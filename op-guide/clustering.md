@@ -7,12 +7,15 @@ A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> 
 ## A standalone cluster
 
 1. Start PD.
+
     ```bash
     pd-server --cluster-id=1 \
               --host=127.0.0.1 \
               --data-dir=pd 
     ```
+    
 2. Start TiKV.
+
     ```bash
     tikv-server -I 1 \
                 -S raftkv \
@@ -22,6 +25,7 @@ A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> 
     ```
 
 3. Start TiDB.
+
     ```bash
     tidb-server --store=tikv \
                 --path="127.0.0.1:2379/pd?cluster=1"
