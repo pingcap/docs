@@ -25,13 +25,12 @@ A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> 
     ```bash
     tidb-server --store=tikv \
                 --path="127.0.0.1:2379/pd?cluster=1"
-                -P 5001
     ```
 
 4. Use the official `mysql` client to connect to TiDB and enjoy it. 
 
     ```sh
-    mysql -h 127.0.0.1 -P 5001 -u root -D test
+    mysql -h 127.0.0.1 -P 4000 -u root -D test
     ```
 
 ## A 3-node multi-machine cluster
@@ -102,4 +101,3 @@ We run PD and TiKV on every node and TiDB on node1 only.
     ```sh
     mysql -h 192.168.199.113 -P 4000 -u root -D test
     ```
-  
