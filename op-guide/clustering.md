@@ -94,14 +94,13 @@ In every node, we will run one PD and one TiKV. We will run one TiDB in node1.
 
     ```bash
     tidb-server --store=tikv \
-                --path="192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379/pd?cluster=1" \
-                -P 5001
+                --path="192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379/pd?cluster=1" 
     ```
 
 4. Use the official `mysql` client to connect to TiDB and enjoy it. 
 
     ```sh
-    mysql -h 192.168.199.113 -P 5001 -u root -D test
+    mysql -h 192.168.199.113 -P 4000 -u root -D test
     ```
 
 ## A local cluster with `docker-compose`
