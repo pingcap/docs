@@ -19,7 +19,7 @@ A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> 
     ```bash
     tikv-server -I 1 \
                 -S raftkv \
-                --addr 127.0.0.1:20160 \
+                --host=127.0.0.1 \
                 --pd 127.0.0.1:2379 \
                 -S tikv 
     ```
@@ -77,19 +77,19 @@ We run PD and TiKV on every node and TiDB on node1 only.
     tikv-server -S raftkv \
                 -I 1 \
                 --pd 192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379 \
-                --addr 192.168.199.113:20160 \
+                --host 192.168.199.113 \
                 -s tikv1
     
     tikv-server -S raftkv \
                 -I 1 \
                 --pd 192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379 \
-                --addr 192.168.199.114:20160 \
+                --host 192.168.199.114 \
                 -s tikv2
                 
     tikv-server -S raftkv \
                 -I 1 \
                 --pd 192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379 \
-                --addr 192.168.199.115:20160 \
+                --host 192.168.199.115 \
                 -s tikv3
     ```
 

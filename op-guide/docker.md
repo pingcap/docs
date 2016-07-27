@@ -63,8 +63,7 @@ services:
       - "20160"
 
     command:
-      - --addr=0.0.0.0:20160
-      - --advertise-addr=tikv1:20160
+      - --host=tikv1
       - --cluster-id=1
       - --dsn=raftkv
       - --store=/var/tikv
@@ -85,8 +84,7 @@ services:
       - "20160"
 
     command:
-      - --addr=0.0.0.0:20160
-      - --advertise-addr=tikv2:20160
+      - --host=tikv2
       - --cluster-id=1
       - --dsn=raftkv
       - --store=/var/tikv
@@ -107,8 +105,7 @@ services:
       - "20160"
 
     command:
-      - --addr=0.0.0.0:20160
-      - --advertise-addr=tikv3:20160
+      - --host=tikv3
       - --cluster-id=1
       - --dsn=raftkv
       - --store=/var/tikv
