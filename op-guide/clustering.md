@@ -2,7 +2,7 @@
 
 ## Overview
 
-A TiDB cluster contains PD, TiKV, TiDB. The start-up sequence is PD -> TiKV -> TiDB.
+A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> TiKV -> TiDB.
 
 ## A standalone cluster
 
@@ -34,19 +34,19 @@ A TiDB cluster contains PD, TiKV, TiDB. The start-up sequence is PD -> TiKV -> T
     mysql -h 127.0.0.1 -P 5001 -u root -D test
     ```
 
-## A 3-nodes multi-machine cluster
+## A 3-node multi-machine cluster
 
 Assume we have three machines with the following details:
 
-|Name|Address|
+|Name|Host IP|
 |----|-------|
 |node1|192.168.199.113|
 |node2|192.168.199.114|
 |node3|192.168.199.115|
 
-In every node, we will run one PD and one TiKV. We will run one TiDB in node1. 
+We run PD and TiKV on every node and TiDB on node1 only.
 
-1. Start PDs.
+1. Start PD on every node.
 
     ```bash
     pd-server --host=192.168.199.113 \
@@ -68,7 +68,7 @@ In every node, we will run one PD and one TiKV. We will run one TiDB in node1.
               --initial-cluster="pd1=http://192.168.199.113:2380,pd2=http://192.168.199.114:2380,pd3=http://192.168.199.115:2380"
     ```
 
-2. Start TiKVs.
+2. Start TiKV on every node.
 
     ```bash
     tikv-server -S raftkv \
@@ -90,7 +90,7 @@ In every node, we will run one PD and one TiKV. We will run one TiDB in node1.
                 -s tikv3
     ```
 
-3. Start TiDB.
+3. Start TiDB on node1.
 
     ```bash
     tidb-server --store=tikv \
@@ -106,6 +106,7 @@ In every node, we will run one PD and one TiKV. We will run one TiDB in node1.
 ## A local cluster with `docker-compose`
 
 A simple `docker-compose.yml`:
+
 
 ```bash
 version: '2'
