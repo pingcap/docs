@@ -76,46 +76,38 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 + default: "pd"
 + If you want to start multiply PDs, you must use different name for each one.
 
-### --host
-
-+ the server host
-+ default: "127.0.0.1"
-+ You must set this flag so that it can be connected from outside. You can only ignore it in the standalone mode.
-
 ### --data-dir
 
 + the path to the data directory
 + default: "default.${name}"
 
-### --client-port
+### --client-urls
 
-+ the listening port for client traffic
-+ default: 2379
-+ The listening address is `0.0.0.0:${client-port}`.
++ the listening URL list for client traffic
++ default: "http://0.0.0.0:2379"
 
-### --advertise-client-port
+###  --advertise-client-urls
 
-+ the advertise port for client traffic
-+ default: ${client-port}
-+ If you use Docker to start PD, and use different ports to map the listening client port, you must set this flag. For example, if you use `-p 12379:2379`, the advertise client port must be 12379 through which the client can connect to PD.
++ the advertise URL list for client traffic from outside
++ default: ${client-urls}
++ If the client cannot connect to PD through the default listening client URLs, you must manually set the advertise client URLs explicitly.
 
-### --peer-port
+### --peer-urls
 
-+ the listening port for peer traffic
-+ default 2380
-+ The listening address is `0.0.0.0:${peer-port}`.
++ the listening URL list for peer traffic
++ default: "http://0.0.0.0:2380"
 
-### --advertise-peer-port
+### --advertise-peer-urls
 
-+ the advertise port for peer traffic
-+ default: ${peer-port}
-+ If you use Docker to start PD, and use different ports to map the listening peer port, you must set this flag. For example, if you use `-p 12380:2380`, the advertise peer port must be 12380 for other peers to connect to.
++ the advertise URL list for peer traffic from outside
++ default: ${peer-urls}
++ If the peer cannot connect to PD through the default listening peer URLs, you must manually set the advertise peer URLs explicitly.
 
 ### --initial-cluster
 
 + the initial cluster configuration for bootstrapping 
-+ default: "{name}=http://{host}:{advertise-peer-port}"
-+ You must set this flag to bootstrap PD cluster. For example, if you have three PDs (pd1, pd2, pd3), the initial cluster is "pd1=http://pd1_host:2380,pd2=http://pd2_host:2380,pd3=http://pd3_host:2380".
++ default: "{name}=http://{advertise-peer-url}"
++ For example, if `name` is "pd", and `advertise-peer-urls` is "http://127.0.0.1:2380,http://127.0.0.1:2381", the `initial-cluster` is "pd=http://127.0.0.1:2380,pd=http://127.0.0.1:2381".
 + Note: this flag will be deprecated later.
 
 ### --initial-cluster-state
@@ -124,45 +116,37 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 + default: "new"
 + Note: this flag will be deprecated later.
 
-### --port
+### --addr
 
-+ the listening port for client traffic
-+ default: 1234
-+ The listening address is `0.0.0.0:${port}`.
++ the listening address for client traffic
++ default: "0.0.0.0:1234"
 + Note: this flag will be deprecated later.
 
-### --advertise-port
+### --advertise-addr
 
-+ the server advertise port for client traffic
-+ default: ${port}
-+ If you use Docker to start PD, and use different ports to map the listening port, you must set this flag. For example, if you use `-p 11234:1234`, the advertise port must be 11234 through which the client can connect to PD.
++ the server advertise address for client traffic
++ default: ${addr}
++ If the client cannot connect to PD through the default listening address, you must manually set the advertise address explicitly.
 + Note: this flag will be deprecated later.
 
-### --http-port
+### --http-addr
 
-+ the server http port
-+ default: 9090
++ the server http address
++ default: "0.0.0.0:9090"
 + Note: this flag will be deprecated later.
 
 ## TiKV
 
-### -P, --port
+### -A, --addr
 
-+ the server listening port for outer traffic
-+ default: 20160
-+ The listening address is `0.0.0.0:${port}`.
++ the server listening address
++ default: "0.0.0.0:20160"
 
-### --advertise-port
+### --advertise-addr
 
-+ the server advertise port for outer traffic
-+ default: ${port}
-+ If you use Docker to start TiKV, and use different ports to map the listening port, you must set this flag. For example, if you use `-p 20161:20160`, the advertise port must be 20161 through which the client can connect to TiKV.
-
-### -H, --host
-
-+ the server host
-+ default: "127.0.0.1"
-+ You must set this flag so that it can be connected from outside. You can only ignore it in the standalone mode.
++ the server advertise address for client traffic.
++ default: ${addr}
++ + If the client cannot connect to TiKV through the default listening address, you must manually set the advertise address explicitly.
 
 ### -L, --Log
 
