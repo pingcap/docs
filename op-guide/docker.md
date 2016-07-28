@@ -19,10 +19,15 @@ services:
 
     command:
       - --cluster-id=1 
-      - --host=pd1 
       - --name=pd1 
+      - --client-urls=http://0.0.0.0:2379
+      - --peer-urls=http://0.0.0.0:2380
+      - --advertise-client-urls=http://pd1:2379
+      - --advertise-peer-urls=http://pd1:2380
       - --initial-cluster=pd1=http://pd1:2380,pd2=http://pd2:2380,pd3=http://pd3:2380
-
+      - --addr=0.0.0.0:1234
+      - --advertise-addr=pd1:1234
+      
     privileged: true
 
   pd2:
@@ -35,10 +40,15 @@ services:
 
     command:
       - --cluster-id=1 
-      - --host=pd2
       - --name=pd2 
+      - --client-urls=http://0.0.0.0:2379
+      - --peer-urls=http://0.0.0.0:2380
+      - --advertise-client-urls=http://pd2:2379
+      - --advertise-peer-urls=http://pd2:2380
       - --initial-cluster=pd1=http://pd1:2380,pd2=http://pd2:2380,pd3=http://pd3:2380
-
+      - --addr=0.0.0.0:1234
+      - --advertise-addr=pd2:1234
+      
     privileged: true
 
   pd3:
@@ -51,10 +61,15 @@ services:
 
     command:
       - --cluster-id=1 
-      - --host=pd3
       - --name=pd3 
+      - --client-urls=http://0.0.0.0:2379
+      - --peer-urls=http://0.0.0.0:2380
+      - --advertise-client-urls=http://pd3:2379
+      - --advertise-peer-urls=http://pd3:2380
       - --initial-cluster=pd1=http://pd1:2380,pd2=http://pd2:2380,pd3=http://pd3:2380 
-
+      - --addr=0.0.0.0:1234
+      - --advertise-addr=pd3:1234
+      
     privileged: true
 
   tikv1:
@@ -63,8 +78,9 @@ services:
       - "20160"
 
     command:
-      - --host=tikv1
       - --cluster-id=1
+      - --addr=0.0.0.0:20160
+      - --advertise-addr=tikv1:20160
       - --dsn=raftkv
       - --store=/var/tikv
       - --pd=pd1:2379,pd2:2379,pd3:2379
@@ -84,8 +100,9 @@ services:
       - "20160"
 
     command:
-      - --host=tikv2
       - --cluster-id=1
+      - --addr=0.0.0.0:20160
+      - --advertise-addr=tikv2:20160
       - --dsn=raftkv
       - --store=/var/tikv
       - --pd=pd1:2379,pd2:2379,pd3:2379
@@ -105,8 +122,9 @@ services:
       - "20160"
 
     command:
-      - --host=tikv3
       - --cluster-id=1
+      - --addr=0.0.0.0:20160
+      - --advertise-addr=tikv3:20160
       - --dsn=raftkv
       - --store=/var/tikv
       - --pd=pd1:2379,pd2:2379,pd3:2379
@@ -127,7 +145,7 @@ services:
 
     command:
       - --store=tikv 
-      - --path=pd1:2379,pd2:2379,pd3:2379/pd?cluster=1
+      - --path=pd1:2379,pd2:2379,pd3:2379?cluster=1
       - -L=warn
 
     depends_on:
