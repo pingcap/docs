@@ -10,7 +10,7 @@ A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> 
 
     ```bash
     pd-server --cluster-id=1 \
-              --data-dir=pd 
+              --data-dir=pd
     ```
     
 2. Start TiKV.
@@ -19,14 +19,14 @@ A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> 
     tikv-server -I 1 \
                 -S raftkv \
                 --pd 127.0.0.1:2379 \
-                -S tikv 
+                -s tikv
     ```
 
 3. Start TiDB.
 
     ```bash
     tidb-server --store=tikv \
-                --path="127.0.0.1:2379?cluster=1"
+                --path="127.0.0.1:2379?cluster=1" 
     ```
 
 4. Use the official `mysql` client to connect to TiDB and enjoy it. 
@@ -87,13 +87,13 @@ We run PD and TiKV on every node and TiDB on node1 only.
     tikv-server -S raftkv \
                 -I 1 \
                 --pd 192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379 \
-                --addr 192.168.199.113:20160 \
+                --addr 192.168.199.114:20160 \
                 -s tikv2
                 
     tikv-server -S raftkv \
                 -I 1 \
                 --pd 192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379 \
-                --addr 192.168.199.113:20160 \
+                --addr 192.168.199.115:20160 \
                 -s tikv3
     ```
 
@@ -101,7 +101,7 @@ We run PD and TiKV on every node and TiDB on node1 only.
 
     ```bash
     tidb-server --store=tikv \
-                --path="192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379?cluster=1" 
+                --path="192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379?cluster=1"
     ```
 
 4. Use the official `mysql` client to connect to TiDB and enjoy it. 
