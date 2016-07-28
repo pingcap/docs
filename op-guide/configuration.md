@@ -84,7 +84,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### --client-urls
 
 + the listening URL list for client traffic
-+ default: "http://0.0.0.0:2379"
++ default: "http://127.0.0.1:2379"
 
 ###  --advertise-client-urls
 
@@ -95,7 +95,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### --peer-urls
 
 + the listening URL list for peer traffic
-+ default: "http://0.0.0.0:2380"
++ default: "http://127.0.0.1:2380"
 
 ### --advertise-peer-urls
 
@@ -119,7 +119,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### --addr
 
 + the listening address for client traffic
-+ default: "0.0.0.0:1234"
++ default: "127.0.0.1:1234"
 + Note: this flag will be deprecated later.
 
 ### --advertise-addr
@@ -140,7 +140,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### -A, --addr
 
 + the server listening address
-+ default: "0.0.0.0:20160"
++ default: "127.0.0.1:20160"
 
 ### --advertise-addr
 
