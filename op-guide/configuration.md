@@ -70,7 +70,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 + default: 0
 + You must use a unique ID to distinguish different clusters. 
 
-### name
+### --name
 
 + the human-readable unique name for this PD member
 + default: "pd"
