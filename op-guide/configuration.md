@@ -78,35 +78,37 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 ### --host
 
-+ the server host IP
++ the server host
 + default: "127.0.0.1"
 + You must set this flag so that it can be connected from outside. You can only ignore it in the standalone mode.
 
 ### --data-dir
 
 + the path to the data directory
-+ default: "default.{name}"
++ default: "default.${name}"
 
 ### --client-port
 
 + the listening port for client traffic
 + default: 2379
++ The listening address is `0.0.0.0:${client-port}`.
 
 ### --advertise-client-port
 
 + the advertise port for client traffic
-+ default: {client-port}
++ default: ${client-port}
 + If you use Docker to start PD, and use different ports to map the listening client port, you must set this flag. For example, if you use `-p 12379:2379`, the advertise client port must be 12379 through which the client can connect to PD.
 
 ### --peer-port
 
 + the listening port for peer traffic
 + default 2380
++ The listening address is `0.0.0.0:${peer-port}`.
 
 ### --advertise-peer-port
 
 + the advertise port for peer traffic
-+ default: {peer-port}
++ default: ${peer-port}
 + If you use Docker to start PD, and use different ports to map the listening peer port, you must set this flag. For example, if you use `-p 12380:2380`, the advertise peer port must be 12380 for other peers to connect to.
 
 ### --initial-cluster
@@ -126,12 +128,13 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 + the listening port for client traffic
 + default: 1234
++ The listening address is `0.0.0.0:${port}`.
 + Note: this flag will be deprecated later.
 
 ### --advertise-port
 
 + the server advertise port for client traffic
-+ default: {port}
++ default: ${port}
 + If you use Docker to start PD, and use different ports to map the listening port, you must set this flag. For example, if you use `-p 11234:1234`, the advertise port must be 11234 through which the client can connect to PD.
 + Note: this flag will be deprecated later.
 
@@ -147,16 +150,17 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 + the server listening port for outer traffic
 + default: 20160
++ The listening address is `0.0.0.0:${port}`.
 
 ### --advertise-port
 
 + the server advertise port for outer traffic
-+ default: {port}
++ default: ${port}
 + If you use Docker to start TiKV, and use different ports to map the listening port, you must set this flag. For example, if you use `-p 20161:20160`, the advertise port must be 20161 through which the client can connect to TiKV.
 
 ### -H, --host
 
-+ the server host IP
++ the server host
 + default: "127.0.0.1"
 + You must set this flag so that it can be connected from outside. You can only ignore it in the standalone mode.
 
