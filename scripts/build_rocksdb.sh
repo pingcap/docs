@@ -3,7 +3,7 @@
 set -e
 
 # Use current path for building and installing RocksDB. 
-TIDB_PATH=`PWD`
+TIDB_PATH=`pwd`
 DEPS_PATH=${TIDB_PATH}/deps
 echo "building RocksDB in $DEPS_PATH"
 
@@ -90,7 +90,6 @@ case "$OSTYPE" in
                 echo "unsupported platform $dist, you may install RocksDB manually"
                 exit 0
             ;;
-
         esac
     ;;
     darwin*) 
