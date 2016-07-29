@@ -25,7 +25,7 @@ After you install the RocksDB shared library, you can build TiKV directly withou
     make
     ```
     
-+ Run test 
++ Run test.
     
     ```bash
     make test
@@ -60,7 +60,7 @@ After you install the RocksDB shared library, you can build TiKV directly withou
     git clone https://github.com/pingcap/pd.git $GOPATH/src/github.com/pingcap/pd
     ```
     
-+ Enter `$GOPATH/src/github.com/pingcap/pd` to build and install the binary in the `bin` directory
++ Enter `$GOPATH/src/github.com/pingcap/pd` to build and install the binary in the `bin` directory.
 
     ```bash
     make
