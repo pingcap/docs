@@ -14,12 +14,12 @@ RocksDB 4.9+ is required, You can install the RocksDB shared library manually ac
 
 After you install the RocksDB shared library, you can build TiKV directly without `ROCKSDB_SYS_STATIC`.
 
-+ Get the TiKV source code
++ Get the TiKV source code.
 
     ```bash
     git clone https://github.com/pingcap/tikv.git 
     ```
-+ Enter the source directory to build and install the binary in the `bin` directory
++ Enter the source directory to build and install the binary in the `bin` directory.
 
     ```bash
     make
@@ -33,20 +33,20 @@ After you install the RocksDB shared library, you can build TiKV directly withou
 
 ## Build TiDB
 
-+ Make sure set `GOPATH` environment correctly.
++ Make sure the GOPATH environment is set correctly.
 
-+ Get the TiDB source code
++ Get the TiDB source code.
 
     ```bash
     git clone https://github.com/pingcap/tidb.git $GOPATH/src/github.com/pingcap/tidb
     ```
     
-+ Enter `$GOPATH/src/github.com/pingcap/tidb` to build and install the binary in the `bin` directory
++ Enter `$GOPATH/src/github.com/pingcap/tidb` to build and install the binary in the `bin` directory.
 
     ```bash
     make
     ```
-+ Run test
++ Run test.
     
     ```bash
     make test
@@ -54,7 +54,7 @@ After you install the RocksDB shared library, you can build TiKV directly withou
 
 ## Build PD
 
-+ Get the PD source code
++ Get the PD source code.
 
     ```bash
     git clone https://github.com/pingcap/pd.git $GOPATH/src/github.com/pingcap/pd
@@ -65,7 +65,7 @@ After you install the RocksDB shared library, you can build TiKV directly withou
     ```bash
     make
     ```
-+ Run test
++ Run test.
     
     ```bash
     make test
