@@ -15,8 +15,8 @@ RocksDB 4.9+ is required, You can install the RocksDB shared library manually ac
 After you install the RocksDB shared library, you can build TiKV directly without `ROCKSDB_SYS_STATIC`.
 
 ```bash
-# cd TiKV source root.
-# build and install the binary in the `bin` directory.
+# cd TiKV source directory
+# build and install the binary in the `bin` directory
 make 
 
 # run test
