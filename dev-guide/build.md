@@ -2,9 +2,9 @@
 
 ## Overview
 
-If you want to dive into TiDB project, change some codes and send us PR, you can follow this guide to build TiDB project.
+You can follow this guide to build the TiDB project.
 
-See [user build guide](../op-guide/build.md) to check platforms and prerequisites first. 
+Before your begin, check the [supported platforms](../op-guide/build.md#supported-platforms) and [prerequisites](../op-guide/build.md#prerequisites) first.
 
 ## Install RocksDB
 
