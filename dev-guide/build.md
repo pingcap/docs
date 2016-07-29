@@ -25,7 +25,7 @@ After you install the RocksDB shared library, you can build TiKV directly withou
     make
     ```
     
-+ Run test.
++ Run unit test.
     
     ```bash
     make test
@@ -46,7 +46,7 @@ After you install the RocksDB shared library, you can build TiKV directly withou
     ```bash
     make
     ```
-+ Run test.
++ Run unit test.
     
     ```bash
     make test
@@ -65,7 +65,7 @@ After you install the RocksDB shared library, you can build TiKV directly withou
     ```bash
     make
     ```
-+ Run test.
++ Run unit test.
     
     ```bash
     make test
