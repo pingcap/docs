@@ -63,6 +63,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 + the config file
 + default: ""
++ If you set the configuration using the command line, the same setting in the config file will be overwritten.
 
 ### --cluster-id
 
@@ -108,13 +109,6 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 + the initial cluster configuration for bootstrapping 
 + default: "{name}=http://{advertise-peer-url}"
 + For example, if `name` is "pd", and `advertise-peer-urls` is "http://127.0.0.1:2380,http://127.0.0.1:2381", the `initial-cluster` is "pd=http://127.0.0.1:2380,pd=http://127.0.0.1:2381".
-+ Note: this flag will be deprecated later.
-
-### --initial-cluster-state
-
-+ the initial cluster state ("new" or "existing")
-+ default: "new"
-+ Note: this flag will be deprecated later.
 
 ### --addr
 
@@ -158,6 +152,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 + the config file
 + default: ""
++ If you set the configuration using the command line, the same setting in the config file will be overwritten.
 
 ### -s, --store
 
