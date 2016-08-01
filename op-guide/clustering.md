@@ -114,7 +114,7 @@ We run PD and TiKV on every node and TiDB on node1 only.
 
 ### PD
 
-You can use `join` to start a new PD server. For example, we have started three PD servers with Cluster ID 1:
+You can use `join` to start a new PD server. For example, we have started three PD servers within Cluster ID 1:
 
 |Name|ClientUrls|PeerUrls|
 |----|----------|--------|
@@ -134,10 +134,10 @@ pd-server --cluster-id=1 \
 
 ### TiKV
 
-Adding a new TiKV server is very simple. After you start a new Store, PD will do auto-balance for all TiKV Stores automatically. PD finds the new Store has no data and then will try to move some regions from other Store to the new Store.
+Adding a new TiKV server is very simple. After you start a new Store, PD will automatically balance all the TiKV Stores. If PD finds that the new Store has no data, it will try to move some regions from other Stores to the new Store.
 
-You can tell PD to remove a Store explicitly, then PD will treat this Store is dead, and does balance for the region which contains this Store in Region heartbeat. 
+ou can tell PD to remove a Store explicitly. Then, PD will treat this Store as dead and rebalance the Region whose replicas are in this Store through Region heartbeats.
 
 ### TiDB
 
-TiDB server is stateless, you can add or remove TiDB server directly. Note that if you put all TiDB behind a proxy like HAProxy, you must update the proxy configuration and reload it. 
+TiDB server is stateless, and you can add or remove a TiDB server directly. Note that if you put all TiDB servers behind a proxy like HAProxy, you must update the proxy configuration and reload it.
