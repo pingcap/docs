@@ -136,7 +136,7 @@ pd-server --cluster-id=1 \
 
 Adding a new TiKV server is very simple. After you start a new Store, PD will automatically balance all the TiKV Stores. If PD finds that the new Store has no data, it will try to move some regions from other Stores to the new Store.
 
-ou can tell PD to remove a Store explicitly. Then, PD will treat this Store as dead and rebalance the Region whose replicas are in this Store through Region heartbeats.
+You can tell PD to remove a Store explicitly. Then, PD will treat this Store as dead and rebalance the Region whose replicas are in this Store through Region heartbeats.
 
 ### TiDB
 
