@@ -114,7 +114,7 @@ We run PD and TiKV on every node and TiDB on node1 only.
 
 ### PD
 
-You can use `join` to start a new PD server. For example, we have started three PD servers within Cluster ID 1:
+You can use `join` to start a new PD server and add it to an existing PD cluster. . For example, we have started three PD servers within Cluster ID 1:
 
 |Name|ClientUrls|PeerUrls|
 |----|----------|--------|
