@@ -114,7 +114,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 + join the cluster dynamically
 + default: ""
-+ If you want to join a existing cluster, you can use `--join="${advertise-client-urls}"`, the `advertise-client-url` is any existing PD's, multiply advertise client urls is separated by comma.
++ If you want to join a existing cluster, you can use `--join="${advertise-client-urls}"`, the `advertise-client-url` is any existing PD's, multiply advertise client urls are separated by comma.
 
 ### --addr
 
