@@ -9,9 +9,11 @@ Before you start, make sure that:
 + Installed the latest version of [Docker](https://www.docker.com/products/docker) 
 + Pulled the TiDB/TiKV/PD docker images from PingCAP's Docker Hub repositories
 
-`docker pull pingcap/tidb:latest`
-`docker pull pingcap/tikv:latest`
-`docker pull pingcap/pd:latest`
+```bash
+docker pull pingcap/tidb:latest
+docker pull pingcap/tikv:latest
+docker pull pingcap/pd:latest
+```
 
 ## Step 1. Create a docker bridge network
 
@@ -239,8 +241,8 @@ mysql> SELECT * FROM mytable;
 
 ## Alternatively, use `docker-compose`
 
-Note that you don't need to create a docker network first while using `docker-compose`.
-Only a `docker-compose.yml` file is needed as the following.
+Note: If you are using `docker-compose`, you don't need to create a Docker network and start TiDB,TiKV,PD containers separately. 
+The following `docker-compose.yml` file is enough.
 
 ```bash
 version: '2'

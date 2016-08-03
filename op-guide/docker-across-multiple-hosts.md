@@ -14,9 +14,11 @@ Assume we have 3 machines with the following details:
 
 On each host, we have installed Docker with the latest version and pulled the latest Docker images of TiDB, TiKV and PD.
 
-`docker pull pingcap/tidb:latest`
-`docker pull pingcap/tikv:latest`
-`docker pull pingcap/pd:latest`
+```bash
+docker pull pingcap/tidb:latest
+docker pull pingcap/tikv:latest
+docker pull pingcap/pd:latest
+```
 
 ## Step 1. Start the `busybox` container as the storage volume for each host
 
