@@ -1,16 +1,19 @@
-# Run a TiDB Cluster in Docker on a Single Host
+# Run a TiDB cluster in Docker on a single host
+
+This page shows you how to run a TiDB cluster quickly on a single machine.
+
 
 ## Preparation
-
 Before you start, make sure that:
 
 + Installed the latest version of [Docker](https://www.docker.com/products/docker) 
 + Pulled the TiDB/TiKV/PD docker images from PingCAP's Docker Hub repositories
+
 `docker pull pingcap/tidb:latest`
 `docker pull pingcap/tikv:latest`
 `docker pull pingcap/pd:latest`
 
-## Create a docker bridge network
+## Step 1. Create a docker bridge network
 
 ```bash
 net="isolated_nw"
@@ -18,11 +21,11 @@ docker network rm ${net}
 docker network create --driver bridge ${net} 
 ```
 
-After creating a docker network, we will make all the TiDB containers added to it, which composed a standalone cluster.
-The service in cluster can communicate with each other using the name instead of IP addresss.
-In addition, you can replace the network name above with any you like.
+After creating a Docker network, add all the TiDB containers into it to make a standalone cluster.
+The services in cluster can communicate with each other using the name instead of IP address.
+In addition, you can replace the network name with any of your favorite names.
 
-## Using `Busybox` container as storage volume
+## Step 2. Using `Busybox` container as the storage volume
 
 ```bash
 docker run -d --name ti-storage \
@@ -30,9 +33,9 @@ docker run -d --name ti-storage \
   busybox
 ```
 
-## Start PD service
+## Step 3. Start the PD service
 
-First we start up 3 pd-servers, respectively named as **pd1**, **pd2**, **pd3**.
+Start 3 PD servers, respectively named as **pd1**, **pd2**, **pd3**.
 
 **pd1:** 
 
@@ -94,8 +97,7 @@ docker run --net ${net} -d --name pd3 \
   --advertise-addr="pd3:1234"
 ```
 
-After that, if you need to add **pd4** into the existing cluster, just use `--join` flag, and specify any one of the available **advertise-client-urls** above.
-Notice that the **advertise-client-urls** is needed here, not **advertise-peer-urls**.
+After that, if you need to add new PD servers into the existing cluster, use the `--join` flag, and specify any one of the available **advertise-client-urls** above.
 
 **pd4:**
 
@@ -117,7 +119,27 @@ docker run --net ${net} -d --name pd4 \
   --advertise-addr="pd4:1234"
 ```
 
-## Start TiKV service
+**pd5:**
+
+```bash
+docker run --net ${net} -d --name pd5 \
+  -v /usr/share/ca­certificates/:/etc/ssl/certs \
+  -v /etc/localtime:/etc/localtime:ro \
+  --volumes-from ti-storage \
+  pingcap/pd \
+  --cluster-id=1 \
+  --name="pd5" \
+  --data-dir="/tidata/pd5" \
+  --client-urls="http://0.0.0.0:2379" \
+  --advertise-client-urls="http://pd5:2379" \
+  --peer-urls="http://0.0.0.0:2380" \
+  --advertise-peer-urls="http://pd5:2380" \
+  --join="http://pd4:2379" \
+  --addr="0.0.0.0:1234" \
+  --advertise-addr="pd5:1234"
+```
+
+## Step 4. Start the TiKV service
 
 Next you can run any number of TiKV instances, which is the underlying distributed storage.
 
@@ -166,10 +188,10 @@ docker run --net ${net} -d --name tikv3 \
   --cluster-id=1
 ```
 
-## Start TiDB service
+## Step 5. Start the TiDB service
 
 The **tidb-server** as the SQL Layer is stateless, and accept client connections from users.
-Using `-p 4000:4000` to expose port of 4000 to the host server.
+Using `-p 4000:4000` to expose port 4000 to the host server.
 
 ```bash
 docker run --net ${net} -d --name tidb \
@@ -181,16 +203,44 @@ docker run --net ${net} -d --name tidb \
   -L warn
 ```
 
-## Use SQL client
-After you started a TiDB cluster, you can use official mysql client connecting to TiDB for a test immediately.
+## Step 6. Use the official MySQL client
+Once the TiDB cluster is running, you can use the official MySQL client to connect to TiDB for a quick test.
 
 ```bash
 mysql -h 127.0.0.1 -P 4000 -u root -D test
+# Welcome to the MySQL monitor.  Commands end with ; or \g.
+# Your MySQL connection id is 10001
+# Server version: 5.5.31-TiDB-1.0 MySQL Community Server (GPL)
 ```
 
-## In another way, using `docker-compose`
+Then run some SQL statments:
 
-A simple `docker-compose.yml`:
+```bash
+mysql> CREATE DATABASE mydb;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> USE mydb;
+Database changed
+
+mysql> CREATE TABLE mytable ( id INT, data VARCHAR(100), dt DATE, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO mytable VALUES (1, 'test data', '2016-08-03');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM mytable;
++----+-----------+------------+
+| id | data      | dt         |
++----+-----------+------------+
+|  1 | test data | 2016-08-03 |
++----+-----------+------------+
+1 row in set (0.00 sec)
+```
+
+## Alternatively, use `docker-compose`
+
+Note that you don't need to create a docker network first while using `docker-compose`.
+Only a `docker-compose.yml` file is needed as the following.
 
 ```bash
 version: '2'

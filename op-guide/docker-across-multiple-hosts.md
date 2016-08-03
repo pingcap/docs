@@ -1,6 +1,6 @@
-# Run TiDB in Docker across Multiple Hosts
+# Run a TiDB cluster in Docker across multiple hosts
 
-This page shows you a example of manually deploying a TiDB cluster using docker on multiple machines.
+This page shows you an example of how to manually deploy a TiDB cluster using Docker across multiple machines.
 
 
 ## Preparation
@@ -12,11 +12,15 @@ Assume we have 3 machines with the following details:
 |**host2**|192.168.1.101|
 |**host3**|192.168.1.102|
 
-Every host has already installed newest version docker, and pulled the latest docker images of TiDB/TiKV/PD.
+On each host, we have installed Docker with the latest version and pulled the latest Docker images of TiDB, TiKV and PD.
 
-## Start `busybox` container as storage volume for each host
+`docker pull pingcap/tidb:latest`
+`docker pull pingcap/tikv:latest`
+`docker pull pingcap/pd:latest`
 
-Run this command on **host1**, **host2**, **host3** respectively:
+## Step 1. Start the `busybox` container as the storage volume for each host
+
+Run the following command on **host1**, **host2**, **host3** respectively:
 
 ```bash
 export host1=192.168.1.100
@@ -28,7 +32,7 @@ docker run -d --name ti-storage \
   busybox
 ```
 
-## Start PD on every host
+## Step 2. Start PD on each host
 
 **host1:**
 ```bash
@@ -99,7 +103,7 @@ docker run -d --name pd3 \
   --advertise-addr="${host3}:1234"
 ```
 
-## Start TiKV on every host
+## Step 3. Start TiKV on each host
 
 **host1:**
 ```bash
@@ -146,7 +150,7 @@ docker run -d --name tikv3 \
   --cluster-id=1
 ```
 
-## Start TiDB on any one host
+## Step 4. Start TiDB on **host1**
 
 ```bash
 docker run -d --name tidb \
@@ -159,8 +163,35 @@ docker run -d --name tidb \
   -L warn
 ```
 
-## Use the official mysql client to connect to TiDB and enjoy it.
+## Step 5. Use the official MySQL client to connect to TiDB and enjoy it.
 
 ```bash
-mysql -h ${host1} -P 4000 -u root -D test
+mysql -h 127.0.0.1 -P 4000 -u root -D test
+# Welcome to the MySQL monitor.  Commands end with ; or \g.
+# Your MySQL connection id is 10001
+# Server version: 5.5.31-TiDB-1.0 MySQL Community Server (GPL)
+```
+
+Then run some SQL statments:
+
+```bash
+mysql> CREATE DATABASE mydb;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> USE mydb;
+Database changed
+
+mysql> CREATE TABLE mytable ( id INT, data VARCHAR(100), dt DATE, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO mytable VALUES (1, 'test data', '2016-08-03');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM mytable;
++----+-----------+------------+
+| id | data      | dt         |
++----+-----------+------------+
+|  1 | test data | 2016-08-03 |
++----+-----------+------------+
+1 row in set (0.00 sec)
 ```
