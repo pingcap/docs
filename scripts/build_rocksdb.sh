@@ -41,6 +41,8 @@ function install_in_ubuntu {
     cd rocksdb-rocksdb-${ROCKSDB_VER} 
     make shared_lib 
     ${SUDO} make install-shared 
+    make static_lib
+    ${SUDO} make install-static
     # guarantee tikv can find rocksdb.
     ${SUDO} ldconfig
 }
@@ -57,6 +59,8 @@ function install_in_centos {
     cd rocksdb-rocksdb-${ROCKSDB_VER} 
     make shared_lib 
     ${SUDO} make install-shared 
+    make static_lib
+    ${SUDO} make install-static
     # guarantee tikv can find rocksdb.
     ${SUDO} ldconfig
 }
@@ -74,6 +78,8 @@ function install_in_macosx {
     cd rocksdb-rocksdb-${ROCKSDB_VER} 
     make shared_lib 
     ${SUDO} make install-shared
+    make static_lib
+    ${SUDO} make install-static
 }
 
 case "$OSTYPE" in 
