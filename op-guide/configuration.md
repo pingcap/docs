@@ -178,7 +178,7 @@ TiKV supports some human readable conversion.
 
 + the store capacity
 + default: 0 (unlimited)
-+ PD uses this flag to determine how to balance this TiKV. (Tip: you can use 10GB instead of 1073741824)
++ PD uses this flag to determine how to balance the TiKV servers. (Tip: you can use 10GB instead of 1073741824)
 
 ### -S, --dsn
 
