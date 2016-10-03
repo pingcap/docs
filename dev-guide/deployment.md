@@ -4,7 +4,7 @@
 
 If you want to build the TiDB project, deploy the binaries to other machines and run them, you can follow this guide.
 
-Before your begin, check the [supported platforms](./requirements.md#supported-platforms) and [prerequisites](./requirements.md#prerequisites) first.
+Before you begin, check the [supported platforms](./requirements.md#supported-platforms) and [prerequisites](./requirements.md#prerequisites) first.
 
 ## Building and installing TiDB components
 

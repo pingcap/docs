@@ -4,7 +4,7 @@
 
 If you want to develop the TiDB project, you can follow this guide.
 
-Before your begin, check the [supported platforms](./requirements.md#supported-platforms) and [prerequisites](./requirements.md#prerequisites) first.
+Before you begin, check the [supported platforms](./requirements.md#supported-platforms) and [prerequisites](./requirements.md#prerequisites) first.
 
 ## Install RocksDB
 
