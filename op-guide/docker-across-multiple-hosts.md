@@ -96,6 +96,7 @@ docker run -d --name pd3 \
 ```bash
 docker run -d --name tikv1 \
   -p 20160:20160
+  -e "TZ=/etc/localtime"\
   -v /etc/localtime:/etc/localtime:ro \
   --volumes-from ti-storage \
   pingcap/tikv \
@@ -111,6 +112,7 @@ docker run -d --name tikv1 \
 ```bash
 docker run -d --name tikv2 \
   -p 20160:20160
+  -e "TZ=/etc/localtime"\
   -v /etc/localtime:/etc/localtime:ro \
   --volumes-from ti-storage \
   pingcap/tikv \
@@ -126,6 +128,7 @@ docker run -d --name tikv2 \
 ```bash
 docker run -d --name tikv3 \
   -p 20160:20160
+  -e "TZ=/etc/localtime"\
   -v /etc/localtime:/etc/localtime:ro \
   --volumes-from ti-storage \
   pingcap/tikv \
