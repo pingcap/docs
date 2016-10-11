@@ -134,6 +134,7 @@ Next you can run any number of TiKV instances, which is the underlying distribut
 
 ```bash
 docker run --net ${net} -d --name tikv1 \
+  -e "TZ=/etc/localtime" \
   -v /etc/localtime:/etc/localtime:ro \
   --volumes-from ti-storage \
   pingcap/tikv \
@@ -149,6 +150,7 @@ docker run --net ${net} -d --name tikv1 \
 
 ```bash
 docker run --net ${net} -d --name tikv2 \
+  -e "TZ=/etc/localtime" \
   -v /etc/localtime:/etc/localtime:ro \
   --volumes-from ti-storage \
   pingcap/tikv \
@@ -164,6 +166,7 @@ docker run --net ${net} -d --name tikv2 \
 
 ```bash
 docker run --net ${net} -d --name tikv3 \
+  -e "TZ=/etc/localtime" \
   -v /etc/localtime:/etc/localtime:ro \
   --volumes-from ti-storage \
   pingcap/tikv \
@@ -294,6 +297,8 @@ services:
     image: pingcap/tikv
     ports:
       - "20160"
+    environment: 
+      - TZ=/etc/localtime
     volumes:
       - /etc/localtime:/etc/localtime:ro
 
@@ -318,6 +323,8 @@ services:
     image: pingcap/tikv
     ports:
       - "20160"
+    environment: 
+      - TZ=/etc/localtime
     volumes:
       - /etc/localtime:/etc/localtime:ro
 
@@ -342,6 +349,8 @@ services:
     image: pingcap/tikv
     ports:
       - "20160"
+    environment: 
+      - TZ=/etc/localtime
     volumes:
       - /etc/localtime:/etc/localtime:ro
 
