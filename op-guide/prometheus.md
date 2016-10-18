@@ -1,12 +1,12 @@
 # Use prometheus in TiDB
 
-this page shows you how to deploy prometheus and grafana.
+This page shows you how to deploy Prometheus and Grafana.
 
-##Preparation
+## Preparation
 Before you start, make sure that: 
 
 + Installed the [Pushgateway](https://github.com/prometheus/pushgateway) and [Prometheus](https://prometheus.io/docs/introduction/install)
-+ Started the TiDB with [metrics-addr](https://github.com/pingcap/docs/blob/master/op-guide/configuration.md#--metrics-addr)
++ Started the TiDB/TiKV/PD with [metrics-addr](https://github.com/pingcap/docs/blob/master/op-guide/configuration.md)
 
 ## Step 1. Configure the Prometheus
 
@@ -59,17 +59,17 @@ scrape_configs:
 
 ```
 
-set `honor_labels:true` if you use pushgateway. and if you use docker start tidb, you should add option `-h $HOSTNAME` to define hostname in docker. After that, you can start prometheus with `prometheus.yml`.
+set `honor_labels:true` if you use pushgateway. and if you use Docker start tidb, you should add option `-h $HOSTNAME` to define hostname in Docker. After that, you can start prometheus with `prometheus.yml`.
 
 
 ## Step 2. To monitor TiDB with Grafana/Prometheus
-Grafana supports querying Prometheus.we use grafana to show result of querying.
+Grafana supports querying Prometheus. We use grafana to show result of querying.
 
 Install the [Grafana](http://docs.grafana.org/)
 
-By default, Grafana will be listening on [http://localhost:3000](). The default login is "admin" / "admin".Now,open grafana address in browser.
+By default, Grafana will be listening on [http://localhost:3000](). The default username/password is "admin" / "admin". Now, open grafana address in browser.
 
-###Creating a Prometheus data source
+### Creating a Prometheus data source
 
 - To create a Prometheus data source:
     - Click on the Grafana logo to open the sidebar menu.
@@ -83,14 +83,14 @@ By default, Grafana will be listening on [http://localhost:3000](). The default 
 - The following shows an example data source configuration:
 ![image alt text](datasource.png)    
 
-**Note**:set datasource name as `pingcap`.we will use it in Grafana graph
+**Note**:set datasource name as `pingcap`. we will use it in Grafana dashboard.
 
-###Creating a Prometheus graph in Grafana
+### Creating a Prometheus graph in Grafana
 
 - Follow the import way of adding a new Grafana graph. Then:
     - Click on the Grafana logo to open the sidebar menu.
     - Click on "Dashboards" in the sidebar.
     - Click on "Import".
     - Click on "Upload .json File".
-    - Upload a json file in `docs/etc`.such as [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json)
+    - Upload a json file in `docs/etc`. such as [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json)
 
