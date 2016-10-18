@@ -72,13 +72,13 @@ By default, Grafana will be listening on [http://localhost:3000](). The default 
 ###Creating a Prometheus data source
 
 - To create a Prometheus data source:
-    -. Click on the Grafana logo to open the sidebar menu.
-    -. Click on "Data Sources" in the sidebar.
-    -. Click on "Add New".
-    -. Select "Prometheus" as the type.
-    -. Set the appropriate Prometheus server URL (for example, http://localhost:9090/)
-    -. Adjust other data source settings as desired (for example, turning the proxy access off).
-    -. Click "Add" to save the new data source.
+    - Click on the Grafana logo to open the sidebar menu.
+    - Click on "Data Sources" in the sidebar.
+    - Click on "Add New".
+    - Select "Prometheus" as the type.
+    - Set the appropriate Prometheus server URL (for example, http://localhost:9090/)
+    - Adjust other data source settings as desired (for example, turning the proxy access off).
+    - Click "Add" to save the new data source.
 
 - The following shows an example data source configuration:
 ![image alt text](datasource.png)    
@@ -88,9 +88,9 @@ By default, Grafana will be listening on [http://localhost:3000](). The default 
 ###Creating a Prometheus graph in Grafana
 
 - Follow the import way of adding a new Grafana graph. Then:
-    -. Click on the Grafana logo to open the sidebar menu.
-    -. Click on "Dashboards" in the sidebar.
-    -. Click on "Import".
-    -. Click on "Upload .json File".
-    -. Upload a json file in `docs/etc`.such as [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json)
+    - Click on the Grafana logo to open the sidebar menu.
+    - Click on "Dashboards" in the sidebar.
+    - Click on "Import".
+    - Click on "Upload .json File".
+    - Upload a json file in `docs/etc`.such as [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json)
 
