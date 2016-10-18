@@ -59,7 +59,7 @@ scrape_configs:
 
 ```
 
-Set `honor_labels:true` if you use pushgateway. and if you use docker start tidb, you should add option `-h $HOSTNAME` to define hostname in docker. After that, you can start prometheus with `prometheus.yml`.
+set `honor_labels:true` if you use pushgateway. and if you use docker start tidb, you should add option `-h $HOSTNAME` to define hostname in docker. After that, you can start prometheus with `prometheus.yml`.
 
 
 ## Step 2. To monitor TiDB with Grafana/Prometheus
@@ -72,16 +72,15 @@ By default, Grafana will be listening on [http://localhost:3000](). The default 
 ###Creating a Prometheus data source
 
 - To create a Prometheus data source:
-    1. Click on the Grafana logo to open the sidebar menu.
-    2. Click on "Data Sources" in the sidebar.
-    3. Click on "Add New".
-    4. Select "Prometheus" as the type.
-    5. Set the appropriate Prometheus server URL (for example, http://localhost:9090/)
-    6. Adjust other data source settings as desired (for example, turning the proxy access off).
-    7. Click "Add" to save the new data source.
+    -. Click on the Grafana logo to open the sidebar menu.
+    -. Click on "Data Sources" in the sidebar.
+    -. Click on "Add New".
+    -. Select "Prometheus" as the type.
+    -. Set the appropriate Prometheus server URL (for example, http://localhost:9090/)
+    -. Adjust other data source settings as desired (for example, turning the proxy access off).
+    -. Click "Add" to save the new data source.
 
 - The following shows an example data source configuration:
-
 ![image alt text](datasource.png)    
 
 **Note**:set datasource name as `pingcap`.we will use it in Grafana graph
@@ -89,9 +88,9 @@ By default, Grafana will be listening on [http://localhost:3000](). The default 
 ###Creating a Prometheus graph in Grafana
 
 - Follow the import way of adding a new Grafana graph. Then:
-    1. Click on the Grafana logo to open the sidebar menu.
-    2. Click on "Dashboards" in the sidebar.
-    3. Click on "Import".
-    4. Click on "Upload .json File".
-    5. Upload a json file in `docs/etc`.like [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json)
+    -. Click on the Grafana logo to open the sidebar menu.
+    -. Click on "Dashboards" in the sidebar.
+    -. Click on "Import".
+    -. Click on "Upload .json File".
+    -. Upload a json file in `docs/etc`.such as [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json)
 
