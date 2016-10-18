@@ -3,6 +3,7 @@
 TiDB is a distributed SQL database. Inspired by the design of Google F1, TiDB supports the best features of both traditional RDBMS and NoSQL.
 ## FAQ
  - [TiDB FAQ](./TiDB_FAQ.md)
+ 
 ## Getting started
  - [Quick Start for TiDB](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
 
