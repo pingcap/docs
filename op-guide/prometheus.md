@@ -1,7 +1,6 @@
 # Use Prometheus and Grafana in TiDB
 
-This page shows you how to deploy Prometheus and Grafana.
-
+This page shows you how to deploy Prometheus and Grafana.  
 ## Preparation
 Before you start, make sure you have: 
 
@@ -60,40 +59,41 @@ scrape_configs:
 ```
 
 **Note**:
- - if you use pushgateway, set `honor_labels:true`.
- - if you use Docker start TiDB,add the `-h $HOSTNAME` option to define the hostname in Docker. Then, you can start Prometheus using the `prometheus.yml` file.
+ - If you use pushgateway, set `honor_labels:true`.
+ - If you use Docker start TiDB,add the `-h $HOSTNAME` option to define the hostname in Docker. Then, you can start Prometheus using the `prometheus.yml` file.
 
 
 ## Step 2. Monitor TiDB with Prometheus and Grafana 
 
-Grafana supports querying Prometheus. We use grafana to show result of querying.
+Grafana supports querying Prometheus. We use Grafana to show the querying result.
 
-### 1). Install the [Grafana](http://docs.grafana.org/)
+### Install the [Grafana](http://docs.grafana.org/)
 
-### 2). Open Grafana in your browser
+### Open Grafana in your browser
 
-You can use the default address: http://localhost:3000 and the default login credential: "admin" / "admin".
+You can use the default address: [http://localhost:3000]() and the default login credential: "admin" / "admin".
 
-### 3). Creating a Prometheus data source
+### Creating a Prometheus data source
 
 To create a Prometheus data source:
-    1. Click the Grafana logo to open the sidebar menu.
-    2. Click "Data Sources" in the sidebar.
-    3. Click "Add data source".
-    4. Specify the name for the data source. Note:if you want use our dashboard configuration file, use `pingcap` as the data source name.
-    4. Select "Prometheus" as the Type to be consistent with the UI.
-    5. Set the appropriate Prometheus server URL (for example, http://localhost:9090/)
-    6. Configure other data source settings.
-    7. Click "Add" to save the new data source.
+
+1. Click the Grafana logo to open the sidebar menu.
+2. Click "Data Sources" in the sidebar.
+3. Click "Add data source".
+4. Specify the name for the data source. Note: The Name of the data source must be consistent with the name in the .json file in the [Creating a Grafana dashboard] (#4-creating-a-grafana-dashboard) section. For example, if you specify the Name as "pingcap", the data source name in the [tidb-grafana.json] (https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json) file is also "pingcap". 
+5. Select "Prometheus" as the Type.
+6. Set the appropriate Prometheus server URL (for example, http://localhost:9090/).
+7. Configure other data source settings.
+8. Click "Add" to save the new data source.
 
 See the following snapshot as an example of data source configuration:
 ![image alt text](datasource.png)    
 
-### 4). Creating a Grafana dashboard
+### Creating a Grafana dashboard
 
 Import the data source to add a new Grafana dashboard:
-    1. Click the Grafana logo to open the sidebar menu.
-    2. Click "Dashboards" in the sidebar.
-    3. Click "Import".
-    4. Click "Upload .json File" to upload a JSON file. See [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json) as an example. 
-    5. Click "Save & Open".A Prometheus dashboard is create.
+
+1. Click the Grafana logo to open the sidebar menu.
+2. On the sidebar menu, click "Dashboards" -> "Import" to open the "Import Dashboard" window. 
+3. Click "Upload .json File" to upload a JSON file. See [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json) as an example. 
+4. Click "Save & Open".A Prometheus dashboard is create.
