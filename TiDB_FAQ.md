@@ -134,6 +134,6 @@ TiDB is as scalable as NoSQL databases but features in the usability and functio
 
 Yes. Your applications can be migrated to TiDB without changing a single line of code in most cases.
 
-## Can I use other key-value stores with TiDB?
+## Can I use other key-value storage engines with TiDB?
 
-Yes. TiDB supports many popular storage engines, such as Go levelDB, LevelDB, RocksDB, LMDB, BoltDB and even more to come.
+Yes. TiDB supports many popular storage engines, such as Go levelDB and TiKV.
