@@ -32,7 +32,7 @@ TiDB is at your service if your applications require any of the following:
 
 ## When not to use TiDB?
 
-TiDB is not a good choice if the number of the rows in your database table is less than a TB and there is no requirement for high availability, strong consistency and cross-datacenter replication.
+TiDB is not a good choice if the number of the rows in your database table is less than 100GB and there is no requirement for high availability, strong consistency and cross-datacenter replication.
 
 ## How does TiDB manage user account?
 
@@ -42,7 +42,7 @@ You can use MySQL grammar to create user accounts. For example, you can create a
 
 CREATE USER 'test'@'localhost' identified by '123';
 
-The user name of this account is "test; the password is “123" and this user can login from localhost only.
+The user name of this account is "test"; the password is “123" and this user can login from localhost only.
 
 You can also use MySQL grammar to authorize this user. For example, you can grant the read privilege to the "test" user by using the following statement:
 
@@ -64,7 +64,7 @@ As your business grows, your database might face the following three bottlenecks
 
 + Not enough throughputs.
 
-You can grow TiDB as your business grows.
+You can scale TiDB as your business grows.
 
 + If the disk space is not enough, you can increase the capacity simply by adding more TiKV nodes. When the new node is started, PD will migrate the data from other nodes to the new node automatically.
 
@@ -96,15 +96,15 @@ Yes. ACID semantics are guaranteed in TiDB:
 
 + Durability: TiDB allows a collection of machines to work as a coherent group that can survive the failures of some of its members. So in TiDB, once a transaction has been committed, it will remain so, even in the event of power loss, crashes, or errors. 
 
-## How to set the lease parameter in TiDB?
+## How to choose the lease parameter in TiDB?
 
-When the TiDB server is started, set the lease parameter in the command line. The value of the lease parameter impacts the Database Schema Changes (DDL) speed of the current session. In the testing environments, you can set the value to 1s for to speed up the testing cycle. But in the production environments, it is recommended to set the value to minutes (for example, 300s) to ensure the DDL safety.
+The lease parameter is set from the command line when starting a TiDB server. The value of the lease parameter impacts the Database Schema Changes (DDL) speed of the current session. In the testing environments, you can set the value to 1s for to speed up the testing cycle. But in the production environments, it is recommended to set the value to minutes (for example, 300s) to ensure the DDL safety.
 
 ## Why is the DDL statement so slow when using TiDB?
 
-TiDB implements the online schema changes of [Google F1](http://research.google.com/pubs/pub41376.html). Generally, DDL is not a frequent operation. In case of DDL, the top priority of TiDB is to ensure the data consistency and business continuity. A complete DDL has 2 to 5 phases depending on the statement type. Each phase takes the time of 2 leases. Assuming one lease is 5 minutes, for a Drop Table statement which requires 2 phases, it takes 20 minutes (2 x 2 x 5 = 20). As what we have learned from Google F1, the DDL operation is handled by the database administrator (DBA) using special tools and it usually takes days.
+TiDB implements the online change algorithm of [Google F1](http://research.google.com/pubs/pub41376.html). Generally, DDL is not a frequent operation. In case of DDL, the top priority of TiDB is to ensure the data consistency and business continuity. A complete DDL has 2 to 5 phases depending on the statement type. Each phase takes the time of 2 leases. Assuming one lease is 1 minute, for a Drop Table statement which requires 2 phases, it takes 4 minutes (2 x 2 x 1 = 4). As what we have learned from Google F1, the DDL operation is handled by the database administrator (DBA) using special tools and it usually takes days.
 
-## What language can I use to work with TiDB?
+## What programming language can I use to work with TiDB?
 
 Any language that has MySQL client or driver.
 
