@@ -87,6 +87,7 @@ To create a Prometheus data source:
 8. Click "Add" to save the new data source.
 
 See the following snapshot as an example of data source configuration:
+
 ![image alt text](datasource.png)    
 
 ### Creating a Grafana dashboard
@@ -96,4 +97,4 @@ Import the data source to add a new Grafana dashboard:
 1. Click the Grafana logo to open the sidebar menu.
 2. On the sidebar menu, click "Dashboards" -> "Import" to open the "Import Dashboard" window. 
 3. Click "Upload .json File" to upload a JSON file. See [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json) as an example. 
-4. Click "Save & Open".A Prometheus dashboard is create.
+4. Click "Save & Open".A Prometheus dashboard is created.
