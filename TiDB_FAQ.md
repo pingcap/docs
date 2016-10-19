@@ -136,4 +136,4 @@ Yes. Your applications can be migrated to TiDB without changing a single line of
 
 ## Can I use other key-value storage engines with TiDB?
 
-Yes. TiDB supports many popular storage engines, such as Go levelDB and TiKV.
+Yes. TiDB supports many popular storage engines, such as goleveldb and TiKV.
