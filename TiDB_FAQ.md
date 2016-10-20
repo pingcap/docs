@@ -26,7 +26,7 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 
 TiDB is at your service if your applications require any of the following:
 + Horizontal scalability
-+ Business continuity 
++ High availability
 + Strong consistency
 + Support for distributed ACID transactions
 
@@ -36,7 +36,7 @@ TiDB is not a good choice if the number of the rows in your database table is le
 
 ## How does TiDB manage user account?
 
-TiDB follows MySQL user account management system. You can create user accounts and authorize them. 
+TiDB follows MySQL user authentication mechanism. You can create user accounts and authorize them. 
 
 You can use MySQL grammar to create user accounts. For example, you can create a user account by using the following statement:
 
@@ -90,7 +90,7 @@ Yes. ACID semantics are guaranteed in TiDB:
 
 + Atomicity: Each transaction in TiDB is "all or nothing": if one part of the transaction fails, then the entire transaction fails, and the database state is left unchanged. TiDB guarantees atomicity in each and every situation, including power failures, errors, and crashes. 
 
-+ Consistency: TiDB ensures that any transaction brings the database from one valid state to another. Any data written to the ImDB database must be valid according to all defined rules, including constraints, cascades, triggers, and any combination thereof. 
++ Consistency: TiDB ensures that any transaction brings the database from one valid state to another. Any data written to the TiDB database must be valid according to all defined rules, including constraints, cascades, triggers, and any combination thereof. 
 
 + Isolation: TiDB provides snapshot isolation (SI), snapshot isolation with lock (SQL statement: SELECT ... FOR UPDATE), and externally consistent reads and writes in distributed transactions.   
 
@@ -116,7 +116,7 @@ TiDB maps relational databases to Key-Value databases. It maps the relational ta
 
 ## Can I use SQL statements to work with TiDB?
 
-Yes. TiDB follows MySQL’s SQL grammar. You can use TiDB just you use MySQL.
+Yes. TiDB follows MySQL’s SQL grammar. You can use TiDB just as using MySQL.
 
 ## Is TiDB based on MySQL?
 
