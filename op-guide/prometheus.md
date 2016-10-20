@@ -60,7 +60,7 @@ scrape_configs:
 
 **Note**:
  - If you use pushgateway, set `honor_labels:true`.
- - If you use Docker start TiDB,add the `-h $HOSTNAME` option to define the hostname in Docker. Then, you can start Prometheus using the `prometheus.yml` file.
+ - If you use Docker start TiDB, add the `-h $HOSTNAME` option to define the hostname in Docker. Then, you can start Prometheus using the `prometheus.yml` file.
 
 
 ## Step 2. Monitor TiDB with Prometheus and Grafana 
@@ -80,7 +80,7 @@ To create a Prometheus data source:
 1. Click the Grafana logo to open the sidebar menu.
 2. Click "Data Sources" in the sidebar.
 3. Click "Add data source".
-4. Specify the name for the data source. Note: The Name of the data source must be consistent with the name in the .json file in the [Creating a Grafana dashboard] (#4-creating-a-grafana-dashboard) section. For example, if you specify the Name as "pingcap", the data source name in the [tidb-grafana.json] (https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json) file is also "pingcap". 
+4. Specify the name for the data source. Note: The Name of the data source must be consistent with the name in the .json file in the [Creating a Grafana dashboard] (#creating-a-grafana-dashboard) section. For example, if you specify the Name as "pingcap", the data source name in the [tidb-grafana.json] (https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json) file is also "pingcap". 
 5. Select "Prometheus" as the Type.
 6. Set the appropriate Prometheus server URL (for example, http://localhost:9090/).
 7. Configure other data source settings.
@@ -97,4 +97,4 @@ Import the data source to add a new Grafana dashboard:
 1. Click the Grafana logo to open the sidebar menu.
 2. On the sidebar menu, click "Dashboards" -> "Import" to open the "Import Dashboard" window. 
 3. Click "Upload .json File" to upload a JSON file. See [tidb-grafana.json](https://github.com/pingcap/docs/blob/master/etc/tidb-grafana.json) as an example. 
-4. Click "Save & Open".A Prometheus dashboard is created.
+4. Click "Save & Open". A Prometheus dashboard is created.
