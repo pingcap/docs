@@ -6,9 +6,9 @@ A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> 
 
 To learn the TiDB architecture, please see [TiDB Architecture](../README.md#TiDB-Architecture).
 
-To quickly understand and try TiDB, please follow [Standalone Cluster Deployment](#Standalone-Cluster-Deployment).
+To quickly understand and try TiDB, please follow [Standalone Cluster Deployment](#standalone-cluster-deployment).
 
-To deploy and use TiDB in production, please follow [Multi Nodes Deployment](#Multi-Nodes-Deployment).
+To deploy and use TiDB in production, please follow [Multi Nodes Deployment](#multi-nodes-deployment).
 
 ## Download Official Binary
 
