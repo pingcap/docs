@@ -1,6 +1,8 @@
 ## Deploying Recommendations
 
-Now that you have an understanding of the horizontal scalability and high availability architecture of TiDB, let’s take a look the recommended deployment. Each component has the following hardware requirements:
+To learn the TiDB architecture, see [TiDB Architecture](../README.md#TiDB-Architecture).
+
+The following table lists the recommended hardware for each components.
 
 <table>
   <tr>

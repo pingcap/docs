@@ -67,12 +67,13 @@ TiKV is a cluster and the data consistency is ensured using the Raft protocol. T
 - [TiDB FAQ](./TiDB_FAQ.md)
  
 ## Getting started
-- [Quick Start for TiDB](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
 
-## Deployment & Operation
+- [Quick Start Guide for TiDB](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
+
+## Deployment
 
 - [Deployment Recommendation](op-guide/recommendation.md)
-- [Binary Deployment(Recommended)](op-guide/binary-deployment.md)
+- [Binary Deployment (Recommended)](op-guide/binary-deployment.md)
 - [Docker Deployment](op-guide/docker-deployment.md)
 
 ## Building TiDB

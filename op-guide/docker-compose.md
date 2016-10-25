@@ -1,6 +1,6 @@
 ## Use `docker-compose`
 
-Note: If you are using `docker-compose`, you don't need to create a Docker network and start TiDB,TiKV,PD containers separately. 
+Note: If you are using `docker-compose`, you don't need to create a Docker network and start TiDB,TiKV and PD containers separately. 
 The following `docker-compose.yml` file is enough.
 
 ```yaml
