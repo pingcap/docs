@@ -6,8 +6,8 @@ To learn the TiDB architecture, see [TiDB Architecture](../README.md#TiDB-Archit
 
 Before you start, make sure that you have:
 
-+ Install the latest version of [Docker](https://www.docker.com/products/docker) 
-+ Pull the TiDB, TiKV and PD docker images
++ Installed the latest version of [Docker](https://www.docker.com/products/docker) 
++ Pulled the TiDB, TiKV and PD docker images. If not, pull the images using the following commands:
 
 ```bash
 docker pull pingcap/tidb:latest
