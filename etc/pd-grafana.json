@@ -1,5 +1,15 @@
 {
-  "id": 3,
+ "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "id": null,
   "title": "PD",
   "tags": [],
   "style": "dark",
@@ -22,7 +32,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "editable": true,
           "error": false,
@@ -100,7 +110,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -177,7 +187,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -254,7 +264,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -331,7 +341,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -408,7 +418,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -479,7 +489,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -557,7 +567,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "editable": true,
           "error": false,
@@ -634,7 +644,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -710,7 +720,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -788,14 +798,14 @@
       "title": "cluster status"
     },
     {
-      "collapse": true,
+      "collapse": false,
       "editable": true,
       "height": "300px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "editable": true,
           "error": false,
@@ -876,7 +886,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -957,7 +967,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1047,7 +1057,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1127,7 +1137,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1207,7 +1217,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1323,22 +1333,11 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "text": "pingcap-118",
-          "value": "pingcap-118"
-        },
-        "datasource": "pingcap",
+        "datasource": "${DS_PROMETHEUS}",
         "hide": 0,
         "includeAll": false,
         "multi": false,
         "name": "instance",
-        "options": [
-          {
-            "text": "pingcap-118",
-            "value": "pingcap-118",
-            "selected": true
-          }
-        ],
         "query": "label_values(pd_cluster_status, instance)",
         "refresh": 1,
         "type": "query"

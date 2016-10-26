@@ -1,5 +1,15 @@
 {
-  "id": 1,
+   "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "id": null,
   "title": "TiDB",
   "tags": [],
   "style": "dark",
@@ -16,7 +26,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -102,7 +112,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -193,7 +203,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -285,7 +295,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -369,7 +379,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -456,7 +466,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -543,7 +553,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -623,7 +633,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -709,7 +719,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -794,7 +804,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -881,7 +891,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -965,7 +975,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1052,7 +1062,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1129,7 +1139,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -1210,7 +1220,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1287,7 +1297,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1375,7 +1385,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1462,7 +1472,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "pingcap",
+          "datasource": "${DS_PROMETHEUS}",
           "editable": true,
           "error": false,
           "fill": 1,
