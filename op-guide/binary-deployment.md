@@ -10,9 +10,11 @@ To quickly understand and try TiDB, follow [Standalone Cluster Deployment](#stan
 
 To deploy and use TiDB in production, follow [Multi Nodes Deployment](#multi-nodes-deployment).
 
-## Download the Official Binary Package
+## Download and Decompress the Official Binary Package
 
 ### Linux
+
+Note: The Linux package does not support the CentOS 6 platform. See [CentOS 6](#centos-6) to download and decompress the CentOS 6 package.
 
 ```bash
 # Download package
@@ -27,10 +29,10 @@ tar -xzf tidb-latest-linux-amd64.tar.gz
 cd tidb-latest-linux-amd64
 ```
 
-#### CentOS-6
+#### CentOS 6
 
 ```bash
-# Download CentOS-6 package
+# Download CentOS 6 package
 wget http://download.pingcap.org/tidb-latest-linux-amd64-centos6.tar.gz
 wget http://download.pingcap.org/tidb-latest-linux-amd64-centos6.sha256
 
