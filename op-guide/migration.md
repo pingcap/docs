@@ -35,7 +35,7 @@ cd tidb-tools-latest-linux-amd64
 
 ### A sample to use the `checker` tool
 
-1. Create several tables in the `test` database in MySQL and insert data.
+1\. Create several tables in the `test` database in MySQL and insert data.
 
 ```bash
 USE test;
@@ -46,7 +46,7 @@ INSERT INTO t1 VALUES (1, 1), (2, 2), (3, 3);
 INSERT INTO t2 VALUES (1, "a"), (2, "b"), (3, "c");
 ```
 
-2. Use the `checker` tool to check all the tables in the `test` database
+2\. Use the `checker` tool to check all the tables in the `test` database.
 
 ```bash
 ./bin/checker -host 127.0.0.1 -port 3306 -user root test
@@ -58,7 +58,8 @@ INSERT INTO t2 VALUES (1, "a"), (2, "b"), (3, "c");
 2016/10/27 13:11:49 checker.go:69: [info] Check table t2 succ
 ```
 
-3. Use the `checker` tool to check one of the tables in the `test` database
+3\. Use the `checker` tool to check one of the tables in the `test` database.
+
 **Note:** Assuming you need to migrate the `t1` table only in this sample.
 
 ```bash
@@ -72,15 +73,15 @@ Check database succ!
 
 ### A sample of a table that cannot be migrated
 
-1. Create the following `t_error` table in MySQL:
-
+1\. Create the following `t_error` table in MySQL:
 ```bash
 CREATE TABLE t_error (
   c timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
 
-2. Use the `checker` tool to check the table. If the following error is displayed, the `t_error` table cannot be migrated.
+
+2\. Use the `checker` tool to check the table. If the following error is displayed, the `t_error` table cannot be migrated.
 
 ```bash
 ./bin/checker -host 127.0.0.1 -port 3306 -user root test t_error
@@ -295,8 +296,3 @@ mysql> select * from t1;
 ```
 
 You can see that by using `syncer`, the updates in MySQL can be automatically synchronized in TiDB.
-
-
-
-
-
