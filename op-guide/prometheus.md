@@ -1,6 +1,7 @@
 # Use Prometheus and Grafana in TiDB
 
 This page shows you how to deploy Prometheus and Grafana.  
+
 ## Preparation
 Before you start, make sure you have: 
 
@@ -11,7 +12,7 @@ Before you start, make sure you have:
 
 See the following `prometheus.yml` as an example:
 
-```
+```yaml
 #global config
 global:
   scrape_interval:     15s # By default, scrape targets every 15 seconds.

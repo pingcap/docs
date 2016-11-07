@@ -85,7 +85,7 @@
               "expr": "max(pd_cluster_status{instance=\"$instance\",type=\"storage_capacity\"})",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 600
+              "step": 240
             }
           ],
           "thresholds": "",
@@ -162,7 +162,7 @@
               "expr": "pd_cluster_status{instance=\"$instance\",type=\"region_total_count\"}",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 600
+              "step": 240
             }
           ],
           "thresholds": "",
@@ -239,7 +239,7 @@
               "expr": "pd_cluster_status{instance=\"$instance\",type=\"store_up_count\"}",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 600
+              "step": 240
             }
           ],
           "thresholds": "",
@@ -316,7 +316,7 @@
               "expr": "pd_cluster_status{instance=\"$instance\",type=\"store_down_count\"}",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 600
+              "step": 240
             }
           ],
           "thresholds": "",
@@ -393,7 +393,7 @@
               "expr": "pd_cluster_status{instance=\"$instance\",type=\"store_offline_count\"}",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 600
+              "step": 240
             }
           ],
           "thresholds": "",
@@ -470,7 +470,7 @@
               "expr": "pd_cluster_status{instance=\"$instance\",type=\"store_tombstone_count\"}",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 600
+              "step": 240
             }
           ],
           "thresholds": "",
@@ -792,6 +792,86 @@
               "show": true
             }
           ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 27,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 300,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(pd_balancer_balancers_count{instance=\"$instance\"}[5m])) by (type)",
+              "intervalFactor": 2,
+              "legendFormat": "{{type}}",
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "balance_operators_count",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         }
       ],
       "showTitle": true,
@@ -826,7 +906,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "sideWidth": 250,
+            "sideWidth": 300,
             "total": false,
             "values": true
           },
@@ -906,7 +986,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "sideWidth": 250,
+            "sideWidth": 300,
             "sortDesc": true,
             "total": false,
             "values": true
@@ -920,21 +1000,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(1.0, sum(rate(pd_cmd_handle_completed_cmds_duration_seconds_bucket{instance=\"$instance\"}[5m])) by (type, le))",
+              "expr": "histogram_quantile(0.99, sum(rate(pd_cmd_handle_completed_cmds_duration_seconds_bucket{instance=\"$instance\"}[5m])) by (type, le))",
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 20
+              "step": 40
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "100% completed_cmds_duration_seconds",
+          "title": "99% completed_cmds_duration_seconds",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -977,7 +1057,7 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 21,
+          "id": 23,
           "isNew": true,
           "legend": {
             "alignAsTable": true,
@@ -987,7 +1067,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "sideWidth": 250,
+            "sideWidth": 300,
             "sortDesc": true,
             "total": false,
             "values": true
@@ -1001,21 +1081,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(pd_cmd_handle_completed_cmds_duration_seconds_sum{instance=\"$instance\"}[5m]) / rate(pd_cmd_handle_completed_cmds_duration_seconds_count{instance=\"$instance\"}[5m])",
+              "expr": "histogram_quantile(0.99999, sum(rate(pd_cmd_handle_completed_cmds_duration_seconds_bucket{instance=\"$instance\"}[5m])) by (type, le))",
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 20
+              "step": 40
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Average completed_cmds_duration_seconds",
+          "title": "99.999% completed_cmds_duration_seconds",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1077,7 +1157,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "sideWidth": 250,
+            "sideWidth": 300,
             "total": false,
             "values": true
           },
@@ -1157,7 +1237,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "sideWidth": 250,
+            "sideWidth": 300,
             "total": false,
             "values": true
           },
@@ -1170,21 +1250,101 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(1.0, sum(rate(pd_txn_handle_txns_duration_seconds_bucket[5m])) by (instance, result, le))",
+              "expr": "histogram_quantile(0.99, sum(rate(pd_txn_handle_txns_duration_seconds_bucket[5m])) by (instance, result, le))",
               "intervalFactor": 2,
               "legendFormat": "{{instance}} : {{result}}",
               "refId": "A",
-              "step": 20
+              "step": 40
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "100% handle_txns_duration_seconds",
+          "title": "99% handle_txns_duration_seconds",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 24,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 300,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.99999, sum(rate(pd_txn_handle_txns_duration_seconds_bucket[5m])) by (instance, result, le))",
+              "intervalFactor": 2,
+              "legendFormat": "{{instance}} : {{result}}",
+              "refId": "A",
+              "step": 40
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "99.999% handle_txns_duration_seconds",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1237,7 +1397,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "sideWidth": 250,
+            "sideWidth": 300,
             "total": false,
             "values": true
           },
@@ -1250,22 +1410,104 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(1.0, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) by (instance, le))",
+              "expr": "histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) by (instance, le))",
               "intervalFactor": 2,
               "legendFormat": "{{instance}}",
               "metric": "",
               "refId": "A",
-              "step": 20
+              "step": 40
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "100% wal_fsync_duration_seconds",
+          "title": "99% wal_fsync_duration_seconds",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "transparent": false,
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 25,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 300,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.99999, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) by (instance, le))",
+              "intervalFactor": 2,
+              "legendFormat": "{{instance}}",
+              "metric": "",
+              "refId": "A",
+              "step": 40
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "99.999% wal_fsync_duration_seconds",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1302,7 +1544,7 @@
     }
   ],
   "time": {
-    "from": "now-6h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -1347,8 +1589,9 @@
   "annotations": {
     "list": []
   },
+  "refresh": "5m",
   "schemaVersion": 12,
-  "version": 27,
+  "version": 13,
   "links": [],
   "gnetId": null
 }

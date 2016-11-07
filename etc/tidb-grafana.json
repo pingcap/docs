@@ -56,7 +56,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -65,7 +65,7 @@
               "intervalFactor": 2,
               "legendFormat": "",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -83,7 +83,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -99,16 +99,7 @@
               "show": true
             }
           ]
-        }
-      ],
-      "showTitle": false,
-      "title": "Row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
+        },
         {
           "aliasColors": {},
           "bars": false,
@@ -148,7 +139,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -157,7 +148,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{instance}} {{type}}",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -191,15 +182,248 @@
               "show": true
             }
           ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 23,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.80, sum(rate(tidb_server_handle_query_duration_seconds_bucket[1m])) by (le))",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "80% tidb_server_handle_query_duration_seconds",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 25,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(tidb_server_handle_query_duration_seconds_bucket[1m])) by (le))",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "99% tidb_server_handle_query_duration_seconds",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         }
       ],
-      "title": "New row"
+      "showTitle": false,
+      "title": "Row"
     },
     {
       "collapse": false,
       "editable": true,
       "height": "250px",
       "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 8,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "tidb_server_connections",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Client connection count",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
         {
           "aliasColors": {},
           "bars": false,
@@ -242,22 +466,13 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "go_memstats_heap_sys_bytes",
-              "hide": true,
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "metric": "go_memstats_heap_sys_bytes",
-              "refId": "A",
-              "step": 120
-            },
-            {
               "expr": "go_memstats_heap_inuse_bytes{job=\"tidb\"}",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "{{job}}-{{instance}}",
               "metric": "go_memstats_heap_inuse_bytes",
               "refId": "B",
-              "step": 60
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -275,7 +490,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "bytes",
               "label": "",
               "logBase": 1,
               "max": null,
@@ -288,83 +503,7 @@
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 10,
-          "isNew": true,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "go_goroutines {job=\"tidb\"}",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 60
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "go goroutines",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
+              "show": false
             }
           ]
         }
@@ -411,7 +550,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -420,7 +559,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -454,15 +593,7 @@
               "show": true
             }
           ]
-        }
-      ],
-      "title": "New row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
+        },
         {
           "aliasColors": {},
           "bars": false,
@@ -498,7 +629,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -507,7 +638,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{instance}}",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -563,17 +694,16 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 7,
+          "id": 6,
           "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": false,
-            "current": true,
+            "current": false,
             "max": true,
             "min": false,
             "rightSide": true,
             "show": true,
-            "sortDesc": true,
             "total": false,
             "values": true
           },
@@ -586,21 +716,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 4,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.95, sum(rate(tidb_ddl_batch_add_or_del_data_succ_bucket[1m])) by (le))",
+              "expr": "sum(rate(tidb_tikvclient_backoff_seconds_bucket[1m])) by (instance, type)",
               "intervalFactor": 2,
-              "legendFormat": "{{instance}}, {{handle_data_type}}",
+              "legendFormat": "{{instance}}-{{type}}",
               "refId": "A",
-              "step": 120
+              "step": 2
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "95% ddl_batch_add_or_del_data",
+          "title": "KV retry duration",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -633,7 +763,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": null,
           "editable": true,
           "error": false,
           "fill": 1,
@@ -643,14 +773,13 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 8,
+          "id": 20,
           "isNew": true,
           "legend": {
             "avg": false,
             "current": false,
             "max": false,
             "min": false,
-            "rightSide": true,
             "show": true,
             "total": false,
             "values": false
@@ -664,21 +793,20 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 8,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "tidb_server_connections",
+              "expr": "sum(rate(pd_client_cmd_cmds_total[1m]))",
               "intervalFactor": 2,
-              "legendFormat": "",
               "refId": "A",
-              "step": 120
+              "step": 2
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Client connection count",
+          "title": "pd_client_cmd_total",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -749,7 +877,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 3,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -757,7 +885,7 @@
               "expr": "histogram_quantile(0.95, sum(rate(tidb_ddl_handle_job_duration_seconds_bucket[1m])) by (le))",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 40
+              "step": 4
             }
           ],
           "timeFrom": null,
@@ -791,16 +919,7 @@
               "show": true
             }
           ]
-        }
-      ],
-      "showTitle": false,
-      "title": "New row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
+        },
         {
           "aliasColors": {},
           "bars": false,
@@ -814,18 +933,19 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 6,
+          "id": 7,
           "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": false,
             "current": false,
-            "max": true,
+            "max": false,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
+            "sortDesc": true,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 2,
@@ -836,21 +956,99 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 3,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(tidb_tikvclient_backoff_seconds_bucket[1m])) by (instance, type)",
+              "expr": "histogram_quantile(0.95, sum(rate(tidb_ddl_batch_add_or_del_data_succ_bucket[1m])) by (le))",
               "intervalFactor": 2,
-              "legendFormat": "{{instance}}-{{type}}",
+              "legendFormat": "",
               "refId": "A",
-              "step": 40
+              "step": 4
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "KV retry duration",
+          "title": "95% ddl_batch_add_or_del_data",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 19,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "tidb_ddl_waiting_jobs",
+              "intervalFactor": 2,
+              "legendFormat": "{{instance}}, {{action}}",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "tidb_ddl_waiting_jobs",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -881,6 +1079,7 @@
           ]
         }
       ],
+      "showTitle": false,
       "title": "New row"
     },
     {
@@ -937,7 +1136,7 @@
               "legendFormat": "",
               "metric": "tidb_distsql_handle_query_duration_seconds_bucket",
               "refId": "A",
-              "step": 60
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -955,7 +1154,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -1016,7 +1215,7 @@
               "legendFormat": "",
               "metric": "tidb_distsql_query_total",
               "refId": "A",
-              "step": 60
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -1101,7 +1300,7 @@
               "intervalFactor": 2,
               "metric": "tidb_server_session_execute_run_duration_bucket",
               "refId": "A",
-              "step": 120
+              "step": 4
             }
           ],
           "timeFrom": null,
@@ -1139,88 +1338,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "editable": true,
-          "error": false,
-          "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "thresholdLine": false
-          },
-          "id": 15,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "histogram_quantile(0.9, rate(tidb_server_session_execute_compile_duration_bucket [1m]))",
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "metric": "tidb_server_session_execute_compile_duration_bucket",
-              "refId": "A",
-              "step": 120
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "compile",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": null,
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1230,7 +1348,7 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 16,
+          "id": 21,
           "isNew": true,
           "legend": {
             "avg": false,
@@ -1250,101 +1368,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 4,
+          "span": 8,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.95,  rate( tidb_server_session_execute_parse_duration_bucket [1m]))",
+              "expr": "sum(rate(tidb_executor_statement_node_total[1m])) by (type)",
               "intervalFactor": 2,
-              "metric": "tidb_server_session_execute_parse_duration_bucket",
+              "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 120
+              "step": 2
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "parse",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 11,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(tidb_tikvclient_region_err_total[1m])) by (type, instance)",
-              "intervalFactor": 2,
-              "legendFormat": "{{instance}}-{{type}}",
-              "metric": "tidb_server_session_execute_parse_duration_count",
-              "refId": "A",
-              "step": 40
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "TiClient Region Error",
+          "title": "statement-count",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1417,21 +1455,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 4,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.95, sum(rate(tidb_tikvclient_txn_cmd_seconds_bucket[1m])) by (le, type))",
+              "expr": "histogram_quantile(0.99, sum(rate(tidb_tikvclient_txn_cmd_seconds_bucket[1m])) by (le, type))",
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 40
+              "step": 4
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "95% tidb_tikvclient_txn_cmd_seconds_bucket",
+          "title": "99% tidb_tikvclient_txn_cmd_seconds_bucket",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1460,15 +1498,7 @@
               "show": true
             }
           ]
-        }
-      ],
-      "title": "New row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
+        },
         {
           "aliasColors": {},
           "bars": false,
@@ -1482,7 +1512,7 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 19,
+          "id": 22,
           "isNew": true,
           "legend": {
             "avg": false,
@@ -1503,21 +1533,101 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 4,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "tidb_ddl_waiting_jobs",
+              "expr": "histogram_quantile(0.99999, sum(rate(tidb_tikvclient_txn_cmd_seconds_bucket[1m])) by (le, type))",
               "intervalFactor": 2,
-              "legendFormat": "{{instance}}, {{action}}",
+              "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 40
+              "step": 4
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "tidb_ddl_waiting_jobs",
+          "title": "99.999% tidb_tikvclient_txn_cmd_seconds_bucket",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 11,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 4,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(tidb_tikvclient_region_err_total[1m])) by (type, instance)",
+              "intervalFactor": 2,
+              "legendFormat": "{{instance}}-{{type}}",
+              "metric": "tidb_server_session_execute_parse_duration_count",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "TiClient Region Error",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1548,11 +1658,11 @@
           ]
         }
       ],
-      "title": "New row"
+      "title": "DDL"
     }
   ],
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1586,9 +1696,9 @@
   "annotations": {
     "list": []
   },
-  "refresh": false,
+  "refresh": "1m",
   "schemaVersion": 12,
-  "version": 71,
+  "version": 38,
   "links": [],
   "gnetId": null
 }
