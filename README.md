@@ -12,7 +12,7 @@
 	+ Configuration and options
 + Operation and Monitoring
 	+ Overview of the monitoring framework
-	+ Component state API and monitoring
+	+ [Monitoring a Monitoring a TiDB cluster](op-guide/Monitoring_TiDB.md)
 + Compatibility and comparison with MySQL
 	+ [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/)
 	+ Comparing with MySQL
