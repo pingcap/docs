@@ -2,8 +2,8 @@
 
 ## TiDB Document list
 + TiDB Introduction and Architecture
-	+ [TiDB introduction and features](#./tidb-introduction)
-	+ [TiDB architecture](#./tidb-architecture)
+	+ [TiDB introduction and features](#tidb-introduction)
+	+ [TiDB architecture](#tidb-architecture)
 + Installation and Deployment
 	+ [Deployment Recommendation](op-guide/recommendation.md)
 	+ [Downloading the Binary](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
