@@ -180,7 +180,7 @@ Generally, it does not need to be configured. You can use the default port: 9091
 
 Add the Push Gateway address to the yaml configuration file:
 
-	```yaml
+```yaml
 	scrape_configs:
 	  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
 	  - job_name: 'TiDB'
@@ -194,7 +194,7 @@ Add the Push Gateway address to the yaml configuration file:
 	      - targets: ['host:port'] # use the Push Gateway address
 	        labels:
 	                group: 'production'
-	```
+```
 
 #### Configuring Grafana
 
