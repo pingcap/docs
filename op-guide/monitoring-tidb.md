@@ -2,7 +2,7 @@
 
 Currently there are two types of interfaces to monitor the state of the TiDB cluster:
 
-* Using the HTTP interface to report the component information to the outside, which is called the component state interface.
+* Using the HTTP interface to get the internal information of a component, which is called the component state interface.
 
 * Using Prometheus to record the detailed information of the various operations in the components, which is called the Metrics interface.
 
