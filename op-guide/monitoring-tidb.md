@@ -12,7 +12,7 @@ You can use this type of interface to monitor the basic information of the compo
 
 ### TiDB server
 
-The HTTP interface of TiDB is: http://host:port/status.
+The HTTP interface of TiDB is: `http://host:port/status`
 
 The default port number is: 10080 which can be set using the `--status` flag. 
 
@@ -30,7 +30,7 @@ In this example,
 
 ### PD server
 
-The API address of PD is: http://${host}:${port}/pd/api/v1/${api_name}
+The API address of PD is: `http://${host}:${port}/pd/api/v1/${api_name}`
 
 The default port number is: 2379.
 
@@ -92,7 +92,7 @@ You can get the following metrics for each component:
 
 See the following diagram for the deployment architecture:
 
-![image alt text](image_1.png)
+![image alt text](monitoring-tidb.png)
 
 **Note:** You must add the Prometheus Pushgateway addresses to the startup parameters of the TiDB, PD and TiKV components.
 
@@ -118,13 +118,13 @@ See the following links for your reference:
 
 - PD: update the toml configuration file with the Push Gateway address and the the push frequency: 
 
-	```bash
+	```toml
 	[metric]	\# prometheus client push interval, set "0s" to disable prometheus.	interval = "15s"	\# prometheus pushgateway address, leaves it empty will disable prometheus.	address = "host:port"
 	```
 
-* TiKV: update the toml configuration file with the Push Gateway address and the the push frequency. Set the job field as "tikv"
+* TiKV: update the toml configuration file with the Push Gateway address and the the push frequency. Set the job field as "tikv".
 
-	```bash
+	```toml
 	[metric]	\# the Prometheus client push interval. Setting the value to 0s stops Prometheus client from pushing.	interval = "15s"	\# the Prometheus pushgateway address. Leaving it empty stops Prometheus client from pushing.	address = "host:port"	\# the Prometheus client push job name. Note: A node id will automatically append, e.g., "tikv_1".	job = "tikv"
 	```
 #### Configuring PushServer
@@ -135,8 +135,8 @@ Generally, it does not need to be configured. You can use the default port: 9091
 
 Add the Push Gateway address to the yaml configuration file:
 
-	```bash
-	scrape_configs:	  \# The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.	  - job_name: 'TiDB'		    \# Override the global default and scrape targets from this job every 5 seconds.	    scrape_interval: 5s		    honor_labels:true		    static_configs:	      - targets: ['host:port'] # use the Push Gateway address	        labels:	                group: 'production'
+	```yaml
+	scrape_configs:	  \# The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.	  - job_name: 'TiDB'		    \# Override the global default and scrape targets from this job every 5 seconds.	    scrape_interval: 5s		    honor_labels: true		    static_configs:	      - targets: ['host:port'] # use the Push Gateway address	        labels:	                group: 'production'
 	```
 
 #### Configuring Grafana

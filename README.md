@@ -12,7 +12,7 @@
 	+ Configuration and options
 + Operation and Monitoring
 	+ Overview of the monitoring framework
-	+ [Monitoring a TiDB cluster](op-guide/Monitoring_TiDB.md)
+	+ [Monitoring a TiDB cluster](op-guide/monitoring-tidb.md)
 + Compatibility and comparison with MySQL
 	+ [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/)
 	+ Comparing with MySQL
