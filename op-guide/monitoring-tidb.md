@@ -19,7 +19,12 @@ The default port number is: 10080 which can be set using the `--status` flag.
 The interface can be used to get the current TiDB server state and to determine whether the server is alive. The result is returned in the following JSON format:
 
 ```bash
-curl http://127.0.0.1:10080/status{connections: 0,version: "5.5.31-TiDB-1.0",git_hash: "b99521846ff6f71f06e2d49a3f98fa1c1d93d91b"}
+curl http://127.0.0.1:10080/status
+{
+connections: 0,
+version: "5.5.31-TiDB-1.0",
+git_hash: "b99521846ff6f71f06e2d49a3f98fa1c1d93d91b"
+}
 ```
 In this example, 
 * connection: the current number of clients connected to the TiDB server
@@ -39,7 +44,37 @@ See [PD API doc](https://cdn.rawgit.com/pingcap/docs/master/op-guide/pd-api-v1.h
 The interface can be used to get the state of all the TiKV servers and the information about load balancing. It is the most important and common interface to get the state information of all the TiKV nodes. See the following example for the the information about a single-node TiKV cluster:
 
 ```bash
-curl http://127.0.0.1:2379/pd/api/v1/stores{  "count": 1 // the number of the TiKV node  "stores": [  // the list of the TiKV node   // the detailed information about the single TiKV node   {      "store": {        "id": 1,        "address": "127.0.0.1:22161",        "state": 0      },      "status": {        "store_id": 1,               // the ID of the node        "capacity": 1968874332160,   // the total capacity        "available": 1264847716352,  // the available capacity        "region_count": 1,           // the count of Regions in this node        "sending_snap_count": 0,        "receiving_snap_count": 0,        "start_ts": "2016-10-24T19:54:00.110728339+08:00",   // the starting timestamp        "last_heartbeat_ts": "2016-10-25T10:52:54.973669928+08:00",   // the timestamp of the last heartbeat        "total_region_count": 1,           // the count of the total Regions        "leader_region_count": 1,        // the count of the Leader Regions        "uptime": "14h58m54.862941589s"      },      "scores": [        100,        35      ]    }  ]}
+curl http://127.0.0.1:2379/pd/api/v1/stores
+{
+  "count": 1 // the number of the TiKV node
+  "stores": [  // the list of the TiKV node
+   // the detailed information about the single TiKV node
+   {
+      "store": {
+        "id": 1,
+        "address": "127.0.0.1:22161",
+        "state": 0
+      },
+      "status": {
+        "store_id": 1,               // the ID of the node
+        "capacity": 1968874332160,   // the total capacity
+        "available": 1264847716352,  // the available capacity
+        "region_count": 1,           // the count of Regions in this node
+        "sending_snap_count": 0,
+        "receiving_snap_count": 0,
+        "start_ts": "2016-10-24T19:54:00.110728339+08:00",   // the starting timestamp
+        "last_heartbeat_ts": "2016-10-25T10:52:54.973669928+08:00",   // the timestamp of the last heartbeat
+        "total_region_count": 1,           // the count of the total Regions
+        "leader_region_count": 1,        // the count of the Leader Regions
+        "uptime": "14h58m54.862941589s"
+      },
+      "scores": [
+        100,
+        35
+      ]
+    }
+  ]
+}
 ```
 
 ## The Metrics interface
@@ -119,13 +154,23 @@ See the following links for your reference:
 - PD: update the toml configuration file with the Push Gateway address and the the push frequency: 
 
 	```toml
-	[metric]	\# prometheus client push interval, set "0s" to disable prometheus.	interval = "15s"	\# prometheus pushgateway address, leaves it empty will disable prometheus.	address = "host:port"
+	[metric]
+	# prometheus client push interval, set "0s" to disable prometheus.
+	interval = "15s"
+	# prometheus pushgateway address, leaves it empty will disable prometheus.
+	address = "host:port"
 	```
 
 * TiKV: update the toml configuration file with the Push Gateway address and the the push frequency. Set the job field as "tikv".
 
 	```toml
-	[metric]	\# the Prometheus client push interval. Setting the value to 0s stops Prometheus client from pushing.	interval = "15s"	\# the Prometheus pushgateway address. Leaving it empty stops Prometheus client from pushing.	address = "host:port"	\# the Prometheus client push job name. Note: A node id will automatically append, e.g., "tikv_1".	job = "tikv"
+	[metric]
+	# the Prometheus client push interval. Setting the value to 0s stops Prometheus client from pushing.
+	interval = "15s"
+	# the Prometheus pushgateway address. Leaving it empty stops Prometheus client from pushing.
+	address = "host:port"
+	# the Prometheus client push job name. Note: A node id will automatically append, e.g., "tikv_1".
+	job = "tikv"
 	```
 #### Configuring PushServer
 
@@ -136,7 +181,19 @@ Generally, it does not need to be configured. You can use the default port: 9091
 Add the Push Gateway address to the yaml configuration file:
 
 	```yaml
-	scrape_configs:	  \# The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.	  - job_name: 'TiDB'		    \# Override the global default and scrape targets from this job every 5 seconds.	    scrape_interval: 5s		    honor_labels: true		    static_configs:	      - targets: ['host:port'] # use the Push Gateway address	        labels:	                group: 'production'
+	scrape_configs:
+	  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+	  - job_name: 'TiDB'
+	
+	    # Override the global default and scrape targets from this job every 5 seconds.
+	    scrape_interval: 5s
+	
+	    honor_labels: true
+	
+	    static_configs:
+	      - targets: ['host:port'] # use the Push Gateway address
+	        labels:
+	                group: 'production'
 	```
 
 #### Configuring Grafana
