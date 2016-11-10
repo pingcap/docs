@@ -14,8 +14,8 @@ Prometheus consists of multiple components. Currently, TiDB uses the following o
 
 The diagram is as follows:
 
-<img src="./prometheus-in-TiDB.png" width="500">
+<img src="prometheus-in-TiDB.png" width="500">
 
 ## About Grafana in TiDB
 Grafana is an open source project for analysing and visualizing metrics. TiDB uses Grafana to display the performance metrics as follows:
-![screenshot](./grafana-screenshot.png)
+![screenshot](grafana-screenshot.png)
