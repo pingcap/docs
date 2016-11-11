@@ -60,5 +60,6 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
 
 ### Transaction
 
-TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-level locking to avoid write conflict, in TiDB, the write conflict is checked only in the `commit` process during the execution of the statements like `Update`, `Insert`, `Delete`, and so on. On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
+TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-level locking to avoid write conflict, in TiDB, the write conflict is checked only in the `commit` process during the execution of the statements like `Update`, `Insert`, `Delete`, and so on. 
+**Note:** On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
 
