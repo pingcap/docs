@@ -2,7 +2,7 @@
 
 TiDB supports the majority of the MySQL grammar, including cross-row transactions, JOIN, subquery, and so on. You can connect to TiDB directly using your own MySQL client. If your existing business is developed based on MySQL, you can replace MySQL with TiDB to power your application without changing a single line of code in most cases.
 
-TiDB is compatible with most of the MySQL database management & administration tools such as `PHPMyAdmin`, `Navicat`, `MySQL Workbench`, and so on. It also  support the database backup tools, such as `mysqldump` and `mydumper/myloader`.
+TiDB is compatible with most of the MySQL database management & administration tools such as `PHPMyAdmin`, `Navicat`, `MySQL Workbench`, and so on. It also supports the database backup tools, such as `mysqldump` and `mydumper/myloader`.
 
 However, in TiDB, there are some MySQL features that are not supported or are different because they cannot be implemented well in distributed environments.
 
