@@ -4,7 +4,7 @@ TiDB supports the majority of the MySQL grammar, including cross-row transaction
 
 TiDB is compatible with most of the MySQL database management & administration tools such as `PHPMyAdmin`, `Navicat`, `MySQL Workbench`, and so on. It also supports the database backup tools, such as `mysqldump` and `mydumper/myloader`.
 
-However, in TiDB, there are some MySQL features that are not supported or are different because they cannot be implemented well in distributed environments.
+However, in TiDB, there are some MySQL features that are not supported or are different because they cannot be implemented well in distributed scenario.
 
 ## Unsupported features
 
