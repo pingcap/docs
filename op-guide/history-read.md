@@ -51,7 +51,7 @@ Pay special attention to the following two rows:
 
   **Note:** If your data is updated very frequently, the following issues might occur if the value of the `tikv_gc_life_time` is set to be too large like in days or months：
     - The more versions of the data, the more disk storage is occupied.
-    - A large amount of the history versions might slow down the query, especially the range queries like `select count(\*) from t`.
+    - A large amount of the history versions might slow down the query, especially the range queries like `select count(*) from t`.
     - If the value of the `tikv_gc_life_time` variable is suddenly changed to be smaller while the database is running, it might lead to the removal of large amounts of history data and cause huge I/O burden.
     
 - `tikv_gc_safe_point`: This row records the current safePoint. You can safely create the Snapshot to read the history data using the timestamp that is later than the safePoint. The safePoint automatically updates every time GC runs.
