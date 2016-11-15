@@ -19,7 +19,7 @@ The `tidb_snapshot` system variable is introduced to support reading history dat
 
 **Note:** Because the timestamp in TiDB transactions is allocated by Placement Driver (PD), the version of the stored data is also marked based on the timestamp allocated by PD. When a Snapshot is created, the version number is based on the value of the `tidb_snapshot` variable. If there is a large difference between the local time of the TiDB server and the PD server, use the time of the PD server.
 
-After reading data from history versions, you can read data from the latest version by ending the current Session or using the `Set` statement to set the value of the `tidb_snapshot` variable to "" (Null). 
+After reading data from history versions, you can read data from the latest version by ending the current Session or using the `Set` statement to set the value of the `tidb_snapshot` variable to "" (empty string). 
 
 ## How TiDB Manages the Data Versions
 
@@ -137,7 +137,7 @@ mysql> select * from t;
 3 rows in set (0.00 sec)
 ```
 
-7\. Set the  `tidb_snapshot` variable to be "" (Null) and you can read the data from the latest version:
+7\. Set the  `tidb_snapshot` variable to be "" (empty string) and you can read the data from the latest version:
 ```
 mysql> set @@tidb_snapshot="";
 Query OK, 0 rows affected (0.00 sec)
