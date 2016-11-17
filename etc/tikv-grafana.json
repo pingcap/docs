@@ -9,14 +9,6 @@
       "pluginName": "Prometheus"
     }
   ],
-  "id": null,
-  "title": "TiKV",
-  "tags": [],
-  "style": "dark",
-  "timezone": "browser",
-  "editable": true,
-  "hideControls": false,
-  "sharedCrosshair": false,
   "rows": [
     {
       "collapse": false,
@@ -65,6 +57,7 @@
             {
               "expr": "sum(rate(tikv_server_receive_msg_total[1m])) by (instance, type)",
               "intervalFactor": 2,
+              "legendFormat": "{{instance}}-{{type}}",
               "metric": "tikv_server_receive_msg_total",
               "refId": "A",
               "step": 20
@@ -202,6 +195,93 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
+          "id": 2,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(tikv_storage_command_total[1m])) by (type)",
+              "intervalFactor": 2,
+              "legendFormat": "{{type}}",
+              "refId": "A",
+              "step": 10
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "rate(tikv_storage_command_total)",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 2,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "title": "New row"
+    },
+    {
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
           "height": "",
           "id": 1,
           "isNew": true,
@@ -230,9 +310,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(tikv_scheduler_stage_total{stage!=\"error\"}[1m])) by (type, stage)",
+              "expr": "sum(tikv_scheduler_contex_total) by (job)",
               "intervalFactor": 2,
-              "legendFormat": "",
+              "legendFormat": "{{job}}",
               "metric": "",
               "refId": "A",
               "step": 20
@@ -240,7 +320,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "rate(scheduler_stage_total ok)",
+          "title": "scheduler context total",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -313,6 +393,7 @@
             {
               "expr": "sum(rate(tikv_scheduler_stage_total{stage=\"error\"}[1m])) by (type)",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "refId": "A",
               "step": 20
             }
@@ -370,92 +451,6 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 2,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(tikv_storage_command_total[1m])) by (type)",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 10
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "rate(tikv_storage_command_total)",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 2,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "title": "New row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
           "id": 3,
           "isNew": true,
           "legend": {
@@ -485,18 +480,10 @@
             {
               "expr": "histogram_quantile(0.95, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le,type))",
               "intervalFactor": 2,
-              "legendFormat": "",
+              "legendFormat": "{{type}}",
               "metric": "tikv_scheduler_command_duration_seconds_bucket",
               "refId": "A",
               "step": 20
-            },
-            {
-              "expr": "",
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "metric": "tikv_scheduler_latch_wait_duration_seconds_bucket",
-              "refId": "B",
-              "step": 4
             }
           ],
           "timeFrom": null,
@@ -573,6 +560,7 @@
             {
               "expr": "histogram_quantile(0.99, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le,type))",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "refId": "A",
               "step": 20
             }
@@ -659,6 +647,7 @@
             {
               "expr": "sum(rate(tikv_raftstore_raft_ready_handled_total[1m])) by (type)",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "metric": "tikv_raftstore_raft_ready_handled_total",
               "refId": "A",
               "step": 10
@@ -746,6 +735,7 @@
             {
               "expr": "histogram_quantile(0.95, sum(rate(tikv_storage_engine_async_request_duration_seconds_bucket[1m])) by (le, type))",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "metric": "tikv_storage_engine_async_request_duration_seconds_bucket",
               "refId": "A",
               "step": 20
@@ -825,6 +815,7 @@
             {
               "expr": "histogram_quantile(0.99, sum(rate(tikv_storage_engine_async_request_duration_seconds_bucket[1m])) by (le, type))",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "refId": "A",
               "step": 20
             }
@@ -911,6 +902,7 @@
             {
               "expr": "sum(rate(tikv_raftstore_proposal_total[1m])) by (type)",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "metric": "tikv_raftstore_proposal_total",
               "refId": "A",
               "step": 10
@@ -999,6 +991,7 @@
             {
               "expr": "sum(rate(tikv_storage_engine_async_request_total{status=\"failed\"}[1m])) by (type)",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "refId": "A",
               "step": 10
             }
@@ -1085,6 +1078,7 @@
             {
               "expr": "sum(rate(tikv_raftstore_raft_sent_message_total[1m])) by (type)",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "refId": "A",
               "step": 40
             }
@@ -1419,6 +1413,7 @@
             {
               "expr": "histogram_quantile(0.95, sum(rate(tikv_coprocessor_request_duration_seconds_bucket{req!=\"\"}[1m])) by (le,type,req))",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}-{{req}}",
               "metric": "tikv_coprocessor_request_duration_seconds_bucket",
               "refId": "A",
               "step": 20
@@ -1499,6 +1494,7 @@
             {
               "expr": "histogram_quantile(0.99, sum(rate(tikv_coprocessor_request_duration_seconds_bucket{req!=\"\"}[1m])) by (le,type,req))",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}-{{req}}",
               "refId": "A",
               "step": 20
             }
@@ -1506,95 +1502,6 @@
           "timeFrom": null,
           "timeShift": null,
           "title": "99% tikv_coprocessor_request_duration_seconds",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "title": "New row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 19,
-          "isNew": true,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(tikv_scheduler_contex_total) by (job)",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "",
-              "intervalFactor": 2,
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "scheduler-context-count",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1674,6 +1581,7 @@
             {
               "expr": "sum(rate(tikv_raftstore_admin_cmd_total{status=\"success\"}[1m]))  by (type)",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "metric": "tikv_raftstore_admin_cmd_total",
               "refId": "A",
               "step": 10
@@ -1848,6 +1756,7 @@
             {
               "expr": "histogram_quantile(0.95, sum(rate(tikv_scheduler_latch_wait_duration_seconds_bucket[1m])) by (le,type))",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "refId": "A",
               "step": 20
             }
@@ -1926,6 +1835,7 @@
             {
               "expr": "histogram_quantile(0.99, sum(rate(tikv_scheduler_latch_wait_duration_seconds_bucket[1m])) by (le,type))",
               "intervalFactor": 2,
+              "legendFormat": "{{type}}",
               "refId": "A",
               "step": 20
             }
@@ -2372,6 +2282,338 @@
         }
       ],
       "title": "New row"
+    },
+    {
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 31,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(tikv_raftstore_apply_log_duration_seconds_bucket[1m])) by (le))",
+              "intervalFactor": 2,
+              "metric": "",
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "99% tikv_raftstore_apply_log_duration",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 32,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.9999, sum(rate(tikv_raftstore_apply_log_duration_seconds_bucket[1m])) by (le))",
+              "intervalFactor": 2,
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "99.99% tikv_raftstore_apply_log_duration",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "title": "New row"
+    },
+    {
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 33,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(tikv_engine_size_bytes) by (type)",
+              "intervalFactor": 2,
+              "legendFormat": "{{type}}",
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "cf size",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 34,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(tikv_pd_heartbeat_tick_total{type=\"leader\"}) by (job)",
+              "intervalFactor": 2,
+              "legendFormat": "{{job}}",
+              "metric": "tikv_pd_heartbeat_tick_total",
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "leader",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "title": "New row"
     }
   ],
   "time": {
@@ -2411,7 +2653,7 @@
   },
   "refresh": "5m",
   "schemaVersion": 12,
-  "version": 28,
+  "version": 33,
   "links": [],
   "gnetId": null
 }
