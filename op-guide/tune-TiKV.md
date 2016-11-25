@@ -74,9 +74,9 @@ scheduler-worker-pool-size = 4
 
 Besides `block cache` and `write buffer`, the system memory is also occupied in the following scenarios:
 
-1). Some of the memory need to be set aside as the system's cache page.
++ Some of the memory need to be set aside as the system's cache page.
 
-2). When TiKV processes large queries such as `select * from ...`, it reads data and generate corresponding data structure in the memory and returns to TiDB. During the process, some of the memory are also occupied.
++ When TiKV processes large queries such as `select * from ...`, it reads data and generate corresponding data structure in the memory and returns to TiDB. During the process, some of the memory are also occupied.
 
 
 ## 3. Recommended configuration to export data
