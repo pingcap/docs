@@ -27,7 +27,7 @@ tar -xzf tidb-latest-linux-amd64.tar.gz
 cd tidb-latest-linux-amd64
 ```
 
-#### CentOS 6 (Not Suggested)
+#### CentOS 6 (Not Recommended)
 
 ```bash
 # Download CentOS 6 package
