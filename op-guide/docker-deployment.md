@@ -162,7 +162,7 @@ The TiKV and PD can be started with a specified configuration file, which includ
 
 Assume that the path to configuration file of PD and TiKV on the host is `/path/to/config/pd.toml` and `／path/to/config/tikv.toml`
 
-You can start TiKV and PD as following
+You can start TiKV and PD as following:
 
 ```bash
 docker run -d --name tikv1 \
