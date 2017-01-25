@@ -66,3 +66,7 @@ TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-le
 
 **Note:** On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
 
+
+### Transaction
+
+TiDB in the execution of the load data, the default record for every 20,000 rows as a transaction for persistent storage. If a load data operation to insert more than 20,000 rows of data, it will be divided into multiple transactions to commit. If a transaction error occurs, this transaction will be fialed to commit, but the transactions before it are committed successfully. In this case, a part of the load data operation is successfully inserted, and the rest of the data insertion fails. And MySQL treats a load data operation as a transaction, if a failure occurs, it will lead to the failure of the entire load data operation.
