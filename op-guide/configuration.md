@@ -62,7 +62,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### --privilege
 + enable(true) or disable(false) the privilege check.
 + default: false
-+ The value can be (true) or (false). (true) is to enable and (false) is to disable. Privilege is not checked strictly in current version, and it can be enable or disable by this flag. TiDB will check privilege by default in the future.
++ The value can be (true) or (false). (true) is to enable and (false) is to disable. This feature is a work in progress, so it's disabled by default. It will be enabled by default when finish.
 
 ### --report-status
 + enable(true) or disable(false) the status report and pprof tool.
