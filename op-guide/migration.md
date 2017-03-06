@@ -131,7 +131,6 @@ Use the `mydumper` tool to export data from MySQL by typing the following comman
 ```bash
 ./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 128 -B test -T t1,t2 --skip-tz-utc -o ./var/test
 ```
-
 In this command, 
 + `-B test`: means the data is exported from the `test` database.
 + `-T t1,t2`: means only the `t1` and `t2` tables are exported.
