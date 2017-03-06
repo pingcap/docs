@@ -137,6 +137,8 @@ In this command,
 + `-t 16`: means 16 threads are used to export the data.
 + `-F 128`: means a table is partitioned into chunks and one chunk is 128MB.
 
++ The purpose of adding the parameter `--skip-tz-utc` is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
++
 **Note:**
 On the Cloud platforms which require the `super privilege`, such as on the Aliyun platform, add the `--no-locks` parameter to the command. If not, you might get the error message that you don't have the privilege.
 
