@@ -156,7 +156,11 @@ The overhead of the Leader schedule is smaller and it can set to be bigger when 
 >> config set leader-schedule-limit 4       // Up to 4 leader schedules can be implemented simutaneously
 ```
 
-By modifying `region-schedule-limit`, you can control the number of simultaneously implementing region schedule.
+By modifying `region-
+
+
+
+-limit`, you can control the number of simultaneously implementing region schedule.
 This value mainly impacts the speed of *region balance*: the bigger the value is, the faster the schedule goes. If the value is set to 0, the schedule will be closed.
 The overhead of the Region schedule is relatively big and it should not set to be too big.
 
