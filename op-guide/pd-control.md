@@ -1,11 +1,13 @@
 # PD Control instructions
 
-As a command line tool of PD, PD Control is used for obtaining the cluster state information and tuning the cluster.
+As a command line tool of PD, PD Control obtains the state information of the cluster and tunes the cluster.
 
 ## Source code compiling
 
 1. [*Go*](https://golang.org/) Version 1.7 or later
 2. In the PD root directory, use `make` command to compile and generate bin/pd-ctl
+
+**Note:** Generally, you don't need to compile source code as the PD Control tool already exists in the released Binary or Docker. However, dev users can refer to the above instruction for compiling source code.
 
 ## Usage
 
@@ -41,7 +43,7 @@ export PD_ADDR=http://127.0.0.1:2379
 
 ### store [delete] \<store_id\>
 
-This is used for displaying the store information or deleting the specified store.
+Display the store information or delete a specified store.
 
 Usage:
 
@@ -59,7 +61,7 @@ Usage:
 
 ### region \<region_id\>
 
-This is used for displaying the region information.
+Display the region information.
 
 Usage:
 
@@ -84,7 +86,7 @@ Usage:
 
 ### region key [--format=raw|pb|proto|protobuf] \<key\>
 
-This is used for querying the region that a specific key resides. It supports raw and protobuf format.
+Query the region that a specific key resides in. It supports the raw and protobuf format.
 
 Raw format usage (default):
 
@@ -112,7 +114,7 @@ Protobuf format usage:
 
 ### member [leader | delete]
 
-This is used for displaying PD member informaiton or deleting specified members.
+Display the PD member informaiton or delete a specified member.
 
 Usage:
 
@@ -133,7 +135,7 @@ Success!
 
 ### config [show | set \<option\> \<value\>]
 
-This is used for displaying or modifying the configuration information.
+Display or modify the configuration information.
 
 Usage:
 
@@ -174,7 +176,7 @@ The overhead of the Replica schedule is relatively big and it should not set to 
 
 ### operator [show | add | remove]
 
-This is used for displaying and controlling schedule operations.
+Display and control schedule operations.
 
 Usage:
 
@@ -191,7 +193,7 @@ Usage:
 
 ### scheduler [show | add | remove]
 
-This is used for displaying and controlling schedule strategies.
+Display and control schedule strategies.
 
 Usage:
 
