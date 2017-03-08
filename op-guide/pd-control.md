@@ -7,7 +7,7 @@ As a command line tool of PD, PD Control is used for obtaining the cluster state
 1. [*Go*](https://golang.org/) Version 1.7 or later
 2. In the PD root directory, use `make` command to compile and generate bin/pd-ctl
 
-## A sample
+## Usage
 
 single-command mode:
 
@@ -24,11 +24,11 @@ export PD_ADDR=http://127.0.0.1:2379
 ./pd-ctl
 ```
 
-## command line flags (flags)
+## command line flags
 
 ### \-\-pd,-u
 
-+ Specify PD address
++ PD address
 + Default address: http://127.0.0.1:2379
 + Enviroment variable: PD_ADDR
 
@@ -46,14 +46,14 @@ This is used for displaying the store information or deleting the specified stor
 Sample:
 
 ```bash
->> store            // Display all store information
+>> store            // Display the information of all stores
 {
   "count": 3,
   "stores": [...]
 }
 >> store 1          // Get the store with a store id 1
   ......
->> store delete 1   // Put the store with a store id 1 offline
+>> store delete 1   // Make the store with a store id 1 offline
   ......
 ```
 
@@ -64,13 +64,13 @@ This is used for displaying the region information.
 Sample:
 
 ```bash
->> region                               //　Display all region information
+>> region                               //　Display the information of all regions
 {
   "count": 1,
   "regions": [......]
 }
 
->> region 2                             // Display the information with a region id 2
+>> region 2                             // Display the information of region id 2
 {
   "region": {
       "id": 2,
@@ -117,7 +117,7 @@ This is used for displaying PD member informaiton or deleting specified members.
 Sample:
 
 ```bash
->> member                               // Display all member information
+>> member                               // Display the information of all members
 {
   "members": [......]
 }
@@ -127,7 +127,7 @@ Sample:
   "addr": "http://192.168.199.229:2379",
   "id": 9724873857558226554
 }
->> member delete pd2                    // Put "pd2" offline
+>> member delete pd2                    // Make "pd2" offline
 Success!
 ```
 
@@ -153,15 +153,19 @@ This value mainly impacts the speed of *leader balance*: the bigger the value is
 The overhead of the Leader schedule is smaller and it can set to be bigger when necessary.
 
 ```bash
->> config set leader-schedule-limit 4       // Up to 4 leader schedule can be implemented simutaneously
+>> config set leader-schedule-limit 4       // Up to 4 leader schedules can be implemented simutaneously
 ```
 
-By modifying `region-schedule-limit`, you can control the number of simultaneously implementing region schedule.
+By modifying `region-
+
+
+
+-limit`, you can control the number of simultaneously implementing region schedule.
 This value mainly impacts the speed of *region balance*: the bigger the value is, the faster the schedule goes. If the value is set to 0, the schedule will be closed.
 The overhead of the Region schedule is relatively big and it should not set to be too big.
 
 ```bash
->> config set region-schedule-limit 2       // Up to 2 region schedule can be implemented simutaneously
+>> config set region-schedule-limit 2       // Up to 2 region schedules can be implemented simutaneously
 ```
 
 By modifying `replica-schedule-limit`, you can control the number of simultaneously implementing replica schedule.
@@ -169,7 +173,7 @@ This value mainly impacts the schedule speed when a node breaks down or becomes 
 The overhead of the Replica schedule is relatively big and it should not set to be too big.
 
 ```bash
->> config set replica-schedule-limit 4      // Up to 4 replica schedule can be implemented simutaneously
+>> config set replica-schedule-limit 4      // Up to 4 replica schedules can be implemented simutaneously
 ```
 
 ### operator [show | add | remove]
