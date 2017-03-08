@@ -43,7 +43,7 @@ export PD_ADDR=http://127.0.0.1:2379
 
 This is used for displaying the store information or deleting the specified store.
 
-Sample:
+Usage:
 
 ```bash
 >> store            // Display the information of all stores
@@ -61,7 +61,7 @@ Sample:
 
 This is used for displaying the region information.
 
-Sample:
+Usage:
 
 ```bash
 >> region                               //　Display the information of all regions
@@ -86,7 +86,7 @@ Sample:
 
 This is used for querying the region that a specific key resides. It supports raw and protobuf format.
 
-A sample of Raw format (default):
+Raw format usage (default):
 
 ```bash
 >> region key abc
@@ -98,7 +98,7 @@ A sample of Raw format (default):
 }
 ```
 
-A sampel of Protobuf format:
+Protobuf format usage:
 
 ```bash
 >> region key --format=pb t\200\000\000\000\000\000\000\377\035_r\200\000\000\000\000\377\017U\320\000\000\000\000\000\372
@@ -114,7 +114,7 @@ A sampel of Protobuf format:
 
 This is used for displaying PD member informaiton or deleting specified members.
 
-Sample:
+Usage:
 
 ```bash
 >> member                               // Display the information of all members
@@ -135,7 +135,7 @@ Success!
 
 This is used for displaying or modifying the configuration information.
 
-Sample:
+Usage:
 
 ```bash
 >> config show                             //　Dispaly the information of config
@@ -176,7 +176,7 @@ The overhead of the Replica schedule is relatively big and it should not set to 
 
 This is used for displaying and controlling schedule operations.
 
-Sample:
+Usage:
 
 ```bash
 >> operator show                            // Display all operators
@@ -193,7 +193,7 @@ Sample:
 
 This is used for displaying and controlling schedule strategies.
 
-Sample:
+Usage:
 
 ```bash
 >> scheduler show                             // Display all schedulers
