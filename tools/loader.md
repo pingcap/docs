@@ -10,7 +10,7 @@ Developed by PingCAP, Loader is a data import tool and it imports data to TiDB a
 
 ## Why did we develop Loader?
 
-Since tools like mysqldump will take us days to migrate massive amounts of data, we used the mydumper/myloader suite of Percona to multi-thread export and import data. During the process, we found that mydumper works well. However, as myloader lacks functions of error retry andd breakpoint transmission, it is inconvenient for us to use. Therefore, we developed loader, which reads the output data files and imports data to TiDB/MySQL through mysql protocol.
+Since tools like mysqldump will take us days to migrate massive amounts of data, we used the mydumper/myloader suite of Percona to multi-thread export and import data. During the process, we found that mydumper works well. However, as myloader lacks functions of error retry and savepoint, it is inconvenient for us to use. Therefore, we developed loader, which reads the output data files of mydumper and imports data to TiDB/MySQL through mysql protocol.
 
 ## What can Loader do?
 
@@ -20,7 +20,7 @@ Since tools like mysqldump will take us days to migrate massive amounts of data,
 
 + Support error retry
 
-+ Support breakpoint transmission
++ Support savepoint
 
 + Improve the speed of importing data through system variable
 
@@ -99,6 +99,6 @@ Or use configuration file "config.toml":
 
     ./bin/loader -c=config.toml
     
-### Notes
+### Note
 
 If you use the default checkpoint file, after importing the data of a database, please delete loader.checkpoint before you begin to import the next database. When importing each database, explicitly specify the file name of checkpoint is recommended.
