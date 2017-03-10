@@ -38,15 +38,23 @@ TiDB is not a good choice if the number of the rows in your database table is le
 
 TiDB follows MySQL user authentication mechanism. You can create user accounts and authorize them. 
 
-You can use MySQL grammar to create user accounts. For example, you can create a user account by using the following statement:
++ You can use MySQL grammar to create user accounts. For example, you can create a user account by using the following statement:
+  ```
+  CREATE USER 'test'@'localhost' identified by '123';
+  ```
+  The user name of this account is "test"; the password is “123" and this user can login from localhost only.
 
-CREATE USER 'test'@'localhost' identified by '123';
+  You can use the `Set Password` statement to set and change the password. For example, to set the password for the default "root" account, you can use the following statement:
 
-The user name of this account is "test"; the password is “123" and this user can login from localhost only.
+  ```
+  SET PASSWORD FOR 'root'@'%' = '123';
+  ```
 
-You can also use MySQL grammar to authorize this user. For example, you can grant the read privilege to the "test" user by using the following statement:
++ You can also use MySQL grammar to authorize this user. For example, you can grant the read privilege to the "test" user by using the following statement:
 
-GRANT SELECT ON \*.\* TO  'test'@'localhost';
+  ```
+  GRANT SELECT ON \*.\* TO  'test'@'localhost';
+  ```
 
 Note: There are following differences between TiDB and MySQL in user account creating and authorizing:
 
@@ -142,3 +150,20 @@ Yes. TiDB supports many popular storage engines, such as goleveldb and TiKV.
 
 No. You can clone the [TiDB repository](https://github.com/pingcap/tidb) to your `$GOPATH/src/github.com/pingcap/tidb` and run the `make` command manually. TiDB is a project rather than a library. Its package management is very complex and the parser is generated using the [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) file. So TiDB uses `Makefile` for package management.
 However, if you are very familiar with `Go`, you can try the `make parser; ln -s _vendor/src vendor` command at the TiDB root directory. After that, the `go run`, `go test`, `go install` commands might work. But this approach is not recommended.
+
+## Why the modified `toml` configuration for TiKV/PD does not take effect?
+You need to set the `--config` parameter in TiKV/PD to make the `toml` configuration effective. TiKV/PD does not read the configuration by default.
+
+## Why the TiKV data directory is gone?
+
+For TiKV, the default value of the `--store` parameter is `/tmp/tikv/store`. In some virtual machines, restarting the operating system results in removing all the data under the `/tmp` directory. It is recommended to set the TiKV data directory explicitly by setting the `--store` parameter.
+
+## The `cluster ID mismatch` message is displayed when starting TiKV.
+
+This is because the cluster ID stored in local TiKV is different from the cluster ID specified by PD. When a new PD cluster is deployed, PD generates random cluster IDs. TiKV gets the cluster ID from PD and stores the cluster ID locally when it is initialized. The next time when TiKV is started, it checks the local cluster ID with the cluster ID in PD. If the cluster IDs don't match, the `cluster ID mismatch` message is displayed and TiKV exits.
+
+If you previously deploy a PD cluster, but then you remove the PD data and deploy a new PD cluster, this error occurs because TiKV uses the old data to connect to the new PD cluster.
+
+## The `TiKV cluster is not bootstrapped` message is displayed when accessing PD.
+Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed.
+If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
