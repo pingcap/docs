@@ -4,9 +4,9 @@
 
 The capacity of a TiDB cluster can be incresead or reduced without affecting online services.
 
-The following part shows you how to increase or delete PD, TiKV or TiDB nodes.
+The following part shows you how to add or delete PD, TiKV or TiDB nodes.
 
-About pd-ctl document, please refer to [pd-control](./pd-control.md).
+About pd-ctl usage, please refer to [pd-control](./pd-control.md).
 
 ## PD
 
@@ -47,8 +47,8 @@ Delete `pd4` through pd-ctl:
 ```
 
 ### Migrate a node dynamically
-To migrate all PD nodes to a new machine, you need to add nodes on the new machine and then delete nodes on the old machine.
-In the process of migration, you should migrate the nodes one by one. After completing one step, you can verify the process by checking the information of all nodes.
+To migrate all PD nodes to a new machine, you need to add a node on the new machine and then delete nodes on the old machine.
+In the process of migrating multiple nodes, you should migrate the node one by one. After completing each step, you can verify the process by checking the information of all nodes.
 
 ## TiKV
 
@@ -66,7 +66,7 @@ The newly started TiKV server will automatically register in the existing PD of 
 
 ## Delete a node dynamically
 
-To delete (make it offline) a TiKV server safely, you need to tell PD in advance. After that, PD is able to migrate the data on this TiKV server to other TiKV servers, ensuring that data have enough copies.
+To delete (make it offline) a TiKV server safely, you need to inform PD in advance. After that, PD is able to migrate the data on this TiKV server to other TiKV servers, ensuring that data have enough replicas.
 
 Assume that you need to delete the TiKV server with a store id 1, you can complete this through pd-ctl:
 
@@ -102,4 +102,4 @@ To verify whether a node has been made offline, you can check the state informat
 ### TiDB
 
 TiDB is a stateless server, which means it can be added or deleted directly.
-It should be noted that if you build a proxy (such as HAProxy) before TiDB, you need to update the proxy configuration and reload it.
+It should be noted that if you deploy a proxy (such as HAProxy) in front of TiDB, you need to update the proxy configuration and reload it.
