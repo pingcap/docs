@@ -47,8 +47,8 @@ Delete `pd4` through pd-ctl:
 ```
 
 ### Migrate a node dynamically
-To migrate all PD nodes to a new machine, you need to add a node on the new machine and then delete nodes on the old machine.
-In the process of migrating multiple nodes, you should migrate the node one by one. After completing each step, you can verify the process by checking the information of all nodes.
+If you want to migrate a node to a new machince, you need to, first of all, add a node on the new machine and then delete a node on the old machine.
+As you can just migrate one node at a time, if you want to migrate multiple nodes, you need to repeat the above steps until you have migrated all nodes. After completing each step, you can verify the process by checking the information of all nodes.
 
 ## TiKV
 
