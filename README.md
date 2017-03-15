@@ -12,10 +12,12 @@
 	+ [Docker Deployment](op-guide/docker-deployment.md)
 	+ [Configuration and options](op-guide/configuration.md)
 + Operation and Monitoring
+	+ [Scaling a TiDB cluster](op-guide/horizontal-scale.md)
 	+ [Overview of the monitoring framework](op-guide/monitor-overview.md)
 	+ [Monitoring a TiDB cluster](op-guide/monitoring-tidb.md)
+	+ [PD Command-Line Tools](op-guide/pd-control.md)
 + Compatibility and comparison with MySQL
-	+ [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/)
+	+ [TiDB SQL Grammar](README.md for sql)
 	+ [Compatibility with MySQL](op-guide/mysql-compatibility.md)
 + [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
 + [Frequently Asked Questions (FAQ)](./TiDB_FAQ.md)
@@ -23,6 +25,7 @@
 + Use Cases
 + Advanced Usage
 	+ [Data migration from MySQL to TiDB](op-guide/migration.md)
+	+ [Loader instructions](loader.md)
 	+ [Performance tuning](op-guide/tune-TiKV.md)
 	+ [Reading data from history versions](op-guide/history-read.md)
 + More resources
