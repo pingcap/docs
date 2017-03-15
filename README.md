@@ -17,7 +17,7 @@
 	+ [Monitoring a TiDB cluster](op-guide/monitoring-tidb.md)
 	+ [PD Command-Line Tools](op-guide/pd-control.md)
 + Compatibility and comparison with MySQL
-	+ [TiDB SQL Grammar](README.md for sql)
+	+ [TiDB SQL Grammar](sql/README.md)
 	+ [Compatibility with MySQL](op-guide/mysql-compatibility.md)
 + [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
 + [Frequently Asked Questions (FAQ)](./TiDB_FAQ.md)
