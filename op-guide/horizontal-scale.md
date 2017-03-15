@@ -27,7 +27,7 @@ Get the information about the existing PD nodes through pd-ctl:
 
 ### Add a node dynamically
 
-Add a new PD server to the current PD custer by using the parameter `join`.
+Add a new PD server to the current PD cluster by using the parameter `join`.
 To add `pd4`, you just need to specify the client url of any PD server in the PD cluster in the parameter `--join`, like:
 
 ```bash
@@ -47,7 +47,7 @@ Delete `pd4` through pd-ctl:
 ```
 
 ### Migrate a node dynamically
-If you want to migrate a node to a new machince, you need to, first of all, add a node on the new machine and then delete a node on the old machine.
+If you want to migrate a node to a new machine, you need to, first of all, add a node on the new machine and then delete the node on the old machine.
 As you can just migrate one node at a time, if you want to migrate multiple nodes, you need to repeat the above steps until you have migrated all nodes. After completing each step, you can verify the process by checking the information of all nodes.
 
 ## TiKV
@@ -91,7 +91,7 @@ Then you can check the state of this TiKV:
 You can verify the state of this store through the following information:
 - `state=0`: this store is in service
 - `state=1`: this store is in the process of offline, but the store is still in service
-- `state=2`: this store has completed the process of offline and there are no data on it, so instances can be shut down
+- `state=2`: this store has completed the process of offline and there are no data on it, so the instance can be shut down
 
 ## Migrate a node dynamically
 
