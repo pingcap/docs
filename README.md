@@ -10,6 +10,7 @@
 	+ [Downloading the Binary](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
 	+ [Binary Deployment (Recommended)](op-guide/binary-deployment.md)
 	+ [Docker Deployment](op-guide/docker-deployment.md)
+	+ [Multi-site Deployment](op-guide/location-awareness.md)
 	+ [Configuration and options](op-guide/configuration.md)
 + Operation and Monitoring
 	+ [Scaling a TiDB cluster](op-guide/horizontal-scale.md)
@@ -25,7 +26,7 @@
 + Use Cases
 + Advanced Usage
 	+ [Data migration from MySQL to TiDB](op-guide/migration.md)
-	+ [Loader instructions](loader.md)
+	+ [Loader instructions](./tool/loader.md)
 	+ [Performance tuning](op-guide/tune-TiKV.md)
 	+ [Reading data from history versions](op-guide/history-read.md)
 + More resources
