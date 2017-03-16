@@ -76,8 +76,8 @@ tikv-server --labels zone=z4,rack=r2,host=h2
 In other words, 16 TiKV instances are distributed across 4 data zones, 8 racks and 16 machines.
 
 In this case, PD will schedule different replicas of each datum to different data zones.
-If one of the data zones hangs up, everything still works well.
-If the data zone couldn't recover within a period of time, PD will remove the replica of this data zone.
-If there are only three (or two) data zones, we cannot guarantee that everything would work well when a data zone hangs up. However, it is ensured that everything is fine when a site hangs up.
+- If one of the data zones hangs up, everything still works well.
+- If the data zone couldn't recover within a period of time, PD will remove the replica of this data zone.
+- If there are only three (or two) data zones, we cannot guarantee that everything would work well when a data zone hangs up. However, it is ensured that everything is fine when a site hangs up.
 
-In a word, PD maximized the disaster recovery of the cluster according to the current topology. Therefore, if we want to reach to a certain level of disaster recovery, we need to deploy many machines in different sites according to the topology. The number of machines should be more than the one of `max-replicas`.
+In a word, PD maximizes the disaster recovery of the cluster according to the current topology. Therefore, if we want to reach to a certain level of disaster recovery, we need to deploy many machines in different sites according to the topology. The number of machines should be more than the one of `max-replicas`.
