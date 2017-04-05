@@ -1,6 +1,6 @@
 ## Use `docker-compose`
 
-Note: If you are using `docker-compose`, you don't need to create a Docker network and start TiDB,TiKV and PD containers separately. 
+Note: If you are using `docker-compose`, you don't need to create a Docker network and start TiDB,TiKV and PD containers separately.
 The following `docker-compose.yml` file is enough.
 
 ```yaml
@@ -9,61 +9,61 @@ version: '2'
 services:
   pd1:
     image: pingcap/pd
-    ports:
+    expose:
       - "2379"
       - "2380"
     volumes:
       - /etc/localtime:/etc/localtime:ro
 
     command:
-      - --name=pd1 
+      - --name=pd1
       - --client-urls=http://0.0.0.0:2379
       - --peer-urls=http://0.0.0.0:2380
       - --advertise-client-urls=http://pd1:2379
       - --advertise-peer-urls=http://pd1:2380
       - --initial-cluster=pd1=http://pd1:2380,pd2=http://pd2:2380,pd3=http://pd3:2380
-      
+
     privileged: true
 
   pd2:
     image: pingcap/pd
-    ports:
+    expose:
       - "2379"
       - "2380"
     volumes:
       - /etc/localtime:/etc/localtime:ro
 
     command:
-      - --name=pd2 
+      - --name=pd2
       - --client-urls=http://0.0.0.0:2379
       - --peer-urls=http://0.0.0.0:2380
       - --advertise-client-urls=http://pd2:2379
       - --advertise-peer-urls=http://pd2:2380
       - --initial-cluster=pd1=http://pd1:2380,pd2=http://pd2:2380,pd3=http://pd3:2380
-      
+
     privileged: true
 
   pd3:
     image: pingcap/pd
-    ports:
+    expose:
       - "2379"
       - "2380"
     volumes:
       - /etc/localtime:/etc/localtime:ro
 
     command:
-      - --name=pd3 
+      - --name=pd3
       - --client-urls=http://0.0.0.0:2379
       - --peer-urls=http://0.0.0.0:2380
       - --advertise-client-urls=http://pd3:2379
       - --advertise-peer-urls=http://pd3:2380
-      - --initial-cluster=pd1=http://pd1:2380,pd2=http://pd2:2380,pd3=http://pd3:2380 
-      
+      - --initial-cluster=pd1=http://pd1:2380,pd2=http://pd2:2380,pd3=http://pd3:2380
+
     privileged: true
 
   tikv1:
     image: pingcap/tikv
-    ports:
+    expose:
       - "20160"
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -85,7 +85,7 @@ services:
 
   tikv2:
     image: pingcap/tikv
-    ports:
+    expose:
       - "20160"
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -107,7 +107,7 @@ services:
 
   tikv3:
     image: pingcap/tikv
-    ports:
+    expose:
       - "20160"
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -136,7 +136,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
     command:
-      - --store=tikv 
+      - --store=tikv
       - --path=pd1:2379,pd2:2379,pd3:2379
       - -L=warn
 
@@ -148,7 +148,7 @@ services:
     privileged: true
 ```
 
-+ Use `docker-compose up -d` to create and start the cluster. 
++ Use `docker-compose up -d` to create and start the cluster.
 + Use `docker-compose port tidb 4000` to print the TiDB public port. For example, if the output is `0.0.0.0:32966`, the TiDB public port is `32966`.
-+ Use `mysql -h 127.0.0.1 -P 32966 -u root -D test` to connect to TiDB and enjoy it. 
++ Use `mysql -h 127.0.0.1 -P 32966 -u root -D test` to connect to TiDB and enjoy it.
 + Use `docker-compose down` to stop and remove the cluster.
