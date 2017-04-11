@@ -1,3 +1,7 @@
+---
+title: TiKV Performance Tuning
+category: Advanced Usage
+---
 
 # TiKV Performance Tuning
 This document describes how to tune the TiKV parameters for optimal performance.

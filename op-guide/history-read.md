@@ -1,3 +1,8 @@
+---
+title: Reading data from history versions
+category: Advanced Usage
+---
+
 # Reading Data From History Versions
 
 This document describes how TiDB reads data from the history versions, how TiDB manages the data versions, as well as an example to show how to use the feature.

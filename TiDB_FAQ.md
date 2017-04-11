@@ -1,3 +1,8 @@
+---
+title: TiDB FAQ
+category: FAQ
+---
+
 # TiDB FAQ
 
 ## What is TiDB?

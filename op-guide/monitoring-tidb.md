@@ -1,3 +1,8 @@
+---
+title: Monitoring a TiDB cluster
+category: Operation and Monitoring
+---
+
 # Monitoring a TiDB cluster
 
 Currently there are two types of interfaces to monitor the state of the TiDB cluster:

@@ -1,3 +1,8 @@
+---
+title: Loader instructions
+category: Advanced Usage
+---
+
 # Loader instructions
 
 ## What is Loader?

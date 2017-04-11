@@ -1,3 +1,8 @@
+---
+title: SQL Statment Syntax of TiDB
+category: Compatibility and comparison with MySQL
+---
+
 # SQL Statment Syntax of TiDB
 
 TiDB supports the SQL-92 standard and is compatible with MySQL grammar. Currently, TiDB supports the majority of frequently-used MySQL syntax.

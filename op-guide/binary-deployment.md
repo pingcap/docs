@@ -1,3 +1,8 @@
+---
+title: TiDB Binary Deployment
+category: Installation and Deployment
+---
+
 # TiDB Binary Deployment
 
 ## Overview
