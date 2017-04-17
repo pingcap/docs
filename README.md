@@ -3,31 +3,31 @@
 ## TiDB Document list
 + [Quick Start Guide](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
 + TiDB Introduction and Architecture
-	+ [TiDB introduction](#tidb-introduction)
-	+ [TiDB architecture](#tidb-architecture)
+  - [TiDB introduction](#tidb-introduction)
+  - [TiDB architecture](#tidb-architecture)
 + Installation and Deployment
-	+ [Deployment Recommendation](op-guide/recommendation.md)
-	+ [Downloading the Binary](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
-	+ [Binary Deployment (Recommended)](op-guide/binary-deployment.md)
-	+ [Docker Deployment](op-guide/docker-deployment.md)
-	+ [Configuration flags](op-guide/configuration.md)
+  - [Deployment Recommendation](op-guide/recommendation.md)
+  - [Downloading the Binary](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
+  - [Binary Deployment (Recommended)](op-guide/binary-deployment.md)
+  - [Docker Deployment](op-guide/docker-deployment.md)
+  - [Configuration flags](op-guide/configuration.md)
 + Operation and Monitoring
-	+ [Scaling a TiDB cluster](op-guide/horizontal-scale.md)
-	+ [Overview of the monitoring framework](op-guide/monitor-overview.md)
-	+ [Monitoring a TiDB cluster](op-guide/monitoring-tidb.md)
-	+ [PD Command-Line Tools](op-guide/pd-control.md)
+  - [Scaling a TiDB cluster](op-guide/horizontal-scale.md)
+  - [Overview of the monitoring framework](op-guide/monitor-overview.md)
+  - [Monitoring a TiDB cluster](op-guide/monitoring-tidb.md)
+  - [PD Command-Line Tools](op-guide/pd-control.md)
 + Compatibility and comparison with MySQL
-	+ [TiDB SQL Grammar](sql/README.md)
-	+ [Compatibility with MySQL](op-guide/mysql-compatibility.md)
+  - [TiDB SQL Grammar](sql/README.md)
+  - [Compatibility with MySQL](op-guide/mysql-compatibility.md)
 + Advanced Usage
-	+ [Data migration from MySQL to TiDB](op-guide/migration.md)
-	+ [Loader instructions](./tool/loader.md)
-	+ [Performance tuning](op-guide/tune-TiKV.md)
-	+ [Reading data from history versions](op-guide/history-read.md)
-	+ [Troubleshooting](./trouble-shooting.md)
+  - [Data migration from MySQL to TiDB](op-guide/migration.md)
+  - [Loader instructions](./tool/loader.md)
+  - [Performance tuning](op-guide/tune-TiKV.md)
+  - [Reading data from history versions](op-guide/history-read.md)
+  - [Troubleshooting](./trouble-shooting.md)
 + More resources
-	+ [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
-	+ [PingCAP blog](https://pingcap.github.io/blog/)
+  - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
+  - [PingCAP blog](https://pingcap.github.io/blog/)
 + [Frequently Asked Questions (FAQ)](./TiDB_FAQ.md)
 
 
