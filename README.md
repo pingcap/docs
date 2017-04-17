@@ -10,8 +10,7 @@
 	+ [Downloading the Binary](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
 	+ [Binary Deployment (Recommended)](op-guide/binary-deployment.md)
 	+ [Docker Deployment](op-guide/docker-deployment.md)
-	+ [Multi-site Deployment](op-guide/location-awareness.md)
-	+ [Configuration and options](op-guide/configuration.md)
+	+ [Configuration flags](op-guide/configuration.md)
 + Operation and Monitoring
 	+ [Scaling a TiDB cluster](op-guide/horizontal-scale.md)
 	+ [Overview of the monitoring framework](op-guide/monitor-overview.md)
@@ -20,18 +19,16 @@
 + Compatibility and comparison with MySQL
 	+ [TiDB SQL Grammar](sql/README.md)
 	+ [Compatibility with MySQL](op-guide/mysql-compatibility.md)
-+ [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
-+ [Frequently Asked Questions (FAQ)](./TiDB_FAQ.md)
-+ [Troubleshooting](./trouble-shooting.md)
-+ Use Cases
 + Advanced Usage
 	+ [Data migration from MySQL to TiDB](op-guide/migration.md)
 	+ [Loader instructions](./tool/loader.md)
 	+ [Performance tuning](op-guide/tune-TiKV.md)
 	+ [Reading data from history versions](op-guide/history-read.md)
+	+ [Troubleshooting](./trouble-shooting.md)
 + More resources
-	+ [PingCAP weekly update](http://weekly.pingcap.com/)
+	+ [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
 	+ [PingCAP blog](https://pingcap.github.io/blog/)
++ [Frequently Asked Questions (FAQ)](./TiDB_FAQ.md)
 
 
 ## TiDB Introduction
