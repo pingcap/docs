@@ -76,7 +76,7 @@ You can scale TiDB as your business grows.
 
 + If the disk space is not enough, you can increase the capacity simply by adding more TiKV nodes. When the new node is started, PD will migrate the data from other nodes to the new node automatically.
 
-+ You can add more TiDB nodes or TiKV nodes if the computing resources are not enough. After a TiDB node is added, you can simply configure it in the Load Balancer.
++ If the computing resources are not enough, you can, first of all, check for the CPU consumption situation before adding more TiDB nodes or TiKV nodes. It is noted that after a TiDB node is added, you can simply configure it in the Load Balancer.
 
 + If the throughputs are not enough, you can add both TiDB nodes and TiKV nodes.
 
@@ -90,7 +90,7 @@ Strong consistency means all replicas return the same value when queried for the
 
 ## Does TiDB support distributed transactions?
 
-Yes. The transaction model in TiDB is inspired by Google’s Percolator, a paper published in 2006. It’s mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign monotone increasing timestamp for each transaction, so the conflicts can be detected.  PD works as the timestamp allocator in a TiDB cluster.
+Yes. The transaction model in TiDB is inspired by Google’s Percolator, a paper published in 2006. It’s mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign monotone increasing timestamp for each transaction, so the conflicts can be detected. PD works as the timestamp allocator in a TiDB cluster.
 
 ## Does TiDB have ACID semantics?
 
@@ -106,11 +106,11 @@ Yes. ACID semantics are guaranteed in TiDB:
 
 ## How to choose the lease parameter in TiDB?
 
-The lease parameter is set from the command line when starting a TiDB server. The value of the lease parameter impacts the Database Schema Changes (DDL) speed of the current session. In the testing environments, you can set the value to 1s for to speed up the testing cycle. But in the production environments, it is recommended to set the value to minutes (for example, 300s) to ensure the DDL safety.
+The lease parameter (`--lease=60`) is set from the command line when starting a TiDB server. The value of the lease parameter impacts the Database Schema Changes (DDL) speed of the current session. In the testing environments, you can set the value to 1s for to speed up the testing cycle. But in the production environments, it is recommended to set the value to minutes (for example, 60) to ensure the DDL safety.
 
 ## Why is the DDL statement so slow when using TiDB?
 
-TiDB implements the online change algorithm of [Google F1](http://research.google.com/pubs/pub41376.html). Generally, DDL is not a frequent operation. In case of DDL, the top priority of TiDB is to ensure the data consistency and business continuity. A complete DDL has 2 to 5 phases depending on the statement type. Each phase takes the time of 2 leases. Assuming one lease is 1 minute, for a Drop Table statement which requires 2 phases, it takes 4 minutes (2 x 2 x 1 = 4). As what we have learned from Google F1, the DDL operation is handled by the database administrator (DBA) using special tools and it usually takes days.
+TiDB implements the online change algorithm of [Google F1](http://research.google.com/pubs/pub41376.html). Generally, DDL is not a frequent operation. In case of DDL, the top priority of TiDB is to ensure the data consistency and business continuity. A complete DDL has 2 to 5 phases depending on the statement type. Each phase takes the time of 2 leases. Assuming one lease is 1 minute, for a Drop Table statement which requires 2 phases, it takes 4 minutes (2 x 2 x 1 = 4). Besides, other factors also impact the run time of DDL. For example, the amount of the exisitng data volume impacts the run time of DDL when adding an index. As what we have learned from Google F1, the DDL operation is handled by the database administrator (DBA) using special tools and it usually takes days.
 
 ## What programming language can I use to work with TiDB?
 
@@ -140,13 +140,20 @@ TiDB is as scalable as NoSQL databases but features in the usability and functio
 
 ## Can a MySQL application be migrated to TiDB?
 
-Yes. Your applications can be migrated to TiDB without changing a single line of code in most cases.
+Yes. Your applications can be migrated to TiDB without changing a single line of code in most cases. You can use this tool(https://github.com/pingcap/tidb-tools/tree/master/checker) to check whether the Schema in MySQL is compatible with TiDB. 
 
 ## Can I use other key-value storage engines with TiDB?
 
-Yes. TiDB supports many popular storage engines, such as goleveldb and TiKV.
+Yes. Apart from TiKV, TiDB supports many popular standalone storage engines, such as GolevelDB, RocksDB and BoltDB. If the storage engine is a KV engine that supports transactions and it provides a client that meets the interface requirement of TiDB, then it can connect to TiDB.
+
+## An error message is displayed when using go get to install TiDB.
+
+Please manually clone TiDB to the GOPATH directory and run the `make` command. As a project rather than a library, TiDB has complex dependency. In addition to the fact that the parser is generated from `parser.y`, TiDB doesn't support `go get`. Instead, we use Makefile to manage it.
+
+If you are a developer and familiar with Go, you can run `make parser; ln -s _vendor/src vendor` in the root directory of TiDB and then run commands like `go run`, `go test` and `go install`. However, this is not recommended.
 
 ## Why the modified `toml` configuration for TiKV/PD does not take effect?
+
 You need to set the `--config` parameter in TiKV/PD to make the `toml` configuration effective. TiKV/PD does not read the configuration by default.
 
 ## Why the TiKV data directory is gone?
@@ -159,6 +166,27 @@ This is because the cluster ID stored in local TiKV is different from the cluste
 
 If you previously deploy a PD cluster, but then you remove the PD data and deploy a new PD cluster, this error occurs because TiKV uses the old data to connect to the new PD cluster.
 
+## The `duplicated store address` message is displayed when starting TiKV.
+
+This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. This error occurs when there is no data folder under the directory that TiKV `--store` specifies, you use the previous parameter to restart the TiKV.
+
+To solve this problem, use the store delete(https://github.com/pingcap/pd/tree/master/pdctl#store-delete-) function to delete the previous store and then restart TiKV.
+
 ## The `TiKV cluster is not bootstrapped` message is displayed when accessing PD.
+
 Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed.
+
 If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
+
+## The `etcd cluster ID mismatch` message is displayed when starting PD.
+
+This is because the `--initial-cluster` in the PD startup parameter contains a memeber that doesn't belong to this cluster. To solve this problem, please check the corresponding cluster of each member, remove the wrong memeber and then restart PD.
+
+## How to modify the startup parameters of PD
+
+If you want to modify PD's startup parameters, such as `--client-url`, `--advertise-client-url` or `--name`, you just need to restart PD with the updated parameters.
+
+However, if you want to modify `--peer-url` or `--advertise-peer-url`, you should be aware to the following situations and deal with them differently:
+
++ The previous startup parameter has `--advertise-peer-url` and you just want to update `--peer-url`: restart PD with the updated parameter.
++ The previous startup parameter doesn't have `--advertise-peer-url`: update the PD information with etcdctl (https://coreos.com/etcd/docs/latest/op-guide/runtime-configuration.html#update-a-member) and then restart PD with the updated parameter.
