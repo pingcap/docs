@@ -1,5 +1,5 @@
 ---
-title: Loader instructions
+title: Loader Instructions
 category: advanced
 ---
 
