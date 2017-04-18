@@ -133,7 +133,7 @@ You can get the following metrics for each component:
 
 See the following diagram for the deployment architecture:
 
-![image alt text](monitoring-tidb.png)
+![image alt text](media/monitoring-tidb.png)
 
 **Note:** You must add the Prometheus Pushgateway addresses to the startup parameters of the TiDB, PD and TiKV components.
 

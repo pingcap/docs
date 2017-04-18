@@ -1,7 +1,6 @@
 # TiDB Documentation
 
 ## TiDB Document list
-+ [Quick Start Guide](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
 + TiDB Introduction and Architecture
   - [TiDB introduction](overview.md#tidb-introduction)
   - [TiDB architecture](overview.md#tidb-architecture)
@@ -28,7 +27,7 @@
 + More resources
   - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
   - [PingCAP blog](https://pingcap.github.io/blog/)
-+ [Frequently Asked Questions (FAQ)](./TiDB_FAQ.md)
+- [Frequently Asked Questions (FAQ)](./TiDB_FAQ.md)
 
 
 ## TiDB Introduction
