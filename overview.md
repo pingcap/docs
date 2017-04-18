@@ -35,7 +35,7 @@ Power TiDB with your most favorite engines. TiDB supports many popular storage e
 
 To better understand TiDB’s features, you need to understand the TiDB architecture.
 
-![image alt text](media/architecture.png)
+![image alt text](media/tidb-architecture.png)
 
 The TiDB cluster has three components: the TiDB Server, the PD Server,  and the TiKV server.
 
