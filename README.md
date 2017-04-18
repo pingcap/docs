@@ -3,8 +3,8 @@
 ## TiDB Document list
 + [Quick Start Guide](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
 + TiDB Introduction and Architecture
-  - [TiDB introduction](#tidb-introduction)
-  - [TiDB architecture](#tidb-architecture)
+  - [TiDB introduction](overview.md#tidb-introduction)
+  - [TiDB architecture](overview.md#tidb-architecture)
 + Installation and Deployment
   - [Deployment Recommendation](op-guide/recommendation.md)
   - [Downloading the Binary](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
