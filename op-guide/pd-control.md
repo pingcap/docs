@@ -1,9 +1,9 @@
 ---
-title: PD Control instructions
+title: PD Control Instructions
 category: Operation and Monitoring
 ---
 
-# PD Control instructions
+# PD Control Instructions
 
 As a command line tool of PD, PD Control obtains the state information of the cluster and tunes the cluster.
 

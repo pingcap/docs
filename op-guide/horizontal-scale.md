@@ -1,9 +1,9 @@
 ---
-title: Scaling a TiDB cluster
+title: Scaling a TiDB Cluster
 category: Installation and Deployment
 ---
 
-# Scaling a TiDB cluster
+# Scaling a TiDB Cluster
 
 ## Overview
 

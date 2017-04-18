@@ -2,31 +2,31 @@
 
 ## TiDB Document list
 + TiDB Introduction and Architecture
-  - [TiDB introduction](overview.md#tidb-introduction)
-  - [TiDB architecture](overview.md#tidb-architecture)
+  - [TiDB Introduction](overview.md#tidb-introduction)
+  - [TiDB Architecture](overview.md#tidb-architecture)
 + Installation and Deployment
   - [Deployment Recommendation](op-guide/recommendation.md)
   - [Downloading the Binary](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
   - [Binary Deployment (Recommended)](op-guide/binary-deployment.md)
   - [Docker Deployment](op-guide/docker-deployment.md)
-  - [Configuration flags](op-guide/configuration.md)
+  - [Configuration Flags](op-guide/configuration.md)
 + Operation and Monitoring
-  - [Scaling a TiDB cluster](op-guide/horizontal-scale.md)
-  - [Overview of the monitoring framework](op-guide/monitor-overview.md)
-  - [Monitoring a TiDB cluster](op-guide/monitoring-tidb.md)
+  - [Scaling a TiDB Cluster](op-guide/horizontal-scale.md)
+  - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
+  - [Monitoring a TiDB Cluster](op-guide/monitoring-tidb.md)
   - [PD Command-Line Tools](op-guide/pd-control.md)
-+ Compatibility and comparison with MySQL
++ Compatibility and Comparison with MySQL
   - [TiDB SQL Grammar](sql/README.md)
   - [Compatibility with MySQL](op-guide/mysql-compatibility.md)
 + Advanced Usage
-  - [Data migration from MySQL to TiDB](op-guide/migration.md)
-  - [Loader instructions](./tool/loader.md)
-  - [Performance tuning](op-guide/tune-TiKV.md)
-  - [Reading data from history versions](op-guide/history-read.md)
+  - [Data Migration from MySQL to TiDB](op-guide/migration.md)
+  - [Loader Instructions](./tool/loader.md)
+  - [Performance Tuning](op-guide/tune-TiKV.md)
+  - [Reading Data from History Versions](op-guide/history-read.md)
   - [Troubleshooting](./trouble-shooting.md)
-+ More resources
++ More Resources
   - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
-  - [PingCAP blog](https://pingcap.github.io/blog/)
+  - [PingCAP Blog](https://pingcap.github.io/blog/)
 - [Frequently Asked Questions (FAQ)](./TiDB_FAQ.md)
 
 

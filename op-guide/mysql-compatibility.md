@@ -1,6 +1,6 @@
 ---
 title: Compatibility with MySQL
-category: Compatibility and comparison with MySQL
+category: Compatibility and Comparison with MySQL
 ---
 
 # Compatibility with MySQL

@@ -1,9 +1,9 @@
 ---
-title: Configuration flags
+title: Configuration Flags
 category: Installation and Deployment
 ---
 
-# Configuration flags
+# Configuration Flags
 
 TiDB/TiKV/PD are configurable through command-line flags and environment variables.
 
