@@ -1,6 +1,6 @@
 ---
 title: Migrating Data from MySQL to TiDB
-category: Advanced Usage
+category: advanced
 ---
 
 # Migrating Data from MySQL to TiDB

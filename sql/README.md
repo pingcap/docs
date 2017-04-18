@@ -1,6 +1,6 @@
 ---
 title: SQL Statment Syntax of TiDB
-category: Compatibility and Comparison with MySQL
+category: compatibility
 ---
 
 # SQL Statment Syntax of TiDB

@@ -1,6 +1,6 @@
 ---
 title: Deploying Recommendations
-category: Installation and Deployment
+category: deployment
 ---
 
 ## Deploying Recommendations

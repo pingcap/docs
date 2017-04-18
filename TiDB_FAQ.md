@@ -1,6 +1,6 @@
 ---
 title: TiDB FAQ
-category: FAQ
+category: faq
 ---
 
 # TiDB FAQ

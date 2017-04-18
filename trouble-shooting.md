@@ -1,6 +1,6 @@
 ---
 title: TiDB Cluster Troubleshooting Guide
-category: Advanced Usage
+category: advanced
 ---
 
 # TiDB Cluster Troubleshooting Guide

@@ -1,6 +1,6 @@
 ---
 title: Loader instructions
-category: Advanced Usage
+category: advanced
 ---
 
 # Loader instructions

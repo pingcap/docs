@@ -1,6 +1,6 @@
 ---
 title: TiDB Binary Deployment
-category: Installation and Deployment
+category: deployment
 ---
 
 # TiDB Binary Deployment

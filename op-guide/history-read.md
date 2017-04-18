@@ -1,6 +1,6 @@
 ---
 title: Reading Data from History Versions
-category: Advanced Usage
+category: advanced
 ---
 
 # Reading Data from History Versions

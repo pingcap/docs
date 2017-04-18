@@ -1,6 +1,6 @@
 ---
 title: TiDB Docker Deployment
-category: Installation and Deployment
+category: deployment
 ---
 
 # TiDB Docker Deployment 
