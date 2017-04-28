@@ -188,7 +188,7 @@ TiKV supports some human readable conversion.
 + default: ""
 + If you set the configuration using the command line, the same setting in the config file will be overwritten.
 
-### -s, --store
+### --data-dir
 
 + the path to the data directory
 + default: "/tmp/tikv/store"
@@ -203,7 +203,7 @@ TiKV supports some human readable conversion.
 
 + the DSN to use
 + default: "raftkv"
-+ The flag is deprecated now. 
++ The flag is deprecated now.
 
 ### --pd
 
