@@ -10,7 +10,7 @@ echo "building RocksDB in $DEPS_PATH"
 mkdir -p ${DEPS_PATH}
 cd $DEPS_PATH
 
-ROCKSDB_VER=5.1.2
+ROCKSDB_VER=5.2.1
 
 SUDO=
 if which sudo; then 
