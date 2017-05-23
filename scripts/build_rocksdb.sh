@@ -29,6 +29,14 @@ function get_linux_platform {
     fi 
 }
 
+
+function ldconfig_for_rocksdb {
+    if [ $(${SUDO} ldconfig -p | grep librocksdb | wc -l) -eq 0 ]; then
+        ${SUDO} echo "/usr/local/lib" >> /etc/ld.so.conf
+        ${SUDO} ldconfig
+    fi
+}
+
 function install_in_ubuntu {
     echo "building RocksDB in Ubuntu..."
     if [ ! -d rocksdb-${ROCKSDB_VER} ]; then
@@ -42,7 +50,7 @@ function install_in_ubuntu {
     make shared_lib 
     ${SUDO} make install-shared 
     # guarantee tikv can find rocksdb.
-    ${SUDO} ldconfig
+    ldconfig_for_rocksdb
 }
 
 function install_in_centos {
@@ -58,7 +66,7 @@ function install_in_centos {
     make shared_lib 
     ${SUDO} make install-shared 
     # guarantee tikv can find rocksdb.
-    ${SUDO} ldconfig
+    ldconfig_for_rocksdb
 }
 
 function install_in_macosx {
@@ -113,4 +121,5 @@ case "$OSTYPE" in
 esac
 
 cd ${TIDB_PATH}
+rm -rf deps
 echo "building RocksDB OK"
