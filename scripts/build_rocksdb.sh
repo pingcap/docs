@@ -31,7 +31,7 @@ function get_linux_platform {
 
 
 function ldconfig_for_rocksdb {
-    ldconfig
+    ${SUDO} ldconfig
     if [ $(${SUDO} ldconfig -p | grep librocksdb | wc -l) -eq 0 ]; then
         ${SUDO} echo "/usr/local/lib" >> /etc/ld.so.conf
         ${SUDO} ldconfig
