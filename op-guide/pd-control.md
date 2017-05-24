@@ -1,4 +1,9 @@
-# PD Control instructions
+---
+title: PD Control Instructions
+category: monitoring
+---
+
+# PD Control Instructions
 
 As a command line tool of PD, PD Control obtains the state information of the cluster and tunes the cluster.
 
@@ -13,11 +18,11 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 single-command mode:
 
-    ./pd-ctl store -d -u 127.0.0.1:2379
+    ./pd-ctl store -d -u http://127.0.0.1:2379
 
 interactive mode:
 
-    ./pd-ctl -u 127.0.0.1:2379
+    ./pd-ctl -u http://127.0.0.1:2379
 
 use environment variables:
 
