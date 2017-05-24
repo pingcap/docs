@@ -72,7 +72,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### --skip-grant-table
 + enables anyone to connect without a password and with all privileges
 + default: false
-+ The value can be (true) or (false). This option is usually used to reset password, enable it need the root privileges on the OS.
++ The value can be (true) or (false). This option is usually used to reset password, enabling it needs the root privileges on the OS.
 
 ### --report-status
 + enable(true) or disable(false) the status report and pprof tool.
