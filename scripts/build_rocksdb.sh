@@ -19,12 +19,12 @@ fi
 
 function get_linux_platform {
     if [ -f /etc/redhat-release ]; then 
-	    if [[ `cat /etc/redhat-release` == Fedora* ]]; then
-	        echo "Fedora"
-	    else 
+        if [[ `cat /etc/redhat-release` == Fedora* ]]; then
+	    echo "Fedora"
+        else 
             # For CentOS or redhat, we treat all as CentOS.
             echo "CentOS"
-	    fi
+	fi
     elif [ -f /etc/lsb-release ]; then
         DIST=`cat /etc/lsb-release | grep '^DISTRIB_ID' | awk -F=  '{ print $2 }'`
         echo "$DIST"
