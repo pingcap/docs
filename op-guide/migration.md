@@ -1,4 +1,9 @@
-# Migrating data from MySQL to TiDB
+---
+title: Migrating Data from MySQL to TiDB
+category: advanced
+---
+
+# Migrating Data from MySQL to TiDB
 
 ## Overview
 
@@ -129,7 +134,7 @@ cd mydumper-linux-amd64
 Use the `mydumper` tool to export data from MySQL by typing the following command:
 
 ```bash
-./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 128 -B test -T t1,t2 -o ./var/test
+./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 128 -B test -T t1,t2 --skip-tz-utc -o ./var/test
 ```
 In this command, 
 + `-B test`: means the data is exported from the `test` database.
