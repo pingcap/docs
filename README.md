@@ -25,7 +25,6 @@
   - [Reading Data from History Versions](op-guide/history-read.md)
   - [Troubleshooting](./trouble-shooting.md)
 + More Resources
-  - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
   - [PingCAP Blog](https://pingcap.github.io/blog/)
 - [Frequently Asked Questions (FAQ)](./FAQ.md)
 
