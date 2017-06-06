@@ -9,8 +9,6 @@ category: advanced
 
 Developed by PingCAP, Loader is a data import tool and it imports data to TiDB and MySQL.
 
-[Source code](https://github.com/pingcap/tidb-tools/tree/master/loader)
-
 [Download the Binary](http://download.pingcap.org/tidb-tools-latest-linux-amd64.tar.gz)
 
 ## Why did we develop Loader?
