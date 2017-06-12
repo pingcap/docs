@@ -279,11 +279,11 @@ skip-sqls = ["ALTER USER", "CREATE USER"]
 # skip prefix mathched sqls
 # skip-sqls = ["^ALTER\\s+USER", "^CREATE\\s+USER"]
 
-// 1. asterisk character (*, also called "star") matches zero or more characters,
-//    for example, doc* matches doc and document but not dodo;
-//    asterisk character must be in the end of wildcard word,
-//    and there is only one asterisk in one wildcard word
-// 2. the question mark ? matches exactly one character
+# 1. asterisk character (*, also called "star") matches zero or more characters,
+#    for example, doc* matches doc and document but not dodo;
+#    asterisk character must be in the end of wildcard word,
+#    and there is only one asterisk in one wildcard word
+# 2. the question mark ? matches exactly one character
 #[[route-rules]]
 #pattern-schema = "route_*"
 #pattern-table = "abc_*"
