@@ -291,7 +291,7 @@ Start `syncer`:
 INSERT INTO t1 VALUES (4, 4), (5, 5);
 ```
 
-### 5. Login TiDB and view the data:
+### 5. Logging in TiDB and viewingthe data:
 
 ```bash
 mysql -h127.0.0.1 -P4000 -uroot -p
