@@ -76,7 +76,7 @@ You can scale TiDB as your business grows.
 
 + If the disk space is not enough, you can increase the capacity simply by adding more TiKV nodes. When the new node is started, PD will migrate the data from other nodes to the new node automatically.
 
-+ If the computing resources are not enough, you can, first of all, check for the CPU consumption situation before adding more TiDB nodes or TiKV nodes. It is noted that after a TiDB node is added, you can simply configure it in the Load Balancer.
++ If the computing resources are not enough, check the CPU consumption situation first before adding more TiDB nodes or TiKV nodes. When a TiDB node is added, you can configure it in the Load Balancer.
 
 + If the throughputs are not enough, you can add both TiDB nodes and TiKV nodes.
 
@@ -140,15 +140,15 @@ TiDB is as scalable as NoSQL databases but features in the usability and functio
 
 ## Can a MySQL application be migrated to TiDB?
 
-Yes. Your applications can be migrated to TiDB without changing a single line of code in most cases. You can use this tool(https://github.com/pingcap/tidb-tools/tree/master/checker) to check whether the Schema in MySQL is compatible with TiDB. 
+Yes. Your applications can be migrated to TiDB without changing a single line of code in most cases. You can use [checker](https://github.com/pingcap/tidb-tools/tree/master/checker) to check whether the Schema in MySQL is compatible with TiDB. 
 
 ## Can I use other key-value storage engines with TiDB?
 
 Yes. Apart from TiKV, TiDB supports many popular standalone storage engines, such as GolevelDB, RocksDB and BoltDB. If the storage engine is a KV engine that supports transactions and it provides a client that meets the interface requirement of TiDB, then it can connect to TiDB.
 
-## An error message is displayed when using go get to install TiDB.
+## An error message is displayed when using `go get` to install TiDB.
 
-Please manually clone TiDB to the GOPATH directory and run the `make` command. As a project rather than a library, TiDB has complex dependency. In addition to the fact that the parser is generated from `parser.y`, TiDB doesn't support `go get`. Instead, we use Makefile to manage it.
+Manually clone TiDB to the GOPATH directory and run the `make` command. TiDB uses `Makefile` to manage the dependencies.
 
 If you are a developer and familiar with Go, you can run `make parser; ln -s _vendor/src vendor` in the root directory of TiDB and then run commands like `go run`, `go test` and `go install`. However, this is not recommended.
 
@@ -168,9 +168,9 @@ If you previously deploy a PD cluster, but then you remove the PD data and deplo
 
 ## The `duplicated store address` message is displayed when starting TiKV.
 
-This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. This error occurs when there is no data folder under the directory that TiKV `--store` specifies, you use the previous parameter to restart the TiKV.
+This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. This error occurs when there is no data folder under the directory that TiKV `--store` specifies, but you use the previous parameter to restart the TiKV.
 
-To solve this problem, use the store delete(https://github.com/pingcap/pd/tree/master/pdctl#store-delete-) function to delete the previous store and then restart TiKV.
+To solve this problem, use the [store delete](https://github.com/pingcap/pd/tree/master/pdctl#store-delete-) function to delete the previous store and then restart TiKV.
 
 ## The `TiKV cluster is not bootstrapped` message is displayed when accessing PD.
 
@@ -180,13 +180,18 @@ If this message is displayed, start the TiKV cluster. When TiKV is initialized, 
 
 ## The `etcd cluster ID mismatch` message is displayed when starting PD.
 
-This is because the `--initial-cluster` in the PD startup parameter contains a memeber that doesn't belong to this cluster. To solve this problem, please check the corresponding cluster of each member, remove the wrong memeber and then restart PD.
+This is because the `--initial-cluster` in the PD startup parameter contains a memeber that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong memeber, and then restart PD.
 
-## How to modify the startup parameters of PD
+## How to update the startup parameters of PD
 
-If you want to modify PD's startup parameters, such as `--client-url`, `--advertise-client-url` or `--name`, you just need to restart PD with the updated parameters.
+If you want to update PD's startup parameters, such as `--client-url`, `--advertise-client-url` or `--name`, you just need to restart PD with the updated parameters.
 
-However, if you want to modify `--peer-url` or `--advertise-peer-url`, you should be aware to the following situations and deal with them differently:
+However, if you want to update `--peer-url` or `--advertise-peer-url`, pay attention to the following situations:
 
 + The previous startup parameter has `--advertise-peer-url` and you just want to update `--peer-url`: restart PD with the updated parameter.
-+ The previous startup parameter doesn't have `--advertise-peer-url`: update the PD information with etcdctl (https://coreos.com/etcd/docs/latest/op-guide/runtime-configuration.html#update-a-member) and then restart PD with the updated parameter.
++ The previous startup parameter doesn't have `--advertise-peer-url`: update the PD information with [etcdctl](https://coreos.com/etcd/docs/latest/op-guide/runtime-configuration.html#update-a-member) and then restart PD with the updated parameter.
+
+## Where are the TiDB/PD/TiKV logs?
+
+By default, TiDB/PD/TiKV outputs the logs to standard error. If a file is specified using `--log--file` during the startup, the log is output to the file and rotated daily.
+
