@@ -237,7 +237,7 @@ log-level = "info"
 
 server-id = 101
 
-# the file path for meta
+# The file path for meta.
 meta = "./syncer.meta"
 worker-count = 1
 batch = 1
@@ -256,9 +256,9 @@ user = "root"
 password = ""
 port = 4000
 
-# support whitelist filters and specify some libraries and tables to synchronize, for example: 
+# Support whitelist filtering and specify the libraries and tables to synchronize, for example: 
 
-# Specify all tables under db1 and db2 to synchronize
+# Specify all the tables under db1 and db2 to synchronize
 replicate-do-db = ["db1","db2"]
 
 # Specify db1.table1 to synchronize
@@ -271,8 +271,8 @@ tbl-name = "table1"
 db-name ="db3"
 tbl-name = "table2"
 
-# support regular expressions and use "~" to start with
-# synchronize all libraries that begin with test
+# Support regular expressions.Start a regular expression with "~".
+# Synchronize all the libraries that begin with test.
 replicate-do-db = ["~^test.*"]
 ```
 Start `syncer`:
