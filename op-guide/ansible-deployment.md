@@ -21,7 +21,7 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology, 
 - Configuring monitoring modules
 
  
-## 1.Prepare
+## 1. Prepare
 Before you start, make sure that you have:
 
 1.1 A Control Machine with the following requirements:
@@ -62,7 +62,7 @@ Before you start, make sure that you have:
 
 **Note:** The Control Machine can be one of the managed nodes with access to external network to download binary.
 
-### 3 Install Ansible in the Control Machine
+### 2. Install Ansible in the Control Machine
 
 Install Ansible 2.3 or later to your platform: 
 
@@ -106,11 +106,11 @@ For more information, see [Ansible Documentation](http://docs.ansible.com/ansibl
 
 
 
-### 4 Download TiDB-Ansible to the Control Machine
+### 3. Download TiDB-Ansible to the Control Machine
 Download the latest master version of the ZIP package from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible) or [click to download]( https://github.com/pingcap/tidb-ansible/Archive/master.zip).
  
  
-### 5 Allocate machine resources and edit the `inventory.ini` file in the Control Machine
+### 4. Allocate machine resources and edit the `inventory.ini` file in the Control Machine
 
 The standard Cluster has 6 machines: 
 
@@ -158,11 +158,11 @@ pd_servers
 172.16.10.1
 ```
  
-### 6 Deploy TiDB Ansible
+### 5. Deploy TiDB Ansible
 
 - If you use the normal user with the sudo privileges to deploy TiDB Ansible:
 	
-	6.1 Edit the `inventory.ini` file as follows:
+	5.1 Edit the `inventory.ini` file as follows:
 	
 	  ```
 	  ## Connection
@@ -174,27 +174,27 @@ pd_servers
 	  # ssh via normal user
 	  ansible_user = tidb
 	  ```
-	6.2 Connect to the network and download the TiDB, TiKV, and PD binaries:
+	5.2 Connect to the network and download the TiDB, TiKV, and PD binaries:
 		
 		ansible-playbook local_prepare.yml
 	                                           
-	6.3 Initialize the system environment of the target machines and modify the kernel parameters:
+	5.3 Initialize the system environment of the target machines and modify the kernel parameters:
 	
 		ansible-playbook bootstrap.yml -k -K
 	 
 	**Note:** Add the `-K` parameter because this playbook needs root privileges.
 	            
-	6.4 Deploy the TiDB cluster:
+	5.4 Deploy the TiDB cluster:
 	 
 	    ansible-playbook deploy.yml
 	 
-	6.5 Start the TiDB cluster:
+	5.5 Start the TiDB cluster:
 	 
 	    ansible-playbook start.yml
 
 - If you use the root user to deploy TiDB Ansible:
 	
-	6.1 Edit `inventory.ini` as follows:
+	5.1 Edit `inventory.ini` as follows:
 	
 	```
 	  ## Connection
@@ -208,17 +208,17 @@ pd_servers
 	  
 	```
 
-	6.2 Connect to the network and download the TiDB, TiKV, and PD binaries
+	5.2 Connect to the network and download the TiDB, TiKV, and PD binaries
 	
 		ansible-playbook local_prepare.yml 
 	
-	6.3 Initialize the system environment of the target machines and update the kernel parameters
+	5.3 Initialize the system environment of the target machines and update the kernel parameters
 	 
 		ansible-playbook bootstrap.yml -k
 		
 	**Note:** If the service user does not exist, the initialization operation will automatically create the user.
 	 
-	6.4 Change the root user to the normal user.
+	5.4 Change the root user to the normal user.
 	
 	Because root user is recommended to run the TiDB service, you need to change the root user to a normal user. Edit the `inventory.ini` file to uncomment `# ansible_become = true` as follows:
 	
@@ -234,23 +234,23 @@ pd_servers
 	  
 	```
 	 
-	6.5 Run the following command:
+	5.5 Run the following command:
 	
 		ansible-playbook deploy.yml
 	 
-	6.6 Start the TiDB cluster
+	5.6 Start the TiDB cluster
 		
 		ansible-playbook start.yml
 
-### 7 Test the cluster
+### 6 Test the cluster
 	
-7.1 Use the MySQL client to connect to the TiDB cluster:
+6.1 Use the MySQL client to connect to the TiDB cluster:
 	  	
 	  	mysql -u root-h 172.16.10.1 -P 4000
 	  
 **Note:** The TiDB service default port is 4000.
 	  
-7.2 Open a browser to access the monitoring platform:
+6.2 Open a browser to access the monitoring platform:
 
 	    http://172.16.10.1:3000
 	    
