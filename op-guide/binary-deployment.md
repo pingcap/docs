@@ -9,11 +9,11 @@ category: deployment
 
 A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> TiKV -> TiDB.
 
-To learn the TiDB architecture, see [TiDB Architecture](../README.md#TiDB-Architecture).
+Before your startt, see [TiDB Architecture](../README.md#TiDB-Architecture) and [Deployment Recommendations](op-guide/recommendation.md).
 
 To quickly understand and try TiDB, see [Single Node Cluster Deployment](#single-node-deployment).
 
-To try TiDB out and explore the features, see [Multiple Nodes Cluster Deployment for Test](#multiple-nodes-cluster-deployment-for-test)
+To try TiDB out and explore the features, see [Multiple Nodes Cluster Deployment for Test](#multiple-nodes-cluster-deployment-for-test).
 
 To deploy and use TiDB in production, see [Multiple Nodes Cluster Deployment](#multiple-nodes-cluster-deployment).
 
@@ -147,7 +147,7 @@ Assuming you have six nodes with the following details:
 
 **Note:** 
 - If you start TiKV or deploying PD in the production environment, it is highly recommended to specify the path for the configuration file using the `--config` flag. If the flag is not set, TiKV or PD does not read the configuration file.
-- If you use `nohup` to start the cluster in the production environment, write the startup commands in a script and then run the script. If not, the `nohup` process might abort because it receives exceptions when the Shell command exits. For more information, see [The TiDB/TiKV/PD process aborts unexpectedly](/./trouble-shooting.md#the-tidbtikvpd-process-aborts-unexpectedly).
+- If you use `nohup` to start the cluster in the production environment, write the startup commands in a script and then run the script. If not, the `nohup` process might abort because it receives exceptions when the Shell command exits. For more information, see [the TiDB/TiKV/PD process aborts unexpectedly](/./trouble-shooting.md#the-tidbtikvpd-process-aborts-unexpectedly).
 
 ## Multiple Nodes Cluster Deployment for Test
 
