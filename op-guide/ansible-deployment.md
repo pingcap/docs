@@ -8,8 +8,7 @@ category: deployment
 ## Overview
 Ansible is an IT automation tool. It can configure systems, deploy software, and orchestrate more advanced IT tasks such as continuous deployments or zero downtime rolling updates.
 
-[TiDB-Ansible](https://github.com/pingcap/tidb-ansible) is a TiDB cluster deployment tool developed by PingCAP, based on Anisible playbook. TiDB-Ansible enables you to quickly deploy a new TiDB cluster which includes PD, TiDB, TiKV, and the cluster monitoring modules.a
-
+[TiDB-Ansible](https://github.com/pingcap/tidb-ansible) is a TiDB cluster deployment tool developed by PingCAP, based on Ansible playbook. TiDB-Ansible enables you to quickly deploy a new TiDB cluster which includes PD, TiDB, TiKV, and the cluster monitoring modules.
  
 You can use the TiDB-Ansible configuration file to set up the cluster topology, completing all operation tasks with one click, including:
 	
@@ -35,14 +34,13 @@ Before you start, make sure that you have:
 	
 - Access to the managed nodes via SSH using password login or SSH authorized_key login. 
 	
-
 1.2  Several managed nodes with the following requirements:
 
 - 4 or more machines. At least 3 instances for TiKV. Don’t deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md).
    
 - Operating system:
    		
-	- Ubuntu, macOS, CentOS 7 or later, or Docker
+	- Ubuntu, CentOS 7.2 or later, or Docker
 	   		
 	- X86_64 architecture (AMD64)
 	   		
@@ -54,9 +52,7 @@ Before you start, make sure that you have:
 
 - The same time and time zone for all machines with the NTP service on to synchronize the correct time.
 
-- A deploy account to deploy TiBD-Ansible. It can be the root user or a user account with sudo privileges. 
-
-- A service account to start and run the TiDB service. It is not recommended to use the root user. 
+- A remote user account which you can use to login from the Control Machine to connect to the managed nodes via SSH. It can be the root user or a user account with sudo privileges. 
 
 - Python 2.6 or Python 2.7
 
@@ -103,7 +99,6 @@ Install Ansible 2.3 or later to your platform:
  You can use the `ansible –version` command to see the version information.
 
 For more information, see [Ansible Documentation](http://docs.ansible.com/ansible/intro_installation.html).
-
 
 
 ### 3. Download TiDB-Ansible to the Control Machine
@@ -158,9 +153,9 @@ pd_servers
 172.16.10.1
 ```
  
-### 5. Deploy TiDB Ansible
+### 5. Deploy the TiDB cluster
 
-- If you use the normal user with the sudo privileges to deploy TiDB Ansible:
+- If you use the normal user with the sudo privileges to deploy TiDB:
 	
 	5.1 Edit the `inventory.ini` file as follows:
 	
@@ -182,17 +177,19 @@ pd_servers
 	
 		ansible-playbook bootstrap.yml -k -K
 	 
-	**Note:** Add the `-K` parameter because this playbook needs root privileges.
+	**Note:** 
+	- Add the `-k` (lowercase) parameter if password is needed to connect to the managed node. This applies to other playbooks as well.
+	- Add the `-K`(uppercase) parameter because this playbook needs root privileges.
 	            
 	5.4 Deploy the TiDB cluster:
 	 
-	    ansible-playbook deploy.yml
+	    ansible-playbook deploy.yml -k
 	 
 	5.5 Start the TiDB cluster:
 	 
-	    ansible-playbook start.yml
+	    ansible-playbook start.yml -k
 
-- If you use the root user to deploy TiDB Ansible:
+- If you use the root user to deploy TiDB:
 	
 	5.1 Edit `inventory.ini` as follows:
 	
@@ -208,19 +205,21 @@ pd_servers
 	  
 	```
 
-	5.2 Connect to the network and download the TiDB, TiKV, and PD binaries
+	5.2 Connect to the network and download the TiDB, TiKV, and PD binaries.
 	
 		ansible-playbook local_prepare.yml 
 	
-	5.3 Initialize the system environment of the target machines and update the kernel parameters
+	5.3 Initialize the system environment of the target machines and update the kernel parameters.
 	 
 		ansible-playbook bootstrap.yml -k
 		
-	**Note:** If the service user does not exist, the initialization operation will automatically create the user.
+	**Note:** 
+	- If the service user does not exist, the initialization operation will automatically create the user.
+	- Add the `-k` (lowercase) parameter if password is needed to connect to the managed node. This applies to other playbooks as well.
 	 
 	5.4 Change the root user to the normal user.
 	
-	Because root user is recommended to run the TiDB service, you need to change the root user to a normal user. Edit the `inventory.ini` file to uncomment `# ansible_become = true` as follows:
+	Because root user is not recommended to run the TiDB service, you need to change the root user to a normal user. Edit the `inventory.ini` file to uncomment `# ansible_become = true` as follows:
 	
 	```
 	  ## Connection
@@ -236,11 +235,11 @@ pd_servers
 	 
 	5.5 Run the following command:
 	
-		ansible-playbook deploy.yml
+		ansible-playbook deploy.yml -k
 	 
-	5.6 Start the TiDB cluster
+	5.6 Start the TiDB cluster: 
 		
-		ansible-playbook start.yml
+		ansible-playbook start.yml -k
 
 ### 6 Test the cluster
 	
