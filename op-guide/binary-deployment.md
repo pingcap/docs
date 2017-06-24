@@ -36,7 +36,7 @@ cd tidb-latest-linux-amd64
 
 ### CentOS 6 (Not Recommended)
 
-**Warning:** It is not recommended to deploy on CentOS 6 because most of the development and tests are performed on the CentOS 7+ and Ubuntu 14.04+ platforms. There might not be enough tests on the CentOS 6 platform.
+**Warning:** It is not recommended to deploy on CentOS 6 because most of the developments and tests are performed on the CentOS 7+ and Ubuntu 14.04+ platforms. There might not be enough tests on the CentOS 6 platform.
 
 ```bash
 # Download CentOS 6 package
@@ -146,7 +146,7 @@ Assuming you have six nodes with the following details:
     ```
 
 **Note:** 
-- If you start TiKV or deploying PD in the production environment, it is highly recommended to specify the path for the configuration file using the `--config` flag. If the flag is not set, TiKV or PD does not read the configuration file.
+- If you start TiKV or deploy PD in the production environment, it is highly recommended to specify the path for the configuration file using the `--config` flag. If the flag is not set, TiKV or PD does not read the configuration file.
 - If you use `nohup` to start the cluster in the production environment, write the startup commands in a script and then run the script. If not, the `nohup` process might abort because it receives exceptions when the Shell command exits. For more information, see [the TiDB/TiKV/PD process aborts unexpectedly](/./trouble-shooting.md#the-tidbtikvpd-process-aborts-unexpectedly).
 
 ## Multiple Nodes Cluster Deployment for Test
