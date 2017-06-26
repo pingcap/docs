@@ -242,12 +242,14 @@ pd_servers
 		ansible-playbook start.yml -k
 
 ### 6 Test the cluster
+
+**Note:** It is recommended to use a load balancing layer on top of TiKV to provide the SQL interface.
 	
 6.1 Use the MySQL client to connect to the TiDB cluster:
 	  	
 	  	mysql -u root-h 172.16.10.1 -P 4000
 	  
-**Note:** The TiDB service default port is 4000.
+The TiDB service default port is 4000.
 	  
 6.2 Open a browser to access the monitoring platform:
 

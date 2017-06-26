@@ -7,7 +7,8 @@
 + Installation and Deployment
   - [Deployment Recommendation](op-guide/recommendation.md)
   - [Downloading the Binary](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
-  - [Binary Deployment (Recommended)](op-guide/binary-deployment.md)
+  - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
+  - [Binary Deployment](op-guide/binary-deployment.md)
   - [Docker Deployment](op-guide/docker-deployment.md)
   - [Configuration Flags](op-guide/configuration.md)
 + Operation and Monitoring
