@@ -8,7 +8,7 @@ Before you begin, see [Binary Deployment (Recommended)](./binary-deployment.md) 
 
 ## TiKV reports the topological information
 
-TiKV reports the topological information to PD through the startup parameter or configuration of TiKV.
+TiKV reports the topological information to PD according to the startup parameter or configuration of TiKV.
 
 Assuming that the topology has three structures: zone > rack > host, use lables to specify the following information:
 
