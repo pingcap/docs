@@ -1,6 +1,6 @@
 # TiDB Documentation
 
-## TiDB Document list
+## Documentation List
 
 - [Quick Start](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
 - [Step 1: Download](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
