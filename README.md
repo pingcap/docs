@@ -3,14 +3,14 @@
 ## TiDB Document list
 
 - [Quick Start](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
-- Step 1: [Download](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
+- [Step 1: Download](op-guide/binary-deployment.md#download-and-decompress-the-official-binary-package)
 + Step 2: Deploy
   - [Deployment Recommendation](op-guide/recommendation.md)
   - [Ansible Deployment](op-guide/ansible-deployment.md)
   - [Binary Deployment](op-guide/binary-deployment.md)
   - [Docker Deployment](op-guide/docker-deployment.md)
   - [Configuration Flags](op-guide/configuration.md)
-- Step 3: [Scale](op-guide/horizontal-scale.md)
+- [Step 3: Scale](op-guide/horizontal-scale.md)
 + Step 4: Develope
   - [TiDB SQL Grammar](sql/README.md)
   - [Compatibility with MySQL](op-guide/mysql-compatibility.md)
