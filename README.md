@@ -9,6 +9,7 @@
   - [Ansible Deployment](op-guide/ansible-deployment.md)
   - [Binary Deployment](op-guide/binary-deployment.md)
   - [Docker Deployment](op-guide/docker-deployment.md)
+  - [Cross-Region Deployment](op-guide/location-awareness.md)
   - [Configuration Flags](op-guide/configuration.md)
 - [Step 3: Scale](op-guide/horizontal-scale.md)
 + Step 4: Develope
