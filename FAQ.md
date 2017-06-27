@@ -107,10 +107,6 @@ Yes. ACID semantics are guaranteed in TiDB:
 
 The lease parameter (`--lease=60`) is set from the command line when starting a TiDB server. The value of the lease parameter impacts the Database Schema Changes (DDL) speed of the current session. In the testing environments, you can set the value to 1s for to speed up the testing cycle. But in the production environments, it is recommended to set the value to minutes (for example, 60) to ensure the DDL safety.
 
-## Why is the DDL statement so slow when using TiDB?
-
-TiDB implements the online change algorithm of [Google F1](http://research.google.com/pubs/pub41376.html). Generally, DDL is not a frequent operation. In case of DDL, the top priority of TiDB is to ensure the data consistency and business continuity. A complete DDL has 2 to 5 phases depending on the statement type. Each phase takes the time of 2 leases. Assuming one lease is 1 minute, for a Drop Table statement which requires 2 phases, it takes 4 minutes (2 x 2 x 1 = 4). Besides, other factors also impact the run time of DDL. For example, the amount of the exisitng data volume impacts the run time of DDL when adding an index. As what we have learned from Google F1, the DDL operation is handled by the database administrator (DBA) using special tools and it usually takes days.
-
 ## What programming language can I use to work with TiDB?
 
 Any language that has MySQL client or driver.
