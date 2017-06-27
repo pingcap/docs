@@ -21,7 +21,7 @@
   - [PD Command-Line Tools](op-guide/pd-control.md)
 + Advanced Usage
   - [Data Migration from MySQL to TiDB](op-guide/migration.md)
-  - [Loader Instructions](./tool/loader.md)
+  - [Loader Instructions](./tools/loader.md)
   - [Performance Tuning](op-guide/tune-TiKV.md)
   - [Reading Data from History Versions](op-guide/history-read.md)
   - [Troubleshooting](./trouble-shooting.md)
