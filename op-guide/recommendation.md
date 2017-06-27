@@ -29,7 +29,7 @@ The following table lists the recommended hardware for each component.
 
 - The TiDB instance can be deployed on its own, or share the same node with PD.
 
-- For PD and TiKV, deploy a single instance on one disk to avoid I/O conflict which impacts the performance.
+- For PD and TiKV, deploy a single instance on one disk to avoid I/O competition which impacts the performance.
 
 - Deploy the TiDB instances and the TiKV instances separately to avoid competing CPU resources which impacts the performance. 
 
