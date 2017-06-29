@@ -14,7 +14,7 @@
 - [Step 3: Scale](op-guide/horizontal-scale.md)
 + Step 4: Develope
   - [TiDB SQL Grammar](sql/README.md)
-  - [Compatibility with MySQL](op-guide/mysql-compatibility.md)
+  - [Compatibility with MySQL](sql/mysql-compatibility.md)
 + Step 5: Monitor
   - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
   - [Monitoring a TiDB Cluster](op-guide/monitoring-tidb.md)
