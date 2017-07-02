@@ -12,7 +12,7 @@
   - [Cross-Region Deployment](op-guide/location-awareness.md)
   - [Configuration Flags](op-guide/configuration.md)
 - [Step 3: Scale](op-guide/horizontal-scale.md)
-+ Step 4: Develope
++ Step 4: Develop
   - [TiDB SQL Grammar](sql/README.md)
   - [Compatibility with MySQL](op-guide/mysql-compatibility.md)
 + Step 5: Monitor
@@ -24,7 +24,7 @@
   - [Loader Instructions](./tools/loader.md)
   - [Performance Tuning](op-guide/tune-TiKV.md)
   - [Reading Data from History Versions](op-guide/history-read.md)
-  - [Troubleshooting](./trouble-shooting.md)
++ [Troubleshooting](./trouble-shooting.md)
 + More Resources
   - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
   - [PingCAP Blog](https://pingcap.github.io/blog/)
