@@ -32,6 +32,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL grammar. Currentl
     - Prepared SQL Statement Syntax
     - Database Administration Statements
     - Utility Statements
++ [Privilege Management](privilege.md)
 + [The Proprietary System Variables and Syntax in TiDB](tidb-specific.md)
 + Others
     - SQL Modes
