@@ -2,7 +2,7 @@
 Title: specific system variables and syntax used in TiDB
 Category: compatibility
 ---
-# The Proprietary System Variables and Syntax in TiDB
+# The Proprietary System Variables and Syntaxes in TiDB
 On the basis of MySQL variables and syntaxes, TiDB has defined some specific system variables and syntaxes to optimize performance.
 ## System Variable
 Variables can be set with the `SET` statement, for example:
