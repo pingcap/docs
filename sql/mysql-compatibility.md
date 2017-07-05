@@ -74,4 +74,15 @@ TiDB implementsa an optimistic transaction model. Unlike MySQL, which uses row-l
 
 ### Load data
 
-When TiDB is in the execution of loading data, by default, a record with 20,000 rows of data is seen as a transaction for persistent storage. If a load data operation inserts more than 20,000 rows, it will be divided into multiple transactions to commit. If an error occurs in one transaction, this transaction in process will not be committed. However, transactions before that are committed successfully. In this case, a part of the load data operation is successfully inserted, and the rest of the data insertion fails. But MySQL treats a load data operation as a transaction, one error leads to the failure of the entire load data operation.
++ Syntax:
+
+	```
+	 LOAD DATA LOCAL INFILE 'file_name' INTO TABLE table_name
+	     {FIELDS | COLUMNS} TERMINATED BY 'string' ENCLOSED BY 'char' ESCAPED BY 'char'
+	     LINES STARTING BY 'string' TERMINATED BY 'string'
+	     (col_name ...);
+	```
+Currently, the supported `ESCAPED BY` characters are: `/\/\`.
++ Transaction
+
+	When TiDB is in the execution of loading data, by default, a record with 20,000 rows of data is seen as a transaction for persistent storage. If a load data operation inserts more than 20,000 rows, it will be divided into multiple transactions to commit. If an error occurs in one transaction, this transaction in process will not be committed. However, transactions before that are committed successfully. In this case, a part of the load data operation is successfully inserted, and the rest of the data insertion fails. But MySQL treats a load data operation as a transaction, one error leads to the failure of the entire load data operation.
