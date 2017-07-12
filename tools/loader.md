@@ -34,23 +34,25 @@ Since tools like mysqldump will take us days to migrate massive amounts of data,
   -L string: the log level setting. It can be set as debug, info, warn, error, fatal (default: "info")
   
   -P int: the port of TiDB/MySQL (default: 4000)
+
+  -V  prints version and exit
   
+  -c string config file
+
   -d string: the storage directory of data that need to import (default: "./")
   
-  -h string: the host of TiDB/MySQL (default: "127.0.0.1")
-  
+  -h string: the host of TiDB/MySQL (default: "127.0.0.1")  
+
   -checkpoint-schema string: the database name of checkpoint. In the execution process, loader will constantly update this database. After recovering from an interruption, loader will get the process of the last run through this database. (default: "tidb_loader")
-  
-  -skip-unique-check: whether to skip the unique index check, 0 means no while 1 means yes (can improve the speed of importing data).
-  Note: Only when you import data to TiDB can you open this option (default: 1)
-  
+ 
   -p string: the account and password of TiDB/MySQL
   
   -pprof-addr string: the pprof address of Loader. It tunes the perfomance of Loader (default: ":10084")
-  
-  -q int: the number of insert statement that included in each transaction during the import process (default: 1. By default, the size of each insert statement of sql exported by mydumper is 1MB, including many rows of data.)
-  
-  -t int: the number of thread (default: 4)
+
+  -skip-unique-check: whether to skip the unique index check, 0 means no while 1 means yes (can improve the speed of importing data).
+  Note: Only when you import data to TiDB can you open this option (default: 1)
+
+  -t int: the number of thread,increase this as TiKV nodes increase (default: 16)
   
   -u string: the user name of TiDB/MySQL (default: "root")
 ```
