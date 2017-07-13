@@ -7,13 +7,13 @@ category: advanced
 
 ## What is Loader?
 
-Developed by PingCAP, Loader is a data import tool and it imports data to TiDB and MySQL.
+Developed by PingCAP, Loader is a data import tool and it imports data to TiDB 
 
 [Download the Binary](http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz)
 
 ## Why did we develop Loader?
 
-Since tools like mysqldump will take us days to migrate massive amounts of data, we used the mydumper/myloader suite of Percona to multi-thread export and import data. During the process, we found that mydumper works well. However, as myloader lacks functions of error retry and savepoint, it is inconvenient for us to use. Therefore, we developed loader, which reads the output data files of mydumper and imports data to TiDB/MySQL through mysql protocol.
+Since tools like mysqldump will take us days to migrate massive amounts of data, we used the mydumper/myloader suite of Percona to multi-thread export and import data. During the process, we found that mydumper works well. However, as myloader lacks functions of error retry and savepoint, it is inconvenient for us to use. Therefore, we developed loader, which reads the output data files of mydumper and imports data to TiDB through mysql protocol.
 
 ## What can Loader do?
 
