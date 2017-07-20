@@ -2,7 +2,7 @@
 
 ## Overview
 
-PD schedules according to the topology of the TiKV cluster to maximize the TiKV's capability for disaster recovery.
+PD schedules according to the topology of the TiKV cluster to maximize the TiKV's availability for disaster recovery.
 
 Before you begin, see [Binary Deployment (Recommended)](./binary-deployment.md) and [Docker Deployment](./docker-deployment.md).
 
