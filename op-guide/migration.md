@@ -145,13 +145,13 @@ You can use `mydumper` to export data from MySQL and `loader` to import the data
 Use the `mydumper` tool to export data from MySQL by using the following command:
 
 ```bash
-./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 128 -B test -T t1,t2 --skip-tz-utc -o ./var/test
+./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 64 -B test -T t1,t2 --skip-tz-utc -o ./var/test
 ```
 In this command, 
 + `-B test`: means the data is exported from the `test` database.
 + `-T t1,t2`: means only the `t1` and `t2` tables are exported.
 + `-t 16`: means 16 threads are used to export the data.
-+ `-F 128`: means a table is partitioned into chunks and one chunk is 128MB.
++ `-F 64`: means a table is partitioned into chunks and one chunk is 64MB.
 + `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
 
 **Note:**
@@ -163,11 +163,8 @@ On the Cloud platforms which require the `super privilege`, such as on the Aliyu
 Use the `loader` tool to import the data from MySQL to TiDB. See [Loader instructions](./tools/loader.md) for more information.
 
 ```bash
-./bin/loader -h 127.0.0.1 -u root -P 4000 -t 4 -d ./var/test
+./bin/loader -h 127.0.0.1 -u root -P 4000 -t 32 -d ./var/test
 ```
-
-In this command, 
-+ `-q 1` means how many queries are included in each transaction. The default value is 1. When importing data to TiDB, it is recommended to use the default value.
 
 After the data is imported, you can view the data in TiDB using the MySQL client:
 
