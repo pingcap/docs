@@ -215,11 +215,11 @@ In order to migrate data quickly (especially huge amount of data), you can refer
     - TIDB * 4
     - PD * 3
  - machine configuration
-    CPU: Intel Xeon E5-2670 v3 @ 2.30GHz
-    48 vCPU [2 x 12 physical cores]
-    Memory: 128G
-    Disk: sda [raid 10, 300G] sdb[raid 5, 2T]
-    OS: CentOS 7.2
+    - CPU: Intel Xeon E5-2670 v3 @ 2.30GHz
+    - 48 vCPU [2 x 12 physical cores]
+    - Memory: 128G
+    - Disk: sda [raid 10, 300G] sdb[raid 5, 2T]
+    - OS: CentOS 7.2
  - mydumper's -F is set to 16, loader's -t is set to 64
 
 Results: import time is about 11 hours, 19.4 G / hour
