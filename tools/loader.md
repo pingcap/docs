@@ -7,7 +7,7 @@ category: advanced
 
 ## What is Loader?
 
-Developed by PingCAP, Loader is a data import tool and it imports data to TiDB 
+Loader is a data import tool to load data to TiDB.
 
 [Download the Binary](http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz)
 
@@ -35,9 +35,9 @@ Since tools like mysqldump will take us days to migrate massive amounts of data,
   
   -P int: the port of TiDB (default: 4000)
 
-  -V  prints version and exit
+  -V boolean: prints version and exit
   
-  -c string config file
+  -c string: config file
   
   -checkpoint-schema string: the database name of checkpoint. In the execution process, loader will constantly update this database. After recovering from an interruption, loader will get the process of the last run through this database. (default: "tidb_loader")
 
