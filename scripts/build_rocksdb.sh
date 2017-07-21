@@ -38,7 +38,7 @@ function install_in_ubuntu {
     if [ ! -d rocksdb-${ROCKSDB_VER} ]; then
         ${SUDO} apt-get update 
         ${SUDO} apt-get install -y --no-install-recommends zlib1g-dev libbz2-dev libsnappy-dev libgflags-dev liblz4-dev 
-	curl -L https://github.com/facebook/zstd/archive/v1.3.0.tar.gz -o lzstd.tar.gz
+	curl -L https://github.com/facebook/rocksdb/archive/v5.5.1.tar.gz -o lzstd.tar.gz
 	tar xf lzstd.tar.gz
 	cd zstd-1.3.0
 	${SUDO} make install
