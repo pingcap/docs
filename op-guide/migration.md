@@ -201,6 +201,23 @@ mysql> select * from t2;
 +----+------+
 ```
 
+### 3. Best practice
+In order to migrate data quickly (especially huge amount of data), you can refer to the following recommendations.
+
+- make dump data file as small as possible, it is best not to exceed 64M (parameter -F 64)
+- loader's parameter -t can be evaluated according to the number and load of tikv instances. For example, there are three tikv instances, -t can be set to 3 * (1 ~ n); while load of tikv is too high and the loader's log appears a large number of `backoffer.maxSleep 15000ms is exceeded`, it's better to decrease -t ; otherwise increase it.
+
+### A sample, and related configuration
+
+ - the total amount of dump files are 214G, single table with 8 columns, 2 billion rows
+ - Cluster topology
+    - TIKV * 12
+    - TIDB * 4
+    - PD * 3
+ - mydumper's -F is set to 16, loader's -t is set to 64
+
+Results: import time is about 11 hours, 19.4 G / hour
+
 ## Step 3. (Optional) Using the `syncer` tool to import data incrementally
 
 The previous section introduces how to import all the history data from MySQL to TiDB using `mydumper`/`loader`. But this is not applicable if the data in MySQL is updated after the migration and it is expected to import the updated data quickly.
