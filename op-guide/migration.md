@@ -199,27 +199,27 @@ mysql> select * from t2;
 ```
 
 ### 3. Best practice
-In order to migrate data quickly (especially huge amount of data), you can refer to the following recommendations.
+To migrate data quickly, especially for huge amount of data, you can refer to the following recommendations.
 
-- make dump data file as small as possible, it is best not to exceed 64M (parameter -F 64)
-- loader's parameter -t can be evaluated according to the number and load of tikv instances. For example, there are three tikv instances, -t can be set to 3 * (1 ~ n); while load of tikv is too high and the loader's log appears a large number of `backoffer.maxSleep 15000ms is exceeded`, it's better to decrease -t ; otherwise increase it.
+- Make the exported data file as small as possible and it is recommended not to exceed 64M. You can use the -F parameter to set the value.
+- The -t parameter can be evaluated according to the number and the load of TiKV instances. For example, if there are three TiKV instances, -t can be set to 3 * (1 ~ n). If the load of TiKV is too high and the backoffer.maxSleep 15000ms is exceeded message appears many times, it's better to decrease -t; otherwise increase it.
 
-### A sample, and related configuration
+### A sample, and the configuration
 
- - the total amount of dump files are 214G, single table with 8 columns, 2 billion rows
- - cluster topology
-    - TIKV * 12 [4 machines, 3 tikv instances per macine]
-    - TIDB * 4
-    - PD * 3
- - machine configuration
+ - The total size of the exported files is 214G. A single table has 8 columns and 2 billion rows.
+ - The cluster topology:
+    - 12 TiKV instances: 4 nodes, 3 TiKV instances per node
+    - 4 TiDB instances
+    - 3 PD instances
+ - The configuration of each node:
     - CPU: Intel Xeon E5-2670 v3 @ 2.30GHz
     - 48 vCPU [2 x 12 physical cores]
     - Memory: 128G
-    - Disk: sda [raid 10, 300G] sdb[raid 5, 2T]
+    - Disk: sda [raid 10, 300G] sdb[RAID 5, 2T]
     - OS: CentOS 7.2
- - mydumper's -F is set to 16, loader's -t is set to 64
+ - the F parameter of mydumper is set to 16 and the -t parameter of loader is set to 64.
 
-Results: import time is about 11 hours, 19.4 G / hour
+**Results**: It takes 11 hours to import all the data, which is 19.4G per hour.
 
 ## Step 3. (Optional) Using the `syncer` tool to import data incrementally
 
