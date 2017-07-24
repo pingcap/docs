@@ -202,7 +202,7 @@ mysql> select * from t2;
 To migrate data quickly, especially for huge amount of data, you can refer to the following recommendations.
 
 - Make the exported data file as small as possible and it is recommended not to exceed 64M. You can use the -F parameter to set the value.
-- The -t parameter can be evaluated according to the number and the load of TiKV instances. For example, if there are three TiKV instances, -t can be set to 3 * (1 ~ n). If the load of TiKV is too high and the backoffer.maxSleep 15000ms is exceeded message appears many times, it's better to decrease -t; otherwise increase it.
+- The -t parameter can be evaluated according to the number and the load of TiKV instances. For example, if there are three TiKV instances, -t can be set to 3 * (1 ~ n). If the load of TiKV is too high and the log `backoffer.maxSleep 15000ms is exceeded` appears many times, it's better to decrease -t; otherwise increase it.
 
 ### A sample, and the configuration
 
