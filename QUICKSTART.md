@@ -70,7 +70,7 @@ Before you start, make sure that you have:
    
 - Operating system:
    		
-	- Ubuntu, CentOS 7.2 or later, or Docker
+	- CentOS 7.3
 	   		
 	- X86_64 architecture (AMD64)
 	   		
@@ -82,7 +82,7 @@ Before you start, make sure that you have:
 
 - The same time and time zone for all machines with the NTP service on to synchronize the correct time.
 
-- A remote user account which you can use to login from the Control Machine to connect to the managed nodes via SSH. It can be the root user or a user account with sudo privileges. 
+- A remote user account with password which you can use to login from the Control Machine to connect to the managed nodes via SSH. It is a normal user account with sudo privileges.
 
 - Python 2.6 or Python 2.7
 
@@ -90,43 +90,15 @@ Before you start, make sure that you have:
 
 ### 2. Install Ansible in the Control Machine
 
-Install Ansible 2.3 or later to your platform: 
+Install Ansible 2.3 or later to your CentOS 7.3 platform: 
 
-- PPA source on Ubuntu:
-	
-	```
-	sudo add-apt-repository ppa:ansible/ansible
-	sudo apt-get update
-	sudo apt-get install ansible
-	```
- 
-- EPEL source on CentOS:
-	
-	```
-	yum install epel-release
-	yum update
-	yum install ansible
-	```
- 
-- Homebrew on macOS:
-	
-	To install Homebrew, see [Homebrew]( https://brew.sh ).
-	 
-	```
-	brew update
-	brew install ansible
-	```
- 
-- Docker
-	
-	Install and configure Docker for your own platform.
-	```
-	docker run -v `pwd`:/playbook --rm -it williamyeh/ansible:ubuntu16.04 /bin/bash
-	cd /playbook # 
-	```
-	**Note:** The above command mounts the current working directory as the /playbook directory in the container.
-		
- You can use the `ansible –version` command to see the version information.
+```
+ yum install epel-release
+ yum update
+ yum install ansible
+```
+
+You can use the `ansible –version` command to see the version information.
 
 For more information, see [Ansible Documentation](http://docs.ansible.com/ansible/intro_installation.html).
 
@@ -181,6 +153,9 @@ pd_servers
  
 [grafana_servers]
 172.16.10.1
+
+...
+
 ```
  
 ### 5. Deploy the TiDB cluster
@@ -460,20 +435,8 @@ For example, if you want to add a TiDB node with the IP address: 172.16.10.101, 
 	
 2. Initialize the newly added node:
 	
-		ansible-playbook bootstrap.yml -k
-3. Edit the inventory.ini file as follows:
+		ansible-playbook bootstrap.yml -k -K
 
-	```
-	  ## Connection
-	  # ssh via root:
-	  # ansible_user = root
-	    ansible_become = true
-	  # ansible_become_user = tidb
-		
-	  # ssh via normal user
-	  ansible_user = tidb
-		  
-	```
 4. Deploy the cluster:
 		
 		ansible-playbook deploy.yml -k
@@ -531,25 +494,13 @@ To add a PD node with the IP address: 172.16.10.102, you can use the following p
 	
 2. Initialize the newly added node:
 	
-		ansible-playbook bootstrap.yml -k
-3. Edit the inventory.ini file as follows:
+		ansible-playbook bootstrap.yml -k -K
 
-	```
-	  ## Connection
-	  # ssh via root:
-	  # ansible_user = root
-	    ansible_become = true
-	  # ansible_become_user = tidb
-		
-	  # ssh via normal user
-	  ansible_user = tidb
-		  
-	```
-4. Deploy the cluster:
+3. Deploy the cluster:
 		
 		ansible-playbook deploy.yml -k
 
-5. Login the newly added PD node and edit the starting script: `{deploy_dir}/scripts/run_pd.sh`
+4. Login the newly added PD node and edit the starting script: `{deploy_dir}/scripts/run_pd.sh`
 	
 	5.1 Remove the  `--initial-cluster="xxxx"` configuration.
 	
@@ -559,12 +510,13 @@ To add a PD node with the IP address: 172.16.10.102, you can use the following p
 	
 		{deploy_dir}/scripts/start_pd.sh
 		
-	5.4 Use the `pd-ctl` and see if the New node is added successfully:
+	5.4 Use `pd-ctl` and see if the New node is added successfully:
 	```
 	./pd-ctl -u “http://172.16.10.1:2379”
 	```
+	**Note:** `pd-ctl` is a command to check the number of PD nodes.
 	
-6. Roll upgrade the entire cluster:
+5. Roll upgrade the entire cluster:
 		
 		ansible-playbook rolling_update.yml -k
 6. Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform:
