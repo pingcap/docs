@@ -415,7 +415,7 @@ The default account and password are: admin/admin.
 ## Scale the TiDB cluster
 The capacity of a TiDB cluster can be increased or reduced without affecting the online services.
 
-For example, if you want to add a TiDB node with the IP address: 172.16.10.101. You can use the following procedure:
+For example, if you want to add a TiDB node with the IP address: 172.16.10.101, you can use the following procedure:
 
 1. Edit the `inventory.ini` file and append the node information:
  
@@ -485,7 +485,7 @@ For example, if you want to add a TiDB node with the IP address: 172.16.10.101. 
 
 You can use the same procedure to add a TiKV node. But to add a PD node, some configuration files need to be manually updated. 
 
-To add a PD node with the IP address: 172.16.10.102. You can use the following procedure:
+To add a PD node with the IP address: 172.16.10.102, you can use the following procedure:
 
 1. Edit the `inventory.ini` file and append the node information:
  
