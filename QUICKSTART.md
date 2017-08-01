@@ -11,9 +11,7 @@ category: quick start
         Machine](#2-install-ansible-in-the-control-machine)
     -   [3. Download TiDB-Ansible to the Control
         Machine](#3-download-tidb-ansible-to-the-control-machine)
-    -   [4. Allocate machine resources and edit the `inventory.ini` file
-        in the Control
-        Machine](#4-allocate-machine-resources-and-edit-the-inventory.ini-file-in-the-control-machine)
+    -   [4. Orchestrate the TiDB cluster](#4-orchestrate-the-tidb-cluster)
     -   [5. Deploy the TiDB cluster](#5-deploy-the-tidb-cluster)
     -   [6. Start the cluster](#6-start-the-cluster)
 -   [Try TiDB](#try-tidb)
@@ -107,12 +105,12 @@ For more information, see [Ansible Documentation](http://docs.ansible.com/ansibl
 Download the latest master version of the ZIP package from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible) or [click to download]( https://github.com/pingcap/tidb-ansible/Archive/master.zip).
  
  
-### 4. Allocate machine resources and edit the `inventory.ini` file in the Control Machine
+### 4. Orchestrate the TiDB cluster
 
 The standard Cluster has 6 machines: 
 
-- 2 TiDB instances, the first TiDB instance is used as a monitor 
-- 3 PD instances
+- 2 TiDB instances 
+- 3 PD instances, one of the PD instances is used as the monitor.
 - 3 TiKV instances
  
 The cluster topology is as follows:
@@ -121,7 +119,7 @@ The cluster topology is as follows:
 | ---- | ------- | -------- |
 | node1 | 172.16.10.1 | PD1, TiDB1 |
 | node2 | 172.16.10.2 | PD2, TiDB2 |
-| node3 | 172.16.10.3 | PD3 |
+| node3 | 172.16.10.3 | PD3, Monitor|
 | node4 | 172.16.10.4 | TiKV1 |
 | node5 | 172.16.10.5 | TiKV2 |
 | node6 | 172.16.10.6 | TiKV3 |
@@ -149,10 +147,10 @@ tikv_servers
 pd_servers
  
 [monitoring_servers]
-172.16.10.1
+172.16.10.3
  
 [grafana_servers]
-172.16.10.1
+172.16.10.3
 
 ...
 
@@ -178,7 +176,7 @@ Use the normal user with the sudo privileges to deploy TiDB:
 		
 		ansible-playbook local_prepare.yml
 	                                           
-5.3 Initialize the system environment of the target machines and modify the kernel parameters:
+5.3 Initialize the system environment of the target machines and adjust the kernel parameters:
 	
 		ansible-playbook bootstrap.yml -k -K
 	 
@@ -205,7 +203,6 @@ Use the MySQL client to connect to the TiDB cluster:
 
 ## Try TiDB
 
-After the TiDB cluster is deployed, you can
 This section describes some basic CRUD operations in TiDB.
 
 ### Create, show, and drop a database
@@ -237,17 +234,17 @@ Use the `CREATE TABLE` statement to create a table. The Syntax is as follows:
 For example:
 
     CREATE TABLE person (
-    number INT(11),
-    name VARCHAR(255),
-    birthday DATE
+	    number INT(11),
+	    name VARCHAR(255),
+	    birthday DATE
     );
 
 Add `IF NOT EXISTS` to prevent an error if the table exists:
 
     CREATE TABLE IF NOT EXISTS person (
-      number INT(11),
-      name VARCHAR(255),
-    birthday DATE
+	      number INT(11),
+	      name VARCHAR(255),
+	      birthday DATE
     );
 
 Use the `SHOW CREATE` statement to see the statement that creates the table. For example:
@@ -295,8 +292,8 @@ Use the `SHOW INDEX` to display all the indexes in a table:
 
 Use the `ALTER TABLE` or `DROP INDEX` to delete an index. Like the `CREATE INDEX` statement, `DROP INDEX` can also be embedded in the `ALTER TABLE` statement. For example:
 
-    DROP INDEX person_num ON person;
-    ALTER TABLE person DROP INDEX person_num;
+      DROP INDEX person_num ON person;
+      ALTER TABLE person DROP INDEX person_num;
 
 ### Insert, select, update, and delete data
 
@@ -353,7 +350,7 @@ Delete `tiuser`:
 
 Open a browser to access the monitoring platform:
 
-	http://172.16.10.1:3000
+	http://172.16.10.3:3000
 	    
 The default account and password are: admin/admin.
 
@@ -416,10 +413,10 @@ For example, if you want to add a TiDB node (node101) with the IP address: 172.1
 	pd_servers
 	 
 	[monitoring_servers]
-	172.16.10.1
+	172.16.10.3
 	 
 	[grafana_servers]
-	172.16.10.1
+	172.16.10.3
 	```
 	Now you the topology is as follows:
 	
@@ -427,7 +424,7 @@ For example, if you want to add a TiDB node (node101) with the IP address: 172.1
 	| ---- | ------- | -------- |
 	| node1 | 172.16.10.1 | PD1, TiDB1 |
 	| node2 | 172.16.10.2 | PD2, TiDB2 |
-	| node3 | 172.16.10.3 | PD3 |
+	| node3 | 172.16.10.3 | PD3, Monitor |
 	| **node101** | **172.16.10.101**|**TiDB3** |
 	| node4 | 172.16.10.4 | TiKV1 |
 	| node5 | 172.16.10.5 | TiKV2 |
@@ -444,7 +441,7 @@ For example, if you want to add a TiDB node (node101) with the IP address: 172.1
 		
 		ansible-playbook rolling_update.yml -k
 6. Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform:
-	http://172.16.10.1:3000
+	http://172.16.10.3:3000
 
 You can use the same procedure to add a TiKV node. But to add a PD node, some configuration files need to be manually updated. 
 
@@ -474,10 +471,10 @@ To add a PD node (node102) with the IP address: 172.16.10.102, you can use the f
 	pd_servers
 	 
 	[monitoring_servers]
-	172.16.10.1
+	172.16.10.3
 	 
 	[grafana_servers]
-	172.16.10.1
+	172.16.10.3
 	```
 	
 	Now you the topology is as follows:
@@ -486,7 +483,7 @@ To add a PD node (node102) with the IP address: 172.16.10.102, you can use the f
 	| ---- | ------- | -------- |
 	| node1 | 172.16.10.1 | PD1, TiDB1 |
 	| node2 | 172.16.10.2 | PD2, TiDB2 |
-	| node3 | 172.16.10.3 | PD3 |
+	| node3 | 172.16.10.3 | PD3, Monitor |
 	| **node102** | **172.16.10.102** | **PD4** |
 	| node4 | 172.16.10.4 | TiKV1 |
 	| node5 | 172.16.10.5 | TiKV2 |
@@ -521,7 +518,7 @@ To add a PD node (node102) with the IP address: 172.16.10.102, you can use the f
 		ansible-playbook rolling_update.yml -k
 6. Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform:
 	
-		http://172.16.10.1:3000
+		http://172.16.10.3:3000
 
 
 ## Destroy the cluster
