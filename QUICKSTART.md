@@ -68,8 +68,8 @@ Before you start, make sure that you have:
    
 - Operating system:
    		
-	- CentOS 7.3
-	   		
+	- CentOS 7.0 and later versions
+	   		
 	- X86_64 architecture (AMD64)
 	   		
 	- Kernel version 3.10 or later
@@ -80,7 +80,7 @@ Before you start, make sure that you have:
 
 - The same time and time zone for all machines with the NTP service on to synchronize the correct time.
 
-- A remote user account with password which you can use to login from the Control Machine to connect to the managed nodes via SSH. It is a normal user account with sudo privileges.
+- A remote user account which you can use to login from the Control Machine to connect to the managed nodes via SSH. It is a normal user account with sudo privileges.
 
 - Python 2.6 or Python 2.7
 
@@ -96,7 +96,7 @@ Install Ansible 2.3 or later to your CentOS 7.3 platform:
  yum install ansible
 ```
 
-You can use the `ansible –version` command to see the version information.
+You can use the `ansible -–version` command to see the version information.
 
 For more information, see [Ansible Documentation](http://docs.ansible.com/ansible/intro_installation.html).
 
@@ -180,9 +180,10 @@ Use the normal user with the sudo privileges to deploy TiDB:
 	
 		ansible-playbook bootstrap.yml -k -K
 	 
-**Note:** 
-	- Add the `-k` (lowercase) parameter if password is needed to connect to the managed node. This applies to other playbooks as well.
-	- Add the `-K`(uppercase) parameter because this playbook needs root privileges.
+**Note:**
+
+- Add the `-k` (lowercase) parameter if password is needed to connect to the managed node. This applies to other playbooks as well.	
+- Add the `-K` (uppercase) parameter if sudo needs password for root privileges.
 	            
 5.4 Deploy the TiDB cluster:
 	 
@@ -196,7 +197,7 @@ Start the TiDB cluster:
 
 Use the MySQL client to connect to the TiDB cluster:
 	  	
-	  mysql -u root-h 172.16.10.1 -P 4000
+	  mysql -u root -h 172.16.10.1 -P 4000
 	  
 **Note:** The TiDB service default port is 4000.
 	  
@@ -418,7 +419,7 @@ For example, if you want to add a TiDB node (node101) with the IP address: 172.1
 	[grafana_servers]
 	172.16.10.3
 	```
-	Now you the topology is as follows:
+	Now the topology is as follows:
 	
 	| Name | Host IP | Services |
 	| ---- | ------- | -------- |
