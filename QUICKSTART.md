@@ -359,30 +359,35 @@ The default account and password are: admin/admin.
 ### About the key metrics
  
 
-| Service| Metric| Description | Normal Range |
-| -------- |-------------| ---- |-----|
-|TiDB  |99% tidb\_server\_handle\_query\_duration\_seconds| the 99th percentile query response time of | less than 100ms|
-|TiDB  |90% tidb\_server\_handle\_query\_duration\_seconds| the 90th percentile query response time |less than 10ms|
-|TiDB  | memory usage | the memory usage of TiDB | The normal range is from dozens of MB to hundreds of MB. If the memory usage of a TiDB server surges, there must be a large transaction.|
-|TiDB  | TiDB server QPS| the QPS of the cluster | application specific|
-|TiDB  | Client connection count | the number of connections from application servers to the database | Application specific. If the number of connections hops, you need to find out the reasons. If it drops to `0`, you can check if the network is broken; if it surges, you need to check the application.|
-|TiDB  | Schema Lease Error| If TiDB does not access the schema in TiKV in time, this error is displayed. If the value of this metric is not `0`, you need to find out the reason. It might be because it is slow to access TiKV, or because the value of the `--lease` option in TiDB is set to be too small.| 0|
-|TiKV  | 99% scheduler command duration| the 99th percentile command duration | less than 50ms|
-|TiKV  | 99.99% scheduler command duration| the 99.99th percentile command duration | less than 100ms |
-|TiKV  | 99% storage async_request duration| the 99th percentile Raft command duration | less than 50ms |
-|TiKV  | 99.99% storage async_request duration| the 99.99th percentile Raft command duration  | less than 100ms |
-|TiKV  | server report failure message | There might be an issue with the network or the message might not come from this cluster.| If there are large amount of messages which contains `unreachable`, there might be an issue with the network. If the message contains `store not match`, the message does not come from this cluster.|
-|TiKV  | Vote | the frequency of the Raft vote | Usually, the value only changes when there is a split. If the value of `Vote` remains high for a long time, the system might have a severe issue and some nodes are not working.|
-|TiKV  | 99% and 99.99% coprocessor request duration| the 99th percentile and the 99.99th percentile coprocessor request duration | Application specific. Usually, the value does not remain high.|
-|TiKV  | channel full| The channel is full and the threads are too busy. | If the value is bigger than `0` , the threads are too busy. |
-|PD  | 99% etcd\_disk\_wal\_fsync\_duration\_seconds_bucket | the 99th percentile duration to flush etcd | less than 50ms|
-|PD  |99.99% etcd\_disk\_wal\_fsync\_duration\_seconds\_bucket | the 99.99th percentile duration to flush etcd | less than 100ms|
-|PD  | 99% pd\_cmd\_handle\_completed\_cmds\_duration\_seconds\_bucket | the 99th percentile duration to complete a pd-server request | less than 5ms|
-|PD  | 99.99% pd\_cmd\_handle\_completed\_cmds\_duration\_seconds\_bucket| the 99.99th percentile duration to complete a pd-server request | less than 50ms|
-|PD  |99% pd\_client\_request\_handle\_requests\_duration\_seconds\_bucket | the 99th percentile duration to complete a pd-client request | less than 5ms|
-|PD  | 99.99% pd\_client_request\_handle\_requests\_duration\_seconds\_bucket|the 99.99th percentile duration to complete a pd-client request | less than 50ms|
-|PD  | pd\_cluster\_status{type="store\_max\_diff\_storage\_ratio"} | the storage ratio difference of the nodes with the biggest storage ratio and the smallest storage ratio | The value fluctuate around `0.05`. If it's stable, the value is smaller than 0.05.|
-|PD  | pd\_cluster\_status{type=”store\_max\_diff\_leader\_ratio”} | the storage ratio difference of the nodes with the biggest storage ratio and the smallest storage ratio | The value fluctuate around `0.05`. If it's stable, the value is smaller than 0.05.|
+Service	|	Panel Name	|	Description	|	Normal Range
+---	|	---	|	---	|	---
+PD	|	Storage Capacity	|	the total storage capacity of the TiDB cluster	|	
+PD	|	Current Storage Size	|	the occupied storage capacity of the TiDB cluster	|	
+PD	|	Store Status  -- up store	|	the number of TiKV nodes that are up	|	
+PD	|	Store Status  -- down store	|	the number of TiKV nodes that are down	| `0`. If the number is bigger than `0`, it means some node(s) are not down.
+PD	|	Store Status  -- offline store	| the number of TiKV nodes that are manually offline|	
+PD	|	Store Status  -- Tombstone store	|	the number of TiKV nodes that are Tombstone 
+PD	|	Current storage usage	|	the storage occupancy rate of the TiKV cluster	|	If it exceeds 80%, you need to consider adding more TiKV nodes.
+PD	|	99% completed\_cmds\_duration\_seconds	|	the 99th percentile duration to complete a pd-server request|	less than 5ms
+PD	|	average completed\_cmds\_duration\_seconds	|	the average duration to complete a pd-server request	|	less than 50ms
+PD	|	leader balance ratio	|	the leader ratio difference of the nodes with the biggest leader ratio and the smallest leader ratio	|	It is less than 5% for a balanced situation. It becomes bigger when a node is restarting. 
+PD	|	region balance ratio	|	the region ratio difference of the nodes with the biggest region ratio and the smallest region ratio	|	It is less than 5% for a balanced situation. It becomes bigger when adding or removing a node.	
+PD	|	number of region	|	the number of regions	| 	
+TiDB	|	handle\_requests\_duration\_seconds	|	the response time to get TSO from PD| less than 100ms
+TiDB	|	tidb server QPS	|	the QPS of the cluster	|	application specific
+TiDB	|	statement count	|	the number of different types of statement within a given time	|	application specific
+TiDB	|	connection count	|	the number of connections from application servers to the database	|	Application specific. If the number of connections hops, you need to find out the reasons. If it drops to 0, you can check if the network is broken; if it surges, you need to check the application.
+TiDB	|	Query Duration 99th percentile	|	the 99th percentile query time	|	
+TiKV	|	99%  & 99.99% scheduler command duration	|	the 99th percentile and 99.99th percentile scheduler command duration|	For 99%, it is less than 50ms; for 99.99%, it is less than 100ms.
+TiKV	|	99%  & 99.99% storage async_request duration	|	the 99th percentile and 99.99th percentile Raft command duration	|	For 99%, it is less than 50ms; for 99.99%, it is less than 100ms.
+TiKV	|	server report failure message	|	There might be an issue with the network or the message might not come from this cluster.	|	If there are large amount of messages which contains `unreachable`, there might be an issue with the network. If the message contains `store not match`, the message does not come from this cluster.	
+TiKV		|	Vote	|the frequency of the Raft vote |	Usually, the value only changes when there is a split. If the value of Vote remains high for a long time, the system might have a severe issue and some nodes are not working.
+TiKV	|	99% and 99% coprocessor request duration	|	the 99th percentile and the 99.99th percentile coprocessor request duration	|	Application specific. Usually, the value does not remain high.
+TiKV	|	Pending task	|	the number of pending tasks	|	Except for PD worker, it is not normal if the value is too high. 
+TiKV	|	stall	|	RocksDB stall time	|	If the value is bigger than 0, it means that RocksDB is too busy, and you need to pay attention to IO and CPU usage.
+TiKV	|	channel full	|	The channel is full and the threads are too busy.	|	If the value is bigger than 0, the threads are too busy.
+TiKV	|	95% send\_message\_duration\_seconds	|	the 95th percentile message sending time	|	less than 50ms
+TiKV	|	leader/region	|	the number of leader/region per TiKV server|	application specific
 
 
 ## Scale the TiDB cluster
