@@ -378,7 +378,7 @@ TiDB	|	connection count	|	the number of connections from application servers to 
 TiDB	|	statement count	|	the number of different types of statement within a given time	|	application specific
 TiDB	|	Query Duration 99th percentile	|	the 99th percentile query time	|	
 TiKV	|	99%  & 99.99% scheduler command duration	|	the 99th percentile and 99.99th percentile scheduler command duration|	For 99%, it is less than 50ms; for 99.99%, it is less than 100ms.
-TiKV	|	95%  & 99.99% storage async_request duration	|	the 95th percentile and 99.99th percentile Raft command duration	|	For 99%, it is less than 50ms; for 99.99%, it is less than 100ms.
+TiKV	|	95%  & 99.99% storage async_request duration	|	the 95th percentile and 99.99th percentile Raft command duration	|	For 95%, it is less than 50ms; for 99.99%, it is less than 100ms.
 TiKV	|	server report failure message	|	There might be an issue with the network or the message might not come from this cluster.	|	If there are large amount of messages which contains `unreachable`, there might be an issue with the network. If the message contains `store not match`, the message does not come from this cluster.	
 TiKV		|	Vote	|the frequency of the Raft vote |	Usually, the value only changes when there is a split. If the value of Vote remains high for a long time, the system might have a severe issue and some nodes are not working.
 TiKV	|	95% and 99% coprocessor request duration	|	the 95th percentile and the 99.99th percentile coprocessor request duration	|	Application specific. Usually, the value does not remain high.
