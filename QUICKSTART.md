@@ -372,21 +372,20 @@ PD	|	99% completed\_cmds\_duration\_seconds	|	the 99th percentile duration to co
 PD	|	average completed\_cmds\_duration\_seconds	|	the average duration to complete a pd-server request	|	less than 50ms
 PD	|	leader balance ratio	|	the leader ratio difference of the nodes with the biggest leader ratio and the smallest leader ratio	|	It is less than 5% for a balanced situation. It becomes bigger when a node is restarting. 
 PD	|	region balance ratio	|	the region ratio difference of the nodes with the biggest region ratio and the smallest region ratio	|	It is less than 5% for a balanced situation. It becomes bigger when adding or removing a node.	
-PD	|	number of region	|	the number of regions	| 	
 TiDB	|	handle\_requests\_duration\_seconds	|	the response time to get TSO from PD| less than 100ms
 TiDB	|	tidb server QPS	|	the QPS of the cluster	|	application specific
-TiDB	|	statement count	|	the number of different types of statement within a given time	|	application specific
 TiDB	|	connection count	|	the number of connections from application servers to the database	|	Application specific. If the number of connections hops, you need to find out the reasons. If it drops to 0, you can check if the network is broken; if it surges, you need to check the application.
+TiDB	|	statement count	|	the number of different types of statement within a given time	|	application specific
 TiDB	|	Query Duration 99th percentile	|	the 99th percentile query time	|	
 TiKV	|	99%  & 99.99% scheduler command duration	|	the 99th percentile and 99.99th percentile scheduler command duration|	For 99%, it is less than 50ms; for 99.99%, it is less than 100ms.
-TiKV	|	99%  & 99.99% storage async_request duration	|	the 99th percentile and 99.99th percentile Raft command duration	|	For 99%, it is less than 50ms; for 99.99%, it is less than 100ms.
+TiKV	|	95%  & 99.99% storage async_request duration	|	the 95th percentile and 99.99th percentile Raft command duration	|	For 99%, it is less than 50ms; for 99.99%, it is less than 100ms.
 TiKV	|	server report failure message	|	There might be an issue with the network or the message might not come from this cluster.	|	If there are large amount of messages which contains `unreachable`, there might be an issue with the network. If the message contains `store not match`, the message does not come from this cluster.	
 TiKV		|	Vote	|the frequency of the Raft vote |	Usually, the value only changes when there is a split. If the value of Vote remains high for a long time, the system might have a severe issue and some nodes are not working.
-TiKV	|	99% and 99% coprocessor request duration	|	the 99th percentile and the 99.99th percentile coprocessor request duration	|	Application specific. Usually, the value does not remain high.
+TiKV	|	95% and 99% coprocessor request duration	|	the 95th percentile and the 99.99th percentile coprocessor request duration	|	Application specific. Usually, the value does not remain high.
 TiKV	|	Pending task	|	the number of pending tasks	|	Except for PD worker, it is not normal if the value is too high. 
 TiKV	|	stall	|	RocksDB stall time	|	If the value is bigger than 0, it means that RocksDB is too busy, and you need to pay attention to IO and CPU usage.
 TiKV	|	channel full	|	The channel is full and the threads are too busy.	|	If the value is bigger than 0, the threads are too busy.
-TiKV	|	95% send\_message\_duration\_seconds	|	the 95th percentile message sending time	|	less than 50ms
+TiKV	|		95% send\_message\_duration\_seconds	|	the 95th percentile message sending time	|	less than 50ms
 TiKV	|	leader/region	|	the number of leader/region per TiKV server|	application specific
 
 
