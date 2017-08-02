@@ -94,6 +94,26 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 + default: true
 + The value can be (true) or (false). (true) is to enable join without any equal conditions. (false) is to disable it.
 
+### --ssl-cert
+
++ The path to an SSL certificate file in PEM format to use for establishing a secure connection.
++ default: ""
++ When this option is specified along with `--ssl-key`, the server permits but does not require secure connections.
++ If the specified certificate or key is not valid, the server still starts normally but does not permit secure connections.
+
+### --ssl-key
+
++ The path to an SSL key file in PEM format to use for establishing a secure connection, namely the private key of the certificate you specified by `--ssl-cert`.
++ default: ""
++ Currently TiDB does not support keys which is protected by a passphrase.
+
+### --ssl-ca
+
++ The path to a file in PEM format that contains a list of trusted SSL certificate authorities.
++ default: ""
++ When this option is specified along with `--ssl-cert` and `--ssl-key`, the server verifies the client's certificate via this CA list if the client provides its certificate accordingly.
++ The secure connection will be established without client verification if the client does not provide a certificate even when this option is set.
+
 ## Placement Driver (PD)
 
 ### -L
