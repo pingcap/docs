@@ -94,6 +94,11 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 + default: true
 + The value can be (true) or (false). (true) is to enable join without any equal conditions. (false) is to disable it.
 
+### --proxy-protocol-networks
++ PROXY Protocol allowed proxy server IP addresses or CIDRs (split by `,`).
++ default: "" (empty string)
++ The value can be IP address (192.168.1.50) or CIDR (192.168.1.0/24), if require more than one address use `,` to split. `*` means any IP addresses. Leaving it empty disable PROXY Protocol.
+
 ## Placement Driver (PD)
 
 ### -L
