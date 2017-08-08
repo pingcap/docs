@@ -9,7 +9,7 @@ category: deployment
 
 A complete TiDB project contains PD, TiKV, TiDB. The start-up sequence is PD -> TiKV -> TiDB.
 
-Before your start, see [TiDB Architecture](../README.md#TiDB-Architecture) and [Deployment Recommendations](op-guide/recommendation.md).
+Before your start, see [TiDB Architecture](../README.md#TiDB-Architecture) and [Deployment Recommendations](../op-guide/recommendation.md).
 
 To quickly understand and try TiDB, see [Single Node Cluster Deployment](#single-node-deployment).
 
