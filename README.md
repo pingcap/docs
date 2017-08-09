@@ -3,7 +3,7 @@
 ## Documentation List
 
 - [Quick Start](https://github.com/pingcap/tidb/blob/master/docs/QUICKSTART.md)
-- [TiSpark (Beta) User Guide](https://github.com/pingcap/tispark/blob/master/docs/userguide.md)
+- [TiSpark User Guide](https://github.com/pingcap/tispark/blob/master/docs/userguide.md)
 + Deploy
   - [Deployment Recommendation](op-guide/recommendation.md)
   - [Ansible Deployment(Recommended)](op-guide/ansible-deployment.md)
