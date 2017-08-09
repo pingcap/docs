@@ -81,7 +81,7 @@ cd tidb-latest-linux-amd64-centos6
 
 ## Multiple Nodes Cluster Deployment
 
-For production environment, multiple nodes cluster deployment is recommended. Before you begin, see [Deployment Recommendations](op-guide/recommendation.md).
+For production environment, multiple nodes cluster deployment is recommended. Before you begin, see [Deployment Recommendations](../op-guide/recommendation.md).
 
 Assuming you have six nodes with the following details:
 
