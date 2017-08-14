@@ -102,7 +102,7 @@ For more information, see [Ansible Documentation](http://docs.ansible.com/ansibl
 
 
 ### 3. Download TiDB-Ansible to the Control Machine
-Download the latest master version of the ZIP package from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible) or [click to download]( https://github.com/pingcap/tidb-ansible/Archive/master.zip).
+Download the latest master version of the ZIP package from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible) or [click to download]( https://github.com/pingcap/tidb-ansible/archive/master.zip).
  
  
 ### 4. Orchestrate the TiDB cluster
