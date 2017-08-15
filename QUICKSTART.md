@@ -31,7 +31,7 @@ category: quick start
 
 ## About TiDB
 
-TiDB is a distributed open source SQL database and supports the best features of both Traditional RDBMS and NoSQL. TiDB is compatible with MySQL and features in infinite horizontal scalability, strong consistency, and high availability. The goal of TiDB is to serve as a one-stop solution for online transactions and analysis.
+TiDB is a distributed open source SQL database and supports the best features of both traditional RDBMS and NoSQL. TiDB is compatible with MySQL and features in infinite horizontal scalability, strong consistency, and high availability. The goal of TiDB is to serve as a one-stop solution for online transactions and analysis.
 
 ## About this guide
 
@@ -47,7 +47,7 @@ The architecture is as follows:
 ![TiDB Architecture](media/tidb-architecture.png)
 
 
-### 1. Prepare the systems
+### 1. Prepare the environment
 
 Before you start, make sure that you have:
 
@@ -211,108 +211,108 @@ This section describes some basic CRUD operations in TiDB.
 You can use the `CREATE DATABASE` statement to create a database. 
 
 The Syntax is as follows:
-
+```sql
     CREATE DATABASE db_name [options];
-  
+``` 
 For example, the following statement creates a database with the name `samp_db`:
-
+```sql
 	CREATE DATABASE IF NOT EXISTS samp_db;
-
+```
 You can use the `SHOW DATABASES` statement to show the databases:
-
+```sql
     SHOW DATABASES;
-
+```
 You can use the `DROP DATABASE` statement to delete a database, for example:
-
+```sql
     DROP DATABASE samp_db;
-
+```
 ### Create, show, and drop a table
 
 Use the `CREATE TABLE` statement to create a table. The Syntax is as follows:
-
-	`CREATE TABLE table_name column_name data_type constraint`
- 
+```sql
+	CREATE TABLE table_name column_name data_type constraint`
+```
 For example:
-
-    CREATE TABLE person (
+```sql
+	CREATE TABLE person (
 	    number INT(11),
 	    name VARCHAR(255),
 	    birthday DATE
-    );
-
+	);
+```
 Add `IF NOT EXISTS` to prevent an error if the table exists:
-
-    CREATE TABLE IF NOT EXISTS person (
+```sql
+	CREATE TABLE IF NOT EXISTS person (
 	      number INT(11),
 	      name VARCHAR(255),
 	      birthday DATE
     );
-
+```
 Use the `SHOW CREATE` statement to see the statement that creates the table. For example:
-
+```sql
     SHOW CREATE table person;
-
+```
 Use the `SHOW FULL COLUMNS` statement to display the information about a table. For example:
-
+```sql
     SHOW FULL COLUMNS FROM person;
-
+```
 Use the `DROP TABLE` statement to delete a table. For example:
-
+```sql
     DROP TABLE person;
-
+```
 or
-
+```sql
     DROP TABLE IF EXISTS person;
-
+```
 Use the `samp_db` statement to show all the tables in a database. For example:
-
+```sql
     SHOW TABLES FROM samp_db;
-
+```
 
 ### Create, show, and drop an index
 
 For the columns whose value is not unique, you can use the `CREATE INDEX` or `ALTER TABLE` statements. For example:
-
+```sql
     CREATE INDEX person_num ON person (number);
-    
+```    
 or
-
+```sql
     ALTER TABLE person ADD INDEX person_num (number)；
-
+```
 You can also create unique indexes for the columns whose value is unique. For example:
-
+```sql
     CREATE UNIQUE INDEX person_num ON person (number);
-   
+```   
 or 
-   
+```sql   
     ALTER TABLE person ADD UNIQUE person_num  on (number);
-    
+```    
 Use the `SHOW INDEX` to display all the indexes in a table:
-
-	SHOW INDEX from person;
-
+```sql
+    SHOW INDEX from person;
+```
 Use the `ALTER TABLE` or `DROP INDEX` to delete an index. Like the `CREATE INDEX` statement, `DROP INDEX` can also be embedded in the `ALTER TABLE` statement. For example:
-
+```sql
       DROP INDEX person_num ON person;
       ALTER TABLE person DROP INDEX person_num;
-
+```
 ### Insert, select, update, and delete data
 
 Use the `INSERT` statement to insert data into a table. For example: 
-
+```sql
     INSERT INTO person VALUES("1","tom","20170912");
-    
+```    
 Use the `SELECT` statement to see the data in a table. For example:     
-    
+```sql    
     SELECT * FROM person;
     +--------+------+------------+
     | number | name | birthday   |
     +--------+------+------------+
     |      1 | tom  | 2017-09-12 |
     +--------+------+------------+
-
+```
 Use the `UPDATE ` statement to update the data in a table. For example:
-
+```sql
     UPDATE person SET birthday='20171010' WHERE name='tom';
     
     SELECT * FROM person;
@@ -321,38 +321,38 @@ Use the `UPDATE ` statement to update the data in a table. For example:
     +--------+------+------------+
     |      1 | tom  | 2017-10-10 |
     +--------+------+------------+
-
+```
 Use the `DELETE` statement to delete the data in a table. For example:
-
+```sql
     DELETE FROM person WHERE number=1;
     SELECT * FROM person;
     Empty set (0.00 sec)
-
+```
 
 ### Create, authorize, and delete a user
 
 Use the `CREATE USER` statement to create a user named `tiuser` with the passwword `1236456`:
-
+```sql
     CREATE USER 'tiuser'@'localhost' IDENTIFIED BY '123456';
-
+```
 Grant `tiuser` to privilege to retrieve the tables in the `samp_db` database:
-
+```sql
     GRANT SELECT ON samp_db .* TO 'tiuser'@'localhost';
- 
+``` 
 Check the privileges of `tiuser`:
-
+```sql
     show grants for tiuser@localhost;
-
+```
 Delete `tiuser`:
-
+```sql
     DROP USER 'tiuser'@'localhost';
-    
+```    
 ## Monitoring a TiDB cluster
 
 Open a browser to access the monitoring platform:
-
+```
 	http://172.16.10.3:3000
-	    
+```	    
 The default account and password are: admin/admin.
 
 
@@ -442,7 +442,7 @@ For example, if you want to add a TiDB node (node101) with the IP address: 172.1
 4. Deploy the cluster:
 		
 		ansible-playbook deploy.yml -k
-5. Roll upgrade the entire cluster:
+5. Roll update the entire cluster:
 		
 		ansible-playbook rolling_update.yml -k
 6. Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform:
