@@ -252,7 +252,7 @@ Use the `SHOW CREATE` statement to see the statement that creates the table. For
 ```sql
 	SHOW CREATE table person;
 ```
-Use the `SHOW FULL COLUMNS` statement to display the information about a table. For example:
+Use the `SHOW FULL COLUMNS` statement to display the information about all the columns in a table. For example:
 ```sql
 	SHOW FULL COLUMNS FROM person;
 ```
@@ -264,7 +264,7 @@ or
 ```sql
 	DROP TABLE IF EXISTS person;
 ```
-Use the `samp_db` statement to show all the tables in a database. For example:
+Use the `SHOW TABLES` statement to show all the tables in a database. For example:
 ```sql
 	SHOW TABLES FROM samp_db;
 ```
@@ -331,11 +331,11 @@ Use the `DELETE` statement to delete the data in a table. For example:
 
 ### Create, authorize, and delete a user
 
-Use the `CREATE USER` statement to create a user named `tiuser` with the passwword `1236456`:
+Use the `CREATE USER` statement to create a user named `tiuser` with the password `123456`:
 ```sql
 	CREATE USER 'tiuser'@'localhost' IDENTIFIED BY '123456';
 ```
-Grant `tiuser` to privilege to retrieve the tables in the `samp_db` database:
+Grant `tiuser` the privilege to retrieve the tables in the `samp_db` database:
 ```sql
 	GRANT SELECT ON samp_db .* TO 'tiuser'@'localhost';
 ``` 
@@ -381,7 +381,7 @@ TiKV	|	99%  & 99.99% scheduler command duration	|	the 99th percentile and 99.99t
 TiKV	|	95%  & 99.99% storage async_request duration	|	the 95th percentile and 99.99th percentile Raft command duration	|	For 95%, it is less than 50ms; for 99.99%, it is less than 100ms.
 TiKV	|	server report failure message	|	There might be an issue with the network or the message might not come from this cluster.	|	If there are large amount of messages which contains `unreachable`, there might be an issue with the network. If the message contains `store not match`, the message does not come from this cluster.	
 TiKV		|	Vote	|the frequency of the Raft vote |	Usually, the value only changes when there is a split. If the value of Vote remains high for a long time, the system might have a severe issue and some nodes are not working.
-TiKV	|	95% and 99% coprocessor request duration	|	the 95th percentile and the 99.99th percentile coprocessor request duration	|	Application specific. Usually, the value does not remain high.
+TiKV	|	95% and 99% coprocessor request duration	|	the 95th percentile and the 99th percentile coprocessor request duration	|	Application specific. Usually, the value does not remain high.
 TiKV	|	Pending task	|	the number of pending tasks	|	Except for PD worker, it is not normal if the value is too high. 
 TiKV	|	stall	|	RocksDB stall time	|	If the value is bigger than 0, it means that RocksDB is too busy, and you need to pay attention to IO and CPU usage.
 TiKV	|	channel full	|	The channel is full and the threads are too busy.	|	If the value is bigger than 0, the threads are too busy.
@@ -482,7 +482,7 @@ To add a PD node (node102) with the IP address: 172.16.10.102, you can use the f
 	172.16.10.3
 	```
 	
-	Now you the topology is as follows:
+	Now the topology is as follows:
 	
 	| Name | Host IP | Services |
 	| ---- | ------- | -------- |
@@ -504,15 +504,15 @@ To add a PD node (node102) with the IP address: 172.16.10.102, you can use the f
 
 4. Login the newly added PD node and edit the starting script: `{deploy_dir}/scripts/run_pd.sh`
 	
-	5.1 Remove the  `--initial-cluster="xxxx"` configuration.
+	4.1 Remove the  `--initial-cluster="xxxx"` configuration.
 	
-	5.2 Add `join="http://172.16.10.1:2379"`. The IP address(`172.16.10.1`) can be any of the existing PD IP address in the cluster.
+	4.2 Add `join="http://172.16.10.1:2379"`. The IP address(`172.16.10.1`) can be any of the existing PD IP address in the cluster.
 	
-	5.3 Manually start the PD service in the newly added PD node:
+	4.3 Manually start the PD service in the newly added PD node:
 	
 		{deploy_dir}/scripts/start_pd.sh
 		
-	5.4 Use `pd-ctl` and see if the New node is added successfully:
+	4.4 Use `pd-ctl` and see if the New node is added successfully:
 	```
 	./pd-ctl -u “http://172.16.10.1:2379”
 	```
