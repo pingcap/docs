@@ -23,6 +23,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL grammar. Currentl
     - Date and Time Type
     - Others
 + Functions and Operators
+    - [Aggregate (GROUP BY) Functions](functions-and-operators/aggregate-group-by-functions.md)
     - Operators
     - Built-in Functions
 + SQL Statement Syntax
