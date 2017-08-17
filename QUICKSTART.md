@@ -371,7 +371,7 @@ PD	|	Current Storage Size	|	the occupied storage capacity of the TiDB cluster	|
 PD	|	Store Status  -- up store	|	the number of TiKV nodes that are up	|	
 PD	|	Store Status  -- down store	|	the number of TiKV nodes that are down	| `0`. If the number is bigger than `0`, it means some node(s) are not down.
 PD	|	Store Status  -- offline store	| the number of TiKV nodes that are manually offline|	
-PD	|	Store Status  -- Tombstone store	|	the number of TiKV nodes that are Tombstone 
+PD	|	Store Status  -- Tombstone store	|	the number of TiKV nodes that are Tombstone| 
 PD	|	Current storage usage	|	the storage occupancy rate of the TiKV cluster	|	If it exceeds 80%, you need to consider adding more TiKV nodes.
 PD	|	99% completed\_cmds\_duration\_seconds	|	the 99th percentile duration to complete a pd-server request|	less than 5ms
 PD	|	average completed\_cmds\_duration\_seconds	|	the average duration to complete a pd-server request	|	less than 50ms
