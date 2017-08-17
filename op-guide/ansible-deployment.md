@@ -174,16 +174,16 @@ pd_servers
 	
 	5.1 Edit the `inventory.ini` file as follows:
 	
-	  ```
-	  ## Connection
-	  # ssh via root:
-	  # ansible_user = root
-	  # ansible_become = true
-	  # ansible_become_user = tidb
+  ```
+  ## Connection
+  # ssh via root:
+  # ansible_user = root
+  # ansible_become = true
+  # ansible_become_user = tidb
 
-	  # ssh via normal user
-	  ansible_user = tidb
-	  ```
+  # ssh via normal user
+  ansible_user = tidb
+  ```
 	5.2 Connect to the network and download the TiDB, TiKV, and PD binaries:
 		
 		ansible-playbook local_prepare.yml
@@ -292,14 +292,14 @@ The rolling update of the TiDB service does not impact the ongoing business. The
 	```
  
 ## Summary of common operations
-| Job | Playbook | |
-|----|--------|----|
-| Start the cluster | `ansible-playbook start.yml` | |
-| Stop the cluster | `ansible-playbook stop.yml` | |
-| Destroy the cluster | `ansible-playbook unsafe_cleanup.yml` | (if the deployment directory is a mount point, an error will be reported, but implementation results will remain unaffected) |
-| Clean data (for test) | `ansible-playbook cleanup_data.yml` | |
-| Rolling Upgrade | `ansible-playbook rolling_update.yml` | |
-| Rolling upgrade TiKV | `ansible-playbook rolling_update.yml --tags=tikv` | |
-| Rolling upgrade modules except PD | `ansible-playbook rolling_update.yml --skip-tags=pd` | |
+| Job | Playbook |
+|----|--------|
+| Start the cluster | `ansible-playbook start.yml` |
+| Stop the cluster | `ansible-playbook stop.yml` |
+| Destroy the cluster | `ansible-playbook unsafe_cleanup.yml` (If the deployment directory is a mount point, an error will be reported, but implementation results will remain unaffected) | 
+| Clean data (for test) | `ansible-playbook cleanup_data.yml` |
+| Rolling Upgrade | `ansible-playbook rolling_update.yml` |
+| Rolling upgrade TiKV | `ansible-playbook rolling_update.yml --tags=tikv` |
+| Rolling upgrade modules except PD | `ansible-playbook rolling_update.yml --skip-tags=pd` |
  
 For more advanced features of TiDB including data migration, performance tuning, etc., see [TiDB Documents](https://github.com/pingcap/docs). 
