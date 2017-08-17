@@ -172,7 +172,7 @@ Use the normal user with the sudo privileges to deploy TiDB:
 # ansible_user = root
 # ansible_become = true
 # ansible_become_user = tidb
-  
+
 # ssh via normal user
 ansible_user = tidb
 ```
