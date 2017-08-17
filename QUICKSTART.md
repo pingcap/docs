@@ -58,6 +58,7 @@ Before you start, make sure that you have:
 - Python 2.6 or Python 2.7
 
 - Python Jinja2 2.7.2 and MarkupSafe 0.11 packages. You can use the following commands to install the packages:
+
 	```
 	pip install Jinja2==2.7.2 MarkupSafe==0.11
 	```
@@ -165,17 +166,17 @@ Use the normal user with the sudo privileges to deploy TiDB:
 	
 5.1 Edit the `inventory.ini` file as follows:
 	
- ```
-  ## Connection
-  # ssh via root:
-  # ansible_user = root
-  # ansible_become = true
-  # ansible_become_user = tidb
+```
+## Connection
+# ssh via root:
+# ansible_user = root
+# ansible_become = true
+# ansible_become_user = tidb
   
-  # ssh via normal user
-  ansible_user = tidb
- ```
- 
+# ssh via normal user
+ansible_user = tidb
+```
+
 5.2 Connect to the network and download the TiDB, TiKV, and PD binaries:
 		
 		ansible-playbook local_prepare.yml

@@ -173,6 +173,7 @@ pd_servers
 - If you use the normal user with the sudo privileges to deploy TiDB:
 	
 	5.1 Edit the `inventory.ini` file as follows:
+	
 		
 	  ```
 	  ## Connection
@@ -184,6 +185,7 @@ pd_servers
 	  # ssh via normal user
 	  ansible_user = tidb
 	  ```
+	  
   
 	5.2 Connect to the network and download the TiDB, TiKV, and PD binaries:
 		
