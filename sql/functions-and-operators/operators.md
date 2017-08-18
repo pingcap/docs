@@ -9,7 +9,7 @@
 | [`BINARY`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#operator_binary) | Cast a string to a binary string         |
 | [`&`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-and) | Bitwise AND                              |
 | [`~`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-invert) | Bitwise inversion                        |
-| [`|`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-or) | Bitwise OR                               |
+| [`\|`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-or) | Bitwise OR                               |
 | [`^`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-xor) | Bitwise XOR                              |
 | [`CASE`](https://dev.mysql.com/doc/refman/5.7/en/control-flow-functions.html#operator_case) | Case operator                            |
 | [`DIV`](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_div) | Integer division                         |
