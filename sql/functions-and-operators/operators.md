@@ -1,9 +1,9 @@
 # Operators
 
-1. [Operator Precedence](#Operator Precedence)
-2. [Comparison Functions and Operators](#Comparison Functions and Operators)
-3. [Logical Operators](#Comparison Functions and Operators)
-4. [Assignment Operators](#Comparison Functions and Operators)
+1. [Operator Precedence](#Operator-Precedence)
+2. [Comparison Functions and Operators](#Comparison-Functions-and-Operators)
+3. [Logical Operators](#Comparison-Functions-and-Operators)
+4. [Assignment Operators](#Comparison-Functions-and-Operators)
 
 | Name                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
