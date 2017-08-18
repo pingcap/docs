@@ -1,5 +1,10 @@
 # Operators
 
+1. [Operator Precedence](#Operator Precedence)
+2. [Comparison Functions and Operators](#Comparison Functions and Operators)
+3. [Logical Operators](#Comparison Functions and Operators)
+4. [Assignment Operators](#Comparison Functions and Operators)
+
 | Name                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
 | [`AND`, `&&`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_and) | Logical AND                              |
@@ -35,7 +40,7 @@
 | [`!=`, `<>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-equal) | Not equal operator                       |
 | [`NOT LIKE`](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_not-like) | Negation of simple pattern matching      |
 | [`NOT REGEXP`](https://dev.mysql.com/doc/refman/5.7/en/regexp.html#operator_not-regexp) | Negation of REGEXP                       |
-| [`||`, `OR`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_or) | Logical OR                               |
+| [`\|\|`, `OR`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_or) | Logical OR                               |
 | [`+`](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_plus) | Addition operator                        |
 | [`REGEXP`](https://dev.mysql.com/doc/refman/5.7/en/regexp.html#operator_regexp) | Pattern matching using regular expressions |
 | [`>>`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_right-shift) | Right shift                              |
@@ -107,7 +112,7 @@ For details, see [here](https://dev.mysql.com/doc/refman/5.7/en/comparison-opera
 | ---------------------------------------- | ------------- |
 | [`AND`, `&&`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_and) | Logical AND   |
 | [`NOT`, `!`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_not) | Negates value |
-| [`||`, `OR`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_or) | Logical OR    |
+| [`\|\|`, `OR`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_or) | Logical OR    |
 | [`XOR`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_xor) | Logical XOR   |
 
 For details, see [here](https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html).
