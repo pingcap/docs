@@ -58,8 +58,9 @@ Before you start, make sure that you have:
 - Python 2.6 or Python 2.7
 
 - Python Jinja2 2.7.2 and MarkupSafe 0.11 packages. You can use the following commands to install the packages:
+
 	```
-	pip install Jinja2 == 2.7.2 MarkupSafe == 0.11
+	pip install Jinja2==2.7.2 MarkupSafe==0.11
 	```
 	
 - Access to the managed nodes via SSH using password login or SSH authorized_key login. 
@@ -98,14 +99,15 @@ Install Ansible 2.3 or later to your CentOS 7.3 platform:
  yum install ansible
 ```
 
-You can use the `ansible -–version` command to see the version information.
+You can use the `ansible --version` command to see the version information.
 
 For more information, see [Ansible Documentation](http://docs.ansible.com/ansible/intro_installation.html).
 
 
 ### 3. Download TiDB-Ansible to the Control Machine
 Download the latest master version of the ZIP package from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible) or [click to download]( https://github.com/pingcap/tidb-ansible/archive/master.zip).
- 
+
+You can then unzip the package and the default folder name is `tidb-ansible-master`. The `tidb-ansible-master` directory contains all the files you need to get started with TiDB-Ansible. 
  
 ### 4. Orchestrate the TiDB cluster
 
@@ -126,7 +128,7 @@ The cluster topology is as follows:
 | node5 | 172.16.10.5 | TiKV2 |
 | node6 | 172.16.10.6 | TiKV3 |
  
-Edit the `inventory.ini` file:
+Edit the `inventory.ini` file from the `tidb-ansible-master` directory as follows:
  
 ```
 [tidb_servers]
@@ -164,16 +166,17 @@ Use the normal user with the sudo privileges to deploy TiDB:
 	
 5.1 Edit the `inventory.ini` file as follows:
 	
-	 ```
-	  ## Connection
-	  # ssh via root:
-	  # ansible_user = root
-	  # ansible_become = true
-	  # ansible_become_user = tidb
-	  
-	  # ssh via normal user
-	  ansible_user = tidb
-	 ```
+```
+## Connection
+# ssh via root:
+# ansible_user = root
+# ansible_become = true
+# ansible_become_user = tidb
+
+# ssh via normal user
+ansible_user = tidb
+```
+
 5.2 Connect to the network and download the TiDB, TiKV, and PD binaries:
 		
 		ansible-playbook local_prepare.yml
@@ -368,7 +371,7 @@ PD	|	Current Storage Size	|	the occupied storage capacity of the TiDB cluster	|
 PD	|	Store Status  -- up store	|	the number of TiKV nodes that are up	|	
 PD	|	Store Status  -- down store	|	the number of TiKV nodes that are down	| `0`. If the number is bigger than `0`, it means some node(s) are not down.
 PD	|	Store Status  -- offline store	| the number of TiKV nodes that are manually offline|	
-PD	|	Store Status  -- Tombstone store	|	the number of TiKV nodes that are Tombstone 
+PD	|	Store Status  -- Tombstone store	|	the number of TiKV nodes that are Tombstone| 
 PD	|	Current storage usage	|	the storage occupancy rate of the TiKV cluster	|	If it exceeds 80%, you need to consider adding more TiKV nodes.
 PD	|	99% completed\_cmds\_duration\_seconds	|	the 99th percentile duration to complete a pd-server request|	less than 5ms
 PD	|	average completed\_cmds\_duration\_seconds	|	the average duration to complete a pd-server request	|	less than 50ms
