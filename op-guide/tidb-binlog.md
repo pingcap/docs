@@ -3,8 +3,6 @@ title: Deploy TiDB-Binlog
 category: advanced
 ---
 
-<!-- TOC -->
-
 - [About TiDB-Binlog](#about-tidb-binlog)
 - [TiDB-Binlog architecture](#tidb-binlog-architecture)
     - [Pump](#pump)
@@ -19,9 +17,6 @@ category: advanced
     - [Configure Grafana](#configure-grafana)
         - [Create a Prometheus data source](#create-a-prometheus-data-source)
         - [Create a Grafana dashboard](#create-a-grafana-dashboard)
-
-<!-- /TOC -->
-
 
 ## About TiDB-Binlog
 
