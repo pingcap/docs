@@ -29,8 +29,8 @@ TiDB-Binlog is a tool for enterprise users to collect binlog files for TiDB and 
 
 TiDB-Binlog supports the following scenarios:  
 
-- *Data synchronization*: to synchronize TiDB cluster data to other databases  
-- *Real-time backup and recovery*: to back up TiDB cluster data, and recover in case of cluster outages
+- **Data synchronization**: to synchronize TiDB cluster data to other databases  
+- **Real-time backup and recovery**: to back up TiDB cluster data, and recover in case of cluster outages
   
 ## TiDB-Binlog architecture
 
