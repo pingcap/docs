@@ -3,8 +3,6 @@ title: TiDB FAQ
 category: faq
 ---
 
-<!-- TOC -->
-
 - [Product](#product)
     - [General](#general)
         - [What is TiDB?](#what-is-tidb)
@@ -61,8 +59,6 @@ category: faq
         - [Check the running DDL job](#check-the-running-ddl-job)
     - [SQL optimization](#sql-optimization)
         - [How to optimize `select count(1)`?](#how-to-optimize-select-count1)
-
-<!-- /TOC -->
 
 ## Product
 
