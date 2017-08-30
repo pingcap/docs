@@ -8,28 +8,22 @@ category: quick start
 - [About TiDB](#about-tidb)
 - [About this guide](#about-this-guide)
 - [Deploy a TiDB cluster](#deploy-a-tidb-cluster)
-  - [1. Prepare the systems](#1-prepare-the-systems)
-  - [2. Install Ansible in the Control
-        Machine](#2-install-ansible-in-the-control-machine)
-  - [3. Download TiDB-Ansible to the Control
-        Machine](#3-download-tidb-ansible-to-the-control-machine)
-  - [4. Orchestrate the TiDB cluster](#4-orchestrate-the-tidb-cluster)
-  - [5. Deploy the TiDB cluster](#5-deploy-the-tidb-cluster)
-  - [6. Start the cluster](#6-start-the-cluster)
+    1. [Prepare the environment](#prepare-the-environment)
+    2. [Install Ansible in the Control Machine](#install-ansible-in-the-control-machine)
+    3. [Download TiDB-Ansible to the Control Machine](#download-tidb-ansible-to-the-control-machine)
+    4. [Orchestrate the TiDB cluster](#orchestrate-the-tidb-cluster)
+    5. [Deploy the TiDB cluster](#deploy-the-tidb-cluster)
+    6. [Start the cluster](#start-the-cluster)
 - [Try TiDB](#try-tidb)
-  - [Create, show, and drop a
-        database](#create-show-and-drop-a-database)
-  - [Create, show, and drop a table](#create-show-and-drop-a-table)
-  - [Create, show, and drop an
-        index](#create-show-and-drop-an-index)
-  - [Insert, select, update, and delete
-        data](#insert-select-update-and-delete-data)
-  - [Create, authorize, and delete a
-        user](#create-authorize-and-delete-a-user)
+    - [Create, show, and drop a database](#create-show-and-drop-a-database)
+    - [Create, show, and drop a table](#create-show-and-drop-a-table)
+    - [Create, show, and drop an index](#create-show-and-drop-an-index)
+    - [Insert, select, update, and delete data](#insert-select-update-and-delete-data)
+    - [Create, authorize, and delete a user](#create-authorize-and-delete-a-user)
 - [Monitoring a TiDB cluster](#monitoring-a-tidb-cluster)
-  - [About the key metrics](#about-the-key-metrics)
--   [Scale the TiDB cluster](#scale-the-tidb-cluster)
--   [Destroy the cluster](#destroy-the-cluster)
+    - [About the key metrics](#about-the-key-metrics)
+- [Scale the TiDB cluster](#scale-the-tidb-cluster)
+- [Destroy the cluster](#destroy-the-cluster)
 
 ## About TiDB
 
