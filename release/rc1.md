@@ -1,11 +1,9 @@
 ---
-layout: post
 title: TiDB RC1 Release Notes
-excerpt: TiDB RC1 is now released!
+category: release notes
 ---
 
-The TiDB RC1 is now released. See the following updates in this release:
-
+On December 23, 2016, TiDB RC1 is released. See the following updates in this release:
 
 ## TiKV:
 + The write speed has been improved.
