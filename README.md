@@ -3,7 +3,7 @@
 ## Documentation List
 
 + Quick Start
-  - [TiDB Quick Start Guide](./QUICKSTART.md)
+  + [TiDB Quick Start Guide](./QUICKSTART.md)
     - [About TiDB](./QUICKSTART.md#about-tidb)
     - [About this guide](./QUICKSTART.md#about-this-guide)
     - [Deploy a TiDB cluster](./QUICKSTART.md#deploy-a-tidb-cluster)
