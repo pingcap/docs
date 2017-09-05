@@ -11,14 +11,14 @@
     - [Monitoring a TiDB cluster](./QUICKSTART.md#monitoring-a-tidb-cluster)
     - [Scale the TiDB cluster](./QUICKSTART.md#scale-the-tidb-cluster)
     - [Destroy the cluster](./QUICKSTART.md#destroy-the-cluster)
-  + [TiDB Connector for Spark User Guide](https://github.com/pingcap/tispark/blob/master/docs/userguide.md)
+  - [TiDB Connector for Spark User Guide](https://github.com/pingcap/tispark/blob/master/docs/userguide.md)
 + Deploy
   - [Deployment Recommendation](op-guide/recommendation.md)
   - [Ansible Deployment(Recommended)](op-guide/ansible-deployment.md)
   - [Docker Deployment](op-guide/docker-deployment.md)
   - [Cross-Region Deployment](op-guide/location-awareness.md)
   - [Configuration Flags](op-guide/configuration.md)
-+ [Scale](op-guide/horizontal-scale.md)
+- [Scale](op-guide/horizontal-scale.md)
 + Develop
   - [TiDB SQL Grammar](sql/README.md)
   - [Compatibility with MySQL](sql/mysql-compatibility.md)
@@ -32,7 +32,7 @@
   - [Loader User Guide](./tools/loader.md)
   - [Performance Tuning](op-guide/tune-TiKV.md)
   - [Reading Data from History Versions](op-guide/history-read.md)
-+ [Troubleshooting](./trouble-shooting.md)
+- [Troubleshooting](./trouble-shooting.md)
 + Releases
   - [Pre-GA](release/prega.md)
   - [RC4](release/rc4.md)
@@ -42,7 +42,7 @@
 + More Resources
   - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
   - [PingCAP Blog](https://pingcap.github.io/blog/)
-+ [Frequently Asked Questions (FAQ)](./FAQ.md)
+- [Frequently Asked Questions (FAQ)](./FAQ.md)
 
 ## TiDB Introduction
 
