@@ -2,9 +2,9 @@
 
 ## Documentation List
 
-+ About TiDB
++ [About TiDB](overview.md)
   - [TiDB Introduction](overview.md#tidb-introduction)
-  - [TiDB Architecture](overview.md#tidb-architecture)
+  - [TiDB Architecture](overview.md#tidb-architecture))
 + Quick Start
   + [TiDB Quick Start Guide](./QUICKSTART.md)
     - [About TiDB](./QUICKSTART.md#about-tidb)
