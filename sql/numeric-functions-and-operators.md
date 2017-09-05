@@ -1,3 +1,8 @@
+---
+title: Numeric Functions and Operators
+category: user guide
+---
+
 # Numeric Functions and Operators
 
 ## Arithmetic Operators
