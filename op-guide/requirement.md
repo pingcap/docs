@@ -7,7 +7,7 @@ category: deployment
 
 ## About
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server and mainstream virtualization environments and runs well. TiDB supports most mainstream hardware networks and the mainstream Linux operating system. 
+As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server and major virtualization environments and runs well. TiDB supports most major hardware networks and the major Linux operating system. 
 
 ## Linux OS Version Requirements
 
@@ -20,12 +20,12 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 **Note**
 
-- The Oracle Enterprise Linux only supports the Red Hat Compatible Kernel (RHCK), and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-- The support for the Linux operating systems above include the deployment and operation in physical servers as well as in the mainstream virtualized environments like VMWare, KVM and XEM.
+- For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
+- The support for the Linux operating systems above include the deployment and operation in physical servers as well as in major virtualized environments like VMWare, KVM and XEM.
 
 ## Server Requirements
 
-You can deploy and operate TiDB on the 64-bit universal hardware server platform in the Intel x86-64 architecture. The requirements and recommendations about server hardware configuration for development, testing and production environments are as follows:
+You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture. The requirements and recommendations about server hardware configuration for development, testing and production environments are as follows:
 
 ### Development and Testing Environments
 
@@ -38,22 +38,22 @@ You can deploy and operate TiDB on the 64-bit universal hardware server platform
 
 **Note**
 
-- Verify that in the test environment the TiDB and PD can be deployed on the same server.
-- In performance-related testing, do not use low-performance storage and network hardware configuration, in order to guarantee the correctness of the test result.
+- In the test environment, the TiDB and PD can be deployed on the same server.
+- For performance-related testing, do not use low-performance storage and network hardware configuration, in order to guarantee the correctness of the test result.
 
 ### Production Environment
 
-| Component | CPU | Memory | Hard Disk Type | Hard Disk Number | Single Hard Disk Size | Network | Instance Number (lowest requirement) |
+| Component | CPU | Memory | Hard Disk Type | Hard Disk Number | Single Hard Disk Size | Network | Instance Number (minimum requirement) |
 | :-----: | :------: | :------: | :------: | :------: | ------ | :------: | :-----: |
-|  TiDB  | 32 core+ | 128 GB+ | SSD | minimum 2 | 500 GB+ | 2+ 10 Gigabit network card | 2 |
-| PD | 16 core+ | 32 GB+ | SSD | minimum 2 | 200 GB+ | 2+ 10 Gigabit network card | 3 |
-| TiKV | 32 core+ | 128 GB+ | SSD | minimum 2 | 200~500 GB. It is recommended to keep the size of TiKV hard disk within 500G in case it takes too long to restore data when the hard disk is damaged.  | 2+ 10 Gigabit network card | 3 | 
-| Monitor | 16 core+ | 32 GB+ | SAS | minimum 4 | 200 GB+ | 2+ 10 Gigabit network card | 1 |
+|  TiDB  | 32 core+ | 128 GB+ | SSD | minimum 2 | 500 GB+ | 2 or more 10 Gigabit network cards | 2 |
+| PD | 16 core+ | 32 GB+ | SSD | minimum 2 | 200 GB+ | 2 or more 10 Gigabit network cards | 3 |
+| TiKV | 32 core+ | 128 GB+ | SSD | minimum 2 | 200~500 GB. It is recommended to keep the size of TiKV hard disk within 500G in case it takes too long to restore data when the hard disk is damaged.  | 2 or more 10 Gigabit network cards | 3 | 
+| Monitor | 16 core+ | 32 GB+ | SAS | minimum 4 | 200 GB+ | 2 or more 10 Gigabit network cards | 1 |
 |     |     |     |      |      |      |  Total Server Number   |    9   |
 
 **Note**:   
 
-- In the production environment, you can deploy and operate TiDB and PD on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
+- In the production environment, you can deploy and run TiDB and PD on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
 - It is strongly recommended to use higher configuration in the production environment.
 
 ## Network Requirements
@@ -62,16 +62,16 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 
 | Component | Default Port | Description |
 | :--:| :--: | :-- |
-| TiDB |  4000  | access communication port of application and DBA tools|
-| TiDB | 10080  | communication port to report TiDB status|
+| TiDB |  4000  | the communication port for application and DBA tools|
+| TiDB | 10080  | the communication port to report TiDB status|
 | TiKV |  20160 |  TiKV communication port  |
 | PD | 2379 | to provide TiDB and PD communication port|
 | PD | 2380 | PD cluster inter-node communication port|
 | Prometheus |  9090|Prometheus service communication port|
 | Pushgateway |  9091| TiDB, TiKV, PD monitor aggregation and report port|
-| Node_exporter |  9100| communication port to report the system information of every TiDB cluster node |
+| Node_exporter |  9100| the communication port to report the system information of every TiDB cluster node |
 | Grafana | 3000 | Web monitor external service and client (browser) access port|
 
 ## Client Web Browser Requirements
 
-Based on the Prometheus and Grafana platform, TiDB provides a visual data monitoring solution for distributed database clusters. To visit the Grafana monitor entry, it is recommended to use a higher version of Microsoft IE, Google Chrome or Mozilla Firefox.
+Based on the Prometheus and Grafana platform, TiDB provides a visual data monitoring solution to monitor the TiDB cluster status. To visit the Grafana monitor interface, it is recommended to use a higher version of Microsoft IE, Google Chrome or Mozilla Firefox.
