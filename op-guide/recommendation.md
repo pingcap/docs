@@ -58,7 +58,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 ## Network Requirements
 
-As an open source distributed NewSQL database, TiDB requires the following network port configuration to operate. Based on the TiDB deployment in actual environments, the administrator can enable relevant ports in the network side and host side. 
+As an open source distributed NewSQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can enable relevant ports in the network side and host side. 
 
 | Component | Default Port | Description |
 | :--:| :--: | :-- |
