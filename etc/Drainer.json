@@ -1,30 +1,59 @@
 {
-   "__inputs": [
+  "__inputs": [
     {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
+      "name": "DS_Drainer",
+      "label": "Drainer",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
       "pluginName": "Prometheus"
     }
   ],
-  "id": null,
-  "title": "TiDB-Binlog",
-  "tags": [],
-  "style": "dark",
-  "timezone": "browser",
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.1.2"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": []
+  },
   "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
   "hideControls": false,
-  "sharedCrosshair": false,
+  "id": null,
+  "links": [],
+  "refresh": "5s",
   "rows": [
     {
-      "title": "New row",
+      "collapse": false,
+      "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -55,14 +84,15 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(binlog_pump_rpc_counter[1m])",
+              "expr": "irate(binlog_pump_rpc_counter[1m])",
               "intervalFactor": 2,
               "legendFormat": "{{instance}} : {{method}}",
               "metric": "binlog_cistern_rpc_duration_seconds_bucket",
               "refId": "A",
-              "step": 4
+              "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "RPC QPS(pump)",
@@ -74,9 +104,9 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true,
             "mode": "time",
             "name": null,
+            "show": true,
             "values": []
           },
           "yaxes": [
@@ -96,13 +126,12 @@
               "min": null,
               "show": true
             }
-          ],
-          "thresholds": []
+          ]
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -137,9 +166,10 @@
               "intervalFactor": 2,
               "legendFormat": "{{instance}} : {{method}}",
               "refId": "B",
-              "step": 4
+              "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "95% RPC Latency(pump)",
@@ -151,9 +181,9 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true,
             "mode": "time",
             "name": null,
+            "show": true,
             "values": []
           },
           "yaxes": [
@@ -173,20 +203,19 @@
               "min": null,
               "show": true
             }
-          ],
-          "thresholds": []
+          ]
         }
       ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
       "repeat": null,
-      "repeatRowId": null,
       "repeatIteration": null,
-      "collapse": false
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
-      "title": "New row",
+      "collapse": false,
+      "height": "250px",
       "panels": [
         {
           "cacheTimeout": null,
@@ -197,7 +226,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -208,7 +237,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 11,
+          "id": 34,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -245,16 +274,16 @@
           },
           "targets": [
             {
-              "expr": "binlog_cistern_binlog_count_total",
+              "expr": "binlog_drainer_window{marker=\"upper\", }/(2^18*10^3)",
               "intervalFactor": 2,
               "legendFormat": "",
-              "metric": "binlog_cistern_binlog_count_total",
+              "metric": "binlog_drainer_window",
               "refId": "A",
-              "step": 40
+              "step": 4
             }
           ],
           "thresholds": "",
-          "title": "Binlog Count",
+          "title": "slave upper boundary",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -275,7 +304,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -286,7 +315,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 18,
+          "id": 40,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -323,15 +352,16 @@
           },
           "targets": [
             {
-              "expr": "binlog_cistern_window{marker=\"upper\"}/10^6",
+              "expr": "binlog_drainer_window{marker=\"lower\", }/(2^18*10^3)",
               "intervalFactor": 2,
-              "metric": "binlog_cistern_window",
+              "legendFormat": "",
+              "metric": "binlog_drainer_window",
               "refId": "A",
-              "step": 40
+              "step": 4
             }
           ],
           "thresholds": "",
-          "title": "window upper boundary",
+          "title": "slave  lower boundary",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -352,7 +382,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -363,7 +393,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 17,
+          "id": 37,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -391,7 +421,7 @@
               "to": "null"
             }
           ],
-          "span": 3,
+          "span": 2,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -400,93 +430,171 @@
           },
           "targets": [
             {
-              "expr": "binlog_cistern_window{marker=\"lower\"}/10^6",
-              "intervalFactor": 2,
-              "metric": "binlog_cistern_window",
-              "refId": "A",
-              "step": 40
-            }
-          ],
-          "thresholds": "",
-          "title": "window lower boundary",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "${DS_PROMETHEUS}",
-          "editable": true,
-          "error": false,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 13,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 3,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "targets": [
-            {
-              "expr": "binlog_drainer_position/10^6",
+              "expr": "binlog_drainer_position{}/((2^18)*1000)",
               "intervalFactor": 2,
               "legendFormat": "",
               "metric": "binlog_drainer_position",
               "refId": "A",
-              "step": 40
+              "step": 4
             }
           ],
           "thresholds": "",
-          "title": "drainer position",
+          "title": "slave position",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_Drainer}",
+          "editable": true,
+          "error": false,
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 28,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "expr": "binlog_drainer_error_binlog_count{}",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "metric": "binlog_drainer_error_binlog_count",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": "",
+          "title": "error binlogs",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_Drainer}",
+          "editable": true,
+          "error": false,
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 29,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "expr": "binlog_drainer_query_tikv_count{}",
+              "intervalFactor": 2,
+              "metric": "binlog_drainer_query_tikv_count",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": "",
+          "title": "slave tikv query",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -499,27 +607,26 @@
           "valueName": "avg"
         }
       ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
       "repeat": null,
-      "repeatRowId": null,
       "repeatIteration": null,
-      "collapse": false
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
-      "title": "New row",
+      "collapse": false,
+      "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "fill": 1,
           "grid": {},
-          "hideTimeOverride": false,
-          "id": 1,
+          "id": 38,
           "legend": {
             "avg": false,
             "current": false,
@@ -535,25 +642,26 @@
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
-          "points": true,
+          "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "binlog_cistern_savepoint",
+              "expr": "(binlog_drainer_window{marker=\"upper\", } - ignoring(marker)binlog_drainer_position{})/(2^18*10^3)",
               "intervalFactor": 2,
-              "legendFormat": "{{nodeID}}",
-              "metric": "binlog_cistern_savepoint",
+              "legendFormat": "",
+              "metric": "binlog_drainer_position",
               "refId": "A",
-              "step": 4
+              "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Save Points of Pumps",
+          "title": "synchronization delay",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -562,15 +670,15 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true,
             "mode": "time",
             "name": null,
+            "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "none",
-              "label": null,
+              "label": "绉�",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -584,177 +692,24 @@
               "min": null,
               "show": true
             }
-          ],
-          "thresholds": []
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {},
-          "id": 12,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "binlog_cistern_collect_retry_times",
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "metric": "binlog_cistern_collect_retry_times",
-              "refId": "A",
-              "step": 4
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "collect_retry_times",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true,
-            "mode": "time",
-            "name": null,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "thresholds": []
+          ]
         }
       ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
       "repeat": null,
-      "repeatRowId": null,
       "repeatIteration": null,
-      "collapse": false
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
-      "title": "New row",
+      "collapse": false,
+      "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {},
-          "id": 15,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "histogram_quantile(0.95, rate(binlog_drainer_txn_duration_time_bucket[1m]))",
-              "intervalFactor": 2,
-              "legendFormat": "{{instance}}:{{job}}",
-              "metric": "binlog_drainer_txn_duration_time_bucket",
-              "refId": "A",
-              "step": 4
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "95% drainer txn latency",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true,
-            "mode": "time",
-            "name": null,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "thresholds": []
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -783,14 +738,15 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(binlog_drainer_event[1m])",
+              "expr": "rate(binlog_drainer_event{}[1m])",
               "intervalFactor": 2,
               "legendFormat": "",
               "metric": "binlog_drainer_event",
               "refId": "A",
-              "step": 4
+              "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Drainer Event",
@@ -802,9 +758,85 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true,
             "mode": "time",
             "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 10,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_Drainer}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "id": 15,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.99, rate(binlog_drainer_txn_duration_time_bucket[1m]))",
+              "intervalFactor": 2,
+              "legendFormat": "{{instance}}:{{job}}",
+              "metric": "binlog_drainer_txn_duration_time_bucket",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "99% drainer txn latency",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
             "values": []
           },
           "yaxes": [
@@ -824,25 +856,24 @@
               "min": null,
               "show": true
             }
-          ],
-          "thresholds": []
+          ]
         }
       ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
       "repeat": null,
-      "repeatRowId": null,
       "repeatIteration": null,
-      "collapse": false
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
-      "title": "New row",
+      "collapse": false,
+      "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -875,9 +906,10 @@
               "intervalFactor": 2,
               "metric": "go_goroutines",
               "refId": "A",
-              "step": 4
+              "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Goroutine",
@@ -889,9 +921,9 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true,
             "mode": "time",
             "name": null,
+            "show": true,
             "values": []
           },
           "yaxes": [
@@ -911,18 +943,17 @@
               "min": null,
               "show": true
             }
-          ],
-          "thresholds": []
+          ]
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_Drainer}",
           "editable": true,
           "error": false,
           "fill": 1,
           "grid": {},
-          "id": 8,
+          "id": 39,
           "legend": {
             "avg": false,
             "current": false,
@@ -940,12 +971,7 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "10-9-10-121",
-              "yaxis": 1
-            }
-          ],
+          "seriesOverrides": [],
           "span": 6,
           "stack": false,
           "steppedLine": false,
@@ -953,12 +979,12 @@
             {
               "expr": "go_memstats_heap_inuse_bytes{job=\"binlog\"}",
               "intervalFactor": 2,
-              "legendFormat": "",
-              "metric": "go_memstats_heap_inuse_bytes",
+              "metric": "go_goroutines",
               "refId": "A",
-              "step": 4
+              "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Memory",
@@ -970,15 +996,15 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true,
             "mode": "time",
             "name": null,
+            "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "format": "short",
-              "label": null,
+              "format": "bits",
+              "label": "",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -992,28 +1018,53 @@
               "min": null,
               "show": true
             }
-          ],
-          "thresholds": []
+          ]
         }
       ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
       "repeat": null,
-      "repeatRowId": null,
       "repeatIteration": null,
-      "collapse": false
-    },
-    {
+      "repeatRowId": null,
+      "showTitle": false,
       "title": "New row",
-      "panels": [],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
-      "repeat": null,
-      "repeatRowId": null,
-      "repeatIteration": null,
-      "collapse": false
+      "titleSize": "h6"
     }
-  ]
+  ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "Drainer",
+  "version": 1
 }
