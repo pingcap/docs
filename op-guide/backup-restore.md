@@ -63,7 +63,7 @@ To quickly backup and restore data (especially large amounts of data), refer to 
   - OS: CentOS 7.2
 - The `-F` parameter of `mydumper` is set to 16 and the `-t` parameter of `loader` is set to 64.
 
-Result: It takes 11 hours to import all the data, which is 19.4G/hour.
+**Results**: It takes 11 hours to import all the data, which is 19.4G/hour.
 
 ### Backup Data from TiDB
 
