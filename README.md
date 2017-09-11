@@ -31,8 +31,8 @@
     - [Performance Tuning for TiKV](op-guide/tune-TiKV.md)
   + Backup and Migrate
     + [Migrate data from MySQL to TiDB](op-guide/migration.md)
-      - [Migrate all the data](using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
-      - [Migrate the data incrementally](optional-using-the-syncer-tool-to-import-data-incrementally)
+      - [Migrate all the data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
+      - [Migrate the data incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
   + Manual operations 
     - [Deploy Using the Binary](op-guide/binary-deployment.md)
 + User Guide
@@ -51,7 +51,7 @@
     - [Miscellaneous Functions](sql/miscellaneous-functions.md)
   - [TiDB SQL Grammar](sql/README.md)
   - [Compatibility with MySQL](sql/mysql-compatibility.md)
-+ Advanced usage
++ Advanced Usage
   - [Reading Data from History Versions](op-guide/history-read.md) 
 + Tools
   - [Syncer User Guide](./tools/syncer.md)
