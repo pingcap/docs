@@ -15,13 +15,13 @@ To make it easy to try [TiSpark](https://github.com/pingcap/tispark/blob/master/
   ```
   spark/jars/tispark-0.1.0-beta-SNAPSHOT-jar-with-dependencies.jar
   ```
-	
+  
 - TiSpark sample data and import scripts are deployed by default under the TiDB-Ansible directory.
-	
+
   ```
   tidb-ansible/resources/bin/tispark-sample-data
   ```
-	
+  
 ## Prepare the Environment
 
 ### Install JDK on the TiDB Instance
