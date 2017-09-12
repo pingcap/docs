@@ -1,6 +1,6 @@
 ---
 title: TiSpark Quick Start Guide
-category: TiSpark
+category: User Guide
 ---
 
 # TiSpark Quick Start Guide
@@ -9,14 +9,14 @@ To make it easy to try [TiSpark](https://github.com/pingcap/tispark/blob/master/
 
 ## Deployment Information
 
-- Spark is deployed by default in the spark directory under the TiDB instance deployment directory.
-- TiSpark jar package is deployed by default in the jars folder under the Spark deployment directory.
+- Spark is deployed by default in the `spark` folder in the TiDB instance deployment directory.
+- The TiSpark jar package is deployed by default in the `jars` folder in the Spark deployment directory.
 
   ```
   spark/jars/tispark-0.1.0-beta-SNAPSHOT-jar-with-dependencies.jar
   ```
   
-- TiSpark sample data and import scripts are deployed by default under the TiDB-Ansible directory.
+- TiSpark sample data and import scripts are deployed by default in the TiDB-Ansible directory.
 
   ```
   tidb-ansible/resources/bin/tispark-sample-data
@@ -26,18 +26,18 @@ To make it easy to try [TiSpark](https://github.com/pingcap/tispark/blob/master/
 
 ### Install JDK on the TiDB Instance
 
-Download the latest version of jdk 1.8 from [Oracle JDK official download page](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html). The version used in the following example is `jdk-8u141-linux-x64.tar.gz`.
+Download the latest version of JDK 1.8 from [Oracle JDK official download page](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html). The version used in the following example is `jdk-8u141-linux-x64.tar.gz`.
 
-Extract the package and set the environment variables based on your jdk deployment directory.  
+Extract the package and set the environment variables based on your JDK deployment directory.  
 
 Edit the `~/.bashrc` file. For example:
 
-```
+```bashrc
 export JAVA_HOME=/home/pingcap/jdk1.8.0_144
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
-Verify the validity of jdk:
+Verify the validity of JDK:
 
 ```
 $ java -version
@@ -48,7 +48,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)
 
 ### Import the Sample Data
 
-Assume that the TiDB cluster is started. The service IP of one TiDB instance is 192.168.0.2, the port is 4000, the user name is root, and the password is null.
+Assume that the TiDB cluster is started. The service IP of one TiDB instance is `192.168.0.2`, the port is `4000`, the user name is `root`, and the password is null.
 
 ```
 cd tidb-ansible/resources/bin/tispark-sample-data
@@ -68,7 +68,7 @@ Run the script:
 
 > **Note**: You need to install the MySQL client on the machine that runs the script. If you are a CentOS user, you can install it through the command `yum -y install mysql`.
 
-Log into TiDB and verify that the TPCH_001 database and the following tables are included.
+Log into TiDB and verify that the `TPCH_001` database and the following tables are included.
 
 ```
 $ mysql -uroot -P4000 -h192.168.0.2
@@ -107,7 +107,7 @@ MySQL [TPCH_001]> show tables;
 
 ## Use Example
 
-Assume that the IP of your PD node is 192.168.0.2, and the port is 2379. 
+Assume that the IP of your PD node is `192.168.0.2`, and the port is `2379`. 
 
 First start the spark-shell in the spark deployment directory:
 
