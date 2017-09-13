@@ -60,7 +60,7 @@ pip install Jinja2==2.7.2 MarkupSafe==0.11
 
 - 4 or more machines. At least 3 instances for TiKV. Don’t deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md).
 - Operating system:
-  - CentOS 7.0 and later versions
+  - CentOS 7.3 and later versions
   - X86_64 architecture (AMD64)
   - Kernel version 3.10 or later
   - Ext4 file system.
