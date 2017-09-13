@@ -10,9 +10,9 @@
   - [About This Guide](./QUICKSTART.md#about-this-guide)
   - [Deploy a TiDB Cluster](./QUICKSTART.md#deploy-a-tidb-cluster)
   - [Try TiDB](./QUICKSTART.md#try-tidb)
-  - [Monitor a TiDB Cluster](./QUICKSTART.md#monitoring-a-tidb-cluster)
+  - [Monitor the TiDB Cluster](./QUICKSTART.md#monitoring-a-tidb-cluster)
   - [Scale the TiDB Cluster](./QUICKSTART.md#scale-the-tidb-cluster)
-  - [Destroy the Cluster](./QUICKSTART.md#destroy-the-cluster)
+  - [Destroy the TiDB Cluster](./QUICKSTART.md#destroy-the-cluster)
 + Operations Guide
   - [Hardware and Software Requirements](op-guide/recommendation.md)
   + Deploy
@@ -32,7 +32,7 @@
   + Backup and Migrate
     - [Backup and Restore](op-guide/backup-restore.md)
     + [Migrate Data From MySQL to TiDB](op-guide/migration.md)
-      - [Migrate all the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
+      - [Migrate All the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
       - [Migrate the Data Incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
   + Manual operations 
     - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
