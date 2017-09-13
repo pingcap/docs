@@ -3,7 +3,7 @@ title: TiDB Ansible Deployment
 category: deployment
 ---
 
-# TiDB Ansible Deployment
+# Ansible Deployment
 
 ## Overview
 

@@ -20,7 +20,7 @@ category: quick start
     - [Create, show, and drop an index](#create-show-and-drop-an-index)
     - [Insert, select, update, and delete data](#insert-select-update-and-delete-data)
     - [Create, authorize, and delete a user](#create-authorize-and-delete-a-user)
-- [Monitoring a TiDB cluster](#monitoring-a-tidb-cluster)
+- [Monitor a TiDB cluster](#monitor-a-tidb-cluster)
     - [About the key metrics](#about-the-key-metrics)
 - [Scale the TiDB cluster](#scale-the-tidb-cluster)
 - [Destroy the cluster](#destroy-the-cluster)
@@ -378,7 +378,7 @@ Delete `tiuser`:
 DROP USER 'tiuser'@'localhost';
 ```
 
-## Monitoring a TiDB cluster
+## Monitor a TiDB cluster
 
 Open a browser to access the monitoring platform: `http://172.16.10.3:3000`.
 

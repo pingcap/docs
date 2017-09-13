@@ -3,7 +3,7 @@ title: TiDB Binary Deployment
 category: deployment
 ---
 
-# TiDB Binary Deployment
+# Binary Deployment
 
 ## Overview
 
