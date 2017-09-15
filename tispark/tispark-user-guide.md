@@ -1,7 +1,7 @@
-+---
- +title: TiDB Connector for Spark User Guide
- +category: user guide
-+---
+---
+title: TiDB Connector for Spark User Guide
+category: user guide
+---
 
 # TiDB Connector for Spark User Guide
 
@@ -105,7 +105,7 @@ spark-shell --jars $PATH/tispark-0.1.0.jar
 If you want to deploy TiDB Connector for Spark as a default component, simply place the TiDB Connector for Spark jar package into the jars path for each node of the Spark cluster and restart the Spark cluster:
 
 ```sh
-$ {SPARK_INSTALL_PATH}/jars
+${SPARK_INSTALL_PATH}/jars
 
 ```
 
