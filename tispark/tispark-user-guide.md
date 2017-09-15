@@ -1,14 +1,13 @@
 +---
  +title: TiDB Connector for Spark User Guide
  +category: user guide
- +---
++---
 
 # TiDB Connector for Spark User Guide
 
 The TiDB Connector for Spark is a thin layer built for running Apache Spark on top of TiDB/TiKV to answer the complex OLAP queries. It takes advantages of both the Spark platform and the distributed TiKV cluster and seamlessly glues to TiDB, the distributed OLTP database, to provide a Hybrid Transactional/Analytical Processing (HTAP) solution to serve as a one-stop solution for both online transactions and analysis.
 
 The TiDB Connector for Spark depends on the TiKV cluster and the PD cluster. You also need to set up a Spark cluster. This document provides a brief introduction to how to setup and use the TiDB Connector for Spark. It requires some basic knowledge of Apache Spark. For more information, see [Spark website](https://spark.apache.org/docs/latest/index.html).
-
 
 ## Overview
 
@@ -38,41 +37,40 @@ For independent deployment of TiKV and the TiDB Connector for Spark, it is recom
  
 + Hardware configuration
  - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md#deployment-recommendations).
- - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G. If using  Hard Disk Drive (HDD), it is recommended to use at least 8 disks.
+ - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G. If using Hard Disk Drive (HDD), it is recommended to use at least 8 disks.
 
 + TiKV parameters (default)
 
 ```
-[Server]
-End-point-concurrency = 8 # For OLAP scenarios, consider increasing this parameter
-[Raftstore]
-Sync-log = false
+[server]
+end-point-concurrency = 8  # For OLAP scenarios, consider increasing this parameter
+[raftstore]
+sync-log = false
 
+[rocksdb]
+max-background-compactions = 6
+max-background-flushes = 2
 
-[Rocksdb]
-Max-background-compactions = 6
-Max-background-flushes = 2
+[rocksdb.defaultcf]
+block-cache-size = "10GB"
 
-[Rocksdb.defaultcf]
-Block-cache-size = "10GB"
+[rocksdb.writecf]
+block-cache-size = "4GB"
 
-[Rocksdb.writecf]
-Block-cache-size = "4GB"
+[rocksdb.raftcf]
+block-cache-size = "1GB"
 
-[Rocksdb.raftcf]
-Block-cache-size = "1GB"
+[rocksdb.lockcf]
+block-cache-size = "1GB"
 
-[Rocksdb.lockcf]
-Block-cache-size = "1GB"
-
-[Storage]
-Scheduler-worker-pool-size = 4
+[storage]
+scheduler-worker-pool-size = 4
 ```
 
 #### Configuration of the independent deployment of the Spark cluster and the TiDB Connector for Spark cluster 
 
  
-Please refer to the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for the detail hardware recommendations.
+See the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for the detail hardware recommendations.
 
 The following is a short overview of the TiDB Connector for Spark configuration.
 
@@ -80,9 +78,9 @@ It is recommended to allocate 32G memory for Spark. Please reserve at least 25% 
 
 It is recommended to provision at least 8 to 16 cores on per machine for Spark. Initially, you can assign all the CPU cores to Spark.
 
-Please refer to the Spark official configuration website at (https://spark.apache.org/docs/latest/spark-standalone.html). The following is an example based on the spark-env.sh configuration:
+See the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website. The following is an example based on the `spark-env.sh` configuration:
 
-```
+```sh
 SPARK_EXECUTOR_MEMORY = 32g
 SPARK_WORKER_MEMORY = 32g
 SPARK_WORKER_CORES = 8
@@ -91,24 +89,23 @@ SPARK_WORKER_CORES = 8
 #### Hybrid deployment configuration for the TiDB Connector for Spark and TiKV cluster
 
 For the hybrid deployment of the TiDB Connector for Spark and TiKV, add the TiDB Connector for Spark required resources to the TiKV reserved resources, and allocate 25% of the memory for the system.
- 
 
 ## Deploy the TiDB Connector for Spark
 
-Download the TiDB Connector for Spark's jar package [here] (https://download.pingcap.org/tispark-0.1.0-beta-SNAPSHOT-jar-with-dependencies.jar).
+Download the TiDB Connector for Spark's jar package [here](https://download.pingcap.org/tispark-0.1.0-beta-SNAPSHOT-jar-with-dependencies.jar).
 
 ### Deploy the TiDB Connector for Spark on the existing Spark cluster
 
 Running TiDB Connector for Spark on an existing Spark cluster does not require a reboot of the cluster. You can use Spark's `--jars` parameter to introduce the TiDB Connector for Spark as a dependency:
 
-```
-Spark-shell --jars $ PATH / tispark-0.1.0.jar
+```sh
+spark-shell --jars $PATH/tispark-0.1.0.jar
 ```
 
 If you want to deploy TiDB Connector for Spark as a default component, simply place the TiDB Connector for Spark jar package into the jars path for each node of the Spark cluster and restart the Spark cluster:
 
-```
-$ {SPARK_INSTALL_PATH} / jars
+```sh
+$ {SPARK_INSTALL_PATH}/jars
 
 ```
 
@@ -118,7 +115,7 @@ In this way,  you can use either `Spark-Submit` or `Spark-Shell` to use the TiDB
 ### Deploy TiDB Connector for Spark without the Spark cluster
 
 
-If you do not have a Spark cluster, we recommend using the standalone mode. To use the Spark Standalone model, you can simply place a compiled version of Spark on each node of the cluster. If you encounter problems, please to refer to its official website* (https://spark.apache.org/docs/latest/spark-standalone.html)*. And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
+If you do not have a Spark cluster, we recommend using the standalone mode. To use the Spark Standalone model, you can simply place a compiled version of Spark on each node of the cluster. If you encounter problems, see its [official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
 
 
 #### Download and install
@@ -127,14 +124,14 @@ You can download [Apache Spark](https://spark.apache.org/downloads.html)
 
 For the Standalone mode without Hadoop support, use Spark 2.1.x and any version of Pre-build with Apache Hadoop 2.x with Hadoop dependencies. If you need to use the Hadoop cluster, please choose the corresponding Hadoop version. You can also choose to build from the [source code](https://spark.apache.org/docs/2.1.0/building-spark.html) to match the previous version of the official Hadoop 2.6. Please note that the TiDB Connector for Spark currently only supports Spark 2.1.x version.
  
-Suppose you already have a Spark binaries, and the current PATH is `SPARKPATH`, please copy the TiDB Connector for Spark jar package to the `$ {SPARKPATH} / jars` directory.
+Suppose you already have a Spark binaries, and the current PATH is `SPARKPATH`, please copy the TiDB Connector for Spark jar package to the `${SPARKPATH}/jars` directory.
 
 #### Starting a Master node
 
 Execute the following command on the selected Spark Master node:
  
-```
-cd $ SPARKPATH
+```sh
+cd $SPARKPATH
 
 ./sbin/start-master.sh  
 ```
@@ -146,8 +143,8 @@ After the above step is completed, a log file will be printed on the screen. Che
 
 Similarly, you can start a Spark-Slave node with the following command:
 
-```
-./sbin/start-slave.sh spark: // spark-master-hostname: 7077
+```sh
+./sbin/start-slave.sh spark://spark-master-hostname:7077
 ```
 
 After the command returns, you can see if the Slave node is joined to the Spark cluster correctly from the panel as well. Repeat the above command at all Slave nodes. After all Slaves are connected to the master, you have a Standalone mode Spark cluster.
@@ -157,17 +154,17 @@ After the command returns, you can see if the Slave node is joined to the Spark 
 If you want to use JDBC server and interactive SQL shell, please copy `start-tithriftserver.sh stop-tithriftserver.sh` to your Spark's sbin folder and `tispark-sql` to the bin folder. 
 
 To start interactive shell:
-```
+```sh
 ./bin/tispark-sql
 ```
 
 To use Thrift Server, you can start it similar way as default Spark Thrift Server:
-```
+```sh
 ./sbin/start-tithriftserver.sh
 ```
 
 And stop it like below:
-```
+```sh
 ./sbin/stop-tithriftserver.sh
 ```
 
@@ -179,16 +176,16 @@ Assuming you have successfully started the TiDB Connector for Spark cluster as d
 
 In the Spark-Shell, enter the following command, assuming that your PD node is located at `192.168.1.100`, port `2379`:
 
-```
+```sh
 import org.apache.spark.sql.TiContext
-val ti = new TiContext (spark, List ("192.168.1.100:2379")
+val ti = new TiContext(spark, List("192.168.1.100:2379")
 ti.tidbMapDatabase ("tpch")
 
 ```
 After that you can call Spark SQL directly:
 
-```
-spark.sql ("select count (*) from lineitem")
+```sh
+spark.sql("select count(*)from lineitem").show
 ```
 
 The result is:
@@ -203,7 +200,7 @@ The result is:
  
 TiSpark's SQL Interactive shell is almost the same as the spark-SQL shell.
 
-```
+```sh
 tispark-sql> use tpch;
 Time taken: 0.015 seconds
 
@@ -215,7 +212,7 @@ Time taken: 0.673 seconds, Fetched 1 row(s)
 For JDBC connection with Thrift Server, you can try it with various JDBC supported tools including SQuirreLSQL and hive-beeline.
 For example, to use it with beeline:
 
-```
+```sh
 ./beeline
 Beeline version 1.2.2 by Apache Hive
 beeline> !connect jdbc:hive2://localhost:10000
