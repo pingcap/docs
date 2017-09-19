@@ -43,7 +43,7 @@ Now, if you want to query all the users living in Beijing, what should you do? I
 SELECT id, name FROM person WHERE JSON_EXTRACT(address_info, '$.city') = 'Beijing');
 ```
 
-`JSON_EXTRACT` is a function that TiDB supports. If you are familiar with JSON in MySQL 5.7, you must know it. The `JSON_EXTRACT` function in TiDB behaves the same as in MySQL. The meaning of the above function is to extract the `city` field from the `address_info` document. The second argument is a "path expression" and is used to specify which field to extract. The complete syntax description of the path expression is complex. Here is a few simple examples to help you understand its general use:
+`JSON_EXTRACT` is a function that TiDB supports. If you are familiar with JSON in MySQL 5.7, you must know it. The `JSON_EXTRACT` function in TiDB behaves the same as in MySQL. The meaning of the above function is to extract the `city` field from the `address_info` document. The second argument is a "path expression" and is used to specify which field to extract. The complete syntax description of the path expression is complex. Here are a few simple examples to help you understand its general use:
 
 ```sql
 SET @person = '{"name":"John","friends":[{"name":"Forest","age":16},{"name":"Zhang San","gender":"male"}]}';
@@ -54,7 +54,7 @@ SELECT JSON_EXTRACT(@person,  '$.friends[1].gender'); -- gets "male"
 SELECT JSON_EXTRACT(@person,  '$.friends[2].name'); -- gets NULL
 ``` 
 
-In addition to inserting and querying data, TiDB also support editing JSON. In general, TiDB currently support the following JSON functions in MySQL 5.7:
+In addition to inserting and querying data, TiDB also support editing JSON. In general, TiDB currently supports the following JSON functions in MySQL 5.7:
 
 - [JSON_EXTRACT](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract)
 - [JSON_ARRAY](https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-array)
@@ -114,4 +114,4 @@ The current limitations of JSON and generated column are as follows:
 - You cannot add the generated column in the storage type of `STORED` through `ALTER TABLE`.
 - You cannot create an index on the generated column through `ALTER TABLE`. 
 
-The above functions and some other JSON functions are in development.
+The above functions and some other JSON functions are under development.
