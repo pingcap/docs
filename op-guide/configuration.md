@@ -105,7 +105,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 + The path to an SSL key file in PEM format to use for establishing a secure connection, namely the private key of the certificate you specified by `--ssl-cert`.
 + default: ""
-+ Currently TiDB does not support keys which is protected by a passphrase.
++ Currently TiDB does not support keys protected by a passphrase.
 
 ### --ssl-ca
 
