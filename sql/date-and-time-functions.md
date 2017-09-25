@@ -1,6 +1,6 @@
 # Date and Time Functions
 
-This section describes the functions that can be used to manipulate temporal values. See [“Date and Time Types”](link to tide url), for a description of the range of values each date and time type has and the valid formats in which values may be specified.
+This section describes the functions that can be used to manipulate temporal values. See ["Date and Time Types"](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html), for a description of the range of values each date and time type has and the valid formats in which values may be specified.
 
 **Date/Time Functions**
 
