@@ -2,8 +2,8 @@
 
 - [Operator Precedence](#operator-precedence)
 - [Comparison Functions and Operators](#comparison-functions-and-operators)
-- [Logical Operators](#comparison-functions-and-operators)
-- [Assignment Operators](#comparison-functions-and-operators)
+- [Logical Operators](#logical-operators)
+- [Assignment Operators](#assignment-operators)
 
 | Name | Description |
 | ---------------------------------------- | ---------------------------------------- |
@@ -27,8 +27,8 @@
 | [`IS NOT`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is-not) | Test a value against a boolean |
 | [`IS NOT NULL`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is-not-null) | NOT NULL value test |
 | [`IS NULL`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is-null) | NULL value test |
-| [`->`](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-column-path) | Return value from JSON column after evaluating path; equivalent to JSON_EXTRACT(). |
-| [`->>`](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-inline-path) | Return value from JSON column after evaluating path and unquoting the result; equivalent to JSON_UNQUOTE(JSON_EXTRACT()). |
+| [`->`](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-column-path) | Return value from JSON column after evaluating path; equivalent to `JSON_EXTRACT()` |
+| [`->>`](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-inline-path) | Return value from JSON column after evaluating path and unquoting the result; equivalent to `JSON_UNQUOTE(JSON_EXTRACT())` |
 | [`<<`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_left-shift) | Left shift |
 | [`<`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_less-than) | Less than operator |
 | [`<=`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_less-than-or-equal) | Less than or equal operator |
