@@ -12,8 +12,8 @@ For bit functions and operators, TiDB behaves similarly as MySQL. See [Bit Funct
 | Name | Description |
 | :------| :------------- |
 | [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#function_bit-count) | Return the number of bits that are set as 1 |
-| [&](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-and) | Bitwise AND |
-| [~](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-invert) | Bitwise inversion |
+| [`&`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-and) | Bitwise AND |
+| [`~`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-invert) | Bitwise inversion |
 | [`\|`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-or) | Bitwise OR |
 | [`^`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-xor) | Bitwise XOR |
 | [`<<`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_left-shift) | Left shift |
