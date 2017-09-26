@@ -8,7 +8,7 @@
 | Name | Description |
 | ---------------------------------------- | ---------------------------------------- |
 | [`AND`, `&&`](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_and) | Logical AND |
-| [`=`](https://dev.mysql.com/doc/refman/5.7/en/assignment-operators.html#operator_assign-equal) | Assign a value (as part of a [`SET`](https://dev.mysql.com/doc/refman/5.7/en/set-variable.html) statement, or as part of the `SET` clause in an[`UPDATE`](https://dev.mysql.com/doc/refman/5.7/en/update.html) statement) |
+| [`=`](https://dev.mysql.com/doc/refman/5.7/en/assignment-operators.html#operator_assign-equal) | Assign a value (as part of a [`SET`](https://dev.mysql.com/doc/refman/5.7/en/set-variable.html) statement, or as part of the `SET` clause in an [`UPDATE`](https://dev.mysql.com/doc/refman/5.7/en/update.html) statement) |
 | [`:=`](https://dev.mysql.com/doc/refman/5.7/en/assignment-operators.html#operator_assign-value) | Assign a value |
 | [`BETWEEN ... AND ...`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_between) | Check whether a value is within a range of values |
 | [`BINARY`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#operator_binary) | Cast a string to a binary string |
