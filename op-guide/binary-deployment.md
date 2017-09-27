@@ -7,9 +7,9 @@ category: deployment
 
 ## Overview
 
-A complete TiDB cluster contains PD, TiKV and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
+A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
-Before your start, see [TiDB Architecture](../README.md#TiDB-Architecture) and [Software and Hardware Requirements](recommendation.md).
+Before you start, see [TiDB Architecture](../README.md#TiDB-Architecture) and [Software and Hardware Requirements](recommendation.md).
 
 This document describes the binary deployment of three scenarios:
 
@@ -125,7 +125,7 @@ The key's randomart image is:
 
 ## Download the Official Binary Package
 
-TiDB provides the official binary installation package that supports Linux. For operating system, it is recommended to use Redhat 7+, CentOS 7+ and higher versions, and not use the Redhat 6 or CentOS 6 version.
+TiDB provides the official binary installation package that supports Linux. For the operating system, it is recommended to use Redhat 7.3+, CentOS 7.3+ and higher versions.
 
 ### Operating System: Linux (Redhat 7+, CentOS 7+)
 
@@ -237,7 +237,7 @@ Follow the steps below to start PD, TiKV and TiDB:
 
 ## Multiple Nodes Cluster Deployment
 
-For production environment, multiple nodes cluster deployment is recommended. Before you begin, see [Software and Hardware Requirements](recommendation.md).
+For the production environment, multiple nodes cluster deployment is recommended. Before you begin, see [Software and Hardware Requirements](recommendation.md).
 
 Assuming that you have six nodes, you can deploy 3 PD instances, 3 TiKV instances, and 1 TiDB instance. See the following table for details:
 
@@ -250,9 +250,9 @@ Assuming that you have six nodes, you can deploy 3 PD instances, 3 TiKV instance
 | Node5 | 192.168.199.117| TiKV2 |
 | Node6 | 192.168.199.118| TiKV3 |
 
-Follow the steps below to start PD, TiKV and TiDB:
+Follow the steps below to start PD, TiKV, and TiDB:
 
-1. Start PD on Node1, Node2 and Node3 in sequence.
+1. Start PD on Node1, Node2, and Node3 in sequence.
     
     ```bash
     ./bin/pd-server --name=pd1 \
