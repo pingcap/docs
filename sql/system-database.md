@@ -28,7 +28,7 @@ Currently, the `help_topic` is NULL.
 
 ## GC Worker System Tables
 
-- `gc_delete_range`
+- `gc_delete_range`: to record the data to be deleted
 
 ## Miscellaneous System Tables
 
