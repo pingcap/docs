@@ -7,7 +7,7 @@ category: deployment
 
 ## Overview
 
-A complete TiDB cluster contains PD, TiKV and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To close the database service, follow the reverse order of start-up.
+A complete TiDB cluster contains PD, TiKV and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
 Before your start, see [TiDB Architecture](../README.md#TiDB-Architecture) and [Software and Hardware Requirements](recommendation.md).
 
@@ -19,7 +19,7 @@ This document describes the binary deployment of three scenarios:
 
 ## TiDB Components and Default Ports
 
-### 1. TiDB Database Components (Required)
+### TiDB Database Components (Required)
 
 | Component | Default Port | Protocol | Description | 
 | :-- | :-- | :-- | :----------- |
@@ -30,9 +30,9 @@ This document describes the binary deployment of three scenarios:
 | PD | 2379 | TCP | the communication port between TiDB and PD | 
 | PD | 2380 | TCP | the inter-node communication port within the PD cluster |
 
-### 2. TiDB Database Components (Optional)
+### TiDB Database Components (Optional)
 
-| Component | Default port | Protocol | Description | 
+| Component | Default Port | Protocol | Description | 
 | :-- | :-- | :-- | :------------------------ |
 | Prometheus |  9090| TCP | the communication port for the Prometheus service | 
 | Pushgateway |  9091 | TCP | the aggregation and report port for TiDB, TiKV, and PD monitor |
