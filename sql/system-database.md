@@ -3,11 +3,13 @@ title: The TiDB System Database
 category: user guide
 ---
 
-The TiDB System Database is similar to MySQL, which contains tables that store information required by the server as it runs.
+# The TiDB System Database
+
+The TiDB System Database is similar to MySQL, which contains tables that store information required by the server when it runs.
 
 ### Grant System Tables
 
-These system tables contain grant information about user accounts and the privileges held by them:
+These system tables contain grant information about user accounts and their privileges:
 
 - `user`: user accounts, global privileges, and other non-privilege columns
 - `db`: database-level privileges
@@ -20,9 +22,9 @@ Currently, the `help_topic` is NULL.
 
 ### Statistics System Tables
 
-- `stats_buckets`: the buckets of statistics information
-- `stats_histograms`: the histograms of statistics information
-- `stats_meta`: the meta information of tables, such as the total number of rows and modifications
+- `stats_buckets`: the buckets of statistics
+- `stats_histograms`: the histograms of statistics
+- `stats_meta`: the meta information of tables, such as the total number of rows and updated rows
 
 ### GC Worker System Tables
 
@@ -30,5 +32,5 @@ Currently, the `help_topic` is NULL.
 
 ### Miscellaneous System Tables
 
-- `GLOBAL_VARIABLES`: global system variable tables
+- `GLOBAL_VARIABLES`: global system variable table
 - `tidb`: to record the version information when TiDB executes `bootstrap`
