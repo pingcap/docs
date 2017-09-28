@@ -12,7 +12,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 + TiDB Server Administration
     - The TiDB Server
     - The TiDB Data Directory
-    - The TiDB System Database
+    - [The TiDB System Database](system-database.md)
     - [The Proprietary System Variables and Syntax in TiDB](tidb-specific.md)
     - TiDB Server Logs
 + Security
@@ -20,6 +20,8 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
     - TiDB User Account Management
     - Using Secure Connections
 + Optimization
+    - Understand the Query Execution Plan
+    - [Introduction to Statistics](statistics.md)
 + Language Structure
     - Literal Values
     - Schema Object Names
@@ -52,7 +54,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
     - [Cast Functions and Operators](cast-functions-and-operators.md)
     - Bit Functions and Operators
     - [Encryption and Compression Functions](encryption-and-compression-functions.md)
-    - Information Functions
+    - [Information Functions](information-functions.md)
     - JSON Functions
     - Functions Used with Global Transaction IDs
     - [Aggregate (GROUP BY) Functions](aggregate-group-by-functions.md)

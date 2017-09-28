@@ -5,16 +5,14 @@
 + [About TiDB](overview.md)
   - [TiDB Introduction](overview.md#tidb-introduction)
   - [TiDB Architecture](overview.md#tidb-architecture)
-+ Quick Start
-  + [TiDB Quick Start Guide](./QUICKSTART.md)
-    - [About TiDB](./QUICKSTART.md#about-tidb)
-    - [About this guide](./QUICKSTART.md#about-this-guide)
-    - [Deploy a TiDB cluster](./QUICKSTART.md#deploy-a-tidb-cluster)
-    - [Try TiDB](./QUICKSTART.md#try-tidb)
-    - [Monitoring a TiDB cluster](./QUICKSTART.md#monitoring-a-tidb-cluster)
-    - [Scale the TiDB cluster](./QUICKSTART.md#scale-the-tidb-cluster)
-    - [Destroy the cluster](./QUICKSTART.md#destroy-the-cluster)
-- [TiDB Connector for Spark User Guide](https://github.com/pingcap/tispark/blob/master/docs/userguide.md)
++ [TiDB Quick Start Guide](./QUICKSTART.md)
+  - [About TiDB](./QUICKSTART.md#about-tidb)
+  - [About This Guide](./QUICKSTART.md#about-this-guide)
+  - [Deploy a TiDB Cluster](./QUICKSTART.md#deploy-a-tidb-cluster)
+  - [Try TiDB](./QUICKSTART.md#try-tidb)
+  - [Monitor the TiDB Cluster](./QUICKSTART.md#monitoring-a-tidb-cluster)
+  - [Scale the TiDB Cluster](./QUICKSTART.md#scale-the-tidb-cluster)
+  - [Destroy the TiDB Cluster](./QUICKSTART.md#destroy-the-cluster)
 + Operations Guide
   - [Hardware and Software Requirements](op-guide/recommendation.md)
   + Deploy
@@ -23,19 +21,21 @@
     - [Cross-Region Deployment](op-guide/location-awareness.md)
   + Configure
     - [Configuration Flags](op-guide/configuration.md)
-    - [PD Command-Line Tools](op-guide/pd-control.md)
   + Monitor
     - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
-    - [Monitoring a TiDB Cluster](op-guide/monitoring-tidb.md)
+    - [Key Metrics](op-guide/dashboard-overview-info.md)
+    - [Monitor a TiDB Cluster](op-guide/monitoring-tidb.md)
   - [Scale](op-guide/horizontal-scale.md)
   - [Upgrade](op-guide/ansible-deployment.md#perform-rolling-update)
-  - [Performance Tuning](op-guide/tune-TiKV.md)
-  + Backup and Restore
-    - [Reading Data from History Versions](op-guide/history-read.md) 
-  - [Import and Export](op-guide/migration.md)
+  + Performance Tuning
+    - [Performance Tuning for TiKV](op-guide/tune-TiKV.md)
+  + Backup and Migrate
+    - [Backup and Restore](op-guide/backup-restore.md)
+    + [Migrate Data from MySQL to TiDB](op-guide/migration.md)
+      - [Migrate All the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
+      - [Migrate the Data Incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
   + Manual operations 
-    - [Deploy Using the Binary](op-guide/binary-deployment.md)
-    - [Troubleshoot](./trouble-shooting.md)
+    - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
 + User Guide
   + TiDB Server Administration
     - [The Proprietary System Variables and Syntax in TiDB](sql/tidb-specific.md)
@@ -52,10 +52,19 @@
     - [Miscellaneous Functions](sql/miscellaneous-functions.md)
   - [TiDB SQL Grammar](sql/README.md)
   - [Compatibility with MySQL](sql/mysql-compatibility.md)
++ Advanced Usage
+  - [Read Data From History Versions](op-guide/history-read.md) 
 + Tools
   - [Syncer User Guide](./tools/syncer.md)
   - [Loader User Guide](./tools/loader.md)
   - [TiDB-Binlog User Guide](./tools/tidb-binlog.md)
+  - [PD Command-Line Tools](op-guide/pd-control.md)
++ The TiDB Connector for Spark
+  - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
+  - [User Guide](tispark/tispark-user-guide.md)
+- [Frequently Asked Questions (FAQ)](./FAQ.md)
+- [Troubleshoot](./trouble-shooting.md)
+- [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 + Releases
   - [Pre-GA](release/prega.md)
   - [RC4](release/rc4.md)
@@ -66,7 +75,6 @@
   - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
   - [PingCAP Blog](https://pingcap.github.io/blog/)
   - [Weekly Update](http://weekly.pingcap.com/)
-- [Frequently Asked Questions (FAQ)](./FAQ.md)
 
 ## TiDB Introduction
 
@@ -100,7 +108,7 @@ Power TiDB with your most favorite engines. TiDB supports many popular storage e
 
 To better understand TiDB’s features, you need to understand the TiDB architecture.
 
-![image alt text](media/tidb-architecture.png)
+![TiDB Architecture](media/tidb-architecture.png)
 
 The TiDB cluster has three components: the TiDB Server, the PD Server,  and the TiKV server.
 

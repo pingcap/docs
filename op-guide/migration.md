@@ -1,6 +1,6 @@
 ---
 title: Migrating Data from MySQL to TiDB
-category: advanced
+category: deployment
 ---
 
 # Migrating Data from MySQL to TiDB
@@ -45,7 +45,7 @@ Before using the `syncer` tool, make sure:
     ```
 
 
-## Step 1. Using the `checker` tool to check the Schema
+## 1. Using the `checker` tool to check the Schema
 
 Before migrating, you can use the `checker` tool in TiDB to check if TiDB supports the table schema of the data to be migrated. If the `checker` fails to check a certain table schema, it means that the table is not currently supported by TiDB and therefore the data in the table cannot be migrated.
 
@@ -143,11 +143,11 @@ cd tidb-enterprise-tools-latest-linux-amd64
     ```
 
 
-## Step 2. Using the `mydumper` / `loader` tool to export and import all the data
+## 2. Using the `mydumper` / `loader` tool to export and import all the data
 
 You can use `mydumper` to export data from MySQL and `loader` to import the data into TiDB.
 
-**Note:** Although TiDB also supports the official `mysqldump` tool from MySQL for data migration, it is not recommended to use the `mysqldump` tool. Its performance is much lower than `mydumper` / `loader` and it costs a lot of time to migrate large amounts of data. `mydumper`/`loader` is a more powerful tool to migrate data. For more information, see [https://github.com/maxbube/mydumper](https://github.com/maxbube/mydumper).
+> **Note:** Although TiDB also supports the official `mysqldump` tool from MySQL for data migration, it is not recommended to use it. Its performance is much lower than `mydumper` / `loader` and it takes much time to migrate large amounts of data. `mydumper`/`loader` is more powerful. For more information, see [https://github.com/maxbube/mydumper](https://github.com/maxbube/mydumper).
 
 
 ### 1. Exporting data from MySQL
@@ -171,7 +171,7 @@ On the Cloud platforms which require the `super privilege`, such as on the Aliyu
 ### 2. Importing data to TiDB
 
 
-Use the `loader` tool to import the data from MySQL to TiDB. See [Loader instructions](./tools/loader.md) for more information.
+Use `loader` to import the data from MySQL to TiDB. See [Loader instructions](./tools/loader.md) for more information.
 
 ```bash
 ./bin/loader -h 127.0.0.1 -u root -P 4000 -t 32 -d ./var/test
@@ -212,10 +212,10 @@ mysql> select * from t2;
 ### 3. Best practice
 To migrate data quickly, especially for huge amount of data, you can refer to the following recommendations.
 
-- Make the exported data file as small as possible and it is recommended not to exceed 64M. You can use the -F parameter to set the value.
-- The -t parameter can be evaluated according to the number and the load of TiKV instances. For example, if there are three TiKV instances, -t can be set to 3 * (1 ~ n). If the load of TiKV is too high and the log `backoffer.maxSleep 15000ms is exceeded` appears many times, it's better to decrease -t; otherwise increase it.
+- Keep the exported data file as small as possible and it is recommended keep it within 64M. You can use the `-F` parameter to set the value.
+- You can adjust the `-t` parameter of `loader` based on the number and the load of TiKV instances. For example, if there are three TiKV instances, `-t` can be set to 3 * (1 ~ n). If the load of TiKV is too high and the log `backoffer.maxSleep 15000ms is exceeded` is displayed many times, decrease the value of `-t`; otherwise, increase it.
 
-### A sample, and the configuration
+### A sample and the configuration
 
  - The total size of the exported files is 214G. A single table has 8 columns and 2 billion rows.
  - The cluster topology:
@@ -227,12 +227,12 @@ To migrate data quickly, especially for huge amount of data, you can refer to th
     - 48 vCPU [2 x 12 physical cores]
     - Memory: 128G
     - Disk: sda [raid 10, 300G] sdb[RAID 5, 2T]
-    - OS: CentOS 7.2
- - the F parameter of mydumper is set to 16 and the -t parameter of loader is set to 64.
+    - Operating System: CentOS 7.3
+ - The `-F` parameter of `mydumper` is set to 16 and the `-t` parameter of `loader` is set to 64.
 
-**Results**: It takes 11 hours to import all the data, which is 19.4G per hour.
+**Results**: It takes 11 hours to import all the data, which is 19.4G/hour.
 
-## Step 3. (Optional) Using the `syncer` tool to import data incrementally
+## 3. (Optional) Using the `syncer` tool to import data incrementally
 
 The previous section introduces how to import all the history data from MySQL to TiDB using `mydumper`/`loader`. But this is not applicable if the data in MySQL is updated after the migration and it is expected to import the updated data quickly.
 

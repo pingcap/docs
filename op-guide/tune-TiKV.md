@@ -1,9 +1,10 @@
 ---
 title: TiKV Performance Tuning
-category: advanced
+category: tuning
 ---
 
-# TiKV Performance Tuning
+# Performance Tuning for TiKV
+
 This document describes how to tune the TiKV parameters for optimal performance.
 
 TiKV uses RocksDB for persistent storage at the bottom level of the TiKV architecture. Therefore, many of the performance parameters are related to RocksDB.
