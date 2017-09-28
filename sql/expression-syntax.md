@@ -5,7 +5,7 @@ category: user guide
 
 # Expression Syntax
 
-The following rules define the expression syntax in TiDB. You can find the definition in `parser/parser.y`. The syntax parsing in TiDB is based on yacc.
+The following rules define the expression syntax in TiDB. You can find the definition in `parser/parser.y`. The syntax parsing in TiDB is based on Yacc.
 
 ```
 Expression:
