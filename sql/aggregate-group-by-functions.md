@@ -89,4 +89,4 @@ group by id, val;
 
 ## Detection of Functional Dependence
 
-TiDB does not support sql mode `ONLY_FULL_GROUP_BY` and detection of functional dependence, we'll do it in the future, for more information see [#4248](https://github.com/pingcap/tidb/issues/4248).
+TiDB does not support SQL mode `ONLY_FULL_GROUP_BY` and detection of functional dependence. We'll do it in the future. For more information, see [#4248](https://github.com/pingcap/tidb/issues/4248).
