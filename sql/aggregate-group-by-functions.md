@@ -24,7 +24,7 @@ This section describes the supported MySQL group (aggregate) functions in TiDB.
 
 ## GROUP BY Modifiers
 
-TiDB dose not support any `GROUP BY` modifiers currently, we'll do it in the future, for more information, see [#4250](https://github.com/pingcap/tidb/issues/4250).
+TiDB dose not support any `GROUP BY` modifiers currently. We'll do it in the future. For more information, see [#4250](https://github.com/pingcap/tidb/issues/4250).
 
 ## <span id="tidb-handling-of-group-by">TiDB Handling of GROUP BY</span>
 
