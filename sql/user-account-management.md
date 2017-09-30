@@ -7,17 +7,17 @@ category: user guide
 
 ## User Names and Passwords
 
-TiDB stores user accounts in the table of the `mysql.user` system database. Each account is identified by a user name and the client host. Each account has a password.
+TiDB stores the user accounts in the table of the `mysql.user` system database. Each account is identified by a user name and the client host. Each account may have a password.
 
-Connect to the TiDB server using the MySQL client, and use the specified account and password to login:
+You can connect to the TiDB server using the MySQL client, and use the specified account and password to login:
 
-```
+```sql
 shell> mysql --port 4000 --user xxx --password
 ```
 
 Or use the abbreviation of command line parameters:
    
-```
+```sql
 shell> mysql -P 4000 -u xxx -p
 ```
 
@@ -28,11 +28,11 @@ You can create TiDB accounts in two ways:
 - By using the standard account-management SQL statements intended for creating accounts and establishing their privileges, such as `CREATE USER` and `GRANT`. 
 - By manipulating the grant tables directly with statements such as `INSERT`, `UPDATE`, or `DELETE`. 
 
-It is recommended to use the account-management statements, because manipulating the grant tables directly can lead to incomplete updates. Another option for creating accounts is to use the GUI tool.
+It is recommended to use the account-management statements, because manipulating the grant tables directly can lead to incomplete updates. You can also create accounts by using third party GUI tools.
 
 The following example uses the `CREATE USER` and `GRANT` statements to set up four accounts: 
 
-```
+```sql
 mysql> CREATE USER 'finley'@'localhost' IDENTIFIED BY 'some_pass';
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'finley'@'localhost' WITH GRANT OPTION;
 mysql> CREATE USER 'finley'@'%' IDENTIFIED BY 'some_pass';
@@ -44,7 +44,7 @@ mysql> CREATE USER 'dummy'@'localhost';
 
 To see the privileges for an account, use `SHOW GRANTS`:
 
-```
+```sql
 mysql> SHOW GRANTS FOR 'admin'@'localhost';
 +-----------------------------------------------------+
 | Grants for admin@localhost                          |
@@ -55,15 +55,15 @@ mysql> SHOW GRANTS FOR 'admin'@'localhost';
 
 ## Remove User Accounts
 
-To remove an user account, use the `DROP USER` statement:
+To remove a user account, use the `DROP USER` statement:
 
-```
+```sql
 mysql> DROP USER 'jeffrey'@'localhost';
 ```
 
 ## Reserved User Accounts
 
-TiDB creates a `'root'@'%'` default account during the database initialization. 
+TiDB creates the `'root'@'%'` default account during the database initialization. 
 
 ## Set Account Resource Limits
 
