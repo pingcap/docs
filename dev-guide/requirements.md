@@ -13,7 +13,7 @@ The following table lists TiDB support for common architectures and operating sy
 ## Prerequisites
 
 + Go [1.5+](https://golang.org/doc/install)
-+ Rust [nightly version](https://www.rust-lang.org/downloads.html)
++ Rust [nightly version](https://github.com/pingcap/docs/blob/qqsun8819/docs/dev-guide/rust-install.md)
 + GCC 4.8+ with static library
 
 The [check requirement script](../scripts/check_requirement.sh) can help you check prerequisites and 
