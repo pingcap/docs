@@ -17,7 +17,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
     - TiDB Server Logs
 + Security
     - [The TiDB Access Privilege System](privilege.md)
-    - TiDB User Account Management
+    - [TiDB User Account Management](user-account-management.md)
     - Using Secure Connections
 + Optimization
     - Understand the Query Execution Plan
@@ -27,7 +27,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
     - Schema Object Names
     - Keywords and Reserved words
     - User-Defined Variables
-    - Expression Syntax
+    - [Expression Syntax](expression-syntax.md)
     - [Comment Syntax](comment-syntax.md)
 + Globalization
     - Character Set Support
@@ -63,7 +63,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 + SQL Statement Syntax
     - Data Definition Statements
     - Data Manipulation Statements
-    - Transactions
+    - [Transactions](transaction.md)
     - Replication Statements
     - Prepared SQL Statement Syntax
     - Compound-Statement Syntax
