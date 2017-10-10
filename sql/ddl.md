@@ -169,7 +169,7 @@ The `CREATE TABLE` statement is used to create a table. Currently, it does not s
 - The `[ASC | DESC]` in `index_col_name` is currently only supported in syntax.
 - The `index_type` is currently only supported in syntax.
 - The `KEY_BLOCK_SIZE` in `index_option` is currently only supported in syntax.
-- The `table_option` currently only supports `AUTO_INCREMENT`, `COMMENT` and `CHARACTER SET`, while the others are only supported in syntax. The clauses are separated by a comma `,`. See the following table for details:
+- The `table_option` currently only supports `AUTO_INCREMENT`, `CHARACTER SET` and `COMMENT`, while the others are only supported in syntax. The clauses are separated by a comma `,`. See the following table for details:
   
     | Parameters | Description | Example |
     | ---------- | ---------- | ------- |
