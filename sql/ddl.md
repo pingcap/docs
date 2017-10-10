@@ -32,7 +32,7 @@ The `CREATE DATABASE` statement is used to create a database, and to specify the
 
 If you create an existing database and does not specify the use of `IF NOT EXISTS`, it reports an error.
 
-The `create_specification` option is used to specify the specific `CHARACTER` and `COLLATE` in the database. Currently the option is only supported in syntax.
+The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently the option is only supported in syntax.
 
 ## DROP DATABASE Syntax
 
@@ -163,7 +163,7 @@ table_option:
 The `CREATE TABLE` statement is used to create a table. Currently, it does not support temporary tables, `CHECK` constraints, and importing data from other tables while creating tables. It supports some `Partition_options` in syntax but not complete.
 
 - When you create an existing table, if you use `IF NOT EXIST`, it does not report an error. Otherwise, it reports an error.
-- Use `LIKE` to create an empty table based on the definition of the table, which includes the column and index properties.
+- Use `LIKE` to create an empty table based on the definition of another table, which includes the column and index properties.
 - The `FULLTEXT` and `FOREIGN KEY` in `create_definition` are currently only supported in syntax.
 - For the `data_type`, see [Data Types](datatype.md).
 - The `[ASC | DESC]` in `index_col_name` is currently only supported in syntax.
@@ -171,11 +171,11 @@ The `CREATE TABLE` statement is used to create a table. Currently, it does not s
 - The `KEY_BLOCK_SIZE` in `index_option` is currently only supported in syntax.
 - The `table_option` currently only supports `AUTO_INCREMENT`, `COMMENT` and `CHARACTER SET`, while the others are only supported in syntax. The clauses are separated by a comma `,`. See the following table for details:
   
-  | Parameters | Description | Example |
-  | ---------- | ---------- | ------- |
-  | `AUTO_INCREMENT` | The initial value of the increment field | `AUTO_INCREMENT` = 5 |
-  | `CHARACTER SET` | To specify the string code for the table; currently only supports UTF8MB4 | `CHARACTER SET` =  'utf8mb4' |
-  | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
+    | Parameters | Description | Example |
+    | ---------- | ---------- | ------- |
+    | `AUTO_INCREMENT` | The initial value of the increment field | `AUTO_INCREMENT` = 5 |
+    | `CHARACTER SET` | To specify the string code for the table; currently only support UTF8MB4 | `CHARACTER SET` =  'utf8mb4' |
+    | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
   
 ### AUTO_INCREMENT Description
 
