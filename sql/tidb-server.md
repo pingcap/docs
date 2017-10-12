@@ -29,7 +29,7 @@ When you use the local storage engine, the data is stored on the local hard disk
 
 When you use the TiKV storage engine, the data is stored on the TiKV node and the directory location is controlled by the [`data-dir`](https://github.com/pingcap/docs-cn/blob/master/op-guide/configuration.md#--data-dir-1) parameter.
 
-## TiDB Server Log File
+## TiDB Server Logs
 
 The three components of the TiDB cluster (`tidb-server`, ` tikv-server` and `pd-server`) outputs the logs to standard errors by default. In each of the three components, you can set the [`--log-file`](https://github.com/pingcap/docs-cn/blob/master/op-guide/configuration.md#--log-file) parameter (or the configuration item in the configuration file) and output the log into a file.
 
