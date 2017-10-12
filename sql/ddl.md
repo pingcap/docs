@@ -28,11 +28,11 @@ create_specification:
   | [DEFAULT] COLLATE [=] collation_name
 ```
 
-The `CREATE DATABASE` statement is used to create a database, and to specify the default properties of the database, such as the default character set and validation rules. The `CREATE SCHEMA` statement behaves the same as the `CREATE DATABASE` statement.
+The `CREATE DATABASE` statement is used to create a database, and to specify the default properties of the database, such as the default character set and validation rules. `CREATE SCHEMA` is a synonym for `CREATE DATABASE`.
 
-If you create an existing database and does not specify the use of `IF NOT EXISTS`, it reports an error.
+If you create an existing database and does not specify `IF NOT EXISTS`, an error is displayed.
 
-The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently the option is only supported in syntax.
+The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently, the option is only supported in syntax.
 
 ## DROP DATABASE Syntax
 
@@ -42,7 +42,7 @@ DROP {DATABASE | SCHEMA} [IF EXISTS] db_name
 
 The `DROP DATABASE` statement is used to delete the specified database and its tables.
 
-The `IF EXISTS` statement is used to prevent an error when the database does not exist.
+The `IF EXISTS` statement is used to prevent an error if the database does not exist.
 
 ## CREATE TABLE Syntax
 
@@ -160,10 +160,10 @@ table_option:
   | STATS_PERSISTENT [=] {DEFAULT|0|1}
 ```
 
-The `CREATE TABLE` statement is used to create a table. Currently, it does not support temporary tables, `CHECK` constraints, and importing data from other tables while creating tables. It supports some `Partition_options` in syntax but not complete.
+The `CREATE TABLE` statement is used to create a table. Currently, it does not support temporary tables, `CHECK` constraints, or importing data from other tables while creating tables. It supports some of the `Partition_options` in syntax.
 
-- When you create an existing table, if you use `IF NOT EXIST`, it does not report an error. Otherwise, it reports an error.
-- Use `LIKE` to create an empty table based on the definition of another table, which includes the column and index properties.
+- When you create an existing table and if you specify `IF NOT EXIST`, it does not report an error. Otherwise, it reports an error.
+- Use `LIKE` to create an empty table based on the definition of another table including its column and index properties.
 - The `FULLTEXT` and `FOREIGN KEY` in `create_definition` are currently only supported in syntax.
 - For the `data_type`, see [Data Types](datatype.md).
 - The `[ASC | DESC]` in `index_col_name` is currently only supported in syntax.
@@ -179,7 +179,7 @@ The `CREATE TABLE` statement is used to create a table. Currently, it does not s
   
 ### AUTO_INCREMENT Description
 
-The TiDB automatic increment ID (`AUTO_INCREMENT` ID) only guarantees automatic increment and uniqueness, and does not guarantees continuous allocation. Currently, TiDB adopts bulk allocation. If you insert data into multiple TiDB servers at the same time, the allocated automatic increment ID is not continuous.
+The TiDB automatic increment ID (`AUTO_INCREMENT` ID) only guarantees automatic increment and uniqueness and does not guarantee continuous allocation. Currently, TiDB adopts bulk allocation. If you insert data into multiple TiDB servers at the same time, the allocated automatic increment ID is not continuous.
 
 You can specify the `AUTO_INCREMENT` for integer fields. A table only supports one field with the `AUTO_INCREMENT` property.
 
@@ -192,7 +192,7 @@ DROP TABLE [IF EXISTS]
 
 You can delete multiple tables at the same time. The tables are separated by a comma `,`.
 
-When you delete a table that does not exist, and does not specify the use of `IF EXISTS`, it will report an error.
+If you delete a table that does not exist and does not specify the use of `IF EXISTS`, an error is displayed.
 
 ## TRUNCATE TABLE Syntax
 
@@ -200,11 +200,11 @@ When you delete a table that does not exist, and does not specify the use of `IF
 TRUNCATE [TABLE] tbl_name
 ```
 
-The `TRUNCATE TABLE` statement is used to clear all the data in the specified table, while the table structure persists.
+The `TRUNCATE TABLE` statement is used to clear all the data in the specified table but keeps the table structure.
 
-This operation is similar to deleting the full table data of a specified table, but it is much faster and is not affected by the number of rows in the table.
+This operation is similar to deleting all the data of a specified table, but it is much faster and is not affected by the number of rows in the table.
 
-> **Note**: If you use the `TRUNCATE TABLE` statement, the value of `AUTO_INCREMENT` in the original table will not be logged and will be recounted.
+> **Note**: If you use the `TRUNCATE TABLE` statement, the value of `AUTO_INCREMENT` in the original table is reset to its starting value.
 
 ## RENAME TABLE Syntax
 
@@ -215,7 +215,7 @@ RENAME TABLE
 
 The `RENAME TABLE` statement is used to rename a table. 
 
-This table is equivalent to the following `ALTER TABLE` statement:
+This statement is equivalent to the following `ALTER TABLE` statement:
 
 ```sql
 ALTER TABLE old_table RENAME new_table;
@@ -291,23 +291,23 @@ table_option:
 
 The `ALTER TABLE` statement is used to update the structure of an existing table, such as updating the table or table properties, adding or deleting columns, creating or deleting indexes, updating columns or column properties. The descriptions of several field types are as follows:
 
-- For `index_col_name`, `index_type` and `index_option`, see [CREATE INDEX Syntax](#create-index-syntax).
+- For `index_col_name`, `index_type`, and `index_option`, see [CREATE INDEX Syntax](#create-index-syntax).
 - Currently, the `table_option` is only supported in syntax.
 
 The support for specific operation types is as follows:
 
-- `ADD/DROP INDEX/COLUMN`: currently does not support the creation or deletion of multiple indexes or columns at the same time
+- `ADD/DROP INDEX/COLUMN`: currently, does not support the creation or deletion of multiple indexes or columns at the same time
 - `ADD/DROP PRIMARY KEY`: currently not supported
 - `DROP COLUMN`: currently does not support the deletion of columns that are primary key columns or index columns
-- `ADD COLUMN`: currently does not support setting the newly added column as the primary key or unique index at the same time, and does not support setting the column property to `AUTO_INCREMENT`
-- `CHANGE/MODIFY COLUMN`: currently supports some of the syntax, and the details are as follows:
-  - In updating types, the `CHANGE/MODIFY COLUMN` only supports updates between integer types, updates between string types, and updates between Blob types. You can only extend the length of the original type. Besides, the column properties of `unsigned`/`charset`/`collate` cannot be changed. The specific supported types are classified as follows:
+- `ADD COLUMN`: currently, does not support setting the newly added column as the primary key or unique index at the same time, and does not support setting the column property to `AUTO_INCREMENT`
+- `CHANGE/MODIFY COLUMN`: currently supports some of the syntaxes, and the details are as follows:
+  - In updating data types, the `CHANGE/MODIFY COLUMN` only supports updates between integer types, updates between string types, and updates between Blob types. You can only extend the length of the original type. Besides, the column properties of `unsigned`/`charset`/`collate` cannot be changed. The specific supported types are classified as follows:
       - Integer types: `TinyInt`, `SmallInt`, `MediumInt`, `Int`, `BigInt`
       - String types: `Char`, `Varchar`, `Text`, `TinyText`, `MediumText`, `LongText`
       - Blob types: `Blob`, `TinyBlob`, `MediumBlob`, `LongBlob`
   - In updating type definition, the `CHANGE/MODIFY COLUMN` supports `default value`, `comment`, `null`, `not null` and `OnUpdate`, but does not support the update from `null` to `not null`.
   - The `CHANGE/MODIFY COLUMN` does not support the update of `enum` type column.
-- `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: currently only supported in syntax    
+- `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: is currently only supported in syntax    
 
 ## CREATE INDEX Syntax
 
@@ -331,11 +331,11 @@ index_type:
 
 The `CREATE INDEX` statement is used to create the index for an existing table. In function, `CREATE INDEX` corresponds to the index creation of `ALTER TABLE`. Similar to MySQL, the `CREATE INDEX` cannot create a primary key index.
 
-### Difference with MySQL
+### Difference from MySQL
 
 - The `CREATE INDEX` supports the `UNIQUE` index and does not support `FULLTEXT` and `SPATIAL` indexes.
-- The `index_col_name` supports the length option with a maximum length limit of 3072 bytes. The length limit does not change depending on the storage engine and character set used when building the table. This is because TiDB does not use storage engines like InnoDB and MyISAM, and only provides syntax compatibility with MySQL for the storage engine options when creating tables. Similarly, TiDB uses the utf8mb4 character set, and only provides syntax compatibility with MySQL for the character set options when creating tables. For more information, see [Compatibility with MySQL](mysql-compatibility.md).
-- The `index_col_name` supports the index sorting options of `ASC` and `DESC`. The behavior of sorting options is similar to MySQL, and only syntax parsing is supported. All the internal indexes are arranged in positive order. For more information, see [CREATE INDEX Syntax](https://dev.mysql.com/doc/refman/5.7/en/create-index.html).
+- The `index_col_name` supports the length option with a maximum length limit of 3072 bytes. The length limit does not change depending on the storage engine, and character set used when building the table. This is because TiDB does not use storage engines like InnoDB and MyISAM, and only provides syntax compatibility with MySQL for the storage engine options when creating tables. Similarly, TiDB uses the utf8mb4 character set, and only provides syntax compatibility with MySQL for the character set options when creating tables. For more information, see [Compatibility with MySQL](mysql-compatibility.md).
+- The `index_col_name` supports the index sorting options of `ASC` and `DESC`. The behavior of sorting options is similar to MySQL, and only syntax parsing is supported. All the internal indexes are stored in ascending order ascending order. For more information, see [CREATE INDEX Syntax](https://dev.mysql.com/doc/refman/5.7/en/create-index.html).
 - The `index_option` supports `KEY_BLOCK_SIZE`, `index_type` and `COMMENT`. The `COMMENT` supports a maximum of 1024 characters and does not support the `WITH PARSER` option.
 - The `index_type` supports `BTREE` and `HASH` only in MySQL syntax, which means the index type is independent of the storage engine option in the creating table statement. For example, in MySQL, when you use `CREATE INDEX` on a table using InnoDB, it only supports the `BTREE` index, while TiDB supports both `BTREE` and `HASH` indexes.   
 - The `CREATE INDEX` does not support the `algorithm_option` and `lock_option` in MySQL.
