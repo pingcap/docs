@@ -119,7 +119,7 @@ SSL: Cipher in use is ECDHE-RSA-AES128-GCM-SHA256
 ...
 ```
 
-## Supported TLS Versions, Key Exchange Protocols and Encryption Algorithms
+## Supported TLS Versions, Key Exchange Protocols, and Encryption Algorithms
 
 The TLS versions, key exchange protocols and encryption algorithms supported by TiDB are determined by the official Golang libraries.
 
