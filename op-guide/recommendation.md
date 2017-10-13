@@ -1,6 +1,6 @@
 ---
 title: Software and Hardware Requirements
-category: deployment
+category: operations
 ---
 
 # Software and Hardware Requirements
