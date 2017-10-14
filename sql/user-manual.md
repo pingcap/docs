@@ -73,7 +73,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 - [Data Definition Statements](ddl.md)
 - Data Manipulation Statements
 - [Transactions](transaction.md)
-- Database Administration Statements
+- [Database Administration Statements](admin.md)
 - Prepared SQL Statement Syntax
 - Utility Statements
 - [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/)
