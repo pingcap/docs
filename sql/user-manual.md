@@ -42,23 +42,24 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 
 ## Data Types
 
-- Numeric Types
-- Date and Time Types
-- String Types
-- Extensions for Spatial Data
-- The JSON Data Type
-- Data Type Default Values
+- [Numeric Types](datatype.md#numeric-types)
+- [Date and Time Types](datatype.md#date-and-time-types)
+- [String Types](datatype.md#string-types)
+- [JSON Types](datatype.md#json-types)
+- [The ENUM data type](datatype.md#the-enum-data-type)
+- [The SET Type](datatype.md#the-set-type)
+- [Data Type Default Values](datatype.md#data-type-default-values)
 
 ## Functions and Operators
 
-- Function and Operator Reference
+- [Function and Operator Reference](functions-and-operators-reference.md)
 - [Type Conversion in Expression Evaluation](type-conversion-in-expression-evaluation.md)
 - [Operators](operators.md)
 - [Control Flow Functions](control-flow-functions.md)
 - [String Functions](string-functions.md)
 - [Numeric Functions and Operators](numeric-functions-and-operators.md)
-- Date and Time Functions
-- Bit Functions and Operators
+- [Date and Time Functions](date-and-time-functions.md)
+- [Bit Functions and Operators](bit-functions-and-operators.md)
 - [Cast Functions and Operators](cast-functions-and-operators.md)
 - [Encryption and Compression Functions](encryption-and-compression-functions.md)
 - [Information Functions](information-functions.md)
@@ -73,9 +74,10 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 - [Data Definition Statements](ddl.md)
 - Data Manipulation Statements
 - [Transactions](transaction.md)
-- Database Administration Statements
-- Prepared SQL Statement Syntax
-- Utility Statements
+
+- [Database Administration Statements](admin.md)
+- [Prepared SQL Statement Syntax](prepare.md)
+- [Utility Statements](util.md)
 - [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/)
 
 ## JSON Functions and Generated Column
