@@ -13,7 +13,7 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 - [The TiDB Command Options](server-command-option.md)
 - [The TiDB Data Directory](tidb-server.md#tidb-data-directory)
 - [The TiDB System Database](system-database.md)
-- The TiDB System Variables
+- [The TiDB System Variables](variable.md)
 - [The Proprietary System Variables and Syntax in TiDB](tidb-specific.md)
 - [The TiDB Server Logs](tidb-server.md#tidb-server-logs)
 - [The TiDB Access Privilege System](privilege.md)
@@ -28,9 +28,9 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 ## Language Structure
 
 - [Literal Values](literal-values.md)
-- Schema Object Names
+- [Schema Object Names](schema-object-names.md)
 - [Keywords and Reserved Words](keywords-and-reserved-words.md)
-- User-Defined Variables
+- [User-Defined Variables](user-defined-variables.md)
 - [Expression Syntax](expression-syntax.md)
 - [Comment Syntax](comment-syntax.md)
 
