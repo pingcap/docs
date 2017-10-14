@@ -36,9 +36,9 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 
 ## Globalization
 
-- Character Set Support
-- Character Set Configuration
-- Time Zone
+- [Character Set Support](character-set-support.md)
+- [Character Set Configuration](character-set-configuration.md)
+- [Time Zone](time-zone.md)
 
 ## Data Types
 
