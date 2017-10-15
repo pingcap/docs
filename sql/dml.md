@@ -133,13 +133,13 @@ You can use the following ways to specify the data set:
         b int,
         c int
     );
-    INSERT INTO tbl\_name SELECT * from tbl\_name1;
+    INSERT INTO tbl_name SELECT * from tbl_name1;
     ```
     In the example above, the data is selected from `tal_name1`, and then inserted into `tbl_name`.
 
 ## DELETE
 
-`DELETE` is a DML statement that removes rows from a table. TiDB is compatible with all the `DELETE` syntaxes of MySQL except for `PARTITION`. There are two kinds of `DELETE`, [`Single-Table DELETE`] (#single-table-delete-syntax) and [`Multiple-Table DELETE`](#multiple-table-delete-syntax).
+`DELETE` is a DML statement that removes rows from a table. TiDB is compatible with all the `DELETE` syntaxes of MySQL except for `PARTITION`. There are two kinds of `DELETE`, [`Single-Table DELETE`](#single-table-delete-syntax) and [`Multiple-Table DELETE`](#multiple-table-delete-syntax).
 
 ### Single-Table DELETE Syntax
 
