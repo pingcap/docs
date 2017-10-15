@@ -133,6 +133,7 @@ You can use the following ways to specify the data set:
         b int,
         c int
     );
+
     INSERT INTO tbl_name SELECT * from tbl_name1;
     ```
     In the example above, the data is selected from `tal_name1`, and then inserted into `tbl_name`.
