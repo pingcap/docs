@@ -67,12 +67,12 @@ TiDB supports the SQL-92 standard and is compatible with MySQL. To help you easi
 - Functions Used with Global Transaction IDs [TBD]
 - [Aggregate (GROUP BY) Functions](aggregate-group-by-functions.md)
 - [Miscellaneous Functions](miscellaneous-functions.md)
-- Precision Math
+- [Precision Math](precision-math.md)
 
 ## SQL Statement Syntax
 
 - [Data Definition Statements](ddl.md)
-- Data Manipulation Statements
+- [Data Manipulation Statements](dml.md)
 - [Transactions](transaction.md)
 
 - [Database Administration Statements](admin.md)
