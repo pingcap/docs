@@ -30,7 +30,7 @@ SELECT
   [FOR UPDATE | LOCK IN SHARE MODE]]
 ```
  
-###	The Description of the Syntax Elements 
+### The Description of the Syntax Elements 
 
 |Syntax Element|Description|
 | --------------------- | -------------------------------------------------- |
@@ -77,7 +77,7 @@ assignment_list:
   assignment [, assignment] ...
 ```
 
-###	The Description of the Syntax Elements
+### The Description of the Syntax Elements
 
 | Syntax Elements | Description |
 | -------------- | --------------------------------------------------------- |
@@ -145,7 +145,7 @@ You can use the following ways to specify the data set:
 
 The `Single_Table DELETE` Syntax deletes rows from a single table. 
 
-#### DELETE Syntax
+###  DELETE Syntax
 
 ```sql
 DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name
@@ -192,7 +192,7 @@ Both of the two syntax formats can be used to delete multiple tables, or delete 
 
 There are two kinds of `UPDATE` syntax, [Single-table UPDATE](#single-table-update) and [Multi-Table UPDATE](#multi-table-update).
 
-#### Single-table UPDATE
+###  Single-table UPDATE
 ```sql
 UPDATE [LOW_PRIORITY] [IGNORE] table_reference
   SET assignment_list
@@ -208,7 +208,7 @@ assignment_list:
 ```
 For the single-table syntax, the `UPDATE` statement updates columns of existing rows in the named table with new values. The `SET assignment_list` clause indicates which columns to modify and the values they should be given. The `WHERE/Orderby/Limit` clause, if given, specifies the conditions that identify which rows to update.
 
-#### Multi-Table UPDATE
+###  Multi-Table UPDATE
 
 ```sql
 UPDATE [LOW_PRIORITY] [IGNORE] table_references
@@ -253,7 +253,7 @@ REPLACE [LOW_PRIORITY | DELAYED]
   SELECT ...
 ```
 
-###	The Description of the Syntax Elements
+### The Description of the Syntax Elements
 
 |Syntax Element|Description|
 | -------------- | --------------------------------------------------------- |
