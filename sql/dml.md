@@ -54,27 +54,27 @@ SELECT
 ### Syntax
 
 ```sql
-InsertStatement:
-INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]
-  [INTO] tbl_name
-  insert_values
-  [ON DUPLICATE KEY UPDATE assignment_list]
+  Insert Statement:
+  INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]
+    [INTO] tbl_name
+    insert_values
+    [ON DUPLICATE KEY UPDATE assignment_list]
 
-insert_values:
-  [(col_name [, col_name] ...)]
-  {VALUES | VALUE} (expr_list) [, (expr_list)] ...
-|   SET assignment_list
-|   [(col_name [, col_name] ...)]
-  SELECT ...
+  insert_values:
+    [(col_name [, col_name] ...)]
+    {VALUES | VALUE} (expr_list) [, (expr_list)] ...
+|     SET assignment_list
+|     [(col_name [, col_name] ...)]
+    SELECT ...
 
-expr_list:
-  expr [, expr] ...
+  expr_list:
+    expr [, expr] ...
 
-assignment:
-  col_name = expr
+  assignment:
+    col_name = expr
 
-assignment_list:
-  assignment [, assignment] ...
+  assignment_list:
+    assignment [, assignment] ...
 ```
 
 ### The Description of the Syntax Elements
@@ -94,6 +94,7 @@ assignment_list:
 You can use the following ways to specify the data set:
 
 - Value List
+
   Place the values to be inserted in a Value List.
 
   ```sql
@@ -193,6 +194,7 @@ Both of the two syntax formats can be used to delete multiple tables, or delete 
 There are two kinds of `UPDATE` syntax, [Single-table UPDATE](#single-table-update) and [Multi-Table UPDATE](#multi-table-update).
 
 ###  Single-table UPDATE
+
 ```sql
 UPDATE [LOW_PRIORITY] [IGNORE] table_reference
   SET assignment_list
@@ -206,6 +208,7 @@ assignment:
 assignment_list:
   assignment [, assignment] ...
 ```
+
 For the single-table syntax, the `UPDATE` statement updates columns of existing rows in the named table with new values. The `SET assignment_list` clause indicates which columns to modify and the values they should be given. The `WHERE/Orderby/Limit` clause, if given, specifies the conditions that identify which rows to update.
 
 ###  Multi-Table UPDATE
