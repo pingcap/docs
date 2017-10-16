@@ -15,19 +15,19 @@ Data manipulation language (DML) is a family of syntax elements used for selecti
 
 ```sql
 SELECT
-    [ALL | DISTINCT | DISTINCTROW ]
-      [HIGH_PRIORITY]
-      [SQL_CACHE | SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]
-    select_expr [, select_expr ...]
-    [FROM table_references
-    [WHERE where_condition]
-    [GROUP BY {col_name | expr | position}
-      [ASC | DESC], ...]
-    [HAVING where_condition]
-    [ORDER BY {col_name | expr | position}
-      [ASC | DESC], ...]
-    [LIMIT {[offset,] row_count | row_count OFFSET offset}]
-    [FOR UPDATE | LOCK IN SHARE MODE]]
+  [ALL | DISTINCT | DISTINCTROW ]
+    [HIGH_PRIORITY]
+    [SQL_CACHE | SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]
+  select_expr [, select_expr ...]
+  [FROM table_references
+  [WHERE where_condition]
+  [GROUP BY {col_name | expr | position}
+    [ASC | DESC], ...]
+  [HAVING where_condition]
+  [ORDER BY {col_name | expr | position}
+    [ASC | DESC], ...]
+  [LIMIT {[offset,] row_count | row_count OFFSET offset}]
+  [FOR UPDATE | LOCK IN SHARE MODE]]
 ```
  
 ###	The Description of the Syntax Elements 
@@ -56,25 +56,25 @@ SELECT
 ```sql
 InsertStatement:
 INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]
-    [INTO] tbl_name
-    insert_values
-    [ON DUPLICATE KEY UPDATE assignment_list]
+  [INTO] tbl_name
+  insert_values
+  [ON DUPLICATE KEY UPDATE assignment_list]
 
 insert_values:
-    [(col_name [, col_name] ...)]
-    {VALUES | VALUE} (expr_list) [, (expr_list)] ...
+  [(col_name [, col_name] ...)]
+  {VALUES | VALUE} (expr_list) [, (expr_list)] ...
 |   SET assignment_list
 |   [(col_name [, col_name] ...)]
-    SELECT ...
+  SELECT ...
 
 expr_list:
-    expr [, expr] ...
+  expr [, expr] ...
 
 assignment:
-    col_name = expr
+  col_name = expr
 
 assignment_list:
-    assignment [, assignment] ...
+  assignment [, assignment] ...
 ```
 
 ###	The Description of the Syntax Elements
@@ -94,48 +94,48 @@ assignment_list:
 You can use the following ways to specify the data set:
 
 - Value List
-    Place the values to be inserted in a Value List.
+  Place the values to be inserted in a Value List.
 
-    ```sql
-    CREATE TABLE tbl_name (
-        a int,
-        b int,
-        c int
-    );
-    INSERT INTO tbl_name VALUES(1,2,3),(4,5,6),(7,8,9);
-    ```
-        
-    In the example above, `(1,2,3),(4,5,6),(7,8,9)` are the Value Lists enclosed within parentheses and separated by commas. Each Values List means a row of data, in this example, 3 rows are inserted. You can also specify the `ColumnName List` to insert rows to some of the columns. 
-    and contains exactly as many values as are to be inserted per row.  
-
-    ```sql
-    INSERT INTO tbl_name (a,c) VALUES(1,2),(4,5),(7,8);
-    ```
+  ```sql
+  CREATE TABLE tbl_name (
+    a int,
+    b int,
+    c int
+  );
+  INSERT INTO tbl_name VALUES(1,2,3),(4,5,6),(7,8,9);
+  ```
     
-    In the example above, only the `a` and `c` columns are listed, the the `b` of each row will be set to `Null`.
+  In the example above, `(1,2,3),(4,5,6),(7,8,9)` are the Value Lists enclosed within parentheses and separated by commas. Each Values List means a row of data, in this example, 3 rows are inserted. You can also specify the `ColumnName List` to insert rows to some of the columns. 
+  and contains exactly as many values as are to be inserted per row.  
+
+  ```sql
+  INSERT INTO tbl_name (a,c) VALUES(1,2),(4,5),(7,8);
+  ```
+  
+  In the example above, only the `a` and `c` columns are listed, the the `b` of each row will be set to `Null`.
 
 - Assignment List
 
-    Insert the values by using Assignment Statements,for example:
+  Insert the values by using Assignment Statements,for example:
 
-    ```sql
-    INSERT INTO tbl_name a=1, b=2, c=3;
-    ```
+  ```sql
+  INSERT INTO tbl_name a=1, b=2, c=3;
+  ```
 
-    In this way, only one row of data can be inserted at a time, and the value of each column needs the assignment statement.
+  In this way, only one row of data can be inserted at a time, and the value of each column needs the assignment statement.
 
 - Select Statement
 
-    The data set to be inserted is obtained using a `SELECT` statement. The column to be inserted into is obtained from the Schema in the `SELECT` statement.
-    ```sql
-    CREATE TABLE tbl_name1 (
-        a int,
-        b int,
-        c int
-    );
-    INSERT INTO tbl\_name SELECT * from tbl\_name1;
-    ```
-    In the example above, the data is selected from `tal_name1`, and then inserted into `tbl_name`.
+  The data set to be inserted is obtained using a `SELECT` statement. The column to be inserted into is obtained from the Schema in the `SELECT` statement.
+  ```sql
+  CREATE TABLE tbl_name1 (
+    a int,
+    b int,
+    c int
+  );
+  INSERT INTO tbl\_name SELECT * from tbl\_name1;
+  ```
+  In the example above, the data is selected from `tal_name1`, and then inserted into `tbl_name`.
 
 ## DELETE
 
@@ -149,9 +149,9 @@ The `Single_Table DELETE` Syntax deletes rows from a single table.
 
 ```sql
 DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name
-    [WHERE where_condition]
-    [ORDER BY ...]
-    [LIMIT row_count]
+  [WHERE where_condition]
+  [ORDER BY ...]
+  [LIMIT row_count]
 ```
 
 ### Multiple-Table DELETE Syntax
@@ -160,14 +160,14 @@ The `Multiple_Table DELETE` Syntax deletes rows of multiple tables, and has the 
 
 ```sql
 DELETE [LOW_PRIORITY] [QUICK] [IGNORE]
-    tbl_name[.*] [, tbl_name[.*]] ...
-    FROM table_references
-    [WHERE where_condition]
+  tbl_name[.*] [, tbl_name[.*]] ...
+  FROM table_references
+  [WHERE where_condition]
 
 DELETE [LOW_PRIORITY] [QUICK] [IGNORE]
-    FROM tbl_name[.*] [, tbl_name[.*]] ...
-    USING table_references
-    [WHERE where_condition]
+  FROM tbl_name[.*] [, tbl_name[.*]] ...
+  USING table_references
+  [WHERE where_condition]
 ```
 
 Both of the two syntax formats can be used to delete multiple tables, or delete the selected results from multiple tables. There are still differences between the two formats. The first one will delete data of every table in the table list before `FROM`. The second one will delete the data of the tables in the table list which is after `FROM` and before `USING`.
@@ -195,16 +195,16 @@ There are two kinds of `UPDATE` syntax, [Single-table UPDATE](#single-table-upda
 #### Single-table UPDATE
 ```sql
 UPDATE [LOW_PRIORITY] [IGNORE] table_reference
-    SET assignment_list
-    [WHERE where_condition]
-    [ORDER BY ...]
-    [LIMIT row_count]
+  SET assignment_list
+  [WHERE where_condition]
+  [ORDER BY ...]
+  [LIMIT row_count]
 
 assignment:
-    col_name = value
+  col_name = value
 
 assignment_list:
-    assignment [, assignment] ...
+  assignment [, assignment] ...
 ```
 For the single-table syntax, the `UPDATE` statement updates columns of existing rows in the named table with new values. The `SET assignment_list` clause indicates which columns to modify and the values they should be given. The `WHERE/Orderby/Limit` clause, if given, specifies the conditions that identify which rows to update.
 
@@ -212,8 +212,8 @@ For the single-table syntax, the `UPDATE` statement updates columns of existing 
 
 ```sql
 UPDATE [LOW_PRIORITY] [IGNORE] table_references
-    SET assignment_list
-    [WHERE where_condition]
+  SET assignment_list
+  [WHERE where_condition]
 ```
 
 For the multiple-table syntax, `UPDATE` updates rows in each table named in `table_references` that satisfy the conditions. 
@@ -239,18 +239,18 @@ For the multiple-table syntax, `UPDATE` updates rows in each table named in `tab
 
 ```sql
 REPLACE [LOW_PRIORITY | DELAYED]
-    [INTO] tbl_name
-    [(col_name [, col_name] ...)]
-    {VALUES | VALUE} (value_list) [, (value_list)] ...
+  [INTO] tbl_name
+  [(col_name [, col_name] ...)]
+  {VALUES | VALUE} (value_list) [, (value_list)] ...
 
 REPLACE [LOW_PRIORITY | DELAYED]
-    [INTO] tbl_name
-    SET assignment_list
+  [INTO] tbl_name
+  SET assignment_list
 
 REPLACE [LOW_PRIORITY | DELAYED]
-    [INTO] tbl_name
-    [(col_name [, col_name] ...)]
-    SELECT ...
+  [INTO] tbl_name
+  [(col_name [, col_name] ...)]
+  SELECT ...
 ```
 
 ###	The Description of the Syntax Elements
