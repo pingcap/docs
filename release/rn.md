@@ -5,6 +5,7 @@ category: release
 
 # TiDB Release Notes
   
+  - [1.0](release/ga.md)
   - [Pre-GA](release/prega.md)
   - [RC4](release/rc4.md)
   - [RC3](release/rc3.md)
