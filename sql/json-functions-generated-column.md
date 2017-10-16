@@ -1,9 +1,9 @@
 ---
-title: JSON Functions and Generated Column
+title: Using TiDB as a Document Store
 category: user guide
 ---
 
-# JSON Functions and Generated Column
+# Using TiDB as a Document Store
 
 ## About
 
