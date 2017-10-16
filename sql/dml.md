@@ -218,7 +218,7 @@ UPDATE [LOW_PRIORITY] [IGNORE] table_references
 
 For the multiple-table syntax, `UPDATE` updates rows in each table named in `table_references` that satisfy the conditions. 
 
-###	The Description of the Syntax Elements
+### The Description of the Syntax Elements
 
 | Syntax Elements | Description |
 | -------------- | --------------------------------------------------------- |
