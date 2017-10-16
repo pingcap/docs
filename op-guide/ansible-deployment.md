@@ -87,8 +87,8 @@ For more information, see [Ansible Documentation](http://docs.ansible.com/ansibl
 
 
 ## 3. Download TiDB-Ansible to the Control Machine
-Use the following command to download the TiDB-Ansible release-1.0 branch from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible).
-The default folder name is `tidb-ansible`. The `tidb-ansible` directory contains all the files you need to get started with TiDB-Ansible.
+Use the following command to download the TiDB-Ansible `release-1.0` branch from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible).
+The default folder name is `tidb-ansible`. The `tidb-ansible` directory contains all files you need to get started with TiDB-Ansible.
 
 ```
 git clone -b release-1.0 https://github.com/pingcap/tidb-ansible.git
