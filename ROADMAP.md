@@ -24,7 +24,6 @@ This document defines the roadmap for TiDB development.
 - [ ] Reverse Index
 - [ ] Cluster Index
 - [ ] Improve DDL
-- [ ] Foreign Key in the Restrict mode
 - [ ] Support `utf8_general_ci` collation
 
 ## TiKV:
