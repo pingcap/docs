@@ -21,7 +21,7 @@ This document defines the roadmap for TiDB development.
 - [ ] Common Table Expression
 - [ ] Table Partition
 - [ ] Hash time index to reslove the issue with hot regions
-- [ ] Reversted Index
+- [ ] Reverse Index
 - [ ] Cluster Index
 - [ ] Improve DDL
 - [ ] Foreign Key in the Restrict mode
