@@ -77,7 +77,7 @@ Power TiDB with your most favorite engines. TiDB supports local storage engines 
 
 ## Roadmap
 
-Read the [Roadmap](https://github.com/pingcap/docs).
+Read the [Roadmap](https://github.com/pingcap/docs/blob/master/ROADMAP.md).
 
 ## TiDB Architecture
 
