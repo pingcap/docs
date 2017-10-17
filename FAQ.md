@@ -472,11 +472,11 @@ You can `kill` DML statements. First use `show processlist` to find the id corre
 
 But currently, you cannot `kill` DDL statements. Once you start executing DDL statements, you cannot stop them unless something goes wrong. If something goes wrong, the DDL statements will stop executing.
 
-#### What is the function of supervise/svc/svcstat service?
+#### What is the function of supervise/svc/svstat service?
 
 - supervise: the daemon process, to manage the processes 
 - svc: to start and stop the service
-- svcstat: to check the process status
+- svstat: to check the process status
 
 ## SQL
 
