@@ -40,6 +40,7 @@ category: faq
         - [Where is the Raft log stored in TiDB?](#where-is-the-raft-log-stored-in-tidb)
         - [Why it is very slow to execute DDL statements sometimes?](#why-it-is-very-slow-to-execute-ddl-statements-sometimes)
         - [ERROR 2013 (HY000): Lost connection to MySQL server during query.](#error-2013-hy000-lost-connection-to-mysql-server-during-query)
+        - [Can I use S3 as the backend storage in TiDB?](#can-i-use-s3-as-the-backend-storage-in-tidb)
     - [TiKV](#tikv)
         - [What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?](#what-is-the-recommended-number-of-replicas-in-the-tikv-cluster-is-it-better-to-keep-the-minimum-number-for-high-availability)
         - [Can TiKV specify a standalone replica machine (to separate cluster data and replicas)?](#can-tikv-specify-a-standalone-replica-machine-to-separate-cluster-data-and-replicas)
@@ -47,6 +48,8 @@ category: faq
         - [The `cluster ID mismatch` message is displayed when starting TiKV.](#the-cluster-id-mismatch-message-is-displayed-when-starting-tikv)
         - [The `duplicated store address` message is displayed when starting TiKV.](#the-duplicated-store-address-message-is-displayed-when-starting-tikv)
         - [Would the key be too long according to the TiDB setting?](#would-the-key-be-too-long-according-to-the-tidb-setting)
+        - [TiKV master and slave use the same compression algorithm, why the results are different?](#tikv-master-and-slave-use-the-same-compression-algorithm-why-the-results-are-different)
+        - [What are the features of TiKV block cache?](#what-are-the-features-of-tikv-block-cache)
     - [TiSpark](#tispark)
         - [Where is the user guide of TiSpark?](#where-is-the-user-guide-of-tispark)
         - [TiSpark Cases](#tispark-cases)
@@ -59,8 +62,10 @@ category: faq
         - [How does TiDB scale?](#how-does-tidb-scale)
     - [Monitor](#monitor)
         - [The monitor can't show all the metrics.](#the-monitor-cant-show-all-the-metrics)
+        - [How to configure to monitor Syncer status?](#how-to-configure-to-monitor-syncer-status)
     - [Migrate](#migrate)
         - [Can a MySQL application be migrated to TiDB?](#can-a-mysql-application-be-migrated-to-tidb)
+        - [Accidentally import the MySQL user table into TiDB and cannot login, how to restore?](#accidentally-import-the-mysql-user-table-into-tidb-and-cannot-login-how-to-restore)
     - [Performance tuning](#performance-tuning)
     - [Backup and restore](#backup-and-restore)
     - [Misc](#misc)
@@ -68,12 +73,15 @@ category: faq
         - [Where are the TiDB/PD/TiKV logs?](#where-are-the-tidbpdtikv-logs)
         - [How to safely stop TiDB?](#how-to-safely-stop-tidb)
         - [Can `kill` be executed in TiDB?](#can-kill-be-executed-in-tidb)
+        - [What is the function of supervise/svc/svcstat service?](#what-is-the-function-of-supervisesvcsvcstat-service)
 - [SQL](#sql)
     - [SQL syntax](#sql-syntax)
         - [The error message `transaction too large` is displayed.](#the-error-message-transaction-too-large-is-displayed)
         - [Check the running DDL job](#check-the-running-ddl-job)
+        - [The `column Show_db_priv not found` message is displayed when executing `grant SHOW DATABASES on db.*`.](#the-column-show_db_priv-not-found-message-is-displayed-when-executing-grant-show-databases-on-db)
     - [SQL optimization](#sql-optimization)
         - [How to optimize `select count(1)`?](#how-to-optimize-select-count1)
+        - [The efficiency of `FROM_UNIXTIME` is low.](#the-efficiency-of-from_unixtime-is-low)
 
 ## Product
 
@@ -236,7 +244,19 @@ Troubleshooting methods:
 
 - Check whether `panic` exists in the log.
 - Check whether `oom` exists in `dmesg` using the `dmesg |grep -i oom` command.
-- A long time of not accessing can also lead to this error, usually caused by the tcp timeout. If not used for a long time, the tcp is killed by the operating system.  
+- A long time of not accessing can also lead to this error, usually caused by the tcp timeout. If not used for a long time, the tcp is killed by the operating system. 
+
+#### Can I use S3 as the backend storage in TiDB?
+
+No. Currently, TiDB only supports the distributed storage engine and the Goleveldb/Rocksdb/Boltdb engine.
+
+Does TiDB support the following DDL?
+
+```
+`CREATE TABLE ... LOCATION "s3://xxx/yyy"`
+```
+
+If you can implement the S3 storage engine client, it should be based on the TiKV interface.
 
 ### TiKV
 
@@ -267,6 +287,19 @@ To solve this problem, use the [store delete](https://github.com/pingcap/pd/tree
 #### Would the key be too long according to the TiDB setting?
 
 The RocksDB compresses the key.
+
+#### TiKV master and slave use the same compression algorithm, why the results are different?
+
+Currently, some files of TiKV master have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data fluctuates occasionally. The underlying storage engine adjusts data as needed.
+
+#### What are the features of TiKV block cache?
+
+TiKV has the Column Falimies feature of RocksDB. By default, the KV data is eventually stored in the 3 CFs (default, write and lock) within RocksDB.
+
+- The default CF stores real data and the corresponding parameter is in [rocksdb.defaultcf]. The write CF stores the data version information (MVCC) and index-related data, and the corresponding parameter is in `[rocksdb.writecf]`. The lock CF stores the lock information and the system uses the default parameter.
+- The Raft RocksDB instance stores Raft logs. The default CF mainly stores Raft logs and the corresponding parameter is in `[raftdb.defaultcf]`.
+- Each CF has an individual block-cache to cache data blocks and improve RocksDB read speed. The size of block-cache is controlled by the `block-cache-size` parameter. A larger value of the parameter means more hot data can be cached and is more favorable to read operation. At the same time, it consumes more system memory.
+- Each CF has an individual write-buffer and the size is controlled by the `write-buffer-size` parameter.
 
 ### TiSpark
 
@@ -335,11 +368,63 @@ The monitoring machine is recommended to use standalone deployment. It is recomm
 
 Check the time difference between the machine time of the monitor and the time within the cluster. If it is large, you can correct the time and the monitor will display all the metrics.
 
+#### How to configure to monitor Syncer status?
+
+Download [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana, modify the Prometheus configuration file, add the following:
+
+```
+- job_name: ‘syncer_ops’ // task name
+    static_configs:
+      - targets: [’10.10.1.1:10096’] // Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
+```
+
+Restart Prometheus. 
+
 ### Migrate
 
 #### Can a MySQL application be migrated to TiDB?
 
 Yes. Your applications can be migrated to TiDB without changing a single line of code in most cases. You can use [checker](https://github.com/pingcap/tidb-tools/tree/master/checker) to check whether the Schema in MySQL is compatible with TiDB.
+
+#### Accidentally import the MySQL user table into TiDB and cannot login, how to restore?
+
+Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Login the cluster and rebuild using the following SQL statements:
+
+```sql
+DROP TABLE IF EXIST mysql.user;
+
+CREATE TABLE if not exists mysql.user (
+    Host        CHAR(64),
+    User        CHAR(16),
+    Password      CHAR(41),
+    Select_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Insert_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Update_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Delete_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Drop_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Process_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Grant_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    References_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Alter_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Show_db_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Super_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_tmp_table_priv   ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Lock_tables_priv    ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Execute_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_view_priv    ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Show_view_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_routine_priv   ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Alter_routine_priv    ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Index_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_user_priv    ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Event_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Trigger_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    PRIMARY KEY (Host, User));
+
+INSERT INTO mysql.user VALUES ("%", "root", "", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y");
+
+```
 
 ### Performance tuning
 
@@ -387,6 +472,12 @@ You can `kill` DML statements. First use `show processlist` to find the id corre
 
 But currently, you cannot `kill` DDL statements. Once you start executing DDL statements, you cannot stop them unless something goes wrong. If something goes wrong, the DDL statements will stop executing.
 
+#### What is the function of supervise/svc/svcstat service?
+
+- supervise: the daemon process, to manage the processes 
+- svc: to start and stop the service
+- svcstat: to check the process status
+
 ## SQL
 
 ### SQL syntax
@@ -417,6 +508,14 @@ admin show ddl
 
 Note: The DDL cannot be cancelled unless it goes wrong.
 
+#### The `column Show_db_priv not found` message is displayed when executing `grant SHOW DATABASES on db.*`.
+
+`SHOW DATABASES` is a global privilege rather than a database-level privilege. Therefore, you cannot grant this privilege to a database. You need to grant all databases:
+
+```
+`grant SHOW DATABASES on *.*`
+``` 
+
 ### SQL optimization
 
 #### How to optimize `select count(1)`?
@@ -429,3 +528,7 @@ Recommendations:
 2. Improve the concurrency. The default value is 10. You can improve it to 50 and have a try. But usually the improvement is 2-4 times of the default value.
 3. Test the `count` in the case of large amount of data.
 4. Optimize the TiKV configuration. See [Performance Tuning for TiKV](op-guide/tune-TiKV.md).
+
+#### The efficiency of `FROM_UNIXTIME` is low.
+
+Do not use `FROM_UNIXTIME` to get the system time. It is recommended to convert datetime to timestamp and compare. Currently, `FROM_UNIXTIME` does not support indexes. 
