@@ -31,6 +31,16 @@ However, in TiDB, the following MySQL features are not supported for the time be
 
 The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential.
 
+> **Note**:
+> 
+> When multiple TiDB servers use the auto-increment ID, do not mix the default value and the custom value, because it reports an error in the following situation:
+> 
+> In a two-TiDB cluster, create a table with auto-increment ID using the `create table t(id int unique key auto_increment, c int);` SQL statement. TiDB A caches [1,5000] auto-increment ID, while TiDB B caches [5001,10000] auto-increment ID. 
+> 
+> First, insert a statement into TiDB B from the client, with the `id` set as 1, and run the statement. Then, insert a record into TiDB A from the client, with the `id` set as the default value 1. In this case, it returns `Duplicated Error`.
+> 
+> This issue is expected to be fixed soon.
+
 ### Built-in Functions
 
 TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#FunctionCallKeyword) for the supported functions.
