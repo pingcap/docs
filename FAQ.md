@@ -38,7 +38,7 @@ category: faq
         - [How to choose the lease parameter in TiDB?](#how-to-choose-the-lease-parameter-in-tidb)
         - [Can I use other key-value storage engines with TiDB?](#can-i-use-other-key-value-storage-engines-with-tidb)
         - [Where is the Raft log stored in TiDB?](#where-is-the-raft-log-stored-in-tidb)
-        - [Why it is very slow to execute DDL statements sometimes?](#why-it-is-very-slow-to-execute-ddl-statements-sometimes)
+        - [Why it is very slow to run DDL statements sometimes?](#why-it-is-very-slow-to-run-ddl-statements-sometimes)
         - [ERROR 2013 (HY000): Lost connection to MySQL server during query.](#error-2013-hy000-lost-connection-to-mysql-server-during-query)
         - [Can I use S3 as the backend storage in TiDB?](#can-i-use-s3-as-the-backend-storage-in-tidb)
     - [TiKV](#tikv)
@@ -235,9 +235,13 @@ Yes. Besides TiKV, TiDB supports many popular standalone storage engines, such a
 
 In RocksDB.
 
-#### Why it is very slow to execute DDL statements sometimes?
+#### Why it is very slow to run DDL statements sometimes?
 
-In the TiDB cluster, the DDL statements are executed serially, not concurrently. You can use the `admin show ddl` statement to view running DDL statements and use the `admin show ddl jobs` statement to view the DDL in history and in the queue. 
+Possible reasons:
+
+- When you run multiple DDL statements together, it is slower when running the later few DDL statements. This is because the DDL statements are executed serially in the TiDB cluster.
+- After you start the cluster successfully, the first DDL operation may take a longer time to run, usually around 30s. This is because the TiDB cluster is electing the leader that processes DDL statements.
+- In rolling update or shutdown update, the processing time of DDL statements in the first ten minutes after starting TiDB is affected by the server stop sequence (stopping PD -> TiDB), and the condition where TiDB does not clean up the registration data in time because TiDB is stopped using the `kill -9` command. When you run DDL statements during this period, for the state change of each DDL, you need to wait 2 * lease (lease = 10s).
 
 #### ERROR 2013 (HY000): Lost connection to MySQL server during query.
 
