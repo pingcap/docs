@@ -61,6 +61,7 @@ category: faq
     - [Scale](#scale)
         - [How does TiDB scale?](#how-does-tidb-scale)
     - [Monitor](#monitor)
+        - [Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?](#should-i-deploy-the-tidb-monitoring-framework-prometheus--grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory)
         - [The monitor can't show all the metrics.](#the-monitor-cant-show-all-the-metrics)
         - [How to configure to monitor Syncer status?](#how-to-configure-to-monitor-syncer-status)
     - [Migrate](#migrate)
@@ -73,11 +74,11 @@ category: faq
         - [Where are the TiDB/PD/TiKV logs?](#where-are-the-tidbpdtikv-logs)
         - [How to safely stop TiDB?](#how-to-safely-stop-tidb)
         - [Can `kill` be executed in TiDB?](#can-kill-be-executed-in-tidb)
-        - [What is the function of supervise/svc/svcstat service?](#what-is-the-function-of-supervisesvcsvcstat-service)
+        - [What is the function of supervise/svc/svstat service?](#what-is-the-function-of-supervisesvcsvstat-service)
 - [SQL](#sql)
     - [SQL syntax](#sql-syntax)
         - [The error message `transaction too large` is displayed.](#the-error-message-transaction-too-large-is-displayed)
-        - [Check the running DDL job](#check-the-running-ddl-job)
+        - [View the DDL job.](#view-the-ddl-job)
         - [The `column Show_db_priv not found` message is displayed when executing `grant SHOW DATABASES on db.*`.](#the-column-show_db_priv-not-found-message-is-displayed-when-executing-grant-show-databases-on-db)
     - [SQL optimization](#sql-optimization)
         - [How to optimize `select count(1)`?](#how-to-optimize-select-count1)
@@ -360,7 +361,7 @@ You can scale TiDB as your business grows.
 
 ### Monitor
 
-Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?
+#### Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?
 
 The monitoring machine is recommended to use standalone deployment. It is recommended to use 8 core CPU, 32 GB+ memory and 500 GB+ hard disk.  
 
@@ -500,13 +501,10 @@ There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Goog
 
 3. As for `delete` and `update`, you can use `limit` plus circulation to operate.
 
-#### Check the running DDL job
+#### View the DDL job.
 
-```sql
-admin show ddl
-```
-
-Note: The DDL cannot be cancelled unless it goes wrong.
+- `admin show ddl`: to view the running DDL job
+- `admin show ddl jobs`: to view all the results in the current DDL job queue (including tasks that are running and waiting to run) and the last ten results in the completed DDL job queue
 
 #### The `column Show_db_priv not found` message is displayed when executing `grant SHOW DATABASES on db.*`.
 
