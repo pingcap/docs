@@ -38,7 +38,7 @@ Before you start, make sure that you have:
 
 2. Several managed nodes with the following requirements:
 
-    - 4 or more machines. At least 3 instances for TiKV. Don’t deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md).
+    - 4 or more machines. At least 3 instances for TiKV. Don't deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md).
 
     - Recommended Operating system:
 
@@ -322,12 +322,12 @@ It is recommended to configure load balancing to provide uniform SQL interface.
 1. Connect to the TiDB cluster using the MySQL client.
 
     ```
-    mysql -u root-h 172.16.10.1 -P 4000
+    mysql -u root -h 172.16.10.1 -P 4000
     ```
     
     > **Note**: The default port of TiDB service is 4000.
 
-2. Access the monitoring platform using a browser.
+2. Access the monitoring platform using a web browser.
 
     ```
     http://172.16.10.1:3000
