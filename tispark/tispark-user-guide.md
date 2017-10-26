@@ -37,7 +37,7 @@ For independent deployment of TiKV and the TiDB Connector for Spark, it is recom
  
 + Hardware configuration
  - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md#deployment-recommendations).
- - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G. If using Hard Disk Drive (HDD), it is recommended to use at least 8 disks.
+ - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G.
 
 + TiKV parameters (default)
 
