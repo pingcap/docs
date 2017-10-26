@@ -23,7 +23,7 @@ Before you start, make sure that you have:
 
 2. Several managed nodes with the following requirements:
 
-    - 4 or more machines. At least 3 instances for TiKV. Don’t deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md).
+    - 4 or more machines. At least 3 instances for TiKV. Don't deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md).
 
     - Recommended Operating system:
 
@@ -33,7 +33,7 @@ Before you start, make sure that you have:
 
       - Kernel version 3.10 or later
 
-      - Ext4 file system.
+      - Ext4 file system
 
     - The network between machines. Turn off the firewalls and iptables when deploying and turn them on after the deployment.
 
@@ -74,22 +74,22 @@ Before you start, make sure that you have:
 
 ## Download TiDB Installation Packages
 
-| Component | Download link | Description |
-| -------- | ----  | -------- |
-|**Deploy**| [ tidb-ansible release-1.0 ](https://github.com/pingcap/tidb-ansible/tree/release-1.0) |  |
-|**TiDB**| [ tidb-1.0.0 ](http://download.pingcap.org/tidb-v1.0.0-linux-amd64-unportable.tar.gz) | |
-| | [ tidb-tools-latest ](http://download.pingcap.org/tidb-tools-latest-linux-amd64.tar.gz) |  |
-| | [ tidb-binlog-latest ](http://download.pingcap.org/tidb-binlog-latest-linux-amd64.tar.gz) |  |
-|**Monitor**| [ prometheus-1.5.2 ](https://github.com/prometheus/prometheus/releases/download/v1.5.2/prometheus-1.5.2.linux-amd64.tar.gz) |  |
-| | [ grafana-4.1.2 ](https://grafanarel.s3.amazonaws.com/builds/grafana-4.1.2-1486989747.linux-x64.tar.gz) |  |
-| | [ node_exporter-0.14.0-rc.1 ](http://download.pingcap.org/node_exporter-0.14.0-rc.1.linux-amd64.tar.gz) |  |
-| | [ pushgateway-0.3.1 ](http://download.pingcap.org/pushgateway-0.3.1.linux-amd64.tar.gz) |  |
-| | [ alertmanager-0.5.1 ](https://github.com/prometheus/alertmanager/releases/download/v0.5.1/alertmanager-0.5.1.linux-amd64.tar.gz) |  |
-| | [ daemontools-0.53 ](http://oifici4co.bkt.gdipper.com/daemontools-0.53.tar.gz) |  |
-|**Test**| [ fio-2.16 ](https://download.pingcap.org/fio-2.16.tar.gz) |  |
-|**Spark**| [ spark-2.1.1-bin-hadoop ](http://download.pingcap.org/spark-2.1.1-bin-hadoop2.7.tgz) |  |
-| | [ tispark-SNAPSHOT-jar-with-dependencies ](http://download.pingcap.org/tispark-SNAPSHOT-jar-with-dependencies.jar) |  |
-| | [ tispark-sample-data ](http://download.pingcap.org/tispark-sample-data.tar.gz) |  |
+| Component | Download link | 
+| -------- | ----  | 
+|**Deploy**| [ tidb-ansible release-1.0 ](https://github.com/pingcap/tidb-ansible/tree/release-1.0) | 
+|**TiDB**| [ tidb-1.0.0 ](http://download.pingcap.org/tidb-v1.0.0-linux-amd64-unportable.tar.gz) |
+| | [ tidb-tools-latest ](http://download.pingcap.org/tidb-tools-latest-linux-amd64.tar.gz) | 
+| | [ tidb-binlog-latest ](http://download.pingcap.org/tidb-binlog-latest-linux-amd64.tar.gz) |
+|**Monitor**| [ prometheus-1.5.2 ](https://github.com/prometheus/prometheus/releases/download/v1.5.2/prometheus-1.5.2.linux-amd64.tar.gz) | 
+| | [ grafana-4.1.2 ](https://grafanarel.s3.amazonaws.com/builds/grafana-4.1.2-1486989747.linux-x64.tar.gz) |
+| | [ node_exporter-0.14.0-rc.1 ](http://download.pingcap.org/node_exporter-0.14.0-rc.1.linux-amd64.tar.gz) | 
+| | [ pushgateway-0.3.1 ](http://download.pingcap.org/pushgateway-0.3.1.linux-amd64.tar.gz) |
+| | [ alertmanager-0.5.1 ](https://github.com/prometheus/alertmanager/releases/download/v0.5.1/alertmanager-0.5.1.linux-amd64.tar.gz) |
+| | [ daemontools-0.53 ](http://oifici4co.bkt.gdipper.com/daemontools-0.53.tar.gz) |
+|**Test**| [ fio-2.16 ](https://download.pingcap.org/fio-2.16.tar.gz) | 
+|**Spark**| [ spark-2.1.1-bin-hadoop ](http://download.pingcap.org/spark-2.1.1-bin-hadoop2.7.tgz) |
+| | [ tispark-SNAPSHOT-jar-with-dependencies ](http://download.pingcap.org/tispark-SNAPSHOT-jar-with-dependencies.jar) |
+| | [ tispark-sample-data ](http://download.pingcap.org/tispark-sample-data.tar.gz) |
 
 > **Note**: Download all installation packages to the Control Machine.
 
@@ -356,7 +356,7 @@ It is recommended to configure load balancing to provide uniform SQL interface.
     
     > **Note**: The default port of TiDB service is 4000.
 
-2. Access the monitoring platform using a browser.
+2. Access the monitoring platform using a web browser.
 
     ```
     http://172.16.10.1:3000
