@@ -2,7 +2,7 @@
 
 ## Documentation List
 
-+ [About TiDB](overview.md)
++ About TiDB
   - [TiDB Introduction](overview.md#tidb-introduction)
   - [TiDB Architecture](overview.md#tidb-architecture)
 - [TiDB Quick Start Guide](QUICKSTART.md)
@@ -24,7 +24,8 @@
   - [Performance Tuning](op-guide/tune-TiKV.md)
   + Backup and Migrate
       - [Backup and Restore](op-guide/backup-restore.md)
-      + [Migrate Data from MySQL to TiDB](op-guide/migration.md)
+      + Migrate
+          - [Migration Overview](op-guide/migration-overview.md)
           - [Migrate All the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
           - [Migrate the Data Incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
   - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
@@ -44,14 +45,7 @@
       - [Understand the Query Execution Plan](sql/understanding-the-query-execution-plan.md)
       - [Introduction to Statistics](sql/statistics.md)
   + Language Structure
-      + [Literal Values](sql/literal-values.md)
-          - [String Literals](sql/literal-values.md#string-literals)
-          - [Numeric Literals](sql/literal-values.md#numeric-literals)
-          - [NULL Values](sql/literal-values.md#null-values)
-          - [Hexadecimal Literals](sql/literal-values.md#hexadecimal-literals)
-          - [Date and Time Literals](sql/literal-values.md#date-and-time-literals)
-          - [Boolean Literals](sql/literal-values.md#boolean-literals)
-          - [Bit-Value Literals](sql/literal-values.md#bit-value-literals)
+      - [Literal Values](sql/literal-values.md)
       - [Schema Object Names](sql/schema-object-names.md)
       - [Keywords and Reserved Words](sql/keywords-and-reserved-words.md)
       - [User-Defined Variables](sql/user-defined-variables.md)
