@@ -120,8 +120,8 @@ $ bin/spark-shell
 import org.apache.spark.sql.TiContext
 val ti = new TiContext(spark)
 
-// Mapping all TiDB tables from database tpch as Spark SQL tables
-ti.tidbMapDatabase("tpch")
+// Mapping all TiDB tables from `TPCH_001` database as Spark SQL tables
+ti.tidbMapDatabase("TPCH_001")
 ```
 
 Then you can call Spark SQL directly:

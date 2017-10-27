@@ -178,7 +178,7 @@ In the Spark-Shell, enter the following command, assuming that your PD node is l
 
 ```sh
 import org.apache.spark.sql.TiContext
-val ti = new TiContext(spark, List("192.168.1.100:2379")
+val ti = new TiContext(spark)
 ti.tidbMapDatabase ("tpch")
 
 ```
