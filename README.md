@@ -21,7 +21,7 @@
       - [Scale](op-guide/horizontal-scale.md)
       - [Use Ansible to Scale](QUICKSTART.md#scale-the-tidb-cluster)
   - [Upgrade](op-guide/ansible-deployment.md#perform-rolling-update)
-  - [Performance Tuning](op-guide/tune-TiKV.md)
+  - [Tune Performance](op-guide/tune-TiKV.md)
   + Backup and Migrate
       - [Backup and Restore](op-guide/backup-restore.md)
       + Migrate
