@@ -239,7 +239,7 @@ In RocksDB.
 
 Possible reasons:
 
-- When you run multiple DDL statements together, it is slower when running the later few DDL statements. This is because the DDL statements are executed serially in the TiDB cluster.
+- If you run multiple DDL statements together, the last few DDL statements might run slowly. This is because the DDL statements are executed serially in the TiDB cluster.
 - After you start the cluster successfully, the first DDL operation may take a longer time to run, usually around 30s. This is because the TiDB cluster is electing the leader that processes DDL statements.
 - In rolling update or shutdown update, the processing time of DDL statements in the first ten minutes after starting TiDB is affected by the server stop sequence (stopping PD -> TiDB), and the condition where TiDB does not clean up the registration data in time because TiDB is stopped using the `kill -9` command. When you run DDL statements during this period, for the state change of each DDL, you need to wait 2 * lease (lease = 10s).
 
@@ -258,7 +258,7 @@ No. Currently, TiDB only supports the distributed storage engine and the Golevel
 Does TiDB support the following DDL?
 
 ```
-`CREATE TABLE ... LOCATION "s3://xxx/yyy"`
+CREATE TABLE ... LOCATION "s3://xxx/yyy"
 ```
 
 If you can implement the S3 storage engine client, it should be based on the TiKV interface.
@@ -295,11 +295,11 @@ The RocksDB compresses the key.
 
 #### TiKV master and slave use the same compression algorithm, why the results are different?
 
-Currently, some files of TiKV master have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data fluctuates occasionally. The underlying storage engine adjusts data as needed.
+Currently, some files of TiKV master have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data size fluctuates occasionally. The underlying storage engine adjusts data as needed.
 
 #### What are the features of TiKV block cache?
 
-TiKV has the Column Falimies feature of RocksDB. By default, the KV data is eventually stored in the 3 CFs (default, write and lock) within RocksDB.
+TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV data is eventually stored in the 3 CFs (default, write and lock) within RocksDB.
 
 - The default CF stores real data and the corresponding parameter is in [rocksdb.defaultcf]. The write CF stores the data version information (MVCC) and index-related data, and the corresponding parameter is in `[rocksdb.writecf]`. The lock CF stores the lock information and the system uses the default parameter.
 - The Raft RocksDB instance stores Raft logs. The default CF mainly stores Raft logs and the corresponding parameter is in `[raftdb.defaultcf]`.
@@ -375,7 +375,7 @@ Check the time difference between the machine time of the monitor and the time w
 
 #### How to configure to monitor Syncer status?
 
-Download [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana, modify the Prometheus configuration file, add the following:
+Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
 
 ```
 - job_name: ‘syncer_ops’ // task name
@@ -393,7 +393,7 @@ Yes. Your applications can be migrated to TiDB without changing a single line of
 
 #### Accidentally import the MySQL user table into TiDB and cannot login, how to restore?
 
-Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Login the cluster and rebuild using the following SQL statements:
+Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Login the cluster and recreate the mysql.user table using the following statement:
 
 ```sql
 DROP TABLE IF EXIST mysql.user;
@@ -515,7 +515,7 @@ There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Goog
 `SHOW DATABASES` is a global privilege rather than a database-level privilege. Therefore, you cannot grant this privilege to a database. You need to grant all databases:
 
 ```
-`grant SHOW DATABASES on *.*`
+grant SHOW DATABASES on *.*
 ``` 
 
 ### SQL optimization
