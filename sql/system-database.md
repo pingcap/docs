@@ -37,11 +37,11 @@ Currently, the `help_topic` is NULL.
 
 ## INFORMATION\_SCHEMA Tables
 
-To be compatible with MySQL, TiDB supports INFORMATION\_SCHEMA tables. Some third-party software queries information in these tables. Currently, most INFORMATION\_SCHEMA tables in TiDB are null.
+To be compatible with MySQL, TiDB supports INFORMATION\_SCHEMA tables. Some third-party software queries information in these tables. Currently, most INFORMATION\_SCHEMA tables in TiDB are NULL.
 
 ### CHARACTER\_SETS Table
 
-The CHARACTER\_SETS table provides information about character sets. But the table data is fake. By default, TiDB only supports utf8mb4.
+The CHARACTER\_SETS table provides information about character sets. But it contains dummy data. By default, TiDB only supports utf8mb4.
 
 ```sql
 mysql> select * from CHARACTER_SETS;
@@ -63,7 +63,7 @@ The COLLATIONS table is similar to the CHARACTER\_SETS table.
 
 ### COLLATION\_CHARACTER\_SET\_APPLICABILITY Table
 
-Null table.
+NULL.
 
 ### COLUMNS Table
 
@@ -75,59 +75,59 @@ SHOW COLUMNS FROM table_name [FROM db_name] [LIKE 'wild']
 
 ### COLUMNS\_PRIVILEGE Table
 
-Null table.
+NULL.
 
 ### ENGINES Table
 
-The ENGINES table provides information about storage engines. Currently, the table data is fake. In the production environment, use the TiKV engine for TiDB.
+The ENGINES table provides information about storage engines. But it contains dummy data only. In the production environment, use the TiKV engine for TiDB.
 
 ### EVENTS Table
 
-Null table.
+NULL.
 
 ### FILES Table
 
-Null table.
+NULL.
 
 ### GLOBAL\_STATUS Table
 
-Null table.
+NULL.
 
 ### GLOBAL\_VARIABLES Table
 
-Null table.
+NULL.
 
 ### KEY\_COLUMN\_USAGE Table
 
-The KEY\_COLUMN\_USAGE table describes which key columns have constraints.
+The KEY_COLUMN_USAGE table describes the key constraints of the columns, such as the primary key constraint.
 
 ### OPTIMIZER\_TRACE Table
 
-Null table.
+NULL.
 
 ### PARAMETERS Table
 
-Null table.
+NULL.
 
 ### PARTITIONS Table
 
-Null table.
+NULL.
 
 ### PLUGINS Table
 
-Null table.
+NULL.
 
 ### PROFILING Table
 
-Null table.
+NULL.
 
 ### REFERENTIAL\_CONSTRAINTS Table
 
-Null table.
+NULL.
 
 ### ROUTINES Table
 
-Null table.
+NULL.
 
 ### SCHEMATA Table
 
@@ -148,11 +148,11 @@ mysql> select * from SCHEMATA;
 
 ### SCHEMA\_PRIVILEGES Table
 
-Null table.
+NULL.
 
 ### SESSION\_STATUS Table
 
-Null table.
+NULL.
 
 ### SESSION\_VARIABLES Table
 
@@ -216,7 +216,7 @@ SHOW TABLES
 
 ### TABLESPACES Table
 
-Null table.
+NULL.
 
 ### TABLE\_CONSTRAINTS Table
 
@@ -227,11 +227,11 @@ The TABLE_CONSTRAINTS table describes which tables have constraints.
 
 ### TABLE\_PRIVILEGES Table
 
-Null table.
+NULL.
 
 ### TRIGGERS Table
 
-Null table.
+NULL.
 
 ### USER\_PRIVILEGES Table
 
@@ -252,4 +252,4 @@ mysql> desc USER_PRIVILEGES;
 
 ### VIEWS Table
 
-Null table. Currently, TiDB does not support views. 
+NULL. Currently, TiDB does not support views. 
