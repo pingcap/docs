@@ -108,9 +108,9 @@ max_connections = 2000
     | Mysql | 32 | 5 million | 256 | 1902 | 38045 | 134.56 ms / 363.18 ms |
     | Mysql | 32 | 10 million | 256 | 1770 | 35416 | 144.55 ms / 383.33 ms  |
 
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/threads_oltp.png?imageView2/2/w/700/q/75|imageslim)    
+    ![](media/sysbench-01.png)    
 
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/table_size_oltp.png?imageView2/2/w/700/q/75|imageslim)
+    ![](media/sysbench-02.png)
 
 - Simple `Select` test
 
@@ -127,9 +127,9 @@ max_connections = 2000
     | Mysql | 32 | 5 million | 256 |  386866 | 0.66 ms / 1.64 ms |
     | Mysql | 32 | 10 million | 256 |  388273 | 0.66 ms / 1.64 ms  |
 
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/threads_select.png?imageView2/2/w/700/q/75|imageslim) 
+    ![](media/sysbench-03.png) 
 
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/table_size_select.png?imageView2/2/w/700/q/75|imageslim) 
+    ![](media/sysbench-04.png) 
 
 - Simple `Insert` test
 
@@ -146,9 +146,9 @@ max_connections = 2000
     | Mysql | 32 | 5 million | 256 | 10593 | 24.16 ms / 82.96 ms  |
     | Mysql | 32 | 10 million | 256 | 9813 | 26.08 ms / 94.10 ms  |  
  
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/threads_insert.png?imageView2/2/w/700/q/75|imageslim)
+    ![](media/sysbench-05.png)
 
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/table_size_insert.png?imageView2/2/w/700/q/75|imageslim)   
+    ![](media/sysbench-06.png)   
 
 ### Scenario two: TiDB horizontal scalability test
 
@@ -185,7 +185,7 @@ block-cache-size = "2GB"
     | 4 TiDB physical nodes | 32 | 1 million | 256 * 4 | 8984 | 179692 | 114.96 ms / 176.73 ms |
     | 6 TiDB physical nodes | 32 | 5 million | 256 * 6 | 12953 | 259072 | 117.80 ms / 200.47 ms  |
 
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/scale_tidb_oltp.png?imageView2/2/w/700/q/75|imageslim)
+    ![](media/sysbench-07.png)
 
 - Simple `Select` test
 
@@ -196,7 +196,7 @@ block-cache-size = "2GB"
     | 4 TiDB physical nodes | 32 | 1 million | 256 * 4 | 289933 | 3.53 ms / 8.74 ms  |
     | 6 TiDB physical nodes | 32 | 5 million | 256 * 6 | 435313 | 3.55 ms / 9.17 ms  |
 
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/scale_tidb_select.png?imageView2/2/w/700/q/75|imageslim)
+    ![](media/sysbench-08.png)
 
 - Simple `Insert` test
 
@@ -206,4 +206,4 @@ block-cache-size = "2GB"
     | 5 TiKV physical nodes | 32 | 1 million | 256 * 3 | 60689 | 37.96 ms / 29.9 ms |
     | 7 TiKV physical nodes | 32 | 1 million | 256 * 3 | 80087 | 9.62 ms / 21.37 ms |
 
-    ![](http://7xnp02.com1.z0.glb.clouddn.com/scale_tikv_insert.png?imageView2/2/w/700/q/75|imageslim)
+    ![](media/sysbench-09.png)
