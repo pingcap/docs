@@ -1,44 +1,46 @@
 ---
-title: TiDB sysbench performance test report - v1.0.0
+title: Performace test result for TiDB using Sysbench
 category: benchmark 
 ---
 
-# TiDB sysbench performance test report - v1.0.0
+# Performace test result for TiDB using Sysbench
 
 ## Test purpose
 
 The purpose of this test is to test the performance and horizontal scalability of TiDB in OLTP scenarios.
 
-## Test version, time and place
+> **Note**: The results of the testing might vary based on different environmental dependencies.
+
+## Test version, date and place
 
 TiDB version: v1.0.0
 
-Time: October 20, 2017
+Date: October 20, 2017
 
 Place: Beijing
 
 ## Test environment
 
-IDC machines:
+- IDC machines:
 
-| Category  |  Name       |  
-| :--------| :---------| 
-| OS       | linux (CentOS 7.3.1611)       |   
-| CPU | 40 vCPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
-| RAM | 128GB | 
-| DISK | 1.5T SSD * 2  + Optane SSD * 1 |  
+  | Category  |  Detail       |  
+  | :--------| :---------| 
+  | OS       | Linux (CentOS 7.3.1611)       |   
+  | CPU | 40 vCPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
+  | RAM | 128GB | 
+  | DISK | 1.5T SSD * 2  + Optane SSD * 1 |  
 
-Sysbench version: 1.0.6
+- Sysbench version: 1.0.6
 
-See the [test script](https://github.com/pingcap/tidb-bench/tree/cwen/not_prepared_statement/sysbench).   
+- Test script: https://github.com/pingcap/tidb-bench/tree/cwen/not_prepared_statement/sysbench.   
 
 ## Test scenarios
 
-### Scenario one: sysbench standard performance test
+### Scenario one: simple performance test using Sysbench
 
-Test table structure:
+The structure of the table used for the test:
 
-``` 
+``` sql
 CREATE TABLE `sbtest` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `k` int(10) unsigned NOT NULL DEFAULT '0',
@@ -49,7 +51,7 @@ CREATE TABLE `sbtest` (
 ) ENGINE=InnoDB  
 ``` 
 
-Deployment and parameters configuration:
+The deployment and configuration details:
 
 ```
 // TiDB deployment
@@ -63,7 +65,7 @@ data3: 2 tikv (Optane SSD)
 data2: 1 tikv
 data1: 1 tikv
 
-// TiKV parameters configuration
+// TiKV configuration
 sync-log = false
 grpc-concurrency = 8
 grpc-raft-conn-num = 24 
@@ -82,7 +84,7 @@ block-cache-size = "2GB"
 172.16.10.8    1*sysbench 
 Mysql version: 5.6.37
 
-// MySQL parameters configuration
+// MySQL configuration
 thread_cache_size = 64
 innodb_buffer_pool_size = 64G
 innodb_file_per_table = 1
@@ -91,7 +93,7 @@ datadir = /data3/mysql
 max_connections = 2000 
 ```
 
-- Standard OLTP test
+- Simple OLTP test
     
     | - | Table count | Table size | Sysbench threads | TPS | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
@@ -110,7 +112,7 @@ max_connections = 2000
 
     ![](http://7xnp02.com1.z0.glb.clouddn.com/table_size_oltp.png?imageView2/2/w/700/q/75|imageslim)
 
-- Standard select test
+- Simple `Select` test
 
     | - | Table count | Table size | Sysbench threads | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | 
@@ -129,9 +131,9 @@ max_connections = 2000
 
     ![](http://7xnp02.com1.z0.glb.clouddn.com/table_size_select.png?imageView2/2/w/700/q/75|imageslim) 
 
-- Standard insert test
+- Simple `Insert` test
 
-    | - | table count | table size | sysbench threads | qps | latency(avg / .95) | 
+    | - | Table count | Table size | Sysbench threads | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: |
     | TiDB | 32 | 1 million | 64 * 4 | 25308 | 10.12 ms / 25.40 ms |
     | TiDB | 32 | 1 million | 128 * 4 | 28773 | 17.80 ms / 44.58 ms   |
@@ -150,7 +152,7 @@ max_connections = 2000
 
 ### Scenario two: TiDB horizontal scalability test
 
-Deployment and parameters configuration:
+The deployment and configuration details:
 
 ```
 // TiDB deployment 
@@ -162,7 +164,7 @@ data3: 2 tikv (Optane SSD)
 data2: 1 tikv 
 data1: 1 tikv 
 
-// TiKV parameters configuration 
+// TiKV configuration 
 sync-log = false
 grpc-concurrency = 8
 grpc-raft-conn-num = 24 
@@ -174,9 +176,9 @@ block-cache-size = "5GB"
 block-cache-size = "2GB"
 ``` 
 
-- Standard OLTP test
+- Simple OLTP test
 
-    | - | Table count | Table size | Sysbench threads | TPS | QPS | latency(avg / .95) | 
+    | - | Table count | Table size | Sysbench threads | TPS | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
     | 1 TiDB physical node | 32 | 1 million | 256 * 1 | 2495 | 49902 | 102.42 ms / 125.52 ms |
     | 2 TiDB physical nodes | 32 | 1 million | 256 * 2 | 5007 | 100153 | 102.23 ms / 125.52 ms  |
@@ -185,9 +187,9 @@ block-cache-size = "2GB"
 
     ![](http://7xnp02.com1.z0.glb.clouddn.com/scale_tidb_oltp.png?imageView2/2/w/700/q/75|imageslim)
 
-- Standard select test
+- Simple `Select` test
 
-    | - | table count | table size | sysbench threads | qps | latency(avg / .95) | 
+    | - | Table count | Table size | Sysbench threads | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | 
     | 1 TiDB physical node | 32 | 1 million | 256 * 1 | 71841 | 3.56 ms / 8.74 ms |
     | 2 TiDB physical nodes | 32 | 1 million | 256 * 2 | 146615 | 3.49 ms / 8.74 ms |
@@ -196,9 +198,9 @@ block-cache-size = "2GB"
 
     ![](http://7xnp02.com1.z0.glb.clouddn.com/scale_tidb_select.png?imageView2/2/w/700/q/75|imageslim)
 
-- Standard insert test
+- Simple `Insert` test
 
-    | - | table count | table size | sysbench threads | qps | latency(avg / .95) | 
+    | - | Table count | Table size | Sysbench threads | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | 
     | 3 TiKV physical node | 32 | 1 million |256 * 3 | 40547 | 18.93 ms / 38.25 ms |
     | 5 TiKV physical nodes | 32 | 1 million | 256 * 3 | 60689 | 37.96 ms / 29.9 ms |
