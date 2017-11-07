@@ -33,9 +33,9 @@ Power TiDB with your most favorite engines. TiDB supports local storage engines 
 
 Read the following three articles to understand TiDB techniques:
 
-- [Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/)
-- [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/)
-- [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)
+- [Data Storage](https://pingcap.netlify.com/blog/2017-07-11-tidbinternal1/)
+- [Computing](https://pingcap.netlify.com/blog/2017-07-11-tidbinternal2/)
+- [Scheduling](https://pingcap.netlify.com/blog/2017-07-20-tidbinternal3/)
 
 ## Roadmap
 
