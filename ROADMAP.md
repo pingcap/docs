@@ -49,8 +49,10 @@ This document defines the roadmap for TiDB development.
 ##  PD:
 - [ ] Improve namespace 
   - [ ] Different replication policies for different namespaces and tables
+
   - [ ] Decentralize scheduling table regions
-- [ ] Schedulor supports prioritization to be more controllable 
+  - [ ] Scheduler supports prioritization to be more controllable 
+
 - [ ] Use machine learning to optimize scheduling
 
 ## TiSpark:
