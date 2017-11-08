@@ -3,77 +3,7 @@ title: TiDB FAQ
 category: faq
 ---
 
-- [Product](#product)
-    - [General](#general)
-        - [What is TiDB?](#what-is-tidb)
-        - [Is TiDB based on MySQL?](#is-tidb-based-on-mysql)
-        - [What is the difference between TiDB and MySQL Group Replication?](#what-is-the-difference-between-tidb-and-mysql-group-replication)
-        - [How do TiDB and TiKV work together? What is the relationship between the two?](#how-do-tidb-and-tikv-work-together-what-is-the-relationship-between-the-two)
-        - [What does Placement Driver (PD) do?](#what-does-placement-driver-pd-do)
-        - [Is it easy to use TiDB?](#is-it-easy-to-use-tidb)
-        - [When to use TiDB?](#when-to-use-tidb)
-        - [When not to use TiDB?](#when-not-to-use-tidb)
-        - [How is TiDB strongly-consistent?](#how-is-tidb-strongly-consistent)
-        - [Does TiDB support distributed transactions?](#does-tidb-support-distributed-transactions)
-        - [Does the conflict of multiple transactions (such as updating the same row at the same time) cause commit failure of some transactions?](#does-the-conflict-of-multiple-transactions-such-as-updating-the-same-row-at-the-same-time-cause-commit-failure-of-some-transactions)
-        - [What programming language can I use to work with TiDB?](#what-programming-language-can-i-use-to-work-with-tidb)
-        - [How does TiDB compare to traditional relational databases like Oracle and MySQL?](#how-does-tidb-compare-to-traditional-relational-databases-like-oracle-and-mysql)
-        - [How does TiDB compare to NoSQL databases like Cassandra, Hbase, or MongoDB?](#how-does-tidb-compare-to-nosql-databases-like-cassandra-hbase-or-mongodb)
-        - [An error message is displayed when using `go get` to install TiDB.](#an-error-message-is-displayed-when-using-go-get-to-install-tidb)
-        - [How is TiDB highly available?](#how-is-tidb-highly-available)
-        - [Does TiDB release space immediately after deleting data?](#does-tidb-release-space-immediately-after-deleting-data)
-        - [Can I execute DDL operations on the target table when loading data?](#can-i-execute-ddl-operations-on-the-target-table-when-loading-data)
-        - [Does TiDB support the `replace into` syntax?](#does-tidb-support-the-replace-into-syntax)
-        - [How to export the data in TiDB?](#how-to-export-the-data-in-tidb)
-        - [Does TiDB support session timeout?](#does-tidb-support-session-timeout)
-    - [PD](#pd)
-        - [The `TiKV cluster is not bootstrapped` message is displayed when accessing PD.](#the-tikv-cluster-is-not-bootstrapped-message-is-displayed-when-accessing-pd)
-        - [The `etcd cluster ID mismatch` message is displayed when starting PD.](#the-etcd-cluster-id-mismatch-message-is-displayed-when-starting-pd)
-        - [How to update the startup parameters of PD?](#how-to-update-the-startup-parameters-of-pd)
-        - [What's the maximum tolerance for time synchronization error of PD?](#whats-the-maximum-tolerance-for-time-synchronization-error-of-pd)
-        - [How does the client connection find PD?](#how-does-the-client-connection-find-pd)
-        - [What is the difference between the `leader-schedule-limit` and `region-schedule-limit` scheduling parameters in PD?](#what-is-the-difference-between-the-leader-schedule-limit-and-region-schedule-limit-scheduling-parameters-in-pd)
-        - [Is the number of replicas in each region configurable? If yes, how to configure it?](#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it)
-    - [TiDB](#tidb)
-        - [How to choose the lease parameter in TiDB?](#how-to-choose-the-lease-parameter-in-tidb)
-        - [Can I use other key-value storage engines with TiDB?](#can-i-use-other-key-value-storage-engines-with-tidb)
-        - [Where is the Raft log stored in TiDB?](#where-is-the-raft-log-stored-in-tidb)
-        - [Why it is very slow to execute DDL statements sometimes?](#why-it-is-very-slow-to-execute-ddl-statements-sometimes)
-        - [ERROR 2013 (HY000): Lost connection to MySQL server during query.](#error-2013-hy000-lost-connection-to-mysql-server-during-query)
-    - [TiKV](#tikv)
-        - [What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?](#what-is-the-recommended-number-of-replicas-in-the-tikv-cluster-is-it-better-to-keep-the-minimum-number-for-high-availability)
-        - [Can TiKV specify a standalone replica machine (to separate cluster data and replicas)?](#can-tikv-specify-a-standalone-replica-machine-to-separate-cluster-data-and-replicas)
-        - [Why the TiKV data directory is gone?](#why-the-tikv-data-directory-is-gone)
-        - [The `cluster ID mismatch` message is displayed when starting TiKV.](#the-cluster-id-mismatch-message-is-displayed-when-starting-tikv)
-        - [The `duplicated store address` message is displayed when starting TiKV.](#the-duplicated-store-address-message-is-displayed-when-starting-tikv)
-        - [Would the key be too long according to the TiDB setting?](#would-the-key-be-too-long-according-to-the-tidb-setting)
-    - [TiSpark](#tispark)
-        - [Where is the user guide of TiSpark?](#where-is-the-user-guide-of-tispark)
-        - [TiSpark Cases](#tispark-cases)
-- [Operations](#operations)
-    - [Install](#install)
-        - [Why the modified `toml` configuration for TiKV/PD does not take effect?](#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect)
-        - [What can I do if the file system of my data disk is XFS and cannot be changed?](#what-can-i-do-if-the-file-system-of-my-data-disk-is-xfs-and-cannot-be-changed)
-        - [Can I configure chrony to meet the requirement of time synchronization in TiDB?](#can-i-configure-chrony-to-meet-the-requirement-of-time-synchronization-in-tidb)
-    - [Scale](#scale)
-        - [How does TiDB scale?](#how-does-tidb-scale)
-    - [Monitor](#monitor)
-        - [The monitor can't show all the metrics.](#the-monitor-cant-show-all-the-metrics)
-    - [Migrate](#migrate)
-        - [Can a MySQL application be migrated to TiDB?](#can-a-mysql-application-be-migrated-to-tidb)
-    - [Performance tuning](#performance-tuning)
-    - [Backup and restore](#backup-and-restore)
-    - [Misc](#misc)
-        - [How does TiDB manage user account?](#how-does-tidb-manage-user-account)
-        - [Where are the TiDB/PD/TiKV logs?](#where-are-the-tidbpdtikv-logs)
-        - [How to safely stop TiDB?](#how-to-safely-stop-tidb)
-        - [Can `kill` be executed in TiDB?](#can-kill-be-executed-in-tidb)
-- [SQL](#sql)
-    - [SQL syntax](#sql-syntax)
-        - [The error message `transaction too large` is displayed.](#the-error-message-transaction-too-large-is-displayed)
-        - [Check the running DDL job](#check-the-running-ddl-job)
-    - [SQL optimization](#sql-optimization)
-        - [How to optimize `select count(1)`?](#how-to-optimize-select-count1)
+# TiDB FAQ
 
 ## Product
 
@@ -150,7 +80,7 @@ If you are a developer and familiar with Go, you can run `make parser; ln -s _ve
 
 #### How is TiDB highly available?
 
-TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [High availability](README.md#high-availability).
+TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [High availability](overview.md#high-availability).
 
 #### Does TiDB release space immediately after deleting data?
 
@@ -220,7 +150,7 @@ The lease parameter (`--lease=60`) is set from the command line when starting a 
 
 #### Can I use other key-value storage engines with TiDB?
 
-Yes. Besides TiKV, TiDB supports many popular standalone storage engines, such as GolevelDB, RocksDB and BoltDB. If the storage engine is a KV engine that supports transactions and it provides a client that meets the interface requirement of TiDB, then it can connect to TiDB.
+Yes. Besides TiKV, TiDB supports many popular standalone storage engines, such as GolevelDB and BoltDB. If the storage engine is a KV engine that supports transactions and it provides a client that meets the interface requirement of TiDB, then it can connect to TiDB.
 
 #### Where is the Raft log stored in TiDB?
 
@@ -272,7 +202,7 @@ The RocksDB compresses the key.
 
 #### Where is the user guide of TiSpark?
 
-See the [TiSpark User Guide](https://github.com/pingcap/tispark/blob/master/docs/userguide.md).
+See the [TiSpark User Guide](tispark/tispark-user-guide.md).
 
 #### TiSpark Cases
 

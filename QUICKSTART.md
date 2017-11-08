@@ -3,28 +3,6 @@ title: TiDB Quick Start Guide
 category: quick start
 ---
 
-# TiDB Quick Start Guide
-
-- [About TiDB](#about-tidb)
-- [About this guide](#about-this-guide)
-- [Deploy a TiDB cluster](#deploy-a-tidb-cluster)
-    1. [Prepare the environment](#prepare-the-environment)
-    2. [Install Ansible in the Control Machine](#install-ansible-in-the-control-machine)
-    3. [Download TiDB-Ansible to the Control Machine](#download-tidb-ansible-to-the-control-machine)
-    4. [Orchestrate the TiDB cluster](#orchestrate-the-tidb-cluster)
-    5. [Deploy the TiDB cluster](#deploy-the-tidb-cluster)
-    6. [Start the cluster](#start-the-cluster)
-- [Try TiDB](#try-tidb)
-    - [Create, show, and drop a database](#create-show-and-drop-a-database)
-    - [Create, show, and drop a table](#create-show-and-drop-a-table)
-    - [Create, show, and drop an index](#create-show-and-drop-an-index)
-    - [Insert, select, update, and delete data](#insert-select-update-and-delete-data)
-    - [Create, authorize, and delete a user](#create-authorize-and-delete-a-user)
-- [Monitor a TiDB cluster](#monitor-a-tidb-cluster)
-    - [About the key metrics](#about-the-key-metrics)
-- [Scale the TiDB cluster](#scale-the-tidb-cluster)
-- [Destroy the cluster](#destroy-the-cluster)
-
 ## About TiDB
 
 TiDB (The pronunciation is: /’taɪdiːbi:/ tai-D-B, etymology: titanium) is a Hybrid Transactional/Analytical Processing (HTAP) database. Inspired by the design of Google F1 and Google Spanner, TiDB features infinite horizontal scalability, strong consistency, and high availability. The goal of TiDB is to serve as a one-stop solution for online transactions and analyses.
@@ -58,8 +36,10 @@ pip install Jinja2==2.7.2 MarkupSafe==0.11
 
 1.2  Several managed nodes with the following requirements:
 
-- 4 or more machines. At least 3 instances for TiKV. Don’t deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md).
+- 4 or more machines. At least 3 instances for TiKV. Don’t deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](/op-guide/recommendation.md).
+
 - Operating system:
+
   - CentOS 7.3 and later versions
   - X86_64 architecture (AMD64)
   - Kernel version 3.10 or later
@@ -99,6 +79,7 @@ You can then unzip the package and the default folder name is `tidb-ansible-mast
 ### 4. Orchestrate the TiDB cluster
 
 The standard Cluster has 6 machines:
+
 - 2 TiDB instances
 - 3 PD instances, one of the PD instances is used as the monitor.
 - 3 TiKV instances
@@ -165,25 +146,26 @@ ansible_user = tidb
 
 5.2 Connect to the network and download the TiDB, TiKV, and PD binaries:
 
- ansible-playbook local_prepare.yml
+  ansible-playbook local_prepare.yml
 
 5.3 Initialize the system environment of the target machines and adjust the kernel parameters:
 
- ansible-playbook bootstrap.yml -k -K
+  ansible-playbook bootstrap.yml -k -K
 
-**Note:**
-- Add the `-k` (lowercase) parameter if password is needed to connect to the managed node. This applies to other playbooks as well.
-- Add the `-K` (uppercase) parameter if sudo needs password for root privileges.
+> **Note:**
+> 
+> - Add the `-k` (lowercase) parameter if password is needed to connect to the managed node. This applies to other playbooks as well.
+> - Add the `-K` (uppercase) parameter if sudo needs password for root privileges.
 
 5.4 Deploy the TiDB cluster:
 
- ansible-playbook deploy.yml -k
+  ansible-playbook deploy.yml -k
 
 ### 6. Start the cluster
 
 Start the TiDB cluster:
 
- ansible-playbook start.yml -k
+  ansible-playbook start.yml -k
 
 Use the MySQL client to connect to the TiDB cluster:
 
@@ -191,7 +173,7 @@ Use the MySQL client to connect to the TiDB cluster:
 mysql -u root -h 172.16.10.1 -P 4000
 ```
 
-**Note:** The TiDB service default port is 4000.
+> **Note:** The TiDB service default port is 4000.
 
 ## Try TiDB
 
@@ -524,11 +506,11 @@ Now the topology is as follows:
 
 2.  Initialize the newly added node:
 
-        ansible-playbook bootstrap.yml -k -K
+  ansible-playbook bootstrap.yml -k -K
 
 3.  Deploy the cluster:
 
-          ansible-playbook deploy.yml -k
+  ansible-playbook deploy.yml -k
 
 4.  Login the newly added PD node and edit the starting script: `{deploy_dir}/scripts/run_pd.sh`
 
@@ -560,8 +542,8 @@ Now the topology is as follows:
 
 Stop the cluster:
 
-    ansible-playbook stop.yml -k
+  ansible-playbook stop.yml -k
 
 Destroy the cluster:
 
-    ansible-playbook unsafe_cleanup.yml -k
+  ansible-playbook unsafe_cleanup.yml -k
