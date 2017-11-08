@@ -59,7 +59,7 @@ Before you start, make sure that you have:
 
 - Python 2.6 or Python 2.7
 
-**Note:** The Control Machine can be one of the managed nodes.
+> **Note:** The Control Machine can be one of the managed nodes.
 
 ## 2. Install Ansible in the Control Machine
 
@@ -224,13 +224,13 @@ chmod 777 tidb-ansible-master/scripts/grafana-config-copy.py
 
 6.1 Use the MySQL client to connect to the TiDB cluster:
 
-          mysql -u root-h 172.16.10.1 -P 4000
+  mysql -u root-h 172.16.10.1 -P 4000
 
-**Note:** The TiDB service default port is 4000.
+> **Note:** The TiDB service default port is 4000.
 
 6.2 Open a browser to access the monitoring platform:
 
-        http://172.16.10.1:3000
+  http://172.16.10.1:3000
 
 The default account and password: admin/admin.
 
@@ -241,9 +241,10 @@ The rolling update of the TiDB service does not impact the ongoing business. The
 + 3 TiKV instances
 + 3 PD instances
 
-**Note:** For remote connections, add the `-k` (lower case) parameter if the password is needed to connect to the managed node. But if the mutual authentication is already set up, you don't need to add the `-k` parameter.
-
-**Note:** If the `pump`/`drainer` services are running in the cluster, it is recommended to stop the `drainer` service first before the rolling update. The rolling update of the TiDB service automatically updates the `pump` service.
+> **Note:** 
+> 
+> - For remote connections, add the `-k` (lower case) parameter if the password is needed to connect to the managed node. But if the mutual authentication is already set up, you don't need to add the `-k` parameter.
+> - If the `pump`/`drainer` services are running in the cluster, it is recommended to stop the `drainer` service first before the rolling update. The rolling update of the TiDB service automatically updates the `pump` service.
 
 7.1. Download the binary
 
@@ -272,6 +273,7 @@ The rolling update of the TiDB service does not impact the ongoing business. The
     ```
 
 ## Summary of common operations
+
 | Job | Playbook |
 | ------------- | ------------------------------------------------------------ |
 | Start the cluster | `ansible-playbook start.yml` |

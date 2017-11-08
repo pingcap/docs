@@ -9,7 +9,7 @@ category: operations
 
 A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
-Before you start, see [TiDB Architecture](../README.md#TiDB-Architecture) and [Software and Hardware Requirements](recommendation.md).
+Before you start, see [TiDB Architecture](../overview.md#tidb-architecture) and [Software and Hardware Requirements](./recommendation.md).
 
 This document describes the binary deployment of three scenarios:
 
@@ -21,6 +21,8 @@ This document describes the binary deployment of three scenarios:
 
 ### TiDB Database Components (Required)
 
+See the following table for the default ports for the TiDB components:
+
 | Component | Default Port | Protocol | Description | 
 | :-- | :-- | :-- | :----------- |
 | ssh | 22 | TCP | sshd service |
@@ -31,6 +33,8 @@ This document describes the binary deployment of three scenarios:
 | PD | 2380 | TCP | the inter-node communication port within the PD cluster |
 
 ### TiDB Database Components (Optional)
+
+See the following table for the default ports for the optional TiDB components:
 
 | Component | Default Port | Protocol | Description | 
 | :-- | :-- | :-- | :------------------------ |
@@ -46,7 +50,7 @@ This document describes the binary deployment of three scenarios:
 
 | Configuration | Description |
 | :-- | :-------------------- |
-| Supported Platform | See the [Software and Hardware Requirements](recommendation.md) |
+| Supported Platform | See the [Software and Hardware Requirements](./recommendation.md) |
 | File System  |  The ext4 file system is recommended in TiDB Deployment |
 | Swap Space  |  The Swap Space is recommended to close in TiDB Deployment  |
 | Disk Block Size  |  Set the size of the system disk `Block` to `4096` |
@@ -75,6 +79,7 @@ This document describes the binary deployment of three scenarios:
 | Transparent Hugepages | For Red Hat 7+ and CentOS 7+ systems, it is required to set the Transparent Hugepages to `always` |
 | I/O Scheduler | Set the I/O Scheduler of data disks to the `deadline` mode |
 | vm.swappiness | Set `vm.swappiness = 0` |
+
 
 > **Note**: To adjust the operating system parameters, contact your system administrator.
 
@@ -237,7 +242,7 @@ Follow the steps below to start PD, TiKV and TiDB:
 
 ## Multiple Nodes Cluster Deployment
 
-For the production environment, multiple nodes cluster deployment is recommended. Before you begin, see [Software and Hardware Requirements](recommendation.md).
+For the production environment, multiple nodes cluster deployment is recommended. Before you begin, see [Software and Hardware Requirements](./recommendation.md).
 
 Assuming that you have six nodes, you can deploy 3 PD instances, 3 TiKV instances, and 1 TiDB instance. See the following table for details:
 
@@ -318,8 +323,8 @@ Follow the steps below to start PD, TiKV, and TiDB:
 > **Note**:
 > 
 > - If you start TiKV or deploy PD in the production environment, it is highly recommended to specify the path for the configuration file using the `--config` parameter. If the parameter is not set, TiKV or PD does not read the configuration file.
-> - To tune TiKV, see [Performance Tuning for TiKV](tune-TiKV.md).
-> - If you use `nohup` to start the cluster in the production environment, write the startup commands in a script and then run the script. If not, the `nohup` process might abort because it receives exceptions when the Shell command exits. For more information, see [The TiDB/TiKV/PD process aborts unexpectedly](/./trouble-shooting.md#the-tidbtikvpd-process-aborts-unexpectedly). 
+> - To tune TiKV, see [Performance Tuning for TiKV](./tune-TiKV.md).
+> - If you use `nohup` to start the cluster in the production environment, write the startup commands in a script and then run the script. If not, the `nohup` process might abort because it receives exceptions when the Shell command exits. For more information, see [The TiDB/TiKV/PD process aborts unexpectedly](../trouble-shooting.md#the-tidbtikvpd-process-aborts-unexpectedly). 
 
 ## TiDB Monitor and Alarm Deployment
 

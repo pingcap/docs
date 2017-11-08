@@ -24,10 +24,10 @@
   - [Tune Performance](op-guide/tune-TiKV.md)
   + Backup and Migrate
     - [Backup and Restore](op-guide/backup-restore.md)
-      + Migrate
-        - [Migration Overview](op-guide/migration-overview.md)
-        - [Migrate All the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
-        - [Migrate the Data Incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
+    + Migrate
+      - [Migration Overview](op-guide/migration-overview.md)
+      - [Migrate All the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
+      - [Migrate the Data Incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
   - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
 + TiDB User Guide
   + TiDB Server Administration
