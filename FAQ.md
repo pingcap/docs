@@ -5,6 +5,8 @@ category: faq
 
 # TiDB FAQ
 
+This document lists the Most Frequently Asked Questions about TiDB.
+
 ## Product
 
 ### General
