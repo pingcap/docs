@@ -3,6 +3,8 @@ title: TiDB Quick Start Guide
 category: quick start
 ---
 
+# TiDB Quick Start Guide
+
 ## About TiDB
 
 TiDB (The pronunciation is: /’taɪdiːbi:/ tai-D-B, etymology: titanium) is a Hybrid Transactional/Analytical Processing (HTAP) database. Inspired by the design of Google F1 and Google Spanner, TiDB features infinite horizontal scalability, strong consistency, and high availability. The goal of TiDB is to serve as a one-stop solution for online transactions and analyses.
@@ -53,7 +55,7 @@ pip install Jinja2==2.7.2 MarkupSafe==0.11
 
 - Python 2.6 or Python 2.7
 
-**Note:** The Control Machine can be one of the managed nodes with access to external network to download binary.
+> **Note:** The Control Machine can be one of the managed nodes with access to external network to download binary.
 
 ### 2. Install Ansible in the Control Machine
 
@@ -404,47 +406,47 @@ The capacity of a TiDB cluster can be increased or reduced without affecting the
 For example, if you want to add a TiDB node (node101) with the IP address: 172.16.10.101, you can use the following procedure:
 
 1.  Edit the `inventory.ini` file and append the node information:
-
-```
-[tidb_servers]
-172.16.10.1
-172.16.10.2
-172.16.10.101
-
-[pd_servers]
-172.16.10.1
-172.16.10.2
-172.16.10.3
-
-[tikv_servers]
-172.16.10.4
-172.16.10.5
-172.16.10.6
-
-[monitored_servers:children]
-tidb_servers
-tikv_servers
-pd_servers
-
-[monitoring_servers]
-172.16.10.3
-
-[grafana_servers]
-172.16.10.3
-```
-
-Now the topology is as follows:
-
-| Name | Host IP | Services |
-| ---- | ------- | -------- |
-| node1 | 172.16.10.1 | PD1, TiDB1 |
-| node2 | 172.16.10.2 | PD2, TiDB2 |
-| node3 | 172.16.10.3 | PD3, Monitor |
-| **node101** | **172.16.10.101**|**TiDB3** |
-| node4 | 172.16.10.4 | TiKV1 |
-| node5 | 172.16.10.5 | TiKV2 |
-| node6 | 172.16.10.6 | TiKV3 |
-
+        
+        ```
+        [tidb_servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.101
+        
+        [pd_servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.3
+        
+        [tikv_servers]
+        172.16.10.4
+        172.16.10.5
+        172.16.10.6
+        
+        [monitored_servers:children]
+        tidb_servers
+        tikv_servers
+        pd_servers
+        
+        [monitoring_servers]
+        172.16.10.3
+        
+        [grafana_servers]
+        172.16.10.3
+        ```
+        
+        Now the topology is as follows:
+        
+        | Name | Host IP | Services |
+        | ---- | ------- | -------- |
+        | node1 | 172.16.10.1 | PD1, TiDB1 |
+        | node2 | 172.16.10.2 | PD2, TiDB2 |
+        | node3 | 172.16.10.3 | PD3, Monitor |
+        | **node101** | **172.16.10.101**|**TiDB3** |
+        | node4 | 172.16.10.4 | TiKV1 |
+        | node5 | 172.16.10.5 | TiKV2 |
+        | node6 | 172.16.10.6 | TiKV3 |
+        
 2.  Initialize the newly added node:
 
         ansible-playbook bootstrap.yml -k -K
@@ -455,6 +457,7 @@ Now the topology is as follows:
 5.  Roll update the entire cluster:
 
         ansible-playbook rolling_update.yml -k
+
 6.  Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform:
         http://172.16.10.3:3000
 
@@ -464,53 +467,53 @@ To add a PD node (node102) with the IP address: 172.16.10.102, you can use the f
 
 1.  Edit the `inventory.ini` file and append the node information:
 
-```
-[tidb_servers]
-172.16.10.1
-172.16.10.2
-
-[pd_servers]
-172.16.10.1
-172.16.10.2
-172.16.10.3
-172.16.10.102
-
-[tikv_servers]
-172.16.10.4
-172.16.10.5
-172.16.10.6
-
-[monitored_servers:children]
-tidb_servers
-tikv_servers
-pd_servers
-
-[monitoring_servers]
-172.16.10.3
-
-[grafana_servers]
-172.16.10.3
-```
-
-Now the topology is as follows:
-
-| Name | Host IP | Services |
-| ---- | ------- | -------- |
-| node1 | 172.16.10.1 | PD1, TiDB1 |
-| node2 | 172.16.10.2 | PD2, TiDB2 |
-| node3 | 172.16.10.3 | PD3, Monitor |
-| **node102** | **172.16.10.102** | **PD4** |
-| node4 | 172.16.10.4 | TiKV1 |
-| node5 | 172.16.10.5 | TiKV2 |
-| node6 | 172.16.10.6 | TiKV3 |
+        ```
+        [tidb_servers]
+        172.16.10.1
+        172.16.10.2
+        
+        [pd_servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.3
+        172.16.10.102
+        
+        [tikv_servers]
+        172.16.10.4
+        172.16.10.5
+        172.16.10.6
+        
+        [monitored_servers:children]
+        tidb_servers
+        tikv_servers
+        pd_servers
+        
+        [monitoring_servers]
+        172.16.10.3
+        
+        [grafana_servers]
+        172.16.10.3
+        ```
+        
+        Now the topology is as follows:
+        
+        | Name | Host IP | Services |
+        | ---- | ------- | -------- |
+        | node1 | 172.16.10.1 | PD1, TiDB1 |
+        | node2 | 172.16.10.2 | PD2, TiDB2 |
+        | node3 | 172.16.10.3 | PD3, Monitor |
+        | **node102** | **172.16.10.102** | **PD4** |
+        | node4 | 172.16.10.4 | TiKV1 |
+        | node5 | 172.16.10.5 | TiKV2 |
+        | node6 | 172.16.10.6 | TiKV3 |
 
 2.  Initialize the newly added node:
 
-  ansible-playbook bootstrap.yml -k -K
+        ansible-playbook bootstrap.yml -k -K
 
 3.  Deploy the cluster:
 
-  ansible-playbook deploy.yml -k
+        ansible-playbook deploy.yml -k
 
 4.  Login the newly added PD node and edit the starting script: `{deploy_dir}/scripts/run_pd.sh`
 
@@ -533,6 +536,7 @@ Now the topology is as follows:
 5.  Roll upgrade the entire cluster:
 
         ansible-playbook rolling_update.yml -k
+        
 6.  Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform:
 
         http://172.16.10.3:3000
@@ -542,8 +546,8 @@ Now the topology is as follows:
 
 Stop the cluster:
 
-  ansible-playbook stop.yml -k
+        ansible-playbook stop.yml -k
 
 Destroy the cluster:
 
-  ansible-playbook unsafe_cleanup.yml -k
+        ansible-playbook unsafe_cleanup.yml -k
