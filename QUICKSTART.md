@@ -434,8 +434,8 @@ For example, if you want to add a TiDB node (node101) with the IP address: 172.1
         [grafana_servers]
         172.16.10.3
         ```
-        
-        Now the topology is as follows:
+  
+  Now the topology is as follows:
         
         | Name | Host IP | Services |
         | ---- | ------- | -------- |
@@ -495,7 +495,7 @@ To add a PD node (node102) with the IP address: 172.16.10.102, you can use the f
         172.16.10.3
         ```
         
-        Now the topology is as follows:
+  Now the topology is as follows:
         
         | Name | Host IP | Services |
         | ---- | ------- | -------- |
