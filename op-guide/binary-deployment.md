@@ -88,7 +88,7 @@ See the following table for the default ports for the optional TiDB components:
 | Configuration | Description |
 | :-- | :---------------------------- |
 | LANG environment | Set `LANG = en_US.UTF8` |
-| TZ time zone | Set the TZ time zone of all nodes to the same value | 
+| TZ time zone | Set the TZ time zone of all nodes to the same value |
 
 ## Create the Database Running User Account
 
@@ -101,10 +101,10 @@ In the Linux environment, create TiDB on each installation node as a database ru
 Last login: Tue Aug 22 12:06:23 CST 2017 on pts/2
 -bash-4.2$ ssh-keygen -t rsa
 Generating public/private rsa key pair.
-Enter file in which to save the key (/home/tidb/.ssh/id_rsa): 
+Enter file in which to save the key (/home/tidb/.ssh/id_rsa):
 Created directory '/home/tidb/.ssh'.
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
 Your identification has been saved in /home/tidb/.ssh/id_rsa.
 Your public key has been saved in /home/tidb/.ssh/id_rsa.pub.
 The key fingerprint is:
@@ -146,21 +146,21 @@ sha256sum -c tidb-latest-linux-amd64.sha256
 tar -xzf tidb-latest-linux-amd64.tar.gz
 cd tidb-latest-linux-amd64
 ```
-  
+
 ## Single Node Cluster Deployment
 
 After downloading the TiDB binary package, you can run and test the TiDB cluster on a standalone server. Follow the steps below to start PD, TiKV and TiDB:
 
 1. Start PD.
-    
+
     ```bash
     ./bin/pd-server --data-dir=pd \
                     --log-file=pd.log
-    ``` 
-   
-  
+    ```
+
+
 2. Start TiKV.
-    
+
     ```bash
     ./bin/tikv-server --pd="127.0.0.1:2379" \
                       --data-dir=tikv \
@@ -168,7 +168,7 @@ After downloading the TiDB binary package, you can run and test the TiDB cluster
     ```
 
 3. Start TiDB.
-    
+
     ```bash
     ./bin/tidb-server --store=tikv \
                       --path="127.0.0.1:2379" \
@@ -205,10 +205,10 @@ Follow the steps below to start PD, TiKV and TiDB:
                     --peer-urls="http://192.168.199.113:2380" \
                     --initial-cluster="pd1=http://192.168.199.113:2380" \
                     --log-file=pd.log
-    ```  
-    
+    ```
+
 2. Start TiKV on Node2, Node3 and Node4.
-    
+
     ```bash
     ./bin/tikv-server --pd="192.168.199.113:2379" \
                       --addr="192.168.199.114:20160" \
@@ -227,7 +227,7 @@ Follow the steps below to start PD, TiKV and TiDB:
     ```
 
 3. Start TiDB on Node1.
-    
+
     ```bash
     ./bin/tidb-server --store=tikv \
                       --path="192.168.199.113:2379" \
@@ -235,7 +235,7 @@ Follow the steps below to start PD, TiKV and TiDB:
     ```
 
 4. Use the official MySQL client to connect to TiDB.
-    
+
     ```sh
     mysql -h 192.168.199.113 -P 4000 -u root -D test
     ```
@@ -258,7 +258,7 @@ Assuming that you have six nodes, you can deploy 3 PD instances, 3 TiKV instance
 Follow the steps below to start PD, TiKV, and TiDB:
 
 1. Start PD on Node1, Node2, and Node3 in sequence.
-    
+
     ```bash
     ./bin/pd-server --name=pd1 \
                     --data-dir=pd1 \
@@ -286,9 +286,9 @@ Follow the steps below to start PD, TiKV, and TiDB:
                     -L "info" \
                     --log-file=pd.log
     ```
-    
+
 2. Start TiKV on Node4, Node5 and Node6.
-    
+
     ```bash
     ./bin/tikv-server --pd="192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379" \
                       --addr="192.168.199.116:20160" \
@@ -305,26 +305,26 @@ Follow the steps below to start PD, TiKV, and TiDB:
                       --data-dir=tikv3 \
                       --log-file=tikv.log
     ```
-    
+
 3. Start TiDB on Node1.
-    
+
     ```bash
     ./bin/tidb-server --store=tikv \
                       --path="192.168.199.113:2379,192.168.199.114:2379,192.168.199.115:2379" \
                       --log-file=tidb.log
     ```
-    
+
 4. Use the official MySQL client to connect to TiDB.
-    
+
     ```sh
     mysql -h 192.168.199.113 -P 4000 -u root -D test
     ```
-   
+
 > **Note**:
-> 
+>
 > - If you start TiKV or deploy PD in the production environment, it is highly recommended to specify the path for the configuration file using the `--config` parameter. If the parameter is not set, TiKV or PD does not read the configuration file.
 > - To tune TiKV, see [Performance Tuning for TiKV](./tune-TiKV.md).
-> - If you use `nohup` to start the cluster in the production environment, write the startup commands in a script and then run the script. If not, the `nohup` process might abort because it receives exceptions when the Shell command exits. For more information, see [The TiDB/TiKV/PD process aborts unexpectedly](../trouble-shooting.md#the-tidbtikvpd-process-aborts-unexpectedly). 
+> - If you use `nohup` to start the cluster in the production environment, write the startup commands in a script and then run the script. If not, the `nohup` process might abort because it receives exceptions when the Shell command exits. For more information, see [The TiDB/TiKV/PD process aborts unexpectedly](../trouble-shooting.md#the-tidbtikvpd-process-aborts-unexpectedly).
 
 ## TiDB Monitor and Alarm Deployment
 
@@ -363,7 +363,7 @@ $cd node_exporter-0.14.0-rc.1.linux-amd64
 # Start the node_exporter service.
 ./node_exporter --web.listen-address=":9100" \
     --log.level="info"
-``` 
+```
 
 #### Start `pushgateway` on Node1.
 
@@ -410,7 +410,7 @@ scrape_configs:
       - '192.168.199.115:9100'
       - '192.168.199.116:9100'
 ...
- 
+
 # Start Prometheus:
 ./prometheus \
     --config.file="/data1/tidb/deploy/conf/prometheus.yml" \
@@ -444,4 +444,4 @@ domain = 192.168.199.113
 ./grafana-server \
     --homepath="/data1/tidb/deploy/opt/grafana" \
     --config="/data1/tidb/deploy/opt/grafana/conf/grafana.ini"
-``` 
+```

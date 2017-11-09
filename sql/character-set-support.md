@@ -5,7 +5,7 @@ category: user guide
 
 # Character Set Support
 
-A character set is a set of symbols and encodings. A collation is a set of rules for comparing characters in a character set. 
+A character set is a set of symbols and encodings. A collation is a set of rules for comparing characters in a character set.
 
 Currently, TiDB supports the following character sets:
 
@@ -147,7 +147,7 @@ For example:
 mysql> CREATE TABLE t1(a int) CHARACTER SET utf8 COLLATE utf8_general_ci;
 Query OK, 0 rows affected (0.08 sec)
 ```
-The table character set and collation are used as the default values for column definitions if the column character set and collation are not specified in individual column definitions. 
+The table character set and collation are used as the default values for column definitions if the column character set and collation are not specified in individual column definitions.
 
 ## Column Character Set and Collation
 
@@ -185,7 +185,7 @@ You can use the following statement to specify a particular collation that is re
     SET character_set_connection = charset_name;
     ```
 
-    `COLLATE` is optional, if absent, the default collation of the `charset_name` is used. 
+    `COLLATE` is optional, if absent, the default collation of the `charset_name` is used.
 
 - `SET CHARACTER SET 'charset_name'`
 
@@ -196,5 +196,5 @@ You can use the following statement to specify a particular collation that is re
     SET character_set_results = charset_name;
     SET collation_connection = @@collation_database;
     ```
-    
+
 For more information, see [Connection Character Sets and Collations in MySQL](https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html).
