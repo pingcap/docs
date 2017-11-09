@@ -1,9 +1,9 @@
 ---
-title: TiDB Introduction
+title: About TiDB
 category: introduction
 ---
 
-# TiDB Introduction
+# About TiDB
 
 ## TiDB Introduction
 
