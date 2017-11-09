@@ -46,16 +46,16 @@ mysql> SHOW COLLATION WHERE Charset = 'latin1';
 
 The `latin1` collations have the following meanings:
 
-| Collation         | Meaning |
-| :-                | :- |
-| `latin1_bin`        | Binary according to `latin1` encoding |
-| `latin1_danish_ci`  | Danish/Norwegian |
-| `latin1_general_ci` | Multilingual (Western European) |
+| Collation           | Meaning                                             |
+|:--------------------|:----------------------------------------------------|
+| `latin1_bin`        | Binary according to `latin1` encoding               |
+| `latin1_danish_ci`  | Danish/Norwegian                                    |
+| `latin1_general_ci` | Multilingual (Western European)                     |
 | `latin1_general_cs` | Multilingual (ISO Western European), case sensitive |
-| `latin1_german1_ci` | German DIN-1 (dictionary order) |
-| `latin1_german2_ci` | German DIN-2 (phone book order) |
-| `latin1_spanish_ci` | Modern Spanish |
-| `latin1_swedish_ci` | Swedish/Finnish |
+| `latin1_german1_ci` | German DIN-1 (dictionary order)                     |
+| `latin1_german2_ci` | German DIN-2 (phone book order)                     |
+| `latin1_spanish_ci` | Modern Spanish                                      |
+| `latin1_swedish_ci` | Swedish/Finnish                                     |
 
 Each character set has a default collation. For example, the default collation for utf8 is `utf8_bin`.
 
@@ -69,13 +69,13 @@ The collation names in TiDB follow these conventions:
 - A language-specific collation includes a language name. For example, `utf8_turkish_ci` and `utf8_hungarian_ci` sort characters for the utf8 character set using the rules of Turkish and Hungarian, respectively.
 - Collation suffixes indicate whether a collation is case and accent sensitive, or binary. The following table shows the suffixes used to indicate these characteristics.
 
- | Suffix  | Meaning |
- | :- | :- |
- | \_ai   | Accent insensitive |
- | \_as   | Accent insensitive |
- | \_ci   | Case insensitive |
- | \_cs   | Case sensitive |
- | \_bin  | Binary |
+| Suffix | Meaning            |
+|:-------|:-------------------|
+| \_ai   | Accent insensitive |
+| \_as   | Accent insensitive |
+| \_ci   | Case insensitive   |
+| \_cs   | Case sensitive     |
+| \_bin  | Binary             |
 
 > **Note**: For now, TiDB supports on some of the collations in the above table.
 
