@@ -23,25 +23,25 @@ This document describes the binary deployment of three scenarios:
 
 See the following table for the default ports for the TiDB components:
 
-| Component | Default Port | Protocol | Description | 
+| Component | Default Port | Protocol | Description |
 | :-- | :-- | :-- | :----------- |
 | ssh | 22 | TCP | sshd service |
-| TiDB|  4000  | TCP | the communication port for the application and DBA tools | 
-| TiDB| 10080  |  TCP | the communication port to report TiDB status | 
-| TiKV|  20160 |  TCP | the TiKV communication port  | 
-| PD | 2379 | TCP | the communication port between TiDB and PD | 
+| TiDB|  4000  | TCP | the communication port for the application and DBA tools |
+| TiDB| 10080  |  TCP | the communication port to report TiDB status |
+| TiKV|  20160 |  TCP | the TiKV communication port  |
+| PD | 2379 | TCP | the communication port between TiDB and PD |
 | PD | 2380 | TCP | the inter-node communication port within the PD cluster |
 
 ### TiDB Database Components (Optional)
 
 See the following table for the default ports for the optional TiDB components:
 
-| Component | Default Port | Protocol | Description | 
+| Component | Default Port | Protocol | Description |
 | :-- | :-- | :-- | :------------------------ |
-| Prometheus |  9090| TCP | the communication port for the Prometheus service | 
+| Prometheus |  9090| TCP | the communication port for the Prometheus service |
 | Pushgateway |  9091 | TCP | the aggregation and report port for TiDB, TiKV, and PD monitor |
-| Node_exporter|  9100| TCP | the communication port to report the system information of every TiDB cluster node |  
-| Grafana | 3000 | TCP | the port for the external Web monitoring service and client (Browser) access | 
+| Node_exporter|  9100| TCP | the communication port to report the system information of every TiDB cluster node |
+| Grafana | 3000 | TCP | the port for the external Web monitoring service and client (Browser) access |
 | alertmanager | 9093 | TCP | the port for the alert service |
 
 ## Configure and Check the System before Installation
