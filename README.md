@@ -93,7 +93,7 @@
   - [Compatibility with MySQL](sql/mysql-compatibility.md)
 + Advanced Usage
   - [Read Data From History Versions](op-guide/history-read.md) 
-+ Tools
++ TiDB Utilities
   - [Syncer User Guide](tools/syncer.md)
   - [Loader User Guide](tools/loader.md)
   - [TiDB-Binlog User Guide](tools/tidb-binlog.md)
