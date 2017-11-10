@@ -6,29 +6,6 @@
   - [TiDB Introduction](overview.md#tidb-introduction)
   - [TiDB Architecture](overview.md#tidb-architecture)
 - [TiDB Quick Start Guide](QUICKSTART.md)
-+ TiDB Operations Guide
-  - [Hardware and Software Requirements](op-guide/recommendation.md)
-  + Deploy
-    - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
-    - [Docker Deployment](op-guide/docker-deployment.md)
-    - [Cross-Region Deployment](op-guide/location-awareness.md)
-  - [Configure](op-guide/configuration.md)
-  + Monitor
-    - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
-    - [Key Metrics](op-guide/dashboard-overview-info.md)
-    - [Monitor a TiDB Cluster](op-guide/monitoring-tidb.md)
-  + Scale
-    - [Scale](op-guide/horizontal-scale.md)
-    - [Use Ansible to Scale](QUICKSTART.md#scale-the-tidb-cluster)
-  - [Upgrade](op-guide/ansible-deployment.md#perform-rolling-update)
-  - [Tune Performance](op-guide/tune-TiKV.md)
-  + Backup and Migrate
-    - [Backup and Restore](op-guide/backup-restore.md)
-    + Migrate
-      - [Migration Overview](op-guide/migration-overview.md)
-      - [Migrate All the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
-      - [Migrate the Data Incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
-  - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
 + TiDB User Guide
   + TiDB Server Administration
     - [The TiDB Server](sql/tidb-server.md)
@@ -91,8 +68,32 @@
   - [JSON Functions and Generated Column](sql/json-functions-generated-column.md)
   - [Connectors and APIs](sql/connection-and-APIs.md)
   - [Compatibility with MySQL](sql/mysql-compatibility.md)
-+ Advanced Usage
-  - [Read Data From History Versions](op-guide/history-read.md) 
+  + Advanced Usage
+    - [Read Data From History Versions](op-guide/history-read.md) 
++ TiDB Operations Guide
+  - [Hardware and Software Requirements](op-guide/recommendation.md)
+  + Deploy
+    - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
+    - [Docker Deployment](op-guide/docker-deployment.md)
+    - [Cross-Region Deployment](op-guide/location-awareness.md)
+  - [Configure](op-guide/configuration.md)
+  + Monitor
+    - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
+    - [Key Metrics](op-guide/dashboard-overview-info.md)
+    - [Monitor a TiDB Cluster](op-guide/monitoring-tidb.md)
+  + Scale
+    - [Scale](op-guide/horizontal-scale.md)
+    - [Use Ansible to Scale](QUICKSTART.md#scale-the-tidb-cluster)
+  - [Upgrade](op-guide/ansible-deployment.md#perform-rolling-update)
+  - [Tune Performance](op-guide/tune-TiKV.md)
+  + Backup and Migrate
+    - [Backup and Restore](op-guide/backup-restore.md)
+    + Migrate
+      - [Migration Overview](op-guide/migration-overview.md)
+      - [Migrate All the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
+      - [Migrate the Data Incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
+  - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
+  - [Troubleshoot](./trouble-shooting.md)
 + TiDB Utilities
   - [Syncer User Guide](tools/syncer.md)
   - [Loader User Guide](tools/loader.md)
@@ -102,7 +103,6 @@
   - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
   - [User Guide](tispark/tispark-user-guide.md)
 - [Frequently Asked Questions (FAQ)](./FAQ.md)
-- [Troubleshoot](./trouble-shooting.md)
 - [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 - [Releases](release/rn.md)
 - [TiDB Roadmap](https://github.com/pingcap/docs/blob/master/ROADMAP.md)
