@@ -105,12 +105,12 @@
 - [Frequently Asked Questions (FAQ)](./FAQ.md)
 - [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 - [Releases](release/rn.md)
-- [TiDB Roadmap](https://github.com/pingcap/docs/blob/master/ROADMAP.md)
+- [TiDB Roadmap](./ROADMAP.md)
 - [Connect with us](community.md)
 + More Resources
   - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
-  - [PingCAP Blog](https://pingcap.github.io/blog/)
-  - [Weekly Update](http://weekly.pingcap.com/)
+  - [PingCAP Blog](https://pingcap.com/blog/)
+  - [Weekly Update](https://pingcap.com/weekly/)
 
 ## TiDB Introduction
 
