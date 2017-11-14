@@ -53,7 +53,6 @@
     - [Encryption and Compression Functions](sql/encryption-and-compression-functions.md)
     - [Information Functions](sql/information-functions.md)
     - [JSON Functions](sql/json-functions.md)
-    - Functions Used with Global Transaction IDs [TBD]
     - [Aggregate (GROUP BY) Functions](sql/aggregate-group-by-functions.md)
     - [Miscellaneous Functions](sql/miscellaneous-functions.md)
     - [Precision Math](sql/precision-math.md)
@@ -82,7 +81,7 @@
     - [Key Metrics](op-guide/dashboard-overview-info.md)
     - [Monitor a TiDB Cluster](op-guide/monitoring-tidb.md)
   + Scale
-    - [Scale](op-guide/horizontal-scale.md)
+    - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
     - [Use Ansible to Scale](QUICKSTART.md#scale-the-tidb-cluster)
   - [Upgrade](op-guide/ansible-deployment.md#perform-rolling-update)
   - [Tune Performance](op-guide/tune-TiKV.md)
@@ -105,7 +104,7 @@
 - [Frequently Asked Questions (FAQ)](./FAQ.md)
 - [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 - [Releases](release/rn.md)
-- [TiDB Roadmap](./ROADMAP.md)
+- [TiDB Roadmap](https://github.com/pingcap/docs/blob/master/ROADMAP.md)
 - [Connect with us](community.md)
 + More Resources
   - [Frequently Used Tools](https://github.com/pingcap/tidb-tools)
