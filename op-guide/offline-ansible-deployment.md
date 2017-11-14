@@ -1,9 +1,9 @@
 ---
-title: Offline Ansible Deployment
+title: Offline deployment using Ansible
 category: operations
 ---
 
-# Offline Ansible Deployment
+# Offline deployment using Ansible
 
 ## Prepare
 
@@ -72,7 +72,9 @@ Before you start, make sure that you have:
   # ansible 2.3.1.0
   ```
 
-## Download TiDB Installation Packages
+## Download TiDB packages
+
+Download all packages to the Control Machine.
 
 | Component | Download link | 
 | -------- | ----  | 
@@ -91,9 +93,7 @@ Before you start, make sure that you have:
 | | [ tispark-SNAPSHOT-jar-with-dependencies ](http://download.pingcap.org/tispark-SNAPSHOT-jar-with-dependencies.jar) |
 | | [ tispark-sample-data ](http://download.pingcap.org/tispark-sample-data.tar.gz) |
 
-> **Note**: Download all installation packages to the Control Machine.
-
-## Deploy for Installation
+## Install the packages
 
 1. Extract the cluster deployment tool `tidb-ansible`.
 2. Copy all the other components to the `downloads` directory in `tidb-ansible`.
@@ -119,9 +119,9 @@ Before you start, make sure that you have:
   
     ```
 
-## Orchestrate the TiDB Cluster
+## Orchestrate the TiDB cluster
 
-The file path of `inventory.ini`: `tidb-ansible/inventory.ini`
+The file path of `inventory.ini` is: `tidb-ansible/inventory.ini`
 
 The standard cluster has 6 machines:
 
@@ -129,7 +129,7 @@ The standard cluster has 6 machines:
 - 3 PD nodes
 - 3 TiKV nodes
 
-### The Cluster Topology of Single TiKV Instance on a Single Machine 
+### The cluster topology of single TiKV instance on a single machine 
 
 | Name | Host IP | Services |
 | ---- | ------- | -------- |
@@ -167,7 +167,7 @@ pd_servers
 172.16.10.1
 ```
 
-### The Cluster Topology of Multiple TiKV Instances on a Single Machine
+### The cluster topology of multiple TiKV instances on a single machine
 
 Take three TiKV instances as an example:
 
@@ -222,7 +222,7 @@ location_labels = ["host"]
 
 1. For multiple TiKV instances, edit the `end-point-concurrency` and `block-cache-size` parameters in `conf/tikv.yml`:
 
-    - `end-point-concurrency`: keep the number lower than CPU Vcores
+    - `end-point-concurrency`: keep the number less than CPU Vcores
     - `rocksdb defaultcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 30% 
     - `rocksdb writecf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 45%
     - `rocksdb lockcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 2.5% (128 MB at a minimum)
@@ -232,7 +232,7 @@ location_labels = ["host"]
 
     - `capaticy`: (DISK - log space) / TiKV instance number (the unit is GB)
 
-## Deploy the TiDB Cluster
+## Deploy the TiDB cluster
 
 > **Note**: 
 > 
@@ -344,7 +344,7 @@ Descriptions about the two circumstances are as follows.
         ansible-playbook start.yml -k
         ```
 
-## Test the Cluster
+## Test the cluster
 
 It is recommended to configure load balancing to provide uniform SQL interface.
 
