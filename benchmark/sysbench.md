@@ -36,7 +36,7 @@ Place: Beijing
 
 ## Test scenarios
 
-### Scenario one: simple performance test using Sysbench
+### Scenario one: RW performance test using Sysbench
 
 The structure of the table used for the test:
 
@@ -93,7 +93,7 @@ datadir = /data3/mysql
 max_connections = 2000 
 ```
 
-- Simple OLTP test
+- OLTP RW test
     
     | - | Table count | Table size | Sysbench threads | TPS | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
@@ -112,7 +112,7 @@ max_connections = 2000
 
     ![](media/sysbench-02.png)
 
-- Simple `Select` test
+- `Select` RW test
 
     | - | Table count | Table size | Sysbench threads | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | 
@@ -131,7 +131,7 @@ max_connections = 2000
 
     ![](media/sysbench-04.png) 
 
-- Simple `Insert` test
+- `Insert` RW test
 
     | - | Table count | Table size | Sysbench threads | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -176,7 +176,7 @@ block-cache-size = "5GB"
 block-cache-size = "2GB"
 ``` 
 
-- Simple OLTP test
+- OLTP RW test
 
     | - | Table count | Table size | Sysbench threads | TPS | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
@@ -187,7 +187,7 @@ block-cache-size = "2GB"
 
     ![](media/sysbench-07.png)
 
-- Simple `Select` test
+- `Select` RW test
 
     | - | Table count | Table size | Sysbench threads | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | 
@@ -198,7 +198,7 @@ block-cache-size = "2GB"
 
     ![](media/sysbench-08.png)
 
-- Simple `Insert` test
+- `Insert` RW test
 
     | - | Table count | Table size | Sysbench threads | QPS | Latency(avg / .95) | 
     | :---: | :---: | :---: | :---: | :---: | :---: | 
