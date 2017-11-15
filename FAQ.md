@@ -3,9 +3,86 @@ title: TiDB FAQ
 category: faq
 ---
 
-# TiDB FAQ
-
-This document lists the Most Frequently Asked Questions about TiDB.
+- [Product](#product)
+    - [General](#general)
+        - [What is TiDB?](#what-is-tidb)
+        - [Is TiDB based on MySQL?](#is-tidb-based-on-mysql)
+        - [What is the difference between TiDB and MySQL Group Replication?](#what-is-the-difference-between-tidb-and-mysql-group-replication)
+        - [How do TiDB and TiKV work together? What is the relationship between the two?](#how-do-tidb-and-tikv-work-together-what-is-the-relationship-between-the-two)
+        - [What does Placement Driver (PD) do?](#what-does-placement-driver-pd-do)
+        - [Is it easy to use TiDB?](#is-it-easy-to-use-tidb)
+        - [When to use TiDB?](#when-to-use-tidb)
+        - [When not to use TiDB?](#when-not-to-use-tidb)
+        - [How is TiDB strongly-consistent?](#how-is-tidb-strongly-consistent)
+        - [Does TiDB support distributed transactions?](#does-tidb-support-distributed-transactions)
+        - [Does the conflict of multiple transactions (such as updating the same row at the same time) cause commit failure of some transactions?](#does-the-conflict-of-multiple-transactions-such-as-updating-the-same-row-at-the-same-time-cause-commit-failure-of-some-transactions)
+        - [What programming language can I use to work with TiDB?](#what-programming-language-can-i-use-to-work-with-tidb)
+        - [How does TiDB compare to traditional relational databases like Oracle and MySQL?](#how-does-tidb-compare-to-traditional-relational-databases-like-oracle-and-mysql)
+        - [How does TiDB compare to NoSQL databases like Cassandra, Hbase, or MongoDB?](#how-does-tidb-compare-to-nosql-databases-like-cassandra-hbase-or-mongodb)
+        - [An error message is displayed when using `go get` to install TiDB.](#an-error-message-is-displayed-when-using-go-get-to-install-tidb)
+        - [How is TiDB highly available?](#how-is-tidb-highly-available)
+        - [Does TiDB release space immediately after deleting data?](#does-tidb-release-space-immediately-after-deleting-data)
+        - [Can I execute DDL operations on the target table when loading data?](#can-i-execute-ddl-operations-on-the-target-table-when-loading-data)
+        - [Does TiDB support the `replace into` syntax?](#does-tidb-support-the-replace-into-syntax)
+        - [How to export the data in TiDB?](#how-to-export-the-data-in-tidb)
+        - [Does TiDB support session timeout?](#does-tidb-support-session-timeout)
+    - [PD](#pd)
+        - [The `TiKV cluster is not bootstrapped` message is displayed when accessing PD.](#the-tikv-cluster-is-not-bootstrapped-message-is-displayed-when-accessing-pd)
+        - [The `etcd cluster ID mismatch` message is displayed when starting PD.](#the-etcd-cluster-id-mismatch-message-is-displayed-when-starting-pd)
+        - [How to update the startup parameters of PD?](#how-to-update-the-startup-parameters-of-pd)
+        - [What's the maximum tolerance for time synchronization error of PD?](#whats-the-maximum-tolerance-for-time-synchronization-error-of-pd)
+        - [How does the client connection find PD?](#how-does-the-client-connection-find-pd)
+        - [What is the difference between the `leader-schedule-limit` and `region-schedule-limit` scheduling parameters in PD?](#what-is-the-difference-between-the-leader-schedule-limit-and-region-schedule-limit-scheduling-parameters-in-pd)
+        - [Is the number of replicas in each region configurable? If yes, how to configure it?](#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it)
+    - [TiDB](#tidb)
+        - [How to choose the lease parameter in TiDB?](#how-to-choose-the-lease-parameter-in-tidb)
+        - [Can I use other key-value storage engines with TiDB?](#can-i-use-other-key-value-storage-engines-with-tidb)
+        - [Where is the Raft log stored in TiDB?](#where-is-the-raft-log-stored-in-tidb)
+        - [Why it is very slow to run DDL statements sometimes?](#why-it-is-very-slow-to-run-ddl-statements-sometimes)
+        - [ERROR 2013 (HY000): Lost connection to MySQL server during query.](#error-2013-hy000-lost-connection-to-mysql-server-during-query)
+        - [Can I use S3 as the backend storage in TiDB?](#can-i-use-s3-as-the-backend-storage-in-tidb)
+    - [TiKV](#tikv)
+        - [What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?](#what-is-the-recommended-number-of-replicas-in-the-tikv-cluster-is-it-better-to-keep-the-minimum-number-for-high-availability)
+        - [Can TiKV specify a standalone replica machine (to separate cluster data and replicas)?](#can-tikv-specify-a-standalone-replica-machine-to-separate-cluster-data-and-replicas)
+        - [Why the TiKV data directory is gone?](#why-the-tikv-data-directory-is-gone)
+        - [The `cluster ID mismatch` message is displayed when starting TiKV.](#the-cluster-id-mismatch-message-is-displayed-when-starting-tikv)
+        - [The `duplicated store address` message is displayed when starting TiKV.](#the-duplicated-store-address-message-is-displayed-when-starting-tikv)
+        - [Would the key be too long according to the TiDB setting?](#would-the-key-be-too-long-according-to-the-tidb-setting)
+        - [TiKV master and slave use the same compression algorithm, why the results are different?](#tikv-master-and-slave-use-the-same-compression-algorithm-why-the-results-are-different)
+        - [What are the features of TiKV block cache?](#what-are-the-features-of-tikv-block-cache)
+    - [TiSpark](#tispark)
+        - [Where is the user guide of TiSpark?](#where-is-the-user-guide-of-tispark)
+        - [TiSpark Cases](#tispark-cases)
+- [Operations](#operations)
+    - [Install](#install)
+        - [Why the modified `toml` configuration for TiKV/PD does not take effect?](#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect)
+        - [What can I do if the file system of my data disk is XFS and cannot be changed?](#what-can-i-do-if-the-file-system-of-my-data-disk-is-xfs-and-cannot-be-changed)
+        - [Can I configure chrony to meet the requirement of time synchronization in TiDB?](#can-i-configure-chrony-to-meet-the-requirement-of-time-synchronization-in-tidb)
+    - [Scale](#scale)
+        - [How does TiDB scale?](#how-does-tidb-scale)
+    - [Monitor](#monitor)
+        - [Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?](#should-i-deploy-the-tidb-monitoring-framework-prometheus--grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory)
+        - [The monitor can't show all the metrics.](#the-monitor-cant-show-all-the-metrics)
+        - [How to configure to monitor Syncer status?](#how-to-configure-to-monitor-syncer-status)
+    - [Migrate](#migrate)
+        - [Can a MySQL application be migrated to TiDB?](#can-a-mysql-application-be-migrated-to-tidb)
+        - [Accidentally import the MySQL user table into TiDB and cannot login, how to restore?](#accidentally-import-the-mysql-user-table-into-tidb-and-cannot-login-how-to-restore)
+    - [Performance tuning](#performance-tuning)
+    - [Backup and restore](#backup-and-restore)
+    - [Misc](#misc)
+        - [How does TiDB manage user account?](#how-does-tidb-manage-user-account)
+        - [Where are the TiDB/PD/TiKV logs?](#where-are-the-tidbpdtikv-logs)
+        - [How to safely stop TiDB?](#how-to-safely-stop-tidb)
+        - [Can `kill` be executed in TiDB?](#can-kill-be-executed-in-tidb)
+        - [What is the function of supervise/svc/svstat service?](#what-is-the-function-of-supervisesvcsvstat-service)
+- [SQL](#sql)
+    - [SQL syntax](#sql-syntax)
+        - [The error message `transaction too large` is displayed.](#the-error-message-transaction-too-large-is-displayed)
+        - [View the DDL job.](#view-the-ddl-job)
+        - [The `column Show_db_priv not found` message is displayed when executing `grant SHOW DATABASES on db.*`.](#the-column-show_db_priv-not-found-message-is-displayed-when-executing-grant-show-databases-on-db)
+    - [SQL optimization](#sql-optimization)
+        - [How to optimize `select count(1)`?](#how-to-optimize-select-count1)
+        - [The efficiency of `FROM_UNIXTIME` is low.](#the-efficiency-of-from_unixtime-is-low)
 
 ## Product
 
@@ -82,7 +159,7 @@ If you are a developer and familiar with Go, you can run `make parser; ln -s _ve
 
 #### How is TiDB highly available?
 
-TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [High availability](overview.md#high-availability).
+TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [High availability](README.md#high-availability).
 
 #### Does TiDB release space immediately after deleting data?
 
@@ -152,15 +229,19 @@ The lease parameter (`--lease=60`) is set from the command line when starting a 
 
 #### Can I use other key-value storage engines with TiDB?
 
-Yes. Besides TiKV, TiDB supports many popular standalone storage engines, such as GolevelDB and BoltDB. If the storage engine is a KV engine that supports transactions and it provides a client that meets the interface requirement of TiDB, then it can connect to TiDB.
+Yes. Besides TiKV, TiDB supports many popular standalone storage engines, such as GolevelDB, RocksDB and BoltDB. If the storage engine is a KV engine that supports transactions and it provides a client that meets the interface requirement of TiDB, then it can connect to TiDB.
 
 #### Where is the Raft log stored in TiDB?
 
 In RocksDB.
 
-#### Why it is very slow to execute DDL statements sometimes?
+#### Why it is very slow to run DDL statements sometimes?
 
-In the TiDB cluster, the DDL statements are executed serially, not concurrently. You can use the `admin show ddl` statement to view running DDL statements and use the `admin show ddl jobs` statement to view the DDL in history and in the queue. 
+Possible reasons:
+
+- If you run multiple DDL statements together, the last few DDL statements might run slowly. This is because the DDL statements are executed serially in the TiDB cluster.
+- After you start the cluster successfully, the first DDL operation may take a longer time to run, usually around 30s. This is because the TiDB cluster is electing the leader that processes DDL statements.
+- In rolling update or shutdown update, the processing time of DDL statements in the first ten minutes after starting TiDB is affected by the server stop sequence (stopping PD -> TiDB), and the condition where TiDB does not clean up the registration data in time because TiDB is stopped using the `kill -9` command. When you run DDL statements during this period, for the state change of each DDL, you need to wait 2 * lease (lease = 10s).
 
 #### ERROR 2013 (HY000): Lost connection to MySQL server during query.
 
@@ -168,7 +249,19 @@ Troubleshooting methods:
 
 - Check whether `panic` exists in the log.
 - Check whether `oom` exists in `dmesg` using the `dmesg |grep -i oom` command.
-- A long time of not accessing can also lead to this error, usually caused by the tcp timeout. If not used for a long time, the tcp is killed by the operating system.  
+- A long time of not accessing can also lead to this error, usually caused by the tcp timeout. If not used for a long time, the tcp is killed by the operating system. 
+
+#### Can I use S3 as the backend storage in TiDB?
+
+No. Currently, TiDB only supports the distributed storage engine and the Goleveldb/Rocksdb/Boltdb engine.
+
+Does TiDB support the following DDL?
+
+```
+CREATE TABLE ... LOCATION "s3://xxx/yyy"
+```
+
+If you can implement the S3 storage engine client, it should be based on the TiKV interface.
 
 ### TiKV
 
@@ -200,11 +293,24 @@ To solve this problem, use the [store delete](https://github.com/pingcap/pd/tree
 
 The RocksDB compresses the key.
 
+#### TiKV master and slave use the same compression algorithm, why the results are different?
+
+Currently, some files of TiKV master have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data size fluctuates occasionally. The underlying storage engine adjusts data as needed.
+
+#### What are the features of TiKV block cache?
+
+TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV data is eventually stored in the 3 CFs (default, write and lock) within RocksDB.
+
+- The default CF stores real data and the corresponding parameter is in [rocksdb.defaultcf]. The write CF stores the data version information (MVCC) and index-related data, and the corresponding parameter is in `[rocksdb.writecf]`. The lock CF stores the lock information and the system uses the default parameter.
+- The Raft RocksDB instance stores Raft logs. The default CF mainly stores Raft logs and the corresponding parameter is in `[raftdb.defaultcf]`.
+- Each CF has an individual block-cache to cache data blocks and improve RocksDB read speed. The size of block-cache is controlled by the `block-cache-size` parameter. A larger value of the parameter means more hot data can be cached and is more favorable to read operation. At the same time, it consumes more system memory.
+- Each CF has an individual write-buffer and the size is controlled by the `write-buffer-size` parameter.
+
 ### TiSpark
 
 #### Where is the user guide of TiSpark?
 
-See the [TiSpark User Guide](tispark/tispark-user-guide.md).
+See the [TiSpark User Guide](https://github.com/pingcap/tispark/blob/master/docs/userguide.md).
 
 #### TiSpark Cases
 
@@ -259,7 +365,7 @@ You can scale TiDB as your business grows.
 
 ### Monitor
 
-Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?
+#### Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?
 
 The monitoring machine is recommended to use standalone deployment. It is recommended to use 8 core CPU, 32 GB+ memory and 500 GB+ hard disk.  
 
@@ -267,11 +373,63 @@ The monitoring machine is recommended to use standalone deployment. It is recomm
 
 Check the time difference between the machine time of the monitor and the time within the cluster. If it is large, you can correct the time and the monitor will display all the metrics.
 
+#### How to configure to monitor Syncer status?
+
+Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
+
+```
+- job_name: ‘syncer_ops’ // task name
+    static_configs:
+      - targets: [’10.10.1.1:10096’] // Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
+```
+
+Restart Prometheus. 
+
 ### Migrate
 
 #### Can a MySQL application be migrated to TiDB?
 
 Yes. Your applications can be migrated to TiDB without changing a single line of code in most cases. You can use [checker](https://github.com/pingcap/tidb-tools/tree/master/checker) to check whether the Schema in MySQL is compatible with TiDB.
+
+#### Accidentally import the MySQL user table into TiDB and cannot login, how to restore?
+
+Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Login the cluster and recreate the mysql.user table using the following statement:
+
+```sql
+DROP TABLE IF EXIST mysql.user;
+
+CREATE TABLE if not exists mysql.user (
+    Host        CHAR(64),
+    User        CHAR(16),
+    Password      CHAR(41),
+    Select_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Insert_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Update_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Delete_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Drop_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Process_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Grant_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    References_priv     ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Alter_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Show_db_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Super_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_tmp_table_priv   ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Lock_tables_priv    ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Execute_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_view_priv    ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Show_view_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_routine_priv   ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Alter_routine_priv    ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Index_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Create_user_priv    ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Event_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    Trigger_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
+    PRIMARY KEY (Host, User));
+
+INSERT INTO mysql.user VALUES ("%", "root", "", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y");
+
+```
 
 ### Performance tuning
 
@@ -319,6 +477,12 @@ You can `kill` DML statements. First use `show processlist` to find the id corre
 
 But currently, you cannot `kill` DDL statements. Once you start executing DDL statements, you cannot stop them unless something goes wrong. If something goes wrong, the DDL statements will stop executing.
 
+#### What is the function of supervise/svc/svstat service?
+
+- supervise: the daemon process, to manage the processes 
+- svc: to start and stop the service
+- svstat: to check the process status
+
 ## SQL
 
 ### SQL syntax
@@ -341,13 +505,18 @@ There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Goog
 
 3. As for `delete` and `update`, you can use `limit` plus circulation to operate.
 
-#### Check the running DDL job
+#### View the DDL job.
 
-```sql
-admin show ddl
+- `admin show ddl`: to view the running DDL job
+- `admin show ddl jobs`: to view all the results in the current DDL job queue (including tasks that are running and waiting to run) and the last ten results in the completed DDL job queue
+
+#### The `column Show_db_priv not found` message is displayed when executing `grant SHOW DATABASES on db.*`.
+
+`SHOW DATABASES` is a global privilege rather than a database-level privilege. Therefore, you cannot grant this privilege to a database. You need to grant all databases:
+
 ```
-
-Note: The DDL cannot be cancelled unless it goes wrong.
+grant SHOW DATABASES on *.*
+``` 
 
 ### SQL optimization
 
@@ -361,3 +530,7 @@ Recommendations:
 2. Improve the concurrency. The default value is 10. You can improve it to 50 and have a try. But usually the improvement is 2-4 times of the default value.
 3. Test the `count` in the case of large amount of data.
 4. Optimize the TiKV configuration. See [Performance Tuning for TiKV](op-guide/tune-TiKV.md).
+
+#### The efficiency of `FROM_UNIXTIME` is low.
+
+Do not use `FROM_UNIXTIME` to get the system time. It is recommended to convert datetime to timestamp and compare. Currently, `FROM_UNIXTIME` does not support indexes. 

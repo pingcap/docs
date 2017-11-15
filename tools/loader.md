@@ -107,7 +107,7 @@ Or use configuration file "config.toml":
 
     ./bin/loader -c=config.toml
     
-> **Note**:
-> 
-> - If you use the default checkpoint-schema, after importing the data of a database, drop the `tidb_loader` database before you begin to import the next database. 
-> - It is recommended to specify the `checkpoint-schema = "tidb_loader"` parameter when importing data.
+### Note
+
++ If you use the default checkpoint-schema, after importing the data of a database, drop the tidb_loader database before you begin to import the next database. 
++ It is recommended to specify the `checkpoint-schema = "tidb_loader"` parameter when importing data.
