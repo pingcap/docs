@@ -23,11 +23,11 @@ Similar to MySQL, TiDB also has system tables that store the information needed 
 
 ## TiDB Data Directory
 
-The TiDB data is stored in the storage engine and the data directory depends on the storage engine used. For more information about how to choose the storage engine, see the [TiDB startup parameters document](op-guide/configuration.md#--store).
+The TiDB data is stored in the storage engine and the data directory depends on the storage engine used. For more information about how to choose the storage engine, see the [TiDB startup parameters document](../op-guide/configuration.md#store).
 
-When you use the local storage engine, the data is stored on the local hard disk and the directory location is controlled by the [`path`](op-guide/configuration.md#--path) parameter.
+When you use the local storage engine, the data is stored on the local hard disk and the directory location is controlled by the [`path`](../op-guide/configuration.md#path) parameter.
 
-When you use the TiKV storage engine, the data is stored on the TiKV node and the directory location is controlled by the [`data-dir`](op-guide/configuration.md#--data-dir-1) parameter.
+When you use the TiKV storage engine, the data is stored on the TiKV node and the directory location is controlled by the [`data-dir`](../op-guide/configuration.md#data-dir-1) parameter.
 
 ## TiDB Server Logs
 
