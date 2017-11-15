@@ -8,16 +8,16 @@ category: user guide
 
 TiDB's privilege management system is implemented according to the privilege management system in MySQL. It supports most of the syntaxes and privilege types in MySQL. If you find any inconsistency with MySQL, feel free to [open an issue](https://github.com/pingcap/docs-cn/issues/new).
 
-> **Note:** Starting from RC3, the privilege management function is enabled by default. But if you use earlier versions than RC3, you must add the following startup option or the privilege check does not work:
-> 
->    ./tidb-server -privilege=true
+**Note:** Starting from RC3, the privilege management function is enabled by default. But if you use earlier versions than RC3, you must add the following startup option or the privilege check does not work:
+
+    ./tidb-server -privilege=true
 
 ## 1. User account operation
 
 TiDB user account names consist of a user name and a host name. The account name syntax is `'user_name'@'host_name'`.
 
-- The `user_name` is case sensitive.
-- The `host_name` can be a host name or an IP address. The `%` and `_` wildcard characters are permitted in host name or IP address values. For example, a host value of `'%'` matches any host name and `'192.168.1.%'` matches every host on a subnet.
+The `user_name` is case sensitive.
+The `host_name` can be a host name or an IP address. The `%` and `_` wildcard characters are permitted in host name or IP address values. For example, a host value of `'%'` matches any host name and `'192.168.1.%'` matches every host on a subnet.
 
 ### Create user
 
@@ -116,7 +116,7 @@ mysql> select user,host from mysql.user where user='xxxx';
 
 In this example, `xxxx@%` is the user that is automatically created.
 
-> **Note:** Granting privileges to a database or table does not check if the database or table exists.
+**Note:** Granting privileges to a database or table does not check if the database or table exists.
 
 ```
 mysql> select * from test.xxxx;
@@ -161,40 +161,41 @@ The `REVOKE` statement corresponds with the `REVOKE` statement：
 revoke all privileges on `test`.* from 'genius'@'localhost';
 ```
 
-> **Note：** To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed.
-> 
+**Note：** To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed.
+
+```
+mysql> revoke all privileges on `te%`.* from 'genius'@'%';
+ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
+```
+
+> About fuzzy matching, escape, string and identifier
+>
+>
 > ```
-> mysql> revoke all privileges on `te%`.* from 'genius'@'%';
-> ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
+> mysql> grant all privileges on `te\%`.* to 'genius'@'localhost';
+> Query OK, 0 rows affected (0.00 sec)
 > ```
-
-About fuzzy matching, escape, string and identifier:
-
-```sql
-mysql> grant all privileges on `te\%`.* to 'genius'@'localhost';
-Query OK, 0 rows affected (0.00 sec)
-```
-
-This example uses exact match to find the database named `te%`. Note that the `%` uses the `\` escape character so that `%` is not considered as a wildcard.
-
-A string is enclosed in single quotation marks(''), while an identifier is enclosed in backticks (``). See the differences below:
-
-```sql
-mysql> grant all privileges on 'test'.* to 'genius'@'localhost';
-ERROR 1064 (42000): You have an error in your SQL syntax; check the
-manual that corresponds to your MySQL server version for the right
-syntax to use near ''test'.* to 'genius'@'localhost'' at line 1
-
-mysql> grant all privileges on `test`.* to 'genius'@'localhost';
-Query OK, 0 rows affected (0.00 sec)
-```
-
-If you want to use special keywords as table names, enclose them in backticks (``). For example:
-
-```sql
-mysql> create table `select` (id int);
-Query OK, 0 rows affected (0.27 sec)
-```
+>
+> This example uses exact match to find the database named `te%`. Note that the `%` uses the `\` escape character so that `%` is not considered as a wildcard.
+>
+> A string is enclosed in single quotation marks(''), while an identifier is enclosed in backticks (``). See the differences below:
+>
+> ```
+> mysql> grant all privileges on 'test'.* to 'genius'@'localhost';
+> ERROR 1064 (42000): You have an error in your SQL syntax; check the
+> manual that corresponds to your MySQL server version for the right
+> syntax to use near ''test'.* to 'genius'@'localhost'' at line 1
+>
+> mysql> grant all privileges on `test`.* to 'genius'@'localhost';
+> Query OK, 0 rows affected (0.00 sec)
+> ```
+>
+> If you want to use special keywords as table names, enclose them in backticks (``). For example:
+>
+> ```
+> mysql> create table `select` (id int);
+> Query OK, 0 rows affected (0.27 sec)
+> ```
 
 ### Check privileges granted to user
 
@@ -230,8 +231,11 @@ To be more precise, you can check the privilege information in the `Grant` table
 The following system tables are special because all the privilege-related data is stored in them:
 
 - mysql.user (user account, global privilege)
+
 - mysql.db (database-level privilege)
+
 - mysql.tables_priv (table-level privilege)
+
 - mysql.columns_priv (column-level privilege)
 
 These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
@@ -296,7 +300,6 @@ flush privileges
 ## 4. Limitations and constraints
 
 Currently, the following privileges are not checked yet because they are less frequently used:
-
 - FILE
 - USAGE
 - SHUTDOWN
@@ -305,4 +308,4 @@ Currently, the following privileges are not checked yet because they are less fr
 - INDEX
 - ...
 
-> **Note:** The column-level privilege is not implemented at this stage.
+**Note:** The column-level privilege is not implemented at this stage.
