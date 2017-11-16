@@ -211,3 +211,14 @@ Usage:
 >> scheduler remove grant-leader-scheduler-1  // Delete the corresponding scheduler
 ```
 
+### hot [read | write | store]
+
+Display the hot data in the cluster.
+
+Usage:
+
+```bash
+>> hot read                                   // Display hot data of the read operation
+>> hot write                                  // Display hot data of the write operation
+>> hot store                                  // Display all the read and write data of the store
+```
