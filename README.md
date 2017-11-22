@@ -93,7 +93,7 @@
       - [Migrate All the Data](op-guide/migration.md#using-the-mydumper--loader-tool-to-export-and-import-all-the-data)
       - [Migrate the Data Incrementally](op-guide/migration.md#optional-using-the-syncer-tool-to-import-data-incrementally)
   - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
-  - [Troubleshoot](./trouble-shooting.md)
+  - [Troubleshoot](trouble-shooting.md)
 + TiDB Utilities
   - [Syncer User Guide](tools/syncer.md)
   - [Loader User Guide](tools/loader.md)
