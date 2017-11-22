@@ -50,6 +50,20 @@ SELECT n'some text';
 SELECT _utf8'some text';
 ```
 
+Escape characters:
+
+- `\0`: An ASCII NUL (X'00') character
+- `\'`: A single quote (') character
+- `\"`: A double quote (")character
+- `\b`: A backspace character
+- `\n`: A newline (linefeed) character
+- `\r`: A carriage return character
+- `\t`: A tab character
+- `\z`: ASCII 26 (Ctrl + Z)
+- `\\`: A backslash `\` character
+- `\%`: A `%` character
+- `\_`: A `_` character
+
 You can use the following ways to include quote characters within a string:
 
 - A `'` inside a string quoted with `'` may be written as `''`.
@@ -102,7 +116,7 @@ X'1z' (z is not a hexadecimal legal digit)
 Hexadecimal literals written using `X'val'` notation must contain an even number of digits. To avoid the syntax error, pad the value with a leading zero:
 
 ```
-mysql> select X'aff';
+mysql> select X'aff';
 ERROR 1105 (HY000): line 0 column 13 near ""hex literal: invalid hexadecimal format, must even numbers, but 3 (total length 13)
 mysql> select X'0aff';
 +---------+
