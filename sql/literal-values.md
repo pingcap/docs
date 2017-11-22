@@ -50,20 +50,6 @@ SELECT n'some text';
 SELECT _utf8'some text';
 ```
 
-Escape characters:
-
-- `\0`: An ASCII NUL (X'00') character
-- `\'`: A single quote (') character
-- `\"`: A double quote (")character
-- `\b`: A backspace character
-- `\n`: A newline (linefeed) character
-- `\r`: A carriage return character
-- `\t`: A tab character
-- `\z`: ASCII 26 (Ctrl + Z)
-- `\\`: A backslash `\` character
-- `\%`: A `%` character
-- `\_`: A `_` character
-
 You can use the following ways to include quote characters within a string:
 
 - A `'` inside a string quoted with `'` may be written as `''`.
