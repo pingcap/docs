@@ -213,12 +213,12 @@ Usage:
 
 ### hot [read | write | store]
 
-Display the hot data in the cluster.
+Display the hot spot in the cluster.
 
 Usage:
 
 ```bash
->> hot read                                   // Display hot data of the read operation
->> hot write                                  // Display hot data of the write operation
->> hot store                                  // Display all the read and write data of the store
+>> hot read                                   // Display hot spot for the read operation
+>> hot write                                  // Display hot spot for the write operation
+>> hot store                                  // Display hot spot for all the read and write operations
 ```
