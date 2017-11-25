@@ -10,7 +10,7 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 
 You must follow [rust-rocksdb](https://github.com/pingcap/rust-rocksdb/blob/master/librocksdb_sys/build.sh#L127) to see which version TiKV needs. You can install the RocksDB shared library manually according to [INSTALL.md](https://github.com/facebook/rocksdb/blob/master/INSTALL.md).
 
-Once installed, please add the RocksDB include path to your `CPATH` environment variable and the RocksDB lib path to `LIBRARY_PATH`, `LD_LIBRARY_PATH` environment variables.
+Once installed, please mkae sure that RocksDB include path is in your `CPATH` environment variable and the RocksDB lib path is in `LIBRARY_PATH`, `LD_LIBRARY_PATH` environment variables.
 
 ## Build TiKV
 
