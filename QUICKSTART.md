@@ -28,6 +28,7 @@ Before you start, make sure that you have:
 1. A Control Machine with the following requirements:
 
     - Python 2.6 or Python 2.7
+
     - Python Jinja2 2.7.2 and MarkupSafe 0.11 packages. You can use the following commands to install the packages:
     
         ```bash
@@ -39,6 +40,7 @@ Before you start, make sure that you have:
 2. Several managed nodes with the following requirements:
 
     - 4 or more machines. At least 3 instances for TiKV. Don’t deploy TiKV together with TiDB or PD on the same machine. See [deploying recommendations](/op-guide/recommendation.md).
+
     + Operating system:
 
       - CentOS 7.3 and later versions
@@ -47,8 +49,11 @@ Before you start, make sure that you have:
       - Ext4 file system.
 
     - Network between machines. Turn off the firewalls and iptables when deploying and turn them on after the deployment.
+
     - The same time and time zone for all machines with the NTP service on to synchronize the correct time.
+
     - A remote user account which you can use to login from the Control Machine to connect to the managed nodes via SSH. It is a normal user account with sudo privileges.
+    
     - Python 2.6 or Python 2.7
 
     > **Note:** The Control Machine can be one of the managed nodes with access to external network to download binary.
