@@ -14,27 +14,27 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### `--binlog-socket`
 
 - The TiDB services use the unix socket file for internal connections, such as the PUMP service
-- Default: ""
+- Default: ``
 - You can use "/tmp/pump.sock" to accept the communication of PUMP unix socket file.
 
 ### `--cross-join`
 
-- To enable(true) or disable(false) the cross join without any equal condition
+- To enable (true) or disable (false) the cross join without any equal conditions
 - Default: true
-- The value can be (true) or (false). (true) is to enable join without any equal conditions. (false) is to disable it.
+- The value can be (true) or (false). (true) is to enable `join` without any equal conditions. (false) is to disable it.
 
 ### `--host`
 
 - The host address that the TiDB server monitors
 - Default: "0.0.0.0"
 - The TiDB server monitors this address.
-- The "0.0.0.0" monitors all network cards addresses. If you have multiple network cards, specify the network card that provides service, such as 192.168.100.113.
+- The "0.0.0.0" monitors all network cards. If you have multiple network cards, specify the network card that provides service, such as 192.168.100.113.
 
 ### `--join-concurrency int`
 
 - The number of goroutine when `join-concurrency` executes `join` concurrently
 - Default: 5
-- The number depends on the amount of data and data distribution, usually the larger the better, and a larger number means a larger CPU workload.
+- The number depends on the amount of data and data distribution, usually the larger the better, and a larger number means a larger CPU overhead.
 
 ### `-L`
 
@@ -45,7 +45,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### `--lease`
 
 + The schema lease time in seconds
-+ Default: "1"
++ Default: "10"
 + This is the schema lease time that is used in online schema changes. The value will affect the DDL statement running time. Do not change it unless you understand the internal mechanism.
 
 ### `--log-file`
@@ -60,11 +60,16 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 + Default: ""
 + Leaving it empty stops the Prometheus client from pushing.
 
-### `--metrics-intervel`
+### `--metrics-interval`
 
 + The Prometheus client push interval in seconds
 + Default: 0
 + Setting the value to 0 stops the Prometheus client from pushing.
++ The format is:
+    
+    ```
+    --metrics-addr=192.168.100.115:9091
+    ```
 
 ### `-P`
 
