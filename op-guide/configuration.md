@@ -21,7 +21,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 - To enable (true) or disable (false) the cross join without any equal conditions
 - Default: true
-- The value can be (true) or (false). (true) is to enable `join` without any equal conditions. (false) is to disable it.
+- The value can be `true` or `false`. By default, `true` is to enable `join` without any equal conditions (the `Where` field). If you set the value to `false`, the server refuses to run the `join` statement.
 
 ### `--host`
 
