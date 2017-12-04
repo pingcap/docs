@@ -59,17 +59,17 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 + The Prometheus pushgateway address
 + Default: ""
 + Leaving it empty stops the Prometheus client from pushing.
++ The format is:
+    
+    ```
+    --metrics-addr=192.168.100.115:9091
+    ```
 
 ### `--metrics-interval`
 
 + The Prometheus client push interval in seconds
 + Default: 0
 + Setting the value to 0 stops the Prometheus client from pushing.
-+ The format is:
-    
-    ```
-    --metrics-addr=192.168.100.115:9091
-    ```
 
 ### `-P`
 
