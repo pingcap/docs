@@ -1,5 +1,5 @@
 ---
-title: TiDB Ansible Deployment
+title: Ansible Deployment
 category: operations
 ---
 
@@ -207,7 +207,7 @@ location_labels = ["host"]
 
 2. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
-    - `capaticy`: (DISK - log space) / TiKV instance number (the unit is GB)
+    - `capacity`: (DISK - log space) / TiKV instance number (the unit is GB)
 
 ## Deploy the TiDB cluster
 
