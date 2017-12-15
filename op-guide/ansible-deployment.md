@@ -269,7 +269,7 @@ Descriptions about the two circumstances are as follows.
         ansible-playbook start.yml -k
         ```
 
-- Use the normal user with  to deploy TiDB.
+- Use the normal user account to deploy TiDB.
 
     > **Note**: Before the deployment, you should create the normal `tidb` user account and add the sudo privileges. The following example uses the `tidb` user account as the user who runs the service.
 
