@@ -448,8 +448,8 @@ mysql> admin show ddl;
 
 ```
 
-`OWNER` represents the TiDB server that is running this DDL statement. `JOB` lists the detailed information of the task.
-
+- The `OWNER` represents the TiDB server that is running this DDL statement.
+- The `JOB` lists the detailed information of the task.
 - The `SchemaID:81, TableID:90` in `JOB` represents the database ID and the user table ID.
 - The `RowCount:1293344122` in `JOB` represents the numer of rows that have been processed currently.
 
