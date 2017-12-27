@@ -92,7 +92,7 @@ For more information, see [Ansible Documentation](http://docs.ansible.com/ansibl
 
 Use the following command to download the corresponding version of TiDB-Ansible from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`. The `tidb-ansible` directory contains all files you need to get started with TiDB-Ansible.
 
-Download the GA version:
+Download the 1.0 version:
 
 ```
 git clone -b release-1.0 https://github.com/pingcap/tidb-ansible.git
@@ -104,7 +104,7 @@ Download the master version:
 git clone https://github.com/pingcap/tidb-ansible.git
 ```
 
-> **Note:** For the production environment, download the GA version to deploy TiDB.
+> **Note:** For the production environment, download the 1.0 version to deploy TiDB.
 
 ## Orchestrate the TiDB cluster
 
@@ -220,7 +220,7 @@ location_labels = ["host"]
 
     - `capacity`: (DISK - log space) / TiKV instance number (the unit is GB)
 
-### Adjustment of inventory.ini variables
+### Description of inventory.ini variables
 
 | Variable | Description |
 | ---- | ------- |
@@ -238,7 +238,7 @@ location_labels = ["host"]
 | enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
 | zookeeper_addrs | the zookeeper address of the binlog Kafka cluster |
 | enable_slow_query_log | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
-| deploy_without_tidb | the KV mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
+| deploy_without_tidb | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 
 ## Deploy the TiDB cluster
 
