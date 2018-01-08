@@ -76,7 +76,10 @@
     - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Cross-Region Deployment](op-guide/location-awareness.md)
-  - [Configure](op-guide/configuration.md)
+  + Configure
+    - [Configuration Flags](op-guide/configuration.md)
+    - [Enable TLS Authentication](op-guide/security.md)
+    - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
   + Monitor
     - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
     - [Key Metrics](op-guide/dashboard-overview-info.md)
