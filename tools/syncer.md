@@ -73,25 +73,44 @@ batch = 10
 # The testing address for pprof. It can also be used by Prometheus to pull the syncer metrics.
 status-addr = ":10081"
 
-skip-sqls = ["ALTER USER", "CREATE USER"]
+# Notice: skip-sqls is abandoned, please use skip-ddls instead.
+# skip-ddls skip ddl statements which supports regular expression. When there are DDL sqls incompatible with tidb, you should skip them via these rules.
+# skip-ddls = ["^CREATE\\s+USER"]
+
+# Notice: skip-events is abandoned, please use skip-dmls instead
+# skip-dmls skip DML statements. dml value can be 'insert', 'update', 'delete'.
+# skip delete statements in foo.bar table.
+# [[skip-dmls]]
+# db-name = "foo"
+# tbl-name = "bar"
+# dml = "delete"
+# 
+# skip all delete statements.
+# [[skip-dmls]]
+# dml = "delete"
+# 
+# skip all delete statements in all foo.* tables.
+# [[skip-dmls]]
+# db-name = "foo"
+# dml = "delete"
 
 # Support whitelist filter. You can specify the database and table to be synchronised. For example:
 # Synchronise all the tables of db1 and db2:
-replicate-do-db = ["db1","db2"]
+# replicate-do-db = ["db1","db2"]
 
 # Synchronise db1.table1.
-[[replicate-do-table]]
-db-name ="db1"
-tbl-name = "table1"
+# [[replicate-do-table]]
+# db-name ="db1"
+# tbl-name = "table1"
 
 # Synchronise db3.table2.
-[[replicate-do-table]]
-db-name ="db3"
-tbl-name = "table2"
+# [[replicate-do-table]]
+# db-name ="db3"
+# tbl-name = "table2"
 
 # Support regular expressions. Start with '~'  to use regular expressions.
 # To synchronise all the databases that start with `test`:
-replicate-do-db = ["~^test.*"]
+# replicate-do-db = ["~^test.*"]
 
 # The sharding synchronising rules support wildcharacter.
 # 1. The asterisk character (*, also called "star") matches zero or more characters,
