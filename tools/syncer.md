@@ -78,21 +78,21 @@ status-addr = ":10081"
 # skip-ddls = ["^CREATE\\s+USER"]
 
 # Notice: skip-events is abandoned, please use skip-dmls instead
-# skip-dmls skip DML statements. dml value can be 'insert', 'update', 'delete'.
+# skip-dmls skip DML statements. type value can be 'insert', 'update', 'delete'.
 # skip delete statements in foo.bar table.
 # [[skip-dmls]]
 # db-name = "foo"
 # tbl-name = "bar"
-# dml = "delete"
+# type = "delete"
 # 
 # skip all delete statements.
 # [[skip-dmls]]
-# dml = "delete"
+# type = "delete"
 # 
 # skip all delete statements in all foo.* tables.
 # [[skip-dmls]]
 # db-name = "foo"
-# dml = "delete"
+# type = "delete"
 
 # Support whitelist filter. You can specify the database and table to be synchronised. For example:
 # Synchronise all the tables of db1 and db2:
