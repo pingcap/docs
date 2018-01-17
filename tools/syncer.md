@@ -78,7 +78,7 @@ status-addr = ":10081"
 # skip-ddls = ["^CREATE\\s+USER"]
 
 # Notice: skip-events is abandoned, and use skip-dmls instead
-# skip-dmls skip DML statements. type value can be 'insert', 'update', 'delete'.
+# skip-dmls skips DML statements. The type value can be 'insert', 'update' and 'delete'.
 # skip delete statements in foo.bar table.
 # [[skip-dmls]]
 # db-name = "foo"
