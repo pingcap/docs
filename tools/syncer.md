@@ -77,9 +77,9 @@ status-addr = ":10081"
 # skip-ddls skips DDL statements, and supports regular expressions. If the DDL sqls are incompatible with TiDB, skip them using these rules.
 # skip-ddls = ["^CREATE\\s+USER"]
 
-# Notice: skip-events is abandoned, and use skip-dmls instead
+# Notice: skip-events is abandoned, and use skip-dmls instead.
 # skip-dmls skips DML statements. The type value can be 'insert', 'update' and 'delete'.
-# skip delete statements in foo.bar table.
+# skip 'delete' statements in foo.bar table.
 # [[skip-dmls]]
 # db-name = "foo"
 # tbl-name = "bar"
