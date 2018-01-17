@@ -73,11 +73,11 @@ batch = 10
 # The testing address for pprof. It can also be used by Prometheus to pull the syncer metrics.
 status-addr = ":10081"
 
-# Notice: skip-sqls is abandoned, please use skip-ddls instead.
-# skip-ddls skip ddl statements which supports regular expression. When there are DDL sqls incompatible with tidb, you should skip them via these rules.
+# Notice: skip-sqls is abandoned, and use skip-ddls instead.
+# skip-ddls skips DDL statements, and supports regular expressions. If the DDL sqls are incompatible with TiDB, skip them using these rules.
 # skip-ddls = ["^CREATE\\s+USER"]
 
-# Notice: skip-events is abandoned, please use skip-dmls instead
+# Notice: skip-events is abandoned, and use skip-dmls instead
 # skip-dmls skip DML statements. type value can be 'insert', 'update', 'delete'.
 # skip delete statements in foo.bar table.
 # [[skip-dmls]]
