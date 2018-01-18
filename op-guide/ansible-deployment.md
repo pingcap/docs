@@ -51,7 +51,7 @@ Before you start, make sure that you have:
 
       - ext4 filesystem
 
-          Use the ext4 filesystem for your data disks. Mount the ext4 filesystem with the `nodelalloc` mount option. See [Mount the data disk ext4 filesystem with options](#mount-the-data-disk-ext4-filesystem-with-options).
+          Use ext4 filesystem for your data disks. Mount ext4 filesystem with the `nodelalloc` mount option. See [Mount the data disk ext4 filesystem with options](#mount-the-data-disk-ext4-filesystem-with-options).
     
     - The network between machines. Turn off the firewalls and iptables when deploying and turn them on after the deployment.
 
@@ -579,7 +579,7 @@ ansible-playbook start.yml
 
 ### Mount the data disk ext4 filesystem with options
 
-Format your data disks to the ext4 filesystem and mount the filesystem with the `nodelalloc` and `noatime` options. It is required to mount the `nodelalloc` option, or else the Ansible deployment cannot pass the detection. The `noatime` option is optional. 
+Format your data disks to ext4 filesystem and mount the filesystem with the `nodelalloc` and `noatime` options. It is required to mount the `nodelalloc` option, or else the Ansible deployment cannot pass the detection. The `noatime` option is optional. 
 
 Take the `/dev/nvme0n1` data disk as an example:
 
