@@ -28,11 +28,11 @@ SET SESSION TRANSACTION ISOLATION LEVEL [read committed|repeatable read]
 
 ## Repeatable Read
 
-Repeatable Read is the default transaction isolation level in TiDB. The Repeatable Read isolation level only sees data committed before the transaction began, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, the transaction statement does see the effects of previous updates executed within its own transaction, even though they are not yet committed.
+Repeatable Read is the default transaction isolation level in TiDB. The Repeatable Read isolation level only sees data committed before the transaction begins, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, the transaction statement does see the effects of previous updates executed within its own transaction, even though they are not yet committed.
 
 For transactions running on different nodes, the start and commit order depends on the order that the timestamp is obtained from PD.
 
-Transactions of the Repeatable Read isolation level does not concurrent updating of a same row. When committing, if the transaction finds that the row has been updated by another transaction after it starts, then the transaction rolls back and retries automatically. For example:
+Transactions of the Repeatable Read isolation level cannot concurrently update a same row. When committing, if the transaction finds that the row has been updated by another transaction after it starts, then the transaction rolls back and retries automatically. For example:
 
 ```
 create table t1(id int);
