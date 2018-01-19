@@ -119,7 +119,7 @@ Take `Release Version: v1.0.3-1-ga80e796` as an example of version number descri
 
 #### What's the difference between various TiDB master versions? How to avoid using the wrong TiDB-Ansible version?
 
-The TiDB community is highly active. After the GA release, the engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Release Notes](release/rn.md).
+The TiDB community is highly active. After the GA release, the engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Weekly update](https://pingcap.com/weekly/).
 
 It is recommended to deploy the TiDB cluster using the latest version of TiDB-Ansible, which will also be updated along with the TiDB version. Besides, TiDB has a unified management of the version number after GA release. You can view the version number using the following two methods:
 
