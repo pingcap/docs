@@ -113,9 +113,9 @@ Currently, TiDB has a standard management of various versions. Each release cont
 
 Take `Release Version: v1.0.3-1-ga80e796` as an example of version number description:
 
-- `v1.0.3` represents the standard GA version.
-- `-1` represents the current version has one commit.
-- `ga80e796` represents the version `git-hash`.
+- `v1.0.3` indicates the standard GA version.
+- `-1` indicates the current version has one commit.
+- `ga80e796` indicates the version `git-hash`.
 
 #### What's the difference between various TiDB master versions? How to avoid using the wrong TiDB-Ansible version?
 
@@ -128,7 +128,7 @@ It is recommended to deploy the TiDB cluster using the latest version of TiDB-An
 
 #### What's the recommended solution for the deployment of three geo-distributed data centers?
 
-The architecture of TiDB guarantees that it fully supports geo-distributed and multi-activeness. Your data and applications are always-on. All the outages are transparent to your applications and your data can recover automatically. The operation depends on the network latency and stability. It is recommended to keep the latency within 5ms. Currently, we already have similar use cases. For for details, contact info@pingcap.com. 
+The architecture of TiDB guarantees that it fully supports geo-distribution and multi-activeness. Your data and applications are always-on. All the outages are transparent to your applications and your data can recover automatically. The operation depends on the network latency and stability. It is recommended to keep the latency within 5ms. Currently, we already have similar use cases. For details, contact info@pingcap.com. 
 
 #### Does TiDB provide any other knowledge resource besides the documentation?
 
@@ -177,7 +177,7 @@ Make sure that the total number of TiKV instances is always greater than or equa
 
 #### How to delete the monitoring data of a cluster node that is offline?
 
-The offline node usually refers to the TiKV node. You can determine whether the offline process is finished by the pd-ctl or the monitor. After the node is offline, perform the following steps:
+The offline node usually indicates the TiKV node. You can determine whether the offline process is finished by the pd-ctl or the monitor. After the node is offline, perform the following steps:
 
 1. Manually stop the relevant services on the offline node.
 2. Delete the `node_exporter` data of the corresponding node from the Prometheus configuration file.
