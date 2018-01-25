@@ -48,7 +48,7 @@ Configure in the configuration file or command line arguments, and set the corre
 
 ```toml
 [security]
-# set the path for certificates. Empty string means disabling secure connectoins.
+# set the path for certificates. Empty string means disabling secure connections.
 ca-path = "/path/to/ca.pem"
 cert-path = "/path/to/client.pem"
 key-path = "/path/to/client-key.pem"
@@ -60,7 +60,7 @@ Configure in the configuration file or command line arguments, and set the corre
 
 ```toml
 [security]
-# Path of file that contains list of trusted SSL CAs. if set, following four settings shouldn't be empty
+# Path of file that contains list of trusted SSL CAs. If set, following four settings shouldn't be empty
 cacert-path = "/path/to/ca.pem"
 # Path of file that contains X509 certificate in PEM format.
 cert-path = "/path/to/server.pem"
