@@ -41,7 +41,7 @@ Before you start, make sure that you have:
 
     - The same time and time zone for all machines with the NTP service on to synchronize the correct time. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
 
-    - Create a normal user account as the user running the service. The user can sudo to root without a password.
+    - Create a normal user account as the user who runs the service. The user can sudo to root without a password.
 
 2. A Control Machine with the following requirements:
 
@@ -228,7 +228,7 @@ location_labels = ["host"]
 
 When `ansible-playbook` runs Playbook, the default concurrent number is 5. If many target machines are deployed, you can add the `-f` parameter to specify the concurrency, such as `ansible-playbook deploy.yml -f 10`.
 
-The following example uses the `tidb` user account as the user running the service.
+The following example uses the `tidb` user account as the user who runs the service.
 
 To deploy TiDB using a normal user account, take the following steps:
 
