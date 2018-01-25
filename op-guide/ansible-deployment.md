@@ -41,14 +41,14 @@ Before you start, make sure that you have:
 
     - The same time and time zone for all machines with the NTP service on to synchronize the correct time. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
 
-    - Create a normal user account in TiDB as the user running the service. The user can sudo to root without a password.
+    - Create a normal user account as the user running the service. The user can sudo to root without a password.
 
 2. A Control Machine with the following requirements:
 
     - The Control Machine can be one of the managed nodes.
     - It is recommended to install CentOS 7.3 or later version of Linux operating system (Python 2.7 involved by default).
     - The machine has access to the external network, used to download TiDB and relevant packages.
-    - Configure mutual trust of `ssh authorized_key`. In the Control Machine, you can login the deployed target machine using TiDB user account without a password.
+    - Configure mutual trust of `ssh authorized_key`. In the Control Machine, you can login the deployed target machine using `tidb` user account without a password.
 
 ## Install Ansible and dependencies in the Control Machine
 
