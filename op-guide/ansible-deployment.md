@@ -475,7 +475,7 @@ $ sudo systemctl start ntpd.service
 
 ### How to deploy the NTP service using Ansible?
 
-Refer to [Download TiDB-Ansible to the Control Machine](#download-tidb-ansible-to-the-control-machine) and download TiDB-Ansible. Add the IP of the deployment target machine to `[servers]`. You can replace the `time_server` variable value `pool.ntp.org` with other NTP server. Before starting the NTP service, the system `ntpdate` the NTP server. The NTP service deployed by Ansible uses the default server list in the package. See the `server` parameter in the `cat /etc/ntp.conf` file.
+Refer to [Download TiDB-Ansible to the Control Machine](#download-tidb-ansible-to-the-control-machine) and download TiDB-Ansible. Add the IP of the deployment target machine to `[servers]`. You can replace the `ntp_server` variable value `pool.ntp.org` with other NTP server. Before starting the NTP service, the system `ntpdate` the NTP server. The NTP service deployed by Ansible uses the default server list in the package. See the `server` parameter in the `cat /etc/ntp.conf` file.
 
 ```
 $ vi hosts.ini
