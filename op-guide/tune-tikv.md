@@ -13,8 +13,8 @@ TiKV uses two RocksDB instances: the default RocksDB instance stores KV data, th
 TiKV implements `Column Families` (CF) from RocksDB.
 
 The default RocksDB instance stores KV data in the `default`, `write` and `lock` CFs.
-+ The `default` CF stores the actual data. The corresponding parameters are in  `[rocksdb.defaultcf]`.
-+ The `write` CF stores the version information in Multi-Version Concurrency Control (MVCC). The corresponding parameters are in `[rocksdb.writecf]`.
++ The `default` CF stores the actual data. The corresponding parameters are in `[rocksdb.defaultcf]`.
++ The `write` CF stores the version information in Multi-Version Concurrency Control (MVCC) and index-related data. The corresponding parameters are in `[rocksdb.writecf]`.
 + The `lock` CF stores the lock information. The system uses the default parameters.
 
 The Raft RocksDB (RaftDB) instance stores Raft logs.
@@ -26,21 +26,233 @@ Each CF also has a separate `write buffer`. You can configure the size by settin
 
 ## Parameter specification
 
-[TiKV Configuration](https://github.com/pingcap/tikv/blob/master/etc/config-template.toml).
+```
+# Log level: trace, debug, info, warn, error, off.
+log-level = "info"
+
+[server]
+# Set listening address
+# addr = "127.0.0.1:20160"
+
+# It is recommended to use the default value.
+# notify-capacity = 40960
+# messages-per-tick = 4096
+
+# Size of thread pool for gRPC
+# grpc-concurrency = 4
+# The number of gRPC connections between each TiKV instance
+# grpc-raft-conn-num = 10
+
+# Most read requests from TiDB are sent to the coprocessor of TiKV. This parameter is used to set the number of threads 
+# of the coprocessor. If there are many read requests for the business, the number of the threads of the coprocessor 
+# will be increased. But this number should be smaller than that of CPU cores of the system. For example, there are 
+# 32 cores in the machine installed with TiKV. In a repeatable read scenario, this parameter can even be set to 30.
+# If this parameter is not set, TiKV will automatically set it to CPU cores * 0.8. 
+# end-point-concurrency = 8
+
+# Tag the TiKV instances to schedule replicas.
+# labels = {zone = "cn-east-1", host = "118", disk = "ssd"}
+
+[storage]
+# The data directory
+# data-dir = "/tmp/tikv/store"
+
+# In most cases, you can use the default value. When importing data, it is recommended to set the parameter to 1024000.
+# scheduler-concurrency = 102400
+# This parameter controls the number of write threads. When write operations occur frequently, set this parameter value
+# higher. Run `top -H -p tikv-pid` and if the threads named sched-worker-pool are busy, set the value of parameter
+# scheduler-worker-pool-size higher and increase the number of write threads.
+# scheduler-worker-pool-size = 4
+
+[pd]
+# PD adress
+# endpoints = ["127.0.0.1:2379","127.0.0.2:2379","127.0.0.3:2379"]
+
+[metric]
+# The interval of pushing metrics to Prometheus pushgateway
+interval = "15s"
+# Prometheus pushgateway adress
+address = ""
+job = "tikv"
+
+[raftstore]
+# The default value is true，which means writing the data on the disk compulsorily. If it is not in a business scenario
+# of the financial security level, it is recommended to set the value to false to achieve better performance.
+sync-log = true
+
+# Raft RocksDB directory. The default value is Raft subdirectory of [storage.data-dir].
+# If there are multiple disks on the machine, store the data of Raft RocksDB on different disks to improve TiKV performance.
+# raftdb-dir = "/tmp/tikv/store/raft"
+
+region-max-size = "384MB"
+# The threshold value of Region split
+region-split-size = "256MB"
+# When the data size in a Region is larger than the shreshold value, TiKV checks whether this Region needs split.
+# To reduce the costs of scanning data in the checking process，set the value to 32MB during checking and set it to
+# the default value in normal operation. 
+region-split-check-diff = "32MB"
+
+[rocksdb]
+# The maximum number of threads of RocksDB background tasks. The background tasks include compression and flush.
+# For detailed information why RocksDB needs to implement compression, please see RocksDB-related materials. When write
+# traffic (like the importing data size) is big，it is recommended to enable more threads. But set the number of the enabled 
+# threads smaller than that of CPU cores. For example, when importing data, for a machine with a 32-core CPU, 
+# set the value to 28.
+# max-background-jobs = 8
+
+# The maximum number of file handles RocksDB can open
+# max-open-files = 40960
+
+# The file size limit of RocksDB MANIFEST. For more details, please see https://github.com/facebook/rocksdb/wiki/MANIFEST
+max-manifest-file-size = "20MB"
+
+# The directory of RocksDB write-ahead logs. If there are two disks on the machine, store the RocksDB data and WAL logs
+# on different disks to improve TiKV performance.
+# wal-dir = "/tmp/tikv/store"
+
+# The following parameters are for dealing with RocksDB archiving WAL.
+# For more details, please see https://github.com/facebook/rocksdb/wiki/How-to-persist-in-memory-RocksDB-database%3F
+# wal-ttl-seconds = 0
+# wal-size-limit = 0
+
+# In most cases, set the maximum total size of RocksDB WAL logs to the default value.
+# max-total-wal-size = "4GB"
+
+# This parameter is for enabling or disabling the statistics information of RocksDB.
+# enable-statistics = true
+
+# This parameter is for enabling the readahead feature during RocksDB compression. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
+# compaction-readahead-size = "2MB"
+
+[rocksdb.defaultcf]
+# The data block size. RocksDB compresses data based on the unit of block.
+# Similar to page in other databases, block is the smallest unit cached in block-cache.
+block-size = "64KB"
+
+# The compression mode of each layer of RocksDB data. The optional values include no, snappy, zlib, 
+# bzip2, lz4, lz4hc, and zstd.
+# "no:no:lz4:lz4:lz4:zstd:zstd" indicates there is no compression of level0 and level1; lz4 compression algorithm is used
+# from level2 to level4; zstd compression algorithm is used from level5 to level6.
+# no means no compression. lz4 is a compression algorithm whose speed and compression ratio are moderate. The 
+# compression ratio of zlib is high. It is friendly to the storage space, but its compression speed is slow. This
+# compression occupies many CPU resources. Different machines deploy compression modes according to CPU and I/O resources.
+# For example, if you use the compression mode of "no:no:lz4:lz4:lz4:zstd:zstd" and find much I/O pressure of the 
+# system (run the iostat command to find %util lasts 100%, or run the top command to find many iowaits) when writing
+# (importing) a lot of data while the CPU resources are adequate, you can compress level0 and level1 and exchange CPU
+# resources for I/O resources. If you use the compression mode of "no:no:lz4:lz4:lz4:zstd:zstd" and you find the I/O
+# pressure of the system is not big when writing a lot of data, but CPU resources are inadequate. Then run the top 
+# command and choose the -H option. If you find a lot of bg threads (namely the compression thread of RocksDB) are 
+# running, you can exchange I/O resources for CPU resources and change the compression mode to "no:no:no:lz4:lz4:zstd:zstd".
+# In a word, it aims at making maximal use of the existing resources of the system and giving full play to TiKV performance
+# in terms of the current resources.
+compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
+
+# The RocksDB memtable size
+write-buffer-size = "128MB"
+
+# The maximum number of the memtables. Before the data is written in RocksDB, it is recorded in WAL logs and then 
+# inserted in memtables. When the memtable size reaches the limiting size of write-buffer-size, the memtable will turn
+# into read only and generate a new memtable receiving new write operations. The flush threads of RocksDB will flush
+# the read only memtable to the disks to become an sst file of level0. max-background-flushes controls the maximum
+# number of flush threads. When the flush threads are busy, resulting in the number of the memtables waiting to be 
+# flushed to the disks reaching the limit of max-write-buffer-number, RocksDB will stall the new operation. 
+# "Stall" is a flow control mechanism of RocksDB. When importing data, you can set the max-write-buffer-number value 
+# higher, like 10. 
+max-write-buffer-number = 5
+
+# When the number of sst files of level0 reaches the limit of level0-slowdown-writes-trigger, RocksDB
+# tries to slow down the write operation, because too many sst files of level0 will cause higher read pressure of
+# RocksDB. level0-slowdown-writes-trigger and level0-stop-writes-trigger are for the flow control of RocksDB.
+# When the number of sst files of level0 reaches 4 (the default value), the sst files of level0 and the sst files
+# of level1 which overlap those of level0 will implement compression to relieve the read pressure.
+level0-slowdown-writes-trigger = 20
+
+# When the number of sst files of level0 reaches the limit of level0-stop-writes-trigger, RocksDB stalls the new
+# write operation.
+level0-stop-writes-trigger = 36
+
+# When the level1 data size reaches the limit value of max-bytes-for-level-base, the sst files of level1
+# and their overlap sst files of level2 will implement compression. The golden rule: the first reference principle
+# of setting max-bytes-for-level-base is guaranteeing that the max-bytes-for-level-base value is roughly equal to the
+# data volume of level0. Thus unnecessary compression is reduced. For example, if the compression mode is
+# "no:no:lz4:lz4:lz4:lz4:lz4", the max-bytes-for-level-base value is write-buffer-size * 4, because there is no
+# compression of level0 and level1 and the trigger condition of compression for level0 is that the number of the
+# sst files reaches 4 (the default value). When both level0 and level1 adopt compression, it is necessary to analyze
+# RocksDB logs to know the size of an sst file compressed from an mentable. For example, if this file size is 32MB,
+# the proposed value of max-bytes-for-level-base is 32MB * 4 = 128MB.
+max-bytes-for-level-base = "512MB"
+
+# The sst file size. The sst file size of level0 is influenced by the compression algorithm of write-buffer-size
+# and level0. target-file-size-base is used to control the size of a single sst file of level1-level6.
+target-file-size-base = "32MB"
+
+# When the parameter is not configured, TiKV sets the value to 40% of the system memory size. To deploy multiple
+# TiKV nodes on one physical machine, configure this parameter explicitly. Otherwise, the OOM problem might occur
+# in TiKV.
+# block-cache-size = "1GB"
+
+[rocksdb.writecf]
+# Set it the same as rocksdb.defaultcf.compression-per-level.
+compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
+
+# Set it the same as rocksdb.defaultcf.write-buffer-size.
+write-buffer-size = "128MB"
+max-write-buffer-number = 5
+min-write-buffer-number-to-merge = 1
+
+# Set it the same as rocksdb.defaultcf.max-bytes-for-level-base.
+max-bytes-for-level-base = "512MB"
+target-file-size-base = "32MB"
+
+# When this parameter is not configured, TiKV sets this parameter value to 15% of the system memory size. To
+# deploy multiple TiKV nodes on one physical machine, configure this parameter explicitly. The related data
+# of the version information (MVCC) and the index-related data are recorded in write CF. In business scenario,
+# if there are many single table indexes, set this parameter value higher.
+# block-cache-size = "256MB"
+
+[raftdb]
+# The maximum number of the file handles RaftDB can open
+# max-open-files = 40960
+
+# Configure this parameter to enable or disable the RaftDB statistics information.
+# enable-statistics = true
+
+# Enable the readahead feature in RaftDB compression. If you are using mechanical disks, it is recommended to set
+# this value to 2MB at least.
+# compaction-readahead-size = "2MB"
+
+[raftdb.defaultcf]
+# Set it the same as rocksdb.defaultcf.compression-per-level.
+compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
+
+# Set it the same as rocksdb.defaultcf.write-buffer-size.
+write-buffer-size = "128MB"
+max-write-buffer-number = 5
+min-write-buffer-number-to-merge = 1
+
+# Set it the same as rocksdb.defaultcf.max-bytes-for-level-base.
+max-bytes-for-level-base = "512MB"
+target-file-size-base = "32MB"
+
+# Generally，you can set it from 256MB to 2GB. In most cases, you can use the default value. But if the system
+# resources are adequate, you can set it higher. 
+block-cache-size = "256MB"
+```
+
 
 ## TiKV memory usage
 
-Besides `block cache` and `write buffer`, the system memory is also occupied in the following scenarios:
+Besides `block cache` and `write buffer` which occupy the system memory, the system memory is occupied in the
+following scenarios:
 
-+ Some of the memory need to be set aside as the system's page cache.
++ Some of the memory is reserved as the system's page cache.
 
-+ When TiKV processes large queries such as `select * from ...`, it reads data and generate corresponding data structure in the memory and returns to TiDB. During the process, some of the memory are also occupied.
-
++ When TiKV processes large queries such as `select * from ...`, it reads data, generates the corresponding data structure in the memory, and returns this structure to TiDB. During this process, TiKV occupies some of the memory.
 
 ## Recommended configuration of TiKV
 
-+ In production environments, it is not recommended to deploy TiKV on the machine whose CPU core is less than 8 or the memory is less than 32GB.
++ In production environments, it is not recommended to deploy TiKV on the machine whose CPU cores are less than 8 or the memory is less than 32GB.
 
 + If you demand a high write throughput, it is recommended to use a disk with good throughput capacity.
 
-+ If you demand a good read-write latency, it is recommended to use SSD with high IOPS.
++ If you demand a very low read-write latency, it is recommended to use SSD with high IOPS.
