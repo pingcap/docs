@@ -133,6 +133,8 @@ zookeeper_addrs = "192.168.0.11:2181,192.168.0.12:2181,192.168.0.13:2181"
         to configure the file path of Pump; if you specifies the configuration file, Pump reads the configuration first; if the corresponding configuration also exists in the command line argument, Pump uses the command line configuration to cover that in the configuration file
     -data-dir string
         the path of storing Pump data
+    -enable-tolerant
+	after enable tolerant, pump wouldn't return error if it fails to write binlog (default true)
     -kafka-addrs string
         the connected Kafka address (default "127.0.0.1:9092")
     -zookeeper-addrs string
