@@ -43,7 +43,7 @@ Before you start, make sure that you have:
 
     - Create a normal `tidb` user account as the user who runs the service. The `tidb` user can sudo to the root user without a password. See [How to configure SSH mutual trust and sudo without password](#how-to-configure-ssh-mutual-trust-and-sudo-without-password).
 
-    > **Note:** When you deploy TiDB using Ansible, use SSD disks for data partition of TiKV and PD nodes.
+    > **Note:** When you deploy TiDB using Ansible, use SSD disks for the data directory of TiKV and PD nodes.
 
 2. A Control Machine with the following requirements:
 
@@ -213,7 +213,7 @@ location_labels = ["host"]
 
 #### Description of the deployment directory
 
-You can control the deployment directory using the `deploy_dir` variable. The global variable is set to `/home/tidb/deploy` by default, and it applies to all services. If the data disk is mounted on the `/data1` directory, you can set it to `/data1/deploy`. For example:
+You can configure the deployment directory using the `deploy_dir` variable. The global variable is set to `/home/tidb/deploy` by default, and it applies to all services. If the data disk is mounted on the `/data1` directory, you can set it to `/data1/deploy`. For example:
 
 ```
 ## Global variables
