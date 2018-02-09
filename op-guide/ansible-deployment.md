@@ -25,7 +25,7 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology, 
 
 Before you start, make sure that you have:
 
-1. Several managed nodes with the following requirements:
+1. Several target machines with the following requirements:
 
     - 4 or more machines. At least 3 instances for TiKV. Do not deploy TiKV together with TiDB or PD on the same machine. See [Software and Hardware Requirements](recommendation.md).
 

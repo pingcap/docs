@@ -14,7 +14,7 @@ Before you start, make sure that you have:
     - The machine must have access to the Internet in order to download TiDB-Ansible, TiDB and related packages.
     - For Linux operating system, it is recommended to install CentOS 7.3 or later.
 
-2. Several managed nodes and one Control Machine
+2. Several target machines and one Control Machine
 
     - For system requirements and configuration, see [Prepare the environment](ansible-deployment.md#prepare).
     - It is acceptable without access to the Internet.
