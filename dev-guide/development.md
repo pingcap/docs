@@ -8,24 +8,47 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 
 ## Build TiKV
 
-After you install the RocksDB shared library, you can build TiKV directly without `ROCKSDB_SYS_STATIC`.
+### Rust toolchain
 
-+ Get the TiKV source code.
+Rust Nightly is required. The version that we currently use can be found in the file named `RUST_VERSION` in TiKV git repository. 
 
-    ```bash
-    git clone https://github.com/pingcap/tikv.git 
-    ```
-+ Enter the source directory to build and install the binary in the `bin` directory.
+```
+# Get rustup from rustup.rs, then in your `tikv` folder:
+$ rustup override set nightly-2018-01-12
+$ cargo +nightly-2018-01-12 install rustfmt-nightly --version 0.3.4
+```
 
-    ```bash
-    make
-    ```
-    
-+ Run unit test.
-    
-    ```bash
-    make test
-    ```
+### Golang
+
+Golang 1.8 or higher version is required. Please refer to [](https://golang.org/doc/install) to find how to install.
+
+### GCC
+
+GCC 4.8 or higher version is needed. If your GCC's version is too low, please upgrade first.
+
+### CMake
+
+Some dependencies of TiKV need CMake to be built. Please install CMake 3.1 or higher version.
+
+### TiKV
+
+Get TiKV source code from GitHub
+
+```
+$ git clone https://github.com/pingcap/tikv.git 
+```
+
+Run all unit tests:
+
+```
+$ make test
+```
+
+Build in release mode:
+
+```
+$ make release
+```
 
 ## Build TiDB
 
