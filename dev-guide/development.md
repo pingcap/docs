@@ -20,7 +20,7 @@ $ cargo +nightly-2018-01-12 install rustfmt-nightly --version 0.3.4
 
 ### Golang
 
-Golang 1.8 or higher version is required. Please refer to [](https://golang.org/doc/install) to find how to install.
+Golang 1.9 or higher version is required. Please refer to [](https://golang.org/doc/install) to find how to install.
 
 ### GCC
 
