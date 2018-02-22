@@ -768,23 +768,23 @@ Yes. Find the startup script on the machine where Prometheus is started, edit th
 
 A PD request timeout. Check the status, monitoring data and log of the PD server, and the network between the TiDB server and the PD server.
 
-#### ERROR 9002 (HY000) : TiKV Server Timeout
+#### ERROR 9002 (HY000): TiKV Server Timeout
 
 A TiKV request timeout. Check the status, monitoring data and log of the TiKV server, and the network between the TiDB server and the TiKV server.
 
-#### ERROR 9003 (HY000) : TiKV Server is Busy
+#### ERROR 9003 (HY000): TiKV Server is Busy
 
 The TiKV server is busy. This usually occurs when the database load is very high. Check the status, monitoring data and log of the TiKV server.
 
-#### ERROR 9004 (HY000) : Resolve Lock Timeout
+#### ERROR 9004 (HY000): Resolve Lock Timeout
 
 A lock resolving timeout. This usually occurs when a large number of transaction conflicts exist. Check whether the application code is locked by multiple locks.
 
-#### ERROR 9005 (HY000) : Region is unavailable
+#### ERROR 9005 (HY000): Region is unavailable
 
 The accessed Region is not available. A Raft Group is not available, with possible reasons like an inadequate number of replicas. This usually occurs when the TiKV server is busy or the TiKV node is shut down. Check the status, monitoring data and log of the TiKV server.
 
-#### ERROR 9006 (HY000) : GC Too Early
+#### ERROR 9006 (HY000): GC Too Early
 
 The interval of `GC Life Time` is too short. The data that should have been read by long transactions might be deleted. You can add the `GC Life Time`.
 
