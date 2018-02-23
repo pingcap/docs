@@ -778,7 +778,7 @@ The TiKV server is busy. This usually occurs when the database load is very high
 
 #### ERROR 9004 (HY000): Resolve Lock Timeout
 
-A lock resolving timeout. This usually occurs when a large number of transaction conflicts exist. Check whether the application code is locked by multiple locks.
+A lock resolving timeout. This usually occurs when a large number of transaction conflicts exist. Check the application code to see whether lock contention exists in the database.
 
 #### ERROR 9005 (HY000): Region is unavailable
 
