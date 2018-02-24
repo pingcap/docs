@@ -8,20 +8,20 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 
 ## Build TiKV
 
-Get TiKV source code from GitHub
++ Get TiKV source code from GitHub
 
     ```bash
     git clone https://github.com/pingcap/tikv.git 
     cd tikv
     ```
 
-Run all unit tests:
++ Run all unit tests:
 
     ```bash
     make test
     ```
 
-Build in release mode:
++ Build in release mode:
 
     ```bash
     make release
