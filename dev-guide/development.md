@@ -10,22 +10,22 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 
 Get TiKV source code from GitHub
 
-```bash
-$ git clone https://github.com/pingcap/tikv.git 
-$ cd tikv
-```
+    ```bash
+    git clone https://github.com/pingcap/tikv.git 
+    cd tikv
+    ```
 
 Run all unit tests:
 
-```bash
-$ make test
-```
+    ```bash
+    make test
+    ```
 
 Build in release mode:
 
-```bash
-$ make release
-```
+    ```bash
+    make release
+    ```
 
 ## Build TiDB
 
