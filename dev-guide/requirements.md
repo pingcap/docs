@@ -21,7 +21,7 @@ The [check requirement script](../scripts/check_requirement.sh) can help you che
 install the missing ones automatically.
 
 
-TiKV is well tested in a certain Rust version by us, which can be found in the `RUST_VERSION` file in TiKV's root directory. We recommend you to use the same version as we do. To set Rust version, in your `tikv` directory:
+TiKV is well tested in a certain Rust version by us, which can be found in the `RUST_VERSION` file in TiKV's root directory. We recommend you to use the same version as we do. To set Rust version, execute following commant in your TiKV project directory:
 
 ```bash
 rustup override set nightly-2018-01-12  # For example if our current version is `nightly-2018-01-12`
