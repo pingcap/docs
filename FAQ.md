@@ -51,7 +51,7 @@ Yes. The transaction model in TiDB is inspired by Google’s Percolator, a paper
 
 #### What programming language can I use to work with TiDB?
 
-Any language that has MySQL client or driver.
+Any language supported by MySQL client or driver.
 
 #### Can I use other Key-Value storage engines with TiDB?
 
@@ -132,7 +132,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 ##### What's the purposes of 2 network cards of 10 gigabit?
 
-As a distributed cluster, TiDB has a high demand on time, especially for PD, because PD needs to distribute unique timestamps. If the time in PD is not consistent, it takes longer waiting time when switching PD. The bond of two network cards guarantees the stability of data transmission, and 10 gigabit guarantees the transmission speed. Gigabit network cards are prone to meet bottlenecks, therefore it is strongly recommended to use 10 gigabit network cards.
+As a distributed cluster, TiDB has a high demand on time, especially for PD, because PD needs to distribute unique timestamps. If the time in the PD servers is not consistent, it takes longer waiting time when switching the PD server. The bond of two network cards guarantees the stability of data transmission, and 10 gigabit guarantees the transmission speed. Gigabit network cards are prone to meet bottlenecks, therefore it is strongly recommended to use 10 gigabit network cards.
 
 ##### Is it feasible if we don't use RAID for SSD?
 
@@ -150,7 +150,7 @@ You need to set the `--config` parameter in TiKV/PD to make the `toml` configura
 
 ##### Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?
 
-The monitoring machine is recommended to use standalone deployment. It is recommended to use 8 core CPU, 16 GB+ memory and 500 GB+ hard disk.
+The monitoring machine is recommended to use standalone deployment. It is recommended to use a 8 core CPU with 16 GB+ memory and a 500 GB+ hard disk.
 
 ##### Why the monitor cannot display all metrics?
 
@@ -178,7 +178,7 @@ Check the time difference between the machine time of the monitor and the time w
 | machine_benchmark | to monitor the disk IOPS of the managed node, True by default; do not close it |
 | set_hostname | to edit the hostname of the mananged node based on the IP, False by default |
 | enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
-| zookeeper_addrs | the zookeeper address of the binlog Kafka cluster |
+| zookeeper_addrs | the ZooKeeper address of the binlog Kafka cluster |
 | enable_slow_query_log | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
 | deploy_without_tidb | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 
@@ -188,23 +188,23 @@ It is not recommended to deploy TiDB offline using Ansible. If the Control Machi
 
 ### Upgrade
 
-#### How to rolling update using Ansible?
+#### How to perform rolling updates using Ansible?
 
-- Apply rolling update to the TiKV node (only update the TiKV service).
+- Apply rolling updates to the TiKV node (only update the TiKV service).
     
     ```
     ansible-playbook rolling_update.yml --tags=tikv
     ```
 
-- Apply rolling update to all services.
+- Apply rolling updates to all services.
 
     ```
     ansible-playbook rolling_update.yml
     ```
 
-#### What is the effect of rolling udpate?
+#### What is the effect of rolling udpates?
 
-When you apply rolling update to TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB * 2, PD * 3, TiKV * 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling update. When you update TiDB, Pump is also updated.
+When you apply rolling updates to TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB * 2, PD * 3, TiKV * 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
 
 #### How to upgrade when I deploy TiDB using Binary?
 
@@ -240,10 +240,10 @@ Solution:
 | Stop the cluster                  | `ansible-playbook stop.yml`              |
 | Destroy the cluster               | `ansible-playbook unsafe_cleanup.yml` (If the deployment directory is a mount point, an error will be reported, but implementation results will remain unaffected) |
 | Clean data (for test)             | `ansible-playbook unsafe_cleanup_data.yml` |
-| Rolling Upgrade                   | `ansible-playbook rolling_update.yml`    |
-| Rolling upgrade TiKV              | `ansible-playbook rolling_update.yml --tags=tikv` |
-| Rolling upgrade modules except PD | `ansible-playbook rolling_update.yml --skip-tags=pd` |
-| Rolling update the monitoring components | `ansible-playbook rolling_update_monitor.yml` |
+| Apply rolling updates                  | `ansible-playbook rolling_update.yml`    |
+| Apply rolling updates to TiKV   | `ansible-playbook rolling_update.yml --tags=tikv` |
+| Apply rolling updates to components except PD | `ansible-playbook rolling_update.yml --skip-tags=pd` |
+| Apply rolling updates to the monitoring components | `ansible-playbook rolling_update_monitor.yml` |
 
 #### How to log into TiDB?
 
@@ -271,17 +271,17 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 #### How to safely stop TiDB?
 
-If the cluster is deployed through ansible, you can use the command `ansible-playbook stop.yml` to stop the TiDB cluster. If the cluster is not deployed through ansible, `kill` all the services directly. The components of TiDB will do `graceful shutdown`.
+If the cluster is deployed using Ansible, you can use the `ansible-playbook stop.yml` command to stop the TiDB cluster. If the cluster is not deployed using Ansible, `kill` all the services directly. The components of TiDB will do `graceful shutdown`.
 
 #### Can `kill` be executed in TiDB?
 
-You can `kill` DML statements. First use `show processlist` to find the id corresponding with the session, and then execute `kill tidb connection id`.
+You can `kill` DML statements. First use `show processlist` to find the ID corresponding with the session, and then execute `kill tidb connection id`.
 
 But currently, you cannot `kill` DDL statements. Once you start executing DDL statements, you cannot stop them unless something goes wrong. If something goes wrong, the DDL statements will stop executing.
 
 #### Does TiDB support session timeout?
 
-Currently, TiDB does not support session timeout in the database level. If you want to implement session timeout, use the session id started by side records in the absence of LB (Load Balancing), and customize the session timeout on the application. After timeout, kill SQL using `kill id` on the node that starts the query. It is currently recommended to implement session timeout using applications. When the timeout time is reached, the application layer reports an exception and continues to execute subsequent program segments.
+Currently, TiDB does not support session timeout in the database level. If you want to implement session timeout, use the session ID started by side records in the absence of LB (Load Balancing), and customize the session timeout on the application. After timeout, kill SQL using `kill id` on the node that starts the query. It is currently recommended to implement session timeout using applications. When the timeout time is reached, the application layer reports an exception and continues to execute subsequent program segments.
 
 #### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
 
@@ -334,7 +334,7 @@ The 92 indicates the escape character, which is ASCII 92 by default.
 
 ### Manage the PD server
 
-#### The `TiKV cluster is not bootstrapped` message is displayed when accessing PD.
+#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD.
 
 Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed. If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
 
@@ -352,7 +352,7 @@ The client connection can only access the cluster through TiDB. TiDB connects PD
 
 #### What is the difference between the `leader-schedule-limit` and `region-schedule-limit` scheduling parameters in PD?
 
-- The `leader-schedule-limit` scheduling parameter is used to balance the leader number of different TiKV servers, affecting the load of query processing.
+- The `leader-schedule-limit` scheduling parameter is used to balance the Leader number of different TiKV servers, affecting the load of query processing.
 - The `region-schedule-limit` scheduling parameter is used to balance the replica number of different TiKV servers, affecting the data amount of different nodes.
 
 #### Is the number of replicas in each region configurable? If yes, how to configure it?
@@ -385,7 +385,7 @@ Possible reasons:
 
 - If you run multiple DDL statements together, the last few DDL statements might run slowly. This is because the DDL statements are executed serially in the TiDB cluster.
 - After you start the cluster successfully, the first DDL operation may take a longer time to run, usually around 30s. This is because the TiDB cluster is electing the leader that processes DDL statements.
-- In rolling update or shutdown update, the processing time of DDL statements in the first ten minutes after starting TiDB is affected by the server stop sequence (stopping PD -> TiDB), and the condition where TiDB does not clean up the registration data in time because TiDB is stopped using the `kill -9` command. When you run DDL statements during this period, for the state change of each DDL, you need to wait for 2 * lease (lease = 10s).
+- In rolling updates or shutdown updates, the processing time of DDL statements in the first ten minutes after starting TiDB is affected by the server stop sequence (stopping PD -> TiDB), and the condition where TiDB does not clean up the registration data in time because TiDB is stopped using the `kill -9` command. When you run DDL statements during this period, for the state change of each DDL, you need to wait for 2 * lease (lease = 10s).
 - If a communication issue occurs between a TiDB server and a PD server in the cluster, the TiDB server cannot get or update the version information from the PD server in time. In this case, you need to wait for 2 * lease for the state processing of each DDL.
 
 #### Can I use S3 as the backend storage engine in TiDB?
@@ -669,7 +669,7 @@ There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Goog
 
 #### Can I execute DDL operations on the target table when loading data?
 
-No. None of the DDL operations can be executed on the target table when you load data, otherwise the data fails to load.
+No. None of the DDL operations can be executed on the target table when you load data, otherwise the data fails to be loaded.
 
 #### Does TiDB support the `replace into` syntax?
 
@@ -687,11 +687,11 @@ Deleting a large amount of data leaves a lot of useless keys, affecting the quer
 
 When deleting a large amount of data, it is recommended to use `Delete * from t where xx limit 5000;`. It deletes through the loop and uses `Affected Rows == 0` as a condition to end the loop, so as not to exceed the limit of transaction size. With the prerequisite of meeting business filtering logic, it is recommended to add a strong filter index column or directly use the primary key to select the range, such as `id >= 5000*n+m and id < 5000*(n+1)+m`.
 
-If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags will remain for a short period (then all will be Garbage Collected) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
+If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all will be processed by Garbage Collected) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
 
 #### How to improve the data loading speed in TiDB?
 
-- Currently Lightning is in development for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (Truncate the original table and then import data).
+- Currently Lightning is in development for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
 - Data loading in TiDB is related to the status of disks and the whole cluster. When loading data, pay attention to metrics like the disk usage rate of the host, TiClient Error, Backoff, Thread CPU and so on. You can analyze the bottlenecks using these metrics.
 
 ## SQL optimization
@@ -726,7 +726,7 @@ Use `admin show ddl` to view the current job of adding an index.
 
 #### Does TiDB support CBO (Cost-Based Optimization)? If yes, to what extent?
 
-Yes. TiDB uses the cost-based optimizer. The cost model and statistics are constantly optimized. Besides, TiDB also supports correlation algorithms like Hash join and soft merge.
+Yes. TiDB uses the cost-based optimizer. The cost model and statistics are constantly optimized. Besides, TiDB also supports correlation algorithms like hash join and soft merge.
 
 ## Database optimization
 
