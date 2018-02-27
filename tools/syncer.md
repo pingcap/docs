@@ -5,6 +5,10 @@ category: advanced
 
 # Syncer User Guide
 
+## About Syncer
+
+Syncer is a tool used to import data incrementally.
+
 ## Syncer architecture
 
 ![syncer sharding](../media/syncer_architecture.png)
