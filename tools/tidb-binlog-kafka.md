@@ -76,7 +76,7 @@ cd tidb-binlog-latest-linux-amd64
     - Use the `generate_binlog_position` tool of the [tidb-tools](https://github.com/pingcap/tidb-tools)project to generate the Drainer savepoint file. Use `generate_binlog_position` to compile this tool. See the [README description](https://github.com/pingcap/tidb-tools/blob/master/generate_binlog_position/README.md) for usage. You can also download this tool from [generate_binlog_position](https://download.pingcap.org/generate_binlog_position-latest-linux-amd64.tar.gz) and use `sha256sum` to verify the [sha256](https://download.pingcap.org/generate_binlog_position-latest-linux-amd64.sha256) file.
     - Do a full backup. For example, back up TiDB using mydumper.
     - Import the full backup to the target system.
-    - The savepoint file started by Drainer is stored in the checkpoint table of the downstream database tidb_binlog by default. If no valid data exists in the checkpoint table, configure `initial-commit-ts` to make Drainer work from a specified position when it is started: 
+    - The savepoint file started by the Kafka version of Drainer is stored in the checkpoint table of the downstream database tidb_binlog by default. If no valid data exists in the checkpoint table, configure `initial-commit-ts` to make Drainer work from a specified position when it is started: 
       
         ```
         bin/drainer --config=conf/drainer.toml --data-dir=${drainer_savepoint_dir}
@@ -103,9 +103,9 @@ cd tidb-binlog-latest-linux-amd64
   		  
 #### Recommended Kafka parameter configuration
     
-- `auto.create.topics.enable = true`. If no topic exists, Kafka automatically creates a topic on the broker.
-- `broker.id` is a required parameter to identify the Kafka cluster. Keep the parameter value unique. For example, `broker.id = 1`.
-- fs.file-max = 1000000. Kafka uses a lot of files and network sockets. It is recommended to change the parameter value to 1000000. Change the value using `vi /etc/sysctl.conf`.   
+- `auto.create.topics.enable = true`: if no topic exists, Kafka automatically creates a topic on the broker.
+- `broker.id`: a required parameter to identify the Kafka cluster. Keep the parameter value unique. For example, `broker.id = 1`.
+- `fs.file-max = 1000000`: Kafka uses a lot of files and network sockets. It is recommended to change the parameter value to 1000000. Change the value using `vi /etc/sysctl.conf`.   
 
 ### Deploy Pump using TiDB-Ansible
 
@@ -408,4 +408,4 @@ When you start Drainer, set the two parameters of `--metrics-addr` and `--metric
 
 3. Click "Upload .json File" to upload a JSON file (Download [TiDB Grafana Config](https://grafana.com/tidb)).
 
-4. Click "Save & Open".A Prometheus dashboard is created.
+4. Click "Save & Open". A Prometheus dashboard is created.
