@@ -34,7 +34,7 @@ You can deploy Syncer to any of the machines that can connect to MySQL or the Ti
 
 ## Use Syncer to import data incrementally
 
-Before importing data, read [Check before importing data using Syncer](#how-to-check-before-importing-data-using-syncer).
+Before importing data, read [Check before importing data using Syncer](#check-before-importing-data-using-syncer).
 
 ### 1. Set the position to synchronize
 
@@ -231,13 +231,14 @@ syncer-binlog = (ON.000001, 2504), syncer-binlog-gtid = 53ea0ed1-9bf8-11e6-8bea-
 
 The update in MySQL is automatically synchronized in TiDB.
 
-## Syncer FAQ
+## Description of Syncer configuration
 
-### How to specify the database to be synchronized?
+### Specify the database to be synchronized
 
-1. Use the actual case to describe the priority of parameters when using Syncer to synchronize the database.
-2. To use the route-rules, see [Support for synchronizing data from sharded tables](#how-is-the-support-for-synchronizing-data-from-sharded-tables).
-3. Priority: replicate-do-db --> replicate-do-table --> replicate-ignore-db --> replicate-ignore-table
+This section describes the priority of parameters when you use Syncer to synchronize the database.
+
+- To use the route-rules, see [Support for synchronizing data from sharded tables](#support-for-synchronizing-data-from-sharded-tables).
+- Priority: replicate-do-db --> replicate-do-table --> replicate-ignore-db --> replicate-ignore-table
 
 ```toml
 # Specify the ops database to be synchronized.
@@ -284,7 +285,7 @@ db-name ="order"
 tbl-name = "~^2016_.*"
 ```
 
-### How is the support for synchronizing data from sharded tables?
+### Support for synchronizing data from sharded tables
 
 You can use Syncer to import data from sharded tables into one table within one database according to the `route-rules`. But before synchronizing, you need to check:
 
@@ -333,7 +334,7 @@ target-schema = "order"
 target-table = "order_2017"
 ```
 
-### How to check before importing data using Syncer?
+### Check before importing data using Syncer
 
 1. Check the `server-id` of the source database.
 
@@ -415,7 +416,8 @@ target-table = "order_2017"
 
 5. Check user privileges of mydumper.
 
-    To export data using mydumper, the user must have the privilege of adding the `--no-locks` option when the operation object is RDS at least, to avoid applying for the reload privilege using `select, reload`.
+    - To export data using mydumper, the user must have the privilege of `select, reload`.
+    - You can add the `--no-locks` option when the operation object is RDS, to avoid applying for the privilege of `reload`.
 
 6. Check user privileges of synchronizing the upstream and downstream data.
 
@@ -432,30 +434,6 @@ target-table = "order_2017"
     ```
     show binlog events in 'mysql-bin.000023' from 136676560 limit 10;
     ```
-
-### How to safely start Syncer?
-
-It is recommended to start Syncer using daemon tools like [supervise](https://cr.yp.to/daemontools/supervise.html).
-
-1. Start Syncer using the `screen` service. For the following instances, before starting Syncer, you need to install the related `screen` and `sendmail` software and configure `smtp`.
-
-    - Run `screen -S syncer-ops` to create a conversation window.
-
-        `./syncer --config ops.toml --enable-gtid  --auto-fix-gtid;echo "syncer is down"|mail -s "syncer status" `
-
-    - To exit the `screen` service, use the combination key of `CTRL + A & D`. To view the created conversation, use `screen -ls`. To restore the conversation, use `screen -r ID`.
-
-2. Start Syncer using `nohup &`.
-
-    - Create `syncer.sh` and run the following command:
-
-        `./syncer --config ops.toml --enable-gtid  --auto-fix-gtid -log-file ./${1}.log --status-addr 127.0.0.1:${2};echo "syncer is down"|mail -s "syncer status"`
-
-    - Create `start_ops.sh` as follows:
-
-        `nohup ./syncer.sh ops 10088 &>./nohup.out &`
-
-    - Start Syncer using `sh start_ops.sh`.
 
 ## Syncer monitoring solution
 
@@ -499,7 +477,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
       }
     ```
 
-### Configure Grafana
+#### Configure Grafana
 
 1. Log in to the Grafana Web interface.
 
@@ -536,12 +514,12 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 #### title: syncer_binlog_file
 
 - metrics: `syncer_binlog_file{node="master"} - ON(instance, job) syncer_binlog_file{node="syncer"}`
-- info: the number of binlog files discrepancy between Syncer and master in the process of synchronization; the normal value is 0, which indicates real-time synchronization; a larger value indicates a larger number of binlog files discrepancy
+- info: the number of binlog files discrepancy between the upstream and the downstream in the process of synchronization; the normal value is 0, which indicates real-time synchronization; a larger value indicates a larger number of binlog files discrepancy
 
 #### title: binlog skipped events
 
 - metrics: `irate(syncer_binlog_skipped_events_total[1m])`
-- info: the total number of SQL statements that Syncer skips when it synchronizes the master binlog file; you can configure the format of SQL statements skipped by Syncer using the `skip-sqls` parameter in the `syncer.toml` file.
+- info: the total number of SQL statements that Syncer skips when the upstream synchronizes binlog files with the downstream; you can configure the format of SQL statements skipped by Syncer using the `skip-sqls` parameter in the `syncer.toml` file.
 
 #### title: syncer_txn_costs_gauge_in_second
 
