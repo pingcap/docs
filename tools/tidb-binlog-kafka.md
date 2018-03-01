@@ -73,10 +73,10 @@ cd tidb-binlog-latest-linux-amd64
     
     To guarantee the integrity of data, perform the following operations 10 minutes after Pump is started:
 
-    - Use the `generate_binlog_position` tool of the project [tidb-tools](https://github.com/pingcap/tidb-tools) to generate the Drainer savepoint file. Use `generate_binlog_position` to compile this tool. See the [README description](https://github.com/pingcap/tidb-tools/blob/master/generate_binlog_position/README.md) for usage. You can also obtain this tool from [generate_binlog_position](https://download.pingcap.org/generate_binlog_position-latest-linux-amd64.tar.gz) and use `sha256sum` to verify [sha256](https://download.pingcap.org/generate_binlog_position-latest-linux-amd64.sha256).
+    - Use the `generate_binlog_position` tool of the [tidb-tools](https://github.com/pingcap/tidb-tools)project to generate the Drainer savepoint file. Use `generate_binlog_position` to compile this tool. See the [README description](https://github.com/pingcap/tidb-tools/blob/master/generate_binlog_position/README.md) for usage. You can also download this tool from [generate_binlog_position](https://download.pingcap.org/generate_binlog_position-latest-linux-amd64.tar.gz) and use `sha256sum` to verify the [sha256](https://download.pingcap.org/generate_binlog_position-latest-linux-amd64.sha256) file.
     - Do a full backup. For example, back up TiDB using mydumper.
     - Import the full backup to the target system.
-    - The savepoint file started by Kafka Drainer is stored in the checkpoint sheet of the downstream database tidb_binlog by default. If no valid data exists in the checkpoint sheet, configure `initial-commit-ts` to start Drainer to start the transaction: 
+    - The savepoint file started by Drainer is stored in the checkpoint table of the downstream database tidb_binlog by default. If no valid data exists in the checkpoint table, configure `initial-commit-ts` to make Drainer work from a specified position when it is started: 
       
         ```
         bin/drainer --config=conf/drainer.toml --data-dir=${drainer_savepoint_dir}
@@ -103,12 +103,9 @@ cd tidb-binlog-latest-linux-amd64
   		  
 #### Recommended Kafka parameter configuration
     
-- auto.create.topics.enable = true. If no topic exists, Kafka will automatically create a topic on a Broker.
-- `broker.id` is the requisite parameter to indicate Kafka cluster. The parameter value should be unique. For example, broker.id = 1
-- fs.file-max = 1000000. Kafka uses a lot of files and network sockets. It is recommended to change the parameter value to 1000000. See `vi /etc/sysctl.conf` to change the value. 
-    
-  
-   
+- `auto.create.topics.enable = true`. If no topic exists, Kafka automatically creates a topic on the broker.
+- `broker.id` is a required parameter to identify the Kafka cluster. Keep the parameter value unique. For example, `broker.id = 1`.
+- fs.file-max = 1000000. Kafka uses a lot of files and network sockets. It is recommended to change the parameter value to 1000000. Change the value using `vi /etc/sysctl.conf`.   
 
 ### Deploy Pump using TiDB-Ansible
 
@@ -129,7 +126,7 @@ zookeeper_addrs = "192.168.0.11:2181,192.168.0.12:2181,192.168.0.13:2181"
 
 A usage example:
 
-For three PDs, three ZooKeepers, and one TiDB, the information of each node is as follows: 
+Assume that we have three PDs, three ZooKeepers, and one TiDB. The information of each node is as follows: 
 	
 ```
 TiDB="192.168.0.10"
@@ -141,12 +138,13 @@ ZK2="192.168.0.12"
 ZK3="192.168.0.11"
 ```
 
-Deploy Drainer Pump on the machine with the IP address "192.168.0.10".
+Deploy Drainer/Pump on the machine with the IP address "192.168.0.10".
 
 The IP address of the corresponding PD cluster is "192.168.0.16,192.168.0.15,192.168.0.14". 
 
 The ZooKeeper IP address of the corresponding Kafka cluster is "192.168.0.13,192.168.0.12,192.168.0.11".
-This example shows the Pump Drainer usage.
+
+This example describes how to use Pump/Drainer.
 
 1. Description of Pump command line arguments
 
