@@ -146,40 +146,40 @@ The ZooKeeper IP address of the corresponding Kafka cluster is "192.168.0.13,192
 
 This example describes how to use Pump/Drainer.
 
-1. Description of Pump command line arguments
+1. Description of Pump command line options
 
     ```
     Usage of Pump:
--L string
-    log level: debug, info, warn, error, fatal (default "info")
--V
-    to print Pump version info
--addr string
-    the RPC address that Pump provides service (-addr= "192.168.0.10:8250")
--advertise-addr string
-    the RPC address that Pump provides external service (-advertise-addr="192.168.0.10:8250")
--config string
-    to configure the file path of Pump; if you specifies the configuration file, Pump reads the configuration first; if the corresponding configuration also exists in the command line argument, Pump uses the command line configuration to cover that in the configuration file
--data-dir string
-    the path of storing Pump data
--zookeeper-addrs string (-zookeeper_addrs="192.168.0.11:2181,192.168.0.12:2181,192.168.0.13:2181")
-    the ZooKeeper address; this option gets the Kafka address from ZooKeeper
--gc int
-    the maximum days that the binlog is retained (default 7), and 0 means retaining the binlog permanently
--heartbeat-interval int
-    the interval between heartbeats that Pump sends to PD (unit: second)
--log-file string
-    the path of the log file
--log-rotate string
-    the log file rotating frequency (hour/day)
--metrics-addr string
-    the Prometheus pushgataway address; leaving it empty disables Prometheus push
--metrics-interval int
-    the frequency of reporting monitoring information (default 15, unit: second)
--pd-urls string
-    the node address of the PD cluster (-pd-urls="http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379")
--socket string
-    the monitoring address of the unix socket service (default "unix:///tmp/pump.sock")
+    -L string
+        log level: debug, info, warn, error, fatal (default "info")
+    -V
+        to print Pump version info
+    -addr string
+        the RPC address that Pump provides service (-addr= "192.168.0.10:8250")
+    -advertise-addr string
+        the RPC address that Pump provides external service (-advertise-addr="192.168.0.10:8250")
+    -config string
+        to configure the file path of Pump; if you specifies the configuration file, Pump reads the configuration first; if the corresponding configuration also exists in the command line argument, Pump uses the command line configuration to cover that in the configuration file
+    -data-dir string
+        the path of storing Pump data
+    -zookeeper-addrs string (-zookeeper_addrs="192.168.0.11:2181,192.168.0.12:2181,192.168.0.13:2181")
+        the ZooKeeper address; this option gets the Kafka address from ZooKeeper
+    -gc int
+        the maximum days that the binlog is retained (default 7), and 0 means retaining the binlog permanently
+    -heartbeat-interval int
+        the interval between heartbeats that Pump sends to PD (unit: second)
+    -log-file string
+        the path of the log file
+    -log-rotate string
+        the log file rotating frequency (hour/day)
+    -metrics-addr string
+        the Prometheus pushgataway address; leaving it empty disables Prometheus push
+    -metrics-interval int
+        the frequency of reporting monitoring information (default 15, unit: second)
+    -pd-urls string
+        the node address of the PD cluster (-pd-urls="http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379")
+    -socket string
+        the monitoring address of the unix socket service (default "unix:///tmp/pump.sock")
     ```
 
 2. Pump configuration file
@@ -247,7 +247,7 @@ This example describes how to use Pump/Drainer.
     -ignore-schemas string
         the DB filtering list (default "INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql,test"); does not support the rename DDL operation on the table of ignore schemas
     -initial-commit-ts (default 0)
-        If Drainer does not provide related breakpoint information, you can use this option to configure the related breakpoint information.
+        If Drainer does not provide related breakpoint information, you can use this option to configure the related breakpoint information
     -log-file string
         the path of the log file
     -log-rotate string
@@ -351,6 +351,7 @@ wget http://download.pingcap.org/pb_reader-latest-linux-amd64.sha256
     
 # Check the file integrity. If the result is OK, the file is correct.
 sha256sum -c pb_reader-latest-linux-amd64.sha256
+
 # Extract the package.
 tar -xzf pb_reader-latest-linux-amd64.tar.gz
 cd pb_reader-latest-linux-amd64
@@ -407,6 +408,4 @@ When you start Drainer, set the two parameters of `--metrics-addr` and `--metric
 
 3. Click "Upload .json File" to upload a JSON file (Download [TiDB Grafana Config](https://grafana.com/tidb)).
 
-4. Click "Save & Open".
-
-5. A Prometheus dashboard is created.
+4. Click "Save & Open".A Prometheus dashboard is created.
