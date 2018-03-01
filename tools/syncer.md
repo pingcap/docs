@@ -7,13 +7,13 @@ category: advanced
 
 ## About Syncer
 
-Syncer is a tool used to import data incrementally.
+Syncer is a tool used to import data incrementally. It is a part of the TiDB enterprise toolset. To obtain Syncer, see [Download the TiDB enterprise toolset](#download-the-tidb-toolset-linux).
 
 ## Syncer architecture
 
 ![syncer sharding](../media/syncer_architecture.png)
 
-## Download the TiDB toolset (Linux)
+## Download the TiDB enterprise toolset (Linux)
 
 ```bash
 # Download the tool package.
