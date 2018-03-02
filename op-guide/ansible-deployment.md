@@ -692,7 +692,7 @@ sudo yum install python2-jmespath
 Enter `import jmespath` in the Python interactive window of the Control Machine.
 
 - If no error displays, the dependency is successfully installed.
-- If the `ImportError: No module named jmespath` error displays, the Python `jmespath` component is not successfully installed.
+- If the `ImportError: No module named jmespath` error displays, the Python `jmespath` module is not successfully installed.
 
 ```
 $ python
