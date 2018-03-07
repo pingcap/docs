@@ -3,7 +3,7 @@ title: TiDB Adopters
 category: adopters
 ---
 
-# TiDB Adopteco
+# TiDB Adopters
 
 This is a list of TiDB adopters in various industries.
 
