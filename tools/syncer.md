@@ -514,7 +514,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 #### title: syncer_binlog_file
 
 - metrics: `syncer_binlog_file{node="master"} - ON(instance, job) syncer_binlog_file{node="syncer"}`
-- info: the number of binlog files discrepancy between the upstream and the downstream in the process of synchronization; the normal value is 0, which indicates real-time synchronization; a larger value indicates a larger number of binlog files discrepancy
+- info: the number of different binlog files between the upstream and the downstream in the process of synchronization; the normal value is 0, which indicates real-time synchronization; a larger value indicates a larger number of binlog files discrepancy
 
 #### title: binlog skipped events
 
@@ -524,4 +524,4 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 #### title: syncer_txn_costs_gauge_in_second
 
 - metrics: `syncer_txn_costs_gauge_in_second`
-- info: the time costed that Syncer processes one batch (unit: second)
+- info: the time consumed by Syncer when it processes one batch (unit: second)
