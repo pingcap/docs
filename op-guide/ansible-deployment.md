@@ -25,7 +25,7 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology, 
 
 Before you start, make sure that you have:
 
-1. Several managed nodes with the following requirements:
+1. Several target machines with the following requirements:
 
     - 4 or more machines. At least 3 instances for TiKV. Do not deploy TiKV together with TiDB or PD on the same machine. See [Software and Hardware Requirements](recommendation.md).
 
@@ -43,16 +43,18 @@ Before you start, make sure that you have:
 
     - Create a normal `tidb` user account as the user who runs the service. The `tidb` user can sudo to the root user without a password. See [How to configure SSH mutual trust and sudo without password](#how-to-configure-ssh-mutual-trust-and-sudo-without-password).
 
+    > **Note:** When you deploy TiDB using Ansible, use SSD disks for the data directory of TiKV and PD nodes.
+
 2. A Control Machine with the following requirements:
 
     - The Control Machine can be one of the managed nodes.
     - It is recommended to install CentOS 7.3 or later version of Linux operating system (Python 2.7 involved by default).
-    - The machine has access to the external network, used to download TiDB and relevant packages.
+    - The Control Machine must have access to the Internet in order to download TiDB and related packages.
     - Configure mutual trust of `ssh authorized_key`. In the Control Machine, you can login to the deployment target machine using `tidb` user account without a password. See [How to configure SSH mutual trust and sudo without password](#how-to-configure-ssh-mutual-trust-and-sudo-without-password).
 
 ## Install Ansible and dependencies in the Control Machine
 
-Use the following method to install Ansible on the Control Machine of CentOS 7 system. Installation from the EPEL source includes Ansible dependencies automatically (such as `Jinja2==2.7.2 MarkupSafe==0.11`). After installation, you can view the version using `ansible --version`. 
+Use the following method to install Ansible on the Control Machine of CentOS 7 system. Installation from the EPEL source includes Ansible dependencies automatically (such as `Jinja2==2.7.2 MarkupSafe==0.11`). After installation, you can view the version using `ansible --version`.
 
 > **Note:** Make sure that the Ansible version is **Ansible 2.4** or later, otherwise a compatibility issue occurs.
 
@@ -193,9 +195,9 @@ TiKV3-3 ansible_host=172.16.10.6 deploy_dir=/data3/deploy tikv_port=20173 labels
 location_labels = ["host"]
 ```
 
-**Edit the parameters:**
+**Edit the parameters in the service configuration file:**
 
-1. For multiple TiKV instances, edit the `end-point-concurrency` and `block-cache-size` parameters in `conf/tikv.yml`:
+1. For multiple TiKV instances, edit the `end-point-concurrency` and `block-cache-size` parameters in `tidb-ansible/conf/tikv.yml`:
 
     - `end-point-concurrency`: keep the number lower than CPU Vcores
     - `rocksdb defaultcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 30%
@@ -208,6 +210,24 @@ location_labels = ["host"]
     - `capacity`: (DISK - log space) / TiKV instance number (the unit is GB)
 
 ### Description of inventory.ini variables
+
+#### Description of the deployment directory
+
+You can configure the deployment directory using the `deploy_dir` variable. The global variable is set to `/home/tidb/deploy` by default, and it applies to all services. If the data disk is mounted on the `/data1` directory, you can set it to `/data1/deploy`. For example:
+
+```
+## Global variables
+[all:vars]
+deploy_dir = /data1/deploy
+```
+
+To set a deployment directory separately for a service, you can configure host variables when configuring the service host list. Take the TiKV node as an example and it is similar for other services. You must add the first column alias to avoid confusion when the services are mixedly deployed.
+
+```
+TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy
+```
+
+#### Description of other variables
 
 | Variable | Description |
 | ---- | ------- |
@@ -260,7 +280,7 @@ To deploy TiDB using a normal user account, take the following steps:
     ansible -i inventory.ini all -m shell -a 'whoami' -b
     ```
 
-2. Connect to the network and download TiDB binary to the Control Machine using `local_prepare.yml` playbook.
+2. Run the `local_prepare.yml` playbook, connect to the Internet and download TiDB binary to the Control Machine.
 
     ```
     ansible-playbook local_prepare.yml
@@ -657,4 +677,27 @@ After you login to the deployment target machine using the `tidb` user, run the 
 ```
 [tidb@172.16.10.61 ~]$ sudo -su root
 [root@172.16.10.61 tidb]#
+```
+
+### Error: You need to install jmespath prior to running json_query filter
+
+See [Install Ansible and dependencies in the Control Machine](#install-ansible-and-dependencies-in-the-control-machine) and install Ansible 2.4 in the Control Machine. The `python2-jmespath` dependent package is installed by default.
+
+For the CentOS 7 system, you can install `jmespath` using the following command:
+
+```
+sudo yum install python2-jmespath
+```
+
+Enter `import jmespath` in the Python interactive window of the Control Machine.
+
+- If no error displays, the dependency is successfully installed.
+- If the `ImportError: No module named jmespath` error displays, the Python `jmespath` module is not successfully installed.
+
+```
+$ python
+Python 2.7.5 (default, Nov  6 2016, 00:28:07)
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-11)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import jmespath
 ```

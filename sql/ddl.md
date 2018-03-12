@@ -178,11 +178,14 @@ You can specify the `AUTO_INCREMENT` for integer fields. A table only supports o
 ```sql
 DROP TABLE [IF EXISTS]
     tbl_name [, tbl_name] ...
+    [RESTRICT | CASCADE]
 ```
 
 You can delete multiple tables at the same time. The tables are separated by a comma `,`.
 
 If you delete a table that does not exist and does not specify the use of `IF EXISTS`, an error is displayed.
+
+The RESTRICT and CASCADE keywords do nothing. They are permitted to make porting easier from other database systems.
 
 ## TRUNCATE TABLE syntax
 
@@ -329,6 +332,7 @@ The `CREATE INDEX` statement is used to create the index for an existing table. 
 - The `index_option` supports `KEY_BLOCK_SIZE`, `index_type` and `COMMENT`. The `COMMENT` supports a maximum of 1024 characters and does not support the `WITH PARSER` option.
 - The `index_type` supports `BTREE` and `HASH` only in MySQL syntax, which means the index type is independent of the storage engine option in the creating table statement. For example, in MySQL, when you use `CREATE INDEX` on a table using InnoDB, it only supports the `BTREE` index, while TiDB supports both `BTREE` and `HASH` indexes.   
 - The `CREATE INDEX` does not support the `algorithm_option` and `lock_option` in MySQL.
+- TiDB supports at most 512 columns in a single table. The corresponding number limit in InnoDB is 1017, and the hard limit in MySQL is 4096. For more details, see [Limits on Table Column Count and Row Size](https://dev.mysql.com/doc/refman/5.7/en/column-count-limit.html).
 
 ## DROP INDEX syntax
 
