@@ -454,9 +454,9 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 1. To add the Syncer job information to Prometheus, flush the following content to the configuration file of Prometheus. The monitor is enabled when you restart Prometheus.
 
     ```yaml
-    - job_name: 'syncer_ops' // name of the job, to distinguish the reported data
-    static_configs:
-      - targets: ['10.1.1.4:10086'] // Syncer monitoring address and port; to inform Prometheus of obtaining the monitoring data of Syncer
+        - job_name: 'syncer_ops' // name of the job, to distinguish the reported data
+          static_configs:
+            - targets: ['10.1.1.4:10086'] // Syncer monitoring address and port; to inform Prometheus of obtaining the monitoring data of Syncer
     ```
 
 2. To configure Prometheus [alert](https://prometheus.io/docs/alerting/alertmanager/), flush the following content to the `alert.rule` configuration file. The alert is enabled when you restart Prometheus.
