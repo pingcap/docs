@@ -91,7 +91,9 @@ git clone https://github.com/pingcap/tidb-ansible.git
 
 ## Orchestrate the TiDB cluster
 
-The file path of `inventory.ini`: `tidb-ansible/inventory.ini`
+The file path of `inventory.ini`: `tidb-ansible/inventory.ini`.
+
+> **Note:** Use the internal IP address to deploy the cluster.
 
 The standard cluster has 6 machines:
 
