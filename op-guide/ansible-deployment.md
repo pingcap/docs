@@ -36,7 +36,7 @@ Before you start, make sure that you have:
       - ext4 filesystem
 
           Use ext4 filesystem for your data disks. Mount ext4 filesystem with the `nodelalloc` mount option. See [Mount the data disk ext4 filesystem with options](#mount-the-data-disk-ext4-filesystem-with-options).
-    
+
     - The network between machines. Turn off the firewalls and iptables when deploying and turn them on after the deployment.
 
     - The same time and time zone for all machines with the NTP service on to synchronize the correct time. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
@@ -229,8 +229,8 @@ TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy
 
 #### Description of other variables
 
-| Variable | Description |
-| ---- | ------- |
+| Variable        | Description                                                |
+| --------------- | ---------------------------------------------------------- |
 | cluster_name | the name of a cluster, adjustable |
 | tidb_version | the version of TiDB, configured by default in TiDB-Ansible branches |
 | deployment_method | the method of deployment, binary by default, Docker optional |
@@ -255,7 +255,7 @@ The following example uses the `tidb` user account as the user who runs the serv
 
 To deploy TiDB using a normal user account, take the following steps:
 
-1. Edit the `tidb-ansible/inventory.ini` file to make sure `ansible_user = tidb`. 
+1. Edit the `tidb-ansible/inventory.ini` file to make sure `ansible_user = tidb`.
 
     ```
     ## Connection
@@ -263,7 +263,7 @@ To deploy TiDB using a normal user account, take the following steps:
     # ansible_user = root
     # ansible_become = true
     # ansible_become_user = tidb
-    
+
     # ssh via normal user
     ansible_user = tidb
     ```
@@ -364,7 +364,7 @@ wget http://download.pingcap.org/tidb-v1.0.0-linux-amd64-unportable.tar.gz
 ### Use Ansible for rolling update
 
 - Apply rolling update to the TiKV node (only update the TiKV service).
-    
+
     ```
     ansible-playbook rolling_update.yml --tags=tikv
     ```
@@ -540,7 +540,7 @@ $ sudo systemctl start ntpd.service
     ```
     # deployment methods, [binary, docker]
     deployment_method = docker
-    
+
     # process supervision, [systemd, supervise]
     process_supervision = systemd
     ```
@@ -577,7 +577,7 @@ ansible-playbook start.yml
 
 ### Mount the data disk ext4 filesystem with options
 
-Format your data disks to ext4 filesystem and mount the filesystem with the `nodelalloc` and `noatime` options. It is required to mount the `nodelalloc` option, or else the Ansible deployment cannot pass the detection. The `noatime` option is optional. 
+Format your data disks to ext4 filesystem and mount the filesystem with the `nodelalloc` and `noatime` options. It is required to mount the `nodelalloc` option, or else the Ansible deployment cannot pass the detection. The `noatime` option is optional.
 
 Take the `/dev/nvme0n1` data disk as an example:
 
