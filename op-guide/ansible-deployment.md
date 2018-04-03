@@ -60,12 +60,14 @@ Use the following method to install Ansible on the Control Machine of CentOS 7 s
 
 ```bash
   # yum install epel-release
-  # yum install ansible curl
+  # yum install ansible curl python2-jmespath
   # ansible --version
     ansible 2.4.2.0
 ```
 
 For other systems, see [Install Ansible](ansible-deployment.md#install-ansible).
+
+> **Note:** Make sure that the Python `jmespath` module (0.9.0 or later) is installed on the Control Machine. See [Error: You need to install jmespath prior to running json_query filter](#error-you-need-to-install-jmespath-prior-to-running-json_query-filter).
 
 ## Download TiDB-Ansible to the Control Machine
 
@@ -231,8 +233,10 @@ TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy
 
 #### Description of other variables
 
-| Variable        | Description                                                |
-| --------------- | ---------------------------------------------------------- |
+> **Note:** To enable the following control variables, use the capitalized `True`. To disable the following control variables, use the capitalized `False`.
+
+| Variable | Description |
+| ---- | ------- |
 | cluster_name | the name of a cluster, adjustable |
 | tidb_version | the version of TiDB, configured by default in TiDB-Ansible branches |
 | deployment_method | the method of deployment, binary by default, Docker optional |
@@ -306,7 +310,7 @@ To deploy TiDB using a normal user account, take the following steps:
     ansible-playbook start.yml
     ```
 
-> **Note:** If you want to deploy TiDB using the root user account, see [Ansible Deployment Using the Root User Account](op-guide/root-ansible-deployment.md).
+> **Note:** If you want to deploy TiDB using the root user account, see [Ansible Deployment Using the Root User Account](root-ansible-deployment.md).
 
 ## Test the cluster
 
@@ -725,5 +729,15 @@ If `import jmespath` still reports an error after the `python2-jmespath` package
 ```
 $ sudo yum -y install epel-release
 $ sudo yum -y install python-pip
+$ sudo pip install jmespath
+$ pip show jmespath
+Name: jmespath
+Version: 0.9.0
+```
+
+For the Ubuntu system, you can install the Python `jmespath` module using the following command:
+
+```
+$ sudo apt-get install python-pip
 $ sudo pip install jmespath
 ```
