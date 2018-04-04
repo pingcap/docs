@@ -1,0 +1,44 @@
+---
+title: TiDB Memory Control
+category: user guide
+---
+
+# TiDB Memory Control
+
+Currently TiDB can track the memory usage of a single SQL query. When the memory usage exceeds the threshold value, TiDB performs some operations to reduce the risk of OOM or find the causes of OOM. In the TiDB configuration file, you can configure the options as below to control TiDB behaviors when the memory usage exceeds the threshold value:
+
+```
+# Valid options: ["log", "cancel"]
+oom-action = "log"
+```
+
+- If the configuration item above uses "log", when the memory usage of a single SQL query exceeds the threshold value which is controlled by the `tidb_mem_quota_query` variable, TiDB prints an entry of log. Then the SQL query continues to be executed. If OOM occurs, you can find the corresponding SQL query in the log.
+- If the configuration item above uses "cancel", when the memory usage of a single SQL query exceeds the threshold value, TiDB stops executing the SQL query immediately and returns an error to the client. The error information shows the memory usage of the execution operators that occupy ssmuch memory in detail.
+
+## How to configure the threshold value of memory usage
+
+You can control the memory usage of a query through the following session variables. Generally, you only need to configure `tidb_mem_quota_query`. Other variables are advanced items which most users do not need to care about.
+
+| Variable Name | Description | Unit | Default Value |
+|-----------------------------------|---------------------------------------------------|-------|-----------|
+| tidb_mem_quota_query              | Configure the threshold value of memory usage for a single SQL query | Byte | 32 << 30 |
+| tidb_mem_quota_hashjoin | Configure the threshold value of memory usage for hash join | Byte | 32 << 30 |
+| tidb_mem_quota_mergejoin | Configure the threshold value of memory usage for merge join | Byte | 32 << 30 |
+| tidb_mem_quota_sort | Configure the threshold value of memory usage for `sort` | Byte | 32 << 30 |
+| tidb_mem_quota_topn | Configure the threshold value of memory usage for Top-N | Byte | 32 << 30 |
+| tidb_mem_quota_indexlookupreader | Configure the threshold value of memory usage for Index Lookup Reader | Byte | 32 << 30 |
+| tidb_mem_quota_indexlookupjoin | Configure the threshold value of memory usage for Index Lookup Join | Byte | 32 << 30 |
+| tidb_mem_quota_nestedloopapply | Configure the threshold value of memory usage for  Nested Loop Apply | Byte | 32 << 30 |
+
+Some usage examples:
+
+```sql
+-- Set the threshold value of memory usage for a single SQL query to 8GB:
+set @@tidb_mem_quota_query = 8 << 30;
+
+-- Set the threshold value of memory usage for a single SQL query to 8MB:
+set @@tidb_mem_quota_query = 8 << 20;
+
+-- Set the threshold value of memory usage for a single SQL query to 8KB:
+set @@tidb_mem_quota_query = 8 << 10;
+```
