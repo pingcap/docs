@@ -204,7 +204,7 @@ This example describes how to use Pump/Drainer.
     # the path of storing Pump data
     data-dir = "data.pump"
 
-    # the ZooKeeper address; You can set the option to get the Kafka address from ZooKeeper; if the namespace is configured in Kafka, you need to keep same configuration here
+    # the ZooKeeper address; You can set the option to get the Kafka address from ZooKeeper; if the namespace is configured in Kafka, you need to keep the same configuration here
     zookeeper-addrs = "192.168.0.11:2181,192.168.0.12:2181,192.168.0.13:2181"
     # example of the ZooKeeper address that configures the namespace
     zookeeper-addrs = "192.168.0.11:2181,192.168.0.12:2181,192.168.0.13:2181/kafka/123"
