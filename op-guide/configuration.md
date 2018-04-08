@@ -11,10 +11,11 @@ TiDB, TiKV and PD are configurable using command-line flags and environment vari
 
 The default TiDB ports are 4000 for client requests and 10080 for status report.
 
-### `-V`
+### `--binlog-socket`
 
-- Output the version of TiDB
+- The TiDB services use the unix socket file for internal connections, such as the PUMP service
 - Default: ""
+- You can use “/tmp/pump.sock” to accept the communication of PUMP unix socket file.
 
 ### `--config`
 
@@ -23,50 +24,12 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 - If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line flags, TiDB uses the configuration in the command line flags to cover that in the configuration file. For detailed configuration information, see [tidb-config-file.md](tidb-config-file.md)
     ```
 
-### `--store`
-
-- The storage engine in the bottom layer of TiDB
-- Default: "mocktikv"
-- You can choose "mocktikv" or "tikv". ("mocktikv" is the local storage engine; "tikv" is a distributed storage engine)
-
-### `--path`
-
-- The path to the data directory for local storage engine like "mocktikv"
-- For `--store = tikv`, the path should be specified, for `--store = mocktikv`, if the path is not specified, the default value is used.
-- For the distributed storage engine like TiKV, `--path` specifies the actual PD address. Assuming that you deploy the PD server on 192.168.100.113:2379, 192.168.100.114:2379 and 192.168.100.115:2379, the value of `--path` is "192.168.100.113:2379, 192.168.100.114:2379, 192.168.100.115:2379".
-- Default: "/tmp/tidb"
-- You can use `tidb-server --store=mocktikv --path=""` to enable an in-memory TiDB.
-
 ### `--host`
 
 - The host address that the TiDB server monitors
 - Default: “0.0.0.0”
 - The TiDB server monitors this address.
 - The “0.0.0.0” monitors all network cards by default. If you have multiple network cards, specify the network card that provides service, such as 192.168.100.113.
-
-### `-p`
-
-- The monitoring port of TiDB services
-- Default: "4000"
-- The TiDB server accepts MySQL client requests from this port.
-
-### `--socket string`
-
-- The TiDB services use the unix socket file for external connections.
-- Default: ""
-- You can use “/tmp/tidb.sock” to open the unix socket file.
-
-### `--binlog-socket`
-
-- The TiDB services use the unix socket file for internal connections, such as the PUMP service
-- Default: ""
-- You can use “/tmp/pump.sock” to accept the communication of PUMP unix socket file.
-
-### `--run-ddl`
-
-- To see whether the `tidb-server` runs DDL statements, and set when the number of `tidb-server` is over two in the cluster
-- Default: true
-- The value can be (true) or (false). (true) indicates the `tidb-server` runs DDL itself. (false) indicates the `tidb-server` does not run DDL itself.
 
 ### `-L`
 
@@ -86,20 +49,6 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 - Default: ""
 - If this flag is not set, logs are written to the file specified by `--log-file` by default.
 
-### `--report-status`
-
-- To enable(true) or disable(false) the status report and pprof tool
-- Default: true
-- The value can be (true) or (false). (true) is to enable metrics and pprof. (false) is to disable metrics and pprof.
-
-### `--status`
-
-- The status report port for TiDB server
-- Default: "10080"
-- This is used to get server internal data. The data includes Prometheus metrics and pprof.
-- Prometheus metrics can be got through "http://host:status_port/metrics".
-- Pprof data can be got through "http://host:status_port/debug/pprof".
-
 ### `--metrics-addr`
 
 - The Prometheus Pushgateway address
@@ -117,12 +66,19 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 - Default: 15s
 - Setting the value to 0 stops the Prometheus client from pushing.
 
-### `--token-limit`
+### `-p`
 
-- The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
-- Default: 1000
-- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to 
-release tokens.
+- The monitoring port of TiDB services
+- Default: "4000"
+- The TiDB server accepts MySQL client requests from this port.
+
+### `--path`
+
+- The path to the data directory for local storage engine like "mocktikv"
+- For `--store = tikv`, the path should be specified, for `--store = mocktikv`, if the path is not specified, the default value is used.
+- For the distributed storage engine like TiKV, `--path` specifies the actual PD address. Assuming that you deploy the PD server on 192.168.100.113:2379, 192.168.100.114:2379 and 192.168.100.115:2379, the value of `--path` is "192.168.100.113:2379, 192.168.100.114:2379, 192.168.100.115:2379".
+- Default: "/tmp/tidb"
+- You can use `tidb-server --store=mocktikv --path=""` to enable an in-memory TiDB.
 
 ### `--proxy-protocol-networks`
 
@@ -135,6 +91,50 @@ release tokens.
 - Timeout for the PROXY protocol header read
 - Default: 5 (seconds)
 - Generally use the default value and do not set its value to 0. The unit is second.
+
+### `--report-status`
+
+- To enable(true) or disable(false) the status report and pprof tool
+- Default: true
+- The value can be (true) or (false). (true) is to enable metrics and pprof. (false) is to disable metrics and pprof.
+
+### `--run-ddl`
+
+- To see whether the `tidb-server` runs DDL statements, and set when the number of `tidb-server` is over two in the cluster
+- Default: true
+- The value can be (true) or (false). (true) indicates the `tidb-server` runs DDL itself. (false) indicates the `tidb-server` does not run DDL itself.
+
+### `--socket string`
+
+- The TiDB services use the unix socket file for external connections.
+- Default: ""
+- You can use “/tmp/tidb.sock” to open the unix socket file.
+
+### `--status`
+
+- The status report port for TiDB server
+- Default: "10080"
+- This is used to get server internal data. The data includes Prometheus metrics and pprof.
+- Prometheus metrics can be got through "http://host:status_port/metrics".
+- Pprof data can be got through "http://host:status_port/debug/pprof".
+
+### `--store`
+
+- The storage engine in the bottom layer of TiDB
+- Default: "mocktikv"
+- You can choose "mocktikv" or "tikv". ("mocktikv" is the local storage engine; "tikv" is a distributed storage engine)
+
+### `--token-limit`
+
+- The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
+- Default: 1000
+- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to 
+release tokens.
+
+### `-V`
+
+- Output the version of TiDB
+- Default: ""
 
 ## Placement Driver (PD)
 
