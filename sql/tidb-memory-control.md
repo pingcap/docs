@@ -5,7 +5,7 @@ category: user guide
 
 # TiDB Memory Control
 
-Currently TiDB can track the memory quota of a single SQL query. When the memory quota exceeds the threshold value, TiDB performs some operations to reduce the risk of OOM or find the causes of OOM. In the TiDB configuration file, you can configure the options as below to control TiDB behaviors when the memory quota exceeds the threshold value:
+Currently TiDB can track the memory quota of a single SQL query and take actions to prevent OOM (out of memory) or troubleshoot OOM when the memory usage exceeds a specific threshold value. In the TiDB configuration file, you can configure the options as below to control TiDB behaviors when the memory quota exceeds the threshold value:
 
 ```
 # Valid options: ["log", "cancel"]
@@ -13,11 +13,11 @@ oom-action = "log"
 ```
 
 - If the configuration item above uses "log", when the memory quota of a single SQL query exceeds the threshold value which is controlled by the `tidb_mem_quota_query` variable, TiDB prints an entry of log. Then the SQL query continues to be executed. If OOM occurs, you can find the corresponding SQL query in the log.
-- If the configuration item above uses "cancel", when the memory quota of a single SQL query exceeds the threshold value, TiDB stops executing the SQL query immediately and returns an error to the client. The error information shows the memory quota of the execution operators that occupy ssmuch memory in detail.
+- If the configuration item above uses "cancel", when the memory quota of a single SQL query exceeds the threshold value, TiDB stops executing the SQL query immediately and returns an error to the client. The error information clearly shows the memory usage of each physical execution operator that consumes much memory in the SQL execution process.
 
-## How to configure the threshold value of memory quota
+## Configure the memory quota of a query
 
-You can control the memory quota of a query through the following session variables. Generally, you only need to configure `tidb_mem_quota_query`. Other variables are advanced items which most users do not need to care about.
+You can control the memory quota of a query using the following session variables. Generally, you only need to configure `tidb_mem_quota_query`. Other variables are used for advanced configuration which most users do not need to care about.
 
 | Variable Name | Description | Unit | Default Value |
 |-----------------------------------|---------------------------------------------------|-------|-----------|
