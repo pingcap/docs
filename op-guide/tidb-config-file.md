@@ -147,7 +147,7 @@ Configuration about performance.
 
 - The number of retries that TiDB makes when it encounters a `key` conflict or other errors while committing a transaction.
 - Default: 10
-- If the number of retries exceeds `retry-limit` but the transaction still fails, TiDB returns an error.
+- If the number of retries exceeds `retry-limit` but the transaction still fails, TiDB returns an error
 
 ### `join-concurrency`
 
@@ -188,7 +188,7 @@ Configuration about Plan Cache.
 
 - To enable Plan Cache
 - Default: false
-- Enabling Plan Cache saves the query optimization overhead of the same SQL statement.
+- Enabling Plan Cache saves the query optimization overhead of the same SQL statement
 
 ### `capacity`
 
