@@ -13,23 +13,22 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 ### `--binlog-socket`
 
-- The TiDB services use the unix socket file for internal connections, such as the PUMP service
+- The TiDB services use the unix socket file for internal connections, such as the Pump service
 - Default: ""
-- You can use “/tmp/pump.sock” to accept the communication of PUMP unix socket file.
+- You can use "/tmp/pump.sock" to accept the communication of Pump unix socket file.
 
 ### `--config`
 
 - The configuration file
 - Default: ""
-- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line flags, TiDB uses the configuration in the command line flags to cover that in the configuration file. For detailed configuration information, see [tidb-config-file.md](tidb-config-file.md)
-    ```
+- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line flags, TiDB uses the configuration in the command line flags to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](tidb-config-file.md)
 
 ### `--host`
 
 - The host address that the TiDB server monitors
-- Default: “0.0.0.0”
+- Default: "0.0.0.0"
 - The TiDB server monitors this address.
-- The “0.0.0.0” monitors all network cards by default. If you have multiple network cards, specify the network card that provides service, such as 192.168.100.113.
+- The "0.0.0.0" monitors all network cards by default. If you have multiple network cards, specify the network card that provides service, such as 192.168.100.113.
 
 ### `-L`
 
@@ -41,7 +40,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 - The log file
 - Default: ""
-- If this flag is not set, logs are written to "stderr". Otherwise, logs are stored in the log file which will be automatically rotated every day.
+- If this flag is not set, logs are output to "stderr". If this flag is set, logs are output to the corresponding file, which is automatically rotated every day, and the previous file is renamed as a backup.
 
 ### `--log-slow-query`
 
@@ -66,7 +65,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 - Default: 15s
 - Setting the value to 0 stops the Prometheus client from pushing.
 
-### `-p`
+### `-P`
 
 - The monitoring port of TiDB services
 - Default: "4000"
@@ -75,14 +74,14 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 ### `--path`
 
 - The path to the data directory for local storage engine like "mocktikv"
-- For `--store = tikv`, the path should be specified, for `--store = mocktikv`, if the path is not specified, the default value is used.
+- For `--store = tikv`, you must specify the path; for `--store = mocktikv`, the default value is used if you do not specify the path.
 - For the distributed storage engine like TiKV, `--path` specifies the actual PD address. Assuming that you deploy the PD server on 192.168.100.113:2379, 192.168.100.114:2379 and 192.168.100.115:2379, the value of `--path` is "192.168.100.113:2379, 192.168.100.114:2379, 192.168.100.115:2379".
 - Default: "/tmp/tidb"
-- You can use `tidb-server --store=mocktikv --path=""` to enable an in-memory TiDB.
+- You can use `tidb-server --store=mocktikv --path=""` to enable a pure in-memory TiDB.
 
 ### `--proxy-protocol-networks`
 
-- The list of proxy server’s IP addresses allowed by PROXY Protocol; if you need to configure multiple addresses, separate them using ",".
+- The list of proxy server's IP addresses allowed by PROXY Protocol; if you need to configure multiple addresses, separate them using ",".
 - Default: ""
 - Leaving it empty disables PROXY Protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24). "*" means any IP addresses.
 
@@ -114,13 +113,13 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 - The status report port for TiDB server
 - Default: "10080"
-- This is used to get server internal data. The data includes Prometheus metrics and pprof.
+- This is used to get server internal data. The data includes [Prometheus metrics](https://prometheus.io/) and [pprof](https://golang.org/pkg/net/http/pprof/).
 - Prometheus metrics can be got through "http://host:status_port/metrics".
 - Pprof data can be got through "http://host:status_port/debug/pprof".
 
 ### `--store`
 
-- The storage engine in the bottom layer of TiDB
+- To specify the storage engine used by TiDB in the bottom layer
 - Default: "mocktikv"
 - You can choose "mocktikv" or "tikv". ("mocktikv" is the local storage engine; "tikv" is a distributed storage engine)
 
