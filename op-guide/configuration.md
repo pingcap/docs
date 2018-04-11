@@ -40,7 +40,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 - The log file
 - Default: ""
-- If this flag is not set, logs are output to "stderr". If this flag is set, logs are output to the corresponding file, which is automatically rotated every day, and the previous file is renamed as a backup.
+- If this flag is not set, logs are output to "stderr". If this flag is set, logs are output to the corresponding file, which is automatically rotated in the early morning every day, and the previous file is renamed as a backup.
 
 ### `--log-slow-query`
 
