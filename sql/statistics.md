@@ -126,7 +126,7 @@ Syntax:
 
 ```sql
 DROP STATS TableName
-> The statement deletes statistics of all the tables in `TableName`。
+> The statement deletes statistics of all the tables in `TableName`.
 ```
 
 ## Import and export statistics
@@ -148,5 +148,5 @@ Syntax:
 
 ```
 LOAD STATS 'file_name'
-> `file_name` is the file name of the statistics to be imported
+> `file_name` is the file name of the statistics to be imported.
 ```
