@@ -27,7 +27,7 @@ If you need to set the global variable, run:
 - Scope: SESSION | GLOBAl
 - Default value: 0
 - This variable indicates whether to import data from the dump file currently.
-- When the variable is set to 1, the unique index constraint is not checked to speed up importing.
+- To speed up importing, the unique index constraint is not checked when the variable is set to 1.
 - This variable is only used by Lightning. Do not modify it.  
 
 ### tidb_opt_agg_push_down
@@ -41,14 +41,13 @@ If you need to set the global variable, run:
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to set whether the optimizer executes the optimization operation of 
-unfolding the "in-" subquery.
+- This variable is used to set whether the optimizer executes the optimization operation of unfolding the "in-" subquery.
 
 ### tidb_build_stats_concurrency
 
 - Scope: SESSION
 - Default value: 4
-- This variable is used to set the concurrency of executing the ANALYZE statement.
+- This variable is used to set the concurrency of executing the `ANALYZE` statement.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
 ### tidb_checksum_table_concurrency
@@ -206,7 +205,7 @@ unfolding the "in-" subquery.
 
 - Scope: SERVER
 - Default value: 0
-- This variable is used set whether to enable Streaming.
+- This variable is used to set whether to enable Streaming.
  
 ## Optimizer hint
 On the basis of MySQL’s `Optimizer Hint` Syntax, TiDB adds some proprietary `Hint` syntaxes. When using the `Hint` syntax, the TiDB optimizer will try to use the specific algorithm, which performs better than the default algorithm in some scenarios.
