@@ -169,7 +169,7 @@ This section describes some basic CRUD operations in TiDB.
     +--------+------+------------+
     ```
 
-- To update the data in a table, use the `UPDATE ` statement. For example:
+- To update the data in a table, use the `UPDATE` statement. For example:
 
     ```sql
     UPDATE person SET birthday='20171010' WHERE name='tom';
@@ -192,7 +192,7 @@ This section describes some basic CRUD operations in TiDB.
 
 ### Create, authorize, and delete a user
 
-- To create a user , use the `CREATE USER` statement. The following example creates a user named `tiuser` with the password `123456`:
+- To create a user, use the `CREATE USER` statement. The following example creates a user named `tiuser` with the password `123456`:
 
     ```sql
     CREATE USER 'tiuser'@'localhost' IDENTIFIED BY '123456';
