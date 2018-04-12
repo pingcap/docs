@@ -145,15 +145,9 @@ Configuration about performance.
 
 ### `retry-limit`
 
-- The number of retries that TiDB makes when it encounters a `key` conflict or other errors while committing a transaction.
+- The number of retries that TiDB makes when it encounters a `key` conflict or other errors while committing a transaction
 - Default: 10
 - If the number of retries exceeds `retry-limit` but the transaction still fails, TiDB returns an error
-
-### `join-concurrency`
-
-- The number of goroutines when `join-concurrency` concurrently executes `join`
-- Default: 5
-- Configure it based on the data volume and data distribution, and generally the more the better; a larger value indicates a larger CPU overhead
 
 ### `cross-join`
 
