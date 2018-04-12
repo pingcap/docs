@@ -76,14 +76,12 @@ Login to the Control Machine using the `tidb` user account and enter the `/home/
 Download the 1.0 GA version:
 
 ```
-cd /home/tidb
 git clone -b release-1.0 https://github.com/pingcap/tidb-ansible.git
 ```
 
 Download the 2.0 version:
 
 ```
-cd /home/tidb
 git clone -b release-2.0 https://github.com/pingcap/tidb-ansible.git
 ```
 
@@ -92,7 +90,6 @@ or
 Download the master version:
 
 ```
-cd /home/tidb
 git clone https://github.com/pingcap/tidb-ansible.git
 ```
 

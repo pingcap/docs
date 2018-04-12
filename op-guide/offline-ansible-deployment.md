@@ -64,14 +64,12 @@ Before you start, make sure that you have:
     Download the 1.0 GA version:
 
     ```
-    cd /home/tidb
     git clone -b release-1.0 https://github.com/pingcap/tidb-ansible.git
     ```
 
     Download the 2.0 version:
 
     ```
-    cd /home/tidb
     git clone -b release-2.0 https://github.com/pingcap/tidb-ansible.git
     ```
 
@@ -80,7 +78,6 @@ Before you start, make sure that you have:
     Download the master version:
 
     ```
-    cd /home/tidb
     git clone https://github.com/pingcap/tidb-ansible.git
     ```
 
