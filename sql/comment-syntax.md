@@ -96,6 +96,6 @@ Since Hint is involved in comments like `/*+ xxx */`, the MySQL client clears th
 mysql -h 127.0.0.1 -P 4000 -uroot --comments
 ```
 
-For details about the optimizer that TiDB supports, see [Optimizer hint](tidb-specific.md#optimizer-hint).
+For details about the optimizer hints that TiDB supports, see [Optimizer hint](tidb-specific.md#optimizer-hint).
 
 For more information, see [Comment Syntax](https://dev.mysql.com/doc/refman/5.7/en/comments.html).
