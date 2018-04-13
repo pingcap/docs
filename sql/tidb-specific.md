@@ -69,10 +69,10 @@ If you need to set the global variable, run:
 - Default value: ""
 - This variable is read-only. It is used to obtain the configuration information of the current TiDB server.
 
-### tidb_dists-ql_scan_concurrency
+### tidb_distsql_scan_concurrency 
 
 - Scope: SESSION | GLOBAL
-- Default value: 10
+- Default value: 15
 - This variable is used to set the concurrency of the `scan` operation. 
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios. 
 - For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
@@ -90,7 +90,19 @@ If you need to set the global variable, run:
 - Default value: 4
 - This variable is used to set the concurrency of the `index lookup` operation. 
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
- 
+
+### tidb_index_lookup_join_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 4
+- This variable is used to set the concurrency of the `index lookup join` algorithm. 
+
+### tidb_hash_join_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 5
+- This variable is used to set the concurrency of the `hash join` algorithm. 
+
 ### tidb_index_serial_scan_concurrency
 
 - Scope: SESSION | GLOBAL
