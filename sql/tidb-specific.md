@@ -257,7 +257,7 @@ You can use this TABLE OPTION to set the bit digit of the number of implicit `_t
 
 For the tables with non-integer PK or without PK, TiDB uses an implicit auto-increment ROW ID. When a large number of `INSERT` operations occur, the data is written into a single Region, causing a write hot spot.
 
-To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The ROW ID is scattered and the data is written into multiple different Regions. But setting an overlarge value might lead to an excessively large number of of RPC requests, which increases the CPU and network overheads.
+To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The ROW ID is scattered and the data is written into multiple different Regions. But setting an overlarge value might lead to an excessively large number of RPC requests, which increases the CPU and network overheads.
 
 - `SHARD_ROW_ID_BITS = 4` indicates 16 shards
 - `SHARD_ROW_ID_BITS = 6` indicates 64 shards
