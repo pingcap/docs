@@ -26,7 +26,7 @@ Use the following command to set the isolation level of the Session or Global tr
 SET [SESSION | GLOBAL] TRANSACTION ISOLATION LEVEL [read committed|repeatable read]
 ```
 
-If you do not use the Session or Global keyword, this statement takes effect only for the next executed transaction, but not for the entire session or global transaction.
+If you do not use the Session or Global keyword, this statement takes effect only for the transaction to be executed next, but not for the entire session or global transaction.
 
 ```
 SET TRANSACTION ISOLATION LEVEL [read committed|repeatable read]
@@ -82,7 +82,7 @@ retry-limit = 10
 
 ## Statement rollback
 
-If you execute a statement within a statement, the executed statement does not take effect when an error occurs.
+If you execute a statement within a transaction, the statement does not take effect when an error occurs.
 
 ```
 begin;
