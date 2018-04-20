@@ -74,7 +74,7 @@ Take the following steps to install Ansible offline on the CentOS 7 system:
     # yum install epel-release
     # yum install ansible curl
     # ansible --version
-      ansible 2.4.2.0
+      ansible 2.5.0
     ```
     > **Note:** Make sure that the version of Ansible is 2.4 or later, otherwise compatibility problem might occur.
 
