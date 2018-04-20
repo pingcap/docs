@@ -10,7 +10,7 @@ TiDB Controller is a command line tool of TiDB, usually used to obtain the statu
 ## Compile from source code
 
 - Compilation environment requirement: [Go](https://golang.org/) Version 1.7 or later
-- Compilation procedures: Go the root directory of the [TiDB Controller project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
+- Compilation procedures: Go to the root directory of the [TiDB Controller project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
 - Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
 
 ## Usage introduction
@@ -54,8 +54,8 @@ The following example shows how to obtain the schema information:
 
 Use `tidb-ctl schema -h` to get the help information of the subcommands. `schema` has two subcommands: `in` and `tid`.
 
-- `in` is used to obtain the table structure of all tables in the database through the database name.
-- `tid` is used to obtain the table structure through the unique `table_id` in the whole database.
+- `in` is used to obtain the table schema of all tables in the database through the database name.
+- `tid` is used to obtain the table schema through the unique `table_id` in the whole database.
 
 #### The `in` command
 
@@ -89,7 +89,7 @@ The result is long and displayed in JSON. The above result is a truncated one.
 
 - If you want to specify the table name, use `tidb-ctl schema in {database} -n {table name}` to filter.
 
-    For example, `tidb-ctl schema in mysql -n db` returns the table structure of the `db` table in the `mysql` database:
+    For example, `tidb-ctl schema in mysql -n db` returns the table schema of the `db` table in the `mysql` database:
 
     ```text
     {
