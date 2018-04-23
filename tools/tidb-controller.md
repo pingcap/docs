@@ -5,7 +5,7 @@ category: tools
 
 # TiDB Controller User Guide
 
-TiDB Controller is a command line tool of TiDB, usually used to obtain the status information of TiDB in tuning.
+TiDB Controller is a command line tool of TiDB, usually used to obtain the status information of TiDB for debugging.
 
 ## Compile from source code
 
@@ -105,6 +105,6 @@ The result is long and displayed in JSON. The above result is a truncated one.
 
     The above result is a truncated one, too.
 
-- If you want to specify the server name, use the `-H -P` option.
+- If you want to specify the server address, use the `-H -P` option.
 
     For example, `tidb-ctl -H 127.0.0.1 -P 10080 schema in mysql -n db`.
