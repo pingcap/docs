@@ -348,7 +348,7 @@ wget https://github.com/prometheus/pushgateway/releases/download/v0.3.1/pushgate
 
 # Extract the package.
 tar -xzf prometheus-1.5.2.linux-amd64.tar.gz
-tar -xzf node_exporter-0.14.0-rc.1.linux-amd64.tar.gz
+tar -xzf node_exporter-0.14.0-rc.2.linux-amd64.tar.gz
 tar -xzf grafana-4.1.2-1486989747.linux-x64.tar.gz
 tar -xzf pushgateway-0.3.1.linux-amd64.tar.gz
 ```
@@ -441,7 +441,7 @@ domain = 192.168.199.113
 ...
 
 # Start the Grafana service:
-./grafana-server \
+./bin/grafana-server \
     --homepath="/data1/tidb/deploy/opt/grafana" \
     --config="/data1/tidb/deploy/opt/grafana/conf/grafana.ini"
 ```

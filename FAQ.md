@@ -172,7 +172,7 @@ Check the time difference between the machine time of the monitor and the time w
 
 ##### Description of inventory.ini variables
 
-| Variable | Description |
+| Variable        | Description                                                |
 | ---- | ------- |
 | cluster_name | the name of a cluster, adjustable |
 | tidb_version | the version of TiDB, configured by default in TiDB-Ansible branches |
@@ -283,12 +283,12 @@ If the cluster is deployed using Ansible, you can use the `ansible-playbook stop
 
 #### Can `kill` be executed in TiDB?
 
-- You can `kill` DML statements. First use `show processlist` to find the ID corresponding with the session, and then run `kill id`.
+- You can `kill` DML statements. First use `show processlist` to find the ID corresponding with the session, and then run `kill tidb [session id]`.
 - You can `kill` DDL statements. First use `admin show ddl jobs` to find the ID of the DDL job you need to kill, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](sql/admin.md#admin-statement).
 
 #### Does TiDB support session timeout?
 
-Currently, TiDB does not support session timeout in the database level. If you want to implement session timeout, use the session ID started by side records in the absence of LB (Load Balancing), and customize the session timeout on the application. After timeout, kill SQL using `kill id` on the node that starts the query. It is currently recommended to implement session timeout using applications. When the timeout time is reached, the application layer reports an exception and continues to execute subsequent program segments.
+Currently, TiDB does not support session timeout in the database level. If you want to implement session timeout, use the session ID started by side records in the absence of LB (Load Balancing), and customize the session timeout on the application. After timeout, kill SQL using `kill tidb [session id]` on the node that starts the query. It is currently recommended to implement session timeout using applications. When the timeout time is reached, the application layer reports an exception and continues to execute subsequent program segments.
 
 #### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
 
@@ -742,6 +742,7 @@ Use `admin show ddl` to view the current job of adding an index.
 
 - `admin show ddl`: to view the running DDL job
 - `admin show ddl jobs`: to view all the results in the current DDL job queue (including tasks that are running and waiting to run) and the last ten results in the completed DDL job queue
+- `admin show ddl job queries 'job_id' [, 'job_id'] ...`: to view the original SQL statement of the DDL task corresponding to the `job_id`; the `job_id` only searches the running DDL job and the last ten results in the DDL history job queue
 
 #### Does TiDB support CBO (Cost-Based Optimization)? If yes, to what extent?
 
