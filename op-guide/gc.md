@@ -53,10 +53,10 @@ In the table above, `tikv_gc_run_interval`, `tikv_gc_life_time` and `tikv_gc_con
     The duration strings are a sequence of a number with the time unit, such as 24h, 2h30m and 2.5h. The time units you can use include "h", "m" and "s".
 
     > **Note**: When you set `tikv_gc_life_time` to a large number (like days or even months) in a data updated frequently scenario, some problems as follows may occur: 
-
-        - The more versions of the data, the more disk storage space is occupied.
-        - A large number of history versions might slow down the query. They may affect range queries like `select count(*) from t`.
-        - If `tikv_gc_life_time` is suddenly turned to a smaller value during operation, a great deal of old data may be deleted in a short time, causing I/O pressure.
+        
+    - The more versions of the data, the more disk storage space is occupied.
+    - A large number of history versions might slow down the query. They may affect range queries like `select count(*) from t`.
+    - If `tikv_gc_life_time` is suddenly turned to a smaller value during operation, a great deal of old data may be deleted in a short time, causing I/O pressure.
 
 - `tikv_gc_last_run_time`: the last time GC works.
 
