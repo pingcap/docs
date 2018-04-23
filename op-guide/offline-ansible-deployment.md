@@ -36,7 +36,7 @@ Take the following steps to install Ansible offline on the CentOS 7 system:
 
     After the installation is finished, you can use `pip -V` to check whether it is successfully installed:
 
-    ```
+    ```bash
     # pip -V
      pip 8.1.2 from /usr/lib/python2.7/site-packages (python 2.7)
     ```
