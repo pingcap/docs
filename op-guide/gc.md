@@ -5,9 +5,9 @@ category: advanced
 
 # TiDB Garbage Collection (GC)
 
-TiDB uses MVCC to control concurrency. When you update or delete data, the data is not deleted immediately but is saved for a period during which it can be read. Thus the write operation and the read operation are not mutually exclusive and it is possible to read the previous data.
+TiDB uses MVCC to control concurrency. When you update or delete data, the original data is not deleted immediately but is kept for a period during which it can be read. Thus the write operation and the read operation are not mutually exclusive and it is possible to read the history versions of the data.
 
-The data versions whose duration exceeds a specific time and that are not used any more will be cleared, otherwise they will occupy the disk space, affecting the system performance. TiDB uses Garbage Collection (GC) to clear the obsolete data. 
+The data versions whose duration exceeds a specific time and that are not used any more will be cleared, otherwise they will occupy the disk space and affect TiDB's performance. TiDB uses Garbage Collection (GC) to clear the obsolete data. 
 
 ## Working mechanism
 
