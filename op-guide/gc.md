@@ -15,7 +15,7 @@ GC runs periodically on TiDB. When a TiDB server is started, a `gc_worker` is en
 
 ## Configuration and monitor
 
-The GC configuration and operational status are recorded in the `mysql.tidb` system table, which can be monitored and configured using the following SQL statement:
+The GC configuration and operational status are recorded in the `mysql.tidb` system table as below, which can be monitored and configured using SQL statements:
 
 ```sql
 mysql> select VARIABLE_NAME, VARIABLE_VALUE from mysql.tidb;
@@ -36,7 +36,7 @@ mysql> select VARIABLE_NAME, VARIABLE_VALUE from mysql.tidb;
 10 rows in set (0.02 sec)
 ```
 
-In the table above, `tikv_gc_run_interval`, `tikv_gc_life_time` and `tikv_gc_concurrency` can be configured manually. Other variables with the `tikv_gc prefix` prefix record the current status, which are automatically updated by TiDB. Do not modify these variables.
+In the table above, `tikv_gc_run_interval`, `tikv_gc_life_time` and `tikv_gc_concurrency` can be configured manually. Other variables with the `tikv_gc` prefix record the current status, which are automatically updated by TiDB. Do not modify these variables.
 
 - `tikv_gc_leader_uuid`, `tikv_gc_leader_desc`, `tikv_gc_leader_lease`: the current GC leader information.
 
