@@ -358,7 +358,7 @@ tar -xzf pushgateway-0.3.1.linux-amd64.tar.gz
 ####  Start `node_exporter` on Node1, Node2, Node3 and Node4.
 
 ```
-$cd node_exporter-0.14.0-rc.1.linux-amd64
+$cd node_exporter-0.14.0-rc.2.linux-amd64
 
 # Start the node_exporter service.
 ./node_exporter --web.listen-address=":9100" \
@@ -424,7 +424,7 @@ scrape_configs:
 #### Start Grafana in Node1.
 
 ```
-cd grafana-4.1.2-1486989747.linux-x64
+cd grafana-4.1.2-1486989747
 
 # Edit the Configuration file:
 
