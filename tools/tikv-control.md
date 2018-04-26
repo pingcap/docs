@@ -34,7 +34,7 @@ $ tikv-ctl --to-hex "\252\377"
 AAFF
 ```
 
-> **Note:** When you specify the `escaped` form of the key in a command line, it is required to enclose it in double quotes. Otherwise, bash eats the backslash and wrong result is returned.
+> **Note:** When you specify the `escaped` form of the key in a command line, it is required to enclose it in double quotes. Otherwise, bash eats the backslash and a wrong result is returned.
 
 ## Subcommands, some options and flags
 
@@ -71,7 +71,7 @@ cf lock region size: 27616
 
 ### Scan to view MVCC of a specific range
 
-The `--from` and `--to` options of the `scan` command accepts two escaped forms of raw key, and uses the `--show-cf` flag to specify the column families that you need to view.
+The `--from` and `--to` options of the `scan` command accept two escaped forms of raw key, and use the `--show-cf` flag to specify the column families that you need to view.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db scan --from 'zm' --limit 2 --show-cf lock,default,write
@@ -110,7 +110,7 @@ success!
 
 ### Set a Region to tombstone
 
-The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some write data of the Raft state machine is lost caused by power down.
+The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
 
 In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Besides, those Regions need to have enough healthy replicas in other TiKV instances, so as to be able to continue writing and reading through the Raft mechanism.
 
