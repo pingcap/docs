@@ -93,7 +93,6 @@ https://github.com/pingcap/tidb-bench/tree/master/sysbench
 | v2.0.0-rc6 | 32 | 10 million | 256 * 3 | 208130 | 3.69333 ms/8.90333 ms  |
 | v2.0.0-rc6 | 32 | 10 million | 512 * 3 |  211788 | 7.23333 ms/15.59 ms |
 | v2.0.0-rc6 | 32 | 10 million | 1024 * 3 |  212868 | 14.5933 ms/43.2133 ms |
-| v2.0.0-rc6 | 32 | 10 million | 2048 * 3 |  212785 | 28.9267 ms/67.7333 ms  |
 | v1.0.8  | 32 | 10 million | 128 * 3 |  188686 | 2.03667 ms/5.99 ms  |
 | v1.0.8  | 32 | 10 million | 256 * 3 |  195090  |3.94 ms/9.12 ms  |
 | v1.0.8  | 32 | 10 million | 512 * 3 |  203012 | 7.57333 ms/15.3733 ms  |
@@ -109,7 +108,6 @@ According to the statistics above, the `Select` query performance of TiDB 2.0 GA
 | v2.0.0-rc6 | 32 | 10 million | 256 * 3 | 5578.165 | 111563.3 | 167.673 ms/275.623 ms |
 | v2.0.0-rc6 | 32 | 10 million | 512 * 3 | 5874.045 | 117480.9 | 315.083 ms/674.017 ms |
 | v2.0.0-rc6 | 32 | 10 million | 1024 * 3 | 6290.7 | 125814 | 529.183 ms/857.007 ms |
-| v2.0.0-rc6 | 32 | 10 million | 2048 * 3 | 6212.55 | 124251 | 981.143 ms/1328.05 ms |
 | v1.0.8 | 32 | 10 million | 128 * 3 | 5523.91 | 110478 | 69.53 ms/88.6333 ms |
 | v1.0.8 | 32 | 10 million | 256 * 3 | 5969.43 | 119389 |128.63 ms/162.58 ms |
 | v1.0.8 | 32 | 10 million | 512 * 3 | 6308.93 | 126179 | 243.543 ms/310.913 ms |
@@ -125,7 +123,6 @@ According to the statistics above, the OLTP performance of TiDB 2.0 GA and TiDB 
 | v2.0.0-rc6 | 32 | 10 million | 256 * 3 | 38741.2 | 19.8233 ms/39.65 ms |
 | v2.0.0-rc6 | 32 | 10 million | 512 * 3 | 45136.8 | 34.0267 ms/66.84 ms |
 | v2.0.0-rc6 | 32 | 10 million | 1024 * 3 | 48667 | 63.1167 ms/121.08 ms |
-| v2.0.0-rc6 | 32 | 10 million | 2048 * 3 | 49228 | 124.777 ms/182.12 ms |
 | v1.0.8 | 32 | 10 million | 128 * 3 | 31125.7 | 12.3367 ms/19.89 ms |
 | v1.0.8 | 32 | 10 million | 256 * 3 | 36800 | 20.8667 ms/35.3767 ms |
 | v1.0.8 | 32 | 10 million | 512 * 3 | 44123 | 34.8067 ms/63.32 ms |
