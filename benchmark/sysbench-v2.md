@@ -128,4 +128,4 @@ According to the statistics above, the OLTP performance of TiDB 2.0 GA and TiDB 
 | v1.0.8 | 32 | 10 million | 512 * 3 | 44123 | 34.8067 ms/63.32 ms |
 | v1.0.8 | 32 | 10 million | 1024 * 3 | 48496 | 63.3333 ms/118.92 ms |
 
-According to the statistics above, the `Insert` query performance of TiDB 2.0 GA has increased 5% at most than that of TiDB 1.0 GA.
+According to the statistics above, the `Insert` query performance of TiDB 2.0 GA has increased slightly than that of TiDB 1.0 GA.
