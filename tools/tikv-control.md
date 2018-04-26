@@ -11,7 +11,7 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
 
 `tikv-ctl` provides two operation modes:
 
-- Remote mode: accept the service address of TiKV through the `--host` flag
+- Remote mode: use the `--host` option to accept the service address of TiKV as the argument
 
     For this mode, if SSL is started in TiKV, `tikv-ctl` also needs to specify the related certificate file. For example:
 
@@ -19,7 +19,7 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
     $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:21060 <subcommands>
     ```
 
-- Local mode: use the `--db` flag to specify the local TiKV data directory path
+- Local mode: use the `--db` option to specify the local TiKV data directory path
 
 Unless otherwise noted, all commands supports both the remote mode and the local mode.
 
@@ -101,7 +101,7 @@ To print the value of a key, use the `print` command.
 
 ### Compact data manually
 
-Use the `compact` command to manually compact TiKV data. If you specify the `--from` and `--to` options, then the flag is also in the form of escaped raw key. You can use the `--db` flag to specify the RocksDB that you need to compact. The optional flag values are `kv` and `raft`.
+Use the `compact` command to manually compact TiKV data. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. You can use the `--db` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db compact -d kv
