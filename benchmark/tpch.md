@@ -33,7 +33,7 @@ Hardware information:
 | CPU        | 40 vCPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz  |
 | RAM        | 128GB, 16GB RDIMM * 8, 2400MT/s, dual channel, x8 bitwidth        |
 | DISK       | Intel P4500 4T SSD * 2      |
-| Network card  | 10 Gigabit Ethernet |
+| Network Card  | 10 Gigabit Ethernet |
 
 ### TPC-H
 
@@ -100,7 +100,7 @@ TiDB 2.0:
 
 It should be notified that:
 
-- In the diagram above, the orange bars represent the query result of Release 1.0 and the blue bars represent the query rersult of Release 2.0. The ordinate shows the processing time of queries.
-- Both Queries 15 are tagged with Nan because both TiDB 1.0 and TiDB 2.0 do not support view.
-- Queries 2, 17, and 19 in the TiDB 1.0 column are tagged with Nan because TiDB 1.0 does not return a result for long.
-- Queries 5, 7, 18, and 21 in the TiDB 1.0 column are tagged with OOM because TiDB 1.0 memory space is occupied too much and then is killed by oom-killer.
+- In the diagram above, the orange bars represent the query result of Release 1.0 and the blue bars represent the query rersult of Release 2.0. The ordinate represents the processing time of queries, the shorter the better. 
+- Query 15 is tagged with "NaN" because VIEW is not supported in both TiDB 1.0 and 2.0 releases.
+- Queries 2, 17, and 19 in the TiDB 1.0 column are tagged with "NaN" because TiDB 1.0 does not return a result for long.
+- Queries 5, 7, 18, and 21 in the TiDB 1.0 column are tagged with "OOM" because the memory consumption is too high and tidb-server is killed by oom-killer.
