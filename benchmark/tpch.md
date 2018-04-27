@@ -8,9 +8,9 @@ draft: true
 
 ## Test purpose
 
-The test aims at comparing the performance between TiDB v1.0 and v2.0 in OLAP scenario.
+This test aims to compare the performances of TiDB 1.0 and TiDB 2.0 in the OLAP scenario.
 
-> **Note**: Different test environments may lead to different test results.
+> **Note**: Different test environments might lead to different test results.
 
 ## Test environment
 
@@ -18,7 +18,7 @@ The test aims at comparing the performance between TiDB v1.0 and v2.0 in OLAP sc
 
 | Type       |  Name                                                |
 |------------|------------------------------------------------------|
-| OS         | linux (CentOS 7.3.1611)                              |
+| OS         | Linux (CentOS 7.3.1611)                              |
 | CPU        | 40 vCPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz  |
 | RAM        | 128GB                                                |
 | DISK       | 1.5T SSD * 2  + Optane SSD * 1                       |
@@ -41,7 +41,7 @@ The test aims at comparing the performance between TiDB v1.0 and v2.0 in OLAP sc
 
 ### Corresponding TiDB version information
 
-TiDB 1.0：
+TiDB 1.0:
 
 | Component | Version | Commit Hash                                 |
 |--------|-------------|--------------------------------------------|
@@ -49,7 +49,7 @@ TiDB 1.0：
 | TiKV   | v1.0.8      | 2bb923a4cd23dbf68f0d16169fd526dc5c1a9f4a   |
 | PD     | v1.0.8      | 137fa734472a76c509fbfd9cb9bc6d0dc804a3b7   |
 
-TiDB 2.0：
+TiDB 2.0:
 
 | Component | Version      | Commit Hash                            |
 |--------|-------------|--------------------------------------------|
