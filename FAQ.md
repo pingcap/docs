@@ -212,7 +212,7 @@ It is not recommended to deploy TiDB offline using Ansible. If the Control Machi
 
 #### How are the rolling updates done?
 
-When you apply rolling updates to TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB * 2, PD * 3, TiKV * 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
+When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB * 2, PD * 3, TiKV * 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
 
 #### How to upgrade when I deploy TiDB using Binary?
 
