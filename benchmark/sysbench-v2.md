@@ -7,7 +7,7 @@ category: benchmark
 
 ## Test purpose
 
-The test aims at comparing the performance between TiDB v1.0 and TiDB v2.0.
+This test aims to compare the performances of TiDB 1.0 and TiDB 2.0.
 
 ## Test version, time, and place 
 
@@ -98,7 +98,7 @@ https://github.com/pingcap/tidb-bench/tree/master/sysbench
 | v1.0.8  | 32 | 10 million | 512 * 3 |  203012 | 7.57333 ms/15.3733 ms  |
 | v1.0.8  | 32 | 10 million | 1024 * 3 |  205932 | 14.9267 ms/40.7633 ms |
 
-According to the statistics above, the `Select` query performance of TiDB 2.0 GA has increased about 10% at most than that of TiDB 1.0 GA.
+According to the statistics above, the `Select` query performance of TiDB 2.0 GA has increased by about 10% at most than that of TiDB 1.0 GA.
 
 ### Standard OLTP test
 
