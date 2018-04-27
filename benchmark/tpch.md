@@ -16,7 +16,7 @@ This test aims to compare the performances of TiDB 1.0 and TiDB 2.0 in the OLAP 
 
 ### Machine information
 
-System information
+System information:
 
 | Machine IP      | Operation system              | Kernel version     | File system type |
 |--------------|------------------------|------------------------------|--------------|
@@ -27,7 +27,7 @@ System information
 | 172.16.31.8  | CentOS 7.4.1708 64bit  | 3.10.0-693.11.6.el7.x86\_64  | ext4         |
 | 172.16.31.10 | CentOS 7.4.1708 64bit  | 3.10.0-693.11.6.el7.x86\_64  | ext4         |
 
-Hardware information
+Hardware information:
 
 | Type       |  Name                                                |
 |------------|------------------------------------------------------|
