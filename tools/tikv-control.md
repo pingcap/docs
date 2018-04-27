@@ -13,7 +13,7 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
 
 - Remote mode: use the `--host` option to accept the service address of TiKV as the argument
 
-    For this mode, if SSL is started in TiKV, `tikv-ctl` also needs to specify the related certificate file. For example:
+    For this mode, if SSL is enabled in TiKV, `tikv-ctl` also needs to specify the related certificate file. For example:
 
     ```
     $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:21060 <subcommands>
@@ -152,7 +152,7 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 > - This command only supports the remote mode.
 > - Even if this command returns `success!`, you need to check whether TiKV panics. This is because this command is only a proposal that requests a consistency check for the leader, and you cannot know from the client whether the whole check process is successful or not.
 
-### Print the Regions where the Raft state machine reports an error
+### Print the Regions where the Raft state machine corrupts
 
 To avoid checking the Regions while TiKV is started, you can use the `tombstone` command to set the Regions where the Raft state machine reports an error to Tombstone. Before running this command, use the `bad-regions` command to find out the Regions with errors, so as to combine multiple tools for automated processing.
 
