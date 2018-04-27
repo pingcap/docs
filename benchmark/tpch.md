@@ -12,30 +12,6 @@ This test aims to compare the performances of TiDB 1.0 and TiDB 2.0 in the OLAP 
 
 > **Note**: Different test environments might lead to different test results.
 
-## 测试环境
-
-### 测试机器信息
-
-1. 系统信息
-
-| 机器 IP      | 操作系统               | 内核版本                     | 文件系统类型 |
-|--------------|------------------------|------------------------------|--------------|
-| 172.16.31.2  | Ubuntu 17.10 64bit     | 4.13.0-16-generic            | ext4         |
-| 172.16.31.3  | Ubuntu 17.10 64bit     | 4.13.0-16-generic            | ext4         |
-| 172.16.31.4  | Ubuntu 17.10 64bit     | 4.13.0-16-generic            | ext4         |
-| 172.16.31.6  | CentOS 7.4.1708 64bit  | 3.10.0-693.11.6.el7.x86\_64  | ext4         |
-| 172.16.31.8  | CentOS 7.4.1708 64bit  | 3.10.0-693.11.6.el7.x86\_64  | ext4         |
-| 172.16.31.10 | CentOS 7.4.1708 64bit  | 3.10.0-693.11.6.el7.x86\_64  | ext4         |
-
-2. 硬件信息
-
-| 类别       |  名称                                                |
-|------------|------------------------------------------------------|
-| CPU        | 40 vCPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz  |
-| 内存       | 128GB, 8条16GB RDIMM, 2400MT/s, 双列, x8 带宽        |
-| 磁盘       | 2 块 Intel P4500 系列 4T SSD 硬盘                    |
-| 网卡       | 万兆网卡                                             |
-
 ## Test environment
 
 ### Machine information
