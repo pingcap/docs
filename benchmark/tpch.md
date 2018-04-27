@@ -84,7 +84,7 @@ TiDB 2.0：
 | 21        | 31.466s            | OOM              |
 | 22        | 31.539s            | 125.471s         |
 
-![TPC-H Query Result](./tpch.png)
+![TPC-H Query Result](./media/tpch.png)
 
 It should be notified that:
 
