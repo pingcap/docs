@@ -135,8 +135,8 @@ If you need to set the global variable, run:
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable is used to set whether to divide the data for deletion automatically.
-- When deleting a large amount of data, you can set the variable value to true. Then the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction.  
+- This variable is used to set whether to divide the data for deletion automatically. It is valid only when `autocommit` is enabled.
+- When deleting a large amount of data, you can set the variable value to true. Then the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction.
 
 ### tidb_dml_batch_size
 
