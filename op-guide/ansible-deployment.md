@@ -318,6 +318,8 @@ To deploy TiDB using a normal user account, take the following steps:
 
 ## Test the cluster
 
+Note: Because TiDB is compatible with MySQL, you can use MySQL client to connect to TiDB directly. Before you start TiDB, make sure to install MySQL client first.
+
 It is recommended to configure load balancing to provide uniform SQL interface.
 
 1. Connect to the TiDB cluster using the MySQL client.
