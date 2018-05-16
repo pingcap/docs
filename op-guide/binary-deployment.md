@@ -205,7 +205,7 @@ Follow the steps below to start PD, TiKV and TiDB:
                     --data-dir=pd1 \
                     --client-urls="http://192.168.199.113:2379" \
                     --peer-urls="http://192.168.199.113:2380" \
-                    --initial-cluster=pd1="http://192.168.199.113:2380" \
+                    --initial-cluster="pd1=http://192.168.199.113:2380" \
                     --log-file=pd.log
     ```
 
