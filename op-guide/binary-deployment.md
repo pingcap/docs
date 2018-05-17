@@ -132,7 +132,7 @@ The key's randomart image is:
 
 TiDB provides the official binary installation package that supports Linux. For the operating system, it is recommended to use Redhat 7.3+, CentOS 7.3+ and higher versions.
 
-> Note: Because TiDB is compatible with MySQL, you can use MySQL client to connect to TiDB directly. Before you start TiDB, make sure to install MySQL client first.
+> **Note:** Because TiDB is compatible with MySQL, you must use MySQL client to connect to TiDB directly.
 
 ### Download and extract the package on each node
 
