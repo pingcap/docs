@@ -111,6 +111,8 @@
   - [PD Control](tools/pd-control.md)
   - [TiKV Control](tools/tikv-control.md)
   - [TiDB Controller](tools/tidb-controller.md)
++ TiKV
+  - [TiKV Quick Start Guide](tikv/tikv-quick-start-guide.md)
 + TiSpark
   - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
   - [User Guide](tispark/tispark-user-guide.md)
