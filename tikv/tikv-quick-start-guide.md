@@ -44,7 +44,7 @@ To deploy a TiKV cluster on a single machine for test, take the following steps:
 
 1. Download the official binary package.
 
-    ```
+    ```bash
     # Download the package.
     wget https://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
     wget http://download.pingcap.org/tidb-latest-linux-amd64.sha256
@@ -59,7 +59,7 @@ To deploy a TiKV cluster on a single machine for test, take the following steps:
 
 2. Start PD.
 
-    ```
+    ```bash
     ./bin/pd-server --name=pd1 \
                     --data-dir=pd1 \
                     --client-urls="http://127.0.0.1:2379" \
@@ -72,7 +72,7 @@ To deploy a TiKV cluster on a single machine for test, take the following steps:
 
     To start the 3 TiKV instances, open a new terminal tab or window, come to the `tidb-latest-linux-amd64` directory, and start the instances using the following command:
 
-    ```
+    ```bash
     ./bin/tikv-server --pd-endpoints="127.0.0.1:2379" \
                     --addr="127.0.0.1:20160" \
                     --data-dir=tikv1 \
@@ -114,7 +114,7 @@ To deploy a TiKV cluster with multiple nodes for test, take the following steps:
 
 1. To deploy a TiKV cluster with multiple nodes for test, take the following steps:
 
-    ```
+    ```bash
     # Download the package.
     wget https://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
     wget http://download.pingcap.org/tidb-latest-linux-amd64.sha256
@@ -129,7 +129,7 @@ To deploy a TiKV cluster with multiple nodes for test, take the following steps:
 
 2. Start PD on Node1.
 
-    ```
+    ```bash
     ./bin/pd-server --name=pd1 \
                     --data-dir=pd1 \
                     --client-urls="http://192.168.199.113:2379" \
@@ -142,7 +142,7 @@ To deploy a TiKV cluster with multiple nodes for test, take the following steps:
 
     Node2:
 
-    ```
+    ```bash
     ./bin/tikv-server --pd-endpoints="192.168.199.113:2379" \
                     --addr="192.168.199.114:20160" \
                     --data-dir=tikv1 \
@@ -151,7 +151,7 @@ To deploy a TiKV cluster with multiple nodes for test, take the following steps:
 
     Node3:
 
-    ```
+    ```bash
     ./bin/tikv-server --pd-endpoints="192.168.199.113:2379" \
                     --addr="192.168.199.115:20160" \
                     --data-dir=tikv2 \
@@ -160,7 +160,7 @@ To deploy a TiKV cluster with multiple nodes for test, take the following steps:
 
     Node4:
 
-    ```
+    ```bash
     ./bin/tikv-server --pd-endpoints="192.168.199.113:2379" \
                     --addr="192.168.199.116:20160" \
                     --data-dir=tikv3 \
@@ -199,14 +199,14 @@ To use the Raw Key-Value API in applications developed by golang, take the follo
 
 1. Install the necessary packages.
 
-    ```
+    ```bash
     go get -v -u github.com/pingcap/tidb/config
     go get -v -u github.com/pingcap/tidb/store/tikv
     ```
 
 2. Import the dependency packages.
 
-    ```
+    ```bash
     import (
         "fmt"
         "github.com/pingcap/tidb/config"
@@ -216,7 +216,7 @@ To use the Raw Key-Value API in applications developed by golang, take the follo
 
 3. Create a Raw Key-Value client.
 
-    ```
+    ```bash
     cli, err := tikv.NewRawKVClient([]string{"192.168.199.113:2379"}, config.Security{})
     ```
 
@@ -227,7 +227,7 @@ To use the Raw Key-Value API in applications developed by golang, take the follo
 
 4. Call the Raw Key-Value client methods to access the data on TiKV. The Raw Key-Value API contains the following methods, and you can also find them at [GoDoc](https://godoc.org/github.com/pingcap/tidb/store/tikv#RawKVClient).
 
-    ```
+    ```bash
     type RawKVClient struct
     func (c *RawKVClient) Close() error
     func (c *RawKVClient) ClusterID() uint64
@@ -239,7 +239,7 @@ To use the Raw Key-Value API in applications developed by golang, take the follo
 
 #### Usage example of the Raw Key-Value API
 
-```
+```bash
 package main
 
 import (
@@ -293,7 +293,7 @@ func main() {
 
 The result is like:
 
-```
+```bash
 INFO[0000] [pd] create pd client with endpoints [192.168.199.113:2379]
 INFO[0000] [pd] leader switches to: http://127.0.0.1:2379, previous:
 INFO[0000] [pd] init cluster id 6554145799874853483
@@ -326,14 +326,14 @@ To use the Transactional Key-Value API in applications developed by golang, take
 
 1. Install the necessary packages.
 
-    ```
+    ```bash
     go get -v -u github.com/pingcap/tidb/kv
     go get -v -u github.com/pingcap/tidb/store/tikv
     ```
 
 2. Import the dependency packages.
 
-    ```
+    ```bash
     import (
         "github.com/pingcap/tidb/kv"
         "github.com/pingcap/tidb/store/tikv"
@@ -343,7 +343,7 @@ To use the Transactional Key-Value API in applications developed by golang, take
 
 3. Create Storage using a URL scheme.
 
-    ```
+    ```bash
     driver := tikv.Driver{}
     storage, err := driver.Open("tikv://192.168.199.113:2379")
     ```
@@ -354,7 +354,7 @@ To use the Transactional Key-Value API in applications developed by golang, take
 
     Here is an example to increase a key-value by 1:
 
-    ```
+    ```bash
     func increase(storage kv.Storage, key []byte) error {
         txn, err := storage.Begin()
         if err != nil {
@@ -386,7 +386,7 @@ To use the Transactional Key-Value API in applications developed by golang, take
 
 5. Call the Transactional Key-Value API's methods to access the data on TiKV. The Transactional Key-Value API contains the following methods:
 
-    ```
+    ```bash
     Begin() -> Txn
     Txn.Get(key []byte) -> (value []byte)
     Txn.Set(key []byte, value []byte)
@@ -397,7 +397,7 @@ To use the Transactional Key-Value API in applications developed by golang, take
 
 #### Usage example of the Transactional Key-Value API
 
-```
+```bash
 package main
 
 import (
@@ -492,7 +492,7 @@ func main() {
 
 The result is like:
 
-```
+```bash
 INFO[0000] [pd] create pd client with endpoints [192.168.199.113:2379]
 INFO[0000] [pd] leader switches to: http://127.0.0.1:2379, previous:
 INFO[0000] [pd] init cluster id 6554145799874853483
