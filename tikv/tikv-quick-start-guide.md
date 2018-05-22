@@ -368,7 +368,7 @@ To use the Transactional Key-Value API in applications developed by golang, take
                 return err
             }
         } else {
-            oldValue, err = strconv.ParseInt(string(val), 10, 32)
+            oldValue, err = strconv.Atoi(string(val))
             if err != nil {
                 return err
             }
