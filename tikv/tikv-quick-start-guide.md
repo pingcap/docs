@@ -112,7 +112,7 @@ Assume that you have four nodes, you can deploy 1 PD instance and 3 TiKV instanc
 
 To deploy a TiKV cluster with multiple nodes for test, take the following steps:
 
-1. To deploy a TiKV cluster with multiple nodes for test, take the following steps:
+1. Download the official binary package on each node.
 
     ```bash
     # Download the package.
