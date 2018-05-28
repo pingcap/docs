@@ -177,7 +177,7 @@ The result displays the store count and detailed information regarding each stor
 
 ## Try TiKV using the Raw Key-Value API and Transactional Key-Value API
 
-This section introduces two types of APIs and guides you through how to use the two APIs in TiKV using two examples. The usage examples are based on the [deployment of TiKV on multiple nodes](#deploy-the-tikv-cluster-on-multiple-nodes-for-test) in the above section. You can also quickly try the two APIs on a single machine.
+This section introduces two types of APIs and guides you through how to use the two APIs in TiKV using two examples. The usage examples are based on the [deployment of TiKV on multiple nodes](#deploy-the-tikv-cluster-on-multiple-nodes-for-test) in the above section. You can also quickly try the two types of APIs on a single machine.
 
 ### Two types of APIs
 
