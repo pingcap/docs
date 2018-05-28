@@ -220,7 +220,7 @@ To be more precise, you can check the privilege information in the `Grant` table
 3. If the result is still empty, check whether `test@%` has table-level `Insert` privilege at `db1.t`:
 
     ```sql
-    select tables_priv from mysql.tables_priv where user='test' and host='%' and db='db1';
+    select table_priv from mysql.tables_priv where user='test' and host='%' and db='db1';
     ```
 
 ### Implementation of the privilege system
