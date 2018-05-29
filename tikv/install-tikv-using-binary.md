@@ -1,6 +1,6 @@
 ---
 title: Install TiKV Using Binary Files
-category: overview
+category: user guide
 ---
 
 # Install TiKV Using Binary Files
@@ -66,6 +66,8 @@ You can use the [pd-ctl](https://github.com/pingcap/pd/tree/master/pdctl) tool t
 ```
 ./bin/pd-ctl store -d -u http://127.0.0.1:2379
 ```
+
+If the state of all the TiKV instances is "Up", you have successfully deployed a TiKV cluster.
 
 ## Deploy the TiKV cluster on multiple nodes for test
 
@@ -143,4 +145,4 @@ You can use the [pd-ctl](https://github.com/pingcap/pd/tree/master/pdctl) tool t
 ./pd-ctl store -d -u http://192.168.199.113:2379
 ```
 
-The result displays the store count and detailed information regarding each store.
+The result displays the store count and detailed information regarding each store. If the state of all the TiKV instances is "Up", you have successfully deployed a TiKV cluster.

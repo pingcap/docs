@@ -115,6 +115,7 @@
   - [Overview](tikv/tikv-overview.md)
   + Install TiKV
     - [Prerequisites](op-guide/recommendation.md)
+    - [Install TiKV Using Docker Compose](tikv/install-tikv-docker-compose.md)
     - [Install TiKV Using Binary Files](tikv/install-tikv-using-binary.md)
   + Client Drivers
     - [Go](tikv/go-client-api.md)
