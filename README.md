@@ -111,15 +111,14 @@
   - [PD Control](tools/pd-control.md)
   - [TiKV Control](tools/tikv-control.md)
   - [TiDB Controller](tools/tidb-controller.md)
-+ TiKV
-  + Get Started
-    - [Overview](tikv/get-started/tikv-overview.md)
-    + Install TiKV
-      - [Prerequisites](op-guide/recommendation.md)
-      - [Install TiKV Using Binary Files](tikv/get-started/install-tikv-using-binary.md)
-    + Client Drivers
-      - [Go](tikv/get-started/go-client-api.md)
-+ TiSpark
++ TiKV Documentation
+  - [Overview](tikv/tikv-overview.md)
+  + Install TiKV
+    - [Prerequisites](op-guide/recommendation.md)
+    - [Install TiKV Using Binary Files](tikv/install-tikv-using-binary.md)
+  + Client Drivers
+    - [Go](tikv/go-client-api.md)
++ TiSpark Documentation
   - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
   - [User Guide](tispark/tispark-user-guide.md)
 - [Frequently Asked Questions (FAQ)](FAQ.md)

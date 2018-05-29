@@ -16,7 +16,6 @@ To use the Raw Key-Value API in applications developed by golang, take the follo
 1. Install the necessary packages.
 
     ```bash
-    go get -v -u github.com/pingcap/tidb/config
     go get -v -u github.com/pingcap/tidb/store/tikv
     ```
 
@@ -167,38 +166,6 @@ To use the Transactional Key-Value API in applications developed by golang, take
 4. (Optional) Modify the Storage using a Transaction.
 
     The lifecycle of a Transaction is: _begin → {get, set, delete, scan} → {commit, rollback}_.
-
-    Here is an example to increase a key-value by 1:
-
-    ```bash
-    func increase(storage kv.Storage, key []byte) error {
-        txn, err := storage.Begin()
-        if err != nil {
-            return err
-        }
-    defer txn.Rollback()
-        var oldValue int
-        val, err := txn.Get(key)
-        if err != nil {
-            if !kv.ErrNotExist.Equal(err) {
-                return err
-            }
-        } else {
-            oldValue, err = strconv.Atoi(string(val))
-            if err != nil {
-                return err
-            }
-        }
-        err = txn.Set(key, []byte(strconv.Itoa(oldValue+1)))
-        if err != nil {
-            return err
-        }
-        err = txn.Commit(context.Background())
-        return err
-    }
-    ```
-
-    > **Note:** If a key does not exist, `Get` returns a `kv.ErrNotExist` error.
 
 5. Call the Transactional Key-Value API's methods to access the data on TiKV. The Transactional Key-Value API contains the following methods:
 
