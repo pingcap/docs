@@ -35,7 +35,7 @@ The key features of TiKV are as follows:
 
 The TiKV server software stack is as follows:
 
-![The TiKV software stack](../../media/tikv_stack.png)
+![The TiKV software stack](../media/tikv_stack.png)
 
 - **Placement Driver:** Placement Driver (PD) is the cluster manager of TiKV. PD periodically checks replication constraints to balance load and data automatically.
 - **Store:** There is a RocksDB within each Store and it stores data into local disk.
