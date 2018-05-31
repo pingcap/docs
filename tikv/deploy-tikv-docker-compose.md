@@ -1,9 +1,9 @@
 ---
-title: Install TiKV Using Docker Compose
+title: Install and Deploy TiKV Using Docker Compose
 category: user guide
 ---
 
-# Install TiKV Using Docker Compose
+# Install and Deploy TiKV Using Docker Compose
 
 This guide describes how to quickly deploy a TiKV cluster using [Docker Compose](https://github.com/pingcap/tidb-docker-compose/). Currently, this installation method only supports the Linux system.
 
@@ -21,7 +21,7 @@ This guide describes how to quickly deploy a TiKV cluster using [Docker Compose]
     curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
     ```
 
-## Install
+## Install and deploy
 
 1. Download `tidb-docker-compose`.
 

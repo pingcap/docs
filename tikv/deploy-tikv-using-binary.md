@@ -1,9 +1,9 @@
 ---
-title: Install TiKV Using Binary Files
+title: Install and Deploy TiKV Using Binary Files
 category: user guide
 ---
 
-# Install TiKV Using Binary Files
+# Install and Deploy TiKV Using Binary Files
 
 This guide describes how to deploy a TiKV cluster using binary files.
 
