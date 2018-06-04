@@ -1,9 +1,9 @@
 ---
-title: Ansible Deployment
+title: Deploy TiDB Using Ansible
 category: operations
 ---
 
-# Ansible Deployment
+# Deploy TiDB Using Ansible
 
 ## Overview
 
@@ -19,7 +19,6 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology, 
 - Cleaning data
 - Cleaning environment
 - Configuring monitoring modules
-
 
 ## Prepare
 
@@ -55,12 +54,6 @@ Before you start, make sure that you have:
 ## Download TiDB-Ansible to the Control Machine
 
 Login to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. Use the following command to download the corresponding version of TiDB-Ansible from GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`. The following are examples of downloading various versions, and you can turn to the official team for advice on which version to choose.
-
-Download the 1.0 GA version:
-
-```
-git clone -b release-1.0 https://github.com/pingcap/tidb-ansible.git
-```
 
 Download the 2.0 version:
 
@@ -105,7 +98,7 @@ The standard cluster has 6 machines:
 - 3 PD nodes
 - 3 TiKV nodes
 
-### The cluster topology of single TiKV instance on a single machine
+### The cluster topology of a single TiKV instance on each TiKV node
 
 | Name  | Host IP     | Services   |
 |:------|:------------|:-----------|
@@ -146,8 +139,7 @@ The standard cluster has 6 machines:
 172.16.10.6
 ```
 
-
-### The cluster topology of multiple TiKV instances on a single machine
+### The cluster topology of multiple TiKV instances on each TiKV node
 
 Take two TiKV instances as an example:
 
@@ -173,13 +165,10 @@ Take two TiKV instances as an example:
 [tikv_servers]
 TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv1"
 TiKV1-2 ansible_host=172.16.10.4 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv1"
-TiKV1-3 ansible_host=172.16.10.4 deploy_dir=/data3/deploy tikv_port=20173 labels="host=tikv1"
 TiKV2-1 ansible_host=172.16.10.5 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv2"
 TiKV2-2 ansible_host=172.16.10.5 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv2"
-TiKV2-3 ansible_host=172.16.10.5 deploy_dir=/data3/deploy tikv_port=20173 labels="host=tikv2"
 TiKV3-1 ansible_host=172.16.10.6 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv3"
 TiKV3-2 ansible_host=172.16.10.6 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv3"
-TiKV3-3 ansible_host=172.16.10.6 deploy_dir=/data3/deploy tikv_port=20173 labels="host=tikv3"
 
 [monitoring_servers]
 172.16.10.1
@@ -203,21 +192,34 @@ location_labels = ["host"]
 
 **Edit the parameters in the service configuration file:**
 
-1. For multiple TiKV instances, edit the `end-point-concurrency` and `block-cache-size` parameters in `tidb-ansible/conf/tikv.yml`:
+1. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `block-cache-size` parameter in `tidb-ansible/conf/tikv.yml`:
 
-    - `end-point-concurrency`: keep the number lower than CPU Vcores
     - `rocksdb defaultcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 30%
     - `rocksdb writecf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 45%
     - `rocksdb lockcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 2.5% (128 MB at a minimum)
     - `raftdb defaultcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 2.5% (128 MB at a minimum)
 
-2. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
+2. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `high-concurrency`, `normal-concurrency` and `low-concurrency` parameters in the `tidb-ansible/conf/tikv.yml` file:
+
+    ```
+    readpool:
+    coprocessor:
+        # Notice: if CPU_NUM > 8, default thread pool size for coprocessors
+        # will be set to CPU_NUM * 0.8.
+        # high-concurrency: 8
+        # normal-concurrency: 8
+        # low-concurrency: 8
+    ```
+
+    Recommended configuration: `number of instances * parameter value = CPU_Vcores * 0.8`.
+
+3. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
     - `capacity`: (DISK - log space) / TiKV instance number (the unit is GB)
 
-### Description of inventory.ini variables
+### Edit variables in the `inventory.ini` file
 
-#### Description of the deployment directory
+#### Edit the deployment directory
 
 You can configure the deployment directory using the `deploy_dir` variable. The global variable is set to `/home/tidb/deploy` by default, and it applies to all services. If the data disk is mounted on the `/data1` directory, you can set it to `/data1/deploy`. For example:
 
