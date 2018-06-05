@@ -14,7 +14,7 @@ Please **NOTE** that:
 - Do not assume the code is self-evident
 - Do not assume reviewers understand the original issue
 
-## What are the type of the changes (mandatory)?
+## What are the type of the changes? (mandatory)
 
 The currently defined types are listed below, please pick one of the types for this PR by removing the others:
 
@@ -23,7 +23,7 @@ The currently defined types are listed below, please pick one of the types for t
 - Bug fix (non-breaking change which fixes an issue)
 - Breaking change (fix or feature that would cause existing functionality to not work as expected)
 
-## How has this PR been tested (mandatory)?
+## How has this PR been tested? (mandatory)
 
 Please describe the tests that you ran to verify your changes. Have you finished unit tests, integration tests, or manual tests?
 
