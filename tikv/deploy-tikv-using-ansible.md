@@ -15,16 +15,14 @@ This guide describes how to install and deploy TiKV using Ansible. Ansible is an
 
     - 4 or more machines
 
-        A standard TiKV cluster contains 6 machines. You can use 4 machines for test.
+        A standard TiKV cluster contains 6 machines. You can use 4 machines for testing.
 
-    - CentOS 7.3 or later version of Linux operating system, x86_64 architecture (AMD64), ext4 filesystem
+    - CentOS 7.3 (64 bit) or later with Python 2.7 installed, x86_64 architecture (AMD64), ext4 filesystem
 
         Use ext4 filesystem for your data disks. Mount ext4 filesystem with the `nodelalloc` mount option. See [Mount the data disk ext4 filesystem with options](../op-guide/ansible-deployment#mount-the-data-disk-ext4-filesystem-with-options).
 
     - Network between machines
-
-        Turn off the firewalls and iptables when deploying and turn them on after the deployment.
-
+    
     - Same time and time zone for all machines with the NTP service on to synchronize the correct time.
     
         See [How to check whether the NTP service is normal](../op-guide/ansible-deployment#how-to-check-whether-the-ntp-service-is-normal).
@@ -39,9 +37,10 @@ This guide describes how to install and deploy TiKV using Ansible. Ansible is an
 
     > **Note:** The Control Machine can be one of the target machines.
     
-    - CentOS 7.3 or later version of Linux operating system (Python 2.7 involved by default)
+    - CentOS 7.3 (64 bit) or later with Python 2.7 installed
     - Access to the Internet
-    - Mutual trust of `ssh authorized_key` configured
+    - Git installed
+    - SSH Mutual Trust configured
 
         In the Control Machine, you can log in to the deployment target machine using `tidb` user account without a password. See [How to configure SSH mutual trust and sudo without password](../op-guide/ansible-deployment#how-to-configure-ssh-mutual-trust-and-sudo-without-password).
 
@@ -63,7 +62,7 @@ This guide describes how to install and deploy TiKV using Ansible. Ansible is an
         git clone https://github.com/pingcap/tidb-ansible.git
         ```
 
-    You can turn to the official team for advice on which version to choose.
+    You can turn to the official team (info@pingcap.com) for advice on which version to choose.
 
 ## Step 2: Install Ansible and dependencies in the Control Machine
 
@@ -227,7 +226,7 @@ Edit the parameters in the service configuration file:
     deploy_dir = /data1/deploy
     ```
 
-    **Note:** To separately set the deployment directory for a service, you can configure the host variables while configuring the service host list. It is required to add the first column alias, to avoid confusion in scenarios of mixed services deployment.
+    **Note:** To separately set the deployment directory for a service, you can configure the host variable while configuring the service host list in the `inventory.ini` file. It is required to add the first column alias, to avoid confusion in scenarios of mixed services deployment.
 
     ```bash
     TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy
@@ -267,7 +266,7 @@ The following example uses `tidb` as the user who runs the service.
         ansible -i inventory.ini all -m shell -a 'whoami' -b
         ```
 
-3. Download the TiDB binary to the Control Machine.
+3. Download the TiKV binary to the Control Machine.
 
     ```bash
     ansible-playbook local_prepare.yml
