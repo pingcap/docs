@@ -219,6 +219,8 @@ location_labels = ["host"]
 
 ### Edit variables in the `inventory.ini` file
 
+In the `inventory.ini` file, you can edit the deployment directory and other variables according to your need.
+
 #### Edit the deployment directory
 
 You can configure the deployment directory using the `deploy_dir` variable. The global variable is set to `/home/tidb/deploy` by default, and it applies to all services. If the data disk is mounted on the `/data1` directory, you can set it to `/data1/deploy`. For example:
