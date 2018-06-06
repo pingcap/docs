@@ -223,7 +223,7 @@ Edit the parameters in the service configuration file:
 
 3. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
-    - `capacity`: (DISK - log space) / TiKV instance number (the unit is GB)
+    - `capacity`: (total disk capacity - log space) / TiKV instance number (the unit is GB)
 
 ## Step 4: Edit variables in the `inventory.ini` file
 
