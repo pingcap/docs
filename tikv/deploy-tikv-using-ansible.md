@@ -87,17 +87,26 @@ This guide describes how to install and deploy TiKV using Ansible. Ansible is an
 
 ## Step 3: Edit the `inventory.ini` file to orchestrate the TiKV cluster
 
-Edit the `tidb-ansible/inventory.ini` file to orchestrate the TiKV cluster. This section shows the cluster topology of a single TiKV instance on a single machine and the cluster topology of multiple TiKV instances on a single machine.
-
-> **Note:** Leave `[tidb_servers]` in the `inventory.ini` file empty, because this deployment is for the TiKV cluster, not the TiDB cluster.
-
-The standard TiKV cluster contains 6 machines: 3 PD nodes and 3 TiKV nodes.
+Edit the `tidb-ansible/inventory.ini` file to orchestrate the TiKV cluster. The standard TiKV cluster contains 6 machines: 3 PD nodes and 3 TiKV nodes.
 
 - Deploy at least 3 instances for TiKV.
 - Do not deploy TiKV together with PD on the same machine.
 - Use the first PD machine as the monitoring machine.
 
-It is required to use the internal IP address to deploy. For more details, see [Software and Hardware Requirements](../op-guide/recommendation.md).
+> **Note:**
+>
+> - Leave `[tidb_servers]` in the `inventory.ini` file empty, because this deployment is for the TiKV cluster, not the TiDB cluster.
+> - It is required to use the internal IP address to deploy.
+
+You can choose one of the following two types of cluster topology according to your need:
+
+- The cluster topology of a single TiKV instance on each TiKV node
+
+    By default, deploy one TiKV instance on each TiKV node.
+
+- The cluster topology of multiple TiKV instances on each TiKV node
+
+    If the CPU and memory of your TiKV machines are twice better than the requirements described in [Hardware and Software Requirements](../op-guide/recommendation.md), and at the same time you have two SSD hard disks or one SSD har disk with a capacity of more than 2T, you can consider the cluster topology of multiple TiKV instances on each TiKV node. However, it is not recommended to deploy more than two TiKV instances on a single TiKV node.
 
 ### Option 1: Use the cluster topology of a single TiKV instance on each TiKV node
 
