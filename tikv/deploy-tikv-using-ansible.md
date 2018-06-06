@@ -62,11 +62,11 @@ This guide describes how to install and deploy TiKV using Ansible. Ansible is an
         git clone https://github.com/pingcap/tidb-ansible.git
         ```
 
-    You can turn to the official team (info@pingcap.com) for advice on which version to choose.
+    If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
 
-## Step 2: Install Ansible and dependencies in the Control Machine
+## Step 2: Install Ansible and the dependencies on the Control Machine
 
-1. Install Ansible and dependencies on the Control Machine:
+1. Install Ansible and the dependencies on the Control Machine:
 
     ```bash
     sudo yum -y install epel-release
@@ -75,7 +75,7 @@ This guide describes how to install and deploy TiKV using Ansible. Ansible is an
     sudo pip install -r ./requirements.txt
     ```
 
-    Ansible and related dependencies are recorded in the `tidb-ansible/requirements.txt` file.
+    Ansible and related dependencies are in the `tidb-ansible/requirements.txt` file.
 
 2. View the version of Ansible:
 
@@ -98,15 +98,13 @@ Edit the `tidb-ansible/inventory.ini` file to orchestrate the TiKV cluster. The 
 > - Leave `[tidb_servers]` in the `inventory.ini` file empty, because this deployment is for the TiKV cluster, not the TiDB cluster.
 > - It is required to use the internal IP address to deploy.
 
-You can choose one of the following two types of cluster topology according to your need:
+You can choose one of the following two types of cluster topology according to your scenario:
 
 - [The cluster topology of a single TiKV instance on each TiKV node](#option-1-use-the-cluster-topology-of-a-single-tikv-instance-on-each-tikv-node)
 
-    By default, deploy one TiKV instance on each TiKV node.
+    In most cases, it is recommended to deploy one TiKV instance on each TiKV node for better performance. However, if the CPU and memory of your TiKV machines are much better than the required in [Hardware and Software Requirements](../op-guide/recommendation.md), and you have more than two disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 TiKV instances on a single TiKV node.
 
 - [The cluster topology of multiple TiKV instances on each TiKV node](#option-2-use-the-cluster-topology-of-multiple-tikv-instances-on-each-tikv-node)
-
-    If the CPU and memory of your TiKV machines are twice better than the requirements described in [Hardware and Software Requirements](../op-guide/recommendation.md), and at the same time you have two SSD hard disks or one SSD har disk with a capacity of more than 2T, you can consider the cluster topology of multiple TiKV instances on each TiKV node. However, it is not recommended to deploy more than two TiKV instances on a single TiKV node.
 
 ### Option 1: Use the cluster topology of a single TiKV instance on each TiKV node
 
@@ -287,17 +285,11 @@ The following example uses `tidb` as the user who runs the service.
     ansible-playbook bootstrap.yml
     ```
 
-5. Deploy the TiKV cluster software.
+5. Deploy the TiKV cluster.
 
     ```bash
     ansible-playbook deploy.yml
     ```
-
-    > **Note:** You can use the `Report` button on the Grafana Dashboard to generate the PDF file. This function depends on the `fontconfig` package. To use this function, log in to the `grafana_servers` machine and install it using the following command:
-    >
-    > ```bash
-    > $ sudo yum install fontconfig
-    >
 
 6. Start the TiKV cluster.
 
