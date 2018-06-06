@@ -100,11 +100,11 @@ Edit the `tidb-ansible/inventory.ini` file to orchestrate the TiKV cluster. The 
 
 You can choose one of the following two types of cluster topology according to your need:
 
-- The cluster topology of a single TiKV instance on each TiKV node
+- [The cluster topology of a single TiKV instance on each TiKV node](#option-1-use-the-cluster-topology-of-a-single-tikv-instance-on-each-tikv-node)
 
     By default, deploy one TiKV instance on each TiKV node.
 
-- The cluster topology of multiple TiKV instances on each TiKV node
+- [The cluster topology of multiple TiKV instances on each TiKV node](#option-2-use-the-cluster-topology-of-multiple-tikv-instances-on-each-tikv-node)
 
     If the CPU and memory of your TiKV machines are twice better than the requirements described in [Hardware and Software Requirements](../op-guide/recommendation.md), and at the same time you have two SSD hard disks or one SSD har disk with a capacity of more than 2T, you can consider the cluster topology of multiple TiKV instances on each TiKV node. However, it is not recommended to deploy more than two TiKV instances on a single TiKV node.
 
