@@ -111,12 +111,24 @@
   - [PD Control](tools/pd-control.md)
   - [TiKV Control](tools/tikv-control.md)
   - [TiDB Controller](tools/tidb-controller.md)
-+ TiSpark
++ TiKV Documentation
+  - [Overview](tikv/tikv-overview.md)
+  + Install and Deploy TiKV
+    - [Prerequisites](op-guide/recommendation.md)
+    - [Install and Deploy TiKV Using Docker Compose](tikv/deploy-tikv-docker-compose.md)
+    - [Install and Deploy TiKV Using Ansible](tikv/deploy-tikv-using-ansible.md)
+    - [Install and Deploy TiKV Using Binary Files](tikv/deploy-tikv-using-binary.md)
+  + Client Drivers
+    - [Go](tikv/go-client-api.md)
++ TiSpark Documentation
   - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
   - [User Guide](tispark/tispark-user-guide.md)
 - [Frequently Asked Questions (FAQ)](FAQ.md)
 - [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 + [Releases](releases/rn.md)
+  - [2.0.3](releases/203.md)
+  - [2.0.2](releases/202.md)
+  - [2.0.1](releases/201.md)
   - [2.0](releases/2.0ga.md)
   - [2.0 RC5](releases/2rc5.md)
   - [2.0 RC4](releases/2rc4.md)
