@@ -46,8 +46,8 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 > 
 > The operations are executed as follows:
 >
-> 1. The client inserts the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
-> 2. The client inserts the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, therefore Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 5000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
+> 1. The client issues the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
+> 2. The client issues the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 5000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
 ### Built-in functions
 
