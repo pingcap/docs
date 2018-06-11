@@ -6,6 +6,7 @@
   - [TiDB Introduction](overview.md#tidb-introduction)
   - [TiDB Architecture](overview.md#tidb-architecture)
 - [TiDB Quick Start Guide](QUICKSTART.md)
+- [TiDB Tutorial](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/)
 + TiDB User Guide
   + TiDB Server Administration
     - [The TiDB Server](sql/tidb-server.md)
@@ -116,6 +117,7 @@
   + Install and Deploy TiKV
     - [Prerequisites](op-guide/recommendation.md)
     - [Install and Deploy TiKV Using Docker Compose](tikv/deploy-tikv-docker-compose.md)
+    - [Install and Deploy TiKV Using Ansible](tikv/deploy-tikv-using-ansible.md)
     - [Install and Deploy TiKV Using Docker](tikv/deploy-tikv-using-docker.md)
     - [Install and Deploy TiKV Using Binary Files](tikv/deploy-tikv-using-binary.md)
   + Client Drivers
