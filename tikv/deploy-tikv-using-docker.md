@@ -9,11 +9,7 @@ This guide describes how to deploy a multi-node TiKV cluster using Docker.
 
 ## Prerequisites
 
-Install Docker:
-
-```
-sudo yum install docker
-```
+Make sure that Docker is installed on each machine.
 
 For more details about prerequisites, see [Hardware and Software Requirements](../op-guide/recommendation.md).
 
