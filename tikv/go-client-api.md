@@ -15,7 +15,7 @@ To use the Raw Key-Value API in applications developed by golang, take the follo
 
 1. Install the necessary packages.
 
-    ```go
+    ```bash
     go get -v -u github.com/pingcap/tidb/store/tikv
     ```
 
@@ -141,7 +141,7 @@ To use the Transactional Key-Value API in applications developed by golang, take
 
 1. Install the necessary packages.
 
-    ```go
+    ```bash
     go get -v -u github.com/juju/errors
     go get -v -u github.com/pingcap/tidb/kv
     go get -v -u github.com/pingcap/tidb/store/tikv
