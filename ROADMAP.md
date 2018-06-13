@@ -32,7 +32,7 @@ This document defines the roadmap for TiDB development.
 - [ ] Table Partition
 - [ ] Cluster Index
 - [ ] Improve DDL
-  - [ ] Speed up Add Index operation
+  - [x] Speed up Add Index operation
   - [ ] Parallel DDL
 - [ ] Support `utf8_general_ci` collation
 
