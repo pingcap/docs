@@ -16,9 +16,9 @@ This document defines the roadmap for TiDB development.
 - [ ] Statistics
   - [x] Update statistics dynamically according to the query feedback
   - [x] Analyze table automatically
-  - [ ] Improve the accuracy of Row Cout estimation
+  - [ ] Improve the accuracy of Row Count estimation
 - [ ] Executor
-  - [ ] Pushdown the Projection operator to the Coprocessor
+  - [ ] Push down the Projection operator to the Coprocessor
   - [ ] Improve the performance of the HashJoin operator
   - [ ] Parallel Operators
     - [x] Projection
