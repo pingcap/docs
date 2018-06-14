@@ -163,3 +163,5 @@ scala> spark.sql("select count(*) from lineitem").show
 |   60175|
 +--------+
 ```
+
+Here is [a 5-minute tutorial](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/) that shows you how to spin up a standard TiDB cluster using Docker Compose on your local computer (installed with macOS).
