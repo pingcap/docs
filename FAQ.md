@@ -394,7 +394,7 @@ The processing time is different for different scenarios. Generally, you can con
 2. The `Add Index` operation with a relatively large number of rows in the corresponding data table: the processing time depends on the specific number of rows and the QPS at that time (the `Add Index` operation has a lower priority than ordinary SQL operations)
 3. Other DDL operations: about 1s
 
-Besides, if the TiDB server instance that receives the DDL request is same TiDB server instance that the DDL owner is in, the first and third scenarios above might cost dozens to hundreds of milliseconds.
+Besides, if the TiDB server instance that receives the DDL request is the same TiDB server instance that the DDL owner is in, the first and third scenarios above might cost dozens to hundreds of milliseconds.
 
 #### Why it is very slow to run DDL statements sometimes?
 
