@@ -121,3 +121,45 @@ To customize the cluster, you can edit the `docker-compose.yml` file directly. I
     - Default password: admin
 
     If tidb-vision is enabled, you can access the cluster data visualization interface: <http://localhost:8010>.
+
+## Access the Spark shell and load TiSpark
+
+Insert some sample data to the TiDB cluster:
+
+```bash
+$ docker-compose exec tispark-master bash
+$ cd /opt/spark/data/tispark-sample-data
+$ mysql -h tidb -P 4000 -u root < dss.ddl
+```
+
+After the sample data is loaded into the TiDB cluster, you can access the Spark shell using `docker-compose exec tispark-master /opt/spark/bin/spark-shell`.
+
+```bash
+$ docker-compose exec tispark-master /opt/spark/bin/spark-shell
+...
+Spark context available as 'sc' (master = local[*], app id = local-1527045927617).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.1.1
+      /_/
+
+Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_172)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> import org.apache.spark.sql.TiContext
+...
+scala> val ti = new TiContext(spark)
+...
+scala> ti.tidbMapDatabase("TPCH_001")
+...
+scala> spark.sql("select count(*) from lineitem").show
++--------+
+|count(1)|
++--------+
+|   60175|
++--------+
+```
