@@ -228,7 +228,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION | GLOBAL
 - Default value: 10
-- When a transaction encounters errors that support retries, such as transaction conflicts and TiKV busy, this transaction can be re-executed. This variable is used to set the maximum number of the retries.
+- When a transaction encounters retriable errors, such as transaction conflicts and TiKV busy, this transaction can be re-executed. This variable is used to set the maximum number of the retries.
 
 ## Optimizer Hint
 
