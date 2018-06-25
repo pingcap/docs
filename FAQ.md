@@ -89,7 +89,7 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 No. TiDB JDBC drive is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
-After you configure the two data sources of Atomikos, set the JDBC drives to XA. When Atomikos operates TM and RM (DB), Atomikos sends the command about XA to JDBC layer. Taking MySQL for an example, when XA is enabled in the JDBC layer, JDBC will send a series of XA logic operations to InnoDB, including using DML to change the `redo` log. This is the operations of the two-phase commit. The current TiDB version does not support the upper application layer JTA/XA and does not parse operations about XA sent by Atomikos.
+After you configure the two data sources of Atomikos, set the JDBC drives to XA. When Atomikos operates TM and RM (DB), Atomikos sends the command about XA to JDBC layer. Taking MySQL for an example, when XA is enabled in the JDBC layer, JDBC will send a series of XA logic operations to InnoDB, including using DML to change the `redo` log. This is the operation of the two-phase commit. The current TiDB version does not support the upper application layer JTA/XA and does not parse operations about XA sent by Atomikos.
 
 MySQL is a standalone database which meets the requirement of across-database transactions using XA; while TiDB supports the distributed transaction using Google Percolator transaction model and its performance stability is higher than XA, so TiDB does not support XA and there is no need for TiDB supporting XA.
 
@@ -108,7 +108,7 @@ It is recommended to use the official standard statements when modifying the use
 
 #### Why does the auto-incrementing ID of the later inserted data is smaller than that of the earlier inserted data in TiDB?
 
-The auto-incrementing IDs (`AUTO_INCREMENT`) in TiDB are unique and automatically incrementing but not always allocated continuously. Currently TiDB allocate auto-incrementing IDs in batches, therefore the allocated auto-incrementing IDs may not be continuous when data is inserted in multiple TiDB servers simultaneously. When multiple threads concurrently insert data in multiple `tidb-server` instances, the auto-incrementing ID of the later inserted data may be smaller. Besides, `AUTO_INCREMENT` is allowed to be assigned to the integer field in TiDB and only one field of the `AUTO_INCREMENT` attribute is allowed in one table. For details, see [DDL](sql/ddl.md).
+The auto-incrementing IDs (`AUTO_INCREMENT`) in TiDB are unique and automatically incrementing but not always allocated continuously. Currently TiDB allocates auto-incrementing IDs in batches, therefore the allocated auto-incrementing IDs may not be continuous when data is inserted in multiple TiDB servers simultaneously. When multiple threads concurrently insert data in multiple `tidb-server` instances, the auto-incrementing ID of the later inserted data may be smaller. Besides, `AUTO_INCREMENT` is allowed to be assigned to the integer field in TiDB and only one field of the `AUTO_INCREMENT` attribute is allowed in one table. For details, see [DDL](sql/ddl.md).
 
 #### How to modify the configuration file to configure `sql_mode` besides using the `set` command by default?
 
@@ -258,7 +258,7 @@ You can use Docker Compose to build a cluster locally, including the cluster mon
 
 #### How to add the `label` configuration if `label` of TiKV was not configured when I deployed the TiDB cluster for the first time?
 
-The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for the global management and schedule of PD. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone, rack, host"` you should configure based on the practical `label` level name). 
+The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for the global management and schedule of PD. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone, rack, host"` you should configure based on the practical `label` level name. 
 
 For the usage of `pd-ctl`, see [PD Control Instruction](tools/pd-control.md).
 
@@ -275,9 +275,11 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
     ```
 
 - The mix test of sequential Write and random Read:
-```
-./fio -ioengine=libaio -bs=32k -direct=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randr_write_test.txt -name='PingCAP' -iodepth=4 -runtime=60
-```
+
+    ```
+    ./fio -ioengine=libaio -bs=32k -direct=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randr_write_test.txt -name='PingCAP' -iodepth=4 -runtime=60
+    ```
+    
 ### Upgrade
 
 #### How to perform rolling updates using Ansible?
@@ -860,7 +862,7 @@ View the `Healthy` field using `show stats_healthy` and generally you need to ex
 
 #### What is the ID rule when a query plan is presented as a tree? What is the execution order for this tree?
 
-No rule exists for these IDs but the IDs are unique. When IDs are generated, a counter  works and ID will plus one when one plan is generated. The execution order has nothing to do with the ID. The whole query plan is a tree and the execution process starts from the root node and the data is returned to the upper level continuously. For details about the query plan, see [Understanding the TiDB Query Execution Plan](sql/understanding-the-query-execution-plan.md).
+No rule exists for these IDs but the IDs are unique. When IDs are generated, a counter works and ID will plus one when one plan is generated. The execution order has nothing to do with the ID. The whole query plan is a tree and the execution process starts from the root node and the data is returned to the upper level continuously. For details about the query plan, see [Understanding the TiDB Query Execution Plan](sql/understanding-the-query-execution-plan.md).
 
 #### In the TiDB query plan, `cop` tasks are in the same root. Are they executed concurrently?
 
@@ -880,7 +882,7 @@ See [The TiDB Command Options](sql/server-command-option.md).
 
 #### How to scatter the hotspots?
 
-In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hospot in a Region. In TiDB, for the table whose primary key (PK) is not a integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [TiDB Specific System Variables and Syntax](sql/tidb-specific.md).
+In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [TiDB Specific System Variables and Syntax](sql/tidb-specific.md).
 
 ### TiKV
 
