@@ -19,7 +19,7 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology a
 - Deploy the whole TiDB cluster
 - Start the TiDB cluster
 - Stop the TiDB cluster
-- Modify components configuration
+- Modify component configuration
 - Scale the TiDB cluster
 - Upgrade the component version
 - Clean up data of the TiDB cluster
