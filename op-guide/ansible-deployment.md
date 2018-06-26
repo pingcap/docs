@@ -280,7 +280,7 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 ## Step 8: Edit the `inventory.ini` file to orchestrate the TiDB cluster
 
-Log in to the Control Machine using the `tidb` user account, and edit the `tidb-ansible/inventory.ini` file to orchestrate the TiDB cluster. The standard TiDB cluster contains 6 machines: 2 TiDB modes, 3 PD nodes and 3 TiKV nodes.
+Log in to the Control Machine using the `tidb` user account, and edit the `tidb-ansible/inventory.ini` file to orchestrate the TiDB cluster. The standard TiDB cluster contains 6 machines: 2 TiDB nodes, 3 PD nodes and 3 TiKV nodes.
 
 - Deploy at least 3 instances for TiKV.
 - Do not deploy TiKV together with TiDB or PD on the same machine.
