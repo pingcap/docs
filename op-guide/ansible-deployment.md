@@ -203,9 +203,9 @@ $ cd /home/tidb/tidb-ansible
 $ ansible-playbook -i hosts.ini deploy_ntp.yml -k
 ```
 
-The NTP service is installed and started using the software the comes with the system on the target machines. The default NTP server list in the installation package is used. The related `server` parameter is in the `/etc/ntp.conf` configuration file.
+The NTP service is installed and started using the software repository that comes with the system on the target machines. The default NTP server list in the installation package is used. The related `server` parameter is in the `/etc/ntp.conf` configuration file.
 
-To make the NTP service start synchronizing as soon as possible, the system executes `ntpdate` one time on `ntp_server` in the `hosts.ini` file. The default server is `pool.ntp.org`, and you can also replace it with your NTP server.
+To make the NTP service start synchronizing as soon as possible, the system executes the `ntpdate` command to set the local date and time by polling `ntp_server` in the `hosts.ini` file. The default server is `pool.ntp.org`, and you can also replace it with your NTP server.
 
 ## Step 7: Mount the data disk ext4 filesystem with options on the target machines
 
@@ -649,7 +649,7 @@ Run the following command:
 process_supervision = systemd
 ```
 
-For versions earlier than TiDB 1.0.4, the TiDB-Ansible supervision method of a process is `supervise` by default. The previously installed cluster can remain the same. If you need to change the supervision method to `systemd`, close the cluster and run the following command:
+For versions earlier than TiDB 1.0.4, the TiDB-Ansible supervision method of a process is `supervise` by default. The previously installed cluster can remain the same. If you need to change the supervision method to `systemd`, stop the cluster and run the following command:
 
 ```
 ansible-playbook stop.yml
