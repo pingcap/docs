@@ -29,7 +29,7 @@ This operation stops all the components in the entire TiDB cluster in order, whi
 $ ansible-playbook unsafe_cleanup_data.yml
 ```
 
-This operation stops the TiDB, Pump, TiKV and PD services, and clean up the data directory of Pump, TiKV and PD.
+This operation stops the TiDB, Pump, TiKV and PD services, and cleans up the data directory of Pump, TiKV and PD.
 
 ## Destroy a cluster
 
@@ -37,6 +37,6 @@ This operation stops the TiDB, Pump, TiKV and PD services, and clean up the data
 $ ansible-playbook unsafe_cleanup.yml
 ```
 
-This operation stops the cluster and clean up the data directory.
+This operation stops the cluster and cleans up the data directory.
 
 > **Note:** If the deployment directory is a mount point, an error will be reported, but implementation results remain unaffected, so you can ignore it.

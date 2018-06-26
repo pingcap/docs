@@ -25,7 +25,7 @@ Assume that the topology is as follows:
 
 ## Increase the capacity of a TiDB/TiKV node
 
-For example, if you want to add two TiDB nodes (node101, node102) with the IP address `172.16.10.101` and `172.16.10.102`, take the following steps:
+For example, if you want to add two TiDB nodes (node101, node102) with the IP addresses `172.16.10.101` and `172.16.10.102`, take the following steps:
 
 1. Edit the `inventory.ini` file and append the node information:
 
@@ -88,6 +88,8 @@ For example, if you want to add two TiDB nodes (node101, node102) with the IP ad
     ```
     ansible-playbook bootstrap.yml -l 172.16.10.101,172.16.10.102
     ```
+
+    > **Note:** If an alias is configured in the `inventory.ini` file, for example, `node101 ansible_host=172.16.10.101`, use `-1` to specify the alias when executing `ansible-playbook`. For example, `ansible-playbook bootstrap.yml -l node101,node102`. This also applies to the following steps.
 
 3. Deploy the newly added node:
 
@@ -202,7 +204,7 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
     
         > **Note:** `pd-ctl` is a command used to check the number of PD nodes.
 
-5. Roll upgrade the entire cluster:
+5. Apply a rolling update to the entire cluster:
     
     ```
     ansible-playbook rolling_update.yml
@@ -290,13 +292,13 @@ For example, if you want to remove a TiKV node (node9) with the IP address `172.
 
 1. Remove the node from the cluster using `pd-ctl`:
 
-    1. View the store id of node9:
+    1. View the store ID of node9:
         
         ```
         ./pd-ctl -u "http://172.16.10.1:2379" -d store
         ```
 
-    2. Remove node9 from the cluster, assuming that the store id is 10:
+    2. Remove node9 from the cluster, assuming that the store ID is 10:
         
         ```
         ./pd-ctl -u "http://172.16.10.1:2379" -d store delete 10

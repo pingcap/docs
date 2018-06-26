@@ -17,13 +17,13 @@ To upgrade between large versions, you need to upgrade [`tidb-ansible`](https://
 
 1. Edit the value of the `tidb_version` parameter in the `/home/tidb/tidb-ansible/inventory.ini` file, and specify the version number you need to upgrade to.
 
-    For example, to upgrade form `v2.0.2` to `v2.0.3`:
+    For example, to upgrade from `v2.0.2` to `v2.0.3`:
 
     ```
     tidb_version = v2.0.3
     ```
 
-2. Delete the existing downloads directory `/home/tidb/tidb-ansible/downloads/`.
+2. Delete the existing `downloads` directory `/home/tidb/tidb-ansible/downloads/`.
 
     ```
     $ cd /home/tidb/tidb-ansible
