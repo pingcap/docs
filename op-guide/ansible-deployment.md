@@ -522,7 +522,7 @@ The following example uses `tidb` as the user who runs the service.
 
 > **Note:** If you want to deploy TiDB using the root user account, see [Ansible Deployment Using the Root User Account](root-ansible-deployment.md).
 
-## Test the cluster
+## Test the TiDB cluster
 
 Because TiDB is compatible with MySQL, you must use the MySQL client to connect to TiDB directly. It is recommended to configure load balancing to provide uniform SQL interface.
 
