@@ -413,7 +413,7 @@ location_labels = ["host"]
 
 3. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
-    - `capacity`: (total disk capacity - log space) / TiKV instance number (the unit is GB)
+    - `capacity`: total disk capacity / number of TiKV instances (the unit is GB)
 
 ## Step 9: Edit variables in the `inventory.ini` file
 
@@ -448,7 +448,7 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | process_supervision | the supervision way of processes, systemd by default, supervise optional |
 | timezone | the timezone of the managed node, adjustable, `Asia/Shanghai` by default, used together with the `set_timezone` variable |
 | set_timezone | to edit the timezone of the managed node, True by default; False means closing |
-| enable_firewalld | to enable the firewall, closed by default |
+| enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](recommendation.md#network-requirements) to the white list |
 | enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
 | set_hostname | to edit the hostname of the mananged node based on the IP, False by default |
 | enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
