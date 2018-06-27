@@ -63,7 +63,7 @@ The architecture of TiDB guarantees that it fully supports geo-distribution and 
 
 #### Does TiDB provide any other knowledge resource besides the documentation?
 
-Currently, [TiDB documentation](https://www.pingcap.com/docs/overview.md) is the most important and timely way to get knowledge of TiDB. In addition, we also have some technical communication groups. If you have any needs, contact info@pingcap.com.
+Currently, [TiDB documentation](https://www.pingcap.com/docs/overview) is the most important and timely way to get knowledge of TiDB. In addition, we also have some technical communication groups. If you have any needs, contact info@pingcap.com.
 
 #### What are the MySQL variables that TiDB is compatible with?
 
@@ -87,36 +87,36 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 #### Does TiDB support XA？
 
-No. TiDB JDBC drive is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
+No. The JDBC drive of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
-After you configure the two data sources of Atomikos, set the JDBC drives to XA. When Atomikos operates TM and RM (DB), Atomikos sends the command about XA to JDBC layer. Taking MySQL for an example, when XA is enabled in the JDBC layer, JDBC will send a series of XA logic operations to InnoDB, including using DML to change the `redo` log. This is the operation of the two-phase commit. The current TiDB version does not support the upper application layer JTA/XA and does not parse operations about XA sent by Atomikos.
+After you configure the two data sources of Atomikos, set the JDBC drives to XA. When Atomikos operates TM and RM (DB), Atomikos sends the command including XA to the JDBC layer. Taking MySQL for an example, when XA is enabled in the JDBC layer, JDBC will send a series of XA logic operations to InnoDB, including using DML to change the `redo` log. This is the operation of the two-phase commit. The current TiDB version does not support the upper application layer JTA/XA and does not parse XA operations sent by Atomikos.
 
-MySQL is a standalone database which meets the requirement of across-database transactions using XA; while TiDB supports the distributed transaction using Google Percolator transaction model and its performance stability is higher than XA, so TiDB does not support XA and there is no need for TiDB supporting XA.
+As a standalone database, MySQL can only implement across-database transactions using XA; while TiDB supports distributed transactions using Google Percolator transaction model and its performance stability is higher than XA, so TiDB does not support XA and there is no need for TiDB to support XA.
 
 #### Does `show processlist` display the system process ID?
 
 The display content of TiDB `show processlist` is almost the same as that of MySQL `show processlist`. TiDB `show processlist` does not display the system process ID. The ID that it displays is the current session ID. The differences between TiDB `show processlist` and MySQL `show processlist` are as follows:
 
-- As TiDB is a distributed database, the `tidb-server` instance is a stateless engine for parsing and executing the SQL statements (for details, see [TiDB architecture](overview.md#tidb-architecture)). `show processlist` displays the session list executed in the `tidb-server` instance which the user uses the MySQL client to log into, not the list of all the sessions running in the cluster. But MySQL is a standalone database and its `show processlist` displays all the SQL statements executed in MySQL.
+- As TiDB is a distributed database, the `tidb-server` instance is a stateless engine for parsing and executing the SQL statements (for details, see [TiDB architecture](overview.md#tidb-architecture)). `show processlist` displays the session list executed in the `tidb-server` instance that the user logs in to from the MySQL client, not the list of all the sessions running in the cluster. But MySQL is a standalone database and its `show processlist` displays all the SQL statements executed in MySQL.
 - TiDB `show processlist` displays the estimated memory usage (unit: Byte) of the current session, which is not displayed in MySQL `show processlist`.
 
 #### How to modify the user password and privilege?
 
-To modify the user password in TiDB, it is recommended to use `set password for 'root'@'%' = '0101001';` or `alter`, not `update mysql.user` which may cause other node not to refresh timely. 
+To modify the user password in TiDB, it is recommended to use `set password for 'root'@'%' = '0101001';` or `alter`, not `update mysql.user` which might lead to the condition that the password in other nodes is not refreshed timely. 
 
 It is recommended to use the official standard statements when modifying the user password and privilege. For details, see [TiDB user account management](sql/user-account-management.md).
 
-#### Why does the auto-incrementing ID of the later inserted data is smaller than that of the earlier inserted data in TiDB?
+#### Why does the auto-increment ID of the later inserted data is smaller than that of the earlier inserted data in TiDB?
 
-The auto-incrementing IDs (`AUTO_INCREMENT`) in TiDB are unique and automatically incrementing but not always allocated continuously. Currently TiDB allocates auto-incrementing IDs in batches, therefore the allocated auto-incrementing IDs may not be continuous when data is inserted in multiple TiDB servers simultaneously. When multiple threads concurrently insert data in multiple `tidb-server` instances, the auto-incrementing ID of the later inserted data may be smaller. Besides, `AUTO_INCREMENT` is allowed to be assigned to the integer field in TiDB and only one field of the `AUTO_INCREMENT` attribute is allowed in one table. For details, see [DDL](sql/ddl.md).
+The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [DDL](sql/ddl.md).
 
-#### How to modify the configuration file to configure `sql_mode` besides using the `set` command by default?
+#### How to modify the `sql_mode` in TiDB except using the `set` command?
 
-The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql\_mode` of the database; it only supports using the `set` command to configure `sql\_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure.
+The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql\_mode` of the database; it only supports using the `set` command to configure `sql\_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure it.
 
-#### Which authentication protocols do TiDB support? What's the process? 
+#### What authentication protocols does TiDB support? What's the process? 
 
-- Like MySQL, TiDB supports SASL protocol for user login authentication and password processing.
+- Like MySQL, TiDB supports the SASL protocol for user login authentication and password processing.
 
 - When the client connects to TiDB, the challenge-response authentication mode starts. The process is as follows:
 
@@ -186,11 +186,11 @@ As a distributed cluster, TiDB has a high demand on time, especially for PD, bec
 
 If the resources are adequate, it is recommended to use RAID 10 for SSD. If the resources are inadequate, it is acceptable not to use RAID for SSD.
 
-##### What's the recommended configuration of components of the TiDB cluster?
+##### What's the recommended configuration of TiDB components?
 
-- TiDB needs the machine with good performance of CPU and memory. If you need to open Binlog, the local disk space should be increased based on the service volume estimation and the time requirement for the GC operation. But the SSD disk is not a must.
-- PD stores the cluster metadata and has frequent Read and Write requests. It demands a high I/O disk. A disk of low performance will affect the performance of the whole cluster. It is recommended to use SSD and the disk space can be not too large. In addition, the more the Regions in the cluster, the higher performance of CPU and memory it demands.
-- TiKV demands high performance of CPU, memory and disk. You should use SSD.
+- TiDB has a high requirement on CPU and memory. If you need to open Binlog, the local disk space should be increased based on the service volume estimation and the time requirement for the GC operation. But the SSD disk is not a must.
+- PD stores the cluster metadata and has frequent Read and Write requests. It demands a high I/O disk. A disk of low performance will affect the performance of the whole cluster. It is recommended to use SSD disks. In addition, a larger number of Regions has a higher requirement on CPU and memory.
+- TiKV has a high requirement on CPU, memory and disk. It is required to use SSD. 
 
 For details, see [TiDB software and hardware requirements](op-guide/recommendation.md).
 
@@ -242,29 +242,29 @@ Check the time difference between the machine time of the monitor and the time w
 
 It is not recommended to deploy TiDB offline using Ansible. If the Control Machine has no access to external network, you can deploy TiDB offline using Ansible. For details, see [Offline Deployment Using Ansible](op-guide/offline-ansible-deployment.md).
 
-#### Fast build the cluster using Docker Compose (standalone deployment)
+#### How to deploy TiDB quickly using Docker Compose on a single machine?
 
-You can use Docker Compose to build a cluster locally, including the cluster monitor. You can also customize the version and the number of instances of the components on demand and customize the configuration file which is only allowed in the development environment. For details, see [Building the Cluster Using Docker Compose](op-guide/docker-compose.md).
+You can use Docker Compose to build a TiDB cluster locally, including the cluster monitoring components. You can also customize the version and number of instances for each component. The configuration file can also be customized. You can only use this deployment method for testing and development environment. For details, see [Building the Cluster Using Docker Compose](op-guide/docker-compose.md).
 
 #### How to separately record the slow query log in TiDB? How to locate the slow query SQL statement?
 
-1. The slow query definition for TiDB is in the `conf/tidb.yml` configuration file of `tidb-ansible`. `slow-threshold: 300` is the threshold value of the slow query (unit: millisecond).
+1. The slow query definition for TiDB is in the `conf/tidb.yml` configuration file of `tidb-ansible`. The `slow-threshold: 300` parameter is used to configure the threshold value of the slow query. (unit: millisecond).
 
-    The slow query log is recorded in `tidb.log` by default. If you want to generate a slow query log file separately, set `enable_slow_query_log` of the `inventory.ini` configuration file to `True`.
+    The slow query log is recorded in `tidb.log` by default. If you want to generate a slow query log file separately, set `enable_slow_query_log` in the `inventory.ini` configuration file to `True`.
 
     Then run `ansible-playbook rolling_update.yml --tags=tidb` to perform a rolling update on the `tidb-server` instance. After the update is finished, the `tidb-server` instance will record the slow query log in `tidb_slow_query.log`.
 
-2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
+2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and the slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
 
 #### How to add the `label` configuration if `label` of TiKV was not configured when I deployed the TiDB cluster for the first time?
 
-The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for the global management and schedule of PD. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone, rack, host"` you should configure based on the practical `label` level name. 
+The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for PD to execute global management and scheduling. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone, rack, host"` (you should configure it based on the practical `label` level name). 
 
 For the usage of `pd-ctl`, see [PD Control Instruction](tools/pd-control.md).
 
-#### Why does the `dd` command for the disk test use the `oflag=direct` option?di
+#### Why does the `dd` command for the disk test use the `oflag=direct` option?
 
-The Direct mode wraps the Write request into the I/O command and sends this command to the disk, thus to bypass the file system cache to test the real I/O Read/Write performance of the disk.
+The Direct mode wraps the Write request into the I/O command and sends this command to the disk to bypass the file system cache and directly test the real I/O Read/Write performance of the disk.
 
 #### How to use the `fio` command to test the disk performance of the TiKV instance?
 
@@ -616,7 +616,7 @@ TiKV supports calling the interface separately. Theoretically, you can take an i
 
 #### The error message `IO error: No space left on device While appending to file` is displayed.
 
-This is because the disk space is not enough. You should add nodes or enlarge the disk space.
+This is because the disk space is not enough. You need to add nodes or enlarge the disk space.
 
 ### TiDB test
 
@@ -862,15 +862,15 @@ View the `Healthy` field using `show stats_healthy` and generally you need to ex
 
 #### What is the ID rule when a query plan is presented as a tree? What is the execution order for this tree?
 
-No rule exists for these IDs but the IDs are unique. When IDs are generated, a counter works and ID will plus one when one plan is generated. The execution order has nothing to do with the ID. The whole query plan is a tree and the execution process starts from the root node and the data is returned to the upper level continuously. For details about the query plan, see [Understanding the TiDB Query Execution Plan](sql/understanding-the-query-execution-plan.md).
+No rule exists for these IDs but the IDs are unique. When IDs are generated, a counter works and adds one when one plan is generated. The execution order has nothing to do with the ID. The whole query plan is a tree and the execution process starts from the root node and the data is returned to the upper level continuously. For details about the query plan, see [Understanding the TiDB Query Execution Plan](sql/understanding-the-query-execution-plan.md).
 
 #### In the TiDB query plan, `cop` tasks are in the same root. Are they executed concurrently?
 
-Currently the computing tasks of TiDB to two different tasks: `cop task` and `root task`. 
+Currently the computing tasks of TiDB belong to two different types of tasks: `cop task` and `root task`. 
 
-`cop task` is the computing task which is pushed down to the KV end for execution distributedly; `root task` is the computing task executed for single point of execution on TiDB end. 
+`cop task` is the computing task which is pushed down to the KV end for distributed execution; `root task` is the computing task for single point execution on the TiDB end.
 
-Generally the input data of `root task` comes from `cop task`; when `root task` processes data, `cop task` of TiKV can processes data at the same time and waits for the pull of `root task` of TiDB. Therefore, `cop` tasks can be considered as executed concurrently; but their data is of upstream and downstream relation. During the execution process, they are executed concurrently during some time. For example, the first `cop task` is processing the data in [100, 200] and the second `cop task` is processing the data in [1, 100]. For details, see [Understanding the TiDB Query Plan](sql/understanding-the-query-execution-plan.md).
+Generally the input data of `root task` comes from `cop task`; when `root task` processes data, `cop task` of TiKV can processes data at the same time and waits for the pull of `root task` of TiDB. Therefore, `cop` tasks can be considered as executed concurrently; but their data has an upstream and downstream relationship. During the execution process, they are executed concurrently during some time. For example, the first `cop task` is processing the data in [100, 200] and the second `cop task` is processing the data in [1, 100]. For details, see [Understanding the TiDB Query Plan](sql/understanding-the-query-execution-plan.md).
 
 ## Database optimization
 
@@ -910,17 +910,17 @@ Yes. Find the startup script on the machine where Prometheus is started, edit th
 
 #### Region Health monitor
 
-In TiDB 2.0, Region health is monitored in the PD metric monitor page, in which the `Region Health` monitor item shows the statistics of all the Region replica status. `miss` means shortage of replicas and `extra` means the extra replica exists. In addition, `Region Health` also shows the isolation level by `label`. `level-1` means the Region replicas are isolated physically in the first `label` level. All the Regions are in `level-0` when `location label` is not configured.
+In TiDB 2.0, Region health is monitored in the PD metric monitoring page, in which the `Region Health` monitoring item shows the statistics of all the Region replica status. `miss` means shortage of replicas and `extra` means the extra replica exists. In addition, `Region Health` also shows the isolation level by `label`. `level-1` means the Region replicas are isolated physically in the first `label` level. All the Regions are in `level-0` when `location label` is not configured.
 
 #### What is the meaning of `selectsimplefull` in Statement Count monitor?
 
-It means full table scan but the table may be a small system table.
+It means full table scan but the table might be a small system table.
 
 #### What is the difference between `QPS` and `Statement OPS` in the monitor?
 
 The `QPS` statisctics is about all the SQL statements, including `use database`, `load data`, `begin`, `commit`, `set`, `show`, `insert` and `select`.
 
-The `Statement OPS` statistics is only about service related SQL statements, including `select`, `update` and `insert`, therefore the `Statement OPS` statistics matches the service.
+The `Statement OPS` statistics is only about applications related SQL statements, including `select`, `update` and `insert`, therefore the `Statement OPS` statistics matches the applications better.
 
 ## Troubleshoot
 
@@ -976,4 +976,4 @@ The solution is to use the `--local-infile=1` option when you start the MySQL cl
 
 #### ERROR 9001 (HY000): PD server timeoutstart timestamp may fall behind safepoint
 
-This error occurs when TiDB accesses PD. A worker in the TiDB background continuously queries the safepoint in PD and this error occurs if it fails to query within 100s. Generally it is because PD failure or the network problem between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](sql/error.md).
+This error occurs when TiDB fails to access PD. A worker in the TiDB background continuously queries the safepoint in PD and this error occurs if it fails to query within 100s. Generally it is because the PD failure or network failure between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](sql/error.md).
