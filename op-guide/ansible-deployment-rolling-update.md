@@ -5,7 +5,7 @@ category: operations
 
 # Upgrade TiDB Using TiDB-Ansible
 
-When you perform a rolling update for a TiDB cluster, the service is shut down serially and is restarted after you update the service binary and the configuration file. If the load balancing is configured in the front-end, the rolling update of TiDB does not impact the running applications. Minimum requirements: `pd*3, tidb*2, tikv*3`.
+When you perform a rolling update for a TiDB cluster, the service is shut down serially and is started after you update the service binary and the configuration file. If the load balancing is configured in the front-end, the rolling update of TiDB does not impact the running applications. Minimum requirements: `pd*3, tidb*2, tikv*3`.
 
 > **Note:** If the binlog is enabled, and Pump and Drainer services are deployed in the TiDB cluster, stop the Drainer service before the rolling update. The Pump service is automatically updated in the rolling update of TiDB.
 
@@ -54,7 +54,7 @@ wget http://download.pingcap.org/tidb-v2.0.3-linux-amd64-unportable.tar.gz
     $ ansible-playbook rolling_update.yml --tags=pd
     ```
 
-    When you apply a rolling update to the PD leader instance, if the number of PD instances is not less than 3, Ansible migrates the PD leader to other nodes before stopping this instance.
+    When you apply a rolling update to the PD leader instance, if the number of PD instances is not less than 3, Ansible migrates the PD leader to another node before stopping this instance.
 
 - Apply a rolling update to the TiKV node (only upgrade the TiKV service)
 

@@ -25,7 +25,7 @@ Before you start, make sure that you have:
 
 Take the following steps to install system dependencies on the Control Machine installed with the CentOS 7 system.
 
-1. Download the [`pip`](https://download.pingcap.org/pip-rpms.el7.tar.gz) offline installation package to the Control Machine.
+1. Download the [`pip`](https://download.pingcap.org/ansible-system-rpms.el7.tar.gz) offline installation package to the Control Machine.
 
     ```
     # tar -xzvf ansible-system-rpms.el7.tar.gz
