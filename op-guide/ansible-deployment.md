@@ -230,7 +230,7 @@ Taking the above code for example, the system supports the `performance` and `po
 >   ```
 >   # cpupower frequency-info --governors
 >   analyzing CPU 0:
->   available cpufreq governors: Not Available
+>     available cpufreq governors: Not Available
 >   ```
 
 ### Check the current governor mode
