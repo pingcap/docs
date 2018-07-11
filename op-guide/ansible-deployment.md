@@ -225,7 +225,7 @@ analyzing CPU 0:
 
 Taking the above code for example, the system supports the `performance` and `powersave` modes. 
 
-> **Note:** As the following shows, if it returns “Not Available”, it means that the system is not available and you can skip this step.
+> **Note:** As the following shows, if it returns “Not Available”, it means that the current system does not support CPUfreq configuration and you can skip this step.
 
 >   ```
 >   # cpupower frequency-info --governors
