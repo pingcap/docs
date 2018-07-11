@@ -22,7 +22,7 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
 
 Unless otherwise noted, all commands supports both the remote mode and the local mode.
 
-Besides, `tikv-ctl` has two simple commands `--to-hex` and `--to-escaped`, which are used to make simple changes to the form of the key.
+Additionally, `tikv-ctl` has two simple commands `--to-hex` and `--to-escaped`, which are used to make simple changes to the form of the key.
 
 Generally, use the `escaped` form of the key. For example:
 
@@ -111,7 +111,7 @@ success!
 
 The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
 
-In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Besides, those Regions need to have enough healthy replicas in other TiKV instances, so as to be able to continue writing and reading through the Raft mechanism.
+In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism.
 
 ```bash
 pd-ctl>> operator add remove-peer <region_id> <peer_id>
@@ -161,3 +161,17 @@ all regions are healthy
 ```
 
 If the command is successfully executed, it prints the above information. If the command fails, it prints the list of bad Regions. Currently, the errors that can be detected include the mismatches between `last index`, `commit index` and `apply index`, and the loss of Raft log. Other conditions like the damage of snapshot files still need further support.
+
+### View Region properties
+
+- To view in local the properties of Region 2 on the TiKV instance that is deployed in `/path/to/tikv`:
+
+    ```bash
+    $ tikv-ctl --db /path/to/tikv/data/db region-properties -r 2
+    ```
+
+- To view online the properties of Region 2 on the TiKV instance that is running on `127.0.0.1:20160`:
+
+    ```bash
+    $ tikv-ctl --host 127.0.0.1:20160 region-properties -r 2
+    ```

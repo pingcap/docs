@@ -79,13 +79,13 @@
   + Deploy
     - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
     - [Offline Deployment Using Ansible](op-guide/offline-ansible-deployment.md)
-    - [TiDB 2.0 Upgrade Guide](op-guide/tidb-v2-upgrade-guide.md)
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Docker Compose Deployment](op-guide/docker-compose.md)
     - [Cross-Region Deployment](op-guide/location-awareness.md)
   + Configure
     - [Configuration Flags](op-guide/configuration.md)
     - [Configuration File Description](op-guide/tidb-config-file.md)
+    - [Modify Component Configuration Using Ansible](op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
     - [Enable TLS Authentication](op-guide/security.md)
     - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
   + Monitor
@@ -94,8 +94,10 @@
     - [Monitor a TiDB Cluster](op-guide/monitor.md)
   + Scale
     - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
-    - [Use Ansible to Scale](QUICKSTART.md#scale-the-tidb-cluster)
-  - [Upgrade](op-guide/ansible-deployment.md#perform-rolling-update)
+    - [Scale Using Ansible](op-guide/ansible-deployment-scale.md)
+  + Upgrade
+    - [Upgrade the Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
+    - [TiDB 2.0 Upgrade Guide](op-guide/tidb-v2-upgrade-guide.md)
   - [Tune Performance](op-guide/tune-tikv.md)
   + Backup and Migrate
     - [Backup and Restore](op-guide/backup-restore.md)
@@ -103,7 +105,7 @@
       - [Migration Overview](op-guide/migration-overview.md)
       - [Migrate All the Data](op-guide/migration.md#use-the-mydumper--loader-tool-to-export-and-import-all-the-data)
       - [Migrate the Data Incrementally](op-guide/migration.md#use-the-syncer-tool-to-import-data-incrementally-optional)
-  - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
+  - [TiDB-Ansible Common Operations](op-guide/ansible-operation.md)
   - [Troubleshoot](trouble-shooting.md)
 + TiDB Enterprise Tools
   - [Syncer](tools/syncer.md)
@@ -118,7 +120,7 @@
     - [Prerequisites](op-guide/recommendation.md)
     - [Install and Deploy TiKV Using Docker Compose](tikv/deploy-tikv-docker-compose.md)
     - [Install and Deploy TiKV Using Ansible](tikv/deploy-tikv-using-ansible.md)
-    - [Install and Deploy TiKV Using Binary Files](tikv/deploy-tikv-using-binary.md)
+    - [Install and Deploy TiKV Using Docker](tikv/deploy-tikv-using-docker.md)
   + Client Drivers
     - [Go](tikv/go-client-api.md)
 + TiSpark Documentation
@@ -127,6 +129,9 @@
 - [Frequently Asked Questions (FAQ)](FAQ.md)
 - [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 + [Releases](releases/rn.md)
+  - [2.0.5](releases/205.md)
+  - [2.1 Beta](releases/21beta.md)
+  - [2.0.4](releases/204.md)
   - [2.0.3](releases/203.md)
   - [2.0.2](releases/202.md)
   - [2.0.1](releases/201.md)

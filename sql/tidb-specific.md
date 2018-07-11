@@ -8,19 +8,24 @@ category: user guide
 On the basis of MySQL variables and syntaxes, TiDB has defined some specific system variables and syntaxes to optimize performance.
 
 ## System variable
+
 Variables can be set with the `SET` statement, for example:
 
-```set @@tidb_distsql_scan_concurrency = 10 ```
+```
+set @@tidb_distsql_scan_concurrency = 10
+```
 
 If you need to set the global variable, run:
 
-```set @@global.tidb_distsql_scan_concurrency = 10 ```
- 
+```
+set @@global.tidb_distsql_scan_concurrency = 10
+```
+
 ### tidb_snapshot
 
 - Scope: SESSION
 - Default value: ""
-- This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20", the current session reads the data of this moment.
+- This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
 
 ### tidb_import_data
 
@@ -218,8 +223,21 @@ If you need to set the global variable, run:
 - Scope: SERVER
 - Default value: 0
 - This variable is used to set whether to enable Streaming.
- 
-## Optimizer hint
+
+### tidb_retry_limit
+
+- Scope: SESSION | GLOBAL
+- Default value: 10
+- When a transaction encounters retriable errors, such as transaction conflicts and TiKV busy, this transaction can be re-executed. This variable is used to set the maximum number of the retries.
+
+### tidb_disable_txn_auto_retry
+
+- Scope: SESSION | GLOBAL
+- Default: 0
+- This variable is used to set whether to disable automatic retry of explicit transactions. If you set this variable to 1, the transaction does not retry automatically. If there is a conflict, the transaction needs to be retried at the application layer. To decide whether you need to disable automatic retry, see [description of optimistic transactions](transaction-isolation.md#description-of-optimistic-transactions).
+
+## Optimizer Hint
+
 On the basis of MySQL’s `Optimizer Hint` Syntax, TiDB adds some proprietary `Hint` syntaxes. When using the `Hint` syntax, the TiDB optimizer will try to use the specific algorithm, which performs better than the default algorithm in some scenarios.
  
 The `Hint` syntax is included in comments like `/*+ xxx */`, and in MySQL client versions earlier than 5.7.7, the comment is removed by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
