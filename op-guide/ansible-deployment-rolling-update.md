@@ -11,7 +11,9 @@ When you perform a rolling update for a TiDB cluster, the service is shut down s
 
 ## Upgrade the component version
 
-To upgrade between large versions, you need to upgrade [`tidb-ansible`](https://github.com/pingcap/tidb-ansible). If you want to upgrade the version of TiDB from 1.0 to 2.0, see [TiDB 2.0 Upgrade Guide](tidb-v2-upgrade-guide.md). For a smaller version upgrade, it is also recommended to update `tidb-ansible` for the latest configuration file templates, features, and bug fixes.
+- To upgrade between large versions, you need to upgrade [`tidb-ansible`](https://github.com/pingcap/tidb-ansible). If you want to upgrade the version of TiDB from 1.0 to 2.0, see [TiDB 2.0 Upgrade Guide](tidb-v2-upgrade-guide.md). 
+
+- For a minor upgrade, it is also recommended to update `tidb-ansible` for the latest configuration file templates, features, and bug fixes.
 
 ### Download the binary automatically
 
