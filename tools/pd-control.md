@@ -166,7 +166,7 @@ Usage:
 - `max-merge-region-rows` controls the upper limit on the row count of Region Merge. When `regionRowCount` exceeds the specified value, PD does not merge it with the adjacent Region.
 
     ```bash
-    >> config set max-merge-region-rows 50000 // Set the the upper limit on rowCount to 50k
+    >> config set max-merge-region-rows 50000 // Set the the upper limit on rowCount to 50000
     ```
 
 - `split-merge-interval` controls the interval between the `split` and `merge` operations on a same Region. This means the newly split Region won't be merged within a period of time.
@@ -349,7 +349,7 @@ Usage:
 >> operator add add-peer 1 2                // Add a replica of Region 1 on store 2
 >> operator remove remove-peer 1 2          // Remove a replica of Region 1 on store 2
 >> operator add transfer-leader 1 2         // Schedule the leader of Region 1 to store 2
->> operator add transfer-region 1 2 3 4     // Schedule Region 1 to store 2,3,4
+>> operator add transfer-region 1 2 3 4     // Schedule Region 1 to stores 2,3,4
 >> operator add transfer-peer 1 2 3         // Schedule the replica of Region 1 on store 2 to store 3
 >> operator add merge-region 1 2            // Merge Region 1 with Region 2
 >> operator add split-region 1              // Split Region 1 into two Regions in halves
