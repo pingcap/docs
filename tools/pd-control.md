@@ -369,7 +369,7 @@ time: 43.12698ms
 
 ### `region \<region_id\> [--jq="<query string>"]`
 
-Use this command to view the region information. For a jq formatted output, see [jq-formatted-json-output-usage] (#jq-formatted-json-output-usage).
+Use this command to view the region information. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
 
 Usage:
 
@@ -473,7 +473,7 @@ Usage:
 
 ### `store [delete | label | weight] \<store_id\>  [--jq="<query string>"]`
 
-Use this command to view the store information or remove a specified store. For a jq formatted output, see [jq-formatted-json-output-usage] (#jq-formatted-json-output-usage).
+Use this command to view the store information or remove a specified store. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
 
 Usage:
 
@@ -519,7 +519,7 @@ system:  2017-10-09 05:50:59 +0800 CST
 logic:  120102
 ```
 
-## Jq formatted json output usage
+## Jq formatted JSON output usage
 
 ### Simplify the output of `store`
 
@@ -539,7 +539,7 @@ logic:  120102
 ...
 ```
 
-### Query the distribution status of the Region copies
+### Query the distribution status of the Region replicas
 
 ```bash
 » region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id]}"
@@ -548,9 +548,9 @@ logic:  120102
 ...
 ```
 
-### Filter Regions according to the number of copies
+### Filter Regions according to the number of replicas
 
-For example, to filter out all Regions whose number of copies is not 3:
+For example, to filter out all Regions whose number of replicas is not 3:
 
 ```bash
 » region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length != 3)}"
@@ -558,9 +558,9 @@ For example, to filter out all Regions whose number of copies is not 3:
 {"id":2,"peer_stores":[1,30,31,32]}
 ```
 
-### Filter Regions according to the store ID of copies
+### Filter Regions according to the store ID of replicas
 
-For example,to filter out all Regions that have a replica on store30:
+For example, to filter out all Regions that have a replica on store30:
 
 ```bash
 » region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(any(.==30))}"
@@ -581,7 +581,7 @@ You can also find out all Regions that have a replica on store30 or store31 in t
 
 ### Look for relevant Regions when restoring data
 
-For example, when [store1, store30, store31] is unavailable at its downtime, you can find all Regions whose Down copies are more than normal copies:
+For example, when [store1, store30, store31] is unavailable at its downtime, you can find all Regions whose Down replicas are more than normal replicas:
 
 ```bash
 » region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length as $total | map(if .==(1,30,31) then . else empty end) | length>=$total-length) }"
@@ -591,7 +591,7 @@ For example, when [store1, store30, store31] is unavailable at its downtime, you
 ...
 ```
 
-Or when [store1, store30, store31] fails to start, you can find Regions that can manually remove data without risks on store1. In this way, you can filter out all Regions that have a replica on store1 but don't have other DownPeers:
+Or when [store1, store30, store31] fails to start, you can find Regions where the data can be manually removed safely on store1. In this way, you can filter out all Regions that have a replica on store1 but don't have other DownPeers:
 
 ```bash
 » region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length>1 and any(.==1) and all(.!=(30,31)))}"
