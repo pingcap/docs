@@ -182,7 +182,7 @@ If the command is successfully executed, it prints the above information. If the
 
 ### Modify the RocksDB configuration of TiKV dynamically
 
-The `modify-tikv-config` command is used to dynamically modify the configuration arguments. Currently it only supports dynamically modifying RocksDB related arguments. 
+You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, it only supports dynamically modifying RocksDB related arguments. 
 
 - `-m` is used to specify the target RocksDB. You can set it to `kvdb` or `raftdb`.
 - `-n` is used to specify the configuration name. 
