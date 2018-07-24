@@ -105,6 +105,9 @@ Pay special attention to the following two variables:
     mysql> set @@tidb_snapshot="2016-10-08 16:45:26";
     Query OK, 0 rows affected (0.00 sec)
     ```
+
+    > **Note:** You should use double `@` not a single `@` before `tidb_snapshot`.
+
     **Result:** The read from the following statement is the data before the update operation, which is the history data.
 
     ```sql
@@ -137,3 +140,5 @@ Pay special attention to the following two variables:
     +------+
     3 rows in set (0.00 sec)
     ```
+
+    > **Note:** You should use double `@` not a single `@` before `tidb_snapshot`.
