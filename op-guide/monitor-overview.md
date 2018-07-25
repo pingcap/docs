@@ -1,6 +1,6 @@
 ---
 title: Overview of the TiDB Monitoring Framework
-summary: Use Prometheus and Grafana to construct the TiDB monitoring framework.
+summary: Use Prometheus and Grafana to build the TiDB monitoring framework.
 category: operations
 ---
 

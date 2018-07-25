@@ -1,6 +1,6 @@
 ---
 title: TiDB Garbage Collection (GC)
-summary: Use TiDB Garbage Collection (GC) to clear obsolete data.
+summary: Use Garbage Collection (GC) to clear the obsolete data of TiDB.
 category: advanced
 ---
 
