@@ -1,6 +1,6 @@
 ---
 title: Install and Deploy TiKV Using Ansible
-summary: Use TiDB-Ansible to Deploy a TiKV cluster on multiple nodes.
+summary: Use TiDB-Ansible to deploy a TiKV cluster on multiple nodes.
 category: user guide
 ---
 
