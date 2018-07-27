@@ -1,5 +1,6 @@
 ---
 title: Reading Data from History Versions
+summary: Learn about how TiDB reads data from history versions.
 category: advanced
 ---
 
@@ -105,6 +106,9 @@ Pay special attention to the following two variables:
     mysql> set @@tidb_snapshot="2016-10-08 16:45:26";
     Query OK, 0 rows affected (0.00 sec)
     ```
+
+    > **Note:** You should use `@@` instead of `@` before `tidb_snapshot` because `@@` is used to denote the system variable while `@` is used to denote the user variable.
+
     **Result:** The read from the following statement is the data before the update operation, which is the history data.
 
     ```sql
@@ -137,3 +141,5 @@ Pay special attention to the following two variables:
     +------+
     3 rows in set (0.00 sec)
     ```
+
+    > **Note:** You should use `@@` instead of `@` before `tidb_snapshot` because `@@` is used to denote the system variable while `@` is used to denote the user variable.
