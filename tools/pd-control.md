@@ -247,7 +247,7 @@ The configuration above is global. You can also tune the configuration by config
     config set disable-raft-learner true        // Disable Raft learner
     ```
 
-- `cluster-version` is the version of the cluster, which is used to enable or disable some Features and to deal with the compatibility issues. By default, it is the minimum version of all normally running TiKV nodes in the cluster. Only when you need to roll back to an earlier version, you can set it manually.
+- `cluster-version` is the version of the cluster, which is used to enable or disable some features and to deal with the compatibility issues. By default, it is the minimum version of all normally running TiKV nodes in the cluster. You can set it manually only when you need to roll it back to an earlier version.
 
     ```bash
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
