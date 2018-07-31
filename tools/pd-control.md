@@ -1,5 +1,6 @@
 ---
 title: PD Control User Guide
+summary: Use PD Control to obtain the state information of a cluster and tune a cluster.
 category: tools
 ---
 
@@ -143,6 +144,8 @@ Usage:
   "max-replicas": 3,
   "location-labels": ""
 }
+>> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
+"2.0.0"
 ```
 
 - `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
@@ -244,6 +247,12 @@ The configuration above is global. You can also tune the configuration by config
     config set disable-raft-learner true        // Disable Raft learner
     ```
 
+- `cluster-version` is the version of the cluster, which is used to enable or disable some features and to deal with the compatibility issues. By default, it is the minimum version of all normally running TiKV nodes in the cluster. You can set it manually only when you need to roll it back to an earlier version.
+
+    ```bash
+    config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
+    ```
+
 - `disable-remove-down-replica` is used to disable the feature of automatically deleting DownReplica. When you set it to `true`, PD does not automatically clean up the downtime replicas.
 
 - `disable-replace-offline-replica` is used to disable the feature of migrating OfflineReplica. When you set it to `true`, PD does not migrate the offline replicas.
@@ -331,7 +340,7 @@ Success!
 }
 >> member leader resign // Move leader away from the current member
 ......
->> member leader transfer 9724873857558226554 // Migrate leader to a specified ID member
+>> member leader transfer pd3 // Migrate leader to a specified member
 ......
 ```
 
