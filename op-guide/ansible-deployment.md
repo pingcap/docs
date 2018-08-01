@@ -26,7 +26,7 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology a
 - [Clean up data of the TiDB cluster](ansible-operation.md#clean-up-cluster-data)
 - [Destroy the TiDB cluster](ansible-operation.md#destroy-a-cluster)
 
-## Prerequisites
+## Prepare
 
 Before you start, make sure you have:
 
@@ -171,14 +171,12 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
     $ cd /home/tidb/tidb-ansible
     $ vi hosts.ini
     [servers]
-    192.168.0.2
-    192.168.0.3
-    192.168.0.4
-    192.168.0.5
-    192.168.0.6
-    192.168.0.7
-    192.168.0.8
-    192.168.0.10
+    172.16.10.1
+    172.16.10.2
+    172.16.10.3
+    172.16.10.4
+    172.16.10.5
+    172.16.10.6
 
     [all:vars]
     username = tidb
