@@ -25,7 +25,7 @@ Before you start, make sure you have:
     - CentOS 7.3 (64 bit) or later with Python 2.7 installed, x86_64 architecture (AMD64)
     - Network between machines
     
-    > **Note:** When you deploy TiKV using Ansible, use SSD disks for the data directory of TiKV and PD nodes. Otherwise, it cannot pass the check.
+    > **Note:** When you deploy TiKV using Ansible, use SSD disks for the data directory of TiKV and PD nodes. Otherwise, it cannot pass the check. For more details, see [Software and Hardware Requirements](../op-guide/recommendation.md).
 
 2. A Control Machine that meets the following requirements:
 
@@ -176,7 +176,7 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
     $ ansible-playbook -i hosts.ini create_users.yml -u root -k
     ```
 
-    This step creates the `tidb` user account on the target machines, configures the sudo rules and the SSH mutual trust between the Control Machine and the target machines.
+    This step creates the `tidb` user account on the target machines, and configures the sudo rules and the SSH mutual trust between the Control Machine and the target machines.
 
 > **Note:** To configure the SSH mutual trust and sudo without password manually, see [How to manually configure the SSH mutual trust and sudo without password](../op-guide/ansible-deployment.md#how-to-manually-configure-the-ssh-mutual-trust-and-sudo-without-password).
 
