@@ -7,30 +7,30 @@ category: operations
 
 # Deploy TiDB, a distributed MySQL compatible database, to Kubernetes on your laptop
 
-[TiDB](www.pingcap.com) is a scale-out distributed MySQL database.
-Scale-out means that when you have high usage of CPU, RAM, or disk, you just add another node to your cluster.
-This is much easier to administer at scale. But we need deployment to be simple from day one. We have an [ansible based deployment]() that works in almost any environment. However, if we commit to deploying to Kubernetes, we can provide an even better experience.
+[TiDB](www.pingcap.com) is a scale-out distributed MySQL-compatible database.
+Scale-out means that when you have high usage of CPU, RAM, or disk, you just add another node to your cluster and the cluster's capacity will increase accordingly.
+This is much easier to administer at scale, but we need deployment to be simple from day one. We have an [Ansible-based deployment](https://www.pingcap.com/docs/op-guide/ansible-deployment/) that works in almost any environment. However, if a TiDB cluster is deployed using Kubernetes, we can provide an even better experience.
 
-For this tutorial we will deploy to a laptop Kubernetes, but this can be done on any Kubernetes cluster.
+For this tutorial we will deploy TiDB using Kubernetes on our laptop, but this can be done on any Kubernetes cluster.
 
 
-## TIDB architecture
+## TIDB Architecture
 
-Lets review what we will be deploying.
+Let's review what we will be deploying.
 
 * TiKV
-* PD
-* TIDB SQL
+* Placement Driver (PD)
+* TiDB stateless SQL layer
 
-The scale-out property of TIDB is provided by [TikV](), a distributed key-value store.
+The scale-out property of TiDB is provided by [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store.
 The TiKV cluster itself requires deploying a PD cluster. PD stands for placement driver, which controls where data is stored in TiKV.
-MySQL compatibility is provided by a separatly deployed TIDB SQL component that works on top of TiKV.
+MySQL compatibility is provided by a separately deployed TiDB SQL component that's stateless and works on top of TiKV.
 
 
 ## Kubernetes architecture
 
 TiKV and PD maintain database state on disk, and are thus mapped to a [StatefulSet]() with a PersistentVolume Claim.
-TiDB SQL is also mapped to a StateFulSet, but it does not make any PersistentVolume Claims.
+TiDB SQL is also mapped to a StatefulSet, but it does not make any PersistentVolume Claims.
 
 These are wrapped together in a helm chart called tidb-cluster.
 Additionally, we provide [tidb-operator](), a Kubernetes operator. This program monitors the status of TiDB in your Kubernetes cluster and provides a gateway to administrative duties.
@@ -38,26 +38,30 @@ Additionally, we provide [tidb-operator](), a Kubernetes operator. This program 
 
 ### Installing a Kubernetes cluster on your laptop
 
-First we need to run a Kubernetes cluster. minikube is the popular option for that. However, minikube only creates one Kubernetes node. To run TiDB, we need multiple Kubernetes nodes. There are a few options f
-or this, but we have found a way to make DinD (Docker in Docker) work.
+First we need to run a Kubernetes (k8s) cluster. minikube is the popular option for that. However, minikube only creates one Kubernetes node. To run TiDB, we need multiple Kubernetes nodes. There are a few options for this, but for this tutorial we will use DinD (Docker in Docker).
 
-DinD (Docker in Docker) allows running the docker daemon inside a top-level docker container. This means the top-level container to simulate a Kubernetes node and have containers launched inside it. The kubeadm-
-dind-cluster project starts multiple docker containers as a k8s nodes on a standalone machine through DinD, and then start a k8s cluster by using docker to start k8s components on these nodes.
+DinD (Docker in Docker) allows for running the docker daemon inside a top-level docker container. This means the top-level container can simulate as a Kubernetes node and have containers launched inside it. The kubeadm-
+dind-cluster project starts multiple docker containers as a k8s node on a standalone machine through DinD, and then start a k8s cluster by using docker to start k8s components on these nodes.
 
 First [install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-Next, bring up the DinD K8s. This takes a while: now is a good time to stretch and drink some water.
+
+Then, make sure Docker is running on your laptop. Install Docker [here](https://docs.docker.com/install/) if you haven't done so.
+
+Next, bring up the DinD K8s. 
 
     wget https://cdn.rawgit.com/kubernetes-sigs/kubeadm-dind-cluster/master/fixed/dind-cluster-v1.10.sh
     chmod +x dind-cluster-v1.10.sh
     NUM_NODES=4 ./dind-cluster-v1.10.sh up
     kubectl config use-context dind
 
-Ensure the DinD cluster works:
+Launching this will take a while, a good time to stretch and drink some water.
 
-    kubectl get node,componentstatus
+Ensure the DinD cluster works: (KEVIN's: these two commands don't work, give error: "Unable to connect to the server: x509: certificate signed by unknown authority")
+
+    kubectl get node,componentstatus 
     kubectl get pod -n kube-system
 
-If you would like, you can now [view the dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard/proxy/) once you start the proxy with:
+If you would like, you can now [view the dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard/proxy/) once you start the proxy with: (KEVIN's NOTE: launching dashboard doesn't work, give error: "proxy error: x509: certificate signed by unknown authority")
 
     kubectl proxy
 
@@ -67,13 +71,15 @@ Local Persistent volumes don't work right in DinD so we need to provision them m
     git clone https://github.com/pingcap/tidb-operator
     # temporary directory until repo switch happens
     cd tidb-operator/new-operator
+    
+    (KEVIN's NOTE: below commands don't work: same x509 error as above)
     ./manifests/local-dind/pv-hosts.sh
     kubectl apply -f manifests/local-storageclass.yaml
 
 
-### Running TIDB
+### Running TiDB
 
-This process is the same regardless of how you created a Kubernetes cluster. First we launch the operator:
+This process is the same regardless of how you create a Kubernetes cluster. First we launch the operator:
 
 You need to have helm installed and tiller running.
 
@@ -81,6 +87,7 @@ You need to have helm installed and tiller running.
     bash helm.sh
     helm init
 
+(KEVIN's Note: all steps below don't work w/o resolving x509 certificate issue above.)
 
 Use helm to launch tidb-operator
 
