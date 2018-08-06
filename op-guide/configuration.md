@@ -13,7 +13,7 @@ The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 ### `--advertise-address`
 
-- The IP address on which to advertise the apiserver to TiDB server
+- The IP address on which to advertise the apiserver to the TiDB server
 - Default: ""
 - This address must be reachable by the rest of the TiDB cluster and the user.
 
