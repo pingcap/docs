@@ -19,7 +19,7 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
     $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:21060 <subcommands>
     ```
 
-    However sometimes `tikv-ctl` comunicates with `PD` instead of `TiKV`, in which case we need to use `--pd` option instead of `--host`. Here is an example:
+    However, sometimes `tikv-ctl` communicates with `PD` instead of `TiKV`, in which case you need to use the `--pd` option instead of `--host`. Here is an example:
     ```
     $ tikv-ctl --pd 127.0.0.1:2379 compact-cluster
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
@@ -105,9 +105,10 @@ In this command, the key is also the escaped form of raw key.
 
 To print the value of a key, use the `print` command.
 
-### Print some properties about region
+### Print some properties about Region
 
 In order to record region state details, `TiKV` writes some statistic into SST files of regions.
+
 For take a look at these properties, run `tikv-ctl` with sub-command `region-properties`:
 
 ```bash
@@ -124,8 +125,7 @@ mvcc.max_row_versions: 0
 middle_key_by_approximate_size:
 ```
 
-The properties can be used for tell the region is health or not. If not, then we can use them to fix the region.
-E.g. split the region manually by the `middle_key_approximate_size`.
+The properties can be used to check whether the Region is healthy or not. If not, you can use them to fix the Region. For example, spliting the Region manually by `middle_key_approximate_size`.
 
 ### Compact data of each TiKV manually
 
@@ -185,6 +185,7 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 > - Even if this command returns `success!`, you need to check whether TiKV panics. This is because this command is only a proposal that requests a consistency check for the leader, and you cannot know from the client whether the whole check process is successful or not.
 
 ### Dump snapshot meta
+
 This sub-command is used to parse a snapshot meta file at given path and print the result.
 
 ### Print the Regions where the Raft state machine corrupts
