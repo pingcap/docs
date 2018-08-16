@@ -19,7 +19,8 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
     $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:21060 <subcommands>
     ```
 
-    However, sometimes `tikv-ctl` communicates with `PD` instead of `TiKV`, in which case you need to use the `--pd` option instead of `--host`. Here is an example:
+    However, sometimes `tikv-ctl` communicates with PD instead of TiKV. In this case, you need to use the `--pd` option instead of `--host`. Here is an example:
+    
     ```
     $ tikv-ctl --pd 127.0.0.1:2379 compact-cluster
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
@@ -107,9 +108,7 @@ To print the value of a key, use the `print` command.
 
 ### Print some properties about Region
 
-In order to record region state details, `TiKV` writes some statistic into SST files of regions.
-
-For take a look at these properties, run `tikv-ctl` with sub-command `region-properties`:
+In order to record Region state details, TiKV writes some statistics into the SST files of Regions. To view these properties, run `tikv-ctl` with the `region-properties` sub-command:
 
 ```bash
 $ tikv-ctl --host localhost:20160 region-properties -r 2
