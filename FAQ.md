@@ -537,7 +537,7 @@ TiDB has the following high priority and low priority syntax:
 
 - LOW_PRIORITY: this statement has a low priority, that is, TiDB reduces the priority of this statement during the execution period.
 
-You can combine the above two parameters with the DML language of TiDB to use them. For usage details, see [TiDB DML](sql/dml.md). For example:
+You can combine the above two parameters with the DML of TiDB to use them. For usage details, see [TiDB DML](sql/dml.md). For example:
 
 1. Adjust the priority by writing SQL statements in the database:
 
@@ -553,15 +553,17 @@ You can combine the above two parameters with the DML language of TiDB to use th
 
 #### What's the trigger strategy for `auto analyze` in TiDB?
 
-Trigger strategy: `auto analyze` is automatically triggered when a new table contains 1000 or more records and does not have the write operation within one minute.
+Trigger strategy: `auto analyze` is automatically triggered when the number of pieces of data in a new table reaches 1000 and this table has no write operation within one minute.
 
 When the modified number or the current total row number is larger than `tidb_auto_analyze_ratio`, the `analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is 0, indicating that this feature is disabled. To ensure safety, its minimum value is 0.3 when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is 0.7, otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to 0.5.
 
 #### How to use a specific index with hint in a SQL statement?
 
-It has the same usage with MySQL:
+Its usage is similar to MySQL:
 
-`select column_name from table_name use index（index_name）where where_condition;`
+```
+select column_name from table_name use index（index_name）where where_condition;
+```
 
 ### Manage the TiKV server
 
