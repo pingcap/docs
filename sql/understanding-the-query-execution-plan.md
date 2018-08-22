@@ -24,7 +24,7 @@ Currently, the `EXPLAIN` statement returns the following four columns: id, count
 
 | Property Name | Description |
 | -----| ------------- |
-| id | The id of an operator, to identify the uniqueness of an operator in the entire execution plan. As of TiDB 2.1, the id includes formatting to show a tree structure of operators.  The data flows from a child to its parent, and each operator has one and only one parent. |  
+| id | The id of an operator, to identify the uniqueness of an operator in the entire execution plan. As of TiDB 2.1, the id includes formatting to show a tree structure of operators. The data flows from a child to its parent, and each operator has one and only one parent. |  
 | count | An estimation of the number of data items that the current operator outputs, based on the statistics and the execution logic of the operator | 
 | task | the task that the current operator belongs to. The current execution plan contains two types of tasks: 1) the **root** task that runs on the TiDB server; 2) the **cop** task that runs concurrently on the TiKV server. The topological relations of the current execution plan in the task level is that a root task can be followed by many cop tasks. The root task uses the output of cop task as the input. The cop task executes the tasks that TiDB pushes to TiKV. Each cop task scatters in the TiKV cluster and is executed by multiple processes. |
 | operator info | The details about each operator. The information of each operator differs from others, see [Operator Info](#operator-info).|
