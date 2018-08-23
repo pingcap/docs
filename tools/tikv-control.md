@@ -105,23 +105,6 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
 
 In this command, the key is also the escaped form of raw key.
 
-### Recover from MVCC data corruption
-
-Use the `recover-mvcc` command in circumstances where TiKV cannot run normally caused by MVCC data corruption. It cross-checks 3 CFs ("default", "write", "lock") to recover from various kinds of inconsistency.
-
-Use the `--regions` option to specify involved Regions by `region_id`. Use the `--pd`option to specify PD endpoints.
-
-```bash
-$ tikv-ctl --db /path/to/tikv/db recover-mvcc --regions 1001,1002 --pd 127.0.0.1:2379
-success!
-```
-
-> **Note**:
-> 
-> - This command only supports the local mode. It prints `success!` when successfully run.
-> - The argument of the `--pd/-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
-> - You need to run this command for all stores that specify Regions' peers.
-
 ### Print a specific key value
 
 To print the value of a key, use the `print` command.
@@ -175,22 +158,6 @@ success!
 >
 > - This command only supports the local mode.
 > - The argument of the `--pd/-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether PD can securely switch to Tombstone. Therefore, before setting a PD instance to Tombstone, you need to take off the corresponding Peer of this Region on the machine in `pd-ctl`.
-
-### Force Region to recover the service from failure of multiple replicas
-
-Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Then after you restart TiKV, these Regions can continue to provide services using the other healthy replicas. This command is usually used in circumstances where multiple TiKV stores are damaged or deleted.
-
-The `--stores` option accepts multiple `store_id` separated by comma and uses the `--regions` flag to specify involved Regions. Otherwise, all Regions' peers located on these stores will be removed by default.
-
-```bash
-$ tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores --stores 3 --regions 1001,1002
-success!
-```
-
-> **Note:**
-> 
-> - This command only supports the local mode. It prints `success!` when successfully run.
-> - You must run this command for all stores that specify Regions' peers. If `--regions` is not set,all Regions are involved, and you need to run this command for all stores.
 
 ### Send a `consistency-check` request to TiKV
 
@@ -255,3 +222,36 @@ success!
 $ tikv-ctl modify-tikv-config -m raftdb -n default.disable_auto_compactions -v true
 success!
 ```
+
+### Force Region to recover the service from failure of multiple replicas
+
+Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Then after you restart TiKV, these Regions can continue to provide services using the other healthy replicas. This command is usually used in circumstances where multiple TiKV stores are damaged or deleted.
+
+The `--stores` option accepts multiple `store_id` separated by comma and uses the `--regions` flag to specify involved Regions. Otherwise, all Regions' peers located on these stores will be removed by default.
+
+```bash
+$ tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores --stores 3 --regions 1001,1002
+success!
+```
+
+> **Note:**
+> 
+> - This command only supports the local mode. It prints `success!` when successfully run.
+> - You must run this command for all stores that specify Regions' peers. If `--regions` is not set,all Regions are involved, and you need to run this command for all stores.
+
+### Recover from MVCC data corruption
+
+Use the `recover-mvcc` command in circumstances where TiKV cannot run normally caused by MVCC data corruption. It cross-checks 3 CFs ("default", "write", "lock") to recover from various kinds of inconsistency.
+
+Use the `--regions` option to specify involved Regions by `region_id`. Use the `--pd`option to specify PD endpoints.
+
+```bash
+$ tikv-ctl --db /path/to/tikv/db recover-mvcc --regions 1001,1002 --pd 127.0.0.1:2379
+success!
+```
+
+> **Note**:
+> 
+> - This command only supports the local mode. It prints `success!` when successfully run.
+> - The argument of the `--pd/-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
+> - You need to run this command for all stores that specify Regions' peers.
