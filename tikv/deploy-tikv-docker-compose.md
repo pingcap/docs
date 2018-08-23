@@ -44,7 +44,7 @@ Make sure you have installed the following items on your machine:
 
     ```bash
     cd tidb-docker-compose/compose
-    networkMode: host
+    sed -i "s/^networkMode: bridge/networkMode: host/g" values.yaml
     ```
 
 3. Generate the `generated-docker-compose.yml` file.
