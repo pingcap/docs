@@ -14,9 +14,10 @@ With Docker Compose, you can use a YAML file to configure application services i
 
 Make sure you have installed the following items on your machine:
 
-- Docker (17.06.0 or later)
-- Docker Compose
-- Git
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Docker](https://docs.docker.com/install/#supported-platforms) (17.06.0 or later)
+- [Git](https://git-scm.com/downloads)
+- [MySQL Server](https://dev.mysql.com/downloads/mysql/)
 
 ## Deploy TiDB using Docker Compose
 
@@ -33,19 +34,25 @@ Make sure you have installed the following items on your machine:
     docker-compose up -d
     ```
 
-3. Access the cluster.
+3. Enable the MySQL Server service and access the cluster.
 
     ```bash
     mysql -h 127.0.0.1 -P 4000 -u root
     ```
 
-    Access the Grafana monitoring interface:
+## Monitor the cluster 
+
+After your machine successfully connects to MySQL Server on `127.0.0.1`, you can monitor real-time activities in the TiDB cluster with:
+
+1. the [Grafana monitoring interface](https://pingcap.com/docs/op-guide/monitor-overview/#about-grafana-in-tidb):
 
     - Default address: <http://localhost:3000>
     - Default account name: admin
     - Default password: admin
 
-    Access the [cluster data visualization interface](https://github.com/pingcap/tidb-vision): <http://localhost:8010>
+2. the [cluster data visualization interface](https://github.com/pingcap/tidb-vision): 
+
+    - Default address: <http://localhost:8010>
 
 ## Customize the cluster
 
