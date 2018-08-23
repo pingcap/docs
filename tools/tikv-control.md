@@ -237,7 +237,7 @@ success!
 > **Note:**
 > 
 > - This command only supports the local mode. It prints `success!` when successfully run.
-> - You must run this command for all stores that have specified Regions' peers. If `--regions` is not set, all Regions are involved, and you need to run this command for all stores.
+> - You must run this command for all stores where specified Regions' peers locate. If `--regions` is not set, all Regions are involved, and you need to run this command for all stores.
 
 ### Recover from MVCC data corruption
 
@@ -254,4 +254,4 @@ success!
 > 
 > - This command only supports the local mode. It prints `success!` when successfully run.
 > - The argument of the `--pd/-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
-> - You need to run this command for all stores that have specified Regions' peers.
+> - You need to run this command for all stores where specified Regions' peers locate.
