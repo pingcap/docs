@@ -54,7 +54,7 @@ Configuration about log.
 
 - The file name of the slow query log
 - Default: ""
-- After you set it, the slow query log outputs to this file separately
+- After you set it, the slow query log is output to this file separately
 
 ### `slow-threshold`
 
