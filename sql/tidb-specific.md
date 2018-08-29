@@ -127,14 +127,14 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Scope: SESSION | GLOBAL
 - Default value: 4
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `partial` phase.
-- When the parameter of the aggregate function is not distinct, HashAgg is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
+- When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 
 ### tidb_hashagg_final_concurrency
 
 - Scope: SESSION | GLOBAL
 - Default value: 4
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `final` phase.
-- When the parameter of the aggregate function is not distinct, HashAgg is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
+- When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 
 ### tidb_index_join_batch_size
 
@@ -278,9 +278,9 @@ set @@global.tidb_distsql_scan_concurrency = 10
 ## tidb_ddl_reorg_priority
 
 - Scope: SESSION | GLOBAL
-- Default value: PRIORITY_NORMAL
+- Default value: `PRIORITY_NORMAL`
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
-- You can set the value of this variable to PRIORITY_LOW, PRIORITY_NORMAL or PRIORITY_HIGH.
+- You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
 
 ## Optimizer Hint
 
