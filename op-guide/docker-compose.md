@@ -44,13 +44,13 @@ Make sure you have installed the following items on your machine:
 
 After your machine successfully connects to MySQL Server on `127.0.0.1`, you can monitor real-time activities in the TiDB cluster with:
 
-1. the [Grafana monitoring interface](https://pingcap.com/docs/op-guide/monitor-overview/#about-grafana-in-tidb):
+1. The [Grafana monitoring interface](https://pingcap.com/docs/op-guide/monitor-overview/#about-grafana-in-tidb):
 
     - Default address: <http://localhost:3000>
     - Default account name: admin
     - Default password: admin
 
-2. the [cluster data visualization interface](https://github.com/pingcap/tidb-vision): 
+2. The [cluster data visualization interface](https://github.com/pingcap/tidb-vision): 
 
     - Default address: <http://localhost:8010>
 

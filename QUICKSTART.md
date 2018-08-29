@@ -1,6 +1,6 @@
 ---
 title: TiDB Quick Start Guide
-summary: Learn how to deploy a TiDB cluster and try it quickly.
+summary: Learn how to deploy, monitor, test and stop a TiDB cluster.
 category: quick start
 ---
 
@@ -10,7 +10,7 @@ category: quick start
 
 This guide introduces you the quickest way to deploy a TiDB cluster locally - using Docker Compose. Once you've installed [Docker Compose](https://docs.docker.com/compose/install/), [Git](https://git-scm.com/downloads) and [MySQL Server](https://dev.mysql.com/downloads/mysql/), you are all set.
 
-> **Warning:** Running TiDB in Docker involves risks and is strongly discouraged for production application. For the production environment, it is recommended to [deploy TiDB using Ansible](https://pingcap.com/docs/op-guide/ansible-deployment/).
+> **Warning:** Running TiDB in Docker involves risks and is strongly discouraged for production application. For the production environment, it is recommended to [deploy TiDB using Ansible](op-guide/ansible-deployment.md).
 
 ## Deploy a TiDB cluster
 
@@ -39,13 +39,13 @@ First, open a terminal and enter the following commands:
 
 After your machine successfully connects to MySQL Server on `127.0.0.1`, you can monitor real-time activities in the TiDB cluster with:
 
-1. the [Grafana monitoring interface](https://pingcap.com/docs/op-guide/monitor-overview/#about-grafana-in-tidb):
+1. The [Grafana monitoring interface](op-guide/monitor-overview.md/#about-grafana-in-tidb):
 
     - Default address: <http://localhost:3000>
     - Default account name: admin
     - Default password: admin
 
-2. the [cluster data visualization interface](https://github.com/pingcap/tidb-vision): 
+2. The [cluster data visualization interface](https://github.com/pingcap/tidb-vision): 
 
     - Default address: <http://localhost:8010>
 
@@ -245,6 +245,7 @@ This section demonstrates some basic CRUD operations of TiDB in the terminal.
 ## Stop the cluster
 
 1. Exit from the MySQL client:
+
     ```sql
     > exit;
     ```
