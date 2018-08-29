@@ -108,7 +108,7 @@ TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-le
 
 ### Default differences
 
-- Default character set: `latin1` in MySQL 5.7 (UTF-8 in MySQL 8.0), while UTF-8 in TiDB.
+- Default character set: `latin1` in MySQL 5.7 (UTF-8 in MySQL 8.0), while `utf8mb4` in TiDB.
 - Default collation: `latin1_swedish_ci` in MySQL 5.7, while `binary` in TiDB.
 - Default value of `lower_case_table_names`:
     - The default value in TiDB is 2 and currently TiDB only supports 2.
