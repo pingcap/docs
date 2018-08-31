@@ -1,53 +1,63 @@
 ---
 title: TiDB Quick Start Guide
-summary: Learn how to deploy, monitor, test and stop a TiDB cluster.
+summary: Learn how to deploy a TiDB cluster quickly.
 category: quick start
 ---
 
 # TiDB Quick Start Guide
 
-## Before you begin
+This guide introduces how to deploy and monitor a TiDB cluster on your local drive using Docker Compose for experimenting and testing.
 
-This guide introduces you the quickest way to deploy a TiDB cluster locally - using Docker Compose. Once you've installed [Docker Compose](https://docs.docker.com/compose/install/), [Git](https://git-scm.com/downloads) and [MySQL Server](https://dev.mysql.com/downloads/mysql/), you are all set.
+> **Warning:** Deploying TiDB using Docker Compose can only be used for experimental purposes. For production usage, [use Ansible to deploy the TiDB cluster](op-guide/ansible-deployment.md).
 
-> **Warning:** Running TiDB in Docker involves risks and is strongly discouraged for production application. For the production environment, it is recommended to [deploy TiDB using Ansible](op-guide/ansible-deployment.md).
+## Prerequisites
+
+Before you begin, make sure to install the following tools:
+
+- [Git](https://git-scm.com/downloads)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [MySQL Client](https://dev.mysql.com/downloads/mysql/)
 
 ## Deploy a TiDB cluster
 
-First, open a terminal and enter the following commands:
-
-1. To download `tidb-docker-compose`:
+1. Download `tidb-docker-compose`:
 
     ```bash
     git clone https://github.com/pingcap/tidb-docker-compose.git
     ```
 
-2. To get the latest TiDB Docker images and start the cluster:
+2. Change the directory to tidb-docker-compose and get the latest TiDB Docker Images:
 
     ```bash
-    cd tidb-docker-compose && docker-compose pull 
+    cd tidb-docker-compose && docker-compose pull
+    ```
+
+3. Start the TiDB cluster:
+
+    ```bash
     docker-compose up -d
     ```
 
-3. Make sure that you have enabled the MySQL Server service in order to access the cluster:
+Congratulations! You have deployed a TiDB cluster! You can see messages in your terminal of the default components of a TiDB cluster: 
 
-    ```bash
+- 1 TiDB instance
+- 3 TiKV instances
+- 3 Placement Driver (PD) instances
+- Prometheus
+- Grafana
+- 2 TiSpark instances (one master, one slave)
+- 1 TiDB-Vision instance
+
+You can now test your TiDB server using one of the following methods:
+
+- Use the MySQL client to connect to TiDB to read and write data:
+
+    ```
     mysql -h 127.0.0.1 -P 4000 -u root
     ```
 
-## Monitor the cluster
-
-After your machine successfully connects to MySQL Server on `127.0.0.1`, you can monitor real-time activities in the TiDB cluster with:
-
-1. The [Grafana monitoring interface](op-guide/monitor-overview.md/#about-grafana-in-tidb):
-
-    - Default address: <http://localhost:3000>
-    - Default account name: admin
-    - Default password: admin
-
-2. The [cluster data visualization interface](https://github.com/pingcap/tidb-vision): 
-
-    - Default address: <http://localhost:8010>
+- Use Grafana to view the status of the cluster via [http://localhost:3000](http://localhost:3000) with the default account name and password:  `admin` and `admin`.
+- Use [TiDB-Vision](https://github.com/pingcap/tidb-vision), a cluster visualization tool, to see data transfer and load-balancing inside your cluster via [http://localhost:8010](http://localhost:8010).
 
 ## Test the cluster
 

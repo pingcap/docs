@@ -14,10 +14,9 @@ With Docker Compose, you can use a YAML file to configure application services i
 
 Make sure you have installed the following items on your machine:
 
-- [Docker Compose](https://docs.docker.com/compose/install/)
-- [Docker](https://docs.docker.com/install/#supported-platforms) (17.06.0 or later)
 - [Git](https://git-scm.com/downloads)
-- [MySQL Server](https://dev.mysql.com/downloads/mysql/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [MySQL Client](https://dev.mysql.com/downloads/mysql/)
 
 ## Deploy TiDB using Docker Compose
 
@@ -27,32 +26,30 @@ Make sure you have installed the following items on your machine:
     git clone https://github.com/pingcap/tidb-docker-compose.git
     ```
 
-2. Create and start the cluster.
+2. Change the directory to tidb-docker-compose and get the latest TiDB Docker Images:
 
     ```bash
-    cd tidb-docker-compose && docker-compose pull # Get the latest Docker images
-    docker-compose up -d
+    cd tidb-docker-compose && docker-compose pull
     ```
 
-3. Enable the MySQL Server service and access the cluster.
+3. Start the TiDB cluster:
 
     ```bash
-    mysql -h 127.0.0.1 -P 4000 -u root
+    docker-compose up -d
     ```
 
 ## Monitor the cluster 
 
-After your machine successfully connects to MySQL Server on `127.0.0.1`, you can monitor real-time activities in the TiDB cluster with:
+After you have successfully deployed a TiDB cluster, you can now test your TiDB server using one of the following methods:
 
-1. The [Grafana monitoring interface](https://pingcap.com/docs/op-guide/monitor-overview/#about-grafana-in-tidb):
+- Use the MySQL client to connect to TiDB to read and write data:
 
-    - Default address: <http://localhost:3000>
-    - Default account name: admin
-    - Default password: admin
-
-2. The [cluster data visualization interface](https://github.com/pingcap/tidb-vision): 
-
-    - Default address: <http://localhost:8010>
+    ```
+    mysql -h 127.0.0.1 -P 4000 -u root
+    ```
+    
+- Use Grafana to view the status of the cluster via [http://localhost:3000](http://localhost:3000) with the default account name and password:  `admin` and `admin`.
+- Use [TiDB-Vision](https://github.com/pingcap/tidb-vision), a cluster visualization tool, to see data transfer and load-balancing inside your cluster via [http://localhost:8010](http://localhost:8010).
 
 ## Customize the cluster
 
