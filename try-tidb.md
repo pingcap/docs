@@ -1,7 +1,7 @@
 ---
 title: Try TiDB
 summary: Some examples on how to test a TiDB cluster.
-category: quick start
+category: try tidb
 ---
 
 # Try TiDB
