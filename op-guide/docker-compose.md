@@ -38,16 +38,16 @@ Make sure you have installed the following items on your machine:
     docker-compose up -d
     ```
 
-## Monitor the cluster 
-
-After you have successfully deployed a TiDB cluster, you can now test your TiDB server using one of the following methods:
-
-- Use the MySQL client to connect to TiDB to read and write data:
+4. Use the MySQL client to connect to TiDB to read and write data:
 
     ```
     mysql -h 127.0.0.1 -P 4000 -u root
     ```
-    
+
+## Monitor the cluster 
+
+After you have successfully deployed a TiDB cluster, you can now monitor the TiDB cluster using one of the following methods:
+
 - Use Grafana to view the status of the cluster via [http://localhost:3000](http://localhost:3000) with the default account name and password:  `admin` and `admin`.
 - Use [TiDB-Vision](https://github.com/pingcap/tidb-vision), a cluster visualization tool, to see data transfer and load-balancing inside your cluster via [http://localhost:8010](http://localhost:8010).
 
