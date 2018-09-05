@@ -6,11 +6,13 @@ category: quick start
 
 # TiDB Quick Start Guide
 
+Installation instructions for platforms officially supported by PingCAP.
+
 - [Ansible (recommended)](op-guide/ansible-deployment.md)
 - [Ansible (offline deployment)](op-guide/offline-ansible-deployment.md)
 - [Docker](op-guide/docker-deployment.md)
-- [Docker Compose](op-guide/docker-compose.md)
-- [Kubernetes](op-guide/kubernetes.md)
+- [Docker Compose (for development environments)](op-guide/docker-compose.md)
+- [Kubernetes (beta)](op-guide/kubernetes.md)
 
 ## Community Provided Blog Posts & Tutorials
 
