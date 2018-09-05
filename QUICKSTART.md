@@ -56,5 +56,6 @@ You can now test your TiDB server using one of the following methods:
     mysql -h 127.0.0.1 -P 4000 -u root
     ```
     You can [try TiDB](try-tidb.md) to explore the SQL statements.
+    
 - Use Grafana to view the status of the cluster via [http://localhost:3000](http://localhost:3000) with the default account name and password:  `admin` and `admin`.
 - Use [TiDB-Vision](https://github.com/pingcap/tidb-vision), a cluster visualization tool, to see data transfer and load-balancing inside your cluster via [http://localhost:8010](http://localhost:8010).
