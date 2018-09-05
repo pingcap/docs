@@ -22,7 +22,7 @@ third parties and not guaranteed to be up to date.
 - [How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/)
 - [Developer install guide (single machine)](http://www.tocker.ca/this-blog-now-powered-by-wordpress-tidb.html)
 
-_Please open a [pull request](https://github.com/pingcap/docs/pulls) to have your tutorial added here._
+_Please open a [pull request](https://github.com/pingcap/docs/edit/master/QUICKSTART.md) to have your tutorial added here._
 
 ## Source Code
 
