@@ -1,12 +1,12 @@
 ---
 title: Try TiDB
-summary: Basic SQL statement for the TiDB database.
+summary: Learn about the basic SQL statements for the TiDB database.
 category: try tidb
 ---
 
 # Try TiDB
 
-After you successfully deploy a TiDB cluster, you can run SQL statements in TiDB. Because TiDB is compatible with MySQL, you can use MySQL client to connect to TiDB and run MySQL statements directly in most of the cases. For more information, see [Compatibility with MySQL](sql/mysql-compatibility).
+After you successfully deploy a TiDB cluster, you can run SQL statements in TiDB. Because TiDB is compatible with MySQL, you can use THE MySQL client to connect to TiDB and run MySQL statements directly in most of the cases. For more information, see [Compatibility with MySQL](sql/mysql-compatibility.md).
 
 This page includes some basic SQL statements such as CRUD operations. For a complete list of the statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
 
