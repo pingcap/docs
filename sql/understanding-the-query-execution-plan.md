@@ -54,7 +54,7 @@ The good news with this query is that most of the work is pushed down to the cop
 ```
 mysql> ALTER TABLE trips ADD INDEX (start_date);
 ..
-mmysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
+mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
 +------------------------+---------+------+--------------------------------------------------------------------------------------------------+
 | id                     | count   | task | operator info                                                                                    |
 +------------------------+---------+------+--------------------------------------------------------------------------------------------------+
