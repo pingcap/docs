@@ -23,7 +23,7 @@ done;
 
 ```
 
-## Create table in TiDB
+## Load data into MySQL
 
 The system data can be imported to MySQL using the following schema:
 
