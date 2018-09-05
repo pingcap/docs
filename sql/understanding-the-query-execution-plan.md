@@ -64,7 +64,6 @@ mmysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 |     └─IndexScan_24     | 8166.73 | cop  | table:trips, index:start_date, range:[2017-07-01 00:00:00,2017-07-01 23:59:59], keep order:false |
 +------------------------+---------+------+--------------------------------------------------------------------------------------------------+
 4 rows in set (0.01 sec)
-
 ```
 
 In the revisted `EXPLAIN` we can see the count of rows scanned has reduced via the use of an index.  On a reference system, this reduced query execution time reduced from 50.41 seconds to 0.00 seconds!
