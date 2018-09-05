@@ -1,6 +1,6 @@
 ---
 title: TiDB Quick Start Guide
-summary: Learn how to deploy a TiDB cluster quickly.
+summary: Learn how to quickly start a TiDB cluster.
 category: quick start
 ---
 
@@ -8,7 +8,7 @@ category: quick start
 
 This guide introduces how to deploy and monitor a TiDB cluster on your local drive using Docker Compose for experimenting and testing.
 
-**Warning:** Deploying TiDB using Docker Compose can only be used for experimental purposes. For production usage, [use Ansible to deploy the TiDB cluster](op-guide/ansible-deployment.md).
+> **Warning:** Deploying TiDB using Docker Compose can only be used for experimental purposes. For production usage, [use Ansible to deploy the TiDB cluster](op-guide/ansible-deployment.md).
 
 ## Prerequisites
 

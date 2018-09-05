@@ -1,10 +1,12 @@
 ---
 title: Try TiDB
-summary: Some examples on how to test a TiDB cluster.
+summary: Basic SQL statement for the TiDB database.
 category: try tidb
 ---
 
 # Try TiDB
+
+After you successfully deploy a TiDB cluster, you can run SQL statements in TiDB. Because TiDB is compatible with MySQL, you can use MySQL statements directly
 
 This guide demonstrates some basic CRUD operations of TiDB that you can perform in the terminal after you successfully deployed a TiDB cluster. 
 
