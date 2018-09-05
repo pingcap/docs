@@ -29,6 +29,14 @@ Currently, the `EXPLAIN` statement returns the following four columns: id, count
 | task | the task that the current operator belongs to. The current execution plan contains two types of tasks: 1) the **root** task that runs on the TiDB server; 2) the **cop** task that runs concurrently on the TiKV server. The topological relations of the current execution plan in the task level is that a root task can be followed by many cop tasks. The root task uses the output of cop task as the input. The cop task executes the tasks that TiDB pushes to TiKV. Each cop task scatters in the TiKV cluster and is executed by multiple processes. |
 | operator info | The details about each operator. The information of each operator differs from others, see [Operator Info](#operator-info).|
 
+### Example Usage
+
+Using the [bikeshare example database](bikeshare-example-database.md):
+
+```
+SELECT 1 FROM DUAL;
+```
+
 ## Overview
 
 ### Introduction to task
