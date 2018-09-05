@@ -6,12 +6,11 @@ category: quick start
 
 # TiDB Quick Start Guide
 
-- Docker Compose
-- Ansible
-- Ansible
-- Docker
-- GKE
-- DinD
+- [Docker Compose](op-guide/docker-compose.md)
+- [Ansible (recommended)](op-guide/ansible-deployment.md)
+- [Ansible (offline deployment)](op-guide/offline-ansible-deployment.md)
+- [Docker](op-guide/docker-deployment.md)
+- [Kubernetes](op-guide/kubernetes.md)
 
 ## Community Provided Blog Posts & Tutorials
 
@@ -20,6 +19,8 @@ third parties and not guaranteed to be up to date.
 
 - [How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/)
 - [Developer install guide (single machine)](http://www.tocker.ca/this-blog-now-powered-by-wordpress-tidb.html)
+
+_Please open a [pull request](https://github.com/pingcap/docs/pulls) to have your tutorial added here._
 
 ## Source Code
 
