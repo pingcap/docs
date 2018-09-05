@@ -6,10 +6,10 @@ category: quick start
 
 # TiDB Quick Start Guide
 
-- [Docker Compose](op-guide/docker-compose.md)
 - [Ansible (recommended)](op-guide/ansible-deployment.md)
 - [Ansible (offline deployment)](op-guide/offline-ansible-deployment.md)
 - [Docker](op-guide/docker-deployment.md)
+- [Docker Compose](op-guide/docker-compose.md)
 - [Kubernetes](op-guide/kubernetes.md)
 
 ## Community Provided Blog Posts & Tutorials
