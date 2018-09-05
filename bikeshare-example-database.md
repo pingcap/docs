@@ -10,7 +10,7 @@ Capital Bikeshare, released under the [Capital Bikeshare Data License Agreement]
 
 ## Downloading all data files
 
-The system data is available [for download in .zip files](https://s3.amazonaws.com/capitalbikeshare-data/index.html) organized per year.  Downloading and extracting all files requires approximately 3GB of disk space.  To download all files at once using a bash script:
+The system data is available [for download in .zip files](https://s3.amazonaws.com/capitalbikeshare-data/index.html) organized per year.  Downloading and extracting all files requires approximately 3GB of disk space.  To download all files for years 2010-2017 using a bash script:
 
 ```
 
