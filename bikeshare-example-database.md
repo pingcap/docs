@@ -10,7 +10,7 @@ Capital Bikeshare, released under the [Capital Bikeshare Data License Agreement]
 
 ## Downloading all data files
 
-To download and extract all previous years in one step (using a bash script).  This requires approximately 3GB of disk space:
+The system data is available [for download](https://s3.amazonaws.com/capitalbikeshare-data/index.html) in zip files organized per year.  Downloading and extracting all files requires approximately 3GB of disk space.  To download all files at once (using a bash script):
 
 ```
 
@@ -24,6 +24,8 @@ done;
 ```
 
 ## Create table in TiDB
+
+The system data can be imported to MySQL using the following schema:
 
 ```
 CREATE DATABASE bikeshare;
@@ -41,6 +43,15 @@ CREATE TABLE trips (
  bike_number varchar(255),
  member_type varchar(255)
 );
+```
+You can import files indivudally using the example `LOAD DATA` command here, or import all files using the bash loop below:
+
+```
+LOAD DATA LOCAL INFILE '2017Q1-capitalbikeshare-tripdata.csv' INTO TABLE trips
+  FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+(duration, start_date, end_date, start_station_number, start_station, 
+end_station_number, end_station, bike_number, member_type);
 ```
 
 ### Import all files
