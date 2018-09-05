@@ -83,7 +83,7 @@
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Docker Compose Deployment](op-guide/docker-compose.md)
     - [Cross-Region Deployment](op-guide/location-awareness.md)
-    - [Google Kubernetes Engine](op-guide/google-kubernetes-engine.md)
+    - [Kubernetes](op-guide/kubernetes.md)
   + Configure
     - [Configuration Flags](op-guide/configuration.md)
     - [Configuration File Description](op-guide/tidb-config-file.md)
