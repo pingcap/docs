@@ -50,9 +50,6 @@ To import all `*.csv` files into TiDB in a bash loop:
 ```
 for FILE in `ls *.csv`; do
  echo "== $FILE =="
- mysql bikeshare -e "LOAD DATA LOCAL INFILE '${FILE}' INTO TABLE trips
-  FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-  LINES TERMINATED BY '\r\n'
-(duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);"
+ mysql bikeshare -e "LOAD DATA LOCAL INFILE '${FILE}' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);"
 done;
 ```
