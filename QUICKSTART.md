@@ -20,3 +20,12 @@ third parties and not guaranteed to be up to date.
 
 - [How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/)
 - [Developer install guide (single machine)](http://www.tocker.ca/this-blog-now-powered-by-wordpress-tidb.html)
+
+## Source Code
+
+Source Code for [all PingCAP projects](https://github.com/pingcap) is available on GitHub.
+
+- [TiDB](https://github.com/pingcap/tidb)
+- [TiKV](https://github.com/tikv/tikv)
+- [PD](https://github.com/pingcap/pd)
+- [TiSpark](https://github.com/pingcap/tispark)
