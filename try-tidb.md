@@ -6,9 +6,9 @@ category: try tidb
 
 # Try TiDB
 
-After you successfully deploy a TiDB cluster, you can run SQL statements in TiDB. Because TiDB is compatible with MySQL, you can use MySQL statements directly
+After you successfully deploy a TiDB cluster, you can run SQL statements in TiDB. Because TiDB is compatible with MySQL, you can use MySQL client to connect to TiDB and run MySQL statements directly in most of the cases. For more information, see [Compatibility with MySQL](sql/mysql-compatibility).
 
-This guide demonstrates some basic CRUD operations of TiDB that you can perform in the terminal after you successfully deployed a TiDB cluster. 
+This page includes some basic SQL statements such as CRUD operations. For a complete list of the statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
 
 ## Create, show, and drop a database
 
