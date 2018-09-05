@@ -31,11 +31,43 @@ Currently, the `EXPLAIN` statement returns the following four columns: id, count
 
 ### Example Usage
 
-Using the [bikeshare example database](bikeshare-example-database.md):
+Using the [bikeshare example database](../bikeshare-example-database.md):
 
 ```
-SELECT 1 FROM DUAL;
+mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
++--------------------------+-------------+------+------------------------------------------------------------------------------------------------------------------------+
+| id                       | count       | task | operator info                                                                                                          |
++--------------------------+-------------+------+------------------------------------------------------------------------------------------------------------------------+
+| StreamAgg_20             | 1.00        | root | funcs:count(col_0)                                                                                                     |
+| └─TableReader_21         | 1.00        | root | data:StreamAgg_9                                                                                                       |
+|   └─StreamAgg_9          | 1.00        | cop  | funcs:count(1)                                                                                                         |
+|     └─Selection_19       | 8166.73     | cop  | ge(bikeshare.trips.start_date, 2017-07-01 00:00:00.000000), le(bikeshare.trips.start_date, 2017-07-01 23:59:59.000000) |
+|       └─TableScan_18     | 19117643.00 | cop  | table:trips, range:[-inf,+inf], keep order:false                                                                       |
++--------------------------+-------------+------+------------------------------------------------------------------------------------------------------------------------+
+5 rows in set (0.00 sec)
 ```
+
+Here we can see that the coprocesor (cop) needs to scan the table `trips` to find rows that match the criteria of `start_date`.  Rows that meet this criteria are determined in `Selection_19` and passed to `StreamAgg_9`, all still within the coprocessor (i.e. inside of TiKV).  Each of the TiKV nodes return `1.00` rows to TiDB (as `TableReader_21`), which are then aggregated as `StreamAgg_20` to return `1.00` rows to the client.
+
+The good news with this query is that most of the work is pushed down to the coprocessor.  This means that minimal data transfer way required for query execution.  However, the `TableScan_18` can be eliminated by adding an index to speed up queries on `start_date`:
+
+```
+mysql> ALTER TABLE trips ADD INDEX (start_date);
+..
+mmysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
++------------------------+---------+------+--------------------------------------------------------------------------------------------------+
+| id                     | count   | task | operator info                                                                                    |
++------------------------+---------+------+--------------------------------------------------------------------------------------------------+
+| StreamAgg_25           | 1.00    | root | funcs:count(col_0)                                                                               |
+| └─IndexReader_26       | 1.00    | root | index:StreamAgg_9                                                                                |
+|   └─StreamAgg_9        | 1.00    | cop  | funcs:count(1)                                                                                   |
+|     └─IndexScan_24     | 8166.73 | cop  | table:trips, index:start_date, range:[2017-07-01 00:00:00,2017-07-01 23:59:59], keep order:false |
++------------------------+---------+------+--------------------------------------------------------------------------------------------------+
+4 rows in set (0.01 sec)
+
+```
+
+In the revisted `EXPLAIN` we can see the count of rows scanned has reduced via the use of an index.  On a reference system, this reduced query execution time reduced from 50.41 seconds to 0.00 seconds!
 
 ## Overview
 
