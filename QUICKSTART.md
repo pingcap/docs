@@ -26,7 +26,7 @@ _Please open a [pull request](https://github.com/pingcap/docs/edit/master/QUICKS
 
 ## Source Code
 
-Source Code for [all PingCAP projects](https://github.com/pingcap) is available on GitHub.
+Source code for [all components of the TiDB platform](https://github.com/pingcap) is available on GitHub.
 
 - [TiDB](https://github.com/pingcap/tidb)
 - [TiKV](https://github.com/tikv/tikv)
