@@ -16,8 +16,7 @@ Installation instructions for platforms officially supported by PingCAP.
 
 ## Community Provided Blog Posts & Tutorials
 
-A collection of installation guides for TiDB authored by the community. The content is maintained by 
-third parties and not guaranteed to be up to date.
+A collection of unofficial installation guides for TiDB authored by the community. The content is not guaranteed to be up to date.
 
 - [How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/)
 - [Developer install guide (single machine)](http://www.tocker.ca/this-blog-now-powered-by-wordpress-tidb.html)
