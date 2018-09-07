@@ -5,8 +5,9 @@
 + About TiDB
   - [TiDB Introduction](overview.md#tidb-introduction)
   - [TiDB Architecture](overview.md#tidb-architecture)
-- [TiDB Quick Start Guide](QUICKSTART.md)
-- [TiDB Tutorial](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/)
++ Quick Start
+  - [TiDB Quick Start Guide](QUICKSTART.md)
+  - [Basic SQL Statements](try-tidb.md)
 + TiDB User Guide
   + TiDB Server Administration
     - [The TiDB Server](sql/tidb-server.md)
@@ -71,6 +72,7 @@
   - [Error Codes and Troubleshooting](sql/error.md)
   - [Compatibility with MySQL](sql/mysql-compatibility.md)
   - [TiDB Memory Control](sql/tidb-memory-control.md)
+  - [Slow Query Log](sql/slow-query.md)
   + Advanced Usage
     - [Read Data From History Versions](op-guide/history-read.md)
     - [Garbage Collection (GC)](op-guide/gc.md)
@@ -82,6 +84,7 @@
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Docker Compose Deployment](op-guide/docker-compose.md)
     - [Cross-Region Deployment](op-guide/location-awareness.md)
+    - [Kubernetes Deployment](op-guide/kubernetes.md)
   + Configure
     - [Configuration Flags](op-guide/configuration.md)
     - [Configuration File Description](op-guide/tidb-config-file.md)
@@ -130,6 +133,7 @@
 - [Frequently Asked Questions (FAQ)](FAQ.md)
 - [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 + [Releases](releases/rn.md)
+  - [2.1 RC1](releases/21rc1.md) 
   - [2.0.6](releases/206.md)
   - [2.0.5](releases/205.md)
   - [2.1 Beta](releases/21beta.md)
