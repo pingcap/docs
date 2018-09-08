@@ -308,7 +308,7 @@ In TiDB, the values of the SET type is internally converted to Int64. The existe
 
 In this case, for an element of `('a', 'c')`, it is 0101 in binary.
 
-For more information, see [the SET type in MySQL](https://dev.mysql.com/doc/refman/5.7/en/set.html)。
+For more information, see [the SET type in MySQL](https://dev.mysql.com/doc/refman/5.7/en/set.html).
 
 ## Data type default values
 
