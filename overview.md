@@ -1,6 +1,6 @@
 ---
 title: TiDB Introduction
-summary: An introduction to TiDB and the key benefits it provides.
+summary: An introduction to the TiDB database platform
 category: introduction
 ---
 
