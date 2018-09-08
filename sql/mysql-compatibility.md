@@ -15,8 +15,8 @@ However, in TiDB, the following MySQL features are not supported for the time be
 ## Unsupported features
 
 + Stored procedures and functions
-+ View
-+ Trigger
++ Views
++ Triggers
 + Events
 + The user-defined functions
 + The `FOREIGN KEY` constraints
