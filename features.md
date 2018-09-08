@@ -1,6 +1,6 @@
 ---
 title: TiDB Key Features
-summary: A list of some of the key features of the TiDB Database
+summary: Key features of the TiDB database platform
 category: introduction
 ---
 
