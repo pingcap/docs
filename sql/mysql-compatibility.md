@@ -14,9 +14,10 @@ However, in TiDB, the following MySQL features are not supported for the time be
 
 ## Unsupported features
 
-+ Stored Procedures
++ Stored procedures and functions
 + View
 + Trigger
++ Events
 + The user-defined functions
 + The `FOREIGN KEY` constraints
 + The `FULLTEXT` indexes
@@ -24,8 +25,7 @@ However, in TiDB, the following MySQL features are not supported for the time be
 + The Non-UTF-8 characters
 + Add primary key
 + Drop primary key
-+ Events
-+ SYS Schema
++ SYS schema
 
 ## Features that are different from MySQL
 
