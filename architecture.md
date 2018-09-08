@@ -1,6 +1,6 @@
 ---
 title: TiDB Architecture
-summary: The key architecture components of the TiDB Database Platform
+summary: The key architecture components of the TiDB database platform
 category: introduction
 ---
 
