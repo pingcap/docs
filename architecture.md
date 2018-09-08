@@ -10,7 +10,7 @@ To better understand TiDB's features, you need to understand the TiDB architectu
 
 ![image alt text](media/tidb-architecture.png)
 
-### TiDB server
+## TiDB server
 
 The TiDB server is in charge of the following operations:
 
@@ -26,7 +26,7 @@ The TiDB server is in charge of the following operations:
 
 The TiDB server is stateless. It does not store data and it is for computing only. TiDB is horizontally scalable and provides the unified interface to the outside through the load balancing components such as Linux Virtual Server (LVS), HAProxy, or F5.
 
-### Placement Driver server
+## Placement Driver server
 
 The Placement Driver (PD) server is the managing component of the entire cluster and is in charge of the following three operations:
 
@@ -38,11 +38,10 @@ The Placement Driver (PD) server is the managing component of the entire cluster
 
 As a cluster, PD needs to be deployed to an odd number of nodes. Usually it is recommended to deploy to 3 online nodes at least.
 
-### TiKV server
+## TiKV server
 
 The TiKV server is responsible for storing data. From an external view, TiKV is a distributed transactional Key-Value storage engine. Region is the basic unit to store data. Each Region stores the data for a particular Key Range which is a left-closed and right-open interval from StartKey to EndKey. There are multiple Regions in each TiKV node. TiKV uses the Raft protocol for replication to ensure the data consistency and disaster recovery. The replicas of the same Region on different nodes compose a Raft Group. The load balancing of the data among different TiKV nodes are scheduled by PD. Region is also the basic unit for scheduling the load balance.
 
-### TiSpark
+## TiSpark
 
 TiSpark deals with the complex OLAP requirements. TiSpark makes Spark SQL directly run on the storage layer of the TiDB cluster, combines the advantages of the distributed TiKV cluster, and integrates into the big data ecosystem. With TiSpark, TiDB can support both OLTP and OLAP scenarios in one cluster, so the users never need to worry about data synchronization.
-
