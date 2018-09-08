@@ -1,6 +1,6 @@
 ---
 title: TiDB Introduction
-summary: An introduction to TiDB and some of the key benefits it provides.
+summary: An introduction to TiDB and the key benefits it provides.
 category: introduction
 ---
 
