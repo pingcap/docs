@@ -54,7 +54,7 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 ### Performance Schema
 
-Performance Schema tables will return empty results in TiDB.  TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for monitoring instead.
+Performance Schema tables will return empty results in TiDB.  TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
 
 ### Built-in functions
 
