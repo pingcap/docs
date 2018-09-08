@@ -1,10 +1,10 @@
 ---
-title: TiDB Features
+title: TiDB Key Features
 summary: A list of some of the key features of the TiDB Database
 category: introduction
 ---
 
-# TiDB Features
+# TiDB Key Features
 
 ## Horizontal scalability
 
