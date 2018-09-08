@@ -278,7 +278,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 ## tidb_ddl_reorg_priority
 
 - Scope: SESSION | GLOBAL
-- Default value: `PRIORITY_NORMAL`
+- Default value: `PRIORITY_LOW`
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
 
