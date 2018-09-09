@@ -23,9 +23,9 @@ done;
 
 ```
 
-## Load data into MySQL
+## Load data into TiDB
 
-The system data can be imported to MySQL using the following schema:
+The system data can be imported into TiDB using the following schema:
 
 ```
 CREATE DATABASE bikeshare;
