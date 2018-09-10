@@ -89,11 +89,19 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
 + Rename Table
 + Create Table Like
 
-### Transaction
+### Transaction model
 
 TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-level locking to avoid write conflict, in TiDB, the write conflict is checked only in the `commit` process during the execution of the statements like `Update`, `Insert`, `Delete`, and so on.
 
 **Note:** On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
+
+### Large transactions
+
+Due to the distributed, 2-phase commit requirement of TiDB, large transactions that modify data can be particularly problematic. TiDB intentionally sets some limits on transaction sizes to reduce this impact:
+
+* Each Key-Value entry is no more than 6MB
+* The total number of Key-Value entry is no more than 300,000 rows
+* The total size of Key-Value entry is no more than 100MB
 
 ### Load data
 
@@ -130,6 +138,10 @@ Create Table: CREATE TABLE `t1` (
 ```
 
 While architectually TiDB does support a similar storage engine abstraction to MySQL, user tables will be created in the engine specified by the [`--store`](server-command-option.md#--store) option used when starting tidb-server (typically `tikv`).
+
+### EXPLAIN
+
+The output of the query execution plan returned from the `EXPLAIN` command differs from MySQL.  For more information, see [Understand the Query Execution Plan](understanding-the-query-execution-plan.md).
 
 ### Default differences
 
