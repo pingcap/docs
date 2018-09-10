@@ -18,11 +18,11 @@ However, in TiDB, the following MySQL features are not supported for the time be
 + Views
 + Triggers
 + Events
-+ The user-defined functions
-+ The `FOREIGN KEY` constraints
-+ The `FULLTEXT` indexes
-+ The `Spatial` indexes
-+ The Non-UTF-8 characters
++ User-defined functions
++ `FOREIGN KEY` constraints
++ `FULLTEXT` indexes
++ `Spatial` indexes
++ Character sets other than UTF-8
 + Add primary key
 + Drop primary key
 + SYS schema
