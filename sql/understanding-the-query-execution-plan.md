@@ -47,7 +47,7 @@ mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 0
 5 rows in set (0.00 sec)
 ```
 
-Here we can see that the coprocesor (cop) needs to scan the table `trips` to find rows that match the criteria of `start_date`. Rows that meet this criteria are determined in `Selection_19` and passed to `StreamAgg_9`, all still within the coprocessor (i.e. inside of TiKV). Each of the TiKV nodes return `1.00` row to TiDB (as `TableReader_21`), which are then aggregated as `StreamAgg_20` to return `1.00` row to the client.
+Here we can see that the coprocesor (cop) needs to scan the table `trips` to find rows that match the criteria of `start_date`. Rows that meet this criteria are determined in `Selection_19` and passed to `StreamAgg_9`, all still within the coprocessor (i.e. inside of TiKV). The `count` column shows an approximate number of rows that will be processed, which is estimated with the help of table statistics. In this query it is estimated that each of the TiKV nodes will return `1.00` row to TiDB (as `TableReader_21`), which are then aggregated as `StreamAgg_20` to return an estimated `1.00` row to the client.
 
 The good news with this query is that most of the work is pushed down to the coprocessor. This means that minimal data transfer way required for query execution. However, the `TableScan_18` can be eliminated by adding an index to speed up queries on `start_date`:
 
