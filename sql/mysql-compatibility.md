@@ -111,6 +111,25 @@ TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-le
 + Transaction
 
     When TiDB is in the execution of loading data, by default, a record with 20,000 rows of data is seen as a transaction for persistent storage. If a load data operation inserts more than 20,000 rows, it will be divided into multiple transactions to commit. If an error occurs in one transaction, this transaction in process will not be committed. However, transactions before that are committed successfully. In this case, a part of the load data operation is successfully inserted, and the rest of the data insertion fails. But MySQL treats a load data operation as a transaction, one error leads to the failure of the entire load data operation.
+    
+### Storage engines
+
+For compatibility reasons, TiDB supports the syntax to create tables with alternative storage engines.  Meta-data commands will describe tables as being of engine InnoDB:
+
+```sql
+mysql> CREATE TABLE t1 (a INT) ENGINE=MyISAM;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> SHOW CREATE TABLE t1\G
+*************************** 1. row ***************************
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `a` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+1 row in set (0.00 sec)
+```
+
+While architectually TiDB does support a similar storage engine abstraction to MySQL, user tables will be created in the engine specified by the `--store` option used when starting tidb-server (typically `tikv`).
 
 ### Default differences
 
