@@ -10,24 +10,22 @@ Capital Bikeshare, released under the [Capital Bikeshare Data License Agreement]
 
 ## Downloading all data files
 
-The system data is available [for download in .zip files](https://s3.amazonaws.com/capitalbikeshare-data/index.html) organized per year.  Downloading and extracting all files requires approximately 3GB of disk space.  To download all files for years 2010-2017 using a bash script:
+The system data is available [for download in .zip files](https://s3.amazonaws.com/capitalbikeshare-data/index.html) organized per year. Downloading and extracting all files requires approximately 3GB of disk space.  To download all files for years 2010-2017 using a bash script:
 
-```
-
+```bash
 mkdir -p bikeshare-data && cd bikeshare-data
 
 for YEAR in 2010 2011 2012 2013 2014 2015 2016 2017; do
  wget https://s3.amazonaws.com/capitalbikeshare-data/${YEAR}-capitalbikeshare-tripdata.zip
  unzip ${YEAR}-capitalbikeshare-tripdata.zip
 done;
-
 ```
 
 ## Load data into TiDB
 
 The system data can be imported into TiDB using the following schema:
 
-```
+```sql
 CREATE DATABASE bikeshare;
 USE bikeshare;
 
@@ -44,9 +42,9 @@ CREATE TABLE trips (
  member_type varchar(255)
 );
 ```
-You can import files indivudally using the example `LOAD DATA` command here, or import all files using the bash loop below:
+You can import files individually using the example `LOAD DATA` command here, or import all files using the bash loop below:
 
-```
+```sql
 LOAD DATA LOCAL INFILE '2017Q1-capitalbikeshare-tripdata.csv' INTO TABLE trips
   FIELDS TERMINATED BY ',' ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
@@ -59,7 +57,7 @@ end_station_number, end_station, bike_number, member_type);
 
 To import all `*.csv` files into TiDB in a bash loop:
 
-```
+```bash
 for FILE in `ls *.csv`; do
  echo "== $FILE =="
  mysql bikeshare -e "LOAD DATA LOCAL INFILE '${FILE}' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);"
