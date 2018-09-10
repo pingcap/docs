@@ -52,9 +52,9 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 > 1. The client issues the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
 > 2. The client issues the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
-### Performance Schema
+### Performance schema
 
-Performance Schema tables will return empty results in TiDB.  TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
+Performance schema tables will return empty results in TiDB.  TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
 
 ### Built-in functions
 
