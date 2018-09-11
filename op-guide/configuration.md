@@ -1,5 +1,6 @@
 ---
 title: Configuration Flags
+summary: Learn some configuration flags of TiDB, TiKV and PD.
 category: operations
 ---
 
@@ -10,6 +11,12 @@ TiDB, TiKV and PD are configurable using command-line flags and environment vari
 ## TiDB
 
 The default TiDB ports are 4000 for client requests and 10080 for status report.
+
+### `--advertise-address`
+
+- The IP address on which to advertise the apiserver to the TiDB server
+- Default: ""
+- This address must be reachable by the rest of the TiDB cluster and the user.
 
 ### `--binlog-socket`
 
@@ -155,7 +162,13 @@ release tokens.
 
 - The listening URL list for client traffic
 - Default: "http://127.0.0.1:2379"
-- To deploy a cluster, you must use `--client-urls` to specify the IP address of the current host, such as "http://192.168.100.113:2379". If the cluster is run on Docker, specify the IP address of Docker as "http://0.0.0.0:2379".
+- To deploy a cluster, you must use `--client-urls` to specify the IP address of the current host, such as "http://192.168.100.113:2379". If the cluster runs on Docker, specify the IP address of Docker as "http://0.0.0.0:2379".
+
+### `--peer-urls`
+
+- The listening URL list for peer traffic
+- Default: "http://127.0.0.1:2380"
+- To deploy a cluster, you must use `--peer-urls` to specify the IP address of the current host, such as "http://192.168.100.113:2380". If the cluster runs on Docker, specify the IP address of Docker as "http://0.0.0.0:2380".
 
 ### `--config`
 
@@ -209,11 +222,26 @@ release tokens.
 - Default: "pd"
 - If you want to start multiply PDs, you must use different name for each one.
 
-### `--peer-urls`
+### `--cacert`
 
-- The listening URL list for peer traffic
-- Default: "http://127.0.0.1:2380"
-- To deploy a cluster, you must use `--peer-urls` to specify the IP address of the current host, such as "http://192.168.100.113:2380". If the cluster is run on Docker, specify the IP address of Docker as "http://0.0.0.0:2380".
+- The file path of CA, used to enable TLS
+- Default: ""
+
+### `--cert`
+
+- The path of the PEM file including the X509 certificate, used to enable TLS
+- Default: ""
+
+### `--key`
+
+- The path of the PEM file including the X509 key, used to enable TLS
+- Default: ""
+
+### `--namespace-classifier`
+
+- To specify the namespace classifier used by PD
+- Default: "table"
+- If you use TiKV separately, not in the entire TiDB cluster, it is recommended to configure the value to 'default'.
 
 ## TiKV
 

@@ -1,5 +1,6 @@
 ---
 title: The Proprietary System Variables and Syntaxes in TiDB
+summary: Use the proprietary system variables and syntaxes in TiDB to optimize performance.
 category: user guide
 ---
 
@@ -8,23 +9,28 @@ category: user guide
 On the basis of MySQL variables and syntaxes, TiDB has defined some specific system variables and syntaxes to optimize performance.
 
 ## System variable
+
 Variables can be set with the `SET` statement, for example:
 
-```set @@tidb_distsql_scan_concurrency = 10 ```
+```
+set @@tidb_distsql_scan_concurrency = 10
+```
 
 If you need to set the global variable, run:
 
-```set @@global.tidb_distsql_scan_concurrency = 10 ```
- 
+```
+set @@global.tidb_distsql_scan_concurrency = 10
+```
+
 ### tidb_snapshot
 
 - Scope: SESSION
 - Default value: ""
-- This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20", the current session reads the data of this moment.
+- This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
 
 ### tidb_import_data
 
-- Scope: SESSION | GLOBAl
+- Scope: SESSION
 - Default value: 0
 - This variable indicates whether to import data from the dump file currently.
 - To speed up importing, the unique index constraint is not checked when the variable is set to 1.
@@ -110,6 +116,26 @@ If you need to set the global variable, run:
 - This variable is used to set the concurrency of the `serial scan` operation. 
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
+### tidb_projection_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 4
+- This variable is used to set the concurrency of the `Projection` operator.
+
+### tidb_hashagg_partial_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 4
+- This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `partial` phase.
+- When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
+
+### tidb_hashagg_final_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 4
+- This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `final` phase.
+- When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
+
 ### tidb_index_join_batch_size
 
 - Scope: SESSION | GLOBAL
@@ -126,21 +152,21 @@ If you need to set the global variable, run:
 
 ### tidb_batch_insert
 
-- Scope: SESSION | GLOBAL
+- Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to divide the inserted data automatically. It is valid only when `autocommit` is enabled.
 - When inserting a large amount of data, you can set the variable value to true. Then the inserted data is automatically divided into multiple batches and each batch is inserted by a single transaction.
 
 ### tidb_batch_delete
 
-- Scope: SESSION | GLOBAL
+- Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to divide the data for deletion automatically. It is valid only when `autocommit` is enabled.
 - When deleting a large amount of data, you can set the variable value to true. Then the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction.
 
 ### tidb_dml_batch_size
 
-- Scope: SESSION | GLOBAL
+- Scope: SESSION
 - Default value: 20000
 - This variable is used to set the automatically divided batch size of the data for insertion/deletion. It is only valid when `tidb_batch_insert` or `tidb_batch_delete` is enabled.
 - When the data size of a single row is very large, the overall data size of 20 thousand rows exceeds the size limit for a single transaction. In this case, set the variable to a smaller value.
@@ -218,27 +244,65 @@ If you need to set the global variable, run:
 - Scope: SERVER
 - Default value: 0
 - This variable is used to set whether to enable Streaming.
- 
-## Optimizer hint
+
+### tidb_retry_limit
+
+- Scope: SESSION | GLOBAL
+- Default value: 10
+- When a transaction encounters retriable errors, such as transaction conflicts and TiKV busy, this transaction can be re-executed. This variable is used to set the maximum number of the retries.
+
+### tidb_disable_txn_auto_retry
+
+- Scope: SESSION | GLOBAL
+- Default: 0
+- This variable is used to set whether to disable automatic retry of explicit transactions. If you set this variable to 1, the transaction does not retry automatically. If there is a conflict, the transaction needs to be retried at the application layer. To decide whether you need to disable automatic retry, see [description of optimistic transactions](transaction-isolation.md#description-of-optimistic-transactions).
+
+### tidb_enable_table_partition
+
+- Scope: SESSION
+- Default value: 0
+- This variable is used to set whether to enable the `TABLE PARTITION` feature.
+
+### tidb_backoff_lock_fast
+
+- Scope: SESSION | GLOBAL
+- Default value: 100
+- This variable is used to set the `backoff` time when the read request meets a lock.
+
+### tidb_ddl_reorg_worker_cnt
+
+- Scope: SESSION | GLOBAL
+- Default value: 16
+- This variable is used to set the concurrency of the DDL operation in the `re-organize` phase. 
+
+### tidb_ddl_reorg_priority
+
+- Scope: SESSION | GLOBAL
+- Default value: `PRIORITY_LOW`
+- This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
+- You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
+
+## Optimizer Hint
+
 On the basis of MySQL’s `Optimizer Hint` Syntax, TiDB adds some proprietary `Hint` syntaxes. When using the `Hint` syntax, the TiDB optimizer will try to use the specific algorithm, which performs better than the default algorithm in some scenarios.
  
 The `Hint` syntax is included in comments like `/*+ xxx */`, and in MySQL client versions earlier than 5.7.7, the comment is removed by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
  
 ### TIDB_SMJ(t1, t2)
  
-```SELECT /*+ TIDB_SMJ(t1, t2) */ * from t1，t2 where t1.id = t2.id```
+```SELECT /*+ TIDB_SMJ(t1, t2) */ * from t1, t2 where t1.id = t2.id```
 
 This variable is used to remind the optimizer to use the `Sort Merge Join` algorithm. This algorithm takes up less memory, but takes longer to execute. It is recommended if the data size is too large, or there’s insufficient system memory.
 
 ### TIDB_INLJ(t1, t2)
  
-```SELECT /*+ TIDB_INLJ(t1, t2) */ * from t1，t2 where t1.id = t2.id```
+```SELECT /*+ TIDB_INLJ(t1, t2) */ * from t1, t2 where t1.id = t2.id```
 
 This variable is used to remind the optimizer to use the `Index Nested Loop Join` algorithm. In some scenarios, this algorithm runs faster and takes up fewer system resources, but may be slower and takes up more system resources in some other scenarios. You can try to use this algorithm in scenarios where the result-set is less than 10,000 rows after the outer table is filtered by the WHERE condition. The parameter in `TIDB_INLJ()` is the candidate table for the driving table (external table) when generating the query plan. That means, `TIDB_INLJ (t1)` will only consider using t1 as the driving table to create a query plan.
 
 ### TIDB_HJ(t1, t2)
 
-```SELECT /*+ TIDB_HJ(t1, t2) */ * from t1，t2 where t1.id = t2.id```
+```SELECT /*+ TIDB_HJ(t1, t2) */ * from t1, t2 where t1.id = t2.id```
 
 This variable is used to remind the optimizer to use the `Hash Join` algorithm. This algorithm executes threads concurrently. It runs faster but takes up more memory.
 

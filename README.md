@@ -3,9 +3,12 @@
 ## Documentation List
 
 + About TiDB
-  - [TiDB Introduction](overview.md#tidb-introduction)
-  - [TiDB Architecture](overview.md#tidb-architecture)
-- [TiDB Quick Start Guide](QUICKSTART.md)
+  - [TiDB Introduction](overview.md)
+  - [TiDB Architecture](architecture.md)
+  - [TiDB Key Features](features.md)
++ Quick Start
+  - [TiDB Quick Start Guide](QUICKSTART.md)
+  - [Basic SQL Statements](try-tidb.md)
 + TiDB User Guide
   + TiDB Server Administration
     - [The TiDB Server](sql/tidb-server.md)
@@ -70,6 +73,7 @@
   - [Error Codes and Troubleshooting](sql/error.md)
   - [Compatibility with MySQL](sql/mysql-compatibility.md)
   - [TiDB Memory Control](sql/tidb-memory-control.md)
+  - [Slow Query Log](sql/slow-query.md)
   + Advanced Usage
     - [Read Data From History Versions](op-guide/history-read.md)
     - [Garbage Collection (GC)](op-guide/gc.md)
@@ -78,13 +82,14 @@
   + Deploy
     - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
     - [Offline Deployment Using Ansible](op-guide/offline-ansible-deployment.md)
-    - [TiDB 2.0 Upgrade Guide](op-guide/tidb-v2-upgrade-guide.md)
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Docker Compose Deployment](op-guide/docker-compose.md)
     - [Cross-Region Deployment](op-guide/location-awareness.md)
+    - [Kubernetes Deployment](op-guide/kubernetes.md)
   + Configure
     - [Configuration Flags](op-guide/configuration.md)
     - [Configuration File Description](op-guide/tidb-config-file.md)
+    - [Modify Component Configuration Using Ansible](op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
     - [Enable TLS Authentication](op-guide/security.md)
     - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
   + Monitor
@@ -93,8 +98,10 @@
     - [Monitor a TiDB Cluster](op-guide/monitor.md)
   + Scale
     - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
-    - [Use Ansible to Scale](QUICKSTART.md#scale-the-tidb-cluster)
-  - [Upgrade](op-guide/ansible-deployment.md#perform-rolling-update)
+    - [Scale Using Ansible](op-guide/ansible-deployment-scale.md)
+  + Upgrade
+    - [Upgrade the Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
+    - [TiDB 2.0 Upgrade Guide](op-guide/tidb-v2-upgrade-guide.md)
   - [Tune Performance](op-guide/tune-tikv.md)
   + Backup and Migrate
     - [Backup and Restore](op-guide/backup-restore.md)
@@ -102,21 +109,40 @@
       - [Migration Overview](op-guide/migration-overview.md)
       - [Migrate All the Data](op-guide/migration.md#use-the-mydumper--loader-tool-to-export-and-import-all-the-data)
       - [Migrate the Data Incrementally](op-guide/migration.md#use-the-syncer-tool-to-import-data-incrementally-optional)
-  - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
+  - [TiDB-Ansible Common Operations](op-guide/ansible-operation.md)
   - [Troubleshoot](trouble-shooting.md)
 + TiDB Enterprise Tools
   - [Syncer](tools/syncer.md)
   - [Loader](tools/loader.md)
   - [TiDB-Binlog](tools/tidb-binlog-kafka.md)
   - [PD Control](tools/pd-control.md)
+  - [PD Recover](tools/pd-recover.md)
   - [TiKV Control](tools/tikv-control.md)
   - [TiDB Controller](tools/tidb-controller.md)
-+ TiSpark
++ TiKV Documentation
+  - [Overview](tikv/tikv-overview.md)
+  + Install and Deploy TiKV
+    - [Prerequisites](op-guide/recommendation.md)
+    - [Install and Deploy TiKV Using Docker Compose](tikv/deploy-tikv-docker-compose.md)
+    - [Install and Deploy TiKV Using Ansible](tikv/deploy-tikv-using-ansible.md)
+    - [Install and Deploy TiKV Using Docker](tikv/deploy-tikv-using-docker.md)
+  + Client Drivers
+    - [Go](tikv/go-client-api.md)
++ TiSpark Documentation
   - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
   - [User Guide](tispark/tispark-user-guide.md)
 - [Frequently Asked Questions (FAQ)](FAQ.md)
 - [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 + [Releases](releases/rn.md)
+  - [2.0.7](releases/207.md)
+  - [2.1 RC1](releases/21rc1.md) 
+  - [2.0.6](releases/206.md)
+  - [2.0.5](releases/205.md)
+  - [2.1 Beta](releases/21beta.md)
+  - [2.0.4](releases/204.md)
+  - [2.0.3](releases/203.md)
+  - [2.0.2](releases/202.md)
+  - [2.0.1](releases/201.md)
   - [2.0](releases/2.0ga.md)
   - [2.0 RC5](releases/2rc5.md)
   - [2.0 RC4](releases/2rc4.md)

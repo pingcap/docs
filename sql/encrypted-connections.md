@@ -1,5 +1,6 @@
 ---
 title: Use Encrypted Connections
+summary: Use the encrypted connection to ensure data security.
 category: user guide
 ---
 
@@ -110,7 +111,7 @@ mysql> SHOW STATUS LIKE "%Ssl%";
 ......
 ```
 
-Besides, for the official MySQL client, you can also use the `STATUS` or `\s` statement to view the connection status:
+For the official MySQL client, you can also use the `STATUS` or `\s` statement to view the connection status:
 
 ```
 mysql> \s

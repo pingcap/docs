@@ -1,11 +1,14 @@
 ---
 title: TiKV Control User Guide
+summary: Use TiKV Control to manage a TiKV cluster.
 category: tools
 ---
 
 # TiKV Control User Guide
 
-TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. When you compile TiKV, the `tikv-ctl` command is also compiled at the same time. If the cluster is deployed using Ansible, the binary file also exist in the corresponding `tidb-ansible/resources/bin` directory.
+TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster.
+
+When you compile TiKV, the `tikv-ctl` command is also compiled at the same time. If the cluster is deployed using Ansible, the `tikv-ctl` binary file exists in the corresponding `tidb-ansible/resources/bin` directory. If the cluster is deployed using the binary, the `tikv-ctl` file is in the `bin` directory together with other files such as `tidb-server`, `pd-server`, `tikv-server`, etc.
 
 ## General options
 
@@ -19,11 +22,18 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
     $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:21060 <subcommands>
     ```
 
+    However, sometimes `tikv-ctl` communicates with PD instead of TiKV. In this case, you need to use the `--pd` option instead of `--host`. Here is an example:
+    
+    ```
+    $ tikv-ctl --pd 127.0.0.1:2379 compact-cluster
+    store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
+    ```
+
 - Local mode: use the `--db` option to specify the local TiKV data directory path
 
 Unless otherwise noted, all commands supports both the remote mode and the local mode.
 
-Besides, `tikv-ctl` has two simple commands `--to-hex` and `--to-escaped`, which are used to make simple changes to the form of the key.
+Additionally, `tikv-ctl` has two simple commands `--to-hex` and `--to-escaped`, which are used to make simple changes to the form of the key.
 
 Generally, use the `escaped` form of the key. For example:
 
@@ -99,20 +109,44 @@ In this command, the key is also the escaped form of raw key.
 
 To print the value of a key, use the `print` command.
 
-### Compact data manually
+### Print some properties about Region
 
-Use the `compact` command to manually compact TiKV data. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. You can use the `--db` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`.
+In order to record Region state details, TiKV writes some statistics into the SST files of Regions. To view these properties, run `tikv-ctl` with the `region-properties` sub-command:
+
+```bash
+$ tikv-ctl --host localhost:20160 region-properties -r 2
+num_files: 0
+num_entries: 0
+num_deletes: 0
+mvcc.min_ts: 18446744073709551615
+mvcc.max_ts: 0
+mvcc.num_rows: 0
+mvcc.num_puts: 0
+mvcc.num_versions: 0
+mvcc.max_row_versions: 0
+middle_key_by_approximate_size:
+```
+
+The properties can be used to check whether the Region is healthy or not. If not, you can use them to fix the Region. For example, splitting the Region manually by `middle_key_approximate_size`.
+
+### Compact data of each TiKV manually
+
+Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. You can use the `--db` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`. Also, the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db compact -d kv
 success!
 ```
 
+### Compact data of the whole TiKV cluster manually
+
+Use the `compact-cluster` command to manually compact data of the whole TiKV cluster. The flags of this command have the same meanings and usage as those of the `compact` command.
+
 ### Set a Region to tombstone
 
 The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
 
-In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Besides, those Regions need to have enough healthy replicas in other TiKV instances, so as to be able to continue writing and reading through the Raft mechanism.
+In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism.
 
 ```bash
 pd-ctl>> operator add remove-peer <region_id> <peer_id>
@@ -124,17 +158,6 @@ success!
 >
 > - This command only supports the local mode.
 > - The argument of the `--pd/-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether PD can securely switch to Tombstone. Therefore, before setting a PD instance to Tombstone, you need to take off the corresponding Peer of this Region on the machine in `pd-ctl`.
-
-### Force Region to recover the service from multiple replicas failure
-
-Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peers list of all Regions. Then after you restart TiKV, these Regions can continue to provide services using the other healthy replicas. This command is usually used in circumstances where multiple TiKV stores are damaged or deleted.
-
-```bash
-$ tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores 3,4,5
-success!
-```
-
-> **Note:** This command only supports the local mode. It prints `success!` when successfully run.
 
 ### Send a `consistency-check` request to TiKV
 
@@ -152,6 +175,10 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 > - This command only supports the remote mode.
 > - Even if this command returns `success!`, you need to check whether TiKV panics. This is because this command is only a proposal that requests a consistency check for the leader, and you cannot know from the client whether the whole check process is successful or not.
 
+### Dump snapshot meta
+
+This sub-command is used to parse a snapshot meta file at given path and print the result.
+
 ### Print the Regions where the Raft state machine corrupts
 
 To avoid checking the Regions while TiKV is started, you can use the `tombstone` command to set the Regions where the Raft state machine reports an error to Tombstone. Before running this command, use the `bad-regions` command to find out the Regions with errors, so as to combine multiple tools for automated processing.
@@ -162,3 +189,69 @@ all regions are healthy
 ```
 
 If the command is successfully executed, it prints the above information. If the command fails, it prints the list of bad Regions. Currently, the errors that can be detected include the mismatches between `last index`, `commit index` and `apply index`, and the loss of Raft log. Other conditions like the damage of snapshot files still need further support.
+
+### View Region properties
+
+- To view in local the properties of Region 2 on the TiKV instance that is deployed in `/path/to/tikv`:
+
+    ```bash
+    $ tikv-ctl --db /path/to/tikv/data/db region-properties -r 2
+    ```
+
+- To view online the properties of Region 2 on the TiKV instance that is running on `127.0.0.1:20160`:
+
+    ```bash
+    $ tikv-ctl --host 127.0.0.1:20160 region-properties -r 2
+    ```
+
+### Modify the RocksDB configuration of TiKV dynamically
+
+You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, it only supports dynamically modifying RocksDB related arguments. 
+
+- `-m` is used to specify the target RocksDB. You can set it to `kvdb` or `raftdb`.
+- `-n` is used to specify the configuration name. 
+    You can refer to the arguments of `[rocksdb]` and `[raftdb]` (corresponding to `kvdb` and `raftdb`) in the [TiKV configuration template](https://github.com/pingcap/tikv/blob/master/etc/config-template.toml#L213-L500).
+    You can use `default|write|lock + . + argument name` to specify the configuration of different CFs. For `kvdb`, you can set it to `default`, `write`, or `lock`; for `raftdb`, you can only set it to `default`.
+- `-v` is used to specify the configuration value.
+
+```bash
+$ tikv-ctl modify-tikv-config -m kvdb -n max_background_jobs -v 8
+success！
+$ tikv-ctl modify-tikv-config -m kvdb -n write.block-cache-size -v 256MB
+success!
+$ tikv-ctl modify-tikv-config -m raftdb -n default.disable_auto_compactions -v true
+success!
+```
+
+### Force Region to recover the service from failure of multiple replicas
+
+Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Then after you restart TiKV, these Regions can continue to provide services using the other healthy replicas. This command is usually used in circumstances where multiple TiKV stores are damaged or deleted.
+
+The `--stores` option accepts multiple `store_id` separated by comma and uses the `--regions` flag to specify involved Regions. Otherwise, all Regions' peers located on these stores will be removed by default.
+
+```bash
+$ tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores --stores 3 --regions 1001,1002
+success!
+```
+
+> **Note:**
+> 
+> - This command only supports the local mode. It prints `success!` when successfully run.
+> - You must run this command for all stores where specified Regions' peers locate. If `--regions` is not set, all Regions are involved, and you need to run this command for all stores.
+
+### Recover from MVCC data corruption
+
+Use the `recover-mvcc` command in circumstances where TiKV cannot run normally caused by MVCC data corruption. It cross-checks 3 CFs ("default", "write", "lock") to recover from various kinds of inconsistency.
+
+Use the `--regions` option to specify involved Regions by `region_id`. Use the `--pd` option to specify PD endpoints.
+
+```bash
+$ tikv-ctl --db /path/to/tikv/db recover-mvcc --regions 1001,1002 --pd 127.0.0.1:2379
+success!
+```
+
+> **Note**:
+> 
+> - This command only supports the local mode. It prints `success!` when successfully run.
+> - The argument of the `--pd/-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
+> - You need to run this command for all stores where specified Regions' peers locate.

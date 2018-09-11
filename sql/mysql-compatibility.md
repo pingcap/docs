@@ -1,11 +1,12 @@
 ---
 title: Compatibility with MySQL
+summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
 category: user guide
 ---
 
 # Compatibility with MySQL
 
-TiDB supports the majority of the MySQL grammar, including cross-row transactions, JOIN, subquery, and so on. You can connect to TiDB directly using your own MySQL client. If your existing business is developed based on MySQL, you can replace MySQL with TiDB to power your application without changing a single line of code in most cases.
+TiDB supports the majority of the MySQL 5.7 syntax, including cross-row transactions, JOIN, subquery, and so on. You can connect to TiDB directly using your own MySQL client. If your existing business is developed based on MySQL, you can replace MySQL with TiDB to power your application without changing a single line of code in most cases.
 
 TiDB is compatible with most of the MySQL database management & administration tools such as `PHPMyAdmin`, `Navicat`, `MySQL Workbench`, and so on. It also supports the database backup tools, such as `mysqldump` and `mydumper/myloader`.
 
@@ -32,18 +33,22 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 > **Warning**:
 > 
-> If you use the auto-increment ID in a cluster with multiple TiDB servers, do not mix the default value and the custom value, because it reports an error in the following situation:
+> If you use the auto-increment ID in a cluster with multiple tidb-server instances, do not mix the default value and the custom value, otherwise an error occurs in the following situation:
 > 
-> In a cluster of two TiDB servers, namely TiDB A and TiDB B, TiDB A caches [1,5000] auto-increment ID, while TiDB B caches [5001,10000] auto-increment ID. Use the following statement to create a table with auto-increment ID:
+> Assume that you have a table with the auto-increment ID:
 > 
 > ```
 > create table t(id int unique key auto_increment, c int);
 > ```
+> 
+> The principle of the auto-increment ID in TiDB is that each tidb-server instance caches a section of ID values (currently 30000 IDs are cached) for allocation and fetches the next section after this section is used up.
 >
-> The statement is executed as follows:
+> Assume that the cluster contains two tidb-server instances, namely Instance A and Instance B. Instance A caches the auto-increment ID of [1, 30000], while Instance B caches the auto-increment ID of [30001, 60000].
+> 
+> The operations are executed as follows:
 >
-> 1. The client inserts a statement to TiDB B which sets the `id` to be 1 and the statement is executed successfully.
-> 2. The client inserts a record to TiDB A which sets the `id` set to the default value 1. In this case, it returns `Duplicated Error`.
+> 1. The client issues the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
+> 2. The client issues the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
 ### Built-in functions
 
@@ -92,6 +97,7 @@ TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-le
     LOAD DATA LOCAL INFILE 'file_name' INTO TABLE table_name
         {FIELDS | COLUMNS} TERMINATED BY 'string' ENCLOSED BY 'char' ESCAPED BY 'char'
         LINES STARTING BY 'string' TERMINATED BY 'string'
+        IGNORE n LINES
         (col_name ...);
     ```
     
@@ -100,3 +106,14 @@ TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-le
 + Transaction
 
     When TiDB is in the execution of loading data, by default, a record with 20,000 rows of data is seen as a transaction for persistent storage. If a load data operation inserts more than 20,000 rows, it will be divided into multiple transactions to commit. If an error occurs in one transaction, this transaction in process will not be committed. However, transactions before that are committed successfully. In this case, a part of the load data operation is successfully inserted, and the rest of the data insertion fails. But MySQL treats a load data operation as a transaction, one error leads to the failure of the entire load data operation.
+
+### Default differences
+
+- Default character set: `latin1` in MySQL 5.7 (UTF-8 in MySQL 8.0), while `utf8mb4` in TiDB.
+- Default collation: `latin1_swedish_ci` in MySQL 5.7, while `binary` in TiDB.
+- Default value of `lower_case_table_names`:
+    - The default value in TiDB is 2 and currently TiDB only supports 2.
+    - The default value in MySQL:
+        - On Linux: 0
+        - On Windows: 1
+        - On macOS: 2

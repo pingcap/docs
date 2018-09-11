@@ -1,5 +1,6 @@
 ---
 title: The TiDB System Database
+summary: Learn tables contained in the TiDB System Database.
 category: user guide
 ---
 
@@ -73,7 +74,7 @@ The COLUMNS table provides information about columns in tables. The information 
 SHOW COLUMNS FROM table_name [FROM db_name] [LIKE 'wild']
 ```
 
-### COLUMNS\_PRIVILEGE table
+### COLUMN\_PRIVILEGES table
 
 NULL.
 
