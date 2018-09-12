@@ -55,7 +55,7 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 ### Performance schema
 
-Performance schema tables will return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
+Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
 
 ### Built-in functions
 
@@ -101,8 +101,8 @@ TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-le
 Due to the distributed, 2-phase commit requirement of TiDB, large transactions that modify data can be particularly problematic. TiDB intentionally sets some limits on transaction sizes to reduce this impact:
 
 * Each Key-Value entry is no more than 6MB
-* The total number of Key-Value entry is no more than 300,000 rows
-* The total size of Key-Value entry is no more than 100MB
+* The total number of Key-Value entries is no more than 300,000 rows
+* The total size of Key-Value entries is no more than 100MB
 
 ### Load data
 
@@ -123,7 +123,7 @@ Due to the distributed, 2-phase commit requirement of TiDB, large transactions t
     
 ### Storage engines
 
-For compatibility reasons, TiDB supports the syntax to create tables with alternative storage engines. Meta-data commands will describe tables as being of engine InnoDB:
+For compatibility reasons, TiDB supports the syntax to create tables with alternative storage engines. Metadata commands describe tables as being of engine InnoDB:
 
 ```sql
 mysql> CREATE TABLE t1 (a INT) ENGINE=MyISAM;
@@ -138,7 +138,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-While architectually TiDB does support a similar storage engine abstraction to MySQL, user tables will be created in the engine specified by the [`--store`](server-command-option.md#--store) option used when starting tidb-server (typically `tikv`).
+Architecturally, TiDB does support a similar storage engine abstraction to MySQL, user tables are be created in the engine specified by the [`--store`](server-command-option.md#--store) option used when starting tidb-server (typically `tikv`).
 
 ### EXPLAIN
 
@@ -148,7 +148,7 @@ The output of the query execution plan returned from the `EXPLAIN` command diffe
 
 - Default character set:
     - The default value in TiDB is `utf8` which is equivalent to `utf8mb4` in MySQL.
-    - The default value in MySQL 5.7 is `latin1`, but changes in `utf8mb4` in MySQL 8.0.
+    - The default value in MySQL 5.7 is `latin1`, but changes to `utf8mb4` in MySQL 8.0.
 - Default collation: `latin1_swedish_ci` in MySQL 5.7, while `binary` in TiDB.
 - Default SQL mode:
     - The default value in TiDB is `STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION`.
