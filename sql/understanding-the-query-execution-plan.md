@@ -29,7 +29,7 @@ Currently, the `EXPLAIN` statement returns the following four columns: id, count
 | task | the task that the current operator belongs to. The current execution plan contains two types of tasks: 1) the **root** task that runs on the TiDB server; 2) the **cop** task that runs concurrently on the TiKV server. The topological relations of the current execution plan in the task level is that a root task can be followed by many cop tasks. The root task uses the output of cop task as the input. The cop task executes the tasks that TiDB pushes to TiKV. Each cop task scatters in the TiKV cluster and is executed by multiple processes. |
 | operator info | The details about each operator. The information of each operator differs from others, see [Operator Info](#operator-info).|
 
-### Example Usage
+### Example usage
 
 Using the [bikeshare example database](../bikeshare-example-database.md):
 
@@ -49,7 +49,7 @@ mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 0
 
 Here we can see that the coprocesor (cop) needs to scan the table `trips` to find rows that match the criteria of `start_date`. Rows that meet this criteria are determined in `Selection_19` and passed to `StreamAgg_9`, all still within the coprocessor (i.e. inside of TiKV). The `count` column shows an approximate number of rows that will be processed, which is estimated with the help of table statistics. In this query it is estimated that each of the TiKV nodes will return `1.00` row to TiDB (as `TableReader_21`), which are then aggregated as `StreamAgg_20` to return an estimated `1.00` row to the client.
 
-The good news with this query is that most of the work is pushed down to the coprocessor. This means that minimal data transfer way required for query execution. However, the `TableScan_18` can be eliminated by adding an index to speed up queries on `start_date`:
+The good news with this query is that most of the work is pushed down to the coprocessor. This means that minimal data transfer is required for query execution. However, the `TableScan_18` can be eliminated by adding an index to speed up queries on `start_date`:
 
 ```
 mysql> ALTER TABLE trips ADD INDEX (start_date);
@@ -66,7 +66,7 @@ mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 0
 4 rows in set (0.01 sec)
 ```
 
-In the revisted `EXPLAIN` we can see the count of rows scanned has reduced via the use of an index. On a reference system, this reduced query execution time reduced from 50.41 seconds to 0.00 seconds!
+In the revisited `EXPLAIN` you can see the count of rows scanned has reduced via the use of an index. On a reference system, the query execution time reduced from 50.41 seconds to 0.00 seconds!
 
 ## Overview
 
