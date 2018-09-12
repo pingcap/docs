@@ -55,7 +55,7 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 ### Performance schema
 
-Performance schema tables will return empty results in TiDB.  TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
+Performance schema tables will return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
 
 ### Built-in functions
 
@@ -123,7 +123,7 @@ Due to the distributed, 2-phase commit requirement of TiDB, large transactions t
     
 ### Storage engines
 
-For compatibility reasons, TiDB supports the syntax to create tables with alternative storage engines.  Meta-data commands will describe tables as being of engine InnoDB:
+For compatibility reasons, TiDB supports the syntax to create tables with alternative storage engines. Meta-data commands will describe tables as being of engine InnoDB:
 
 ```sql
 mysql> CREATE TABLE t1 (a INT) ENGINE=MyISAM;
@@ -142,7 +142,7 @@ While architectually TiDB does support a similar storage engine abstraction to M
 
 ### EXPLAIN
 
-The output of the query execution plan returned from the `EXPLAIN` command differs from MySQL.  For more information, see [Understand the Query Execution Plan](understanding-the-query-execution-plan.md).
+The output of the query execution plan returned from the `EXPLAIN` command differs from MySQL. For more information, see [Understand the Query Execution Plan](understanding-the-query-execution-plan.md).
 
 ### Default differences
 
