@@ -1,6 +1,7 @@
 ---
 title: Bikeshare Example Database
-summary: Install the Bikeshare Example Database
+summary: Install the Bikeshare example database.
+category: user guide
 ---
 
 # Bikeshare Example Database
@@ -8,9 +9,9 @@ summary: Install the Bikeshare Example Database
 Examples used in the TiDB manual use [System Data](https://www.capitalbikeshare.com/system-data) from 
 Capital Bikeshare, released under the [Capital Bikeshare Data License Agreement](https://www.capitalbikeshare.com/data-license-agreement).
 
-## Downloading all data files
+## Download all data files
 
-The system data is available [for download in .zip files](https://s3.amazonaws.com/capitalbikeshare-data/index.html) organized per year. Downloading and extracting all files requires approximately 3GB of disk space.  To download all files for years 2010-2017 using a bash script:
+The system data is available [for download in .zip files](https://s3.amazonaws.com/capitalbikeshare-data/index.html) organized per year. Downloading and extracting all files requires approximately 3GB of disk space. To download all files for years 2010-2017 using a bash script:
 
 ```bash
 mkdir -p bikeshare-data && cd bikeshare-data
@@ -42,6 +43,7 @@ CREATE TABLE trips (
  member_type varchar(255)
 );
 ```
+
 You can import files individually using the example `LOAD DATA` command here, or import all files using the bash loop below:
 
 ```sql
