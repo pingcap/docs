@@ -447,6 +447,76 @@ Usage:
 }
 ```
 
+### `region store \<store_id\>`
+
+Use this command to list all Regions of a specific store.
+
+Usage:
+
+```bash
+>> region store 2
+{
+  "count": 10,
+  "regions": [......],
+}
+```
+
+### `region topread \[limit\]`
+
+Use this command to list Regions with top read flow. The default value of the limit is 10.
+
+Usage:
+
+```bash
+>> region topread
+{
+  "count": 10,
+  "regions": [......],
+}
+```
+
+### `region topwrite \[limit\]`
+
+Use this command to list Regions with top write flow. The default value of the limit is 10.
+
+Usage:
+
+```bash
+>> region topwrite
+{
+  "count": 10,
+  "regions": [......],
+}
+```
+
+### `region topconfver \[limit\]`
+
+Use this command to list Regions with top conf version. The default value of the limit is 10.
+
+Usage:
+
+```bash
+>> region topconfver
+{
+  "count": 10,
+  "regions": [......],
+}
+```
+
+### `region topversion \[limit\]`
+
+Use this command to list Regions with top version. The default value of the limit is 10.
+
+Usage:
+
+```bash
+>> region topversion
+{
+  "count": 10,
+  "regions": [......],
+}
+```
+
 ### `region check [miss-peer | extra-peer | down-peer | pending-peer | incorrect-ns]`
 
 Use this command to check the Regions in abnormal conditions.
