@@ -101,7 +101,7 @@ TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-le
 Due to the distributed, 2-phase commit requirement of TiDB, large transactions that modify data can be particularly problematic. TiDB intentionally sets some limits on transaction sizes to reduce this impact:
 
 * Each Key-Value entry is no more than 6MB
-* The total number of Key-Value entries is no more than 300,000 rows
+* The total number of Key-Value entries is no more than 300,000
 * The total size of Key-Value entries is no more than 100MB
 
 ### Load data
