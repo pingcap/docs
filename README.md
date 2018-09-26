@@ -9,6 +9,7 @@
 + Quick Start
   - [TiDB Quick Start Guide](QUICKSTART.md)
   - [Basic SQL Statements](try-tidb.md)
+  - [Bikeshare Example Database](bikeshare-example-database.md)
 + TiDB User Guide
   + TiDB Server Administration
     - [The TiDB Server](sql/tidb-server.md)
@@ -34,7 +35,7 @@
   + Globalization
     - [Character Set Support](sql/character-set-support.md)
     - [Character Set Configuration](sql/character-set-configuration.md)
-    - [Time Zone](sql/time-zone.md)
+    - [Time Zone Support](sql/time-zone.md)
   + Data Types
     - [Numeric Types](sql/datatype.md#numeric-types)
     - [Date and Time Types](sql/datatype.md#date-and-time-types)
@@ -134,8 +135,9 @@
 - [Frequently Asked Questions (FAQ)](FAQ.md)
 - [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 + [Releases](releases/rn.md)
+  - [2.1 RC2](releases/21rc2.md)
   - [2.0.7](releases/207.md)
-  - [2.1 RC1](releases/21rc1.md) 
+  - [2.1 RC1](releases/21rc1.md)
   - [2.0.6](releases/206.md)
   - [2.0.5](releases/205.md)
   - [2.1 Beta](releases/21beta.md)
