@@ -69,6 +69,7 @@ In addition to inserting and querying data, TiDB also supports editing JSON. In 
 - [JSON_MERGE](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge)
 - [JSON_CONTAINS](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-contains)
 - [JSON_CONTAINS_PATH](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-contains-path)
+- [JSON_LENGTH](https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-length)
 
 You can get the general use of these functions directly from the function name. These functions in TiDB behave the same as in MySQL 5.7. For more information, see the [JSON Functions document of MySQL 5.7](https://dev.mysql.com/doc/refman/5.7/en/json-functions.html). If you are a user of MySQL 5.7, you can migrate to TiDB seamlessly.
 
