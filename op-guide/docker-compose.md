@@ -100,7 +100,7 @@ To customize the cluster, you can edit the `docker-compose.yml` file directly. I
 4. Generate the `docker-compose.yml` file.
 
     ```bash
-    helm template compose > generated-docker-compose.yaml
+    helm template compose > generated-docker-compose.yml
     ```
 
 5. Create and start the cluster using the generated `docker-compose.yml` file.
