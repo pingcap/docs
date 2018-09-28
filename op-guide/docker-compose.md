@@ -90,12 +90,12 @@ To customize the cluster, you can edit the `docker-compose.yml` file directly. I
 
     You can modify the configuration in `values.yaml`, such as the cluster size, TiDB image version, and so on.
 
-    [tidb-vision](https://github.com/pingcap/tidb-vision) is the data visualization interface of the TiDB cluster, used to visually display the PD scheduling on TiKV data. If you do not need this component, leave `tidbVision` empty.
+    [tidb-vision](https://github.com/pingcap/tidb-vision) is the data visualization interface of the TiDB cluster, used to visually display the PD scheduling on TiKV data. If you do not need this component, comment out the `tidbVision` field.
 
     For PD, TiKV, TiDB and tidb-vision, you can build Docker images from GitHub source code or local files for development and testing.
 
-    - To build PD, TiKV or TiDB images from the locally compiled binary file, you need to leave the `image` field empty and copy the compiled binary file to the corresponding `pd/bin/pd-server`, `tikv/bin/tikv-server`, `tidb/bin/tidb-server`.
-    - To build the tidb-vision image from local, you need to leave the `image` field empty and copy the tidb-vision project to `tidb-vision/tidb-vision`.
+    - To build PD, TiKV or TiDB images from the locally compiled binary file, you need to comment out the `image` field and copy the compiled binary file to the corresponding `pd/bin/pd-server`, `tikv/bin/tikv-server`, `tidb/bin/tidb-server`.
+    - To build the tidb-vision image from local, you need to comment out the `image` field and copy the tidb-vision project to `tidb-vision/tidb-vision`.
 
 4. Generate the `docker-compose.yml` file.
 
