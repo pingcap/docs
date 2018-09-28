@@ -90,7 +90,7 @@ To customize the cluster, you can edit the `docker-compose.yml` file directly. I
 
     You can modify the configuration in `values.yaml`, such as the cluster size, TiDB image version, and so on.
 
-    [tidb-vision](https://github.com/pingcap/tidb-vision) is the data visualization interface of the TiDB cluster, used to visually display the PD scheduling on TiKV data. If you do not need this component, comment out the `tidbVision` field.
+    [tidb-vision](https://github.com/pingcap/tidb-vision) is the data visualization interface of the TiDB cluster, used to visually display the PD scheduling on TiKV data. If you do not need this component, comment out the `tidbVision` section.
 
     For PD, TiKV, TiDB and tidb-vision, you can build Docker images from GitHub source code or local files for development and testing.
 
