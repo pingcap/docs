@@ -26,7 +26,7 @@ When you perform a rolling update for a TiDB cluster, the service is shut down s
     tidb_version = v2.0.7
     ```
 
-    > **Note:** If you use the master branch of `tidb-ansible`, you can keep `tidb_version = latest`. The installation package of the latest TiDB version is updated each day.
+    > **Note:** If you use `tidb-ansible` of the master branch, you can keep `tidb_version = latest`. The installation package of the latest TiDB version is updated each day.
 
 2. Delete the existing `downloads` directory `/home/tidb/tidb-ansible/downloads/`.
 
@@ -51,7 +51,7 @@ wget http://download.pingcap.org/tidb-v2.0.7-linux-amd64.tar.gz
 
 > **Note:** Remember to replace the version number in the download link with the one you need.
 
-If you use the master branch of `tidb-ansible`, download the binary using the followin command:
+If you use `tidb-ansible` of the master branch, download the binary using the following command:
 
 ```
 $ wget http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
