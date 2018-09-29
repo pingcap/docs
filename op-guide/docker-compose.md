@@ -85,7 +85,7 @@ To customize the cluster, you can edit the `docker-compose.yml` file directly. I
 
     ```bash
     cd tidb-docker-compose
-    vi compose/values.yaml # custom the cluster size, docker image, port mapping and so on
+    vim compose/values.yaml # custom the cluster size, docker image, port mapping and so on
     ```
 
     You can modify the configuration in `values.yaml`, such as the cluster size, TiDB image version, and so on.
