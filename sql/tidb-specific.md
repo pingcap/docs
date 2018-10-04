@@ -285,8 +285,9 @@ set @@global.tidb_distsql_scan_concurrency = 10
 ### tidb_force_priority
 
 - Scope: SESSION | GLOBAL
-- Default value: NO_PRIORITY
+- Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server.  A use case is to ensure that a particular user (or TiDB server) that is performing OLAP queries receives lower priority than users performing OLTP queries.
+- You can set the value of this variable to `PRIORITY_LOW`, `NO_PRIORITY` or `PRIORITY_HIGH`.
 
 ## Optimizer Hint
 
