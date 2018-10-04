@@ -282,6 +282,12 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
 
+### tidb_force_priority
+
+- Scope: SESSION | GLOBAL
+- Default value: NO_PRIORITY
+- This variable is used to change the default priority for statements executed on a TiDB server.  A use case is to ensure that a particular user (or TiDB server) that is performing OLAP queries receives lower priority than users performing OLTP queries.
+
 ## Optimizer Hint
 
 On the basis of MySQL’s `Optimizer Hint` Syntax, TiDB adds some proprietary `Hint` syntaxes. When using the `Hint` syntax, the TiDB optimizer will try to use the specific algorithm, which performs better than the default algorithm in some scenarios.
