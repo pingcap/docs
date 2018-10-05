@@ -8,7 +8,7 @@ category: tools
 
 ## What is mydumper?
 
-Mydumper is a fork of the [mydumper](https://github.com/maxbube/mydumper) project with additional functionality specific to TiDB.  It is the recommended method to use for logical backups of TiDB.
+`mydumper` is a fork of the [mydumper](https://github.com/maxbube/mydumper) project with additional functionality specific to TiDB.  It is the recommended method to use for logical backups of TiDB.
 
 [Download the Binary](http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz).
 
@@ -37,7 +37,7 @@ Command line parameter:
 ```
 ## FAQ
 
-### Is this source code for these changes available?
+### Is the source code for these changes available?
 
 Source code for PingCAP's mydumper is [available on GitHub](https://github.com/pingcap/mydumper).
 
