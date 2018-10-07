@@ -691,7 +691,7 @@ TiDB is not suitable for tables of small size (such as below ten million level),
 
 #### How to back up data in TiDB?
 
-Currently, the preferred way of backing up is using the [TiDB fork of mydumper](tools/mydumper.md).Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is poorer than [`mydumper`](tools/mydumper.md)/[`loader`](tools/loader.md) and it needs much more time to back up and restore large volumes of data. Therefore, it is not recommended to use `mysqldump`. 
+Currently, the preferred method for backup is using the [PingCAP fork of mydumper](tools/mydumper.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is poorer than [`mydumper`](tools/mydumper.md)/[`loader`](tools/loader.md) and it needs much more time to back up and restore large volumes of data.
 
 Keep the size of the data file exported from `mydumper` as small as possible. It is recommended to keep the size within 64M. You can set value of the `-F` parameter to 64.
 
