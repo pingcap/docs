@@ -1,10 +1,10 @@
 ---
-title: JSON Functions and Generated Column
-summary: Learn how to use JSON functions and generated column to handle scenarios with uncertain schema.
+title: Generated Columns
+summary: Learn how to use generated columns
 category: user guide
 ---
 
-# JSON Functions and Generated Column
+# Generated Columns
 
 ## About
 

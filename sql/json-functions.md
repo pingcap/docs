@@ -6,11 +6,65 @@ category: user guide
 
 # JSON Functions
 
+## Functions that create JSON values
+
+| Function Name and Syntactic Sugar | Description |
+| --------------------------------- | ----------- |
+| JSON_ARRAY | desc |
+| JSON_OBJECT | desc |
+
+## Functions that search JSON values
+
+| Function Name and Syntactic Sugar | Description |
+| --------------------------------- | ----------- |
+| JSON_CONTAINS | desc |
+| JSON_CONTAINS_PATH | desc |
+| JSON_EXTRACT | desc |
+| -> | desc |
+| ->> | desc |
+
+## Functions that modify JSON values
+
+| Function Name and Syntactic Sugar | Description |
+| --------------------------------- | ----------- |
+| JSON_INSERT | desc |
+| JSON_MERGE | desc |
+| JSON_REMOVE | desc |
+| JSON_REPLACE | desc |
+| JSON_SET | desc |
+| JSON_UNQUOTE | desc |
+
+## Functions that return JSON value attributes
+
+| Function Name and Syntactic Sugar | Description |
+| --------------------------------- | ----------- |
+| JSON_LENGTH | desc |
+| JSON_TYPE | desc |
+
+
+## Unsupported JSON Functions
+
+The following JSON functions are currently unsupported in TiDB.  You can track our progress in adding them in [TIDB #7546](https://github.com/pingcap/tidb/issues/7546):
+
+* `JSON_QUOTE`
+* `JSON_APPEND` and its alias `JSON_ARRAY_APPEND`
+* `JSON_ARRAY_INSERT`
+* `JSON_MERGE_PATCH`
+* `JSON_MERGE_PRESERVE`, use the alias `JSON_MERGE` instead
+* `JSON_VALID`
+* `JSON_PRETTY`
+* `JSON_SEARCH`
+* `JSON_STORAGE_SIZE`
+* `JSON_DEPTH`
+* `JSON_KEYS`
+* `JSON_ARRAYAGG`
+* `JSON_OBJECTAGG`
+
 | Function Name and Syntactic Sugar  | Description  |
 | ---------- | ------------------ |
 | [JSON_EXTRACT(json_doc, path[, path] ...)][json_extract]| Return data from a JSON document, selected from the parts of the document matched by the `path` arguments |
-| [JSON_UNQUOTE(json_val)][json_unquote] |  Unquote JSON value and return the result as a `utf8mb4` string |
-| [JSON_TYPE(json_val)][json_type] | Return a `utf8mb4` string indicating the type of a JSON value |
+| [JSON_UNQUOTE(json_val)][json_unquote] |  Unquote JSON value and return the result as a string |
+| [JSON_TYPE(json_val)][json_type] | Return a string indicating the type of a JSON value |
 | [JSON_SET(json_doc, path, val[, path, val] ...)][json_set]  | Insert or update data in a JSON document and return the result |
 | [JSON_INSERT(json_doc, path, val[, path, val] ...)][json_insert] | Insert data into a JSON document and return the result |
 | [JSON_REPLACE(json_doc, path, val[, path, val] ...)][json_replace] | Replace existing values in a JSON document and return the result |
