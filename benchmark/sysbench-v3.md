@@ -86,7 +86,7 @@ block-cache-size = "20GB"
 
 ### `Point Select` test
 
-| Version | Threads | QPS | 95% Latency(ms) |
+| Version | Threads | QPS | 95% Latency (ms) |
 | :-: | :-: | :-: | :-: |
 | v2.1 | 64   | 111481.09 | 1.16  |
 | v2.1 | 128  | 145102.62 | 2.52  |
@@ -105,7 +105,7 @@ According to the statistics above, the `Point Select` query performance of TiDB 
 
 ### `Update Non-Index` test
 
-| Version | Threads | QPS | 95% Latency(ms) |
+| Version | Threads | QPS | 95% Latency (ms) |
 | :-: | :-: | :-: | :-: |
 | v2.1 | 64   | 18946.09 | 5.77   |
 | v2.1 | 128  | 22022.82 | 12.08  |
@@ -124,7 +124,7 @@ According to the statistics above, the `Update Non-Index` write performance of T
 
 ### `Update Index` test
 
-| Version | Threads | QPS | 95% Latency(ms) |
+| Version | Threads | QPS | 95% Latency (ms) |
 | :-: | :-: | :-: | :-: |
 | v2.1 | 64   | 9934.49  | 12.08  |
 | v2.1 | 128  | 10505.95 | 25.28  |
