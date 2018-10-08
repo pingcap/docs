@@ -66,7 +66,7 @@ TiDB does not currently enable [`ONLY_FULL_GROUP_BY`](mysql-compatibility.md#def
 
 ### Differences from MySQL
 
-The current implimentation of `ONLY_FULL_GROUP_BY` is less strict than in MySQL 5.7. For example, suppose that we execute the following query, expecting the results to be ordered by "c":
+The current implementation of `ONLY_FULL_GROUP_BY` is less strict than in MySQL 5.7. For example, suppose that we execute the following query, expecting the results to be ordered by "c":
 
 ```sql
 drop table if exists t;
