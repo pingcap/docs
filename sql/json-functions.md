@@ -6,7 +6,7 @@ category: user guide
 
 # JSON Functions
 
-TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7.  Additional JSON functions were added to MySQL 5.7 after its release, and not all are available in TiDB (see [unsupported functions](#Unsupported-functions)).
+TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7.  Additional JSON functions were added to MySQL 5.7 after its release, and not all are available in TiDB (see [unsupported functions](#unsupported-functions)).
 
 ## Functions that create JSON values
 
