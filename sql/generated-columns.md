@@ -58,7 +58,7 @@ CREATE TABLE person (
 Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation will return errors:
 
 ```sql
-MySQL [test]> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
+mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
 ERROR 1048 (23000): Column 'city' cannot be null
 ```
 
