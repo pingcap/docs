@@ -6,7 +6,7 @@ category: user guide
 
 # JSON Functions
 
-TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7.  Additional JSON functions were added to MySQL 5.7 after its release, and not all are available in TiDB (see Unsupported JSON Functions).
+TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7.  Additional JSON functions were added to MySQL 5.7 after its release, and not all are available in TiDB (see [unsupported functions](#Unsupported-functions)).
 
 ## Functions that create JSON values
 
@@ -14,16 +14,18 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | --------------------------------- | ----------- |
 | [JSON_ARRAY([val[, val] ...])][json_array]  | Evaluate a (possibly empty) list of values and return a JSON array containing those values |
 | [JSON_OBJECT(key, val[, key, val] ...)][json_object]   | Evaluate a (possibly empty) list of key-value pairs and return a JSON object containing those pairs  |
+| [JSON_QUOTE][json_quote] | desc |
 
 ## Functions that search JSON values
 
 | Function Name and Syntactic Sugar | Description |
 | --------------------------------- | ----------- |
-| JSON_CONTAINS | desc |
-| JSON_CONTAINS_PATH | desc |
+| [JSON_CONTAINS][json_contains] | desc |
+| [JSON_CONTAINS_PATH][json_contains_path] | desc |
 | [JSON_EXTRACT(json_doc, path[, path] ...)][json_extract]| Return data from a JSON document, selected from the parts of the document matched by the `path` arguments |
 | ->  | Return value from JSON column after evaluating path; the syntactic sugar of `JSON_EXTRACT(doc, path_literal)`   |
 | ->>  | Return value from JSON column after evaluating path and unquoting the result; the syntactic sugar of `JSON_UNQUOTE(JSONJSON_EXTRACT(doc, path_literal))` |
+| [JSON_KEYS][json_keys] | desc |
 
 ## Functions that modify JSON values
 
@@ -40,24 +42,22 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 
 | Function Name and Syntactic Sugar | Description |
 | --------------------------------- | ----------- |
-| JSON_LENGTH | desc |
+| [JSON_LENGTH][json_length] | desc |
 | [JSON_TYPE(json_val)][json_type] | Return a string indicating the type of a JSON value |
+| [JSON_VALID][json_valid] | desc |
 
-## Unsupported JSON Functions
+## Unsupported functions
 
-The following JSON functions are currently unsupported in TiDB.  You can track our progress in adding them in [TIDB #7546](https://github.com/pingcap/tidb/issues/7546):
+The following JSON functions are unsupported in TiDB.  You can track our progress in adding them in [TIDB #7546](https://github.com/pingcap/tidb/issues/7546):
 
-* `JSON_QUOTE`
 * `JSON_APPEND` and its alias `JSON_ARRAY_APPEND`
 * `JSON_ARRAY_INSERT`
 * `JSON_MERGE_PATCH`
 * `JSON_MERGE_PRESERVE`, use the alias `JSON_MERGE` instead
-* `JSON_VALID`
 * `JSON_PRETTY`
 * `JSON_SEARCH`
 * `JSON_STORAGE_SIZE`
 * `JSON_DEPTH`
-* `JSON_KEYS`
 * `JSON_ARRAYAGG`
 * `JSON_OBJECTAGG`
 
