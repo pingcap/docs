@@ -14,18 +14,18 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | --------------------------------- | ----------- |
 | [JSON_ARRAY([val[, val] ...])][json_array]  | Evaluate a (possibly empty) list of values and return a JSON array containing those values |
 | [JSON_OBJECT(key, val[, key, val] ...)][json_object]   | Evaluate a (possibly empty) list of key-value pairs and return a JSON object containing those pairs  |
-| [JSON_QUOTE][json_quote] | desc |
+| [JSON_QUOTE(string)][json_quote] | Escapes a string for use in JSON, and returns it with enclosing quotes |
 
 ## Functions that search JSON values
 
 | Function Name and Syntactic Sugar | Description |
 | --------------------------------- | ----------- |
-| [JSON_CONTAINS][json_contains] | desc |
-| [JSON_CONTAINS_PATH][json_contains_path] | desc |
+| [JSON_CONTAINS(target, candidate[, path])][json_contains] | Indicates by returning 1 or 0 whether a given candidate JSON document is contained within a target JSON document |
+| [JSON_CONTAINS_PATH(json_doc, one_or_all, path[, path] ...)][json_contains_path] | Returns 0 or 1 to indicate whether a JSON document contains data at a given path or paths |
 | [JSON_EXTRACT(json_doc, path[, path] ...)][json_extract]| Return data from a JSON document, selected from the parts of the document matched by the `path` arguments |
 | [->][json_short_extract]  | Return value from JSON column after evaluating path; the syntactic sugar of `JSON_EXTRACT(doc, path_literal)`   |
 | [->>][json_short_extract_unquote]  | Return value from JSON column after evaluating path and unquoting the result; the syntactic sugar of `JSON_UNQUOTE(JSONJSON_EXTRACT(doc, path_literal))` |
-| [JSON_KEYS][json_keys] | desc |
+| [JSON_KEYS(json_doc[, path])][json_keys] | Returns the keys from the top-level value of a JSON object as a JSON array, or, if a path argument is given, the top-level keys from the selected path |
 
 ## Functions that modify JSON values
 
@@ -42,9 +42,9 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 
 | Function Name and Syntactic Sugar | Description |
 | --------------------------------- | ----------- |
-| [JSON_LENGTH][json_length] | desc |
+| [JSON_LENGTH(json_doc[, path])][json_length] | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
 | [JSON_TYPE(json_val)][json_type] | Return a string indicating the type of a JSON value |
-| [JSON_VALID][json_valid] | desc |
+| [JSON_VALID(val)][json_valid] | Returns 1 if a value is valid JSON, or 0 if it is not |
 
 ## Unsupported functions
 
