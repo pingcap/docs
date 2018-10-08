@@ -59,7 +59,7 @@ This document defines the roadmap for TiDB development.
     - [ ] Multi-thread apply pool - Apply Region Raft committed entries in multiple threads
 + Engine
     - [ ] Titan - Separate large key-values from LSM-Tree
-    - [ ] Pluggable Engine Interface - Clean up the engine wrapper code and provide more extendibility
+    - [ ] Pluggable Engine Interface - Clean up the engine wrapper code and provide more extensibility
 + Storage
     - [ ] Flow Control - Do flow control in scheduler to avoid write stall in advance
 + Transaction
