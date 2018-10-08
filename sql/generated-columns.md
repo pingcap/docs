@@ -43,7 +43,7 @@ You can use the index on the generated column in order to speed up the following
 SELECT name, id FROM person WHERE city = 'Beijing';
 ```
 
-If no data exists at path `$.city`, `JSON_EXTRACT` will return `NULL`. The definition of the city virtual column permits `NULL` values. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual column as follows:
+If no data exists at path `$.city`, `JSON_EXTRACT` will return `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual column as follows:
 
 ```sql
 CREATE TABLE person (
