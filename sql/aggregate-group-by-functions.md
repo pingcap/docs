@@ -38,7 +38,7 @@ TiDB does not currently support `GROUP BY` modifiers such as `WITH ROLLUP`. We p
 
 ## SQL mode support
 
-TiDB supports the SQL Mode `ONLY_FULL_GROUP_BY` and when enabled, will refuse queries with ambiguous non-aggregated columns. For example, this query is illegal with `ONLY_FULL_GROUP_BY` enabled because the non-aggregated column "b" in the `SELECT` list does not appear in the `GROUP BY`:
+TiDB supports the SQL Mode `ONLY_FULL_GROUP_BY`, and when enabled TiDB will refuse queries with ambiguous non-aggregated columns. For example, this query is illegal with `ONLY_FULL_GROUP_BY` enabled because the non-aggregated column "b" in the `SELECT` list does not appear in the `GROUP BY`:
 
 ```sql
 drop table if exists t;
