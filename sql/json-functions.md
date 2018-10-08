@@ -23,8 +23,8 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [JSON_CONTAINS][json_contains] | desc |
 | [JSON_CONTAINS_PATH][json_contains_path] | desc |
 | [JSON_EXTRACT(json_doc, path[, path] ...)][json_extract]| Return data from a JSON document, selected from the parts of the document matched by the `path` arguments |
-| ->  | Return value from JSON column after evaluating path; the syntactic sugar of `JSON_EXTRACT(doc, path_literal)`   |
-| ->>  | Return value from JSON column after evaluating path and unquoting the result; the syntactic sugar of `JSON_UNQUOTE(JSONJSON_EXTRACT(doc, path_literal))` |
+| [->][json_short_extract]  | Return value from JSON column after evaluating path; the syntactic sugar of `JSON_EXTRACT(doc, path_literal)`   |
+| [->>][json_short_extract_unquote]  | Return value from JSON column after evaluating path and unquoting the result; the syntactic sugar of `JSON_UNQUOTE(JSONJSON_EXTRACT(doc, path_literal))` |
 | [JSON_KEYS][json_keys] | desc |
 
 ## Functions that modify JSON values
@@ -62,6 +62,8 @@ The following JSON functions are unsupported in TiDB.  You can track our progres
 * `JSON_OBJECTAGG`
 
 [json_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract
+[json_short_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-column-path
+[json_short_extract_unquote]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-inline-path
 [json_unquote]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-unquote
 [json_type]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-type
 [json_set]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-set
@@ -71,3 +73,6 @@ The following JSON functions are unsupported in TiDB.  You can track our progres
 [json_merge]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge
 [json_object]: https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-object
 [json_array]: https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-array
+[json_keys]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-keys
+[json_length]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-length
+[json_valid]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-valid
