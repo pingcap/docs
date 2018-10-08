@@ -46,6 +46,12 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [JSON_TYPE(json_val)][json_type] | Return a string indicating the type of a JSON value |
 | [JSON_VALID(val)][json_valid] | Returns 1 if a value is valid JSON, or 0 if it is not |
 
+## Aggregate functions
+
+| Function Name and Syntactic Sugar | Description |
+| --------------------------------- | ----------- |
+| [JSON_ARRAYAGG(col or expr)][json_arrayagg] | Aggregates a result set as a single JSON array whose elements consist of the rows |
+
 ## Unsupported functions
 
 The following JSON functions are unsupported in TiDB.  You can track our progress in adding them in [TIDB #7546](https://github.com/pingcap/tidb/issues/7546):
@@ -58,7 +64,6 @@ The following JSON functions are unsupported in TiDB.  You can track our progres
 * `JSON_SEARCH`
 * `JSON_STORAGE_SIZE`
 * `JSON_DEPTH`
-* `JSON_ARRAYAGG`
 * `JSON_OBJECTAGG`
 
 [json_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract
@@ -79,3 +84,4 @@ The following JSON functions are unsupported in TiDB.  You can track our progres
 [json_quote]: https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-quote
 [json_contains]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-contains
 [json_contains_path]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-contains-path
+[json_arrayagg]: https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_json-arrayagg
