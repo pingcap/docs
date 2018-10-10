@@ -16,16 +16,16 @@ category: tools
 
 + Use `tidb_snapshot` to provide backup consistency instead of `FLUSH TABLES WITH READ LOCK`
 
-+ Include the hidden `_tidb_rowid` column in exports when present
++ Include the hidden `_tidb_rowid` column in `INSERT` statements when present
 
-+ Allow for `tidb_snapshot` to be configurable (i.e. backup data as it appeared at an earlier point in time)
-
++ Allow for `tidb_snapshot` to be [configurable](../op-guide/history-read.md#how-tidb-reads-data-from-history-versions) (i.e. backup data as it appeared at an earlier point in time)
 
 ### New parameter description
 
 ```
   -z, --tidb-snapshot: Set the tidb_snapshot to be used for the backup.
                        Default: NOW()-INTERVAL 1 SECOND.
+                       Accepts either a TSO or valid datetime.  For example: -z "2016-10-08 16:45:26"
 ```
 
 ### Usage example
