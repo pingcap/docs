@@ -89,10 +89,15 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     ```
 4. Generate the SSH key.
 
-    Execute the `su` command to switch the user from `root` to `tidb`. Create the SSH key for the `tidb` user account and hit the Enter key when `Enter passphrase` is prompted. After successful execution, the SSH private key file is `/home/tidb/.ssh/id_rsa`, and the SSH public key file is `/home/tidb/.ssh/id_rsa.pub`.
+    Execute the `su` command to switch the user from `root` to `tidb`.
 
     ```
     # su - tidb
+    ```
+
+    Create the SSH key for the `tidb` user account and hit the Enter key when `Enter passphrase` is prompted. After successful execution, the SSH private key file is `/home/tidb/.ssh/id_rsa`, and the SSH public key file is `/home/tidb/.ssh/id_rsa.pub`.
+    
+    ```
     $ ssh-keygen -t rsa
     Generating public/private rsa key pair.
     Enter file in which to save the key (/home/tidb/.ssh/id_rsa):
@@ -119,11 +124,16 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 ## Step 3: Download TiDB-Ansible to the Control Machine
 
-1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory.
+1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. The corresponding relationship between the `tidb-ansible` branch and TiDB versions is as follows:
 
-2. Download the corresponding TiDB-Ansible version from the [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+    | tidb-ansible branch | TiDB version | Note |
+    | ------------------- | ------------ | ---- |
+    | release-2.0 | 2.0 version | This is the latest stable version. You can use it in production. |
+    | master | master version | This version includes the latest features with a daily update. |
 
-    - Download the 2.0 GA version:
+2. Download the corresponding TiDB-Ansible branch from the [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+
+    - Download the 2.0 version:
 
         ```bash
         $ git clone -b release-2.0 https://github.com/pingcap/tidb-ansible.git
@@ -497,11 +507,10 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | cluster_name | the name of a cluster, adjustable |
 | tidb_version | the version of TiDB, configured by default in TiDB-Ansible branches |
 | process_supervision | the supervision way of processes, systemd by default, supervise optional |
-| timezone | the timezone of the managed node, adjustable, `Asia/Shanghai` by default, used together with the `set_timezone` variable |
-| set_timezone | to edit the timezone of the managed node, True by default; False means closing |
+| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](../sql/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
 | enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](recommendation.md#network-requirements) to the white list |
 | enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
-| set_hostname | to edit the hostname of the mananged node based on the IP, False by default |
+| set_hostname | to edit the hostname of the managed node based on the IP, False by default |
 | enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
 | zookeeper_addrs | the zookeeper address of the binlog Kafka cluster |
 | enable_slow_query_log | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |

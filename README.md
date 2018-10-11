@@ -3,11 +3,13 @@
 ## Documentation List
 
 + About TiDB
-  - [TiDB Introduction](overview.md#tidb-introduction)
-  - [TiDB Architecture](overview.md#tidb-architecture)
+  - [TiDB Introduction](overview.md)
+  - [TiDB Architecture](architecture.md)
+  - [TiDB Key Features](features.md)
 + Quick Start
   - [TiDB Quick Start Guide](QUICKSTART.md)
   - [Basic SQL Statements](try-tidb.md)
+  - [Bikeshare Example Database](bikeshare-example-database.md)
 + TiDB User Guide
   + TiDB Server Administration
     - [The TiDB Server](sql/tidb-server.md)
@@ -33,7 +35,7 @@
   + Globalization
     - [Character Set Support](sql/character-set-support.md)
     - [Character Set Configuration](sql/character-set-configuration.md)
-    - [Time Zone](sql/time-zone.md)
+    - [Time Zone Support](sql/time-zone.md)
   + Data Types
     - [Numeric Types](sql/datatype.md#numeric-types)
     - [Date and Time Types](sql/datatype.md#date-and-time-types)
@@ -116,24 +118,19 @@
   - [TiDB-Binlog](tools/tidb-binlog-kafka.md)
   - [PD Control](tools/pd-control.md)
   - [PD Recover](tools/pd-recover.md)
-  - [TiKV Control](tools/tikv-control.md)
+  - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
   - [TiDB Controller](tools/tidb-controller.md)
-+ TiKV Documentation
-  - [Overview](tikv/tikv-overview.md)
-  + Install and Deploy TiKV
-    - [Prerequisites](op-guide/recommendation.md)
-    - [Install and Deploy TiKV Using Docker Compose](tikv/deploy-tikv-docker-compose.md)
-    - [Install and Deploy TiKV Using Ansible](tikv/deploy-tikv-using-ansible.md)
-    - [Install and Deploy TiKV Using Docker](tikv/deploy-tikv-using-docker.md)
-  + Client Drivers
-    - [Go](tikv/go-client-api.md)
++ [TiKV Documentation](https://github.com/tikv/tikv/wiki)
 + TiSpark Documentation
   - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
   - [User Guide](tispark/tispark-user-guide.md)
 - [Frequently Asked Questions (FAQ)](FAQ.md)
-- [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
+- [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
 + [Releases](releases/rn.md)
-  - [2.1 RC1](releases/21rc1.md) 
+  - [2.1 RC3](releases/21rc3.md)
+  - [2.1 RC2](releases/21rc2.md)
+  - [2.0.7](releases/207.md)
+  - [2.1 RC1](releases/21rc1.md)
   - [2.0.6](releases/206.md)
   - [2.0.5](releases/205.md)
   - [2.1 Beta](releases/21beta.md)
