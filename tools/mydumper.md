@@ -14,11 +14,11 @@ category: tools
 
 ## What enhancements does this contain over regular mydumper?
 
-+ Use `tidb_snapshot` to provide backup consistency instead of `FLUSH TABLES WITH READ LOCK`
++ Uses `tidb_snapshot` to provide backup consistency instead of `FLUSH TABLES WITH READ LOCK`
 
-+ Include the hidden `_tidb_rowid` column in `INSERT` statements when present
++ Includes the hidden `_tidb_rowid` column in `INSERT` statements when present
 
-+ Allow for `tidb_snapshot` to be [configurable](../op-guide/history-read.md#how-tidb-reads-data-from-history-versions) (i.e. backup data as it appeared at an earlier point in time)
++ Allows `tidb_snapshot` to be [configurable](../op-guide/history-read.md#how-tidb-reads-data-from-history-versions) (i.e. backup data as it appeared at an earlier point in time)
 
 ### New parameter description
 
@@ -35,6 +35,7 @@ Command line parameter:
 ```
 ./bin/mydumper -h 127.0.0.1 -u root -P 4000
 ```
+
 ## FAQ
 
 ### Is the source code for these changes available?
