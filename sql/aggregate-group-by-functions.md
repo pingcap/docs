@@ -34,11 +34,11 @@ This section describes the supported MySQL group (aggregate) functions in TiDB.
 
 ## GROUP BY modifiers
 
-TiDB does not currently support `GROUP BY` modifiers such as `WITH ROLLUP`. We plan to add support in the future. See [TIDB #4250](https://github.com/pingcap/tidb/issues/4250).
+TiDB does not currently support `GROUP BY` modifiers such as `WITH ROLLUP`. We plan to add support in the future. See [TiDB #4250](https://github.com/pingcap/tidb/issues/4250).
 
 ## SQL mode support
 
-TiDB supports the SQL Mode `ONLY_FULL_GROUP_BY`, and when enabled TiDB will refuse queries with ambiguous non-aggregated columns. For example, this query is illegal with `ONLY_FULL_GROUP_BY` enabled because the non-aggregated column "b" in the `SELECT` list does not appear in the `GROUP BY`:
+TiDB supports the SQL Mode `ONLY_FULL_GROUP_BY`, and when enabled TiDB will refuse queries with ambiguous non-aggregated columns. For example, this query is illegal with `ONLY_FULL_GROUP_BY` enabled because the non-aggregated column "b" in the `SELECT` list does not appear in the `GROUP BY` statement:
 
 ```sql
 drop table if exists t;
@@ -62,11 +62,11 @@ mysql> select a, b, sum(c) from t group by a;
 ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'b' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
-TiDB does not currently enable [`ONLY_FULL_GROUP_BY`](mysql-compatibility.md#default-differences) mode by default.
+TiDB does not currently enable the [`ONLY_FULL_GROUP_BY`](mysql-compatibility.md#default-differences) mode by default.
 
 ### Differences from MySQL
 
-The current implementation of `ONLY_FULL_GROUP_BY` is less strict than in MySQL 5.7. For example, suppose that we execute the following query, expecting the results to be ordered by "c":
+The current implementation of `ONLY_FULL_GROUP_BY` is less strict than that in MySQL 5.7. For example, suppose that we execute the following query, expecting the results to be ordered by "c":
 
 ```sql
 drop table if exists t;
@@ -115,7 +115,7 @@ group by id, val;
 
 ## Unsupported aggregate functions
 
-The following aggregate functions are currently unsupported in TiDB.  You can track our progress in [TIDB #7623](https://github.com/pingcap/tidb/issues/7623):
+The following aggregate functions are currently unsupported in TiDB. You can track our progress in [TiDB #7623](https://github.com/pingcap/tidb/issues/7623):
 
 - `JSON_OBJECTAGG`
 - `VAR_SAMP`
