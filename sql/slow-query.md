@@ -98,7 +98,7 @@ The statements whose `wait_time` is very large and `process_time` is very small 
 
 ### `admin show slow` command
 
-Besides obtaining the TiDB log file, another way to identify the slow query is through the `admin show slow` SQL command:
+In addition to the TIDB log file, you can identify slow queries by running the `admin show slow` command:
 
     admin show slow recent N
     admin show slow top [internal | all] N
