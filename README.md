@@ -5,7 +5,6 @@
 + About TiDB
   - [TiDB Introduction](overview.md)
   - [TiDB Architecture](architecture.md)
-  - [TiDB Key Features](features.md)
 + Quick Start
   - [TiDB Quick Start Guide](QUICKSTART.md)
   - [Basic SQL Statements](try-tidb.md)
@@ -114,6 +113,7 @@
   - [Troubleshoot](trouble-shooting.md)
 + TiDB Enterprise Tools
   - [Syncer](tools/syncer.md)
+  - [mydumper](tools/mydumper.md)
   - [Loader](tools/loader.md)
   - [TiDB-Binlog](tools/tidb-binlog-kafka.md)
   - [PD Control](tools/pd-control.md)
