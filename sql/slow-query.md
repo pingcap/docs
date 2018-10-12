@@ -100,14 +100,14 @@ The statements whose `wait_time` is very large and `process_time` is very small 
 
 In addition to the TiDB log file, you can identify slow queries by running the `admin show slow` command:
 
-```
+```sql
 admin show slow recent N
 admin show slow top [internal | all] N
 ```
 
 `recent N` shows the recent N slow query records, for example:
 
-```
+```sql
 admin show recent 10
 ```
 
@@ -116,7 +116,7 @@ If the `internal` option is provided, the returned results would be the inner SQ
 If the `all` option is provided, the returned results would be the user's SQL combinated with inner SQL;
 Otherwise, this command would only return the slow query records from the user's SQL.
 
-```
+```sql
 admin show top 3
 admin show top internal 3
 admin show top all 5
