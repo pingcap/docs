@@ -112,8 +112,7 @@ The following aggregate functions are currently unsupported in TiDB. You can tra
 
 - `STD`, `STDDEV`, `STDDEV_POP`
 - `STDDEV_SAMP`
-- `VARIANCE`
-- `VAR_POP`
+- `VARIANCE`, `VAR_POP`
 - `VAR_SAMP`
 - `JSON_ARRAYAGG`
 - `JSON_OBJECTAGG`
