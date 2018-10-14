@@ -6,7 +6,7 @@ category: user guide
 
 # TiDB Specific System Variables
 
-On the basis of MySQL variables and syntaxes, TiDB has defined some specific system variables and syntaxes to optimize performance.
+TiDB contains a number of system variables which are specific to its usage, and **do not** apply to MySQL.  These variables start with a `tidb_` prefix, and can be tuned to optimize system performance.
 
 ## System variable
 
