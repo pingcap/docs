@@ -21,13 +21,6 @@ This section describes the supported MySQL group (aggregate) functions in TiDB.
 | [`MAX()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_max)                       | Return the maximum value                          |
 | [`MIN()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_min)                       | Return the minimum value                          |
 | [`GROUP_CONCAT()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_group-concat)     | Return a concatenated string                      |
-| [`STD()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_std) |	Return the population standard deviation |
-| [`STDDEV()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_stddev) |	Return the population standard deviation |
-| [`STDDEV_POP()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_stddev-pop) | Return the population standard deviation |
-| [`STDDEV_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_stddev-samp) | Return the sample standard deviation |
-| [`VARIANCE()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_variance) | Return the population standard variance |
-| [`VAR_POP()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_var-pop) | Return the population standard variance |
-| [`JSON_ARRAYAGG()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_json-arrayagg) | Return result set as a single JSON array |
 
 - Unless otherwise stated, group functions ignore `NULL` values.
 - If you use a group function in a statement containing no `GROUP BY` clause, it is equivalent to grouping on all rows.
@@ -117,5 +110,10 @@ group by id, val;
 
 The following aggregate functions are currently unsupported in TiDB. You can track our progress in [TiDB #7623](https://github.com/pingcap/tidb/issues/7623):
 
-- `JSON_OBJECTAGG`
+- `STD`, `STDDEV`, `STDDEV_POP`
+- `STDDEV_SAMP`
+- `VARIANCE`
+- `VAR_POP`
 - `VAR_SAMP`
+- `JSON_ARRAYAGG`
+- `JSON_OBJECTAGG`
