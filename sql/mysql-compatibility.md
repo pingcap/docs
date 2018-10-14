@@ -140,6 +140,10 @@ Create Table: CREATE TABLE `t1` (
 
 Architecturally, TiDB does support a similar storage engine abstraction to MySQL, and user tables are created in the engine specified by the [`--store`](server-command-option.md#--store) option used when you start tidb-server (typically `tikv`).
 
+### Partitioning
+
+TiDB supports only [`RANGE` Partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-range.html).  Support for `LIST`, `HASH`, `KEY` and subpartitioning is not supported at this time.
+
 ### EXPLAIN
 
 The output of the query execution plan returned from the `EXPLAIN` command differs from MySQL. For more information, see [Understand the Query Execution Plan](understanding-the-query-execution-plan.md).
