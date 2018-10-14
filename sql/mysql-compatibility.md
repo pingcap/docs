@@ -142,7 +142,7 @@ Architecturally, TiDB does support a similar storage engine abstraction to MySQL
 
 ### Partitioning
 
-TiDB supports only [`RANGE` Partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-range.html).  Support for `LIST`, `HASH`, `KEY` and subpartitioning is not supported at this time.
+TiDB supports only [`RANGE` Partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-range.html). Support for `LIST`, `HASH`, `KEY` and subpartitioning is not available at this time.
 
 ### EXPLAIN
 
