@@ -14,7 +14,6 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | --------------------------------- | ----------- |
 | [JSON_ARRAY([val[, val] ...])][json_array]  | Evaluate a (possibly empty) list of values and return a JSON array containing those values |
 | [JSON_OBJECT(key, val[, key, val] ...)][json_object]   | Evaluate a (possibly empty) list of key-value pairs and return a JSON object containing those pairs  |
-| [JSON_QUOTE(string)][json_quote] | Escapes a string for use in JSON, and returns it with enclosing quotes |
 
 ## Functions that search JSON values
 
@@ -25,7 +24,6 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [JSON_EXTRACT(json_doc, path[, path] ...)][json_extract]| Return data from a JSON document, selected from the parts of the document matched by the `path` arguments |
 | [->][json_short_extract]  | Return value from JSON column after evaluating path; the syntactic sugar of `JSON_EXTRACT(doc, path_literal)`   |
 | [->>][json_short_extract_unquote]  | Return value from JSON column after evaluating path and unquoting the result; the syntactic sugar of `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` |
-| [JSON_KEYS(json_doc[, path])][json_keys] | Returns the keys from the top-level value of a JSON object as a JSON array, or, if a path argument is given, the top-level keys from the selected path |
 
 ## Functions that modify JSON values
 
@@ -44,13 +42,6 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | --------------------------------- | ----------- |
 | [JSON_LENGTH(json_doc[, path])][json_length] | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
 | [JSON_TYPE(json_val)][json_type] | Return a string indicating the type of a JSON value |
-| [JSON_VALID(val)][json_valid] | Returns 1 if a value is valid JSON, or 0 if it is not |
-
-## Aggregate functions
-
-| Function Name and Syntactic Sugar | Description |
-| --------------------------------- | ----------- |
-| [JSON_ARRAYAGG(col or expr)][json_arrayagg] | Aggregates a result set as a single JSON array whose elements consist of the rows |
 
 ## Unsupported functions
 
@@ -58,12 +49,16 @@ The following JSON functions are unsupported in TiDB.  You can track our progres
 
 * `JSON_APPEND` and its alias `JSON_ARRAY_APPEND`
 * `JSON_ARRAY_INSERT`
+* `JSON_DEPTH`
+* `JSON_KEYS`
 * `JSON_MERGE_PATCH`
 * `JSON_MERGE_PRESERVE`, use the alias `JSON_MERGE` instead
 * `JSON_PRETTY`
+* `JSON_QUOTE`
 * `JSON_SEARCH`
 * `JSON_STORAGE_SIZE`
-* `JSON_DEPTH`
+* `JSON_VALID`
+* `JSON_ARRAYAGG`
 * `JSON_OBJECTAGG`
 
 [json_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract
