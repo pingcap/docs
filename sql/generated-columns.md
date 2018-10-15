@@ -6,8 +6,6 @@ category: user guide
 
 # Generated Columns
 
-## About
-
 TiDB supports generated columns as part of MySQL 5.7 compatibility. One of the primary use cases for generated columns is to extract data out of a JSON data type and enable it to be indexed.
 
 ## Index JSON using generated column
@@ -23,7 +21,7 @@ CREATE TABLE person (
 );
 ```
 
-In order to index a JSON column, you must first extract it as a generated column. Using the `city` generated column as an example, we are then able to add an index:
+In order to index a JSON column, you must first extract it as a generated column. Using the `city` generated column as an example, you are then able to add an index:
 
 ```sql
 CREATE TABLE person (
@@ -43,7 +41,7 @@ You can use the index on the generated column in order to speed up the following
 SELECT name, id FROM person WHERE city = 'Beijing';
 ```
 
-If no data exists at path `$.city`, `JSON_EXTRACT` will return `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual column as follows:
+If no data exists at path `$.city`, `JSON_EXTRACT` returns `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual column as follows:
 
 ```sql
 CREATE TABLE person (
@@ -55,7 +53,7 @@ CREATE TABLE person (
 );
 ```
 
-Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation will return errors:
+Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation return errors:
 
 ```sql
 mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
@@ -64,7 +62,7 @@ ERROR 1048 (23000): Column 'city' cannot be null
 
 ## Limitations
 
-The current limitations of JSON and generated column are as follows:
+The current limitations of JSON and generated columns are as follows:
 
 - You cannot add the generated column in the storage type of `STORED` through `ALTER TABLE`.
 - You cannot create an index on the generated column through `ALTER TABLE`. 
