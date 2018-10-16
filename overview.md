@@ -24,7 +24,7 @@ TiDB (The pronunciation is: /'taɪdiːbi:/ tai-D-B, etymology: titanium) is an o
 
     TiDB is designed to work in the cloud -- public, private, or hybrid -- making deployment, provisioning, and maintenance drop-dead simple.
 
-- __No more ETL__
+- __Minimize ETL__
 
     ETL (Extract, Transform and Load) is no longer necessary with TiDB's hybrid OLTP/OLAP architecture, enabling you to create new values for your users, easier and faster.
 
@@ -39,15 +39,3 @@ Read the following three articles to understand TiDB techniques:
 - [Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/)
 - [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/)
 - [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)
-
-## Roadmap
-
-Read the [Roadmap](https://github.com/pingcap/docs/blob/master/ROADMAP.md).
-
-## Connect with us
-
-- **Twitter**: [@PingCAP](https://twitter.com/PingCAP)
-- **Reddit**: https://www.reddit.com/r/TiDB/
-- **Stack Overflow**: https://stackoverflow.com/questions/tagged/tidb
-- **Mailing list**: [Google Group](https://groups.google.com/forum/#!forum/tidb-user)
-

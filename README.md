@@ -5,7 +5,6 @@
 + About TiDB
   - [TiDB Introduction](overview.md)
   - [TiDB Architecture](architecture.md)
-  - [TiDB Key Features](features.md)
 + Quick Start
   - [TiDB Quick Start Guide](QUICKSTART.md)
   - [Basic SQL Statements](try-tidb.md)
@@ -17,12 +16,13 @@
     - [The TiDB Data Directory](sql/tidb-server.md#tidb-data-directory)
     - [The TiDB System Database](sql/system-database.md)
     - [The TiDB System Variables](sql/variable.md)
-    - [The Proprietary System Variables and Syntax in TiDB](sql/tidb-specific.md)
+    - [The TiDB Specific System Variables](sql/tidb-specific.md)
     - [The TiDB Server Logs](sql/tidb-server.md#tidb-server-logs)
     - [The TiDB Access Privilege System](sql/privilege.md)
     - [TiDB User Account Management](sql/user-account-management.md)
     - [Use Encrypted Connections](sql/encrypted-connections.md)
-  + SQL Optimization
+  + SQL Optimization and Execution
+    - [SQL Optimization Process](sql/sql-optimizer-overview.md)
     - [Understand the Query Execution Plan](sql/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](sql/statistics.md)
   + Language Structure
@@ -114,6 +114,7 @@
   - [Troubleshoot](trouble-shooting.md)
 + TiDB Enterprise Tools
   - [Syncer](tools/syncer.md)
+  - [mydumper](tools/mydumper.md)
   - [Loader](tools/loader.md)
   - [TiDB-Binlog](tools/tidb-binlog-kafka.md)
   - [PD Control](tools/pd-control.md)
@@ -187,7 +188,7 @@ TiDB (The pronunciation is: /'taɪdiːbi:/ tai-D-B, etymology: titanium) is an o
 
     TiDB is designed to work in the cloud -- public, private, or hybrid -- making deployment, provisioning, and maintenance drop-dead simple.
 
-- __No more ETL__
+- __Minimize ETL__
 
     ETL (Extract, Transform and Load) is no longer necessary with TiDB's hybrid OLTP/OLAP architecture, enabling you to create new values for your users, easier and faster.
 

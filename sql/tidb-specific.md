@@ -1,12 +1,12 @@
 ---
-title: The Proprietary System Variables and Syntaxes in TiDB
-summary: Use the proprietary system variables and syntaxes in TiDB to optimize performance.
+title: TiDB Specific System Variables
+summary: Use system variables specific to TiDB to optimize performance.
 category: user guide
 ---
 
-# The Proprietary System Variables and Syntaxes in TiDB
+# TiDB Specific System Variables
 
-On the basis of MySQL variables and syntaxes, TiDB has defined some specific system variables and syntaxes to optimize performance.
+TiDB contains a number of system variables which are specific to its usage, and **do not** apply to MySQL. These variables start with a `tidb_` prefix, and can be tuned to optimize system performance.
 
 ## System variable
 
@@ -281,6 +281,13 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: `PRIORITY_LOW`
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
+
+### tidb_force_priority
+
+- Scope: SESSION
+- Default value: `NO_PRIORITY`
+- This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
+- You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
 
 ## Optimizer Hint
 
