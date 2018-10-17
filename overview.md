@@ -10,27 +10,27 @@ TiDB (The pronunciation is: /'taɪdiːbi:/ tai-D-B, etymology: titanium) is an o
 
 - __Horizontal scalability__
 
-    TiDB provides horizontal scalability simply by adding new nodes. Never worry about infrastructure capacity ever again.
+    TiDB scales horizontally by simply adding new nodes and there's no sharding required.
 
 - __MySQL compatibility__
 
-    Easily replace MySQL with TiDB to power your applications without changing a single line of code [in most cases](https://www.pingcap.com/docs/sql/mysql-compatibility/) and still benefit from the MySQL ecosystem.
+    Use TiDB without changing a single line of MySQL application code in most cases and still benefit from the MySQL ecosystem.
 
-- __Distributed transaction__
+- __Distributed transactions__
 
-    TiDB is your source of truth, guaranteeing ACID compliance, so your data is accurate and reliable anytime, anywhere.
+    TiDB guarantees ACID compliance.
 
 - __Cloud Native__
 
     TiDB is designed to work in the cloud -- public, private, or hybrid -- making deployment, provisioning, and maintenance drop-dead simple.
 
-- __Minimal ETL__
+- __Minimizes ETL__
 
-    ETL (Extract, Transform and Load) is no longer necessary with TiDB's hybrid OLTP/OLAP architecture, enabling you to create new values for your users, easier and faster.
+    TiDB's hybrid OLTP/OLAP architecture means you can start performing analytical workloads without creating an ETL (Extract, Transform and Load) process.
 
 - __High availability__
 
-    With TiDB, your data and applications are always on and continuously available, so your users are never disappointed.
+    TiDB is designed for fault tolerance by using a layered architecture and the Raft protocol.
 
 TiDB is designed to support both OLTP and OLAP scenarios. For complex OLAP scenarios, use [TiSpark](tispark/tispark-user-guide.md).
 
