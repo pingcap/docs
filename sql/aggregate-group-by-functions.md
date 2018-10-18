@@ -1,9 +1,12 @@
 ---
 title: Aggregate (GROUP BY) Functions
+summary: Learn about the supported aggregate functions in TiDB.
 category: user guide
 ---
 
 # Aggregate (GROUP BY) Functions
+
+This document describes details about the supported aggregate functions in TiDB.
 
 ## Aggregate (GROUP BY) function descriptions
 
@@ -39,7 +42,7 @@ insert into t values(1, 2, 3), (2, 2, 3), (3, 2, 3);
 select a, b, sum(c) from t group by a;
 ```
 
-The preceding query is legal in TiDB. TiDB does not support SQL mode `ONLY_FULL_GROUP_BY` currently. We'll do it in the future. For more inmormation, see [#4248](https://github.com/pingcap/tidb/issues/4248).
+The preceding query is legal in TiDB. TiDB does not support SQL mode `ONLY_FULL_GROUP_BY` currently. We'll do it in the future. For more information, see [#4248](https://github.com/pingcap/tidb/issues/4248).
 
 Suppose that we execute the following query, expecting the results to be ordered by "c":
 ```sql
@@ -52,12 +55,14 @@ select distinct a, b from t order by c;
 To order the result, duplicates must be eliminated first. But to do so, which row should we keep? This choice influences the retained value of "c", which in turn influences ordering and makes it arbitrary as well.
 
 In MySQL, a query that has `DISTINCT` and `ORDER BY` is rejected as invalid if any `ORDER BY` expression does not satisfy at least one of these conditions:
+
 - The expression is equal to one in the `SELECT` list
 - All columns referenced by the expression and belonging to the query's selected tables are elements of the `SELECT` list
 
 But in TiDB, the above query is legal, for more information see [#4254](https://github.com/pingcap/tidb/issues/4254).
 
 Another TiDB extension to standard SQL permits references in the `HAVING` clause to aliased expressions in the `SELECT` list. For example, the following query returns "name" values that occur only once in table "orders":
+
 ```sql
 select name, count(name) from orders
 group by name
@@ -65,6 +70,7 @@ having count(name) = 1;
 ```
 
 The TiDB extension permits the use of an alias in the `HAVING` clause for the aggregated column:
+
 ```sql
 select name, count(name) as c from orders
 group by name
@@ -72,6 +78,7 @@ having c = 1;
 ```
 
 Standard SQL permits only column expressions in `GROUP BY` clauses, so a statement such as this is invalid because "FLOOR(value/100)" is a noncolumn expression:
+
 ```sql
 select id, floor(value/100)
 from tbl_name
@@ -81,6 +88,7 @@ group by id, floor(value/100);
 TiDB extends standard SQL to permit noncolumn expressions in `GROUP BY` clauses and considers the preceding statement valid.
 
 Standard SQL also does not permit aliases in `GROUP BY` clauses. TiDB extends standard SQL to permit aliases, so another way to write the query is as follows:
+
 ```sql
 select id, floor(value/100) as val
 from tbl_name

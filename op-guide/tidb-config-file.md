@@ -1,5 +1,6 @@
 ---
 title: TiDB Configuration File Description
+summary: Learn the TiDB configuration file options that are not involved in command line options.
 category: deployment
 ---
 
@@ -7,7 +8,7 @@ category: deployment
 
 The TiDB configuration file supports more options than command line options. You can find the default configuration file in [config/config.toml.example](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`.
 
-This document describes the options that are not involved in command line options. For command line options, see [here](configuration.md).
+This document describes the options that are not involved in command line options. For command line options, see [here](../op-guide/configuration.md).
 
 ### `split-table`
 
@@ -31,6 +32,7 @@ This document describes the options that are not involved in command line option
 - To configure the value of the `lower_case_table_names` system variable
 - Default: 2
 - For details, you can see the [MySQL description](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names) of this variable
+- Currently, TiDB only supports setting the value of this option to 2. This means it is case-sensitive when you save a table name, but case-insensitive when you compare table names. The comparison is based on the lower case.
 
 ## Log
 
@@ -47,6 +49,12 @@ Configuration about log.
 - Whether to disable outputting timestamp in the log
 - Default: false
 - If you set the value to true, the log does not output timestamp
+
+### `slow-query-file`
+
+- The file name of the slow query log
+- Default: ""
+- After you set it, the slow query log is output to this file separately
 
 ### `slow-threshold`
 
@@ -174,27 +182,6 @@ Configuration about performance.
 - Default: 0
 - TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics
 
-## Plan Cache
-
-Configuration about Plan Cache.
-
-### `enabled`
-
-- To enable Plan Cache
-- Default: false
-- Enabling Plan Cache saves the query optimization overhead of the same SQL statement
-
-### `capacity`
-
-- The number of cached statements
-- Default: 2560
-
-### `shards`
-
-- The number of plan-cache buckets
-- Default: 256
-- A larger number indicates a smaller particle size of the lock
-
 ## prepared-plan-cache
 
 The Plan Cache configuration of the `prepare` statement.
@@ -221,3 +208,17 @@ The Plan Cache configuration of the `prepare` statement.
 - The maximum timeout time when executing a transaction commit
 - Default: 41s
 - It is required to set this value larger than twice of the Raft election timeout time
+
+### txn-local-latches
+
+Configuration about the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
+
+### `enable`
+
+- To enable
+- Default: false
+
+### `capacity`
+
+- The number of slots corresponding to Hash, which automatically adjusts upward to an exponential multiple of 2. Each slot occupies 32 Bytes of memory. If set too small, it might result in slower running speed and poor performance in the scenario where data writing covers a relatively large range (such as importing data).
+- Default: 1024000

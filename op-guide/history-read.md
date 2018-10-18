@@ -1,5 +1,6 @@
 ---
 title: Reading Data from History Versions
+summary: Learn about how TiDB reads data from history versions.
 category: advanced
 ---
 
@@ -9,7 +10,8 @@ This document describes how TiDB reads data from the history versions, how TiDB 
 
 ## Feature description
 
-TiDB implements a feature to read history data using the standard SQL interface directly without special clients or drivers. By using this feature, 
+TiDB implements a feature to read history data using the standard SQL interface directly without special clients or drivers. By using this feature:
+
 - Even when data is updated or removed, its history versions can be read using the SQL interface.
 - Even if the table structure changes after the data is updated, TiDB can use the old structure to read the history data.
 
@@ -20,7 +22,7 @@ The `tidb_snapshot` system variable is introduced to support reading history dat
 - The variable is valid in the `Session` scope.
 - Its value can be modified using the `Set` statement. 
 - The data type for the variable is text. 
-- The variable is to record time in the following format: “2016-10-08 16:45:26.999”. Generally, the time can be set to seconds like in “2016-10-08 16:45:26”. 
+- The variable accepts TSO (Timestamp Oracle) and datetime. TSO is a globally unique time service, which is obtained from PD. The acceptable datetime format is "2016-10-08 16:45:26.999". Generally, the datetime can be set using second precision, for example "2016-10-08 16:45:26".
 - When the variable is set, TiDB creates a Snapshot using its value as the timestamp, just for the data structure and there is no any overhead. After that, all the `Select` operations will read data from this Snapshot.
 
 > **Note:** Because the timestamp in TiDB transactions is allocated by Placement Driver (PD), the version of the stored data is also marked based on the timestamp allocated by PD. When a Snapshot is created, the version number is based on the value of the `tidb_snapshot` variable. If there is a large difference between the local time of the TiDB server and the PD server, use the time of the PD server.
@@ -29,39 +31,14 @@ After reading data from history versions, you can read data from the latest vers
 
 ## How TiDB manages the data versions
 
-TiDB implements Multi-Version Concurrency Control (MVCC) to manage data versions. The history versions of data are kept because each update / removal creates a new version of the data object instead of updating / removing the data object in-place. But not all the versions are kept. If the versions are older than a specific time, they will be removed completely to reduce the storage occupancy and the performance overhead caused by too many history versions.
+TiDB implements Multi-Version Concurrency Control (MVCC) to manage data versions. The history versions of data are kept because each update/removal creates a new version of the data object instead of updating/removing the data object in-place. But not all the versions are kept. If the versions are older than a specific time, they will be removed completely to reduce the storage occupancy and the performance overhead caused by too many history versions.
 
-In TiDB, Garbage Collection (GC) runs periodically to remove the obsolete data versions. GC is triggered in the following way: There is a `gc_worker` goroutine running in the background of each TiDB server. In a cluster with multiple TiDB servers, one of the `gc_worker` goroutines will be automatically selected to be the leader. The leader is responsible for maintaining the GC state and sends GC commands to each TiKV region leader.
+In TiDB, Garbage Collection (GC) runs periodically to remove the obsolete data versions. For GC details, see [TiDB Garbage Collection (GC)](../op-guide/gc.md)
 
-The running record of GC is recorded in the system table of `mysql.tidb` as follows and can be monitored and configured using the SQL statements：
+Pay special attention to the following two variables:
 
-```
-mysql> select variable_name, variable_value from mysql.tidb;
-+-----------------------+----------------------------+
-| variable_name         | variable_value             |
-+-----------------------+----------------------------+
-| bootstrapped          | True                       |
-| tikv_gc_leader_uuid   | 55daa0dfc9c0006            |
-| tikv_gc_leader_desc   | host:pingcap-pc5 pid:10549 |
-| tikv_gc_leader_lease  | 20160927-13:18:28 +0800 CST|
-| tikv_gc_run_interval  | 10m0s                      |
-| tikv_gc_life_time     | 10m0s                      |
-| tikv_gc_last_run_time | 20160927-13:13:28 +0800 CST|
-| tikv_gc_safe_point    | 20160927-13:03:28 +0800 CST|
-+-----------------------+----------------------------+
-7 rows in set (0.00 sec)
-```
-
-Pay special attention to the following two rows:
-
-- `tikv_gc_life_time`: This row is to configure the retention time of the history version and its default value is 10m. You can use SQL statements to configure it. For example, if you want all the data within one day to be readable, set this row to 24h by using the `update mysql.tidb set variable_value='24h' where variable_name='tikv_gc_life_time'` statement. The format is: "24h", "2h30m", "2.5h". The unit of time can be: "h", "m", "s".
-
-> **Note:** If your data is updated very frequently, the following issues might occur if the value of the `tikv_gc_life_time` is set to be too large like in days or months:
-> 
->  - The more versions of the data, the more disk storage is occupied.
->  - A large amount of the history versions might slow down the query, especially the range queries like `select count(*) from t`.
->  - If the value of the `tikv_gc_life_time` variable is suddenly changed to be smaller while the database is running, it might lead to the removal of large amounts of history data and cause huge I/O burden.
->  - `tikv_gc_safe_point`: This row records the current safePoint. You can safely create the Snapshot to read the history data using the timestamp that is later than the safePoint. The safePoint automatically updates every time GC runs.
+- `tikv_gc_life_time`: It is used to configure the retention time of the history version. You can modify it manually.
+- `tikv_gc_safe_point`: It records the current `safePoint`. You can safely create the snapshot to read the history data using the timestamp that is later than `safePoint`. `safePoint` automatically updates every time GC runs.
 
 ## Example
 
@@ -130,6 +107,9 @@ Pay special attention to the following two rows:
     mysql> set @@tidb_snapshot="2016-10-08 16:45:26";
     Query OK, 0 rows affected (0.00 sec)
     ```
+
+    > **Note:** You should use `@@` instead of `@` before `tidb_snapshot` because `@@` is used to denote the system variable while `@` is used to denote the user variable.
+
     **Result:** The read from the following statement is the data before the update operation, which is the history data.
 
     ```sql
@@ -162,3 +142,5 @@ Pay special attention to the following two rows:
     +------+
     3 rows in set (0.00 sec)
     ```
+
+    > **Note:** You should use `@@` instead of `@` before `tidb_snapshot` because `@@` is used to denote the system variable while `@` is used to denote the user variable.

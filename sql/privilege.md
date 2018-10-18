@@ -1,11 +1,10 @@
 ---
 title: Privilege Management
+summary: Learn how to manage the privilege.
 category: user guide
 ---
 
 # Privilege Management
-
-## Privilege management overview
 
 TiDB's privilege management system is implemented according to the privilege management system in MySQL. It supports most of the syntaxes and privilege types in MySQL. If you find any inconsistency with MySQL, feel free to [open an issue](https://github.com/pingcap/docs-cn/issues/new).
 
@@ -57,6 +56,7 @@ The `DROP USER` statement removes one or more MySQL accounts and their privilege
 ```sql
 drop user 'test'@'%';
 ```
+
 **Required Privilege:** To use `DROP USER`, you must have the global `CREATE USER` privilege.
 
 #### Reset the root password
@@ -97,7 +97,7 @@ grant all privileges on *.* to 'xxx'@'%';
 
 If the granted user does not exist, TiDB will automatically create a user.
 
-```
+```sql
 mysql> select * from mysql.user where user='xxxx';
 Empty set (0.00 sec)
 
@@ -117,7 +117,7 @@ In this example, `xxxx@%` is the user that is automatically created.
 
 > **Note:** Granting privileges to a database or table does not check if the database or table exists.
 
-```
+```sql
 mysql> select * from test.xxxx;
 ERROR 1146 (42S02): Table 'test.xxxx' doesn't exist
 
@@ -135,7 +135,7 @@ mysql> select user,host from mysql.tables_priv where user='xxxx';
 
 You can use fuzzy matching to grant privileges to databases and tables.
 
-```
+```sql
 mysql> grant all privileges on `te%`.* to genius;
 Query OK, 0 rows affected (0.00 sec)
 
@@ -162,7 +162,7 @@ revoke all privileges on `test`.* from 'genius'@'localhost';
 
 > **Note:** To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed:
 
-    ```
+    ```sql
     mysql> revoke all privileges on `te%`.* from 'genius'@'%';
     ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
     ```
@@ -208,19 +208,19 @@ To be more precise, you can check the privilege information in the `Grant` table
 1. Check if `test@%` has global `Insert` privilege:
 
     ```sql
-    select Insert from mysql.user where user='test' and host='%';
+    select Insert_priv from mysql.user where user='test' and host='%';
     ```
 
 2. If not, check if `test@%` has database-level `Insert` privilege at `db1`:
 
     ```sql
-    select Insert from mysql.db where user='test' and host='%';
+    select Insert_priv from mysql.db where user='test' and host='%';
     ```
 
 3. If the result is still empty, check whether `test@%` has table-level `Insert` privilege at `db1.t`:
 
     ```sql
-    select tables_priv from mysql.tables_priv where user='test' and host='%' and db='db1';
+    select table_priv from mysql.tables_priv where user='test' and host='%' and db='db1';
     ```
 
 ### Implementation of the privilege system
@@ -254,7 +254,7 @@ In theory, all privilege-related operations can be done directly by the CRUD ope
 
 On the implementation level, only a layer of syntactic sugar is added. For example, you can use the following command to remove a user:
 
-```
+```sql
 delete from mysql.user where user='test';
 ```
 
@@ -317,7 +317,7 @@ auth_spec: {
 }
 ```
 
-For more information about the user account, see [TiDB user account management](user-account-management.md).
+For more information about the user account, see [TiDB user account management](../sql/user-account-management.md).
 
 - IDENTIFIED BY `auth_string`
 

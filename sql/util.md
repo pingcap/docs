@@ -1,9 +1,12 @@
 ---
 title: Utility Statements
+summary: Learn how to use the utility statements, including the `DESCRIBE`, `EXPLAIN`, and `USE` statements.
 category: user guide
 ---
 
 # Utility Statements
+
+This document describes the utility statements, including the `DESCRIBE`, `EXPLAIN`, and `USE` statements.
 
 ## `DESCRIBE` statement
 
@@ -34,7 +37,7 @@ explainable_stmt: {
 }
 ```
 
-For more information about the `EXPLAIN` statement, see [Understand the Query Execution Plan](understanding-the-query-execution-plan.md).
+For more information about the `EXPLAIN` statement, see [Understand the Query Execution Plan](../sql/understanding-the-query-execution-plan.md).
 
 In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
 

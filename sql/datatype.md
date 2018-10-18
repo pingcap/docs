@@ -1,11 +1,10 @@
 ---
 title: TiDB Data Type
+summary: Learn about the data types supported in TiDB.
 category: user guide
 ---
 
 # TiDB Data Type
-
-## Overview
 
 TiDB supports all the data types in MySQL except the Spatial type, including numeric type, string type, date & time type, and JSON type.
 
@@ -59,13 +58,13 @@ INTEGER[(M)] [UNSIGNED] [ZEROFILL]
 
 BIGINT[(M)] [UNSIGNED] [ZEROFILL]
 > BIGINT. The signed range is: [-9223372036854775808, 9223372036854775807], and the unsigned range is [0, 18446744073709551615].
-
 ```
+
 The meaning of the fields:
 
 | Syntax Element | Description |
 | -------- | ------------------------------- |
-| M | the length of the type. Optional. |
+| M | the display width of the type. Optional. |
 | UNSIGNED | UNSIGNED. If omitted, it is SIGNED. |
 | ZEROFILL | If you specify ZEROFILL for a numeric column, TiDB automatically adds the UNSIGNED attribute to the column. |
 
@@ -101,7 +100,6 @@ DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL
 
 FLOAT(p) [UNSIGNED] [ZEROFILL]
 > A floating-point number. p represents the precision in bits, but TiDB uses this value only to determine whether to use FLOAT or DOUBLE for the resulting data type. If p is from 0 to 24, the data type becomes FLOAT with no M or D values. If p is from 25 to 53, the data type becomes DOUBLE with no M or D values. The range of the resulting column is the same as for the single-precision FLOAT or double-precision DOUBLE data types described earlier in this section.
-
 ```
 
 The meaning of the fields:
@@ -176,8 +174,8 @@ TIME[(fsp)]
 > A time. The range is '-838:59:59.000000' to '838:59:59.000000'. TiDB displays TIME values in 'HH:MM:SS[.fraction]' format.
 An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
 
-YEAR[(2|4)]
-> A year in two-digit or four-digit format. The default is the four-digit format. In four-digit format, values display as 1901 to 2155, and 0000. In two-digit format, values display as 70 to 69, representing years from 1970 to 2069.
+YEAR[(4)]
+> A year in four-digit format. Values display as 1901 to 2155, and 0000.
 
 ```
 
@@ -255,7 +253,7 @@ INSERT INTO city VALUES (1, '{"name": "Beijing", "population": 100}');
 SELECT id FROM city WHERE population >= 100;
 ```
 
-For more information, see [JSON Functions and Generated Column](json-functions-generated-column.md).
+For more information, see [JSON Functions and Generated Column](../sql/json-functions-generated-column.md).
 
 ## The ENUM data type
 
@@ -309,7 +307,7 @@ In TiDB, the values of the SET type is internally converted to Int64. The existe
 
 In this case, for an element of `('a', 'c')`, it is 0101 in binary.
 
-For more information, see [the SET type in MySQL](https://dev.mysql.com/doc/refman/5.7/en/set.html)。
+For more information, see [the SET type in MySQL](https://dev.mysql.com/doc/refman/5.7/en/set.html).
 
 ## Data type default values
 

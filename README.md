@@ -3,9 +3,12 @@
 ## Documentation List
 
 + About TiDB
-  - [TiDB Introduction](overview.md#tidb-introduction)
-  - [TiDB Architecture](overview.md#tidb-architecture)
-- [TiDB Quick Start Guide](QUICKSTART.md)
+  - [TiDB Introduction](overview.md)
+  - [TiDB Architecture](architecture.md)
++ Quick Start
+  - [TiDB Quick Start Guide](QUICKSTART.md)
+  - [Basic SQL Statements](try-tidb.md)
+  - [Bikeshare Example Database](bikeshare-example-database.md)
 + TiDB User Guide
   + TiDB Server Administration
     - [The TiDB Server](sql/tidb-server.md)
@@ -13,12 +16,13 @@
     - [The TiDB Data Directory](sql/tidb-server.md#tidb-data-directory)
     - [The TiDB System Database](sql/system-database.md)
     - [The TiDB System Variables](sql/variable.md)
-    - [The Proprietary System Variables and Syntax in TiDB](sql/tidb-specific.md)
+    - [The TiDB Specific System Variables](sql/tidb-specific.md)
     - [The TiDB Server Logs](sql/tidb-server.md#tidb-server-logs)
     - [The TiDB Access Privilege System](sql/privilege.md)
     - [TiDB User Account Management](sql/user-account-management.md)
     - [Use Encrypted Connections](sql/encrypted-connections.md)
-  + SQL Optimization
+  + SQL Optimization and Execution
+    - [SQL Optimization Process](sql/sql-optimizer-overview.md)
     - [Understand the Query Execution Plan](sql/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](sql/statistics.md)
   + Language Structure
@@ -31,7 +35,7 @@
   + Globalization
     - [Character Set Support](sql/character-set-support.md)
     - [Character Set Configuration](sql/character-set-configuration.md)
-    - [Time Zone](sql/time-zone.md)
+    - [Time Zone Support](sql/time-zone.md)
   + Data Types
     - [Numeric Types](sql/datatype.md#numeric-types)
     - [Date and Time Types](sql/datatype.md#date-and-time-types)
@@ -64,14 +68,16 @@
     - [Prepared SQL Statement Syntax](sql/prepare.md)
     - [Utility Statements](sql/util.md)
     - [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/)
-  - [JSON Functions and Generated Column](sql/json-functions-generated-column.md)
+  - [Generated Columns](sql/generated-columns.md)
   - [Connectors and APIs](sql/connection-and-APIs.md)
   - [TiDB Transaction Isolation Levels](sql/transaction-isolation.md)
   - [Error Codes and Troubleshooting](sql/error.md)
   - [Compatibility with MySQL](sql/mysql-compatibility.md)
   - [TiDB Memory Control](sql/tidb-memory-control.md)
+  - [Slow Query Log](sql/slow-query.md)
   + Advanced Usage
     - [Read Data From History Versions](op-guide/history-read.md)
+    - [Garbage Collection (GC)](op-guide/gc.md)
 + TiDB Operations Guide
   - [Hardware and Software Requirements](op-guide/recommendation.md)
   + Deploy
@@ -80,9 +86,11 @@
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Docker Compose Deployment](op-guide/docker-compose.md)
     - [Cross-Region Deployment](op-guide/location-awareness.md)
+    - [Kubernetes Deployment](op-guide/kubernetes.md)
   + Configure
     - [Configuration Flags](op-guide/configuration.md)
     - [Configuration File Description](op-guide/tidb-config-file.md)
+    - [Modify Component Configuration Using Ansible](op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
     - [Enable TLS Authentication](op-guide/security.md)
     - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
   + Monitor
@@ -91,8 +99,10 @@
     - [Monitor a TiDB Cluster](op-guide/monitor.md)
   + Scale
     - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
-    - [Use Ansible to Scale](QUICKSTART.md#scale-the-tidb-cluster)
-  - [Upgrade](op-guide/ansible-deployment.md#perform-rolling-update)
+    - [Scale Using Ansible](op-guide/ansible-deployment-scale.md)
+  + Upgrade
+    - [Upgrade the Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
+    - [TiDB 2.0 Upgrade Guide](op-guide/tidb-v2-upgrade-guide.md)
   - [Tune Performance](op-guide/tune-tikv.md)
   + Backup and Migrate
     - [Backup and Restore](op-guide/backup-restore.md)
@@ -100,19 +110,37 @@
       - [Migration Overview](op-guide/migration-overview.md)
       - [Migrate All the Data](op-guide/migration.md#use-the-mydumper--loader-tool-to-export-and-import-all-the-data)
       - [Migrate the Data Incrementally](op-guide/migration.md#use-the-syncer-tool-to-import-data-incrementally-optional)
-  - [Deploy TiDB Using the Binary](op-guide/binary-deployment.md)
+  - [TiDB-Ansible Common Operations](op-guide/ansible-operation.md)
   - [Troubleshoot](trouble-shooting.md)
-+ TiDB Utilities
-  - [Syncer User Guide](tools/syncer.md)
-  - [Loader User Guide](tools/loader.md)
-  - [TiDB-Binlog User Guide](tools/tidb-binlog-kafka.md)
-  - [PD Control User Guide](tools/pd-control.md)
-+ The TiDB Connector for Spark
++ TiDB Enterprise Tools
+  - [Syncer](tools/syncer.md)
+  - [mydumper](tools/mydumper.md)
+  - [Loader](tools/loader.md)
+  - [TiDB-Binlog](tools/tidb-binlog-kafka.md)
+  - [PD Control](tools/pd-control.md)
+  - [PD Recover](tools/pd-recover.md)
+  - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
+  - [TiDB Controller](tools/tidb-controller.md)
++ [TiKV Documentation](https://github.com/tikv/tikv/wiki)
++ TiSpark Documentation
   - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
   - [User Guide](tispark/tispark-user-guide.md)
 - [Frequently Asked Questions (FAQ)](FAQ.md)
-- [TiDB Best Practices](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
+- [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
 + [Releases](releases/rn.md)
+  - [2.0.8](releases/208.md)
+  - [2.1 RC3](releases/21rc3.md)
+  - [2.1 RC2](releases/21rc2.md)
+  - [2.0.7](releases/207.md)
+  - [2.1 RC1](releases/21rc1.md)
+  - [2.0.6](releases/206.md)
+  - [2.0.5](releases/205.md)
+  - [2.1 Beta](releases/21beta.md)
+  - [2.0.4](releases/204.md)
+  - [2.0.3](releases/203.md)
+  - [2.0.2](releases/202.md)
+  - [2.0.1](releases/201.md)
+  - [2.0](releases/2.0ga.md)
   - [2.0 RC5](releases/2rc5.md)
   - [2.0 RC4](releases/2rc4.md)
   - [2.0 RC3](releases/2rc3.md)
@@ -143,7 +171,7 @@
 
 ## TiDB Introduction
 
-TiDB (The pronunciation is: /'taɪdiːbi:/ tai-D-B, etymology: titanium) is an open source distributed scalable Hybrid Transactional and Analytical Processing (HTAP) database built by PingCAP. Inspired by the design of Google F1 and Google Spanner, TiDB features infinite horizontal scalability, strong consistency, and high availability. The goal of TiDB is to serve as a one-stop solution for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing).
+TiDB (The pronunciation is: /'taɪdiːbi:/ tai-D-B, etymology: titanium) is an open-source distributed scalable Hybrid Transactional and Analytical Processing (HTAP) database. It features infinite horizontal scalability, strong consistency, and high availability. TiDB is MySQL compatible and serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.
 
 - __Horizontal scalability__
 
@@ -161,7 +189,7 @@ TiDB (The pronunciation is: /'taɪdiːbi:/ tai-D-B, etymology: titanium) is an o
 
     TiDB is designed to work in the cloud -- public, private, or hybrid -- making deployment, provisioning, and maintenance drop-dead simple.
 
-- __No more ETL__
+- __Minimize ETL__
 
     ETL (Extract, Transform and Load) is no longer necessary with TiDB's hybrid OLTP/OLAP architecture, enabling you to create new values for your users, easier and faster.
 

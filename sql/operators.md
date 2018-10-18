@@ -1,4 +1,12 @@
+---
+title: Operators
+summary: Learn about the operators precedence, comparison functions and operators, logical operators, and assignment operators.
+category: user guide
+---
+
 # Operators
+
+This document describes the operators precedence, comparison functions and operators, logical operators, and assignment operators.
 
 - [Operator precedence](#operator-precedence)
 - [Comparison functions and operators](#comparison-functions-and-operators)
@@ -54,7 +62,7 @@
 
 Operator precedences are shown in the following list, from highest precedence to the lowest. Operators that are shown together on a line have the same precedence.
 
-``` sql
+```sql
 INTERVAL
 BINARY, COLLATE
 !

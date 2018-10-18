@@ -1,5 +1,6 @@
 ---
 title: Syncer User Guide
+summary: Use Syncer to import data incrementally to TiDB.
 category: advanced
 ---
 
@@ -126,7 +127,7 @@ status-addr = "127.0.0.1:10086"
 # replicate-do-db = ["~^b.*","s1"]
 
 # Specify the db.table to be synchronized.
-# db-name and tbl-name do not support the `db-name ="dbname，dbname2"` format.
+# db-name and tbl-name do not support the `db-name ="dbname, dbname2"` format.
 # [[replicate-do-table]]
 # db-name ="dbname"
 # tbl-name = "table-name"
@@ -144,7 +145,7 @@ status-addr = "127.0.0.1:10086"
 # replicate-ignore-db = ["~^b.*","s1"]
 
 # Specify the database table you want to ignore in synchronization.
-# db-name and tbl-name do not support the `db-name ="dbname，dbname2"` format.
+# db-name and tbl-name do not support the `db-name ="dbname, dbname2"` format.
 # [[replicate-ignore-table]]
 # db-name = "your_db"
 # tbl-name = "your_table"
@@ -340,7 +341,7 @@ target-table = "order_2017"
 
     - Check the `server-id` using the following command:
 
-        ```
+        ```sql
         mysql> show global variables like 'server_id';
         +---------------+-------
         | Variable_name | Value |
@@ -357,7 +358,7 @@ target-table = "order_2017"
 
     - Check whether the binlog is enabled in MySQL using the following command:
         
-        ```
+        ```sql
         mysql> show global variables like 'log_bin';
         +--------------------+---------+
         | Variable_name | Value  |
@@ -373,7 +374,7 @@ target-table = "order_2017"
 
     - Check the binlog format using the following command:
 
-        ```
+        ```sql
         mysql> show global variables like 'binlog_format';
         +--------------------+----------+
         | Variable_name | Value   |
@@ -397,7 +398,7 @@ target-table = "order_2017"
 
     - Check `binlog_row_image` using the following command:
 
-        ```
+        ```sql
         mysql> show global variables like 'binlog_row_image';
         +--------------------------+---------+
         | Variable_name        | Value  |
@@ -409,7 +410,7 @@ target-table = "order_2017"
 
     - If the result of `binlog_row_image` is not FULL, set it to FULL using the following command:
     
-        ```
+        ```sql
         mysql> set global binlog_row_image = FULL;
         Query OK, 0 rows affected (0.01 sec)
         ```

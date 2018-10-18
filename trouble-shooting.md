@@ -1,5 +1,6 @@
 ---
 title: TiDB Cluster Troubleshooting Guide
+summary: Learn how to diagnose and resolve issues when you use TiDB.
 category: advanced
 ---
 
@@ -89,7 +90,8 @@ Before starting the process, make sure the result of `ulimit -n` is large enough
 
 ## Database access times out and the system load is too high
 
-Provide the following information:
+First, check the [SLOW-QUERY](sql/slow-query.md) log and see if it is because of some inappropriate SQL statement.
+If you failed to solve the problem, provide the following information:
 
 + The deployment topology
     - How many `tidb-server`/`pd-server`/`tikv-server` instances are deployed?

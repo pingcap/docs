@@ -1,5 +1,6 @@
 ---
 title: TiDB-Binlog user guide
+summary: Learn how to install, deploy and monitor TiDB-Binlog.
 category: tool
 ---
 
@@ -145,7 +146,7 @@ Usage of Pump:
 -log-rotate string
     log file rotate type, hour/day
 -metrics-addr string
-    Prometheus pushgataway address; leaving it empty will disable Prometheus push
+    Prometheus Pushgateway address; leaving it empty will disable Prometheus push
 -metrics-interval int
     Prometheus client push interval in second, set "0" to disable Prometheus push (default 15)
 -pd-urls string

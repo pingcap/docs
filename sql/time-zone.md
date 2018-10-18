@@ -1,24 +1,30 @@
 ---
-title: Time Zone
+title: Time Zone Support
+summary: Learn how to set the time zone and its format.
 category: user guide
 ---
 
-# Time Zone
+# Time Zone Support
 
-The time zone in TiDB is decided by the global `time_zone` system variable and the session `time_zone` system variable. The initial value for `time_zone` is 'SYSTEM', which indicates that the server time zone is the same as the system time zone. 
+The time zone in TiDB is decided by the global `time_zone` system variable and the session `time_zone` system variable. The default value of `time_zone` is `SYSTEM`. The actual time zone corresponding to `System` is configured when the TiDB cluster bootstrap is initialized. The detailed logic is as follows:
+
+- Prioritize the use of the `TZ` environment variable.
+- If the `TZ` environment variable fails, extract the time zone from the actual soft link address of `/etc/localtime`.
+- If both of the above methods fail, use `UTC` as the system time zone.
 
 You can use the following statement to set the global server `time_zone` value at runtime:
 
 ```sql
 mysql> SET GLOBAL time_zone = timezone;
 ```
+
 Each client has its own time zone setting, given by the session `time_zone` variable. Initially, the session variable takes its value from the global `time_zone` variable, but the client can change its own time zone with this statement:
 
 ```sql
 mysql> SET time_zone = timezone;
 ```
 
-You can use the following statment to view the current values of the global and client-specific time zones:
+You can use the following statement to view the current values of the global and client-specific time zones:
 
 ```sql
 mysql> SELECT @@global.time_zone, @@session.time_zone;

@@ -1,5 +1,6 @@
 ---
 title: Character Set Support
+summary: Learn about the supported character sets in TiDB.
 category: user guide
 ---
 
@@ -72,12 +73,12 @@ The collation names in TiDB follow these conventions:
     | Suffix | Meaning            |
     |:-------|:-------------------|
     | \_ai   | Accent insensitive |
-    | \_as   | Accent insensitive |
+    | \_as   | Accent sensitive   |
     | \_ci   | Case insensitive   |
     | \_cs   | Case sensitive     |
     | \_bin  | Binary             |
 
-> **Note**: For now, TiDB supports on some of the collations in the above table.
+> **Note**: Currently, TiDB only supports some of the collations in the above table.
 
 ## Database character set and collation
 

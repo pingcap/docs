@@ -1,5 +1,6 @@
 ---
 title: Tune TiKV Performance
+summary: Learn how to tune the TiKV parameters for optimal performance.
 category: tuning
 ---
 
@@ -70,14 +71,14 @@ log-level = "info"
 # endpoints = ["127.0.0.1:2379","127.0.0.2:2379","127.0.0.3:2379"]
 
 [metric]
-# The interval of pushing metrics to Prometheus pushgateway
+# The interval of pushing metrics to Prometheus Pushgateway
 interval = "15s"
-# Prometheus pushgateway adress
+# Prometheus Pushgateway address
 address = ""
 job = "tikv"
 
 [raftstore]
-# The default value is true，which means writing the data on the disk compulsorily. If it is not in a business scenario
+# The default value is true, which means writing the data on the disk compulsorily. If it is not in a business scenario
 # of the financial security level, it is recommended to set the value to false to achieve better performance.
 sync-log = true
 
@@ -88,15 +89,15 @@ sync-log = true
 region-max-size = "384MB"
 # The threshold value of Region split
 region-split-size = "256MB"
-# When the data size in a Region is larger than the threshold value, TiKV checks whether this Region needs split.
-# To reduce the costs of scanning data in the checking process，set the value to 32MB during checking and set it to
+# When the data size change in a Region is larger than the threshold value, TiKV checks whether this Region needs split.
+# To reduce the costs of scanning data in the checking process, set the value to 32MB during checking and set it to
 # the default value in normal operation. 
 region-split-check-diff = "32MB"
 
 [rocksdb]
 # The maximum number of threads of RocksDB background tasks. The background tasks include compaction and flush.
 # For detailed information why RocksDB needs to implement compaction, see RocksDB-related materials. When write
-# traffic (like the importing data size) is big，it is recommended to enable more threads. But set the number of the enabled 
+# traffic (like the importing data size) is big, it is recommended to enable more threads. But set the number of the enabled 
 # threads smaller than that of CPU cores. For example, when importing data, for a machine with a 32-core CPU, 
 # set the value to 28.
 # max-background-jobs = 8
@@ -235,11 +236,10 @@ min-write-buffer-number-to-merge = 1
 max-bytes-for-level-base = "512MB"
 target-file-size-base = "32MB"
 
-# Generally，you can set it from 256MB to 2GB. In most cases, you can use the default value. But if the system
+# Generally, you can set it from 256MB to 2GB. In most cases, you can use the default value. But if the system
 # resources are adequate, you can set it higher. 
 block-cache-size = "256MB"
 ```
-
 
 ## TiKV memory usage
 

@@ -1,5 +1,6 @@
 ---
 title: TiDB Transaction Isolation Levels
+summary: Learn about the transaction isolation levels in TiDB.
 category: user guide
 ---
 
@@ -16,25 +17,13 @@ The SQL-92 standard defines four levels of transaction isolation: Read Uncommitt
 | Repeatable Read  | Not possible | Not possible       | Not possible in  TiDB | Possible              |
 | Serializable     | Not possible | Not possible       | Not possible          | Not possible          |
 
-TiDB offers two transaction isolation levels: Read Committed and Repeatable Read.
+TiDB offers the Repeatable Read isolation level.
 
 TiDB uses the [Percolator transaction model](https://research.google.com/pubs/pub36726.html). A global read timestamp is obtained when the transaction is started, and a global commit timestamp is obtained when the transaction is committed. The execution order of transactions is confirmed based on the timestamps. To know more about the implementation of TiDB transaction model, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
 
-Use the following command to set the isolation level of the Session or Global transaction:
-
-```
-SET [SESSION | GLOBAL] TRANSACTION ISOLATION LEVEL [read committed|repeatable read]
-```
-
-If you do not use the Session or Global keyword, this statement takes effect only for the transaction to be executed next, but not for the entire session or global transaction.
-
-```
-SET TRANSACTION ISOLATION LEVEL [read committed|repeatable read]
-```
-
 ## Repeatable Read
 
-Repeatable Read is the default transaction isolation level in TiDB. The Repeatable Read isolation level only sees data committed before the transaction begins, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, the transaction statement does see the effects of previous updates executed within its own transaction, even though they are not yet committed.
+The Repeatable Read isolation level only sees data committed before the transaction begins, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, the transaction statement does see the effects of previous updates executed within its own transaction, even though they are not yet committed.
 
 For transactions running on different nodes, the start and commit order depends on the order that the timestamp is obtained from PD.
 
@@ -61,12 +50,6 @@ The Repeatable Read isolation level in TiDB differs from that in MySQL. The MySQ
 
 The MySQL Repeatable Read isolation level is not the snapshot isolation level. The consistency of MySQL Repeatable Read isolation level is weaker than both the snapshot isolation level and TiDB Repeatable Read isolation level.
 
-## Read Committed
-
-The Read Committed isolation level differs from Repeatable Read isolation level. Read Committed only guarantees the uncommitted data cannot be read.
-
-**Note:** Because the transaction commit is a dynamic process, the Read Committed isolation level might read the data committed by part of the transaction. It is not recommended to use the Read Committed isolation level in a database that requires strict consistency.
-
 ## Transaction retry
 
 For the `insert/delete/update` operation, if the transaction fails and can be retried according to the system, the transaction is automatically retried within the system.
@@ -79,6 +62,50 @@ You can control the number of retries by configuring the `retry-limit` parameter
 # The maximum number of retries when commit a transaction.
 retry-limit = 10
 ```
+
+## Description of optimistic transactions
+
+Because TiDB uses the optimistic transaction model, the final result might not be as expected if the transactions created by the explicit `BEGIN` statement automatically retry after meeting a conflict.
+
+Example 1:
+
+| Session1 | Session2 |
+| ---------------- | ------------ |
+| `begin;` | `begin;` |
+| `select balance from t where id = 1;` | `update t set balance = balance -100 where id = 1;` |
+|  | `update t set balance = balance -100 where id = 2;` |
+| // the subsequent logic depends on the result of `select` | `commit;` |
+| `if balance > 100 {` | |
+| `update t set balance = balance + 100 where id = 2;` | |
+| `}` | |
+| `commit;` // automatic retry | |
+
+Example 2:
+
+| Session1 | Session2   |
+| ---------------- | ------------ |
+| `begin;` | `begin;` |
+| `update t set balance = balance - 100  where id = 1;` | `delete t where id = 1;` |
+|  | `commit;` |
+| // the subsequent logic depends on the result of `affected_rows` | |
+| `if affected_rows > 100 {` | |
+| `update t set balance = balance + 100 where id = 2;` | |
+| `}` | |
+| `commit;` // automatic retry | |
+
+Under the automatic retry mechanism of TiDB, all the executed statements for the first time are re-executed again. When whether the subsequent statements are to be executed or not depends on the results of the previous statements, automatic retry cannot guarantee the final result is as expected.
+
+To disable the automatic retry of explicit transactions, configure the `tidb_disable_txn_auto_retry` global variable:
+
+```
+set @@global.tidb_disable_txn_auto_retry = 1;
+```
+
+This variable does not affect the implicit single statement with `auto_commit = 1`, so this type of statement still automatically retries.
+
+After the automatic retry of explicit transactions is disabled, if a transaction conflict occurs, the `commit` statement returns an error that includes the `try again later` string. The application layer uses this string to judge whether the error can be retried.
+
+If the application layer logic is included in the process of transaction execution, it is recommended to add the retry of explicit transactions at the application layer and disable automatic retry.
 
 ## Statement rollback
 

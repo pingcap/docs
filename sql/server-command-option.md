@@ -1,9 +1,12 @@
 ---
 title: The TiDB Command Options
+summary: Learn about TiDB command options and configuration files.
 category: user guide
 ---
 
 # The TiDB Command Options
+
+This document describes the startup options and TiDB server configuration files.
 
 ## TiDB startup options
 
@@ -153,6 +156,14 @@ Same as the "run-ddl" startup option
 
 - Default: true
 - When you execute `join` on tables without any conditions on both sides, the statement can be run by default. But if you set the value to `false`, the server does not run such `join` statement. 
+
+### force-priority
+
+- The default priority for statements
+- Default: `NO_PRIORITY`
+- TiDB supports the priorities `NO_PRIORITY` | `LOW_PRIORITY` | `DELAYED` | `HIGH_PRIORITY` for statements. One use case for changing the priority, is you may choose to dedicate a pool of servers for OLAP queries and set the value to `LOW_PRIORITY` to ensure that TiKV servers will provide priority to OLTP workloads which are routed to a different pool of TiDB servers. This helps ensure more uniform OLTP performance at the risk of slightly slower OLAP performance.
+  
+TiDB will automatically set table scans to `LOW_PRIORITY` and overwriting priority on a per-statement basis is possible by using the `HIGH PRIORITY` or `LOW PRIORITY` [DML modifier](dml.md).
 
 ### join-concurrency
 
