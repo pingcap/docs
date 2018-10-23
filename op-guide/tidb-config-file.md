@@ -36,9 +36,9 @@ This document describes the options that are not involved in command line option
 
 ### `compatible-kill-query`
 
-+ Set "kill" statement to be MySQL compatible
++ To set the "kill" statement to be MySQL compatible
 + Default: false
-+ In TiDB, the behavior of "kill xxx" is not compatible with MySQL. Only when you are executing "kill tidb xxx" will a query be killed. If `compatible-kill-query` is set to true, the "kill xxx" will be compatible with MySQL, so no additional "tidb" is need.
++ In TiDB, the behavior of "kill xxx" is not compatible with MySQL. A query is killed only when you are executing "kill tidb xxx". If `compatible-kill-query` is set to true, the "kill xxx" is compatible with MySQL, so no additional "tidb" is needed.
 
 ## Log
 
