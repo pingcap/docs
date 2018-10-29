@@ -291,9 +291,9 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 ## Optimizer Hint
 
-On the basis of MySQL’s `Optimizer Hint` Syntax, TiDB adds some proprietary `Hint` syntaxes. When using the `Hint` syntax, the TiDB optimizer will try to use the specific algorithm, which performs better than the default algorithm in some scenarios.
- 
-The `Hint` syntax is included in comments like `/*+ xxx */`, and in MySQL client versions earlier than 5.7.7, the comment is removed by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
+TiDB supports optimizer hints, based on the format of the new comment-like syntax introduced in MySQL 5.7. i.e. `/*+ TIDB_XX(t1, t2) */`.  Use of hints is recommended in cases where the TiDB optimize selects a less optimal query plan.
+
+**Note:** MySQL command-line clients earlier than 5.7.7 will strip optimizer hints by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
  
 ### TIDB_SMJ(t1, t2)
  
