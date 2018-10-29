@@ -289,9 +289,9 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
 
-## Optimizer Hint
+## Optimizer Hints
 
-TiDB supports optimizer hints, based on the format of the comment-like syntax introduced in MySQL 5.7. i.e. `/*+ TIDB_XX(t1, t2) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
+TiDB supports optimizer hints, based on the comment-like syntax introduced in MySQL 5.7. i.e. `/*+ TIDB_XX(t1, t2) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
 
 > **Note:** MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
  
