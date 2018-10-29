@@ -6,7 +6,7 @@ category: user guide
 
 # Privilege Management
 
-TiDB's privilege management system is implemented according to the privilege management system in MySQL. It supports most of the syntaxes and privilege types in MySQL. If you find any inconsistency with MySQL, feel free to [open an issue](https://github.com/pingcap/docs-cn/issues/new).
+TiDB's privilege management system is implemented according to the privilege management system in MySQL. It supports most of the syntaxes and privilege types in MySQL. If you find any inconsistency with MySQL, feel free to [open an issue](https://github.com/pingcap/tidb/issues/new/choose).
 
 ## Examples
 
@@ -197,10 +197,11 @@ Query OK, 0 rows affected (0.27 sec)
 
 #### Check privileges granted to user
 
-You can use the `show grant` statement to see what privileges are granted to a user.
+You can use the `show grants` statement to see what privileges are granted to a user.  For example:
 
 ```sql
-show grants for 'root'@'%';
+shows grants; // show grants for the current user
+show grants for 'root'@'%'; // show grants for a specific user
 ```
 
 To be more precise, you can check the privilege information in the `Grant` table. For example, you can use the following steps to check if the `test@%` user has the `Insert` privilege on `db1.t`:
@@ -232,7 +233,7 @@ The following system tables are special because all the privilege-related data i
 - mysql.user (user account, global privilege)
 - mysql.db (database-level privilege)
 - mysql.tables_priv (table-level privilege)
-- mysql.columns_priv (column-level privilege)
+- mysql.columns_priv (column-level privilege; not currently supported)
 
 These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
 
@@ -258,7 +259,11 @@ On the implementation level, only a layer of syntactic sugar is added. For examp
 delete from mysql.user where user='test';
 ```
 
-However, it’s not recommended to manually modify the grant table.
+However, the recommended usage is with the `DROP USER` command:
+
+```sql
+DROP USER 'test';
+```
 
 #### Connection verification
 
@@ -289,7 +294,7 @@ When TiDB starts, some privilege-check tables are loaded into memory, and then t
 If an immediate effect is needed when you modify the `grant` table, you can run the following command:
 
 ```sql
-flush privileges
+flush privileges;
 ```
 
 ### Limitations and constraints
@@ -304,7 +309,7 @@ Currently, the following privileges are not checked yet because they are less fr
 - INDEX
 - ...
 
-**Note:** The column-level privilege is not implemented at this stage.
+> **Note:** The column-level privilege is not implemented at this stage.
 
 ## `Create User` statement
 
