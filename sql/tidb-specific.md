@@ -291,7 +291,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 ## Optimizer Hint
 
-TiDB supports optimizer hints, based on the format of the new comment-like syntax introduced in MySQL 5.7. i.e. `/*+ TIDB_XX(t1, t2) */`. Use of hints is recommended in cases where the TiDB optimize selects a less optimal query plan.
+TiDB supports optimizer hints, based on the format of the comment-like syntax introduced in MySQL 5.7. i.e. `/*+ TIDB_XX(t1, t2) */`. Use of hints is recommended in cases where the TiDB optimize selects a less optimal query plan.
 
 **Note:** MySQL command-line clients earlier than 5.7.7 will strip optimizer hints by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
  
