@@ -197,7 +197,7 @@ Query OK, 0 rows affected (0.27 sec)
 
 #### Check privileges granted to user
 
-You can use the `show grants` statement to see what privileges are granted to a user.  For example:
+You can use the `show grants` statement to see what privileges are granted to a user. For example:
 
 ```sql
 shows grants; // show grants for the current user
