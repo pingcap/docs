@@ -420,7 +420,7 @@ Usage:
 
 ### `region key [--format=raw|encode] <key>`
 
-Use this command to query the region that a specific key resides in. It supports the raw and encoding formats. And it needs to use single quotes around the key when it is in the encoding format.
+Use this command to query the region that a specific key resides in. It supports the raw and encoding formats. And you need to use single quotes around the key when it is in the encoding format.
 
 Raw format usage (default):
 
