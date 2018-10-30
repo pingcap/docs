@@ -259,10 +259,10 @@ On the implementation level, only a layer of syntactic sugar is added. For examp
 delete from mysql.user where user='test';
 ```
 
-However, the recommended usage is with the `DROP USER` command:
+However, the recommended usage is with the `drop user` command:
 
 ```sql
-DROP USER 'test';
+drop user 'test';
 ```
 
 #### Connection verification
