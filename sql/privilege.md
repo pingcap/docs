@@ -91,7 +91,7 @@ GRANT SELECT ON test.* TO 'xxx'@'%';
 
 Use the following statement to grant the `xxx` user all privileges on all databases:
 
-```
+```sql
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
@@ -162,10 +162,10 @@ REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 
 > **Note:** To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed:
 
-    ```sql
-    mysql> REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
-    ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
-    ```
+```sql
+mysql> REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
+ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
+```
 
 About fuzzy matching, escape, string and identifier:
 
