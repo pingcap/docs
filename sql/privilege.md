@@ -200,8 +200,8 @@ Query OK, 0 rows affected (0.27 sec)
 You can use the `SHOW GRANTS` statement to see what privileges are granted to a user. For example:
 
 ```sql
-SHOW GRANTS; // show grants for the current user
-SHOW GRANTS FOR 'root'@'%'; // show grants for a specific user
+SHOW GRANTS; -- show grants for the current user
+SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
 To be more precise, you can check the privilege information in the `Grant` table. For example, you can use the following steps to check if the `test@%` user has the `Insert` privilege on `db1.t`:
