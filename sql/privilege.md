@@ -311,7 +311,7 @@ Currently, the following privileges are not checked yet because they are less fr
 
 > **Note:** The column-level privilege is not implemented at this stage.
 
-## `Create User` statement
+## `CREATE USER` statement
 
 ```sql
 CREATE USER [IF NOT EXISTS]
