@@ -45,7 +45,7 @@ The Kafka cluster stores the binlog data written by Pump and provides the binlog
 
 ```bash
 # Download the tool package.
-wget http://download.pingcap.org/tidb-binlog-kfaka-linux-amd64.tar.gz
+wget http://download.pingcap.org/tidb-binlog-kafka-linux-amd64.tar.gz
 wget http://download.pingcap.org/tidb-binlog-kafka-linux-amd64.sha256
 
 # Check the file integrity. If the result is OK, the file is correct.
