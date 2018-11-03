@@ -68,6 +68,32 @@ mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 0
 
 In the revisited `EXPLAIN` you can see the count of rows scanned has reduced via the use of an index. On a reference system, the query execution time reduced from 50.41 seconds to 0.00 seconds!
 
+## <span id="explain-analyze-output-format">`EXPLAIN ANALYZE` output format</span>
+
+As an extention to `EXPLAIN`, `EXPLAIN ANALYZE` will execute the query and provide additional execution statistics in the `operator_info` column is as follows:
+
+* `time` shows the total wall time from entering the executor until exiting the execution.  It includes all execution time of any child executor operations.  If the executor is called multiple times (`loops`) from a parent executor, the time will be the cumulative time.
+
+* `loops` is the number of times the executor was called from the parent executor.
+
+* `rows` is the total number of rows that were returned by this executor.  So for example, you can compare the accuracy of the `count` column to `rows`/`loops` in the `execution_info` column to asess how accurate the query optimizer's estimations are.
+
+### Example usage
+
+```sql
+mysql> EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
++--------------------------+-----------+------+------------------------------------------------------------------------------------------------------------------------+------------------------------------+
+| id                       | count     | task | operator info                                                                                                          | execution info                     |
++--------------------------+-----------+------+------------------------------------------------------------------------------------------------------------------------+------------------------------------+
+| StreamAgg_20             | 1.00      | root | funcs:count(col_0)                                                                                                     | time:1.675716755s, loops:2, rows:1 |
+| └─TableReader_21         | 1.00      | root | data:StreamAgg_9                                                                                                       | time:1.675679706s, loops:2, rows:2 |
+|   └─StreamAgg_9          | 1.00      | cop  | funcs:count(1)                                                                                                         |                                    |
+|     └─Selection_19       | 22066.30  | cop  | ge(bikeshare.trips.start_date, 2017-07-01 00:00:00.000000), le(bikeshare.trips.start_date, 2017-07-01 23:59:59.000000) |                                    |
+|       └─TableScan_18     | 882652.00 | cop  | table:trips, range:[-inf,+inf], keep order:false                                                                       |                                    |
++--------------------------+-----------+------+------------------------------------------------------------------------------------------------------------------------+------------------------------------+
+5 rows in set (1.68 sec)
+```
+
 ## Overview
 
 ### Introduction to task
