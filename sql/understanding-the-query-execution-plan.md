@@ -33,7 +33,7 @@ Currently, the `EXPLAIN` statement returns the following four columns: id, count
 
 Using the [bikeshare example database](../bikeshare-example-database.md):
 
-```
+```sql
 mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
 +--------------------------+-------------+------+------------------------------------------------------------------------------------------------------------------------+
 | id                       | count       | task | operator info                                                                                                          |
