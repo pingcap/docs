@@ -42,7 +42,7 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
 
 ### binlog_pump_write_binlog_rpc_duration_seconds_bucket
 
-- Description: It takes too much time for Pump to handle the request of TiDB writing data in Binlog
+- Description: It takes too much time for Pump to handle the TiDB request of writing binlog
 - Monitoring rule: histogram_quantile(0.9, rate(binlog_pump_rpc_duration_seconds_bucket{method="WriteBinlog"}[5m])) > 1
 - Solution: 
     
