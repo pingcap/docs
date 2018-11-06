@@ -6,13 +6,13 @@ category: tools
 
 # sync-diff-inspector User Guide
 
-[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to check whether the data in MySQL is consistent with that in TiDB. In addition, you can also use this tool to repair data in the scenario of a small number of data is inconsistent.
+[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to check whether the data in MySQL is consistent with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
 This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. You can download it at [sync-diff-inspector-linux-amd64.tar.gz](https://download.pingcap.org/sync-diff-inspector-linux-amd64.tar.gz).
 
 ## Key features
 
-- Compare the table structure and data
+- Compare the table schema and data
 - Generate the SQL statements used to repair data if the data inconsistency exists
 - Support comparing the data of multiple tables with the data of a single table (for the scenario of synchronizing data from sharded tables into the combined table)
 - Support comparing the data of different schemas or tables with different names
@@ -45,11 +45,11 @@ use-rowid = false
 # If disabled, data is compared line by line.
 use-checksum = true
 
-# If set true, data check is ignored. If set false, data is checked.
+# If set to true, data check is ignored. If set false, data is checked.
 ignore-data-check = false
 
-# If set true, the table struct comparison is ignored.
-# If set false, the table struct is compared.
+# If set to true, the table struct comparison is ignored.
+# If set to false, the table struct is compared.
 ignore-struct-check = false
 
 # The name of the file which saves the SQL statements used to repair data
@@ -102,7 +102,7 @@ is-sharding = false
 # These columns are neither checked nor used to divide chunks or sort data.
 # remove-columns = ["name"]
 
-# Configuration example of comparing two tables with different database name and table name.
+# Configuration example of comparing two tables with different database names and table names.
 [[table-config]]
 # The name of the target schema
 schema = "test"
