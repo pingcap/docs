@@ -33,7 +33,7 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
     
     - Check whether it is too slow to synchronize data in the downstream based on Drainer `event` and Drainer `execute latency`:
         
-        - If Drainer `execute time` is too large, check the network bandwidth and latency of the machine with Drainer deployed and the machine with the target database deployed, and the state of the target database
+        - If Drainer `execute time` is too large, check the network bandwidth and latency between the machine with Drainer deployed and the machine with the target database deployed, and the state of the target database
         - If Drainer `execute time` is not too large and Drainer `event` is too small, add `work count` and `batch` and retry
 
     - If the two solutions above cannot work, contact support@pingcap.com
