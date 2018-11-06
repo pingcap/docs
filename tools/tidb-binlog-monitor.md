@@ -15,7 +15,7 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
 
 ### binlog_pump_storage_error_count
 
-- Description: Pump fails to write and store the binlog data locally
+- Description: Pump fails to write the binlog data to the local storage
 - Monitoring rule: changes(binlog_pump_storage_error_count[1m]) > 0
 - Solution: Check whether an error exists in the `pump_storage_error` monitoring and check the Pump log to find the causes
 
