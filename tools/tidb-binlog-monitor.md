@@ -69,7 +69,7 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
 
 ### binlog_drainer_execute_duration_time_more_than_10s
 
-- Description: The transaction time it takes for Drainer to synchronize data to TiDB. If it is too large, the synchronization of Drainer is affected
+- Description: The transaction time it takes Drainer to synchronize data to TiDB. If it is too large, the Drainer synchronization of data is affected
 - Monitoring rule: histogram_quantile(0.9, rate(binlog_drainer_execute_duration_time_bucket[1m])) > 10
 - Solutions:
     
