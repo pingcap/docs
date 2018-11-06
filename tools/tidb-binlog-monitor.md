@@ -74,4 +74,4 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
 - Solutions:
     
     - Check the TiDB cluster state
-    - Check the Drainer log or monitor. If a DDL operation causes this problem, just ignore it
+    - Check the Drainer log or monitor. If a DDL operation causes this problem, you can ignore it
