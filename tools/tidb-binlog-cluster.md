@@ -177,7 +177,7 @@ This section shows two methods of deploying TiDB-Binlog:
         drainer_mysql ansible_host=172.16.10.71 initial_commit_ts="402899541671542785"
         ```
 
-    - Assume that the downstream is `pb` with its alias `drainer_pb`:
+    - Assume that the downstream is `pb` with the alias `drainer_pb`:
 
         ```
         [drainer_servers]
