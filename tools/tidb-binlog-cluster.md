@@ -160,7 +160,7 @@ This section shows two methods of deploying TiDB-Binlog:
 
     After this command is executed, a file named `{data-dir}/savepoint` is generated. This file contains `tso`, whose value is used as the value of the `initial-commit-ts` parameter needed for the initial start of Drainer.
 
-2. Backup and restore.
+2. Back up and restore all the data.
 
     If the downstream is MySQL/TiDB, you need to guarantee the data integrity, and make a full backup of the data and recover the data before Drainer starts (about 10 minutes after Pump starts to run).
 
