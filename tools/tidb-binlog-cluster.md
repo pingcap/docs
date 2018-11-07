@@ -491,7 +491,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         ./bin/drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
         ```
 
-        If the command line parameter and the configuration file parameter are the same, use the parameter value in the command line.
+        If the command line parameter and the configuration file parameter are the same, the parameter value in the command line is used.
 
 ## TiDB-Binlog operations
 
