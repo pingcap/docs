@@ -98,7 +98,7 @@ This section shows two methods of deploying TiDB-Binlog:
         enable_binlog = True
         ```
 
-    2. Add the deployment machine IDs for `pump_servers`.
+    2. Add the deployment machine IPs for `pump_servers`.
 
         ```
         ## Binlog Part
