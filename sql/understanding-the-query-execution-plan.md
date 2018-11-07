@@ -70,7 +70,7 @@ In the revisited `EXPLAIN` you can see the count of rows scanned has reduced via
 
 ## <span id="explain-analyze-output-format">`EXPLAIN ANALYZE` output format</span>
 
-As an extention to `EXPLAIN`, `EXPLAIN ANALYZE` will execute the query and provide additional execution statistics in the `operator_info` column is as follows:
+As an extension to `EXPLAIN`, `EXPLAIN ANALYZE` will execute the query and provide additional execution statistics in the `operator_info` column as follows:
 
 * `time` shows the total wall time from entering the executor until exiting the execution.  It includes all execution time of any child executor operations.  If the executor is called multiple times (`loops`) from a parent executor, the time will be the cumulative time.
 
