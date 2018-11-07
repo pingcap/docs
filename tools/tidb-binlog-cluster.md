@@ -162,7 +162,7 @@ This section shows two methods of deploying TiDB-Binlog:
 
 2. Back up and restore all the data.
 
-    If the downstream is MySQL/TiDB, you need to guarantee the data integrity, and make a full backup of the data and recover the data before Drainer starts (about 10 minutes after Pump starts to run).
+    If the downstream is MySQL/TiDB, to guarantee the data integrity, you need to make a full backup and restore of the data before Drainer starts (about 10 minutes after Pump starts to run).
 
     It is recommended to use mydumper to make a full backup of TiDB and then use Loader to export the data to the downstream. For more details, see [Backup and Restore](https://github.com/pingcap/docs/blob/master/op-guide/backup-restore.md).
 
