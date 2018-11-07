@@ -284,7 +284,7 @@ Pump="192.168.0.12"
 Drainer="192.168.0.13"
 ```
 
-For this example, the following shows how to use Pump/Drainer.
+The following part shows how to use Pump and Drainer based on the nodes above.
 
 1. Deploy Pump using the binary.
 
