@@ -1,12 +1,12 @@
 ---
 title: sync-diff-inspector User Guide
-summary: Use sync-diff-inspector to check data consistency and repair inconsistent data.
+summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 category: tools
 ---
 
 # sync-diff-inspector User Guide
 
-[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to check whether the data in MySQL is consistent with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
+[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to compare the data that is stored in databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
 This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. You can download it at [sync-diff-inspector-linux-amd64.tar.gz](https://download.pingcap.org/sync-diff-inspector-linux-amd64.tar.gz).
 
