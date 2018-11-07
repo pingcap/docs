@@ -51,7 +51,7 @@ The server hardware requirements for development, testing, and the production en
 ## Notes
 
 * When TiDB is running, you need to guarantee that at least one Pump is running normally.
-* Binlog is started by adding the `enable-binlog` startup parameter to TiDB.
+* To enable TiDB-Binlog, add the `enable-binlog` startup parameter to TiDB.
 * Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
 * If you want to start Drainer in the existing TiDB cluster, generally, you need to make a full backup of the cluster data, obtain `savepoint`, export the data to the target database, and start Drainer to synchronize the incremental data from `savepoint`.
 * Drainer supports synchronizing binlogs to MySQL, TiDB, Kafka or the local files. If you need to synchronize binlogs to other destinations, you can set Drainer to synchronize the binlog to Kafka and read the data in Kafka for customization processing. See [Binlog Slave Client User Guide](../tools/binlog-slave-client.md).
