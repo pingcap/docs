@@ -129,7 +129,7 @@ This section shows two methods of deploying TiDB-Binlog:
 
 2. Deploy and start the TiDB cluster.
 
-    For how to use Ansible to deploy the TiDB cluster, see [Deploy TiDB Using Ansible](../op-guide/ansible-deployment.md). When Binlog is started, Pump is deployed and started by default.
+    For how to use Ansible to deploy the TiDB cluster, see [Deploy TiDB Using Ansible](../op-guide/ansible-deployment.md). When Binlog is enabled, Pump is deployed and started by default.
 
 3. Check the Pump status.
 
