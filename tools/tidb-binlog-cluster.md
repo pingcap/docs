@@ -1,6 +1,7 @@
 ---
 title: TiDB-Binlog Cluster User Guide
-category: advanced
+summary: This document introduces TiDB-Binlog of the cluster version, including its architecture, deployment, operations and monitoring.
+category: tools
 ---
 
 # TiDB-Binlog Cluster User Guide
@@ -39,34 +40,32 @@ Drainer collects and merges binlogs from each Pump, converts the binlog to SQL o
 
 ## Hardware requirements
 
-Pump and Drainer can be deployed and run on common 64-bit hardware server platforms with the Intel x86-64 architecture. 
+Pump and Drainer can be deployed and run on the 64-bit general hardware server platform of the Intel x86-64 architecture. 
 
 The server hardware requirements for development, testing, and the production environment are as follows:
 
-| Application     | The Number of Servers       | CPU   | Disk          | Memory   |
+| Service     | The Number of Servers       | CPU   | Disk          | Memory   |
 | -------- | -------- | --------| --------------- | ------ |
 | Pump | 3 | 8 core+    | SSD, 200 GB+ | 16G |
-| Drainer | 1 | 8 core+ | SAS, 100 GB+ (If you need to output a local file, use SSD and increase the disk size) | 16G |
+| Drainer | 1 | 8 core+ | SAS, 100 GB+ (If a local file is output, use SSD and increase the disk size) | 16G |
 
 ## Notes
 
 * When TiDB is running, you need to guarantee that at least one Pump is running normally.
-* To enable TiDB-Binlog, add the `enable-binlog` startup parameter to TiDB.
+* Binlog is started by adding the `enable-binlog` startup parameter to TiDB.
 * Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
-* If you want to start Drainer in the existing TiDB cluster, generally, you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to synchronize the incremental data from `savepoint`.
+* If you want to start Drainer in the existing TiDB cluster, generally, you need to make a full backup of the cluster data, obtain `savepoint`, export the data to the target database, and start Drainer to synchronize the incremental data from `savepoint`.
 * Drainer supports synchronizing binlogs to MySQL, TiDB, Kafka or the local files. If you need to synchronize binlogs to other destinations, you can set Drainer to synchronize the binlog to Kafka and read the data in Kafka for customization processing. See [Binlog Slave Client User Guide](../tools/binlog-slave-client.md).
 * If TiDB-Binlog is used for recovering the incremental data, you can set the downstream to `pb` to synchronize the binlog data to the local file and then use [Reparo](../tools/reparo.md) to recover the incremental data.
-* Pump/Drainer has two states: `paused` and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `paused`. The paused Pump do not need to send all the binlog data to Drainer. If you need to exit from Pump for a long period of time (or do not use Pump any more), use `binlogctl` to make Pump offline. The same goes for Drainer.
+* Pump/Drainer has two states: `paused` and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `paused`. There is no need for paused Pump to send all the binlog data to Drainer. If you need to exit from Pump for long (or do not use Pump any more), you need to use `binlogctl` to turn Pump offline. The same goes for Drainer.
 
 ## TiDB-Binlog deployment
-This section shows two methods of deploying TiDB-Binlog:
-- [Deploy TiDB-Binlog using TiDB-Ansible](#deploy-tidb-binlog-using-tidb-ansible)
-- [Deploy TiDB-Binlog using Binary](#deploy-tidb-binlog-using-binary)
+
 ### Deploy TiDB-Binlog using TiDB-Ansible 
 
 #### Step 1: Download TiDB-Ansible
 
-1. Use the TiDB user account to log in to the central control machine and go to the `/home/tidb` directory. The information about the branch of TiDB-Ansible and the corresponding TiDB version is as follows. If you have questions regarding which version to use, email to [info@pingcap.com](mailto:info@pingcap.com) for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
+1. Use the TiDB user account to login to the central control machine and go to the `/home/tidb` directory. The information about the branch of TiDB-Ansible and the corresponding TiDB version is as follows. For which version to choose, you can contact info@pingcap.com。
 
     | TiDB-Ansible Branch | TiDB Version | Note |
     | ---------------- | --------- | --- |
@@ -98,7 +97,7 @@ This section shows two methods of deploying TiDB-Binlog:
         enable_binlog = True
         ```
 
-    2. Add the deployment machine IPs for `pump_servers`.
+    2. Add the deployment machine IDs for `pump_servers`.
 
         ```
         ## Binlog Part
@@ -108,7 +107,7 @@ This section shows two methods of deploying TiDB-Binlog:
         172.16.10.74
         ```
 
-        Pump retains the data of the latest 5 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file and remove the related comments. Take modifying the variable value to 7 as an example:
+        Pump retains the data of the latest 5 days by default. You can modify the value of the `gc` variable of the `tidb-ansible/conf/pump.yml` file and remove the related comments. Take modifying the variable value to 7 as an example:
 
         ```
         global:
@@ -129,11 +128,11 @@ This section shows two methods of deploying TiDB-Binlog:
 
 2. Deploy and start the TiDB cluster.
 
-    For how to use Ansible to deploy the TiDB cluster, see [Deploy TiDB Using Ansible](../op-guide/ansible-deployment.md). When Binlog is enabled, Pump is deployed and started by default.
+    For how to use Ansible to deploy the TiDB cluster, see [Deploy TiDB Using Ansible](../op-guide/ansible-deployment.md). When Binlog is started, Pump is deployed and started by default.
 
 3. Check the Pump status.
 
-    Use binlogctl to check the Pump status. Change the `pd-urls` parameter to the PD address of the cluster. If `State` is `online`, Pump is started successfully.
+    Use `binlogctl` to check the Pump status. Change the `pd-urls` parameter to the PD address of the cluster. If `State` is `online`, Pump is started successfully.
 
     ```
     $ cd /home/tidb/tidb-ansible
@@ -147,7 +146,7 @@ This section shows two methods of deploying TiDB-Binlog:
 
 1. Obtain `initial_commit_ts`. 
 
-    Run the following command to use binlogctl to generate the `tso` information which is needed for the initial start of Drainer:
+    Run the following command to use `binlogctl` to generate the `tso` information which is needed for the initial start of Drainer:
 
     ```
     $ cd /home/tidb/tidb-ansible
@@ -160,24 +159,24 @@ This section shows two methods of deploying TiDB-Binlog:
 
     After this command is executed, a file named `{data-dir}/savepoint` is generated. This file contains `tso`, whose value is used as the value of the `initial-commit-ts` parameter needed for the initial start of Drainer.
 
-2. Back up and restore all the data.
+2. Backup and restore.
 
-    If the downstream is MySQL/TiDB, to guarantee the data integrity, you need to make a full backup and restore of the data before Drainer starts (about 10 minutes after Pump starts to run).
+    If the downstream is MySQL/TiDB, you need to guarantee the data integrity, and make a full backup of the data and recover the data before Drainer starts (about 10 minutes after Pump starts to run).
 
-    It is recommended to use [mydumper](../tools/mydumper.md) to make a full backup of TiDB and then use [Loader](../tools/loader.md) to export the data to the downstream. For more details, see [Backup and Restore](../op-guide/backup-restore.md).
+    It is recommended to use mydumper to make a full backup of TiDB and then use Loader to export the data to the downstream. For more details, see [Backup and Restore](https://github.com/pingcap/docs/blob/master/op-guide/backup-restore.md).
 
 3. Modify the `tidb-ansible/inventory.ini` file.
 
-    Add the deployment machine IPs for `drainer_servers`. Set `initial_commit_ts` to the value you have obtained, which is only used for the initial start of Drainer.
+    Add the deployment machine IPs for `drainer_servers`. Set `initial_commit_ts` to the value you have obtained, which is used just for the initial start of Drainer.
 
-    - Assume that the downstream is MySQL with the alias `drainer_mysql`:
+    - Assume that the downstream is MySQL with its alias `drainer_mysql`:
 
         ```
         [drainer_servers]
         drainer_mysql ansible_host=172.16.10.71 initial_commit_ts="402899541671542785"
         ```
 
-    - Assume that the downstream is `pb` with the alias `drainer_pb`:
+    - Assume that the downstream is `pb` with its alias `drainer_pb`:
 
         ```
         [drainer_servers]
@@ -186,7 +185,7 @@ This section shows two methods of deploying TiDB-Binlog:
 
 4. Modify the configuration file.
 
-    1. Assume that the downstream is MySQL:
+    - Assume that the downstream is MySQL:
 
         ```
         $ cd /home/tidb/tidb-ansible/conf
@@ -214,7 +213,7 @@ This section shows two methods of deploying TiDB-Binlog:
         # size-limit = "100000"
         ```
 
-    2. Assume that the downstream is `pb`:
+    - Assume that the downstream is `pb`:
 
         ```
         $ cd /home/tidb/tidb-ansible/conf
@@ -244,7 +243,7 @@ This section shows two methods of deploying TiDB-Binlog:
     $ ansible-playbook deploy_drainer.yml
     ```
 
-6. Start Drainer.
+6. Starty Drainer.
 
     ```
     $ ansible-playbook start_drainer.yml
@@ -272,7 +271,7 @@ sha256sum -c tidb-binlog-cluster-latest-linux-amd64.sha256
 
 #### The usage example
 
-Assuming that you have three PD nodes, one TiDB node, two Pump nodes, and one Drainer node, the information of each node is as follows:
+Assume that there are three PDs, one TiDB, two machines used for deploying Pump, and one machine used for deploying Drainer. The information for each node is as follows:
 
 ```
 TiDB="192.168.0.10"
@@ -284,7 +283,7 @@ Pump="192.168.0.12"
 Drainer="192.168.0.13"
 ```
 
-The following part shows how to use Pump and Drainer based on the nodes above.
+For this example, the following shows how to use Pump/Drainer.
 
 1. Deploy Pump using the binary.
 
@@ -301,17 +300,17 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -advertise-addr string
             the RPC address through which Pump provides the external service (-advertise-addr="192.168.0.11:8250")
         -config string
-            the path of the configuration file. If you specify the configuration file, Pump reads the configuration in the configuration file first. If the corresponding configuration also exits in the command line parameters, Pump uses the configuration of the command line parameters to cover that of the configuration file.
+            the configuration file directory. If you have specified the configuration file, Pump reads the configuration file first. If the corresponding configuration exits in the command line parameters, Pump uses the configuration of the command line parameters to cover that of the configuration file.
         -data-dir string
-            the path where the Pump data is stored
+            the directory where the Pump data is stored
         -enable-tolerant
-            After `tolerant` is enabled, Pump (enabled by default) does not report an error if the binlog fails to write into Pump.
+            After `tolerant` is enabled, Pump (enabled by default) does not report an error if it fails to write in the binlog.
         -gc int
-            the days of data which Pump saves (7 by default)
+            the number of days to retain the data in Pump (7 by default)
         -heartbeat-interval int
             the interval of the heartbeats Pump sends to PD (in seconds)
         -log-file string
-            the file path of logs
+            log file directory
         -log-rotate string
             the switch frequency of logs (hour/day)
         -metrics-addr string
@@ -333,7 +332,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # the address through which Pump provides the service
         advertise-addr = “192.168.0.11:8250"
 
-        # the days of data which Pump saves (7 by default)
+        # the number of days to retain the data in Pump (7 by default)
         gc = 7
 
         # the directory where the Pump data is stored
@@ -491,7 +490,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         ./bin/drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
         ```
 
-        If the command line parameter and the configuration file parameter are the same, the parameter value in the command line is used.
+        If the command line parameter and the configuration file parameter are the same, use the parameter value in the command line.
 
 ## TiDB-Binlog operations
 
@@ -502,7 +501,7 @@ Pump/Drainer state description:
 * online: running normally
 * pausing: in the pausing process. It turns into this state after you use `kill` or press Ctrl + C to exit from the process
 * paused: has been stopped. When Pump is in this state, it denies the request of writing data into the binlog and does not provide the binlog for Drainer any more. When Drainer is in this state, it does not synchronize data to the downstream. After Pump/Drainer exits normally from all the threads, it switches its state to `paused` and then exits from the process
-* closing: in the offline process. Binlogctl is used to get Pump/Drainer offline and Pump/Drainer is in this state before the process exits. In this state, Pump does not accept the request of writing data into the binlog and waits for all the binlog data to be consumed by Drainer
+* closing: in the offline process. `binlogctl` is used to get Pump/Drainer offline and Pump/Drainer is in this state before the process exits. In this state, Pump does not accept the request of writing data into the binlog and waits for all the binlog data to be consumed by Drainer
 * offline: becomes offline. After Pump has sent all the binlog data which has been saved to Drainer, its state is switched to `offline`. Drainer's state can be switched to `offline` when all the threads have exited.
 
 > **Notes:**
@@ -512,27 +511,27 @@ Pump/Drainer state description:
   * The binlog data which Pump saves is processed by GC only when it is consumed by all the Drainers that are not `offline`.
   * Close Drainer only when it will not be used any more.
 
-For how to pause, close, and check and modify the state of Drainer, see the [binlogctl guide](#binlogctl-guide) as follows.
+For how to pause, close, and check and modify the state of Drainer, see the [`binlogctl` guide](#binlogctl-guide) as follows.
 
-### binlogctl guide
+### `binlogctl` guide
 
-[binlogctl](https://github.com/pingcap/tidb-tools/tree/develop/tidb-binlog/binlogctl) is an operations tool for TiDB-Binlog with the following features:
+[`binlogctl`](https://github.com/pingcap/tidb-tools/tree/develop/tidb-binlog/binlogctl) is an operations tool for TiDB-Binlog with the following features:
 
 * Obtains the current `ts`
 * Checks the Pump/Drainer state
 * Modifies the Pump/Drainer state
 * Pause/Close Pump/Drainer
 
-#### Usage scenarios of binlogctl
+#### Usage scenarios of `binlogctl`
 
 * The first time you run Drainer and need to obtain the current `ts`
 * When Pump/Drainer exits abnormally, its state is not updated and the service is affected
 * When a fault occurs in synchronization or you need to check the runtime, and you need to check the Pump/Drainer state
 * When you need to maintain the cluster and should pause/close Pump/Drainer
 
-#### Download binlogctl
+#### Download `binlogctl`
 
-Download binlogctl via:
+Download `binlogctl` via:
 
 ```bash
 wget https://download.pingcap.org/binlogctl-new-linux-amd64.tar.gz
@@ -542,7 +541,7 @@ wget https://download.pingcap.org/binlogctl-new-linux-amd64.sha256
 sha256sum -c tidb-binlog-new-linux-amd64.sha256
 ```
 
-#### How to use binlogctl 
+#### How to use `binlogctl` 
 
 Command line parameters:
 
@@ -594,7 +593,7 @@ Command example:
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-pump/pause-drainer/offline-pump/offline-drainer -node-id ip-127-0-0-1:8250/{nodeID}
     ```
 
-    binlogctl sends the HTTP request to Pump/Drainer, and Pump/Drainer exits from the process after receiving the command and sets its state to `paused`/`offline`.
+    `binlogctl` sends the HTTP request to Pump/Drainer, and Pump/Drainer exits from the process after receiving the command and sets its state to `paused`/`offline`.
 
 - Generate the meta file which is needed for the Drainer startup:
 
