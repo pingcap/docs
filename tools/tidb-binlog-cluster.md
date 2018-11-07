@@ -272,7 +272,7 @@ sha256sum -c tidb-binlog-cluster-latest-linux-amd64.sha256
 
 #### The usage example
 
-Assume that there are three PDs, one TiDB, two machines used for deploying Pump, and one machine used for deploying Drainer. The information for each node is as follows:
+Assuming that you have three PD nodes, one TiDB node, two Pump nodes, and one Drainer node, the information of each node is as follows:
 
 ```
 TiDB="192.168.0.10"
