@@ -303,7 +303,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -config string
             the path of the configuration file. If you specify the configuration file, Pump reads the configuration in the configuration file first. If the corresponding configuration also exits in the command line parameters, Pump uses the configuration of the command line parameters to cover that of the configuration file.
         -data-dir string
-            the directory where the Pump data is stored
+            the path where the Pump data is stored
         -enable-tolerant
             After `tolerant` is enabled, Pump (enabled by default) does not report an error if it fails to write in the binlog.
         -gc int
