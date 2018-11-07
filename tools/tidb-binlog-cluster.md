@@ -168,7 +168,7 @@ This section shows two methods of deploying TiDB-Binlog:
 
 3. Modify the `tidb-ansible/inventory.ini` file.
 
-    Add the deployment machine IPs for `drainer_servers`. Set `initial_commit_ts` to the value you have obtained, which is used just for the initial start of Drainer.
+    Add the deployment machine IPs for `drainer_servers`. Set `initial_commit_ts` to the value you have obtained, which is only used for the initial start of Drainer.
 
     - Assume that the downstream is MySQL with its alias `drainer_mysql`:
 
