@@ -301,7 +301,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -advertise-addr string
             the RPC address through which Pump provides the external service (-advertise-addr="192.168.0.11:8250")
         -config string
-            the configuration file directory. If you have specified the configuration file, Pump reads the configuration file first. If the corresponding configuration exits in the command line parameters, Pump uses the configuration of the command line parameters to cover that of the configuration file.
+            the path of the configuration file. If you specify the configuration file, Pump reads the configuration in the configuration file first. If the corresponding configuration also exits in the command line parameters, Pump uses the configuration of the command line parameters to cover that of the configuration file.
         -data-dir string
             the directory where the Pump data is stored
         -enable-tolerant
