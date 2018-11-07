@@ -46,7 +46,7 @@ The server hardware requirements for development, testing, and the production en
 | Application     | The Number of Servers       | CPU   | Disk          | Memory   |
 | -------- | -------- | --------| --------------- | ------ |
 | Pump | 3 | 8 core+    | SSD, 200 GB+ | 16G |
-| Drainer | 1 | 8 core+ | SAS, 100 GB+ (If a local file is output, use SSD and increase the disk size) | 16G |
+| Drainer | 1 | 8 core+ | SAS, 100 GB+ (If you need to output a local file, use SSD and increase the disk size) | 16G |
 
 ## Notes
 
