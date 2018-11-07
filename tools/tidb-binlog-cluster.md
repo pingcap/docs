@@ -305,7 +305,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -data-dir string
             the path where the Pump data is stored
         -enable-tolerant
-            After `tolerant` is enabled, Pump (enabled by default) does not report an error if it fails to write in the binlog.
+            After `tolerant` is enabled, Pump (enabled by default) does not report an error if the binlog fails to write into Pump.
         -gc int
             the days of data which Pump saves (7 by default)
         -heartbeat-interval int
