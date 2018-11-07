@@ -59,7 +59,9 @@ The server hardware requirements for development, testing, and the production en
 * Pump/Drainer has two states: `paused` and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `paused`. The paused Pump do not need to send all the binlog data to Drainer. If you need to exit from Pump for a long period of time (or do not use Pump any more), use `binlogctl` to make Pump offline. The same goes for Drainer.
 
 ## TiDB-Binlog deployment
-
+This section shows two methods of deploying TiDB-Binlog:
+- [Deploy TiDB-Binlog using TiDB-Ansible](#deploy-tidb-binlog-using-tidb-ansible)
+- [Deploy TiDB-Binlog using Binary](#deploy-tidb-binlog-using-binary)
 ### Deploy TiDB-Binlog using TiDB-Ansible 
 
 #### Step 1: Download TiDB-Ansible
