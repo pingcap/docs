@@ -14,7 +14,7 @@ You can set the service parameters using the command line or the configuration f
 
 ## TiDB system variable
 
-TiDB is compatible with MySQL system variables, and defines some unique system variables to adjust the database behavior. For more information, see [The Proprietary System Variables and Syntaxes in TiDB](../sql/tidb-specific.md).
+TiDB is compatible with MySQL system variables, and defines some unique system variables to adjust the database behavior. For more information, see [TiDB Specific System Variables](../sql/tidb-specific.md).
 
 ## TiDB system table
 
@@ -30,6 +30,6 @@ When you use the TiKV storage engine, the data is stored on the TiKV node and th
 
 ## TiDB server logs
 
-The three components of the TiDB cluster (`tidb-server`, ` tikv-server` and `pd-server`) outputs the logs to standard errors by default. In each of the three components, you can set the [`--log-file`](../op-guide/configuration.md#--log-file) parameter (or the configuration item in the configuration file) and output the log into a file.
+The three components of the TiDB cluster (`tidb-server`, ` tikv-server` and `pd-server`) outputs the logs to standard errors by default. In each of the three components, you can set the `--log-file` [startup parameter](../op-guide/configuration.md) (or the configuration item in the configuration file) and output the log into a file.
 
 You can adjust the log behavior using the configuration file. For more details, see the configuration file description of each component. For example, the [`tidb-server` log configuration item](https://github.com/pingcap/tidb/blob/master/config/config.toml.example#L46).

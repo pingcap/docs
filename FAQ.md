@@ -271,14 +271,14 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
 
 - Random Read test:
 
-    ```
-    ./fio -ioengine=libaio -bs=32k -direct=1 -thread -rw=randread  -size=10G -filename=fio_randread_test.txt -name='PingCAP' -iodepth=4 -runtime=60
+    ```bash
+    ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randread -size=10G -filename=fio_randread_test.txt -name='fio randread test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_result.json
     ```
 
 - The mix test of sequential Write and random Read:
 
-    ```
-    ./fio -ioengine=libaio -bs=32k -direct=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randr_write_test.txt -name='PingCAP' -iodepth=4 -runtime=60
+    ```bash
+    ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
 #### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: " ` when deploying TiDB using TiDB-Ansible
@@ -505,13 +505,13 @@ Possible reasons:
 
 #### Can I use S3 as the backend storage engine in TiDB?
 
-No. Currently, TiDB only supports the distributed storage engine and the Goleveldb/Rocksdb/Boltdb engine.
+No. Currently, TiDB only supports the distributed storage engine and the Goleveldb/RocksDB/BoltDB engine.
 
-#### Can the `Infomation_schema` support more real information?
+#### Can the `Information_schema` support more real information?
 
-The tables in `Infomation_schema` exist mainly for compatibility with MySQL, and some third-party software queries information in the tables. Currently, most of those tables are null. More parameter information is to be involved in the tables as TiDB updates later.
+The tables in `Information_schema` exist mainly for compatibility with MySQL, and some third-party software queries information in the tables. Currently, most of those tables are null. More parameter information is to be involved in the tables as TiDB updates later.
 
-For the `Infomation_schema` that TiDB currently supports, see [The TiDB System Database](sql/system-database.md).
+For the `Information_schema` that TiDB currently supports, see [The TiDB System Database](sql/system-database.md).
 
 #### What's the explanation of the TiDB Backoff type scenario?
 
@@ -581,7 +581,7 @@ If you previously deploy a PD cluster, but then you remove the PD data and deplo
 
 This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. This error occurs when there is no data folder under the directory that TiKV `--store` specifies, but you use the previous parameter to restart the TiKV.
 
-To solve this problem, use the [store delete](https://github.com/pingcap/pd/tree/master/pdctl#store-delete-) function to delete the previous store and then restart TiKV.
+To solve this problem, use the [`store delete`](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string) function to delete the previous store and then restart TiKV.
 
 #### TiKV master and slave use the same compression algorithm, why the results are different?
 
@@ -794,7 +794,7 @@ Two solutions:
 
 ##### Syncer user guide
 
-See [Syncer User Guide](docs/tools/syncer.md).
+See [Syncer User Guide](tools/syncer.md).
 
 ##### How to configure to monitor Syncer status?
 
@@ -911,7 +911,7 @@ Recommendations:
 1. Improve the hardware configuration. See [Software and Hardware Requirements](op-guide/recommendation.md).
 2. Improve the concurrency. The default value is 10. You can improve it to 50 and have a try. But usually the improvement is 2-4 times of the default value.
 3. Test the `count` in the case of large amount of data.
-4. Optimize the TiKV configuration. See [Performance Tuning for TiKV](op-guide/tune-TiKV.md).
+4. Optimize the TiKV configuration. See [Performance Tuning for TiKV](op-guide/tune-tikv.md).
 
 #### How to view the progress of adding an index?
 

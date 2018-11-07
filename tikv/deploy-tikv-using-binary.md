@@ -8,8 +8,9 @@ category: user guide
 
 This guide describes how to deploy a TiKV cluster using binary files.
 
-- To quickly understand and try TiKV, see [Deploy the TiKV cluster on a single machine](#deploy-the-tikv-cluster-on-a-single-machine).
-- To try TiKV out and explore the features, see [Deploy the TiKV cluster on multiple nodes for testing](#deploy-the-tikv-cluster-on-multiple-nodes-for-testing).
+- [Install and Deploy TiKV Using Binary Files](#install-and-deploy-tikv-using-binary-files)
+  - [Deploy the TiKV cluster on a single machine](#deploy-the-tikv-cluster-on-a-single-machine)
+  - [Deploy the TiKV cluster on multiple nodes for testing](#deploy-the-tikv-cluster-on-multiple-nodes-for-testing)
 
 ## Deploy the TiKV cluster on a single machine
 
@@ -62,7 +63,7 @@ This section describes how to deploy TiKV on a single machine installed with the
                     --log-file=tikv3.log
     ```
 
-You can use the [pd-ctl](https://github.com/pingcap/pd/tree/master/pdctl) tool to verify whether PD and TiKV are successfully deployed:
+You can use the [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl) tool to verify whether PD and TiKV are successfully deployed:
 
 ```
 ./bin/pd-ctl store -d -u http://127.0.0.1:2379
@@ -140,7 +141,7 @@ To deploy a TiKV cluster with multiple nodes for test, take the following steps:
                     --log-file=tikv3.log
     ```
 
-You can use the [pd-ctl](https://github.com/pingcap/pd/tree/master/pdctl) tool to verify whether PD and TiKV are successfully deployed:
+You can use the [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl) tool to verify whether PD and TiKV are successfully deployed:
 
 ```
 ./pd-ctl store -d -u http://192.168.199.113:2379
