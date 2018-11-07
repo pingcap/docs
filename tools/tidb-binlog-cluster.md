@@ -311,7 +311,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -heartbeat-interval int
             the interval of the heartbeats Pump sends to PD (in seconds)
         -log-file string
-            log file directory
+            the file path of logs
         -log-rotate string
             the switch frequency of logs (hour/day)
         -metrics-addr string
