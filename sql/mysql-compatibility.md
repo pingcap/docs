@@ -109,7 +109,7 @@ Due to the distributed, 2-phase commit requirement of TiDB, large transactions t
 
 ### Small transactions
 
-Since each transaction in TiDB requires two round trips to the PD leader, small transactions may have higher latencies in TiDB than in MySQL. As a hypothetical example, the following query could be improved by moving from `auto_commit` to using a small transaction:
+Since each transaction in TiDB requires two round trips to the PD leader, small transactions may have higher latencies in TiDB than MySQL. As a hypothetical example, the following query could be improved by moving from `auto_commit` to using a small transaction:
 
 ```sql
 # original version with auto_commit
