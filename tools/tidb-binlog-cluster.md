@@ -108,7 +108,7 @@ This section shows two methods of deploying TiDB-Binlog:
         172.16.10.74
         ```
 
-        Pump retains the data of the latest 5 days by default. You can modify the value of the `gc` variable of the `tidb-ansible/conf/pump.yml` file and remove the related comments. Take modifying the variable value to 7 as an example:
+        Pump retains the data of the latest 5 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file and remove the related comments. Take modifying the variable value to 7 as an example:
 
         ```
         global:
