@@ -244,7 +244,7 @@ This section shows two methods of deploying TiDB-Binlog:
     $ ansible-playbook deploy_drainer.yml
     ```
 
-6. Starty Drainer.
+6. Start Drainer.
 
     ```
     $ ansible-playbook start_drainer.yml
