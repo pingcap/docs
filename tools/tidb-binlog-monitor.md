@@ -1,6 +1,6 @@
 ---
 title: TiDB-Binlog Monitoring Metrics
-summary: This document introduces three levels of monitoring metrics of TiDB-Binlog.
+summary: Learn about three levels of monitoring metrics of TiDB-Binlog.
 category: tools
 ---
 
