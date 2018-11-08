@@ -29,7 +29,7 @@ Pump is used to record the binlogs generated in TiDB, sort the binlogs based on 
 
 ### Drainer
 
-Drainer collects and merges binlogs from each Pump, converts the binlog to SQL or data of a specific format, and synchronizes the data to the downstream.
+Drainer collects and combines binlogs from each Pump, converts the binlog to SQL or data of a specific format, and synchronizes the data to the downstream.
 
 ## Main features
 
