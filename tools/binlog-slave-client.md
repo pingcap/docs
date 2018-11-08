@@ -1,5 +1,6 @@
 ---
 title: Binlog Slave Client User Guide
+summary: Learn how to use Binlog Slave Client.
 category: tools
 ---
 
@@ -140,8 +141,6 @@ Currently, two examples are provided:
 
 * Using Driver to synchronize data to MySQL. This example shows how to convert a binlog to SQL
 * Using Driver to print data
-
-The Driver address: [Binlog Slave Driver](https://github.com/pingcap/tidb-tools/tree/master/tidb_binlog/driver)。
 
 > **Notes:**
 >
