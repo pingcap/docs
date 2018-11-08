@@ -16,7 +16,7 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
 
 ### binlog_pump_storage_error_count
 
-- Description: Pump fails to write and store the binlog data locally
+- Description: Pump fails to write the binlog data to the local storage
 - Monitoring rule: `changes(binlog_pump_storage_error_count[1m])` > 0
 - Solution: Check whether an error exists in the `pump_storage_error` monitoring and check the Pump log to find the causes
 
@@ -34,7 +34,7 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
     
     - Check whether it is too slow to synchronize data in the downstream based on Drainer `event` and Drainer `execute latency`:
         
-        - If Drainer `execute time` is too large, check the network bandwidth and latency of the machine with Drainer deployed and the machine with the target database deployed, and the state of the target database
+        - If Drainer `execute time` is too large, check the network bandwidth and latency between the machine with Drainer deployed and the machine with the target database deployed, and the state of the target database
         - If Drainer `execute time` is not too large and Drainer `event` is too small, add `work count` and `batch` and retry
 
     - If the two solutions above cannot work, contact [support@pingcap.com](mailto:support@pingcap.com)
@@ -43,7 +43,7 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
 
 ### binlog_pump_write_binlog_rpc_duration_seconds_bucket
 
-- Description: It takes too much time for Pump to handle the request of TiDB writing data in Binlog
+- Description: It takes too much time for Pump to handle the TiDB request of writing binlog
 - Monitoring rule: `histogram_quantile(0.9, rate(binlog_pump_rpc_duration_seconds_bucket{method="WriteBinlog"}[5m]))` > 1
 - Solution: 
     
@@ -70,7 +70,7 @@ Currently, the monitoring metrics of TiDB-Binlog has three levels:
 
 ### binlog_drainer_execute_duration_time_more_than_10s
 
-- Description: The transaction time it takes for Drainer to synchronize data to TiDB. If it is too large, the synchronization of Drainer is affected
+- Description: The transaction time it takes Drainer to synchronize data to TiDB. If it is too large, the Drainer synchronization of data is affected
 - Monitoring rule: `histogram_quantile(0.9, rate(binlog_drainer_execute_duration_time_bucket[1m]))` > 10
 - Solutions:
     
