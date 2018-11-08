@@ -1,6 +1,6 @@
 ---
 title: TiDB-Binlog Cluster User Guide
-summary: This document introduces TiDB-Binlog of the cluster version, including its architecture, deployment, operations and monitoring.
+summary: Learn how to deploy, operate, and monitor the cluster version of TiDB-Binlog.
 category: tools
 ---
 
@@ -510,7 +510,7 @@ Pump/Drainer state description:
 * `offline`: becomes offline. After Pump sents all the binlog data that it saves to Drainer, its state is switched to `offline`. Drainer's state can be switched to `offline` after all the threads have exited.
 
 > **Notes:**
-
+>
 > * When Pump/Drainer is `pausing` or `paused`, the data synchronization is interrupted.
 > * When Pump is `closing`, you need to guarantee that all the data has been consumed by all the Drainers that are not `offline`. So before making Pump offline, you need to guarantee all the Drainers are `online`; otherwise, Pump cannot get offline normally.
 > * The binlog data that Pump saves is processed by GC only when it has been consumed by all the Drainers that are not `offline`.
@@ -617,4 +617,4 @@ Command example:
 
 After you have deployed TiDB-Binlog using Ansible successfully, you can go to the Grafana Web (default address: <http://grafana_ip:3000>, default account: admin, password: admin) to check the state of Pump and Drainer.
 
-For TiDB-Binlog monitoring metrics, see [TiDB-Binlog Monitoring Metrics](../tools/tidb-binlog-monitor.md)
+For TiDB-Binlog monitoring metrics, see [TiDB-Binlog Monitoring Metrics](../tools/tidb-binlog-monitor.md).
