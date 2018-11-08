@@ -29,14 +29,14 @@ Pump is used to record the binlogs generated in TiDB, sort the binlogs based on 
 
 ### Drainer
 
-Drainer collects and combines binlogs from each Pump, converts the binlog to SQL or data of a specific format, and synchronizes the data to the downstream.
+Drainer collects and merges binlogs from each Pump, converts the binlog to SQL or data of a specific format, and synchronizes the data to the downstream.
 
 ## Main features
 
 * Multiple Pumps form a cluster which can scale out horizontally.
 * TiDB uses the built-in Pump Client to send the binlog to each Pump.
 * Pump stores binlogs and sends the binlogs to Drainer in order.
-* Drainer reads binlogs of each Pump, merges and reorders the binlogs, and sends the binlogs to the downstream.
+* Drainer reads binlogs of each Pump, merges and sorts the binlogs, and sends the binlogs to the downstream.
 
 ## Hardware requirements
 
