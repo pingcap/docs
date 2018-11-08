@@ -136,7 +136,7 @@ You need to configure the following information when using Driver:
 
 You can use Driver by quoting the Driver code in package and refer to the example code provided by Driver to learn how to use Driver and parse the binlog data. 
 
-Currently, there are two examples:
+Currently, two examples are provided:
 
 * Using Driver to synchronize data to MySQL. This example shows how to convert a binlog to SQL
 * Using Driver to print data
@@ -146,4 +146,4 @@ The Driver address: [Binlog Slave Driver](https://github.com/pingcap/tidb-tools/
 > **Notes:**
 >
 > - The example code only shows how to use Driver. If you want to use Driver in the production environment, you need to optimize the code.
-> - Currently, only Driver for golang and the example code are supported. If you want to use other languages, you need to generate the code file in the corresponding language based on the binlog proto file and develop an application to read the binlog data in Kafka, parse the data, and output the data to the downstream. You are also welcome to optimize the example code and submit the example code of other languages to [TiDB-Tools](https://github.com/pingcap/tidb-tools).
+> - Currently, only the Golang version of Driver and example code are available. If you want to use other languages, you need to generate the code file in the corresponding language based on the binlog proto file and develop an application to read the binlog data in Kafka, parse the data, and output the data to the downstream. You are also welcome to optimize the example code and submit the example code of other languages to [TiDB-Tools](https://github.com/pingcap/tidb-tools).
