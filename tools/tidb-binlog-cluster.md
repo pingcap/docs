@@ -25,7 +25,7 @@ The TiDB-Binlog cluster is composed of Pump and Drainer.
 
 ### Pump
 
-Pump is used to record the binlogs generated in TiDB, reorder the binlogs based on the commit time of the transaction, and send binlogs to Drainer for consumption.
+Pump is used to record the binlogs generated in TiDB, sort the binlogs based on the commit time of the transaction, and send binlogs to Drainer for consumption.
 
 ### Drainer
 
@@ -65,6 +65,8 @@ This section shows two methods of deploying TiDB-Binlog:
 
 - [Deploy TiDB-Binlog using TiDB-Ansible](#deploy-tidb-binlog-using-tidb-ansible)
 - [Deploy TiDB-Binlog using Binary](#deploy-tidb-binlog-using-binary)
+
+It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to do a simple testing, you can deploy TiDB-Binlog using Binary.
 
 ### Deploy TiDB-Binlog using TiDB-Ansible 
 
