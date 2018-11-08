@@ -5,7 +5,7 @@ category: tools
 
 # Binlog Slave Client User Guide
 
-Binlog Slave Client is used to parse the binlog data and output the data in a specific format to Kafka. This feature is introduced because currently, Drainer supports outputting data in a format including MySQL, TiDB, TheFlash, and pb, which does not meet users' requirement for outputting data to, for example, Elasticsearch and Hive. After data is output to Kafka, the user writes code to read data from Kafka and then processes the data.
+Binlog Slave Client is used to parse the binlog data and output the data in a specific format to Kafka. Currently, Drainer supports outputting data in multiple formats including MySQL, TiDB, TheFlash, and pb. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced. After data is output to Kafka, the user writes code to read data from Kafka and then processes the data.
 
 ## Configure Drainer
 
