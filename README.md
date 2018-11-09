@@ -10,9 +10,9 @@
     - [TiDB Quick Start Guide](QUICKSTART.md)
     - [Basic SQL Statements](try-tidb.md)
     - [Bikeshare Example Database](bikeshare-example-database.md)
+  + Deploy
     - [Hardware and Software Requirements](op-guide/recommendation.md)
     - [Upgrading from Previous Releases](op-guide/tidb-v2-upgrade-guide.md)
-  + Deploy
     + [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
       - [Offline Deployment](op-guide/offline-ansible-deployment.md)
       - [Modify Component Configuration Using Ansible](op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
