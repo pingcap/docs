@@ -49,7 +49,7 @@ Usage of Reparo:
 ### Description of the configuration file
 
 ```
-# The storage directory for the binlog file in the protobuf format which Drainer outputs
+# The storage directory for the binlog file in the protobuf format that Drainer outputs
 data-dir = "./data.drainer"
 
 # Uses the index file to locate `ts`. Set this parameter if `start-ts` is set. The file 
@@ -110,7 +110,7 @@ password = ""
 
 ### Note
 
-* `data-dir` specifies the directory for the binlog file which Drainer outputs.
+* `data-dir` specifies the directory for the binlog file that Drainer outputs.
 * Both `start-datatime` and `start-tso` are used to specify the time point for starting recovery, but they are different in the time format. If they are not set, the recovery process starts from the earliest binlog file by default.
 * Both `stop-datetime` and `stop-tso` are used to specify the time point for finishing recovery, but they are different in the time format. If they are not set, the recovery process ends up with the last binlog file by default.
 * `dest-type` specifies the destination type. Its value can be "mysql" and "print." 
