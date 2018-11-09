@@ -505,7 +505,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 Pump/Drainer state description:
 
-* `online`: running normally
+* `online`: running normally.
 * `pausing`: in the pausing process. It turns into this state after you use `kill` or press Ctrl + C to exit from the process.
 * `paused`: has been stopped. While Pump is in this state, it rejects the request of writing binlog into it and does not provide the binlog for Drainer any more. When Drainer is in this state, it does not synchronize data to the downstream. After Pump and Drainer exit normally from all the threads, they switch the state to `paused` and then exits from the process.
 * `closing`: in the offline process. `binlogctl` is used to get Pump/Drainer offline and Pump/Drainer is in this state before the process exits. In this state, Pump does not accept new requests of writing binlog into it and waits for all the binlog data to be used up by Drainer.
