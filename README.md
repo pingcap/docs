@@ -100,6 +100,9 @@
       - [Database Administration Statements](sql/admin.md)
       - [Prepared SQL Statement Syntax](sql/prepare.md)
       - [Utility Statements](sql/util.md)
+    + Locking and Transaction Model
+      - [Optimistic Locking](sql/transaction-isolation.md#description-of-optimistic-transactions)
+      - [Transaction Isolation Levels](sql/transaction-isolation.md)
     + Security
       - [The TiDB Access Privilege System](sql/privilege.md)
       - [TiDB User Account Management](sql/user-account-management.md)
@@ -113,7 +116,6 @@
       - [TiDB Memory Control](sql/tidb-memory-control.md)
       - [Slow Query Log](sql/slow-query.md)
     - [Connectors and APIs](sql/connection-and-APIs.md)
-    - [Transaction Isolation Levels](sql/transaction-isolation.md)
     - [Error Codes and Troubleshooting](sql/error.md)
     + Advanced Usage
       - [Read Data From History Versions](op-guide/history-read.md)
