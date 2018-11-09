@@ -11,39 +11,40 @@
     - [Basic SQL Statements](try-tidb.md)
     - [Bikeshare Example Database](bikeshare-example-database.md)
     - [Hardware and Software Requirements](op-guide/recommendation.md)
+    - [Upgrading from Previous Releases](op-guide/tidb-v2-upgrade-guide.md)
   + Deploy
-    - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
-    - [Offline Deployment Using Ansible](op-guide/offline-ansible-deployment.md)
+    + [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
+      - [Offline Deployment](op-guide/offline-ansible-deployment.md)
+      - [Modify Component Configuration Using Ansible](op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
+      - [Scale Using Ansible](op-guide/ansible-deployment-scale.md)
+      - [TiDB-Ansible Common Operations](op-guide/ansible-operation.md)
+      - [Upgrade the Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Docker Compose Deployment](op-guide/docker-compose.md)
     - [Kubernetes Deployment](op-guide/kubernetes.md)
   + Configure
     - [Configuration Flags](op-guide/configuration.md)
     - [Configuration File Description](op-guide/tidb-config-file.md)
-    - [Modify Component Configuration Using Ansible](op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
     - [Enable TLS Authentication](op-guide/security.md)
     - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
-  + Monitor
-    - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
-    - [Key Metrics](op-guide/dashboard-overview-info.md)
-    - [Monitor a TiDB Cluster](op-guide/monitor.md)
-  + Scale
-    - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
-    - [Scale Using Ansible](op-guide/ansible-deployment-scale.md)
-  + Upgrade
-    - [Upgrade the Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
-    - [TiDB 2.0 Upgrade Guide](op-guide/tidb-v2-upgrade-guide.md)
-  - [Tune Performance](op-guide/tune-tikv.md)
   + Backup and Migrate
     - [Backup and Restore](op-guide/backup-restore.md)
     + Migrate
       - [Migration Overview](op-guide/migration-overview.md)
       - [Migrate All the Data](op-guide/migration.md#use-the-mydumper--loader-tool-to-export-and-import-all-the-data)
       - [Migrate the Data Incrementally](op-guide/migration.md#use-the-syncer-tool-to-import-data-incrementally-optional)
-  - [TiDB-Ansible Common Operations](op-guide/ansible-operation.md)
-  - [Frequently Asked Questions (FAQ)](FAQ.md)
-  - [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
-  - [Troubleshoot](trouble-shooting.md)
+  + Monitor
+    - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
+    - [Key Metrics](op-guide/dashboard-overview-info.md)
+    - [Monitor a TiDB Cluster](op-guide/monitor.md)
+  + Optimize
+    - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
+    - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
+    - [Tune TiKV](op-guide/tune-tikv.md)
+  - [FAQ](FAQ.md)
+  - [Troubleshooting](trouble-shooting.md)
+  - [Adopters](adopters.md)
+  - [Roadmap](ROADMAP.md)
 + Components
   + TiDB Server
     + TiDB Server Administration
@@ -164,9 +165,6 @@
   - [RC3](releases/rc3.md)
   - [RC2](releases/rc2.md)
   - [RC1](releases/rc1.md)
-- [TiDB Adopters](adopters.md)
-- [TiDB Roadmap](ROADMAP.md)
-- [Connect with us](community.md)
 
 ## TiDB Introduction
 
