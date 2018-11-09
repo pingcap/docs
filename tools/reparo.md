@@ -25,7 +25,7 @@ Usage of Reparo:
     If the configuration file is specified, Reparo reads the configuration data in this file.
     If the configuration data also exists in the command line parameters, Reparo uses the configuration data in the command line parameters to cover that in the configuration file.
 -data-dir string
-    The storage directory for the binlog file in the protobuf format which Drainer outputs ("data.drainer" by default)
+    The storage directory for the binlog file in the protobuf format that Drainer outputs ("data.drainer" by default)
 -dest-type string
     The downstream service type 
     Value: "print"/"mysql" ("print" by default)
