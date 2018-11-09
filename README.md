@@ -16,7 +16,6 @@
     - [Offline Deployment Using Ansible](op-guide/offline-ansible-deployment.md)
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Docker Compose Deployment](op-guide/docker-compose.md)
-    - [Cross-Region Deployment](op-guide/location-awareness.md)
     - [Kubernetes Deployment](op-guide/kubernetes.md)
   + Configure
     - [Configuration Flags](op-guide/configuration.md)
@@ -116,6 +115,8 @@
       - [Read Data From History Versions](op-guide/history-read.md)
       - [Garbage Collection (GC)](op-guide/gc.md)
   + [TiKV Server](https://github.com/tikv/tikv/wiki)
+  + Placement Driver (pd)
+    - [Cross-Region Deployment](op-guide/location-awareness.md)
   + TiSpark Driver
     - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
     - [User Guide](tispark/tispark-user-guide.md)
