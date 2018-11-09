@@ -47,17 +47,13 @@
   - [Roadmap](ROADMAP.md)
 + Components
   + TiDB Server
-    + TiDB Server Administration
-      - [The TiDB Server](sql/tidb-server.md)
-      - [The TiDB Command Options](sql/server-command-option.md)
-      - [The TiDB Data Directory](sql/tidb-server.md#tidb-data-directory)
-      - [The TiDB System Database](sql/system-database.md)
-      - [The TiDB System Variables](sql/variable.md)
-      - [The TiDB Specific System Variables](sql/tidb-specific.md)
-      - [The TiDB Server Logs](sql/tidb-server.md#tidb-server-logs)
-      - [The TiDB Access Privilege System](sql/privilege.md)
-      - [TiDB User Account Management](sql/user-account-management.md)
-      - [Use Encrypted Connections](sql/encrypted-connections.md)
+    + Overview
+      - [Compatibility with MySQL](sql/mysql-compatibility.md)
+      - [Configuration](sql/server-command-option.md)
+      + Extensions to MySQL
+        - [System Variables](sql/tidb-specific.md)
+        - [Optimizer Hints](sql/tidb-specific.md)
+        - [Table Options](sql/tidb-specific.md)      
     + SQL Optimization and Execution
       - [SQL Optimization Process](sql/sql-optimizer-overview.md)
       - [Understand the Query Execution Plan](sql/understanding-the-query-execution-plan.md)
@@ -105,13 +101,21 @@
       - [Prepared SQL Statement Syntax](sql/prepare.md)
       - [Utility Statements](sql/util.md)
       - [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/)
+    + TiDB Server Administration
+      - [The TiDB Server](sql/tidb-server.md)
+      - [The TiDB Data Directory](sql/tidb-server.md#tidb-data-directory)
+      - [The TiDB System Database](sql/system-database.md)
+      - [The TiDB System Variables](sql/variable.md)
+      - [The TiDB Server Logs](sql/tidb-server.md#tidb-server-logs)
+      - [The TiDB Access Privilege System](sql/privilege.md)
+      - [TiDB User Account Management](sql/user-account-management.md)
+      - [Use Encrypted Connections](sql/encrypted-connections.md)
+      - [TiDB Memory Control](sql/tidb-memory-control.md)
+      - [Slow Query Log](sql/slow-query.md)
     - [Generated Columns](sql/generated-columns.md)
     - [Connectors and APIs](sql/connection-and-APIs.md)
-    - [TiDB Transaction Isolation Levels](sql/transaction-isolation.md)
+    - [Transaction Isolation Levels](sql/transaction-isolation.md)
     - [Error Codes and Troubleshooting](sql/error.md)
-    - [Compatibility with MySQL](sql/mysql-compatibility.md)
-    - [TiDB Memory Control](sql/tidb-memory-control.md)
-    - [Slow Query Log](sql/slow-query.md)
     + Advanced Usage
       - [Read Data From History Versions](op-guide/history-read.md)
       - [Garbage Collection (GC)](op-guide/gc.md)
