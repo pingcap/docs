@@ -19,6 +19,7 @@
       - [Scale Using Ansible](op-guide/ansible-deployment-scale.md)
       - [TiDB-Ansible Common Operations](op-guide/ansible-operation.md)
       - [Upgrade the Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
+      - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
     - [Docker Deployment](op-guide/docker-deployment.md)
     - [Docker Compose Deployment](op-guide/docker-compose.md)
     - [Kubernetes Deployment](op-guide/kubernetes.md)
@@ -38,7 +39,6 @@
     - [Key Metrics](op-guide/dashboard-overview-info.md)
     - [Monitor a TiDB Cluster](op-guide/monitor.md)
   + Optimize
-    - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
     - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
     - [Tune TiKV](op-guide/tune-tikv.md)
   - [FAQ](FAQ.md)
@@ -49,6 +49,7 @@
   + TiDB Server
     + Overview
       - [Compatibility with MySQL](sql/mysql-compatibility.md)
+      - [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/)
       - [Configuration](sql/server-command-option.md)
       + Extensions to MySQL
         - [System Variables](sql/tidb-specific.md)
@@ -67,7 +68,6 @@
       - [Comment Syntax](sql/comment-syntax.md)
     + Globalization
       - [Character Set Support](sql/character-set-support.md)
-      - [Character Set Configuration](sql/character-set-configuration.md)
       - [Time Zone Support](sql/time-zone.md)
     + Data Types
       - [Numeric Types](sql/datatype.md#numeric-types)
@@ -77,6 +77,7 @@
       - [The ENUM data type](sql/datatype.md#the-enum-data-type)
       - [The SET Type](sql/datatype.md#the-set-type)
       - [Data Type Default Values](sql/datatype.md#data-type-default-values)
+    - [Generated Columns](sql/generated-columns.md)
     + Functions and Operators
       - [Function and Operator Reference](sql/functions-and-operators-reference.md)
       - [Type Conversion in Expression Evaluation](sql/type-conversion-in-expression-evaluation.md)
@@ -100,19 +101,18 @@
       - [Database Administration Statements](sql/admin.md)
       - [Prepared SQL Statement Syntax](sql/prepare.md)
       - [Utility Statements](sql/util.md)
-      - [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/)
+    + Security
+      - [The TiDB Access Privilege System](sql/privilege.md)
+      - [TiDB User Account Management](sql/user-account-management.md)
+      - [Use Encrypted Connections](sql/encrypted-connections.md)
     + TiDB Server Administration
       - [The TiDB Server](sql/tidb-server.md)
       - [The TiDB Data Directory](sql/tidb-server.md#tidb-data-directory)
       - [The TiDB System Database](sql/system-database.md)
       - [The TiDB System Variables](sql/variable.md)
       - [The TiDB Server Logs](sql/tidb-server.md#tidb-server-logs)
-      - [The TiDB Access Privilege System](sql/privilege.md)
-      - [TiDB User Account Management](sql/user-account-management.md)
-      - [Use Encrypted Connections](sql/encrypted-connections.md)
       - [TiDB Memory Control](sql/tidb-memory-control.md)
       - [Slow Query Log](sql/slow-query.md)
-    - [Generated Columns](sql/generated-columns.md)
     - [Connectors and APIs](sql/connection-and-APIs.md)
     - [Transaction Isolation Levels](sql/transaction-isolation.md)
     - [Error Codes and Troubleshooting](sql/error.md)
