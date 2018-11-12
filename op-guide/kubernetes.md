@@ -14,7 +14,7 @@ and automates tasks related to operating a TiDB cluster. It makes TiDB a truly c
 <main class="tabs">
   <input id="tabGoogle" type="radio" name="tabs" value="GoogleContent" checked>
   <label for="tabGoogle">
-      <span><img src="https://cloud.google.com/_static/images/cloud/icons/favicons/onecloud/apple-icon.png" style="width: auto; height: 20px; display: inline; position: absolute; top: 50%; margin-top: -10px; background: transparent;"></img></span>
+      <span style="width: 20px;"><img src="https://cloud.google.com/_static/images/cloud/icons/favicons/onecloud/apple-icon.png" style="width: auto; height: 20px; display: inline; position: absolute; top: 50%; margin-top: -10px; background: transparent;"></img></span>
       <span class="label__title">GCP</span>
   </label>
   <input id="tabLocal" type="radio" name="tabs" value="LocalContent">
