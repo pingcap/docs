@@ -19,7 +19,7 @@ and automates tasks related to operating a TiDB cluster. It makes TiDB a truly c
   </label>
   <input id="tabLocal" type="radio" name="tabs" value="LocalContent">
   <label for="tabLocal">
-      <span><img src="https://avatars1.githubusercontent.com/u/13629408?s=400&v=4" style="width: auto; height: 20px; display: inline; position: absolute; top: 50%; margin-top: -10px; background: transparent;"></img></span>
+      <span><img src="https://avatars1.githubusercontent.com/u/13629408?s=400&v=4" width="20"></img></span>
       <span class="label__title">Local</span>
   </label>
   <section id="GoogleContent">
