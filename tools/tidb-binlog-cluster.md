@@ -51,6 +51,7 @@ The server hardware requirements for development, testing, and the production en
 
 ## Notes
 
+* You need to use TiDB v2.0.8-binlog, v2.1.0-rc.5 or the later version. Otherwise, the TiDB cluster is not compatible with the cluster version of TiDB-Binlog.
 * When TiDB is running, you need to guarantee that at least one Pump is running normally.
 * To enable TiDB-Binlog, add the `enable-binlog` startup parameter to TiDB.
 * Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
@@ -58,6 +59,7 @@ The server hardware requirements for development, testing, and the production en
 * Drainer supports synchronizing binlogs to MySQL, TiDB, Kafka or the local files. If you need to synchronize binlogs to other destinations, you can set Drainer to synchronize the binlog to Kafka and read the data in Kafka for customization processing. See [Binlog Slave Client User Guide](../tools/binlog-slave-client.md).
 * If TiDB-Binlog is used for recovering the incremental data, you can set the downstream to `pb` to synchronize the binlog data to the local file and then use [Reparo](../tools/reparo.md) to recover the incremental data.
 * Pump/Drainer has two states: `paused` and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `paused`. The paused Pump do not need to send all the binlog data to Drainer. If you need to exit from Pump for a long period of time (or do not use Pump any more), use `binlogctl` to make Pump offline. The same goes for Drainer.
+* If the downstream is MySQL/TiDB, you can use [sync-diff-inspector](../tools/sync-diff-inspector.md) to verify the data after data synchronization.
 
 ## TiDB-Binlog deployment
 
@@ -513,12 +515,10 @@ Pump/Drainer state description:
 
 > **Notes:**
 >
-> * You need to use TiDB v2.0.8-binlog, v2.1.0-rc.5 or the later version. Otherwise, the cluster version of  TiDB-Binlog is not compatible with the TiDB cluster.
 > * When Pump/Drainer is `pausing` or `paused`, the data synchronization is interrupted.
 > * When Pump is `closing`, you need to guarantee that all the data has been consumed by all the Drainers that are not `offline`. So before making Pump offline, you need to guarantee all the Drainers are `online`; otherwise, Pump cannot get offline normally.
 > * The binlog data that Pump saves is processed by GC only when it has been consumed by all the Drainers that are not `offline`.
 > * Close Drainer only when it will not be used any more.
-> * If the downstream is MySQL/TiDB, you can use [sync-diff-inspector](../tools/sync-diff-inspector.md) to verify the data after data synchronization.
 
 For how to pause, close, check, and modify the state of Drainer, see the [binlogctl guide](#binlogctl-guide) as follows.
 
