@@ -6,7 +6,7 @@ category: tools
 
 # TiDB Lightning Checkpoints
 
-Importing a large database usually takes hours or days, and if such long running processes spuriously crashes, it can be very time-wasting to redo the previously completed tasks. To solve this, Lightning uses *checkpoints* to stores the import progress, so that `tidb-lightning` continues importing from where it lefts off after restarting.
+Importing a large database usually takes hours or days, and if such long running processes spuriously crashes, it can be very time-wasting to redo the previously completed tasks. To solve this, Lightning uses *checkpoints* to store the import progress, so that `tidb-lightning` continues importing from where it lefts off after restarting.
 
 This document describes how to enable, configure, store, and control *checkpoints*.
 
@@ -16,7 +16,7 @@ This document describes how to enable, configure, store, and control *checkpoint
 [checkpoint]
 # Whether to enable checkpoints.
 # While importing data, Lightning records which tables have been imported, so
-# even if Lightning or other component crash, you can start from a known
+# even if Lightning or some other component crashes, you can start from a known
 # good state instead of redoing everything.
 enable = true
 

@@ -102,7 +102,7 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
 
 - **`lightning_kv_encoder`** (Counter)
 
-    Counting open and closed KV encoders. KV encoders are in-memory TiDB instances which converts SQL `INSERT` statements into KV pairs. The net values need to be bounded in a healthy situation. Labels:
+    Counting open and closed KV encoders. KV encoders are in-memory TiDB instances that convert SQL `INSERT` statements into KV pairs. The net values need to be bounded in a healthy situation. Labels:
 
     - **type**: `open` / `closed`
 

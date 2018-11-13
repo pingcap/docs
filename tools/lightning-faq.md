@@ -78,7 +78,7 @@ Yes, as long as every `tidb-lightning` instance operates on different tables.
 
 If it is deployed using TiDB-Ansible, run `scripts/stop_importer.sh` under the deployed folder.
 
-Otherwise, obtain the process ID with `ps aux | grep tikv-importer`, then run `kill «pid»`.
+Otherwise, obtain the process ID with `ps aux | grep tikv-importer`, and then run `kill «pid»`.
 
 ## How to stop `tidb-lightning`?
 
@@ -98,7 +98,7 @@ It is potentially caused by starting `tidb-lightning` incorrectly, which causes 
 
 We do not recommend using `nohup` directly in the command line. Rather, put the `nohup` inside a script file and execute the script.
 
-## Why my TiDB cluster is using lots of CPU and running very slowly after using Lightning?
+## Why my TiDB cluster is using lots of CPU resources and running very slowly after using Lightning?
 
 If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. You can force the cluster back to "normal mode" using the following command:
 

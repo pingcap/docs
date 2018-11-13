@@ -36,7 +36,7 @@ To achieve the best performance, it is recommended to use the following hardware
     - `tidb-lightning` fully consumes all CPU cores when running,
         and deploying on a dedicated machine is highly recommended.
         If not possible, `tidb-lightning` could be deployed together with other components like
-        `tidb-server`, and limiting the CPU usage via the `region-concurrency` setting.
+        `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
 
 - `tikv-importer`:
 
@@ -247,7 +247,8 @@ Download the TiDB Lightning package (choose the same version as that of the TiDB
     # Checks if the cluster satisfies the minimum requirement before starting.
     #check-requirements = true
 
-    # The maximum number of tables to be handled concurrently
+    # The maximum number of tables to be handled concurrently.
+    # This value affects the memory usage of tikv-importer.
     # Must not exceed the max-open-engines setting for tikv-importer.
     table-concurrency = 8
     # The concurrency number of data. It is set to the number of logical CPU
@@ -294,7 +295,7 @@ Download the TiDB Lightning package (choose the same version as that of the TiDB
     # mydumper local source data directory
     data-source-dir = "/data/my_database"
     # If no-schema is set to true, tidb-lightning assumes that the table skeletons
-    # already exists on the target TiDB cluster, and will not execute the `CREATE
+    # already exist on the target TiDB cluster, and will not execute the `CREATE
     # TABLE` statements
     no-schema = false
 

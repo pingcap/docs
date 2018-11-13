@@ -11,7 +11,7 @@ TiDB Lightning is a tool used for fast full import of large amounts of data into
 - Importing **large amounts** of **new** data **quickly**
 - Back up and restore all the data
 
-## Lightning Architecture
+## Lightning architecture
 
 The TiDB Lightning tool set consists of two components:
 
