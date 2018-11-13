@@ -629,7 +629,7 @@ The cluster version of TiDB-Binlog is not compatible with the Kafka or local ver
 
 ### Upgrade process
 
-- If importing the full data is acceptable, you can abandon the old version and deploy TiDB-Binlog based on this document.
+- If importing the full data is acceptable, you can abandon the old version and deploy TiDB-Binlog following this document.
 - If you want to resume synchronization from the original checkpoint, perform the following steps to upgrade TiDB-Binlog:
 
     1. Deploy the new version of Pump.
