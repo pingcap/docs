@@ -1,16 +1,16 @@
 ---
-title: TiDB Lightning Deployment
-summary: Deploy TiDB Lightning to quickly import large amounts of new data.
+title: TiDB-Lightning Deployment
+summary: Deploy TiDB-Lightning to quickly import large amounts of new data.
 category: tools
 ---
 
-# TiDB Lightning Deployment
+# TiDB-Lightning Deployment
 
-This document describes the hardware requirements of TiDB Lightning on separate deployment and mixed deployment, and how to deploy it using Ansible or manually.
+This document describes the hardware requirements of TiDB-Lightning on separate deployment and mixed deployment, and how to deploy it using Ansible or manually.
 
 ## Notes
 
-Before starting TiDB Lightning, note that:
+Before starting TiDB-Lightning, note that:
 
 - During the import process, the cluster cannot provide normal services.
 - If `tidb-lightning` crashes, the cluster is left in "import mode". Forgetting to switch back to "normal mode" can lead to a high amount of uncompacted data on the TiKV cluster, and cause abnormally high CPU usage and stall. You can manually switch the cluster back to "normal mode" via the `tidb-lightning-ctl` tool:
@@ -64,16 +64,16 @@ It is recommended to use the following configuration of the single machine:
 
 > **Notes:** `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
 
-## Deploy TiDB Lightning
+## Deploy TiDB-Lightning
 
-This section describes two deployment methods of TiDB Lightning:
+This section describes two deployment methods of TiDB-Lightning:
 
-- [Deploy TiDB Lightning using Ansible](#deploy-tidb-lightning-using-ansible)
-- [Deploy TiDB Lightning manually](#deploy-tidb-lightning-manually)
+- [Deploy TiDB-Lightning using Ansible](#deploy-tidb-lightning-using-ansible)
+- [Deploy TiDB-Lightning manually](#deploy-tidb-lightning-manually)
 
-### Deploy TiDB Lightning using Ansible
+### Deploy TiDB-Lightning using Ansible
 
-You can deploy TiDB Lightning using Ansible together with the [deployment of the TiDB cluster itself using Ansible](../op-guide/ansible-deployment.md).
+You can deploy TiDB-Lightning using Ansible together with the [deployment of the TiDB cluster itself using Ansible](../op-guide/ansible-deployment.md).
 
 1. Edit `inventory.ini` to add the addresses of the `tidb-lightning` and `tikv-importer` servers.
 
@@ -146,7 +146,7 @@ You can deploy TiDB Lightning using Ansible together with the [deployment of the
 
 7. After completion, run `scripts/stop_importer.sh` on the `tikv-importer` server to stop Importer.
 
-### Deploy TiDB Lightning manually
+### Deploy TiDB-Lightning manually
 
 #### Step 1: Deploy a TiDB cluster
 
@@ -154,9 +154,9 @@ Before importing data, you need to have a deployed TiDB cluster, with the cluste
 
 You can find deployment instructions in [TiDB Quick Start Guide](https://pingcap.com/docs/QUICKSTART/).
 
-#### Step 2: Download the TiDB Lightning installation package
+#### Step 2: Download the TiDB-Lightning installation package
 
-Download the TiDB Lightning package (choose the same version as that of the TiDB cluster):
+Download the TiDB-Lightning package (choose the same version as that of the TiDB cluster):
 
 - **v2.1**: https://download.pingcap.org/tidb-lightning-release-2.1-linux-amd64.tar.gz
 - **v2.0**: https://download.pingcap.org/tidb-lightning-release-2.0-linux-amd64.tar.gz

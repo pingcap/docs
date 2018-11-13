@@ -1,25 +1,25 @@
 ---
-title: TiDB Lightning Introduction and Architecture
+title: TiDB-Lightning Introduction and Architecture
 summary: Learn about Lightning and the whole architecture.
 category: tools
 ---
 
-# TiDB Lightning Introduction and Architecture
+# TiDB-Lightning Introduction and Architecture
 
-TiDB Lightning is a tool used for fast full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via mydumper. You can use it in the following two scenarios:
+TiDB-Lightning is a tool used for fast full import of large amounts of data into a TiDB cluster. Currently, TiDB-Lightning supports reading SQL dump exported via mydumper. You can use it in the following two scenarios:
 
 - Importing **large amounts** of **new** data **quickly**
 - Back up and restore all the data
 
 ## Lightning architecture
 
-The TiDB Lightning tool set consists of two components:
+The TiDB-Lightning tool set consists of two components:
 
 - **`tidb-lightning`** (the "front end") reads the SQL dump and imports the database structure into the TiDB cluster, and also transforms the data into Key-Value (KV) pairs and sends them to `tikv-importer`.
 
 - **`tikv-importer`** (the "back end") combines and sorts the KV pairs and then imports these sorted pairs as a whole into the TiKV cluster.
 
-![Architecture of TiDB Lightning tool set](../media/tidb-lightning.svg)
+![Architecture of TiDB-Lightning tool set](../media/tidb-lightning.svg)
 
 The complete import process is as follows:
 
