@@ -116,7 +116,7 @@
   - [Syncer](tools/syncer.md)
   - [mydumper](tools/mydumper.md)
   - [Loader](tools/loader.md)
-  + Lightning
+  + TiDB-Lightning
     - [Introduction and Architecture](tools/lightning-overview-architecture.md)
     - [Deployment](tools/lightning-deployment.md)
     - [Checkpoints](tools/lightning-checkpoints.md)
