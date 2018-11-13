@@ -117,7 +117,7 @@
   - [mydumper](tools/mydumper.md)
   - [Loader](tools/loader.md)
   + TiDB-Lightning
-    - [Introduction and Architecture](tools/lightning-overview-architecture.md)
+    - [Overview](tools/lightning-overview-architecture.md)
     - [Deployment](tools/lightning-deployment.md)
     - [Checkpoints](tools/lightning-checkpoints.md)
     - [Monitor](tools/lightning-monitor.md)

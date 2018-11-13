@@ -1,10 +1,10 @@
 ---
-title: TiDB-Lightning Introduction and Architecture
+title: TiDB-Lightning Overview
 summary: Learn about Lightning and the whole architecture.
 category: tools
 ---
 
-# TiDB-Lightning Introduction and Architecture
+# TiDB-Lightning Overview
 
 TiDB-Lightning is a tool used for fast full import of large amounts of data into a TiDB cluster. Currently, TiDB-Lightning supports reading SQL dump exported via mydumper. You can use it in the following two scenarios:
 
