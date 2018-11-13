@@ -57,7 +57,7 @@
          <text style="stroke:none" x="46.0783774722" y="106" font-family="Helvetica" font-size="8" font-weight="normal" font-style="normal">SQL </text>
          <text style="stroke:none" x="43.9299399722" y="116" font-family="Helvetica" font-size="8" font-weight="normal" font-style="normal">dump</text>
       </g>
-      <text style="stroke:none" x="5.5" y="230.730876623" font-family="Helvetica" font-size="12" font-weight="normal" font-style="italic">TiDB Lightning Tool Set</text>
+      <text style="stroke:none" x="5.5" y="230.730876623" font-family="Helvetica" font-size="12" font-weight="normal" font-style="italic">TiDB-Lightning Tool Set</text>
       <text style="stroke:none" x="275.5" y="87.1126700941" font-family="Helvetica" font-size="12" font-weight="normal" font-style="italic">TiDB Cluster</text>
       <text style="stroke:none" x="5.5" y="374.730876623" font-family="Helvetica" font-size="12" font-weight="normal" font-style="italic">TiKV Cluster</text>
       <text style="stroke:none" x="419.5" y="285.112670094" font-family="Helvetica" font-size="12" font-weight="normal" font-style="italic">PD Cluster</text>
