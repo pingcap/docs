@@ -116,6 +116,9 @@
   - [Syncer](tools/syncer.md)
   - [mydumper](tools/mydumper.md)
   - [Loader](tools/loader.md)
+  + Data Migration
+    - [Overview](tools/data-migration-overview.md)
+    - [Deployment](tools/data-migration-deployment.md)
   - [TiDB-Binlog](tools/tidb-binlog-cluster.md)
   - [PD Control](tools/pd-control.md)
   - [PD Recover](tools/pd-recover.md)
