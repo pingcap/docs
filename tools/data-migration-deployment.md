@@ -14,7 +14,7 @@ Before you start, make sure you have the following machines as required.
 
 1. Several target machines that meet the following requirements:
 
-    - CentOS 7.3 or later, x86_64 architecture (AMD64)
+    - CentOS 7.3 (64-bit) or later, x86_64 architecture (AMD64)
     - Network between machines
     - Closing the firewall, or opening the service port
 
@@ -22,7 +22,7 @@ Before you start, make sure you have the following machines as required.
 
     > **Note:** The Control Machine can be one of the target machines.
 
-    - CentOS 7.3 (64 bit) or later, with Python 2.7 installed
+    - CentOS 7.3 (64-bit) or later, with Python 2.7 installed
     - Access to the Internet
 
 ## Step 1: Install system dependencies on the Control Machine
@@ -253,7 +253,7 @@ dm-master ansible_host=172.16.10.71 deploy_dir=/data1/deploy
 
 | Variable name | Description |
 | ------------- | ------- |
-| server_id | dm-worker disguises itself as a MySQL slave, and this variable is the server_id of the slave. Keep it globally unique in the MySQL cluster, and the value range is 0 ~ 4294967295. |
+| server_id | dm-worker connects to MySQL as a slave. This variable is the server_id of the slave. Keep it globally unique in the MySQL cluster, and the value range is 0 ~ 4294967295. |
 | mysql_host | The upstream MySQL host. |
 | mysql_user | The upstream MySQL username; default "root". |
 | mysql_password | The upstream MySQL user password. You need to encrypt the password using the `dmctl` tool. See [Encrypt the upstream MySQL user password using dmctl](#encrypt-the-upstream-mysql-user-password-using-dmctl). |
