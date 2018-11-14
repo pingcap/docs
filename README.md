@@ -119,6 +119,13 @@
   + Data Migration
     - [Overview](tools/data-migration-overview.md)
     - [Deployment](tools/data-migration-deployment.md)
+  + TiDB-Lightning
+    - [Overview](tools/lightning-overview-architecture.md)
+    - [Deployment](tools/lightning-deployment.md)
+    - [Checkpoints](tools/lightning-checkpoints.md)
+    - [Monitor](tools/lightning-monitor.md)
+    - [Troubleshooting](tools/lightning-errors.md)
+    - [FAQs](tools/lightning-faq.md)
   - [TiDB-Binlog](tools/tidb-binlog-cluster.md)
   - [PD Control](tools/pd-control.md)
   - [PD Recover](tools/pd-recover.md)
