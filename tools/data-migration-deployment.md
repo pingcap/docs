@@ -176,13 +176,21 @@ Log in to the Control Machine using the `tidb` user account, and edit the `/home
 > dm-worker1 ansible_host=172.16.10.72 ansible_port=5555 server_id=101 mysql_host=172.16.10.72 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 > ```
 
-### Cluster topology example
+You can choose one of the following two types of cluster topology according to your scenario:
+
+- [The cluster topology of of a single dm-worker instance on each node](#option-1-use-the-cluster-topology-of-a-single-dm-worker-instance-on-each-node)
+
+    Generally, it is recommended to deploy one dm-worker instance on each node. Howerver, if the CPU and memory of your machine is much better than the required in [Hardware and Software Requirements](../op-guide/recommendation.md), and you have more than 2 disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 dm-worker instances on a single node.
+
+- [The cluster topology of multiple dm-worker instances on each node](#option-2-use-the-cluster-topology-of-multiple-dm-worker-instances-on-each-node)
+
+### Option 1: Use the cluster topology of a single dm-worker instance on each node
 
 | Name | Host IP | Services |
 | ---- | ------- | -------- |
-| node1 | 172.16.10.71 | dm-master, prometheus, grafana, alertmanager |
-| node2 | 172.16.10.72 | dm-worker |
-| node3 | 172.16.10.73 | dm-worker |
+| node1 | 172.16.10.71 | dm-master, Prometheus, Grafana, Alertmanager |
+| node2 | 172.16.10.72 | dm-worker1 |
+| node3 | 172.16.10.73 | dm-worker2 |
 
 ```ini
 ## DM modules
@@ -193,6 +201,52 @@ dm_master ansible_host=172.16.10.71
 dm_worker1 ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
 dm_worker2 ansible_host=172.16.10.73 server_id=102 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+
+## Monitoring modules
+[prometheus_servers]
+prometheus ansible_host=172.16.10.71
+
+[grafana_servers]
+grafana ansible_host=172.16.10.71
+
+[alertmanager_servers]
+alertmanager ansible_host=172.16.10.71
+
+## Global variables
+[all:vars]
+cluster_name = test-cluster
+
+ansible_user = tidb
+
+dm_version = latest
+
+deploy_dir = /data1/dm
+
+grafana_admin_user = "admin"
+grafana_admin_password = "admin"
+```
+
+### Option 2: Use the cluster topology of multiple dm-worker instances on each node
+
+| Name | Host IP | Services |
+| ---- | ------- | -------- |
+| node1 | 172.16.10.71 | dm-master, Prometheus, Grafana, Alertmanager |
+| node2 | 172.16.10.72 | dm-worker1-1, dm-worker1-2 |
+| node3 | 172.16.10.73 | dm-worker2-1, dm-worker2-2 |
+
+When you edit the `inventory.ini` file, pay attention to distinguish between the following variables: `server_id`, `deploy_dir`, `dm_worker_port`, and `dm_worker_status_port`.
+
+```ini
+## DM modules
+[dm_master_servers]
+dm_master ansible_host=172.16.10.71
+
+[dm_worker_servers]
+dm_worker1_1 ansible_host=172.16.10.72 server_id=101 deploy_dir=/data1/dm_worker dm_worker_port=10081 dm_worker_status_port=10082 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+dm_worker1_2 ansible_host=172.16.10.72 server_id=102 deploy_dir=/data2/dm_worker dm_worker_port=10083 dm_worker_status_port=10084 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+
+dm_worker2_1 ansible_host=172.16.10.73 server_id=103 deploy_dir=/data1/dm_worker dm_worker_port=10081 dm_worker_status_port=10082 mysql_host=172.16.10.83 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+dm_worker2_2 ansible_host=172.16.10.73 server_id=104 deploy_dir=/data2/dm_worker dm_worker_port=10083 dm_worker_status_port=10084 mysql_host=172.16.10.84 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
 ## Monitoring modules
 [prometheus_servers]
@@ -313,7 +367,7 @@ The following example uses `tidb` as the user who runs the service.
 
     This operation starts all the components in the entire DM cluster in order, which include dm-master, dm-worker, and the monitoring components. You can use this command to start a DM cluster after it is stopped.
 
-## Stop the DM cluster
+## Step 10: Stop the DM cluster
 
 If you need to stop the DM cluster, run the following command:
 
