@@ -20,7 +20,7 @@ The Data Migration tool consists of three components: dm-master, dm-worker, and 
     - Monitoring the running state of dm-worker processes
     - Monitoring the running state of data synchronization tasks
     - Providing a unified portal for the management of data synchronization tasks
-    - Coordinating the DDL synchronization of partition tables in each instance under the sharding scenario
+    - Coordinating the DDL synchronization of sharded tables in each instance under the sharding scenario
 
 + dm-worker:
 
