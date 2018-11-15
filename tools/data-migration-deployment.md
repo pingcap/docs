@@ -178,7 +178,7 @@ Log in to the Control Machine using the `tidb` user account, and edit the `/home
 
 You can choose one of the following two types of cluster topology according to your scenario:
 
-- [The cluster topology of of a single dm-worker instance on each node](#option-1-use-the-cluster-topology-of-a-single-dm-worker-instance-on-each-node)
+- [The cluster topology of a single dm-worker instance on each node](#option-1-use-the-cluster-topology-of-a-single-dm-worker-instance-on-each-node)
 
     Generally, it is recommended to deploy one dm-worker instance on each node. Howerver, if the CPU and memory of your machine is much better than the required in [Hardware and Software Requirements](../op-guide/recommendation.md), and you have more than 2 disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 dm-worker instances on a single node.
 
