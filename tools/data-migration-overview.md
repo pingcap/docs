@@ -6,7 +6,7 @@ category: tools
 
 # Data Migration Overview
 
-Data Migration (DM) is an integrated data synchronization task management platform that supports the full backup and the incremental synchronization of MariaDB/MySQL binlog into TiDB. It can help to reduce the operations cost and simplify the troubleshooting process.
+Data Migration (DM) is an integrated data synchronization task management platform that you can use to back up and restore the full data, or synchronize the incremental data into TiDB using the MySQL/MariaDB binlog. It can help to reduce the operations cost and simplify the troubleshooting process.
 
 ## Architecture
 

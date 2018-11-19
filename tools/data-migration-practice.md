@@ -55,7 +55,7 @@ After the DM cluster is deployed using DM-Ansible, the configuration information
 
 The following example assumes that you need to synchronize all the `test_table` table data in the `test_db` database of both the upstream MySQL-1 and MySQL-2 instances, to the downstream `test_table` table in the `test_db` database of TiDB, in the full data plus incremental data mode.
 
-You can copy, edit, and generate the `task.yaml` task configuration file as below. The task configuration template is in `{ansible deploy}/conf/task.yaml.example`.
+You can refer to the `task.yaml.example` task configuration template in `{ansible deploy}/conf`, and then copy, edit, and generate the `task.yaml` task configuration file as below:
 
 ```yaml
 # The task name. You need to use a different name for each of the multiple tasks that
