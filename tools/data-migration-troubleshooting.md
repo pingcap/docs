@@ -28,7 +28,36 @@ However, in some cases, you need to [reset the data synchronization task](#reset
 
 For database related passwords in all the DM configuration files, use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. For how to encrypt the plaintext password, see [Encrypt the upstream MySQL user password using dmctl](../tools/data-migration-deployment.md#encrypt-the-upstream-mysql-user-password-using-dmctl).
 
-In addition, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also checks the read and write privileges automatically while starting the data synchronization task.
+In addition, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also checks the following privileges automatically while starting the data synchronization task:
+
++ MySQL binlog configuration
+
+    - Whether the binlog is enabled (DM requires that the binlog must be enabled)
+    - Whether `binlog_format=ROW` (DM only supports the binlog synchronization in the ROW format
+    - Whether `binlog_row_image=FULL` (DM only supports `binlog_row_image=FULL`)
+
++ The privileges of the upstream MySQL instance
+
+    The MySQL user in DM configuration needs to have the following privileges at least:
+    
+    - REPLICATION SLAVE
+    - REPLICATION CLIENT
+    - RELOAD
+    - SELECT
+
++ The compatibility of the upstream MySQL table schema
+
+    Some differences exist between the compatibility of TiDB and that of MySQL.
+
+    - No support for the foreign key
+    - [Character set compatibility](../sql/character-set-support.md)
+
++ The consistency check on the upstream MySQL multiple-instance shards
+
+    - The consistency of the table schema
+        - Column name, type
+        - Index
+    - Whether the auto increment primary key that conflicts during merging exists
 
 ## Reset the data synchronization task
 

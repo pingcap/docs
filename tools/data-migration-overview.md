@@ -6,11 +6,11 @@ category: tools
 
 # Data Migration Overview
 
-Data Migration (DM) is an integrated data synchronization task management platform that you can use to back up and restore the full data, or synchronize the incremental data into TiDB using the MySQL/MariaDB binlog. It can help to reduce the operations cost and simplify the troubleshooting process.
+Data Migration (DM) is an integrated data synchronization task management platform that supports the full data migration and the incremental data migration. It can help to reduce the operations cost and simplify the troubleshooting process.
 
 ## Architecture
 
-The Data Migration tool consists of three components: dm-master, dm-worker, and dmctl.
+The Data Migration tool includes three components: dm-master, dm-worker, and dmctl.
 
 ![Data Migration architecture](../media/dm-architecture.png)
 
@@ -35,7 +35,7 @@ dm-worker executes specific data synchronization tasks.
 
 ### dmctl 
 
-dmctl is the access entry to the DM cluster.
+dmctl is the command line tool used to control the DM cluster.
 
 - Creating/Updating/Dropping data synchronization tasks
 - Checking the state of data synchronization tasks
