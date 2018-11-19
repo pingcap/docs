@@ -58,6 +58,7 @@ The server hardware requirements for development, testing, and the production en
 * If you want to start Drainer in the existing TiDB cluster, generally, you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to synchronize the incremental data from `savepoint`.
 * Drainer supports synchronizing binlogs to MySQL, TiDB, Kafka or the local files. If you need to synchronize binlogs to other destinations, you can set Drainer to synchronize the binlog to Kafka and read the data in Kafka for customization processing. See [Binlog Slave Client User Guide](../tools/binlog-slave-client.md).
 * If TiDB-Binlog is used for recovering the incremental data, you can set the downstream to `pb` to synchronize the binlog data to the local file and then use [Reparo](../tools/reparo.md) to recover the incremental data.
+* If the downstream is set to `tidb`, the `_tidb_rowid` hidden column of TiDB is used to synchronize data. It should be noted that only the Drainer data is allowed to write into the downstream, otherwise an error might occur to the data.
 * Pump/Drainer has two states: `paused` and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `paused`. The paused Pump do not need to send all the binlog data to Drainer. If you need to exit from Pump for a long period of time (or do not use Pump any more), use `binlogctl` to make Pump offline. The same goes for Drainer.
 * If the downstream is MySQL/TiDB, you can use [sync-diff-inspector](../tools/sync-diff-inspector.md) to verify the data after data synchronization.
 
@@ -208,7 +209,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
 
         ```
         # downstream storage, equal to --dest-db-type
-        # Valid values are "mysql", "pb", "tidb", "flash", and "kafka".
+        # Valid values are "mysql", "pb", "kafka", "flash", and "tidb".
         db-type = "mysql"
 
         # the downstream MySQL protocol database
@@ -234,7 +235,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
 
         ```
         # downstream storage, equal to --dest-db-type
-        # Valid values are "mysql", "pb", "tidb", "flash", and "kafka".
+        # Valid values are "mysql", "pb", "kafka", "flash", and "tidb".
         db-type = "pb"
 
         # Uncomment this if you want to use `pb` or `sql` as `db-type`.
@@ -383,7 +384,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
             the directory where the Drainer data is stored ("data.drainer" by default)
         -dest-db-type string
             the downstream service type of Drainer
-            The value can be "tidb", "kafka", "pb", and "mysql" ("mysql" by default).
+            The value can be "mysql", "kafka", "pb", "flash", and "tidb". ("mysql" by default)
         -detect-interval int
             the interval of checking the online Pump in PD (10 by default, in seconds)
         -disable-detect
@@ -454,7 +455,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         disable-dispatch = false
  
         # the downstream service type of Drainer ("mysql" by default)
-        # Valid value: "mysql", "pb"
+        # Valid value: "mysql", "kafka", "pb", "flash", "tidb"
         db-type = "mysql"
  
         # `replicate-do-db` has priority over `replicate-do-table`. When they have the same `db` name,
