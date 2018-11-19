@@ -55,8 +55,10 @@ In addition, the user of the upstream and downstream databases must have the cor
 + The consistency check on the upstream MySQL multiple-instance shards
 
     - The consistency of the table schema
+
         - Column name, type
         - Index
+        
     - Whether the auto increment primary key that conflicts during merging exists
 
 ## Reset the data synchronization task
