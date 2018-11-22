@@ -16,7 +16,7 @@ Normally it takes Lightning 5 minutes per thread to import a 256 MB Chunk. It is
 
 There are several reasons why Lightning becomes slow:
 
-**Cause 1**: `region-concurrency` is too high, causing thread contention and reduces performance on the contrary
+**Cause 1**: `region-concurrency` is too high, which causes thread contention and reduces performance.
 
 1. The setting can be found from the start of the log by searching `region-concurrency`.
 2. If Lightning shares the same machine with other services (e.g. Importer), the `region-concurrency` must be **manually** set to 75% of total CPU number
