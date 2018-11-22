@@ -52,11 +52,11 @@ The black and white lists filtering rule of the upstream database instances is s
 
 ### Binlog event filtering
 
-Binlog event filtering is a more fine-grained filtering rule than the black and white lists synchronization at the schema and table levels. You can specify the database(s) or table(s) that you need to synchronize or filter out using statements like `INSERT`, `TRUNCATE TABLE`.
+Binlog event filtering is a more fine-grained filtering rule than the black and white lists filtering rule at the schema and table levels. You can specify the Binlog events of the database(s) or table(s) that you need to synchronize or filter out using statements like `INSERT`, `TRUNCATE TABLE`.
 
-### Column mapping filtering
+### Column mapping
 
-Column mapping filtering is used to resolve the conflicts occurred when the sharding auto-increment primary key IDs are merged. The value of the auto-increment primary key ID can be modified according to the instance-id, which is configured by the user, and the schema/table name number.
+Column mapping is used to resolve the conflicts occurred when the sharding auto-increment primary key IDs are merged for sharded tables. The value of the auto-increment primary key ID can be modified according to the instance-id, which is configured by the user, and the schema/table ID.
 
 ### Sharding support
 
