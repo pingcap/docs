@@ -40,7 +40,7 @@ If the owner has finished the DDL operation but other DM-workers have not skippe
 
 After you have manually unlocked the lock, the lock might not be automatically synchronized when the next sharding DDL event is received, because the configuration information of this task still includes offline DM-workers.
 
-Therefore, after you have manually unlocked the DM-workers, you need to use `stop-task`/`start-task` and a new task configuration that does not include offline DM-workers to restart the task.
+Therefore, after you have manually unlocked the DM-workers, you need to use `stop-task`/`start-task` and the updated task configuration that does not include offline DM-workers to restart the task.
 
 > **Note:** If the DM-workers that went offline go online after you run `unlock-ddl-lock`, it means: These DM-workers will synchronize the unlocked DDL operation again. (Other DM-workers that were not offline have synchronized the DDL operation.)
 The DDL operation of these DM-workers will try to match the subsequent synchronized DDL operations of other DM-workers. A match error of synchronizing sharding DDL operations of different DM-workers might occur.
