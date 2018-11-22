@@ -20,7 +20,7 @@ There are several reasons why Lightning becomes slow:
 
 1. The setting can be found from the start of the log by searching `region-concurrency`.
 2. If Lightning shares the same machine with other services (e.g. Importer), `region-concurrency` must be **manually** set to 75% of the total number of CPU cores
-3. If there is a quota on CPU (e.g. limited by K8s settings), Lightning may not be able to read this out. In this case, the `region-concurrency` must also be **manually** reduced.
+3. If there is a quota on CPU (e.g. limited by K8s settings), Lightning may not be able to read this out. In this case, `region-concurrency` must also be **manually** reduced.
 
 **Cause 2**: The table is too complex.
 
