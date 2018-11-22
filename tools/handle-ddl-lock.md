@@ -47,7 +47,7 @@ The DDL operation of these DM-workers will try to match the subsequent synchroni
 
 ## Case two: some DM-worker restarts (or is unreachable temporarily)
 
-The unlocking operation process of a DM calling multiple DM-workers to execute/skip the sharding DDL operation and update the checkpoint is not atomic. Therefore, a possible case is that after the owner finishes the DDL operation, an non-owner restarts before other DM-workers skip this DDL operation. At this time, the lock information on other DM-masters has been removed but the DM-worker that performs the restart operation has not skipped the DDL operation or updated the checkpoint.
+The unlocking operation process of a DM calling multiple DM-workers to execute/skip the sharding DDL operation and update the checkpoint is not atomic. Therefore, a possible case is that after the owner finishes the DDL operation, a non-owner restarts before other DM-workers skip this DDL operation. At this time, the lock information on the DM-master has been removed but the DM-worker that performs the restart operation has not skipped the DDL operation or updated the checkpoint.
 
 After the DDL task in restarted and `start-task` is performed, the DM-worker that performs the restart operation tries to synchronize this sharding DDL operation. But as other DM-workers have finished synchronizing the DDL operation, the restarted DM-worker cannot synchronize or skip this DDL operation.
 
