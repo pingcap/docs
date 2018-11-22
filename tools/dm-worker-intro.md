@@ -6,14 +6,14 @@ category: tools
 
 # DM-worker Introduction
 
-DM-worker is a tool used to synchronize the data from MySQL/MariaDB in the upstream to TiDB in the downstream. 
+DM-worker is a tool used to synchronize data from MySQL/MariaDB to TiDB. 
 
 It has the following features:
 
-- Connecting to a MySQL/MariaDB instance and registering as the slave of this instance
-- Reading the binlog files of MySQL/MariaDB and persisting the binlog files to the local storage (relay logs)
-- A single DM-worker supports synchronizing the data of one MySQL/MariaDB instance in the upstream to multiple TiDB instances in the downstream
-- Multiple DM-workers support synchronizing the data of multiple MySQL/MariaDB instances in the upstream to one TiDB instance in the downstream
+- Acts as a slave of any MySQL or MariaDB server
+- Reads the binlog events from MySQL/MariaDB and persists them to the local storage
+- A single DM-worker supports synchronizing the data of one MySQL/MariaDB instance to multiple TiDB instances
+- Multiple DM-workers support synchronizing the data of multiple MySQL/MariaDB instances to one TiDB instance
 
 ## DM-worker processing unit
 
