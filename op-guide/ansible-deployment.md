@@ -160,7 +160,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 Make sure you have logged in to the Control Machine using the `tidb` user account.
 
-It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the TiDB 2.0 GA version, TiDB 2.1 version, and the master version are compatible with Ansible 2.4 and Ansible 2.5.
+It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB-Ansible are compatible with Ansible 2.4 and Ansible 2.5.
 
 1. Install Ansible and the dependencies on the Control Machine:
 
