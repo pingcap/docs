@@ -52,7 +52,7 @@ The black and white lists filtering rule of the upstream database instances is s
 
 ### Binlog event filtering
 
-Binlog event filtering is a more fine-grained filtering rule than the black and white lists filtering rule at the schema and table levels. You can specify the Binlog events of the database(s) or table(s) that you need to synchronize or filter out using statements like `INSERT`, `TRUNCATE TABLE`.
+Binlog event filtering is a more fine-grained filtering rule than the black and white lists filtering rule at the schema and table levels. You can use statements like `INSERT`, `TRUNCATE TABLE` to specify the Binlog events of the database(s) or table(s) that you need to synchronize or filter out.
 
 ### Column mapping
 
