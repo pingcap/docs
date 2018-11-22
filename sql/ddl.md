@@ -19,7 +19,7 @@ create_specification:
   | [DEFAULT] COLLATE [=] collation_name
 ```
 
-The `CREATE DATABASE` statement is used to create a database, and to specify the default properties of the database, such as the default character set and validation rules. `CREATE SCHEMA` is a synonym for `CREATE DATABASE`.
+The `CREATE DATABASE`statement is used to create a database, and to specify the default properties of the database, such as the default character set and validation rules. `CREATE SCHEMA`is a synonym for `CREATE DATABASE`.
 
 If you create an existing database and does not specify `IF NOT EXISTS`, an error is displayed.
 
