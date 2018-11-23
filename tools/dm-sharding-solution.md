@@ -76,7 +76,7 @@ Data Migration has the following sharding DDL usage restrictions:
 
 - All the tables in a sharding group must execute the same DDL statements in the same order.
 
-   - Currently, Data Migration does not support using unordered crossed sharding DDL statements to synchronize data.
+   - Currently, Data Migration does not support executing the sharding DDL statements in an unordered and crossed way.
    - The whole synchronization process hangs up whenever a certain DDL statement on a table is not executed.
 
 - Only after one DDL operation is completed in the whole sharding group, this group can execute the next DDL statement.
