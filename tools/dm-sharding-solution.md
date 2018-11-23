@@ -52,9 +52,9 @@ To complete the sharding data synchronization task, Data Migration uses the glob
 
 The processing details are as follows:
 
-1. DM-worker creates a sharding group for all upstream tables merged into the same target table (first layer synchronization; members are the upstream tables)
+1. DM-worker creates a sharding group for all upstream tables to be merged into the same target table (first layer synchronization; members are the upstream tables)
 
-2. DM-master creates a sharding group for all DM-workers that perform the target table merging task (the second layer synchronization; the members are all dm-workers)
+2. DM-master creates a sharding group for all DM-workers that perform the target table merging task (the second layer synchronization; the members are all DM-workers)
 
 3. When a certain upstream table in the sharding group within the DM-worker encounters a DDL statement, the synchronization of the target table in the DM-worker is partially suspended (the DML statements before the DDL structure change continue to synchronize, while the DML statements after the DDL structure change and the subsequent DDL statements are ignored), but the synchronization of other target tables in this task continues.
 
@@ -92,12 +92,12 @@ Data Migration has the following sharding DDL usage restrictions:
     
     - If some of the sharding DDL statements have been executed when you start to synchronize the synchronization points, the sharding DDL operation can never be synchronized successfully.
 
-- If you need to change `router-rules`, you need to wait for all sharding DDL synchronization to complete.
+- If you need to change `router-rules`, you need to wait for synchronization of all sharding DDL operations to complete.
 
     - While in the process of sharding DDL synchronization, it reports an error if you use dmctl to change `router-rules`.
 
 - If you need to `CREATE` a new table to an existing sharding group, you need to keep the table schema the same as the newly edited table schema.
 
-    - For example, the original table_a, table_b initially has two columns (a, b), and after the sharding DDL has three columns (a, b, c), the table of the new CREATE after the synchronization is completed should have three columns (a, b, c).
+    - For example, the original table_a, table_b initially has two columns (a, b), and after the sharding DDL has three columns (a, b, c), the table of the new `CREATE` after the synchronization is completed should have three columns (a, b, c).
 
 - While the sharding DDL lock is waiting for synchronization, if DM-master is restarted, the synchronization process can be blocked because of the lock information loss.
