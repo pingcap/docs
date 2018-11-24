@@ -179,7 +179,7 @@ Description: the rules for mapping the the upstream database instances to the co
 
 - `source-column`, `target-column`: Uses the data of `source-column` to cover that of `target-column` via computing of `expression`.
 
-- `expression` :The expression used to convert the column data. Currently, only the following built-in expression is supported:
+- `expression`: The expression used to convert the column data. Currently, only the following built-in expression is supported:
         
     - `partition id`
         
@@ -190,12 +190,14 @@ Description: the rules for mapping the the upstream database instances to the co
             - If argument[0] == "", the partition ID takes up 0 bit in the figure below; otherwise, it takes up 4 bits (by default)
             - If argument[1] == "", the schema ID takes up 0 bit in the figure below; otherwise, it takes up 7 bits (by default)
             - If argument[2] == "", the table ID takes up 0 bit in the figure below; otherwise, it takes up 8 bits (by default)
+            - The origin ID is the value of the auto-increment ID column of a row in the table
 
             ![partition ID](../media/partition-id.png)
 
         - Restrictions:
         
             - It is only applicable to the bigint column.
-            - The instance ID value should meet (>= 0, <= 15) (4 bits by default)
-            - The schema ID value should meet (>= 0, <= 127) (7 bits by default)
-            - The table ID value should meet (>= 0, <= 255) (8 bits by default)
+            - The instance ID value should be (>= 0, <= 15) (4 bits by default)
+            - The schema ID value should be (>= 0, <= 127) (7 bits by default)
+            - The table ID value should be (>= 0, <= 255) (8 bits by default)
+            - The origin ID value should be (>= 0, <= 17592186044415) (44 bits by default)
