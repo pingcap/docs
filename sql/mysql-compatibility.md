@@ -32,6 +32,8 @@ However, in TiDB, the following MySQL features are not supported for the time be
 + X-Protocol
 + Savepoints
 + Column-level privileges
++ `CREATE TABLE tblName AS SELECT stmt` syntax
++ `CREATE TEMPORARY TABLE` syntax
 
 ## Features that are different from MySQL
 
