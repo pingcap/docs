@@ -54,7 +54,7 @@ The processing details are as follows:
 
 1. DM-worker creates a sharding group for all upstream tables to be merged into the same target table (first layer synchronization; members are the upstream tables)
 
-2. DM-master creates a sharding group for all DM-workers that perform the target table merging task (the second layer synchronization; the members are all DM-workers)
+2. DM-master creates a sharding group for all DM-workers that perform the target table merging task (the second layer synchronization; the members are all DM-workers that are doing the task)
 
 3. When a certain upstream table in the sharding group within the DM-worker encounters a DDL statement, the synchronization of the target table in the DM-worker is partially suspended (the DML statements before the DDL structure change continue to synchronize, while the DML statements after the DDL structure change and the subsequent DDL statements are ignored), but the synchronization of other target tables in this task continues.
 
@@ -96,7 +96,7 @@ Data Migration has the following sharding DDL usage restrictions:
 
     - While in the process of sharding DDL synchronization, it reports an error if you use dmctl to change `router-rules`.
 
-- If you need to `CREATE` a new table to an existing sharding group, you need to keep the table schema the same as the newly edited table schema.
+- If you need to `CREATE` a new table to an existing sharding group, you need to keep the table schema the same as the newly altered table schema.
 
     - For example, the original table_a, table_b initially has two columns (a, b), and after the sharding DDL has three columns (a, b, c), the table of the new `CREATE` after the synchronization is completed should have three columns (a, b, c).
 
