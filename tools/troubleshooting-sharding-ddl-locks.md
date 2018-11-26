@@ -13,18 +13,18 @@ This document shows how to troubleshoot sharding DDL locks in different abnormal
 The possible causes of an abnormal condition include:
 
 - Some DM-workers go offline
-- Some DM-worker restarts (or is unreachable temporarily)
+- A DM-worker restarts (or is unreachable temporarily)
 - DM-master restarts
 
 > **Warning:** Do not use `unlock-ddl-lock`/`break-ddl-lock` unless you are definitely clear about the possible impacts brought by this command and you can accept the impacts.
 
 ## Condition one: some DM-workers go offline
 
-Before DM-master tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL event. If the sharding DDL operation is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted, the sharding DDL lock cannot be automatically synchronized and unlocked since not all the DM-workers can receive the DDL event.
+Before the DM-master tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL event. If the sharding DDL operation is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted, then the sharding DDL lock cannot be automatically synchronized and unlocked because not all the DM-workers can receive the DDL event.
 
-If you do not need to make some DM-workers offline in the synchronization process of the sharding DDL operation, a better policy is to use `stop-task` to stop the running task first, then make some DM-workers offline, and finally use `start-task` and the **new task configuration** that does not contain the already offline DM-worker to restart the task.
+If you do not need to make some DM-workers offline in the process of synchronizing sharding DDL statements, a better solution is using `stop-task` to stop the running task first, then make the DM-workers offline, and finally use `start-task` and the **new task configuration** that does not contain the already offline DM-workers to restart the task.
 
-If the owner has finished the DDL operation but other DM-workers have not skipped this DDL operation, the owner has gone offline. For the solution, see [Case two: some DM-worker restarts](#case-two-some-dm-worker-restarts-or-is-unreachable-temporarily).
+If the owner goes offline when the owner has finished executing the DDL statement but other DM-workers have not skipped this DDL statement. For the solution, see [Condition two: a DM-worker restarts](#condition-two-a-dm-worker-restarts-or-is-unreachable-temporarily).
 
 ### Manual solution
 
@@ -32,46 +32,45 @@ If the owner has finished the DDL operation but other DM-workers have not skippe
 
 2. Run the `unlock-ddl-lock` command to specify the information of the lock to be unlocked manually.
 
-    - If the owner of this lock is offline, you can configure the `--owner` parameter to specify another DM-worker as the new owner to execute the DDL operation.
+    - If the owner of this lock is offline, you can configure the `--owner` parameter to specify another DM-worker as the new owner to execute the DDL statement.
 
 3. Run `show-ddl-locks` to check whether this lock has been successfully unlocked.
 
 ### Impact
 
-After you have manually unlocked the lock, the lock might not be automatically synchronized when the next sharding DDL event is received, because the configuration information of this task still includes offline DM-workers.
+After you have manually unlocked the lock, it still might exist that the lock cannot be automatically synchronized when the next sharding DDL event is received, because the offline DM-workers are included in the task configuration information.
 
 Therefore, after you have manually unlocked the DM-workers, you need to use `stop-task`/`start-task` and the updated task configuration that does not include offline DM-workers to restart the task.
 
-> **Note:** If the DM-workers that went offline go online after you run `unlock-ddl-lock`, it means: These DM-workers will synchronize the unlocked DDL operation again. (Other DM-workers that were not offline have synchronized the DDL operation.)
-The DDL operation of these DM-workers will try to match the subsequent synchronized DDL operations of other DM-workers. A match error of synchronizing sharding DDL operations of different DM-workers might occur.
+> **Note:** If the DM-workers that went offline become online again after you run `unlock-ddl-lock`, it means: These DM-workers will synchronize the unlocked DDL operation again. (Other DM-workers that were not offline have synchronized the DDL statement.) The DDL operation of these DM-workers will try to match the subsequent synchronized DDL statements of other DM-workers. A match error of synchronizing sharding DDL statements of different DM-workers might occur.
 
-## Case two: some DM-worker restarts (or is unreachable temporarily)
+## Condition two: a DM-worker restarts (or is unreachable temporarily)
 
-The unlocking operation process of a DM calling multiple DM-workers to execute/skip the sharding DDL operation and update the checkpoint is not atomic. Therefore, a possible case is that after the owner finishes the DDL operation, a non-owner restarts before other DM-workers skip this DDL operation. At this time, the lock information on the DM-master has been removed but the DM-worker that performs the restart operation has not skipped the DDL operation or updated the checkpoint.
+Currently, the DDL unlocking process is not atomic, during which the DM-master schedules multiple DM-workers to execute or skip the sharding DDL statement and updates the checkpoint. Therefore, it might exist that after the owner finishes executing the DDL statement, a non-owner restarts before other DM-workers skip this DDL statement. At this time, the lock information on the DM-master has been removed but the restarted DM-worker has failed to skip this DDL statement and update the checkpoint.
 
-After the DDL task in restarted and `start-task` is performed, the DM-worker that performs the restart operation tries to synchronize this sharding DDL operation. But as other DM-workers have finished synchronizing the DDL operation, the restarted DM-worker cannot synchronize or skip this DDL operation.
+After the DM-worker restarts and runs `start-task`, it retries to synchronize the sharding DDL statement. But as other DM-workers have finished synchronizing this DDL statement, the restarted DM-worker cannot synchronize or skip this DDL statement.
 
 ### Manual solution
 
-1. Run `query-status` to check the information of the sharding DDL operation that the restarted DM-worker is currently blocking. 
+1. Run `query-status` to check the information of the sharding DDL statement that the restarted DM-worker is currently blocking. 
 
 2. Run `break-ddl-lock` to specify the DM-worker that is to break the lock forcefully.
     
-    - Configure `skip` to specify the sharding DDL operation to be skipped.
+    - Configure `skip` to specify the sharding DDL statement to be skipped.
 
 3. Run `query-status` to check whether the lock has been successfully broken.
 
 ### Impact
 
-No bad impact. After you have manually broken the lock, the subsequent sharding DDL operation can be automatically synchronized normally.
+No bad impact. After you have manually broken the lock, the subsequent sharding DDL statements can be automatically synchronized normally.
 
-## Case three: DM-master restarts
+## Condition three: DM-master restarts
 
-After a DM-worker sends the sharding DDL information to DM-master, this DM-worker will hang up, wait for the message from DM-master, and then decide whether to execute or skip this DDL operation.
+After a DM-worker sends the sharding DDL information to DM-master, this DM-worker will hang up, wait for the message from DM-master, and then decide whether to execute or skip this DDL statement.
 
 Because the state of DM-master is not persistent, the lock information that a DM-worker sends to DM-master will be lost if DM-master restarts.
 
-Therefore, DM-master cannot dispatch a DM-worker to execute/skip the DDL operation after DM-master restarts due to lock information loss.
+Therefore, DM-master cannot schedule the DM-worker to execute or skip the DDL statement after DM-master restarts due to lock information loss.
 
 ### Manual solution
 
@@ -82,72 +81,72 @@ Therefore, DM-master cannot dispatch a DM-worker to execute/skip the DDL operati
 
 ### Impact
 
-No bad impact. After you have manually paused and resumed the task, the DM-worker resumes synchronizing the sharding DDL lock and sends the lost lock information to DM-master. The subsequent sharding DDL operation can be synchronized normally.
+No bad impact. After you have manually paused and resumed the task, the DM-worker resumes synchronizing the sharding DDL lock and sends the lost lock information to DM-master. The subsequent sharding DDL statements can be synchronized normally.
 
-## Parameter description of related commands
+## Parameter description of sharding DDL lock commands
 
 ### `show-ddl-locks`
 
 - `task-name`: 
     
     - Non-flag parameter, string, optional
-    - If not set, no specific task is to be queried; if set, only this task is to be queried.
+    - If it is not set, no specific task is queried; if it is set, only this task is queried.
 
 - `worker`:
     
     - Flag parameter, string array, `--worker`, optional
     - Can be specified repeatedly multiple times.
-    - If set, only the DDL lock information that is related to these DM-workers is to be queried.
+    - If it is set, only the DDL lock information related to these DM-workers is to be queried.
 
 #### `unlock-ddl-lock`
 
 - `lock-ID`: 
 
     - Non-flag parameter, string, required
-    - Specifies the lock ID of the DDL operation to be unlocked (this ID can be obtained by `show-ddl-locks`)
+    - Specifies the ID of the DDL lock that to be unlocked (this ID can be obtained by `show-ddl-locks`)
 
 - `owner`: 
     
     - Flag parameter, string, `--owner`, optional
-    - If set, this value should correspond to a DM-worker that executes the DDL operation of the lock instead of the default owner.
+    - If it is set, this value should correspond to a DM-worker that substitutes for the default owner to execute the DDL statement of the lock.
 
 - `force-remove`: 
     
     - Flag parameter, boolean, `--force-remove`, optional
-    - If set, the lock information is removed even though the owner fails to execute the DDL operation. The owner cannot retry or perform other operations.
+    - If it is set, the lock information is removed even though the owner fails to execute the DDL statement. The owner cannot retry or perform other operations.
 
 - `worker`: 
     
     - Flag parameter, string array, `--worker`, optional
     - Can be specified repeatedly multiple times.
-    - If not set, all the DM-workers to receive the lock event execute/skip the DDL operation. If set, only the specified DM-workers execute/skip the DDL operation.
+    - If it is not set, all the DM-workers to receive the lock event execute or skip the DDL statement. If it is set, only the specified DM-workers execute or skip the DDL statement.
 
 #### `break-ddl-lock`
 
 - `task-name`: 
     
     - Non-flag parameter, string, required
-    - Specifies the name for the task that contains the lock to be broken.
+    - Specifies the name of the task where the lock to be broken is located.
 
 - `worker`: 
 
     - Flag parameter, string, `--worker`, required
-    - Only one should be specified.
-    - Specifies the DM-worker to break the lock.
+    - You must specify one and can only specify one.
+    - Specifies the DM-worker that is to break the lock.
 
 - `remove-id`: 
 
-    - Flag parameter, string, `--remove-id`, required
-    - If set, the value should be the ID of a DDL lock. Then the information about the DDL lock recorded in the DM-worker is removed.
+    - Flag parameter, string, `--remove-id`, optional
+    - If it is set, the value should be the ID of a DDL lock. Then the information about the DDL lock recorded in the DM-worker is removed.
     
 - `exec`: 
 
     - Flag parameter, boolean, `--exec`, optional
-    - If set, a specific DM-worker executes the DDL operation corresponding to the lock.
-    - Cannot be specified simultaneously with the `skip` parameter.
+    - If it is set, a specific DM-worker executes the DDL statement corresponding to the lock.
+    - You cannot specify `exec` and `skip` at the same time.
 
 - `skip`: 
     
     - Flag parameter, boolean, `--skip`, optional
-    - If set, a specific DM-worker skips the DDL operation of the lock.
-    - Cannot be specified simultaneously with the `skip` parameter.
+    - If it is set, a specific DM-worker skips the DDL operation of the lock.
+    - You cannot specify `exec` and `skip` at the same time.
