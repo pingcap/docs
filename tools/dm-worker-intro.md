@@ -59,7 +59,7 @@ GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_w
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
-If you also need to synchronize the data from other databases into TiDB, make sure the same privileges are granted to those database users.
+If you also need to synchronize the data from other databases into TiDB, make sure the same privileges are granted to the user of the respective databases.
 
 ### Downstream database user privileges
 
