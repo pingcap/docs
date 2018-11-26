@@ -85,7 +85,7 @@ GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX  ON db.table TO 'your_
 ### Minimal privilege required by each processing unit
 
 | Processing unit | Minimal upstream (MySQL/MariaDB) privilege | Minimal downstream (TiDB) privilege | Minimal system privilege |
-|:----|:--------------------|:------------|:----|
+|----|--------------------|------------|----|
 | Relay log | `REPLICATION SLAVE` (reads the binlog)<br>`REPLICATION CLIENT` (`show master status`, `show slave status`) | NULL | Read/Write local files |
 | Dumper | `SELECT`<br>`RELOAD` (flushes tables with Read lock and unlocks tables）| NULL | Write local files |
 | Loader | NULL | `SELECT` (Query the checkpoint history)<br>`CREATE` (creates a database/table)<br>`DELETE` (deletes checkpoint)<br>`INSERT` (Inserts the Dump data) | Read/Write local files |
