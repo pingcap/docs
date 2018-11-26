@@ -1,24 +1,24 @@
 ---
-title: Handling the Sharding DDL Lock Manually
-summary: Learn to manually unlock the sharding DDL lock.
+title: Troubleshooting Sharding DDL Locks
+summary: Learn how to troubleshoot sharding DDL locks in different abnormal conditions.
 category: tools
 ---
 
-# Handling the Sharding DDL Lock Manually
+# Troubleshooting Sharding DDL Locks
 
-This document shows how to manually unlock the sharding DDL lock in different cases.
+The Data Migration tool uses a sharding DDL lock to ensure operations are applied in the correct order. This locking mechanism occurs automatically, but in some abnormal conditions you may need to perform manual operations such as force-releasing the lock.
 
-Generally, the sharding DDL lock synchronization of DM can be completed automatically. But when some abnormality happens, you need to use `unlock-ddl-lock`/`break-ddl-lock` to unlock the abnormal DDL lock manually.
+This document shows how to troubleshoot sharding DDL locks in different abnormal conditions.
 
-The possible causes of an abnormality include:
+The possible causes of an abnormal condition include:
 
 - Some DM-workers go offline
 - Some DM-worker restarts (or is unreachable temporarily)
 - DM-master restarts
 
-> **Note:** You can use `unlock-ddl-lock`/`break-ddl-lock` only when you are definitely clear about the possible impacts brought by this command and you can accept the impacts.
+> **Warning:** Do not use `unlock-ddl-lock`/`break-ddl-lock` unless you are definitely clear about the possible impacts brought by this command and you can accept the impacts.
 
-## Case one: some DM-workers go offline
+## Condition one: some DM-workers go offline
 
 Before DM-master tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL event. If the sharding DDL operation is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted, the sharding DDL lock cannot be automatically synchronized and unlocked since not all the DM-workers can receive the DDL event.
 
