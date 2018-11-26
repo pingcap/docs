@@ -46,7 +46,7 @@ Therefore, after you have manually unlocked the DM-workers, you need to use `sto
 
 ## Condition two: a DM-worker restarts (or is unreachable temporarily)
 
-Currently, the DDL unlocking process is not atomic, during which the DM-master schedules multiple DM-workers to execute or skip the sharding DDL statement and updates the checkpoint. Therefore, it might exist that after the owner finishes executing the DDL statement, a non-owner restarts before other DM-workers skip this DDL statement. At this time, the lock information on the DM-master has been removed but the restarted DM-worker has failed to skip this DDL statement and update the checkpoint.
+Currently, the DDL unlocking process is not atomic, during which the DM-master schedules multiple DM-workers to execute or skip the sharding DDL statement and updates the checkpoint. Therefore, it might exist that after the owner finishes executing the DDL statement, a non-owner restarts before it skips this DDL statement and updates the checkpoint. At this time, the lock information on the DM-master has been removed but the restarted DM-worker has failed to skip this DDL statement and update the checkpoint.
 
 After the DM-worker restarts and runs `start-task`, it retries to synchronize the sharding DDL statement. But as other DM-workers have finished synchronizing this DDL statement, the restarted DM-worker cannot synchronize or skip this DDL statement.
 
@@ -56,7 +56,7 @@ After the DM-worker restarts and runs `start-task`, it retries to synchronize th
 
 2. Run `break-ddl-lock` to specify the DM-worker that is to break the lock forcefully.
     
-    - Configure `skip` to specify the sharding DDL statement to be skipped.
+    - Specify `skip` to skip the sharding DDL statement.
 
 3. Run `query-status` to check whether the lock has been successfully broken.
 
@@ -113,7 +113,7 @@ No bad impact. After you have manually paused and resumed the task, the DM-worke
 - `force-remove`: 
     
     - Flag parameter, boolean, `--force-remove`, optional
-    - If it is set, the lock information is removed even though the owner fails to execute the DDL statement. The owner cannot retry or perform other operations.
+    - If it is set, the lock information is removed even though the owner fails to execute the DDL statement. The owner cannot retry or perform other operations on this DDL statement.
 
 - `worker`: 
     
