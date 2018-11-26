@@ -176,6 +176,9 @@ The output of the query execution plan returned from the `EXPLAIN` command diffe
     - The default value in TiDB is `utf8mb4`.
     - The default value in MySQL 5.7 is `latin1`, but changes to `utf8mb4` in MySQL 8.0.
 - Default collation: `latin1_swedish_ci` in MySQL 5.7, while `binary` in TiDB.
+- Default value of `foreign_key_checks`:
+    - The default value in TiDB is `OFF` and currently TiDB only supports `OFF`.
+    - The default value in MySQL 5.7 is `ON`.
 - Default value of `lower_case_table_names`:
     - The default value in TiDB is 2 and currently TiDB only supports 2.
     - The default value in MySQL:
