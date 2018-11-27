@@ -342,8 +342,8 @@ Usage:
 >> member                               // Display the information of all members
 {
   "header": {
-  "leader": {......},	    "cluster_id": 6493707687106161130
-  "etcd_leader": {......},	  },
+    "cluster_id": 6493707687106161130
+  },
   "members": [
     {
       "name": "pd1",
@@ -530,8 +530,9 @@ Usage:
     },
     {
       ...
-    }
-  ],
+    },
+    ...
+  ]
 }
 ```
 
@@ -545,7 +546,7 @@ Usage:
 >> region topread
 {
   "count": 16,
-  "regions": [...],
+  "regions": [...]
 }
 ```
 
@@ -559,7 +560,7 @@ Usage:
 >> region topwrite
 {
   "count": 16,
-  "regions": [...],
+  "regions": [...]
 }
 ```
 
@@ -573,7 +574,7 @@ Usage:
 >> region topconfver
 {
   "count": 16,
-  "regions": [...],
+  "regions": [...]
 }
 ```
 
@@ -587,7 +588,7 @@ Usage:
 >> region topversion
 {
   "count": 16,
-  "regions": [...],
+  "regions": [...]
 }
 ```
 
@@ -601,7 +602,7 @@ Usage:
 >> region topsize
 {
    "count": 16,
-   "regions": [...],
+   "regions": [...]
 }
 
 ```
@@ -624,7 +625,7 @@ Usage:
 >> region miss-peer
 {
   "count": 2,
-  "regions": [...],
+  "regions": [...]
 }
 ```
 
