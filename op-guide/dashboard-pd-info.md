@@ -23,18 +23,18 @@ Cluster | Storage capacity | The total capacity size of the cluster |
 Cluster | Current storage size | The current storage size of the cluster |
 Cluster | Number of Regions | The total number of Regions without replicas |
 Cluster | Leader balance ratio | The leader ratio difference of the instances with the biggest leader ratio and the smallest leader ratio | It is less than 5% for a balanced situation and becomes bigger when you restart an instance |
-Cluster | Region balance ratio | The region ratio difference of the instances with the biggest Region ratio and the smallest Region ratio | It is less than 5% for a balanced situation and becomes bigger when you add or remove an instance |
+Cluster | Region balance ratio | The Region ratio difference of the instances with the biggest Region ratio and the smallest Region ratio | It is less than 5% for a balanced situation and becomes bigger when you add or remove an instance |
 Cluster | Normal stores | The count of healthy stores |
 Cluster | Abnormal stores | The count of unhealthy stores | The normal value is `0`. If the number is bigger than `0`, it means at least one instance is abnormal.
 Cluster | Current storage usage | The current storage size and used ratio of the cluster |
 Cluster | Current peer count | The current peer count of the cluster |
 Cluster | Metadata information | It records the cluster ID, the last ID the allocator generated, and the last timestamp TSO generated. |
 Cluster | Region label isolation level | The number of Regions in different label levels |
-Cluster | Region health | It records the unusual Regions' count which may have pending peers, down peers, extra peers, offline peers, miss peers, learner peers or incorrect namespace | The number of pending peers should less than `100`. The miss peers should not be continuous greater than `0`.
+Cluster | Region health | It records the unusual Regions' count which may include pending peers, down peers, extra peers, offline peers, missing peers, learner peers or incorrect namespaces | The number of pending peers should be less than `100`. The missing peers should not be persistently greater than `0`.
 Balance | Store capacity | The capacity size of each TiKV instance |
 Balance | Store available | The available capacity size of each TiKV instance |
 Balance | Store used | The used capacity size of each TiKV instance |
-Balance | Size amplification | The size amplification, which is equal to Store region size over Store used capacity size, of each TiKV instance |
+Balance | Size amplification | The size amplification, which is equal to Store Region size over Store used capacity size, of each TiKV instance |
 Balance | Size available ratio | It is equal to Store available capacity size over Store capacity size for each TiKV instance |
 Balance | Store leader score | The leader score of each TiKV instance |
 Balance | Store Region score | The Region score of each TiKV instance |
