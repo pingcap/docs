@@ -16,47 +16,47 @@ You can get an overview of the component PD status from the PD dashboard, where 
 
 To understand the key metrics displayed on the Overview dashboard, check the following table:
 
-Row Name | Panel Name | Description | Normal Range
+Row name | Panel name | Description | Normal range
 ---------------- | ---------------- | ---------------------------------- | --------------
-Cluster | PD Role | It indicates whether the current PD is the leader or a follower. |
-Cluster | Storage Capacity | The total capacity size of the cluster |
-Cluster | Current Storage Size | The current storage size of the cluster |
+Cluster | PD role | It indicates whether the current PD is the leader or a follower. |
+Cluster | Storage capacity | The total capacity size of the cluster |
+Cluster | Current storage size | The current storage size of the cluster |
 Cluster | Number of Regions | The total number of Regions without replicas |
-Cluster | Leader Balance Ratio | The leader ratio difference of the instances with the biggest leader ratio and the smallest leader ratio | It is less than 5% for a balanced situation and becomes bigger when you restart an instance |
-Cluster | Region Balance Ratio | The region ratio difference of the instances with the biggest Region ratio and the smallest Region ratio | It is less than 5% for a balanced situation and becomes bigger when you add or remove an instance |
-Cluster | Normal Stores | The count of healthy stores |
-Cluster | Abnormal Stores | The count of unhealthy stores | The normal value is `0`. If the number is bigger than `0`, it means at least one instance is abnormal.
-Cluster | Current Storage Usage | The current storage size and used ratio of the cluster |
-Cluster | Current Peer Count | The current peer count of the cluster |
-Cluster | Metadata Information | It records the cluster ID, the last ID the allocator generated, and the last timestamp TSO generated. |
-Cluster | Region Label Isolation Level | The number of Regions in different label levels |
-Cluster | Region Health | It records the unusual Regions' count which may have pending peers, down peers, extra peers, offline peers, miss peers, learner peers or incorrect namespace | The number of pending peers should less than `100`. The miss peers should not be continuous greater than `0`.
+Cluster | Leader balance ratio | The leader ratio difference of the instances with the biggest leader ratio and the smallest leader ratio | It is less than 5% for a balanced situation and becomes bigger when you restart an instance |
+Cluster | Region balance ratio | The region ratio difference of the instances with the biggest Region ratio and the smallest Region ratio | It is less than 5% for a balanced situation and becomes bigger when you add or remove an instance |
+Cluster | Normal stores | The count of healthy stores |
+Cluster | Abnormal stores | The count of unhealthy stores | The normal value is `0`. If the number is bigger than `0`, it means at least one instance is abnormal.
+Cluster | Current storage usage | The current storage size and used ratio of the cluster |
+Cluster | Current peer count | The current peer count of the cluster |
+Cluster | Metadata information | It records the cluster ID, the last ID the allocator generated, and the last timestamp TSO generated. |
+Cluster | Region label isolation level | The number of Regions in different label levels |
+Cluster | Region health | It records the unusual Regions' count which may have pending peers, down peers, extra peers, offline peers, miss peers, learner peers or incorrect namespace | The number of pending peers should less than `100`. The miss peers should not be continuous greater than `0`.
 Balance | Store capacity | The capacity size of each TiKV instance |
 Balance | Store available | The available capacity size of each TiKV instance |
 Balance | Store used | The used capacity size of each TiKV instance |
 Balance | Size amplification | The size amplification, which is equal to Store region size over Store used capacity size, of each TiKV instance |
 Balance | Size available ratio | It is equal to Store available capacity size over Store capacity size for each TiKV instance |
 Balance | Store leader score | The leader score of each TiKV instance |
-Balance | Store region score | The Region score of each TiKV instance |
+Balance | Store Region score | The Region score of each TiKV instance |
 Balance | Store leader size | The total leader size of each TiKV instance |
-Balance | Store region size | The total Region size of each TiKV instance |
+Balance | Store Region size | The total Region size of each TiKV instance |
 Balance | Store leader count | The leader count of each TiKV instance |
-Balance | Store region count | The Region count of each TiKV instance |
-HotRegion | Hot write region's leader distribution | The total number of leader Regions under hot write on each TiKV instance |
-HotRegion | Hot write region's peer distribution | The total number of Regions which are not leader under hot write on each TiKV instance |
-HotRegion | Hot write region's leader written bytes | The total bytes of hot write on leader Regions for each TiKV instance |
-HotRegion | Hot write region's peer written bytes | The total bytes of hot write on Regions which are not leader for each TiKV instance |
-HotRegion | Hot read region's leader distribution | The total number of leader Regions under hot read on each TiKV instance |
-HotRegion | Hot read region's peer distribution | The total number of Regions which are not leader under hot read on each TiKV instance |
-HotRegion | Hot read region's leader read bytes | The total bytes of hot read on leader Regions for each TiKV instance |
-HotRegion | Hot read region's peer read bytes | The total bytes of hot read on Regions which are not leader for each TiKV instance |
+Balance | Store Region count | The Region count of each TiKV instance |
+HotRegion | Hot write Region's leader distribution | The total number of leader Regions under hot write on each TiKV instance |
+HotRegion | Hot write Region's peer distribution | The total number of Regions which are not leader under hot write on each TiKV instance |
+HotRegion | Hot write Region's leader written bytes | The total bytes of hot write on leader Regions for each TiKV instance |
+HotRegion | Hot write Region's peer written bytes | The total bytes of hot write on Regions which are not leader for each TiKV instance |
+HotRegion | Hot read Region's leader distribution | The total number of leader Regions under hot read on each TiKV instance |
+HotRegion | Hot read Region's peer distribution | The total number of Regions which are not leader under hot read on each TiKV instance |
+HotRegion | Hot read Region's leader read bytes | The total bytes of hot read on leader Regions for each TiKV instance |
+HotRegion | Hot read Region's peer read bytes | The total bytes of hot read on Regions which are not leader for each TiKV instance |
 Scheduler | Scheduler is running | The current running schedulers |
 Scheduler | Balance leader movement | The leader movement details among TiKV instances |
-Scheduler | Balance region movement | The Region movement details among TiKV instances |
+Scheduler | Balance Region movement | The Region movement details among TiKV instances |
 Scheduler | Balance leader event | The count of balance leader events |
-Scheduler | Balance region event | The count of balance Region events |
+Scheduler | Balance Region event | The count of balance Region events |
 Scheduler | Balance leader scheduler | The inner status of balance leader scheduler |
-Scheduler | Balance region scheduler | The inner status of balance Region scheduler |
+Scheduler | Balance Region scheduler | The inner status of balance Region scheduler |
 Scheduler | Namespace checker | The namespace checker's status |
 Scheduler | Replica checker | The replica checker's status |
 Scheduler | Region merge checker | The merge checker's status |
@@ -66,27 +66,27 @@ Operator | Schedule operator finish | The number of different operators that are
 Operator | Schedule operator timeout | The number of different operators that are timeout |
 Operator | Schedule operator replaced or canceled | The number of different operators that are replaced or canceled |
 Operator | Schedule operators count by state | The number of operators in different status |
-Operator | 99% operator finish duration | The time consumed when the operator is finished in `.99` |
-Operator | 50% operator finish duration | The time consumed when the operator is finished in `.50` |
-Operator | 99% operator step duration | The time consumed when the operator step is finished in `.99` |
-Operator | 50% operator step duration | The time consumed when the operator step is finished in `.50` |
-Grpc | completed commands rate | The rate of completing each kind of gRPC commands |
-Grpc | 99% completed_cmds_duration_seconds | The time consumed of completing each kind of gRPC commands in `.99` |
-Etcd | handle_txns_count | The count of Ectd transactions |
-Etcd | 99% handle_txns_duration_seconds | The time consumed of handling Ectd transactions in `.99` |
-Etcd | 99% wal_fsync_duration_seconds | The time consumed of writing WAL into the persistent storage in `.99` | The value is less than `1s`.
-Etcd | 99% peer_round_trip_time_seconds | The latency of the network in `.99` | The value is less than `1s`.
-Etcd | etcd disk wal fsync rate | The rate of writing WAL into the persistent storage |
-Etcd | Raft Term | The current term of Raft |
-Etcd | Raft Committed Index | The last committed index of Raft |
-Etcd | Raft Applied Index | The last applied index of Raft |
-TiDB | handle_requests_count | The count of TiDB requests |
-TiDB | handle_requests_duration_seconds | The time consumed of handling TiDB requests | It should be less than `100ms` in `.99`.
+Operator | 99% Operator finish duration | The time consumed when the operator is finished in `.99` |
+Operator | 50% Operator finish duration | The time consumed when the operator is finished in `.50` |
+Operator | 99% Operator step duration | The time consumed when the operator step is finished in `.99` |
+Operator | 50% Operator step duration | The time consumed when the operator step is finished in `.50` |
+gRPC | Completed commands rate | The rate of completing each kind of gRPC commands |
+gRPC | 99% Completed commands duration | The time consumed of completing each kind of gRPC commands in `.99` |
+etcd | Handle transactions count | The count of etcd transactions |
+etcd | 99% Handle transactions duration | The time consumed of handling etcd transactions in `.99` |
+etcd | 99% WAL fsync duration | The time consumed of writing WAL into the persistent storage in `.99` | The value is less than `1s`.
+etcd | 99% Peer round trip time seconds | The latency of the network in `.99` | The value is less than `1s`.
+etcd | etcd disk wal fsync rate | The rate of writing WAL into the persistent storage |
+etcd | Raft term | The current term of Raft |
+etcd | Raft committed index | The last committed index of Raft |
+etcd | Raft applied index | The last applied index of Raft |
+TiDB | Handle requests count | The count of TiDB requests |
+TiDB | Handle requests duration | The time consumed of handling TiDB requests | It should be less than `100ms` in `.99`.
 Heartbeat | Region heartbeat report | The count of the heartbeats which each TiKV instance reports to PD |
 Heartbeat | Region heartbeat report error | The count of the heartbeats with the `error` status |
 Heartbeat | Region heartbeat report active | The count of the heartbeats with the `ok` status |
 Heartbeat | Region schedule push | The count of the corresponding schedule commands which PD sends to each TiKV instance |
-Heartbeat | 99% region heartbeat latency | The heartbeat latency of each TiKV instance in `.99` |
+Heartbeat | 99% Region heartbeat latency | The heartbeat latency of each TiKV instance in `.99` |
 
 ## Interface of the PD dashboard
 
