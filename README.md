@@ -120,6 +120,10 @@
     - [Overview](tools/data-migration-overview.md)
     - [Deployment](tools/data-migration-deployment.md)
     - [Synchronize Data](tools/data-migration-practice.md)
+    + Configure
+      - [Configuration Overview](tools/dm-configuration-file-overview.md)
+      - [Task Configuration File](tools/dm-task-configuration-file-intro.md)
+      - [Argument Description](tools/dm-task-config-argument-description.md)
     + Sharding Data Solution
       - [Overview and Design Details](tools/dm-sharding-solution.md)
       - [Sharding DDL Usage Restrictions](tools/dm-sharding-solution.md#sharding-ddl-usage-restrictions)
