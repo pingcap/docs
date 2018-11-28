@@ -24,7 +24,7 @@ name: test                      # The name of the task. Should be globally uniqu
 task-mode: all                  # The task mode. Can be set to `full`/`incremental`/`all`.
 is-sharding: true               # Whether it is a sharding task
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information
-remove-meta: false              # Whether to remove the `meta` information (`checkpoint` and `onlineddl`) before the 
+remove-meta: false              # Whether to remove the `meta` information (`checkpoint` and `onlineddl`) before starting the 
                                 # synchronization task 
 
 target-database:                # Configuration of the downstream database instance
@@ -87,7 +87,7 @@ loaders:                                            # Configuration arguments of
     global:
     ​    pool-size: 16                               # The number of threads that execute mydumper SQL files concurrently in Loader
     ​    dir: "./dumped_data"                        # The directory output by mydumper that Loader reads. Directories for
-                                                    # different tasks of the same instance are different. (mydumper outputs the 
+                                                    # different tasks of the same instance must be different. (mydumper outputs the 
                                                     # SQL file based on the directory)
 
 syncers:                                            # Configuration arguments of running Syncer
