@@ -23,7 +23,7 @@ Cluster | Available size | The available capacity size of each TiKV instance |
 Cluster | Capacity size | The capacity size of each TiKV instance |
 Cluster | CPU | The cpu usage of each TiKV instance |
 Cluster | Memory | The memory usage of each TiKV instance |
-Cluster | IO utilization | The io utilization of each TiKV instance |
+Cluster | I/O utilization | The io utilization of each TiKV instance |
 Cluster | MBps | The total bytes and keys of read and write on each TiKV instance |
 Cluster | QPS | The QPS of different kinds of commands in each TiKV instance |
 Cluster | Errps | The total number of the gRPC message failure |
@@ -83,7 +83,7 @@ Scheduler | Scheduler stage total | The total number of commands on each stage |
 Scheduler | Scheduler priority commands | The count of different priority commands |
 Scheduler | Scheduler pending commands | The count of pending commands on each TiKV instance |
 Scheduler - batch_get | Scheduler stage total | The total number of commands on each stage in batch_get command | There should not be lots of errors in a short time.
-Scheduler - batch_get | Scheduler command duration | The time consumed when execting batch_get command | It should be less than `1s`.
+Scheduler - batch_get | Scheduler command duration | The time consumed when executing batch_get command | It should be less than `1s`.
 Scheduler - batch_get | Scheduler latch wait duration | The time which is caused by latch wait in batch_get command | It should be less than `1s`.
 Scheduler - batch_get | Scheduler keys read | The count of keys read by a batch_get command |
 Scheduler - batch_get | Scheduler keys written | The count of keys written by a batch_get command |
@@ -92,7 +92,7 @@ Scheduler - batch_get | Scheduler scan details [lock] | The keys scan details of
 Scheduler - batch_get | Scheduler scan details [write] | The keys scan details of write CF when executing batch_get command |
 Scheduler - batch_get | Scheduler scan details [default] | The keys scan details of default CF when executing batch_get command |
 Scheduler - cleanup | Scheduler stage total | The total number of commands on each stage in cleanup command | There should not be lots of errors in a short time. 
-Scheduler - cleanup | Scheduler command duration | The time consumed when execting cleanup command | It should be less than `1s`.
+Scheduler - cleanup | Scheduler command duration | The time consumed when executing cleanup command | It should be less than `1s`.
 Scheduler - cleanup | Scheduler latch wait duration | The time which is caused by latch wait in cleanup command | It should be less than `1s`.
 Scheduler - cleanup | Scheduler keys read | The count of keys read by a cleanup command |
 Scheduler - cleanup | Scheduler keys written | The count of keys written by a cleanup command |
@@ -101,7 +101,7 @@ Scheduler - cleanup | Scheduler scan details [lock] | The keys scan details of l
 Scheduler - cleanup | Scheduler scan details [write] | The keys scan details of write CF when executing cleanup command |
 Scheduler - cleanup | Scheduler scan details [default] | The keys scan details of default CF when executing cleanup command |
 Scheduler - commit | Scheduler stage total | The total number of commands on each stage in commit command | There should not be lots of errors in a short time. 
-Scheduler - commit | Scheduler command duration | The time consumed when execting commit command | It should be less than `1s`.
+Scheduler - commit | Scheduler command duration | The time consumed when executing commit command | It should be less than `1s`.
 Scheduler - commit | Scheduler latch wait duration | The time which is caused by latch wait in commit command | It should be less than `1s`. 
 Scheduler - commit | Scheduler keys read | The count of keys read by a commit command |
 Scheduler - commit | Scheduler keys written | The count of keys written by a commit command |
@@ -110,7 +110,7 @@ Scheduler - commit | Scheduler scan details [lock] | The keys scan details of lo
 Scheduler - commit | Scheduler scan details [write] | The keys scan details of write CF when executing commit command |
 Scheduler - commit | Scheduler scan details [default] | The keys scan details of default CF when executing commit command |
 Scheduler - gc | Scheduler stage total | The total number of commands on each stage in gc command | There should not be lots of errors in a short time. 
-Scheduler - gc | Scheduler command duration | The time consumed when execting gc command | It should be less than `1s`.
+Scheduler - gc | Scheduler command duration | The time consumed when executing gc command | It should be less than `1s`.
 Scheduler - gc | Scheduler latch wait duration | The time which is caused by latch wait in gc command | It should be less than `1s`.
 Scheduler - gc | Scheduler keys read | The count of keys read by a gc command |
 Scheduler - gc | Scheduler keys written | The count of keys written by a gc command |
@@ -119,7 +119,7 @@ Scheduler - gc | Scheduler scan details [lock] | The keys scan details of lock C
 Scheduler - gc | Scheduler scan details [write] | The keys scan details of write CF when executing gc command |
 Scheduler - gc | Scheduler scan details [default] | The keys scan details of default CF when executing gc command |
 Scheduler - get | Scheduler stage total | The total number of commands on each stage in get command | There should not be lots of errors in a short time. 
-Scheduler - get | Scheduler command duration | The time consumed when execting get command | It should be less than `1s`.
+Scheduler - get | Scheduler command duration | The time consumed when executing get command | It should be less than `1s`.
 Scheduler - get | Scheduler latch wait duration | The time which is caused by latch wait in get command | It should be less than `1s`.
 Scheduler - get | Scheduler keys read | The count of keys read by a get command |
 Scheduler - get | Scheduler keys written | The count of keys written by a get command |
@@ -128,7 +128,7 @@ Scheduler - get | Scheduler scan details [lock] | The keys scan details of lock 
 Scheduler - get | Scheduler scan details [write] | The keys scan details of write CF when executing get command |
 Scheduler - get | Scheduler scan details [default] | The keys scan details of default CF when executing get command |
 Scheduler - key_mvcc | Scheduler stage total | The total number of commands on each stage in key_mvcc command | There should not be lots of errors in a short time. 
-Scheduler - key_mvcc | Scheduler command duration | The time consumed when execting key_mvcc command | It should be less than `1s`.
+Scheduler - key_mvcc | Scheduler command duration | The time consumed when executing key_mvcc command | It should be less than `1s`.
 Scheduler - key_mvcc | Scheduler latch wait duration | The time which is caused by latch wait in key_mvcc command | It should be less than `1s`.
 Scheduler - key_mvcc | Scheduler keys read | The count of keys read by a key_mvcc command |
 Scheduler - key_mvcc | Scheduler keys written | The count of keys written by a key_mvcc command |
@@ -137,7 +137,7 @@ Scheduler - key_mvcc | Scheduler scan details [lock] | The keys scan details of 
 Scheduler - key_mvcc | Scheduler scan details [write] | The keys scan details of write CF when executing key_mvcc command |
 Scheduler - key_mvcc | Scheduler scan details [default] | The keys scan details of default CF when executing key_mvcc command |
 Scheduler - prewrite | Scheduler stage total | The total number of commands on each stage in prewrite command | There should not be lots of errors in a short time. 
-Scheduler - prewrite | Scheduler command duration | The time consumed when execting prewrite command | It should be less than `1s`.
+Scheduler - prewrite | Scheduler command duration | The time consumed when executing prewrite command | It should be less than `1s`.
 Scheduler - prewrite | Scheduler latch wait duration | The time which is caused by latch wait in prewrite command | It should be less than `1s`.
 Scheduler - prewrite | Scheduler keys read | The count of keys read by a prewrite command |
 Scheduler - prewrite | Scheduler keys written | The count of keys written by a prewrite command |
@@ -146,7 +146,7 @@ Scheduler - prewrite | Scheduler scan details [lock] | The keys scan details of 
 Scheduler - prewrite | Scheduler scan details [write] | The keys scan details of write CF when executing prewrite command |
 Scheduler - prewrite | Scheduler scan details [default] | The keys scan details of default CF when executing prewrite command |
 Scheduler - resolve_lock | Scheduler stage total | The total number of commands on each stage in resolve_lock command | There should not be lots of errors in a short time. 
-Scheduler - resolve_lock | Scheduler command duration | The time consumed when execting resolve_lock command | It should be less than `1s`.
+Scheduler - resolve_lock | Scheduler command duration | The time consumed when executing resolve_lock command | It should be less than `1s`.
 Scheduler - resolve_lock | Scheduler latch wait duration | The time which is caused by latch wait in resolve_lock command | It should be less than `1s`.
 Scheduler - resolve_lock | Scheduler keys read | The count of keys read by a resolve_lock command |
 Scheduler - resolve_lock | Scheduler keys written | The count of keys written by a resolve_lock command |
@@ -155,7 +155,7 @@ Scheduler - resolve_lock | Scheduler scan details [lock] | The keys scan details
 Scheduler - resolve_lock | Scheduler scan details [write] | The keys scan details of write CF when executing resolve_lock command |
 Scheduler - resolve_lock | Scheduler scan details [default] | The keys scan details of default CF when executing resolve_lock command |
 Scheduler - scan | Scheduler stage total | The total number of commands on each stage in scan command | There should not be lots of errors in a short time. 
-Scheduler - scan | Scheduler command duration | The time consumed when execting scan command | It should be less than `1s`.
+Scheduler - scan | Scheduler command duration | The time consumed when executing scan command | It should be less than `1s`.
 Scheduler - scan | Scheduler latch wait duration | The time which is caused by latch wait in scan command | It should be less than `1s`.
 Scheduler - scan | Scheduler keys read | The count of keys read by a scan command |
 Scheduler - scan | Scheduler keys written | The count of keys written by a scan command |
@@ -164,7 +164,7 @@ Scheduler - scan | Scheduler scan details [lock] | The keys scan details of lock
 Scheduler - scan | Scheduler scan details [write] | The keys scan details of write CF when executing scan command |
 Scheduler - scan | Scheduler scan details [default] | The keys scan details of default CF when executing scan command |
 Scheduler - scan_lock | Scheduler stage total | The total number of commands on each stage in scan_lock command | There should not be lots of errors in a short time.
-Scheduler - scan_lock | Scheduler command duration | The time consumed when execting scan_lock command | It should be less than `1s`.
+Scheduler - scan_lock | Scheduler command duration | The time consumed when executing scan_lock command | It should be less than `1s`.
 Scheduler - scan_lock | Scheduler latch wait duration | The time which is caused by latch wait in scan_lock command | It should be less than `1s`.
 Scheduler - scan_lock | Scheduler keys read | The count of keys read by a scan_lock command |
 Scheduler - scan_lock | Scheduler keys written | The count of keys written by a scan_lock command |
@@ -173,7 +173,7 @@ Scheduler - scan_lock | Scheduler scan details [lock] | The keys scan details of
 Scheduler - scan_lock | Scheduler scan details [write] | The keys scan details of write CF when executing scan_lock command |
 Scheduler - scan_lock | Scheduler scan details [default] | The keys scan details of default CF when executing scan_lock command |
 Scheduler - start_ts_mvcc | Scheduler stage total | The total number of commands on each stage in start_ts_mvcc command | There should not be lots of errors in a short time. 
-Scheduler - start_ts_mvcc | Scheduler command duration | The time consumed when execting start_ts_mvcc command | It should be less than `1s`.
+Scheduler - start_ts_mvcc | Scheduler command duration | The time consumed when executing start_ts_mvcc command | It should be less than `1s`.
 Scheduler - start_ts_mvcc | Scheduler latch wait duration | The time which is caused by latch wait in start_ts_mvcc command | It should be less than `1s`.
 Scheduler - start_ts_mvcc | Scheduler keys read | The count of keys read by a start_ts_mvcc command |
 Scheduler - start_ts_mvcc | Scheduler keys written | The count of keys written by a start_ts_mvcc command |
@@ -182,7 +182,7 @@ Scheduler - start_ts_mvcc | Scheduler scan details [lock] | The keys scan detail
 Scheduler - start_ts_mvcc | Scheduler scan details [write] | The keys scan details of write CF when executing start_ts_mvcc command |
 Scheduler - start_ts_mvcc | Scheduler scan details [default] | The keys scan details of default CF when executing start_ts_mvcc command |
 Scheduler - unsafe_destroy_range | Scheduler stage total | The total number of commands on each stage in unsafe_destroy_range command | There should not be lots of errors in a short time.
-Scheduler - unsafe_destroy_range | Scheduler command duration | The time consumed when execting unsafe_destroy_range command | It should be less than `1s`.
+Scheduler - unsafe_destroy_range | Scheduler command duration | The time consumed when executing unsafe_destroy_range command | It should be less than `1s`.
 Scheduler - unsafe_destroy_range | Scheduler latch wait duration | The time which is caused by latch wait in unsafe_destroy_range command | It should be less than `1s`.
 Scheduler - unsafe_destroy_range | Scheduler keys read | The count of keys read by a unsafe_destroy_range command |
 Scheduler - unsafe_destroy_range | Scheduler keys written | The count of keys written by a unsafe_destroy_range command |
@@ -235,15 +235,15 @@ Thread CPU | Split check CPU | The CPU utilization of split check |
 Thread CPU | RocksDB CPU | The CPU utilization of RocksDB |
 Thread CPU | gRPC poll CPU | The CPU utilization of gRPC | The CPU usage should be less than `80%`.
 RocksDB - kv | Get operations | The count of get operations |
-RocksDB - kv | Get duration | The time consumed when execting get operation |
+RocksDB - kv | Get duration | The time consumed when executing get operation |
 RocksDB - kv | Seek operations | The count of seek operations |
-RocksDB - kv | Seek duration | The time consumed when execting seek operation |
+RocksDB - kv | Seek duration | The time consumed when executing seek operation |
 RocksDB - kv | Write operations | The count of write operations |
-RocksDB - kv | Write duration | The time consumed when execting write operation |
+RocksDB - kv | Write duration | The time consumed when executing write operation |
 RocksDB - kv | WAL sync operations | The count of WAL sync operations |
-RocksDB - kv | WAL sync duration | The time consumed when execting WAL sync operation |
+RocksDB - kv | WAL sync duration | The time consumed when executing WAL sync operation |
 RocksDB - kv | Compaction operations | The count of compaction and flush operations |
-RocksDB - kv | Compaction duration | The time consumed when execting compaction and flush operation |
+RocksDB - kv | Compaction duration | The time consumed when executing compaction and flush operation |
 RocksDB - kv | SST read duration | The time consumed when reading SST files |
 RocksDB - kv | Write stall duration | The time which is caused by write stall | It should be `0` in normal case.
 RocksDB - kv | Memtable size | The memtable size of each column family |
@@ -268,15 +268,15 @@ RocksDB - kv | Number files at each level | The number of SST files for differen
 RocksDB - kv | Ingest SST duration seconds | The time consumed when ingesting SST files |
 RocksDB - kv | Stall conditions changed of each CF | Stall conditions changed of each column family |
 RocksDB - raft | Get operations | The count of get operations |
-RocksDB - raft | Get duration | The time consumed when execting get operation |
+RocksDB - raft | Get duration | The time consumed when executing get operation |
 RocksDB - raft | Seek operations | The count of seek operations |
-RocksDB - raft | Seek duration | The time consumed when execting seek operation |
+RocksDB - raft | Seek duration | The time consumed when executing seek operation |
 RocksDB - raft | Write operations | The count of write operations |
-RocksDB - raft | Write duration | The time consumed when execting write operation |
+RocksDB - raft | Write duration | The time consumed when executing write operation |
 RocksDB - raft | WAL sync operations | The count of WAL sync operations |
-RocksDB - raft | WAL sync duration | The time consumed when execting WAL sync operation |
+RocksDB - raft | WAL sync duration | The time consumed when executing WAL sync operation |
 RocksDB - raft | Compaction operations | The count of compaction and flush operations |
-RocksDB - raft | Compaction duration | The time consumed when execting compaction and flush operation |
+RocksDB - raft | Compaction duration | The time consumed when executing compaction and flush operation |
 RocksDB - raft | SST read duration | The time consumed when reading SST files |
 RocksDB - raft | Write stall duration | The time which is caused by write stall | It should be `0` in normal case.
 RocksDB - raft | Memtable size | The memtable size of each column family |
