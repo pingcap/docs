@@ -1,12 +1,12 @@
 ---
-title: Task Configuration Argument Description of Data Migration
-summary: This document introduces some arguments in task configuration of Data Migration.
+title: Data Migration Task Configuration Options
+summary: This document introduces the configuration options that apply to Data Migration tasks.
 category: tools
 ---
 
-# Task Configuration Argument Description of Data Migration
+# Data Migration Task Configuration Options
 
-This document introduces some arguments in task configuration of Data Migration. 
+This document introduces the configuration options that apply to Data Migration tasks. 
 
 ## `task-mode`
 
@@ -65,7 +65,7 @@ instance:
 ​      tbl-name: "do"
 ```
 
-Description: The black white list filter rule for the upstream database instance table. This rule is similar to `replication-rules-db`/`replication-rules-table` of MySQL.
+Description: The black white list filter rule for the upstream database instance table.
 
 The filter process is as follows:
 
