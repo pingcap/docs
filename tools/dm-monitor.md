@@ -26,16 +26,16 @@ If your DM cluster is deployed using DM-Ansible, the [monitoring system](../tool
 | relay log data corruption | The number of corrupted relay log files | Immediate alerts |
 | fail to read binlog from master | The number of errors encountered when the relay log reads the binlog from the upstream MySQL | Immediate alerts |
 | fail to write relay log | The number of errors encountered when the relay log writes the binlog to disks | Immediate alerts |
-| binlog file index | The largest serial number of relay log files. For example, "value = 1" indicates "relay-log.000001". | N/A |
+| binlog file index | The largest index number of relay log files. For example, "value = 1" indicates "relay-log.000001". | N/A |
 | binlog file gap between master and relay | The number of binlog files in the relay log that are behind the upstream master | When the number of binlog files in relay that are behind the upstream master exceeds one (>1) and the condition lasts over 10 minutes |
-| binlog pos | The write offset of the latest relay log files | N/A |
+| binlog pos | The write offset of the latest relay log file | N/A |
 | read binlog duration | The duration that the relay log reads binlog from the upstream MySQL (in seconds) |  N/A |
 | write relay log duration | The duration that the relay log writes binlog into the disks each time (in seconds) | N/A |
-| binlog size | The size of a single piece of binlog that the relay log writes into the disks | N/A |
+| binlog size | The size of a single binlog event that the relay log writes into the disks | N/A |
 
 ## Dumper
 
-The following metrics shows only when `task-mode` is in the `full` or `all` mode.
+The following metrics show only when `task-mode` is in the `full` or `all` mode.
 
 | Metric name | Description | Alert |
 |----|------------|----|
@@ -43,7 +43,7 @@ The following metrics shows only when `task-mode` is in the `full` or `all` mode
 
 ## Loader
 
-The following metrics shows only when `task-mode` is in the `full` or `all` mode.
+The following metrics show only when `task-mode` is in the `full` or `all` mode.
 
 | Metric name | Description | Alert |
 |----|------------|----|
@@ -53,9 +53,11 @@ The following metrics shows only when `task-mode` is in the `full` or `all` mode
 | table count | The total number of tables in the full data imported by Loader | N/A |
 | data file count | The total number of data files in the full data imported by Loader (including the `INSERT INTO` statement) | N/A |
 | latency of execute transaction | The duration that Loader executes a transaction (in seconds) | N/A |
-| latency of query | The time consumed by Loader when executing a query (in seconds) | N/A |
+| latency of query | The duration that Loader executes a query (in seconds) | N/A |
 
 ## Binlog replication
+
+The following metrics show only when `task-mode` is in the `incremental` or `all` mode.
 
 | Metric name | Description | Alert |
 |----|------------|----|
