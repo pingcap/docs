@@ -35,7 +35,7 @@ If your DM cluster is deployed using DM-Ansible, the [monitoring system](../tool
 
 ## Dumper
 
-The following metrics show only when `task-mode` is in the `full` or `all` mode.
+The following metric shows only when `task-mode` is in the `full` or `all` mode.
 
 | Metric name | Description | Alert |
 |----|------------|----|
