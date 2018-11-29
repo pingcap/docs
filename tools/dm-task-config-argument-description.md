@@ -18,7 +18,7 @@ This document introduces some arguments in task configuration of Data Migration.
     - `incremental`: Only synchronizes the incremental data of the upstream database to the downstream database using the binlog.
     - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental synchronization to the downstream database starting from the exported position during the full backup process (binlog position/GTID).
 
-## Route rule
+## Routing rule
 
 ```
 # `schema-pattern`/`table-pattern` uses the wildcard matching rule
@@ -33,7 +33,7 @@ table level:
 ​    target-table: "t"
 ```
 
-Description: Synchronizes the upstream table data that matches `schema-pattern`/`table-pattern` to the downstream `target-schema`/`target-table`. You can set the route rule at the schema/table level. 
+Description: Synchronizes the upstream table data that matches `schema-pattern`/`table-pattern` to the downstream `target-schema`/`target-table`. You can set the routing rule at the schema/table level. 
 
 Taking the above code block as an example:
 
