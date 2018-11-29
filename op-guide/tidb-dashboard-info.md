@@ -25,7 +25,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Internal SQL OPS: the statistics of the executed SQL statements within TiDB
 
 - Server
-    - Connection count: the number of clients connected to each TiDB instance
+    - Connection Count: the number of clients connected to each TiDB instance
     - Failed Query OPM: the statistics of failed SQL statements, such as grammar mistake, primary key, and so on
     - Heap Memory Usage: the heap memory size used by each TiDB instance
     - Events OPM: the statistics of key events, such as "start", "close", "graceful-shutdown","kill", "hang", and so on
