@@ -21,12 +21,12 @@ Row name | Panel name | Description | Normal range
 Cluster | Store size | The storage size of each TiKV instance |
 Cluster | Available size | The available capacity size of each TiKV instance |
 Cluster | Capacity size | The capacity size of each TiKV instance |
-Cluster | CPU | The cpu usage of each TiKV instance |
+Cluster | CPU | The CPU usage of each TiKV instance |
 Cluster | Memory | The memory usage of each TiKV instance |
-Cluster | I/O utilization | The io utilization of each TiKV instance |
+Cluster | IO utilization | The I/O utilization of each TiKV instance |
 Cluster | MBps | The total bytes and keys of read and write on each TiKV instance |
 Cluster | QPS | The QPS of different kinds of commands in each TiKV instance |
-Cluster | Errps | The total number of the gRPC message failure |
+Cluster | Errps | The total number of the gRPC message failures |
 Cluster | Leader | The number of leaders on each TiKV instance |
 Cluster | Region | The number of Regions on each TiKV instance |
 Errors | Server is busy | It contains some kinds of events such as write stall, channel full, scheduler busy, and coprocessor full, which will make the TiKV instance unavailable temporarily. |
@@ -47,27 +47,27 @@ Server | Region average written keys | The average rate of writing keys to Regio
 Server | Region average written bytes | The average rate of writing bytes to Regions on each TiKV instance |
 Server | Active written leaders | The number of active leaders on each TiKV instance |
 Server | Approximate Region size | The approximate Region size | 
-Raft IO | Apply log duration | The time consumed when Raft apply log |
-Raft IO | Apply log duration per server | The time consumed when Raft apply log on each TiKV instance |
-Raft IO | Append log duration | The time consumed when Raft append log |
-Raft IO | Append log duration per server | The time consumed when Raft append log on each TiKV instance |
+Raft IO | Apply log duration | The time consumed when Raft applies log |
+Raft IO | Apply log duration per server | The time consumed when Raft applies log on each TiKV instance |
+Raft IO | Append log duration | The time consumed when Raft appends log |
+Raft IO | Append log duration per server | The time consumed when Raft appends log on each TiKV instance |
 Raft process | Ready handled | The count of different ready type of Raft |
-Raft process | Process ready duration per server | The time consumed when peer processing ready in Raft | It should be less than `2s` in `.9999`.
-Raft process | Process tick duration per server | The time consumed when peer processing tick in Raft |
-Raft process | 0.99 Duration of raftstore events | The time consumed of raftstore events in `.99` |
-Raft message | Sent messages per server | The number of sending Raft messages of each TiKV instance |
-Raft message | Flush messages per server | The number of flushing Raft messages of each TiKV instance |
-Raft message | Receive messages per server | The number of receiving Raft messages of each TiKV instance |
-Raft message | Messages | The number of sending different types of Raft messages  |
-Raft message | Vote | The total number of vote messages is sent in Raft |
-Raft message | Raft dropped messages | The number of dropping different types of Raft messages |
+Raft process | Process ready duration per server | The time consumed when the peer processes ready in Raft | It should be less than `2s` in `.9999`.
+Raft process | Process tick duration per server | The time consumed when the peer processes tick in Raft |
+Raft process | 0.99 Duration of raftstore events | The time consumed by raftstore events in `.99` |
+Raft message | Sent messages per server | The number of Raft messages sent by each TiKV instance |
+Raft message | Flush messages per server | The number of Raft messages flushed by each TiKV instance |
+Raft message | Receive messages per server | The number of Raft messages received by each TiKV instance |
+Raft message | Messages | The number of different types of Raft messages that are sent |
+Raft message | Vote | The total number of vote messages that are sent in Raft |
+Raft message | Raft dropped messages | The number of different types of Raft messages that are dropped |
 Raft propose | Raft proposals per ready | The proposal count of all Regions in a mio tick |
 Raft propose | Raft read/write proposals | The total number of different kinds of proposals |
 Raft propose | Raft read proposals per server | The number of read proposals which are made by each TiKV instance |
 Raft propose | Raft write proposals per server | The number of write proposals which are made by each TiKV instance |
 Raft propose | Propose wait duration | The wait time of each proposal |
 Raft propose | Propose wait duration per server | The wait time of each proposal in each TiKV instance |
-Raft propose | Raft log speed | The speed of peers propose log |
+Raft propose | Raft log speed | The speed that peers propose log |
 Raft admin | Admin proposals | The number of admin proposals |
 Raft admin | Admin apply | The number of the processed apply command |
 Raft admin | Check split | The number of raftstore split check |
@@ -308,7 +308,7 @@ gRPC | 99% gRPC KV GC message duration | The execution time of gRPC GC message |
 PD | PD requests | The count of requests that TiKV sends to PD |
 PD | PD request duration (average) | The time consumed by requests that TiKV sends to PD |
 PD | PD heartbeats | The total number of PD heartbeat messages |
-PD | PD validate peers | The total number of PD worker validate peer task |
+PD | PD validate peers | The total number of peers validated by the PD worker |
 
 ## Interface of the TiKV dashboard
 
