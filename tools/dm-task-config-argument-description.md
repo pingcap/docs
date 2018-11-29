@@ -1,22 +1,22 @@
 ---
-title: Task Configuration Argument Description
-summary: This document introduces some arguments in task configuration.
+title: Task Configuration Argument Description of Data Migration
+summary: This document introduces some arguments in task configuration of Data Migration.
 category: tools
 ---
 
-# Task Configuration Argument Description 
+# Task Configuration Argument Description of Data Migration
 
-This document introduces some arguments in task configuration. 
+This document introduces some arguments in task configuration of Data Migration. 
 
 ## `task-mode`
 
 - String
 - The task mode of data migration to be executed 
-- Value: `full`/`incremental`/`all`, `all` by default
+- Value: `full`/`incremental`/`all`
 
     - `full`: Only makes a full backup of the upstream database and then makes a full import to the downstream database.
     - `incremental`: Only synchronizes the incremental data of the upstream database to the downstream database using the binlog.
-    - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental synchronization to the downstream database starting from the exported location during the full backup process (binlog position/GTID).
+    - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental synchronization to the downstream database starting from the exported position during the full backup process (binlog position/GTID).
 
 ## Route rule
 
@@ -37,7 +37,7 @@ Description: Synchronizes the upstream table data that matches `schema-pattern`/
 
 Taking the above code block as an example:
 
-- Schema level: Synchronizes all the upstream tables that match the `test_*` schema to the downstream test schema.  
+- Schema level: Synchronizes all the upstream tables that match the `test_*` schema to the downstream `test` schema.  
 
     For example, `schema: test_1 - tables [a, b, c]`  =>  `schema:test -  tables [a, b, c]`
 
@@ -124,22 +124,22 @@ Description: Configures the filter rules of black white list for binlog events o
     | ---------------   | ---- | ----------------------------- |
     | `all`             |      | Includes all the events below |
     | `all dml`         |      | Includes all DML events below |
-    | `all ddl`         |      | Includes all DML events below |
+    | `all ddl`         |      | Includes all DDL events below |
     | `none`            |      | Includes none of the events below |
     | `none ddl`        |      | Includes none of the DDL events below |
     | `none dml`        |      | Includes none of the DML events below |
-    | `insert`          | DML  | Inserts a DML statement              |
-    | `update`          | DML  | Updates a DML statement              |
-    | `delete`          | DML  | Deletes a DML statement              |
-    | `create database` | DDL  | Creates a database         |
-    | `drop database`   | DDL  | Drops a database           |
-    | `create table`    | DDL  | Creates a table      |
-    | `create index`    | DDL  | Creates an index          |
-    | `drop table`      | DDL  | Drops a table              |
-    | `truncate table`  | DDL  | Truncates a table          |
-    | `rename table`    | DDL  | Renames a table            |
-    | `drop index`      | DDL  | Drops an index           |
-    | `alter table`     | DDL  | Alters a table           |
+    | `insert`          | DML  | The `INSERT` DML event              |
+    | `update`          | DML  | The `UPDATE` DML event              |
+    | `delete`          | DML  | The `DELETE` DML event              |
+    | `create database` | DDL  | The `CREATE DATABASE` DDL event         |
+    | `drop database`   | DDL  | The `DROP DATABASE` DDL event           |
+    | `create table`    | DDL  | The `CREATE TABLE` DDL event      |
+    | `create index`    | DDL  | The `CREATE INDEX` DDL event          |
+    | `drop table`      | DDL  | The `DROP TABLE` DDL event              |
+    | `truncate table`  | DDL  | The `TRUNCATE TABLE` DDL event          |
+    | `rename table`    | DDL  | The `RENAME TABLE` DDL event            |
+    | `drop index`      | DDL  | The `DROP INDEX` DDL event           |
+    | `alter table`     | DDL  | The `ALTER TABLE` DDL event           |
 
 - `sql-pattern` 
 
@@ -175,9 +175,9 @@ instance-2:
 ​    arguments: ["2", "test_", "t_"]
 ```
 
-Description: the rules for mapping the the upstream database instances to the columns of `schema-pattern`/`table-pattern` matched tables. It is used to merge the conflicts of auto-increment primary keys of sharded tables.
+Description: the rules for mapping the columns of `schema-pattern`/`table-pattern` matched tables in upstream database instances. It is used to resolve the conflicts of auto-increment primary keys of sharded tables.
 
-- `source-column`, `target-column`: Uses the data of `source-column` to cover that of `target-column` via computing of `expression`.
+- `source-column`, `target-column`: Uses `expression` to compute the data of `source-column` as the data of `target-column`.
 
 - `expression`: The expression used to convert the column data. Currently, only the following built-in expression is supported:
         
