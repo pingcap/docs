@@ -61,7 +61,7 @@ Pay special attention to the following variables configuration. For variable mea
 
 1. Make sure that `ansible_user` is the normal user. For unified privilege management, remote installation using the root user is no longer supported. The default configuration uses the `tidb` user as the SSH remote user and the program running user.
 
-    ```
+    ```ini
     ## Connection
     # ssh via normal user
     ansible_user = tidb
@@ -71,7 +71,7 @@ Pay special attention to the following variables configuration. For variable mea
 
 2. Keep the `process_supervision` variable consistent with that in the previous version. It is recommended to use `systemd` by default.
 
-    ```
+    ```ini
     # process supervision, [systemd, supervise]
     process_supervision = systemd
     ```
@@ -84,7 +84,7 @@ If you have previously customized the configuration file of TiDB cluster compone
 
 In TiKV configuration, `end-point-concurrency` is changed to three parameters: `high-concurrency`, `normal-concurrency` and `low-concurrency`.
 
-```
+```yaml
 readpool:
   coprocessor:
     # Notice: if CPU_NUM > 8, default thread pool size for coprocessors
