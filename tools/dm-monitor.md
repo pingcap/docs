@@ -1,6 +1,6 @@
 ---
 title: Data Migration Monitoring Metrics
-summary: Learn about the key monitoring metrics when you use Data Migration to synchronize data.
+summary: Learn about the monitoring metrics when you use Data Migration to synchronize data.
 category: operations
 ---
 
