@@ -13,7 +13,7 @@ For description of configuration items, see [Data Migration Task Configuration O
 
 ## Important concepts
 
-For description of important concepts including `instance-id` and the DM-worker ID, see [Description of important concepts](../tools/dm-configuration-file-overview.md#description-of-important-concepts) 
+For description of important concepts including `instance-id` and the DM-worker ID, see [Description of important concepts](../tools/dm-configuration-file-overview.md#description-of-important-concepts). 
 
 ## Global configuration
 
