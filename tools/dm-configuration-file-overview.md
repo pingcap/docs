@@ -18,7 +18,7 @@ This document gives an overview of configuration files of DM (Data Migration).
 
 ### DM task configuration file
 
-When you use DM-Ansible to deploy DM, you can find the task configuration file example as below in `<path-to-dm-ansible>/conf`:
+When you use DM-Ansible to deploy DM, you can find the following task configuration file template in `<path-to-dm-ansible>/conf`:
 
 - `task.yaml.exmaple`: The standard configuration file of the data synchronization task (a specific task corresponds to a `task.yaml`). For the introduction of the configuration file, see [Task Configuration File](../tools/dm-task-configuration-file-intro.md).
 
