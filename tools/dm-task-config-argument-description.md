@@ -12,7 +12,7 @@ This document introduces the configuration options that apply to Data Migration 
 
 - String (`full`/`incremental`/`all`)
 - The task mode of data migration to be executed 
-- Value: `full`/`incremental`/`all`
+- Default value: `all`
 
     - `full`: Only makes a full backup of the upstream database and then restore it to the downstream database.
     - `incremental`: Only synchronizes the incremental data of the upstream database to the downstream database using the binlog.
