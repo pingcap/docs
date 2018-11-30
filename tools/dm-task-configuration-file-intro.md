@@ -127,15 +127,11 @@ mysql-instances:
     ​        binlog-name: binlog-00001
     ​        binlog-pos: 4
 
-    ​    route-rules: ["user-route-rules-schema", "user-route-rules"]       # The name of the mapping rule between the matched 
-                                                                           # table of the upstream database instance and the 
-                                                                           # downstream database
-    ​    filter-rules: ["user-filter-1", "user-filter-2"]                   # The filter rule name of binlog events of the matched 
-                                                                           # table for the upstream database instance
+    ​    route-rules: ["user-route-rules-schema", "user-route-rules"]       # Routing rules selected from `routes` above
+    ​    filter-rules: ["user-filter-1", "user-filter-2"]                   # Filter rules selected from `filters` above
     ​    column-mapping-rules: ["instance-1"]                               # The column mapping rule name of the matched table of 
                                                                            # the upstream database instance 
-    ​    black-white-list:  "instance"                                      # The filter rule of the black white list of the 
-                                                                           # matched table of the upstream database instance 
+    ​    black-white-list:  "instance"                                      # The black white list item selected from `black-white-list` above 
 
     ​    mydumper-config-name: "global"                                     # The mydumper configuration name. You cannot set it 
                                                                            # and `mydumper` at the same time. 
