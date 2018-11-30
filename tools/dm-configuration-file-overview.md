@@ -24,7 +24,7 @@ When you use DM-Ansible to deploy DM, you can find the following task configurat
 
 ### Data synchronization task creation
 
-Taking `task.yaml.example` as an example, perform the following steps to create a data synchronization task.
+You can perform the following steps to create a data synchronization task based on `task.yaml.example`:
 
 1. Copy `task.yaml.example` as `your_task.yaml`.
 2. Modify the configurations in `your_task.yaml` based on [Task Configuration File](../tools/dm-task-configuration-file-intro.md)
