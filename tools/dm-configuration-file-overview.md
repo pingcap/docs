@@ -37,6 +37,6 @@ This section shows description of some important concepts.
 | Concept         | Description                                                         | Configuration File                                                     |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `instance-id`  | Specifies a MySQL/MariaDB instance (if you deploy DM using DM-ansible, `host:port` is used to construct this ID) | `mysql-instance` of `dm-master.toml`;<br> `instance-id` of `task.yaml` |
-| DM-worker ID | Specifies a DM-worker (from the `worker-addr` parameter of `dm-worker.toml`) | `worker-addr` of `dm-worker.toml`;<br> the `-worker` / `-w` flag of the dmctl command line |
+| DM-worker ID | Specifies a DM-worker (from the `worker-addr` parameter of `dm-worker.toml`) | `worker-addr` of `dm-worker.toml`;<br> the `-worker`/`-w` flag of the dmctl command line |
 
 > **Note:** `mysql-instance` and DM-worker should have a one-to-one relationship. 
