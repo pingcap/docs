@@ -23,14 +23,14 @@ This document introduces the configuration options that apply to Data Migration 
 ```
 # `schema-pattern`/`table-pattern` uses the wildcard matching rule
 schema level:
-​    schema-pattern: "test_*"
-​    target-schema: "test"
+    schema-pattern: "test_*"
+    target-schema: "test"
 
 table level:
-​    schema-pattern: "test_*"
-​    table-pattern: "t_*"
-​    target-schema: "test"
-​    target-table: "t"
+    schema-pattern: "test_*"
+    table-pattern: "t_*"
+    target-schema: "test"
+    target-table: "t"
 ```
 
 Description: Synchronizes the upstream table data that matches `schema-pattern`/`table-pattern` to the downstream `target-schema`/`target-table`. You can set the routing rule at the schema/table level. 
@@ -53,19 +53,19 @@ Taking the above code block as an example:
 
 ```
 instance:						
-​    do-dbs: ["~^test.*", "do"]         # Starts with "~", indicating it is a regular expression
-​    ignore-dbs: ["mysql", "ignored"]
-​    do-tables:
-​    - db-name: "~^test.*"
-​      tbl-name: "~^t.*"
-​    - db-name: "do"
-​      tbl-name: "do"
-​    ignore-tables:
-​    - db-name: "do"
-​      tbl-name: "do"
+    do-dbs: ["~^test.*", "do"]         # Starts with "~", indicating it is a regular expression
+    ignore-dbs: ["mysql", "ignored"]
+    do-tables:
+    - db-name: "~^test.*"
+      tbl-name: "~^t.*"
+    - db-name: "do"
+      tbl-name: "do"
+    ignore-tables:
+    - db-name: "do"
+      tbl-name: "do"
 ```
 
-Description: The black white list filter rule for the upstream database instance table.
+The black and white lists filtering rule of the upstream database instances is similar to MySQL `replication-rules-db`/`replication-rules-table`.
 
 The filter process is as follows:
 
@@ -97,25 +97,25 @@ The filter process is as follows:
 
     3. If `do-tables` is not empty, ignore it and exit. Otherwise, exit and execute the statement.
 
-## Filter rules of binlog events
+## Filtering rules of binlog events
 
 ```
 # table level
 user-filter-1:
-​    schema-pattern: "test_*"     # `schema-pattern`/`table-pattern` uses the wildcard matching rule.
-​    table-pattern: "t_*"
-​    events: ["truncate table", "drop table"]
-​    sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
-​    action: Ignore
+    schema-pattern: "test_*"     # `schema-pattern`/`table-pattern` uses the wildcard matching rule.
+    table-pattern: "t_*"
+    events: ["truncate table", "drop table"]
+    sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
+    action: Ignore
 
 # schema level
 user-filter-2:
-​    schema-pattern: "test_*"
-​    events: ["All DML"]
-​    action: Do
+    schema-pattern: "test_*"
+    events: ["All DML"]
+    action: Do
 ```
 
-Description: Configures the filter rules for binlog events and DDL SQL staements of the upstream tables that match `schema-pattern`/`table-pattern`.
+Description: Configures the filtering rules for binlog events and DDL SQL statements of the upstream tables that match `schema-pattern`/`table-pattern`.
 
 - `events`: the binlog event array
 
@@ -145,7 +145,7 @@ Description: Configures the filter rules for binlog events and DDL SQL staements
     - Filters a specific DDL SQL statement. 
     - The matching rule supports using an regular expression, for example, `"^DROP\\s+PROCEDURE"`.
     
-> **Note:** If `sql-pattern` is empty, no filtering operation is performed. For the filter rules, see the `action` description.
+> **Note:** If `sql-pattern` is empty, no filtering operation is performed. For the filtering rules, see the `action` description.
 
 - `action` 
 
@@ -159,19 +159,19 @@ Description: Configures the filter rules for binlog events and DDL SQL staements
 
 ```
 instance-1:
-​    schema-pattern: "test_*"    # `schema-pattern`/`table-pattern` uses the wildcard matching rule
-​    table-pattern: "t_*"
-​    expression: "partition id"
-​    source-column: "id"
-​    target-column: "id"
-​    arguments: ["1", "test_", "t_"]
+    schema-pattern: "test_*"    # `schema-pattern`/`table-pattern` uses the wildcard matching rule
+    table-pattern: "t_*"
+    expression: "partition id"
+    source-column: "id"
+    target-column: "id"
+    arguments: ["1", "test_", "t_"]
 instance-2:
-​    schema-pattern: "test_*"
-​    table-pattern: "t_*"
-​    expression: "partition id"
-​    source-column: "id"
-​    target-column: "id"
-​    arguments: ["2", "test_", "t_"]
+    schema-pattern: "test_*"
+    table-pattern: "t_*"
+    expression: "partition id"
+    source-column: "id"
+    target-column: "id"
+    arguments: ["2", "test_", "t_"]
 ```
 
 Description: the rules for mapping the columns of `schema-pattern`/`table-pattern` matched tables in upstream database instances. It is used to resolve the conflicts of auto-increment primary keys of sharded tables.
