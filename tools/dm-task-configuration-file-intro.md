@@ -9,7 +9,7 @@ category: tools
 This document introduces the task configuration file of Data Migration --
 [`task.yaml`](https://github.com/pingcap/tidb-tools/blob/docs/docs/dm/zh_CN/configuration/task.yaml), including [Global configuration](#global-configuration) and [Instance configuration](#instance-configuration).
 
-For description of configuration items, see [Task Configuration Argument Description](../tools/dm-task-config-argument-description.md).
+For description of configuration items, see [Data Migration Task Configuration Options](../tools/dm-task-config-argument-description.md).
 
 ## Important concepts
 
