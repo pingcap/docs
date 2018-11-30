@@ -49,7 +49,7 @@ Taking the above code block as an example:
 > - You can set one routing rule at most at one level.
 
 
-## Black white list rule
+## Black and white lists filtering rule
 
 ```
 instance:						
