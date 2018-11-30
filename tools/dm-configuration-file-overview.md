@@ -30,7 +30,7 @@ You can perform the following steps to create a data synchronization task based 
 2. Refer to the description in the [Task Configuration File](../tools/dm-task-configuration-file-intro.md) and modify the configuration in `your_task.yaml`.
 3. Create your data synchronization task using dmctl.
 
-### Description of important concepts
+### Important concepts
 
 This section shows description of some important concepts.
 
