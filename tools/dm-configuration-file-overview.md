@@ -14,7 +14,7 @@ This document gives an overview of configuration files of DM (Data Migration).
 - `dm-master.toml`: The configuration file of running the DM-master process, including the topology information of the DM cluster and the corresponding relationship between the MySQL instance and DM-worker (must be one-to-one relationship). When you use DM-Ansible to deploy DM, `dm-master.toml` is generated automatically.
 - `dm-worker.toml`: The configuration file of running the DM-worker process, including the configuration information of upstream MySQL instance. When you use DM-Ansible to deploy DM, `dm-worker.toml` is generated automatically.
 
-## Configuration file and creation of DM tasks
+## DM synchronization task configuration
 
 ### DM task configuration file
 
