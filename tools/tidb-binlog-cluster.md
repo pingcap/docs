@@ -305,7 +305,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
     - Taking deploying Pump on "192.168.0.11" as an example, the description for command line parameters of Pump is as follows:
 
-        ```bash
+        ```
         Usage of Pump:
         -L string
             the output information level of logs: debug, info, warn, error, fatal ("info" by default)
@@ -373,7 +373,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
     - Taking deploying Drainer on "192.168.0.13" as an example, the description for command line parameters of Drainer is as follows:
 
-        ```bash
+        ```
         Usage of Drainer:
         -L string
             the output information level of logs: debug, info, warn, error, fatal ("info" by default)
@@ -561,7 +561,7 @@ sha256sum -c tidb-binlog-new-linux-amd64.sha256
 
 Command line parameters:
 
-```bash
+```
 Usage of binlogctl:
 -V
     Outputs the binlogctl version information
