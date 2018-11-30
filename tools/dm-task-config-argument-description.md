@@ -10,7 +10,7 @@ This document introduces the configuration options that apply to Data Migration 
 
 ## `task-mode`
 
-- String
+- String (`full`/`incremental`/`all`)
 - The task mode of data migration to be executed 
 - Value: `full`/`incremental`/`all`
 
