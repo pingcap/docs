@@ -14,7 +14,7 @@ This document introduces the configuration options that apply to Data Migration 
 - The task mode of data migration to be executed 
 - Value: `full`/`incremental`/`all`
 
-    - `full`: Only makes a full backup of the upstream database and then makes a full import to the downstream database.
+    - `full`: Only makes a full backup of the upstream database and then restore it to the downstream database.
     - `incremental`: Only synchronizes the incremental data of the upstream database to the downstream database using the binlog.
     - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental synchronization to the downstream database starting from the exported position during the full backup process (binlog position/GTID).
 
@@ -46,7 +46,7 @@ Taking the above code block as an example:
 > **Notes:** 
 >
 > - The `table level` rule has a higher priority than the `schema level` rule.
-> - You can set one configuration rule at most at one level.
+> - You can set one routing rule at most at one level.
 
 
 ## Black white list rule
@@ -115,8 +115,7 @@ user-filter-2:
 ​    action: Do
 ```
 
-For the matching rules, see
-Description: Configures the filter rules of black white list for binlog events of the upstream tables and DDL SQL statements that match `schema-pattern`/`table-pattern`.
+Description: Configures the filter rules for binlog events and DDL SQL staements of the upstream tables that match `schema-pattern`/`table-pattern`.
 
 - `events`: the binlog event array
 
@@ -145,16 +144,16 @@ Description: Configures the filter rules of black white list for binlog events o
 
     - Filters a specific DDL SQL statement. 
     - The matching rule supports using an regular expression, for example, `"^DROP\\s+PROCEDURE"`.
-    - **Note:** If `sql-pattern` is empty, no filtering operation is performed. For the filter rules, see the `action` description.
+    
+> **Note:** If `sql-pattern` is empty, no filtering operation is performed. For the filter rules, see the `action` description.
 
 - `action` 
 
     - String (`Do`/`Ignore`)
-    - For rules that match `schema-pattern`/`table-pattern`, judge whether the DDL statement is in the events of the rule or `sql-pattern`:
+    - For rules that match `schema-pattern`/`table-pattern`, judge whether the DDL statement is in the events of the rule or `sql-pattern`. 
         
-        - If the DDL statement is in the events of the rule or `sql-pattern`, execute `Ignore` (black list).
-        - If the DDL statement is not in the events of the rule or `sql-pattern` (not empty), execute `Do` (white list). 
-
+        - Black list: If `action = Ignore`, execute `Ignore`; otherwise execute `Do`.
+        - White list: If `action = Ignore`, execute `Do`; otherwise execute `Ignore`.
 
 ## Column mapping rule
 
