@@ -16,9 +16,9 @@ Run the following command to start all the components (including DM-master, DM-w
 $ ansible-playbook start.yml
 ```
 
-## Close a cluster
+## Stop a cluster
 
-Run the following command to close all the components (including DM-master, DM-worker and the monitoring component) of the whole DM cluster:
+Run the following command to stop all the components (including DM-master, DM-worker and the monitoring component) of the whole DM cluster:
 
 ```
 $ ansible-playbook stop.yml
@@ -95,7 +95,7 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
 ### Step 2: Edit the `inventory.ini` file and add the new DM-worker instance
 
-Edit the `inventory.ini` file and add the new DM_worker instance `dm_worker3`. 
+Edit the `inventory.ini` file and add the new DM-worker instance `dm_worker3`. 
 
 ```
 [dm_worker_servers]
@@ -134,7 +134,7 @@ $ ansible-playbook rolling_update_monitor.yml --tags=prometheus
 
 Assuming that you want to remove the `dm_worker3` instance, perform the following steps:
 
-### Step 1: Close the offline DM-worker instance
+### Step 1: Stop the offline DM-worker instance
 
 ```
 $ ansible-playbook stop.yml --tags=dm-worker -l dm_worker3
@@ -191,7 +191,7 @@ Assuming you need to maintain the `172.16.10.71` machine or this machine is faul
 
     This step creates the `tidb` user account on `172.16.10.80`, configures the sudo rules and the SSH mutual trust between the Control Machine and  the `172.16.10.80` machine.
 
-### Step 2: Close the old DM-master instance
+### Step 2: Stop the old DM-master instance
 
 > If the `172.16.10.71` machine is faulty and you cannot log in via SSH, you can ignore this step. 
 
@@ -251,9 +251,9 @@ Assuming that you need to maintain the `172.16.10.72` machine or this machine is
     $ ansible-playbook -i hosts.ini create_users.yml -u root -k
     ```
 
-    This step creates the `tidb` user account on `172.16.10.75`, and configures the sudo rules and the SSH mutual trust between the Control Machine and  the `172.16.10.80` machine.
+    This step creates the `tidb` user account on `172.16.10.75`, and configures the sudo rules and the SSH mutual trust between the Control Machine and  the `172.16.10.75` machine.
     
-### Step 2: Close the old DM-worker instance
+### Step 2: Stop the old DM-worker instance
 
 > If the `172.16.10.72` machine is faulty and you cannot log in via SSH, you can ignore this step.
 
