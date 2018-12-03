@@ -129,8 +129,7 @@ mysql-instances:
 
         route-rules: ["user-route-rules-schema", "user-route-rules"]       # Routing rules selected from `routes` above
         filter-rules: ["user-filter-1", "user-filter-2"]                   # Filter rules selected from `filters` above
-        column-mapping-rules: ["instance-1"]                               # The column mapping rule name of the matched table of 
-                                                                           # the upstream database instance 
+        column-mapping-rules: ["instance-1"]                               # Column mapping rules selected from `column-mappings` above 
         black-white-list:  "instance"                                      # The black white list item selected from `black-white-list` above 
 
         mydumper-config-name: "global"                                     # The mydumper configuration name. You cannot set it 
@@ -172,12 +171,14 @@ mysql-instances:
             max-retry: 200
 ```
 
-Refer to [Feature configuration set](#feature-configuration-set) to get the configuration details of the following options:
+For the configuration details of the above options, see the corresponding part in [Feature configuration set](#feature-configuration-set), as shown in the following table.
 
-- `route-rules`
-- `filter-rules`
-- `column-mapping-rules`
-- `black-white-list`
-- `mydumper-config-name`
-- `loader-config-name`
-- `syncer-config-name`
+| Option | Corresponding part |
+| ------ | ------------------ |
+| `route-rules` | `routes` |
+| `filter-rules` | `filters` |
+| `column-mapping-rules` | `column-mappings` |
+| `black-white-list` | `black-white-list` |
+| `mydumper-config-name` | `mydumpers` |
+| `loader-config-name` | `loaders` |
+| `syncer-config-name` | `syncers`  |
