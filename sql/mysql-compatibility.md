@@ -20,15 +20,18 @@ However, in TiDB, the following MySQL features are not supported for the time be
 + Events
 + User-defined functions
 + `FOREIGN KEY` constraints
-+ `FULLTEXT` indexes
-+ `SPATIAL` indexes
++ `FULLTEXT` functions and indexes
++ `SPATIAL` functions and indexes
 + Character sets other than `utf8`
++ Collations other than `BINARY`
 + Add primary key
 + Drop primary key
 + SYS schema
 + Optimizer trace
 + XML Functions
 + X-Protocol
++ Savepoints
++ Column-level privileges
 
 ## Features that are different from MySQL
 
@@ -94,6 +97,8 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
 
 TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-level locking to avoid write conflict, in TiDB, the write conflict is checked only in the `commit` process during the execution of the statements like `Update`, `Insert`, `Delete`, and so on.
 
+Similarly, functions such as `GET_LOCK()` and `RELEASE_LOCK()` and statements such as `SELECT .. FOR UPDATE` do not work in the same way as in MySQL.
+
 **Note:** On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
 
 ### Large transactions
@@ -103,6 +108,28 @@ Due to the distributed, 2-phase commit requirement of TiDB, large transactions t
 * Each Key-Value entry is no more than 6MB
 * The total number of Key-Value entries is no more than 300,000
 * The total size of Key-Value entries is no more than 100MB
+
+### Small transactions
+
+Since each transaction in TiDB requires two round trips to the PD leader, small transactions may have higher latencies in TiDB than MySQL. As a hypothetical example, the following query could be improved by moving from `auto_commit` to using an explicit transaction:
+
+```sql
+# original version with auto_commit
+UPDATE my_table SET a='new_value' WHERE id = 1; 
+UPDATE my_table SET a='newer_value' WHERE id = 2;
+UPDATE my_table SET a='newest_value' WHERE id = 3;
+
+# improved version
+START TRANSACTION;
+UPDATE my_table SET a='new_value' WHERE id = 1; 
+UPDATE my_table SET a='newer_value' WHERE id = 2;
+UPDATE my_table SET a='newest_value' WHERE id = 3;
+COMMIT;
+```
+
+### Single-threaded workloads
+
+Due to its distributed nature, workloads that are single-threaded may perform worse in TiDB when compared to a single-instance deployment of MySQL. This difference is similar to the case of small transactions being potentially slower in TiDB.
 
 ### Load data
 
@@ -141,9 +168,18 @@ Create Table: CREATE TABLE `t1` (
 
 Architecturally, TiDB does support a similar storage engine abstraction to MySQL, and user tables are created in the engine specified by the [`--store`](server-command-option.md#--store) option used when you start tidb-server (typically `tikv`).
 
+### SQL Modes
+
+TiDB supports **all of the SQL modes** from MySQL 5.7 with minor exceptions:
+
+1. The `ALLOW_INVALID_DATES` mode is not yet supported. See [TiDB #8263](https://github.com/pingcap/tidb/issues/8263).
+2. The compatibility modes deprecated in MySQL 5.7 and removed in MySQL 8.0 are not supported (such as `ORACLE`, `POSTGRESQL` etc).
+3. The mode `ONLY_FULL_GROUP_BY` has minor [semantic differences](../sql/aggregate-group-by-functions.md#differences-from-mysql) to MySQL 5.7, which we plan to address in the future.
+4. The SQL modes `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` are supported for compatibility, but are not applicable to TiDB. 
+
 ### EXPLAIN
 
-The output of the query execution plan returned from the `EXPLAIN` command differs from MySQL. For more information, see [Understand the Query Execution Plan](understanding-the-query-execution-plan.md).
+The output of the query execution plan returned from the `EXPLAIN` command differs from MySQL. For more information, see [Understand the Query Execution Plan](../sql/understanding-the-query-execution-plan.md).
 
 ### Default differences
 

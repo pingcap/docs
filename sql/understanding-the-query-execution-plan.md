@@ -13,7 +13,7 @@ Based on the details of your tables, the TiDB optimizer chooses the most efficie
 The result of the `EXPLAIN` statement provides information about how TiDB executes SQL queries:
 
 - `EXPLAIN` works together with `SELECT`, `DELETE`, `INSERT`, `REPLACE`, and `UPDATE`.
-- When you run the `EXPLAIN` statement, TiDB returns the final physical execution plan which is optimized by the SQL statment of `EXPLAIN`. In other words, `EXPLAIN` displays the complete information about how TiDB executes the SQL statement, such as in which order, how tables are joined, and what the expression tree looks like. For more information, see [`EXPLAIN` output format](#explain-output-format).
+- When you run the `EXPLAIN` statement, TiDB returns the final physical execution plan which is optimized by the SQL statement of `EXPLAIN`. In other words, `EXPLAIN` displays the complete information about how TiDB executes the SQL statement, such as in which order, how tables are joined, and what the expression tree looks like. For more information, see [`EXPLAIN` output format](#explain-output-format).
 - TiDB does not support `EXPLAIN [options] FOR CONNECTION connection_id` currently. We'll do it in the future. For more information, see [#4351](https://github.com/pingcap/tidb/issues/4351).
 
 The results of `EXPLAIN` shed light on how to index the data tables so that the execution plan can use the index to speed up the execution of SQL statements. You can also use `EXPLAIN` to check if the optimizer chooses the optimal order to join tables.
@@ -33,7 +33,7 @@ Currently, the `EXPLAIN` statement returns the following four columns: id, count
 
 Using the [bikeshare example database](../bikeshare-example-database.md):
 
-```
+```sql
 mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
 +--------------------------+-------------+------+------------------------------------------------------------------------------------------------------------------------+
 | id                       | count       | task | operator info                                                                                                          |
@@ -51,7 +51,7 @@ Here you can see that the coprocesor (cop) needs to scan the table `trips` to fi
 
 The good news with this query is that most of the work is pushed down to the coprocessor. This means that minimal data transfer is required for query execution. However, the `TableScan_18` can be eliminated by adding an index to speed up queries on `start_date`:
 
-```
+```sql
 mysql> ALTER TABLE trips ADD INDEX (start_date);
 ..
 mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -67,6 +67,31 @@ mysql> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 0
 ```
 
 In the revisited `EXPLAIN` you can see the count of rows scanned has reduced via the use of an index. On a reference system, the query execution time reduced from 50.41 seconds to 0.00 seconds!
+
+## <span id="explain-analyze-output-format">`EXPLAIN ANALYZE` output format</span>
+
+As an extension to `EXPLAIN`, `EXPLAIN ANALYZE` will execute the query and provide additional execution statistics in the `execution info` column as follows:
+
+* `time` shows the total wall time from entering the operator until exiting the execution. It includes all execution time of any child operator operations. If the operator is called multiple times (`loops`) from a parent operator, the time will be the cumulative time.
+
+* `loops` is the number of times the operator was called from the parent operator.
+
+* `rows` is the total number of rows that were returned by this operator. So for example, you can compare the accuracy of the `count` column to `rows`/`loops` in the `execution_info` column to assess how accurate the query optimizer's estimations are.
+
+### Example usage
+
+```sql
+mysql> EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
++------------------------+---------+------+--------------------------------------------------------------------------------------------------+-----------------------------------+
+| id                     | count   | task | operator info                                                                                    | execution info                    |
++------------------------+---------+------+--------------------------------------------------------------------------------------------------+-----------------------------------+
+| StreamAgg_25           | 1.00    | root | funcs:count(col_0)                                                                               | time:79.851424ms, loops:2, rows:1 |
+| └─IndexReader_26       | 1.00    | root | index:StreamAgg_9                                                                                | time:79.835575ms, loops:2, rows:1 |
+|   └─StreamAgg_9        | 1.00    | cop  | funcs:count(1)                                                                                   |                                   |
+|     └─IndexScan_24     | 8161.83 | cop  | table:trips, index:start_date, range:[2017-07-01 00:00:00,2017-07-01 23:59:59], keep order:false |                                   |
++------------------------+---------+------+--------------------------------------------------------------------------------------------------+-----------------------------------+
+4 rows in set (0.08 sec)
+```
 
 ## Overview
 

@@ -6,7 +6,7 @@ category: tool
 
 # TiDB-Binlog User Guide
 
-This document describes how to deploy the Kafka version of TiDB-Binlog. If you need to deploy the local version of TiDB-Binlog, see the [TiDB-Binlog user guide for the local version](tidb-binlog.md).
+This document describes how to deploy the Kafka version of TiDB-Binlog. If you need to deploy the local version of TiDB-Binlog, see the [TiDB-Binlog user guide for the local version](../tools/tidb-binlog.md).
 
 ## About TiDB-Binlog
 
@@ -45,15 +45,15 @@ The Kafka cluster stores the binlog data written by Pump and provides the binlog
 
 ```bash
 # Download the tool package.
-wget http://download.pingcap.org/tidb-binlog-latest-linux-amd64.tar.gz
-wget http://download.pingcap.org/tidb-binlog-latest-linux-amd64.sha256
+wget http://download.pingcap.org/tidb-binlog-kafka-linux-amd64.tar.gz
+wget http://download.pingcap.org/tidb-binlog-kafka-linux-amd64.sha256
 
 # Check the file integrity. If the result is OK, the file is correct.
-sha256sum -c tidb-binlog-latest-linux-amd64.sha256
+sha256sum -c tidb-binlog-kafka-linux-amd64.sha256
 
 # Extract the package.
-tar -xzf tidb-binlog-latest-linux-amd64.tar.gz
-cd tidb-binlog-latest-linux-amd64
+tar -xzf tidb-binlog-kafka-linux-amd64.tar.gz
+cd tidb-binlog-kafka-linux-amd64
 ```
 
 ## Deploy TiDB-Binlog
@@ -74,7 +74,7 @@ cd tidb-binlog-latest-linux-amd64
 
     To guarantee the integrity of data, perform the following operations 10 minutes after Pump is started:
 
-    - Use [binlogctl](https://github.com/pingcap/tidb-tools/tree/master/tidb_binlog/binlogctl) of the [tidb-tools](https://github.com/pingcap/tidb-tools) project to generate the `position` for the initial start of Drainer.
+    - Use [binlogctl](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/binlogctl) of the [tidb-tools](https://github.com/pingcap/tidb-tools) project to generate the `position` for the initial start of Drainer.
     - Do a full backup. For example, back up TiDB using Mydumper.
     - Import the full backup to the target system.
     - The savepoint metadata started by the Kafka version of Drainer is stored in the `checkpoint` table of the downstream database `tidb_binlog` by default. If no valid data exists in the `checkpoint` table, configure `initial-commit-ts` to make Drainer work from a specified position when it is started:
@@ -85,7 +85,7 @@ cd tidb-binlog-latest-linux-amd64
 
 - The drainer outputs `pb` and you need to set the following parameters in the configuration file:
 
-    ```
+    ```toml
     [syncer]
     db-type = "pb"
     disable-dispatch = true
@@ -96,7 +96,7 @@ cd tidb-binlog-latest-linux-amd64
 
 - The drainer outputs `kafka` and you need to set the following parameters in the configuration file:
 
-    ```
+    ```toml
     [syncer]
     db-type = "kafka"
     
@@ -106,7 +106,7 @@ cd tidb-binlog-latest-linux-amd64
     # kafka-version = "0.8.2.0"
     ```
     
-    The data which outputs to kafka follows the binlog format sorted by ts and defined by protobuf. See [driver](https://github.com/pingcap/tidb-tools/tree/master/tidb_binlog/driver) to access the data and sync to the down stream.
+    The data which outputs to kafka follows the binlog format sorted by ts and defined by protobuf. See [driver](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/driver) to access the data and sync to the down stream.
     
 - Deploy Kafka and ZooKeeper cluster before deploying TiDB-Binlog. Make sure that Kafka is 0.9 version or later.
 
@@ -122,6 +122,10 @@ cd tidb-binlog-latest-linux-amd64
 - `auto.create.topics.enable = true`: if no topic exists, Kafka automatically creates a topic on the broker.
 - `broker.id`: a required parameter to identify the Kafka cluster. Keep the parameter value unique. For example, `broker.id = 1`.
 - `fs.file-max = 1000000`: Kafka uses a lot of files and network sockets. It is recommended to change the parameter value to 1000000. Change the value using `vi /etc/sysctl.conf`.
+- Configure the following three parameters to 1G, to avoid the failure of writing into Kafka caused by too large a single message when a large number of data is modified in a transaction.
+    - `message.max.bytes=1073741824`
+    - `replica.fetch.max.bytes=1073741824`
+    - `fetch.message.max.bytes=1073741824`
 
 ### Deploy Pump using TiDB-Ansible
 
@@ -130,7 +134,7 @@ cd tidb-binlog-latest-linux-amd64
 
 Configuration example:
 
-```
+```ini
 # binlog trigger
 enable_binlog = True
 # ZooKeeper address of the Kafka cluster. Example:
@@ -146,7 +150,7 @@ A usage example:
 
 Assume that we have three PDs, three ZooKeepers, and one TiDB. The information of each node is as follows:
 
-```
+```ini
 TiDB="192.168.0.10"
 PD1="192.168.0.16"
 PD2="192.168.0.15"
@@ -193,7 +197,7 @@ This example describes how to use Pump/Drainer.
     -log-rotate string
         the log file rotating frequency (hour/day)
     -metrics-addr string
-        the Prometheus pushgateway address; leaving it empty disables Prometheus push
+        the Prometheus Pushgateway address; leaving it empty disables Prometheus push
     -metrics-interval int
         the frequency of reporting monitoring information (default 15, unit: second)
     -pd-urls string
@@ -275,7 +279,7 @@ This example describes how to use Pump/Drainer.
     -log-rotate string
         the log file rotating frequency (hour/day)
     -metrics-addr string
-        the Prometheus pushgateway address; leaving it empty disables Prometheus push
+        the Prometheus Pushgateway address; leaving it empty disables Prometheus push
     -metrics-interval int
         the frequency of reporting monitoring information (default 15, unit: second)
     -pd-urls string

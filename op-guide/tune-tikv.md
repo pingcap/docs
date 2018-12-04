@@ -37,10 +37,6 @@ log-level = "info"
 # Set listening address
 # addr = "127.0.0.1:20160"
 
-# It is recommended to use the default value.
-# notify-capacity = 40960
-# messages-per-tick = 4096
-
 # Size of thread pool for gRPC
 # grpc-concurrency = 4
 # The number of gRPC connections between each TiKV instance
@@ -71,9 +67,9 @@ log-level = "info"
 # endpoints = ["127.0.0.1:2379","127.0.0.2:2379","127.0.0.3:2379"]
 
 [metric]
-# The interval of pushing metrics to Prometheus pushgateway
+# The interval of pushing metrics to Prometheus Pushgateway
 interval = "15s"
-# Prometheus pushgateway adress
+# Prometheus Pushgateway address
 address = ""
 job = "tikv"
 
@@ -240,7 +236,6 @@ target-file-size-base = "32MB"
 # resources are adequate, you can set it higher. 
 block-cache-size = "256MB"
 ```
-
 
 ## TiKV memory usage
 

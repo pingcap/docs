@@ -23,7 +23,7 @@ For other information, see [Frequently Asked Questions (FAQ)](FAQ.md).
 
     - If a certain process is not running, see the following corresponding sections to diagnose and solve the issue.
     + If all the processes are running, check the `tidb-server` log to see if the following messages are displayed:
-        - InfomationSchema is out of date: This message is displayed if the `tikv-server` cannot be connected. Check the state and log of `pd-server` and `tikv-server`.
+        - InformationSchema is out of date: This message is displayed if the `tikv-server` cannot be connected. Check the state and log of `pd-server` and `tikv-server`.
         - panic: This message is displayed if there is an issue with the program. Please provide the detailed panic log and [create an issue](https://github.com/pingcap/tidb/issues/new).
         
 3. If the data is cleared and the services are re-deployed, make sure that:
@@ -90,7 +90,7 @@ Before starting the process, make sure the result of `ulimit -n` is large enough
 
 ## Database access times out and the system load is too high
 
-First, check the [SLOW-QUERY](./sql/slow-query.md) log and see if it is because of some inappropriate SQL statement.
+First, check the [SLOW-QUERY](sql/slow-query.md) log and see if it is because of some inappropriate SQL statement.
 If you failed to solve the problem, provide the following information:
 
 + The deployment topology

@@ -8,7 +8,7 @@ category: user guide
 
 TiDB contains a number of system variables which are specific to its usage, and **do not** apply to MySQL. These variables start with a `tidb_` prefix, and can be tuned to optimize system performance.
 
-## System variable
+## System variables
 
 Variables can be set with the `SET` statement, for example:
 
@@ -255,7 +255,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION | GLOBAL
 - Default: 0
-- This variable is used to set whether to disable automatic retry of explicit transactions. If you set this variable to 1, the transaction does not retry automatically. If there is a conflict, the transaction needs to be retried at the application layer. To decide whether you need to disable automatic retry, see [description of optimistic transactions](transaction-isolation.md#description-of-optimistic-transactions).
+- This variable is used to set whether to disable automatic retry of explicit transactions. If you set this variable to 1, the transaction does not retry automatically. If there is a conflict, the transaction needs to be retried at the application layer. To decide whether you need to disable automatic retry, see [description of optimistic transactions](../sql/transaction-isolation.md#description-of-optimistic-transactions).
 
 ### tidb_enable_table_partition
 
@@ -289,27 +289,33 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
 
-## Optimizer Hint
+## Optimizer Hints
 
-On the basis of MySQL’s `Optimizer Hint` Syntax, TiDB adds some proprietary `Hint` syntaxes. When using the `Hint` syntax, the TiDB optimizer will try to use the specific algorithm, which performs better than the default algorithm in some scenarios.
- 
-The `Hint` syntax is included in comments like `/*+ xxx */`, and in MySQL client versions earlier than 5.7.7, the comment is removed by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
+TiDB supports optimizer hints, based on the comment-like syntax introduced in MySQL 5.7. i.e. `/*+ TIDB_XX(t1, t2) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
+
+> **Note:** MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
  
 ### TIDB_SMJ(t1, t2)
  
-```SELECT /*+ TIDB_SMJ(t1, t2) */ * from t1, t2 where t1.id = t2.id```
+```sql
+SELECT /*+ TIDB_SMJ(t1, t2) */ * from t1, t2 where t1.id = t2.id
+```
 
 This variable is used to remind the optimizer to use the `Sort Merge Join` algorithm. This algorithm takes up less memory, but takes longer to execute. It is recommended if the data size is too large, or there’s insufficient system memory.
 
 ### TIDB_INLJ(t1, t2)
- 
-```SELECT /*+ TIDB_INLJ(t1, t2) */ * from t1, t2 where t1.id = t2.id```
 
-This variable is used to remind the optimizer to use the `Index Nested Loop Join` algorithm. In some scenarios, this algorithm runs faster and takes up fewer system resources, but may be slower and takes up more system resources in some other scenarios. You can try to use this algorithm in scenarios where the result-set is less than 10,000 rows after the outer table is filtered by the WHERE condition. The parameter in `TIDB_INLJ()` is the candidate table for the driving table (external table) when generating the query plan. That means, `TIDB_INLJ (t1)` will only consider using t1 as the driving table to create a query plan.
+```sql
+SELECT /*+ TIDB_INLJ(t1, t2) */ * from t1, t2 where t1.id = t2.id
+```
+
+This variable is used to remind the optimizer to use the `Index Nested Loop Join` algorithm. In some scenarios, this algorithm runs faster and takes up fewer system resources, but may be slower and takes up more system resources in some other scenarios. You can try to use this algorithm in scenarios where the result-set is less than 10,000 rows after the outer table is filtered by the WHERE condition. The parameter in `TIDB_INLJ()` is the candidate table for the inner table when you create the query plan. For example, `TIDB_INLJ (t1)` means that TiDB only considers using t1 as the inner table to create a query plan.
 
 ### TIDB_HJ(t1, t2)
 
-```SELECT /*+ TIDB_HJ(t1, t2) */ * from t1, t2 where t1.id = t2.id```
+```sql
+SELECT /*+ TIDB_HJ(t1, t2) */ * from t1, t2 where t1.id = t2.id
+```
 
 This variable is used to remind the optimizer to use the `Hash Join` algorithm. This algorithm executes threads concurrently. It runs faster but takes up more memory.
 
@@ -338,3 +344,27 @@ Usage of statements:
 
 - `CREATE TABLE`: `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
 - `ALTER TABLE`: `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`
+
+## tidb_slow_log_threshold
+
+- Scope: SESSION
+- Default value: 300ms
+- This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+
+Usage example:
+
+```sql
+set tidb_slow_log_threshold = 200
+```
+
+## tidb_query_log_max_len
+
+- Scope: SESSION
+- Default value: 2048 (bytes)
+- The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
+
+Usage example:
+
+```sql
+set tidb_query_log_max_len = 20
+```

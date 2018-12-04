@@ -10,7 +10,7 @@ category: operations
 
 The capacity of a TiDB cluster can be increased or reduced without affecting online services.
 
-> **Note:** If your TiDB cluster is deployed using Ansible, see [Scale the TiDB Cluster Using TiDB-Ansible](ansible-deployment-scale.md).
+> **Note:** If your TiDB cluster is deployed using Ansible, see [Scale the TiDB Cluster Using TiDB-Ansible](../op-guide/ansible-deployment-scale.md).
 
 The following part shows you how to add or delete PD, TiKV or TiDB nodes.
 
@@ -51,7 +51,7 @@ Delete `pd4` through pd-ctl:
 
 ```bash
 ./pd-ctl -u http://host1:2379
->> member delete pd4
+>> member delete name pd4
 ```
 
 ### Migrate a node dynamically

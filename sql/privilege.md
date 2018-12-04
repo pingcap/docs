@@ -6,7 +6,7 @@ category: user guide
 
 # Privilege Management
 
-TiDB's privilege management system is implemented according to the privilege management system in MySQL. It supports most of the syntaxes and privilege types in MySQL. If you find any inconsistency with MySQL, feel free to [open an issue](https://github.com/pingcap/docs-cn/issues/new).
+TiDB's privilege management system is implemented according to the privilege management system in MySQL. It supports most of the syntaxes and privilege types in MySQL. If you find any inconsistency with MySQL, feel free to [open an issue](https://github.com/pingcap/tidb/issues/new/choose).
 
 ## Examples
 
@@ -22,19 +22,19 @@ TiDB user account names consist of a user name and a host name. The account name
 The `CREATE USER` statement creates new MySQL accounts.
 
 ```sql
-create user 'test'@'127.0.0.1' identified by 'xxx';
+CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'xxx';
 ```
 
 If the host name is not specified, you can log in from any IP address. If the password is not specified, it is empty by default:
 
 ```sql
-create user 'test';
+CREATE USER 'test';
 ```
 
 Equals:
 
 ```sql
-create user 'test'@'%' identified by '';
+CREATE USER 'test'@'%' IDENTIFIED BY '';
 ```
 
 **Required Privilege:** To use `CREATE USER`, you must have the global `CREATE USER` privilege.
@@ -44,7 +44,7 @@ create user 'test'@'%' identified by '';
 You can use the `SET PASSWORD` syntax to assign or modify a password to a user account.
 
 ```sql
-set password for 'root'@'%' = 'xxx';
+SET PASSWORD FOR 'root'@'%' = 'xxx';
 ```
 
 **Required Privilege:** Operations that assign or modify passwords are permitted only to users with the `CREATE USER` privilege.
@@ -54,8 +54,9 @@ set password for 'root'@'%' = 'xxx';
 The `DROP USER` statement removes one or more MySQL accounts and their privileges. It removes the user record entries in the `mysql.user` table and the privilege rows for the account from all grant tables.
 
 ```sql
-drop user 'test'@'%';
+DROP USER 'test'@'%';
 ```
+
 **Required Privilege:** To use `DROP USER`, you must have the global `CREATE USER` privilege.
 
 #### Reset the root password
@@ -85,25 +86,25 @@ The `GRANT` statement grants privileges to the user accounts.
 For example, use the following statement to grant the `xxx` user the privilege to read the `test` database.
 
 ```sql
-grant Select on test.* to 'xxx'@'%';
+GRANT SELECT ON test.* TO 'xxx'@'%';
 ```
 
 Use the following statement to grant the `xxx` user all privileges on all databases:
 
-```
-grant all privileges on *.* to 'xxx'@'%';
+```sql
+GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
 If the granted user does not exist, TiDB will automatically create a user.
 
-```
-mysql> select * from mysql.user where user='xxxx';
+```sql
+mysql> SELECT * FROM mysql.user WHERE user='xxxx';
 Empty set (0.00 sec)
 
-mysql> grant all privileges on test.* to 'xxxx'@'%' identified by 'yyyyy';
+mysql> GRANT ALL PRIVILEGES ON test.* TO 'xxxx'@'%' IDENTIFIED BY 'yyyyy';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> select user,host from mysql.user where user='xxxx';
+mysql> SELECT user,host FROM mysql.user WHERE user='xxxx';
 +------|------+
 | user | host |
 +------|------+
@@ -116,14 +117,14 @@ In this example, `xxxx@%` is the user that is automatically created.
 
 > **Note:** Granting privileges to a database or table does not check if the database or table exists.
 
-```
-mysql> select * from test.xxxx;
+```sql
+mysql> SELECT * FROM test.xxxx;
 ERROR 1146 (42S02): Table 'test.xxxx' doesn't exist
 
-mysql> grant all privileges on test.xxxx to xxxx;
+mysql> GRANT ALL PRIVILEGES ON test.xxxx TO xxxx;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> select user,host from mysql.tables_priv where user='xxxx';
+mysql> SELECT user,host FROM mysql.tables_priv WHERE user='xxxx';
 +------|------+
 | user | host |
 +------|------+
@@ -134,11 +135,11 @@ mysql> select user,host from mysql.tables_priv where user='xxxx';
 
 You can use fuzzy matching to grant privileges to databases and tables.
 
-```
-mysql> grant all privileges on `te%`.* to genius;
+```sql
+mysql> GRANT ALL PRIVILEGES ON `te%`.* TO genius;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> select user,host,db from mysql.db where user='genius';
+mysql> SELECT user,host,db FROM mysql.db WHERE user='genius';
 +--------|------|-----+
 | user   | host | db  |
 +--------|------|-----+
@@ -156,20 +157,20 @@ The `REVOKE` statement enables system administrators to revoke privileges from t
 The `REVOKE` statement corresponds with the `REVOKE` statement:
 
 ```sql
-revoke all privileges on `test`.* from 'genius'@'localhost';
+REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 ```
 
 > **Note:** To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed:
 
-    ```
-    mysql> revoke all privileges on `te%`.* from 'genius'@'%';
-    ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
-    ```
+```sql
+mysql> REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
+ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
+```
 
 About fuzzy matching, escape, string and identifier:
 
 ```sql
-mysql> grant all privileges on `te\%`.* to 'genius'@'localhost';
+mysql> GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -178,28 +179,29 @@ This example uses exact match to find the database named `te%`. Note that the `%
 A string is enclosed in single quotation marks(''), while an identifier is enclosed in backticks (``). See the differences below:
 
 ```sql
-mysql> grant all privileges on 'test'.* to 'genius'@'localhost';
+mysql> GRANT ALL PRIVILEGES ON 'test'.* TO 'genius'@'localhost';
 ERROR 1064 (42000): You have an error in your SQL syntax; check the
 manual that corresponds to your MySQL server version for the right
 syntax to use near ''test'.* to 'genius'@'localhost'' at line 1
 
-mysql> grant all privileges on `test`.* to 'genius'@'localhost';
+mysql> GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
 If you want to use special keywords as table names, enclose them in backticks (``). For example:
 
 ```sql
-mysql> create table `select` (id int);
+mysql> CREATE TABLE `select` (id int);
 Query OK, 0 rows affected (0.27 sec)
 ```
 
 #### Check privileges granted to user
 
-You can use the `show grant` statement to see what privileges are granted to a user.
+You can use the `SHOW GRANTS` statement to see what privileges are granted to a user. For example:
 
 ```sql
-show grants for 'root'@'%';
+SHOW GRANTS; -- show grants for the current user
+SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
 To be more precise, you can check the privilege information in the `Grant` table. For example, you can use the following steps to check if the `test@%` user has the `Insert` privilege on `db1.t`:
@@ -207,19 +209,19 @@ To be more precise, you can check the privilege information in the `Grant` table
 1. Check if `test@%` has global `Insert` privilege:
 
     ```sql
-    select Insert_priv from mysql.user where user='test' and host='%';
+    SELECT Insert_priv FROM mysql.user WHERE user='test' AND host='%';
     ```
 
 2. If not, check if `test@%` has database-level `Insert` privilege at `db1`:
 
     ```sql
-    select Insert_priv from mysql.db where user='test' and host='%';
+    SELECT Insert_priv FROM mysql.db WHERE user='test' AND host='%';
     ```
 
 3. If the result is still empty, check whether `test@%` has table-level `Insert` privilege at `db1.t`:
 
     ```sql
-    select table_priv from mysql.tables_priv where user='test' and host='%' and db='db1';
+    SELECT table_priv FROM mysql.tables_priv WHERE user='test' AND host='%' AND db='db1';
     ```
 
 ### Implementation of the privilege system
@@ -231,12 +233,12 @@ The following system tables are special because all the privilege-related data i
 - mysql.user (user account, global privilege)
 - mysql.db (database-level privilege)
 - mysql.tables_priv (table-level privilege)
-- mysql.columns_priv (column-level privilege)
+- mysql.columns_priv (column-level privilege; not currently supported)
 
 These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
 
 ```sql
-mysql> select User,Host,Select_priv,Insert_priv from mysql.user limit 1;
+mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 +------|------|-------------|-------------+
 | User | Host | Select_priv | Insert_priv |
 +------|------|-------------|-------------+
@@ -253,11 +255,15 @@ In theory, all privilege-related operations can be done directly by the CRUD ope
 
 On the implementation level, only a layer of syntactic sugar is added. For example, you can use the following command to remove a user:
 
-```
-delete from mysql.user where user='test';
+```sql
+DELETE FROM mysql.user WHERE user='test';
 ```
 
-However, it’s not recommended to manually modify the grant table.
+However, the recommended usage is with `DROP USER`:
+
+```sql
+DROP USER 'test';
+```
 
 #### Connection verification
 
@@ -271,7 +277,7 @@ User identity is based on two pieces of information: `Host`, the host that initi
 
 When the connection is successful, the request verification process checks whether the operation has the privilege.
 
-For database-related requests (INSERT, UPDATE), the request verification process first checks the user’s global privileges in the `mysql.user` table. If the privilege is granted, you can access directly. If not, check the `mysql.db` table.
+For database-related requests (`INSERT`, `UPDATE`), the request verification process first checks the user’s global privileges in the `mysql.user` table. If the privilege is granted, you can access directly. If not, check the `mysql.db` table.
 
 The `user` table has global privileges regardless of the default database. For example, the `DELETE` privilege in `user` can apply to any row, table, or database.
 
@@ -288,7 +294,7 @@ When TiDB starts, some privilege-check tables are loaded into memory, and then t
 If an immediate effect is needed when you modify the `grant` table, you can run the following command:
 
 ```sql
-flush privileges
+FLUSH PRIVILEGES;
 ```
 
 ### Limitations and constraints
@@ -303,9 +309,9 @@ Currently, the following privileges are not checked yet because they are less fr
 - INDEX
 - ...
 
-**Note:** The column-level privilege is not implemented at this stage.
+> **Note:** The column-level privilege is not implemented at this stage.
 
-## `Create User` statement
+## `CREATE USER` statement
 
 ```sql
 CREATE USER [IF NOT EXISTS]
@@ -316,12 +322,14 @@ auth_spec: {
 }
 ```
 
-For more information about the user account, see [TiDB user account management](user-account-management.md).
+For more information about the user account, see [TiDB user account management](../sql/user-account-management.md).
 
-- IDENTIFIED BY `auth_string`
+- `IDENTIFIED BY 'auth_string'`
 
-  When you set the login password, `auth_string` is encrypted by TiDB and stored in the `mysql.user` table.
+    It is used to set the login password. `auth_string` is encrypted by TiDB and stored in the `mysql.user` table.
 
-- IDENTIFIED BY PASSWORD `hash_string`
+- `IDENTIFIED BY PASSWORD 'hash_string'`
 
-  When you set the login password, `hash_string` is encrypted by TiDB and stored in the `mysql.user` table. Currently, this is not the same as MySQL.
+    It is also used to set the login password. `hash_string` is a 41-character string similar to `*EBE2869D7542FCE37D1C9BBC724B97BDE54428F1`, which is directly stored in the `mysql.user` table by TiDB. To get this string, use `SELECT password('auth_string')` to encrypt your password.
+
+    TiDB supports the `mysql_native_password` authentication mechanism based on SHA-1, which is the default mechanism used in MySQL 5.7. Support for additional authentication mechanisms is planned in the future.

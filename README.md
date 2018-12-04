@@ -68,7 +68,7 @@
     - [Prepared SQL Statement Syntax](sql/prepare.md)
     - [Utility Statements](sql/util.md)
     - [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/)
-  - [JSON Functions and Generated Column](sql/json-functions-generated-column.md)
+  - [Generated Columns](sql/generated-columns.md)
   - [Connectors and APIs](sql/connection-and-APIs.md)
   - [TiDB Transaction Isolation Levels](sql/transaction-isolation.md)
   - [Error Codes and Troubleshooting](sql/error.md)
@@ -94,8 +94,12 @@
     - [Enable TLS Authentication](op-guide/security.md)
     - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
   + Monitor
-    - [Overview of the Monitoring Framework](op-guide/monitor-overview.md)
-    - [Key Metrics](op-guide/dashboard-overview-info.md)
+    - [Monitoring Framework Overview](op-guide/monitor-overview.md)
+    + Key Monitoring Metrics
+      - [Overview](op-guide/dashboard-overview-info.md)
+      - [TiDB](op-guide/tidb-dashboard-info.md)
+      - [PD](op-guide/dashboard-pd-info.md)
+      - [TiKV](op-guide/dashboard-tikv-info.md)
     - [Monitor a TiDB Cluster](op-guide/monitor.md)
   + Scale
     - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
@@ -116,7 +120,28 @@
   - [Syncer](tools/syncer.md)
   - [mydumper](tools/mydumper.md)
   - [Loader](tools/loader.md)
-  - [TiDB-Binlog](tools/tidb-binlog-kafka.md)
+  + Data Migration
+    - [Overview](tools/data-migration-overview.md)
+    - [Deploy](tools/data-migration-deployment.md)
+    - [Synchronize Data](tools/data-migration-practice.md)
+    + Configure
+      - [Configuration Overview](tools/dm-configuration-file-overview.md)
+      - [Task Configuration File](tools/dm-task-configuration-file-intro.md)
+      - [Configuration Options](tools/dm-task-config-argument-description.md)
+    + Sharding Data Solution
+      - [Overview and Design Details](tools/dm-sharding-solution.md)
+      - [Sharding DDL Usage Restrictions](tools/dm-sharding-solution.md#sharding-ddl-usage-restrictions)
+      - [Troubleshoot Sharding DDL Locks](tools/troubleshooting-sharding-ddl-locks.md)
+    - [Monitor](tools/dm-monitor.md)
+    - [Troubleshoot](tools/data-migration-troubleshooting.md)
+  + TiDB-Lightning
+    - [Overview](tools/lightning/overview-architecture.md)
+    - [Deployment](tools/lightning/deployment.md)
+    - [Checkpoints](tools/lightning/checkpoints.md)
+    - [Monitor](tools/lightning/monitor.md)
+    - [Troubleshooting](tools/lightning/errors.md)
+    - [FAQs](tools/lightning/faq.md)
+  - [TiDB-Binlog](tools/tidb-binlog-cluster.md)
   - [PD Control](tools/pd-control.md)
   - [PD Recover](tools/pd-recover.md)
   - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
@@ -128,6 +153,10 @@
 - [Frequently Asked Questions (FAQ)](FAQ.md)
 - [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
 + [Releases](releases/rn.md)
+  - [2.1 GA](releases/2.1ga.md)
+  - [2.0.9](releases/209.md)
+  - [2.1 RC5](releases/21rc5.md)
+  - [2.1 RC4](releases/21rc4.md)
   - [2.0.8](releases/208.md)
   - [2.1 RC3](releases/21rc3.md)
   - [2.1 RC2](releases/21rc2.md)
@@ -189,7 +218,7 @@ TiDB (The pronunciation is: /'taɪdiːbi:/ tai-D-B, etymology: titanium) is an o
 
     TiDB is designed to work in the cloud -- public, private, or hybrid -- making deployment, provisioning, and maintenance drop-dead simple.
 
-- __Minimizes ETL__
+- __Minimize ETL__
 
     TiDB's hybrid OLTP/OLAP architecture means you can start performing analytical workloads without creating an ETL (Extract, Transform and Load) process.
 
