@@ -35,7 +35,7 @@ $ ansible-playbook stop.yml
         $ rm -rf downloads
         ```
 
-    2. Use Playbook to download the latest DM binary file, which substitutes for the binary file in the `/home/tidb/dm-ansible/resource/bin/` directory.
+    2. Use Playbook to download the latest DM binary file and replace the existing binary in the `/home/tidb/dm-ansible/resource/bin/` directory with it automatically.
 
         ```
         $ ansible-playbook local_prepare.yml
@@ -132,7 +132,7 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
 Assuming that you want to remove the `dm_worker3` instance, perform the following steps:
 
-1. Stop the offline DM-worker instance.
+1. Stop the DM-worker instance that you need to remove.
 
     ```
     $ ansible-playbook stop.yml --tags=dm-worker -l dm_worker3
@@ -163,11 +163,11 @@ Assuming that you want to remove the `dm_worker3` instance, perform the followin
 
 ## Replace a DM-master instance
 
-Assuming you need to maintain the `172.16.10.71` machine or this machine is faulty, and you need to migrate the DM-master instance from `172.16.10.71` to `172.16.10.80`, perform the following steps:
+Assuming that the `172.16.10.71` machine needs to be maintained or this machine breaks down, and you need to migrate the DM-master instance from `172.16.10.71` to `172.16.10.80`, perform the following steps:
 
 1. Configure the SSH mutual trust and sudo rules on the Control machine.
 
-    1. Refer to [Configure the SSH mutual trust and sudo rules on the Control Machine](../tools/data-migration-deployment.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) and log in to the Control Machine using the `tidb` user account and add `172.16.10.80` to the `[servers]` section of the `hosts.ini` file.
+    1. Refer to [Configure the SSH mutual trust and sudo rules on the Control Machine](../tools/data-migration-deployment.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine), log in to the Control Machine using the `tidb` user account, and add `172.16.10.80` to the `[servers]` section of the `hosts.ini` file.
 
         ```
         $ cd /home/tidb/dm-ansible
@@ -185,19 +185,19 @@ Assuming you need to maintain the `172.16.10.71` machine or this machine is faul
         $ ansible-playbook -i hosts.ini create_users.yml -u root -k
         ```
 
-        This step creates the `tidb` user account on `172.16.10.80`, configures the sudo rules and the SSH mutual trust between the Control Machine and  the `172.16.10.80` machine.
+        This step creates the `tidb` user account on `172.16.10.80`, configures the sudo rules and the SSH mutual trust between the Control Machine and the `172.16.10.80` machine.
 
 2. Stop the old DM-master instance.
 
-    > If the `172.16.10.71` machine is faulty and you cannot log in via SSH, you can ignore this step. 
+    > **Note:** If the `172.16.10.71` machine breaks down and you cannot log in via SSH, ignore this step.  
 
         ```
         $ ansible-playbook stop.yml --tags=dm-master
         ```
 
-3. Edit the `inventory.ini` file, comment or delete the line where the old DM-master instance exists, and add the information of the new DM-master instance.
-
-    ```
+3. Edit the `inventory.ini` file, comment or delete the line where the DM-master instance that you want to replace exists, and add the information of the new DM-master instance.
+ 
+    ```ini
     [dm_master_servers]
     # dm_master ansible_host=172.16.10.71
     dm_master ansible_host=172.16.10.80
@@ -223,11 +223,11 @@ Assuming you need to maintain the `172.16.10.71` machine or this machine is faul
 
 ## Replace a DM-worker instance
 
-Assuming that you need to maintain the `172.16.10.72` machine or this machine is faulty, and you need to migrate `dm_worker1` from the `172.16.10.72` machine to the `172.16.10.75` machine, perform the following steps:
+Assuming that the `172.16.10.72` machine needs to be maintained or this machine breaks down, and you need to migrate `dm_worker1` from `172.16.10.72` to `172.16.10.75`, perform the following steps:
 
 1. Configure the SSH mutual trust and sudo rules on the Control Machine. 
 
-    1. Refer to [Configure the SSH mutual trust and sudo rules on the Control Machine](../tools/data-migration-deployment.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) and log in to the Control Machine using the `tidb` user account and add `172.16.10.75` to the `[servers]` section of the `hosts.ini` file.
+    1. Refer to [Configure the SSH mutual trust and sudo rules on the Control Machine](../tools/data-migration-deployment.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine), log in to the Control Machine using the `tidb` user account, and add `172.16.10.75` to the `[servers]` section of the `hosts.ini` file.
 
         ```
         $ cd /home/tidb/dm-ansible
@@ -245,11 +245,11 @@ Assuming that you need to maintain the `172.16.10.72` machine or this machine is
         $ ansible-playbook -i hosts.ini create_users.yml -u root -k
         ```
 
-        This step creates the `tidb` user account on `172.16.10.75`, and configures the sudo rules and the SSH mutual trust between the Control Machine and  the `172.16.10.75` machine.
+        This step creates the `tidb` user account on `172.16.10.75`, and configures the sudo rules and the SSH mutual trust between the Control Machine and the `172.16.10.75` machine.
     
 2. Stop the old DM-worker instance.
 
-    > If the `172.16.10.72` machine is faulty and you cannot log in via SSH, you can ignore this step.
+    > **Note:** If the `172.16.10.72` machine breaks down and you cannot log in via SSH, ignore this step. 
 
     ```
     $ ansible-playbook stop.yml --tags=dm-worker -l dm_worker1
@@ -257,9 +257,9 @@ Assuming that you need to maintain the `172.16.10.72` machine or this machine is
 
 3. Edit the `inventory.ini` file and add the new DM-worker instance.
 
-    Edit the `inventory.ini` file, comment or delete the line where the old `dm_worker1` instance `172.16.10.72` exists, and add the `172.16.10.75` information of the new `dm_worker1` instance.
+    Edit the `inventory.ini` file, comment or delete the line where the `dm_worker1` instance `172.16.10.72` that you want to replace exists, and add the `172.16.10.75` information of the new `dm_worker1` instance.
 
-    ```
+    ```ini
     [dm_worker_servers]
     dm_worker1 ansible_host=172.16.10.75 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
     # dm_worker1 ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
