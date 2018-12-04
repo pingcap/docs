@@ -4,7 +4,7 @@ summary: This document introduces the common operations when you administer a DM
 category: tools
 ---
 
-# Common Operations of DM-Ansible
+# DM Common Operations
 
 This document introduces the common operations when you administer a DM cluster using DM-Ansible. 
 
