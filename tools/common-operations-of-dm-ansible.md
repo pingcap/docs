@@ -187,7 +187,7 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
         This step creates the `tidb` user account on `172.16.10.80`, configures the sudo rules and the SSH mutual trust between the Control Machine and the `172.16.10.80` machine.
 
-2. Stop the old DM-master instance.
+2. Stop the DM-master instance that you need to replace.
 
     > **Note:** If the `172.16.10.71` machine breaks down and you cannot log in via SSH, ignore this step.  
 
