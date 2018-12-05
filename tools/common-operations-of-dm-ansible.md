@@ -43,25 +43,25 @@ $ ansible-playbook stop.yml
 
 2. Use Ansible to perform the rolling update.
 
-    - Perform a rolling update on the DM-worker instance:
+    1. Perform a rolling update on the DM-worker instance:
 
         ```
         ansible-playbook rolling_update.yml --tags=dm-worker
         ```
 
-    - Perform a rolling update on the DM-master instance:
+    2. Perform a rolling update on the DM-master instance:
 
         ```
         ansible-playbook rolling_update.yml --tags=dm-master
         ```
 
-    - Upgrade dmctl:
+    3. Upgrade dmctl:
 
         ```
         ansible-playbook rolling_update.yml --tags=dmctl
         ```
 
-    - Perform a rolling update on DM-worker, DM-master and dmctl
+    4. Perform a rolling update on DM-worker, DM-master and dmctl:
 
         ```
         ansible-playbook rolling_update.yml
