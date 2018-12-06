@@ -1,12 +1,12 @@
 ---
-title: Common Operations of DM-Ansible
-summary: This document introduces the common operations when you administer a DM cluster using DM-Ansible. 
+title: Data Migration Cluster Operations
+summary: This document introduces the DM cluster operations and considerations when you administer a DM cluster using DM-Ansible.
 category: tools
 ---
 
-# DM Common Operations
+# Data Migration Cluster Operations
 
-This document introduces the common operations when you administer a DM cluster using DM-Ansible. 
+This document introduces the DM cluster operations and considerations when you administer a DM cluster using DM-Ansible.
 
 ## Start a cluster
 
@@ -22,6 +22,106 @@ Run the following command to stop all the components (including DM-master, DM-wo
 
 ```
 $ ansible-playbook stop.yml
+```
+
+## Restart cluster components
+
+You need to update the DM cluster components in the following cases:
+
+- You want to [upgrade the component version](#upgrade-the-component-version).
+- A serious bug occurs and you have to restart the component for temporary recovery.
+- The machine that the DM cluster is located in is restarted for certain reasons.
+
+### Restarting considerations
+
+This sections describes the considerations that you need to know when you restart DM components.
+
+#### Restarting DM-worker considerations
+
+**In the process of full data import:**
+
+For the SQL files during full data import, DM uses the downstream database to record the checkpoint information. When DM-worker is restarted, you can refer to the checkpoint information and use the [`start-task` command](../tools/data-migration-practice.md#step-4-start-the-data-synchronization-task) to recover the data synchronization task automatically.
+
+**In the process of incremental data import:**
+
+For the binlog during incremental data import, DM uses the downstream database to record the checkpoint information, and enables the safe mode within the first 5 minutes after the synchronization task is started or recovered.
+
++ Sharding DDL statements synchronization is not enabled
+
+    If the sharding DDL statements synchronization is not enabled in the task running on DM-worker, when DM-worker is restarted, you can refer to the checkpoint information and use the `start-task` command to recover the data synchronization task automatically.
+
++ Sharding DDL statements synchronization is enabled
+
+    - When DM is synchronizing the sharding DDL statements, if DM-worker successfully executes (or skips) the sharding DDL binlog event, then the checkpoints of all tables related to sharding DDL in the DM-worker are updated to the place after the binlog corresponding to the DDL statement.
+
+    - If DM-worker is restarted before or after synchronizing sharding DDL statements, you can refer to the checkpoint information and use the `start-task` command to recover the data synchronization task automatically.
+
+    - If DM-worker is restarted during the process of synchronizing sharding DDL statements, the issue might occur that the DM-worker owner has executed the DDL statement and successfully changed the downstream database table schema, while other DM-worker instances are restarted but fail to skip the DDL statement and update the checkpoints.
+
+        At this time, DM tries again to synchronize these DDL statements that are not skipped. However, the restarted DM-worker instances will be blocked at the place of the binlog corresponding to the DDL binlog event, because the DM-worker instance that is not restarted has executed to the place after this DDL binlog event.
+
+        To resolve this issue, follow the steps described in [Troubleshooting Sharding DDL Locks](../tools/troubleshooting-sharding-ddl-locks.md#condition-two-a-dm-worker-restarts-or-is-unreachable-temporarily)
+
+#### Restarting DM-master considerations
+
+The information maintained by DM-master includes the following two major types, and these data are not being persisted when you restart DM-master.
+
+- The corresponding relationship between the task and DM-worker
+- The sharding DDL lock related information
+
+When DM-master is restarted, it automatically requests the task information from each DM-worker instance and rebuilds the corresponding relationship between the task and DM-worker. However, at this time, DM-worker does not resend the sharding DDL information, so it might occur that the sharding DDL lock synchronization cannot be finished automatically because of the lost lock information.
+
+To resolve this issue, follow the steps described in [Troubleshooting Sharding DDL Locks](../tools/troubleshooting-sharding-ddl-locks.md#condition-three-dm-master-restarts).
+
+#### Restarting dmctl considerations
+
+The dmctl component is stateless. You can restart it at any time you like.
+
+### Restart DM-worker
+
+> **Note:** Try to avoid restarting DM-worker during the process of synchronizing sharding DDL statements.
+
+To restart the DM-worker component, you can use either of the following two approaches:
+
+- Perform a rolling update on DM-worker
+
+    ```bash
+    $ ansible-playbook rolling_update.yml --tags=dm-worker
+    ```
+
+- Stop DM-worker first and then restart it
+
+    ```bash
+    $ ansible-playbook stop.yml --tags=dm-worker
+    $ ansible-playbook start.yml --tags=dm-worker
+    ```
+
+### Restart DM-master
+
+> **Note:** Try to avoid restarting DM-master during the process of synchronizing sharding DDL statements.
+
+To restart the DM-master component, you can use either of the following two approaches:
+
+- Perform a rolling update on DM-master
+
+    ```bash
+    $ ansible-playbook rolling_update.yml --tags=dm-master
+    ```
+
+- Stop DM-master first and then restart it
+
+    ```bash
+    $ ansible-playbook stop.yml --tags=dm-master
+    $ ansible-playbook start.yml --tags=dm-master
+    ```
+
+### Restart dmctl
+
+To stop and restart dmctl, use the following command, instead of using DM-Ansible:
+
+```bash
+$ exit            # Stops the running dmctl
+$ sh dmctl.sh     # Restart dmctl
 ```
 
 ## Upgrade the component version
