@@ -134,6 +134,7 @@
       - [Troubleshoot Sharding DDL Locks](tools/troubleshooting-sharding-ddl-locks.md)
     - [Monitor](tools/dm-monitor.md)
     - [Common Operations](tools/common-operations-of-dm-ansible.md)
+    - [Upgrade Loader or Syncer to DM](tools/upgrade-loader-or-syncer-to-dm.md)
     - [Troubleshoot](tools/data-migration-troubleshooting.md)
   + TiDB-Lightning
     - [Overview](tools/lightning/overview-architecture.md)
