@@ -390,3 +390,27 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
     ```
     $ ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
+
+## Switch between master and slave instances
+
+Each instance in the DM cluster consists of a master instance and a slave instance. Generally, you can only access the master instance and the slave instance serves as a backup. However, when the machine where the master instance is located encounters an error, the master instance and the slave instance can be switched. After the switch, the original master instance becomes a backup instance.
+
+This section describes how to switch between master and slave instances using dmctl in two conditions.
+
+### Upstream master-slave switch behind the virtual IP
+
+1. Use `query-status` to make sure that relay catches up with the master instance before the switch (`relayCatchUpMaster`).
+2. Use `pause-relay` to pause relay.
+3. Use `pause-task` to pause all running tasks.
+4. The upstream master and slave instances behind the virtual IP execute the switch operation.
+5. Use `switch-relay-master` to tell relay to execute the master-slave switch.
+6. Use `resume-relay` to make relay resume to read binlog from the new master instance.
+7. Use `resume-task` to resume the previous synchronization task.
+
+### Master-slave switch after changing IP
+
+1. Use `query-status` to make sure that relay catches up with the master instance before the switch (`relayCatchUpMaster`).
+2. Use `stop-task` to stop all running tasks.
+3. Modify the DM-worker configuration, and use DM-Ansible to perform a rolling update on DM-worker.
+4. Update the `task.yaml` and `mysql-instances / config` configurations.
+5. Use `start-task` to restart the synchronization task.
