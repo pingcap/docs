@@ -10,7 +10,7 @@ This document introduces how to upgrade Loader or Syncer to DM (Data Migration).
 
 ## Upgrade Loader to Data Migration
 
-Loader is used to import the full data that is exported from [mydumper](https://github.com/pingcap/docs/blob/master/tools/mydumper.md) to TiDB.
+Loader is used to load the full data that is dumped from [mydumper](../tools/mydumper.md) to TiDB.
 
 When the `task-mode` of the task DM executes is `full`, DM automatically uses `dumper` to export data and then uses `loader` to import the data.
 
@@ -36,7 +36,7 @@ Taking the configuration options in [Data Migration Task Configuration File](../
 | `do-table` | `do-tables` of `black-white-list`. The filtering feature of tables has been refactored. For detailed configuration, see `do-tables` in [Data Migration Task Configuration File](../tools/dm-task-configuration-file-intro.md). |  
 | `ignore-db` | `ignore-dbs` of `black-white-list`. The filtering feature of databases has been refactored. For detailed configuration, see `ignore-dbs` in [Data Migration Task Configuration File](../tools/dm-task-configuration-file-intro.md). |
 | `ignore-table` | `ignore-tables` of `black-white-list`. The filtering feature of tables has been refactored. For detailed configuration, see `ignore-tables` in [Data Migration Task Configuration File](../tools/dm-task-configuration-file-intro.md). |
-| `rm-checkpoint` | Deprecated. A configuration option with a similar feature is `remove-previous-checkpoint`. |
+| `rm-checkpoint` | Deprecated. A configuration option with a similar feature is `remove-meta`. |
 
 Taking the configuration options in [Data Migration Task Configuration File](../tools/dm-task-configuration-file-intro.md) as examples, the corresponding relationship of task configuration options between mydumper and DM is as follows:
 
@@ -54,7 +54,7 @@ Other options are specified using `extra-args` of `mydumper`. Their usage in DM 
 
 ## Upgrade Syncer to Data Migration
 
-Syncer is a tool used to import data incrementally. The task Syncer executes is corresponding to the synchronization task with `incremental``task-mode` in DM. The `syncer` processing unit feature of dm-worker in DM is corresponding to the Syncer feature.
+Syncer is a tool used to import data incrementally. The task Syncer executes is corresponding to the synchronization task with `incremental` `task-mode` in DM. The `syncer` processing unit feature of dm-worker in DM is corresponding to the Syncer feature.
 
 To upgrade Syncer to DM, you only need to generate the corresponding task configuration file and then use dmctl to execute the task.
 
