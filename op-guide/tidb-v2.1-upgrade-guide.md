@@ -12,6 +12,14 @@ This document describes how to upgrade from TiDB 2.0 (TiDB 2.0.1 or later) or Ti
 
 For details about using Ansible to perform a rolling update to each component, see [Perform a rolling update using Ansible](../op-guide/ansible-deployment-rolling-update.md#perform-a-rolling-update-using-ansible).
 
+## Upgrade caveat
+
+- TiDB 2.1 does not support downgrading to v2.0.x or earlier due to the adoption of the new storage engine
++ Parallel DDL is enabled in TiDB 2.1, so the clusters with TiDB version earlier than 2.0.1 cannot upgrade to 2.1 using rolling update. You can choose either of the following two options:
+    - Stop the cluster and upgrade to 2.1 directly
+    - Roll update to 2.0.1 or later 2.0.x versions, and then roll update to the 2.1 version
+- If you upgrade from TiDB 2.0.6 or earlier to TiDB 2.1, check if there is any ongoing DDL operation, especially the time consuming `Add Index` operation, because the DDL operations slow down the upgrading process. If there is ongoing DDL operation, wait for the DDL operation finishes and then roll update.
+
 ## Step 1: Install Ansible and dependencies on the Control Machine
 
 TiDB-Ansible release-2.1 depends on Ansible 2.4.2 ~ 2.7.0 (`ansible>=2.4.2,<2.7.0`) and the Python module `jinja2>=2.9.6` and `jmespath>=0.9.0`.
