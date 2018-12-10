@@ -316,26 +316,17 @@ pause-task [-w "127.0.0.1:10181"] task-name
 You can use the task management command to restart the data synchronization task.
 
 ```bash
-» resume-task test
-{
-​    "op": "Resume",
-​    "result": true,
-​    "msg": "",
-​    "workers": [
-​        {
-​            "op": "Resume",
-​            "result": true,
-​            "worker": "172.16.30.15:10081",
-​            "msg": ""
-​        },
-​        {
-​            "op": "Resume",
-​            "result": true,
-​            "worker": "172.16.30.16:10081",
-​            "msg": ""
-​        }
-​    ]
-}
+» help resume-task
+resume a paused task with name
+
+Usage:
+ dmctl resume-task [-w worker ...] <task_name> [flags]
+
+Flags:
+ -h, --help   help for resume-task
+
+Global Flags:
+ -w, --worker strings   dm-worker ID
 ```
 
 #### Command usage example
@@ -439,7 +430,7 @@ You can use the task management command to update the data synchronization task.
 
 #### Update items that support online update
 
-1. Check the status if the corresponding data synchronization task using `query-status <task-name>`.
+1. Check the status of the corresponding data synchronization task using `query-status <task-name>`.
 
     If `stage` is not `Paused`, use `pause-task <task-name>` to pause the task.
 
@@ -451,7 +442,7 @@ You can use the task management command to update the data synchronization task.
 
 #### Update items that do not support online update
 
-1. Check the status if the corresponding data synchronization task using `query-status <task-name>`.
+1. Check the status of the corresponding data synchronization task using `query-status <task-name>`.
 
     If the task exists, use `stop-task <task-name>` to stop the task.
 
@@ -459,7 +450,7 @@ You can use the task management command to update the data synchronization task.
 
 3. Restart the task using `start-task <task-name>`.
 
-#### Command help
+#### Command usage help
 
 ```bash
 » help update-task
@@ -517,7 +508,7 @@ The user of the upstream and downstream databases must have the corresponding re
 + MySQL binlog configuration
 
     - Whether the binlog is enabled (DM requires that the binlog must be enabled)
-    - Whether `binlog_format=ROW` (DM only supports the binlog synchronization in the ROW format
+    - Whether `binlog_format=ROW` (DM only supports the binlog synchronization in the ROW format)
     - Whether `binlog_row_image=FULL` (DM only supports `binlog_row_image=FULL`)
 
 + The privileges of the upstream MySQL instance user
