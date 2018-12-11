@@ -63,7 +63,7 @@ Syncer is a tool used to import data incrementally. The task Syncer executes is 
 To upgrade Syncer to DM, perform the following steps:
 
 1. [Deploy the DM cluster](../tools/data-migration-deployment.md).
-2. Generate the corresponding task configuration file.
+2. Refer to [Syncer configuration change](#syncer-configuration-change) and generate the corresponding task configuration file.
 3. Use dmctl to start the task.
 
 ### Syncer Configuration change
