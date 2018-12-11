@@ -30,7 +30,7 @@ driver = "file"
 
 # The data source name (DSN) indicating the location of the checkpoint storage.
 #
-# For "file" driver, the DSN is a path. If not specified, Lightning would
+# For the "file" driver, the DSN is a path. If the path is not specified, Lightning would
 # default to "/tmp/CHECKPOINT_SCHEMA.pb".
 #
 # For the "mysql" driver, the DSN is a URL in the form of "USER:PASS@tcp(HOST:PORT)/".

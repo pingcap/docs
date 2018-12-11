@@ -328,7 +328,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     #  - gb18030: the schema files must be encoded as GB-18030, otherwise will
     #             emit errors
     #  - auto:    (default) automatically detects whether the schema is UTF-8 or
-    #             GB-18030, error if the encoding is neither
+    #             GB-18030. An error is reported if the encoding is neither.
     #  - binary:  do not try to decode the schema files
     # note that the *data* files are always parsed as binary regardless of
     # schema encoding.
@@ -371,10 +371,10 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # Configures the background periodic actions
     # Supported units: h (hour), m (minute), s (second).
     [cron]
-    # Duration between which Lightning will automatically refresh the import mode
+    # Duration between which Lightning automatically refreshes the import mode
     # status. Should be shorter than the corresponding TiKV setting.
     switch-mode = "5m"
-    # Duration which the an import progress will be printed to the log.
+    # Duration between which an import progress is printed to the log.
     log-progress = "5m"
 
     # Table filter options. See the corresponding section for details.

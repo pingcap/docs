@@ -125,7 +125,7 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
 
 - **`lightning_block_read_seconds`** (Histogram)
 
-    Bucketed histogram of the time needed to read a block of SQL rows from the data source
+    Bucketed histogram of the time needed to read a block of SQL rows from the data source.
 
 - **`lightning_block_read_bytes`** (Histogram)
 

@@ -75,7 +75,7 @@ Try the latest version! Maybe there is new speed improvement.
 
 2. Manually `CREATE` the affected tables in the target database, and then set `[mydumper] no-schema = true` to skip automatic table creation.
 
-3. Set `[mydumper] character-set = "binary"` to skip the check. Note that this may introduce mojibake into the target database.
+3. Set `[mydumper] character-set = "binary"` to skip the check. Note that this might introduce mojibake into the target database.
 
 ## [sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'
 

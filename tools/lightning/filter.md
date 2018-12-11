@@ -6,7 +6,7 @@ category: tools
 
 # TiDB-Lightning Table Filter
 
-TiDB-Lightning supports setting up black and white lists to ignore certain databases and tables. This can be used to skip cache tables, or manually partitions the data source on a shared storage to allow multiple Lightning instances work together without interfering each other.
+TiDB-Lightning supports setting up black and white lists to ignore certain databases and tables. This can be used to skip cache tables, or manually partition the data source on a shared storage to allow multiple Lightning instances work together without interfering each other.
 
 The filtering rule is similar to MySQL `replication-rules-db`/`replication-rules-table`.
 
@@ -60,7 +60,7 @@ Note that the database filtering rules are applied before considering the table 
 
 ## Example
 
-To illustrate how these rules work, let’s suppose the data source contains the following tables:
+To illustrate how these rules work, suppose the data source contains the following tables:
 
 ```
 `logs`.`messages_2016`
@@ -98,7 +98,7 @@ db-name = "~^forum.*"
 table-name = "messages"
 ```
 
-First we apply the database rules:
+First apply the database rules:
 
 | Database                  | Outcome                                    |
 |---------------------------|--------------------------------------------|
@@ -108,7 +108,7 @@ First we apply the database rules:
 | `` `forum_backup_2017` `` | Skipped by rule C                          |
 | `` `forum_backup_2018` `` | Included by rule A (rule C will not apply) |
 
-Then we apply the table rules:
+Then apply the table rules:
 
 | Table                                | Outcome                                    |
 |--------------------------------------|--------------------------------------------|
