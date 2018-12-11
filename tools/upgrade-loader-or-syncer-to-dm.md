@@ -18,7 +18,7 @@ To upgrade Loader to DM, perform the following steps:
 
 1. [Deploy the DM cluster](../tools/data-migration-deployment.md).
 2. Generate the corresponding task configuration file.
-3. Use dmctl to start the task.
+3. [Use dmctl to start the task](../tools/data-migration-manage-task.md#create-the-data-synchronization-task).
 
 ### Configuration change 
 
