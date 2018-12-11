@@ -14,13 +14,13 @@ Loader is a tool used to load the full data that is dumped from [mydumper](../to
 
 When the `task-mode` of the task DM executes is `full`, DM automatically uses `dumper` to dump data and then uses `loader` to load the data.
 
-To upgrade Loader to DM, you need to:
+To upgrade Loader to DM, perform the following steps:
 
-1. Deploy the DM cluster.
+1. [Deploy the DM cluster](../tools/data-migration-deployment.md).
 2. Generate the corresponding task configuration file.
 3. Use dmctl to start the task.
 
-### Change configuration 
+### Configuration change 
 
 Loader uses the TOML file to define the process-related operation parameters and synchronization task parameters; DM uses the YAML file to define task configuration file parameters.
 
@@ -46,9 +46,9 @@ Taking the configuration options in [Data Migration Task Configuration File](../
 
 | Configuration in mydumper | Corresponding configuration in DM |
 | ---------------------- | --------------------------------- |
-| `host` | No corresponding option. Fixed when DM-worker is deployed. |
-| `port` | No corresponding option. Fixed when DM-worker is deployed. |
-| `user` | No corresponding option. Fixed when DM-worker is deployed. |
+| `host` | No corresponding option. Configured when DM-worker is deployed. |
+| `port` | No corresponding option. Configured when DM-worker is deployed. |
+| `user` | No corresponding option. Configured when DM-worker is deployed. |
 | `password` | No corresponding option. Configured when DM-worker is deployed. |
 | `threads` | `threads` of `mydumper` |
 | `chunk-filesize` | `chunk-filesize` of `mydumper` |
@@ -60,7 +60,11 @@ Other options are specified using `extra-args` of `mydumper`. Their usage in DM 
 
 Syncer is a tool used to import data incrementally. The task Syncer executes is corresponding to the synchronization task with `incremental` `task-mode` in DM. The `syncer` processing unit feature of dm-worker in DM is corresponding to the Syncer feature.
 
-To upgrade Syncer to DM, you only need to generate the corresponding task configuration file and then use dmctl to execute the task.
+To upgrade Syncer to DM, perform the following steps:
+
+1. [Deploy the DM cluster](../tools/data-migration-deployment.md).
+2. Generate the corresponding task configuration file.
+3. Use dmctl to start the task.
 
 ### Configuration change
 
