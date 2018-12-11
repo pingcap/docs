@@ -12,9 +12,13 @@ This document introduces how to upgrade Loader or Syncer to DM (Data Migration).
 
 Loader is a tool used to load the full data that is dumped from [mydumper](../tools/mydumper.md) to TiDB.
 
-When the `task-mode` of the task DM executes is `full`, DM automatically uses `dumper` to export data and then uses `loader` to import the data.
+When the `task-mode` of the task DM executes is `full`, DM automatically uses `dumper` to dump data and then uses `loader` to load the data.
 
-To upgrade Loader to DM, you only need to generate the corresponding task configuration file and use dmctl to execute the task.
+To upgrade Loader to DM, you need to:
+
+1. Deploy the DM cluster.
+2. Generate the corresponding task configuration file.
+3. Use dmctl to start the task.
 
 ### Change configuration 
 
@@ -45,7 +49,7 @@ Taking the configuration options in [Data Migration Task Configuration File](../
 | `host` | No corresponding option. Fixed when DM-worker is deployed. |
 | `port` | No corresponding option. Fixed when DM-worker is deployed. |
 | `user` | No corresponding option. Fixed when DM-worker is deployed. |
-| `password` | No corresponding option. Fixed when DM-worker is deployed. |
+| `password` | No corresponding option. Configured when DM-worker is deployed. |
 | `threads` | `threads` of `mydumper` |
 | `chunk-filesize` | `chunk-filesize` of `mydumper` |
 | `skip-tz-utc` | `skip-tz-utc` of `mydumper` |
