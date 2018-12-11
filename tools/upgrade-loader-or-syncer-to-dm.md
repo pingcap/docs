@@ -10,7 +10,7 @@ This document introduces how to upgrade Loader or Syncer to DM (Data Migration).
 
 ## Upgrade Loader to Data Migration
 
-Loader is used to load the full data that is dumped from [mydumper](../tools/mydumper.md) to TiDB.
+Loader is a tool used to load the full data that is dumped from [mydumper](../tools/mydumper.md) to TiDB.
 
 When the `task-mode` of the task DM executes is `full`, DM automatically uses `dumper` to export data and then uses `loader` to import the data.
 
