@@ -49,7 +49,7 @@ driver = "file"
 
 Lightning supports two kinds of checkpoint storage: a local file or a remote MySQL-compatible database.
 
-With `driver = "file"`, checkpoints are stored in a local file at the path given by the `dsn` setting. Checkpoints are updated rapidly, and we highly recommend to place the checkpoint file on a drive with very high write endurance e.g. a RAM disk.
+With `driver = "file"`, checkpoints are stored in a local file at the path given by the `dsn` setting. Checkpoints are updated rapidly, so we highly recommend placing the checkpoint file on a drive with very high write endurance, such as a RAM disk.
 
 With `driver = "mysql"`, checkpoints can be saved in any databases compatible with MySQL 5.7 or above, including MariaDB and TiDB. By default, the checkpoints are saved in the target database.
 
