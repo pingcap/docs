@@ -34,7 +34,7 @@ driver = "file"
 # default to "/tmp/CHECKPOINT_SCHEMA.pb".
 #
 # For the "mysql" driver, the DSN is a URL in the form of "USER:PASS@tcp(HOST:PORT)/".
-# If not specified, the TiDB server from the [tidb] section will be used to
+# If the URL is not specified, the TiDB server from the [tidb] section is used to
 # store the checkpoints. You should specify a different MySQL-compatible
 # database server to reduce the load of the target TiDB cluster.
 #dsn = "/tmp/tidb_lightning_checkpoint.pb"
