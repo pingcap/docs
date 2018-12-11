@@ -86,7 +86,7 @@ Taking the configuration options in [Data Migration Task Configuration File](../
 | `route-rules` | `route-rules`|
 | `pattern-schema` | `schema-pattern` |
 | `pattern-table` | `table-pattern` |
-| `from` | `config` of `mysql-instances`. Should be consistent with the upstream MySQL information during the DM-worker deployment. |
+| `from` | `config` of `mysql-instances`. Keep it consistent with the upstream MySQL information during the DM-worker deployment. |
 | `to` | `target-database` |
 | `disable-detect` | `disable-detect` of `syncer` | 
 | `safe-mode` | `safe-mode` of `syncer` | 
