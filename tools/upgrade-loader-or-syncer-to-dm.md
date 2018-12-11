@@ -64,7 +64,7 @@ To upgrade Syncer to DM, perform the following steps:
 
 1. [Deploy the DM cluster](../tools/data-migration-deployment.md).
 2. Refer to [Syncer configuration change](#syncer-configuration-change) and generate the corresponding task configuration file.
-3. Use dmctl to start the task.
+3. [Use dmctl to start the task](../tools/data-migration-manage-task.md#create-the-data-synchronization-task).
 
 ### Syncer Configuration change
 
