@@ -78,7 +78,7 @@ In this command,
 - `-T t1,t2`: means only the `t1` and `t2` tables are exported.
 - `-t 16`: means 16 threads are used to export the data.
 - `-F 256`: means a table is partitioned into chunks and one chunk is 256 MB.
-- `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
+- `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine, and to disable automatic conversion.
 
 ## Deploy TiDB-Lightning
 
