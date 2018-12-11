@@ -18,11 +18,9 @@ do-dbs = ["pattern1", "pattern2", "pattern3"]
 ignore-dbs = ["pattern4", "pattern5"]
 ```
 
-If the name of a database matched *any* pattern in the `do-dbs` array in the `[black-white-list]` section, the database will be included.
-
-Otherwise, if the name matched *any* pattern in the `ignore-dbs` array, the database will be skipped.
-
-If a database’s name matched *both* the `do-dbs` and `ignore-dbs` arrays, the database will be included.
+* If the name of a database matched *any* pattern in the `do-dbs` array in the `[black-white-list]` section, the database is included.
+* Otherwise, if the name matched *any* pattern in the `ignore-dbs` array, the database is skipped.
+* If a database’s name matched *both* the `do-dbs` and `ignore-dbs` arrays, the database is included.
 
 The pattern can either be a simple name, or a regular expression in [Go dialect](https://golang.org/pkg/regexp/syntax/#hdr-Syntax) if it starts with a `~` character.
 
@@ -50,13 +48,11 @@ db-name = "db-pattern-5"
 table-name = "table-pattern-5"
 ```
 
-If the qualified name of a table matched *any* pair of patterns in the `do-tables` array, the table will be included.
+* If the qualified name of a table matched *any* pair of patterns in the `do-tables` array, the table is included.
+* Otherwise, if the qualified name matched *any* pair of patterns in the `ignore-tables` array, the table is skipped.
+* If a table’s qualified name matched *both* the `do-tables` and `ignore-tables` arrays, the table is included.
 
-Otherwise, if the qualified name matched *any* pair of patterns in the `ignore-tables` array, the table will be skipped.
-
-If a table’s qualified name matched *both* the `do-tables` and `ignore-tables` arrays, the table will be included.
-
-Note that the database filtering rules are applied before considering the table filtering rules. This means if a database is ignored by `ignore-dbs`, all tables inside this database will not be considered even if they matched any `do-tables` array.
+Note that the database filtering rules are applied before Lightning considers the table filtering rules. This means if a database is ignored by `ignore-dbs`, all tables inside this database are not considered even if they matches any `do-tables` array.
 
 ## Example
 

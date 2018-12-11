@@ -175,7 +175,7 @@ You can find deployment instructions in [TiDB Quick Start Guide](https://pingcap
 Download the TiDB-Lightning package (choose the same version as that of the TiDB cluster):
 
 - **v2.1.0**: https://download.pingcap.org/tidb-lightning-v2.1.0-linux-amd64.tar.gz
-- **v2.0.9**: https://download.pingcap.org/tidb-lightning-release-2.0-linux-amd64.tar.gz
+- **v2.0.9**: https://download.pingcap.org/tidb-lightning-v2.0.9-linux-amd64.tar.gz
 - Latest unstable version: https://download.pingcap.org/tidb-lightning-latest-linux-amd64.tar.gz
 
 #### Step 3: Start `tikv-importer`
@@ -293,10 +293,10 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     #  - mysql: store into a remote MySQL-compatible database
     driver = "file"
     # The data source name (DSN) indicating the location of the checkpoint storage.
-    # For "file" driver, the DSN is a path. If not specified, Lightning would
+    # For the "file" driver, the DSN is a path. If the path is not specified, Lightning would
     # default to "/tmp/CHECKPOINT_SCHEMA.pb".
-    # For "mysql" driver, the DSN is a URL in the form of "USER:PASS@tcp(HOST:PORT)/".
-    # If not specified, the TiDB server from the [tidb] section will be used to
+    # For the "mysql" driver, the DSN is a URL in the form of "USER:PASS@tcp(HOST:PORT)/".
+    # If the URL is not specified, the TiDB server from the [tidb] section is used to
     # store the checkpoints. You should specify a different MySQL-compatible
     # database server to reduce the load of the target TiDB cluster.
     #dsn = "/tmp/tidb_lightning_checkpoint.pb"
@@ -323,10 +323,10 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # TABLE` statements
     no-schema = false
     # the character set of the schema files; only supports one of:
-    #  - utf8mb4: the schema files must be encoded as UTF-8, otherwise will emit
-    #             errors
-    #  - gb18030: the schema files must be encoded as GB-18030, otherwise will
-    #             emit errors
+    #  - utf8mb4: the schema files must be encoded as UTF-8, otherwise Lightning
+    #             will emit errors
+    #  - gb18030: the schema files must be encoded as GB-18030, otherwise
+    #             Lightning will emit errors
     #  - auto:    (default) automatically detects whether the schema is UTF-8 or
     #             GB-18030. An error is reported if the encoding is neither.
     #  - binary:  do not try to decode the schema files
