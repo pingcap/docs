@@ -327,7 +327,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     #             errors
     #  - gb18030: the schema files must be encoded as GB-18030, otherwise will
     #             emit errors
-    #  - auto:    (default) automatically detect if the schema is UTF-8 or
+    #  - auto:    (default) automatically detects whether the schema is UTF-8 or
     #             GB-18030, error if the encoding is neither
     #  - binary:  do not try to decode the schema files
     # note that the *data* files are always parsed as binary regardless of
