@@ -66,7 +66,7 @@ To upgrade Syncer to DM, perform the following steps:
 2. Generate the corresponding task configuration file.
 3. Use dmctl to start the task.
 
-### Configuration change
+### Syncer Configuration change
 
 Syncer uses the TOML file to define the process-related operation parameters and synchronization task parameters; DM uses the YAML file to define task configuration file parameters.
 
