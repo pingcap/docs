@@ -9,7 +9,7 @@ As a NewSQL database, TiDB excels in the best features of the traditional relati
 
 ## 3-DC Deployment Solution
 
-TiDB, TiKV and PD are distributed among 3 DCs, which is the most common deployment solution which the highest avaiability.
+TiDB, TiKV and PD are distributed among 3 DCs, which is the most common deployment solution with the highest availability.
 
 ![3-DC Deployment Architecture](../media/deploy-3dc.png)
 
