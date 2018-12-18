@@ -6,9 +6,7 @@ category: tools
 
 # TiDB-Binlog Cluster User Guide
 
-This document introduces the architecture and the deployment of TiDB-Binlog of the cluster version. If you want to use the local or Kafka version of TiDB-Binlog, see [the deployment document for TiDB-Binlog of the local version](../tools/tidb-binlog.md) and [the deployment document for TiDB-Binlog of the Kafka version](../tools/tidb-binlog-kafka.md).
-
-TiDB-Binlog is an enterprise tool used to collect the binlog data of TiDB and provide real-time backup and synchronization.
+TiDB-Binlog is an enterprise tool used to collect the binlog data of TiDB and provide real-time backup and synchronization. This document describes the architecture of the cluster version of TiDB-Binlog, and how to deploy, operate, monitor, and upgrade it.
 
 TiDB-Binlog has the following features:
 
