@@ -639,7 +639,7 @@ The new TiDB versions (v2.0.8-binlog, v2.1.0-rc.5 or later) are not compatible w
 The corresponding relationship between TiDB-Binlog versions and TiDB versions is shown in the following table:
 
 | TiDB-Binlog version | TiDB version | Note |
-|---|---|---|
+|:---|:---|:---|
 | Local | TiDB 1.0 or earlier ||
 | Kafka | TiDB 1.0 ~ TiDB 2.1 RC5 | TiDB 1.0 supports both the local and Kafka versions of TiDB-Binlog. |
 | Cluster | TiDB v2.0.8-binlog, TiDB 2.1 RC5 or later | TiDB v2.0.8-binlog is a special 2.0 version supporting the cluster version of TiDB-Binlog. |
