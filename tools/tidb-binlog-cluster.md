@@ -229,7 +229,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         # size-limit = "100000"
         ```
 
-    - Assume that in the downstream database are the local files of the proto buffer (`pb`) format:
+    - Assume that in the downstream is `pb`:
 
         ```bash
         $ cd /home/tidb/tidb-ansible/conf
