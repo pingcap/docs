@@ -229,7 +229,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         # size-limit = "100000"
         ```
 
-    - Assume that in the downstream is `pb`:
+    - Assume that the downstream is `pb`:
 
         ```bash
         $ cd /home/tidb/tidb-ansible/conf
