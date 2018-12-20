@@ -114,6 +114,7 @@ First start the spark-shell:
 $ cd spark
 $ bin/spark-shell
 ```
+Then query TiDB table as native Spark SQL:
 
 ```scala
 scala> spark.sql("use TPCH_001")
