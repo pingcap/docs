@@ -108,15 +108,10 @@ MySQL [TPCH_001]> show tables;
 
 ## Use example
 
-First modify $SPARK_HOME/conf/spark-defaults.conf and add following items:
-```
-spark.tispark.pd.addresses $your_pd_servers
-spark.sql.extensions org.apache.spark.sql.TiExtensions
-```
-
-Then start the spark-shell in the spark deployment directory:
+First start the spark-shell:
 
 ```
+$ cd spark
 $ bin/spark-shell
 ```
 
