@@ -153,10 +153,10 @@ The result is:
 TiSpark's SQL Interactive shell is almost the same as the spark SQL shell.
 
 ```sh
-tispark-sql> use tpch;
+spark-sql> use tpch;
 Time taken: 0.015 seconds
 
-tispark-sql> select count(*) from lineitem;
+spark-sql> select count(*) from lineitem;
 2000
 Time taken: 0.673 seconds, Fetched 1 row(s)
 ```
