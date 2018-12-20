@@ -23,7 +23,7 @@ TiSpark is an OLAP solution that runs Spark SQL directly on TiKV, the distribute
 
 ## Environment setup
 
-+ The TiSpark 2.x supports Spark 2.3.x. It does not support any versions earlier than 2.3.x.
++ The TiSpark 2.x supports Spark 2.3.x. It does not support any versions earlier than 2.3.x. If you want to use Spark 2.1.x, please use TiSpark 1.x.
 + TiSpark requires JDK 1.8+ and Scala 2.11 (Spark2.0 + default Scala version).
 + TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
 
