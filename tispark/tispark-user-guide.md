@@ -150,7 +150,7 @@ The result is:
 +-------------+
 ```
  
-TiSpark's SQL Interactive shell is almost the same as the spark SQL shell.
+Spark SQL Interactive shell remains the same:
 
 ```sh
 spark-sql> use tpch;
