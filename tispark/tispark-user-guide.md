@@ -238,7 +238,7 @@ If you would like TiSpark to use statistic information, first you need to make s
 Since TiSpark 2.0, statistics information will be default to auto load.
 
 Note that table statistics will be cached in your spark driver node's memory, so you need to make sure that your memory should be enough for your statistics information.
-Currently you could adjust these configs in your spark.conf file.
+Currently you could adjust these configs in your `spark-defaults.conf` file.
   
 | Property Name | Default | Description
 | --------   | -----:   | :----: |
