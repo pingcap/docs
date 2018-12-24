@@ -279,7 +279,7 @@ wget https://download.pingcap.org/tidb-{version}-linux-amd64.sha256
 sha256sum -c tidb-{version}-binlog-linux-amd64.sha256
 ```
 
-For TiDB v2.1.0 GA or later versions, Pump and Drainer are already included in the download package. For other TiDB versions, you need to download Pump and Drainer separately using the following command:
+For TiDB v2.1.0 GA or later versions, Pump and Drainer are already included in the TiDB download package. For other TiDB versions, you need to download Pump and Drainer separately using the following command:
 
 ```bash
 wget https://download.pingcap.org/tidb-binlog-{version}-linux-amd64.tar.gz
