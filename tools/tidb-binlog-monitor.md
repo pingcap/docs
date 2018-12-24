@@ -19,13 +19,13 @@ To understand the Pump monitoring metrics, check the following table:
 | Pump monitoring metrics | Description |
 |:---|:---|
 | Storage Size | Records the total disk space (capacity) and the available disk space (available)|
-| Metadata | Records the TSO (`gc_tso`) of the biggest binlog that each Pump node can delete, and the commit TSO (`max_commit_tso`) of the biggest saved binlog |
+| Metadata | Records the biggest TSO (`gc_tso`) of the binlog that each Pump node can delete, and the biggest commit TSO (`max_commit_tso`) of the saved binlog |
 | Write Binlog QPS by Instance | Shows QPS of writing binlog requests received by each Pump node |
-| Write Binlog Latency | Records the latency time when each Pump node writes binlog |
+| Write Binlog Latency | Records the latency time of each Pump node writing binlog |
 | Storage Write Binlog Size | Shows the size of the binlog data written by Pump |
-| Storage Write Binlog Latency | Records the latency time When Pump writes binlog |
+| Storage Write Binlog Latency | Records the latency time of the Pump storage module writing binlog |
 | Pump Storage Error By Type | Records the number of errors encountered by Pump, counted based on the type of error |
-| Query TiKV | The number of times that Pump queries the transaction status of TiKV |
+| Query TiKV | The number of times that Pump queries the transaction status through TiKV |
 
 ### Drainer monitoring metrics
 
@@ -33,13 +33,13 @@ To understand the Drainer monitoring metrics, check the following table:
 
 | Drainer monitoring metrics | Description |
 |:---|:---|
-| Checkpoint TSO | Shows the TSO time of the biggest binlog that Drainer has already synchronized into the downstream. You can get the lag by using the current time to subtract the binlog timestamp. But be noted that the timestamp is allocated by PD of the master cluster and is determined by the time of PD.|
-| Pump Handle TSO | Records the time of the biggest TSO among the binlog files that Drainer obtains from each Pump node |
+| Checkpoint TSO | Shows the biggest TSO time of the binlog that Drainer has already synchronized into the downstream. You can get the lag by using the current time to subtract the binlog timestamp. But be noted that the timestamp is allocated by PD of the master cluster and is determined by the time of PD.|
+| Pump Handle TSO | Records the biggest TSO time among the binlog files that Drainer obtains from each Pump node |
 | Pull Binlog QPS by Pump NodeID | Shows the QPS when Drainer obtains binlog from each Pump node |
 | 95% Binlog Reach Duration By Pump | Records the delay from the time when binlog is written into Pump to the time when the binlog is obtained by Drainer |
 | Error By Type | Shows the number of errors encountered by Drainer, counted based on the type of error |
 | Drainer Event | Shows the number of various types of events, including "ddl", "insert", "delete", "update", "flush", and "savepoint" |
-| Execute Time | Records the time it takes the SQL statement to execute to the downstream, or the time it takes to write data into downstream |
+| Execute Time | Records the time it takes to execute the SQL statement in the downstream, or the time it takes to write data into downstream |
 | 95% Binlog Size | Shows the size of the binlog data that Drainer obtains from each Pump node |
 | DDL Job Count | Records the number of DDL statements handled by Drainer|
 
