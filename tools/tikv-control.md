@@ -241,7 +241,7 @@ Then after you restart TiKV, these Regions can continue to provide services usin
 > **Note:**
 > 
 > - This command only supports the local mode. It prints `success!` when successfully run.
-> - Generally, you must run this command for all stores where specified Regions' peers are located. 
+> - Generally, you need to run this command for all stores where the peers of the specified Regions are located.
 > - If you specify `store_id` as `--all-regions`, you need to run this command for all the other healthy stores in the cluster.
 
 ### Recover from MVCC data corruption
