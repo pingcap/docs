@@ -227,7 +227,7 @@ success!
 
 Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of the specified Regions. This command has only one mode "local". Before running this command, you need to stop the service of the target TiKV to release the file lock.
 
-The `-s` option accepts multiple `store_id` separated by comma and uses the `-r` flag to specify involved Regions. To recover the service from failure of multiple replicas for all the Regions in one store, specify `store_id` as `--all-regions`.
+The `-s` option accepts multiple `store_id` separated by comma and uses the `-r` flag to specify involved Regions. To recover the service from the failure of multiple replicas for all the Regions in one store, specify `--all-regions`.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores -s 3 -r 1001,1002
