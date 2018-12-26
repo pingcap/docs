@@ -322,7 +322,8 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # already exist on the target TiDB cluster, and will not execute the `CREATE
     # TABLE` statements
     no-schema = false
-    # the character set of the schema files; only supports one of:
+    # the character set of the schema files, containing CREATE TABLE statements;
+    # only supports one of:
     #  - utf8mb4: the schema files must be encoded as UTF-8, otherwise Lightning
     #             will emit errors
     #  - gb18030: the schema files must be encoded as GB-18030, otherwise
@@ -378,7 +379,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     log-progress = "5m"
 
     # Table filter options. See the corresponding section for details.
-    [black-white-list]
+    #[black-white-list]
     # ...
     ```
 

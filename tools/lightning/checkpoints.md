@@ -24,7 +24,7 @@ enable = true
 schema = "tidb_lightning_checkpoint"
 
 # Where to store the checkpoints.
-#  - file:  store as a local file.
+#  - file:  store as a local file (requires v2.1.1 or above)
 #  - mysql: store into a remote MySQL-compatible database
 driver = "file"
 
