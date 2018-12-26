@@ -184,7 +184,7 @@ To use the Transactional Key-Value API in applications developed by golang, take
     Begin() -> Txn
     Txn.Get(key []byte) -> (value []byte)
     Txn.Set(key []byte, value []byte)
-    Txn.Iter(begin []byte, end) -> Iterator
+    Txn.Iter(begin, end []byte) -> Iterator
     Txn.Delete(key []byte)
     Txn.Commit()
     ```
