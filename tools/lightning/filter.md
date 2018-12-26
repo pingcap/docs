@@ -19,10 +19,10 @@ ignore-dbs = ["pattern4", "pattern5"]
 ```
 
 * If the `do-dbs` array in the `[black-white-list]` section is not empty,
-    * If the name of a database matched *any* pattern in the `do-dbs` array, the database is included,
+    * If the name of a database matches *any* pattern in the `do-dbs` array, the database is included.
     * Otherwise, the database is skipped.
-* Otherwise, if the name matched *any* pattern in the `ignore-dbs` array, the database is skipped.
-* If a database’s name matched *both* the `do-dbs` and `ignore-dbs` arrays, the database is included.
+* Otherwise, if the name matches *any* pattern in the `ignore-dbs` array, the database is skipped.
+* If a database’s name matches *both* the `do-dbs` and `ignore-dbs` arrays, the database is included.
 
 The pattern can either be a simple name, or a regular expression in [Go dialect](https://golang.org/pkg/regexp/syntax/#hdr-Syntax) if it starts with a `~` character.
 
