@@ -225,7 +225,7 @@ success!
 
 ### Force Region to recover the service from failure of multiple replicas
 
-Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of the specified Regions. This command has only one mode "local". Before running this command, you need to stop the service of the target TiKV to release the file lock.
+Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of the specified Regions. This command has only one mode "local". Before running this command, you need to stop the target TiKV process to release the file lock.
 
 The `-s` option accepts multiple `store_id` separated by comma and uses the `-r` flag to specify involved Regions. To recover the service from the failure of multiple replicas for all the Regions in one store, specify `--all-regions`.
 
@@ -242,7 +242,7 @@ Then after you restart TiKV, these Regions can continue to provide services usin
 > 
 > - This command only supports the local mode. It prints `success!` when successfully run.
 > - Generally, you need to run this command for all stores where the peers of the specified Regions are located.
-> - If you specify `--all-regions`, you need to run this command for all the other healthy stores in the cluster.
+> - If you specify `--all-regions`, run this command for all the other healthy stores in the cluster.
 
 ### Recover from MVCC data corruption
 
