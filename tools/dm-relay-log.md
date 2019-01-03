@@ -1,10 +1,10 @@
 ---
-title: DM relay Log
+title: DM Relay Log
 summary: Learn the directory structure, initial synchronization rules and data purge of DM relay logs.
 category: tools
 ---
 
-# DM relay Log
+# DM Relay Log
 
 The DM relay log consists of a set of numbered files containing events that describe database changes, and an index file that contains the names of all used relay log files.
 
