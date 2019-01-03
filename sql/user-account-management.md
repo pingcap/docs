@@ -43,6 +43,7 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'finley'@'%' WITH GRANT OPTION;
 mysql> CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin_pass';
 mysql> GRANT RELOAD,PROCESS ON *.* TO 'admin'@'localhost';
 mysql> CREATE USER 'dummy'@'localhost';
+mysql> FLUSH PRIVILEGES;
 ```
 
 To see the privileges for an account, use `SHOW GRANTS`:
@@ -93,3 +94,13 @@ Or:
 ```sql
 ALTER USER 'jeffrey'@'localhost' IDENTIFIED BY 'mypass';
 ```
+
+## Flush privileges 
+
+Please run the following command to apply changed permissions immediately:
+
+```sql
+FLUSH PRIVILEGES;
+```
+
+See [Privilege Management](privilege.md) for details.

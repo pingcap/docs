@@ -104,6 +104,7 @@ The display content of TiDB `show processlist` is almost the same as that of MyS
 #### How to modify the user password and privilege?
 
 To modify the user password in TiDB, it is recommended to use `set password for 'root'@'%' = '0101001';` or `alter`, not `update mysql.user` which might lead to the condition that the password in other nodes is not refreshed timely.
+Run `FLUSH PRIVILEGES` to apply changed permissions immediately.
 
 It is recommended to use the official standard statements when modifying the user password and privilege. For details, see [TiDB user account management](sql/user-account-management.md).
 
