@@ -96,7 +96,7 @@ ALTER USER 'jeffrey'@'localhost' IDENTIFIED BY 'mypass';
 
 ## Flush privileges 
 
-If you modified the `grant` table directly, please run the following command to apply changes immediately:
+If you modified the grant tables directly, please run the following command to apply changes immediately:
 
 ```sql
 FLUSH PRIVILEGES;
