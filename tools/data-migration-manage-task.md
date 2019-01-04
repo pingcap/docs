@@ -91,10 +91,7 @@ This section describes how to use the task management commands to execute the fo
 
 ### Create the data synchronization task
 
-You can use the task management command to create the data synchronization task. When you create the data management task, DM checks the privilege of upstream database instances and the table schema. For the table schemas of all sharded tables in the sharding data synchronization task, DM executes the following two checks:
-
-- Whether the auto-increment and unique column exists in the table, whether the corresponding `partition id` type of column mapping rule exists, and whether a conflict exists
-- Whether the upstream and downstream table schemas to be synchronized are consistent
+You can use the task management command to create the data synchronization task. Data Migration [prechecks the corresponding privileges and configuration automatically](../tools/data-migration-manage-task.md#prcheck-the-upstream-mysql-instance-configuration) while starting the data synchronization.
 
 ```bash
 » help start-task
@@ -141,6 +138,54 @@ start-task [ -w "172.16.30.15:10081"] ./task.yaml
 ​    ]
 }
 ```
+
+## Precheck the upstream MySQL instance configuration
+
+To detect possible errors of data synchronization configuration in advance, DM provides the precheck feature. You can use the `check-task` command to precheck whether the upstream MySQL instance configuration satisfies the DM requirements.
+
+The user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration checks the following privileges and configuration automatically while starting the data synchronization task:
+
++ MySQL binlog configuration
+
+    - Whether the binlog is enabled (DM requires that the binlog must be enabled)
+    - Whether `binlog_format=ROW` (DM only supports the binlog synchronization in the ROW format)
+    - Whether `binlog_row_image=FULL` (DM only supports `binlog_row_image=FULL`)
+
++ The privileges of the upstream MySQL instance user
+
+    The MySQL user in DM configuration needs to have the following privileges at least:
+    
+    - REPLICATION SLAVE
+    - REPLICATION CLIENT
+    - RELOAD
+    - SELECT
+
++ The compatibility of the upstream MySQL table schema
+
+    TiDB differs from MySQL in compatibility in the following aspects:
+
+    - Does not support the foreign key
+    - [Character set compatibility differs](../sql/character-set-support.md)
+
++ The consistency check on the upstream MySQL multiple-instance shards
+
+    + The schema consistency of all sharded tables
+
+        - Column size
+        - Column name
+        - Column position
+        - Column type
+        - Primary key
+        - Unique index
+
+    + The conflict of the auto increment primary keys in the sharded tables
+
+        - The check fails in the following two conditions:
+
+            - The auto increment primary key exists in the sharded tables and its column type *is not* bigint.
+            - The auto increment primary key exists in the sharded tables and its column type *is* bigint, but column mapping *is not* configured.
+
+        - The check succeeds in other conditions except the two above.
 
 ### Check the data synchronization task status
 
@@ -498,43 +543,6 @@ update-task [-w "127.0.0.1:10181"] ./task.yaml
 ​    ]
 }
 ```
-
-## Check the upstream MySQL instance configuration
-
-To check whether the upstream MySQL instance configuration satisfies the DM requirements, use the `check-task` command.
-
-The user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration checks the following privileges automatically while starting the data synchronization task:
-
-+ MySQL binlog configuration
-
-    - Whether the binlog is enabled (DM requires that the binlog must be enabled)
-    - Whether `binlog_format=ROW` (DM only supports the binlog synchronization in the ROW format)
-    - Whether `binlog_row_image=FULL` (DM only supports `binlog_row_image=FULL`)
-
-+ The privileges of the upstream MySQL instance user
-
-    The MySQL user in DM configuration needs to have the following privileges at least:
-    
-    - REPLICATION SLAVE
-    - REPLICATION CLIENT
-    - RELOAD
-    - SELECT
-
-+ The compatibility of the upstream MySQL table schema
-
-    TiDB differs from MySQL in compatibility in the following aspects:
-
-    - Does not support the foreign key
-    - [Character set compatibility differs](../sql/character-set-support.md)
-
-+ The consistency check on the upstream MySQL multiple-instance shards
-
-    - The consistency of the table schema
-
-        - Column name, type
-        - Index
-
-    - Whether the auto increment primary key that conflicts during merging exists
 
 ## Manage the DDL locks
 

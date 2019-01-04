@@ -9,71 +9,77 @@ category: tools
 This document introduces the task configuration file of Data Migration --
 [`task.yaml`](https://github.com/pingcap/tidb-tools/blob/docs/docs/dm/zh_CN/configuration/task.yaml), including [Global configuration](#global-configuration) and [Instance configuration](#instance-configuration).
 
-For description of configuration items, see [Data Migration Task Configuration Options](../tools/dm-task-config-argument-description.md).
+For the feature and configuration of each configuration item, see [Data Synchronization Features](../tools/dm-data-synchronization-intro.md).
 
 ## Important concepts
 
-For description of important concepts including `instance-id` and the DM-worker ID, see [Important concepts](../tools/dm-configuration-file-overview.md#important-concepts). 
+For description of important concepts including `instance-id` and the DM-worker ID, see [Important concepts](../tools/dm-configuration-file-overview.md#important-concepts).
 
 ## Global configuration
 
-### Basic information configuration
+### Basic configuration
 
-```
+```toml
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`/`incremental`/`all`.
-is-sharding: true               # Whether it is a sharding task
-meta-schema: "dm_meta"          # The downstream database that stores the `meta` information
-remove-meta: false              # Whether to remove the `meta` information (`checkpoint` and `onlineddl`) before starting the 
-                                # synchronization task 
+is-sharding: true               # Whether it is a sharding task.
+meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
+remove-meta: false              # Whether to remove the `meta` information (`checkpoint` and `onlineddl`) before starting the synchronization task.
+enable-heartbeat: false         # Whether to enable the heartbeat feature.
 
-target-database:                # Configuration of the downstream database instance
+target-database:                # Configuration of the downstream database instance.
     host: "192.168.0.1"
     port: 4000
     user: "root"
     password: ""
 ```
 
-For more details of `task-mode`, see [Task configuration argument description](../tools/dm-task-config-argument-description.md).
+`task-mode`
+
+- Description: the task mode that can be used to specify the data synchronization task to be executed.
+- Value: string (`full`, `incremental`, or `all`), `all` by default.
+    - `full` only makes a full backup of the upstream database and then imports the full data to the downstream database.
+    - `incremental`: Only synchronizes the incremental data of the upstream database to the downstream database using the binlog.
+    - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental synchronization to the downstream database starting from the exported position during the full backup process (binlog position/GTID).
 
 ### Feature configuration set
 
 Global configuration includes the following feature configuration set.
 
-```
+```toml
 routes:                                             # The routing mapping rule set between the upstream and downstream tables
-    user-route-rules-schema:                        # `schema-pattern`/`table-pattern` uses the wildcard matching rule.
-        schema-pattern: "test_*"                
+    route-rule-1:
+        schema-pattern: "test_*"
         table-pattern: "t_*"
         target-schema: "test"
         target-table: "t"
+    route-rule-2:
+    ​    schema-pattern: "test_*"
+    ​    target-schema: "test"
 
-filters:                                            # The binlog event filter rule set of the matched table of the upstream
-                                                    # database instance
-    user-filter-1:
-        schema-pattern: "test_*"
-        table-pattern: "t_*"
-        events: ["truncate table", "drop table"]
-        action: Ignore
+filters:                                            # The binlog event filter rule set of the matched table of the upstream database instance
+    filter-rule-1:
+    ​    schema-pattern: "test_*"
+    ​    table-pattern: "t_*"
+    ​    events: ["truncate table", "drop table"]
+    ​    action: Ignore
 
-black-white-list:                                   # The filter rule set of the black white list of the matched table of the 
-                                                    # upstream database instance
-    instance:                                  
-        do-dbs: ["~^test.*", "do"]
-        ignore-dbs: ["mysql", "ignored"]
-        do-tables:
-        - db-name: "~^test.*"
-          tbl-name: "~^t.*"
+black-white-list:                                   # The filter rule set of the black white list of the matched table of the upstream database instance
+    bw-rule-1:
+    ​    do-dbs: ["~^test.*", "do"]
+    ​    ignore-dbs: ["mysql", "ignored"]
+    ​    do-tables:
+    ​    - db-name: "~^test.*"
+    ​      tbl-name: "~^t.*"
 
-column-mappings:                                    # The column mapping rule set of the matched table of the upstream database 
-                                                    # instance
-    instance-1:                                     
-        schema-pattern: "test_*"
-        table-pattern: "t_*"
-        expression: "partition id"
-        source-column: "id"
-        target-column: "id"
-        arguments: ["1", "test_", "t_"]
+column-mappings:                                    # The column mapping rule set of the matched table of the upstream database instance
+    cm-rule-1:
+    ​    schema-pattern: "test_*"
+    ​    table-pattern: "t_*"
+    ​    expression: "partition id"
+    ​    source-column: "id"
+    ​    target-column: "id"
+    ​    arguments: ["1", "test_", "t_"]
 
 mydumpers:                                          # Configuration arguments of running mydumper
     global:
@@ -112,63 +118,25 @@ This part defines the subtask of data synchronization. DM supports synchronizing
 ```
 mysql-instances:
     -
-        config:                                    # The upstream database configuration corresponding to `instance-id`
-            host: "192.168.199.118"
-            port: 4306
-            user: "root"
-            password: "1234"                       # Requires the password encrypted by dmctl
-        instance-id: "instance118-4306"            # The MySQL instance ID. It corresponds to the upstream MySQL instance. It is 
-                                                   # not allowed to set it to an ID of a MySQL instance that is not within the 
-                                                   # DM-master cluster topology.
-
-        meta:                                      # The position where the binlog synchronization starts when the checkpoint of 
-                                                   # the downstream database does not exist. If the checkpoint exits, this 
-                                                   # configuration does not work. 
+        source-id: "mysql-replica-01"                                      # The ID of the upstream instance or replication group ID. It can be configured by referring to the `source_id` in the `inventory.ini` file or the `source-id` in the `dm-master.toml` file.
+        meta:                                                              # The position where the binlog synchronization starts when the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used.
             binlog-name: binlog-00001
             binlog-pos: 4
 
-        route-rules: ["user-route-rules-schema", "user-route-rules"]       # Routing rules selected from `routes` above
-        filter-rules: ["user-filter-1", "user-filter-2"]                   # Filter rules selected from `filters` above
-        column-mapping-rules: ["instance-1"]                               # Column mapping rules selected from `column-mappings` above 
-        black-white-list:  "instance"                                      # The black white list item selected from `black-white-list` above 
+        route-rules: ["route-rule-1", "route-rule-2"]                      # The name of the mapping rule between the table matching the upstream database instance and the downstream database.
+        filter-rules: ["filter-rule-1"]                                    # The name of the binlog filtering rule of the table matching the upstream database instance.
+        column-mapping-rules: ["cm-rule-1"]                                # The name of the column mapping rule of the table matching the upstream database instance.
+        black-white-list:  "bw-rule-1"                                     # The name of the black and white lists filtering rule of the table matching the upstream database instance.
 
-        mydumper-config-name: "global"                                     # The mydumper configuration name. You cannot set it 
-                                                                           # and `mydumper` at the same time. 
-        loader-config-name: "global"                                       # The Loader configuration name. You cannot set it and
-                                                                           # `loader` at the same time.
-        syncer-config-name: "global"                                       # The Syncer configuration name. You cannot set it and 
-                                                                           # `syncer` at the same time.
+        mydumper-config-name: "global"                                     # The mydumper configuration name.
+        loader-config-name: "global"                                       # The Loader configuration name.
+        syncer-config-name: "global"                                       # The Syncer configuration name.
 
     -
-        config:
-            host: "192.168.199.118"
-            port: 5306
-            user: "root"
-            password: "1234"
-        instance-id: "instance118-5306"
-
-        mydumper:                                                          # The mydumper configuration. You cannot set it and 
-                                                                           # `mydumper-config-name` at the same time.
-            mydumper-path: "./mydumper"                                    # The mydumper binary file path. It is generated by 
-                                                                           # Ansible deployment application and needs no 
-                                                                           # configuration.
-            threads: 4
-            chunk-filesize: 8
-            skip-tz-utc: true
-            extra-args: "-B test -T t1,t2"
-    
-        loader:                                                            # The Loader configuration. You cannot set it and 
-                                                                           # `loader-config-name` at the same time.
-            pool-size: 32                                                  # The number of threads that execute mydumper SQL 
-                                                                           # files concurrently in Loader
-            dir: "./dumped_data"
-    
-        syncer:                                                            # The Syncer configuration. You cannot set it and 
-                                                                           # `syncer-config-name` at the same time.
-            worker-count: 32                                               # The number of threads that synchronize binlog events 
-                                                                           # concurrently in Syncer
-            batch: 2000
-            max-retry: 200
+        source-id: "mysql-replica-02"                                      # The ID of the upstream instance or replication group. It can be configured by referring to the `source_id` in the `inventory.ini` file or the `source-id` in the `dm-master.toml` file.
+        mydumper-config-name: "global"                                     # The mydumper configuration name.
+        loader-config-name: "global"                                       # The Loader configuration name.
+        syncer-config-name: "global"                                       # The Syncer configuration name.
 ```
 
 For the configuration details of the above options, see the corresponding part in [Feature configuration set](#feature-configuration-set), as shown in the following table.
