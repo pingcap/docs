@@ -43,8 +43,6 @@ To achieve the best performance, it is recommended to use the following hardware
     - 10 Gigabit network card (should be capable of transferring at ≥300 MB/s)
     - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running,
         and deploying on a dedicated machine is strongly recommended.
-        If not possible, `tikv-importer` could be deployed together with other components like
-        `tikv-server`, but the import speed might be affected.
 
 If you have sufficient machines, you can deploy multiple Lightning/Importer servers, with each working on a distinct set of tables, to import the data in parallel.
 
