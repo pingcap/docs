@@ -21,18 +21,15 @@ Before starting TiDB-Lightning, note that:
 
 ## Hardware requirements
 
-`tidb-lightning` and `tikv-importer` are both resource-intensive programs. It is recommended to deploy them into two separate machines. If your hardware resources are limited, you can deploy `tidb-lightning` and `tikv-importer` on the same machine.
-
-### Hardware requirements of separate deployment
+`tidb-lightning` and `tikv-importer` are both resource-intensive programs. It is recommended to deploy them into two separate machines.
 
 To achieve the best performance, it is recommended to use the following hardware configuration:
 
 - `tidb-lightning`:
 
     - 32+ logical cores CPU
-    - 16 GB+ memory
-    - 1 TB+ SSD, preferring higher read speed
-    - 10 Gigabit network card
+    - An SSD large enough to store the entire SQL dump, preferring higher read speed
+    - 10 Gigabit network card (should be capable of transferring at ≥300 MB/s)
     - `tidb-lightning` fully consumes all CPU cores when running,
         and deploying on a dedicated machine is highly recommended.
         If not possible, `tidb-lightning` could be deployed together with other components like
@@ -42,25 +39,14 @@ To achieve the best performance, it is recommended to use the following hardware
 
     - 32+ logical cores CPU
     - 32 GB+ memory
-    - 1 TB+ SSD, preferring higher IOPS
-    - 10 Gigabit network card
+    - 1 TB+ SSD, preferring higher IOPS (≥ 8000 is recommended)
+    - 10 Gigabit network card (should be capable of transferring at ≥300 MB/s)
     - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running,
         and deploying on a dedicated machine is strongly recommended.
         If not possible, `tikv-importer` could be deployed together with other components like
         `tikv-server`, but the import speed might be affected.
 
 If you have sufficient machines, you can deploy multiple Lightning/Importer servers, with each working on a distinct set of tables, to import the data in parallel.
-
-### Hardware requirements of mixed deployment
-
-If your hardware resources are severely under constraint, it is possible to deploy `tidb-lightning` and `tikv-importer` and other components on the same machine, but the import performance is affected.
-
-It is recommended to use the following configuration of the single machine:
-
-- 32+ logical cores CPU
-- 32 GB+ memory
-- 1 TB+ SSD, preferring higher IOPS
-- 10 Gigabit network card
 
 > **Notes:** `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
 
