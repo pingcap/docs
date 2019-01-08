@@ -213,7 +213,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
 
     [import]
     # The directory to store engine files.
-    import-dir = "/tmp/tikv/import"
+    import-dir = "/mnt/ssd/data.import/"
     # Number of threads to handle RPC requests.
     num-threads = 16
     # Number of concurrent import jobs.
