@@ -313,9 +313,6 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # Block size for file reading. Keep it longer than the longest string of
     # the data source.
     read-block-size = 65536 # Byte (default = 64 KB)
-    # Each data file is split into multiple chunks of this size. Each chunk
-    # is processed in parallel.
-    region-min-size = 268435456 # Byte (default = 256 MB)
     # mydumper local source data directory
     data-source-dir = "/data/my_database"
     # If no-schema is set to true, tidb-lightning assumes that the table skeletons
