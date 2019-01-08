@@ -268,10 +268,17 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # This value affects the memory usage of tikv-importer.
     # Must not exceed the max-open-engines setting for tikv-importer.
     table-concurrency = 8
+
     # The concurrency number of data. It is set to the number of logical CPU
     # cores by default. When deploying together with other components, you can
     # set it to 75% of the size of logical CPU cores to limit the CPU usage.
     #region-concurrency =
+
+    # The maximum IO concurrency. Excessive IO concurrency causes increase in
+    # IO latency because the disk's internal buffer is frequently refreshed,
+    # causing, cache miss and slow down read speed. Depending on the storage
+    # medium, this value may need to adjusted for optimal performance.
+    io-concurrency = 5
 
     # Logging
     level = "info"
