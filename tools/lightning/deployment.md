@@ -29,7 +29,7 @@ To achieve the best performance, it is recommended to use the following hardware
 
     - 32+ logical cores CPU
     - An SSD large enough to store the entire SQL dump, preferring higher read speed
-    - 10 Gigabit network card (should be capable of transferring at ≥300 MB/s)
+    - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
     - `tidb-lightning` fully consumes all CPU cores when running,
         and deploying on a dedicated machine is highly recommended.
         If not possible, `tidb-lightning` could be deployed together with other components like
@@ -40,7 +40,7 @@ To achieve the best performance, it is recommended to use the following hardware
     - 32+ logical cores CPU
     - 32 GB+ memory
     - 1 TB+ SSD, preferring higher IOPS (≥ 8000 is recommended)
-    - 10 Gigabit network card (should be capable of transferring at ≥300 MB/s)
+    - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
     - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running,
         and deploying on a dedicated machine is strongly recommended.
 
@@ -262,10 +262,10 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # set it to 75% of the size of logical CPU cores to limit the CPU usage.
     #region-concurrency =
 
-    # The maximum IO concurrency. Excessive IO concurrency causes increase in
-    # IO latency because the disk's internal buffer is frequently refreshed,
-    # causing, cache miss and slow down read speed. Depending on the storage
-    # medium, this value may need to adjusted for optimal performance.
+    # The maximum I/O concurrency. Excessive I/O concurrency causes an increase in
+    # I/O latency because the disk's internal buffer is frequently refreshed,
+    # which causes the cache miss and slows down the read speed. Depending on the storage
+    # medium, this value might need to be adjusted for optimal performance.
     io-concurrency = 5
 
     # Logging
