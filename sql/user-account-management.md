@@ -94,7 +94,7 @@ Or:
 ALTER USER 'jeffrey'@'localhost' IDENTIFIED BY 'mypass';
 ```
 
-## Flush privileges 
+## `FLUSH PRIVILEGES` 
 
 If you modified the grant tables directly, run the following command to apply changes immediately:
 
