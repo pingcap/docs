@@ -102,4 +102,4 @@ If you modified the grant tables directly, run the following command to apply ch
 FLUSH PRIVILEGES;
 ```
 
-For details, see [Privilege Management](privilege.md).
+For details, see [Privilege Management](../sql/privilege.md).
