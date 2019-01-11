@@ -41,7 +41,7 @@ This sections shows the usage examples in different scenarios.
 
 #### Merge sharded schemas and tables
 
-Assuming in the scenario of sharded schemas and tables, you want to synchronize two upstream MySQL instances `test_{1,2,3...}`.`t_{1,2,3...}` to the downstream TiDB instances `test`.`t`.
+Assuming in the scenario of sharded schemas and tables, you want to synchronize the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` tables in the downstream TiDB instance.
 
 To synchronize the upstream instances to the downstream `test`.`t`, you must create two routing rules:
 
@@ -66,7 +66,7 @@ To synchronize the upstream instances to the downstream `test`.`t`, you must cre
 
 #### Merge sharded schemas
 
-Assuming in the scenario of sharded schemas, you want to synchronize two upstream MySQL instances `test_{1,2,3...}`.`t_{1,2,3...}` to the downstream TiDB instances `test`.`t_{1,2,3...}`.
+Assuming in the scenario of sharded schemas, you want to synchronize the `test_{1,2,3...}`.`t_{1,2,3...}` tables in the two upstream MySQL instances to the `test`.`t_{1,2,3...}` tables in the downstream TiDB instance.
 
 To synchronize the upstream schemas to the downstream `test`.`t_[1,2,3]`, you only need to create one routing rule.
 
@@ -289,8 +289,12 @@ filters:
 
 - `action`: the string (`Do`/`Ignore`). Based on the following rules, it judges whether to filter. If either of the two rules is satisfied, the binlog will be filtered; otherwise, the binlog will not be filtered.
 
-    - `Do`: the white list, not in the events of this rule; if `sql-pattern` is not empty, the corresponding SQL statement is not in `sql-pattern` either.
-    - `Ignore`: the black list, in the events or `sql-pattern` of this rule.
+    - `Do`: the white list. The binlog will be filtered in either of the following two conditions:
+        - The type of the event is not in the `event` list of the rule.
+        - The SQL statement of the event cannot be matched by `sql-pattern` of the rule.
+    - `Ignore`: the black list. The binlog will be filtered in either of the following two conditions:
+        - The type of the event is in the `event` list of the rule.
+        - The SQL statement of the event can be matched by `sql-pattern` of the rule.
 
 ### Usage examples
 

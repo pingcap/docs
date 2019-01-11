@@ -19,7 +19,7 @@ For description of important concepts including `instance-id` and the DM-worker 
 
 ### Basic configuration
 
-```toml
+```yaml
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`/`incremental`/`all`.
 is-sharding: true               # Whether it is a sharding task.
@@ -46,7 +46,7 @@ target-database:                # Configuration of the downstream database insta
 
 Global configuration includes the following feature configuration set.
 
-```toml
+```yaml
 # The routing mapping rule set between the upstream and downstream tables.
 routes:
     route-rule-1:
