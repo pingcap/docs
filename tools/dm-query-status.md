@@ -1,12 +1,12 @@
 ---
-title: DM Query Status
+title: Data Migration Query Status
 summary: Learn the query result and subtask status of DM query status.
 category: tools
 ---
 
-# DM Query Status
+# Data Migration Query Status
 
-This document introduces the query result and subtask status of DM query status.
+This document introduces the query result and subtask status of Data Migration (DM) Query Status.
 
 ## Query result
 
