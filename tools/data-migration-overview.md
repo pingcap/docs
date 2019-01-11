@@ -50,19 +50,19 @@ This section describes the data synchronization features provided by the Data Mi
 
 ### Schema and table routing
 
-The schema and table routing feature means that DM can synchronize a certain table of the upstream MySQL or MariaDB instance to the specified table in the downstream, which can be used to merge or synchronize the sharding data.
+The [schema and table routing](../tools/dm-data-synchronization-features.md#table-routing) feature means that DM can synchronize a certain table of the upstream MySQL or MariaDB instance to the specified table in the downstream, which can be used to merge or synchronize the sharding data.
 
 ### Black and white lists synchronization at the schema and table levels
 
-The black and white lists filtering rule of the upstream database instance tables is similar to MySQL replication-rules-db/tables, which can be used to filter or only synchronize all operations of some databases or some tables.
+The [black and white lists filtering rule](../tools/dm-data-synchronization-features.md#black-and-white-table-lists) of the upstream database instance tables is similar to MySQL replication-rules-db/tables, which can be used to filter or only synchronize all operations of some databases or some tables.
 
 ### Binlog event filtering
 
-Binlog event filtering is a more fine-grained filtering rule than the black and white lists filtering rule. You can use statements like `INSERT` or `TRUNCATE TABLE` to specify the binlog events of `schema/table` that you need to synchronize or filter out.
+[Binlog event filtering](../tools/dm-data-synchronization-features.md#binlog-event-filtering) is a more fine-grained filtering rule than the black and white lists filtering rule. You can use statements like `INSERT` or `TRUNCATE TABLE` to specify the binlog events of `schema/table` that you need to synchronize or filter out.
 
 ### Column mapping
 
-The column mapping feature means that the table column value can be modified according to the built-in expression specified by the user, which can be used to resolve the conflicts of the sharding auto-increment primary key IDs.
+The [column mapping](../tools/dm-data-synchronization-features.md#column-mapping) feature means that the table column value can be modified according to the built-in expression specified by the user, which can be used to resolve the conflicts of the sharding auto-increment primary key IDs.
 
 ### Sharding support
 
@@ -77,7 +77,7 @@ Before using the DM tool, note the following restrictions:
     - 5.5 < MySQL version < 5.8
     - MariaDB version >= 10.1.2
 
-    Data Migration [prechecks the corresponding privileges and configuration automatically](../tools/data-migration-manage-task.md#prcheck-the-upstream-mysql-instance-configuration) while starting the data synchronization task using dmctl.
+    Data Migration [prechecks the corresponding privileges and configuration automatically](../tools/data-migration-manage-task.md#precheck-the-upstream-mysql-instance-configuration) while starting the data synchronization task using dmctl.
 
 + DDL syntax
 

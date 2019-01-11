@@ -120,6 +120,7 @@ It is required to use `pip` to install Ansible and its dependencies, otherwise a
     ```bash
     $ tar -xzvf dm-ansible-latest.tar.gz
     $ mv dm-ansible-latest dm-ansible
+    $ cd /home/tidb/dm-ansible
     $ sudo pip install -r ./requirements.txt
     ```
 
@@ -307,7 +308,7 @@ dm-master ansible_host=172.16.10.71 deploy_dir=/data1/deploy
 
 | Variable name | Description |
 | ------------- | ------- |
-| source_id | DM-worker binds to a unique database instance or a replica group with the master-slave architecture. When the master and slave switches, you only need to update `mysql_host` or `port` and do not need to update the `source_id`. |
+| source_id | DM-worker binds to a unique database instance or a replica group with the master-slave architecture. When the master and slave switches, you only need to update `mysql_host` or `mysql_port` and do not need to update the `source_id`. |
 | server_id | DM-worker connects to MySQL as a slave. This variable is the `server_id` of the slave. Keep it globally unique in the MySQL cluster, and the value range is 0 ~ 4294967295. |
 | mysql_host | The upstream MySQL host. |
 | mysql_user | The upstream MySQL username; default "root". |

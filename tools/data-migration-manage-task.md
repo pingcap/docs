@@ -91,7 +91,7 @@ This section describes how to use the task management commands to execute the fo
 
 ### Create the data synchronization task
 
-You can use the task management command to create the data synchronization task. Data Migration [prechecks the corresponding privileges and configuration automatically](../tools/data-migration-manage-task.md#prcheck-the-upstream-mysql-instance-configuration) while starting the data synchronization.
+You can use the task management command to create the data synchronization task. Data Migration [prechecks the corresponding privileges and configuration automatically](#precheck-the-upstream-mysql-instance-configuration) while starting the data synchronization.
 
 ```bash
 » help start-task
@@ -143,7 +143,7 @@ start-task [ -w "172.16.30.15:10081"] ./task.yaml
 
 To detect possible errors of data synchronization configuration in advance, DM provides the precheck feature. You can use the `check-task` command to precheck whether the upstream MySQL instance configuration satisfies the DM requirements.
 
-The user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration checks the following privileges and configuration automatically while starting the data synchronization task:
+The user of the upstream and downstream databases must have the corresponding read and write privileges. DM checks the following privileges and configuration automatically while starting the data synchronization task:
 
 + MySQL binlog configuration
 
