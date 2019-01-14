@@ -8,7 +8,7 @@ category: user guide
 
 A character set is a set of symbols and encodings. A collation is a set of rules for comparing characters in a character set.
 
-For **compatibility reasons** TiDB lists several character sets as available, but will always store data in the `utf8mb4` character set.
+For **compatibility reasons**, TiDB lists several character sets as available, but will always store data in the `utf8mb4` character set.
 
 ```sql
 mysql> SHOW CHARACTER SET;
