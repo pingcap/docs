@@ -40,7 +40,7 @@ An example of the directory structure of the local storage for a relay log:
     
         - In the above example, for the `7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001` directory, `7e427cc0-091c-11e9-9e45-72b7c59d52d7` is the upstream database UUID and `000001` is the local `subdir` serial number.
 
-- `server-uuid.index`: Records the list information of the current `subdir` directory.
+- `server-uuid.index`: Records a list of names of currently available `subdir` directory.
 
 - `relay.meta`: Stores the information of the synchronized binlog in each `subdir`. For example,
 
