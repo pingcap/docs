@@ -64,7 +64,7 @@ For the start of DM-worker (or the relay log resuming synchronization after a pa
 
 - If a valid local relay log does not exist, and `relay-binlog-name` or `relay-binlog-gtid` is not specified in the DM configuration file:
 
-    - In the non-GTID mode, DM-worker starts synchronization from the initial upstream binlog and synchronizes all the upstream binlog files to the latest local configuration directory successively.
+    - In the non-GTID mode, DM-worker starts synchronization from the initial upstream binlog and synchronizes all the upstream binlog files to the latest successively.
 
     - In the GTID mode, DM-worker starts synchronization from the initial upstream GTID. 
     
