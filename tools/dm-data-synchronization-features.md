@@ -33,7 +33,7 @@ routes:
 
 ### Parameter explanation
 
-DM synchronizes the upstream MySQL or MariaDB instance table that matches the [`schema-pattern`/`table-pattern` rule provided by Table selector](#table-selector) to the downstream `target-schema`/`target-table`.
+DM synchronizes the upstream MySQL or MariaDB instance table that matches the [`schema-pattern`/`table-pattern` rule provided by Table selector](../tools/dm-table-selector.md) to the downstream `target-schema`/`target-table`.
 
 ### Usage examples
 
@@ -41,7 +41,7 @@ This sections shows the usage examples in different scenarios.
 
 #### Merge sharded schemas and tables
 
-Assuming in the scenario of sharded schemas and tables, you want to synchronize the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` tables in the downstream TiDB instance.
+Assuming in the scenario of sharded schemas and tables, you want to synchronize the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` table in the downstream TiDB instance.
 
 To synchronize the upstream instances to the downstream `test`.`t`, you must create two routing rules:
 
@@ -92,45 +92,6 @@ Assuming that the following two routing rules are configured and `test_1_bak`.`t
     target-schema: "test"
     target-table: "t_bak"
 ```
-
-### Table selector
-
-Table selector provides a match rule based on [wildcard characters](https://en.wikipedia.org/wiki/Wildcard_character) for schema/table. To match a specified table, configure `schema-pattern`/`table-pattern`.
-
-#### Wildcard character
-
-Table selector uses the following two wildcard characters in `schema-pattern`/`table-pattern`:
-
-+ The asterisk character (`*`, also called "star")
-
-    - `*` matches zero or more characters. For example, `doc*` matches `doc` and `document` but not `dodo`.
-    - `*` can only be placed at the end of the word. For example, `doc*` is supported, while `do*c` is not supported.
-
-+ The question mark (`?`)
-
-    `?` matches exactly one character except the empty character.
-
-#### Match rules
-
-- `schema-pattern` cannot be empty.
-- `table-pattern` can be empty. When you configure it as empty, only `schema` is matched according to `schema-pattern`.
-- When `table-pattern` is not empty, the `schema` is matched according to `schema-pattern` and `table` is matched according to `table-pattern`. Only when both `schema` and `table` are successfully matched, you can get the match result.
-
-#### Usage examples
-
-- Matching all schemas and tables that have a `schema_` prefix in the schema name:
-
-    ```yaml
-    schema-pattern： "schema_*"
-    table-pattern： ""
-    ```
-
-- Matching all tables that have a `schema_` prefix in the schema name and a `table_` prefix in the table name
-
-    ```yaml
-    schema-pattern = "schema_*"
-    table-pattern = "table_*"
-    ```
 
 ## Black and white table lists
 
@@ -260,7 +221,7 @@ filters:
 
 ### Parameter explanation
 
-- [`schema-pattern`/`table-pattern`](#table-selector): the binlog events or DDL SQL statements of upstream MySQL or MariaDB instance tables that match `schema-pattern`/`table-pattern` are filtered by the rules below.
+- [`schema-pattern`/`table-pattern`](../tools/dm-table-selector.md): the binlog events or DDL SQL statements of upstream MySQL or MariaDB instance tables that match `schema-pattern`/`table-pattern` are filtered by the rules below.
 
 - `events`: the binlog event array.
 
@@ -388,7 +349,7 @@ column-mappings:
 
 ### Parameter explanation
 
-- [`schema-pattern`/`table-pattern`](#table-selector): to execute column value modifying operations on the upstream MySQL or MariaDB instance tables that match the `schema-pattern`/`table-pattern` filtering rule.
+- [`schema-pattern`/`table-pattern`](../tools/dm-table-selector.md): to execute column value modifying operations on the upstream MySQL or MariaDB instance tables that match the `schema-pattern`/`table-pattern` filtering rule.
 - `source-column`, `target-column`: to modify the value of the `source-column` column according to specified `expression` and assign the new value to `target-column`.
 - `expression`: the expression used to modify data. Currently, only the `partition id` built-in expression is supported.
 
