@@ -796,7 +796,7 @@ Two solutions:
 
 #### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
 
- Yes, it does. And it supports DDL as well. For details, see [how TiDB reads data from history versions](op-guide/history-read).
+ Yes, it does. And it supports DDL as well. For details, see [how TiDB reads data from history versions](op-guide/history-read.md).
 
 ### Migrate the data online
 
