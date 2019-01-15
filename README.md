@@ -202,6 +202,7 @@
   - [RC1](releases/rc1.md)
 - [TiDB Adopters](adopters.md)
 - [TiDB Roadmap](ROADMAP.md)
+- [Download](download.md)
 - [Connect with us](community.md)
 + More Resources
   - [PingCAP Blog](https://pingcap.com/blog/)
