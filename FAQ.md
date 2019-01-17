@@ -257,7 +257,7 @@ You can use Docker Compose to build a TiDB cluster locally, including the cluste
 
 2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and the slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
 
-3. Besides the log, you can also view the slow query using the `admin show slow` command. For details, see [`admin show slow` command](sql/slow-query.md#admin-show-slow-command).
+3. In addition to the log, you can also view the slow query using the `admin show slow` command. For details, see [`admin show slow` command](sql/slow-query.md#admin-show-slow-command).
 
 #### How to add the `label` configuration if `label` of TiKV was not configured when I deployed the TiDB cluster for the first time?
 
@@ -751,9 +751,9 @@ CREATE TABLE if not exists mysql.user (
 INSERT INTO mysql.user VALUES ("%", "root", "", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y");
 ```
 
-#### 4.1.5 Can TiDB provide services while Loader is running?
+#### Can TiDB provide services while Loader is running?
  
- Since Loader inserts the data logically, TiDB can provide services while it's running. But do not perform the related DDL operations.
+ TiDB can provide services while Loader is running because Loader inserts the data logically. But do not perform the related DDL operations.
 
 #### How to export the data in TiDB?
 
@@ -839,10 +839,10 @@ Two solutions:
 - Put the `syncer.meta` file in a relatively secure disk. For example, use disks with RAID 1.
 - Restore the location information of history synchronization according to the monitoring data that Syncer reports to Prometheus regularly. But the location information might be inaccurate due to the delay when a large amount of data is synchronized.
 
-##### If the downstream TiDB data is not consistent with the MySQL data during Syncer's synchronization process, will DML operations cause exits?
+##### If the downstream TiDB data is not consistent with the MySQL data during the synchronization process of Syncer, will DML operations cause exits?
 
-- If data exists in the upstream MySQL and doesn't exist in the downstream TiDB, and the upstream MySQL performs the `UPDATE` or `DELETE` operation on this piece of data, it will not cause errors or exits and the data will not exist during Syncer's synchronization process.
-- If conflicts exist in the primary key indexes or the unique indexes in the downstream, preforming `UPDATE` will cause exits while performing `INSERT` will not.
+- If the data exists in the upstream MySQL but does not exist in the downstream TiDB, when the upstream MySQL performs the `UPDATE` or `DELETE` operation on this row of data, Syncer will not report an error and the synchronization process will not exit, and this row of data does not exist in the downstream.
+- If a conflict exists in the primary key indexes or the unique indexes in the downstream, preforming the `UPDATE` operation will cause an exit and performing the `INSERT` operation will not cause an exit.
 
 ### Migrate the traffic
 
