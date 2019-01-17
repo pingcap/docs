@@ -10,7 +10,7 @@ This document describes how to upgrade from TiDB 1.0 or TiDB 2.0 RC version to T
 
 ## Precaution
 
-Do not perform any DDL requests during the upgrading process, or else the undefined behavior error might occur.
+Do not execute any DDL statements during the upgrading process, otherwise the undefined behavior error might occur.
 
 ## Step 1: Install Ansible and dependencies in the Control Machine
 

@@ -22,7 +22,7 @@ For details about using Ansible to perform a rolling update to each component, s
 
 ## Precaution
 
-Do not perform any DDL requests during the upgrading process, or else the undefined behavior error might occur.
+Do not execute any DDL statements during the upgrading process, otherwise the undefined behavior error might occur.
 
 ## Step 1: Install Ansible and dependencies on the Control Machine
 
