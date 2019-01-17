@@ -36,7 +36,7 @@ Table selector uses the following two wildcard characters in `schema-pattern`/`t
     table-pattern： ""
     ```
 
-- Matching all tables that have a `schema_` prefix in the schema name and a `table_` prefix in the table name
+- Matching all tables that have a `schema_` prefix in the schema name and a `table_` prefix in the table name:
 
     ```yaml
     schema-pattern = "schema_*"

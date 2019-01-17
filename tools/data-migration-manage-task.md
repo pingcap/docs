@@ -17,11 +17,14 @@ This section shows the basic usage of dmctl commands.
 ```bash
 $ ./dmctl --help
 Usage of dmctl:
- -V prints version and exit                 # Prints the version information.
- -encrypt string                            # Encrypts the database password according to the encryption method provided by DM; used in DM configuration files.
-​       encrypt plaintext to ciphertext
- -master-addr string                        # dm-master access address. dmctl interacts with dm-master to complete task management operations.
-​       master API server addr
+ # Prints the version information.
+ -V prints version and exit
+ # Encrypts the database password according to the encryption method provided by DM; used in DM configuration files.
+ -encrypt string
+       encrypt plaintext to ciphertext
+ # The dm-master access address. dmctl interacts with dm-master to complete task management operations.
+ -master-addr string
+       master API server addr
 ```
 
 ### Database password encryption
@@ -36,7 +39,8 @@ VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=
 ### Task management overview
 
 ```bash
-$ ./dmctl -master-addr 172.16.30.14                    # Enters the command line mode to interact with DM-master
+# Enters the command line mode to interact with DM-master.
+$ ./dmctl -master-addr 172.16.30.14
 Welcome to dmctl
 Release Version: v1.0.0-100-g2bef6f8b
 Git Commit Hash: 2bef6f8beda34c0dff57377005c71589b48aa3c5
@@ -154,7 +158,7 @@ The user of the upstream and downstream databases must have the corresponding re
 + The privileges of the upstream MySQL instance user
 
     The MySQL user in DM configuration needs to have the following privileges at least:
-    
+
     - REPLICATION SLAVE
     - REPLICATION CLIENT
     - RELOAD

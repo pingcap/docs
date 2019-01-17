@@ -73,7 +73,7 @@ target-database:
 # Configuration of all the upstream MySQL instances required by the current data synchronization task
 mysql-instances:
 -
-  # The ID of upstream instances or the replica groups. You can refer to the configuration of `source_id` in the "inventory.ini" file or in the "dm-master.toml" file.
+  # The ID of upstream instances or the replication group. You can refer to the configuration of `source_id` in the "inventory.ini" file or in the "dm-master.toml" file.
   source-id: "mysql-replica-01"
   # The configuration item name of the black and white lists of the name of the
   # database/table to be synchronized, used to quote the global black and white
@@ -91,14 +91,14 @@ mysql-instances:
 # configuration item name.
 black-white-list:
   global:
-    do-tables:                        # The white list of upstream tables to be synchronized
-    - db-name: "test_db"              # The database name of the table to be synchronized
-      tbl-name: "test_table"          # The name of the table to be synchronized
+    do-tables:                        # The white list of upstream tables to be synchronized.
+    - db-name: "test_db"              # The database name of the table to be synchronized.
+      tbl-name: "test_table"          # The name of the table to be synchronized.
 
 # mydumper global configuration. Each instance can quote it by the configuration item name.
 mydumpers:
   global:
-    mydumper-path: "./bin/mydumper"   # The file path of the mydumper binary
+    mydumper-path: "./bin/mydumper"   # The file path of the mydumper binary.
     extra-args: "-B test_db -T test_table"  # Only dumps the "test_table" table of the "test_db" database. It can configure any mydumper argument.
 ```
 

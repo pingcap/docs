@@ -194,7 +194,7 @@ You can choose one of the following two types of cluster topology according to y
 | node3 | 172.16.10.73 | DM-worker2 |
 
 ```ini
-## DM modules
+## DM modules.
 [dm_master_servers]
 dm_master ansible_host=172.16.10.71
 
@@ -203,7 +203,7 @@ dm_worker1 ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql
 
 dm_worker2 ansible_host=172.16.10.73 server_id=102 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
-## Monitoring modules
+## Monitoring modules.
 [prometheus_servers]
 prometheus ansible_host=172.16.10.71
 
@@ -213,7 +213,7 @@ grafana ansible_host=172.16.10.71
 [alertmanager_servers]
 alertmanager ansible_host=172.16.10.71
 
-## Global variables
+## Global variables.
 [all:vars]
 cluster_name = test-cluster
 
@@ -235,10 +235,10 @@ grafana_admin_password = "admin"
 | node2 | 172.16.10.72 | DM-worker1-1, DM-worker1-2 |
 | node3 | 172.16.10.73 | DM-worker2-1, DM-worker2-2 |
 
-When you edit the `inventory.ini` file, pay attention to distinguish between the following variables: `server_id`, `deploy_dir`, `dm_worker_port`, and `dm_worker_status_port`.
+When you edit the `inventory.ini` file, pay attention to distinguish between the following variables: `server_id`, `deploy_dir`, and `dm_worker_port`.
 
 ```ini
-## DM modules
+## DM modules.
 [dm_master_servers]
 dm_master ansible_host=172.16.10.71
 
@@ -249,7 +249,7 @@ dm_worker1_2 ansible_host=172.16.10.72 server_id=102 deploy_dir=/data2/dm_worker
 dm_worker2_1 ansible_host=172.16.10.73 server_id=103 deploy_dir=/data1/dm_worker dm_worker_port=8262 mysql_host=172.16.10.83 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 dm_worker2_2 ansible_host=172.16.10.73 server_id=104 deploy_dir=/data2/dm_worker dm_worker_port=8263 mysql_host=172.16.10.84 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
-## Monitoring modules
+## Monitoring modules.
 [prometheus_servers]
 prometheus ansible_host=172.16.10.71
 
@@ -259,7 +259,7 @@ grafana ansible_host=172.16.10.71
 [alertmanager_servers]
 alertmanager ansible_host=172.16.10.71
 
-## Global variables
+## Global variables.
 [all:vars]
 cluster_name = test-cluster
 
@@ -284,7 +284,7 @@ Edit the `deploy_dir` variable to configure the deployment directory.
 The global variable is set to `/home/tidb/deploy` by default, and it applies to all services. If the data disk is mounted on the `/data1` directory, you can set it to `/data1/dm`. For example:
 
 ```ini
-## Global variables
+## Global variables.
 [all:vars]
 deploy_dir = /data1/dm
 ```
@@ -308,7 +308,7 @@ dm-master ansible_host=172.16.10.71 deploy_dir=/data1/deploy
 
 | Variable name | Description |
 | ------------- | ------- |
-| source_id | DM-worker binds to a unique database instance or a replica group with the master-slave architecture. When the master and slave switches, you only need to update `mysql_host` or `mysql_port` and do not need to update the `source_id`. |
+| source_id | DM-worker binds to a unique database instance or a replication group with the master-slave architecture. When the master and slave switch, you only need to update `mysql_host` or `mysql_port` and do not need to update the `source_id`. |
 | server_id | DM-worker connects to MySQL as a slave. This variable is the `server_id` of the slave. Keep it globally unique in the MySQL cluster, and the value range is 0 ~ 4294967295. |
 | mysql_host | The upstream MySQL host. |
 | mysql_user | The upstream MySQL username; default "root". |
@@ -368,8 +368,6 @@ The following example uses `tidb` as the user who runs the service.
 1. Edit the `dm-ansible/inventory.ini` file to make sure `ansible_user = tidb`.
 
     ```ini
-    ## Connection
-    # ssh via normal user
     ansible_user = tidb
     ```
 

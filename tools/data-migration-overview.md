@@ -54,7 +54,7 @@ The [schema and table routing](../tools/dm-data-synchronization-features.md#tabl
 
 ### Black and white lists synchronization at the schema and table levels
 
-The [black and white lists filtering rule](../tools/dm-data-synchronization-features.md#black-and-white-table-lists) of the upstream database instance tables is similar to MySQL replication-rules-db/tables, which can be used to filter or only synchronize all operations of some databases or some tables.
+The [black and white lists filtering rule](../tools/dm-data-synchronization-features.md#black-and-white-table-lists) of the upstream database instance tables is similar to MySQL `replication-rules-db`/`replication-rules-table`, which can be used to filter or only synchronize all operations of some databases or some tables.
 
 ### Binlog event filtering
 
