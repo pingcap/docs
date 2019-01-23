@@ -32,7 +32,7 @@ An example of the directory structure of the local storage for a relay log:
 
 - `subdir`: 
 
-    - DM-worker stores the binlogs synchronized from the upstream database in the same directory. Each directory is a `subdir`.
+    - DM-worker stores the binlog synchronized from the upstream database in the same directory. Each directory is a `subdir`.
 
     - `subdir` is named `<Upstream database UUID>.<Local subdir serial number>`.
 
