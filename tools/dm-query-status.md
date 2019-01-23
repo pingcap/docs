@@ -1,6 +1,6 @@
 ---
 title: Data Migration Query Status
-summary: Learn the query result and subtask status of DM query status.
+summary: Learn the DM query result and subtask status.
 category: tools
 ---
 
