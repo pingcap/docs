@@ -56,7 +56,7 @@ This document introduces the query result and subtask status of Data Migration (
                                     "`test`.`t1`"
                                 ],
                                 "unsynced": [                                   # The upstream table that has not executed this sharding DDL
-                                                                                # statement. If any upstream tables have not been synchronized completely,  
+                                                                                # statement. If any upstream tables have not finished synchronization,  
                                                                                 # `blockingDDLs` is empty.
                                 ]
                             }
