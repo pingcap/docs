@@ -6,7 +6,7 @@ category: tools
 
 # Data Migration Query Status
 
-This document introduces the query result and subtask status of Data Migration (DM) Query Status.
+This document introduces the query result and subtask status of Data Migration (DM).
 
 ## Query result
 
