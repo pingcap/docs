@@ -58,7 +58,7 @@ An example of the directory structure of the local storage for a relay log:
 
 ## Initial synchronization rules
 
-For the start of DM-worker (or the relay log resuming synchronization after a pause), the starting position of synchronization is determined according to the concrete condition as follows:
+For each start of DM-worker (or the relay log resuming synchronization after a pause), the starting position of synchronization includes the following conditions:
 
 - If a valid local relay log (a valid relay log is a relay log with valid `server-uuid.index`, `subdir` and `relay.meta` files), DM-worker resumes synchronization from a position recorded by `relay.meta`.
 
