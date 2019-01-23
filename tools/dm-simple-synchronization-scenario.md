@@ -44,7 +44,7 @@ Assume that the upstream schemas are as follows:
     3. Synchronize the `user` schema of instance 3 to the `user_south` of TiDB.
     4. Never delete the table `log`.
 2. Synchronize the upstream `store` schema to the downstream `store` schema without merging tables.
-    1. `store_sz` exists in both the instance 2 and 3, which is synchronized to `store_suzhou` and `store_shenzhen` respectively.
+    1. `store_sz` exists in both instances 2 and 3, which is synchronized to `store_suzhou` and `store_shenzhen` respectively.
     2. Never delete `store`.
 3. The `log` schema needs to be filtered out.
 
@@ -61,7 +61,7 @@ Assume that the schemas synchronized to the downstream are as follows:
 
 ## Synchronization solution
 
-- To satisfy the i, ii, and iii items of the first synchronization requirement, configure the table routing rule as follows:
+- To satisfy synchronization Requirements #1-i, #1-ii and #1-iii, configure the [table routing rules](../tools/dm-data-synchronization-features.md#table-routing) as follows:
 
     ```yaml
     routes:
@@ -77,7 +77,7 @@ Assume that the schemas synchronized to the downstream are as follows:
         target-schema: "user_south"
     ```
 
-- To satisfy the i item of the second synchronization requirement, configure the table routing rule as follows:
+- To satisfy the synchronization Requirement #2-i, configure the [table routing rules](../tools/dm-data-synchronization-features.md#table-routing) as follows:
 
     ```yaml
     routes:
@@ -94,7 +94,7 @@ Assume that the schemas synchronized to the downstream are as follows:
         target-table:  "store_shenzhen"
     ```
 
-- To satisfy the iv item of the first synchronization requirement, configure the binlog filtering rule as follows:
+- To satisfy the synchronization Requirement #1-iv, configure the [binlog filtering rules](../tools/dm-data-synchronization-features.md#binlog-event-filtering) as follows:
 
     ```yaml
     filters:
@@ -110,7 +110,7 @@ Assume that the schemas synchronized to the downstream are as follows:
         action: Ignore
     ```
 
-- To satisfy the ii item of the second synchronization requirement, configure the binlog filtering rule as follows:
+- To satisfy the synchronization Requirement #2-ii, configure the [binlog filtering rule](../tools/dm-data-synchronization-features.md#binlog-event-filtering) as follows:
 
     ```yaml
     filters:
@@ -121,9 +121,9 @@ Assume that the schemas synchronized to the downstream are as follows:
         action: Ignore
     ```
 
-    > **Note:** `store-filter-rule` is different from `log-filter-rule & user-filter-rule`. `store-filter-rule` is the schema of the whole `store`, while `log-filter-rule & user-filter-rule` is the schema of the `user`.`log` tables.
+    > **Note:** `store-filter-rule` is different from `log-filter-rule & user-filter-rule`. `store-filter-rule` is a rule for the whole `store` schema, while `log-filter-rule` and `user-filter-rule` are rules for the `log` table in the `user` schema.
 
-- To satisfy the third synchronization requirement, configure the black and white lists as follows:
+- To satisfy the synchronization Requirement #3, configure the [black and white lists](../tools/dm-data-synchronization-features.md#black-and-white-table-lists) as follows:
 
     ```yaml
     black-white-list:
