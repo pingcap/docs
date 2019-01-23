@@ -17,24 +17,24 @@ Assume that the upstream schemas are as follows:
     | Schema | Tables|
     |:------|:------|
     | user  | information, log_north, log_bak |
-    | store_01 | sale_01, slae_02 |
-    | store_02 | sale_01, slae_02 |
+    | store_01 | sale_01, sale_02 |
+    | store_02 | sale_01, sale_02 |
 
 - Instance 2
 
     | Schema | Tables|
     |:------|:------|
     | user  | information, log_east, log_bak |
-    | store_01 | sale_01, slae_02 |
-    | store_02 | sale_01, slae_02 |
+    | store_01 | sale_01, sale_02 |
+    | store_02 | sale_01, sale_02 |
 
 - Instance 3
 
     | Schema | Tables|
     |:------|:------|
     | user  | information, log_south, log_bak |
-    | store_01 | sale_01, slae_02 |
-    | store_02 | sale_01, slae_02 |
+    | store_01 | sale_01, sale_02 |
+    | store_02 | sale_01, sale_02 |
 
 ## Synchronization requirements
 
@@ -58,7 +58,7 @@ Assume that the downstream schema after synchronization is as follows:
 
 ## Synchronization solution
 
-- To satisfy the 1 and 2 synchronization requirements, configure the [table routing rule](../tools/dm-data-synchronization-features.md#table-routing) as follows:
+- To satisfy the synchronization Requirements #1 and #2, configure the [table routing rule](../tools/dm-data-synchronization-features.md#table-routing) as follows:
 
     ```yaml
     routes:
@@ -68,7 +68,7 @@ Assume that the downstream schema after synchronization is as follows:
         target-schema: "user"
     ```
 
-- To satisfy the synchronization requirement 3, configure the [table routing rule](../tools/dm-data-synchronization-features.md#table-routing) as follows:
+- To satisfy the synchronization Requirement #3, configure the [table routing rule](../tools/dm-data-synchronization-features.md#table-routing) as follows:
 
     ```yaml
     routes:
@@ -83,7 +83,7 @@ Assume that the downstream schema after synchronization is as follows:
         target-table:  "sale"
     ```
 
-- To satisfy the 4 and 5 synchronization requirements, configure the [binlog event filtering rule](../tools/dm-data-synchronization-features.md#binlog-event-filtering) as follows:
+- To satisfy the synchronization Requirements #4 and #5, configure the [binlog event filtering rule](../tools/dm-data-synchronization-features.md#binlog-event-filtering) as follows:
 
     ```yaml
     filters:
@@ -94,9 +94,9 @@ Assume that the downstream schema after synchronization is as follows:
         action: Ignore
     ```
 
-    > **Note:** The 4, 5 and 7 synchronization requirements indicate that all the deletion operations in the `user` schema are filtered out, so a schema level filtering rule is configured here. However, the deletion operations of future tables will also be filtered out.
+    > **Note:** The synchronization Requirements #4, #5 and #7 indicate that all the deletion operations in the `user` schema are filtered out, so a schema level filtering rule is configured here. However, the deletion operations of future tables will also be filtered out.
 
-- To satisfy the synchronization requirement 6, configure the [binlog event filtering rule](../tools/dm-data-synchronization-features.md#binlog-event-filtering) as follows:
+- To satisfy the synchronization Requirement #6, configure the [binlog event filtering rule](../tools/dm-data-synchronization-features.md#binlog-event-filtering) as follows:
 
     ```yaml
     filters:
@@ -112,7 +112,7 @@ Assume that the downstream schema after synchronization is as follows:
         action: Ignore
     ```
 
-- To satisfy the synchronization requirement 7, configure the [black and white table lists](../tools/dm-data-synchronization-features.md#black-and-white-table-lists) as follows:
+- To satisfy the synchronization Requirement #7, configure the [black and white table lists](../tools/dm-data-synchronization-features.md#black-and-white-table-lists) as follows:
 
     ```yaml
     black-white-list:
@@ -122,7 +122,7 @@ Assume that the downstream schema after synchronization is as follows:
         tbl-name: "log_bak"
     ```
 
-- To satisfy the synchronization requirement 8, configure the [column mapping rule](../tools/dm-data-synchronization-features.md#column-mapping) as follows:
+- To satisfy the synchronization Requirement #8, configure the [column mapping rule](../tools/dm-data-synchronization-features.md#column-mapping) as follows:
 
     ```yaml
     column-mappings:
