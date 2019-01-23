@@ -50,18 +50,18 @@ This document introduces the query result and subtask status of Data Migration (
                                     "USE `test`; ALTER TABLE `test`.`t_target` DROP COLUMN `age`;"
                                 ],
                                 "firstPos": "(bin|000001.000001, 3130)",        # The starting position of the sharding DDL statement.
-                                "synced": [                                     # The sharded table of the sharding DDL statement that `Sync` has read.
+                                "synced": [                                     # The upstream sharded table whose executed sharding DDL statement has been read by the `Sync` unit.
                                     "`test`.`t2`"
                                     "`test`.`t3`"
                                     "`test`.`t1`"
                                 ],
-                                "unsynced": [                                   # The upstream table of the sharding DDL statement that has not been
-                                                                                # executed. If any upstream tables have not been synchronized completely,  
+                                "unsynced": [                                   # The upstream table that has not executed this sharding DDL
+                                                                                # statement. If any upstream tables have not been synchronized completely,  
                                                                                 # `blockingDDLs` is empty.
                                 ]
                             }
                         ],
-                        "synced": false         # Whether the progress of incremental synchronization in the downstream has been the same as that in the 
+                        "synced": false         # Whether the incremental synchronization catches up with the upstream and has the same binlog position as that in the 
                                                 # upstream. The save point is not refreshed in real time in the `Sync` background, so "false" of "synced" 
                                                 # does not always mean a synchronization delay exits.
                     }
@@ -92,9 +92,9 @@ This document introduces the query result and subtask status of Data Migration (
                     "result": null,
                     "unresolvedDDLLockID": "",
                     "load": {                   # The synchronization information of the `Load` processing unit.
-                        "finishedBytes": "115", # The number of bytes that have been imported fully.
-                        "totalBytes": "452",    # The total number of bytes that need to be imported.
-                        "progress": "25.44 %"   # The progress of the full import.
+                        "finishedBytes": "115", # The number of bytes that have been loaded.
+                        "totalBytes": "452",    # The total number of bytes that need to be loaded.
+                        "progress": "25.44 %"   # The progress of the loading process.
                     }
                 }
             ],
@@ -121,9 +121,9 @@ This document introduces the query result and subtask status of Data Migration (
                     "result": null,
                     "unresolvedDDLLockID": "",
                     "load": {                   # The synchronization information of the `Load` processing unit.
-                        "finishedBytes": "115", # The number of bytes that have been imported fully.
-                        "totalBytes": "452",    # The total number of bytes that need to be imported.
-                        "progress": "25.44 %"   # The progress of the full import.
+                        "finishedBytes": "115", # The number of bytes that have been loaded.
+                        "totalBytes": "452",    # The total number of bytes that need to be loaded.
+                        "progress": "25.44 %"   # The progress of the loading process.
                     }
                 }
             ],
