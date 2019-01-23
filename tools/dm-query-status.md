@@ -40,7 +40,7 @@ This document introduces the query result and subtask status of Data Migration (
                         "syncerBinlogGtid": "",                                             # It is always empty because `Sync` does not use GTID to
                                                                                             # synchronize data.
                         "blockingDDLs": [       # The DDL list that is blocked currently. It is not empty only when all the upstream tables of this 
-                                                # DM-worker are "synced". In this case, it indicates the sharding DDL statement to be executed or skipped.
+                                                # DM-worker are in the "synced" status. In this case, it indicates the sharding DDL statements to be executed or that are skipped.
                             "USE `test`; ALTER TABLE `test`.`t_target` DROP COLUMN `age`;"
                         ],
                         "unresolvedGroups": [   # The sharding group that is not resolved.
