@@ -8,7 +8,7 @@ category: tools
 
 The Data Migration (DM) relay log consists of a set of numbered files containing events that describe database changes, and an index file that contains the names of all used relay log files.
 
-After DM-worker is started, it automatically synchronizes the upstream binlog to the local configuration directory (the default synchronization directory is `<deploy_dir>/relay_log` if DM is deployed using `DM-Ansible`). When DM-worker is running, it synchronizes the upstream binlog to the local file in real time and Syncer, a processing unit of DM-worker, reads the the binlog events of the local relay log, transforms these events to SQL statements, and then applies these statements to the downstream database.
+After DM-worker is started, it automatically synchronizes the upstream binlog to the local configuration directory (the default synchronization directory is `<deploy_dir>/relay_log` if DM is deployed using `DM-Ansible`). When DM-worker is running, it synchronizes the upstream binlog to the local file in real time. Syncer, a processing unit of DM-worker, reads the binlog events of the local relay log in real time, transforms these events to SQL statements, and then synchronizes these statements to the downstream database.
 
 This document introduces the directory structure, initial synchronization rules and data purge of DM relay logs.
 
