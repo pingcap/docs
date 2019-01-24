@@ -144,21 +144,23 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
 
 2. Deploy and start the TiDB cluster containing Pump.
 
+    After configuring the `inventory.ini` file, you can choose one method from below to deploy the TiDB cluster.
+
     **Method #1**: Add Pump on the existing TiDB cluster
 
-    Step 1: Deploy `pump_servers` and `node_exporters`
+    1. Deploy `pump_servers` and `node_exporters`
 
         ```
         ansible-playbook deploy.yml -l ${pump1_ip}, ${pump2_ip}, [${alias1_name}, ${alias2_name}]
         ```
 
-    Step 2: Update and restart `tidb_servers`
+    2. Update and restart `tidb_servers`
 
         ```
         ansible-playbook rolling_update.yml --tags=tidb
         ```
 
-    Step 3: Update the monitoring data
+    3. Update the monitoring data
 
         ```
         ansible-playbook rolling_update_monitor.yml --tags=prometheus
