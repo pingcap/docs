@@ -62,8 +62,8 @@ Assume that the downstream schema after synchronization is as follows:
 
     ```yaml
     routes:
-    ...
-    user-route-rule:
+      ...
+      user-route-rule:
         schema-pattern: "user"
         target-schema: "user"
     ```
@@ -72,11 +72,11 @@ Assume that the downstream schema after synchronization is as follows:
 
     ```yaml
     routes:
-    ...
-    store-route-rule:
+      ...
+      store-route-rule:
         schema-pattern: "store_*"
         target-schema: "store"
-    sale-route-rule:
+      sale-route-rule:
         schema-pattern: "store_*"
         table-pattern: "sale_*"
         target-schema: "store"
@@ -87,26 +87,26 @@ Assume that the downstream schema after synchronization is as follows:
 
     ```yaml
     filters:
-    ...
-    user-filter-rule:
+      ...
+      user-filter-rule:
         schema-pattern: "user"
         events: ["truncate table", "drop table", "delete"， "drop database"]
         action: Ignore
     ```
 
-    > **Note:** The synchronization Requirements #4, #5 and #7 indicate that all the deletion operations in the `user` schema are filtered out, so a schema level filtering rule is configured here. However, the deletion operations of future tables will also be filtered out.
+    > **Note:** The synchronization Requirements #4, #5 and #7 indicate that all the deletion operations in the `user` schema are filtered out, so a schema level filtering rule is configured here. However, the deletion operations of future tables in the `user` schema will also be filtered out.
 
 - To satisfy the synchronization Requirement #6, configure the [binlog event filtering rule](../tools/dm-data-synchronization-features.md#binlog-event-filtering) as follows:
 
     ```yaml
     filters:
-    ...
-    sale-filter-rule:
+      ...
+      sale-filter-rule:
         schema-pattern: "store_*"
         table-pattern: "sale_*"
         events: ["truncate table", "drop table", "delete"]
         action: Ignore
-    store-filter-rule:
+      store-filter-rule:
         schema-pattern: "store_*"
         events: ["drop database"]
         action: Ignore
@@ -116,37 +116,37 @@ Assume that the downstream schema after synchronization is as follows:
 
     ```yaml
     black-white-list:
-    log-bak-ignored:
+      log-bak-ignored:
         ignore-tales:
         - db-name: "user"
-        tbl-name: "log_bak"
+          tbl-name: "log_bak"
     ```
 
 - To satisfy the synchronization Requirement #8, configure the [column mapping rule](../tools/dm-data-synchronization-features.md#column-mapping) as follows:
 
     ```yaml
     column-mappings:
-    instance-1-sale:
-    ​    schema-pattern: "store_*"
-    ​    table-pattern: "sale_*"
-    ​    expression: "partition id"
-    ​    source-column: "id"
-    ​    target-column: "id"
-    ​    arguments: ["1", "store_", "sale_"]
-    instance-2-sale:
-    ​    schema-pattern: "store_*"
-    ​    table-pattern: "sale_*"
-    ​    expression: "partition id"
-    ​    source-column: "id"
-    ​    target-column: "id"
-    ​    arguments: ["2", "store_", "sale_"]
-    instance-3-sale:
-    ​    schema-pattern: "store_*"
-    ​    table-pattern: "sale_*"
-    ​    expression: "partition id"
-    ​    source-column: "id"
-    ​    target-column: "id"
-    ​    arguments: ["3", "store_", "sale_"]
+      instance-1-sale:
+        schema-pattern: "store_*"
+        table-pattern: "sale_*"
+        expression: "partition id"
+        source-column: "id"
+        target-column: "id"
+        arguments: ["1", "store_", "sale_"]
+      instance-2-sale:
+        schema-pattern: "store_*"
+        table-pattern: "sale_*"
+        expression: "partition id"
+        source-column: "id"
+        target-column: "id"
+        arguments: ["2", "store_", "sale_"]
+      instance-3-sale:
+        schema-pattern: "store_*"
+        table-pattern: "sale_*"
+        expression: "partition id"
+        source-column: "id"
+        target-column: "id"
+        arguments: ["3", "store_", "sale_"]
     ```
 
 ## Synchronization task configuration
@@ -211,7 +211,7 @@ routes:
     target-table:  "sale"
 
 filters:
-   user-filter-rule:
+  user-filter-rule:
     schema-pattern: "user"
     events: ["truncate table", "drop table", "delete"， "drop database"]
     action: Ignore
@@ -233,26 +233,26 @@ black-white-list:
 
 column-mappings:
   instance-1-sale:
-​    schema-pattern: "store_*"
-​    table-pattern: "sale_*"
-​    expression: "partition id"
-​    source-column: "id"
-​    target-column: "id"
-​    arguments: ["1", "store_", "sale_"]
+    schema-pattern: "store_*"
+    table-pattern: "sale_*"
+    expression: "partition id"
+    source-column: "id"
+    target-column: "id"
+    arguments: ["1", "store_", "sale_"]
   instance-2-sale:
-​    schema-pattern: "store_*"
-​    table-pattern: "sale_*"
-​    expression: "partition id"
-​    source-column: "id"
-​    target-column: "id"
-​    arguments: ["2", "store_", "sale_"]
+    schema-pattern: "store_*"
+    table-pattern: "sale_*"
+    expression: "partition id"
+    source-column: "id"
+    target-column: "id"
+    arguments: ["2", "store_", "sale_"]
   instance-3-sale:
-​    schema-pattern: "store_*"
-​    table-pattern: "sale_*"
-​    expression: "partition id"
-​    source-column: "id"
-​    target-column: "id"
-​    arguments: ["3", "store_", "sale_"]
+    schema-pattern: "store_*"
+    table-pattern: "sale_*"
+    expression: "partition id"
+    source-column: "id"
+    target-column: "id"
+    arguments: ["3", "store_", "sale_"]
 
 mydumpers:
   global:
