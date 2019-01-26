@@ -9,11 +9,11 @@ category: tools
 This document introduces the task configuration file of Data Migration --
 [`task.yaml`](https://github.com/pingcap/tidb-tools/blob/docs/docs/dm/zh_CN/configuration/task.yaml), including [Global configuration](#global-configuration) and [Instance configuration](#instance-configuration).
 
-For the feature and configuration of each configuration item, see [Data Synchronization Features](../tools/dm-data-synchronization-features.md).
+For the feature and configuration of each configuration item, see [Data Synchronization Features](/tools/dm/data-synchronization-features.md).
 
 ## Important concepts
 
-For description of important concepts including `instance-id` and the DM-worker ID, see [Important concepts](../tools/dm-configuration-file-overview.md#important-concepts).
+For description of important concepts including `instance-id` and the DM-worker ID, see [Important concepts](/tools/dm/dm-configuration-file-overview.md#important-concepts).
 
 ## Global configuration
 
