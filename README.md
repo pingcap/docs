@@ -123,19 +123,25 @@
   - [mydumper](tools/mydumper.md)
   - [Loader](tools/loader.md)
   + Data Migration
-    + Overview
-      - [Architecture](/tools/dm/overview.md#architecture)
-      - [Features](/tools/dm/overview.md#data-synchronization-features)
-      - [Restrictions](/tools/dm/overview.md#usage-restrictions)
-    - [Deploy](/tools/dm/deployment.md)
-    - [Synchronize Data](/tools/dm/practice.md)
+    - [Overview](/tools/dm/overview.md)
+    - [Restrictions](/tools/dm/overview.md#usage-restrictions)
+    + Features
+      - [Table Routing](/tools/dm/data-synchronization-features.md#table-routing)
+      - [Black and White Lists](/tools/dm/data-synchronization-features.md#black-and-white-table-lists)
+      - [Binlog Event Filtering](/tools/dm/data-synchronization-features.md#binlog-event-filtering)
+      - [Column Mapping](/tools/dm/data-synchronization-features.md#column-mapping)
+      - [Synchronization Delay Monitoring](/tools/dm/data-synchronization-features.md#synchronization-delay-monitoring)
+      + Sharding Support
+        - [Introduction](/tools/dm/sharding-solution.md)
+        - [Restrictions](/tools/dm/sharding-solution.md#sharding-ddl-usage-restrictions)
+        - [Troubleshoot](/tools/troubleshooting-sharding-ddl-locks.md)
+    + Usage Scenarios
+      - [Simple Scenario](/tools/dm/simple-synchronization-scenario.md)
+      - [Shard Merge Scenario](/tools/dm/shard-merge-scenario.md)
+    - [Deploy](/tools/dm/practice.md)
     + Configure
-      - [Configuration Overview](/tools/dm/dm-configuration-file-overview.md)
-      - [Task Configuration File](/tools/dm/task-configuration-file-intro.md)
-    + Sharding Data Solution
-      - [Overview and Design Details](/tools/dm/sharding-solution.md)
-      - [Sharding DDL Usage Restrictions](/tools/dm/sharding-solution.md#sharding-ddl-usage-restrictions)
-      - [Troubleshoot Sharding DDL Locks](/tools/dm/troubleshooting-sharding-ddl-locks.md)
+      - [Overview](/tools/dm/dm-configuration-file-overview.md)
+      - [Task Configuration](/tools/dm/task-configuration-file-intro.md)
     - [Monitor](/tools/dm/monitor.md)
     - [Manage the Task](/tools/dm/manage-task.md)
     - [Cluster Operations](/tools/dm/cluster-operations.md)
