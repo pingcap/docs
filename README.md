@@ -138,8 +138,7 @@
     + Usage Scenarios
       - [Simple Scenario](tools/dm-simple-synchronization-scenario.md)
       - [Shard Merge Scenario](tools/dm-shard-merge-scenario.md)
-    - [Deploy](tools/data-migration-deployment.md)
-    - [Synchronize](tools/data-migration-practice.md)
+    - [Deploy](tools/data-migration-practice.md)
     + Configure
       - [Overview](tools/dm-configuration-file-overview.md)
       - [Task Configuration](tools/dm-task-configuration-file-intro.md)
