@@ -125,6 +125,7 @@
   + Data Migration
     - [Overview](/tools/dm/overview.md)
     - [Restrictions](/tools/dm/overview.md#usage-restrictions)
+    - [Deploy](/tools/dm/practice.md)
     + Features
       - [Table Routing](/tools/dm/data-synchronization-features.md#table-routing)
       - [Black and White Lists](/tools/dm/data-synchronization-features.md#black-and-white-table-lists)
@@ -134,11 +135,10 @@
       + Sharding Support
         - [Introduction](/tools/dm/sharding-solution.md)
         - [Restrictions](/tools/dm/sharding-solution.md#sharding-ddl-usage-restrictions)
-        - [Troubleshoot](/tools/troubleshooting-sharding-ddl-locks.md)
+        - [Troubleshoot](/tools/dm/troubleshooting-sharding-ddl-locks.md)
     + Usage Scenarios
       - [Simple Scenario](/tools/dm/simple-synchronization-scenario.md)
       - [Shard Merge Scenario](/tools/dm/shard-merge-scenario.md)
-    - [Deploy](/tools/dm/practice.md)
     + Configure
       - [Overview](/tools/dm/dm-configuration-file-overview.md)
       - [Task Configuration](/tools/dm/task-configuration-file-intro.md)
