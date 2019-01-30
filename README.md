@@ -135,7 +135,7 @@
       + Sharding Support
         - [Introduction](/tools/dm/sharding-solution.md)
         - [Restrictions](/tools/dm/sharding-solution.md#sharding-ddl-usage-restrictions)
-        - [Troubleshoot](/tools/dm/troubleshooting-sharding-ddl-locks.md)
+        - [Manual Solution](/tools/dm/manually-handling-sharding-ddl-locks.md)
     + Usage Scenarios
       - [Simple Scenario](/tools/dm/simple-synchronization-scenario.md)
       - [Shard Merge Scenario](/tools/dm/shard-merge-scenario.md)
