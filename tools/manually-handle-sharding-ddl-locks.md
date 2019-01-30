@@ -6,8 +6,6 @@ category: tools
 
 # Handle Sharding DDL Locks Manually in TiDB-DM
 
-### Feature
-
 The sharding DDL lock of TiDB-DM automatically completes the synchronization process in most cases, but under some abnormal scenarios you need the command `unlock-ddl-lock` or `break-ddl-lock` to handle abnormal DDL locks manually.
 
 > **Warning:**
