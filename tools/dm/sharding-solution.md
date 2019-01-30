@@ -8,7 +8,7 @@ category: tools
 
 This document introduces the sharding solution provided by Data Migration, its background, design details, and sharding DDL restrictions.
 
-Data Migration supports merging the data of multiple sharded MySQL instances and tables into a single TiDB instance. Generally, Data Migration does it automatically and you need to do nothing. But when some abnormal conditions occur, you need to handle them manually. For details, see [Troubleshooting Sharding DDL Locks](/tools/dm/troubleshooting-sharding-ddl-locks.md).
+Data Migration supports merging the data of multiple sharded MySQL instances and tables into a single TiDB instance. Generally, Data Migration does it automatically and you need to do nothing. But when some abnormal conditions occur, you need to handle them manually. For details, see [Manual Solution](/tools/dm/manually-handle-sharding-ddl-locks.md).
 
 ## Background
 
