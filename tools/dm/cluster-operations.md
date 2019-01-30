@@ -71,7 +71,7 @@ The information maintained by DM-master includes the following two major types, 
 
 When DM-master is restarted, it automatically requests the task information from each DM-worker instance and rebuilds the corresponding relationship between the task and DM-worker. However, at this time, DM-worker does not resend the sharding DDL information, so it might occur that the sharding DDL lock synchronization cannot be finished automatically because of the lost lock information.
 
-To resolve this issue, follow the steps described in [Manual Solution](/tools/dm/manually-handle-sharding-ddl-locks.md).
+To resolve this issue, follow the steps described in [Manual Solution](/tools/dm/manually-handling-sharding-ddl-locks.md).
 
 #### Restarting dmctl considerations
 
