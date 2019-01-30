@@ -60,7 +60,7 @@ For the binlog during incremental data import, DM uses the downstream database t
 
         At this time, DM tries again to synchronize these DDL statements that are not skipped. However, the restarted DM-worker instances will be blocked at the position of the binlog event corresponding to the DDL binlog event, because the DM-worker instance that is not restarted has executed to the place after this DDL binlog event.
 
-        To resolve this issue, follow the steps described in [Manual Solution](/tools/dm/manually-handle-sharding-ddl-locks.md#some-dm-workers-restart-during-the-ddl-unlocking-process).
+        To resolve this issue, follow the steps described in [Manual Solution](/tools/dm/manually-handling-sharding-ddl-locks.md#some-dm-workers-restart-during-the-ddl-unlocking-process).
 
 #### Restarting DM-master considerations
 
