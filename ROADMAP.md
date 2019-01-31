@@ -30,10 +30,10 @@ This document defines the roadmap for TiDB development.
     - [ ] Support Window Function
     - [ ] Support Common Table Expression
     - [ ] Support Hash Partition Table
-    - [ ] Support utf8_general_ci collation
+    - [ ] Support utf8_general_ci Collation
 + [ ] Improve DDL
     - [ ] Support Table Lock
-    - [ ] Support Change column type
+    - [ ] Support Change Column Type
     - [ ] Support Multiple DDL Operations in a Single Statement
 - [ ] Support Plugin System
     - [ ] Support White List Plugin
