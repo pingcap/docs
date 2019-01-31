@@ -20,10 +20,7 @@ This enterprise tools package includes all the following tools:
 - Loader
 - mydumper
 - binlogctl
-- checker
 - ddl_checker
-- dump_region
-- importer
 - sync_diff_inspector
 
 ## TiDB-Binlog
@@ -38,7 +35,7 @@ This enterprise tools package includes all the following tools:
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
 | [tidb-lightning-latest-linux-amd64.tar.gz](https://download.pingcap.org/tidb-lightning-latest-linux-amd64.tar.gz) | Linux | amd64 | [tidb-lightning-latest-linux-amd64.sha256](https://download.pingcap.org/tidb-lightning-latest-linux-amd64.sha256) |
-| [tidb-lightning-v2.1.2-linux-amd64.tar.gz](https://download.pingcap.org/tidb-lightning-v2.1.2-linux-amd64.tar.gz) | Linux | amd64 | [tidb-lightning-v2.1.2-linux-amd64.sha256](https://download.pingcap.org/tidb-lightning-v2.1.2-linux-amd64.sha256) |
+| [tidb-lightning-v2.1.3-linux-amd64.tar.gz](https://download.pingcap.org/tidb-lightning-v2.1.3-linux-amd64.tar.gz) | Linux | amd64 | [tidb-lightning-v2.1.3-linux-amd64.sha256](https://download.pingcap.org/tidb-lightning-v2.1.3-linux-amd64.sha256) |
 
 ## Data Migration
 
