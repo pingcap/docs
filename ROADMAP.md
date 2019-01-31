@@ -30,7 +30,7 @@ This document defines the roadmap for TiDB development.
     - [ ] Support Window Function
     - [ ] Support Common Table Expression
     - [ ] Support Hash Partition Table
-    - [ ] Support utf8_general_ci collation
+    - [ ] Support utf8_general_ci Collation
 + [ ] Improve DDL
     - [ ] Support Table Lock
     - [ ] Support Change Column Type
@@ -40,10 +40,10 @@ This document defines the roadmap for TiDB development.
     - [ ] Support Audit Log Plugin
     - [ ] Support RBAC Plugin
     - [ ] Support Diagnostic Plugin
-- [ ] Support Query Tracing
-- [ ] Support Hybrid Column/Row-oriented Storage Engine
-- [ ] Support New Storage Row Format: improve performance and use less memory
-- [ ] Support Non-integer Type of RowID
++ [ ] Support Query Tracing
++ [ ] Support Hybrid Column/Row-oriented Storage Engine
++ [ ] Support New Storage Row Format: improve performance and use less memory
++ [ ] Support Non-integer Type of RowID
 + [ ] Transaction
     - [ ] Reduce Read-write Conflicts
     - [ ] Optimize Scheduling Mechanism of Transaction
