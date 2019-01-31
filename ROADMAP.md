@@ -25,7 +25,7 @@ This document defines the roadmap for TiDB development.
     - [ ] Shuffle Operators
     - [ ] Vectorized Expression Evaluation
     - [ ] UDF
-- [ ] SQL Features
++ [ ] SQL Features
     - [ ] Support View
     - [ ] Support Window Function
     - [ ] Support Common Table Expression
@@ -33,9 +33,9 @@ This document defines the roadmap for TiDB development.
     - [ ] Support utf8_general_ci collation
 + [ ] Improve DDL
     - [ ] Support Table Lock
-    - [ ] Support Change column type
+    - [ ] Support Change Column Type
     - [ ] Support Multiple DDL Operations in a Single Statement
-- [ ] Support Plugin System
++ [ ] Support Plugin System
     - [ ] Support White List Plugin
     - [ ] Support Audit Log Plugin
     - [ ] Support RBAC Plugin
@@ -44,7 +44,7 @@ This document defines the roadmap for TiDB development.
 - [ ] Support Hybrid Column/Row-oriented Storage Engine
 - [ ] Support New Storage Row Format: improve performance and use less memory
 - [ ] Support Non-integer Type of RowID
-- [ ] Transaction
++ [ ] Transaction
     - [ ] Reduce Read-write Conflicts
     - [ ] Optimize Scheduling Mechanism of Transaction
     - [ ] Refine Model and Reduce Latency
