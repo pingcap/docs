@@ -16,7 +16,7 @@ This document defines the roadmap for TiDB development.
     - [ ] Cascades Planner
     - [ ] Plan Management
     - [ ] SQL Tuning Advisor
-    - [ ] Robust Access Path Selection: add the heuristic rule and improve the accuracy rate of index selection in OLTP scenarios
+    - [ ] Robust Access Path Selection: add the heuristic rule and improve the accuracy of index selection in OLTP scenarios
     - [ ] Adaptive Query Optimization
 + [ ] Execution Engine
     - [ ] Parallel Operators
@@ -26,10 +26,10 @@ This document defines the roadmap for TiDB development.
     - [ ] Vectorized Expression Evaluation
     - [ ] UDF
 + [ ] SQL Features
-    - [ ] Support View
-    - [ ] Support Window Function
+    - [ ] Support Views
+    - [ ] Support Window Functions
     - [ ] Support Common Table Expression
-    - [ ] Support Hash Partition Table
+    - [ ] Support Hash Partitioned Table
     - [ ] Support utf8_general_ci Collation
 + [ ] Improve DDL
     - [ ] Support Table Lock
@@ -42,11 +42,11 @@ This document defines the roadmap for TiDB development.
     - [ ] Support Diagnostic Plugin
 + [ ] Support Query Tracing
 + [ ] Support Hybrid Column/Row-oriented Storage Engine
-+ [ ] Support New Storage Row Format: improve performance and use less memory
++ [ ] Support New Storage Row Format: improve performance and reduce memory usage
 + [ ] Support Non-integer Type of RowID
 + [ ] Transaction
     - [ ] Reduce Read-write Conflicts
-    - [ ] Optimize Scheduling Mechanism of Transaction
+    - [ ] Optimize Transaction Scheduling Mechanism
     - [ ] Refine Model and Reduce Latency
     - [ ] Support Minimal Transaction (like the mini-transaction of InnoDB)
 
