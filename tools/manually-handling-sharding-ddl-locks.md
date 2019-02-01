@@ -1,22 +1,22 @@
 ---
-title: Handle Sharding DDL Locks Manually in TiDB-DM
-summary: Learn how to handle sharding DDL locks manually in TiDB-DM.
+title: Handle Sharding DDL Locks Manually in DM
+summary: Learn how to handle sharding DDL locks manually in DM.
 category: tools
 ---
 
-# Handle Sharding DDL Locks Manually in TiDB-DM
+# Handle Sharding DDL Locks Manually in DM
 
-The sharding DDL lock of TiDB-DM automatically completes the synchronization process in most cases, but under some abnormal scenarios you need the command `unlock-ddl-lock` or `break-ddl-lock` to handle abnormal DDL locks manually.
+DM resolves sharding DDL locks automatically in most cases, but under some abnormal scenarios you need the command `unlock-ddl-lock` or `break-ddl-lock` to manually handle the abnormal DDL locks.
 
 > **Warning:**
 >- Do not use `unlock-ddl-lock` or `break-ddl-lock` unless you are totally aware of the possible impacts brought by the command and you can accept them.
->- Before manually handling the abnormal DDL lock, make sure that you have already read the DM [shard merge principles](./shard-merge.md#Principles).
+>- Before manually handling the abnormal DDL locks, make sure that you have already read the DM [shard merge principles](./shard-merge.md#Principles).
 
 ### Command
 
 #### show-ddl-locks
 
-Show the current DDL lock information on `DM-master`.
+Query the current DDL lock information on `DM-master`.
 
 ##### Command usage
 
@@ -26,28 +26,28 @@ show-ddl-locks [--worker=127.0.0.1:8262] [task-name]
 
 ##### Variables description
 
-- `worker`: flag; string; `--worker`; optional; can be specified multiple times; if not being specified, show the lock information of all DM-workers; if being specified, show the lock information of the specified DM-worker.
-- `task-name`: non-flag; string; optional; if not being specified, show the lock information of all tasks; if being specified, show the lock information of the specified task.
+- `worker`: flag; string; `--worker`; optional; can be specified multiple times; if not being specified, query the lock information related to all DM-workers; if being specified, query the lock information related only to the specified DM-worker.
+- `task-name`: non-flag; string; optional; if not being specified, query the lock information related to all tasks; if being specified, query the lock information related only to the specified task.
 
 ##### Example of results
 
 ```bash
 » show-ddl-locks test
 {
-    "result": true,                                        # show if the locking process succeeds
-    "msg": "",                                             # show the reason for the locking process failure or other descriptive information (for example, the locking task does not exist)
-    "locks": [                                             # the lock information list on the DM-master
+    "result": true,                                        # the result of the query for the lock information
+    "msg": "",                                             # the additional message for the failure to query the lock information or other descriptive information (for example, the lock task does not exist)
+    "locks": [                                             # the lock information list on DM-master
         {
-            "ID": "test-`shard_db`.`shard_table`",         # the ID of the lock, which is composed of the current task name and the corresponding schema/table information of the DDL
-            "task": "test",                                # the task name of the lock
-            "owner": "127.0.0.1:8262",                     # the owner of the lock (the first DM-worker which receives the DDL event)
-            "DDLs": [                                      # the corresponding DDL list of the lock
+            "ID": "test-`shard_db`.`shard_table`",         # the lock ID, which is made up of the current task name and the schema/table information corresponding to the DDL
+            "task": "test",                                # the name of the task to which the lock belongs
+            "owner": "127.0.0.1:8262",                     # the owner of the lock
+            "DDLs": [                                      # the DDL list corresponding to the lock
                 "USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` DROP COLUMN `c2`;"
             ],
-            "synced": [                                    # the list of DM-workers that have received all sharding DDL events in the corresponding MySQL instances
+            "synced": [                                    # the list of DM-workers that have received all sharding DDL events in the corresponding MySQL instance
                 "127.0.0.1:8262"
             ],
-            "unsynced": [                                  # the list of DM-workers that have not yet received all sharding DDL events in the corresponding MySQL instances
+            "unsynced": [                                  # the list of DM-workers that have not yet received all sharding DDL events in the corresponding MySQL instance
                 "127.0.0.1:8263"
             ]
         }
@@ -57,7 +57,7 @@ show-ddl-locks [--worker=127.0.0.1:8262] [task-name]
 
 #### unlock-ddl-lock
 
-Actively ask `DM-master` to unlock the specified DDL lock, for example, ask the owner to execute the DDL; ask other DM-workers that are not the owner to execute or skip the DDL; remove the lock information on `DM-master`.
+Actively ask `DM-master` to unlock the specified DDL lock, including asking the owner to execute the DDL, asking all other DM-workers that are not the owner to skip the DDL, and removing the lock information on `DM-master`.
 
 ##### Command usage
 
@@ -67,23 +67,23 @@ unlock-ddl-lock [--worker=127.0.0.1:8262] [--owner] [--force-remove] <lock-ID>
 
 ##### Variables description
 
-- `worker`: flag; string; `--worker`; optional; can be specified multiple times; if not being specified, send requests for all DM-workers that are waiting for the lock to skip the DDL; if being specified, send requests for the specified DM-worker to skip the DDL
+- `worker`: flag; string; `--worker`; optional; can be specified multiple times; if not being specified, send requests for all DM-workers (except for the owner) that are waiting for the lock to skip the DDL; if being specified, send requests only for the specified DM-worker to skip the DDL
 - `owner`: flag; string; `--owner`; optional; if not being specified, request for the default owner (the owner in the result of `show-ddl-locks`) to execute the DDL; if being specified, request for the DM-worker (the alternative of the default owner) to execute the DDL 
 - `force-remove`: flag; boolean; `--force-remove`; optional; if not being specified, remove the lock information only when the owner succeeds to execute the DDL; if being specified, compulsorily remove the lock information even though the owner fails to execute the DDL (after doing this you will not be able to query or operate on the lock again)
-- `lock-ID`: non-flag; string; optional; specify the ID of the DDL lock which needs to be unlocked (the `ID` in the result of `show-ddl-locks`)
+- `lock-ID`: non-flag; string; required; specify the ID of the DDL lock which needs to be unlocked (the `ID` in the result of `show-ddl-locks`)
 
 ##### Example of results
 
 ```bash
 » unlock-ddl-lock test-`shard_db`.`shard_table`
 {
-    "result": true,                                        # show if the unlocking process succeeds
-    "msg": "",                                             # show the reason why the unlocking process fails
+    "result": true,                                        # the result of the unlocking operation
+    "msg": "",                                             # the additional message for the failure to unlock the lock
     "workers": [                                           # the result list of the DDL execution/skipping operation of each DM-worker
         {
-            "result": true,                                # show if the DDL execution/skipping operation of the DM-worker succeeds
-            "worker": "127.0.0.1:8262",                    # the address of the DM-worker (DM-worker ID)
-            "msg": ""                                      # show the reason why the DDL execution/skipping operation of the DM-worker fails
+            "result": true,                                # the result of the DDL execution/skipping operation
+            "worker": "127.0.0.1:8262",                    # the address of the DM-worker (the DM-worker ID)
+            "msg": ""                                      # the additional message for the failure to the DDL execution/skipping operation of each DM-worker
         }
     ]
 }
@@ -91,7 +91,7 @@ unlock-ddl-lock [--worker=127.0.0.1:8262] [--owner] [--force-remove] <lock-ID>
 
 #### break-ddl-lock
 
-Actively ask the DM-worker to compulsorily break the DDL lock that is waiting to be unlocked, for example, ask the DM-worker to execute/skip the DDL; remove the DDL lock information on the DM-worker.
+Actively ask the DM-worker to compulsorily break the DDL lock that is to be unlocked, including asking the DM-worker to execute/skip the DDL and removing the DDL lock information on the DM-worker.
 
 ##### Command usage
 
@@ -101,24 +101,24 @@ break-ddl-lock <--worker=127.0.0.1:8262> [--remove-id] [--exec] [--skip] <task-n
 
 ##### Variables description
 
-- `worker`: flag; string; `--worker`; not optional; specify the DM-worker which needs to execute the breaking operation
+- `worker`: flag; string; `--worker`; required; specify the DM-worker which needs to execute the breaking operation
 - `remove-id`: flag; string; `--remove-id`; optional; if being specified, it should be the ID of some DDL lock; if not being specified, remove the corresponding DDL lock information only when the breaking operation succeeds; if being specified, compulsorily remove the DDL lock information 
 - `exec`: flag; boolean; `--exec`; optional; cannot be specified simultaneously with the `--skip` parameter; if being specified, ask the DM-worker to execute the corresponding DDL of the lock 
 - `skip`: flag; boolean; `--skip`; optional; cannot be specified simultaneously with the `--exec` parameter; if being specified, ask the DM-worker to skip the corresponding DDL of the lock 
-- `task-name`: non-flag; string; not optional; specify the name of the task containing the lock that is going to execute the breaking operation (you can check if a task contains the lock via [query-status](../task-handling/query-status.md))
+- `task-name`: non-flag; string; required; specify the name of the task containing the lock that is going to execute the breaking operation (you can check if a task contains the lock via [query-status](../task-handling/query-status.md))
 
 ##### Example of results
 
 ```bash
 » break-ddl-lock -w 127.0.0.1:8262 --exec test
 {
-    "result": true,                                        # check if the lock breaking operation succeeds
-    "msg": "",                                             # check the reason why the lock breaking operation fails
-    "workers": [                                           # the list of DM-workers which executes the lock breaking operation (currently you can only break the lock on one DM-worker at a single operation)
+    "result": true,                                        # the result of the lock breaking operation
+    "msg": "",                                             # the additional message for the failure to the lock breaking operation
+    "workers": [                                           # the list of DM-workers which break the lock (currently the lock can be broken by only one DM-worker at a single operation)
         {
-            "result": false,                               # check if the lock breaking operation of the DM-worker succeeds
-            "worker": "127.0.0.1:8262",                    # the address of the DM-worker (DM-worker ID)
-            "msg": ""                                      # check the reason why the lock breaking operation of the DM-worker fails
+            "result": false,                               # the result of the lock breaking operation by the DM-worker
+            "worker": "127.0.0.1:8262",                    # the address of the DM-worker (the DM-worker ID)
+            "msg": ""                                      # the additional message for the failure to the lock breaking operation by the DM-worker
         }
     ]
 }
@@ -126,15 +126,15 @@ break-ddl-lock <--worker=127.0.0.1:8262> [--remove-id] [--exec] [--skip] <task-n
 
 ### Support Scenarios
 
-Currently, using the command `unlock-ddl-lock` or `break-ddl-lock` can only handle the sharding DDL lock under the following abnormal scenarios. You should consult the related developers if you encounter other anomalies.
+Currently, using the command `unlock-ddl-lock` or `break-ddl-lock` can only handle the sharding DDL locks under the following abnormal scenarios. You should consult the related developers if you encounter other anomalies.
 
 #### Some DM-workers go offline
 
 ##### The reason for the abnormal lock
 
-Before `DM-master` tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL event (for details, see [shard merge principles](./shard-merge.md#Principles)). If the sharding DDL event is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted (these DM-workers have been removed according to the application demand), then the sharding DDL lock cannot be automatically synchronized and unlocked because not all the DM-workers can receive the DDL event.
+Before `DM-master` tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL events (for details, see [shard merge principles](./shard-merge.md#Principles)). If the sharding DDL event is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted (these DM-workers have been removed according to the application demand), then the sharding DDL lock cannot be automatically synchronized and unlocked because not all the DM-workers can receive the DDL event.
 
-> If you do not need to make some DM-workers offline in the process of synchronizing sharding DDL events, a better solution is to use `stop-task` to stop the running tasks first, make the DM-workers go offline, remove the corresponding configuration information from the task configuration file, and finally use `start-task` and the new task configuration to restart the synchronization task. 
+> If you need to make some DM-workers offline when not in the process of synchronizing sharding DDL events, a better solution is to use `stop-task` to stop the running tasks first, make the DM-workers go offline, remove the corresponding configuration information from the task configuration file, and finally use `start-task` and the new task configuration to restart the synchronization task. 
 
 ##### Manual solution
 
@@ -154,7 +154,7 @@ mysql> SHOW CREATE TABLE shard_db_1.shard_table_1;
 +---------------+------------------------------------------+
 ```
 
-When you shard tables in the upstream, the following DDL operation will be executed to alter the table structures:
+The following DDL operation will be executed on the upstream sharded tables to alter the table structure:
 
 ```sql
 ALTER TABLE shard_db_*.shard_table_* ADD COLUMN c2 INT;
@@ -309,7 +309,7 @@ The operation processes are:
     ```
 2. Use `unlock-ddl-lock` to ask `DM-master` to unlock the lock.
     - Use the parameter `--worker` to limit the operation to only target at the restarted DM-worker (`127.0.0.1:8263`). 
-    - The DM-worker will try to execute the DDL to the downstream again during the locking process (the owner before restarting has executed the DDL to the downstream), so as to make sure that the DDL can be executed multiple times.
+    - The DM-worker will try to execute the DDL to the downstream again during the unlocking process (the owner before restarting has executed the DDL to the downstream), so as to make sure that the DDL can be executed multiple times.
     ```bash
     » unlock-ddl-lock --worker=127.0.0.1:8263 test-`shard_db`.`shard_table`
     {
