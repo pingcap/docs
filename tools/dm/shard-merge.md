@@ -46,13 +46,13 @@ Here is a simple example:
 In this example, we simplify the merging process, in which there are only two MySQL instances in the upstream and each instance has only one table. Assume that when the synchronization begins, we mark the schema version of two sharded tables as `schema V1`, and mark the schema version after executing DDL statements as `schema V2`. 
 
 Now suppose that in the synchronization process, the binlog data received from the two upstream sharded tables has the following time sequence:
-1. When the synchronization begins, the `syncer` (binlog replication) of the DM-worker can only receive the DML events of `schema V1` from the two sharded tables. 
+1. When the synchronization begins, the syncer unit in DM-worker can only receive the DML events of `schema V1` from the two sharded tables. 
 2. At `t1`, the sharding DDL events from the instance 1 are received. 
-3. From `t2` on, the `syncer` unit receives the DML of `schema V2` from the instance 1; but from the instance 2, it still receives the DML of `schema V1`. 
+3. From `t2` on, the syncer unit receives the DML of `schema V2` from the instance 1; but from the instance 2, it still receives the DML of `schema V1`. 
 4. At `t3`, the sharding DDL events from the instance 2 are received. 
-5. From `t4` on, the `syncer` unit receives the DML of `schema V2` from the instance 2 as well. 
+5. From `t4` on, the syncer unit receives the DML of `schema V2` from the instance 2 as well. 
 
-Suppose that we do no operation to the DDL of the sharded tables during the synchronization process. After DDL statements of the instance 1 are synchronized to the downstream, the downstream table structure will be altered into `schema V2`. But for the instance 2, the `syncer` unit of the DM-worker is still receiving DML events of `schema V1` from `t1` to `t2`. Therefore, in the process of synchronizing the DML of `schema V1` to the downstream, the inconsistency between the DML and the table structure might lead to errors and failure to synchronize the data. 
+Suppose that we do no operation to the DDL of the sharded tables during the synchronization process. After DDL statements of the instance 1 are synchronized to the downstream, the downstream table structure will be altered into `schema V2`. But for the instance 2, the syncer unit in DM-worker is still receiving DML events of `schema V1` from `t1` to `t2`. Therefore, in the process of synchronizing the DML of `schema V1` to the downstream, the inconsistency between the DML and the table structure might lead to errors and failure to synchronize the data. 
 
 ### Principles
 
@@ -86,7 +86,7 @@ Suppose that there are two sharded tables `table_1` and `table_2` to be merged i
 
 Because data comes from the same MySQL instance, all the data is obtained from the same binlog flow. In this case, the time sequence is as follows:
 
-1.  The `syncer` (binlog replication) of the DM-worker receives the DML of `schema V1` from both sharded tables when the synchronization begins. 
+1.  The syncer unit in DM-worker receives the DML of `schema V1` from both sharded tables when the synchronization begins. 
 2. At `t1`, it receives the DDL of `table_1`.
 3. From `t2` to `t3`, the received data includes the DML of `schema V2` from `table_1` and the DML of `schema V1` from `table_2`.
 4. At `t3`, it receives the DDL of `table_2`.
