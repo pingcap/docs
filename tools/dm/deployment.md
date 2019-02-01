@@ -186,7 +186,7 @@ You can choose one of the following two types of cluster topology according to y
 
 - [The cluster topology of multiple DM-worker instances on each node](#option-2-use-the-cluster-topology-of-multiple-dm-worker-instances-on-each-node)
 
-    Generally, it is recommended to deploy one DM-worker instance on each node. However, if the CPU and memory of your machine is much better than the required in [Hardware and Software Requirements](/op-guide/recommendation.md), and you have more than 2 disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 DM-worker instances on a single node.
+    Generally, it is recommended to deploy one DM-worker instance on each node. However, if the CPU and memory of your machine are much better than the required in [Hardware and Software Requirements](/op-guide/recommendation.md), and you have more than 2 disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 DM-worker instances on a single node.
 
 ### Option 1: Use the cluster topology of a single DM-worker instance on each node
 
@@ -295,7 +295,7 @@ grafana_admin_password = "admin"
 | relay_binlog_gtid | Whether DM-worker pulls the binlog starting from the specified GTID. Only used when the local has no valid relay log and `enable_gtid` is true. |
 | flavor | "flavor" indicates the release type of MySQL. For the official version, Percona, and cloud MySQL, fill in "mysql"; for MariaDB, fill in "mariadb". It is "mysql" by default. |
 
-For details about `deploy_dir` configuration, see [Configure the deployment directory](#configure-the-deployment-directory).
+For details about the `deploy_dir` configuration, see [Configure the deployment directory](#configure-the-deployment-directory).
 
 ### Encrypt the upstream MySQL user password using dmctl
 
@@ -309,7 +309,7 @@ VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=
 
 ## Step 8: Edit variables in the `inventory.ini` file
 
-This step shows how to edit the variable of deployment directory, how to configure the relay log synchronization position and the relay log GTID synchronization mode, and explains the global variables in the `inventory.ini` file.
+This step shows how to edit the variable of the deployment directory, how to configure the relay log synchronization position and the relay log GTID synchronization mode, and explains the global variables in the `inventory.ini` file.
 
 ### Configure the deployment directory
 
