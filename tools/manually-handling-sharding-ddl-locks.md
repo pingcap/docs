@@ -6,48 +6,49 @@ category: tools
 
 # Handle Sharding DDL Locks Manually in DM
 
-DM resolves sharding DDL locks automatically in most cases, but under some abnormal scenarios you need the command `unlock-ddl-lock` or `break-ddl-lock` to manually handle the abnormal DDL locks.
+DM uses the sharding DDL lock to ensure operations are performed in the correct order. This locking mechanism resolves sharding DDL locks automatically in most cases, but you need to use the `unlock-ddl-lock` or `break-ddl-lock` command to manually handle the abnormal DDL locks in some abnormal scenarios.
 
 > **Warning:**
+>
 >- Do not use `unlock-ddl-lock` or `break-ddl-lock` unless you are totally aware of the possible impacts brought by the command and you can accept them.
 >- Before manually handling the abnormal DDL locks, make sure that you have already read the DM [shard merge principles](../tools/shard-merge.md#Principles).
 
-### Command
+## Command
 
-#### show-ddl-locks
+### `show-ddl-locks`
 
 Query the current DDL lock information on `DM-master`.
 
-##### Command usage
+#### Command usage
 
 ```bash
 show-ddl-locks [--worker=127.0.0.1:8262] [task-name]
 ```
 
-##### Variables description
+#### Variables description
 
 - `worker`: flag; string; `--worker`; optional; can be specified multiple times; if not being specified, query the lock information related to all DM-workers; if being specified, query the lock information related only to the specified DM-worker.
 - `task-name`: non-flag; string; optional; if not being specified, query the lock information related to all tasks; if being specified, query the lock information related only to the specified task.
 
-##### Example of results
+#### Example of results
 
 ```bash
 » show-ddl-locks test
 {
-    "result": true,                                        # the result of the query for the lock information
-    "msg": "",                                             # the additional message for the failure to query the lock information or other descriptive information (for example, the lock task does not exist)
-    "locks": [                                             # the lock information list on DM-master
+    "result": true,                                        # The result of the query for the lock information.
+    "msg": "",                                             # The additional message for the failure to query the lock information or other descriptive information (for example, the lock task does not exist).
+    "locks": [                                             # The lock information list on DM-master.
         {
-            "ID": "test-`shard_db`.`shard_table`",         # the lock ID, which is made up of the current task name and the schema/table information corresponding to the DDL
-            "task": "test",                                # the name of the task to which the lock belongs
-            "owner": "127.0.0.1:8262",                     # the owner of the lock
-            "DDLs": [                                      # the DDL list corresponding to the lock
+            "ID": "test-`shard_db`.`shard_table`",         # The lock ID, which is made up of the current task name and the schema/table information corresponding to the DDL.
+            "task": "test",                                # The name of the task to which the lock belongs.
+            "owner": "127.0.0.1:8262",                     # The owner of the lock.
+            "DDLs": [                                      # The DDL list corresponding to the lock.
                 "USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` DROP COLUMN `c2`;"
             ],
-            "synced": [                                    # the list of DM-workers that have received all sharding DDL events in the corresponding MySQL instance
+            "synced": [                                    # The list of DM-workers that have received all sharding DDL events in the corresponding MySQL instance.
                 "127.0.0.1:8262"
             ],
-            "unsynced": [                                  # the list of DM-workers that have not yet received all sharding DDL events in the corresponding MySQL instance
+            "unsynced": [                                  # The list of DM-workers that have not yet received all sharding DDL events in the corresponding MySQL instance.
                 "127.0.0.1:8263"
             ]
         }
@@ -55,24 +56,24 @@ show-ddl-locks [--worker=127.0.0.1:8262] [task-name]
 }
 ```
 
-#### unlock-ddl-lock
+### `unlock-ddl-lock`
 
 Actively ask `DM-master` to unlock the specified DDL lock, including asking the owner to execute the DDL, asking all other DM-workers that are not the owner to skip the DDL, and removing the lock information on `DM-master`.
 
-##### Command usage
+#### Command usage
 
 ```bash
 unlock-ddl-lock [--worker=127.0.0.1:8262] [--owner] [--force-remove] <lock-ID>
 ```
 
-##### Variables description
+#### Variables description
 
 - `worker`: flag; string; `--worker`; optional; can be specified multiple times; if not being specified, send requests for all DM-workers (except for the owner) that are waiting for the lock to skip the DDL; if being specified, send requests only for the specified DM-worker to skip the DDL
 - `owner`: flag; string; `--owner`; optional; if not being specified, request for the default owner (the owner in the result of `show-ddl-locks`) to execute the DDL; if being specified, request for the DM-worker (the alternative of the default owner) to execute the DDL 
 - `force-remove`: flag; boolean; `--force-remove`; optional; if not being specified, remove the lock information only when the owner succeeds to execute the DDL; if being specified, compulsorily remove the lock information even though the owner fails to execute the DDL (after doing this you will not be able to query or operate on the lock again)
 - `lock-ID`: non-flag; string; required; specify the ID of the DDL lock which needs to be unlocked (the `ID` in the result of `show-ddl-locks`)
 
-##### Example of results
+#### Example of results
 
 ```bash
 » unlock-ddl-lock test-`shard_db`.`shard_table`
@@ -89,17 +90,17 @@ unlock-ddl-lock [--worker=127.0.0.1:8262] [--owner] [--force-remove] <lock-ID>
 }
 ```
 
-#### break-ddl-lock
+### `break-ddl-lock`
 
 Actively ask the DM-worker to compulsorily break the DDL lock that is to be unlocked, including asking the DM-worker to execute/skip the DDL and removing the DDL lock information on the DM-worker.
 
-##### Command usage
+#### Command usage
 
 ```bash
 break-ddl-lock <--worker=127.0.0.1:8262> [--remove-id] [--exec] [--skip] <task-name>
 ```
 
-##### Variables description
+#### Variables description
 
 - `worker`: flag; string; `--worker`; required; specify the DM-worker which needs to execute the breaking operation
 - `remove-id`: flag; string; `--remove-id`; optional; if being specified, it should be the ID of some DDL lock; if not being specified, remove the corresponding DDL lock information only when the breaking operation succeeds; if being specified, compulsorily remove the DDL lock information 
@@ -107,7 +108,7 @@ break-ddl-lock <--worker=127.0.0.1:8262> [--remove-id] [--exec] [--skip] <task-n
 - `skip`: flag; boolean; `--skip`; optional; cannot be specified simultaneously with the `--exec` parameter; if being specified, ask the DM-worker to skip the corresponding DDL of the lock 
 - `task-name`: non-flag; string; required; specify the name of the task containing the lock that is going to execute the breaking operation (you can check if a task contains the lock via [query-status](../tools/dm-query-status.md))
 
-##### Example of results
+#### Example of results
 
 ```bash
 » break-ddl-lock -w 127.0.0.1:8262 --exec test
@@ -124,19 +125,19 @@ break-ddl-lock <--worker=127.0.0.1:8262> [--remove-id] [--exec] [--skip] <task-n
 }
 ```
 
-### Support Scenarios
+## Supported scenarios
 
-Currently, using the command `unlock-ddl-lock` or `break-ddl-lock` can only handle the sharding DDL locks under the following abnormal scenarios. You should consult the related developers if you encounter other anomalies.
+Currently, the `unlock-ddl-lock` or `break-ddl-lock` command only supports handling sharding DDL locks in the following three abnormal scenarios.
 
-#### Some DM-workers go offline
+### Scenario 1: Some DM-workers go offline
 
-##### The reason for the abnormal lock
+#### The reason for the abnormal lock
 
 Before `DM-master` tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL events (for details, see [shard merge principles](../tools/shard-merge.md#Principles)). If the sharding DDL event is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted (these DM-workers have been removed according to the application demand), then the sharding DDL lock cannot be automatically synchronized and unlocked because not all the DM-workers can receive the DDL event.
 
-> If you need to make some DM-workers offline when not in the process of synchronizing sharding DDL events, a better solution is to use `stop-task` to stop the running tasks first, make the DM-workers go offline, remove the corresponding configuration information from the task configuration file, and finally use `start-task` and the new task configuration to restart the synchronization task. 
+> **Note:** If you need to make some DM-workers offline when not in the process of synchronizing sharding DDL events, a better solution is to use `stop-task` to stop the running tasks first, make the DM-workers go offline, remove the corresponding configuration information from the task configuration file, and finally use `start-task` and the new task configuration to restart the synchronization task. 
 
-##### Manual solution
+#### Manual solution
 
 Suppose that there are two instances `MySQL-1` and `MySQL-2` in the upstream, and there are two tables `shard_db_1`.`shard_table_1` and `shard_db_1`.`shard_table_2` in `MySQL-1` and two tables `shard_db_2`.`shard_table_1` and `shard_db_2`.`shard_table_2` in `MySQL-2`. Now we need to merge the four tables and synchronize them into the table `shard_db`.`shard_table` in the downstream TiDB.
 
@@ -160,17 +161,20 @@ The following DDL operation will be executed on the upstream sharded tables to a
 ALTER TABLE shard_db_*.shard_table_* ADD COLUMN c2 INT;
 ```
 
-The operation processes of MySQL and DM are:
+The operation processes of MySQL and DM are as follows:
 
 1. The corresponding DDL operations are executed on the two sharded tables of `DM-worker-1` in `MySQL-1` to alter the table structures.
+
     ```sql
     ALTER TABLE shard_db_1.shard_table_1 ADD COLUMN c2 INT;
     ```
     ```sql
     ALTER TABLE shard_db_1.shard_table_2 ADD COLUMN c2 INT;
     ```
+
 2. `DM-worker-1` sends the DDL information related to `MySQL-1` to `DM-master`, and `DM-master` creates the corresponding DDL lock. 
 3. Use `show-ddl-lock` to check the information of the current DDL lock.
+    
     ```bash
     » show-ddl-locks test
     {
@@ -194,33 +198,38 @@ The operation processes of MySQL and DM are:
         ]
     }
     ```
+    
 4. Due to the application demand, the `DM-worker-2` data in `MySQL-2` is no longer needed to be synchronized to the downstream TiDB, and `DM-worker-2` is made offline.
 5. The lock whose ID is ``` test-`shard_db`.`shard_table` ``` on `DM-master` cannot receive the DDL information of `DM-worker-2`.
+
     - The returned result `unsynced` by `show-ddl-locks` has always included the information of `DM-worker-2` (`127.0.0.1:8263`).
 6. Use `unlock-dll-lock` to ask `DM-master` to actively unlock the DDL lock.
     - If the owner of the DDL lock has gone offline, you can use the parameter `--owner` to specify another DM-worker as the new owner to execute the DDL.
     - If any DM-worker reports an error, `result` will be set to `false`, and at this point you should check carefully if the errors of each DM-worker is acceptable and within expectations.
     - DM-workers that have gone offline will return the error `rpc error: code = Unavailable`, which is within expectations and can be neglected; but if other online DM-workers return errors, then you should deal with them based on the scenario.
-    ```bash
-    » unlock-ddl-lock test-`shard_db`.`shard_table`
-    {
-        "result": false,
-        "msg": "github.com/pingcap/tidb-enterprise-tools/dm/master/server.go:1472: DDL lock test-`shard_db`.`shard_table` owner ExecuteDDL successfully, so DDL lock removed. but some dm-workers ExecuteDDL fail, you should to handle dm-worker directly",
-        "workers": [
-            {
-                "result": true,
-                "worker": "127.0.0.1:8262",
-                "msg": ""
-            },
-            {
-                "result": false,
-                "worker": "127.0.0.1:8263",
-                "msg": "rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = \"transport: Error while dialing dial tcp 127.0.0.1:8263: connect: connection refused\""
-            }
-        ]
-    }
-    ```
+    
+        ```bash
+        » unlock-ddl-lock test-`shard_db`.`shard_table`
+        {
+            "result": false,
+            "msg": "github.com/pingcap/tidb-enterprise-tools/dm/master/server.go:1472: DDL lock test-`shard_db`.`shard_table` owner ExecuteDDL successfully, so DDL lock removed. but some dm-workers ExecuteDDL fail, you should to handle dm-worker directly",
+            "workers": [
+                {
+                    "result": true,
+                    "worker": "127.0.0.1:8262",
+                    "msg": ""
+                },
+                {
+                    "result": false,
+                    "worker": "127.0.0.1:8263",
+                    "msg": "rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = \"transport: Error while dialing dial tcp 127.0.0.1:8263: connect: connection refused\""
+                }
+            ]
+        }
+        ```
+    
 7. Use `show-dd-locks` to confirm if the DDL lock is unlocked successfully.
+    
     ```bash
     » show-ddl-locks test
     {
@@ -230,7 +239,9 @@ The operation processes of MySQL and DM are:
         ]
     }
     ```
-8. Check if the table structure is altered successfully in the downstream TiDB.
+    
+8. Check whether the table structure is altered successfully in the downstream TiDB.
+    
     ```sql
     mysql> SHOW CREATE TABLE shard_db.shard_table;
     +-------------+--------------------------------------------------+
@@ -243,9 +254,10 @@ The operation processes of MySQL and DM are:
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin |
     +-------------+--------------------------------------------------+
     ```
+    
 9. Use `query-status` to confirm if the synchronization task is normal.
 
-##### Impact
+#### Impact
 
 After you have manually unlocked the lock by using `unlock-ddl-lock`, if you don't deal with the offline DM-workers included in the task configuration information, the lock might still be unable to be synchronized automatically when the next sharding DDL event is received.
 
@@ -255,12 +267,11 @@ Therefore, after you have manually unlocked the DDL lock, you should perform the
 2. Update the task configuration file, and remove the related information of the offline DM-worker from the configuration file.
 3. Use `start-task` and the new task configuration file to restart the task.
 
-> **Note:** 
-> After you run `unlock-ddl-lock`, if the DM-worker that went offline becomes online again and tries to synchronize the data of the sharded tables, a match error between the data and the downstream table structure might occur.
+> **Note:** After you run `unlock-ddl-lock`, if the DM-worker that went offline becomes online again and tries to synchronize the data of the sharded tables, a match error between the data and the downstream table structure might occur.
 
-#### Some DM-workers restart during the DDL unlocking process
+### Scenario 2: Some DM-workers restart during the DDL unlocking process
 
-##### The reason for the abnormal lock
+#### The reason for the abnormal lock
 
 After `DM-master` receives the DDL events of all DM-workers, automatically running `unlock DDL lock` mainly include the following steps:
 
@@ -272,7 +283,7 @@ Currently, the above unlocking process is not atomic. Therefore, after the owner
 
 At this point, the lock information on `DM-master` has been removed and the restarted DM-worker will continue to synchronize the DDL, but as other DM-workers (including the previous owner) has synchronized the DDL and continued the synchronization process, this DM-worker will never see the DDL lock be unlocked automatically. 
 
-##### Manual solution
+#### Manual solution
 
 Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and synchronization as in the manual solution of [Some DM-workers go offline](#Some-DM-workers-go-offline).
 
@@ -283,7 +294,9 @@ After `DM-worker-2` restarts, it will try to synchronize the waiting DDL lock be
 The operation processes are:
 
 1. Use `show-ddl-locks` to confirm if the corresponding lock of the DDL exists on `DM-master`. 
-    - Only the restarted DM-worker (`127.0.0.1:8263`) is at the `synced` state. 
+    
+    Only the restarted DM-worker (`127.0.0.1:8263`) is at the `synced` state. 
+    
     ```bash
     » show-ddl-locks
     {
@@ -307,39 +320,43 @@ The operation processes are:
         ]
     }
     ```
+        
 2. Use `unlock-ddl-lock` to ask `DM-master` to unlock the lock.
+    
     - Use the parameter `--worker` to limit the operation to only target at the restarted DM-worker (`127.0.0.1:8263`). 
     - The DM-worker will try to execute the DDL to the downstream again during the unlocking process (the owner before restarting has executed the DDL to the downstream), so as to make sure that the DDL can be executed multiple times.
-    ```bash
-    » unlock-ddl-lock --worker=127.0.0.1:8263 test-`shard_db`.`shard_table`
-    {
-        "result": true,
-        "msg": "",
-        "workers": [
-            {
-                "result": true,
-                "worker": "127.0.0.1:8263",
-                "msg": ""
-            }
-        ]
-    }
-    ```
+    
+        ```bash
+        » unlock-ddl-lock --worker=127.0.0.1:8263 test-`shard_db`.`shard_table`
+        {
+            "result": true,
+            "msg": "",
+            "workers": [
+                {
+                    "result": true,
+                    "worker": "127.0.0.1:8263",
+                    "msg": ""
+                }
+            ]
+        }
+        ```
+        
 3. Use `show-ddl-locks` to confirm if the DDL lock has been successfully unlocked.
 4. Use `query-status` to confirm if the synchronization task is normal.
 
-##### Impact 
+#### Impact 
 
 After manually unlocking the lock, the following sharding DDL can be synchronized automatically and normally.
 
-#### Some DM-workers are temporarily unreachable during the DDL unlocking process
+### Scenario 3: Some DM-workers are temporarily unreachable during the DDL unlocking process
 
-##### The reason for the abnormal lock
+#### The reason for the abnormal lock
 
 It has the similar reason for the abnormal lock in [Some DM-workers restart during the DDL unlocking process](#Some-DM-workers-restart-during-the-DDL-unlocking-process). If the DM-worker is temporarily unreachable when you ask the DM-worker to skip the DDL, this DM-worker might fail to skip the DDL.
 
 At this point, the lock information is removed from `DM-master`, but the DM-worker will continue to be waiting for a DDL lock which is no longer existing.
 
-##### Manual solution
+#### Manual solution
 
 Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and synchronization as in the manual solution of [Some DM-workers go offline](#Some-DM-workers-go-offline).
 
@@ -349,6 +366,7 @@ The operation processes are:
 
 1. Use `show-ddl-locks` to confirm if the corresponding lock of the DDL no longer exists on `DM-master`. 
 2. Use `query-status` to confirm if the DM-worker is still waiting for the lock to synchronize.
+    
     ```bash
     » query-status test
     {
@@ -392,8 +410,11 @@ The operation processes are:
         ]
     }
     ```
+    
 3. Use `break-ddl-lock` to compulsorily break the DDL lock which the DM-worker is waiting for.
-    - As the owner has executed the DDL to the downstream, you should use the parameter `--skip` to break the lock.
+    
+    As the owner has executed the DDL to the downstream, you should use the parameter `--skip` to break the lock.
+    
     ```bash
     » break-ddl-lock --worker=127.0.0.1:8263 --skip test
     {
@@ -410,6 +431,6 @@ The operation processes are:
     ```
 4. Use `query-status` to confirm if the synchronization task is normal and no longer at the state of waiting for the lock. 
 
-##### Impact 
+#### Impact 
 
 After manually breaking the lock, the following sharding DDL can be synchronized automatically and normally.
