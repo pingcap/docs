@@ -11,7 +11,7 @@ DM uses the sharding DDL lock to ensure operations are performed in the correct 
 > **Warning:**
 >
 >- Do not use `unlock-ddl-lock` or `break-ddl-lock` unless you are totally aware of the possible impacts brought by the command and you can accept them.
->- Before manually handling the abnormal DDL locks, make sure that you have already read the DM [shard merge principles](../tools/shard-merge.md#Principles).
+>- Before manually handling the abnormal DDL locks, make sure that you have already read the DM [shard merge principles](../../tools/dm/shard-merge.md#principles).
 
 ## Command
 
@@ -106,7 +106,7 @@ break-ddl-lock <--worker=127.0.0.1:8262> [--remove-id] [--exec] [--skip] <task-n
 - `remove-id`: flag; string; `--remove-id`; optional; if being specified, it should be the ID of some DDL lock; if not being specified, remove the corresponding DDL lock information only when the breaking operation succeeds; if being specified, compulsorily remove the DDL lock information 
 - `exec`: flag; boolean; `--exec`; optional; cannot be specified simultaneously with the `--skip` parameter; if being specified, ask the DM-worker to execute the corresponding DDL of the lock 
 - `skip`: flag; boolean; `--skip`; optional; cannot be specified simultaneously with the `--exec` parameter; if being specified, ask the DM-worker to skip the corresponding DDL of the lock 
-- `task-name`: non-flag; string; required; specify the name of the task containing the lock that is going to execute the breaking operation (you can check if a task contains the lock via [query-status](../tools/dm-query-status.md))
+- `task-name`: non-flag; string; required; specify the name of the task containing the lock that is going to execute the breaking operation (you can check if a task contains the lock via [query-status](../../tools/dm/query-status.md))
 
 #### Example of results
 
@@ -133,7 +133,7 @@ Currently, the `unlock-ddl-lock` or `break-ddl-lock` command only supports handl
 
 #### The reason for the abnormal lock
 
-Before `DM-master` tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL events (for details, see [shard merge principles](../tools/shard-merge.md#Principles)). If the sharding DDL event is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted (these DM-workers have been removed according to the application demand), then the sharding DDL lock cannot be automatically synchronized and unlocked because not all the DM-workers can receive the DDL event.
+Before `DM-master` tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL events (for details, see [shard merge principles](../../tools/dm/shard-merge.md#principles)). If the sharding DDL event is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted (these DM-workers have been removed according to the application demand), then the sharding DDL lock cannot be automatically synchronized and unlocked because not all the DM-workers can receive the DDL event.
 
 > **Note:** If you need to make some DM-workers offline when not in the process of synchronizing sharding DDL events, a better solution is to use `stop-task` to stop the running tasks first, make the DM-workers go offline, remove the corresponding configuration information from the task configuration file, and finally use `start-task` and the new task configuration to restart the synchronization task. 
 
@@ -285,7 +285,7 @@ At this point, the lock information on `DM-master` has been removed and the rest
 
 #### Manual solution
 
-Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and synchronization as in the manual solution of [Some DM-workers go offline](#Some-DM-workers-go-offline).
+Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and synchronization as in the manual solution of [Some DM-workers go offline](#scenario-1-some-dm-workers-go-offline).
 
 When `DM-master` automatically executes the unlocking process, the owner (`DM-worker-1`) successfully executes the DDL and continues the synchronization process, and the DDL lock information has been removed from `DM-master`. But at this point, if `DM-worker-2` restarts during the period of asking `DM-worker-2` to skip the DDL, then the skipping process might fail. 
 
@@ -352,13 +352,13 @@ After manually unlocking the lock, the following sharding DDL can be synchronize
 
 #### The reason for the abnormal lock
 
-It has the similar reason for the abnormal lock in [Some DM-workers restart during the DDL unlocking process](#Some-DM-workers-restart-during-the-DDL-unlocking-process). If the DM-worker is temporarily unreachable when you ask the DM-worker to skip the DDL, this DM-worker might fail to skip the DDL.
+It has the similar reason for the abnormal lock in [Some DM-workers restart during the DDL unlocking process](#scenario-2-some-dm-workers-restart-during-the-ddl-unlocking-process). If the DM-worker is temporarily unreachable when you ask the DM-worker to skip the DDL, this DM-worker might fail to skip the DDL.
 
 At this point, the lock information is removed from `DM-master`, but the DM-worker will continue to be waiting for a DDL lock which is no longer existing.
 
 #### Manual solution
 
-Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and synchronization as in the manual solution of [Some DM-workers go offline](#Some-DM-workers-go-offline).
+Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and synchronization as in the manual solution of [Some DM-workers go offline](#scenario-1-some-dm-workers-go-offline).
 
 When `DM-master` automatically executes the unlocking operation, the owner (`DM-worker-1`) successfully executes the DDL and continues the synchronization process, and the DDL lock information has been removed from `DM-master`. But at this point, if `DM-worker-2` is temporarily unreachable due to the Internet failure during the period of asking `DM-worker-2` to skip the DDL, then the skipping process might fail. 
 
