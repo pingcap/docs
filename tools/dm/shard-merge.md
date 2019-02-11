@@ -16,8 +16,8 @@ DM has the following sharding DDL usage restrictions:
 
 - In a logical **sharding group** (composed of all sharded tables that need to be merged and replicated into one same downstream table), the same DDL statements must be executed in the same order in all upstream sharded tables (the schema name and the table name can be different), and the next DDL statement cannot be executed unless the current DDL operation is completely finished.
     - For example, if you add `column A` to `table_1` before you add `column B`, then you cannot add `column B` to `table_2` before you add `column A`. Executing the DDL statements in a different order is not supported.
-- If multiple sharding groups exist in a task, you cannot start to execute the DDL statements in other sharding groups until the DDL statements in one sharding group has been replicated successfully.
-    - For each sharding group, it is recommended to use one independent task to perform the replication.
+- For each sharding group, it is recommended to use one independent task to perform the replication.
+    - If multiple sharding groups exist in a task, you cannot start to execute the DDL statements in other sharding groups until the DDL statements in one sharding group has been replicated successfully.
 - In a sharding group, the corresponding DDL statements should be executed in all upstream sharded tables.
     - For example, if DDL statements are not executed on one or more upstream sharded tables corresponding to `DM-worker-2`, then other DM-workers that have executed the DDL statements will pause their synchronization task and wait for `DM-worker-2` to receive the upstream DDL statements.
 - The sharding group replication task does not support `DROP DATABASE/DROP TABLE`.
