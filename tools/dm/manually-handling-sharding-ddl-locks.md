@@ -229,7 +229,7 @@ The operation processes of MySQL and DM are as follows:
         }
         ```
     
-7. Use `show-dd-locks` to confirm if the DDL lock is unlocked successfully.
+7. Use `show-ddl-locks` to confirm if the DDL lock is unlocked successfully.
     
     ```bash
     » show-ddl-locks test
@@ -353,9 +353,9 @@ After manually unlocking the lock, the following sharding DDL can be synchronize
 
 #### The reason for the abnormal lock
 
-It has the similar reason for the abnormal lock in [Some DM-workers restart during the DDL unlocking process](#scenario-2-some-dm-workers-restart-during-the-ddl-unlocking-process). If the DM-worker is temporarily unreachable when you ask the DM-worker to skip the DDL, this DM-worker might fail to skip the DDL.
+This scenario has the similar reason for the abnormal lock in [Scenario 3: Some DM-workers restart during the DDL unlocking process](#scenario-2-some-dm-workers-restart-during-the-ddl-unlocking-process). If the DM-worker is temporarily unreachable when you request the DM-worker to skip the DDL statement, this DM-worker might fail to skip the DDL statement. At this point, the lock information is removed from `DM-master`, but the DM-worker will continue to be waiting for a DDL lock which is no longer existing.
 
-At this point, the lock information is removed from `DM-master`, but the DM-worker will continue to be waiting for a DDL lock which is no longer existing.
+The difference between Scenario 3 and [Scenario 2: Some DM-workers restart during the DDL unlocking process](#scenario-2-some-dm-workers-restart-during-the-ddl-unlocking-process) is that the DM-master does not have a lock in Scenario 3, but the DM-master has a new lock in Scenario 2.
 
 #### Manual solution
 
