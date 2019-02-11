@@ -97,3 +97,45 @@ USE db_name
 ```
 
 The `USE` statement is used to switch the default database. If the table in SQL statements does not display the specified database, then use the default database.
+
+## `TRACE` statement
+
+```sql
+TRACE [FORMAT = format_name] traceable_stmt
+
+format_name:
+    "json" | "row"
+
+traceable_stmt: {
+    SELECT statement
+  | DELETE statement
+  | INSERT statement
+  | REPLACE statement
+  | UPDATE statement
+}
+```
+
+```sql
+mysql> trace format = 'row' select * from mysql.user;
++---------------------------|-----------------|------------+
+| operation                 | startTS         | duration   |
++---------------------------|-----------------|------------+
+| session.getTxnFuture      | 19:54:35.310841 | 4.255µs    |
+|   ├─session.Execute       | 19:54:35.310837 | 928.349µs  |
+|   ├─session.ParseSQL      | 19:54:35.310906 | 35.379µs   |
+|   ├─executor.Compile      | 19:54:35.310972 | 420.688µs  |
+|   ├─session.runStmt       | 19:54:35.311427 | 222.431µs  |
+|   ├─session.CommitTxn     | 19:54:35.311601 | 14.696µs   |
+|   ├─recordSet.Next        | 19:54:35.311828 | 419.797µs  |
+|   ├─tableReader.Next      | 19:54:35.311834 | 379.932µs  |
+|   ├─recordSet.Next        | 19:54:35.312310 | 26.831µs   |
+|   └─tableReader.Next      | 19:54:35.312314 | 2.84µs     |
++---------------------------|-----------------|------------+
+10 rows in set (0.00 sec)
+```
+
+When the `format` is `json`, the output is some `json` text. If the text is too long, they are split into multiple lines.
+
+The `json` output can be viewed in the Web UI which is integrated in TiDB, here is an demo:
+
+![](https://user-images.githubusercontent.com/1420062/48955365-8b82dc80-ef88-11e8-9ecb-22d0bcf565c3.gif)
