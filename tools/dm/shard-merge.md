@@ -14,24 +14,23 @@ This document introduces the sharding support feature provided by Data Migration
 
 DM has the following sharding DDL usage restrictions:
 
-- In a logical **sharding group** (composed of all sharded tables that need to be merged and replicated into one same downstream table), the same DDL statements must be executed in the same order in all upstream sharded tables (the schema name and the table name can be different).
+- In a logical **sharding group** (composed of all sharded tables that need to be merged and replicated into one same downstream table), the same DDL statements must be executed in the same order in all upstream sharded tables (the schema name and the table name can be different), and the next DDL statement cannot be executed unless the current DDL operation is completely finished.
     - For example, if you add `column A` to `table_1` before you add `column B`, then you cannot add `column B` to `table_2` before you add `column A`. Executing the DDL statements in a different order is not supported.
 - If multiple sharding groups exist in a task, you cannot start to execute the DDL statements in other sharding groups until the DDL statements in one sharding group has been replicated successfully.
     - For each sharding group, it is recommended to use one independent task to perform the replication.
 - In a sharding group, the corresponding DDL statements should be executed in all upstream sharded tables.
     - For example, if DDL statements are not executed on one or more upstream sharded tables corresponding to `DM-worker-2`, then other DM-workers that have executed the DDL statements will pause their synchronization task and wait for `DM-worker-2` to receive the upstream DDL statements.
-- In a sharding group, the next DDL statement cannot be executed unless the current DDL operation is completely finished.
 - The sharding group replication task does not support `DROP DATABASE/DROP TABLE`.
     - The Syncer unit in DM-worker automatically ignores the `DROP DATABASE/DROP TABLE` statement of upstream sharded tables.
 - The sharding group replication task supports `RENAME TABLE`, but with the following limitations:
-    - A table can only be renamed to a new name that is not used by any other table.
-    - A single `RENAME TABLE` statement can only involve a single `RENAME` operation. (Online DDL is supported in another solution)
+    - A table can only be renamed to a new name that is not used by any other table. (Online DDL is supported in another solution)
+    - A single `RENAME TABLE` statement can only involve a single `RENAME` operation.
 - The table schema of each sharded table must be the same at the starting point of the incremental replication task, so as to make sure the DML statements of different sharded tables can be replicated into the downstream with a definite table schema, and the subsequent sharding DDL statements can be correctly matched and replicated.
 - If you need to change the [table routing](../../tools/dm/data-synchronization-features.md#table-routing) rule, you have to wait for the replication of all sharding DDL statements to complete.
     - During the replication of sharding DDL statements, an error is reported if you use `dmctl` to change `router-rules`.
 - If you need to `CREATE` a new table to a sharding group where DDL statements are being executed, you have to make sure that the table schema is the same as the newly modified table schema.
     - For example, the original `table_1` and `table_2` has two columns (a, b) initially, and has three columns (a, b, c) after the sharding DDL operation, so after the replication the newly created table should also have three columns (a, b, c).
-- Because the DM-worker that has received the DDL statements will pause the task to wait for other DM-workers to receive their DDL statements, the data replication will be increased.
+- Because the DM-worker that has received the DDL statements will pause the task to wait for other DM-workers to receive their DDL statements, the delay of data replication will be increased.
 
 ### Background
 
@@ -85,7 +84,7 @@ Assume that there are two sharded tables, namely `table_1` and `table_2`, to be 
 
 ![shard-ddl-example-2](../../media/shard-ddl-example-2.png)
 
-Because data comes from the same MySQL instance, all the data is obtained from the same binlog flow. In this case, the time sequence is as follows:
+Because data comes from the same MySQL instance, all the data is obtained from the same binlog stream. In this case, the time sequence is as follows:
 
 1. The Syncer unit in DM-worker receives the DML of `schema V1` from both sharded tables when the replication begins.
 2. At `t1`, the Syncer unit in DM-worker receives the DDL statements of `table_1`.
