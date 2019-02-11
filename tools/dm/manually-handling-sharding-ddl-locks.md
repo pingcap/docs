@@ -206,8 +206,9 @@ The operation processes of MySQL and DM are as follows:
 6. Use `unlock-dll-lock` to ask `DM-master` to actively unlock the DDL lock.
     - If the owner of the DDL lock has gone offline, you can use the parameter `--owner` to specify another DM-worker as the new owner to execute the DDL.
     - If any DM-worker reports an error, `result` will be set to `false`, and at this point you should check carefully if the errors of each DM-worker is acceptable and within expectations.
+
         - DM-workers that have gone offline will return the error `rpc error: code = Unavailable`, which is within expectations and can be neglected; but if other online DM-workers return errors, then you should deal with them based on the scenario.
-    
+
         ```bash
         » unlock-ddl-lock test-`shard_db`.`shard_table`
         {
