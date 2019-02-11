@@ -28,9 +28,9 @@ This document defines the roadmap for TiDB development.
 + [ ] SQL Features
     - [ ] Support Views
     - [ ] Support Window Functions
-    - [ ] Support Common Table Expression
-    - [ ] Support Hash Partitioned Table
-    - [ ] Support utf8_general_ci Collation
+    - [ ] Support Common Table Expressions
+    - [ ] Support Hash Partitioned Tables
+    - [ ] Support the utf8mb4_0900_ai_ci Collation
 + [ ] Improve DDL
     - [ ] Support Table Lock
     - [ ] Support Change Column Type
