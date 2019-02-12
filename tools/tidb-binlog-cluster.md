@@ -177,6 +177,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
     ```bash
     $ cd /home/tidb/tidb-ansible
     $ resources/bin/binlogctl -pd-urls=http://172.16.10.72:2379 -cmd pumps
+    
     INFO[0000] pump: {NodeID: ip-172-16-10-72:8250, Addr: 172.16.10.72:8250, State: online, MaxCommitTS: 403051525690884099, UpdateTime: 2018-12-25 14:23:37 +0800 CST}
     INFO[0000] pump: {NodeID: ip-172-16-10-73:8250, Addr: 172.16.10.73:8250, State: online, MaxCommitTS: 403051525703991299, UpdateTime: 2018-12-25 14:23:36 +0800 CST}
     INFO[0000] pump: {NodeID: ip-172-16-10-74:8250, Addr: 172.16.10.74:8250, State: online, MaxCommitTS: 403051525717360643, UpdateTime: 2018-12-25 14:23:35 +0800 CST}
@@ -615,7 +616,7 @@ Command example:
 
 - Check the state of all the Pumps or Drainers:
 
-    Set `cmd` as `pumps` or `drainers` to check the state of all the Pumps or Drainers. For example:
+    Set `cmd` as `pumps` or `drainers` to check the state of all the Pumps or Drainers. For example,
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pumps
@@ -625,7 +626,7 @@ Command example:
 
 - Modify the Pump/Drainer state:
 
-    Set `cmd` as `update-pump` or `update-drainer` to modify the Pump/Drainer state. The Pump/Drainer states include `online`, `pausing`, `paused`, `closing` and `offline`. 
+    Set `cmd` as `update-pump` or `update-drainer` to modify the state of Pump or Drainer, which can be `online`, `pausing`, `paused`, `closing` or `offline`. 
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd update-pump -node-id ip-127-0-0-1:8250 -state paused
@@ -635,7 +636,8 @@ Command example:
 
 - Pause or close Pump/Drainer:
 
-    Set `cmd` as `pause-pump`, `pause-drainer`, `offline-pump`, `offline-drainer` respectively to pause or close Pump/Drainer. For example: 
+    Set `cmd` as `pause-pump` or `pause-drainer` to pause Pump or Drainer. 
+    Set `cmd` as `offline-pump` or `offline-drainer` to close Pump or Drainer. For example, 
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-pump -node-id ip-127-0-0-1:8250
