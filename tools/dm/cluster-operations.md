@@ -60,7 +60,7 @@ For the binlog during incremental data import, DM uses the downstream database t
 
         At this time, DM tries again to synchronize these DDL statements that are not skipped. However, the restarted DM-worker instances will be blocked at the position of the binlog event corresponding to the DDL binlog event, because the DM-worker instance that is not restarted has executed to the place after this DDL binlog event.
 
-        To resolve this issue, follow the steps described in [Troubleshooting Sharding DDL Locks](/tools/dm/troubleshooting-sharding-ddl-locks.md#condition-two-a-dm-worker-restarts-or-is-unreachable-temporarily)
+        To resolve this issue, follow the steps described in [Handle Sharding DDL Locks Manually](/tools/dm/manually-handling-sharding-ddl-locks.md#scenario-2-some-dm-workers-restart-during-the-ddl-unlocking-process).
 
 #### Restarting DM-master considerations
 
@@ -71,7 +71,7 @@ The information maintained by DM-master includes the following two major types, 
 
 When DM-master is restarted, it automatically requests the task information from each DM-worker instance and rebuilds the corresponding relationship between the task and DM-worker. However, at this time, DM-worker does not resend the sharding DDL information, so it might occur that the sharding DDL lock synchronization cannot be finished automatically because of the lost lock information.
 
-To resolve this issue, follow the steps described in [Troubleshooting Sharding DDL Locks](/tools/dm/troubleshooting-sharding-ddl-locks.md#condition-three-dm-master-restarts).
+To resolve this issue, follow the steps described in [Handle Sharding DDL Locks Manually](/tools/dm/manually-handling-sharding-ddl-locks.md#scenario-3-some-dm-workers-are-temporarily-unreachable-during-the-ddl-unlocking-process).
 
 #### Restarting dmctl considerations
 
