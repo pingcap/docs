@@ -636,8 +636,11 @@ Command example:
 
 - Pause or close Pump/Drainer:
 
-    Set `cmd` as `pause-pump` or `pause-drainer` to pause Pump or Drainer. 
-    Set `cmd` as `offline-pump` or `offline-drainer` to close Pump or Drainer. For example, 
+    - Set `cmd` as `pause-pump` or `pause-drainer` to pause Pump or Drainer. 
+
+    - Set `cmd` as `offline-pump` or `offline-drainer` to close Pump or Drainer. 
+    
+    For example, 
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-pump -node-id ip-127-0-0-1:8250
