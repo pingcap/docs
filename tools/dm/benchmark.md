@@ -54,7 +54,7 @@ Hardware information:
 | 192.168.0.8  | DM-worker \* 1 |
 | 192.168.0.7  | DM-master \* 1 |
 
-### version information
+### Version information
 
 - MySQL version: 5.7.25-log
 
