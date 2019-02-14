@@ -91,7 +91,7 @@ CREATE TABLE `sbtest` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### The deployment and configuration details:
+### The deployment and configuration details
 
 ```
 // TiKV configuration
