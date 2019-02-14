@@ -8,7 +8,7 @@ category: tools
 
 ## Test purpose
 
-The purpose of this test is to test the performance for DM incremental synchronization
+The purpose of this test is to test the performance of DM incremental synchronization
 
 > **Note**: The results of the testing might vary based on different environmental dependencies.
 
@@ -40,19 +40,12 @@ Hardware information:
 
 | Machine IP   | Deployment Instance |
 |--------------|------------|
-| 192.168.0.9  | TiDB \* 1  |
-| 192.168.0.9  | TiKV \* 1  |
+| 192.168.0.9  | TiKV \* 1, TiDB \* 1  |
 | 192.168.0.10 | TiKV \* 1  |
 | 192.168.0.11 | TiKV \* 1  |
-| 192.168.0.6  | PD \* 1    |
-| 192.168.0.7  | PD \* 1    |
-| 192.168.0.8  | PD \* 1    |
-| 192.168.0.6  | MySQL \* 1 |
-| 192.168.0.8  | MySQL \* 1 |
-| 192.168.0.6  | DM-worker \* 1 |
-| 192.168.0.8  | DM-worker \* 1 |
-| 192.168.0.8  | DM-worker \* 1 |
-| 192.168.0.7  | DM-master \* 1 |
+| 192.168.0.6  | PD \* 1, MySQL \* 1, DM-worker \* 1  |
+| 192.168.0.8  | PD \* 1, MySQL \* 1, DM-worker \* 1  |
+| 192.168.0.7  | PD \* 1, DM-master \* 1  |
 
 ### Version information
 
@@ -73,8 +66,8 @@ MySQL1 (192.168.0.8) -> DM-worker1 (192.168.0.6) -> TiDB (192.168.0.9)
 ### Test procedure
 
 - setup environment
-- start DM-task in `all` mode
 - use sysbench to create talbe and generate initial data in upstream MySQL
+- start DM-task in `all` mode
 - use sysbench to generate incremental data in upstream MySQL
 
 ### Use sysbench to generate data load in upstream MySQL
