@@ -67,7 +67,7 @@ MySQL1 (192.168.0.8) -> DM-worker1 (192.168.0.6) -> TiDB (192.168.0.9)
 
 - Set up environment
 - Use sysbench to create the table and generate the initial data in upstream MySQL
-- start DM-task in `all` mode
+- Start DM-task in the `all` mode
 - use sysbench to generate incremental data in upstream MySQL
 
 ### Use sysbench to generate data load in upstream MySQL
