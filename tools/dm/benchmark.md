@@ -118,7 +118,7 @@ syncer:
 | DM    | 256     | 13.89k                                    | 13.89k | 210 (txn execution latency) |
 | TiDB  | -       | 18.53k (Begin/Commit 2.4k Replace 13.80k) | 2.27k  | 29                          |
 
-### Monitor screenshot
+### Monitor screenshots
 
 ### DM key indicator monitor
 
