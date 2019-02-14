@@ -1,7 +1,7 @@
 ---
 title: DM Benchmark Report
 summary: DM benchmark report
-category: benchmark
+category: tools
 ---
 
 # DM Benchmark Report
