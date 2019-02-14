@@ -38,7 +38,7 @@ Hardware information:
 
 ### Cluster topology
 
-| Machine IP   | Deployment Instance |
+| Machine IP   | Deployment instance |
 |--------------|------------|
 | 192.168.0.9  | TiKV \* 1, TiDB \* 1  |
 | 192.168.0.10 | TiKV \* 1  |
