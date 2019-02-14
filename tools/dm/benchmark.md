@@ -8,7 +8,7 @@ category: tools
 
 ## Test purpose
 
-The purpose of this test is to test the performance of DM incremental synchronization
+The purpose of this test is to test the performance of DM incremental replication.
 
 > **Note**: The results of the testing might vary based on different environmental dependencies.
 
