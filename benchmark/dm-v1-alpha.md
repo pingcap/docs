@@ -124,9 +124,9 @@ syncer:
 
 #### DM key indicator monitor
 
-![](../../media/dm-benchmark-01.png)
+![](../media/dm-benchmark-01.png)
 
 #### TiDB key indicator monitor
 
-![](../../media/dm-benchmark-02.png)
-![](../../media/dm-benchmark-03.png)
+![](../media/dm-benchmark-02.png)
+![](../media/dm-benchmark-03.png)
