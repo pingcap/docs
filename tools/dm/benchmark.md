@@ -57,7 +57,7 @@ Hardware information:
 
 - Sysbench version: 1.0.9
 
-## Test Scenario
+## Test scenario
 
 ### Data flow
 
