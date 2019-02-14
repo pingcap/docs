@@ -146,7 +146,6 @@
     - [Manage the Task](tools/dm/manage-task.md)
     - [Cluster Operations](tools/dm/cluster-operations.md)
     - [Troubleshoot](tools/dm/troubleshooting.md)
-    - [Benchmark](tools/dm/benchmark.md)
   + TiDB-Lightning
     - [Overview](tools/lightning/overview-architecture.md)
     - [Deployment](tools/lightning/deployment.md)

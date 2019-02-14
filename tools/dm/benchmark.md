@@ -6,6 +6,8 @@ category: tools
 
 # DM Benchmark Report
 
+This DM benchmark report describes the test purpose, environment, scenario, and result.
+
 ## Test purpose
 
 The purpose of this test is to test the performance of DM incremental replication.
