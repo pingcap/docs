@@ -120,7 +120,7 @@ syncer:
 
 ### Monitor screenshots
 
-### DM key indicator monitor
+#### DM key indicator monitor
 
 ![](../../media/dm-benchmark-01.png)
 
