@@ -147,16 +147,19 @@ The `config.toml` file for `syncer`:
 
 ```toml
 log-level = "info"
+log-file = "syncer.log"
+log-rotate = "day"
 
 server-id = 101
 
 # The file path for meta:
 meta = "./syncer.meta"
 worker-count = 16
-batch = 10
+batch = 1000
+flavor = "mysql"
 
-# The testing address for pprof. It can also be used by Prometheus to pull the syncer metrics.
-status-addr = ":10081"
+# The testing address for pprof. It can also be used by Prometheus to pull Syncer metrics.
+status-addr = ":8271"
 
 skip-sqls = ["ALTER USER", "CREATE USER"]
 

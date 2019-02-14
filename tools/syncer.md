@@ -58,49 +58,63 @@ binlog-gtid = "2bfabd22-fff7-11e6-97f7-f02fa73bcb01:1-23,61ccbb5d-c82d-11e6-ac2e
 Description of Syncer command line options:
 
 ```
-Usage of Syncer:
+Usage of syncer:
   -L string
-      log level: debug, info, warn, error, fatal (default "info")
-  -V
-      to print Syncer version info (default false)
-  -auto-fix-gtid
-      to automatically fix the gtid info when MySQL master and slave switches (default false)
+        log level: debug, info, warn, error, fatal (default "info")
+  -V    to print Syncer version info (default false)
   -b int
-      the size of batch transactions (default 10)
+        the size of batch transactions (default 10)
   -c int
-      the number of batch threads that Syncer processes (default 16)
+        the number of batch threads that Syncer processes (default 16)
   -config string
-      to specify the corresponding configuration file when starting Syncer; for example, `--config config.toml`
+        path to config file
+  -enable-ansi-quotes
+        to specify the corresponding configuration file when starting Syncer; for example, `--config config.toml`
   -enable-gtid
-      to start Syncer using the mode; default false; before enabling this option, you need to enable GTID in the upstream MySQL
+        to start Syncer using the mode; default false; before enabling this option, you need to enable GTID in the upstream MySQL
+  -flavor string
+        use flavor for different MySQL source versions; support "mysql", "mariadb" now; if you replicate from mariadb, please set it to "mariadb" (default "mysql")
   -log-file string
-      to specify the log file directory, such as `--log-file ./syncer.log`
+        to specify the log file directory, such as `--log-file ./syncer.log`
   -log-rotate string
-      to specify the log file rotating cycle, hour/day (default "day")
+        to specify the log file rotating cycle, hour/day (default "day")
+  -max-retry int
+        to specify maxinum retry when network interruption (default 100)
   -meta string
-      to specify the meta file of Syncer upstream (in the same directory with the configuration file by default "syncer.meta")
+        to specify the meta file of Syncer upstream (in the same directory with the configuration file by default "syncer.meta")
+  -persistent-dir string
+        to specify  syncer history table structures persistent dir; set to non-empty string will choosing history table structure according to column length when constructing DML
+  -safe-mode
+        to specify enable safe mode to make syncer reentrant
   -server-id int
-      to specify MySQL slave sever-id (default 101)
+        to specify MySQL slave sever-id (default 101)
   -status-addr string
-      to specify Syncer metrics, such as `--status-addr 127:0.0.1:10088`
+        to specify Syncer metrics (default :8271), such as `--status-addr 127:0.0.1:8271`
 ```
 
 The `config.toml` configuration file of Syncer:
 
 ```toml
 log-level = "info"
+log-file = "syncer.log"
+log-rotate = "day"
 
 server-id = 101
 
 # The file path for meta:
 meta = "./syncer.meta"
-
 worker-count = 16
-batch = 10
+batch = 1000
+flavor = "mysql"
 
 # The testing address for pprof. It can also be used by Prometheus to pull Syncer metrics.
-# Change "127.0.0.1" to the IP address of the corresponding host
-status-addr = "127.0.0.1:10086"
+status-addr = ":8271"
+
+# If set true, syncer will stop and exit on ddl.
+stop-on-ddl = false
+
+# max-retry is used for retry when network interruption.
+max-retry = 100
 
 # Note: skip-sqls is abandoned, and use skip-ddls instead.
 # skip-ddls skips the DDL statements that are incompatible with TiDB, and supports regular expressions.
@@ -490,35 +504,40 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 
 #### title: binlog events
 
-- metrics: `irate(syncer_binlog_events_total[1m])`
-- info: the master binlog statistics that has been synchronized by Syncer, including the five major types of `query`, `rotate`, `update_rows`, `write_rows` and `delete_rows`
+- metrics: `rate(syncer_binlog_event_count[1m])`
+- info: QPS of the binlog event that has been recieved by Syncer
 
-#### title: syncer_binlog_file
+#### title: binlog event transform
 
-- metrics: `syncer_binlog_file`
-- info: the number of master binlog files synchronized by Syncer
+- metrics: `histogram_quantile(0.8, sum(rate(syncer_binlog_event_bucket[1m])) by (le))`
+- info: the cost of transforming binlog event to SQLs by Syncer
 
-#### title: binlog pos
+#### title: transaction latency
 
-- metrics: `syncer_binlog_pos`
-- info: the binlog-pos information that Syncer synchronizes the current master binlog
+- metrics: `histogram_quantile(0.95, sum(rate(syncer_txn_cost_in_second_bucket[1m])) by (le))`
+- info: the cost of executing a transaction on TiDB
 
-#### title: syncer_gtid
+#### title: transaction tps
 
-- metrics: `syncer_gtid`
-- info: the binlog-gtid information that Syncer synchronizes the current master binlog
+- metrics: `rate(syncer_txn_cost_in_second_count[1m])`
+- info: TPS of executing a transaction on TiDB
 
-#### title: syncer_binlog_file
+#### title: binlog file gap
 
 - metrics: `syncer_binlog_file{node="master"} - ON(instance, job) syncer_binlog_file{node="syncer"}`
 - info: the number of different binlog files between the upstream and the downstream in the process of synchronization; the normal value is 0, which indicates real-time synchronization; a larger value indicates a larger number of binlog files discrepancy
 
 #### title: binlog skipped events
 
-- metrics: `irate(syncer_binlog_skipped_events_total[1m])`
+- metrics: `rate(syncer_binlog_skipped_events_total[1m])`
 - info: the total number of SQL statements that Syncer skips when the upstream synchronizes binlog files with the downstream; you can configure the format of SQL statements skipped by Syncer using the `skip-sqls` parameter in the `syncer.toml` file.
 
-#### title: syncer_txn_costs_gauge_in_second
+#### title: execution jobs
 
-- metrics: `syncer_txn_costs_gauge_in_second`
-- info: the time consumed by Syncer when it processes one batch (unit: second)
+- metrics: `sum(rate(syncer_add_jobs_total[1m])) by (queueNo)`
+- info: the count of job that had been added into execution queue
+
+#### title: pending  jobs
+
+- metrics: `sum(rate(syncer_add_jobs_total[1m]) - rate(syncer_finished_jobs_total[1m])) by (queueNo)`
+- info: the count of job that had been applied into TiDB
