@@ -110,7 +110,7 @@ flavor = "mysql"
 # The testing address for pprof. It can also be used by Prometheus to pull Syncer metrics.
 status-addr = ":8271"
 
-# If set true, syncer will stop and exit on ddl.
+# If set it to true, Syncer will stop and exit when it encounters the DDL operation.
 stop-on-ddl = false
 
 # max-retry is used for retry during network interruption.
