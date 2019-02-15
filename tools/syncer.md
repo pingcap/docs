@@ -510,7 +510,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 #### title: binlog event transform
 
 - metrics: `histogram_quantile(0.8, sum(rate(syncer_binlog_event_bucket[1m])) by (le))`
-- info: the cost of transforming binlog event to SQLs by Syncer
+- info: the cost of transforming binlog event to SQL statements by Syncer
 
 #### title: transaction latency
 
