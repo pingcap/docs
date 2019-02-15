@@ -537,7 +537,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 - metrics: `sum(rate(syncer_add_jobs_total[1m])) by (queueNo)`
 - info: the count of jobs that have been added into the execution queue
 
-#### title: pending  jobs
+#### title: pending jobs
 
 - metrics: `sum(rate(syncer_add_jobs_total[1m]) - rate(syncer_finished_jobs_total[1m])) by (queueNo)`
 - info: the count of job that had been applied into TiDB
