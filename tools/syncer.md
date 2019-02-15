@@ -113,7 +113,7 @@ status-addr = ":8271"
 # If set true, syncer will stop and exit on ddl.
 stop-on-ddl = false
 
-# max-retry is used for retry when network interruption.
+# max-retry is used for retry during network interruption.
 max-retry = 100
 
 # Note: skip-sqls is abandoned, and use skip-ddls instead.
