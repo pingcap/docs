@@ -36,7 +36,7 @@ The Placement Driver (PD) server is the managing component of the entire cluster
 
 3. Allocating the transaction ID that is globally unique and monotonic increasing.
 
-The PD server ensures redundancy by using Raft consensus. The raft leader is responsible for handing all operations, with remaining PD servers available for high availability only. It is recommended to deploy PD as an odd number of nodes.
+The PD server ensures redundancy by using the Raft consensus algorithm. The Raft leader is responsible for handling all operations, with remaining PD servers available for high availability only. It is recommended to deploy PD as an odd number of nodes.
 
 ## TiKV server
 
