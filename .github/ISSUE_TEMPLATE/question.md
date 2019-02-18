@@ -19,6 +19,6 @@ Before submitting your question, make sure you have:
 - Searched the open and closed [GitHub issues](https://github.com/pingcap/docs/issues?utf8=%E2%9C%93&q=is%3Aissue).
 <!-- - 查阅了相关的 issues。 -->
 - Read the documentation: 
-<!-- - 阅读了相关文档。 -->
   - [docs](https://github.com/pingcap/docs)
   - [docs-cn](https://github.com/pingcap/docs-cn)
+<!-- - 阅读了相关文档。 -->
