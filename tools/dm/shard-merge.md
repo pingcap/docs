@@ -34,7 +34,7 @@ DM has the following sharding DDL usage restrictions:
 
 ### Background
 
-Currently, DM uses the binlog in the `ROW` format to perform the replication task. The binlog does not contain the table schema information. When you use the `ROW` binlog to replicate data, if you have not replicated multiple upstream tables into the same downstream table, then there only exist DDL operations of one upstream table that can update the table schema of the downstream table. During the replication process, the DML statements can be constructed accordingly with the column values and the downstream table schema.  
+Currently, DM uses the binlog in the `ROW` format to perform the replication task. The binlog does not contain the table schema information. When you use the `ROW` binlog to replicate data, if you have not replicated multiple upstream tables into the same downstream table, then there only exist DDL operations of one upstream table that can update the table schema of the downstream table. The `ROW` binlog can be considered to have the nature of self-description. During the replication process, the DML statements can be constructed accordingly with the column values and the downstream table schema.  
 
 However, in the process of merging and replicating sharded tables, if DDL statements are executed on the upstream tables to modify the table schema, then you need to perform extra operations to synchronize the DDL statements so as to avoid the inconsistency between the DML statements produced by the column values and the actual downstream table schema.
 
@@ -63,7 +63,7 @@ This section shows how DM replicates DDL statements in the process of merging sh
 In this example, `DM-worker-1` replicates the data from MySQL instance 1 and `DM-worker-2` replicates the data from MySQL instance 2. `DM-master` coordinates the DDL replication among multiple DM-workers. Starting from `DM-worker-1` receiving the DDL statements, the DDL replication process is simplified as follows:
 
 1. `DM-worker-1` receives the DDL statement from MySQL instance 1 at `t1`, pauses the data replication of the corresponding DDL and DML statements, and sends the DDL information to `DM-master`.
-2. `DM-master` decides whether to coordinate the replication of this DDL statement based on the received DDL information, creates a lock for this DDL statement, sends the DDL lock information back to `DM-worker-1` and marks `DM-worker-1` as the owner of this lock at the same time.
+2. `DM-master` decides that the replication of this DDL statement needs to be coordinated based on the received DDL information, creates a lock for this DDL statement, sends the DDL lock information back to `DM-worker-1` and marks `DM-worker-1` as the owner of this lock at the same time.
 3. `DM-worker-2` continues replicating the DML statement until it receives the DDL statement from MySQL instance 2 at `t3`, pauses the data replication of this DDL statement, and sends the DDL information to `DM-master`.
 4. `DM-master` decides whether the lock of this DDL statement already exists based on the received DDL information, and sends the lock information directly to `DM-worker-2`.
 5. Based on the configuration information when the task is started, the sharded table information in the upstream MySQL instances, and the deployment topology information, `DM-master` decides whether it has received this DDL statement of all upstream sharded tables to be merged, and requests the owner of the DDL lock (`DM-worker-1`) to replicate this DDL statement to the downstream.
