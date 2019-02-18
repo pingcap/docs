@@ -67,9 +67,9 @@ Usage of syncer:
   -c int
         the number of batch threads that Syncer processes (default 16)
   -config string
-        path to config file
-  -enable-ansi-quotes
         to specify the corresponding configuration file when starting Syncer; for example, `--config config.toml`
+  -enable-ansi-quotes
+        to enable ANSI_QUOTES sql_mode
   -enable-gtid
         to start Syncer using the mode; default false; before enabling this option, you need to enable GTID in the upstream MySQL
   -flavor string
@@ -83,7 +83,7 @@ Usage of syncer:
   -meta string
         to specify the meta file of Syncer upstream (in the same directory with the configuration file by default "syncer.meta")
   -persistent-dir string
-        to specify  syncer history table structures persistent dir; set to non-empty string will choosing history table structure according to column length when constructing DML
+        to specify syncer history table structures persistent file (historical reason: it's not directory); set to non-empty string will choosing history table structure according to column length when constructing DML
   -safe-mode
         to specify enable safe mode to make syncer reentrant
   -server-id int
