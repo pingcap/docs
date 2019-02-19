@@ -535,7 +535,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 #### title: position binlog position
 
 - metrics: `syncer_binlog_pos{node="syncer"}` and `syncer_binlog_pos{node="master"}`
-- info: it works with `file number of binlog position`. `syncer_binlog_pos{node="master"}` indicate the position of latest binlog position that fetch from MySQL, and `syncer_binlog_pos{node="syncer"}` indicate the position of binlog position syncer had executed
+- info: it works with `file number of binlog position`. `syncer_binlog_pos{node="master"}` indicates the position of latest binlog position fetched from MySQL, and `syncer_binlog_pos{node="syncer"}` indicates the position of the binlog position that Syncer has replicated.
 
 #### title: file number of binlog position
 
