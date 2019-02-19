@@ -48,7 +48,7 @@
   "hideControls": false,
   "id": null,
   "links": [],
-  "refresh": "5s",
+  "refresh": false,
   "rows": [
     {
       "collapse": false,
@@ -141,7 +141,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "the cost of transforming binlog event to SQL statements by Syncer",
+          "description": "the cost of transforming the binlog event to SQL statements by Syncer",
           "fill": 1,
           "id": 9,
           "legend": {
@@ -490,7 +490,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "the number of different binlog files between the upstream and the downstream in the process of synchronization; the normal value is 0, which indicates real-time synchronization; a larger value indicates a larger number of binlog files discrepancy",
+          "description": "the number of different binlog files between the upstream and the downstream in the process of replication; the normal value is 0, which indicates real-time replication; a larger value indicates a larger number of binlog files discrepancy",
           "fill": 1,
           "id": 6,
           "legend": {
@@ -579,6 +579,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_TIDB-CLUSTER}",
+          "description": "it works with `file number of binlog position`. `syncer_binlog_pos{node=\"master\"}` indicates the position of latest binlog position fetched from MySQL, and `syncer_binlog_pos{node=\"syncer\"}` indicates the position of the binlog position that Syncer has replicated.",
           "fill": 1,
           "id": 2,
           "legend": {
@@ -628,7 +629,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "binlog pos",
+          "title": "position of binlog position",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -679,6 +680,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_TIDB-CLUSTER}",
+          "description": "it works with `position of binlog position`. `syncer_binlog_file{node=\"master\"}` indicates the file number of the latest binlog position fetched from MySQL, and `syncer_binlog_file{node=\"syncer\"}` indicates the file number of the binlog position that Syncer has replicated.",
           "fill": 1,
           "id": 4,
           "legend": {
@@ -724,7 +726,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "syncer_binlog_file",
+          "title": "file number of binlog position",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -763,7 +765,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "the total number of SQL statements that Syncer skips when the upstream synchronizes binlog files with the downstream; you can configure the format of SQL statements skipped by Syncer using the `skip-sqls` parameter in the `syncer.toml` file.",
+          "description": "he total number of SQL statements that Syncer skips when the upstream synchronizes binlog files with the downstream; you can configure the format of SQL statements skipped by Syncer using the `skip-ddls` and `skip-dmls` parameters in the `syncer.toml` file.",
           "fill": 1,
           "id": 3,
           "legend": {
@@ -1010,8 +1012,8 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
-    "to": "now"
+    "from": "2019-02-19T03:20:15.463Z",
+    "to": "2019-02-19T09:20:15.463Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1040,5 +1042,5 @@
   },
   "timezone": "browser",
   "title": "Syncer",
-  "version": 10
+  "version": 14
 }
