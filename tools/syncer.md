@@ -37,7 +37,7 @@ You can deploy Syncer to any of the machines that can connect to MySQL or the Ti
 
 Before importing data, read [Check before importing data using Syncer](#check-before-importing-data-using-syncer).
 
-### 1. Set the position to synchronize
+### 1. Set the position to replicate
 
 Edit the meta file of Syncer, assuming the meta file is `syncer.meta`:
 
@@ -50,8 +50,8 @@ binlog-gtid = "2bfabd22-fff7-11e6-97f7-f02fa73bcb01:1-23,61ccbb5d-c82d-11e6-ac2e
 
 > **Note:**
 >
-> - The `syncer.meta` file only needs to be configured when it is first used. The position is automatically updated when the new subsequent binlog is synchronized.
-> - If you use the binlog position to synchronize, you only need to configure `binlog-name` and `binlog-pos`; if you use `binlog-gtid` to synchronize, you need to configure `binlog-gtid` and set `--enable-gtid` when starting Syncer.
+> - The `syncer.meta` file only needs to be configured when it is first used. The position is automatically updated when the new subsequent binlog is replicated.
+> - If you use the binlog position to replicate, you only need to configure `binlog-name` and `binlog-pos`; if you use `binlog-gtid` to replacate, you need to configure `binlog-gtid` and set `--enable-gtid` when starting Syncer.
 
 ### 2. Start Syncer
 
@@ -137,10 +137,10 @@ max-retry = 100
 # db-name = "foo"
 # type = "delete"
 
-# Specify the database name to be synchronized. Support regular expressions. Start with '~' to use regular expressions.
+# Specify the database name to be replicated. Support regular expressions. Start with '~' to use regular expressions.
 # replicate-do-db = ["~^b.*","s1"]
 
-# Specify the db.table to be synchronized.
+# Specify the db.table to be replicated.
 # db-name and tbl-name do not support the `db-name ="dbname, dbname2"` format.
 # [[replicate-do-table]]
 # db-name ="dbname"
@@ -150,26 +150,26 @@ max-retry = 100
 # db-name ="dbname1"
 # tbl-name = "table-name1"
 
-# Specify the db.table to be synchronized. Support regular expressions. Start with '~' to use regular expressions.
+# Specify the db.table to be replicated. Support regular expressions. Start with '~' to use regular expressions.
 # [[replicate-do-table]]
 # db-name ="test"
 # tbl-name = "~^a.*"
 
-# Specify the database you want to ignore in synchronization. Support regular expressions. Start with '~' to use regular expressions.
+# Specify the database you want to ignore in replication. Support regular expressions. Start with '~' to use regular expressions.
 # replicate-ignore-db = ["~^b.*","s1"]
 
-# Specify the database table you want to ignore in synchronization.
+# Specify the database table you want to ignore in replication.
 # db-name and tbl-name do not support the `db-name ="dbname, dbname2"` format.
 # [[replicate-ignore-table]]
 # db-name = "your_db"
 # tbl-name = "your_table"
 
-# Specify the database table you want to ignore in synchronization. Support regular expressions. Start with '~' to use regular expressions.
+# Specify the database table you want to ignore in replication. Support regular expressions. Start with '~' to use regular expressions.
 # [[replicate-ignore-table]]
 # db-name ="test"
 # tbl-name = "~^a.*"
 
-# The sharding synchronizing rules support wildcharacter.
+# The sharding replicating rules support wildcharacter.
 # 1. The asterisk character ("*", also called "star") matches zero or more characters,
 #    For example, "doc*" matches "doc" and "document" but not "dodo";
 #    The asterisk character must be in the end of the wildcard word,
@@ -233,7 +233,7 @@ mysql> select * from t1;
 +----+------+
 ```
 
-Syncer outputs the current synchronized data statistics every 30 seconds:
+Syncer outputs the current replicated data statistics every 30 seconds:
 
 ```bash
 2017/06/08 01:18:51 syncer.go:934: [info] [syncer]total events = 15, total tps = 130, recent tps = 4,
@@ -244,52 +244,52 @@ master-binlog = (ON.000001, 11992), master-binlog-gtid=53ea0ed1-9bf8-11e6-8bea-6
 syncer-binlog = (ON.000001, 2504), syncer-binlog-gtid = 53ea0ed1-9bf8-11e6-8bea-64006a897c73:1-35
 ```
 
-The update in MySQL is automatically synchronized in TiDB.
+The update in MySQL is automatically replicated in TiDB.
 
 ## Description of Syncer configuration
 
-### Specify the database to be synchronized
+### Specify the database to be replicated
 
-This section describes the priority of parameters when you use Syncer to synchronize the database.
+This section describes the priority of parameters when you use Syncer to replicate the database.
 
-- To use the route-rules, see [Support for synchronizing data from sharded tables](#support-for-synchronizing-data-from-sharded-tables).
+- To use the route-rules, see [Support for replicating data from sharded tables](#support-for-replicating-data-from-sharded-tables).
 - Priority: replicate-do-db --> replicate-do-table --> replicate-ignore-db --> replicate-ignore-table
 
 ```toml
-# Specify the ops database to be synchronized.
-# Specify to synchronize the database starting with ti.
+# Specify the ops database to be replicated.
+# Specify to replicate the database starting with ti.
 replicate-do-db = ["ops","~^ti.*"]
 
-# The "china" database includes multiple tables such as guangzhou, shanghai and beijing. You only need to synchronize the shanghai and beijing tables.
-# Specify to synchronize the shanghai table in the "china" database.
+# The "china" database includes multiple tables such as guangzhou, shanghai and beijing. You only need to replicate the shanghai and beijing tables.
+# Specify to replicate the shanghai table in the "china" database.
 [[replicate-do-table]]
 db-name ="china"
 tbl-name = "shanghai"
 
-# Specify to synchronize the beijing table in the "china" database.
+# Specify to replicate the beijing table in the "china" database.
 [[replicate-do-table]]
 db-name ="china"
 tbl-name = "beijing"
 
-# The "ops" database includes multiple tables such as ops_user, ops_admin, weekly. You only need to synchronize the ops_user table.
-# Because replicate-do-db has a higher priority than replicate-do-table, it is invalid if you only set to synchronize the ops_user table. In fact, the whole "ops" database is synchronized.
+# The "ops" database includes multiple tables such as ops_user, ops_admin, weekly. You only need to replicate the ops_user table.
+# Because replicate-do-db has a higher priority than replicate-do-table, it is invalid if you only set to replicate the ops_user table. In fact, the whole "ops" database is replicated.
 [[replicate-do-table]]
 db-name ="ops"
 tbl-name = "ops_user"
 
-# The "history" database includes multiple tables such as 2017_01 2017_02 ... 2017_12/2016_01  2016_02 ... 2016_12. You only need to synchronize the tables of 2017.
+# The "history" database includes multiple tables such as 2017_01 2017_02 ... 2017_12/2016_01  2016_02 ... 2016_12. You only need to replicate the tables of 2017.
 [[replicate-do-table]]
 db-name ="history"
 tbl-name = "~^2017_.*"
 
-# Ignore the "ops" and "fault" databases in synchronization
-# Ignore the databases starting with "www" in synchronization
-# Because replicate-do-db has a higher priority than replicate-ignore-db, it is invalid to ignore the "ops" database here in synchronization.
+# Ignore the "ops" and "fault" databases in replication
+# Ignore the databases starting with "www" in replication
+# Because replicate-do-db has a higher priority than replicate-ignore-db, it is invalid to ignore the "ops" database here in replication.
 replicate-ignore-db = ["ops","fault","~^www"]
 
 # The "fault" database includes multiple tables such as faults, user_feedback, ticket.
-# Ignore the user_feedback table in synchronization.
-# Because replicate-ignore-db has a higher priority than replicate-ignore-table, it is invalid if you only set to synchronize the user_feedback table. In fact, the whole "fault" database is synchronized.
+# Ignore the user_feedback table in replication.
+# Because replicate-ignore-db has a higher priority than replicate-ignore-table, it is invalid if you only set to replicate the user_feedback table. In fact, the whole "fault" database is replicated.
 [[replicate-ignore-table]]
 db-name = "fault"
 tbl-name = "user_feedback"
@@ -300,9 +300,9 @@ db-name ="order"
 tbl-name = "~^2016_.*"
 ```
 
-### Support for synchronizing data from sharded tables
+### Support for replicating data from sharded tables
 
-You can use Syncer to import data from sharded tables into one table within one database according to the `route-rules`. But before synchronizing, you need to check:
+You can use Syncer to import data from sharded tables into one table within one database according to the `route-rules`. But before replicating, you need to check:
 
 - Whether the sharding rules can be represented using the `route-rules` syntax.
 - Whether the sharded tables contain unique increasing primary keys, or whether conflicts exist in the unique indexes or the primary keys after the combination.
@@ -311,7 +311,7 @@ Currently, the support for DDL is still in progress.
 
 ![syncer sharding](../media/syncer_sharding.png)
 
-#### Usage of synchronizing data from sharded tables
+#### Usage of replicating data from sharded tables
 
 1. Start Syncer in all MySQL instances and configure the route-rules.
 2. In scenarios using replicate-do-db & replicate-ignore-db and route-rules at the same time, you need to specify the target-schema & target-table content in route-rules.
@@ -320,14 +320,14 @@ Currently, the support for DDL is still in progress.
 # The scenarios are as follows:
 # Database A includes multiple databases such as order_2016 and history_2016.
 # Database B includes multiple databases such as order_2017 and history_2017.
-# Specify to synchronize order_2016 in database A; the data tables are 2016_01 2016_02 ... 2016_12
-# Specify to synchronize order_2017 in database B; the data tables are 2017_01 2017_02 ... 2017_12
+# Specify to replicate order_2016 in database A; the data tables are 2016_01 2016_02 ... 2016_12
+# Specify to replicate order_2017 in database B; the data tables are 2017_01 2017_02 ... 2017_12
 # Use order_id as the primary key in the table, and the primary keys among data do not conflict.
-# Ignore the history_2016 and history_2017 databases in synchronization
+# Ignore the history_2016 and history_2017 databases in replication
 # The target database is "order" and the target data tables are order_2017 and order_2016.
 
 # When Syncer finds that the route-rules is enabled after Syncer gets the upstream data, it first combines databases and tables, and then determines do-db & do-table.
-# You need to configure the database to be synchronized, which is required when you determine the target-schema & target-table.
+# You need to configure the database to be replicated, which is required when you determine the target-schema & target-table.
 [[replicate-do-table]]
 db-name ="order"
 tbl-name = "order_2016"
@@ -365,7 +365,7 @@ target-table = "order_2017"
         1 row in set (0.01 sec)
         ```
 
-    - If the result is null or 0, Syncer cannot synchronize data.
+    - If the result is null or 0, Syncer cannot replicate data.
     - Syncer server-id must be different from MySQL server-id, and must be unique in the MySQL cluster.
 
 2. Check the related binlog parameters
@@ -436,7 +436,7 @@ target-table = "order_2017"
 
 6. Check user privileges of synchronizing the upstream and downstream data.
 
-    - The following privileges granted by the upstream MySQL synchronization account at least:
+    - The following privileges granted by the upstream MySQL replication account at least:
 
         `select, replication slave, replication client`
 
@@ -525,7 +525,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 #### title: binlog file gap
 
 - metrics: `syncer_binlog_file{node="master"} - ON(instance, job) syncer_binlog_file{node="syncer"}`
-- info: the number of different binlog files between the upstream and the downstream in the process of synchronization; the normal value is 0, which indicates real-time synchronization; a larger value indicates a larger number of binlog files discrepancy
+- info: the number of different binlog files between the upstream and the downstream in the process of replication; the normal value is 0, which indicates real-time replication; a larger value indicates a larger number of binlog files discrepancy
 
 #### title: binlog skipped events
 
