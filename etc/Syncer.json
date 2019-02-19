@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_TIDB-CLUSTER",
-      "label": "tidb-cluster",
+      "name": "DS_BIGDATA-CLUSTER",
+      "label": "bigdata-cluster",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "4.6.3"
+      "version": "4.1.2"
     },
     {
       "type": "panel",
@@ -30,17 +30,7 @@
     }
   ],
   "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
-    ]
+    "list": []
   },
   "editable": true,
   "gnetId": null,
@@ -48,7 +38,7 @@
   "hideControls": false,
   "id": null,
   "links": [],
-  "refresh": false,
+  "refresh": "5s",
   "rows": [
     {
       "collapse": false,
@@ -57,10 +47,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "QPS of the binlog event that has been received by Syncer",
+          "datasource": "${DS_BIGDATA-CLUSTER}",
           "fill": 1,
           "id": 1,
           "legend": {
@@ -70,7 +57,7 @@
             "max": true,
             "min": false,
             "rightSide": true,
-            "show": false,
+            "show": true,
             "sort": "current",
             "sortDesc": true,
             "total": false,
@@ -85,16 +72,15 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(syncer_binlog_event_count[1m])",
-              "format": "time_series",
+              "expr": "irate(syncer_binlog_events_total[1m])",
               "intervalFactor": 2,
               "legendFormat": "{{job}} - {{type}}",
+              "metric": "syncer_binlog_events_total",
               "refId": "A",
               "step": 20
             }
@@ -110,88 +96,6 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "the cost of transforming the binlog event to SQL statements by Syncer",
-          "fill": 1,
-          "id": 9,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": false,
-            "sort": "current",
-            "sortDesc": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "histogram_quantile(0.8, sum(rate(syncer_binlog_event_bucket[1m])) by (le))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{job}} - {{type}}",
-              "refId": "A",
-              "step": 20
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "binlog event transform",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -231,26 +135,21 @@
         {
           "aliasColors": {},
           "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "the cost of executing a transaction on TiDB",
+          "datasource": "${DS_BIGDATA-CLUSTER}",
           "fill": 1,
-          "id": 8,
+          "id": 2,
           "legend": {
-            "alignAsTable": true,
+            "alignAsTable": false,
             "avg": false,
-            "current": true,
-            "hideEmpty": false,
-            "hideZero": false,
-            "max": true,
+            "current": false,
+            "max": false,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
-            "sort": "max",
-            "sortDesc": true,
+            "sort": "current",
+            "sortDesc": false,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 1,
@@ -261,24 +160,30 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.95, sum(rate(syncer_txn_cost_in_second_bucket[1m])) by (le))",
-              "format": "time_series",
+              "expr": "syncer_binlog_pos{node=\"syncer\"}",
               "intervalFactor": 2,
-              "legendFormat": "{{job}}",
+              "legendFormat": "{{job}} {{node}}",
+              "metric": "",
               "refId": "A",
-              "step": 20
+              "step": 30
+            },
+            {
+              "expr": "syncer_binlog_pos{node=\"master\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{job}} {{node}}",
+              "refId": "B",
+              "step": 30
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "transaction latency",
+          "title": "binlog pos",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -286,7 +191,6 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -294,7 +198,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "none",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -312,65 +216,19 @@
           ]
         },
         {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    1000
-                  ],
-                  "type": "lt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "1m",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "avg"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "60s",
-            "handler": 1,
-            "name": "transaction tps alert",
-            "noDataState": "no_data",
-            "notifications": [
-              {
-                "id": 1
-              }
-            ]
-          },
           "aliasColors": {},
           "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "TPS of executing a transaction on TiDB",
+          "datasource": "${DS_BIGDATA-CLUSTER}",
           "fill": 1,
-          "id": 7,
+          "id": 4,
           "legend": {
-            "alignAsTable": true,
             "avg": false,
-            "current": true,
-            "hideEmpty": false,
-            "hideZero": false,
-            "max": true,
+            "current": false,
+            "max": false,
             "min": false,
-            "rightSide": true,
             "show": true,
-            "sort": "max",
-            "sortDesc": true,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 1,
@@ -381,32 +239,29 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(syncer_txn_cost_in_second_count[1m])",
-              "format": "time_series",
+              "expr": "syncer_binlog_file{node=\"master\"}",
               "intervalFactor": 2,
-              "legendFormat": "{{job}}",
+              "legendFormat": "{{job}} {{node}}",
               "refId": "A",
-              "step": 20
-            }
-          ],
-          "thresholds": [
+              "step": 30
+            },
             {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "lt",
-              "value": 1000
+              "expr": "syncer_binlog_file{node=\"syncer\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{job}} {{node}}",
+              "refId": "B",
+              "step": 30
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "transaction tps",
+          "title": "syncer_binlog_file",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -414,7 +269,6 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -438,7 +292,19 @@
               "show": true
             }
           ]
-        },
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 250,
+      "panels": [
         {
           "alert": {
             "conditions": [
@@ -487,10 +353,7 @@
           },
           "aliasColors": {},
           "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "the number of different binlog files between the upstream and the downstream in the process of replication; the normal value is 0, which indicates real-time replication; a larger value indicates a larger number of binlog files discrepancy",
+          "datasource": "${DS_BIGDATA-CLUSTER}",
           "fill": 1,
           "id": 6,
           "legend": {
@@ -515,14 +378,12 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
               "expr": " syncer_binlog_file{node=\"master\"} - ON(instance, job) syncer_binlog_file{node=\"syncer\"} ",
-              "format": "time_series",
               "intervalFactor": 10,
               "legendFormat": "{{job}}",
               "refId": "A",
@@ -540,7 +401,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "binlog file gap",
+          "title": "syncer_binlog_file",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -548,7 +409,6 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -572,28 +432,35 @@
               "show": true
             }
           ]
-        },
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": true,
+      "title": "Binlog file",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 250,
+      "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "it works with `file number of binlog position`. `syncer_binlog_pos{node=\"master\"}` indicates the position of latest binlog position fetched from MySQL, and `syncer_binlog_pos{node=\"syncer\"}` indicates the position of the binlog position that Syncer has replicated.",
+          "datasource": "${DS_BIGDATA-CLUSTER}",
           "fill": 1,
-          "id": 2,
+          "id": 3,
           "legend": {
-            "alignAsTable": false,
+            "alignAsTable": true,
             "avg": false,
-            "current": false,
-            "max": false,
+            "current": true,
+            "max": true,
             "min": false,
-            "rightSide": false,
+            "rightSide": true,
             "show": true,
-            "sort": "current",
-            "sortDesc": false,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -604,32 +471,23 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "syncer_binlog_pos{node=\"syncer\"}",
-              "format": "time_series",
+              "expr": "irate(syncer_binlog_skipped_events_total[1m])",
               "intervalFactor": 2,
-              "legendFormat": "{{job}} {{node}}",
+              "legendFormat": "{{job}} {{type}}",
+              "metric": "syncer_binlog_skipped_events_total",
               "refId": "A",
-              "step": 30
-            },
-            {
-              "expr": "syncer_binlog_pos{node=\"master\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{job}} {{node}}",
-              "refId": "B",
-              "step": 30
+              "step": 20
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "position of binlog position",
+          "title": "binlog skipped events",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -637,7 +495,6 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -675,107 +532,60 @@
       "height": 250,
       "panels": [
         {
+          "alert": {
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    20
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "alerting",
+            "frequency": "60s",
+            "handler": 1,
+            "name": "syncer_txn_costs_gauge_in_second alert",
+            "noDataState": "no_data",
+            "notifications": [
+              {
+                "id": 1
+              }
+            ]
+          },
           "aliasColors": {},
           "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "it works with `position of binlog position`. `syncer_binlog_file{node=\"master\"}` indicates the file number of the latest binlog position fetched from MySQL, and `syncer_binlog_file{node=\"syncer\"}` indicates the file number of the binlog position that Syncer has replicated.",
+          "datasource": "${DS_BIGDATA-CLUSTER}",
           "fill": 1,
-          "id": 4,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "syncer_binlog_file{node=\"master\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{job}} {{node}}",
-              "refId": "A",
-              "step": 30
-            },
-            {
-              "expr": "syncer_binlog_file{node=\"syncer\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{job}} {{node}}",
-              "refId": "B",
-              "step": 30
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "file number of binlog position",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "he total number of SQL statements that Syncer skips when the upstream synchronizes binlog files with the downstream; you can configure the format of SQL statements skipped by Syncer using the `skip-ddls` and `skip-dmls` parameters in the `syncer.toml` file.",
-          "fill": 1,
-          "id": 3,
+          "id": 7,
           "legend": {
             "alignAsTable": true,
             "avg": false,
             "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
             "max": true,
             "min": false,
             "rightSide": true,
             "show": true,
+            "sort": "max",
+            "sortDesc": true,
             "total": false,
             "values": true
           },
@@ -788,24 +598,30 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(syncer_binlog_skipped_events_total[1m])",
-              "format": "time_series",
+              "expr": "syncer_txn_costs_gauge_in_second",
               "intervalFactor": 2,
-              "legendFormat": "{{job}} {{type}}",
+              "legendFormat": "{{job}}",
               "refId": "A",
               "step": 20
             }
           ],
-          "thresholds": [],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 20
+            }
+          ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "binlog skipped events",
+          "title": "syncer_txn_costs_gauge_in_second",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -813,177 +629,18 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
             {
               "format": "short",
               "label": null,
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "the count of jobs that have been added into the execution queue",
-          "fill": 1,
-          "id": 10,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(syncer_add_jobs_total[1m])) by (queueNo)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "refId": "A",
-              "step": 20
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "execution jobs",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "the count of jobs that have been applied into TiDB",
-          "fill": 1,
-          "id": 11,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": false,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(syncer_add_jobs_total[1m]) - rate(syncer_finished_jobs_total[1m])) by (queueNo)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "refId": "A",
-              "step": 20
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "pending  jobs",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
               "show": true
             },
             {
@@ -1012,8 +669,8 @@
     "list": []
   },
   "time": {
-    "from": "2019-02-19T03:20:15.463Z",
-    "to": "2019-02-19T09:20:15.463Z"
+    "from": "now-3h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1042,5 +699,5 @@
   },
   "timezone": "browser",
   "title": "Syncer",
-  "version": 14
+  "version": 24
 }
