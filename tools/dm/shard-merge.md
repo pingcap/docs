@@ -19,7 +19,7 @@ DM has the following sharding DDL usage restrictions:
 - For each sharding group, it is recommended to use one independent task to perform the replication.
     - If multiple sharding groups exist in a task, you cannot start to execute the DDL statements in other sharding groups until the DDL statements in one sharding group has been replicated successfully.
 - In a sharding group, the corresponding DDL statements should be executed in all upstream sharded tables.
-    - For example, if DDL statements are not executed on one or more upstream sharded tables corresponding to `DM-worker-2`, then other DM-workers that have executed the DDL statements pause their synchronization task and wait for `DM-worker-2` to receive the upstream DDL statements.
+    - For example, if DDL statements are not executed on one or more upstream sharded tables corresponding to `DM-worker-2`, then other DM-workers that have executed the DDL statements pause their replication task and wait for `DM-worker-2` to receive the upstream DDL statements.
 - The sharding group replication task does not support `DROP DATABASE`/`DROP TABLE`.
     - The Syncer unit in DM-worker automatically ignores the `DROP DATABASE`/`DROP TABLE` statement of upstream sharded tables.
 - The sharding group replication task supports `RENAME TABLE`, but with the following limitations (Online DDL is supported in another solution):
@@ -36,7 +36,7 @@ DM has the following sharding DDL usage restrictions:
 
 Currently, DM uses the binlog in the `ROW` format to perform the replication task. The binlog does not contain the table schema information. When you use the `ROW` binlog to replicate data, if you have not replicated multiple upstream tables into the same downstream table, then there only exist DDL operations of one upstream table that can update the table schema of the downstream table. The `ROW` binlog can be considered to have the nature of self-description. During the replication process, the DML statements can be constructed accordingly with the column values and the downstream table schema.  
 
-However, in the process of merging and replicating sharded tables, if DDL statements are executed on the upstream tables to modify the table schema, then you need to perform extra operations to synchronize the DDL statements so as to avoid the inconsistency between the DML statements produced by the column values and the actual downstream table schema.
+However, in the process of merging and replicating sharded tables, if DDL statements are executed on the upstream tables to modify the table schema, then you need to perform extra operations to replicate the DDL statements so as to avoid the inconsistency between the DML statements produced by the column values and the actual downstream table schema.
 
 Here is a simple example:
 
@@ -72,7 +72,7 @@ In this example, `DM-worker-1` replicates the data from MySQL instance 1 and `DM
 
 The characteristics of DM handling the sharding DDL replication among multiple DM-workers can be concluded as follows:
 
-- Based on the task configuration and DM cluster deployment topology information, a logical sharding group is built in `DM-master` to coordinate DDL replication. The group members are DM-workers that handle each sub-task divided from the synchronization task).
+- Based on the task configuration and DM cluster deployment topology information, a logical sharding group is built in `DM-master` to coordinate DDL replication. The group members are DM-workers that handle each sub-task divided from the replication task).
 - After receiving the DDL statement from the binlog event, each DM-worker sends the DDL information to `DM-master`.
 - `DM-master` creates or updates the DDL lock based on the DDL information received from each DM-worker and the sharding group information.
 - If all members of the sharding group receive a same specific DDL statement, this indicates that all DML statements before the DDL execution on the upstream sharded tables have been completely replicated, and this DDL statement can be executed. Then DM can continue to replicate the subsequent DML statements.
@@ -92,7 +92,7 @@ Because data comes from the same MySQL instance, all the data is obtained from t
 4. At `t3`, the Syncer unit in DM-worker receives the DDL statements of `table_2`.
 5. From `t4` on, the Syncer unit in DM-worker receives the DML statements of `schema V2` from both tables.
 
-If the DDL statements are not processed particularly during the data synchronization, when the DDL statement of `table_1` is replicated to the downstream and changes the downstream table schema, the DML statement of `schema V1` from `table_2` cannot be replicated successfully. Therefore, within a single DM-worker, a logical sharding group similar to that within `DM-master` is created, except that members of this group are different sharded tables in the same upstream MySQL instance.
+If the DDL statements are not processed particularly during the data replication, when the DDL statement of `table_1` is replicated to the downstream and changes the downstream table schema, the DML statement of `schema V1` from `table_2` cannot be replicated successfully. Therefore, within a single DM-worker, a logical sharding group similar to that within `DM-master` is created, except that members of this group are different sharded tables in the same upstream MySQL instance.
 
 But when a DM-worker coordinates the replication of the sharding group within itself, it is not totally the same as that performed by `DM-master`. The reasons are as follows:
 
