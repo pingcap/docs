@@ -532,6 +532,17 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 - metrics: `rate(syncer_binlog_skipped_events_total[1m])`
 - info: the total number of SQL statements that Syncer skips when the upstream synchronizes binlog files with the downstream; you can configure the format of SQL statements skipped by Syncer using the `skip-sqls` parameter in the `syncer.toml` file.
 
+#### title: position binlog position
+
+- metrics: `syncer_binlog_pos{node="syncer"}` and `syncer_binlog_pos{node="master"}`
+- info: it works with `file number of binlog position`. `syncer_binlog_pos{node="master"}` indicate the position of latest binlog position that fetch from MySQL, and `syncer_binlog_pos{node="syncer"}` indicate the position of binlog position syncer had executed
+
+#### title: file number of binlog position
+
+- metrics: `syncer_binlog_file{node="syncer"}` and `syncer_binlog_file{node="master"}`
+- info: it works with `position of binlog position`. `syncer_binlog_file{node="master"}` indicate the file number of latest binlog position that fetch from MySQL, and `syncer_binlog_file{node="syncer"}` indicate the file number of binlog position syncer had executed
+
+
 #### title: execution jobs
 
 - metrics: `sum(rate(syncer_add_jobs_total[1m])) by (queueNo)`
