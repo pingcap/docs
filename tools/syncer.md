@@ -505,7 +505,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 #### title: binlog events
 
 - metrics: `rate(syncer_binlog_event_count[1m])`
-- info: QPS of the binlog event that has been recieved by Syncer
+- info: QPS of the binlog event that has been received by Syncer
 
 #### title: binlog event transform
 
