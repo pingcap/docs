@@ -73,19 +73,19 @@ Usage of syncer:
   -enable-gtid
         to start Syncer using the mode; default false; before enabling this option, you need to enable GTID in the upstream MySQL
   -flavor string
-        use flavor for different MySQL source versions; support "mysql", "mariadb" now; if you replicate from mariadb, please set it to "mariadb" (default "mysql")
+        use flavor for different MySQL source versions; support "mysql", "mariadb" now; if you replicate data from MariaDB, set it to "mariadb" (default "mysql")
   -log-file string
         to specify the log file directory, such as `--log-file ./syncer.log`
   -log-rotate string
         to specify the log file rotating cycle, hour/day (default "day")
   -max-retry int
-        to specify maxinum retry when network interruption (default 100)
+        to specify maximum retry times during network interruption (default 100)
   -meta string
-        to specify the meta file of Syncer upstream (in the same directory with the configuration file by default "syncer.meta")
+        to specify the meta file of the upstream of Syncer (in the same directory with the configuration file, "syncer.meta" by default)
   -persistent-dir string
-        to specify syncer history table structures persistent file (historical reason: it's not directory); set to non-empty string will choosing history table structure according to column length when constructing DML
+        to specify the persistent file (historical reason: it is not a directory) of Syncer history table schemas; if you set it to a non-empty string, the history table schema is chosen according to the column length when you construct DML statements
   -safe-mode
-        to specify enable safe mode to make syncer reentrant
+        to specify and enable the safe mode to make Syncer reentrant
   -server-id int
         to specify MySQL slave sever-id (default 101)
   -status-addr string
@@ -110,7 +110,7 @@ flavor = "mysql"
 # The testing address for pprof. It can also be used by Prometheus to pull Syncer metrics.
 status-addr = ":8271"
 
-# If set it to true, Syncer will stop and exit when it encounters the DDL operation.
+# If you set its value to true, Syncer stops and exits when it encounters the DDL operation.
 stop-on-ddl = false
 
 # max-retry is used for retry during network interruption.
