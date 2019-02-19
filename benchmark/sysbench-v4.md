@@ -187,7 +187,7 @@ Sysbench test was carried on each of the tidb-servers. And the final result was 
 | point_select | 3*64   | 162045.89 | 162045.89 | 1.18            | 3.07            | 23.05           |
 | point_select | 3*128  | 178407.72 | 178407.72 | 2.14            | 5.37            | 44.08           |
 
-![point_select](D:/github/docs/media/sysbench_v4_oltp_point_select.png)
+![point_select](../media/sysbench_v4_oltp_point_select.png)
 
 
 
@@ -202,7 +202,7 @@ Sysbench test was carried on each of the tidb-servers. And the final result was 
 | oltp_update_index | 3*128  | 11480.50 | 11480.50 | 33.41           | 78.60           | 4854.81         |
 | oltp_update_index | 3*256  | 11958.88 | 11958.88 | 64.19           | 153.02          | 4560.66         |
 
-![oltp_update_index](D:/github/docs/media/sysbench_v4_oltp_update_index.png)
+![oltp_update_index](../media/sysbench_v4_oltp_update_index.png)
 
 
 
@@ -216,7 +216,7 @@ Sysbench test was carried on each of the tidb-servers. And the final result was 
 | oltp_read_only | 3*64   | 4958.76 | 79340.27 | 39.35          | 56.84         | 231.19 |
 | oltp_read_only | 3*128 | 4916.50 | 78663.92 | 78.77           | 114.72        | 479.39 |
 
-![oltp_update_index](D:/github/docs/media/sysbench_v4_oltp_read_only.png)
+![oltp_update_index](../media/sysbench_v4_oltp_read_only.png)
 
 ## Common issues
 
