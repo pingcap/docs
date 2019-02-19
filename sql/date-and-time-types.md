@@ -5,7 +5,6 @@ category: user guide
 
 # Date and time types
 
-
 The values used to represent date and time types are DATE, TIME, DATETIME, TIMESTAMP, and YEAR. Each of these types has its own range of valid values, and uses a zero value to indicate that it is an invalid value. The TIMESTAMP has an behavior of automatic update, which will be introduced later.
 
 When dealing with date and time value types, please be noted: 
@@ -53,8 +52,6 @@ Ambiguity occurs when the year contained in the date value is in 2 digits. Then 
 - Value between 00 and 69 is converted to a value between 2000 and 2069
 - Value between 70 and 99 is converted to a value between 1970 and 1999
 
-
-
 ## TIME type
 
 For TIME type, the format is 'HH:MM:SS' and the value ranges from '-838:59:59' to '838:59:59'. The value of time part is larger, because TIME is used not only to indicate the time within a day but also to indicate the time interval between 2 events.
@@ -62,8 +59,6 @@ For TIME type, the format is 'HH:MM:SS' and the value ranges from '-838:59:59' t
 TIME can contain a fractional part. With a fractional part, TIME ranges from '-838:59:59.000000' to '838:59:59.000000'.
 
 Please pay attention to the abbreviated form of TIME. For example, '11:12' means '11:12:00' instead of '00:11:12'. However, '1112' means '00:11:12'. These differences are caused by the presence or absence of the colon:, because the 2 situations will be handed differently. 
-
-
 
 ## YEAR type
 
@@ -87,7 +82,7 @@ For any column with TIMESTAMP or DATETIME value type in the table, you can set t
 
 These properties can be set by setting `DEFAULT CURRENT_TIMESTAMP` and `ON UPDATE CURRENT_TIMESTAMP` when the column is being defined. DEFAULT can also be set as a specific value, such as `DEFAULT 0` or `DEFAULT '2000-01-01 00:00:00'` .
 
-```
+```sql
 CREATE TABLE t1 (
   ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -96,14 +91,12 @@ CREATE TABLE t1 (
 
 The default value for DATETIME is `NULL` unless it is specified as `NOT NULL`. For the latter situation, if no default value is set, the default value will be 0.
 
-```
+```sql
 CREATE TABLE t1 (
   dt1 DATETIME ON UPDATE CURRENT_TIMESTAMP,         -- default NULL
   dt2 DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP -- default 0
 );
 ```
-
-
 
 ## Decimal part of time value
 
@@ -111,7 +104,7 @@ Decimal part is allowed in TIME, DATETIME, TIMESTAMP value types. The decimal ca
 
 + Use `type_name(fsp)` to define a column that supports fractional precision, where `type_name` can be TIME, DATETIME or TIMESTAMP. For example,
 
-  ```
+  ```sql
   CREATE TABLE t1 (t TIME(3), dt DATETIME(6));
   ```
 
@@ -121,7 +114,7 @@ Decimal part is allowed in TIME, DATETIME, TIMESTAMP value types. The decimal ca
 
 + When inserting TIME, DATETIME or TIMESTAMP which contain a fractional part, if the number of digit of the fraction is too few, or too many, rounding may be needed in the situation. For example,
 
-  ```
+  ```sql
   mysql> CREATE TABLE fractest( c1 TIME(2), c2 DATETIME(2), c3 TIMESTAMP(2) );
   Query OK, 0 rows affected (0.33 sec)
   
@@ -158,13 +151,13 @@ When TIME is converted to DATE, the process is similar, and the time part will b
 
 Using the `CAST()` function can explicitly convert a value to a DATE type. For example,
 
-```
+```sql
 date_col = CAST(datetime_col AS DATE)
 ```
 
 converting TIME and DATETIME to numeric format:
 
-```
+```sql
 mysql> SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
 +-----------|-------------|--------------+
 | CURTIME() | CURTIME()+0 | CURTIME(3)+0 |
@@ -178,8 +171,6 @@ mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
 | 2012-08-15 09:28:00 | 20120815092800 | 20120815092800.889 |
 +---------------------|----------------|--------------------+
 ```
-
-
 
 ## Two-digit year contained in the date
 
