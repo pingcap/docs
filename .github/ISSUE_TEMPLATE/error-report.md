@@ -10,7 +10,7 @@ For other issues (related to TiDB, TiKV, etc), please move to [other repositorie
 
 Please answer the following questions before submitting your issue. Thanks!
 
-1. What is the directory of the document related to this issue?
+1. What is the URL/path of the document related to this issue?
 
 
 2. How would you like to improve it?
