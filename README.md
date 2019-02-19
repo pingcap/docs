@@ -135,7 +135,7 @@
       + Sharding Support
         - [Introduction](tools/dm/shard-merge.md)
         - [Restrictions](tools/dm/shard-merge.md#restrictions)
-        - [Handle Sharding DDL Locks manually](tools/dm/manually-handling-sharding-ddl-locks.md)
+        - [Handle Sharding DDL Locks Manually](tools/dm/manually-handling-sharding-ddl-locks.md)
     + Usage Scenarios
       - [Simple Scenario](tools/dm/simple-synchronization-scenario.md)
       - [Shard Merge Scenario](tools/dm/shard-merge-scenario.md)
@@ -159,6 +159,7 @@
   - [PD Recover](tools/pd-recover.md)
   - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
   - [TiDB Controller](tools/tidb-controller.md)
+  - [Download](tools/download.md)
 + [TiKV Documentation](https://github.com/tikv/tikv/wiki)
 + TiSpark Documentation
   - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
