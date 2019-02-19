@@ -116,11 +116,15 @@ stop-on-ddl = false
 # max-retry is used for retry during network interruption.
 max-retry = 100
 
-# Note: skip-sqls is abandoned, and use skip-ddls instead.
-# skip-ddls skips the DDL statements that are incompatible with TiDB, and supports regular expressions.
-# skip-ddls = ["^CREATE\\s+USER"]
+# Specify the database name to be replicated. Support regular expressions. Start with '~' to use regular expressions.
+# replicate-do-db = ["~^b.*","s1"]
 
-# Note: skip-events is abandoned, and use skip-dmls instead.
+# Specify the database you want to ignore in replication. Support regular expressions. Start with '~' to use regular expressions.
+# replicate-ignore-db = ["~^b.*","s1"]
+
+# skip-ddls skips the ddl statements.
+# skip-ddls = ["^OPTIMIZE\\s+TABLE"]
+
 # skip-dmls skips the DML statements. The type value can be 'insert', 'update' and 'delete'.
 # The 'delete' statements that skip-dmls skips in the foo.bar table:
 # [[skip-dmls]]
@@ -137,9 +141,6 @@ max-retry = 100
 # db-name = "foo"
 # type = "delete"
 
-# Specify the database name to be replicated. Support regular expressions. Start with '~' to use regular expressions.
-# replicate-do-db = ["~^b.*","s1"]
-
 # Specify the db.table to be replicated.
 # db-name and tbl-name do not support the `db-name ="dbname, dbname2"` format.
 # [[replicate-do-table]]
@@ -154,9 +155,6 @@ max-retry = 100
 # [[replicate-do-table]]
 # db-name ="test"
 # tbl-name = "~^a.*"
-
-# Specify the database you want to ignore in replication. Support regular expressions. Start with '~' to use regular expressions.
-# replicate-ignore-db = ["~^b.*","s1"]
 
 # Specify the database table you want to ignore in replication.
 # db-name and tbl-name do not support the `db-name ="dbname, dbname2"` format.
@@ -530,7 +528,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 #### title: binlog skipped events
 
 - metrics: `rate(syncer_binlog_skipped_events_total[1m])`
-- info: the total number of SQL statements that Syncer skips when the upstream synchronizes binlog files with the downstream; you can configure the format of SQL statements skipped by Syncer using the `skip-sqls` parameter in the `syncer.toml` file.
+- info: the total number of SQL statements that Syncer skips when the upstream synchronizes binlog files with the downstream; you can configure the format of SQL statements skipped by Syncer using the `skip-ddls` and `skip-dmls` parameters in the `syncer.toml` file.
 
 #### title: position binlog position
 
