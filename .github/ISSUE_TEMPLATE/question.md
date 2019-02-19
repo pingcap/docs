@@ -6,7 +6,7 @@ about: Usage question that isn't answered in docs or discussion
 ## Question
 
 **This repository is ONLY used to solve issues related to DOCS.
-For other issues (related to TiDB, TiKV, etc), please move to [other repositories](https://github.com/pingcap/).**  
+For other issues (related to TiDB, PD, etc), please move to [other repositories](https://github.com/pingcap/).**  
 
 Before submitting your question, make sure you have:
 

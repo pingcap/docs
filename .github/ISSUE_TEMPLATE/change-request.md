@@ -6,7 +6,7 @@ about: Any suggestion? Want to add something new?
 ## Change Request
 
 **This repository is ONLY used to solve issues related to DOCS.
-For other issues (related to TiDB, TiKV, etc), please move to [other repositories](https://github.com/pingcap/).**
+For other issues (related to TiDB, PD, etc), please move to [other repositories](https://github.com/pingcap/).**
 
 Please answer the following questions before submitting your issue. Thanks!
 
