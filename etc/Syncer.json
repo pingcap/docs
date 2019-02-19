@@ -60,7 +60,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_TIDB-CLUSTER}",
-          "description": "QPS of the binlog event that has been recieved by Syncer",
+          "description": "QPS of the binlog event that has been received by Syncer",
           "fill": 1,
           "id": 1,
           "legend": {
