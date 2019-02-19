@@ -105,7 +105,7 @@ In DM, the simplified replication process of sharding DDL statements within the 
 2. DM-worker continues parsing the binlog between `t2` and `t3`.
 3. DM-worker ignores the DML statement with the `schema V2` schema that belongs to `table_1`, and replicates the DML statement with the `schema V1` schema that belongs to `table_2` to the downstream.
 4. When receiving the DDL statement of `table_2` at `t3`, the DM-worker records the DDL information and the current position of the binlog.
-5. Based on the information of the replication task configuration and the upstream schemas and tables, the DM-worker decides whether the DDL statements of all sharded tables in the MySQL instance have been received. If yes, DM-worker replicates them to the downstream to modify the downstream table schema.
+5. Based on the information of the replication task configuration and the upstream schemas and tables, the DM-worker decides that the DDL statements of all sharded tables in the MySQL instance have been received and replicates them to the downstream to modify the downstream table schema.
 6. DM-worker sets the starting point of parsing the new binlog stream to be the position saved at Step #1.
 7. DM-worker resumes parsing the binlog between `t2` and `t3`.
 8. DM-worker replicates the DML statement with the `schema V2` schema that belongs to `table_1` to the downstream, and ignores the DML statement with the `schema V1` schema that belongs to `table_2`.
