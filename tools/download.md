@@ -21,7 +21,7 @@ In addition, the Kafka version of TiDB-Binlog is also provided.
 
 ## TiDB-DM (Data Migration)
 
-If you want to download the latest version of TiDB-DM, click the download link in the following table. You can also check the [DM Release](https://github.com/pingcap/dm/releases) page.
+If you want to download the latest version of [TiDB-DM](../tools/dm/overview.md), click the download link in the following table. You can also check the [DM Release](https://github.com/pingcap/dm/releases) page.
 
 | Package name | OS | Architecture |  SHA256 checksum |
 |:---|:---|:---|:---|
