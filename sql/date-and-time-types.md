@@ -27,9 +27,6 @@ When dealing with date and time value types, please note:
 + TiDB may automatically convert invalid values or values beyond the supported range to a zero value of that type. This behavior is dependent on the SQL Mode set. For example,
 
   ```sql
-  mysql> set @@sql_mode = '';                               
-  Query OK, 0 rows affected (0.00 sec)
-
   mysql> show create table t1;
   +-------+---------------------------------------------------------------------------------------------------------+
   | Table | Create Table                                                                                            |
@@ -40,8 +37,20 @@ When dealing with date and time value types, please note:
   +-------+---------------------------------------------------------------------------------------------------------+
   1 row in set (0.00 sec)
   
+  mysql> select @@sql_mode;
+  +-------------------------------------------------------------------------------------------------------------------------------------------+
+  | @@sql_mode                                                                                                                                |
+  +-------------------------------------------------------------------------------------------------------------------------------------------+
+  | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |
+  +-------------------------------------------------------------------------------------------------------------------------------------------+
+  1 row in set (0.00 sec)
+  
   mysql> insert into t1 values ('2090-11-32:22:33:44');
-  Query OK, 1 row affected, 1 warning (0.00 sec)
+  ERROR 1292 (22007): Truncated incorrect time value: '2090-11-32:22:33:44'
+  mysql> set @@sql_mode='';                                                                                                                                                                                                                     Query OK, 0 rows affected (0.01 sec)
+  
+  mysql> insert into t1 values ('2090-11-32:22:33:44');
+  Query OK, 1 row affected, 1 warning (0.01 sec)
   
   mysql> select * from t1;
   +----------+
@@ -49,12 +58,12 @@ When dealing with date and time value types, please note:
   +----------+
   | 00:00:00 |
   +----------+
-  1 row in set (0.00 sec)
+  1 row in set (0.01 sec)
   ```
 
 + Setting different SQL modes can change TiDB behaviors.
-+ TiDB allows month or day in the columns of `DATE` and `DATETIME` to be zero value, for example, '2009-00-00' or '2009-01-00'. If this date type is to be calculated in a function, for example, in `DATE_SUB()` or `DATE_ADD()`, the result can be incorrect. 
-+ TiDB allows zero value '0000-00-00' to be stored. Sometimes '0000-00-00' is more convenient for users than NULL value if they are not using the `NO_ZERO_DATE` SQL mode.
++ If the SQL mode `NO_ZERO_DATE` is not enabled, TiDB allows month or day in the columns of `DATE` and `DATETIME` to be zero value, for example, '2009-00-00' or '2009-01-00'. If this date type is to be calculated in a function, for example, in `DATE_SUB()` or `DATE_ADD()`, the result can be incorrect. 
++ By default, TiDB enables the SQL mode `NO_ZERO_DATE`. This mode prevents storing zero values such as '0000-00-00'.
 
 Different types of zero value are shown in the following table:
 
