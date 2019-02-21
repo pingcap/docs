@@ -4,7 +4,7 @@ summary: Learn about the TiDB-supported date and time types.
 category: user guide
 ---
 
-# Date and time types
+# Date and Time Types
 
 TiDB supports the following data types to store temporal values: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`, and `YEAR`. Each of these types has its own range of valid values, and uses a zero value to indicate that it is an invalid value. In addition, the `TIMESTAMP` and `DATETIME` types can automatically generate new time values on modification.
 
