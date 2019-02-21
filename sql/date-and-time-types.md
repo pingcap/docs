@@ -195,7 +195,7 @@ Using the `CAST()` function can explicitly convert a value to a `DATE` type. For
 date_col = CAST(datetime_col AS DATE)
 ```
 
-converting `TIME` and `DATETIME` to numeric format:
+Converting `TIME` and `DATETIME` to numeric format. For example,
 
 ```sql
 mysql> SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
