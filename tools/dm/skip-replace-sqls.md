@@ -42,7 +42,7 @@ In DM, two modes of matching the binlog event are supported (you can only choose
 
 In the scenario of merging and replicating data from sharded tables, if you need DM to automatically select a DDL lock owner to execute the skip/replace operation, then you must use the DDL pattern matching mode because the binlog positions corresponding to the DDL statements on different DM-workers are not logically connected and are hard to confirm.
 
-**Restrictions**
+**Notes:**
 
 - You can only register one operator (specified by `--binlog-pos`) for one binlog event. The previous one can be overwritten by the newly registered operator.
 - Do not specify an operator for one binlog event by using `--binlog-pos` and `--sql-pattern` at the same time.
