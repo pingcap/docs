@@ -1,6 +1,6 @@
 ---
-title: date and time types
-summary: learn about the TiDB-supported date and time types 
+title: Date and Time Types
+summary: Learn about the TiDB-supported date and time types.
 category: user guide
 ---
 
@@ -90,7 +90,7 @@ When `TIMESTAMP` is to be stored, TiDB converts the `TIMESTAMP` value from the c
 
 Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ). 
 
-**Note**: In `TIMESTAMP`, zero is not permitted to appear in the month-portion or day-portion. The only exception is zero value itself '0000-00-00 00:00:00'.
+> **Note:** In `TIMESTAMP`, zero is not permitted to appear in the month-portion or day-portion. The only exception is zero value itself '0000-00-00 00:00:00'.
 
 ## `TIME` type
 
@@ -122,21 +122,21 @@ For any column with `TIMESTAMP` or `DATETIME` value type in the table, you can s
 
 These properties can be set by setting `DEFAULT CURRENT_TIMESTAMP` and `ON UPDATE CURRENT_TIMESTAMP` when the column is being defined. DEFAULT can also be set as a specific value, such as `DEFAULT 0` or `DEFAULT '2000-01-01 00:00:00'`.
 
-    ```sql
-    CREATE TABLE t1 (
-        ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    );
-    ```
+```sql
+CREATE TABLE t1 (
+    ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
 
 The default value for `DATETIME` is `NULL` unless it is specified as `NOT NULL`. For the latter situation, if no default value is set, the default value is be 0.
 
-    ```sql
-    CREATE TABLE t1 (
-      dt1 DATETIME ON UPDATE CURRENT_TIMESTAMP,         -- default NULL
-      dt2 DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP -- default 0
-    );
-    ```
+```sql
+CREATE TABLE t1 (
+    dt1 DATETIME ON UPDATE CURRENT_TIMESTAMP,         -- default NULL
+    dt2 DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP -- default 0
+);
+```
 
 ## Decimal part of time value
 
@@ -191,26 +191,26 @@ When `TIME` is converted to `DATE`, the process is similar, and the time-portion
 
 Using the `CAST()` function can explicitly convert a value to a `DATE` type. For example,
 
-    ```sql
-    date_col = CAST(datetime_col AS DATE)
-    ```
+```sql
+date_col = CAST(datetime_col AS DATE)
+```
 
 converting `TIME` and `DATETIME` to numeric format:
 
-    ```sql
-    mysql> SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
-    +-----------|-------------|--------------+
-    | CURTIME() | CURTIME()+0 | CURTIME(3)+0 |
-    +-----------|-------------|--------------+
-    | 09:28:00  |       92800 |    92800.887 |
-    +-----------|-------------|--------------+
-    mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
-    +---------------------|----------------|--------------------+
-    | NOW()               | NOW()+0        | NOW(3)+0           |
-    +---------------------|----------------|--------------------+
-    | 2012-08-15 09:28:00 | 20120815092800 | 20120815092800.889 |
-    +---------------------|----------------|--------------------+
-    ```
+```sql
+mysql> SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
++-----------|-------------|--------------+
+| CURTIME() | CURTIME()+0 | CURTIME(3)+0 |
++-----------|-------------|--------------+
+| 09:28:00  |       92800 |    92800.887 |
++-----------|-------------|--------------+
+mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
++---------------------|----------------|--------------------+
+| NOW()               | NOW()+0        | NOW(3)+0           |
++---------------------|----------------|--------------------+
+| 2012-08-15 09:28:00 | 20120815092800 | 20120815092800.889 |
++---------------------|----------------|--------------------+
+```
 
 ## Two-digit year-portion contained in the date
 
@@ -223,8 +223,8 @@ For `DATETIME`, `DATE` and `TIMESTAMP` types, TiDB follows these rules to elimin
 
 These rules also apply to the `YEAR` type, with one exception:
 
-When numeral 00 is inserted to YEAR(4), the result is 0000 rather than 2000. 
+When numeral `00` is inserted to `YEAR(4)`, the result is 0000 rather than 2000. 
 
-If you want the result to be 2000, you should specify value to be 2000, '0' or '00'.
+If you want the result to be 2000, specify value to be 2000, '0' or '00'.
 
 The two-digit year-portion might not be properly calculated in some functions such  `MIN()` and  `MAX()`. For these functions, the four-digit format suites better.
