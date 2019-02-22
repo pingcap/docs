@@ -362,17 +362,17 @@ Before replicating data using Syncer, check the following items:
 
 2. Check the `server-id` of the source database.
 
-    - Check the `server-id` using the following command:
+    Check the `server-id` using the following command:
 
-        ```sql
-        mysql> show global variables like 'server_id';
-        +---------------+-------
-        | Variable_name | Value |
-        +---------------+-------+
-        | server_id     | 1     |
-        +---------------+-------+
-        1 row in set (0.01 sec)
-        ```
+    ```sql
+    mysql> show global variables like 'server_id';
+    +---------------+-------
+    | Variable_name | Value |
+    +---------------+-------+
+    | server_id     | 1     |
+    +---------------+-------+
+    1 row in set (0.01 sec)
+    ```
 
     - If the result is null or 0, Syncer cannot replicate data.
     - Syncer `server-id` must be different from the MySQL `server-id`, and must be unique in the MySQL cluster.
