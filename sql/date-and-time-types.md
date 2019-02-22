@@ -11,8 +11,8 @@ TiDB supports the following data types to store temporal values: `DATE`, `TIME`,
 When dealing with date and time value types, note: 
 
 + Although TiDB tries to interpret different formats, the date-portion must be in the format of year-month-day (for example, '1998-09-04'), rather than month-day-year or day-month-year.
-+ If the year-portion of a date is specified as 2 digits, TiDB converts it based on rules which will be specified in the later section of this document ( "Two-digit year-portion contained in the date" ) .
-+ If a numeric value is needed in the context, TiDB automatically converts the date or time value into a numeric type. For example,
++ If the year-portion of a date is specified as 2 digits, TiDB converts it based on [specific rules](#two-digit-year-portion-contained-in-the-date).
++ If a numeric value is needed in the context, TiDB automatically converts the date or time value into a numeric type. For example:
 
     ```sql
     mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
@@ -23,7 +23,7 @@ When dealing with date and time value types, note:
     +---------------------+----------------+--------------------+
     ```
   
-+ TiDB might automatically convert invalid values or values beyond the supported range to a zero value of that type. This behavior is dependent on the SQL Mode set. For example,
++ TiDB might automatically convert invalid values or values beyond the supported range to a zero value of that type. This behavior is dependent on the SQL Mode set. For example:
 
     ```sql
     mysql> show create table t1;
@@ -152,7 +152,7 @@ A decimal part is permitted for `TIME`, `DATETIME`, `TIMESTAMP` types. The decim
 
   `0` means there is no fractional part. If `fsp` is omitted, the default is 0.
 
-+ When inserting `TIME`, `DATETIME` or `TIMESTAMP` which contain a fractional part, if the number of digit of the fraction is too few, or too many, rounding might be needed in the situation. For example,
++ When inserting `TIME`, `DATETIME` or `TIMESTAMP` which contain a fractional part, if the number of digit of the fraction is too few, or too many, rounding might be needed in the situation. For example:
 
     ```sql
     mysql> CREATE TABLE fractest( c1 TIME(2), c2 DATETIME(2), c3 TIMESTAMP(2) );
@@ -189,13 +189,13 @@ When we convert `TIME` to other time and date formats, the date-portion is autom
 
 When `TIME` is converted to `DATE`, the process is similar, and the time-portion is discarded.
 
-Using the `CAST()` function can explicitly convert a value to a `DATE` type. For example,
+Using the `CAST()` function can explicitly convert a value to a `DATE` type. For example:
 
 ```sql
 date_col = CAST(datetime_col AS DATE)
 ```
 
-Converting `TIME` and `DATETIME` to numeric format. For example,
+Converting `TIME` and `DATETIME` to numeric format. For example:
 
 ```sql
 mysql> SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
