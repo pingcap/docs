@@ -442,7 +442,7 @@ Before replicating data using Syncer, check the following items:
 
     1. Check the user privileges required by mydumper for full data export.
 
-        - To export the full data using mydumper, the user must have the privilege of `select, reload`.
+        - To export the full data using mydumper, the user must have the privileges of `select` and `reload`.
         - You can add the `--no-locks` option when the operation object is RDS, to avoid applying for the `reload` privilege.
 
     2. Check the upstream MySQL or MariaDB user privileges required by Syncer for incremental replication.
