@@ -8,7 +8,7 @@ category: tools
 
 This document introduces how to handle abnormal SQL statements using Data Migration (DM). 
 
-Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL statements supported by TiDB](https://pingcap.com/docs/sql/ddl/)). Therefore, when DM is replicating data from MySQL to TiDB and TiDB does not support the corresponding SQL statement, an error might occur and break the replication process. In this case, there are two ways to resume the replication:
+Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL statements supported by TiDB](/sql/ddl.md)). Therefore, when DM is replicating data from MySQL to TiDB and TiDB does not support the corresponding SQL statement, an error might occur and break the replication process. In this case, there are two ways to resume the replication:
 - use `dmctl` to manually skip the binlog event to which this SQL statement corresponds
 - use `dmctl` to manually replace the corresponding binlog event with other specified SQL statements that will be executed to the downstream
 
