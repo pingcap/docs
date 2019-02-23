@@ -40,7 +40,7 @@ In DM, two modes of matching the binlog event are supported (you can only choose
     - The DDL pattern is given by `--sql-pattern` in the command, for example, to match ``` ALTER TABLE `db2`.`tbl2` DROP COLUMN `c2` ```, the corresponding regular expression should be ``` ~(?i)ALTER\s+TABLE\s+`db2`.`tbl2`\s+DROP\s+COLUMN\s+`c2` ```.
     - The regular expression must be prefixed with `~` and cannot contain any common space (you can replace the space with `\s` or `\s+` in the string).
 
-In the scenario of merging and replicating data from sharded tables, if you need DM to automatically select a DDL lock owner to execute the skip/replace operation, then you must use the DDL pattern matching mode because the binlog positions corresponding to the DDL statements on different DM-workers are not logically connected and are hard to confirm.
+In the scenario of merging and replicating data from sharded tables, if you need DM to automatically select a DDL lock owner to execute the skip/replace operation, then you must use the DDL pattern matching mode because the binlog positions corresponding to the DDL statements on different DM-workers have no logical connection and are hard to confirm.
 
 **Notes:**
 
@@ -61,13 +61,13 @@ In the scenario of merging and replicating data from sharded tables, if you need
 
 In DM, simplified procedures of incremental data replication can be described as follows:
 
-1. The relay processing unit is used as a slave of the upstream MySQL to fetch the binlog that is persisted in the local storage as the relay log. 
+1. The relay unit is used as a slave of the upstream MySQL to fetch the binlog that is persisted in the local storage as the relay log. 
 2. The binlog replication unit (sync) reads the local relay log to obtain the binlog event. 
 3. The binlog replication unit parses the binlog event and builds the DDL/DML statements, and then replicates these statements to the downstream TiDB.
 
 When the binlog replication unit is parsing the binlog event and replicating data to the downstream, the replication process might get interrupted because the corresponding SQL statement is not supported by TiDB.
 
-In DM, you can register some skip/replace operators for the binlog event. Before replicating the SQL statements to the downstream, you can compare the current binlog event information(position, DDL statement) with registered operators. If the position or the DDL matches with a registered operator, you can execute the operation corresponding to the operator and then remove this operator. 
+In DM, you can register some skip/replace operators for the binlog event. Before replicating the SQL statements to the downstream, DM will compare the current binlog event information(position, DDL statement) with registered operators. If the position or the DDL matches with a registered operator, it will execute the operation corresponding to the operator and then remove this operator. 
 
 **Use `sql-skip` / `sql-replace` to resume the replication**
 
@@ -102,9 +102,6 @@ When you use `dmctl` to manually handle the SQL statements unsupported by TiDB, 
 
 `query-status` allows you to query the current status of items such as the subtask and the relay unit in each DM-worker. For details, see [query status](/tools/dm/query-status.md).  
 
-
----
-
 #### query-error
 
 `query-error` allows you to query the existing errors of the running subtask and relay unit in DM-workers.
@@ -115,7 +112,7 @@ When you use `dmctl` to manually handle the SQL statements unsupported by TiDB, 
 query-error [--worker=127.0.0.1:8262] [task-name]
 ```
 
-##### Variable description
+##### Arguments description
 
 + `worker`:
     - Flag parameter, string, `--worker`, optional
@@ -164,8 +161,6 @@ query-error [--worker=127.0.0.1:8262] [task-name]
 }
 ```
 
----
-
 #### sql-skip
 
 `sql-skip` allows you to preset a skip operation that is to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`. 
@@ -176,7 +171,7 @@ query-error [--worker=127.0.0.1:8262] [task-name]
 sql-skip <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [--sql-pattern=~(?i)ALTER\s+TABLE\s+`db1`.`tbl1`\s+ADD\s+COLUMN\s+col1\s+INT] [--sharding] <task-name>
 ```
 
-##### Variable description
+##### Arguments description
 
 + `worker`:
     - Flag parameter, string, `--worker`
@@ -203,9 +198,6 @@ sql-skip <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [
     - Non-flag parameter, string, required
     - `task-name` specifies the name of the task in which the presetted operation is going to be executed. 
 
-
----
-
 #### sql-replace
 
 `sql-replace` allows you to preset a replace operation that is to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`.
@@ -216,7 +208,7 @@ sql-skip <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [
 sql-replace <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [--sql-pattern=~(?i)ALTER\s+TABLE\s+`db1`.`tbl1`\s+ADD\s+COLUMN\s+col1\s+INT] [--sharding] <task-name> <SQL-1;SQL-2>
 ```
 
-##### Variable description
+##### Arguments description
 
 + `worker`: 
     - same with `--worker` of `sql-skip`
@@ -323,9 +315,6 @@ Assume that it is acceptable in the actual production environment that this DDL 
 4. Use `query-status` to guarantee that the `stage` of the task has changed into `Running`.
 5. Use `query-error` to guarantee that the original error information has been removed.
 
-
----
-
 #### Actively replace before the replication gets interrupted 
 
 ##### Business scenario
@@ -408,10 +397,7 @@ For this particular DDL statement, because dropping columns with the index is no
     op: REPLACE, args: ALTER TABLE `db2`.`tbl2` DROP INDEX idx_c2; ALTER TABLE `db2`.`tbl2` DROP COLUMN `c2`
     ```
 6. Use `query-status` to guarantee that the `stage` of the task has been sustained as `Running`.
-7. Use `query-error` to guarantee that the DDL execution error has been removed.
-
-
----
+7. Use `query-error` to guarantee that no DDL execution error exists.
 
 #### Passively skip after the replication gets interrupted in the scenario of merging and replicating data from sharded tables
 
@@ -430,10 +416,7 @@ There are two major differences between the two scenarios as follows. In the sce
 1. We just need the DDL lock owner to execute `sql-skip` (`--worker={DDL-lock-owner}`). 
 2. We just need the DDL lock owner to execute `resume-task` (`--worker={DDL-lock-owner}`).
 
-
----
-
-#### Actively replace after the replication gets interrupted in the scenario of merging and replicating data from sharded tables
+#### Actively replace before the replication gets interrupted in the scenario of merging and replicating data from sharded tables
 
 ##### Business scenario
 
@@ -523,7 +506,7 @@ For this particular DDL statement, because dropping columns with the index is no
     pattern: ~(?i)ALTER\s+TABLE\s+`shard_db`.`shard_table`\s+DROP\s+COLUMN\s+`c2`, 
     op: REPLACE, args: ALTER TABLE `shard_db`.`shard_table` DROP INDEX idx_c2; ALTER TABLE `shard_db`.`shard_table` DROP COLUMN `c2`
     ```
-    At the same time, you can view the following log in the **DM-master** node:
+    In addition, you can view the following log in the **DM-master** node:
     ```bash
     2018/12/28 16:54:35 operator.go:122: [info] [sql-operator] get an operator 
     uuid: eba35acd-6c5e-4bc3-b0b0-ae8bd1232351, request: name:"test" op:REPLACE 
@@ -543,5 +526,5 @@ For this particular DDL statement, because dropping columns with the index is no
     sharding:true
     ```
 7. Use `query-status` to guarantee that the `stage` of the task has been sustained as `Running`, and there is no more DDL statement that is blocking the replication (`blockingDDLs`) and no more sharding group to be resolved (`unresolvedGroups`).
-8. Use `query-error` to guarantee that the DDL execution error has been removed.
+8. Use `query-error` to guarantee that no DDL execution error exists.
 9. Use `show-ddl-locks` to guarantee that all DDL locks have been resolved.
