@@ -15,12 +15,16 @@ Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL
 If you know in advance that an unsupported SQL statement is going to be replicated, you can also use dmctl to manually preset the skip or replace operation, which is automatically executed when DM replicates the corresponding binlog event into the downstream and thus avoid breaking the replication.
 
 #### Restrictions
+
 - The skip or replace operation is a one-time operation that is only used to skip or replace the SQL statement unsupported by the downstream TiDB. Do not handle other replication errors with this approach.
     - For other replication errors, try to handle them using [Black and white table lists](/tools/dm/data-synchronization-features.md#black-and-white-table-lists) or [Binlog event filtering](/tools/dm/data-synchronization-features.md#binlog-event-filtering).
-- If it is unacceptable in the actual production environment that the abnormal DDL statement is skipped in the downstream TiDB and it cannot be replaced with other DDL statements, then using this approach is not recommended.
+
+- If it is unacceptable in the actual production environment that the abnormal DDL statement is skipped in the downstream TiDB and it cannot be replaced with other DDL statements, then do not use this approach.
     - For example: `DROP PRIMARY KEY`
     - In this scenario, you can only create a new table in the downstream with the new table schema (after executing the DDL statement), and re-import all the data into this new table. 
+
 - A single skip or replace operation targets at a single binlog event.
+
 - `--sharding` is only used to preset the operation to the sharding group. You must preset it before executing the DDL statement and presetting it after executing the DDL is not allowed.
     - `--sharding` only supports presetting operations, and in this mode, you can only use `--sql-pattern` to match the binlog event.
     - For the principles of replicating sharding DDL statements using DM, see [Merge and replicate data from sharded tables](/tools/dm/shard-merge.md#principles)
@@ -32,11 +36,15 @@ When the replication task gets interrupted because of the SQL execution error, y
 However, when you try to avoid breaking the replication by actively handling unsupported SQL statements, you cannot know in advance the position of the binlog event, so you need another approach to match the subsequent binlog events.
 
 In DM, two modes of matching the binlog event are supported (you can only choose one mode from below):
+
 1. binlog position: the position information of the binlog event 
+
     - The binlog position is given by `--binlog-pos` in the command, and the format is `binlog-filename:binlog-pos`, for example, `mysql-bin|000001.000003:3270`.
     - The format of the binlog filename in DM is not completely consistent with that in the upstream MySQL.
     - When the replication error occurs, the position can be directly obtained from `failedBinlogPosition` returned by `query-error`.
+
 2. DDL pattern: the regular expression (only for the DDL statement) matching mode
+
     - The DDL pattern is given by `--sql-pattern` in the command, for example, to match ``` ALTER TABLE `db2`.`tbl2` DROP COLUMN `c2` ```, the corresponding regular expression should be ``` ~(?i)ALTER\s+TABLE\s+`db2`.`tbl2`\s+DROP\s+COLUMN\s+`c2` ```.
     - The regular expression must be prefixed with `~` and cannot contain any common space (you can replace the space with `\s` or `\s+` in the string).
 
@@ -46,14 +54,17 @@ In the scenario of merging and replicating data from sharded tables, if you need
 
 - You can only register one operator (specified by `--binlog-pos`) for one binlog event. The previous one can be overwritten by the newly registered operator.
 - Do not specify an operator for one binlog event by using `--binlog-pos` and `--sql-pattern` at the same time.
-- After the operator successfully matches with the binlog event (not after the execution succeeds), it will be deleted. If you need to match again (using `--sql-pattern`) later, you have to register a new operator.
+- The operator is deleted once it successfully matches the binlog event (not after the execution succeeds). If you need to match again (using `--sql-pattern`) later, you have to register a new operator.
 
 ### Support scenarios
 
-- Scenario 1: during the replication, if the DDL statement unsupported by TiDB is executed in the upstream and replicated to the downstream, the replication task will get interrupted.
+- Scenario 1: during the replication, the DDL statement unsupported by TiDB is executed in the upstream and replicated to the downstream, and as a result, the replication task gets interrupted.
+
     - If it is acceptable that this DDL statement is skipped in the downstream TiDB, then you can use `sql-skip` to resume the replication.
     - If it is acceptable that this DDL statement is replaced with other DDL statements, then you can use `sql-replace` to resume the replication.
-- Scenario 2: during the replication, if you know in advance that an unsupported SQL statement is going to be replicated, you can handle it beforehand to avoid breaking the replication.
+
+- Scenario 2: during the replication, you know in advance that an unsupported SQL statement is going to be replicated, so you can handle it beforehand to avoid breaking the replication.
+
     - If it is acceptable that this DDL statement is skipped in the downstream TiDB, then you can use `sql-skip` to preset an operation to automatically skip this DDL statement when it needs to be executed.
     - If it is acceptable that this DDL statement is replaced with other DDL statements, then you can use `sql-replace` to preset an operation to automatically replace this DDL statement when it needs to be executed.
 
@@ -177,11 +188,13 @@ sql-skip <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [
     - Flag parameter, string, `--worker`
     - If `--sharding` is not specified, `worker` is required; if `--sharding` is specified, `worker` is forbidden to use.
     - `worker` specifies the DM-worker in which the presetted operation is going to be executed.
+
 + `binlog-pos`: 
     - Flag parameter, string, `--binlog-pos`
     - You must specify `binlog-pos` or `--sql-pattern`, and you must not specify both.
     - If it is specified, the skip operation will be executed when `binlog-pos` matches with the position of the binlog event. The format is `binlog-filename:binlog-pos`, for example, `mysql-bin|000001.000003:3270`.
     - When the replication error occurs, the position can be obtained from `failedBinlogPosition`  returned by `query-error`.
+
 + `sql-pattern`: 
     - Flag parameter, string, `--sql-pattern`
     - You must specify `--sql-pattern` or `binlog-pos`, and you must not specify both.
@@ -190,10 +203,12 @@ sql-skip <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [
         - The regular expression must be prefixed with `~`. For details, see [regular expression syntax](https://golang.org/pkg/regexp/syntax/#hdr-Syntax).
         - The schema/table name in the regular expression must be converted by the optional router-rule, so the converted name is consistent with the target schema/table name in the downstream. For example, if there are ``` `shard_db_1`.`shard_tbl_1` ``` in the upstream and ``` `shard_db`.`shard_tbl` ``` in the downstream, then you should match ``` `shard_db`.`shard_tbl` ```.
         - The schema/table/column name in the regular expression should be marked by ``` ` ```, for example, ``` `db1`.`tbl1` ```.
+
 + `sharding`: 
     - Flag parameter, boolean, `--sharding`
     - If `--worker` is not specified, `sharding` is required; if `--worker` is specified, `sharding` is forbidden to use.
     - If `sharding` is specified, it indicates that the presetted operation is going to be executed in the DDL lock owner during the sharding DDL replication.
+
 + `task-name`: 
     - Non-flag parameter, string, required
     - `task-name` specifies the name of the task in which the presetted operation is going to be executed. 
@@ -212,14 +227,19 @@ sql-replace <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270
 
 + `worker`: 
     - same with `--worker` of `sql-skip`
+
 + `binlog-pos`: 
     - same with `--binlog-pos` of `sql-skip`
+
 + `sql-pattern`: 
     - same with `--sql-pattern` of `sql-skip`
+
 + `sharding`: 
     - same with `--sharding` of `sql-skip`
+
 + `task-name`: 
     - same with `task-name` of `sql-skip`
+
 + `SQLs`: 
     - Non-flag parameter, string, required 
     - `SQLs` specifies the new SQL statements that are going to replace the original binlog event. You should separate multiple SQL statements with `;`, for example, ``` ALTER TABLE shard_db.shard_table drop index idx_c2;ALTER TABLE shard_db.shard_table DROP COLUMN c2; ```. 
@@ -269,6 +289,7 @@ Assume that it is acceptable in the actual production environment that this DDL 
 1. Use `query-error` to obtain the position of the failed binlog event.
     - You can get the position from `failedBinlogPosition` returned by `query-error`.
     - In this example, the position is `mysql-bin|000001.000003:34642`.
+
 2. Use `sql-skip` to preset a skip operation that is to be executed when DM replicates this binlog event to the downstream after using `resume-task`.
 
     ```bash
@@ -321,6 +342,7 @@ Assume that it is acceptable in the actual production environment that this DDL 
     ```
 
 4. Use `query-status` to guarantee that the `stage` of the task has changed into `Running`.
+
 5. Use `query-error` to guarantee that the original error information has been removed.
 
 #### Actively replace before the replication gets interrupted 
@@ -365,13 +387,17 @@ For this particular DDL statement, because dropping columns with the index is no
 1. Design a matchable regular expression for the DDL statement (converted by the optional router-rule) to be executed in the upstream.
     - The DDL statement to be executed in the upstream is `ALTER TABLE db2.tbl2 DROP COLUMN c2;`. 
     - Because its router-rule conversion does not exist, we can design the following regular expression:
+
         ```sql
         ~(?i)ALTER\s+TABLE\s+`db2`.`tbl2`\s+DROP\s+COLUMN\s+`c2`
         ```
+
 2. Build new DDL statements that are used to replace this original DDL statement.
+
     ```sql
     ALTER TABLE `db2`.`tbl2` DROP INDEX idx_c2;ALTER TABLE `db2`.`tbl2` DROP COLUMN `c2`
     ```
+
 3. Use `sql-replace` to preset a replace operation that is to be executed when DM replicates the corresponding binlog event to the downstream.
 
     ```bash
@@ -399,6 +425,7 @@ For this particular DDL statement, because dropping columns with the index is no
     ```
 
 4. Execute the DDL statements in the upstream MySQL.
+
 5. Check if the downstream table schema is altered successfully, and you can view the following log in the corresponding DM-worker node:
 
     ```bash
@@ -409,8 +436,9 @@ For this particular DDL statement, because dropping columns with the index is no
     pattern: ~(?i)ALTER\s+TABLE\s+`db2`.`tbl2`\s+DROP\s+COLUMN\s+`c2`, 
     op: REPLACE, args: ALTER TABLE `db2`.`tbl2` DROP INDEX idx_c2; ALTER TABLE `db2`.`tbl2` DROP COLUMN `c2`
     ```
-    
+
 6. Use `query-status` to guarantee that the `stage` of the task has been sustained as `Running`.
+
 7. Use `query-error` to guarantee that no DDL execution error exists.
 
 #### Passively skip after the replication gets interrupted in the scenario of merging and replicating data from sharded tables
@@ -435,6 +463,7 @@ There are two major differences between the two scenarios as follows. In the sce
 ##### Business scenario
 
 Assume that we need to merge and replicate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream: 
+
 - In the MySQL instance 1, there is a schema `shard_db_1`, which has two tables `shard_table_1` and `shard_table_2`.
 - In the MySQL instance 2, there is a schema `shard_db_2`, which has two tables `shard_table_1` and `shard_table_2`.
 
@@ -476,14 +505,19 @@ For this particular DDL statement, because dropping columns with the index is no
 1. Design a matchable regular expression for the DDL statement (converted by the optional router-rule) to be executed in the upstream.
     - The DDL statement to be executed in the upstream is `ALTER TABLE shard_db_*.shard_table_* DROP COLUMN c2`. 
     - Because the table name will be converted into ``` `shard_db`.`shard_table` ``` by the router-rule, we can design the following regular expression:
+
         ```sql
         ~(?i)ALTER\s+TABLE\s+`shard_db`.`shard_table`\s+DROP\s+COLUMN\s+`c2`
         ```
+
 2. Build new DDL statements that are used to replace this original DDL statement.
+
     ```sql
     ALTER TABLE `shard_db`.`shard_table` DROP INDEX idx_c2;ALTER TABLE `shard_db`.`shard_table` DROP COLUMN `c2`
     ```
+
 3. Because this is in the scenario of merging and replicating data from sharded tables, we use `--sharding` to automatically guarantee that the replace operation is only executed in the DDL lock owner.
+
 4. Use `sql-replace` to preset a replace operation that is to be executed when DM replicates the corresponding binlog event to the downstream.
 
     ```bash
@@ -508,6 +542,7 @@ For this particular DDL statement, because dropping columns with the index is no
     ```
 
 5. Execute the DDL statements to the sharded tables in the upstream MySQL instances.
+
 6. Check if the downstream table schema is altered successfully, and you can also view the following log in the DDL lock **owner** node:
 
     ```bash
@@ -550,5 +585,7 @@ For this particular DDL statement, because dropping columns with the index is no
     ```
 
 7. Use `query-status` to guarantee that the `stage` of the task has been sustained as `Running`, and there is no more DDL statement that is blocking the replication (`blockingDDLs`) and no more sharding group to be resolved (`unresolvedGroups`).
+
 8. Use `query-error` to guarantee that no DDL execution error exists.
+
 9. Use `show-ddl-locks` to guarantee that all DDL locks have been resolved.
