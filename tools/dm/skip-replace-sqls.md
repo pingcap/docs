@@ -57,7 +57,7 @@ In the scenario of merging and replicating data from sharded tables, if you need
 > - Do not specify an operator for one binlog event by using `--binlog-pos` and `--sql-pattern` at the same time.
 > - The operator is deleted once it successfully matches the binlog event (not after the execution succeeds). If you need to match again (using `--sql-pattern`) later, you have to register a new operator.
 
-### Support scenarios
+### Supported scenarios
 
 - Scenario 1: during the replication, the DDL statement unsupported by TiDB is executed in the upstream and replicated to the downstream, and as a result, the replication task gets interrupted.
 
