@@ -264,9 +264,9 @@ sql-replace <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270
 
 #### Passively skip after the replication gets interrupted
 
-##### Business scenario
+##### Application scenario
 
-Assume that we need to replicate the upstream table `db1.tbl1` to the downstream TiDB (not in the scenario of merging and replicating data from sharded tables). The initial table schema is:
+Assume that you need to replicate the upstream table `db1.tbl1` to the downstream TiDB (not in the scenario of merging and replicating data from sharded tables). The initial table schema is:
 
 ```sql
 mysql> SHOW CREATE TABLE db1.tbl1;
@@ -363,9 +363,9 @@ Assume that it is acceptable in the actual production environment that this DDL 
 
 #### Actively replace before the replication gets interrupted 
 
-##### Business scenario
+##### Application scenario
 
-Assume that we need to replicate the upstream table `db2.tbl2` to the downstream TiDB (not in the scenario of merging and replicating data from sharded tables). The initial table schema is:
+Assume that you need to replicate the upstream table `db2.tbl2` to the downstream TiDB (not in the scenario of merging and replicating data from sharded tables). The initial table schema is:
 
 ```sql
 mysql> SHOW CREATE TABLE db2.tbl2;
@@ -394,15 +394,15 @@ exec sqls[[USE `db2`; ALTER TABLE `db2`.`tbl2` DROP COLUMN `c2`;]] failed,
 err:Error 1105: can't drop column c2 with index covered now
 ```
 
-**Assume that we know in advance that this DDL statement is not supported by TiDB before it is executed in the upstream.** Then we can use `sql-skip` or `sql-replace` to preset a skip or replace operation for this DDL statement. 
+**Assume that you know in advance that this DDL statement is not supported by TiDB before it is executed in the upstream.** Then you can use `sql-skip` or `sql-replace` to preset a skip or replace operation for this DDL statement. 
 
-For this particular DDL statement, because dropping columns with the index is not temporarily supported by TiDB, we can use two new SQL statements to replace the original DDL, namely, DROP the index first and then DROP the column c2.
+For this particular DDL statement, because dropping columns with the index is not temporarily supported by TiDB, you can use two new SQL statements to replace the original DDL, namely, DROP the index first and then DROP the column c2.
 
 ##### Actively replace the SQL statement
 
 1. Design a matchable regular expression for the DDL statement (converted by the optional router-rule) to be executed in the upstream.
     - The DDL statement to be executed in the upstream is `ALTER TABLE db2.tbl2 DROP COLUMN c2;`. 
-    - Because its router-rule conversion does not exist, we can design the following regular expression:
+    - Because its router-rule conversion does not exist, you can design the following regular expression:
 
         ```sql
         ~(?i)ALTER\s+TABLE\s+`db2`.`tbl2`\s+DROP\s+COLUMN\s+`c2`
@@ -459,9 +459,9 @@ For this particular DDL statement, because dropping columns with the index is no
 
 #### Passively skip after the replication gets interrupted in the scenario of merging and replicating data from sharded tables
 
-##### Business scenario
+##### Application scenario
 
-Assume that we need to merge and replicate multiple tables in multiple upstream MySQL instances to one same table in the downstream TiDB through multiple DM-workers. And the DDL statement unsupported by TiDB is executed to the upstream sharded tables. 
+Assume that you need to merge and replicate multiple tables in multiple upstream MySQL instances to one same table in the downstream TiDB through multiple DM-workers. And the DDL statement unsupported by TiDB is executed to the upstream sharded tables. 
 
 After DM-master coordinates the DDL replication through the DDL lock and requests the DDL lock owner to execute the DDL statement to the downstream, the replication gets interrupted because this DDL statement is not supported by TiDB. 
 
@@ -471,15 +471,15 @@ In the scenario of merging and replicating data from sharded tables, passively s
 
 There are two major differences between the two scenarios as follows. In the scenario of merging and replicating data from sharded tables:  
 
-1. We just need the DDL lock owner to execute `sql-skip` (`--worker={DDL-lock-owner}`). 
+1. You just need the DDL lock owner to execute `sql-skip` (`--worker={DDL-lock-owner}`). 
 
-2. We just need the DDL lock owner to execute `resume-task` (`--worker={DDL-lock-owner}`).
+2. You just need the DDL lock owner to execute `resume-task` (`--worker={DDL-lock-owner}`).
 
 #### Actively replace before the replication gets interrupted in the scenario of merging and replicating data from sharded tables
 
-##### Business scenario
+##### Application scenario
 
-Assume that we need to merge and replicate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream: 
+Assume that you need to merge and replicate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream: 
 
 - In the MySQL instance 1, there is a schema `shard_db_1`, which has two tables `shard_table_1` and `shard_table_2`.
 - In the MySQL instance 2, there is a schema `shard_db_2`, which has two tables `shard_table_1` and `shard_table_2`.
@@ -513,15 +513,15 @@ exec sqls[[USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` DROP COLUMN `c2`
 err:Error 1105: can't drop column c2 with index covered now
 ```
 
-**Assume that we know in advance that this DDL statement is not supported by TiDB before it is executed in the upstream.** Then we can use `sql-skip` or `sql-replace` to preset a skip or replace operation for this DDL statement. 
+**Assume that you know in advance that this DDL statement is not supported by TiDB before it is executed in the upstream.** Then you can use `sql-skip` or `sql-replace` to preset a skip or replace operation for this DDL statement. 
 
-For this particular DDL statement, because dropping columns with the index is not temporarily supported by TiDB, we can use two new SQL statements to replace the original DDL, namely, DROP the index first and then DROP the column c2.
+For this particular DDL statement, because dropping columns with the index is not temporarily supported by TiDB, you can use two new SQL statements to replace the original DDL, namely, DROP the index first and then DROP the column c2.
 
 ##### Actively replace the SQL statement
 
 1. Design a matchable regular expression for the DDL statement (converted by the optional router-rule) to be executed in the upstream.
     - The DDL statement to be executed in the upstream is `ALTER TABLE shard_db_*.shard_table_* DROP COLUMN c2`. 
-    - Because the table name should be converted into ``` `shard_db`.`shard_table` ``` by the router-rule, we can design the following regular expression:
+    - Because the table name should be converted into ``` `shard_db`.`shard_table` ``` by the router-rule, you can design the following regular expression:
 
         ```sql
         ~(?i)ALTER\s+TABLE\s+`shard_db`.`shard_table`\s+DROP\s+COLUMN\s+`c2`
@@ -533,7 +533,7 @@ For this particular DDL statement, because dropping columns with the index is no
     ALTER TABLE `shard_db`.`shard_table` DROP INDEX idx_c2;ALTER TABLE `shard_db`.`shard_table` DROP COLUMN `c2`
     ```
 
-3. Because this is in the scenario of merging and replicating data from sharded tables, we use `--sharding` to automatically guarantee that the replace operation is only executed in the DDL lock owner.
+3. Because this is in the scenario of merging and replicating data from sharded tables, you can use `--sharding` to automatically guarantee that the replace operation is only executed in the DDL lock owner.
 
 4. Use `sql-replace` to preset a replace operation that is to be executed when DM replicates the corresponding binlog event to the downstream.
 
