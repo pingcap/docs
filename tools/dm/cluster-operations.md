@@ -405,7 +405,7 @@ This section describes how to switch between master and slave instances using dm
 
 ### Master-slave switch after changing IP
 
-1. Use `query-status` to make sure that the relay unit has caught up with binlog status of the master instance before the switch  (`relayCatchUpMaster`).
+1. Use `query-status` to make sure that the relay unit has caught up with binlog status of the master instance before the switch (`relayCatchUpMaster`).
 2. Use `stop-task` to stop all running tasks.
 3. Modify the DM-worker configuration, and use DM-Ansible to perform a rolling update on DM-worker.
 4. Update the `task.yaml` and `mysql-instances / config` configurations.
