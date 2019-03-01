@@ -5,11 +5,11 @@ category: benchmark
 
 #  Sysbench Test Result of TiDB 3.0 Beta on NVMe SSD
 
-In this test result, Sysbench 1.0.14 is used. It is recommended to use Sysbench with the versions later than 1.0, which can be downloaded [here](https://github.com/akopytov/sysbench/releases/tag/1.0.14).
+In this test, Sysbench 1.0.14 is used. It is recommended to use Sysbench 1.0 or later, which can be downloaded [here](https://github.com/akopytov/sysbench/releases/tag/1.0.14).
 
 ## Test purpose
 
-To test the performance of TiDB 3.0 Beta on NVMe SSD.
+This test aims to test the performance of TiDB 3.0 Beta on NVMe SSD.
 
 ## Test version, time, and place
 
@@ -35,7 +35,7 @@ IDC machines:
 
 ## Test plan
 
-### Information on TiDB versions 
+### TiDB version information 
 
 | Component | GitHash |
 |:---- |:---- |
