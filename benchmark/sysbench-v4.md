@@ -59,6 +59,8 @@ Higher log level means fewer logs to be printed and thus positively influence Ti
 ```
 [log]
 level = "error"
+[prepared-plan-cache]
+enabled = true
 ```
 
 ### TiKV configuration
@@ -158,19 +160,19 @@ Collecting statistics helps the optimizer choose a more accurate execution plan.
 ANALYZE TABLE sbtest7;
 ```
 
-### Point check command
+### Point select test command
 
 ```
 sysbench --config-file=config oltp_point_select --tables=32 --table-size=10000000 run
 ```
 
-### Update index command
+### Update index test command
 
 ```
 sysbench --config-file=config oltp_update_index --tables=32 --table-size=10000000 run
 ```
 
-### Read-only command
+### Read-only test command
 
 ```
 sysbench --config-file=config oltp_read_only --tables=32 --table-size=10000000 run
@@ -236,8 +238,6 @@ The maximum concurrency limits for other modules on TiKV, such as storage readpo
 The actual CPU usage can be observed through Grafana's TiKV Thread CPU monitor panel. If there is a bottleneck on the modules, it can be adjusted by increasing the concurrency of the modules.
 
 ### Given that TiKV has not yet reached the CPU usage bottleneck under high concurrency, why is TiDB's CPU usage still low?
-
-The TiDB parameter `grpc-concurrency` is used to control the concurrency when TiDB sends gRPC requests to TiKV. If messages are crowded on the network, you can increase this parameter to solve the problem.
 
 CPU of NUMA architecture is used on some high-end equipment where cross-CPU access to remote memory will greatly reduce performance. By default, TiDB will use all CPUs of the server, and goroutine scheduling will inevitably lead to cross-CPU memory access.
 
