@@ -237,7 +237,7 @@ The maximum concurrency limits for other modules on TiKV, such as storage readpo
 
 The actual CPU usage can be observed through Grafana's TiKV Thread CPU monitor panel. If there is a bottleneck on the modules, it can be adjusted by increasing the concurrency of the modules.
 
-### Given that TiKV has not yet reached the CPU usage bottleneck under high concurrency, why is TiDB's CPU usage still low?
+### Given that TiKV has not yet reached the CPU usage bottleneck under high concurrency, why is TiDB's CPU utilization rate still low?
 
 CPU of NUMA architecture is used on some high-end equipment where cross-CPU access to remote memory will greatly reduce performance. By default, TiDB will use all CPUs of the server, and goroutine scheduling will inevitably lead to cross-CPU memory access.
 
