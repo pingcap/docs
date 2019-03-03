@@ -56,7 +56,7 @@ For the binlog during incremental data import, DM uses the downstream database t
 
     - When DM-worker is restarted before or after synchronizing sharding DDL statements, it checks the checkpoint information and you can use the `start-task` command to recover the data synchronization task automatically.
 
-    - When DM-worker is restarted during the process of synchronizing sharding DDL statements, the issue might occur that the owner DM-worker has executed the DDL statement and successfully changed the downstream database table schema, while other DM-worker instances are restarted but fail to skip the DDL statement and update the checkpoints.
+    - When DM-worker is restarted during the process of synchronizing sharding DDL statements, the issue might occur that the owner (one of DM-worker instances) has executed the DDL statement and successfully changed the downstream database table schema, while other DM-worker instances are restarted but fail to skip the DDL statement and update the checkpoints.
 
         At this time, DM tries again to synchronize these DDL statements that are not skipped. However, the restarted DM-worker instances will be blocked at the position of the binlog event corresponding to the DDL binlog event, because the DM-worker instance that is not restarted has executed to the place after this DDL binlog event.
 
