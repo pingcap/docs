@@ -355,7 +355,7 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
 3. Edit the `inventory.ini` file and add the new DM-worker instance.
 
-    Edit the `inventory.ini` file, comment or delete the line where the original `dm_worker1` instance that you want to replace exists, and add the information for the new `dm_worker1` instance.
+    Edit the `inventory.ini` file, comment or delete the line where the original `dm_worker1` instance (`172.16.10.72`) that you want to replace exists, and add the information for the new `dm_worker1` instance (`172.16.10.75`).
 
     ```ini
     [dm_worker_servers]
