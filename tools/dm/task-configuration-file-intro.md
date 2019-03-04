@@ -13,7 +13,7 @@ For the feature and configuration of each configuration item, see [Data Synchron
 
 ## Important concepts
 
-For description of important concepts including `instance-id` and the DM-worker ID, see [Important concepts](/tools/dm/dm-configuration-file-overview.md#important-concepts).
+For description of important concepts including `source-id` and the DM-worker ID, see [Important concepts](/tools/dm/dm-configuration-file-overview.md#important-concepts).
 
 ## Configuration order
 
@@ -27,9 +27,9 @@ For description of important concepts including `instance-id` and the DM-worker 
 ```yaml
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`/`incremental`/`all`.
-is-sharding: true               # Whether it is a sharding task.
+is-sharding: true               # Whether it is a task to merge the shards.
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
-remove-meta: false              # Whether to remove the `meta` information (`checkpoint` and `onlineddl`) before starting the synchronization task.
+remove-meta: false              # Whether to remove the `meta` information (`checkpoint` and `onlineddl`) corresponding to the task name before starting the synchronization task.
 enable-heartbeat: false         # Whether to enable the heartbeat feature.
 
 target-database:                # Configuration of the downstream database instance.
@@ -42,10 +42,10 @@ target-database:                # Configuration of the downstream database insta
 `task-mode`
 
 - Description: the task mode that can be used to specify the data synchronization task to be executed.
-- Value: string (`full`, `incremental`, or `all`), `all` by default.
+- Value: string (`full`, `incremental`, or `all`).
     - `full` only makes a full backup of the upstream database and then imports the full data to the downstream database.
     - `incremental`: Only replicates the incremental data of the upstream database to the downstream database using the binlog. You can set the `meta` configuration item of the instance configuration to specify the starting position of incremental replication.
-    - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental replication to the downstream database starting from the exported position during the full backup process (binlog position/GTID).
+    - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental replication to the downstream database starting from the exported position during the full backup process (binlog position).
 
 ### Feature configuration set
 
@@ -73,7 +73,7 @@ filters:
     filter-rule-2:
         schema-pattern: "test_*"
         # Only execute all the DML events in the `test_*` schema.
-        events: ["All DML"]
+        events: ["all dml"]
         action: Do
 
 # The filter rule set of the black white list of the matched table of the upstream database instance.
@@ -146,7 +146,8 @@ This part defines the subtask of data synchronization. DM supports synchronizing
 mysql-instances:
     -
         source-id: "mysql-replica-01"                                      # The ID of the upstream instance or replication group ID. It can be configured by referring to the `source_id` in the `inventory.ini` file or the `source-id` in the `dm-master.toml` file.
-        meta:                                                              # The position where the binlog synchronization starts when the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used.
+        meta:                                                              # The position where the binlog synchronization starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used.
+
             binlog-name: binlog-00001
             binlog-pos: 4
 
