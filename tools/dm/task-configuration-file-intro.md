@@ -18,7 +18,7 @@ For description of important concepts including `instance-id` and the DM-worker 
 ## Configuration order
 
 1. Edit the [global configuration](#global-configuration).
-2. Edit the [instance configuration](#global-configuration) based on the global configuration.
+2. Edit the [instance configuration](#instance-configuration) based on the global configuration.
 
 ## Global configuration
 
@@ -44,8 +44,8 @@ target-database:                # Configuration of the downstream database insta
 - Description: the task mode that can be used to specify the data synchronization task to be executed.
 - Value: string (`full`, `incremental`, or `all`), `all` by default.
     - `full` only makes a full backup of the upstream database and then imports the full data to the downstream database.
-    - `incremental`: Only synchronizes the incremental data of the upstream database to the downstream database using the binlog.
-    - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental synchronization to the downstream database starting from the exported position during the full backup process (binlog position/GTID).
+    - `incremental`: Only replicates the incremental data of the upstream database to the downstream database using the binlog. You can set the `meta` configuration item of the instance configuration to specify the starting position of incremental replication.
+    - `all`: `full` + `incremental`. Makes a full backup of the upstream database, imports the full data to the downstream database, and then uses the binlog to make an incremental replication to the downstream database starting from the exported position during the full backup process (binlog position/GTID).
 
 ### Feature configuration set
 
