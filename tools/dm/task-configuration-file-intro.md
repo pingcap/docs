@@ -169,7 +169,7 @@ mysql-instances:
 For the configuration details of the above options, see the corresponding part in [Feature configuration set](#feature-configuration-set), as shown in the following table.
 
 | Option | Corresponding part |
-| ------ | ------------------ |
+| :------ | :------------------ |
 | `route-rules` | `routes` |
 | `filter-rules` | `filters` |
 | `column-mapping-rules` | `column-mappings` |
