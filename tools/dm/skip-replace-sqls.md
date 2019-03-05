@@ -264,7 +264,7 @@ sql-replace <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270
 
 #### Passively skip after the replication gets interrupted
 
-##### Application scenario
+##### Application scenarios
 
 Assume that you need to replicate the upstream table `db1.tbl1` to the downstream TiDB (not in the scenario of merging and replicating data from sharded tables). The initial table schema is:
 
@@ -359,11 +359,11 @@ Assume that it is acceptable in the actual production environment that this DDL 
 
 4. Use `query-status` to guarantee that the `stage` of the task has changed into `Running`.
 
-5. Use `query-error` to guarantee that the original error information has been removed.
+5. Use `query-error` to guarantee that no DDL execution error exists.
 
 #### Actively replace before the replication gets interrupted 
 
-##### Application scenario
+##### Application scenarios
 
 Assume that you need to replicate the upstream table `db2.tbl2` to the downstream TiDB (not in the scenario of merging and replicating data from sharded tables). The initial table schema is:
 
@@ -459,7 +459,7 @@ For this particular DDL statement, because dropping columns with the index is no
 
 #### Passively skip after the replication gets interrupted in the scenario of merging and replicating data from sharded tables
 
-##### Application scenario
+##### Application scenarios
 
 Assume that you need to merge and replicate multiple tables in multiple upstream MySQL instances to one same table in the downstream TiDB through multiple DM-workers. And the DDL statement unsupported by TiDB is executed to the upstream sharded tables. 
 
@@ -477,7 +477,7 @@ There are two major differences between the two scenarios as follows. In the sce
 
 #### Actively replace before the replication gets interrupted in the scenario of merging and replicating data from sharded tables
 
-##### Application scenario
+##### Application scenarios
 
 Assume that you need to merge and replicate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream: 
 
