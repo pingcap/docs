@@ -435,6 +435,10 @@ Not really. We need some good features of gRPC, such as flow control, encryption
 
 The 92 indicates the escape character, which is ASCII 92 by default.
 
+#### Why does the data length shown by `information_schema.tables.data_length` differ from the store size on the TiKV monitoring panel?
+	
+Because the two results are calculated in different ways. `information_schema.tables.data_length` is an estimated value by calculating the averaged length of each row, while the store size on the TiKV monitoring panel sums up the length of the data files (the SST files of RocksDB) in a single TiKV instance. Because of the existence of multiple versions and the data compressed by TiKV, different values are shown by the two results.
+	
 ### Manage the PD server
 
 #### The `TiKV cluster is not bootstrapped` message is displayed when I access PD.
