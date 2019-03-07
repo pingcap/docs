@@ -654,7 +654,7 @@ Generally, enabling `sync-log` reduces about 30% of the performance. For the tes
 
 Raft uses strong consistency, and only when the data has been written into more than 50% of the nodes, the application returns ACK (two out of three nodes). In this case, data consistency is guaranteed. However, theoretically, two nodes might crash. Therefore, for scenarios that have a strict requirement on data security, such as scenarios in financial industry, you need to enable the `sync-log`.
 
-#### Since TiDB uses the Raft protocol, multiple network roundtrips occur during data writing. What is the actual write delay?
+#### Since TiKV uses the Raft protocol, multiple network roundtrips occur during data writing. What is the actual write delay?
 
 Theoretically, TiDB has a write delay of 4 more network roundtrips than standalone databases.
 
