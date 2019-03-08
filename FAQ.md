@@ -648,7 +648,9 @@ Generally, enabling `sync-log` reduces about 30% of the performance. For write p
 
 #### Can Raft + multiple replicas in the TiKV architecture achieve absolute data security? Is it necessary to apply the most strict mode (`sync-log = true) to a standalone storage?
 
-Raft replicates data with strong consistency. Only when the data has been written into more than 50% of the nodes, will the application return ACK (two out of three nodes). In this case, data consistency is guaranteed. However, theoretically, two nodes might crash. Therefore, for scenarios with a strict requirement on data security, for example, the financial industry, you need to enable the `sync-log` mode.
+Data is redundantly copied between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the nodes, will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, for scenarios with a strict requirement on data security, for example, the financial industry, you need to enable the `sync-log` mode.
+
+As an alternative to using `sync-log`, you may also consider having five nodes instead of three in your Raft group. This would allow for the failure of two nodes, while still providing data safety.
 
 #### In data writing using the Raft protocol, multiple network roundtrips occur. What is the actual write delay?
 
