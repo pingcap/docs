@@ -44,9 +44,9 @@ TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolera
 
 #### How is TiDB strongly consistent?
 
-TiDB implements the Repeatable Read isolation in the Snapshot Isolation level. It does so by using the [Raft consensus algorithm](https://raft.github.io/) to ensure consistency among multiple replicas.
+TiDB implements Snapshot Isolation consistency, which it advertises as `REPEATABLE-READ` for compatibility with MySQL. Data is redundantly copied between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur.
 
-At the bottom layer, TiDB uses a model of replication log + State Machine to replicate data. For the write requests, the data is written to a Leader and the Leader then replicates the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log is committed and can be applied into the State Machine.
+At the bottom layer, TiKV uses a model of replication log + State Machine to replicate data. For the write requests, the data is written to a Leader and the Leader then replicates the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log is committed and can be applied into the State Machine.
 
 #### Does TiDB support distributed transactions?
 
