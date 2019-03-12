@@ -16,9 +16,9 @@ If you explicitly specify the charset of a newly created table as UTF8 in v2.1.0
 
 To avoid this issue, you need to pay attention to:
 
-- Point #1: Before v2.1.3, TiDB does not support modifying the charset of the column. Therefore, when you execute DDL operations, you need to make sure that the charset of the new column is consistent with that of the original column.
+- Point #1: before v2.1.3, TiDB does not support modifying the charset of the column. Therefore, when you execute DDL operations, you need to make sure that the charset of the new column is consistent with that of the original column.
 
-- Point #2: Before v2.1.3, even if the charset of the column is different from that of the table, `show create table` does not show the charset of the column. But as shown in the following passage, you can view it by obtaining the metadata of the table through HTTP API.
+- Point #2: before v2.1.3, even if the charset of the column is different from that of the table, `show create table` does not show the charset of the column. But as shown in the following passage, you can view it by obtaining the metadata of the table through HTTP API.
 
 ### Issue #1: `unsupported modify column charset utf8mb4 not match origin utf8`
 
@@ -183,7 +183,7 @@ Specifically, you can use the parameter `tidb_skip_utf8_check` to skip the legal
 
 If you only want to skip the UTF8 check, you can set the parameter `tidb_check_mb4_value_in_utf8`. This parameter is added to the `config.toml` file in v2.1.3, and you can modify `check-mb4-value-in-utf8` in the configuration file and then restart the cluster to enable it.
 
-Starting from v2.1.5, you can set `tidb_check_mb4_value_in_utf8` through HTTP API and the Session variable.
+Starting from v2.1.5, you can set `tidb_check_mb4_value_in_utf8` through HTTP API and the session variable: 
 
 * HTTP API（HTTP API can be enabled only on a single server）
 
