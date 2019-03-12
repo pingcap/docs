@@ -7,15 +7,15 @@ category: operations
 
 ## Overview
 
-A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
+The following guide provides installation instructions from tarball on Linux. A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
 Before you start, see [TiDB architecture](../overview.md#tidb-architecture) and [Software and Hardware Requirements](op-guide/recommendation.md).
 
 This document describes the binary deployment of three scenarios:
 
-- To quickly understand and try TiDB, see [Single node cluster deployment](#single-node-cluster-deployment).
-- To try TiDB out and explore the features, see [Multiple nodes cluster deployment for test](#multiple-nodes-cluster-deployment-for-test).
-- To deploy and use TiDB in production, see [Multiple nodes cluster deployment](#multiple-nodes-cluster-deployment).
+1. [Single node cluster deployment](#single-node-cluster-deployment) for trying out TiDB.
+2. [Multiple nodes cluster deployment for testing](#multiple-nodes-cluster-deployment-for-test) TiDB across multiple nodes and exploring features in more detail.
+3. [Multiple nodes cluster deployment](#multiple-nodes-cluster-deployment) for production deployments.
 
 ## TiDB components and default ports
 
@@ -47,13 +47,13 @@ See the following table for the default ports for the optional TiDB components:
 ## Configure and check the system before installation
 
 ### Operating system
-
+For the operating system, it is recommended to use RHEL/CentOS 7.3 or higher. The following additional requirements are recommended:
 | Configuration | Description |
 | :-- | :-------------------- |
-| Supported Platform | See the [Software and Hardware Requirements](./recommendation.md) |
-| File System  |  The ext4 file system is recommended in TiDB Deployment |
-| Swap Space  |  The Swap Space is recommended to close in TiDB Deployment  |
-| Disk Block Size  |  Set the size of the system disk `Block` to `4096` |
+| Supported Platform | RHEL/CentOS 7.3+ ([more details](./recommendation.md) |
+| File System  |  ext4 is recommended |
+| Swap Space  |  Should be disabled  |
+| Disk Block Size  |  Set the system disk `Block` size to `4096` |
 
 ### Network and firewall
 
@@ -130,9 +130,7 @@ The key's randomart image is:
 
 ## Download the official binary package
 
-TiDB provides the official binary installation package that supports Linux. For the operating system, it is recommended to use Redhat 7.3+, CentOS 7.3+ and higher versions.
 
-### Operating system: Linux (Redhat 7+, CentOS 7+)
 
 ```
 # Download the package.
@@ -175,7 +173,7 @@ After downloading the TiDB binary package, you can run and test the TiDB cluster
                       --log-file=tidb.log &
     ```
 
-4. Use the official MySQL client to connect to TiDB.
+4. Use the MySQL client to connect to TiDB.
 
     ```sh
     $ mysql -h 127.0.0.1 -P 4000 -u root -D test
@@ -234,7 +232,7 @@ Follow the steps below to start PD, TiKV and TiDB:
                       --log-file=tidb.log
     ```
 
-4. Use the official MySQL client to connect to TiDB.
+4. Use the MySQL client to connect to TiDB.
 
     ```sh
     $ mysql -h 192.168.199.113 -P 4000 -u root -D test
@@ -315,7 +313,7 @@ Follow the steps below to start PD, TiKV, and TiDB:
                       --log-file=tidb.log &
     ```
 
-4. Use the official MySQL client to connect to TiDB.
+4. Use the MySQL client to connect to TiDB.
 
     ```sh
     $ mysql -h 192.168.199.113 -P 4000 -u root -D test
