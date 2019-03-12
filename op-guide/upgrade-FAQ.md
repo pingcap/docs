@@ -40,7 +40,7 @@ Before upgrading, the following operations are executed in v2.1.0 and the versio
     Time: 0.006s
     ```
 
-After upgrading, the following error is reported in v2.1.1 and v2.1.2; there is no such error in v2.1.3 and the later versions.
+After upgrading, the following error is reported in v2.1.1 and v2.1.2 and there is no such error in v2.1.3 and the later versions.
 
     ```SQL
     tidb > alter table t change column a a varchar(20);
