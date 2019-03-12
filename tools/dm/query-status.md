@@ -109,7 +109,7 @@ This document introduces the query result and subtask status of Data Migration (
                 "result": null
             }
          },
-         {
+        {
             "result": true,
             "worker": "172.17.0.6:10081",
             "msg": "",
