@@ -646,7 +646,7 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 
 Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](benchmark/sysbench.md).
 
-#### Can Raft + multiple replicas in the TiKV architecture achieve absolute data security? Is it necessary to apply the most strict mode (`sync-log = true) to a standalone storage?
+#### Can Raft + multiple replicas in the TiKV architecture achieve absolute data security? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
 
 Data is redundantly copied between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the nodes, will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, for scenarios with a strict requirement on data security, for example, the financial industry, you need to enable the `sync-log` mode.
 
