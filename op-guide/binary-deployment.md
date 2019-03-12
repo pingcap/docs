@@ -52,7 +52,7 @@ For the operating system, it is recommended to use RHEL/CentOS 7.3 or higher. Th
 
 | Configuration | Description |
 | :-- | :-------------------- |
-| Supported Platform | RHEL/CentOS 7.3+ ([more details](/op-guide/recommendation.md) |
+| Supported Platform | RHEL/CentOS 7.3+ ([more details](/op-guide/recommendation.md)) |
 | File System  |  ext4 is recommended |
 | Swap Space  |  Should be disabled  |
 | Disk Block Size  |  Set the system disk `Block` size to `4096` |
@@ -61,7 +61,7 @@ For the operating system, it is recommended to use RHEL/CentOS 7.3 or higher. Th
 
 | Configuration | Description |
 | :-- | :------------------- |
-| Firewall / Port | Check whether the ports required by TiDB are accessible between the nodes |
+| Firewall/Port | Check whether the ports required by TiDB are accessible between the nodes |
 
 ### Operating system parameters
 
