@@ -5,11 +5,7 @@ category: operations
 
 # Deploy TiDB Using the Binary
 
-## Overview
-
-The following guide provides installation instructions from tarball on Linux. A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
-
-Before you start, see [TiDB architecture](/overview.md#tidb-architecture) and [Software and Hardware Requirements](/op-guide/recommendation.md).
+This guide provides installation instructions from tarball on Linux. A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
 This document describes the binary deployment of three scenarios:
 
@@ -17,34 +13,9 @@ This document describes the binary deployment of three scenarios:
 2. [Multiple nodes cluster deployment for testing](#multiple-nodes-cluster-deployment-for-test) TiDB across multiple nodes and exploring features in more detail.
 3. [Multiple nodes cluster deployment](#multiple-nodes-cluster-deployment) for production deployments.
 
-## TiDB components and default ports
+## Prepare
 
-### TiDB database components (required)
-
-See the following table for the default ports for the TiDB components:
-
-| Component | Default Port | Protocol | Description |
-| :-- | :-- | :-- | :----------- |
-| ssh | 22 | TCP | sshd service |
-| TiDB|  4000  | TCP | the communication port for the application and DBA tools |
-| TiDB| 10080  |  TCP | the communication port to report TiDB status |
-| TiKV|  20160 |  TCP | the TiKV communication port  |
-| PD | 2379 | TCP | the communication port between TiDB and PD |
-| PD | 2380 | TCP | the inter-node communication port within the PD cluster |
-
-### TiDB database components (optional)
-
-See the following table for the default ports for the optional TiDB components:
-
-| Component | Default Port | Protocol | Description |
-| :-- | :-- | :-- | :------------------------ |
-| Prometheus |  9090| TCP | the communication port for the Prometheus service |
-| Pushgateway |  9091 | TCP | the aggregation and report port for TiDB, TiKV, and PD monitor |
-| Node_exporter|  9100| TCP | the communication port to report the system information of every TiDB cluster node |
-| Grafana | 3000 | TCP | the port for the external Web monitoring service and client (Browser) access |
-| alertmanager | 9093 | TCP | the port for the alert service |
-
-## Configure and check the system before installation
+Before you start, see [TiDB architecture](/overview.md#tidb-architecture) and [Software and Hardware Requirements](/op-guide/recommendation.md). Make sure the following requirements are satisfied:
 
 ### Operating system
 
@@ -82,15 +53,50 @@ For the operating system, it is recommended to use RHEL/CentOS 7.3 or higher. Th
 | I/O Scheduler | Set the I/O Scheduler of data disks to the `deadline` mode |
 | vm.swappiness | Set `vm.swappiness = 0` |
 
-
-> **Note**: To adjust the operating system parameters, contact your system administrator.
-
 ### Database running user settings
 
 | Configuration | Description |
 | :-- | :---------------------------- |
 | LANG environment | Set `LANG = en_US.UTF8` |
 | TZ time zone | Set the TZ time zone of all nodes to the same value |
+
+## TiDB components and default ports
+
+Before you deploy a TiDB cluster, see the [required components](#tidb-database-components-required) and [optional components](#tidb-database-components-optional).
+
+### TiDB database components (required)
+
+See the following table for the default ports for the TiDB components:
+
+| Component | Default Port | Protocol | Description |
+| :-- | :-- | :-- | :----------- |
+| ssh | 22 | TCP | the sshd service |
+| TiDB|  4000  | TCP | the communication port for the application and DBA tools |
+| TiDB| 10080  |  TCP | the communication port to report TiDB status |
+| TiKV|  20160 |  TCP | the TiKV communication port  |
+| PD | 2379 | TCP | the communication port between TiDB and PD |
+| PD | 2380 | TCP | the inter-node communication port within the PD cluster |
+
+### TiDB database components (optional)
+
+See the following table for the default ports for the optional TiDB components:
+
+| Component | Default Port | Protocol | Description |
+| :-- | :-- | :-- | :------------------------ |
+| Prometheus |  9090| TCP | the communication port for the Prometheus service |
+| Pushgateway |  9091 | TCP | the aggregation and report port for TiDB, TiKV, and PD monitor |
+| Node_exporter|  9100| TCP | the communication port to report the system information of every TiDB cluster node |
+| Grafana | 3000 | TCP | the port for the external Web monitoring service and client (Browser) access |
+| alertmanager | 9093 | TCP | the port for the alert service |
+
+## Create a database running user account
+
+Create a database running user account (`tidb`) using the following command. You can use this `tidb` user account to deploy your TiDB cluster.
+
+```bash
+$ useradd tidb	
+$ su - tidb
+```
 
 ## Download the official binary package
 
