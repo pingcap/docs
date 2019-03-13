@@ -85,50 +85,12 @@ For the operating system, it is recommended to use RHEL/CentOS 7.3 or higher. Th
 
 > **Note**: To adjust the operating system parameters, contact your system administrator.
 
-### Database running user
+### Database running user settings
 
 | Configuration | Description |
 | :-- | :---------------------------- |
 | LANG environment | Set `LANG = en_US.UTF8` |
 | TZ time zone | Set the TZ time zone of all nodes to the same value |
-
-## Create the database running user account
-
-In the Linux environment, create TiDB on each installation node as a database running user, and set up the SSH mutual trust between cluster nodes. To create a running user and open SSH mutual trust, contact the system administrator. Here is an example:
-
-```bash
-$ useradd tidb
-$ usermod -a -G tidb tidb
-$ su - tidb
-Last login: Tue Aug 22 12:06:23 CST 2017 on pts/2
--bash-4.2$ ssh-keygen -t rsa
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/tidb/.ssh/id_rsa):
-Created directory '/home/tidb/.ssh'.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /home/tidb/.ssh/id_rsa.
-Your public key has been saved in /home/tidb/.ssh/id_rsa.pub.
-The key fingerprint is:
-5a:00:e6:df:9e:40:25:2c:2d:e2:6e:ee:74:c6:c3:c1 tidb@t001
-The key's randomart image is:
-+--[ RSA 2048]----+
-|    oo. .        |
-|  .oo.oo         |
-| . ..oo          |
-|  .. o o         |
-| .  E o S        |
-|  oo . = .       |
-| o. * . o        |
-| ..o .           |
-| ..              |
-+-----------------+
-
--bash-4.2$ cd .ssh
--bash-4.2$ cat id_rsa.pub >> authorized_keys
--bash-4.2$ chmod 644 authorized_keys
--bash-4.2$ ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.1.100
-```
 
 ## Download the official binary package
 
