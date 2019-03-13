@@ -292,9 +292,9 @@ Follow the steps below to start PD, TiKV, and TiDB:
 > - To tune TiKV, see [Performance Tuning for TiKV](/op-guide/tune-tikv.md).
 > - If you use `nohup` to start the cluster in the production environment, write the startup commands in a script and then run the script. If not, the `nohup` process might abort because it receives exceptions when the Shell command exits. For more information, see [The TiDB/TiKV/PD process aborts unexpectedly](/trouble-shooting.md#the-tidbtikvpd-process-aborts-unexpectedly).
 
-## TiDB monitor and alarm deployment
+## Deploy the TiDB monitoring service
 
-To install and deploy the environment for TiDB monitor and alarm service, see the following table for the system information:
+Assume that the TiDB cluster information is as follows:
 
 | Name  | Host IP | Services |
 | :-- | :-- | :-------------- |
@@ -319,132 +319,132 @@ $ tar -xzf node_exporter-0.15.2.linux-amd64.tar.gz
 $ tar -xzf grafana-4.6.3.linux-x64.tar.gz
 ```
 
-### Start the monitor service
+### Start the monitoring service
 
-####  Start `node_exporter` on Node1, Node2, Node3 and Node4.
+1. Start `node_exporter` on Node1, Node2, Node3 and Node4.
 
-```
-$ cd node_exporter-0.15.2.linux-amd64
+    ```
+    $ cd node_exporter-0.15.2.linux-amd64
 
-# Start the node_exporter service.
-$ ./node_exporter --web.listen-address=":9100" \
-    --log.level="info" &
-```
+    # Start the node_exporter service.
+    $ ./node_exporter --web.listen-address=":9100" \
+        --log.level="info" &
+    ```
 
-#### Start Prometheus in Node1.
+2. Start Prometheus in Node1.
 
-```
-$ cd prometheus-2.2.1.linux-amd64
+    ```
+    $ cd prometheus-2.2.1.linux-amd64
 
-# Edit the Configuration file:
+    # Edit the Configuration file:
 
-$ vi prometheus.yml
+    $ vi prometheus.yml
 
-...
-global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
-  evaluation_interval: 15s # By default, scrape targets every 15 seconds.
-  # scrape_timeout is set to the global default (10s).
-  external_labels:
-    cluster: 'test-cluster'
-    monitor: "prometheus"
+    ...
+    global:
+      scrape_interval:     15s # By default, scrape targets every 15 seconds.
+      evaluation_interval: 15s # By default, scrape targets every 15 seconds.
+      # scrape_timeout is set to the global default (10s).
+      external_labels:
+        cluster: 'test-cluster'
+        monitor: "prometheus"
 
-scrape_configs:
-  - job_name: "overwritten-nodes"
-    honor_labels: true # don't overwrite job & instance labels
-    static_configs:
-    - targets:
-      - '192.168.199.113:9100'
-      - '192.168.199.114:9100'
-      - '192.168.199.115:9100'
-      - '192.168.199.116:9100'
-      - '192.168.199.117:9100'
-      - '192.168.199.118:9100'
+    scrape_configs:
+      - job_name: "overwritten-nodes"
+        honor_labels: true # don't overwrite job & instance labels
+        static_configs:
+        - targets:
+          - '192.168.199.113:9100'
+          - '192.168.199.114:9100'
+          - '192.168.199.115:9100'
+          - '192.168.199.116:9100'
+          - '192.168.199.117:9100'
+          - '192.168.199.118:9100'
 
-  - job_name: "tidb"
-    honor_labels: true # don't overwrite job & instance labels
-    static_configs:
-    - targets:
-      - '192.168.199.113:10080'
+      - job_name: "tidb"
+        honor_labels: true # don't overwrite job & instance labels
+        static_configs:
+        - targets:
+          - '192.168.199.113:10080'
 
-  - job_name: "pd"
-    honor_labels: true # don't overwrite job & instance labels
-    static_configs:
-    - targets:
-      - '192.168.199.113:2379'
-      - '192.168.199.114:2379'
-      - '192.168.199.115:2379'
+      - job_name: "pd"
+        honor_labels: true # don't overwrite job & instance labels
+        static_configs:
+        - targets:
+          - '192.168.199.113:2379'
+          - '192.168.199.114:2379'
+          - '192.168.199.115:2379'
 
-  - job_name: "tikv"
-    honor_labels: true # don't overwrite job & instance labels
-    static_configs:
-    - targets:
-      - '192.168.199.116:20180'
-      - '192.168.199.117:20180'
-      - '192.168.199.118:20180'
-...
+      - job_name: "tikv"
+        honor_labels: true # don't overwrite job & instance labels
+        static_configs:
+        - targets:
+          - '192.168.199.116:20180'
+          - '192.168.199.117:20180'
+          - '192.168.199.118:20180'
+    ...
 
-# Start Prometheus:
-$ ./prometheus \
-    --config.file="./prometheus.yml" \
-    --web.listen-address=":9090" \
-    --web.external-url="http://192.168.199.113:9090/" \
-    --web.enable-admin-api \
-    --log.level="info" \
-    --storage.tsdb.path="./data.metrics" \
-    --storage.tsdb.retention="15d" &
-```
+    # Start Prometheus:
+    $ ./prometheus \
+        --config.file="./prometheus.yml" \
+        --web.listen-address=":9090" \
+        --web.external-url="http://192.168.199.113:9090/" \
+        --web.enable-admin-api \
+        --log.level="info" \
+        --storage.tsdb.path="./data.metrics" \
+        --storage.tsdb.retention="15d" &
+    ```
 
-#### Start Grafana in Node1.
+3. Start Grafana in Node1.
 
-```
-$ cd grafana-4.6.3
+    ```
+    $ cd grafana-4.6.3
 
-# Edit the Configuration file:
+    # Edit the Configuration file:
 
-$ vi conf/grafana.ini
+    $ vi conf/grafana.ini
 
-...
+    ...
 
-[paths]
-data = ./data
-logs = ./data/log
-plugins = ./data/plugins
-[server]
-http_port = 3000
-domain = 192.168.199.113
-[database]
-[session]
-[analytics]
-check_for_updates = true
-[security]
-admin_user = admin
-admin_password = admin
-[snapshots]
-[users]
-[auth.anonymous]
-[auth.basic]
-[auth.ldap]
-[smtp]
-[emails]
-[log]
-mode = file
-[log.console]
-[log.file]
-level = info
-format = text
-[log.syslog]
-[event_publisher]
-[dashboards.json]
-enabled = false
-path = ./data/dashboards
-[metrics]
-[grafana_net]
-url = https://grafana.net
+    [paths]
+    data = ./data
+    logs = ./data/log
+    plugins = ./data/plugins
+    [server]
+    http_port = 3000
+    domain = 192.168.199.113
+    [database]
+    [session]
+    [analytics]
+    check_for_updates = true
+    [security]
+    admin_user = admin
+    admin_password = admin
+    [snapshots]
+    [users]
+    [auth.anonymous]
+    [auth.basic]
+    [auth.ldap]
+    [smtp]
+    [emails]
+    [log]
+    mode = file
+    [log.console]
+    [log.file]
+    level = info
+    format = text
+    [log.syslog]
+    [event_publisher]
+    [dashboards.json]
+    enabled = false
+    path = ./data/dashboards
+    [metrics]
+    [grafana_net]
+    url = https://grafana.net
 
-...
+    ...
 
-# Start the Grafana service:
-$ ./bin/grafana-server \
-    --config="./conf/grafana.ini"
-```
+    # Start the Grafana service:
+    $ ./bin/grafana-server \
+        --config="./conf/grafana.ini"
+    ```
