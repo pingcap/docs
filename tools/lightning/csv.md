@@ -58,8 +58,8 @@ trim-last-separator = false
 
 ### `separator`
 
-- Defines the field separator. 
-- Must be a single ASCII character. 
+- Defines the field separator.
+- Must be a single ASCII character.
 - Common values:
 
     * `','` for CSV
@@ -69,8 +69,8 @@ trim-last-separator = false
 
 ### `delimiter`
 
-- Defines the delimiter used for quoting. 
-- If `delimiter` is empty, all fields are unquoted. 
+- Defines the delimiter used for quoting.
+- If `delimiter` is empty, all fields are unquoted.
 - Common values:
 
     * `'"'` quote fields with double-quote, same as [RFC 4180]
@@ -82,37 +82,37 @@ trim-last-separator = false
 
 ### `header`
 
-- Whether *all* CSV files contain a header row. 
+- Whether *all* CSV files contain a header row.
 - If `header` is true, the first row will be used as the
 *column names*. If `header` is false, the first row is not special and treated as an ordinary data row.
 
 ### `not-null` and `null`
 
-- The `not-null` setting controls whether all fields are non-nullable. 
+- The `not-null` setting controls whether all fields are non-nullable.
 - If `not-null` is false, the
 string specified by `null` will be transformed to the SQL NULL instead of a concrete value.
 - Quoting will not affect whether a field is null.
 
-For example, with the CSV file:
+    For example, with the CSV file:
 
-```csv
-A,B,C
-\N,"\N",
-```
+    ```csv
+    A,B,C
+    \N,"\N",
+    ```
 
-- In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both
+    In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both
 converted to NULL after importing to TiDB. The column `C` is simply the empty string `''` but not
 NULL.
 
 ### `backslash-escape`
 
-- Whether to interpret backslash escapes inside fields. 
+- Whether to interpret backslash escapes inside fields.
 - If `backslash-escape` is true, the following sequences are
 recognized and transformed:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
-    | `\0`     | Null character (U+0000)  | 
+    | `\0`     | Null character (U+0000)  |
     | `\b`     | Backspace (U+0008)       |
     | `\n`     | Line feed (U+000A)       |
     | `\r`     | Carriage return (U+000D) |

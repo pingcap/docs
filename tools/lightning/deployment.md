@@ -355,22 +355,22 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
 
     # Configure how CSV files are parsed.
     [mydumper.csv]
-    # separator between fields, should be an ASCII character.
+    # Separator between fields, should be an ASCII character.
     separator = ','
-    # quoting delimiter, can either be an ASCII character or empty string.
+    # Quoting delimiter, can either be an ASCII character or empty string.
     delimiter = '"'
-    # whether the CSV files contain a header.
-    # If true, the first line will be skipped
+    # Whether the CSV files contain a header.
+    # If `header` is true, the first line will be skipped.
     header = true
-    # whether the CSV contains any NULL value.
-    # If true, all columns from CSV cannot be NULL.
+    # Whether the CSV contains any NULL value.
+    # If `not-null` is true, all columns from CSV cannot be NULL.
     not-null = false
-    # if non-null = false (i.e. CSV can contain NULL),
+    # When `not-null` is false (i.e. CSV can contain NULL),
     # fields equal to this value will be treated as NULL.
     null = '\N'
-    # whether to interpret backslash escapes inside fields.
+    # Whether to interpret backslash escapes inside fields.
     backslash-escape = true
-    # if a line ends with a separator, remove it.
+    # If a line ends with a separator, remove it.
     trim-last-separator = false
 
     [tidb]
