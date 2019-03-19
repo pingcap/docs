@@ -91,12 +91,17 @@ See the following table for the default ports for the optional TiDB components:
 
 ## Create a database running user account
 
-Create a database running user account (`tidb`) using the following command. You can use this `tidb` user account to deploy your TiDB cluster.
+1. Log in to the machine using the `root` user account and create a database running user account (`tidb`) using the following command:
 
-```bash
-$ useradd tidb	
-$ su - tidb
-```
+    ```bash
+    # useradd tidb -m
+    ```
+
+2. Switch the user from `root` to `tidb` by using the following command. You can use this `tidb` user account to deploy your TiDB cluster.
+
+    ```bash
+    # su - tidb
+    ```
 
 ## Download the official binary package
 
