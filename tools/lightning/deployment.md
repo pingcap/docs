@@ -317,7 +317,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # the data source.
     read-block-size = 65536 # Byte (default = 64 KB)
 
-    # minimum size (in terms of source data file) of each batch of import.
+    # Minimum size (in terms of source data file) of each batch of import.
     # Lightning splits a large table into multiple data engine files according to this size.
     batch-size = 107_374_182_400 # Byte (default = 100 GB)
 
@@ -328,7 +328,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # resources. The scale up factor is controlled by this parameter, which
     # expresses the ratio of duration between the "import" and "write" steps
     # with full concurrency. This can be calculated as the ratio
-    # (import duration / write duration) of a single table of size around 1 GB.
+    # (import duration/write duration) of a single table of size around 1 GB.
     # The exact timing can be found in the log. If "import" is faster, the batch
     # size anomaly is smaller, and a ratio of zero means uniform batch size.
     # This value should be in the range (0 <= batch-import-ratio < 1).
@@ -353,7 +353,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # schema encoding.
     character-set = "auto"
 
-    # Configure how CSV files are parsed
+    # Configure how CSV files are parsed.
     [mydumper.csv]
     # separator between fields, should be an ASCII character.
     separator = ','

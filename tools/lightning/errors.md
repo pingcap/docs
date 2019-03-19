@@ -91,7 +91,7 @@ See the [Checkpoints control](../../tools/lightning/checkpoints.md#checkpoints-c
 
 **Solutions**:
 
-1. Ensure Lightning and the source database are using the same time zone. When deploying via TiDB-Ansible, the timezone is defined in `inventory.ini`
+1. Ensure Lightning and the source database are using the same time zone. When deploying via TiDB-Ansible, the timezone is defined in `inventory.ini`.
 
     ```ini
     # inventory.ini

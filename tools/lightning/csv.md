@@ -1,6 +1,6 @@
 ---
 title: TiDB-Lightning CSV Support
-summary: Importing CSV files via TiDB-Lightning.
+summary: Learn how to import CSV files via TiDB-Lightning.
 category: tools
 ---
 
@@ -24,8 +24,8 @@ CSV files are schema-less. To import them into TiDB, a table schema must be prov
 done either by:
 
 * Providing a file named `db_name.table_name-schema.sql` containing the `CREATE TABLE` DDL
-    statement, or
-* Creating the empty tables directly in TiDB in the first place, then set
+    statement
+* Creating the empty tables directly in TiDB in the first place, and then setting
     `[mydumper] no-schema = true` in `tidb-lightning.toml`.
 
 ## Configuration
@@ -35,22 +35,22 @@ Most settings have a corresponding option in the MySQL [`LOAD DATA`] statement.
 
 ```toml
 [mydumper.csv]
-# separator between fields, should be an ASCII character.
+# Separator between fields, should be an ASCII character.
 separator = ','
-# quoting delimiter, can either be an ASCII character or empty string.
+# Quoting delimiter, can either be an ASCII character or empty string.
 delimiter = '"'
-# whether the CSV files contain a header.
-# If true, the first line will be skipped
+# Whether the CSV files contain a header.
+# If `header` is true, the first line will be skipped.
 header = true
-# whether the CSV contains any NULL value.
-# If true, all columns from CSV cannot be NULL.
+# Whether the CSV contains any NULL value.
+# If `not-null` is true, all columns from CSV cannot be NULL.
 not-null = false
-# if non-null = false (i.e. CSV can contain NULL),
+# When `not-null` is false (i.e. CSV can contain NULL),
 # fields equal to this value will be treated as NULL.
 null = '\N'
-# whether to interpret backslash escapes inside fields.
+# Whether to interpret backslash escapes inside fields.
 backslash-escape = true
-# if a line ends with a separator, remove it.
+# If a line ends with a separator, remove it.
 trim-last-separator = false
 ```
 
@@ -58,34 +58,40 @@ trim-last-separator = false
 
 ### `separator`
 
-Defines the field separator. Must be a single ASCII character. Common values:
+- Defines the field separator. 
+- Must be a single ASCII character. 
+- Common values:
 
-* `','` for CSV
-* `"\t"` for TSV
+    * `','` for CSV
+    * `"\t"` for TSV
 
-Corresponds to the `FIELDS TERMINATED BY` option in the LOAD DATA statement.
+- Corresponds to the `FIELDS TERMINATED BY` option in the LOAD DATA statement.
 
 ### `delimiter`
 
-Defines the delimiter used for quoting. If empty, all fields are unquoted. Common values:
+- Defines the delimiter used for quoting. 
+- If `delimiter` is empty, all fields are unquoted. 
+- Common values:
 
-* `'"'` quote fields with double-quote, same as [RFC 4180]
-* `''` disable quoting
+    * `'"'` quote fields with double-quote, same as [RFC 4180]
+    * `''` disable quoting
 
-Corresponds to the `FIELDS ENCLOSED BY` option in the `LOAD DATA` statement.
+- Corresponds to the `FIELDS ENCLOSED BY` option in the `LOAD DATA` statement.
 
 [RFC 4180]: https://tools.ietf.org/html/rfc4180
 
 ### `header`
 
-Whether *all* CSV files contains a header row. If true, the first row will be used as the
-*column names*. If false, the first row is not special and treated as an ordinary data row.
+- Whether *all* CSV files contain a header row. 
+- If `header` is true, the first row will be used as the
+*column names*. If `header` is false, the first row is not special and treated as an ordinary data row.
 
 ### `not-null` and `null`
 
-The `not-null` setting controls whether all fields are non-nullable. If `not-null` is false, the
+- The `not-null` setting controls whether all fields are non-nullable. 
+- If `not-null` is false, the
 string specified by `null` will be transformed to the SQL NULL instead of a concrete value.
-Quoting will not affect whether a field is null.
+- Quoting will not affect whether a field is null.
 
 For example, with the CSV file:
 
@@ -94,43 +100,44 @@ A,B,C
 \N,"\N",
 ```
 
-in the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both
+- In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both
 converted to NULL after importing to TiDB. The column `C` is simply the empty string `''` but not
 NULL.
 
 ### `backslash-escape`
 
-Whether to interpret backslash escapes inside fields. If true, the following sequences are
+- Whether to interpret backslash escapes inside fields. 
+- If `backslash-escape` is true, the following sequences are
 recognized and transformed:
 
-| Sequence | Converted to             |
-|----------|--------------------------|
-| `\0`     | Null character (U+0000)  |
-| `\b`     | Backspace (U+0008)       |
-| `\n`     | Line feed (U+000A)       |
-| `\r`     | Carriage return (U+000D) |
-| `\t`     | Tab (U+0009)             |
-| `\Z`     | Windows EOF (U+001A)     |
+    | Sequence | Converted to             |
+    |----------|--------------------------|
+    | `\0`     | Null character (U+0000)  | 
+    | `\b`     | Backspace (U+0008)       |
+    | `\n`     | Line feed (U+000A)       |
+    | `\r`     | Carriage return (U+000D) |
+    | `\t`     | Tab (U+0009)             |
+    | `\Z`     | Windows EOF (U+001A)     |
 
-In all other cases (e.g. `\"`) the backslash is simply stripped, leaving the next character (`"`)
+    In all other cases (e.g. `\"`) the backslash is simply stripped, leaving the next character (`"`)
 in the field.
 
 Quoting will not affect whether backslash escapes are interpreted.
 
-Corresponds to the `FIELDS ESCAPED BY '\'` option in the `LOAD DATA` statement.
+- Corresponds to the `FIELDS ESCAPED BY '\'` option in the `LOAD DATA` statement.
 
 ### `trim-last-separator`
 
-Treat the field `separator` as a terminator, and removes all trailing separators.
+- Treats the field `separator` as a terminator, and removes all trailing separators.
 
-For example, with the CSV file:
+    For example, with the CSV file:
 
-```csv
-A,,B,,
-```
+    ```csv
+    A,,B,,
+    ```
 
-When `trim-last-separator = false`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
-When `trim-last-separator = true`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
+- When `trim-last-separator = false`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
+- When `trim-last-separator = true`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
 
 ### Non-configurable options
 
