@@ -122,7 +122,7 @@ recognized and transformed:
     In all other cases (e.g. `\"`) the backslash is simply stripped, leaving the next character (`"`)
 in the field.
 
-Quoting will not affect whether backslash escapes are interpreted.
+- Quoting will not affect whether backslash escapes are interpreted.
 
 - Corresponds to the `FIELDS ESCAPED BY '\'` option in the `LOAD DATA` statement.
 
