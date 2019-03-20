@@ -5,6 +5,9 @@ category: release
 
 # TiDB Release Notes
 
+- [2.1.6](../releases/2.1.6.md)
+- [2.1.5](../releases/2.1.5.md)
+- [2.1.4](../releases/2.1.4.md)
 - [2.1.3](../releases/2.1.3.md)
 - [3.0 Beta](../releases/3.0beta.md)
 - [2.0.11](../releases/2.0.11.md)

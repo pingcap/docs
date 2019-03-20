@@ -56,26 +56,22 @@ For the binlog during incremental data import, DM uses the downstream database t
 
     - When DM-worker is restarted before or after synchronizing sharding DDL statements, it checks the checkpoint information and you can use the `start-task` command to recover the data synchronization task automatically.
 
-    - When DM-worker is restarted during the process of synchronizing sharding DDL statements, the issue might occur that the DM-worker owner has executed the DDL statement and successfully changed the downstream database table schema, while other DM-worker instances are restarted but fail to skip the DDL statement and update the checkpoints.
+    - When DM-worker is restarted during the process of synchronizing sharding DDL statements, the issue might occur that the owner (one of DM-worker instances) has executed the DDL statement and successfully changed the downstream database table schema, while other DM-worker instances are restarted but fail to skip the DDL statement and update the checkpoints.
 
         At this time, DM tries again to synchronize these DDL statements that are not skipped. However, the restarted DM-worker instances will be blocked at the position of the binlog event corresponding to the DDL binlog event, because the DM-worker instance that is not restarted has executed to the place after this DDL binlog event.
 
-        To resolve this issue, follow the steps described in [Troubleshooting Sharding DDL Locks](/tools/dm/troubleshooting-sharding-ddl-locks.md#condition-two-a-dm-worker-restarts-or-is-unreachable-temporarily)
+        To resolve this issue, follow the steps described in [Handle Sharding DDL Locks Manually](/tools/dm/manually-handling-sharding-ddl-locks.md#scenario-2-some-dm-workers-restart-during-the-ddl-unlocking-process).
+
+**Conclusion:** Try to avoid restarting DM-worker in the process of sharding DDL replication.
 
 #### Restarting DM-master considerations
 
-The information maintained by DM-master includes the following two major types, and these data are not being persisted when you restart DM-master.
+The information maintained by DM-master includes the following two major types, and these data is not being persisted when you restart DM-master.
 
 - The corresponding relationship between the task and DM-worker
 - The sharding DDL lock related information
 
-When DM-master is restarted, it automatically requests the task information from each DM-worker instance and rebuilds the corresponding relationship between the task and DM-worker. However, at this time, DM-worker does not resend the sharding DDL information, so it might occur that the sharding DDL lock synchronization cannot be finished automatically because of the lost lock information.
-
-To resolve this issue, follow the steps described in [Troubleshooting Sharding DDL Locks](/tools/dm/troubleshooting-sharding-ddl-locks.md#condition-three-dm-master-restarts).
-
-#### Restarting dmctl considerations
-
-The dmctl component is stateless. You can restart it at any time you like.
+When DM-master is restarted, it automatically requests the task information from each DM-worker instance, rebuilds the corresponding relationship between the task and DM-worker, and also re-fetches the sharding DDL information from each DM-worker instance. So the corresponding DDL lock can be correctly rebuilt and the sharding DDL lock can be automatically resolved.
 
 ### Restart DM-worker
 
@@ -98,8 +94,6 @@ To restart the DM-worker component, you can use either of the following two appr
 
 ### Restart DM-master
 
-> **Note:** Try to avoid restarting DM-master during the process of synchronizing sharding DDL statements.
-
 To restart the DM-master component, you can use either of the following two approaches:
 
 - Perform a rolling update on DM-master
@@ -115,15 +109,6 @@ To restart the DM-master component, you can use either of the following two appr
     $ ansible-playbook start.yml --tags=dm-master
     ```
 
-### Restart dmctl
-
-To stop and restart dmctl, use the following command, instead of using DM-Ansible:
-
-```bash
-$ exit            # Stops the running dmctl
-$ sh dmctl.sh     # Restart dmctl
-```
-
 ## Upgrade the component version
 
 1. Download the DM binary file.
@@ -135,7 +120,7 @@ $ sh dmctl.sh     # Restart dmctl
         $ rm -rf downloads
         ```
 
-    2. Use Playbook to download the latest DM binary file and replace the existing binary in the `/home/tidb/dm-ansible/resource/bin/` directory with it automatically.
+    2. Use Playbook to download the version of DM binary file as specified in `inventory.ini`, and replace the existing binary in the `/home/tidb/dm-ansible/resource/bin/` directory with it automatically.
 
         ```
         $ ansible-playbook local_prepare.yml
@@ -197,11 +182,11 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
     ```
     [dm_worker_servers]
-    dm_worker1 ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+    dm_worker1 source_id="mysql-replica-01" ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
-    dm_worker2 ansible_host=172.16.10.73 server_id=102 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+    dm_worker2 source_id="mysql-replica-02" ansible_host=172.16.10.73 server_id=102 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
-    dm_worker3 ansible_host=172.16.10.74 server_id=103 mysql_host=172.16.10.83 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+    dm_worker3 source_id="mysql-replica-03" ansible_host=172.16.10.74 server_id=103 mysql_host=172.16.10.83 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
     ```
 
 3. Deploy the new DM-worker instance.
@@ -242,11 +227,11 @@ Assuming that you want to remove the `dm_worker3` instance, perform the followin
 
     ```
     [dm_worker_servers]
-    dm_worker1 ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+    dm_worker1 source_id="mysql-replica-01" ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
-    dm_worker2 ansible_host=172.16.10.73 server_id=102 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+    dm_worker2 source_id="mysql-replica-02" ansible_host=172.16.10.73 server_id=102 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
-    # dm_worker3 ansible_host=172.16.10.74 server_id=103 mysql_host=172.16.10.83 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306 # Comment or delete this line
+    # dm_worker3 source_id="mysql-replica-03" ansible_host=172.16.10.74 server_id=103 mysql_host=172.16.10.83 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306 # Comment or delete this line
     ```
 
 3. Configure and restart the DM-master service.
@@ -357,14 +342,14 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
 3. Edit the `inventory.ini` file and add the new DM-worker instance.
 
-    Edit the `inventory.ini` file, comment or delete the line where the `dm_worker1` instance `172.16.10.72` that you want to replace exists, and add the `172.16.10.75` information of the new `dm_worker1` instance.
+    Edit the `inventory.ini` file, comment or delete the line where the original `dm_worker1` instance (`172.16.10.72`) that you want to replace exists, and add the information for the new `dm_worker1` instance (`172.16.10.75`).
 
     ```ini
     [dm_worker_servers]
-    dm_worker1 ansible_host=172.16.10.75 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
-    # dm_worker1 ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+    dm_worker1 source_id="mysql-replica-01" ansible_host=172.16.10.75 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+    # dm_worker1 source_id="mysql-replica-01" ansible_host=172.16.10.72 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 
-    dm_worker2 ansible_host=172.16.10.73 server_id=102 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
+    dm_worker2 source_id="mysql-replica-02" ansible_host=172.16.10.73 server_id=102 mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
     ```
 
 4. Deploy the new DM-worker instance.
@@ -397,7 +382,7 @@ This section describes how to switch between master and slave instances using dm
 
 ### Upstream master-slave switch behind the virtual IP
 
-1. Use `query-status` to make sure that relay catches up with the master instance before the switch (`relayCatchUpMaster`).
+1. Use `query-status` to make sure that the relay unit has caught up with the binlog status of the master instance before the switch (`relayCatchUpMaster`).
 2. Use `pause-relay` to pause relay.
 3. Use `pause-task` to pause all running tasks.
 4. The upstream master and slave instances behind the virtual IP execute the switch operation.
@@ -407,8 +392,7 @@ This section describes how to switch between master and slave instances using dm
 
 ### Master-slave switch after changing IP
 
-1. Use `query-status` to make sure that relay catches up with the master instance before the switch (`relayCatchUpMaster`).
+1. Use `query-status` to make sure that the relay unit has caught up with the binlog status of the master instance before the switch (`relayCatchUpMaster`).
 2. Use `stop-task` to stop all running tasks.
 3. Modify the DM-worker configuration, and use DM-Ansible to perform a rolling update on DM-worker.
-4. Update the `task.yaml` and `mysql-instances / config` configurations.
-5. Use `start-task` to restart the synchronization task.
+4. Use `start-task` to restart the synchronization task.

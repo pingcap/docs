@@ -1,7 +1,7 @@
 ---
 title: Loader Instructions
 summary: Use Loader to load data to TiDB.
-category: advanced
+category: tools
 ---
 
 # Loader Instructions
@@ -10,7 +10,7 @@ category: advanced
 
 Loader is a data import tool to load data to TiDB.
 
-[Download the Binary](http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz).
+It can be [downloaded](../tools/download.md) as part of the Enterprise Tools package.
 
 ## Why did we develop Loader?
 

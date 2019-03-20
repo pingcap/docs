@@ -6,7 +6,7 @@ category: tools
 
 # Data Migration Overview
 
-Data Migration (DM) is an integrated data synchronization task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB into TiDB. It can help to reduce the operations cost and simplify the troubleshooting process.
+[DM](https://github.com/pingcap/dm) (Data Migration) is an integrated data synchronization task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB into TiDB. It can help to reduce the operations cost and simplify the troubleshooting process.
 
 ## Architecture
 
@@ -66,7 +66,7 @@ The [column mapping](/tools/dm/data-synchronization-features.md#column-mapping) 
 
 ### Sharding support
 
-DM supports merging the original sharded instances and tables into TiDB, but with [some restrictions](/tools/dm/sharding-solution.md#sharding-ddl-usage-restrictions).
+DM supports merging the original sharded instances and tables into TiDB, but with [some restrictions](/tools/dm/shard-merge.md#restrictions).
 
 ## Usage restrictions
 
@@ -77,7 +77,7 @@ Before using the DM tool, note the following restrictions:
     - 5.5 < MySQL version < 5.8
     - MariaDB version >= 10.1.2
 
-    Data Migration [prechecks the corresponding privileges and configuration automatically](/tools/dm/manage-task.md#precheck-the-upstream-mysql-instance-configuration) while starting the data synchronization task using dmctl.
+    Data Migration [prechecks the corresponding privileges and configuration automatically](/tools/dm/precheck.md) while starting the data synchronization task using dmctl.
 
 + DDL syntax
 
@@ -89,10 +89,10 @@ Before using the DM tool, note the following restrictions:
 
     - If conflict exists between sharded tables, *only columns with the auto increment primary key* encounter the conflict, and the *column type is bigint*, solve the conflict using [column mapping](/tools/dm/data-synchronization-features.md#column-mapping). Otherwise, data synchronization is not supported. Conflicting data can cover each other and cause data loss.
 
-    - For other sharding restrictions, see [Sharding DDL usage restrictions](/tools/dm/sharding-solution.md#sharding-ddl-usage-restrictions).
+    - For other sharding restrictions, see [Sharding DDL usage restrictions](/tools/dm/shard-merge.md#restrictions).
 
 + Operations
 
     - After DM-worker is restarted, the data synchronization task cannot be automatically restored. You need to manually run `start-task`. For details, see [Manage the Data Synchronization Task](/tools/dm/manage-task.md).
 
-    - After DM-worker or DM-master is restarted, the DDL lock synchronization cannot be automatically restored in some conditions. You need to manually handle it. For details, see [Troubleshooting Sharding DDL Locks](/tools/dm/troubleshooting-sharding-ddl-locks.md).
+    - After DM-worker is restarted, the DDL lock synchronization cannot be automatically restored in some conditions. You need to manually handle it. For details, see [Handle Sharding DDL Locks Manually](/tools/dm/manually-handling-sharding-ddl-locks.md).

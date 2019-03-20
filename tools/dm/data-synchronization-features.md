@@ -201,9 +201,9 @@ After using the `bw-rule` rule:
 | `forum`.`messages` | No | 1. The schema `forum` matches `do-dbs` and continues to filter at the table level.<br> 2. The table `messages` is in the `db-name: "~^forum.*",tbl-name: "messages"` of `do-tables`. |
 | `forum_backup_2018`.`messages` | No | 1. The schema `forum_backup_2018` matches `do-dbs` and continues to filter at the table level.<br> 2. The schema and table match the `db-name: "~^forum.*",tbl-name: "messages"` of `do-tables`. |
 
-## Binlog event filtering
+## Binlog event filter
 
-Binlog event filtering is a more fine-grained filtering rule than the black and white lists filtering rule. You can use statements like `INSERT` or `TRUNCATE TABLE` to specify the binlog events of `schema/table` that you need to synchronize or filter out.
+Binlog event filter is a more fine-grained filtering rule than the black and white lists filtering rule. You can use statements like `INSERT` or `TRUNCATE TABLE` to specify the binlog events of `schema/table` that you need to synchronize or filter out.
 
 > **Note:** If a same table matches multiple rules, these rules are applied in order and the black list has priority over the white list. This means if both the `Ignore` and `Do` rules are applied to a single table, the `Ignore` rule takes effect.
 
@@ -305,7 +305,7 @@ filters:
 
 #### Filter out the SQL statements that TiDB does not support
 
-To filter out the `PROCEDURE` statement that TiDB does not support, configure the following `filter-procedure-rule`:
+To filter out the `PROCEDURE` statements that TiDB does not support, configure the following `filter-procedure-rule`:
 
 ```yaml
 filters:
@@ -317,6 +317,22 @@ filters:
 ```
 
 `filter-procedure-rule`  filters out the `^CREATE\\s+PROCEDURE` and `^DROP\\s+PROCEDURE` statements of all tables that match the `test_*`.`t_*` pattern.
+
+#### Filter out the SQL statements that the TiDB parser does not support
+
+For the SQL statements that the TiDB parser does not support, DM cannot parse them and get the `schema`/`table` information. So you must use the global filtering rule: `schema-pattern: "*"`.
+
+> **Note:** To avoid unexpectedly filtering out data that need to be replicated, you must configure the global filtering rule as strictly as possible.
+
+To filter out the `PARTITION` statements that the TiDB parser does not support, configure the following filtering rule:
+
+```yaml
+filters:
+  filter-partition-rule:
+    schema-pattern: "*"
+    sql-pattern: ["ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
+    action: Ignore
+```
 
 ## Column mapping
 
