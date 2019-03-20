@@ -194,7 +194,7 @@ Solution:
         ```sh
         # Enabled.
         curl -X POST -d "check_mb4_value_in_utf8=1" http://{TiDBIP}:10080/settings
-        # Disable.
+        # Disabled.
         curl -X POST -d "check_mb4_value_in_utf8=0" http://{TiDBIP}:10080/settings
         ```
 
@@ -203,6 +203,6 @@ Solution:
         ```sql
         # Enabled.
         set @@session.tidb_check_mb4_value_in_utf8 = 1;
-        # Disable.
+        # Disabled.
         set @@session.tidb_check_mb4_value_in_utf8 = 0;
         ```
