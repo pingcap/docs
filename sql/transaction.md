@@ -76,3 +76,21 @@ TiDB uses `SNAPSHOT ISOLATION` by default. You can set the isolation level of th
 ```sql
 SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
 ```
+## Lazy check of transactions
+
+In TiDB, lazy checking is performed for values written by ordinary `INSERT` statements. The meaning of a lazy check is that: it does not check for unique constraints when the `INSERT` statement is executed, but checks for unique constraints when the transaction commits.
+
+Example:
+
+```sql
+CREATE TABLE T (I INT KEY);
+INSERT INTO T VALUES (1);
+BEGIN;
+INSERT INTO T VALUES (1); -- MySQL returns an error; TiDB returns success
+INSERT INTO T VALUES (2);
+COMMIT; -- MySQL commits successfully; TiDB returns an error, transaction rollback
+SELECT * FROM T; -- MySQL returns 1 2; TiDB returns 1
+```
+
+The significance of lazy checking is that: if you perform a unique constraint check on every `INSERT` statement in a transaction, it will cause high network overhead. A batch check at the time of submission will greatly improve performance.
+> **Note**: This optimization does not take effect for `INSERT IGNORE` and `INSERT ON DUPLICATE KEY UPDATE`, only for normal `INSERT` statements.
