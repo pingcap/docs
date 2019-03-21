@@ -45,8 +45,9 @@ See the following example for the information about a single-node TiKV cluster:
 ```bash
 curl http://127.0.0.1:2379/pd/api/v1/stores
 {
-  "count": 1,
-  "stores": [
+  "count": 1,  # The number of TiKV nodes.
+  "stores": [  # The list of TiKV nodes.
+    # The details about the single TiKV node.
     {
       "store": {
         "id": 1,
@@ -55,8 +56,8 @@ curl http://127.0.0.1:2379/pd/api/v1/stores
         "state_name": "Up"
       },
       "status": {
-        "capacity": "20 GiB",
-        "available": "16 GiB",
+        "capacity": "20 GiB",  # The total capacity.
+        "available": "16 GiB",  # The available capacity.
         "leader_count": 17,
         "leader_weight": 1,
         "leader_score": 17,
@@ -65,8 +66,8 @@ curl http://127.0.0.1:2379/pd/api/v1/stores
         "region_weight": 1,
         "region_score": 17,
         "region_size": 17,
-        "start_ts": "2019-03-21T14:09:32+08:00",
-        "last_heartbeat_ts": "2019-03-21T14:14:22.961171958+08:00",
+        "start_ts": "2019-03-21T14:09:32+08:00",  # The starting timestamp.
+        "last_heartbeat_ts": "2019-03-21T14:14:22.961171958+08:00",  # The timestamp of the last heartbeat.
         "uptime": "4m50.961171958s"
       }
     }
