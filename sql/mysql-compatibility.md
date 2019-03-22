@@ -99,6 +99,12 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
 + Rename Table
 + Create Table Like
 
+### Database Administration
+
+Many administrative statements in TiDB work as they do in MySQL, but there are some important differences.
+
+[`ANALYZE TABLE`](statistics.md#manual-collection) works differently in TiDB than in MySQL, in that it's a relatively lightweight and short-lived operation in MySQL/InnoDB, while in TiDB it completely rebuilds the statistics for a table and can take much longer to complete.
+
 ### Transaction model
 
 TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-level locking to avoid write conflict, in TiDB, the write conflict is checked only in the `commit` process during the execution of the statements like `Update`, `Insert`, `Delete`, and so on.
