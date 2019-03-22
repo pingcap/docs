@@ -156,7 +156,7 @@ Due to its distributed nature, workloads that are single-threaded may perform wo
     
 ### Views
 
-Views in TiDB are currently non-updatable. We plan to add this functionality at a later date.
+Views in TiDB are currently non-insertable and non-updatable. We plan to add this functionality at a later date.
 
 ### Storage engines
 
