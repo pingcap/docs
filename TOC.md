@@ -68,6 +68,7 @@
     - [Prepared SQL Statement Syntax](sql/prepare.md)
     - [Utility Statements](sql/util.md)
     - [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/)
+  - [Contraints](sql/constraints.md)
   - [Generated Columns](sql/generated-columns.md)
   - [Connectors and APIs](sql/connection-and-APIs.md)
   - [TiDB Transaction Isolation Levels](sql/transaction-isolation.md)
