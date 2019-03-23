@@ -18,7 +18,7 @@
     - [The TiDB System Variables](sql/variable.md)
     - [The TiDB Specific System Variables](sql/tidb-specific.md)
     - [The TiDB Server Logs](sql/tidb-server.md#tidb-server-logs)
-    + [Security](sql/security.md)
+    + Security
       - [MySQL Compatibility](sql/security-compatibility.md)
       - [The TiDB Access Privilege System](sql/privilege.md)
       - [TiDB User Account Management](sql/user-account-management.md)
