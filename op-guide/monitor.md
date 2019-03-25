@@ -8,18 +8,18 @@ category: operations
 
 You can use the following two types of interfaces to monitor the TiDB cluster state:
 
-- [The state interface](#use-the-state-interface): using the HTTP interface to get the component information.
-- [The metrics interface](#use-the-metrics-interface): using Prometheus to record the detailed information of the various operations in components and view these metrics using Grafana.
+- [The state interface](#use-the-state-interface): this interface uses the HTTP interface to get the component information.
+- [The metrics interface](#use-the-metrics-interface): this interface uses Prometheus to record the detailed information of the various operations in components and view these metrics using Grafana.
 
 ## Use the state interface
 
-You can use the state interface to monitor the basic information of the component. This interface can act as the interface to monitor Keepalive. In addition, this interface of the Placement Driver (PD) can get the details of the entire TiKV cluster.
+The state interface monitors the basic information of a specific component in the TiDB cluster. It can also act as the monitor interface for Keepalive messages. In addition, the state interface for the Placement Driver (PD) can get the details of the entire TiKV cluster.
 
 ### TiDB server
 
-- The TiDB API address: `http://${host}:${port}`
-- The default port: `10080`
-- The details about API names: see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
+- TiDB API address: `http://${host}:${port}`
+- Default port: `10080`
+- Details about API names: see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
 
 The following example uses `http://${host}:${port}/status` to get the current state of the TiDB server and to determine whether the server is alive. The result is returned in the JSON format.
 
@@ -34,13 +34,11 @@ curl http://127.0.0.1:10080/status
 
 ### PD server
 
-- The PD API address: `http://${host}:${port}/pd/api/v1/${api_name}`
-- The default port: `2379`
-- The details about API names: see [PD API doc](https://cdn.rawgit.com/pingcap/docs/master/op-guide/pd-api-v1.html)
+- PD API address: `http://${host}:${port}/pd/api/v1/${api_name}`
+- Default port: `2379`
+- Details about API names: see [PD API doc](https://cdn.rawgit.com/pingcap/docs/master/op-guide/pd-api-v1.html)
 
-You can use this interface to get the state of all the TiKV servers and the information about load balancing. It is the most important and frequently-used interface to get the state information of all the TiKV nodes.
-
-See the following example for the information about a single-node TiKV cluster:
+The PD interface provides the state of all the TiKV servers and the information about load balancing. See the following example for the information about a single-node TiKV cluster:
 
 ```bash
 curl http://127.0.0.1:2379/pd/api/v1/stores
@@ -76,15 +74,15 @@ curl http://127.0.0.1:2379/pd/api/v1/stores
 
 ## Use the metrics interface
 
-You can use the metrics interface to monitor the state and performance of the entire TiDB cluster.
+The metrics interface monitors the state and performance of the entire TiDB cluster.
 
 - If you use Ansible to deploy the TiDB cluster, the monitoring system (Prometheus and Grafana) is deployed at the same time.
 - If you use other deployment ways, [deploy Prometheus and Grafana](#deploy-prometheus-and-grafana) before using this interface.
 
-In TiDB 3.0, the Prometheus Pushgateway is **not used** by default, but you can also use it if you like. In earlier TiDB versions, the Prometheus Pushgateway is **used** by default, but you can also choose to not use it.
-
-- If you want to use Pushgateway, see [Use Pushgateway](#use-pushgateway).
-- If you do not want to use Pushgateway, make sure Prometheus and Grafana are deployed and then [configure Grafana](#configure-grafana).
+> **Note:** In TiDB 3.0 Beta and 2.1, Prometheus Pushgateway (an intermediary service which allows you to push metrics from jobs which cannot be scraped) is not used in the PD server and the TiDB server, while it is optional in the TiKV server. In earlier TiDB versions, the Prometheus Pushgateway is used by default, but you can also choose to not use it.
+>
+> - If you want to use Pushgateway, see [Use Pushgateway](#use-pushgateway).
+> - If you do not want to use Pushgateway, make sure Prometheus and Grafana are deployed and then [configure Grafana](#configure-grafana).
 
 ### Deploy Prometheus and Grafana
 
@@ -345,7 +343,7 @@ This section describes how to configure Grafana.
 
 #### Step 2: Import a Grafana dashboard
 
-To import a Grafana dashboard for the PD server, the TiKV server, and the TiDB server, take the following steps respectively.
+To import a Grafana dashboard for the PD server, the TiKV server, and the TiDB server, take the following steps respectively:
 
 1. Click the Grafana logo to open the sidebar menu.
 
