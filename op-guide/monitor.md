@@ -79,7 +79,7 @@ The metrics interface monitors the state and performance of the entire TiDB clus
 - If you use Ansible to deploy the TiDB cluster, the monitoring system (Prometheus and Grafana) is deployed at the same time.
 - If you use other deployment ways, [deploy Prometheus and Grafana](#deploy-prometheus-and-grafana) before using this interface.
 
-> **Note:** In TiDB 3.0 Beta and 2.1, Prometheus Pushgateway (an intermediary service which allows you to push metrics from jobs which cannot be scraped) is not used in the PD server and the TiDB server, while it is optional in the TiKV server. In earlier TiDB versions, the Prometheus Pushgateway is used by default, but you can also choose to not use it.
+> **Note:** In TiDB 3.0 Beta and 2.1, Prometheus Pushgateway (an intermediary service which allows you to push metrics from jobs which cannot be scraped) is not used and not supported in the PD server and the TiDB server, while it is optional in the TiKV server. In earlier TiDB versions, the Prometheus Pushgateway is used by default, but you can also choose to not use it.
 >
 > - If you want to use Pushgateway, see [Use Pushgateway](#use-pushgateway).
 > - If you do not want to use Pushgateway, make sure Prometheus and Grafana are deployed and then [configure Grafana](#configure-grafana).
