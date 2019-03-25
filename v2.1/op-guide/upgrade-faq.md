@@ -4,7 +4,7 @@ summary: This document lists some FAQs and their solutions after upgrading.
 category: deployment
 ---
 
-# FAQs After Upgrading
+# FAQs After Upgrade
 
 This document lists some FAQs and their solutions after you upgrade TiDB.
 
