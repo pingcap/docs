@@ -133,7 +133,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 
 * The first `INSERT` statement does not cause a duplicate key error, as it would in MySQL. This check is deferred until the `COMMIT` statement is executed.
 
-By changing `tidb_constraint_check_in_place` to `TRUE`, `UNIQUE` constraints will be checked as statements are executed.  For example:
+By changing `tidb_constraint_check_in_place` to `TRUE`, `UNIQUE` constraints will be checked as statements are executed. For example:
 
 ```
 DROP TABLE IF EXISTS users;
