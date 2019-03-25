@@ -1,5 +1,5 @@
 ---
-title: FAQs After Upgrading
+title: FAQs After Upgrade
 summary: This document lists some FAQs and their solutions after upgrading.
 category: deployment
 ---
