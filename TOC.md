@@ -109,7 +109,7 @@
     - [Upgrade the Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
     - [TiDB 2.0 Upgrade Guide](op-guide/tidb-v2.0-upgrade-guide.md)
     - [TiDB 2.1 Upgrade Guide](op-guide/tidb-v2.1-upgrade-guide.md)
-    - [FAQs After Upgrading](op-guide/upgrade-FAQ.md)
+    - [FAQs After Upgrade](op-guide/upgrade-faq.md)
   - [Tune Performance](op-guide/tune-tikv.md)
   + Backup and Migrate
     - [Backup and Restore](op-guide/backup-restore.md)
@@ -170,6 +170,7 @@
 - [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
 + [Releases](releases/rn.md)
   + v3.0
+    - [3.0.0 Beta.1](releases/3.0.0-beta.1.md)
     - [3.0 Beta](releases/3.0beta.md)
   + v2.1
     - [2.1.6](releases/2.1.6.md)
