@@ -79,10 +79,7 @@ The metrics interface monitors the state and performance of the entire TiDB clus
 - If you use Ansible to deploy the TiDB cluster, the monitoring system (Prometheus and Grafana) is deployed at the same time.
 - If you use other deployment ways, [deploy Prometheus and Grafana](#deploy-prometheus-and-grafana) before using this interface.
 
-> **Note:** In TiDB 3.0 Beta and 2.1, Prometheus Pushgateway (an intermediary service which allows you to push metrics from jobs which cannot be scraped) is not used and not supported in the PD server and the TiDB server, while it is optional in the TiKV server. In earlier TiDB versions, the Prometheus Pushgateway is used by default, but you can also choose to not use it.
->
-> - If you want to use Pushgateway, see [Use Pushgateway](#use-pushgateway).
-> - If you do not want to use Pushgateway, make sure Prometheus and Grafana are deployed and then [configure Grafana](#configure-grafana).
+After Prometheus and Grafana are successfully deployed, [configure Grafana](#configure-grafana).
 
 ### Deploy Prometheus and Grafana
 
@@ -243,77 +240,6 @@ Assume that the TiDB cluster topology is as follows:
             --config="./conf/grafana.ini"
         ```
 
-### Use Pushgateway
-
-This section introduces the deployment architecture with Pushgateway, and describes the setting up and configuration of the monitoring system.
-
-#### The deployment architecture
-
-![monitor architecture](../media/monitor-architecture.png)
-
-#### Set up the monitoring system
-
-See the following links for your reference:
-
-- Prometheus Pushgateway: [https://github.com/prometheus/pushgateway](https://github.com/prometheus/pushgateway)
-- Prometheus Server: [https://github.com/prometheus/prometheus#install](https://github.com/prometheus/prometheus#install)
-- Grafana: [http://docs.grafana.org](http://docs.grafana.org/)
-
-#### Configure TiDB, PD and TiKV
-
-You need to add the Prometheus Pushgateway addresses to the startup parameters of the TiDB, PD and TiKV components.
-
-+ TiDB: set the two parameters: `--metrics-addr` and `--metrics-interval`.
-
-    - Set the Pushgateway address as the `--metrics-addr` parameter.
-    - Set the push frequency as the `--metrics-interval` parameter. The unit is s, and the default value is 15.
-
-+ PD: update the toml configuration file with the Pushgateway address and the push frequency:
-
-    ```toml
-    [metric]
-    # Prometheus client push interval, set "0s" to disable prometheus.
-    interval = "15s"
-    # Prometheus Pushgateway address, leaves it empty will disable prometheus.
-    address = "host:port"
-    ```
-
-+ TiKV: update the toml configuration file with the Pushgateway address and the the push frequency. Set the job field as "tikv".
-
-    ```toml
-    [metric]
-    # the Prometheus client push interval. Setting the value to 0s stops Prometheus client from pushing.
-    interval = "15s"
-    # the Prometheus Pushgateway address. Leaving it empty stops Prometheus client from pushing.
-    address = "host:port"
-    # the Prometheus client push job name. Note: A node id will automatically append, e.g., "tikv_1".
-    job = "tikv"
-    ```
-
-#### Configure PushServer
-
-Generally, the PushServer does not need to be configured, since the default port of `9091` can be used.
-
-#### Configure Prometheus
-
-Add the Pushgateway address to the yaml configuration file:
-
-```yaml
- scrape_configs:
-# The job name is added as a label `job=<job_name>` to any time series scraped from this config.
-- job_name: 'TiDB'
-
-  # Overrides the global default and scrape targets from this job every 5 seconds.
-  scrape_interval: 5s
-
-  honor_labels: true
-
-  static_configs:
- - targets: ['host:port'] # Use the Pushgateway address.
-labels:
-  group: 'production'
-```
-
 ### Configure Grafana
 
 This section describes how to configure Grafana.
@@ -349,7 +275,9 @@ To import a Grafana dashboard for the PD server, the TiKV server, and the TiDB s
 
 2. On the sidebar menu, click **Dashboards** -> **Import** to open the **Import Dashboard** window.
 
-3. Click **Upload .json File** to upload a JSON file (Download [TiDB Grafana Config](https://grafana.com/tidb)).
+3. Click **Upload .json File** to upload a JSON file (Download [TiDB Grafana configuration file](https://github.com/pingcap/tidb-ansible/tree/master/scripts)).
+
+    > **Note:** For the TiKV, PD, and TiDB dashboards, use the `tikv_pull.json` file, the `pd.json` file, the `tidb.json` file respectively.
 
 4. Click **Load**.
 
