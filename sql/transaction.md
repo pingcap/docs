@@ -78,7 +78,7 @@ SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
 ```
 ## Lazy check of transactions
 
-In TiDB, lazy checking is performed for values written by ordinary `INSERT` statements. The meaning of a lazy check is that: it does not check for unique constraints when the `INSERT` statement is executed, but checks for unique constraints when the transaction commits.
+**Lazy check** means that TiDB does not check for the unique constraint when the `INSERT` statement is executed, but checks for the unique constraint when the transaction is committed. In TiDB, the lazy check is performed for values written by ordinary `INSERT` statements.
 
 Example:
 
