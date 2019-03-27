@@ -118,7 +118,7 @@ Assume that the TiDB cluster topology is as follows:
         --log.level="info" &
     ```
 
-3. Start Prometheus in Node1.
+3. Start Prometheus on Node1.
 
     1. Edit the Prometheus configuration file.
 
@@ -185,7 +185,7 @@ Assume that the TiDB cluster topology is as follows:
             --storage.tsdb.retention="15d" &
         ```
 
-4. Start Grafana in Node1.
+4. Start Grafana on Node1.
 
     1. Edit the Grafana configuration file.
 
@@ -254,7 +254,7 @@ This section describes how to configure Grafana.
 
 2. Click the Grafana logo to open the sidebar menu.
 
-3. Click **Data Source** in the sidebar.
+3. In the sidebar menu, click **Data Source**.
 
 4. Click **Add data source**.
 
@@ -273,7 +273,7 @@ To import a Grafana dashboard for the PD server, the TiKV server, and the TiDB s
 
 1. Click the Grafana logo to open the sidebar menu.
 
-2. On the sidebar menu, click **Dashboards** -> **Import** to open the **Import Dashboard** window.
+2. In the sidebar menu, click **Dashboards** -> **Import** to open the **Import Dashboard** window.
 
 3. Click **Upload .json File** to upload a JSON file (Download [TiDB Grafana configuration file](https://github.com/pingcap/tidb-ansible/tree/master/scripts)).
 
