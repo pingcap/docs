@@ -92,5 +92,5 @@ COMMIT; -- It is successfully committed in MySQL; TiDB returns an error and the 
 SELECT * FROM T; -- MySQL returns 1 2; TiDB returns 1.
 ```
 
-The significance of lazy checking is that: if you perform a unique constraint check on every `INSERT` statement in a transaction, it will cause high network overhead. A batch check at the time of submission will greatly improve performance.
+The lazy check is important because if you perform a unique constraint check on every `INSERT` statement in a transaction, it can cause high network overhead. A batch check when the transaction is committed can greatly improve performance.
 > **Note**: This optimization does not take effect for `INSERT IGNORE` and `INSERT ON DUPLICATE KEY UPDATE`, only for normal `INSERT` statements.
