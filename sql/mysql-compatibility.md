@@ -10,7 +10,7 @@ TiDB supports both the MySQL wire protocol and the majority of its syntax. This 
 
 Currently TiDB advertises itself as MySQL 5.7, and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL workbench, mysqldump, mydumper/myloader.
 
-**Note:** This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security Features](../sql/security-compatibility.md) and [Transaction Model](../sql/transaction-compatibility.md) compatibility.
+> **Note:** This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security Features](../sql/security-compatibility.md) and [Transaction Model](../sql/transaction-compatibility.md) compatibility.
 
 ## Unsupported features
 
