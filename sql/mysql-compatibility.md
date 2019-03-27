@@ -6,11 +6,11 @@ category: user guide
 
 # Compatibility with MySQL
 
-TiDB supports the majority of the MySQL 5.7 syntax, including cross-row transactions, JOIN, subquery, and so on. You can connect to TiDB directly using your own MySQL client. If your existing business is developed based on MySQL, you can replace MySQL with TiDB to power your application without changing a single line of code in most cases.
+TiDB supports both the MySQL wire protocol and the majority of its syntax. This means that you can use your existing MySQL connectors and your existing applications can often be migrated to TiDB without changing any application code.
 
-TiDB is compatible with most of the MySQL database management & administration tools such as `PHPMyAdmin`, `Navicat`, `MySQL Workbench`, and so on. It also supports the database backup tools, such as `mysqldump` and `mydumper/myloader`.
+Currently TiDB advertises itself as MySQL 5.7, and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL workbench, mysqldump, mydumper/myloader.
 
-However, in TiDB, the following MySQL features are not supported for the time being or are different:
+**Note:** This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security Features](./sql/security-compatibility.md) and [Transaction Model](./sql/transaction-compatibility.md) compatibility.
 
 ## Unsupported features
 
