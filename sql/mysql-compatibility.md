@@ -6,9 +6,9 @@ category: user guide
 
 # Compatibility with MySQL
 
-TiDB supports both the MySQL wire protocol and the majority of its syntax. This means that you can use your existing MySQL connectors and your existing applications can often be migrated to TiDB without changing any application code.
+TiDB supports both the MySQL wire protocol and the majority of its syntax. This means that you can use your existing MySQL connectors and clients, and your existing applications can often be migrated to TiDB without changing any application code.
 
-Currently TiDB advertises itself as MySQL 5.7, and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL workbench, mysqldump, mydumper/myloader.
+Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and mydumper/myloader.
 
 > **Note:** This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security Features](../sql/security-compatibility.md) and [Transaction Model](../sql/transaction-compatibility.md) compatibility.
 
@@ -43,11 +43,11 @@ Currently TiDB advertises itself as MySQL 5.7, and works with most MySQL databas
 
 ### Auto-increment ID
 
-The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential.
+In TiDB, auto-increment columns are only guaranteed to be incremental and unique but are *not* guaranteed to be allocated sequentially. Currently, TiDB allocates IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs will not be sequential.
 
 > **Warning**:
 > 
-> If you use the auto-increment ID in a cluster with multiple tidb-server instances, do not mix the default value and the custom value, otherwise an error occurs in the following situation:
+> If you use auto-increment IDs in a cluster with multiple tidb-server instances, do not mix default values and custom values, otherwise an error will occur in the following situation:
 > 
 > Assume that you have a table with the auto-increment ID:
 > 
