@@ -23,8 +23,8 @@ TiSpark is an OLAP solution that runs Spark SQL directly on TiKV, the distribute
 
 ## Environment setup
 
-+ The TiSpark 2.x supports Spark 2.3.x. It does not support any versions earlier than 2.3.x. If you want to use Spark 2.1.x, please use TiSpark 1.x. If you want to use Spark 2.1.x, use TiSpark 1.x instead.
-+ There are small changes when TiSpark works with different minor versions of Spark 2.3.x. The default version TiSpark supports is Spark 2.3.2, if you want to use TiSpark with Spark 2.3.1 or Spark 2.3.0, you would need to build from sources to avoid conflicting APIs. Check out this section [How to build from sources](https://github.com/pingcap/tispark#how-to-build-from-sources) for more details.
++ The TiSpark 2.x supports Spark 2.3.x. It does not support any versions earlier than 2.3.x. If you want to use Spark 2.1.x, use TiSpark 1.x instead.
++ There are small changes when TiSpark works with different minor versions of Spark 2.3.x. The default version TiSpark supports is Spark 2.3.2. If you want to use TiSpark with Spark 2.3.1 or Spark 2.3.0, you need to build from sources to avoid conflicting APIs. For more details, see [How to build from sources](https://github.com/pingcap/tispark#how-to-build-from-sources).
 + TiSpark requires JDK 1.8+ and Scala 2.11 (Spark2.0 + default Scala version).
 + TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
 
@@ -58,15 +58,16 @@ SPARK_WORKER_MEMORY = 32g
 SPARK_WORKER_CORES = 8
 ```
 
-In the spark-defaults.conf, you should add following lines:
-```
+In the `spark-defaults.conf` file, add the following lines:
+
+```sh
 spark.tispark.pd.addresses $your_pd_servers
 spark.sql.extensions org.apache.spark.sql.TiExtensions
 ```
-`your_pd_servers` should be comma-separated pd addresses, each in the format of `$your_pd_address:$port`
 
-For example, `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379` when you have multiple PD servers on 10.16.20.1,10.16.20.2,10.16.20.3 with port 2379.
+`your_pd_servers` are comma-separated PD addresses, with each in the format of `$your_pd_address:$port`.
 
+For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.20.3` with the port 2379, put it as `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379`.
 
 ### Configuration of hybrid deployment of TiKV and TiSpark
 
@@ -74,7 +75,7 @@ For the hybrid deployment of TiKV and TiSpark, add TiSpark required resources to
 
 ## Deploy the TiSpark cluster
 
-Download TiSpark's jar package [here](http://download.pingcap.org/tispark-latest-linux-amd64.tar.gz), decompress the tar and copy content to folder you see fit.
+Download TiSpark's jar package [here](http://download.pingcap.org/tispark-latest-linux-amd64.tar.gz), decompress it, and copy the content to the appropriate folder.
 
 ### Deploy TiSpark on the existing Spark cluster
 
@@ -120,7 +121,7 @@ After the command returns, you can see if the Slave node is joined to the Spark 
 
 #### Spark SQL shell and JDBC server
 
-Now that TiSpark supports Spark 2.3, you can use Spark's ThriftServer and SparkSQL directly.
+TiSpark supports Spark 2.3, so you can use Spark's ThriftServer and SparkSQL directly.
 
 ## Demo
 
@@ -192,11 +193,14 @@ TiSparkR is a thin layer built to support the R language with TiSpark. Refer to 
 
 ## TiSpark on PySpark
 
-TiSpark on PySpark is a Python package build to support the Python language with TiSpark. Refer to [this document](https://github.com/pingcap/tispark/blob/master/python/README.md) for usage.
+TiSpark on PySpark is a Python package built to support the Python language with TiSpark. Refer to [this document](https://github.com/pingcap/tispark/blob/master/python/README.md) for usage.
 
 ## Use TiSpark together with Hive
-TiSpark should be ok to use together with Hive. 
-You need to set environment variable HADOOP_CONF_DIR to your Hadoop's configuration folder and copy hive-site.xml to spark/conf folder before starting Spark.
+
+You can use TiSpark together with Hive. 
+
+Before starting Spark, you need to set the `HADOOP_CONF_DIR` environment variable to your Hadoop configuration folder and copy `hive-site.xml` to the `spark/conf` folder.
+
 ```
 val tisparkDF = spark.sql("select * from tispark_table").toDF
 tisparkDF.write.saveAsTable("hive_table") // save table to hive
@@ -204,19 +208,21 @@ spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").s
 ```
 
 ## Load Spark Dataframe into TiDB using JDBC
-TiSpark does not provide a direct way to load data into yout TiDB cluster, but you can still load using jdbc like this:
+
+TiSpark does not provide a direct way of loading data into your TiDB cluster, but you can load data using JDBC like this:
+
 ```scala
 import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
 
 val customer = spark.sql("select * from customer limit 100000")
-// you might repartition source to make it balance across nodes
-// and increase concurrency
+// You might repartition the source to make it balance across nodes
+// and increase the concurrency.
 val df = customer.repartition(32)
 df.write
 .mode(saveMode = "append")
 .format("jdbc")
 .option("driver", "com.mysql.jdbc.Driver")
- // replace host and port as your and be sure to use rewrite batch
+ // Replace the host and port with that of your own and be sure to use the rewrite batch
 .option("url", "jdbc:mysql://127.0.0.1:4000/test?rewriteBatchedStatements=true")
 .option("useSSL", "false")
 // As tested, 150 is good practice
@@ -226,25 +232,27 @@ df.write
 .option("user", "root") // TiDB user here
 .save()
 ``` 
-It is recommended to set `isolationLevel` to `NONE` to avoid large single transactions which may potentialy lead to TiDB OOM.
+
+It is recommended to set `isolationLevel` to `NONE` to avoid large single transactions which might potentially lead to TiDB OOM.
 
 ## Statistics information
-TiSpark could use TiDB's statistic information for 
+
+TiSpark uses TiDB statistic information for the following items:
 
 1. Determining which index to ues in your query plan with the estimated lowest cost.
 2. Small table broadcasting, which enables efficient broadcast join.
 
-If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](https://github.com/pingcap/docs/blob/master/sql/statistics.md).
+If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](../sql/statistics.md).
 
-Since TiSpark 2.0, statistics information will be default to auto load.
+Starting from TiSpark 2.0, statistics information is default to auto load.
 
-Note that table statistics will be cached in your spark driver node's memory, so you need to make sure that your memory should be enough for your statistics information.
-Currently you could adjust these configs in your `spark-defaults.conf` file.
+Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
+
+Currently, you can adjust these configurations in your `spark-defaults.conf` file.
   
-| Property Name | Default | Description
-| --------   | -----:   | :----: |
-| spark.tispark.statistics.auto_load | true | Whether to load statistics info automatically during database mapping. |
-
+| Property name | Default | Description |
+| :--------   | :-----  | :---- |
+| spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |
 
 ## FAQ
 
