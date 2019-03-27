@@ -14,10 +14,9 @@ As a time series database, Prometheus has a multi-dimensional data model and fle
 
 Prometheus consists of multiple components. Currently, TiDB uses the following of them:
 
-- The Prometheus Server to scrape and store time series data.
-- The client libraries to customize necessary metrics in the application.
-- A Pushgateway to receive the data from Client Push for the Prometheus main server.
-- An AlertManager for the alerting mechanism.
+- The Prometheus Server to scrape and store time series data
+- The client libraries to customize necessary metrics in the application
+- An AlertManager for the alerting mechanism
 
 The diagram is as follows:
 
