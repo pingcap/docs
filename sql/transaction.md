@@ -89,7 +89,7 @@ BEGIN;
 INSERT INTO T VALUES (1); -- MySQL returns an error; TiDB returns success
 INSERT INTO T VALUES (2);
 COMMIT; -- It is successfully committed in MySQL; TiDB returns an error and the transaction rolls back.
-SELECT * FROM T; -- MySQL returns 1 2; TiDB returns 1
+SELECT * FROM T; -- MySQL returns 1 2; TiDB returns 1.
 ```
 
 The significance of lazy checking is that: if you perform a unique constraint check on every `INSERT` statement in a transaction, it will cause high network overhead. A batch check at the time of submission will greatly improve performance.
