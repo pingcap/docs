@@ -51,7 +51,9 @@ For the operating system, it is recommended to use RHEL/CentOS 7.3 or higher. Th
 | CPU Frequency Scaling | It is recommended to turn on CPU overclocking |
 | Transparent Hugepages | For Red Hat 7+ and CentOS 7+ systems, it is required to set the Transparent Hugepages to `always` |
 | I/O Scheduler | Set the I/O Scheduler of data disks to the `deadline` mode |
-| vm.swappiness | Set `vm.swappiness = 0` |
+| vm.swappiness | Set `vm.swappiness = 0` in `sysctl.conf` |
+| net.core.somaxconn | Set `net.core.somaxconn = 32768` in `sysctl.conf` |
+| net.ipv4.tcp_syncookies | Set `net.ipv4.tcp_syncookies = 0` in `sysctl.conf` |
 
 ### Database running user settings
 
