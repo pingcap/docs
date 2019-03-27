@@ -6,7 +6,7 @@ category: introduction
 
 # TiDB Introduction
 
-TiDB ("Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It features horizontal scalability, strong consistency, and high availability. TiDB is MySQL compatible and a distributed relational database that can handle both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.
+TiDB ("Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.
 
 ## Key Features
 
