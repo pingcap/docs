@@ -292,7 +292,7 @@ You need to add the Prometheus Pushgateway addresses to the startup parameters o
 
 #### Configure PushServer
 
-Generally, it does not need to be configured. You can use the default port: 9091.
+Generally, the PushServer does not need to be configured, since the default port of `9091` can be used.
 
 #### Configure Prometheus
 
