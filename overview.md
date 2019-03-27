@@ -28,7 +28,7 @@ We believe that being able to replicate in both directions lowers the risk when 
 
 ### Distributed Transactions with Strong Consistency
 
-TiDB internally shards table into small ranges that we refer to as regions. Each region defaults to approximately 100MiB in size, and TiDB uses a Two-phase commit internally to ensure that regions are maintained in a transactionally consistent way.
+TiDB internally shards table into small range-based chunks that we refer to as "regions". Each region defaults to approximately 100MiB in size, and TiDB uses a Two-phase commit internally to ensure that regions are maintained in a transactionally consistent way.
 
 Transactions in TiDB are strongly consistent, with snapshot isolation level consistency by default. This makes TiDB more comparable to traditional relational databases in semantics than some of the newer NoSQL systems using eventual consistency.
 
