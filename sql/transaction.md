@@ -86,7 +86,7 @@ For example:
 CREATE TABLE T (I INT KEY);
 INSERT INTO T VALUES (1);
 BEGIN;
-INSERT INTO T VALUES (1); -- MySQL returns an error; TiDB returns success
+INSERT INTO T VALUES (1); -- MySQL returns an error; TiDB returns success.
 INSERT INTO T VALUES (2);
 COMMIT; -- It is successfully committed in MySQL; TiDB returns an error and the transaction rolls back.
 SELECT * FROM T; -- MySQL returns 1 2; TiDB returns 1.
