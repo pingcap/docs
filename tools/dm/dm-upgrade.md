@@ -6,7 +6,7 @@ category: tools
 
 # Data Migration Upgrade
 
-This document introduces how to upgrade your Data Migration (DM) version to a non-compatible version.
+This document introduces how to upgrade your Data Migration (DM) version to an incompatible version.
 
 Assuming that V-A, V-B, V-C are three DM versions in chronological order and they are not compatible with each other, you need to upgrade V-A to V-C. Upgrade-A-B means upgrading V-A to V-B and Upgrade-B-C means upgrading V-B to V-C.
 
