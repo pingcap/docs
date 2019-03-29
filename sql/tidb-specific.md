@@ -296,3 +296,42 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
+
+## SHARD_ROW_ID_BITS
+
+For the tables with non-integer PK or without PK, TiDB uses an implicit auto-increment ROW ID. When a large number of `INSERT` operations occur, the data is written into a single Region, causing a write hot spot.
+
+To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The ROW ID is scattered and the data is written into multiple different Regions. But setting an overlarge value might lead to an excessively large number of RPC requests, which increases the CPU and network overheads.
+
+- `SHARD_ROW_ID_BITS = 4` indicates 16 shards
+- `SHARD_ROW_ID_BITS = 6` indicates 64 shards
+- `SHARD_ROW_ID_BITS = 0` indicates the default 1 shard
+
+Usage of statements:
+
+- `CREATE TABLE`: `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
+- `ALTER TABLE`: `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`
+
+## tidb_slow_log_threshold
+
+- Scope: SESSION
+- Default value: 300ms
+- This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+
+Usage example:
+
+```sql
+set tidb_slow_log_threshold = 200
+```
+
+## tidb_query_log_max_len
+
+- Scope: SESSION
+- Default value: 2048 (bytes)
+- The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
+
+Usage example:
+
+```sql
+set tidb_query_log_max_len = 20
+```
