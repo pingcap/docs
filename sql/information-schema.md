@@ -405,6 +405,29 @@ mysql> desc USER_PRIVILEGES;
 4 rows in set (0.00 sec)
 ```
 
+### VIEWS table
+
+The `VIEWS` table provides information about SQL views:
+
+```
+mysql> create view test.v1 as select 1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from views\G
+*************************** 1. row ***************************
+       TABLE_CATALOG: def
+        TABLE_SCHEMA: test
+          TABLE_NAME: v1
+     VIEW_DEFINITION: select 1
+        CHECK_OPTION: CASCADED
+        IS_UPDATABLE: NO
+             DEFINER: root@127.0.0.1
+       SECURITY_TYPE: DEFINER
+CHARACTER_SET_CLIENT: utf8
+COLLATION_CONNECTION: utf8_general_ci
+1 row in set (0.00 sec)
+```
+
 ## Unsupported Information Schema Tables
 
 The following `INFORMATION_SCHEMA` tables are present in TiDB, but will always return zero rows:
