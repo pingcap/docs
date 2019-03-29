@@ -92,7 +92,7 @@ INSERT INTO t1 VALUES (2);
 COMMIT; -- triggers an error
 ```
 
-`PRIMARY KEY` constraints otherwise have similar behavior and restritions to MySQL:
+`PRIMARY KEY` constraints otherwise have similar behavior and restrictions to MySQL:
 
 ```
 mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -108,7 +108,7 @@ mysql> CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-* Table `t2` failed to be created because the column `a` pemitted `NULL` values.
+* Table `t2` failed to be created because the column `a` permitted `NULL` values.
 * Table `t3` failed because there can only be one `PRIMARY KEY` on a table.
 * Table `t4` was successful, because even though there can only be one primary key, it may be defined as a composite of multiple columns.
 
