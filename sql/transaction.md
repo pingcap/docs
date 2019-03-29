@@ -78,12 +78,12 @@ SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
 ```
 ## Lazy check of constraints
 
-**Lazy check** means that by default TiDB will not check [unique constraints](../sql/constraints.md#unique) when an `INSERT` statement is executed, but instead checks when the transaction is committed. In TiDB, the lazy check is performed for values written by ordinary `INSERT` statements.
+**Lazy check** means that by default TiDB will not check [primary key](../sql/constraints.md#primary-key) or [unique constraints](../sql/constraints.md#unique) when an `INSERT` statement is executed, but instead checks when the transaction is committed. In TiDB, the lazy check is performed for values written by ordinary `INSERT` statements.
 
 For example:
 
 ```sql
-CREATE TABLE T (I INT KEY);
+CREATE TABLE T (I INT NOT NULL PRIMARY KEY);
 INSERT INTO T VALUES (1);
 BEGIN;
 INSERT INTO T VALUES (1); -- MySQL returns an error; TiDB returns success.
