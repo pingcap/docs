@@ -132,7 +132,7 @@
       - [Overview](sql/sql-optimizer-overview.md)
       - [Cost-based Optimizer](sql/understanding-the-query-execution-plan.md)
       - [Introduction to Statistics](sql/statistics.md)
-      - Optimizer Hints
+      - [Optimizer Hints](sql/optimizer-hints.md)
       - [Tune TiKV](op-guide/tune-tikv.md)
       - [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
     - [The mysql System Database](sql/system-database.md)
