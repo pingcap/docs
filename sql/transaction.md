@@ -83,13 +83,13 @@ SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
 For example:
 
 ```sql
-CREATE TABLE T (I INT NOT NULL PRIMARY KEY);
-INSERT INTO T VALUES (1);
-BEGIN;
-INSERT INTO T VALUES (1); -- MySQL returns an error; TiDB returns success.
-INSERT INTO T VALUES (2);
+CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY);
+INSERT INTO t1 VALUES (1);
+START TRANSACTION;
+INSERT INTO t1 VALUES (1); -- MySQL returns an error; TiDB returns success.
+INSERT INTO t1 VALUES (2);
 COMMIT; -- It is successfully committed in MySQL; TiDB returns an error and the transaction rolls back.
-SELECT * FROM T; -- MySQL returns 1 2; TiDB returns 1.
+SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 ```
 
 The lazy check is important because if you perform a unique constraint check on every `INSERT` statement in a transaction, it can cause high network overhead. A batch check when the transaction is committed can greatly improve performance.
