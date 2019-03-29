@@ -137,7 +137,7 @@ Assume that the TiDB cluster topology is as follows:
             monitor: "prometheus"
 
         scrape_configs:
-          - job_name: "overwritten-nodes"
+          - job_name: 'overwritten-nodes'
             honor_labels: true  # Do not overwrite job & instance labels.
             static_configs:
             - targets:
@@ -148,13 +148,13 @@ Assume that the TiDB cluster topology is as follows:
               - '192.168.199.117:9100'
               - '192.168.199.118:9100'
 
-          - job_name: "tidb"
+          - job_name: 'tidb'
             honor_labels: true  # Do not overwrite job & instance labels.
             static_configs:
             - targets:
               - '192.168.199.113:10080'
 
-          - job_name: "pd"
+          - job_name: 'pd'
             honor_labels: true  # Do not overwrite job & instance labels.
             static_configs:
             - targets:
@@ -162,7 +162,7 @@ Assume that the TiDB cluster topology is as follows:
               - '192.168.199.114:2379'
               - '192.168.199.115:2379'
 
-          - job_name: "tikv"
+          - job_name: 'tikv'
             honor_labels: true  # Do not overwrite job & instance labels.
             static_configs:
             - targets:
