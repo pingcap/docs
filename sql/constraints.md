@@ -4,7 +4,7 @@
 
 TiDB supports the same basic constraints supported in MySQL with the follwing exceptions:
 
-- `UNIQUE` constraints are checked lazily by default. By batching checks until when the transaction commits, TiDB is able to reduce network communication. This behavior can be changed by setting `tidb_constraint_check_in_place` to `TRUE`.
+- `PRIMARY KEY` and `UNIQUE` constraints are checked lazily by default. By batching checks until when the transaction commits, TiDB is able to reduce network communication. This behavior can be changed by setting `tidb_constraint_check_in_place` to `TRUE`.
 
 - `FOREIGN KEY` constraints are not currently enforced by DML.
 
@@ -81,7 +81,18 @@ Query OK, 1 row affected (0.03 sec)
 
 ## Primary Key
 
-TiDB supports `PRIMARY KEY` constraints with similar semantics to MySQL. For example:
+In TiDB, `PRIMARY KEY` constraints are checked lazily by default. By batching checks until when the transaction commits, TiDB is able to reduce network communication. For example:
+
+```
+CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY);
+INSERT INTO t1 VALUES (1);
+START TRANSACTION;
+INSERT INTO t1 VALUES (1); -- does not error
+INSERT INTO t1 VALUES (2);
+COMMIT; -- triggers an error
+```
+
+`PRIMARY KEY` constraints otherwise have similar behavior and restritions to MySQL:
 
 ```
 mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -97,7 +108,7 @@ mysql> CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-* Table `t2` failed to be created because the column `a` permitted `NULL` values.
+* Table `t2` failed to be created because the column `a` pemitted `NULL` values.
 * Table `t3` failed because there can only be one `PRIMARY KEY` on a table.
 * Table `t4` was successful, because even though there can only be one primary key, it may be defined as a composite of multiple columns.
 
