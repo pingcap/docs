@@ -144,7 +144,7 @@
     + Usage Scenarios
       - [Simple Scenario](tools/dm/simple-synchronization-scenario.md)
       - [Shard Merge Scenario](tools/dm/shard-merge-scenario.md)
-    - [Deploy the DM Cluster](tools/dm/deployment.md)
+    - [Deploy a DM Cluster](tools/dm/deployment.md)
     - [Migrate Data Using DM](tools/dm/practice.md)
     + Configure
       - [Overview](tools/dm/dm-configuration-file-overview.md)
