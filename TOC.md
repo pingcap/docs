@@ -75,7 +75,7 @@
     - [Common Errors](sql/error.md)
     - [Troubleshoot Cluster Setup](trouble-shooting.md)
     - [Troubleshoot Migrations](tools/dm/troubleshooting.md)
-    - [Troubleshooting Lightning Imports](tools/lightning/errors.md)
+    - [Troubleshooting TiDB-Lightning Imports](tools/lightning/errors.md)
     - [Support Resources](support.md)
     - [Report an Issue](report-issue.md)
   - [Contribute](contribute.md)
@@ -198,7 +198,7 @@
   - [Adopters](adopters.md)
 + FAQs
   - [TiDB Server FAQs](FAQ.md)
-  - [Lightning FAQs](tools/lightning/faq.md)
+  - [TiDB-Lightning FAQs](tools/lightning/faq.md)
   - [Upgrade FAQs](op-guide/upgrade-faq.md)
 + [Releases](releases/rn.md)
   + v3.0
