@@ -76,7 +76,7 @@ Currently, the TiDB 2.0 GA version and the master version are compatible with An
 
 ## Step 4: Download TiDB-Ansible and TiDB packages on the download machine
 
-The corresponding relationship between `tidb-ansible` and TiDB versions is as follows:
+The relationship between `tidb-ansible` and TiDB versions is as follows:
 
 | TiDB version | tidb-ansible tag | Note |
 | -------- | ---------------- | --- |

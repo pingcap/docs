@@ -125,7 +125,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 ## Step 3: Download TiDB-Ansible to the Control Machine
 
-1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. The corresponding relationship between `tidb-ansible` and TiDB versions is as follows:
+1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. The relationship between `tidb-ansible` and TiDB versions is as follows:
 
     | TiDB version | tidb-ansible tag | Note |
     | -------- | ---------------- | --- |
