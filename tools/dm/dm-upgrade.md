@@ -93,7 +93,7 @@ Before this version, `mysql-instances` in the task configuration file (`task.yam
 - `config`: the upstream MySQL address, user name and password.
 - `instance-id`: identifies an upstream MySQL.
 
-Since this version, the above two kinds of information are removed and the following information is added:
+Starting from this version, the above two kinds of information are removed and the following information is added:
 
 - `source_id`: exists in `inventory.ini`, used to identify an upstream MySQL instance or a master-slave replication group.
 - `source-id`: exists in `mysql-instances` of the task configuration file. Its value corresponds to `source_id` of `inventory.ini`.
