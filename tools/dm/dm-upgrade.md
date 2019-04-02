@@ -4,7 +4,7 @@ summary: Learn how to upgrade a Data Migration version to an incompatible versio
 category: tools
 ---
 
-# Data Migration Upgrade
+# Upgrade Data Migration
 
 This document introduces how to upgrade your Data Migration (DM) version to an incompatible version.
 
