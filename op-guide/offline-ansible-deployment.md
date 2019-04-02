@@ -83,7 +83,7 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
 | 2.0 version | v2.0.10, v2.0.11 | It is the latest 2.0 stable version which can be used in the production environment. |
 | 2.1 version | v2.1.1 ~ v2.1.6 | It is the latest 2.1 stable version which can be used in the production environment (recommended). |
 | 3.0 version | v3.0.0-beta, v3.0.0-beta.1 | It is currently a beta version which is not recommended to use in the production environment. |
-| The latest version | None | It includes the newest features and is updated on a daily basis, so it is not recommended to use it in the production environment. |
+| `master` branch | None | It includes the newest features and is updated on a daily basis, so it is not recommended to use it in the production environment. |
 
 > **Note:** If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
 
@@ -111,7 +111,7 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
         $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
         ```
 
-    - Download the tidb-ansible version that corresponds to the latest TiDB version:
+    - Download the tidb-ansible version that corresponds to the `master` branch of TiDB:
 
         ```
         $ git clone https://github.com/pingcap/tidb-ansible.git
