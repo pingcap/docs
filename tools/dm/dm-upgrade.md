@@ -72,7 +72,7 @@ Starting from this version, DM-worker uses a same port (8262 by default) to prov
     dm_master ansible_host=172.16.10.71 dm_master_port=8261
     ```
     
-2. Use DM-Ansible to perform rolling update on DM, Prometheus and Grafana.
+2. Use DM-Ansible to perform a rolling update on DM, Prometheus and Grafana.
 
 ## Upgrade to v1.0.0-133-g2f9fe82
 
