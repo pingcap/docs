@@ -39,7 +39,7 @@ Before this version, DM-worker uses the following two ports to provide different
 - `dm_worker_port`: 10081 by default. Provides the RPC service to communicate with DM-master.
 - `dm_worker_status_port`: 10082 by default. Provides metrics and status information.
 
-Since this version, DM-worker uses a same port (8262 by default) to provide the above two kinds of information or services simultaneously.
+Starting from this version, DM-worker uses a same port (8262 by default) to provide the above two kinds of information or services simultaneously.
 
 ### Upgrade operation example
 
