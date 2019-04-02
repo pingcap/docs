@@ -1,6 +1,6 @@
 ---
 title: Data Migration Upgrade
-summary: Lear how to upgrade a Data Migration version to a non-compatible version.
+summary: Learn how to upgrade a Data Migration version to an incompatible version.
 category: tools
 ---
 
