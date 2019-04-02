@@ -1,5 +1,5 @@
 ---
-title: Data Migration Upgrade
+title: Upgrade Data Migration
 summary: Learn how to upgrade a Data Migration version to an incompatible version.
 category: tools
 ---
