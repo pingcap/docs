@@ -118,7 +118,7 @@ Starting from this version, the above two kinds of information are removed and t
     dm-worker1 ansible_host=172.16.10.72 source_id="mysql-replica-01" server_id=101 mysql_host=172.16.10.72 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
     ```
 
-2. Use DM-Ansible to perform rolling update on DM.
+2. Use DM-Ansible to perform a rolling update on DM.
 
 3. Modify the task configuration file (`task.yaml`).
     
