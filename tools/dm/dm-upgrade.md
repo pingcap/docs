@@ -10,7 +10,7 @@ This document introduces how to upgrade your Data Migration (DM) version to an i
 
 Assuming that V-A, V-B, V-C are three DM versions in chronological order and they are not compatible with each other, you need to upgrade V-A to V-C. Upgrade-A-B means upgrading V-A to V-B and Upgrade-B-C means upgrading V-B to V-C.
 
-- If Upgrade-A-B overlaps Upgrade-B-C (e.g. different changes of a same configuration item), it is recommended to perform Upgrade-A-B to V-B and then perform Upgrade-B-C to V-C.
+- If Upgrade-A-B overlaps with Upgrade-B-C (e.g. different changes of a same configuration item), it is recommended to perform Upgrade-A-B to V-B and then perform Upgrade-B-C to V-C.
 - If Upgrade-A-B doe not overlap Upgrade-B-C, you can merge Upgrade-A-B and Upgrade-B-C as Upgrade-A-C to upgrade DM from V-A to V-C.
 
 > **Note:**
