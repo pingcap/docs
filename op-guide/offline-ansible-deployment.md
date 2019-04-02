@@ -76,7 +76,7 @@ Currently, the TiDB 2.0 GA version and the master version are compatible with An
 
 ## Step 4: Download TiDB-Ansible and TiDB packages on the download machine
 
-The relationship between `tidb-ansible` and TiDB versions is as follows:
+The relationship between the `tidb-ansible` version and the TiDB version is as follows:
 
 | TiDB version | tidb-ansible tag | Note |
 | -------- | ---------------- | --- |
@@ -103,15 +103,15 @@ The relationship between `tidb-ansible` and TiDB versions is as follows:
 
     Use the following command to download the corresponding version of TiDB-Ansible from the GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
-    > **Note:** You should use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. Errors might occur when you use multiple versions by modifying the `inventory.ini` file.
+    > **Note:** It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
 
-    - Download the tidb-ansible with the specified tag:
+    - Download the tidb-ansible version with a specified tag:
     
         ```
         $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
         ```
 
-    - Download the tidb-ansible that corresponds to the latest version:
+    - Download the tidb-ansible version that corresponds to the latest TiDB version:
 
         ```
         $ git clone https://github.com/pingcap/tidb-ansible.git
