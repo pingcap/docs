@@ -141,4 +141,4 @@ Starting from this version, the above two kinds of information are removed and t
     source-id: "instance118-4306" # It should be consistent with the original `source_id` value when the checkpoint of the original task needs to be reused.
     ```
 
-4. Use the modified task configuration to restart the task.
+4. Restart the task.
