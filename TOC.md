@@ -141,7 +141,7 @@
     + TiSpark
       - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
       - [User Guide](tispark/tispark-user-guide.md)
-  - Configuration
+  + Configuration
     + tidb-server
       - [MySQL Compatibility](sql/variable.md)
       - [Time Zone](sql/time-zone.md)
@@ -151,10 +151,9 @@
       - [Garbage Collection (GC)](op-guide/gc.md)
       - [Configuration Flags](op-guide/configuration.md)
     + pd-server
-        - [Configuration Flags](op-guide/pd-configuration.md)
+      - [Configuration Flags](op-guide/pd-configuration.md)
     + tikv-server
-        - [Configuration Flags](op-guide/tikv-configuration.md)
-  - TiDB Status Port
+      - [Configuration Flags](op-guide/tikv-configuration.md)
   + Tools
     - [Syncer](tools/syncer.md)
     - [mydumper](tools/mydumper.md)
