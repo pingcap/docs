@@ -1,12 +1,12 @@
 ---
-title: Deploy TiDB Using the Binary
+title: Production Deployment from Binary Tarball
 summary: Use the binary to deploy a TiDB cluster.
 category: operations
 ---
 
-# Deploy TiDB Using the Binary
+# Production Deployment from Binary Tarball
 
-This guide provides installation instructions from tarball on Linux. A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
+This guide provides installation instructions from a binary tarball on Linux. A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
 This document describes binary deployment for production usage. See also [local deployment](binary-local-deployment.md) and [testing enviroment](binary-testing-deployment.md) deployment.
 
