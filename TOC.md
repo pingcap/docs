@@ -62,7 +62,7 @@
   - [Migrate](tools/dm/overview.md)
   - Maintain
     - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
-    - [Identifying slow queries](sql/slow-query.md)
+    - [Identify slow queries](sql/slow-query.md)
     - [Backup and Restore](op-guide/backup-restore.md)
     + Scale
       - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
