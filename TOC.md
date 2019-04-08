@@ -26,8 +26,8 @@
 + How-to
   + Get Started
     + Start a Local Cluster
-      - [From Binary](op-guide/binary-deployment.md)
-      - [In Kubernetes](op-guide/kubernetes.md)
+      - [From Binary](op-guide/binary-local-deployment.md)
+      - [In Kubernetes](op-guide/kubernetes-local.md)
       - [In Docker Compose](op-guide/docker-compose.md)
     - [Explore SQL with TiDB](try-tidb.md)
     - [Import Sample Database](bikeshare-example-database.md)
