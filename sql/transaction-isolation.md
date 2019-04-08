@@ -19,6 +19,8 @@ The SQL-92 standard defines four levels of transaction isolation: Read Uncommitt
 
 TiDB implements Snapshot Isolation consistency, which it advertises as `REPEATABLE-READ` for compatibility with MySQL. This differs from the [ANSI Repeatable Read isolation level](#difference-between-tidb-and-ansi-repeatable-read) and the [MySQL Repeatable Read level](#difference-between-tidb-and-mysql-repeatable-read).
 
+> **Note**: In the default configuration, transactions may exhibit lost updates due to automatic retries. See [Transaction Retry](#transaction-retry) for instructions on how to disable this feature.
+
 TiDB uses the [Percolator transaction model](https://research.google.com/pubs/pub36726.html). A global read timestamp is obtained when the transaction is started, and a global commit timestamp is obtained when the transaction is committed. The execution order of transactions is confirmed based on the timestamps. To know more about the implementation of TiDB transaction model, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
 
 ## Repeatable Read
@@ -52,9 +54,9 @@ The MySQL Repeatable Read isolation level is not the snapshot isolation level. T
 
 ## Transaction retry
 
-For the `insert/delete/update` operation, if the transaction fails and can be retried according to the system, the transaction is automatically retried within the system.
+Transactions that fail may automatically be retried by TiDB, which may lead to lost updates. This feature can be disabled by setting both `tidb_disable_txn_auto_retry=TRUE` and `tidb_retry_limit = 0`.
 
-You can control the number of retries by configuring the `retry-limit` parameter:
+In addition, you can control the number of retries by configuring the `retry-limit` parameter:
 
 ```
 [performance]
