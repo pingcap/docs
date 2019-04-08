@@ -2,7 +2,7 @@
 
 ## Documentation List
 
-+ [Quick Start](QUICKSTART.md)
++ [Introduction](QUICKSTART.md)
 + Concepts
   - [Architecture](architecture.md)
   + [Key Features](overview.md)
