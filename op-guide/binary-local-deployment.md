@@ -8,6 +8,8 @@ category: operations
 
 This guide provides installation instructions for all TiDB components on a single developer machine. It is intended for evaluation purposes, and does not match the recommended usage for production systems.
 
+See also [testing environment](../op-guide/binary-testing-deployment.md) and [production enviroment](../op-guide/binary-deployment.md) deployment.
+
 The following local TCP ports will be used:
 
 | Component | Port  | Protocol | Description |
