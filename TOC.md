@@ -140,7 +140,7 @@
     + TiSpark
       - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
       - [User Guide](tispark/tispark-user-guide.md)
-  - Configuration
+  + Configuration
     + tidb-server
       - [MySQL Compatibility](sql/variable.md)
       - [Time Zone](sql/time-zone.md)
@@ -153,7 +153,6 @@
       - [Configuration Flags](op-guide/pd-configuration.md)
     + tikv-server
       - [Configuration Flags](op-guide/tikv-configuration.md)
-  - TiDB Status Port
   + Tools
     - [Syncer](tools/syncer.md)
     - [mydumper](tools/mydumper.md)
