@@ -65,7 +65,7 @@ $ tar -xzf tidb-latest-linux-amd64.tar.gz
 $ cd tidb-latest-linux-amd64
 ```
 
-### Start Binaries
+### Start
 
 Follow the steps below to start PD, TiKV and TiDB:
 
