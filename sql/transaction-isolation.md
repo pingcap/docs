@@ -19,7 +19,7 @@ The SQL-92 standard defines four levels of transaction isolation: Read Uncommitt
 
 TiDB implements Snapshot Isolation consistency, which it advertises as `REPEATABLE-READ` for compatibility with MySQL. This differs from the [ANSI Repeatable Read isolation level](#difference-between-tidb-and-ansi-repeatable-read) and the [MySQL Repeatable Read level](#difference-between-tidb-and-mysql-repeatable-read).
 
-> **Note**: In the default configuration, transactions may exhibit lost updates due to automatic retries. See [Transaction Retry](#transaction-retry) for instructions on how to disable this feature.
+> **Note**: In the default configuration, transactions may exhibit lost updates due to automatic retries. See [Transaction Retry](#transaction-retry) and [Transactional anomalies caused by automatic retries](#xxxx) for additional context on feature and how to disable it.
 
 TiDB uses the [Percolator transaction model](https://research.google.com/pubs/pub36726.html). A global read timestamp is obtained when the transaction is started, and a global commit timestamp is obtained when the transaction is committed. The execution order of transactions is confirmed based on the timestamps. To know more about the implementation of TiDB transaction model, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
 
@@ -65,9 +65,9 @@ In addition, you can control the number of retries by configuring the `retry-lim
 retry-limit = 10
 ```
 
-## Description of optimistic transactions
+## Transactional anomalies caused by automatic retries
 
-Because TiDB uses the optimistic transaction model, the final result might not be as expected if the transactions created by the explicit `BEGIN` statement automatically retry after meeting a conflict.
+Because TiDB automatically retries transactions [by default](#transaction-retry), the final result might not be as expected if the transactions created by the explicit `BEGIN` statement automatically retry after meeting a conflict.
 
 Example 1:
 
@@ -95,15 +95,16 @@ Example 2:
 | `}` | |
 | `commit;` // automatic retry | |
 
-Under the automatic retry mechanism of TiDB, all the executed statements for the first time are re-executed again. When whether the subsequent statements are to be executed or not depends on the results of the previous statements, automatic retry cannot guarantee the final result is as expected.
+Under the automatic retry mechanism of TiDB, all the executed statements for the first time are re-executed again. Whether the subsequent statements are to be executed or not depends on the results of the previous statements, automatic retry cannot guarantee the final result is as expected.
 
-To disable the automatic retry of explicit transactions, configure the `tidb_disable_txn_auto_retry` global variable:
+To disable the automatic retry of explicit transactions, configure the `tidb_disable_txn_auto_retry` and `tidb_retry_limit` variables:
 
+```sql
+SET GLOBAL tidb_disable_txn_auto_retry = 1;
+SET GLOBAL tidb_retry_limit = 0;
 ```
-set @@global.tidb_disable_txn_auto_retry = 1;
-```
 
-This variable does not affect the implicit single statement with `auto_commit = 1`, so this type of statement still automatically retries.
+Changing the variable `tidb_disable_txn_auto_retry` does not affect the implicit single statement with `auto_commit = 1`, since this type of statement still automatically retries.
 
 After the automatic retry of explicit transactions is disabled, if a transaction conflict occurs, the `commit` statement returns an error that includes the `try again later` string. The application layer uses this string to judge whether the error can be retried.
 
