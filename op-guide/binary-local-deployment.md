@@ -19,7 +19,7 @@ The following local TCP ports will be used:
 | PD        | 2380  | TCP      | the inter-node communication port within the PD cluster |
 
 
-### Operating System (Pre-check)
+### Prepare
 
 This guide is for deployment on Linux only. It is recommended to use RHEL/CentOS 7.3 or higher. TiKV requires you to raise the open files limit:
 
