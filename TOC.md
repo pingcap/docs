@@ -150,9 +150,9 @@
       - [Garbage Collection (GC)](op-guide/gc.md)
       - [Configuration Flags](op-guide/configuration.md)
     + pd-server
-        - [Configuration Flags](op-guide/pd-configuration.md)
+      - [Configuration Flags](op-guide/pd-configuration.md)
     + tikv-server
-        - [Configuration Flags](op-guide/tikv-configuration.md)
+      - [Configuration Flags](op-guide/tikv-configuration.md)
   - TiDB Status Port
   + Tools
     - [Syncer](tools/syncer.md)
