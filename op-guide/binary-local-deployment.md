@@ -34,7 +34,7 @@ EOF
 sudo cp /tmp/tidb.conf /etc/security/limits.d/
 sudo sysctl -w fs.file-max=1000000
 ```
-See the [production deployment](binary-deployment.md) optional kernel tuning parameters.
+See the [production deployment](../op-guide/binary-deployment.md) optional kernel tuning parameters.
 
 ### Create a database running user account
 
