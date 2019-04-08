@@ -51,7 +51,7 @@
     + Geographic Redundancy
       - [Overview](op-guide/cross-dc-deployment.md)
       - [Configure Location Awareness](op-guide/location-awareness.md)
-  + Monitoring and Alerting
+  + Monitor and Alert
     - [Overview](op-guide/monitor-overview.md)
     - [Monitor a TiDB Cluster](op-guide/monitor.md)
     + Key Monitoring Metrics
