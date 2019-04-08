@@ -35,12 +35,12 @@
   - Deploy
     - [Hardware Recommendations](op-guide/recommendation.md)
     - [Manual Deployment](op-guide/binary-deployment.md)
-    - Orchestrated Deployment
+    + Orchestrated Deployment
       - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
       - [Ansible Offline Deployment](op-guide/offline-ansible-deployment.md)
       - [Docker Deployment](op-guide/docker-deployment.md)
       - [Kubernetes Deployment](op-guide/kubernetes.md)
-    - Security
+    + Security
       - [Security Compatibility with MySQL](sql/security-compatibility.md)
       - [The TiDB Access Privilege System](sql/privilege.md)
       - [TiDB User Account Management](sql/user-account-management.md)
@@ -48,17 +48,17 @@
         - [Enable TLS For MySQL Clients](sql/encrypted-connections.md)
         - [Enable TLS Between TiDB Components](op-guide/security.md)
       - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
-    - Monitoring and Alerting
-      - [Overview](op-guide/monitor-overview.md)
-      - [Monitor a TiDB Cluster](op-guide/monitor.md)
-      + Key Monitoring Metrics
-        - [Overview](op-guide/dashboard-overview-info.md)
-        - [TiDB](op-guide/tidb-dashboard-info.md)
-        - [PD](op-guide/dashboard-pd-info.md)
-        - [TiKV](op-guide/dashboard-tikv-info.md)
-    - Geographic Redundancy
+    + Geographic Redundancy
       - [Overview](op-guide/cross-dc-deployment.md)
       - [Configure Location Awareness](op-guide/location-awareness.md)
+  + Monitoring and Alerting
+    - [Overview](op-guide/monitor-overview.md)
+    - [Monitor a TiDB Cluster](op-guide/monitor.md)
+    + Key Monitoring Metrics
+      - [Overview](op-guide/dashboard-overview-info.md)
+      - [TiDB](op-guide/tidb-dashboard-info.md)
+      - [PD](op-guide/dashboard-pd-info.md)
+      - [TiKV](op-guide/dashboard-tikv-info.md)
   - [Migrate](tools/dm/overview.md)
   - Maintain
     - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
@@ -78,11 +78,11 @@
     - [Troubleshooting TiDB-Lightning Imports](tools/lightning/errors.md)
     - [Support Resources](support.md)
     - [Report an Issue](report-issue.md)
-  - [Contribute](contribute.md)
+  + [Contribute](contribute.md)
     - [Contribute to TiDB](contribute.md#contribute-to-tidb)
     - [Improve the Docs](contribute.md#improve-the-docs)
 + Reference
-  - SQL
+  + SQL
     - [Supported Client Drivers](sql/connection-and-APIs.md)
     - [MySQL Compatibility](sql/mysql-compatibility.md)
     + SQL Statements
