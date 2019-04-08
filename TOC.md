@@ -61,7 +61,7 @@
       - [Configure Location Awareness](op-guide/location-awareness.md)
   - [Migrate](tools/dm/overview.md)
   - Maintain
-    - [Upgrading from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
+    - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
     - [Identifying slow queries](sql/slow-query.md)
     - [Backup and Restore](op-guide/backup-restore.md)
     + Scale
