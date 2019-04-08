@@ -40,18 +40,18 @@
       - [Ansible Offline Deployment](op-guide/offline-ansible-deployment.md)
       - [Docker Deployment](op-guide/docker-deployment.md)
       - [Kubernetes Deployment](op-guide/kubernetes.md)
-    + Security
-      - [Security Compatibility with MySQL](sql/security-compatibility.md)
-      - [The TiDB Access Privilege System](sql/privilege.md)
-      - [TiDB User Account Management](sql/user-account-management.md)
-      + Transport Layer Security (TLS)
-        - [Enable TLS For MySQL Clients](sql/encrypted-connections.md)
-        - [Enable TLS Between TiDB Components](op-guide/security.md)
-      - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
     + Geographic Redundancy
       - [Overview](op-guide/cross-dc-deployment.md)
       - [Configure Location Awareness](op-guide/location-awareness.md)
-  + Monitor and Alert
+  + Secure
+    - [Security Compatibility with MySQL](sql/security-compatibility.md)
+    - [The TiDB Access Privilege System](sql/privilege.md)
+    - [TiDB User Account Management](sql/user-account-management.md)
+    + Transport Layer Security (TLS)
+      - [Enable TLS For MySQL Clients](sql/encrypted-connections.md)
+      - [Enable TLS Between TiDB Components](op-guide/security.md)
+    - [Generate Self-signed Certificates](op-guide/generate-self-signed-certificates.md)
+  + Monitor
     - [Overview](op-guide/monitor-overview.md)
     - [Monitor a TiDB Cluster](op-guide/monitor.md)
     + Key Monitoring Metrics
