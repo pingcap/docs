@@ -8,11 +8,7 @@ category: operations
 
 This guide provides installation instructions from tarball on Linux. A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
-This document describes the binary deployment of three scenarios:
-
-1. [Single node cluster deployment](#single-node-cluster-deployment) for trying out TiDB.
-2. [Multiple nodes cluster deployment for testing](#multiple-nodes-cluster-deployment-for-test) TiDB across multiple nodes and exploring features in more detail.
-3. [Multiple nodes cluster deployment](#multiple-nodes-cluster-deployment) for production deployments.
+This document describes binary deployment for production usage. See also [local deployment](binary-local-deployment.md) and [testing enviroment](binary-testing-deployment.md) deployment.
 
 ## Prepare
 
@@ -120,98 +116,6 @@ $ sha256sum -c tidb-latest-linux-amd64.sha256
 $ tar -xzf tidb-latest-linux-amd64.tar.gz
 $ cd tidb-latest-linux-amd64
 ```
-
-## Single node cluster deployment
-
-After downloading the TiDB binary package, you can run and test the TiDB cluster on a standalone server. Follow the steps below to start PD, TiKV and TiDB:
-
-1. Start PD.
-
-    ```bash
-    $ ./bin/pd-server --data-dir=pd \
-                    --log-file=pd.log &
-    ```
-
-2. Start TiKV.
-
-    ```bash
-    $ ./bin/tikv-server --pd="127.0.0.1:2379" \
-                      --data-dir=tikv \
-                      --log-file=tikv.log &
-    ```
-
-3. Start TiDB.
-
-    ```bash
-    $ ./bin/tidb-server --store=tikv \
-                      --path="127.0.0.1:2379" \
-                      --log-file=tidb.log &
-    ```
-
-4. Use the MySQL client to connect to TiDB.
-
-    ```sh
-    $ mysql -h 127.0.0.1 -P 4000 -u root -D test
-    ```
-
-## Multiple nodes cluster deployment for test
-
-If you want to test TiDB but have a limited number of nodes, you can use one PD instance to test the entire cluster.
-
-Assuming that you have four nodes, you can deploy 1 PD instance, 3 TiKV instances, and 1 TiDB instance. See the following table for details:
-
-| Name | Host IP | Services |
-| :-- | :-- | :------------------- |
-| Node1 | 192.168.199.113 | PD1, TiDB |
-| Node2 | 192.168.199.114 | TiKV1 |
-| Node3 | 192.168.199.115 | TiKV2 |
-| Node4 | 192.168.199.116 | TiKV3 |
-
-Follow the steps below to start PD, TiKV and TiDB:
-
-1. Start PD on Node1.
-
-    ```bash
-    $ ./bin/pd-server --name=pd1 \
-                    --data-dir=pd \
-                    --client-urls="http://192.168.199.113:2379" \
-                    --peer-urls="http://192.168.199.113:2380" \
-                    --initial-cluster="pd1=http://192.168.199.113:2380" \
-                    --log-file=pd.log &
-    ```
-
-2. Start TiKV on Node2, Node3 and Node4.
-
-    ```bash
-    $ ./bin/tikv-server --pd="192.168.199.113:2379" \
-                      --addr="192.168.199.114:20160" \
-                      --data-dir=tikv \
-                      --log-file=tikv.log &
-
-    $ ./bin/tikv-server --pd="192.168.199.113:2379" \
-                      --addr="192.168.199.115:20160" \
-                      --data-dir=tikv \
-                      --log-file=tikv.log &
-
-    $ ./bin/tikv-server --pd="192.168.199.113:2379" \
-                      --addr="192.168.199.116:20160" \
-                      --data-dir=tikv \
-                      --log-file=tikv.log &
-    ```
-
-3. Start TiDB on Node1.
-
-    ```bash
-    $ ./bin/tidb-server --store=tikv \
-                      --path="192.168.199.113:2379" \
-                      --log-file=tidb.log
-    ```
-
-4. Use the MySQL client to connect to TiDB.
-
-    ```sh
-    $ mysql -h 192.168.199.113 -P 4000 -u root -D test
-    ```
 
 ## Multiple nodes cluster deployment
 
