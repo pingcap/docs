@@ -100,7 +100,7 @@ Under the automatic retry mechanism of TiDB, all the executed statements for the
 To disable the automatic retry of explicit transactions, configure the `tidb_disable_txn_auto_retry` and `tidb_retry_limit` variables:
 
 ```sql
-SET GLOBAL tidb_disable_txn_auto_retry = 1;
+SET GLOBAL tidb_disable_txn_auto_retry = TRUE;
 SET GLOBAL tidb_retry_limit = 0;
 ```
 
