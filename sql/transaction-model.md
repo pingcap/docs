@@ -14,6 +14,10 @@ Similarly, functions such as `GET_LOCK()` and `RELEASE_LOCK()` and statements su
 
 ## Behavior and Performance Differences
 
+### Transaction Retry
+
+By default, transactions that fail may automatically be retried by TiDB, which may lead to lost updates. This feature can be disabled by setting both `tidb_disable_txn_auto_retry=TRUE` and `tidb_retry_limit = 0`.
+
 ### Large transactions
 
 Due to the distributed, 2-phase commit requirement of TiDB, large transactions that modify data can be particularly problematic. TiDB intentionally sets some limits on transaction sizes to reduce this impact:
