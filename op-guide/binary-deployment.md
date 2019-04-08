@@ -8,7 +8,7 @@ category: operations
 
 This guide provides installation instructions from a binary tarball on Linux. A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
-This document describes binary deployment for production usage. See also [local deployment](../op-guide/binary-local-deployment.md) and [testing enviroment](../op-guide/binary-testing-deployment.md) deployment.
+See also [local deployment](../op-guide/binary-local-deployment.md) and [testing enviroment](../op-guide/binary-testing-deployment.md) deployment.
 
 ## Prepare
 
