@@ -41,7 +41,7 @@
       - [Docker Deployment](op-guide/docker-deployment.md)
       - [Kubernetes Deployment](op-guide/kubernetes.md)
     - Security
-      - [MySQL Compatibility](sql/security-compatibility.md)
+      - [Security Compatibility with MySQL](sql/security-compatibility.md)
       - [The TiDB Access Privilege System](sql/privilege.md)
       - [TiDB User Account Management](sql/user-account-management.md)
       + Transport Layer Security (TLS)
@@ -127,6 +127,7 @@
       - [Comment Syntax](sql/comment-syntax.md)
     - [Generated Columns](sql/generated-columns.md)
     + Transactions
+      - [Transaction Model](sql/transaction-model.md)
       - [Isolation Levels](sql/transaction-isolation.md)
     + Performance
       - [Overview](sql/sql-optimizer-overview.md)
