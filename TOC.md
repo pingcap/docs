@@ -43,6 +43,7 @@
     + Geographic Redundancy
       - [Overview](op-guide/cross-dc-deployment.md)
       - [Configure Location Awareness](op-guide/location-awareness.md)
+    - [TiSpark](tispark/tispark-quick-start-guide.md)
   + Secure
     - [Security Compatibility with MySQL](sql/security-compatibility.md)
     - [The TiDB Access Privilege System](sql/privilege.md)
@@ -138,9 +139,7 @@
       - [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
     - [The mysql System Database](sql/system-database.md)
     - [Information Schema](sql/information-schema.md)
-    + TiSpark
-      - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
-      - [User Guide](tispark/tispark-user-guide.md)
+    - [TiSpark](tispark/tispark-user-guide.md)
   + Configuration
     + tidb-server
       - [MySQL Compatibility](sql/variable.md)
