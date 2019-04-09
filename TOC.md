@@ -40,6 +40,7 @@
       - [Ansible Offline Deployment](op-guide/offline-ansible-deployment.md)
       - [Docker Deployment](op-guide/docker-deployment.md)
       - [Kubernetes Deployment](op-guide/kubernetes.md)
+      - [Overview of Ansible Operations](op-guide/ansible-operation.md)
     + Geographic Redundancy
       - [Overview](op-guide/cross-dc-deployment.md)
       - [Configure Location Awareness](op-guide/location-awareness.md)
@@ -62,16 +63,14 @@
       - [TiKV](op-guide/dashboard-tikv-info.md)
   - [Migrate](tools/dm/overview.md)
   + Maintain
-    - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
-    - [Identify slow queries](sql/slow-query.md)
     - [Backup and Restore](op-guide/backup-restore.md)
     + Scale
       - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
-    + Common Ansible Operations
-      - [Overview](op-guide/ansible-operation.md)
-      - [Scale](op-guide/ansible-deployment-scale.md)
-      - [Modify Component Configuration](op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
-      - [Upgrade Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
+      - [Scale using Ansible](op-guide/ansible-deployment-scale.md)
+    - [Identify slow queries](sql/slow-query.md)
+    + Upgrade
+      - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
+      - [Rolling updates with Ansible](op-guide/ansible-deployment-rolling-update.md)
   - Troubleshoot
     - [Common Errors](sql/error.md)
     - [Troubleshoot Cluster Setup](trouble-shooting.md)
