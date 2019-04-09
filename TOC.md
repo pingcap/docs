@@ -60,7 +60,7 @@
       - [PD](op-guide/dashboard-pd-info.md)
       - [TiKV](op-guide/dashboard-tikv-info.md)
   - [Migrate](tools/dm/overview.md)
-  - Maintain
+  + Maintain
     - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
     - [Identify slow queries](sql/slow-query.md)
     - [Backup and Restore](op-guide/backup-restore.md)
