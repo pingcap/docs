@@ -113,7 +113,7 @@ max-retry = 100
 
 # After Syncer uses `route-rules` to map the upstream schema and table into `target-schema` and `target-table`, 
 # Syncer matches the mapped `target-schema` and `target-table` with do / ignore rules,
-# and the sequence of matching rules is: replicate-do-db --> replicate-do-table --> replicate-ignore-db --> replicate-ignore-table.
+# and the matching sequence is: replicate-do-db --> replicate-do-table --> replicate-ignore-db --> replicate-ignore-table.
 # Specify the database name to be replicated. Support regular expressions. Start with '~' to use regular expressions.
 # replicate-do-db = ["~^b.*","s1"]
 
