@@ -197,7 +197,7 @@
   - [Roadmap](ROADMAP.md)
   - [Adopters](adopters.md)
 + FAQs
-  - [TiDB Server FAQs](FAQ.md)
+  - [TiDB FAQs](FAQ.md)
   - [TiDB-Lightning FAQs](tools/lightning/faq.md)
   - [Upgrade FAQs](op-guide/upgrade-faq.md)
 + [Releases](releases/rn.md)
