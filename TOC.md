@@ -40,9 +40,11 @@
       - [Ansible Offline Deployment](op-guide/offline-ansible-deployment.md)
       - [Docker Deployment](op-guide/docker-deployment.md)
       - [Kubernetes Deployment](op-guide/kubernetes.md)
+      - [Overview of Ansible Operations](op-guide/ansible-operation.md)
     + Geographic Redundancy
       - [Overview](op-guide/cross-dc-deployment.md)
       - [Configure Location Awareness](op-guide/location-awareness.md)
+    - [TiSpark](tispark/tispark-quick-start-guide.md)
   + Secure
     - [Security Compatibility with MySQL](sql/security-compatibility.md)
     - [The TiDB Access Privilege System](sql/privilege.md)
@@ -61,21 +63,19 @@
       - [TiKV](op-guide/dashboard-tikv-info.md)
   - [Migrate](tools/dm/overview.md)
   + Maintain
-    - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
-    - [Identify slow queries](sql/slow-query.md)
     - [Backup and Restore](op-guide/backup-restore.md)
     + Scale
       - [Scale a TiDB Cluster](op-guide/horizontal-scale.md)
-    + Common Ansible Operations
-      - [Overview](op-guide/ansible-operation.md)
-      - [Scale](op-guide/ansible-deployment-scale.md)
-      - [Modify Component Configuration](op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
-      - [Upgrade Component Version](op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
+      - [Scale using Ansible](op-guide/ansible-deployment-scale.md)
+    - [Identify slow queries](sql/slow-query.md)
+    + Upgrade
+      - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
+      - [Rolling updates with Ansible](op-guide/ansible-deployment-rolling-update.md)
   - Troubleshoot
     - [Common Errors](sql/error.md)
     - [Troubleshoot Cluster Setup](trouble-shooting.md)
-    - [Troubleshoot Migrations](tools/dm/troubleshooting.md)
-    - [Troubleshooting TiDB-Lightning Imports](tools/lightning/errors.md)
+    - [Troubleshoot Data Migrations](tools/dm/troubleshooting.md)
+    - [Troubleshoot TiDB-Lightning](tools/lightning/errors.md)
     - [Support Resources](support.md)
     - [Report an Issue](report-issue.md)
   + [Contribute](contribute.md)
@@ -138,15 +138,13 @@
       - [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
     - [The mysql System Database](sql/system-database.md)
     - [Information Schema](sql/information-schema.md)
-    + TiSpark
-      - [Quick Start Guide](tispark/tispark-quick-start-guide.md)
-      - [User Guide](tispark/tispark-user-guide.md)
+    - [TiSpark](tispark/tispark-user-guide.md)
   + Configuration
     + tidb-server
-      - [MySQL Compatibility](sql/variable.md)
+      - [MySQL System Variables](sql/variable.md)
+      - [TiDB Specific System Variables](sql/tidb-specific.md)
       - [Time Zone](sql/time-zone.md)
       - [Character Set](sql/character-set-support.md)
-      - [Extensions to MySQL](sql/tidb-specific.md)
       - [Memory Control](sql/tidb-memory-control.md)
       - [Garbage Collection (GC)](op-guide/gc.md)
       - [Configuration Flags](op-guide/configuration.md)
@@ -197,7 +195,7 @@
   - [Roadmap](ROADMAP.md)
   - [Adopters](adopters.md)
 + FAQs
-  - [TiDB Server FAQs](FAQ.md)
+  - [TiDB FAQs](FAQ.md)
   - [TiDB-Lightning FAQs](tools/lightning/faq.md)
   - [Upgrade FAQs](op-guide/upgrade-faq.md)
 + [Releases](releases/rn.md)
