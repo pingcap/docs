@@ -74,7 +74,7 @@
   - Troubleshoot
     - [Common Errors](sql/error.md)
     - [Troubleshoot Cluster Setup](trouble-shooting.md)
-    - [Troubleshoot Migrations](tools/dm/troubleshooting.md)
+    - [Troubleshoot Data Migrations](tools/dm/troubleshooting.md)
     - [Troubleshooting TiDB-Lightning Imports](tools/lightning/errors.md)
     - [Support Resources](support.md)
     - [Report an Issue](report-issue.md)
