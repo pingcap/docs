@@ -59,10 +59,9 @@
       - [TiDB](op-guide/tidb-dashboard-info.md)
       - [PD](op-guide/dashboard-pd-info.md)
       - [TiKV](op-guide/dashboard-tikv-info.md)
-  + Migrate
-    - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
-    - [Data Migration Overview](tools/dm/overview.md)
+  - [Migrate](tools/dm/overview.md)
   + Maintain
+    - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
     - [Identify slow queries](sql/slow-query.md)
     - [Backup and Restore](op-guide/backup-restore.md)
     + Scale
