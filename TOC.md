@@ -31,7 +31,7 @@
       - [In Docker Compose](op-guide/docker-compose.md)
     - [Explore SQL with TiDB](try-tidb.md)
     - [Import Sample Database](bikeshare-example-database.md)
-    - [Read Historical Data without Restoring from Backup](op-guide/history-read.md)
+    - [Read Historical Data](op-guide/history-read.md)
   - Deploy
     - [Hardware Recommendations](op-guide/recommendation.md)
     - [Manual Deployment](op-guide/binary-deployment.md)
