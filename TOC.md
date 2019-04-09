@@ -45,6 +45,7 @@
       - [Overview](op-guide/cross-dc-deployment.md)
       - [Configure Location Awareness](op-guide/location-awareness.md)
     - [TiSpark](tispark/tispark-quick-start-guide.md)
+    - [Data Migration with Ansible](tools/dm/deployment.md)
   + Secure
     - [Security Compatibility with MySQL](sql/security-compatibility.md)
     - [The TiDB Access Privilege System](sql/privilege.md)
@@ -61,7 +62,10 @@
       - [TiDB](op-guide/tidb-dashboard-info.md)
       - [PD](op-guide/dashboard-pd-info.md)
       - [TiKV](op-guide/dashboard-tikv-info.md)
-  - [Migrate](tools/dm/overview.md)
+  + Migrate
+    - [Overview](op-guide/migration-overview.md)
+    - [From MySQL](op-guide/migration.md)
+    - [Using Data Migration](tools/dm/overview.md)
   + Maintain
     - [Backup and Restore](op-guide/backup-restore.md)
     + Scale
@@ -70,6 +74,7 @@
     - [Identify slow queries](sql/slow-query.md)
     + Upgrade
       - [Upgrade from TiDB 2.1](op-guide/tidb-v2.1-upgrade-guide.md)
+      - [Upgrade Data Migration](tools/dm/dm-upgrade.md)
       - [Rolling updates with Ansible](op-guide/ansible-deployment-rolling-update.md)
   - Troubleshoot
     - [Common Errors](sql/error.md)
