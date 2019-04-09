@@ -34,7 +34,9 @@
     - [Read Historical Data](op-guide/history-read.md)
   - Deploy
     - [Hardware Recommendations](op-guide/recommendation.md)
-    - [Manual Deployment](op-guide/binary-deployment.md)
+    + From Binary Tarball
+      - [For testing environments](op-guide/binary-testing-deployment.md)
+      - [For production environments](op-guide/binary-deployment.md)
     + Orchestrated Deployment
       - [Ansible Deployment (Recommended)](op-guide/ansible-deployment.md)
       - [Ansible Offline Deployment](op-guide/offline-ansible-deployment.md)
