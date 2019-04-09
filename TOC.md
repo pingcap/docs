@@ -142,10 +142,10 @@
     - [TiSpark](tispark/tispark-user-guide.md)
   + Configuration
     + tidb-server
-      - [MySQL Compatibility](sql/variable.md)
+      - [MySQL System Variables](sql/variable.md)
+      - [TiDB Specific System Variables](sql/tidb-specific.md)
       - [Time Zone](sql/time-zone.md)
       - [Character Set](sql/character-set-support.md)
-      - [Extensions to MySQL](sql/tidb-specific.md)
       - [Memory Control](sql/tidb-memory-control.md)
       - [Garbage Collection (GC)](op-guide/gc.md)
       - [Configuration Flags](op-guide/configuration.md)
