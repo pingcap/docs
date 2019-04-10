@@ -182,7 +182,7 @@ ADMIN CHECK TABLE tbl_name [, tbl_name] ...
 
 - `ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...`: To view the original SQL statement of the DDL task corresponding to the `job_id`; the `job_id` only searches the running DDL job and the last ten results in the DDL history job queue
 - `ADMIN CANCEL DDL JOBS job_id [, job_id] ...`: To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled. If the operation fails to cancel the jobs, specific reasons are displayed.
-- `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and the corresponding index. If the check is passed, the empty query result is returned; otherwise the error message `data isn't equal` is returned.
+- `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and corresponding indexes. If the check is passed, the empty query result is returned; otherwise the error message `data isn't equal` is returned.
 
   > **Note**:
   >
