@@ -17,6 +17,13 @@ We're using MariaDB Server in this case instead of MySQL Server because RHEL/Cen
 Even if you've already started a TiDB Cluster, it might be easier to follow along with this tutorial if you set up a new, very simple cluster. The first step of that will be to download the latest TiDB Platform package: http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz. That package contains all the files we'll need to get started.
 
 ```
+curl -LO http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
+tar xf tidb-latest-linux-amd64.tar.gz
+cd tidb-latest-linux-amd64
+```
+
+
+```
 [kolbe@localhost ~]$ curl -LO http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -26,32 +33,28 @@ Even if you've already started a TiDB Cluster, it might be easier to follow alon
 [kolbe@localhost tidb-latest-linux-amd64]$
 ```
 
-Now we'll start a very simple TiDB Cluster, with a single instance each of `pd-server`, `tikv-server`, and `tidb-server`:
-
-```
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pd-server --log-file=pd.log --data-dir=pd.data &
-[1] 7831
-[kolbe@localhost tidb-latest-linux-amd64]$ printf %s\\n '[rocksdb]' max-open-files=1024 '[raftdb]' max-open-files=1024 > tikv.toml
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tikv-server --log-file=tikv.log --data-dir=tikv.data --pd-endpoints=127.0.0.1:2379 --config=tikv.toml &
-[2] 7873
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pump --log-file=pump.log --data-dir=pump.data --socket=/tmp/pump.sock &
-[3] 8019
-[kolbe@localhost tidb-latest-linux-amd64]$ printf %s\\n 'store="tikv"' 'path="127.0.0.1:2379"' '[binlog]' 'enable=true' 'binlog-socket="/tmp/pump.sock"' > tidb.toml
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tidb-server --log-file=tidb.log --config=tidb.toml &
-[4] 8028
-```
-
-First, set up the config files we'll use:
-
+Now we'll start a very simple TiDB Cluster, with a single instance each of `pd-server`, `tikv-server`, and `tidb-server`. First, let's populate the config files we'll use:
 ```
 printf %s\\n 'log-file="pd.log"' 'data-dir="pd.data"' > pd.toml
 printf %s\\n 'log-file="tikv.log"' '[storage]' 'data-dir="tikv.data"' '[pd]' 'endpoints=["127.0.0.1:2379"]' '[rocksdb]' max-open-files=1024 '[raftdb]' max-open-files=1024 > tikv.toml
 printf %s\\n 'log-file="pump.log"' 'socket="/tmp/pump.sock"' 'data-dir="pump.data"' > pump.toml
 printf %s\\n 'store="tikv"' 'path="127.0.0.1:2379"' '[log.file]' 'filename="tidb.log"' '[binlog]' 'enable=true' 'binlog-socket="/tmp/pump.sock"' > tidb.toml
+printf %s\\n 'log-file="drainer.log"' '[syncer]' 'db-type="mysql"' '[syncer.to]' 'host="127.0.0.1"' 'user="root"' 'password=""' 'port=3306' > drainer.toml
+
 ```
 
 ```
 $ for f in \*.toml; do echo "$f:"; cat "$f"; echo; done
+drainer.toml:
+log-file="drainer.log"
+[syncer]
+db-type="mysql"
+[syncer.to]
+host="127.0.0.1"
+user="root"
+password=""
+port=3306
+
 pd.toml:
 log-file="pd.log"
 data-dir="pd.data"
@@ -82,30 +85,42 @@ max-open-files=1024
 max-open-files=1024
 ```
 
+Now we can start each component. This has to be done in a specific order, first bringing up the PD (Placement Driver), then TiKV Server (the backend key/value store used by TiDB Platform), then pump (because TiDB must connect to the pump service to send the binary log), and finally TiDB Server (the frontend that receives SQL from applications). To give the services a little time to start up, well sleep for a few seconds between each.
+
 ```
-[1]   Running                 ./bin/pd-server --config=pd.toml &\>pd.out &
-[2]   Running                 ./bin/tikv-server --config=tikv.toml &\>tikv.out &
-[4]-  Running                 ./bin/pump --config=pump.toml &\>pump.out &
-[5]+  Running                 ./bin/tidb-server --config=tidb.toml &\>tidb.out &
+./bin/pd-server --config=pd.toml &>pd.out &
+sleep 3
+./bin/tikv-server --config=tikv.toml &>tikv.out &
+sleep 3
+./bin/pump --config=pump.toml &>pump.out &
+sleep 3
+./bin/tidb-server --config=tidb.toml &>tidb.out &
 ```
 
 ```
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pd-server --log-file=pd.log --data-dir=pd.data &>pd.out &
-[1] 8202
-[kolbe@localhost tidb-latest-linux-amd64]$ printf %s\\n '[rocksdb]' max-open-files=1024 '[raftdb]' max-open-files=1024 > tikv.toml
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tikv-server --log-file=tikv.log --data-dir=tikv.data --pd-endpoints=127.0.0.1:2379 --config=tikv.toml &>tikv.out &
-[2] 8210
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pump --log-file=pump.log --data-dir=pump.data --socket=/tmp/pump.sock &>pump.out &
-[3] 8315
-[kolbe@localhost tidb-latest-linux-amd64]$ printf %s\\n 'store="tikv"' 'path="127.0.0.1:2379"' '[binlog]' 'enable=true' 'binlog-socket="/tmp/pump.sock"' > tidb.toml
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tidb-server --log-file=tidb.log --config=tidb.toml &>tidb.out &
-[4] 8347
-[kolbe@localhost tidb-latest-linux-amd64]$ jobs
-[1]   Running                 ./bin/pd-server --log-file=pd.log --data-dir=pd.data &>pd.out &
-[2]   Running                 ./bin/tikv-server --log-file=tikv.log --data-dir=tikv.data --pd-endpoints=127.0.0.1:2379 --config=tikv.toml &>tikv.out &
-[3]-  Running                 ./bin/pump --log-file=pump.log --data-dir=pump.data --socket=/tmp/pump.sock &>pump.out &
-[4]+  Running                 ./bin/tidb-server --log-file=tidb.log --config=tidb.toml &>tidb.out &
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pd-server --config=pd.toml &>pd.out &
+[1] 20935
+[kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tikv-server --config=tikv.toml &>tikv.out &
+[2] 20944
+[kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pump --config=pump.toml &>pump.out &
+[3] 21050
+[kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tidb-server --config=tidb.toml &>tidb.out &
+[4] 21058
 ```
+
+And if you execute `jobs`, you should see the list of running daemons:
+```
+[kolbe@localhost tidb-latest-linux-amd64]$$ jobs
+[1]   Running                 ./bin/pd-server --config=pd.toml &>pd.out &
+[2]   Running                 ./bin/tikv-server --config=tikv.toml &>tikv.out &
+[3]-  Running                 ./bin/pump --config=pump.toml &>pump.out &
+[4]+  Running                 ./bin/tidb-server --config=tidb.toml &>tidb.out &
+
+```
+
 
 You should see all 4 components of our TiDB Cluster running now, and you can now connect to the TiDB Server on port 4000 using the MariaDB/MySQL command-line client.
 
@@ -132,22 +147,87 @@ Check Table Before Drop: false
 1 row in set (0.00 sec)
 ```
 
+At this point we have a TiDB Cluster running, and we have `pump` reading binary logs from the cluster and storing them as relay logs in its data directory. The next pieces of the puzzle are to start a MariaDB server that `drainer` can write to. If you are using an operating system that makes it easier to install MySQL server, that's also OK -- just make sure it's listening on port 3306 and that you can either connect to it as user "root" with an empty password, or adjust drainer.toml as necessary.
+
+
 ```
-[kolbe@localhost tidb-latest-linux-amd64]$ sudo systemctl start mariadb
-[kolbe@localhost tidb-latest-linux-amd64]$ mysql
+[kolbe@localhost ~]$ mysql -h 127.0.0.1 -P 3306 -u root
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 3
+Your MariaDB connection id is 20
 Server version: 5.5.60-MariaDB MariaDB Server
 
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-MariaDB [(none)]> select version();
-+----------------+
-| version()      |
-+----------------+
-| 5.5.60-MariaDB |
-+----------------+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| test               |
+| tidb_binlog        |
++--------------------+
+5 rows in set (0.01 sec)
+```
+
+Here we can already see the `tidb_binlog` database, which contains the `checkpoint` table used by `drainer` to record up to what point binary logs from the TiDB Cluster have been applied.
+
+```
+MariaDB [tidb_binlog]> use tidb_binlog;
+Database changed
+MariaDB [tidb_binlog]> select * from checkpoint;
++---------------------+---------------------------------------------+
+| clusterID           | checkPoint                                  |
++---------------------+---------------------------------------------+
+| 6678715361817107733 | {"commitTS":407637466476445697,"ts-map":{}} |
++---------------------+---------------------------------------------+
 1 row in set (0.00 sec)
+```
+
+Now, let's open another client to the TiDB Server, so that we can create a table and insert some rows into it. It's easiest to do this under GNU screen so you can keep multiple clients open at the same time.
+
+```
+mysql -h 127.0.0.1 -P 4000 --prompt='TiDB [\d]> ' -u root
+TiDB [(none)]> create database tidbtest;
+Query OK, 0 rows affected (0.12 sec)
+
+TiDB [(none)]> use tidbtest;
+Database changed
+TiDB [tidbtest]> create table t1 (id int unsigned not null auto_increment primary key);
+Query OK, 0 rows affected (0.11 sec)
+
+TiDB [tidbtest]> insert into t1 () values (),(),(),(),();
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+```
+
+Switching back to the MariaDB client, we should find the new database, new table, and the rows we've newly inserted:
+```
+MariaDB [(none)]> use tidbtest
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [tidbtest]> show tables;
++--------------------+
+| Tables_in_tidbtest |
++--------------------+
+| t1                 |
++--------------------+
+1 row in set (0.00 sec)
+
+MariaDB [tidbtest]> select * from t1;
++----+
+| id |
++----+
+|  1 |
+|  2 |
+|  3 |
+|  4 |
+|  5 |
++----+
+5 rows in set (0.00 sec)
 ```
