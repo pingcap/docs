@@ -66,7 +66,7 @@ Usage of syncer:
   -log-rotate string
         to specify the log file rotating cycle, hour/day (default "day")
   -max-retry int
-        to specify maximum retry times when an error occurs due to network interruption or other reasons (default 100)
+        to specify maximum retry times of the SQL request when an error occurs due to network interruption or other reasons (default 100)
   -meta string
         to specify the meta file of the upstream of Syncer (in the same directory with the configuration file, "syncer.meta" by default)
   -persistent-dir string
@@ -112,7 +112,7 @@ max-retry = 100
 # skip-ddls = ["ALTER USER", "CREATE USER"]
 
 # After Syncer uses `route-rules` to map the upstream schema and table into `target-schema` and `target-table`, 
-# Syncer matches the mapped `target-schema` and `target-table` with do / ignore rules,
+# Syncer matches the mapped `target-schema` and `target-table` with do/ignore rules,
 # and the matching sequence is: replicate-do-db --> replicate-do-table --> replicate-ignore-db --> replicate-ignore-table.
 # Specify the database name to be replicated. Support regular expressions. Start with '~' to use regular expressions.
 # replicate-do-db = ["~^b.*","s1"]
