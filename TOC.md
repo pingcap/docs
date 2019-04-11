@@ -66,7 +66,8 @@
       - [TiKV](op-guide/dashboard-tikv-info.md)
   + Migrate
     - [Overview](op-guide/migration-overview.md)
-    - [From MySQL](op-guide/migration.md)
+    - [Full import using mydumper/loader](op-guide/migration.md)
+    - [Incremental import using syncer](op-guide/migration-incremental.md)
     - [Using Data Migration](tools/dm/overview.md)
   + Maintain
     - [Backup and Restore](op-guide/backup-restore.md)
@@ -143,7 +144,7 @@
       - [Optimizer Hints](sql/optimizer-hints.md)
       - [Tune TiKV](op-guide/tune-tikv.md)
       - [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
-    - [The mysql System Database](sql/system-database.md)
+    - [TiDB System Database](sql/system-database.md)
     - [Information Schema](sql/information-schema.md)
     - [TiSpark](tispark/tispark-user-guide.md)
   + Configuration
