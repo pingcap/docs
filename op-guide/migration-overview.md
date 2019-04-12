@@ -6,7 +6,7 @@ category: operations
 
 # Migration Overview
 
-This document describes scenarios for migrating data into TiDB from either MySQL or data source stored in CSV format.
+This document describes scenarios for migrating data into TiDB from either MySQL or another data source via CSV format.
 
 ## Tools overview
 
