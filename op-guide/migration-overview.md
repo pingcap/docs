@@ -10,7 +10,7 @@ This document describes scenarios for migrating data into TiDB from either MySQL
 
 ## Tools overview
 
-Migrations will often make use of the following tools. For a brief overview of their usage:
+Migrations will often make use of the following tools. The following is a brief overview of their usage:
 
 - [`mydumper`](../tools/mydumper.md) exports data from MySQL. It is recommended over using mysqldump.
 - [`loader`](../tools/loader.md) imports data in mydumper format into TiDB.
