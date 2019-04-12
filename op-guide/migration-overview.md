@@ -13,7 +13,7 @@ This document describes scenarios for migrating data into TiDB from either MySQL
 Migrations will often make use of the following tools. For a brief overview of their usage:
 
 - [`mydumper`](../tools/mydumper.md) exports data from MySQL. It is recommended over using mysqldump.
-- [`loader`](../tools/loader.md) imports data in mydumper format into TiDB
+- [`loader`](../tools/loader.md) imports data in mydumper format into TiDB.
 - [`syncer`](../tools/syncer.md) acts like a MySQL replication slave and pushes data from MySQL into TiDB.
 - [DM](../tools/dm/overview.md) (Data Migration) integrates the functions of mydumper, Loader and syncer to support the export and import of full-size data, as well as incremental synchronization of MySQL Binlog data, and supports data synchronization of a more complete pooled table scenario.
 - [TiDB-Lightning](../tools/lightning/overview-architecture.md) imports data to TiDB in an optimized way.  For example, a 1TiB backup could take 10+ hours to import with loader, but may be complete in TiDB-Lightning in just 3 hours.
