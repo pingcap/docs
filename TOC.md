@@ -66,7 +66,7 @@
       - [TiKV](op-guide/dashboard-tikv-info.md)
   + Migrate
     - [Overview](op-guide/migration-overview.md)
-    - [Full import using mydumper/loader](op-guide/migration.md)
+    - [Migrate from MySQL](op-guide/migration.md)
     - [Incremental import using syncer](op-guide/migration-incremental.md)
     - [Using Data Migration](tools/dm/overview.md)
   + Maintain
