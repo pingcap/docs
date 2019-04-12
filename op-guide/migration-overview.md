@@ -26,7 +26,8 @@ The following example scenarios show how you can put to use the tools mentioned 
 
 The recommended method to perform a complete dump and restore from MySQL is to use the following tools:
   - `mydumper`: to export data from MySQL.
-  - `Loader`: to import the data into TiDB.
+  - mydumper + TiDB-Lightning: use mydumper to export data from MySQL and use TiDB-Lightning to import the data into TiDB.
+  - DM: use DM to export data from MySQL and import the data into TiDB.
 
 For detailed operations, follow the steps in [Migrate Data from MySQL to TiDB](../op-guide/migration.md).
 
