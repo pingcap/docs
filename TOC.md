@@ -68,7 +68,7 @@
     - [Overview](op-guide/migration-overview.md)
     + Migrate from MySQL
       - [Migrate the Full Data](op-guide/migration.md)
-    - [Incremental import using syncer](op-guide/migration-incremental.md)
+      - [Migrate the Incremental Data](op-guide/migration-incremental.md)
     - [Using Data Migration](tools/dm/overview.md)
   + Maintain
     - [Backup and Restore](op-guide/backup-restore.md)
