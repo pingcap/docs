@@ -22,7 +22,7 @@ Migrations will often make use of the following tools. The following is a brief 
 
 The following example scenarios show how you can put to use the tools mentioned above.
 
-#### Complete dump and restore from MySQL
+#### Full data migration from MySQL
 
 The recommended method to perform a complete dump and restore from MySQL is to use the following tools:
   - `mydumper`: to export data from MySQL.
