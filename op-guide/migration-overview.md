@@ -28,7 +28,7 @@ The recommended method to perform a complete dump and restore from MySQL is to u
   - `mydumper`: to export data from MySQL.
   - `Loader`: to import the data into TiDB.
 
-Follow our [guide for more detailed information](../op-guide/migration.md).
+For detailed operations, follow the steps in [Migrate Data from MySQL to TiDB](../op-guide/migration.md).
 
 #### Complete dump and restore with replication
 
