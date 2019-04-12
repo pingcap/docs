@@ -35,7 +35,7 @@ For detailed operations, follow the steps in [Migrate Data from MySQL to TiDB](.
 
 For databases that are large or frequently updated, it is recommended to use the following tools:
   - `mydumper`: to export data from MySQL.
-  - `Loader`: to import data to TiDB.
+  - mydumper + TiDB-Lightning + Syncer: use mydumper to export data from MySQL, use TiDB-Lightning to import the data into TiDB, and then use Syncer to replicate the incremental binlog data from MySQL into TiDB.
   - DM: use DM to migrate the full data from MySQL to TiDB and then replicate the incremental data from MySQL into TiDB.
 
 For detailed operations, follow the steps in [Incremental Migration](../op-guide/migration-incremental.md).
