@@ -32,7 +32,7 @@ For detailed operations, follow the steps in [Migrate Data from MySQL to TiDB](.
 
 #### Complete dump and restore with replication
 
-For databases that are large, or frequently updated it is recommended to use the following tools:
+For databases that are large or frequently updated, it is recommended to use the following tools:
   - `mydumper`: to export data from MySQL.
   - `Loader`: to import data to TiDB.
   - `Syncer`: to replicate data from MySQL to TiDB.
