@@ -1,6 +1,6 @@
 ---
 title: Migration Overview
-summary: Learn how to migrate data into TiDB
+summary: Learn how to migrate data into TiDB.
 category: operations
 ---
 
