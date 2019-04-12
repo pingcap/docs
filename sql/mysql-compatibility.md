@@ -108,8 +108,6 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
 Many administrative statements in TiDB work as they do in MySQL, but there are some important differences:
 
 + [`ANALYZE TABLE`](/sql/statistics.md#manual-collection) works differently in TiDB than in MySQL, in that it is a relatively lightweight and short-lived operation in MySQL/InnoDB, while in TiDB it completely rebuilds the statistics for a table and can take much longer to complete.
-
-+ The output of the query execution plan returned from the `EXPLAIN` command differs from MySQL. For more information, see [Understand the Query Execution Plan](../sql/understanding-the-query-execution-plan.md).
     
 ### Storage engines
 
