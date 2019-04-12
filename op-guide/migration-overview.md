@@ -37,7 +37,7 @@ For databases that are large or frequently updated, it is recommended to use the
   - `Loader`: to import data to TiDB.
   - `Syncer`: to replicate data from MySQL to TiDB.
 
-Follow our [guide for more detailed information](../op-guide/migration-incremental.md).
+For detailed operations, follow the steps in [Incremental Migration](../op-guide/migration-incremental.md).
     
   > **Note:** To replicate data from MySQL to TiDB, binary logging [must be enabled](http://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html) with the [row format](https://dev.mysql.com/doc/refman/5.7/en/binary-log-formats.html) enabled.
 
