@@ -69,7 +69,7 @@
     + Migrate from MySQL
       - [Migrate the Full Data](op-guide/migration.md)
       - [Migrate the Incremental Data](op-guide/migration-incremental.md)
-    - [Using Data Migration](tools/dm/overview.md)
+    - [Migrate from CSV](tools/lightning/csv.md)
   + Maintain
     - [Backup and Restore](op-guide/backup-restore.md)
     + Scale
