@@ -31,7 +31,7 @@ To migrate the full data, you can use one of the following three solutions:
 
 For detailed operations, follow the steps in [Migrate Data from MySQL to TiDB](../op-guide/migration.md).
 
-#### Complete dump and restore with replication
+#### Full data migration and incremental replication
 
 To migrate the full data and then replicate data incrementally, you can use one of the following three solutions:
   - mydumper + Loader + Syncer: use mydumper to export data from MySQL, use Loader to import the data into TiDB, and then use Syncer to replicate the incremental binlog data from MySQL into TiDB.
