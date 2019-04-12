@@ -25,7 +25,7 @@ The following example scenarios show how you can put to use the tools mentioned 
 #### Full data migration from MySQL
 
 To migrate the full data, you can use one of the following three solutions:
-  - `mydumper`: to export data from MySQL.
+  - mydumper + Loader: use mydumper to export data from MySQL and use Loader to import the data into TiDB.
   - mydumper + TiDB-Lightning: use mydumper to export data from MySQL and use TiDB-Lightning to import the data into TiDB.
   - DM: use DM to export data from MySQL and import the data into TiDB.
 
