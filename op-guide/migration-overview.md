@@ -1,58 +1,50 @@
 ---
 title: Migration Overview
-summary: Learn how to migrate data from MySQL to TiDB.
+summary: Learn how to migrate data into TiDB
 category: operations
 ---
 
 # Migration Overview
 
-## Overview
+This document describes scenarios for migrating data into TiDB from either MySQL or data source stored in CSV format.
 
-This document describes how to migrate data from MySQL to TiDB in detail.
+## Tools overview
 
-See the following for the assumed MySQL and TiDB server information:
+Migrations will often make use of the following tools. For a brief overview of their usage:
 
-|Name|Address|Port|User|Password|
-|----|-------|----|----|--------|
-|MySQL|127.0.0.1|3306|root|* |
-|TiDB|127.0.0.1|4000|root|* |
+- [`mydumper`](../tools/mydumper.md) exports data from MySQL. It is recommended over using mysqldump.
+- [`loader`](../tools/loader.md) imports data in mydumper format into TiDB
+- [`syncer`](../tools/syncer.md) acts like a MySQL replication slave and pushes data from MySQL into TiDB.
+- [DM](../tools/dm/overview.md) (Data Migration) integrates the functions of mydumper, Loader and syncer to support the export and import of full-size data, as well as incremental synchronization of MySQL Binlog data, and supports data synchronization of a more complete pooled table scenario. [Introduction to Data Migration](https://pingcap.com/docs-cn/tools/dm/overview/)
+- [TiDB-Lightning](../tools/lightning/overview-architecture.md) imports data to TiDB in an optimized way.  For example, a 1TiB backup could take 10+ hours to import with loader, may be complete in TiDB-Lightning in just 3 hours.
 
 ## Scenarios
 
-+ To import all the history data. This needs the following tools:
-    - `mydumper`: to export data from MySQL.
-    - `Loader`: to import data to TiDB.
+The following example scenarios show how you can put to use the tools mentioned above.
 
-+ To incrementally synchronize data after all the history data is imported. This needs the following tools:
-    - `mydumper`: to export data from MySQL.
-    - `Loader`: to import data to TiDB.
-    - `Syncer`: to incrementally synchronize data from MySQL to TiDB.
+#### Complete dump and restore from MySQL
 
-        > **Note:** To incrementally synchronize data from MySQL to TiDB, the binary logging (binlog) must be enabled and must use the `row` format in MySQL.
+The recommended method to perform a complete dump and restore from MySQL is to use the following tools:
+  - `mydumper`: to export data from MySQL.
+  - `Loader`: to import the data into TiDB.
 
-### Enable binary logging (binlog) in MySQL
+Follow our [guide for more detailed information](../op-guide/migration.md).
 
-Before using the `syncer` tool, make sure:
+#### Complete dump and restore with replication
 
-+ Binlog is enabled in MySQL. See [Setting the Replication Master Configuration](http://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html).
+For databases that are large, or frequently updated it is recommended to use the following tools:
+  - `mydumper`: to export data from MySQL.
+  - `Loader`: to import data to TiDB.
+  - `Syncer`: to replicate data from MySQL to TiDB.
 
-+ Binlog must use the `row` format which is the recommended binlog format in MySQL 5.7. It can be configured using the following statement:
+Follow our [guide for more detailed information](../op-guide/migration-incremental.md).
+    
+  > **Note:** To replicate data from MySQL to TiDB, binary logging [must be enabled](http://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html) with the [row format](https://dev.mysql.com/doc/refman/5.7/en/binary-log-formats.html) enabled.
 
-    ```bash
-    SET GLOBAL binlog_format = ROW;
-    ```
+#### Dump and restore from database other than MySQL
 
-### Download the TiDB toolset (Linux)
+To import data from another database, it is recommended to:
+  - Export the data as CSV format.
+  - Import the data using TiDB-Lightning.
 
-```bash
-# Download the tool package.
-wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz
-wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.sha256
-
-# Check the file integrity. If the result is OK, the file is correct.
-sha256sum -c tidb-enterprise-tools-latest-linux-amd64.sha256
-
-# Extract the package.
-tar -xzf tidb-enterprise-tools-latest-linux-amd64.tar.gz
-cd tidb-enterprise-tools-latest-linux-amd64
-```
+Read more on [CSV support for TiDB-Lightning](../tools/lightning/csv.md).
