@@ -47,4 +47,4 @@ To import data from another database, it is recommended to:
   - Export the data as CSV format.
   - Import the data using TiDB-Lightning.
 
-Read more on [CSV support for TiDB-Lightning](../tools/lightning/csv.md).
+For more information, refer to [CSV support for TiDB-Lightning](../tools/lightning/csv.md).
