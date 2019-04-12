@@ -66,6 +66,10 @@ In TiDB, auto-increment columns are only guaranteed to be incremental and unique
 
 Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
 
+### Query Execution Plan
+
+The output format of Query Execution Plan ( `EXPLAIN` / `EXPLAIN FOR` ) in TiDB is greatly different from that in MySQL. Besides, the output content and the privileges setting of `EXPLAIN FOR` are not the same as those of MySQL. See [Understand the Query Execution Plan](/sql/understanding-the-query-execution-plan.md) for more details.
+
 ### Built-in functions
 
 TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#FunctionCallKeyword) for the supported functions.

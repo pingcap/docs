@@ -14,7 +14,7 @@ The result of the `EXPLAIN` statement provides information about how TiDB execut
 
 - `EXPLAIN` works together with `SELECT`, `DELETE`, `INSERT`, `REPLACE`, and `UPDATE`.
 - When you run the `EXPLAIN` statement, TiDB returns the final physical execution plan which is optimized by the SQL statement of `EXPLAIN`. In other words, `EXPLAIN` displays the complete information about how TiDB executes the SQL statement, such as in which order, how tables are joined, and what the expression tree looks like. For more information, see [`EXPLAIN` output format](#explain-output-format).
-- TiDB does not support `EXPLAIN [options] FOR CONNECTION connection_id` currently. We'll do it in the future. For more information, see [#4351](https://github.com/pingcap/tidb/issues/4351).
+- TiDB now supports `EXPLAIN [options] FOR CONNECTION connection_id` which works differently than `EXPLAIN FOR` in MySQL. See [`EXPLAIN FOR CONNECTION`](#explain-for-connection)。
 
 The results of `EXPLAIN` shed light on how to index the data tables so that the execution plan can use the index to speed up the execution of SQL statements. You can also use `EXPLAIN` to check if the optimizer chooses the optimal order to join tables.
 
@@ -92,6 +92,12 @@ mysql> EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017
 +------------------------+---------+------+--------------------------------------------------------------------------------------------------+-----------------------------------+
 4 rows in set (0.08 sec)
 ```
+## `EXPLAIN FOR CONNECTION`
+
+`EXPLAIN FOR CONNECTION` is used for getting the last query execution plan in one connection. The output format is totally the same as `EXPLAIN`. But the execution in TiDB is different from that in MySQL. Except for the output format, there are other differences as followed: 
+
+- **EXECUTE** query plan is returned in MySQL while **LAST EXECUTED** is returned in TiDB.
+- In MySQL document, the connection of the user account should be the same as that of query or the user account has the `PROCESS` privileges. For TiDB, the user account should have the same connection as the query or has the `SUPER` privileges.   
 
 ## Overview
 
