@@ -1,14 +1,10 @@
 ---
-title: TiDB Introduction
-summary: An introduction to the TiDB database platform
-category: introduction
+title: Key Features
+summary: Key features of the TiDB database platform.
+category: concepts
 ---
 
-# TiDB Introduction
-
-TiDB ("Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.
-
-## Key Features
+# Key Features
 
 ### Horizontal Scalability
 
