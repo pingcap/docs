@@ -30,7 +30,7 @@
       - [In Kubernetes](dev/how-to/get-started/local-cluster/install-from-kubernetes.md)
       - [In Docker Compose](dev/how-to/get-started/local-cluster/install-from-docker-compose.md)
     - [Explore SQL with TiDB](dev/how-to/get-started/explore-sql.md)
-    - [Import Example Database](dev/how-to/get-started/import-sample-database.md)
+    - [Import Example Database](dev/how-to/get-started/import-example-database.md)
     - [Read Historical Data](dev/how-to/get-started/read-historical-data.md)
   - Deploy
     - [Hardware Recommendations](op-guide/recommendation.md)
