@@ -1,10 +1,11 @@
 ---
-title: TiDB Quick Start Guide
+title: TiDB Introduction
 summary: Learn how to quickly start a TiDB cluster.
-category: quick start
+category: introduction
+aliases: ['/docs/QUICKSTART']
 ---
 
-# TiDB Quick Start Guide
+# TiDB Introduction
 
 TiDB ("Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.
 
