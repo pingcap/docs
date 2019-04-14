@@ -5,7 +5,7 @@
 + [Introduction](QUICKSTART.md)
 + Concepts
   - [Architecture](architecture.md)
-  + [Key Features](overview.md)
+  + [Key Features](key-features.md)
     - [Horizontal Scalability](overview.md#horizontal-scalability)
     - [MySQL Compatible Syntax](overview.md#mysql-compatible-syntax)
     - [Replicate from and to MySQL](overview.md#replicate-from-and-to-mysql)
