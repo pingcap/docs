@@ -66,7 +66,7 @@ Usage of syncer:
   -log-rotate string
         to specify the log file rotating cycle, hour/day (default "day")
   -max-retry int
-        to specify maximum retry times of the SQL request when an error occurs due to network interruption or other reasons (default 100)
+        to specify the maximum times an SQL statement should be retried. One common cause of statement retries is network interruption (default 100)
   -meta string
         to specify the meta file of the upstream of Syncer (in the same directory with the configuration file, "syncer.meta" by default)
   -persistent-dir string
@@ -102,7 +102,7 @@ status-addr = ":8271"
 # If you set its value to true, Syncer stops and exits when it encounters the DDL operation.
 stop-on-ddl = false
 
-# The maximum retry times of the SQL request when an error occurs due to network interruption or other reasons.
+# The maximum number of times an SQL statement should be retried. One common cause of statement retries is network interruption.
 max-retry = 100
 
 # Specify the time zone used by the target database; all timestamp fields in binlog are converted according to the time zone; the local time zone of Syncer is used by default.
