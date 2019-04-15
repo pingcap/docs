@@ -13,7 +13,7 @@ See also [local deployment](/op-guide/binary-local-deployment.md) and [productio
 
 ## Prepare
 
-Before you start, see [TiDB architecture](/architecture.md) and [Software and Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md). Make sure the following requirements are satisfied:
+Before you start, see [TiDB architecture](/architecture.md) and [Software and Hardware Recommendations](../hardware-recommendations.md). Make sure the following requirements are satisfied:
 
 ### Operating system
 
@@ -21,7 +21,7 @@ For the operating system, it is recommended to use RHEL/CentOS 7.3 or higher. Th
 
 | Configuration | Description |
 | :-- | :-------------------- |
-| Supported Platform | RHEL/CentOS 7.3+ ([more details](/dev/how-to/deploy/hardware-recommendations.md)) |
+| Supported Platform | RHEL/CentOS 7.3+ ([more details](../hardware-recommendations.md)) |
 | File System  |  ext4 is recommended |
 | Swap Space  |  Should be disabled  |
 | Disk Block Size  |  Set the system disk `Block` size to `4096` |
