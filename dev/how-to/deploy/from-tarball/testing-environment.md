@@ -9,7 +9,7 @@ aliases: ['/docs/op-guide/binary-testing-deployment/']
 
 This guide provides installation instructions for all TiDB components across multiple nodes for testing purposes. It does not match the recommended usage for production systems.
 
-See also [local deployment](../op-guide/binary-local-deployment.md) and [production enviroment](../op-guide/binary-deployment.md) deployment.
+See also [local deployment](/op-guide/binary-local-deployment.md) and [production enviroment](/op-guide/binary-deployment.md) deployment.
 
 ## Prepare
 
