@@ -1,7 +1,8 @@
 ---
 title: TiDB-Ansible Common Operations
 summary: Learn some common operations when using TiDB-Ansible to administer a TiDB cluster.
-category: operations
+category: how-to
+aliases: ['/docs/op-guide/ansible-operation/']
 ---
 
 # TiDB-Ansible Common Operations
