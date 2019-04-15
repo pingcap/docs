@@ -6,7 +6,7 @@ category: concepts
 
 # Key Features
 
-### Horizontal Scalability
+## Horizontal Scalability
 
 TiDB expands both SQL processing and storage by simply adding new nodes. This makes infrastructure capacity planning both easier and more cost-effective than traditional relational databases which only scale vertically.
 
