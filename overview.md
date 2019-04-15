@@ -11,6 +11,7 @@ TiDB ("Ti" stands for Titanium) is an open-source NewSQL database that supports 
 
 TiDB can be deployed on-premise or in-cloud. The following deployment options are officially supported by PingCAP:
 
+- [Binary Tarball Deployment](op-guide/binary-deployment.md): This guide describes how to deploy TiDB from a binary tarball in production. Guides for [development](op-guide/binary-local-deployment.md) and [testing](op-guide/binary-testing-deployment.md) environments are also available.
 - [Ansible Deployment](op-guide/ansible-deployment.md): This guide describes how to deploy TiDB using Ansible. It is strongly recommended for production deployment.
 - [Ansible Offline Deployment](op-guide/offline-ansible-deployment.md): If your environment has no access to the internet, you can follow this guide to see how to deploy a TiDB cluster offline using Ansible.
 - [Docker Deployment](op-guide/docker-deployment.md): This guide describes how to deploy TiDB using Docker.
@@ -23,7 +24,8 @@ The following list collects deployment guides and tutorials from the community. 
 
 - [How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/)
 - [Developer install guide (single machine)](http://www.tocker.ca/this-blog-now-powered-by-wordpress-tidb.html)
--  [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
+- [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
+
 _Your contribution is also welcome! Feel free to open a [pull request](https://github.com/pingcap/docs/edit/master/QUICKSTART.md) to add additional links._
 
 ## Source Code
