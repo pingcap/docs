@@ -1,6 +1,7 @@
+TiDB Binlog is a stack of components that form a solution to push incremental updates to a TiDB Server cluster into any of a variety of downstream platforms. TiDB Binlog is distributed as a part of TiDB Enterprise Tools.
+
 https://pingcap.com/docs/tools/tidb-binlog-cluster/
 
-TiDB Binlog is a stack of components that form a solution to push incremental updates to a TiDB Server cluster into any of a variety of downstream platforms. TiDB Binlog is distributed as a part of TiDB Enterprise Tools.
 
 TiDB Binlog comprises two components: the *pump* and the *drainer*. Several pump nodes make up a pump cluster. Each pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A drainer connects to the pump cluster and transforms updates into the correct format for a particular downstream destination, be if Kafka or another TiDB Cluster or a MySQL/MariaDB server. 
 
@@ -85,7 +86,7 @@ max-open-files=1024
 max-open-files=1024
 ```
 
-Now we can start each component. This has to be done in a specific order, first bringing up the PD (Placement Driver), then TiKV Server (the backend key/value store used by TiDB Platform), then pump (because TiDB must connect to the pump service to send the binary log), and finally TiDB Server (the frontend that receives SQL from applications). To give the services a little time to start up, well sleep for a few seconds between each.
+Now we can start each component. This is best done in a specific order, first bringing up the PD (Placement Driver), then TiKV Server (the backend key/value store used by TiDB Platform), then pump (because TiDB must connect to the pump service to send the binary log), and finally TiDB Server (the frontend that receives SQL from applications). To give the services a little time to start up, well sleep for a few seconds between each.
 
 ```
 ./bin/pd-server --config=pd.toml &>pd.out &
@@ -231,3 +232,40 @@ MariaDB [tidbtest]> select * from t1;
 +----+
 5 rows in set (0.00 sec)
 ```
+
+
+There are a few extra pieces that are worth talking about. One is the `binlogctl` tool. For a full guide to the tool, see https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md#binlogctl-guide. Information about pumps and drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate inforamtion about their states.
+
+You can use `binlogctl` to get a view of the current status of pumps and drainers in the cluster:
+```
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/binlogctl -cmd drainers
+[2019/04/11 17:40:47.991 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: offline, MaxCommitTS: 407638532237557761, UpdateTime: 2019-04-11 17:19:53 -0400 EDT}"]
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/binlogctl -cmd pumps
+[2019/04/11 17:40:49.590 -04:00] [INFO] [nodes.go:47] ["query node"] [type=pump] [node="{NodeID: localhost.localdomain:8250, Addr: 192.168.236.128:8250, State: online, MaxCommitTS: 407638860495323137, UpdateTime: 2019-04-11 17:40:49 -0400 EDT}"]
+```
+
+```
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/binlogctl -cmd drainers
+[2019/04/11 17:44:10.861 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: online, MaxCommitTS: 407638907719778305, UpdateTime: 2019-04-11 17:44:10 -0400 EDT}"]
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/binlogctl -cmd pumps
+[2019/04/11 17:44:13.904 -04:00] [INFO] [nodes.go:47] ["query node"] [type=pump] [node="{NodeID: localhost.localdomain:8250, Addr: 192.168.236.128:8250, State: online, MaxCommitTS: 407638914024079361, UpdateTime: 2019-04-11 17:44:13 -0400 EDT}"]
+```
+
+If I kill the drainer, the cluster puts it in the "paused" state, which means that the cluster expects it to rejoin.
+```
+[kolbe@localhost tidb-latest-linux-amd64]$ pkill drainer
+[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/binlogctl -cmd drainers
+[2019/04/11 17:44:22.640 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: paused, MaxCommitTS: 407638915597467649, UpdateTime: 2019-04-11 17:44:18 -0400 EDT}"]
+```
+
+You use "NodeIDs" with binlogctl to control individual nodes. In this case, the NodeID of the drainer is "localhost.localdomain:8249" and the NodeID of the puump is "localhost.localdomain:8250".
+
+The main use in this tutorial is likely to be in the event of a cluster restart. If you end all processes in the cluster and try to restart them, `pump` will believe that `drainer` is still "online" and will refuse to start, becaue it cannot be contacted.contacted.
+
+There are 3 solutions to that issue:
+
+# Stop drainer using `binlogctl` instead of killing the process: ```./bin/binlogctl --pd-urls=http://127.0.0.1:2379 -cmd drainers
+./bin/binlogctl --pd-urls=http://127.0.0.1:2379 -cmd=offline-drainer --node-id=localhost.localdomain:8249```
+# Start drainer before starting pump.
+# Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer: ```./bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd update-drainer -node-id localhost.localdomain:8249 -state offline```
+
