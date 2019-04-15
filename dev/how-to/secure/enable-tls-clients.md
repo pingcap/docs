@@ -1,7 +1,8 @@
 ---
 title: Use Encrypted Connections
 summary: Use the encrypted connection to ensure data security.
-category: user guide
+category: how-to
+aliases: ['']
 ---
 
 # Use Encrypted Connections

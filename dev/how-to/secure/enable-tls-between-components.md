@@ -1,7 +1,8 @@
 ---
 title: Enable TLS Authentication
 summary: Learn how to enable TLS authentication in a TiDB cluster.
-category: deployment
+category: how-to
+aliases: ['']
 ---
 
 # Enable TLS Authentication

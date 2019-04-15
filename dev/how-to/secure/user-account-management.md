@@ -1,7 +1,8 @@
 ---
 title: TiDB User Account Management
 summary: Learn how to manage a TiDB user account.
-category: user guide
+category: how-to
+aliases: ['']
 ---
 
 # TiDB User Account Management

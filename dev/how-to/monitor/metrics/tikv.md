@@ -1,7 +1,8 @@
 ---
 title: Key Monitoring Metrics of TiKV
 summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
-category: operations
+category: how-to
+aliases: ['']
 ---
 
 # Key Monitoring Metrics of TiKV
@@ -316,31 +317,31 @@ This section shows images of the service panels on the TiKV dashboard.
 
 ### Cluster
 
-![TiKV Dashboard - Cluster metrics](../media/tikv-dashboard-cluster.png)
+![TiKV Dashboard - Cluster metrics](/media/tikv-dashboard-cluster.png)
 
 ### Errors
 
-![TiKV Dashboard - Errors metrics](../media/tikv-dashboard-errors.png)
+![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors.png)
 
 ### Server
 
-![TiKV Dashboard - Server metrics](../media/tikv-dashboard-server.png)
+![TiKV Dashboard - Server metrics](/media/tikv-dashboard-server.png)
 
 ### Raft IO
 
-![TiKV Dashboard - Raft IO metrics](../media/tikv-dashboard-raftio.png)
+![TiKV Dashboard - Raft IO metrics](/media/tikv-dashboard-raftio.png)
 
 ### Raft process
 
-![TiKV Dashboard - Raft process metrics](../media/tikv-dashboard-raft-process.png)
+![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
 ### Raft message
 
-![TiKV Dashboard - Raft message metrics](../media/tikv-dashboard-raft-message.png)
+![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
 
 ### Raft propose
 
-![TiKV Dashboard - Raft propose metrics](../media/tikv-dashboard-raft-propose.png)
+![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)
 
 ### Raft admin
 
@@ -348,24 +349,24 @@ This section shows images of the service panels on the TiKV dashboard.
 
 ### Local reader
 
-![TiKV Dashboard - Local reader metrics](../media/tikv-dashboard-local-reader.png)
+![TiKV Dashboard - Local reader metrics](/media/tikv-dashboard-local-reader.png)
 
 ### Storage
 
-![TiKV Dashboard - Storage metrics](../media/tikv-dashboard-storage.png)
+![TiKV Dashboard - Storage metrics](/media/tikv-dashboard-storage.png)
 
 ### Scheduler
 
-![TiKV Dashboard - Scheduler metrics](../media/tikv-dashboard-scheduler.png)
+![TiKV Dashboard - Scheduler metrics](/media/tikv-dashboard-scheduler.png)
 
 ### Scheduler - batch_get
 
-![TiKV Dashboard - Scheduler - batch_get metrics](../media/tikv-dashboard-scheduler-batch-get.png)
+![TiKV Dashboard - Scheduler - batch_get metrics](/media/tikv-dashboard-scheduler-batch-get.png)
 
 ### Scheduler - cleanup
 
-![TiKV Dashboard - Scheduler - cleanup metrics](../media/tikv-dashboard-scheduler-cleanup.png)
+![TiKV Dashboard - Scheduler - cleanup metrics](/media/tikv-dashboard-scheduler-cleanup.png)
 
 ### Scheduler - commit
 
-![TiKV Dashboard - Scheduler commit metrics](../media/tikv-dashboard-scheduler-commit.png)
+![TiKV Dashboard - Scheduler commit metrics](/media/tikv-dashboard-scheduler-commit.png)

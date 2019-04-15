@@ -1,7 +1,8 @@
 ---
 title: Key Monitoring Metrics of PD
 summary: Learn some key metrics displayed on the Grafana PD dashboard.
-category: operations
+category: how-to
+aliases: ['']
 ---
 
 # Key Monitoring Metrics of PD
@@ -92,36 +93,36 @@ Heartbeat | 99% Region heartbeat latency | The heartbeat latency of each TiKV in
 
 ### Cluster
 
-![PD Dashboard - Cluster metrics](../media/pd-dashboard-cluster.png)
+![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster.png)
 
 ### Balance
 
-![PD Dashboard - Balance metrics](../media/pd-dashboard-balance.png)
+![PD Dashboard - Balance metrics](/media/pd-dashboard-balance.png)
 
 ### HotRegion
 
-![PD Dashboard - HotRegion metrics](../media/pd-dashboard-hot-region.png)
+![PD Dashboard - HotRegion metrics](/media/pd-dashboard-hot-region.png)
 
 ### Scheduler
 
-![PD Dashboard - Scheduler metrics](../media/pd-dashboard-scheduler.png)
+![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler.png)
 
 ### Operator
 
-![PD Dashboard - Operator metrics](../media/pd-dashboard-operator.png)
+![PD Dashboard - Operator metrics](/media/pd-dashboard-operator.png)
 
 ### gRPC
 
-![PD Dashboard - gRPC metrics](../media/pd-dashboard-grpc.png)
+![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc.png)
 
 ### etcd
 
-![PD Dashboard - etcd metrics](../media/pd-dashboard-etcd.png)
+![PD Dashboard - etcd metrics](/media/pd-dashboard-etcd.png)
 
 ### TiDB
 
-![PD Dashboard - TiDB metrics](../media/pd-dashboard-tidb.png)
+![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb.png)
 
 ### Heartbeat
 
-![PD Dashboard - Heartbeat metrics](../media/pd-dashboard-heartbeat.png)
+![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat.png)
