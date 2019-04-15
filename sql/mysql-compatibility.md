@@ -68,7 +68,7 @@ Performance schema tables return empty results in TiDB. TiDB uses a combination 
 
 ### Query Execution Plan
 
-The output format of Query Execution Plan ( `EXPLAIN` / `EXPLAIN FOR` ) in TiDB is greatly different from that in MySQL. Besides, the output content and the privileges setting of `EXPLAIN FOR` are not the same as those of MySQL. See [Understand the Query Execution Plan](/sql/understanding-the-query-execution-plan.md) for more details.
+The output format of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is greatly different from that in MySQL. Besides, the output content and the privileges setting of `EXPLAIN FOR` are not the same as those of MySQL. See [Understand the Query Execution Plan](/sql/understanding-the-query-execution-plan.md) for more details.
 
 ### Built-in functions
 
