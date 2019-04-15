@@ -36,7 +36,7 @@ Before you start, make sure you have:
 
     - 4 or more machines
     
-        A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Requirements](/op-guide/recommendation.md).
+        A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](../hardware-recommendations.md).
 
     - CentOS 7.3 (64 bit) or later, x86_64 architecture (AMD64)
     - Network between machines
