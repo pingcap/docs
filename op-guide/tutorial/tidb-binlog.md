@@ -260,12 +260,12 @@ If I kill the drainer, the cluster puts it in the "paused" state, which means th
 
 You use "NodeIDs" with binlogctl to control individual nodes. In this case, the NodeID of the drainer is "localhost.localdomain:8249" and the NodeID of the puump is "localhost.localdomain:8250".
 
-The main use in this tutorial is likely to be in the event of a cluster restart. If you end all processes in the cluster and try to restart them, `pump` will believe that `drainer` is still "online" and will refuse to start, becaue it cannot be contacted.contacted.
+The main use of `binlogctl` in this tutorial is likely to be in the event of a cluster restart. If you end all processes in the TiDB cluster and try to restart them (but not the downstream MySQL/MariaDB server or the drainer), `pump` will believe that `drainer` is still "online" and will refuse to start, because it cannot contact `drainer`.
 
 There are 3 solutions to that issue:
 
-# Stop drainer using `binlogctl` instead of killing the process: ```./bin/binlogctl --pd-urls=http://127.0.0.1:2379 -cmd drainers
-./bin/binlogctl --pd-urls=http://127.0.0.1:2379 -cmd=offline-drainer --node-id=localhost.localdomain:8249```
-# Start drainer before starting pump.
-# Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer: ```./bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd update-drainer -node-id localhost.localdomain:8249 -state offline```
+# Stop drainer using `binlogctl` instead of killing the process: ```./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
+./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249```
+# Start drainer _before_ starting pump.
+# Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer: `./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline`
 
