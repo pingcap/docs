@@ -1,5 +1,5 @@
 ---
-title: TIDB Configuration Flags
+title: TiDB Configuration Flags
 summary: Learn some configuration flags for TiDB
 category: operations
 ---
