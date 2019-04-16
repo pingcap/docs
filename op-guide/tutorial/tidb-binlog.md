@@ -264,8 +264,8 @@ The main use of `binlogctl` in this tutorial is likely to be in the event of a c
 
 There are 3 solutions to that issue:
 
-# Stop drainer using `binlogctl` instead of killing the process: ```./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
+1. Stop drainer using `binlogctl` instead of killing the process: ```./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
 ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249```
-# Start drainer _before_ starting pump.
-# Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer: `./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline`
+2. Start drainer _before_ starting pump.
+3. Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer: `./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline`
 
