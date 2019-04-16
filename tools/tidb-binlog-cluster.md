@@ -392,6 +392,10 @@ The following part shows how to use Pump and Drainer based on the nodes above.
     
         # the address of the PD cluster nodes
         pd-urls = "http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379"
+
+        # [storage]
+        # Set to true (the default) to ensure reliability and ensure binlog data is flushed to disk
+        # sync-log = true
         ```
 
     - The example of starting Pump:
@@ -474,19 +478,19 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # the directory of the log file
         log-file = "drainer.log"
 
+        # Drainer compresses the data when it gets the binlog from Pump. The value can be "gzip". If it is not configured, it will not be compressed
+        # compressor = "gzip"
+
         # Syncer Configuration
         [syncer]
+        # If the item is set, the sql-mode will be used to parse the DDL statement.
+        # sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
-        # the db filter list ("INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql,test" by default)
-        # Does not support the Rename DDL operation on tables of `ignore schemas`.
-        ignore-schemas = "INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql"
-
-        # the number of SQL statements of a transaction which are output to the downstream database (1 by default)
-        txn-batch = 1
-
+        # the number of SQL statements of a transaction which are output to the downstream database (20 by default)
+    
         # the number of the concurrency of the downstream for synchronization. The bigger the value,
-        # the better throughput performance of the concurrency (1 by default)
-        worker-count = 1
+        # the better throughput performance of the concurrency (16 by default)
+        worker-count = 16
 
         # whether to disable the SQL feature of splitting a single binlog file. If it is set to "true",
         # each binlog file is restored to a single transaction for synchronization based on the order of binlogs.
@@ -496,6 +500,10 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # the downstream service type of Drainer ("mysql" by default)
         # Valid value: "mysql", "kafka", "pb", "flash"
         db-type = "mysql"
+
+        # the db filter list ("INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql,test" by default)
+        # Does not support the Rename DDL operation on tables of `ignore schemas`.
+        ignore-schemas = "INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql"
 
         # `replicate-do-db` has priority over `replicate-do-table`. When they have the same `db` name,
         # regular expressions are supported for configuration.
@@ -510,6 +518,11 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # [[syncer.replicate-do-table]]
         # db-name ="test"
         # tbl-name = "~^a.*"
+
+        # Ignore the synchronization of some tables
+        # [[syncer.ignore-table]]
+        # db-name = "test"
+        # tbl-name = "log"
 
         # the server parameters of the downstream database when `db-type` is set to "mysql"
         [syncer.to]
@@ -527,6 +540,10 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # zookeeper-addrs = "127.0.0.1:2181"
         # kafka-addrs = "127.0.0.1:9092"
         # kafka-version = "0.8.2.0"
+
+        # Save the Kafka cluster'topic name of the binlog data. The default value is <cluster-id>_obinlog
+        # If you run multiple Drainer synchronization data to the same Kafka cluster, each Drainer's topic-name needs to be different.
+        # topic-name = ""
         ```
 
     - The example of starting Drainer:
