@@ -8,6 +8,8 @@ category: operations
 
 PD is configurable using command-line flags and environment variables.
 
+## Flag description
+
 ### `--advertise-client-urls`
 
 - The advertise URL list for client traffic from outside

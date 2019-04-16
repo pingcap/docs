@@ -11,6 +11,8 @@ TiKV supports some readable unit conversions for command line parameters.
 - File size (based on byte): KB, MB, GB, TB, PB (or lowercase)
 - Time (based on ms): ms, s, m, h
 
+## Flag discription
+
 ### `-A, --addr`
 
 - The address that the TiKV server monitors
