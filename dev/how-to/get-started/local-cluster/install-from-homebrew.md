@@ -19,6 +19,9 @@ After first [installing Homebrew](https://brew.sh/), TiDB can be installed with:
 ```bash
 brew tap pingcap/brew
 brew install tidb-server
+
+# start the tidb-server
+tidb-server
 ```
 
 The tidb-server does not bundle any clients.  To use with the MySQL client:
