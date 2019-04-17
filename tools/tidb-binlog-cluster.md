@@ -486,7 +486,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # If the item is set, the sql-mode will be used to parse the DDL statement.
         # sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
-        # the number of SQL statements of a transaction which are output to the downstream database (20 by default)
+        # the number of SQL statements of a transaction that are output to the downstream database (20 by default)
     
         # the number of the concurrency of the downstream for synchronization. The bigger the value,
         # the better throughput performance of the concurrency (16 by default)
