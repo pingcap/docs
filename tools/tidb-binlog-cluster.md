@@ -394,7 +394,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         pd-urls = "http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379"
 
         # [storage]
-        # Set to true (the default) to ensure reliability and ensure binlog data is flushed to disk
+        # Set to true (by default) to ensure reliability and ensure binlog data is flushed to the disk
         # sync-log = true
         ```
 
