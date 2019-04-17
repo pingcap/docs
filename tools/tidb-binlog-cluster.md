@@ -541,7 +541,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # kafka-addrs = "127.0.0.1:9092"
         # kafka-version = "0.8.2.0"
 
-        # Save the Kafka cluster'topic name of the binlog data. The default value is <cluster-id>_obinlog
+        # the topic name of the Kafka cluster that saves the binlog data. The default value is <cluster-id>_obinlog
         # To run multiple Drainers to replicate data to the same Kafka cluster, you need to set different `topic-name`s for each Drainer.
         # topic-name = ""
         ```
