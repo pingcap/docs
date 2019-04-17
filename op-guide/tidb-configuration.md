@@ -1,10 +1,10 @@
 ---
-title: TiDB Configuration Flags
+title: Configuration Flags
 summary: Learn some configuration flags for TiDB
 category: operations
 ---
 
-# TiDB Configuration Flags
+# Configuration Flags
 
 TiDB is configurable using command-line flags and environment variables. The default TiDB ports are 4000 for client requests and 10080 for status report.
 

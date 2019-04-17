@@ -156,7 +156,7 @@
       - [Character Set](sql/character-set-support.md)
       - [Memory Control](sql/tidb-memory-control.md)
       - [Garbage Collection (GC)](op-guide/gc.md)
-      - [Configuration Flags](op-guide/tidb-configuration.md)
+      - [Configuration Flags](op-guide/configuration.md)
     + pd-server
       - [Configuration Flags](op-guide/pd-configuration.md)
     + tikv-server
