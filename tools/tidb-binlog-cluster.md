@@ -542,7 +542,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # kafka-version = "0.8.2.0"
 
         # Save the Kafka cluster'topic name of the binlog data. The default value is <cluster-id>_obinlog
-        # If you run multiple Drainer synchronization data to the same Kafka cluster, each Drainer's topic-name needs to be different.
+        # To run multiple Drainers to replicate data to the same Kafka cluster, you need to set different `topic-name`s for each Drainer.
         # topic-name = ""
         ```
 
