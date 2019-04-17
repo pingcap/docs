@@ -519,7 +519,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # db-name ="test"
         # tbl-name = "~^a.*"
 
-        # Ignore the synchronization of some tables
+        # Ignore the replication of some tables
         # [[syncer.ignore-table]]
         # db-name = "test"
         # tbl-name = "log"
