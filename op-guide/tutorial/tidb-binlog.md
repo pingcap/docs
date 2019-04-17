@@ -1,13 +1,18 @@
 TiDB Binlog is a stack of components that form a solution to push incremental updates to a TiDB Server cluster into any of a variety of downstream platforms. TiDB Binlog is distributed as a part of TiDB Enterprise Tools.
 
+TODO: add real-world use case description
+
 https://pingcap.com/docs/tools/tidb-binlog-cluster/
 
+# Overview
 
-TiDB Binlog comprises two components: the *pump* and the *drainer*. Several pump nodes make up a pump cluster. Each pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A drainer connects to the pump cluster and transforms updates into the correct format for a particular downstream destination, be if Kafka or another TiDB Cluster or a MySQL/MariaDB server. 
+TiDB Binlog comprises two components: the *pump* and the *drainer*. Several pump nodes make up a pump cluster. Each pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A drainer connects to the pump cluster and transforms updates into the correct format for a particular downstream destination, be it Kafka or another TiDB Cluster or a MySQL/MariaDB server.
 
 The clustered architecture of the pump component ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or pump nodes join or leave the pump cluster.
 
-This tutorial will start with a very simple TiDB Binlog deployment with a single node of each component (PD, TiKV Server, TiDB Server, pump, and drainer), set up to push data into a MariaDB Server instance. Later, we'll make the topology a little bit more complex by adding additional TiDB Server and pump nodes, and an additional drainer. This tutorial assumes you're using a modern Linux distribution on x86-64. I'll use a minimal CentOS 7 installation running in VMware for the examples.
+This tutorial will start with a very simple TiDB Binlog deployment with a single node of each component (PD, TiKV Server, TiDB Server, pump, and drainer), set up to push data into a MariaDB Server instance. Later, we'll make the topology a little bit more complex by adding additional TiDB Server and pump nodes, and an additional drainer. This tutorial assumes you're using a modern Linux distribution on x86-64. I'll use a minimal CentOS 7 installation running in VMware for the examples. If you don't want to use local virtualization, you can easily and inexpensively start a CentOS 7 VM in your favorite cloud provider.
+
+# Installation
 
 We're using MariaDB Server in this case instead of MySQL Server because RHEL/CentOS 7 include MariaDB Server in their default package repositories. We'll need the client as well as the server for later, so let's install them now:
 
@@ -34,6 +39,8 @@ cd tidb-latest-linux-amd64
 [kolbe@localhost tidb-latest-linux-amd64]$
 ```
 
+# Configuration
+
 Now we'll start a very simple TiDB Cluster, with a single instance each of `pd-server`, `tikv-server`, and `tidb-server`. First, let's populate the config files we'll use:
 ```
 printf %s\\n 'log-file="pd.log"' 'data-dir="pd.data"' > pd.toml
@@ -45,7 +52,7 @@ printf %s\\n 'log-file="drainer.log"' '[syncer]' 'db-type="mysql"' '[syncer.to]'
 ```
 
 ```
-$ for f in \*.toml; do echo "$f:"; cat "$f"; echo; done
+$ for f in *.toml; do echo "$f:"; cat "$f"; echo; done
 drainer.toml:
 log-file="drainer.log"
 [syncer]
@@ -86,6 +93,8 @@ max-open-files=1024
 max-open-files=1024
 ```
 
+# Bootstrapping
+
 Now we can start each component. This is best done in a specific order, first bringing up the PD (Placement Driver), then TiKV Server (the backend key/value store used by TiDB Platform), then pump (because TiDB must connect to the pump service to send the binary log), and finally TiDB Server (the frontend that receives SQL from applications). To give the services a little time to start up, well sleep for a few seconds between each.
 
 ```
@@ -123,7 +132,10 @@ And if you execute `jobs`, you should see the list of running daemons:
 ```
 
 
-You should see all 4 components of our TiDB Cluster running now, and you can now connect to the TiDB Server on port 4000 using the MariaDB/MySQL command-line client.
+
+# Connecting
+
+You should have all 4 components of our TiDB Cluster running now, and you can now connect to the TiDB Server on port 4000 using the MariaDB/MySQL command-line client.
 
 ```
 [kolbe@localhost tidb-latest-linux-amd64]$ mysql -h 127.0.0.1 -P 4000 -u root test
@@ -149,7 +161,6 @@ Check Table Before Drop: false
 ```
 
 At this point we have a TiDB Cluster running, and we have `pump` reading binary logs from the cluster and storing them as relay logs in its data directory. The next pieces of the puzzle are to start a MariaDB server that `drainer` can write to. If you are using an operating system that makes it easier to install MySQL server, that's also OK -- just make sure it's listening on port 3306 and that you can either connect to it as user "root" with an empty password, or adjust drainer.toml as necessary.
-
 
 ```
 [kolbe@localhost ~]$ mysql -h 127.0.0.1 -P 3306 -u root
@@ -233,6 +244,7 @@ MariaDB [tidbtest]> select * from t1;
 5 rows in set (0.00 sec)
 ```
 
+# binlogctl
 
 There are a few extra pieces that are worth talking about. One is the `binlogctl` tool. For a full guide to the tool, see https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md#binlogctl-guide. Information about pumps and drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate inforamtion about their states.
 
@@ -264,8 +276,8 @@ The main use of `binlogctl` in this tutorial is likely to be in the event of a c
 
 There are 3 solutions to that issue:
 
-# Stop drainer using `binlogctl` instead of killing the process: ```./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
+1. Stop drainer using `binlogctl` instead of killing the process: ```./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
 ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249```
-# Start drainer _before_ starting pump.
-# Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer: `./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline`
+2. Start drainer _before_ starting pump.
+3. Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer: `./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline`
 
