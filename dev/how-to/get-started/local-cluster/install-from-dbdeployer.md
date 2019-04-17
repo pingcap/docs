@@ -15,12 +15,12 @@ Similar to [Homebrew](install-from-homebrew.md), the DBdeployer installation met
 <main class="tabs">
   <input id="tabMacOS" type="radio" name="tabs" value="GoogleContent" checked>
   <label for="tabMacOS">
-      <span><img src="https://cloud.google.com/_static/images/cloud/icons/favicons/onecloud/apple-icon.png" width="20"></img></span>
+      <span><img src="/images/docs/mac-os-64.png" width="20"></img></span>
       <span class="label__title">macOS</span>
   </label>
   <input id="tabLinux" type="radio" name="tabs" value="AWSContent">
   <label for="tabLinux">
-      <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/2000px-Amazon_Web_Services_Logo.svg.png" width="20"></img></span>
+      <span><img src="/images/docs/linux-64.png" width="20"></img></span>
       <span class="label__title">Linux</span>
   </label>
   <section id="MacOSContent">
