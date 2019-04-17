@@ -86,7 +86,7 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - The list of proxy server's IP addresses allowed by PROXY Protocol; if you need to configure multiple addresses, separate them using ",".
 - Default: ""
-- Leaving it empty disables PROXY Protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24). "*" means any IP addresses.
+- Leaving it empty disables PROXY Protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24). "\*" means any IP addresses.
 
 ## `--proxy-protocol-header-timeout`
 
