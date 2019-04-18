@@ -16,10 +16,7 @@ The system data is available [for download in .zip files](https://s3.amazonaws.c
 mkdir -p bikeshare-data && cd bikeshare-data
 
 curl -L --remote-name-all https://s3.amazonaws.com/capitalbikeshare-data/{2010..2017}-capitalbikeshare-tripdata.zip
-for f in *-tripdata.zip
-do
-    unzip "$f"
-done
+for f in *-tripdata.zip; do unzip "$f"; done
 ```
 
 ## Load data into TiDB
