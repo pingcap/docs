@@ -1,12 +1,16 @@
 TiDB Binlog is a stack of components that form a solution to push incremental updates to a TiDB Server cluster into any of a variety of downstream platforms. TiDB Binlog is distributed as a part of TiDB Enterprise Tools.
 
-TODO: add real-world use case description
+TiDB Binlog is particularly useful during a migration from MySQL or MariaDB to TiDB, as it enables application traffic going to TiDB to be pushed to a downstream MySQL or MariaDB instance/cluster. This can provide peace of mind in the form of a way to revert an application to MySQL/MariaDB if there are any issues with a migration to TiDB.
 
-https://pingcap.com/docs/tools/tidb-binlog-cluster/
+You may also wish to use TiDB Binlog for incremental backups, if you want to replicate from one TiDB Cluster to another, or if you want to send TiDB updates through Kafka to an arbitrary downstream platform of your choice.
+
+More information about TiDB Binlog can be found at https://pingcap.com/docs/tools/tidb-binlog-cluster/.
 
 # Overview
 
 TiDB Binlog comprises two components: the *pump* and the *drainer*. Several pump nodes make up a pump cluster. Each pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A drainer connects to the pump cluster and transforms updates into the correct format for a particular downstream destination, be it Kafka or another TiDB Cluster or a MySQL/MariaDB server.
+
+![TiDB-Binlog architecture](../media/tidb_binlog_cluster_architecture.png)
 
 The clustered architecture of the pump component ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or pump nodes join or leave the pump cluster.
 
@@ -246,7 +250,7 @@ MariaDB [tidbtest]> select * from t1;
 
 # binlogctl
 
-There are a few extra pieces that are worth talking about. One is the `binlogctl` tool. For a full guide to the tool, see https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md#binlogctl-guide. Information about pumps and drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate inforamtion about their states.
+Information about pumps and drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate inforamtion about their states. For a full guide to the binlogctl tool, see https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md#binlogctl-guide.
 
 You can use `binlogctl` to get a view of the current status of pumps and drainers in the cluster:
 ```
