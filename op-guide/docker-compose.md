@@ -10,6 +10,13 @@ This document describes how to quickly deploy a TiDB testing cluster with a sing
 
 With Docker Compose, you can use a YAML file to configure application services in multiple containers. Then, with a single command, you can create and start all the services from your configuration.
 
+## Alternatives
+
+If you want to use docker but just test MySQL compatibility or otherwise run just a single TiDB server (without TiKV), there is a [3rd-party image](https://gitlab.com/jniltinho/tidb-alpine) for that.
+
+> **Note**: Internally this installation uses goleveldb as the storage engine. It is much slower than TiKV, and any benchmarks will be unreliable.
+
+
 ## Prerequisites
 
 Make sure you have installed the following items on your machine:
