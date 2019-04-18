@@ -6,7 +6,7 @@ TiDB Binlog is particularly useful during a migration from MySQL or MariaDB to T
 
 You may also wish to use TiDB Binlog for incremental backups, if you want to replicate from one TiDB Cluster to another, or if you want to send TiDB updates through Kafka to an arbitrary downstream platform of your choice.
 
-More information about TiDB Binlog can be found at https://pingcap.com/docs/tools/tidb-binlog-cluster/.
+See [TiDB-Binlog Cluster User Guide](https://pingcap.com/docs/tools/tidb-binlog-cluster/) for more information.
 
 # Architecture
 
@@ -22,13 +22,13 @@ This tutorial will start with a very simple TiDB Binlog deployment with a single
 
 We're using MariaDB Server in this case instead of MySQL Server because RHEL/CentOS 7 include MariaDB Server in their default package repositories. We'll need the client as well as the server for later, so let's install them now:
 
-```
-[kolbe@localhost ~]$ sudo yum install -y mariadb-server
+```bash
+sudo yum install -y mariadb-server
 ```
 
-Even if you've already started a TiDB Cluster, it might be easier to follow along with this tutorial if you set up a new, very simple cluster. The first step of that will be to download the latest TiDB Platform package: http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz. That package contains all the files we'll need to get started.
+Even if you've already started a TiDB Cluster, it might be easier to follow along with this tutorial if you set up a new, very simple cluster. The first step of that will be to download the latest TiDB Platform package: http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz. That package contains all the files we'll need to get started, using a simplified form of [Local Deployment from Binary Tarball](https://pingcap.com/docs/op-guide/binary-local-deployment/). You may wish to consult [Testing Deployment from Binary Tarball](https://pingcap.com/docs/op-guide/binary-testing-deployment/) for best practices in establishing a real testing deployment that goes beyond the scope of this tutorial.
 
-```
+```bash
 curl -LO http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
 tar xf tidb-latest-linux-amd64.tar.gz
 cd tidb-latest-linux-amd64
@@ -101,28 +101,22 @@ max-open-files=1024
 
 # Bootstrapping
 
-Now we can start each component. This is best done in a specific order, first bringing up the PD (Placement Driver), then TiKV Server (the backend key/value store used by TiDB Platform), then pump (because TiDB must connect to the pump service to send the binary log), and finally TiDB Server (the frontend that receives SQL from applications). To give the services a little time to start up, well sleep for a few seconds between each.
+Now we can start each component. This is best done in a specific order, first bringing up the PD (Placement Driver), then TiKV Server (the backend key/value store used by TiDB Platform), then pump (because TiDB must connect to the pump service to send the binary log), and finally TiDB Server (the frontend that receives SQL from applications).
 
 ```
 ./bin/pd-server --config=pd.toml &>pd.out &
-sleep 3
 ./bin/tikv-server --config=tikv.toml &>tikv.out &
-sleep 3
 ./bin/pump --config=pump.toml &>pump.out &
-sleep 3
 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 ```
 
 ```
 [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pd-server --config=pd.toml &>pd.out &
 [1] 20935
-[kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
 [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tikv-server --config=tikv.toml &>tikv.out &
 [2] 20944
-[kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
 [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pump --config=pump.toml &>pump.out &
 [3] 21050
-[kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
 [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tidb-server --config=tidb.toml &>tidb.out &
 [4] 21058
 ```
@@ -141,7 +135,14 @@ And if you execute `jobs`, you should see the list of running daemons:
 
 # Connecting
 
-You should have all 4 components of our TiDB Cluster running now, and you can now connect to the TiDB Server on port 4000 using the MariaDB/MySQL command-line client.
+You should have all 4 components of our TiDB Cluster running now, and you can now connect to the TiDB Server on port 4000 using the MariaDB/MySQL command-line client:
+
+```bash
+mysql -h 127.0.0.1 -P 4000 -u root test
+```
+```
+select tidb_version()\G
+```
 
 ```
 [kolbe@localhost tidb-latest-linux-amd64]$ mysql -h 127.0.0.1 -P 4000 -u root test
@@ -167,6 +168,13 @@ Check Table Before Drop: false
 ```
 
 At this point we have a TiDB Cluster running, and we have `pump` reading binary logs from the cluster and storing them as relay logs in its data directory. The next pieces of the puzzle are to start a MariaDB server that `drainer` can write to. If you are using an operating system that makes it easier to install MySQL server, that's also OK -- just make sure it's listening on port 3306 and that you can either connect to it as user "root" with an empty password, or adjust drainer.toml as necessary.
+
+```bash
+mysql -h 127.0.0.1 -P 3306 -u root
+```
+```
+show databases;
+```
 
 ```
 [kolbe@localhost ~]$ mysql -h 127.0.0.1 -P 3306 -u root
@@ -252,7 +260,7 @@ MariaDB [tidbtest]> select * from t1;
 
 # binlogctl
 
-Information about pumps and drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate inforamtion about their states. For a full guide to the binlogctl tool, see https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md#binlogctl-guide.
+Information about pumps and drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate inforamtion about their states. See [binlogctl guide](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md#binlogctl-guide) for more information.
 
 You can use `binlogctl` to get a view of the current status of pumps and drainers in the cluster:
 ```
