@@ -1,3 +1,5 @@
+# Overview
+
 TiDB Binlog is a stack of components that form a solution to push incremental updates to a TiDB Server cluster into any of a variety of downstream platforms. TiDB Binlog is distributed as a part of TiDB Enterprise Tools.
 
 TiDB Binlog is particularly useful during a migration from MySQL or MariaDB to TiDB, as it enables application traffic going to TiDB to be pushed to a downstream MySQL or MariaDB instance/cluster. This can provide peace of mind in the form of a way to revert an application to MySQL/MariaDB if there are any issues with a migration to TiDB.
@@ -6,11 +8,11 @@ You may also wish to use TiDB Binlog for incremental backups, if you want to rep
 
 More information about TiDB Binlog can be found at https://pingcap.com/docs/tools/tidb-binlog-cluster/.
 
-# Overview
+# Architecture
 
-TiDB Binlog comprises two components: the *pump* and the *drainer*. Several pump nodes make up a pump cluster. Each pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A drainer connects to the pump cluster and transforms updates into the correct format for a particular downstream destination, be it Kafka or another TiDB Cluster or a MySQL/MariaDB server.
+TiDB Binlog comprises two components: the **pump** and the **drainer**. Several pump nodes make up a pump cluster. Each pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A drainer connects to the pump cluster and transforms updates into the correct format for a particular downstream destination, be it Kafka or another TiDB Cluster or a MySQL/MariaDB server.
 
-![TiDB-Binlog architecture](../media/tidb_binlog_cluster_architecture.png)
+![TiDB-Binlog architecture](../../media/tidb_binlog_cluster_architecture.png)
 
 The clustered architecture of the pump component ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or pump nodes join or leave the pump cluster.
 
@@ -280,8 +282,13 @@ The main use of `binlogctl` in this tutorial is likely to be in the event of a c
 
 There are 3 solutions to that issue:
 
-1. Stop drainer using `binlogctl` instead of killing the process: ```./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
-./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249```
+1. Stop drainer using `binlogctl` instead of killing the process:
+```
+./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
+./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249
+```
 2. Start drainer _before_ starting pump.
-3. Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer: `./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline`
-
+3. Use `binlogctl` after starting pd (but before starting drainer or pump) to update the state of the paused drainer:
+```
+./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline
+```
