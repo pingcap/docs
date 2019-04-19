@@ -25,9 +25,7 @@ Similar to [Homebrew](install-from-homebrew.md), the DBdeployer installation met
   </label>
   <section id="MacOSContent">
 
-After <a href="https://github.com/datacharmer/dbdeployer">installing DBdeployer</a>:
-
-Install a MySQL 5.7 client:
+After <a href="https://github.com/datacharmer/dbdeployer">installing DBdeployer</a>, install a MySQL 5.7 client:
 <pre>
 curl -LO https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.25-macos10.14-x86_64.tar.gz
 dbdeployer unpack mysql-5.7.25-macos10.14-x86_64.tar.gz
@@ -43,9 +41,7 @@ dbdeployer deploy single 3.0.0 --client-from=5.7.25
 </section>
   <section id="LinuxContent">
 
-After <a href="https://github.com/datacharmer/dbdeployer">installing DBdeployer</a>:
-
-Install a MySQL 5.7 client:
+After <a href="https://github.com/datacharmer/dbdeployer">installing DBdeployer</a>, install a MySQL 5.7 client:
 <pre>
 dbdeployer remote get mysql-5.7.25
 dbdeployer unpack mysql-5.7.25.tar.xz
