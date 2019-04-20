@@ -10,7 +10,9 @@ The `PREPARE` statement provides an SQL interface to server-side prepared statem
 
 ## Synopsis
 
-TBD
+**PreparedStmt:**
+
+![PreparedStmt](/media/sqlgram/PreparedStmt.png)
 
 ## Examples
 
