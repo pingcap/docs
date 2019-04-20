@@ -1,10 +1,11 @@
 ---
-title: Bikeshare Example Database
+title: Import Example Database
 summary: Install the Bikeshare example database.
-category: user guide
+category: how-to 
+aliases: ['/docs/bikeshare-example-database/']
 ---
 
-# Bikeshare Example Database
+# Import Example Database
 
 Examples used in the TiDB manual use [System Data](https://www.capitalbikeshare.com/system-data) from Capital Bikeshare, released under the [Capital Bikeshare Data License Agreement](https://www.capitalbikeshare.com/data-license-agreement).
 
@@ -15,10 +16,8 @@ The system data is available [for download in .zip files](https://s3.amazonaws.c
 ```bash
 mkdir -p bikeshare-data && cd bikeshare-data
 
-for YEAR in 2010 2011 2012 2013 2014 2015 2016 2017; do
- wget https://s3.amazonaws.com/capitalbikeshare-data/${YEAR}-capitalbikeshare-tripdata.zip
- unzip ${YEAR}-capitalbikeshare-tripdata.zip
-done;
+curl -L --remote-name-all https://s3.amazonaws.com/capitalbikeshare-data/{2010..2017}-capitalbikeshare-tripdata.zip
+unzip \*-tripdata.zip
 ```
 
 ## Load data into TiDB
