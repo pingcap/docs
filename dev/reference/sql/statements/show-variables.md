@@ -106,4 +106,3 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 ## See also
 
 * [SET](set-session-variable.md)
-

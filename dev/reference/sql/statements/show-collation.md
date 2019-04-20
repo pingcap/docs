@@ -257,4 +257,3 @@ TiDB does not support collations other than binary. This statement is only provi
 ## See also
 
 * [SHOW CHARACTER SET](show-character-set.md)
-

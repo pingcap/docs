@@ -38,4 +38,3 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 * [GRANT](grant.md)
 * [REVOKE](revoke.md)
 * [Privilege Management](/sql/privilege.md)
-

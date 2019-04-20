@@ -8,9 +8,8 @@ category: reference
 
 This statement modifies an existing table to conform to a new table structure. The statement `ALTER TABLE` can be used to:
 
-* Add, remove, or rename indexes
-* Add, remove or rename columns
-* Change the data type of existing columns
+* [`ADD`](add-index.md), [`DROP`](drop-index.md), or [`RENAME`](rename-index.md) indexes
+* [`ADD`](add-column.md), [`DROP`](drop-column.md), [`MODIFY`](modify-column.md) or [`CHANGE`](change-column.md) columns
 
 ## Synopsis
 
@@ -57,7 +56,6 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 | └─IndexScan_5     | 10.00 | cop  | table:t1, index:c1, range:[3,3], keep order:false, stats:pseudo |
 +-------------------+-------+------+-----------------------------------------------------------------+
 2 rows in set (0.00 sec)
-
 ```
 
 ## MySQL compatibility
@@ -76,4 +74,3 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * [CREATE TABLE](create-table.md)
 * [DROP TABLE](drop-table.md)
 * [SHOW CREATE TABLE](show-create-table.md)
-

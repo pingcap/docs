@@ -66,4 +66,3 @@ This statement is a TiDB extension to MySQL syntax.
 ## See also
 
 * [EXPLAIN ANALYZE](explain-analyze.md)
-

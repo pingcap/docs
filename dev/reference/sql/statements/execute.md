@@ -47,4 +47,3 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 * [PREPARE](prepare.md)
 * [DEALLOCATE](deallocate.md)
-

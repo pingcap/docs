@@ -30,7 +30,6 @@ mysql> SHOW PROCESSLIST;
 
 mysql> KILL TIDB 2;
 Query OK, 0 rows affected (0.00 sec)
-
 ```
 
 ## MySQL compatibility

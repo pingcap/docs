@@ -47,4 +47,3 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 ## See also
 
 * [SELECT](select.md)
-

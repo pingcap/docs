@@ -7,4 +7,3 @@ category: reference
 # SHOW [FULL] FIELDS FROM
 
 This statement is an alias to [`SHOW [FULL] COLUMNS FROM`](show-columns-from.md). It is included for compatibility with MySQL.
-

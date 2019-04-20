@@ -29,4 +29,3 @@ mysql> SHOW ENGINES;
 ## MySQL compatibility
 
 * This statement will always only return InnoDB as the supported engine. Internally, TiDB will typically use TiKV as the storage engine.
-

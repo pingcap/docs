@@ -69,4 +69,4 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 
 * [CREATE USER](create-user.md)
 * [ALTER USER](alter-user.md)
-
+* [SHOW CREATE USER](show-create-user.md)

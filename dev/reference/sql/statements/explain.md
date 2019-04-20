@@ -89,7 +89,6 @@ mysql> EXPLAIN DELETE FROM t1 WHERE c1=3;
 |   └─TableScan_4     | 10000.00 | cop  | table:t1, range:[-inf,+inf], keep order:false, stats:pseudo |
 +---------------------+----------+------+-------------------------------------------------------------+
 3 rows in set (0.00 sec)
-
 ```
 
 ## MySQL compatibility
@@ -100,6 +99,6 @@ mysql> EXPLAIN DELETE FROM t1 WHERE c1=3;
 
 ## See also
 
-* Understanding Query Execution Plans
+* [Understanding the Query Execution Plan](/sql/understanding-the-query-execution-plan.md)
 * [EXPLAIN ANALYZE](explain-analyze.md)
 * [ANALYZE TABLE](analyze-table.md)

@@ -96,4 +96,3 @@ Query OK, 0 rows affected (0.31 sec)
 * [ADD COLUMN](add-column.md)
 * [CREATE TABLE](create-table.md)
 * [EXPLAIN](explain.md)
-

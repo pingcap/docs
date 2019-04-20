@@ -84,4 +84,3 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 * [CREATE TABLE](create-table.md)
 * [DROP TABLE](drop-table.md)
 * [SHOW CREATE TABLE](show-create-table.md)
-

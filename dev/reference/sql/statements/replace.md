@@ -74,4 +74,3 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 * [INSERT](insert.md)
 * [SELECT](select.md)
 * [UPDATE](update.md)
-

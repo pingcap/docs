@@ -72,4 +72,3 @@ Query OK, 0 rows affected (0.30 sec)
 * [CREATE INDEX](create-index.md)
 * [ADD INDEX](add-index.md)
 * [RENAME INDEX](rename-index.md)
-

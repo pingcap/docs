@@ -122,4 +122,3 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 ## See also
 
 * [SHOW CREATE TABLE](show-create-table.md)
-

@@ -75,4 +75,3 @@ mysql> show status;
 ## See also
 
 * [SHOW \[GLOBAL|SESSION\] STATUS](show-status.md)
-
