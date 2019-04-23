@@ -338,7 +338,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 1. Deploy Pump using the binary.
 
-    - The command line parameters of Pump are as follow:
+    - To view the command line parameters of Pump, execute `./bin/pump -help`:
 
         ```
         Usage of Pump:
@@ -406,7 +406,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 2. Deploy Drainer using binary.
 
-    - The command line parameters of Drainer are as follow:
+    - To view the command line parameters of Drainer, execute `./bin/drainer -help`:
 
         ```
         Usage of Drainer:
