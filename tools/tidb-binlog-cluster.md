@@ -322,7 +322,6 @@ sha256sum -c tidb-binlog-$version-linux-amd64.sha256
 
 Assuming that you have three PD nodes, one TiDB node, two Pump nodes, and one Drainer node, the information of each node is as follows:
 
-```
 | Node     | IP           |
 | ---------|:------------:|
 | TiDB     | 192.168.0.10 |
@@ -332,7 +331,6 @@ Assuming that you have three PD nodes, one TiDB node, two Pump nodes, and one Dr
 | Pump     | 192.168.0.11 |
 | Pump     | 192.168.0.12 |
 | Drainer  | 192.168.0.13 |
-```
 
 The following part shows how to use Pump and Drainer based on the nodes above.
 
