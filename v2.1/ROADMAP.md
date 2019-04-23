@@ -44,7 +44,6 @@ This document defines the roadmap for TiDB development.
     - [ ] Support modifying the column type
     - [ ] Support modifying the primary key
     - [ ] Support multiple DDL operations in a single statement
-    - [ ] Support invisible indexes
 - [ ] Support `utf8_general_ci` collation
 
 ## TiKV:
