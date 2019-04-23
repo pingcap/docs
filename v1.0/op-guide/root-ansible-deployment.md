@@ -38,7 +38,7 @@ To deploy TiDB using a root user account, take the following steps:
     ansible-playbook bootstrap.yml
     ```
 
-    > **Note**: If the service user does not exist, the initialization operation will automatically create the user.
+    > **Note:** If the service user does not exist, the initialization operation will automatically create the user.
 
     If the remote connection using the root user requires a password, use the `-k` (lower case) parameter. This applies to other playbooks as well:
 

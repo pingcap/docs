@@ -583,7 +583,7 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
     mysql -u root -h 172.16.10.1 -P 4000
     ```
 
-    > **Note**: The default port of TiDB service is 4000.
+    > **Note:** The default port of TiDB service is 4000.
 
 2. Access the monitoring platform using a web browser.
 
@@ -591,7 +591,7 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
     http://172.16.10.1:3000
     ```
 
-    > **Note**: The default account and password: `admin`/`admin`.
+    > **Note:** The default account and password: `admin`/`admin`.
 
 ## Deployment FAQs
 

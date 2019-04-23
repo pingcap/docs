@@ -316,7 +316,7 @@ It is recommended to configure load balancing to provide uniform SQL interface.
     mysql -u root -h 172.16.10.1 -P 4000
     ```
 
-    > **Note**: The default port of TiDB service is 4000.
+    > **Note:** The default port of TiDB service is 4000.
 
 2. Access the monitoring platform using a web browser.
 
