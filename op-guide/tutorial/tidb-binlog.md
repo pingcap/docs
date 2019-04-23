@@ -1,12 +1,14 @@
 # TiDB Binlog Tutorial
 
-This tutorial will start with a very simple TiDB-Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, pump, and drainer), set up to push data into a MariaDB Server instance. 
+This tutorial will start with a very simple TiDB-Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, pump, and drainer), set up to push data into a MariaDB Server instance.
 
-This tutorial assumes you're using a modern Linux distribution on x86-64. I'll use a minimal CentOS 7 installation running in VMware for the examples. If you don't want to use local virtualization, you can easily and inexpensively start a CentOS 7 VM in your favorite cloud provider.
+This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](https://pingcap.com/docs/architecture/), who may have already set up a TiDB cluster (though that is not mandatory), and who wants to gain hands-on familiarity with the features and functionality of TiDB-Binlog. This tutorial is a good way to "kick the tires" of TiDB-Binlog and to familiarize yourself with the concepts of its architecture.
+
+This tutorial assumes you're using a modern Linux distribution on x86-64. I'll use a minimal CentOS 7 installation running in VMware for the examples. It'll be easiest if you start from a clean install, so that you aren't impacted by quirks of your existing environment. If you don't want to use local virtualization, you can easily and inexpensively start a CentOS 7 VM in your favorite cloud provider.
 
 ## Overview
 
-TiDB-Binlog is a solution to collect binary log data from TiDB server and provide real-time data backup and replication. It pushes incremental data updates to a TiDB Server cluster into any of various of downstream platforms.
+TiDB-Binlog is a solution to collect binary log data from TiDB server and provide real-time data backup and replication. It pushes incremental data updates to a TiDB Server cluster into any of various downstream platforms.
 
 You can use TiDB-Binlog for incremental backups, to replicate data from one TiDB cluster to another, or to send TiDB updates through Kafka to a downstream platform of your choice.
 
@@ -22,8 +24,6 @@ TiDB-Binlog comprises two components: the **pump** and the **drainer**. Several 
 ![TiDB-Binlog architecture](../../media/tidb_binlog_cluster_architecture.png)
 
 The clustered architecture of the pump component ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or pump nodes join or leave the pump cluster.
-
-
 
 ## Installation
 
@@ -57,17 +57,17 @@ Expect this output:
 Now we'll start a very simple TiDB cluster, with a single instance each of `pd-server`, `tikv-server`, and `tidb-server`.
 
 First, let's populate the config files we'll use:
-```
-printf %s\\n 'log-file="pd.log"' 'data-dir="pd.data"' > pd.toml
-printf %s\\n 'log-file="tikv.log"' '[storage]' 'data-dir="tikv.data"' '[pd]' 'endpoints=["127.0.0.1:2379"]' '[rocksdb]' max-open-files=1024 '[raftdb]' max-open-files=1024 > tikv.toml
-printf %s\\n 'log-file="pump.log"' 'socket="/tmp/pump.sock"' 'data-dir="pump.data"' > pump.toml
-printf %s\\n 'store="tikv"' 'path="127.0.0.1:2379"' '[log.file]' 'filename="tidb.log"' '[binlog]' 'enable=true' 'binlog-socket="/tmp/pump.sock"' > tidb.toml
-printf %s\\n 'log-file="drainer.log"' '[syncer]' 'db-type="mysql"' '[syncer.to]' 'host="127.0.0.1"' 'user="root"' 'password=""' 'port=3306' > drainer.toml
+```bash
+printf > pd.toml %s\\n 'log-file="pd.log"' 'data-dir="pd.data"'
+printf > tikv.toml %s\\n 'log-file="tikv.log"' '[storage]' 'data-dir="tikv.data"' '[pd]' 'endpoints=["127.0.0.1:2379"]' '[rocksdb]' max-open-files=1024 '[raftdb]' max-open-files=1024 
+printf > pump.toml %s\\n 'log-file="pump.log"' 'data-dir="pump.data"' 'addr="127.0.0.1:8250"' 'advertise-addr="127.0.0.1:8250"' 'pd-urls="http://127.0.0.1:2379"'
+printf > tidb.toml %s\\n 'store="tikv"' 'path="127.0.0.1:2379"' '[log.file]' 'filename="tidb.log"' '[binlog]' 'enable=true'
+printf > drainer.toml %s\\n 'log-file="drainer.log"' '[syncer]' 'db-type="mysql"' '[syncer.to]' 'host="127.0.0.1"' 'user="root"' 'password=""' 'port=3306'
 ```
 
 This will allow you to see the contents of the config files:
 ```bash
-$ for f in *.toml; do echo "$f:"; cat "$f"; echo; done
+for f in *.toml; do echo "$f:"; cat "$f"; echo; done
 ```
 
 Expect this output:
@@ -88,8 +88,10 @@ data-dir="pd.data"
 
 pump.toml:
 log-file="pump.log"
-socket="/tmp/pump.sock"
 data-dir="pump.data"
+addr="127.0.0.1:8250"
+advertise-addr="127.0.0.1:8250"
+pd-urls="http://127.0.0.1:2379"
 
 tidb.toml:
 store="tikv"
@@ -98,7 +100,6 @@ path="127.0.0.1:2379"
 filename="tidb.log"
 [binlog]
 enable=true
-binlog-socket="/tmp/pump.sock"
 
 tikv.toml:
 log-file="tikv.log"
@@ -117,10 +118,11 @@ max-open-files=1024
 Now we can start each component. This is best done in a specific order, first bringing up the PD (Placement Driver), then TiKV Server (the backend key/value store used by TiDB Platform), then pump (because TiDB must connect to the pump service to send the binary log), and finally TiDB Server (the frontend that speaks the MySQL protocol to your applications).
 
 Start all the services:
-```
+```bash
 ./bin/pd-server --config=pd.toml &>pd.out &
 ./bin/tikv-server --config=tikv.toml &>tikv.out &
 ./bin/pump --config=pump.toml &>pump.out &
+sleep 3
 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 ```
 
@@ -132,6 +134,7 @@ Expect this output:
 [2] 20944
 [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pump --config=pump.toml &>pump.out &
 [3] 21050
+[kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
 [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tidb-server --config=tidb.toml &>tidb.out &
 [4] 21058
 ```
@@ -143,8 +146,9 @@ And if you execute `jobs`, you should see the list of running daemons:
 [2]   Running                 ./bin/tikv-server --config=tikv.toml &>tikv.out &
 [3]-  Running                 ./bin/pump --config=pump.toml &>pump.out &
 [4]+  Running                 ./bin/tidb-server --config=tidb.toml &>tidb.out &
-
 ```
+
+If one of the services has failed to start (if you see "`Exit 1`" instead of "`Running`", for example), try to restart that individual service.
 
 ## Connecting
 
@@ -155,7 +159,7 @@ mysql -h 127.0.0.1 -P 4000 -u root test
 ```
 
 Print the TiDB version:
-```
+```sql
 select tidb_version()\G
 ```
 
@@ -183,9 +187,14 @@ Check Table Before Drop: false
 1 row in set (0.00 sec)
 ```
 
-At this point we have a TiDB Cluster running, and we have `pump` reading binary logs from the cluster and storing them as relay logs in its data directory. The next step is to start a MariaDB server that `drainer` can write to. 
+At this point we have a TiDB Cluster running, and we have `pump` reading binary logs from the cluster and storing them as relay logs in its data directory. The next step is to start a MariaDB server that `drainer` can write to, and to start `drainer`:
 
-If you are using an operating system that makes it easier to install MySQL server, that's also OK -- just make sure it's listening on port 3306 and that you can either connect to it as user "root" with an empty password, or adjust drainer.toml as necessary.
+```bash
+sudo systemctl start mariadb
+./bin/drainer --config=drainer.toml &>drainer.out &
+```
+
+If you are using an operating system that makes it easier to install MySQL server, that's also OK — just make sure it's listening on port 3306 and that you can either connect to it as user "root" with an empty password, or adjust drainer.toml as necessary.
 
 ```bash
 mysql -h 127.0.0.1 -P 3306 -u root
@@ -195,6 +204,7 @@ mysql -h 127.0.0.1 -P 3306 -u root
 show databases;
 ```
 
+Expect this output:
 ```
 [kolbe@localhost ~]$ mysql -h 127.0.0.1 -P 3306 -u root
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -234,8 +244,20 @@ MariaDB [tidb_binlog]> select * from checkpoint;
 
 Now, let's open another client connection to the TiDB server, so that we can create a table and insert some rows into it. It's easiest to do this under GNU screen so you can keep multiple clients open at the same time.
 
-```sql
+```bash
 mysql -h 127.0.0.1 -P 4000 --prompt='TiDB [\d]> ' -u root
+```
+
+```sql
+create database tidbtest;
+use tidbtest;
+create table t1 (id int unsigned not null auto_increment primary key);
+insert into t1 () values (),(),(),(),();
+select * from t1;
+```
+
+Expect this output:
+```
 TiDB [(none)]> create database tidbtest;
 Query OK, 0 rows affected (0.12 sec)
 
@@ -250,8 +272,16 @@ Records: 5  Duplicates: 0  Warnings: 0
 ```
 
 Switching back to the MariaDB client, we should find the new database, new table, and the rows we've newly inserted:
+
+```sql
+use tidbtest;
+show tables;
+select * from t1;
 ```
-MariaDB [(none)]> use tidbtest
+
+Expect this output:
+```
+MariaDB [(none)]> use tidbtest;
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
@@ -276,6 +306,8 @@ MariaDB [tidbtest]> select * from t1;
 +----+
 5 rows in set (0.00 sec)
 ```
+
+You should see the same rows when querying the MariaDB server that you inserted into TiDB. Congratulations! You've just set up TiDB-Binlog!
 
 ## binlogctl
 
@@ -325,3 +357,9 @@ There are 3 solutions to that issue:
     ```
     ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline
     ```
+
+## Conclusion
+
+In this tutorial, we've set up TiDB-Binlog to replicate from a TiDB cluster to a downstream MariaDB server. We did that using a single `pump` and a single `drainer`. As we've seen, TiDB-Binlog is a comprehensive platform for capturing and processing changes to a TiDB cluster.
+
+In a more robust development, testing, or production deployment, you'd have multiple TiDB servers for HA and scaling purposes, and you'd use multiple instances of `pump` to ensure that application traffic to TiDB server instances is unaffected by problems in the pump cluster. You may also use additional `drainer` instances to push updates to different downstream platforms or to implement incremental backups.
