@@ -336,7 +336,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 1. Deploy Pump using the binary.
 
-    - Taking deploying Pump on "192.168.0.11" as an example, the description for command line parameters of Pump is as follows:
+    - The command line parameters of Pump are as follow:
 
         ```
         Usage of Pump:
@@ -404,7 +404,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 2. Deploy Drainer using binary.
 
-    - Taking deploying Drainer on "192.168.0.13" as an example, the description for command line parameters of Drainer is as follows:
+    - The command line parameters of Drainer are as follow:
 
         ```
         Usage of Drainer:
@@ -529,7 +529,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # kafka-version = "0.8.2.0"
         ```
 
-    - The example of starting Drainer:
+    - Starting Drainer:
 
         > **Note:** If the downstream is MySQL/TiDB, to guarantee the data integrity, you need to obtain the `initial-commit-ts` value and make a full backup of the data and restore the data before the initial start of Drainer. For details, see [Deploy Drainer](#step-3-deploy-drainer).
 
@@ -540,6 +540,17 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         ```
 
         If the command line parameter and the configuration file parameter are the same, the parameter value in the command line is used.
+
+    - Starting TiDB Server:
+        
+        After starting Pump and Drainer, start TiDB Server with binlog enabled by adding this section to your config file for TiDB Server:
+
+        ```
+        [binlog]
+        enable=true
+        ```
+
+        TiDB Server will obtain the addresses of registered Pumps from PD and will stream data to all of them. If there are no registered Pump instances, TiDB Server will refuse to start or will block starting until a Pump instance comes online.
 
 ## TiDB-Binlog operations
 
