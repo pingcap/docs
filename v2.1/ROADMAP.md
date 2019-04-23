@@ -42,8 +42,9 @@ This document defines the roadmap for TiDB development.
     - [x] Parallel DDL
     - [ ] Support locking table
     - [ ] Support modifying the column type
-    - [ ] Supoort modifying the primary key
+    - [ ] Support modifying the primary key
     - [ ] Support multiple DDL operations in a single statement
+    - [ ] Support invisible indexes
 - [ ] Support `utf8_general_ci` collation
 
 ## TiKV:
