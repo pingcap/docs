@@ -541,16 +541,15 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
         If the command line parameter and the configuration file parameter are the same, the parameter value in the command line is used.
 
-3. Starting TiDB Server:
+3. Starting TiDB server:
         
-    - After starting Pump and Drainer, start TiDB Server with binlog enabled by adding this section to your config file for TiDB Server:
+    - After starting Pump and Drainer, start TiDB server with binlog enabled by adding this section to your config file for TiDB server:
+        ```
+        [binlog]
+        enable=true
+        ```
 
-    ```
-    [binlog]
-    enable=true
-    ```
-
-    TiDB Server will obtain the addresses of registered Pumps from PD and will stream data to all of them. If there are no registered Pump instances, TiDB Server will refuse to start or will block starting until a Pump instance comes online.
+    - TiDB server will obtain the addresses of registered Pumps from PD and will stream data to all of them. If there are no registered Pump instances, TiDB server will refuse to start or will block starting until a Pump instance comes online.
 
 
 ## TiDB-Binlog operations
