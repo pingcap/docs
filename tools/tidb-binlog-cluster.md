@@ -591,11 +591,10 @@ For how to pause, close, check, and modify the state of Drainer, see the [binlog
 
 #### Download `binlogctl`
 
-Download `binlogctl` via:
+Your distribution of TiDB or TiDB-Binlog may already include binlogctl. If not, download `binlogctl`:
 
 ```bash
-wget https://download.pingcap.org/binlogctl-new-linux-amd64.tar.gz
-wget https://download.pingcap.org/binlogctl-new-linux-amd64.sha256
+wget https://download.pingcap.org/binlogctl-new-linux-amd64.{tar.gz,sha256}
 
 # Check the file integrity. It should return OK.
 sha256sum -c tidb-binlog-new-linux-amd64.sha256
