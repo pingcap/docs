@@ -1,12 +1,13 @@
 ---
 title: TiSpark Quick Start Guide
 summary: Learn how to use TiSpark quickly.
-category: User Guide
+category: how-to
+aliases: ['/docs/tispark/tispark-quick-start-guide/']
 ---
 
 # TiSpark Quick Start Guide
 
-To make it easy to [try TiSpark](../tispark/tispark-user-guide.md), the TiDB cluster installed using TiDB-Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
+To make it easy to [try TiSpark](/tispark/tispark-user-guide.md), the TiDB cluster installed using TiDB-Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
 
 ## Deployment information
 
@@ -67,7 +68,9 @@ Run the script:
 ./sample_data.sh
 ```
 
-> **Note**: You need to install the MySQL client on the machine that runs the script. If you are a CentOS user, you can install it through the command `yum -y install mysql`.
+> **Note:**
+>
+> You need to install the MySQL client on the machine that runs the script. If you are a CentOS user, you can install it through the command `yum -y install mysql`.
 
 Log into TiDB and verify that the `TPCH_001` database and the following tables are included.
 

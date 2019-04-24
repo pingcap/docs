@@ -10,13 +10,15 @@ TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-le
 
 Similarly, functions such as `GET_LOCK()` and `RELEASE_LOCK()` and statements such as `SELECT .. FOR UPDATE` do not work in the same way as in MySQL.
 
-**Note:** On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
+**Note:**
+>
+> On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
 
 ## Differences from MySQL
 
 ### Transaction retry
 
-By default, transactions that fail may automatically be retried by TiDB, which may lead to lost updates. This feature can be disabled by setting both `tidb_disable_txn_auto_retry = TRUE` and `tidb_retry_limit = 0`.
+By default, transactions that fail may automatically be retried by TiDB, which may lead to lost updates. This feature can be disabled by setting `tidb_retry_limit = 0`.
 
 ### Large transactions
 

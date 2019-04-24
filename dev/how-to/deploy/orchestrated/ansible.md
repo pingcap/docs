@@ -1,7 +1,8 @@
 ---
 title: Deploy TiDB Using Ansible
 summary: Use Ansible to deploy a TiDB cluster.
-category: operations
+category: how-to
+aliases: ['/docs/op-guide/ansible-deployment/']
 ---
 
 # Deploy TiDB Using Ansible
@@ -18,14 +19,14 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology a
 
 - Initialize operating system parameters
 - Deploy the whole TiDB cluster
-- [Start the TiDB cluster](../op-guide/ansible-operation.md#start-a-cluster)
-- [Stop the TiDB cluster](../op-guide/ansible-operation.md#stop-a-cluster)
-- [Modify component configuration](../op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
-- [Scale the TiDB cluster](../op-guide/ansible-deployment-scale.md)
-- [Upgrade the component version](../op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
-- [Enable the cluster binlog](../tools/tidb-binlog-cluster.md)
-- [Clean up data of the TiDB cluster](../op-guide/ansible-operation.md#clean-up-cluster-data)
-- [Destroy the TiDB cluster](../op-guide/ansible-operation.md#destroy-a-cluster)
+- [Start the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
+- [Stop the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
+- [Modify component configuration](/op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
+- [Scale the TiDB cluster](/op-guide/ansible-deployment-scale.md)
+- [Upgrade the component version](/op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
+- [Enable the cluster binlog](/tools/tidb-binlog-cluster.md)
+- [Clean up data of the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
+- [Destroy the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
 
 ## Prepare
 
@@ -35,16 +36,20 @@ Before you start, make sure you have:
 
     - 4 or more machines
     
-        A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Requirements](../op-guide/recommendation.md).
+        A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md).
 
     - CentOS 7.3 (64 bit) or later, x86_64 architecture (AMD64)
     - Network between machines
 
-    > **Note:** When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](../op-guide/docker-compose.md) on a single machine.
+    > **Note:**
+    >
+    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/dev/how-to/get-started/local-cluster/install-from-docker-compose.md) on a single machine.
 
 2. A Control Machine that meets the following requirements:
 
-    > **Note:** The Control Machine can be one of the target machines.
+    > **Note:**
+    >
+    > The Control Machine can be one of the target machines.
 
     - CentOS 7.3 (64 bit) or later with Python 2.7 installed
     - Access to the Internet
@@ -128,15 +133,17 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. The relationship between the `tidb-ansible` version and the TiDB version is as follows:
 
     | TiDB version | tidb-ansible tag | Note |
-    | -------- | ---------------- | --- |
+    | :-------- | :---------------- | :--- |
     | 2.0 version | v2.0.10, v2.0.11 | It is the latest 2.0 stable version which can be used in the production environment. |
-    | 2.1 version | v2.1.1 ~ v2.1.6 | It is the latest 2.1 stable version which can be used in the production environment (recommended). |
+    | 2.1 version | v2.1.1 ~ v2.1.8 | It is the latest 2.1 stable version which can be used in the production environment (recommended). |
     | 3.0 version | v3.0.0-beta, v3.0.0-beta.1 | It is currently a beta version which is not recommended to use in the production environment. |
     | `master` branch | None | It includes the newest features and is updated on a daily basis, so it is not recommended to use it in the production environment. |
 
-2. Download the corresponding TiDB-Ansible versions from the [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+2. Download the [corresponding TiDB-Ansible versions](https://github.com/pingcap/tidb-ansible/tags) from the [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
-    > **Note:** It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
+    > **Note:**
+    >
+    > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
     
     - Download the tidb-ansible version with a specified tag:
     
@@ -150,7 +157,9 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
         $ git clone https://github.com/pingcap/tidb-ansible.git
         ```
 
-    > **Note:** It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
+    > **Note:**
+    >
+    > It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
     If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
 
@@ -210,7 +219,9 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
 
 ## Step 6: Install the NTP service on the target machines
 
-> **Note:** If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can ignore this step. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
+> **Note:**
+>
+> If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can ignore this step. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
 
 Make sure you have logged in to the Control Machine using the `tidb` user account, run the following command:
 
@@ -241,7 +252,9 @@ analyzing CPU 0:
 
 Taking the above code for example, the system supports the `performance` and `powersave` modes. 
 
-> **Note:** As the following shows, if it returns "Not Available", it means that the current system does not support CPUfreq configuration and you can skip this step.
+> **Note:**
+>
+> As the following shows, if it returns "Not Available", it means that the current system does not support CPUfreq configuration and you can skip this step.
 
 ```
 # cpupower frequency-info --governors
@@ -283,7 +296,9 @@ Log in to the target machines using the `root` user account.
 
 Format your data disks to the ext4 filesystem and mount the filesystem with the `nodelalloc` and `noatime` options. It is required to mount the `nodelalloc` option, or else the Ansible deployment cannot pass the test. The `noatime` option is optional.
 
-> **Note:** If your data disks have been formatted to ext4 and have mounted the options, you can uninstall it by running the `# umount /dev/nvme0n1` command, follow the steps starting from editing the `/etc/fstab` file, and remount the filesystem with options.
+> **Note:**
+>
+> If your data disks have been formatted to ext4 and have mounted the options, you can uninstall it by running the `# umount /dev/nvme0n1` command, follow the steps starting from editing the `/etc/fstab` file, and remount the filesystem with options.
 
 Take the `/dev/nvme0n1` data disk as an example:
 
@@ -352,13 +367,15 @@ Log in to the Control Machine using the `tidb` user account, and edit the `tidb-
 - Do not deploy TiKV together with TiDB or PD on the same machine.
 - Use the first TiDB machine as the monitoring machine.
 
-> **Note:** It is required to use the internal IP address to deploy. If the SSH port of the target machines is not the default 22 port, you need to add the `ansible_port` variable. For example, `TiDB1 ansible_host=172.16.10.1 ansible_port=5555`.
+> **Note:**
+>
+> It is required to use the internal IP address to deploy. If the SSH port of the target machines is not the default 22 port, you need to add the `ansible_port` variable. For example, `TiDB1 ansible_host=172.16.10.1 ansible_port=5555`.
 
 You can choose one of the following two types of cluster topology according to your scenario:
 
 - [The cluster topology of a single TiKV instance on each TiKV node](#option-1-use-the-cluster-topology-of-a-single-tikv-instance-on-each-tikv-node)
 
-    In most cases, it is recommended to deploy one TiKV instance on each TiKV node for better performance. However, if the CPU and memory of your TiKV machines are much better than the required in [Hardware and Software Requirements](../op-guide/recommendation.md), and you have more than two disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 TiKV instances on a single TiKV node.
+    In most cases, it is recommended to deploy one TiKV instance on each TiKV node for better performance. However, if the CPU and memory of your TiKV machines are much better than the required in [Hardware and Software Requirements](/dev/how-to/deploy/hardware-recommendations.md), and you have more than two disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 TiKV instances on a single TiKV node.
 
 - [The cluster topology of multiple TiKV instances on each TiKV node](#option-2-use-the-cluster-topology-of-multiple-tikv-instances-on-each-tikv-node)
 
@@ -505,7 +522,9 @@ The global variable is set to `/home/tidb/deploy` by default, and it applies to 
 deploy_dir = /data1/deploy
 ```
 
-**Note:** To separately set the deployment directory for a service, you can configure the host variable while configuring the service host list in the `inventory.ini` file. It is required to add the first column alias, to avoid confusion in scenarios of mixed services deployment.
+> **Note:**
+>
+> To separately set the deployment directory for a service, you can configure the host variable while configuring the service host list in the `inventory.ini` file. It is required to add the first column alias, to avoid confusion in scenarios of mixed services deployment.
 
 ```bash
 TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy
@@ -516,12 +535,12 @@ TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy
 To enable the following control variables, use the capitalized `True`. To disable the following control variables, use the capitalized `False`.
 
 | Variable Name | Description |
-| ---- | ------- |
+| :---- | :------- |
 | cluster_name | the name of a cluster, adjustable |
 | tidb_version | the version of TiDB, configured by default in TiDB-Ansible branches |
 | process_supervision | the supervision way of processes, systemd by default, supervise optional |
-| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](../sql/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
-| enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](../op-guide/recommendation.md#network-requirements) to the white list |
+| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/sql/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
+| enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](/dev/how-to/deploy/hardware-recommendations.md#network-requirements) to the white list |
 | enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
 | set_hostname | to edit the hostname of the managed node based on the IP, False by default |
 | enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
@@ -550,7 +569,9 @@ The following example uses `tidb` as the user who runs the service.
     ansible_user = tidb
     ```
 
-    > **Note:** Do not configure `ansible_user` to `root`, because `tidb-ansible` limits the user that runs the service to the normal user.
+    > **Note:**
+    >
+    > Do not configure `ansible_user` to `root`, because `tidb-ansible` limits the user that runs the service to the normal user.
 
     Run the following command and if all servers return `tidb`, then the SSH mutual trust is successfully configured:
 
@@ -582,7 +603,9 @@ The following example uses `tidb` as the user who runs the service.
     ansible-playbook deploy.yml
     ```
 
-    > **Note:** You can use the `Report` button on the Grafana Dashboard to generate the PDF file. This function depends on the `fontconfig` package and English fonts. To use this function, log in to the `grafana_servers` machine and install it using the following command:
+    > **Note:**
+    >
+    > You can use the `Report` button on the Grafana Dashboard to generate the PDF file. This function depends on the `fontconfig` package and English fonts. To use this function, log in to the `grafana_servers` machine and install it using the following command:
     >
     > ```
     > $ sudo yum install fontconfig open-sans-fonts
@@ -604,7 +627,9 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
     mysql -u root -h 172.16.10.1 -P 4000
     ```
 
-    > **Note**: The default port of TiDB service is 4000.
+    > **Note:**
+    >
+    > The default port of TiDB service is 4000.
 
 2. Access the monitoring platform using a web browser.
 
@@ -612,7 +637,9 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
     http://172.16.10.1:3000
     ```
 
-    > **Note**: The default account and password: `admin`/`admin`.
+    > **Note:**
+    >
+    > The default account and password: `admin`/`admin`.
 
 ## Deployment FAQs
 
@@ -680,7 +707,9 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
     polling server every 1024 s
     ```
 
-> **Note:** For the Ubuntu system, you need to install the `ntpstat` package.
+> **Note:**
+>
+> For the Ubuntu system, you need to install the `ntpstat` package.
 
 - The following condition indicates the NTP service is not synchronizing normally:
 
