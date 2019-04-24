@@ -31,7 +31,9 @@ In this command,
 - `-F 64`: means a table is partitioned into chunks and one chunk is 64MB.
 - `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
 
-> **Note**: On the Cloud platforms which require the `super privilege`, such as on the Amazon RDS, add the `--no-locks` parameter to the command. If not, you might get the error message that you don't have the privilege.
+> **Note:**
+>
+> On the Cloud platforms which require the `super privilege`, such as on the Amazon RDS, add the `--no-locks` parameter to the command. If not, you might get the error message that you don't have the privilege.
 
 ### Import data to TiDB
 

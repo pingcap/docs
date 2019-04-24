@@ -56,7 +56,9 @@ You can also download the binary manually. Use `wget` to download the binary and
 wget http://download.pingcap.org/tidb-v2.0.7-linux-amd64.tar.gz
 ```
 
-> **Note:** Remember to replace the version number in the download link with the one you need.
+> **Note:**
+>
+> Remember to replace the version number in the download link with the one you need.
 
 If you use `tidb-ansible` of the master branch, download the binary using the following command:
 
