@@ -1,6 +1,6 @@
 ---
 title: TiDB-Binlog Cluster User Guide
-summary: Learn how to deploy, operate, and monitor the cluster version of TiDB-Binlog.
+summary: Learn overview of the cluster version of TiDB-Binlog.
 category: tools
 ---
 # TiDB-Binlog Cluster User Guide

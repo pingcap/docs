@@ -1,6 +1,6 @@
 ---
 title: TiDB-Binlog Cluster deployment
-summary: Learn how to deploy, operate, and monitor the cluster version of TiDB-Binlog.
+summary: Learn how to deploy the cluster version of TiDB-Binlog.
 category: tools
 ---
 
