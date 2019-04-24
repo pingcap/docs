@@ -1,3 +1,10 @@
+---
+title: Support Resources
+summary: Find support resources for your TiDB installation.
+category: how-to
+aliases: ['/docs/support/']
+---
+
 # Support Resources
 
 You can reach out to the community members via any one of the following ways: 

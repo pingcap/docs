@@ -2,12 +2,12 @@
 title: Key Monitoring Metrics of PD
 summary: Learn some key metrics displayed on the Grafana PD dashboard.
 category: how-to
-aliases: ['']
+aliases: ['/docs/op-guide/dashboard-pd-info/']
 ---
 
 # Key Monitoring Metrics of PD
 
-If you use Ansible to deploy the TiDB cluster, the monitoring system is deployed at the same time. For more information, see [Overview of the Monitoring Framework](../op-guide/monitor-overview.md).
+If you use Ansible to deploy the TiDB cluster, the monitoring system is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/dev/how-to/monitor/overview.md).
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. A lot of metrics are there to help you diagnose.
 
