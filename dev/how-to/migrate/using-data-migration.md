@@ -2,6 +2,7 @@
 title: Data Migration Overview
 summary: Learn about the Data Migration tool, the architecture, the key components and features.
 category: how-to
+aliases: ['']
 ---
 
 # Data Migration Overview
