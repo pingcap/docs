@@ -2,7 +2,7 @@
 
 This tutorial will start with a very simple TiDB-Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, pump, and drainer), set up to push data into a MariaDB Server instance.
 
-This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](https://pingcap.com/docs/architecture/), who may have already set up a TiDB cluster (though that is not mandatory), and who wants to gain hands-on familiarity with the features and functionality of TiDB-Binlog. This tutorial is a good way to "kick the tires" of TiDB-Binlog and to familiarize yourself with the concepts of its architecture.
+This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](https://pingcap.com/docs/architecture/), who may have already set up a TiDB cluster (though that is not mandatory), and who wants to gain hands-on familiarity with the features and functionality of TiDB-Binlog. This tutorial is a good way to "kick the tires" of TiDB-Binlog and to familiarize yourself with the concepts of its architecture. The methodology used to deploy TiDB in this tutorial should **not** be used to deploy TiDB in a production or development setting.
 
 This tutorial assumes you're using a modern Linux distribution on x86-64. I'll use a minimal CentOS 7 installation running in VMware for the examples. It'll be easiest if you start from a clean install, so that you aren't impacted by quirks of your existing environment. If you don't want to use local virtualization, you can easily and inexpensively start a CentOS 7 VM in your favorite cloud provider.
 
@@ -36,18 +36,16 @@ sudo yum install -y mariadb-server
 Even if you've already started a TiDB cluster, it will be easier to follow along with this tutorial if you set up a new, very simple cluster. We will install from a tarball, using a simplified form of the [Local Deployment](https://pingcap.com/docs/op-guide/binary-local-deployment/) guide. You may also wish to consult [Testing Deployment from Binary Tarball](https://pingcap.com/docs/op-guide/binary-testing-deployment/) for best practices establishing a real testing deployment that goes beyond the scope of this tutorial.
 
 ```bash
-curl -LO http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
-tar xf tidb-latest-linux-amd64.tar.gz
+curl -L http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
 cd tidb-latest-linux-amd64
 ```
 
 Expect this output:
 ```
-[kolbe@localhost ~]$ curl -LO http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
+[kolbe@localhost ~]$ curl -LO http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  368M  100  368M    0     0  8394k      0  0:00:44  0:00:44 --:--:-- 11.1M
-[kolbe@localhost ~]$ tar xf tidb-latest-linux-amd64.tar.gz
 [kolbe@localhost ~]$ cd tidb-latest-linux-amd64
 [kolbe@localhost tidb-latest-linux-amd64]$
 ```
@@ -141,7 +139,7 @@ Expect this output:
 
 And if you execute `jobs`, you should see the list of running daemons:
 ```
-[kolbe@localhost tidb-latest-linux-amd64]$$ jobs
+[kolbe@localhost tidb-latest-linux-amd64]$ jobs
 [1]   Running                 ./bin/pd-server --config=pd.toml &>pd.out &
 [2]   Running                 ./bin/tikv-server --config=tikv.toml &>tikv.out &
 [3]-  Running                 ./bin/pump --config=pump.toml &>pump.out &
@@ -155,36 +153,21 @@ If one of the services has failed to start (if you see "`Exit 1`" instead of "`R
 You should have all 4 components of our TiDB Cluster running now, and you can now connect to the TiDB Server on port 4000 using the MariaDB/MySQL command-line client:
 
 ```bash
-mysql -h 127.0.0.1 -P 4000 -u root test
-```
-
-Print the TiDB version:
-```sql
-select tidb_version()\G
+mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
 ```
 
 Expect this output:
 ```
-[kolbe@localhost tidb-latest-linux-amd64]$ mysql -h 127.0.0.1 -P 4000 -u root test
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MySQL connection id is 3
-Server version: 5.7.25-TiDB-v3.0.0-beta.1-94-g5a34c4b9d MySQL Community Server (Apache License 2.0)
-
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-MySQL [test]> select tidb_version()\G
+[kolbe@localhost tidb-latest-linux-amd64]$ mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
 *************************** 1. row ***************************
-tidb_version(): Release Version: v3.0.0-beta.1-94-g5a34c4b9d
-Git Commit Hash: 5a34c4b9d2e9aebb2ba132745af5634a52cdefe8
+tidb_version(): Release Version: v3.0.0-beta.1-154-gd5afff70c
+Git Commit Hash: d5afff70cdd825d5fab125c8e52e686cc5fb9a6e
 Git Branch: master
-UTC Build Time: 2019-04-11 03:15:28
+UTC Build Time: 2019-04-24 03:10:00
 GoVersion: go version go1.12 linux/amd64
 Race Enabled: false
 TiKV Min Version: 2.1.0-alpha.1-ff3dd160846b7d1aed9079c389fc188f7f5ea13e
 Check Table Before Drop: false
-1 row in set (0.00 sec)
 ```
 
 At this point we have a TiDB Cluster running, and we have `pump` reading binary logs from the cluster and storing them as relay logs in its data directory. The next step is to start a MariaDB server that `drainer` can write to, and to start `drainer`:
@@ -242,7 +225,7 @@ MariaDB [tidb_binlog]> select * from checkpoint;
 1 row in set (0.00 sec)
 ```
 
-Now, let's open another client connection to the TiDB server, so that we can create a table and insert some rows into it. It's easiest to do this under GNU screen so you can keep multiple clients open at the same time.
+Now, let's open another client connection to the TiDB server, so that we can create a table and insert some rows into it. (It's easiest to do this under GNU screen so you can keep multiple clients open at the same time.)
 
 ```bash
 mysql -h 127.0.0.1 -P 4000 --prompt='TiDB [\d]> ' -u root
@@ -269,6 +252,18 @@ Query OK, 0 rows affected (0.11 sec)
 TiDB [tidbtest]> insert into t1 () values (),(),(),(),();
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
+
+TiDB [tidbtest]> select * from t1;
++----+
+| id |
++----+
+|  1 |
+|  2 |
+|  3 |
+|  4 |
+|  5 |
++----+
+5 rows in set (0.00 sec)
 ```
 
 Switching back to the MariaDB client, we should find the new database, new table, and the rows we've newly inserted:
@@ -357,6 +352,38 @@ There are 3 solutions to that issue:
     ```
     ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline
     ```
+
+## Cleanup
+
+To stop the TiDB cluster and TiDB-Binlog processes, you can execute `pkill -P $$` in the shell where you first started the various processes that form the cluster (pd-server, tikv-server, pump, tidb-server, drainer). To give them each time to shut down cleanly, it's helpful to stop them in a particular order:
+
+```bash
+for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1; done
+```
+
+Expect this output:
+```
+kolbe@localhost tidb-latest-linux-amd64]$ for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1; done
+[4]-  Done                    ./bin/tidb-server --config=tidb.toml &>tidb.out
+[5]+  Done                    ./bin/drainer --config=drainer.toml &>drainer.out
+[3]+  Done                    ./bin/pump --config=pump.toml &>pump.out
+[2]+  Done                    ./bin/tikv-server --config=tikv.toml &>tikv.out
+[1]+  Done                    ./bin/pd-server --config=pd.toml &>pd.out
+```
+
+If you wish to restart the cluster after all services exit, you can do so using the same commands you used originally to start the services. As discussed in the `binlogctl` section above, you'll need to start `drainer` before `pump` can start, and `pump` must start before `tidb-server` can start.
+
+```bash
+./bin/pd-server --config=pd.toml &>pd.out &
+./bin/tikv-server --config=tikv.toml &>tikv.out &
+./bin/drainer --config=drainer.toml &>drainer.out &
+sleep 3
+./bin/pump --config=pump.toml &>pump.out &
+sleep 3
+./bin/tidb-server --config=tidb.toml &>tidb.out &
+```
+
+If any of the components fail to start, try again to start the unsuccessful component(s).
 
 ## Conclusion
 
