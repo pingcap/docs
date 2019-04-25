@@ -10,7 +10,9 @@ TiDB supports both the MySQL wire protocol and the majority of its syntax. This 
 
 Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and mydumper/myloader.
 
-> **Note:** This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security Compatibility with MySQL](../sql/security-compatibility.md) and [Transaction Model](../sql/transaction-model.md) compatibility.
+> **Note:**
+>
+> This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security Compatibility with MySQL](../sql/security-compatibility.md) and [Transaction Model](../sql/transaction-model.md) compatibility.
 
 ## Unsupported features
 
@@ -66,6 +68,10 @@ In TiDB, auto-increment columns are only guaranteed to be incremental and unique
 
 Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
 
+### Query Execution Plan
+
+The output format of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is greatly different from that in MySQL. Besides, the output content and the privileges setting of `EXPLAIN FOR` are not the same as those of MySQL. See [Understand the Query Execution Plan](/sql/understanding-the-query-execution-plan.md) for more details.
+
 ### Built-in functions
 
 TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#FunctionCallKeyword) for the supported functions.
@@ -90,7 +96,9 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
     - Supports changing/modifying the types among the following string types: Char, Varchar, Text, TinyText, MediumText, LongText
     - Support changing/modifying the types among the following string types: Blob, TinyBlob, MediumBlob, LongBlob.
     
-        > **Note:** The changing/modifying column operation cannot make the length of the original type become shorter and it cannot change the unsigned/charset/collate attributes of the column.
+        > **Note:**
+        >
+        > The changing/modifying column operation cannot make the length of the original type become shorter and it cannot change the unsigned/charset/collate attributes of the column.
 
     - Supports changing the following type definitions: `default value`, `comment`, `null`, `not null` and `OnUpdate`.
     - Supports parsing the `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}` syntax, but there is no actual operation.
@@ -99,13 +107,9 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
 + Rename Table
 + Create Table Like
 
-### Database administration
-
-Many administrative statements in TiDB work as they do in MySQL, but there are some important differences:
+### Analyze table
 
 + [`ANALYZE TABLE`](/sql/statistics.md#manual-collection) works differently in TiDB than in MySQL, in that it is a relatively lightweight and short-lived operation in MySQL/InnoDB, while in TiDB it completely rebuilds the statistics for a table and can take much longer to complete.
-
-+ The output of the query execution plan returned from the `EXPLAIN` command differs from MySQL. For more information, see [Understand the Query Execution Plan](../sql/understanding-the-query-execution-plan.md).
     
 ### Storage engines
 

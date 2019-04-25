@@ -92,7 +92,7 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 #### Does TiDB support XA？
 
-No. The JDBC drive of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
+No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
 After you configure the two data sources of Atomikos, set the JDBC drives to XA. When Atomikos operates TM and RM (DB), Atomikos sends the command including XA to the JDBC layer. Taking MySQL for an example, when XA is enabled in the JDBC layer, JDBC will send a series of XA logic operations to InnoDB, including using DML to change the `redo` log. This is the operation of the two-phase commit. The current TiDB version does not support the upper application layer JTA/XA and does not parse XA operations sent by Atomikos.
 
@@ -1036,7 +1036,7 @@ It means full table scan but the table might be a small system table.
 
 #### What is the difference between `QPS` and `Statement OPS` in the monitor?
 
-The `QPS` statisctics is about all the SQL statements, including `use database`, `load data`, `begin`, `commit`, `set`, `show`, `insert` and `select`.
+The `QPS` statistics is about all the SQL statements, including `use database`, `load data`, `begin`, `commit`, `set`, `show`, `insert` and `select`.
 
 The `Statement OPS` statistics is only about applications related SQL statements, including `select`, `update` and `insert`, therefore the `Statement OPS` statistics matches the applications better.
 
@@ -1072,7 +1072,9 @@ The interval of `GC Life Time` is too short. The data that should have been read
 update mysql.tidb set variable_value='30m' where variable_name='tikv_gc_life_time';
 ```
 
-> **Note:** "30m" means only cleaning up the data generated 30 minutes ago, which might consume some extra storage space.
+> **Note:**
+>
+> "30m" means only cleaning up the data generated 30 minutes ago, which might consume some extra storage space.
 
 ### MySQL native error messages
 
