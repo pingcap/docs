@@ -38,7 +38,7 @@ To achieve the best performance, it is recommended to use the following hardware
 - `tikv-importer`:
 
     - 32+ logical cores CPU
-    - 32 GB+ memory
+    - 40 GB+ memory
     - 1 TB+ SSD, preferring higher IOPS (≥ 8000 is recommended)
         * The disk should be larger than the total size of the top N tables, where N = max(index-concurrency, table-concurrency).
     - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
@@ -50,6 +50,8 @@ If you have sufficient machines, you can deploy multiple Lightning/Importer serv
 > **Notes:**
 >
 > `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
+>
+> `tikv-importer` stores intermediate data on the RAM to speed up process. The typical memory usage can be calculated from configuration as **(`max-open-engine` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
 
 Additionally, the target TiKV cluster should have enough space to absorb the new data.
 Besides [the standard requirements](../../op-guide/recommendation.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](../../FAQ.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
@@ -231,6 +233,10 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     #stream-channel-window = 128
     # Maximum number of open engines.
     max-open-engines = 8
+    # minimum ratio of target store available space: store_available_space / store_capacity.
+    # Importer pauses uploading SST if the availability ratio of the target store is less than this
+    # value, to give PD enough time to balance regions.
+    min-available-ratio = 0.05
     ```
 
 3. Run `tikv-importer`.
@@ -265,7 +271,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # The sum of these two values must not exceed the max-open-engines setting
     # for tikv-importer.
     index-concurrency = 2
-    table-concurrency = 8
+    table-concurrency = 6
 
     # The concurrency number of data. It is set to the number of logical CPU
     # cores by default. When deploying together with other components, you can
