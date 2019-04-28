@@ -94,7 +94,6 @@ tidb > show create table INFORMATION_SCHEMA.SLOW_QUERY;
 +------------+-------------------------------------------------------------+
 ```
 
-#### Execution details
 
 The contents in `INFORMATION_SCHEMA.SLOW_QUERY` table is obtained after parsing at real-time the slow log in TiDB. Every time when you query this table, the contents in slow log file will be read and then parsed.  
 
