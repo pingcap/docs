@@ -211,7 +211,7 @@ $ pt-query-digest --report tidb-slow.log
 .
 ```
 
-### Identify problematic SQL statements
+## Identify problematic SQL statements
 
 Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large will increase the pressure on the entire cluster. 
 
