@@ -154,7 +154,7 @@ tidb > select query, query_time from INFORMATION_SCHEMA.`SLOW_QUERY` where diges
 2 rows in set
 ```
 
-## Query the slow query with pseudo metrics 
+## Query the slow query whose stats is pseudo
 
 ```sql
 tidb > select query, query_time, stats from INFORMATION_SCHEMA.`SLOW_QUERY` where is_internal=false and stats like('%pseudo%');
