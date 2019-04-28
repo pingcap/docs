@@ -39,7 +39,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 ### Fields description
 
 * `Time`: Indicates the print time of log.
-* `Txn_start_ts`: Indicates the start timestamp of the transaction, that is, the ID of the transaction. You can use this value to `grep` the transaction-related logs.
+* `Txn_start_ts`: The start timestamp of the transaction (transaction ID). You can use this value to `grep` the transaction-related logs.
 * `User`: Indicates the name of the user who executes this statement.
 * `Conn_ID`: Indicates the Connection ID (session ID). For example, you can use the keyword `con:3` to `grep` the log whose session ID is 3.
 * `Query_time`: Indicates the execution time of this statement. Only the statement whose execution time exceeds slow-threshold output this log (the unit is second). The unit of all the following time fields is second.
