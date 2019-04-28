@@ -183,7 +183,7 @@ Currently, `INFORMATION_SCHEMA.SLOW_QUERY` only supports parsing a slow log file
 
 #### Parse TiDB slow log with pt-query-digest
 
-TiDB slow log can be analysed by pt-query-digest, for example:
+You can analyze TiDB slow log with pt-query-digest. pt-query-digest 3.0.13 version or later is recommended. The examples are as followed:
 
 ```shell
 $ pt-query-digest --report tidb-slow.log
