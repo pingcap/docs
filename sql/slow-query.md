@@ -12,7 +12,7 @@ The slow log format has been modified in TiDB V2.1.8. See [this file](<https://g
 
 A problematic SQL statement can increase the pressure on the entire cluster, resulting in a longer response time. To solve this problem, you can use the slow query log to identify the problematic statements and thus improve the performance.
 
-### Obtain the log
+## Obtain the log
 
 The statement whose execution time exceeds [slow-threshold](../op-guide/tidb-config-file.md#slow-threshold) will be individually output to [slow-query-file](../op-guide/tidb-config-file.md#slow-query-file) in TiDB and be made compatible with the slow log. You can analyze directly the slow log file with `pt-query-digest`. You can edit `slow-threshold` in the configuration file and its default value is 300ms. `slow-query-file` is `tidb-slow.log` by default.
 
