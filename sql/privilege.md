@@ -166,7 +166,7 @@ To be more precise, you can check the privilege information in the `Grant` table
 You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGES` table.
 
 | Privilege type       |  Privilege variable    | Privilege description                 |
-| :------------: | :------------: | :----------------------: |
+| :------------ | :------------ | :---------------------- |
 | ALL            | AllPriv        | All the privileges                 |
 | Drop           | DropPriv       | Deletes a schema or table        |
 | Index          | IndexPriv      | Creates or deletes an index          |
