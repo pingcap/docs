@@ -132,7 +132,7 @@ mysql> CREATE TABLE `select` (id int);
 Query OK, 0 rows affected (0.27 sec)
 ```
 
-### Check privileges granted to user
+### Check privileges granted to users
 
 You can use the `SHOW GRANTS` statement to see what privileges are granted to a user. For example:
 
@@ -167,27 +167,27 @@ You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGE
 
 | Privilege type       |  Privilege variable    | Privilege description                 |
 | :------------ | :------------ | :---------------------- |
-| ALL            | AllPriv        | All the privileges                 |
-| Drop           | DropPriv       | Deletes a schema or table        |
-| Index          | IndexPriv      | Creates or deletes an index          |
-| Alter          | AlterPriv      | Executes the `ALTER` statement          |
-| Super          | SuperPriv      | All the privileges                 |
-| Grant          | GrantPriv      | Grants another user a privilege         |
-| Create         | CreatePriv     | Creates a schema or table        |
-| Select         | SelectPriv     | Reads the table data               |
-| Insert         | InsertPriv     | Inserts data to a table             |
-| Update         | UpdatePriv     | Updates the table data             |
-| Delete         | DeletePriv     | Deleted the table data             |
-| Trigger        | TriggerPriv    | /                 |
-| Process        | ProcessPriv    | Displays the running task       |
-| Execute        | ExecutePriv    | Executes the `EXECUTE` statement       |
-| Drop Role      | DropRolePriv   | Executes `DROP ROLE`           |
-| Show View      | ShowViewPriv   | Executes `SHOW CREATE VIEW`    |
-| References     | ReferencesPriv | /                |
-| Create View    | CreateViewPriv | Creates a View                 |
-| Create User    | CreateUserPriv | Creates a user                |
-| Create Role    | CreateRolePriv | Executes `CREATE ROLE`         |
-| Show Databases | ShowDBPriv     | Shows the table status in the database |
+| ALL            | `AllPriv`        | All the privileges                 |
+| Drop           | `DropPriv`      | Deletes a schema or table        |
+| Index          | `IndexPriv`      | Creates or deletes an index          |
+| Alter          | `AlterPriv`      | Executes the `ALTER` statement          |
+| Super          | `SuperPriv`      | All the privileges                 |
+| Grant          | `GrantPriv`      | Grants another user a privilege         |
+| Create         | `CreatePriv`     | Creates a schema or table        |
+| Select         | `SelectPriv`     | Reads the table data               |
+| Insert         | `InsertPriv`     | Inserts data to a table             |
+| Update         | `UpdatePriv`     | Updates the table data             |
+| Delete         | `DeletePriv`     | Deleted the table data             |
+| Trigger        | `TriggerPriv`    | /                 |
+| Process        | `ProcessPriv`    | Displays the running task       |
+| Execute        | `ExecutePriv`    | Executes the `EXECUTE` statement       |
+| Drop Role      | `DropRolePriv`   | Executes `DROP ROLE`           |
+| Show View      | `ShowViewPriv`   | Executes `SHOW CREATE VIEW`    |
+| References     | `ReferencesPriv` | /                |
+| Create View    | `CreateViewPriv` | Creates a View                 |
+| Create User    | `CreateUserPriv` | Creates a user                |
+| Create Role    | `CreateRolePriv` | Executes `CREATE ROLE`         |
+| Show Databases | `ShowDBPriv`     | Shows the table status in the database |
 
 ### ALTER
 
