@@ -65,7 +65,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Cop_wait_addr`: The address of the cop-task whose wait time is longest.
 * `Query`: Indicates a SQL statement. `Query` will not be printed in the slow log, but the corresponding field is called `Query` after the slow log mapping to the memory table.
 
-### Memory mapping in slow log
+## Memory mapping in slow log
 The contents of slow log in TiDB will be parsed and then mapped to `INFORMATION_SCHEMA.SLOW_QUERY` table to find slow log more conviently with SQL. The column names in the table can find their corresponded field recorded in slow log.
 
 ```sql
