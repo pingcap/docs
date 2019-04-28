@@ -60,8 +60,6 @@ The server hardware requirements for development, testing, and the production en
 ## Notes
 
 * You need to use TiDB v2.0.8-binlog, v2.1.0-rc.5 or a later version. Older versions of TiDB cluster are not compatible with the cluster version of TiDB-Binlog.
-* Make sure that the TiDB-Binlog service is enabled in all TiDB instances in a same cluster, otherwise upstream and downstream data inconsistency might occur during data synchronization. If you want to temporarily run a TiDB instance where the TiDB-Binlog service is not enabled, set `run_ddl=false` in the TiDB configuration file.
-
 * Drainer supports synchronizing binlogs to MySQL, TiDB, Kafka or local files. If you need to synchronize binlogs to other destinations, you can set Drainer to synchronize the binlog to Kafka and read the data in Kafka for customized processing. See [Binlog Slave Client User Guide](../binlog/binlog-slave-client.md).
 * To use TiDB-Binlog for recovering incremental data, set the downstream to `pb` (local files in the proto buffer format). Drainer converts the binlog to data in the specified proto buffer format and writes the data to local files. In this way, you can use [Reparo](../../tools/reparo.md) to recover data incrementally.
 * If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](../../tools/sync-diff-inspector.md) to verify the data after data synchronization.
