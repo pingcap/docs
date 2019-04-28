@@ -102,7 +102,7 @@ The contents in `INFORMATION_SCHEMA.SLOW_QUERY` table is obtained after parsing 
 
 The following example shows how to locate a slow query by querying the SLOW_QUERY table.
 
-#### Slow Query of quering TopN
+### Slow Query of quering TopN
 
 Query the slow query of users of Top2. `Is_internal=false` means to exclude slow queries inside TiDB, only to see slow queries from users.
 
