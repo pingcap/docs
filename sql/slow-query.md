@@ -180,7 +180,7 @@ Time: 0.001s
 
 Currently, `INFORMATION_SCHEMA.SLOW_QUERY` only supports parsing one single slow log file. If the slow log file which exceeds a certain size is logrotated into multiple files, querying `INFORMATION_SCHEMA.SLOW_QUERY` will only parse one file. We will improve this later.
 
-#### Parse TiDB slow log with pt-query-digest
+### Parse TiDB slow log with pt-query-digest
 
 You can analyze TiDB slow log with pt-query-digest. pt-query-digest 3.0.13 version or later is recommended. The examples are as followed:
 
