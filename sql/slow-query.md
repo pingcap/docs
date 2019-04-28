@@ -171,7 +171,7 @@ tidb > select query, query_time, stats from INFORMATION_SCHEMA.`SLOW_QUERY` wher
 
 #### Parse other TiDB slow log files
 
-Currently, query `INFORMATION_SCHEMA.SLOW_QUERY` will only parse the slow log file name set by `slow-query-file` in the configuration file, which is set to "tidb-slow.log" by default. But if you want to parse other log files, you can set the session variable `tidb_slow_query_file` to the specific file path, and then query INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow log file according to the set path.
+Currently, when you query `INFORMATION_SCHEMA.SLOW_QUERY` table, only this file will be parsed. This file corresponds to the slow query name set by `slow-query-file` in the configuration file and refers to "tidb-slow.log" by default. If you want to parse other log files, you can set the session variable `tidb_slow_query_file` to the specific file path, and then query INFORMATION_SCHEMA.SLOW_QUERY` table to parse the slow log file according to the set path.
 ```sql
 /* Set the slow log file path to facilitate so that other slow log files will be easy to be parsed. The scope of the tidb_slow_query_file variable is session. */
 tidb > set tidb_slow_query_file="/path-to-log/tidb-slow.log"
