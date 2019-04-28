@@ -19,6 +19,7 @@ Pump/Drainer state description:
 > **Notes:**
 >
 > * When Pump/Drainer is `pausing` or `paused`, the data synchronization is interrupted.
+> * Pump and Drainer have several states, including `online`, `paused`, and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `pausing` then finally turn to `paused` . There is no need for Pump to send all the binlog data to Drainer before it become `paused` while Pump need to send all the binlog data to Drainer before it become `offline` . If you need to exit from Pump for a long period of time (or are permanently removing Pump from the cluster), use `binlogctl` to make Pump offline. The same goes for Drainer.
 > * When Pump is `closing`, you need to guarantee that all the data has been consumed by all the Drainers that are not `offline`. So before making Pump offline, you need to guarantee all the Drainers are `online`; otherwise, Pump cannot get offline normally.
 > * The binlog data that Pump saves is processed by GC only when it has been consumed by all the Drainers that are not `offline`.
 > * Close Drainer only when it will not be used any more.
@@ -29,14 +30,14 @@ For how to pause, close, check, and modify the state of Drainer, see the [binlog
 
 [`binlogctl`](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/binlogctl) is an operations tool for TiDB-Binlog with the following features:
 
-* Obtaining the current `ts`
+* Obtaining the current `tso`
 * Checking the Pump/Drainer state
 * Modifying the Pump/Drainer state
 * Pausing or closing Pump/Drainer
 
 ### Usage scenarios of `binlogctl`
 
-* It is the first time you run Drainer and you need to obtain the current `ts`.
+* It is the first time you run Drainer and you need to obtain the current `tso`.
 * When Pump/Drainer exits abnormally, its state is not updated and the service is affected. You can use this tool to modify the state.
 * An error occurs during synchronization and you need to check the running status and the Pump/Drainer state.
 * While maintaining the cluster, you need to pause or close Pump/Drainer.
