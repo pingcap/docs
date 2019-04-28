@@ -36,7 +36,7 @@ The statement whose execution time exceeds [slow-threshold](../op-guide/tidb-con
 select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 ```
 
-### Fields description
+## Fields description
 
 * `Time`: The print time of log.
 * `Txn_start_ts`: The start timestamp of the transaction (transaction ID). You can use this value to `grep` the transaction-related logs.
