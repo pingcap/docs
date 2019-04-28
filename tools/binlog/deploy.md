@@ -148,11 +148,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
 
     This command outputs `meta: &{CommitTS:400962745252184065}`, and the value of `CommitTS` is used as the value of the `initial-commit-ts` parameter needed for the initial start of Drainer.
 
-2. Back up and restore all the data.
-
-    It is recommended to use [mydumper](../tools/mydumper.md) to make a full backup of TiDB and then use [Loader](../tools/loader.md) to export the data to the downstream. For more details, see [Backup and Restore](../op-guide/backup-restore.md).
-
-3. Modify the `tidb-ansible/inventory.ini` file.
+2. Modify the `tidb-ansible/inventory.ini` file.
 
     Add the deployment machine IPs for `drainer_servers`. Set `initial_commit_ts` to the value you have obtained, which is only used for the initial start of Drainer.
 
@@ -163,14 +159,14 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         drainer_mysql ansible_host=172.16.10.71 initial_commit_ts="402899541671542785"
         ```
 
-    - Assume that the downstream is `pb` with the alias `drainer_pb`:
+    - Assume that the downstream is `file` with the alias `drainer_pb`:
 
         ```ini
         [drainer_servers]
         drainer_pb ansible_host=172.16.10.71 initial_commit_ts="402899541671542785"
         ```
 
-4. Modify the configuration file.
+3. Modify the configuration file.
 
     - Assume that the downstream is MySQL:
 
@@ -186,7 +182,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
 
         ```toml
         # downstream storage, equal to --dest-db-type
-        # Valid values are "mysql", "pb", "kafka", and "flash".
+        # Valid values are "mysql", "file", "kafka", and "flash".
         db-type = "mysql"
 
         # the downstream MySQL protocol database
@@ -200,7 +196,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         # size-limit = "100000"
         ```
 
-    - Assume that the downstream is `pb`:
+    - Assume that the downstream is incremental backup data:
 
         ```bash
         $ cd /home/tidb/tidb-ansible/conf
@@ -208,15 +204,15 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         $ vi drainer_pb_drainer.toml
         ```
 
-        Set `db-type` to `pb`.
+        Set `db-type` to `file`.
 
         ```toml
         # downstream storage, equal to --dest-db-type
-        # Valid values are "mysql", "pb", "kafka", and "flash".
-        db-type = "pb"
+        # Valid values are "mysql", "file", "kafka", and "flash".
+        db-type = "file"
 
-        # Uncomment this if you want to use `pb` or `sql` as `db-type`.
-        # `Compress` compresses the output file, like the `pb` and `sql` file. Now it supports the `gzip` algorithm only. 
+        # Uncomment this if you want to use `file` or `sql` as `db-type`.
+        # `Compress` compresses the output file, like the `file` and `sql` file. Now it supports the `gzip` algorithm only. 
         # The value can be `gzip`. Leave it empty to disable compression. 
         [syncer.to]
         compression = ""
@@ -224,13 +220,13 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         dir = "data.drainer"
         ```
 
-5. Deploy Drainer.
+4. Deploy Drainer.
 
     ```bash
     $ ansible-playbook deploy_drainer.yml
     ```
 
-6. Start Drainer.
+5. Start Drainer.
 
     ```bash
     $ ansible-playbook start_drainer.yml
@@ -368,7 +364,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
             the directory where the Drainer data is stored ("data.drainer" by default)
         -dest-db-type string
             the downstream service type of Drainer
-            The value can be "mysql", "kafka", "pb", and "flash". ("mysql" by default)
+            The value can be "mysql", "kafka", "file", and "flash". ("mysql" by default)
         -detect-interval int
             the interval of checking the online Pump in PD (10 by default, in seconds)
         -disable-detect
@@ -440,7 +436,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         disable-dispatch = false
 
         # the downstream service type of Drainer ("mysql" by default)
-        # Valid value: "mysql", "kafka", "pb", "flash"
+        # Valid value: "mysql", "kafka", "file", "flash"
         db-type = "mysql"
 
         # the db filter list ("INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql,test" by default)
@@ -473,7 +469,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         password = ""
         port = 3306
 
-        # the directory where the binlog file is stored when `db-type` is set to `pb`
+        # the directory where the binlog file is stored when `db-type` is set to `file`
         # [syncer.to]
         # dir = "data.drainer"
 
@@ -512,7 +508,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 ## Notes
 * When TiDB is running, you need to guarantee that at least one Pump is running normally.
-* To enable the TiDB-Binlog service in TiDB server, use the -enable-binlog startup parameter in TiDB, or add enable=true to the [binlog] section of the TiDB server configuration file.
+* To enable the TiDB-Binlog service in TiDB server, use the `-enable-binlog` startup parameter in TiDB, or add enable=true to the [binlog] section of the TiDB server configuration file.
 * Make sure that the TiDB-Binlog service is enabled in all TiDB instances in a same cluster, otherwise upstream and downstream data inconsistency might occur during data synchronization. If you want to temporarily run a TiDB instance where the TiDB-Binlog service is not enabled, set `run_ddl=false` in the TiDB configuration file.
 * Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
 * If you want to start Drainer in an existing TiDB cluster, generally you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to synchronize the incremental data from `savepoint`.

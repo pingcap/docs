@@ -6,7 +6,7 @@ category: tools
 
 # Binlog Slave Client User Guide
 
-Binlog Slave Client is used to parse the binlog data and output the data in a specific format to Kafka. Currently, Drainer supports outputting data in multiple formats including MySQL, TiDB, TheFlash, and file. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced. After data is output to Kafka, the user writes code to read data from Kafka and then processes the data.
+Binlog Slave Client is used to parse the binlog data and output the data in a specific format to Kafka. Currently, Drainer supports outputting data in multiple formats including MySQL, TiDB, and file. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced. After data is output to Kafka, the user writes code to read data from Kafka and then processes the data.
 
 ## Configure Drainer
 
@@ -87,9 +87,9 @@ message TableMutation {
   optional Row change_row = 3;
 }
 
-// `DMLData` stores all the mutations caused by DML in a table.
+// `DMLData` stores all the mutations caused by DML in a transaction.
 message DMLData {
-  // `tables` contains all the table changes.
+  // `tables` contains all the table changes in the transaction.
   repeated Table tables = 1;
 }
 
@@ -113,7 +113,6 @@ enum BinlogType {
 message Binlog {
   optional BinlogType type = 1 [ (gogoproto.nullable) = false ];
   optional int64 commit_ts = 2 [ (gogoproto.nullable) = false ];
-  // `dml_data` is marshalled from the DML type.
   optional DMLData dml_data = 3;
   optional DDLData ddl_data = 4;
 }

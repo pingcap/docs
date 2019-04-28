@@ -11,10 +11,10 @@ category: tools
 Pump/Drainer state description:
 
 * `online`: running normally.
-* `pausing`: in the pausing process. It turns into this state after you use `kill` or press Ctrl + C to exit from the process.
+* `pausing`: in the pausing process. It turns into this state after you use `kill` or press Ctrl + C to exit from the process; When Pump/Drainer exits all internal threads in safe, it becomes `paused`.
 * `paused`: has been stopped. While Pump is in this state, it rejects the request of writing binlog into it and does not provide the binlog for Drainer any more. When Drainer is in this state, it does not synchronize data to the downstream. After Pump and Drainer exit normally from all the threads, they switch the state to `paused` and then exits from the process.
 * `closing`: in the offline process. `binlogctl` is used to get Pump/Drainer offline and Pump/Drainer is in this state before the process exits. In this state, Pump does not accept new requests of writing binlog into it and waits for all the binlog data to be used up by Drainer.
-* `offline`: becomes offline. After Pump sents all the binlog data that it saves to Drainer, its state is switched to `offline`. Drainer's state can be switched to `offline` after all the threads have exited.
+* `offline`: becomes offline. After Pump sents all the binlog data that it saves to Drainer, its state is switched to `offline`.
 
 > **Notes:**
 >
@@ -30,14 +30,14 @@ For how to pause, close, check, and modify the state of Drainer, see the [binlog
 
 [`binlogctl`](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/binlogctl) is an operations tool for TiDB-Binlog with the following features:
 
-* Obtaining the current `tso`
+* Obtaining the current `tso` of TiDB cluster
 * Checking the Pump/Drainer state
 * Modifying the Pump/Drainer state
 * Pausing or closing Pump/Drainer
 
 ### Usage scenarios of `binlogctl`
 
-* It is the first time you run Drainer and you need to obtain the current `tso`.
+* It is the first time you run Drainer and you need to obtain the current `tso` of TiDB cluster.
 * When Pump/Drainer exits abnormally, its state is not updated and the service is affected. You can use this tool to modify the state.
 * An error occurs during synchronization and you need to check the running status and the Pump/Drainer state.
 * While maintaining the cluster, you need to pause or close Pump/Drainer.
