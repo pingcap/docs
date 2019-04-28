@@ -60,7 +60,7 @@ Configuration about log.
 ### `slow-query-file`
 
 - The file name of the slow query log
-- Default: "tidb-slow.log".
+- Default: "tidb-slow.log"
 - The format of slow log is updated in TiDB V2.1.8, so the slow log is output to slow log file separatly. In versions before V2.1.8, this variable is set to "" by default.
 - After you set it, the slow query log is output to this file separately
 
