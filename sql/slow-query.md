@@ -16,7 +16,7 @@ A problematic SQL statement can increase the pressure on the entire cluster, res
 
 The statement whose execution time exceeds [slow-threshold](../op-guide/tidb-config-file.md#slow-threshold) will be individually output to [slow-query-file](../op-guide/tidb-config-file.md#slow-query-file) in TiDB and be made compatible with the slow log. You can analyze directly the slow log file with `pt-query-digest`. You can edit `slow-threshold` in the configuration file and its default value is 300ms. `slow-query-file` is `tidb-slow.log` by default.
 
-### Usage example
+## Usage example
 
 ```sql
 # Time: 2019-03-18-12:10:19.513961 +0800
