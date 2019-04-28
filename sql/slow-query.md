@@ -133,7 +133,7 @@ Time: 0.014s
 ```
 
 #### Query slow queries like SQL based on SQL fingerprints
-If you want to query the same SQL fingerprint query after querying TopN's SQL, you can use the fingerprint as the filter condition.
+If you want to query the slow query with the same SQL fingerprint query after querying TopN's SQL statements, you can use the fingerprint as the filter condition.
 
 ```sql
 tidb > select query_time, query,digest from INFORMATION_SCHEMA.`SLOW_QUERY` where `Is_internal`=false order by `Query_time` desc limit 1;
