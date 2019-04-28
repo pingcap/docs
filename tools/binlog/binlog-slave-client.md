@@ -6,7 +6,7 @@ category: tools
 
 # Binlog Slave Client User Guide
 
-Binlog Slave Client is used to parse the binlog data and output the data in a specific format to Kafka. Currently, Drainer supports outputting data in multiple formats including MySQL, TiDB, TheFlash, and pb. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced. After data is output to Kafka, the user writes code to read data from Kafka and then processes the data.
+Binlog Slave Client is used to parse the binlog data and output the data in a specific format to Kafka. Currently, Drainer supports outputting data in multiple formats including MySQL, TiDB, TheFlash, and file. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced. After data is output to Kafka, the user writes code to read data from Kafka and then processes the data.
 
 ## Configure Drainer
 
@@ -53,7 +53,7 @@ message ColumnInfo {
   // https://dev.mysql.com/doc/refman/8.0/en/data-types.html
   // for the `numeric` type: int bigint smallint tinyint float double decimal bit
   // for the `string` type: text longtext mediumtext char tinytext varchar
-  // blob longblog mediumblog binary tinyblob varbinary
+  // blob longblob mediumblob binary tinyblob varbinary
   // enum set
   // for the `json` type: json
   optional string mysql_type = 2 [ (gogoproto.nullable) = false ];
@@ -134,6 +134,7 @@ You need to configure the following information when using Driver:
 * `CommitTS`: from which `commit ts` to start reading the binlog
 * `Offset`: from which Kafka `offset` to start reading data. If `CommitTS` is set, you needn't configure this parameter
 * `ClusterID`: the cluster ID of the TiDB cluster
+* `Topic`: topic name of kafka, if Topic is empty, use the default name in drainer <ClusterID>_obinlog
 
 You can use Driver by quoting the Driver code in package and refer to the example code provided by Driver to learn how to use Driver and parse the binlog data. 
 
