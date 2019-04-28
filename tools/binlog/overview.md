@@ -60,11 +60,8 @@ The server hardware requirements for development, testing, and the production en
 ## Notes
 
 * You need to use TiDB v2.0.8-binlog, v2.1.0-rc.5 or a later version. Older versions of TiDB cluster are not compatible with the cluster version of TiDB-Binlog.
-* When TiDB is running, you need to guarantee that at least one Pump is running normally.
-* To enable the TiDB-Binlog service in TiDB server, use the `-enable-binlog` startup parameter in TiDB, or add `enable=true` to the `[binlog]` section of the TiDB server configuration file.
 * Make sure that the TiDB-Binlog service is enabled in all TiDB instances in a same cluster, otherwise upstream and downstream data inconsistency might occur during data synchronization. If you want to temporarily run a TiDB instance where the TiDB-Binlog service is not enabled, set `run_ddl=false` in the TiDB configuration file.
-* Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
-* If you want to start Drainer in an existing TiDB cluster, generally you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to synchronize the incremental data from `savepoint`.
+
 * Drainer supports synchronizing binlogs to MySQL, TiDB, Kafka or local files. If you need to synchronize binlogs to other destinations, you can set Drainer to synchronize the binlog to Kafka and read the data in Kafka for customized processing. See [Binlog Slave Client User Guide](../binlog/binlog-slave-client.md).
 * To use TiDB-Binlog for recovering incremental data, set the downstream to `pb` (local files in the proto buffer format). Drainer converts the binlog to data in the specified proto buffer format and writes the data to local files. In this way, you can use [Reparo](../../tools/reparo.md) to recover data incrementally.
 * Pump and Drainer have several states, including `online`, `paused`, and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `paused`. The paused Pump do not need to send all the binlog data to Drainer. If you need to exit from Pump for a long period of time (or are permanently removing Pump from the cluster), use `binlogctl` to make Pump offline. The same goes for Drainer.

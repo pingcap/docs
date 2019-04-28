@@ -1,5 +1,5 @@
 ---
-title: TiDB-Binlog Cluster deployment
+title: TiDB-Binlog deployment
 summary: Learn how to deploy the cluster version of TiDB-Binlog.
 category: tools
 ---
@@ -65,22 +65,22 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         172.16.10.74
         ```
 
-        Pump retains the data of the latest 5 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file and remove the related comments. Take modifying the variable value to 7 as an example:
-
+        Pump retains the data of the latest 7 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file and remove the related comments: 
+        
         ```yaml
         global:
           # an integer value to control the expiry date of the binlog data, which indicates for how long (in days) the binlog data would be stored
           # must be bigger than 0
-          gc: 7
+          # gc: 7
         ```
 
-        Make sure the space of the deployment directory is sufficient for storing Binlog. For more details, see [Configure the deployment directory](../op-guide/ansible-deployment.md#configure-the-deployment-directory). You can also set a separate deployment directory for Pump.
+        Make sure the space of the deployment directory is sufficient for storing Binlog. For more details, see [Configure the deployment directory](../../dev/how-to/deploy/orchestrated/ansible.md#configure-the-deployment-directory). You can also set a separate deployment directory for Pump.
 
         ```ini
         ## Binlog Part
         [pump_servers]
         pump1 ansible_host=172.16.10.72 deploy_dir=/data1/pump
-        pump2 ansible_host=172.16.10.73 deploy_dir=/data1/pump
+        pump2 ansible_host=172.16.10.73 deploy_dir=/data2/pump
         pump3 ansible_host=172.16.10.74 deploy_dir=/data1/pump
         ```
 
@@ -116,7 +116,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
 
     **Method #2**: Deploy a TiDB cluster containing Pump from scratch.
 
-    For how to use Ansible to deploy the TiDB cluster, see [Deploy TiDB Using Ansible](../op-guide/ansible-deployment.md).
+    For how to use Ansible to deploy the TiDB cluster, see [Deploy TiDB Using Ansible](../../dev/how-to/deploy/orchestrated/ansible.md).
 
 3. Check the Pump status.
 
@@ -509,3 +509,9 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         ```
 
     - TiDB server will obtain the addresses of registered Pumps from PD and will stream data to all of them. If there are no registered Pump instances, TiDB server will refuse to start or will block starting until a Pump instance comes online.
+
+## Notes
+* When TiDB is running, you need to guarantee that at least one Pump is running normally.
+* To enable the TiDB-Binlog service in TiDB server, use the `-enable-binlog` startup parameter in TiDB, or add `enable=true` to the `[binlog]` section of the TiDB server configuration file.
+* Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
+* If you want to start Drainer in an existing TiDB cluster, generally you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to synchronize the incremental data from `savepoint`.
