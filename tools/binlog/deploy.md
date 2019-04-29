@@ -81,7 +81,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         [pump_servers]
         pump1 ansible_host=172.16.10.72 deploy_dir=/data1/pump
         pump2 ansible_host=172.16.10.73 deploy_dir=/data2/pump
-        pump3 ansible_host=172.16.10.74 deploy_dir=/data1/pump
+        pump3 ansible_host=172.16.10.74 deploy_dir=/data3/pump
         ```
 
 2. Deploy and start the TiDB cluster containing Pump.
