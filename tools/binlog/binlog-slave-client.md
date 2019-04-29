@@ -1,6 +1,6 @@
 ---
 title: Binlog Slave Client User Guide
-summary: Use Binglog Slave Client to parse the binlog data and output the data in a specific format to Kafka.
+summary: Use Binlog Slave Client to consume TiDB slave binlog data from Kafka and output the data in a specific format.
 category: tools
 ---
 
