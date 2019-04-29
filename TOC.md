@@ -199,7 +199,7 @@
       - [Monitor](tools/lightning/monitor.md)
     + TiDB-Binlog
       - [Overview](tools/binlog/overview.md)
-      - [Deployment](tools/binlog/deploy.md)
+      - [Deploy](tools/binlog/deploy.md)
       - [Monitor](tools/binlog/monitor.md)
       - [Operation](tools/binlog/operation.md)
       - [Upgrade](tools/binlog/upgrade.md)
