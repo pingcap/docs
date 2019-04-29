@@ -19,7 +19,7 @@ TiDB-Binlog supports the following scenarios:
 
 The TiDB-Binlog architecture is as follows:  
 
-![TiDB-Binlog architecture](../../media/architecture.jpeg) 
+![TiDB-Binlog architecture](media/architecture.jpeg) 
 
 The TiDB-Binlog cluster mainly consists of two components:  
 
@@ -65,7 +65,7 @@ TiDB-Binlog can be [downloaded](../../tools/download.md) as part of the Enterpri
   
   We set the startup parameter `binlog-socket` as the specified unix socket file path of the corresponding parameter `socket` in Pump. The final deployment architecture is as follows:  
   
-  ![TiDB pump deployment architecture](../../media/tidb_pump_deployment.jpeg)  
+  ![TiDB pump deployment architecture](media/tidb_pump_deployment.jpeg)  
    
 - Currently, you need to deploy Drainer manually.
 

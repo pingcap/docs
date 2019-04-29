@@ -159,11 +159,11 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         drainer_mysql ansible_host=172.16.10.71 initial_commit_ts="402899541671542785"
         ```
 
-    - Assume that the downstream is `file` with the alias `drainer_pb`:
+    - Assume that the downstream is `file` with the alias `drainer_file`:
 
         ```ini
         [drainer_servers]
-        drainer_pb ansible_host=172.16.10.71 initial_commit_ts="402899541671542785"
+        drainer_file ansible_host=172.16.10.71 initial_commit_ts="402899541671542785"
         ```
 
 3. Modify the configuration file.
@@ -192,16 +192,14 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         password = "123456"
         port = 3306
         # Time and size limits for flash batch write
-        # time-limit = "30s"
-        # size-limit = "100000"
         ```
 
     - Assume that the downstream is incremental backup data:
 
         ```bash
         $ cd /home/tidb/tidb-ansible/conf
-        $ cp drainer.toml drainer_pb_drainer.toml
-        $ vi drainer_pb_drainer.toml
+        $ cp drainer.toml drainer_file_drainer.toml
+        $ vi drainer_file_drainer.toml
         ```
 
         Set `db-type` to `file`.
@@ -211,11 +209,9 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         # Valid values are "mysql", "file", "kafka", and "flash".
         db-type = "file"
 
-        # Uncomment this if you want to use `file` or `sql` as `db-type`.
-        # `Compress` compresses the output file, like the `file` and `sql` file. Now it supports the `gzip` algorithm only. 
+        # Uncomment this if you want to use `file` as `db-type`. 
         # The value can be `gzip`. Leave it empty to disable compression. 
         [syncer.to]
-        compression = ""
         # default data directory: "{{ deploy_dir }}/data.drainer"
         dir = "data.drainer"
         ```
@@ -239,11 +235,11 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
 Run the following commands to download the packages:
 
 ```bash
-version=v2.1.8 # or "latest" for nightly builds
-wget https://download.pingcap.org/tidb-$version-linux-amd64.{tar.gz,sha256}
+version="latest" for nightly builds
+wget https://download.pingcap.org/tidb-latest-linux-amd64.{tar.gz,sha256}
 
 # Check the file integrity. If the result is OK, the file is correct.
-sha256sum -c tidb-$version-linux-amd64.sha256
+sha256sum -c tidb-latest-linux-amd64.sha256
 ```
 
 For TiDB v2.1.0 GA or later versions, Pump and Drainer are already included in the TiDB download package. For other TiDB versions, you need to download Pump and Drainer separately using the following command:
@@ -289,8 +285,6 @@ The following part shows how to use Pump and Drainer based on the nodes above.
             the path of the configuration file. If you specify the configuration file, Pump reads the configuration in the configuration file first. If the corresponding configuration also exits in the command line parameters, Pump uses the configuration of the command line parameters to cover that of the configuration file.
         -data-dir string
             the path where the Pump data is stored
-        -enable-tolerant
-            After `tolerant` is enabled, Pump (enabled by default) does not report an error if the binlog fails to write into Pump.
         -gc int
             the number of days to retain the data in Pump (7 by default)
         -heartbeat-interval int

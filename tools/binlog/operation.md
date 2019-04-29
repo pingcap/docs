@@ -11,7 +11,7 @@ category: tools
 Pump/Drainer state description:
 
 * `online`: running normally.
-* `pausing`: in the pausing process. It turns into this state after you use `kill` or press Ctrl + C to exit from the process; When Pump/Drainer exits all internal threads in safe, it becomes `paused`.
+* `pausing`: in the pausing process. It turns into this state after you use `kill` or press Ctrl + C to exit from the process. When Pump/Drainer exits all internal threads in safe, it becomes `paused`.
 * `paused`: has been stopped. While Pump is in this state, it rejects the request of writing binlog into it and does not provide the binlog for Drainer any more. When Drainer is in this state, it does not synchronize data to the downstream. After Pump and Drainer exit normally from all the threads, they switch the state to `paused` and then exits from the process.
 * `closing`: in the offline process. `binlogctl` is used to get Pump/Drainer offline and Pump/Drainer is in this state before the process exits. In this state, Pump does not accept new requests of writing binlog into it and waits for all the binlog data to be used up by Drainer.
 * `offline`: becomes offline. After Pump sents all the binlog data that it saves to Drainer, its state is switched to `offline`.
@@ -20,7 +20,7 @@ Pump/Drainer state description:
 >
 > * When Pump/Drainer is `pausing` or `paused`, the data synchronization is interrupted.
 > * Pump and Drainer have several states, including `online`, `paused`, and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `pausing` then finally turn to `paused` . There is no need for Pump to send all the binlog data to Drainer before it become `paused` while Pump need to send all the binlog data to Drainer before it become `offline` . If you need to exit from Pump for a long period of time (or are permanently removing Pump from the cluster), use `binlogctl` to make Pump offline. The same goes for Drainer.
-> * When Pump is `closing`, you need to guarantee that all the data has been consumed by all the Drainers that are not `offline`. So before making Pump offline, you need to guarantee all the Drainers are `online`; otherwise, Pump cannot get offline normally.
+> * When Pump is `closing`, you need to guarantee that all the data has been consumed by all the Drainers that are not `offline`. So before making Pump offline, you need to guarantee all the Drainers are `online`. Otherwise, Pump cannot get offline normally.
 > * The binlog data that Pump saves is processed by GC only when it has been consumed by all the Drainers that are not `offline`.
 > * Close Drainer only when it will not be used any more.
 
