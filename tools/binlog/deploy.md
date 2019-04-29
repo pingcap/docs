@@ -176,7 +176,9 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         $ vi drainer_mysql_drainer.toml
         ```
 
-        > **Note:** Name the configuration file as `alias_drainer.toml`. Otherwise, the customized configuration file cannot be found during the deployment process.
+        > **Note:**
+        >
+        > Name the configuration file as `alias_drainer.toml`. Otherwise, the customized configuration file cannot be found during the deployment process.
         
         Set `db-type` to `mysql` and configure the downstream MySQL information:
 
