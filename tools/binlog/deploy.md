@@ -482,7 +482,9 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
     - Starting Drainer:
 
-        > **Note:** If the downstream is MySQL/TiDB, to guarantee the data integrity, you need to obtain the `initial-commit-ts` value and make a full backup of the data and restore the data before the initial start of Drainer. For details, see [Deploy Drainer](#step-3-deploy-drainer).
+        > **Note:**
+        >
+        > If the downstream is MySQL/TiDB, to guarantee the data integrity, you need to obtain the `initial-commit-ts` value and make a full backup of the data and restore the data before the initial start of Drainer. For details, see [Deploy Drainer](#step-3-deploy-drainer).
 
         When Drainer is started for the first time, use the `initial-commit-ts` parameter.
 
