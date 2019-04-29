@@ -9,7 +9,9 @@ aliases: ['/docs/op-guide/ansible-deployment-scale/']
 
 The capacity of a TiDB cluster can be increased or decreased without affecting the online services.
 
-> **Warning:** In decreasing the capacity, if your cluster has a mixed deployment of other services, do not perform the following procedures. The following examples assume that the removed nodes have no mixed deployment of other services.
+> **Warning:**
+>
+> In decreasing the capacity, if your cluster has a mixed deployment of other services, do not perform the following procedures. The following examples assume that the removed nodes have no mixed deployment of other services.
 
 Assume that the topology is as follows:
 
