@@ -43,6 +43,6 @@ Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 
 ## See also
 
-* [INSERT](insert.md)
+* [INSERT](/dev/reference/sql/statements/insert.md)
 * [Transaction Model](/sql/transaction-model.md)
 * [Import Example Database](/bikeshare-example-database.md)

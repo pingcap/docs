@@ -57,7 +57,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [INSERT](insert.md)
-* [SELECT](select.md)
-* [UPDATE](update.md)
-* [REPLACE](replace.md)
+* [INSERT](/dev/reference/sql/statements/insert.md)
+* [SELECT](/dev/reference/sql/statements/select.md)
+* [UPDATE](/dev/reference/sql/statements/update.md)
+* [REPLACE](/dev/reference/sql/statements/replace.md)

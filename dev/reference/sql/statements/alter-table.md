@@ -8,8 +8,8 @@ category: reference
 
 This statement modifies an existing table to conform to a new table structure. The statement `ALTER TABLE` can be used to:
 
-* [`ADD`](add-index.md), [`DROP`](drop-index.md), or [`RENAME`](rename-index.md) indexes
-* [`ADD`](add-column.md), [`DROP`](drop-column.md), [`MODIFY`](modify-column.md) or [`CHANGE`](change-column.md) columns
+* [`ADD`](/dev/reference/sql/statements/add-index.md), [`DROP`](/dev/reference/sql/statements/drop-index.md), or [`RENAME`](/dev/reference/sql/statements/rename-index.md) indexes
+* [`ADD`](/dev/reference/sql/statements/add-column.md), [`DROP`](/dev/reference/sql/statements/drop-column.md), [`MODIFY`](/dev/reference/sql/statements/modify-column.md) or [`CHANGE`](/dev/reference/sql/statements/change-column.md) columns
 
 ## Synopsis
 
@@ -65,12 +65,12 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## See also
 
-* [ADD COLUMN](add-column.md)
-* [DROP COLUMN](drop-column.md)
-* [RENAME COLUMN](rename-column.md)
-* [ADD INDEX](add-index.md)
-* [DROP INDEX](drop-index.md)
-* [RENAME INDEX](rename-index.md)
-* [CREATE TABLE](create-table.md)
-* [DROP TABLE](drop-table.md)
-* [SHOW CREATE TABLE](show-create-table.md)
+* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
+* [DROP COLUMN](/dev/reference/sql/statements/drop-column.md)
+* [RENAME COLUMN](/dev/reference/sql/statements/rename-column.md)
+* [ADD INDEX](/dev/reference/sql/statements/add-index.md)
+* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
+* [RENAME INDEX](/dev/reference/sql/statements/rename-index.md)
+* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
+* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
+* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)

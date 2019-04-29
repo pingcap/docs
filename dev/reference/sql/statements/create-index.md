@@ -90,9 +90,9 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## See also
 
-* [ADD INDEX](add-index.md)
-* [DROP INDEX](drop-index.md)
-* [RENAME INDEX](rename-index.md)
-* [ADD COLUMN](add-column.md)
-* [CREATE TABLE](create-table.md)
-* [EXPLAIN](explain.md)
+* [ADD INDEX](/dev/reference/sql/statements/add-index.md)
+* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
+* [RENAME INDEX](/dev/reference/sql/statements/rename-index.md)
+* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
+* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
+* [EXPLAIN](/dev/reference/sql/statements/explain.md)

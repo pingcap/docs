@@ -41,5 +41,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [EXECUTE](execute.md)
-* [DEALLOCATE](deallocate.md)
+* [EXECUTE](/dev/reference/sql/statements/execute.md)
+* [DEALLOCATE](/dev/reference/sql/statements/deallocate.md)

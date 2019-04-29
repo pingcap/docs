@@ -38,6 +38,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [COMMIT](commit.md)
-* [ROLLBACK](rollback.md)
-* [BEGIN](begin.md)
+* [COMMIT](/dev/reference/sql/statements/commit.md)
+* [ROLLBACK](/dev/reference/sql/statements/rollback.md)
+* [BEGIN](/dev/reference/sql/statements/begin.md)

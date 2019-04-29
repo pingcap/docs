@@ -57,6 +57,6 @@ This statement is a TiDB extension to MySQL syntax.
 ## See also
 
 * [Understanding the Query Execution Plan](/sql/understanding-the-query-execution-plan.md)
-* [EXPLAIN](explain.md)
-* [ANALYZE TABLE](analyze-table.md)
-* [TRACE](trace.md)
+* [EXPLAIN](/dev/reference/sql/statements/explain.md)
+* [ANALYZE TABLE](/dev/reference/sql/statements/analyze-table.md)
+* [TRACE](/dev/reference/sql/statements/trace.md)

@@ -56,7 +56,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW CREATE TABLE](show-create-table.md)
-* [CREATE INDEX](create-index.md)
-* [DROP INDEX](drop-index.md)
-* [SHOW INDEX](show-index.md)
+* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
+* [CREATE INDEX](/dev/reference/sql/statements/create-index.md)
+* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
+* [SHOW INDEX](/dev/reference/sql/statements/show-index.md)

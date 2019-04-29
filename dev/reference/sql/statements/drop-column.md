@@ -85,6 +85,6 @@ mysql> SELECT * FROM t1;
 
 ## See also
 
-* [ADD COLUMN](add-column.md)
-* [SHOW CREATE TABLE](show-create-table.md)
-* [CREATE TABLE](create-table.md)
+* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
+* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
+* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)

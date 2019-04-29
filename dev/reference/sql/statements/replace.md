@@ -70,7 +70,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [DELETE](delete.md)
-* [INSERT](insert.md)
-* [SELECT](select.md)
-* [UPDATE](update.md)
+* [DELETE](/dev/reference/sql/statements/delete.md)
+* [INSERT](/dev/reference/sql/statements/insert.md)
+* [SELECT](/dev/reference/sql/statements/select.md)
+* [UPDATE](/dev/reference/sql/statements/update.md)

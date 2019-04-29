@@ -44,6 +44,6 @@ mysql> SHOW GRANTS FOR 'root';
 
 ## See also
 
-* [CREATE USER](create-user.md)
-* [SHOW GRANTS](show-grants.md)
-* [DROP USER](drop-user.md)
+* [CREATE USER](/dev/reference/sql/statements/create-user.md)
+* [SHOW GRANTS](/dev/reference/sql/statements/show-grants.md)
+* [DROP USER](/dev/reference/sql/statements/drop-user.md)

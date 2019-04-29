@@ -6,7 +6,7 @@ category: reference
 
 # SHOW TABLE STATUS 
 
-This statement shows various statistics about tables in TiDB. If the statistics appear out of date, it is recommended to run [`ANALYZE TABLE`](analyze-table.md).
+This statement shows various statistics about tables in TiDB. If the statistics appear out of date, it is recommended to run [`ANALYZE TABLE`](/dev/reference/sql/statements/analyze-table.md).
 
 ## Synopsis
 
@@ -86,7 +86,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW TABLES](show-tables.md)
-* [CREATE TABLE](create-table.md)
-* [DROP TABLE](drop-table.md)
-* [SHOW CREATE TABLE](show-create-table.md)
+* [SHOW TABLES](/dev/reference/sql/statements/show-tables.md)
+* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
+* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
+* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)

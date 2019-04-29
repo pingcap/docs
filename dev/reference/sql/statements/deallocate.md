@@ -49,5 +49,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [PREPARE](prepare.md)
-* [EXECUTE](execute.md)
+* [PREPARE](/dev/reference/sql/statements/prepare.md)
+* [EXECUTE](/dev/reference/sql/statements/execute.md)

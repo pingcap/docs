@@ -58,4 +58,4 @@ mysql> show global status;
 
 ## See also
 
-* [FLUSH STATUS](flush-status.md)
+* [FLUSH STATUS](/dev/reference/sql/statements/flush-status.md)

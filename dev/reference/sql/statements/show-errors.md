@@ -56,4 +56,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW WARNINGS](show-warnings.md)
+* [SHOW WARNINGS](/dev/reference/sql/statements/show-warnings.md)

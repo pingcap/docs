@@ -35,6 +35,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [GRANT](grant.md)
-* [REVOKE](revoke.md)
+* [GRANT](/dev/reference/sql/statements/grant.md)
+* [REVOKE](/dev/reference/sql/statements/revoke.md)
 * [Privilege Management](/sql/privilege.md)

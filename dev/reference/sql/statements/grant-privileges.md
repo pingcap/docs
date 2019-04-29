@@ -65,5 +65,5 @@ mysql> SHOW GRANTS FOR 'newuser';
 
 ## See also
 
-* [REVOKE <privileges>](revoke-privileges.md)
-* [SHOW GRANTS](show-grants.md)
+* [REVOKE <privileges>](/dev/reference/sql/statements/revoke-privileges.md)
+* [SHOW GRANTS](/dev/reference/sql/statements/show-grants.md)

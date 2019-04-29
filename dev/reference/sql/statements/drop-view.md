@@ -79,5 +79,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [DROP TABLE](drop-table.md)
-* [CREATE VIEW](create-view.md)
+* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
+* [CREATE VIEW](/dev/reference/sql/statements/create-view.md)
