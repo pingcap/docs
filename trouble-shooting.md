@@ -75,7 +75,7 @@ See the following for the situations when the `pd-server` cannot be started:
 
 ## TiDB panic
 
-Please provide panic log and [create an issue](https://github.com/pingcap/tidb/issues/new?template=bug-report.md).
+Please provide the panic log and [create an issue](https://github.com/pingcap/tidb/issues/new/choose).
 
 ## The connection is rejected
 
