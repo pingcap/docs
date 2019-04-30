@@ -110,7 +110,7 @@ In the Grafana dashboard, the default name of an instance is `DM-instance`.
 | fail to read binlog from master | The number of errors encountered when relay log reads the binlog from the upstream MySQL | Immediate alerts |
 | fail to write relay log | The number of errors encountered when the relay log writes the binlog to disks | Immediate alerts |
 | binlog file index | The largest index number of relay log files. For example, "value = 1" indicates "relay-log.000001" | N/A |
-| binlog file gap between master and relay | An alert occurs when the number of binlog files by which the `relay` processing unit is behind the upstream master exceeds one (>1) and the condition lasts over 10 minutes |
+| binlog file gap between master and relay | The number of binlog files by which the `relay` processing unit is behind the upstream master | An alert occurs when the number of binlog files by which the `relay` processing unit is behind the upstream master exceeds one (>1) and the condition lasts over 10 minutes |
 | binlog pos | The write offset of the latest relay log file  | N/A |
 | read binlog duration | The duration that the relay log reads the binlog from the upstream MySQL (in seconds) |  N/A |
 | write relay log duration | The duration that the relay log writes the binlog into the disk each time (in seconds) | N/A |
