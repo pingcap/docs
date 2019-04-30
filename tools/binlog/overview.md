@@ -2,6 +2,7 @@
 title: TiDB-Binlog Cluster User Guide
 summary: Learn overview of the cluster version of TiDB-Binlog.
 category: tools
+aliases: ['docs/tools/tidb-binlog-cluster/']
 ---
 # TiDB-Binlog Cluster User Guide
 
