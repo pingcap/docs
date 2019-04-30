@@ -6,7 +6,7 @@ category: tools
 
 # TiDB-Binlog Cluster deployment
 
-This section shows two methods of deploying TiDB-Binlog:
+This document describes two methods of deploying TiDB-Binlog:
 
 - [Deploy TiDB-Binlog using TiDB-Ansible](#deploy-tidb-binlog-using-tidb-ansible)
 - [Deploy TiDB-Binlog using a Binary package](#deploy-tidb-binlog-using-binary)
