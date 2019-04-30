@@ -115,8 +115,8 @@ password = ""
 > * Both `stop-datetime` and `stop-tso` are used to specify the time point for finishing recovery, but they are different in the time format. If they are not set, the recovery process ends up with the last binlog file by default.
 > * `dest-type` specifies the destination type. Its value can be "mysql" and "print." 
 >
->     * When it is set to｀mysql｀, the data can be recovered to MySQL or TiDB that uses or is compatible with the MySQL protocol. In this case, you need to specify the database information in `[dest-db]` of the configuration information.
->     * When it is set to ｀print｀, only the binlog information is printed. It is generally used for debugging and checking the binlog information. In this case, there is no need to specify `[dest-db]`.
+>     * When it is set to `mysql`, the data can be recovered to MySQL or TiDB that uses or is compatible with the MySQL protocol. In this case, you need to specify the database information in `[dest-db]` of the configuration information.
+>     * When it is set to `print`, only the binlog information is printed. It is generally used for debugging and checking the binlog information. In this case, there is no need to specify `[dest-db]`.
 >
 > * `replicate-do-db` specifies the database for recovery. If it is not set, all the databases are to be recovered.
-> * `replicate-do-table` specifies the table fo recovery. If it is not set, all the tables are to be recovered.
+> * `replicate-do-table` specifies the table for recovery. If it is not set, all the tables are to be recovered.
