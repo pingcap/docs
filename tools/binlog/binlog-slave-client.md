@@ -1,12 +1,12 @@
 ---
 title: Binlog Slave Client User Guide
-summary: Use Binglog Slave Client to parse the binlog data and output the data in a specific format to Kafka.
+summary: Use Binlog Slave Client to consume TiDB slave binlog data from Kafka and output the data in a specific format.
 category: tools
 ---
 
 # Binlog Slave Client User Guide
 
-Binlog Slave Client is used to parse the binlog data and output the data in a specific format to Kafka. Currently, Drainer supports outputting data in multiple formats including MySQL, TiDB, and file. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced. After data is output to Kafka, the user writes code to read data from Kafka and then processes the data.
+Binlog Slave Client is used to consume TiDB slave binlog data from Kafka and output the data in a specific format. Currently, Drainer supports multiple kind of down streaming, including MySQL, TiDB, file and Kafka. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced.
 
 ## Configure Drainer
 
@@ -142,7 +142,7 @@ Currently, two examples are provided:
 * Using Driver to synchronize data to MySQL. This example shows how to convert a binlog to SQL
 * Using Driver to print data
 
-> **Notes:**
+> **Note:**
 >
 > - The example code only shows how to use Driver. If you want to use Driver in the production environment, you need to optimize the code.
 > - Currently, only the Golang version of Driver and example code are available. If you want to use other languages, you need to generate the code file in the corresponding language based on the binlog proto file and develop an application to read the binlog data in Kafka, parse the data, and output the data to the downstream. You are also welcome to optimize the example code and submit the example code of other languages to [TiDB-Tools](https://github.com/pingcap/tidb-tools).

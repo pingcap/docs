@@ -1,6 +1,6 @@
 ---
 title: TiDB-Binlog deployment
-summary: Learn how to deploy the cluster version of TiDB-Binlog.
+summary: Learn how to deploy TiDB-Binlog cluster.
 category: tools
 ---
 
@@ -81,7 +81,7 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         [pump_servers]
         pump1 ansible_host=172.16.10.72 deploy_dir=/data1/pump
         pump2 ansible_host=172.16.10.73 deploy_dir=/data2/pump
-        pump3 ansible_host=172.16.10.74 deploy_dir=/data1/pump
+        pump3 ansible_host=172.16.10.74 deploy_dir=/data3/pump
         ```
 
 2. Deploy and start the TiDB cluster containing Pump.
@@ -176,7 +176,9 @@ It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to 
         $ vi drainer_mysql_drainer.toml
         ```
 
-        > **Note:** Name the configuration file as `alias_drainer.toml`. Otherwise, the customized configuration file cannot be found during the deployment process.
+        > **Note:**
+        >
+        > Name the configuration file as `alias_drainer.toml`. Otherwise, the customized configuration file cannot be found during the deployment process.
         
         Set `db-type` to `mysql` and configure the downstream MySQL information:
 
@@ -480,7 +482,9 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
     - Starting Drainer:
 
-        > **Note:** If the downstream is MySQL/TiDB, to guarantee the data integrity, you need to obtain the `initial-commit-ts` value and make a full backup of the data and restore the data before the initial start of Drainer. For details, see [Deploy Drainer](#step-3-deploy-drainer).
+        > **Note:**
+        >
+        > If the downstream is MySQL/TiDB, to guarantee the data integrity, you need to obtain the `initial-commit-ts` value and make a full backup of the data and restore the data before the initial start of Drainer. For details, see [Deploy Drainer](#step-3-deploy-drainer).
 
         When Drainer is started for the first time, use the `initial-commit-ts` parameter.
 

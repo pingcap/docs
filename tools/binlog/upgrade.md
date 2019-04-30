@@ -6,7 +6,7 @@ category: tools
 
 # TiDB-Binlog upgrade
 
-The new TiDB versions (v2.0.8-binlog, v2.1.0-rc.5 or later) are not compatible with the [Kafka version](../binlog/tidb-binlog-kafka.md) or [Local version](../binlog/tidb-binlog-local.md) of TiDB-Binlog. If TiDB is upgraded to one of the new versions, it is required to use the cluster version of TiDB-Binlog. If the Kafka or local version of TiDB-Binlog is used before upgrading, you need to upgrade your TiDB-Binlog to the cluster version.
+The new TiDB versions (v2.0.8-binlog, v2.1.0-rc.5 or later) are not compatible with the [Kafka version](/tools/binlog/tidb-binlog-kafka.md) or [Local version](/tools/binlog/tidb-binlog-local.md) of TiDB-Binlog. If TiDB is upgraded to one of the new versions, it is required to use the cluster version of TiDB-Binlog. If the Kafka or local version of TiDB-Binlog is used before upgrading, you need to upgrade your TiDB-Binlog to the cluster version.
 
 The corresponding relationship between TiDB-Binlog versions and TiDB versions is shown in the following table:
 

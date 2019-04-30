@@ -65,7 +65,7 @@ TiDB-Binlog can be [downloaded](../../tools/download.md) as part of the Enterpri
   
   We set the startup parameter `binlog-socket` as the specified unix socket file path of the corresponding parameter `socket` in Pump. The final deployment architecture is as follows:  
   
-  ![TiDB pump deployment architecture](media/tidb_pump_deployment.jpeg)  
+  ![TiDB pump deployment architecture](/media/tidb_pump_deployment.jpeg)  
    
 - Currently, you need to deploy Drainer manually.
 

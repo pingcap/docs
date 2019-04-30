@@ -16,7 +16,7 @@ Pump/Drainer state description:
 * `closing`: in the offline process. `binlogctl` is used to get Pump/Drainer offline and Pump/Drainer is in this state before the process exits. In this state, Pump does not accept new requests of writing binlog into it and waits for all the binlog data to be used up by Drainer.
 * `offline`: becomes offline. After Pump sents all the binlog data that it saves to Drainer, its state is switched to `offline`.
 
-> **Notes:**
+> **Note:**
 >
 > * When Pump/Drainer is `pausing` or `paused`, the data synchronization is interrupted.
 > * Pump and Drainer have several states, including `online`, `paused`, and `offline`. If you press Ctrl + C or kill the process, both Pump and Drainer become `pausing` then finally turn to `paused` . There is no need for Pump to send all the binlog data to Drainer before it become `paused` while Pump need to send all the binlog data to Drainer before it become `offline` . If you need to exit from Pump for a long period of time (or are permanently removing Pump from the cluster), use `binlogctl` to make Pump offline. The same goes for Drainer.
