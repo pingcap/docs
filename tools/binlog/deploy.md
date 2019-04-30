@@ -1,10 +1,10 @@
 ---
-title: TiDB-Binlog deployment
+title: TiDB-Binlog Cluster deployment
 summary: Learn how to deploy TiDB-Binlog cluster.
 category: tools
 ---
 
-# TiDB-Binlog deployment
+# TiDB-Binlog Cluster deployment
 
 This section shows two methods of deploying TiDB-Binlog:
 

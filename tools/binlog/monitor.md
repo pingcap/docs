@@ -1,5 +1,5 @@
 ---
-title: TiDB-Binlog Cluster monitoring
+title: TiDB-Binlog monitoring
 summary: Learn how to monitor the cluster version of TiDB-Binlog.
 category: tools
 ---
