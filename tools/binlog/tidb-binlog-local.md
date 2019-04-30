@@ -19,7 +19,7 @@ TiDB-Binlog supports the following scenarios:
 
 The TiDB-Binlog architecture is as follows:  
 
-![TiDB-Binlog architecture](media/architecture.jpeg) 
+![TiDB-Binlog architecture](/media/architecture.jpeg) 
 
 The TiDB-Binlog cluster mainly consists of two components:  
 
