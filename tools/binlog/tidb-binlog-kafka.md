@@ -72,7 +72,7 @@ cd tidb-binlog-kafka-linux-amd64
 
     We set the startup parameter `binlog-socket` as the specified unix socket file path of the corresponding parameter `socket` in Pump. The final deployment architecture is as follows:
 
-    ![TiDB Pump deployment architecture](media/tidb_pump_deployment.jpeg)
+    ![TiDB Pump deployment architecture](/media/tidb_pump_deployment.jpeg)
 
 - Drainer does not support renaming DDL on the table of the ignored schemas (schemas in the filter list).
 
