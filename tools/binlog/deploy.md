@@ -504,9 +504,10 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
     - TiDB server will obtain the addresses of registered Pumps from PD and will stream data to all of them. If there are no registered Pump instances, TiDB server will refuse to start or will block starting until a Pump instance comes online.
 
-## Notes
-* When TiDB is running, you need to guarantee that at least one Pump is running normally.
-* To enable the TiDB-Binlog service in TiDB server, use the `-enable-binlog` startup parameter in TiDB, or add enable=true to the [binlog] section of the TiDB server configuration file.
-* Make sure that the TiDB-Binlog service is enabled in all TiDB instances in a same cluster, otherwise upstream and downstream data inconsistency might occur during data synchronization. If you want to temporarily run a TiDB instance where the TiDB-Binlog service is not enabled, set `run_ddl=false` in the TiDB configuration file.
-* Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
-* If you want to start Drainer in an existing TiDB cluster, generally you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to synchronize the incremental data from `savepoint`.
+> **Note:**
+> 
+> - When TiDB is running, you need to guarantee that at least one Pump is running normally.
+> - To enable the TiDB-Binlog service in TiDB server, use the `-enable-binlog` startup parameter in TiDB, or add enable=true to the [binlog] section of the TiDB server configuration file.
+> - Make sure that the TiDB-Binlog service is enabled in all TiDB instances in a same cluster, otherwise upstream and downstream data inconsistency might occur during data synchronization. If you want to temporarily run a TiDB instance where the TiDB-Binlog service is not enabled, set `run_ddl=false` in the TiDB configuration file.
+> - Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
+> - If you want to start Drainer in an existing TiDB cluster, generally you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to synchronize the incremental data from `savepoint`.
