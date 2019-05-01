@@ -1,5 +1,17 @@
+TiDB-DM (Data Migration) is a platform that supports migrating large, complex, production data sets from MySQL or MariaDB to TiDB.
+
+TiDB-DM can support migrating sharded topologies from in-production databases by merging tables from multiple separate MySQL/MariaDB instances/clusters and applying rolling production updates using the MySQL/MariaDB binary log.
+
+===Architecture
+https://pingcap.com/images/docs/dm-architecture.png
+
+https://pingcap.com/docs/tools/dm/overview/
+
+
+```bash
 sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
 sudo yum install -y mysql-community-server
+```
 
 ```bash
 tee my.cnf <<EoCNF
