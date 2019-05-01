@@ -4,7 +4,7 @@ summary: Learn how to deploy TiDB-Binlog cluster.
 category: tools
 ---
 
-# TiDB-Binlog Cluster deployment
+# TiDB-Binlog Cluster Deployment
 
 This document describes two methods of deploying TiDB-Binlog:
 
