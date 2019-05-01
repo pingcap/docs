@@ -4,7 +4,7 @@ summary: Learn how to install, deploy and monitor TiDB-Binlog.
 category: tools
 ---
 
-# TiDB-Binlog-Local deployment
+# TiDB-Binlog Local Deployment
 
 ## About TiDB-Binlog-local
 
