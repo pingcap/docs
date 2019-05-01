@@ -4,7 +4,7 @@ summary: Learn how to operate the cluster version of TiDB-Binlog.
 category: tools
 ---
 
-# TiDB-Binlog Cluster operations
+# TiDB-Binlog Cluster Operations
 
 ## Pump/Drainer state
 
