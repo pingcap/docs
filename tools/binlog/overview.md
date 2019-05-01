@@ -4,7 +4,7 @@ summary: Learn overview of the cluster version of TiDB-Binlog.
 category: tools
 aliases: ['docs/tools/tidb-binlog-cluster/']
 ---
-# TiDB-Binlog Cluster User Guide
+# TiDB-Binlog Cluster Overview
 
 This document introduces the architecture and the deployment of the cluster version of TiDB-Binlog.
 
