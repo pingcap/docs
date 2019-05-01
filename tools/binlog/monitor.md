@@ -4,7 +4,7 @@ summary: Learn how to monitor the cluster version of TiDB-Binlog.
 category: tools
 ---
 
-# TiDB-Binlog monitoring
+# TiDB-Binlog Monitoring
 
 After you have deployed TiDB-Binlog using Ansible successfully, you can go to the Grafana Web (default address: <http://grafana_ip:3000>, default account: admin, password: admin) to check the state of Pump and Drainer.
 
