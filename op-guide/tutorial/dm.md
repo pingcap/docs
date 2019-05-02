@@ -4,12 +4,12 @@ TiDB-DM can support migrating sharded topologies from in-production databases by
 
 In this tutorial, we'll see how to migrate a sharded table from multiple upstream MySQL instances. We'll do this a couple of different ways. First, we'll merge several tables/shards that do not conflict; that is, they're partitioned using a scheme that does not result in conflicting unique key values. Then, we'll merge several tables that **do** have conflicting unique key values.
 
-=== Architecture
+### Architecture
 https://pingcap.com/images/docs/dm-architecture.png
 
 https://pingcap.com/docs/tools/dm/overview/
 
-=== Setup
+### Setup
 
 First, install MySQL 5.7 and download/extract the TiDB packages we'll use: 
 ```bash
@@ -17,7 +17,6 @@ sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/my
 sudo yum install -y mysql-community-server
 curl http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
 curl http://download.pingcap.org/dm-latest-linux-amd64.tar.gz | tar xzf -
-# curl http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz | tar xzf -
 ```
 
 Create some directories and symlinks:
@@ -63,7 +62,12 @@ do
 done
 ```
 
-=== Non-overlapping shards
+Download and extract configuration files we'll use for our TiDB-DM exercises:
+```bash
+curl -L https://github.com/kolbe/pingcap-docs/raw/kolbe-tutorials-dm/op-guide/tutorial/dm-cnf/dm-cnf.tgz | tar xvzf -
+```
+
+### Non-overlapping shards
 Create MySQL schema:
 ```bash
 for i in 1 2 3
@@ -114,7 +118,7 @@ The port number in the right-hand columns shows which instance the rows are comi
 1858    d7fd118e6f226a71b5f1ffe10efd0a78        3309
 ```
 
-=== Starting TiDB-DM master, workers, and task1
+### Starting TiDB-DM master, workers, and task1
 
 Our goal in this exercise is to use DM to combine the data from these distinct MySQL instances into a single table in TiDB.
 
@@ -259,7 +263,7 @@ Expect this output:
 As long as the DM master and workers are running the "dmtest1" task, they'll continue to keep the downstream TiDB server synchronized with the upstream MySQL server instances.
 
 
-=== Overlapping shards
+### Overlapping shards
 
 The first step of the next exercise will be to create a second database and set of tables across the MySQL instances.
 ```bash
@@ -386,6 +390,7 @@ Expected output:
 ```
 
 
+### Conclusion
 
 TODO:
 * PR/FR for command-line behavior of dmctl
