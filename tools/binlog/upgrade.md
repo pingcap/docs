@@ -18,9 +18,12 @@ The corresponding relationship between TiDB-Binlog versions and TiDB versions is
 
 ## Upgrade process
 
-- If importing the full data is acceptable, you can abandon the old version and deploy TiDB-Binlog following this document.
-- If you want to resume synchronization from the original checkpoint, perform the following steps to upgrade TiDB-Binlog:
+> **Note:**
+> 
+> If importing the full data is acceptable, you can abandon the old version and deploy TiDB-Binlog following [TiDB-Binlog Cluster Deployment](/tools/binlog/deploy.md)
 
+
+If you want to resume synchronization from the original checkpoint, perform the following steps to upgrade TiDB-Binlog:
     1. Deploy the new version of Pump.
     2. Stop the TiDB cluster service.
     3. Upgrade TiDB and the configuration, and write the binlog data to the new Pump cluster.
