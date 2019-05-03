@@ -463,14 +463,13 @@ loaders:
     dir: "data/dump3"
 ```
 
+Let's start this dmtask2 and see what the data looks like after it's been imported into the downstream TiDB instance:
 ```bash
 dmctl -master-addr :8261 <<<"start-task dm-cnf/dmtask2.yaml"
-```
-
-```bash
 mysql -h 127.0.0.1 -P 4000 -u root -e 'select * from t1' dmtest2 | tail
 ```
 
+Expected output:
 ```
 1729382256910270827     00411460f7c92d2124a67ea0f4cb5f85        3309
 1729382256910270828     bac9162b47c56fc8a4d2a519803d51b3        3309
@@ -484,18 +483,18 @@ mysql -h 127.0.0.1 -P 4000 -u root -e 'select * from t1' dmtest2 | tail
 1729382256910270836     24b16fede9a67c9251d3e7c7161c83ac        3309
 ```
 
-TiDB-DM uses an algorithm to bit-shift the ID assigned by the upstream MySQL instances to generate a unique ID for the downstream TiDB instance. In our test case, the partition ID consists only of the "instance ID", because the schema and table names are the same on each of the upstream MySQL servers. We leave the "schema ID" and "table ID" components of the partition id expression arguments blank:
+So, how do we end up with these new ID values in the left-most column of our downstream table?  TiDB-DM uses an algorithm to bit-shift the ID assigned by the upstream MySQL instances to generate a unique ID for the downstream TiDB instance. In our test case, the partition ID consists only of the "instance ID", because the schema and table names are the same on each of the upstream MySQL servers. We left the "schema ID" and "table ID" components of the partition id expression arguments blank:
 
 ```
 $ grep arguments dm-cnf/dmtask2.yaml
-    arguments: ["1", null, null]
-    arguments: ["2", null, null]
-    arguments: ["3", null, null]
+    arguments: ["1", "", ""]
+    arguments: ["2", "", ""]
+    arguments: ["3", "", ""]
 ```
 
-The last auto-increment ID assigned by the upstream MySQL servers was 372. The rows with the highest transformed auto-increment IDs after migration to the TiDB server are from instance 3 (identified by port number 3309 in the right-most column). The last row has the same value in the middle column as the rows with ID 372 in the MySQL instances. The algorithm allots 44 bits of the 64 bit integer for the auto-increment ID that comes from upstream, which means that values above 2^44 (about 17.5 trillion) can't be handled by the default implementation of the partition id column mapping scheme. 1 bit is reserved for the sign, 4 for the instance ID, 7 for the schema ID, and 8 for the table ID (44 + 1 + 4 + 7 + 8 = 64 bits). Customizations of the algorithm are trivial, so please contact PingCAP if you have a use case that can't be accommodated by this implementation.
+The last auto-increment ID assigned by the upstream MySQL servers was 372. The rows with the highest transformed auto-increment IDs after migration to the TiDB server are from instance 3 (identified by port number 3309 in the right-most column). The last row has the same value in the middle column as the rows with ID 372 in the MySQL instances, so we can be sure what we're looking at. The algorithm allots 44 bits of the 64 bit integer for the auto-increment ID that comes from upstream, which means that values above 2^44 (about 17.5 trillion) can't be handled by the default implementation of the partition id column mapping scheme. 1 bit is reserved for the sign, 4 for the instance ID, 7 for the schema ID, and 8 for the table ID (44 + 1 + 4 + 7 + 8 = 64 bits). Customizations of the algorithm are trivial, so please contact PingCAP if you have a use case that can't be accommodated by this implementation.
 
-Here we can see the algorithm in action for our use case, taking an auto-increment ID of 372 and instance ID of 3:
+Here we can reproduce the algorithm for our use case, taking an auto-increment ID of 372 and instance ID of 3:
 ```bash
 id=372 instance_id=3 schema_id=0 table_id=0
 echo $(( instance_id << (64-1-4) | schema_id << (64-1-4-7) | table_id << 44 | id ))
@@ -535,7 +534,6 @@ Expected output:
 1729382256910270836     372     24b16fede9a67c9251d3e7c7161c83ac        3309
 1152921504606847348     372     24b16fede9a67c9251d3e7c7161c83ac        3308
 ```
-
 
 ### Conclusion
 
