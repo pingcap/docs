@@ -3,11 +3,28 @@ task-mode: all
 is-sharding: true
 enable-heartbeat: true
 
-target-database:
-  host: "127.0.0.1"
-  port: 4000
-  user: "root"
-  password: ""
+column-mappings:
+  mysql1:
+    schema-pattern: "dmtest2"
+    table-pattern: "t1"
+    expression: "partition id"
+    arguments: ["1", "", ""]
+    source-column: "id"
+    target-column: "id"
+  mysql2:
+    schema-pattern: "dmtest2"
+    table-pattern: "t1"
+    expression: "partition id"
+    arguments: ["2", "", ""]
+    source-column: "id"
+    target-column: "id"
+  mysql3:
+    schema-pattern: "dmtest2"
+    table-pattern: "t1"
+    expression: "partition id"
+    arguments: ["3", "", ""]
+    source-column: "id"
+    target-column: "id"
 
 mysql-instances:
   - source-id: "mysql1"
@@ -26,37 +43,11 @@ mysql-instances:
     column-mapping-rules: ["mysql3"]
     loader-config-name: "loader3"
 
-column-mappings:
-  mysql1:
-    schema-pattern: "dmtest2"
-    table-pattern: "t1"
-    expression: "partition id"
-    source-column: "id"
-    target-column: "id"
-    arguments: ["1", null, null]
-  mysql2:
-    schema-pattern: "dmtest2"
-    table-pattern: "t1"
-    expression: "partition id"
-    source-column: "id"
-    target-column: "id"
-    arguments: ["2", null, null]
-  mysql3:
-    schema-pattern: "dmtest2"
-    table-pattern: "t1"
-    expression: "partition id"
-    source-column: "id"
-    target-column: "id"
-    arguments: ["3", null, null]
-
-black-white-list:                     # filter rules, mysql instance can ref rules in it
+# The column-mappings section tells TiDB-DM how we want it to combine
+black-white-list:
   dmtest2:
     do-dbs: ["dmtest2"]
 
-mydumpers:
-  global:
-    threads: 4
-    
 loaders:
   loader1:
     dir: "data/dump1"
@@ -64,3 +55,9 @@ loaders:
     dir: "data/dump2"
   loader3:
     dir: "data/dump3"
+
+target-database:
+  host: "127.0.0.1"
+  port: 4000
+  user: "root"
+  password: ""

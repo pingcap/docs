@@ -4,6 +4,8 @@ TiDB-DM can support migrating sharded topologies from in-production databases by
 
 In this tutorial, we'll see how to migrate a sharded table from multiple upstream MySQL instances. We'll do this a couple of different ways. First, we'll merge several tables/shards that do not conflict; that is, they're partitioned using a scheme that does not result in conflicting unique key values. Then, we'll merge several tables that **do** have conflicting unique key values.
 
+This tutorial assumes you're using a new CentOS 7 machine. You can virtualize locally (using VMware, VirtualBox, etc.), or deploy a small cloud VM on your favorite provider. You'll have the best luck if you have at least 1GB of memory, since we're going to run quite a few services.
+
 ### Architecture
 https://pingcap.com/images/docs/dm-architecture.png
 
@@ -17,12 +19,14 @@ sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/my
 sudo yum install -y mysql-community-server
 curl http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
 curl http://download.pingcap.org/dm-latest-linux-amd64.tar.gz | tar xzf -
+curl -L https://github.com/kolbe/pingcap-docs/raw/kolbe-tutorials-dm/op-guide/tutorial/dm-cnf/dm-cnf.tgz | tar xvzf -
 ```
 
 Create some directories and symlinks:
 ```bash
-mkdir -p bin data logs conf
-ln -s -t bin/ "$HOME"/*/bin/*
+mkdir -p bin data logs
+ln -sf -t bin/ "$HOME"/*/bin/*
+[[ $PATH = *$HOME/bin* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
 ```
 
 Set up MySQL configuration for the 3 instances we'll run:
@@ -60,11 +64,6 @@ do
     mysqld --defaults-group-suffix="$i" --initialize-insecure
     mysqld --defaults-group-suffix="$i" &
 done
-```
-
-Download and extract configuration files we'll use for our TiDB-DM exercises:
-```bash
-curl -L https://github.com/kolbe/pingcap-docs/raw/kolbe-tutorials-dm/op-guide/tutorial/dm-cnf/dm-cnf.tgz | tar xvzf -
 ```
 
 ### Non-overlapping shards
@@ -118,16 +117,86 @@ The port number in the right-hand columns shows which instance the rows are comi
 1858    d7fd118e6f226a71b5f1ffe10efd0a78        3309
 ```
 
-### Starting TiDB-DM master, workers, and task1
+### Starting TiDB-DM master and workers
 
 Our goal in this exercise is to use DM to combine the data from these distinct MySQL instances into a single table in TiDB.
 
-We'll start a single dm-master process and one dm-worker process for each of the MySQL server instances (3 total).
+The package of configuation files we unpacked earlier contains the configuration for the components of the TiDB-DM cluster as well as configuration files for the 2 tasks we'll explore in this tutorial.
 
+We'll start a single dm-master process and one dm-worker process for each of the MySQL server instances (3 total):
 ```bash
 tidb-server --log-file=logs/tidb-server.log &
-for i in 1 2 3; do dm-worker --config=conf/dm-worker$i.toml & done
-dm-master --config=conf/dm-master.toml &
+for i in 1 2 3; do dm-worker --config=dm-cnf/dm-worker$i.toml & done
+dm-master --config=dm-cnf/dm-master.toml &
+```
+
+Each of the upstream instances corresponds to a separate dm-worker instance, each of which has its own configuration file. These files describe the details of the connection to the upstream MySQL server as well as where to store the relay log files (the local copy of the upstream server's binary log) and the output of mydumper. Each dm-worker should listen on a different port (defined by `worker-addr`). Here's dm-worker1.toml, for example:
+```toml
+# Worker Configuration.
+
+server-id = 1
+source-id = "mysql1"
+flavor = "mysql"
+worker-addr = ":8262"
+log-file = "logs/worker1.log"
+relay-dir = "data/relay1"
+meta-dir = "data/meta1"
+dir = "data/dump1"
+
+[from]
+host = "127.0.0.1"
+user = "root"
+password = ""
+port = 3307
+```
+
+Tasks are defined in YAML files. First, let's look at dmtask1.yaml. You'll see a number of global options, and several groups of options that define various behaviors.
+
+* `task-mode: all` tells TiDB-DM to both import a full backup of the upstream instances as well as replicate incremental updates using the upstream MySQL server's binary log.
+  * You can give `task-mode` the `full` or `incremental` value, respectively, to get only one of those two behaviors.
+* `is-sharding: true` tells TiDB-DM that we want multiple dm-worker instances to work on a single task to merge several upstream shards into a single downstream table.
+* `ignore-checking-items: ["auto_increment_ID"]` disables TiDB-DM's detection of potential auto-increment conflicts among the upstream instances. TiDB-DM can detect that all 3 upstream MySQL servers have an auto-increment column for a table with the same name in the same schema, and that this situation would be expected to lead to conflicts among the several tables. We've avoided that by setting `auto-increment-increment` and `auto-increment-offset` so that each of the MySQL servers gives non-overlapping IDs. So, we tell TiDB-DM to ignore checking for overlapping auto-increment IDs in this task.
+* We use a `black-white-list` to limit the scope of this task to database `dmtest`.
+* The `loaders` section defines where to find the output of each instance of mydumper that was executed by the respective instance of dm-worker. 
+
+```yaml
+name: dmtask1
+task-mode: all
+is-sharding: true
+enable-heartbeat: true
+ignore-checking-items: ["auto_increment_ID"]
+
+target-database:
+  host: "127.0.0.1"
+  port: 4000
+  user: "root"
+  password: ""
+
+mysql-instances:
+  - source-id: "mysql1"
+    server-id: 1
+    black-white-list: "dmtest1"
+    loader-config-name: "loader1"
+  - source-id: "mysql2"
+    server-id: 2
+    black-white-list: "dmtest1"
+    loader-config-name: "loader2"
+  - source-id: "mysql3"
+    server-id: 3
+    black-white-list: "dmtest1"
+    loader-config-name: "loader3"
+
+black-white-list:
+  dmtest1:
+    do-dbs: ["dmtest1"]
+
+loaders:
+  loader1:
+    dir: "data/dump1"
+  loader2:
+    dir: "data/dump2"
+  loader3:
+    dir: "data/dump3"
 ```
 
 The `dmctl` tool is an interactive client that facilitates interaction with the TiDB-DM cluster. You use it to start tasks, query task status, et cetera. Start the tool by executing `dmctl` to get the interactive prompt:
@@ -143,9 +212,9 @@ Go Version: go version go1.12 linux/amd64
 »
 ```
 
-To start dmtask1, execute `start-task conf/dmtask1.yaml`:
+To start dmtask1, execute `start-task dm-cnf/dmtask1.yaml`:
 ```
-» start-task conf/dmtask1.yaml
+» start-task dm-cnf/dmtask1.yaml
 {
     "result": true,
     "msg": "",
@@ -316,8 +385,86 @@ EoSQL
 
 If we try to migrate these rows as-is into a single table in a downstream TiDB instance, the Primary Key auto-increment values will collide and cause duplicate key errors to be issued. We'll use the "partition id" expression of the "column mappings" feature of DM to transform the auto-increment values so that they no longer collide. 
 
+Let's taks a look at dmtask2.yaml.
+
+* We aren't using `ignore-checking-items: ["auto_increment_ID"]` anymore, because the upstream auto-increment IDs **do** collide.
+* We use `column-mappings` to tell TiDB-DM how we want it to handle the shard merge operation
+  * We have a single upstream schema and table, so our `schema-pattern` and `table-pattern` are actually just strings.
+    * You can include wildcards in these if you want to merge multiple schemas and/or tables.
+  * The `partition id` expression has a corresponding `arguments` section that controls the algorithm used to transform upstream IDs into those used in the downstream TiDB cluster. There's a more in-depth discussion of this algorithm later in this tutorial.
+  * `source_column` and `target_column` are pretty self-explanatory, but it's worth noting that they offer the possibility of merging upstream inserts into a downstream table with a different structure, for example if you need to preserve the original values.
+  * Each entry in `mysql-instances` has a different column mapping because different arguments to the `partition id` algorithm needs to be used for each.
+
+
+```yaml
+name: dmtask2
+task-mode: all
+is-sharding: true
+enable-heartbeat: true
+
+target-database:
+  host: "127.0.0.1"
+  port: 4000
+  user: "root"
+  password: ""
+
+# The column-mappings section tells TiDB-DM how we want it to combine
+# the data from the 3 upstream instances.
+column-mappings:
+  mysql1:
+    schema-pattern: "dmtest2"
+    table-pattern: "t1"
+    expression: "partition id"
+    arguments: ["1", "", ""]
+    source-column: "id"
+    target-column: "id"
+  mysql2:
+    schema-pattern: "dmtest2"
+    table-pattern: "t1"
+    expression: "partition id"
+    arguments: ["2", "", ""]
+    source-column: "id"
+    target-column: "id"
+  mysql3:
+    schema-pattern: "dmtest2"
+    table-pattern: "t1"
+    expression: "partition id"
+    arguments: ["3", "", ""]
+    source-column: "id"
+    target-column: "id"
+
+mysql-instances:
+  - source-id: "mysql1"
+    server-id: 1
+    black-white-list: "dmtest2"
+    column-mapping-rules: ["mysql1"]
+    loader-config-name: "loader1"
+  - source-id: "mysql2"
+    server-id: 2
+    black-white-list: "dmtest2"
+    column-mapping-rules: ["mysql2"]
+    loader-config-name: "loader2"
+  - source-id: "mysql3"
+    server-id: 3
+    black-white-list: "dmtest2"
+    column-mapping-rules: ["mysql3"]
+    loader-config-name: "loader3"
+
+black-white-list:
+  dmtest2:
+    do-dbs: ["dmtest2"]
+
+loaders:
+  loader1:
+    dir: "data/dump1"
+  loader2:
+    dir: "data/dump2"
+  loader3:
+    dir: "data/dump3"
+```
+
 ```bash
-dmctl -master-addr :8261 <<<"start-task conf/dmtask2.yaml"
+dmctl -master-addr :8261 <<<"start-task dm-cnf/dmtask2.yaml"
 ```
 
 ```bash
@@ -340,7 +487,7 @@ mysql -h 127.0.0.1 -P 4000 -u root -e 'select * from t1' dmtest2 | tail
 TiDB-DM uses an algorithm to bit-shift the ID assigned by the upstream MySQL instances to generate a unique ID for the downstream TiDB instance. In our test case, the partition ID consists only of the "instance ID", because the schema and table names are the same on each of the upstream MySQL servers. We leave the "schema ID" and "table ID" components of the partition id expression arguments blank:
 
 ```
-$ grep arguments conf/dmtask2.yaml
+$ grep arguments dm-cnf/dmtask2.yaml
     arguments: ["1", null, null]
     arguments: ["2", null, null]
     arguments: ["3", null, null]
@@ -359,7 +506,7 @@ Expected output:
 1729382256910270836
 ```
 
-Because only 44 bits correspond to the original auto-increment value, we can discard the rest of them to convert the transofmred values back to what they were originally:
+Because only 44 bits correspond to the original auto-increment value, we can discard the rest of them to convert the transformed values back to what they were originally:
 
 ```bash
 echo $(( 1729382256910270836 & (1<<45)-1 ))
