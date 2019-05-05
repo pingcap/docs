@@ -9,7 +9,7 @@ category: tools
 This document describes two methods of deploying TiDB-Binlog:
 
 - [Deploy TiDB-Binlog using TiDB-Ansible](#deploy-tidb-binlog-using-tidb-ansible)
-- [Deploy TiDB-Binlog using a Binary package](#deploy-tidb-binlog-using-binary)
+- [Deploy TiDB-Binlog using a Binary package](#deploy-tidb-binlog-using-a-binary-package)
 
 It is recommended to deploy TiDB-Binlog using TiDB-Ansible. If you just want to do a simple testing, you can deploy TiDB-Binlog using a Binary package.
 
