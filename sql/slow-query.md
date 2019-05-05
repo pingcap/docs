@@ -56,7 +56,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Memory_max`: Indicates the maximum memory space used during the execution period of this SQL statement (the unit is byte).
 * `Num_cop_tasks`: Indicates the number of cop-tasks.
 * `Cop_proc_avg`: The average execution time of cop-tasks.
-* `Cop_proc_p90`: The P90 quantile execution time of cop-task.
+* `Cop_proc_p90`: The P90 quantile execution time of cop-tasks.
 * `Cop_proc_max`: The maximum execution time of cop-task.
 * `Cop_proc_addr`: The address of the longest cop-task.
 * `Cop_wait_avg`: The average wait time for cop-task.
