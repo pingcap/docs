@@ -59,7 +59,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Cop_proc_p90`: The P90 quantile execution time of cop-tasks.
 * `Cop_proc_max`: The maximum execution time of cop-tasks.
 * `Cop_proc_addr`: The address of the cop-task whose execution time is the longest.
-* `Cop_wait_avg`: The average wait time for cop-task.
+* `Cop_wait_avg`: The average waiting time of cop-task.
 * `Cop_wait_p90`: The P90 queuing wait time for cop-task.
 * `Cop_wait_max`: The maximum wait time for cop-task.
 * `Cop_wait_addr`: The address of the cop-task whose wait time is longest.
