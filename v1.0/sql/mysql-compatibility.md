@@ -31,8 +31,8 @@ However, in TiDB, the following MySQL features are not supported for the time be
 
 The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential.
 
-> **Warning**:
-> 
+> **Warning:**
+>
 > If you use the auto-increment ID in a cluster with multiple TiDB servers, do not mix the default value and the custom value, because it reports an error in the following situation:
 > 
 > In a cluster of two TiDB servers, namely TiDB A and TiDB B, TiDB A caches [1,5000] auto-increment ID, while TiDB B caches [5001,10000] auto-increment ID. Use the following statement to create a table with auto-increment ID:
@@ -70,7 +70,9 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
     - Supports changing/modifying the types among the following string types: Char，Varchar，Text，TinyText，MediumText，LongText
     - Support changing/modifying the types among the following string types: Blob，TinyBlob，MediumBlob，LongBlob.
 
-**Note:** The change/modifying column operation cannot make the length of the original type become shorter and it cannot change the unsigned/charset/collate attributes of the column.
+> **Note:**
+>
+> The change/modifying column operation cannot make the length of the original type become shorter and it cannot change the unsigned/charset/collate attributes of the column.
 
     - Supports changing the following type definitions: default value，comment，null，not null and OnUpdate, but does not support changing from null to not null.
     - Supports parsing the `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}` syntax, but there is no actual operation.
@@ -84,7 +86,9 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
 
 TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-level locking to avoid write conflict, in TiDB, the write conflict is checked only in the `commit` process during the execution of the statements like `Update`, `Insert`, `Delete`, and so on.
 
-**Note:** On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
+> **Note:**
+>
+> On the business side, remember to check the returned results of `commit` because even there is no error in the execution, there might be errors in the `commit` process.
 
 
 ### Load data

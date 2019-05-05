@@ -57,7 +57,7 @@ cd tidb-ansible/resources/bin/tispark-sample-data
 Edit the TiDB login information in `sample_data.sh`. For example:
 
 ```
-mysql -h 192.168.0.2 -P 4000 -u root < dss.ddl
+mysql --local-infile=1 -h 192.168.0.2 -P 4000 -u root < dss.ddl
 ```
 
 Run the script:
@@ -66,7 +66,9 @@ Run the script:
 ./sample_data.sh
 ```
 
-> **Note**: You need to install the MySQL client on the machine that runs the script. If you are a CentOS user, you can install it through the command `yum -y install mysql`.
+> **Note:**
+>
+> You need to install the MySQL client on the machine that runs the script. If you are a CentOS user, you can install it through the command `yum -y install mysql`.
 
 Log into TiDB and verify that the `TPCH_001` database and the following tables are included.
 
