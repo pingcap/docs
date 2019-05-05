@@ -61,7 +61,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Cop_proc_addr`: The address of the cop-task whose execution time is the longest.
 * `Cop_wait_avg`: The average waiting time of cop-task.
 * `Cop_wait_p90`: The P90 waiting time of cop-task.
-* `Cop_wait_max`: The maximum wait time for cop-task.
+* `Cop_wait_max`: The maximum waiting time of cop-task.
 * `Cop_wait_addr`: The address of the cop-task whose wait time is longest.
 * `Query`: Indicates a SQL statement. `Query` will not be printed in the slow log, but the corresponding field is called `Query` after the slow log mapping to the memory table.
 
