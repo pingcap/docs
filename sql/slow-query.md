@@ -44,7 +44,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to `grep` the log whose session ID is 3.
 * `Query_time`: Indicates the execution time of this statement. Only the statement whose execution time exceeds slow-threshold outputs this log (the unit is second). The unit of all the following time fields is second.
 * `Process_time`: The total processing time of this SQL in TiKV. Because the data will be sent to TiKV in parallel. This value may exceed `Query_time`.
-* `Wait_time`: Indicates the total waiting time of this statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests will increase.
+* `Wait_time`: The total waiting time of this statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests will increase.
 * `Backoff_time`: Indicates the waiting time before retry when this statement encounters errors that require a retry. The common errors as such include: lock occurs, Region split, the TiKV server is busy.
 * `Request_count`: Indicates the number of Coprocessor requests that this statement sends.
 * `Total_keys`: Indicates the number of keys that Coprocessor has scanned.
