@@ -10,7 +10,7 @@ This tutorial assumes you're using a modern Linux distribution on x86-64. I'll u
 
 ## Overview
 
-TiDB-Binlog is a solution to collect binary log data from TiDB server and provide real-time data backup and replication. It pushes incremental data updates to a TiDB Server cluster into any of various downstream platforms.
+TiDB-Binlog is a solution to collect binary log data from TiDB server and provide real-time data backup and replication. It pushes incremental data updates made to a TiDB Server cluster into any of various downstream platforms.
 
 You can use TiDB-Binlog for incremental backups, to replicate data from one TiDB cluster to another, or to send TiDB updates through Kafka to a downstream platform of your choice.
 
