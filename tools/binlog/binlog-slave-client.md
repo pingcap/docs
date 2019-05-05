@@ -131,9 +131,9 @@ You need to configure the following information when using Driver:
 
 * `KafkaAddr`: the address of the Kafka cluster
 * `CommitTS`: from which `commit ts` to start reading the binlog
-* `Offset`: from which Kafka `offset` to start reading data. If `CommitTS` is set, you needn't configure this parameter
+* `Offset`: from which Kafka `offset` to start reading data. If `CommitTS` is set, you needn't configure this parameter.
 * `ClusterID`: the cluster ID of the TiDB cluster
-* `Topic`: topic name of kafka, if Topic is empty, use the default name in drainer <ClusterID>_obinlog
+* `Topic`: the topic name of Kafka. If Topic is empty, use the default name in Drainer `<ClusterID>_obinlog`.
 
 You can use Driver by quoting the Driver code in package and refer to the example code provided by Driver to learn how to use Driver and parse the binlog data. 
 
