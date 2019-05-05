@@ -8,13 +8,13 @@ category: user guide
 
 The slow query log is a record of SQL statements that took a long time to perform.
 
-The slow log format has been modified in TiDB V2.1.8. See [this file](<https://github.com/pingcap/docs/blob/master/v2.1/sql/slow-query.md>) for previous version before v2.1.8.
+The slow log format is updated in TiDB v2.1.8 and later. For the slow query log information in versions earlier than v2.1.8, see [this file](https://github.com/pingcap/docs/blob/master/v2.1/sql/slow-query.md).
 
 A problematic SQL statement can increase the pressure on the entire cluster, resulting in a longer response time. To solve this problem, you can use the slow query log to identify the problematic statements and thus improve the performance.
 
 ## Obtain the log
 
-The statement whose execution time exceeds [slow-threshold](../op-guide/tidb-config-file.md#slow-threshold) will be individually output to [slow-query-file](../op-guide/tidb-config-file.md#slow-query-file) in TiDB and be made compatible with the slow log. You can analyze directly the slow log file with `pt-query-digest`. You can edit `slow-threshold` in the configuration file and its default value is 300ms. `slow-query-file` is `tidb-slow.log` by default.
+In TiDB, the statements whose execution time exceeds [slow-threshold](../op-guide/tidb-config-file.md#slow-threshold) are individually output to [slow-query-file](../op-guide/tidb-config-file.md#slow-query-file) by default, the format of the slow log is compatible, and the slow log file can be directly analyzed with `pt-query-digest`. `slow-threshold` can be modified by the configuration file, which is set to 300ms by default. `slow-query-file` is set to `tidb-slow.log` by default.
 
 ## Usage example
 
