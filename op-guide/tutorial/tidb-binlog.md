@@ -1,4 +1,4 @@
-# TiDB Binlog Tutorial
+# TiDB-Binlog Tutorial
 
 This tutorial will start with a very simple TiDB-Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, pump, and drainer), set up to push data into a MariaDB Server instance.
 
