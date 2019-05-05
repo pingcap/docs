@@ -99,7 +99,7 @@ By parsing slow logs in TiDB in real time, the contents in the `INFORMATION_SCHE
 
 ## Query example of SLOW_QUERY
 
-The following example shows how to locate a slow query by querying the SLOW_QUERY table.
+The following examples show how to identify a slow query by querying the SLOW_QUERY table.
 
 ### Slow Query of quering TopN
 
