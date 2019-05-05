@@ -48,7 +48,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Backoff_time`: The waiting time before retry when this statement encounters errors that require a retry. The common errors as such include: lock occurs, Region split, `TiKV server is busy`.
 * `Request_count`: The number of Coprocessor requests that this statement sends.
 * `Total_keys`: The number of keys that Coprocessor has scanned.
-* `Process_keys`: Indicates the number of keys that Coprocessor has processed. Compared with `total_keys`, `processed_keys` does not include the old versions of MVCC. A great difference between `processed_keys` and `total_keys` indicates that the number of old versions are relatively large.
+* `Process_keys`: The number of keys that Coprocessor has processed. Compared with `total_keys`, `processed_keys` does not include the old versions of MVCC. A great difference between `processed_keys` and `total_keys` indicates that the number of old versions is relatively large.
 * `DB`: Indicates the current database.
 * `Index_ids`: Indicates the IDs of the indexes involved in the statement.
 * `Is_internal`: Indicates whether the SQL is TiDB internal. True indicates the SQL is executed internally by TiDB, such as analyze, load variable, etc.; false indicates the SQL is executed by the user.
