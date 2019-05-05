@@ -118,7 +118,7 @@ tidb > select `Query_time`, query from INFORMATION_SCHEMA.`SLOW_QUERY` where `Is
 Time: 0.012s
 ```
 
-#### Query the slow query of users' TopN
+### Query on TopN slow query of the `test` user. 
 ```sql
 /* Query all SQL executed by user, sorted by execution time */
 tidb > select `Query_time`, query,  user from INFORMATION_SCHEMA.`SLOW_QUERY` where `Is_internal`=false and user like "test%" order by `Query_time` desc limit 2;
