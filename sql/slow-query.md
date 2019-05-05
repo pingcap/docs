@@ -53,7 +53,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Index_ids`: Indicates the IDs of the indexes involved in the statement.
 * `Is_internal`: Indicates whether the SQL is TiDB internal. True indicates the SQL is executed internally by TiDB, such as analyze, load variable, etc.; false indicates the SQL is executed by the user.
 * `Digest`: Indicates the fingerprint of the SQL statement.
-* `Memory_max`: Indicates the amount of memory used during the execution period (the unit is byte).
+* `Memory_max`: Indicates the maximum memory space used during the execution period of this SQL statement (the unit is byte).
 * `Num_cop_tasks`: Indicates the number of cop-tasks.
 * `Cop_proc_avg`: The average execution time of cop-task.
 * `Cop_proc_p90`: The P90 quantile execution time of cop-task.
