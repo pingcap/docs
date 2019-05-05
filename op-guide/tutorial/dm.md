@@ -4,7 +4,7 @@ TiDB-DM can support migrating sharded topologies from in-production databases by
 
 In this tutorial, we'll see how to migrate a sharded table from multiple upstream MySQL instances. We'll do this a couple of different ways. First, we'll merge several tables/shards that do not conflict; that is, they're partitioned using a scheme that does not result in conflicting unique key values. Then, we'll merge several tables that **do** have conflicting unique key values.
 
-This tutorial assumes you're using a new CentOS 7 machine. You can virtualize locally (using VMware, VirtualBox, etc.), or deploy a small cloud VM on your favorite provider. You'll have the best luck if you have at least 1GB of memory, since we're going to run quite a few services.
+This tutorial assumes you're using a new, clean CentOS 7 instance. You can virtualize locally (using VMware, VirtualBox, etc.), or deploy a small cloud VM on your favorite provider. You'll have the best luck if you have at least 1GB of memory, since we're going to run quite a few services.
 
 ### Architecture
 https://pingcap.com/images/docs/dm-architecture.png
@@ -26,7 +26,7 @@ Create some directories and symlinks:
 ```bash
 mkdir -p bin data logs
 ln -sf -t bin/ "$HOME"/*/bin/*
-[[ $PATH = *$HOME/bin* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
+[[ :$PATH: = *:$HOME/bin:* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
 ```
 
 Set up MySQL configuration for the 3 instances we'll run:
@@ -537,10 +537,11 @@ Expected output:
 
 ### Conclusion
 
+In this tutorial, we've completed 2 exercises. The first was a shard migration from 3 upstream MySQL server instances that each assigned non-overlapping sets of auto-increment IDs, and the second was a shard migration from 3 upstream MySQL server instances that each assigned auto-increment IDs that conflicted with one another. We saw how TiDB-DM not only takes care of importing an initial dump of data in the cluster, but that it can also read binary logs to keep the downstream TiDB cluster in sync with the upstream instance(s).
+
 TODO:
 * PR/FR for command-line behavior of dmctl
 * PR/FR for default value of dmctl -master-address
-* clarify expected behavior of column-mappings/./arguments
 
 
 for i in 1 2 3; do mysql -h 127.0.0.1 -P "$((3306+i))" -u root -e 'show databases; drop database if exists dmtest2; drop database if exists dmtest1; drop database if exists dmtest; drop database if exists dm_heartbeat; show databases; '; done
