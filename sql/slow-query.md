@@ -120,7 +120,7 @@ Time: 0.012s
 
 ### Query on TopN slow query of the `test` user. 
 ```sql
-/* Query all SQL executed by user, sorted by execution time */
+/* Query all the SQL statements executed by `test` user and sorted them by execution run-time */
 tidb > select `Query_time`, query,  user from INFORMATION_SCHEMA.`SLOW_QUERY` where `Is_internal`=false and user like "test%" order by `Query_time` desc limit 2;
 +-------------+------------------------------------------------------------------+----------------+
 | Query_time  | query                                                            | user           |
