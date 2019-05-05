@@ -106,7 +106,7 @@ The following examples show how to identify a slow query by querying the SLOW_QU
 Query the Top2 slow query of the users. `Is_internal=false` refers to exclude the internal slow queries in TiDB. Only the slow query of the users is needed.
 
 ```sql
-/* Query all SQL executed by user, sorted by execution time */
+/* Query all the SQL statements executed by the user and sort them by execution run-time */
 tidb > select `Query_time`, query from INFORMATION_SCHEMA.`SLOW_QUERY` where `Is_internal`=false order by `Query_time` desc limit 2;
 +--------------+------------------------------------------------------------------+
 | Query_time   | query                                                            |
