@@ -23,7 +23,7 @@ See [TiDB-Binlog Cluster User Guide](https://pingcap.com/docs/tools/tidb-binlog-
 
 TiDB-Binlog comprises two components: the **pump** and the **drainer**. Several pump nodes make up a pump cluster. Each pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A drainer connects to the pump cluster and transforms updates into the correct format for a particular downstream destination, be it Kafka or another TiDB Cluster or a MySQL/MariaDB server.
 
-![TiDB-Binlog architecture](../../media/tidb_binlog_cluster_architecture.png)
+![TiDB-Binlog architecture](https://pingcap.com/images/docs/tidb_binlog_cluster_architecture.png)
 
 The clustered architecture of the pump component ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or pump nodes join or leave the pump cluster.
 
@@ -308,7 +308,7 @@ You should see the same rows when querying the MariaDB server that you inserted 
 
 ## binlogctl
 
-Information about pumps and drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate information about their states. See [binlogctl guide](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md#binlogctl-guide) for more information.
+Information about pumps and drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate information about their states. See [binlogctl guide](https://pingcap.com/docs/tools/binlog/operation/#binlogctl-guide) for more information.
 
 You can use `binlogctl` to get a view of the current status of pumps and drainers in the cluster:
 ```bash
