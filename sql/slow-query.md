@@ -131,7 +131,7 @@ tidb > select `Query_time`, query,  user from INFORMATION_SCHEMA.`SLOW_QUERY` wh
 Time: 0.014s
 ```
 
-#### Query slow queries like SQL based on SQL fingerprints
+### Query the slow queries like SQL based on SQL fingerprints
 If you want to query the slow query with the same SQL fingerprint query after querying TopN's SQL statements, you can use the fingerprint as the filter condition.
 
 ```sql
