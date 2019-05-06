@@ -8,7 +8,7 @@ This tutorial is targeted toward users who have some familiarity with the [TiDB 
 >
 > The instructions to deploy TiDB in this tutorial should **not** be used to deploy TiDB in a production or development setting.
 
-This tutorial assumes you're using a modern Linux distribution on x86-64.  A minimal CentOS 7 installation running in VMware is used in this tutorial for the examples. It's recommended that you start from a clean install, so that you aren't impacted by quirks of your existing environment. virtualization, you can easily start a CentOS 7 VM using your cloud service.
+This tutorial assumes you're using a modern Linux distribution on x86-64. A minimal CentOS 7 installation running in VMware is used in this tutorial for the examples. It's recommended that you start from a clean install, so that you aren't impacted by quirks of your existing environment. If you don't want to use local virtualization, you can easily start a CentOS 7 VM using your cloud service.
 
 ## TiDB-Binlog Overview
 
@@ -24,7 +24,7 @@ See [TiDB-Binlog Cluster User Guide](https://pingcap.com/docs/tools/tidb-binlog-
 
 TiDB-Binlog comprises two components: the **Pump** and the **Drainer**. Several Pump nodes make up a pump cluster. Each Pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A Drainer connects to the Pump cluster and transforms the received updates into the correct format for a particular downstream destination, for example, Kafka, another TiDB Cluster or a MySQL/MariaDB server.
 
-![TiDB-Binlog architecture](https://pingcap.com/images/docs/tidb_binlog_cluster_architecture.png)
+![TiDB-Binlog architecture](/media/tidb_binlog_cluster_architecture.png)
 
 The clustered architecture of Pump ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or Pump nodes join or leave the Pump cluster.
 
@@ -44,6 +44,7 @@ cd tidb-latest-linux-amd64
 ```
 
 Expected output:
+
 ```
 [kolbe@localhost ~]$ curl -LO http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -74,6 +75,7 @@ for f in *.toml; do echo "$f:"; cat "$f"; echo; done
 ```
 
 Expected output:
+
 ```
 drainer.toml:
 log-file="drainer.log"
@@ -145,6 +147,7 @@ Expected output:
 ```
 
 If you execute `jobs`, you should see a list of running daemons:
+
 ```
 [kolbe@localhost tidb-latest-linux-amd64]$ jobs
 [1]   Running                 ./bin/pd-server --config=pd.toml &>pd.out &
@@ -164,6 +167,7 @@ mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
 ```
 
 Expected output:
+
 ```
 [kolbe@localhost tidb-latest-linux-amd64]$ mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
 *************************** 1. row ***************************
@@ -197,6 +201,7 @@ show databases;
 ```
 
 Expected output:
+
 ```
 [kolbe@localhost ~]$ mysql -h 127.0.0.1 -P 3306 -u root
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -284,6 +289,7 @@ select * from t1;
 ```
 
 Expected output:
+
 ```
 MariaDB [(none)]> use tidbtest;
 Reading table information for completion of table and column names
@@ -325,6 +331,7 @@ Use `binlogctl` to get a view of the current status of Pumps and Drainers in the
 ```
 
 Expected output:
+
 ```
 [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/binlogctl -cmd drainers
 [2019/04/11 17:44:10.861 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: online, MaxCommitTS: 407638907719778305, UpdateTime: 2019-04-11 17:44:10 -0400 EDT}"]
@@ -341,6 +348,7 @@ pkill drainer
 ```
 
 Expected output:
+
 ```
 [kolbe@localhost tidb-latest-linux-amd64]$ pkill drainer
 [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/binlogctl -cmd drainers
@@ -374,6 +382,7 @@ for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1;
 ```
 
 Expected output:
+
 ```
 kolbe@localhost tidb-latest-linux-amd64]$ for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1; done
 [4]-  Done                    ./bin/tidb-server --config=tidb.toml &>tidb.out
