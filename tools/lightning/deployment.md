@@ -216,7 +216,11 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # The algorithm at level-0 is used to compress KV data.
     # The algorithm at level-6 is used to compress SST files.
     # The algorithms at level-1 to level-5 are unused for now.
-    compression-per-level = ["lz4", "no", "no", "no", "no", "no", "zstd"]
+    compression-per-level = ["lz4", "no", "no", "no", "no", "no", "lz4"]
+
+    [rocksdb.writecf]
+    # (same as above)
+    compression-per-level = ["lz4", "no", "no", "no", "no", "no", "lz4"]
 
     [import]
     # The directory to store engine files.
@@ -233,6 +237,8 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     #stream-channel-window = 128
     # Maximum number of open engines.
     max-open-engines = 8
+    # Maximum upload speed (bytes per second) from Importer to TiKV.
+    upload-speed-limit = "512MB"
     # minimum ratio of target store available space: store_available_space / store_capacity.
     # Importer pauses uploading SST if the availability ratio of the target store is less than this
     # value, to give PD enough time to balance regions.
