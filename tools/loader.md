@@ -60,7 +60,7 @@ Since tools like mysqldump will take us days to migrate massive amounts of data,
 
   -p string: the account and password of TiDB
 
-  -status-addr string: the pprof address of Loader. It can also be used by Prometheus to pull Loader metrics
+  -status-addr string: It can be used by Prometheus to pull Loader metrics, and is also the pprof address of Loader.
 
   -t int: the number of thread,increase this as TiKV nodes increase (default: 16)
 
@@ -81,7 +81,7 @@ log-file = "loader.log"
 # Directory of the dump to import (default: "./")
 dir = "./"
 
-# The pprof address of Loader. It can also be used by Prometheus to pull Loader metrics.
+# It can be used by Prometheus to pull Loader metrics, and is also the pprof address of Loader.
 status-addr = ":8272"
 
 # The checkpoint data is saved to TiDB, and the schema name is defined here.
