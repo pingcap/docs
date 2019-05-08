@@ -88,6 +88,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
 + Change/Modify Column:
     - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`.
     - Does not support changing the `UNSIGNED`, `CHARACTER SET` or `COLLATE` attributes.
++ `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
 
 For more information, see [Online Schema Changes](/key-features.md#online-schema-changes).
 
