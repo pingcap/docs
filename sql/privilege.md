@@ -6,7 +6,7 @@ category: user guide
 
 # Privilege Management
 
-TiDB's privilege management system is implemented according to the privilege management system in MySQL. It supports most of the syntaxes and privilege types in MySQL.
+TiDB supports MySQL 5.7's privilege management system, including the syntax and privilege types. Starting with TiDB 3.0, support for SQL Roles is also available.
 
 This document introduces privilege-related TiDB operations, privileges required for TiDB operations and implementation of the privilege system.
 
