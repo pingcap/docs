@@ -88,11 +88,6 @@
     - [Troubleshoot Cluster Setup](dev/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot Data Migrations](dev/how-to/troubleshoot/data-migration.md)
     - [Troubleshoot TiDB-Lightning](dev/how-to/troubleshoot/tidb-lightning.md)
-    - [Support Resources](dev/how-to/troubleshoot/support-resources.md)
-    - [Report an Issue](dev/how-to/troubleshoot/report-issue.md)
-  + [Contribute](dev/how-to/contribute.md)
-    - [Contribute to TiDB](dev/how-to/contribute.md#contribute-to-tidb)
-    - [Improve the Docs](dev/how-to/contribute.md#improve-the-docs)
 + Reference
   + SQL
     - [Supported Client Drivers](sql/connection-and-APIs.md)
@@ -209,12 +204,18 @@
     - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
     - [TiDB Controller](tools/tidb-controller.md)
     - [Download](tools/download.md)
-  - [Roadmap](ROADMAP.md)
   - [Adopters](adopters.md)
 + FAQs
   - [TiDB FAQs](FAQ.md)
   - [TiDB-Lightning FAQs](tools/lightning/faq.md)
   - [Upgrade FAQs](op-guide/upgrade-faq.md)
++ Technical Support  
+  - [Support Resources](support-resources.md)
+  - [Report an Issue](report-issue.md)
++ Contribute
+  - [Contribute to TiDB](contribute.md#contribute-to-tidb)
+  - [Improve the Docs](contribute.md#improve-the-docs)
+- [Roadmap](ROADMAP.md)
 + [Releases](releases/rn.md)
   + v3.0
     - [3.0.0 Beta.1](releases/3.0.0-beta.1.md)
