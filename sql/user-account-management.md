@@ -98,7 +98,8 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
 
 1. Modify the configuration file by adding `skip-grant-table` in the `security` part:
 
-    > [security]
+    ```
+    [security]
     > skip-grant-table = true
 
 2. Restart TiDB using the modified configuration (the `root` privilege is required):
