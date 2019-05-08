@@ -61,7 +61,7 @@ mysql> SHOW GRANTS FOR 'admin'@'localhost';
 To remove a user account, use the `DROP USER` statement:
 
 ```sql
-mysql> DROP USER 'jeffrey'@'localhost';
+mysql> DROP USER 'test'@'localhost';
 ```
 
 ## Reserved user accounts
@@ -79,7 +79,7 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
 - To assign a password when you create a new account, use `CREATE USER` and include an `IDENTIFIED BY` clause: 
 
     ```sql
-    CREATE USER 'jeffrey'@'localhost' IDENTIFIED BY 'mypass';
+    CREATE USER 'test'@'localhost' IDENTIFIED BY 'mypass';
     ```
 
 - To assign or change a password for an existing account, use `SET PASSWORD FOR` or `ALTER USER`:
@@ -91,7 +91,7 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
     Or:
 
     ```sql
-    ALTER USER 'jeffrey'@'localhost' IDENTIFIED BY 'mypass';
+    ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';
     ```
 
 ## Forget the `root` password
