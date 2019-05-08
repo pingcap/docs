@@ -54,7 +54,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB, such as Analyze, load variables, etc.; `false` indicates the SQL statement is executed by the user.
 * `Digest`: The fingerprint of the SQL statement.
 * `Memory_max`: Indicates the maximum memory space used during the execution period of this SQL statement (the unit is byte).
-* `Num_cop_tasks`: The number of cop-tasks.
+* `Num_cop_tasks`: The number of [cop-tasks](/sql/understanding-the-query-execution-plan.md).
 * `Cop_proc_avg`: The average execution time of cop-tasks.
 * `Cop_proc_p90`: The P90 quantile execution time of cop-tasks.
 * `Cop_proc_max`: The maximum execution time of cop-tasks.
@@ -186,9 +186,12 @@ Currently, `INFORMATION_SCHEMA.SLOW_QUERY` only supports parsing a slow log file
 
 ### Parse TiDB slow logs with `pt-query-digest`
 
-TiDB slow logs can be analyzed by `pt-query-digest`, for example:
+TiDB slow logs can be analyzed by `pt-query-digest`. It is recommended to use `pt-query-digest` 3.0.13 or later. For example:
 
 ```shell
+$pt-query-digest --version
+pt-query-digest 3.0.13
+
 $ pt-query-digest --report tidb-slow.log
 # 320ms user time, 20ms system time, 27.00M rss, 221.32M vsz
 # Current date: Mon Mar 18 13:18:51 2019
