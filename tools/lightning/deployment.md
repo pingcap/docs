@@ -238,7 +238,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # Maximum number of open engines.
     max-open-engines = 8
     # Maximum upload speed (bytes per second) from Importer to TiKV.
-    upload-speed-limit = "512MB"
+    #upload-speed-limit = "512MB"
     # minimum ratio of target store available space: store_available_space / store_capacity.
     # Importer pauses uploading SST if the availability ratio of the target store is less than this
     # value, to give PD enough time to balance regions.
