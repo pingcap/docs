@@ -191,7 +191,7 @@ You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGE
 
 ### ALTER
 
-- For all the `ALTER` statement, users must have the `ALTER` privilege for the corresponding table.
+- For all `ALTER` statements, users must have the `ALTER` privilege for the corresponding table.
 - For statements except `ALTER...DROP` and `ALTER...RENAME TO`, users must have the `INSERT` and `CREATE` privileges for the corresponding table.
 - For the `ALTER...DROP` statement, users must have the `DROP` privilege for the corresponding table.
 - For the `ALTER...RENAME TO` statement, users must have the `DROP` privilege for the table before renaming, and the `CREATE` and `INSERT` privileges for the table after renaming.
