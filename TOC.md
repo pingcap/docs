@@ -34,6 +34,7 @@
     - [Explore SQL with TiDB](dev/how-to/get-started/explore-sql.md)
     - [Import Example Database](dev/how-to/get-started/import-example-database.md)
     - [Read Historical Data](dev/how-to/get-started/read-historical-data.md)
+    - [TiDB-Binlog Tutorial](dev/how-to/get-started/tidb-binlog.md)
   - Deploy
     - [Hardware Recommendations](dev/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -197,7 +198,12 @@
       - [Table Filter](tools/lightning/filter.md)
       - [CSV Support](tools/lightning/csv.md)
       - [Monitor](tools/lightning/monitor.md)
-    - [TiDB-Binlog](tools/tidb-binlog-cluster.md)
+    + TiDB-Binlog
+      - [Overview](tools/binlog/overview.md)
+      - [Deploy](tools/binlog/deploy.md)
+      - [Monitor](tools/binlog/monitor.md)
+      - [Maintain](tools/binlog/operation.md)
+      - [Upgrade](tools/binlog/upgrade.md)
     - [PD Control](tools/pd-control.md)
     - [PD Recover](tools/pd-recover.md)
     - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
@@ -214,6 +220,7 @@
     - [3.0.0 Beta.1](releases/3.0.0-beta.1.md)
     - [3.0 Beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.9](releases/2.1.9.md)
     - [2.1.8](releases/2.1.8.md)
     - [2.1.7](releases/2.1.7.md)
     - [2.1.6](releases/2.1.6.md)
