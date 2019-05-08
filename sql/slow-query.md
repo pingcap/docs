@@ -66,6 +66,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Query`: A SQL statement. `Query` will not be printed in the slow log, but the corresponding field is called `Query` after the slow log mapping to the memory table.
 
 ## Memory mapping in slow log
+
 The contents of the slow log in TiDB will be parsed and then mapped to `INFORMATION_SCHEMA.SLOW_QUERY` table to identify slow query more conveniently with SQL. The column names in the table can find their corresponded field recorded in the slow log.
 
 ```sql
@@ -101,7 +102,7 @@ By parsing slow logs in TiDB in real time, the contents in the `INFORMATION_SCHE
 
 The following examples show how to identify a slow query by querying the SLOW_QUERY table.
 
-### Slow Query of quering TopN
+### Slow Query of quering Top-N
 
 Query the Top2 slow query of the users. `Is_internal=false` refers to exclude the internal slow queries in TiDB. Only the slow query of the users is needed.
 
@@ -118,7 +119,8 @@ tidb > select `Query_time`, query from INFORMATION_SCHEMA.`SLOW_QUERY` where `Is
 Time: 0.012s
 ```
 
-### Query on TopN slow query of the `test` user. 
+### Query on Top-N slow query of the `test` user. 
+
 ```sql
 /* Query all the SQL statements executed by `test` user and sorted them by execution run-time */
 tidb > select `Query_time`, query,  user from INFORMATION_SCHEMA.`SLOW_QUERY` where `Is_internal`=false and user like "test%" order by `Query_time` desc limit 2;
@@ -132,6 +134,7 @@ Time: 0.014s
 ```
 
 ### Query the slow queries like SQL based on SQL fingerprints
+
 If you want to query the slow query with the same SQL fingerprint query after querying TopN's SQL statements, you can use the fingerprint as the filter condition.
 
 ```sql
@@ -171,6 +174,7 @@ tidb > select query, query_time, stats from INFORMATION_SCHEMA.`SLOW_QUERY` wher
 #### Parse other TiDB slow log files
 
 Currently, when you query `INFORMATION_SCHEMA.SLOW_QUERY` table, only this file will be parsed. This file corresponds to the slow query name set by `slow-query-file` in the configuration file and refers to "tidb-slow.log" by default. If you want to parse other log files, you can set the session variable `tidb_slow_query_file` to the specific file path, and then query INFORMATION_SCHEMA.SLOW_QUERY` table to parse the slow log file according to the set path.
+
 ```sql
 /* Set the slow log file path to facilitate so that other slow log files will be easy to be parsed. The scope of the tidb_slow_query_file variable is session. */
 tidb > set tidb_slow_query_file="/path-to-log/tidb-slow.log"
