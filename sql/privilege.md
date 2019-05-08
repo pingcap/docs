@@ -248,7 +248,7 @@ Requires the `INSERT` and `SELECT` privileges for the table.
 
 ### SHOW
 
-`SHOW CREATE TABLE` requires any of the privileges.
+`SHOW CREATE TABLE` requires any single privilege to the table.
 
 `SHOW CREATE VIEW` requires the `SHOW VIEW` privilege.
 
