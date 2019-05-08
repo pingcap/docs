@@ -73,9 +73,9 @@ See the [Checkpoints control](../../tools/lightning/checkpoints.md#checkpoints-c
 
 **Solutions**:
 
-1. Increase the value of `max-open-engine` setting in `tikv-importer.toml`. This value is typically dictated by the available memory. This could be calculated as:
+1. Increase the value of `max-open-engines` setting in `tikv-importer.toml`. This value is typically dictated by the available memory. This could be calculated as:
 
-    Max Memory Usage ≈ `max-open-engine` × `write-buffer-size` × `max-write-buffer-number`
+    Max Memory Usage ≈ `max-open-engines` × `write-buffer-size` × `max-write-buffer-number`
 
 2. Decrease the value of `table-concurrency` + `index-concurrency` so it is less than `max-open-engines`.
 

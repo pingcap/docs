@@ -51,7 +51,7 @@ If you have sufficient machines, you can deploy multiple Lightning/Importer serv
 >
 > `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
 >
-> `tikv-importer` stores intermediate data on the RAM to speed up process. The typical memory usage can be calculated from configuration as **(`max-open-engine` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
+> `tikv-importer` stores intermediate data on the RAM to speed up process. The typical memory usage can be calculated from configuration as **(`max-open-engines` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
 
 Additionally, the target TiKV cluster should have enough space to absorb the new data.
 Besides [the standard requirements](../../op-guide/recommendation.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](../../FAQ.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
