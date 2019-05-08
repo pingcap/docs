@@ -260,13 +260,13 @@ Requires the `INSERT` and `SELECT` privileges for the table.
 
 ### DROP ROLE/USER
 
-`DROP ROLE` requires the `DROPROLE` privilege.
+`DROP ROLE` requires the `DROP ROLE` privilege.
 
-`DROP USER` requires the `CREATEUSER` privilege.
+`DROP USER` requires the `CREATE USER` privilege.
 
 ### ALTER USER
 
-Requires the `CREATEUSER` privilege.
+Requires the `CREATE USER` privilege.
 
 ### GRANT
 
