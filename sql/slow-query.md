@@ -104,7 +104,7 @@ The following examples show how to identify a slow query by querying the SLOW_QU
 
 ### Slow query of quering Top-N
 
-Query the slow query of users of Top 2. `Is_internal=false` means excluding slow queries inside TiDB and only querying slow queries from users.
+Query the Top 2 slow queries of the users. `Is_internal=false` means excluding slow queries inside TiDB and only querying slow queries from users.
 
 ```sql
 /* Query all the SQL statements executed by the user and sort them by execution run-time */
@@ -135,7 +135,7 @@ Time: 0.014s
 
 ### Query the slow queries like SQL based on SQL fingerprints
 
-If you want to query the same SQL fingerprint query after querying the Top-N SQL statement, you can use the fingerprint as the filter condition.
+If you want to query the slow query with the same SQL fingerprint query after querying the Top-N SQL statement, you can use the fingerprint as the filter condition.
 
 ```sql
 tidb > select query_time, query,digest from INFORMATION_SCHEMA.`SLOW_QUERY` where `Is_internal`=false order by `Query_time` desc limit 1;
