@@ -220,7 +220,7 @@ Requires the `CREATE VIEW` privilege.
 
 > **Note:**
 >
-> If the current user is not the user that creates the View, he needs both the `CREATE VIEW` and `SUPER` privileges.
+> If the current user is not the user that creates the View, both the `CREATE VIEW` and `SUPER` privileges are required.
 
 ### DROP DATABASE
 
