@@ -13,15 +13,18 @@ This test aims to test the performance of TiDB 3.0 Beta on NVMe SSD.
 
 ## Test version, time, and place
 
-TiDB version: 3.0 Beta
+TiDB version: 3.0 Beta  
+
 Time: February, 2019
+
 Place: Beijing
 
 ## Test environment
 
 - [Hardware requirements](https://pingcap.com/docs/op-guide/recommendation/)
-- The TiDB cluster is deployed according to the [TiDB Deployment Guide](https://pingcap.com/docs/op-guide/ansible-deployment/). Suppose there are 3 servers in total. It is recommended to deploy 1 TiDB, 1 PD and 1 TiKV on each server. As for disk space, suppose that there are 32 tables and 10M rows of data on each table, it is recommended that the disk space where TiKV's data directory resides is larger than 512 GB.
-The number of concurrent connections to a single TiDB cluster is recommended to be under 500. If you need to increase the concurrency pressure on the entire system, you can add TiDB instances to the cluster whose number depends on the pressure of the test.
+
+- The TiDB cluster is deployed according to the [TiDB Deployment Guide](https://pingcap.com/docs/op-guide/ansible-deployment/). Suppose there are 3 servers in total. It is recommended to deploy 1 TiDB instance, 1 PD instance and 1 TiKV instance on each server. As for disk space, supposing that there are 32 tables and 10M rows of data on each table, it is recommended that the disk space where TiKV's data directory resides is larger than 512 GB.
+    The number of concurrent connections to a single TiDB cluster is recommended to be under 500. If you need to increase the concurrency pressure on the entire system, you can add TiDB instances to the cluster whose number depends on the pressure of the test.
 
 IDC machines:
  
@@ -54,7 +57,7 @@ IDC machines:
 
 ### TiDB configuration
 
-Higher log level means fewer logs to be printed and thus positively influence TiDB performance. Turn on the `prepared plan cache` in the TiDB configuration to lower the cost of optimizing execution plan. Specifically, you can add the following command in the TiDB configuration file:
+Higher log level means fewer logs to be printed and thus positively influences TiDB performance. Enable `prepared plan cache` in the TiDB configuration to lower the cost of optimizing execution plan. Specifically, you can add the following command in the TiDB configuration file:
 
 ```
 [log]
@@ -67,7 +70,7 @@ enabled = true
 
 Higher log level also means better performance for TiKV.
 
-As TiKV is deployed in clusters, the Raft algorithm can guarantee that data is written into most of the nodes. Therefore, apart from the scenarios where data security is extremely sensitive, the `sync-log` can be turned off in raftstore.
+As TiKV is deployed in clusters, the Raft algorithm can guarantee that data is written into most of the nodes. Therefore, except the scenarios where data security is extremely sensitive, `sync-log` can be disabled in raftstore.
 
 There are 2 Column Families (Default CF and Write CF) on TiKV cluster which are mainly used to store different types of data. For the Sysbench test, the Column Family that is used to import data has a constant proportion among TiDB clusters: 
 
@@ -89,7 +92,9 @@ For more detailed information on TiKV performance tuning, see [Tune TiKV Perform
  
 ## Test process
 
-> **Note:** This test was performed without load balancing tools such as HAproxy. We run the Sysbench test on individual TiDB node and added the results up. The load balancing tools and the parameters of different versions might also impact the performance.
+> **Note:**
+>
+> This test was performed without load balancing tools such as HAproxy. We run the Sysbench test on individual TiDB node and added the results up. The load balancing tools and the parameters of different versions might also impact the performance.
 
 ### Sysbench configuration
 
@@ -131,10 +136,12 @@ create database sbtest;
 
 Adjust the order in which Sysbench scripts create indexes. Sysbench imports data in the order of "Build Table -> Insert Data -> Create Index", which takes more time for TiDB to import data. Users can adjust the order to speed up the import of data. Suppose that you use Sysbench version https://github.com/akopytov/sysbench/tree/1.0.14. You can adjust the order in the following two ways.
 
-1. Download the TiDB-modified [oltp_common.lua](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench-patch/oltp_common.lua) file and overwrite the `/usr/share/sysbench/oltp_common.lua` file with it. 
+1. Download the TiDB-modified [oltp_common.lua](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua) file and overwrite the `/usr/share/sysbench/oltp_common.lua` file with it. 
 2. Move the [235th](https://github.com/akopytov/sysbench/blob/1.0.14/src/lua/oltp_common.lua#L235) to [240th](https://github.com/akopytov/sysbench/blob/1.0.14/src/lua/oltp_common.lua#L240) lines of `/usr/share/sysbench/oltp_common.lua` to be right behind 198th lines.
 
-> **Note:** This operation is optional and is only to save the time consumed by data import. 
+> **Note:**
+>
+> This operation is optional and is only to save the time consumed by data import. 
 
 At the command line, enter the following command to start importing data. The config file is the one configured in the previous step:
 
@@ -231,7 +238,7 @@ Take HAproxy as an example. The parameter `nbproc` can increase the number of pr
 
 ### Under high concurrency, why is the CPU utilization rate of TiKV still low?
 
-Although the overall CPU utilization rate is low for TiKV, the CPU utilization rate of some modules is the cluster might be high.
+Although the overall CPU utilization rate is low for TiKV, the CPU utilization rate of some modules in the cluster might be high.
 
 The maximum concurrency limits for other modules on TiKV, such as storage readpool, coprocessor, and gRPC, can be adjusted through the TiKV configuration file.
 
