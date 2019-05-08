@@ -2,7 +2,6 @@
 title: Contribute
 summary: Learn how to contribute to the TiDB database.
 category: how-to
-aliases: ['/docs/contribute/']
 ---
 
 # Contribute
