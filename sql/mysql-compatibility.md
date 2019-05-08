@@ -78,7 +78,7 @@ TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL G
 
 ### DDL
 
-TiDB implements the asynchronous schema changes algorithm in F1. This means that DDL does not block reads or writes to tables while in operation. However, some restrictions currently apply to DDL changes:
+In TiDB DDL does not block reads or writes to tables while in operation. However, some restrictions currently apply to DDL changes:
 
 + Add Index: Does not support creating multiple indexes at the same time.
 + Add Column:
@@ -88,6 +88,8 @@ TiDB implements the asynchronous schema changes algorithm in F1. This means that
 + Change/Modify Column:
     - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`.
     - Does not support changing the `UNSIGNED`, `CHARACTER SET` or `COLLATE` attributes.
+
+For more information, see [Online Schema Changes](/key-features.md#online-schema-changes).
 
 ### Analyze table
 
