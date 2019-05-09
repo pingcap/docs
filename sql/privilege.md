@@ -345,8 +345,6 @@ When TiDB starts, some privilege-check tables are loaded into memory, and then t
 
 Manually editing tables such as `mysql.user` with statements such as `INSERT`, `DELETE`, `UPDATE` will not take effect immediately. This behavior is compatible with MySQL, and privilege cache can be updated with the following statement:
 
-If an immediate effect is needed when you modify the `grant` table, you can run the following command:
-
 ```sql
 FLUSH PRIVILEGES;
 ```
