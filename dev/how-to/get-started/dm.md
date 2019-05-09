@@ -75,7 +75,7 @@ auto-increment-offset=3
 EoCNF
 ```
 
-Initialize and start MySQL our instances:
+Initialize and start our MySQL instances:
 ```bash
 for i in 1 2 3
 do
@@ -87,9 +87,11 @@ done
 
 ### Non-overlapping shards
 
-Our first scenario consists of 3 "shards" with the same schema, but non-overlapping auto-increment primary keys. We achieve that by having set `auto-increment-increment=5` and `auto-increment-offset` in our .my.cnf file. `auto-increment-increment` tells each instance to increment by 5 for each new auto-increment ID it generates, and `auto-increment-offset`, set differently for each instance, tells that instance the offset from 0 to start counting. For example, an instance with `auto-increment-increment=5` and `auto-increment-offset=2` will generate the auto-increment ID sequence {2,7,12,17,22,…}.
+Our first scenario consists of 3 "shards" with the same schema, but non-overlapping auto-increment primary keys.
 
-Create our MySQL schema and table in each of the 3 MySQL Server instances:
+We achieve that by having set `auto-increment-increment=5` and `auto-increment-offset` in our .my.cnf file. `auto-increment-increment` tells each instance to increment by 5 for each new auto-increment ID it generates, and `auto-increment-offset`, set differently for each instance, tells that instance the offset from 0 to start counting. For example, an instance with `auto-increment-increment=5` and `auto-increment-offset=2` will generate the auto-increment ID sequence {2,7,12,17,22,…}.
+
+Create our MySQL database and table in each of the 3 MySQL Server instances:
 ```bash
 for i in 1 2 3
 do
@@ -122,7 +124,7 @@ for i in 1 2 3; do
 done | sort -n
 ```
 
-Note that we have incrementing, non-overlapping IDs in the left-hand column. The port number in the right-hand column shows which instance the rows are coming from:
+Note that we have incrementing, non-overlapping IDs in the left-hand column. The port number in the right-hand column shows which instance the rows were inserted into and are being selected from:
 ```
 ...
 1841    e8dfff4676a47048d6f0c4ef899593dd        3307
