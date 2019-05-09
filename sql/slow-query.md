@@ -45,7 +45,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Query_time`: Indicates the execution time of this statement. Only the statement whose execution time exceeds slow-threshold outputs this log (the unit is second). The unit of all the following time fields is second.
 * `Process_time`: The total processing time of this SQL statement in TiKV. Because the data is sent to TiKV concurrently, this value may exceed `Query_time`.
 * `Wait_time`: The total waiting time of this statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests will increase.
-* `Backoff_time`: The waiting time before retry when this statement encounters errors that require a retry. The common errors as such include: lock occurring, Region splitting, and `tikv server is busy`.
+* `Backoff_time`: The waiting time before retry when this statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 * `Request_count`: The number of Coprocessor requests that this statement sends.
 * `Total_keys`: The number of keys that Coprocessor has scanned.
 * `Process_keys`: The number of keys that Coprocessor has processed. Compared with `total_keys`, `processed_keys` does not include the old versions of MVCC. A great difference between `processed_keys` and `total_keys` indicates that many old versions exist.
@@ -56,11 +56,11 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Memory_max`: Indicates the maximum memory space used during the execution period of this SQL statement (the unit is byte).
 * `Num_cop_tasks`: The number of [cop-tasks](/sql/understanding-the-query-execution-plan.md).
 * `Cop_proc_avg`: The average execution time of cop-tasks.
-* `Cop_proc_p90`: The P90 quantile execution time of cop-tasks.
+* `Cop_proc_p90`: The P90 execution time of cop-tasks.
 * `Cop_proc_max`: The maximum execution time of cop-tasks.
-* `Cop_proc_addr`: The address of the cop-task whose execution time is the longest.
+* `Cop_proc_addr`: The address of the cop-task with the longest execution time.
 * `Cop_wait_avg`: The average waiting time of cop-tasks.
-* `Cop_wait_p90`: The P90 waiting time of cop-task.
+* `Cop_wait_p90`: The P90 waiting time of cop-tasks.
 * `Cop_wait_max`: The maximum waiting time of cop-tasks.
 * `Cop_wait_addr`: The address of the cop-task whose waiting time is the longest.
 * `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
@@ -102,7 +102,7 @@ By parsing slow logs in TiDB in real time, the contents in the `INFORMATION_SCHE
 
 The following examples show how to identify a slow query by querying the SLOW_QUERY table.
 
-### Slow query of quering Top-N
+### Top-N slow queries 
 
 Query the Top 2 slow queries of the users. `Is_internal=false` means excluding slow queries inside TiDB and only querying slow queries from users.
 
@@ -133,7 +133,7 @@ tidb > select `Query_time`, query,  user from INFORMATION_SCHEMA.`SLOW_QUERY` wh
 Time: 0.014s
 ```
 
-### Query the slow queries like SQL based on SQL fingerprints
+### Query slow queries with the same SQL fingerprints
 
 If you want to query the slow query with the same SQL fingerprint query after querying the Top-N SQL statement, you can use the fingerprint as the filter condition.
 
