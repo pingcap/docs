@@ -41,7 +41,7 @@ CREATE TABLE person (
 
 In this table, the `city` column is a **generated column**. As the name implies, the column is generated from other columns in the table, and cannot be assigned a value when inserted or updated. This column is generated based on the expression it defines and it is stored in the database. Thus this column can be read directly, not in a way that the `address_info` column it depends on is read first and then the data is calculated. The index on `city` however is _stored_ and uses the same structure as other indexes of the type `varchar(64)`.
 
-You can use the index on the generated stored column in order to speed up the following statement:
+You can use the index on the stored generated column in order to speed up the following statement:
 
 ```sql
 SELECT name, id FROM person WHERE city = 'Beijing';
