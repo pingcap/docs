@@ -397,7 +397,7 @@ The following example uses `tidb` as the user who runs the service.
     ansible -i inventory.ini all -m shell -a 'whoami'
     ```
 
-    Run the following command and if all servers return `root`, then sudo without password of the `tidb` user is successfully configured:
+    Run the following command and if all servers return `tidb`, then sudo without password of the `tidb` user is successfully configured:
 
     ```bash
     ansible -i inventory.ini all -m shell -a 'whoami' -b
