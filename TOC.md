@@ -73,7 +73,7 @@
     + Scale
       - [Scale a TiDB Cluster](dev/how-to/maintain/scale/horizontally.md)
       - [Scale using Ansible](dev/how-to/maintain/scale/with-ansible.md)
-    - [Identify slow queries](dev/how-to/maintain/identify-slow-queries.md)
+    - [Identify Slow Queries](dev/how-to/maintain/identify-slow-queries.md)
     + Upgrade
       - [Upgrade from TiDB 2.1](dev/how-to/maintain/upgrade/from-previous-version.md)
       - [Upgrade Data Migration](dev/how-to/maintain/upgrade/data-migration.md)
