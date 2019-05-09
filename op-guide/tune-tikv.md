@@ -67,7 +67,7 @@ log-level = "info"
 ##
 ## Block cache is used by RocksDB to cache uncompressed blocks. Big block cache can speed up read.
 ## It is recommended to turn on shared block cache. Since only the total cache size need to be
-## set, it is easier to config. In most cases it should be able to auto-balance cache usage
+## set, it is easier to configure. In most cases, it should be able to auto-balance cache usage
 ## between column families with standard LRU algorithm.
 ##
 ## The rest of config in the storage.block-cache session is effective only when shared block cache
