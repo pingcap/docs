@@ -1,19 +1,38 @@
-TiDB-DM (Data Migration) is a platform that supports migrating large, complex, production data sets from MySQL or MariaDB to TiDB.
+---
+title: TiDB DM (Data Migration) Tutorial
+summary: Learn the basics of the TiDB DM (Data Migration) platform.
+category: how-to
+---
 
-TiDB-DM can support migrating sharded topologies from in-production databases by merging tables from multiple separate MySQL/MariaDB instances/clusters and applying rolling production updates using the MySQL/MariaDB binary log.
+# TiDB DM (Data Migration) Tutorial
+
+TiDB DM (Data Migration) is a platform that supports migrating large, complex, production data sets from MySQL or MariaDB to TiDB.
+
+DM supports creating and importing an initial dump of data, as well as keeping data synchronized during migration by reading and applying binary logs from the source data store. DM can migrate sharded topologies from in-production databases by merging tables from multiple separate upstream MySQL/MariaDB instances/clusters.
 
 In this tutorial, we'll see how to migrate a sharded table from multiple upstream MySQL instances. We'll do this a couple of different ways. First, we'll merge several tables/shards that do not conflict; that is, they're partitioned using a scheme that does not result in conflicting unique key values. Then, we'll merge several tables that **do** have conflicting unique key values.
 
 This tutorial assumes you're using a new, clean CentOS 7 instance. You can virtualize locally (using VMware, VirtualBox, etc.), or deploy a small cloud VM on your favorite provider. You'll have the best luck if you have at least 1GB of memory, since we're going to run quite a few services.
 
 ### Architecture
-https://pingcap.com/images/docs/dm-architecture.png
 
-https://pingcap.com/docs/tools/dm/overview/
+![TiDB DM architecture](https://pingcap.com/images/docs/dm-architecture.png)
+
+The TiDB DM (Data Migration) platform consists of 3 components: dm-master, dm-worker, and dmctl.
+
+* dm-master manages and schedules the operation of data synchronization tasks.
+* dm-worker executes specific data synchronization tasks.
+* dmctl is the command line tool used to control the DM cluster.
+
+Individual tasks are defined in .yaml files that are read by dmctl and submitted to dm-master. dm-master then informs each instance of dm-worker of its responsibilities for a given task.
+
+For additional information about DM, please consult [Data Migration Overview](https://pingcap.com/docs/tools/dm/overview/) in the TiDB documentation.
 
 ### Setup
 
-First, install MySQL 5.7 and download/extract the TiDB packages we'll use: 
+We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-server, tikv-server, and tidb-server. Then we'll start a single dm-master and 3 instances of dm-worker.
+
+First, install MySQL 5.7 and download/extract the TiDB packages we'll use:
 ```bash
 sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
 sudo yum install -y mysql-community-server
@@ -29,7 +48,7 @@ ln -sf -t bin/ "$HOME"/*/bin/*
 [[ :$PATH: = *:$HOME/bin:* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
 ```
 
-Set up MySQL configuration for the 3 instances we'll run:
+Set up configuration for the 3 instances of MySQL Server we'll start:
 ```bash
 tee -a "$HOME/.my.cnf" <<EoCNF
 [server]
@@ -56,7 +75,7 @@ auto-increment-offset=3
 EoCNF
 ```
 
-Initialize and start MySQL instances:
+Initialize and start MySQL our instances:
 ```bash
 for i in 1 2 3
 do
@@ -67,7 +86,10 @@ done
 ```
 
 ### Non-overlapping shards
-Create MySQL schema:
+
+Our first scenario consists of 3 "shards" with the same schema, but non-overlapping auto-increment primary keys. We achieve that by having set `auto-increment-increment=5` and `auto-increment-offset` in our .my.cnf file. `auto-increment-increment` tells each instance to increment by 5 for each new auto-increment ID it generates, and `auto-increment-offset`, set differently for each instance, tells that instance the offset from 0 to start counting. For example, an instance with `auto-increment-increment=5` and `auto-increment-offset=2` will generate the auto-increment ID sequence {2,7,12,17,22,…}.
+
+Create our MySQL schema and table in each of the 3 MySQL Server instances:
 ```bash
 for i in 1 2 3
 do
@@ -100,7 +122,7 @@ for i in 1 2 3; do
 done | sort -n
 ```
 
-The port number in the right-hand columns shows which instance the rows are coming from):
+Note that we have incrementing, non-overlapping IDs in the left-hand column. The port number in the right-hand column shows which instance the rows are coming from:
 ```
 ...
 1841    e8dfff4676a47048d6f0c4ef899593dd        3307
@@ -117,20 +139,20 @@ The port number in the right-hand columns shows which instance the rows are comi
 1858    d7fd118e6f226a71b5f1ffe10efd0a78        3309
 ```
 
-### Starting TiDB-DM master and workers
+### Starting DM master and workers
 
 Our goal in this exercise is to use DM to combine the data from these distinct MySQL instances into a single table in TiDB.
 
-The package of configuation files we unpacked earlier contains the configuration for the components of the TiDB-DM cluster as well as configuration files for the 2 tasks we'll explore in this tutorial.
+The package of configuation files we unpacked earlier (dm-cnf.tgz) contains the configuration for the components of the TiDB cluster, the DM components, and for the 2 DM tasks we'll explore in this tutorial.
 
-We'll start a single dm-master process and one dm-worker process for each of the MySQL server instances (3 total):
+We'll start a single tidb-server instance, one dm-worker process for each of the MySQL server instances (3 total), and a single dm-master process:
 ```bash
 tidb-server --log-file=logs/tidb-server.log &
 for i in 1 2 3; do dm-worker --config=dm-cnf/dm-worker$i.toml & done
 dm-master --config=dm-cnf/dm-master.toml &
 ```
 
-Each of the upstream instances corresponds to a separate dm-worker instance, each of which has its own configuration file. These files describe the details of the connection to the upstream MySQL server as well as where to store the relay log files (the local copy of the upstream server's binary log) and the output of mydumper. Each dm-worker should listen on a different port (defined by `worker-addr`). Here's dm-worker1.toml, for example:
+Each of the upstream MySQL Server instances corresponds to a separate dm-worker instance, each of which has its own configuration file. These files describe the details of the connection to the upstream MySQL Server as well as where to store the relay log files (the local copy of the upstream server's binary log) and the output of mydumper. Each dm-worker should listen on a different port (defined by `worker-addr`). Here's dm-worker1.toml, for example:
 ```toml
 # Worker Configuration.
 
@@ -152,11 +174,11 @@ port = 3307
 
 Tasks are defined in YAML files. First, let's look at dmtask1.yaml. You'll see a number of global options, and several groups of options that define various behaviors.
 
-* `task-mode: all` tells TiDB-DM to both import a full backup of the upstream instances as well as replicate incremental updates using the upstream MySQL server's binary log.
-  * You can give `task-mode` the `full` or `incremental` value, respectively, to get only one of those two behaviors.
-* `is-sharding: true` tells TiDB-DM that we want multiple dm-worker instances to work on a single task to merge several upstream shards into a single downstream table.
-* `ignore-checking-items: ["auto_increment_ID"]` disables TiDB-DM's detection of potential auto-increment conflicts among the upstream instances. TiDB-DM can detect that all 3 upstream MySQL servers have an auto-increment column for a table with the same name in the same schema, and that this situation would be expected to lead to conflicts among the several tables. We've avoided that by setting `auto-increment-increment` and `auto-increment-offset` so that each of the MySQL servers gives non-overlapping IDs. So, we tell TiDB-DM to ignore checking for overlapping auto-increment IDs in this task.
-* We use a `black-white-list` to limit the scope of this task to database `dmtest`.
+* `task-mode: all` tells DM to both import a full backup of the upstream instances as well as replicate incremental updates using the upstream MySQL server's binary log.
+  * Alternatively, you can give `task-mode` the `full` or `incremental` value, respectively, to get only one of those two behaviors.
+* `is-sharding: true` tells DM that we want multiple dm-worker instances to work on a single task to merge several upstream shards into a single downstream table.
+* `ignore-checking-items: ["auto_increment_ID"]` disables DM's detection of potential auto-increment conflicts among the upstream instances. DM can detect that all 3 upstream MySQL servers have an auto-increment column for a table with the same name in the same schema, and that this situation would be expected to lead to conflicts among the several tables. We've avoided that by setting `auto-increment-increment` and `auto-increment-offset` so that each of the MySQL servers gives non-overlapping IDs. So, we tell DM to ignore checking for overlapping auto-increment IDs in this task.
+* We use `black-white-list` to limit the scope of this task to database `dmtest`.
 * The `loaders` section defines where to find the output of each instance of mydumper that was executed by the respective instance of dm-worker. 
 
 ```yaml
@@ -199,7 +221,7 @@ loaders:
     dir: "data/dump3"
 ```
 
-The `dmctl` tool is an interactive client that facilitates interaction with the TiDB-DM cluster. You use it to start tasks, query task status, et cetera. Start the tool by executing `dmctl` to get the interactive prompt:
+The `dmctl` tool is an interactive client that facilitates interaction with the DM cluster. You use it to start tasks, query task status, et cetera. Start the tool by executing `dmctl -master-addr :8261` to get the interactive prompt:
 ```
 $ dmctl -master-addr :8261
 Welcome to dmctl
@@ -239,7 +261,6 @@ To start dmtask1, execute `start-task dm-cnf/dmtask1.yaml`:
 ```
 
 Starting the task will kick off the actions defined in the task configuration file. That includes executing instances of mydumper and loader, and connecting the workers to the upstream MySQL servers as replication slaves after the initial data dump has been loaded.
-
 
 
 We can see that all rows have been migrated to the TiDB server:
@@ -345,7 +366,7 @@ EoSQL
 done
 ```
 
-Insert a few hundred rows into each of the MySQL instances. By setting `auto_increment_increment=1` and `auto_increment_offset=1`, we'll ensure that all 3 MySQL servers allocate the same auto-increment IDs:
+Insert a few hundred rows into each of the MySQL instances. By setting `auto_increment_increment=1` and `auto_increment_offset=1`, we'll ensure that all 3 MySQL servers allocate the same sequence of auto-increment IDs:
 ```bash
 for i in 1 2 3; do
     mysql -h 127.0.0.1 -P "$((3306+i))" -u root dmtest2 <<EoSQL
@@ -388,9 +409,9 @@ If we try to migrate these rows as-is into a single table in a downstream TiDB i
 Let's taks a look at dmtask2.yaml.
 
 * We aren't using `ignore-checking-items: ["auto_increment_ID"]` anymore, because the upstream auto-increment IDs **do** collide.
-* We use `column-mappings` to tell TiDB-DM how we want it to handle the shard merge operation
+* We use `column-mappings` to tell DM how we want it to handle the shard merge operation.
   * We have a single upstream schema and table, so our `schema-pattern` and `table-pattern` are actually just strings.
-    * You can include wildcards in these if you want to merge multiple schemas and/or tables.
+    * You can include wildcards in these if you want to merge multiple schemas and/or tables into a single downstream table.
   * The `partition id` expression has a corresponding `arguments` section that controls the algorithm used to transform upstream IDs into those used in the downstream TiDB cluster. There's a more in-depth discussion of this algorithm later in this tutorial.
   * `source_column` and `target_column` are pretty self-explanatory, but it's worth noting that they offer the possibility of merging upstream inserts into a downstream table with a different structure, for example if you need to preserve the original values.
   * Each entry in `mysql-instances` has a different column mapping because different arguments to the `partition id` algorithm needs to be used for each.
@@ -408,7 +429,7 @@ target-database:
   user: "root"
   password: ""
 
-# The column-mappings section tells TiDB-DM how we want it to combine
+# The column-mappings section tells DM how we want it to combine
 # the data from the 3 upstream instances.
 column-mappings:
   mysql1:
@@ -483,7 +504,7 @@ Expected output:
 1729382256910270836     24b16fede9a67c9251d3e7c7161c83ac        3309
 ```
 
-So, how do we end up with these new ID values in the left-most column of our downstream table?  TiDB-DM uses an algorithm to bit-shift the ID assigned by the upstream MySQL instances to generate a unique ID for the downstream TiDB instance. In our test case, the partition ID consists only of the "instance ID", because the schema and table names are the same on each of the upstream MySQL servers. We left the "schema ID" and "table ID" components of the partition id expression arguments blank:
+So, how do we end up with these new ID values in the left-most column of our downstream table? DM uses an algorithm to bit-shift the ID assigned by the upstream MySQL instances to generate a unique ID for the downstream TiDB instance. In our test case, the partition ID consists only of the "instance ID", because the schema and table names are the same on each of the upstream MySQL servers. We left the "schema ID" and "table ID" components of the partition id expression arguments blank:
 
 ```
 $ grep arguments dm-cnf/dmtask2.yaml
@@ -537,7 +558,9 @@ Expected output:
 
 ### Conclusion
 
-In this tutorial, we've completed 2 exercises. The first was a shard migration from 3 upstream MySQL server instances that each assigned non-overlapping sets of auto-increment IDs, and the second was a shard migration from 3 upstream MySQL server instances that each assigned auto-increment IDs that conflicted with one another. We saw how TiDB-DM not only takes care of importing an initial dump of data in the cluster, but that it can also read binary logs to keep the downstream TiDB cluster in sync with the upstream instance(s).
+In this tutorial, we've completed 2 exercises. The first was a shard migration from 3 upstream MySQL server instances that each assigned non-overlapping sets of auto-increment IDs, and the second was a shard migration from 3 upstream MySQL server instances that each assigned auto-increment IDs that conflicted with one another. We saw how DM not only takes care of importing an initial dump of data in the cluster, but that it can also read binary logs to keep the downstream TiDB cluster in sync with the upstream instance(s).
+
+For additional information about DM, please consult [Data Migration Overview](https://pingcap.com/docs/tools/dm/overview/) in the TiDB documentation.
 
 TODO:
 * PR/FR for command-line behavior of dmctl
