@@ -341,7 +341,9 @@ The use of `%` in `tables_priv` and `columns_priv` is similar, but column value 
 
 ### Time of effect
 
-When TiDB starts, some privilege-check tables are loaded into memory, and then the cached data is used to verify the privileges. The system will periodically synchronize the `grant` table from database to cache. Time of effect is determined by the synchronization cycle. Currently, the value is 5 minutes.
+When TiDB starts, some privilege-check tables are loaded into memory, and then the cached data is used to verify the privileges. Executing privilege management statements such as `GRANT`, `REVOKE`, `CREATE USER`, `DROP USER` will take effect immediately.
+
+Manually editing tables such as `mysql.user` with statements such as `INSERT`, `DELETE`, `UPDATE` will not take effect immediately. This behavior is compatible with MySQL, and privilege cache can be updated with the following statement:
 
 If an immediate effect is needed when you modify the `grant` table, you can run the following command:
 
