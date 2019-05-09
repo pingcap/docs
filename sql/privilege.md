@@ -1,8 +1,7 @@
 ---
 title: Privilege Management
 summary: Learn how to manage the privilege.
-category: how-to
-aliases: ['/docs/sql/privilege/']
+category: user guide
 ---
 
 # Privilege Management
@@ -329,7 +328,7 @@ auth_spec: {
 }
 ```
 
-For more information about the user account, see [TiDB user account management](/dev/how-to/secure/user-account-management.md).
+For more information about the user account, see [TiDB user account management](../sql/user-account-management.md).
 
 - `IDENTIFIED BY 'auth_string'`
 

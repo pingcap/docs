@@ -1,7 +1,7 @@
 ---
 title: Report an Issue
 summary: Report an issue with your TiDB installation.
-category: how-to
+category: support
 ---
 
 # Report an Issue
