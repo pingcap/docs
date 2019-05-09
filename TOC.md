@@ -50,7 +50,7 @@
       - [Overview](dev/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](dev/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [TiSpark](dev/how-to/deploy/tispark.md)
-    - [Data Migration with Ansible](/tools/dm/deployment.md)
+    - [Data Migration with Ansible](dev/how-to/deploy/data-migration-with-ansible.md)
   + Configure
     - [Time Zone](sql/time-zone.md)
     - [Memory Control](sql/tidb-memory-control.md)
