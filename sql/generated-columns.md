@@ -8,7 +8,7 @@ category: user guide
 
 TiDB supports generated columns as part of MySQL 5.7 compatibility. One of the primary use cases for generated columns is to extract data out of a JSON data type and enable it to be indexed.
 
-## Index JSON using generated stored column
+## Index JSON using stored generated column
 
 In both MySQL 5.7 and TiDB, columns of type JSON can not be indexed directly. i.e. The following table structure is **not supported**:
 
