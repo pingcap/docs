@@ -269,7 +269,6 @@
     - [TiDB](op-guide/tidb-dashboard-info.md)
     - [PD](op-guide/dashboard-pd-info.md)
     - [TiKV](op-guide/dashboard-tikv-info.md)
-  - [Roadmap](ROADMAP.md)
   - [Adopters](adopters.md)
 + FAQs
   - [TiDB FAQs](FAQ.md)
@@ -281,6 +280,7 @@
 + Contribute
   - [Contribute to TiDB](contribute.md#contribute-to-tidb)
   - [Improve the Docs](contribute.md#improve-the-docs)
+- [Roadmap](ROADMAP.md)
 + [Releases](releases/rn.md)
   + v3.0
     - [3.0.0 Beta.1](releases/3.0.0-beta.1.md)
