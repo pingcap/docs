@@ -1,7 +1,8 @@
 ---
 title: FAQs After Upgrade
 summary: Learn about the FAQs after upgrading TiDB.
-category: deployment
+category: faq
+aliases: ['/docs/op-guide/upgrade-faq/']
 ---
 
 # FAQs After Upgrade
