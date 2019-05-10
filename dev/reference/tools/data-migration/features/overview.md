@@ -2,7 +2,7 @@
 title: Data Synchronization Features
 summary: Learn about the data synchronization features provided by the Data Migration tool.
 category: reference
-aliases: ['']
+aliases: ['/docs/tools/dm/data-synchronization-features/']
 ---
 
 # Data Synchronization Features

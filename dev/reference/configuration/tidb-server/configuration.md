@@ -2,7 +2,7 @@
 title: Configuration Flags
 summary: Learn some configuration flags for TiDB
 category: reference
-aliases: ['']
+aliases: ['/docs/op-guide/configuration/']
 ---
 
 # Configuration Flags

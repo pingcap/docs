@@ -2,7 +2,7 @@
 title: TiDB Monitoring Metrics
 summary: Learn some key metrics displayed on the Grafana TiDB dashboard.
 category: reference
-aliases: ['']
+aliases: ['/docs/op-guide/tidb-dashboard-info/']
 ---
 
 # TiDB Monitoring Metrics

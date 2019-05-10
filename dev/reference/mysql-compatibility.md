@@ -2,7 +2,7 @@
 title: Compatibility with MySQL
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
 category: reference
-aliases: [''] 
+aliases: ['/docs/sql/mysql-compatibility/'] 
 ---
 
 # Compatibility with MySQL

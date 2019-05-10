@@ -2,7 +2,7 @@
 title: JSON Functions
 summary: Learn about JSON functions.
 category: reference
-aliases: ['']
+aliases: ['/docs/sql/json-functions/']
 ---
 
 # JSON Functions

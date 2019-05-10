@@ -2,7 +2,7 @@
 title: User-Defined Variables
 summary: Learn how to use user-defined variables.
 category: reference
-aliases: ['']
+aliases: ['/docs/sql/user-defined-variables/']
 ---
 
 # User-Defined Variables

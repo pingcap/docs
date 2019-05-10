@@ -2,7 +2,7 @@
 title: TiDB-Binlog Monitoring
 summary: Learn how to monitor the cluster version of TiDB-Binlog.
 category: reference
-aliases: ['']
+aliases: ['/docs/tools/binlog/monitor/']
 ---
 
 # TiDB-Binlog Monitoring

@@ -2,7 +2,7 @@
 title: Optimizer Hints
 summary: Use Optimizer Hints to influence query execution plans
 category: reference
-aliases: ['']
+aliases: ['/docs/sql/optimizer-hints/']
 ---
 
 # Optimizer Hints

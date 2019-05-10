@@ -2,7 +2,7 @@
 title: Synchronize Data Using Data Migration
 summary: Use the Data Migration tool to synchronize the full data and the incremental data.
 category: reference
-aliases: ['']
+aliases: ['/docs/tools/dm/practice/']
 ---
 
 # Synchronize Data Using Data Migration

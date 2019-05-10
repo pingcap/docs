@@ -2,7 +2,7 @@
 title: Manage the Data Synchronization Task
 summary: Use dmctl to manage the data synchronization task.
 category: reference
-aliases: ['']
+aliases: ['/docs/tools/dm/manage-task/']
 ---
 
 # Manage the Data Synchronization Task

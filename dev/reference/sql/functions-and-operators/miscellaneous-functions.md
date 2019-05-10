@@ -2,7 +2,7 @@
 title: Miscellaneous Functions
 summary: Learn about miscellaneous functions in TiDB.
 category: reference
-aliases: ['']
+aliases: ['/docs/sql/miscellaneous-functions/']
 ---
 
 # Miscellaneous Functions

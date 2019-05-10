@@ -2,7 +2,7 @@
 title: Constraints
 summary: Learn how SQL Constraints apply to TiDB.
 category: reference
-aliases: [''] 
+aliases: ['/docs/sql/constraints/'] 
 ---
 
 # Constraints

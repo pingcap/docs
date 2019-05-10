@@ -2,7 +2,7 @@
 title: TiDB Specific System Variables
 summary: Use system variables specific to TiDB to optimize performance.
 category: reference
-aliases: ['']
+aliases: ['/docs/sql/tidb-specific/']
 ---
 
 # TiDB Specific System Variables

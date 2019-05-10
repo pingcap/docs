@@ -2,7 +2,7 @@
 title: TiSpark User Guide
 summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution for both online transactions and analysis.
 category: reference
-aliases: [''] 
+aliases: ['/docs/tispark/tispark-user-guide/'] 
 ---
 
 # TiSpark User Guide

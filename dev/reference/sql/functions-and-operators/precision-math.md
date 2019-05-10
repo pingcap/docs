@@ -2,7 +2,7 @@
 title: Precision Math
 summary: Learn about the precision math in TiDB.
 category: reference
-aliases: ['']
+aliases: ['/docs/sql/precision-math/']
 ---
 
 # Precision Math

@@ -2,7 +2,7 @@
 title: Privilege Management
 summary: Learn how to manage the privilege.
 category: reference
-aliases: ['']
+aliases: ['/docs/sql/privilege/']
 ---
 
 # Privilege Management
