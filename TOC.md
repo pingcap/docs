@@ -80,7 +80,7 @@
       - [Rolling updates with Ansible](dev/how-to/maintain/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](dev/how-to/troubleshoot/cluster-setup.md)
-    - [Troubleshoot Data Migrations](dev/how-to/troubleshoot/data-migration.md)
+    - [Troubleshoot Data Migration](dev/how-to/troubleshoot/data-migration.md)
     - [Troubleshoot TiDB-Lightning](dev/how-to/troubleshoot/tidb-lightning.md)
 + Reference
   - [MySQL Compatibility](sql/mysql-compatibility.md)
