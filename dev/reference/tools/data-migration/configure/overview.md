@@ -1,7 +1,8 @@
 ---
 title: Data Migration Configuration File Overview
 summary: This document gives an overview of Data Migration configuration files. 
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # Data Migration Configuration File Overview

@@ -1,7 +1,8 @@
 ---
 title: Error Codes and Troubleshooting
 summary: Learn about the error codes and solutions in TiDB.
-category: user guide
+category: reference
+aliases: [''] 
 ---
 
 # Error Codes and Troubleshooting

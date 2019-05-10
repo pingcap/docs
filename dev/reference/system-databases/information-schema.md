@@ -1,3 +1,10 @@
+---
+title: Information Schema
+summary: Learn how to use Information Schema in TiDB.
+category: reference
+aliases: [''] 
+---
+
 # Information Schema
 
 As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` tables. Many of these tables also have a corresponding `SHOW` command. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.

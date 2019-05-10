@@ -1,7 +1,8 @@
 ---
 title: Data Migration Cluster Operations
 summary: This document introduces the DM cluster operations and considerations when you administer a DM cluster using DM-Ansible.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # Data Migration Cluster Operations

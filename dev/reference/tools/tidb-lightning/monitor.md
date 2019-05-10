@@ -1,7 +1,8 @@
 ---
 title: TiDB-Lightning Monitoring
 summary: Learn about the monitor configuration and monitoring metrics of TiDB-Lightning.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # TiDB-Lightning Monitoring

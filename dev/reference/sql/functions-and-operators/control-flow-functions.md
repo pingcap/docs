@@ -1,7 +1,8 @@
 ---
 title: Control Flow Functions
 summary: Learn about the Control Flow functions.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Control Flow Functions

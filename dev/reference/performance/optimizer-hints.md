@@ -1,7 +1,8 @@
 ---
 title: Optimizer Hints
 summary: Use Optimizer Hints to influence query execution plans
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Optimizer Hints

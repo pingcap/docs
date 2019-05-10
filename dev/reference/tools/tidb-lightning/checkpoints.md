@@ -1,7 +1,8 @@
 ---
 title: TiDB-Lightning Checkpoints
 summary: Use checkpoints to avoid redoing the previously completed tasks before the crash.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # TiDB-Lightning Checkpoints

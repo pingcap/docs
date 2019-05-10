@@ -1,7 +1,8 @@
 ---
 title: Cast Functions and Operators
 summary: Learn about the cast functions and operators.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Cast Functions and Operators

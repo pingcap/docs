@@ -1,7 +1,8 @@
 ---
 title: Download
 summary: Download the most officially maintained versions of TiDB enterprise tools.
-category: resources
+category: reference
+aliases: ['']
 ---
 
 # Download

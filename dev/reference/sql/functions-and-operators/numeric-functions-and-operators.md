@@ -1,7 +1,8 @@
 ---
 title: Numeric Functions and Operators
 summary: Learn about the numeric functions and operators.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Numeric Functions and Operators

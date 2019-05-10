@@ -1,7 +1,8 @@
 ---
 title: PD Configuration Flags
 summary: Learn some configuration flags of PD.
-category: operations
+category: reference
+aliases: ['']
 ---
 
 # PD Configuration Flags

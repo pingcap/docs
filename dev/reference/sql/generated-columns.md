@@ -1,7 +1,8 @@
 ---
 title: Generated Columns
 summary: Learn how to use generated columns
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Generated Columns

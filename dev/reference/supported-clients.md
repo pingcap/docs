@@ -1,7 +1,8 @@
 ---
 title: Connectors and APIs 
 summary: Learn about the connectors and APIs.
-category: user guide
+category: reference
+aliases: [''] 
 ---
 
 # Connectors and APIs

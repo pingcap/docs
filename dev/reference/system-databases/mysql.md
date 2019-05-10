@@ -1,7 +1,8 @@
 ---
 title: TiDB System Tables
 summary: Learn the TiDB system tables.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # TiDB System Tables

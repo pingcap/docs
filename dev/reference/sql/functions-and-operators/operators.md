@@ -1,7 +1,8 @@
 ---
 title: Operators
 summary: Learn about the operators precedence, comparison functions and operators, logical operators, and assignment operators.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Operators

@@ -1,7 +1,8 @@
 ---
 title: Information Functions
 summary: Learn about the information functions.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Information Functions

@@ -1,7 +1,8 @@
 ---
 title: mydumper Instructions 
 summary: Use mydumper to export data from TiDB.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # mydumper Instructions

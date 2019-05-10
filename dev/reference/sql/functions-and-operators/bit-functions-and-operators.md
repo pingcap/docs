@@ -1,7 +1,8 @@
 ---
 title: Bit Functions and Operators
 summary: Learn about the bit functions and operators.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Bit Functions and Operators

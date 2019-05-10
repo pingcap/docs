@@ -1,7 +1,8 @@
 ---
 title: Encryption and Compression Functions
 summary: Learn about the encryption and compression functions.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Encryption and Compression Functions

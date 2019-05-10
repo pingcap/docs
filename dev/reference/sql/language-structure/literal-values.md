@@ -1,7 +1,8 @@
 ---
 title: Literal Values
 summary: Learn how to use various literal values.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Literal Values

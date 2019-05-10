@@ -1,7 +1,8 @@
 ---
 title: Configuration Flags
 summary: Learn some configuration flags for TiDB
-category: operations
+category: reference
+aliases: ['']
 ---
 
 # Configuration Flags

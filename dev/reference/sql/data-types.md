@@ -1,7 +1,8 @@
 ---
 title: TiDB Data Type
 summary: Learn about the data types supported in TiDB.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # TiDB Data Type

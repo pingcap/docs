@@ -1,7 +1,8 @@
 ---
 title: TiDB-Binlog Cluster Upgrade
 summary: Learn how to upgrade the cluster version of TiDB-Binlog.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # TiDB-Binlog Cluster Upgrade

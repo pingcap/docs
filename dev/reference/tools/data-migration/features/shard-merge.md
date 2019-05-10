@@ -1,7 +1,8 @@
 ---
 title: Merge and Replicate Data from Sharded Tables
 summary: Learn how DM merges and replicates data from sharded tables.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # Merge and Replicate Data from Sharded Tables

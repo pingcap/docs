@@ -1,7 +1,8 @@
 ---
 title: Precision Math
 summary: Learn about the precision math in TiDB.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Precision Math

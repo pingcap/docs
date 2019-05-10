@@ -1,7 +1,8 @@
 ---
 title: Key Metrics
 summary: Learn some key metrics displayed on the Grafana Overview dashboard.
-category: operations
+category: reference
+aliases: ['']
 ---
 
 # Key Metrics

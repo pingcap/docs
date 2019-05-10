@@ -1,7 +1,8 @@
 ---
 title: Date and Time Functions
 summary: Learn how to use the data and time functions.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Date and Time Functions

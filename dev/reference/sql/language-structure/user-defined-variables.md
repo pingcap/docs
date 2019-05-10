@@ -1,7 +1,8 @@
 ---
 title: User-Defined Variables
 summary: Learn how to use user-defined variables.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # User-Defined Variables

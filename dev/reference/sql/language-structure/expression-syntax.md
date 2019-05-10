@@ -1,7 +1,8 @@
 ---
 title: Expression Syntax
 summary: Learn about the expression syntax in TiDB.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Expression Syntax

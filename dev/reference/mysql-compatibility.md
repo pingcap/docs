@@ -1,7 +1,8 @@
 ---
 title: Compatibility with MySQL
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
-category: user guide
+category: reference
+aliases: [''] 
 ---
 
 # Compatibility with MySQL

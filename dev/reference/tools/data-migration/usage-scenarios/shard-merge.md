@@ -1,7 +1,8 @@
 ---
 title: Data Migration Shard Merge Scenario
 summary: Learn how to use Data Migration to synchronize data in the shard merge scenario.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # Data Migration Shard Merge Scenario

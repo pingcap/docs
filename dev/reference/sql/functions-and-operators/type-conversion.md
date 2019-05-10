@@ -1,7 +1,8 @@
 ---
 title: Type Conversion in Expression Evaluation
 summary: Learn about the type conversion in expression evaluation.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Type Conversion in Expression Evaluation

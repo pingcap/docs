@@ -1,7 +1,8 @@
 ---
 title: Privilege Management
 summary: Learn how to manage the privilege.
-category: user guide
+category: reference
+aliases: ['']
 ---
 
 # Privilege Management

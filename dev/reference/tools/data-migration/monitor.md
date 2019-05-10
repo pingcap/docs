@@ -1,7 +1,8 @@
 ---
 title: Data Migration Monitoring Metrics
 summary: Learn about the monitoring metrics when you use Data Migration to replicate data.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # Data Migration Monitoring Metrics

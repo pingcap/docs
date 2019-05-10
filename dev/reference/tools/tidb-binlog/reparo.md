@@ -1,7 +1,8 @@
 ---
 title: Reparo User Guide
 summary: Learn to use Reparo.
-category: tools
+category: reference
+aliases: ['']
 ---
 
 # Reparo User Guide
