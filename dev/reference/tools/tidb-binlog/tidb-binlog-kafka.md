@@ -2,7 +2,7 @@
 title: TiDB-Binlog user guide
 summary: Learn how to deploy the Kafka version of TiDB-Binlog.
 category: reference
-aliases: ['']
+aliases: ['/docs/tools/binlog/tidb-binlog-kafka/']
 ---
 
 # TiDB-Binlog User Guide
