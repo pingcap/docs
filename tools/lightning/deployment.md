@@ -239,7 +239,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     max-open-engines = 8
     # Maximum upload speed (bytes per second) from Importer to TiKV.
     # upload-speed-limit = "512MB"
-    # Minimum ratio of available space on the target store: store_available_space / store_capacity.
+    # Minimum ratio of available space on the target store: `store_available_space`/`store_capacity`.
     # Importer pauses uploading SST if the availability ratio of the target store is less than this
     # value, to allow enough time for PD to balance Regions.
     min-available-ratio = 0.05
