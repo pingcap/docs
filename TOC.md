@@ -75,7 +75,9 @@
       - [Scale using Ansible](dev/how-to/maintain/scale/with-ansible.md)
     - [Identify Slow Queries](dev/how-to/maintain/identify-slow-queries.md)
     + Upgrade
-      - [Upgrade from TiDB 2.1](dev/how-to/maintain/upgrade/from-previous-version.md)
+      - [Upgrade to TiDB 3.0](dev/how-to/maintain/upgrade/to-tidb-3.0.md)
+      - [Upgrade to TiDB 2.1](dev/how-to/maintain/upgrade/to-tidb-2.1.md)
+
       - [Upgrade Data Migration](dev/how-to/maintain/upgrade/data-migration.md)
       - [Rolling updates with Ansible](dev/how-to/maintain/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
