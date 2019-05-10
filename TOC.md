@@ -283,6 +283,7 @@
 - [Roadmap](ROADMAP.md)
 + [Releases](releases/rn.md)
   + v3.0
+    - [3.0.0 RC1](releases/3.0.0-rc.1.md)
     - [3.0.0 Beta.1](releases/3.0.0-beta.1.md)
     - [3.0 Beta](releases/3.0beta.md)
   + v2.1
