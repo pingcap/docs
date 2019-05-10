@@ -28,7 +28,6 @@ To make it easy to manage dependencies, use `pip` to install Ansible and its dep
 
 After the installation is finished, you can view the version information using the following command:
 
-
 ```
 $ ansible --version
 ansible 2.5.14
@@ -39,7 +38,6 @@ $ pip show jmespath
 Name: jmespath
 Version: 0.9.0
 ```
-
 > **Note:**
 >
 > - You must install Ansible and its dependencies following the above procedures.
@@ -61,7 +59,6 @@ Version: 0.9.0
     ```
     $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
     ```
-
 ## Edit the `inventory.ini` file and the configuration file
 
 Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb/tidb-ansible` directory.
@@ -76,14 +73,11 @@ Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansi
 
 1. Make sure that `ansible_user` is the normal user. For unified privilege management, remote installation using the root user is no longer supported. The default configuration uses the `tidb` user as the SSH remote user and the program running user.
 
-
     ```
     ## Connection
     # ssh via normal user
     ansible_user = tidb
     ```
-
-
     You can refer to [How to configure SSH mutual trust and sudo rules on the Control Machine](/dev/how-to/deploy/orchestrated/ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) to automatically configure the mutual trust among hosts.
 
 2. Keep the `process_supervision` variable consistent with that in the previous version. It is recommended to use `systemd` by default.
@@ -115,7 +109,6 @@ For the cluster topology of multiple TiKV instances on a single machine, you nee
 
 ## Download TiDB 3.0 binary to the Control Machine
 
-
 Make sure that `tidb_version = v3.0.0` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB 2.1 binary to the Control Machine:
 
 ```
@@ -139,7 +132,7 @@ $ ansible-playbook local_prepare.yml
    ```
    $ ansible-playbook rolling_update.yml
    ```
-
+   
 ## Perform rolling update to TiDB monitoring components
 
 ```
