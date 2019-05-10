@@ -7,7 +7,7 @@ aliases: ['/docs/op-guide/dashboard-pd-info/']
 
 # Key Monitoring Metrics of PD
 
-If you use Ansible to deploy the TiDB cluster, the monitoring system is deployed at the same time. For more information, see [Overview of the Monitoring Framework](../op-guide/monitor-overview.md).
+If you use Ansible to deploy the TiDB cluster, the monitoring system is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/op-guide/monitor-overview.md).
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. A lot of metrics are there to help you diagnose.
 
@@ -93,36 +93,36 @@ Heartbeat | 99% Region heartbeat latency | The heartbeat latency of each TiKV in
 
 ### Cluster
 
-![PD Dashboard - Cluster metrics](../media/pd-dashboard-cluster.png)
+![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster.png)
 
 ### Balance
 
-![PD Dashboard - Balance metrics](../media/pd-dashboard-balance.png)
+![PD Dashboard - Balance metrics](/media/pd-dashboard-balance.png)
 
 ### HotRegion
 
-![PD Dashboard - HotRegion metrics](../media/pd-dashboard-hot-region.png)
+![PD Dashboard - HotRegion metrics](/media/pd-dashboard-hot-region.png)
 
 ### Scheduler
 
-![PD Dashboard - Scheduler metrics](../media/pd-dashboard-scheduler.png)
+![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler.png)
 
 ### Operator
 
-![PD Dashboard - Operator metrics](../media/pd-dashboard-operator.png)
+![PD Dashboard - Operator metrics](/media/pd-dashboard-operator.png)
 
 ### gRPC
 
-![PD Dashboard - gRPC metrics](../media/pd-dashboard-grpc.png)
+![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc.png)
 
 ### etcd
 
-![PD Dashboard - etcd metrics](../media/pd-dashboard-etcd.png)
+![PD Dashboard - etcd metrics](/media/pd-dashboard-etcd.png)
 
 ### TiDB
 
-![PD Dashboard - TiDB metrics](../media/pd-dashboard-tidb.png)
+![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb.png)
 
 ### Heartbeat
 
-![PD Dashboard - Heartbeat metrics](../media/pd-dashboard-heartbeat.png)
+![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat.png)

@@ -11,11 +11,11 @@ aliases: ['/docs/tools/syncer/']
 
 Syncer is a tool used to import data incrementally. It is a part of the TiDB enterprise toolset. 
 
-It can be [downloaded](../tools/download.md) as part of the Enterprise Tools package.
+It can be [downloaded](/tools/download.md) as part of the Enterprise Tools package.
 
 ## Syncer architecture
 
-![syncer sharding](../media/syncer_architecture.png)
+![syncer sharding](/media/syncer_architecture.png)
 
 ## Where to deploy Syncer
 
@@ -303,7 +303,7 @@ You can use Syncer to import data from sharded tables into one table within one 
 
 Currently, the support for DDL is still in progress.
 
-![syncer sharding](../media/syncer_sharding.png)
+![syncer sharding](/media/syncer_sharding.png)
 
 #### Usage of replicating data from sharded tables
 
@@ -496,7 +496,7 @@ The `syncer` monitoring solution contains the following components:
 
 See the following diagram:
 
-![syncer_monitor_scheme](../media/syncer_monitor_scheme.png)
+![syncer_monitor_scheme](/media/syncer_monitor_scheme.png)
 
 ### Configure Syncer monitor and alert
 

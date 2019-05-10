@@ -7,7 +7,7 @@ aliases: ['/docs/op-guide/dashboard-tikv-info/']
 
 # Key Monitoring Metrics of TiKV
 
-If you use Ansible to deploy the TiDB cluster, the monitoring system is deployed at the same time. For more information, see [Overview of the Monitoring Framework](../op-guide/monitor-overview.md).
+If you use Ansible to deploy the TiDB cluster, the monitoring system is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/op-guide/monitor-overview.md).
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. A lot of metrics are there to help you diagnose.
 
@@ -317,56 +317,56 @@ This section shows images of the service panels on the TiKV dashboard.
 
 ### Cluster
 
-![TiKV Dashboard - Cluster metrics](../media/tikv-dashboard-cluster.png)
+![TiKV Dashboard - Cluster metrics](/media/tikv-dashboard-cluster.png)
 
 ### Errors
 
-![TiKV Dashboard - Errors metrics](../media/tikv-dashboard-errors.png)
+![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors.png)
 
 ### Server
 
-![TiKV Dashboard - Server metrics](../media/tikv-dashboard-server.png)
+![TiKV Dashboard - Server metrics](/media/tikv-dashboard-server.png)
 
 ### Raft IO
 
-![TiKV Dashboard - Raft IO metrics](../media/tikv-dashboard-raftio.png)
+![TiKV Dashboard - Raft IO metrics](/media/tikv-dashboard-raftio.png)
 
 ### Raft process
 
-![TiKV Dashboard - Raft process metrics](../media/tikv-dashboard-raft-process.png)
+![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
 ### Raft message
 
-![TiKV Dashboard - Raft message metrics](../media/tikv-dashboard-raft-message.png)
+![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
 
 ### Raft propose
 
-![TiKV Dashboard - Raft propose metrics](../media/tikv-dashboard-raft-propose.png)
+![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)
 
 ### Raft admin
 
-![TiKV Dashboard - Raft admin metrics](../media/tikv-dashboard-raft-admin.png)
+![TiKV Dashboard - Raft admin metrics](/media/tikv-dashboard-raft-admin.png)
 
 ### Local reader
 
-![TiKV Dashboard - Local reader metrics](../media/tikv-dashboard-local-reader.png)
+![TiKV Dashboard - Local reader metrics](/media/tikv-dashboard-local-reader.png)
 
 ### Storage
 
-![TiKV Dashboard - Storage metrics](../media/tikv-dashboard-storage.png)
+![TiKV Dashboard - Storage metrics](/media/tikv-dashboard-storage.png)
 
 ### Scheduler
 
-![TiKV Dashboard - Scheduler metrics](../media/tikv-dashboard-scheduler.png)
+![TiKV Dashboard - Scheduler metrics](/media/tikv-dashboard-scheduler.png)
 
 ### Scheduler - batch_get
 
-![TiKV Dashboard - Scheduler - batch_get metrics](../media/tikv-dashboard-scheduler-batch-get.png)
+![TiKV Dashboard - Scheduler - batch_get metrics](/media/tikv-dashboard-scheduler-batch-get.png)
 
 ### Scheduler - cleanup
 
-![TiKV Dashboard - Scheduler - cleanup metrics](../media/tikv-dashboard-scheduler-cleanup.png)
+![TiKV Dashboard - Scheduler - cleanup metrics](/media/tikv-dashboard-scheduler-cleanup.png)
 
 ### Scheduler - commit
 
-![TiKV Dashboard - Scheduler commit metrics](../media/tikv-dashboard-scheduler-commit.png)
+![TiKV Dashboard - Scheduler commit metrics](/media/tikv-dashboard-scheduler-commit.png)

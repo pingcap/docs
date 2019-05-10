@@ -13,7 +13,7 @@ Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL d
 
 > **Note:**
 >
-> This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security Compatibility with MySQL](../sql/security-compatibility.md) and [Transaction Model](../sql/transaction-model.md) compatibility.
+> This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security Compatibility with MySQL](/sql/security-compatibility.md) and [Transaction Model](/sql/transaction-model.md) compatibility.
 
 ## Unsupported features
 
@@ -38,7 +38,7 @@ Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL d
 + `CREATE TABLE tblName AS SELECT stmt` syntax
 + `CREATE TEMPORARY TABLE` syntax
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
-+ `LOCK TABLE` syntax (TiDB uses `tidb_snapshot` to [produce backups](../tools/mydumper.md))
++ `LOCK TABLE` syntax (TiDB uses `tidb_snapshot` to [produce backups](/tools/mydumper.md))
 + `CHECK TABLE` syntax
 + `CHECKSUM TABLE` syntax
 
@@ -67,7 +67,7 @@ In TiDB, auto-increment columns are only guaranteed to be incremental and unique
 
 ### Performance schema
 
-Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](https://pingcap.com/docs/op-guide/monitor/#use-prometheus-and-grafana) for performance metrics instead.
+Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/op-guide/monitor.md#use-prometheus-and-grafana) for performance metrics instead.
 
 ### Query Execution Plan
 
@@ -129,14 +129,14 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-Architecturally, TiDB does support a similar storage engine abstraction to MySQL, and user tables are created in the engine specified by the [`--store`](server-command-option.md#--store) option used when you start tidb-server (typically `tikv`).
+Architecturally, TiDB does support a similar storage engine abstraction to MySQL, and user tables are created in the engine specified by the [`--store`](/sql/server-command-option.md#--store) option used when you start tidb-server (typically `tikv`).
 
 ### SQL modes
 
 TiDB supports **all of the SQL modes** from MySQL 5.7 with minor exceptions:
 
 - The compatibility modes deprecated in MySQL 5.7 and removed in MySQL 8.0 are not supported (such as `ORACLE`, `POSTGRESQL` etc).
-- The mode `ONLY_FULL_GROUP_BY` has minor [semantic differences](../sql/aggregate-group-by-functions.md#differences-from-mysql) to MySQL 5.7, which we plan to address in the future.
+- The mode `ONLY_FULL_GROUP_BY` has minor [semantic differences](/sql/aggregate-group-by-functions.md#differences-from-mysql) to MySQL 5.7, which we plan to address in the future.
 - The SQL modes `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` are supported for compatibility, but are not applicable to TiDB. 
 
 ### Default differences

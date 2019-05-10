@@ -329,7 +329,7 @@ auth_spec: {
 }
 ```
 
-For more information about the user account, see [TiDB user account management](../sql/user-account-management.md).
+For more information about the user account, see [TiDB user account management](/sql/user-account-management.md).
 
 - `IDENTIFIED BY 'auth_string'`
 

@@ -15,7 +15,7 @@ TiSpark depends on the TiKV cluster and the PD cluster. You also need to set up 
 
 TiSpark is an OLAP solution that runs Spark SQL directly on TiKV, the distributed storage engine.
 
-![TiSpark architecture](../media/tispark-architecture.png)
+![TiSpark architecture](/media/tispark-architecture.png)
 
 + TiSpark integrates with Spark Catalyst Engine deeply. It provides precise control of the computing, which allows Spark read data from TiKV efficiently. It also supports index seek, which improves the performance of the point query execution significantly.
 + It utilizes several strategies to push down the computing to reduce the size of dataset handling by Spark SQL, which accelerates the query execution. It also uses the TiDB built-in statistical information for the query plan optimization.
@@ -38,7 +38,7 @@ This section describes the configuration of independent deployment of TiKV and T
 For independent deployment of TiKV and TiSpark, it is recommended to refer to the following recommendations:
 
 + Hardware configuration
- - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](../op-guide/recommendation.md#deployment-recommendations).
+ - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](/op-guide/recommendation.md#deployment-recommendations).
  - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G.
 
 ### Configuration of independent deployment of Spark and TiSpark
@@ -243,7 +243,7 @@ TiSpark uses TiDB statistic information for the following items:
 1. Determining which index to ues in your query plan with the estimated lowest cost.
 2. Small table broadcasting, which enables efficient broadcast join.
 
-If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](../sql/statistics.md).
+If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](/sql/statistics.md).
 
 Starting from TiSpark 2.0, statistics information is default to auto load.
 
