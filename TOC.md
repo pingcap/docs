@@ -188,7 +188,7 @@
       - [`USE`](dev/reference/sql/statements/use.md)
     - [Constraints](dev/reference/sql/constraints.md)
     - [Generated Columns](dev/reference/sql/generated-columns.md)
-    - [Character Set](dev/reference/sql/character-set-support.md)
+    - [Character Set](dev/reference/sql/character-set.md)
   + Configuration
     + tidb-server
       - [MySQL System Variables](dev/reference/configuration/tidb-server/mysql-variables.md)
