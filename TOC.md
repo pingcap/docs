@@ -102,7 +102,7 @@
       - [Data Type Default Values](dev/reference/sql/data-types.md#data-type-default-values)
     + Functions and Operators
       - [Function and Operator Reference](dev/reference/sql/functions-and-operators/reference.md)
-      - [Type Conversion in Expression Evaluation](dev/reference/sql/functions-and-operators/type-conversion-in-expression-evaluation.md)
+      - [Type Conversion in Expression Evaluation](dev/reference/sql/functions-and-operators/type-conversion.md)
       - [Operators](dev/reference/sql/functions-and-operators/operators.md)
       - [Control Flow Functions](dev/reference/sql/functions-and-operators/control-flow-functions.md)
       - [String Functions](dev/reference/sql/functions-and-operators/string-functions.md)
