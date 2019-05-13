@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0 Upgrade Guide
-summary: Learn how to upgrade to TiDB 3.0
+summary: Learn how to upgrade to TiDB 3.0.
 category: upgrade
 ---
 
