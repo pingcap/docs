@@ -6,7 +6,7 @@ category: upgrade
 
 # TiDB 3.0 Upgrade Guide
 
-This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.0.1) or TiDB 2.1 RC to TiDB 3.0. TiDB 3.0 is compatible with [TiDB Binlog of Kafka Version](/tools/tidb-binlog-kafka.md) and [TiDB Binlog of Cluster Version](/tools/tidb-binlog-cluster.md).
+This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.0.1) or TiDB 2.1 RC to TiDB 3.0. TiDB 3.0 is compatible with [TiDB Binlog of Kafka Version](/dev/tools/binlog/tidb-binlog-kafka.md) and [TiDB Binlog of Cluster Version](/dev/tools/binlog/overview.md).
 
 ## Upgrade caveat
 
