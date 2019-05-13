@@ -6,7 +6,7 @@ category: upgrade
 
 # TiDB 3.0 Upgrade Guide
 
-This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.0.1) or TiDB 2.1 RC to TiDB 3.0. TiDB 3.0 is compatible with [TiDB Binlog of Kafka Version](/dev/tools/binlog/tidb-binlog-kafka.md) and [TiDB Binlog of Cluster Version](/dev/tools/binlog/overview.md).
+This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.0.1) or TiDB 2.1 RC to TiDB 3.0. TiDB 3.0 is compatible with [TiDB Binlog of Kafka Version](/dev/reference/tools/tidb-binlog/tidb-binlog-kafka.md) and [TiDB Binlog of Cluster Version](/dev/reference/tools/tidb-binlog/overview.md).
 
 ## Upgrade caveat
 
@@ -120,7 +120,6 @@ $ ansible-playbook local_prepare.yml
 > **Note:**
 >
 > To optimize operation and maintenance management over components of TiDB cluster, there are some adjustments to  `PD service` under `systemd` in TiDB 3.0. Compared to earlier versions, rolling update operations on TiDB cluster components are slightly different. Please make sure that the `process_supervision` parameter remains consistent before and after the upgrade.
->
 - If the default `systemd` parameter is used by the `process_supervision` variable,perform rolling update on the TiDB cluster using  `excessive_rolling_update.yml`.
 
    ```
