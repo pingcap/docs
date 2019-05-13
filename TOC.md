@@ -228,11 +228,11 @@
       - [Restrictions](dev/reference/tools/data-migration/overview.md#usage-restrictions)
       - [Deploy](dev/reference/tools/data-migration/deploy.md)
       + Features
-        - [Table Routing](dev/reference/tools/data-migration/data-synchronization-features.md#table-routing)
-        - [Black and White Lists](dev/reference/tools/data-migration/data-synchronization-features.md#black-and-white-table-lists)
-        - [Binlog Event Filtering](dev/reference/tools/data-migration/data-synchronization-features.md#binlog-event-filtering)
-        - [Column Mapping](dev/reference/tools/data-migration/data-synchronization-features.md#column-mapping)
-        - [Synchronization Delay Monitoring](dev/reference/tools/data-migration/data-synchronization-features.md#synchronization-delay-monitoring)
+        - [Table Routing](dev/reference/tools/data-migration/features/overview.md#table-routing)
+        - [Black and White Lists](dev/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
+        - [Binlog Event Filtering](dev/reference/tools/data-migration/features/overview.md#binlog-event-filtering)
+        - [Column Mapping](dev/reference/tools/data-migration/features/overview.md#column-mapping)
+        - [Synchronization Delay Monitoring](dev/reference/tools/data-migration/features/overview.md#synchronization-delay-monitoring)
         + Sharding Support
           - [Introduction](dev/reference/tools/data-migration/shard-merge.md)
           - [Restrictions](dev/reference/tools/data-migration/shard-merge.md#restrictions)
