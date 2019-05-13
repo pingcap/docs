@@ -197,7 +197,7 @@
     + pd-server
       - [Configuration Flags](dev/reference/configuration/pd-server/configuration.md)
     + tikv-server
-      - [Configuration Flags](dev/reference/configuration/tikv-server/configuration)
+      - [Configuration Flags](dev/reference/configuration/tikv-server/configuration.md)
   + Security
     - [Security Compatibility with MySQL](dev/reference/security/compatibility.md)
     - [The TiDB Access Privilege System](dev/reference/security/privilege-system.md)
