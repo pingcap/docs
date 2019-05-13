@@ -234,17 +234,17 @@
         - [Column Mapping](dev/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Synchronization Delay Monitoring](dev/reference/tools/data-migration/features/overview.md#synchronization-delay-monitoring)
         + Sharding Support
-          - [Introduction](dev/reference/tools/data-migration/shard-merge.md)
-          - [Restrictions](dev/reference/tools/data-migration/shard-merge.md#restrictions)
-          - [Handle Sharding DDL Locks Manually](dev/reference/tools/data-migration/manually-handling-sharding-ddl-locks.md)
+          - [Introduction](dev/reference/tools/data-migration/features/shard-merge.md)
+          - [Restrictions](dev/reference/tools/data-migration/features/shard-merge.md#restrictions)
+          - [Handle Sharding DDL Locks Manually](dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md)
       + Usage Scenarios
-        - [Simple Scenario](dev/reference/tools/data-migration/simple-synchronization-scenario.md)
-        - [Shard Merge Scenario](dev/reference/tools/data-migration/shard-merge-scenario.md)
+        - [Simple Scenario](dev/reference/tools/data-migration/usage-scenarios/simple-synchronization.md)
+        - [Shard Merge Scenario](dev/reference/tools/data-migration/usage-scenarios/shard-merge.md)
       + Configure
-        - [Overview](dev/reference/tools/data-migration/dm-configuration-file-overview.md)
-        - [Task Configuration](dev/reference/tools/data-migration/task-configuration-file-intro.md)
+        - [Overview](dev/reference/tools/data-migration/configure/overview.md)
+        - [Task Configuration](dev/reference/tools/data-migration/configure/task-configuration-file.md)
       - [Monitor](dev/reference/tools/data-migration/monitor.md)
-      - [Manage the Task](dev/reference/tools/data-migration/manage-task.md)
+      - [Manage the Task](dev/reference/tools/data-migration/manage-tasks.md)
       - [Cluster Operations](dev/reference/tools/data-migration/cluster-operations.md)
     + TiDB-Lightning
       - [Overview](dev/reference/tools/tidb-lightning/overview.md)
