@@ -256,7 +256,7 @@
     + TiDB-Binlog
       - [Overview](dev/reference/tools/tidb-binlog/overview.md)
       - [Deploy](dev/reference/tools/tidb-binlog/deploy.md)
-      - [Monitor](dev/reference/tools/tidb-binlog-binlog/monitor.md)
+      - [Monitor](dev/reference/tools/tidb-binlog/monitor.md)
       - [Maintain](dev/reference/tools/tidb-binlog/operation.md)
       - [Upgrade](dev/reference/tools/tidb-binlog/upgrade.md)
     - [PD Control](dev/reference/tools/pd-control.md)
