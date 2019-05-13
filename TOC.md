@@ -250,7 +250,7 @@
       - [Overview](dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](dev/reference/tools/tidb-lightning/deployment.md)
       - [Checkpoints](dev/reference/tools/tidb-lightning/checkpoints.md)
-      - [Table Filter](dev/reference/tools/tidb-lightning/filter.md)
+      - [Table Filter](dev/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](dev/reference/tools/tidb-lightning/csv.md)
       - [Monitor](dev/reference/tools/tidb-lightning/monitor.md)
     + TiDB-Binlog
