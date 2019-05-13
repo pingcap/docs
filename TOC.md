@@ -262,7 +262,7 @@
     - [PD Control](dev/reference/tools/pd-control.md)
     - [PD Recover](dev/reference/tools/pd-recover.md)
     - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
-    - [TiDB Controller](dev/reference/tools/tidb-controller.md)
+    - [TiDB Control](dev/reference/tools/tidb-control.md)
     - [Download](dev/reference/tools/download.md)
   + Key Monitoring Metrics
     - [Overview](dev/reference/key-monitoring-metrics/overview.md)
