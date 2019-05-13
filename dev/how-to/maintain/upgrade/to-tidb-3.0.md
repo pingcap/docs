@@ -38,6 +38,7 @@ $ pip show jmespath
 Name: jmespath
 Version: 0.9.0
 ```
+
 > **Note:**
 >
 > - You must install Ansible and its dependencies following the above procedures.
@@ -78,6 +79,7 @@ Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansi
     # ssh via normal user
     ansible_user = tidb
     ```
+    
     You can refer to [How to configure SSH mutual trust and sudo rules on the Control Machine](/dev/how-to/deploy/orchestrated/ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) to automatically configure the mutual trust among hosts.
 
 2. Keep the `process_supervision` variable consistent with that in the previous version. It is recommended to use `systemd` by default.
@@ -120,6 +122,7 @@ $ ansible-playbook local_prepare.yml
 > **Note:**
 >
 > To optimize operation and maintenance management over components of TiDB cluster, there are some adjustments to  `PD service` under `systemd` in TiDB 3.0. Compared to earlier versions, rolling update operations on TiDB cluster components are slightly different. Please make sure that the `process_supervision` parameter remains consistent before and after the upgrade.
+
 - If the default `systemd` parameter is used by the `process_supervision` variable,perform rolling update on the TiDB cluster using  `excessive_rolling_update.yml`.
 
    ```
