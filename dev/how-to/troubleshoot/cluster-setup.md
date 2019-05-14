@@ -39,7 +39,7 @@ For other information, see [Frequently Asked Questions (FAQ)](/FAQ.md).
 See the following for the situations when the `tidb-server` cannot be started:
 
 - Error in the startup parameters.
-    See the [TiDB configuration and options](op-guide/configuration.md#tidb).
+    See the [TiDB configuration and options](dev/reference/configuration/tidb-server/configuration.md#tidb).
 - The port is occupied.
     Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `tidb-server` is not occupied.
 + Cannot connect to `pd-server`.
@@ -51,7 +51,7 @@ See the following for the situations when the `tidb-server` cannot be started:
 
 See the following for the situations when the `tikv-server` cannot be started:
 
-- Error in the startup parameters: See the [TiKV configuration and options](op-guide/configuration.md#tikv).
+- Error in the startup parameters: See the [TiKV configuration and options](dev/reference/configuration/tidb-server/configuration.md#tikv).
 - The port is occupied: Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `tikv-server` is not occupied.
 + Cannot connect to `pd-server`.
     - Check if the network between TiDB and PD is running smoothly, including whether the network can be pinged or if there is any issue with the Firewall configuration.
@@ -64,7 +64,7 @@ See the following for the situations when the `tikv-server` cannot be started:
 See the following for the situations when the `pd-server` cannot be started:
 
 - Error in the startup parameters.
-    See the [PD configuration and options](op-guide/configuration.md##placement-driver-pd).
+    See the [PD configuration and options](dev/reference/configuration/tidb-server/configuration.md##placement-driver-pd).
 - The port is occupied.
     Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `pd-server` is not occupied.
 

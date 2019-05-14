@@ -9,7 +9,7 @@ aliases: ['/docs/sql/slow-query/']
 
 The slow query log is a record of SQL statements that took a long time to perform.
 
-The slow log format is updated in TiDB v2.1.8 and later. For the slow query log information in versions earlier than v2.1.8, see [this file](https://github.com/pingcap/docs/blob/master/v2.1/sql/slow-query.md).
+The slow log format is updated in TiDB v2.1.8 and later. For the slow query log information in versions earlier than v2.1.8, see [this file](https://github.com/pingcap/docs/blob/master/v2.1/dev/how-to/maintain/identify-slow-queries.md).
 
 A problematic SQL statement can increase the pressure on the entire cluster, resulting in a longer response time. To solve this problem, you can use the slow query log to identify the problematic statements and thus improve the performance.
 
@@ -55,7 +55,7 @@ select * from t_slim, t_wide where t_slim.c0=t_wide.c0;
 * `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB, such as Analyze, load variables, etc.; `false` indicates the SQL statement is executed by the user.
 * `Digest`: The fingerprint of the SQL statement.
 * `Memory_max`: Indicates the maximum memory space used during the execution period of this SQL statement (the unit is byte).
-* `Num_cop_tasks`: The number of [cop-tasks](/sql/understanding-the-query-execution-plan.md).
+* `Num_cop_tasks`: The number of [cop-tasks](/dev/reference/performance/understanding-the-query-execution-plan.md).
 * `Cop_proc_avg`: The average execution time of cop-tasks.
 * `Cop_proc_p90`: The P90 execution time of cop-tasks.
 * `Cop_proc_max`: The maximum execution time of cop-tasks.
