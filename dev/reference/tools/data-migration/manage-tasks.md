@@ -7,7 +7,7 @@ aliases: ['/docs/tools/dm/manage-task/']
 
 # Manage the Data Synchronization Task
 
-This document describes how to manage and maintain the data synchronization task using the [dmctl](/dev/how-to/migrate/using-data-migration.md#dmctl) component. For the Data Migration cluster deployed using DM-Ansible, the dmctl binary file is in `dm-ansible/dmctl`.
+This document describes how to manage and maintain the data synchronization task using the [dmctl](/dev/reference/tools/data-migration/overview.md#dmctl) component. For the Data Migration cluster deployed using DM-Ansible, the dmctl binary file is in `dm-ansible/dmctl`.
 
 ## dmctl basic usage
 
