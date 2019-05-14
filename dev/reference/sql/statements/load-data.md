@@ -45,4 +45,4 @@ Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 
 * [INSERT](/dev/reference/sql/statements/insert.md)
 * [Transaction Model](/dev/reference/transactions/transaction-model.md)
-* [Import Example Database](/dev/how-to/get-started/import-sample-database.md)
+* [Import Example Database](/dev/how-to/get-started/import-example-database.md)
