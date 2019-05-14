@@ -484,7 +484,7 @@ Before replicating data using Syncer, check the following items:
 
 6. Check the Character Set.
     
-    TiDB differs from MySQL in [Character Set](/dev/reference/configuration/tidb-server/character-set.md).
+    TiDB differs from MySQL in [Character Set](/dev/reference/sql/character-set.md).
 
 ## Syncer monitoring solution
 
