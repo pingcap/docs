@@ -91,7 +91,7 @@ mysql> SELECT * FROM t1;
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * The `KEY_BLOCK_SIZE` and `ENGINE` attributes are parsed but ignored.
 * The `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes. The length limit does not change depending on the storage engine, and character set used when building the table.
-* The `index_col_name` supports the index sorting options of `ASC` and `DESC`
+* The `index_col_name` attribute supports the index sorting options of `ASC` and `DESC`
 * The `COMMENT` attribute supports a maximum of 1024 characters and does not support the `WITH PARSER` option.
 * TiDB supports at most 512 columns in a single table. The corresponding number limit in InnoDB is 1017, and the hard limit in MySQL is 4096.
 
