@@ -9,7 +9,7 @@ aliases: ['/docs/sql/slow-query/']
 
 The slow query log is a record of SQL statements that took a long time to perform.
 
-The slow log format is updated in TiDB v2.1.8 and later. For the slow query log information in versions earlier than v2.1.8, see [this file](https://github.com/pingcap/docs/blob/master/v2.1/dev/how-to/maintain/identify-slow-queries.md).
+The slow log format is updated in TiDB v2.1.8 and later. For the slow query log information in versions earlier than v2.1.8, see [this file](https://github.com/pingcap/docs/blob/master/v2.1/sql/slow-query.md).
 
 A problematic SQL statement can increase the pressure on the entire cluster, resulting in a longer response time. To solve this problem, you can use the slow query log to identify the problematic statements and thus improve the performance.
 
