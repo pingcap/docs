@@ -12,95 +12,104 @@ TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`,
 
 ### `CHAR` Type
 
+`CHAR` is a fixed length string.  Values stored as `CHAR` are right-padded with spaces to the specified length. M represents the column-length in characters (not bytes).  The range of M is 0 to 255:
+
 ```sql
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
-A fixed-length string. If stored as CHAR, it is right-padded with spaces to the specified length. M represents the column length in characters. The range of M is 0 to 255.
 
 ### `VARCHAR` Type
+
+`VARCHAR` is a string of variable-length. M represents the maximum column length in characters (not bytes). The range of M is 0 to 65,535, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB).
 
 ```sql
 [NATIONAL] VARCHAR(M) [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
-A variable-length string. M represents the maximum column length in characters. The range of M is 0 to 65,535. The effective maximum length of a VARCHAR is subject to the maximum row size (65,535 bytes, which is shared among all columns) and the character set used.
 
 ### `TINYTEXT` Type
+
+`TINYTEXT` is a string of variable-length. The length (M) is optional, with the maximum length being restricted to 255 characters:
 
 ```sql
 TINYTEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-A TEXT column with a maximum length of 255 characters.
-
 ### `TEXT` Type
+
+`TEXT` is a string of variable-length. M represents the maximum column length ranging from 0 to 65,535. The range of M is 0 to 65,535, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-A TEXT column. M represents the maximum column length ranging from 0 to 65,535. The maximum length of TEXT is based on the size of the longest row and the character set.
 
 ### `MEDIUMTEXT` Type
+
+`MEDIUMTEXT` is a string of variable-length. M represents the maximum column length ranging from 0 to 16,777,215, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-A TEXT column with a maximum length of 16,777,215 characters.
-
-
 ### `LONGTEXT` Type
+
+`LONGTEXT` is a string of variable-length. M represents the maximum column length ranging from 0 to 4,294,967,295, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
-A TEXT column with a maximum length of 4,294,967,295 characters.
 
 ### `BINARY` Type
+
+The `BINARY` type is similar to the `CHAR` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum length in bytes:
 
 ```sql
 BINARY(M)
 ```
-The BINARY type is similar to the CHAR type, but stores binary byte strings rather than nonbinary character strings.
 
 ### `VARBINARY` Type
+
+The `VARBINARY` type is similar to the `VARCHAR` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum length, up to 65,535 bytes:
 
 ```sql
 VARBINARY(M)
 ```
-The VARBINARY type is similar to the VARCHAR type, but stores binary byte strings rather than nonbinary character strings.
 
 ### `TINYBLOB` Type
+
+The `TINYBLOB` type is similar to the `TINYTEXT` type, but stores binary byte strings rather than nonbinary character strings:
 
 ```sql
 TINYBLOB
 ```
-A BLOB column with a maximum length of 255 bytes.
 
 ### `BLOB` Type
+
+The `BLOB` type is similar to the `TEXT` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum column length, up to 65,535 bytes. The effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 BLOB[(M)]
 ```
-A BLOB column with a maximum length of 65,535 bytes. M represents the maximum column length.
 
 ### `MEDIUMBLOB` Type
+
+The `MEDIUMBLOB` type is similar to the `TEXT` type, but stores binary byte strings rather than nonbinary character strings. The maximum length is 16,777,215 bytes, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB): 
 
 ```sql
 MEDIUMBLOB
 ```
-A BLOB column with a maximum length of 16,777,215 bytes.
 
 ### `LONGBLOB` Type
+
+The `LONGBLOB` type is similar to the `LONGTEXT` type, but stores binary byte strings rather than nonbinary character strings. The maximum length is 4,294,967,295 bytes, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB): 
 
 ```sql
 LONGBLOB
 ```
-A BLOB column with a maximum length of 4,294,967,295 bytes.
 
 ### `ENUM` Type
 
-An ENUM is a string object with a value chosen from a list of permitted values that are enumerated explicitly in the column specification when the table is created. The syntax is:
+An `ENUM` is a string object with a value chosen from a list of permitted values that are enumerated explicitly in the column specification when the table is created. The syntax is:
 
 ```sql
 ENUM('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -109,7 +118,7 @@ ENUM('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name
 ENUM('apple', 'orange', 'pear')
 ```
 
-The value of the ENUM data type is stored as numbers. Each value is converted to a number according the definition order. In the previous example, each string is mapped to a number:
+The value of the `ENUM` data type is stored as numbers. Each value is converted to a number according the definition order. In the previous example, each string is mapped to a number:
 
 | Value | Number |
 | ---- | ---- |
@@ -123,7 +132,7 @@ For more information, see [the ENUM type in MySQL](https://dev.mysql.com/doc/ref
 
 ### `SET` Type
 
-A SET is a string object that can have zero or more values, each of which must be chosen from a list of permitted values specified when the table is created. The syntax is:
+A `SET` is a string object that can have zero or more values, each of which must be chosen from a list of permitted values specified when the table is created. The syntax is:
 
 ```sql
 SET('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -139,7 +148,7 @@ In the example, any of the following values can be valid:
 '2'
 '1,2'
 ```
-In TiDB, the values of the SET type is internally converted to Int64. The existence of each element is represented using a binary: 0 or 1. For a column specified as `SET('a','b','c','d')`, the members have the following decimal and binary values.
+In TiDB, the values of the `SET` type is internally converted to `Int64`. The existence of each element is represented using a binary: 0 or 1. For a column specified as `SET('a','b','c','d')`, the members have the following decimal and binary values.
 
 | Member | Decimal Value | Binary Value |
 | ---- | ---- | ------ |
@@ -148,6 +157,6 @@ In TiDB, the values of the SET type is internally converted to Int64. The existe
 | 'c' | 4 | 0100 |
 | 'd' | 8 | 1000 |
 
-In this case, for an element of `('a', 'c')`, it is 0101 in binary.
+In this case, for an element of `('a', 'c')`, it is `0101` in binary.
 
 For more information, see [the SET type in MySQL](https://dev.mysql.com/doc/refman/5.7/en/set.html).
