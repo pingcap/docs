@@ -1,7 +1,7 @@
 ---
 title: Date and Time Types
 summary: Learn about the TiDB-supported date and time types.
-category: user guide
+category: reference
 ---
 
 # Date and Time Types
@@ -74,9 +74,7 @@ Different types of zero value are shown in the following table:
 | TIMESTAMP | '0000-00-00 00:00:00' |
 | YEAR      | 0000         |
 
-`DATETIME` and `TIMESTAMP` values can contain a fractional part of up to 6 digits which is accurate to milliseconds. In any column of `DATETIME` or `TIMESTAMP` types, a fractional part is stored instead of being discarded. With a fractional part, the value is in the format of 'YYYY-MM-DD HH:MM:SS[.fraction]', and the fraction ranges from 000000 to 999999. A decimal point must be used to separate the fraction from the rest.
-
-Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ). 
+Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ) if the SQL mode permits such usage.
 
 ## Automatic initialization and update of `TIMESTAMP` and `DATETIME`
 
@@ -104,7 +102,7 @@ CREATE TABLE t1 (
 
 ## Decimal part of time value
 
-A decimal part is permitted for `TIME`, `DATETIME`, `TIMESTAMP` types. The decimal can be accurate to milliseconds.
+`DATETIME` and `TIMESTAMP` values can contain a fractional part of up to 6 digits which is accurate to milliseconds. In any column of `DATETIME` or `TIMESTAMP` types, a fractional part is stored instead of being discarded. With a fractional part, the value is in the format of 'YYYY-MM-DD HH:MM:SS[.fraction]', and the fraction ranges from 000000 to 999999. A decimal point must be used to separate the fraction from the rest.
 
 + Use `type_name(fsp)` to define a column that supports fractional precision, where `type_name` can be `TIME`, `DATETIME` or `TIMESTAMP`. For example,
 
@@ -195,31 +193,28 @@ The two-digit year-portion might not be properly calculated in some functions su
 
 ### `DATE` type
 
-DATE
-> A date. The supported range is '1000-01-01' to '9999-12-31'. TiDB displays DATE values in 'YYYY-MM-DD' format.
+A date. The supported range is '1000-01-01' to '9999-12-31'. TiDB displays DATE values in 'YYYY-MM-DD' format.
+`DATE` only contains date-portion and no time-portion. TiDB accepts and shows the values of `DATE` type in 'YYYY-MM-DD' format. The acceptable values range from '1000-01-01' to '9999-12-31'.
 
-+ `DATE` only contains date-portion and no time-portion. TiDB accepts and shows the values of `DATE` type in 'YYYY-MM-DD' format. The acceptable values range from '1000-01-01' to '9999-12-31'.
+```sql
+DATE
+```
 
 ### `TIME` type
 
+For the `TIME` type, the format is `HH:MM:SS[.fraction]` and valid values range from '-838:59:59.000000' to '838:59:59.000000'. `TIME` is used not only to indicate the time within a day but also to indicate the time interval between 2 events.  An optional `fsp` value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
+
+```sql
 TIME[(fsp)]
-> A time. The range is '-838:59:59.000000' to '838:59:59.000000'. TiDB displays TIME values in 'HH:MM:SS[.fraction]' format.
-An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
+```
 
-For `TIME` type, the format is 'HH:MM:SS' and the value ranges from '-838:59:59' to '838:59:59'. The value of time-portion is larger, because `TIME` is used not only to indicate the time within a day but also to indicate the time interval between 2 events.
-
-`TIME` can contain a fractional part. With a fractional part, `TIME` ranges from '-838:59:59.000000' to '838:59:59.000000'.
-
-Pay attention to the abbreviated form of `TIME`. For example, '11:12' means '11:12:00' instead of '00:11:12'. However, '1112' means '00:11:12'. These differences are caused by the presence or absence of the colon:, because the 2 situations are handled differently. 
-
+Pay attention to the abbreviated form of `TIME`. For example, '11:12' means '11:12:00' instead of '00:11:12'. However, '1112' means '00:11:12'. These differences are caused by the presence or absence of the colon (`:`).
 
 ### `DATETIME` type
 
-+ `DATETIME` contains both date-portion and time-portion, and the format is 'YYYY-MM-DD HH:MM:SS'. The acceptable values range from '1000-01-01 00:00:00' to '9999-12-31 23:59:59'.
+`DATETIME` contains both date-portion and time-portion, and the format is 'YYYY-MM-DD HH:MM:SS[.fraction]'. The acceptable values range from '1000-01-01 00:00:00.000000' to '9999-12-31 23:59:59.999999'.
 
-> A date and time combination. The supported range is '1000-01-01 00:00:00.000000' to '9999-12-31 23:59:59.999999'. TiDB displays 
-DATETIME values in 'YYYY-MM-DD HH:MM:SS[.fraction]' format, but permits assignment of values to DATETIME columns using either strings or numbers.
-An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
+TiDB displays `DATETIME` values in 'YYYY-MM-DD HH:MM:SS[.fraction]' format, but permits assignment of values to `DATETIME` columns using either strings or numbers.  An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
 
 ```sql
 DATETIME[(fsp)]
@@ -227,15 +222,9 @@ DATETIME[(fsp)]
 
 ### `TIMESTAMP` type
 
-A timestamp. The range is '1970-01-01 00:00:01.000000' to '2038-01-19 03:14:07.999999'.
-An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
-An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
-+ `TIMESTAMP` contains both date-portion and time-portion. Its values range from '1970-01-01 00:00:01' to '2038-01-19 03:14:07' in UTC time.
+`TIMESTAMP` contains both date-portion and time-portion. Valid values range from '1970-01-01 00:00:01.000000' to '2038-01-19 03:14:07.999999' in UTC time. An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
 
-> **Note:**
->
-> In `TIMESTAMP`, zero is not permitted to appear in the month-portion or day-portion. The only exception is zero value itself '0000-00-00 00:00:00'.
-
+In `TIMESTAMP`, zero is not permitted to appear in the month-portion or day-portion. The only exception is zero value itself '0000-00-00 00:00:00'.
 
 ```sql
 TIMESTAMP[(fsp)]
@@ -251,13 +240,11 @@ When `TIMESTAMP` is to be stored, TiDB converts the `TIMESTAMP` value from the c
 
 ### `YEAR` type
 
-A year in four-digit format. Values display as 1901 to 2155, and 0000.
+The `YEAR` type is specified in the format 'YYYY'. Supported values range from 1901 to 2155, or the zero value of 0000:
 
 ```sql
 YEAR[(4)]
 ```
-
-The `YEAR` type is specified in the format 'YYYY'. Supported values range from 1901 to 2155, or the zero value of 0000. 
 
 `YEAR` follows these format rules:
 
