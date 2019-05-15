@@ -191,7 +191,7 @@ query-status
 >   ```bash
 >   Couldn't acquire global lock, snapshots will not be consistent: Access denied for user 'root'@'%' (using password: YES)
 >   ```
->If the consistency between dump file and metadata is allowed not to be ensured by FTML, or the writing process in upstream can be paused, you can skip by adding `--no-locks` in `extra-args` under the `mydumpers`. The procedure is as follows: 
+>If the consistency between dump file and metadata is allowed not to be ensured by FTML, or the writing process in upstream can be paused, you can skip the error by adding `--no-locks` in `extra-args` under the `mydumpers`. The procedure is as follows: 
 > 1. Use `stop-task` to stop the paused task caused by irregular dumping 
 > 2. Update the `extra-args: "-B test_db -T test_table"` in task.yaml to `extra-args: "-B test_db -T test_table --no-locks"`
 > 3. Use `start-task` to restart the task
