@@ -1,6 +1,6 @@
 ---
 title: Numeric Types
-summary: Learn about the data types supported in TiDB.
+summary: Learn about numeric data types supported in TiDB.
 category: reference
 ---
 
