@@ -14,6 +14,8 @@ In this tutorial, we'll see how to migrate a sharded table from multiple upstrea
 
 This tutorial assumes you're using a new, clean CentOS 7 instance. You can virtualize locally (using VMware, VirtualBox, etc.), or deploy a small cloud VM on your favorite provider. You'll have the best luck if you have at least 1GB of memory, since we're going to run quite a few services.
 
+> Warning: The methodology used to deploy TiDB in this tutorial should **not** be used to deploy TiDB in a production or development setting.
+
 ### Architecture
 
 ![TiDB DM architecture](https://pingcap.com/images/docs/dm-architecture.png)
