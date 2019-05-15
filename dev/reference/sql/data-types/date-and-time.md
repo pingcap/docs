@@ -191,6 +191,8 @@ If you want the result to be 2000, specify the value to be 2000, '0' or '00'.
 
 The two-digit year-portion might not be properly calculated in some functions such  `MIN()` and  `MAX()`. For these functions, the four-digit format suites better.
 
+## Supported types
+
 ### `DATE` type
 
 A date. The supported range is '1000-01-01' to '9999-12-31'. TiDB displays DATE values in 'YYYY-MM-DD' format.
