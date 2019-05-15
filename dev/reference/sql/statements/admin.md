@@ -21,17 +21,9 @@ ADMIN CHECK TABLE tbl_name [, tbl_name] ...
 
 ## Synopsis
 
-**ExplainSym:**
+**AdminStmt:**
 
-![ExplainSym](/media/sqlgram/ExplainSym.png)
-
-**ExplainStmt:**
-
-![ExplainStmt](/media/sqlgram/ExplainStmt.png)
-
-**ExplainableStmt:**
-
-![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
+![AdminStmt](/media/sqlgram/AdminStmt.png)
 
 ## Examples
 
