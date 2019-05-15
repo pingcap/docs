@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Type
-summary: Learn about the data types supported in TiDB.
+summary: Learn about default values for data types in TiDB.
 category: reference
 ---
 
