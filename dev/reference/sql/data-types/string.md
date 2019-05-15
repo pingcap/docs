@@ -6,20 +6,46 @@ category: reference
 
 # String types
 
-### Overview
+## Overview
 
-TiDB supports all the MySQL string types, including CHAR, VARCHAR, BINARY, VARBINARY, BLOB, TEXT, ENUM, and SET. For more information, [String Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/string-types.html).
+TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`, `VARBINARY`, `BLOB`, `TEXT`, `ENUM`, and `SET`. For more information, [String Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/string-types.html).
 
-#### Type definition
-
-Syntax:
+### `CHAR` Type
 
 ```sql
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 > A fixed-length string. If stored as CHAR, it is right-padded with spaces to the specified length. M represents the column length in characters. The range of M is 0 to 255.
+```
 
+### `VARCHAR` Type
+```sql
 [NATIONAL] VARCHAR(M) [CHARACTER SET charset_name] [COLLATE collation_name]
-> A variable-length string. M represents the maximum column length in characters. The range of M is 0 to 65,535. The effective maximum length of a VARCHAR is subject to the maximum row size (65,535 bytes, which is shared among all columns) and the character set used.
+```
+A variable-length string. M represents the maximum column length in characters. The range of M is 0 to 65,535. The effective maximum length of a VARCHAR is subject to the maximum row size (65,535 bytes, which is shared among all columns) and the character set used.
+
+### `TEXT` Type
+### `LONGTEXT` Type
+### `BINARY` Type
+
+```sql
+BINARY(M)
+```
+The BINARY type is similar to the CHAR type, but stores binary byte strings rather than nonbinary character strings.
+
+### `VARBINARY` Type
+### `TINYBLOB` Type
+### `BLOB` Type
+### `MEDIUMBLOB` Type
+### `LONGBLOB` Type
+### `ENUM` Type
+### `SET` Type
+
+
+### Type definition
+
+Syntax:
+
+```sql
 
 BINARY(M)
 > The BINARY type is similar to the CHAR type, but stores binary byte strings rather than nonbinary character strings.
@@ -57,28 +83,6 @@ ENUM('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name
 SET('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name]
 > A set. A string object that can have zero or more values, each of which must be chosen from the list of values 'value1', 'value2', ...
 ```
-
-## JSON types
-
-TiDB supports the JSON (JavaScript Object Notation) data type.
-The JSON type can store semi-structured data like JSON documents. The JSON data type provides the following advantages over storing JSON-format strings in a string column:
-
-- Use the Binary format for serialization. The internal format permits quick read access to JSON document elements.
-- Automatic validation of the JSON documents stored in JSON columns.Only valid documents can be stored.
-
-JSON columns, like columns of other binary types, are not indexed directly, but you can index the fields in the JSON document in the form of generated column:
-
-```sql
-CREATE TABLE city (
-id INT PRIMARY KEY,
-detail JSON,
-population INT AS (JSON_EXTRACT(detail, '$.population')
-);
-INSERT INTO city VALUES (1, '{"name": "Beijing", "population": 100}');
-SELECT id FROM city WHERE population >= 100;
-```
-
-For more information, see [JSON Functions](/dev/reference/sql/functions-and-operators/json-functions.md) and [Generated Columns](/dev/reference/sql/generated-columns.md).
 
 ## The ENUM data type
 
