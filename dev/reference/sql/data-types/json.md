@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Type
-summary: Learn about the data types supported in TiDB.
+summary: Learn about the JSON data type in TiDB.
 category: reference
 ---
 
