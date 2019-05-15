@@ -10,9 +10,9 @@ category: reference
 
 TiDB supports all the MySQL numeric types, including:
 
-+ [Integer Types (Exact Value)
-+ [Floating-Point Types (Approximate Value)
-+ [Fixed-Point Types (Exact Value)
++ [Integer Types](#integer-types) (Exact Value)
++ [Floating-Point Types](#floating-point-types) (Approximate Value)
++ [Fixed-Point Types](#fixed-point-types) (Exact Value)
 
 ## Integer Types
 
@@ -38,12 +38,19 @@ See the following for the requirements of the storage and minimum value/maximim 
 
 ### `BIT` type
 
+The BIT data type. A type of BIT(M) enables storage of M-bit values. M can range from 1 to 64.
+
+```sql
 BIT[(M)]
-> The BIT data type. A type of BIT(M) enables storage of M-bit values. M can range from 1 to 64.
+```
 
 ### `BOOLEAN` type
 
 The `BOOLEAN` type and its alias `BOOL` are equivalent to `TINYINT(1)`. If the value is `0`, it is considered as `False`; otherwise, it is considered `True`. As in MySQL, `True` is `1` and `False` is `0`.
+
+```sql
+BOOLEAN
+```
 
 ### `TINYINT` type
 
@@ -71,16 +78,19 @@ MEDIUMINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ### `INT` type
 
-INT[(M)] [UNSIGNED] [ZEROFILL]
-> INT. The signed range is: [-2147483648, 2147483647], and the unsigned range is [0, 4294967295].
+INT and alias INTEGER. The signed range is: [-2147483648, 2147483647], and the unsigned range is [0, 4294967295].
 
-INTEGER[(M)] [UNSIGNED] [ZEROFILL]
-> Same as INT.
+```sql
+INT[(M)] [UNSIGNED] [ZEROFILL]
+```
 
 ### `BIGINT` type
 
+BIGINT. The signed range is: [-9223372036854775808, 9223372036854775807], and the unsigned range is [0, 18446744073709551615].
+
+```sql
 BIGINT[(M)] [UNSIGNED] [ZEROFILL]
-> BIGINT. The signed range is: [-9223372036854775808, 9223372036854775807], and the unsigned range is [0, 18446744073709551615].
+```
 
 ## Floating-point types
 
@@ -107,19 +117,24 @@ See the following for the requirements of the storage:
 
 ### `FLOAT` type
 
-FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
 > A small (single-precision) floating-point number. Permissible values are -3.402823466E+38 to -1.175494351E-38, 0, and 1.175494351E-38 to 3.402823466E+38. These are the theoretical limits, based on the IEEE standard. The actual range might be slightly smaller depending on your hardware or operating system.
 
-FLOAT(p) [UNSIGNED] [ZEROFILL]
 > A floating-point number. p represents the precision in bits, but TiDB uses this value only to determine whether to use FLOAT or DOUBLE for the resulting data type. If p is from 0 to 24, the data type becomes FLOAT with no M or D values. If p is from 25 to 53, the data type becomes DOUBLE with no M or D values. The range of the resulting column is the same as for the single-precision FLOAT or double-precision DOUBLE data types described earlier in this section.
+
+```sql
+FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
+FLOAT(p) [UNSIGNED] [ZEROFILL]
+```
 
 ### `DOUBLE` type
 
-DOUBLE[(M,D)] [UNSIGNED] [ZEROFILL]
 > A normal-size (double-precision) floating-point number. Permissible values are -1.7976931348623157E+308 to -2.2250738585072014E-308, 0, and 2.2250738585072014E-308 to 1.7976931348623157E+308. These are the theoretical limits, based on the IEEE standard. The actual range might be slightly smaller depending on your hardware or operating system.
-
-DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL]
 > Synonym for DOUBLE.
+
+```sql
+DOUBLE[(M,D)] [UNSIGNED] [ZEROFILL]
+DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL]
+```
 
 ## Fixed-point types
 
@@ -136,8 +151,10 @@ The meaning of the fields:
 
 ### `DECIMAL` type
 
-DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]
-> A packed “exact” fixed-point number. M is the total number of digits (the precision), and D is the number of digits after the decimal point (the scale). The decimal point and (for negative numbers) the - sign are not counted in M. If D is 0, values have no decimal point or fractional part. The maximum number of digits (M) for DECIMAL is 65. The maximum number of supported decimals (D) is 30. If D is omitted, the default is 0. If M is omitted, the default is 10.
-
-NUMERIC[(M[,D])] [UNSIGNED] [ZEROFILL]
+A packed "exact" fixed-point number. M is the total number of digits (the precision), and D is the number of digits after the decimal point (the scale). The decimal point and (for negative numbers) the - sign are not counted in M. If D is 0, values have no decimal point or fractional part. The maximum number of digits (M) for DECIMAL is 65. The maximum number of supported decimals (D) is 30. If D is omitted, the default is 0. If M is omitted, the default is 10.
 > Synonym for DECIMAL.
+
+```sql
+DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]
+NUMERIC[(M[,D])] [UNSIGNED] [ZEROFILL]
+```
