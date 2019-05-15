@@ -1,6 +1,6 @@
 ---
 title: Date and Time Types
-summary: Learn about the TiDB-supported date and time types.
+summary: Learn about the supported date and time types.
 category: reference
 ---
 
@@ -76,7 +76,7 @@ Different types of zero value are shown in the following table:
 
 Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ) if the SQL mode permits such usage.
 
-## Automatic initialization and update of `TIMESTAMP` and `DATETIME`
+### Automatic initialization and update of `TIMESTAMP` and `DATETIME`
 
 Columns with `TIMESTAMP` or `DATETIME` value type can be automatically initialized or updated to the current time.
 
@@ -100,7 +100,7 @@ CREATE TABLE t1 (
 );
 ```
 
-## Decimal part of time value
+### Decimal part of time value
 
 `DATETIME` and `TIMESTAMP` values can contain a fractional part of up to 6 digits which is accurate to milliseconds. In any column of `DATETIME` or `TIMESTAMP` types, a fractional part is stored instead of being discarded. With a fractional part, the value is in the format of 'YYYY-MM-DD HH:MM:SS[.fraction]', and the fraction ranges from 000000 to 999999. A decimal point must be used to separate the fraction from the rest.
 
@@ -133,7 +133,7 @@ CREATE TABLE t1 (
     1 row in set (0.00 sec)
     ```
 
-## Conversions between date and time types
+### Conversions between date and time types
 
 Sometimes we need to make conversions between date and time types. But some conversions might lead to information loss. For example, `DATE`, `DATETIME` and `TIMESTAMP` values all have their own respective ranges. `TIMESTAMP` should be no earlier than the year 1970 in UTC time or no later than UTC time '2038-01-19 03:14:07'. Based on this rule, '1968-01-01' is a valid date value of `DATE` or `DATETIME`, but becomes 0 when it is converted to `TIMESTAMP`.
 
@@ -174,7 +174,7 @@ mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
 +---------------------|----------------|--------------------+
 ```
 
-## Two-digit year-portion contained in the date
+### Two-digit year-portion contained in the date
 
 The two-digit year-portion contained in date does not explicitly indicate the actual year and is ambiguous. 
 
@@ -195,8 +195,7 @@ The two-digit year-portion might not be properly calculated in some functions su
 
 ### `DATE` type
 
-A date. The supported range is '1000-01-01' to '9999-12-31'. TiDB displays DATE values in 'YYYY-MM-DD' format.
-`DATE` only contains date-portion and no time-portion. TiDB accepts and shows the values of `DATE` type in 'YYYY-MM-DD' format. The acceptable values range from '1000-01-01' to '9999-12-31'.
+`DATE` only contains date-portion and no time-portion, displayed in `YYYY-MM-DD` format. The supported range is '1000-01-01' to '9999-12-31':
 
 ```sql
 DATE
@@ -210,13 +209,15 @@ For the `TIME` type, the format is `HH:MM:SS[.fraction]` and valid values range 
 TIME[(fsp)]
 ```
 
-Pay attention to the abbreviated form of `TIME`. For example, '11:12' means '11:12:00' instead of '00:11:12'. However, '1112' means '00:11:12'. These differences are caused by the presence or absence of the colon (`:`).
+> **Note:**
+> 
+> Pay attention to the abbreviated form of `TIME`. For example, '11:12' means '11:12:00' instead of '00:11:12'. However, '1112' means '00:11:12'. These differences are caused by the presence or absence of the `:` character.
 
 ### `DATETIME` type
 
-`DATETIME` contains both date-portion and time-portion, and the format is 'YYYY-MM-DD HH:MM:SS[.fraction]'. The acceptable values range from '1000-01-01 00:00:00.000000' to '9999-12-31 23:59:59.999999'.
+`DATETIME` contains both date-portion and time-portion. Valid values range from '1000-01-01 00:00:00.000000' to '9999-12-31 23:59:59.999999'.
 
-TiDB displays `DATETIME` values in 'YYYY-MM-DD HH:MM:SS[.fraction]' format, but permits assignment of values to `DATETIME` columns using either strings or numbers.  An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
+TiDB displays `DATETIME` values in `YYYY-MM-DD HH:MM:SS[.fraction]` format, but permits assignment of values to `DATETIME` columns using either strings or numbers.  An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
 
 ```sql
 DATETIME[(fsp)]
@@ -234,7 +235,7 @@ TIMESTAMP[(fsp)]
 
 #### Timezone Handling
 
-When `TIMESTAMP` is to be stored, TiDB converts the `TIMESTAMP` value from the current time zone to UTC time zone. When `TIMESTAMP`  is to be retrieved, TiDB converts the stored `TIMESTAMP` value from UTC time zone to the current time zone (Note: `DATETIME` is not handled in this way). The default time zone for each connection is the server's local time zone, which can be modified by the environment variable `time_zone` .
+When `TIMESTAMP` is to be stored, TiDB converts the `TIMESTAMP` value from the current time zone to UTC time zone. When `TIMESTAMP`  is to be retrieved, TiDB converts the stored `TIMESTAMP` value from UTC time zone to the current time zone (Note: `DATETIME` is not handled in this way). The default time zone for each connection is the server's local time zone, which can be modified by the environment variable `time_zone`.
 
 > **Warning:**
 > 
@@ -248,7 +249,7 @@ The `YEAR` type is specified in the format 'YYYY'. Supported values range from 1
 YEAR[(4)]
 ```
 
-`YEAR` follows these format rules:
+`YEAR` follows the following format rules:
 
 + Four-digit numeral ranges from 1901 to 2155
 + Four-digit string ranges from '1901' to '2155'
