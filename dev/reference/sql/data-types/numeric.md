@@ -14,7 +14,7 @@ TiDB supports all the MySQL numeric types, including:
 + [Floating-Point Types](#floating-point-types) (Approximate Value)
 + [Fixed-Point Types](#fixed-point-types) (Exact Value)
 
-## Integer Types
+## Integer types
 
 The meaning of the fields:
 
@@ -38,7 +38,7 @@ See the following for the requirements of the storage and minimum value/maximim 
 
 ### `BIT` type
 
-The BIT data type. A type of BIT(M) enables storage of M-bit values. M can range from 1 to 64.
+The BIT data type. A type of BIT(M) enables storage of M-bit values. M can range from 1 to 64:
 
 ```sql
 BIT[(M)]
@@ -46,7 +46,7 @@ BIT[(M)]
 
 ### `BOOLEAN` type
 
-The `BOOLEAN` type and its alias `BOOL` are equivalent to `TINYINT(1)`. If the value is `0`, it is considered as `False`; otherwise, it is considered `True`. As in MySQL, `True` is `1` and `False` is `0`.
+The `BOOLEAN` type and its alias `BOOL` are equivalent to `TINYINT(1)`. If the value is `0`, it is considered as `False`; otherwise, it is considered `True`. As in MySQL, `True` is `1` and `False` is `0`:
 
 ```sql
 BOOLEAN
@@ -76,9 +76,9 @@ The `MEDIUMINT` data type stores signed values of range [-8388608, 8388607], and
 MEDIUMINT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### `INT` type
+### `INTEGER` type
 
-INT and alias INTEGER. The signed range is: [-2147483648, 2147483647], and the unsigned range is [0, 4294967295].
+The `INTEGER` type and its alias `INT` stores signed values of range [-2147483648, 2147483647], and unsigned values of range [0, 4294967295]:
 
 ```sql
 INT[(M)] [UNSIGNED] [ZEROFILL]
@@ -86,7 +86,7 @@ INT[(M)] [UNSIGNED] [ZEROFILL]
 
 ### `BIGINT` type
 
-BIGINT. The signed range is: [-9223372036854775808, 9223372036854775807], and the unsigned range is [0, 18446744073709551615].
+The `BIGINT` data type stores signed values of range [-9223372036854775808, 9223372036854775807], and unsigned values of range [0, 18446744073709551615]:
 
 ```sql
 BIGINT[(M)] [UNSIGNED] [ZEROFILL]
@@ -94,7 +94,7 @@ BIGINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ## Floating-point types
 
-TiDB supports all the MySQL floating-point types, including FLOAT, and DOUBLE. For more information, [Floating-Point Types (Approximate Value) - FLOAT, DOUBLE in MySQL](https://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html).
+TiDB supports all the MySQL floating-point types, including `FLOAT`, and `DOUBLE`. For more information, [Floating-Point Types (Approximate Value) - FLOAT, DOUBLE in MySQL](https://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html).
 
 The meaning of the fields:
 
@@ -117,24 +117,31 @@ See the following for the requirements of the storage:
 
 ### `FLOAT` type
 
-> A small (single-precision) floating-point number. Permissible values are -3.402823466E+38 to -1.175494351E-38, 0, and 1.175494351E-38 to 3.402823466E+38. These are the theoretical limits, based on the IEEE standard. The actual range might be slightly smaller depending on your hardware or operating system.
+The `FLOAT` type stores a single-precision floating-point number. Permissible values are -3.402823466E+38 to -1.175494351E-38, 0, and 1.175494351E-38 to 3.402823466E+38. These are the theoretical limits, based on the IEEE standard. The actual range might be slightly smaller depending on your hardware or operating system.
 
-> A floating-point number. p represents the precision in bits, but TiDB uses this value only to determine whether to use FLOAT or DOUBLE for the resulting data type. If p is from 0 to 24, the data type becomes FLOAT with no M or D values. If p is from 25 to 53, the data type becomes DOUBLE with no M or D values. The range of the resulting column is the same as for the single-precision FLOAT or double-precision DOUBLE data types described earlier in this section.
+`FLOAT(p)` can be used to represent the required precision in bits. TiDB uses this value only to determine whether to use `FLOAT` or `DOUBLE` for the resulting data type. If p is from 0 to 24, the data type becomes FLOAT with no M or D values. If p is from 25 to 53, the data type becomes `DOUBLE` with no M or D values. The range of the resulting column is the same as for the single-precision `FLOAT` or double-precision `DOUBLE` data type.
 
 ```sql
 FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
 FLOAT(p) [UNSIGNED] [ZEROFILL]
 ```
 
+> **Warning:**
+> 
+> As in MySQL, the `FLOAT` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
+
 ### `DOUBLE` type
 
-> A normal-size (double-precision) floating-point number. Permissible values are -1.7976931348623157E+308 to -2.2250738585072014E-308, 0, and 2.2250738585072014E-308 to 1.7976931348623157E+308. These are the theoretical limits, based on the IEEE standard. The actual range might be slightly smaller depending on your hardware or operating system.
-> Synonym for DOUBLE.
+The `DOUBLE` type, and its alias `DOUBLE PRECISION` stores a double-precision floating-point number. Permissible values are -1.7976931348623157E+308 to -2.2250738585072014E-308, 0, and 2.2250738585072014E-308 to 1.7976931348623157E+308. These are the theoretical limits, based on the IEEE standard. The actual range might be slightly smaller depending on your hardware or operating system.
 
 ```sql
 DOUBLE[(M,D)] [UNSIGNED] [ZEROFILL]
 DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL]
 ```
+
+> **Warning:**
+> 
+> As in MySQL, the `DOUBLE` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
 
 ## Fixed-point types
 
@@ -151,7 +158,7 @@ The meaning of the fields:
 
 ### `DECIMAL` type
 
-A packed "exact" fixed-point number. M is the total number of digits (the precision), and D is the number of digits after the decimal point (the scale). The decimal point and (for negative numbers) the - sign are not counted in M. If D is 0, values have no decimal point or fractional part. The maximum number of digits (M) for DECIMAL is 65. The maximum number of supported decimals (D) is 30. If D is omitted, the default is 0. If M is omitted, the default is 10.
+`DECIMAL` and its alias `NUMERIC` stores a packed "exact" fixed-point number. M is the total number of digits (the precision), and D is the number of digits after the decimal point (the scale). The decimal point and (for negative numbers) the - sign are not counted in M. If D is 0, values have no decimal point or fractional part. The maximum number of digits (M) for DECIMAL is 65. The maximum number of supported decimals (D) is 30. If D is omitted, the default is 0. If M is omitted, the default is 10.
 > Synonym for DECIMAL.
 
 ```sql
