@@ -97,7 +97,7 @@
       - [Default Values](dev/reference/sql/data-types/default-values.md)
       + Numeric Types
         - [`BIT`](dev/reference/sql/data-types/numeric.md#bit-type)
-        - [`BOOL|BOOLEAN`](dev/reference/sql/data-types/numeric.md#boolean-tyoe)
+        - [`BOOL|BOOLEAN`](dev/reference/sql/data-types/numeric.md#boolean-type)
         - [`TINYINT`](dev/reference/sql/data-types/numeric.md#tinyint-type)
         - [`SMALLINT`](dev/reference/sql/data-types/numeric.md#smallint-type)
         - [`MEDIUMINT`](dev/reference/sql/data-types/numeric.md#mediumint-type)
