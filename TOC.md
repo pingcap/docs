@@ -125,7 +125,7 @@
         - [`LONGBLOB`](dev/reference/sql/data-types/string.md#longblob-type)
         - [`ENUM`](dev/reference/sql/data-types/string.md#enum-type)
         - [`SET`](dev/reference/sql/data-types/string.md#set-type)
-      - [`JSON` Type](dev/reference/sql/data-types/json.md-type)
+      - [`JSON` Type](dev/reference/sql/data-types/json.md)
     + Functions and Operators
       - [Function and Operator Reference](dev/reference/sql/functions-and-operators/reference.md)
       - [Type Conversion in Expression Evaluation](dev/reference/sql/functions-and-operators/type-conversion.md)
