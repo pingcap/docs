@@ -19,6 +19,22 @@ ADMIN CHECK TABLE tbl_name [, tbl_name] ...
 - `ADMIN SHOW DDL`: To view the currently running DDL jobs.
 - `ADMIN SHOW DDL JOBS`: To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue.
 
+## Synopsis
+
+**ExplainSym:**
+
+![ExplainSym](/media/sqlgram/ExplainSym.png)
+
+**ExplainStmt:**
+
+![ExplainStmt](/media/sqlgram/ExplainStmt.png)
+
+**ExplainableStmt:**
+
+![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
+
+## Examples
+
     ```sql
     mysql> admin show ddl jobs;
     +--------+---------+------------+---------------+----------------------+-----------+----------+-----------+-----------------------------------+---------------+
@@ -66,27 +82,6 @@ ADMIN CHECK TABLE tbl_name [, tbl_name] ...
   >
   > - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement. 
   > - If the jobs you want to cancel are finished, the cancellation operation fails. 
-
-
-## Synopsis
-
-**ExplainSym:**
-
-![ExplainSym](/media/sqlgram/ExplainSym.png)
-
-**ExplainStmt:**
-
-![ExplainStmt](/media/sqlgram/ExplainStmt.png)
-
-**ExplainableStmt:**
-
-![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
-
-## Examples
-
-```sql
-xxx
-```
 
 ## MySQL compatibility
 
