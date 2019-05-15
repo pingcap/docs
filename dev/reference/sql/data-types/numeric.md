@@ -6,8 +6,6 @@ category: reference
 
 # Numeric Types
 
-## Overview
-
 TiDB supports all the MySQL numeric types, including:
 
 + [Integer Types](#integer-types) (Exact Value)
