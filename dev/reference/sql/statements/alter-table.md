@@ -8,8 +8,8 @@ category: reference
 
 This statement modifies an existing table to conform to a new table structure. The statement `ALTER TABLE` can be used to:
 
-* [`ADD`](/dev/reference/sql/statements/add-index.md), [`DROP`](/dev/reference/sql/statements/drop-index.md), or [`RENAME`](/dev/reference/sql/statements/rename-index.md) indexes
-* [`ADD`](/dev/reference/sql/statements/add-column.md), [`DROP`](/dev/reference/sql/statements/drop-column.md), [`MODIFY`](/dev/reference/sql/statements/modify-column.md) or [`CHANGE`](/dev/reference/sql/statements/change-column.md) columns
+* [`ADD`](/v3.0/reference/sql/statements/add-index.md), [`DROP`](/v3.0/reference/sql/statements/drop-index.md), or [`RENAME`](/v3.0/reference/sql/statements/rename-index.md) indexes
+* [`ADD`](/v3.0/reference/sql/statements/add-column.md), [`DROP`](/v3.0/reference/sql/statements/drop-column.md), [`MODIFY`](/v3.0/reference/sql/statements/modify-column.md) or [`CHANGE`](/v3.0/reference/sql/statements/change-column.md) columns
 
 ## Synopsis
 
@@ -65,12 +65,12 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## See also
 
-* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
-* [DROP COLUMN](/dev/reference/sql/statements/drop-column.md)
-* [RENAME COLUMN](/dev/reference/sql/statements/rename-column.md)
-* [ADD INDEX](/dev/reference/sql/statements/add-index.md)
-* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
-* [RENAME INDEX](/dev/reference/sql/statements/rename-index.md)
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
+* [ADD COLUMN](/v3.0/reference/sql/statements/add-column.md)
+* [DROP COLUMN](/v3.0/reference/sql/statements/drop-column.md)
+* [RENAME COLUMN](/v3.0/reference/sql/statements/rename-column.md)
+* [ADD INDEX](/v3.0/reference/sql/statements/add-index.md)
+* [DROP INDEX](/v3.0/reference/sql/statements/drop-index.md)
+* [RENAME INDEX](/v3.0/reference/sql/statements/rename-index.md)
+* [CREATE TABLE](/v3.0/reference/sql/statements/create-table.md)
+* [DROP TABLE](/v3.0/reference/sql/statements/drop-table.md)
+* [SHOW CREATE TABLE](/v3.0/reference/sql/statements/show-create-table.md)

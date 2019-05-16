@@ -68,7 +68,7 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## See also
 
-* [SHOW INDEX](/dev/reference/sql/statements/show-index.md)
-* [CREATE INDEX](/dev/reference/sql/statements/create-index.md)
-* [ADD INDEX](/dev/reference/sql/statements/add-index.md)
-* [RENAME INDEX](/dev/reference/sql/statements/rename-index.md)
+* [SHOW INDEX](/v3.0/reference/sql/statements/show-index.md)
+* [CREATE INDEX](/v3.0/reference/sql/statements/create-index.md)
+* [ADD INDEX](/v3.0/reference/sql/statements/add-index.md)
+* [RENAME INDEX](/v3.0/reference/sql/statements/rename-index.md)

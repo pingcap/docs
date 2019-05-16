@@ -56,6 +56,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW SCHEMAS](/dev/reference/sql/statements/show-schemas.md)
-* [DROP DATABASE](/dev/reference/sql/statements/drop-database.md)
-* [CREATE DATABASE](/dev/reference/sql/statements/create-database.md)
+* [SHOW SCHEMAS](/v3.0/reference/sql/statements/show-schemas.md)
+* [DROP DATABASE](/v3.0/reference/sql/statements/drop-database.md)
+* [CREATE DATABASE](/v3.0/reference/sql/statements/create-database.md)

@@ -50,6 +50,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [SHOW TABLES](/dev/reference/sql/statements/show-tables.md)
-* [ALTER TABLE](/dev/reference/sql/statements/alter-table.md)
+* [CREATE TABLE](/v3.0/reference/sql/statements/create-table.md)
+* [SHOW TABLES](/v3.0/reference/sql/statements/show-tables.md)
+* [ALTER TABLE](/v3.0/reference/sql/statements/alter-table.md)

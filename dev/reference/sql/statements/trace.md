@@ -142,4 +142,4 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [EXPLAIN ANALYZE](/dev/reference/sql/statements/explain-analyze.md)
+* [EXPLAIN ANALYZE](/v3.0/reference/sql/statements/explain-analyze.md)

@@ -38,4 +38,4 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## See also
 
-* [SHOW \[FULL\] PROCESSLIST](/dev/reference/sql/statements/show-processlist.md)
+* [SHOW \[FULL\] PROCESSLIST](/v3.0/reference/sql/statements/show-processlist.md)
