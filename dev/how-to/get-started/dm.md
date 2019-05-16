@@ -18,7 +18,7 @@ This tutorial assumes you're using a new, clean CentOS 7 instance. You can virtu
 
 ### Architecture
 
-![TiDB DM architecture](https://pingcap.com/images/docs/dm-architecture.png)
+![TiDB DM architecture](/media/dm-architecture.png)
 
 The TiDB DM (Data Migration) platform consists of 3 components: dm-master, dm-worker, and dmctl.
 
