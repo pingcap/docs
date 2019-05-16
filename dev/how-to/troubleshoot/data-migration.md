@@ -2,7 +2,6 @@
 title: Data Migration Troubleshooting
 summary: Learn how to diagnose and resolve issues when you use Data Migration.
 category: how-to
-aliases: ['/docs/tools/dm/troubleshooting/']
 ---
 
 # Data Migration Troubleshooting

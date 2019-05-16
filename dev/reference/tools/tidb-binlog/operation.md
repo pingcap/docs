@@ -2,7 +2,6 @@
 title: TiDB-Binlog Cluster Operations
 summary: Learn how to operate the cluster version of TiDB-Binlog.
 category: reference
-aliases: ['/docs/tools/binlog/operation/']
 ---
 
 # TiDB-Binlog Cluster Operations

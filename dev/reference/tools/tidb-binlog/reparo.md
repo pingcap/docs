@@ -2,7 +2,6 @@
 title: Reparo User Guide
 summary: Learn to use Reparo.
 category: reference
-aliases: ['/docs/tools/binlog/reparo/']
 ---
 
 # Reparo User Guide

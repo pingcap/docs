@@ -2,7 +2,6 @@
 title: Data Migration Simple Usage Scenario
 summary: Learn how to use Data Migration to synchronize data in a simple scenario.
 category: reference
-aliases: ['/docs/tools/dm/simple-synchronization-scenario/']
 ---
 
 # Data Migration Simple Usage Scenario

@@ -2,7 +2,6 @@
 title: Transactions
 summary: Learn how to use the distributed transaction statements.
 category: reference
-aliases: ['/docs/sql/transaction/']
 ---
 
 # Transactions

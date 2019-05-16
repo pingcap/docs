@@ -1,7 +1,6 @@
 ---
 title: Cross-DC Deployment Solutions
 category: how-to
-aliases: ['/docs/op-guide/cross-dc-deployment/']
 ---
 
 # Cross-DC Deployment Solutions

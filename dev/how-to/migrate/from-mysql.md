@@ -2,7 +2,6 @@
 title: Migrate Data from MySQL to TiDB
 summary: Use `mydumper` and `loader` to migrate data from MySQL to TiDB.
 category: how-to
-aliases: ['/docs/op-guide/migration/']
 ---
 
 # Migrate Data from MySQL to TiDB

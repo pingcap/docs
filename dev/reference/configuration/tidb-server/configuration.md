@@ -2,7 +2,6 @@
 title: Configuration Flags
 summary: Learn some configuration flags for TiDB
 category: reference
-aliases: ['/docs/op-guide/configuration/','/docs/sql/server-command-option/','/docs/sql/tidb-server/']
 ---
 
 # Configuration Flags

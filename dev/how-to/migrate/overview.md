@@ -2,7 +2,6 @@
 title: Migration Overview
 summary: Learn how to migrate data into TiDB.
 category: how-to
-aliases: ['/docs/op-guide/migration-overview/']
 ---
 
 # Migration Overview
