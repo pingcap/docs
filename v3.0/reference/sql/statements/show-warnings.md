@@ -84,4 +84,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW ERRORS](/dev/reference/sql/statements/show-errors.md)
+* [SHOW ERRORS](/v3.0/reference/sql/statements/show-errors.md)

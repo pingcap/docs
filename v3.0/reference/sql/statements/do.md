@@ -46,4 +46,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SELECT](/dev/reference/sql/statements/select.md)
+* [SELECT](/v3.0/reference/sql/statements/select.md)

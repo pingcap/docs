@@ -51,5 +51,5 @@ ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@
 
 ## See also
 
-* [LOCK TABLES](/dev/reference/sql/statements/lock-tables.md)
-* [Read historical data](/dev/how-to/get-started/read-historical-data.md)
+* [LOCK TABLES](/v3.0/reference/sql/statements/lock-tables.md)
+* [Read historical data](/v3.0/how-to/get-started/read-historical-data.md)

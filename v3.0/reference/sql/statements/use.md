@@ -75,5 +75,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE DATABASE](/dev/reference/sql/statements/create-database.md)
-* [SHOW TABLES](/dev/reference/sql/statements/show-tables.md)
+* [CREATE DATABASE](/v3.0/reference/sql/statements/create-database.md)
+* [SHOW TABLES](/v3.0/reference/sql/statements/show-tables.md)

@@ -80,7 +80,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [GRANT <privileges>](/dev/reference/sql/statements/grant-privileges.md)
-* [SHOW GRANTS](/dev/reference/sql/statements/show-grants.md)
-* [Privilege Management](/dev/reference/security/privilege-system.md)
+* [GRANT <privileges>](/v3.0/reference/sql/statements/grant-privileges.md)
+* [SHOW GRANTS](/v3.0/reference/sql/statements/show-grants.md)
+* [Privilege Management](/v3.0/reference/security/privilege-system.md)
 

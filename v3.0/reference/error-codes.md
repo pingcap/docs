@@ -28,4 +28,4 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 ## Troubleshooting
 
-See the [troubleshooting](/dev/how-to/troubleshoot/cluster-setup.md) and [FAQ](/faq/tidb.md) documents.
+See the [troubleshooting](/v3.0/how-to/troubleshoot/cluster-setup.md) and [FAQ](/faq/tidb.md) documents.

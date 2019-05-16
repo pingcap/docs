@@ -60,6 +60,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE USER](/dev/reference/sql/statements/create-user.md)
-* [Privilege Management](/dev/reference/security/privilege-system.md)
+* [CREATE USER](/v3.0/reference/sql/statements/create-user.md)
+* [Privilege Management](/v3.0/reference/security/privilege-system.md)
 
