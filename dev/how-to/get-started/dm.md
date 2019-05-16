@@ -40,7 +40,7 @@ sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/my
 sudo yum install -y mysql-community-server
 curl http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
 curl http://download.pingcap.org/dm-latest-linux-amd64.tar.gz | tar xzf -
-curl -L https://github.com/kolbe/pingcap-docs/raw/kolbe-tutorials-dm/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
+curl -L https://github.com/pingcap/docs/raw/master/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
 ```
 
 Create some directories and symlinks:
