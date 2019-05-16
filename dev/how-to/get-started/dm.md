@@ -646,4 +646,4 @@ Expected output:
 
 In this tutorial, we've completed 2 exercises. The first was a shard migration from 3 upstream MySQL server instances that each assigned non-overlapping sets of auto-increment IDs, and the second was a shard migration from 3 upstream MySQL server instances that each assigned auto-increment IDs that conflicted with one another. We saw how DM not only takes care of importing an initial dump of data in the cluster, but that it can also read binary logs to keep the downstream TiDB cluster in sync with the upstream instance(s).
 
-For additional information about DM, please consult [Data Migration Overview](https://pingcap.com/docs/tools/dm/overview/) in the TiDB documentation or join the [TiDB Community Slack](https://pingcap.com/tidbslack/) channel!
+For additional information about DM, please consult [Data Migration Overview](/dev/reference/tools/data-migration/overview.md) in the TiDB documentation or join the [TiDB Community Slack](https://pingcap.com/tidbslack/) channel!
