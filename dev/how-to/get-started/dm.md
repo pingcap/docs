@@ -8,7 +8,7 @@ category: how-to
 
 TiDB DM (Data Migration) is a platform that supports migrating large, complex, production data sets from MySQL or MariaDB to TiDB.
 
-DM supports creating and importing an initial dump of data, as well as keeping data synchronized during migration by reading and applying binary logs from the source data store. DM can migrate sharded topologies from in-production databases by merging tables from multiple separate upstream MySQL/MariaDB instances/clusters.
+DM supports creating and importing an initial dump of data, as well as keeping data synchronized during migration by reading and applying binary logs from the source data store. DM can migrate sharded topologies from in-production databases by merging tables from multiple separate upstream MySQL/MariaDB instances/clusters. In addition to its use for migrations, DM is often used on an ongoing basis by existing MySQL or MariaDB users who deploy a TiDB cluster as a slave, to either provide improved horizontal scalability or run real-time analytical workloads on TiDB without needing to manage an ETL pipeline. 
 
 In this tutorial, we'll see how to migrate a sharded table from multiple upstream MySQL instances. We'll do this a couple of different ways. First, we'll merge several tables/shards that do not conflict; that is, they're partitioned using a scheme that does not result in conflicting unique key values. Then, we'll merge several tables that **do** have conflicting unique key values.
 
@@ -159,7 +159,7 @@ Note that we have incrementing, non-overlapping IDs in the left-hand column. The
 
 Our goal in this exercise is to use DM to combine the data from these distinct MySQL instances into a single table in TiDB.
 
-The package of configuation files we unpacked earlier (dm-cnf.tgz) contains the configuration for the components of the TiDB cluster, the DM components, and for the 2 DM tasks we'll explore in this tutorial.
+The package of configuration files we unpacked earlier (dm-cnf.tgz) contains the configuration for the components of the TiDB cluster, the DM components, and for the 2 DM tasks we'll explore in this tutorial.
 
 We'll start a single tidb-server instance, one dm-worker process for each of the MySQL server instances (3 total), and a single dm-master process:
 ```bash
@@ -646,4 +646,4 @@ Expected output:
 
 In this tutorial, we've completed 2 exercises. The first was a shard migration from 3 upstream MySQL server instances that each assigned non-overlapping sets of auto-increment IDs, and the second was a shard migration from 3 upstream MySQL server instances that each assigned auto-increment IDs that conflicted with one another. We saw how DM not only takes care of importing an initial dump of data in the cluster, but that it can also read binary logs to keep the downstream TiDB cluster in sync with the upstream instance(s).
 
-For additional information about DM, please consult [Data Migration Overview](https://pingcap.com/docs/tools/dm/overview/) in the TiDB documentation or join [TiDB Community Slack](https://pingcap.com/tidbslack/).
+For additional information about DM, please consult [Data Migration Overview](https://pingcap.com/docs/tools/dm/overview/) in the TiDB documentation or join the [TiDB Community Slack](https://pingcap.com/tidbslack/) channel!
