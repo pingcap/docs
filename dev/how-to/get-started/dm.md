@@ -28,7 +28,7 @@ The TiDB DM (Data Migration) platform consists of 3 components: dm-master, dm-wo
 
 Individual tasks are defined in .yaml files that are read by dmctl and submitted to dm-master. dm-master then informs each instance of dm-worker of its responsibilities for a given task.
 
-For additional information about DM, please consult [Data Migration Overview](https://pingcap.com/docs/tools/dm/overview/) in the TiDB documentation.
+For additional information about DM, please consult [Data Migration Overview](/dev/reference/tools/data-migration/overview.md) in the TiDB documentation.
 
 ### Setup
 
