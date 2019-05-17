@@ -63,5 +63,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW GRANTS](/v3.0/reference/sql/statements/show-grants.md)
-* [GRANT <privileges>](/v3.0/reference/sql/statements/grant-privileges.md)
+* [SHOW GRANTS](/dev/reference/sql/statements/show-grants.md)
+* [GRANT <privileges>](/dev/reference/sql/statements/grant-privileges.md)

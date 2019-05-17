@@ -125,4 +125,4 @@ If you modified the grant tables directly, run the following command to apply ch
 FLUSH PRIVILEGES;
 ```
 
-For details, see [Privilege Management](/v3.0/reference/security/privilege-system.md).
+For details, see [Privilege Management](/dev/reference/security/privilege-system.md).

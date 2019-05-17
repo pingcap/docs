@@ -105,4 +105,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SET](/v3.0/reference/sql/statements/set-session-variable.md)
+* [SET](/dev/reference/sql/statements/set-session-variable.md)

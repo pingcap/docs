@@ -54,7 +54,7 @@ mysql> SHOW CREATE USER 'newuser';
 
 ## See also
 
-* [Security Compatibility with MySQL](/v3.0/reference/security/compatibility.md)
-* [CREATE USER](/v3.0/reference/sql/statements/create-user.md)
-* [DROP USER](/v3.0/reference/sql/statements/drop-user.md)
-* [SHOW CREATE USER](/v3.0/reference/sql/statements/show-create-user.md)
+* [Security Compatibility with MySQL](/dev/reference/security/compatibility.md)
+* [CREATE USER](/dev/reference/sql/statements/create-user.md)
+* [DROP USER](/dev/reference/sql/statements/drop-user.md)
+* [SHOW CREATE USER](/dev/reference/sql/statements/show-create-user.md)

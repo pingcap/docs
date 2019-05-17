@@ -57,5 +57,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE TABLE](/v3.0/reference/sql/statements/create-table.md)
-* [SHOW CREATE TABLE](/v3.0/reference/sql/statements/show-create-table.md)
+* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
+* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)

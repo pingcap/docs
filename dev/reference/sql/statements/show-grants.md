@@ -53,5 +53,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW CREATE USER](/v3.0/reference/sql/statements/show-create-user.md)
-* [GRANT](/v3.0/reference/sql/statements/grant.md)
+* [SHOW CREATE USER](/dev/reference/sql/statements/show-create-user.md)
+* [GRANT](/dev/reference/sql/statements/grant.md)
