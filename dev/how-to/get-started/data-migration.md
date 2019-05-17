@@ -273,7 +273,7 @@ There are a number of global options, and several groups of options that define 
 
 * `task-mode: all` tells DM to both import a full backup of the upstream instances as well as replicate incremental updates using the upstream MySQL server's binary log.
   
-  * Alternatively, you can give `task-mode` the `full` or `incremental` value, respectively, to get only one of those two behaviors.
+    * Alternatively, you can give `task-mode` the `full` or `incremental` value, respectively, to get only one of those two behaviors.
 
 * `is-sharding: true` tells DM that we want multiple DM-worker instances to work on a single task to merge several upstream shards into a single downstream table.
 
@@ -561,11 +561,11 @@ loaders:
     
         * You can include wildcards in these if you want to merge multiple schemas and/or tables into a single downstream table.
   
-  * The `partition id` expression has a corresponding `arguments` section that controls the algorithm used to transform upstream IDs into those used in the downstream TiDB cluster. There's a more in-depth discussion of this algorithm later in this tutorial.
+    * The `partition id` expression has a corresponding `arguments` section that controls the algorithm used to transform upstream IDs into those used in the downstream TiDB cluster. There's a more in-depth discussion of this algorithm later in this tutorial.
   
-  * `source_column` and `target_column` are pretty self-explanatory, but it's worth noting that they offer the possibility of merging upstream inserts into a downstream table with a different structure, for example if you need to preserve the original values.
+    * `source_column` and `target_column` are pretty self-explanatory, but it's worth noting that they offer the possibility of merging upstream inserts into a downstream table with a different structure, for example if you need to preserve the original values.
   
-  * Each entry in `mysql-instances` has a different column mapping because different arguments to the `partition id` algorithm needs to be used for each.
+    * Each entry in `mysql-instances` has a different column mapping because different arguments to the `partition id` algorithm needs to be used for each.
 
 
 Let's start dmtask2:
