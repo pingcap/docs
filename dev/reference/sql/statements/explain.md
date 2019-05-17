@@ -91,7 +91,9 @@ mysql> EXPLAIN DELETE FROM t1 WHERE c1=3;
 +---------------------+----------+------+-------------------------------------------------------------+
 3 rows in set (0.00 sec)
 ```
-In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` or `FORMAT = "row"` as in the following example:
+If you do not specify the `FORMAT`, or specify `FORMAT = "row"`, `EXPLAIN` statement will ouput the results in MySQL standard result format. But the field is different with that of MySQL. See [Understand the Query Execution Plan](https://pingcap.com/docs/dev/reference/performance/understanding-the-query-execution-plan/) for more information. 
+
+In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
 
 ```sql
 create table t(a bigint, b bigint);
