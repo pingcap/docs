@@ -13,7 +13,7 @@ Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL d
 
 > **Note:**
 >
-> This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security](/v3.0/reference/security/compatibility.md) and [Transaction Model](/dev/reference/transactions/transaction-model.md) compatibility.
+> This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security](/v3.0/reference/security/compatibility.md) and [Transaction Model](/v3.0/reference/transactions/transaction-model.md) compatibility.
 
 ## Unsupported features
 

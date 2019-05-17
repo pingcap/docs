@@ -31,7 +31,7 @@ Do not execute any DDL statements during the upgrading process, otherwise the un
 
 TiDB-Ansible release-2.1 depends on Ansible 2.4.2 ~ 2.7.0 (`ansible>=2.4.2,<2.7.0`) and the Python module `jinja2>=2.9.6` and `jmespath>=0.9.0`.
 
-To make it easy to manage dependencies, use `pip` to install Ansible and its dependencies. For details, see [Install Ansible and its dependencies on the Control Machine](/v3.0/how-to/deploy/orchestrated/ansible.md#step-4-install-ansible-and-its-dependencies-on-the-control-machine). For offline environment, see [Install Ansible and its dependencies offline on the Control Machine](/dev/how-to/deploy/orchestrated/offline-ansible.md#step-3-install-ansible-and-its-dependencies-offline-on-the-control-machine).
+To make it easy to manage dependencies, use `pip` to install Ansible and its dependencies. For details, see [Install Ansible and its dependencies on the Control Machine](/v3.0/how-to/deploy/orchestrated/ansible.md#step-4-install-ansible-and-its-dependencies-on-the-control-machine). For offline environment, see [Install Ansible and its dependencies offline on the Control Machine](/v3.0/how-to/deploy/orchestrated/offline-ansible.md#step-3-install-ansible-and-its-dependencies-offline-on-the-control-machine).
 
 After the installation is finished, you can view the version information using the following command:
 

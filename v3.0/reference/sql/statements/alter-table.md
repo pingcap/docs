@@ -8,8 +8,8 @@ category: reference
 
 This statement modifies an existing table to conform to a new table structure. The statement `ALTER TABLE` can be used to:
 
-* [`ADD`](/v3.0/reference/sql/statements/add-index.md), [`DROP`](/dev/reference/sql/statements/drop-index.md), or [`RENAME`](/dev/reference/sql/statements/rename-index.md) indexes
-* [`ADD`](/v3.0/reference/sql/statements/add-column.md), [`DROP`](/dev/reference/sql/statements/drop-column.md), [`MODIFY`](/dev/reference/sql/statements/modify-column.md) or [`CHANGE`](/dev/reference/sql/statements/change-column.md) columns
+* [`ADD`](/v3.0/reference/sql/statements/add-index.md), [`DROP`](/v3.0/reference/sql/statements/drop-index.md), or [`RENAME`](/v3.0/reference/sql/statements/rename-index.md) indexes
+* [`ADD`](/v3.0/reference/sql/statements/add-column.md), [`DROP`](/v3.0/reference/sql/statements/drop-column.md), [`MODIFY`](/v3.0/reference/sql/statements/modify-column.md) or [`CHANGE`](/v3.0/reference/sql/statements/change-column.md) columns
 
 ## Synopsis
 
