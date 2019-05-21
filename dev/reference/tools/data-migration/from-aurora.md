@@ -6,11 +6,11 @@ category: reference
 
 # Migrate from AWS Aurora MySQL to TiDB
 
-This document describes how to migrate from [AWS Aurora MySQL](https://aws.amazon.com/rds/aurora/details/) to TiDB by using TiDB Data Migration (DM).
+This document describes how to migrate from [AWS Aurora MySQL](https://aws.amazon.com/rds/aurora/details/mysql-details/?nc1=h_ls) to TiDB by using TiDB Data Migration (DM).
 
 ## Step 1: Enable binlog in the Aurora cluster
 
-Assuming that you want to migrate data from two Aurora clusters to TiDB, the information list of the Aurora clusters is listed in the following table. The Aurora-1 contains a seperate reader endpoint.
+Assuming that you want to migrate data from two Aurora clusters to TiDB, the information of the Aurora clusters is listed in the following table. The Aurora-1 cluster contains a seperate reader endpoint.
 
 | Cluster | Endpoint | Port | Role |
 |:-------- |:--- | :--- | :--- |
@@ -32,26 +32,26 @@ If you need to migrate data based on GTID (Global Transaction Identifier), enabl
 
 ### Modify binlog related parameters in the Aurora cluster 
 
-In the Aurora cluster, binlog related parameters are cluster level parameters among cluster parameter groups. For more information about binlog in the Aurora cluster, see [Enable Binary Logging on the Replication Master](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html##AuroraMySQL.Replication.MySQL.EnableBinlog). You need to set the `binlog_format` to `ROW` when you use DM for data migration. 
+In the Aurora cluster, binlog related parameters are cluster level parameters among cluster parameter groups. For more information about binlog in the Aurora cluster, see [Enable Binary Logging on the Replication Master](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html#AuroraMySQL.Replication.MySQL.EnableBinlog). You need to set the `binlog_format` to `ROW` when using DM for data migration. 
 
-If GTID is required for migration, set both `gtid-mode` and `enforce_gtid_consistency` as `ON`. See [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/zh_cn/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora) for more information about enabling GTID-based migration for Aurora cluster. 
+To migrate data based on GTID, set both `gtid-mode` and `enforce_gtid_consistency` to `ON`. See [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/zh_cn/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora) for more information about enabling GTID-based migration for Aurora cluster. 
 
 > **Note:**
 >
-> In Aurora back-end management system, `gtid_mode` means `gtid-mode`.
+> In the AWS Management Console, the `gtid_mode` parameter appears as `gtid-mode`.
 
-## Step 2: Deploy DM cluster
+## Step 2: Deploy the DM cluster
 
-Up to now we recommend using DM-Ansible to deploy DM cluster. See [Deploy Data Migration Using DM-Ansible](https://pingcap.com/docs/dev/how-to/deploy/data-migration-with-ansible/) for more information. 
+It is recommended to use DM-Ansible to deploy a DM cluster. See [Deploy Data Migration Using DM-Ansible](https://pingcap.com/docs/dev/how-to/deploy/data-migration-with-ansible/). 
 
-> **Warning**: 
+> **Note:**
 > 
-> - In all the DM config files, use encrypted password generated with dmctl. If the database password is empty, you can pass the encryption. About how to use dmctl to encrypt cleartext password, see [Encrypt the upstream MySQL user password using dmctl](https://pingcap.com/docs/dev/how-to/deploy/data-migration-with-ansible/#encrypt-the-upstream-mysql-user-password-using-dmctl) for more information. 
-> - Both the upstream and downstream users need to have the corresponded read-write access permission.
+> - Use password encrypted with dmctl in all the DM configuration files. If the database password is empty, it is unnecessary to encrypt it. For how to use dmctl to encrypt a cleartext password, see [Encrypt the upstream MySQL user password using dmctl](https://pingcap.com/docs/dev/how-to/deploy/data-migration-with-ansible/#encrypt-the-upstream-mysql-user-password-using-dmctl). 
+> - Both the upstream and downstream users must have the corresponding read and write privileges.
 
 ## Step 3: Check the cluster informtaion
 
-The config information is as follows after using DM-Ansible to deploy DM cluster. 
+After a DM cluster is deployed using DM-Ansible, the configuration information is as follows: 
 
 - DM cluster components
 
@@ -61,7 +61,7 @@ The config information is as follows after using DM-Ansible to deploy DM cluster
     | dm_worker2 | 172.16.10.73 | 8262 |
     | dm_master | 172.16.10.71 | 8261 |
 
-- Upstream and Downstream database instance
+- Upstream and downstream database instances
 
     | Database instance | Host | Port | Username | Encrypted password |
     |:-------- |:--- | :--- | :--- | :--- |
@@ -69,10 +69,10 @@ The config information is as follows after using DM-Ansible to deploy DM cluster
     | Upstream Aurora-2 | pingcap-2.h8emfqdptyc4.us-east-2.rds.amazonaws.com | 3306 | root | VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU= |
     | Downstream TiDB | 172.16.10.83 | 4000 | root | |
 
-- Configuration in dm-master process config file `{ansible deploy}/conf/dm-master.toml`
+- Configuration in the `{ansible deploy}/conf/dm-master.toml` DM-master process configuration file 
 
     ```toml
-    # Master Configuration
+    # DM-Master Configuration
 
     [[deploy]]
     source-id = "mysql-replica-01"
@@ -83,18 +83,18 @@ The config information is as follows after using DM-Ansible to deploy DM cluster
     dm-worker = "172.16.10.73:8262"
     ```
 
-## Step 4: Configurate the task
+## Step 4: Configure the task
 
-This document assumes that you need to use both incremental backup and full backup of `test_table` table in `test_db` in Aurora-1 and Aurora-2 instance, and replicate to the `test_table` table of `test_db` in downstream TiDB.
+This section assumes that you need to replicate data of the `test_table` table in the `test_db` schema of Aurora-1 and Aurora-2 instances, in both full data migration and incremental replication modes, to the `test_table` table of the `test_db` schema in one downstream TiDB instance.
 
-Copy and edit `{ansible deploy}/conf/task.yaml.example` to generate the following config file `task.yaml`: 
+Copy and edit `{ansible deploy}/conf/task.yaml.example` to generate the following `task.yaml` configuration file: 
 
 ```yaml
 # The task name. You need to use a different name for each of the multiple tasks that run simultaneously.
 name: "test"
-# The full backup plus incremental backup for data replication.
+# The full data migration plus incremental replication task mode.
 task-mode: "all"
-# The downstream TiDB config information.
+# The downstream TiDB configuration information.
 target-database:
   host: "172.16.10.83"
   port: 4000
@@ -104,9 +104,9 @@ target-database:
 # Configuration of all the upstream MySQL instances required by the current data replication task.
 mysql-instances:
 -
-  # The ID of upstream instances or the replication group. You can refer to the configuration of `source_id` in the "inventory.ini" file or in the "dm-master.toml" file.
+  # ID of the upstream instance or the replication group. Refer to the configuration of `source_id` in the `inventory.ini` file or configuration of `source-id` in the `dm-master.toml` file.
   source-id: "mysql-replica-01"
-  # The configuration item name of the black and white lists of the name of the database/table to be replicated, used to quote the global black and white lists configuration that is set in the global black-white-list below.
+  # The configuration item name of the black and white lists of the schema or table to be replicated, used to quote the global black and white lists configuration. For global configuration, see the `black-white-list` below.
   black-white-list: "global"
   # The configuration item name of mydumper, used to quote the global mydumper configuration. 
   mydumper-config-name: "global"
@@ -123,31 +123,31 @@ black-white-list:
     - db-name: "test_db"              # The database name of the table to be replicated 
       tbl-name: "test_table"          # The name of the table to be replicated 
 
-# mydumper global configuration. Each instance can quote with the configuration item name. 
+# mydumper global configuration. Each instance can quote it by the configuration item name. 
 mydumpers:
   global:
-    extra-args: "-B test_db -T test_table"  # It can only output the `test_table` of `test_db` and configure the parameter of mydumper. 
+    extra-args: "-B test_db -T test_table"  # Only outputs the `test_table` table of the `test_db` schema and can configure any parameter of mydumper. 
 ```
 
 ## Step 5: Start the task
 
-1. Go to dmctl directory `/home/tidb/dm-ansible/resources/bin/`
+1. Go to the dmctl directory: `/home/tidb/dm-ansible/resources/bin/`.
 
-2. Start dmctl using:
+2. Start dmctl using the following command:
 
     ```bash
     ./dmctl --master-addr 172.16.10.71:8261
     ```
 
-3. Start data replication task using:
+3. Start data replication task using the following command:
 
     ```bash
-    # `task.yaml` is the previous edited config file 
+    # `task.yaml` is the previously edited configuration file.
     start-task ./task.yaml
     ```
     
-    - The task has been started successfully if the returned results do not report any error. 
-    - The permission of upstream Aurora user may not be supported by TiDB if the returned results report the following errors:  
+    - If the returned results do not contain any error, it indicates the task is successfully started. 
+    - If the returned results contain the following error information, it indicates the upstream Aurora user might have privileges unsupported by TiDB:  
         
         ```json
         {
@@ -170,28 +170,32 @@ mydumpers:
         }
         ```
         
-        Using either of the following solutions, you can use `start-task` to restart the task:
-        1. Remove the unnecessary permission not supported by TiDB for Aurora user when migrating data 
-        2. If Aurora user is ensured to have the permission that DM needs, then add the following configuration item in `task.yaml` config file to skip the permission precheck when start the task. 
+        To resolve this issue, use either of the following two solutions to handle it and then use the `start-task` command to restart the task:
+        1. Remove the unnecessary privileges unsupported by TiDB for the Aurora user that is used to migrate data. 
+        2. If you can make sure that the Aurora user has the privileges required by DM, add the following configuration item to the `task.yaml` configuration file to skip the privileges precheck when starting the task.
+            
             ```yaml
             ignore-checking-items: ["dump_privilege", "replication_privilege"]
             ```
 
 ## Step 6: Query the task
 
-If you want to know whether there is a on-going data replication in DM cluster or the information about the task status, execute the following command to query:
+To view the on-going data replication task(s) in the DM cluster or the task status, run the following command in dmctl to query:
 
 ```bash
 query-status
 ```
 
-> **Warning**: 
+> **Note:** 
 >
-> If the returned results of the command report the following error, it means the lock cannot be acquired when dumping in full backup. 
+> If the following error message is in the returned results of the above query command, it indicates the corresponding lock cannot be obtained during the phase of the full data migration.
+>
 >   ```bash
 >   Couldn't acquire global lock, snapshots will not be consistent: Access denied for user 'root'@'%' (using password: YES)
 >   ```
->If the consistency between dump file and metadata is allowed not to be ensured by FTML, or the writing process in upstream can be paused, you can skip the error by adding `--no-locks` in `extra-args` under the `mydumpers`. The procedure is as follows: 
-> 1. Use `stop-task` to stop the paused task caused by irregular dumping 
-> 2. Update the `extra-args: "-B test_db -T test_table"` in task.yaml to `extra-args: "-B test_db -T test_table --no-locks"`
-> 3. Use `start-task` to restart the task
+>
+> If it is acceptable to not use FTWL to guarantee that the dump file is consistent with metadata or the upstream can pause writing data, you can skip the above error by adding the `--no-locks` argument for `extra-args` under `mydumpers`. The steps are as follows: 
+> 
+> 1. Use the `stop-task` command to stop the paused task caused by the failure of nomarl dumping.
+> 2. In the `task.yaml` file, modify `extra-args: "-B test_db -T test_table"` to `extra-args: "-B test_db -T test_table --no-locks"`.
+> 3. Use the `start-task` command to restart the task.
