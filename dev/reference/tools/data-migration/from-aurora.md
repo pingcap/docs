@@ -1,16 +1,16 @@
 ---
-title: Data Migration from AWS Aurora MySQL to TiDB
-summary: Using DM to migrate from AWS Aurora MySQL to TiDB
-category: tools
+title: Migrate from AWS Aurora MySQL to TiDB
+summary: Learn how to migrate from AWS Aurora MySQL to TiDB by using TiDB Data Migration (DM).
+category: reference
 ---
 
-# Data Migration from AWS Aurora MySQL to TiDB
+# Migrate from AWS Aurora MySQL to TiDB
 
-This document describes how to use DM to migrate from [AWS Aurora MySQL](https://aws.amazon.com/cn/rds/aurora/details/mysql-details/) to TiDB。
+This document describes how to migrate from [AWS Aurora MySQL](https://aws.amazon.com/rds/aurora/details/) to TiDB by using TiDB Data Migration (DM).
 
-## Step 1: Start binlog in Aurora cluster
+## Step 1: Enable binlog in the Aurora cluster
 
-This document assumes you'll migrate data from two Aurora clusters to  TiDB. The information list of Aurora clusters is as belowed. It indicates Aurora-1 has a single built-in reader endpoint. 
+Assuming that you want to migrate data from two Aurora clusters to TiDB, the information list of the Aurora clusters is listed in the following table. The Aurora-1 contains a seperate reader endpoint.
 
 | Cluster | Endpoint | Port | Role |
 |:-------- |:--- | :--- | :--- |
@@ -18,25 +18,25 @@ This document assumes you'll migrate data from two Aurora clusters to  TiDB. The
 | Aurora-1 | pingcap-1-us-east-2a.h8emfqdptyc4.us-east-2.rds.amazonaws.com | 3306 | Reader |
 | Aurora-2 | pingcap-2.h8emfqdptyc4.us-east-2.rds.amazonaws.com | 3306 | Writer |
 
-During the incremental backup process, you need to set the binglog format as `ROW`. Inactive binlog or incorrect binlog format will hinder data migration using DM. See [Checking items](https://www.pingcap.com/docs-cn/tools/dm/precheck/#%E6%A3%80%E6%9F%A5%E5%86%85%E5%AE%B9) for more information.
+DM relies on the `ROW` format of binlog during the incremental replication process, so you need to set the binlog format as `ROW`. If binlog is not enabled or is incorrectly configured, DM cannot replicate data normally. For more details, see [Checking items](/dev/reference/tools/data-migration/precheck.md#checking-items).
 
-> **Warning:** 
+> **Note:** 
 >
-> Aurora reader cannot start binlog, so it cannot be the upstream master server when using DM to migrate data.
+> Because binlog cannot be enabled in the Aurora reader, it cannot be taken as the upstream master server when you use DM to migrate data.
 
-If you need to use GTID for replication, enable GTID for Aurora cluster. 
+If you need to migrate data based on GTID (Global Transaction Identifier), enable GTID for the Aurora cluster. 
 
-> **Warning:**
+> **Note:**
 >
 > GTID-based data migration requires MySQL 5.7 (Aurora 2.04.1) version or later. 
 
-### Modify binlog relevent parameters in the Aurora cluster 
+### Modify binlog related parameters in the Aurora cluster 
 
-In Aurora cluster, binlog relevant parameters are in the **cluster parameter group**. See [Enable Binary Logging on the Replication Master](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html) for more information about enabling binlog. You need to set the `binlog_format` in `ROW` when using DM for migration. 
+In the Aurora cluster, binlog related parameters are cluster level parameters among cluster parameter groups. For more information about binlog in the Aurora cluster, see [Enable Binary Logging on the Replication Master](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html##AuroraMySQL.Replication.MySQL.EnableBinlog). You need to set the `binlog_format` to `ROW` when you use DM for data migration. 
 
 If GTID is required for migration, set both `gtid-mode` and `enforce_gtid_consistency` as `ON`. See [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/zh_cn/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora) for more information about enabling GTID-based migration for Aurora cluster. 
 
-> **Warning**: 
+> **Note:**
 >
 > In Aurora back-end management system, `gtid_mode` means `gtid-mode`.
 
