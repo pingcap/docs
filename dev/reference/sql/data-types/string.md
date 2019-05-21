@@ -36,7 +36,7 @@ TINYTEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `TEXT` type
 
-`TEXT` is a string of variable-length. M represents the maximum column length ranging from 0 to 65,535. The range of M is 0 to 65,535, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
+`TEXT` is a string of variable-length. M represents the maximum column length ranging from 0 to 65,535. The effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
