@@ -28,7 +28,7 @@ TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`,
 
 ### `TINYTEXT` type
 
-`TINYTEXT` is a string of variable-length. The length (M) is optional, with the maximum length being restricted to 255 characters:
+`TINYTEXT` is a string of variable-length. The length (M) is optional, with a maximum length of 255 characters:
 
 ```sql
 TINYTEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
