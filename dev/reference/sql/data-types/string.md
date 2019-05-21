@@ -6,7 +6,7 @@ category: reference
 
 # String Types
 
-TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`, `VARBINARY`, `BLOB`, `TEXT`, `ENUM`, and `SET`. For more information, [String Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/string-types.html).
+TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`, `VARBINARY`, `BLOB`, `TEXT`, `ENUM`, and `SET`. For more information, see [String Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/string-types.html).
 
 ## Supported types
 
