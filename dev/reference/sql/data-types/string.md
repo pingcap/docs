@@ -68,7 +68,7 @@ BINARY(M)
 
 ### `VARBINARY` type
 
-The `VARBINARY` type is similar to the `VARCHAR` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum length, up to 65,535 bytes:
+The `VARBINARY` type is similar to the `VARCHAR` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum length, ranging from 0 to 65,535 bytes:
 
 ```sql
 VARBINARY(M)
