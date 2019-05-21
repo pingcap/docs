@@ -12,7 +12,7 @@ TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`,
 
 ### `CHAR` type
 
-`CHAR` is a fixed length string.  Values stored as `CHAR` are right-padded with spaces to the specified length. M represents the column-length in characters (not bytes).  The range of M is 0 to 255:
+`CHAR` is a fixed length string. Values stored as `CHAR` are right-padded with spaces to the specified length. M represents the column-length in characters (not bytes).  The range of M is 0 to 255:
 
 ```sql
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
