@@ -84,7 +84,7 @@ TINYBLOB
 
 ### `BLOB` type
 
-The `BLOB` type is similar to the `TEXT` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum column length, up to 65,535 bytes. The effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
+The `BLOB` type is similar to the `TEXT` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum column length ranging from 0 to 65,535 bytes. The effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 BLOB[(M)]
