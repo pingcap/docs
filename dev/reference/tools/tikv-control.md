@@ -1,7 +1,8 @@
 ---
 title: TiKV Control User Guide
 summary: Use TiKV Control to manage a TiKV cluster.
-category: tools
+category: reference
+aliases: ['/docs/tools/tikv-control/']
 ---
 
 # TiKV Control User Guide
@@ -217,7 +218,11 @@ You can use the `modify-tikv-config` command to dynamically modify the configura
 - `-v` is used to specify the configuration value.
 
 ```bash
+# Set shared block cache size.
 $ tikv-ctl modify-tikv-config -m storage -n block_cache.capacity -v 10GB
+success!
+# Set block cache size for write CF when shared block cache is not used.
+$ tikv-ctl modify-tikv-config -m kvdb -n write.block_cache_size -v 256MB
 success!
 $ tikv-ctl modify-tikv-config -m kvdb -n max_background_jobs -v 8
 success!
