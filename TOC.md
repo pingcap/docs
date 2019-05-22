@@ -68,6 +68,7 @@
     + Migrate from MySQL
       - [Migrate the Full Data](dev/how-to/migrate/from-mysql.md)
       - [Migrate the Incremental Data](dev/how-to/migrate/incrementally-from-mysql.md)
+    - [Migrate from MariaDB Galera Cluster](dev/how-to/migrate/from-mariadb-galera-cluster.md)
     - [Migrate from CSV](tools/lightning/csv.md)
   + Maintain
     - [Backup and Restore](dev/how-to/maintain/backup-and-restore.md)
