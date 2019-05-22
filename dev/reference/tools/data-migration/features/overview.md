@@ -362,14 +362,14 @@ column-mappings:
 ​    expression: "partition id"
 ​    source-column: "id"
 ​    target-column: "id"
-​    arguments: ["1", "test_", "t_"]
+​    arguments: ["1", "test", "t", "_"]
   rule-2:
 ​    schema-pattern: "test_*"
 ​    table-pattern: "t_*"
 ​    expression: "partition id"
 ​    source-column: "id"
 ​    target-column: "id"
-​    arguments: ["2", "test_", "t_"]
+​    arguments: ["2", "test", "t", "_"]
 ```
 
 ### Parameter explanation
@@ -387,23 +387,25 @@ column-mappings:
 Note the following restrictions:
 
 - The `partition id` expression only supports the bigint type of atuo-increment primary key.
-- The schema name format must be `the schema prefix + number (the schema ID)`. For example, it supports `s_1`, but does not support `s_a`.
-- The table name format must be `the table name + number (the table ID)`.
+- The schema name format must be `the schema prefix` or `schema prefix + separator + number (the schema ID)`. For example, it supports `s` and `s_1`, but does not support `s_a`.
+- The table name format must be `the table prefix` or `table prefix + separator + number (the table ID)`.
+- If the schema/table name does not contain the `… + separator + number` part, the corresponding ID is considered as 0.
 - Restrictions on sharding size:
     - It supports 16 MySQL or MariaDB instances at most (0 <= instance ID <= 15).
     - Each instance supports 128 schemas at most (0 <= schema ID  <= 127).
     - Each schema of each instance supports 256 tables at most (0 <= table ID <= 255).
     - The ID range of the auto-increment primary key is "0 <= ID <= 17592186044415".
-    - The `{instance ID、schema ID、table ID}` group must be unique.
+    - The `{instance ID, schema ID, table ID}` group must be unique.
 - Currently, the `partition id` expression is a customized feature. If you want to modify this feature, contact the corresponding developers.
 
 **`partition id` arguments configuration**
 
-Configure the following three arguments in order:
+Configure the following 3–4 arguments in order:
 
 - `instance_id`: the ID of the upstream sharded MySQL or MariaDB instance (0 <= instance ID <= 15)
 - The schema prefix: used to parse the schema name and get the `schema ID`
 - The table prefix: used to parse the table name and get the `table ID`
+- The separator: used to separate between the prefix and the IDs, and can be omitted to use an empty string as separator
 
 **`partition id` expression rules**
 
@@ -430,14 +432,14 @@ column-mappings:
 ​    expression: "partition id"
 ​    source-column: "id"
 ​    target-column: "id"
-​    arguments: ["1", "test_", "t_"]
+​    arguments: ["1", "test", "t", "_"]
   rule-2:
 ​    schema-pattern: "test_*"
 ​    table-pattern: "t_*"
 ​    expression: "partition id"
 ​    source-column: "id"
 ​    target-column: "id"
-​    arguments: ["2", "test_", "t_"]
+​    arguments: ["2", "test", "t", "_"]
 ```
 
 - The column ID of the MySQL instance 1 table `test_1`.`t_1` is converted from `1` to `1 << (64-1-4) | 1 << (64-1-4 -7) | 1 << 44 | 1 = 580981944116838401`.

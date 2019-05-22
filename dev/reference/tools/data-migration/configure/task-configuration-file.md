@@ -99,14 +99,14 @@ column-mappings:
         expression: "partition id"
         source-column: "id"
         target-column: "id"
-        arguments: ["1", "test_", "t_"]
+        arguments: ["1", "test", "t", "_"]
     cm-rule-2:
         schema-pattern: "test_*"
         table-pattern: "t_*"
         expression: "partition id"
         source-column: "id"
         target-column: "id"
-        arguments: ["2", "test_", "t_"]
+        arguments: ["2", "test", "t", "_"]
 
 # Configuration arguments of running mydumper.
 mydumpers:
