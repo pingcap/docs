@@ -35,6 +35,7 @@
     - [Import Example Database](dev/how-to/get-started/import-example-database.md)
     - [Read Historical Data](dev/how-to/get-started/read-historical-data.md)
     - [TiDB-Binlog Tutorial](dev/how-to/get-started/tidb-binlog.md)
+    - [TiDB Data Migration Tutorial](dev/how-to/get-started/data-migration.md)
   + Deploy
     - [Hardware Recommendations](dev/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -75,7 +76,8 @@
     - [Scale a TiDB Cluster](dev/how-to/scale/horizontally.md)
     - [Scale using Ansible](dev/how-to/scale/with-ansible.md)
   + Upgrade
-    - [Upgrade from TiDB 2.1](dev/how-to/upgrade/from-previous-version.md)
+    - [Upgrade to TiDB 3.0](dev/how-to/upgrade/from-previous-version.md)
+    - [Upgrade to TiDB 2.1](dev/how-to/upgrade/to-tidb-2.1.md)
     - [Upgrade Data Migration](dev/how-to/upgrade/data-migration.md)
     - [Rolling updates with Ansible](dev/how-to/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
@@ -145,6 +147,7 @@
     + SQL Statements
       - [`ADD COLUMN`](dev/reference/sql/statements/add-column.md)
       - [`ADD INDEX`](dev/reference/sql/statements/add-index.md)
+      - [`ADMIN`](dev/reference/sql/statements/admin.md)
       - [`ALTER TABLE`](dev/reference/sql/statements/alter-table.md)
       - [`ALTER USER`](dev/reference/sql/statements/alter-user.md)
       - [`ANALYZE TABLE`](dev/reference/sql/statements/analyze-table.md)
@@ -237,7 +240,7 @@
   + System Databases
     - [`mysql`](dev/reference/system-databases/mysql.md)
     - [`information_schema`](dev/reference/system-databases/information-schema.md)
-  - [Errors Codes](sql/error.md)
+  - [Errors Codes](dev/reference/error-codes.md)
   - [Supported Client Drivers](dev/reference/supported-clients.md)
   - [Garbage Collection (GC)](dev/reference/garbage-collection.md)
   + Performance
@@ -316,6 +319,7 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.10](releases/2.1.10.md)
     - [2.1.9](releases/2.1.9.md)
     - [2.1.8](releases/2.1.8.md)
     - [2.1.7](releases/2.1.7.md)
