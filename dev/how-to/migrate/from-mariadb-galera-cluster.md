@@ -63,6 +63,10 @@ This document introduces how to migrate data from MariaDB Galera Cluster to TiDB
 
 - Configure the MariaDB yum repository.
 
+    > **Note:**
+    >
+    > Currently, Data Migration supports only MariaDB 10.1.2 and later.
+
     ```
     Create mariadb.repo.
     # vi /etc/yum.repo.d/mariadb.repo
@@ -406,6 +410,10 @@ You need to install the following on all the nodes in the database.
         ```
 
     2. Edit `inventory.ini`.
+    
+        > **Note:**
+        >
+        > Add `flavor="mariadb"` when writing `invintory.ini`, because the binlog formats between MariaDB and MySQL are different.
 
         ```
         ## DM modules
@@ -561,8 +569,3 @@ You need to install the following on all the nodes in the database.
         ```
  
 For more information about dmctl basic usage, see [Manage the Data Synchronization Task](https://pingcap.com/docs/dev/reference/tools/data-migration/manage-tasks/).
- 
-## Note
-
-- Add `flavor="mariadb"` when writing `invintory.ini`, because the binlog formats between MariaDB and MySQL are different.
-- Currently, Data Migration supports only MariaDB 10.1.2 and later.
