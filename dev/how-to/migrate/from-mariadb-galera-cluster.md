@@ -80,7 +80,7 @@ This document introduces how to migrate data from MariaDB Galera Cluster to TiDB
 
     [mariadb-maxscale]
     # To use the latest stable release of MaxScale, use "latest" as the version.
-    # To use the latest beta (or stable if no current beta) release of MaxScale, use "beta" as the version.
+    # To use the latest beta (or stable if there is no beta currently) release of MaxScale, use "beta" as the version.
     name = MariaDB MaxScale
     baseurl = https://downloads.mariadb.com/MaxScale/2.3/centos/$releasever/$basearch
     gpgkey = file:///etc/pki/rpm-gpg/MariaDB-MaxScale-GPG-KEY
