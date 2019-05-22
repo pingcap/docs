@@ -19,7 +19,7 @@ SET autocommit = {0 | 1}
 
 If you set the value of `autocommit` to 1, the status of the current Session is autocommit. If you set the value of `autocommit` to 0, the status of the current Session is non-autocommit. The value of `autocommit` is 1 by default.
 
-In the autocommit status, the updates are automatically committed to the database after you run each statement. Otherwise, the updates are only committed when you run the `COMMIT` or `BEGIN` statement. The `BEGIN` statement tries to commit the last transaction and starts a new transaction.
+When autocommit is enabled, statements are automatically committed immediately following their execution. When autocommit is disabled, statements are only committed when you execute `COMMIT` or as part of an [implicit commit](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html). For example, executing `[BEGIN|START TRANSACTION]` implicitly commits the last transaction and starts a new transaction. This behavior is required for MySQL compatibility.
 
 `autocommit` is also a System Variable. You can update the current Session or the Global value using the following variable assignment statement:
 
@@ -66,7 +66,7 @@ This statement is used to roll back the current transaction and cancels all the 
 
 TiDB supports explicit transactions (`BEGIN/COMMIT`) and implicit transactions (`SET autocommit = 1`).
 
-If you set the value of `autocommit` to 1 and start a new transaction through the `BEGIN` statement, the autocommit is disabled before `COMMIT`/`ROLLBACK` which makes the transaction becomes explicit.
+If you set the value of `autocommit` to 1 and start a new transaction through the `[BEGIN|START TRANSACTION]` statement, the autocommit is disabled before `COMMIT`/`ROLLBACK` which makes the transaction becomes explicit.
 
 For DDL statements, the transaction is committed automatically and does not support rollback. If you run the DDL statement while the current Session is in the process of a transaction, the DDL statement is executed after the current transaction is committed.
 

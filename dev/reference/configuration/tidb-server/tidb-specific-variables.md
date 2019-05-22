@@ -256,11 +256,13 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION | GLOBAL
 - Default: 1
-- This variable is used to set whether to disable automatic retry of explicit transactions. If you set this variable to 1, the transaction does not retry automatically. If there is a transactional conflict, the transaction needs to be retried at the application layer.
+- This variable is used to set whether to disable automatic retry of explicit transactions. The default value of 1 means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+
+    Setting the value to 0 means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    To decide whether you need to disable automatic retry, see [description of optimistic transactions](/dev/reference/transactions/transaction-isolation.md#description-of-optimistic-transactions).
+    To decide whether you can enable automatic retry, see [description of optimistic transactions](/dev/reference/transactions/transaction-isolation.md#description-of-optimistic-transactions).
 
 ### tidb_back_off_weight
 
