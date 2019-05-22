@@ -6,13 +6,13 @@ category: reference
 
 # String Types
 
-TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`, `VARBINARY`, `BLOB`, `TEXT`, `ENUM`, and `SET`. For more information, [String Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/string-types.html).
+TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`, `VARBINARY`, `BLOB`, `TEXT`, `ENUM`, and `SET`. For more information, see [String Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/string-types.html).
 
 ## Supported types
 
 ### `CHAR` type
 
-`CHAR` is a fixed length string.  Values stored as `CHAR` are right-padded with spaces to the specified length. M represents the column-length in characters (not bytes).  The range of M is 0 to 255:
+`CHAR` is a fixed length string. Values stored as `CHAR` are right-padded with spaces to the specified length. M represents the column-length in characters (not bytes).  The range of M is 0 to 255:
 
 ```sql
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -28,7 +28,7 @@ TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`,
 
 ### `TINYTEXT` type
 
-`TINYTEXT` is a string of variable-length. The length (M) is optional, with the maximum length being restricted to 255 characters:
+`TINYTEXT` is a string of variable-length. The length (M) is optional, with a maximum length of 255 characters:
 
 ```sql
 TINYTEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -36,7 +36,7 @@ TINYTEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `TEXT` type
 
-`TEXT` is a string of variable-length. M represents the maximum column length ranging from 0 to 65,535. The range of M is 0 to 65,535, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
+`TEXT` is a string of variable-length. M represents the maximum column length ranging from 0 to 65,535. The effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -68,7 +68,7 @@ BINARY(M)
 
 ### `VARBINARY` type
 
-The `VARBINARY` type is similar to the `VARCHAR` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum length, up to 65,535 bytes:
+The `VARBINARY` type is similar to the `VARCHAR` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum length, ranging from 0 to 65,535 bytes:
 
 ```sql
 VARBINARY(M)
@@ -84,7 +84,7 @@ TINYBLOB
 
 ### `BLOB` type
 
-The `BLOB` type is similar to the `TEXT` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum column length, up to 65,535 bytes. The effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
+The `BLOB` type is similar to the `TEXT` type, but stores binary byte strings rather than nonbinary character strings. M represents the maximum column length ranging from 0 to 65,535 bytes. The effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 BLOB[(M)]
