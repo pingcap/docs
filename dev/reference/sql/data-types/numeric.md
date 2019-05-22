@@ -22,18 +22,6 @@ The meaning of the fields:
 | UNSIGNED | UNSIGNED. If omitted, it is SIGNED. |
 | ZEROFILL | If you specify ZEROFILL for a numeric column, TiDB automatically adds the UNSIGNED attribute to the column. |
 
-#### Storage and range
-
-See the following for the requirements of the storage and minimum value/maximim value of each data type:
-
-| Type | Storage Required (bytes) | Minimum Value (Signed/Unsigned) | Maximum Value (Signed/Unsigned) |
-| ----------- |----------|-----------------------| --------------------- |
-| `TINYINT` | 1 | -128 / 0 | 127 / 255 |
-| `SMALLINT` | 2 | -32768 / 0 | 32767 / 65535 |
-| `MEDIUMINT` | 3 | -8388608 / 0 | 8388607 / 16777215 |
-| `INT` | 4 | -2147483648 / 0 | 2147483647 / 4294967295 |
-| `BIGINT` | 8 | -9223372036854775808 / 0 | 9223372036854775807 / 18446744073709551615 |
-
 ### `BIT` type
 
 The BIT data type. A type of BIT(M) enables storage of M-bit values. M can range from 1 to 64:
