@@ -391,10 +391,8 @@ Before replicating data using Syncer, check the following items:
 
     2. The binlog format must be `ROW` and the binary log must be written with `FULL` row images. Check both of these variables:
 
-        Check the binlog format using the following command:
-
         ```sql
-        > select variable_name, variable_value from information_schema.global_variables where variable_name in ('binlog_format','binlog_row_image');
+        mysql> select variable_name, variable_value from information_schema.global_variables where variable_name in ('binlog_format','binlog_row_image');
         +------------------+----------------+
         | variable_name    | variable_value |
         +------------------+----------------+
@@ -404,13 +402,11 @@ Before replicating data using Syncer, check the following items:
         2 rows in set (0.001 sec)
         ```
 
-        - It's critical to persist this configuration change to disk, so that it's reflected if the MySQL service restarts.
-        - Because existing connections will keep the old value, we recommend against using the `SET` statement to dynamically chnage these settings.
         - If one of the settings is not correct, you should change the configuration file on disk and restart the MySQL service.
+        - It's critical to persist any configuration changes to disk, so that they're reflected if the MySQL service restarts.
+        - Because existing connections will keep old values of global variables, you should *not* use the `SET` statement to dynamically chnage these settings.
 
-
-
-3. Check user privileges.
+4. Check user privileges.
 
     1. Check the user privileges required by mydumper for full data export.
 
@@ -444,7 +440,7 @@ Before replicating data using Syncer, check the following items:
         GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX  ON db.table TO 'your_user'@'your_wildcard_of_host';
         ```
 
-4. Check the SQL mode.
+5. Check the SQL mode.
 
     Make sure that the upstream SQL mode is consistent with the downstream SQL mode. Otherwise, the data replication error might occur.
 
@@ -458,7 +454,7 @@ Before replicating data using Syncer, check the following items:
     1 row in set (0.01 sec)
     ```
 
-5. Check the Character Set.
+6. Check the Character Set.
     
     TiDB differs from MySQL in [Character Set](/dev/reference/sql/character-set.md).
 
