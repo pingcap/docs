@@ -168,4 +168,4 @@ Because they are built-in, named time zones in TiDB may behave slightly differen
 
 #### Zero month and zero day
 
-TiDB does not accept that the date value of month and day is 0. This kind of date data can be normally inserted but might not be read by certain types of SQL statements. 
+It is not recommended to unset the SQL modes `NO_ZERO_DATE` or `NO_ZERO_IN_DATE`, which are enabled by default in TiDB as in MySQL. While TiDB supports operating with these modes disabled, the TiKV coprocessor does not. Executing certain statements that push down date and time processing functions to TiKV may result in a statement error.
