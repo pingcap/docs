@@ -64,10 +64,10 @@
     - [Monitor a TiDB Cluster](dev/how-to/monitor/monitor-a-cluster.md)
   + Migrate
     - [Overview](dev/how-to/migrate/overview.md)
-    + [Migrate from Aurora](dev/how-to/migrate/from-aurora.md)
     + Migrate from MySQL
       - [Migrate the Full Data](dev/how-to/migrate/from-mysql.md)
       - [Migrate the Incremental Data](dev/how-to/migrate/incrementally-from-mysql.md)
+    + [Migrate from Aurora](dev/how-to/migrate/from-aurora.md)
     - [Migrate from CSV](tools/lightning/csv.md)
   + Maintain
     - [Backup and Restore](dev/how-to/maintain/backup-and-restore.md)
