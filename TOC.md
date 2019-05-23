@@ -247,6 +247,8 @@
       - [Monitor](dev/reference/tools/data-migration/monitor.md)
       - [Manage the Task](dev/reference/tools/data-migration/manage-tasks.md)
       - [Cluster Operations](dev/reference/tools/data-migration/cluster-operations.md)
+      - Migrate from MySQL compatible database 
+        - [Migrate from Aurora](dev/how-to/migrate/from-aurora.md)
     + TiDB-Lightning
       - [Overview](dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](dev/reference/tools/tidb-lightning/deployment.md)
