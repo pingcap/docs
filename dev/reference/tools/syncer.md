@@ -404,7 +404,7 @@ Before replicating data using Syncer, check the following items:
 
         - If one of the settings is not correct, you should change the configuration file on disk and restart the MySQL service.
         - It's critical to persist any configuration changes to disk, so that they're reflected if the MySQL service restarts.
-        - Because existing connections will keep old values of global variables, you should *not* use the `SET` statement to dynamically chnage these settings.
+        - Because existing connections will keep old values of global variables, you should *not* use the `SET` statement to dynamically change these settings.
 
 4. Check user privileges.
 
