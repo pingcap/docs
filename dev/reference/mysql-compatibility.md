@@ -155,11 +155,11 @@ TiDB supports **all of the SQL modes** from MySQL 5.7 with minor exceptions:
 
 TiDB supports named timezones such as `America/Los_Angeles` without having to load the [time zone information tables](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation) as in MySQL.
 
-Because they are built-in, named time zones in TiDB may behave slightly differently to MySQL, and cannot be modified. For example, in TiDB the names are case-sensitive [#8087](https://github.com/pingcap/tidb/issues/8087).
+Because they are built-in, named time zones in TiDB might behave slightly differently to MySQL, and cannot be modified. For example, in TiDB the names are case-sensitive [#8087](https://github.com/pingcap/tidb/issues/8087).
 
 > **Note:**
 >
-> TiKV calculates the time-related expressions received with its built-in named timezone calculation rules instead of the system named timezone rules. If these two kinds of named timezone rules do not match with each other, it may occur that the inserted time data cannot be read again. For example, if you install the tzdata 2018a named timezone rules, when you set the named timezone to Asia/Shanghai or to the server's timezone which is Asia/Shanghia, TiDB 3.0 RC.1 can be inserted to `1988-04-17 02:00:00`. But this record can not be read again by certain types of SQL statements. The reason is that the time does not exist in `Asia/Shanghai` named timezone according to the tzdata 2018i rules on which the TiKV 3.0 based. That is, the time does not exist because the DST shifts time forward by an hour.
+> TiKV calculates the time-related expressions received with its built-in named timezone calculation rules instead of the system named timezone rules. If these two kinds of named timezone rules do not match with each other, it might occur that the inserted time data cannot be read again. For example, if you install the tzdata 2018a named timezone rules, when you set the named timezone to Asia/Shanghai or to the server's timezone which is Asia/Shanghai, TiDB 3.0 RC.1 can be inserted to `1988-04-17 02:00:00`. But this record can not be read again by certain types of SQL statements. The reason is that the time does not exist in `Asia/Shanghai` named timezone according to the tzdata 2018i rules on which the TiKV 3.0 based. That is, the time does not exist because the DST shifts time forward by an hour.
 > 
 > The named timezone rules in TiKV of two versions are as follows: 
 > 
@@ -168,4 +168,4 @@ Because they are built-in, named time zones in TiDB may behave slightly differen
 
 #### Zero month and zero day
 
-It is not recommended to unset the SQL modes `NO_ZERO_DATE` or `NO_ZERO_IN_DATE`, which are enabled by default in TiDB as in MySQL. While TiDB supports operating with these modes disabled, the TiKV coprocessor does not. Executing certain statements that push down date and time processing functions to TiKV may result in a statement error.
+It is not recommended to unset the SQL modes `NO_ZERO_DATE` or `NO_ZERO_IN_DATE`, which are enabled by default in TiDB as in MySQL. While TiDB supports operating with these modes disabled, the TiKV coprocessor does not. Executing certain statements that push down date and time processing functions to TiKV might result in a statement error.
