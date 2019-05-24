@@ -359,6 +359,7 @@ Before replicating data using Syncer, check the following items:
     > **Note:** 
     >
     > If there is a master-slave replication structure between the upstream MySQL/MariaDB servers, then choose the following version.
+    >
     > - 5.7.1 < MySQL version < 5.8
     > - MariaDB version >= 10.1.3
 
