@@ -403,20 +403,31 @@ Note the following restrictions:
 Configure the following 3–4 arguments in order:
 
 - `instance_id`: the ID of the upstream sharded MySQL or MariaDB instance (0 <= instance ID <= 15)
-- The schema prefix: used to parse the schema name and get the `schema ID`; can be an empty string to indicate the schema name has no pattern and the `schema ID` is always zero
-- The table prefix: used to parse the table name and get the `table ID`; can be an empty string to indicate the table name has no pattern and the `table ID` is always zero
+- `schema prefix`: used to parse the schema name and get the `schema ID`
+- `table prefix`: used to parse the table name and get the `table ID`
 - The separator: used to separate between the prefix and the IDs, and can be omitted to use an empty string as separator
+
+Any of `instance_id`, `schema prefix` and `table prefix` can be set to an empty string (`""`) to indicate the corresponding parts will not be encoded into the partition ID.
 
 **`partition id` expression rules**
 
 `partition id` fills the beginning bit of the auto-increment primary key ID with the argument number, and computes an int64 (MySQL bigint) type of value. The specific rules are as follows:
 
-- int64 bit indicates `[1:1 bit] [2:4 bits] [3：7 bits] [4:8 bits] [5: 44 bits]`.
-- `1`: the sign bit, reserved
-- `2`: the instance ID, 4 bits by default
-- `3`: the schema ID, 7 bits by default
-- `4`: the table ID, 8 bits by default
-- `5`: the auto-increment primary key ID, 44 bits by default
+| instance_id | schema prefix | table prefix | Encoding |
+|:------------|:--------------|:-------------|---------:|
+| ☑ defined   | ☑ defined     | ☑ defined    | [`S`: 1 bit] [`I`: 4 bits] [`D`: 7 bits] [`T`: 8 bits] [`P`: 44 bits] |
+| ☐ empty     | ☑ defined     | ☑ defined    | [`S`: 1 bit] [`D`: 7 bits] [`T`: 8 bits] [`P`: 48 bits] |
+| ☑ defined   | ☐ empty       | ☑ defined    | [`S`: 1 bit] [`I`: 4 bits] [`T`: 8 bits] [`P`: 51 bits] |
+| ☑ defined   | ☑ defined     | ☐ empty      | [`S`: 1 bit] [`I`: 4 bits] [`D`: 7 bits] [`P`: 52 bits] |
+| ☐ empty     | ☐ empty       | ☑ defined    | [`S`: 1 bit] [`T`: 8 bits] [`P`: 55 bits] |
+| ☐ empty     | ☑ defined     | ☐ empty      | [`S`: 1 bit] [`D`: 7 bits] [`P`: 56 bits] |
+| ☑ defined   | ☐ empty       | ☐ empty      | [`S`: 1 bit] [`I`: 4 bits] [`P`: 59 bits] |
+
+- `S`: the sign bit, reserved
+- `I`: the instance ID, 4 bits by default if set
+- `D`: the schema ID, 7 bits by default if set
+- `T`: the table ID, 8 bits by default if set
+- `P`: the auto-increment primary key ID, occupying the rest of bits (≥44 bits)
 
 ### Usage example
 
