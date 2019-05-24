@@ -386,9 +386,9 @@ column-mappings:
 
 Note the following restrictions:
 
-- The `partition id` expression only supports the bigint type of atuo-increment primary key.
-- The schema name format must be `the schema prefix` or `schema prefix + separator + number (the schema ID)`. For example, it supports `s` and `s_1`, but does not support `s_a`.
-- The table name format must be `the table prefix` or `table prefix + separator + number (the table ID)`.
+- The `partition id` expression only supports the bigint type of auto-increment primary key.
+- If the `schema prefix` is not empty, the schema name format must be `schema prefix` or `schema prefix + separator + number (the schema ID)`. For example, it supports `s` and `s_1`, but does not support `s_a`.
+- If the `table prefix` is not empty, the table name format must be `table prefix` or `table prefix + separator + number (the table ID)`.
 - If the schema/table name does not contain the `… + separator + number` part, the corresponding ID is considered as 0.
 - Restrictions on sharding size:
     - It supports 16 MySQL or MariaDB instances at most (0 <= instance ID <= 15).
@@ -403,8 +403,8 @@ Note the following restrictions:
 Configure the following 3–4 arguments in order:
 
 - `instance_id`: the ID of the upstream sharded MySQL or MariaDB instance (0 <= instance ID <= 15)
-- The schema prefix: used to parse the schema name and get the `schema ID`
-- The table prefix: used to parse the table name and get the `table ID`
+- The schema prefix: used to parse the schema name and get the `schema ID`; can be an empty string to indicate the schema name has no pattern and the `schema ID` is always zero
+- The table prefix: used to parse the table name and get the `table ID`; can be an empty string to indicate the table name has no pattern and the `table ID` is always zero
 - The separator: used to separate between the prefix and the IDs, and can be omitted to use an empty string as separator
 
 **`partition id` expression rules**
