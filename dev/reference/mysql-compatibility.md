@@ -170,4 +170,4 @@ Because they are built-in, named time zones in TiDB might behave slightly differ
 
 #### Zero month and zero day
 
-It is not recommended to unset the SQL modes `NO_ZERO_DATE` or `NO_ZERO_IN_DATE`, which are enabled by default in TiDB as in MySQL. While TiDB supports operating with these modes disabled, the TiKV coprocessor does not. Executing certain statements that push down date and time processing functions to TiKV might result in a statement error.
+It is not recommended to unset the `NO_ZERO_DATE` and `NO_ZERO_IN_DATE` SQL modes, which are enabled by default in TiDB as in MySQL. While TiDB supports operating with these modes disabled, the TiKV coprocessor does not. Executing certain statements that push down date and time processing functions to TiKV might result in a statement error.
