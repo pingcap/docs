@@ -66,8 +66,8 @@ Metrics provided by `tikv-importer` are listed under the namespace `tikv_import_
 
     Bucketed histogram for the duration of an RPC action. Labels:
 
-    - **request**: `switch_mode` / `open_engine` / `write_engine` / `close_engine` / `import_engine` / `cleanup_engine` / `compact_cluster` / `upload` / `ingest` / `compact`
-    - **result**: `ok` / `error`
+    - **request**: `switch_mode`/`open_engine`/`write_engine`/`close_engine`/`import_engine`/`cleanup_engine`/`compact_cluster`/`upload`/`ingest`/`compact`
+    - **result**: `ok`/`error`
 
 - **`tikv_import_write_chunk_bytes`** (Histogram)
 
@@ -117,7 +117,7 @@ Metrics provided by `tikv-importer` are listed under the namespace `tikv_import_
 
     Indicates the running phase. Possible values are 1, meaning running inside the phase, and 0, meaning outside the phase. Labels:
 
-    - **phase**: `prepare` / `import`
+    - **phase**: `prepare`/`import`
 
 - **`tikv_import_wait_store_available_count`** (Counter)
 
@@ -133,39 +133,39 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
 
     Counts open and closed engine files. Labels:
 
-    - **type**: `open` / `closed`
+    - **type**: `open`/`closed`
 
 - **`lightning_idle_workers`** (Gauge)
 
     Counts idle workers. Values should be less than the `*-concurrency` settings and are typically zero. Labels:
 
-    - **name**: `table` / `index` / `region` / `io` / `closed-engine`
+    - **name**: `table`/`index`/`region`/`io`/`closed-engine`
 
 - **`lightning_kv_encoder`** (Counter)
 
     Counts open and closed KV encoders. KV encoders are in-memory TiDB instances that convert SQL `INSERT` statements into KV pairs. The net values need to be bounded in a healthy situation. Labels:
 
-    - **type**: `open` / `closed`
+    - **type**: `open`/`closed`
 
 * **`lightning_tables`** (Counter)
 
     Counts number of tables processed and their status. Labels:
 
-    - **state**: `pending` / `written` / `closed` / `imported` / `altered_auto_inc` / `checksum` / `analyzed` / `completed`
-    - **result**: `success` / `failure`
+    - **state**: `pending`/`written`/`closed`/`imported`/`altered_auto_inc`/`checksum`/`analyzed`/`completed`
+    - **result**: `success`/`failure`
 
 * **`lightning_engines`** (Counter)
 
     Counts number of engine files processed and their status. Labels:
 
-    - **state**: `pending` / `written` / `closed` / `imported` / `completed`
-    - **result**: `success` / `failure`
+    - **state**: `pending`/`written`/`closed`/`imported`/`completed`
+    - **result**: `success`/`failure`
 
 - **`lightning_chunks`** (Counter)
 
     Counts number of chunks processed and their status. Labels:
 
-    - **state**: `estimated` / `pending` / `running` / `finished` / `failed`
+    - **state**: `estimated`/`pending`/`running`/`finished`/`failed`
 
 - **`lightning_import_seconds`** (Histogram)
 
@@ -203,4 +203,4 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
 
     Bucketed histogram for the time needed to acquire an idle worker. Labels:
 
-    - **name**: `table` / `index` / `region` / `io` / `closed-engine`
+    - **name**: `table`/`index`/`region`/`io`/`closed-engine`
