@@ -111,10 +111,13 @@ def replace_link_wrap(chapter, name):
                     if _rel_path == fpath:
                         frag = '#' + file_link_name[fpath]
             return '[%s](%s)' % (link_name, frag)
-        elif link.endswith('.png'):
+        elif link.endswith('.png') or link.endswith('.jpeg') or link.endswith('.svg') or link.endswith('.gif') or link.endswith('.jpg'):
             # special handing for pic
-            fname = os.path.basename(link)
-            return '[%s](./media/%s)' % (link_name, fname)
+            img_link = re.sub(r'[\.\/]*media\/', './media/', link, count=0, flags=0)
+            # print('****************', img_link)
+            # print('================', '[%s](%s)' % (link_name, img_link))
+            # return '[%s](%s/%s)' % (link_name, dirname, fname)
+            return '[%s](%s)' % (link_name, img_link)
         else:
             return full
 
@@ -151,7 +154,7 @@ for type_, level, name in followups:
             with open(name) as fp:
                 chapter = fp.read()
                 chapter = replace_link_wrap(chapter, name)
-                chapter = image_link_pattern.sub(replace_img_link, chapter)
+                # chapter = image_link_pattern.sub(replace_img_link, chapter)
 
                 # fix heading level
                 diff_level = level - heading_patthern.findall(chapter)[0].count('#')

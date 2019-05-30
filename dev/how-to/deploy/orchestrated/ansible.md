@@ -21,10 +21,10 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology a
 - Deploy the whole TiDB cluster
 - [Start the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
 - [Stop the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
-- [Modify component configuration](/op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
-- [Scale the TiDB cluster](/op-guide/ansible-deployment-scale.md)
-- [Upgrade the component version](/op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
-- [Enable the cluster binlog](/tools/tidb-binlog-cluster.md)
+- [Modify component configuration](/dev/how-to/maintain/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
+- [Scale the TiDB cluster](/dev/how-to/maintain/scale/with-ansible.md)
+- [Upgrade the component version](/dev/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
+- [Enable the cluster binlog](/dev/reference/tools/tidb-binlog/overview.md)
 - [Clean up data of the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
 - [Destroy the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
 
@@ -451,7 +451,7 @@ TiKV2-2 ansible_host=172.16.10.5 deploy_dir=/data2/deploy tikv_port=20172 labels
 TiKV3-1 ansible_host=172.16.10.6 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv3"
 TiKV3-2 ansible_host=172.16.10.6 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv3"
 
-# If you use tidb-ansible of the master branch to deploy the TiDB cluster and `tikv_metric_method` in the `group_vars/all.yml` file is set to `pull`, you must also configure the TiKV status ports in the topology of multiple TiKV instances, as shown in the following example.
+# When you deploy a TiDB cluster of the 3.0 version, you must configure the TiKV status ports in the topology of multiple TiKV instances, as shown in the following example.
 # TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv1"
 # TiKV1-2 ansible_host=172.16.10.4 deploy_dir=/data2/deploy tikv_port=20172 tikv_status_port=20182 labels="host=tikv1"
 # TiKV2-1 ansible_host=172.16.10.5 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv2"
@@ -539,7 +539,7 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | cluster_name | the name of a cluster, adjustable |
 | tidb_version | the version of TiDB, configured by default in TiDB-Ansible branches |
 | process_supervision | the supervision way of processes, systemd by default, supervise optional |
-| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/sql/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
+| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/dev/how-to/configure/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
 | enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](/dev/how-to/deploy/hardware-recommendations.md#network-requirements) to the white list |
 | enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
 | set_hostname | to edit the hostname of the managed node based on the IP, False by default |
