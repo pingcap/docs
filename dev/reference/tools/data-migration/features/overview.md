@@ -400,14 +400,14 @@ Note the following restrictions:
 
 **`partition id` arguments configuration**
 
-Configure the following 3–4 arguments in order:
+Configure the following three or four arguments in order:
 
 - `instance_id`: the ID of the upstream sharded MySQL or MariaDB instance (0 <= instance ID <= 15)
 - `schema prefix`: used to parse the schema name and get the `schema ID`
 - `table prefix`: used to parse the table name and get the `table ID`
 - The separator: used to separate between the prefix and the IDs, and can be omitted to use an empty string as separator
 
-Any of `instance_id`, `schema prefix` and `table prefix` can be set to an empty string (`""`) to indicate the corresponding parts will not be encoded into the partition ID.
+Any of `instance_id`, `schema prefix` and `table prefix` can be set to an empty string (`""`) to indicate that the corresponding parts will not be encoded into the partition ID.
 
 **`partition id` expression rules**
 
