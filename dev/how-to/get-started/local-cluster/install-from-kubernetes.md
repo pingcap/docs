@@ -2,7 +2,8 @@
 title: Deploy TiDB to Kubernetes Locally
 summary: Use TiDB Operator to quickly deploy a TiDB cluster on Kubernetes
 category: how-to
-aliases: ['/docs/op-guide/kubernetes-local/'] 
+aliases: ['/docs/op-guide/kubernetes-local/']
+exists_in_docs_cn: false
 ---
 
 # Deploy TiDB to Kubernetes Locally

@@ -3,6 +3,7 @@ title: TiDB Deployment on Kubernetes
 summary: Use TiDB Operator to quickly deploy a TiDB cluster on Kubernetes
 category: how-to
 aliases: ['/docs/op-guide/kubernetes/']
+exists_in_docs_cn: false
 ---
 
 # TiDB Deployment on Kubernetes

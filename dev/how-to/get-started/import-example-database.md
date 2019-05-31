@@ -3,6 +3,7 @@ title: Import Example Database
 summary: Install the Bikeshare example database.
 category: how-to 
 aliases: ['/docs/bikeshare-example-database/']
+exists_in_docs_cn: false
 ---
 
 # Import Example Database

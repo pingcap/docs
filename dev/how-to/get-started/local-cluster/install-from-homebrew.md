@@ -2,6 +2,7 @@
 title: Install from Homebrew 
 summary: Install TiDB using the Homebrew package manager.
 category: how-to
+exists_in_docs_cn: false
 ---
 
 # Install from Homebrew
