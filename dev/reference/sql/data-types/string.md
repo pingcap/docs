@@ -2,6 +2,7 @@
 title: String types
 summary: Learn about the string types supported in TiDB.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # String Types

@@ -2,6 +2,7 @@
 title: SHOW COLLATION | TiDB SQL Statement Reference 
 summary: An overview of the usage of SHOW COLLATION for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # SHOW COLLATION

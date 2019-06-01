@@ -2,6 +2,7 @@
 title: GRANT <privileges> | TiDB SQL Statement Reference 
 summary: An overview of the usage of GRANT <privileges> for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # GRANT <privileges>

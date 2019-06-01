@@ -2,6 +2,7 @@
 title: Numeric Types
 summary: Learn about numeric data types supported in TiDB.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # Numeric Types

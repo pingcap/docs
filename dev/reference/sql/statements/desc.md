@@ -2,6 +2,7 @@
 title: DESC | TiDB SQL Statement Reference 
 summary: An overview of the usage of DESC for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # DESC

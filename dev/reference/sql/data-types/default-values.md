@@ -2,6 +2,7 @@
 title: TiDB Data Type
 summary: Learn about default values for data types in TiDB.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # Default Values

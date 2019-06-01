@@ -2,6 +2,7 @@
 title: DROP TABLE | TiDB SQL Statement Reference 
 summary: An overview of the usage of DROP TABLE for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # DROP TABLE

@@ -2,6 +2,7 @@
 title: INSERT | TiDB SQL Statement Reference 
 summary: An overview of the usage of INSERT for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # INSERT

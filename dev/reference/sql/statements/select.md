@@ -3,6 +3,7 @@ title: SELECT | TiDB SQL Statement Reference
 summary: An overview of the usage of SELECT for the TiDB database.
 category: reference
 aliases: ['/docs/sql/dml/']
+exists_in_docs_cn: false
 ---
 
 # SELECT 

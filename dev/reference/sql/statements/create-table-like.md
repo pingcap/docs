@@ -2,6 +2,7 @@
 title: CREATE TABLE LIKE | TiDB SQL Statement Reference 
 summary: An overview of the usage of CREATE TABLE AS for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # CREATE TABLE LIKE

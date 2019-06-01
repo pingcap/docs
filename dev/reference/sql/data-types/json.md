@@ -2,6 +2,7 @@
 title: TiDB Data Type
 summary: Learn about the JSON data type in TiDB.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # JSON Type

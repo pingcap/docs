@@ -2,6 +2,7 @@
 title: SHOW TABLE STATUS | TiDB SQL Statement Reference 
 summary: An overview of the usage of SHOW TABLE STATUS for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # SHOW TABLE STATUS 

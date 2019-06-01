@@ -2,6 +2,7 @@
 title: SHOW CREATE USER | TiDB SQL Statement Reference 
 summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # SHOW CREATE USER 

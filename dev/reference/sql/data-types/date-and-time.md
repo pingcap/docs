@@ -3,6 +3,7 @@ title: Date and Time Types
 summary: Learn about the supported date and time types.
 category: reference
 aliases: ['/docs/sql/date-and-time-types/']
+exists_in_docs_cn: false
 ---
 
 # Date and Time Types

@@ -2,6 +2,7 @@
 title: SHOW [GLOBAL|SESSION] STATUS | TiDB SQL Statement Reference 
 summary: An overview of the usage of SHOW [GLOBAL|SESSION] STATUS for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # SHOW [GLOBAL|SESSION] STATUS 

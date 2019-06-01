@@ -2,6 +2,7 @@
 title: RENAME TABLE | TiDB SQL Statement Reference 
 summary: An overview of the usage of RENAME TABLE for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # RENAME TABLE

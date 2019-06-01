@@ -2,6 +2,7 @@
 title: SHOW GRANTS | TiDB SQL Statement Reference 
 summary: An overview of the usage of SHOW GRANTS for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # SHOW GRANTS
@@ -54,4 +55,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 ## See also
 
 * [SHOW CREATE USER](/dev/reference/sql/statements/show-create-user.md)
-* [GRANT](/dev/reference/sql/statements/grant.md)
+

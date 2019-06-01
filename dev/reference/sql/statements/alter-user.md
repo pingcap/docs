@@ -2,6 +2,7 @@
 title: ALTER USER | TiDB SQL Statement Reference 
 summary: An overview of the usage of ALTER USER for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # ALTER USER

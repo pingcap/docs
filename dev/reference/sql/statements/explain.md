@@ -3,6 +3,7 @@ title: EXPLAIN | TiDB SQL Statement Reference
 summary: An overview of the usage of EXPLAIN for the TiDB database.
 category: reference
 aliases: ['/docs/sql/util/']
+exists_in_docs_cn: false
 ---
 
 # EXPLAIN

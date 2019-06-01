@@ -2,6 +2,7 @@
 title: DROP INDEX | TiDB SQL Statement Reference 
 summary: An overview of the usage of DROP INDEX for the TiDB database.
 category: reference
+exists_in_docs_cn: false
 ---
 
 # DROP INDEX
