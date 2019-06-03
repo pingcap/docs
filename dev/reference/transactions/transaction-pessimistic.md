@@ -28,9 +28,9 @@ Pessimistic locking in TiDB is mostly similar with that in MySQL, only with slig
 
 - All the locks will be released when the transaction is committed or rolled back.
 
-- Deadlock occurred in the concurrent transactions will be detected by Deadlock Detector and a DEADLOCK `Error` which is the same as that in MySQL will be returned.
+- Deadlock which occurs in the concurrent transactions will be detected by Deadlock Detector and a DEADLOCK `Error` which is the same as that in MySQL will be returned.
 
-- You can choose optimistic transactional model or pessimistic transactional model in TiDB by specifying the model to execute.
+- You can choose optimistic transactional model or pessimistic transactional model in TiDB by specifying the model to adopt.
 
 ## How To Enable Pessimistic Transactional Model?
 
@@ -89,7 +89,7 @@ The related configuration file is under the `[pessimistic-txn]` file. Besides th
     max-retry-count = 256
     ```
 
-    In the pessimistic transactional model, the transaction can auto-retry a single statement. You can configure the maximum number of auto-retry to avoid the extreme case that the single statement is run endlessly. Normally you do not need to modify this configuration.
+    In the pessimistic transactional model, the transaction can automatically retry a single statement. You can configure the maximum number of automatically retry to avoid the extreme case that the single statement is run endlessly. Normally you do not need to modify this configuration.
 
 
 ## Lock Unsupported Yet
