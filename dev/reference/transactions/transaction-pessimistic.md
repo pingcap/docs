@@ -6,12 +6,12 @@ category: reference
 
 # TiDB Pessimistic Transactional Model
 
-TiDB implements optimistic transactional model by default. Problem might arise that the transaction fails to commit because of the conflict with other transaction. To solve this problem, generally you need to modify the application code and combine with automatic retry logic. But if you use pessimistic transactional model, you can avoid this potential issue  and the application can runs normally without modification and retry logic.
+TiDB implements optimistic transactional model by default. Problem might arise that the transaction fails to commit because of the conflict with other transaction. To solve this problem, generally you need to modify the application code and combine with automatic retry logic. But with pessimistic transactional model, you can avoid this potential issue and the application can run normally without being modified or added in the retry logic.
 
 
 > **Warning:**
 >
-> Up to now, TiDB pessimistic transactional model is still **in testing**. **We do not recommend you to implement it in the production environment**.
+> Up to now, TiDB's pessimistic transactional model is still **in testing**. **We do not recommend you to implement it in the production environment**.
 
 ## Pessimistic Locking in TiDB
 
@@ -30,11 +30,11 @@ Pessimistic locking in TiDB is mostly similar with that in MySQL, only with slig
 
 - Deadlock occurred in the concurrent transactions will be detected by Deadlock Detector and a DEADLOCK `Error` which is the same as that in MySQL will be returned.
 
-- You can choose the optimistic transactional model or pessimistic transactional model in TiDB by specifying the model to execute.
+- You can choose optimistic transactional model or pessimistic transactional model in TiDB by specifying the model to execute.
 
 ## How To Enable Pessimistic Transactional Model?
 
-The pessimistic transactional model is disabled by default because it is in testing now. Before enabling this model, adding the following statements in the configuration file:
+The pessimistic transactional model is disabled by default because it is in testing now. Before enabling this model, adding the following statement in the configuration file:
 
 ```
 [pessimistic-txn]
@@ -43,7 +43,7 @@ enable = true
 
 When `enable` is set to `true`, the default transaction model in TiDB is still the optimistic one. You can enable the pessimistic transaction model through the following methods:
 
-- Use `BEGIN PESSIMISTIC;` statement to start the transaction and implement the pessimistic transactional model. Add the code comment like `BEGIN /*!90000 PESSIMISTIC */;` to make the transaction compatible with MySQL syntax.
+- Use `BEGIN PESSIMISTIC;` statement to start the transaction. Add the code comment like `BEGIN /*!90000 PESSIMISTIC */;` to make the transaction compatible with MySQL syntax.
 
 - Execute `set @@tidb_txn_mode = 'pessimistic';` statement to allow the all the transactions of this session to implement the pessimistic transactional model.
 
@@ -55,9 +55,9 @@ When `enable` is set to `true`, the default transaction model in TiDB is still t
     default = true
     ```
 
-If the default locking is pessimistic, use the following methods to enter the optimistic transactional model:
+If the default locking is pessimistic, use the following methods to implement the optimistic transactional model:
 
-- Use `BEGIN OPTIMISTIC;` statement to start the transaction and implement the optimistic transactional model. You can add the code comment like `BEGIN /*!90000 OPTIMISTIC */;` to make the transaction compatible with MySQL syntax.
+- Use `BEGIN OPTIMISTIC;` statement to start the transaction. You can add the code comment like `BEGIN /*!90000 OPTIMISTIC */;` to make the transaction compatible with MySQL syntax.
 
 - Execute `set @@tidb_txn_mode = 'optimistic';` statement to allow the transaction of the current session to use the optimistic transactional model.
 
@@ -79,9 +79,9 @@ The related configuration file is under the `[pessimistic-txn]` file. Besides th
     ttl = "30s"
     ```
 
-The default value of the pessimistic locking timeout `ttl` is 30s. The value configured must be between "15s" and "60s". Otherwise, the error will be reported.
+    The default value of the pessimistic locking timeout `ttl` is 30s. The value configured must be between "15s" and "60s". Otherwise, the error will be reported.
 
-The transaction will fail if its execution time exceeds the value of `ttl`. If the timeout value is set too high, it might cause long waiting time of write transaction when `tidb-server` fails. If too low, a transaction might be rolled back due to the conflict with other transaction.
+    The transaction will fail if its execution time exceeds the value of `ttl`. If the timeout value is set too high, it might cause long waiting time of write transaction when `tidb-server` fails. If too low, the transaction might be rolled back due to the conflict with other transaction.
 
 - `max-retry-count`
 
@@ -89,7 +89,7 @@ The transaction will fail if its execution time exceeds the value of `ttl`. If t
     max-retry-count = 256
     ```
 
-In the pessimistic transactional model, the transaction can auto-retry a single statement. You can configure the maximum number of auto-retry to avoid the extreme case that the single statement is run endlessly. Normally you do not need to modify this configuration.
+    In the pessimistic transactional model, the transaction can auto-retry a single statement. You can configure the maximum number of auto-retry to avoid the extreme case that the single statement is run endlessly. Normally you do not need to modify this configuration.
 
 
 ## Lock Unsupported Yet
