@@ -13,7 +13,7 @@ The slow log format is updated in TiDB v2.1.8 and later. For the slow query log 
 
 > **Note:**
 >
-> The field information in slow query log is very few in TiDB 2.1.8 version. The field mentioned in the following part is added later in TiDB 3.0.0 version.
+> There are very few field information of slow query log in TiDB 2.1.8 version. The field information mentioned in the following part is added later in TiDB 3.0.0 version.
 
 A problematic SQL statement can increase the pressure on the entire cluster, resulting in a longer response time. To solve this problem, you can use the slow query log to identify the problematic statements and thus improve the performance.
 
@@ -48,9 +48,10 @@ select count(1) from t_slim, t_wide where t_slim.c0>t_wide.c0 and t_slim.c1>t_wi
 * `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to `grep` the log whose session ID is 3.
 * `DB`: The current database.
 * `Index_ids`: The IDs of the indexes involved in the statement.
-* `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB, such as Analyze, load variables, etc.; `false` indicates the SQL statement is executed by the user.
+* `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB, such as `analyze`, `load variables`, etc. `false` indicates the SQL statement is executed by the user.
 * `Digest`: The fingerprint of the SQL statement.
 * `Memory_max`: Indicates the maximum memory space used during the execution period of this SQL statement (the unit is byte).
+* `Query_time`: 16.479155653
 * `Process_time`: The total processing time of this SQL statement in TiKV. Because the data is sent to TiKV concurrently, this value may exceed `Query_time`.
 * `Wait_time`: The total waiting time of this statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests will increase.
 * `Backoff_time`: The waiting time before retry when this statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
