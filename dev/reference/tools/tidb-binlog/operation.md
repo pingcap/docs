@@ -170,7 +170,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
     +----------|----------------|--------|--------------------|---------------------|
     ```
 
-- Modify the state of the Pump/Drainer node:
+- Modify the state of a Pump or Drainer node:
 
     ```bach
     mysql> change pump to node_state ='paused' for node_id 'pump1'";
