@@ -48,10 +48,11 @@ For how to pause, close, check, and modify the state of Drainer, see the [binlog
 Your distribution of TiDB or TiDB-Binlog may already include binlogctl. If not, download `binlogctl`:
 
 ```bash
-wget https://download.pingcap.org/binlogctl-new-linux-amd64.{tar.gz,sha256}
+wget https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-{version}-linux-amd64.sha256
 
 # Check the file integrity. It should return OK.
-sha256sum -c tidb-binlog-new-linux-amd64.sha256
+sha256sum -c tidb-{version}-linux-amd64.sha256
 ```
 
 ### `binlogctl` usage description
@@ -93,7 +94,7 @@ Command example:
 
 - Modify the Pump/Drainer state:
 
-    Set `cmd` as `update-pump` or `update-drainer` to modify the state of Pump or Drainer, which can be `online`, `pausing`, `paused`, `closing` or `offline`. 
+    Set `cmd` as `update-pump` or `update-drainer` to modify the state of Pump or Drainer, which can be `online`, `pausing`, `paused`, `closing` or `offline`.
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd update-pump -node-id ip-127-0-0-1:8250 -state paused
@@ -103,11 +104,11 @@ Command example:
 
 - Pause or close Pump/Drainer:
 
-    - Set `cmd` as `pause-pump` or `pause-drainer` to pause Pump or Drainer. 
+    - Set `cmd` as `pause-pump` or `pause-drainer` to pause Pump or Drainer.
 
-    - Set `cmd` as `offline-pump` or `offline-drainer` to close Pump or Drainer. 
-    
-    For example, 
+    - Set `cmd` as `offline-pump` or `offline-drainer` to close Pump or Drainer.
+
+    For example,
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-pump -node-id ip-127-0-0-1:8250
@@ -127,3 +128,62 @@ Command example:
     ```
 
     This command generates a `{data-dir}/savepoint` file. This file stores the `tso` information which is needed for the initial start of Drainer.
+
+## Use SQL statements to control Pump/Drainer
+
+Execute the corresponded SQL statements in the TiDB server to check or modify the state of binlog.
+
+- Check whether the binlog is enabled:
+
+    ```bash
+    mysql> show variables like "log_bin";
+    +---------------+-------+
+    | Variable_name | Value |
+    +---------------+-------+
+    | log_bin       |  ON   |
+    +---------------+-------+
+    ```
+
+    When the Value is `ON`, it means that the binlog is enabled.
+
+- Check the status of all the Pumps and Drainers:
+
+    ```bash
+    mysql> show pump status;
+    +--------|----------------|--------|--------------------|---------------------|
+    | NodeID |     Address    | State  |   Max_Commit_Ts    |    Update_Time      |
+    +--------|----------------|--------|--------------------|---------------------|
+    | pump1  | 127.0.0.1:8250 | Online | 408553768673342237 | 2019-05-01 00:00:01 |
+    +--------|----------------|--------|--------------------|---------------------|
+    | pump2  | 127.0.0.2:8250 | Online | 408553768673342335 | 2019-05-01 00:00:02 |
+    +--------|----------------|--------|--------------------|---------------------|
+    ```
+
+    ```bash
+    mysql> show drainer status;
+    +----------|----------------|--------|--------------------|---------------------|
+    |  NodeID  |     Address    | State  |   Max_Commit_Ts    |    Update_Time      |
+    +----------|----------------|--------|--------------------|---------------------|
+    | drainer1 | 127.0.0.3:8249 | Online | 408553768673342532 | 2019-05-01 00:00:03 |
+    +----------|----------------|--------|--------------------|---------------------|
+    | drainer2 | 127.0.0.4:8249 | Online | 408553768673345531 | 2019-05-01 00:00:04 |
+    +----------|----------------|--------|--------------------|---------------------|
+    ```
+
+- Modify the state of the Pump/Drainer node:
+
+    ```bach
+    mysql> change pump to node_state ='paused' for node_id 'pump1'";
+    Query OK, 0 rows affected (0.01 sec)
+    ```
+
+    ```bach
+    mysql> change drainer to node_state ='paused' for node_id 'drainer1'";
+    Query OK, 0 rows affected (0.01 sec)
+    ```
+
+> **Note:**
+>
+> - TiDB v2.1.7 or higher supports checking whether the binlog is enabled and the running status of Pump/Drainer.
+>
+> - TiDB v3.0.0-rc.1 or higher supports modifying the state of Pump/Drainer. Only the state of Pump/Drainer which is stored in Placement Driver (PD) can be changed. If you want to pause or close the node, the `binlogctl` is still required to use.
