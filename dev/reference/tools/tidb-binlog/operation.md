@@ -51,7 +51,7 @@ Your distribution of TiDB or TiDB-Binlog may already include binlogctl. If not, 
 wget https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz
 wget https://download.pingcap.org/tidb-{version}-linux-amd64.sha256
 
-# Check the file integrity. It should return OK.
+# Check the file integrity. If the result is OK, the file is correct.
 sha256sum -c tidb-{version}-linux-amd64.sha256
 ```
 
