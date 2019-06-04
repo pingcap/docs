@@ -133,7 +133,7 @@ Command example:
 
 To view or modify binlog related states, execute corresponding SQL statements in TiDB.
 
-- Check whether the binlog is enabled:
+- Check whether binlog is enabled:
 
     ```bash
     mysql> show variables like "log_bin";
