@@ -131,7 +131,7 @@ Command example:
 
 ## Use SQL statements to control Pump/Drainer
 
-Execute the corresponded SQL statements in the TiDB server to check or modify the state of binlog.
+To view or modify binlog related states, execute corresponding SQL statements in TiDB.
 
 - Check whether the binlog is enabled:
 
