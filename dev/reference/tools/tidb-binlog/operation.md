@@ -146,7 +146,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
 
     When the Value is `ON`, it means that the binlog is enabled.
 
-- Check the status of all the Pumps and Drainers:
+- Check the status of all the Pump or Drainer nodes:
 
     ```bash
     mysql> show pump status;
