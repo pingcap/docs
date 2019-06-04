@@ -184,5 +184,5 @@ To view or modify binlog related states, execute corresponding SQL statements in
 
 > **Note:**
 >
-> - TiDB v2.1.7 or higher supports checking whether the binlog is enabled and the running status of Pump/Drainer.
+> - Checking whether binlog is enabled and the running status of Pump or Drainer is supported in TiDB v2.1.7 and later versions.
 > - TiDB v3.0.0-rc.1 or higher supports modifying the state of Pump/Drainer. Only the state of the Pump/Drainer which is stored in Placement Driver (PD) can be changed. If you want to pause or close the node, the `binlogctl` is still required to use.
