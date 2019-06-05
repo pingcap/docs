@@ -3,7 +3,6 @@ title: Connectors and APIs
 summary: Learn about the connectors and APIs.
 category: reference
 aliases: ['/docs/sql/connection-and-APIs/']
-exists_in_docs_cn: false
 ---
 
 # Connectors and APIs
