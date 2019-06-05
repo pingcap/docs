@@ -3,7 +3,6 @@ title: TiDB Garbage Collection (GC)
 summary: Use Garbage Collection (GC) to clear the obsolete data of TiDB.
 category: reference
 aliases: ['/docs/op-guide/gc/']
-exists_in_docs_cn: false
 ---
 
 # TiDB Garbage Collection (GC)
