@@ -34,7 +34,7 @@
     - [Explore SQL with TiDB](dev/how-to/get-started/explore-sql.md)
     - [Import Example Database](dev/how-to/get-started/import-example-database.md)
     - [Read Historical Data](dev/how-to/get-started/read-historical-data.md)
-    - [TiDB-Binlog Tutorial](dev/how-to/get-started/tidb-binlog.md)
+    - [TiDB Binlog Tutorial](dev/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](dev/how-to/get-started/data-migration.md)
     - [TiSpark Quick Start Guide](dev/how-to/deploy/tispark.md)
   + Deploy
@@ -256,7 +256,7 @@
     - [Mydumper](dev/reference/tools/mydumper.md)
     - [Syncer](dev/reference/tools/syncer.md)
     - [Loader](dev/reference/tools/loader.md)
-    + Data Migration
+    + TiDB Data Migration
       - [Overview](dev/reference/tools/data-migration/overview.md)
       - [Restrictions](dev/reference/tools/data-migration/overview.md#usage-restrictions)
       + Features
@@ -282,7 +282,7 @@
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](dev/how-to/migrate/from-aurora.md)
       - [Troubleshoot](dev/how-to/troubleshoot/data-migration.md)
-    + TiDB-Lightning
+    + TiDB Lightning
       - [Overview](dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](dev/reference/tools/tidb-lightning/deployment.md)
       - [Checkpoints](dev/reference/tools/tidb-lightning/checkpoints.md)
@@ -291,7 +291,7 @@
       - [Monitor](dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](dev/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](faq/tidb-lightning.md)
-    + TiDB-Binlog
+    + TiDB Binlog
       - [Overview](dev/reference/tools/tidb-binlog/overview.md)
       - [Deploy](dev/reference/tools/tidb-binlog/deploy.md)
       - [Monitor](dev/reference/tools/tidb-binlog/monitor.md)
@@ -310,7 +310,7 @@
   - [Adopters](adopters.md)
 + FAQs
   - [TiDB FAQs](faq/tidb.md)
-  - [TiDB-Lightning FAQs](faq/tidb-lightning.md)
+  - [TiDB Lightning FAQs](faq/tidb-lightning.md)
   - [Upgrade FAQs](faq/upgrades.md)
 + Support  
   - [Support Resources](support-resources.md)
