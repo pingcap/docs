@@ -15,7 +15,7 @@ Pump or Drainer state description:
 * `pausing`: in the pausing process. It turns into this state after you use `kill` or press Ctrl + C to exit from the process. When Pump or Drainer exits all internal threads in safe, it becomes `paused`.
 * `paused`: has been stopped. While Pump is in this state, it rejects the request of writing binlog into it and does not provide the binlog for Drainer any more. When Drainer is in this state, it does not replicate data to the downstream. After Pump and Drainer exit normally from all the threads, they switch the state to `paused` and then exits from the process.
 * `closing`: in the offline process. The `binlogctl` is used to get Pump or Drainer offline and Pump or Drainer is in this state before the process exits. In this state, Pump does not accept new requests of writing binlog into it and waits for all the binlog data to be used up by Drainer.
-* `offline`: becomes offline. After Pump sent all the binlog data that it saves to Drainer, its state is switched to `offline`.
+* `offline`: becomes offline. After Pump sends all the binlog data that it saves to Drainer, its state is switched to `offline`.
 
 > **Note:**
 >
@@ -25,22 +25,22 @@ Pump or Drainer state description:
 > * The binlog data that Pump saves is processed by GC only when it has been consumed by all the Drainers that are not `offline`.
 > * Close Drainer only when it will not be used any more.
 
-For how to pause, close, check, and modify the states of Drainer, see the [binlogctl guide](#binlogctl-guide) as follows.
+For how to pause, close, check, and modify the state of Drainer, see the [binlogctl guide](#binlogctl-guide) as follows.
 
 ## `binlogctl` guide
 
 [`binlogctl`](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/binlogctl) is an operations tool for TiDB-Binlog with the following features:
 
 * Obtaining the current `tso` of TiDB cluster
-* Checking the states of Pump or Drainer
-* Modifying the states of Pump or Drainer
+* Checking the state of Pump or Drainer
+* Modifying the state of Pump or Drainer
 * Pausing or closing Pump or Drainer
 
 ### Usage scenarios of `binlogctl`
 
 * It is the first time you run Drainer and you need to obtain the current `tso` of TiDB cluster.
 * When Pump or Drainer exits abnormally, its state is not updated and the service is affected. You can use this tool to modify the state.
-* An error occurs during data replication and you need to check the running status and states of Pump or Drainer.
+* An error occurs during data replication and you need to check the running status and state of Pump or Drainer.
 * While maintaining the cluster, you need to pause or close Pump or Drainer.
 
 ### Download `binlogctl`
@@ -92,7 +92,7 @@ Command example:
     INFO[0000] pump: {NodeID: ip-172-16-30-67:8250, Addr: 172.16.30.192:8250, State: online, MaxCommitTS: 405197570529820673, UpdateTime: 2018-12-25 14:23:37 +0800 CST}
     ```
 
-- Modify the states of Pump or Drainer:
+- Modify the state of Pump or Drainer:
 
     Set `cmd` as `update-pump` or `update-drainer` to modify the states of Pump or Drainer, which can be `online`, `pausing`, `paused`, `closing` or `offline`.
 
@@ -100,7 +100,7 @@ Command example:
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd update-pump -node-id ip-127-0-0-1:8250 -state paused
     ```
 
-    This command modifies the states of Pump or Drainer saved in the Placement Driver (PD).
+    This command modifies the state of Pump or Drainer saved in the Placement Driver (PD).
 
 - Pause or close Pump or Drainer:
 
@@ -129,7 +129,7 @@ Command example:
 
     This command generates a `{data-dir}/savepoint` file. This file stores the `tso` information which is needed for the initial start of Drainer.
 
-## Use SQL statements to control Pump or Drainer
+## Use SQL statements to manage Pump or Drainer
 
 To view or modify binlog related states, execute corresponding SQL statements in TiDB.
 
