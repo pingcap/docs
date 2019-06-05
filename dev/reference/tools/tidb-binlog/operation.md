@@ -131,11 +131,7 @@ Command example:
 
 ## Use SQL statements to control Pump or Drainer
 
-<<<<<<< HEAD
-Execute the corresponded SQL statements in the TiDB server to check or modify the states of binlog.
-=======
 To view or modify binlog related states, execute corresponding SQL statements in TiDB.
->>>>>>> 36c13cff2696e78ee84f08e0b4c286859d5405fd
 
 - Check whether binlog is enabled:
 
@@ -174,11 +170,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
     +----------|----------------|--------|--------------------|---------------------|
     ```
 
-<<<<<<< HEAD
-- Modify the states of the Pump or Drainer node:
-=======
-- Modify the state of a Pump or Drainer node:
->>>>>>> 36c13cff2696e78ee84f08e0b4c286859d5405fd
+- Modify the states of a Pump or Drainer node:
 
     ```bach
     mysql> change pump to node_state ='paused' for node_id 'pump1'";
@@ -192,10 +184,5 @@ To view or modify binlog related states, execute corresponding SQL statements in
 
 > **Note:**
 >
-<<<<<<< HEAD
-> - TiDB v2.1.7 or higher supports checking whether the binlog is enabled and the running status of Pump or Drainer.
-> - TiDB v3.0.0-rc.1 or higher supports modifying the states of Pump or Drainer. Only the states of the Pump or Drainer which is saved in Placement Driver (PD) can be changed. If you want to pause or close the node, the `binlogctl` is still required to use.
-=======
 > - Checking whether binlog is enabled and the running status of Pump or Drainer is supported in TiDB v2.1.7 and later versions.
 > - Modifying the status of Pump or Drainer is supported in TiDB v3.0.0-rc.1 and later versions. This feature only supports modifying the status of Pump or Drainer nodes stored in the Placement Driver (PD). To pause or close the node, use the `binlogctl` tool.
->>>>>>> 36c13cff2696e78ee84f08e0b4c286859d5405fd
