@@ -123,4 +123,4 @@ With the default settings of 3 replicas, the space requirement of the target TiK
 
 ## Can TiKV-Importer be restarted while TiDB-Lightning is running?
 
-No, Importer stores data of engines in memory. Lightning must be restarted once Importer is restarted.
+No. Importer stores some information of engines in memory. If Importer is restarted, Lightning must be restarted.
