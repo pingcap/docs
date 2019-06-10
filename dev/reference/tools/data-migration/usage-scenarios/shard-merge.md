@@ -37,7 +37,7 @@ Assume that the upstream schemas are as follows:
     | store_01 | sale_01, sale_02 |
     | store_02 | sale_01, sale_02 |
 
-## replication requirements
+## Replication requirements
 
 1. Merge the `user`.`information` table of three upstream instances to the downstream `user`.`information` table in TiDB.
 2. Merge the `user`.`log_{north|south|east}` table of three upstream instances to the downstream `user`.`log_{north|south|east}` table in TiDB.
@@ -57,7 +57,7 @@ Assume that the downstream schema after replication is as follows:
 | user | information, log_north, log_east, log_south|
 | store | sale |
 
-## replication solution
+## Replication solution
 
 - To satisfy the replication Requirements #1 and #2, configure the [table routing rule](/dev/reference/tools/data-migration/features/overview.md#table-routing) as follows:
 
