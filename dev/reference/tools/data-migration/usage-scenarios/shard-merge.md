@@ -152,7 +152,7 @@ Assume that the downstream schema after replication is as follows:
         arguments: ["3", "store", "sale", "_"]
     ```
 
-## replication task configuration
+## Replication task configuration
 
 The complete configuration of the replication task is shown as below. For more details, see [Data Migration Task Configuration File](/dev/reference/tools/data-migration/configure/task-configuration-file.md).
 
