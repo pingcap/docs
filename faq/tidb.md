@@ -457,9 +457,9 @@ Most of the APIs of PD are available only when the TiKV cluster is initialized. 
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
 
-#### What's the maximum tolerance for time replication error of PD?
+#### What's the maximum tolerance for time synchronization error of PD?
 
-PD can tolerate any replication error, but a larger error value means a larger gap between the timestamp allocated by the PD and the physical time, which will affect functions such as read of historical versions.
+PD can tolerate any synchronization error, but a larger error value means a larger gap between the timestamp allocated by the PD and the physical time, which will affect functions such as read of historical versions.
 
 #### How does the client connection find PD?
 
