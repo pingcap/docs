@@ -1,11 +1,11 @@
 ---
-title: Data replication Features
+title: Data Replication Features
 summary: Learn about the data replication features provided by the Data Migration tool.
 category: reference
 aliases: ['/docs/tools/dm/data-replication-features/']
 ---
 
-# Data replication Features
+# Data Replication Features
 
 This document describes the data replication features provided by the Data Migration tool and explains the configuration of corresponding parameters.
 
@@ -456,7 +456,7 @@ column-mappings:
 - The column ID of the MySQL instance 1 table `test_1`.`t_1` is converted from `1` to `1 << (64-1-4) | 1 << (64-1-4 -7) | 1 << 44 | 1 = 580981944116838401`.
 - The row ID of the MySQL instance 2 table `test_1`.`t_2` is converted from `2` to `2 << (64-1-4) | 1 << (64-1-4 -7) | 2 << 44 | 2 = 1157460288606306306`.
 
-## replication delay monitoring
+## Replication delay monitoring
 
 The heartbeat feature supports calculating the real-time replication delay between each replication task and MySQL or MariaDB based on real replication data.
 
