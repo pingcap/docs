@@ -443,9 +443,9 @@ Most of the APIs of PD are available only when the TiKV cluster is initialized. 
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
 
-#### What's the maximum tolerance for time replication error of PD?
+#### What's the maximum tolerance for time synchronization error of PD?
 
-Theoretically, the smaller of the tolerance, the better. During leader changes, if the clock goes back, the process won't proceed until it catches up with the previous leader. PD can tolerate any replication error, but a larger error value means a longer period of service stop during the leader change.
+Theoretically, the smaller of the tolerance, the better. During leader changes, if the clock goes back, the process won't proceed until it catches up with the previous leader. PD can tolerate any synchronization error, but a larger error value means a longer period of service stop during the leader change.
 
 #### How does the client connection find PD?
 
