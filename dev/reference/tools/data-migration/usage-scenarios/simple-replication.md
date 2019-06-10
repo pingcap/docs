@@ -2,7 +2,7 @@
 title: Data Migration Simple Usage Scenario
 summary: Learn how to use Data Migration to replicate data in a simple scenario.
 category: reference
-aliases: ['/docs/tools/dm/simple-replication-scenario/'],['/docs/dev/reference/tools/data-migration/simple-synchronization/']
+aliases: ['/docs/tools/dm/simple-synchronization-scenario/'],['/docs/dev/reference/tools/data-migration/usage-scenarios/simple-synchronization/']
 ---
 
 # Data Migration Simple Usage Scenario
@@ -37,14 +37,14 @@ Assume that the upstream schemas are as follows:
     | store | store_gz, store_sz |
     | log   | messages |
 
-## replication requirements
+## Replication requirements
 
 1. Do not merge the `user` schema.
-    1. replicate the `user` schema of instance 1 to the `user_north` of TiDB.
-    2. replicate the `user` schema of instance 2 to the `user_east` of TiDB.
-    3. replicate the `user` schema of instance 3 to the `user_south` of TiDB.
+    1. Replicate the `user` schema of instance 1 to the `user_north` of TiDB.
+    2. Replicate the `user` schema of instance 2 to the `user_east` of TiDB.
+    3. Replicate the `user` schema of instance 3 to the `user_south` of TiDB.
     4. Never delete the table `log`.
-2. replicate the upstream `store` schema to the downstream `store` schema without merging tables.
+2. Replicate the upstream `store` schema to the downstream `store` schema without merging tables.
     1. `store_sz` exists in both instances 2 and 3, which is replicated to `store_suzhou` and `store_shenzhen` respectively.
     2. Never delete `store`.
 3. The `log` schema needs to be filtered out.
@@ -60,7 +60,7 @@ Assume that the schemas replicated to the downstream are as follows:
 | user_south | information, log|
 | store | store_bj, store_tj, store_sh, store_suzhou, store_gz, store_shenzhen |
 
-## replication solution
+## Replication solution
 
 - To satisfy replication Requirements #1-i, #1-ii and #1-iii, configure the [table routing rules](/dev/reference/tools/data-migration/features/overview.md#table-routing) as follows:
 
@@ -134,7 +134,7 @@ Assume that the schemas replicated to the downstream are as follows:
         ignore-dbs: ["log"]
     ```
 
-## replication task configuration
+## Replication task configuration
 
 The complete replication task configuration is shown below. For more details, see [configuration explanations](/dev/reference/tools/data-migration/configure/task-configuration-file.md).
 
