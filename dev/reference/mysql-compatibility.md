@@ -50,7 +50,7 @@ In TiDB, auto-increment columns are only guaranteed to be incremental and unique
 
 > **Note:**
 >
-> If you use auto-increment IDs in a cluster with multiple tidb-server instances, do not mix default values and custom values, otherwise an error will occur in the following situation.
+> If you use auto-increment IDs in a cluster with multiple tidb-server instances, do not mix default values and custom values. Otherwise, an error might occur in the following situation.
 
 Assume that you have a table with the auto-increment ID:
 
