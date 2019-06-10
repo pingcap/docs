@@ -47,11 +47,11 @@ Compared with the 3-DC deployment, the 3-DC in 2 cities deployment has the follo
 
 However, the disadvantage is that if the 2 DCs within the same city goes down, whose probability is higher than that of the outage of 2 DCs in 2 cities, the TiDB cluster will not be available and some of the data will be lost. 
 
-## 2-DC + Binlog replication Deployment Solution
+## 2-DC + Binlog Replication Deployment Solution
 
 The 2-DC + Binlog replication is similar to the MySQL Master-Slave solution. 2 complete sets of TiDB clusters (each complete set of the TiDB cluster includes TiDB, PD and TiKV) are deployed in 2 DCs, one acts as the Master and one as the Slave. Under normal circumstances, the Master DC handle all the requests and the data written to the Master DC is asynchronously written to the Slave DC via Binlog.
 
-![Data replication in 2-DC in 2 Cities Deployment](../media/deploy-binlog.png)
+![Data Replication in 2-DC in 2 Cities Deployment](../media/deploy-binlog.png)
 
 If the Master DC goes down, the requests can be switched to the slave cluster. Similar to MySQL, some data might be lost. But different from MySQL, this solution can ensure the high availability within the same DC: if some nodes within the DC are down, the online business won’t be impacted and no manual efforts are needed because the cluster will automatically re-elect leaders to provide services.
 
