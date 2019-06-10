@@ -2,7 +2,7 @@
 title: Performance test result for TiDB using Sysbench
 category: benchmark
 draft: true
-aliases: ['']
+aliases: ['/docs/benchmark/sysbench/']
 ---
 
 # Performance test result for TiDB using Sysbench

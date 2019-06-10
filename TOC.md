@@ -290,7 +290,7 @@
       - [CSV Support](/dev/reference/tools/tidb-lightning/csv.md)
       - [Monitor](/dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/tidb-lightning.md)
-      - [FAQ](faq/tidb-lightning.md)
+      - [FAQ](/dev/faq/tidb-lightning.md)
     + TiDB Binlog
       - [Overview](/dev/reference/tools/tidb-binlog/overview.md)
       - [Deploy](/dev/reference/tools/tidb-binlog/deploy.md)

@@ -2,6 +2,7 @@
 title: DM Benchmark Report
 summary: Learn about the DM benchmark report.
 category: benchmark
+aliases: ['/docs/benchmark/dm-v1-alpha/']
 ---
 
 # DM Benchmark Report

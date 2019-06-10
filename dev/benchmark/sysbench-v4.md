@@ -1,7 +1,7 @@
 ---
 title: Sysbench Test Result of TiDB 3.0 Beta on NVMe SSD
 category: benchmark
-aliases: ['']
+aliases: ['/docs/benchmark/sysbench-v4/']
 ---
 
 #  Sysbench Test Result of TiDB 3.0 Beta on NVMe SSD
