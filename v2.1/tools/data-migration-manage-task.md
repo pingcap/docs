@@ -1,5 +1,5 @@
 ---
-title: Manage the Data replication Task
+title: Manage the Data Replication Task
 summary: Use dmctl to manage the data replication task.
 category: tools
 ---

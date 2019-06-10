@@ -1,6 +1,6 @@
 ---
 title: Replicate Data Using Data Migration
-summary: Use the Data Migration tool to Replicate the full data and the incremental data.
+summary: Use the Data Migration tool to replicate the full data and the incremental data.
 category: tools
 ---
 
