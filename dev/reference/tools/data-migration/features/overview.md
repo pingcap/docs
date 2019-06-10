@@ -2,7 +2,7 @@
 title: Data Replication Features
 summary: Learn about the data replication features provided by the Data Migration tool.
 category: reference
-aliases: ['/docs/tools/dm/data-replication-features/']
+aliases: ['/docs/tools/dm/data-synchronization-features/']
 ---
 
 # Data Replication Features
