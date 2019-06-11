@@ -1,6 +1,6 @@
 ---
 title: TiDB Pessimistic Transaction Mode
-summary: Learn about TiDB pessimistic transaction mode.
+summary: Learn about the pessimistic transaction mode of TiDB.
 category: reference
 ---
 
@@ -14,7 +14,7 @@ By default, TiDB implements an optimistic transaction mode, where the commit mig
 
 ## Behaviors of the pessimistic transaction mode
 
-Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Known Restrictions](#known-restrictions).
+Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Known restrictions](#known-restrictions).
 
 - When you perform `SELECT FOR UPDATE` statements, transactions read the last committed data and apply a pessimistic lock on the modified data.
 
@@ -30,7 +30,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 - TiDB supports both the optimistic transaction mode and pessimistic transaction mode in the same cluster. You can specify either mode for transaction execution.
 
-## Methods to enable pessimistic transaction mode
+## Methods to enable the pessimistic transaction mode
 
 The pessimistic transaction mode is disabled by default because it is currently an experimental feature. Before enabling it, you need to add the following setting in the configuration file:
 
@@ -91,7 +91,7 @@ The related configuration parameters are under the `[pessimistic-txn]` category.
 
     A pessimistic transaction can automatically retry a single statement. You can specify the maximum retrying times by setting the parameter `max-retry-count` to avoid retrying a statement endlessly in some extreme cases. Normally, you do not need to modify this configuration.
 
-## Known Restrictions
+## Known restrictions
 
 - TiDB does not support GAP Lock or Next Key Lock. When multiple rows of data are updated through range conditions in a pessimistic transaction, other transactions can insert data without being blocked in this range.
 
