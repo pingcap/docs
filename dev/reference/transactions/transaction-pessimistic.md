@@ -60,17 +60,19 @@ If the pessimistic transaction mode is enabled in the configuration file by defa
 
 - Execute `set @@tidb_txn_mode = 'optimistic';` statement to allow all the transactions processed in this session to be in the optimistic transaction mode.
 
-## Enablement Priority
+## Enablement priority
 
-- `BEGIN PESSIMISTIC;` and `BEGIN OPTIMISTIC;` are statements with the highest priority.
+The three methods to enable the transaction mode are ordered from highest priority to lowest as follows:
 
--  Session variable `tidb_txn_mode` has the second highest priority.
+- Use `BEGIN PESSIMISTIC;` or `BEGIN OPTIMISTIC;`.
 
-- You can configure the `default` file. If the transaction starts with `BEGIN` statement and the value of `tidb_txn_mode` is an empty string, the transaction mode is determined by the `default` in the configuration file.
+-  Set the session variable `tidb_txn_mode`.
+
+- Configure the parameter `default` in the configuration file. If you use a regular `BEGIN` statement and set the value of `tidb_txn_mode` to an empty string, then you can use `default` to determine whether to enable the pessimistic or optimistic transaction mode.
 
 ## Configuration Parameter
 
-The related configuration file is under the `[pessimistic-txn]` file. Besides the `enable` and `default` arguments, you can also configure the following arguments:
+The related configuration parameters are under the `[pessimistic-txn]` category. Besides `enable` and `default`, you can also configure the following parameters:
 
 - `ttl`
 
@@ -78,9 +80,9 @@ The related configuration file is under the `[pessimistic-txn]` file. Besides th
     ttl = "30s"
     ```
 
-    The default value of the pessimistic locking timeout `ttl` is 30s. The value configured must be between "15s" and "60s". Otherwise, the error will be reported.
+     `ttl` is the timeout time for the lock of pessimistic transactions. Its default value is "30s" (30 seconds). You must set it to a value between 15~60 seconds, and a lower or higher value can result in an error. 
 
-    The transaction will fail if its execution time exceeds the value of `ttl`. If the timeout value is set too high, it might cause long waiting time of write transaction when `tidb-server` fails. If too low, the transaction might be rolled back due to the conflict with other transaction.
+    A transaction fails when its execution time exceeds `ttl`. If the value of `ttl` is set too high, the remaining pessimistic lock might block the write transaction for a long time when `tidb-server` is down. If set too low, the transaction might be rolled back by other transactions before it can finish execution.
 
 - `max-retry-count`
 
@@ -88,13 +90,13 @@ The related configuration file is under the `[pessimistic-txn]` file. Besides th
     max-retry-count = 256
     ```
 
-    In the pessimistic transaction mode, the transaction can automatically retry a single statement. You can configure the maximum number of automatically retry to avoid the extreme case that the single statement is run endlessly. Normally you do not need to modify this configuration.
+    A pessimistic transaction can automatically retry a single statement. You can specify the maximum retrying times by setting the parameter `max-retry-count` to avoid retrying a statement endlessly in some extreme cases. Normally, you do not need to modify this configuration.
 
 
 ## Known Restrictions
 
 - GAP Lock or Next Key Lock
 
-  When the transaction sets the pessimistic lock on the rows in a scanned range to update, other transaction can still insert the new rows without being blocked.
+    When multiple rows of data are updated through range conditions in a pessimistic transaction, other transactions can insert data without being blocked in this range.
 
 - SELECT LOCK IN SHARE MODE
