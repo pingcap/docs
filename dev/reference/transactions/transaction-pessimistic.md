@@ -1,5 +1,5 @@
 ---
-title: TiDB Pessimistic Transaction Mode
+title: Pessimistic Transactions
 summary: Learn about TiDB pessimistic transaction mode.
 category: reference
 ---
@@ -10,12 +10,11 @@ By default, TiDB implements an optimistic transaction mode, where the commit mig
 
 > **Warning:**
 >
-> Up to now, the pessimistic transaction mode in TiDB is still an **experimental** feature. It is *not recommended to apply it in the production environment*.
+> Pessimistic transactions are an **experimental** feature. It is *not recommended to apply it in the production environment*.
 
-## Behaviors of the Pessimistic Transaction Mode
+## Behaviors of the pessimistic transaction mode
 
 Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Known Restrictions](#known-restrictions).
-
 
 - When you perform `SELECT FOR UPDATE` statements, transactions read the last committed data and apply a pessimistic lock on the modified data.
 
@@ -29,9 +28,9 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 - Deadlocks in concurrent transactions can be detected by the deadlock detector. A DEADLOCK error which is the same as that in MySQL is returned.
 
-- TiDB supports both the optimistic transaction mode and pessimistic transaction mode in the same cluster.  You can specify either mode for transaction execution.
+- TiDB supports both the optimistic transaction mode and pessimistic transaction mode in the same cluster. You can specify either mode for transaction execution.
 
-## Methods to Enable Pessimistic Transaction Mode
+## Methods to enable pessimistic transaction mode
 
 The pessimistic transaction mode is disabled by default because it is currently an experimental feature. Before enabling it, you need to add the following setting in the configuration file:
 
@@ -66,11 +65,11 @@ The three methods to enable the transaction mode are ordered from highest priori
 
 - Use `BEGIN PESSIMISTIC;` or `BEGIN OPTIMISTIC;`.
 
--  Set the session variable `tidb_txn_mode`.
+- Set the session variable `tidb_txn_mode`.
 
 - Configure the parameter `default` in the configuration file. If you use a regular `BEGIN` statement and set the value of `tidb_txn_mode` to an empty string, then you can use `default` to determine whether to enable the pessimistic or optimistic transaction mode.
 
-## Configuration Parameter
+## Configuration parameter
 
 The related configuration parameters are under the `[pessimistic-txn]` category. Besides `enable` and `default`, you can also configure the following parameters:
 
@@ -80,7 +79,7 @@ The related configuration parameters are under the `[pessimistic-txn]` category.
     ttl = "30s"
     ```
 
-     `ttl` is the timeout time for the lock of pessimistic transactions. Its default value is "30s" (30 seconds). You must set it to a value between 15~60 seconds, and a lower or higher value can result in an error. 
+     `ttl` is the timeout time for the lock of pessimistic transactions. Its default value is "30s" (30 seconds). You must set it to a value between 15~60 seconds, and a lower or higher value can result in an error.
 
     A transaction fails when its execution time exceeds `ttl`. If the value of `ttl` is set too high, the remaining pessimistic lock might block the write transaction for a long time when `tidb-server` is down. If set too low, the transaction might be rolled back by other transactions before it can finish execution.
 
@@ -92,11 +91,8 @@ The related configuration parameters are under the `[pessimistic-txn]` category.
 
     A pessimistic transaction can automatically retry a single statement. You can specify the maximum retrying times by setting the parameter `max-retry-count` to avoid retrying a statement endlessly in some extreme cases. Normally, you do not need to modify this configuration.
 
-
 ## Known Restrictions
 
-- GAP Lock or Next Key Lock
+- TiDB does not support GAP Lock or Next Key Lock. When multiple rows of data are updated through range conditions in a pessimistic transaction, other transactions can insert data without being blocked in this range.
 
-    When multiple rows of data are updated through range conditions in a pessimistic transaction, other transactions can insert data without being blocked in this range.
-
-- SELECT LOCK IN SHARE MODE
+- TiDB does not support `SELECT LOCK IN SHARE MODE`.
