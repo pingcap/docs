@@ -6,19 +6,19 @@ category: reference
 
 # TiDB Pessimistic Transaction Mode
 
-By default, TiDB implements an optimistic transaction mode, where the commit might fail for a transaction because of transaction conflicts. To improve the commit success rate, you need to modify the application with an automatic retry logic. With the pessimistic transaction mode, you can avoid this potential issue without the need of adding any retry logic to your application.
+By default, TiDB implements an optimistic transaction mode, where the transaction commit might fail because of transaction conflicts. To make sure that the commit succeeds, you need to modify the application and add an automatic retry mechanism. You can avoid this issue by using the pessimistic transaction mode of TiDB.
 
 > **Warning:**
 >
-> Pessimistic transactions are an **experimental** feature. It is *not recommended to apply it in the production environment*.
+> The pessimistic transaction mode of TiDB is an **experimental** feature. It is *not recommended to apply it in the production environment*.
 
 ## Behaviors of the pessimistic transaction mode
 
 Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Known restrictions](#known-restrictions).
 
-- When you perform `SELECT FOR UPDATE` statements, transactions read the last committed data and apply a pessimistic lock on the modified data.
+- When you perform `SELECT FOR UPDATE` statements, transactions read the last committed data and apply a pessimistic lock on the data being read.
 
-- When you perform `UPDATE/DELETE/INSERT` statements, transactions read the last committed data and place a pessimistic lock on the modified data.
+- When you perform `UPDATE/DELETE/INSERT` statements, transactions read the last committed data to execute on them and apply a pessimistic lock on the modified data.
 
 - When a pessimistic lock is applied on a row of data, other write transactions attempting to modify the data are blocked and have to wait for the lock to be released.
 
@@ -57,7 +57,7 @@ If the pessimistic transaction mode is enabled in the configuration file by defa
 
 - Use `BEGIN OPTIMISTIC;` statement to start the transaction in the optimistic transaction mode. Write in comment style as `BEGIN /*!90000 OPTIMISTIC */;` to make it compatible with the MySQL syntax.
 
-- Execute `set @@tidb_txn_mode = 'optimistic';` statement to allow all the transactions processed in this session to be in the optimistic transaction mode.
+- Execute `set @@tidb_txn_mode = 'optimistic';` to allow all the transactions processed in this session to be in the optimistic transaction mode.
 
 ## Enablement priority
 
@@ -79,7 +79,7 @@ The related configuration parameters are under the `[pessimistic-txn]` category.
     ttl = "30s"
     ```
 
-     `ttl` is the timeout time for the lock of pessimistic transactions. Its default value is "30s" (30 seconds). You must set it to a value between 15~60 seconds, and a lower or higher value can result in an error.
+    `ttl` is the timeout time for the lock of pessimistic transactions. Its default value is "30s" (30 seconds). You must set it to a value between 15~60 seconds, and a lower or higher value can result in an error.
 
     A transaction fails when its execution time exceeds `ttl`. If the value of `ttl` is set too high, the remaining pessimistic lock might block the write transaction for a long time when `tidb-server` is down. If set too low, the transaction might be rolled back by other transactions before it can finish execution.
 
