@@ -41,7 +41,7 @@ enable = true
 
 When `enable` is set to `true`, the default transaction mode in TiDB is still optimistic. To enable the pessimistic transaction mode, choose any of the following methods that suits your needs:
 
-- Use `BEGIN PESSIMISTIC;` statement to start the transaction in the pessimistic transaction mode. Write in comment style as `BEGIN /*!90000 PESSIMISTIC */;` to make it compatible with the MySQL syntax.
+- Use `BEGIN PESSIMISTIC;` statement to start the transaction in the pessimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 PESSIMISTIC */;` to make it compatible with the MySQL syntax.
 
 - Execute the `set @@tidb_txn_mode = 'pessimistic';` statement to allow all the transactions processed in this session to be in the pessimistic transaction mode.
 
@@ -55,7 +55,7 @@ When `enable` is set to `true`, the default transaction mode in TiDB is still op
 
 If the pessimistic transaction mode is enabled in the configuration file by default, use one of the following methods to adopt the optimistic transaction mode for the transaction:
 
-- Use `BEGIN OPTIMISTIC;` statement to start the transaction in the optimistic transaction mode. Write in comment style as `BEGIN /*!90000 OPTIMISTIC */;` to make it compatible with the MySQL syntax.
+- Use `BEGIN OPTIMISTIC;` statement to start the transaction in the optimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 OPTIMISTIC */;` to make it compatible with the MySQL syntax.
 
 - Execute `set @@tidb_txn_mode = 'optimistic';` to allow all the transactions processed in this session to be in the optimistic transaction mode.
 
