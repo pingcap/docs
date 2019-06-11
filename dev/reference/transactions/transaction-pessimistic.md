@@ -16,9 +16,9 @@ By default, TiDB implements an optimistic transaction mode, where the transactio
 
 Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Known restrictions](#known-restrictions).
 
-- When you perform `SELECT FOR UPDATE` statements, transactions read the last committed data and apply a pessimistic lock on the data being read.
+- When you perform the `SELECT FOR UPDATE` statement, transactions read the last committed data and apply a pessimistic lock on the data being read.
 
-- When you perform `UPDATE/DELETE/INSERT` statements, transactions read the last committed data to execute on them and apply a pessimistic lock on the modified data.
+- When you perform the `UPDATE/DELETE/INSERT` statement, transactions read the last committed data to execute on them and apply a pessimistic lock on the modified data.
 
 - When a pessimistic lock is applied on a row of data, other write transactions attempting to modify the data are blocked and have to wait for the lock to be released.
 
@@ -41,7 +41,7 @@ enable = true
 
 When `enable` is set to `true`, the default transaction mode in TiDB is still optimistic. To enable the pessimistic transaction mode, choose any of the following methods that suits your needs:
 
-- Use `BEGIN PESSIMISTIC;` statement to start the transaction in the pessimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 PESSIMISTIC */;` to make it compatible with the MySQL syntax.
+- Use the `BEGIN PESSIMISTIC;` statement to start the transaction in the pessimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 PESSIMISTIC */;` to make it compatible with the MySQL syntax.
 
 - Execute the `set @@tidb_txn_mode = 'pessimistic';` statement to allow all the transactions processed in this session to be in the pessimistic transaction mode.
 
@@ -55,9 +55,9 @@ When `enable` is set to `true`, the default transaction mode in TiDB is still op
 
 If the pessimistic transaction mode is enabled in the configuration file by default, use one of the following methods to adopt the optimistic transaction mode for the transaction:
 
-- Use `BEGIN OPTIMISTIC;` statement to start the transaction in the optimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 OPTIMISTIC */;` to make it compatible with the MySQL syntax.
+- Use the `BEGIN OPTIMISTIC;` statement to start the transaction in the optimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 OPTIMISTIC */;` to make it compatible with the MySQL syntax.
 
-- Execute `set @@tidb_txn_mode = 'optimistic';` to allow all the transactions processed in this session to be in the optimistic transaction mode.
+- Execute the `set @@tidb_txn_mode = 'optimistic';` statement to allow all the transactions processed in this session to be in the optimistic transaction mode.
 
 ## Enablement priority
 
