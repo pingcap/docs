@@ -1,5 +1,5 @@
 ---
-title: Pessimistic Transactions
+title: TiDB Pessimistic Transaction Mode
 summary: Learn about TiDB pessimistic transaction mode.
 category: reference
 ---
