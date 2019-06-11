@@ -935,7 +935,7 @@ See [Introduction to Statistics](/dev/reference/performance/statistics.md).
 
 #### How to optimize `select count(1)`?
 
-The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/dev/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_distsql_scan_concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
+The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/dev/reference/configuration/tidb-server/tidb-specific-variables.md#tidb-distsql-scan-concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
 
 Recommendations:
 
