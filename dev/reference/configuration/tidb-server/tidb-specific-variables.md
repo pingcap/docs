@@ -50,6 +50,28 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: 0
 - This variable is used to set whether the optimizer executes the optimization operation of unfolding the "in-" subquery.
 
+### tidb_auto_analyze_ratio
+
+- Scope: GLOBAL
+- Default value: 0.5
+- This variable is used to set the threshold value for the automatic updates by `ANALYZE` statements. For the table `tbl`, when the ratio of the number of the modified rows and the total rows is greater than `tidb_auto_analyze_ratio` and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics of the table.
+
+> **Note:**
+>
+> Only when the `run-auto-analyze` option is enabled in the starting configuration file of TiDB, the `auto_analyze` feature can be triggered.
+
+### tidb_auto_analyze_start_time
+
+- Scope: GLOBAL
+- Default value: 00:00 +0000
+- This variable is used to set the start time of a day, after which the automatic updates by `ANALYZE` statements are allowed.
+
+### tidb_auto_analyze_end_time
+
+- Scope: GLOBAL
+- Default value: 23:59 +0000
+- This variable is used to set the end time of a day, before which the automatic updates by `ANALYZE` statements are allowed.
+
 ### tidb_build_stats_concurrency
 
 - Scope: SESSION
@@ -313,6 +335,12 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
+
+### tidb_opt_write_row_id
+
+- Scope: SESSION
+- Default value: 0
+- This variable is used to set whether to allow `insert`, `replace` and `update` statements to operate on the column `_tidb_rowid`. It is not allowed by default. This variable can be used only when importing data with TiDB tools.
 
 ## SHARD_ROW_ID_BITS
 
