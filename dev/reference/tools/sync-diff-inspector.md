@@ -16,7 +16,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 > - TiDB uses the `utf8_bin` collation. If you need to compare the data in MySQL with that in TiDB, pay attention to the collation configuration of MySQL tables. If the primary key or unique key is the `varchar` type and the collation configuration in MySQL differs from that in TiDB, then the final check result might be incorrect because of the collation issue. You need to add collation to the sync-diff-inspector configuration file.
 > - If you configure the `tidb-instance-id` to divide data into chunks according to TiDB statistics, try to guarantee the accuracy of statistics. You can manually run the `analyze table {table_name}` command when the TiDB server *workload is light*.
 > - Pay special attention to `table-rules`. If you configure `schema-pattern="test1"` and `target-schema="test2"`, the `test1` schema in the source database and the `test2` schema in the target database are compared. If the source database has a `test2` schema, this `test2` schema is also compared with the `test2` schema in the target database.
-> - sync_diff_inspector saves the check status to  `sync_diff_inspector` schema in the target database during checking. You need to ensure that the database users have read and write permissions to the corresponding schemas.
+> - sync_diff_inspector saves the check status to  `sync_diff_inspector` schema in the target database during checking. You need to ensure that database users have read and write permissions to the corresponding schemas.
 
 ## Key features
 
