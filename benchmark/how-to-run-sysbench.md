@@ -3,7 +3,7 @@ title: How to Test TiDB Using Sysbench
 category: benchmark
 ---
 
-#  How to test TiDB using Sysbench
+#  How to Test TiDB Using Sysbench
 
 In this test, Sysbench 1.0.14 and TiDB 3.0 Beta are used. It is recommended to use Sysbench 1.0 or later, which can be downloaded [here](https://github.com/akopytov/sysbench/releases/tag/1.0.14).
 
@@ -116,13 +116,13 @@ db-driver=mysql
 
 ### Data import
 
-Before importing the data, it is necessary to make some settings on TiDB. Execute the following command in MySQL client:
+Before importing the data, it is necessary to make some settings to TiDB. Execute the following command in MySQL client:
 
 ```sql
 set global tidb_disable_txn_auto_retry = off;
 ```
 
-Then exit the client. TiDB uses an optimistic transaction modal that rolls back transactions when a concurrency conflict is found. Setting `tidb_disable_txn_auto_retry` to `off` will turn on the automatic retry mechanism after a transaction conflict, which will try to avoid Sysbench quit caused by the error reports of transaction conflicts.
+Then exit the client. TiDB uses an optimistic transaction model that rolls back transactions when a concurrency conflict is found. Setting `tidb_disable_txn_auto_retry` to `off` turns on the automatic retry mechanism after meeting a transaction conflict, which can prevent Sysbench from quitting because of the transaction conflict error.
 
 Restart MySQL client and execute the following SQL statement to create a database `sbtest`:
 

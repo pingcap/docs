@@ -1047,7 +1047,7 @@ The `Statement OPS` statistics is only about applications related SQL statements
 
 #### ERROR 8005 (HY000): Write Conflict, txnStartTS is stale
 
-Check whether `tidb_disable_txn_auto_retry` is on. If so, set it to off; if it is already off, increase the value of `tidb_retry_limit` until the error no longer occurs.
+Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
 
 #### ERROR 9001 (HY000): PD Server Timeout
 
@@ -1083,7 +1083,7 @@ update mysql.tidb set variable_value='30m' where variable_name='tikv_gc_life_tim
 
 #### ERROR 9007 (HY000): Write Conflict
 
-Check whether `tidb_disable_txn_auto_retry` is on. If so, set it to off; if it is already off, increase the value of `tidb_retry_limit` until the error no longer occurs.
+Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
 
 ### MySQL native error messages
 
