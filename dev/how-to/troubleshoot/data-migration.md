@@ -43,7 +43,7 @@ When you encounter a DDL statement unsupported by TiDB, you need to manually han
 
 You need to reset the entire data replication task in the following cases:
 
-- `RESET MASTER` is artificially executed in the upstream database, which causes an error in the relay log replication.
+- `RESET MASTER` is accidentally executed in the upstream database.
 - The relay log or the upstream binlog is corrupted or lost.
 
 Generally, at this time, the relay unit exits with an error and cannot be automatically restored gracefully. You need to manually restore the data replication and the steps are as follows:
