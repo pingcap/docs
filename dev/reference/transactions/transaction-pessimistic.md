@@ -89,7 +89,7 @@ The related configuration parameters are under the `[pessimistic-txn]` category.
     max-retry-count = 256
     ```
 
-    A pessimistic transaction can automatically retry a single statement. You can specify the maximum retrying times by setting the parameter `max-retry-count` to avoid retrying a statement endlessly in some extreme cases. Normally, you do not need to modify this configuration.
+A pessimistic transaction can automatically retry a single statement. You can specify the maximum retrying times by setting the `max-retry-count` parameter to avoid retrying a statement endlessly in some extreme cases. Normally, you do not need to modify this configuration.
 
 ## Known restrictions
 
