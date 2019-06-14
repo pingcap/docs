@@ -63,11 +63,11 @@ If the pessimistic transaction mode is enabled in the configuration file by defa
 
 The three methods to enable the transaction mode are ordered from highest priority to lowest as follows:
 
-- Use `BEGIN PESSIMISTIC;` or `BEGIN OPTIMISTIC;`.
+- `BEGIN PESSIMISTIC;` or `BEGIN OPTIMISTIC;`.
 
-- Set the session variable `tidb_txn_mode`.
+- The session variable `tidb_txn_mode`.
 
-- Configure the parameter `default` in the configuration file. If you use a regular `BEGIN` statement and set the value of `tidb_txn_mode` to an empty string, then you can use `default` to determine whether to enable the pessimistic or optimistic transaction mode.
+-  The `default` configuration item in the configuration file. If you use a regular `BEGIN` statement and set the value of `tidb_txn_mode` to an empty string, then you can use `default` to determine whether to enable the pessimistic or optimistic transaction mode.
 
 ## Configuration parameter
 
