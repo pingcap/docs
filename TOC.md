@@ -261,19 +261,19 @@
       - [Overview](dev/reference/tools/data-migration/overview.md)
       - [Restrictions](dev/reference/tools/data-migration/overview.md#usage-restrictions)
       + Features
-        - [Table Routing](/dev/reference/tools/data-migration/features/overview.md#table-routing)
-        - [Black and White Lists](/dev/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
-        - [Binlog Event Filter](/dev/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/dev/reference/tools/data-migration/features/overview.md#column-mapping)
-        - [Replication Delay Monitoring](/dev/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
+        - [Table Routing](dev/reference/tools/data-migration/features/overview.md#table-routing)
+        - [Black and White Lists](dev/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
+        - [Binlog Event Filter](dev/reference/tools/data-migration/features/overview.md#binlog-event-filter)
+        - [Column Mapping](dev/reference/tools/data-migration/features/overview.md#column-mapping)
+        - [Replication Delay Monitoring](dev/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](dev/reference/tools/data-migration/features/shard-merge.md)
           - [Restrictions](dev/reference/tools/data-migration/features/shard-merge.md#restrictions)
           - [Handle Sharding DDL Locks Manually](dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md)
       + Usage Scenarios
-        - [Simple Scenario](/dev/reference/tools/data-migration/usage-scenarios/simple-replication.md)
-        - [Shard Merge Scenario](/dev/reference/tools/data-migration/usage-scenarios/shard-merge.md)
-      - [Deploy](/dev/reference/tools/data-migration/deploy.md)
+        - [Simple Scenario](dev/reference/tools/data-migration/usage-scenarios/simple-replication.md)
+        - [Shard Merge Scenario](dev/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+      - [Deploy](dev/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](dev/reference/tools/data-migration/configure/overview.md)
         - [Task Configuration](dev/reference/tools/data-migration/configure/task-configuration-file.md)
