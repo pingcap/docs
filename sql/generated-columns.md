@@ -68,7 +68,7 @@ ERROR 1048 (23000): Column 'city' cannot be null
 
 ## Use generated virtual columns
 
-TiDB also supports generated virtual columns. Different from generated store columns, generated virtual columns are **virtual** in that they are generated as needed and are not stored in the database or occupied the memory space. Although TiDB supports indexing generated virtual columns, the optimizer currently cannot use the index in this case. This issue will be fixed in a later version of TiDB ([#5189](https://github.com/pingcap/tidb/issues/5189)).
+TiDB also supports generated virtual columns. Different from generated store columns, generated virtual columns are **virtual** in that they are generated as needed and are not stored in the database or cached in the memory. Although TiDB supports indexing generated virtual columns, the optimizer currently cannot use indexes in this case. This issue will be fixed in a later version of TiDB ([#5189](https://github.com/pingcap/tidb/issues/5189)).
 
 ```sql
 CREATE TABLE person (
