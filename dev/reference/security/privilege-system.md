@@ -294,10 +294,10 @@ Requires the `SUPER` privilege.
 
 The following system tables are special because all the privilege-related data is stored in them:
 
-- mysql.user (user account, global privilege)
-- mysql.db (database-level privilege)
-- mysql.tables_priv (table-level privilege)
-- mysql.columns_priv (column-level privilege; not currently supported)
+- `mysql.user` (user account, global privilege)
+- `mysql.db` (database-level privilege)
+- `mysql.tables_priv` (table-level privilege)
+- `mysql.columns_priv` (column-level privilege; not currently supported)
 
 These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
 
