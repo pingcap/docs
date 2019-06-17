@@ -25,7 +25,7 @@ To index a JSON column, you must first extract it as a generated stored column.
 
 > **Note:**
 >
-> The optimizer in TiDB only uses the index created on a generated stored column. Currently, the optimizer cannot use an index created on a generated virtual column. This issue will be fixed in later TiDB versions (See [#5189](https://github.com/pingcap/tidb/issues/5189)).
+> The optimizer in TiDB only uses the index created on a generated stored column. Currently, the optimizer cannot use an index created on a generated virtual column. This issue will be fixed in later TiDB versions (See ISSUE [#5189](https://github.com/pingcap/tidb/issues/5189)).
 
 Using the `city` stored generated column as an example, you are then able to add an index:
 
@@ -39,7 +39,7 @@ CREATE TABLE person (
 );
 ```
 
-In this table, the `city` column is a **generated column**. As the name implies, the column is generated from other columns in the table, and cannot be assigned a value when inserted or updated. This column is generated based on a defined expression and is stored in the database. Thus this column can be read directly, not in a way that its dependent column `address_info`  is read first and then the data is calculated. The index on `city` however is _stored_ and uses the same structure as other indexes of the type `varchar(64)`.
+In this table, the `city` column is a **generated column**. As the name implies, the column is generated from other columns in the table, and cannot be assigned a value when inserted or updated. This column is generated based on a defined expression and is stored in the database. Thus this column can be read directly, not in a way that its dependent column `address_info` is read first and then the data is calculated. The index on `city` however is _stored_ and uses the same structure as other indexes of the type `varchar(64)`.
 
 You can use the index on the stored generated column in order to speed up the following statement:
 
@@ -68,7 +68,7 @@ ERROR 1048 (23000): Column 'city' cannot be null
 
 ## Use generated virtual columns
 
-TiDB also supports generated virtual columns. Different from generated store columns, generated virtual columns are **virtual** in that they are generated as needed and are not stored in the database or cached in the memory. Although TiDB supports indexing generated virtual columns, the optimizer currently cannot use indexes in this case. This issue will be fixed in a later version of TiDB ([#5189](https://github.com/pingcap/tidb/issues/5189)).
+TiDB also supports generated virtual columns. Different from generated store columns, generated virtual columns are **virtual** in that they are generated as needed and are not stored in the database or cached in the memory. Although TiDB supports indexing generated virtual columns, the optimizer currently cannot use indexes in this case. This issue will be fixed in a later version of TiDB (ISSUE [#5189](https://github.com/pingcap/tidb/issues/5189)).
 
 ```sql
 CREATE TABLE person (
