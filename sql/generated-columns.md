@@ -25,7 +25,7 @@ To index a JSON column, you must first extract it as a generated stored column.
 
 > **Note:**
 >
-> The optimizer in TiDB only uses the index created on a generated stored column. Currently, the optimizer cannot use an index created on a generated virtual column. This issue will be fixed in the later TiDB versions (See [#5189](https://github.com/pingcap/tidb/issues/5189)).
+> The optimizer in TiDB only uses the index created on a generated stored column. Currently, the optimizer cannot use an index created on a generated virtual column. This issue will be fixed in later TiDB versions (See [#5189](https://github.com/pingcap/tidb/issues/5189)).
 
 Using the `city` stored generated column as an example, you are then able to add an index:
 
