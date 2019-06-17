@@ -29,9 +29,20 @@ Use the following statement to grant the `xxx` user all privileges on all databa
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-If the granted user does not exist, TiDB will automatically create a user.
+If the granted user does not exist, TiDB will not automatically create a user by default. This beahavior follows `NO_AUTO_CREATE_USER` in SQL Mode.
+If `NO_AUTO_CREATE_USER` is deleted from SQL Mode, TiDB will automatically create a user when the granted user does not exist.
 
 ```sql
+mysql> select @@sql_mode;                                                                                                                                                                             +-------------------------------------------------------------------------------------------------------------------------------------------+
+| @@sql_mode                                                                                                                                |
++-------------------------------------------------------------------------------------------------------------------------------------------+
+| ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |
++-------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> set @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+Query OK, 0 rows affected (0.00 sec)
+
 mysql> SELECT * FROM mysql.user WHERE user='xxxx';
 Empty set (0.00 sec)
 
@@ -334,7 +345,7 @@ For database-related requests (`INSERT`, `UPDATE`), the request verification pro
 
 The `user` table has global privileges regardless of the default database. For example, the `DELETE` privilege in `user` can apply to any row, table, or database.
 
-In the `Db` table, an empty user is to match the anonymous user name. Wildcards are not allowed in the `User` column. The value for the `Host` and `Db` columns can use `%` and `_`, which can use pattern matching.
+In the `db` table, an empty user is to match the anonymous user name. Wildcards are not allowed in the `User` column. The value for the `Host` and `Db` columns can use `%` and `_`, which can use pattern matching.
 
 Data in the `user` and `db` tables is also sorted when loaded into memory.
 
