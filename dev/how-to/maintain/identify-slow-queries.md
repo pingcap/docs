@@ -73,7 +73,6 @@ select count(1) from t_slim, t_wide where t_slim.c0>t_wide.c0 and t_slim.c1>t_wi
 To locate slow queries using SQL queries, the contents of slow logs in TiDB are parsed and then mapped to the `INFORMATION_SCHEMA.SLOW_QUERY` table. The column names in the table and the field names recorded in slow logs are in a one-to-one correspondence relationship.
 
 ```sql
-tidb > show create table INFORMATION_SCHEMA.SLOW_QUERY;
 +------------+-------------------------------------------------------------+
 | Table      | Create Table                                                |
 +------------+-------------------------------------------------------------+
