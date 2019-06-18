@@ -543,7 +543,7 @@ When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if e
 
 #### How to control or change the execution priority of SQL commits?
 
-TiDB supports changing the priority on a [per-session](/dev/reference/configuration/tidb-server/tidb-specific-variables.md#tidb-force-priority), [global](/dev/reference/configuration/tidb-server/configuration.md#force-priority) or individual statement basis. Priority has the following meaning:
+TiDB supports changing the priority on a [per-session](/dev/reference/configuration/tidb-server/tidb-specific-variables.md#tidb-force-priority), [global](/dev/reference/configuration/tidb-server/server-command-option.md#force-priority) or individual statement basis. Priority has the following meaning:
 
 - `HIGH_PRIORITY`: this statement has a high priority, that is, TiDB gives priority to this statement and executes it first.
 
@@ -620,7 +620,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 
 #### If a node is down, will the service be affected? If yes, how long?
 
-TiDB uses Raft to synchronize data among multiple replicas and guarantees the strong consistency of data. If one replica goes wrong, the other replicas can guarantee data security. The default number of replicas in each Region is 3. Based on the Raft protocol, a leader is elected in each Region, and if a single leader fails, a follower is soon elected as Region leader after a maximum of 2 * lease time (lease time is 10 seconds).
+TiDB uses Raft to replicate data among multiple replicas and guarantees the strong consistency of data. If one replica goes wrong, the other replicas can guarantee data security. The default number of replicas in each Region is 3. Based on the Raft protocol, a leader is elected in each Region, and if a single leader fails, a follower is soon elected as Region leader after a maximum of 2 * lease time (lease time is 10 seconds).
 
 #### What are the TiKV scenarios that take up high I/O, memory, CPU, and exceed the parameter configuration?
 
@@ -834,37 +834,37 @@ Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/de
 
 Restart Prometheus.
 
-##### Is there a current solution to synchronizing data from TiDB to other databases like HBase and Elasticsearch?
+##### Is there a current solution to replicating data from TiDB to other databases like HBase and Elasticsearch?
 
-No. Currently, the data synchronization depends on the application itself.
+No. Currently, the data replication depends on the application itself.
 
-##### Does Syncer support synchronizing only some of the tables when Syncer is synchronizing data?
+##### Does Syncer support replicating only some of the tables when Syncer is replicating data?
 
 Yes. For details, see [Syncer User Guide](/dev/reference/tools/syncer.md)
 
-##### Do frequent DDL operations affect the synchronization speed of Syncer?
+##### Do frequent DDL operations affect the replication speed of Syncer?
 
-Frequent DDL operations may affect the synchronization speed. For Sycner, DDL operations are executed serially. When DDL operations are executed during data synchronization, data will be synchronized serially and thus the synchronization speed will be slowed down.
+Frequent DDL operations may affect the replication speed. For Sycner, DDL operations are executed serially. When DDL operations are executed during data replication, data will be replicated serially and thus the replication speed will be slowed down.
 
 ##### If the machine that Syncer is in is broken and the directory of the `syncer.meta` file is lost, what should I do?
 
-When you synchronize data using Syncer GTID, the `syncer.meta` file is constantly updated during the synchronization process. The current version of Syncer does not contain the design for high availability. The `syncer.meta` configuration file of Syncer is directly stored on the hard disks, which is similar to other tools in the MySQL ecosystem, such as mydumper.
+When you replicate data using Syncer GTID, the `syncer.meta` file is constantly updated during the replication process. The current version of Syncer does not contain the design for high availability. The `syncer.meta` configuration file of Syncer is directly stored on the hard disks, which is similar to other tools in the MySQL ecosystem, such as mydumper.
 
 Two solutions:
 
 - Put the `syncer.meta` file in a relatively secure disk. For example, use disks with RAID 1.
-- Restore the location information of history synchronization according to the monitoring data that Syncer reports to Prometheus regularly. But the location information might be inaccurate due to the delay when a large amount of data is synchronized.
+- Restore the location information of history replication according to the monitoring data that Syncer reports to Prometheus regularly. But the location information might be inaccurate due to the delay when a large amount of data is replicated.
 
-##### If the downstream TiDB data is not consistent with the MySQL data during the synchronization process of Syncer, will DML operations cause exits?
+##### If the downstream TiDB data is not consistent with the MySQL data during the replication process of Syncer, will DML operations cause exits?
 
-- If the data exists in the upstream MySQL but does not exist in the downstream TiDB, when the upstream MySQL performs the `UPDATE` or `DELETE` operation on this row of data, Syncer will not report an error and the synchronization process will not exit, and this row of data does not exist in the downstream.
+- If the data exists in the upstream MySQL but does not exist in the downstream TiDB, when the upstream MySQL performs the `UPDATE` or `DELETE` operation on this row of data, Syncer will not report an error and the replication process will not exit, and this row of data does not exist in the downstream.
 - If a conflict exists in the primary key indexes or the unique indexes in the downstream, preforming the `UPDATE` operation will cause an exit and performing the `INSERT` operation will not cause an exit.
 
 ### Migrate the traffic
 
 #### How to migrate the traffic quickly?
 
-It is recommended to build a multi-source MySQL -> TiDB real-time synchronization environment using Syncer tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
+It is recommended to build a multi-source MySQL -> TiDB real-time replication environment using Syncer tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
 
 #### Is there a limit for the total write and read capacity in TiDB?
 
@@ -874,6 +874,7 @@ The total read capacity has no limit. You can increase the read capacity by addi
 
 As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
 
+- A transaction is limited to 5000 SQL statements (by default)
 - Each Key-Value entry is no more than 6MB
 - The total number of Key-Value entry is no more than 300,000 rows
 - The total size of Key-Value entry is no more than 100MB
