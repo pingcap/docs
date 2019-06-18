@@ -2,6 +2,7 @@
 title: The TiDB Command Options
 summary: Learn about TiDB command options and configuration files.
 category: user guide
+aliases: ['/docs/sql/server-command-option/']
 ---
 
 # The TiDB Command Options
