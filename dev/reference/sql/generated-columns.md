@@ -26,7 +26,7 @@ To index a JSON column, you must first extract it as a generated stored column.
 
 > **Note:**
 >
-> The optimizer in TiDB only uses the index created on a generated stored column. Currently, the optimizer cannot use an index created on a generated virtual column. This issue will be fixed in later TiDB versions (See ISSUE [#5189](https://github.com/pingcap/tidb/issues/5189)).
+> The optimizer in TiDB only uses the index created on a generated stored column. Currently, the optimizer cannot use an index created on a generated virtual column. This issue will be fixed in later TiDB versions (See Issue [#5189](https://github.com/pingcap/tidb/issues/5189)).
 
 Using the `city` stored generated column as an example, you are then able to add an index:
 
@@ -69,7 +69,7 @@ ERROR 1048 (23000): Column 'city' cannot be null
 
 ## Use generated virtual columns
 
-TiDB also supports generated virtual columns. Different from generated store columns, generated virtual columns are **virtual** in that they are generated as needed and are not stored in the database or cached in the memory. Although TiDB supports indexing generated virtual columns, the optimizer currently cannot use indexes in this case. This issue will be fixed in a later version of TiDB (ISSUE [#5189](https://github.com/pingcap/tidb/issues/5189)).
+TiDB also supports generated virtual columns. Different from generated store columns, generated virtual columns are **virtual** in that they are generated as needed and are not stored in the database or cached in the memory. Although TiDB supports indexing generated virtual columns, the optimizer currently cannot use indexes in this case. This issue will be fixed in a later version of TiDB (Issue [#5189](https://github.com/pingcap/tidb/issues/5189)).
 
 ```sql
 CREATE TABLE person (
