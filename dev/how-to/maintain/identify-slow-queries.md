@@ -51,7 +51,7 @@ select count(1) from t_slim, t_wide where t_slim.c0>t_wide.c0 and t_slim.c1>t_wi
 * `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB, such as `analyze`, `load variables`, etc. `false` indicates that the SQL statement is executed by the user.
 * `Digest`: The fingerprint of the SQL statement.
 * `Memory_max`: The maximum memory space used during the execution period of this SQL statement (the unit is byte).
-* `Query_time`: 16.479155653
+* `Query_time`: Indicates the execution time of this statement. Only the statement whose execution time exceeds slow-threshold outputs this log (the unit is second). The unit of all the following time fields is second.
 * `Process_time`: The total processing time of this SQL statement in TiKV. Because the data is sent to TiKV concurrently, this value may exceed `Query_time`.
 * `Wait_time`: The total waiting time of this statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests will increase.
 * `Backoff_time`: The waiting time before retry when this statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
@@ -93,6 +93,16 @@ tidb > show create table INFORMATION_SCHEMA.SLOW_QUERY;
 |            |   `Index_ids` varchar(100) DEFAULT NULL,                    |
 |            |   `Is_internal` tinyint(1) unsigned DEFAULT NULL,           |
 |            |   `Digest` varchar(64) DEFAULT NULL,                        |
+|            |   `Stats` varchar(512) DEFAULT NULL,                        |
+|            |   `Cop_proc_avg` double unsigned DEFAULT NULL,              |
+|            |   `Cop_proc_p90` double unsigned DEFAULT NULL,              |
+|            |   `Cop_proc_max` double unsigned DEFAULT NULL,              |
+|            |   `Cop_proc_addr` varchar(64) DEFAULT NULL,                 |
+|            |   `Cop_wait_avg` double unsigned DEFAULT NULL,              |
+|            |   `Cop_wait_p90` double unsigned DEFAULT NULL,              |
+|            |   `Cop_wait_max` double unsigned DEFAULT NULL,              |
+|            |   `Cop_wait_addr` varchar(64) DEFAULT NULL,                 |
+|            |   `Mem_max` bigint(20) unsigned DEFAULT NULL,               |
 |            |   `Query` varchar(4096) DEFAULT NULL                        |
 |            | ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
 +------------+-------------------------------------------------------------+
