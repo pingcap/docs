@@ -42,7 +42,7 @@ mysql> select @@sql_mode;                                                       
 mysql> set @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SELECT * FROM mysql.user WHERE user='xxxx';
+mysql> SELECT * FROM mysql.user WHERE user='idontexist';
 Empty set (0.00 sec)
 
 mysql> GRANT ALL PRIVILEGES ON test.* TO 'xxxx'@'%' IDENTIFIED BY 'yyyyy';
