@@ -29,35 +29,58 @@ Use the following statement to grant the `xxx` user all privileges on all databa
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-If the granted user does not exist, TiDB will not automatically create a user by default. This behavior can be changed by un-setting the `NO_AUTO_CREATE_USER` SQL Mode. This is **not recommended** since it presents a security risk: miss-spelling a username will result in a new user created with an empty password.
+By default, `GRANT` statements will return an error if the user specified does not exist. This behavior depends on if the SQL Mode `NO_AUTO_CREATE_USER` is specified:
 
 ```sql
-mysql> select @@sql_mode;                                                                                                                                                                             +-------------------------------------------------------------------------------------------------------------------------------------------+
+mysql> SET sql_mode=DEFAULT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT @@sql_mode;
++-------------------------------------------------------------------------------------------------------------------------------------------+
 | @@sql_mode                                                                                                                                |
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> set @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+mysql> SELECT * FROM mysql.user WHERE user='idontexist';
+Empty set (0.00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
+ERROR 1105 (HY000): You are not allowed to create a user with GRANT
+
+mysql> SELECT user,host,password FROM mysql.user WHERE user='idontexist';
+Empty set (0.00 sec)
+```
+
+In the following example, the user `idontexist` is automatically created with an empty password because the SQL Mode `NO_AUTO_CREATE_USER` was not set. This is **not recommended** since it presents a security risk: miss-spelling a username will result in a new user created with an empty password:
+
+```sql
+mysql> SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT @@sql_mode;
++-----------------------------------------------------------------------------------------------------------------------+
+| @@sql_mode                                                                                                            |
++-----------------------------------------------------------------------------------------------------------------------+
+| ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION |
++-----------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
 
 mysql> SELECT * FROM mysql.user WHERE user='idontexist';
 Empty set (0.00 sec)
 
-mysql> GRANT ALL PRIVILEGES ON test.* TO 'xxxx'@'%' IDENTIFIED BY 'yyyyy';
-Query OK, 0 rows affected (0.00 sec)
+mysql> GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
+Query OK, 1 row affected (0.05 sec)
 
-mysql> SELECT user,host FROM mysql.user WHERE user='xxxx';
-+------|------+
-| user | host |
-+------|------+
-| xxxx | %    |
-+------|------+
+mysql> SELECT user,host,password FROM mysql.user WHERE user='idontexist';
++------------+------+----------+
+| user       | host | password |
++------------+------+----------+
+| idontexist | %    |          |
++------------+------+----------+
 1 row in set (0.00 sec)
 ```
-
-In this example, `xxxx@%` is the user that is automatically created.
 
 > **Note:**
 >
