@@ -29,7 +29,7 @@ Use the following statement to grant the `xxx` user all privileges on all databa
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-If the granted user does not exist, TiDB will not automatically create a user by default. This beahavior follows `NO_AUTO_CREATE_USER` in SQL Mode. If `NO_AUTO_CREATE_USER` is deleted from SQL Mode, TiDB will automatically create a user when the granted user does not exist.
+If the granted user does not exist, TiDB will not automatically create a user by default. This behavior can be changed by un-setting the `NO_AUTO_CREATE_USER` SQL Mode. This is **not recommended** since it presents a security risk: miss-spelling a username will result in a new user created with an empty password.
 
 ```sql
 mysql> select @@sql_mode;                                                                                                                                                                             +-------------------------------------------------------------------------------------------------------------------------------------------+
