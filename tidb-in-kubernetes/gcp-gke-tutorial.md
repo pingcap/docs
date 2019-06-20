@@ -1,3 +1,9 @@
+---
+title: Deploy TiDB Operator and TiDB cluster on GCP GKE
+summary: Learn how to deploy TiDB Operator and TiDB cluster on GCP GKE.
+category: how-to
+---
+
 # Deploy TiDB Operator and TiDB cluster on GCP GKE
 
 This document describes how to deploy TiDB Operator and a TiDB cluster on GCP GKE with your laptop (Linux or macOS) for development or testing.
@@ -24,6 +30,8 @@ After you install Google Cloud SDK, you need to run `gcloud init` to [perform in
 
 If the GCP project is new, make sure the relevant APIs are enabled:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 gcloud services enable cloudresourcemanager.googleapis.com && \
 gcloud services enable cloudbilling.googleapis.com && \
@@ -42,14 +50,27 @@ The terraform script expects three environment variables. You can let Terraform 
 * `TF_VAR_GCP_REGION`: The region to create the resources in, for example: `us-west1`.
 * `TF_VAR_GCP_PROJECT`: The name of the GCP project.
 
-> *Note*: The service account must have sufficient permissions to create resources in the project. The `Project Editor` primitive will accomplish this.
+> **Note:**
+>
+> The service account must have sufficient permissions to create resources in the project. The `Project Editor` primitive will accomplish this.
 
-To set the three environment variables, for example, you can enter in your terminal:
+To set the three environment variables, for example, you can enter the following commands in your terminal and replace the values with the path to the JSON file you have downloaded, the GCP region and your GCP project name:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
-# Replace the values with the path to the JSON file you have downloaded, the GCP region and your GCP project name.
 export TF_VAR_GCP_CREDENTIALS_PATH="/Path/to/my-project.json"
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
 export TF_VAR_GCP_REGION="us-west1"
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
 export TF_VAR_GCP_PROJECT="my-project"
 ```
 
@@ -64,16 +85,30 @@ The default setup creates a new VPC, two subnetworks, and an f1-micro instance a
 * 3 n1-standard-16 instances for TiDB
 * 3 n1-standard-2 instances for monitor
 
-> *Note*: The number of nodes created depends on how many availability zones there are in the chosen region. Most have 3 zones, but us-central1 has 4. See [Regions and Zones](https://cloud.google.com/compute/docs/regions-zones/) for more information and see the [Customize](#customize) section on how to customize node pools in a regional cluster.
+> *Note*:
+>
+> The number of nodes created depends on how many availability zones there are in the chosen region. Most have 3 zones, but us-central1 has 4. See [Regions and Zones](https://cloud.google.com/compute/docs/regions-zones/) for more information and see the [Customize](#customize) section on how to customize node pools in a regional cluster.
 
 The default setup, as listed above, requires at least 91 CPUs which exceed the default CPU quota of a GCP project. To increase your project's quota, follow the instructions [here](https://cloud.google.com/compute/quotas). You need more CPUs if you need to scale out.
 
 Now that you have configured everything needed, you can launch the script to deploy the TiDB cluster:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
-git clone --depth=1 https://github.com/pingcap/tidb-operator
+git clone --depth=1 https://github.com/pingcap/tidb-operator && \
 cd tidb-operator/deploy/gcp
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
 terraform init
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
 terraform apply
 ```
 
@@ -101,30 +136,63 @@ tidb_version = v3.0.0-rc.1
 
 ## Access the database
 
-After `terraform apply` is successful, the TiDB cluster can be accessed by SSHing into the bastion machine and connecting via MySQL:
+After `terraform apply` is successful, the TiDB cluster can be accessed by SSHing into the bastion machine and connecting via MySQL (Replace the `<>` parts with values from the output):
+
+{{< copyable "shell-regular" >}}
 
 ```bash
-# Replace the `<>` parts with values from the output.
 gcloud compute ssh bastion --zone <zone>
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
 mysql -h <tidb_ilb_ip> -P 4000 -u root
 ```
 
-> *Note*: You need to install the MySQL client before you connect to TiDB via MySQL.
+> **Note**:
+>
+> You need to install the MySQL client before you connect to TiDB via MySQL.
 
 ## Interact with the cluster
 
 You can interact with the cluster using `kubectl` and `helm` with the kubeconfig file `credentials/kubeconfig_<cluster_name>` as follows. The default `cluster_name` is `my-cluster`, which can be changed in `variables.tf`.
 
-```bash
-# By specifying --kubeconfig argument.
-kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb
-helm --kubeconfig credentials/kubeconfig_<cluster_name> ls
+There are two ways to do this:
 
-# Or setting KUBECONFIG environment variable.
-export KUBECONFIG=$PWD/credentials/kubeconfig_<cluster_name>
-kubectl get po -n tidb
-helm ls
-```
+- By specifying --kubeconfig argument:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb
+    ```
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    helm --kubeconfig credentials/kubeconfig_<cluster_name> ls
+    ```
+
+- Or setting KUBECONFIG environment variable:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    export KUBECONFIG=$PWD/credentials/kubeconfig_<cluster_name>
+    ```
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    kubectl get po -n tidb
+    ```
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    helm ls
+    ```
 
 ## Upgrade
 
@@ -141,8 +209,13 @@ variable "tidb_version" {
 
 The upgrading does not finish immediately. You can run `kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb --watch` to verify that all pods are in `Running` state. Then you can [access the database](#access-the-database) and use `tidb_version()` to see whether the cluster has been upgraded successfully:
 
+{{< copyable "sql" >}}
+
 ```sql
-MySQL [(none)]> select tidb_version();
+select tidb_version();
+```
+
+```
 *************************** 1. row ***************************
 tidb_version(): Release Version: v3.0.0-rc.2
 Git Commit Hash: 06f3f63d5a87e7f0436c0618cf524fea7172eb93
@@ -170,7 +243,9 @@ variable "tidb_count" {
 }
 ```
 
-> *Note*: Incrementing the node count creates a node per GCP availability zone.
+> **Note:**
+>
+> Incrementing the node count creates a node per GCP availability zone.
 
 ## Customize
 
@@ -188,9 +263,13 @@ Currently, there are not too many parameters exposed to be customized. However, 
 
 The cluster is created as a regional, as opposed to a zonal cluster. This means that GKE replicates node pools to each availability zone. This is desired to maintain high availability, however for the monitoring services, like Grafana, this is potentially unnecessary. It is possible to manually remove nodes if desired via `gcloud`.
 
-> *Note*: GKE node pools are managed instance groups, so a node deleted by `gcloud compute instances delete` will be automatically recreated and added back to the cluster.
+> **Note:**
+>
+> GKE node pools are managed instance groups, so a node deleted by `gcloud compute instances delete` will be automatically recreated and added back to the cluster.
 
 Suppose that you need to delete a node from the monitor pool. You can first do:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 gcloud compute instance-groups managed list | grep monitor
@@ -198,7 +277,7 @@ gcloud compute instance-groups managed list | grep monitor
 
 And the result will be something like this:
 
-```bash
+```
 gke-my-cluster-monitor-pool-08578e18-grp  us-west1-b  zone   gke-my-cluster-monitor-pool-08578e18  0     0            gke-my-cluster-monitor-pool-08578e18  no
 gke-my-cluster-monitor-pool-7e31100f-grp  us-west1-c  zone   gke-my-cluster-monitor-pool-7e31100f  1     1            gke-my-cluster-monitor-pool-7e31100f  no
 gke-my-cluster-monitor-pool-78a961e5-grp  us-west1-a  zone   gke-my-cluster-monitor-pool-78a961e5  1     1            gke-my-cluster-monitor-pool-78a961e5  no
@@ -206,20 +285,28 @@ gke-my-cluster-monitor-pool-78a961e5-grp  us-west1-a  zone   gke-my-cluster-moni
 
 The first column is the name of the managed instance group, and the second column is the zone in which it was created. You also need the name of the instance in that group, and you can get it by running:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 gcloud compute instance-groups managed list-instances <the-name-of-the-managed-instance-group> --zone <zone>
 ```
 
 For example:
 
-```bash
-$ gcloud compute instance-groups managed list-instances gke-my-cluster-monitor-pool-08578e18-grp --zone us-west1-b
+{{< copyable "shell-regular" >}}
 
+```bash
+gcloud compute instance-groups managed list-instances gke-my-cluster-monitor-pool-08578e18-grp --zone us-west1-b
+```
+
+```
 NAME                                       ZONE        STATUS   ACTION  INSTANCE_TEMPLATE                     VERSION_NAME  LAST_ERROR
 gke-my-cluster-monitor-pool-08578e18-c7vd  us-west1-b  RUNNING  NONE    gke-my-cluster-monitor-pool-08578e18
 ```
 
 Now you can delete the instance by specifying the name of the managed instance group and the name of the instance, for example:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 gcloud compute instance-groups managed delete-instances gke-my-cluster-monitor-pool-08578e18-grp --instances=gke-my-cluster-monitor-pool-08578e18-c7vd --zone us-west1-b
@@ -229,14 +316,17 @@ gcloud compute instance-groups managed delete-instances gke-my-cluster-monitor-p
 
 When you are done, the infrastructure can be torn down by running:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 terraform destroy
 ```
 
 You have to manually delete disks in the Google Cloud Console, or with `gcloud` after running `terraform destroy` if you do not need the data anymore.
 
-> *Note*: When `terraform destroy` is running, an error with the following message might occur: `Error reading Container Cluster "my-cluster": Cluster "my-cluster" has status "RECONCILING" with message""`. This happens when GCP is upgrading the kubernetes master node, which it does automatically at times. While this is happening, it is not possible to delete the cluster. When it is done, run `terraform destroy` again.
-
+> **Note:**
+>
+> When `terraform destroy` is running, an error with the following message might occur: `Error reading Container Cluster "my-cluster": Cluster "my-cluster" has status "RECONCILING" with message""`. This happens when GCP is upgrading the kubernetes master node, which it does automatically at times. While this is happening, it is not possible to delete the cluster. When it is done, run `terraform destroy` again.
 
 ## More information
 
