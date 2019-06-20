@@ -203,7 +203,7 @@ For example, to upgrade the cluster to version 3.0.0-rc.1, modify the `tidb_vers
  }
 ```
 
-> **Note**:
+> **Note:**
 > 
 > The upgrading doesn't finish immediately. You can watch the upgrading process by `kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb --watch`.
 
@@ -219,7 +219,7 @@ For example, to scale out the cluster, you can modify the number of TiDB instanc
  }
 ```
 
-> **Note**:
+> **Note:**
 >
 > Currently, scaling in is NOT supported because we cannot determine which node to scale. Scaling out needs a few minutes to complete, you can watch the scaling out by `kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb --watch`.
 
@@ -258,4 +258,6 @@ It may take some while to finish destroying the cluster.
 terraform destroy
 ```
 
-> **Note:** You have to manually delete the EBS volumes in AWS console after running `terraform destroy` if you do not need the data on the volumes anymore.
+> **Note:**
+>
+> You have to manually delete the EBS volumes in AWS console after running `terraform destroy` if you do not need the data on the volumes anymore.
