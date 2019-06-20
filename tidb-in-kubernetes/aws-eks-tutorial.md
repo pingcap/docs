@@ -145,36 +145,41 @@ mysql -h <tidb_dns> -P <tidb_port> -u root
 
 The default value of `cluster_name` is `my-cluster`. If the DNS name is not resolvable, be patient and wait a few minutes.
 
-You can interact with the EKS cluster using `kubectl` and `helm` with the kubeconfig file `credentials/kubeconfig_<cluster_name>` as follows.
+You can interact with the EKS cluster using `kubectl` and `helm` with the kubeconfig file `credentials/kubeconfig_<cluster_name>` in the following two ways.
 
-Specify `--kubeconfig` argument:
+- By specifying `--kubeconfig` argument:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```shell
-kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb
-helm --kubeconfig credentials/kubeconfig_<cluster_name> ls
-```
+    ```shell
+    kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb 
+    ```
+    
+    {{< copyable "shell-regular" >}}
 
-Or set KUBECONFIG environment variable:
+    ```shell
+    helm --kubeconfig credentials/kubeconfig_<cluster_name> ls
+    ```
 
-{{< copyable "shell-regular" >}}
+- Or by setting KUBECONFIG environment variable:
 
-```shell
-export KUBECONFIG=$PWD/credentials/kubeconfig_<cluster_name>
-```
+    {{< copyable "shell-regular" >}}
 
-{{< copyable "shell-regular" >}}
+    ```shell
+    export KUBECONFIG=$PWD/credentials/kubeconfig_<cluster_name>
+    ```
 
-```shell
-kubectl get po -n tidb
-```
+    {{< copyable "shell-regular" >}}
 
-{{< copyable "shell-regular" >}}
+    ```shell
+    kubectl get po -n tidb
+    ```
 
-```shell
-helm ls
-```
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    helm ls
+    ```
 
 ## Monitor
 
