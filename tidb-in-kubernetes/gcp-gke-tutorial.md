@@ -85,7 +85,7 @@ The default setup creates a new VPC, two subnetworks, and an f1-micro instance a
 * 3 n1-standard-16 instances for TiDB
 * 3 n1-standard-2 instances for monitor
 
-> *Note*:
+> **Note:**
 >
 > The number of nodes created depends on how many availability zones there are in the chosen region. Most have 3 zones, but us-central1 has 4. See [Regions and Zones](https://cloud.google.com/compute/docs/regions-zones/) for more information and see the [Customize](#customize) section on how to customize node pools in a regional cluster.
 
@@ -150,7 +150,7 @@ gcloud compute ssh bastion --zone <zone>
 mysql -h <tidb_ilb_ip> -P 4000 -u root
 ```
 
-> **Note**:
+> **Note:**
 >
 > You need to install the MySQL client before you connect to TiDB via MySQL.
 
@@ -327,7 +327,3 @@ You have to manually delete disks in the Google Cloud Console, or with `gcloud` 
 > **Note:**
 >
 > When `terraform destroy` is running, an error with the following message might occur: `Error reading Container Cluster "my-cluster": Cluster "my-cluster" has status "RECONCILING" with message""`. This happens when GCP is upgrading the kubernetes master node, which it does automatically at times. While this is happening, it is not possible to delete the cluster. When it is done, run `terraform destroy` again.
-
-## More information
-
-Please view our [operation guide](./operation-guide.md).
