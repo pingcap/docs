@@ -1,7 +1,7 @@
 ---
 title: Deploy TiDB to Kubernetes on Google Cloud
 summary: Learn how to deploy TiDB on Google Cloud using Kubernetes.
-category: operations
+category: how-to
 ---
 
 # Deploy TiDB to Kubernetes on Google Cloud
@@ -94,7 +94,7 @@ Install `helm`:
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
 ```
 
-Copy `helm` to your `$HOME` directory so that it will persist after the Cloud Shell reaches its idle timeout:
+Copy `helm` to your `$HOME` directory so that it persists after the Cloud Shell reaches its idle timeout:
 
 {{< copyable "shell-regular" >}}
 
@@ -130,36 +130,45 @@ Helm repo (http://charts.pingcap.org/) houses PingCAP managed charts, such as ti
 {{< copyable "shell-regular" >}}
 
 ```shell
-helm repo add pingcap http://charts.pingcap.org/
+helm repo add pingcap http://charts.pingcap.org/ && \
 helm repo list
 ```
 
-Then you can check the avaliable charts:
+Then you can check the available charts:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 helm repo update
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
 helm search tidb-cluster -l
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
 helm search tidb-operator -l
 ```
 
 ## Deploy TiDB Operator
 
-> **Note:** ${chartVersion} will be used in the rest of the document to represent the chart version, e.g. `v1.0.0-beta.3`.
+Note that `${chartVersion}` is used in the rest of the document to represent the chart version, e.g. `v1.0.0-beta.3`.
 
 The first TiDB component we are going to install is the TiDB Operator, using a Helm Chart. TiDB Operator is the management system that works with Kubernetes to bootstrap your TiDB cluster and keep it running. This step assumes you are in the `tidb-operator` working directory:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-kubectl apply -f ./manifests/crd.yaml &&
-kubectl apply -f ./manifests/gke/persistent-disk.yml &&
+kubectl apply -f ./manifests/crd.yaml && \
+kubectl apply -f ./manifests/gke/persistent-disk.yml && \
 helm install pingcap/tidb-operator -n tidb-admin --namespace=tidb-admin --version=${chartVersion}
 ```
 
 We can watch the operator come up with:
-
 
 {{< copyable "shell-regular" >}}
 
@@ -179,7 +188,7 @@ Now with a single command we can bring-up a full TiDB cluster:
 helm install pingcap/tidb-cluster -n demo --namespace=tidb --set pd.storageClassName=pd-ssd,tikv.storageClassName=pd-ssd --version=${chartVersion}
 ```
 
-It will take a few minutes to launch. You can monitor the progress with:
+It takes a few minutes to launch. You can monitor the progress with:
 
 {{< copyable "shell-regular" >}}
 
@@ -269,7 +278,7 @@ To do so, use the following command:
 kubectl -n tidb port-forward svc/demo-grafana 3000:3000 &>/dev/null &
 ```
 
-In Cloud Shell, click on the Web Preview button and enter 3000 for the port. This will open a new browser tab pointing to the Grafana dashboards. Alternatively, use the following URL https://ssh.cloud.google.com/devshell/proxy?port=3000 in a new tab or window.
+In Cloud Shell, click on the Web Preview button and enter 3000 for the port. This opens a new browser tab pointing to the Grafana dashboards. Alternatively, use the following URL https://ssh.cloud.google.com/devshell/proxy?port=3000 in a new tab or window.
 
 If not using Cloud Shell, point a browser to `localhost:3000`.
 
@@ -288,7 +297,7 @@ The above commands only delete the running pods, the data is persistent. If you 
 {{< copyable "shell-regular" >}}
 
 ```shell
-kubectl delete pvc -n tidb -l app.kubernetes.io/instance=demo,app.kubernetes.io/managed-by=tidb-operator &&
+kubectl delete pvc -n tidb -l app.kubernetes.io/instance=demo,app.kubernetes.io/managed-by=tidb-operator && \
 kubectl get pv -l app.kubernetes.io/namespace=tidb,app.kubernetes.io/managed-by=tidb-operator,app.kubernetes.io/instance=demo -o name | xargs -I {} kubectl patch {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
 ```
 
