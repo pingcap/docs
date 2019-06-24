@@ -45,7 +45,7 @@ After <a href="https://github.com/datacharmer/dbdeployer">installing DBdeployer<
 dbdeployer downloads get-unpack --overwrite --delete-after-unpack mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz
 </pre>
 
-Install TiDB 3.0 using the installed MySQL 5.7 client:
+Install TiDB using the installed MySQL 5.7 client:
 <pre>
 dbdeployer downloads get-unpack tidb-master-linux-amd64.tar.gz --prefix=tidb --unpack-version=3.0.0 --overwrite --delete-after-unpack
 </pre>
