@@ -16,7 +16,7 @@ _version_tag="$(date '+%Y%m%d')"
 # used to debug template setting error
 
 
-docs_versions=(dev v3.0)
+docs_versions=(dev v3.0 v2.1)
 
 for i in "${docs_versions[@]}"
 do
@@ -38,16 +38,3 @@ do
     -V include-after="\\input{templates/copyright.tex}" \
     $version -s -o $output_path
 done
-
-# pandoc -N --toc --smart --latex-engine=xelatex \
-#     --template=templates/template.tex \
-#     --columns=80 \
-#     --listings \
-#     -V title="TiDB Documentation" \
-#     -V author="PingCAP Inc." \
-#     -V date="${_version_tag}" \
-#     -V CJKmainfont="${MAINFONT}" \
-#     -V fontsize=12pt \
-#     -V geometry:margin=1in \
-#     -V include-after="\\input{templates/copyright.tex}" \
-#     dev/doc.md -s -o output.pdf
