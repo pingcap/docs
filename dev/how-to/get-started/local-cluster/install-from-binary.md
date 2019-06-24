@@ -54,7 +54,7 @@ See the [production deployment](/how-to/deploy/from-tarball/production-environme
 
 ### Download the official binary package
 
-```
+```bash
 # Download the package.
 $ wget http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
 $ wget http://download.pingcap.org/tidb-latest-linux-amd64.sha256

@@ -54,17 +54,17 @@ See the [production deployment](/how-to/deploy/from-tarball/production-environme
 
 ### Download the official binary package
 
-```
+```bash
 # Download the package.
-$ wget http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
-$ wget http://download.pingcap.org/tidb-latest-linux-amd64.sha256
+$ wget https://download.pingcap.org/tidb-v2.1-linux-amd64.tar.gz
+$ wget https://download.pingcap.org/tidb-v2.1-linux-amd64.sha256
 
 # Check the file integrity. If the result is OK, the file is correct.
-$ sha256sum -c tidb-latest-linux-amd64.sha256
+$ sha256sum -c tidb-v2.1-linux-amd64.sha256
 
 # Extract the package.
-$ tar -xzf tidb-latest-linux-amd64.tar.gz
-$ cd tidb-latest-linux-amd64
+$ tar -xzf tidb-v2.1-linux-amd64.tar.gz
+$ cd tidb-v2.1-linux-amd64
 ```
 
 ### Start

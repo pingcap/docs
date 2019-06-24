@@ -29,15 +29,12 @@ Similar to [Homebrew](/how-to/get-started/local-cluster/install-from-homebrew.md
 
 After <a href="https://github.com/datacharmer/dbdeployer">installing DBdeployer</a>, install a MySQL 5.7 client:
 <pre>
-curl -LO https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.25-macos10.14-x86_64.tar.gz
-dbdeployer unpack mysql-5.7.25-macos10.14-x86_64.tar.gz
+dbdeployer downloads get-unpack --overwrite --delete-after-unpack mysql-5.7.26-macos10.14-x86_64.tar.gz
 </pre>
 
 Install TiDB using the installed MySQL 5.7 client:
 <pre>
-curl -O https://download.pingcap.org/tidb-master-darwin-amd64.tar.gz
-dbdeployer unpack tidb-master-darwin-amd64.tar.gz --unpack-version=3.0.0
-dbdeployer deploy single 3.0.0 --client-from=5.7.25
+dbdeployer downloads get-unpack tidb-master-darwin-amd64.tar.gz --prefix=tidb --unpack-version=3.0.0 --overwrite --delete-after-unpack
 </pre>  
 
 </section>
@@ -45,15 +42,12 @@ dbdeployer deploy single 3.0.0 --client-from=5.7.25
 
 After <a href="https://github.com/datacharmer/dbdeployer">installing DBdeployer</a>, install a MySQL 5.7 client:
 <pre>
-dbdeployer remote get mysql-5.7.25
-dbdeployer unpack mysql-5.7.25.tar.xz
+dbdeployer downloads get-unpack --overwrite --delete-after-unpack mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz
 </pre>
 
-Install TiDB using the installed MySQL 5.7 client:
+Install TiDB 3.0 using the installed MySQL 5.7 client:
 <pre>
-wget https://download.pingcap.org/tidb-master-linux-amd64.tar.gz
-dbdeployer unpack tidb-master-linux-amd64.tar.gz --unpack-version=3.0.0
-dbdeployer deploy single 3.0.0 --client-from=5.7.25
+dbdeployer downloads get-unpack tidb-master-linux-amd64.tar.gz --prefix=tidb --unpack-version=3.0.0 --overwrite --delete-after-unpack
 </pre>
 
   </section>

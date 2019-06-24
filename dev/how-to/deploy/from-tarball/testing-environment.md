@@ -104,7 +104,7 @@ See the following table for the default ports for the optional TiDB components:
 
 ## Download the official binary package
 
-```
+```bash
 # Download the package.
 $ wget http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
 $ wget http://download.pingcap.org/tidb-latest-linux-amd64.sha256
