@@ -2,7 +2,7 @@
 title: TiDB Binlog Cluster Upgrade
 summary: Learn how to upgrade the cluster version of TiDB Binlog.
 category: reference
-aliases: ['/docs/tools/binlog/upgrade/']
+aliases: ['/docs/tools/binlog/upgrade/','/docs-cn/dev/reference/tools/tidb-binlog/upgrade/']
 ---
 
 # TiDB Binlog Cluster Upgrade
@@ -21,7 +21,7 @@ The corresponding relationship between TiDB Binlog versions and TiDB versions is
 
 > **Note:**
 >
-> If importing the full data is acceptable, you can abandon the old version and deploy TiDB Binlog following [TiDB Binlog Cluster Deployment](/tools/binlog/deploy.md)
+> If importing the full data is acceptable, you can abandon the old version and deploy TiDB Binlog following [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog-deploy.md)
 
 
 If you want to resume replication from the original checkpoint, perform the following steps to upgrade TiDB Binlog:
