@@ -10,11 +10,7 @@ This document collects the available downloads for most officially maintained ve
 
 ## TiDB-Binlog and Lightning
 
-<<<<<<< HEAD
 If you want to download the latest version of [TiDB Binlog](/dev/reference/tidb-binlog-overview.md) or [Lightning](/dev/reference/tools/tidb-lightning/overview.md), directly download the TiDB package, because both TiDB-Binlog and Lightning are included in the TiDB package.
-=======
-If you want to download the latest version of [TiDB-Binlog](/reference/tools/tidb-binlog/overview.md) or [Lightning](/reference/tools/tidb-lightning/overview.md), directly download the TiDB package, because both TiDB-Binlog and Lightning are included in the TiDB package.
->>>>>>> docs/master
 
 In addition, the Kafka version of TiDB-Binlog is also provided.
 
@@ -44,10 +40,5 @@ This enterprise tools package includes all the following tools:
 - Syncer
 - Loader
 - mydumper
-<<<<<<< HEAD
 - [binlogctl](/dev/reference/tidb-binlog-overview.md#binlogctl-guide)
-=======
-- [binlogctl](/reference/tools/tidb-binlog/overview.md#binlogctl-guide)
->>>>>>> docs/master
-- ddl_checker
 - [sync_diff_inspector](/reference/tools/sync-diff-inspector.md)
