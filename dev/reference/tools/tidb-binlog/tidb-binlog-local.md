@@ -2,7 +2,6 @@
 title: TiDB Binlog Local Deployment
 summary: Learn how to install, deploy and monitor TiDB Binlog.
 category: reference
-aliases: ['/docs/tools/binlog/tidb-binlog-local/']
 ---
 
 # TiDB Binlog Local Deployment
@@ -36,7 +35,11 @@ Drainer collects binlog files from each Pump node, converts them into specified 
 
 ### Download
 
+<<<<<<< HEAD
 TiDB Binlog can be [downloaded](/dev/reference/tools/download.md) as part of the Enterprise Tools package.
+=======
+TiDB-Binlog can be [downloaded](/reference/tools/download.md) as part of the Enterprise Tools package.
+>>>>>>> docs/master
 
 ### Deploy TiDB Binlog
 

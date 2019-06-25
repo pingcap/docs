@@ -8,7 +8,7 @@ category: how-to
 
 This tutorial starts with a simple TiDB-Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, Pump, and Drainer), set up to push data into a MariaDB Server instance.
 
-This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](/dev/architecture.md), who may have already set up a TiDB cluster (not mandatory), and who wants to gain hands-on experience with TiDB-Binlog. This tutorial is a good way to "kick the tires" of TiDB-Binlog and to familiarize yourself with the concepts of its architecture.
+This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](/architecture.md), who may have already set up a TiDB cluster (not mandatory), and who wants to gain hands-on experience with TiDB-Binlog. This tutorial is a good way to "kick the tires" of TiDB-Binlog and to familiarize yourself with the concepts of its architecture.
 
 > **Warning:**
 >
@@ -24,7 +24,11 @@ You can use TiDB-Binlog for incremental backups, to replicate data from one TiDB
 
 TiDB-Binlog is particularly useful when you migrate data from MySQL or MariaDB to TiDB, in which case you may use the TiDB DM (Data Migration) platform to get data from a MySQL/MariaDB cluster into TiDB, and then use TiDB-Binlog to keep a separate, downstream MySQL/MariaDB instance/cluster in sync with your TiDB cluster. TiDB-Binlog enables application traffic to TiDB to be pushed to a downstream MySQL or MariaDB instance/cluster, which reduces the risk of a migration to TiDB because you can easily revert the application to MySQL or MariaDB without downtime or data loss.
 
+<<<<<<< HEAD
 See [TiDB-Binlog Cluster User Guide](/dev/reference/tidb-binlog-overview.md) for more information.
+=======
+See [TiDB-Binlog Cluster User Guide](/reference/tools/tidb-binlog/overview.md) for more information.
+>>>>>>> docs/master
 
 ## Architecture
 
@@ -42,7 +46,7 @@ We're using MariaDB Server in this case instead of MySQL Server because RHEL/Cen
 sudo yum install -y mariadb-server
 ```
 
-Even if you've already started a TiDB cluster, it will be easier to follow along with this tutorial where we will set up a new, simple cluster. We will install from a tarball, using a simplified form of the [Local Deployment](/dev/how-to/get-started/local-cluster/install-from-binary.md) guide. You may also wish to refer to [Testing Deployment from Binary Tarball](/dev/how-to/deploy/from-tarball/testing-environment.md) for best practices of establishing a real testing deployment, but that goes beyond the scope of this tutorial.
+Even if you've already started a TiDB cluster, it will be easier to follow along with this tutorial where we will set up a new, simple cluster. We will install from a tarball, using a simplified form of the [Local Deployment](/how-to/get-started/local-cluster/install-from-binary.md) guide. You may also wish to refer to [Testing Deployment from Binary Tarball](/how-to/deploy/from-tarball/testing-environment.md) for best practices of establishing a real testing deployment, but that goes beyond the scope of this tutorial.
 
 ```bash
 curl -L http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
@@ -327,7 +331,11 @@ You should see the same rows that you inserted into TiDB when querying the Maria
 
 ## binlogctl
 
+<<<<<<< HEAD
 Information about Pumps and Drainers that have joined the cluster is stored in PD. You can use the binlogctl tool query and manipulate information about their states. See [binlogctl guide](/dev/how-to/maintain/tidb-binlog.md#binlogctl-guide) for more information.
+=======
+Information about Pumps and Drainers that have joined the cluster is stored in PD. You can use the binlogctl tool query and manipulate information about their states. See [binlogctl guide](/reference/tools/tidb-binlog/operation.md#binlogctl-guide) for more information.
+>>>>>>> docs/master
 
 Use `binlogctl` to get a view of the current status of Pumps and Drainers in the cluster:
 
