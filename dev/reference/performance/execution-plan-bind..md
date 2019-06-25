@@ -6,7 +6,7 @@ category: reference
 
 # Execution Plan Binding
 
-In [Optimizer Hints](/dev/reference/performance/optimizer-hints.md) we have introduced how to select a specific execution plan using Hint. However, sometimes we need to interfere with execution selection without modifying SQL statements. Execution Plan Binding provides a set of functionalities to do this.
+The [Optimizer Hints](/reference/performance/optimizer-hints.md) document introduces how to select a specific execution plan using Hint. However, sometimes you need to interfere with execution selection without modifying SQL statements. Execution Plan Binding provides a set of functionalities to do this.
 
 ## Syntax
 
@@ -20,6 +20,8 @@ This statement binds SQL execution plans at the GLOBAL or SESSION level. The def
 
 `Parameterization` is a process that converts a constant in SQL to a variable parameter, with standardized processing on the spaces and line breaks in the SQL statement, for example,
 
+{{< copyable "sql" >}}
+
 ```sql
 select * from t where a >    1
 -- parameterized:
@@ -32,18 +34,20 @@ select * from t where a > ？
 >
 > - This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `select * from t where a > ?`
 >
->    ```sql
->    CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
->   ```
+>     ```sql
+>     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
+>     ```
 >
 > - This binding will fail because the original SQL statement is processed as `select * from t where a > ?`, while the bound SQL statement is processed differently as `select * from t where b > ?`.
 >
->    ```sql
->    CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
->    ```
+>     ```sql
+>     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
+>     ```
 
 
 ### Remove binding
+
+{{< copyable "sql" >}}
 
 ```sql
 DROP [GLOBAL | SESSION] BINDING FOR SelectStmt
@@ -53,14 +57,16 @@ This statement removes a specified execution plan binding at the GLOBAL or SESSI
 
 ### View binding
 
+{{< copyable "sql" >}}
+
 ```sql
 SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 ```
 
 This statement outputs the execution plan bindings at the GLOBAL or SESSION level. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
 
-| Column Name | Note            |
-| -------- | ------------- |
+| Column Name | Note  |
+| :-------- | :------------- |
 | original_sql  |  Original SQL statement after parameterization |
 | bind_sql | Bound SQL statement with hints |
 | default_db | Default database |
