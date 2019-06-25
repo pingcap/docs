@@ -9,47 +9,24 @@ aliases: ['/docs/tools/tidb-controller/']
 
 TiDB Controller is a command line tool of TiDB, usually used to obtain the status information of TiDB for debugging.
 
-## Compile from source code
-
-- Compilation environment requirement: [Go](https://golang.org/) Version 1.7 or later
-- Compilation procedures: Go to the root directory of the [TiDB Controller project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
-- Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
-
 ## Usage introduction
 
-The usage of `tidb-ctl` consists of command (including subcommand), option, and flag.
+The parameters of `tidb-ctl` consist of commands, subcommands, options, and flags.
 
 - command: characters without `-` or `--`
+- subcommand: characters without `-` or `--` that follow a command
 - option: characters with `-` or `--`
-- flag: characters exactly following the command or option, passing value to the command or option
+- flag: characters exactly following a command/subcommand or option, passing value to the command/subcommand or option
 
 Usage example: `tidb-ctl schema in mysql -n db`
 
 - `schema`: the command
-- `in`: the subcommand of schema
+- `in`: the subcommand of `schema`
 - `mysql`: the flag of `in`
 - `-n`: the option
 - `db`: the flag of `-n`
 
-### Get help
-
-Use `tidb-ctl -h/--help` to get the help information. `tidb-ctl` consists of multiple layers of commands. You can use `-h/--help` to get the help information of `tidb-ctl` and all other subcommands.
-
-### Connect
-
-```
-tidb-ctl -H/--host {TiDB service address} -P/--port {TiDB service port}
-`tidb-ctl` has 4 connection related parameters, which are:
-```
-
-- `--host`: TiDB Service address
-- `--port`: TiDB Service port
-- `--pdhost`: PD Service address
-- `--pdport`: PD Service port
-
-`--pdhost` and `--pdport` are mainly used for the `etcd` subcommand, for example: `tidb-ctl etcd ddlinfo`. If you do not add an address and port, the default value will be used. The default address of the TiDB/PD service is 127.0.0.1 (the service address can only use the IP address). The default port of the TiDB service port is 10080, and the default port of the PD service port is 2379. **The connection option is a global option and applies to all of the following commands.**
-
-Currently, TiDB Controller supports the following subcommands. You could obtain the usage of them using the `tidb-ctl SUBCOMMAND --help` command.
+TiDB Controller supports the following commands:
 
 - `tidb-ctl base64decode`: BASE64 decode
 - `tidb-ctl decoder`: For KEY decode
@@ -60,11 +37,31 @@ Currently, TiDB Controller supports the following subcommands. You could obtain 
 - `tidb-ctl schema`: Schema information
 - `tidb-ctl table`: Table information
 
+### Get help
+
+Use `tidb-ctl -h/--help` to get usage information.
+
+TiDB Controller consists of multiple layers of commands. You can use `-h/--help` after each command/subcommand to get its respective usage information.
+
+### Connect
+
+```
+tidb-ctl -H/--host <TiDB service address> -P/--port <TiDB service port>
+`tidb-ctl` has 4 connection related parameters:
+```
+
+- `--host`: TiDB Service address (default 127.0.0.1)
+- `--port`: TiDB Service port (default 10080)
+- `--pdhost`: PD Service address (default 127.0.0.1)
+- `--pdport`: PD Service port (default 2379)
+
+`--pdhost` and `--pdport` are mainly used for the `etcd` command, for example: `tidb-ctl etcd ddlinfo`. **The connection option is a global option and applies to all of the following commands.**
+
 ### Examples
 
 The following example shows how to obtain the schema information:
 
-Use `tidb-ctl schema -h` to get the help information of the subcommands. `schema` has two subcommands: `in` and `tid`.
+Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has two subcommands: `in` and `tid`.
 
 - `in` is used to obtain the table schema of all tables in the database through the database name.
 - `tid` is used to obtain the table schema through the unique `table_id` in the whole database.
@@ -76,7 +73,7 @@ You can also use `tidb-ctl schema in -h/--help` to get the help information of t
 ##### Basic usage
 
 ```
-tidb-ctl schema in {database name}
+tidb-ctl schema in <database name>
 ```
 
 For example, `tidb-ctl schema in mysql` returns the following result:
@@ -97,9 +94,9 @@ For example, `tidb-ctl schema in mysql` returns the following result:
 ]
 ```
 
-The result is long and displayed in JSON. The above result is a truncated one.
+The result is long and displayed in JSON. (The above output is truncated.)
 
-- If you want to specify the table name, use `tidb-ctl schema in {database} -n {table name}` to filter.
+- If you want to specify the table name, use `tidb-ctl schema in <database> -n <table name>` to filter.
 
     For example, `tidb-ctl schema in mysql -n db` returns the table schema of the `db` table in the `mysql` database:
 
@@ -115,7 +112,7 @@ The result is long and displayed in JSON. The above result is a truncated one.
     }
     ```
 
-    The above result is a truncated one, too.
+    (The above output is truncated.)
     If the TiDB address in use is not the default address and port, you can use the command line argument `--host`, `--port` option, such as: `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`.
 
 #### base64decode subcommand
@@ -140,7 +137,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 - Obtian mvcc data using http api interface
 
     ```shell
-    ▶ curl "http://$IP:10080/mvcc/index/test/t/a/1?a=1"
+    $ curl "http://$IP:10080/mvcc/index/test/t/a/1?a=1"
     {
      "info": {
       "writes": [
@@ -153,7 +150,7 @@ tidb-ctl base64decode [table_id] [base64_data]
      }
     }%
 
-    ▶ curl "http://$IP:10080/mvcc/key/test/t/1"
+    $ curl "http://$IP:10080/mvcc/key/test/t/1"
     {
      "info": {
       "writes": [
@@ -170,7 +167,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 - Decode handle id (uint64) using `base64decode`.
 
   ```shell
-  ▶ tidb-ctl base64decode AAAAAAAAAAE=
+  $ tidb-ctl base64decode AAAAAAAAAAE=
   hex: 0000000000000001
   uint64: 1
   ```
@@ -178,7 +175,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 - Decode row data using `base64decode`.
 
     ```shell
-    ▶ ./tidb-ctl base64decode test.t CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
+    $ ./tidb-ctl base64decode test.t CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
     a:      1
     b:      哈哈 hello
     c is NULL
@@ -186,7 +183,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     e not found in data
 
     # if the table id of test.t is 60, you can also use below command to do the same thing.
-    ▶ ./tidb-ctl base64decode 60 CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
+    $ ./tidb-ctl base64decode 60 CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
     a:      1
     b:      哈哈 hello
     c is NULL
@@ -199,7 +196,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 - The following example shows how to decode row key. Decoding index key is similar to that.
 
     ```shell
-    ▶ ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
+    $ ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
     table_id: -9223372036854775780
     row_id: -9223372036854775558
     ```
@@ -207,7 +204,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 - The following example shows how to decode value.
 
     ```shell
-    ▶ ./tidb-ctl decoder -f value -k AhZoZWxsbyB3b3JsZAiAEA==
+    $ ./tidb-ctl decoder -f value -k AhZoZWxsbyB3b3JsZAiAEA==
     type: bytes, value: hello world
     type: bigint, value: 1024
     ```
@@ -237,3 +234,10 @@ The erro log of TiDB is wiritten in one line. You could use `tidb-ctl log` to ch
 - If you want to specify the server address, use the `-H -P` option.
 
     For example, `tidb-ctl -H 127.0.0.1 -P 10080 schema in mysql -n db`.
+
+## Compile from source code
+
+- Compilation environment requirement: [Go](https://golang.org/) Version 1.7 or later
+- Compilation procedures: Go to the root directory of the [TiDB Controller project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
+- Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
+
