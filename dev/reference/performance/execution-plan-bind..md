@@ -12,6 +12,8 @@ The [Optimizer Hints](/reference/performance/optimizer-hints.md) document introd
 
 ### Create binding
 
+{{< copyable "sql" >}}
+
 ```sql
 CREATE [GLOBAL | SESSION] BINDING FOR SelectStmt USING SelectStmt
 ```
