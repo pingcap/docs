@@ -6,7 +6,7 @@ category: reference
 
 # Information Functions
 
-TiDB supports most of the [information functions](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html) as in MySQL 5.7.
+TiDB supports most of the [information functions](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html) available in MySQL 5.7.
 
 ## Supported functions
 

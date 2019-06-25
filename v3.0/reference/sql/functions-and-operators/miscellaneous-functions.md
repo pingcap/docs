@@ -7,7 +7,7 @@ aliases: ['/docs/sql/miscellaneous-functions/']
 
 # Miscellaneous Functions
 
-TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html) as in MySQL 5.7.
+TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html) available in MySQL 5.7.
 
 ## Supported functions
 

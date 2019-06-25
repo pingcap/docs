@@ -7,7 +7,7 @@ aliases: ['/docs/sql/cast-functions-and-operators/']
 
 # Cast Functions and Operators
 
-TiDB supports all of the [cast functions and operators](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html) as in MySQL 5.7.
+TiDB supports all of the [cast functions and operators](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html) available in MySQL 5.7.
 
 | Name                                     | Description                      |
 | ---------------------------------------- | -------------------------------- |

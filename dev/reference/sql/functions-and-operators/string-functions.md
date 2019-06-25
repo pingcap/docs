@@ -6,7 +6,7 @@ category: reference
 
 # String Functions
 
-TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html) as in MySQL 5.7.
+TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html) available in MySQL 5.7.
 
 ## Supported functions
 

@@ -6,7 +6,7 @@ category: reference
 
 # Date and Time Functions
 
-TiDB supports all of the [date and time functions](https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html) as in MySQL 5.7.
+TiDB supports all of the [date and time functions](https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html) available in MySQL 5.7.
 
 **Date/Time functions**
 
