@@ -49,7 +49,7 @@
       - [Overview](how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](dev/how-to/deploy/tidb-binlog.md)
+    - [TiDB Binlog Cluster Deployment](how-to/deploy/tidb-binlog.md)
   + Configure
     - [Time Zone](how-to/configure/time-zone.md)
     - [Memory Control](how-to/configure/memory-control.md)
@@ -61,7 +61,7 @@
   + Monitor
     - [Overview](how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](how-to/monitor/monitor-a-cluster.md)
-    - [TiDB Binlog Monitoring](dev/how-to/monitor/tidb-binlog.md)
+    - [TiDB Binlog Monitoring](how-to/monitor/tidb-binlog.md)
   + Migrate
     - [Overview](how-to/migrate/overview.md)
     + Migrate from MySQL
@@ -74,7 +74,7 @@
     - [Backup and Restore](how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries (2.1.8+)](how-to/maintain/identify-slow-queries.md)
     - [Identify Slow Queries (earlier)](how-to/maintain/identify-slow-queries-21.md)
-    - [TiDB Binlog Cluster Operations](dev/how-to/maintain/tidb-binlog.md)
+    - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
@@ -82,7 +82,7 @@
     - [Upgrade to TiDB 2.1](how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
-    - [TiDB Binlog Cluster Upgrade](dev/how-to/upgrade/tidb-binlog.md)
+    - [TiDB Binlog Cluster Upgrade](how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](how-to/troubleshoot/data-migration.md)
@@ -255,7 +255,7 @@
     - [Tune TiKV](reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](reference/tispark.md)
-  - [TiDB Binlog Cluster Overview](dev/reference/tidb-binlog-overview.md)
+  - [TiDB Binlog Cluster Overview](reference/tidb-binlog-overview.md)
   + Tools
     - [Mydumper](reference/tools/mydumper.md)
     - [Syncer](reference/tools/syncer.md)
