@@ -354,7 +354,7 @@ You can use `SHOW GRANTS` or `SHOW GRANTS FOR CURRENT_USER()` to check the curre
 
 ### Authorization table
 
-In addition to four system tables, the RBAC system introduces two new system tables:
+In addition to four system [privilege tables](/reference/security/privilege-system.md#privilege-table), the RBAC system introduces two new system privilege tables:
 
 - `mysql.role_edges`: records the authorization relationship of the role and user.
 - `mysql.default_roles`: records default roles of each user.
