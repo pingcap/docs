@@ -137,8 +137,8 @@ cd tidb-binlog-kafka-linux-amd64
 
 ### Deploy Pump using TiDB-Ansible
 
-- If you have not deployed the Kafka cluster, use the [Kafka-Ansible](https://github.com/pingcap/thirdparty-ops/tree/master/kafka-ansible) to deploy.
-- When you deploy the TiDB cluster using [TiDB-Ansible](https://github.com/pingcap/tidb-ansible), edit the `tidb-ansible/inventory.ini` file, set `enable_binlog = True`, and configure the `zookeeper_addrs` variable as the ZooKeeper address of the Kafka cluster. In this way, Pump is deployed while you deploy the TiDB cluster.
+- If you have not deployed the Kafka cluster, use the [Kafka Ansible](https://github.com/pingcap/thirdparty-ops/tree/master/kafka-ansible) to deploy.
+- When you deploy the TiDB cluster using [TiDB Ansible](https://github.com/pingcap/tidb-ansible), edit the `tidb-ansible/inventory.ini` file, set `enable_binlog = True`, and configure the `zookeeper_addrs` variable as the ZooKeeper address of the Kafka cluster. In this way, Pump is deployed while you deploy the TiDB cluster.
 
 Configuration example:
 
