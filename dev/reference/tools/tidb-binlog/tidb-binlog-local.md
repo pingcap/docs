@@ -35,11 +35,7 @@ Drainer collects binlog files from each Pump node, converts them into specified 
 
 ### Download
 
-<<<<<<< HEAD
 TiDB Binlog can be [downloaded](/dev/reference/tools/download.md) as part of the Enterprise Tools package.
-=======
-TiDB-Binlog can be [downloaded](/reference/tools/download.md) as part of the Enterprise Tools package.
->>>>>>> docs/master
 
 ### Deploy TiDB Binlog
 
