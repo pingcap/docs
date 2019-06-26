@@ -7,9 +7,110 @@ aliases: ['/docs/op-guide/migration/']
 
 # Migrate Data from TiDB to TiDB/MySQL
 
-## Pre-requirements
+## Pre-requirements - deploy TiDB Binlog pump cluster using TiDB-Ansible
 
-* you must already [deploy pump cluster](https://pingcap.com/docs/v3.0/reference/tools/tidb-binlog/deploy/), don't need to deploy drainer.
+### Step 1: Download TiDB-Ansible
+
+1. Use the TiDB user account to log in to the central control machine and go to the `/home/tidb` directory.
+
+2. Use the following command to download the master branch of TiDB-Ansible from the [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible) on GitHub. The default folder name is `tidb-ansible`.
+
+    - Download the master version:
+
+        ```bash
+        $ git clone https://github.com/pingcap/tidb-ansible.git
+        ```
+
+### Step 2: Deploy Pump
+1. Modify the `tidb-ansible/inventory.ini` file.
+
+    1. Set `enable_binlog = True` to start `binlog` of the TiDB cluster.
+
+        ```ini
+        ## binlog trigger
+        enable_binlog = True
+        ```
+
+    2. Add the deployment machine IPs for `pump_servers`.
+
+        ```ini
+        ## Binlog Part
+        [pump_servers]
+        172.16.10.72
+        172.16.10.73
+        172.16.10.74
+        ```
+
+        Pump retains the data of the latest 7 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file and remove the related comments:
+
+        ```yaml
+        global:
+          # an integer value to control the expiry date of the binlog data, which indicates for how long (in days) the binlog data would be stored
+          # must be bigger than 0
+          # gc: 7
+        ```
+
+        Make sure the space of the deployment directory is sufficient for storing Binlog. For more details, see [Configure the deployment directory](/how-to/deploy/orchestrated/ansible.md#configure-the-deployment-directory). You can also set a separate deployment directory for Pump.
+
+        ```ini
+        ## Binlog Part
+        [pump_servers]
+        pump1 ansible_host=172.16.10.72 deploy_dir=/data1/pump
+        pump2 ansible_host=172.16.10.73 deploy_dir=/data2/pump
+        pump3 ansible_host=172.16.10.74 deploy_dir=/data3/pump
+        ```
+
+2. Deploy and start the TiDB cluster containing Pump.
+
+    After configuring the `inventory.ini` file, you can choose one method from below to deploy the TiDB cluster.
+
+    **Method #1**: Add Pump on the existing TiDB cluster.
+
+    1. Deploy `pump_servers` and `node_exporters`.
+
+        ```
+        ansible-playbook deploy.yml -l ${pump1_ip},${pump2_ip},[${alias1_name},${alias2_name}]
+        ```
+
+        > **Note:**
+        >
+        > Do not add a space after the commas in the above command. Otherwise, an error is reported.
+
+    2. Start `pump_servers`.
+
+        ```
+        ansible-playbook start.yml --tags=pump
+        ```
+
+    3. Update and restart `tidb_servers`.
+
+        ```
+        ansible-playbook rolling_update.yml --tags=tidb
+        ```
+
+    4. Update the monitoring data.
+
+        ```
+        ansible-playbook rolling_update_monitor.yml --tags=prometheus
+        ```
+
+    **Method #2**: Deploy a TiDB cluster containing Pump from scratch.
+
+    For how to use Ansible to deploy the TiDB cluster, see [Deploy TiDB Using Ansible](/how-to/deploy/orchestrated/ansible.md).
+
+3. Check the Pump status.
+
+    Use `binlogctl` to check the Pump status. Change the `pd-urls` parameter to the PD address of the cluster. If `State` is `online`, Pump is started successfully.
+
+    ```bash
+    $ cd /home/tidb/tidb-ansible
+    $ resources/bin/binlogctl -pd-urls=http://172.16.10.72:2379 -cmd pumps
+
+    INFO[0000] pump: {NodeID: ip-172-16-10-72:8250, Addr: 172.16.10.72:8250, State: online, MaxCommitTS: 403051525690884099, UpdateTime: 2018-12-25 14:23:37 +0800 CST}
+    INFO[0000] pump: {NodeID: ip-172-16-10-73:8250, Addr: 172.16.10.73:8250, State: online, MaxCommitTS: 403051525703991299, UpdateTime: 2018-12-25 14:23:36 +0800 CST}
+    INFO[0000] pump: {NodeID: ip-172-16-10-74:8250, Addr: 172.16.10.74:8250, State: online, MaxCommitTS: 403051525717360643, UpdateTime: 2018-12-25 14:23:35 +0800 CST}
+    ```
+
 
 ## Temporal logic of migration opeations
 
