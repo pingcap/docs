@@ -19,11 +19,9 @@ aliases: ['/docs/op-guide/migration/']
 
 3. Use `loader` to import the data into slave TiDB cluster or MySQL.
 
-4. Use `initial_commit_ts` obtained in step 1 to [start drainer](https://pingcap.com/docs/v3.0/reference/tools/tidb-binlog/deploy/)
+4. Use `initial_commit_ts` obtained in step 1 to start drainer
 
-## Use the `mydumper`/`loader` tool to export and import all the data
-
-You can use `mydumper` to export data from master TiDB cluster and `loader` to import the data into slave TiDB cluster/MySQL.
+## Migrate Data Process
 
 `Mydumper` and `loader` can be [downloaded as part of Enterprise Tools](/reference/tools/download.md).
 
