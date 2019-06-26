@@ -45,7 +45,7 @@ The Kafka cluster stores the binlog data written by Pump and provides the binlog
 
 The corresponding relationship between the `tidb-ansible` branch and the TiDB version is as follows:
 
-| tidb-ansible branch | TiDB version | Note |
+| TiDB Ansible branch | TiDB version | Note |
 | ------------------- | ------------ | ---- |
 | release-2.0 | 2.0 version | The latest 2.0 stable version. You can use it in the production environment. |
 
@@ -135,7 +135,7 @@ cd tidb-binlog-kafka-linux-amd64
     - `replica.fetch.max.bytes=1073741824`
     - `fetch.message.max.bytes=1073741824`
 
-### Deploy Pump using TiDB-Ansible
+### Deploy Pump using TiDB Ansible
 
 - If you have not deployed the Kafka cluster, use the [Kafka Ansible](https://github.com/pingcap/thirdparty-ops/tree/master/kafka-ansible) to deploy.
 - When you deploy the TiDB cluster using [TiDB Ansible](https://github.com/pingcap/tidb-ansible), edit the `tidb-ansible/inventory.ini` file, set `enable_binlog = True`, and configure the `zookeeper_addrs` variable as the ZooKeeper address of the Kafka cluster. In this way, Pump is deployed while you deploy the TiDB cluster.
