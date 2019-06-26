@@ -247,28 +247,6 @@ mysql> select * from t2;
         # Time and size limits for flash batch write
         ```
 
-    - Assume that the downstream is incremental backup data:
-
-        ```bash
-        $ cd /home/tidb/tidb-ansible/conf
-        $ cp drainer-cluster.toml drainer_file_drainer-cluster.toml
-        $ vi drainer_file_drainer-cluster.toml
-        ```
-
-        Set `db-type` to `file`.
-
-        ```toml
-        # downstream storage, equal to --dest-db-type
-        # Valid values are "mysql", "file", "kafka", and "flash".
-        db-type = "file"
-
-        # Uncomment this if you want to use `file` as `db-type`. 
-        # The value can be `gzip`. Leave it empty to disable compression. 
-        [syncer.to]
-        # default data directory: "{{ deploy_dir }}/data.drainer"
-        dir = "data.drainer"
-        ```
-
 3. Deploy Drainer.
 
     ```bash
