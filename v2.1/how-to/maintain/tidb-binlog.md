@@ -2,8 +2,7 @@
 title: TiDB Binlog Cluster Operations
 summary: Learn how to operate the cluster version of TiDB Binlog.
 category: reference
-
-aliases: ['/docs/tools/binlog/operation/','/docs-cn/dev/reference/tools/tidb-binlog/operation/']
+aliases: ['/docs/tools/binlog/operation/','/docs/dev/reference/tools/tidb-binlog/operation/']
 
 ---
 
