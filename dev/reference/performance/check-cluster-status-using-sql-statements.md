@@ -1,12 +1,12 @@
 ---
-title: SQL Diagnostic Kit
-summary: This document introduces that TiDB offers some SQL statements and system tables to query some useful information to facilitate troubleshooting.
+title: Check the TiDB Cluter Status Using SQL Statements
+summary: This document introduces that TiDB offers some SQL statements and system tables to check the TiDB cluster status.
 category: reference
 ---
 
-# SQL Diagnostic Kit
+# Check the TiDB Cluter Status Using SQL Statements
 
-To facilitate troubleshooting, TiDB offers some SQL statements and system tables to query some useful information.
+TiDB offers some SQL statements and system tables to check the TiDB cluster status.
 
 The `INFORMATION_SCHEMA` system database offers system tables as follows to query the cluster status and diagnose common cluster issues:
 
@@ -23,6 +23,6 @@ You can also use the following statements to obtain some useful information for 
 - `ADMIN SHOW DDL`: obtains the ID of TiDB with the `DDL owner` role and `IP:PORT`.
 - The feature of `SHOW ANALYZE STATUS` is the same with that of [the `ANALYZE_STATUS` table](/reference/system-databases/information-schema.md#analyze-status-table).
 - Specific `EXPLAIN` statements
-	- `EXPLAIN ANALYZE`: obtains some detailed information for execution of a SQL statement.
-	- `EXPLAIN FOR CONNECTION`: obtains the execution plan for the query executed last in a connection. Can be used along with `SHOW PROCESSLIST`.
-	- For more information about `EXPLAIN`, see [Understand the Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md).
+    - `EXPLAIN ANALYZE`: obtains some detailed information for execution of a SQL statement.
+    - `EXPLAIN FOR CONNECTION`: obtains the execution plan for the query executed last in a connection. Can be used along with `SHOW PROCESSLIST`.
+    - For more information about `EXPLAIN`, see [Understand the Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md).
