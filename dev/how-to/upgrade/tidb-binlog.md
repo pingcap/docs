@@ -2,7 +2,6 @@
 title: Upgrade TiDB Binlog Cluster
 summary: Learn how to upgrade the cluster version of TiDB Binlog.
 category: reference
-
 ---
 
 # Upgrade TiDB Binlog Cluster
