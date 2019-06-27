@@ -231,3 +231,23 @@ Configuration about the transaction latch. It is recommended to enable it when m
 
 - The number of slots corresponding to Hash, which automatically adjusts upward to an exponential multiple of 2. Each slot occupies 32 Bytes of memory. If set too small, it might result in slower running speed and poor performance in the scenario where data writing covers a relatively large range (such as importing data).
 - Default: 1024000
+
+### `max-batch-size`
+
+- Set the maximum number of requests that can be included in a batch. Value 0 disables the duplex stream RPC and fall back to the unary RPC request mode that is compatible with V2.1 or earlier versions of TiDB
+- Default: 128
+
+### `max-batch-wait-time`
+
+- Specifies the time (in nanoseconds) that TiDB needs to wait when gRPC is overloaded on TiKV side. This option controls the maximum wait time for TiDB to merge small requests into a batch. During the wait period, TiDB combines requests using the best effort strategy.
+- Default: 0
+
+### `batch-wait-size` 
+
+- Specifies the maximum number of requests for a batch. If the batch size has exceeded this limit during the wait period, the wait ends and the batch merging completes. This reduces unnecessary latency that may be caused by the wait.
+- Default: 8
+
+### `overload-threshold`
+
+- Specifies the upper limit for CUP usage of gRPC. If the CPU usage of gRPC is higher than this value, TiDB knows that the network transportation from TiKV is in overload status, and starts the wait strategy.
+- Default: 200 (200%)
