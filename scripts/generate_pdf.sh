@@ -16,7 +16,7 @@ _version_tag="$(date '+%Y%m%d')"
 # used to debug template setting error
 
 
-docs_versions=(v3.0)
+docs_versions=(dev v2.0)
 
 for i in "${docs_versions[@]}"
 do
