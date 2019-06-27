@@ -57,7 +57,7 @@ To delete a role, you need the `DROP ROLE` or `DROP USER` privilege.
 
 The operation of granting a privilege to a role is the same with that of granting a privilege to a user. For details, see [TiDB Privilege Management](/reference/security/privilege-system.md).
 
-For example, you can use the following statement to grant the `analyst` user the privilege to read the `test` database:
+For example, you can use the following statement to grant the `analyst` role the privilege to read the `test` database:
 
 {{< copyable "sql" >}}
 
@@ -65,7 +65,7 @@ For example, you can use the following statement to grant the `analyst` user the
 GRANT SELECT ON test.* TO 'analyst'@'%';
 ```
 
-You can use the following statement to grant the `analyst` user all privileges on all databases:
+You can use the following statement to grant the `analyst` role all privileges on all databases:
 
 {{< copyable "sql" >}}
 
@@ -75,7 +75,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'analyst'@'%';
 
 ### Revoke a privilege
 
-For example, you can use the following statement to revoke all privileges on the `test` database granted to the `analyst` user:
+For example, you can use the following statement to revoke all privileges on the `test` database granted to the `analyst` role:
 
 {{< copyable "sql" >}}
 
@@ -130,7 +130,7 @@ The operation of revoking a role from a user is atomic. If you fail to revoke a 
 
 After a role is granted to a user, it does not take effect immediately. Only after the user enables this role, he can use the privilege the role owns.
 
-You can set a default role for a user. When the user logs in, the default role is automatically enabled.
+You can set default roles for a user. When the user logs in, the default roles are automatically enabled.
 
 {{< copyable "sql" >}}
 
@@ -140,7 +140,7 @@ SET DEFAULT ROLE
     TO user [, user ]
 ```
 
-For example, you can use the following statement to set the default role of `test@localhost` to `administrator` and `developer`:
+For example, you can use the following statement to set default roles of `test@localhost` to `administrator` and `developer`:
 
 {{< copyable "sql" >}}
 
@@ -148,7 +148,7 @@ For example, you can use the following statement to set the default role of `tes
 SET DEFAULT ROLE administrator, developer TO 'test'@'localhost';
 ```
 
-You can use the following statement to set the default role of `test@localhost` to all roles:
+You can use the following statement to set default roles of `test@localhost` to all roles:
 
 {{< copyable "sql" >}}
 
