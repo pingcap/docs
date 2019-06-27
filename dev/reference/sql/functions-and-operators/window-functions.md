@@ -6,7 +6,7 @@ category: reference
 
 # Window Functions
 
-The usage of window functions in TiDB is similar to that in MySQL. For details, see [MySQL Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html). 
+The usage of window functions in TiDB is similar to that in MySQL 8.0. For details, see [MySQL Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html). 
 
 Because window functions may use some reserved or key words, some SQL statements that could be executed normally cannot be parsed after TiDB is upgrade. In this case, you can set `tidb_enable_window_function` (`1` by default) to `0`.
 
