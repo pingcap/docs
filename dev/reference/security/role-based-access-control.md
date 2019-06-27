@@ -406,7 +406,7 @@ select * from mysql.default_roles;
 
 ### References
 
-Because RBAS, user management, and privilege management are closely related, you can refer to operation details in the following resources:
+Because RBAC, user management, and privilege management are closely related, you can refer to operation details in the following resources:
 
 - [TiDB Privilege Management](/reference/security/privilege-system.md)
 - [TiDB User Account Management](/reference/security/user-account-management.md)
