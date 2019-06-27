@@ -83,7 +83,7 @@
     - [Upgrade to TiDB 3.0](how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
-    - [TiDB Binlog Cluster Upgrade](how-to/upgrade/tidb-binlog.md)
+    - [Upgrade TiDB Binlog Cluster](how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](how-to/troubleshoot/data-migration.md)
@@ -146,6 +146,7 @@
       - [Information Functions](reference/sql/functions-and-operators/information-functions.md)
       - [JSON Functions](reference/sql/functions-and-operators/json-functions.md)
       - [Aggregate (GROUP BY) Functions](reference/sql/functions-and-operators/aggregate-group-by-functions.md)
+      - [Window Functions](reference/sql/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](reference/sql/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](reference/sql/functions-and-operators/precision-math.md)
     + SQL Statements
