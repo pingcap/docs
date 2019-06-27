@@ -6,7 +6,7 @@ category: user guide
 
 # Role-Based Access Control
 
-The implementation of TiDB's role-based access control (RBAC) system is similar to that of MySQL. TiDB is compatible with most RBAC syntax of MySQL.
+The implementation of TiDB's role-based access control (RBAC) system is similar to that of MySQL 8.0. TiDB is compatible with most RBAC syntax of MySQL.
 
 This document introduces TiDB RBAC-related operations and implementation.
 
