@@ -57,30 +57,30 @@ To delete a role, you need the `DROP ROLE` or `DROP USER` privilege.
 
 The operation of granting a privilege to a role is the same with that of granting a privilege to a user. For details, see [TiDB Privilege Management](/reference/security/privilege-system.md).
 
-For example, you can use the following statement to grant the `xxx` user the privilege to read the `test` database:
+For example, you can use the following statement to grant the `analyst` user the privilege to read the `test` database:
 
 {{< copyable "sql" >}}
 
 ```sql
-GRANT SELECT ON test.* TO 'xxx'@'%';
+GRANT SELECT ON test.* TO 'analyst'@'%';
 ```
 
-You can use the following statement to grant the `xxx` user all privileges on all databases:
+You can use the following statement to grant the `analyst` user all privileges on all databases:
 
 {{< copyable "sql" >}}
 
 ```sql
-GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'analyst'@'%';
 ```
 
 ### Revoke a privilege
 
-For example, you can use the following statement to revoke all privileges on the `test` database granted to the `xxx` user:
+For example, you can use the following statement to revoke all privileges on the `test` database granted to the `analyst` user:
 
 {{< copyable "sql" >}}
 
 ```sql
-REVOKE ALL PRIVILEGES ON `test`.* FROM 'xxx'@'%';
+REVOKE ALL PRIVILEGES ON `test`.* FROM 'analyst'@'%';
 ```
 
 For details, see [TiDB Privilege Management](/reference/security/privilege-system.md).
