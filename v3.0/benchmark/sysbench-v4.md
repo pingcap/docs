@@ -99,7 +99,7 @@ set global tidb_hashagg_partial_concurrency=1;
 set global tidb_disable_txn_auto_retry=0;
 ```
 
-In addition, the following configuration is set in v3.0:
+In addition, make the following configuration in v3.0:
 
 ```toml
 [tikv-client]
@@ -124,7 +124,7 @@ block-cache-size = "8GB"
 block-cache-size = "1GB"
 ```
 
-In addition, the following configuration is made in v3.0:
+In addition, make the following configuration in v3.0:
 
 ```toml
 [raftstore]
