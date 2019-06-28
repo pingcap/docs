@@ -41,7 +41,7 @@ To install Java and Ant, run the following command (take CentOS as an example):
 sudo yum install -y java ant
 ```
 
-Come to the `benchmarksql` directory and run `ant` to build:
+Enter the `benchmarksql` directory and run `ant` to build:
 
 ```shell
 cd benchmarksql
@@ -141,7 +141,7 @@ Run the following BenchmarkSQL test script:
 nohup ./runBenchmark.sh props.mysql &> test.log &
 ```
 
-After the execution is finished, view the result using the `test.log`:
+After the execution is finished, view the result using `test.log`:
 
 ```text
 07:09:53,455 [Thread-351] INFO   jTPCC : Term-00, Measured tpmC (NewOrders) = 77373.25
