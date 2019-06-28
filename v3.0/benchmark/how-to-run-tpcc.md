@@ -151,4 +151,4 @@ After the execution is finished, view the result using the `test.log`:
 07:09:53,456 [Thread-351] INFO   jTPCC : Term-00, Transaction Count = 345240
 ```
 
-The tpmC section is the testing result.
+The value in the tpmC section is the testing result.
