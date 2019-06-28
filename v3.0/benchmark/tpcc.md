@@ -83,13 +83,13 @@ The default TiKV configuration is used in both v2.1 and v3.0.
 
 | Version | Threads | tpmC |
 | :-- | :-- | :-- |
-| v3.0 | 128  | 37400.76 |
-| v3.0 | 256  | 39931.79  |
-| v3.0 | 512  | 40272.34 |
+| v3.0 | 128  | 44068.55 |
+| v3.0 | 256  | 47094.06  |
+| v3.0 | 512  | 48808.65 |
 | v2.1 | 128  | 10641.71  |
 | v2.1 | 256  | 10861.62 |
 | v2.1 | 512  | 10965.39 |
 
 ![point select](/media/tpcc-2.1-3.0.png)
 
-According to the testing statistics, the performance of TiDB 3.0 **has increased by 400%** than that of TiDB 2.1.
+According to the testing statistics, the performance of TiDB 3.0 **has increased by 450%** than that of TiDB 2.1.
