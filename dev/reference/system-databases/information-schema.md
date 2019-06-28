@@ -1,7 +1,7 @@
 ---
 title: Information Schema
 summary: Learn how to use Information Schema in TiDB.
-category: reference 
+category: reference
 ---
 
 # Information Schema
