@@ -51,6 +51,7 @@
       - [Overview](how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](how-to/deploy/data-migration-with-ansible.md)
+    - [TiDB Binlog Cluster Deployment](how-to/deploy/tidb-binlog.md)
   + Configure
     - [Time Zone](how-to/configure/time-zone.md)
     - [Memory Control](how-to/configure/memory-control.md)
@@ -62,17 +63,19 @@
   + Monitor
     - [Overview](how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](how-to/monitor/monitor-a-cluster.md)
+    - [TiDB Binlog Monitoring](how-to/monitor/tidb-binlog.md)
   + Migrate
     - [Overview](how-to/migrate/overview.md)
     + Migrate from MySQL
       - [Migrate the Full Data](how-to/migrate/from-mysql.md)
       - [Migrate the Incremental Data](how-to/migrate/incrementally-from-mysql.md)
-    + [Migrate from Aurora](how-to/migrate/from-aurora.md)
-    - [Migrate from CSV](tools/lightning/csv.md)
+    - [Migrate from Aurora](how-to/migrate/from-aurora.md)
+    - [Migrate from CSV](reference/tools/tidb-lightning/csv.md)
   + Maintain
     - [Common Ansible Operations](how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
+    - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
@@ -80,6 +83,7 @@
     - [Upgrade to Development Series](how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
+    - [Upgrade TiDB Binlog Cluster](how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](how-to/troubleshoot/data-migration.md)
@@ -142,12 +146,14 @@
       - [Information Functions](reference/sql/functions-and-operators/information-functions.md)
       - [JSON Functions](reference/sql/functions-and-operators/json-functions.md)
       - [Aggregate (GROUP BY) Functions](reference/sql/functions-and-operators/aggregate-group-by-functions.md)
+      - [Window Functions](reference/sql/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](reference/sql/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](reference/sql/functions-and-operators/precision-math.md)
     + SQL Statements
       - [`ADD COLUMN`](reference/sql/statements/add-column.md)
       - [`ADD INDEX`](reference/sql/statements/add-index.md)
       - [`ADMIN`](reference/sql/statements/admin.md)
+      - [`ALTER DATABASE`](reference/sql/statements/alter-database.md)
       - [`ALTER TABLE`](reference/sql/statements/alter-table.md)
       - [`ALTER USER`](reference/sql/statements/alter-user.md)
       - [`ANALYZE TABLE`](reference/sql/statements/analyze-table.md)
@@ -234,6 +240,7 @@
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
     - [TiDB User Account Management](reference/security/user-account-management.md)
+    - [Role-Based Access Control](reference/security/role-based-access-control.md)
   + Transactions
     - [Overview](reference/transactions/overview.md)
     - [Transaction Model](reference/transactions/transaction-model.md)
@@ -254,6 +261,7 @@
     - [Tune TiKV](reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](reference/tispark.md)
+  - [TiDB Binlog Cluster Overview](reference/tidb-binlog-overview.md)
   + Tools
     - [Mydumper](reference/tools/mydumper.md)
     - [Syncer](reference/tools/syncer.md)
@@ -293,12 +301,6 @@
       - [Monitor](reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](faq/tidb-lightning.md)
-    + TiDB Binlog
-      - [Overview](reference/tools/tidb-binlog/overview.md)
-      - [Deploy](reference/tools/tidb-binlog/deploy.md)
-      - [Monitor](reference/tools/tidb-binlog/monitor.md)
-      - [Maintain](reference/tools/tidb-binlog/operation.md)
-      - [Upgrade](reference/tools/tidb-binlog/upgrade.md)
     - [PD Control](reference/tools/pd-control.md)
     - [PD Recover](reference/tools/pd-recover.md)
     - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
