@@ -69,18 +69,7 @@ enabled = true
 
 ### TiKV parameter configuration
 
-```txt
-[readpool.storage]
-normal-concurrency = 8
-[server]
-grpc-concurrency = 8
-[raftstore]
-sync-log = false
-[rocksdb.defaultcf]
-block-cache-size = "60GB"
-[rocksdb.writecf]
-block-cache-size = "20GB"
-```
+The default TiKV configuration is used in both v2.1 and v3.0.
 
 ### Cluster topology
 
@@ -101,6 +90,6 @@ block-cache-size = "20GB"
 | v2.1 | 256  | 10861.62 |
 | v2.1 | 512  | 10965.39 |
 
-![point select](/media/sysbench_v3_point_select.png)
+![point select](/media/tpcc-2.1-3.0.png)
 
-According to the testing statistics, the performance of TiDB 3.0 **has increased by 450%** than that of TiDB 2.1.
+According to the testing statistics, the performance of TiDB 3.0 **has increased by 400%** than that of TiDB 2.1.
