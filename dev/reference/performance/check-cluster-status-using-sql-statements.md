@@ -4,7 +4,7 @@ summary: This document introduces that TiDB offers some SQL statements and syste
 category: reference
 ---
 
-# Check the TiDB Cluter Status Using SQL Statements
+# Check the TiDB Cluster Status Using SQL Statements
 
 TiDB offers some SQL statements and system tables to check the TiDB cluster status.
 
