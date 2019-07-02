@@ -2,7 +2,6 @@
 title: Compatibility with MySQL
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
 category: reference
-aliases: ['/docs/sql/mysql-compatibility/']
 ---
 
 # Compatibility with MySQL
@@ -10,6 +9,8 @@ aliases: ['/docs/sql/mysql-compatibility/']
 TiDB supports both the MySQL wire protocol and the majority of its syntax. This means that you can use your existing MySQL connectors and clients, and your existing applications can often be migrated to TiDB without changing any application code.
 
 Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and mydumper/myloader.
+
+However, as some features of MySQL are not well implemented in a distributed scenario, TiDB currently does not support these features or, in some way, behaves differently from MySQL. Some syntaxes of MySQL are parsed but ignored in TiDB, such as `Engine` in `Create Table` statement.
 
 > **Note:**
 >
@@ -24,7 +25,7 @@ Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL d
 + `FOREIGN KEY` constraints
 + `FULLTEXT` functions and indexes
 + `SPATIAL` functions and indexes
-+ Character sets other than `utf8mb4`
++ Character sets other than `utf8mb4` and `utf8`
 + Collations other than `BINARY`
 + Add primary key
 + Drop primary key
@@ -37,7 +38,6 @@ Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL d
 + `CREATE TABLE tblName AS SELECT stmt` syntax
 + `CREATE TEMPORARY TABLE` syntax
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
-+ `LOCK TABLE` syntax (TiDB uses `tidb_snapshot` to [produce backups](/reference/tools/mydumper.md))
 + `CHECK TABLE` syntax
 + `CHECKSUM TABLE` syntax
 + `GET_LOCK` and `RELEASE_LOCK` functions
@@ -97,7 +97,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
 + Alter Database
     - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
 + `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
-+ `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but will work differently than MySQL since some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning. 
++ `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but will work differently than MySQL since some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
 
 For more information, see [Online Schema Changes](/key-features.md#online-schema-changes).
 
