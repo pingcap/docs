@@ -206,11 +206,13 @@ table_option:
   | STATS_PERSISTENT [=] {DEFAULT|0|1}
 ```
 
-The `table_option` currently only supports `AUTO_INCREMENT`, `CHARACTER SET` and `COMMENT`, while the others are only supported in syntax. The clauses are separated by a comma `,`. See the following table for details:
+The `table_option` currently only supports `AUTO_INCREMENT`, `SHARD_ROW_ID_BITS` (see [TiDB Specific System Variables](/reference/configuration/tidb-server/tidb-specific-variables.md#shard-row-id-bits) for details), `PRE_SPLIT_REGIONS`, `CHARACTER SET`, `COLLATE`, and `COMMENT`, while the others are only supported in syntax. The clauses are separated by a comma `,`. See the following table for details:
 
 | Parameters | Description | Example |
 | ---------- | ---------- | ------- |
 | `AUTO_INCREMENT` | The initial value of the increment field | `AUTO_INCREMENT` = 5 |
+|`SHARD_ROW_ID_BITS`| To set the number of bits for the implicit `_tidb_rowid` shards |`SHARD_ROW_ID_BITS` = 4|
+|`PRE_SPLIT_REGIONS`| To pre-split 2^(PRE_SPLIT_REGIONS-1) Regions when creating a table |`PRE_SPLIT_REGIONS` = 4|
 | `CHARACTER SET` | To specify the string code for the table; currently only support UTF8MB4 | `CHARACTER SET` =  'utf8mb4' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
 
