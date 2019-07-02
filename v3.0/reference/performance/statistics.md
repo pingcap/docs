@@ -16,24 +16,81 @@ Based on the statistics, the TiDB optimizer chooses the most efficient query exe
 
 ### Manual collection
 
-You can run the `ANALYZE` statement to collect statistics. Note that `ANALYZE TABLE` in TiDB takes considerably longer than in MySQL/InnoDB. In InnoDB, only a small number of pages are sampled, while in TiDB a comprehensive set of statistics is completely rebuilt. Scripts that were written for MySQL may naively expect `ANALYZE TABLE` will be a short-lived operation.
+You can run the `ANALYZE` statement to collect statistics.
 
-Syntax:
+#### Full collection
+
+> **Note:**
+>
+> `ANALYZE TABLE` in TiDB takes considerably longer than in MySQL/InnoDB. In InnoDB, only a small number of pages are sampled, while in TiDB a comprehensive set of statistics is completely rebuilt. Scripts that were written for MySQL may naively expect `ANALYZE TABLE` will be a short-lived operation.
+>
+> For quicker analysis, you can set `tidb_enable_fast_analyze` to `1` to turn on Quick Analysis. The default value for this parameter is `0`.
+>
+> When Quick Analysis is turned on, TiDB randomly samples approximately 10,000 rows of data to build statistics. Therefore, in the case of uneven data distribution or relatively small amount of data, the accuracy of statistical information will be relatively poor. It may lead to poor execution plans, such as choosing the wrong index. If the execution time of the normal `ANALYZE` statement is acceptable, it is recommended to turn off Quick Analysis.
+
+You can perform full collection using the following syntaxes.
+
+Collecting statistics of all the tables in `TableNameList`:
+
+{{< copyable "sql" >}}
 
 ```sql
 ANALYZE TABLE TableNameList [WITH NUM BUCKETS]
-> The statement collects statistics of all the tables in `TableNameList`. 
-> `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
+```
 
+`WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
+
+Collecting statistics of the index columns on all `IndexNameList`s in `TableName`:
+
+{{< copyable "sql" >}}
+
+```sql
 ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS]
-> The statement collects statistics of the index columns on all `IndexNameList`s in `TableName`.
-> The statement collects statistics of all index columns when `IndexNameList` is empty.
+```
 
+The statement collects statistics of all index columns when `IndexNameList` is empty.
+
+Collecting statistics of partition in all `PartitionNameList`s in `TableName`:
+
+{{< copyable "sql" >}}
+
+```sql
 ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS]
-> The statement collects partition statistics of all `PartitionNameList`s in `TableName`.
+```
 
+Collecting statistics of index columns for the partitions in all `PartitionNameList`s in `TableName`:
+
+{{< copyable "sql" >}}
+
+```sql
 ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS]
-> The statement collects index column statistics of the partitions in all `PartitionNameList`s in `TableName`.
+```
+
+#### Incremental collection
+
+To improve the speed of analysis after full collection, incremental collection could be used to analyze the newly added sections in monotonically non-decreasing columns such as time columns.
+
+> **Note:**
+>
+> 1. Currently, incremental collection is only provided for index.
+> 2. When using incremental collection, you must ensure that there is only `INSERT` operations on the table, and that the newly inserted value on the index column is monotonically non-decreasing. Otherwise, the statistical information may be inaccurate, affecting the TiDB optimizer to select an appropriate execution plan.
+
+You can perform incremental collection using the following syntaxes.
+
+Incrementally collecting statistics for index columns in all `IndexNameLists` in `TableName`:
+
+{{< copyable "sql" >}}
+
+```sql
+ANALYZE INCREMENTAL TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS]
+```
+
+Incrementally collecting statistics of index columns for partitions in all `PartitionNameLists` in `TableName`:
+
+{{< copyable "sql" >}}
+
+```sql
+ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS]
 ```
 
 ### Automatic update
@@ -68,6 +125,30 @@ When you analyze regular columns, you can use the `tidb_distsql_scan_concurrency
 
 When you analyze index columns, you can use the `tidb_index_serial_scan_concurrency` parameter to control the number of Region to be read at one time. The default value is `1`.
 
+### View `ANALYZE` state
+
+When executing `ANALYZE`, you can view the current state of `ANALYZE` through the following SQL statement:
+
+{{< copyable "sql" >}}
+
+```sql
+SHOW ANALYZE STATUS [ShowLikeOrWhere]
+```
+
+This statement returns the state of `ANALYZE`. You can use `ShowLikeOrWhere` to filter the information you need.
+
+Currently, the `SHOW ANALYZE STATUS` statement returns the following 7 columns:
+
+| Syntax Element | Description            |
+| -------- | ------------- |
+| table_schema  |  database name    |
+| table_name | table name |
+| partition_name| partition name |
+| job_info | task information. The element includes index names when index analysis is performed. |
+| row_count | the number of rows that have been analyzed |
+| start_time | the time at which the task starts |
+| state | state of task, including `pending`, `running`, `finished` and `failed` |
+
 ## View statistics
 
 You can view the statistics status using the following statements.
@@ -76,12 +157,15 @@ You can view the statistics status using the following statements.
 
 You can use the `SHOW STATS_META` statement to view the total number of rows and the number of updated rows.
 
-Syntax:
+Syntax as follows:
+
+{{< copyable "sql" >}}
 
 ```sql
 SHOW STATS_META [ShowLikeOrWhere]
-> The statement returns the total number of rows and the number of updated rows. You can use `ShowLikeOrWhere` to filter the information you need.
 ```
+
+The statement returns the total number of rows and the number of updated rows. You can use `ShowLikeOrWhere` to filter the information you need.
 
 Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
@@ -98,12 +182,15 @@ Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
 You can use the `SHOW STATS_HISTOGRAMS` statement to view the number of different values and the number of `NULL` in all the columns.
 
-Syntax:
+Syntax as follows:
+
+{{< copyable "sql" >}}
 
 ```sql
 SHOW STATS_HISTOGRAMS [ShowLikeOrWhere]
-> The statement returns the number of different values and the number of `NULL` in all the columns. You can use `ShowLikeOrWhere` to filter the information you need.
 ```
+
+The statement returns the number of different values and the number of `NULL` in all the columns. You can use `ShowLikeOrWhere` to filter the information you need.
 
 Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 8 columns:
 
@@ -123,12 +210,15 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 8 columns
 
 You can use the `SHOW STATS_BUCKETS` statement to view each bucket of the histogram.
 
-Syntax:
+Syntax as follows:
+
+{{< copyable "sql" >}}
 
 ```sql
 SHOW STATS_BUCKETS [ShowLikeOrWhere]
-> The statement returns information about all the buckets. You can use `ShowLikeOrWhere` to filter the information you need.
 ```
+
+The statement returns information about all the buckets. You can use `ShowLikeOrWhere` to filter the information you need.
 
 Currently, the `SHOW STATS_BUCKETS` statement returns the following 10 columns:
 
@@ -149,22 +239,36 @@ Currently, the `SHOW STATS_BUCKETS` statement returns the following 10 columns:
 
 You can run the `DROP STATS` statement to delete statistics.
 
-Syntax:
+Syntax as follows:
+
+{{< copyable "sql" >}}
 
 ```sql
 DROP STATS TableName
-> The statement deletes statistics of all the tables in `TableName`.
 ```
+
+The statement deletes statistics of all the tables in `TableName`.
 
 ## Import and export statistics
 
 ### Export statistics
 
-The interface to export statistics:
+The interface to export statistics is as follows.
+
+Use this interface to obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database.
+
+{{< copyable "" >}}
 
 ```
 http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
-> Use this interface to obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database.
+```
+
+Use the following interface to obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database at specific time.
+
+{{< copyable "" >}}
+
+```
+http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
 ```
 
 ### Import statistics
@@ -173,7 +277,10 @@ Generally, the imported statistics refer to the JSON file obtained using the exp
 
 Syntax:
 
+{{< copyable "sql" >}}
+
 ```
 LOAD STATS 'file_name'
-> `file_name` is the file name of the statistics to be imported.
 ```
+
+`file_name` is the file name of the statistics to be imported.
