@@ -23,10 +23,7 @@ GC runs periodically on TiDB. The default frequency is once every 10 minutes. Fo
 The TiDB transaction model is implemented based on [Google's Percolator](https://ai.google/research/pubs/pub36726). It's mainly a two-phase commit protocol with some practical optimizations. When the first phase is finished, all the related keys are locked. Among these locks, one is the primary lock and the others are secondary locks which contain a pointer to the primary lock; in the second phase, the key with the primary lock gets a write record and its lock is removed. The write record indicates the write or delete operation in the history or the transactional rollback record of this key. The type of write record that replaces the primary lock indicates whether the corresponding transaction is committed successfully. Then all the secondary locks are replaced successively. If the threads fail to replace the secondary locks, these locks are retained.
 
 The Resolve Locks step rolls back or commits the locks before the safe point, depending on whether their primary key has been committed or not. If the primary key is also retained, the transaction times out and will be rolled back.
-
-> **Note:**
->
-> Resolve Locks is a required step. Once GC has cleared the write record of the primary lock, you can never know whether this transaction is successful or not. Also, if the the transaction contains retained secondary keys, it's important to know whether it should be rolled back or committed. As a result, data consistency can't be guaranteed.
+This step is required. Once GC has cleared the write record of the primary lock, you can never know whether this transaction is successful or not. Also, if the the transaction contains retained secondary keys, it's important to know whether it should be rolled back or committed. As a result, data consistency can't be guaranteed.
 
 In the Resolve Lock step, the GC leader processes requests from all Regions. From TiDB 3.0,this process runs concurrently by default, with the default concurrency identical to the number of TiKV nodes in the cluster. For more details on how to configure, see [GC Configuration](/reference/garbage-collection/configuration.md#tikv-gc-auto-concurrency).
 
