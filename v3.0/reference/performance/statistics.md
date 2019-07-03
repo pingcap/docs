@@ -22,49 +22,49 @@ You can run the `ANALYZE` statement to collect statistics.
 
 > **Note:**
 >
-> `ANALYZE TABLE` in TiDB takes considerably longer than in MySQL/InnoDB. In InnoDB, only a small number of pages are sampled, while in TiDB a comprehensive set of statistics is completely rebuilt. Scripts that were written for MySQL may naively expect `ANALYZE TABLE` will be a short-lived operation.
+> The execution time of `ANALYZE TABLE` in TiDB is longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while in TiDB a comprehensive set of statistics is completely rebuilt. Scripts that were written for MySQL may naively expect `ANALYZE TABLE` will be a short-lived operation.
 >
-> For quicker analysis, you can set `tidb_enable_fast_analyze` to `1` to turn on Quick Analysis. The default value for this parameter is `0`.
+> For quicker analysis, you can set `tidb_enable_fast_analyze` to `1` to enable the Quick Analysis feature. The default value for this parameter is `0`.
 >
-> When Quick Analysis is turned on, TiDB randomly samples approximately 10,000 rows of data to build statistics. Therefore, in the case of uneven data distribution or relatively small amount of data, the accuracy of statistical information will be relatively poor. It may lead to poor execution plans, such as choosing the wrong index. If the execution time of the normal `ANALYZE` statement is acceptable, it is recommended to turn off Quick Analysis.
+> After Quick Analysis is enabled, TiDB randomly samples approximately 10,000 rows of data to build statistics. Therefore, in the case of uneven data distribution or a relatively small amount of data, the accuracy of statistical information is relatively poor. It might lead to poor execution plans, such as choosing the wrong index. If the execution time of the normal `ANALYZE` statement is acceptable, it is recommended to disable the Quick Analysis feature.
 
-You can perform full collection using the following syntaxes.
+You can perform full collection using the following syntax.
 
-Collecting statistics of all the tables in `TableNameList`:
++ To collect statistics of all the tables in `TableNameList`:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-ANALYZE TABLE TableNameList [WITH NUM BUCKETS]
-```
+    ```sql
+    ANALYZE TABLE TableNameList [WITH NUM BUCKETS]
+    ```
 
-`WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
+  `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
 
-Collecting statistics of the index columns on all `IndexNameList`s in `TableName`:
++ To collect statistics of the index columns on all `IndexNameList`s in `TableName`:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS]
-```
+    ```sql
+    ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS]
+    ```
 
-The statement collects statistics of all index columns when `IndexNameList` is empty.
+  The statement collects statistics of all index columns when `IndexNameList` is empty.
 
-Collecting statistics of partition in all `PartitionNameList`s in `TableName`:
++ To collect statistics of partition in all `PartitionNameList`s in `TableName`:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS]
-```
+    ```sql
+    ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS]
+    ```
 
-Collecting statistics of index columns for the partitions in all `PartitionNameList`s in `TableName`:
++ To collect statistics of index columns for the partitions in all `PartitionNameList`s in `TableName`:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS]
-```
+    ```sql
+    ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS]
+    ```
 
 #### Incremental collection
 
@@ -72,26 +72,26 @@ To improve the speed of analysis after full collection, incremental collection c
 
 > **Note:**
 >
-> 1. Currently, incremental collection is only provided for index.
-> 2. When using incremental collection, you must ensure that there is only `INSERT` operations on the table, and that the newly inserted value on the index column is monotonically non-decreasing. Otherwise, the statistical information may be inaccurate, affecting the TiDB optimizer to select an appropriate execution plan.
+> + Currently, the incremental collection is only provided for index.
+> + When using the incremental collection, you must ensure that only `INSERT` operations exist on the table, and that the newly inserted value on the index column is monotonically non-decreasing. Otherwise, the statistical information might be inaccurate, affecting the TiDB optimizer to select an appropriate execution plan.
 
-You can perform incremental collection using the following syntaxes.
+You can perform incremental collection using the following syntax.
 
-Incrementally collecting statistics for index columns in all `IndexNameLists` in `TableName`:
++ To incrementally collect statistics for index columns in all `IndexNameLists` in `TableName`:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-ANALYZE INCREMENTAL TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS]
-```
+    ```sql
+    ANALYZE INCREMENTAL TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS]
+    ```
 
-Incrementally collecting statistics of index columns for partitions in all `PartitionNameLists` in `TableName`:
++ To incrementally collect statistics of index columns for partitions in all `PartitionNameLists` in `TableName`:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS]
-```
+    ```sql
+    ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS]
+    ```
 
 ### Automatic update
 
@@ -101,9 +101,9 @@ Three system variables related to automatic update of statistics are as follows:
 
 |  System Variable | Default Value | Description |
 |---|---|---|
-| `tidb_auto_analyze_ratio`| 0.5 | the threshold value of automatic update |
-| `tidb_auto_analyze_start_time` | `00:00 +0000` | the start time in a day when TiDB can perform automatic update |
-| `tidb_auto_analyze_end_time`   | `23:59 +0000` | the end time in a day when TiDB can perform automatic update |
+| `tidb_auto_analyze_ratio`| 0.5 | The threshold value of automatic update |
+| `tidb_auto_analyze_start_time` | `00:00 +0000` | The start time in a day when TiDB can perform automatic update |
+| `tidb_auto_analyze_end_time`   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update |
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics of this table.
 
@@ -127,7 +127,7 @@ When you analyze index columns, you can use the `tidb_index_serial_scan_concurre
 
 ### View `ANALYZE` state
 
-When executing `ANALYZE`, you can view the current state of `ANALYZE` through the following SQL statement:
+When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using the following SQL statement:
 
 {{< copyable "sql" >}}
 
@@ -140,14 +140,14 @@ This statement returns the state of `ANALYZE`. You can use `ShowLikeOrWhere` to 
 Currently, the `SHOW ANALYZE STATUS` statement returns the following 7 columns:
 
 | Syntax Element | Description            |
-| -------- | ------------- |
-| table_schema  |  database name    |
-| table_name | table name |
-| partition_name| partition name |
-| job_info | task information. The element includes index names when index analysis is performed. |
-| row_count | the number of rows that have been analyzed |
-| start_time | the time at which the task starts |
-| state | state of task, including `pending`, `running`, `finished` and `failed` |
+| :-------- | :------------- |
+| table_schema  |  The database name    |
+| table_name | The table name |
+| partition_name| The partition name |
+| job_info | The task information. The element includes index names when index analysis is performed. |
+| row_count | The number of rows that have been analyzed |
+| start_time | The time at which the task starts |
+| state | The state of a task, including `pending`, `running`, `finished`, and `failed` |
 
 ## View statistics
 
@@ -165,18 +165,18 @@ Syntax as follows:
 SHOW STATS_META [ShowLikeOrWhere]
 ```
 
-The statement returns the total number of rows and the number of updated rows. You can use `ShowLikeOrWhere` to filter the information you need.
+This statement returns the total number of all the rows in all the tables and the number of updated rows. You can use `ShowLikeOrWhere` to filter the information you need.
 
 Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
 | Syntax Element | Description  |
 | :-------- | :------------- |
-| `db_name`  |  database name    |
-| `table_name` | table name |
-| `partition_name`| partition name |
-| `update_time` | the time of the update |
-| `modify_count` | the number of modified rows |
-| `row_count` | the total number of rows |
+| `db_name`  |  The database name    |
+| `table_name` | The table name |
+| `partition_name`| The partition name |
+| `update_time` | The the time of the update |
+| `modify_count` | The number of modified rows |
+| `row_count` | The total number of rows |
 
 ### Metadata of columns
 
@@ -190,21 +190,21 @@ Syntax as follows:
 SHOW STATS_HISTOGRAMS [ShowLikeOrWhere]
 ```
 
-The statement returns the number of different values and the number of `NULL` in all the columns. You can use `ShowLikeOrWhere` to filter the information you need.
+This statement returns the number of different values and the number of `NULL` in all the columns. You can use `ShowLikeOrWhere` to filter the information you need.
 
 Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 8 columns:
 
 | Syntax Element | Description    |
 | :-------- | :------------- |
-| `db_name`  |  database name    |
-| `table_name` | table name |
-| `partition_name` | partition name |
-| `column_name` | column name |
-| `is_index` | whether it is an index column or not |
-| `update_time` | the time of the update |
-| `distinct_count` | the number of different values |
-| `null_count` | the number of `NULL` |
-| `avg_col_size` | the average length of columns |
+| `db_name`  |  The database name    |
+| `table_name` | The table name |
+| `partition_name` | The partition name |
+| `column_name` | The column name |
+| `is_index` | Whether it is an index column or not |
+| `update_time` | The time of the update |
+| `distinct_count` | The number of different values |
+| `null_count` | The number of `NULL` |
+| `avg_col_size` | The average length of columns |
 
 ### Buckets of histogram
 
@@ -218,22 +218,22 @@ Syntax as follows:
 SHOW STATS_BUCKETS [ShowLikeOrWhere]
 ```
 
-The statement returns information about all the buckets. You can use `ShowLikeOrWhere` to filter the information you need.
+This statement returns information about all the buckets. You can use `ShowLikeOrWhere` to filter the information you need.
 
 Currently, the `SHOW STATS_BUCKETS` statement returns the following 10 columns:
 
 | Syntax Element | Description   |
 | :-------- | :------------- |
-| `db_name`  |  database name    |
-| `table_name` | table name |
-| `partition_name` | partition name |
-| `column_name` | column name |
-| `is_index` | whether it is an index column or not |
-| `bucket_id` | the ID of a bucket |
-| `count` | the number of all the values that falls on the bucket and the previous buckets |
-| `repeats` | the occurrence number of the maximum value |
-| `lower_bound` | the minimum value |
-| `upper_bound` | the maximum value |
+| `db_name`  |  The database name    |
+| `table_name` | The table name |
+| `partition_name` | The partition name |
+| `column_name` | The column name |
+| `is_index` | Whether it is an index column or not |
+| `bucket_id` | The the ID of a bucket |
+| `count` | The number of all the values that falls on the bucket and the previous buckets |
+| `repeats` | The occurrence number of the maximum value |
+| `lower_bound` | The minimum value |
+| `upper_bound` | The maximum value |
 
 ## Delete statistics
 
@@ -253,23 +253,23 @@ The statement deletes statistics of all the tables in `TableName`.
 
 ### Export statistics
 
-The interface to export statistics is as follows.
+The interface to export statistics is as follows:
 
-Use this interface to obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database.
++ To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database:
 
-{{< copyable "" >}}
+    {{< copyable "" >}}
 
-```
-http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
-```
+    ```
+    http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
+    ```
 
-Use the following interface to obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database at specific time.
++ To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database at specific time:
 
-{{< copyable "" >}}
+    {{< copyable "" >}}
 
-```
-http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
-```
+    ```
+    http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
+    ```
 
 ### Import statistics
 
