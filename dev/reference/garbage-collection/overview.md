@@ -12,7 +12,7 @@ TiDB uses MVCC to control transaction concurrency. When you update the data, the
 
 Each TiDB cluster contains a TiDB instance that is selected as the GC leader, which controls the GC process.
 
-GC runs periodically on TiDB. The default frequency is once in every 10 minutes. For each GC, TiDB firstly calculates a timestamp called "safe point". Then, TiDB clears the obsolete data under the premise that all the snapshots after the safe point retain integrity of the data. Specifically, there are three steps involved in the GC process:
+GC runs periodically on TiDB. The default frequency is once every 10 minutes. For each GC, TiDB firstly calculates a timestamp called "safe point" (defaults to the current time minus 10 minutes). Then, TiDB clears the obsolete data under the premise that all the snapshots after the safe point retain the integrity of the data. Specifically, there are three steps involved in the GC process:
 
 1. Resolve Locks
 2. Delete Ranges
