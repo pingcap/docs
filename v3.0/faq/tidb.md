@@ -1012,7 +1012,7 @@ See [Overview of the Monitoring Framework](/how-to/monitor/overview.md).
 
 ### Key metrics of monitoring
 
-See [Key Metrics](/reference/key-monitoring-metrics/overview.md).
+See [Key Metrics](/reference/key-monitoring-metrics/overview-dashboard.md).
 
 #### Is there a better way of monitoring the key metrics?
 
