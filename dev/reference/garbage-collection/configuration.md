@@ -53,7 +53,7 @@ update mysql.tidb set VARIABLE_VALUE="30m" where VARIABLE_NAME="tikv_gc_run_inte
 
 ## `tikv_gc_auto_concurrency`
 
-- Controls whether to let TiDB automatically specify the GC concurrency, or the maximum number of GC threads allowed concurrently. When `tikv_gc_mode` is set to `"distributed"`, GC concurrency works in the [Resolve Locks](/reference/garbage-collection/overview.md#resolve-locks) step. When `tikv_gc_mode` is set to `"central"`, it is applied to both the Resolve Locks and the [Do GC](/reference/garbage-collection/overview.md#do-gc) steps.
+- Controls whether to let TiDB automatically specify the GC concurrency, or the maximum number of GC threads allowed concurrently. When `tikv_gc_mode` is set to `"distributed"`, GC concurrency works in the [Resolve Locks](/reference/garbage-collection/overview.md#resolve-locks) step. When `tikv_gc_mode` is set to `"central"`, it is applied to both the Resolve Locks and [Do GC](/reference/garbage-collection/overview.md#do-gc) steps.
 
     - `true`(default): Automatically use the number of TiKV nodes in the cluster as the GC concurrency
     - `false`: Use the value of [`tikv_gc_concurrency`](#tikv-gc-concurrency) as the GC concurrency
