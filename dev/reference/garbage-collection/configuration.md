@@ -32,7 +32,7 @@ update mysql.tidb set VARIABLE_VALUE="30m" where VARIABLE_NAME="tikv_gc_run_inte
 
 ## `tikv_gc_life_time`
 
-- The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point. The value must be greater than or equal to 10 minutes.
+- The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point. The value must be greater than [`max-txn-time-use`](/reference/configuration/tidb-server/configuration-file#max-txn-time-use) in the TiDB configuration by at least 10 seconds, and must be greater than or equal to 10 minutes.
 - Default: `"10m0s"`
 
     > **Note:**
