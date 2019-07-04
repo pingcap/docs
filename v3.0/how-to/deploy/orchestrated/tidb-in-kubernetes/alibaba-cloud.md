@@ -6,7 +6,7 @@ category: how-to
 
 # Deploy TiDB on Alibaba Cloud Kubernetes
 
-This document introduces how to use your laptop (Linux or macOS) to deploy a TiDB Cluster on Alibaba Cloud Kubernetes.
+This document describes how to deploy a TiDB cluster on Alibaba Cloud Kubernetes with your laptop (Linux or macOS) for development or testing.
 
 ## Prerequisites
 
