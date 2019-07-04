@@ -57,24 +57,39 @@ The auto-scaling group ensures the desired number of healthy instances, so the c
 
 Configure the target region and credential (you can also set these variables in `terraform` command prompt):
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-export TF_VAR_ALICLOUD_REGION=<YOUR_REGION>
-export TF_VAR_ALICLOUD_ACCESS_KEY=<YOUR_ACCESS_KEY>
+export TF_VAR_ALICLOUD_REGION=<YOUR_REGION> && \
+export TF_VAR_ALICLOUD_ACCESS_KEY=<YOUR_ACCESS_KEY> && \
 export TF_VAR_ALICLOUD_SECRET_KEY=<YOUR_SECRET_KEY>
 ```
 
 The `variables.tf` file contains default settings of variables used for deploying the cluster, you can change it or use `-var` option to override a specific variable to fit your need.
 
-Apply the stack:
+Use the following commands to set up the cluster.
+
+Get the code from Github:
+
+{{< copyable "shell-regular" >}}
 
 ```shell
-# Get the code
-$ git clone --depth=1 https://github.com/pingcap/tidb-operator
-$ cd tidb-operator/deploy/aliyun
+git clone --depth=1 https://github.com/pingcap/tidb-operator && \
+cd tidb-operator/deploy/aliyun
+```
 
-# Apply the configs, note that you must answer "yes" to `terraform apply` to continue
-$ terraform init
-$ terraform apply
+Apply the configs, note that you must answer "yes" to `terraform apply` to continue:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+terraform init
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+terraform apply
 ```
 
 If you get an error while running `terraform apply`, fix the error (for example, lack of permission) according to the description and run `terraform apply` again.
@@ -105,19 +120,38 @@ worker_key_file = /root/tidb-operator/deploy/aliyun/credentials/tidb-cluster-nod
 
 You can then interact with the ACK cluster using `kubectl` and `helm` (`cluster_name` is `tidb-cluster` by default):
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ export KUBECONFIG=$PWD/credentials/kubeconfig_<cluster_name>
-$ kubectl version
-$ helm ls
+export KUBECONFIG=$PWD/credentials/kubeconfig_<cluster_name>
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl version
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+helm ls
 ```
 
 ## Access the database
 
 You can connect the TiDB cluster via the bastion instance, all necessary information are in the output printed after installation is finished (replace the `<>` parts with values from the output):
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ ssh -i credentials/<cluster_name>-bastion-key.pem root@<bastion_ip>
-$ mysql -h <tidb_slb_ip> -P <tidb_port> -u root
+ssh -i credentials/<cluster_name>-bastion-key.pem root@<bastion_ip>
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+mysql -h <tidb_slb_ip> -P <tidb_port> -u root
 ```
 
 ## Monitor
@@ -139,8 +173,10 @@ To upgrade TiDB cluster, modify `tidb_version` variable to a higher version in `
 
 This may take a while to complete, watch the process using command:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ kubectl get pods --namespace tidb -o wide --watch
+kubectl get pods --namespace tidb -o wide --watch
 ```
 
 ## Scale
@@ -170,15 +206,24 @@ For more customization options, please refer to `variables.tf`.
 
 It may take some while to finish destroying the cluster.
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ terraform destroy
+terraform destroy
 ```
 
 Alibaba cloud terraform provider does not handle kubernetes creation error properly, which causes an error when destroying. In that case, you can remove the kubernetes resource from the local state manually and proceed to destroy the rest resources:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ terraform state list
-$ terraform state rm module.ack.alicloud_cs_managed_kubernetes.k8s
+terraform state list
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+terraform state rm module.ack.alicloud_cs_managed_kubernetes.k8s
 ```
 
 > **Note:**
