@@ -111,7 +111,7 @@ $ kubectl version
 $ helm ls
 ```
 
-## Access the DB
+## Access the cluster
 
 You can connect the TiDB cluster via the bastion instance, all necessary information are in the output printed after installation is finished (replace the `<>` parts with values from the output):
 
