@@ -23,7 +23,7 @@ This document describes how to deploy a TiDB cluster on Alibaba Cloud Kubernetes
 
 ### Permissions
 
-The following permissions are required to deploy a TiDB cluster:
+To deploy a TiDB cluster, make sure you have the following privileges: 
 
 - AliyunECSFullAccess
 - AliyunESSFullAccess
