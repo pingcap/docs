@@ -37,11 +37,11 @@ The default setup creates:
 - An ECS instance as the bastion machine
 - A managed ACK (Alibaba Cloud Kubernetes) cluster with the following ECS instance worker nodes:
 
-  - An auto-scaling group of 2 * instances (2c2g) as ACK mandatory workers for system service like CoreDNS
-  - An auto-scaling group of 3 * `ecs.i2.xlarge` instances for PD
-  - An auto-scaling group of 3 * `ecs.i2.2xlarge` instances for TiKV
-  - An auto-scaling group of 2 * instances (16c32g) for TiDB
-  - An auto-scaling group of 1 * instance (4c8g) for monitoring components
+    - An auto-scaling group of 2 * instances (2c2g) as ACK mandatory workers for system service like CoreDNS
+    - An auto-scaling group of 3 * `ecs.i2.xlarge` instances for PD
+    - An auto-scaling group of 3 * `ecs.i2.2xlarge` instances for TiKV
+    - An auto-scaling group of 2 * instances (16c32g) for TiDB
+    - An auto-scaling group of 1 * instance (4c8g) for monitoring components
 
 In addition, the monitoring node mounts a 500GB cloud disk as data volume. All the instances except ACK mandatory workers span in multiple available zones to provide cross-AZ high availability.
 
@@ -119,8 +119,9 @@ $ mysql -h <tidb_slb_ip> -P <tidb_port> -u root
 Visit `<monitor_endpoint>` to view the grafana dashboards. You can find this information in the output of installation.
 
 The initial login credentials are:
-    - User: admin
-    - Password: admin
+
+- User: admin
+- Password: admin
 
 > **Warning:**
 >
@@ -176,7 +177,7 @@ Because the Alibaba Cloud offers different instance types in different region, i
 
 There's a exception for PD and TiKV instances, because PD and TiKV required local SSD, so you cannot specify instance type for them. Instead, you can choose the type family among `ecs.i1`,`ecs.i2` and `ecs.i2g`, which has one or more local NVMe SSD, and select a certain type in the type family by specifying `instance_memory_size`.
 
-For more customization options, please refer to `variables.tf`
+For more customization options, please refer to `variables.tf`.
 
 ## Limitations
 
