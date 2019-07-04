@@ -1,4 +1,4 @@
-# Deploy TiDB to Kubernetes on Your Laptop
+# Deploy TiDB in Kubernetes on Your Laptop
 
 This document describes how to deploy a TiDB cluster in Kubernetes on your laptop (Linux or macOS) for development or testing.
 
@@ -10,14 +10,15 @@ Before deployment, make sure the following requirements are satisfied:
 
 - Resources requirement: CPU 2+, Memory 4G+
 
-    > **Note:** For macOS, you need to allocate 2+ CPU and 4G+ Memory to Docker. For details, see [Docker for Mac configuration](https://docs.docker.com/docker-for-mac/#advanced).
+    > **Note:**
+    >
+    > For macOS, you need to allocate 2+ CPU and 4G+ Memory to Docker. For details, see [Docker for Mac configuration](https://docs.docker.com/docker-for-mac/#advanced).
 
 - [Docker](https://docs.docker.com/install/): version >= 17.03
 
     > **Note:**
     >
     > - [Legacy Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_mac/) users must migrate to [Docker for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac) by uninstalling Legacy Docker Toolbox and installing Docker for Mac, because DinD cannot run on Docker Toolbox or Docker Machine.
-    >
     > - `kubeadm` validates the installed Docker version during installation. If you are using Docker later than 18.06, there will be warning messages in installation. The cluster might still be able to work normally, but it is recommended to use a Docker version between 17.03 and 18.06 for better compatibility. You can find older versions of docker [here](https://download.docker.com/).
 
 - [Helm Client](https://github.com/helm/helm/blob/master/docs/install.md#installing-the-helm-client): version >= 2.9.0 and < 3.0.0
