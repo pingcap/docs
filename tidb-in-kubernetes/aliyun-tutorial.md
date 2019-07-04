@@ -1,9 +1,15 @@
 # Deploy TiDB Operator and TiDB Cluster on Alibaba Cloud Kubernetes
 
-## Requirements
+This document introduces how to use your laptop (Linux or macOS) to deploy TiDB Operator and TiDB Cluster on Alibaba Cloud Kubernetes.
+
+## Prerequisites
 
 - [aliyun-cli](https://github.com/aliyun/aliyun-cli) >= 3.0.15 and [configure aliyun-cli](https://www.alibabacloud.com/help/doc-detail/90766.htm?spm=a2c63.l28256.a3.4.7b52a893EFVglq)
-> **Note:** The access key used must be granted permissions to control resources.
+
+    > **Note:**
+    > 
+    > The access key used must be granted permissions to control resources.
+
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) >= 1.12
 - [helm](https://github.com/helm/helm/blob/master/docs/install.md#installing-the-helm-client) >= 2.9.1 and <= 2.11.0
 - [jq](https://stedolan.github.io/jq/download/) >= 1.6
@@ -11,7 +17,8 @@
 
 ### Permissions
 
-The following permissions are required:
+The following permissions are required to deploy a TiDB cluster:
+
 - AliyunECSFullAccess
 - AliyunESSFullAccess
 - AliyunVPCFullAccess
@@ -24,24 +31,26 @@ The following permissions are required:
 
 ## Overview
 
-The default setup will create:
+The default setup creates:
 
 - A new VPC
-- An ECS instance as bastion machine
-- A managed ACK(Alibaba Cloud Kubernetes) cluster with the following ECS instance worker nodes:
-  - An auto-scaling group of 2 * instances(2c2g) as ACK mandatory workers for system service like CoreDNS
+- An ECS instance as the bastion machine
+- A managed ACK (Alibaba Cloud Kubernetes) cluster with the following ECS instance worker nodes:
+
+  - An auto-scaling group of 2 * instances (2c2g) as ACK mandatory workers for system service like CoreDNS
   - An auto-scaling group of 3 * `ecs.i2.xlarge` instances for PD
   - An auto-scaling group of 3 * `ecs.i2.2xlarge` instances for TiKV
-  - An auto-scaling group of 2 * instances(16c32g) for TiDB
-  - An auto-scaling group of 1 * instance(4c8g) for monitoring components
+  - An auto-scaling group of 2 * instances (16c32g) for TiDB
+  - An auto-scaling group of 1 * instance (4c8g) for monitoring components
 
-In addition, the monitoring node will mount a 500GB cloud disk as data volume. All the instances except ACK mandatory workers span in multiple available zones to provide cross-AZ high availability.
+In addition, the monitoring node mounts a 500GB cloud disk as data volume. All the instances except ACK mandatory workers span in multiple available zones to provide cross-AZ high availability.
 
-The auto-scaling group will ensure the desired number of healthy instances, so the cluster can auto recover from node failure or even available zone failure.
+The auto-scaling group ensures the desired number of healthy instances, so the cluster can auto-recover from node failure or even available zone failure.
 
 ## Setup
 
 Configure target region and credential (you can also set these variables in `terraform` command prompt):
+
 ```shell
 export TF_VAR_ALICLOUD_REGION=<YOUR_REGION>
 export TF_VAR_ALICLOUD_ACCESS_KEY=<YOUR_ACCESS_KEY>
@@ -62,11 +71,9 @@ $ terraform init
 $ terraform apply
 ```
 
-If you get an error while running `terraform apply`, fix the error(e.g. lack of permission) according to the description and run `terraform apply` again.
+If you get an error while running `terraform apply`, fix the error (for example, lack of permission) according to the description and run `terraform apply` again.
 
-`terraform apply` will take 5 to 10 minutes to create the whole stack, once complete, basic cluster information will be printed:
-
-> **Note:** You can use the `terraform output` command to get the output again.
+`terraform apply` takes 5 to 10 minutes to create the whole stack, once complete, basic cluster information is printed:
 
 ```
 Apply complete! Resources: 3 added, 0 changed, 1 destroyed.
@@ -85,6 +92,10 @@ tidb_version = v3.0.0-rc.1
 vpc_id = vpc-bp16wcbu0xhbg833fymmc
 worker_key_file = /root/tidb-operator/deploy/aliyun/credentials/tidb-cluster-node-key.pem
 ```
+
+> **Note:**
+>
+> You can use the `terraform output` command to get the output again.
 
 You can then interact with the ACK cluster using `kubectl` and `helm` (`cluster_name` is `tidb-cluster` by default):
 
@@ -111,7 +122,9 @@ The initial login credentials are:
     - User: admin
     - Password: admin
 
-> **Warning:** It is strongly recommended to set `monitor_slb_network_type` to `intranet` in `variables.tf` for security if you already have a VPN connecting to your VPC or plan to setup one.
+> **Warning:**
+>
+> It is strongly recommended to set `monitor_slb_network_type` to `intranet` in `variables.tf` for security if you already have a VPN connecting to your VPC or plan to setup one.
 
 ## Upgrade TiDB cluster
 
@@ -119,13 +132,13 @@ To upgrade TiDB cluster, modify `tidb_version` variable to a higher version in `
 
 This may take a while to complete, watch the process using command:
 
-```
-kubectl get pods --namespace tidb -o wide --watch
+```shell
+$ kubectl get pods --namespace tidb -o wide --watch
 ```
 
 ## Scale TiDB cluster
 
-To scale TiDB cluster, modify `tikv_count` or `tidb_count` to your desired numbers, and then run `terraform apply`.
+To scale the TiDB cluster, modify `tikv_count` or `tidb_count` to your desired numbers, and then run `terraform apply`.
 
 ## Destroy
 
@@ -135,14 +148,16 @@ It may take some while to finish destroying the cluster.
 $ terraform destroy
 ```
 
-Alibaba cloud terraform provider do not handle kubernetes creation error properly, which will cause an error when destroying. In that case, you can remove the kubernetes resource from the local state manually and proceed to destroy the rest resources:
+Alibaba cloud terraform provider do not handle kubernetes creation error properly, which causes an error when destroying. In that case, you can remove the kubernetes resource from the local state manually and proceed to destroy the rest resources:
 
 ```shell
 $ terraform state list
 $ terraform state rm module.ack.alicloud_cs_managed_kubernetes.k8s
 ```
 
-> **Note:** You have to manually delete the cloud disk used by monitoring node in Aliyun's console after destroying if you don't need it anymore.
+> **Note:**
+> 
+> You have to manually delete the cloud disk used by monitoring node in Aliyun's console after destroying if you don't need it anymore.
 
 ## Customize
 
