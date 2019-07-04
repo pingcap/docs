@@ -173,9 +173,9 @@ The worker node instance types are also configurable, there are two ways to conf
 1. by specifying instance type id
 2. by specifying capacity like instance cpu count and memory size
 
-Because the Alibaba Cloud offers different instance types in different region, it is recommended to specify the capacity instead of certain type. You can configure these in the `variables.tf`, note that instance type will override capacity configurations.
+Because the Alibaba Cloud offers different instance types in different region, it is recommended to specify the capacity instead of certain type. You can configure these in the `variables.tf`, note that instance type overrides capacity configurations.
 
-There's a exception for PD and TiKV instances, because PD and TiKV required local SSD, so you cannot specify instance type for them. Instead, you can choose the type family among `ecs.i1`,`ecs.i2` and `ecs.i2g`, which has one or more local NVMe SSD, and select a certain type in the type family by specifying `instance_memory_size`.
+There is an exception for PD and TiKV instances, because PD and TiKV required local SSD, so you cannot specify instance types for them. Instead, you can choose the type family among `ecs.i1`,`ecs.i2` and `ecs.i2g`, which has one or more local NVMe SSD, and select a certain type in the type family by specifying `instance_memory_size`.
 
 For more customization options, please refer to `variables.tf`.
 
