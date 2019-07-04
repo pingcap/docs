@@ -70,6 +70,6 @@ You might encounter the following two situations when seeing which nodes' IP can
 
 ## LoadBalancer
 
-If Kubernetes is run in an environment with LoadBalancer, such as GCP/AWS platform, it is recommended to enable the LoadBalancer feature of these cloud platforms.
+If Kubernetes is run in an environment with LoadBalancer, such as GCP/AWS platform, it is recommended to use the LoadBalancer feature of these cloud platforms by setting `tidb.service.type=LoadBalancer`.
 
 See [Kubernetes Service Documentation](https://kubernetes.io/docs/concepts/services-networking/service/) to know more about the features of Service and what LoadBalancer in the cloud platform supports.
