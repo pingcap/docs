@@ -1,3 +1,9 @@
+---
+title: Deploy TiDB in Kubernetes on Your Laptop
+summary: Learn how to deploy TiDB in Kubernetes on Your Laptop.
+category: how-to
+---
+
 # Deploy TiDB in Kubernetes on Your Laptop
 
 This document describes how to deploy a TiDB cluster in Kubernetes on your laptop (Linux or macOS) for development or testing.
