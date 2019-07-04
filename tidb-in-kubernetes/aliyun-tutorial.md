@@ -181,4 +181,4 @@ For more customization options, please refer to `variables.tf`.
 
 ## Limitations
 
-You cannot change pod cidr, service cidr and worker instance types once the cluster created.
+You cannot change pod cidr, service cidr and worker instance types once the cluster is created.
