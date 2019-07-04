@@ -149,7 +149,7 @@ It may take some while to finish destroying the cluster.
 $ terraform destroy
 ```
 
-Alibaba cloud terraform provider do not handle kubernetes creation error properly, which causes an error when destroying. In that case, you can remove the kubernetes resource from the local state manually and proceed to destroy the rest resources:
+Alibaba cloud terraform provider does not handle kubernetes creation error properly, which causes an error when destroying. In that case, you can remove the kubernetes resource from the local state manually and proceed to destroy the rest resources:
 
 ```shell
 $ terraform state list
