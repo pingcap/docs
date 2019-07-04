@@ -1,10 +1,10 @@
 ---
-title: Deploy TiDB Operator and TiDB cluster on GCP GKE
+title: Deploy TiDB Operator and TiDB Cluster on GCP GKE
 summary: Learn how to deploy TiDB Operator and TiDB cluster on GCP GKE.
 category: how-to
 ---
 
-# Deploy TiDB Operator and TiDB cluster on GCP GKE
+# Deploy TiDB Operator and TiDB Cluster on GCP GKE
 
 This document describes how to deploy TiDB Operator and a TiDB cluster on GCP GKE with your laptop (Linux or macOS) for development or testing.
 

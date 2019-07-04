@@ -1,10 +1,10 @@
 ---
-title: Deploy TiDB Operator and TiDB cluster on AWS EKS
+title: Deploy TiDB Operator and TiDB Cluster on AWS EKS
 summary: Learn how to deploy TiDB Operator and TiDB cluster on AWS EKS.
 category: how-to
 ---
 
-# Deploy TiDB Operator and TiDB cluster on AWS EKS
+# Deploy TiDB Operator and TiDB Cluster on AWS EKS
 
 This document describes how to deploy TiDB Operator and a TiDB cluster on AWS EKS with your laptop (Linux or macOS) for development or testing.
 

@@ -1,3 +1,9 @@
+---
+title: Deploy TiDB Operator and TiDB Cluster on Alibaba Cloud Kubernetes
+summary: Learn how to deploy TiDB Operator and TiDB cluster on Alibaba Cloud Kubernetes.
+category: how-to
+---
+
 # Deploy TiDB Operator and TiDB Cluster on Alibaba Cloud Kubernetes
 
 This document introduces how to use your laptop (Linux or macOS) to deploy TiDB Operator and TiDB Cluster on Alibaba Cloud Kubernetes.
