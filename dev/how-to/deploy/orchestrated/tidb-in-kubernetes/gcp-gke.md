@@ -1,10 +1,10 @@
 ---
-title: Deploy TiDB Cluster on GCP GKE
-summary: Learn how to deploy TiDB cluster on GCP GKE.
+title: Deploy TiDB on GCP GKE
+summary: Learn how to deploy a TiDB cluster on GCP GKE.
 category: how-to
 ---
 
-# Deploy TiDB Cluster on GCP GKE
+# Deploy TiDB on GCP GKE
 
 This document describes how to deploy a TiDB cluster on GCP GKE with your laptop (Linux or macOS) for development or testing.
 
