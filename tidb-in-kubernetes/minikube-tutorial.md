@@ -1,6 +1,6 @@
 ---
 title: Deploy TiDB in the Minikube Cluster
-summary: Learn how to deploy TiDB n the minikube cluster.
+summary: Learn how to deploy TiDB in the minikube cluster.
 category: how-to
 ---
 
