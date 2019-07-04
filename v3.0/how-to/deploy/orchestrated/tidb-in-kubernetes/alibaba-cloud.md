@@ -21,7 +21,7 @@ This document describes how to deploy a TiDB cluster on Alibaba Cloud Kubernetes
 - [jq](https://stedolan.github.io/jq/download/) >= 1.6
 - [terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) 0.11.*
 
-### Permissions
+### Privileges
 
 To deploy a TiDB cluster, make sure you have the following privileges: 
 
