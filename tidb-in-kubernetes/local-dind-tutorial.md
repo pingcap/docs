@@ -46,69 +46,130 @@ Before deployment, make sure the following requirements are satisfied:
 
     If your root directory `/` uses XFS without the `d_type` support, but there is another partition does, or is using another filesystem, you can also change the data directory of Docker to use that partition.
 
-    Assume a supported filesystem is mounted at path `/data`, use the following instructions to let Docker use it:
+    Assume a supported filesystem is mounted at path `/data`, use the following instructions to let Docker use it.
 
-    ```sh
-    # Create a new directory for docker data storage
+    Create a new directory for docker data storage:
+
+    {{< copyable "shell-regular" >}}
+    
+    ```shell
     mkdir -p /data/docker
+    ```
 
-    # Stop docker daemon
+    Stop docker daemon:
+
+    {{< copyable "shell-regular" >}}
+    
+    ```shell
     systemctl stop docker.service
+    ```
 
-    # Make sure the systemd directory exist
+    Make sure the `systemd` directory exist:
+
+    {{< copyable "shell-regular" >}}
+    
+    ```shell
     mkdir -p /etc/systemd/system/docker.service.d/
+    ```
 
-    # Overrite config
+    Overwrite config:
+
+    {{< copyable "shell-regular" >}}
+    
+    ```shell
     cat << EOF > /etc/systemd/system/docker.service.d/docker-storage.conf
     [Service]
     ExecStart=
     ExecStart=/usr/bin/dockerd --data-root /data/docker -H fd:// --containerd=/run/containerd/containerd.sock
     EOF
+    ```
 
-    # Restart docker daemon
-    systemctl daemon-reload
+    Restart docker daemon:
+
+    {{< copyable "shell-regular" >}}
+    
+    ```shell
+    systemctl daemon-reload && \
     systemctl start docker.service
     ```
 
 ## Step 1: Deploy a Kubernetes cluster using DinD
 
-First, make sure that the docker daemon is running, and you can install and set up a Kubernetes cluster (version 1.12) using DinD for TiDB Operator with the script in our repository:
+First, make sure that the docker daemon is running, and you can install and set up a Kubernetes cluster (version 1.12) using DinD for TiDB Operator with the script in our repository. Follow the steps below:
 
-```sh
-# Clone the code
-$ git clone --depth=1 https://github.com/pingcap/tidb-operator
+Clone the code:
 
-# Set up the cluster
-$ cd tidb-operator
-$ manifests/local-dind/dind-cluster-v1.12.sh up
+{{< copyable "shell-regular" >}}
+
+```shell
+git clone --depth=1 https://github.com/pingcap/tidb-operator
+```
+
+Set up the cluster:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+cd tidb-operator && \
+manifests/local-dind/dind-cluster-v1.12.sh up
 ```
 
 If the cluster fails to pull Docker images during setup, you can set the environment variable `KUBE_REPO_PREFIX` to `uhub.ucloud.cn/pingcap` before running the script `dind-cluster-v1.12.sh` as follows (the Docker images are pulled from [UCloud Docker Registry](https://docs.ucloud.cn/compute/uhub/index) instead):
 
-```sh
-$ KUBE_REPO_PREFIX=uhub.ucloud.cn/pingcap manifests/local-dind/dind-cluster-v1.12.sh up
+{{< copyable "shell-regular" >}}
+
+```shell
+KUBE_REPO_PREFIX=uhub.ucloud.cn/pingcap manifests/local-dind/dind-cluster-v1.12.sh up
 ```
 
 An alternative solution is to configure HTTP proxies in DinD:
 
-```sh
-$ export DIND_HTTP_PROXY=http://<ip>:<port>
-$ export DIND_HTTPS_PROXY=http://<ip>:<port>
-$ export DIND_NO_PROXY=.svc,.local,127.0.0.1,0,1,2,3,4,5,6,7,8,9 # whitelist internal domains and IP addresses
-$ manifests/local-dind/dind-cluster-v1.12.sh up
+{{< copyable "shell-regular" >}}
+
+```shell
+export DIND_HTTP_PROXY=http://<ip>:<port> && \
+export DIND_HTTPS_PROXY=http://<ip>:<port>
 ```
 
-There might be some warnings during the process due to various settings and environment of your system, but the command should exit without any error. You can verify whether the K8s cluster is up and running by using:
+Export whitelist internal domains and IP addresses:
 
-```sh
-# Get the cluster information
-$ kubectl cluster-info
+{{< copyable "shell-regular" >}}
+
+```shell
+export DIND_NO_PROXY=.svc,.local,127.0.0.1,0,1,2,3,4,5,6,7,8,9
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+manifests/local-dind/dind-cluster-v1.12.sh up
+```
+
+There might be some warnings during the process due to various settings and environment of your system, but the command should exit without any error. You can verify whether the K8s cluster is up and running by using the following commands.
+
+Get the cluster information:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl cluster-info
+```
+
+```
 Kubernetes master is running at http://127.0.0.1:8080
 KubeDNS is running at http://127.0.0.1:8080/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 kubernetes-dashboard is running at http://127.0.0.1:8080/api/v1/namespaces/kube-system/services/kubernetes-dashboard/proxy
+```
 
-# List host nodes (they are docker containers in the DinD installation) in the cluster
-$ kubectl get nodes -o wide
+List host nodes (they are docker containers in the DinD installation) in the cluster:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl get nodes -o wide
+```
+
+```
 NAME          STATUS   ROLES    AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION               CONTAINER-RUNTIME
 kube-master   Ready    master   11m     v1.12.5   10.192.0.2    <none>        Debian GNU/Linux 9 (stretch)   3.10.0-957.12.1.el7.x86_64   docker://18.9.0
 kube-node-1   Ready    <none>   9m32s   v1.12.5   10.192.0.3    <none>        Debian GNU/Linux 9 (stretch)   3.10.0-957.12.1.el7.x86_64   docker://18.9.0
@@ -126,24 +187,33 @@ Once the K8s cluster is up and running, we can add chart repo and install TiDB O
 
 1. Add the Helm chart repo:
 
-    ```sh
-    $ helm repo add pingcap http://charts.pingcap.org/
-    $ helm repo list
-    $ helm repo update
-    $ helm search tidb-cluster -l
-    $ helm search tidb-operator -l
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    helm repo add pingcap http://charts.pingcap.org/ && \
+    helm repo list && \
+    helm repo update && \
+    helm search tidb-cluster -l && \
+    helm search tidb-operator -l
     ```
 
 2. Install TiDB operator:
 
-    ```sh
-    $ helm install pingcap/tidb-operator --name=tidb-operator --namespace=tidb-admin --set scheduler.kubeSchedulerImageName=mirantis/hypokube --set scheduler.kubeSchedulerImageTag=final --version=${chartVersion}
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    helm install pingcap/tidb-operator --name=tidb-operator --namespace=tidb-admin --set scheduler.kubeSchedulerImageName=mirantis/hypokube --set scheduler.kubeSchedulerImageTag=final --version=${chartVersion}
     ```
 
 3. Wait a few minutes until TiDB Operator is running:
 
-    ```sh
-    $ kubectl get pods --namespace tidb-admin -l app.kubernetes.io/instance=tidb-operator
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    kubectl get pods --namespace tidb-admin -l app.kubernetes.io/instance=tidb-operator
+    ```
+
+    ```
     NAME                                       READY     STATUS    RESTARTS   AGE
     tidb-controller-manager-5cd94748c7-jlvfs   1/1       Running   0          1m
     tidb-scheduler-56757c896c-clzdg            2/2       Running   0          1m
@@ -153,28 +223,57 @@ Once the K8s cluster is up and running, we can add chart repo and install TiDB O
 
 By using `helm` along with TiDB Operator, we can easily set up a TiDB cluster:
 
-```sh
-$ helm install pingcap/tidb-cluster --name=demo --namespace=tidb --version=${chartVersion}
+{{< copyable "shell-regular" >}}
+
+```shell
+helm install pingcap/tidb-cluster --name=demo --namespace=tidb --version=${chartVersion}
 ```
 
 Wait a few minutes for all TiDB components to be created and ready:
 
-```sh
-# Use `Ctrl + C` to exit watch mode
-$ kubectl get pods --namespace tidb -l app.kubernetes.io/instance=demo -o wide --watch
+{{< copyable "shell-regular" >}}
 
-# Get basic information of the TiDB cluster
-$ kubectl get tidbcluster -n tidb
+```shell
+kubectl get pods --namespace tidb -l app.kubernetes.io/instance=demo -o wide --watch
+```
+
+> **Note:**
+>
+> You can use `Ctrl + C` to exit watch mode.
+
+Get basic information of the TiDB cluster:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl get tidbcluster -n tidb
+```
+
+```
 NAME   PD                       STORAGE   READY   DESIRE   TIKV                       STORAGE   READY   DESIRE   TIDB                       READY   DESIRE
 demo   pingcap/pd:v3.0.0-rc.1   1Gi       3       3        pingcap/tikv:v3.0.0-rc.1   10Gi      3       3        pingcap/tidb:v3.0.0-rc.1   2       2
+```
 
-$ kubectl get statefulset -n tidb
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl get statefulset -n tidb
+```
+
+```
 NAME        DESIRED   CURRENT   AGE
 demo-pd     3         3         1m
 demo-tidb   2         2         1m
 demo-tikv   3         3         1m
+```
 
-$ kubectl get service -n tidb
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl get service -n tidb
+```
+
+```
 NAME              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                          AGE
 demo-discovery    ClusterIP   10.96.146.139    <none>        10261/TCP                        1m
 demo-grafana      NodePort    10.111.80.73     <none>        3000:32503/TCP                   1m
@@ -184,8 +283,15 @@ demo-prometheus   NodePort    10.104.97.84     <none>        9090:32448/TCP     
 demo-tidb         NodePort    10.102.165.13    <none>        4000:32714/TCP,10080:32680/TCP   1m
 demo-tidb-peer    ClusterIP   None             <none>        10080/TCP                        1m
 demo-tikv-peer    ClusterIP   None             <none>        20160/TCP                        1m
+```
 
-$ kubectl get configmap -n tidb
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl get configmap -n tidb
+```
+
+```
 NAME                              DATA   AGE
 demo-monitor                      5      1m
 demo-monitor-dashboard-extra-v3   2      1m
@@ -194,8 +300,15 @@ demo-monitor-dashboard-v3         5      1m
 demo-pd                           2      1m
 demo-tidb                         2      1m
 demo-tikv                         2      1m
+```
 
-$ kubectl get pod -n tidb
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl get pod -n tidb
+```
+
+```
 NAME                              READY     STATUS      RESTARTS   AGE
 demo-discovery-649c7bcbdc-t5r2k   1/1       Running     0          1m
 demo-monitor-58745cf54f-gb8kd     2/2       Running     0          1m
@@ -223,8 +336,10 @@ To access the TiDB cluster, use `kubectl port-forward` to expose services to the
 
     1. Use `kubectl` to forward the host machine port to the TiDB service port:
 
-        ```sh
-        $ kubectl port-forward svc/demo-tidb 4000:4000 --namespace=tidb
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        kubectl port-forward svc/demo-tidb 4000:4000 --namespace=tidb
         ```
 
         > **Note:** 
@@ -233,16 +348,20 @@ To access the TiDB cluster, use `kubectl port-forward` to expose services to the
 
     2. To connect to TiDB using the MySQL client, open a new terminal tab or window and run the following command:
 
-        ```sh
-        $ mysql -h 127.0.0.1 -P 4000 -u root
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        mysql -h 127.0.0.1 -P 4000 -u root
         ```
 
 - View the monitor dashboards
 
     1. Use `kubectl` to forward the host machine port to the Grafana service port:
 
-        ```sh
-        $ kubectl port-forward svc/demo-grafana 3000:3000 --namespace=tidb
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        kubectl port-forward svc/demo-grafana 3000:3000 --namespace=tidb
         ```
 
         > **Note:**
@@ -262,8 +381,13 @@ To access the TiDB cluster, use `kubectl port-forward` to expose services to the
 
     1. Find their listing port numbers using the following command:
 
-        ```sh
-        $ kubectl get service -n tidb | grep NodePort
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        kubectl get service -n tidb | grep NodePort
+        ```
+
+        ```
         demo-grafana      NodePort    10.111.80.73     <none>        3000:32503/TCP                   1m
         demo-prometheus   NodePort    10.104.97.84     <none>        9090:32448/TCP                   1m
         demo-tidb         NodePort    10.102.165.13    <none>        4000:32714/TCP,10080:32680/TCP   1m
@@ -275,8 +399,13 @@ To access the TiDB cluster, use `kubectl port-forward` to expose services to the
 
         DinD is a K8s cluster running inside Docker containers, so services expose ports to the containers' address, instead of the real host machine. We can find the IP addresses of Docker containers by using the following command:
 
-        ```sh
-        $ kubectl get nodes -o yaml | grep address
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        kubectl get nodes -o yaml | grep address
+        ```
+
+        ```
         addresses:
         - address: 10.192.0.2
         - address: kube-master
@@ -303,8 +432,10 @@ You can scale out or scale in the TiDB cluster simply by modifying the number of
 
 1. Get the values.yaml of the current tidb-cluster chart:
 
-    ```sh
-    mkdir -p /home/tidb/demo
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    mkdir -p /home/tidb/demo && \
     helm inspect values pingcap/tidb-cluster --version=${chartVersion} > /home/tidb/demo/values-demo.yaml
     ```
   
@@ -314,7 +445,9 @@ You can scale out or scale in the TiDB cluster simply by modifying the number of
 
 3. Run the following command to apply the changes:
 
-    ```sh
+    {{< copyable "shell-regular" >}}
+
+    ```shell
     helm upgrade demo pingcap/tidb-cluster --namespace=tidb -f /home/tidb/demo/values-demo.yaml --version=${chartVersion}
     ```
 > **Note:** 
@@ -331,14 +464,21 @@ Use `kubectl get pod -n tidb` to verify the number of each compoments equal to v
 
 2. Run the following command to apply the changes:
 
-    ```sh
+    {{< copyable "shell-regular" >}}
+
+    ```shell
     helm upgrade demo pingcap/tidb-cluster --namespace=tidb -f /home/tidb/demo/values-demo.yaml --version=${chartVersion}
     ```
 
 Use `kubectl get pod -n tidb` to verify whether all pods are in the `Running` state. Then you can connect to the database and use `tidb_version()` function to verify the version:
 
-```sh
-MySQL [(none)]> select tidb_version();
+{{< copyable "sql" >}}
+
+```sql
+select tidb_version();
+```
+
+```
 *************************** 1. row ***************************
 tidb_version(): Release Version: v3.0.0-rc.2
 Git Commit Hash: 06f3f63d5a87e7f0436c0618cf524fea7172eb93
@@ -355,8 +495,10 @@ Check Table Before Drop: false
 
 When you finish your test, use the following command to destroy the TiDB cluster:
 
-```sh
-$ helm delete demo --purge
+{{< copyable "shell-regular" >}}
+
+```shell
+helm delete demo --purge
 ```
 
 > **Note:** 
@@ -365,34 +507,47 @@ $ helm delete demo --purge
 
 If you do not need the data anymore, run the following commands to clean up the data. 
 
-```sh
-$ kubectl get pv -l app.kubernetes.io/namespace=tidb -o name | xargs -I {} kubectl patch {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
-$ kubectl delete pvc --namespace tidb --all
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl get pv -l app.kubernetes.io/namespace=tidb -o name | xargs -I {} kubectl patch {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl delete pvc --namespace tidb --all
 ```
 
 ## Stop and Re-start the Kubernetes cluster
 
 * If you want to stop the DinD Kubernetes cluster, run the following command:
 
-    ```sh
-    $ manifests/local-dind/dind-cluster-v1.12.sh stop
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    manifests/local-dind/dind-cluster-v1.12.sh stop
     ```
 
     You can use `docker ps` to verify that there is no docker container running.
 
 * If you want to restart the DinD Kubernetes after you stop it, run the following command:
 
-    ```
-    $ manifests/local-dind/dind-cluster-v1.12.sh start
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    manifests/local-dind/dind-cluster-v1.12.sh start
     ```
 
 ## Destroy the DinD Kubernetes cluster
 
 If you want to clean up the DinD Kubernetes cluster, run the following commands:
 
-```sh
-$ manifests/local-dind/dind-cluster-v1.12.sh clean
-$ sudo rm -rf data/kube-node-*
+{{< copyable "shell-regular" >}}
+
+```shell
+manifests/local-dind/dind-cluster-v1.12.sh clean && \
+sudo rm -rf data/kube-node-*
 ```
 
 > **Warning:** 
