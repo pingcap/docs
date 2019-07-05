@@ -22,7 +22,7 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology a
 - [Start the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
 - [Stop the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
 - [Modify component configuration](/how-to/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
-- [Scale the TiDB cluster](/how-to/scale/with-ansible/#scale-the-tidb-cluster-using-tidb-ansible.md)
+- [Scale the TiDB cluster](/how-to/scale/with-ansible.md)
 - [Upgrade the component version](/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
 - [Enable the cluster binlog](/reference/tidb-binlog-overview.md)
 - [Clean up data of the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
