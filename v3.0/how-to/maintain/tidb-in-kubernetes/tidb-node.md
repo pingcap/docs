@@ -101,7 +101,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
 Migrating TiKV instances is relatively slow and might lead to unwanted data migration load on the cluster. For this reason, you need to choose different strategies as needed prior to maintaining the nodes that hold TiKV instances:
 
 - If you want to maintain a node that is recoverable in a short term, you can recover the TiKV node from where it is after the maintenance without migrating it elsewhere.
--  If you want to maintain a node that is not recoverable in a short term, you need to make a plan for the TiKV migration task.
+- If you want to maintain a node that is not recoverable in a short term, you need to make a plan for the TiKV migration task.
 
 ### Maintain a recoverable node in a short term
 
@@ -121,7 +121,7 @@ pd-ctl -d config set max-store-down-time 10m
 
 After configuring `max-store-down-time` to an appropriate value, the follow-up operations are the same as those in [Maintain nodes that hold PD and TiDB instances](#maintain-nodes-that-hold-pd-and-tidb-instances).
 
-### Maintain an irrecoverable node in a short terminform
+### Maintain an irrecoverable node in a short term
 
 For the maintenance on an node that cannot be recovered in a short term (for example, a node has to go offline for a long time), you need to use `pd-ctl` to proactively tell the TiDB cluster to make the corresponding TiKV instances offline, and manually unbind the instances from the node.
 
