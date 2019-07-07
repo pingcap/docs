@@ -101,7 +101,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
 Migrating TiKV instances is relatively slow and might lead to unwanted data migration load on the cluster. For this reason, you need to choose different strategies as needed prior to maintaining the nodes that hold TiKV instances:
 
 - If you want to maintain a node that is recoverable in a short term, you can recover the TiKV node from where it is after the maintenance without migrating it elsewhere.
--  If you want to maintain a node that is not recoverable in a short term, you need to make a plan for the TiKV migration task.
+- If you want to maintain a node that is not recoverable in a short term, you need to make a plan for the TiKV migration task.
 
 ### Maintain a recoverable node in a short term
 
