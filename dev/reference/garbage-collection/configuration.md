@@ -1,12 +1,12 @@
 ---
 title: GC Configuration
-summary: Learn about GC related parameters
+summary: Learn about GC configuration parameters.
 category: reference
 ---
 
 # GC Configuration
 
-The GC configuration and operational status are recorded in the `mysql.tidb` system table. This documents list these parameters with their descriptions. You can use SQL statements to query or modify them. For example, the following statement adjusts the GC interval to 30 minutes:
+The GC (Garbage Collection) configuration and operational status are recorded in the `mysql.tidb` system table. This document lists these parameters with their descriptions. You can use SQL statements to query or modify them. For example, the following statement adjusts the GC interval to 30 minutes:
 
 ```sql
 update mysql.tidb set VARIABLE_VALUE="30m" where VARIABLE_NAME="tikv_gc_run_interval";
@@ -14,7 +14,7 @@ update mysql.tidb set VARIABLE_VALUE="30m" where VARIABLE_NAME="tikv_gc_run_inte
 
 > **Note:**
 >
-> Besides the following GC configuration parameters, the `mysql.tidb` system table also contains records that store the status of the storage components in a TiDB cluster, among which GC related ones are included, as listed below:
+> In addition to GC configuration parameters, the `mysql.tidb` system table also contains records that store the status of the storage components in a TiDB cluster, among which GC related ones are included, as listed below:
 >
 > - `tikv_gc_leader_uuid`, `tikv_gc_leader_desc` and `tikv_gc_leader_lease`: Records the information of the GC leader
 > - `tikv_gc_last_run_time`: The duration of the previous GC
@@ -37,7 +37,7 @@ update mysql.tidb set VARIABLE_VALUE="30m" where VARIABLE_NAME="tikv_gc_run_inte
 
     > **Note:**
     >
-    > - The value of `tikv_gc_life_time` must be greater than that of [`max-txn-time-use`](/reference/configuration/tidb-server/configuration-file/#max-txn-time-use) in the TiDB configuration file by at least 10 seconds, and must than or equal to 10 minutes.
+    > - The value of `tikv_gc_life_time` must be greater than that of [`max-txn-time-use`](/reference/configuration/tidb-server/configuration-file.md#max-txn-time-use) in the TiDB configuration file by at least 10 seconds, and must than or equal to 10 minutes.
     > - In scenarios of frequent updates, a large value (days or even months) for `tikv_gc_life_time` may cause potential issues, such as:
     >    - Larger storage use
     >    - A large amount of history data may affect performance to a certain degree, especially for range queries such as `select count(*) from t`
