@@ -297,7 +297,7 @@
       - [FAQ](faq/tidb-lightning.md)
     - [PD Control](reference/tools/pd-control.md)
     - [PD Recover](reference/tools/pd-recover.md)
-    - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
+    - [TiKV Control](reference/tools/tikv-control.md)
     - [TiDB Control](reference/tools/tidb-control.md)
     - [Download](reference/tools/download.md)
   + Key Monitoring Metrics
@@ -326,6 +326,7 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
     - [2.1.12](releases/2.1.12.md)
     - [2.1.11](releases/2.1.11.md)

@@ -25,12 +25,15 @@
     - [Online Schema Changes](key-features.md#online-schema-changes)
 + How-to
   + Get Started
-    + Start a Local Cluster
-      - [From Binary](how-to/get-started/local-cluster/install-from-binary.md)
-      - [From Homebrew](how-to/get-started/local-cluster/install-from-homebrew.md)
-      - [From DBdeployer](how-to/get-started/local-cluster/install-from-dbdeployer.md)
-      - [In Kubernetes](how-to/get-started/local-cluster/install-from-kubernetes.md)
-      - [In Docker Compose](how-to/get-started/local-cluster/install-from-docker-compose.md)
+    + Start a Cluster
+      - [From Binary](how-to/get-started/deploy-tidb-from-binary.md)
+      - [From Homebrew](how-to/get-started/deploy-tidb-from-homebrew.md)
+      - [From DBdeployer](how-to/get-started/deploy-tidb-from-dbdeployer.md)
+      + In Kubernetes
+        - [DinD](how-to/get-started/deploy-tidb-from-kubernetes-dind.md)
+        - [Minikube](how-to/get-started/deploy-tidb-from-kubernetes-minikube.md)
+        - [GKE](how-to/get-started/deploy-tidb-from-kubernetes-gke.md)
+      - [In Docker Compose](how-to/get-started/deploy-tidb-from-docker-compose.md)
     - [Explore SQL with TiDB](how-to/get-started/explore-sql.md)
     - [Import Example Database](how-to/get-started/import-example-database.md)
     - [Read Historical Data](how-to/get-started/read-historical-data.md)
@@ -46,7 +49,10 @@
       - [Ansible Deployment (Recommended)](how-to/deploy/orchestrated/ansible.md)
       - [Ansible Offline Deployment](how-to/deploy/orchestrated/offline-ansible.md)
       - [Docker Deployment](how-to/deploy/orchestrated/docker.md)
-      - [Kubernetes Deployment](how-to/deploy/orchestrated/kubernetes.md)
+      + TiDB in Kubernetes
+        - [AWS EKS](how-to/deploy/orchestrated/tidb-in-kubernetes/aws-eks.md)
+        - [GCP](how-to/deploy/orchestrated/tidb-in-kubernetes/gcp-gke.md)
+        - [Alibaba Cloud](how-to/deploy/orchestrated/tidb-in-kubernetes/alibaba-cloud.md)
     + Geographic Redundancy
       - [Overview](how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
@@ -257,6 +263,7 @@
     - [Understanding the Query Execution Plan](reference/performance/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](reference/performance/statistics.md)
     - [Optimizer Hints](reference/performance/optimizer-hints.md)
+    - [Check the TiDB Cluster Status Using SQL Statements](reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](reference/performance/execution-plan-bind.md)
     - [Tune TiKV](reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
@@ -303,7 +310,7 @@
       - [FAQ](faq/tidb-lightning.md)
     - [PD Control](reference/tools/pd-control.md)
     - [PD Recover](reference/tools/pd-recover.md)
-    - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
+    - [TiKV Control](reference/tools/tikv-control.md)
     - [TiDB Control](reference/tools/tidb-control.md)
     - [Download](reference/tools/download.md)
   + Key Monitoring Metrics
@@ -332,6 +339,7 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
     - [2.1.12](releases/2.1.12.md)
     - [2.1.11](releases/2.1.11.md)
