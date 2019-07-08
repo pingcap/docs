@@ -27,9 +27,9 @@ Before deploying TiDB Operator, make sure the following items are installed on y
 
 TiDB Operator runs in Kubernetes cluster. You can use one of the methods listed [here](https://kubernetes.io/docs/setup/pick-right-solution/) to set up a Kubernetes cluster. Make sure that the Kubernetes version is v1.10 or higher. If you are using AWS, GKE or local machine, here are quick-start tutorials:
 
-* [Local DinD tutorial](./local-dind-tutorial.md)
-* [Google GKE tutorial](./google-kubernetes-tutorial.md)
-* [AWS EKS tutorial](./aws-eks-tutorial.md)
+* [Local DinD tutorial](/how-to/get-started/deploy-tidb-from-kubernetes-dind.md)
+* [Google GKE tutorial](/how-to/get-started/deploy-tidb-from-kubernetes-gke.md)
+* [AWS EKS tutorial](/how-to/deploy/orchestrated/tidb-in-kubernetes/aws-eks.md)
 
 If you are deploying in a different environment, a proper DNS addon must be installed in the Kubernetes cluster. You can follow the [official documentation](https://kubernetes.io/docs/tasks/access-application-cluster/configure-dns-cluster/) to set up a DNS addon.
 
@@ -47,8 +47,6 @@ sudo vim /etc/systemd/system/docker.service
 ```
 
 Set `LimitNOFILE` to `1048576` or bigger.
-
-Otherwise you have to change TiKV's `max-open-files` to match your work node `ulimit -n` in the configuration file `charts/tidb-cluster/templates/config/_tikv-config.tpl`, but this will impact TiDB performance.
 
 ## Install Helm
 
@@ -71,7 +69,7 @@ You can follow the Helm [official documentation](https://helm.sh) to install Hel
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/tiller-rbac.yaml
+    kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/tiller-rbac.yaml && \
     helm init --service-account=tiller --upgrade
     ```
    
@@ -80,19 +78,19 @@ You can follow the Helm [official documentation](https://helm.sh) to install Hel
    {{< copyable "shell-regular" >}}
    
     ```shell
-    kubectl get po -n kube-system -l name=tiller # make sure tiller pod is running
+    kubectl get po -n kube-system -l name=tiller
     ```
 
    If `RBAC` is not enabled for the Kubernetes cluster, then `helm init --upgrade` should be enough.
    
 3. Add Helm repo
 
-   Helm repo (http://charts.pingcap.org/) houses PingCAP managed charts, such as tidb-operator, tidb-cluster and tidb-backup, etc. Add and check the repo with following commands:
+   PingCAP Helm repo houses PingCAP managed charts, such as tidb-operator, tidb-cluster and tidb-backup, etc. Add and check the repo with following commands:
    
     {{< copyable "shell-regular" >}}
    
     ```shell
-    helm repo add pingcap http://charts.pingcap.org/
+    helm repo add pingcap http://charts.pingcap.org/ && \
     helm repo list
     ```
 
@@ -101,8 +99,8 @@ You can follow the Helm [official documentation](https://helm.sh) to install Hel
     {{< copyable "shell-regular" >}}
    
     ```shell
-    helm repo update
-    helm search tidb-cluster -l
+    helm repo update && \
+    helm search tidb-cluster -l && \
     helm search tidb-operator -l
     ```
     
@@ -129,7 +127,7 @@ Check the Pod and PV status with the following commands:
 {{< copyable "shell-regular" >}}
 
 ```shell
-kubectl get po -n kube-system -l app=local-volume-provisioner
+kubectl get po -n kube-system -l app=local-volume-provisioner && \
 kubectl get pv | grep local-storage
 ```
 
@@ -142,7 +140,7 @@ TiDB Operator uses [CRD](https://kubernetes.io/docs/tasks/access-kubernetes-api/
 {{< copyable "shell-regular" >}}
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/crd.yaml
+kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/crd.yaml && \
 kubectl get crd tidbclusters.pingcap.com
 ```
 
@@ -157,7 +155,7 @@ Use the following command to get the `values.yaml` file of the `tidb-operator` c
 {{< copyable "shell-regular" >}}
 
 ```shell
-mkdir -p /home/tidb/tidb-operator
+mkdir -p /home/tidb/tidb-operator && \
 helm inspect values pingcap/tidb-operator --version=${chartVersion} > /home/tidb/tidb-operator/values-tidb-operator.yaml
 ```
 
@@ -166,7 +164,7 @@ Set `scheduler.kubeSchedulerImage` in the `/home/tidb/tidb-operator/values-tidb-
 {{< copyable "shell-regular" >}}
 
 ```shell
-helm install pingcap/tidb-operator --name=tidb-operator --namespace=tidb-admin --version=${chartVersion} -f /home/tidb/tidb-operator/values-tidb-operator.yaml
+helm install pingcap/tidb-operator --name=tidb-operator --namespace=tidb-admin --version=${chartVersion} -f /home/tidb/tidb-operator/values-tidb-operator.yaml && \
 kubectl get po -n tidb-admin -l app.kubernetes.io/name=tidb-operator
 ```
 
