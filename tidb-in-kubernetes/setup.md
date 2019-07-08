@@ -1,57 +1,74 @@
-# TiDB Operator Setup
+---
+title: Deploy TiDB Operator in Kubernetes
+summary: TiDB Operator Deployment
+category: how-to
+---
 
-## Requirements
+# Deploy TiDB Operator in Kubernetes
 
-Before deploying the TiDB Operator, make sure the following requirements are satisfied:
+## Prerequisites
 
-* Kubernetes v1.10 or greater
+Before deploying TiDB Operator, make sure the following items are installed on your machine:
+
+* Kubernetes >= v1.10
 * [DNS addons](https://kubernetes.io/docs/tasks/access-application-cluster/configure-dns-cluster/)
 * [PersistentVolume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 * [RBAC](https://kubernetes.io/docs/admin/authorization/rbac) enabled (optional)
 * [Helm](https://helm.sh) version >= v2.8.2 and < v3.0.0
-* Kubernetes v1.12 is required for zone-aware persistent volumes.
+* Kubernetes v1.12 or higher version is required for zone-aware persistent volumes.
 
-> **Note:** Allthough TiDB Operator can use network volume to persist TiDB data, this is slower due to redundant replication. It is highly recommended to set up [local volume](https://kubernetes.io/docs/concepts/storage/volumes/#local) for better performance.
+> **Note:** 
+>
+> + Although TiDB Operator can use network volume to persist TiDB data, this process could be very slow due to the redundant replication. It is highly recommended to set up [local volume](https://kubernetes.io/docs/concepts/storage/volumes/#local) for better performance.
+>
+> + Network volumes in a multi-availability zone setup require Kubernetes v1.12 or higher version. It is recommended to use networked volumes to store backup data in `tidb-bakup` chart.
 
-> **Note:** Network volumes in a multi availability zone setup require Kubernetes v1.12 or greater. We do recommend using networked volumes for backup in the tidb-bakup chart.
+## Deploy Kubernetes cluster
 
-## Kubernetes
-
-TiDB Operator runs on top of Kubernetes cluster, you can use one of the methods listed [here](https://kubernetes.io/docs/setup/pick-right-solution/) to set up a Kubernetes cluster. Just make sure the Kubernetes cluster version is equal or greater than v1.10. If you want to use AWS, GKE or local machine, there are quick start tutorials:
+TiDB Operator runs in Kubernetes cluster. You can use one of the methods listed [here](https://kubernetes.io/docs/setup/pick-right-solution/) to set up a Kubernetes cluster. Make sure that the Kubernetes version is v1.10 or higher. If you are using AWS, GKE or local machine, here are quick-start tutorials:
 
 * [Local DinD tutorial](./local-dind-tutorial.md)
 * [Google GKE tutorial](./google-kubernetes-tutorial.md)
 * [AWS EKS tutorial](./aws-eks-tutorial.md)
 
-If you want to use a different envirnoment, a proper DNS addon must be installed in the Kubernetes cluster. You can follow the [official documentation](https://kubernetes.io/docs/tasks/access-application-cluster/configure-dns-cluster/) to set up a DNS addon.
+If you are deploying in a different environment, a proper DNS addon must be installed in the Kubernetes cluster. You can follow the [official documentation](https://kubernetes.io/docs/tasks/access-application-cluster/configure-dns-cluster/) to set up a DNS addon.
 
-TiDB Operator uses [PersistentVolume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) to persist TiDB cluster data (including the database, monitor data, backup data), so the Kubernetes must provide at least one kind of persistent volume. To achieve better performance, local SSD disk persistent volume is recommended. You can follow [this step](#local-persistent-volume) to auto provisioning local persistent volumes.
+TiDB Operator uses [PersistentVolume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) to persist the data of TiDB cluster (including the database, monitoring data, backup data), so Kubernetes cluster must provide at least one kind of persistent volume. For better performance, it is recommended to use local SSD disk as the volumes. Follow [this step](#local-persistent-volume) to auto-provision local persistent volumes.
 
-The Kubernetes cluster is suggested to enable [RBAC](https://kubernetes.io/docs/admin/authorization/rbac). Otherwise you may want to set `rbac.create` to `false` in the values.yaml of both tidb-operator and tidb-cluster charts.
+It is suggested to enable [RBAC](https://kubernetes.io/docs/admin/authorization/rbac) in the Kubernetes cluster. Otherwise, you need to set `rbac.create` to `false` in the `values.yaml` of both `tidb-operator` and `tidb-cluster` charts.
 
-Because TiDB by default will use lots of file descriptors, the [worker node](https://access.redhat.com/solutions/61334) and its Docker daemon's ulimit must be configured to greater than 1048576:
+Because TiDB by default will use many file descriptors, the [worker node](https://access.redhat.com/solutions/61334) and its Docker daemon's `ulimit` must be configured to `1048576` or bigger:
+
+
+{{< copyable "shell-regular" >}}
 
 ```shell
 sudo vim /etc/systemd/system/docker.service
 ```
 
-Set `LimitNOFILE` to equal or greater than 1048576.
+Set `LimitNOFILE` to `1048576` or bigger.
 
 Otherwise you have to change TiKV's `max-open-files` to match your work node `ulimit -n` in the configuration file `charts/tidb-cluster/templates/config/_tikv-config.tpl`, but this will impact TiDB performance.
 
-## Helm
+## Install Helm
 
-You can follow Helm official [documentation](https://helm.sh) to install Helm in your Kubernetes cluster. The following instructions are listed here for quick reference:
+You can follow the Helm [official documentation](https://helm.sh) to install Helm in your Kubernetes cluster. The following instructions are listed here for quick reference:
 
 1. Install helm client
+
+    {{< copyable "shell-regular" >}}
 
     ```shell
     curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
     ```
 
-    Or if you use macOS, you can use homebrew to install Helm by `brew install kubernetes-helm`
+    Or if on macOS, you can use homebrew to install Helm by `brew install kubernetes-helm`.
 
-2. Install helm server
+2. Install Helm server
+
+   Make sure that tiller pod is running.
+
+    {{< copyable "shell-regular" >}}
 
     ```shell
     kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/tiller-rbac.yaml
@@ -93,13 +110,13 @@ You can follow Helm official [documentation](https://helm.sh) to install Helm in
 
 ### Prepare local volumes
 
-See the [operations guide in sig-storage-local-static-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md) which explains setup and cleanup of local volumes on the nodes.
+See the [operation guide in sig-storage-local-static-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md) which explains how to set up and clean up local volumes on the nodes.
 
-It also provides some [best practices](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/best-practices.md) for production.
+Also see [best practices](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/best-practices.md) for production environment.
 
 ### Deploy local-static-provisioner
 
-After mounting all data disks on Kubernetes nodes, you can deploy [local-volume-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner) to automatically provision the mounted disks as Local PersistentVolumes.
+After mounting all data disks on Kubernetes nodes, you can deploy [local-volume-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner) that can automatically provision the mounted disks as Local PersistentVolumes.
 
 {{< copyable "shell-regular" >}}
 
@@ -116,11 +133,11 @@ kubectl get po -n kube-system -l app=local-volume-provisioner
 kubectl get pv | grep local-storage
 ```
 
-The local-volume-provisioner creates a volume for each mounted disk. Note that for example on GKE this will create local volumes only of size 375GiB and that you need to manually alter the setup to create larger disks.
+The local-volume-provisioner creates a volume for each mounted disk. Note that on GKE, this will create local volumes of only 375GiB in size and that you need to manually alter the setup to create larger disks.
 
 ## Install TiDB Operator
 
-TiDB Operator uses [CRD](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/) to extend Kubernetes, so to use TiDB Operator, you should first create `TidbCluster` custom resource kind. This is a one-time job, namely you can only need to do this once in your Kubernetes cluster.
+TiDB Operator uses [CRD](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/) to extend Kubernetes. Therefore, to use TiDB Operator, you should first create `TidbCluster` custom resource, which is a one-time job in your Kubernetes cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -129,11 +146,13 @@ kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/
 kubectl get crd tidbclusters.pingcap.com
 ```
 
-After the `TidbCluster` custom resource is created, you can install TiDB Operator in your Kubernetes cluster.
+After `TidbCluster` custom resource is created, install TiDB Operator in your Kubernetes cluster.
 
-> **Note:** ${chartVersion} will be used in the rest of the document to represent the chart version, e.g. `v1.0.0-beta.3`.
+> **Note:** 
+>
+> `${chartVersion}` will be used in the rest sections of the documents to represent the chart version. For example, `v1.0.0-beta.3`.
 
-Get the values.yaml of tidb-operator chart you want to install:
+Use the following command to get the `values.yaml` file of the `tidb-operator` chart you want to install:
 
 {{< copyable "shell-regular" >}}
 
@@ -142,7 +161,7 @@ mkdir -p /home/tidb/tidb-operator
 helm inspect values pingcap/tidb-operator --version=${chartVersion} > /home/tidb/tidb-operator/values-tidb-operator.yaml
 ```
 
-Uncomment the `scheduler.kubeSchedulerImage` in `/home/tidb/tidb-operator/values-tidb-operator.yaml`, set it to the same as your kubernetes cluster version.
+Set `scheduler.kubeSchedulerImage` in the `/home/tidb/tidb-operator/values-tidb-operator.yaml` file as same as the image of your kubernetes cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -151,18 +170,18 @@ helm install pingcap/tidb-operator --name=tidb-operator --namespace=tidb-admin -
 kubectl get po -n tidb-admin -l app.kubernetes.io/name=tidb-operator
 ```
 
-## Custom TiDB Operator
+## Customize TiDB Operator
 
-Customizing is done by modifying `/home/tidb/tidb-operator/values-tidb-operator.yaml`. The rest of the document will use `values.yaml` to reference `/home/tidb/tidb-operator/values-tidb-operator.yaml`
+To customize TiDB Operator, modify `/home/tidb/tidb-operator/values-tidb-operator.yaml`. The rest sections of the document use `values.yaml` to refer to `/home/tidb/tidb-operator/values-tidb-operator.yaml`
 
 TiDB Operator contains two components:
 
 * tidb-controller-manager
 * tidb-scheduler
 
-This two components are stateless, so they are deployed via `Deployment`. You can customize the `replicas` and resource limits/requests as you wish in the values.yaml.
+These two components are stateless and deployed via `Deployment`. You can customize `replicas` and resource limits/requests as you wish in the `values.yaml`.
 
-After editing values.yaml, run the following command to apply the modification:
+After modifying `values.yaml`, run the following command to apply this modification:
 
 {{< copyable "shell-regular" >}}
 
@@ -172,7 +191,7 @@ helm upgrade tidb-operator pingcap/tidb-operator --version=${chartVersion} -f /h
 
 ## Upgrade TiDB Operator
 
-Upgrading TiDB Operator itself is similar to customize TiDB Operator, modify the image version in values.yaml and then run `helm upgrade`:
+Similar to customizing TiDB Operator, upgrading TiDB Operator needs you to modify the image version in `values.yaml` and then run `helm upgrade`:
 
 {{< copyable "shell-regular" >}}
 
@@ -180,10 +199,10 @@ Upgrading TiDB Operator itself is similar to customize TiDB Operator, modify the
 helm upgrade tidb-operator pingcap/tidb-operator --version=${chartVersion} -f /home/tidb/tidb-operator/values-tidb-operator.yaml
 ```
 
-When a new version of tidb-operator comes out, simply update the `operatorImage` in values.yaml and run the above command should be enough. But for safety reasons, you should get the new values.yaml from new tidb-operator chart and merge the old values.yaml with new values.yaml. And then upgrade as above.
+When a new version of `tidb-operator` is released, you only need to update the `operatorImage` in `values.yaml` and run the above command. But to be really safe, you should get the new `values.yaml` from new `tidb-operator` chart and merge the old `values.yaml` with the new one. And then upgrade as above.
 
-TiDB Operator is for TiDB cluster maintenance, what this means is that when TiDB cluster is up and running, you can just stop TiDB Operator and TiDB cluster still works well unless you need to do TiDB cluster maintenance like scaling, upgrading etc.
+TiDB Operator is used for maintaining TiDB cluster. This means that when TiDB cluster is up and running, you can even stop TiDB Operator without affecting TiDB cluster that works well until you need to maintain the cluster for scaling, upgrading, etc.
 
 ## Upgrade Kubernetes
 
-When you have a major version change of Kubernetes, you need to make sure that the kubeSchedulerImageTag matches it. By default, this value is generated by helm during install/upgrade so you need to perform a helm upgrade to reset it.
+When there is a major version upgrade of Kubernetes, you need to make sure that `kubeSchedulerImageTag` matches the version. By default, this value is generated by Helm during the installation/upgrade process. To reset this value, you need to execute `helm upgrade`.
