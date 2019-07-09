@@ -6,29 +6,29 @@ category: reference
 
 # MODIFY COLUMN
 
-The `ALTER TABLE.. MODIFY COLUMN` statement modifies a column on an existing table. The modification can include changing the data type and attributes. To rename at the same time, use the [`CHANGE COLUMN`](/dev/reference/sql/statements/change-column.md) statement instead.
+The `ALTER TABLE.. MODIFY COLUMN` statement modifies a column on an existing table. The modification can include changing the data type and attributes. To rename at the same time, use the [`CHANGE COLUMN`](/reference/sql/statements/change-column.md) statement instead.
 
 ## Synopsis
 
 **AlterTableStmt:**
 
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+![AlterTableStmt](/media/sqlgram-dev/AlterTableStmt.png)
 
 **AlterTableSpec:**
 
-![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+![AlterTableSpec](/media/sqlgram-dev/AlterTableSpec.png)
 
 **ColumnKeywordOpt:**
 
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
+![ColumnKeywordOpt](/media/sqlgram-dev/ColumnKeywordOpt.png)
 
 **ColumnDef:**
 
-![ColumnDef](/media/sqlgram/ColumnDef.png)
+![ColumnDef](/media/sqlgram-dev/ColumnDef.png)
 
 **ColumnPosition:**
 
-![ColumnPosition](/media/sqlgram/ColumnPosition.png)
+![ColumnPosition](/media/sqlgram-dev/ColumnPosition.png)
 
 ## Examples
 
@@ -68,8 +68,8 @@ ERROR 1105 (HY000): can't run multi schema change
 
 ## See also
 
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
-* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
-* [DROP COLUMN](/dev/reference/sql/statements/drop-column.md)
-* [CHANGE COLUMN](/dev/reference/sql/statements/change-column.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [ADD COLUMN](/reference/sql/statements/add-column.md)
+* [DROP COLUMN](/reference/sql/statements/drop-column.md)
+* [CHANGE COLUMN](/reference/sql/statements/change-column.md)

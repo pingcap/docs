@@ -12,11 +12,11 @@ The `TRACE` statement provides detailed information about query execution. It is
 
 **TraceStmt:**
 
-![TraceStmt](/media/sqlgram/TraceStmt.png)
+![TraceStmt](/media/sqlgram-dev/TraceStmt.png)
 
 **TraceableStmt:**
 
-![TraceableStmt](/media/sqlgram/TraceableStmt.png)
+![TraceableStmt](/media/sqlgram-dev/TraceableStmt.png)
 
 
 ## Examples
@@ -142,4 +142,4 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [EXPLAIN ANALYZE](/dev/reference/sql/statements/explain-analyze.md)
+* [EXPLAIN ANALYZE](/reference/sql/statements/explain-analyze.md)

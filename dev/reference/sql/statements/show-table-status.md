@@ -6,21 +6,21 @@ category: reference
 
 # SHOW TABLE STATUS 
 
-This statement shows various statistics about tables in TiDB. If the statistics appear out of date, it is recommended to run [`ANALYZE TABLE`](/dev/reference/sql/statements/analyze-table.md).
+This statement shows various statistics about tables in TiDB. If the statistics appear out of date, it is recommended to run [`ANALYZE TABLE`](/reference/sql/statements/analyze-table.md).
 
 ## Synopsis
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram-dev/ShowTargetFilterable.png)
 
 **ShowDatabaseNameOpt:**
 
-![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
+![ShowDatabaseNameOpt](/media/sqlgram-dev/ShowDatabaseNameOpt.png)
 
 ## Examples
 
@@ -86,7 +86,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW TABLES](/dev/reference/sql/statements/show-tables.md)
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
+* [SHOW TABLES](/reference/sql/statements/show-tables.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [DROP TABLE](/reference/sql/statements/drop-table.md)
+* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)

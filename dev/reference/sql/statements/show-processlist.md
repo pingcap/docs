@@ -12,11 +12,11 @@ This statement lists the current sessions connected to the same TiDB server. The
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **OptFull:**
 
-![OptFull](/media/sqlgram/OptFull.png)
+![OptFull](/media/sqlgram-dev/OptFull.png)
 
 ## Examples
 
@@ -37,4 +37,4 @@ mysql> SHOW PROCESSLIST;
 
 ## See also
 
-* [KILL \[TIDB\]](/dev/reference/sql/statements/kill.md)
+* [KILL \[TIDB\]](/reference/sql/statements/kill.md)

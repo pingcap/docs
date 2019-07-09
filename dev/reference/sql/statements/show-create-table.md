@@ -12,11 +12,11 @@ This statement shows the exact statement to recreate an existing table using SQL
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram/TableName.png)
+![TableName](/media/sqlgram-dev/TableName.png)
 
 ## Examples
 
@@ -41,7 +41,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
-* [SHOW TABLES](/dev/reference/sql/statements/show-tables.md)
-* [SHOW COLUMNS FROM](/dev/reference/sql/statements/show-columns-from.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [DROP TABLE](/reference/sql/statements/drop-table.md)
+* [SHOW TABLES](/reference/sql/statements/show-tables.md)
+* [SHOW COLUMNS FROM](/reference/sql/statements/show-columns-from.md)

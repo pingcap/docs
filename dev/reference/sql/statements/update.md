@@ -12,23 +12,23 @@ The `UPDATE` statement is used to modify data in a specified table.
 
 **UpdateStmt:**
 
-![UpdateStmt](/media/sqlgram/UpdateStmt.png)
+![UpdateStmt](/media/sqlgram-dev/UpdateStmt.png)
 
 **TableRef:**
 
-![TableRef](/media/sqlgram/TableRef.png)
+![TableRef](/media/sqlgram-dev/TableRef.png)
 
 **TableRefs:**
 
-![TableRefs](/media/sqlgram/TableRefs.png)
+![TableRefs](/media/sqlgram-dev/TableRefs.png)
 
 **AssignmentList:**
 
-![AssignmentList](/media/sqlgram/AssignmentList.png)
+![AssignmentList](/media/sqlgram-dev/AssignmentList.png)
 
 **WhereClauseOptional:**
 
-![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
+![WhereClauseOptional](/media/sqlgram-dev/WhereClauseOptional.png)
 
 ## Examples
 
@@ -71,7 +71,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [INSERT](/dev/reference/sql/statements/insert.md)
-* [SELECT](/dev/reference/sql/statements/select.md)
-* [DELETE](/dev/reference/sql/statements/delete.md)
-* [REPLACE](/dev/reference/sql/statements/replace.md)
+* [INSERT](/reference/sql/statements/insert.md)
+* [SELECT](/reference/sql/statements/select.md)
+* [DELETE](/reference/sql/statements/delete.md)
+* [REPLACE](/reference/sql/statements/replace.md)

@@ -12,15 +12,15 @@ This statement is included for compatibility with MySQL. It has no effect on TiD
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram-dev/ShowTargetFilterable.png)
 
 **GlobalScope:**
 
-![GlobalScope](/media/sqlgram/GlobalScope.png)
+![GlobalScope](/media/sqlgram-dev/GlobalScope.png)
 
 ## Examples
 
@@ -58,4 +58,4 @@ mysql> show global status;
 
 ## See also
 
-* [FLUSH STATUS](/dev/reference/sql/statements/flush-status.md)
+* [FLUSH STATUS](/reference/sql/statements/flush-status.md)

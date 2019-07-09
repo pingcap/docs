@@ -12,23 +12,23 @@ This statement creates a new database in TiDB. The MySQL terminology for 'databa
 
 **CreateDatabaseStmt:**
 
-![CreateDatabaseStmt](/media/sqlgram/CreateDatabaseStmt.png)
+![CreateDatabaseStmt](/media/sqlgram-dev/CreateDatabaseStmt.png)
 
 **DatabaseSym:**
 
-![DatabaseSym](/media/sqlgram/DatabaseSym.png)
+![DatabaseSym](/media/sqlgram-dev/DatabaseSym.png)
 
 **IfNotExists:**
 
-![IfNotExists](/media/sqlgram/IfNotExists.png)
+![IfNotExists](/media/sqlgram-dev/IfNotExists.png)
 
 **DBName:**
 
-![DBName](/media/sqlgram/DBName.png)
+![DBName](/media/sqlgram-dev/DBName.png)
 
 **DatabaseOptionListOpt:**
 
-![DatabaseOptionListOpt](/media/sqlgram/DatabaseOptionListOpt.png)
+![DatabaseOptionListOpt](/media/sqlgram-dev/DatabaseOptionListOpt.png)
 
 ## Examples
 
@@ -56,5 +56,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [USE](/dev/reference/sql/statements/use.md)
-* [DROP DATABASE](/dev/reference/sql/statements/drop-database.md)
+* [USE](/reference/sql/statements/use.md)
+* [DROP DATABASE](/reference/sql/statements/drop-database.md)

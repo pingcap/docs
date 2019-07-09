@@ -12,15 +12,15 @@ The `SET TRANSACTION` statement can be used to change the current isolation leve
 
 **SetStmt:**
 
-![SetStmt](/media/sqlgram/SetStmt.png)
+![SetStmt](/media/sqlgram-dev/SetStmt.png)
 
 **TransactionChar:**
 
-![TransactionChar](/media/sqlgram/TransactionChar.png)
+![TransactionChar](/media/sqlgram-dev/TransactionChar.png)
 
 **IsolationLevel:**
 
-![IsolationLevel](/media/sqlgram/IsolationLevel.png)
+![IsolationLevel](/media/sqlgram-dev/IsolationLevel.png)
 
 ## Examples
 
@@ -64,5 +64,5 @@ mysql> SHOW SESSION VARIABLES like 'transaction_isolation';
 
 ## See also
 
-* [SET \[GLOBAL|SESSION\] <variable>](/dev/reference/sql/statements/set-variable.md)
-* [Isolation Levels](/dev/reference/transactions/transaction-isolation.md)
+* [SET \[GLOBAL|SESSION\] <variable>](/reference/sql/statements/set-variable.md)
+* [Isolation Levels](/reference/transactions/transaction-isolation.md)

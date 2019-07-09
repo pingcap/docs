@@ -2,28 +2,27 @@
 title: EXPLAIN | TiDB SQL Statement Reference 
 summary: An overview of the usage of EXPLAIN for the TiDB database.
 category: reference
-aliases: ['/docs/sql/util/']
 ---
 
 # EXPLAIN
 
 The `EXPLAIN` statement shows the execution plan for a query without executing it. It is complimented by `EXPLAIN ANALYZE` which will execute the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query.
 
-The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternative usage of `EXPLAIN <tableName>` is documented under [`SHOW [FULL] COLUMNS FROM`](/dev/reference/sql/statements/show-columns-from.md).
+The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternative usage of `EXPLAIN <tableName>` is documented under [`SHOW [FULL] COLUMNS FROM`](/reference/sql/statements/show-columns-from.md).
 
 ## Synopsis
 
 **ExplainSym:**
 
-![ExplainSym](/media/sqlgram/ExplainSym.png)
+![ExplainSym](/media/sqlgram-dev/ExplainSym.png)
 
 **ExplainStmt:**
 
-![ExplainStmt](/media/sqlgram/ExplainStmt.png)
+![ExplainStmt](/media/sqlgram-dev/ExplainStmt.png)
 
 **ExplainableStmt:**
 
-![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
+![ExplainableStmt](/media/sqlgram-dev/ExplainableStmt.png)
 
 ## Examples
 
@@ -152,8 +151,8 @@ If the `dot` program is not installed on your computer, copy the result to [this
 
 ## See also
 
-* [Understanding the Query Execution Plan](/dev/reference/performance/understanding-the-query-execution-plan.md)
-* [EXPLAIN ANALYZE](/dev/reference/sql/statements/explain-analyze.md)
-* [ANALYZE TABLE](/dev/reference/sql/statements/analyze-table.md)
-* [TRACE](/dev/reference/sql/statements/trace.md)
+* [Understanding the Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md)
+* [EXPLAIN ANALYZE](/reference/sql/statements/explain-analyze.md)
+* [ANALYZE TABLE](/reference/sql/statements/analyze-table.md)
+* [TRACE](/reference/sql/statements/trace.md)
 

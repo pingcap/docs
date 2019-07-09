@@ -12,35 +12,35 @@ The `CREATE VIEW` statement saves a `SELECT` statement as a queryable object, si
 
 **CreateViewStmt:**
 
-![CreateViewStmt](/media/sqlgram/CreateViewStmt.png)
+![CreateViewStmt](/media/sqlgram-dev/CreateViewStmt.png)
 
 **OrReplace:**
 
-![OrReplace](/media/sqlgram/OrReplace.png)
+![OrReplace](/media/sqlgram-dev/OrReplace.png)
 
 **ViewAlgorithm:**
 
-![ViewAlgorithm](/media/sqlgram/ViewAlgorithm.png)
+![ViewAlgorithm](/media/sqlgram-dev/ViewAlgorithm.png)
 
 **ViewDefiner:**
 
-![ViewDefiner](/media/sqlgram/ViewDefiner.png)
+![ViewDefiner](/media/sqlgram-dev/ViewDefiner.png)
 
 **ViewSQLSecurity:**
 
-![ViewSQLSecurity](/media/sqlgram/ViewSQLSecurity.png)
+![ViewSQLSecurity](/media/sqlgram-dev/ViewSQLSecurity.png)
 
 **ViewName:**
 
-![ViewName](/media/sqlgram/ViewName.png)
+![ViewName](/media/sqlgram-dev/ViewName.png)
 
 **ViewFieldList:**
 
-![ViewFieldList](/media/sqlgram/ViewFieldList.png)
+![ViewFieldList](/media/sqlgram-dev/ViewFieldList.png)
 
 **ViewCheckOption:**
 
-![ViewCheckOption](/media/sqlgram/ViewCheckOption.png)
+![ViewCheckOption](/media/sqlgram-dev/ViewCheckOption.png)
 
 ## Examples
 
@@ -101,6 +101,6 @@ ERROR 1105 (HY000): insert into view v1 is not supported now.
 
 ## See also
 
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
-* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [DROP TABLE](/reference/sql/statements/drop-table.md)

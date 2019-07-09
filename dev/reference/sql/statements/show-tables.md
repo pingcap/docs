@@ -14,15 +14,15 @@ To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram-dev/ShowTargetFilterable.png)
 
 **ShowDatabaseNameOpt:**
 
-![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
+![ShowDatabaseNameOpt](/media/sqlgram-dev/ShowDatabaseNameOpt.png)
 
 ## Examples
 
@@ -81,6 +81,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [DROP TABLE](/reference/sql/statements/drop-table.md)
+* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)

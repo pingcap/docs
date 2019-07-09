@@ -12,11 +12,11 @@ The statement `ALTER TABLE .. RENAME INDEX` renames an existing index to a new n
 
 **AlterTableStmt:**
 
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+![AlterTableStmt](/media/sqlgram-dev/AlterTableStmt.png)
 
 **KeyOrIndex:**
 
-![KeyOrIndex](/media/sqlgram/KeyOrIndex.png)
+![KeyOrIndex](/media/sqlgram-dev/KeyOrIndex.png)
 
 ## Examples
 
@@ -56,7 +56,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
-* [CREATE INDEX](/dev/reference/sql/statements/create-index.md)
-* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
-* [SHOW INDEX](/dev/reference/sql/statements/show-index.md)
+* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [CREATE INDEX](/reference/sql/statements/create-index.md)
+* [DROP INDEX](/reference/sql/statements/drop-index.md)
+* [SHOW INDEX](/reference/sql/statements/show-index.md)

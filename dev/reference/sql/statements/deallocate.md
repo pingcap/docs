@@ -12,15 +12,15 @@ The `DEALLOCATE` statement provides an SQL interface to server-side prepared sta
 
 **DeallocateStmt:**
 
-![DeallocateStmt](/media/sqlgram/DeallocateStmt.png)
+![DeallocateStmt](/media/sqlgram-dev/DeallocateStmt.png)
 
 **DeallocateSym:**
 
-![DeallocateSym](/media/sqlgram/DeallocateSym.png)
+![DeallocateSym](/media/sqlgram-dev/DeallocateSym.png)
 
 **Identifier:**
 
-![Identifier](/media/sqlgram/Identifier.png)
+![Identifier](/media/sqlgram-dev/Identifier.png)
 
 ## Examples
 
@@ -49,5 +49,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [PREPARE](/dev/reference/sql/statements/prepare.md)
-* [EXECUTE](/dev/reference/sql/statements/execute.md)
+* [PREPARE](/reference/sql/statements/prepare.md)
+* [EXECUTE](/reference/sql/statements/execute.md)

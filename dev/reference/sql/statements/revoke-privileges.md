@@ -12,31 +12,31 @@ This statement removes privileges from an existing user.
 
 **GrantStmt:**
 
-![GrantStmt](/media/sqlgram/GrantStmt.png)
+![GrantStmt](/media/sqlgram-dev/GrantStmt.png)
 
 **PrivElemList:**
 
-![PrivElemList](/media/sqlgram/PrivElemList.png)
+![PrivElemList](/media/sqlgram-dev/PrivElemList.png)
 
 **PrivElem:**
 
-![PrivElem](/media/sqlgram/PrivElem.png)
+![PrivElem](/media/sqlgram-dev/PrivElem.png)
 
 **PrivType:**
 
-![PrivType](/media/sqlgram/PrivType.png)
+![PrivType](/media/sqlgram-dev/PrivType.png)
 
 **ObjectType:**
 
-![ObjectType](/media/sqlgram/ObjectType.png)
+![ObjectType](/media/sqlgram-dev/ObjectType.png)
 
 **PrivLevel:**
 
-![PrivLevel](/media/sqlgram/PrivLevel.png)
+![PrivLevel](/media/sqlgram-dev/PrivLevel.png)
 
 **UserSpecList:**
 
-![UserSpecList](/media/sqlgram/UserSpecList.png)
+![UserSpecList](/media/sqlgram-dev/UserSpecList.png)
 
 ## Examples
 
@@ -80,7 +80,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [GRANT <privileges>](/dev/reference/sql/statements/grant-privileges.md)
-* [SHOW GRANTS](/dev/reference/sql/statements/show-grants.md)
-* [Privilege Management](/dev/reference/security/privilege-system.md)
+* [GRANT <privileges>](/reference/sql/statements/grant-privileges.md)
+* [SHOW GRANTS](/reference/sql/statements/show-grants.md)
+* [Privilege Management](/reference/security/privilege-system.md)
 

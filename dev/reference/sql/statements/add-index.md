@@ -12,23 +12,23 @@ The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This
 
 **AlterTableStmt:**
 
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+![AlterTableStmt](/media/sqlgram-dev/AlterTableStmt.png)
 
 **AlterTableSpec:**
 
-![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+![AlterTableSpec](/media/sqlgram-dev/AlterTableSpec.png)
 
 **ColumnKeywordOpt:**
 
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
+![ColumnKeywordOpt](/media/sqlgram-dev/ColumnKeywordOpt.png)
 
 **ColumnDef:**
 
-![ColumnDef](/media/sqlgram/ColumnDef.png)
+![ColumnDef](/media/sqlgram-dev/ColumnDef.png)
 
 **ColumnPosition:**
 
-![ColumnPosition](/media/sqlgram/ColumnPosition.png)
+![ColumnPosition](/media/sqlgram-dev/ColumnPosition.png)
 
 ## Examples
 
@@ -72,9 +72,9 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## See also
 
-* [CREATE INDEX](/dev/reference/sql/statements/create-index.md)
-* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
-* [RENAME INDEX](/dev/reference/sql/statements/rename-index.md)
-* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [EXPLAIN](/dev/reference/sql/statements/explain.md)
+* [CREATE INDEX](/reference/sql/statements/create-index.md)
+* [DROP INDEX](/reference/sql/statements/drop-index.md)
+* [RENAME INDEX](/reference/sql/statements/rename-index.md)
+* [ADD COLUMN](/reference/sql/statements/add-column.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [EXPLAIN](/reference/sql/statements/explain.md)

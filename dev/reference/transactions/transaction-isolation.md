@@ -2,7 +2,6 @@
 title: TiDB Transaction Isolation Levels
 summary: Learn about the transaction isolation levels in TiDB.
 category: reference
-aliases: ['/docs/sql/transaction-isolation/']
 ---
 
 # TiDB Transaction Isolation Levels
@@ -57,7 +56,7 @@ The MySQL Repeatable Read isolation level is not the snapshot isolation level. T
 
 ## Transaction retry
 
-By default TiDB will not retry transactions because this might lead to lost updates. If your application can tolerate lost updates, and does not require Snapshot Isolation consistency, you can enable **this feature** by setting `tidb_disable_txn_auto_retry = 0`. This has the benefit of fewer `COMMIT` statements generating errors.
+By default TiDB will not retry transactions because this might lead to lost updates. If your application can tolerate lost updates, and does not require Snapshot Isolation consistency, you can enable **this feature** by setting `tidb_disable_txn_auto_retry = off`. This has the benefit of fewer `COMMIT` statements generating errors.
 
 The value of `tidb_retry_limit` cannot be 0. Otherwise, the automatic retry is also disabled.
 
