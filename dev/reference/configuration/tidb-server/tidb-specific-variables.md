@@ -381,3 +381,19 @@ Usage example:
 ```sql
 set tidb_query_log_max_len = 20
 ```
+
+### tidb_wait_split_region_finish
+
+- Scope: SESSION
+- Default value: 1
+
+Determined by PD scheduling and the load condition of TiKV, the time to break up the region may be long. This variable is used to set whether to wait for all regions to be broken and then return the result to the client when executing the `SPLIT REGION` statement. The default 1 means to wait for the breakup to complete before returning the result. 0 means return without waiting for the region to break up.
+
+It should be noted that during the region breakup, there will be some impact on the performance of writing and reading on the broken region. For batch writing, data importing, etc, it is recommended to wait for the region to be broken before start data importing.
+
+### tidb_wait_split_region_timeout
+
+- Scope: SESSION
+- Default value: 300
+
+This variable is used to set the execution timeout of the `SPLIT REGION` statement in seconds. The default value is 300 seconds. A timeout error is returned if it is overtime.
