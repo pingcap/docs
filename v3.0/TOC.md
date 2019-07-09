@@ -43,6 +43,8 @@
       - [For Testing Environments](how-to/deploy/from-tarball/testing-environment.md)
       - [For Production Environments](how-to/deploy/from-tarball/production-environment.md)
     + Orchestrated Deployment
+      + tidb-in-kubernetes
+        - [Access TiDB](how-to/deploy/orchestrated/tidb-in-kubernetes/access-tidb.md)
       - [Ansible Deployment (Recommended)](how-to/deploy/orchestrated/ansible.md)
       - [Ansible Offline Deployment](how-to/deploy/orchestrated/offline-ansible.md)
       - [Docker Deployment](how-to/deploy/orchestrated/docker.md)
