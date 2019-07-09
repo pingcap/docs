@@ -1,37 +1,39 @@
 ---
-title: Access TiDB Clusters on Kubernetes
+title: Access the TiDB Cluster in Kubernetes
+summary: Learn how to access the TiDB cluster in Kubernetes.
 category: how-to
 ---
 
-# Access TiDB Clusters on Kubernetes
+# Access the TiDB Cluster in Kubernetes
 
-To access TiDB within a Kubernetes cluster, use the TiDB service domain name `<tidbcluster-name>-tidb.<namespace>`.
+This document describes how to access the TiDB cluster in Kubernetes.
 
-To access TiDB outside a Kubernetes cluster, you need to expose TiDB service port. To do that, make the following configuration via the `tidb.service` field in the `values.yaml` file in the tidb-cluster Helm chart.
++ To access the TiDB cluster within a Kubernetes cluster, use the TiDB service domain name `<tidbcluster-name>-tidb.<namespace>`.
++ To access the TiDB cluster outside a Kubernetes cluster, expose the TiDB service port by editing the `tidb.service` field configuration in the `values.yaml` file of the `tidb-cluster` Helm chart.
 
-{{< copyable "" >}}
+    {{< copyable "" >}}
 
-```yaml
-tidb:
-  service:
-    type: NodePort
-    # externalTrafficPolicy: Cluster
-    # annotations:
-    # cloud.google.com/load-balancer-type: Internal
-```
+    ```yaml
+    tidb:
+    service:
+        type: NodePort
+        # externalTrafficPolicy: Cluster
+        # annotations:
+        # cloud.google.com/load-balancer-type: Internal
+    ```
 
 ## NodePort
 
-Without LoadBalancer, expose the TiDB service port in the following two modes of NodePort:
+If there is no LoadBalancer, expose the TiDB service port in the following two modes of NodePort:
 
 - `externalTrafficPolicy=Cluster`: All machines in the Kubernetes cluster assign a NodePort to TiDB Pod, which is the default mode.
 - `externalTrafficPolicy=Local`: Only those machines that runs TiDB assign NodePort to TiDB Pod so that you can access local TiDB instances.
 
-    When the `Local` mode is in use, it is recommended to enable the `StableScheduling` feature of tidb-scheduler. Tidb-scheduler tries to schedule the newly added TiDB instances to the existing machines during the upgrade process. With such scheduling, client outside Kubernetes cluster does not need to upgrade configuration after TiDB is restarted.
+    When you use the `Local` mode, it is recommended to enable the `StableScheduling` feature of `tidb-scheduler`. `tidb-scheduler` tries to schedule the newly added TiDB instances to the existing machines during the upgrade process. With such scheduling, client outside the Kubernetes cluster does not need to upgrade configuration after TiDB is restarted.
 
-### See the IP/PORT exposed in NodePort mode
+### View the IP/PORT exposed in NodePort mode
 
-To see the Node Port assigned by Service, use the following commands to obtain the Service object of TiDB:
+To view the Node Port assigned by Service, run the following commands to obtain the Service object of TiDB:
 
 {{< copyable "shell-regular" >}}
 
@@ -51,10 +53,10 @@ release=<your-tidb-release-name>
 kubectl -n ${namespace} get svc ${release}-tidb -ojsonpath="{.spec.ports[?(@.name=='mysql-client')].nodePort}{'\n'}"
 ```
 
-You might encounter the following two situations when seeing which nodes' IP can access TiDB service:
+To check you can access TiDB services by using the IP of what nodes, see the following two cases:
 
-- When `externalTrafficPolicy` is configured as `Cluster`, IPs of all nodes can access TiDB.
-- When `externalTrafficPolicy` is configured as `Local`, use the following commands to obtain the nodes on which the TiDB instance of the specified cluster is located:
+- When `externalTrafficPolicy` is configured as `Cluster`, you can use the IP of any node to access TiDB services.
+- When `externalTrafficPolicy` is configured as `Local`, use the following commands to get the nodes where the TiDB instance of a specified cluster is located:
 
     {{< copyable "shell-regular" >}}
 

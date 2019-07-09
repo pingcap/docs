@@ -43,8 +43,6 @@
       - [For Testing Environments](how-to/deploy/from-tarball/testing-environment.md)
       - [For Production Environments](how-to/deploy/from-tarball/production-environment.md)
     + Orchestrated Deployment
-      + tidb-in-kubernetes
-        - [Access TiDB](how-to/deploy/orchestrated/tidb-in-kubernetes/access-tidb.md)
       - [Ansible Deployment (Recommended)](how-to/deploy/orchestrated/ansible.md)
       - [Ansible Offline Deployment](how-to/deploy/orchestrated/offline-ansible.md)
       - [Docker Deployment](how-to/deploy/orchestrated/docker.md)
@@ -54,6 +52,7 @@
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](how-to/deploy/data-migration-with-ansible.md)
     - [TiDB Binlog Cluster Deployment](how-to/deploy/tidb-binlog.md)
+    - [Access the TiDB Cluster in Kubernetes](how-to/deploy/orchestrated/tidb-in-kubernetes/access-tidb.md)
   + Configure
     - [Time Zone](how-to/configure/time-zone.md)
     - [Memory Control](how-to/configure/memory-control.md)
