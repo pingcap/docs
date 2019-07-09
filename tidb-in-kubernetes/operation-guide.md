@@ -1,3 +1,8 @@
+---
+title: TiDB Cluster Operation Guide
+summary: TiDB Cluster Operation Guide
+category: how-to
+---
 # TiDB Cluster Operation Guide
 
 TiDB Operator can manage multiple clusters in the same Kubernetes cluster.
@@ -5,17 +10,21 @@ TiDB Operator can manage multiple clusters in the same Kubernetes cluster.
 The following variables will be used in the rest of the document:
 
 ```shell
-$ releaseName="demo"
-$ namespace="tidb"
-$ chartVersion="v1.0.0-beta.3"
+releaseName="demo"
+namespace="tidb"
+chartVersion="v1.0.0-beta.3"
 ```
 After Helm is deployed, get the values.yaml of current tidb-cluster chart:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ mkdir -p /home/tidb/${releaseName}
-$ helm inspect values pingcap/tidb-cluster --version=${chartVersion} > /home/tidb/${releaseName}/values-${releaseName}.yaml
+mkdir -p /home/tidb/${releaseName} && \
+helm inspect values pingcap/tidb-cluster --version=${chartVersion} > /home/tidb/${releaseName}/values-${releaseName}.yaml
 ```
-> **Note:** The rest of the document will use `values.yaml` to reference `/home/tidb/${releaseName}/values-${releaseName}.yaml`
+> **Note:** 
+>
+> The rest of the document will use `values.yaml` to reference `/home/tidb/${releaseName}/values-${releaseName}.yaml`
 
 ## Configuration
 
@@ -35,8 +44,10 @@ TiDB Operator uses `values.yaml` as TiDB cluster configuration file. It provides
         
         If you don't want to use the default `StorageClass` or your Kubernetes cluster does not support `local-storage` class, please execute the following command to find an available `StorageClass` and select the ones you want to provide to TiDB cluster.
 
+        {{< copyable "shell-regular" >}}
+
         ```shell
-        $ kubectl get sc
+        kubectl get sc
         ```
 
 * Disaster Tolerance setting
@@ -64,10 +75,12 @@ TiDB Operator uses `values.yaml` as TiDB cluster configuration file. It provides
         * `rack`: rack where node is located
         * `kubernetes.io/hostname`: hostname of the node
 
-        you need label topology info to nodes of Kubernetes cluster use the following command
+        you need label topology info to nodes of Kubernetes cluster use the following command(not all tags are required):
+
+        {{< copyable "shell-regular" >}}
+
         ```shell
-        # Not all tags are required
-        $ kubectl label node <nodeName> region=<regionName> zone=<zoneName> rack=<rackName> kubernetes.io/hostname=<hostName>
+        kubectl label node <nodeName> region=<regionName> zone=<zoneName> rack=<rackName> kubernetes.io/hostname=<hostName>
         ```
 
 For other settings, the variables in `values.yaml` are self-explanatory with comments. You can modify them according to your need before installing the charts.
@@ -86,38 +99,55 @@ We have a [daemonset which does the above performance fixes](../manifests/gke/lo
 We also have a [daemonset that fixes performance and combines all SSD disks together with lvm](../manifests/gke/local-ssd-provision.yaml).
 The terraform deployment will automatically install that.
 
-> **Note**: This setup that combines local SSD assumes you are running only one process that needs local SSD per VM.
+> **Note:**
+>
+> This setup that combines local SSD assumes you are running only one process that needs local SSD per VM.
 
 
 ## Deploy TiDB cluster
 
 After TiDB Operator and Helm are deployed correctly and configuration completed, TiDB cluster can be deployed using following command:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ helm install pingcap/tidb-cluster --name=${releaseName} --namespace=${namespace} --version=${chartVersion} -f /home/tidb/${releaseName}/values-${releaseName}.yaml
-$ kubectl get po -n ${namespace} -l app.kubernetes.io/instance=${releaseName}
+helm install pingcap/tidb-cluster --name=${releaseName} --namespace=${namespace} --version=${chartVersion} -f /home/tidb/${releaseName}/values-${releaseName}.yaml
+```
+
+Check Pod status with following command:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl get po -n ${namespace} -l app.kubernetes.io/instance=${releaseName}
 ```
 
 ## Access TiDB cluster
 
 By default TiDB service is exposed using [`NodePort`](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport). You can modify it to `ClusterIP` which will disable access from outside of the cluster. Or modify it to [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) if the underlining Kubernetes supports this kind of service.
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ kubectl get svc -n ${namespace} # check the available services
+kubectl get svc -n ${namespace} # check the available services
 ```
 
 By default the TiDB cluster has no root password set. Setting a password in helm is insecure. Instead you can set the name of a K8s secret as `tidb.passwordSecretName` in `values.yaml`. Note that this is only used to initialize users: once your tidb cluster is initialized you may delete the secret. The format of the secret is `user=password`, so you can set the root user password with:
 
-```
-kubectl create namespace ${namespace}
+{{< copyable "shell-regular" >}}
+
+```shell
+kubectl create namespace ${namespace} && \
 kubectl create secret generic tidb-secret --from-literal=root=<root-password> --namespace=${namespace}
 ```
 
 You can retrieve the password from the initialization `Secret`:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ PASSWORD=$(kubectl get secret -n ${namespace} tidb-secret -ojsonpath="{.data.root}" | base64 --decode)
-$ echo ${PASSWORD}
+PASSWORD=$(kubectl get secret -n ${namespace} tidb-secret -ojsonpath="{.data.root}" | base64 --decode) && \
+echo ${PASSWORD}
 ```
 
 * Access inside of the Kubernetes cluster
@@ -128,9 +158,18 @@ $ echo ${PASSWORD}
 
     * Using kubectl portforward
 
+        {{< copyable "shell-regular" >}}
+
         ```shell
-        $ kubectl port-forward -n ${namespace} svc/${releaseName}-tidb 4000:4000 &>/tmp/portforward-tidb.log
-        $ mysql -h 127.0.0.1 -P 4000 -u root -p
+        kubectl port-forward -n ${namespace} svc/${releaseName}-tidb 4000:4000 &>/tmp/portforward-tidb.log
+        ```
+
+        Access TiDB:
+
+        {{< copyable "shell-regular" >}}
+        
+        ```shell
+        mysql -h 127.0.0.1 -P 4000 -u root -p
         ```
 
     * Using LoadBalancer
@@ -156,22 +195,28 @@ Due to the above reasons, it's recommended to do horizontal scaling other than v
 
 To scale in/out TiDB cluster, just modify the `replicas` of PD, TiKV and TiDB in `values.yaml` file. And then run the following command:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ helm upgrade ${releaseName} pingcap/tidb-cluster --version=${chartVersion} -f /home/tidb/${releaseName}/values-${releaseName}.yaml
+helm upgrade ${releaseName} pingcap/tidb-cluster --version=${chartVersion} -f /home/tidb/${releaseName}/values-${releaseName}.yaml
 ```
 
 ### Vertical scaling
 
 To scale up/down TiDB cluster, modify the cpu/memory/storage limits and requests of PD, TiKV and TiDB in `values.yaml` file. And then run the same command as above.
 
-> **Note**: See the above caveats of vertical scaling. Before [#35](https://github.com/pingcap/tidb-operator/issues/35) is fixed, you have to manually configure the block cache size for TiKV in charts/tidb-cluster/templates/config/_tikv-config.tpl
+> **Note:**
+>
+> See the above caveats of vertical scaling. Before [#35](https://github.com/pingcap/tidb-operator/issues/35) is fixed, you have to manually configure the block cache size for TiKV in `values.yaml`.
 
 ## Upgrade TiDB cluster
 
 Upgrade TiDB cluster is similar to scale TiDB cluster, but by changing `image` of PD, TiKV and TiDB to different image versions in `values.yaml`. And then run the following command:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ helm upgrade ${releaseName} pingcap/tidb-cluster --version=${chartVersion} -f /home/tidb/${releaseName}/values-${releaseName}.yaml
+helm upgrade ${releaseName} pingcap/tidb-cluster --version=${chartVersion} -f /home/tidb/${releaseName}/values-${releaseName}.yaml
 ```
 
 For minor version upgrade, updating the `image` should be enough. When TiDB major version is out, the better way to update is to fetch the new values.yaml from new tidb-operator chart as described in the beginning and then merge the old values.yaml with new values.yaml. And then upgrade as above.
@@ -180,26 +225,36 @@ For minor version upgrade, updating the `image` should be enough. When TiDB majo
 
 Since `v1.0.0`, TiDB operator can perform rolling-update on configuration updates. This feature is disabled by default in favor of backward compatibility, you can enable it by setting `enableConfigMapRollout` to `true` in your helm values file.
 
-> **Note**: currently, changing PD's `scheduler` and `replication` configurations(`maxStoreDownTime` and `maxReplicas` in `values.yaml`, and all the configuration key under `[scheduler]` and `[replication]` section if you override the pd config file) after cluster creation has no effect. You have to configure these variables via `pd-ctl` after the cluster creation, see: [pd-ctl](https://pingcap.com/docs/dev/reference/tools/pd-control/)
+> **Note:**
+>
+> Currently, changing PD's `scheduler` and `replication` configurations(`maxStoreDownTime` and `maxReplicas` in `values.yaml`, and all the configuration key under `[scheduler]` and `[replication]` section if you override the pd config file) after cluster creation has no effect. You have to configure these variables via `pd-ctl` after the cluster creation, see: [pd-ctl](https://pingcap.com/docs/dev/reference/tools/pd-control/)
 
-> WARN: changing this variable against a running cluster will trigger an rolling-update of PD/TiKV/TiDB pods even if there's no configuration change.
+> **WARN:**
+>
+> Changing this variable against a running cluster will trigger an rolling-update of PD/TiKV/TiDB pods even if there's no configuration change.
 
 ## Destroy TiDB cluster
 
 To destroy TiDB cluster, run the following command:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ helm delete ${releaseName} --purge
+helm delete ${releaseName} --purge
 ```
 
 The above command only delete the running pods, the data is persistent. If you do not need the data anymore, you can run the following command to clean the data:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ kubectl delete pvc -n ${namespace} -l app.kubernetes.io/instance=${releaseName},app.kubernetes.io/managed-by=tidb-operator
-$ kubectl get pv -l app.kubernetes.io/namespace=${namespace},app.kubernetes.io/managed-by=tidb-operator,app.kubernetes.io/instance=${releaseName} -o name | xargs -I {} kubectl patch {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
+kubectl delete pvc -n ${namespace} -l app.kubernetes.io/instance=${releaseName},app.kubernetes.io/managed-by=tidb-operator && \
+kubectl get pv -l app.kubernetes.io/namespace=${namespace},app.kubernetes.io/managed-by=tidb-operator,app.kubernetes.io/instance=${releaseName} -o name | xargs -I {} kubectl patch {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
 ```
 
-> **Note:** the above command will delete the data permanently. Think twice before executing them.
+> **Note:**
+>
+> The above command will delete the data permanently. Think twice before executing them.
 
 
 ## Monitor
@@ -210,40 +265,15 @@ By default the monitor data is not persistent, when the monitor pod is killed fo
 
 You can view the dashboard using `kubectl portforward`:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-$ kubectl port-forward -n ${namespace} svc/${releaseName}-grafana 3000:3000 &>/tmp/portforward-grafana.log
+kubectl port-forward -n ${namespace} svc/${releaseName}-grafana 3000:3000 &>/tmp/portforward-grafana.log
 ```
 
 Then open your browser at http://localhost:3000 The default username and password are both `admin`
 
 The Grafana service is exposed as `NodePort` by default, you can change it to `LoadBalancer` if the underlining Kubernetes has load balancer support. And then view the dashboard via load balancer endpoint.
-
-### View TiDB Slow Query Log
-
-For default setup, tidb is configured to export slow query log to STDOUT along with normal server logs. You can obtain the slow query log by `grep` the keyword `SLOW_QUERY`:
-
-```shell
-$ kubectl logs -n ${namespace} ${tidbPodName} | grep SLOW_QUERY
-```
-
-Optionally, you can output slow query log in a separate sidecar by enabling `separateSlowLog`:
-
-```yaml
-# Uncomment the following line to enable separate output of the slow query log
-    # separateSlowLog: true
-```
-
-Run `helm upgrade` to apply the change, then you can obtain the slow query log from the sidecar named `slowlog`:
-
-```shell
-$ kubectl logs -n ${namespace} ${tidbPodName} -c slowlog
-```
-
-To retrieve logs from multiple pods, [`stern`](https://github.com/wercker/stern) is recommended.
-
-```shell
-$ stern -n ${namespace} tidb -c slowlog
-```
 
 ## Backup and restore
 
