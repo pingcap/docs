@@ -12,7 +12,7 @@ The `DELETE` statement removes rows from a specified table.
 
 **DeleteFromStmt:**
 
-![DeleteFromStmt](/media/sqlgram/DeleteFromStmt.png)
+![DeleteFromStmt](/media/sqlgram-dev/DeleteFromStmt.png)
 
 ## Examples
 
@@ -57,7 +57,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [INSERT](/dev/reference/sql/statements/insert.md)
-* [SELECT](/dev/reference/sql/statements/select.md)
-* [UPDATE](/dev/reference/sql/statements/update.md)
-* [REPLACE](/dev/reference/sql/statements/replace.md)
+* [INSERT](/reference/sql/statements/insert.md)
+* [SELECT](/reference/sql/statements/select.md)
+* [UPDATE](/reference/sql/statements/update.md)
+* [REPLACE](/reference/sql/statements/replace.md)

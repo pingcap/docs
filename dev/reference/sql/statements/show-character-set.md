@@ -12,15 +12,15 @@ This statement provides a static list of available character sets in TiDB. The o
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram-dev/ShowTargetFilterable.png)
 
 **CharsetKw:**
 
-![CharsetKw](/media/sqlgram/CharsetKw.png)
+![CharsetKw](/media/sqlgram-dev/CharsetKw.png)
 
 ## Examples
 
@@ -44,4 +44,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW COLLATION](/dev/reference/sql/statements/show-collation.md)
+* [SHOW COLLATION](/reference/sql/statements/show-collation.md)

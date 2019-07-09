@@ -12,7 +12,7 @@ This statement shows a list of assignable privileges in TiDB. It is a static lis
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 ## Examples
 
@@ -63,5 +63,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW GRANTS](/dev/reference/sql/statements/show-grants.md)
-* [GRANT <privileges>](/dev/reference/sql/statements/grant-privileges.md)
+* [SHOW GRANTS](/reference/sql/statements/show-grants.md)
+* [GRANT <privileges>](/reference/sql/statements/grant-privileges.md)

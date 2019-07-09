@@ -12,15 +12,15 @@ This statement changes an existing user inside the TiDB privilege system. In the
 
 **AlterUserStmt:**
 
-![AlterUserStmt](/media/sqlgram/AlterUserStmt.png)
+![AlterUserStmt](/media/sqlgram-dev/AlterUserStmt.png)
 
 **UserSpecList:**
 
-![UserSpecList](/media/sqlgram/UserSpecList.png)
+![UserSpecList](/media/sqlgram-dev/UserSpecList.png)
 
 **UserSpec:**
 
-![UserSpec](/media/sqlgram/UserSpec.png)
+![UserSpec](/media/sqlgram-dev/UserSpec.png)
 
 ## Examples
 
@@ -54,7 +54,7 @@ mysql> SHOW CREATE USER 'newuser';
 
 ## See also
 
-* [Security Compatibility with MySQL](/dev/reference/security/compatibility.md)
-* [CREATE USER](/dev/reference/sql/statements/create-user.md)
-* [DROP USER](/dev/reference/sql/statements/drop-user.md)
-* [SHOW CREATE USER](/dev/reference/sql/statements/show-create-user.md)
+* [Security Compatibility with MySQL](/reference/security/compatibility.md)
+* [CREATE USER](/reference/sql/statements/create-user.md)
+* [DROP USER](/reference/sql/statements/drop-user.md)
+* [SHOW CREATE USER](/reference/sql/statements/show-create-user.md)

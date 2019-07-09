@@ -14,15 +14,15 @@ Both `TRUNCATE TABLE tableName` and `TRUNCATE tableName` are valid syntax.
 
 **TruncateTableStmt:**
 
-![TruncateTableStmt](/media/sqlgram/TruncateTableStmt.png)
+![TruncateTableStmt](/media/sqlgram-dev/TruncateTableStmt.png)
 
 **OptTable:**
 
-![OptTable](/media/sqlgram/OptTable.png)
+![OptTable](/media/sqlgram-dev/OptTable.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram/TableName.png)
+![TableName](/media/sqlgram-dev/TableName.png)
 
 ## Examples
 
@@ -66,7 +66,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
-* [DELETE](/dev/reference/sql/statements/delete.md)
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
+* [DROP TABLE](/reference/sql/statements/drop-table.md)
+* [DELETE](/reference/sql/statements/delete.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)

@@ -12,15 +12,15 @@ This statement drops an view object from the currently selected database. It doe
 
 **DropViewStmt:**
 
-![DropViewStmt](/media/sqlgram/DropViewStmt.png)
+![DropViewStmt](/media/sqlgram-dev/DropViewStmt.png)
 
 **TableNameList:**
 
-![TableNameList](/media/sqlgram/TableNameList.png)
+![TableNameList](/media/sqlgram-dev/TableNameList.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram/TableName.png)
+![TableName](/media/sqlgram-dev/TableName.png)
 
 ## Examples
 
@@ -79,5 +79,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [DROP TABLE](/dev/reference/sql/statements/drop-table.md)
-* [CREATE VIEW](/dev/reference/sql/statements/create-view.md)
+* [DROP TABLE](/reference/sql/statements/drop-table.md)
+* [CREATE VIEW](/reference/sql/statements/create-view.md)

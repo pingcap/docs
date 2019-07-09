@@ -14,15 +14,15 @@ By design `DROP TABLE` will also drop views, as they share the same namespace as
 
 **DropTableStmt:**
 
-![DropTableStmt](/media/sqlgram/DropTableStmt.png)
+![DropTableStmt](/media/sqlgram-dev/DropTableStmt.png)
 
 **TableOrTables:**
 
-![TableOrTables](/media/sqlgram/TableOrTables.png)
+![TableOrTables](/media/sqlgram-dev/TableOrTables.png)
 
 **TableNameList:**
 
-![TableNameList](/media/sqlgram/TableNameList.png)
+![TableNameList](/media/sqlgram-dev/TableNameList.png)
 
 ## Examples
 
@@ -51,7 +51,7 @@ Query OK, 0 rows affected (0.23 sec)
 
 ## See also
 
-* [DROP VIEW](/dev/reference/sql/statements/drop-view.md)
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
-* [SHOW TABLES](/dev/reference/sql/statements/show-tables.md)
+* [DROP VIEW](/reference/sql/statements/drop-view.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [SHOW TABLES](/reference/sql/statements/show-tables.md)

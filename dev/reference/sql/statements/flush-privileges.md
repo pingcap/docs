@@ -12,15 +12,15 @@ This statement triggers TiDB to reload the in-memory copy of privileges from the
 
 **FlushStmt:**
 
-![FlushStmt](/media/sqlgram/FlushStmt.png)
+![FlushStmt](/media/sqlgram-dev/FlushStmt.png)
 
 **NoWriteToBinLogAliasOpt:**
 
-![NoWriteToBinLogAliasOpt](/media/sqlgram/NoWriteToBinLogAliasOpt.png)
+![NoWriteToBinLogAliasOpt](/media/sqlgram-dev/NoWriteToBinLogAliasOpt.png)
 
 **FlushOption:**
 
-![FlushOption](/media/sqlgram/FlushOption.png)
+![FlushOption](/media/sqlgram-dev/FlushOption.png)
 
 ## Examples
 
@@ -35,4 +35,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [Privilege Management](/dev/reference/security/privilege-system.md)
+* [Privilege Management](/reference/security/privilege-system.md)

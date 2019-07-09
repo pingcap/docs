@@ -14,7 +14,7 @@ In the absense of a `START TRANSACTION` statement, every statement will by defau
 
 **BeginTransactionStmt:**
 
-![BeginTransactionStmt](/media/sqlgram/BeginTransactionStmt.png)
+![BeginTransactionStmt](/media/sqlgram-dev/BeginTransactionStmt.png)
 
 ## Examples
 
@@ -38,6 +38,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [COMMIT](/dev/reference/sql/statements/commit.md)
-* [ROLLBACK](/dev/reference/sql/statements/rollback.md)
-* [BEGIN](/dev/reference/sql/statements/begin.md)
+* [COMMIT](/reference/sql/statements/commit.md)
+* [ROLLBACK](/reference/sql/statements/rollback.md)
+* [BEGIN](/reference/sql/statements/begin.md)
