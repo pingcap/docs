@@ -389,7 +389,7 @@ set tidb_query_log_max_len = 20
 
 Depending on PD scheduling and the load condition of TiKV, Region split might take a long time. This variable determines whether to wait for all Regions to be split before returning the result to the client when executing `SPLIT REGION`.  Value 1 means waiting for the split to complete before returning the result. 0 means returning the result without waiting for Region split.
 
-It should be noted that during the region breakup, there will be some impact on the performance of writing and reading on the broken region. For batch writing, data importing, etc, it is recommended to wait for the region to be broken before start data importing.
+It should be noted that Region split can impact on the read/write performance on Regions being split. For scenarios such as batch writing and data importing, it is recommended to wait for the Region split to finish before data importing.
 
 ### tidb_wait_split_region_timeout
 
