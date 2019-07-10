@@ -1,5 +1,5 @@
 ---
-title: Split Region | TiDB SQL Statement Reference 
+title: Split Region
 summary: An overview of the usage of Split Region for the TiDB database.
 category: reference
 ---
