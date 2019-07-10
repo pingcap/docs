@@ -242,6 +242,8 @@
       - [Configuration Flags](reference/configuration/pd-server/configuration.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
+    + tidb-in-kubernetes
+      - [TiDB Cluster Configuration on Kubernetes](reference/configuration/tidb-in-kubernetes/cluster-configuration.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
