@@ -387,7 +387,7 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION
 - Default value: 1
 
-Determined by PD scheduling and the load condition of TiKV, the time to break up the region may be long. This variable is used to set whether to wait for all regions to be broken and then return the result to the client when executing the `SPLIT REGION` statement. The default 1 means to wait for the breakup to complete before returning the result. 0 means return without waiting for the region to break up.
+Depending on PD scheduling and the load condition of TiKV, Region split might take a long time. This variable determines whether to wait for all Regions to be split before returning the result to the client when executing `SPLIT REGION`.  Value 1 means waiting for the split to complete before returning the result. 0 means returning the result without waiting for Region split.
 
 It should be noted that during the region breakup, there will be some impact on the performance of writing and reading on the broken region. For batch writing, data importing, etc, it is recommended to wait for the region to be broken before start data importing.
 
