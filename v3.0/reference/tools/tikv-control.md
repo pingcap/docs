@@ -32,7 +32,7 @@ When you compile TiKV, the `tikv-ctl` command is also compiled at the same time.
 
 - Local mode: Use the `--db` option to specify the local TiKV data directory path. In this mode, you need to stop the running TiKV instance.
 
-Unless otherwise noted, all commands support both the remote mode and the local mode. 
+Unless otherwise noted, all commands support both the remote mode and the local mode.
 
 Additionally, `tikv-ctl` has two simple commands `--to-hex` and `--to-escaped`, which are used to make simple changes to the form of the key.
 
