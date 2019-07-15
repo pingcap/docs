@@ -10,7 +10,7 @@ TiDB supports both the MySQL wire protocol and the majority of its syntax. This 
 
 Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and mydumper/myloader.
 
-However, as some features of MySQL are not well implemented in a distributed scenario, TiDB currently does not support these features or, in some way, behaves differently from MySQL. Some syntaxes of MySQL are parsed but ignored in TiDB, such as `Engine` in `Create Table` statement.
+However, TiDB does not support some of MySQL features or behaves differently from MySQL because these features cannot be easily implemented in a distributed system. For some MySQL syntax, TiDB can parse but does not process it. For example, `Engine` in the `CREATE TABLE` statement can be parsed but is ignored.
 
 > **Note:**
 >
