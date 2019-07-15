@@ -67,7 +67,7 @@ CREATE TABLE [IF NOT EXISTS] tbl_name
     [table_options]
 ```
 
-When you create an existing table and if you specify `IF NOT EXIST`, it does not report an error. Otherwise, it reports an error.
+When you create an existing table, if you specify `IF NOT EXIST`, it does not report an error. Otherwise, it reports an error.
 
 ```sql
 CREATE TABLE [IF NOT EXISTS] tbl_name
