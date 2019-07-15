@@ -396,4 +396,4 @@ It should be noted that Region split can impact on the read/write performance on
 - Scope: SESSION
 - Default value: 300
 
-This variable is used to set the execution timeout of the `SPLIT REGION` statement in seconds. The default value is 300 seconds. A timeout error is returned if it is overtime.
+This variable specifies the execution timeout of the `SPLIT REGION` statement in seconds. A timeout error is returned if the operation is out of time.
