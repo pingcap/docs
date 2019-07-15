@@ -12,11 +12,11 @@ This statement shows a list of warnings that occurred for previously executed st
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram-dev/ShowTargetFilterable.png)
 
 ## Examples
 
@@ -84,4 +84,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW ERRORS](/dev/reference/sql/statements/show-errors.md)
+* [SHOW ERRORS](/reference/sql/statements/show-errors.md)

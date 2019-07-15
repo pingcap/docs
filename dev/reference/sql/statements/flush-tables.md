@@ -12,27 +12,27 @@ This statement is included for compatibility with MySQL. It has no effective usa
 
 **FlushStmt:**
 
-![FlushStmt](/media/sqlgram/FlushStmt.png)
+![FlushStmt](/media/sqlgram-dev/FlushStmt.png)
 
 **NoWriteToBinLogAliasOpt:**
 
-![NoWriteToBinLogAliasOpt](/media/sqlgram/NoWriteToBinLogAliasOpt.png)
+![NoWriteToBinLogAliasOpt](/media/sqlgram-dev/NoWriteToBinLogAliasOpt.png)
 
 **FlushOption:**
 
-![FlushOption](/media/sqlgram/FlushOption.png)
+![FlushOption](/media/sqlgram-dev/FlushOption.png)
 
 **TableOrTables:**
 
-![TableOrTables](/media/sqlgram/TableOrTables.png)
+![TableOrTables](/media/sqlgram-dev/TableOrTables.png)
 
 **TableNameListOpt:**
 
-![TableNameListOpt](/media/sqlgram/TableNameListOpt.png)
+![TableNameListOpt](/media/sqlgram-dev/TableNameListOpt.png)
 
 **WithReadLockOpt:**
 
-![WithReadLockOpt](/media/sqlgram/WithReadLockOpt.png)
+![WithReadLockOpt](/media/sqlgram-dev/WithReadLockOpt.png)
 
 ## Examples
 
@@ -51,4 +51,4 @@ ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@
 
 ## See also
 
-* [Read historical data](/dev/how-to/get-started/read-historical-data.md)
+* [Read historical data](/how-to/get-started/read-historical-data.md)

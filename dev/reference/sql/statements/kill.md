@@ -14,7 +14,7 @@ By design, this statement is not compatible with MySQL by default. This helps pr
 
 **KillStmt:**
 
-![KillStmt](/media/sqlgram/KillStmt.png)
+![KillStmt](/media/sqlgram-dev/KillStmt.png)
 
 ## Examples
 
@@ -34,8 +34,8 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQL compatibility
 
-* The `KILL TIDB` statement is a TiDB extension. If you are certain that the session you are attempting to kill is on the same TiDB server, set [`compatible-kill-query = true`](/dev/reference/configuration/tidb-server/configuration-file.md#compatible-kill-query) in your configuration file.
+* The `KILL TIDB` statement is a TiDB extension. If you are certain that the session you are attempting to kill is on the same TiDB server, set [`compatible-kill-query = true`](/reference/configuration/tidb-server/configuration-file.md#compatible-kill-query) in your configuration file.
 
 ## See also
 
-* [SHOW \[FULL\] PROCESSLIST](/dev/reference/sql/statements/show-processlist.md)
+* [SHOW \[FULL\] PROCESSLIST](/reference/sql/statements/show-processlist.md)

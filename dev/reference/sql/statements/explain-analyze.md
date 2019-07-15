@@ -12,15 +12,15 @@ The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major diffe
 
 **ExplainSym:**
 
-![ExplainSym](/media/sqlgram/ExplainSym.png)
+![ExplainSym](/media/sqlgram-dev/ExplainSym.png)
 
 **ExplainStmt:**
 
-![ExplainStmt](/media/sqlgram/ExplainStmt.png)
+![ExplainStmt](/media/sqlgram-dev/ExplainStmt.png)
 
 **ExplainableStmt:**
 
-![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
+![ExplainableStmt](/media/sqlgram-dev/ExplainableStmt.png)
 
 ## Examples
 
@@ -56,7 +56,7 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [Understanding the Query Execution Plan](/dev/reference/performance/understanding-the-query-execution-plan.md)
-* [EXPLAIN](/dev/reference/sql/statements/explain.md)
-* [ANALYZE TABLE](/dev/reference/sql/statements/analyze-table.md)
-* [TRACE](/dev/reference/sql/statements/trace.md)
+* [Understanding the Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md)
+* [EXPLAIN](/reference/sql/statements/explain.md)
+* [ANALYZE TABLE](/reference/sql/statements/analyze-table.md)
+* [TRACE](/reference/sql/statements/trace.md)

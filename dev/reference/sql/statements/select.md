@@ -2,7 +2,6 @@
 title: SELECT | TiDB SQL Statement Reference 
 summary: An overview of the usage of SELECT for the TiDB database.
 category: reference
-aliases: ['/docs/sql/dml/']
 ---
 
 # SELECT 
@@ -13,51 +12,51 @@ The `SELECT` statement is used to read data from TiDB.
 
 **SelectStmt:**
 
-![SelectStmt](/media/sqlgram/SelectStmt.png)
+![SelectStmt](/media/sqlgram-dev/SelectStmt.png)
 
 **FromDual:**
 
-![FromDual](/media/sqlgram/FromDual.png)
+![FromDual](/media/sqlgram-dev/FromDual.png)
 
 **WhereClauseOptional:**
 
-![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
+![WhereClauseOptional](/media/sqlgram-dev/WhereClauseOptional.png)
 
 **SelectStmtOpts:**
 
-![SelectStmtOpts](/media/sqlgram/SelectStmtOpts.png)
+![SelectStmtOpts](/media/sqlgram-dev/SelectStmtOpts.png)
 
 **SelectStmtFieldList:**
 
-![SelectStmtFieldList](/media/sqlgram/SelectStmtFieldList.png)
+![SelectStmtFieldList](/media/sqlgram-dev/SelectStmtFieldList.png)
 
 **TableRefsClause:**
 
-![TableRefsClause](/media/sqlgram/TableRefsClause.png)
+![TableRefsClause](/media/sqlgram-dev/TableRefsClause.png)
 
 **WhereClauseOptional:**
 
-![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
+![WhereClauseOptional](/media/sqlgram-dev/WhereClauseOptional.png)
 
 **SelectStmtGroup:**
 
-![SelectStmtGroup](/media/sqlgram/SelectStmtGroup.png)
+![SelectStmtGroup](/media/sqlgram-dev/SelectStmtGroup.png)
 
 **HavingClause:**
 
-![HavingClause](/media/sqlgram/HavingClause.png)
+![HavingClause](/media/sqlgram-dev/HavingClause.png)
 
 **OrderByOptional:**
 
-![OrderByOptional](/media/sqlgram/OrderByOptional.png)
+![OrderByOptional](/media/sqlgram-dev/OrderByOptional.png)
 
 **SelectStmtLimit:**
 
-![SelectStmtLimit](/media/sqlgram/SelectStmtLimit.png)
+![SelectStmtLimit](/media/sqlgram-dev/SelectStmtLimit.png)
 
 **SelectLockOpt:**
 
-![SelectLockOpt](/media/sqlgram/SelectLockOpt.png)
+![SelectLockOpt](/media/sqlgram-dev/SelectLockOpt.png)
 
 ## Description of the syntax elements
 
@@ -75,7 +74,7 @@ The `SELECT` statement is used to read data from TiDB.
 |`HAVING where_condition` | The `HAVING` clause and the `WHERE` clause are both used to filter the results. The `HAVING` clause filters the results of `GROUP BY`, while the `WHERE` clause filter the results before aggregation. |
 |`ORDER BY` | The `ORDER BY` clause is used to sort the data in ascending or descending order, based on columns, expressions or items in the `select_expr` list.|
 |`LIMIT` | The `LIMIT` clause can be used to constrain the number of rows. `LIMIT` takes one or two numeric arguments. With one argument, the argument specifies the maximum number of rows to return, the first row to return is the first row of the table by default; with two arguments, the first argument specifies the offset of the first row to return, and the second specifies the maximum number of rows to return.|
-| `FOR UPDATE` | The `SELECT FOR UPDATE` clause locks all the data in the result sets to detect concurrent updates from other transactions. Data that match the query conditions but do not exist in the result sets are not read-locked, such as the row data written by other transactions after the current transaction is started. TiDB uses the [Optimistic Transaction Model](/dev/reference/transactions/transaction-model.md). The transaction conflicts are not detected in the statement execution phase. Therefore, the current transaction does not block other transactions from executing `UPDATE`, `DELETE` or `SELECT FOR UPDATE` like other databases such as PostgreSQL. In the committing phase, the rows read by `SELECT FOR UPDATE` are committed in two phases, which means they can also join the conflict detection. If write conflicts occur, the commit fails for all transactions that include the `SELECT FOR UPDATE` clause. If no conflict is detected, the commit succeeds. And a new version is generated for the locked rows, so that write conflicts can be detected when other uncommitted transactions are being committed later.|
+| `FOR UPDATE` | The `SELECT FOR UPDATE` clause locks all the data in the result sets to detect concurrent updates from other transactions. Data that match the query conditions but do not exist in the result sets are not read-locked, such as the row data written by other transactions after the current transaction is started. TiDB uses the [Optimistic Transaction Model](/reference/transactions/transaction-model.md). The transaction conflicts are not detected in the statement execution phase. Therefore, the current transaction does not block other transactions from executing `UPDATE`, `DELETE` or `SELECT FOR UPDATE` like other databases such as PostgreSQL. In the committing phase, the rows read by `SELECT FOR UPDATE` are committed in two phases, which means they can also join the conflict detection. If write conflicts occur, the commit fails for all transactions that include the `SELECT FOR UPDATE` clause. If no conflict is detected, the commit succeeds. And a new version is generated for the locked rows, so that write conflicts can be detected when other uncommitted transactions are being committed later.|
 |`LOCK IN SHARE MODE` | To guarantee compatibility, TiDB parses these three modifiers, but will ignore them.|
 
 
@@ -109,7 +108,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [INSERT](/dev/reference/sql/statements/insert.md)
-* [DELETE](/dev/reference/sql/statements/delete.md)
-* [UPDATE](/dev/reference/sql/statements/update.md)
-* [REPLACE](/dev/reference/sql/statements/replace.md)
+* [INSERT](/reference/sql/statements/insert.md)
+* [DELETE](/reference/sql/statements/delete.md)
+* [UPDATE](/reference/sql/statements/update.md)
+* [REPLACE](/reference/sql/statements/replace.md)

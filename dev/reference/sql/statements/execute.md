@@ -12,11 +12,11 @@ The `EXECUTE` statement provides an SQL interface to server-side prepared statem
 
 **ExecuteStmt:**
 
-![ExecuteStmt](/media/sqlgram/ExecuteStmt.png)
+![ExecuteStmt](/media/sqlgram-dev/ExecuteStmt.png)
 
 **Identifier:**
 
-![Identifier](/media/sqlgram/Identifier.png)
+![Identifier](/media/sqlgram-dev/Identifier.png)
 
 ## Examples
 
@@ -45,5 +45,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [PREPARE](/dev/reference/sql/statements/prepare.md)
-* [DEALLOCATE](/dev/reference/sql/statements/deallocate.md)
+* [PREPARE](/reference/sql/statements/prepare.md)
+* [DEALLOCATE](/reference/sql/statements/deallocate.md)

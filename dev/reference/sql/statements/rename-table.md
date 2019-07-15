@@ -12,11 +12,11 @@ This statement renames an existing table to a new name.
 
 **RenameTableStmt:**
 
-![RenameTableStmt](/media/sqlgram/RenameTableStmt.png)
+![RenameTableStmt](/media/sqlgram-dev/RenameTableStmt.png)
 
 **TableToTable:**
 
-![TableToTable](/media/sqlgram/TableToTable.png)
+![TableToTable](/media/sqlgram-dev/TableToTable.png)
 
 ## Examples
 
@@ -50,6 +50,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [SHOW TABLES](/dev/reference/sql/statements/show-tables.md)
-* [ALTER TABLE](/dev/reference/sql/statements/alter-table.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [SHOW TABLES](/reference/sql/statements/show-tables.md)
+* [ALTER TABLE](/reference/sql/statements/alter-table.md)

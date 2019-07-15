@@ -13,27 +13,27 @@ This statement inserts new rows into a table.
 
 **InsertIntoStmt:**
 
-![InsertIntoStmt](/media/sqlgram/InsertIntoStmt.png)
+![InsertIntoStmt](/media/sqlgram-dev/InsertIntoStmt.png)
 
 **PriorityOpt:**
 
-![PriorityOpt](/media/sqlgram/PriorityOpt.png)
+![PriorityOpt](/media/sqlgram-dev/PriorityOpt.png)
 
 **IgnoreOptional:**
 
-![IgnoreOptional](/media/sqlgram/IgnoreOptional.png)
+![IgnoreOptional](/media/sqlgram-dev/IgnoreOptional.png)
 
 **IntoOpt:**
 
-![IntoOpt](/media/sqlgram/IntoOpt.png)
+![IntoOpt](/media/sqlgram-dev/IntoOpt.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram/TableName.png)
+![TableName](/media/sqlgram-dev/TableName.png)
 
 **InsertValues:**
 
-![InsertValues](/media/sqlgram/InsertValues.png)
+![InsertValues](/media/sqlgram-dev/InsertValues.png)
 
 ## Examples
 
@@ -95,7 +95,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [DELETE](/dev/reference/sql/statements/delete.md)
-* [SELECT](/dev/reference/sql/statements/select.md)
-* [UPDATE](/dev/reference/sql/statements/update.md)
-* [REPLACE](/dev/reference/sql/statements/replace.md)
+* [DELETE](/reference/sql/statements/delete.md)
+* [SELECT](/reference/sql/statements/select.md)
+* [UPDATE](/reference/sql/statements/update.md)
+* [REPLACE](/reference/sql/statements/replace.md)

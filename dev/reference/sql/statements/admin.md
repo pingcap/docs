@@ -2,7 +2,6 @@
 title: ADMIN | TiDB SQL Statement Reference 
 summary: An overview of the usage of ADMIN for the TiDB database.
 category: reference
-aliases: ['/docs/sql/admin/']
 ---
 
 # ADMIN
@@ -24,7 +23,7 @@ ADMIN CHECK TABLE tbl_name [, tbl_name] ...
 
 **AdminStmt:**
 
-![AdminStmt](/media/sqlgram/AdminStmt.png)
+![AdminStmt](/media/sqlgram-dev/AdminStmt.png)
 
 ## Examples
 

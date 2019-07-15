@@ -12,23 +12,23 @@ The `REPLACE` statement is semantically a combined `DELETE`+`INSERT` statement. 
 
 **ReplaceIntoStmt:**
 
-![ReplaceIntoStmt](/media/sqlgram/ReplaceIntoStmt.png)
+![ReplaceIntoStmt](/media/sqlgram-dev/ReplaceIntoStmt.png)
 
 **PriorityOpt:**
 
-![PriorityOpt](/media/sqlgram/PriorityOpt.png)
+![PriorityOpt](/media/sqlgram-dev/PriorityOpt.png)
 
 **IntoOpt:**
 
-![IntoOpt](/media/sqlgram/IntoOpt.png)
+![IntoOpt](/media/sqlgram-dev/IntoOpt.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram/TableName.png)
+![TableName](/media/sqlgram-dev/TableName.png)
 
 **InsertValues:**
 
-![InsertValues](/media/sqlgram/InsertValues.png)
+![InsertValues](/media/sqlgram-dev/InsertValues.png)
 
 ## Examples
 
@@ -70,7 +70,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [DELETE](/dev/reference/sql/statements/delete.md)
-* [INSERT](/dev/reference/sql/statements/insert.md)
-* [SELECT](/dev/reference/sql/statements/select.md)
-* [UPDATE](/dev/reference/sql/statements/update.md)
+* [DELETE](/reference/sql/statements/delete.md)
+* [INSERT](/reference/sql/statements/insert.md)
+* [SELECT](/reference/sql/statements/select.md)
+* [UPDATE](/reference/sql/statements/update.md)

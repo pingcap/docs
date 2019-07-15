@@ -12,11 +12,11 @@ This statement shows a list of privileges associated with a user. As in MySQL, t
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **Username:**
 
-![Username](/media/sqlgram/Username.png)
+![Username](/media/sqlgram-dev/Username.png)
 
 ## Examples
 
@@ -53,5 +53,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW CREATE USER](/dev/reference/sql/statements/show-create-user.md)
-* [GRANT](/dev/reference/sql/statements/grant.md)
+* [SHOW CREATE USER](/reference/sql/statements/show-create-user.md)
+* [GRANT](/reference/sql/statements/grant.md)
