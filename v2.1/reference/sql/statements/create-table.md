@@ -216,6 +216,10 @@ The `table_option` currently only supports `AUTO_INCREMENT`, `SHARD_ROW_ID_BITS`
 | `CHARACTER SET` | To specify the string code for the table; currently only support UTF8MB4 | `CHARACTER SET` =  'utf8mb4' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
 
+> **Note:**
+>
+> In TiDB 2.1 versions, the three features `SHARD_ROW_ID_BITS`, `PRE_SPLIT_REGIONS` and `COLLATE` are supported starting from the 2.1.13 version (including 2.1.13).
+
 ## Examples
 
 ```sql
