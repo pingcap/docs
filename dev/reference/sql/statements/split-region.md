@@ -8,7 +8,7 @@ category: reference
 
 For each new table created in TiDB, one Region is segmented by default to store the data of this table. This default behavior is controlled by `split-table` in the configuration file. When the data in this Region exceeds the default Region size limit, the Region starts to split into two.
 
-In the above case, because there is only one Region at the beginning,  all write requests occur on the TiKV where the Region is located. If there are a large number of writes for the newly created table, hotspots are caused. 
+In the above case, because there is only one Region at the beginning, all write requests occur on the TiKV where the Region is located. If there are a large number of writes for the newly created table, hotspots are caused. 
 
 To solve the hotspot problem in the above scenario, TiDB introduces the pre-split function, which can pre-split multiple Regions for a certain table according to the specified parameters and scatter them to each TiKV node.
 
