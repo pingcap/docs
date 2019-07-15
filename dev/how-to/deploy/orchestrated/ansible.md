@@ -20,8 +20,8 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology a
 - Deploy the whole TiDB cluster
 - [Start the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
 - [Stop the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
-- [Modify component configuration](/how-to/maintain/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
-- [Scale the TiDB cluster](/how-to/maintain/scale/with-ansible.md)
+- [Modify component configuration](/how-to/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
+- [Scale the TiDB cluster](/how-to/scale/with-ansible.md)
 - [Upgrade the component version](/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
 - [Enable the cluster binlog](/reference/tidb-binlog-overview.md)
 - [Clean up data of the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
@@ -43,7 +43,7 @@ Before you start, make sure you have:
 
     > **Note:**
     >
-    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/local-cluster/install-from-docker-compose.md) on a single machine.
+    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
 
 2. A Control Machine that meets the following requirements:
 
@@ -654,6 +654,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 | TiDB          | tidb_port          | 4000         | the communication port for the application and DBA tools |
 | TiDB          | tidb_status_port   | 10080        | the communication port to report TiDB status |
 | TiKV          | tikv_port          | 20160        | the TiKV communication port |
+| TiKV          | tikv_status_port   | 20180        | the communication port to report TiKV status |
 | PD            | pd_client_port     | 2379         | the communication port between TiDB and PD |
 | PD            | pd_peer_port       | 2380         | the inter-node communication port within the PD cluster |
 | Pump          | pump_port          | 8250         | the pump communication port |
