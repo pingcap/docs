@@ -90,6 +90,8 @@
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
     - [Upgrade TiDB Binlog Cluster](how-to/upgrade/tidb-binlog.md)
+    - Upgrade TiDB in Kubernetes
+      - [Rolling Update TiDB](how-to/upgrade/tidb-in-kubernetes.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](how-to/troubleshoot/data-migration.md)
@@ -242,6 +244,8 @@
       - [Configuration Flags](reference/configuration/pd-server/configuration.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
+    + TiDB in Kubernetes
+      - [Backup Configuration](reference/configuration/tidb-in-kubernetes/backup-configuration.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
