@@ -46,7 +46,7 @@ For example, when `table_id` is 22 and `row_id` is 11:
 t22_r11
 ```
 
-Row data in the same table have the same `table_id`, but each has its unique `row_id`. This could be used for Region split.
+Row data in the same table have the same `table_id`, but each row has its unique `row_id` that can be used for Region split.
 
 #### Even Split
 
