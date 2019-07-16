@@ -8,7 +8,7 @@ category: reference
 
 For each new table created in TiDB, one Region is segmented by default to store the data of this table. This default behavior is controlled by `split-table` in the configuration file. When the data in this Region exceeds the default Region size limit, the Region starts to split into two.
 
-In the above case, because there is only one Region at the beginning,  all write requests occur on the TiKV where the Region is located. If there are a large number of writes for the newly created table, hotspots are caused. 
+In the above case, because there is only one Region at the beginning, all write requests occur on the TiKV where the Region is located. If there are a large number of writes for the newly created table, hotspots are caused. 
 
 To solve the hotspot problem in the above scenario, TiDB introduces the pre-split function, which can pre-split multiple Regions for a certain table according to the specified parameters and scatter them to each TiKV node.
 
@@ -30,7 +30,7 @@ SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value
 SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
 ```
 
-`BY value_list…` is used to specify a series of points manually, then the current Region will be spilt according to them. It is suitable for scenarios with unevenly distributed data.
+`BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
 
 ### Split Table Region
 
@@ -46,7 +46,7 @@ For example, when `table_id` is 22 and `row_id` is 11:
 t22_r11
 ```
 
-Row data in the same table have the same `table_id`, but each has its unique `row_id`. This could be used for Region split.
+Row data in the same table have the same `table_id`, but each row has its unique `row_id` that can be used for Region split.
 
 #### Even Split
 
