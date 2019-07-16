@@ -1,17 +1,23 @@
 ---
 title: Data Migration FAQ
+summary: Learn about two questions (FAQs) relating to Data Migration.
 category: FAQ
 ---
 
 # Data Migration FAQ
 
+This is a simple FAQ page for DM, including:
+
++ How to handle the `invalid connection` error
++ How to handle the `driver: bad connection` error
+
 ## What can I do when a synchronization task is interrupted with an `invalid connection` error returned ?
 
-`invalid connection` error usually indicates connection error between DM and downstream TiDB database (Network failure, TiDB restart, Tikv busy and so on) and some data of current request have been sent to TiDB.
+`invalid connection` error usually indicates that errors have occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, TiKV busy and so on) and that part of the data for the current request has been sent to TiDB.
 
-DM will concurrently replicate data downstream in synchronize tasks. Due to this feature, an interrupted task may contain several errors. ( You could check current error by using `query-status` or `query-error`. )
+DM concurrently replicates data downstream in its synchronization tasks. Due to this feature, several errors might occur when a task is interrupted. You can check these errors through `query-status` or `query-error`.
 
-- If there is only `invalid connection` error during incremental replication, DM will retry automatically.
+- If there is only `invalid connection` error during the incremental replication, DM retries automatically.
 If DM does not or fails to retry automatically because of version problems, use `stop-task` to stop the task and then use`start-task` to restart the task.
 
 ## What can I do when a synchronization task is interrupted with the `driver: bad connection` error returned?
