@@ -50,7 +50,7 @@ When a cluster is created, a default account `root` is created with no password.
 
     > **Note:**
     > 
-    > When the initialization job is created, the pod for the TiDB cluster has not been created fully. There might be a few errors before initialization completes and pod state becomes Completed.
+    > When the initialization job is created, the Pod for the TiDB cluster has not been created fully. There might be a few errors before initialization completes and Pod state becomes Completed.
 
 ## Batch execute initialization SQL statements
 
