@@ -76,4 +76,4 @@ helm install pingcap/tidb-cluster -f values.yaml --name=<release-name> --namespa
 
 > **Note:**
 >
-> Currently no verification has been implemented for `initSql`. You can create accounts and set passwords in `initSql`, it's not recommended because passwords created this way are saved as plaintext in the initializer job object.
+> Currently no verification has been implemented for `initSql`. You can create accounts and set passwords in `initSql`, but it's not recommended because passwords created this way are saved as plaintext in the initializer job object.
