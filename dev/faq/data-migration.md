@@ -13,7 +13,7 @@ This is a simple FAQ page for DM, including:
 
 ## What can I do when a synchronization task is interrupted with the `invalid connection` error returned?
 
- `invalid connection` error usually indicates connection error between DM and downstream TiDB database (Network failure, TiDB restart, Tikv busy and so on) and some data of current request have been sent to TiDB.
+`invalid connection` error usually indicates that errors have occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, TiKV busy and so on) and that part of the data for the current request has been sent to TiDB.
 
 DM will concurrently replicate data downstream in synchronize tasks. Due to this feature, an interrupted task may contain several errors. ( You could check current error by using `query-status` or `query-error`. )
 
