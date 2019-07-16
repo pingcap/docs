@@ -230,7 +230,6 @@
       - [`TRUNCATE`](reference/sql/statements/truncate.md)
       - [`UPDATE`](reference/sql/statements/update.md)
       - [`USE`](reference/sql/statements/use.md)
-      - [`Split Region`](dev/reference/sql/statements/split-region.md)
     - [Constraints](reference/sql/constraints.md)
     - [Generated Columns](reference/sql/generated-columns.md)
     - [Character Set](reference/sql/character-set.md)
