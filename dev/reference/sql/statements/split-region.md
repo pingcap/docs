@@ -30,7 +30,7 @@ SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value
 SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
 ```
 
-`BY value_list…` is used to specify a series of points manually, then the current Region will be spilt according to them. It is suitable for scenarios with unevenly distributed data.
+`BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
 
 ### Split Table Region
 
@@ -46,7 +46,7 @@ For example, when `table_id` is 22 and `row_id` is 11:
 t22_r11
 ```
 
-Row data in the same table have the same `table_id`, but each has its unique `row_id`. This could be used for Region split.
+Row data in the same table have the same `table_id`, but each row has its unique `row_id` that can be used for Region split.
 
 #### Even Split
 
