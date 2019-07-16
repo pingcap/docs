@@ -6,6 +6,11 @@ category: FAQ
 
 # Data Migration FAQ
 
+This is a simple FAQ page for DM, including:
+
++ How to handle the `invalid connection` error
++ How to handle the `driver: bad connection` error
+
 ## What can I do when a synchronization task is interrupted with the `invalid connection` error returned?
 
  `invalid connection` error usually indicates connection error between DM and downstream TiDB database (Network failure, TiDB restart, Tikv busy and so on) and some data of current request have been sent to TiDB.
