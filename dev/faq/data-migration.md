@@ -1,5 +1,6 @@
 ---
 title: Data Migration FAQ
+summary: Learn about two questions (FAQs) relating to Data Migration.
 category: FAQ
 ---
 
