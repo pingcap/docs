@@ -44,12 +44,12 @@ The default setup creates:
 - A managed ACK (Alibaba Cloud Kubernetes) cluster with the following ECS instance worker nodes:
 
     - An auto-scaling group of 2 * instances (2c2g) as ACK mandatory workers for system service like CoreDNS
-    - An auto-scaling group of 3 * `ecs.i2.xlarge` instances for PD
+    - An auto-scaling group of 3 * `ecs.g5.xlarge` instances for PD
     - An auto-scaling group of 3 * `ecs.i2.2xlarge` instances for TiKV
-    - An auto-scaling group of 2 * instances (16c32g) for TiDB
-    - An auto-scaling group of 1 * instance (4c8g) for monitoring components
+    - An auto-scaling group of 2 * `ecs.c5.4xlarge` instances for TiDB
+    - An auto-scaling group of 1 * `ecs.c5.xlarge` instance for monitoring components
 
-In addition, the monitoring node mounts a 500GB cloud disk as data volume. All the instances except ACK mandatory workers span in multiple available zones to provide cross-AZ high availability.
+In addition, the monitoring node mounts a 100GB cloud disk as data volume. All the instances except ACK mandatory workers span in multiple available zones to provide cross-AZ high availability.
 
 The auto-scaling group ensures the desired number of healthy instances, so the cluster can auto-recover from node failure or even available zone failure.
 
@@ -101,24 +101,22 @@ Apply complete! Resources: 3 added, 0 changed, 1 destroyed.
 
 Outputs:
 
-bastion_ip = 1.2.3.4
-bastion_key_file = /root/tidb-operator/deploy/aliyun/credentials/tidb-cluster-bastion-key.pem
-cluster_id = ca57c6071f31f458da66965ceddd1c31b
-kubeconfig_file = /root/tidb-operator/deploy/aliyun/.terraform/modules/a2078f76522ae433133fc16e24bd21ae/kubeconfig_tidb-cluster
-monitor_endpoint = 1.2.3.4:3000
+bastion_ip = 47.96.174.214
+cluster_id = c2d9b20854a194f158ef2bc8ea946f20e
+kubeconfig_file = /tidb-operator/deploy/aliyun/credentials/kubeconfig
+monitor_endpoint = 121.199.195.236:3000
 region = cn-hangzhou
-tidb_port = 4000
-tidb_slb_ip = 192.168.5.53
-tidb_version = v3.0.0-rc.1
-vpc_id = vpc-bp16wcbu0xhbg833fymmc
-worker_key_file = /root/tidb-operator/deploy/aliyun/credentials/tidb-cluster-node-key.pem
+ssh_key_file = /tidb-operator/deploy/aliyun/credentials/my-cluster-keyZ.pem
+tidb_endpoint = 172.21.5.171:4000
+tidb_version = v3.0.0
+vpc_id = vpc-bp1v8i5rwsc7yh8dwyep5
 ```
 
 > **Note:**
 >
 > You can use the `terraform output` command to get the output again.
 
-You can then interact with the ACK cluster using `kubectl` and `helm` (`cluster_name` is `tidb-cluster` by default):
+You can then interact with the ACK cluster using `kubectl` and `helm` (`cluster_name` is `my-cluster` by default):
 
 {{< copyable "shell-regular" >}}
 
@@ -183,25 +181,6 @@ kubectl get pods --namespace tidb -o wide --watch
 
 To scale the TiDB cluster, modify `tikv_count` or `tidb_count` to your desired numbers, and then run `terraform apply`.
 
-## Customize
-
-By default, the terraform script will create a new VPC. You can use an existing VPC by setting `vpc_id` to use an existing VPC. Note that kubernetes node will only be created in available zones that has vswitch existed when using existing VPC.
-
-An ecs instance is also created by default as bastion machine to connect to the created TiDB cluster, because the TiDB service is only exposed to intranet. The bastion instance has mysql-cli and sysbench installed that helps you use and test TiDB.
-
-If you don't have to access TiDB from internet, you could disable the creation of bastion instance by setting `create_bastion` to false in `variables.tf`
-
-The worker node instance types are also configurable, there are two ways to configure that:
-
-1. by specifying instance type id
-2. by specifying capacity like instance cpu count and memory size
-
-Because the Alibaba Cloud offers different instance types in different region, it is recommended to specify the capacity instead of certain type. You can configure these in the `variables.tf`, note that instance type overrides capacity configurations.
-
-There is an exception for PD and TiKV instances, because PD and TiKV required local SSD, so you cannot specify instance types for them. Instead, you can choose the type family among `ecs.i1`,`ecs.i2` and `ecs.i2g`, which has one or more local NVMe SSD, and select a certain type in the type family by specifying `instance_memory_size`.
-
-For more customization options, please refer to `variables.tf`.
-
 ## Destroy
 
 It may take some while to finish destroying the cluster.
@@ -230,6 +209,147 @@ terraform state rm module.ack.alicloud_cs_managed_kubernetes.k8s
 > 
 > You have to manually delete the cloud disk used by monitoring node in Aliyun's console after destroying if you don't need it anymore.
 
+## Customize
+
+### Customize TiDB Operator
+
+To customize TiDB Operator, change the variables in `variables.tf` according to their descriptions. It is worth noting that the `operator_helm_values` variable allows you provide a customized `values.yaml` for TiDB Operator, for example:
+
+```hcl
+variable "operator_helm_values" {
+  default = file("my-operator-values.yaml")
+}
+```
+
+By default, the terraform script will create a new VPC. You can use an existing VPC by setting `vpc_id` to use an existing VPC. Note that kubernetes node will only be created in available zones that has vswitch existed when using existing VPC.
+
+### Customize TiDB cluster
+
+The TiDB cluster uses `./my-cluster.yaml` as the `values.yaml` file, so you can customize the TiDB cluster by editing this file. Refer to [TiDB in Kubernetes cluster configuration](/reference/configuration/tidb-in-kubernetes/cluster-configuration.md) for available configuration options.
+
+## Manage Multiple TiDB clusters
+
+If you want to manage multiple TiDB clusters in one Kubernetes cluster, you can edit the `./main.tf` to add the declaration of `tidb-cluster` module as needed, for example:
+
+```hcl
+module "tidb-cluster-dev" {
+  source = "../modules/aliyun/tidb-cluster"
+  providers = {
+    helm = helm.default
+  }
+
+  cluster_name = "another-cluster"
+  ack          = module.tidb-operator
+
+  pd_count                   = 1
+  tikv_count                 = 1
+  tidb_count                 = 1
+  override_values            = file("dev-cluster.yaml")
+}
+
+module "tidb-cluster-staging" {
+  source = "../modules/aliyun/tidb-cluster"
+  providers = {
+    helm = helm.default
+  }
+
+  cluster_name = "another-cluster"
+  ack          = module.tidb-operator
+
+  pd_count                   = 3
+  tikv_count                 = 3
+  tidb_count                 = 2
+  override_values            = file("staging-cluster.yaml")
+}
+```
+
+Note that the `cluster_name` must be unique accross the clusters. The availabel configuration options of `tidb-cluster` module are as follows:
+
+| 参数名 | 说明 | 默认值 |
+| :----- | :---- | :----- |
+| `ack` | An object that encapsulates the information of Kubernetes cluster | `nil` |
+| `cluster_name` | TiDB cluster name, must be unique | `nil` |
+| `tidb_version` | TiDB cluster version | `v3.0.0` |
+| `tidb_cluster_chart_version` | version of the `tidb-cluster` helm chart | `v1.0.0-beta.3"` |
+| `pd_count` | PD replica number | 3 |
+| `pd_instance_type` | PD instance type | `ecs.g5.large` |
+| `tikv_count` | TiKV replica number | 3 |
+| `tikv_instance_type` | TiKV instance type | `ecs.i2.2xlarge` |
+| `tidb_count` | TiDB replica number | 2 |
+| `tidb_instance_type` | TiDB instance type | `ecs.c5.4xlarge` |
+| `monitor_instance_type` | Monitor node instance type | `ecs.c5.xlarge` |
+| `override_values` | The content of `values.yaml` for TiDB cluster, it is recommend to read it from a file via the `file()` function call | `nil` |
+| `local_exec_interpreter` | Interpreter to execute local command | `["/bin/sh", "-c"]` |
+
+## Manage Multiple Kubernetes Clusters
+
+It is recommended to use a separate Terraform module for each Kubernetes cluster (a Terraform module is a directory containing `.tf` scripts).
+
+Actually, the `deploy/aliyun` module composes several reusable modules under the `deploy/modules` directory. When managing multiple Kubernetes clusters, you can compose these modules in a new directory as per your requirements. Steps are as follows:
+
+1. Create a directory for each Kubernetes cluster：
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    mkdir -p deploy/aliyun/aliyun-staging
+    ```
+
+2. Refer to the `deploy/aliyun/main.tf` to write your own Terraform script, here is a simple example：
+
+    ```hcl
+    provider "alicloud" {
+        region     = <YOUR_REGION>
+        access_key = <YOUR_ACCESS_KEY>
+        secret_key = <YOUR_SECRET_KEY>
+    }
+
+    module "tidb-operator" {
+        source     = "../modules/aliyun/tidb-operator"
+
+        region          = <YOUR_REGION>
+        access_key      = <YOUR_ACCESS_KEY>
+        secret_key      = <YOUR_SECRET_KEY>
+        cluster_name    = "example-cluster"
+        key_file        = "ssh-key.pem"
+        kubeconfig_file = "kubeconfig"
+    }
+
+    provider "helm" {
+        alias    = "default"
+        insecure = true
+        install_tiller = false
+        kubernetes {
+            config_path = module.tidb-operator.kubeconfig_filename
+        }
+    }
+
+    module "tidb-cluster" {
+        source = "../modules/aliyun/tidb-cluster"
+        providers = {
+            helm = helm.default
+        }
+
+        cluster_name = "example-cluster"
+        ack          = module.tidb-operator
+    }
+
+    module "bastion" {
+        source = "../modules/aliyun/bastion"
+
+        bastion_name             = "example-bastion"
+        key_name                 = module.tidb-operator.key_name
+        vpc_id                   = module.tidb-operator.vpc_id
+        vswitch_id               = module.tidb-operator.vswitch_ids[0]
+        enable_ssh_to_worker     = true
+        worker_security_group_id = module.tidb-operator.security_group_id
+    }
+    ```
+
+You can customize the above script as needed, for example, you can remove the `bastion` section if you don't need a bastion machine.
+
+Optionally, you can copy and edit the `deploy/aliyun` directory, but note that you cannot copy the directory which you have already run `terraform apply` against. It is recommended to clone a new repository before copying to ensure the Terraform state of the directory is clean.
+
 ## Limitations
 
-You cannot change pod cidr, service cidr and worker instance types once the cluster is created.
+You cannot change `pod cidr`, `service cidr` and worker instance types once the cluster is created.
