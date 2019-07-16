@@ -5,7 +5,7 @@ category: how-to
 
 # Rolling Update TiDB in Kubernetes
 
-When you perform a rolling update for a TiDB cluster in Kubernetes, the Pod is shut down and recreated with the new image or/and configuration serially in the order of TiDB, TiKV, PD. Under the high available deployment topology (minimum requirements: PD \* 3, TiKV \* 3, TiDB \* 2), rolling updating PD and TiKV servers does not impact the running clients.
+When you perform a rolling update for a TiDB cluster in Kubernetes, the Pod is shut down and recreated with the new image or/and configuration serially in the order of PD, TiKV, TiDB. Under the high available deployment topology (minimum requirements: PD \* 3, TiKV \* 3, TiDB \* 2), rolling updating PD and TiKV servers does not impact the running clients.
 
 For clients that can retry stale connections, rolling updating TiDB servers does not impact the running clients neither. However, for clients that **can not** retry stale connections, rolling updating TiDB servers will close the client connections and cause the request to fail. We recommend to add connection retry ability for the clients or to perform rolling update for TiDB servers in idle time.
 
