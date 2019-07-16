@@ -20,7 +20,7 @@ DM concurrently replicates data downstream in its synchronization tasks. Due to 
 - If there is only `invalid connection` error during the incremental replication, DM retries automatically.
 - If DM doesn't or fail to retry automatically because of version problems, you can use `stop-task` to stop the task and then use`start-task` to restart the task.
 
-## What can I do when a synchronization task is interrupted with an `driver: bad connection` error ?
+## What can I do when a synchronization task is interrupted with the `driver: bad connection` error returned?
 
 `driver: bad connection` usually indicates connection error between DM and upstream TiDB database (Network failure, TiDB restart and so on) and no data of current request are sent to TiDB temporarily.
 
