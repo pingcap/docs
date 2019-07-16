@@ -17,7 +17,7 @@ This is a simple FAQ page for DM, including:
 
 DM concurrently replicates data downstream in its synchronization tasks. Due to this feature, several errors might occur when a task is interrupted. You can check these errors through `query-status` or `query-error`.
 
-- If there is only `invalid connection` error during incremental replication, DM will retry automatically.
+- If there is only `invalid connection` error during the incremental replication, DM retries automatically.
 - If DM doesn't or fail to retry automatically because of version problems, you can use `stop-task` to stop the task and then use`start-task` to restart the task.
 
 ## What can I do when a synchronization task is interrupted with an `driver: bad connection` error ?
