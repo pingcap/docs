@@ -5,7 +5,7 @@ category: FAQ
 
 # Data Migration FAQ
 
-## What can I do when a synchronization task is interrupted with an `invalid connection` error returned ?
+## What can I do when a synchronization task is interrupted with the `invalid connection` error returned?
 
  `invalid connection` error usually indicates connection error between DM and downstream TiDB database (Network failure, TiDB restart, Tikv busy and so on) and some data of current request have been sent to TiDB.
 
