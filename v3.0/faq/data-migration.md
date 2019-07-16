@@ -18,4 +18,4 @@ DM will concurrently replicate data downstream in synchronize tasks. Due to this
 
 `driver: bad connection` usually indicates connection error between DM and upstream TiDB database (Network failure, TiDB restart and so on) and no data of current request are sent to TiDB temporarily.
 
-In the current version, when facing this type of error, you should use `stop-task` to stop the task and then use `start-task` to restart the task. DM will improve its automatic retry function for this type of error later.
+When facing this type of error in the current version, use `stop-task` to stop the task and then use `start-task` to restart the task. DM will be improved on its automatic retry mechanism to cope with this type of error in the future.
