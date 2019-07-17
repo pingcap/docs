@@ -133,6 +133,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. The relationship between the `tidb-ansible` version and the TiDB version is as follows:
 
     | TiDB version | tidb-ansible tag | Note |
+    | :-------- | :---------------- | :--- |
     | 3.0 version | v3.0.0 | TiDB v3.0 GA release (recommended) |
     | `master` branch | None | Includes the newest features and is updated on a daily basis (not recommended to use in a production environment) |
 
