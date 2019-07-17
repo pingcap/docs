@@ -30,7 +30,7 @@ mysql> select VARIABLE_NAME, VARIABLE_VALUE from mysql.tidb;
 13 rows in set (0.00 sec)
 ```
 
-For example, the following statement makes GC keeps history data in the recent one day:
+For example, the following statement makes GC keep history data for the most recent 24 hours:
 
 ```sql
 update mysql.tidb set VARIABLE_VALUE="24h" where VARIABLE_NAME="tikv_gc_life_time";
