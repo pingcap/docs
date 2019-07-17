@@ -102,7 +102,7 @@ For example, running `tidb-ctl schema in mysql` returns the following result:
 ]
 ```
 
-The result is displayed in the JSON format. (The above output is a truncated version.)
+The result is displayed in the JSON format. (The above output is truncated.)
 
 - If you want to specify the table name, use `tidb-ctl schema in <database> -n <table name>` to filter.
 
@@ -120,7 +120,9 @@ The result is displayed in the JSON format. (The above output is a truncated ver
     }
     ```
 
-    The above output is also a truncated verstion. If you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure. For example, `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`.
+    (The above output is also truncated.)
+    
+    If you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure. For example, `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`.
 
 #### The `base64decode` subcommand
 
@@ -144,31 +146,31 @@ tidb-ctl base64decode [table_id] [base64_data]
 2. Obtian MVCC data using the HTTP API interface:
 
     ```shell
-    ▶ curl "http://$IP:10080/mvcc/index/test/t/a/1?a=1"
+    $ curl "http://$IP:10080/mvcc/index/test/t/a/1?a=1"
     {
      "info": {
       "writes": [
        {
         "start_ts": 407306449994645510,
         "commit_ts": 407306449994645513,
-        "short_value": "AAAAAAAAAAE="    # unique index a 存的值是对应行的 handle id.
+        "short_value": "AAAAAAAAAAE="    # The unique index a stores the handle id of the corresponding row.
        }
       ]
      }
     }%
 
-    ▶ curl "http://$IP:10080/mvcc/key/test/t/1"
+    $ curl "http://$IP:10080/mvcc/key/test/t/1"
     {
      "info": {
       "writes": [
        {
         "start_ts": 407306588892692486,
         "commit_ts": 407306588892692489,
-        "short_value": "CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk="  # handle id 为 1 的行数据。
+        "short_value": "CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk="  # Row data that handle id is 1.
        }
       ]
      }
-    }%
+    }% 
     ```
 
 3. Decode `handle id (uint64) using `base64decode`.
@@ -182,7 +184,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 4. Decode row data using `base64decode`.
 
     ```shell
-    ▶ ./tidb-ctl base64decode test.t CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
+    $ ./tidb-ctl base64decode test.t CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
     a:      1
     b:      哈哈 hello
     c is NULL
@@ -190,7 +192,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     e not found in data
 
     # if the table id of test.t is 60, you can also use below command to do the same thing.
-    ▶ ./tidb-ctl base64decode 60 CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
+    $ ./tidb-ctl base64decode 60 CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
     a:      1
     b:      哈哈 hello
     c is NULL
