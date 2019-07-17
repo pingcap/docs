@@ -239,5 +239,3 @@ tidb-ctl base64decode [table_id] [base64_data]
 #### The `log` subcommand
 
 The stack information for the TiDB error log is in one line format. You could use `tidb-ctl log` to change its format to multiple lines.
-
-If you want to specify the server address, use the `-H -P` option. For example, `tidb-ctl -H 127.0.0.1 -P 10080 schema in mysql -n db`.
