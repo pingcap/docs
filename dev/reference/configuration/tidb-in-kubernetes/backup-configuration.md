@@ -4,7 +4,7 @@ summary: Learn the backup configurations of TiDB in Kubernetetes.
 category: reference
 ---
 
-# TiDB in Kubernetetes Backup Configuration
+# The Backup Configuration of TiDB in Kubernetetes
 
 `tidb-backup` is a helm chart designed for TiDB cluster backup and restore. This document describes the configuration of this chart.
 
