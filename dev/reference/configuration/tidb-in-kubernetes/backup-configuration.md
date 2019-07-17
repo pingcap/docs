@@ -18,7 +18,7 @@ category: reference
 
 ### `clusterName`
 
-- Target cluster name
+- The name of the target cluster
 - Default: "demo"
 - The name of the TiDB cluster that data is backed up from or restore to
 
