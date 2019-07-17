@@ -12,7 +12,7 @@ category: reference
 
 ### `mode`
 
-- Run mode
+- The operating mode
 - Default: "backup"
 - Options: `backup` or `restore`
 
