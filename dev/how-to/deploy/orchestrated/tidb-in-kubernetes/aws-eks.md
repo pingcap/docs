@@ -15,13 +15,13 @@ Before deploying a TiDB cluster on AWS EKS, make sure the following requirements
 * [awscli](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) >= 1.16.73, to control AWS resources
 
     The `awscli` must be [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) before it can interact with AWS. The fastest way is using the `aws configure` command:
-    
+
     {{< copyable "shell-regular" >}}
 
     ```shell
     aws configure
     ```
-    
+
     Replace AWS Access Key ID and AWS Secret Access Key with your own keys:
 
     ```
@@ -42,9 +42,9 @@ Before deploying a TiDB cluster on AWS EKS, make sure the following requirements
 * [aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) installed in `PATH`, to authenticate with AWS
 
     The easiest way to install `aws-iam-authenticator` is to download the prebuilt binary as follows.
-    
+
     Download binary for Linux:
-    
+
     {{< copyable "shell-regular" >}}
 
     ```shell
@@ -328,11 +328,8 @@ terraform destroy
 
 > **Note:**
 >
-> This will destroy your EKS cluster along with all the TiDB clusters you deployed on it.
-
-> **Note:**
->
-> You have to manually delete the EBS volumes in AWS console after running terraform destroy if you do not need the data on the volumes anymore.
+> * This will destroy your EKS cluster along with all the TiDB clusters you deployed on it.
+> * You have to manually delete the EBS volumes in AWS console after running terraform destroy if you do not need the data on the volumes anymore.
 
 ## Multiple Kubernetes Management
 
@@ -376,7 +373,7 @@ module "vpc" {
   vpc_name = "another-eks-cluster"
 }
 
-# provision a EKS control plane with tidb-opeartor installed
+# provision a EKS control plane with tidb-operator installed
 module "tidb-operator" {
   source = "../modules/aws/tidb-operator"
 
@@ -466,14 +463,8 @@ Also, it requires little effort if you want to integrate these modules into your
 
 > **Note:**
 >
-> If you create the new directory elsewhere, please take care of the relative path of modules.
-
-> **Note:**
->
-> If you want to use these modules outside of the tidb-operator project, make sure you copy the whole `modules` directory and keep the relative path of each module inside the directory unchanged.
-
-> **Note:**
->
-> The hack of helm provider is necessary in case of [hashicorp/terraform#2430](https://github.com/hashicorp/terraform/issues/2430#issuecomment-370685911), please keep it in your Terraform scripts.
+> * If you create the new directory elsewhere, please take care of the relative path of modules.
+> * If you want to use these modules outside of the tidb-operator project, make sure you copy the whole `modules` directory and keep the relative path of each module inside the directory unchanged.
+> * The hack of helm provider is necessary in case of [hashicorp/terraform#2430](https://github.com/hashicorp/terraform/issues/2430#issuecomment-370685911), please keep it in your Terraform scripts.
 
 If you are unwilling to touch the Terraform code, copy this directory for each of your Kubernetes clusters also make sense. But note that you cannot copy a directory that you have already run `terraform apply` against because of the local Terraform state file corruption. It is recommended to clone a new repository before copying the directory.
