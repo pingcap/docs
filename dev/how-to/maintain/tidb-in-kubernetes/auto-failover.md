@@ -40,11 +40,11 @@ By default, `pdFailoverPeriod`, `tikvFailoverPeriod` and `tidbFailoverPeriod` ar
 
 There are three components in a TiDB cluster - PD, TiKV, and TiDB, each of which has its own automatic failover policy. This section gives an in-depth introduction to these policies.
 
-### PD
+### Failover with PD
 
 Assume that there are 3 nodes in a PD cluster. If a PD node is down for over 5 minutes (configurable by modifying `tidbFailoverPeriod`), TiDB Operator takes this node offline first, and creates a new PD node. At this time, there are 4 nodes in the cluster. If the failed PD node gets back online, TiDB Operator deletes the newly created node and the number of nodes gets back to 3.
 
-### TiKV
+### Failover with TiKV
 
 When a TiKV node fails, its status turns to `Disconnected`. After 30 minutes (configurable by modifying `pd.maxStoreDownTime` when deploying the cluster), it turns to `Down`. After waiting for 5 minutes (configurable by modifying `tikvFailoverPeriod`), TiDB Operator creates a new TiKV node if this TiKV node is still down. If the failed TiKV node gets back online, TiDB Operator does not automatically delete the newly created node, and you need to manually drop it and restore the original number of nodes. To do this, you can delete the TiKV node from the `status.tikv.failureStores` field of the `TidbCluster` object:
 
@@ -81,6 +81,6 @@ status
 ...
 ```
 
-### TiDB
+### Failover with TiDB
 
 The TiDB automatic failover policy works the same way as `deployment` does in Kubernetes. Assume that there are 3 nodes in a TiDB cluster. If a TiDB node is down for over 5 minutes (configurable by modifying `tidbFailoverPeriod`), TiDB Operator creates a new TiDB node. At this time, there are 4 nodes in the cluster. When the failed TiDB node gets back online, TiDB Operator deletes the newly created node and the number of nodes gets back to 3.
