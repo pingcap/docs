@@ -48,7 +48,7 @@ sample-percent = 100
 # If disabled, data is compared line by line.
 use-checksum = true
 
-# If it is set to true, data is checked only by calculating checksum. Data will not be checked after inspection, even if the upstream and downstream checksums are inconsistent.
+# If it is set to true, data is checked only by calculating checksum. Data is not checked after inspection, even if the upstream and downstream checksums are inconsistent.
 only-use-checksum = false
 
 # Whether to use the checkpoint of the last check. If it is enabled, the inspector only checks the last unverified chunks and chunks that failed the verification.
