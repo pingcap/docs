@@ -14,7 +14,7 @@ category: reference
 
 - The operating mode
 - Default: "backup"
-- Options: `backup` or `restore`
+- Options: `backup` (for backing up the data of a cluster) or `restore` (for restoring the data of a cluster)
 
 ### `clusterName`
 
