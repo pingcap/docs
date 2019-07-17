@@ -1,5 +1,6 @@
 ---
-title: TiDB in Kubernetetes Backup Configuration
+title: The Backup Configuration of TiDB in Kubernetetes
+summary: Learn the backup configurations of TiDB in Kubernetetes.
 category: reference
 ---
 
