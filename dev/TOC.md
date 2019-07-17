@@ -5,7 +5,7 @@
 + [Introduction](overview.md)
 + Concepts
   - [Architecture](architecture.md)
-  + [Key Features](key-features.md)
+  + Key Features
     - [Horizontal Scalability](key-features.md#horizontal-scalability)
     - [MySQL Compatible Syntax](key-features.md#mysql-compatible-syntax)
     - [Replicate from and to MySQL](key-features.md#replicate-from-and-to-mysql)
@@ -57,6 +57,7 @@
       - [Overview](how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](how-to/deploy/data-migration-with-ansible.md)
+    - [Deploy TiDB Operator](how-to/deploy/tidb-operator.md)
     - [TiDB Binlog Cluster Deployment](how-to/deploy/tidb-binlog.md)
   + Configure
     - [Time Zone](how-to/configure/time-zone.md)
@@ -257,7 +258,9 @@
     - [`information_schema`](reference/system-databases/information-schema.md)
   - [Errors Codes](reference/error-codes.md)
   - [Supported Client Drivers](reference/supported-clients.md)
-  - [Garbage Collection (GC)](reference/garbage-collection.md)
+  + Garbage Collection (GC)
+    - [GC Overview](reference/garbage-collection/overview.md)
+    - [GC Configuration](reference/garbage-collection/configuration.md)
   + Performance
     - [Overview](reference/performance/sql-optimizer-overview.md)
     - [Understanding the Query Execution Plan](reference/performance/understanding-the-query-execution-plan.md)
@@ -299,6 +302,7 @@
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](how-to/migrate/from-aurora.md)
       - [Troubleshoot](how-to/troubleshoot/data-migration.md)
+      - [FAQ](faq/data-migration.md)
     + TiDB Lightning
       - [Overview](reference/tools/tidb-lightning/overview.md)
       - [Deployment](reference/tools/tidb-lightning/deployment.md)
@@ -322,6 +326,7 @@
 + FAQs
   - [TiDB FAQs](faq/tidb.md)
   - [TiDB Lightning FAQs](faq/tidb-lightning.md)
+  - [Data Migration FAQ](faq/data-migration.md)
   - [Upgrade FAQs](faq/upgrade.md)
 + Support
   - [Support Resources](support-resources.md)
@@ -332,6 +337,7 @@
 - [Roadmap](roadmap.md)
 + [Releases](releases/rn.md)
   + v3.0
+    - [3.0.1](releases/3.0.1.md)
     - [3.0 GA](releases/3.0-ga.md)
     - [3.0.0-rc.3](releases/3.0.0-rc.3.md)
     - [3.0.0-rc.2](releases/3.0.0-rc.2.md)
