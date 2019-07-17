@@ -35,7 +35,7 @@ log-level = "info"
 
 # sync-diff-inspector divides the data into multiple chunks based on the primary key,
 # unique key, or the index, and then compares the data of each chunk.
-Compare data in each chunk. Use "chunk-size" to set the size of a chunk.
+# Compare data in each chunk. Use "chunk-size" to set the size of a chunk.
 chunk-size = 1000
 
 # The number of goroutines created to check data
