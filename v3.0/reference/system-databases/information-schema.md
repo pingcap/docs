@@ -15,8 +15,10 @@ As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` t
 
 The `ANALYZE_STATUS` table provides information about the running tasks that collect statistics and a limited number of history tasks.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> select * from `ANALYZE_STATUS`;
+select * from `ANALYZE_STATUS`;
 ```
 
 ```
@@ -37,8 +39,10 @@ mysql> select * from `ANALYZE_STATUS`;
 
 The `CHARACTER_SETS` table provides information about [character sets](/reference/sql/character-set.md). Currently, TiDB only supports some of the character sets.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM character_sets;
+SELECT * FROM character_sets;
 ```
 
 ```
@@ -58,8 +62,10 @@ mysql> SELECT * FROM character_sets;
 
 The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table.  Currently this table is included only for compatibility with MySQL, as TiDB only supports binary collation:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM collations WHERE character_set_name='utf8mb4';
+SELECT * FROM collations WHERE character_set_name='utf8mb4';
 ```
 
 ```
@@ -100,8 +106,10 @@ mysql> SELECT * FROM collations WHERE character_set_name='utf8mb4';
 
 The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applicable character set name.  Similar to the `COLLATIONS` table, it is included only for compatibility with MySQL:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
+SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
 ```
 
 ```
@@ -142,11 +150,23 @@ mysql> SELECT * FROM collation_character_set_applicability WHERE character_set_n
 
 The `COLUMNS` table provides detailed information about columns in tables:
 
-```sql
-mysql> CREATE TABLE test.t1 (a int);
-1 row in set (0.01 sec)
+{{< copyable "sql" >}}
 
-mysql> SELECT * FROM information_schema.columns WHERE table_schema='test' AND TABLE_NAME='t1';
+```sql
+CREATE TABLE test.t1 (a int);
+```
+
+```
+1 row in set (0.01 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM information_schema.columns WHERE table_schema='test' AND TABLE_NAME='t1';
+```
+
+```
 *************************** 1. row ***************************
            TABLE_CATALOG: def
             TABLE_SCHEMA: test
@@ -164,18 +184,20 @@ CHARACTER_MAXIMUM_LENGTH: NULL
       CHARACTER_SET_NAME: NULL
           COLLATION_NAME: NULL
              COLUMN_TYPE: int(11)
-              COLUMN_KEY: 
-                   EXTRA: 
+              COLUMN_KEY:
+                   EXTRA:
               PRIVILEGES: select,insert,update,references
-          COLUMN_COMMENT: 
-   GENERATION_EXPRESSION: 
+          COLUMN_COMMENT:
+   GENERATION_EXPRESSION:
 1 row in set (0.01 sec)
 ```
 
 The corresponding `SHOW` statement is as follows:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SHOW COLUMNS FROM t1 FROM test;
+SHOW COLUMNS FROM t1 FROM test;
 ```
 
 ```
@@ -191,8 +213,10 @@ mysql> SHOW COLUMNS FROM t1 FROM test;
 
 The `ENGINES` table provides information about storage engines. For compatibility, TiDB will always describe InnoDB as the only supported engine:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM engines;
+SELECT * FROM engines;
 ```
 
 ```
@@ -210,8 +234,10 @@ TRANSACTIONS: YES
 
 The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such as the primary key constraint:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM key_column_usage WHERE table_schema='mysql' and table_name='user';
+SELECT * FROM key_column_usage WHERE table_schema='mysql' and table_name='user';
 ```
 
 ```
@@ -262,8 +288,10 @@ The `PROCESSLIST` table has a `MEM` column that `show processlist` does not have
 
 The `SCHEMATA` table provides information about databases. The table data is equivalent to the result of the `SHOW DATABASES` statement:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> select * from SCHEMATA;
+select * from SCHEMATA;
 ```
 
 ```
@@ -298,8 +326,10 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 
 The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM session_variables LIMIT 10;
+SELECT * FROM session_variables LIMIT 10;
 ```
 
 ```
@@ -324,8 +354,10 @@ mysql> SELECT * FROM session_variables LIMIT 10;
 
 The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For more operations, see [Slow Query Log Document](/how-to/maintain/identify-slow-queries.md).
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc SLOW_QUERY;
+desc SLOW_QUERY;
 ```
 
 ```
@@ -366,8 +398,10 @@ mysql> desc SLOW_QUERY;
 
 The `STATISTICS` table provides information about table indexes:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc statistics;
+desc statistics;
 ```
 
 ```
@@ -409,8 +443,10 @@ SHOW INDEX
 
 The `TABLES` table provides information about tables in databases:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user';
+SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user';
 ```
 
 ```
@@ -434,8 +470,8 @@ MAX_DATA_LENGTH: 0
      CHECK_TIME: NULL
 TABLE_COLLATION: utf8mb4_bin
        CHECKSUM: NULL
- CREATE_OPTIONS: 
-  TABLE_COMMENT: 
+ CREATE_OPTIONS:
+  TABLE_COMMENT:
   TIDB_TABLE_ID: 5
 1 row in set (0.00 sec)
 ```
@@ -456,8 +492,10 @@ SHOW TABLES
 
 The `TABLE_CONSTRAINTS` table describes which tables have constraints:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
+SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
 ```
 
 ```
@@ -513,8 +551,10 @@ CONSTRAINT_CATALOG: def
 
 The `TIDB_HOT_REGIONS` table provides information about hot spot Regions.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc TIDB_HOT_REGIONS;
+desc TIDB_HOT_REGIONS;
 ```
 
 ```
@@ -537,8 +577,10 @@ mysql> desc TIDB_HOT_REGIONS;
 
 The `TIDB_INDEXES` table provides the INDEX information of all tables.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc TIDB_INDEXES;
+desc TIDB_INDEXES;
 ```
 
 ```
@@ -561,8 +603,10 @@ mysql> desc TIDB_INDEXES;
 
 The `TIKV_REGION_PEERS` table provides the peer information of all Regions.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc TIKV_REGION_PEERS;
+desc TIKV_REGION_PEERS;
 ```
 
 ```
@@ -583,8 +627,10 @@ mysql> desc TIKV_REGION_PEERS;
 
 The `TIKV_REGION_STATUS` table provides the status information of all Regions.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc TIKV_REGION_STATUS;
+desc TIKV_REGION_STATUS;
 ```
 
 ```
@@ -607,8 +653,10 @@ mysql> desc TIKV_REGION_STATUS;
 
 The `TIKV_STORE_STATUS` table provides the status information of all TiKV Stores.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc TIKV_STORE_STATUS;
+desc TIKV_STORE_STATUS;
 ```
 
 ```
@@ -641,8 +689,10 @@ mysql> desc TIKV_STORE_STATUS;
 
 The `USER_PRIVILEGES` table provides information about global privileges. This information comes from the `mysql.user` system table:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc USER_PRIVILEGES;
+desc USER_PRIVILEGES;
 ```
 
 ```
@@ -661,11 +711,23 @@ mysql> desc USER_PRIVILEGES;
 
 The `VIEWS` table provides information about SQL views:
 
-```sql
-mysql> create view test.v1 as select 1;
-Query OK, 0 rows affected (0.00 sec)
+{{< copyable "sql" >}}
 
-mysql> select * from views;
+```sql
+create view test.v1 as select 1;
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
+select * from views;
+```
+
+```
 *************************** 1. row ***************************
        TABLE_CATALOG: def
         TABLE_SCHEMA: test
