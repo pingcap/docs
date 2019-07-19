@@ -42,7 +42,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     kubectl cordon <node-name>
     ```
 
-3. Use the command `kubectl drain` to migrate the database instances on the maintenance node to other nodes:
+3. Use the `kubectl drain` command to migrate the database instances on the maintenance node to other nodes:
 
     {{< copyable "shell-regular" >}}
     
