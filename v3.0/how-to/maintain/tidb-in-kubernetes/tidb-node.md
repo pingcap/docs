@@ -45,7 +45,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
 3. Use the `kubectl drain` command to migrate the database instances on the maintenance node to other nodes:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kubectl drain <node-name> --ignore-daemonsets --delete-local-data
     ```
@@ -55,7 +55,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
 4. At this time, if you want to make this Kubernetes node offline, you can delete it by running:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kubectl delete node <node-name>
     ```
@@ -63,17 +63,17 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     If you want to recover a Kubernetes node, you need to first make sure that it is in a healthy state:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     watch kubectl get node <node-name>
     ```
-    
+
     After the node goes into the `Ready` state, you can proceed with the following operations.
 
 5. Use `kubectl uncordon` to lift the scheduling restriction on the node:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kubectl uncordon <node-name>
     ```
@@ -85,11 +85,11 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     ```shell
     watch kubectl get -n $namespace pod -o wide
     ```
-    
+
     Or:
-    
+
     {{< copyable "shell-regular" >}}
-    
+
     ```sql
     watch tkctl get all
     ```
@@ -180,17 +180,17 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
 5. Unbind the TiKV instance from the local drive of the node:
 
     Get the `PesistentVolumeClaim` used by the Pod:
-    
+
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kubectl get -n ${namespace} pod ${pod_name} -ojson | jq '.spec.volumes | .[] | select (.name == "tikv") | .persistentVolumeClaim.claimName'
     ```
-    
+
     Delete the `PesistentVolumeClaim`:
-    
+
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kubectl delete -n ${namespace} pvc ${pvc_name}
     ```
@@ -198,7 +198,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
 6. Delete the TiKV instance:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kubectl delete -n ${namespace} pod ${pod_name}
     ```
@@ -206,7 +206,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
 7. Check whether the TiKV instance is normally scheduled to another node:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     watch kubectl -n ${namespace} get pod -o wide
     ```
@@ -216,7 +216,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
 8. After you make sure that there is no more TiKV instance on the node, you can evict other instances on the node:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kubectl drain <node-name> --ignore-daemonsets --delete-local-data
     ```
@@ -224,7 +224,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
 9. Confirm again that there is no more TiKV, TiDB and PD instances running on this node:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kubectl get pod --all-namespaces | grep <node-name>
     ```
@@ -232,7 +232,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
 10. (Optional) If this node is made offline for a long time, it is recommended to delete it from the Kubernetes cluster:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     kuebctl delete node <node-name>
     ```
