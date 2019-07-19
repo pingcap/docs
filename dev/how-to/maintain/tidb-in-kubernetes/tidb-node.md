@@ -229,7 +229,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     kubectl get pod --all-namespaces | grep <node-name>
     ```
 
-10. (optional) If this node is made offline for a long time, it is recommended to delete it from the Kubernetes cluster:
+10. (Optional) If this node is made offline for a long time, it is recommended to delete it from the Kubernetes cluster:
 
     {{< copyable "shell-regular" >}}
     
