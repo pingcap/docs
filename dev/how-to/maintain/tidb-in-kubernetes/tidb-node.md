@@ -78,7 +78,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     kubectl uncordon <node-name>
     ```
 
-6. See whether all pods get back to normal and are running:
+6. See whether all Pods get back to normal and are running:
 
     {{< copyable "shell-regular" >}}
 
