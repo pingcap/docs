@@ -2,7 +2,6 @@
 title: TiDB Specific System Variables
 summary: Use system variables specific to TiDB to optimize performance.
 category: reference
-aliases: ['/docs/sql/tidb-specific/']
 ---
 
 # TiDB Specific System Variables
@@ -382,12 +381,13 @@ Usage example:
 ```sql
 set tidb_query_log_max_len = 20
 ```
+
 ### tidb_wait_split_region_finish
 
 - Scope: SESSION
 - Default value: 1
 
-Depending on PD scheduling and the load condition of TiKV, Region split might take a long time. This variable determines whether to wait for all Regions to be split before returning the result to the client when executing `SPLIT REGION`.  Value 1 means waiting for the split to complete before returning the result. 0 means returning the result without waiting for Region split.
+Depending on PD scheduling and the load condition of TiKV, Region split might take a long time. This variable determines whether to wait for all Regions to be split before returning the result to the client when executing `SPLIT REGION`. Value 1 means waiting for the split to complete before returning the result. 0 means returning the result without waiting for Region split.
 
 It should be noted that Region split can impact the read/write performance for the Regions being split. For scenarios such as batch writing and data importing, it is recommended to wait for the Region split to finish before data importing.
 

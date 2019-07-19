@@ -60,7 +60,7 @@ For example, if you want 16 evenly split Regions split from key range`minInt64`~
 SPLIT TABLE t BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
-This statement splits table t into 16 Regions between minInt64 and maxInt64. If the given primary key range is smaller than the specified one, for example, 0~1000000000,  You can use 0 and 1000000000 take place of minInt64 and maxInt64 respectively to split Regions.
+This statement splits table t into 16 Regions between minInt64 and maxInt64. If the given primary key range is smaller than the specified one, for example, 0~1000000000, you can use 0 and 1000000000 take place of minInt64 and maxInt64 respectively to split Regions.
 
 {{< copyable "sql" >}}
 
@@ -98,9 +98,9 @@ The `table_id` and `index_id` of the same index data in one table is the same. T
 
 The way to split index evenly works the same as splitting data evenly. However, calculating the value of step is more complicated, because `index_value` might not be an integer.
 
-The value of `upper` and `lower` will be encoded into a byte array firstly. After removing the longest common prefix of `lower` and `upper` byte array, the first 8 bytes of `lower` and `upper` will be converted into the uint64 format. Then `step = (upper - lower)/num` will be calculated. After that, the calculated step will be encoded into a byte array, which will be appended to the longest common prefix of the `lower` and `upper` byte array for index split. Here is an example:
+The values of `upper` and `lower` are encoded into a byte array firstly. After removing the longest common prefix of `lower` and `upper` byte array, the first 8 bytes of `lower` and `upper` are converted into the uint64 format. Then `step = (upper - lower)/num` is calculated. After that, the calculated step is encoded into a byte array, which is appended to the longest common prefix of the `lower` and `upper` byte array for index split. Here is an example:
 
-If the row of index idx is an integer, you can use the following SQL statement to split index data:
+If the column of the `idx` index is of the integer type, you can use the following SQL statement to split index data:
 
 {{< copyable "sql" >}}
 
@@ -118,7 +118,7 @@ If the column of index idx1 is of varchar type, and you want to split index data
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 26;
 ```
 
-This statement splits index idx1 into 26 Regions from a~z. The range of region 1 is [minIndexValue, b); the range of region 2 is [b, c); … the range of region26 is [z, minIndexValue]. For index idx, data with prefix a is written into region 1; data with prefix b will be written into region 2, and so on.
+This statement splits index idx1 into 26 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 26 is `[z, minIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, while data with the `b` prefix is written into Region 2, and so on.
 
 If the column of index idx2 is of time type like timestamp/datetime, and you want to split index Region by time interval:
 
@@ -156,7 +156,7 @@ This statement splits 10 Regions in the range of a~z according to the value of c
 
 Index data can also be split by specified index values.
 
-For example, there is idx4 (a,b), with column a of varchar type and column b timestamp.
+For example, there is `idx4 (a,b)`, with column `a` of the varchar type and column `b` of the timestamp type.
 
 {{< copyable "sql" >}}
 
@@ -164,7 +164,7 @@ For example, there is idx4 (a,b), with column a of varchar type and column b tim
 SPLIT TABLE t1 INDEX idx4 ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:26:19"), ("c", "");  
 ```
 
-This statement specifies 3 values to split 4 Regions. The range of each Region are shown as follows:
+This statement specifies 3 values to split 4 Regions. The range of each Region is as follows:
 
 ```
 region1  [ minIndexValue               , ("a", "2000-01-01 00:00:01"))
@@ -175,7 +175,7 @@ region4  [("c", "")                    , maxIndexValue               )
 
 ## pre_split_regions
 
-To have evenly split Regions when a table is created, it is recommended you use `shard_row_id_bits` together with `pre_split_regions`.  When a table is created successfully, `pre_split_regions` pre-spilts tables into the number of Regions as specified by `2^(pre_split_regions-1)`.
+To have evenly split Regions when a table is created, it is recommended you use `shard_row_id_bits` together with `pre_split_regions`. When a table is created successfully, `pre_split_regions` pre-spilts tables into the number of Regions as specified by `2^(pre_split_regions-1)`.
 
 > **Note:**
 >
@@ -189,9 +189,9 @@ To have evenly split Regions when a table is created, it is recommended you use 
 create table t (a int, b int,index idx1(a)) shard_row_id_bits = 4 pre_split_regions=3;
 ```
 
-After building the table, this statement splits 4 + 1  Regions for table t. 4 (2^(3-1)) Regions are used to save table row data, and 1 Region is for saving the index data of idx1.
+After building the table, this statement splits 4 + 1 Regions for table t. `4 (2^(3-1))` Regions are used to save table row data, and 1 Region is for saving the index data of `idx1`.
 
-The ranges of the 4 table Regions are shown as follows:
+The ranges of the 4 table Regions are as follows:
 
 ```
 region1:   [ -inf      ,  1<<61 )  
