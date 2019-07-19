@@ -34,7 +34,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
 
     If any TiKV instance is found, see [Maintain nodes that hold TiKV instances](#maintain-nodes-that-hold-tikv-instances).
 
-2. Use the command `kubectl cordon` to prevent new pods from being scheduled to the node to be maintained:
+2. Use the `kubectl cordon` command to prevent new Pods from being scheduled to the node to be maintained:
 
     {{< copyable "shell-regular" >}}
 
@@ -42,7 +42,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     kubectl cordon <node-name>
     ```
 
-3. Use the command `kubectl drain` to migrate the database instances on the maintenance node to other nodes:
+3. Use the `kubectl drain` command to migrate the database instances on the maintenance node to other nodes:
 
     {{< copyable "shell-regular" >}}
     
@@ -50,7 +50,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     kubectl drain <node-name> --ignore-daemonsets --delete-local-data
     ```
 
-    After running this command, TiDB instances on this node are automatically migrated to other available node, and the PD instance will trigger the auto-failover mechanism after five minutes and complete the nodes.
+    After running this command, TiDB instances on this node are automatically migrated to another available node, and the PD instance will trigger the auto-failover mechanism after five minutes and complete the nodes.
 
 4. At this time, if you want to make this Kubernetes node offline, you can delete it by running:
 
@@ -78,7 +78,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     kubectl uncordon <node-name>
     ```
 
-6. See whether all pods get back to normal and are running:
+6. See whether all Pods get back to normal and are running:
 
     {{< copyable "shell-regular" >}}
 
@@ -94,7 +94,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     watch tkctl get all
     ```
 
-    When you confirm that all pods are running normally, then you have successfully finished the maintenance task.
+    When you confirm that all Pods are running normally, then you have successfully finished the maintenance task.
 
 ## Maintain nodes that hold TiKV instances
 
@@ -125,7 +125,7 @@ After configuring `max-store-down-time` to an appropriate value, the follow-up o
 
 For the maintenance on an node that cannot be recovered in a short term (for example, a node has to go offline for a long time), you need to use `pd-ctl` to proactively tell the TiDB cluster to make the corresponding TiKV instances offline, and manually unbind the instances from the node.
 
-1. Use `kubectl cordon` to prevent new pods from being scheduled to the node to be maintained:
+1. Use `kubectl cordon` to prevent new Pods from being scheduled to the node to be maintained:
 
     {{< copyable "shell-regular" >}}
 
@@ -179,7 +179,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
 
 5. Unbind the TiKV instance from the local drive of the node:
 
-    Get the `PesistentVolumeClaim` used by the pod:
+    Get the `PesistentVolumeClaim` used by the Pod:
     
     {{< copyable "shell-regular" >}}
     
@@ -203,7 +203,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     kubectl delete -n ${namespace} pod ${pod_name}
     ```
 
-7. Check whether the TiKV instance is normally scheduled to other node:
+7. Check whether the TiKV instance is normally scheduled to another node:
 
     {{< copyable "shell-regular" >}}
     
@@ -211,7 +211,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     watch kubectl -n ${namespace} get pod -o wide
     ```
 
-    If there are more TiKV instances on the maintenance node, you need to follow the above steps until all instances are migrated to other node.
+    If there are more TiKV instances on the maintenance node, you need to follow the above steps until all instances are migrated to other nodes.
 
 8. After you make sure that there is no more TiKV instance on the node, you can evict other instances on the node:
 
@@ -229,7 +229,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     kubectl get pod --all-namespaces | grep <node-name>
     ```
 
-10. (optional) If this node is made offline for a long time, it is recommended to delete it from the Kubernetes cluster:
+10. (Optional) If this node is made offline for a long time, it is recommended to delete it from the Kubernetes cluster:
 
     {{< copyable "shell-regular" >}}
     
