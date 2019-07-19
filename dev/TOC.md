@@ -86,6 +86,7 @@
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
     + TiDB in Kubernetes
       - [Automatic Failover](how-to/maintain/auto-failover.md)
+      - [Maintain TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
@@ -248,6 +249,8 @@
       - [Configuration Flags](reference/configuration/pd-server/configuration.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
+    + tidb-in-kubernetes
+      - [Local PV Configuration](reference/configuration/tidb-in-kubernetes/local-pv-configuration.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
