@@ -179,7 +179,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
 
 5. Unbind the TiKV instance from the local drive of the node:
 
-    Get the `PesistentVolumeClaim` used by the pod:
+    Get the `PesistentVolumeClaim` used by the Pod:
     
     {{< copyable "shell-regular" >}}
     
