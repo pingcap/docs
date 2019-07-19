@@ -14,12 +14,12 @@ The TiDB components deployed by TiDB Operator output the logs in the `stdout` an
 
 If you already have a system for collecting logs in your existing infrastructure, you only need to add the `/var/log/containers/*.log` file on the host that holds Kubernetes in the collection scope by conventional means; if there is no available log collection system, or you want to deploy a separate system for collecting relevant logs, you are free to use any log collection system or solution that you are familiar with.
 
-[ElasticSearch] (https://kubernetes.io/docs/tasks/debug-application-cluster/logging-elasticsearch-kibana/) and [Stackdriver] (https://kubernetes.io/docs/tasks/debug-application-cluster/logging-stackdriver/) are provided as two log collection approaches for reference in the Kubernetes official documentation.
+[ElasticSearch](https://kubernetes.io/docs/tasks/debug-application-cluster/logging-elasticsearch-kibana/) and [Stackdriver](https://kubernetes.io/docs/tasks/debug-application-cluster/logging-stackdriver/) are provided as two log collection approaches for reference in the Kubernetes official documentation.
 
 Common open source tools that can be used to collect Kubernetes logs are:
 
-- [Fluentd] (https://www.fluentd.org/)
-- [Fluent-bit] (https://fluentbit.io/)
+- [Fluentd](https://www.fluentd.org/)
+- [Fluent-bit](https://fluentbit.io/)
 - [Filebeat](https://www.elastic.co/products/beats/filebeat)
 - [Logstash](https://www.elastic.co/products/logstash)
 
@@ -39,7 +39,7 @@ Kubectl logs -n ${namespace} ${tidbPodName}
 >
 > To view the log before the container restarts, you can add the `-p` parameter when executing the above command.
 
-If you need to collect logs from multiple Pods, you can use [`stern`] (https://github.com/wercker/stern):
+If you need to collect logs from multiple Pods, you can use [`stern`](https://github.com/wercker/stern):
 
 {{< copyable "shell-regular" >}}
 
