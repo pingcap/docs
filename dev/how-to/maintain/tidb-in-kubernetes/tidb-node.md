@@ -34,7 +34,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
 
     If any TiKV instance is found, see [Maintain nodes that hold TiKV instances](#maintain-nodes-that-hold-tikv-instances).
 
-2. Use the command `kubectl cordon` to prevent new pods from being scheduled to the node to be maintained:
+2. Use the `kubectl cordon` command to prevent new Pods from being scheduled to the node to be maintained:
 
     {{< copyable "shell-regular" >}}
 
