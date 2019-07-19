@@ -1,12 +1,12 @@
 ---
-title: Cluster Initialization in Kubernetes
-summary: Learn how to initiate a TiDB cluster in K8s.
+title: Initialize a TiDB Cluster in Kubernetes
+summary: Learn how to initialize a TiDB cluster in K8s.
 category: how-to
 ---
 
-# Cluster Initialization in Kubernetes
+# Initialize a TiDB Cluster in Kubernetes
 
-This document describes how to initialize a cluster in Kubernetes (K8s), specifically, how to configure the initial account and password and how to initialize the database by batch executing SQL statements automatically.
+This document describes how to initialize a TiDB cluster in Kubernetes (K8s), specifically, how to configure the initial account and password and how to initialize the database by executing SQL statements automatically in batch.
 
 > **Note:**
 >
@@ -52,9 +52,9 @@ When a cluster is created, a default account `root` is created with no password.
     > 
     > When the initialization job is created, the Pod for the TiDB cluster has not been created fully. There might be a few errors before initialization completes and Pod state becomes Completed.
 
-## Batch execute initialization SQL statements
+## Initialize SQL statements in batch
 
-You can also batch execute the SQL statements in  `tidb.initSql` for initialization. This function by default creates some databases or tables for the cluster and performs user privilege management operations. For example, the following configuration automatically creates a database named `app` after the cluster creation, and grants the `developer` account full management privileges on `app`.
+You can also execute the SQL statements in batch in `tidb.initSql` for initialization. This function by default creates some databases or tables for the cluster and performs user privilege management operations. For example, the following configuration automatically creates a database named `app` after the cluster creation, and grants the `developer` account full management privileges on `app`.
 
 {{< copyable "yaml" >}}
 
@@ -66,7 +66,7 @@ tidb:
     GRANT ALL PRIVILEGES ON app.* TO 'developer'@'%';
 ```
 
-Save the above configuration to `values.yaml` file and run the following command to deploy the cluster:
+Save the above configuration to the `values.yaml` file and run the following command to deploy the cluster:
 
 {{< copyable "shell-regular" >}}
 
@@ -76,4 +76,4 @@ helm install pingcap/tidb-cluster -f values.yaml --name=<release-name> --namespa
 
 > **Note:**
 >
-> Currently no verification has been implemented for `initSql`. You can create accounts and set passwords in `initSql`, but it's not recommended because passwords created this way are saved as plaintext in the initializer job object.
+> Currently no verification has been implemented for `initSql`. You can create accounts and set passwords in `initSql`, but it is not recommended because passwords created this way are saved as plaintext in the initializer job object.
