@@ -86,7 +86,7 @@
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
     + TiDB in Kubernetes
       - [Manage the TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
-      - [Automatic Failover](how-to/maintain/auto-failover.md)
+      - [Automatic Failover](how-to/maintain/tidb-in-kubernetes/auto-failover.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
@@ -230,6 +230,7 @@
       - [`SHOW TABLE STATUS`](reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](reference/sql/statements/show-warnings.md)
+      - [`SPLIT REGION`](reference/sql/statements/split-region.md)
       - [`START TRANSACTION`](reference/sql/statements/start-transaction.md)
       - [`TRACE`](reference/sql/statements/trace.md)
       - [`TRUNCATE`](reference/sql/statements/truncate.md)
