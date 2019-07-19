@@ -125,7 +125,7 @@ After configuring `max-store-down-time` to an appropriate value, the follow-up o
 
 For the maintenance on an node that cannot be recovered in a short term (for example, a node has to go offline for a long time), you need to use `pd-ctl` to proactively tell the TiDB cluster to make the corresponding TiKV instances offline, and manually unbind the instances from the node.
 
-1. Use `kubectl cordon` to prevent new pods from being scheduled to the node to be maintained:
+1. Use `kubectl cordon` to prevent new Pods from being scheduled to the node to be maintained:
 
     {{< copyable "shell-regular" >}}
 
