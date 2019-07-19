@@ -94,7 +94,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     watch tkctl get all
     ```
 
-    When you confirm that all pods are running normally, then you have successfully finished the maintenance task.
+    When you confirm that all Pods are running normally, then you have successfully finished the maintenance task.
 
 ## Maintain nodes that hold TiKV instances
 
