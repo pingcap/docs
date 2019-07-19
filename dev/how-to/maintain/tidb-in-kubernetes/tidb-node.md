@@ -211,7 +211,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     watch kubectl -n ${namespace} get pod -o wide
     ```
 
-    If there are more TiKV instances on the maintenance node, you need to follow the above steps until all instances are migrated to other node.
+    If there are more TiKV instances on the maintenance node, you need to follow the above steps until all instances are migrated to other nodes.
 
 8. After you make sure that there is no more TiKV instance on the node, you can evict other instances on the node:
 
