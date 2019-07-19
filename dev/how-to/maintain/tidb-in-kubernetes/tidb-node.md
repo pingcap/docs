@@ -50,7 +50,7 @@ Migrating PD and TiDB instances from a node is relatively fast, so you can proac
     kubectl drain <node-name> --ignore-daemonsets --delete-local-data
     ```
 
-    After running this command, TiDB instances on this node are automatically migrated to other available node, and the PD instance will trigger the auto-failover mechanism after five minutes and complete the nodes.
+    After running this command, TiDB instances on this node are automatically migrated to another available node, and the PD instance will trigger the auto-failover mechanism after five minutes and complete the nodes.
 
 4. At this time, if you want to make this Kubernetes node offline, you can delete it by running:
 
