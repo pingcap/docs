@@ -86,6 +86,7 @@
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
     + TiDB in Kubernetes
       - [Automatic Failover](how-to/maintain/auto-failover.md)
+      - [Collect Logs](how-to/maintain/tidb-in-kubernetes/log-collecting.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
