@@ -1,10 +1,14 @@
 ---
-title: Upgrade TiDB Operator
-summary: Learn how to upgrade TiDB Operator.
+title: Upgrade TiDB Operator and Kubernetes
+summary: Learn how to upgrade TiDB Operator and Kubernetes.
 category: how-to
 ---
 
-# Upgrade TiDB Operator
+# Upgrade TiDB Operator and Kubernetes
+
+This document describes how to upgrade TiDB Operator and Kubernetes.
+
+## Upgrade TiDB Operator
 
 To upgrade TiDB Operator, modify the image version in the `values.yaml` file and then run `helm upgrade`:
 
