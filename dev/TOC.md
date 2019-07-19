@@ -85,8 +85,8 @@
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
     + TiDB in Kubernetes
+      - [Manage the TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
       - [Automatic Failover](how-to/maintain/auto-failover.md)
-      - [Maintain TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
