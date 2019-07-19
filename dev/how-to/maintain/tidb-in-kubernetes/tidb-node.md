@@ -203,7 +203,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     kubectl delete -n ${namespace} pod ${pod_name}
     ```
 
-7. Check whether the TiKV instance is normally scheduled to other node:
+7. Check whether the TiKV instance is normally scheduled to another node:
 
     {{< copyable "shell-regular" >}}
     
