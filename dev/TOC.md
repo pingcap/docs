@@ -85,8 +85,9 @@
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
     + TiDB in Kubernetes
-      - [Automatic Failover](how-to/maintain/auto-failover.md)
+      - [Manage the TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
       - [Collect Logs](how-to/maintain/tidb-in-kubernetes/log-collecting.md)
+      - [Automatic Failover](how-to/maintain/tidb-in-kubernetes/auto-failover.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
@@ -95,6 +96,7 @@
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
     - [Upgrade TiDB Binlog Cluster](how-to/upgrade/tidb-binlog.md)
+    - [Upgrade TiDB Operator and Kubernetes](how-to/upgrade/tidb-operator.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](how-to/troubleshoot/data-migration.md)
@@ -229,6 +231,7 @@
       - [`SHOW TABLE STATUS`](reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](reference/sql/statements/show-warnings.md)
+      - [`SPLIT REGION`](reference/sql/statements/split-region.md)
       - [`START TRANSACTION`](reference/sql/statements/start-transaction.md)
       - [`TRACE`](reference/sql/statements/trace.md)
       - [`TRUNCATE`](reference/sql/statements/truncate.md)
@@ -248,6 +251,8 @@
       - [Configuration Flags](reference/configuration/pd-server/configuration.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
+    + tidb-in-kubernetes
+      - [Local PV Configuration](reference/configuration/tidb-in-kubernetes/local-pv-configuration.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
@@ -350,6 +355,7 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.15](releases/2.1.15.md)
     - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
     - [2.1.12](releases/2.1.12.md)
