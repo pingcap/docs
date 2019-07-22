@@ -22,7 +22,7 @@ You can download the pre-built binary or build `tkctl` from source:
 {{< copyable "shell-regular" >}}
 
 ```shell
-git clone https://github.com/pingcap/tidb-operator.git && \
+git clone --depth=1 https://github.com/pingcap/tidb-operator.git && \
 GOOS=${YOUR_GOOS} make cli &&\
 mv tkctl /usr/local/bin/tkctl
 ```
@@ -244,11 +244,11 @@ gdb /proc/${pid:-1}/root/tikv-server 1
 
 {{< copyable "shell-regular" >}}
 
+The `.gdbinit` configured in the `tidb-debug` image will set `sysroot` to `/proc/1/root/` automatically. So, you can omit this following step if you are using the `tidb-debug` image and the `pid` of the target process 1.
+
 ```shell
 (gdb) set sysroot /proc/${pid}/root/
 ```
-
-The `.gdbinit` configured in the `tidb-debug` image will set `sysroot` to `/proc/1/root/` automatically. So, you can omit this following step if you are using the `tidb-debug` image and the `pid` of the target process 1.
 
 Start debugging:
 
