@@ -6,7 +6,7 @@ category: how-to
 
 # Collect TiDB Logs in Kubernetes
 
-Running logs of the system and program can be very useful for troubleshooting problems and automating some operations. This document introduces the methods to collect logs of TiDB and its related components.
+Runtime logs of the system and program can be very useful for troubleshooting problems and automating some operations. This document introduces the methods to collect logs of TiDB and its related components.
 
 ## Collect logs of TiDB components in Kubernetes
 
@@ -27,7 +27,7 @@ Collected Logs can usually be aggregated and stored on a specific server or stor
 
 Some cloud service providers or specialized performance monitoring service providers also have their own free or chargeable log collection options that you can choose.
 
-If you do not aggregate logs via a separate log collection tool, you can also use the `kubectl` tool to directly view the running log of a container, but you cannot view the log of a destroyed container with this approach:
+If you do not aggregate logs via a separate log collection tool, you can also use the `kubectl` tool to directly view the runtime log of a container, but you cannot view the log of a destroyed container with this approach:
 
 {{< copyable "shell-regular" >}}
 
@@ -51,7 +51,7 @@ stern -n ${namespace} tidb -c slowlog
 
 For versions prior to 3.0, by default, TiDB prints slow query logs to standard output, mixed with application logs.
 
-- If the TiDB version <= 2.1.7, you can filter the slow query logs with the keyword `SLOW_QUERY`, for example:
+- For the TiDB version <= 2.1.7, you can filter the slow query logs with the keyword `SLOW_QUERY`, for example:
 
     {{< copyable "shell-regular" >}}
 
@@ -59,9 +59,9 @@ For versions prior to 3.0, by default, TiDB prints slow query logs to standard o
     kubectl logs -n ${namespace} ${tidbPodName} | grep SLOW_QUERY
     ```
 
-- If the TiDB version >= 2.1.8, it is not so easy to separate the slow query log due to the change of the slow query log format. For this reason, it is recommended to configure `separateSlowLog: true` as described below to view the slow query log separately.
+- For the TiDB version >= 2.1.8, it is not so easy to separate the slow query log due to the change of the slow query log format. For this reason, it is recommended to configure `separateSlowLog: true` as described below to view the slow query log separately.
 
-In some cases, you may want to use some tools or automated systems to analyze and process the log content. The application log of each TiDB component uses [unified log format](https://github.com/tikv/rfcs/blob/master/text/2018-12-19-unified-log-format.md), which facilitates parsing the program. But because slow query logs use a multi-line format that is compatible with MySQL, it can be difficult to parse it with slow query logs mixed with application logs.
+In some cases, you may want to use some tools or automated systems to analyze and process the log content. The application log of each TiDB component uses [unified log format](https://github.com/tikv/rfcs/blob/master/text/2018-12-19-unified-log-format.md), which facilitates parsing with other programs. But because slow query logs use a multi-line format that is compatible with MySQL, it can be difficult to parse it with slow query logs mixed with application logs.
 
 If you want to separate the slow query logs from the application logs, you can configure the `separateSlowLog` parameter in the `values.yaml` file to output the slow query log to a dedicated bypass container so that it can be stored in a separate file on the host.
 
