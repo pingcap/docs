@@ -10,13 +10,13 @@ This document collects frequently asked questions (FAQs) about the TiDB cluster 
 
 ## How to modify time zone settings？
 
-The time zone in component containers of the TiDB cluster deployed in the Kubernetes cluster is UTC by default. To modify time zone settings, perform the following steps:
+The default time zone setting for each component container of a TiDB cluster in Kubernetes is UTC. To modify this setting, take the steps below based on your cluster status:
 
 * If it is the first time you deploy the cluster:
 
-    Modify `timezone` settings in the `values.yaml` file of the TiDB cluster. For example, you can set it to `timezone: Asia/Shanghai` and then deploy the TiDB cluster.
+    In the `values.yaml` file of the TiDB cluster, modify the `timezone` setting. For example, you can set it to `timezone: Asia/Shanghai` before you deploy the TiDB cluster.
 
 * If the cluster is running:
 
-    * Modify `timezone` settings in the `values.yaml` file of the TiDB cluster. For example, you can set it to `timezone: Asia/Shanghai` and then upgrade the TiDB cluster.
+    * In the `values.yaml` file of the TiDB cluster, modify `timezone` settings in the `values.yaml` file of the TiDB cluster. For example, you can set it to `timezone: Asia/Shanghai` and then upgrade the TiDB cluster.
     * Refer to [Time Zone Support](/how-to/configure/time-zone.md) to modify TiDB service time zone settings.
