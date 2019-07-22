@@ -10,7 +10,7 @@ This document introduces how to horizontally and vertically scale up and down a 
 
 ## Horizontal scaling
 
-Horizontally scaling TiDB means that you scale TiDB up or down by adding or remove nodes in your pool of resources. When you scale a TiDB cluster, PD, TiKV, and TiDB are scaled up or down sequentially according to the values of their replicas. Scaling up operations add nodes based on the node ID in ascending order, while scaling down operations remove nodes according to the node ID in descending order.
+Horizontally scaling TiDB means that you scale TiDB up or down by adding or remove nodes in your pool of resources. When you scale a TiDB cluster, PD, TiKV, and TiDB are scaled up or down sequentially according to the values of their replicas. Scaling up operations add nodes based on the node ID in ascending order, while scaling down operations remove nodes based on the node ID in descending order.
 
 ### Horizontal scaling operations
 
