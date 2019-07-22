@@ -354,7 +354,7 @@ terraform state rm module.ack.alicloud_cs_managed_kubernetes.k8s
 
 > **Note:**
 > 
-> You have to manually delete the cloud disk used by monitoring node in the Alibaba Cloud console after destroying if you don not need it anymore.
+> You have to manually delete the cloud disk used by monitoring node in the Alibaba Cloud console after destroying if you do not need it anymore.
 
 ## Limitation
 
