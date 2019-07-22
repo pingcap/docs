@@ -49,7 +49,7 @@ kubectl port-forward -n ${namespace} svc/${releaseName}-prometheus 9090:9090 &>/
 
 Then open [http://localhost:9090](http://localhost:9090) in your browser or access this address via a client tool.
 
-The Prometheus service is exposed by `NodePort` by default. If the Kubernetes cluster supports the load balancer, you can change `monitor.prometheus.service.type` to `LoadBalancer` in `values.yaml` and then access the monitoring data through the load balancer after executing `helm upgrade`.
+The Prometheus service is exposed by `NodePort` by default. If the Kubernetes cluster supports load balancer, you can change `monitor.prometheus.service.type` to `LoadBalancer` in `values.yaml` and then access the monitoring data through the load balancer after executing `helm upgrade`.
 
 ## Monitor the Kubernetes cluster
 
