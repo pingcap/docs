@@ -14,7 +14,7 @@ The default time zone setting for each component container of a TiDB cluster in 
 
 * If it is the first time you deploy the cluster:
 
-    Modify `timezone` settings in the `values.yaml` file of the TiDB cluster. For example, you can set it to `timezone: Asia/Shanghai` and then deploy the TiDB cluster.
+    In the `values.yaml` file of the TiDB cluster, modify the `timezone` setting. For example, you can set it to `timezone: Asia/Shanghai` before you deploy the TiDB cluster.
 
 * If the cluster is running:
 
