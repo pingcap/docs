@@ -33,7 +33,7 @@ kubectl port-forward -n ${namespace} svc/${releaseName}-grafana 3000:3000 &>/tmp
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser and the default username and password are `admin`.
 
-The Grafana service is exposed by `NodePort` by default. If the Kubernetes cluster supports the load balancer, you can change `monitor.grafana.service.type` to `LoadBalancer` in `values.yaml` and then access the dashboard through the load balancer after executing `helm upgrade`.
+The Grafana service is exposed by `NodePort` by default. If the Kubernetes cluster supports load balancer, you can change `monitor.grafana.service.type` to `LoadBalancer` in `values.yaml` and then access the dashboard through the load balancer after executing `helm upgrade`.
 
 If there is no need to use Grafana, you can save resources by setting `monitor.grafana.create` to `false` in `values.yaml` during deployment. In this case, you need to use other existing or newly deployed data visualization tools to directly access the monitoring data to complete the data visualization.
 
