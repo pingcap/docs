@@ -316,7 +316,7 @@ Take the `/dev/nvme0n1` data disk as an example:
 3. Format the data disk to the ext4 filesystem.
 
     ```
-    # mkfs.ext4 /dev/nvme0n1
+    # mkfs.ext4 /dev/nvme0n1p1
     ```
 
 4. View the partition UUID of the data disk.
