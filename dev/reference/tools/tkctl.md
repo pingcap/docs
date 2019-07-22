@@ -5,19 +5,23 @@ category: reference
 
 # TiDB Kubernetes Control User Guide
 
-TiDB Kubernetes Control(`tkctl`) is a command line utility for TiDB operators to operate and diagnose their TiDB clusters in Kubernetes.
+TiDB Kubernetes Control (`tkctl`) is a command line utility that is used for TiDB Operator to maintain and diagnose the TiDB cluster in Kubernetes.
 
 ## Installation
 
 You can download the pre-built binary or build `tkctl` from source:
 
-### Download the Latest Pre-built Binary
+### Download the latest pre-built binary
 
 - [MacOS](http://download.pingcap.org/tkctl-darwin-amd64-latest.tgz)
 - [Linux](http://download.pingcap.org/tkctl-linux-amd64-latest.tgz)
 - [Windows](http://download.pingcap.org/tkctl-windows-amd64-latest.tgz)
 
-### Build from Source
+After unzipping the downloaded file, you can add the `tkctl` executable file to your `PATH` to finish the installation.
+
+### Build from source
+
+Requirement: [Go](https://golang.org/) >= the 1.11 version or later
 
 {{< copyable "shell-regular" >}}
 
@@ -27,21 +31,22 @@ GOOS=${YOUR_GOOS} make cli &&\
 mv tkctl /usr/local/bin/tkctl
 ```
 
-### Shell Completion
+### Shell auto-completion
 
-Configure shell completion for `BASH`:
+You can configure the shell auto-completion for `tkctl` to simplify its usage.
+
+To configure the auto-completion for `BASH`, you need to first install the [bash-completion](https://github.com/scop/bash-completion) package, and configure with either of the two methods below:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-# setup autocomplete in bash into the current shell, bash-completion package should be installed first.
 source <(tkctl completion bash)
 
 # add autocomplete permanently to your bash shell.
 echo "if hash tkctl 2>/dev/null; then source <(tkctl completion bash); fi" >> ~/.bashrc
 ```
 
-Configure shell completion for `ZSH`:
+To configure the auto-completion for `ZSH`:
 
 ```shell
 # setup autocomplete in zsh into the current shell
@@ -51,9 +56,9 @@ source <(tkctl completion zsh)
 echo "if hash tkctl 2>/dev/null; then source <(tkctl completion zsh); fi" >> ~/.zshrc
 ```
 
-### Kubernetes Configuration
+### Kubernetes configuration
 
-`tkctl` reuse the kubeconfig(default to `~/.kube/config`) file to talk with kubernetes cluster. You don't have to set up `kubectl` to use `tkctl`, but make sure you have `~/.kube/config` properly set. You can verify the configuration by executing:
+`tkctl` reuses the `kubeconfig` file (the default location is `~/.kube/config`) to connect with the Kubernetes cluster. You can verify whether `kubeconfig` is correctly configured by using the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -61,15 +66,15 @@ echo "if hash tkctl 2>/dev/null; then source <(tkctl completion zsh); fi" >> ~/.
 tkctl version
 ```
 
-If you see the version of tkctl tool and version of TiDB operator installed in target cluster or "No TiDB Controller Manager found, please install one first.", `tkctl` is correctly configured to access your cluster.
+If the above command correctly outputs the version of TiDB Operator on the server side, then `kubeconfig` is correctly configured.
 
 ## Commands
 
 ### tkctl version
 
-This command used to show the version of **tkctl** and **tidb-operator** installed in target cluster.
+This command is used to show the version of the local **tkctl** and **tidb-operator** installed in the target cluster.
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -85,14 +90,14 @@ TiDB Scheduler Version: pingcap/tidb-operator:latest
 
 ### tkctl list
 
-This command used to list all tidb clusters installed.
+This command is used to list all installed TiDB clusters.
 
-| Flags | Shorthand | Description |
+| Flag | Abbreviation | Description |
 | ----- | --------- | ----------- |
-| --all-namespaces | -A | search all namespaces |
-| --output | -o | output format, one of [default,json,yaml], the default format is `default` |
+| --all-namespaces | -A | Whether to search all Kubernetes namespaces |
+| --output | -o | The output format; you can choose from [default,json,yaml], and the default format is `default` |
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -108,9 +113,9 @@ bar       demo-cluster   3/3   3/3    1/2    11m
 
 ### tkctl use
 
-This command used to specify the current TiDB cluster to use, the other commands could omit `--tidbcluster` option and defaults to select current TiDB cluster if there is a current TiDB cluster set.
+This command is used to specify the TiDB cluster that the current `tkctl` command operates on. After you specify a TiDB cluster by using this command, all commands that operates on a cluster will automatically select this cluster so the `--tidbcluster` option can be omitted.
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -124,13 +129,13 @@ Tidb cluster switched to foo/demo-cluster
 
 ### tkctl info
 
-This command used to get the information of TiDB cluster, the current TiDB cluster will be used if exists.
+This command is used to display information about the TiDB cluster.
 
-| Flags | Shorthand | Description |
+| Flag | Abbreviation | Description |
 | ----- | --------- | ----------- |
-| --tidb-cluster | -t | select the tidb cluster, default to current TiDB cluster |
+| --tidb-cluster | -t | Specify a TiDB cluster; default to the TiDB cluster that is being used |
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -155,16 +160,16 @@ Endpoints(NodePort):
 
 ### tkctl get [component]
 
-This is a group of commands used to get the details of TiDB cluster componentes, the current TiDB cluster will be used if exists.
+This is a group of commands that are used to get the details of TiDB cluster components.
 
-Available components: `pd`, `tikv`, `tidb`, `volume`, `all`(query all components)
+You can query the following components: `pd`, `tikv`, `tidb`, `volume` and `all` (to query all components).
 
-| Flags | Shorthand | Description |
+| Flag | Abbreviation | Description |
 | ----- | --------- | ----------- |
 | --tidb-cluster | -t | select the tidb cluster, default to current TiDB cluster |
 | --output | -o | output format, one of [default,json,yaml], the default format is `default` |
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -197,7 +202,7 @@ local-pv-e54c122a   pd-demo-cluster-pd-2       Bound    1476Gi     172.16.4.156 
 
 ### tkctl debug [pod_name]
 
-This command used to diagnose the Pods of TiDB cluster. It launches a debug container for you which has the necessary troubleshooting tools installed.
+This command is used to diagnose the Pods in a TiDB cluster. It launches a debug container for you which has the necessary troubleshooting tools installed.
 
 | Flags | Shorthand | Description |
 | ----- | --------- | ----------- |
