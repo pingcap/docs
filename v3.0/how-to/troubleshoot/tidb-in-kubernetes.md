@@ -12,9 +12,9 @@ This document describes some common issues and solutions when you use a TiDB clu
 
 When a Pod is in the `CrashLoopBackoff` state, the containers in the Pod quit continually. As a result, you cannot use `kubectl exec` or `tkctl debug` normally, making it inconvenient to diagnose issues.
 
-To solve this problem, TiDB in Kubernetes provides the Pod diagnostic mode. In this mode, the containers in the Pod hang directly after starting, and will not get into the state of repeated crash. Then you can use `kubectl exec` or `tkctl debug` to connect to the Pod containers for diagnosis.
+To solve this problem, TiDB in Kubernetes provides the Pod diagnostic mode. In this mode, the containers in the Pod hang directly after starting, and will not get into a state of repeated crash. Then you can use `kubectl exec` or `tkctl debug` to connect to the Pod containers for diagnosis.
 
-The operation procedures are as follows:
+To use the diagnostic mode for troubleshooting:
 
 1. Add an annotation to the Pod to be diagnosed:
 
@@ -54,7 +54,7 @@ The operation procedures are as follows:
 
 ## Recover the cluster after accidental deletion
 
-TiDB Operator uses PV (Persistent Volume) and PVC (Persistent Volume Claim) to store persistent data. If you accidentally delete the cluster using `helm delete`, the PV/PVC objects and data are still retained to ensure data security.
+TiDB Operator uses PV (Persistent Volume) and PVC (Persistent Volume Claim) to store persistent data. If you accidentally delete a cluster using `helm delete`, the PV/PVC objects and data are still retained to ensure data security.
 
 To restore the cluster at this time, use the `helm install` command to create a cluster with the same name. The retained PV/PVC and data are reused.
 
@@ -76,11 +76,11 @@ kubectl get statefulsets -n ${namespace}
 kubectl describe statefulsets -n ${namespace} ${cluster-name}-pd
 ```
 
-## The network connection issue between Pods
+## Network connection failure between Pods
 
-In a TiDB cluster, you can access most Pods by using the Pod's domain name (allocated by the Headless Service). The exception is when TiDB Operator collects the cluster information or issues the control command, it accesses the PD (Placement Driver) cluster using the `ServiceName` of the PD service.
+In a TiDB cluster, you can access most Pods by using the Pod's domain name (allocated by the Headless Service). The exception is when TiDB Operator collects the cluster information or issues control commands, it accesses the PD (Placement Driver) cluster using the `ServiceName` of the PD service.
 
-When you find some network connection issue exists between Pods from the log or monitoring metrics, or you find the network connection between Pods might be abnormal according to the problem condition, you can follow the following process to diagnose and gradually narrow down the problem:
+When you find some network connection issues between Pods from the log or monitoring metrics, or you find the network connection between Pods might be abnormal according to the problematic condition, you can follow the following process to diagnose and narrow down the problem:
 
 1. Confirm that the endpoints of the Service and Headless Service are normal:
 
@@ -112,7 +112,7 @@ When you find some network connection issue exists between Pods from the log or 
     dig ${HOSTNAME}
     ```
 
-    Use the `ping` command to diagnose whether the three layers of network to the destination IP are connected (the destination IP is the ClusterIP resolved using `dig`):
+    Use the `ping` command to diagnose the connection with the destination IP (the ClusterIP resolved using `dig`):
 
     {{< copyable "shell-regular" >}}
 
@@ -149,7 +149,7 @@ When you find some network connection issue exists between Pods from the log or 
 
 ## The Pod is in the Pending state
 
-The Pending state of a Pod is usually caused by insufficient resources, such as the following conditions:
+The Pending state of a Pod is usually caused by conditions of insufficient resources, such as:
 
 - The `StorageClass` of the PVC used by PD, TiKV, Monitor Pod does not exist or the PV is insufficient.
 - No nodes in the Kubernetes cluster can satisfy the CPU or memory applied by the Pod
@@ -162,7 +162,7 @@ You can check the specific reason for Pending by using the `kubectl describe pod
 kubectl describe po -n ${namespace} ${pod_name}
 ```
 
-- If the CPU or memory resources are insufficient, you can lower the CPU or memory resources applied by the corresponding component, or add a new Kubernetes node.
+- If the CPU or memory resources are insufficient, you can lower the CPU or memory resources requested by the corresponding component for scheduling, or add a new Kubernetes node.
 
 - If the `StorageClass` of the PVC cannot be found, delete the TiDB Pod and the corresponding PVC. Then, in the `values.yaml` file, change `StorageClassName` to the name of the `StorageClass` available in the cluster. Run the following command to get the `StorageClass` available in the cluster:
 
@@ -172,11 +172,11 @@ kubectl describe po -n ${namespace} ${pod_name}
     kubectl get storageclass
     ```
 
-- If a `StorageClass` exists in the cluster but the available PV is insufficient, you need to add the corresponding PV resources. For Local PV, you can expand it by referring to [Local PV Configuration](/reference/configuration/tidb-in-kubernetes/local-pv-configuration.md).
+- If a `StorageClass` exists in the cluster but the available PV is insufficient, you need to add PV resources correspondingly. For Local PV, you can expand it by referring to [Local PV Configuration](/reference/configuration/tidb-in-kubernetes/local-pv-configuration.md).
 
 ## The Pod is in the `CrashLoopBackOff` state
 
-A Pod in the `CrashLoopBackOff` state means that the container in the Pod repeatedly exits abnormally. After one abnormal exit, the container is restarted by kubelet, and then it exits abnormally again after the restart. Many reasons can cause `CrashLoopBackOff`. In this case, the most effective way to locate it is to view the log of the Pod container:
+A Pod in the `CrashLoopBackOff` state means that the container in the Pod repeatedly aborts, in the loop of abort - restart by `kubelet` - abort. There are many potential causes of `CrashLoopBackOff`. In this case, the most effective way to locate it is to view the log of the Pod container:
 
 {{< copyable "shell-regular" >}}
 
@@ -203,11 +203,11 @@ root soft core unlimited
 root soft stack 10240
 ```
 
-If you cannot confirm the cause from the log and `ulimit` is also a normal value, troubleshoot it by using [the diagnostic mode](#use-the-diagnostic-mode).
+If you cannot confirm the cause from the log and `ulimit` is also a normal value, troubleshoot it further by using [the diagnostic mode](#use-the-diagnostic-mode).
 
 ## Unable to access the TiDB service
 
-If you cannot access the TiDB service, first check whether the TiDB service is deployed successfully using the following approach:
+If you cannot access the TiDB service, first check whether the TiDB service is deployed successfully using the following method:
 
 1. Check whether all components of the cluster are up and the status of each component is `Running`.
 
@@ -263,6 +263,6 @@ If the cluster is successfully deployed, check the network using the following s
 
 3. If you cannot access the TiDB service even using `PodIP`, the problem is on the Pod level network. Check the following items:
 
-    * Check whether the relevant route rules on the node are correct.
-    * Check whether the network plugin service works well.
-    * Refer to [the network connection issue between Pods](#the-network-connection-issue-between-pods) section.
+    - Check whether the relevant route rules on the node are correct.
+    - Check whether the network plugin service works well.
+    - Refer to [the network connection issue between Pods](#the-network-connection-issue-between-pods) section.
