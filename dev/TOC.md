@@ -36,10 +36,6 @@
       - [From Binary](how-to/get-started/deploy-tidb-from-binary.md)
       - [From Homebrew](how-to/get-started/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](how-to/get-started/deploy-tidb-from-dbdeployer.md)
-      + In Kubernetes
-        - [DinD](how-to/get-started/deploy-tidb-from-kubernetes-dind.md)
-        - [Minikube](how-to/get-started/deploy-tidb-from-kubernetes-minikube.md)
-        - [GKE](how-to/get-started/deploy-tidb-from-kubernetes-gke.md)
       - [In Docker Compose](how-to/get-started/deploy-tidb-from-docker-compose.md)
     - [Explore SQL with TiDB](how-to/get-started/explore-sql.md)
     - [Import Example Database](how-to/get-started/import-example-database.md)
@@ -56,10 +52,6 @@
       - [Ansible Deployment (Recommended)](how-to/deploy/orchestrated/ansible.md)
       - [Ansible Offline Deployment](how-to/deploy/orchestrated/offline-ansible.md)
       - [Docker Deployment](how-to/deploy/orchestrated/docker.md)
-      + TiDB in Kubernetes
-        - [AWS EKS](how-to/deploy/orchestrated/tidb-in-kubernetes/aws-eks.md)
-        - [GCP](how-to/deploy/orchestrated/tidb-in-kubernetes/gcp-gke.md)
-        - [Alibaba Cloud](how-to/deploy/orchestrated/tidb-in-kubernetes/alibaba-cloud.md)
     + Geographic Redundancy
       - [Overview](how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
@@ -70,7 +62,6 @@
   + Configure
     - [Time Zone](how-to/configure/time-zone.md)
     - [Memory Control](how-to/configure/memory-control.md)
-    - [Cluster Initialization](how-to/configure/initialize-cluster.md)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](how-to/secure/enable-tls-clients.md)
@@ -80,7 +71,6 @@
     - [Overview](how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](how-to/monitor/monitor-a-cluster.md)
     - [TiDB Binlog Monitoring](how-to/monitor/tidb-binlog.md)
-    - [Monitor a TiDB Cluster in Kubernetes](how-to/monitor/tidb-in-kubernetes.md)
   + Migrate
     - [Overview](how-to/migrate/overview.md)
     + Migrate from MySQL
@@ -93,27 +83,18 @@
     - [Backup and Restore](how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
-    + TiDB in Kubernetes
-      - [Manage the TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
-      - [Collect Logs](how-to/maintain/tidb-in-kubernetes/log-collecting.md)
-      - [Automatic Failover](how-to/maintain/tidb-in-kubernetes/auto-failover.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
-    - [Scale in Kubernetes](how-to/scale/in-kubernetes.md)
   + Upgrade
     - [Upgrade to Development Series](how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
     - [Upgrade TiDB Binlog Cluster](how-to/upgrade/tidb-binlog.md)
-    - Upgrade TiDB in Kubernetes
-      - [Rolling Update TiDB](how-to/upgrade/tidb-in-kubernetes.md)
-    - [Upgrade TiDB Operator and Kubernetes](how-to/upgrade/tidb-operator.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](how-to/troubleshoot/data-migration.md)
     - [Troubleshoot TiDB Lightning](how-to/troubleshoot/tidb-lightning.md)
-    - [Troubleshoot TiDB in Kubernetes](how-to/troubleshoot/tidb-in-kubernetes.md)
 + Reference
   - [MySQL Compatibility](reference/mysql-compatibility.md)
   + SQL
@@ -264,9 +245,6 @@
       - [Configuration Flags](reference/configuration/pd-server/configuration.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
-    + TiDB in Kubernetes
-      - [Backup Configuration](reference/configuration/tidb-in-kubernetes/backup-configuration.md)
-      - [Local PV Configuration](reference/configuration/tidb-in-kubernetes/local-pv-configuration.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
@@ -347,12 +325,48 @@
     - [PD](reference/key-monitoring-metrics/pd-dashboard.md)
     - [TiKV](reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Adopters](adopters.md)
++ TiDB in Kubernetes
+  - [About TiDB Operator](tidb-in-kubernetes/overview.md)
+  + Get Started
+    - [DinD](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
+    - [GKE](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
+    - [Minikube](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
+  + Deploy
+    - [Prerequisites for TiDB in Kubernetes](tidb-in-kubernetes/deploy/prerequisites.md)
+    - [TiDB in AWS EKS](tidb-in-kubernetes/deploy/aws-eks.md)
+    - [TiDB in GCP](how-to/tidb-in-kubernetes/gcp-gke.md)
+    - [TiDB in Alibaba Cloud](how-to/tidb-in-kubernetes/alibaba-cloud.md)
+    - [TiDB in General Kubernetes](tidb-in-kubernetes/deploy/general-kubernetes.md)
+    - [Deploy TiDB Operator](tidb-in-kubernetes/deploy/tidb-operator.md)
+  + Configure
+    - [Cluster Initialization](tidb-in-kubernetes/initialize-cluster.md)
+  - [Monitor](tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
+  + Maintain
+    - [Manage a TiDB cluster](tidb-in-kubernetes/maintain/manage-cluster.md)
+    - [Destroy a TiDB cluster](tidb-in-kubernetes/maintain/delete-cluster.md)
+    - [Maintain a Hosting Kubernetes Node](tidb-in-kubernetes/maintain/k8s-node-for-tidb.md)
+    - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
+    - [Collect Logs](tidb-in-kubernetes/maintain/log-collecting.md)
+    - [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
+  - Scale (tidb-in-kubernetes/scale-in-kubernetes.md)
+  + Upgrade 
+    - [TiDB Cluster](tidb-in-kubernetes/upgrade/tidb-cluster.md)
+    - [TiDb Operator](tidb-in-kubernetes/upgrade/tidb-operator.md)
+  + Reference
+    + Configuration
+      - [TiDB Cluster] (tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
+      - [Backup](tidb-in-kubernetes/reference/configuration/backup.md)
+      - [Local PV](tidb-in-kubernetes/reference/configuration/local-pv.md)
+    + Utility
+      - [tkctl](tidb-in-kubernetes/reference/utility/tkctl.md)
+  - Troubleshoot(tidb-in-kubernetes/troubleshoot.md)
+  - FAQs (tidb-in-kubernetes/faq.md)
+ 
 + FAQs
   - [TiDB FAQs](faq/tidb.md)
   - [TiDB Lightning FAQs](faq/tidb-lightning.md)
   - [Data Migration FAQ](faq/data-migration.md)
   - [Upgrade FAQs](faq/upgrade.md)
-  - [TiDB FAQs in Kubernetes](faq/tidb-in-kubernetes.md)
 + Support
   - [Support Resources](support-resources.md)
   - [Report an Issue](report-issue.md)
