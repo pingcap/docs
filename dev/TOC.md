@@ -348,7 +348,7 @@
     - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
     - [Collect Logs](tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
-  - Scale (tidb-in-kubernetes/scale-in-kubernetes.md)
+  - [Scale](tidb-in-kubernetes/scale-in-kubernetes.md)
   + Upgrade 
     - [TiDB Cluster](tidb-in-kubernetes/upgrade/tidb-cluster.md)
     - [TiDb Operator](tidb-in-kubernetes/upgrade/tidb-operator.md)
@@ -359,8 +359,8 @@
       - [Local PV](tidb-in-kubernetes/reference/configuration/local-pv.md)
     + Utility
       - [tkctl](tidb-in-kubernetes/reference/utility/tkctl.md)
-  - Troubleshoot(tidb-in-kubernetes/troubleshoot.md)
-  - FAQs (tidb-in-kubernetes/faq.md)
+  - [Troubleshoot](tidb-in-kubernetes/troubleshoot.md)
+  - [FAQs](tidb-in-kubernetes/faq.md)
  
 + FAQs
   - [TiDB FAQs](faq/tidb.md)
