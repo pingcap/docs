@@ -8,6 +8,7 @@ aliases: ['/docs/releases/rn/']
 
 ## 3.0
 
+- [3.0.1](/releases/3.0.1.md)
 - [3.0 GA](/releases/3.0-ga.md)
 - [3.0.0-rc.3](/releases/3.0.0-rc.3.md)
 - [3.0.0-rc.2](/releases/3.0.0-rc.2.md)
@@ -17,6 +18,7 @@ aliases: ['/docs/releases/rn/']
 
 ## 2.1
 
+- [2.1.15](/releases/2.1.15.md)
 - [2.1.14](/releases/2.1.14.md)
 - [2.1.13](/releases/2.1.13.md)
 - [2.1.12](/releases/2.1.12.md)

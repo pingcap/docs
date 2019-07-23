@@ -2,10 +2,16 @@
 
 ## Documentation List
 
-+ [Introduction](overview.md)
++ Introduction
+  - [TiDB Introduction](overview.md)
+  + Benchmark Test
+    - [How to Test TiDB Using Sysbench](benchmark/how-to-run-sysbench.md)
+    - [Sysbench Performance Test - v2.1 vs. v2.0](benchmark/sysbench-v3.md)
+    - [TPC-H 50G Performance Test - v2.1 vs. v2.0](benchmark/tpch-v2.md)
+    - [DM Benchmark Report](benchmark/dm-v1-alpha.md)
 + Concepts
   - [Architecture](architecture.md)
-  + [Key Features](key-features.md)
+  + Key Features
     - [Horizontal Scalability](key-features.md#horizontal-scalability)
     - [MySQL Compatible Syntax](key-features.md#mysql-compatible-syntax)
     - [Replicate from and to MySQL](key-features.md#replicate-from-and-to-mysql)
@@ -151,6 +157,7 @@
       - [`ADD COLUMN`](reference/sql/statements/add-column.md)
       - [`ADD INDEX`](reference/sql/statements/add-index.md)
       - [`ADMIN`](reference/sql/statements/admin.md)
+      - [`ALTER DATABASE`](reference/sql/statements/alter-database.md)
       - [`ALTER TABLE`](reference/sql/statements/alter-table.md)
       - [`ALTER USER`](reference/sql/statements/alter-user.md)
       - [`ANALYZE TABLE`](reference/sql/statements/analyze-table.md)
@@ -326,6 +333,7 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.15](releases/2.1.15.md)
     - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
     - [2.1.12](releases/2.1.12.md)
