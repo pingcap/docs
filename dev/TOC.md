@@ -354,7 +354,7 @@
     - [TiDb Operator](tidb-in-kubernetes/upgrade/tidb-operator.md)
   + Reference
     + Configuration
-      - [TiDB Cluster] (tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
+      - [TiDB Cluster](tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
       - [Backup](tidb-in-kubernetes/reference/configuration/backup.md)
       - [Local PV](tidb-in-kubernetes/reference/configuration/local-pv.md)
     + Utility
