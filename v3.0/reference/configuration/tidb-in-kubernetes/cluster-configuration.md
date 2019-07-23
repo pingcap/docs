@@ -14,13 +14,11 @@ This document introduces the following items of a TiDB cluster in Kubernetes:
 
 ## Parameters for configuration
 
-TiDB Operator deploys and manages TiDB clusters using Helm. The configuration items for the deployment of TiDB cluster are listed in the table below.
-
-The `charts/tidb-cluster/values.yaml` file of `tidb-cluster` provides the basic configuration by default with which you could quickly start a TiDB cluster. However, if you need special configuration or are deploying in a production environment, you need to manually configure the corresponding parameters according to the table below.
+TiDB Operator deploys and manages TiDB clusters using Helm. The configuration file obtained through Helm provides the basic configuration by default with which you could quickly start a TiDB cluster. However, if you need special configuration or are deploying in a production environment, you need to manually configure the corresponding parameters according to the table below.
 
 > **Note:**
 >
-> In the following table, `values.yaml` refers to `charts/tidb-cluster/values.yaml`.
+> In the following table, `values.yaml` refers to the TiDB cluster's configuration file to be modified.
 
 | Parameter | Description | Default Value |
 | :----- | :---- | :----- |
@@ -75,7 +73,6 @@ The `charts/tidb-cluster/values.yaml` file of `tidb-cluster` provides the basic 
 | `tikv.nodeSelector` | This parameter ensures that TiKV Pods are only scheduled to the node with specific key-value pair as the label. Detailed reference: [nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
 | `tikv.tolerations` | This parameter applies to TiKV Pods, allowing TiKV Pods to be scheduled to the nodes with specified taints. Detailed reference: [taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
 | `tikv.annotations` | This parameter adds a specific `annotations` for TiKV Pods. | `{}` |
-| `tikv.storeLabels` | The labels that specifies the information of TiKV location. PD schedules the copy of the TiKV data based on these labels, the priority of which is decremented in the order of these labels themselves. For example, `["zone","rack"]` means that data copies are preferentially scheduled to TiKV on different `zone`. If the number of `zone` is not enough, these data copies are scheduled to TiKV on different `rack`. If this parameter is not specified, the system sets `["region", "zone", "rack", "host"]` as the default values. The premise that these labels take effect is that they are also included in the Kubernetes Nodes. Note that the lable name is currently not supported to include `/`. | `nil` |
 | `tikv.defaultcfBlockCacheSize` | This parameter specifies the size of block cache which is used to cache uncompressed blocks. Larger block cache settings speed up reads. It is recommended to set the parameter to 30%-50% of the value of `tikv.resources.limits.memory`.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[rocksdb.defaultcf]`<br>`block-cache-size = "1GB"`<br>From TiKV v3.0.0 on, you do not need to configure  `[rocksdb.defaultcf].block-cache-size` and `[rocksdb.writecf].block-cache-size`. Instead, configure `[storage.block-cache].capacity`.   | `1GB` |
 | `tikv.writecfBlockCacheSize` | The parameter specifies the size of writecf block cache. It is recommended to set the parameter to 10%-30% of the value of `tikv.resources.limits.memory`.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[rocksdb.writecf]`<br>`block-cache-size = "256MB"`<br>From TiKV v3.0.0 on, you do not need to configure `[rocksdb.defaultcf].block-cache-size` and `[rocksdb.writecf].block-cache-size`. Instead, configure `[storage.block-cache].capacity`.   | `256MB` |
 | `tikv.readpoolStorageConcurrency` | The size of thread pool for high priority, normal priority or low priority operations in the TiKV storage<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[readpool.storage]`<br>`high-concurrency = 4`<br>`normal-concurrency = 4`<br>`low-concurrency = 4` | `4` |
@@ -194,21 +191,27 @@ affinity:
 
 ### The disaster recovery of data
 
-The disaster recovery of data is guaranteed by the TiDB cluster's own data scheduling algorithm. TiDB Operator only needs to collect topology information from the nodes where TiKV is running and call PD interface to set this information as the information of TiKV store labels. In this way, the TiDB cluster can schedule data copies based on this information.
+Before configuring the disaster recovery, see the [Information Configuration of the Cluster Typology](/how-to/deploy/geographic-redundancy/location-awareness.md) which describes how the disaster recovery of TiDB cluster is implemented.
 
-Currently, TiDB Operator only identifies a specific number of labels. Therefore, you need to use the following labels to set the topology information of a node:
+To add disaster recovery in Kubernetes:
 
-* `region`: The Region where a node is located
-* `zone`: The zone where a node is located
-* `rack`: The rack where a node is located
-* `kubernetes.io/hostname`: The host name of a node
++ Set the label collection of topological location for PD
 
-You can label a node with the following command:
+  > **Note:**
+  >
+  > Except for `kubernetes.io/hostname`, PD currently does not support labels with `/` in the name.
 
-{{< copyable "shell-regular" >}}
+  Replace the `location-labels` information in the `pd.config` with the label collection that describes the topological location on the nodes in Kubernetes cluster.
 
-```shell
-$ kubectl label node <nodeName> region=<regionName> zone=<zoneName> rack=<rackName> kubernetes.io/hostname=<hostName>
-```
++ Set the topological information of the Node where the TiKV node is located.
 
-The labels in the above command are not to be set all at once. Instead, they are to be selected according to actual situation.
+  TiDB Operator automatically obtains the topological information of the Node for TiKV and calls the PD interface to set this information as the information of TiKV's store labels. Based on this topological information, the TiDB cluster  schedules a copy of the data.
+
+  If the Node of the current Kubernetes cluster does not have a label indicating the topological location, or if the existing label name of topology contains `/`, you can manually add a label to the Node by running the following command:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    $ kubectl label node <nodeName> region=<regionName> zone=<zoneName> rack=<rackName> kubernetes.io/hostname=<hostName>
+    ```
+  In the command above, `region`, `zone`, `rack`, `kubernetes.io/hostname` are just examples. The name and number of the label to be added can be arbitrarily defined, as long as it conforms to the specification and is consistent with the labels set in `location-labels` in `pd.config`.
