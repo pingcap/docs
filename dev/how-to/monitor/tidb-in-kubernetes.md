@@ -15,11 +15,11 @@ This document gives a brief introduction to the two monitoring tasks.
 
 ## Monitor the TiDB cluster
 
-You can monitor the TiDB cluster with Prometheus and Grafana. A separate monitoring system is created and configured for each TiDB cluster created by TiDB Operator. The monitoring system runs in the same Namespace as the TiDB cluster, and includes two components Prometheus and Grafana.
+You can monitor the TiDB cluster with Prometheus and Grafana. A separate monitoring system is created and configured for each TiDB cluster created by TiDB Operator. The monitoring system runs in the same Namespace as the TiDB cluster, and includes two components - Prometheus and Grafana.
 
 The monitoring data is not persisted by default. If the monitoring container restarts for some reason, the existing monitoring data gets lost. To persist the monitoring data, you can set `monitor.persistent` to `true` in the `values.yaml` file. When you enable this option, you need to set `storageClass` to an existing storage in the current cluster, and this storage is required to support persisting data, otherwise there is still a risk of data loss.
 
-For some of the monitoring system configuration details, you can check [TiDB Cluster Monitoring](/how-to/monitor/monitor-a-cluster.md) for reference.
+For configuration details on the monitoring system, refer to [TiDB Cluster Monitoring](/how-to/monitor/monitor-a-cluster.md).
 
 ### View the monitoring dashboard
 
@@ -31,15 +31,15 @@ You can run the `kubectl port-forward` command to view the monitoring dashboard:
 kubectl port-forward -n ${namespace} svc/${releaseName}-grafana 3000:3000 &>/tmp/portforward-grafana.log
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) in your browser and the default username and password are `admin`.
+Then open [http://localhost:3000](http://localhost:3000) in your browser and log on with the default username and password `admin`.
 
-The Grafana service is exposed by `NodePort` by default. If the Kubernetes cluster supports load balancer, you can change `monitor.grafana.service.type` to `LoadBalancer` in `values.yaml` and then access the dashboard through the load balancer after executing `helm upgrade`.
+The Grafana service is exposed by `NodePort` by default. If the Kubernetes cluster supports load balancer, you can change `monitor.grafana.service.type` to `LoadBalancer` in `values.yaml`. Then, after executing `helm upgrade`, access the dashboard through the load balancer.
 
-If there is no need to use Grafana, you can save resources by setting `monitor.grafana.create` to `false` in `values.yaml` during deployment. In this case, you need to use other existing or newly deployed data visualization tools to directly access the monitoring data to complete the data visualization.
+If there is no need to use Grafana, you can save resources by setting `monitor.grafana.create` to `false` in `values.yaml` during deployment. In this case, you need to use other existing or newly deployed data visualization tools to directly access the monitoring data.
 
 ### Access the monitoring data
 
-If you need to have a direct access to the monitoring data, you can run the `kubectl port-forward` command to access Prometheus:
+To access the monitoring data directly, run the `kubectl port-forward` command to access Prometheus:
 
 {{< copyable "shell-regular" >}}
 
@@ -49,7 +49,7 @@ kubectl port-forward -n ${namespace} svc/${releaseName}-prometheus 9090:9090 &>/
 
 Then open [http://localhost:9090](http://localhost:9090) in your browser or access this address via a client tool.
 
-The Prometheus service is exposed by `NodePort` by default. If the Kubernetes cluster supports load balancer, you can change `monitor.prometheus.service.type` to `LoadBalancer` in `values.yaml` and then access the monitoring data through the load balancer after executing `helm upgrade`.
+The Prometheus service is exposed by `NodePort` by default. If the Kubernetes cluster supports load balancer, you can change `monitor.prometheus.service.type` to `LoadBalancer` in `values.yaml`. Then, after executing `helm upgrade`, access the monitoring data through the load balancer.
 
 ## Monitor the Kubernetes cluster
 
@@ -61,16 +61,16 @@ Monitoring the host and its resources works in the same way as monitoring physic
 
 If you already have a monitoring system for your physical server in your existing infrastructure, you only need to add the host that holds Kubernetes to the existing monitoring system by conventional means; if there is no monitoring system available, or you want to deploy a separate monitoring system to monitor the host that holds Kubernetes, then you can use any monitoring system that you are familiar with.
 
-The newly deployed monitoring system can run on a separate server, run directly on the host that holds Kubernetes, or run in a Kubernetes cluster. With different deployment methods, there might be some differences in the deployment configuration and resource utilization, but there is no major difference in usage.
+The newly deployed monitoring system can run on a separate server, directly on the host that holds Kubernetes, or in a Kubernetes cluster. Different deployment methods might mean differences in the deployment configuration and resource utilization, but there are no major differences in usage.
 
-Common open source monitoring systems that can be used to monitor server resources are:
+Some common open source monitoring systems that can be used to monitor server resources are:
 
 - [CollectD](https://collectd.org/)
 - [Nagios](https://www.nagios.org/)
 - [Prometheus](http://prometheus.io/) & [node_exporter](https://github.com/prometheus/node_exporter)
 - [Zabbix](https://www.zabbix.com/)
 
-Some cloud service providers or specialized performance monitoring service providers also have their own free or chargeable monitoring solutions to choose from.
+Some cloud service providers or specialized performance monitoring service providers also have their own free or chargeable monitoring solutions that you can choose from.
 
 It is recommended to deploy a host monitoring system in the Kubernetes cluster via [Prometheus Operator](https://github.com/coreos/prometheus-operator) based on [Node Exporter](https://github.com/prometheus/node_exporter) and Prometheus. This solution can also be compatible with and used for monitoring the Kubernetes' own components.
 
@@ -78,7 +78,7 @@ It is recommended to deploy a host monitoring system in the Kubernetes cluster v
 
 For monitoring Kubernetes components, you can refer to the solutions provided in the [Kubernetes official documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/resource-usage-monitoring/) or use other Kubernetes-compatible monitoring systems.
 
-Some cloud service providers may provide their own solutions for monitoring Kubernetes components, and some specialized performance monitoring service providers have their own Kubernetes integration solutions to choose from.
+Some cloud service providers may provide their own solutions for monitoring Kubernetes components, and some specialized performance monitoring service providers have their own Kubernetes integration solutions that you can choose from.
 
 TiDB Operator is actually a container running in Kubernetes. For this reason, you can monitor TiDB Operator by choosing any monitoring system that can monitor the status and resources of a Kubernetes container without deploying additional monitoring components.
 
