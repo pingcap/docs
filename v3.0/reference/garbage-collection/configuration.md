@@ -6,10 +6,34 @@ category: reference
 
 # GC Configuration
 
-The GC (Garbage Collection) configuration and operational status are recorded in the `mysql.tidb` system table. This documents lists these parameters with their descriptions. You can use SQL statements to query or modify them. For example, the following statement adjusts the GC interval to 30 minutes:
+The GC (Garbage Collection) configuration and operational status are recorded in the `mysql.tidb` system table. You can use SQL statements to query or modify them:
+
+```plain
+mysql> select VARIABLE_NAME, VARIABLE_VALUE from mysql.tidb;
++--------------------------+----------------------------------------------------------------------------------------------------+
+| VARIABLE_NAME            | VARIABLE_VALUE                                                                                     |
++--------------------------+----------------------------------------------------------------------------------------------------+
+| bootstrapped             | True                                                                                               |
+| tidb_server_version      | 33                                                                                                 |
+| system_tz                | UTC                                                                                                |
+| tikv_gc_leader_uuid      | 5afd54a0ea40005                                                                                    |
+| tikv_gc_leader_desc      | host:tidb-cluster-tidb-0, pid:215, start at 2019-07-15 11:09:14.029668932 +0000 UTC m=+0.463731223 |
+| tikv_gc_leader_lease     | 20190715-12:12:14 +0000                                                                            |
+| tikv_gc_enable           | true                                                                                               |
+| tikv_gc_run_interval     | 10m0s                                                                                              |
+| tikv_gc_life_time        | 10m0s                                                                                              |
+| tikv_gc_last_run_time    | 20190715-12:09:14 +0000                                                                            |
+| tikv_gc_safe_point       | 20190715-11:59:14 +0000                                                                            |
+| tikv_gc_auto_concurrency | true                                                                                               |
+| tikv_gc_mode             | distributed                                                                                        |
++--------------------------+----------------------------------------------------------------------------------------------------+
+13 rows in set (0.00 sec)
+```
+
+For example, the following statement makes GC keep history data for the most recent 24 hours:
 
 ```sql
-update mysql.tidb set VARIABLE_VALUE="30m" where VARIABLE_NAME="tikv_gc_run_interval";
+update mysql.tidb set VARIABLE_VALUE="24h" where VARIABLE_NAME="tikv_gc_life_time";
 ```
 
 > **Note:**
@@ -37,7 +61,7 @@ update mysql.tidb set VARIABLE_VALUE="30m" where VARIABLE_NAME="tikv_gc_run_inte
 
     > **Note:**
     >
-    > - The value of `tikv_gc_life_time` must be greater than that of [`max-txn-time-use`](/reference/configuration/tidb-server/configuration-file#max-txn-time-use) in the TiDB configuration file by at least 10 seconds, and must than or equal to 10 minutes.
+    > - The value of `tikv_gc_life_time` must be greater than that of [`max-txn-time-use`](/reference/configuration/tidb-server/configuration-file.md#max-txn-time-use) in the TiDB configuration file by at least 10 seconds, and must than or equal to 10 minutes.
     > - In scenarios of frequent updates, a large value (days or even months) for `tikv_gc_life_time` may cause potential issues, such as:
     >    - Larger storage use
     >    - A large amount of history data may affect performance to a certain degree, especially for range queries such as `select count(*) from t`

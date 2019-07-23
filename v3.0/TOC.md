@@ -2,10 +2,17 @@
 
 ## Documentation List
 
-+ [Introduction](overview.md)
++ Introduction
+  - [TiDB Introduction](overview.md)
+  + Benchmark Test
+    - [How to Test TiDB Using Sysbench](benchmark/how-to-run-sysbench.md)
+    - [How to Run TPC-C Test on TiDB](benchmark/how-to-run-tpcc.md)
+    - [Sysbench Performance Test - v3.0 vs. v2.1](benchmark/sysbench-v4.md)
+    - [TPC-C Performance Test - v3.0 vs. v2.1](benchmark/tpcc.md)
+    - [DM Benchmark Report](benchmark/dm-v1-alpha.md)
 + Concepts
   - [Architecture](architecture.md)
-  + [Key Features](key-features.md)
+  + Key Features
     - [Horizontal Scalability](key-features.md#horizontal-scalability)
     - [MySQL Compatible Syntax](key-features.md#mysql-compatible-syntax)
     - [Replicate from and to MySQL](key-features.md#replicate-from-and-to-mysql)
@@ -57,10 +64,13 @@
       - [Overview](how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](how-to/deploy/data-migration-with-ansible.md)
+    - [Deploy TiDB Operator](how-to/deploy/tidb-operator.md)
     - [TiDB Binlog Cluster Deployment](how-to/deploy/tidb-binlog.md)
+    - [Access the TiDB Cluster in Kubernetes](how-to/deploy/orchestrated/tidb-in-kubernetes/access-tidb.md)
   + Configure
     - [Time Zone](how-to/configure/time-zone.md)
     - [Memory Control](how-to/configure/memory-control.md)
+    - [Cluster Initialization](how-to/configure/initialize-cluster.md)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](how-to/secure/enable-tls-clients.md)
@@ -82,18 +92,24 @@
     - [Backup and Restore](how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
+    + TiDB in Kubernetes
+      - [Manage the TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
+      - [Automatic Failover](how-to/maintain/tidb-in-kubernetes/auto-failover.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
+    - [Scale in Kubernetes](how-to/scale/in-kubernetes.md)
   + Upgrade
     - [Upgrade to TiDB 3.0](how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
     - [Upgrade TiDB Binlog Cluster](how-to/upgrade/tidb-binlog.md)
+    - [Upgrade TiDB Operator and Kubernetes](how-to/upgrade/tidb-operator.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](how-to/troubleshoot/data-migration.md)
     - [Troubleshoot TiDB Lightning](how-to/troubleshoot/tidb-lightning.md)
+    - [Troubleshoot TiDB in Kubernetes](how-to/troubleshoot/tidb-in-kubernetes.md)
 + Reference
   - [MySQL Compatibility](reference/mysql-compatibility.md)
   + SQL
@@ -224,6 +240,7 @@
       - [`SHOW TABLE STATUS`](reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](reference/sql/statements/show-warnings.md)
+      - [`SPLIT REGION`](reference/sql/statements/split-region.md)
       - [`START TRANSACTION`](reference/sql/statements/start-transaction.md)
       - [`TRACE`](reference/sql/statements/trace.md)
       - [`TRUNCATE`](reference/sql/statements/truncate.md)
@@ -231,6 +248,7 @@
       - [`USE`](reference/sql/statements/use.md)
     - [Constraints](reference/sql/constraints.md)
     - [Generated Columns](reference/sql/generated-columns.md)
+    - [Partitioning](reference/sql/partitioning.md)
     - [Character Set](reference/sql/character-set.md)
   + Configuration
     + tidb-server
@@ -244,6 +262,7 @@
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
     + tidb-in-kubernetes
       - [TiDB Cluster Configuration on Kubernetes](reference/configuration/tidb-in-kubernetes/cluster-configuration.md)
+      - [Local PV Configuration](reference/configuration/tidb-in-kubernetes/local-pv-configuration.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
@@ -303,6 +322,7 @@
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](how-to/migrate/from-aurora.md)
       - [Troubleshoot](how-to/troubleshoot/data-migration.md)
+      - [FAQ](faq/data-migration.md)
     + TiDB Lightning
       - [Overview](reference/tools/tidb-lightning/overview.md)
       - [Deployment](reference/tools/tidb-lightning/deployment.md)
@@ -326,7 +346,9 @@
 + FAQs
   - [TiDB FAQs](faq/tidb.md)
   - [TiDB Lightning FAQs](faq/tidb-lightning.md)
+  - [Data Migration FAQ](faq/data-migration.md) 
   - [Upgrade FAQs](faq/upgrade.md)
+  - [TiDB FAQs in Kubernetes](faq/tidb-in-kubernetes.md)
 + Support
   - [Support Resources](support-resources.md)
   - [Report an Issue](report-issue.md)
@@ -336,6 +358,7 @@
 - [Roadmap](roadmap.md)
 + [Releases](releases/rn.md)
   + v3.0
+    - [3.0.1](releases/3.0.1.md)
     - [3.0 GA](releases/3.0-ga.md)
     - [3.0.0-rc.3](releases/3.0.0-rc.3.md)
     - [3.0.0-rc.2](releases/3.0.0-rc.2.md)
@@ -343,6 +366,7 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.15](releases/2.1.15.md)
     - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
     - [2.1.12](releases/2.1.12.md)
