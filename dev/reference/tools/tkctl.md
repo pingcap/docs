@@ -1,5 +1,6 @@
 ---
 title: TiDB Kubernetes Control User Guide
+summary: Learn how to use the tkctl (TiDB Kubernetes Control) tool.
 category: reference
 ---
 
@@ -9,7 +10,7 @@ TiDB Kubernetes Control (`tkctl`) is a command line utility that is used for TiD
 
 ## Installation
 
-You can download the pre-built binary or build `tkctl` from source:
+To install `tkctl`, you can download the pre-built binary or build `tkctl` from source.
 
 ### Download the latest pre-built binary
 
@@ -37,24 +38,39 @@ You can configure the shell auto-completion for `tkctl` to simplify its usage.
 
 To configure the auto-completion for `BASH`, you need to first install the [bash-completion](https://github.com/scop/bash-completion) package, and configure with either of the two methods below:
 
-{{< copyable "shell-regular" >}}
+- Configure auto-completion in the current shell:
 
-```shell
-source <(tkctl completion bash)
+    {{< copyable "shell-regular" >}}
 
-# add autocomplete permanently to your bash shell.
-echo "if hash tkctl 2>/dev/null; then source <(tkctl completion bash); fi" >> ~/.bashrc
-```
+    ```shell
+    source <(tkctl completion bash)
+    ```
 
-To configure the auto-completion for `ZSH`:
+- Add auto-completion permanently to your bash shell:
 
-```shell
-# setup autocomplete in zsh into the current shell
-source <(tkctl completion zsh)
+    {{< copyable "shell-regular" >}}
 
-# add autocomplete permanently to your zsh shell
-echo "if hash tkctl 2>/dev/null; then source <(tkctl completion zsh); fi" >> ~/.zshrc
-```
+    ```shell
+    echo "if hash tkctl 2>/dev/null; then source <(tkctl completion bash); fi" >> ~/.bashrc
+    ```
+
+To configure the auto-completion for `ZSH`, you can choose from either of the two methods below:
+
+- Configure auto-completion in the current shell:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    source <(tkctl completion zsh)
+    ```
+
+- Add auto-completion permanently to your zsh shell:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    echo "if hash tkctl 2>/dev/null; then source <(tkctl completion zsh); fi" >> ~/.zshrc
+    ```
 
 ### Kubernetes configuration
 
@@ -166,8 +182,8 @@ You can query the following components: `pd`, `tikv`, `tidb`, `volume` and `all`
 
 | Flag | Abbreviation | Description |
 | ----- | --------- | ----------- |
-| --tidb-cluster | -t | select the tidb cluster, default to current TiDB cluster |
-| --output | -o | output format, one of [default,json,yaml], the default format is `default` |
+| --tidb-cluster | -t | Specify a TiDB cluster; default to the TiDB cluster that is being used |
+| --output | -o | The output format; you can choose from [default,json,yaml], and the default format is `default` |
 
 For example:
 
@@ -202,20 +218,20 @@ local-pv-e54c122a   pd-demo-cluster-pd-2       Bound    1476Gi     172.16.4.156 
 
 ### tkctl debug [pod_name]
 
-This command is used to diagnose the Pods in a TiDB cluster. It launches a debug container for you which has the necessary troubleshooting tools installed.
+This command is used to diagnose the Pods in a TiDB cluster. It launches a debug container with the specified docker image on the host that holds the target Pod. The container has the necessary troubleshooting tools installed and shares the namespace with the container in the target Pod, so you can seamlessly diagnose the target container by using various tools in the debug container.
 
-| Flags | Shorthand | Description |
+| Flag | Abbreviation | Description |
 | ----- | --------- | ----------- |
-| --image |    | specify the docker image of debug container, default to `pingcap/tidb-debug:lastest` |
-| --container | -c | select the container to diagnose, default to the first container of target Pod |
-| --docker-socket |    | specify the docker socket of cluster node, default to `/var/run/docker.sock` |
-| --privileged |    | whether launch container in privileged mode (full container capabilities) |
+| --image |    | Specify the docker image used by the debug container; default to `pingcap/tidb-debug:lastest` |
+| --container | -c | Select the container to be diagnosed; default to the first container of the target Pod |
+| --docker-socket |    | Specify the docker socket on the target node; default to `/var/run/docker.sock` |
+| --privileged |    | Whether to enable the [privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities) mode for the debug container |
 
 > **Note:**
 >
-> The default image of the debug container contains various troubleshooting tools, so the image size is relatively large. If you only need `pd-ctl` and `tidb-ctl`, you can use the `tidb-control` image by specifying `--image=pingcap/tidb-control:latest` command line option.
+> The default image of the debug container contains various troubleshooting tools, so the image size is relatively large. If you only need `pd-ctl` and `tidb-ctl`, you can specify using the `tidb-control` image by using the `--image=pingcap/tidb-control:latest` command line option.
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -233,7 +249,7 @@ Using tools like `GDB` and `perf` in the debug container requires special operat
 
 #### GDB
 
-When using GDB, make sure you point the `program` option to the binary in the **target container**. Additionally, if you use images other than `tidb-debug` as debug container or the `pid` of the target process is not 1, you have to configure the location of dynamic libraries via the `set sysroot` command, steps are as follows:
+When you use GDB to debug the process in the target container, make sure you set the `program` option to the binary in the **target container**. Additionally, if you use images other than `tidb-debug` as the debug container or if the `pid` of the target process is not 1, you have to configure the location of dynamic libraries via the `set sysroot` command as follows:
 
 {{< copyable "shell-regular" >}}
 
@@ -249,7 +265,9 @@ gdb /proc/${pid:-1}/root/tikv-server 1
 
 {{< copyable "shell-regular" >}}
 
-The `.gdbinit` configured in the `tidb-debug` image will set `sysroot` to `/proc/1/root/` automatically. So, you can omit this following step if you are using the `tidb-debug` image and the `pid` of the target process 1.
+The `.gdbinit` pre-configured in the `tidb-debug` image will set `sysroot` to `/proc/1/root/` automatically. For this reason, you can omit this following step if you are using the `tidb-debug` image and the `pid` of the target process is 1.
+
+{{< copyable "shell-regular" >}}
 
 ```shell
 (gdb) set sysroot /proc/${pid}/root/
@@ -269,7 +287,7 @@ Start debugging:
 (gdb) info threads
 ```
 
-#### Perf and Flame Graph
+#### Perf and flame graphs
 
 To use the `perf` command and the `run_flamegraph.sh` script properly, you must copy the program from the target container to the same location in the debug container:
 
@@ -291,20 +309,20 @@ cp /proc/1/root/tikv-server /
 ./run_flamegraph.sh 1
 ```
 
-This script will upload the generated flame graph to `transfer.sh`, you can visit the output link to download the flame graph.
+This script automatically uploads the generated flame graph (SVG format) to `transfer.sh`, and you can visit the link outputted by the script to download the flame graph.
 
 ### tkctl ctop
 
-Complete form of the command: `tkctl ctop [pod_name | node/node_name ]`.
+The complete form of the command is `tkctl ctop [pod_name | node/node_name ]`.
 
-This command used to view the real-time stats of target pod or node. Compare to `kubectl top`, `tkctl ctop` provides network and disk stats, which are important for diagnosing TiDB cluster problem.
+This command is used to view the real-time monitoring stats of the target Pod or node in the cluster. Compared with `kubectl top`, `tkctl ctop` also provides network and disk stats, which are important for diagnosing problems in the TiDB cluster.
 
-| Flags | Shorthand | Description |
+| Flag | Abbreviation | Description |
 | ----- | --------- | ----------- |
-| --image |    | specify the docker image of ctop, default to `quay.io/vektorlab/ctop:0.7.2` |
-| --docker-socket |    | specify the docker socket of cluster node, default to `/var/run/docker.sock` |
+| --image |    | Specify the docker image of ctop; default to `quay.io/vektorlab/ctop:0.7.2` |
+| --docker-socket |    | Specify the docker socket that ctop uses; default to `/var/run/docker.sock` |
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -318,13 +336,11 @@ tkctl ctop node/172.16.4.155
 tkctl ctop demo-cluster-tikv-0
 ```
 
-If you don't see the prompt, please wait a few seconds or minutes.
-
 ### tkctl help [command]
 
-This command used to print the help message of abitrary sub command.
+This command is used to print help messages of the sub commands.
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -334,9 +350,9 @@ tkctl help debug
 
 ### tkctl options
 
-This command used to view the global flags of `tkctl`.
+This command is used to view the global flags of `tkctl`.
 
-Example:
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -374,7 +390,7 @@ should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero mean
       --vmodule=: comma-separated list of pattern=N settings for file-filtered logging
 ```
 
-These options are mainly used to talk with the kubernetes cluster, there are two options that used often:
+These options are mainly used to connect with the Kubernetes cluster and two commonly used options among them are as follows:
 
-- `--context`: choose the kubernetes cluster
-- `--namespace`: choose the kubernetes namespace
+- `--context`: specify the target Kubernetes cluster
+- `--namespace`: specify the Kubernetes namespace
