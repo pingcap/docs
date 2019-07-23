@@ -1,36 +1,37 @@
 ---
-title: TiDB in Kubernetetes Backup Configuration
+title: The Backup Configuration of TiDB in Kubernetetes
+summary: Learn the backup configurations of TiDB in Kubernetetes.
 category: reference
 ---
 
-# TiDB in Kubernetetes Backup Configuration
+# The Backup Configuration of TiDB in Kubernetetes
 
-`tidb-backup` is a helm chart designed for TiDB cluster backup and restore. This document describes the configuration of this chart.
+`tidb-backup` is a helm chart used for backing up and restoring TiDB clusters in Kubernetes. This document describes the configuration of `tidb-backup`.
 
 ## Configuration
 
 ### `mode`
 
-- Run mode
+- The operating mode
 - Default: "backup"
-- Options: `backup` or `restore`
+- Options: `backup` (for backing up the data of a cluster) or `restore` (for restoring the data of a cluster)
 
 ### `clusterName`
 
-- Target cluster name
+- The name of the target cluster
 - Default: "demo"
-- The name of the TiDB cluster that data is backed up from or restore to
+- The name of the TiDB cluster from which data is backed up or to which data is restored
 
 ### `name`
 
-- The backup name
-- Default: "fullbackup-${date}", date is the start time of backup, accurate to minute
+- The name of the backup
+- Default: "fullbackup-{{ date "200601021504" .Release.Time }}". `date` is the starting time of the backup, which is accurate to minute.
 
 ### `secretName`
 
-- The name of the `Secret`([Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/)) which stores the crendential of the target cluster
+- The name of the `Secret` which stores the credential of the target cluster. See [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) for reference.
 - Default: "backup-secret"
-- You can create the `Secret` by the follwing command:
+- You can create the `Secret` by running the following command:
 
     {{< copyable "shell-regular" >}}
 
@@ -40,23 +41,23 @@ category: reference
 
 ### `storage.className`
 
-- The [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) used to store the backup data
+- The [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) is used to store backup data.
 - Default: "local-storage"
-- The backup job has to bound a Persistent Volume (PV) to store the backup data, you have to ensure the `StorageClass` is presented in your Kubernetes cluster.
+- The backup job needs a Persistent Volume (PV) to store the backup data. You must ensure that `StorageClass` is available in your Kubernetes cluster.
 
 ### `storage.size`
 
-- The storage size of PersistenceVolume
+- The storage size of the Persistence Volume
 - Default: "100Gi"
 
 ### `backupOptions`
 
-- The options that are passed to [`mydumper`](https://github.com/maxbube/mydumper/blob/master/docs/mydumper_usage.rst#options)
+- The optional parameter specified to [`mydumper`](https://github.com/maxbube/mydumper/blob/master/docs/mydumper_usage.rst#options) used when backing up data
 - Default: "--chunk-filesize=100"
 
 ### `restoreOptions`
 
-- The options that are passed to [`loader`](https://www.pingcap.com/docs-cn/tools/loader/)
+- The optional parameter specified to [`loader`](https://www.pingcap.com/docs-cn/tools/loader/) used when backing up data
 - Default: "-t 16"
 
 ### `gcp.bucket`
@@ -66,13 +67,13 @@ category: reference
 
 > **Note:**
 >
-> Once you set any variables under `gcp` section, the backup data will be uploaded to Google Cloud Storage, namely, you have to keep the configuration intact.
+> Once you set any variable under the `gcp` section, the backup data will be uploaded to Google Cloud Storage, which means that you must keep the configuration intact.
 
 ### `gcp.secretName`
 
 - The name of the `Secret` that stores the credential of Google Cloud Storage
 - Default: ""
-- You can refer to [Google Cloud Documentation](https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually) to download the credential file and create the `Secret` by the following command:
+- See [Google Cloud Documentation](https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually) to download the credential file and create the `Secret` by the running following command:
 
     {{< copyable "shell-regular" >}}
 
@@ -82,23 +83,23 @@ category: reference
 
 ### `ceph.endpoint`
 
-- The endpoint of ceph object storage
+- The endpoint of the `ceph` object storage
 - Default: ""
 
 > **Note:**
 >
-> Once you set any variables under `ceph` section, the backup data will be uploaded to ceph object storage, namely, you have to keep the configuration intact.
+> Once you set any variable under the `ceph` section, the backup data will be uploaded to the `ceph` object storage, which means that you must keep the configuration intact.
 
 ### `ceph.bucket`
 
-- The bucket name of ceph object storage
+- The bucket name of the `ceph` object storage
 - Default: ""
 
 ### `ceph.secretName`
 
-- The name of the `Secret` that stores the credential of Ceph object store.
+- The name of the `Secret` that stores the credential of the `ceph` object store
 - Default: ""
-- You can create the `Secret` by the following command:
+- You can create the `Secret` by running the following command:
 
     {{< copyable "shell-regular" >}}
 

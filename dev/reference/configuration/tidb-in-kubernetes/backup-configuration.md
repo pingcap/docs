@@ -25,7 +25,7 @@ category: reference
 ### `name`
 
 - The name of the backup
-- Default: "fullbackup-${date}". `date` is the starting time of the backup, which is accurate to minute.
+- Default: "fullbackup-{{ date "200601021504" .Release.Time }}". `date` is the starting time of the backup, which is accurate to minute.
 
 ### `secretName`
 
