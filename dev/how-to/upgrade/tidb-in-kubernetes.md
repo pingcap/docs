@@ -34,7 +34,7 @@ When you perform a rolling update to a TiDB cluster in Kubernetes, the Pod is sh
 
 By default, changes to the configuration files are applied to the TiDB cluster automatically through a rolling update. You can disable this feature by setting the `enableConfigMapRollout` variable to `false` in the `values.yaml` file, if so, the change of configuration will be loaded until the server being restarted.
 
-You can change configuration of TiDB cluster through the following steps:
+You can change the configuration of TiDB cluster through the following steps:
 
 1. Make sure the `enableConfigMapRollout` feature is not disabled explicitly in the `values.yaml` file.
 2. Change the configurations in the `values.yaml` file as needed.
