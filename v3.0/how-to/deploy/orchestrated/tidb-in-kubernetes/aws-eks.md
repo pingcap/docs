@@ -14,7 +14,7 @@ Before deploying a TiDB cluster on AWS EKS, make sure the following requirements
 
 * [awscli](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) >= 1.16.73, to control AWS resources
 
-    The `awscli` must be [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) before it can interact with AWS. The fastest way is using the `aws configure` command:
+    You must [configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) `awscli` before it can interact with AWS. The fastest way is using the `aws configure` command:
 
     {{< copyable "shell-regular" >}}
 
@@ -41,9 +41,9 @@ Before deploying a TiDB cluster on AWS EKS, make sure the following requirements
 * [jq](https://stedolan.github.io/jq/download/)
 * [aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) installed in `PATH`, to authenticate with AWS
 
-    The easiest way to install `aws-iam-authenticator` is to download the prebuilt binary as follows.
+    The easiest way to install `aws-iam-authenticator` is to download the prebuilt binary as shown below:
 
-    Download binary for Linux:
+    Download the binary for Linux:
 
     {{< copyable "shell-regular" >}}
 
@@ -70,7 +70,7 @@ Before deploying a TiDB cluster on AWS EKS, make sure the following requirements
 
 ## Deploy
 
-The default setup will create a new VPC and a t2.micro instance as bastion machine, and an EKS cluster with the following ec2 instances as worker nodes:
+The default setup creates a new VPC and a `t2.micro` instance as the bastion machine, and an EKS cluster with following ec2 instances as worker nodes:
 
 * 3 m5.xlarge instances for PD
 * 3 c5d.4xlarge instances for TiKV
@@ -122,9 +122,11 @@ kubeconfig_filename = credentials/kubeconfig_my-cluster
 region = us-west-2
 ```
 
+You can use the `terraform output` command to get the output again.
+
 > **Note:**
 >
-> You can use the `terraform output` command to get the output again.
+> EKS versions earlier than 1.14 do not support auto enabling cross-zone load balancing via Network Load Balancer (NLB). Therefore, unbalanced pressure distributed among TiDB instances can be expected in default settings. It is strongly recommended that you refer to [AWS Documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html#enable-cross-zone) to manually enable cross-zone load balancing for a production environment.
 
 ## Access the database
 
@@ -160,7 +162,7 @@ You can interact with the EKS cluster using `kubectl` and `helm` with the kubeco
     helm --kubeconfig credentials/kubeconfig_<cluster_name> ls
     ```
 
-- Or by setting `KUBECONFIG` environment variable:
+- Or by setting the `KUBECONFIG` environment variable:
 
     {{< copyable "shell-regular" >}}
 
@@ -238,17 +240,17 @@ An ec2 instance is also created by default as bastion machine to connect to the 
 
 The TiDB version and component count are also configurable in `variables.tf`, you can customize these variables to suit your need.
 
-Currently, the instance type of TiDB cluster component is not configurable because PD and TiKV relies on [NVMe SSD instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html), and different instance types have different disks.
+Currently, the instance type of the TiDB cluster component is not configurable because PD and TiKV depend on [NVMe SSD instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html), and different instance types have different disks.
 
-### Customize TiDB Cluster
+### Customize a TiDB cluster
 
-The terraform scripts provide proper default for TiDB cluster in EKS. You can specify an overriding values file in `clusters.tf` for each TiDB cluster. Values of this file will override the default one.
+The terraform scripts provide proper default settings for the TiDB cluster in EKS. You can specify an overriding values file in `clusters.tf` for each TiDB cluster. Values of this file will override the default settings.
 
-For example, the default cluster specify using `./default-cluster.yaml` as the overriding values file, and enable the ConfigMap rollout feature in this file.
+For example, the default cluster uses `./default-cluster.yaml` as the overriding values file, and the ConfigMap rollout feature is enabled in this file.
 
-In EKS, some values are not customizable as usual, including the cluster version, replicas, node selectors and taints. These variables are controlled by the terraform instead in favor of consistency. To customize these variables, you can edit the `clusters.tf` and change the variables of each `./tidb-cluster` module directly.
+In EKS, some values are not customizable in`values.yaml`, such as the cluster version, replicas, node selectors and taints. These variables are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. To customize these variables, you can edit the `clusters.tf` file and change the variables of each `./tidb-cluster` module directly.
 
-### Customized TiDB Operator
+### Customize TiDB Operator
 
 You can customize the TiDB operator by specifying a helm values file through the `operator_values` variable. For example:
 
@@ -259,7 +261,7 @@ variable "operator_values" {
 }
 ```
 
-## Multiple TiDB Cluster Management
+## Manage multiple TiDB clusters
 
 An instance of `./tidb-cluster` module corresponds to a TiDB cluster in the EKS cluster. If you want to add a new TiDB cluster, you can edit `./cluster.tf` and add a new instance of `./tidb-cluster` module:
 
@@ -304,7 +306,7 @@ module example-cluster {
 >
 > The `cluster_name` of each cluster must be unique.
 
-You can get the DNS name of TiDB service and grafana service via kubectl. If you want Terraform to print these information like the `default-cluster`, you can add `output` sections in `outputs.tf`:
+You can get the DNS name of TiDB service and the Grafana service via `kubectl`. If you want Terraform to print this information, you can add `output` sections in `outputs.tf`:
 
 ```hcl
 output "example-cluster_tidb-hostname" {
@@ -318,7 +320,7 @@ output "example-cluster_monitor-hostname" {
 
 ## Destroy
 
-It may take some while to finish destroying the cluster.
+It may take some time to finish destroying the cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -329,19 +331,19 @@ terraform destroy
 > **Note:**
 >
 > * This will destroy your EKS cluster along with all the TiDB clusters you deployed on it.
-> * You have to manually delete the EBS volumes in AWS console after running terraform destroy if you do not need the data on the volumes anymore.
+> * If you do not need the data on the volumes anymore, you have to manually delete the EBS volumes in AWS console after running `terraform destroy`.
 
-## Multiple Kubernetes Management
+## Manage multiple Kubernetes clusters
 
 This section describes the best practice to manage multiple Kubernetes clusters, each with one or more TiDB clusters installed.
 
 Under the hood, this Terraform module composes several sub-modules:
 
 - `tidb-operator`, that provisions the Kubernetes control plane for TiDB cluster
-- `tidb-cluster`, that a TiDB cluster in the target Kubernetes cluster
-- ...and a `VPC` module, a `bastion` module and a `key-pair` module that are dedicated to TiDB on AWS
+- `tidb-cluster`, that creates the resource pool in the target Kubernetes cluster and deploy the TiDB cluster
+-  A `VPC` module, a `bastion` module and a `key-pair` module that are dedicated to TiDB on AWS
 
-The best practice is creating a new directory for each of your Kubernetes cluster and composing these modules via Terraform scripts, so that the Terraform state and cluster credentials of each cluster won't be screwed. Here's an example:
+The best practice for managing multiple Kubernetes clusters is creating a new directory for each of your Kubernetes clusters, and combine the above modules via Terraform scripts, so that the Terraform states among clusters do not interfere with each other. Here's an example:
 
 {{< copyable "shell-regular" >}}
 
@@ -358,7 +360,7 @@ provider "aws" {
   region = "us-west-1"
 }
 
-# create a key pair for ssh to bastion, also for ssh from bastion to worker nodes
+# create an ssh key to log in the bastion and the Kubernetes node
 module "key-pair" {
   source = "../modules/aws/key-pair"
 
@@ -384,7 +386,7 @@ module "tidb-operator" {
   ssh_key_name       = module.key-pair.key_name
 }
 
-# HACK: enforce helm to depend on the EKS
+# enforce helm to depend on the EKS
 resource "local_file" "kubeconfig" {
   depends_on        = [module.tidb-operator.eks]
   sensitive_content = module.tidb-operator.eks.kubeconfig
@@ -399,7 +401,7 @@ provider "helm" {
   }
 }
 
-# provision a tidb-cluster in the eks cluster
+# provision a TiDB cluster in the EKS cluster
 module "tidb-cluster-a" {
   source = "../modules/aws/tidb-cluster"
   providers = { 
@@ -412,7 +414,7 @@ module "tidb-cluster-a" {
   subnets      = module.vpc.private_subnets
 }
 
-# provision another tidb-cluster in the eks cluster
+# provision another TiDB cluster in the EKS cluster
 module "tidb-cluster-b" {
   source = "../modules/aws/tidb-cluster"
   providers = { 
@@ -455,16 +457,16 @@ output "bastion_ip" {
 }
 ```
 
-As shown in the code above, you can omit most of the parameters in each of the module calls because there are reasonable defaults, and it is easy to customize the setup: you just delete the bastion module call if you don't need it.
+As shown in the code above, you can omit most of the parameters in each of the module calls because there are reasonable defaults, and it is easy to customize the setup. For example, just delete the bastion module call if you do not need it.
 
-To customize each fields, you can refer to this Terraform module as a great example, also, you can always refer to the `variables.tf` of each of the modules to investigate all the available parameters.
+To customize each field, you can refer to the default Terraform module. Also, you can always refer to the `variables.tf` file of each module to investigate all the available parameters.
 
-Also, it requires little effort if you want to integrate these modules into your own Terraform codebase, and this is what these modules are designed for.
+In addition, you can easily integrate these modules into your own Terraform workflow. If you are familiar with Terraform, this is our recommended way of use.
 
 > **Note:**
 >
-> * If you create the new directory elsewhere, please take care of the relative path of modules.
+> * When creating a new directory, please pay attention to its relative path to Terraform modules, which affects the `source` parameter during module calls.
 > * If you want to use these modules outside of the tidb-operator project, make sure you copy the whole `modules` directory and keep the relative path of each module inside the directory unchanged.
-> * The hack of helm provider is necessary in case of [hashicorp/terraform#2430](https://github.com/hashicorp/terraform/issues/2430#issuecomment-370685911), please keep it in your Terraform scripts.
+> * Due to limitation [hashicorp/terraform#2430](https://github.com/hashicorp/terraform/issues/2430#issuecomment-370685911) of Terraform, the hack processing of Helm provider is necessary in the above example. It is recommended that you keep it in your own Terraform scripts.
 
-If you are unwilling to touch the Terraform code, copy this directory for each of your Kubernetes clusters also make sense. But note that you cannot copy a directory that you have already run `terraform apply` against because of the local Terraform state file corruption. It is recommended to clone a new repository before copying the directory.
+If you are unwilling to write Terraform code, you can also copy the `deploy/aws` directory to create new Kubernetes clusters. But note that you cannot copy a directory that you have already run `terraform apply` against, when the Terraform state already exists in local.  In this case, it is recommended to clone a new repository before copying the directory.
