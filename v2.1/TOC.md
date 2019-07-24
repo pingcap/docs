@@ -2,7 +2,13 @@
 
 ## Documentation List
 
-+ [Introduction](overview.md)
++ Introduction
+  - [TiDB Introduction](overview.md)
+  + Benchmark Test
+    - [How to Test TiDB Using Sysbench](benchmark/how-to-run-sysbench.md)
+    - [Sysbench Performance Test - v2.1 vs. v2.0](benchmark/sysbench-v3.md)
+    - [TPC-H 50G Performance Test - v2.1 vs. v2.0](benchmark/tpch-v2.md)
+    - [DM Benchmark Report](benchmark/dm-v1-alpha.md)
 + Concepts
   - [Architecture](architecture.md)
   + Key Features
@@ -328,6 +334,7 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.15](releases/2.1.15.md)
     - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
     - [2.1.12](releases/2.1.12.md)
