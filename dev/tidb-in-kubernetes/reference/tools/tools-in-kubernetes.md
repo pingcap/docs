@@ -50,7 +50,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
     kubectl port-forward -n <namespace> <tikv-pod-name> 20160:20160 &>/tmp/portforward-tikv.log
     ```
 
-    After the connection is established, you can acess the PD service and the TiKV node via the corresponding port in local:
+    After the connection is established, you can access the PD service and the TiKV node via the corresponding port in local:
 
     {{< copyable "shell-regular" >}}
 
@@ -97,6 +97,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
         ```shell
         tikv-ctl --db /path/to/tikv/db size -r 2
         ```
+
         > **Note:**
         >
         >   The default db path of TiKV instances in the debug container is `/proc/1/root/var/lib/tikv/db size -r 2`
@@ -159,7 +160,7 @@ tidb-ctl schema in mysql
     ```
 
    If `RBAC` is not enabled for the Kubernetes cluster, then use the following command to install `tiller`:
-    
+
     {{< copyable "shell-regular" >}}
 
     ```shell
