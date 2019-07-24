@@ -342,7 +342,6 @@
     - [Cluster Initialization](tidb-in-kubernetes/initialize-cluster.md)
   - [Monitor](tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
   + Maintain
-    - [Manage a TiDB cluster](tidb-in-kubernetes/maintain/manage-cluster.md)
     - [Destroy a TiDB cluster](tidb-in-kubernetes/maintain/delete-cluster.md)
     - [Maintain a Hosting Kubernetes Node](tidb-in-kubernetes/maintain/k8s-node-for-tidb.md)
     - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
