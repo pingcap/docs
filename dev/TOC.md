@@ -346,7 +346,7 @@
   - [Monitor](tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
   + Maintain
     - [Destroy a TiDB cluster](tidb-in-kubernetes/maintain/delete-cluster.md)
-    - [Maintain a Hosting Kubernetes Node](tidb-in-kubernetes/maintain/k8s-node-for-tidb.md)
+    - [Maintain a Hosting Kubernetes Node](tidb-in-kubernetes/maintain/kubernetes-node.md)
     - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
     - [Collect Logs](tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
