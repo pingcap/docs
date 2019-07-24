@@ -356,8 +356,9 @@
       - [TiDB Cluster](tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
       - [Backup](tidb-in-kubernetes/reference/configuration/backup.md)
       - [Local PV](tidb-in-kubernetes/reference/configuration/local-pv.md)
-    + Utility
-      - [tkctl](tidb-in-kubernetes/reference/utility/tkctl.md)
+    + Tools
+      - [tkctl](tidb-in-kubernetes/reference/tools/tkctl.md)
+      - [Tools in Kubernetes](tidb-in-kubernetes/reference/tools/in-kubernetes.md)
   - [Troubleshoot](tidb-in-kubernetes/troubleshoot.md)
   - [FAQs](tidb-in-kubernetes/faq.md)
 + FAQs
