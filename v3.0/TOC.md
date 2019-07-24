@@ -89,6 +89,8 @@
     - [Migrate from Aurora](how-to/migrate/from-aurora.md)
     - [Migrate from CSV](reference/tools/tidb-lightning/csv.md)
   + Maintain
+    + TiDB in Kubernetes
+      - [Maintain Kubernetes Nodes](how-to/maintain/tidb-in-kubernetes/tidb-node.md)
     - [Common Ansible Operations](how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
@@ -292,11 +294,12 @@
     - [Optimizer Hints](reference/performance/optimizer-hints.md)
     - [Check the TiDB Cluster Status Using SQL Statements](reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](reference/performance/execution-plan-bind.md)
-    - [Tune TiKV](reference/performance/tune-tikv.md)
+    - [Tun TiKV](reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](reference/tispark.md)
   - [TiDB Binlog Cluster Overview](reference/tidb-binlog-overview.md)
   + Tools
+    - [tkctl](reference/tools/tkctl.md)
     - [Mydumper](reference/tools/mydumper.md)
     - [Syncer](reference/tools/syncer.md)
     - [Loader](reference/tools/loader.md)
