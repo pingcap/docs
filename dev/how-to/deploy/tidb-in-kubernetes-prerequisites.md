@@ -55,7 +55,7 @@ You also need to disable swap on each deployed Kubernetes node by running:
 {{< copyable "shell-regular" >}}
 
 ```shell
-swapofff -a
+swapoff -a
 ```
 
 To check whether swap is disabled:
@@ -74,11 +74,9 @@ In addition, to permanently disable swaps, remove all the swap-related entries i
 
 + 64-bit generic hardware server platform in the Intel x86-64 architecture and 10 Gigabit network card, which are the same as the server requirements for deploying a TiDB cluster using binary. For details, refer to [Hardware recommendations](/how-to/deploy/hardware-recommendations.md).
 
-+ The server's disk, memory and CPU depends on the capacity planning of the cluster and the deployment topology.
++ The server's disk, memory and CPU depends on the capacity planning of the cluster and the deployment topology. It is recommended to deploy three master nodes, three etcd nodes, and several worker nodes to ensure high availability of the online Kubernetes cluster.
 
-  > **Note:**
-  >
-  > It is recommended to deploy three master nodes, three etcd nodes, and several worker nodes to ensure high availability of the online Kubernetes cluster. Meanwhile, the master node often acts as a worker node (that is, load can also be scheduled to the master node) to make full use of resources. You can set [reserved resources](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/) by kubelet to ensure that the system processes on the machine and the core processes of Kubernetes have sufficient resources to run under high workloads. This ensures the stability of the entire system.
+  Meanwhile, the master node often acts as a worker node (that is, load can also be scheduled to the master node) to make full use of resources. You can set [reserved resources](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/) by kubelet to ensure that the system processes on the machine and the core processes of Kubernetes have sufficient resources to run under high workloads. This ensures the stability of the entire system.
 
 The following text analyzes the deployment plan of three Kubernetes masters, three etcd and several worker nodes. To achieve a highly available deployment of multi-master nodes in Kubernetes, see [Kubernetes official documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/).
 
@@ -104,13 +102,13 @@ The TiDB cluster consists of three components: PD, TiKV and TiDB. The following 
 
 - PD component: 2C 4GB. PD occupies relatively less resources and only a small portion of local disks.
 
-  > **Note:**
-  >
-  > For easier management, you can put the PDs of all clusters on the master node. For example, to support 5 TiDB clusters, you can deploy 5 PD instances on each of the 3 master nodes. These PD instances use the same SSD disk (200 to 300 GigaBytes disk) on which you can create 5 directories as a mount point by means of bind mount. For detailed operation, refer to the [documentation](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs).
-  >
-  > If more machines are added to support more TiDB clusters, you can continue to add PD instances in this way on the master. If the resources on the master are exhausted, you can add PDs on other worker nodes in the same way. This method facilitates the planning and management of PD instances, while the downside is that if two machines go down, all TiDB clusters become unavailable due to the concentration of PD instances.
-  >
-  > Therefore, it is recommended to take out an SSD disk from each machine in all clusters and use it to provide PD instances like the master node. If you need to increase the capacity of a cluster by adding machines, you only need to create PD instances on the newly added machines.
+    > **Note:**
+    >
+    > For easier management, you can put the PDs of all clusters on the master node. For example, to support 5 TiDB clusters, you can deploy 5 PD instances on each of the 3 master nodes. These PD instances use the same SSD disk (200 to 300 GigaBytes disk) on which you can create 5 directories as a mount point by means of bind mount. For detailed operation, refer to the [documentation](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs).
+    >
+    > If more machines are added to support more TiDB clusters, you can continue to add PD instances in this way on the master. If the resources on the master are exhausted, you can add PDs on other worker nodes in the same way. This method facilitates the planning and management of PD instances, while the downside is that if two machines go down, all TiDB clusters become unavailable due to the concentration of PD instances.
+    >
+    > Therefore, it is recommended to take out an SSD disk from each machine in all clusters and use it to provide PD instances like the master node. If you need to increase the capacity of a cluster by adding machines, you only need to create PD instances on the newly added machines.
 
 - TiKV component: An NVMe disk of 8C 32GB for each TiKV instance. To deploy multiple TiKV instances on one machine, you must reserve enough buffers when planning capacity.
 
@@ -139,4 +137,8 @@ From the above analysis, a total of seven physical machines are required to supp
 - master and worker node: 48C 192GB, two SSD disks, one RAID5-applied SAS disk, three NVMe disks
 - worker node: 48C 192GB, one block SSD disk, one RAID5-applied SAS disk, two NVMe disks
 
-The recommended configuration above leaves plenty of available resources in addition to those taken by the components. To add monitoring and log components, use the same method to plan the type of machine you need to purchase and its configuration. Moreover, in a production environment, avoid deploying TiDB instances on the master node as much as possible due to the NIC bandwidth. If the NIC of the master nodes works at full capacity, the heartbeat report between the worker node and the master node will be affected and might leads to more serious problems.
+The above recommended configuration leaves plenty of available resources in addition to those taken by the components. If you want to add the monitoring and log components, use the same method to plan and purchase the type of machines with specific configurations.
+
+> **Note:**
+>
+> In a production environment, avoid deploying TiDB instances on a master node due to the network card bandwidth. If the network card of the master node works at full capacity, the heartbeat report between the worker node and the master node will be affected and might lead to serious problems.
