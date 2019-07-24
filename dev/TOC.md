@@ -80,6 +80,7 @@
     - [Overview](how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](how-to/monitor/monitor-a-cluster.md)
     - [TiDB Binlog Monitoring](how-to/monitor/tidb-binlog.md)
+    - [Monitor a TiDB Cluster in Kubernetes](how-to/monitor/tidb-in-kubernetes.md)
   + Migrate
     - [Overview](how-to/migrate/overview.md)
     + Migrate from MySQL
@@ -88,12 +89,15 @@
     - [Migrate from Aurora](how-to/migrate/from-aurora.md)
     - [Migrate from CSV](reference/tools/tidb-lightning/csv.md)
   + Maintain
+    + TiDB in Kubernetes
+      - [Maintain Kubernetes Nodes](how-to/maintain/tidb-in-kubernetes/tidb-node.md)
     - [Common Ansible Operations](how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
     + TiDB in Kubernetes
       - [Manage the TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
+      - [Collect Logs](how-to/maintain/tidb-in-kubernetes/log-collecting.md)
       - [Automatic Failover](how-to/maintain/tidb-in-kubernetes/auto-failover.md)
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
@@ -104,6 +108,8 @@
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
     - [Upgrade TiDB Binlog Cluster](how-to/upgrade/tidb-binlog.md)
+    - Upgrade TiDB in Kubernetes
+      - [Rolling Update TiDB](how-to/upgrade/tidb-in-kubernetes.md)
     - [Upgrade TiDB Operator and Kubernetes](how-to/upgrade/tidb-operator.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](how-to/troubleshoot/cluster-setup.md)
@@ -262,6 +268,8 @@
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
     + tidb-in-kubernetes
       - [TiDB Cluster Configuration on Kubernetes](reference/configuration/tidb-in-kubernetes/cluster-configuration.md)
+    + TiDB in Kubernetes
+      - [Backup Configuration](reference/configuration/tidb-in-kubernetes/backup-configuration.md)
       - [Local PV Configuration](reference/configuration/tidb-in-kubernetes/local-pv-configuration.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
@@ -293,6 +301,7 @@
   - [TiSpark](reference/tispark.md)
   - [TiDB Binlog Cluster Overview](reference/tidb-binlog-overview.md)
   + Tools
+    - [tkctl](reference/tools/tkctl.md)
     - [Mydumper](reference/tools/mydumper.md)
     - [Syncer](reference/tools/syncer.md)
     - [Loader](reference/tools/loader.md)
