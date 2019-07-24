@@ -1,10 +1,10 @@
 ---
-title: The Prerequisites of TiDB in Kubernetes
-summary: Learn the prerequisites of TiDB in Kubernetes
+title: Prerequisites for TiDB in Kubernetes
+summary: Learn the prerequisites for TiDB in Kubernetes.
 category: how-to
 ---
 
-# The Prerequisites of TiDB in Kubernetes
+# Prerequisites for TiDB in Kubernetes
 
 This document introduces the hardware and software prerequisites for deploying a TiDB cluster in Kubernetes.
 
@@ -13,8 +13,8 @@ This document introduces the hardware and software prerequisites for deploying a
 | Software Name | Version |
 | :--- | :--- |
 | Docker | Docker CE 18.09.6 |
-| Kubernetes |  v1.12.5+ |
-| CentOS |  7.6 and kernel 3.10.0-957 or later |
+| Kubernetes | v1.12.5+ |
+| CentOS | 7.6 and kernel 3.10.0-957 or later |
 
 ## The configuration of kernel parameters
 
@@ -34,7 +34,7 @@ This document introduces the hardware and software prerequisites for deploying a
 | net.bridge.bridge-nf-call-arptables | 1 |
 | net.bridge.bridge-nf-call-ip6tables | 1 |
 
-If no error is found in the report option when you are setting the `net.bridge.bridge-nf-call-*` parameters, check whether this module has been loaded by running the following command:
+When you set `net.bridge.bridge-nf-call-*` parameters, and if your option does not report errors, you can check whether this module is loaded by running the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -42,7 +42,7 @@ If no error is found in the report option when you are setting the `net.bridge.b
 lsmod|grep br_netfilter
 ```
 
-If this module is not loaded, run the following command to load the module:
+If this module is not loaded, run the following command to load it:
 
 {{< copyable "shell-regular" >}}
 
@@ -50,7 +50,7 @@ If this module is not loaded, run the following command to load the module:
 modprobe br_netfilter
 ```
 
-You also need to disable the swap of each deployed Kubernetes node and run the following command:
+You also need to disable swap on each deployed Kubernetes node by running:
 
 {{< copyable "shell-regular" >}}
 
@@ -58,84 +58,85 @@ You also need to disable the swap of each deployed Kubernetes node and run the f
 swapofff -a
 ```
 
-Run the following command to check if the swaps are disabled:
+To check whether swap is disabled:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-## If the swap column is all `0` in the result of the above command, this indicates that swaps are disabled.
 free -m
 ```
 
+If the above command shows that the swap column is all `0`, then swap is disabled.
+
 In addition, to permanently disable swaps, remove all the swap-related entries in `/etc/fstab`.
 
-## Kubernetes requirements for hardware and deployment
+## Hardware and deployment requirements
 
-+ A 64-bit general hardware server with Intel x86-64 architecture and a 10 Gigabit NIC, which is the same as the server requirements for deploying a TiDB binary cluster. For more detail, check [here](/dev/how-to/deploy/hardware-recommendations.md).
++ 64-bit generic hardware server platform in the Intel x86-64 architecture and 10 Gigabit network card, which are the same as the server requirements for deploying a TiDB cluster using binary. For details, refer to [Hardware recommendations](/how-to/deploy/hardware-recommendations.md).
 
 + The server's disk, memory and CPU depends on the capacity planning of the cluster and the deployment topology.
 
   > **Note:**
   >
-  > It is recommended to deploy three master nodes, three etcd nodes, and several worker nodes to ensure high availability of the online deployment in Kubernetes. At the same time, the master node often acts as a worker node (that is, load can also be scheduled to the master node) to make full use of machine resources. The [reserved resources](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/) is set by kubelet to ensures that the system processes on the machine and the core processes of Kubernetes still have sufficient resources to operate under high workload, thus ensuring the stability of the entire system.
+  > It is recommended to deploy three master nodes, three etcd nodes, and several worker nodes to ensure high availability of the online Kubernetes cluster. Meanwhile, the master node often acts as a worker node (that is, load can also be scheduled to the master node) to make full use of resources. You can set [reserved resources](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/) by kubelet to ensure that the system processes on the machine and the core processes of Kubernetes have sufficient resources to run under high workloads. This ensures the stability of the entire system.
 
-The following introduction is based on the plan of three Kubernetes masters, three etcd and several worker nodes. To deploy multi-master and highly available nodes in Kubernetes, check the [Kubernetes official documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/).
+The following text analyzes the deployment plan of three Kubernetes masters, three etcd and several worker nodes. To achieve a highly available deployment of multi-master nodes in Kubernetes, see [Kubernetes official documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/).
 
 ## Kubernetes requirements for system resources
 
-- Each machine requires a relatively large SAS disk (at least 1T) to store the data directories of Docker and kubelet.
+- It is required on each machine to have a relatively large SAS disk (at least 1T) to store the data directories of Docker and kubelet.
 
-  > **Note:**
+    > **Note:**
   >
   > The data from Docker mainly includes image and container logs. The data from kubelet are mainly data used in [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir).
 
-- To deploy a monitoring system for the Kubernetes cluster whose data is to be stored on disk, prepare a large SAS disk for Prometheus and the log monitoring system. It is recommended to prepare two large SAS machines for each machine.
+- If you need to deploy a monitoring system for the Kubernetes cluster and store the monitoring data on the disk, consider preparing a large SAS disk for Prometheus and also for the log monitoring system. This is also to guarantee that the purchased machines are homogeneous. For this reason, it is recommended to prepare two large SAS disks for each machine. 
 
-  > **Note:**
+    > **Note:**
   >
-  > In a production environment, it is recommended to use RAID 5 for these disks for the above two usages.
+  > In a production environment, it is recommended to use RAID 5 for the two types of disks. You can decide how many disks for which you want to use RAID 5 as needed.
 
-- It is recommended that the number of etcd be consistent with the Kubernetes master nodes. The etcd data is recommended to be stored on the SSD disk.
+- It is recommended that the number of etcd nodes be consistent with that of the Kubernetes master nodes, and you store the etcd data on the SSD disk.
 
 ## TiDB cluster's requirements for resources
 
-The TiDB cluster consists of three components: PD, TiKV and TiDB. The following recommendations on capacity planning is based on the standard TiDB cluster, namely three PDs, three TiKVs and two TiDBs:
+The TiDB cluster consists of three components: PD, TiKV and TiDB. The following recommendations on capacity planning is based on a standard TiDB cluster, namely three PDs, three TiKVs and two TiDBs:
 
-- PD component: 2C 4GB. PD occupies relatively less resources and only a small portion of local disks are used.
+- PD component: 2C 4GB. PD occupies relatively less resources and only a small portion of local disks.
 
   > **Note:**
   >
-  > For easier management, you can put the PDs of all clusters on the master node. For example, to support 5 TiDB clusters, you can plan to deploy 5 PD instances on each of the 3 master nodes. These PD instances use the same SSD disk (disk of 200 or 300 GigaBytes) on which you can create 5 directories as a mount points by means of bind mount. For detailed operation, check [documentation](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) for reference.
+  > For easier management, you can put the PDs of all clusters on the master node. For example, to support 5 TiDB clusters, you can deploy 5 PD instances on each of the 3 master nodes. These PD instances use the same SSD disk (200 to 300 GigaBytes disk) on which you can create 5 directories as a mount point by means of bind mount. For detailed operation, refer to the [documentation](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs).
   >
-  > If more machines are added to support more TiDB clusters, you can continue to add PD instances in this way on the master. If the resources on the master are exhausted, you can find other worker nodes to add PDs in the same way. This method is convenient for the planning and management of PD instances. However, if two machines go down, all TiDB clusters will be unavailable due to the concentration of PD instances.
+  > If more machines are added to support more TiDB clusters, you can continue to add PD instances in this way on the master. If the resources on the master are exhausted, you can add PDs on other worker nodes in the same way. This method facilitates the planning and management of PD instances, while the downside is that if two machines go down, all TiDB clusters become unavailable due to the concentration of PD instances.
   >
-  > Therefore, it is recommended to take out an SSD disk from each machines in the cluster to provide PD instances like the master node. If you need to enlarge capacity by adding machines in some clusters, you only need to create PD instances on the newly added machines.
+  > Therefore, it is recommended to take out an SSD disk from each machine in all clusters and use it to provide PD instances like the master node. If you need to increase the capacity of a cluster by adding machines, you only need to create PD instances on the newly added machines.
 
-- TiKV components: An NVMe disk of 8C 32GB for each TiKV instance. To deploy multiple TiKV instances on one machine, you must reserve enough buffers when planning capacity.
+- TiKV component: An NVMe disk of 8C 32GB for each TiKV instance. To deploy multiple TiKV instances on one machine, you must reserve enough buffers when planning capacity.
 
-- TiDB component: 8C 32 GB. Because TiDB component does not occupy the disk, you only need to consider the CPU and memory resources for it in your plan. The following example assumes that the capacity is 8C 32 GB.
+- TiDB component: 8C 32 GB capacity. Because the TiDB component does not occupy the disk space, you only need to consider the CPU and memory resources when planning. The following example assumes that the capacity is 8C 32 GB.
 
 ## A case of planning TiDB clusters
 
 This is an example of deploying 5 clusters (3 PDs + 3 TiKVs + 2 TiDBs), where PD is configured as 2C 4GB, TiDB as 8C 32GB, and TiKV as 8C 32GB. There are seven Kubernetes nodes, three of which are both master and worker nodes, and the other three are purely worker nodes. The distribution of each component is as follows:
 
-+ single master node:
++ Single master node:
 
-    - 1 etcd (2C 4GB) + 2 PD (2 \* 2C 2 \* 4GB) + 3 TiKV (3 \* 8C 3 \* 32GB) + 1 TiDB (8C 32GB), totalling 38C 140GB
+    - 1 etcd (2C 4GB) + 2 PDs (2 \* 2C 2 \* 4GB) + 3 TiKVs (3 \* 8C 3 \* 32GB) + 1 TiDB (8C 32GB), totalling 38C 140GB
     - Two SSD disks, one for etcd and one for two PD instances
     - The RAID5-applied SAS disk used for Docker and kubelet
     - Three NVMe disks for TiKV instances
 
-+ single worker node:
++ Single worker node:
 
-    - 3 PD (3 \* 2C 3 \* 4GB) + 2 TiKV (2 \* 8C 2 \* 32GB) + 2 TiDB (2 \* 8C 2 \* 32GB), totalling 38C 140GB
+    - 3 PDs (3 \* 2C 3 \* 4GB) + 2 TiKVs (2 \* 8C 2 \* 32GB) + 2 TiDBs (2 \* 8C 2 \* 32GB), totalling 38C 140GB
     - One SSD disk for three PD instances
     - The RAID5-applied SAS disk used for Docker and kubelet
     - Two NVMe disks for TiKV instances
 
-From the above analysis, a total of seven physical machines are required to support five sets of TiDB cluster. Three of the machines are master and worker nodes, and the remaining four are worker nodes. The requirements of machine configuration are as follows:
+From the above analysis, a total of seven physical machines are required to support five sets of TiDB cluster. Three of the machines are master and worker nodes, and the remaining four are worker nodes. The configuration requirements for the machines are as follows:
 
-- master and worker node: 48C 192GB, 2 block SSD disks, one RAID5-applied SAS disk, three NVMe disks
+- master and worker node: 48C 192GB, two SSD disks, one RAID5-applied SAS disk, three NVMe disks
 - worker node: 48C 192GB, one block SSD disk, one RAID5-applied SAS disk, two NVMe disks
 
 The recommended configuration above leaves plenty of available resources in addition to those taken by the components. To add monitoring and log components, use the same method to plan the type of machine you need to purchase and its configuration. Moreover, in a production environment, avoid deploying TiDB instances on the master node as much as possible due to the NIC bandwidth. If the NIC of the master nodes works at full capacity, the heartbeat report between the worker node and the master node will be affected and might leads to more serious problems.

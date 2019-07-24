@@ -55,7 +55,7 @@ You also need to disable the swap of each deployed Kubernetes node and run the f
 {{< copyable "shell-regular" >}}
 
 ```shell
-swapofff -a
+swapoff -a
 ```
 
 Run the following command to check if the swaps are disabled:
