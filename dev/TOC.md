@@ -335,12 +335,12 @@
     - [GKE](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
     - [Minikube](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
   + Deploy
-    - [Prerequisites for TiDB in Kubernetes](tidb-in-kubernetes/deploy/prerequisites.md)
+    - [Prerequisites](tidb-in-kubernetes/deploy/prerequisites.md)
+    - [TiDB Operator](tidb-in-kubernetes/deploy/tidb-operator.md)
+    - [TiDB in General Kubernetes](tidb-in-kubernetes/deploy/general-kubernetes.md)
     - [TiDB in AWS EKS](tidb-in-kubernetes/deploy/aws-eks.md)
     - [TiDB in GCP](how-to/tidb-in-kubernetes/gcp-gke.md)
     - [TiDB in Alibaba Cloud](how-to/tidb-in-kubernetes/alibaba-cloud.md)
-    - [TiDB in General Kubernetes](tidb-in-kubernetes/deploy/general-kubernetes.md)
-    - [Deploy TiDB Operator](tidb-in-kubernetes/deploy/tidb-operator.md)
   + Configure
     - [Cluster Initialization](tidb-in-kubernetes/initialize-cluster.md)
   - [Monitor](tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
@@ -353,7 +353,7 @@
   - [Scale](tidb-in-kubernetes/scale-in-kubernetes.md)
   + Upgrade
     - [TiDB Cluster](tidb-in-kubernetes/upgrade/tidb-cluster.md)
-    - [TiDb Operator](tidb-in-kubernetes/upgrade/tidb-operator.md)
+    - [TiDB Operator](tidb-in-kubernetes/upgrade/tidb-operator.md)
   + Reference
     + Configuration
       - [TiDB Cluster](tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
