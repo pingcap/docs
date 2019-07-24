@@ -39,7 +39,7 @@ To configure a scheduled full backup, modify the `scheduledBackup` section in th
     > You must set the scheduled full backup PV's [reclaim policy](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy) to `Retain` to keep your backup data safe.
 
 * Configure `scheduledBackup.schedule` in the [Cron](https://en.wikipedia.org/wiki/Cron) format to define the scheduling.
-* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the username and password that has the privilege to backup the database:
+* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the username and password that has the privilege to backup the database, and set `scheduledBackup.secretName` to the name of the created `Secret`(default to `backup-secret`):
 
     {{< copyable "shell-regular" >}}
 
@@ -71,7 +71,7 @@ Refer to the steps below to create an ad-hoc full backup job:
     >
     > You must set the ad-hoc full backup PV's [reclaim policy](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy) to `Retain` to keep your backup data safe.
 
-* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the username and password that has the privilege to backup the database:
+* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the username and password that has the privilege to backup the database, and set `secretName` in the `values.yaml` file to the name of the created `Secret`(default to `backup-secret`):
 
     {{< copyable "shell-regular" >}}
 
@@ -107,7 +107,7 @@ The helm chart `pingcap/tidb-backup` helps restore a TiDB cluster using backup d
     * Set `clusterName` to the target TiDB cluster name.
     * Set `mode` to `restore`.
     * Set `name` to the backup name you want to restore([view backups](#view-backups) helps you view all the backups available). If the backup is stored in `Google Cloud Storage`, `Ceph Object Storage` or `Amazon S3`, you must configure the corresponding section too (you might continue to use the same configuration you set in the [adhoc full backup](#ad-hoc-full-backup)).
-* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the user and password that has the privilege to restore the database (skip this if you have already created one in the [adhoc full backup](#ad-hoc-full-backup) section):
+* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the user and password that has the privilege to restore the database, and set `secretName` in the `values.yaml` file to the name of the created `Secret`(default to `backup-secret`, skip this if you have already created one in the [adhoc full backup](#ad-hoc-full-backup) section):
 
     {{< copyable "shell-regular" >}}
 
