@@ -36,7 +36,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
 
 ## Use TiKV Control in Kubernetes
 
-[TiKV Control](reference/tools/tikv-control.md) is the command-line tool for TiKV. When using TiKV Control for TiDB clusters in Kubernetes, be aware that different operation mode may involve different steps.
+[TiKV Control](reference/tools/tikv-control.md) is the command-line tool for TiKV. When using TiKV Control for TiDB clusters in Kubernetes, be aware that each operation mode involves different steps, as described below:
 
 * **Remote Mode**: In this mode, `tikv-ctl` accesses the TiKV service or the PD service through network. Firstly you need to establish the connection from local to the PD service and the target TiKV node using `kubectl port-forward`:
 
