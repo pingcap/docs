@@ -70,7 +70,7 @@ Before deploying a TiDB cluster on AWS EKS, make sure the following requirements
 
 ## Deploy
 
-The default setup creates a new VPC and a `t2.micro` instance as the bastion machine, and an EKS cluster with following ec2 instances as worker nodes:
+The default setup creates a new VPC and a `t2.micro` instance as the bastion machine, and an EKS cluster with following Amazon EC2 instances as worker nodes:
 
 * 3 m5.xlarge instances for PD
 * 3 c5d.4xlarge instances for TiKV
