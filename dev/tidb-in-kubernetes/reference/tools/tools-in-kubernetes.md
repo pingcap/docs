@@ -10,7 +10,7 @@ Operations on TiDB in Kubernetes require some open source tools. In the meantime
 
 ## Use PD Control in Kubernetes
 
-[PD Control](reference/tools/pd-control.md) is the command line tool for PD (Placement Driver). To use PD Control to operate on TiDB clusters in Kubernetes, firstly you need to establish the connection from local to the PD service using `kubectl port-forward`:
+[PD Control](reference/tools/pd-control.md) is the command-line tool for PD (Placement Driver). To use PD Control to operate on TiDB clusters in Kubernetes, firstly you need to establish the connection from local to the PD service using `kubectl port-forward`:
 
 {{< copyable "shell-regular" >}}
 
@@ -36,7 +36,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
 
 ## Use TiKV Control in Kubernetes
 
-[TiKV Control](reference/tools/tikv-control.md) is the command line tool for TiKV. When using TiKV Control for TiDB clusters in Kubernetes, be aware that different operation mode may involve different steps.
+[TiKV Control](reference/tools/tikv-control.md) is the command-line tool for TiKV. When using TiKV Control for TiDB clusters in Kubernetes, be aware that different operation mode may involve different steps.
 
 * **Remote Mode**: In this mode, `tikv-ctl` accesses the TiKV service or the PD service through network, so firstly you need to establish the connection from local to the PD service and the target TiKV node using `kubectl port-forward`:
 
@@ -106,7 +106,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
 
 ## Use TiDB Control in Kubernetes
 
-[TiDB Control](reference/tools/tidb-control.md) is the command line tool for TiDB. To use TiDB Control in Kubernetes, you need to access the TiDB node and the PD service from local. It is suggested you turn on the connection from local to the TiDB node and the PD service using `kubectl port-forward`: from local to the PD service using `kubectl port-forward`:
+[TiDB Control](reference/tools/tidb-control.md) is the command-line tool for TiDB. To use TiDB Control in Kubernetes, you need to access the TiDB node and the PD service from local. It is suggested you turn on the connection from local to the TiDB node and the PD service using `kubectl port-forward`: from local to the PD service using `kubectl port-forward`:
 
 {{< copyable "shell-regular" >}}
 
