@@ -28,6 +28,8 @@ pd-ctl -d config show
 
 Assume that your local port `2379` has been occupied and you want to switch to another port. Now you need to explicitly assign a PD port for `pd-ctl`:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
 pd-ctl -u 127.0.0.1:<port> -d config show
 ```
@@ -64,7 +66,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
     tikv-ctl --pd 127.0.0.1:2379 compact-cluster
     ```
 
-* **Local Mode**：In this mode, `tikv-ctl` accesses data files of TiKV and requires running TiKV instances to be stopped. To operate in the local mode,first you need to enter the [Diagnostic Mode](/tidb-in-kubernetes/troubleshoot.md#use-the-diagnostic-mode) to turn off automatic re-starting for the TiKV instance, turn off the TiKV thread, and use the `tkctl debug` command to start in the target TiKV Pod a new container that contains the `tikv-ctl` executable. The steps are as follows:
+* **Local Mode**：In this mode, `tikv-ctl` accesses data files of TiKV and requires running TiKV instances to be stopped. To operate in the local mode, first you need to enter the [Diagnostic Mode](/tidb-in-kubernetes/troubleshoot.md#use-the-diagnostic-mode) to turn off automatic re-starting for the TiKV instance, stop the TiKV process, and use the `tkctl debug` command to start in the target TiKV Pod a new container that contains the `tikv-ctl` executable. The steps are as follows:
 
     1. Enter the Diagnostic mode:
 
@@ -74,7 +76,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
         kubectl annotate pod <tikv-pod-name> -n <namespace> runmode=debug
         ```
 
-    2. Turn off the TiKV thread:
+    2. Stop the TiKV process:
 
         {{< copyable "shell-regular" >}}
 
@@ -100,7 +102,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
 
         > **Note:**
         >
-        >   The default db path of TiKV instances in the debug container is `/proc/1/root/var/lib/tikv/db size -r 2`
+        >   The default db path of TiKV instances in the debug container is `/proc/1/root/var/lib/tikv/db`
 
 ## Use TiDB Control in Kubernetes
 
