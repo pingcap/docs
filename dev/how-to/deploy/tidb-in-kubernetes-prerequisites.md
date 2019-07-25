@@ -34,7 +34,7 @@ This document introduces the hardware and software prerequisites for deploying a
 | net.bridge.bridge-nf-call-arptables | 1 |
 | net.bridge.bridge-nf-call-ip6tables | 1 |
 
-When you set `net.bridge.bridge-nf-call-*` parameters, and if your option reports an errors, you can check whether this module is loaded by running the following command:
+When you set `net.bridge.bridge-nf-call-*` parameters, and if your option reports an error, you can check whether this module is loaded by running the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -91,8 +91,8 @@ The following text analyzes the deployment plan of three Kubernetes masters, thr
 - If you need to deploy a monitoring system for the Kubernetes cluster and store the monitoring data on the disk, consider preparing a large SAS disk for Prometheus and also for the log monitoring system. This is also to guarantee that the purchased machines are homogeneous. For this reason, it is recommended to prepare two large SAS disks for each machine.
 
     > **Note:**
-  >
-  > In a production environment, it is recommended to use RAID 5 for the two types of disks. You can decide how many disks for which you want to use RAID 5 as needed.
+    >
+    > In a production environment, it is recommended to use RAID 5 for the two types of disks. You can decide how many disks for which you want to use RAID 5 as needed.
 
 - It is recommended that the number of etcd nodes be consistent with that of the Kubernetes master nodes, and you store the etcd data on the SSD disk.
 
@@ -104,7 +104,7 @@ The TiDB cluster consists of three components: PD, TiKV and TiDB. The following 
 
     > **Note:**
     >
-    > For easier management, you can put the PDs of all clusters on the master node. For example, to support 5 TiDB clusters, you can deploy 5 PD instances on each of the 3 master nodes. These PD instances use the same SSD disk (200 to 300 GigaBytes disk) on which you can create 5 directories as a mount point by means of bind mount. For detailed operation, refer to the [documentation](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs).
+    > For easier management, you can put the PDs of all clusters on the master node. For example, to support five TiDB clusters, you can deploy five PD instances on each of the 3 master nodes. These PD instances use the same SSD disk (200 to 300 GigaBytes disk) on which you can create five directories as a mount point by means of bind mount. For detailed operation, refer to the [documentation](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs).
     >
     > If more machines are added to support more TiDB clusters, you can continue to add PD instances in this way on the master. If the resources on the master are exhausted, you can add PDs on other worker nodes in the same way. This method facilitates the planning and management of PD instances, while the downside is that if two machines go down, all TiDB clusters become unavailable due to the concentration of PD instances.
     >
@@ -116,7 +116,7 @@ The TiDB cluster consists of three components: PD, TiKV and TiDB. The following 
 
 ## A case of planning TiDB clusters
 
-This is an example of deploying 5 clusters (each cluster has 3 PDs, 3 TiKVs, and 2 TiDBs), where PD is configured as 2C 4GB, TiDB as 8C 32GB, and TiKV as 8C 32GB. There are seven Kubernetes nodes, three of which are both master and worker nodes, and the other four are purely worker nodes. The distribution of each component is as follows:
+This is an example of deploying five clusters (each cluster has 3 PDs, 3 TiKVs, and 2 TiDBs), where PD is configured as 2C 4GB, TiDB as 8C 32GB, and TiKV as 8C 32GB. There are seven Kubernetes nodes, three of which are both master and worker nodes, and the other four are purely worker nodes. The distribution of each component is as follows:
 
 + Single master node:
 
