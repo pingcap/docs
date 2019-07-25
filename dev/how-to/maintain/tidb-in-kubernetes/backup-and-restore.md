@@ -29,15 +29,15 @@ Scheduled full backup is a task created alongside the TiDB cluster, and it runs 
 
 To configure a scheduled full backup, modify the `scheduledBackup` section in the `values.yaml` file of the TiDB cluster:
 
-* Set `scheduledBackup.create` to `true`.
-* Set `scheduledBackup.storageClassName` to the `storageClass` of the PV that stores the backup data.
+1. Set `scheduledBackup.create` to `true`.
+2. Set `scheduledBackup.storageClassName` to the `storageClass` of the PV that stores the backup data.
 
     > **Note:**
     >
     > You must set the scheduled full backup PV's [reclaim policy](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy) to `Retain` to keep your backup data safe.
 
-* Configure `scheduledBackup.schedule` in the [Cron](https://en.wikipedia.org/wiki/Cron) format to define the scheduling.
-* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the username and password (the user must have the privileges to back up the data). Meanwhile, set `scheduledBackup.secretName` to the name of the created `Secret`(default to `backup-secret`):
+3. Configure `scheduledBackup.schedule` in the [Cron](https://en.wikipedia.org/wiki/Cron) format to define the scheduling.
+4. Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the username and password (the user must have the privileges to back up the data). Meanwhile, set `scheduledBackup.secretName` to the name of the created `Secret`(default to `backup-secret`):
 
     {{< copyable "shell-regular" >}}
 
@@ -45,7 +45,7 @@ To configure a scheduled full backup, modify the `scheduledBackup` section in th
     kubectl create secret generic backup-secret -n <namespace> --from-literal=user=<user> --from-literal=password=<password>
     ```
 
-* Create a new TiDB cluster with the scheduled full backup task by running `helm install`, or enable the scheduled full backup for the existing cluster by `helm upgrade`:
+5. Create a new TiDB cluster with the scheduled full backup task by running `helm install`, or enable the scheduled full backup for the existing cluster by `helm upgrade`:
 
     {{< copyable "shell-regular" >}}
 
@@ -69,7 +69,7 @@ Follow the steps below to perform an ad-hoc full backup task:
     >
     > You must set the ad-hoc full backup PV's [reclaim policy](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy) to `Retain` to keep your backup data safe.
 
-* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the username and password (the user must have the privileges to back up the data). Meanwhile, set `secretName` in the `values.yaml` file to the name of the created `Secret`(default to `backup-secret`):
+2. Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the username and password (the user must have the privileges to back up the data). Meanwhile, set `secretName` in the `values.yaml` file to the name of the created `Secret`(default to `backup-secret`):
 
     {{< copyable "shell-regular" >}}
 
@@ -77,7 +77,7 @@ Follow the steps below to perform an ad-hoc full backup task:
     kubectl create secret generic backup-secret -n <namespace> --from-literal=user=<user> --from-literal=password=<password>
     ```
 
-* Run the following command to perform an ad-hoc backup task:
+3. Run the following command to perform an ad-hoc backup task:
 
     {{< copyable "shell-regular" >}}
 
@@ -101,11 +101,11 @@ If you store your backup data in [Google Cloud Storage](https://cloud.google.com
 
 The `pingcap/tidb-backup` helm chart helps restore a TiDB cluster using backup data. Follow the steps below to restore:
 
-* Modify the `values.yaml` file:
+1. Modify the `values.yaml` file:
     * Set `clusterName` to the target TiDB cluster name.
     * Set `mode` to `restore`.
     * Set `name` to the name of the backup you want to restore (refer to [view backups](#view-backups) to view available backups). If the backup is stored in [Google Cloud Storage](https://cloud.google.com/storage/), [Ceph Object Storage](https://ceph.com/ceph-storage/object-storage/) or [Amazon S3](https://aws.amazon.com/s3/), you must configure the corresponding sections and make sure that the same configurations are applied as you perform the [full backup](#full-backup).
-* Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the user and password (the user must have the privileges to back up the data). Meanwhile, set `secretName` in the `values.yaml` file to the name of the created `Secret` (default to `backup-secret`; skip this if you have already created one when you perform [full backup](#full-backup)):
+2. Create a Kubernetes [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the user and password (the user must have the privileges to back up the data). Meanwhile, set `secretName` in the `values.yaml` file to the name of the created `Secret` (default to `backup-secret`; skip this if you have already created one when you perform [full backup](#full-backup)):
 
     {{< copyable "shell-regular" >}}
 
@@ -113,7 +113,7 @@ The `pingcap/tidb-backup` helm chart helps restore a TiDB cluster using backup d
     kubectl create secret generic backup-secret -n <namespace> --from-literal=user=<user> --from-literal=password=<password>
     ```
 
-* Restore the backup:
+3. Restore the backup:
 
     {{< copyable "shell-regular" >}}
 
