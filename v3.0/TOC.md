@@ -49,7 +49,7 @@
     - [TiSpark Quick Start Guide](how-to/deploy/tispark.md)
   + Deploy
     - [Hardware Recommendations](how-to/deploy/hardware-recommendations.md)
-    - [The Prerequisites of TiDB in Kubernetes](how-to/deploy/tidb-in-kubernetes-prerequisites.md)
+    - [Prerequisites for TiDB in Kubernetes](how-to/deploy/tidb-in-kubernetes-prerequisites.md)
     + From Binary Tarball
       - [For Testing Environments](how-to/deploy/from-tarball/testing-environment.md)
       - [For Production Environments](how-to/deploy/from-tarball/production-environment.md)
