@@ -235,7 +235,7 @@ By default, the terraform script will create a new VPC. You can use an existing 
 > **Note:**
 >
 > - Reusing VPC and subnets of an existing EKS cluster is not supported yet due to limitations of AWS and Terraform, so only change this option if you have to use a manually created VPC.
-> - The CNI plug-in on the EKS Node reserves some IP resources for each node. When manually creating a VPC, it is recommended to set the subnet mask length to 18~20 to ensure sufficient IP resources.
+> - The CNI plug-in on the EKS Node reserves some IP resources for each node. When manually creating a VPC, it is recommended to set the subnet mask length to 18~20 to ensure sufficient IP resources, or configure the CNI plugin to reserver less IP resources according to [EKS CNI plugin documentation](https://github.com/aws/amazon-vpc-cni-k8s#cni-configuration-variables).
 
 An Amazon EC2 instance is also created by default as the bastion machine to connect to the created TiDB cluster. This is because the TiDB service is exposed as an [Internal Elastic Load Balancer](https://aws.amazon.com/blogs/aws/internal-elastic-load-balancers/). The EC2 instance has MySQL and Sysbench pre-installed, so you can use SSH to log into the EC2 instance and connect to TiDB using the ELB endpoint. You can disable the bastion instance creation by setting `create_bastion` to `false` if you already have an EC2 instance in the VPC.
 
