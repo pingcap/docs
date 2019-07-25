@@ -6,7 +6,7 @@ category: reference
 
 # Tools in Kubernetes
 
-Operations on TiDB in Kubernetes require some open source tools. In the meantime, there are some special requirements for operations using TiDB tools in the Kubernetes environment. This documents introduces in details about related operation tools for TiDB in Kubernetes.
+Operations on TiDB in Kubernetes require some open source tools. In the meantime, there are some special requirements for operations using TiDB tools in the Kubernetes environment. This documents introduces in details the related operation tools for TiDB in Kubernetes.
 
 ## Use PD Control in Kubernetes
 
@@ -26,7 +26,7 @@ After the above command is executed, you can access the PD service via `127.0.0.
 pd-ctl -d config show
 ```
 
-Assume that your local port `2379` has been occupied and you want to switch to another port. Now you need to explicitly assign a PD port for `pd-ctl`:
+Assume that your local port `2379` has been occupied and you want to switch to another port. Then you need to explicitly assign a PD port for `pd-ctl`:
 
 {{< copyable "shell-regular" >}}
 
@@ -38,7 +38,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
 
 [TiKV Control](reference/tools/tikv-control.md) is the command-line tool for TiKV. When using TiKV Control for TiDB clusters in Kubernetes, be aware that different operation mode may involve different steps.
 
-* **Remote Mode**: In this mode, `tikv-ctl` accesses the TiKV service or the PD service through network, so firstly you need to establish the connection from local to the PD service and the target TiKV node using `kubectl port-forward`:
+* **Remote Mode**: In this mode, `tikv-ctl` accesses the TiKV service or the PD service through network. Firstly you need to establish the connection from local to the PD service and the target TiKV node using `kubectl port-forward`:
 
     {{< copyable "shell-regular" >}}
 
@@ -92,7 +92,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
         tkctl debug <tikv-pod-name> -c tikv
         ```
 
-    4. Start using `tikv-ctl` in the local mode. It should be noted that the root file system of `tikv` is under `/proc/1/root`, so you need to adjust the path of the data directory accordingly when executing a command:
+    4. Start using `tikv-ctl` in local mode. It should be noted that the root file system of `tikv` is under `/proc/1/root`, so you need to adjust the path of the data directory accordingly when executing a command:
 
         {{< copyable "shell-regular" >}}
 
@@ -106,7 +106,7 @@ pd-ctl -u 127.0.0.1:<port> -d config show
 
 ## Use TiDB Control in Kubernetes
 
-[TiDB Control](reference/tools/tidb-control.md) is the command-line tool for TiDB. To use TiDB Control in Kubernetes, you need to access the TiDB node and the PD service from local. It is suggested you turn on the connection from local to the TiDB node and the PD service using `kubectl port-forward`: from local to the PD service using `kubectl port-forward`:
+[TiDB Control](reference/tools/tidb-control.md) is the command-line tool for TiDB. To use TiDB Control in Kubernetes, you need to access the TiDB node and the PD service from local. It is suggested you turn on the connection from local to the TiDB node and the PD service using `kubectl port-forward`:
 
 {{< copyable "shell-regular" >}}
 
@@ -130,9 +130,9 @@ tidb-ctl schema in mysql
 
 ## Use Helm
 
-[Helm](https://helm.sh/) is a package management tool for Kubernetes. You can refer to [Helm Documentation](https://github.com/helm/helm#install) to install Helm. The steps are as follows:
+[Helm](https://helm.sh/) is a package management tool for Kubernetes. Refer to [Helm Documentation](https://github.com/helm/helm#install) to install Helm. The steps are as follows:
 
-1. Install helm client
+1. Install Helm client
 
     {{< copyable "shell-regular" >}}
 
@@ -140,7 +140,7 @@ tidb-ctl schema in mysql
     curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
     ```
 
-    Or if on macOS, you can use homebrew to install Helm by `brew install kubernetes-helm`.
+    Or if on macOS, you can use homebrew to install Helm via the `brew install kubernetes-helm` command.
 
 2. Install Helm server.
 
@@ -161,7 +161,7 @@ tidb-ctl schema in mysql
     kubectl get po -n kube-system -l name=tiller
     ```
 
-   If `RBAC` is not enabled for the Kubernetes cluster, then use the following command to install `tiller`:
+   If `RBAC` is not enabled for the Kubernetes cluster, use the following command to install `tiller`:
 
     {{< copyable "shell-regular" >}}
 
@@ -175,7 +175,7 @@ Kubernetes applications are packed as chart in Helm. PingCAP provides three helm
 * `tidb-cluster`: used to deploy TiDB clusters;
 * `tidb-backup`: used to backup or restore TiDB clusters;
 
-These charts are hosted in the Helm chart Repo `http://charts.pingcap.org/` maintained by PingCAP. You can add the Repo to your local using the following command:
+These charts are hosted in the Helm chart repository `http://charts.pingcap.org/` maintained by PingCAP. You can add this repository to your local using the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -198,7 +198,7 @@ pingcap/tidb-cluster    v1.0.0-rc.1                 A Helm chart for TiDB Cluste
 pingcap/tidb-operator   v1.0.0-rc.1                 tidb-operator Helm chart for Kubernetes
 ```
 
-When a new version of chart has been released, you can use `helm repo update` to update the Repo cached locally:
+When a new version of chart has been released, you can use `helm repo update` to update the repository cached locally:
 
 {{< copyable "shell-regular" >}}
 
@@ -206,7 +206,7 @@ When a new version of chart has been released, you can use `helm repo update` to
 helm repo update
 ```
 
-Common Helm operations include `helm install`, `helm upgrade`, and `helm del`. Helm chart usually contains many configurable parameters which could be tedious to configure manually. For convenience, it is recommended you configure using a YAML file. Based on the conventions in the Helm community, we name our YAML file used for Helm configuration `values.yaml`.
+Common Helm operations include `helm install`, `helm upgrade`, and `helm del`. Helm chart usually contains many configurable parameters which could be tedious to configure manually. For convenience, it is recommended that you configure using a YAML file. Based on the conventions in the Helm community, the YAML file used for Helm configuration is named `values.yaml` in this document.
 
 When performing a deployment or upgrade, you must specify the chart name (`chart-name`) and the name for the deployed application (`release-name`). You can also specify one or multiple `values.yaml` files to configure charts. In addition, you can use `chart-version` to specify the chart version (by default the latest GA is used). The steps in command line are as follows:
 
@@ -226,7 +226,7 @@ When performing a deployment or upgrade, you must specify the chart name (`chart
     helm upgrade <release-name> <chart-name> --version=<chart-version> -f <values-file>
     ```
 
-* If you want to delete the application deployed by Helm, use the following command:
+* To delete the application deployed by Helm, run the following command:
 
 {{< copyable "shell-regular" >}}
 
