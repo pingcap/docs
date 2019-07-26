@@ -45,7 +45,6 @@
     - [TiSpark Quick Start Guide](how-to/deploy/tispark.md)
   + Deploy
     - [Hardware Recommendations](how-to/deploy/hardware-recommendations.md)
-    - [Prerequisites for TiDB in Kubernetes](how-to/deploy/tidb-in-kubernetes-prerequisites.md)
     + From Binary Tarball
       - [For Testing Environments](how-to/deploy/from-tarball/testing-environment.md)
       - [For Production Environments](how-to/deploy/from-tarball/production-environment.md)
@@ -59,7 +58,6 @@
     - [Data Migration with Ansible](how-to/deploy/data-migration-with-ansible.md)
     - [Deploy TiDB Operator](how-to/deploy/tidb-operator.md)
     - [TiDB Binlog Cluster Deployment](how-to/deploy/tidb-binlog.md)
-    - [Access the TiDB Cluster in Kubernetes](how-to/deploy/orchestrated/tidb-in-kubernetes/access-tidb.md)
   + Configure
     - [Time Zone](how-to/configure/time-zone.md)
     - [Memory Control](how-to/configure/memory-control.md)
