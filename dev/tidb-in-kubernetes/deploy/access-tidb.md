@@ -67,7 +67,7 @@ To check you can access TiDB services by using the IP of what nodes, see the fol
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl -n stability-cluster1 get pods -l "app.kubernetes.io/component=tidb,app.kubernetes.io/instance=<release}" -ojsonpath="{range .items[*]}{.spec.nodeName}{'\n'}{end>"
+    kubectl -n stability-cluster1 get pods -l "app.kubernetes.io/component=tidb,app.kubernetes.io/instance=<release>" -ojsonpath="{range .items[*]}{.spec.nodeName}{'\n'}{end}"
     ```
 
 ## LoadBalancer
