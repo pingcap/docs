@@ -45,6 +45,7 @@
     - [TiSpark Quick Start Guide](how-to/deploy/tispark.md)
   + Deploy
     - [Hardware Recommendations](how-to/deploy/hardware-recommendations.md)
+    - [Prerequisites for TiDB in Kubernetes](how-to/deploy/tidb-in-kubernetes-prerequisites.md)
     + From Binary Tarball
       - [For Testing Environments](how-to/deploy/from-tarball/testing-environment.md)
       - [For Production Environments](how-to/deploy/from-tarball/production-environment.md)
@@ -85,6 +86,14 @@
     - [Backup and Restore](how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
+<<<<<<< HEAD
+=======
+    + TiDB in Kubernetes
+      - [Manage the TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
+      - [Backup and Restore](how-to/maintain/tidb-in-kubernetes/backup-and-restore.md)
+      - [Collect Logs](how-to/maintain/tidb-in-kubernetes/log-collecting.md)
+      - [Automatic Failover](how-to/maintain/tidb-in-kubernetes/auto-failover.md)
+>>>>>>> c6a23062c3bcde7704401d80f5c1e811e1a9c140
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
