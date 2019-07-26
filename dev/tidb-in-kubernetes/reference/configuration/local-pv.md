@@ -18,12 +18,12 @@ For more information, refer to [Kubernetes local storage](https://kubernetes.io/
 
 ## Data Security
 
-- By default, when a local PV is released, the provisioner will recycle it. You can set the relaimi policy of your storage class to `Retain` to prevent it from being recycled automatically. When confirming that a PV's data can be deleted, modify its reclaim policy to `Delete`. For how to change PV reclaim policy in Kubernetes, please refer to [this doc](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/).
+By default, when a local PV is released, the provisioner recycles it. You can set the reclaim policy of your storage class to `Retain` to prevent data from being recycled automatically. After confirming that a PV's data can be deleted, modify its reclaim policy to `Delete`. For how to change PV reclaim policy in Kubernetes, refer to [this doc](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/).
 
  ## Best Practices
 
-- The path of the local PV is the unique identifier of local storage on the node, it's recommended to utilize the UUID of the device to generate path.
-- For IO isolation, a whole disk per volume is recommended.
-- For capacity isolation, separate partition per volume is recommended.
+- The path of local PV is the unique identifier of local storage on the node. To avoid conflict, it's recommended to use the UUID of the device to generate a unique path.
+- For IO isolation, a whole physical disk per volume is recommended.
+- For capacity isolation, a separate partition per volume is recommended.
 
-Refer to [this doc](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/best-practices.md) for more best practices with local PV in kubernetes.
+Refer to [Best Practices](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/best-practices.md) for more information with local PV in Kubernetes.
