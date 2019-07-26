@@ -181,7 +181,7 @@ kube-node-3   Ready    <none>   9m32s   v1.12.5   10.192.0.5    <none>        De
 
 > **Note:**
 >
-> <chartVersion> will be used in the rest of the document to represent the chart version, e.g. `<chart_version>`.
+> <chartVersion> will be used in the rest of the document to represent the chart version, e.g. `v1.0.0-rc.1`.
 
 Once the K8s cluster is up and running, we can add chart repo and install TiDB Operator into it using `helm`:
 
