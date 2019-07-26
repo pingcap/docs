@@ -269,7 +269,7 @@
     + tidb-in-kubernetes
       - [Backup Configuration](reference/configuration/tidb-in-kubernetes/backup-configuration.md)
       - [Local PV Configuration](reference/configuration/tidb-in-kubernetes/local-pv-configuration.md)
-      - [TiDB Cluster Configuration in Kubernetes](reference/configuration/tidb-in-kubernetes/cluster-configuration.md)
+      - [TiDB Cluster Configurations in Kubernetes](reference/configuration/tidb-in-kubernetes/cluster-configuration.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)

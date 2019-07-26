@@ -1,145 +1,140 @@
 ---
-title: TiDB Cluster Configuration on Kubernetes
-summary: Learn the configuration of TiDB cluster on Kubernetes.
+title: Kubernetes 上的 TiDB 集群配置
 category: reference
 ---
 
-# TiDB Cluster Configuration in Kubernetes
+# Kubernetes 上的 TiDB 集群配置
 
-This document introduces the following items of a TiDB cluster in Kubernetes:
+本文介绍 Kubernetes 上 TiDB 集群的配置参数、资源配置，以及容灾配置。
 
-+ The parameters for configuration
-+ The configuration of resources
-+ The configuration of disaster recovery
+## 配置参数
 
-## Parameters for configuration
+TiDB Operator 使用 Helm 部署和管理 TiDB 集群。通过 Helm 获取的配置文件默认提供了基本的配置，通过这个基本配置，可以快速启动一个 TiDB 集群。但是如果用户需要特殊配置或是用于生产环境，则需要根据以下配置参数列表手动配置对应的配置项。
 
-TiDB Operator deploys and manages TiDB clusters using Helm. The configuration file obtained through Helm provides the basic configuration by default with which you could quickly start a TiDB cluster. However, if you need special configuration or are deploying in a production environment, you need to manually configure the corresponding parameters according to the table below.
-
-> **Note:**
+> **注意：**
 >
-> In the following table, `values.yaml` refers to the TiDB cluster's configuration file to be modified.
+> 下文用 `values.yaml` 指代要修改的 TiDB 集群配置文件。
 
-| Parameter | Description | Default Value |
+| 参数名 | 说明 | 默认值 |
 | :----- | :---- | :----- |
-| `rbac.create` | Whether to enable the RBAC of Kubernetes | `true` |
-| `clusterName` | TiDB cluster name. This variable is unset by default. `tidb-cluster` directly replaces this parameter with `RealeaseName` when the cluster is being installed. | `nil` |
-| `extraLabels` | The custom labels attached to TiDB cluster. See: [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) | `{}` |
-| `schedulerName` | The scheduler used by TiDB cluster | `tidb-scheduler` |
-| `timezone` | The default timezone used by TiDB cluster | `UTC` |
-| `pvReclaimPolicy` | The reclaim policy for PV (Persistent Volume) used by TiDB cluster | `Retain` |
-| `services[0].name` | The name of the service that TiDB cluster exposes | `nil` |
-| `services[0].type` | The type of service that TiDB cluster exposes (selected from `ClusterIP`, `NodePort` and `LoadBalancer`) | `nil` |
-| `discovery.image` | The image of PD's Service Discovery Component in a TiDB cluster. This component is used to provide service discovery for each PD instance to coordinate the starting sequence when the PD cluster is started for the first time. | `pingcap/tidb-operator:v1.0.0-beta.3` |
-| `discovery.imagePullPolicy` | The pulling policy for the image of PD's Service Discovery Component | `IfNotPresent` |
-| `discovery.resoureces.limits.cpu` | The limit of the image of PD's Service Discovery Component on CPU resource | `250m` |
-| `discovery.resoureces.limits.memory` | The limit of the image of PD's Service Discovery Component on memory resource  | `150Mi` |
-| `discovery.resoureces.requests.cpu` | The image of PD's Service Discovery Component's request for CPU resource  | `80m` |
-| `discovery.resoureces.requests.memory` | The image of PD's Service Discovery Component's request for memory resource | `50Mi` |
-| `enableConfigMapRollout` | Whether to enable the automatic rolling update of TiDB cluster. If enabled, TiDB cluster automatically updates the corresponding components when the `ConfigMap` of this cluster changes. This configuration is only supported in `tidb-operator` v1.0 and later versions. | `false` |
-| `pd.config` | The configuration of PD. Check [this link](https://github.com/pingcap/pd/blob/master/conf/config.toml) for the file of the default PD configuration (by choosing the tag of the corresponding PD version). You can see [this document](https://pingcap.com/docs-cn/v3.0/reference/configuration/pd-server/configuration-file/) for the detailed description of the configuration parameters (by choosing the corresponding document version). Here you must **modify the configuration based on the format of the configuration file**.  | If the version of TiDB Operator is v1.0.0-beta.3 or earlier, the default value is <br>`nil`<br>If the version of TiDB Operator is later than v1.0.0-beta.3, the default value is <br>`[log]`<br>`level = "info"`<br>`[replication]`<br>`location-labels = ["region", "zone", "rack", "host"]`.<br>Example of configuration:<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`[log]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`level = "info"`<br>&nbsp;&nbsp;&nbsp;&nbsp;`[replication]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`location-labels = ["region", "zone", "rack", "host"]` |
-| `pd.replicas` | The number of Pods in PD | `3` |
-| `pd.image` | PD image | `pingcap/pd:v3.0.0-rc.1` |
-| `pd.imagePullPolicy` | The pulling policy for PD image | `IfNotPresent` |
-| `pd.logLevel` | The log level of PD<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure the parameter via `pd.config`: <br>`[log]`<br>`level = "info"` | `info` |
-| `pd.storageClassName` | The `storageClass` used by PD. `storageClassName` refers to a type of storage provided by the Kubernetes cluster, which might map to a level of service quality, a backup policy, or to any policy determined by the cluster administrator. Detailed reference: [storage-classes](https://kubernetes.io/docs/concepts/storage/storage-classes) | `local-storage` |
-| `pd.maxStoreDownTime` | This parameter indicates how soon a store node is marked as `down` after it is disconnected. When the state changes to `down`, the store node starts migrating data to other store nodes.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `pd.config`:<br>`[schedule]`<br>`max-store-down-time = "30m"`  | `30m` |
-| `pd.maxReplicas` | The number of data replica in the TiDB cluster<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `pd.config`:<br>`[replication]`<br>`max-replicas = 3` | `3` |
-| `pd.resources.limits.cpu` | The limit on CPU resource per PD Pod | `nil` |
-| `pd.resources.limits.memory` | The limit on memory resource per PD Pod | `nil` |
-| `pd.resources.limits.storage` | The limit on storage per PD Pod | `nil` |
-| `pd.resources.requests.cpu` | Each PD Pod's request for CPU resource | `nil` |
-| `pd.resources.requests.memory` | Each PD Pod's request for memory resource | `nil` |
-| `pd.resources.requests.storage` | Each PD Pod's request for storage | `1Gi` |
-| `pd.affinity` | This parameter defines PD's scheduling rules and preferences. Detailed reference: [affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
-| `pd.nodeSelector` | This parameter ensures that PD Pods are only scheduled to the node with specific key-value pair as the label. Detailed reference: [nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
-| `pd.tolerations` | This parameter applies to PD Pods, allowing PD Pods to be scheduled to the nodes with specified taints. Detailed reference: [taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
-| `pd.annotations` | This parameter adds a specific `annotations` for PD Pods. | `{}` |
-| `tikv.config` | The configuration of TiKV. Check [this link](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) for the file of the default TiKV configuration (by choosing the tag of the corresponding TiKV version). You can see [this document](https://pingcap.com/docs-cn/v3.0/reference/configuration/tikv-server/configuration-file/) for the detailed description of the configuration parameters (by choosing the corresponding document version). Here you must **modify the configuration based on the format of the configuration file**. | If the version of TiDB Operator is v1.0.0-beta.3 or ealier, the default value is<br>`nil`<br>If the version of TiDB Operator is later than v1.0.0-beta.3, the default value is<br>`log-level = "info"`<br>Example of configuration:<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`log-level = "info"` |
-| `tikv.replicas` | The number of Pods in TiKV | `3` |
-| `tikv.image` | TiKV image | `pingcap/tikv:v3.0.0-rc.1` |
-| `tikv.imagePullPolicy` | The pulling policy for TiKV image | `IfNotPresent` |
-| `tikv.logLevel` | The level of TiKV logs<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`log-level = "info"` | `info` |
-| `tikv.storageClassName` | The `storageClass` used by TiKV. `storageClassName` refers to a type of storage provided by the Kubernetes cluster, which might map to a level of service quality, a backup policy, or to any policy determined by the cluster administrator. Detailed reference: [storage-classes](https://kubernetes.io/docs/concepts/storage/storage-classes) | `local-storage` |
-| `tikv.syncLog` | `SyncLog` means whether to enable the raft log synchronization. Enabling this feature ensures that data will not be lost when power is off.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[raftstore]`<br>`sync-log = true`  | `true` |
-| `tikv.grpcConcurrency` | This parameter configures the thread pool size of the gRPC server.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[server]`<br>`grpc-concurrency = 4` | `4` |
-| `tikv.resources.limits.cpu` | The limit on CPU resource per TiKV Pod | `nil` |
-| `tikv.resources.limits.memory` | The limit on memory resource per TiKV Pod | `nil` |
-| `tikv.resources.limits.storage` | The limit on storage per TiKV Pod | `nil` |
-| `tikv.resources.requests.cpu` | Each TiKV Pod's request for CPU resource | `nil` |
-| `tikv.resources.requests.memory` | Each TiKV Pod's request for memory resource | `nil` |
-| `tikv.resources.requests.storage` | Each TiKV Pod's request for storage | `10Gi` |
-| `tikv.affinity` | This parameter defines TiKV's scheduling rules and preferences. Detailed reference:[affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
-| `tikv.nodeSelector` | This parameter ensures that TiKV Pods are only scheduled to the node with specific key-value pair as the label. Detailed reference: [nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
-| `tikv.tolerations` | This parameter applies to TiKV Pods, allowing TiKV Pods to be scheduled to the nodes with specified taints. Detailed reference: [taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
-| `tikv.annotations` | This parameter adds a specific `annotations` for TiKV Pods. | `{}` |
-| `tikv.defaultcfBlockCacheSize` | This parameter specifies the size of block cache which is used to cache uncompressed blocks. Larger block cache settings speed up reads. It is recommended to set the parameter to 30%-50% of the value of `tikv.resources.limits.memory`.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[rocksdb.defaultcf]`<br>`block-cache-size = "1GB"`<br>From TiKV v3.0.0 on, you do not need to configure  `[rocksdb.defaultcf].block-cache-size` and `[rocksdb.writecf].block-cache-size`. Instead, configure `[storage.block-cache].capacity`.   | `1GB` |
-| `tikv.writecfBlockCacheSize` | The parameter specifies the size of writecf block cache. It is recommended to set the parameter to 10%-30% of the value of `tikv.resources.limits.memory`.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[rocksdb.writecf]`<br>`block-cache-size = "256MB"`<br>From TiKV v3.0.0 on, you do not need to configure `[rocksdb.defaultcf].block-cache-size` and `[rocksdb.writecf].block-cache-size`. Instead, configure `[storage.block-cache].capacity`.   | `256MB` |
-| `tikv.readpoolStorageConcurrency` | The size of thread pool for high priority, normal priority or low priority operations in the TiKV storage<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[readpool.storage]`<br>`high-concurrency = 4`<br>`normal-concurrency = 4`<br>`low-concurrency = 4` | `4` |
-| `tikv.readpoolCoprocessorConcurrency` | If `tikv.resources.limits.cpu` is greater than `8`, set the value of `tikv.readpoolCoprocessorConcurrency` to `tikv.resources.limits.cpu` * 0.8<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[readpool.coprocessor]`<br>`high-concurrency = 8`<br>`normal-concurrency = 8`<br>`low-concurrency = 8`  | `8` |
-| `tikv.storageSchedulerWorkerPoolSize` | The worker pool size of TiKV scheduler. This size must be increased in the case of rewriting but be smaller than the total CPU core.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tikv.config`:<br>`[storage]`<br>`scheduler-worker-pool-size = 4`  | `4` |
-| `tidb.config` | The configuration of TiDB. Check [this link](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) for the file of the default TiDB configuration (by choosing the tag of the corresponding TiDB version). You can see [this document](https://pingcap.com/docs-cn/v3.0/reference/configuration/tidb-server/configuration-file/) for the detailed description of the configuration parameters (by choosing the corresponding document version). Here you must **modify the configuration based on the format of the configuration file**.  | If the version of TiDB Operator is v1.0.0-beta.3 or ealier, the default value is<br>`nil`<br>If the version of TiDB Operator is later than v1.0.0-beta.3, the default value is<br>`[log]`<br>`level = "info"`<br>Example of configuration:<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`[log]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`level = "info"` |
-| `tidb.replicas` | The number of Pods in TiDB | `2` |
-| `tidb.image` | TiDB image | `pingcap/tidb:v3.0.0-rc.1` |
-| `tidb.imagePullPolicy` | The pulling policy for TiDB image | `IfNotPresent` |
-| `tidb.logLevel` | The level of TiDB logs<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`[log]`<br>`level = "info"`  | `info` |
-| `tidb.resources.limits.cpu` | The limit on CPU resource per TiDB Pod | `nil` |
-| `tidb.resources.limits.memory` | The limit on memory resource per TiDB Pod | `nil` |
-| `tidb.resources.requests.cpu` | Each TiDB Pod's request for CPU resource | `nil` |
-| `tidb.resources.requests.memory` | Each TiDB Pod's request for memory resource | `nil` |
-| `tidb.passwordSecretName`| The name of the `Secret` that stores the TiDB username and password. The `Secret` can create a secret with this command: `kubectl create secret generic tidb secret--from literal=root=<root password>--namespace=<namespace>`. If the parameter is unset, TiDB root password is empty. | `nil` |
-| `tidb.initSql`| The initialization script that will be executed after a TiDB cluster is successfully started. | `nil` |
-| `tidb.affinity` | This parameter defines TiDB's scheduling rules and preferences. Detailed reference: [affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
-| `tidb.nodeSelector` | This parameter ensures that TiDB Pods are only scheduled to the node with specific key-value pair as the label. Detailed reference: [nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
-| `tidb.tolerations` | This parameter applies to TiDB Pods, allowing TiDB Pods to be scheduled to nodes with specified taints. Detailed reference: [taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
-| `tidb.annotations` | This parameter adds a specific `annotations` for TiDB Pods. | `{}` |
-| `tidb.maxFailoverCount` | The maximum number of failovers for TiDB. Assuming the number is `3`, that is, failovers of up to `3` TiDB instances are supported at the same time. | `3` |
-| `tidb.service.type` | The type of service that TiDB cluster exposes | `Nodeport` |
-| `tidb.service.externalTrafficPolicy` | This parameter indicates whether this Service routes external traffic to a node-local or cluster-wide endpoint. There are two options available: `Cluster`(by default) and `Local`. `Cluster` obscures the client source IP and some traffic needs to hop twice among nodes for the intended node, but with a good overall load distribution. `Local` preserves the client source IP and avoids a second hop for the LoadBalancer and `Nodeport` type services, but risks potentially imbalanced traffic distribution. Detailed reference: [External LoadBalancer](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) | `nil` |
-| `tidb.service.loadBalancerIP` | This parameter specifies the IP of LoadBalancer. Some cloud providers allow you to specify `loadBalancerIP`. In these cases, the LoadBalancer will be created using the user-specified `loadBalancerIP`. If the `loadBalancerIP` field is not specified, the LoadBalancer will be set using the temporary IP address. If `loadBalancerIP` is specified but the cloud provider does not support this feature, the `loadbalancerIP` field you set will be ignored.| `nil` |
-| `tidb.service.mysqlNodePort` | The mysql `NodePort` that TiDB Service exposes |  |
-| `tidb.service.exposeStatus` | The port that indicates the expose status of TiDB Service | `true` |
-| `tidb.service.statusNodePort` | The `NodePort` exposed through specifying the status of TiDB Service |  |
-| `tidb.separateSlowLog` | Whether to run in sidebar mode the `SlowLog` of TiDB exported via independent container | If the version of TiDB Operator is v1.0.0-beta.3 or ealier, the default value is `false`.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, the default value is `true`.  |
-| `tidb.slowLogTailer.image` | The image of TiDB's `slowLogTailer`. `slowLogTailer` is a container of sidecar type, used to export the `SlowLog` of TiDB. This configuration only takes effect when `tidb.separateSlowLog`=`true`. | `busybox:1.26.2` |
-| `tidb.slowLogTailer.resources.limits.cpu` | The limit on CPU resource per TiDB Pod's `slowLogTailer` | `100m` |
-| `tidb.slowLogTailer.resources.limits.memory` | The limit on memory resource per TiDB Pod's `slowLogTailer` | `50Mi` |
-| `tidb.slowLogTailer.resources.requests.cpu` | The request of each TiDB Pod's `slowLogTailer` for CPU resource | `20m` |
-| `tidb.slowLogTailer.resources.requests.memory` | The request of each TiDB Pod's `slowLogTailer` for memory resource | `5Mi` |
-| `tidb.plugin.enable` | Whether to enable TiDB plugin | `false` |
-| `tidb.plugin.directory` | This parameter specifies the directory where the TiDB plugin is located. | `/plugins` |
-| `tidb.plugin.list` | This parameter specifies a list of plugins loaded on TiDB. The naming rules of Plugin ID: plugin name-version. For example: 'conn_limit-1'. | `[]` |
-| `tidb.preparedPlanCacheEnabled` | Whether to enable TiDB's prepared plan cache<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`[prepared-plan-cache]`<br>`enabled = false` | `false` |
-| `tidb.preparedPlanCacheCapacity` | The cache capacity of TiDB's prepared plan<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`[prepared-plan-cache]`<br>`capacity = 100`  | `100` |
-| `tidb.txnLocalLatchesEnabled` | Whether to enable the memory lock for transaction. It is recommended to enable the lock when there are many conflicts among local transactions.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`[txn-local-latches]`<br>`enabled = false` | `false` |
-| `tidb.txnLocalLatchesCapacity` |  The capacity of the transaction memory lock. The number of slots corresponding to Hash is automatically adjusted upward to an exponential multiple of `2`. Each slot occupies 32 Bytes of memory. When the range of writing data is relatively wide (such as impoting or exporting data), setting this parameter too small a value will result in lower performance.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`[txn-local-latches]`<br>`capacity = 10240000` | `10240000` |
-| `tidb.tokenLimit` | The restrictions on TiDB to execute concurrent sessions<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`token-limit = 1000` | `1000` |
-| `tidb.memQuotaQuery` | The memory quota for TiDB queries, which is 32GB by default.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`mem-quota-query = 34359738368` | `34359738368` |
-| `tidb.txnEntryCountLimit` | The limit on the number of entries in a transaction. If TiKV is used as the storage, the entry represents a key-value pair. **Warning:** Do not set this value too large. Otherwise, it might have a big impact on the TiKV cluster. Set this parameter carefully.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`[performance]`<br>`txn-entry-count-limit = 300000` | `300000` |
-| `tidb.txnTotalSizeLimit` | The limit on byte size for each entry in a transaction. If TiKV is used as the storage, the entry represents a key-value pair. **Warning:** Do not set this value too large. Otherwise, it might have a big impact on the TiKV cluster. Set this parameter carefully.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`[performance]`<br>`txn-total-size-limit = 104857600` | `104857600` |
-| `tidb.enableBatchDml` | This parameter enables batch submission for DML.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`enable-batch-dml = false` | `false` |
-| `tidb.checkMb4ValueInUtf8` | This parameter is used to control whether to check the `mb4` characters when the character set is `utf8`.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`check-mb4-value-in-utf8 = true` | `true` |
-| `tidb.treatOldVersionUtf8AsUtf8mb4` | This parameter is used for upgrading compatibility. After it is set to `true`, `utf8` character set in the old table/column is treated as `utf8mb4`.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`treat-old-version-utf8-as-utf8mb4 = true` | `true` |
-| `tidb.lease` | The lease time of TiDB Schema lease. It is highly risky to change this parameter. Therefore, it is not recommended to do so unless you know exactly what might be happening.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`lease = "45s"`  | `45s` |
-| `tidb.maxProcs` | The maximum available CPU cores. `0` represents the number of CPU on the machine or Pod.<br>If the version of TiDB Operator is later than v1.0.0-beta.3, configure this parameter via `tidb.config`:<br>`[performance]`<br>`max-procs = 0` | `0` |
+| `rbac.create` | 是否启用 Kubernetes 的 RBAC | `true` |
+| `clusterName` | TiDB 集群名，默认不设置该变量，`tidb-cluster` 会直接用执行安装时的 `ReleaseName` 代替 | `nil` |
+| `extraLabels` | TiDB 集群附加的自定义标签，参考：[labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) | `{}` |
+| `schedulerName` | TiDB 集群使用的调度器 | `tidb-scheduler` |
+| `timezone` | TiDB 集群默认时区 | `UTC` |
+| `pvReclaimPolicy` | TiDB 集群使用的 PV (Persistent Volume)的 reclaim policy | `Retain` |
+| `services[0].name` | TiDB 集群对外暴露服务的名字 | `nil` |
+| `services[0].type` | TiDB 集群对外暴露服务的类型，(从 `ClusterIP`、`NodePort`、`LoadBalancer` 中选择) | `nil` |
+| `discovery.image` | TiDB 集群 PD 服务发现组件的镜像，该组件用于在 PD 集群第一次启动时，为各个 PD 实例提供服务发现功能以协调启动顺序 | `pingcap/tidb-operator:v1.0.0-beta.3` |
+| `discovery.imagePullPolicy` | PD 服务发现组件镜像的拉取策略 | `IfNotPresent` |
+| `discovery.resoureces.limits.cpu` | PD 服务发现组件的 CPU 资源限额 | `250m` |
+| `discovery.resoureces.limits.memory` | PD 服务发现组件的内存资源限额 | `150Mi` |
+| `discovery.resoureces.requests.cpu` | PD 服务发现组件的 CPU 资源请求 | `80m` |
+| `discovery.resoureces.requests.memory` | PD 服务发现组件的内存资源请求 | `50Mi` |
+| `enableConfigMapRollout` | 是否开启 TiDB 集群自动滚动更新。如果启用，则 TiDB 集群的 ConfigMap 变更时，TiDB 集群自动更新对应组件。该配置只在 tidb-operator v1.0 及以上版本才支持 | `false` |
+| `pd.config` | 配置文件格式的 PD 的配置，请参考[链接](https://github.com/pingcap/pd/blob/master/conf/config.toml)查看默认 PD 配置文件（选择对应 PD 版本的 tag），可以参考[文档](https://pingcap.com/docs-cn/v3.0/reference/configuration/pd-server/configuration-file/)查看配置参数的具体介绍（请选择对应的文档版本），这里只需要**按照配置文件中的格式修改配置** | TiDB Operator 版本 <= v1.0.0-beta.3，默认值为：<br>`nil`<br>TiDB Operator 版本 > v1.0.0-beta.3，默认值为：<br>`[log]`<br>`level = "info"`<br>`[replication]`<br>`location-labels = ["region", "zone", "rack", "host"]`<br>配置示例：<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`[log]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`level = "info"`<br>&nbsp;&nbsp;&nbsp;&nbsp;`[replication]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`location-labels = ["region", "zone", "rack", "host"]` |
+| `pd.replicas` | PD 的 Pod 数 | `3` |
+| `pd.image` | PD 镜像 | `pingcap/pd:v3.0.0-rc.1` |
+| `pd.imagePullPolicy` | PD 镜像的拉取策略 | `IfNotPresent` |
+| `pd.logLevel` | PD 日志级别<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `pd.config` 配置：<br>`[log]`<br>`level = "info"` | `info` |
+| `pd.storageClassName` | PD 使用的 storageClass，storageClassName 指代一种由 Kubernetes 集群提供的存储类型，不同的类可能映射到服务质量级别、备份策略或集群管理员确定的任意策略。详细参考：[storage-classes](https://kubernetes.io/docs/concepts/storage/storage-classes) | `local-storage` |
+| `pd.maxStoreDownTime` | `pd.maxStoreDownTime` 指一个 store 节点断开连接多长时间后状态会被标记为 `down`，当状态变为 `down` 后，store 节点开始迁移数据到其它 store 节点<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `pd.config` 配置：<br>`[schedule]`<br>`max-store-down-time = "30m"` | `30m` |
+| `pd.maxReplicas` | `pd.maxReplicas` 是 TiDB 集群的数据的副本数<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `pd.config` 配置：<br>`[replication]`<br>`max-replicas = 3` | `3` |
+| `pd.resources.limits.cpu` | 每个 PD Pod 的 CPU 资源限额 | `nil` |
+| `pd.resources.limits.memory` | 每个 PD Pod 的内存资源限额 | `nil` |
+| `pd.resources.limits.storage` | 每个 PD Pod 的存储容量限额 | `nil` |
+| `pd.resources.requests.cpu` | 每个 PD Pod 的 CPU 资源请求 | `nil` |
+| `pd.resources.requests.memory` | 每个 PD Pod 的内存资源请求 | `nil` |
+| `pd.resources.requests.storage` | 每个 PD Pod 的存储容量请求 | `1Gi` |
+| `pd.affinity` | `pd.affinity` 定义 PD 的调度规则和偏好，详细请参考：[affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
+| `pd.nodeSelector` | `pd.nodeSelector` 确保 PD Pods 只调度到以该键值对作为标签的节点，详情参考：[nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
+| `pd.tolerations` | `pd.tolerations` 应用于 PD Pods，允许 PD Pods 调度到含有指定 taints 的节点上，详情参考：[taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
+| `pd.annotations` | 为 PD Pods 添加特定的 `annotations` | `{}` |
+| `tikv.config` | 配置文件格式的 TiKV 的配置，请参考[链接](https://github.com/tikv/tikv/blob/master/etc/config-template.toml)查看默认 TiKV 配置文件（选择对应 TiKV 版本的 tag），可以参考[文档](https://pingcap.com/docs-cn/v3.0/reference/configuration/tikv-server/configuration-file/)查看配置参数的具体介绍（请选择对应的文档版本），这里只需要**按照配置文件中的格式修改配置** | TiDB Operator 版本 <= v1.0.0-beta.3，默认值为：<br>`nil`<br>TiDB Operator 版本 > v1.0.0-beta.3，默认值为：<br>`log-level = "info"`<br>配置示例：<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`log-level = "info"` |
+| `tikv.replicas` | TiKV 的 Pod 数 | `3` |
+| `tikv.image` | TiKV 的镜像 | `pingcap/tikv:v3.0.0-rc.1` |
+| `tikv.imagePullPolicy` | TiKV 镜像的拉取策略 | `IfNotPresent` |
+| `tikv.logLevel` | TiKV 的日志级别<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tikv.config` 配置：<br>`log-level = "info"` | `info` |
+| `tikv.storageClassName` | TiKV 使用的 storageClass，storageClassName 指代一种由 Kubernetes 集群提供的存储类型，不同的类可能映射到服务质量级别、备份策略或集群管理员确定的任意策略。详细参考：[storage-classes](https://kubernetes.io/docs/concepts/storage/storage-classes) | `local-storage` |
+| `tikv.syncLog` | syncLog 指是否启用 raft 日志同步功能，启用该功能能保证在断电时数据不丢失<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tikv.config` 配置：<br>`[raftstore]`<br>`sync-log = true` | `true` |
+| `tikv.grpcConcurrency` | 配置 gRPC server 线程池大小<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tikv.config` 配置：<br>`[server]`<br>`grpc-concurrency = 4` | `4` |
+| `tikv.resources.limits.cpu` | 每个 TiKV Pod 的 CPU 资源限额 | `nil` |
+| `tikv.resources.limits.memory` | 每个 TiKV Pod 的内存资源限额 | `nil` |
+| `tikv.resources.limits.storage` | 每个 TiKV Pod 的存储容量限额 | `nil` |
+| `tikv.resources.requests.cpu` | 每个 TiKV Pod 的 CPU 资源请求 | `nil` |
+| `tikv.resources.requests.memory` | 每个 TiKV Pod 的内存资源请求 | `nil` |
+| `tikv.resources.requests.storage` | 每个 TiKV Pod 的存储容量请求 | `10Gi` |
+| `tikv.affinity` | `tikv.affinity` 定义 TiKV 的调度规则和偏好，详细请参考：[affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
+| `tikv.nodeSelector` | `tikv.nodeSelector`确保 TiKV Pods 只调度到以该键值对作为标签的节点，详情参考：[nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
+| `tikv.tolerations` | `tikv.tolerations` 应用于 TiKV Pods，允许 TiKV Pods 调度到含有指定 taints 的节点上，详情参考：[taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
+| `tikv.annotations` | 为 TiKV Pods 添加特定的 `annotations` | `{}` |
+| `tikv.defaultcfBlockCacheSize` | 指定 block 缓存大小，block 缓存用于缓存未压缩的 block，较大的 block 缓存设置可以加快读取速度。一般推荐设置为 `tikv.resources.limits.memory` 的 30%-50%<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tikv.config` 配置：<br>`[rocksdb.defaultcf]`<br>`block-cache-size = "1GB"`<br>从 TiKV v3.0.0 开始，不再需要配置 `[rocksdb.defaultcf].block-cache-size` 和 `[rocksdb.writecf].block-cache-size`，改为配置 `[storage.block-cache].capacity` | `1GB` |
+| `tikv.writecfBlockCacheSize` | 指定 writecf 的 block 缓存大小，一般推荐设置为 `tikv.resources.limits.memory` 的 10%-30%<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tikv.config` 配置：<br>`[rocksdb.writecf]`<br>`block-cache-size = "256MB"`<br>从 TiKV v3.0.0 开始，不再需要配置 `[rocksdb.defaultcf].block-cache-size` 和 `[rocksdb.writecf].block-cache-size`，改为配置 `[storage.block-cache].capacity` | `256MB` |
+| `tikv.readpoolStorageConcurrency` | TiKV 存储的高优先级/普通优先级/低优先级操作的线程池大小<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tikv.config` 配置：<br>`[readpool.storage]`<br>`high-concurrency = 4`<br>`normal-concurrency = 4`<br>`low-concurrency = 4` | `4` |
+| `tikv.readpoolCoprocessorConcurrency` | 一般如果 `tikv.resources.limits.cpu` > 8，则 `tikv.readpoolCoprocessorConcurrency` 设置为`tikv.resources.limits.cpu` * 0.8<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tikv.config` 配置：<br>`[readpool.coprocessor]`<br>`high-concurrency = 8`<br>`normal-concurrency = 8`<br>`low-concurrency = 8` | `8` |
+| `tikv.storageSchedulerWorkerPoolSize` | TiKV 调度程序的工作池大小，应在重写情况下增加，同时应小于总 CPU 核心<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tikv.config` 配置：<br>`[storage]`<br>`scheduler-worker-pool-size = 4` | `4` |
+| `tidb.config` | 配置文件格式的 TiDB 的配置，请参考[链接](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)查看默认 TiDB 配置文件（选择对应 TiDB 版本的 tag），可以参考[文档](https://pingcap.com/docs-cn/v3.0/reference/configuration/tidb-server/configuration-file/)查看配置参数的具体介绍（请选择对应的文档版本），这里只需要**按照配置文件中的格式修改配置** | TiDB Operator 版本 <= v1.0.0-beta.3，默认值为：<br>`nil`<br>TiDB Operator 版本 > v1.0.0-beta.3，默认值为：<br>`[log]`<br>`level = "info"`<br>配置示例：<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`[log]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`level = "info"` |
+| `tidb.replicas` | TiDB 的 Pod 数 | `2` |
+| `tidb.image` | TiDB 的镜像 | `pingcap/tidb:v3.0.0-rc.1` |
+| `tidb.imagePullPolicy` | TiDB 镜像的拉取策略 | `IfNotPresent` |
+| `tidb.logLevel` | TiDB 的日志级别<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`[log]`<br>`level = "info"` | `info` |
+| `tidb.resources.limits.cpu` | 每个 TiDB Pod 的 CPU 资源限额 | `nil` |
+| `tidb.resources.limits.memory` | 每个 TiDB Pod 的内存资源限额 | `nil` |
+| `tidb.resources.requests.cpu` | 每个 TiDB Pod 的 CPU 资源请求 | `nil` |
+| `tidb.resources.requests.memory` | 每个 TiDB Pod 的内存资源请求 | `nil` |
+| `tidb.passwordSecretName`| 存放 TiDB 用户名及密码的 Secret 的名字，该 Secret 可以使用以下命令创建机密：`kubectl create secret generic tidb secret--from literal=root=<root password>--namespace=<namespace>`，如果没有设置，则 TiDB 根密码为空 | `nil` |
+| `tidb.initSql`| 在 TiDB 集群启动成功后，会执行的初始化脚本 | `nil` |
+| `tidb.affinity` | `tidb.affinity` 定义 TiDB 的调度规则和偏好，详细请参考：[affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
+| `tidb.nodeSelector` | `tidb.nodeSelector`确保 TiDB Pods 只调度到以该键值对作为标签的节点，详情参考：[nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
+| `tidb.tolerations` | `tidb.tolerations` 应用于 TiDB Pods，允许 TiDB Pods 调度到含有指定 taints 的节点上，详情参考：[taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
+| `tidb.annotations` | 为 TiDB Pods 添加特定的 `annotations` | `{}` |
+| `tidb.maxFailoverCount` | TiDB 最大的故障转移数量，假设为 3 即最多支持同时 3 个 TiDB 实例故障转移 | `3` |
+| `tidb.service.type` | TiDB 服务对外暴露类型 | `NodePort` |
+| `tidb.service.externalTrafficPolicy` | 表示此服务是否希望将外部流量路由到节点本地或集群范围的端点。有两个可用选项：`Cluster`（默认）和 `Local`。`Cluster` 隐藏了客户端源 IP，可能导致流量需要二次跳转到另一个节点，但具有良好的整体负载分布。`Local` 保留客户端源 IP 并避免 LoadBalancer 和 NodePort 类型服务流量的第二次跳转，但存在潜在的不均衡流量传播风险。详细参考：[外部负载均衡器](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) | `nil` |
+| `tidb.service.loadBalancerIP` | 指定 tidb 负载均衡 IP，某些云提供程序允许您指定loadBalancerIP。在这些情况下，将使用用户指定的loadBalancerIP创建负载平衡器。如果未指定loadBalancerIP字段，则将使用临时IP地址设置loadBalancer。如果指定loadBalancerIP但云提供程序不支持该功能，则将忽略您设置的loadbalancerIP字段 | `nil` |
+| `tidb.service.mysqlNodePort` | TiDB 服务暴露的 mysql NodePort 端口 |  |
+| `tidb.service.exposeStatus` | TiDB 服务是否暴露状态端口 | `true` |
+| `tidb.service.statusNodePort` | 指定 TiDB 服务的状态端口暴露的 `NodePort` |  |
+| `tidb.separateSlowLog` | 是否以 sidecar 方式运行独立容器输出 TiDB 的 SlowLog | 如果 TiDB Operator 版本 <= v1.0.0-beta.3，默认值为 `false`<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，默认值为 `true` |
+| `tidb.slowLogTailer.image` | TiDB 的 slowLogTailer 的镜像，slowLogTailer 是一个 sidecar 类型的容器，用于输出 TiDB 的 SlowLog，该配置仅在 `tidb.separateSlowLog`=`true` 时生效 | `busybox:1.26.2` |
+| `tidb.slowLogTailer.resources.limits.cpu` | 每个 TiDB Pod 的 slowLogTailer 的 CPU 资源限额 | `100m` |
+| `tidb.slowLogTailer.resources.limits.memory` | 每个 TiDB Pod 的 slowLogTailer 的内存资源限额 | `50Mi` |
+| `tidb.slowLogTailer.resources.requests.cpu` | 每个 TiDB Pod 的 slowLogTailer 的 CPU 资源请求 | `20m` |
+| `tidb.slowLogTailer.resources.requests.memory` | 每个 TiDB Pod 的 slowLogTailer 的内存资源请求 | `5Mi` |
+| `tidb.plugin.enable` | 是否启用 TiDB 插件功能 | `false` |
+| `tidb.plugin.directory` | 指定 TiDB 插件所在的目录 | `/plugins` |
+| `tidb.plugin.list` | 指定 TiDB 加载的插件列表，plugin ID 命名规则：插件名-版本，例如：'conn_limit-1' | `[]` |
+| `tidb.preparedPlanCacheEnabled` | 是否启用 TiDB 的 prepared plan 缓存<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`[prepared-plan-cache]`<br>`enabled = false` | `false` |
+| `tidb.preparedPlanCacheCapacity` | TiDB 的 prepared plan 缓存数量<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`[prepared-plan-cache]`<br>`capacity = 100` | `100` |
+| `tidb.txnLocalLatchesEnabled` | 是否启用事务内存锁，当本地事务冲突比较多时建议开启<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`[txn-local-latches]`<br>`enabled = false` | `false` |
+| `tidb.txnLocalLatchesCapacity` |  事务内存锁的容量，Hash 对应的 slot 数，会自动向上调整为 2 的指数倍。每个 slot 占 32 Bytes 内存。当写入数据的范围比较广时（如导数据），设置过小会导致变慢，性能下降。<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`[txn-local-latches]`<br>`capacity = 10240000` | `10240000` |
+| `tidb.tokenLimit` | TiDB 并发执行会话的限制<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`token-limit = 1000` | `1000` |
+| `tidb.memQuotaQuery` | TiDB 查询的内存限额，默认 32GB<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`mem-quota-query = 34359738368` | `34359738368` |
+| `tidb.txnEntryCountLimit` | 一个事务中条目的数目限制。如果使用 TiKV 作为存储，则条目表示键/值对。**警告**：不要将该值设置得太大，否则会对 TiKV 集群造成很大影响。请仔细调整此配置<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`[performance]`<br>`txn-entry-count-limit = 300000` | `300000` |
+| `tidb.txnTotalSizeLimit` | 一个事务中各条目的字节大小限制。如果使用 TiKV 作为存储，则条目表示键/值对。**警告**：不要将该值设置得太大，否则会对 TiKV 集群造成很大影响。请仔细调整此配置<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`[performance]`<br>`txn-total-size-limit = 104857600` | `104857600` |
+| `tidb.enableBatchDml` | `tidb.enableBatchDml` 为 DML 启用批提交<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`enable-batch-dml = false` | `false` |
+| `tidb.checkMb4ValueInUtf8` | 用于控制当字符集为 utf8 时是否检查 mb4 字符<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`check-mb4-value-in-utf8 = true` | `true` |
+| `tidb.treatOldVersionUtf8AsUtf8mb4` | 用于升级兼容性。设置为 `true` 将把旧版本的表/列的 `utf8` 字符集视为 `utf8mb4` 字符集<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`treat-old-version-utf8-as-utf8mb4 = true` | `true` |
+| `tidb.lease` | `tidb.lease`是 TiDB Schema lease 的期限，对其更改是非常危险的，除非你明确知道可能产生的结果，否则不建议更改。<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`lease = "45s"` | `45s` |
+| `tidb.maxProcs` | 最大可使用的 CPU 核数，0 代表机器/Pod 上的 CPU 数量<br>如果 TiDB Operator 版本 > v1.0.0-beta.3，请通过 `tidb.config` 配置：<br>`[performance]`<br>`max-procs = 0` | `0` |
 
-## Description of resource configuration
+## 资源配置说明
 
-Before deploying a TiDB cluster, it is necessary to configure the resource for each components of the cluster according to actual needs. `requests` and `limits` are the resource configuration items listed in the table above. They respectively refer to the minimum requirement for and maximum limit on resources. `limits` must be greater than or equal to `request`. It is recommended to set `limits` to be greater than or equal to `requests`, which ensures that the service achieves Guaranteed-level QoS.
+部署前需要根据实际情况和需求，为 TiDB 集群各个组件配置资源，上面列表中所述每个组件的资源配置包括 requests 和 limits，分别指资源的最低要求和最大限额，资源的 limits 要大于等于 requests，建议 limits 等于 requests，这样可以保证服务获得 Guaranteed 级别的 QoS。
 
-PD, TiKV and TiDB are the core service components of a TiDB cluster. In a production environment, their resource configuration must be made manually according to component needs. Detailed reference: [Hardware Recommendations](dev/how-to/deploy/hardware-recommendations.md). In a testing environment, directly use the default configuration in the `values.yaml` file without any manual setting.
+其中 PD/TiKV/TiDB 是 TiDB 集群的核心服务组件，在生产环境下它们的资源配置需要按组件要求指定，具体参考：[资源配置推荐](/how-to/deploy/hardware-recommendations.md)。如果是测试环境，可以无需配置资源直接使用 `values.yaml` 中默认的配置。
 
-## Description of configuration for disaster recovery
+## 容灾配置说明
 
-TiDB is a distributed database. Its disaster recovery must ensure that when any physical topology node fails, not only the service is unaffected, but also the data is complete and available. The two configurations of disaster recovery are specified separately as follows.
+TiDB 是分布式数据库，它的容灾需要做到在任一个物理拓扑节点发生故障时，不仅服务不受影响，还要保证数据也是完整和可用。下面分别具体说明这两种容灾的配置。
 
-### The disaster recovery of TiDB service
+### TiDB 服务的容灾
 
-The disaster recovery of TiDB service is essentially based on Kubernetes' scheduling capabilities. To optimize scheduling, TiDB Operator provides a custom scheduler that guarantees the disaster recovery of the TiDB service at the host level through the specified scheduling algorithm. Currently, TiDB Cluster uses this scheduler as the default scheduler which is configured through the item `schedulerName` in the above table.
+TiDB 服务容灾本质上基于 Kubernetes 的调度功能来实现的，为了优化调度，TiDB Operator 提供了自定义的调度器，该调度器通过指定的调度算法能在 host 层面，保证 TiDB 服务的容灾，而且目前 TiDB Cluster 使用该调度器作为默认调度器，设置项是上述列表中的 `schedulerName` 配置项。
 
-Disaster recovery at other levels (such as rack, zone, region) are guaranteed by Affinity's `PodAntiAffinity`. Through `PodAntiAffinity`, try to avoid the situation where different instances of the same component are deployed on the same physical topology node. In this way, disaster recovery is achieved. Detailed user guide for Affinity: [Affinity & AntiAffinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity).
+其它层面的容灾（例如 rack，zone，region）是通过 Affinity 的 `PodAntiAffinity` 来保证，通过 `PodAntiAffinity` 能尽量避免同一组件的不同实例部署到同一个物理拓扑节点上，从而达到容灾的目的，Affinity 的使用参考：[Affinity & AntiAffinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) 。
 
-The following is an example of a typical disaster recovery setup:
+下面是一个典型的容灾设置例子：
 
 {{< copyable "shell-regular" >}}
 
@@ -189,29 +184,30 @@ affinity:
        - <helm namespace>
 ```
 
-### The disaster recovery of data
+### 数据的容灾
 
-Before configuring the disaster recovery, see the [Information Configuration of the Cluster Typology](/how-to/deploy/geographic-redundancy/location-awareness.md) which describes how the disaster recovery of TiDB cluster is implemented.
+在开始数据容灾配置前，首先请阅读[集群拓扑信息配置](/how-to/deploy/geographic-redundancy/location-awareness.md)。该文档描述了 TiDB 集群数据容灾的实现原理。
 
-To add disaster recovery in Kubernetes:
+在 Kubernetes 上支持数据容灾的功能，需要如下操作：
 
-+ Set the label collection of topological location for PD
+* 为 PD 设置拓扑位置 Label 集合
 
-  > **Note:**
-  >
-  > Except for `kubernetes.io/hostname`, PD currently does not support labels with `/` in the name.
+    > **注意：**
+    >
+    > 除 `kubernetes.io/hostname` 外，目前 PD 暂不支持名字中带 `/` 的 Label。
 
-  Replace the `location-labels` information in the `pd.config` with the label collection that describes the topological location on the nodes in Kubernetes cluster.
+    用 Kubernetes 集群 Node 节点上描述拓扑位置的 Label 集合替换 `pd.config` 配置项中里的 `location-labels` 信息。
 
-+ Set the topological information of the Node where the TiKV node is located.
+* 为 TiKV 节点设置所在的 Node 节点的拓扑信息
 
-  TiDB Operator automatically obtains the topological information of the Node for TiKV and calls the PD interface to set this information as the information of TiKV's store labels. Based on this topological information, the TiDB cluster  schedules a copy of the data.
+    TiDB Operator 会自动为 TiKV 获取其所在 Node 节点的拓扑信息，并调用 PD 接口将这些信息设置为 TiKV 的 store labels 信息，这样 TiDB 集群就能基于这些信息来调度数据副本。
 
-  If the Node of the current Kubernetes cluster does not have a label indicating the topological location, or if the existing label name of topology contains `/`, you can manually add a label to the Node by running the following command:
+    如果当前 Kubernetes 集群的 Node 节点没有表示拓扑位置的 Label，或者已有的拓扑 Label 名字中带有 `/`，可以通过下面的命令手动给 Node 增加标签：
 
     {{< copyable "shell-regular" >}}
 
     ```shell
     $ kubectl label node <nodeName> region=<regionName> zone=<zoneName> rack=<rackName> kubernetes.io/hostname=<hostName>
     ```
-  In the command above, `region`, `zone`, `rack`, `kubernetes.io/hostname` are just examples. The name and number of the label to be added can be arbitrarily defined, as long as it conforms to the specification and is consistent with the labels set in `location-labels` in `pd.config`.
+
+    其中 `region`、`zone`、`rack`、`kubernetes.io/hostname` 只是举例，要添加的 Label 名字和数量可以任意定义，只要符合规范且和 `pd.config` 里的 `location-labels` 设置的 Labels 保持一致即可。
