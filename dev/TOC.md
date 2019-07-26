@@ -80,20 +80,10 @@
     - [Migrate from Aurora](how-to/migrate/from-aurora.md)
     - [Migrate from CSV](reference/tools/tidb-lightning/csv.md)
   + Maintain
-    + TiDB in Kubernetes
-      - [Maintain Kubernetes Nodes](how-to/maintain/tidb-in-kubernetes/tidb-node.md)
     - [Common Ansible Operations](how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](how-to/maintain/identify-slow-queries.md)
     - [TiDB Binlog Cluster Operations](how-to/maintain/tidb-binlog.md)
-<<<<<<< HEAD
-=======
-    + TiDB in Kubernetes
-      - [Manage the TiDB Cluster](how-to/maintain/tidb-in-kubernetes/tidb-cluster.md)
-      - [Backup and Restore](how-to/maintain/tidb-in-kubernetes/backup-and-restore.md)
-      - [Collect Logs](how-to/maintain/tidb-in-kubernetes/log-collecting.md)
-      - [Automatic Failover](how-to/maintain/tidb-in-kubernetes/auto-failover.md)
->>>>>>> c6a23062c3bcde7704401d80f5c1e811e1a9c140
   + Scale
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
@@ -286,7 +276,6 @@
   - [TiSpark](reference/tispark.md)
   - [TiDB Binlog Cluster Overview](reference/tidb-binlog-overview.md)
   + Tools
-    - [tkctl](reference/tools/tkctl.md)
     - [Mydumper](reference/tools/mydumper.md)
     - [Syncer](reference/tools/syncer.md)
     - [Loader](reference/tools/loader.md)
@@ -338,7 +327,7 @@
     - [TiKV](reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Adopters](adopters.md)
 + TiDB in Kubernetes
-  - [About TiDB Operator](tidb-in-kubernetes/overview.md)
+  - [About TiDB Operator](tidb-in-kubernetes/tidb-operator-overview.md)
   + Get Started
     - [DinD](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
     - [GKE](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
