@@ -50,7 +50,7 @@ release=<your-tidb-release-name>
 {{< copyable "shell-regular" >}}
 
 ```shell
-kubectl -n <namespace} get svc ${release}-tidb -ojsonpath="{.spec.ports[?(@.name=='mysql-client')].nodePort}{'\n'>"
+kubectl -n <namespace> get svc <release>-tidb -ojsonpath="{.spec.ports[?(@.name=='mysql-client')].nodePort}{'\n'}"
 ```
 
 To check you can access TiDB services by using the IP of what nodes, see the following two cases:

@@ -152,7 +152,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl get tc <CLUSTER_NAME} -ojson | jq '.status.tikv.stores | .[] | select ( .podName == "${POD_NAME>" ) | .id'
+    kubectl get tc <CLUSTER_NAME> -ojson | jq '.status.tikv.stores | .[] | select ( .podName == "<POD_NAME>" ) | .id'
     ```
 
     Make the TiKV instance offline:
@@ -184,7 +184,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl get -n <namespace} pod ${pod_name> -ojson | jq '.spec.volumes | .[] | select (.name == "tikv") | .persistentVolumeClaim.claimName'
+    kubectl get -n <namespace> pod <pod_name> -ojson | jq '.spec.volumes | .[] | select (.name == "tikv") | .persistentVolumeClaim.claimName'
     ```
 
     Delete the `PesistentVolumeClaim`:
@@ -192,7 +192,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl delete -n <namespace} pvc ${pvc_name>
+    kubectl delete -n <namespace> pvc <pvc_name>
     ```
 
 6. Delete the TiKV instance:
@@ -200,7 +200,7 @@ For the maintenance on an node that cannot be recovered in a short term (for exa
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl delete -n <namespace} pod ${pod_name>
+    kubectl delete -n <namespace> pod <pod_name>
     ```
 
 7. Check whether the TiKV instance is normally scheduled to another node:
