@@ -8,6 +8,10 @@ category: how-to
 
 This document describes how to deploy a TiDB cluster on GCP GKE with your laptop (Linux or macOS) for development or testing.
 
+  > **Notice：**
+  >
+  > GKE support is in *ALPHA* status. DO NOT USE it in production!
+
 ## Prerequisites
 
 First of all, make sure the following items are installed on your machine:
