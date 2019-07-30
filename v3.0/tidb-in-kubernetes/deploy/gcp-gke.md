@@ -8,7 +8,7 @@ category: how-to
 
 This document describes how to deploy a TiDB cluster on GCP GKE with your laptop (Linux or macOS) for development or testing.
 
-  > **Notice：**
+  > **Warning:**
   >
   > GKE support for multiple disks per node has [known issues](https://github.com/pingcap/tidb-operator/issues/684) that make it not ready for production usage.
   > We are working to get GKE to resolve this issue.
