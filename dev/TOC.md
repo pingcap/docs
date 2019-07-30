@@ -336,7 +336,7 @@
     - [TiDB in General Kubernetes](tidb-in-kubernetes/deploy/general-kubernetes.md)
     - [TiDB in AWS EKS](tidb-in-kubernetes/deploy/aws-eks.md)
     - [TiDB in GCP GKE](tidb-in-kubernetes/deploy/gcp-gke.md)
-    - [TiDB in Alibaba Cloud](tidb-in-kubernetes/deploy/alibaba-cloud.md)
+    - [TiDB in Alibaba Cloud ACK](tidb-in-kubernetes/deploy/alibaba-cloud.md)
     - [Access TiDB in Kubernetes](tidb-in-kubernetes/deploy/access-tidb.md)
   + Configure
     - [Cluster Initialization](tidb-in-kubernetes/initialize-cluster.md)
