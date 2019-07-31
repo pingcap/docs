@@ -62,7 +62,7 @@ For the above three situations, you must recover the data replication of TiDB Bi
     RECOVER TABLE t;
     ```
 
-    This method searches the DDL statement of the `DROP TABLE` type that appears first in the recent history of `DDL JOB`, and then recovers the table where the table name of the `DROP TABLE` is identical with the table name specified in the `RECOVER TABLE` statement.
+    This method searches the DDL operations of the `DROP TABLE` type that appears first in the recent history of `DDL JOB`, and then recovers the table where the table name of the `DROP TABLE` is identical with the table name specified in the `RECOVER TABLE` statement.
 
 + Recover the deleted table according to the table's `DDL JOB ID` used when the it is being deleted.
 
@@ -104,4 +104,4 @@ When deleting a table, TiDB only deletes the table metadata, and writes the tabl
 
 Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. Refer to [Read Historical Data](/how-to/get-started/read-historical-data.md) for details.
 
-The recovery of the table metadata is done by obtaining the table metadata through the snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `RECOVER TABLE` itself is actually a kind of DDL statement.
+The recovery of the table metadata is done by obtaining the table metadata through the snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `RECOVER TABLE` itself is actually a kind of DDL operation.
