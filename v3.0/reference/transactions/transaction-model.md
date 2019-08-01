@@ -76,4 +76,4 @@ Due to its distributed nature, workloads that are single-threaded or latency-sen
 
     > **Warning:**
     >
-    > The `LOAD DATA` operation in TiDB does not guarantee the atomicity of transactions, so it is recommended only for initial batch loading data, and not during regular usage for production environment(s).
+    > The `LOAD DATA` operation in TiDB by default splits transactions and commits them in batches. However, it is at the expense of breaking the atomicity and isolation of the transaction. When using it, you need to ensure that there are **not any other** ongoing operations on the table, and in the event of an error, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended for use in a production environment.
