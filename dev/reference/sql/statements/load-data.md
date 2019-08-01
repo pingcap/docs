@@ -43,7 +43,7 @@ Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 
 > **Note:**
 > 
-> Committing through splitting transactions is at the expense of breaking the atomicity and isolation of the transaction. When using it, you need to ensure that there are **not any other** ongoing operations on the table, and in the event of an error, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended for use in a production environment.
+> Committing through splitting a transaction is at the expense of breaking the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ## See also
 
