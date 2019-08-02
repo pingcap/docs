@@ -71,8 +71,8 @@ mysql> admin show ddl jobs;
 
     > **Note:**
     >
-    > - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement. 
-    > - If the jobs you want to cancel are finished, the cancellation operation fails. 
+    > - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement.
+    > - If the jobs you want to cancel are finished, the cancellation operation fails.
 
 - `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and corresponding indexes. If the check is passed, an empty result will be returned. On failure, an error message will indicate that data is inconsistent.
 

@@ -4,7 +4,7 @@ summary: An overview of the usage of ANALYZE TABLE for the TiDB database.
 category: reference
 ---
 
-# ANALYZE TABLE 
+# ANALYZE TABLE
 
 This statement updates the statistics that TiDB builds on tables and indexes. It is recommended to run `ANALYZE TABLE` after performing a large batch update or import of records, or when you notice that query execution plans are sub-optimal.
 
