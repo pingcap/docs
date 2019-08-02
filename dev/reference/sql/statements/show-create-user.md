@@ -4,9 +4,9 @@ summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
 category: reference
 ---
 
-# SHOW CREATE USER 
+# SHOW CREATE USER
 
-This statement shows how to re-create a user using the `CREATE USER` syntax. 
+This statement shows how to re-create a user using the `CREATE USER` syntax.
 
 ## Synopsis
 

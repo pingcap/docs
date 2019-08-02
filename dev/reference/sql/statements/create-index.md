@@ -42,7 +42,6 @@ This statement adds a new index to an existing table. It is an alternative synta
 
 ![IndexOption](/media/sqlgram-dev/IndexOption.png)
 
-
 ## Examples
 
 ```sql
@@ -63,7 +62,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +---------------------+----------+------+-------------------------------------------------------------+
 3 rows in set (0.00 sec)
 
-mysql> CREATE INDEX c1 ON t1 (c1); 
+mysql> CREATE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.30 sec)
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;

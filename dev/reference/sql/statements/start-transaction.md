@@ -4,7 +4,7 @@ summary: An overview of the usage of START TRANSACTION for the TiDB database.
 category: reference
 ---
 
-# START TRANSACTION 
+# START TRANSACTION
 
 This statement starts a new transaction inside of TiDB. It is similar to the statements `BEGIN` and `SET autocommit=0`.
 

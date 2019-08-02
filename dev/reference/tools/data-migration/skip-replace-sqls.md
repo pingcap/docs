@@ -6,7 +6,7 @@ category: reference
 
 # Skip or Replace Abnormal SQL Statements
 
-This document introduces how to handle abnormal SQL statements using Data Migration (DM). 
+This document introduces how to handle abnormal SQL statements using Data Migration (DM).
 
 Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL statements supported by TiDB](/reference/mysql-compatibility.md#ddl)). Therefore, when DM is replicating data from MySQL to TiDB and TiDB does not support the corresponding SQL statement, an error might occur and break the replication process. In this case, there are two ways to resume the replication:
 

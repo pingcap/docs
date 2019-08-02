@@ -49,7 +49,7 @@ Drainer collects and merges binlogs from each Pump, converts the binlog to SQL o
 
 ## Hardware requirements
 
-Pump and Drainer can be deployed and run on common 64-bit hardware server platforms with the Intel x86-64 architecture. 
+Pump and Drainer can be deployed and run on common 64-bit hardware server platforms with the Intel x86-64 architecture.
 
 The server hardware requirements for development, testing, and the production environment are as follows:
 

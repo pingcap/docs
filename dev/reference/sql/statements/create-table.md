@@ -4,7 +4,7 @@ summary: An overview of the usage of CREATE TABLE for the TiDB database.
 category: reference
 ---
 
-# CREATE TABLE 
+# CREATE TABLE
 
 This statement creates a new table in the currently selected database. See also `CREATE TABLE LIKE`, which is documented separately.
 

@@ -8,7 +8,7 @@ category: reference
 
 This statement shows a list of tables and views in the currently selected database. The optional keyword `FULL` indicates if a table is of type `BASE TABLE` or `VIEW`.
 
-To show tables in a different database, use `SHOW TABLES IN DatabaseName`. 
+To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
 
 ## Synopsis
 

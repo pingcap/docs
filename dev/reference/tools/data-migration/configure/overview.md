@@ -6,7 +6,7 @@ category: reference
 
 # Data Migration Configuration File Overview
 
-This document gives an overview of configuration files of DM (Data Migration). 
+This document gives an overview of configuration files of DM (Data Migration).
 
 ## DM process configuration files
 

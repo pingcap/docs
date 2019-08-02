@@ -4,7 +4,7 @@ summary: An overview of the usage of SHOW [GLOBAL|SESSION] STATUS for the TiDB d
 category: reference
 ---
 
-# SHOW [GLOBAL|SESSION] STATUS 
+# SHOW [GLOBAL|SESSION] STATUS
 
 This statement is included for compatibility with MySQL. It has no effect on TiDB, which uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS`.
 

@@ -55,4 +55,3 @@ Query OK, 1 row affected (0.02 sec)
 * [SHOW CREATE USER](/reference/sql/statements/show-create-user.md)
 * [ALTER USER](/reference/sql/statements/alter-user.md)
 * [Privilege Management](/reference/security/privilege-system.md)
-
