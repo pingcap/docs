@@ -116,6 +116,7 @@ First start the spark-shell:
 $ cd spark
 $ bin/spark-shell
 ```
+
 Then query the TiDB table as you are using the native Spark SQL:
 
 ```scala

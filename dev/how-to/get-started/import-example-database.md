@@ -48,7 +48,7 @@ LOAD DATA LOCAL INFILE '2017Q1-capitalbikeshare-tripdata.csv' INTO TABLE trips
   FIELDS TERMINATED BY ',' ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES
-(duration, start_date, end_date, start_station_number, start_station, 
+(duration, start_date, end_date, start_station_number, start_station,
 end_station_number, end_station, bike_number, member_type);
 ```
 
