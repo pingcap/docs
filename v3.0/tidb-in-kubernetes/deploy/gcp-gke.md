@@ -140,7 +140,7 @@ kubeconfig_file = ./credentials/kubeconfig_tidb-cluster
 monitor_lb_ip = 35.227.134.146
 monitor_port = 3000
 region = us-west1
-tidb_version = v3.0.01
+tidb_version = v3.0.1
 ```
 
 ## Access the database
@@ -165,7 +165,7 @@ mysql -h <tidb_ilb_ip> -P 4000 -u root
 
 ## Interact with the cluster
 
-You can interact with the cluster using `kubectl` and `helm` with the kubeconfig file `credentials/kubeconfig_<cluster_name>` as follows. The default `cluster_name` is `tidb`, which can be changed in `variables.tf`.
+You can interact with the cluster using `kubectl` and `helm` with the kubeconfig file `credentials/kubeconfig_<cluster_name>` as follows. The default `cluster_name` is `tidb-cluster`, which can be changed by overriding it, either in `terraform.tfvars` or via the method of your choice.
 
 There are two ways to do this:
 
