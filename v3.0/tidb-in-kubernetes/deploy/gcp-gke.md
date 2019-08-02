@@ -81,11 +81,19 @@ echo "GCP_PROJECT=$(gcloud config get-value project)" >> terraform.tfvars
 
 You need to decide on instance types. If you just want to get a feel for a TiDB deployment and lower your cost, you can use the small settings.
 
-    cat small.tfvars >> terraform.tfvars
+{{< copyable "shell-regular" >}}
+
+```bash
+cat small.tfvars >> terraform.tfvars
+```
+
+{{< copyable "shell-regular" >}}
 
 If you want to benchmark a production deployment, run:
 
-    cat prod.tfvars >> terraform.tfvars
+```bash
+cat prod.tfvars >> terraform.tfvars
+```
 
 The default setup creates a new VPC, two subnetworks, and an f1-micro instance as a bastion machine. The production setup is created with the following instance types as worker nodes:
 
@@ -101,7 +109,6 @@ The default setup creates a new VPC, two subnetworks, and an f1-micro instance a
 The production setup, as listed above, requires at least 91 CPUs which exceed the default CPU quota of a GCP project. To increase your project's quota, follow the instructions [here](https://cloud.google.com/compute/quotas). You need more CPUs if you need to scale out.
 
 Now that you have configured everything needed, you can launch the script to deploy the TiDB cluster:
-
 
 {{< copyable "shell-regular" >}}
 
