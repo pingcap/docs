@@ -184,4 +184,4 @@ The result is:
 -----------------+---------+------------+--------+-----------+
 ```
 
-See [more examples]([https://github.com/pingcap/tispark-test/tree/master/tpch/sparksql](https://github.com/pingcap/tispark-test/tree/master/tpch/sparksql)).
+See [more examples](https://github.com/pingcap/tispark-test/tree/master/tpch/sparksql)).
