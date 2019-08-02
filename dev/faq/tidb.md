@@ -90,7 +90,7 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 5000 at most.
 
-#### Does TiDB support XA？
+#### Does TiDB support XA?
 
 No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
@@ -448,11 +448,11 @@ Two reasons:
 
 ### Manage the PD server
 
-#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD.
+#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD
 
 Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed. If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
 
-#### The `etcd cluster ID mismatch` message is displayed when starting PD.
+#### The `etcd cluster ID mismatch` message is displayed when starting PD
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
 
@@ -582,13 +582,13 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 Use 3 replicas for test. If you increase the number of replicas, the performance declines but it is more secure. Whether to configure more replicas depends on the specific business needs.
 
-#### The `cluster ID mismatch` message is displayed when starting TiKV.
+#### The `cluster ID mismatch` message is displayed when starting TiKV
 
 This is because the cluster ID stored in local TiKV is different from the cluster ID specified by PD. When a new PD cluster is deployed, PD generates random cluster IDs. TiKV gets the cluster ID from PD and stores the cluster ID locally when it is initialized. The next time when TiKV is started, it checks the local cluster ID with the cluster ID in PD. If the cluster IDs don't match, the `cluster ID mismatch` message is displayed and TiKV exits.
 
 If you previously deploy a PD cluster, but then you remove the PD data and deploy a new PD cluster, this error occurs because TiKV uses the old data to connect to the new PD cluster.
 
-#### The `duplicated store address` message is displayed when starting TiKV.
+#### The `duplicated store address` message is displayed when starting TiKV
 
 This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. This error occurs when there is no data folder under the directory that TiKV `--store` specifies, but you use the previous parameter to restart the TiKV.
 
@@ -674,7 +674,7 @@ TiKV supports calling the interface separately. Theoretically, you can take an i
 - Reduce the data transmission between TiDB and TiKV
 - Make full use of the distributed computing resources of TiKV to execute computing pushdown
 
-#### The error message `IO error: No space left on device While appending to file` is displayed.
+#### The error message `IO error: No space left on device While appending to file` is displayed
 
 This is because the disk space is not enough. You need to add nodes or enlarge the disk space.
 
@@ -697,7 +697,7 @@ At the beginning, many users tend to do a benchmark test or a comparison test be
 - In MySQL, the read capacity can be increased by adding slave, but the write capacity cannot be increased except using sharding, which has many problems.
 - In TiDB, both the read and write capacity can be easily increased by adding more nodes.
 
-#### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL.
+#### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL
 
 TiDB is designed for scenarios where sharding is used because the capacity of a MySQL standalone is limited, and where strong consistency and complete distributed transactions are required. One of the advantages of TiDB is pushing down computing to the storage nodes to execute concurrent computing.
 
