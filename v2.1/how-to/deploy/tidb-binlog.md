@@ -46,6 +46,7 @@ It is recommended to deploy TiDB Binlog using TiDB-Ansible. If you just want to 
         ```
 
 ### Step 2: Deploy Pump
+
 1. Modify the `tidb-ansible/inventory.ini` file.
 
     1. Set `enable_binlog = True` to start `binlog` of the TiDB cluster.

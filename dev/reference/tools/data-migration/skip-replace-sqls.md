@@ -16,7 +16,7 @@ Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL
 
 If you know in advance that an unsupported SQL statement is going to be replicated, you can also use dmctl to manually preset the skip or replace operation, which is automatically executed when DM replicates the corresponding binlog event into the downstream and thus avoid breaking the replication.
 
-#### Restrictions
+## Restrictions
 
 - The skip or replace operation is a one-time operation that is only used to skip or replace the SQL statement unsupported by the downstream TiDB. Do not handle other replication errors with this approach.
     - For other replication errors, try to handle them using [Black and white table lists](/reference/tools/data-migration/features/overview.md#black-and-white-table-lists) or [Binlog event filtering](/reference/tools/data-migration/features/overview.md#binlog-event-filter).
@@ -31,7 +31,7 @@ If you know in advance that an unsupported SQL statement is going to be replicat
     - `--sharding` only supports presetting operations, and in this mode, you can only use `--sql-pattern` to match the binlog event.
     - For the principles of replicating sharding DDL statements using DM, see [Merge and replicate data from sharded tables](/reference/tools/data-migration/features/shard-merge.md#principles)
 
-#### Match the binlog event
+## Match the binlog event
 
 When the replication task gets interrupted because of the SQL execution error, you can obtain the position of the corresponding binlog event by using `query-error`. When you execute `sql-skip` or `sql-replace`, you can specify the position to match the binlog event.
 
@@ -58,7 +58,7 @@ In the scenario of merging and replicating data from sharded tables, if you need
 > - Do not specify an operator for one binlog event by using `--binlog-pos` and `--sql-pattern` at the same time.
 > - The operator is deleted once it successfully matches the binlog event (not after the execution succeeds). If you need to match again (using `--sql-pattern`) later, you have to register a new operator.
 
-### Supported scenarios
+## Supported scenarios
 
 - Scenario 1: during the replication, the DDL statement unsupported by TiDB is executed in the upstream and replicated to the downstream, and as a result, the replication task gets interrupted.
 
@@ -70,7 +70,7 @@ In the scenario of merging and replicating data from sharded tables, if you need
     - If it is acceptable that this DDL statement is skipped in the downstream TiDB, then you can use `sql-skip` to preset an operation to automatically skip this DDL statement when it needs to be executed.
     - If it is acceptable that this DDL statement is replaced with other DDL statements, then you can use `sql-replace` to preset an operation to automatically replace this DDL statement when it needs to be executed.
 
-### Implementation principles
+## Implementation principles
 
 In DM, simplified procedures of incremental data replication can be described as follows:
 
@@ -122,25 +122,25 @@ In DM, you can register some skip or replace operators for the binlog event. Bef
 
 7. Execute the skip or replace operation corresponding to the operator and then the replication task continues.
 
-### Command
+## Command
 
 When you use dmctl to manually handle the SQL statements unsupported by TiDB, the commonly used commands include `query-status`, `query-error`, `sql-skip` and `sql-replace`.
 
-#### query-status
+### query-status
 
 `query-status` allows you to query the current status of items such as the subtask and the relay unit in each DM-worker. For details, see [query status](/reference/tools/data-migration/query-status.md).
 
-#### query-error
+### query-error
 
 `query-error` allows you to query the existing errors of the running subtask and relay unit in DM-workers.
 
-##### Command usage
+#### Command usage
 
 ```bash
 query-error [--worker=127.0.0.1:8262] [task-name]
 ```
 
-##### Arguments description
+#### Arguments description
 
 + `worker`:
     - Flag parameter, string, `--worker`, optional
@@ -150,7 +150,7 @@ query-error [--worker=127.0.0.1:8262] [task-name]
     - Non-flag parameter, string, optional
     - If it is not specified, this command queries the errors of all tasks; if it is specified, this command queries the error of the specified task.
 
-##### Example of results
+#### Example of results
 
 ```bash
 » query-error test
@@ -189,17 +189,17 @@ query-error [--worker=127.0.0.1:8262] [task-name]
 }
 ```
 
-#### sql-skip
+### sql-skip
 
 `sql-skip` allows you to preset a skip operation that is to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`.
 
-##### Command usage
+#### Command usage
 
 ```bash
 sql-skip <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [--sql-pattern=~(?i)ALTER\s+TABLE\s+`db1`.`tbl1`\s+ADD\s+COLUMN\s+col1\s+INT] [--sharding] <task-name>
 ```
 
-##### Arguments description
+#### Arguments description
 
 + `worker`:
     - Flag parameter, string, `--worker`
@@ -230,17 +230,17 @@ sql-skip <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [
     - Non-flag parameter, string, required
     - `task-name` specifies the name of the task in which the presetted operation is going to be executed.
 
-#### sql-replace
+### sql-replace
 
 `sql-replace` allows you to preset a replace operation that is to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`.
 
-##### Command usage
+#### Command usage
 
 ```bash
 sql-replace <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270] [--sql-pattern=~(?i)ALTER\s+TABLE\s+`db1`.`tbl1`\s+ADD\s+COLUMN\s+col1\s+INT] [--sharding] <task-name> <SQL-1;SQL-2>
 ```
 
-##### Arguments description
+#### Arguments description
 
 + `worker`:
     - same with `--worker` of `sql-skip`
@@ -261,11 +261,11 @@ sql-replace <--worker=127.0.0.1:8262> [--binlog-pos=mysql-bin|000001.000003:3270
     - Non-flag parameter, string, required
     - `SQLs` specifies the new SQL statements that are going to replace the original binlog event. You should separate multiple SQL statements with `;`, for example, ``` ALTER TABLE shard_db.shard_table drop index idx_c2;ALTER TABLE shard_db.shard_table DROP COLUMN c2; ```.
 
-### Usage examples
+## Usage examples
 
-#### Passively skip after the replication gets interrupted
+### Passively skip after the replication gets interrupted
 
-##### Application scenario
+#### Application scenario
 
 Assume that you need to replicate the upstream table `db1.tbl1` to the downstream TiDB (not in the scenario of merging and replicating data from sharded tables). The initial table schema is:
 
@@ -299,7 +299,7 @@ Now, if you query the status of the task using `query-status`, you can see that 
 
 To obtain the details about the error, you should use `query-error`. For example, you can execute `query-error test` to get the position of the failed binlog event (`failedBinlogPosition`), which is `mysql-bin|000001.000003:34642`.
 
-##### Passively skip the SQL statement
+#### Passively skip the SQL statement
 
 Assume that it is acceptable in the actual production environment that this DDL statement is not executed in the downstream TiDB (namely, the original table schema is retained). Then you can use `sql-skip` to skip this DDL statement to resume the replication. The procedures are as follows:
 
@@ -362,9 +362,9 @@ Assume that it is acceptable in the actual production environment that this DDL 
 
 5. Use `query-error` to guarantee that no DDL execution error exists.
 
-#### Actively replace before the replication gets interrupted
+### Actively replace before the replication gets interrupted
 
-##### Application scenario
+#### Application scenario
 
 Assume that you need to replicate the upstream table `db2.tbl2` to the downstream TiDB (not in the scenario of merging and replicating data from sharded tables). The initial table schema is:
 
@@ -399,7 +399,7 @@ err:Error 1105: can't drop column c2 with index covered now
 
 For this particular DDL statement, because dropping columns with the index is not temporarily supported by TiDB, you can use two new SQL statements to replace the original DDL, namely, DROP the index first and then DROP the column c2.
 
-##### Actively replace the SQL statement
+#### Actively replace the SQL statement
 
 1. Design a matchable regular expression for the DDL statement (converted by the optional router-rule) to be executed in the upstream.
     - The DDL statement to be executed in the upstream is `ALTER TABLE db2.tbl2 DROP COLUMN c2;`.
@@ -458,15 +458,15 @@ For this particular DDL statement, because dropping columns with the index is no
 
 7. Use `query-error` to guarantee that no DDL execution error exists.
 
-#### Passively skip after the replication gets interrupted in the scenario of merging and replicating data from sharded tables
+### Passively skip after the replication gets interrupted in the scenario of merging and replicating data from sharded tables
 
-##### Application scenario
+#### Application scenario
 
 Assume that you need to merge and replicate multiple tables in multiple upstream MySQL instances to one same table in the downstream TiDB through multiple DM-workers. And the DDL statement unsupported by TiDB is executed to the upstream sharded tables.
 
 After DM-master coordinates the DDL replication through the DDL lock and requests the DDL lock owner to execute the DDL statement to the downstream, the replication gets interrupted because this DDL statement is not supported by TiDB.
 
-##### Passively skip the SQL statement
+#### Passively skip the SQL statement
 
 In the scenario of merging and replicating data from sharded tables, passively skipping the unsupported DDL statement has the similar steps with [Passively skip after the replication gets interrupted](#passively-skip-after-the-replication-gets-interrupted).
 
@@ -476,9 +476,9 @@ There are two major differences between the two scenarios as follows. In the sce
 
 2. You just need the DDL lock owner to execute `resume-task` (`--worker={DDL-lock-owner}`).
 
-#### Actively replace before the replication gets interrupted in the scenario of merging and replicating data from sharded tables
+### Actively replace before the replication gets interrupted in the scenario of merging and replicating data from sharded tables
 
-##### Application scenario
+#### Application scenario
 
 Assume that you need to merge and replicate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream:
 
@@ -518,7 +518,7 @@ err:Error 1105: can't drop column c2 with index covered now
 
 For this particular DDL statement, because dropping columns with the index is not temporarily supported by TiDB, you can use two new SQL statements to replace the original DDL, namely, DROP the index first and then DROP the column c2.
 
-##### Actively replace the SQL statement
+#### Actively replace the SQL statement
 
 1. Design a matchable regular expression for the DDL statement (converted by the optional router-rule) to be executed in the upstream.
     - The DDL statement to be executed in the upstream is `ALTER TABLE shard_db_*.shard_table_* DROP COLUMN c2`.

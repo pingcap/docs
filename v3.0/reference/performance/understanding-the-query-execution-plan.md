@@ -93,6 +93,7 @@ mysql> EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017
 +------------------------+---------+------+--------------------------------------------------------------------------------------------------+-----------------------------------+
 4 rows in set (0.08 sec)
 ```
+
 ## `EXPLAIN FOR CONNECTION`
 
 `EXPLAIN FOR CONNECTION` provides the last query execution plan used by a given connection. The output format is totally the same as `EXPLAIN` in TiDB. The usage has the following semantic differences from MySQL:

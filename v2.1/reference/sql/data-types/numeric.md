@@ -91,7 +91,7 @@ The meaning of the fields:
 | UNSIGNED | UNSIGNED. If omitted, it is SIGNED. |
 | ZEROFILL | If you specify ZEROFILL for a numeric column, TiDB automatically adds the UNSIGNED attribute to the column. |
 
-#### Storage
+### Storage
 
 See the following for the requirements of the storage:
 

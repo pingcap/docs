@@ -18,7 +18,7 @@ This tutorial assumes you're using a new, clean CentOS 7 instance. You can virtu
 >
 > The methodology used to deploy TiDB in this tutorial should **not** be used to deploy TiDB in a production or development setting.
 
-### Architecture
+## Architecture
 
 ![TiDB DM architecture](/media/dm-architecture.png)
 
@@ -32,7 +32,7 @@ Individual tasks are defined in .yaml files that are read by dmctl and submitted
 
 For additional information about DM, please consult [Data Migration Overview](/reference/tools/data-migration/overview.md) in the TiDB documentation.
 
-### Setup
+## Setup
 
 We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-server, tikv-server, and tidb-server. Then we'll start a single DM-master and 3 instances of DM-worker.
 
@@ -106,7 +106,7 @@ $ pgrep -a mysqld
 17782 mysqld --defaults-group-suffix=3
 ```
 
-### Non-overlapping shards
+## Non-overlapping shards
 
 Our first scenario consists of 3 "shards" with the same schema, but non-overlapping auto-increment primary keys.
 
@@ -429,8 +429,7 @@ Expect this output:
 
 As long as the DM master and workers are running the "dmtest1" task, they'll continue to keep the downstream TiDB server replicated with the upstream MySQL server instances.
 
-
-### Overlapping shards
+## Overlapping shards
 
 The first step of the next exercise will be to create a second database and set of tables across the MySQL instances.
 
@@ -692,7 +691,7 @@ Expected output:
 1152921504606847348     372     24b16fede9a67c9251d3e7c7161c83ac        3308
 ```
 
-### Conclusion
+## Conclusion
 
 In this tutorial, we've completed 2 exercises. The first was a shard migration from 3 upstream MySQL server instances that each assigned non-overlapping sets of auto-increment IDs, and the second was a shard migration from 3 upstream MySQL server instances that each assigned auto-increment IDs that conflicted with one another. We saw how DM not only takes care of importing an initial dump of data in the cluster, but that it can also read binary logs to keep the downstream TiDB cluster in sync with the upstream instance(s).
 

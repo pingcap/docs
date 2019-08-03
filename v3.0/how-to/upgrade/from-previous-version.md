@@ -60,6 +60,7 @@ Version: 0.9.0
     ```
     $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
     ```
+
 ## Edit the `inventory.ini` file and the configuration file
 
 Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb/tidb-ansible` directory.
