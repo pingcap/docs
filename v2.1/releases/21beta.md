@@ -71,7 +71,6 @@ On June 29, 2018, TiDB 2.1 Beta is released! Compared with TiDB 2.0, this releas
     - Do not support rolling back to v2.0.x or earlier due to update of the new version storage engine
     - Enable `raft learner` by default in the new version of PD. If the cluster is upgraded from 1.x to 2.1, the machine should be stopped before upgrade or a rolling update should be first applied to TiKV and then PD
 
-
 ## TiKV
 
 - Upgrade Rust to the `nightly-2018-06-14` version

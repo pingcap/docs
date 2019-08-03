@@ -18,7 +18,6 @@ The `TRACE` statement provides detailed information about query execution. It is
 
 ![TraceableStmt](/media/sqlgram-v2.1/TraceableStmt.png)
 
-
 ## Examples
 
 ```sql
@@ -134,7 +133,6 @@ The JSON formatted trace can be pasted into the trace viewer, which is accessed 
 ![TiDB Trace Viewer-1](/media/trace-paste.png)
 
 ![TiDB Trace Viewer-2](/media/trace-view.png)
-
 
 ## MySQL compatibility
 

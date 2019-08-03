@@ -60,7 +60,6 @@ mysql> ALTER TABLE t1 CHANGE col3 col4 BIGINT, CHANGE id id2 INT NOT NULL;
 ERROR 1105 (HY000): can't run multi schema change
 ```
 
-
 ## MySQL compatibility
 
 * Making multiple changes in a single `ALTER TABLE` statement is not currently supported.

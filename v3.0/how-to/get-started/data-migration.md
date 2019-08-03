@@ -568,7 +568,6 @@ loaders:
 
     * Each entry in `mysql-instances` has a different column mapping because different arguments to the `partition id` algorithm needs to be used for each.
 
-
 Let's start dmtask2:
 
 ```bash

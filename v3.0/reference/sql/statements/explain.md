@@ -156,4 +156,3 @@ If the `dot` program is not installed on your computer, copy the result to [this
 * [EXPLAIN ANALYZE](/reference/sql/statements/explain-analyze.md)
 * [ANALYZE TABLE](/reference/sql/statements/analyze-table.md)
 * [TRACE](/reference/sql/statements/trace.md)
-

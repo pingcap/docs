@@ -26,7 +26,6 @@ This statement drops a column from a specified table. `DROP COLUMN` is online in
 
 ![ColumnName](/media/sqlgram-v2.1/ColumnName.png)
 
-
 ## Examples
 
 ```sql

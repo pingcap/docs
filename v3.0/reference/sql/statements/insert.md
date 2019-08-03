@@ -8,7 +8,6 @@ category: reference
 
 This statement inserts new rows into a table.
 
-
 ## Synopsis
 
 **InsertIntoStmt:**

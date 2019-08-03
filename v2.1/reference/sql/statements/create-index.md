@@ -42,7 +42,6 @@ This statement adds a new index to an existing table. It is an alternative synta
 
 ![IndexOption](/media/sqlgram-v2.1/IndexOption.png)
 
-
 ## Examples
 
 ```sql

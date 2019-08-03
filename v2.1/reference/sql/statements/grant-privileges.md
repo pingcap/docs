@@ -68,4 +68,3 @@ mysql> SHOW GRANTS FOR 'newuser';
 * [REVOKE <privileges>](/reference/sql/statements/revoke-privileges.md)
 * [SHOW GRANTS](/reference/sql/statements/show-grants.md)
 * [Privilege Management](/reference/security/privilege-system.md)
-

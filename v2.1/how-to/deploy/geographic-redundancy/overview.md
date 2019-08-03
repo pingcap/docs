@@ -64,7 +64,6 @@ Some of our production users also adopt the 2-DC multi-active solution, which me
 
 Please be noted that for the 2-DC + Binlog replication solution, data is asynchronously replicated via Binlog. If the network latency between 2 DCs is too high, the data in the Slave cluster will fall much behind of the Master cluster. If the Master cluster goes down, some data will be lost and it cannot be guaranteed the lost data is within 5 minutes.
 
-
 ## Overall analysis for HA and DR
 
 For the 3-DC deployment solution and 3-DC in 2 cities solution, we can guarantee that the cluster will automatically recover, no human interference is needed and that the data is strongly consistent even if any one of the 3 DCs goes down. All the scheduling policies are to tune the performance, but availability is the top 1 priority instead of performance in case of an outage.

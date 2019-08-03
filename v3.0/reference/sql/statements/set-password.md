@@ -62,4 +62,3 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 * [CREATE USER](/reference/sql/statements/create-user.md)
 * [Privilege Management](/reference/security/privilege-system.md)
-
