@@ -46,7 +46,7 @@ Compared with the 3-DC deployment, the 3-DC in 2 cities deployment has the follo
 2. Better usage of the resources because 2 DCs can provide services to the applications.
 3. Even if one DC is down, the TiDB cluster will be still available and no data is lost.
 
-However, the disadvantage is that if the 2 DCs within the same city goes down, whose probability is higher than that of the outage of 2 DCs in 2 cities, the TiDB cluster will not be available and some of the data will be lost. 
+However, the disadvantage is that if the 2 DCs within the same city goes down, whose probability is higher than that of the outage of 2 DCs in 2 cities, the TiDB cluster will not be available and some of the data will be lost.
 
 ## 2-DC + Binlog Replication Deployment Solution
 

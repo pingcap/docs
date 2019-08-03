@@ -1,5 +1,5 @@
 ---
-title: SELECT | TiDB SQL Statement Reference 
+title: SELECT | TiDB SQL Statement Reference
 summary: An overview of the usage of SELECT for the TiDB database.
 category: reference
 ---

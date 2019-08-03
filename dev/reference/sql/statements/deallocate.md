@@ -1,5 +1,5 @@
 ---
-title: DEALLOCATE | TiDB SQL Statement Reference 
+title: DEALLOCATE | TiDB SQL Statement Reference
 summary: An overview of the usage of DEALLOCATE for the TiDB database.
 category: reference
 ---

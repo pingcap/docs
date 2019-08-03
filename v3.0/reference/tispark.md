@@ -2,7 +2,7 @@
 title: TiSpark User Guide
 summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution for both online transactions and analysis.
 category: reference
-aliases: ['/docs/tispark/tispark-user-guide/'] 
+aliases: ['/docs/tispark/tispark-user-guide/']
 ---
 
 # TiSpark User Guide
@@ -152,7 +152,7 @@ The result is:
 | 600000000 |
 +-------------+
 ```
- 
+
 Spark SQL Interactive shell remains the same:
 
 ```sh
@@ -198,7 +198,7 @@ TiSpark on PySpark is a Python package built to support the Python language with
 
 ## Use TiSpark together with Hive
 
-You can use TiSpark together with Hive. 
+You can use TiSpark together with Hive.
 
 Before starting Spark, you need to set the `HADOOP_CONF_DIR` environment variable to your Hadoop configuration folder and copy `hive-site.xml` to the `spark/conf` folder.
 
@@ -232,7 +232,7 @@ df.write
 .option("isolationLevel", "NONE") // recommended to set isolationLevel to NONE if you have a large DF to load.
 .option("user", "root") // TiDB user here
 .save()
-``` 
+```
 
 It is recommended to set `isolationLevel` to `NONE` to avoid large single transactions which might potentially lead to TiDB OOM.
 
@@ -250,7 +250,7 @@ Starting from TiSpark 2.0, statistics information is default to auto load.
 Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
 
 Currently, you can adjust these configurations in your `spark-defaults.conf` file.
-  
+
 | Property name | Default | Description |
 | :--------   | :-----  | :---- |
 | spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |

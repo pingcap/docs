@@ -1,5 +1,5 @@
 ---
-title: COMMIT | TiDB SQL Statement Reference 
+title: COMMIT | TiDB SQL Statement Reference
 summary: An overview of the usage of COMMIT for the TiDB database.
 category: reference
 ---

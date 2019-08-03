@@ -341,7 +341,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         ```bash
         ./bin/pump -config pump.toml
         ```
-  
+
         If the command line parameters is the same with the configuration file parameters, the values of command line parameters are used.
 
 2. Deploy Drainer using binary.

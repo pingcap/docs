@@ -92,7 +92,7 @@ BLOB[(M)]
 
 ### `MEDIUMBLOB` type
 
-The `MEDIUMBLOB` type is similar to the `TEXT` type, but stores binary byte strings rather than nonbinary character strings. The maximum length is 16,777,215 bytes, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB): 
+The `MEDIUMBLOB` type is similar to the `TEXT` type, but stores binary byte strings rather than nonbinary character strings. The maximum length is 16,777,215 bytes, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 MEDIUMBLOB
@@ -100,7 +100,7 @@ MEDIUMBLOB
 
 ### `LONGBLOB` type
 
-The `LONGBLOB` type is similar to the `LONGTEXT` type, but stores binary byte strings rather than nonbinary character strings. The maximum length is 4,294,967,295 bytes, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB): 
+The `LONGBLOB` type is similar to the `LONGTEXT` type, but stores binary byte strings rather than nonbinary character strings. The maximum length is 4,294,967,295 bytes, but the effective maximum-length will be shorter since the total size of all columns must not exceed 65,535 bytes (the maximum row-size in TIDB):
 
 ```sql
 LONGBLOB

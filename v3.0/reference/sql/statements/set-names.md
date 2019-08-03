@@ -1,5 +1,5 @@
 ---
-title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference 
+title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
 summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
 category: reference
 ---

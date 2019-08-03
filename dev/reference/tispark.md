@@ -249,7 +249,7 @@ Starting from TiSpark 2.0, statistics information is default to auto load.
 Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
 
 Currently, you can adjust these configurations in your `spark-defaults.conf` file.
-  
+
 | Property name | Default | Description |
 | :--------   | :-----  | :---- |
 | spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |

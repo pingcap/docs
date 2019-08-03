@@ -212,7 +212,7 @@ module "tidb-cluster-dev" {
 
   cluster_name = "dev-cluster"
   ack          = module.tidb-operator
-  
+
   pd_count                   = 1
   tikv_count                 = 1
   tidb_count                 = 1

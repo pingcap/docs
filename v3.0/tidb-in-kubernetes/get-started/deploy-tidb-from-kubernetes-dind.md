@@ -509,7 +509,7 @@ helm delete demo --purge
 >
 > This only deletes the running pods and other resources. The data is persisted.
 
-If you do not need the data anymore, run the following commands to clean up the data. 
+If you do not need the data anymore, run the following commands to clean up the data.
 
 {{< copyable "shell-regular" >}}
 

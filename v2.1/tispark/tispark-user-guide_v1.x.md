@@ -146,7 +146,7 @@ After the command returns, you can see if the Slave node is joined to the Spark 
 
 #### Spark SQL shell and JDBC server
 
-If you want to use JDBC server and interactive SQL shell, please copy `start-tithriftserver.sh stop-tithriftserver.sh` to your Spark's sbin folder and `tispark-sql` to the bin folder. 
+If you want to use JDBC server and interactive SQL shell, please copy `start-tithriftserver.sh stop-tithriftserver.sh` to your Spark's sbin folder and `tispark-sql` to the bin folder.
 
 To start interactive shell:
 ```sh
@@ -195,7 +195,7 @@ The result is:
 | 600000000 |
 +-------------+
 ```
- 
+
 TiSpark's SQL Interactive shell is almost the same as the spark-SQL shell.
 
 ```sh

@@ -132,11 +132,11 @@ CHARACTER_MAXIMUM_LENGTH: NULL
       CHARACTER_SET_NAME: NULL
           COLLATION_NAME: NULL
              COLUMN_TYPE: int(11)
-              COLUMN_KEY: 
-                   EXTRA: 
+              COLUMN_KEY:
+                   EXTRA:
               PRIVILEGES: select,insert,update,references
-          COLUMN_COMMENT: 
-   GENERATION_EXPRESSION: 
+          COLUMN_COMMENT:
+   GENERATION_EXPRESSION:
 1 row in set (0.01 sec)
 ```
 The corresponding `SHOW` statement is as follows:
@@ -322,8 +322,8 @@ MAX_DATA_LENGTH: 0
      CHECK_TIME: NULL
 TABLE_COLLATION: utf8mb4_bin
        CHECKSUM: NULL
- CREATE_OPTIONS: 
-  TABLE_COMMENT: 
+ CREATE_OPTIONS:
+  TABLE_COMMENT:
   TIDB_TABLE_ID: 5
 1 row in set (0.00 sec)
 ```

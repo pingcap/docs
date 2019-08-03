@@ -1,5 +1,5 @@
 ---
-title: SHOW WARNINGS | TiDB SQL Statement Reference 
+title: SHOW WARNINGS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
 category: reference
 ---

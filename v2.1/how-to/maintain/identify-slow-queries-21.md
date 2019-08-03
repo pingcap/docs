@@ -18,7 +18,7 @@ A problematic SQL statement can increase the pressure on the entire cluster, res
 
 By `grep` the keyword `SLOW_QUERY` in the log file of TiDB, you can obtain the logs of statements whose execution time exceeds [slow-threshold](/reference/configuration/tidb-server/configuration-file.md#slow-threshold).
 
-You can edit `slow-threshold` in the configuration file and its default value is 300ms. If you configure the [slow-query-file](/reference/configuration/tidb-server/configuration-file.md#slow-query-file), all the slow query logs will be written in this file. 
+You can edit `slow-threshold` in the configuration file and its default value is 300ms. If you configure the [slow-query-file](/reference/configuration/tidb-server/configuration-file.md#slow-query-file), all the slow query logs will be written in this file.
 
 ### Usage example
 
@@ -96,7 +96,7 @@ The SQL statement.
 
 ### Identify problematic SQL statements
 
-Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large will increase the pressure on the entire cluster. 
+Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large will increase the pressure on the entire cluster.
 
 The statements whose `wait_time` is very large and `process_time` is very small are usually not problematic. The large `wait_time` is because the statement is blocked by real problematic statements and it has to wait in the execution queue, which leads to a much longer response time.
 

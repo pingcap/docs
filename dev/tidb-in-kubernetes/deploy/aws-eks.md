@@ -30,7 +30,7 @@ Before deploying a TiDB cluster on AWS EKS, make sure the following requirements
     Default region name [None]: us-west-2
     Default output format [None]: json
     ```
-  
+
     > **Note:**
     >
     > The access key must have at least permissions to: create VPC, create EBS, create EC2 and create role.
@@ -269,14 +269,14 @@ An instance of `./tidb-cluster` module corresponds to a TiDB cluster in the EKS 
 ```hcl
 module example-cluster {
   source = "./tidb-cluster"
-  
+
   # The target EKS, required
   eks_info = local.eks
   # The subnets of node pools of this TiDB cluster, required
   subnets = local.subnets
   # TiDB cluster name, required
   cluster_name    = "example-cluster"
-  
+
   # Helm values file
   override_values = file("example-cluster.yaml")
   # TiDB cluster version
@@ -421,7 +421,7 @@ module "tidb-cluster-b" {
   providers = {
     helm = "helm.eks"
   }
-  
+
   cluster_name = "tidb-cluster-b"
   eks          = module.tidb-operator.eks
   ssh_key_name = module.key-pair.key_name

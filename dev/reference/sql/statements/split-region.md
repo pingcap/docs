@@ -161,7 +161,7 @@ For example, there is `idx4 (a,b)`, with column `a` of the varchar type and colu
 {{< copyable "sql" >}}
 
 ```sql
-SPLIT TABLE t1 INDEX idx4 ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:26:19"), ("c", "");  
+SPLIT TABLE t1 INDEX idx4 ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:26:19"), ("c", "");
 ```
 
 This statement specifies 3 values to split 4 Regions. The range of each Region is as follows:
@@ -194,7 +194,7 @@ After building the table, this statement splits 4 + 1 Regions for table t. `4 (2
 The ranges of the 4 table Regions are as follows:
 
 ```
-region1:   [ -inf      ,  1<<61 )  
+region1:   [ -inf      ,  1<<61 )
 region2:   [ 1<<61     ,  2<<61 )
 region3:   [ 2<<61     ,  3<<61 )
 region4:   [ 3<<61     ,  +inf  )

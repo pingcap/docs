@@ -74,7 +74,7 @@ Currently, TiDB does not support setting account resource limits.
 
 ## Assign account passwords
 
-TiDB stores passwords in the `mysql.user` system database. Operations that assign or update passwords are permitted only to users with the `CREATE USER` privilege, or, alternatively, privileges for the `mysql` database (`INSERT` privilege to create new accounts, `UPDATE` privilege to update existing accounts).  
+TiDB stores passwords in the `mysql.user` system database. Operations that assign or update passwords are permitted only to users with the `CREATE USER` privilege, or, alternatively, privileges for the `mysql` database (`INSERT` privilege to create new accounts, `UPDATE` privilege to update existing accounts).
 
 - To assign a password when you create a new account, use `CREATE USER` and include an `IDENTIFIED BY` clause:
 

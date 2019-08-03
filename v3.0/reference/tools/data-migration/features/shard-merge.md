@@ -37,7 +37,7 @@ DM has the following sharding DDL usage restrictions:
 
 ### Background
 
-Currently, DM uses the binlog in the `ROW` format to perform the replication task. The binlog does not contain the table schema information. When you use the `ROW` binlog to replicate data, if you have not replicated multiple upstream tables into the same downstream table, then there only exist DDL operations of one upstream table that can update the table schema of the downstream table. The `ROW` binlog can be considered to have the nature of self-description. During the replication process, the DML statements can be constructed accordingly with the column values and the downstream table schema.  
+Currently, DM uses the binlog in the `ROW` format to perform the replication task. The binlog does not contain the table schema information. When you use the `ROW` binlog to replicate data, if you have not replicated multiple upstream tables into the same downstream table, then there only exist DDL operations of one upstream table that can update the table schema of the downstream table. The `ROW` binlog can be considered to have the nature of self-description. During the replication process, the DML statements can be constructed accordingly with the column values and the downstream table schema.
 
 However, in the process of merging and replicating sharded tables, if DDL statements are executed on the upstream tables to modify the table schema, then you need to perform extra operations to replicate the DDL statements so as to avoid the inconsistency between the DML statements produced by the column values and the actual downstream table schema.
 

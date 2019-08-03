@@ -1,5 +1,5 @@
 ---
-title: DO | TiDB SQL Statement Reference 
+title: DO | TiDB SQL Statement Reference
 summary: An overview of the usage of DO for the TiDB database.
 category: reference
 ---

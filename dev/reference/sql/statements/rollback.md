@@ -1,5 +1,5 @@
 ---
-title: ROLLBACK | TiDB SQL Statement Reference 
+title: ROLLBACK | TiDB SQL Statement Reference
 summary: An overview of the usage of ROLLBACK for the TiDB database.
 category: reference
 ---

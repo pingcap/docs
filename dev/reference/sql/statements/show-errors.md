@@ -1,5 +1,5 @@
 ---
-title: SHOW ERRORS | TiDB SQL Statement Reference 
+title: SHOW ERRORS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW ERRORS for the TiDB database.
 category: reference
 ---

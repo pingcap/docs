@@ -8,7 +8,7 @@ category: how-to
 
 TiDB DM (Data Migration) is a platform that supports migrating large, complex, production data sets from MySQL or MariaDB to TiDB.
 
-DM supports creating and importing an initial dump of data, as well as keeping data replicated during migration by reading and applying binary logs from the source data store. DM can migrate sharded topologies from in-production databases by merging tables from multiple separate upstream MySQL/MariaDB instances/clusters. In addition to its use for migrations, DM is often used on an ongoing basis by existing MySQL or MariaDB users who deploy a TiDB cluster as a slave, to either provide improved horizontal scalability or run real-time analytical workloads on TiDB without needing to manage an ETL pipeline. 
+DM supports creating and importing an initial dump of data, as well as keeping data replicated during migration by reading and applying binary logs from the source data store. DM can migrate sharded topologies from in-production databases by merging tables from multiple separate upstream MySQL/MariaDB instances/clusters. In addition to its use for migrations, DM is often used on an ongoing basis by existing MySQL or MariaDB users who deploy a TiDB cluster as a slave, to either provide improved horizontal scalability or run real-time analytical workloads on TiDB without needing to manage an ETL pipeline.
 
 In this tutorial, we'll see how to migrate a sharded table from multiple upstream MySQL instances. We'll do this a couple of different ways. First, we'll merge several tables/shards that do not conflict; that is, they're partitioned using a scheme that does not result in conflicting unique key values. Then, we'll merge several tables that **do** have conflicting unique key values.
 
@@ -229,7 +229,7 @@ port = 3307
 
 The `flavor` option should be set to `"mysql"` (the default value, and 5.5 < MySQL versions < 8.0 are supported) if migrating from MySQL Server, Percona Server, Percona XtraDB Cluster, or Amazon Aurora or RDS. If migrating from MariaDB Server or MariaDB (Galera) Cluster, use `flavor = "mariadb"` (only MariaDB versions greater than 10.1.2 are supported).
 
-Tasks are defined in YAML files. First, let's look at dmtask1.yaml: 
+Tasks are defined in YAML files. First, let's look at dmtask1.yaml:
 
 ```yaml
 name: dmtask1
@@ -274,7 +274,7 @@ loaders:
 There are a number of global options, and several groups of options that define various behaviors.
 
 * `task-mode: all` tells DM to both import a full backup of the upstream instances as well as replicate incremental updates using the upstream MySQL server's binary log.
-  
+
     * Alternatively, you can give `task-mode` the `full` or `incremental` value, respectively, to get only one of those two behaviors.
 
 * `is-sharding: true` tells DM that we want multiple DM-worker instances to work on a single task to merge several upstream shards into a single downstream table.
@@ -484,7 +484,7 @@ Unlike the last exercise, this time you can see that the same auto-increment IDs
 372     24b16fede9a67c9251d3e7c7161c83ac        3309
 ```
 
-If we try to migrate these rows as-is into a single table in a downstream TiDB instance, the Primary Key auto-increment values will collide and cause duplicate key errors to be issued. We'll use the "partition id" expression of the "column mappings" feature of DM to transform the auto-increment values so that they no longer collide. 
+If we try to migrate these rows as-is into a single table in a downstream TiDB instance, the Primary Key auto-increment values will collide and cause duplicate key errors to be issued. We'll use the "partition id" expression of the "column mappings" feature of DM to transform the auto-increment values so that they no longer collide.
 
 Let's take a look at dmtask2.yaml：
 
@@ -558,15 +558,15 @@ loaders:
 * We aren't using `ignore-checking-items: ["auto_increment_ID"]` anymore, because the upstream auto-increment IDs **do** collide.
 
 * We use `column-mappings` to tell DM how we want it to handle the shard merge operation.
-  
+
     * We have a single upstream schema and table, so our `schema-pattern` and `table-pattern` are actually just strings.
-    
+
         * You can include wildcards in these if you want to merge multiple schemas and/or tables into a single downstream table.
-  
+
     * The `partition id` expression has a corresponding `arguments` section that controls the algorithm used to transform upstream IDs into those used in the downstream TiDB cluster. There's a more in-depth discussion of this algorithm later in this tutorial.
-  
+
     * `source_column` and `target_column` are pretty self-explanatory, but it's worth noting that they offer the possibility of merging upstream inserts into a downstream table with a different structure, for example if you need to preserve the original values.
-  
+
     * Each entry in `mysql-instances` has a different column mapping because different arguments to the `partition id` algorithm needs to be used for each.
 
 

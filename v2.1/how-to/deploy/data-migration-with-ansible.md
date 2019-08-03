@@ -76,7 +76,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     ```
 
     Create the SSH key for the `tidb` user account and hit the <kbd>Enter</kbd> key when `Enter passphrase` is prompted. After successful execution, the SSH private key file is `/home/tidb/.ssh/id_rsa`, and the SSH public key file is `/home/tidb/.ssh/id_rsa.pub`.
-    
+
     ```
     $ ssh-keygen -t rsa
     Generating public/private rsa key pair.

@@ -1,5 +1,5 @@
 ---
-title: TRACE | TiDB SQL Statement Reference 
+title: TRACE | TiDB SQL Statement Reference
 summary: An overview of the usage of TRACE for the TiDB database.
 category: reference
 ---

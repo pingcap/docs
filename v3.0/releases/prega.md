@@ -17,7 +17,7 @@ On August 30, 2017, TiDB Pre-GA is released! This release is focused on MySQL co
 + Many enhancements have been introduced to be more compatible with MySQL
 + Support `Natural Join`
 + Support the JSON type (Experimental), including the query, update and index of the JSON fields
-+ Prune the useless data to reduce the consumption of the executor memory 
++ Prune the useless data to reduce the consumption of the executor memory
 + Support configuring prioritization in the SQL statements and automatically set the prioritization for some of the statements according to the query type
 + Completed the expression refactor and the speed is increased by about 30%
 

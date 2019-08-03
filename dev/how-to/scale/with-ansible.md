@@ -159,9 +159,9 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
     [grafana_servers]
     172.16.10.3
     ```
-  
+
     Now the topology is as follows:
-  
+
     | Name | Host IP | Services |
     | ---- | ------- | -------- |
     | node1 | 172.16.10.1 | PD1 |
@@ -188,7 +188,7 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
     ```
 
 4. Login the newly added PD node and edit the starting script:
-  
+
     ```
     {deploy_dir}/scripts/run_pd.sh
     ```

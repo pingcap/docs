@@ -55,7 +55,7 @@ Pay special attention to the following two variables:
     ```
 
 2. View the data in the table:
-  
+
     ```sql
     mysql> select * from t;
     +------+
@@ -69,7 +69,7 @@ Pay special attention to the following two variables:
     ```
 
 3. View the timestamp of the table:
-  
+
     ```sql
     mysql> select now();
     +---------------------+
@@ -106,7 +106,7 @@ Pay special attention to the following two variables:
     > **Note:**
     >
     > In this example, the value is set to be the time before the update operation.
-  
+
     ```sql
     mysql> set @@tidb_snapshot="2016-10-08 16:45:26";
     Query OK, 0 rows affected (0.00 sec)
@@ -131,7 +131,7 @@ Pay special attention to the following two variables:
     ```
 
 7. Set the  `tidb_snapshot` variable to be "" (empty string) and you can read the data from the latest version:
-  
+
     ```sql
     mysql> set @@tidb_snapshot="";
     Query OK, 0 rows affected (0.00 sec)

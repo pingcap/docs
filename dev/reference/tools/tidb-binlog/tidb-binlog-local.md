@@ -12,7 +12,7 @@ TiDB Binlog is a tool for enterprise users to collect binlog files for TiDB and 
 
 TiDB Binlog supports the following scenarios:
 
-- **Data replication**: to replicate TiDB cluster data to other databases  
+- **Data replication**: to replicate TiDB cluster data to other databases
 - **Real-time backup and recovery**: to back up TiDB cluster data, and recover in case of cluster outages
 
 ## TiDB Binlog Local architecture
@@ -62,11 +62,11 @@ TiDB Binlog can be [downloaded](/reference/tools/download.md) as part of the Ent
 
 ### Note
 
-- You need to deploy a Pump for each TiDB server in a TiDB cluster. Currently, the TiDB server only supports the binlog in UNIX socket.  
+- You need to deploy a Pump for each TiDB server in a TiDB cluster. Currently, the TiDB server only supports the binlog in UNIX socket.
 
     We set the startup parameter `binlog-socket` as the specified unix socket file path of the corresponding parameter `socket` in Pump. The final deployment architecture is as follows:
 
-    ![TiDB pump deployment architecture](/media/tidb_pump_deployment.jpeg)  
+    ![TiDB pump deployment architecture](/media/tidb_pump_deployment.jpeg)
 
 - Currently, you need to deploy Drainer manually.
 
@@ -289,7 +289,7 @@ This section introduces how to monitor TiDB Binlog's status and performance, and
 
 ### Configure Pump/Drainer
 
-Use the Pump service deployed using Ansible. Set metrics in startup parameters.  
+Use the Pump service deployed using Ansible. Set metrics in startup parameters.
 
 When you start Drainer, set the two parameters of `--metrics-addr` and `--metrics-interval`. Set `--metrics-addr` as the address of Push Gateway. Set `--metrics-interval` as the frequency of push (default 15 seconds).
 

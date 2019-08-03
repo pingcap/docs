@@ -1,5 +1,5 @@
 ---
-title: ANALYZE TABLE | TiDB SQL Statement Reference 
+title: ANALYZE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of ANALYZE TABLE for the TiDB database.
 category: reference
 ---

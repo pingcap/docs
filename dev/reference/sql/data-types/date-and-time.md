@@ -22,7 +22,7 @@ When dealing with date and time value types, note:
     | 2012-08-15 09:28:00 | 20120815092800 | 20120815092800.889 |
     +---------------------+----------------+--------------------+
     ```
-  
+
 + TiDB might automatically convert invalid values or values beyond the supported range to a zero value of that type. This behavior is dependent on the SQL Mode set. For example:
 
     ```sql
@@ -43,7 +43,7 @@ When dealing with date and time value types, note:
     | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |
     +-------------------------------------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
-  
+
     mysql> insert into t1 values ('2090-11-32:22:33:44');
     ERROR 1292 (22007): Truncated incorrect time value: '2090-11-32:22:33:44'
     mysql> set @@sql_mode='';                                                                                                                                                                                                                     Query OK, 0 rows affected (0.01 sec)

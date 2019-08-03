@@ -1,5 +1,5 @@
 ---
-title: LOAD DATA | TiDB SQL Statement Reference 
+title: LOAD DATA | TiDB SQL Statement Reference
 summary: An overview of the usage of LOAD DATA for the TiDB database.
 category: reference
 ---

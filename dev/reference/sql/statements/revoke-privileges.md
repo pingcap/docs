@@ -1,5 +1,5 @@
 ---
-title: REVOKE <privileges> | TiDB SQL Statement Reference 
+title: REVOKE <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
 category: reference
 ---

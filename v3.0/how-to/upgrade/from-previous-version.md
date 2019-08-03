@@ -79,7 +79,7 @@ Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansi
     # ssh via normal user
     ansible_user = tidb
     ```
-    
+
     You can refer to [How to configure SSH mutual trust and sudo rules on the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) to automatically configure the mutual trust among hosts.
 
 2. Keep the `process_supervision` variable consistent with that in the previous version. It is recommended to use `systemd` by default.
@@ -134,7 +134,7 @@ $ ansible-playbook local_prepare.yml
    ```
    $ ansible-playbook rolling_update.yml
    ```
-   
+
 ## Perform rolling update to TiDB monitoring components
 
 ```

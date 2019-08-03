@@ -1,5 +1,5 @@
 ---
-title: CREATE USER | TiDB SQL Statement Reference 
+title: CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE USER for the TiDB database.
 category: reference
 ---

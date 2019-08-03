@@ -278,7 +278,7 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
     > **Note:**
     >
-    > If the `172.16.10.71` machine breaks down and you cannot log in via SSH, ignore this step.  
+    > If the `172.16.10.71` machine breaks down and you cannot log in via SSH, ignore this step.
 
     ```
     $ ansible-playbook stop.yml --tags=dm-master

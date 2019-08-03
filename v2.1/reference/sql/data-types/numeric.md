@@ -113,7 +113,7 @@ FLOAT(p) [UNSIGNED] [ZEROFILL]
 ```
 
 > **Warning:**
-> 
+>
 > As in MySQL, the `FLOAT` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
 
 ### `DOUBLE` type
@@ -126,7 +126,7 @@ DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL
 ```
 
 > **Warning:**
-> 
+>
 > As in MySQL, the `DOUBLE` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
 
 ## Fixed-point types

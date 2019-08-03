@@ -287,7 +287,7 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
-#### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: " ` when deploying TiDB using TiDB-Ansible
+#### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: "` when deploying TiDB using TiDB-Ansible
 
 Two possible reasons and solutions:
 
@@ -312,7 +312,7 @@ Two possible reasons and solutions:
 
 #### How are the rolling updates done?
 
-When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB * 2, PD * 3, TiKV * 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
+When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
 
 #### How to upgrade when I deploy TiDB using Binary?
 
@@ -718,11 +718,13 @@ You can edit the `t` parameter of `loader` based on the number of TiKV instances
 ### Full data export and import
 
 #### Mydumper
+
 See [mydumper Instructions](/reference/tools/mydumper.md).
 
 #### Loader
+
 See [Loader Instructions](/reference/tools/loader.md).
- 
+
 #### How to migrate an application running on MySQL to TiDB?
 
 Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.

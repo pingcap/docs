@@ -1,7 +1,7 @@
 ---
 title: Import Example Database
 summary: Install the Bikeshare example database.
-category: how-to 
+category: how-to
 ---
 
 # Import Example Database
