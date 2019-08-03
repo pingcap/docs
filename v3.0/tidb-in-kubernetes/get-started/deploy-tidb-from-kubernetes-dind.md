@@ -454,6 +454,7 @@ You can scale out or scale in the TiDB cluster simply by modifying the number of
     ```shell
     helm upgrade demo pingcap/tidb-cluster --namespace=tidb -f /home/tidb/demo/values-demo.yaml --version=<chartVersion>
     ```
+
 > **Note:**
 >
 > If you need to scale in TiKV, the consumed time depends on the volume of your existing data, because the data needs to be migrated safely.

@@ -139,6 +139,7 @@ SET('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name]
 # For example:
 SET('1', '2') NOT NULL
 ```
+
 In the example, any of the following values can be valid:
 
 ```
@@ -147,6 +148,7 @@ In the example, any of the following values can be valid:
 '2'
 '1,2'
 ```
+
 In TiDB, the values of the `SET` type is internally converted to `Int64`. The existence of each element is represented using a binary: 0 or 1. For a column specified as `SET('a','b','c','d')`, the members have the following decimal and binary values.
 
 | Member | Decimal Value | Binary Value |

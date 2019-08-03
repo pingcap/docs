@@ -139,7 +139,9 @@ CHARACTER_MAXIMUM_LENGTH: NULL
    GENERATION_EXPRESSION:
 1 row in set (0.01 sec)
 ```
+
 The corresponding `SHOW` statement is as follows:
+
 ```sql
 mysql> SHOW COLUMNS FROM t1 FROM test;
 +-------+---------+------+------+---------+-------+
@@ -237,6 +239,7 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 ### SESSION\_VARIABLES table
 
 The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement:
+
 ```sql
 mysql> SELECT * FROM session_variables LIMIT 10;
 +----------------------------------+----------------------+

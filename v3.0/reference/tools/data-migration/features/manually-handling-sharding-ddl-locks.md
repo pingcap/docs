@@ -212,6 +212,7 @@ The operation processes of MySQL and DM are as follows:
     ```sql
     ALTER TABLE shard_db_1.shard_table_1 ADD COLUMN c2 INT;
     ```
+
     ```sql
     ALTER TABLE shard_db_1.shard_table_2 ADD COLUMN c2 INT;
     ```
@@ -476,6 +477,7 @@ The operation processes are:
         ]
     }
     ```
+
 4. Use `query-status` to confirm if the replication task is normal and no longer at the state of waiting for the lock.
 
 #### Impact

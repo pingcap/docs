@@ -260,6 +260,7 @@ select * from t1;
 ```
 
 Expected output:
+
 ```
 TiDB [(none)]> create database tidbtest;
 Query OK, 0 rows affected (0.12 sec)
@@ -373,8 +374,10 @@ There are 3 solutions to this issue:
     ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
     ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249
     ```
+
 - Start Drainer _before_ starting Pump.
 - Use `binlogctl` after starting PD (but before starting Drainer and Pump) to update the state of the paused Drainer:
+
     ```
     ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline
     ```

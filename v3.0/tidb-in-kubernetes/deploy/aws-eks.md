@@ -342,7 +342,7 @@ The Terraform module in our case typically combines several sub-modules:
 
 - `tidb-operator`, that provisions the Kubernetes control plane for TiDB cluster
 - `tidb-cluster`, that creates the resource pool in the target Kubernetes cluster and deploy the TiDB cluster
--  A `VPC` module, a `bastion` module and a `key-pair` module that are dedicated to TiDB on AWS
+- A `VPC` module, a `bastion` module and a `key-pair` module that are dedicated to TiDB on AWS
 
 The best practice for managing multiple Kubernetes clusters is creating a new directory for each of your Kubernetes clusters, and combine the above modules according to your needs via Terraform scripts, so that the Terraform states among clusters do not interfere with each other, and it is convenient to expand. Here's an example:
 

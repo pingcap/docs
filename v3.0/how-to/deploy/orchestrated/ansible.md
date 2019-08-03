@@ -93,6 +93,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     # visudo
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
+
 4. Generate the SSH key.
 
     Execute the `su` command to switch the user from `root` to `tidb`.

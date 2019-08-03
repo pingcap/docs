@@ -66,7 +66,7 @@ All the instances except ACK mandatory workers are deployed across availability 
     export TF_VAR_ALICLOUD_SECRET_KEY=<YOUR_SECRET_KEY>
     ```
 
-The `variables.tf` file contains default settings of variables used for deploying the cluster. You can change it or use the `-var` option to override a specific variable to fit your need.
+    The `variables.tf` file contains default settings of variables used for deploying the cluster. You can change it or use the `-var` option to override a specific variable to fit your need.
 
 2. Use Terraform to set up the cluster.
 

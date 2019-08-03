@@ -102,6 +102,7 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
     # ansible --version
       ansible 2.5.0
     ```
+
     > **Note:**
     >
     > Make sure that the version of Ansible is 2.5, otherwise a compatibility issue occurs.
