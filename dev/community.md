@@ -8,5 +8,5 @@ category: community
 
 - **Twitter**: [@PingCAP](https://twitter.com/PingCAP)
 - **Reddit**: <https://www.reddit.com/r/TiDB/>
-- **Stack Overflow**: `https://stackoverflow.com/questions/tagged/tidb`
+- **Stack Overflow**: <https://stackoverflow.com/questions/tagged/tidb>
 - **Mailing list**: [Google Group](https://groups.google.com/forum/#!forum/tidb-user)
