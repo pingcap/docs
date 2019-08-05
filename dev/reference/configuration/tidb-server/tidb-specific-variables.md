@@ -482,7 +482,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 1, indicating enabling the window function feature.
-- This variable is used to control whether to enable the support for window functions. Window functions may use reserved or key words. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `0`.
+- This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `0`.
 
 ### tidb_slow_query_file
 
