@@ -488,7 +488,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION
 - Default value: ""
-- When querying `INFORMATION_SCHEMA.SLOW_QUERY`, only the slow query log name is parsed set by `slow-query-file` in the configuration file. The slow query log name is "tidb-slow.log" by default. To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path. For details, see [Identify Slow Queries](/how-to/maintain/identify-slow-queries.md).
+- When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is "tidb-slow.log". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path. For details, see [Identify Slow Queries](/how-to/maintain/identify-slow-queries.md).
 
 ### tidb_enable_fast_analyze
 
