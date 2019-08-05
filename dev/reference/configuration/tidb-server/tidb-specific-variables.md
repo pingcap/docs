@@ -495,7 +495,7 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL
 - Default value: 0, indicating not enabling the statistics fast `Analyze` feature.
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
-- If the statistics fast `Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to an un optimal execution plan, for example, selecting a wrong index. If the execution time of non-fast `Analyze` statement is acceptable, it is recommended to disable the fast `Analyze` feature.
+- If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to an unoptimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
 
 ### tidb_expensive_query_time_threshold
 
