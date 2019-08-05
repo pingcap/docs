@@ -885,7 +885,7 @@ It is recommended to build a multi-source MySQL -> TiDB real-time replication en
 
 The total read capacity has no limit. You can increase the read capacity by adding more TiDB servers. Generally the write capacity has no limit as well. You can increase the write capacity by adding more TiKV nodes.
 
-#### The error message `transaction too large` is displayed.
+#### The error message `transaction too large` is displayed
 
 As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
 
