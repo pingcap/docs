@@ -515,4 +515,4 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION
 - Default value: 300
-- This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If the statement is not executed completely within the specified time value, a timeout error is returned.
+- This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned.
