@@ -133,7 +133,7 @@ When you see `Running`, it's time to hit <kbd>Ctrl</kbd>+<kbd>C</kbd> and procee
 
 ## Add Helm repo
 
-Helm repo (https://charts.pingcap.org/) houses PingCAP managed charts, such as tidb-operator, tidb-cluster and tidb-backup, etc. Add and check the repo with following commands:
+Helm repo (`https://charts.pingcap.org/`) houses PingCAP managed charts, such as tidb-operator, tidb-cluster and tidb-backup, etc. Add and check the repo with following commands:
 
 {{< copyable "shell-regular" >}}
 
@@ -164,7 +164,7 @@ helm search tidb-operator -l
 
 ## Deploy TiDB Operator
 
-Note that `<chartVersion>` is used in the rest of the document to represent the chart version, e.g. `v1.0.0-rc.1`.
+Note that `<chartVersion>` is used in the rest of the document to represent the chart version, e.g. `v1.0.0`.
 
 The first TiDB component we are going to install is the TiDB Operator, using a Helm Chart. TiDB Operator is the management system that works with Kubernetes to bootstrap your TiDB cluster and keep it running. This step assumes you are in the `tidb-operator` working directory:
 
@@ -286,7 +286,7 @@ To do so, use the following command:
 kubectl -n tidb port-forward svc/demo-grafana 3000:3000 &>/dev/null &
 ```
 
-In Cloud Shell, click on the Web Preview button and enter 3000 for the port. This opens a new browser tab pointing to the Grafana dashboards. Alternatively, use the following URL https://ssh.cloud.google.com/devshell/proxy?port=3000 in a new tab or window.
+In Cloud Shell, click on the Web Preview button and enter 3000 for the port. This opens a new browser tab pointing to the Grafana dashboards. Alternatively, use the following URL `https://ssh.cloud.google.com/devshell/proxy?port=3000` in a new tab or window.
 
 If not using Cloud Shell, point a browser to `localhost:3000`.
 

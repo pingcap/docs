@@ -48,16 +48,15 @@ TiDB Operator provides several ways to deploy TiDB clusters in Kubernetes:
         - [Deploy TiDB on Alibaba Cloud ACK](tidb-in-kubernetes/deploy/alibaba-cloud.md)
 
     - In an existing Kubernetes cluster:
-    
+
         First install TiDB Operator in a Kubernetes cluster according to [Deploy TiDB Operator in Kubernetes](tidb-in-kubernetes/deploy/tidb-operator.md), then deploy your TiDB clusters according to [Deploy TiDB in General Kubernetes](tidb-in-kubernetes/deploy/general-kubernetes.md).
-    
+
         You also need to adjust the configuration of the Kubernetes cluster based on [Prerequisites for TiDB in Kubernetes](tidb-in-kubernetes/deploy/prerequisites.md) and configure the local PV for your Kubernetes cluster to achieve low latency of local storage for TiKV according to [Local PV Configuration](tidb-in-kubernetes/reference/configuration/local-pv.md).
 
 Before deploying TiDB on any of the above two environments, you can always refer to [TiDB Cluster Configuration Document](/tidb-in-kubernetes/reference/configuration/tidb-cluster.md) to customize TiDB configurations.
 
 After the deployment is complete, see the following documents to use, operate, and maintain TiDB clusters in Kubernetes:
 
-+ [Manage the TiDB Cluster](tidb-in-kubernetes/maintain/kubernetes-node.md)
 + [Access the TiDB Cluster](tidb-in-kubernetes/deploy/access-tidb.md)
 + [Scale TiDB Cluster](tidb-in-kubernetes/scale-in-kubernetes.md)
 + [Upgrade TiDB Cluster](tidb-in-kubernetes/upgrade/tidb-cluster.md#upgrade-the-version-of-tidb-cluster)
@@ -66,6 +65,7 @@ After the deployment is complete, see the following documents to use, operate, a
 + [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
 + [Monitor a TiDB Cluster in Kubernetes](tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
 + [Collect TiDB Logs in Kubernetes](tidb-in-kubernetes/maintain/log-collecting.md)
++ [Maintain Kubernetes Nodes that Hold the TiDB Cluster](tidb-in-kubernetes/maintain/kubernetes-node.md)
 
 When a problem occurs and the cluster needs diagnosis, you can:
 

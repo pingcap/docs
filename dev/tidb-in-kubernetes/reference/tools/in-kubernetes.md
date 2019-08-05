@@ -33,7 +33,7 @@ Assume that your local port `2379` has been occupied and you want to switch to a
 ```shell
 kubectl port-forward -n <namespace> svc/<cluster-name>-pd <local-port>:2379 &>/tmp/portforward-pd.log
 ```
- 
+
 Then you need to explicitly assign a PD port for `pd-ctl`:
 
 {{< copyable "shell-regular" >}}
@@ -201,9 +201,9 @@ helm search pingcap -l
 
 ```
 NAME                    CHART VERSION   APP VERSION DESCRIPTION
-pingcap/tidb-backup     v1.0.0-rc.1                 A Helm chart for TiDB Backup or Restore
-pingcap/tidb-cluster    v1.0.0-rc.1                 A Helm chart for TiDB Cluster
-pingcap/tidb-operator   v1.0.0-rc.1                 tidb-operator Helm chart for Kubernetes
+pingcap/tidb-backup     v1.0.0                      A Helm chart for TiDB Backup or Restore
+pingcap/tidb-cluster    v1.0.0                      A Helm chart for TiDB Cluster
+pingcap/tidb-operator   v1.0.0                      tidb-operator Helm chart for Kubernetes
 ```
 
 When a new version of chart has been released, you can use `helm repo update` to update the repository cached locally:
