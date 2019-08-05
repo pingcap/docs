@@ -2,10 +2,17 @@
 
 ## Documentation List
 
-+ [Introduction](overview.md)
++ Introduction
+  - [TiDB Introduction](overview.md)
+  + Benchmarks
+    - [How to Test TiDB Using Sysbench](benchmark/how-to-run-sysbench.md)
+    - [How to Run TPC-C Test on TiDB](benchmark/how-to-run-tpcc.md)
+    - [Sysbench Performance Test - v3.0 vs. v2.1](benchmark/sysbench-v4.md)
+    - [TPC-C Performance Test - v3.0 vs. v2.1](benchmark/tpcc.md)
+    - [DM Benchmark Report](benchmark/dm-v1-alpha.md)
 + Concepts
   - [Architecture](architecture.md)
-  + [Key Features](key-features.md)
+  + Key Features
     - [Horizontal Scalability](key-features.md#horizontal-scalability)
     - [MySQL Compatible Syntax](key-features.md#mysql-compatible-syntax)
     - [Replicate from and to MySQL](key-features.md#replicate-from-and-to-mysql)
@@ -25,12 +32,10 @@
     - [Online Schema Changes](key-features.md#online-schema-changes)
 + How-to
   + Get Started
-    + Start a Local Cluster
-      - [From Binary](how-to/get-started/local-cluster/install-from-binary.md)
-      - [From Homebrew](how-to/get-started/local-cluster/install-from-homebrew.md)
-      - [From DBdeployer](how-to/get-started/local-cluster/install-from-dbdeployer.md)
-      - [In Kubernetes](how-to/get-started/local-cluster/install-from-kubernetes.md)
-      - [In Docker Compose](how-to/get-started/local-cluster/install-from-docker-compose.md)
+    + Start a Cluster
+      - [From Binary](how-to/get-started/deploy-tidb-from-binary.md)
+      - [From Homebrew](how-to/get-started/deploy-tidb-from-homebrew.md)
+      - [From DBdeployer](how-to/get-started/deploy-tidb-from-dbdeployer.md)
     - [Explore SQL with TiDB](how-to/get-started/explore-sql.md)
     - [Import Example Database](how-to/get-started/import-example-database.md)
     - [Read Historical Data](how-to/get-started/read-historical-data.md)
@@ -46,7 +51,6 @@
       - [Ansible Deployment (Recommended)](how-to/deploy/orchestrated/ansible.md)
       - [Ansible Offline Deployment](how-to/deploy/orchestrated/offline-ansible.md)
       - [Docker Deployment](how-to/deploy/orchestrated/docker.md)
-      - [Kubernetes Deployment](how-to/deploy/orchestrated/kubernetes.md)
     + Geographic Redundancy
       - [Overview](how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
@@ -218,6 +222,7 @@
       - [`SHOW TABLE STATUS`](reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](reference/sql/statements/show-warnings.md)
+      - [`SPLIT REGION`](reference/sql/statements/split-region.md)
       - [`START TRANSACTION`](reference/sql/statements/start-transaction.md)
       - [`TRACE`](reference/sql/statements/trace.md)
       - [`TRUNCATE`](reference/sql/statements/truncate.md)
@@ -225,6 +230,7 @@
       - [`USE`](reference/sql/statements/use.md)
     - [Constraints](reference/sql/constraints.md)
     - [Generated Columns](reference/sql/generated-columns.md)
+    - [Partitioning](reference/sql/partitioning.md)
     - [Character Set](reference/sql/character-set.md)
   + Configuration
     + tidb-server
@@ -251,12 +257,15 @@
     - [`information_schema`](reference/system-databases/information-schema.md)
   - [Errors Codes](reference/error-codes.md)
   - [Supported Client Drivers](reference/supported-clients.md)
-  - [Garbage Collection (GC)](reference/garbage-collection.md)
+  + Garbage Collection (GC)
+    - [GC Overview](reference/garbage-collection/overview.md)
+    - [GC Configuration](reference/garbage-collection/configuration.md)
   + Performance
     - [Overview](reference/performance/sql-optimizer-overview.md)
     - [Understanding the Query Execution Plan](reference/performance/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](reference/performance/statistics.md)
     - [Optimizer Hints](reference/performance/optimizer-hints.md)
+    - [Check the TiDB Cluster Status Using SQL Statements](reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](reference/performance/execution-plan-bind.md)
     - [Tune TiKV](reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
@@ -292,6 +301,7 @@
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](how-to/migrate/from-aurora.md)
       - [Troubleshoot](how-to/troubleshoot/data-migration.md)
+      - [FAQ](faq/data-migration.md)
     + TiDB Lightning
       - [Overview](reference/tools/tidb-lightning/overview.md)
       - [Deployment](reference/tools/tidb-lightning/deployment.md)
@@ -303,7 +313,7 @@
       - [FAQ](faq/tidb-lightning.md)
     - [PD Control](reference/tools/pd-control.md)
     - [PD Recover](reference/tools/pd-recover.md)
-    - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
+    - [TiKV Control](reference/tools/tikv-control.md)
     - [TiDB Control](reference/tools/tidb-control.md)
     - [Download](reference/tools/download.md)
   + Key Monitoring Metrics
@@ -312,9 +322,47 @@
     - [PD](reference/key-monitoring-metrics/pd-dashboard.md)
     - [TiKV](reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Adopters](adopters.md)
++ TiDB in Kubernetes
+  - [About TiDB Operator](tidb-in-kubernetes/tidb-operator-overview.md)
+  + Get Started
+    - [DinD](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
+    - [GKE](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
+    - [Minikube](tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
+  + Deploy
+    - [Prerequisites](tidb-in-kubernetes/deploy/prerequisites.md)
+    - [TiDB Operator](tidb-in-kubernetes/deploy/tidb-operator.md)
+    - [TiDB in General Kubernetes](tidb-in-kubernetes/deploy/general-kubernetes.md)
+    - [TiDB in AWS EKS](tidb-in-kubernetes/deploy/aws-eks.md)
+    - [TiDB in GCP GKE](tidb-in-kubernetes/deploy/gcp-gke.md)
+    - [TiDB in Alibaba Cloud ACK](tidb-in-kubernetes/deploy/alibaba-cloud.md)
+    - [Access TiDB in Kubernetes](tidb-in-kubernetes/deploy/access-tidb.md)
+  + Configure
+    - [Cluster Initialization](tidb-in-kubernetes/initialize-cluster.md)
+  - [Monitor](tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
+  + Maintain
+    - [Destroy a TiDB cluster](tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
+    - [Maintain a Hosting Kubernetes Node](tidb-in-kubernetes/maintain/kubernetes-node.md)
+    - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
+    - [Collect Logs](tidb-in-kubernetes/maintain/log-collecting.md)
+    - [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
+  - [Scale](tidb-in-kubernetes/scale-in-kubernetes.md)
+  + Upgrade
+    - [TiDB Cluster](tidb-in-kubernetes/upgrade/tidb-cluster.md)
+    - [TiDB Operator](tidb-in-kubernetes/upgrade/tidb-operator.md)
+  + Reference
+    + Configuration
+      - [TiDB Cluster](tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
+      - [Backup](tidb-in-kubernetes/reference/configuration/backup.md)
+      - [Local PV](tidb-in-kubernetes/reference/configuration/local-pv.md)
+    + Tools
+      - [tkctl](tidb-in-kubernetes/reference/tools/tkctl.md)
+      - [Tools in Kubernetes](tidb-in-kubernetes/reference/tools/in-kubernetes.md)
+  - [Troubleshoot](tidb-in-kubernetes/troubleshoot.md)
+  - [FAQs](tidb-in-kubernetes/faq.md)
 + FAQs
   - [TiDB FAQs](faq/tidb.md)
   - [TiDB Lightning FAQs](faq/tidb-lightning.md)
+  - [Data Migration FAQ](faq/data-migration.md)
   - [Upgrade FAQs](faq/upgrade.md)
 + Support
   - [Support Resources](support-resources.md)
@@ -325,6 +373,7 @@
 - [Roadmap](roadmap.md)
 + [Releases](releases/rn.md)
   + v3.0
+    - [3.0.1](releases/3.0.1.md)
     - [3.0 GA](releases/3.0-ga.md)
     - [3.0.0-rc.3](releases/3.0.0-rc.3.md)
     - [3.0.0-rc.2](releases/3.0.0-rc.2.md)
@@ -332,6 +381,8 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.15](releases/2.1.15.md)
+    - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
     - [2.1.12](releases/2.1.12.md)
     - [2.1.11](releases/2.1.11.md)

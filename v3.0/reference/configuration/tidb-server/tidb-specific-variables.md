@@ -2,7 +2,6 @@
 title: TiDB Specific System Variables
 summary: Use system variables specific to TiDB to optimize performance.
 category: reference
-aliases: ['/docs/sql/tidb-specific/']
 ---
 
 # TiDB Specific System Variables
@@ -178,16 +177,14 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to divide the inserted data automatically. It is valid only when `autocommit` is enabled.
-- When inserting a large amount of data, you can set the variable value to 1. Then the inserted data is automatically divided into multiple batches and each batch is inserted by a single transaction.
-- This operation might lead to a loss of transaction atomicity. Therefore, it is not recommended to use this parameter in the production environment.
+- When inserting a large amount of data, you can set the variable value to `1`. Then, the inserted data is automatically divided into multiple batches and each batch is inserted by a single transaction. This operation breaks the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ### tidb_batch_delete
 
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to divide the data for deletion automatically. It is valid only when you delete from a single table and `autocommit` is enabled. For the definition of single-table DELETE statement, see [here](https://dev.mysql.com/doc/refman/8.0/en/delete.html).
-- When deleting a large amount of data, you can set the variable value to 1. Then the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction.
-- This operation might lead to a loss of transaction atomicity. Therefore, it is not recommended to use this parameter in the production environment.
+- When deleting a large amount of data, you can set the variable value to `1`. Then, the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction. This operation breaks the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ### tidb_dml_batch_size
 
@@ -382,3 +379,19 @@ Usage example:
 ```sql
 set tidb_query_log_max_len = 20
 ```
+
+### tidb_wait_split_region_finish
+
+- Scope: SESSION
+- Default value: 1
+
+Depending on PD scheduling and the load condition of TiKV, Region split might take a long time. This variable determines whether to wait for all Regions to be split before returning the result to the client when executing `SPLIT REGION`. Value 1 means waiting for the split to complete before returning the result. 0 means returning the result without waiting for Region split.
+
+It should be noted that Region split can impact the read/write performance for the Regions being split. For scenarios such as batch writing and data importing, it is recommended to wait for the Region split to finish before data importing.
+
+### tidb_wait_split_region_timeout
+
+- Scope: SESSION
+- Default value: 300
+
+This variable specifies the execution timeout of the `SPLIT REGION` statement in seconds. A timeout error is returned if the operation is out of time.

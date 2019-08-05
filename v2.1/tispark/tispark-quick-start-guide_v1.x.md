@@ -6,7 +6,7 @@ category: User Guide
 
 # TiSpark Quick Start Guide
 
-To make it easy to [try TiSpark](/tispark/tispark-user-guide.md), the TiDB cluster installed using TiDB-Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
+To make it easy to [try TiSpark](/reference/tispark.md), the TiDB cluster installed using TiDB-Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
 
 ## Deployment information
 
@@ -29,7 +29,7 @@ To make it easy to [try TiSpark](/tispark/tispark-user-guide.md), the TiDB clust
 
 Download the latest version of JDK 1.8 from [Oracle JDK official download page](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html). The version used in the following example is `jdk-8u141-linux-x64.tar.gz`.
 
-Extract the package and set the environment variables based on your JDK deployment directory.  
+Extract the package and set the environment variables based on your JDK deployment directory.
 
 Edit the `~/.bashrc` file. For example:
 
