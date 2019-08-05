@@ -470,7 +470,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 1
-- When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method. 
+- When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.
     - When the value is 0, the heuristic method is not used.
     - When the value is greater than 0:
         - A larger value indicates that an index scan will probably be used in the heuristic method.
