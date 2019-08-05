@@ -510,7 +510,7 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION
 - Default value: 1, indicating returning the result after all Regions are scattered.
 - It usually takes a long time to scatter Regions, which is determined by PD scheduling and TiKV loads. This variable is used to set whether to return the result to the client after all Regions are scattered completely when the `SPLIT REGION` statement is being executed. Value `0` indicates returning the value before finishing scattering all Regions.
-- Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write and data importing scenarios, it is recommended to import data after Regions scattering is finished.
+- Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write or data importing scenarios, it is recommended to import data after Regions scattering is finished.
 
 ### tidb_wait_split_region_timeout
 
