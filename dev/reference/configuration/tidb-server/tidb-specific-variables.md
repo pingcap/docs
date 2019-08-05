@@ -456,7 +456,7 @@ set tidb_query_log_max_len = 20
     select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
     ```
 
-    If `t1` is limited to be unique and not null in the `aa` column. You can use the following statement, without aggregation.
+    If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
 
     ```sql
     select * from t, t1 where t.a=t1.a
