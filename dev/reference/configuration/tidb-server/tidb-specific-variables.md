@@ -466,7 +466,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 0.9
-- This variable is used to set the threshold value of estimating the row count of the current column by a method that estimates the number of rows of the `handle` column using the column histogram. If the order correlation between the current column and the `handle` column exceeds the threshold value, this method is enabled.
+- This variable is used to set the threshold value that determines whether to enable estimating the row count by using column order correlation. If the order correlation between the current column and the `handle` column exceeds the threshold value, this method is enabled.
 
 ### tidb_opt_correlation_exp_factor
 
