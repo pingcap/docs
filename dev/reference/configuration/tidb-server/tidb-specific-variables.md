@@ -437,7 +437,7 @@ set tidb_query_log_max_len = 20
 - Scope: SERVER
 - Default value: 1, indicating check the validity of UTF-8 data. This default behavior is compatible with MySQL.
 - This variable is used to set whether to check the validity of UTF-8 data.
-- To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because you do not do data validity check in the earlier version. For details, see [FAQs After Upgrade](/faq/upgrade.md).
+- To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because there is no data validity check in the earlier version. For details, see [FAQs After Upgrade](/faq/upgrade.md).
 
 ### tidb_opt_insubq_to_join_and_agg
 
