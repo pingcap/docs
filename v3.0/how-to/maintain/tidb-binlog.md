@@ -100,7 +100,7 @@ Command example:
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd update-pump -node-id ip-127-0-0-1:8250 -state paused
     ```
 
-    This command modifies the state of Pump or Drainer saved in the Placement Driver (PD).
+    This command modifies the state of Pump or Drainer saved in the Placement Driver (PD) and is only used if Pump or Drainer service fails to function properly. 
 
 - Pause or close Pump or Drainer:
 
