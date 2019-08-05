@@ -501,7 +501,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SERVER
 - Default value: 60
-- This variable is used to set the threshold value of printing expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
+- This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
     - Slow logs are printed after the statement is executed.
     - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
 
