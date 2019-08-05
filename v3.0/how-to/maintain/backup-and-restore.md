@@ -93,32 +93,32 @@ two more command need to executed:
 
 - step 1: before executing `mydumper` command, you need to query the GC values of TiDB cluster and adjust it to a suitable value using the MySQL client:
 
-```sql
-mysql> select VARIABLE_NAME, VARIABLE_VALUE from mysql.tidb;
-+-----------------------+------------------------------------------------------------------------------------------------+
-| VARIABLE_NAME         | VARIABLE_VALUE                                                                                 |
-+-----------------------+------------------------------------------------------------------------------------------------+
-| bootstrapped          | True                                                                                           |
-| tidb_server_version   | 18                                                                                             |
-| tikv_gc_leader_uuid   | 58accebfa7c0004                                                                                |
-| tikv_gc_leader_desc   | host:ip-172-16-30-5, pid:95472, start at 2018-04-11 13:43:30.73076656 +0800 CST m=+0.068873865 |
-| tikv_gc_leader_lease  | 20180418-11:02:30 +0800 CST                                                                    |
-| tikv_gc_run_interval  | 10m0s                                                                                          |
-| tikv_gc_life_time     | 10m0s                                                                                          |
-| tikv_gc_last_run_time | 20180418-10:59:30 +0800 CST                                                                    |
-| tikv_gc_safe_point    | 20180418-10:58:30 +0800 CST                                                                    |
-| tikv_gc_concurrency   | 1                                                                                              |
-+-----------------------+------------------------------------------------------------------------------------------------+
-10 rows in set (0.02 sec)
+  ```sql
+  mysql> select VARIABLE_NAME, VARIABLE_VALUE from mysql.tidb;
+  +-----------------------+------------------------------------------------------------------------------------------------+
+  | VARIABLE_NAME         | VARIABLE_VALUE                                                                                 |
+  +-----------------------+------------------------------------------------------------------------------------------------+
+  | bootstrapped          | True                                                                                           |
+  | tidb_server_version   | 18                                                                                             |
+  | tikv_gc_leader_uuid   | 58accebfa7c0004                                                                                |
+  | tikv_gc_leader_desc   | host:ip-172-16-30-5, pid:95472, start at 2018-04-11 13:43:30.73076656 +0800 CST m=+0.068873865 |
+  | tikv_gc_leader_lease  | 20180418-11:02:30 +0800 CST                                                                    |
+  | tikv_gc_run_interval  | 10m0s                                                                                          |
+  | tikv_gc_life_time     | 10m0s                                                                                          |
+  | tikv_gc_last_run_time | 20180418-10:59:30 +0800 CST                                                                    |
+  | tikv_gc_safe_point    | 20180418-10:58:30 +0800 CST                                                                    |
+  | tikv_gc_concurrency   | 1                                                                                              |
+  +-----------------------+------------------------------------------------------------------------------------------------+
+  10 rows in set (0.02 sec)
 
-update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
-```
+  update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
+  ```
 
 - step 2:after finishing `mydumper` command, you need to restore the GC value of TiDB cluster to its origin value in step 1
-
-```sql
-update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
-```
+  
+  ```sql
+  update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
+  ```
 
 ### Restore data into TiDB
 
