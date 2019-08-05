@@ -39,7 +39,7 @@ cd tidb-enterprise-tools-latest-linux-amd64
 
 ## Full backup and restoration using `mydumper`/`loader`
 
-You can use [`mydumper`](/reference/tools/mydumper.md) to export data from MySQL and [`loader`](/reference/tools/loader.md) to import the data into TiDB.
+You can use [`mydumper`](/reference/tools/mydumper.md) to export data from TiDB and [`loader`](/reference/tools/loader.md) to import the data into TiDB.
 
 > **Important**: You must use the `mydumper` from the Enterprise Tools package, and not the `mydumper` provided by your operating system's package manager. The upstream version of `mydumper` does not yet handle TiDB correctly ([#155](https://github.com/maxbube/mydumper/pull/155)). Using `mysqldump` is also not recommended, as it is much slower for both backup and restoration.
 
@@ -48,7 +48,7 @@ You can use [`mydumper`](/reference/tools/mydumper.md) to export data from MySQL
 To quickly backup and restore data (especially large amounts of data), refer to the following recommendations:
 
 - Keep the exported data file as small as possible and it is recommended keep it within 64M. You can use the `-F` parameter to set the value.
-- You can adjust the `-t` parameter of `loader` based on the number and the load of TiKV instances. For example, if there are three TiKV instances, `-t` can be set to 3 * (1 ~ n). If the load of TiKV is too high and the log `backoffer.maxSleep 15000ms is exceeded` is displayed many times, decrease the value of `-t`; otherwise, increase it.
+- You can adjust the `-t` parameter of `loader` based on the number and the load of TiKV instances. For example, if there are three TiKV instances, `-t` can be set to around 3 * (1 ~ n). If the load of TiKV is too high and the log `backoffer.maxSleep 15000ms is exceeded` is displayed many times, decrease the value of `-t`; otherwise, increase it.
 
 #### An example of restoring data and related configuration
 
@@ -82,6 +82,41 @@ In this command,
 - `-t 16`: means 16 threads are used to export the data.
 - `-F 64`: means a table is partitioned into chunks and one chunk is 64MB.
 - `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
+
+If `mydumper` meeting error likes
+```log
+** (mydumper:27528): CRITICAL **: 13:25:09.081: Could not read data from samsung_bench.TEST_TBL: GC life time is shorter than transaction duration, transaction starts at 2019-08-05 21:10:01.451 +0800 CST, GC safe point is 2019-08-05 21:14:53.801 +0800 CST
+```
+
+two more command need to executed:
+* step 1: before executing `mydumper` command, you need to query the GC values of TiDB cluster and adjust it to a suitable value using the MySQL client:
+
+```sql
+mysql> select VARIABLE_NAME, VARIABLE_VALUE from mysql.tidb;
++-----------------------+------------------------------------------------------------------------------------------------+
+| VARIABLE_NAME         | VARIABLE_VALUE                                                                                 |
++-----------------------+------------------------------------------------------------------------------------------------+
+| bootstrapped          | True                                                                                           |
+| tidb_server_version   | 18                                                                                             |
+| tikv_gc_leader_uuid   | 58accebfa7c0004                                                                                |
+| tikv_gc_leader_desc   | host:ip-172-16-30-5, pid:95472, start at 2018-04-11 13:43:30.73076656 +0800 CST m=+0.068873865 |
+| tikv_gc_leader_lease  | 20180418-11:02:30 +0800 CST                                                                    |
+| tikv_gc_run_interval  | 10m0s                                                                                          |
+| tikv_gc_life_time     | 10m0s                                                                                          |
+| tikv_gc_last_run_time | 20180418-10:59:30 +0800 CST                                                                    |
+| tikv_gc_safe_point    | 20180418-10:58:30 +0800 CST                                                                    |
+| tikv_gc_concurrency   | 1                                                                                              |
++-----------------------+------------------------------------------------------------------------------------------------+
+10 rows in set (0.02 sec)
+
+update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
+```
+* step 2:after finishing `mydumper` command, you need to restore the GC value of TiDB cluster to its origin value in step 1
+
+```sql
+update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
+```
+
 
 ### Restore data into TiDB
 
