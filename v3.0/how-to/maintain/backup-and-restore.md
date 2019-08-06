@@ -83,7 +83,7 @@ In this command,
 - `-F 64`: means a table is partitioned into chunks and one chunk is 64MB.
 - `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
 
-If `mydumper` emits error likes
+If `mydumper` emits error like
 
 ```log
 ** (mydumper:27528): CRITICAL **: 13:25:09.081: Could not read data from testSchema.testTable: GC life time is shorter than transaction duration, transaction starts at 2019-08-05 21:10:01.451 +0800 CST, GC safe point is 2019-08-05 21:14:53.801 +0800 CST
