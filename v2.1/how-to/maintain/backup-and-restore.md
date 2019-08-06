@@ -19,7 +19,7 @@ Use the following tools for data backup and restoration:
 - `mydumper`: to export data from TiDB
 - `loader`: to import data into TiDB
 
-### Download TiDB toolset (Linux)
+## Download TiDB toolset (Linux)
 
 ```bash
 # Download the tool package.
