@@ -84,7 +84,7 @@ log-level = "info"
 # If it is set to "mysql", you need to configure `host`, `port`, `user` and `password` in [dest-db].
 dest-type = "mysql"
 
-# Safe mode configuration
+# Safe-mode configuration
 # Value: "true/false" ("false" by default)
 # If it is set to "true", Reparo splits the update statement into a delete plus replace statement.
 safe-mode = false
