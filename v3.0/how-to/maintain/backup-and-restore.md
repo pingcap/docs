@@ -7,8 +7,6 @@ aliases: ['/docs/op-guide/backup-restore/']
 
 # Backup and Restore
 
-## About
-
 This document describes how to back up and restore the data of TiDB. Currently, this document only covers full backup and restoration.
 
 Here we assume that the TiDB service information is as follows:
@@ -83,33 +81,35 @@ In this command,
 - `-F 64`: means a table is partitioned into chunks and one chunk is 64MB.
 - `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
 
-If `mydumper` emits error like
+If `mydumper` emits error like:
 
-```log
+```
 ** (mydumper:27528): CRITICAL **: 13:25:09.081: Could not read data from testSchema.testTable: GC life time is shorter than transaction duration, transaction starts at 2019-08-05 21:10:01.451 +0800 CST, GC safe point is 2019-08-05 21:14:53.801 +0800 CST
 ```
 
-two more commands need to be executed:
+Then execute two more commands:
 
-- step 1: before executing `mydumper` command, you need to query the GC values of TiDB cluster and adjust it to a suitable value using the MySQL client:
+- Step 1: before executing the `mydumper` command, query the GC values of the TiDB cluster and adjust it to a suitable value using the MySQL client.
 
-  ```sql
-  mysql> SELECT * FROM mysql.tidb WHERE VARIABLE_NAME = 'tikv_gc_life_time'
-  +-----------------------+------------------------------------------------------------------------------------------------+
-  | VARIABLE_NAME         | VARIABLE_VALUE                                                                                 |
-  +-----------------------+------------------------------------------------------------------------------------------------+
-  | tikv_gc_life_time     | 10m0s                                                                                          |
-  +-----------------------+------------------------------------------------------------------------------------------------+
-  1 rows in set (0.02 sec)
+    ```sql
+    mysql> SELECT * FROM mysql.tidb WHERE VARIABLE_NAME = 'tikv_gc_life_time'
+    +-----------------------+------------------------------------------------------------------------------------------------+
+    | VARIABLE_NAME         | VARIABLE_VALUE                                                                                 |
+    +-----------------------+------------------------------------------------------------------------------------------------+
+    | tikv_gc_life_time     | 10m0s                                                                                          |
+    +-----------------------+------------------------------------------------------------------------------------------------+
+    1 rows in set (0.02 sec)
 
-  mysql> update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
-  ```
+    mysql> update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
+    ```
 
-- step 2: after finishing the `mydumper` command, you need to restore the GC value of TiDB cluster to its original value in step 1
-  
-  ```sql
-  update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
-  ```
+- Step 2: after you finish running the `mydumper` command, restore the GC value of the TiDB cluster to its original value in step 1.
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
+    ```
 
 ### Restore data into TiDB
 
