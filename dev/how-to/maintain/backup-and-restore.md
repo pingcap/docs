@@ -54,14 +54,14 @@ To quickly backup and restore data (especially large amounts of data), refer to 
 - The total size of the exported files is 214G. A single table has 8 columns and 2 billion rows.
 - The cluster topology:
     - 12 TiKV instances: 4 nodes, 3 TiKV instances per node
-  - 4 TiDB instances
-  - 3 PD instances
+    - 4 TiDB instances
+    - 3 PD instances
 - The configuration of each node:
     - CPU: Intel Xeon E5-2670 v3 @ 2.30GHz
-  - 48 vCPU [2 x 12 physical cores]
-  - Memory: 128G
-  - Disk: sda [raid 10, 300G] sdb[RAID 5, 2T]
-  - Operating System: CentOS 7.3
+    - 48 vCPU [2 x 12 physical cores]
+    - Memory: 128G
+    - Disk: sda [raid 10, 300G] sdb[RAID 5, 2T]
+    - Operating System: CentOS 7.3
 - The `-F` parameter of `mydumper` is set to 16 and the `-t` parameter of `loader` is set to 64.
 
 **Results**: It takes 11 hours to import all the data, which is 19.4G/hour.
