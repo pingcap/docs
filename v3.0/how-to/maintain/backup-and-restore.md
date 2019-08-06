@@ -89,7 +89,7 @@ If `mydumper` meeting error likes
 ** (mydumper:27528): CRITICAL **: 13:25:09.081: Could not read data from samsung_bench.TEST_TBL: GC life time is shorter than transaction duration, transaction starts at 2019-08-05 21:10:01.451 +0800 CST, GC safe point is 2019-08-05 21:14:53.801 +0800 CST
 ```
 
-two more command need to executed:
+two more commands need to be executed:
 
 - step 1: before executing `mydumper` command, you need to query the GC values of TiDB cluster and adjust it to a suitable value using the MySQL client:
 
