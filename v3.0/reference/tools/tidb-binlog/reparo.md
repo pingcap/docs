@@ -46,7 +46,7 @@ Usage of Reparo:
     Format: "2006-01-02 15:04:05"
     If it is not set, the recovery process ends up with the last binlog file.
 -safe-mode bool
-    Specifies whether to enable safe mode. When enabled, it supports repeated synchronization. 
+    Specifies whether to enable safe mode. When enabled, it supports repeated synchronization.
 ```
 
 ### Description of the configuration file
