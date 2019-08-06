@@ -46,11 +46,8 @@ If the GCP project is new, make sure the relevant APIs are enabled:
 {{< copyable "shell-regular" >}}
 
 ```bash
-gcloud services enable cloudresourcemanager.googleapis.com && \
-gcloud services enable cloudbilling.googleapis.com && \
-gcloud services enable iam.googleapis.com && \
-gcloud services enable compute.googleapis.com && \
-gcloud services enable container.googleapis.com
+gcloud services enable cloudresourcemanager.googleapis.com cloudbilling.googleapis.com cloud services enable iam.googleapis.com \
+    compute.googleapis.com container.googleapis.com
 ```
 
 ### Configure Terraform
