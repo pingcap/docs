@@ -102,7 +102,7 @@ two more commands need to be executed:
   +-----------------------+------------------------------------------------------------------------------------------------+
   1 rows in set (0.02 sec)
 
-mysql> update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
+  mysql> update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
   ```
 
 - step 2: after finishing the `mydumper` command, you need to restore the GC value of TiDB cluster to its original value in step 1
