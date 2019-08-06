@@ -1,5 +1,7 @@
 # TiDB Documentation
 
+<!-- markdownlint-disable MD007 -->
+
 ## Documentation List
 
 + Introduction
