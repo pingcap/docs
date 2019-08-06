@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "$0")/.."
+
+if ! program=$(which markdownlint) &>/dev/null ; then
+  program=./node_modules/.bin/markdownlint
+  if ! test -f ./node_modules/.bin/markdownlint; then
+    npm install --save-dev markdownlint-cli
+  fi
+fi
+
+exec node "$program" --config ./scripts/mdlint.json "$@"

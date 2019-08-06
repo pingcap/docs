@@ -12,7 +12,7 @@ jobs:
           name: "Install markdownlint"
           command: |
             sudo npm install -g markdownlint-cli
-            markdownlint --version
+            markdownlint --config ./scripts/mdlint.json --version
 
       - run:
           name: "Lint README"
@@ -23,7 +23,7 @@ jobs:
           command: |
             git remote add upstream https://github.com/pingcap/docs.git
             git fetch upstream
-            markdownlint $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*' ':(exclude)v1.0/*' ':(exclude)v2.0/*' ':(exclude)v2.1-legacy/*')
+            markdownlint --config ./scripts/mdlint.json $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*' ':(exclude)v1.0/*' ':(exclude)v2.0/*' ':(exclude)v2.1-legacy/*')
 
       - run:
           name: "Check links"
