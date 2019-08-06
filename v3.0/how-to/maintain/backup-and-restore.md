@@ -111,10 +111,10 @@ two more commands need to be executed:
   +-----------------------+------------------------------------------------------------------------------------------------+
   10 rows in set (0.02 sec)
 
-  update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
+mysql> update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
   ```
 
-- step 2:after finishing `mydumper` command, you need to restore the GC value of TiDB cluster to its origin value in step 1
+- step 2: after finishing the `mydumper` command, you need to restore the GC value of TiDB cluster to its original value in step 1
   
   ```sql
   update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
