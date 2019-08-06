@@ -257,18 +257,19 @@ module "example-tidb-cluster" {
   tikv_instance_type         = "n1-standard-4"
   tidb_instance_type         = "n1-standard-2"
   monitor_instance_type      = "n1-standard-1"
-  pd_node_count              = 1 
-  tikv_node_count            = 2 
+  pd_node_count              = 1
+  tikv_node_count            = 2
   tidb_node_count            = 1
   monitor_node_count         = 1
 }
 ```
+
 > **Note:**
-> 
+>
 > The `cluster_name` of each cluster must be unique.
 
 > **Note:**
-> 
+>
 > The actual number of nodes created are multiplied by the number of availability zones in the region.
 
 You can get the addresses for TiDB and the monitoring service of the created cluster via `kubectl`. If you want the Terraform script to print this information, you can add `output` sections in `outputs.tf`:
@@ -278,6 +279,7 @@ output "how_to_connect_to_example_tidb_cluster_from_bastion" {
   value = module.example-tidb-cluster.how_to_connect_to_tidb_from_bastion
 }
 ```
+
 This will print out the exact command to use to connect to the TiDB cluster we just created from the bastion instance.
 
 ## Scale
@@ -402,7 +404,7 @@ The Terraform module in our case typically combines several sub-modules:
 
 - `tidb-operator`, that provisions the Kubernetes control plane for TiDB cluster
 - `tidb-cluster`, that creates the resource pool in the target Kubernetes cluster and deploy the TiDB cluster
--  A `vpc` module, a `bastion` module and a `project-credentials` module that are dedicated to TiDB on GKE
+- A `vpc` module, a `bastion` module and a `project-credentials` module that are dedicated to TiDB on GKE
 
 The best practice for managing multiple Kubernetes clusters is creating a new directory for each of your Kubernetes clusters, and combine the above modules according to your needs via Terraform scripts, so that the Terraform states among clusters do not interfere with each other, and it is convenient to expand. Here's an example:
 
