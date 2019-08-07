@@ -9,4 +9,4 @@ if ! program=$(which markdownlint) &>/dev/null ; then
   fi
 fi
 
-exec node "$program" --config ./scripts/mdlint.json "$@"
+exec node "$program" "$@"
