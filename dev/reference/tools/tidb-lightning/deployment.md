@@ -417,9 +417,13 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     [post-restore]
     # Performs `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity.
     checksum = true
-    # Performs level-1 compaction after importing each table.
+    # If the value is set to `true`, a level-1 compaction is performed
+    # every time a table is imported.
+    # If unset, it is set to `false` by default.
     level-1-compact = false
-    # Performs full compaction on the whole TiKV cluster at the end of process.
+    # If the value is set to `true`, a full compaction on the whole
+    # TiKV cluster is performed at the end of the import.
+    # If unset, it is set to `false` by default.
     compact = false
     # Performs `ANALYZE TABLE <table>` for each table.
     analyze = true
