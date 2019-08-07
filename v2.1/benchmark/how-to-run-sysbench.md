@@ -149,7 +149,7 @@ sysbench --config-file=config oltp_point_select --tables=32 --table-size=1000000
 
 To warm data, we load data from disk into the block cache of memory. The warmed data has significantly improved the overall performance of the system. It is recommended to warm data once after restarting the cluster.
 
-Sysbench does not provide data warming, so it must be done manually.
+Sysbench 1.0.14 does not provide data warming, so it must be done manually. If you are using a later version of Sysbench, you can use the data warming feature included in the tool itself.
 
 Take a table sbtest7 in Sysbench as an example. Execute the following SQL to warming up data:
 
@@ -203,7 +203,7 @@ Sysbench test was carried on each of the tidb-servers. And the final result was 
 
 | Type | Thread | TPS | QPS | avg.latency(ms) | .95.latency(ms) | max.latency(ms) |
 |:---- |:---- |:---- |:---- |:----------------|:----------------- |:---- |
-| oltp_update_index | 3\*8 | 9668.98 | 9668.98 | 2.51 | 3.19 | 103.88| 
+| oltp_update_index | 3\*8 | 9668.98 | 9668.98 | 2.51 | 3.19 | 103.88|
 | oltp_update_index | 3\*16 | 12834.99 | 12834.99 | 3.79 | 5.47 | 176.90 |
 | oltp_update_index | 3\*32 | 15955.77 | 15955.77 | 6.07 | 9.39 | 4787.14 |
 | oltp_update_index | 3\*64 | 18697.17 | 18697.17 | 10.34 | 17.63 | 4539.04 |

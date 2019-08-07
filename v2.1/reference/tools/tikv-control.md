@@ -23,13 +23,13 @@ When you compile TiKV, the `tikv-ctl` command is also compiled at the same time.
     ```
 
     However, sometimes `tikv-ctl` communicates with PD instead of TiKV. In this case, you need to use the `--pd` option instead of `--host`. Here is an example:
-    
+
     ```
     $ tikv-ctl --pd 127.0.0.1:2379 compact-cluster
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
     ```
 
-- Local mode: use the `--db` option to specify the local TiKV data directory path
+- Local mode: use the `--db` option to specify the local TiKV data directory path. In this mode, you need to stop the running TiKV instance.
 
 Unless otherwise noted, all commands supports both the remote mode and the local mode.
 
@@ -208,22 +208,21 @@ If the command is successfully executed, it prints the above information. If the
 
 ### Modify the RocksDB configuration of TiKV dynamically
 
-You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, it only supports dynamically modifying RocksDB related arguments. 
+You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, it only supports dynamically modifying RocksDB related arguments.
 
-- `-m` is used to specify the target module. You can set it to one of `storage`, `kvdb` or `raftdb`.
-- `-n` is used to specify the configuration name. 
-    You can refer to the arguments of `[storage]`, `[rocksdb]` and `[raftdb]` (corresponding to `storage`, `kvdb` and `raftdb`) in the [TiKV configuration template](https://github.com/pingcap/tikv/blob/master/etc/config-template.toml#L213-L500).
+- `-m` is used to specify the target RocksDB. You can set it to `kvdb` or `raftdb`.
+- `-n` is used to specify the configuration name.
+
+    You can refer to the arguments of `[rocksdb]` and `[raftdb]` (corresponding to `kvdb` and `raftdb`) in the [TiKV configuration template](https://github.com/pingcap/tikv/blob/master/etc/config-template.toml#L213-L500).
+
     You can use `default|write|lock + . + argument name` to specify the configuration of different CFs. For `kvdb`, you can set it to `default`, `write`, or `lock`; for `raftdb`, you can only set it to `default`.
+
 - `-v` is used to specify the configuration value.
 
 ```bash
-# Set shared block cache size.
-$ tikv-ctl modify-tikv-config -m storage -n block_cache.capacity -v 10GB
-success!
-# Set block cache size for write CF when shared block cache is not used.
-$ tikv-ctl modify-tikv-config -m kvdb -n write.block_cache_size -v 256MB
-success!
 $ tikv-ctl modify-tikv-config -m kvdb -n max_background_jobs -v 8
+success!
+$ tikv-ctl modify-tikv-config -m kvdb -n write.block-cache-size -v 256MB
 success!
 $ tikv-ctl modify-tikv-config -m raftdb -n default.disable_auto_compactions -v true
 success!
@@ -245,7 +244,7 @@ $ tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores -s 4,5 --all-
 Then after you restart TiKV, these Regions can continue to provide services using the other healthy replicas. This command is usually used in circumstances where multiple TiKV stores are damaged or deleted.
 
 > **Note:**
-> 
+>
 > - This command only supports the local mode. It prints `success!` when successfully run.
 > - Generally, you need to run this command for all stores where the peers of the specified Regions are located.
 > - If you specify `--all-regions`, run this command for all the other healthy stores in the cluster.
@@ -262,7 +261,7 @@ success!
 ```
 
 > **Note:**
-> 
+>
 > - This command only supports the local mode. It prints `success!` when successfully run.
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
 > - You need to run this command for all stores where specified Regions' peers locate.

@@ -9,7 +9,7 @@ aliases: ['/docs/op-guide/binary-deployment/']
 
 This guide provides installation instructions from a binary tarball on Linux. A complete TiDB cluster contains PD, TiKV, and TiDB. To start the database service, follow the order of PD -> TiKV -> TiDB. To stop the database service, follow the order of stopping TiDB -> TiKV -> PD.
 
-See also [local deployment](/how-to/get-started/local-cluster/install-from-binary.md) and [testing environment](/how-to/deploy/from-tarball/testing-environment.md) deployment.
+See also [local deployment](/how-to/get-started/deploy-tidb-from-binary.md) and [testing environment](/how-to/deploy/from-tarball/testing-environment.md) deployment.
 
 ## Prepare
 
@@ -107,15 +107,14 @@ See the following table for the default ports for the optional TiDB components:
 
 ```
 # Download the package.
-$ wget http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
-$ wget http://download.pingcap.org/tidb-latest-linux-amd64.sha256
+$ wget http://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz http://download.pingcap.org/tidb-v3.0-linux-amd64.sha256
 
 # Check the file integrity. If the result is OK, the file is correct.
-$ sha256sum -c tidb-latest-linux-amd64.sha256
+$ sha256sum -c tidb-v3.0-linux-amd64.sha256
 
 # Extract the package.
-$ tar -xzf tidb-latest-linux-amd64.tar.gz
-$ cd tidb-latest-linux-amd64
+$ tar -xzf tidb-v3.0-linux-amd64.tar.gz
+$ cd tidb-v3.0-linux-amd64
 ```
 
 ## Multiple nodes cluster deployment

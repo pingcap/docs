@@ -85,10 +85,8 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
 
 | TiDB version | tidb-ansible tag | Note |
 | -------- | ---------------- | --- |
-| 2.0 version | v2.0.10, v2.0.11 | It is the latest 2.0 stable version which can be used in the production environment. |
-| 2.1 version | v2.1.1 ~ v2.1.6 | It is the latest 2.1 stable version which can be used in the production environment (recommended). |
-| 3.0 version | v3.0.0-beta, v3.0.0-beta.1 | It is currently a beta version which is not recommended to use in the production environment. |
-| `master` branch | None | It includes the newest features and is updated on a daily basis, so it is not recommended to use it in the production environment. |
+| 3.0 version | v3.0.0 | TiDB v3.0 GA release (recommended) |
+| `master` branch | None | Includes the newest features and is updated on a daily basis (not recommended to use in a production environment) |
 
 > **Note:**
 >
@@ -104,6 +102,7 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
     # ansible --version
       ansible 2.5.0
     ```
+
     > **Note:**
     >
     > Make sure that the version of Ansible is 2.5, otherwise a compatibility issue occurs.
@@ -116,8 +115,8 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
     >
     > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
 
-    - Download the tidb-ansible version with a specified tag:
-    
+    - Download the tidb-ansible version with a specified tag or branch:
+
         ```
         $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
         ```
@@ -147,7 +146,7 @@ See [Install the NTP service on the target machines](/how-to/deploy/orchestrated
 
 > **Note:** If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can ignore this step. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
 
-## Step 7: Configure the CPUfreq governor mode on the target machine 
+## Step 7: Configure the CPUfreq governor mode on the target machine
 
 See [Configure the CPUfreq governor mode on the target machine](/how-to/deploy/orchestrated/ansible.md#step-7-configure-the-cpufreq-governor-mode-on-the-target-machine).
 

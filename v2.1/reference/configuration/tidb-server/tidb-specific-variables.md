@@ -49,28 +49,6 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: 0
 - This variable is used to set whether the optimizer executes the optimization operation of unfolding the "in-" subquery.
 
-### tidb_auto_analyze_ratio
-
-- Scope: GLOBAL
-- Default value: 0.5
-- This variable is used to set the threshold when TiDB automatically executes [`ANALYZE TABLE`](/reference/sql/statements/analyze-table.md) in a background thread to update table statistics. For example, a value of 0.5 means that auto-analyze is triggered when greater than 50% of the rows in a table have been modified.  Auto-analyze can be restricted to only execute during certain hours of the day by specifying `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
-
-> **Note:**
->
-> Only when the `run-auto-analyze` option is enabled in the starting configuration file of TiDB, the `auto_analyze` feature can be triggered.
-
-### tidb_auto_analyze_start_time
-
-- Scope: GLOBAL
-- Default value: 00:00 +0000
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1AM and 3AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
-
-### tidb_auto_analyze_end_time
-
-- Scope: GLOBAL
-- Default value: 23:59 +0000
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1AM and 3AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
-
 ### tidb_build_stats_concurrency
 
 - Scope: SESSION
@@ -177,16 +155,14 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to divide the inserted data automatically. It is valid only when `autocommit` is enabled.
-- When inserting a large amount of data, you can set the variable value to 1. Then the inserted data is automatically divided into multiple batches and each batch is inserted by a single transaction.
-- This operation might lead to a loss of transaction atomicity. Therefore, it is not recommended to use this parameter in the production environment.
+- When inserting a large amount of data, you can set the variable value to `1`. Then, the inserted data is automatically divided into multiple batches and each batch is inserted by a single transaction. This operation breaks the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ### tidb_batch_delete
 
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to divide the data for deletion automatically. It is valid only when you delete from a single table and `autocommit` is enabled. For the definition of single-table DELETE statement, see [here](https://dev.mysql.com/doc/refman/8.0/en/delete.html).
-- When deleting a large amount of data, you can set the variable value to 1. Then the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction.
-- This operation might lead to a loss of transaction atomicity. Therefore, it is not recommended to use this parameter in the production environment.
+- When deleting a large amount of data, you can set the variable value to `1`. Then, the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction. This operation breaks the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ### tidb_dml_batch_size
 
@@ -336,12 +312,6 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
-
-### tidb_opt_write_row_id
-
-- Scope: SESSION
-- Default value: 0
-- This variable is used to set whether to allow `insert`, `replace` and `update` statements to operate on the column `_tidb_rowid`. It is not allowed by default. This variable can be used only when importing data with TiDB tools.
 
 ## SHARD_ROW_ID_BITS
 

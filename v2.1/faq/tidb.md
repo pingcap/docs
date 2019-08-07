@@ -249,7 +249,7 @@ It is not recommended to deploy TiDB offline using Ansible. If the Control Machi
 
 #### How to deploy TiDB quickly using Docker Compose on a single machine?
 
-You can use Docker Compose to build a TiDB cluster locally, including the cluster monitoring components. You can also customize the version and number of instances for each component. The configuration file can also be customized. You can only use this deployment method for testing and development environment. For details, see [Building the Cluster Using Docker Compose](/how-to/get-started/local-cluster/install-from-docker-compose.md).
+You can use Docker Compose to build a TiDB cluster locally, including the cluster monitoring components. You can also customize the version and number of instances for each component. The configuration file can also be customized. You can only use this deployment method for testing and development environment. For details, see [Building the Cluster Using Docker Compose](https://pingcap.com/docs/dev/how-to/get-started/deploy-tidb-from-docker-compose/).
 
 #### How to separately record the slow query log in TiDB? How to locate the slow query SQL statement?
 
@@ -655,7 +655,7 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 
 #### How is the write performance in the most strict data available mode (`sync-log = true`)?
 
-Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/benchmark/sysbench.md).
+Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/v2.1/benchmark/sysbench-v3.md).
 
 #### Can Raft + multiple replicas in the TiKV architecture achieve absolute data security? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
 
@@ -691,7 +691,7 @@ The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 
 At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
 
 - Do not spend too much time on the benchmark test. Pay more attention to the difference of scenarios using TiDB.
-- See the official test. For the Sysbench test and comparison test between TiDB and MySQL, see [Performance test result for TiDB using Sysbench](/benchmark/sysbench-v4.md).
+- See [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/v2.1/benchmark/sysbench-v3.md).
 
 #### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
@@ -720,11 +720,13 @@ You can edit the `t` parameter of `loader` based on the number of TiKV instances
 ### Full data export and import
 
 #### Mydumper
+
 See [mydumper Instructions](/reference/tools/mydumper.md).
 
 #### Loader
+
 See [Loader Instructions](/reference/tools/loader.md).
- 
+
 #### How to migrate an application running on MySQL to TiDB?
 
 Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.
@@ -914,7 +916,7 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 #### How to improve the data loading speed in TiDB?
 
-- The [Lightning](/reference/tools/lightning/overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
+- The [Lightning](/reference/tools/tidb-lightning/overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
 - Data loading in TiDB is related to the status of disks and the whole cluster. When loading data, pay attention to metrics like the disk usage rate of the host, TiClient Error, Backoff, Thread CPU and so on. You can analyze the bottlenecks using these metrics.
 
 #### What should I do if it is slow to reclaim storage space after deleting data?
@@ -1013,11 +1015,11 @@ See [Overview of the Monitoring Framework](/how-to/monitor/overview.md).
 
 ### Key metrics of monitoring
 
-See [Key Metrics](/reference/key-monitoring-metrics/overview.md).
+See [Key Metrics](/reference/key-monitoring-metrics/overview-dashboard.md).
 
 #### Is there a better way of monitoring the key metrics?
 
-The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [Key Metrics](/reference/key-monitoring-metrics/overview.md).
+The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [Key Metrics](/reference/key-monitoring-metrics/overview-dashboard.md).
 
 #### The Prometheus monitoring data is deleted every 15 days by default. Could I set it to two months or delete the monitoring data manually?
 

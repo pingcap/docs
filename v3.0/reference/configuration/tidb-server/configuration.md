@@ -25,7 +25,7 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - The configuration file
 - Default: ""
-- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line flags, TiDB uses the configuration in the command line flags to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](/reference/configuration/tidb-server/configuration-file.md)
+- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line flags, TiDB uses the configuration in the command line flags to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](/reference/configuration/tidb-server/configuration-file.md).
 
 ## `--host`
 
@@ -131,7 +131,7 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
 - Default: 1000
-- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to 
+- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to
 release tokens.
 
 ## `-V`

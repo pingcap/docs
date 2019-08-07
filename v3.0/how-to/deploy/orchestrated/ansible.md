@@ -21,10 +21,10 @@ You can use the TiDB-Ansible configuration file to set up the cluster topology a
 - Deploy the whole TiDB cluster
 - [Start the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
 - [Stop the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
-- [Modify component configuration](/how-to/maintain/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
-- [Scale the TiDB cluster](/how-to/maintain/scale/with-ansible.md)
+- [Modify component configuration](/how-to/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
+- [Scale the TiDB cluster](/how-to/scale/with-ansible.md)
 - [Upgrade the component version](/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
-- [Enable the cluster binlog](/reference/tools/tidb-binlog/overview.md)
+- [Enable the cluster binlog](/reference/tidb-binlog-overview.md)
 - [Clean up data of the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
 - [Destroy the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
 
@@ -35,7 +35,7 @@ Before you start, make sure you have:
 1. Several target machines that meet the following requirements:
 
     - 4 or more machines
-    
+
         A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
 
     - CentOS 7.3 (64 bit) or later, x86_64 architecture (AMD64)
@@ -43,7 +43,7 @@ Before you start, make sure you have:
 
     > **Note:**
     >
-    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/local-cluster/install-from-docker-compose.md) on a single machine.
+    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](https://pingcap.com/docs/dev/how-to/get-started/deploy-tidb-from-docker-compose/) on a single machine.
 
 2. A Control Machine that meets the following requirements:
 
@@ -93,6 +93,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     # visudo
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
+
 4. Generate the SSH key.
 
     Execute the `su` command to switch the user from `root` to `tidb`.
@@ -102,7 +103,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     ```
 
     Create the SSH key for the `tidb` user account and hit the Enter key when `Enter passphrase` is prompted. After successful execution, the SSH private key file is `/home/tidb/.ssh/id_rsa`, and the SSH public key file is `/home/tidb/.ssh/id_rsa.pub`.
-    
+
     ```
     $ ssh-keygen -t rsa
     Generating public/private rsa key pair.
@@ -134,19 +135,17 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
     | TiDB version | tidb-ansible tag | Note |
     | :-------- | :---------------- | :--- |
-    | 2.0 version | v2.0.10, v2.0.11 | It is the latest 2.0 stable version which can be used in the production environment. |
-    | 2.1 version | v2.1.1 ~ v2.1.8 | It is the latest 2.1 stable version which can be used in the production environment (recommended). |
-    | 3.0 version | v3.0.0-beta, v3.0.0-beta.1 | It is currently a beta version which is not recommended to use in the production environment. |
-    | `master` branch | None | It includes the newest features and is updated on a daily basis, so it is not recommended to use it in the production environment. |
+    | 3.0 version | v3.0.0 | TiDB v3.0 GA release (recommended) |
+    | `master` branch | None | Includes the newest features and is updated on a daily basis (not recommended to use in a production environment) |
 
 2. Download the [corresponding TiDB-Ansible versions](https://github.com/pingcap/tidb-ansible/tags) from the [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
     > **Note:**
     >
     > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
-    
-    - Download the tidb-ansible version with a specified tag:
-    
+
+    - Download the tidb-ansible version with a specified tag or branch:
+
         ```
         $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
         ```
@@ -250,7 +249,7 @@ analyzing CPU 0:
   available cpufreq governors: performance powersave
 ```
 
-Taking the above code for example, the system supports the `performance` and `powersave` modes. 
+Taking the above code for example, the system supports the `performance` and `powersave` modes.
 
 > **Note:**
 >
@@ -274,7 +273,7 @@ analyzing CPU 0:
                   within this range.
 ```
 
-As the above code shows, the current mode is `powersave` in this example. 
+As the above code shows, the current mode is `powersave` in this example.
 
 ### Change the governor mode
 
@@ -654,6 +653,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 | TiDB          | tidb_port          | 4000         | the communication port for the application and DBA tools |
 | TiDB          | tidb_status_port   | 10080        | the communication port to report TiDB status |
 | TiKV          | tikv_port          | 20160        | the TiKV communication port |
+| TiKV          | tikv_status_port   | 20180        | the communication port to report the TiKV status |
 | PD            | pd_client_port     | 2379         | the communication port between TiDB and PD |
 | PD            | pd_peer_port       | 2380         | the inter-node communication port within the PD cluster |
 | Pump          | pump_port          | 8250         | the pump communication port |

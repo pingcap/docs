@@ -2,10 +2,16 @@
 
 ## Documentation List
 
-+ [Introduction](overview.md)
++ Introduction
+  - [TiDB Introduction](overview.md)
+  + Benchmarks
+    - [How to Test TiDB Using Sysbench](benchmark/how-to-run-sysbench.md)
+    - [Sysbench Performance Test - v2.1 vs. v2.0](benchmark/sysbench-v3.md)
+    - [TPC-H 50G Performance Test - v2.1 vs. v2.0](benchmark/tpch-v2.md)
+    - [DM Benchmark Report](benchmark/dm-v1-alpha.md)
 + Concepts
   - [Architecture](architecture.md)
-  + [Key Features](key-features.md)
+  + Key Features
     - [Horizontal Scalability](key-features.md#horizontal-scalability)
     - [MySQL Compatible Syntax](key-features.md#mysql-compatible-syntax)
     - [Replicate from and to MySQL](key-features.md#replicate-from-and-to-mysql)
@@ -28,7 +34,6 @@
     + Start a Local Cluster
       - [From Binary](how-to/get-started/local-cluster/install-from-binary.md)
       - [In Kubernetes](how-to/get-started/local-cluster/install-from-kubernetes.md)
-      - [In Docker Compose](how-to/get-started/local-cluster/install-from-docker-compose.md)
     - [Explore SQL with TiDB](how-to/get-started/explore-sql.md)
     - [Import Example Database](how-to/get-started/import-example-database.md)
     - [Read Historical Data](how-to/get-started/read-historical-data.md)
@@ -151,6 +156,7 @@
       - [`ADD COLUMN`](reference/sql/statements/add-column.md)
       - [`ADD INDEX`](reference/sql/statements/add-index.md)
       - [`ADMIN`](reference/sql/statements/admin.md)
+      - [`ALTER DATABASE`](reference/sql/statements/alter-database.md)
       - [`ALTER TABLE`](reference/sql/statements/alter-table.md)
       - [`ALTER USER`](reference/sql/statements/alter-user.md)
       - [`ANALYZE TABLE`](reference/sql/statements/analyze-table.md)
@@ -297,7 +303,7 @@
       - [FAQ](faq/tidb-lightning.md)
     - [PD Control](reference/tools/pd-control.md)
     - [PD Recover](reference/tools/pd-recover.md)
-    - [TiKV Control](https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md)
+    - [TiKV Control](reference/tools/tikv-control.md)
     - [TiDB Control](reference/tools/tidb-control.md)
     - [Download](reference/tools/download.md)
   + Key Monitoring Metrics
@@ -319,6 +325,7 @@
 - [Roadmap](roadmap.md)
 + [Releases](releases/rn.md)
   + v3.0
+    - [3.0.1](releases/3.0.1.md)
     - [3.0 GA](releases/3.0-ga.md)
     - [3.0.0-rc.3](releases/3.0.0-rc.3.md)
     - [3.0.0-rc.2](releases/3.0.0-rc.2.md)
@@ -326,6 +333,8 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.15](releases/2.1.15.md)
+    - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
     - [2.1.12](releases/2.1.12.md)
     - [2.1.11](releases/2.1.11.md)

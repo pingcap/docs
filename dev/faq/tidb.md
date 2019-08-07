@@ -90,7 +90,7 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 5000 at most.
 
-#### Does TiDB support XA？
+#### Does TiDB support XA?
 
 No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
@@ -249,7 +249,7 @@ It is not recommended to deploy TiDB offline using Ansible. If the Control Machi
 
 #### How to deploy TiDB quickly using Docker Compose on a single machine?
 
-You can use Docker Compose to build a TiDB cluster locally, including the cluster monitoring components. You can also customize the version and number of instances for each component. The configuration file can also be customized. You can only use this deployment method for testing and development environment. For details, see [Building the Cluster Using Docker Compose](/how-to/get-started/local-cluster/install-from-docker-compose.md).
+You can use Docker Compose to build a TiDB cluster locally, including the cluster monitoring components. You can also customize the version and number of instances for each component. The configuration file can also be customized. You can only use this deployment method for testing and development environment. For details, see [Building the Cluster Using Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md).
 
 #### How to separately record the slow query log in TiDB? How to locate the slow query SQL statement?
 
@@ -287,7 +287,7 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
-#### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: " ` when deploying TiDB using TiDB-Ansible
+#### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: "` when deploying TiDB using TiDB-Ansible
 
 Two possible reasons and solutions:
 
@@ -312,7 +312,7 @@ Two possible reasons and solutions:
 
 #### How are the rolling updates done?
 
-When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB * 2, PD * 3, TiKV * 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
+When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
 
 #### How to upgrade when I deploy TiDB using Binary?
 
@@ -448,11 +448,11 @@ Two reasons:
 
 ### Manage the PD server
 
-#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD.
+#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD
 
 Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed. If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
 
-#### The `etcd cluster ID mismatch` message is displayed when starting PD.
+#### The `etcd cluster ID mismatch` message is displayed when starting PD
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
 
@@ -582,13 +582,13 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 Use 3 replicas for test. If you increase the number of replicas, the performance declines but it is more secure. Whether to configure more replicas depends on the specific business needs.
 
-#### The `cluster ID mismatch` message is displayed when starting TiKV.
+#### The `cluster ID mismatch` message is displayed when starting TiKV
 
 This is because the cluster ID stored in local TiKV is different from the cluster ID specified by PD. When a new PD cluster is deployed, PD generates random cluster IDs. TiKV gets the cluster ID from PD and stores the cluster ID locally when it is initialized. The next time when TiKV is started, it checks the local cluster ID with the cluster ID in PD. If the cluster IDs don't match, the `cluster ID mismatch` message is displayed and TiKV exits.
 
 If you previously deploy a PD cluster, but then you remove the PD data and deploy a new PD cluster, this error occurs because TiKV uses the old data to connect to the new PD cluster.
 
-#### The `duplicated store address` message is displayed when starting TiKV.
+#### The `duplicated store address` message is displayed when starting TiKV
 
 This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. This error occurs when there is no data folder under the directory that TiKV `--store` specifies, but you use the previous parameter to restart the TiKV.
 
@@ -653,7 +653,7 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 
 #### How is the write performance in the most strict data available mode (`sync-log = true`)?
 
-Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/benchmark/sysbench.md).
+Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/dev/benchmark/sysbench-v4.md).
 
 #### Can Raft + multiple replicas in the TiKV architecture achieve absolute data security? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
 
@@ -674,7 +674,7 @@ TiKV supports calling the interface separately. Theoretically, you can take an i
 - Reduce the data transmission between TiDB and TiKV
 - Make full use of the distributed computing resources of TiKV to execute computing pushdown
 
-#### The error message `IO error: No space left on device While appending to file` is displayed.
+#### The error message `IO error: No space left on device While appending to file` is displayed
 
 This is because the disk space is not enough. You need to add nodes or enlarge the disk space.
 
@@ -689,7 +689,7 @@ The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 
 At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
 
 - Do not spend too much time on the benchmark test. Pay more attention to the difference of scenarios using TiDB.
-- See the official test. For the Sysbench test and comparison test between TiDB and MySQL, see [Performance test result for TiDB using Sysbench](/benchmark/sysbench-v4.md).
+- See [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/dev/benchmark/sysbench-v4.md).
 
 #### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
@@ -697,7 +697,7 @@ At the beginning, many users tend to do a benchmark test or a comparison test be
 - In MySQL, the read capacity can be increased by adding slave, but the write capacity cannot be increased except using sharding, which has many problems.
 - In TiDB, both the read and write capacity can be easily increased by adding more nodes.
 
-#### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL.
+#### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL
 
 TiDB is designed for scenarios where sharding is used because the capacity of a MySQL standalone is limited, and where strong consistency and complete distributed transactions are required. One of the advantages of TiDB is pushing down computing to the storage nodes to execute concurrent computing.
 
@@ -718,11 +718,13 @@ You can edit the `t` parameter of `loader` based on the number of TiKV instances
 ### Full data export and import
 
 #### Mydumper
+
 See [mydumper Instructions](/reference/tools/mydumper.md).
 
 #### Loader
+
 See [Loader Instructions](/reference/tools/loader.md).
- 
+
 #### How to migrate an application running on MySQL to TiDB?
 
 Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.
@@ -912,7 +914,7 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 #### How to improve the data loading speed in TiDB?
 
-- The [Lightning](/reference/tools/lightning/overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
+- The [Lightning](/reference/tools/tidb-lightning/overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
 - Data loading in TiDB is related to the status of disks and the whole cluster. When loading data, pay attention to metrics like the disk usage rate of the host, TiClient Error, Backoff, Thread CPU and so on. You can analyze the bottlenecks using these metrics.
 
 #### What should I do if it is slow to reclaim storage space after deleting data?
@@ -1011,11 +1013,11 @@ See [Overview of the Monitoring Framework](/how-to/monitor/overview.md).
 
 ### Key metrics of monitoring
 
-See [Key Metrics](/reference/key-monitoring-metrics/overview.md).
+See [Key Metrics](/reference/key-monitoring-metrics/overview-dashboard.md).
 
 #### Is there a better way of monitoring the key metrics?
 
-The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [Key Metrics](/reference/key-monitoring-metrics/overview.md).
+The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [Key Metrics](/reference/key-monitoring-metrics/overview-dashboard.md).
 
 #### The Prometheus monitoring data is deleted every 15 days by default. Could I set it to two months or delete the monitoring data manually?
 
