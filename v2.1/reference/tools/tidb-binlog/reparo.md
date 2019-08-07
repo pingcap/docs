@@ -45,7 +45,7 @@ Usage of Reparo:
     Format: "2006-01-02 15:04:05"
     If it is not set, the recovery process ends up with the last binlog file.
 -safe-mode bool
-    Specifies whether to enable safe mode. When enabled, it supports repeated synchronization.
+    Specifies whether to enable safe mode. When enabled, it supports repeated replication.
 ```
 
 ### Description of the configuration file
@@ -84,9 +84,9 @@ log-level = "info"
 dest-type = "mysql"
 
 # Safe-mode configuration
-# Value: "true/false" ("false" by default)
-# If it is set to "true", Reparo splits the update statement into a delete plus replace statement.
-safe-mode = false
+# Value: "true"/"false" ("false" by default)
+# If it is set to "true", Reparo splits the `UPDATE` statement into a `DELETE` statement plus a `REPLACE` statement.
+safe-mode = "false"
 
 # `replicate-do-db` and `replicate-do-table` specify the database and table to be recovered.
 # `replicate-do-db` has priority over `replicate-do-table`.
