@@ -96,7 +96,7 @@ If you want to benchmark a production deployment, run:
 cat prod.tfvars >> terraform.tfvars
 ```
 
-The prod setup creates a new VPC, two subnetworks, and an f1-micro instance as a bastion machine. The production setup is created with the following instance types as worker nodes:
+The `prod.tfvars` setup creates a new VPC, two subnetworks, and an f1-micro instance as a bastion machine. This setup is created with the following instance types as worker nodes:
 
 * 3 n1-standard-4 instances for PD
 * 3 n1-highmem-8 instances for TiKV
