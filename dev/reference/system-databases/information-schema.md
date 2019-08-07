@@ -325,7 +325,6 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 
 The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement:
 
-
 {{< copyable "sql" >}}
 
 ```sql
