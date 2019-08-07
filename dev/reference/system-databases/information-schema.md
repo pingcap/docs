@@ -548,7 +548,7 @@ CONSTRAINT_CATALOG: def
 
 ### TIDB_HOT_REGIONS table
 
-The `TIDB_HOT_REGIONS` table provides information about hot spot Regions.
+The `TIDB_HOT_REGIONS` table provides information about hotspot Regions.
 
 {{< copyable "sql" >}}
 
