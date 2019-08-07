@@ -56,8 +56,8 @@ gcloud services enable cloudresourcemanager.googleapis.com \
 The terraform script expects three variables to be provided by the user. You can let Terraform prompt you for them, or define them in a `.tfvars` file of your choice. The three variables are:
 
 * `GCP_CREDENTIALS_PATH`: Path to a valid GCP credentials file.
-    - It is recommended to create a new service account to be used by Terraform. See [this page](https://cloud.google.com/iam/docs/creating-managing-service-accounts) to create a service account and grant `Project Editor` role to it.
-    - See [this page](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) to create service account keys, and choose `JSON` key type during creation. The downloaded `JSON` file that contains the private key is the credentials file you need.
+    - It is recommended to have a separate service account to be used by Terraform. See [this page](https://cloud.google.com/iam/docs/creating-managing-service-accounts) for more information. The `Project Editor` role will grant sufficient permissions for provisioning the necessary infrastructure resources.
+    - See [this page](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for information on creating service account keys. The steps below detail how to do this using a script provided in the `deploy/gcp` directory, alternatively if creating the service account and key yourself, choose `JSON` key type during creation. The downloaded `JSON` file that contains the private key is the credentials file you need.
 * `GCP_REGION`: The region to create the resources in, for example: `us-west1`.
 * `GCP_PROJECT`: The GCP project in which everything will be created.
 
