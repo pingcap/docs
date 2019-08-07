@@ -10,5 +10,3 @@ gen
 .DS_Store
 
 /node_modules/
-# Ignore this for now
-/package-lock.json
