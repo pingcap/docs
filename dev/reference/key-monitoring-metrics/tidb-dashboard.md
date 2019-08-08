@@ -8,7 +8,7 @@ category: reference
 
 If you use Ansible to deploy the TiDB cluster, the monitoring system is deployed at the same time. For more information, see [TiDB Monitoring Framework Overview](/how-to/monitor/overview.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_Exporter, Disk Performance, and so on. The TiDB dashboard consists of the TiDB panel and the TiDB Summary panel, and what displays on the TiDB Summary panel also displays on the TiDB panel. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. The TiDB dashboard consists of the TiDB panel and the TiDB Summary panel, and what displays on the TiDB Summary panel also displays on the TiDB panel. A lot of metrics are there to help you diagnose.
 
 This document describes some key monitoring metrics displayed on the TiDB dashboard.
 
@@ -42,9 +42,9 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Go GC Count: the number of times that GC is executed on different TiDB instances
     - Go GC CPU Usage: the statistics of GC CPU usage of different TiDB instances
     - Events OPM: the statistics of key events, such as "start", "close", "graceful-shutdown","kill", "hang", and so on
-    - Keep Alive OPM: the number of times that the monitor refreshes every minute on different TiDB instances
+    - Keep Alive OPM: the number of times that the metrics are refreshed every minute on different TiDB instances
     - Prepare Statement Count: the number of `Prepare` statements that are executed on each TiDB instance and the total count of them
-    - Time Jump Back OPS: the number of times that the time jumps back every second on different TiDB instances
+    - Time Jump Back OPS: the number of times that the time rewinds every second on different TiDB instances
     - Heap Memory Usage: the heap memory size used by each TiDB instance
     - Uncommon Error OPM: the statistics of abnormal TiDB errors, including panic, binlog write failure, and so on
     - Handshake Error OPS: the number of times that a handshake error occurs every second on different TiDB instances
