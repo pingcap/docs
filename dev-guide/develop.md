@@ -9,7 +9,7 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 + Get TiKV source code from GitHub
 
     ```bash
-    git clone https://github.com/tikv/tikv.git 
+    git clone https://github.com/tikv/tikv.git
     cd tikv
     ```
 

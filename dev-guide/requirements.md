@@ -4,7 +4,7 @@ Learn about the following requirements before building TiDB.
 
 ## Supported platforms
 
-The following table lists TiDB support for common architectures and operating systems. 
+The following table lists TiDB support for common architectures and operating systems.
 
 |Architecture|Operating System|Status|
 |:------------|:----------------|:------|
@@ -21,7 +21,7 @@ The following table lists TiDB support for common architectures and operating sy
 
 The [check requirement script](../scripts/check_requirement.sh) can help you check prerequisites and install the missing ones automatically.
 
-TiKV is well tested in a certain Rust version by us, and the exact version can be found in the `RUST_VERSION` file in TiKV's root directory. It is recommended to use the same version as we do. 
+TiKV is well tested in a certain Rust version by us, and the exact version can be found in the `RUST_VERSION` file in TiKV's root directory. It is recommended to use the same version as we do.
 
 To set the Rust version, execute the following command in your TiKV project directory:
 
