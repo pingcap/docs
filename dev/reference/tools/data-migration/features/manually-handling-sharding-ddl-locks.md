@@ -2,7 +2,6 @@
 title: Handle Sharding DDL Locks Manually in DM
 summary: Learn how to handle sharding DDL locks manually in DM.
 category: reference
-aliases: ['/docs/tools/dm/manually-handling-sharding-ddl-locks/']
 ---
 
 # Handle Sharding DDL Locks Manually in DM
@@ -12,7 +11,7 @@ DM uses the sharding DDL lock to ensure operations are performed in the correct 
 > **Warning:**
 >
 > - Do not use `unlock-ddl-lock` or `break-ddl-lock` unless you are totally aware of the possible impacts brought by the command and you can accept them.
-> - Before manually handling the abnormal DDL locks, make sure that you have already read the DM [shard merge principles](/dev/reference/tools/data-migration/features/shard-merge.md#principles).
+> - Before manually handling the abnormal DDL locks, make sure that you have already read the DM [shard merge principles](/reference/tools/data-migration/features/shard-merge.md#principles).
 
 ## Command
 
@@ -148,7 +147,7 @@ break-ddl-lock <--worker=127.0.0.1:8262> [--remove-id] [--exec] [--skip] <task-n
 + `task-name`:
 
     - Non-flag; string; required
-    - It specifies the name of the task containing the lock that is going to execute the breaking operation (you can check whether a task contains the lock via [query-status](/tools/dm/query-status.md)).
+    - It specifies the name of the task containing the lock that is going to execute the breaking operation (you can check whether a task contains the lock via [query-status](/reference/tools/data-migration/query-status.md)).
 
 #### Example of results
 
@@ -175,15 +174,15 @@ Currently, the `unlock-ddl-lock` or `break-ddl-lock` command only supports handl
 
 #### The reason for the abnormal lock
 
-Before `DM-master` tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL events (for details, see [shard merge principles](/dev/reference/tools/data-migration/features/shard-merge.md#principles)). If the sharding DDL event is already in the synchronization process, and some DM-workers have gone offline and are not to be restarted (these DM-workers have been removed according to the application demand), then the sharding DDL lock cannot be automatically synchronized and unlocked because not all the DM-workers can receive the DDL event.
+Before `DM-master` tries to automatically unlock the sharding DDL lock, all the DM-workers need to receive the sharding DDL events (for details, see [shard merge principles](/reference/tools/data-migration/features/shard-merge.md#principles)). If the sharding DDL event is already in the replication process, and some DM-workers have gone offline and are not to be restarted (these DM-workers have been removed according to the application demand), then the sharding DDL lock cannot be automatically replicated and unlocked because not all the DM-workers can receive the DDL event.
 
 > **Note:**
 >
-> If you need to make some DM-workers offline when not in the process of synchronizing sharding DDL events, a better solution is to use `stop-task` to stop the running tasks first, make the DM-workers go offline, remove the corresponding configuration information from the task configuration file, and finally use `start-task` and the new task configuration to restart the synchronization task. 
+> If you need to make some DM-workers offline when not in the process of replicating sharding DDL events, a better solution is to use `stop-task` to stop the running tasks first, make the DM-workers go offline, remove the corresponding configuration information from the task configuration file, and finally use `start-task` and the new task configuration to restart the replication task.
 
 #### Manual solution
 
-Suppose that there are two instances `MySQL-1` and `MySQL-2` in the upstream, and there are two tables `shard_db_1`.`shard_table_1` and `shard_db_1`.`shard_table_2` in `MySQL-1` and two tables `shard_db_2`.`shard_table_1` and `shard_db_2`.`shard_table_2` in `MySQL-2`. Now we need to merge the four tables and synchronize them into the table `shard_db`.`shard_table` in the downstream TiDB.
+Suppose that there are two instances `MySQL-1` and `MySQL-2` in the upstream, and there are two tables `shard_db_1`.`shard_table_1` and `shard_db_1`.`shard_table_2` in `MySQL-1` and two tables `shard_db_2`.`shard_table_1` and `shard_db_2`.`shard_table_2` in `MySQL-2`. Now we need to merge the four tables and replicate them into the table `shard_db`.`shard_table` in the downstream TiDB.
 
 The initial table structure is:
 
@@ -212,13 +211,14 @@ The operation processes of MySQL and DM are as follows:
     ```sql
     ALTER TABLE shard_db_1.shard_table_1 ADD COLUMN c2 INT;
     ```
+
     ```sql
     ALTER TABLE shard_db_1.shard_table_2 ADD COLUMN c2 INT;
     ```
 
-2. `DM-worker-1` sends the DDL information related to `MySQL-1` to `DM-master`, and `DM-master` creates the corresponding DDL lock. 
+2. `DM-worker-1` sends the DDL information related to `MySQL-1` to `DM-master`, and `DM-master` creates the corresponding DDL lock.
 3. Use `show-ddl-lock` to check the information of the current DDL lock.
-    
+
     ```bash
     » show-ddl-locks test
     {
@@ -242,9 +242,9 @@ The operation processes of MySQL and DM are as follows:
         ]
     }
     ```
-    
-4. Due to the application demand, the `DM-worker-2` data in `MySQL-2` is no longer needed to be synchronized to the downstream TiDB, and `DM-worker-2` is made offline.
-5. The lock whose ID is ``` test-`shard_db`.`shard_table` ``` on `DM-master` cannot receive the DDL information of `DM-worker-2`.
+
+4. Due to the application demand, the `DM-worker-2` data in `MySQL-2` is no longer needed to be replicated to the downstream TiDB, and `DM-worker-2` is made offline.
+5. The lock whose ID is ```test-`shard_db`.`shard_table` ``` on `DM-master` cannot receive the DDL information of `DM-worker-2`.
 
     - The returned result `unsynced` by `show-ddl-locks` has always included the information of `DM-worker-2` (`127.0.0.1:8263`).
 6. Use `unlock-dll-lock` to ask `DM-master` to actively unlock the DDL lock.
@@ -272,9 +272,9 @@ The operation processes of MySQL and DM are as follows:
             ]
         }
         ```
-    
+
 7. Use `show-ddl-locks` to confirm if the DDL lock is unlocked successfully.
-    
+
     ```bash
     » show-ddl-locks test
     {
@@ -284,9 +284,9 @@ The operation processes of MySQL and DM are as follows:
         ]
     }
     ```
-    
+
 8. Check whether the table structure is altered successfully in the downstream TiDB.
-    
+
     ```sql
     mysql> SHOW CREATE TABLE shard_db.shard_table;
     +-------------+--------------------------------------------------+
@@ -299,12 +299,12 @@ The operation processes of MySQL and DM are as follows:
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin |
     +-------------+--------------------------------------------------+
     ```
-    
-9. Use `query-status` to confirm if the synchronization task is normal.
+
+9. Use `query-status` to confirm if the replication task is normal.
 
 #### Impact
 
-After you have manually unlocked the lock by using `unlock-ddl-lock`, if you don't deal with the offline DM-workers included in the task configuration information, the lock might still be unable to be synchronized automatically when the next sharding DDL event is received.
+After you have manually unlocked the lock by using `unlock-ddl-lock`, if you don't deal with the offline DM-workers included in the task configuration information, the lock might still be unable to be replicated automatically when the next sharding DDL event is received.
 
 Therefore, after you have manually unlocked the DDL lock, you should perform the following operations:
 
@@ -314,7 +314,7 @@ Therefore, after you have manually unlocked the DDL lock, you should perform the
 
 > **Note:**
 >
-> After you run `unlock-ddl-lock`, if the DM-worker that went offline becomes online again and tries to synchronize the data of the sharded tables, a match error between the data and the downstream table structure might occur.
+> After you run `unlock-ddl-lock`, if the DM-worker that went offline becomes online again and tries to replicate the data of the sharded tables, a match error between the data and the downstream table structure might occur.
 
 ### Scenario 2: Some DM-workers restart during the DDL unlocking process
 
@@ -323,27 +323,27 @@ Therefore, after you have manually unlocked the DDL lock, you should perform the
 After `DM-master` receives the DDL events of all DM-workers, automatically running `unlock DDL lock` mainly include the following steps:
 
 1. Ask the owner of the lock to execute the DDL and update the checkpoints of corresponding sharded tables.
-2. Remove the DDL lock information stored on `DM-master` after the owner successfully executes the DDL. 
-3. Ask all other DM-workers to skip the DDL and update the checkpoints of corresponding sharded tables after the owner successfully executes the DDL. 
+2. Remove the DDL lock information stored on `DM-master` after the owner successfully executes the DDL.
+3. Ask all other DM-workers to skip the DDL and update the checkpoints of corresponding sharded tables after the owner successfully executes the DDL.
 
-Currently, the above unlocking process is not atomic. Therefore, after the owner successfully executes the DDL, if a DM-worker restarts during the period of asking other DM-workers to skip the DDL, then the DM-worker might fail to skip the DDL. 
+Currently, the above unlocking process is not atomic. Therefore, after the owner successfully executes the DDL, if a DM-worker restarts during the period of asking other DM-workers to skip the DDL, then the DM-worker might fail to skip the DDL.
 
-At this point, the lock information on `DM-master` has been removed and the restarted DM-worker will continue to synchronize the DDL, but as other DM-workers (including the previous owner) has synchronized the DDL and continued the synchronization process, this DM-worker will never see the DDL lock be unlocked automatically. 
+At this point, the lock information on `DM-master` has been removed and the restarted DM-worker will continue to replicate the DDL, but as other DM-workers (including the previous owner) has replicated the DDL and continued the replication process, this DM-worker will never see the DDL lock be unlocked automatically.
 
 #### Manual solution
 
-Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and synchronization as in the manual solution of [Some DM-workers go offline](#scenario-1-some-dm-workers-go-offline).
+Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and replication as in the manual solution of [Some DM-workers go offline](#scenario-1-some-dm-workers-go-offline).
 
-When `DM-master` automatically executes the unlocking process, the owner (`DM-worker-1`) successfully executes the DDL and continues the synchronization process, and the DDL lock information has been removed from `DM-master`. But at this point, if `DM-worker-2` restarts during the period of asking `DM-worker-2` to skip the DDL, then the skipping process might fail. 
+When `DM-master` automatically executes the unlocking process, the owner (`DM-worker-1`) successfully executes the DDL and continues the replication process, and the DDL lock information has been removed from `DM-master`. But at this point, if `DM-worker-2` restarts during the period of asking `DM-worker-2` to skip the DDL, then the skipping process might fail.
 
-After `DM-worker-2` restarts, it will try to synchronize the waiting DDL lock before it restarted. At this point, a new lock will be created on `DM-master`, and the DM-worker will become the owner of the lock (other DM-workers have executed/skipped the DDL by now and are continuing the synchronization process).
+After `DM-worker-2` restarts, it will try to replicate the waiting DDL lock before it restarted. At this point, a new lock will be created on `DM-master`, and the DM-worker will become the owner of the lock (other DM-workers have executed/skipped the DDL by now and are continuing the replication process).
 
 The operation processes are:
 
-1. Use `show-ddl-locks` to confirm if the corresponding lock of the DDL exists on `DM-master`. 
-    
-    Only the restarted DM-worker (`127.0.0.1:8263`) is at the `synced` state. 
-    
+1. Use `show-ddl-locks` to confirm if the corresponding lock of the DDL exists on `DM-master`.
+
+    Only the restarted DM-worker (`127.0.0.1:8263`) is at the `synced` state.
+
     ```bash
     » show-ddl-locks
     {
@@ -367,12 +367,12 @@ The operation processes are:
         ]
     }
     ```
-        
+
 2. Use `unlock-ddl-lock` to ask `DM-master` to unlock the lock.
-    
-    - Use the parameter `--worker` to limit the operation to only target at the restarted DM-worker (`127.0.0.1:8263`). 
+
+    - Use the parameter `--worker` to limit the operation to only target at the restarted DM-worker (`127.0.0.1:8263`).
     - The DM-worker will try to execute the DDL to the downstream again during the unlocking process (the owner before restarting has executed the DDL to the downstream), so as to make sure that the DDL can be executed multiple times.
-    
+
         ```bash
         » unlock-ddl-lock --worker=127.0.0.1:8263 test-`shard_db`.`shard_table`
         {
@@ -387,13 +387,13 @@ The operation processes are:
             ]
         }
         ```
-        
+
 3. Use `show-ddl-locks` to confirm if the DDL lock has been successfully unlocked.
-4. Use `query-status` to confirm if the synchronization task is normal.
+4. Use `query-status` to confirm if the replication task is normal.
 
-#### Impact 
+#### Impact
 
-After manually unlocking the lock, the following sharding DDL can be synchronized automatically and normally.
+After manually unlocking the lock, the following sharding DDL can be replicated automatically and normally.
 
 ### Scenario 3: Some DM-workers are temporarily unreachable during the DDL unlocking process
 
@@ -405,15 +405,15 @@ The difference between Scenario 3 and [Scenario 2: Some DM-workers restart durin
 
 #### Manual solution
 
-Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and synchronization as in the manual solution of [Some DM-workers go offline](#scenario-1-some-dm-workers-go-offline).
+Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and replication as in the manual solution of [Some DM-workers go offline](#scenario-1-some-dm-workers-go-offline).
 
-When `DM-master` automatically executes the unlocking operation, the owner (`DM-worker-1`) successfully executes the DDL and continues the synchronization process, and the DDL lock information has been removed from `DM-master`. But at this point, if `DM-worker-2` is temporarily unreachable due to the Internet failure during the period of asking `DM-worker-2` to skip the DDL, then the skipping process might fail. 
+When `DM-master` automatically executes the unlocking operation, the owner (`DM-worker-1`) successfully executes the DDL and continues the replication process, and the DDL lock information has been removed from `DM-master`. But at this point, if `DM-worker-2` is temporarily unreachable due to the Internet failure during the period of asking `DM-worker-2` to skip the DDL, then the skipping process might fail.
 
 The operation processes are:
 
-1. Use `show-ddl-locks` to confirm if the corresponding lock of the DDL no longer exists on `DM-master`. 
-2. Use `query-status` to confirm if the DM-worker is still waiting for the lock to synchronize.
-    
+1. Use `show-ddl-locks` to confirm if the corresponding lock of the DDL no longer exists on `DM-master`.
+2. Use `query-status` to confirm if the DM-worker is still waiting for the lock to replicate.
+
     ```bash
     » query-status test
     {
@@ -457,11 +457,11 @@ The operation processes are:
         ]
     }
     ```
-    
+
 3. Use `break-ddl-lock` to compulsorily break the DDL lock which the DM-worker is waiting for.
-    
+
     As the owner has executed the DDL to the downstream, you should use the parameter `--skip` to break the lock.
-    
+
     ```bash
     » break-ddl-lock --worker=127.0.0.1:8263 --skip test
     {
@@ -476,8 +476,9 @@ The operation processes are:
         ]
     }
     ```
-4. Use `query-status` to confirm if the synchronization task is normal and no longer at the state of waiting for the lock. 
 
-#### Impact 
+4. Use `query-status` to confirm if the replication task is normal and no longer at the state of waiting for the lock.
 
-After manually breaking the lock, the following sharding DDL can be synchronized automatically and normally.
+#### Impact
+
+After manually breaking the lock, the following sharding DDL can be replicated automatically and normally.

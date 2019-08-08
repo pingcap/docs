@@ -2,24 +2,23 @@
 title: Transaction Model
 summary: Learn TiDB's transaction model and its differences with MySQL.
 category: reference
-aliases: ['/docs/sql/transaction-model/']
 ---
 
 # Transaction Model
 
-TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-level locking to avoid write conflict, in TiDB, the write conflict is checked only in the `commit` process during the execution of the statements like `Update`, `Insert`, `Delete`, and so on.
+TiDB defaults to an optimistic transaction model. This means that unlike MySQL where statements may block waiting to acquire row-locks, TiDB will allow modifications to occur and detect the conflict at the transaction attempts to commit.
 
-Similarly, functions such as `GET_LOCK()` and `RELEASE_LOCK()` and statements such as `SELECT .. FOR UPDATE` do not work in the same way as in MySQL.
+Similarly, statements such as `SELECT .. FOR UPDATE` do not work in the same way as in MySQL.
 
-**Note:**
+> **Note:**
 >
-> On the application side, remember to check the returned results of `COMMIT` because even there is no error in the execution, there might be errors in the `COMMIT` process.
+> Experimental support for [pessimistic locking](/reference/transactions/transaction-pessimistic.md) is now available. When enabled, TiDB will behave behave similar to the InnoDB storage engine.
 
 ## Differences from MySQL
 
 ### Transaction retry
 
-While the transaction retry is not enabled by default, TiDB can automatically retry failed transactions when `tidb_disable_txn_auto_retry = 0`. This feature is disabled by default because retry might lead to lost updates.
+While the transaction retry is not enabled by default, TiDB can automatically retry failed transactions when `tidb_disable_txn_auto_retry = off`. This feature is disabled by default because retry might lead to lost updates.
 
 ### Large transactions
 
@@ -48,6 +47,10 @@ UPDATE my_table SET a='newest_value' WHERE id = 3;
 COMMIT;
 ```
 
+### SELECT .. FOR UPDATE
+
+Due to optimistic locking, `SELECT .. FOR UPDATE` statements do not block other sessions from modifying data. Instead, the `SELECT .. FOR UPDATE` statement will cause the transaction to fail if rows have been modified by another transaction. Similarly, the `SELECT .. FOR UPDATE` statement disables any transaction retry.
+
 ### Single-threaded or latency-sensitive workloads
 
 Due to its distributed nature, workloads that are single-threaded or latency-sensitive may perform worse in TiDB when compared to a single-instance deployment of MySQL. This difference is similar to the case of small transactions being potentially slower in TiDB.
@@ -63,7 +66,7 @@ Due to its distributed nature, workloads that are single-threaded or latency-sen
         IGNORE n LINES
         (col_name ...);
     ```
-    
+
     Currently, the supported `ESCAPED BY` characters are: `/\/\`.
 
 + Transaction
@@ -72,4 +75,4 @@ Due to its distributed nature, workloads that are single-threaded or latency-sen
 
     > **Warning:**
     >
-    > The `LOAD DATA` operation in TiDB does not guarantee the atomicity of transactions, so it is recommended only for initial batch loading data, and not during regular usage for production environment(s).
+    > The `LOAD DATA` operation in TiDB by default splits transactions and commits them in batches. However, this operation is at the expense of breaking the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.

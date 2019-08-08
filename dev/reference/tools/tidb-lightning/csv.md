@@ -2,7 +2,6 @@
 title: TiDB-Lightning CSV Support
 summary: Learn how to import CSV files via TiDB-Lightning.
 category: reference
-aliases: ['/docs/tools/lightning/csv/']
 ---
 
 # TiDB-Lightning CSV Support
@@ -199,7 +198,6 @@ ID    Region    Count
 3     West      10
 4     North     39
 ```
-
 
 ### TPC-H DBGEN
 

@@ -1,10 +1,10 @@
 ---
-title: ROLLBACK | TiDB SQL Statement Reference 
+title: ROLLBACK | TiDB SQL Statement Reference
 summary: An overview of the usage of ROLLBACK for the TiDB database.
 category: reference
 ---
 
-# ROLLBACK 
+# ROLLBACK
 
 This statement reverts all changes in the current transaction inside of TIDB.  It is the opposite of a `COMMIT` statement.
 
@@ -12,7 +12,7 @@ This statement reverts all changes in the current transaction inside of TIDB.  I
 
 **Statement:**
 
-![Statement](/media/sqlgram/Statement.png)
+![Statement](/media/sqlgram-dev/Statement.png)
 
 ## Examples
 
@@ -39,6 +39,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [COMMIT](/dev/reference/sql/statements/commit.md)
-* [BEGIN](/dev/reference/sql/statements/begin.md)
-* [START TRANSACTION](/dev/reference/sql/statements/start-transaction.md)
+* [COMMIT](/reference/sql/statements/commit.md)
+* [BEGIN](/reference/sql/statements/begin.md)
+* [START TRANSACTION](/reference/sql/statements/start-transaction.md)

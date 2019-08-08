@@ -1,5 +1,5 @@
 ---
-title: CREATE INDEX | TiDB SQL Statement Reference 
+title: CREATE INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE INDEX for the TiDB database.
 category: reference
 ---
@@ -12,36 +12,35 @@ This statement adds a new index to an existing table. It is an alternative synta
 
 **CreateIndexStmt:**
 
-![CreateIndexStmt](/media/sqlgram/CreateIndexStmt.png)
+![CreateIndexStmt](/media/sqlgram-dev/CreateIndexStmt.png)
 
 **CreateIndexStmtUnique:**
 
-![CreateIndexStmtUnique](/media/sqlgram/CreateIndexStmtUnique.png)
+![CreateIndexStmtUnique](/media/sqlgram-dev/CreateIndexStmtUnique.png)
 
 **Identifier:**
 
-![Identifier](/media/sqlgram/Identifier.png)
+![Identifier](/media/sqlgram-dev/Identifier.png)
 
 **IndexTypeOpt:**
 
-![IndexTypeOpt](/media/sqlgram/IndexTypeOpt.png)
+![IndexTypeOpt](/media/sqlgram-dev/IndexTypeOpt.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram/TableName.png)
+![TableName](/media/sqlgram-dev/TableName.png)
 
 **IndexColNameList:**
 
-![IndexColNameList](/media/sqlgram/IndexColNameList.png)
+![IndexColNameList](/media/sqlgram-dev/IndexColNameList.png)
 
 **IndexOptionList:**
 
-![IndexOptionList](/media/sqlgram/IndexOptionList.png)
+![IndexOptionList](/media/sqlgram-dev/IndexOptionList.png)
 
 **IndexOption:**
 
-![IndexOption](/media/sqlgram/IndexOption.png)
-
+![IndexOption](/media/sqlgram-dev/IndexOption.png)
 
 ## Examples
 
@@ -63,7 +62,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +---------------------+----------+------+-------------------------------------------------------------+
 3 rows in set (0.00 sec)
 
-mysql> CREATE INDEX c1 ON t1 (c1); 
+mysql> CREATE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.30 sec)
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
@@ -90,9 +89,9 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## See also
 
-* [ADD INDEX](/dev/reference/sql/statements/add-index.md)
-* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
-* [RENAME INDEX](/dev/reference/sql/statements/rename-index.md)
-* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
-* [EXPLAIN](/dev/reference/sql/statements/explain.md)
+* [ADD INDEX](/reference/sql/statements/add-index.md)
+* [DROP INDEX](/reference/sql/statements/drop-index.md)
+* [RENAME INDEX](/reference/sql/statements/rename-index.md)
+* [ADD COLUMN](/reference/sql/statements/add-column.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [EXPLAIN](/reference/sql/statements/explain.md)

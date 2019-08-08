@@ -1,5 +1,5 @@
 ---
-title: SET [GLOBAL|SESSION] <variable> | TiDB SQL Statement Reference 
+title: SET [GLOBAL|SESSION] <variable> | TiDB SQL Statement Reference
 summary: An overview of the usage of SET [GLOBAL|SESSION] <variable> for the TiDB database.
 category: reference
 ---
@@ -12,7 +12,7 @@ The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, 
 
 **SetStmt:**
 
-![SetStmt](/media/sqlgram/SetStmt.png)
+![SetStmt](/media/sqlgram-dev/SetStmt.png)
 
 ## Examples
 
@@ -70,4 +70,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW \[GLOBAL|SESSION\] VARIABLES](/dev/reference/sql/statements/show-variables.md)
+* [SHOW \[GLOBAL|SESSION\] VARIABLES](/reference/sql/statements/show-variables.md)

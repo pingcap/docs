@@ -2,7 +2,6 @@
 title: TiDB-Ansible Common Operations
 summary: Learn some common operations when using TiDB-Ansible to administer a TiDB cluster.
 category: how-to
-aliases: ['/docs/op-guide/ansible-operation/']
 ---
 
 # TiDB-Ansible Common Operations
@@ -44,4 +43,3 @@ This operation stops the cluster and cleans up the data directory.
 > **Note:**
 >
 > If the deployment directory is a mount point, an error will be reported, but implementation results remain unaffected, so you can ignore it.
-

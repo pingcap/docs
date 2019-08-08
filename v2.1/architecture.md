@@ -8,7 +8,7 @@ category: introduction
 
 The TiDB platform is comprised of three key components: the TiDB server, the PD server, and the TiKV server. In addition, TiDB also provides the [TiSpark](https://github.com/pingcap/tispark/) component for complex OLAP requirements.
 
-![image alt text](media/tidb-architecture.png)
+![image alt text](/media/tidb-architecture.png)
 
 ## TiDB server
 
@@ -36,7 +36,7 @@ The Placement Driver (PD) server is the managing component of the entire cluster
 
 3. Allocating the transaction ID that is globally unique and monotonic increasing.
 
-As a cluster, PD needs to be deployed to an odd number of nodes. Usually it is recommended to deploy to 3 online nodes at least.
+The PD server ensures redundancy by using the Raft consensus algorithm. The Raft leader is responsible for handling all operations, with remaining PD servers available for high availability only. It is recommended to deploy PD as an odd number of nodes.
 
 ## TiKV server
 
@@ -44,4 +44,4 @@ The TiKV server is responsible for storing data. From an external view, TiKV is 
 
 ## TiSpark
 
-TiSpark deals with the complex OLAP requirements. TiSpark makes Spark SQL directly run on the storage layer of the TiDB cluster, combines the advantages of the distributed TiKV cluster, and integrates into the big data ecosystem. With TiSpark, TiDB can support both OLTP and OLAP scenarios in one cluster, so the users never need to worry about data synchronization.
+TiSpark deals with the complex OLAP requirements. TiSpark makes Spark SQL directly run on the storage layer of the TiDB cluster, combines the advantages of the distributed TiKV cluster, and integrates into the big data ecosystem. With TiSpark, TiDB can support both OLTP and OLAP scenarios in one cluster, so the users never need to worry about data replication.

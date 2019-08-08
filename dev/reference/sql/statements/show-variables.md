@@ -1,5 +1,5 @@
 ---
-title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference 
+title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiDB database.
 category: reference
 ---
@@ -12,15 +12,15 @@ This statement shows a list of variables for the scope of either `GLOBAL` or `SE
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram-dev/ShowTargetFilterable.png)
 
 **GlobalScope:**
 
-![GlobalScope](/media/sqlgram/GlobalScope.png)
+![GlobalScope](/media/sqlgram-dev/GlobalScope.png)
 
 ## Examples
 
@@ -102,4 +102,3 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 ## MySQL compatibility
 
 This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
-

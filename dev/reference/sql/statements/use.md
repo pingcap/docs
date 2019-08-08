@@ -1,5 +1,5 @@
 ---
-title: USE | TiDB SQL Statement Reference 
+title: USE | TiDB SQL Statement Reference
 summary: An overview of the usage of USE for the TiDB database.
 category: reference
 ---
@@ -12,11 +12,11 @@ The `USE` statement selects a current database for the user session.
 
 **UseStmt:**
 
-![UseStmt](/media/sqlgram/UseStmt.png)
+![UseStmt](/media/sqlgram-dev/UseStmt.png)
 
 **DBName:**
 
-![DBName](/media/sqlgram/DBName.png)
+![DBName](/media/sqlgram-dev/DBName.png)
 
 ## Examples
 
@@ -75,5 +75,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE DATABASE](/dev/reference/sql/statements/create-database.md)
-* [SHOW TABLES](/dev/reference/sql/statements/show-tables.md)
+* [CREATE DATABASE](/reference/sql/statements/create-database.md)
+* [SHOW TABLES](/reference/sql/statements/show-tables.md)

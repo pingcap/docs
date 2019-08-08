@@ -1,10 +1,10 @@
 ---
-title: ADD COLUMN | TiDB SQL Statement Reference 
+title: ADD COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of ADD COLUMN for the TiDB database.
 category: reference
 ---
 
-# ADD COLUMN 
+# ADD COLUMN
 
 The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding a column.
 
@@ -12,23 +12,23 @@ The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. Thi
 
 **AlterTableStmt:**
 
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+![AlterTableStmt](/media/sqlgram-dev/AlterTableStmt.png)
 
 **AlterTableSpec:**
 
-![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+![AlterTableSpec](/media/sqlgram-dev/AlterTableSpec.png)
 
 **ColumnKeywordOpt:**
 
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
+![ColumnKeywordOpt](/media/sqlgram-dev/ColumnKeywordOpt.png)
 
 **ColumnDef:**
 
-![ColumnDef](/media/sqlgram/ColumnDef.png)
+![ColumnDef](/media/sqlgram-dev/ColumnDef.png)
 
 **ColumnPosition:**
 
-![ColumnPosition](/media/sqlgram/ColumnPosition.png)
+![ColumnPosition](/media/sqlgram-dev/ColumnPosition.png)
 
 ## Examples
 
@@ -78,5 +78,5 @@ mysql> SELECT * FROM t1;
 
 ## See also
 
-* [ADD INDEX](/dev/reference/sql/statements/add-index.md)
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
+* [ADD INDEX](/reference/sql/statements/add-index.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)

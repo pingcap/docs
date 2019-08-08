@@ -2,7 +2,6 @@
 title: User-Defined Variables
 summary: Learn how to use user-defined variables.
 category: reference
-aliases: ['/docs/sql/user-defined-variables/']
 ---
 
 # User-Defined Variables
@@ -16,11 +15,13 @@ You can use the `SET` statement to set a user variable:
 ```sql
 SET @var_name = expr [, @var_name = expr] ...
 ```
+
 or
 
 ```sql
 SET @var_name := expr
 ```
+
 For SET, you can use `=` or `:=` as the assignment operator.
 
 For example:

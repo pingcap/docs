@@ -1,5 +1,5 @@
 ---
-title: SHOW COLLATION | TiDB SQL Statement Reference 
+title: SHOW COLLATION | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW COLLATION for the TiDB database.
 category: reference
 ---
@@ -14,11 +14,11 @@ This statement provides a static list of collations, and is included to provide 
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowStmt](/media/sqlgram-dev/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram-dev/ShowTargetFilterable.png)
 
 ## Examples
 
@@ -256,4 +256,4 @@ TiDB does not support collations other than binary. This statement is only provi
 
 ## See also
 
-* [SHOW CHARACTER SET](/dev/reference/sql/statements/show-character-set.md)
+* [SHOW CHARACTER SET](/reference/sql/statements/show-character-set.md)

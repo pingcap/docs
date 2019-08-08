@@ -1,10 +1,10 @@
 ---
-title: ANALYZE TABLE | TiDB SQL Statement Reference 
+title: ANALYZE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of ANALYZE TABLE for the TiDB database.
 category: reference
 ---
 
-# ANALYZE TABLE 
+# ANALYZE TABLE
 
 This statement updates the statistics that TiDB builds on tables and indexes. It is recommended to run `ANALYZE TABLE` after performing a large batch update or import of records, or when you notice that query execution plans are sub-optimal.
 
@@ -14,15 +14,15 @@ TiDB will also automatically update its statistics over time as it discovers tha
 
 **AnalyzeTableStmt:**
 
-![AnalyzeTableStmt](/media/sqlgram/AnalyzeTableStmt.png)
+![AnalyzeTableStmt](/media/sqlgram-dev/AnalyzeTableStmt.png)
 
 **TableNameList:**
 
-![TableNameList](/media/sqlgram/TableNameList.png)
+![TableNameList](/media/sqlgram-dev/TableNameList.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram/TableName.png)
+![TableName](/media/sqlgram-dev/TableName.png)
 
 ## Examples
 
@@ -65,5 +65,5 @@ This statement is syntactically similar with MySQL. However, `ANALYZE TABLE` may
 
 ## See also
 
-* [EXPLAIN](/dev/reference/sql/statements/explain.md)
-* [EXPLAIN ANALYZE](/dev/reference/sql/statements/explain-analyze.md)
+* [EXPLAIN](/reference/sql/statements/explain.md)
+* [EXPLAIN ANALYZE](/reference/sql/statements/explain-analyze.md)

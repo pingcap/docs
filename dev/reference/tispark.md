@@ -2,7 +2,6 @@
 title: TiSpark User Guide
 summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution for both online transactions and analysis.
 category: reference
-aliases: ['/docs/tispark/tispark-user-guide/'] 
 ---
 
 # TiSpark User Guide
@@ -24,8 +23,7 @@ TiSpark is an OLAP solution that runs Spark SQL directly on TiKV, the distribute
 
 ## Environment setup
 
-+ The TiSpark 2.x supports Spark 2.3.x. It does not support any versions earlier than 2.3.x. If you want to use Spark 2.1.x, use TiSpark 1.x instead.
-+ There are small changes when TiSpark works with different minor versions of Spark 2.3.x. The default version TiSpark supports is Spark 2.3.2. If you want to use TiSpark with Spark 2.3.1 or Spark 2.3.0, you need to build from sources to avoid conflicting APIs. For more details, see [How to build from sources](https://github.com/pingcap/tispark#how-to-build-from-sources).
++ The TiSpark 2.x supports Spark 2.3.x and Spark 2.4.x. If you want to use Spark 2.1.x, use TiSpark 1.x instead.
 + TiSpark requires JDK 1.8+ and Scala 2.11 (Spark2.0 + default Scala version).
 + TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
 
@@ -38,8 +36,8 @@ This section describes the configuration of independent deployment of TiKV and T
 For independent deployment of TiKV and TiSpark, it is recommended to refer to the following recommendations:
 
 + Hardware configuration
- - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](/dev/how-to/deploy/hardware-recommendations.md#deployment-recommendations).
- - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G.
+    - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](/how-to/deploy/hardware-recommendations.md#deployment-recommendations).
+    - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G.
 
 ### Configuration of independent deployment of Spark and TiSpark
 
@@ -76,14 +74,14 @@ For the hybrid deployment of TiKV and TiSpark, add TiSpark required resources to
 
 ## Deploy the TiSpark cluster
 
-Download TiSpark's jar package [here](http://download.pingcap.org/tispark-latest-linux-amd64.tar.gz), decompress it, and copy the content to the appropriate folder.
+Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases). Download your desired version of jar package and copy the content to the appropriate folder.
 
 ### Deploy TiSpark on the existing Spark cluster
 
 Running TiSpark on an existing Spark cluster does not require a reboot of the cluster. You can use Spark's `--jars` parameter to introduce TiSpark as a dependency:
 
 ```sh
-spark-shell --jars $TISPARK_FOLDER/tispark-core-${version}-SNAPSHOT-jar-with-dependencies.jar
+spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
 ```
 
 ### Deploy TiSpark without the Spark cluster
@@ -94,7 +92,7 @@ If you do not have a Spark cluster, we recommend using the standalone mode. To u
 
 You can download [Apache Spark](https://spark.apache.org/downloads.html)
 
-For the Standalone mode without Hadoop support, use Spark **2.3.x** and any version of Pre-build with Apache Hadoop 2.x with Hadoop dependencies. If you need to use the Hadoop cluster, please choose the corresponding Hadoop version. You can also choose to build from the [source code](https://spark.apache.org/docs/2.3.0/building-spark.html) to match the previous version of the official Hadoop 2.x.
+For the Standalone mode without Hadoop support, use Spark **2.3.x** and any version of Pre-build with Apache Hadoop 2.x with Hadoop dependencies. If you need to use the Hadoop cluster, please choose the corresponding Hadoop version. You can also choose to build from the [source code](https://spark.apache.org/docs/latest/building-spark.html) to match the previous version of the official Hadoop 2.x.
 
 Suppose you already have a Spark binaries, and the current PATH is `SPARKPATH`, please copy the TiSpark jar package to the `${SPARKPATH}/jars` directory.
 
@@ -152,7 +150,7 @@ The result is:
 | 600000000 |
 +-------------+
 ```
- 
+
 Spark SQL Interactive shell remains the same:
 
 ```sh
@@ -188,17 +186,9 @@ select count(*) from account;
 1 row selected (1.97 seconds)
 ```
 
-## TiSparkR
-
-TiSparkR is a thin layer built to support the R language with TiSpark. Refer to [this document](https://github.com/pingcap/tispark/blob/master/R/README.md) for usage.
-
-## TiSpark on PySpark
-
-TiSpark on PySpark is a Python package built to support the Python language with TiSpark. Refer to [this document](https://github.com/pingcap/tispark/blob/master/python/README.md) for usage.
-
 ## Use TiSpark together with Hive
 
-You can use TiSpark together with Hive. 
+You can use TiSpark together with Hive.
 
 Before starting Spark, you need to set the `HADOOP_CONF_DIR` environment variable to your Hadoop configuration folder and copy `hive-site.xml` to the `spark/conf` folder.
 
@@ -232,7 +222,7 @@ df.write
 .option("isolationLevel", "NONE") // recommended to set isolationLevel to NONE if you have a large DF to load.
 .option("user", "root") // TiDB user here
 .save()
-``` 
+```
 
 It is recommended to set `isolationLevel` to `NONE` to avoid large single transactions which might potentially lead to TiDB OOM.
 
@@ -243,14 +233,14 @@ TiSpark uses TiDB statistic information for the following items:
 1. Determining which index to ues in your query plan with the estimated lowest cost.
 2. Small table broadcasting, which enables efficient broadcast join.
 
-If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](/dev/reference/performance/statistics.md).
+If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](/reference/performance/statistics.md).
 
 Starting from TiSpark 2.0, statistics information is default to auto load.
 
 Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
 
 Currently, you can adjust these configurations in your `spark-defaults.conf` file.
-  
+
 | Property name | Default | Description |
 | :--------   | :-----  | :---- |
 | spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |

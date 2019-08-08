@@ -1,5 +1,5 @@
 ---
-title: DROP INDEX | TiDB SQL Statement Reference 
+title: DROP INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP INDEX for the TiDB database.
 category: reference
 ---
@@ -12,19 +12,19 @@ This statement removes an index from a specified table, marking space as free in
 
 **AlterTableStmt:**
 
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+![AlterTableStmt](/media/sqlgram-dev/AlterTableStmt.png)
 
 **AlterTableSpec:**
 
-![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+![AlterTableSpec](/media/sqlgram-dev/AlterTableSpec.png)
 
 **KeyOrIndex:**
 
-![KeyOrIndex](/media/sqlgram/KeyOrIndex.png)
+![KeyOrIndex](/media/sqlgram-dev/KeyOrIndex.png)
 
 **Identifier:**
 
-![Identifier](/media/sqlgram/Identifier.png)
+![Identifier](/media/sqlgram-dev/Identifier.png)
 
 ## Examples
 
@@ -46,7 +46,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +---------------------+----------+------+-------------------------------------------------------------+
 3 rows in set (0.00 sec)
 
-mysql> CREATE INDEX c1 ON t1 (c1); 
+mysql> CREATE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.30 sec)
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
@@ -68,7 +68,7 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## See also
 
-* [SHOW INDEX](/dev/reference/sql/statements/show-index.md)
-* [CREATE INDEX](/dev/reference/sql/statements/create-index.md)
-* [ADD INDEX](/dev/reference/sql/statements/add-index.md)
-* [RENAME INDEX](/dev/reference/sql/statements/rename-index.md)
+* [SHOW INDEX](/reference/sql/statements/show-index.md)
+* [CREATE INDEX](/reference/sql/statements/create-index.md)
+* [ADD INDEX](/reference/sql/statements/add-index.md)
+* [RENAME INDEX](/reference/sql/statements/rename-index.md)

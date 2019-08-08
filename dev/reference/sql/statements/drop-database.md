@@ -1,5 +1,5 @@
 ---
-title: DROP DATABASE | TiDB SQL Statement Reference 
+title: DROP DATABASE | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP DATABASE for the TiDB database.
 category: reference
 ---
@@ -12,19 +12,19 @@ The `DROP DATABASE` statement permanently removes a specified database schema, a
 
 **DropDatabaseStmt:**
 
-![DropDatabaseStmt](/media/sqlgram/DropDatabaseStmt.png)
+![DropDatabaseStmt](/media/sqlgram-dev/DropDatabaseStmt.png)
 
 **DatabaseSym:**
 
-![DatabaseSym](/media/sqlgram/DatabaseSym.png)
+![DatabaseSym](/media/sqlgram-dev/DatabaseSym.png)
 
 **IfExists:**
 
-![IfExists](/media/sqlgram/IfExists.png)
+![IfExists](/media/sqlgram-dev/IfExists.png)
 
 **DBName:**
 
-![DBName](/media/sqlgram/DBName.png)
+![DBName](/media/sqlgram-dev/DBName.png)
 
 ## Examples
 
@@ -60,6 +60,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE DATABASE](/dev/reference/sql/statements/create-database.md)
-* [ALTER DATABASE](/dev/reference/sql/statements/alter-database.md)
-* [SHOW CREATE DATABASE](/dev/reference/sql/statements/show-create-database.md)
+* [CREATE DATABASE](/reference/sql/statements/create-database.md)
+* [ALTER DATABASE](/reference/sql/statements/alter-database.md)

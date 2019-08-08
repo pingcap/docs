@@ -1,5 +1,5 @@
 ---
-title: DROP COLUMN | TiDB SQL Statement Reference 
+title: DROP COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP COLUMN for the TiDB database.
 category: reference
 ---
@@ -12,20 +12,19 @@ This statement drops a column from a specified table. `DROP COLUMN` is online in
 
 **AlterTableStmt:**
 
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+![AlterTableStmt](/media/sqlgram-dev/AlterTableStmt.png)
 
 **AlterTableSpec:**
 
-![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+![AlterTableSpec](/media/sqlgram-dev/AlterTableSpec.png)
 
 **ColumnKeywordOpt:**
 
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
+![ColumnKeywordOpt](/media/sqlgram-dev/ColumnKeywordOpt.png)
 
 **ColumnName:**
 
-![ColumnName](/media/sqlgram/ColumnName.png)
-
+![ColumnName](/media/sqlgram-dev/ColumnName.png)
 
 ## Examples
 
@@ -85,6 +84,6 @@ mysql> SELECT * FROM t1;
 
 ## See also
 
-* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
-* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
-* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
+* [ADD COLUMN](/reference/sql/statements/add-column.md)
+* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [CREATE TABLE](/reference/sql/statements/create-table.md)

@@ -2,7 +2,6 @@
 title: TiDB Transaction Isolation Levels
 summary: Learn about the transaction isolation levels in TiDB.
 category: reference
-aliases: ['/docs/sql/transaction-isolation/']
 ---
 
 # TiDB Transaction Isolation Levels
@@ -47,7 +46,7 @@ commit;                         |
 
 ### Difference between TiDB and ANSI Repeatable Read
 
-The Repeatable Read isolation level in TiDB differs from ANSI Repeatable Read isolation level, though they sharing the same name. According to the standard described in the [A Critique of ANSI SQL Isolation Levels](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) paper, TiDB implements the Snapshot Isolation (SI) level. This isolation level does not allow strict phantom reads (A3) but allows broad phantom reads (P3) and write skews. In contrast, the ANSI Repeatable Read isolation level allows phantom reads but does not allow write skews.
+The Repeatable Read isolation level in TiDB differs from ANSI Repeatable Read isolation level, though they sharing the same name. According to the standard described in the [A Critique of ANSI SQL Isolation Levels](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) paper, TiDB implements the Snapshot Isolation (SI) level. This isolation level does not allow strict phantoms (A3) but allows broad phantoms (P3) and write skews. In contrast, the ANSI Repeatable Read isolation level allows phantom reads but does not allow write skews.
 
 ### Difference between TiDB and MySQL Repeatable Read
 
@@ -57,7 +56,7 @@ The MySQL Repeatable Read isolation level is not the snapshot isolation level. T
 
 ## Transaction retry
 
-By default TiDB will not retry transactions because this might lead to lost updates. If your application can tolerate lost updates, and does not require Snapshot Isolation consistency, you can enable **this feature** by setting `tidb_disable_txn_auto_retry = 0`. This has the benefit of fewer `COMMIT` statements generating errors.
+By default TiDB will not retry transactions because this might lead to lost updates. If your application can tolerate lost updates, and does not require Snapshot Isolation consistency, you can enable **this feature** by setting `tidb_disable_txn_auto_retry = off`. This has the benefit of fewer `COMMIT` statements generating errors.
 
 The value of `tidb_retry_limit` cannot be 0. Otherwise, the automatic retry is also disabled.
 
@@ -93,10 +92,10 @@ Example 2:
 
 Under the automatic retry mechanism of TiDB, all the executed statements for the first time are re-executed again. Whether the subsequent statements are to be executed or not depends on the results of the previous statements, automatic retry can violate snapshot isolation, causing lost updates.
 
-To disable the automatic retry of explicit transactions, configure the `tidb_disable_txn_auto_retry` variable:
+To disable the automatic retry of explicit transactions, configure `tidb_disable_txn_auto_retry = on`:
 
 ```sql
-SET GLOBAL tidb_disable_txn_auto_retry = 1;
+SET GLOBAL tidb_disable_txn_auto_retry = on;
 ```
 
 Changing the variable `tidb_disable_txn_auto_retry` does not affect the implicit single statement with `auto_commit = 1`, because the automatic retry of this statement does not cause anomalies like update loss and does not break the isolation of a transaction.
