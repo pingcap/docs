@@ -1,19 +1,19 @@
 ---
-title: View
+title: Views
 summary: Learn how to use views in TiDB.
 category: reference
 ---
 
-# View
+# Views
 
-TiDB supports views. A view acts as a virtual table and its table schema is defined by the `SELECT` statement when you create a view. Using views has the following benefits:
+TiDB supports views. A view acts as a virtual table and its table schema is defined by the `SELECT` statement when you create the view. Using views has the following benefits:
 
-- Exposing only safe fields and data to users to ensure the security of sensitive fields and data stored in the underlying table
+- Exposing only safe fields and data to users to ensure security of sensitive fields and data stored in the underlying table
 - Defining complex queries that frequently appear as views to make complex queries easier and more convenient
 
 ## Query views
 
-Querying a view is similar to querying an ordinary table. However, when TiDB executes a view query, it expands this view into the `SELECT` statement defined when the view was created, and then executes the expanded query statement.
+Querying a view is similar to querying an ordinary table. However, when TiDB queries a view, it actually queries the `SELECT` statement associated with the view.
 
 ## Examples
 
