@@ -86,7 +86,7 @@ dest-type = "mysql"
 # Safe-mode configuration
 # Value: "true"/"false" ("false" by default)
 # If it is set to "true", Reparo splits the `UPDATE` statement into a `DELETE` statement plus a `REPLACE` statement.
-safe-mode = "false"
+safe-mode = false
 
 # `replicate-do-db` and `replicate-do-table` specify the database and table to be recovered.
 # `replicate-do-db` has priority over `replicate-do-table`.
