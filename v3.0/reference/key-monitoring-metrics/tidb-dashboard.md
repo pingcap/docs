@@ -19,7 +19,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 
 - Query Summary
     - Duration: the execution time of a SQL statement
-    - QPS: the statistics of OKs and Errors according to the SQL execution result on each TiDB
+    - QPS: the statistics of OKs and Errors according to the SQL execution result on each TiDB instance
     - Statement OPS: the statistics of executed SQL statements (including `SELECT`, `INSERT`, `UPDATE` and so on)
     - QPS By Instance: the QPS on each TiDB instance
     - Failed Query OPM: the statistics of error types (such as syntax errors and primary key conflicts) according to the errors happening when executing SQL statements on each TiDB instance
@@ -36,7 +36,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Memory Usage: the statistics of memory usage of different TiDB instances
     - CPU Usage: the statistics of CPU usage of different TiDB instances
     - Connection Count: the number of clients connected to each TiDB instance
-    - Open FD Count: the statistics of the opened file descriptors of different TiDB instances
+    - Open FD Count: the statistics of opened file descriptors of different TiDB instances
     - Goroutine Count: the number of Goroutines of different TiDB instances
     - Go GC Duration: the statistics of GC time of different TiDB instances
     - Go Threads: the number of threads of different TiDB instances
@@ -49,7 +49,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Heap Memory Usage: the heap memory size used by each TiDB instance
     - Uncommon Error OPM: the statistics of abnormal TiDB errors, including panic, binlog write failure, and so on
     - Handshake Error OPS: the number of times that a handshake error occurs every second on different TiDB instances
-    - Get Token Duration: the time cost of getting Token after building the connection
+    - Get Token Duration: the time cost of getting Token after establishing the connection
 
 - Transaction
     - Transaction OPS: the statistics of executed transactions
@@ -123,7 +123,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Pseudo Estimation OPS: the number of the SQL statements optimized using pseudo statistics
     - Dump Feedback OPS: the number of stored statistical Feedbacks
     - Update Stats OPS: the statistics of using Feedback to update the statistics information
-    - Significant Feedback: the number of significant Feedback that update the statistics information
+    - Significant Feedback: the number of significant Feedback pieces that update the statistics information
 
 - Meta
     - AutoID QPS: AutoID related statistics, including three operations (global ID allocation, a single table AutoID allocation, a single table AutoID Rebase)
@@ -138,6 +138,6 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Too Many Locks Error OPM: the number of the error that GC clears up too many locks
 
 - Batch Client
-    - Pending Request Count by TiKV: the number of Batch messages that are pending for processing
-    - Wait Duration 95: the waiting time of Batch messages that are pending for processing
+    - Pending Request Count by TiKV: the number of Batch messages that are pending processing
+    - Wait Duration 95: the waiting time of Batch messages that are pending processing
     - Batch Client Unavailable Duration 95: the unavailable time of the Batch client
