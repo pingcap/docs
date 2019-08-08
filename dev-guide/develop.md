@@ -41,7 +41,7 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
     make
     ```
 
-+ Run unit test.
++ Run the unit test.
 
     ```bash
     make test
@@ -61,7 +61,7 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
     make
     ```
 
-+ Run unit test.
++ Run the unit test.
 
     ```bash
     make test
