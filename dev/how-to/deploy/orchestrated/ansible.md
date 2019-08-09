@@ -832,6 +832,8 @@ ssh 172.16.10.61
 
 After you login to the deployment target machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
 
+{{< copyable "shell-regular" >}}
+
 ```shell
 sudo -su root
 ```
