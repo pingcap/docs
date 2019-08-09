@@ -25,15 +25,11 @@ function install_go {
     echo "Intall go ..."
     case "$OSTYPE" in 
         linux*) 
-            curl -L https://storage.googleapis.com/golang/go1.10.2.linux-amd64.tar.gz -o golang.tar.gz
-            ${SUDO} tar -C /usr/local -xzf golang.tar.gz
-            rm golang.tar.gz
+            curl -L https://storage.googleapis.com/golang/go1.12.7.linux-amd64.tar.gz -o golang.tar.gz
         ;;
 
         darwin*)
-            curl -L https://storage.googleapis.com/golang/go1.10.2.darwin-amd64.tar.gz -o golang.tar.gz
-            ${SUDO} tar -C /usr/local -xzf golang.tar.gz
-            rm golang.tar.gz
+            curl -L https://storage.googleapis.com/golang/go1.12.7.darwin-amd64.tar.gz -o golang.tar.gz
         ;;
 
         *)
@@ -41,6 +37,9 @@ function install_go {
             exit 1
         ;;
     esac
+    ${SUDO} tar -C /usr/local -xzf golang.tar.gz
+    rm golang.tar.gz
+    echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
 }
 
 function install_gpp {
@@ -97,8 +96,8 @@ if which go &>/dev/null; then
     # requires go >= 1.8
     GO_VER_1=`go version | awk 'match($0, /([0-9])+(\.[0-9]+)+/) { ver = substr($0, RSTART, RLENGTH); split(ver, n, "."); print n[1];}'`
     GO_VER_2=`go version | awk 'match($0, /([0-9])+(\.[0-9]+)+/) { ver = substr($0, RSTART, RLENGTH); split(ver, n, "."); print n[2];}'`
-    if [[ (($GO_VER_1 -eq 1 && $GO_VER_2 -lt 10)) || (($GO_VER_1 -lt 1)) ]]; then
-        echo "Please upgrade Go to 1.10 or later."
+    if [[ (($GO_VER_1 -eq 1 && $GO_VER_2 -lt 12)) || (($GO_VER_1 -lt 1)) ]]; then
+        echo "Please upgrade Go to 1.12 or later."
         exit 1
     fi
 else
@@ -117,5 +116,7 @@ if which g++ &>/dev/null; then
 else
     install_gpp
 fi
+
+echo -e "Run this command:\n\n\tsource $HOME/.profile\n\nor just open a new terminal window to update environment variables"
 
 echo OK
