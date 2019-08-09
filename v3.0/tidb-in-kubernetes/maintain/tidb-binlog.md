@@ -95,7 +95,7 @@ By default, only one downstream drainer will be created. You can install the `ti
 
     The `clusterName` and `clusterVersion` must match the desired source TiDB cluster.
 
-    You can refer to [TiDB Binlog Drainer Configurations in Kubernetes](reference/configuration/tidb-drainer.md) for the complete configuration reference.
+    You can refer to [TiDB Binlog Drainer Configurations in Kubernetes](tidb-in-kubernetes/reference/configuration/tidb-drainer.md) for the complete configuration reference.
 
 4. Deploy the drainer:
 
