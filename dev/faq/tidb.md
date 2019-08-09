@@ -964,6 +964,8 @@ Recommendations:
 
 You can use `admin show ddl` to view the progress of the current DDL job. The operation is as follows:
 
+{{< copyable "sql" >}}
+
 ```sql
 admin show ddl;
 ```
