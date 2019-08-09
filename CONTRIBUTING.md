@@ -1,4 +1,4 @@
-# Contributing
+# Contribution Guide
 
 Please note that there are version folders.
 If you are documenting a new change, start in the dev/ folder.
