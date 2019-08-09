@@ -50,4 +50,4 @@ Example with a timeout of 1 second (1000 milliseconds):
 SELECT /*+ MAX_EXECUTION_TIME(1000) */ * FROM t1 INNER JOIN t2 WHERE ...
 ```
 
-In addition to the hint, the `max_execution_time` system variable also applies to the current statement.
+In addition to this hint, the `max_execution_time` system variable also limits the execution time of a statement.
