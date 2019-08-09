@@ -935,6 +935,8 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:
 
+{{< copyable "sql" >}}
+
 ```sql
 update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";
 ```
