@@ -57,11 +57,11 @@ The terraform script expects three variables to be provided by the user. You can
 
 * `GCP_CREDENTIALS_PATH`: Path to a valid GCP credentials file.
     - It is recommended for you to create a separate service account to be used by Terraform. See [this page](https://cloud.google.com/iam/docs/creating-managing-service-accounts) for more information. `./create-service-account.sh` will create such a service account with minimal permissions.
-    - See [this page](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for information on creating service account keys. The steps below detail how to do this using a script provided in the `deploy/gcp` directory, alternatively if creating the service account and key yourself, choose `JSON` key type during creation. The downloaded `JSON` file that contains the private key is the credentials file you need.
+    - See [this page](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for information on creating service account keys. The steps in the script below detail how to do this using a script provided in the `deploy/gcp` directory, alternatively if creating the service account and key yourself, choose `JSON` key type during creation. The downloaded `JSON` file that contains the private key is the credentials file you need.
 * `GCP_REGION`: The region in which to create the resources, for example: `us-west1`.
 * `GCP_PROJECT`: The GCP project in which everything will be created.
 
-See below for how to set these variables:
+The script below shows how to configure Terraform with these variables:
 
 {{< copyable "shell-regular" >}}
 
@@ -75,7 +75,7 @@ echo "GCP_PROJECT=$(gcloud config get-value project)" >> terraform.tfvars
 ```
 
 Terraform  automatically loads and populates variables from the files matching `terraform.tfvars` or `*.auto.tfvars`. For more information please see the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/variables.html).
-The previous steps will populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars`
+The steps in the script above will populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars`
 with `GCP_CREDENTIALS_PATH`.
 
 ## Deploy
