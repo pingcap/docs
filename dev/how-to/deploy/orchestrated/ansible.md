@@ -696,7 +696,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 1. Run the following command. If it returns `running`, then the NTP service is running:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     sudo systemctl status ntpd.service
     ```
@@ -710,7 +710,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 2. Run the ntpstat command. If it returns `synchronised to NTP server` (synchronizing with the NTP server), then the synchronization process is normal.
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     ntpstat
     ```
@@ -728,7 +728,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 - The following condition indicates the NTP service is not synchronizing normally:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     ntpstat
     ```
@@ -740,7 +740,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 - The following condition indicates the NTP service is not running normally:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     ntpstat
     ```
@@ -752,7 +752,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 - To make the NTP service start synchronizing as soon as possible, run the following command. You can replace `pool.ntp.org` with other NTP servers.
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     sudo systemctl stop ntpd.service && \
     sudo ntpdate pool.ntp.org && \
@@ -762,7 +762,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 - To install the NTP service manually on the CentOS 7 system, run the following command:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     sudo yum install ntp ntpdate
     sudo systemctl start ntpd.service
