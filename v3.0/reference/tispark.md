@@ -255,3 +255,11 @@ A: You can use the existing Spark cluster without a separate deployment, but if 
 Q: Can I mix Spark with TiKV?
 
 A: If TiDB and TiKV are overloaded and run critical online tasks, consider deploying TiSpark separately. You also need to consider using different NICs to ensure that OLTP's network resources are not compromised and affect online business. If the online business requirements are not high or the loading is not large enough, you can consider mixing TiSpark with TiKV deployment.
+
+Q: What can I do if `warning：WARN ObjectStore:568 - Failed to get database` is returned when executing Spark?
+
+A: You can ignore this warning, because Spark can not locate the corresponding hive library which is in TiKV instead of in hive. One solution is to modify the [log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43). You can add this parameter to the `log4j` file of the `config` under Spark. If the suffix is `template`, use the `mv` command to change it to `propertis`.
+
+Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned when executing Spark?
+
+A: It is returned because the length of the data written exceeds the length of the data type defined by the database. You can check the field length and make adjustment accordingly.
