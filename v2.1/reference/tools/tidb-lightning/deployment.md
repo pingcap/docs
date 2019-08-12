@@ -19,6 +19,20 @@ Before starting TiDB Lightning, note that:
     bin/tidb-lightning-ctl -switch-mode=normal
     ```
 
+- TiDB Lightning is required to have the following privileges in the downstream TiDB:
+
+    | Privilege | Scope |
+    |----:|:------|
+    | SELECT | Tables |
+    | INSERT | Tables |
+    | UPDATE | Tables |
+    | DELETE | Tables |
+    | CREATE | Databases, tables |
+    | DROP | Databases, tables |
+    | ALTER | Tables |
+
+    If the `checksum` configuration item of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
+
 ## Hardware requirements
 
 `tidb-lightning` and `tikv-importer` are both resource-intensive programs. It is recommended to deploy them into two separate machines.
@@ -333,7 +347,7 @@ Download the TiDB Lightning package (choose the same version as that of the TiDB
     read-block-size = 65536 # Byte (default = 64 KB)
 
     # Minimum size (in terms of source data file) of each batch of import.
-    # Lightning splits a large table into multiple data engine files according to this size.
+    # TiDB Lightning splits a large table into multiple data engine files according to this size.
     batch-size = 107_374_182_400 # Byte (default = 100 GB)
 
     # Engine file needs to be imported sequentially. Due to parallel processing,
