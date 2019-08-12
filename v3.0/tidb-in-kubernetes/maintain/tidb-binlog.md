@@ -6,7 +6,7 @@ category: how-to
 
 # Maintain TiDB Binlog
 
-This document describes how to maintain [TiDB Binlog](reference/tidb-binlog-overview.md)  of a TiDB cluster in Kubernetes.
+This document describes how to maintain [TiDB Binlog](reference/tidb-binlog-overview.md) of a TiDB cluster in Kubernetes.
 
 ## Prerequisites
 
@@ -15,7 +15,9 @@ This document describes how to maintain [TiDB Binlog](reference/tidb-binlog-over
 
 ## Enable TiDB Binlog of a TiDB cluster
 
-TiDB Binlog is disabled in the TiDB cluster by default. To create a TiDB cluster with TiDB Binlog enabled or enable  TiDB Binlog in existing TiDB cluster, modify the `values.yaml` file:
+TiDB Binlog is disabled in the TiDB cluster by default. To create a TiDB cluster with TiDB Binlog enabled, or enable TiDB Binlog in an existing TiDB cluster:
+
+ 1.  Modify the `values.yaml` file as described below:
 
 * Set `binlog.pump.create` to `true`.
 * Set `binlog.drainer.create` to `true`.
@@ -24,11 +26,11 @@ TiDB Binlog is disabled in the TiDB cluster by default. To create a TiDB cluster
 
 TiDB Binlog supports three types of downstream storage:
 
-* PersistenceVolume: the default downstream storage. You can consider configuring a large PV for `drainer` (by modifying `binlog.drainer.storage`) in this case.
+* PersistenceVolume: the default downstream storage. You can configure a large PV for `drainer` (by modifying `binlog.drainer.storage`) in this case.
 * MySQL compatible databases: enabled by setting `binlog.drainer.destDBType` to `mysql`. Meanwhile, you must configure the address and credential of the target database in `binlog.drainer.mysql`.
 * Apache Kafka: enabled by setting `binlog.drainer.destDBType` to `kafka`. Meanwhile, you must configure the zookeeper address and Kafka address of the target cluster in `binlog.drainer.kafka`.
 
-Then, create a new TiDB cluster or update an existing cluster:
+2. Create a new TiDB cluster or update an existing cluster:
 
 * Create a new TiDB cluster with TiDB Binlog enabled:
 
@@ -38,7 +40,7 @@ Then, create a new TiDB cluster or update an existing cluster:
     helm install pingcap/tidb-cluster --name=<release-name> --namespace=<namespace> --version=<chart-version> -f <values-file>
     ```
 
-* Update a new TiDB cluster to enable TiDB Binlog:
+* Update an existing TiDB cluster to enable TiDB Binlog:
 
     {{< copyable "shell-regular" >}}
 
@@ -48,9 +50,9 @@ Then, create a new TiDB cluster or update an existing cluster:
 
 ## Deploy Multiple Drainers
 
-By default, only one downstream drainer will be created. You can install the `tidb-drainer` Helm chart to deploy more drainers for a TiDB cluster.
+By default, only one downstream drainer is created. You can install the `tidb-drainer` Helm chart to deploy more drainers for a TiDB cluster, as described below:
 
-1. Make sure the PingCAP helm repository is up to date:
+1. Make sure that the PingCAP Helm repository is up to date:
 
     {{< copyable "shell-regular" >}}
 
@@ -70,7 +72,7 @@ By default, only one downstream drainer will be created. You can install the `ti
     helm inspect values pingcap/tidb-cluster --version=<chartVersion> > values.yaml
     ```
 
-3. Modify the `values.yaml` file to specify the source TiDB cluster and the downstream of the drainer, here is an example:
+3. Modify the `values.yaml` file to specify the source TiDB cluster and the downstream database of the drainer. Here is an example:
 
     ```yaml
     clusterName: example-tidb
@@ -95,7 +97,7 @@ By default, only one downstream drainer will be created. You can install the `ti
 
     The `clusterName` and `clusterVersion` must match the desired source TiDB cluster.
 
-    You can refer to [TiDB Binlog Drainer Configurations in Kubernetes](tidb-in-kubernetes/reference/configuration/tidb-drainer.md) for the complete configuration reference.
+    For complete configuration details, refer to [TiDB Binlog Drainer Configurations in Kubernetes](tidb-in-kubernetes/reference/configuration/tidb-drainer.md).
 
 4. Deploy the drainer:
 
@@ -107,4 +109,4 @@ By default, only one downstream drainer will be created. You can install the `ti
 
     > **Note:**
     >
-    > This chart must be installed to the same namespace with the source TiDB cluster.
+    > This chart must be installed to the same namespace as the source TiDB cluster.
