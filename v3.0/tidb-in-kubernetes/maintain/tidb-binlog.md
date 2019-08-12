@@ -17,36 +17,36 @@ This document describes how to maintain [TiDB Binlog](reference/tidb-binlog-over
 
 TiDB Binlog is disabled in the TiDB cluster by default. To create a TiDB cluster with TiDB Binlog enabled, or enable TiDB Binlog in an existing TiDB cluster:
 
- 1.  Modify the `values.yaml` file as described below:
+1. Modify the `values.yaml` file as described below:
 
-* Set `binlog.pump.create` to `true`.
-* Set `binlog.drainer.create` to `true`.
-* Set `binlog.pump.storageClassName` and `binlog.drainer.storageClassName` to an available `storageClass` in your Kubernetes cluster.
-* Set `binlog.drainer.destDBType` to your desired downstream storage as needed, which is explained in details below.
+    * Set `binlog.pump.create` to `true`.
+    * Set `binlog.drainer.create` to `true`.
+    * Set `binlog.pump.storageClassName` and `binlog.drainer.storageClassName` to an available `storageClass` in your Kubernetes cluster.
+    * Set `binlog.drainer.destDBType` to your desired downstream storage as needed, which is explained in details below.
 
-TiDB Binlog supports three types of downstream storage:
+        TiDB Binlog supports three types of downstream storage:
 
-* PersistenceVolume: the default downstream storage. You can configure a large PV for `drainer` (by modifying `binlog.drainer.storage`) in this case.
-* MySQL compatible databases: enabled by setting `binlog.drainer.destDBType` to `mysql`. Meanwhile, you must configure the address and credential of the target database in `binlog.drainer.mysql`.
-* Apache Kafka: enabled by setting `binlog.drainer.destDBType` to `kafka`. Meanwhile, you must configure the zookeeper address and Kafka address of the target cluster in `binlog.drainer.kafka`.
+        * PersistenceVolume: the default downstream storage. You can configure a large PV for `drainer` (by modifying `binlog.drainer.storage`) in this case.
+        * MySQL compatible databases: enabled by setting `binlog.drainer.destDBType` to `mysql`. Meanwhile, you must configure the address and credential of the target database in `binlog.drainer.mysql`.
+        * Apache Kafka: enabled by setting `binlog.drainer.destDBType` to `kafka`. Meanwhile, you must configure the zookeeper address and Kafka address of the target cluster in `binlog.drainer.kafka`.
 
 2. Create a new TiDB cluster or update an existing cluster:
 
-* Create a new TiDB cluster with TiDB Binlog enabled:
+    * Create a new TiDB cluster with TiDB Binlog enabled:
 
-    {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-    ```shell
-    helm install pingcap/tidb-cluster --name=<release-name> --namespace=<namespace> --version=<chart-version> -f <values-file>
-    ```
+        ```shell
+        helm install pingcap/tidb-cluster --name=<release-name> --namespace=<namespace> --version=<chart-version> -f <values-file>
+        ```
 
-* Update an existing TiDB cluster to enable TiDB Binlog:
+    * Update an existing TiDB cluster to enable TiDB Binlog:
 
-    {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-    ```shell
-    helm upgrade <release-name> pingcap/tidb-cluster --version=<chart-version> -f <values-file>
-    ```
+        ```shell
+        helm upgrade <release-name> pingcap/tidb-cluster --version=<chart-version> -f <values-file>
+        ```
 
 ## Deploy Multiple Drainers
 
