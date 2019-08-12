@@ -266,7 +266,7 @@ A: If TiDB and TiKV are overloaded and run critical online tasks, consider deplo
 
 Q: What can I do if `warning：WARN ObjectStore:568 - Failed to get database` is returned when executing Spark?
 
-A: You can ignore this warning, because Spark can not locate the corresponding hive library which is in TiKV instead of in hive. One solution is to modify the [log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43). You can add this parameter to the `log4j` file of the `config` under Spark. If the suffix is `template`, use the `mv` command to change it to `propertis`.
+A: You can ignore this warning, because Spark can not locate the corresponding hive library which is in TiKV instead of in hive. One solution is to modify the [log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43). You can add this parameter to the `log4j` file of the `config` under Spark. If the suffix is `template`, use the `mv` command to change it to `properties`.
 
 Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned when executing Spark?
 
