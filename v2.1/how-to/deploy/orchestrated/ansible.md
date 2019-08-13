@@ -483,10 +483,10 @@ location_labels = ["host"]
 
 1. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `block-cache-size` parameter in `tidb-ansible/conf/tikv.yml`:
 
-    - `rocksdb defaultcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 30%
-    - `rocksdb writecf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 45%
-    - `rocksdb lockcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 2.5% (128 MB at a minimum)
-    - `raftdb defaultcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 2.5% (128 MB at a minimum)
+    - `rocksdb defaultcf block-cache-size(GB)`: MEM \* 80% / TiKV instance number \* 30%
+    - `rocksdb writecf block-cache-size(GB)`: MEM \* 80% / TiKV instance number \* 45%
+    - `rocksdb lockcf block-cache-size(GB)`: MEM \* 80% / TiKV instance number \* 2.5% (128 MB at a minimum)
+    - `raftdb defaultcf block-cache-size(GB)`: MEM \* 80% / TiKV instance number \* 2.5% (128 MB at a minimum)
 
 2. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `high-concurrency`, `normal-concurrency` and `low-concurrency` parameters in the `tidb-ansible/conf/tikv.yml` file:
 
