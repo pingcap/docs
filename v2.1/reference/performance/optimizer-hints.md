@@ -48,7 +48,7 @@ MAX_EXECUTION_TIME(N)
 
 Example with a timeout of 1 second (1000 milliseconds):
 
- ```sql
+```sql
 SELECT /*+ MAX_EXECUTION_TIME(1000) */ * FROM t1 INNER JOIN t2 WHERE ...
 ```
 
