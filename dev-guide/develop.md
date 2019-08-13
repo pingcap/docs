@@ -2,7 +2,9 @@
 
 If you want to develop the TiDB project, you can follow this guide.
 
-Before you begin, check the [supported platforms](./requirements.md#supported-platforms) and [prerequisites](./requirements.md#prerequisites) first.
+## Before you begin
+
+You need to check the [supported platforms](./requirements.md#supported-platforms) and [prerequisites](./requirements.md#prerequisites) first.
 
 ## Build TiKV
 
@@ -16,7 +18,7 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 + Run all unit tests:
 
     ```bash
-    make test
+    make dev
     ```
 
 + Build in release mode:
@@ -27,7 +29,7 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 
 ## Build TiDB
 
-+ Make sure the GOPATH environment is set correctly.
++ Make sure the `GOPATH` environment is set correctly.
 
 + Get the TiDB source code.
 
@@ -44,7 +46,7 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 + Run the unit test.
 
     ```bash
-    make test
+    make dev
     ```
 
 ## Build PD
@@ -64,5 +66,5 @@ Before you begin, check the [supported platforms](./requirements.md#supported-pl
 + Run the unit test.
 
     ```bash
-    make test
+    make dev
     ```

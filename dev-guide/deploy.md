@@ -4,7 +4,7 @@ The easiest way to deploy TiDB is to use Docker Compose, see [TiDB Docker Compos
 
 ## Before you begin
 
-Before you start, check the [supported platforms](./requirements.md#supported-platforms) and [prerequisites](./requirements.md#prerequisites) first.
+You need to check the [supported platforms](./requirements.md#supported-platforms) and [prerequisites](./requirements.md#prerequisites) first.
 
 ## Build and install TiDB components
 
