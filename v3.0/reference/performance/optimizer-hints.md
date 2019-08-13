@@ -39,7 +39,7 @@ This variable is used to remind the optimizer to use the `Hash Join` algorithm. 
 
 ## MAX\_EXECUTION\_TIME(N)
 
-The `MAX_EXECUTION_TIME` hint is permitted only for SELECT statements. It places a limit N (a timeout value in milliseconds) on how long a statement is permitted to execute before the server terminates it:
+The `MAX_EXECUTION_TIME` hint only applies to `SELECT` statements. It places a limit `N` (a timeout value in milliseconds) on how long a statement is permitted to execute before the server terminates it:
 
 > MAX_EXECUTION_TIME(N)
 
