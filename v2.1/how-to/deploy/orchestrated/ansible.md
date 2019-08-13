@@ -500,11 +500,16 @@ location_labels = ["host"]
         # low-concurrency: 8
     ```
 
-    Recommended configuration: `number of instances * parameter value = CPU_Vcores * 0.8`.
+    Recommended configuration: the number of TiKV instances \* the parameter value = CPU_Vcores \* 0.8.
 
 3. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
-    - `capacity`: total disk capacity / number of TiKV instances (the unit is GB)
+    ```
+    raftstore:
+        capacity: 0
+    ```
+
+    Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
 
 ## Step 10: Edit variables in the `inventory.ini` file
 
