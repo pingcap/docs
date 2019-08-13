@@ -51,4 +51,4 @@ MAX_EXECUTION_TIME(N)
 SELECT /*+ MAX_EXECUTION_TIME(1000) */ * FROM t1 INNER JOIN t2 WHERE ...
 ```
 
- In addition to this hint, the `max_execution_time` system variable also limits the execution time of a statement.
+In addition to this hint, the `max_execution_time` system variable also limits the execution time of a statement.
