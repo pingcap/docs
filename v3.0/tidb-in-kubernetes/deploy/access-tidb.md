@@ -28,7 +28,7 @@ If there is no LoadBalancer, expose the TiDB service port in the following two m
 
 - `externalTrafficPolicy=Cluster`: All machines in the Kubernetes cluster assign a NodePort to TiDB Pod, which is the default mode.
 
-    When using the `Cluster` mode, you can access the TiDB service by using the IP address of any machine and the same port. If there is no TiDB Pod on the machine, the corresponding request is forwarded to the machine with a TiDB Pod.
+    When using the `Cluster` mode, you can access the TiDB service by using the IP address of any machine plus a same port. If there is no TiDB Pod on the machine, the corresponding request is forwarded to the machine with a TiDB Pod.
 
     > **Note:**
     >
