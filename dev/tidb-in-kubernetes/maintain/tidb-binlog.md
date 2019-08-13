@@ -48,7 +48,7 @@ TiDB Binlog is disabled in the TiDB cluster by default. To create a TiDB cluster
         helm upgrade <release-name> pingcap/tidb-cluster --version=<chart-version> -f <values-file>
         ```
 
-## Deploy Multiple Drainers
+## Deploy multiple drainers
 
 By default, only one downstream drainer is created. You can install the `tidb-drainer` Helm chart to deploy more drainers for a TiDB cluster, as described below:
 
