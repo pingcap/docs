@@ -29,7 +29,7 @@ helm inspect values pingcap/tidb-cluster --version=<chart-version> > /home/tidb/
 > - You can replace `/home/tidb` with any directory as you like.
 > - `release-name` is the prefix of resources used by TiDB in Kubernetes (such as Pod, Service, etc.). You can give it a name that is easy to memorize but this name must be *globally unique*. You can view existing `release-name`s in the cluster by running the `helm ls -q` command.
 > - `chart-version` is the version released by the `tidb-cluster` chart. You can view the currently supported versions by running the `helm search -l tidb-cluster` command.
-> - In the rest of this document, `values.yaml` refers to `/home/tidb/<releaseName>/values-<releaseName>.yaml`.
+> - In the rest of this document, `values.yaml` refers to `/home/tidb/<release-name>/values-<releaseName>.yaml`.
 
 Modify the configuratiuon above according to your needs. For more configuration details, refer to the [TiDB Cluster Configuration Document](/tidb-in-kubernetes/reference/configuration/tidb-cluster.md).
 

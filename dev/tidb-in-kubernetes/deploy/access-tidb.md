@@ -32,7 +32,7 @@ If there is no LoadBalancer, expose the TiDB service port in the following two m
 
     > **Note:**
     >
-    > In this mode, the request source IP obtained by the TiDB service is the host IP, not the real client source IP. Therefore, the access control based on the client source IP is not available in this mode.
+    > In this mode, the request's source IP obtained by the TiDB server is the node IP, not the real client's source IP. Therefore, the access control based on the client's source IP is not available in this mode.
 
 - `externalTrafficPolicy=Local`: Only those machines that runs TiDB assign NodePort to TiDB Pod so that you can access local TiDB instances.
 

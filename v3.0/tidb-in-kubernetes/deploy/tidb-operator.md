@@ -40,7 +40,7 @@ It is suggested to enable [RBAC](https://kubernetes.io/docs/admin/authorization/
 
 Because TiDB uses many file descriptors by default, the worker node and its Docker daemon's `ulimit` values must be greater than or equal to `1048576`.
 
-- Configure the `ulimit` value of the work node. See [How to set `ulimit` values](https://access.redhat.com/solutions/61334).
+1. Configure the `ulimit` value of the work node. See [How to set `ulimit` values](https://access.redhat.com/solutions/61334).
 
     {{< copyable "shell-regular" >}}
 
@@ -50,7 +50,7 @@ Because TiDB uses many file descriptors by default, the worker node and its Dock
 
     Set the `nofile` values of `soft` and `hard` of the root account to be greater than or equal to `1048576`.
 
-- Configure the `ulimit` value of the Docker service.
+2. Configure the `ulimit` value of the Docker service.
 
     {{< copyable "shell-regular" >}}
 
@@ -102,7 +102,7 @@ kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/
 kubectl get crd tidbclusters.pingcap.com
 ```
 
-After `TidbCluster` custom resource is created, install TiDB Operator in your Kubernetes cluster.
+After `TidbCluster` custom resource type is created, install TiDB Operator in your Kubernetes cluster.
 
 1. Get the `values.yaml` file of the `tidb-operator` chart you want to install.
 

@@ -41,7 +41,7 @@ To use the diagnostic mode for troubleshooting:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
+    kubectl exec -it <pod-name> -n <namespace> -- /bin/sh
     ```
 
 4. After finishing the diagnosis and resolving the problem, delete the Pod.
