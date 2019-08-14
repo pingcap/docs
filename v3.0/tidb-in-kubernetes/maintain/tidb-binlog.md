@@ -69,7 +69,7 @@ By default, only one downstream drainer is created. You can install the `tidb-dr
 2. Get the default `values.yaml` file to facilitate customization:
 
     ```shell
-    helm inspect values pingcap/tidb-cluster --version=<chartVersion> > values.yaml
+    helm inspect values pingcap/tidb-drainer --version=<chart-version> > values.yaml
     ```
 
 3. Modify the `values.yaml` file to specify the source TiDB cluster and the downstream database of the drainer. Here is an example:
@@ -104,7 +104,7 @@ By default, only one downstream drainer is created. You can install the `tidb-dr
     {{< copyable "shell-regular" >}}
 
     ```shell
-    helm deploy pingcap/tidb-drainer --name=<release-name> --namespace=<namespace> --version=<chart-version> -f values.yaml
+    helm install pingcap/tidb-drainer --name=<release-name> --namespace=<namespace> --version=<chart-version> -f values.yaml
     ```
 
     > **Note:**
