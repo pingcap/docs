@@ -310,9 +310,11 @@
     + TiDB Lightning
       - [Overview](reference/tools/tidb-lightning/overview.md)
       - [Deployment](reference/tools/tidb-lightning/deployment.md)
+      - [Configuration](reference/tools/tidb-lightning/config.md)
       - [Checkpoints](reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](reference/tools/tidb-lightning/csv.md)
+      - [Web Interface](reference/tools/tidb-lightning/web.md)
       - [Monitor](reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](faq/tidb-lightning.md)
