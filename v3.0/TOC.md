@@ -39,7 +39,6 @@
       - [From Binary](how-to/get-started/deploy-tidb-from-binary.md)
       - [From Homebrew](how-to/get-started/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](how-to/get-started/deploy-tidb-from-dbdeployer.md)
-      - [In Docker Compose](how-to/get-started/deploy-tidb-from-docker-compose.md)
     - [Explore SQL with TiDB](how-to/get-started/explore-sql.md)
     - [Import Example Database](how-to/get-started/import-example-database.md)
     - [Read Historical Data](how-to/get-started/read-historical-data.md)
@@ -249,7 +248,6 @@
       - [Configuration Descriptions](reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
-      - [Configuration Descriptions](reference/configuration/tikv-server/configuration-file.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)

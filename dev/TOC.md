@@ -249,7 +249,6 @@
       - [Configuration Descriptions](reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
-      - [Configuration Descriptions](reference/configuration/tikv-server/configuration-file.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
