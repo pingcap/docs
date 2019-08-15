@@ -393,11 +393,29 @@ When you are done, the infrastructure can be torn down by running:
 terraform destroy
 ```
 
-You have to manually delete disks in the Google Cloud Console, or with `gcloud` after running `terraform destroy` if you do not need the data anymore.
-
 > **Note:**
 >
 > When `terraform destroy` is running, an error with the following message might occur: `Error reading Container Cluster "tidb": Cluster "tidb" has status "RECONCILING" with message""`. This happens when GCP is upgrading the kubernetes master node, which it does automatically at times. While this is happening, it is not possible to delete the cluster. When it is done, run `terraform destroy` again.
+
+### Delete disks after use
+
+If you no longer need the data and would like to delete the disks that were being used, there are a couple ways to do so:
+
+- Manual deletion: this can be done either in Google Cloud Console, or with `gcloud`.
+
+- Setting the kubernetes persistent volume reclaim policy to `Delete` prior to `terraform destroy`: This can be accomplished by running the following `kubectl` command before running `terraform destroy`
+
+```bash
+kubectl --kubeconfig /path/to/kubeconfig/file get pvc -n namespace-of-tidb-cluster -o jsonpath='{.items[*].spec.volumeName}'|fmt -1 | xargs -I {} kubectl --kubeconfig /path/to/kubeconfig/file patch pv {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
+```
+
+This command will get the persistent volume claims in the TiDB cluster namespace and set the reclaim policy of the persistent volumes to `Delete`. When the PVCs are deleted during `terraform destroy`, the disks will be deleted as well.
+
+There is a script that simplifies this process in `deploy/gcp` relative to the root directory of the repository, called `change-pv-reclaimpolicy.sh`. This script can be run as follows:
+
+```bash
+./change-pv-reclaimpolicy.sh /path/to/kubeconfig/file tidb-cluster-namespace
+```
 
 ## Manage multiple Kubernetes clusters
 
