@@ -136,6 +136,7 @@ Outputs:
 
 how_to_connect_to_default_cluster_tidb_from_bastion = mysql -h 172.31.252.20 -P 4000 -u root
 how_to_ssh_to_bastion = gcloud compute ssh tidb-cluster-bastion --zone us-west1-b
+how_to_set_reclaim_policy_of_pv_for_default_tidb_cluster_to_delete = kubectl --kubeconfig /.../credentials/kubeconfig_tidb-cluster get pvc -n tidb-cluster -o jsonpath='{.items[*].spec.volumeName}'|fmt -1 | xargs -I {} kubectl --kubeconfig /.../credentials/kubeconfig_tidb-cluster patch pv {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
 kubeconfig_file = ./credentials/kubeconfig_tidb-cluster
 monitor_lb_ip = 35.227.134.146
 monitor_port = 3000
