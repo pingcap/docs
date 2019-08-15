@@ -301,7 +301,7 @@ The Plan Cache configuration of the `prepare` statement.
 - Default: `10`
 - unit: second
 
- ### `grpc-keepalive-timeout`
+### `grpc-keepalive-timeout`
 
 - The timeout of the RPC `keepalive` check between TiDB and TiKV nodes
 - Default value: `3`
