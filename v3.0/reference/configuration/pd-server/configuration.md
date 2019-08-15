@@ -25,8 +25,8 @@ PD is configurable using command-line flags and environment variables.
 ## `--client-urls`
 
 - The listening URL list for client traffic
-- Default: "http://127.0.0.1:2379"
-- To deploy a cluster, you must use `--client-urls` to specify the IP address of the current host, such as "http://192.168.100.113:2379". If the cluster runs on Docker, specify the IP address of Docker as `http://0.0.0.0:2379`.
+- Default: `http://127.0.0.1:2379`
+- To deploy a cluster, you must use `--client-urls` to specify the IP address of the current host, such as `http://192.168.100.113:2379`. If the cluster runs on Docker, specify the IP address of Docker as `http://0.0.0.0:2379`.
 
 ## `--peer-urls`
 
