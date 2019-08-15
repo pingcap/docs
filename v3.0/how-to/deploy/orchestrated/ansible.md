@@ -131,36 +131,19 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 ## Step 3: Download TiDB-Ansible to the Control Machine
 
-1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. The relationship between the `tidb-ansible` version and the TiDB version is as follows:
+Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download the [corresponding TAG version](https://github.com/pingcap/tidb-ansible/tags) of TiDB Ansible 3.0 from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
-    | TiDB version | tidb-ansible tag | Note |
-    | :-------- | :---------------- | :--- |
-    | 3.0 version | v3.0.0 | TiDB v3.0 GA release (recommended) |
-    | `master` branch | None | Includes the newest features and is updated on a daily basis (not recommended to use in a production environment) |
+```
+$ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
+```
 
-2. Download the [corresponding TiDB-Ansible versions](https://github.com/pingcap/tidb-ansible/tags) from the [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+> **Note:**
+>
+> - Replace `$tag` with the value of the chosen TAG version. For example, `v3.02`.
+> - Deploying and upgrading TiDB clusters requires the corresponding version of `tidb-ansible`. Mixed usage by changing the version in the `inventory.ini` file might cause errors.
+> - It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
-    > **Note:**
-    >
-    > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
-
-    - Download the tidb-ansible version with a specified tag or branch:
-
-        ```shell
-        $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
-        ```
-
-    - Download the tidb-ansible version that corresponds to the `master` branch of TiDB:
-
-        ```shell
-        $ git clone https://github.com/pingcap/tidb-ansible.git
-        ```
-
-    > **Note:**
-    >
-    > It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
-
-    If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
+If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
 
 ## Step 4: Install Ansible and its dependencies on the Control Machine
 
