@@ -101,13 +101,13 @@ Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansi
 
 If you have previously customized the configuration file of TiDB cluster components, refer to the backup file to modify the corresponding configuration file in `/home/tidb/tidb-ansible/conf`.
 
-**Note for the following parameter changes:**
+**Note the following parameter changes:**
 
 - In TiKV configuration, `end-point-concurrency` is changed to three parameters: `high-concurrency`, `normal-concurrency` and `low-concurrency`.
 
     ```yaml
     readpool:
-    coprocessor:
+      coprocessor:
         # Notice: if CPU_NUM > 8, default thread pool size for coprocessors
         # will be set to CPU_NUM * 0.8.
         # high-concurrency: 8
@@ -147,7 +147,7 @@ $ ansible-playbook local_prepare.yml
 
 > **Note:**
 >
-> To optimize operation and maintenance management over components of TiDB cluster, there are some adjustments to `PD service` under `systemd` in TiDB 3.0. If the current version is earlier than TiDB 3.0 versions, the rolling update of TiDB cluster components to the 3.0 versions is slightly different. Please make sure that the `process_supervision` parameter remains consistent before and after the upgrade.
+> To optimize operation and maintenance management over components of TiDB cluster, there are some adjustments to `PD service` under `systemd` in TiDB 3.0. If the current version is earlier than TiDB 3.0.0, the rolling update of TiDB cluster components to the 3.0 versions is slightly different. Please make sure that the `process_supervision` parameter remains consistent before and after the upgrade.
 
 - If the default `systemd` parameter is used by the `process_supervision` variable,perform rolling update on the TiDB cluster using  `excessive_rolling_update.yml`.
 
@@ -157,7 +157,7 @@ $ ansible-playbook local_prepare.yml
 
     > **Note:**
     >
-    > If the current version is later than TiDB 3.0 versions, then you can still use the `rolling_update.yml` approach to rolling-update and rolling-restart the TiDB cluster.
+    > If the current version is TiDB 3.0.0 or later, then you can still use the `rolling_update.yml` approach to rolling-update and rolling-restart the TiDB cluster.
 
 - If the `supervise` parameter is used by the `process_supervision` variable, perform rolling update on the TiDB cluster using `rolling_update.yml`.
 

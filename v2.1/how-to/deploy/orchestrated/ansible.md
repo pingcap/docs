@@ -492,7 +492,7 @@ location_labels = ["host"]
 
     ```
     readpool:
-    coprocessor:
+      coprocessor:
         # Notice: if CPU_NUM > 8, default thread pool size for coprocessors
         # will be set to CPU_NUM * 0.8.
         # high-concurrency: 8

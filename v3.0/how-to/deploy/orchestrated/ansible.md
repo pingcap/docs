@@ -484,7 +484,7 @@ location_labels = ["host"]
 
     ```
     storage:
-        block-cache:
+      block-cache:
         capacity: "1GB"
     ```
 
@@ -512,7 +512,7 @@ location_labels = ["host"]
 
     ```
     raftstore:
-        capacity: 0
+      capacity: 0
     ```
 
     Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
