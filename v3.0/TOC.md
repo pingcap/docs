@@ -36,6 +36,7 @@
       - [From Binary](how-to/get-started/deploy-tidb-from-binary.md)
       - [From Homebrew](how-to/get-started/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](how-to/get-started/deploy-tidb-from-dbdeployer.md)
+      - [In Docker Compose](how-to/get-started/deploy-tidb-from-docker-compose.md)
     - [Explore SQL with TiDB](how-to/get-started/explore-sql.md)
     - [Import Example Database](how-to/get-started/import-example-database.md)
     - [Read Historical Data](how-to/get-started/read-historical-data.md)
@@ -84,7 +85,7 @@
     - [Scale using Ansible](how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to TiDB 3.0](how-to/upgrade/from-previous-version.md)
+    - [Upgrade to Development Series](how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](how-to/upgrade/data-migration.md)
     - [Upgrade TiDB Binlog Cluster](how-to/upgrade/tidb-binlog.md)
@@ -232,6 +233,8 @@
     - [Generated Columns](reference/sql/generated-columns.md)
     - [Partitioning](reference/sql/partitioning.md)
     - [Character Set](reference/sql/character-set.md)
+    - [SQL Mode](reference/sql/sql-mode.md)
+    - [View](reference/sql/view.md)
   + Configuration
     + tidb-server
       - [MySQL System Variables](reference/configuration/tidb-server/mysql-variables.md)
@@ -240,8 +243,10 @@
       - [Configuration File](reference/configuration/tidb-server/configuration-file.md)
     + pd-server
       - [Configuration Flags](reference/configuration/pd-server/configuration.md)
+      - [Configuration Descriptions](reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
+      - [Configuration Descriptions](reference/configuration/tikv-server/configuration-file.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)

@@ -233,6 +233,8 @@
     - [Generated Columns](reference/sql/generated-columns.md)
     - [Partitioning](reference/sql/partitioning.md)
     - [Character Set](reference/sql/character-set.md)
+    - [SQL Mode](reference/sql/sql-mode.md)
+    - [View](reference/sql/view.md)
   + Configuration
     + tidb-server
       - [MySQL System Variables](reference/configuration/tidb-server/mysql-variables.md)
@@ -241,8 +243,10 @@
       - [Configuration File](reference/configuration/tidb-server/configuration-file.md)
     + pd-server
       - [Configuration Flags](reference/configuration/pd-server/configuration.md)
+      - [Configuration Descriptions](reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
+      - [Configuration Descriptions](reference/configuration/tikv-server/configuration-file.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)

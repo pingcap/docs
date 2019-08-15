@@ -2,7 +2,6 @@
 title: Configuration Flags
 summary: Learn some configuration flags for TiDB
 category: reference
-aliases: ['/docs/op-guide/configuration/','/docs/sql/server-command-option/','/docs/sql/tidb-server/']
 ---
 
 # Configuration Flags
@@ -52,16 +51,17 @@ TiDB is configurable using command-line flags and environment variables. The def
 - Default: ""
 - If this flag is not set, logs are written to the file specified by `--log-file` by default.
 
+## `--status-host`????
+
+- The `HOST` used to monitor the status of TiDB service
+- Default: `0.0.0.0`
+
 ## `--metrics-addr`
 
 - The Prometheus Pushgateway address
 - Default: ""
 - Leaving it empty stops the Prometheus client from pushing.
-- The format is:
-
-    ```
-    --metrics-addr=192.168.100.115:9091
-    ```
+- The format is `--metrics-addr=192.168.100.115:9091`.
 
 ## `--metrics-interval`
 
@@ -93,7 +93,15 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - Timeout for the PROXY protocol header read
 - Default: 5 (seconds)
-- Generally use the default value and do not set its value to 0. The unit is second.
+
+    > **Note:**
+    >
+    > Use the default value. Do not set the value to `0` unless in special situations.
+
+## `--cors`
+
+- The `Access-Control-Allow-Origin` used to set the status service of TiDB `HTTP`
+- Default: ""
 
 ## `--report-status`
 
@@ -118,8 +126,8 @@ TiDB is configurable using command-line flags and environment variables. The def
 - The status report port for TiDB server
 - Default: "10080"
 - This is used to get server internal data. The data includes [Prometheus metrics](https://prometheus.io/) and [pprof](https://golang.org/pkg/net/http/pprof/).
-- Prometheus metrics can be got through "http://host:status_port/metrics".
-- Pprof data can be got through "http://host:status_port/debug/pprof".
+- Prometheus metrics can be got through [http://host:status_port/metrics](http://host:status_port/metrics).
+- Pprof data can be got through [http://host:status_port/debug/pprof](http://host:status_port/debug/pprof).
 
 ## `--store`
 
@@ -131,8 +139,7 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
 - Default: 1000
-- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to 
-release tokens.
+- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to release tokens.
 
 ## `-V`
 

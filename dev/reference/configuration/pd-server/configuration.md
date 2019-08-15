@@ -51,7 +51,7 @@ PD is configurable using command-line flags and environment variables.
 - Default: "{name}=http://{advertise-peer-url}"
 - For example, if `name` is "pd", and `advertise-peer-urls` is "http://192.168.100.113:2380", the `initial-cluster` is "pd=http://192.168.100.113:2380".
 - If you need to start three PD servers, the `initial-cluster` might be:
-  
+
     ```
     pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
     ```
@@ -106,3 +106,8 @@ PD is configurable using command-line flags and environment variables.
 - To specify the namespace classifier used by PD
 - Default: "table"
 - If you use TiKV separately, not in the entire TiDB cluster, it is recommended to configure the value to 'default'.
+
+## `--metrics-addr`
+
+- The address of Prometheus Pushgateway, which does not push data to Promethus by default.
+- Default: ""
