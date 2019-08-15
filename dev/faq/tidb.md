@@ -90,7 +90,7 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 5000 at most.
 
-#### Does TiDB support XA？
+#### Does TiDB support XA?
 
 No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
@@ -287,7 +287,7 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
-#### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: " ` when deploying TiDB using TiDB-Ansible
+#### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: "` when deploying TiDB using TiDB-Ansible
 
 Two possible reasons and solutions:
 
@@ -312,7 +312,7 @@ Two possible reasons and solutions:
 
 #### How are the rolling updates done?
 
-When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB * 2, PD * 3, TiKV * 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
+When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
 
 #### How to upgrade when I deploy TiDB using Binary?
 
@@ -448,11 +448,11 @@ Two reasons:
 
 ### Manage the PD server
 
-#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD.
+#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD
 
 Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed. If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
 
-#### The `etcd cluster ID mismatch` message is displayed when starting PD.
+#### The `etcd cluster ID mismatch` message is displayed when starting PD
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
 
@@ -552,6 +552,8 @@ You can combine the above two parameters with the DML of TiDB to use them. For e
 
 1. Adjust the priority by writing SQL statements in the database:
 
+    {{< copyable "sql" >}}
+
     ```sql
     select HIGH_PRIORITY | LOW_PRIORITY count(*) from table_name;
     insert HIGH_PRIORITY | LOW_PRIORITY into table_name insert_values;
@@ -572,6 +574,8 @@ When the modified number or the current total row number is larger than `tidb_au
 
 Its usage is similar to MySQL:
 
+{{< copyable "sql" >}}
+
 ```sql
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
 ```
@@ -582,13 +586,13 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 Use 3 replicas for test. If you increase the number of replicas, the performance declines but it is more secure. Whether to configure more replicas depends on the specific business needs.
 
-#### The `cluster ID mismatch` message is displayed when starting TiKV.
+#### The `cluster ID mismatch` message is displayed when starting TiKV
 
 This is because the cluster ID stored in local TiKV is different from the cluster ID specified by PD. When a new PD cluster is deployed, PD generates random cluster IDs. TiKV gets the cluster ID from PD and stores the cluster ID locally when it is initialized. The next time when TiKV is started, it checks the local cluster ID with the cluster ID in PD. If the cluster IDs don't match, the `cluster ID mismatch` message is displayed and TiKV exits.
 
 If you previously deploy a PD cluster, but then you remove the PD data and deploy a new PD cluster, this error occurs because TiKV uses the old data to connect to the new PD cluster.
 
-#### The `duplicated store address` message is displayed when starting TiKV.
+#### The `duplicated store address` message is displayed when starting TiKV
 
 This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. This error occurs when there is no data folder under the directory that TiKV `--store` specifies, but you use the previous parameter to restart the TiKV.
 
@@ -674,7 +678,7 @@ TiKV supports calling the interface separately. Theoretically, you can take an i
 - Reduce the data transmission between TiDB and TiKV
 - Make full use of the distributed computing resources of TiKV to execute computing pushdown
 
-#### The error message `IO error: No space left on device While appending to file` is displayed.
+#### The error message `IO error: No space left on device While appending to file` is displayed
 
 This is because the disk space is not enough. You need to add nodes or enlarge the disk space.
 
@@ -697,7 +701,7 @@ At the beginning, many users tend to do a benchmark test or a comparison test be
 - In MySQL, the read capacity can be increased by adding slave, but the write capacity cannot be increased except using sharding, which has many problems.
 - In TiDB, both the read and write capacity can be easily increased by adding more nodes.
 
-#### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL.
+#### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL
 
 TiDB is designed for scenarios where sharding is used because the capacity of a MySQL standalone is limited, and where strong consistency and complete distributed transactions are required. One of the advantages of TiDB is pushing down computing to the storage nodes to execute concurrent computing.
 
@@ -718,11 +722,13 @@ You can edit the `t` parameter of `loader` based on the number of TiKV instances
 ### Full data export and import
 
 #### Mydumper
+
 See [mydumper Instructions](/reference/tools/mydumper.md).
 
 #### Loader
+
 See [Loader Instructions](/reference/tools/loader.md).
- 
+
 #### How to migrate an application running on MySQL to TiDB?
 
 Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.
@@ -731,9 +737,15 @@ Because TiDB supports most MySQL syntax, generally you can migrate your applicat
 
 Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Log into the cluster without password and recreate the user, or recreate the `mysql.user` table using the following statement:
 
+{{< copyable "sql" >}}
+
 ```sql
 DROP TABLE IF EXIST mysql.user;
+```
 
+{{< copyable "sql" >}}
+
+```sql
 CREATE TABLE if not exists mysql.user (
     Host        CHAR(64),
     User        CHAR(16),
@@ -762,7 +774,11 @@ CREATE TABLE if not exists mysql.user (
     Event_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
     Trigger_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
     PRIMARY KEY (Host, User));
+```
 
+{{< copyable "sql" >}}
+
+```sql
 INSERT INTO mysql.user VALUES ("%", "root", "", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y");
 ```
 
@@ -869,7 +885,7 @@ It is recommended to build a multi-source MySQL -> TiDB real-time replication en
 
 The total read capacity has no limit. You can increase the read capacity by adding more TiDB servers. Generally the write capacity has no limit as well. You can increase the write capacity by adding more TiKV nodes.
 
-#### The error message `transaction too large` is displayed.
+#### The error message `transaction too large` is displayed
 
 As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
 
@@ -919,7 +935,9 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:
 
-```
+{{< copyable "sql" >}}
+
+```sql
 update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";
 ```
 
@@ -948,8 +966,13 @@ Recommendations:
 
 You can use `admin show ddl` to view the progress of the current DDL job. The operation is as follows:
 
+{{< copyable "sql" >}}
+
 ```sql
-tidb> admin show ddl\G;
+admin show ddl;
+```
+
+```
 *************************** 1. row ***************************
   SCHEMA_VER: 140
        OWNER: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
@@ -1070,6 +1093,8 @@ The accessed Region is not available. A Raft Group is not available, with possib
 #### ERROR 9006 (HY000): GC life time is shorter than transaction duration
 
 The interval of `GC Life Time` is too short. The data that should have been read by long transactions might be deleted. You can add `GC Life Time` using the following command:
+
+{{< copyable "sql" >}}
 
 ```sql
 update mysql.tidb set variable_value='30m' where variable_name='tikv_gc_life_time';

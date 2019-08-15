@@ -84,7 +84,9 @@ sysbench --test=oltp_insert --tables=2 --num-threads=1024 --mysql-host=192.168.0
 
 The structure of the table used for the test:
 
-``` sql
+{{< copyable "sql" >}}
+
+```sql
 CREATE TABLE `sbtest` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `k` int(11) NOT NULL DEFAULT '0',
@@ -126,9 +128,9 @@ syncer:
 
 #### DM key indicator monitor
 
-![](/media/dm-benchmark-01.png)
+![dm-benchmark-01](/media/dm-benchmark-01.png)
 
 #### TiDB key indicator monitor
 
-![](/media/dm-benchmark-02.png)
-![](/media/dm-benchmark-03.png)
+![dm-benchmark-02](/media/dm-benchmark-02.png)
+![dm-benchmark-03](/media/dm-benchmark-03.png)

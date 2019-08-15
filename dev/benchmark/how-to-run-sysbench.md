@@ -3,7 +3,7 @@ title: How to Test TiDB Using Sysbench
 category: benchmark
 ---
 
-#  How to Test TiDB Using Sysbench
+# How to Test TiDB Using Sysbench
 
 In this test, Sysbench 1.0.14 and TiDB 3.0 Beta are used. It is recommended to use Sysbench 1.0 or later, which can be downloaded [here](https://github.com/akopytov/sysbench/releases/tag/1.0.14).
 
@@ -129,6 +129,8 @@ db-driver=mysql
 
 Before importing the data, it is necessary to make some settings to TiDB. Execute the following command in MySQL client:
 
+{{< copyable "sql" >}}
+
 ```sql
 set global tidb_disable_txn_auto_retry = off;
 ```
@@ -137,11 +139,13 @@ Then exit the client. TiDB uses an optimistic transaction model that rolls back 
 
 Restart MySQL client and execute the following SQL statement to create a database `sbtest`:
 
-```
+{{< copyable "sql" >}}
+
+```sql
 create database sbtest;
 ```
 
-Adjust the order in which Sysbench scripts create indexes. Sysbench imports data in the order of "Build Table -> Insert Data -> Create Index", which takes more time for TiDB to import data. Users can adjust the order to speed up the import of data. Suppose that you use Sysbench version https://github.com/akopytov/sysbench/tree/1.0.14. You can adjust the order in the following two ways.
+Adjust the order in which Sysbench scripts create indexes. Sysbench imports data in the order of "Build Table -> Insert Data -> Create Index", which takes more time for TiDB to import data. Users can adjust the order to speed up the import of data. Suppose that you use Sysbench version <https://github.com/akopytov/sysbench/tree/1.0.14>. You can adjust the order in the following two ways.
 
 1. Download the TiDB-modified [oltp_common.lua](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua) file and overwrite the `/usr/share/sysbench/oltp_common.lua` file with it.
 2. Move the [235th](https://github.com/akopytov/sysbench/blob/1.0.14/src/lua/oltp_common.lua#L235) to [240th](https://github.com/akopytov/sysbench/blob/1.0.14/src/lua/oltp_common.lua#L240) lines of `/usr/share/sysbench/oltp_common.lua` to be right behind 198th lines.
@@ -164,11 +168,15 @@ Sysbench 1.0.14 does not provide data warming, so it must be done manually. If y
 
 Take a table sbtest7 in Sysbench as an example. Execute the following SQL to warming up data:
 
+{{< copyable "sql" >}}
+
 ```sql
 SELECT COUNT(pad) FROM sbtest7 USE INDEX (k_7);
 ```
 
 Collecting statistics helps the optimizer choose a more accurate execution plan. The `analyze` command can be used to collect statistics on the table sbtest. Each table needs statistics.
+
+{{< copyable "sql" >}}
 
 ```sql
 ANALYZE TABLE sbtest7;
@@ -214,7 +222,7 @@ Sysbench test was carried on each of the tidb-servers. And the final result was 
 
 | Type | Thread | TPS | QPS | avg.latency(ms) | .95.latency(ms) | max.latency(ms) |
 |:---- |:---- |:---- |:---- |:----------------|:----------------- |:---- |
-| oltp_update_index | 3\*8 | 9668.98 | 9668.98 | 2.51 | 3.19 | 103.88| 
+| oltp_update_index | 3\*8 | 9668.98 | 9668.98 | 2.51 | 3.19 | 103.88|
 | oltp_update_index | 3\*16 | 12834.99 | 12834.99 | 3.79 | 5.47 | 176.90 |
 | oltp_update_index | 3\*32 | 15955.77 | 15955.77 | 6.07 | 9.39 | 4787.14 |
 | oltp_update_index | 3\*64 | 18697.17 | 18697.17 | 10.34 | 17.63 | 4539.04 |

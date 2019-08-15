@@ -126,8 +126,8 @@ TiDB is configurable using command-line flags and environment variables. The def
 - The status report port for TiDB server
 - Default: "10080"
 - This is used to get server internal data. The data includes [Prometheus metrics](https://prometheus.io/) and [pprof](https://golang.org/pkg/net/http/pprof/).
-- Prometheus metrics can be got through [http://host:status_port/metrics](http://host:status_port/metrics).
-- Pprof data can be got through [http://host:status_port/debug/pprof](http://host:status_port/debug/pprof).
+- Prometheus metrics can be got through `"http://host:status_port/metrics"`.
+- Pprof data can be got through `"http://host:status_port/debug/pprof"`.
 
 ## `--store`
 

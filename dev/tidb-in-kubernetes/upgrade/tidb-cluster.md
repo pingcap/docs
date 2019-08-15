@@ -8,7 +8,7 @@ category: how-to
 
 When you perform a rolling update to a TiDB cluster in Kubernetes, the Pod is shut down and recreated with the new image or/and configuration serially in the order of PD, TiKV, TiDB. Under the highly available deployment topology (minimum requirements: PD \* 3, TiKV \* 3, TiDB \* 2), performing a rolling update to PD and TiKV servers does not impact the running clients.
 
-+ For the clients that can retry stale connections, performing a rolling update to TiDB servers neither impacts the running clients. 
++ For the clients that can retry stale connections, performing a rolling update to TiDB servers neither impacts the running clients.
 + For the clients that **can not** retry stale connections, performing a rolling update to TiDB servers will close the client connections and cause the request to fail. For this situation, it is recommended to add a function for the clients to retry, or to perform a rolling update to TiDB servers in idle time.
 
 ## Upgrade the version of TiDB cluster
@@ -19,7 +19,7 @@ When you perform a rolling update to a TiDB cluster in Kubernetes, the Pod is sh
     {{< copyable "shell-regular" >}}
 
     ```shell
-    helm upgrade <releaseName> pingcap/tidb-cluster -f values.yaml --version=<chart_version>
+    helm upgrade <release-name> pingcap/tidb-cluster -f values.yaml --version=<chart_version>
     ```
 
 3. Check the upgrade progress:
@@ -43,7 +43,7 @@ You can change the configuration of TiDB cluster through the following steps:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    helm upgrade <releaseName> pingcap/tidb-cluster -f values.yaml --version=<chart_version>
+    helm upgrade <release-name> pingcap/tidb-cluster -f values.yaml --version=<chart_version>
     ```
 
 4. Check the upgrade process:
