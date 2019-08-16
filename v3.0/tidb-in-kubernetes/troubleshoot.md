@@ -266,3 +266,68 @@ If the cluster is successfully deployed, check the network using the following s
     - Check whether the relevant route rules on the node are correct.
     - Check whether the network plugin service works well.
     - Refer to [network connection failure between Pods](#network-connection-failure-between-pods) section.
+
+## TiKV Store is in `Tombstone` status abnormally
+
+Normally for each running Pod, there is a corresponding TiKV store in UP status. However, concurrent scale-in or scale-out on TiKV components might cause part of TiKV stores to fall into `Tombstone` status abnormally. If this happens, try the following steps to fix it:
+
+1. View the status of the TiKV store:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    kubectl get -n <namespace> tidbcluster <release-name> -ojson | jq '.status.tikv.stores'
+    ```
+
+2. View the status of the TiKV Pod:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    kubectl get -n <namespace> po -l app.kubernetes.io/component=tikv
+    ```
+
+3. Compare the status of the TIKV store and that of the Pod. If the store corresponding to a TiKV Pod is in "Offline" status, it means the store is being taken offline abnormally. You can use the following commands to cancel the offline process and perform necessary recovery operations:
+
+    a. Open the connection to the PD service:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        kubectl port-forward -n <namespace> svc/<cluster-name>-pd <local-port>:2379 &>/tmp/portforward-pd.log &
+        ```
+
+    b. Bring online the corresponding store:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        curl -X POST http://127.0.0.1:2379/pd/api/v1/store/<store-id>/state?state=Up
+        ```
+
+4. If the TiKV store with the latest `lastHeartbeatTime` that corresponds to a Pod is in `Tombstone` status, it means that the offline process is completed. At this time, you need to re-create the Pod and bind it with a new PV to perform a recovery, through the following steps:
+
+    a. Set the `reclaimPolicy` of the PV corresponding to the store to `Delete`:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        kubectl patch $(kubectl get pv -l app.kubernetes.io/instance=<release-name>,tidb.pingcap.com/store-id=<store-id> -o name) -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}
+        ```
+
+    b. Remove the PVC used by the Pod:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        kubectl delete -n <namespace> pvc tikv-<pod-name> --wait=false
+        ```
+
+    c. Remove the Pod, and wait for it to be re-created:
+
+        {{< copyable "shell-regular" >}}
+        ```shell
+        kubectl delete -n <namespace> pod <pod-name>
+        ```
+
+    After the Pod is re-created, a new store will be registered in the TiKV cluster. The recovery is completed.
