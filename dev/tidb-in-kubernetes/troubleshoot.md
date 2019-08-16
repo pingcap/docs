@@ -326,6 +326,7 @@ Normally for each running Pod, there is a corresponding TiKV store in UP status.
     c. Remove the Pod, and wait for it to be re-created:
 
         {{< copyable "shell-regular" >}}
+
         ```shell
         kubectl delete -n <namespace> pod <pod-name>
         ```
