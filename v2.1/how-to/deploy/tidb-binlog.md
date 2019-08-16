@@ -502,6 +502,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 3. Starting TiDB server:
 
     - After starting Pump and Drainer, start TiDB server with binlog enabled by adding this section to your config file for TiDB server:
+
         ```
         [binlog]
         enable=true

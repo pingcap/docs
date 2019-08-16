@@ -20,9 +20,9 @@ On June 20, 2017, TiDB RC4 is released!This release is focused on MySQL compatib
 
 + The following features are added or improved in the SQL query optimizer:
     - Support incremental statistics
-    - Support the ` Merge Sort Join ` operator
-    - Support the ` Index Lookup Join` operator
-    - Support the ` Optimizer Hint` Syntax
+    - Support the `Merge Sort Join` operator
+    - Support the `Index Lookup Join` operator
+    - Support the `Optimizer Hint` Syntax
     - Optimize the memory consumption of the `Scan`, `Join`, `Aggregation` operators
     - Optimize the Cost Based Optimizer (CBO) framework
     - Refactor `Expression`

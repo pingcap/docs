@@ -102,7 +102,7 @@ kubectl -n kube-system get pods -l app=helm
 
 ### Add Helm repo
 
-Helm repo (https://charts.pingcap.org/) houses PingCAP managed charts, such as tidb-operator, tidb-cluster and tidb-backup, etc. Add and check the repo with following commands:
+Helm repo (<https://charts.pingcap.org/>) houses PingCAP managed charts, such as tidb-operator, tidb-cluster and tidb-backup, etc. Add and check the repo with following commands:
 
 ```shell
 helm repo add pingcap https://charts.pingcap.org/

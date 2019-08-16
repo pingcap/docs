@@ -6,6 +6,8 @@ category: faq
 
 # TiDB FAQ
 
+<!-- markdownlint-disable MD026 -->
+
 This document lists the Most Frequently Asked Questions about TiDB.
 
 ## About TiDB
