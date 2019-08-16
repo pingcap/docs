@@ -1,5 +1,8 @@
 # TiDB Documentation
 
+<!-- markdownlint-disable MD007 -->
+<!-- markdownlint-disable MD032 -->
+
 ## Documentation List
 
 + Introduction
@@ -167,7 +170,6 @@
       - [`CREATE TABLE LIKE`](reference/sql/statements/create-table-like.md)
       - [`CREATE TABLE`](reference/sql/statements/create-table.md)
       - [`CREATE USER`](reference/sql/statements/create-user.md)
-      - [`CREATE VIEW`](reference/sql/statements/create-view.md)
       - [`DEALLOCATE`](reference/sql/statements/deallocate.md)
       - [`DELETE`](reference/sql/statements/delete.md)
       - [`DESC`](reference/sql/statements/desc.md)
@@ -178,7 +180,6 @@
       - [`DROP INDEX`](reference/sql/statements/drop-index.md)
       - [`DROP TABLE`](reference/sql/statements/drop-table.md)
       - [`DROP USER`](reference/sql/statements/drop-user.md)
-      - [`DROP VIEW`](reference/sql/statements/drop-view.md)
       - [`EXECUTE`](reference/sql/statements/execute.md)
       - [`EXPLAIN ANALYZE`](reference/sql/statements/explain-analyze.md)
       - [`EXPLAIN`](reference/sql/statements/explain.md)
@@ -333,6 +334,7 @@
     - [3.0.0-beta.1](releases/3.0.0-beta.1.md)
     - [3.0.0-beta](releases/3.0beta.md)
   + v2.1
+    - [2.1.16](releases/2.1.16.md)
     - [2.1.15](releases/2.1.15.md)
     - [2.1.14](releases/2.1.14.md)
     - [2.1.13](releases/2.1.13.md)
