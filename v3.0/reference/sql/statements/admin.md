@@ -72,7 +72,7 @@ mysql> admin show ddl jobs;
 
     > **Note:**
 
-    > - Only this operation can cancel DDL jobs, and all other operations and environment changes (such as machine restart and cluster restart) cannot cancel them.
+    > - Only this operation can cancel DDL jobs. All other operations and environment changes (such as machine restart and cluster restart) cannot cancel them.
     > - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement.
     > - If the jobs you want to cancel are finished, the cancellation operation fails.
 
