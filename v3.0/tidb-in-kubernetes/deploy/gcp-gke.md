@@ -400,17 +400,17 @@ terraform destroy
 
 ### Delete disks after use
 
-If you no longer need the data and would like to delete the disks that were being used, there are a couple ways to do so:
+If you no longer need the data and would like to delete the disks in use, there are a couple of ways to do so:
 
-- Manual deletion: this can be done either in Google Cloud Console, or with `gcloud`.
+- Manual deletion: do this either in Google Cloud Console or using the `gcloud` command-line tool.
 
-- Setting the kubernetes persistent volume reclaim policy to `Delete` prior to `terraform destroy`: This can be accomplished by running the following `kubectl` command before running `terraform destroy`
+- Setting the Kubernetes persistent volume reclaiming policy to `Delete` prior to executing `terraform destroy`: Do this by running the following `kubectl` command before `terraform destroy`
 
 ```bash
 kubectl --kubeconfig /path/to/kubeconfig/file get pvc -n namespace-of-tidb-cluster -o jsonpath='{.items[*].spec.volumeName}'|fmt -1 | xargs -I {} kubectl --kubeconfig /path/to/kubeconfig/file patch pv {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
 ```
 
-This command will get the persistent volume claims in the TiDB cluster namespace and set the reclaim policy of the persistent volumes to `Delete`. When the PVCs are deleted during `terraform destroy`, the disks will be deleted as well.
+This command will get the persistent volume claims in the TiDB cluster namespace and set the reclaiming policy of the persistent volumes to `Delete`. When the PVCs are deleted during `terraform destroy`, the disks are deleted as well.
 
 Below is a script called `change-pv-reclaimpolicy.sh`.  It simplifies the above process in `deploy/gcp` relative to the root directory of the repository, . 
 
