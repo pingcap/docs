@@ -74,8 +74,9 @@ echo "GCP_PROJECT=$(gcloud config get-value project)" >> terraform.tfvars
 ./create-service-account.sh
 ```
 
-Terraform  automatically loads and populates variables from the files matching `terraform.tfvars` or `*.auto.tfvars`. For more information, see the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/variables.html).
-The steps in the script above populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars` with `GCP_CREDENTIALS_PATH`.
+Terraform  automatically loads and populates variables from the files matching `terraform.tfvars` or `*.auto.tfvars`. For more information please see the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/variables.html).
+The steps in the script above will populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars`
+with `GCP_CREDENTIALS_PATH`.
 
 ## Deploy
 
@@ -135,6 +136,7 @@ Outputs:
 
 how_to_connect_to_default_cluster_tidb_from_bastion = mysql -h 172.31.252.20 -P 4000 -u root
 how_to_ssh_to_bastion = gcloud compute ssh tidb-cluster-bastion --zone us-west1-b
+how_to_set_reclaim_policy_of_pv_for_default_tidb_cluster_to_delete = kubectl --kubeconfig /.../credentials/kubeconfig_tidb-cluster get pvc -n tidb-cluster -o jsonpath='{.items[*].spec.volumeName}'|fmt -1 | xargs -I {} kubectl --kubeconfig /.../credentials/kubeconfig_tidb-cluster patch pv {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
 kubeconfig_file = ./credentials/kubeconfig_tidb-cluster
 monitor_lb_ip = 35.227.134.146
 monitor_port = 3000
@@ -392,11 +394,29 @@ When you are done, the infrastructure can be torn down by running:
 terraform destroy
 ```
 
-You have to manually delete disks in the Google Cloud Console, or with `gcloud` after running `terraform destroy` if you do not need the data anymore.
-
 > **Note:**
 >
 > When `terraform destroy` is running, an error with the following message might occur: `Error reading Container Cluster "tidb": Cluster "tidb" has status "RECONCILING" with message""`. This happens when GCP is upgrading the kubernetes master node, which it does automatically at times. While this is happening, it is not possible to delete the cluster. When it is done, run `terraform destroy` again.
+
+### Delete disks after use
+
+If you no longer need the data and would like to delete the disks in use, there are a couple of ways to do so:
+
+- Manual deletion: do this either in Google Cloud Console or using the `gcloud` command-line tool.
+
+- Setting the Kubernetes persistent volume reclaiming policy to `Delete` prior to executing `terraform destroy`: Do this by running the following `kubectl` command before `terraform destroy`
+
+```bash
+kubectl --kubeconfig /path/to/kubeconfig/file get pvc -n namespace-of-tidb-cluster -o jsonpath='{.items[*].spec.volumeName}'|fmt -1 | xargs -I {} kubectl --kubeconfig /path/to/kubeconfig/file patch pv {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
+```
+
+This command will get the persistent volume claims in the TiDB cluster namespace and set the reclaiming policy of the persistent volumes to `Delete`. When the PVCs are deleted during `terraform destroy`, the disks are deleted as well.
+
+Below is a script called `change-pv-reclaimpolicy.sh`.  It simplifies the above process in `deploy/gcp` relative to the root directory of the repository,
+
+```bash
+./change-pv-reclaimpolicy.sh /path/to/kubeconfig/file tidb-cluster-namespace
+```
 
 ## Manage multiple Kubernetes clusters
 

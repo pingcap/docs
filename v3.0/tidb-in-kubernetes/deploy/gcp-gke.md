@@ -412,7 +412,7 @@ kubectl --kubeconfig /path/to/kubeconfig/file get pvc -n namespace-of-tidb-clust
 
 This command will get the persistent volume claims in the TiDB cluster namespace and set the reclaiming policy of the persistent volumes to `Delete`. When the PVCs are deleted during `terraform destroy`, the disks are deleted as well.
 
-Below is a script called `change-pv-reclaimpolicy.sh`.  It simplifies the above process in `deploy/gcp` relative to the root directory of the repository, . 
+Below is a script called `change-pv-reclaimpolicy.sh`.  It simplifies the above process in `deploy/gcp` relative to the root directory of the repository,
 
 ```bash
 ./change-pv-reclaimpolicy.sh /path/to/kubeconfig/file tidb-cluster-namespace
