@@ -14,7 +14,7 @@ TiDB supports optimizer hints, based on the comment-like syntax introduced in My
 
 ## Optimizer Hint Syntax
 
-## TIDB_SMJ(t1, t2)
+### TIDB_SMJ(t1, t2)
 
 ```sql
 SELECT /*+ TIDB_SMJ(t1, t2) */ * from t1, t2 where t1.id = t2.id
