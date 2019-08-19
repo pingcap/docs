@@ -74,9 +74,8 @@ echo "GCP_PROJECT=$(gcloud config get-value project)" >> terraform.tfvars
 ./create-service-account.sh
 ```
 
-Terraform  automatically loads and populates variables from the files matching `terraform.tfvars` or `*.auto.tfvars`. For more information please see the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/variables.html).
-The steps in the script above will populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars`
-with `GCP_CREDENTIALS_PATH`.
+Terraform  automatically loads and populates variables from the files matching `terraform.tfvars` or `*.auto.tfvars`. For more information, see the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/variables.html).
+The steps in the script above populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars` with `GCP_CREDENTIALS_PATH`.
 
 ## Deploy
 
