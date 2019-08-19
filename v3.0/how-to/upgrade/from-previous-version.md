@@ -1,7 +1,7 @@
 ---
 title: TiDB 3.0 Upgrade Guide
 summary: Learn how to upgrade to TiDB 3.0.
-category: upgrade
+category: how-to
 ---
 
 # TiDB 3.0 Upgrade Guide
@@ -17,11 +17,11 @@ This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.
     - Stop the cluster and upgrade to 2.1 directly
     - Roll update to 2.0.1 or later 2.0.x versions, and then roll update to the 2.1 version
 
-> **Warning：**
+> **Note：**
 >
 > Do not execute any DDL statements during the upgrading process, otherwise the undefined behavior error might occur.
 
-## Install Ansible and dependencies on the Control Machine
+## Step 1: Install Ansible and dependencies on the Control Machine
 
 > **Note:**
 >
@@ -50,7 +50,7 @@ Version: 0.9.0
 > - Make sure that the Jinja2 version is correct, otherwise an error occurs when you start Grafana.
 > - Make sure that the jmespath version is correct, otherwise an error occurs when you perform a rolling update for TiKV.
 
-## Download TiDB-Ansible to the Control Machine
+## Step 2: Download TiDB-Ansible to the Control Machine
 
 1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory.
 
@@ -66,7 +66,7 @@ Version: 0.9.0
     $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
     ```
 
-## Edit the `inventory.ini` file and the configuration file
+## Step 3: Edit the `inventory.ini` file and the configuration file
 
 Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb/tidb-ansible` directory.
 
@@ -135,7 +135,7 @@ If you have previously customized the configuration file of TiDB cluster compone
 
     Recommended configuration: `capacity` = MEM_TOTAL \* 0.5 / the number of TiKV instances.
 
-## Download TiDB 3.0 binary to the Control Machine
+## Step 4: Download TiDB 3.0 binary to the Control Machine
 
 Make sure that `tidb_version = v3.0.0` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB 2.1 binary to the Control Machine:
 
@@ -143,21 +143,13 @@ Make sure that `tidb_version = v3.0.0` in the `tidb-ansible/inventory.ini` file,
 $ ansible-playbook local_prepare.yml
 ```
 
-## Perform a rolling update to TiDB cluster components
+## Step 5: Perform a rolling update to TiDB cluster components
 
-> **Note:**
->
-> To optimize operation and maintenance management over components of TiDB cluster, there are some adjustments to `PD service` under `systemd` in TiDB 3.0. If the current version is earlier than TiDB 3.0.0, the rolling update of TiDB cluster components to the 3.0 versions is slightly different. Please make sure that the `process_supervision` parameter remains consistent before and after the upgrade.
-
-- If the default `systemd` parameter is used by the `process_supervision` variable,perform rolling update on the TiDB cluster using  `excessive_rolling_update.yml`.
+- If the default `systemd` parameter is used by the `process_supervision` variable, perform rolling update on the TiDB cluster using `excessive_rolling_update.yml`.
 
     ```shell
     $ ansible-playbook excessive_rolling_update.yml
     ```
-
-    > **Note:**
-    >
-    > If the current version is TiDB 3.0.0 or later, then you can still use the `rolling_update.yml` approach to rolling-update and rolling-restart the TiDB cluster.
 
 - If the `supervise` parameter is used by the `process_supervision` variable, perform rolling update on the TiDB cluster using `rolling_update.yml`.
 
@@ -165,7 +157,11 @@ $ ansible-playbook local_prepare.yml
     $ ansible-playbook rolling_update.yml
     ```
 
-## Perform rolling update to TiDB monitoring components
+> **Note:**
+>
+> To optimize operation and maintenance management over components of TiDB cluster, there are some adjustments to `PD service` under `systemd` in TiDB 3.0. After it is upgraded to TiDB 3.0, both the rolling update and rolling-restart of TiDB cluster components use `rolling_update.yml`. `excessive_rolling_update.yml` is no longer used.
+
+## Step 6: Perform a rolling update to TiDB monitoring components
 
 ```shell
 $ ansible-playbook rolling_update_monitor.yml

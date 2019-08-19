@@ -22,9 +22,9 @@ For details about using Ansible to perform a rolling update to each component, s
     - Roll update to 2.0.1 or later 2.0.x versions, and then roll update to the 2.1 version
 + If you upgrade from TiDB 2.0.6 or earlier to TiDB 2.1, check if there is any ongoing DDL operation, especially the time consuming `Add Index` operation, because the DDL operations slow down the upgrading process. If there is ongoing DDL operation, wait for the DDL operation finishes and then roll update.
 
-## Precaution
-
-Do not execute any DDL statements during the upgrading process, otherwise the undefined behavior error might occur.
+> **Note:**
+>
+> Do not execute any DDL statements during the upgrading process, otherwise the undefined behavior error might occur.
 
 ## Step 1: Install Ansible and dependencies on the Control Machine
 
@@ -148,11 +148,23 @@ $ ansible-playbook local_prepare.yml
 
 ## Step 5: Perform a rolling update to TiDB cluster components
 
-```shell
-$ ansible-playbook rolling_update.yml
-```
+- If the default `systemd` parameter is used by the `process_supervision` variable, perform rolling update on the TiDB cluster using `excessive_rolling_update.yml`.
 
-## Step 6: Perform a rolling update to TiDB monitoring component
+    ```shell
+    $ ansible-playbook excessive_rolling_update.yml
+    ```
+
+- If the `supervise` parameter is used by the `process_supervision` variable, perform rolling update on the TiDB cluster using `rolling_update.yml`.
+
+    ```shell
+    $ ansible-playbook rolling_update.yml
+    ```
+
+> **Note:**
+>
+> To optimize operation and maintenance management over components of TiDB cluster, there are some adjustments to `PD service` under `systemd` in TiDB 3.0. After it is upgraded to TiDB 3.0, both the rolling update and rolling-restart of TiDB cluster components use `rolling_update.yml`. `excessive_rolling_update.yml` is no longer used.
+
+## Step 6: Perform a rolling update to TiDB monitoring components
 
 ```shell
 $ ansible-playbook rolling_update_monitor.yml
