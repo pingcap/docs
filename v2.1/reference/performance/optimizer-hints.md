@@ -12,9 +12,7 @@ TiDB supports optimizer hints, based on the comment-like syntax introduced in My
 >
 > MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
 
-## Optimizer Hint Syntax
-
-### TIDB_SMJ(t1, t2)
+## TIDB_SMJ(t1, t2)
 
 ```sql
 SELECT /*+ TIDB_SMJ(t1, t2) */ * from t1, t2 where t1.id = t2.id
