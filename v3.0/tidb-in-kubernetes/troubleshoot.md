@@ -289,7 +289,7 @@ Normally for each running Pod, there is a corresponding TiKV store in UP status.
 
 3. Compare the status of the TIKV store and that of the Pod. If the store corresponding to a TiKV Pod is in "Offline" status, it means the store is being taken offline abnormally. You can use the following commands to cancel the offline process and perform necessary recovery operations:
 
-    a. Open the connection to the PD service:
+    1. Open the connection to the PD service:
 
         {{< copyable "shell-regular" >}}
 
@@ -297,7 +297,7 @@ Normally for each running Pod, there is a corresponding TiKV store in UP status.
         kubectl port-forward -n <namespace> svc/<cluster-name>-pd <local-port>:2379 &>/tmp/portforward-pd.log &
         ```
 
-    b. Bring online the corresponding store:
+    2. Bring online the corresponding store:
 
         {{< copyable "shell-regular" >}}
 
@@ -307,7 +307,7 @@ Normally for each running Pod, there is a corresponding TiKV store in UP status.
 
 4. If the TiKV store with the latest `lastHeartbeatTime` that corresponds to a Pod is in `Tombstone` status, it means that the offline process is completed. At this time, you need to re-create the Pod and bind it with a new PV to perform a recovery, through the following steps:
 
-    a. Set the `reclaimPolicy` of the PV corresponding to the store to `Delete`:
+    1. Set the `reclaimPolicy` of the PV corresponding to the store to `Delete`:
 
         {{< copyable "shell-regular" >}}
 
@@ -315,7 +315,7 @@ Normally for each running Pod, there is a corresponding TiKV store in UP status.
         kubectl patch $(kubectl get pv -l app.kubernetes.io/instance=<release-name>,tidb.pingcap.com/store-id=<store-id> -o name) -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}
         ```
 
-    b. Remove the PVC used by the Pod:
+    2. Remove the PVC used by the Pod:
 
         {{< copyable "shell-regular" >}}
 
@@ -323,9 +323,10 @@ Normally for each running Pod, there is a corresponding TiKV store in UP status.
         kubectl delete -n <namespace> pvc tikv-<pod-name> --wait=false
         ```
 
-    c. Remove the Pod, and wait for it to be re-created:
+    3. Remove the Pod, and wait for it to be re-created:
 
         {{< copyable "shell-regular" >}}
+
         ```shell
         kubectl delete -n <namespace> pod <pod-name>
         ```
