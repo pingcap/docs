@@ -166,4 +166,3 @@ $ ansible-playbook local_prepare.yml
 ```shell
 $ ansible-playbook rolling_update_monitor.yml
 ```
-
