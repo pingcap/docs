@@ -29,10 +29,11 @@ During the DM incremental replication process, this error might occur if the bin
 
 **Cause:** DM needs to store the replicated binlog position, and MySQL officially uses `uint32` to store it, so the binlog position of the file with offset exceeding **4 GB** overflows and an incorrect binlog position is stored. After the task or DM-worker is restarted, this incorrect binlog position is used to re-parse the binlog or relay log.
 
-In this case, you can consider the following solution to manually recover replication:
+In this case, manually recover replication using the following solution:
 
 1. Determine whether the error occurs during the write of the relay log or replication of Binlog replication/Syncer unit (according to the component information in the log error message).
 
 2. Take the following step according to the place where the error occurs.
+
     - If the error occurs in the relay log module and the checkpoints saved by the Binlog replication/Syncer unit are correct, you can first stop the task and the DM-worker, then manually adjust the binlog position of the relay meta to `4`, and restart the DM-worker to re-pull the relay log. If the relay log is written without error, the replication automatically resumes from the breakpoint after the task is restarted.
     - If the relay log is written well and has been rotated to the next file, the error occurs in an invalid binlog position when the Binlog replication/Syncer unit reads a relay log file exceeding **4 GB**. In this situation, you can stop the task and manually set the binlog position of the relay log to a valid one such as `4`. Note that you also need to adjust the binlog position of both global checkpoints and each table checkpoint. Set the safe-mode of the task to `true` to ensure reentrant execution. Then, you can restart the replication task and observe the status. The task resumes after the oversized (larger than **4 GB**) file is replicated.
