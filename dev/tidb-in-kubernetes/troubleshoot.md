@@ -305,9 +305,9 @@ Normally, when a TiKV Pod is in a healthy state (`Running`), the corresponding T
         curl -X POST http://127.0.0.1:2379/pd/api/v1/store/<store-id>/state?state=Up
         ```
 
-4. If the TiKV store with the latest `lastHeartbeatTime` that corresponds to a Pod is in `Tombstone` status, it means that the offline process is completed. At this time, you need to re-create the Pod and bind it with a new PV to perform a recovery, through the following steps:
+4. If the TiKV store with the latest `lastHeartbeatTime` that corresponds to a Pod is in a `Tombstone` state, it means that the offline process is completed. At this time, you need to re-create the Pod and bind it with a new PV to perform recovery by taking the following steps:
 
-    1. Set the `reclaimPolicy` of the PV corresponding to the store to `Delete`:
+    1. Set the `reclaimPolicy` value of the PV corresponding to the store to `Delete`:
 
         {{< copyable "shell-regular" >}}
 
@@ -331,4 +331,4 @@ Normally, when a TiKV Pod is in a healthy state (`Running`), the corresponding T
         kubectl delete -n <namespace> pod <pod-name>
         ```
 
-    After the Pod is re-created, a new store will be registered in the TiKV cluster. The recovery is completed.
+    After the Pod is re-created, a new store is registered in the TiKV cluster. Then the recovery is completed.
