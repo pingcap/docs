@@ -98,7 +98,7 @@ For the above three situations, you can resume data replication from TiDB Binlog
 
     This method recovers the deleted table via the `DDL JOB ID`. If the corresponding DDL job is not of the `DROP TABLE` type, an error occurs.
 
-## Implementation Principle
+## Implementation principle
 
 When deleting a table, TiDB only deletes the table metadata, and writes the table data (row data and index data) to be deleted to the `mysql.gc_delete_range` table. The GC Worker in the TiDB background periodically removes from the `mysql.gc_delete_range` table the keys that exceed the GC life time.
 
