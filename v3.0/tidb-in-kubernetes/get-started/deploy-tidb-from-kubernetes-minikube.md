@@ -2,6 +2,7 @@
 title: Deploy TiDB in the Minikube Cluster
 summary: Learn how to deploy TiDB in the minikube cluster.
 category: how-to
+aliases: ['/docs/v3.0/how-to/get-started/deploy-tidb-from-kubernetes-minikube/']
 ---
 
 # Deploy TiDB in the Minikube Cluster
