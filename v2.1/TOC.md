@@ -312,7 +312,6 @@
     - [TiDB](reference/key-monitoring-metrics/tidb-dashboard.md)
     - [PD](reference/key-monitoring-metrics/pd-dashboard.md)
     - [TiKV](reference/key-monitoring-metrics/tikv-dashboard.md)
-  - [Alert Rules](reference/alert-rules.md)
   - [Adopters](adopters.md)
 + FAQs
   - [TiDB FAQs](faq/tidb.md)
