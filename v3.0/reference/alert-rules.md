@@ -4,6 +4,8 @@ summary: Learn the alert rules in a TiDB cluster.
 category: reference
 ---
 
+<!-- markdownlint-disable MD024 -->
+
 # TiDB Cluster Alert Rules
 
 This document describes the alert rules for different components in a TiDB cluster, including TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter. Each alert rule is classified according to their severity level - emergency, critical or warning.

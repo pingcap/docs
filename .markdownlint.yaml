@@ -39,7 +39,7 @@ heading-start-left: true
 
 # MD024
 no-duplicate-heading:
-  allow_different_nesting: true
+  siblings_only: true
 
 # MD025
 single-title:
