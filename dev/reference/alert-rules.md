@@ -554,7 +554,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Alert rule:
 
-    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance, name) > 0.8`
+    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance, name) > 1.6`
 
 * Description:
 
@@ -604,7 +604,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Alert rule:
 
-    `sum(rate(tikv_thread_cpu_seconds_total{name="apply_worker"}[1m])) by (instance) > 0.9`
+    `sum(rate(tikv_thread_cpu_seconds_total{name="apply_worker"}[1m])) by (instance) > 1.8`
 
 * Description:
 
