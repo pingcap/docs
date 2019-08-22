@@ -105,7 +105,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Description:
 
-    TiDB's monitoring on the memory usage. if the memory usage exceeds 10 G, an alert is triggered.
+    The monitoring on the TiDB memory usage. if the usage exceeds 10 G, an alert is triggered.
 
 * Solution:
 
