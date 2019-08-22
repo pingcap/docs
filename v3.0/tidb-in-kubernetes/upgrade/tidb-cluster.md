@@ -2,6 +2,7 @@
 title: Perform a Rolling Update to a TiDB Cluster in Kubernetes
 summary: Learn how to perform a rolling update to a TiDB cluster in Kubernetes.
 category: how-to
+aliases: ['/docs/v3.0/how-to/upgrade/tidb-in-kubernetes/']
 ---
 
 # Perform a Rolling Update to a TiDB Cluster in Kubernetes
@@ -19,7 +20,7 @@ When you perform a rolling update to a TiDB cluster in Kubernetes, the Pod is sh
     {{< copyable "shell-regular" >}}
 
     ```shell
-    helm upgrade <releaseName> pingcap/tidb-cluster -f values.yaml --version=<chart_version>
+    helm upgrade <release-name> pingcap/tidb-cluster -f values.yaml --version=<chart_version>
     ```
 
 3. Check the upgrade progress:
@@ -43,7 +44,7 @@ You can change the configuration of TiDB cluster through the following steps:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    helm upgrade <releaseName> pingcap/tidb-cluster -f values.yaml --version=<chart_version>
+    helm upgrade <release-name> pingcap/tidb-cluster -f values.yaml --version=<chart_version>
     ```
 
 4. Check the upgrade process:
