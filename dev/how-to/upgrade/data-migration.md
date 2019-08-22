@@ -34,7 +34,7 @@ Go Version: go version go1.11.2 linux/amd64
 
 ### Main changes
 
-Starting from this release, all configurations are rigorously checked, and an unrecognized configuration triggers error. This is to ensure that user always knows exactly what the configuration is.
+Starting from this release, TiDB DM checks all configurations rigorously. Unrecognized configuration triggers an error. This is to ensure that users always know exactly what the configuration is.
 
 ### Upgrade operation example
 
