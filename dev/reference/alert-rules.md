@@ -917,6 +917,156 @@ Warning-level alerts are a reminder for an issue or error.
     * Check the TiDB cluster status.
     * Check the Drainer log or monitor. If a DDL operation causes this problem, you can ignore it.
 
+This section gives the alert rules for the Node_exporter host.
+
+### Emergency-level alerts
+
+Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
+
+#### `NODE_disk_used_more_than_80%`
+
+* Alert rule:
+
+    `node_filesystem_avail{fstype=~"(ext.|xfs)", mountpoint!~"/boot"} / node_filesystem_size{fstype=~"(ext.|xfs)", mountpoint!~"/boot"} * 100 <= 20`
+
+* Description:
+
+    The disk space usage of the machine exceeds 80%.
+
+* Solution:
+
+    1. Log in to the machine and run the `df -h` command to check the disk space usage;
+    2. Make a plan to increase the disk capacity or delete some data or increase cluster node depending on different situations.
+
+#### `NODE_disk_inode_more_than_80%`
+
+* Alert rule:
+
+    `node_filesystem_files_free{fstype=~"(ext.|xfs)"} / node_filesystem_files{fstype=~"(ext.|xfs)"} * 100 < 20`
+
+* Description:
+
+    The inode usage of the filesystem on the machine exceeds 80%.
+
+* Solution:
+
+    Log in to the machine and run the `df -i` command to view the inode usage of the filesystem.
+
+#### `NODE_disk_readonly`
+
+* Alert rule:
+
+    `node_filesystem_readonly{fstype=~"(ext.|xfs)"} == 1`
+
+* Description:
+
+    The filesystem is read-only and data cannot be written in it. It is often caused by disk failure or filesystem corruption.
+
+* Solution:
+
+    * Log in to the machine and create a file to test whether it is normal.
+    * Check whether the disk LED is normal on the machine. If not, replace the disk and repair the filesystem of the machine.
+
+### Critical-level alerts
+
+For the critical-level alerts, a close watch on the abnormal metrics is required.
+
+#### `NODE_memory_used_more_than_80%`
+
+* Alert rule:
+
+    `(((node_memory_MemTotal-node_memory_MemFree-node_memory_Cached)/(node_memory_MemTotal)*100)) >= 80`
+
+* Description:
+
+    The memory usage of the machine exceeds 80%.
+
+* Solution:
+
+    * View the Memory panel of the host on the Grafana Node Exporter dashboard, and check whether Used memory is too high and Available memory is too low.
+    * Log in to the machine and run the `free -m` command to view the memory usage. You can run `top` to check whether there is any abnormal process that has an overly high memory usage.
+
+### Warning-level alerts
+
+Warning-level alerts are a reminder for an issue or error.
+
+#### `NODE_node_overload`
+
+* Alert rule:
+
+    `(node_load5 / count without (cpu, mode) (node_cpu{mode="system"})) > 1`
+
+* Description:
+
+    The CPU load on the machine is relatively high.
+
+* Solution:
+
+    * View the CPU Usage and Load Average of the host on the Grafana Node Exporter dashboard to check whether they are too high.
+    * Log in to the machine and run `top` to check the load average and the CPU usage, and see whether there is any abnormal process that has an overly high CPU usage.
+
+#### `NODE_cpu_used_more_than_80%`
+
+* Alert rule:
+
+    `avg(irate(node_cpu{mode="idle"}[5m])) by(instance) * 100 <= 20`
+
+* Description:
+
+    The CPU usage of the machine exceeds 80%.
+
+* Solution:
+
+    * View the CPU Usage and Load Average of the host on the Grafana Node Exporter dashboard to check whether they are too high.
+    * Log in to the machine and run `top` to check the Load Average and the CPU Usage, and see whether there is any abnormal process that has an overly high CPU usage.
+
+#### `NODE_tcp_estab_num_more_than_50000`
+
+* Alert rule:
+
+    `node_netstat_Tcp_CurrEstab > 50000`
+
+* Description:
+
+    There are more than 50,000 TCP links in the "establish" status on the machine.
+
+* Solution:
+
+    * Log in to the machine and run `ss -s` to check the number of TCP links in the "estab" status in the current system.
+    * Run `netstat` to check whether there is any abnormal link.
+
+#### `NODE_disk_read_latency_more_than_32ms`
+
+* Alert rule:
+
+    `((rate(node_disk_read_time_ms{device=~".+"}[5m]) / rate(node_disk_reads_completed{device=~".+"}[5m])) or (irate(node_disk_read_time_ms{device=~".+"}[5m]) / irate(node_disk_reads_completed{device=~".+"}[5m]))) > 32`
+
+* Description:
+
+    The read latency of the disk exceeds 32 ms.
+
+* Solution:
+
+    * Check the disk status by viewing the Grafana Disk Performance dashboard.
+    * Check the read latency of the disk by viewing the Disk Latency panel.
+    * Check the IO usage by viewing the Disk IO Utilization panel.
+
+#### `NODE_disk_write_latency_more_than_16ms`
+
+* Alert rule:
+
+    `((rate(node_disk_write_time_ms{device=~".+"}[5m]) / rate(node_disk_writes_completed{device=~".+"}[5m])) or (irate(node_disk_write_time_ms{device=~".+"}[5m]) / irate(node_disk_writes_completed{device=~".+"}[5m])))> 16`
+
+* Description:
+
+    The write latency of the disk exceeds 16 ms.
+
+* Solution:
+
+    * Check the disk status by viewing the Grafana Disk Performance dashboard.
+    * Check the write latency of the disk by viewing the Disk Latency panel.
+    * Check the IO usage by viewing the Disk IO Utilization panel.
+
 ## Node_Exporter host alert rules
 
 This section gives the alert rules for the Node_exporter host.
