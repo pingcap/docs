@@ -160,12 +160,6 @@ Configuration about performance.
 - To enable `keepalive` in the TCP layer
 - Default: false
 
-### `retry-limit`
-
-- The number of retries that TiDB makes when it encounters a `key` conflict or other errors while committing a transaction
-- Default: 10
-- If the number of retries exceeds `retry-limit` but the transaction still fails, TiDB returns an error
-
 ### `cross-join`
 
 - Default: true
