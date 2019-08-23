@@ -667,7 +667,7 @@ Warning-level alerts are a reminder for an issue or error.
 * Solution:
 
     1. Consider using a higher-level log such as `warn` or `error`.
-    2. Add `[raftstore] raft-base-tick-interval = "2s"` in the configuration.
+    2. Add `raft-base-tick-interval = "2s"` under the `[raftstore]` configuration.
 
 #### `TiKV_scheduler_context_total`
 
