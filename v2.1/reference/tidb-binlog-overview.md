@@ -72,4 +72,4 @@ The server hardware requirements for development, testing, and the production en
     - If your TiDB version is earlier than 2.1.9, set `db-type="pb"`.
     - If your TiDB version is 2.1.9 or later, set `db-type="file"` or `db-type="pb"`.
 
-* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/reference/tools/sync-diff-inspector.md) to verify the data after data replication.
+* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/reference/tools/sync-diff-inspector/overview.md) to verify the data after data replication.

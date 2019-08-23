@@ -1,0 +1,63 @@
+---
+title: Data Check for Different Library Names or Table Names
+summary: Learn the data check for different library names or table names.
+category: tools
+---
+
+# Data Check for Different Library Names or Table Names
+
+When you use replication tools such as TiDB Data Migration, you can set `route-rules` to replicate data to a specified table in the downstream. sync-diff-inspector enables you to verify tables with different library names or table names.
+
+Below is a simple example.
+
+```toml
+######################### Tables config #########################
+
+# Configure the tables of the target databases that need to be checked
+[[check-tables]]
+    # The name of the schema in the target database
+    schema = "test_2"
+
+    # The table that needs to be checked
+    tables = ["t_2"]
+
+# Configuration example of comparing two tables with different database names and table names.
+[[table-config]]
+    # The name of the schema in the target database
+    schema = "test_2"
+
+    # The name of the target table
+    table = "t_2"
+
+    # Configuration of the source data
+    [[table-config.source-tables]]
+        # The instance ID of the source schema
+        instance-id = "source-1"
+        # The name of the source schema
+        schema = "test_1"
+        # The name of the source table
+        table  = "t_1"
+```
+
+This configuration can be used to check `test_2.t_2` in the downstream and `test_1.t_1` in the instance `source-1`.
+
+To verify a large number of tables with different library names or table names, you can simplify the configuration by setting the mapping relationship by using `table-rule`. You can configure the mapping relationship of either schema or table, or both. For example, all the tables in the upstream library `test_1` are replicated to the downstream `test_2` library, which can be verified through the following configuration:
+
+```toml
+######################### Tables config #########################
+
+# Configure the tables of the target databases that need to be checked
+[[check-tables]]
+    # The name of the schema in the target database
+    schema = "test_2"
+
+    # Check all the tables
+    tables = ["~^"]
+
+[[table-rules]]
+    # schema-pattern and table-pattern support the wildcards "*" and "?"
+    schema-pattern = "test_1"
+    #table-pattern = ""
+    target-schema = "test_2"
+    #target-table = ""
+```

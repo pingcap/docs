@@ -51,4 +51,4 @@ This enterprise tools package includes all the following tools:
 - mydumper
 - [binlogctl](/reference/tidb-binlog-overview.md#binlogctl-guide)
 - ddl_checker
-- [sync_diff_inspector](/reference/tools/sync-diff-inspector.md)
+- [sync_diff_inspector](/reference/tools/sync-diff-inspector/overview.md)
