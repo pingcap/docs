@@ -112,7 +112,6 @@ The following MySQL system variables are fully supported in TiDB and have the sa
 | tx_isolation | GLOBAL \| SESSION | the isolation level of a transaction |
 | hostname | NONE | the hostname of the TiDB server |
 | max\_execution\_time | GLOBAL \| SESSION |  the execution timeout for a statement, in milliseconds |
-| tidb_retry_limit | GLOBAL \| SESSION | the number of retries that TiDB makes when it encounters a key conflict or other errors while committing a transaction |
 
 > **Note:**
 >
