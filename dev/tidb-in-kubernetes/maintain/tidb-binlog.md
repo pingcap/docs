@@ -80,13 +80,13 @@ By default, only one downstream drainer is created. You can install the `tidb-dr
     storageClassName: local-storage
     storage: 10Gi
     config: |
+      detect-interval = 10
       [syncer]
       worker-count = 16
-      detect-interval = 10
+      txn-batch = 20
       disable-dispatch = false
       ignore-schemas = "INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql"
       safe-mode = false
-      txn-batch = 20
       db-type = "tidb"
       [syncer.to]
       host = "slave-tidb"

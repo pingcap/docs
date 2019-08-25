@@ -32,15 +32,15 @@ The following table contains all configuration parameters available for the `tid
 The default value of `config` is:
 
 ```toml
+detect-interval = 10
+compressor = ""
 [syncer]
 worker-count = 16
-detect-interval = 10
 disable-dispatch = false
 ignore-schemas = "INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql"
 safe-mode = false
 txn-batch = 20
-db-type = "pb"
+db-type = "file"
 [syncer.to]
 dir = "/data/pb"
-compression = "gzip"
 ```
