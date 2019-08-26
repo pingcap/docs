@@ -66,41 +66,41 @@ The tikv-importer can be enabled for an existing tidb cluster or by creating a n
 
         ii. Create a `Secret` containing the rclone configuration. A sample configuration is listed below, only one cloud storage configuration is required. For other cloud storage, please refer to rclone [documentation](https://rclone.org/).
 
-            {{< copyable "" >}}
+        {{< copyable "" >}}
 
-            ```yaml
-            apiVersion: v1
-            kind: Secret
-            metadata:
-              name: cloud-storage-secret
-            type: Opaque
-            stringData:
-              rclone.conf: |
-                [s3]
-                type = s3
-                provider = AWS
-                env_auth = false
-                access_key_id = <my-access-key>
-                secret_access_key = <my-secret-key>
-                region = us-east-1
+        ```yaml
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: cloud-storage-secret
+        type: Opaque
+        stringData:
+          rclone.conf: |
+          [s3]
+          type = s3
+          provider = AWS
+          env_auth = false
+          access_key_id = <my-access-key>
+          secret_access_key = <my-secret-key>
+          region = us-east-1
 
-                [ceph]
-                type = s3
-                provider = Ceph
-                env_auth = false
-                access_key_id = <my-access-key>
-                secret_access_key = <my-secret-key>
-                endpoint = <ceph-object-store-endpoint>
-                region = :default-placement
+          [ceph]
+          type = s3
+          provider = Ceph
+          env_auth = false
+          access_key_id = <my-access-key>
+          secret_access_key = <my-secret-key>
+          endpoint = <ceph-object-store-endpoint>
+          region = :default-placement
 
-                [gcs]
-                type = google cloud storage
-                # The service account must include Storage Object Viewer role
-                # The content can be retrieved by `cat <service-account-file.json> | jq -c .`
-                service_account_credentials = <service-account-json-file-content>
-            ```
+          [gcs]
+          type = google cloud storage
+          # The service account must include Storage Object Viewer role
+          # The content can be retrieved by `cat <service-account-file.json> | jq -c .`
+          service_account_credentials = <service-account-json-file-content>
+        ```
 
-            Fill in the placeholders with your configurations and save it as `secret.yaml`, and then create the secret via `kubectl apply -f secret.yaml -n <namespace>`
+        Fill in the placeholders with your configurations and save it as `secret.yaml`, and then create the secret via `kubectl apply -f secret.yaml -n <namespace>`.
 
         iii. Configure the `dataSource.remote.storageClassName` to an existing storage class in the Kubernetes cluster.
 
