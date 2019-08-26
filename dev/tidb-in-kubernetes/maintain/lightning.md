@@ -18,15 +18,15 @@ The tikv-importer can be enabled for an existing tidb cluster or by creating a n
 
 * Create a new TiDB cluster with tikv importer enabled
 
-  1. Set `importer.create` to `true` in tidb-cluster `values.yaml`
+    1. Set `importer.create` to `true` in tidb-cluster `values.yaml`
 
-  2. Deploy the cluster
+    2. Deploy the cluster
 
-       {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-      ```shell
-      helm install pingcap/tidb-cluster --name=<release-name> --namespace=<namespace> -f values.yaml --version=<chart-version>
-      ```
+        ```shell
+        helm install pingcap/tidb-cluster --name=<release-name> --namespace=<namespace> -f values.yaml --version=<chart-version>
+        ```
 
 * Configure an existing TiDB cluster to enable tikv importer
 
