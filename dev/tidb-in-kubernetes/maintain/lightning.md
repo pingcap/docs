@@ -112,7 +112,7 @@ The tikv-importer can be enabled for an existing TiDB cluster or by creating a n
     helm install pingcap/tidb-lightning --name=<tidb-lightning-release-name> --namespace=<namespace> --set failFast=true -f tidb-lightning-values.yaml --version=<chart-version>
     ```
 
-When TiDB Lightning fails to restore data, it cannot simply be restarted, but manual intervention is required. So the restart is disabled in tidb-lightning.
+When TiDB Lightning fails to restore data, it cannot simply be restarted, but manual intervention is required. So the tidb-lightning's `Job` restart policy is set to `Never`.
 
 > **Note:**
 >
@@ -134,6 +134,6 @@ If the lightning fails to restore data, follow the below steps to do manual inte
 
 Currently, TiDB Lighting can only restore data offline. When the restore finishes and the TiDB cluster needs to provide service for applications, the TiDB Lightning should be deleted to save cost.
 
-* tikv-importer can be deleted by setting `importer.create` to false in `values.yaml` of TiDB cluster chart. And then run `helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml`.
+* tikv-importer can be deleted by setting `importer.create` to `false` in `values.yaml` of TiDB cluster chart. And then run `helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml`.
 
 * tidb-lightning can be deleted by running `helm delete <tidb-lightning-release-name> --purge`
