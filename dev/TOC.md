@@ -243,6 +243,7 @@
       - [`LOAD DATA`](reference/sql/statements/load-data.md)
       - [`MODIFY COLUMN`](reference/sql/statements/modify-column.md)
       - [`PREPARE`](reference/sql/statements/prepare.md)
+      - [`RECOVER TABLE`](reference/sql/statements/recover-table.md)
       - [`RENAME INDEX`](reference/sql/statements/rename-index.md)
       - [`RENAME TABLE`](reference/sql/statements/rename-table.md)
       - [`REPLACE`](reference/sql/statements/replace.md)
@@ -352,6 +353,7 @@
     - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
     - [Collect Logs](tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
+    - [TiDB Binlog](tidb-in-kubernetes/maintain/tidb-binlog.md)
   - [Scale](tidb-in-kubernetes/scale-in-kubernetes.md)
   + Upgrade
     - [TiDB Cluster](tidb-in-kubernetes/upgrade/tidb-cluster.md)
@@ -361,6 +363,7 @@
       - [TiDB Cluster](tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
       - [Backup](tidb-in-kubernetes/reference/configuration/backup.md)
       - [Local PV](tidb-in-kubernetes/reference/configuration/local-pv.md)
+      - [TiDB Drainer](tidb-in-kubernetes/reference/configuration/tidb-drainer.md)
     + Tools
       - [tkctl](tidb-in-kubernetes/reference/tools/tkctl.md)
       - [Tools in Kubernetes](tidb-in-kubernetes/reference/tools/in-kubernetes.md)
