@@ -6,7 +6,8 @@ category: reference
 
 # TiDB Lightning Configuration
 
-This document provides samples for global configuration, task configuration, and TiKV Importer configuration in TiDB Lightning, and describes the usage of command-line parameters. 
+This document provides samples for global configuration, task configuration, and TiKV Importer configuration in TiDB Lightning, and describes the usage of command-line parameters.
+
 ## Configuration files
 
 TiDB Lightning's global and task configurations have compatible structures. Unless [Server mode](/reference/tools/tidb-lightning/web.md) is enabled, the same file is used for both parts of configuration.
