@@ -121,7 +121,11 @@ When TiDB Lightning fails, it cannot simply be restarted, but manual interventio
 If the lightning fails to restore data, follow the below steps to do manual intervention:
 
   i. Delete the lightning job by `kubectl delete job -n <namespace> <release-name>-tidb-lightning`
+
   ii. Create the lightning job again with `failFast` disabled by `helm template pingcap/tidb-lightning --name <release-name> --set failFast=false -f tidb-lightning-values.yaml | kubectl apply -n <namespace> -f -`
+
   iii. When the lightning pod is running again, use `kubectl exec -it -n <namesapce> <tidb-lightning-pod-name> sh` to exec into the lightning container.
+
   iv. Get the startup script by `cat /proc/1/cmdline`
-  v. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning/#tidb-lightning-troubleshooting)
+
+  v. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning.md#tidb-lightning-troubleshooting)
