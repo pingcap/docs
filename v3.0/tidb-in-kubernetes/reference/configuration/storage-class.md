@@ -1,8 +1,7 @@
 ---
 title: Local PV Configuration
 summary: Learn how to manage local PV (Persistent Volume).
-category: reference
-aliases: ['/docs/v3.0/tidb-in-kubernetes/reference/configuration/local-pv/']
+category: how-to
 ---
 
 # Local PV Configuration
