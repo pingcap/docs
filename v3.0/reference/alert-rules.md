@@ -58,7 +58,7 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 * Solution:
 
-    Same as [`TiDB_schema_error`](#-tidbschemaerror-).
+    Same as [`TiDB_schema_error`](#-tidbschemaerror).
 
 #### `TiDB_monitor_keep_alive`
 
@@ -461,7 +461,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
     1. Check whether the network is clear.
     2. Check whether the remote TiKV is down.
-    3. If the remote TiKV is not down, check whether the pressure is too high. Refer to the solution in [`TiKV_channel_full_total`](#-tikvchannelfulltotal-).
+    3. If the remote TiKV is not down, check whether the pressure is too high. Refer to the solution in [`TiKV_channel_full_total`](#-tikvchannelfulltotal).
 
 #### `TiKV_channel_full_total`
 
@@ -517,7 +517,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Solution:
 
-    Refer to the solution in [`TiKV_channel_full_total`](#-tikvchannelfulltotal-).
+    Refer to the solution in [`TiKV_channel_full_total`](#-tikvchannelfulltotal).
 
 #### `TiKV_async_request_write_duration_seconds`
 
@@ -531,7 +531,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Solution:
 
-    1. Check the pressure on Raftstore. See the solution in [`TiKV_channel_full_total`](#-tikvchannelfulltotal-).
+    1. Check the pressure on Raftstore. See the solution in [`TiKV_channel_full_total`](#-tikvchannelfulltotal).
     2. Check the pressure on the apply worker thread.
 
 #### `TiKV_coprocessor_request_wait_seconds`
@@ -562,7 +562,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Solution:
 
-    Refer to the solution in [`TiKV_channel_full_total`](#-tikvchannelfulltotal-).
+    Refer to the solution in [`TiKV_channel_full_total`](#-tikvchannelfulltotal).
 
 #### `TiKV_raft_append_log_duration_secs`
 
@@ -641,7 +641,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Solution:
 
-    1. Refer to [`TiKV_channel_full_total`](#-tikvchannelfulltotal-).
+    1. Refer to [`TiKV_channel_full_total`](#-tikvchannelfulltotal).
     2. It there is low pressure on TiKV, consider whether the PD scheduling is too frequent. You can view the Operator Create panel on the PD page, and check the types and number of the PD scheduling.
 
 #### `TiKV_raft_process_ready_duration_secs`
@@ -681,7 +681,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Solution:
 
-    Refer to [`TiKV_scheduler_latch_wait_duration_seconds`](#-tikvschedulerlatchwaitdurationseconds-).
+    Refer to [`TiKV_scheduler_latch_wait_duration_seconds`](#-tikvschedulerlatchwaitdurationseconds).
 
 #### `TiKV_scheduler_command_duration_seconds`
 
@@ -695,7 +695,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Solution:
 
-    Refer to [`TiKV_scheduler_latch_wait_duration_seconds`](#-tikvschedulerlatchwaitdurationseconds-).
+    Refer to [`TiKV_scheduler_latch_wait_duration_seconds`](#-tikvschedulerlatchwaitdurationseconds).
 
 #### `TiKV_coprocessor_outdated_request_wait_seconds`
 
@@ -709,7 +709,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Solution:
 
-    Refer to [`TiKV_coprocessor_request_wait_seconds`](#-tikvcoprocessorrequestwaitseconds-).
+    Refer to [`TiKV_coprocessor_request_wait_seconds`](#-tikvcoprocessorrequestwaitseconds).
 
 #### `TiKV_coprocessor_request_error`
 
@@ -751,7 +751,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Solution:
 
-    Refer to [`TiKV_coprocessor_request_wait_seconds`](#-tikvcoprocessorrequestwaitseconds-).
+    Refer to [`TiKV_coprocessor_request_wait_seconds`](#-tikvcoprocessorrequestwaitseconds).
 
 #### `TiKV_batch_request_snapshot_nums`
 
