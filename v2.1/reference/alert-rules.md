@@ -68,7 +68,7 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 * Description:
 
-    Indicates whether the TiDB process still exists. If the number of times for `tidb_monitor_keep_alive_total` increases less than 100 in 10 minutes, the TiDB process might exit and an alert is triggered.
+    Indicates whether the TiDB process still exists. If the number of times for `tidb_monitor_keep_alive_total` increases less than 100 in 10 minutes, the TiDB process might already exit and an alert is triggered.
 
 * Solution:
 
@@ -1229,6 +1229,7 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 * Description:
 
     Failure to probe the Pushgateway service port.
+
 * Solution:
 
     * Check whether the machine that provides the Pushgateway service is down.
