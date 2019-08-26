@@ -299,8 +299,7 @@ min-available-ratio = 0.05
 
 ## Usage of `tidb-lightning-ctl`
 
-All parameters of `tidb-lightning` can be used in `tidb-lightning-ctl`.
-Additionally, the following parameter should be supplied to execute the command.
+All parameters of `tidb-lightning` can be used in `tidb-lightning-ctl`. Additionally, the following parameter should be supplied to execute the command.
 
 | Parameter | Explanation |
 |:----|:----|

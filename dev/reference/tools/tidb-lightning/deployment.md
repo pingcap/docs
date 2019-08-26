@@ -220,8 +220,7 @@ Download the TiDB Lightning package (choose the same version as that of the TiDB
     import-dir = "/mnt/ssd/data.import/"
     ```
 
-    The above only shows the essential settings.
-    See the [Configuration](/reference/tools/tidb-lightning/config.md#tikv-importer) section for the full list of settings.
+    The above only shows the essential settings. See the [Configuration](/reference/tools/tidb-lightning/config.md#tikv-importer) section for the full list of settings.
 
 3. Run `tikv-importer`.
 
