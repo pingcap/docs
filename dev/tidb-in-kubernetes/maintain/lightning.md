@@ -1,22 +1,22 @@
 ---
-title: TiDB Lightning
-summary: Learn how to restore data into TiDB cluster in Kubernetes fastly with TiDB Lightning.
+title: Restore data into TiDB in Kubernetes
+summary: Learn how to quickly restore data into a TiDB cluster in Kubernetes with TiDB Lightning.
 category: how-to
 ---
 
-# TiDB Lightning
+# Restore data into TiDB in Kubernetes
 
-This document describes how to restore data into TiDB cluster in Kubernetes using [TiDB Lightning](https://github.com/pingcap/tidb-lightning).
+This document describes how to restore data into a TiDB cluster in Kubernetes using [TiDB Lightning](https://github.com/pingcap/tidb-lightning).
 
-TiDB Lightning contains two components: tidb-lightning and tikv-importer. In Kubernetes, the tikv-importer is inside tidb-cluster Helm chart, it's deployed as a `StatefulSet` with `replicas=1` while tidb-lightning is in a separate Helm chart and deployed as a `Job`.
+TiDB Lightning contains two components: tidb-lightning and tikv-importer. In Kubernetes, the tikv-importer is inside the Helm chart of the TiDB cluster, it is deployed as a `StatefulSet` with `replicas=1` while tidb-lightning is in a separate Helm chart and deployed as a `Job`.
 
-So to restore data with TiDB Lighting, both the tikv-importer and tidb-lightning need to be deployed.
+Therefore, both the tikv-importer and tidb-lightning need to be deployed to restore data with TiDB Lightning.
 
 ## Deploy tikv-importer
 
-The tikv-importer can be enabled for an existing tidb cluster or by creating a new one.
+The tikv-importer can be enabled for an existing TiDB cluster or by creating a new one.
 
-* Create a new TiDB cluster with tikv importer enabled
+* Create a new TiDB cluster with tikv-importer enabled
 
     1. Set `importer.create` to `true` in tidb-cluster `values.yaml`
 
@@ -28,9 +28,9 @@ The tikv-importer can be enabled for an existing tidb cluster or by creating a n
         helm install pingcap/tidb-cluster --name=<release-name> --namespace=<namespace> -f values.yaml --version=<chart-version>
         ```
 
-* Configure an existing TiDB cluster to enable tikv importer
+* Configure an existing TiDB cluster to enable tikv-importer
 
-    1. Set `importer.create` to `true` in tidb-cluster `values.yaml`
+    1. Set `importer.create` to `true` in the `values.yaml` file of the TiDB cluster
 
     2. Upgrade the existing TiDB cluster
 
@@ -56,15 +56,15 @@ The tikv-importer can be enabled for an existing tidb cluster or by creating a n
 
     * Local
 
-        Local mode requires the mydumper backup data to be on one of the k8s node. This mode can be enabled by setting `dataSource.local.nodeName` to the node name and `dataSource.local.hostPath` to the mydumper backup data directory path which contains a file named `metadata`.
+        Local mode requires the mydumper backup data to be on one of the Kubernetes node. This mode can be enabled by setting `dataSource.local.nodeName` to the node name and `dataSource.local.hostPath` to the mydumper backup data directory path which contains a file named `metadata`.
 
     * Remote
 
         Unlike local mode, remote mode needs to use [rclone](https://rclone.org) to download mydumper backup tarball file from a network storage like [Google Cloud Storage (GCS)](https://cloud.google.com/storage/), [AWS S3](https://aws.amazon.com/s3/), [Ceph Object Storage](https://ceph.com/ceph-storage/object-storage/) etc to a PV. And then extract the tarball file to the PV. Currently, only these three cloud storages are tested. Other cloud storages that are supported by rclone should also work but not tested.
 
-        i. Ensure `dataSource.local.nodeName` and `dataSource.local.hostPath` are commented out.
+        i. Make sure that `dataSource.local.nodeName` and `dataSource.local.hostPath` are commented out.
 
-        ii. Create a `Secret` containing the rclone configuration. A sample configuration is listed below, only one cloud storage configuration is required. For other cloud storage, please refer to rclone [documentation](https://rclone.org/).
+        ii. Create a `Secret` containing the rclone configuration. A sample configuration is listed below. Only one cloud storage configuration is required. For other cloud storages, please refer to [rclone documentation](https://rclone.org/).
 
         {{< copyable "" >}}
 
@@ -112,8 +112,16 @@ The tikv-importer can be enabled for an existing tidb cluster or by creating a n
     helm install pingcap/tidb-lightning --name=<release-name> --namespace=<namespace> -f values.yaml --version=<chart-version>
     ```
 
-When TiDB Lightning fails, it cannot simply be restarted, manual intervention is required. TiDB Lightning chart has hack script which avoids pod exiting and restarting when it fails. This makes it handy to do manual intervention, however users have to check the pod's log instead of simply checking the pod's status to determine if the restore job failed or not. This behavior can be disabled by setting `failFast` to `true` in `values.yaml`.
+When TiDB Lightning fails, it cannot simply be restarted, but manual intervention is required. So the restart is disabled in tidb-lightning.
 
 > **Note:**
 >
-> Currently, TiDB Lightning will [exit with non-zero error code even when data is successfully restored](https://github.com/pingcap/tidb-lightning/pull/230), this will trigger the job failure. So the success status needs to be determined by viewing tidb-lightning pod's log too.
+> Currently, TiDB Lightning will [exit with non-zero error code even when data is successfully restored](https://github.com/pingcap/tidb-lightning/pull/230). This will trigger the job failure. Therefore, the success status needs to be determined by viewing tidb-lightning pod's log.
+
+If the lightning fails to restore data, follow the below steps to do manual intervention:
+
+  i. Delete the lightning job by `kubectl delete job -n <namespace> <release-name>-tidb-lightning`
+  ii. Create the lightning job again with `failFast` disabled by `helm template pingcap/tidb-lightning --name <release-name> --set failFast=false | kubectl apply -n <namespace> -f -`
+  iii. When the lightning pod is running again, use `kubectl exec -it -n <namesapce> <tidb-lightning-pod-name> sh` to exec into the lightning container.
+  iv. Get the startup script by `cat /proc/1/cmdline`
+  v. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning/#tidb-lightning-troubleshooting)
