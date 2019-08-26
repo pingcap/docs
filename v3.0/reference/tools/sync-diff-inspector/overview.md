@@ -98,9 +98,6 @@ fix-sql-file = "fix.sql"
 
 ######################### Tables config #########################
 
-<https://github.com/pingcap/docs-cn/blob/master/dev/reference/tools/sync-diff-inspector/overview.md>
-<https://github.com/pingcap/docs-cn/blob/d92a5d2f4bf492c1d86b39deb4ca87f5cbdb417b/dev/reference/tools/sync-diff-inspector.md>
-
 # If you need to compare the data of a large number of tables with different schema names or table names, use the table-rule to configure the mapping relationship. You can configure the mapping rule of only schema or only table, or you can also configure the mapping rules of both the schema and table.
 #[[table-rules]]
     # schema-pattern and table-pattern support regular expressions.
