@@ -15,7 +15,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 * Compare the table schema and data
 * Generate the SQL statements used to repair data if the data inconsistency exists
-* Support [data check for different library names or table names](/reference/tools/sync-diff-inspector/route-diff.md)
+* Support [data check for different database names or table names](/reference/tools/sync-diff-inspector/route-diff.md)
 * Support [data check in the sharding scenario](/reference/tools/sync-diff-inspector/shard-diff.md)
 * Support [data check for TiDB upstream-downstream clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
 
@@ -31,11 +31,11 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ### Database privilege
 
-sync-diff-inspector needs to obtain the information of table schema, to query data, and to build the checkpoint library to save breakpoint information. The required database privileges are as follows:
+sync-diff-inspector needs to obtain the information of table schema, to query data, and to build the checkpoint database to save breakpoint information. The required database privileges are as follows:
 
 * Upstream database
     - `SELECT` (check data for comparison)
-    - `SHOW_DATABASES` (view library name)
+    - `SHOW_DATABASES` (view database name)
     - `RELOAD` (view table schema)
 * Downstream database
     - `SELECT` (check data for comparison)
@@ -43,7 +43,7 @@ sync-diff-inspector needs to obtain the information of table schema, to query da
     - `DELETE` (delete the information on the checkpoint table)
     - `INSERT` (write data into the checkpoint table)
     - `UPDATE` (modify the checkpoint table)
-    - `SHOW_DATABASES` (view library name)
+    - `SHOW_DATABASES` (view database name)
     - `RELOAD` (view table schema)
 
 ### Configuration File Description
@@ -97,9 +97,6 @@ ignore-struct-check = false
 fix-sql-file = "fix.sql"
 
 ######################### Tables config #########################
-
-<https://github.com/pingcap/docs-cn/blob/master/dev/reference/tools/sync-diff-inspector/overview.md>
-<https://github.com/pingcap/docs-cn/blob/d92a5d2f4bf492c1d86b39deb4ca87f5cbdb417b/dev/reference/tools/sync-diff-inspector.md>
 
 # If you need to compare the data of a large number of tables with different schema names or table names, use the table-rule to configure the mapping relationship. You can configure the mapping rule of only schema or only table, or you can also configure the mapping rules of both the schema and table.
 #[[table-rules]]

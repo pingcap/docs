@@ -1,12 +1,12 @@
 ---
-title: Data Check for Different Library Names or Table Names
-summary: Learn the data check for different library names or table names.
+title: Data Check for Different Database Names or Table Names
+summary: Learn the data check for different Database names or table names.
 category: tools
 ---
 
-# Data Check for Different Library Names or Table Names
+# Data Check for Different Database Names or Table Names
 
-When you use replication tools such as TiDB Data Migration, you can set `route-rules` to replicate data to a specified table in the downstream. sync-diff-inspector enables you to verify tables with different library names or table names.
+When you use replication tools such as TiDB Data Migration, you can set `route-rules` to replicate data to a specified table in the downstream. sync-diff-inspector enables you to verify tables with different database names or table names.
 
 Below is a simple example.
 
@@ -41,7 +41,7 @@ Below is a simple example.
 
 This configuration can be used to check `test_2.t_2` in the downstream and `test_1.t_1` in the instance `source-1`.
 
-To verify a large number of tables with different library names or table names, you can simplify the configuration by setting the mapping relationship by using `table-rule`. You can configure the mapping relationship of either schema or table, or both. For example, all the tables in the upstream library `test_1` are replicated to the downstream `test_2` library, which can be verified through the following configuration:
+To verify a large number of tables with different database names or table names, you can simplify the configuration by setting the mapping relationship by using `table-rule`. You can configure the mapping relationship of either schema or table, or both. For example, all the tables in the upstream database `test_1` are replicated to the downstream `test_2` database, which can be verified through the following configuration:
 
 ```toml
 ######################### Tables config #########################

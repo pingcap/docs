@@ -15,7 +15,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 * Compare the table schema and data
 * Generate the SQL statements used to repair data if the data inconsistency exists
-* Support [data check for different library names or table names](/reference/tools/sync-diff-inspector/route-diff.md)
+* Support [data check for different database names or table names](/reference/tools/sync-diff-inspector/route-diff.md)
 * Support [data check in the sharding scenario](/reference/tools/sync-diff-inspector/shard-diff.md)
 * Support [data check for TiDB upstream-downstream clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
 
@@ -31,11 +31,11 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ### Database privilege
 
-sync-diff-inspector needs to obtain the information of table schema, to query data, and to build the checkpoint library to save breakpoint information. The required database privileges are as follows:
+sync-diff-inspector needs to obtain the information of table schema, to query data, and to build the checkpoint database to save breakpoint information. The required database privileges are as follows:
 
 * Upstream database
     - `SELECT` (check data for comparison)
-    - `SHOW_DATABASES` (view library name)
+    - `SHOW_DATABASES` (view database name)
     - `RELOAD` (view table schema)
 * Downstream database
     - `SELECT` (check data for comparison)
@@ -43,7 +43,7 @@ sync-diff-inspector needs to obtain the information of table schema, to query da
     - `DELETE` (delete the information on the checkpoint table)
     - `INSERT` (write data into the checkpoint table)
     - `UPDATE` (modify the checkpoint table)
-    - `SHOW_DATABASES` (view library name)
+    - `SHOW_DATABASES` (view database name)
     - `RELOAD` (view table schema)
 
 ### Configuration File Description

@@ -6,7 +6,7 @@ category: tools
 
 # Data Check for TiDB Upstream and Downstream Clusters
 
-You can use TiDB Binlog to build upstream and downstream clusters of TiDB. When Drainer replicates data to TiDB, saving the checkpoint also has the TSO mapping relationship between the upstream and downstream saved as `ts-map`. To check data  between the upstream and downstream, configure `snapshot` in sync-diff-inspector.
+You can use TiDB Binlog to build upstream and downstream clusters of TiDB. When Drainer replicates data to TiDB, saving the checkpoint also has the TSO mapping relationship between the upstream and downstream saved as `ts-map`. To check data between the upstream and downstream, configure `snapshot` in sync-diff-inspector.
 
 ## Step 1: obtain `ts-map`
 
