@@ -8,11 +8,11 @@ category: reference
 
 # TiDB Cluster Alert Rules
 
-This document describes the alert rules for different components in a TiDB cluster, including TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter. Each alert rule is classified according to their severity level - emergency, critical or warning.
+This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter.
 
 ## TiDB alert rules
 
-This section gives the alert rules for the TiDB component.
+This section gives the alert rules for the TiDB component. Each alert rule is classified according to their severity level - emergency, critical or warning.
 
 ### Emergency-level alerts
 
@@ -187,7 +187,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 ## PD alert rules
 
-This section gives the alert rules for the PD component.
+This section gives the alert rules for the PD component. Each alert rule is classified according to their severity level - emergency, critical or warning.
 
 ### Emergency-level alerts
 
@@ -407,7 +407,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 ## TiKV alert rules
 
-This section gives the alert rules for the TiKV component.
+This section gives the alert rules for the TiKV component. Each alert rule is classified according to their severity level - emergency, critical or warning.
 
 ### Emergency-level alerts
 
@@ -799,7 +799,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 ## TiDB Binlog alert rules
 
-This section gives the alert rules for the TiDB Binlog component.
+This section gives the alert rules for the TiDB Binlog component. Each alert rule is classified according to their severity level - emergency, critical or warning.
 
 ### Emergency-level alerts
 
@@ -919,7 +919,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 ## Node_Exporter host alert rules
 
-This section gives the alert rules for the Node_exporter host.
+This section gives the alert rules for the Node_exporter host. Each alert rule is classified according to their severity level - emergency, critical or warning.
 
 ### Emergency-level alerts
 
@@ -1072,7 +1072,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 ## Blackbox_exporter TCP, ICMP, and HTTP alert rules
 
-This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP.
+This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP. Each alert rule is classified according to their severity level - emergency, critical or warning.
 
 ### Emergency-level alerts
 
