@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Web Interface
-summary: Controls TiDB Lightning through the web interface
+summary: Control TiDB Lightning through the web interface.
 category: reference
 ---
 
@@ -23,7 +23,7 @@ server-mode = true
 status-addr = ':8289'
 ```
 
-After TiDB Lightning is launched, we could visit `http://127.0.0.1:8289` to control the program (the actual URL depends on the `status-addr` setting).
+After TiDB Lightning is launched, visit `http://127.0.0.1:8289` to control the program (the actual URL depends on the `status-addr` setting).
 
 In Server mode, TiDB Lightning does not start running immediately.
 Rather, users submit (multiple) *tasks* via the web interface to import data.
@@ -32,7 +32,7 @@ Rather, users submit (multiple) *tasks* via the web interface to import data.
 
 ![Front page of the web interface](/media/lightning-web-frontpage.png)
 
-Functions of the title bar, from left to right
+Functions of the title bar, from left to right:
 
 | Icon | Function |
 |----|----|
@@ -43,7 +43,7 @@ Functions of the title bar, from left to right
 | ⏸/▶ | Pause/resume current execution |
 | ⟳ | Configure auto-refresh of the web page |
 
-Below the title bar, there are three panels showing all tables in different states:
+Three panels below the title bar show all tables in different states:
 
 * Active: these tables are currently being imported
 * Completed: these tables have been imported successfully or failed
@@ -53,7 +53,7 @@ Each panel contains cards describing the status of the table.
 
 ## Submit task
 
-The the "+" button on the title bar to submit a task.
+Click the **+** button on the title bar to submit a task.
 
 ![Submit task dialog](/media/lightning-web-submit.png)
 
@@ -83,4 +83,4 @@ Each task is labeled by the time it was submitted.
 Clicking the task would show the configuration formatted as JSON.
 
 Manage tasks by clicking the "⋮" button next to a task.
-You may stop a task immediately, or reorder queued tasks.
+You can stop a task immediately, or reorder queued tasks.

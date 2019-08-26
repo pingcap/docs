@@ -1,15 +1,15 @@
 ---
 title: TiDB Lightning Configuration
-summary: CLI usage and sample configuration
+summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
 category: reference
 ---
 
 # TiDB Lightning Configuration
 
+This document provides samples for global configuration, task configuration, and TiKV Importer configuration in TiDB Lightning, and describes the usage of command-line parameters. 
 ## Configuration files
 
-TiDB Lightning's global and task configurations have compatible structures.
-Unless [Server mode](/reference/tools/tidb-lightning/web.md) is enabled, the same file is used for both parts of configuration.
+TiDB Lightning's global and task configurations have compatible structures. Unless [Server mode](/reference/tools/tidb-lightning/web.md) is enabled, the same file is used for both parts of configuration.
 
 ### TiDB Lightning (Global)
 
@@ -17,7 +17,7 @@ Unless [Server mode](/reference/tools/tidb-lightning/web.md) is enabled, the sam
 ### tidb-lightning global configuration
 
 [lightning]
-# the HTTP port for web interface and Prometheus metrics pulling (0 to disable)
+# The HTTP port for the web interface and Prometheus metrics pulling (0 to disable).
 status-addr = ':8289'
 
 # Toggle server mode and use of the web interface.
@@ -38,7 +38,7 @@ max-backups = 14
 ### tidb-lightning task configuration
 
 [lightning]
-# Checks if the cluster satisfies the minimum requirement before starting.
+# Checks whether the cluster satisfies the minimum requirement before starting.
 #check-requirements = true
 
 # The maximum number of engines to be opened concurrently.
@@ -64,11 +64,11 @@ io-concurrency = 5
 
 [checkpoint]
 # Whether to enable checkpoints.
-# While importing, Lightning records which tables have been imported, so
-# even if Lightning or other component crashed, you could start from a known
+# While importing data, TiDB Lightning records which tables have been imported, so
+# even if Lightning or another component crashes, you can start from a known
 # good state instead of redoing everything.
 enable = true
-# The schema name (database name) to store the checkpoints
+# The schema name (database name) to store the checkpoints.
 schema = "tidb_lightning_checkpoint"
 # Where to store the checkpoints.
 #  - file:  store as a local file.
@@ -100,7 +100,7 @@ read-block-size = 65536 # Byte (default = 64 KB)
 # TiDB Lightning splits a large table into multiple data engine files according to this size.
 batch-size = 107_374_182_400 # Byte (default = 100 GB)
 
-# Engine file needs to be imported sequentially. Due to parallel processing,
+# The engine file needs to be imported sequentially. Due to parallel processing,
 # multiple data engines will be imported at nearly the same time, and this
 # creates a queue and wastes resources. Therefore, Lightning slightly
 # increases the size of the first few batches to properly distribute
@@ -113,13 +113,13 @@ batch-size = 107_374_182_400 # Byte (default = 100 GB)
 # This value should be in the range (0 <= batch-import-ratio < 1).
 batch-import-ratio = 0.75
 
-# mydumper local source data directory
+# mydumper local source data directory.
 data-source-dir = "/data/my_database"
 # If no-schema is set to true, tidb-lightning assumes that the table skeletons
 # already exist on the target TiDB cluster, and will not execute the `CREATE
-# TABLE` statements
+# TABLE` statements.
 no-schema = false
-# the character set of the schema files, containing CREATE TABLE statements;
+# The character set of the schema files, containing CREATE TABLE statements;
 # only supports one of:
 #  - utf8mb4: the schema files must be encoded as UTF-8, otherwise Lightning
 #             will emit errors
@@ -128,11 +128,11 @@ no-schema = false
 #  - auto:    (default) automatically detects whether the schema is UTF-8 or
 #             GB-18030. An error is reported if the encoding is neither.
 #  - binary:  do not try to decode the schema files
-# note that the *data* files are always parsed as binary regardless of
+# Note that the *data* files are always parsed as binary regardless of
 # schema encoding.
 character-set = "auto"
 
-# Configure how CSV files are parsed.
+# Configures how CSV files are parsed.
 [mydumper.csv]
 # Separator between fields, should be an ASCII character.
 separator = ','
@@ -153,14 +153,14 @@ backslash-escape = true
 trim-last-separator = false
 
 [tidb]
-# Configuration of any TiDB server from the cluster
+# Configuration of any TiDB server from the cluster.
 host = "172.16.31.1"
 port = 4000
 user = "root"
 password = ""
 # Table schema information is fetched from TiDB via this status-port.
 status-port = 10080
-# Address of any PD server from the cluster
+# Address of any PD server from the cluster.
 pd-addr = "172.16.31.4:2379"
 # tidb-lightning imports TiDB as a library and generates some logs itself.
 # This setting controls the log level of the TiDB library.
@@ -174,8 +174,8 @@ distsql-scan-concurrency = 100
 index-serial-scan-concurrency = 20
 checksum-table-concurrency = 16
 
-# The default SQL mode used to parse and execute the SQL statements
-#sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
+# The default SQL mode used to parse and execute the SQL statements.
+sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
 # When data importing is complete, tidb-lightning can automatically perform
 # the Checksum, Compact and Analyze operations. It is recommended to leave
@@ -195,7 +195,7 @@ compact = false
 # Performs `ANALYZE TABLE <table>` for each table.
 analyze = true
 
-# Configures the background periodic actions
+# Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
 [cron]
 # Duration between which Lightning automatically refreshes the import mode
@@ -212,9 +212,9 @@ log-progress = "5m"
 ### TiKV Importer
 
 ```toml
-# TiKV Importer configuration file template
+# TiKV Importer configuration file template.
 
-# Log file
+# Log file.
 log-file = "tikv-importer.log"
 # Log level: trace, debug, info, warn, error, off.
 log-level = "info"
@@ -282,7 +282,7 @@ min-available-ratio = 0.05
 ### Usage of `tidb-lightning`
 
 | Parameter | Explanation | Overrides setting |
-|----|----|----|
+|:----|:----|:----|
 | --config *file* | Reads global configuration from *file*. If not specified, the default configuration would be used. | |
 | -V | Prints program version | |
 | -d *directory* | Directory of the data dump to read from | `mydumper.data-source-dir` |
@@ -302,7 +302,7 @@ All parameters of `tidb-lightning` can be used in `tidb-lightning-ctl`.
 Additionally, the following parameter should be supplied to execute the command.
 
 | Parameter | Explanation |
-|----|----|
+|:----|:----|
 | --compact | Performs a full compaction |
 | --switch-mode *mode* | Switches every TiKV store to the given mode: normal, import |
 | --import-engine *uuid* | Imports the closed engine file from TiKV Importer into the TiKV cluster |
@@ -315,7 +315,7 @@ Additionally, the following parameter should be supplied to execute the command.
 ## Usage of `tikv-importer`
 
 | | Parameter | Explanation | Overrides setting |
-|----|----|----|----|
+|:----|:----|:----|:----|
 | -C | --config *file* | Reads configuration from *file*. If not specified, the default configuration would be used. | |
 | -V | --version | Prints program version | |
 | -A | --addr *ip:port* | Listening address of the TiKV Importer server | `server.addr` |
