@@ -346,10 +346,10 @@
     - [Cluster Initialization](tidb-in-kubernetes/initialize-cluster.md)
   - [Monitor](tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
   + Maintain
-    - [Destroy a TiDB cluster](tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
+    - [Destroy a TiDB Cluster](tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
     - [Maintain a Hosting Kubernetes Node](tidb-in-kubernetes/maintain/kubernetes-node.md)
     - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
-    - [Restore data with TiDB Lightning](tidb-in-kubernetes/maintain/lightning.md)
+    - [Restore Data with TiDB Lightning](tidb-in-kubernetes/maintain/lightning.md)
     - [Collect Logs](tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
   - [Scale](tidb-in-kubernetes/scale-in-kubernetes.md)

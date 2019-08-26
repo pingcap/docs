@@ -1,10 +1,10 @@
 ---
-title: Restore data into TiDB in Kubernetes
+title: Restore Data into TiDB in Kubernetes
 summary: Learn how to quickly restore data into a TiDB cluster in Kubernetes with TiDB Lightning.
 category: how-to
 ---
 
-# Restore data into TiDB in Kubernetes
+# Restore Data into TiDB in Kubernetes
 
 This document describes how to restore data into a TiDB cluster in Kubernetes using [TiDB Lightning](https://github.com/pingcap/tidb-lightning).
 
@@ -25,7 +25,7 @@ The tikv-importer can be enabled for an existing TiDB cluster or by creating a n
         {{< copyable "shell-regular" >}}
 
         ```shell
-        helm install pingcap/tidb-cluster --name=<release-name> --namespace=<namespace> -f values.yaml --version=<chart-version>
+        helm install pingcap/tidb-cluster --name=<tidb-cluster-release-name> --namespace=<namespace> -f values.yaml --version=<chart-version>
         ```
 
 * Configure an existing TiDB cluster to enable tikv-importer
@@ -37,7 +37,7 @@ The tikv-importer can be enabled for an existing TiDB cluster or by creating a n
         {{< copyable "shell-regular" >}}
 
         ```shell
-        helm upgrade <release-name> pingcap/tidb-cluster -f values.yaml --version=<chart-version>
+        helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml --version=<chart-version>
         ```
 
 ## Deploy tidb-lightning
@@ -62,9 +62,9 @@ The tikv-importer can be enabled for an existing TiDB cluster or by creating a n
 
         Unlike local mode, remote mode needs to use [rclone](https://rclone.org) to download mydumper backup tarball file from a network storage like [Google Cloud Storage (GCS)](https://cloud.google.com/storage/), [AWS S3](https://aws.amazon.com/s3/), [Ceph Object Storage](https://ceph.com/ceph-storage/object-storage/) etc to a PV. And then extract the tarball file to the PV. Currently, only these three cloud storages are tested. Other cloud storages that are supported by rclone should also work but not tested.
 
-        i. Make sure that `dataSource.local.nodeName` and `dataSource.local.hostPath` are commented out.
+        1. Make sure that `dataSource.local.nodeName` and `dataSource.local.hostPath` are commented out.
 
-        ii. Create a `Secret` containing the rclone configuration. A sample configuration is listed below. Only one cloud storage configuration is required. For other cloud storages, please refer to [rclone documentation](https://rclone.org/).
+        2. Create a `Secret` containing the rclone configuration. A sample configuration is listed below. Only one cloud storage configuration is required. For other cloud storages, please refer to [rclone documentation](https://rclone.org/).
 
         {{< copyable "" >}}
 
@@ -102,17 +102,17 @@ The tikv-importer can be enabled for an existing TiDB cluster or by creating a n
 
         Fill in the placeholders with your configurations and save it as `secret.yaml`, and then create the secret via `kubectl apply -f secret.yaml -n <namespace>`.
 
-        iii. Configure the `dataSource.remote.storageClassName` to an existing storage class in the Kubernetes cluster.
+        3. Configure the `dataSource.remote.storageClassName` to an existing storage class in the Kubernetes cluster.
 
 2. Deploy TiDB Lightning
 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    helm install pingcap/tidb-lightning --name=<release-name> --namespace=<namespace> --set failFast=true -f tidb-lightning-values.yaml --version=<chart-version>
+    helm install pingcap/tidb-lightning --name=<tidb-lightning-release-name> --namespace=<namespace> --set failFast=true -f tidb-lightning-values.yaml --version=<chart-version>
     ```
 
-When TiDB Lightning fails, it cannot simply be restarted, but manual intervention is required. So the restart is disabled in tidb-lightning.
+When TiDB Lightning fails to restore data, it cannot simply be restarted, but manual intervention is required. So the restart is disabled in tidb-lightning.
 
 > **Note:**
 >
@@ -120,12 +120,20 @@ When TiDB Lightning fails, it cannot simply be restarted, but manual interventio
 
 If the lightning fails to restore data, follow the below steps to do manual intervention:
 
-  i. Delete the lightning job by `kubectl delete job -n <namespace> <release-name>-tidb-lightning`
+    1. Delete the lightning job by running `kubectl delete job -n <namespace> <tidb-lightning-release-name>-tidb-lightning`.
 
-  ii. Create the lightning job again with `failFast` disabled by `helm template pingcap/tidb-lightning --name <release-name> --set failFast=false -f tidb-lightning-values.yaml | kubectl apply -n <namespace> -f -`
+    2. Create the lightning job again with `failFast` disabled by `helm template pingcap/tidb-lightning --name <tidb-lightning-release-name> --set failFast=false -f tidb-lightning-values.yaml | kubectl apply -n <namespace> -f -`.
 
-  iii. When the lightning pod is running again, use `kubectl exec -it -n <namesapce> <tidb-lightning-pod-name> sh` to exec into the lightning container.
+    3. When the lightning pod is running again, use `kubectl exec -it -n <namesapce> <tidb-lightning-pod-name> sh` to exec into the lightning container.
 
-  iv. Get the startup script by `cat /proc/1/cmdline`
+    4. Get the startup script by running `cat /proc/1/cmdline`.
 
-  v. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning.md#tidb-lightning-troubleshooting)
+    5. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning.md#tidb-lightning-troubleshooting).
+
+## Destroy TiDB Lighting
+
+Currently, TiDB Lighting can only restore data offline. When the restore finishes and the TiDB cluster needs to provide service for applications, the TiDB Lightning should be deleted to save cost.
+
+* tikv-importer can be deleted by setting `importer.create` to false in `values.yaml` of TiDB cluster chart. And then run `helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml`.
+
+* tidb-lightning can be deleted by running `helm delete <tidb-lightning-release-name> --purge`
