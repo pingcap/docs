@@ -359,6 +359,7 @@ CREATE DATABASE db_name
     [[DEFAULT] CHARACTER SET charset_name]
     [[DEFAULT] COLLATE collation_name]
 ```
+
 Where `DATABASE` can be replaced with `SCHEMA`.
 
 Different databases can use different character sets and collations. Use the `character_set_database` and  `collation_database` to see the character set and collation of the current database:
@@ -418,6 +419,7 @@ For example:
 mysql> CREATE TABLE t1(a int) CHARACTER SET utf8 COLLATE utf8_general_ci;
 Query OK, 0 rows affected (0.08 sec)
 ```
+
 The table character set and collation are used as the default values for column definitions if the column character set and collation are not specified in individual column definitions.
 
 ## Column character set and collation
