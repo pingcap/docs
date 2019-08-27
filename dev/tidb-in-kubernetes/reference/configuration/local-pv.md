@@ -1,7 +1,7 @@
 ---
 title: Local PV Configuration
 summary: Learn how to manage local PV (Persistent Volume).
-category: reference
+category: how-to
 ---
 
 # Local PV Configuration
