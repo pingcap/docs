@@ -8,7 +8,7 @@ category: how-to
 
 This document describes how to restore data into a TiDB cluster in Kubernetes using [TiDB Lightning](https://github.com/pingcap/tidb-lightning).
 
-TiDB Lightning contains two components: tidb-lightning and tikv-importer. In Kubernetes, the tikv-importer is inside the Helm chart of the TiDB cluster, it is deployed as a `StatefulSet` with `replicas=1` while tidb-lightning is in a separate Helm chart and deployed as a `Job`.
+TiDB Lightning contains two components: tidb-lightning and tikv-importer. In Kubernetes, the tikv-importer is inside the Helm chart of the TiDB cluster. And tikv-importer is deployed as a `StatefulSet` with `replicas=1` while tidb-lightning is in a separate Helm chart and deployed as a `Job`.
 
 Therefore, both the tikv-importer and tidb-lightning need to be deployed to restore data with TiDB Lightning.
 
@@ -130,9 +130,9 @@ If the lightning fails to restore data, follow the steps below to do manual inte
 
 5. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning.md#tidb-lightning-troubleshooting).
 
-## Destroy TiDB Lighting
+## Destroy TiDB Lightning
 
-Currently, TiDB Lighting can only restore data offline. When the restoration finishes and the TiDB cluster needs to provide service for applications, the TiDB Lightning should be deleted to save cost.
+Currently, TiDB Lightning can only restore data offline. When the restoration finishes and the TiDB cluster needs to provide service for applications, the TiDB Lightning should be deleted to save cost.
 
 * tikv-importer can be deleted by setting `importer.create` to `false` in `values.yaml` of the TiDB cluster chart. And then run `helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml`.
 
