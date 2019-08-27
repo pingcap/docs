@@ -148,13 +148,13 @@ $ ansible-playbook local_prepare.yml
 
 ## Step 5: Perform a rolling update to TiDB cluster components
 
-- If the default `systemd` parameter is used by the `process_supervision` variable, perform rolling update on the TiDB cluster using `excessive_rolling_update.yml`.
+- If the `process_supervision` variable uses the default `systemd` parameter, perform a rolling update to the TiDB cluster using `excessive_rolling_update.yml`.
 
     ```shell
     $ ansible-playbook excessive_rolling_update.yml
     ```
 
-- If the `supervise` parameter is used by the `process_supervision` variable, perform rolling update on the TiDB cluster using `rolling_update.yml`.
+- If the `process_supervision` variable uses the `supervise` parameter, perform a rolling update to the TiDB cluster using `rolling_update.yml`.
 
     ```shell
     $ ansible-playbook rolling_update.yml
@@ -162,7 +162,7 @@ $ ansible-playbook local_prepare.yml
 
 > **Note:**
 >
-> To optimize operation and maintenance management over components of TiDB cluster, there are some adjustments to `PD service` under `systemd` in TiDB 3.0. After it is upgraded to TiDB 3.0, both the rolling update and rolling-restart of TiDB cluster components use `rolling_update.yml`. `excessive_rolling_update.yml` is no longer used.
+> To optimize operation and maintenance management over TiDB cluster components, the `PD service` name in the `systemd` mode is adjusted in TiDB 3.0. After upgrading the version to TiDB 3.0, you can use `rolling_update.yml` for both rolling updates and daily rolling restarts. Do not use `excessive_rolling_update.yml` any longer.
 
 ## Step 6: Perform a rolling update to TiDB monitoring components
 
