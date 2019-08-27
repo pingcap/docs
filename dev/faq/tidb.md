@@ -661,11 +661,11 @@ Generally, enabling `sync-log` reduces about 30% of the performance. For write p
 
 #### Can Raft + multiple replicas in the TiKV architecture achieve absolute data security? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
 
-Data is redundantly replicated between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data security but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
+Data is redundantly replicated between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
 
 As an alternative to using `sync-log`, you may also consider having five replicas instead of three in your Raft group. This would allow for the failure of two replicas, while still providing data safety.
 
-For a standalone TiKV node, it is still recommended to enable the sync-log mode. Otherwise, the last write might be lost in case of a node failure.
+For a standalone TiKV node, it is still recommended to enable the `sync-log` mode. Otherwise, the last write might be lost in case of a node failure.
 
 #### Since TiKV uses the Raft protocol, multiple network roundtrips occur during data writing. What is the actual write delay?
 
@@ -688,7 +688,7 @@ This is because the disk space is not enough. You need to add nodes or enlarge t
 
 The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 40% of the system memory size by default. When the OOM error occurs frequently in TiKV, you should check whether the value of `block-cache-size` is set too high. In addition, when multiple TiKV instances are deployed on a single machine, you need to explicitly configure the parameter to prevent multiple instances from using too much system memory that results in the OOM error.
 
-#### Can both TiDB data and RawKV data be stored in the same TIKV cluster?
+#### Can both TiDB data and RawKV data be stored in the same TiKV cluster?
 
 No. TiDB (or data created from the transactional API) relies on a specific key format. It is not compatible with data created from RawKV API (or data from other RawKV-based services).
 
