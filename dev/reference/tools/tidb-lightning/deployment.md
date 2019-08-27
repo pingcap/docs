@@ -272,7 +272,7 @@ Download the TiDB Lightning package (choose the same version as that of the TiDB
 
 2. Mount the data source onto the same machine.
 
-3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning returns a configuration error and exits.
+3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits.
 
     ```toml
     ### tidb-lightning configuration
