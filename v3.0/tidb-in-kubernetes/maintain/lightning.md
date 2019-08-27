@@ -56,11 +56,11 @@ The tikv-importer can be enabled for an existing TiDB cluster or by creating a n
 
     * Local
 
-        Local mode requires the mydumper backup data to be on one of the Kubernetes node. This mode can be enabled by setting `dataSource.local.nodeName` to the node name and `dataSource.local.hostPath` to the mydumper backup data directory path which contains a file named `metadata`.
+        Local mode requires the Mydumper backup data to be on one of the Kubernetes node. This mode can be enabled by setting `dataSource.local.nodeName` to the node name and `dataSource.local.hostPath` to the Mydumper backup data directory path which contains a file named `metadata`.
 
     * Remote
 
-        Unlike local mode, remote mode needs to use [rclone](https://rclone.org) to download mydumper backup tarball file from a network storage to a PV. Any cloud storage supported by rclone should work, but currently only the following have been tested: [Google Cloud Storage (GCS)](https://cloud.google.com/storage/), [AWS S3](https://aws.amazon.com/s3/), [Ceph Object Storage](https://ceph.com/ceph-storage/object-storage/).
+        Unlike local mode, remote mode needs to use [rclone](https://rclone.org) to download Mydumper backup tarball file from a network storage to a PV. Any cloud storage supported by rclone should work, but currently only the following have been tested: [Google Cloud Storage (GCS)](https://cloud.google.com/storage/), [AWS S3](https://aws.amazon.com/s3/), [Ceph Object Storage](https://ceph.com/ceph-storage/object-storage/).
 
         1. Make sure that `dataSource.local.nodeName` and `dataSource.local.hostPath` are commented out.
 
