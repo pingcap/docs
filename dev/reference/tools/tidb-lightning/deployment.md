@@ -309,7 +309,7 @@ Download the TiDB Lightning package (choose the same version as that of the TiDB
     level = "info"
     file = "tidb-lightning.log"
     max-size = 128 # MB
-    max-days = 28 # Old logs are not deleted by default
+    max-days = 28 # Old logs are not deleted by default.
     max-backups = 14
 
     # Server mode
