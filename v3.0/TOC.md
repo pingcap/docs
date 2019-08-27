@@ -348,6 +348,7 @@
     - [Destroy a TiDB cluster](tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
     - [Maintain a Hosting Kubernetes Node](tidb-in-kubernetes/maintain/kubernetes-node.md)
     - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
+    - [Restore Data with TiDB Lightning](tidb-in-kubernetes/maintain/lightning.md)
     - [Collect Logs](tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
     - [TiDB Binlog](tidb-in-kubernetes/maintain/tidb-binlog.md)
