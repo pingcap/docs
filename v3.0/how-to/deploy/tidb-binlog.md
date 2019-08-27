@@ -14,6 +14,17 @@ This document describes two methods of deploying TiDB Binlog:
 
 It is recommended to deploy TiDB Binlog using TiDB Ansible. If you just want to do a simple testing, you can deploy TiDB Binlog using a Binary package.
 
+## Hardware requirements
+
+Pump and Drainer can be deployed and run on common 64-bit hardware server platforms with the Intel x86-64 architecture.
+
+The server hardware requirements for development, testing, and the production environment are as follows:
+
+| Service     | The Number of Servers       | CPU   | Disk          | Memory   |
+| -------- | -------- | --------| --------------- | ------ |
+| Pump | 3 | 8 core+    | SSD, 200 GB+ | 16G |
+| Drainer | 1 | 8 core+ | SAS, 100 GB+ (If the binlogs are output as local files, the disk size depends on how long these files are retained.) | 16G |
+
 ## Deploy TiDB Binlog using TiDB Ansible
 
 ### Step 1: Download TiDB Ansible

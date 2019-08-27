@@ -58,7 +58,10 @@
       - [Overview](how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](how-to/deploy/tidb-binlog.md)
+    + Deploy and Use TiDB Binlog
+      - [TiDB Binlog Cluster Deployment](how-to/deploy/tidb-binlog.md)
+      - [Binlog Slave Client User Guide](reference/tools/tidb-binlog/binlog-slave-client.md)
+      - [Reparo User Guide](reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](how-to/configure/time-zone.md)
     - [Memory Control](how-to/configure/memory-control.md)
