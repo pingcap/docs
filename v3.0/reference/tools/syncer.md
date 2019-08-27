@@ -507,7 +507,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 
 1. Log in to the Grafana Web interface.
 
-    - The default address is: http://localhost:3000
+    - The default address is: <http://localhost:3000>
     - The default account name: admin
     - The password for the default account: admin
 
