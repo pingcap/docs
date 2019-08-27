@@ -66,41 +66,41 @@ The tikv-importer can be enabled for an existing TiDB cluster or by creating a n
 
         2. Create a `Secret` containing the rclone configuration. A sample configuration is listed below. Only one cloud storage configuration is required. For other cloud storages, please refer to [rclone documentation](https://rclone.org/).
 
-        {{< copyable "" >}}
+            {{< copyable "" >}}
 
-        ```yaml
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: cloud-storage-secret
-        type: Opaque
-        stringData:
-          rclone.conf: |
-          [s3]
-          type = s3
-          provider = AWS
-          env_auth = false
-          access_key_id = <my-access-key>
-          secret_access_key = <my-secret-key>
-          region = us-east-1
+            ```yaml
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: cloud-storage-secret
+            type: Opaque
+            stringData:
+              rclone.conf: |
+              [s3]
+              type = s3
+              provider = AWS
+              env_auth = false
+              access_key_id = <my-access-key>
+              secret_access_key = <my-secret-key>
+              region = us-east-1
 
-          [ceph]
-          type = s3
-          provider = Ceph
-          env_auth = false
-          access_key_id = <my-access-key>
-          secret_access_key = <my-secret-key>
-          endpoint = <ceph-object-store-endpoint>
-          region = :default-placement
+              [ceph]
+              type = s3
+              provider = Ceph
+              env_auth = false
+              access_key_id = <my-access-key>
+              secret_access_key = <my-secret-key>
+              endpoint = <ceph-object-store-endpoint>
+              region = :default-placement
 
-          [gcs]
-          type = google cloud storage
-          # The service account must include Storage Object Viewer role
-          # The content can be retrieved by `cat <service-account-file.json> | jq -c .`
-          service_account_credentials = <service-account-json-file-content>
-        ```
+              [gcs]
+              type = google cloud storage
+              # The service account must include Storage Object Viewer role
+              # The content can be retrieved by `cat <service-account-file.json> | jq -c .`
+              service_account_credentials = <service-account-json-file-content>
+            ```
 
-        Fill in the placeholders with your configurations and save it as `secret.yaml`, and then create the secret via `kubectl apply -f secret.yaml -n <namespace>`.
+            Fill in the placeholders with your configurations and save it as `secret.yaml`, and then create the secret via `kubectl apply -f secret.yaml -n <namespace>`.
 
         3. Configure the `dataSource.remote.storageClassName` to an existing storage class in the Kubernetes cluster.
 
@@ -120,15 +120,15 @@ When TiDB Lightning fails to restore data, it cannot simply be restarted, but ma
 
 If the lightning fails to restore data, follow the steps below to do manual intervention:
 
-    1. Delete the lightning job by running `kubectl delete job -n <namespace> <tidb-lightning-release-name>-tidb-lightning`.
+1. Delete the lightning job by running `kubectl delete job -n <namespace> <tidb-lightning-release-name>-tidb-lightning`.
 
-    2. Create the lightning job again with `failFast` disabled by `helm template pingcap/tidb-lightning --name <tidb-lightning-release-name> --set failFast=false -f tidb-lightning-values.yaml | kubectl apply -n <namespace> -f -`.
+2. Create the lightning job again with `failFast` disabled by `helm template pingcap/tidb-lightning --name <tidb-lightning-release-name> --set failFast=false -f tidb-lightning-values.yaml | kubectl apply -n <namespace> -f -`.
 
-    3. When the lightning pod is running again, use `kubectl exec -it -n <namesapce> <tidb-lightning-pod-name> sh` to exec into the lightning container.
+3. When the lightning pod is running again, use `kubectl exec -it -n <namesapce> <tidb-lightning-pod-name> sh` to exec into the lightning container.
 
-    4. Get the startup script by running `cat /proc/1/cmdline`.
+4. Get the startup script by running `cat /proc/1/cmdline`.
 
-    5. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning.md#tidb-lightning-troubleshooting).
+5. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning.md#tidb-lightning-troubleshooting).
 
 ## Destroy TiDB Lighting
 
