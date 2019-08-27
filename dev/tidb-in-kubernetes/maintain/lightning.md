@@ -118,7 +118,7 @@ When TiDB Lightning fails to restore data, it cannot simply be restarted, but ma
 >
 > Currently, TiDB Lightning will [exit with non-zero error code even when data is successfully restored](https://github.com/pingcap/tidb-lightning/pull/230). This will trigger the job failure. Therefore, the success status needs to be determined by viewing tidb-lightning pod's log.
 
-If the lightning fails to restore data, follow the below steps to do manual intervention:
+If the lightning fails to restore data, follow the steps below to do manual intervention:
 
     1. Delete the lightning job by running `kubectl delete job -n <namespace> <tidb-lightning-release-name>-tidb-lightning`.
 
@@ -132,8 +132,8 @@ If the lightning fails to restore data, follow the below steps to do manual inte
 
 ## Destroy TiDB Lighting
 
-Currently, TiDB Lighting can only restore data offline. When the restore finishes and the TiDB cluster needs to provide service for applications, the TiDB Lightning should be deleted to save cost.
+Currently, TiDB Lighting can only restore data offline. When the restoration finishes and the TiDB cluster needs to provide service for applications, the TiDB Lightning should be deleted to save cost.
 
-* tikv-importer can be deleted by setting `importer.create` to `false` in `values.yaml` of TiDB cluster chart. And then run `helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml`.
+* tikv-importer can be deleted by setting `importer.create` to `false` in `values.yaml` of the TiDB cluster chart. And then run `helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml`.
 
-* tidb-lightning can be deleted by running `helm delete <tidb-lightning-release-name> --purge`
+* tidb-lightning can be deleted by running `helm delete <tidb-lightning-release-name> --purge`.
