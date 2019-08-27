@@ -334,12 +334,12 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         pd-urls = "http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379"
 
         # [security]
-        # This section is generally annotated if no special security settings are required.
-        # The file path containing a list of trusted SSL CAs connected to the cluster
+        # This section is generally commented out if no special security settings are required.
+        # The file path containing a list of trusted SSL CAs connected to the cluster.
         # ssl-ca = "/path/to/ca.pem"
-        # The path to the X509 certificate in PEM form that is connected to the cluster
+        # The path to the X509 certificate that is connected to the cluster in PEM format.
         # ssl-cert = "/path/to/drainer.pem"
-        # The path to the X509 key in PEM form that is connected to the cluster
+        # The path to the X509 key that is connected to the cluster in PEM format.
         # ssl-key = "/path/to/drainer-key.pem"
 
         # [storage]
@@ -350,7 +350,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # 42 MB -> 42000000, 42 mib -> 44040192
         # default: 10 gib
         # stop-write-at-available-space = "10 gib"
-        # The LSM DB settings embedded in Pump. Unless you know this part well, it is usually annotated.
+        # The LSM DB settings embedded in Pump. Unless you know this part well, it is usually commented out.
         # [storage.kv]
         # block-cache-capacity = 8388608
         # block-restart-interval = 16
@@ -387,7 +387,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -c int
             the number of the concurrency of the downstream for replication. The bigger the value, the better throughput performance of the concurrency (1 by default).
         -cache-binlog-count int
-            the limit on the number of binlogs in the cache (65536 by default)
+            the limit on the number of binlog items in the cache (65536 by default)
         -config string
             the directory of the configuration file. Drainer reads the configuration file first.
             If the corresponding configuration exists in the command line parameters, Drainer uses the configuration of the command line parameters to cover that of the configuration file.
@@ -419,12 +419,12 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -metrics-interval int
             the report frequency of the monitoring metrics (15 by default, in seconds)
         -node-id string
-            the unique ID of a Pump node. If you do not specify this ID, the system automatically generates an ID based on the host name and listening port.
+            the unique ID of a Drainer node. If you do not specify this ID, the system automatically generates an ID based on the host name and listening port.
         -pd-urls string
             the address of the PD cluster nodes (-pd-urls="http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379")
         -safe-mode
-            Whether to enable safe mode so that the downstream MySQL/TiDB can be repeatedly written
-            Replace the `INSERT` statement with the `REPLACE` statement and split the `UPDATE` statement into `DELETE` plus `REPLACE`.
+            Whether to enable safe mode so that data can be written into the downstream MySQL/TiDB repeatedly.
+            This mode replaces the `INSERT` statement with the `REPLACE` statement and splits the `UPDATE` statement into `DELETE` plus `REPLACE`.
         -txn-batch int
             the number of SQL statements of a transaction which are output to the downstream database (1 by default)
         ```
@@ -469,15 +469,15 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # If the downstream service is MySQL, set it to "False".
         disable-dispatch = false
 
-        # safe mode enables the downstream MySQL/TiDB to be written repeatedly.
-        # replace the `INSERT` statement with the `REPLACE` statement and replace the `UPDATE` statement with `DELETE` plus `REPLACE` statements.
+        # In safe mode, data can be written into the downstream MySQL/TiDB repeatedly.
+        # This mode replaces the `INSERT` statement with the `REPLACE` statement and replaces the `UPDATE` statement with `DELETE` plus `REPLACE` statements.
         safe-mode = false
 
         # the downstream service type of Drainer ("mysql" by default)
         # Valid value: "mysql", "kafka", "file", "flash"
         db-type = "mysql"
 
-        # the `commit ts` of the transaction. If it is in the list, the transaction is filtered and not replicated to the downstream.
+        # If `commit ts` of the transaction is in the list, the transaction is filtered and not replicated to the downstream.
         ignore-txn-commit-ts = []
 
         # the db filter list ("INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql,test" by default)
