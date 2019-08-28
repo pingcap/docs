@@ -208,7 +208,7 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 * Solution:
 
     * Check whether the TiKV process is normal, the network is isolated or the load is too high, and recover the service as much as possible.
-    * If the TiKV cannot be recovered, you can make it offline.
+    * If the TiKV instance cannot be recovered, you can make it offline.
 
 ### Critical-level alerts
 
@@ -228,7 +228,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
     * Find the cause of slow writes. It might be other services that overload the system. You can check whether PD itself occupies a large amount of CPU or I/O resources.
     * Try to restart PD or manually transfer leader to another PD to recover the service.
-    * Make offline and replace the PD with issues if it cannot be recovered due to environmental factors.
+    * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
 
 #### `PD_miss_peer_region_count`
 
@@ -238,11 +238,11 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Description:
 
-    The number of Region replicas is smaller than the value of `max-replicas`. When TiKV is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. When a TiKV node is made offline, it might result in a small number of Regions with missing replicas.
+    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. When a TiKV node is made offline, it might result in a small number of Regions with missing replicas.
 
 * Solution:
 
-    * Find the cause of the issue by checking whether there is any TiKV that is down or being made offline.
+    * Find the cause of the issue by checking whether there is any TiKV machine that is down or being made offline.
     * Watch the Region health panel and see whether `miss_peer_region_count` is continuously decreasing.
 
 ### Warning-level alerts
@@ -261,10 +261,10 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Solution:
 
-    * Check whether the TiKV is being restarted.
+    * Check whether the TiKV instance is being restarted.
     * Check whether the TiKV process is normal, the network is isolated, and the load is too high, and recover the service as much as possible.
-    * If you confirm that the TiKV cannot be recovered, you can make it offline.
-    * If you confirm that the TiKV can be recovered, but not in the short term, you can consider increasing the value of `max-down-time`. It will prevent the TiKV from being considered as irrecoverable and the data from being removed from the TiKV.
+    * If you confirm that the TiKV instance cannot be recovered, you can make it offline.
+    * If you confirm that the TiKV instance can be recovered, but not in the short term, you can consider increasing the value of `max-down-time`. It will prevent the TiKV instance from being considered as irrecoverable and the data from being removed from the TiKV.
 
 #### `PD_cluster_low_space`
 
@@ -279,7 +279,7 @@ Warning-level alerts are a reminder for an issue or error.
 * Solution:
 
     * Check whether the space in the cluster is generally insufficient. If so, increase its capacity.
-    * Check whether there is any issue with Region balance scheduling, which leads to unevenly distributed data.
+    * Check whether there is any issue with Region balance scheduling. If so, it will lead to uneven data distribution.
     * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, core dump, etc.
     * Lower the Region weight of the node to reduce the data volume.
     * When it is not possible to release the space, consider proactively making the node offline. This prevents insufficient disk space that leads to downtime.
@@ -297,7 +297,7 @@ Warning-level alerts are a reminder for an issue or error.
 * Solution:
 
     * Check the network and system load status.
-    * Make offline and replace the PD with issues if it cannot be recovered due to environmental factors.
+    * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
 
 #### `PD_tidb_handle_requests_duration`
 
@@ -314,7 +314,7 @@ Warning-level alerts are a reminder for an issue or error.
     * Check the load status of the server.
     * Use pprof to analyze the CPU profile of PD.
     * Manually switch the PD leader.
-    * Make offline and replace the PD with issues if it cannot be recovered due to environmental issues.
+    * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
 
 #### `PD_down_peer_region_nums`
 
@@ -361,7 +361,7 @@ Warning-level alerts are a reminder for an issue or error.
 
     * Exclude the human factors, such as restarting PD, manually transferring leader, adjusting leader priority, etc.
     * Check the network and system load status.
-    * Make offline and replace the PD with issues if it cannot be recovered due to environmental factors.
+    * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
 
 #### `TiKV_space_used_more_than_80%`
 
@@ -505,7 +505,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Description:
 
-    If this value is relatively large, it means Follower has lagged far behind Leader, and Raft cannot be replicated normally. It is possibly because the TiKV where Follower is located is stuck or down.
+    If this value is relatively large, it means Follower has lagged far behind Leader, and Raft cannot be replicated normally. It is possibly because the TiKV machine where Follower is located is stuck or down.
 
 #### `TiKV_async_request_snapshot_duration_seconds`
 
@@ -763,7 +763,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Description:
 
-    The Coprocessor CPU usage of a TiKV exceeds 90%.
+    The Coprocessor CPU usage of a TiKV machine exceeds 90%.
 
 #### `TiKV_pending_task`
 
