@@ -10,7 +10,7 @@ category: reference
 
 This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter.
 
-According to the severity level, alert rules can be divided into three categories (from high to low): emergency-level, critical-level and warning-level.
+According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level and warning-level.
 
 ## TiDB alert rules
 
@@ -89,7 +89,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Description:
 
-    The number of the panicked TiDB threads. When a panic occurs, an alert is triggered. The thread is often recovered, otherwise, TiDB will frequently restart.
+    The number of panicked TiDB threads. When a panic occurs, an alert is triggered. The thread is often recovered, otherwise, TiDB will frequently restart.
 
 * Solution:
 
@@ -107,7 +107,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Description:
 
-    The monitoring on the TiDB memory usage. if the usage exceeds 10 G, an alert is triggered.
+    The monitoring on the TiDB memory usage. If the usage exceeds 10 G, an alert is triggered.
 
 * Solution:
 
@@ -121,11 +121,11 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Description:
 
-    The latency of handling a request in TiDB. if the 99th percentile latency exceeds 1 second, an alert is triggered.
+    The latency of handling a request in TiDB. If the 99th percentile latency exceeds 1 second, an alert is triggered.
 
 * Solution:
 
-    View the TiDB logs and search for the `SLOW_QUERY` and `TIME_COP_PROCESS` keywords to locate the slow SQL queries.
+    View TiDB logs and search for the `SLOW_QUERY` and `TIME_COP_PROCESS` keywords to locate the slow SQL queries.
 
 #### `TiDB_server_event_error`
 
@@ -138,7 +138,7 @@ Warning-level alerts are a reminder for an issue or error.
     The number of events that happen in the TiDB service. An alert is triggered when the following events happen:
 
     1. start: The TiDB service starts.
-    2. hang: When a critical-level event (currently there’s only one scenario: TiDB cannot write binlog) happens, TiDB enters the `hang` mode and waits to be killed manually.
+    2. hang: When a critical-level event (currently there is only one scenario: TiDB cannot write binlog) happens, TiDB enters the `hang` mode and waits to be killed manually.
 
 * Solution:
 
@@ -222,11 +222,11 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Description:
 
-    etcd writes data to disk with a slower speed than normal. It might lead to PD leader timeout or failure to store TSO on disk in time, which will shut down the service of the entire cluster.
+    etcd writes data to disk at a lower speed than normal. It might lead to PD leader timeout or failure to store TSO on disk in time, which will shut down the service of the entire cluster.
 
 * Solution:
 
-    * Find the cause of slow writes. It might be other services that overload the system. You can check whether PD itself occupies a large amount of CPU or IO resources.
+    * Find the cause of slow writes. It might be other services that overload the system. You can check whether PD itself occupies a large amount of CPU or I/O resources.
     * Try to restart PD or manually transfer leader to another PD to recover the service.
     * Make offline and replace the PD with issues if it cannot be recovered due to environmental factors.
 
@@ -238,12 +238,12 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Description:
 
-    The number of Region replicas is smaller than the value of `max-replicas`. When the TiKV is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. When a TiKV node is made offline, it might result in a small number of Regions with missing replicas.
+    The number of Region replicas is smaller than the value of `max-replicas`. When TiKV is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. When a TiKV node is made offline, it might result in a small number of Regions with missing replicas.
 
 * Solution:
 
     * Find the cause of the issue by checking whether there is any TiKV that is down or being made offline.
-    * Watch the region health panel and see whether `miss_peer_region_count` is continuously decreasing.
+    * Watch the Region health panel and see whether `miss_peer_region_count` is continuously decreasing.
 
 ### Warning-level alerts
 
@@ -278,11 +278,11 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Solution:
 
-    * Check whether there is no sufficient space in the cluster in general. If so, you need to increase its capacity.
+    * Check whether the space in the cluster is generally insufficient. If so, increase its capacity.
     * Check whether there is any issue with Region balance scheduling, which leads to unevenly distributed data.
     * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, core dump, etc.
     * Lower the Region weight of the node to reduce the data volume.
-    * When it is not possible to release the space, you can consider proactively making the node offline. This prevents insufficient disk space that leads to downtime.
+    * When it is not possible to release the space, consider proactively making the node offline. This prevents insufficient disk space that leads to downtime.
 
 #### `PD_etcd_network_peer_latency`
 
@@ -329,8 +329,8 @@ Warning-level alerts are a reminder for an issue or error.
 * Solution:
 
     * Check whether there is any TiKV that is down, or that was just restarted, or that is busy.
-    * Watch the region health panel and see whether `down_peer_region_count` is continuously decreasing.
-    * Check the network between the TiKV servers.
+    * Watch the Region health panel and see whether `down_peer_region_count` is continuously decreasing.
+    * Check the network between TiKV servers.
 
 #### `PD_pending_peer_region_count`
 
@@ -344,8 +344,8 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Solution:
 
-    * Watch the region health panel and see whether `pending_peer_region_count` is continuously decreasing.
-    * Check the network between the TiKV servers, especially whether there is enough bandwidth.
+    * Watch the Region health panel and see whether `pending_peer_region_count` is continuously decreasing.
+    * Check the network between TiKV servers, especially whether there is enough bandwidth.
 
 #### `PD_leader_change`
 
@@ -423,11 +423,11 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 * Description:
 
-    Currently, there are no TiKV monitoring items that are about memory. You can monitor the memory usage of the machines in the cluster by node_exporter. The above rule indicates that when the memory usage exceeds 5 GB within 5 minutes (the memory is occupied too fast in TiKV), an alert is triggered.
+    Currently, there are no TiKV monitoring items about memory. You can monitor the memory usage of the machines in the cluster by node_exporter. The above rule indicates that when the memory usage exceeds 5 GB within 5 minutes (the memory is occupied too fast in TiKV), an alert is triggered.
 
 * Solution:
 
-    Adjust the `block-cache-size` of `rockdb.defaultcf` and `rocksdb.writecf`.
+    Adjust the `block-cache-size` value of both `rockdb.defaultcf` and `rocksdb.writecf`.
 
 #### `TiKV_GC_can_not_work`
 
@@ -443,7 +443,7 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
     1. Perform `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME = "tikv_gc_leader_desc"` to locate the `tidb-server` corresponding to the GC leader;
     2. View the log of the `tidb-server`, and grep gc_worker tidb.log;
-    3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is “start delete {number} ranges”) during this time, it means the GC process is running normally. Otherwise, contact `support@pingcap.com` to resolve this issue.
+    3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is “start delete {number} ranges”) during this time, it means the GC process is running normally. Otherwise, contact [support@pingcap.com](mailto:support@pingcap.com) to resolve this issue.
 
 ### Critical-level alerts
 
@@ -478,7 +478,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 * Solution:
 
     1. Watch the Raft Propose monitor, and see whether the alerted TiKV node has a much higher raft propose than other TiKV nodes. If so, it means that there are one or more hot spots on this TiKV. You need to check whether the hot spot scheduling can work properly.
-    2. Watch the Raft IO monitor, and see whether the latency increases. If the latency is high, it means there might be a bottleneck in the disk. One feasible but unsafe solution is setting `sync-log` to `false`.
+    2. Watch the Raft I/O monitor, and see whether the latency increases. If the latency is high, it means a bottleneck might exist in the disk. One feasible but unsafe solution is setting `sync-log` to `false`.
     3. Watch the Raft Process monitor, and see whether the tick duration is high. If so, you need to add `raft-base-tick-interval = "2s"` under the `[raftstore]` configuration.
 
 #### `TiKV_write_stall`
@@ -574,7 +574,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Description:
 
-    Indicates the time cost of appending Raft log. If it is high, it usually means IO is too busy.
+    Indicates the time cost of appending Raft log. If it is high, it usually means I/O is too busy.
 
 #### `TiKV_raft_apply_log_duration_secs`
 
@@ -584,7 +584,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Description:
 
-    Indicates the time cost of applying Raft log. If it is high, it usually means IO is too busy.
+    Indicates the time cost of applying Raft log. If it is high, it usually means I/O is too busy.
 
 #### `TiKV_scheduler_latch_wait_duration_seconds`
 
@@ -841,7 +841,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
     * Check whether it is too slow to replicate data in the downstream based on Drainer `event` and Drainer `execute latency`.
         * If Drainer `execute time` is too large, check the network bandwidth and latency between the machine with Drainer deployed and the machine with the target database deployed, and the state of the target database.
         * If Drainer `execute time` is not too large and Drainer `event` is too small, add `work count` and `batch` and retry.
-    * If the two solutions above cannot work, contact `support@pingcap.com`.
+    * If the two solutions above cannot work, contact [support@pingcap.com](mailto:support@pingcap.com).
 
 ### Warning-level alerts
 
@@ -860,7 +860,7 @@ Warning-level alerts are a reminder for an issue or error.
 * Solution:
 
     * Verify the disk performance pressure and check the disk performance monitoring via `node exported`.
-    * If both `disk latency` and `util` are low, contact `support@pingcap.com`.
+    * If both `disk latency` and `util` are low, contact [support@pingcap.com](mailto:support@pingcap.com).
 
 #### `binlog_pump_storage_write_binlog_duration_time_bucket`
 
@@ -1054,7 +1054,7 @@ Warning-level alerts are a reminder for an issue or error.
 
     * Check the disk status by viewing the Grafana Disk Performance dashboard.
     * Check the read latency of the disk by viewing the Disk Latency panel.
-    * Check the IO usage by viewing the Disk IO Utilization panel.
+    * Check the I/O usage by viewing the Disk I/O Utilization panel.
 
 #### `NODE_disk_write_latency_more_than_16ms`
 
@@ -1070,7 +1070,7 @@ Warning-level alerts are a reminder for an issue or error.
 
     * Check the disk status by viewing the Grafana Disk Performance dashboard.
     * Check the write latency of the disk by viewing the Disk Latency panel.
-    * Check the IO usage by viewing the Disk IO Utilization panel.
+    * Check the I/O usage by viewing the Disk I/O Utilization panel.
 
 ## Blackbox_exporter TCP, ICMP, and HTTP alert rules
 
