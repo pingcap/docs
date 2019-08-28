@@ -69,7 +69,7 @@ Refer to [Use Helm](/tidb-in-kubernetes/reference/tools/in-kubernetes.md#use-hel
 
 ### Prepare local volumes
 
-Refer to [Local PV Configuration](/tidb-in-kubernetes/reference/configuration/storage-class.md) to set up local persistent volumes in your Kubernetes cluster.
+Refer to [Local PV Configuration](/tidb-in-kubernetes/reference/configuration/local-pv.md) to set up local persistent volumes in your Kubernetes cluster.
 
 ### Deploy local-static-provisioner
 
