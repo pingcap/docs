@@ -12,20 +12,22 @@ To help users identify slow queries, analyze and improve the performance of SQL 
 ## Usage example
 
 ```sql
-# Time: 2019-04-25-15:06:54.247985 +0800
-# Txn_start_ts: 407942204372287489
+# Time: 2019-08-14T09:26:59.487776265+08:00
+# Txn_start_ts: 410450924122144769
 # User: root@127.0.0.1
-# Conn_ID: 2
-# Query_time: 2.6649544670000003
-# Process_time: 0.066 Wait_time: 0.014 Request_count: 8 Total_keys: 20008 Process_keys: 20000
+# Conn_ID: 3086
+# Query_time: 1.527627037
+# Process_time: 0.07 Request_count: 1 Total_keys: 131073 Process_keys: 131072 Prewrite_time: 0.335415029 Commit_time: 0.032175429 Get_commit_ts_time: 0.000177098 Local_latch_wait_time: 0.106869448 Write_keys: 131072 Write_size: 3538944 Prewrite_region: 1
 # DB: test
 # Is_internal: false
-# Digest: edb16a8f28d9c48790925fd1c868fdae3feb49bc58481dda7df228625a5ba6e1
-# Stats: t_slim:407941901863354370,t_wide:407941920305971202
-# Cop_proc_avg: 0.00825 Cop_proc_p90: 0.013 Cop_proc_max: 0.013 Cop_proc_addr: 127.0.0.1:22160
-# Cop_wait_avg: 0.00175 Cop_wait_p90: 0.002 Cop_wait_max: 0.002 Cop_wait_addr: 127.0.0.1:22160
-# Mem_max: 195802
-select count(1) from t_slim, t_wide where t_slim.c0>t_wide.c0 and t_slim.c1>t_wide.c1 and t_wide.c0 > 5000;
+# Digest: 50a2e32d2abbd6c1764b1b7f2058d428ef2712b029282b776beb9506a365c0f1
+# Stats: t:pseudo
+# Num_cop_tasks: 1
+# Cop_proc_avg: 0.07 Cop_proc_p90: 0.07 Cop_proc_max: 0.07 Cop_proc_addr: 172.16.5.87:20171
+# Cop_wait_avg: 0 Cop_wait_p90: 0 Cop_wait_max: 0 Cop_wait_addr: 172.16.5.87:20171
+# Mem_max: 525211
+# Succ: false
+insert into t select * from t;
 ```
 
 ## Fields description
@@ -39,10 +41,10 @@ Slow Query Basics:
 * `Time`: The print time of log.
 * `Query_time`: The execution time of a statement.
 * `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
-* `Digest`: The fingerprint of the SQL statement.
-* `Txn_start_ts`: The start timestamp and the unique ID of the transaction. You can use this value to search for the transaction-related logs.
-* `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB and `false` indicates that the SQL statement is executed by the user.
-* `Index_ids`: The IDs of the indexes involved in the statement.
+* `Digest`: The fingerprint of a SQL statement.
+* `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
+* `Is_internal`: Whether a SQL statement is TiDB internal. `true` indicates that a SQL statement is executed internally in TiDB and `false` indicates that a SQL statement is executed by the user.
+* `Index_ids`: The IDs of the indexes involved in a statement.
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 
@@ -53,12 +55,12 @@ Memory usage fields:
 User fields:
 
 * `User`: The name of the user who executes a statement.
-* `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to `grep` the log whose session ID is 3.
+* `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to search for the log whose session ID is 3.
 * `DB`: The current database.
 
 TiKV Coprocessor Task fields:
 
-* `Request_count`: The number of Coprocessor requests that this statement sends.
+* `Request_count`: The number of Coprocessor requests that a statement sends.
 * `Total_keys`: The number of keys that Coprocessor has scanned.
 * `Process_time`: The total processing time of a SQL statement in TiKV. Because data is sent to TiKV concurrently, this value might exceed `Query_time`.
 * `Wait_time`: The total waiting time of a statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests increases.
@@ -109,7 +111,7 @@ Usage example
 
 ### Query the Top-N slow queries of the `test` user
 
-In the following example, we query the slow queries executed by the `test` user, and sort the first two in reverse order of execution time.
+In the following example, the slow queries executed by the `test` user are queried, and the first two results are displayed in reverse order of execution time.
 
 ```sql
 select query_time, query, user
@@ -138,44 +140,44 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
 
     {{< copyable "sql" >}}
 
-```sql
-select query_time, query, digest
-from information_schema.slow_query
-where is_internal = false
-order by query_time desc
-limit 1;
-```
+    ```sql
+    select query_time, query, digest
+    from information_schema.slow_query
+    where is_internal = false
+    order by query_time desc
+    limit 1;
+    ```
 
-Usage example
+    Usage example
 
-```
-+-------------+-----------------------------+------------------------------------------------------------------+
-| query_time  | query                       | digest                                                           |
-+-------------+-----------------------------+------------------------------------------------------------------+
-| 0.302558006 | select * from t1 where a=1; | 4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa |
-+-------------+-----------------------------+------------------------------------------------------------------+
-```
+    ```
+    +-------------+-----------------------------+------------------------------------------------------------------+
+    | query_time  | query                       | digest                                                           |
+    +-------------+-----------------------------+------------------------------------------------------------------+
+    | 0.302558006 | select * from t1 where a=1; | 4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa |
+    +-------------+-----------------------------+------------------------------------------------------------------+
+    ```
 
 2. Query similar slow queries with the fingerprints.
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-select query, query_time
-from information_schema.slow_query
-where digest = "4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa";
-```
+    ```sql
+    select query, query_time
+    from information_schema.slow_query
+    where digest = "4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa";
+    ```
 
-Usage example
+    Usage example
 
-```
-+-----------------------------+-------------+
-| query                       | query_time  |
-+-----------------------------+-------------+
-| select * from t1 where a=1; | 0.302558006 |
-| select * from t1 where a=2; | 0.401313532 |
-+-----------------------------+-------------+
-```
+    ```
+    +-----------------------------+-------------+
+    | query                       | query_time  |
+    +-----------------------------+-------------+
+    | select * from t1 where a=1; | 0.302558006 |
+    | select * from t1 where a=2; | 0.401313532 |
+    +-----------------------------+-------------+
+    ```
 
 ## Query slow queries with pseudo `stats`
 
@@ -256,7 +258,7 @@ Usage example
 
 ## Identify problematic SQL statements
 
-Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large will increase the pressure on the entire cluster.
+Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large increases the pressure on the entire cluster.
 
 The statements whose `wait_time` is very large and `process_time` is very small are usually not problematic. The large `wait_time` is because the statement is blocked by real problematic statements and it has to wait in the execution queue, which leads to a much longer response time.
 
