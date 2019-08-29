@@ -2,6 +2,7 @@
 title: Deploy TiDB Operator in Kubernetes
 summary: Learn how to deploy TiDB Operator in Kubernetes.
 category: how-to
+aliases: ['/docs/v3.0/how-to/deploy/tidb-in-kubernetes/tidb-operator/']
 ---
 
 # Deploy TiDB Operator in Kubernetes
@@ -64,7 +65,7 @@ Because TiDB uses many file descriptors by default, the worker node and its Dock
 
 Refer to [Use Helm](/tidb-in-kubernetes/reference/tools/in-kubernetes.md#use-helm) to install Helm and configre it with the official PingCAP chart Repo.
 
-## Configure Local Persistent Volume
+## Configure local persistent volume
 
 ### Prepare local volumes
 

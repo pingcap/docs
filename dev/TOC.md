@@ -97,6 +97,51 @@
     - [Troubleshoot TiDB Data Migration](how-to/troubleshoot/data-migration.md)
     - [Troubleshoot TiDB Lightning](how-to/troubleshoot/tidb-lightning.md)
 + Reference
+  + Tools
+    - [Mydumper](reference/tools/mydumper.md)
+    - [Syncer](reference/tools/syncer.md)
+    - [Loader](reference/tools/loader.md)
+    + TiDB Data Migration
+      - [Overview](reference/tools/data-migration/overview.md)
+      - [Restrictions](reference/tools/data-migration/overview.md#usage-restrictions)
+      + Features
+        - [Table Routing](reference/tools/data-migration/features/overview.md#table-routing)
+        - [Black and White Lists](reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
+        - [Binlog Event Filter](reference/tools/data-migration/features/overview.md#binlog-event-filter)
+        - [Column Mapping](reference/tools/data-migration/features/overview.md#column-mapping)
+        - [Replication Delay Monitoring](reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
+        + Sharding Support
+          - [Introduction](reference/tools/data-migration/features/shard-merge.md)
+          - [Restrictions](reference/tools/data-migration/features/shard-merge.md#restrictions)
+          - [Handle Sharding DDL Locks Manually](reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md)
+      + Usage Scenarios
+        - [Simple Scenario](reference/tools/data-migration/usage-scenarios/simple-replication.md)
+        - [Shard Merge Scenario](reference/tools/data-migration/usage-scenarios/shard-merge.md)
+      - [Deploy](reference/tools/data-migration/deploy.md)
+      + Configure
+        - [Overview](reference/tools/data-migration/configure/overview.md)
+        - [Task Configuration](reference/tools/data-migration/configure/task-configuration-file.md)
+      - [Monitor](reference/tools/data-migration/monitor.md)
+      - [Manage the Task](reference/tools/data-migration/manage-tasks.md)
+      - [Cluster Operations](reference/tools/data-migration/cluster-operations.md)
+      + Migrate from MySQL compatible database
+        - [Migrate from Aurora](how-to/migrate/from-aurora.md)
+      - [Troubleshoot](how-to/troubleshoot/data-migration.md)
+      - [FAQ](faq/data-migration.md)
+    + TiDB Lightning
+      - [Overview](reference/tools/tidb-lightning/overview.md)
+      - [Deployment](reference/tools/tidb-lightning/deployment.md)
+      - [Checkpoints](reference/tools/tidb-lightning/checkpoints.md)
+      - [Table Filter](reference/tools/tidb-lightning/table-filter.md)
+      - [CSV Support](reference/tools/tidb-lightning/csv.md)
+      - [Monitor](reference/tools/tidb-lightning/monitor.md)
+      - [Troubleshoot](how-to/troubleshoot/tidb-lightning.md)
+      - [FAQ](faq/tidb-lightning.md)
+    - [PD Control](reference/tools/pd-control.md)
+    - [PD Recover](reference/tools/pd-recover.md)
+    - [TiKV Control](reference/tools/tikv-control.md)
+    - [TiDB Control](reference/tools/tidb-control.md)
+    - [Download](reference/tools/download.md)
   - [MySQL Compatibility](reference/mysql-compatibility.md)
   + SQL
     + SQL Language Structure
@@ -196,6 +241,7 @@
       - [`LOAD DATA`](reference/sql/statements/load-data.md)
       - [`MODIFY COLUMN`](reference/sql/statements/modify-column.md)
       - [`PREPARE`](reference/sql/statements/prepare.md)
+      - [`RECOVER TABLE`](reference/sql/statements/recover-table.md)
       - [`RENAME INDEX`](reference/sql/statements/rename-index.md)
       - [`RENAME TABLE`](reference/sql/statements/rename-table.md)
       - [`REPLACE`](reference/sql/statements/replace.md)
@@ -247,6 +293,11 @@
       - [Configuration Flags](reference/configuration/pd-server/configuration.md)
     + tikv-server
       - [Configuration Flags](reference/configuration/tikv-server/configuration.md)
+  + Key Monitoring Metrics
+    - [Overview](reference/key-monitoring-metrics/overview-dashboard.md)
+    - [TiDB](reference/key-monitoring-metrics/tidb-dashboard.md)
+    - [PD](reference/key-monitoring-metrics/pd-dashboard.md)
+    - [TiKV](reference/key-monitoring-metrics/tikv-dashboard.md)
   + Security
     - [Security Compatibility with MySQL](reference/security/compatibility.md)
     - [The TiDB Access Privilege System](reference/security/privilege-system.md)
@@ -276,56 +327,6 @@
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](reference/tispark.md)
   - [TiDB Binlog Cluster Overview](reference/tidb-binlog-overview.md)
-  + Tools
-    - [Mydumper](reference/tools/mydumper.md)
-    - [Syncer](reference/tools/syncer.md)
-    - [Loader](reference/tools/loader.md)
-    + TiDB Data Migration
-      - [Overview](reference/tools/data-migration/overview.md)
-      - [Restrictions](reference/tools/data-migration/overview.md#usage-restrictions)
-      + Features
-        - [Table Routing](reference/tools/data-migration/features/overview.md#table-routing)
-        - [Black and White Lists](reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
-        - [Binlog Event Filter](reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](reference/tools/data-migration/features/overview.md#column-mapping)
-        - [Replication Delay Monitoring](reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
-        + Sharding Support
-          - [Introduction](reference/tools/data-migration/features/shard-merge.md)
-          - [Restrictions](reference/tools/data-migration/features/shard-merge.md#restrictions)
-          - [Handle Sharding DDL Locks Manually](reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md)
-      + Usage Scenarios
-        - [Simple Scenario](reference/tools/data-migration/usage-scenarios/simple-replication.md)
-        - [Shard Merge Scenario](reference/tools/data-migration/usage-scenarios/shard-merge.md)
-      - [Deploy](reference/tools/data-migration/deploy.md)
-      + Configure
-        - [Overview](reference/tools/data-migration/configure/overview.md)
-        - [Task Configuration](reference/tools/data-migration/configure/task-configuration-file.md)
-      - [Monitor](reference/tools/data-migration/monitor.md)
-      - [Manage the Task](reference/tools/data-migration/manage-tasks.md)
-      - [Cluster Operations](reference/tools/data-migration/cluster-operations.md)
-      + Migrate from MySQL compatible database
-        - [Migrate from Aurora](how-to/migrate/from-aurora.md)
-      - [Troubleshoot](how-to/troubleshoot/data-migration.md)
-      - [FAQ](faq/data-migration.md)
-    + TiDB Lightning
-      - [Overview](reference/tools/tidb-lightning/overview.md)
-      - [Deployment](reference/tools/tidb-lightning/deployment.md)
-      - [Checkpoints](reference/tools/tidb-lightning/checkpoints.md)
-      - [Table Filter](reference/tools/tidb-lightning/table-filter.md)
-      - [CSV Support](reference/tools/tidb-lightning/csv.md)
-      - [Monitor](reference/tools/tidb-lightning/monitor.md)
-      - [Troubleshoot](how-to/troubleshoot/tidb-lightning.md)
-      - [FAQ](faq/tidb-lightning.md)
-    - [PD Control](reference/tools/pd-control.md)
-    - [PD Recover](reference/tools/pd-recover.md)
-    - [TiKV Control](reference/tools/tikv-control.md)
-    - [TiDB Control](reference/tools/tidb-control.md)
-    - [Download](reference/tools/download.md)
-  + Key Monitoring Metrics
-    - [Overview](reference/key-monitoring-metrics/overview-dashboard.md)
-    - [TiDB](reference/key-monitoring-metrics/tidb-dashboard.md)
-    - [PD](reference/key-monitoring-metrics/pd-dashboard.md)
-    - [TiKV](reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Adopters](adopters.md)
 + TiDB in Kubernetes
   - [About TiDB Operator](tidb-in-kubernetes/tidb-operator-overview.md)
@@ -350,6 +351,7 @@
     - [Backup and Restore](tidb-in-kubernetes/maintain/backup-and-restore.md)
     - [Collect Logs](tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](tidb-in-kubernetes/maintain/auto-failover.md)
+    - [TiDB Binlog](tidb-in-kubernetes/maintain/tidb-binlog.md)
   - [Scale](tidb-in-kubernetes/scale-in-kubernetes.md)
   + Upgrade
     - [TiDB Cluster](tidb-in-kubernetes/upgrade/tidb-cluster.md)
@@ -359,6 +361,7 @@
       - [TiDB Cluster](tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
       - [Backup](tidb-in-kubernetes/reference/configuration/backup.md)
       - [Local PV](tidb-in-kubernetes/reference/configuration/local-pv.md)
+      - [TiDB Drainer](tidb-in-kubernetes/reference/configuration/tidb-drainer.md)
     + Tools
       - [tkctl](tidb-in-kubernetes/reference/tools/tkctl.md)
       - [Tools in Kubernetes](tidb-in-kubernetes/reference/tools/in-kubernetes.md)
