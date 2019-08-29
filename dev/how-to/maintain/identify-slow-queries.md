@@ -7,7 +7,7 @@ aliases: ['/docs/sql/slow-query/']
 
 # Identify Slow Queries
 
-To help users identify slow queries, analyze and improve performance of SQL execution, TiDB outputs statements whose execution time exceeds [slow-threshold](/reference/configuration/tidb-server/configuration-file.md#slow-threshold) (The default value is 300 milliseconds) to [slow-query-file](/reference/configuration/tidb-server/configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
+To help users identify slow queries, analyze and improve the performance of SQL execution, TiDB outputs the statements whose execution time exceeds [slow-threshold](/reference/configuration/tidb-server/configuration-file.md#slow-threshold) (The default value is 300 milliseconds) to [slow-query-file](/reference/configuration/tidb-server/configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
 
 ## Usage example
 
@@ -37,22 +37,22 @@ select count(1) from t_slim, t_wide where t_slim.c0>t_wide.c0 and t_slim.c1>t_wi
 Slow Query Basics:
 
 * `Time`: The print time of log.
-* `Query_time`: Indicates the execution time of this statement.
+* `Query_time`: The execution time of a statement.
 * `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
 * `Digest`: The fingerprint of the SQL statement.
 * `Txn_start_ts`: The start timestamp and the unique ID of the transaction. You can use this value to search for the transaction-related logs.
-* `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB, while `false` indicates that the SQL statement is executed by the user.
+* `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB and `false` indicates that the SQL statement is executed by the user.
 * `Index_ids`: The IDs of the indexes involved in the statement.
-* `Succ`: Whether the statement executes successfully.
-* `Backoff_time`: The waiting time before retry when this statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
+* `Succ`: Whether a statement is executed successfully.
+* `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 
 Memory usage fields:
 
-* `Memory_max`: The maximum memory space used during the execution period of this SQL statement (the unit is byte).
+* `Memory_max`: The maximum memory space used during the execution period of a SQL statement (the unit is byte).
 
 User fields:
 
-* `User`: The name of the user who executes this statement.
+* `User`: The name of the user who executes a statement.
 * `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to `grep` the log whose session ID is 3.
 * `DB`: The current database.
 
@@ -60,8 +60,8 @@ TiKV Coprocessor Task fields:
 
 * `Request_count`: The number of Coprocessor requests that this statement sends.
 * `Total_keys`: The number of keys that Coprocessor has scanned.
-* `Process_time`: The total processing time of this SQL statement in TiKV. Because the data is sent to TiKV concurrently, this value may exceed `Query_time`.
-* `Wait_time`: The total waiting time of this statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests will increase.
+* `Process_time`: The total processing time of a SQL statement in TiKV. Because data is sent to TiKV concurrently, this value might exceed `Query_time`.
+* `Wait_time`: The total waiting time of a statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests increases.
 * `Process_keys`: The number of keys that Coprocessor has processed. Compared with `total_keys`, `processed_keys` does not include the old versions of MVCC. A great difference between `processed_keys` and `total_keys` indicates that many old versions exist.
 * `Cop_proc_avg`: The average execution time of cop-tasks.
 * `Cop_proc_p90`: The P90 execution time of cop-tasks.
@@ -132,11 +132,11 @@ Usage example
 
 ### Query similar slow queries with the same SQL fingerprints
 
-After querying the Top-N SQL statements, you can continue to query similar slow queries using the same fingerprints.
+After querying the Top-N SQL statements, continue to query similar slow queries using the same fingerprints.
 
-Step 1: Acquire Top-N slow queries and the corresponding SQL fingerprints.
+1. Acquire Top-N slow queries and the corresponding SQL fingerprints.
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
 ```sql
 select query_time, query, digest
@@ -156,7 +156,7 @@ Usage example
 +-------------+-----------------------------+------------------------------------------------------------------+
 ```
 
-Step 2: Query similar slow queries with the fingerprints.
+2. Query similar slow queries with the fingerprints.
 
 {{< copyable "sql" >}}
 
@@ -214,11 +214,11 @@ set tidb_slow_query_file = "/path-to-log/tidb-slow.log"
 
 ### Parse TiDB slow logs with `pt-query-digest`
 
-You can use `pt-query-digest` to parse TiDB slow logs.
+Use `pt-query-digest` to parse TiDB slow logs.
 
 > **Note:**
 >
-> It is recommended to use `pt-query-digest` 3.0.13 and above.
+> It is recommended to use `pt-query-digest` 3.0.13 or later version.
 
 For example:
 
