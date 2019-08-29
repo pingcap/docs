@@ -40,7 +40,7 @@ Slow Query Basics:
 * `Query_time`: Indicates the execution time of this statement.
 * `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
 * `Digest`: The fingerprint of the SQL statement.
-* `Txn_start_ts`: The start timestamp and the unique ID of the transaction. You can use this value to `grep` the transaction-related logs.
+* `Txn_start_ts`: The start timestamp and the unique ID of the transaction. You can use this value to search for the transaction-related logs.
 * `Is_internal`: Whether the SQL statement is TiDB internal. `true` indicates that the SQL statement is executed internally in TiDB, while `false` indicates that the SQL statement is executed by the user.
 * `Index_ids`: The IDs of the indexes involved in the statement.
 * `Succ`: Whether the statement executes successfully.
