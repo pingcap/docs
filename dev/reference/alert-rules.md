@@ -324,7 +324,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Description:
 
-    The number of Regions with an unresponsive peer reported by the raft leader.
+    The number of Regions with an unresponsive peer reported by the Raft leader.
 
 * Solution:
 
@@ -423,7 +423,7 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 * Description:
 
-    Currently, there are no TiKV monitoring items about memory. You can monitor the memory usage of the machines in the cluster by node_exporter. The above rule indicates that when the memory usage exceeds 5 GB within 5 minutes (the memory is occupied too fast in TiKV), an alert is triggered.
+    Currently, there are no TiKV monitoring items about memory. You can monitor the memory usage of the machines in the cluster by Node_exporter. The above rule indicates that when the memory usage exceeds 5 GB within 5 minutes (the memory is occupied too fast in TiKV), an alert is triggered.
 
 * Solution:
 
@@ -477,7 +477,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 * Solution:
 
-    1. Watch the Raft Propose monitor, and see whether the alerted TiKV node has a much higher raft propose than other TiKV nodes. If so, it means that there are one or more hot spots on this TiKV. You need to check whether the hot spot scheduling can work properly.
+    1. Watch the Raft Propose monitor, and see whether the alerted TiKV node has a much higher Raft propose than other TiKV nodes. If so, it means that there are one or more hot spots on this TiKV. You need to check whether the hot spot scheduling can work properly.
     2. Watch the Raft I/O monitor, and see whether the latency increases. If the latency is high, it means a bottleneck might exist in the disk. One feasible but unsafe solution is setting `sync-log` to `false`.
     3. Watch the Raft Process monitor, and see whether the tick duration is high. If so, you need to add `raft-base-tick-interval = "2s"` under the `[raftstore]` configuration.
 
