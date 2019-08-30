@@ -36,7 +36,7 @@ insert into t select * from t;
 >
 > The unit of all the following time fields in the slow query log is **"second"**.
 
-Slow Query Basics:
+Slow query basics:
 
 * `Time`: The print time of log.
 * `Query_time`: The execution time of a statement.
