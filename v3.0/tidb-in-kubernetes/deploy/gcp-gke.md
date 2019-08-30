@@ -291,7 +291,7 @@ Currently, scaling in is not supported since we cannot determine which node to r
 
 > **Note:**
 >
-> Scaling in by modifying `tikv_count` can lead to data loss.
+> Scaling in by modifying `tikv_count` can lead to data loss due to deleting the underlying instance before rebalancing. See [this page](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/scale-in-kubernetes/) for more information.
 
 ```bash
 kubectl --kubeconfig credentials/kubeconfig_<gke_cluster_name> get po -n <tidb_cluster_name> --watch
