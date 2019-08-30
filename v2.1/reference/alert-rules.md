@@ -1182,13 +1182,13 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 * Description:
 
-    Failure to probe the Node_Exporter service port.
+    Failure to probe the Node_exporter service port.
 
 * Solution:
 
-    * Check whether the machine that provides the Node_Exporter service is down.
-    * Check whether the Node_Exporter process exists.
-    * Check whether the network between the monitoring machine and the Node_Exporter machine is normal.
+    * Check whether the machine that provides the Node_exporter service is down.
+    * Check whether the Node_exporter process exists.
+    * Check whether the network between the monitoring machine and the Node_exporter machine is normal.
 
 #### `Blackbox_exporter_server_is_down`
 
