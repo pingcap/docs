@@ -289,6 +289,10 @@ To scale the TiDB cluster, modify `tikv_count` or `tidb_count`, to your desired 
 
 Currently, scaling in is not supported since we cannot determine which node to remove. Scaling out needs a few minutes to complete, you can watch the scaling-out process by running:
 
+> **Note:**
+>
+> Scaling in by modifying `tikv_count` can lead to data loss.
+
 ```bash
 kubectl --kubeconfig credentials/kubeconfig_<gke_cluster_name> get po -n <tidb_cluster_name> --watch
 ```
