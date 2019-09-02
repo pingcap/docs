@@ -14,7 +14,7 @@ Therefore, both the tikv-importer and tidb-lightning need to be deployed to rest
 
 ## Deploy tikv-importer
 
-The tikv-importer can be enabled for an existing TiDB cluster or by creating a new one.
+The tikv-importer can be enabled for an existing TiDB cluster or for a newly created one.
 
 * Create a new TiDB cluster with tikv-importer enabled
 
@@ -124,7 +124,7 @@ If the lightning fails to restore data, follow the steps below to do manual inte
 
 2. Create the lightning job again with `failFast` disabled by `helm template pingcap/tidb-lightning --name <tidb-lightning-release-name> --set failFast=false -f tidb-lightning-values.yaml | kubectl apply -n <namespace> -f -`.
 
-3. When the lightning pod is running again, use `kubectl exec -it -n <namesapce> <tidb-lightning-pod-name> sh` to exec into the lightning container.
+3. When the lightning pod is running again, use `kubectl exec -it -n <namesapce> <tidb-lightning-pod-name> sh` to `exec` into the lightning container.
 
 4. Get the startup script by running `cat /proc/1/cmdline`.
 
@@ -134,6 +134,8 @@ If the lightning fails to restore data, follow the steps below to do manual inte
 
 Currently, TiDB Lightning can only restore data offline. When the restoration finishes and the TiDB cluster needs to provide service for applications, the TiDB Lightning should be deleted to save cost.
 
-* tikv-importer can be deleted by setting `importer.create` to `false` in `values.yaml` of the TiDB cluster chart. And then run `helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml`.
+* To delete tikv-importer:
+    1. In `values.yaml` of the TiDB cluster chart, set `importer.create` to `false`.
+    2. Run `helm upgrade <tidb-cluster-release-name> pingcap/tidb-cluster -f values.yaml`.
 
-* tidb-lightning can be deleted by running `helm delete <tidb-lightning-release-name> --purge`.
+* To delete tidb-lightning, run `helm delete <tidb-lightning-release-name> --purge`.
