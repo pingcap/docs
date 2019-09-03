@@ -109,30 +109,30 @@ This document describes the roadmap for TiDB development.
 
 ## Data Migration
 
-#### Features
+### Features
 
 * Improve Forward Checking
 * Visualized Management of Replication Rules
 * Visualized Management of Replication Tasks
 * Online Verification on Data Replication
 
-#### Usability
+### Usability
 
 * Refactor Log Format and Content
 
-#### High Availability
+### High Availability
 
 * Support High Service Availability
 * Support High Data Reliability
 
 ## TiDB Toolkit
 
-#### Features
+### Features
 
 * Integrate Loader into TiDB
 * Integrate TiDB Lightning into TiDB
 
-#### Performance
+### Performance
 
 * Support Using Multiple `lightning` and `importer` Instances to Parallel Import Data with TiDB Lightning
 
