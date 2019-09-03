@@ -336,6 +336,10 @@ variable "override_values" {
 }
 ```
 
+### Customize logging
+
+GKE uses Fluentd as its default
+
 ### Customize node pools
 
 The cluster is created as a regional, as opposed to a zonal cluster. This means that GKE replicates node pools to each availability zone. This is desired to maintain high availability, however for the monitoring services, like Grafana, this is potentially unnecessary. It is possible to manually remove nodes if desired via `gcloud`.
