@@ -10,7 +10,7 @@ Category: reference
 
 The PD configuration file supports more options than the command-line parameters. You can find the default configuration file in [conf/config.toml](https://github.com/pingcap/pd/blob/master/conf/config.toml).
 
-This document only describes parameters that are not included in the command-line parameters. Check [here](/reference/configuration/pd-server/configuration.md) for the command line parameters.
+This document only describes parameters that are not included in the command-line parameters. Check [here](/dev/reference/configuration/pd-server/configuration.md) for the command line parameters.
 
 ### `lease`
 

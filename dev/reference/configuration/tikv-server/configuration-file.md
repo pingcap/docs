@@ -10,7 +10,7 @@ category: reference
 
 The configuration files of TiKV support more options than the command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) and rename it to `config.toml`.
 
-This document only describes the parameters that are not included in the command-line parameters. For more details, see [command-line parameter](/reference/configuration/tikv-server/configuration.md).
+This document only describes the parameters that are not included in the command-line parameters. For more details, see [command-line parameter](/dev/reference/configuration/tikv-server/configuration.md).
 
 ### `status-thread-pool-size`
 
