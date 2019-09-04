@@ -13,7 +13,7 @@ This document describes the roadmap for TiDB development.
 
 ## TiDB
 
-### TiDB
+### TiDB Server
 
 #### Features
 
@@ -69,7 +69,7 @@ This document describes the roadmap for TiDB development.
 * Support High Service Availability with Binlog
 * Support High Data Reliability with Binlog
 
-### TiKV
+### TiKV Server
 
 #### Features
 
@@ -136,11 +136,9 @@ This document describes the roadmap for TiDB development.
 
 * Support Using Multiple `lightning` and `importer` Instances to Parallel Import Data with TiDB Lightning
 
-# TiDB Future Plan
+## TiDB Future Plan
 
-## TiDB
-
-### TiDB
+### TiDB Server
 
 #### Features
 
@@ -170,7 +168,7 @@ This document describes the roadmap for TiDB development.
 
 * Column-level Privileges
 
-### TiKV
+### TiKV Server
 
 #### Features
 
