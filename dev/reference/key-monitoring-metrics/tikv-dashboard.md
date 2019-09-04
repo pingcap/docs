@@ -118,7 +118,7 @@ GC | TiDB GC failure | The count of failed TiDB GC jobs |
 GC | GC lifetime | The lifetime of TiDB GC |
 GC | GC interval | The interval of TiDB GC |
 Snapshot | Rate snapshot message | The rate at which Raft snapshot messages are sent |
-Snapshot | 99% Handle snapshot duration | The time consumed to handle snapshots (99%) |
+Snapshot | 99% Handle snapshot duration | The time consumed to handle snapshots (P99) |
 Snapshot | Snapshot state count | The number of snapshots per state |
 Snapshot | 99.99% Snapshot size | The snapshot size (P99.99)  |
 Snapshot | 99.99% Snapshot KV count | The number of KV within a snapshot (P99.99)  |
