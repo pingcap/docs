@@ -18,7 +18,7 @@ Assuming that you want to migrate data from two Aurora clusters to TiDB, the inf
 | Aurora-1 | pingcap-1-us-east-2a.h8emfqdptyc4.us-east-2.rds.amazonaws.com | 3306 | Reader |
 | Aurora-2 | pingcap-2.h8emfqdptyc4.us-east-2.rds.amazonaws.com | 3306 | Writer |
 
-DM relies on the `ROW` format of binlog during the incremental replication process, so you need to set the binlog format as `ROW`. If binlog is not enabled or is incorrectly configured, DM cannot replicate data normally. For more details, see [Checking items](/reference/tools/data-migration/precheck.md#checking-items).
+DM relies on the `ROW` format of binlog during the incremental replication process, so you need to set the binlog format as `ROW`. If binlog is not enabled or is incorrectly configured, DM cannot replicate data normally. For more details, see [Checking items](/v3.0/reference/tools/data-migration/precheck.md#checking-items).
 
 > **Note:**
 >
@@ -108,7 +108,7 @@ mysql-instances:
   source-id: "mysql-replica-01"
   # The configuration item name of the black and white lists of the schema or table to be replicated, used to quote the global black and white lists configuration. For global configuration, see the `black-white-list` below.
   black-white-list: "global"
-  # The configuration item name of mydumper, used to quote the global mydumper configuration.
+  # The configuration item name of Mydumper, used to quote the global Mydumper configuration.
   mydumper-config-name: "global"
 
 -
@@ -123,10 +123,10 @@ black-white-list:
     - db-name: "test_db"              # The database name of the table to be replicated
       tbl-name: "test_table"          # The name of the table to be replicated
 
-# mydumper global configuration. Each instance can quote it by the configuration item name.
+# Mydumper global configuration. Each instance can quote it by the configuration item name.
 mydumpers:
   global:
-    extra-args: "-B test_db -T test_table"  # Only outputs the `test_table` table of the `test_db` schema and can configure any parameter of mydumper.
+    extra-args: "-B test_db -T test_table"  # Only outputs the `test_table` table of the `test_db` schema and can configure any parameter of Mydumper.
 ```
 
 ## Step 5: Start the task

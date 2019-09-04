@@ -68,13 +68,13 @@ If you have sufficient machines, you can deploy multiple Lightning/Importer serv
 > - `tikv-importer` stores intermediate data on the RAM to speed up the import process. The typical memory usage can be calculated by using **(`max-open-engines` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
 
 Additionally, the target TiKV cluster should have enough space to absorb the new data.
-Besides [the standard requirements](/how-to/deploy/hardware-recommendations.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/tidb.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Besides [the standard requirements](/v3.0/how-to/deploy/hardware-recommendations.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/v3.0/faq/tidb.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
 ## Export data
 
-Use the [`mydumper` tool](/reference/tools/mydumper.md) to export data from MySQL by using the following command:
+Use the [`mydumper` tool](/v3.0/reference/tools/mydumper.md) to export data from MySQL by using the following command:
 
 ```sh
 ./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 256 -B test -T t1,t2 --skip-tz-utc -o /data/my_database/
@@ -88,7 +88,7 @@ In this command,
 - `-F 256`: means a table is partitioned into chunks and one chunk is 256 MB.
 - `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine, and to disable automatic conversion.
 
-If the data source consists of CSV files, see [CSV support](/reference/tools/tidb-lightning/csv.md) for configuration.
+If the data source consists of CSV files, see [CSV support](/v3.0/reference/tools/tidb-lightning/csv.md) for configuration.
 
 ## Deploy TiDB Lightning
 
@@ -99,7 +99,7 @@ This section describes two deployment methods of TiDB Lightning:
 
 ### Deploy TiDB Lightning using Ansible
 
-You can deploy TiDB Lightning using Ansible together with the [deployment of the TiDB cluster itself using Ansible](/how-to/deploy/orchestrated/ansible.md).
+You can deploy TiDB Lightning using Ansible together with the [deployment of the TiDB cluster itself using Ansible](/v3.0/how-to/deploy/orchestrated/ansible.md).
 
 1. Edit `inventory.ini` to add the addresses of the `tidb-lightning` and `tikv-importer` servers.
 
@@ -135,7 +135,7 @@ You can deploy TiDB Lightning using Ansible together with the [deployment of the
         # The listening port for metrics gathering. Should be open to the monitoring servers.
         tidb_lightning_pprof_port: 8289
 
-        # The file path that tidb-lightning reads the data source (mydumper SQL dump or CSV) from.
+        # The file path that tidb-lightning reads the data source (Mydumper SQL dump or CSV) from.
         data_source_dir: "{{ deploy_dir }}/mydumper"
         ```
 
@@ -244,11 +244,11 @@ Download the TiDB Lightning package:
     # Number of concurrent import jobs.
     num-import-jobs = 24
     # Maximum duration to prepare Regions.
-    #max-prepare-duration = "5m"
+    # max-prepare-duration = "5m"
     # Split Regions into this size according to the importing data.
-    #region-split-size = "512MB"
+    # region-split-size = "512MB"
     # Stream channel window size. The stream will be blocked on channel full.
-    #stream-channel-window = 128
+    # stream-channel-window = 128
     # Maximum number of open engines.
     max-open-engines = 8
     # Maximum upload speed (bytes per second) from Importer to TiKV.
@@ -271,7 +271,7 @@ Download the TiDB Lightning package:
 
 2. Mount the data source onto the same machine.
 
-3. Configure `tidb-lightning.toml`.
+3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits.
 
     ```toml
     ### tidb-lightning configuration
@@ -281,7 +281,7 @@ Download the TiDB Lightning package:
     pprof-port = 8289
 
     # Checks if the cluster satisfies the minimum requirement before starting.
-    #check-requirements = true
+    # check-requirements = true
 
     # The maximum number of engines to be opened concurrently.
     # Each table is split into one "index engine" to store indices, and multiple
@@ -296,7 +296,7 @@ Download the TiDB Lightning package:
     # The concurrency number of data. It is set to the number of logical CPU
     # cores by default. When deploying together with other components, you can
     # set it to 75% of the size of logical CPU cores to limit the CPU usage.
-    #region-concurrency =
+    # region-concurrency =
 
     # The maximum I/O concurrency. Excessive I/O concurrency causes an increase in
     # I/O latency because the disk's internal buffer is frequently refreshed,
@@ -308,8 +308,14 @@ Download the TiDB Lightning package:
     level = "info"
     file = "tidb-lightning.log"
     max-size = 128 # MB
-    max-days = 28
+    max-days = 28 # Old logs are not deleted by default.
     max-backups = 14
+
+    # Server mode
+    # Whether to enable server mode.
+    # server-mode = false
+    # Listening address in server mode.
+    # status-addr = ":8289"
 
     [checkpoint]
     # Whether to enable checkpoints.
@@ -330,11 +336,11 @@ Download the TiDB Lightning package:
     # If the URL is not specified, the TiDB server from the [tidb] section is used to
     # store the checkpoints. You should specify a different MySQL-compatible
     # database server to reduce the load of the target TiDB cluster.
-    #dsn = "/tmp/tidb_lightning_checkpoint.pb"
+    # dsn = "/tmp/tidb_lightning_checkpoint.pb"
     # Whether to keep the checkpoints after all data are imported. If false, the
     # checkpoints will be deleted. Keeping the checkpoints can aid debugging but
     # will leak metadata about the data source.
-    #keep-after-success = false
+    # keep-after-success = false
 
     [tikv-importer]
     # The listening address of tikv-importer. Change it to the actual address.
@@ -380,6 +386,8 @@ Download the TiDB Lightning package:
     # note that the *data* files are always parsed as binary regardless of
     # schema encoding.
     character-set = "auto"
+    # Is it case sensitive.
+    # case-sensitive = false
 
     # Configure how CSV files are parsed.
     [mydumper.csv]
@@ -414,6 +422,8 @@ Download the TiDB Lightning package:
     # tidb-lightning imports TiDB as a library and generates some logs itself.
     # This setting controls the log level of the TiDB library.
     log-level = "error"
+    # MySQL SQL Mode configuration
+    # sql-mode = ""
 
     # Sets the TiDB session variable to speed up the Checksum and Analyze operations.
     # See https://pingcap.com/docs/dev/reference/performance/statistics/#control-analyze-concurrency
@@ -451,7 +461,7 @@ Download the TiDB Lightning package:
     log-progress = "5m"
 
     # Table filter options. See the corresponding section for details.
-    #[black-white-list]
+    # [black-white-list]
     # ...
     ```
 

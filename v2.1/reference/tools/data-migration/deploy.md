@@ -10,11 +10,11 @@ This guide shows how to replicate data using the Data Migration (DM) tool.
 
 ## Step 1: Deploy the DM cluster
 
-It is recommended to deploy the DM cluster using DM-Ansible. For detailed deployment, see [Deploy Data Migration Using DM-Ansible](/how-to/deploy/data-migration-with-ansible.md).
+It is recommended to deploy the DM cluster using DM-Ansible. For detailed deployment, see [Deploy Data Migration Using DM-Ansible](/v2.1/how-to/deploy/data-migration-with-ansible.md).
 
 > **Note:**
 >
-> - For database passwords in all the DM configuration files, use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. See [Encrypt the upstream MySQL user password using dmctl](/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl).
+> - For database passwords in all the DM configuration files, use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. See [Encrypt the upstream MySQL user password using dmctl](/v2.1/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl).
 > - The user of the upstream and downstream databases must have the corresponding read and write privileges.
 
 ## Step 2: Check the cluster information
@@ -83,7 +83,7 @@ mysql-instances:
   # database/table to be replicated, used to quote the global black and white
   # lists configuration that is set in the global black-white-list below.
   black-white-list: "global"
-  # The configuration item name of mydumper, used to quote the global mydumper configuration.
+  # The configuration item name of Mydumper, used to quote the global Mydumper configuration.
   mydumper-config-name: "global"
 
 -
@@ -99,11 +99,11 @@ black-white-list:
     - db-name: "test_db"              # The database name of the table to be replicated.
       tbl-name: "test_table"          # The name of the table to be replicated.
 
-# mydumper global configuration. Each instance can quote it by the configuration item name.
+# Mydumper global configuration. Each instance can quote it by the configuration item name.
 mydumpers:
   global:
-    mydumper-path: "./bin/mydumper"   # The file path of the mydumper binary.
-    extra-args: "-B test_db -T test_table"  # Only dumps the "test_table" table of the "test_db" database. It can configure any mydumper argument.
+    mydumper-path: "./bin/mydumper"   # The file path of the Mydumper binary.
+    extra-args: "-B test_db -T test_table"  # Only dumps the "test_table" table of the "test_db" database. It can configure any Mydumper argument.
 ```
 
 ## Step 4: Start the data replication task
@@ -113,7 +113,7 @@ To detect possible errors of data replication configuration in advance, DM provi
 - DM automatically checks the corresponding privileges and configuration while starting the data replication task.
 - You can also use the `check-task` command to manually precheck whether the upstream MySQL instance configuration satisfies the DM requirements.
 
-For details about the precheck feature, see [Precheck the upstream MySQL instance configuration](/reference/tools/data-migration/precheck.md).
+For details about the precheck feature, see [Precheck the upstream MySQL instance configuration](/v2.1/reference/tools/data-migration/precheck.md).
 
 > **Note:**
 >
