@@ -128,7 +128,7 @@ If the lightning fails to restore data, follow the steps below to do manual inte
 
 4. Get the startup script by running `cat /proc/1/cmdline`.
 
-5. Diagnose the lightning following the [troubleshooting guide](/how-to/troubleshoot/tidb-lightning.md#tidb-lightning-troubleshooting).
+5. Diagnose the lightning following the [troubleshooting guide](/v3.0/how-to/troubleshoot/tidb-lightning.md#tidb-lightning-troubleshooting).
 
 ## Destroy TiDB Lightning
 
