@@ -51,7 +51,7 @@ Version: 0.9.0
 > - Make sure that the Jinja2 version is correct, otherwise an error occurs when you start Grafana.
 > - Make sure that the jmespath version is correct, otherwise an error occurs when you perform a rolling update for TiKV.
 
-## Step 2: Download TiDB-Ansible to the Control Machine
+## Step 2: Download TiDB Ansible to the Control Machine
 
 1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory.
 
