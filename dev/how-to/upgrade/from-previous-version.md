@@ -6,7 +6,7 @@ category: how-to
 
 # TiDB 3.0 Upgrade Guide
 
-This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.0.1) or TiDB 2.1 RC to TiDB 3.0. TiDB 3.0 is compatible with [TiDB Binlog of Kafka Version](/reference/tools/tidb-binlog/tidb-binlog-kafka.md) and [TiDB Binlog of Cluster Version](/reference/tidb-binlog-overview.md).
+This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.0.1) or TiDB 2.1 RC to TiDB 3.0. TiDB 3.0 is compatible with [TiDB Binlog of Kafka Version](/dev/reference/tools/tidb-binlog/tidb-binlog-kafka.md) and [TiDB Binlog of Cluster Version](/dev/reference/tidb-binlog-overview.md).
 
 ## Upgrade caveat
 
@@ -29,7 +29,7 @@ This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.
 
 TiDB Ansible release-3.0 depends on Ansible 2.4.2 and the later versions (`ansible>=2.4.2`, Ansible 2.7.11 recommended) and the Python module `jinja2>=2.9.6` and `jmespath>=0.9.0`.
 
-To make it easy to manage dependencies, use `pip` to install Ansible and its dependencies. For details, see [Install Ansible and its dependencies on the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-4-install-ansible-and-its-dependencies-on-the-control-machine). For offline environment, see [Install Ansible and its dependencies offline on the Control Machine](/how-to/deploy/orchestrated/offline-ansible.md#step-3-install-ansible-and-its-dependencies-offline-on-the-control-machine).
+To make it easy to manage dependencies, use `pip` to install Ansible and its dependencies. For details, see [Install Ansible and its dependencies on the Control Machine](/dev/how-to/deploy/orchestrated/ansible.md#step-4-install-ansible-and-its-dependencies-on-the-control-machine). For offline environment, see [Install Ansible and its dependencies offline on the Control Machine](/dev/how-to/deploy/orchestrated/offline-ansible.md#step-3-install-ansible-and-its-dependencies-offline-on-the-control-machine).
 
 After the installation is finished, you can view the version information using the following command:
 
@@ -60,7 +60,7 @@ Version: 0.9.0
     $ mv tidb-ansible tidb-ansible-bak
     ```
 
-3. Download the tidb-ansible with the tag corresponding to TiDB 3.0. For more details, See [Download TiDB-Ansible to the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`.
+3. Download the tidb-ansible with the tag corresponding to TiDB 3.0. For more details, See [Download TiDB-Ansible to the Control Machine](/dev/how-to/deploy/orchestrated/ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`.
 
     ```shell
     $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
