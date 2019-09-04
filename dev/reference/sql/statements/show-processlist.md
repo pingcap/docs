@@ -1,5 +1,5 @@
 ---
-title: SHOW [FULL] PROCESSLIST | TiDB SQL Statement Reference 
+title: SHOW [FULL] PROCESSLIST | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] PROCESSLIST for the TiDB database.
 category: reference
 ---
@@ -37,4 +37,4 @@ mysql> SHOW PROCESSLIST;
 
 ## See also
 
-* [KILL \[TIDB\]](/reference/sql/statements/kill.md)
+* [KILL \[TIDB\]](/dev/reference/sql/statements/kill.md)

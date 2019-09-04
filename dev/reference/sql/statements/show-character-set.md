@@ -1,10 +1,10 @@
 ---
-title: SHOW CHARACTER SET | TiDB SQL Statement Reference 
+title: SHOW CHARACTER SET | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CHARACTER SET for the TiDB database.
 category: reference
 ---
 
-# SHOW CHARACTER SET 
+# SHOW CHARACTER SET
 
 This statement provides a static list of available character sets in TiDB. The output does not reflect any attributes of the current connection or user.
 
@@ -40,8 +40,8 @@ mysql> SHOW CHARACTER SET;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/dev/report-issue.md) on GitHub.
 
 ## See also
 
-* [SHOW COLLATION](/reference/sql/statements/show-collation.md)
+* [SHOW COLLATION](/dev/reference/sql/statements/show-collation.md)

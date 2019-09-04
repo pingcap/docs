@@ -12,7 +12,7 @@ Similarly, statements such as `SELECT .. FOR UPDATE` do not work in the same way
 
 > **Note:**
 >
-> Experimental support for [pessimistic locking](/reference/transactions/transaction-pessimistic.md) is now available. When enabled, TiDB will behave behave similar to the InnoDB storage engine.
+> Experimental support for [pessimistic locking](/dev/reference/transactions/transaction-pessimistic.md) is now available. When enabled, TiDB will behave behave similar to the InnoDB storage engine.
 
 ## Differences from MySQL
 
@@ -66,7 +66,7 @@ Due to its distributed nature, workloads that are single-threaded or latency-sen
         IGNORE n LINES
         (col_name ...);
     ```
-    
+
     Currently, the supported `ESCAPED BY` characters are: `/\/\`.
 
 + Transaction
@@ -75,4 +75,4 @@ Due to its distributed nature, workloads that are single-threaded or latency-sen
 
     > **Warning:**
     >
-    > The `LOAD DATA` operation in TiDB does not guarantee the atomicity of transactions, so it is recommended only for initial batch loading data, and not during regular usage for production environment(s).
+    > The `LOAD DATA` operation in TiDB by default splits transactions and commits them in batches. However, this operation is at the expense of breaking the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.

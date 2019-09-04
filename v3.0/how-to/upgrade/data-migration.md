@@ -17,9 +17,34 @@ Assuming that V-A, V-B, V-C are three DM versions in chronological order and the
 > **Note:**
 >
 > - Unless otherwise stated, DM version upgrade means upgrading DM from the previous version with an upgrade procedure to the current version.
-> - Unless otherwise stated, all the following upgrade examples assume that you have downloaded the corresponding DM version and DM-Ansible version, and the DM binary exists in the corresponding directory of DM-Ansible. (For how to download the DM binary, see [Upgrade the component version](/reference/tools/data-migration/cluster-operations.md#upgrade-the-component-version)).
+> - Unless otherwise stated, all the following upgrade examples assume that you have downloaded the corresponding DM version and DM-Ansible version, and the DM binary exists in the corresponding directory of DM-Ansible. (For how to download the DM binary, see [Upgrade the component version](/v3.0/reference/tools/data-migration/cluster-operations.md#upgrade-the-component-version)).
 > - Unless otherwise stated, all the following upgrade examples assume that all the data replication tasks have been stopped before the upgrade and all the replication tasks are restarted manually after DM upgrade is finished.
 > - The following shows the upgrade procedure of DM versions in reverse chronological order.
+
+## Upgrade to v1.0.0-rc.1-12-gaa39ff9
+
+### Version information
+
+```bash
+Release Version: v1.0.0-rc.1-12-gaa39ff9
+Git Commit Hash: aa39ff981dfb3e8c0fa4180127246b253604cc34
+Git Branch: dm-master
+UTC Build Time: 2019-07-24 02:26:08
+Go Version: go version go1.11.2 linux/amd64
+```
+
+### Main changes
+
+Starting from this release, TiDB DM checks all configurations rigorously. Unrecognized configuration triggers an error. This is to ensure that users always know exactly what the configuration is.
+
+### Upgrade operation example
+
+Before starting the DM-master or DM-worker, ensure that the obsolete configuration information has been deleted and there are no redundant configuration items.
+
+Otherwise, the starting might fail. In this situation, you can delete the redundant configuration based on the failure information. These are two possible redundant configurations:
+
+- `meta-file` in `dm-worker.toml`
+- `server-id` in `mysql-instances` in `task.yaml`
 
 ## Upgrade to v1.0.0-143-gcd753da
 
@@ -48,31 +73,31 @@ Starting from this version, DM-worker uses a same port (8262 by default) to prov
 
     - Remove all the `dm_worker_status_port` configuration items and modify the `dm_worker_port` configuration item as needed.
     - Remove all the `dm_master_status_port` configuration items and modify the `dm_master_port` configuration item as needed.
-    
+
     For example, modify
-    
+
     ```ini
     dm_worker1_1 ansible_host=172.16.10.72 server_id=101 deploy_dir=/data1/dm_worker dm_worker_port=10081 dm_worker_status_port=10082 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
     ```
-    
+
     to
-    
+
     ```ini
     dm_worker1_1 ansible_host=172.16.10.72 server_id=101 deploy_dir=/data1/dm_worker dm_worker_port=8262 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
     ```
-    
+
     and modify
-    
+
     ```ini
     dm_master ansible_host=172.16.10.71 dm_master_port=12080 dm_master_status_port=12081
     ```
-    
+
     to
-    
+
     ```ini
     dm_master ansible_host=172.16.10.71 dm_master_port=8261
     ```
-    
+
 2. Use DM-Ansible to perform a rolling update on DM, Prometheus and Grafana.
 
 ## Upgrade to v1.0.0-133-g2f9fe82
@@ -108,7 +133,7 @@ Starting from this version, the above two kinds of information are removed and t
 1. Modify the `inventory.ini` configuration information.
 
     Set the corresponding `source_id` for all DM-worker instances.
-    
+
     For example, modify
 
     ```ini
@@ -124,11 +149,11 @@ Starting from this version, the above two kinds of information are removed and t
 2. Use DM-Ansible to perform a rolling update on DM.
 
 3. Modify the task configuration file (`task.yaml`).
-    
+
     Remove the `config` and `instance-id` configuration items and add the `source-id` configuration item (corresponding to `source_id` in `inventory.ini`).
-    
+
     For example, modify
-    
+
     ```yaml
     config:
           host: "192.168.199.118"
@@ -137,9 +162,9 @@ Starting from this version, the above two kinds of information are removed and t
           password: "1234"
     instance-id: "instance118-4306" # It is unique. It is used as the ID when storing the checkpoint, configuration and other information.
     ```
-    
+
     to
-    
+
     ```yaml
     source-id: "instance118-4306" # It should be consistent with the original `source_id` value when the checkpoint of the original task needs to be reused.
     ```

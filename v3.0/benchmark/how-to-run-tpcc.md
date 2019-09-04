@@ -1,9 +1,9 @@
 ---
-title: How to Test TiDB Using TPC-C
+title: How to Run TPC-C Test on TiDB
 category: benchmark
 ---
 
-# How to Test TiDB Using TPC-C
+# How to Run TPC-C Test on TiDB
 
 This document describes how to test TiDB using [TPC-C](http://www.tpc.org/tpcc/).
 
@@ -96,7 +96,7 @@ enabled = true
 
 ### Configure TiKV
 
-You can use the basic configuration at the beginning. Then after the test is run, you can adjust it based on the metrics on Grafana and the [TiKV Tuning Instructions](../reference/performance/tune-tikv.md).
+You can use the basic configuration at the beginning. Then after the test is run, you can adjust it based on the metrics on Grafana and the [TiKV Tuning Instructions](/v3.0/reference/performance/tune-tikv.md).
 
 ### Configure BenchmarkSQL
 

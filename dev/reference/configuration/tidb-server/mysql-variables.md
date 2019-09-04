@@ -10,7 +10,7 @@ The system variables in MySQL are the system parameters that modify the operatio
 
 ## Set the system variables
 
-You can use the [`SET`](/reference/sql/statements/set-variable.md) statement to change the value of the system variables. Before you change, consider the scope of the variable. For more information, see [MySQL Dynamic System Variables](https://dev.mysql.com/doc/refman/5.7/en/dynamic-system-variables.html).
+You can use the [`SET`](/dev/reference/sql/statements/set-variable.md) statement to change the value of the system variables. Before you change, consider the scope of the variable. For more information, see [MySQL Dynamic System Variables](https://dev.mysql.com/doc/refman/5.7/en/dynamic-system-variables.html).
 
 ### Set Global variables
 
@@ -21,7 +21,7 @@ SET GLOBAL autocommit = 1;
 SET @@global.autocommit = 1;
 ```
 
-### Set Session Variables
+### Set Session variables
 
 Add the `SESSION` keyword before the variable, use `@@session.` as the modifier, or use no modifier:
 
@@ -47,7 +47,7 @@ SET @@autocommit = 1;
     | ON                  |
     +---------------------+
     1 row in set (0.00 sec)
-    
+
     mysql> SELECT @@SESSION.autocommit;
     +----------------------+
     | @@SESSION.autocommit |
@@ -55,10 +55,10 @@ SET @@autocommit = 1;
     | ON                   |
     +----------------------+
     1 row in set (0.00 sec)
-    
+
     mysql> SET GLOBAL autocommit = OFF;
     Query OK, 0 rows affected (0.01 sec)
-    
+
     mysql> SELECT @@SESSION.autocommit; -- Session variables do not change, and the transactions in the session are executed in the form of autocommit.
     +----------------------+
     | @@SESSION.autocommit |
@@ -66,7 +66,7 @@ SET @@autocommit = 1;
     | ON                   |
     +----------------------+
     1 row in set (0.00 sec)
-    
+
     mysql> SELECT @@GLOBAL.autocommit;
     +---------------------+
     | @@GLOBAL.autocommit |
@@ -74,22 +74,22 @@ SET @@autocommit = 1;
     | OFF                 |
     +---------------------+
     1 row in set (0.00 sec)
-    
+
     mysql> exit
     Bye
     $ mysql -h127.0.0.1 -P4000 -uroot -D test
     Welcome to the MySQL monitor.  Commands end with ; or \g.
     Your MySQL connection id is 3
     Server version: 5.7.25-TiDB-None MySQL Community Server (Apache License 2.0)
-    
+
     Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
-    
+
     Oracle is a registered trademark of Oracle Corporation and/or its
     affiliates. Other names may be trademarks of their respective
     owners.
-    
+
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-    
+
     mysql> SELECT @@SESSION.autocommit; -- The newly created session uses a new global variable.
     +----------------------+
     | @@SESSION.autocommit |
@@ -110,7 +110,12 @@ The following MySQL system variables are fully supported in TiDB and have the sa
 | time_zone | GLOBAL \| SESSION | the time zone of the database |
 | tx_isolation | GLOBAL \| SESSION | the isolation level of a transaction |
 | hostname | NONE | the hostname of the TiDB server |
+| max\_execution\_time | GLOBAL \| SESSION |  the execution timeout for a statement, in milliseconds |
 
-## TiDB Specific System Variables
+> **Note:**
+>
+> Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
-See [TiDB Specific System Variables](/reference/configuration/tidb-server/tidb-specific-variables.md).
+## TiDB specific system variables
+
+See [TiDB Specific System Variables](/dev/reference/configuration/tidb-server/tidb-specific-variables.md).

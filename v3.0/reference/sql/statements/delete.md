@@ -1,5 +1,5 @@
 ---
-title: DELETE | TiDB SQL Statement Reference 
+title: DELETE | TiDB SQL Statement Reference
 summary: An overview of the usage of DELETE for the TiDB database.
 category: reference
 ---
@@ -53,11 +53,11 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/v3.0/report-issue.md) on GitHub.
 
 ## See also
 
-* [INSERT](/reference/sql/statements/insert.md)
-* [SELECT](/reference/sql/statements/select.md)
-* [UPDATE](/reference/sql/statements/update.md)
-* [REPLACE](/reference/sql/statements/replace.md)
+* [INSERT](/v3.0/reference/sql/statements/insert.md)
+* [SELECT](/v3.0/reference/sql/statements/select.md)
+* [UPDATE](/v3.0/reference/sql/statements/update.md)
+* [REPLACE](/v3.0/reference/sql/statements/replace.md)

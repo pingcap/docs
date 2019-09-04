@@ -1,5 +1,5 @@
 ---
-title: FLUSH TABLES | TiDB SQL Statement Reference 
+title: FLUSH TABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH TABLES for the TiDB database.
 category: reference
 ---
@@ -51,4 +51,4 @@ ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@
 
 ## See also
 
-* [Read historical data](/how-to/get-started/read-historical-data.md)
+* [Read historical data](/v2.1/how-to/get-started/read-historical-data.md)

@@ -1,12 +1,12 @@
 ---
-title: SHOW CREATE USER | TiDB SQL Statement Reference 
+title: SHOW CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
 category: reference
 ---
 
-# SHOW CREATE USER 
+# SHOW CREATE USER
 
-This statement shows how to re-create a user using the `CREATE USER` syntax. 
+This statement shows how to re-create a user using the `CREATE USER` syntax.
 
 ## Synopsis
 
@@ -44,6 +44,6 @@ mysql> SHOW GRANTS FOR 'root';
 
 ## See also
 
-* [CREATE USER](/reference/sql/statements/create-user.md)
-* [SHOW GRANTS](/reference/sql/statements/show-grants.md)
-* [DROP USER](/reference/sql/statements/drop-user.md)
+* [CREATE USER](/v2.1/reference/sql/statements/create-user.md)
+* [SHOW GRANTS](/v2.1/reference/sql/statements/show-grants.md)
+* [DROP USER](/v2.1/reference/sql/statements/drop-user.md)

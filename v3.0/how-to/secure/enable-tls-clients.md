@@ -28,9 +28,9 @@ In short, to use encrypted connections, both of the following conditions must be
 
 See the following desrciptions about the related parameters to enable encrypted connections:
 
-- [`ssl-cert`](/reference/configuration/tidb-server/configuration.md#ssl-cert): specifies the file path of the SSL certificate
-- [`ssl-key`](/reference/configuration/tidb-server/configuration.md#ssl-key): specifies the private key that matches the certificate
-- [`ssl-ca`](/reference/configuration/tidb-server/configuration.md#ssl-ca): (optional) specifies the file path of the trusted CA certificate
+- [`ssl-cert`](/v3.0/reference/configuration/tidb-server/configuration.md#ssl-cert): specifies the file path of the SSL certificate
+- [`ssl-key`](/v3.0/reference/configuration/tidb-server/configuration.md#ssl-key): specifies the private key that matches the certificate
+- [`ssl-ca`](/v3.0/reference/configuration/tidb-server/configuration.md#ssl-ca): (optional) specifies the file path of the trusted CA certificate
 
 To enable encrypted connections in the TiDB server, you must specify both of the `ssl-cert` and `ssl-key` parameters in the configuration file when you start the TiDB server. You can also specify the `ssl-ca` parameter for client authentication (see [Enable authentication](#enable-authentication)).
 
@@ -86,14 +86,14 @@ If the `ssl-ca` parameter is not specified in the TiDB server or MySQL client, t
   1. Specify the `ssl-cert` and `ssl-key` parameters in the TiDB server.
   2. Specify the `--ssl-ca` parameter in the MySQL client.
   3. Specify the `--ssl-mode` to `VERIFY_CA` at least in the MySQL client.
-  4. Make sure that the certificate (`ssl-cert`) configured by the TiDB server is signed by the CA specified by the client `--ssl-ca` parameter, otherwise the authentication fails. 
-  
+  4. Make sure that the certificate (`ssl-cert`) configured by the TiDB server is signed by the CA specified by the client `--ssl-ca` parameter, otherwise the authentication fails.
+
 + To authenticate the MySQL client from the TiDB server:
   1. Specify the `ssl-cert`, `ssl-key`, and `ssl-ca` parameters in the TiDB server.
   2. Specify the `--ssl-cert` and `--ssl-key` parameters in the client.
   3. Make sure the server-configured certificate and the client-configured certificate are both signed by the `ssl-ca` specified by the server.
-  
-- To perform mutual authentication, meet both of the above requirements. 
+
+- To perform mutual authentication, meet both of the above requirements.
 
 > **Note:**
 >

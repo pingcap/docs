@@ -93,9 +93,21 @@ enabled = true
 
 Then configure global variables:
 
+{{< copyable "sql" >}}
+
 ```sql
 set global tidb_hashagg_final_concurrency=1;
+```
+
+{{< copyable "sql" >}}
+
+```sql
 set global tidb_hashagg_partial_concurrency=1;
+```
+
+{{< copyable "sql" >}}
+
+```sql
 set global tidb_disable_txn_auto_retry=0;
 ```
 
@@ -236,8 +248,8 @@ store-pool-size = 3
 
 **v2.1:**
 
-| Threads |   TPS   |   QPS    | 95% latency(ms) |
-| :------- | :------ | :------- | :-------------- |
+| Threads |    QPS    | 95% latency(ms) |
+| :------- | :-------- | :-------------- |
 | 150     |  85140.60 |           44.98 |
 | 300     |  96773.01 |           82.96 |
 | 600     | 105139.81 |          153.02 |

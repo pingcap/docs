@@ -1,5 +1,5 @@
 ---
-title: CREATE USER | TiDB SQL Statement Reference 
+title: CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE USER for the TiDB database.
 category: reference
 ---
@@ -50,9 +50,8 @@ Query OK, 1 row affected (0.02 sec)
 
 ## See also
 
-* [Security Compatibility with MySQL](/reference/security/compatibility.md)
-* [DROP USER](/reference/sql/statements/drop-user.md)
-* [SHOW CREATE USER](/reference/sql/statements/show-create-user.md)
-* [ALTER USER](/reference/sql/statements/alter-user.md)
-* [Privilege Management](/reference/security/privilege-system.md)
-
+* [Security Compatibility with MySQL](/v3.0/reference/security/compatibility.md)
+* [DROP USER](/v3.0/reference/sql/statements/drop-user.md)
+* [SHOW CREATE USER](/v3.0/reference/sql/statements/show-create-user.md)
+* [ALTER USER](/v3.0/reference/sql/statements/alter-user.md)
+* [Privilege Management](/v3.0/reference/security/privilege-system.md)

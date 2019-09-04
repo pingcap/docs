@@ -1,5 +1,5 @@
 ---
-title: SET [GLOBAL|SESSION] <variable> | TiDB SQL Statement Reference 
+title: SET [GLOBAL|SESSION] <variable> | TiDB SQL Statement Reference
 summary: An overview of the usage of SET [GLOBAL|SESSION] <variable> for the TiDB database.
 category: reference
 ---
@@ -66,8 +66,8 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/v3.0/report-issue.md) on GitHub.
 
 ## See also
 
-* [SHOW \[GLOBAL|SESSION\] VARIABLES](/reference/sql/statements/show-variables.md)
+* [SHOW \[GLOBAL|SESSION\] VARIABLES](/v3.0/reference/sql/statements/show-variables.md)

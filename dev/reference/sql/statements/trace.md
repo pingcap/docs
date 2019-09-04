@@ -1,5 +1,5 @@
 ---
-title: TRACE | TiDB SQL Statement Reference 
+title: TRACE | TiDB SQL Statement Reference
 summary: An overview of the usage of TRACE for the TiDB database.
 category: reference
 ---
@@ -17,7 +17,6 @@ The `TRACE` statement provides detailed information about query execution. It is
 **TraceableStmt:**
 
 ![TraceableStmt](/media/sqlgram-dev/TraceableStmt.png)
-
 
 ## Examples
 
@@ -135,11 +134,10 @@ The JSON formatted trace can be pasted into the trace viewer, which is accessed 
 
 ![TiDB Trace Viewer-2](/media/trace-view.png)
 
-
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [EXPLAIN ANALYZE](/reference/sql/statements/explain-analyze.md)
+* [EXPLAIN ANALYZE](/dev/reference/sql/statements/explain-analyze.md)

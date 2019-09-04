@@ -1,5 +1,5 @@
 ---
-title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference 
+title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
 category: reference
 ---
@@ -66,10 +66,10 @@ mysql> SHOW KEYS FROM t1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/dev/report-issue.md) on GitHub.
 
 ## See also
 
-* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
-* [DROP INDEX](/reference/sql/statements/drop-index.md)
-* [CREATE INDEX](/reference/sql/statements/create-index.md)
+* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
+* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
+* [CREATE INDEX](/dev/reference/sql/statements/create-index.md)

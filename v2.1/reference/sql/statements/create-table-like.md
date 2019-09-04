@@ -1,5 +1,5 @@
 ---
-title: CREATE TABLE LIKE | TiDB SQL Statement Reference 
+title: CREATE TABLE LIKE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE TABLE LIKE for the TiDB database.
 category: reference
 ---
@@ -53,9 +53,9 @@ Empty set (0.00 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/v2.1/report-issue.md) on GitHub.
 
 ## See also
 
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [CREATE TABLE](/v2.1/reference/sql/statements/create-table.md)
+* [SHOW CREATE TABLE](/v2.1/reference/sql/statements/show-create-table.md)

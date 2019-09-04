@@ -1,10 +1,10 @@
 ---
-title: ADD INDEX | TiDB SQL Statement Reference 
+title: ADD INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of ADD INDEX for the TiDB database.
 category: reference
 ---
 
-# ADD INDEX 
+# ADD INDEX
 
 The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding an index.
 
@@ -72,9 +72,9 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## See also
 
-* [CREATE INDEX](/reference/sql/statements/create-index.md)
-* [DROP INDEX](/reference/sql/statements/drop-index.md)
-* [RENAME INDEX](/reference/sql/statements/rename-index.md)
-* [ADD COLUMN](/reference/sql/statements/add-column.md)
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [EXPLAIN](/reference/sql/statements/explain.md)
+* [CREATE INDEX](/dev/reference/sql/statements/create-index.md)
+* [DROP INDEX](/dev/reference/sql/statements/drop-index.md)
+* [RENAME INDEX](/dev/reference/sql/statements/rename-index.md)
+* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
+* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)
+* [EXPLAIN](/dev/reference/sql/statements/explain.md)

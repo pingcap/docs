@@ -1,5 +1,5 @@
 ---
-title: EXECUTE | TiDB SQL Statement Reference 
+title: EXECUTE | TiDB SQL Statement Reference
 summary: An overview of the usage of EXECUTE for the TiDB database.
 category: reference
 ---
@@ -41,9 +41,9 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/dev/report-issue.md) on GitHub.
 
 ## See also
 
-* [PREPARE](/reference/sql/statements/prepare.md)
-* [DEALLOCATE](/reference/sql/statements/deallocate.md)
+* [PREPARE](/dev/reference/sql/statements/prepare.md)
+* [DEALLOCATE](/dev/reference/sql/statements/deallocate.md)

@@ -1,5 +1,5 @@
 ---
-title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference 
+title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
 summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
 category: reference
 ---
@@ -71,11 +71,10 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/v2.1/report-issue.md) on GitHub.
 
 ## See also
 
-* [SHOW \[GLOBAL|SESSION\] VARIABLES](/reference/sql/statements/show-variables.md)
-* [SET <variable>](/reference/sql/statements/set-variable.md)
-* [Character Set Support](/reference/sql/character-set.md)
-
+* [SHOW \[GLOBAL|SESSION\] VARIABLES](/v2.1/reference/sql/statements/show-variables.md)
+* [SET <variable>](/v2.1/reference/sql/statements/set-variable.md)
+* [Character Set Support](/v2.1/reference/sql/character-set.md)

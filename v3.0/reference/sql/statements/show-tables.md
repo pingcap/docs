@@ -1,5 +1,5 @@
 ---
-title: SHOW [FULL] TABLES | TiDB SQL Statement Reference 
+title: SHOW [FULL] TABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] TABLES for the TiDB database.
 category: reference
 ---
@@ -8,7 +8,7 @@ category: reference
 
 This statement shows a list of tables and views in the currently selected database. The optional keyword `FULL` indicates if a table is of type `BASE TABLE` or `VIEW`.
 
-To show tables in a different database, use `SHOW TABLES IN DatabaseName`. 
+To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
 
 ## Synopsis
 
@@ -77,10 +77,10 @@ mysql> SHOW TABLES IN mysql;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/v3.0/report-issue.md) on GitHub.
 
 ## See also
 
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [DROP TABLE](/reference/sql/statements/drop-table.md)
-* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [CREATE TABLE](/v3.0/reference/sql/statements/create-table.md)
+* [DROP TABLE](/v3.0/reference/sql/statements/drop-table.md)
+* [SHOW CREATE TABLE](/v3.0/reference/sql/statements/show-create-table.md)

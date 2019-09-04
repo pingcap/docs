@@ -1,5 +1,5 @@
 ---
-title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference 
+title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiDB database.
 category: reference
 ---
@@ -101,5 +101,4 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
-
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/dev/report-issue.md) on GitHub.

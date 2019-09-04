@@ -1,5 +1,5 @@
 ---
-title: CREATE INDEX | TiDB SQL Statement Reference 
+title: CREATE INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE INDEX for the TiDB database.
 category: reference
 ---
@@ -42,7 +42,6 @@ This statement adds a new index to an existing table. It is an alternative synta
 
 ![IndexOption](/media/sqlgram-v3.0/IndexOption.png)
 
-
 ## Examples
 
 ```sql
@@ -63,7 +62,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +---------------------+----------+------+-------------------------------------------------------------+
 3 rows in set (0.00 sec)
 
-mysql> CREATE INDEX c1 ON t1 (c1); 
+mysql> CREATE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.30 sec)
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
@@ -82,6 +81,10 @@ mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
+## Associated session variables
+
+The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size` and `tidb_ddl_reorg_priority`. Refer to [TiDB-specific system variables](/v3.0/reference/configuration/tidb-server/tidb-specific-variables.md#tidb-ddl-reorg-worker-cnt) for details.
+
 ## MySQL compatibility
 
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
@@ -90,9 +93,9 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## See also
 
-* [ADD INDEX](/reference/sql/statements/add-index.md)
-* [DROP INDEX](/reference/sql/statements/drop-index.md)
-* [RENAME INDEX](/reference/sql/statements/rename-index.md)
-* [ADD COLUMN](/reference/sql/statements/add-column.md)
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [EXPLAIN](/reference/sql/statements/explain.md)
+* [ADD INDEX](/v3.0/reference/sql/statements/add-index.md)
+* [DROP INDEX](/v3.0/reference/sql/statements/drop-index.md)
+* [RENAME INDEX](/v3.0/reference/sql/statements/rename-index.md)
+* [ADD COLUMN](/v3.0/reference/sql/statements/add-column.md)
+* [CREATE TABLE](/v3.0/reference/sql/statements/create-table.md)
+* [EXPLAIN](/v3.0/reference/sql/statements/explain.md)

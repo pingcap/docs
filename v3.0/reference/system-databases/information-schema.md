@@ -2,7 +2,7 @@
 title: Information Schema
 summary: Learn how to use Information Schema in TiDB.
 category: reference
-aliases: ['/docs/sql/information-schema/'] 
+aliases: ['/docs/sql/information-schema/']
 ---
 
 # Information Schema
@@ -11,12 +11,41 @@ As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` t
 
 ## Fully Supported Information Schema Tables
 
-### CHARACTER\_SETS table
+### ANALYZE_STATUS table
 
-The `CHARACTER_SETS` table provides information about [character sets](/reference/sql/character-set.md). Currently, TiDB only supports some of the character sets.
+The `ANALYZE_STATUS` table provides information about the running tasks that collect statistics and a limited number of history tasks.
+
+{{< copyable "sql" >}}
 
 ```sql
-mysql> SELECT * FROM character_sets;
+select * from `ANALYZE_STATUS`;
+```
+
+```
++--------------+------------+----------------+-------------------+----------------+---------------------+----------+
+| TABLE_SCHEMA | TABLE_NAME | PARTITION_NAME | JOB_INFO          | PROCESSED_ROWS | START_TIME          | STATE    |
++--------------+------------+----------------+-------------------+----------------+---------------------+----------+
+| test         | t          |                | analyze index idx | 2              | 2019-06-21 19:51:14 | finished |
+| test         | t          |                | analyze columns   | 2              | 2019-06-21 19:51:14 | finished |
+| test         | t1         | p0             | analyze columns   | 0              | 2019-06-21 19:51:15 | finished |
+| test         | t1         | p3             | analyze columns   | 0              | 2019-06-21 19:51:15 | finished |
+| test         | t1         | p1             | analyze columns   | 0              | 2019-06-21 19:51:15 | finished |
+| test         | t1         | p2             | analyze columns   | 1              | 2019-06-21 19:51:15 | finished |
++--------------+------------+----------------+-------------------+----------------+---------------------+----------+
+6 rows in set
+```
+
+### CHARACTER_SETS table
+
+The `CHARACTER_SETS` table provides information about [character sets](/v3.0/reference/sql/character-set.md). Currently, TiDB only supports some of the character sets.
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM character_sets;
+```
+
+```
 +--------------------+----------------------+---------------+--------+
 | CHARACTER_SET_NAME | DEFAULT_COLLATE_NAME | DESCRIPTION   | MAXLEN |
 +--------------------+----------------------+---------------+--------+
@@ -33,8 +62,13 @@ mysql> SELECT * FROM character_sets;
 
 The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table.  Currently this table is included only for compatibility with MySQL, as TiDB only supports binary collation:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM collations WHERE character_set_name='utf8mb4';
+SELECT * FROM collations WHERE character_set_name='utf8mb4';
+```
+
+```
 +------------------------+--------------------+------+------------+-------------+---------+
 | COLLATION_NAME         | CHARACTER_SET_NAME | ID   | IS_DEFAULT | IS_COMPILED | SORTLEN |
 +------------------------+--------------------+------+------------+-------------+---------+
@@ -68,12 +102,17 @@ mysql> SELECT * FROM collations WHERE character_set_name='utf8mb4';
 26 rows in set (0.00 sec)
 ```
 
-### COLLATION\_CHARACTER\_SET\_APPLICABILITY table
+### COLLATION_CHARACTER_SET_APPLICABILITY table
 
 The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applicable character set name.  Similar to the `COLLATIONS` table, it is included only for compatibility with MySQL:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
+SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
+```
+
+```
 +------------------------+--------------------+
 | COLLATION_NAME         | CHARACTER_SET_NAME |
 +------------------------+--------------------+
@@ -111,11 +150,23 @@ mysql> SELECT * FROM collation_character_set_applicability WHERE character_set_n
 
 The `COLUMNS` table provides detailed information about columns in tables:
 
-```sql
-mysql> CREATE TABLE test.t1 (a int);
-1 row in set (0.01 sec)
+{{< copyable "sql" >}}
 
-mysql> SELECT * FROM information_schema.columns WHERE table_schema='test' AND TABLE_NAME='t1'\G
+```sql
+CREATE TABLE test.t1 (a int);
+```
+
+```
+1 row in set (0.01 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM information_schema.columns WHERE table_schema='test' AND TABLE_NAME='t1';
+```
+
+```
 *************************** 1. row ***************************
            TABLE_CATALOG: def
             TABLE_SCHEMA: test
@@ -133,16 +184,23 @@ CHARACTER_MAXIMUM_LENGTH: NULL
       CHARACTER_SET_NAME: NULL
           COLLATION_NAME: NULL
              COLUMN_TYPE: int(11)
-              COLUMN_KEY: 
-                   EXTRA: 
+              COLUMN_KEY:
+                   EXTRA:
               PRIVILEGES: select,insert,update,references
-          COLUMN_COMMENT: 
-   GENERATION_EXPRESSION: 
+          COLUMN_COMMENT:
+   GENERATION_EXPRESSION:
 1 row in set (0.01 sec)
 ```
+
 The corresponding `SHOW` statement is as follows:
+
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SHOW COLUMNS FROM t1 FROM test;
+SHOW COLUMNS FROM t1 FROM test;
+```
+
+```
 +-------+---------+------+------+---------+-------+
 | Field | Type    | Null | Key  | Default | Extra |
 +-------+---------+------+------+---------+-------+
@@ -155,8 +213,13 @@ mysql> SHOW COLUMNS FROM t1 FROM test;
 
 The `ENGINES` table provides information about storage engines. For compatibility, TiDB will always describe InnoDB as the only supported engine:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM engines\G
+SELECT * FROM engines;
+```
+
+```
 *************************** 1. row ***************************
       ENGINE: InnoDB
      SUPPORT: DEFAULT
@@ -167,12 +230,17 @@ TRANSACTIONS: YES
 1 row in set (0.00 sec)
 ```
 
-### KEY\_COLUMN\_USAGE table
+### KEY_COLUMN_USAGE table
 
 The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such as the primary key constraint:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM key_column_usage WHERE table_schema='mysql' and table_name='user'\G
+SELECT * FROM key_column_usage WHERE table_schema='mysql' and table_name='user';
+```
+
+```
 *************************** 1. row ***************************
            CONSTRAINT_CATALOG: def
             CONSTRAINT_SCHEMA: mysql
@@ -202,12 +270,31 @@ POSITION_IN_UNIQUE_CONSTRAINT: NULL
 2 rows in set (0.00 sec)
 ```
 
+### PROCESSLIST table
+
+`PROCESSLIST`, just like `show processlist`, is used to view the requests that are being handled.
+
+The `PROCESSLIST` table has a `MEM` column that `show processlist` does not have. `MEM` means the occupied memory of the requests being handled, and its unit is `byte`.
+
+```
++----+------+------+--------------------+---------+------+-------+---------------------------+-----+
+| ID | USER | HOST | DB                 | COMMAND | TIME | STATE | INFO                      | MEM |
++----+------+------+--------------------+---------+------+-------+---------------------------+-----+
+| 1  | root | ::1  | INFORMATION_SCHEMA | Query   | 0    | 2     | select * from PROCESSLIST | 0   |
++----+------+------+--------------------+---------+------+-------+---------------------------+-----+
+```
+
 ### SCHEMATA table
 
 The `SCHEMATA` table provides information about databases. The table data is equivalent to the result of the `SHOW DATABASES` statement:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> select * from SCHEMATA\G
+select * from SCHEMATA;
+```
+
+```
 *************************** 1. row ***************************
               CATALOG_NAME: def
                SCHEMA_NAME: INFORMATION_SCHEMA
@@ -235,11 +322,17 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 4 rows in set (0.00 sec)
 ```
 
-### SESSION\_VARIABLES table
+### SESSION_VARIABLES table
 
 The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement:
+
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM session_variables LIMIT 10;
+SELECT * FROM session_variables LIMIT 10;
+```
+
+```
 +----------------------------------+----------------------+
 | VARIABLE_NAME                    | VARIABLE_VALUE       |
 +----------------------------------+----------------------+
@@ -257,12 +350,57 @@ mysql> SELECT * FROM session_variables LIMIT 10;
 10 rows in set (0.00 sec)
 ```
 
+## SLOW_QUERY table
+
+The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance of the SQL engine, see [Slow Query Log Document](/v3.0/how-to/maintain/identify-slow-queries.md).
+
+```sql
+mysql> desc information_schema.slow_query;
++---------------+---------------------+------+------+---------+-------+
+| Field         | Type                | Null | Key  | Default | Extra |
++---------------+---------------------+------+------+---------+-------+
+| Time          | timestamp unsigned  | YES  |      | NULL    |       |
+| Txn_start_ts  | bigint(20) unsigned | YES  |      | NULL    |       |
+| User          | varchar(64)         | YES  |      | NULL    |       |
+| Host          | varchar(64)         | YES  |      | NULL    |       |
+| Conn_ID       | bigint(20) unsigned | YES  |      | NULL    |       |
+| Query_time    | double unsigned     | YES  |      | NULL    |       |
+| Process_time  | double unsigned     | YES  |      | NULL    |       |
+| Wait_time     | double unsigned     | YES  |      | NULL    |       |
+| Backoff_time  | double unsigned     | YES  |      | NULL    |       |
+| Request_count | bigint(20) unsigned | YES  |      | NULL    |       |
+| Total_keys    | bigint(20) unsigned | YES  |      | NULL    |       |
+| Process_keys  | bigint(20) unsigned | YES  |      | NULL    |       |
+| DB            | varchar(64)         | YES  |      | NULL    |       |
+| Index_ids     | varchar(100)        | YES  |      | NULL    |       |
+| Is_internal   | tinyint(1) unsigned | YES  |      | NULL    |       |
+| Digest        | varchar(64)         | YES  |      | NULL    |       |
+| Stats         | varchar(512)        | YES  |      | NULL    |       |
+| Cop_proc_avg  | double unsigned     | YES  |      | NULL    |       |
+| Cop_proc_p90  | double unsigned     | YES  |      | NULL    |       |
+| Cop_proc_max  | double unsigned     | YES  |      | NULL    |       |
+| Cop_proc_addr | varchar(64)         | YES  |      | NULL    |       |
+| Cop_wait_avg  | double unsigned     | YES  |      | NULL    |       |
+| Cop_wait_p90  | double unsigned     | YES  |      | NULL    |       |
+| Cop_wait_max  | double unsigned     | YES  |      | NULL    |       |
+| Cop_wait_addr | varchar(64)         | YES  |      | NULL    |       |
+| Mem_max       | bigint(20) unsigned | YES  |      | NULL    |       |
+| Succ          | tinyint(1) unsigned | YES  |      | NULL    |       |
+| Query         | longblob unsigned   | YES  |      | NULL    |       |
++---------------+---------------------+------+------+---------+-------+
+```
+
 ### STATISTICS table
 
 The `STATISTICS` table provides information about table indexes:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc statistics;
+desc statistics;
+```
+
+```
 +---------------|---------------------|------|------|---------|-------+
 | Field         | Type                | Null | Key  | Default | Extra |
 +---------------|---------------------|------|------|---------|-------+
@@ -301,8 +439,13 @@ SHOW INDEX
 
 The `TABLES` table provides information about tables in databases:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user'\G
+SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user';
+```
+
+```
 *************************** 1. row ***************************
   TABLE_CATALOG: def
    TABLE_SCHEMA: mysql
@@ -323,8 +466,8 @@ MAX_DATA_LENGTH: 0
      CHECK_TIME: NULL
 TABLE_COLLATION: utf8mb4_bin
        CHECKSUM: NULL
- CREATE_OPTIONS: 
-  TABLE_COMMENT: 
+ CREATE_OPTIONS:
+  TABLE_COMMENT:
   TIDB_TABLE_ID: 5
 1 row in set (0.00 sec)
 ```
@@ -341,12 +484,17 @@ SHOW TABLES
   [LIKE 'wild']
 ```
 
-### TABLE\_CONSTRAINTS table
+### TABLE_CONSTRAINTS table
 
 The `TABLE_CONSTRAINTS` table describes which tables have constraints:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SELECT * FROM table_constraints WHERE constraint_type='UNIQUE'\G
+SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
+```
+
+```
 *************************** 1. row ***************************
 CONSTRAINT_CATALOG: def
  CONSTRAINT_SCHEMA: mysql
@@ -395,12 +543,155 @@ CONSTRAINT_CATALOG: def
 - The `CONSTRAINT_TYPE` value can be `UNIQUE`, `PRIMARY KEY`, or `FOREIGN KEY`.
 - The `UNIQUE` and `PRIMARY KEY` information is similar to the result of the `SHOW INDEX` statement.
 
-### USER\_PRIVILEGES table
+### TIDB_HOT_REGIONS table
+
+The `TIDB_HOT_REGIONS` table provides information about hot spot Regions.
+
+{{< copyable "sql" >}}
+
+```sql
+desc TIDB_HOT_REGIONS;
+```
+
+```
++----------------+---------------------+------+-----+---------+-------+
+| Field          | Type                | Null | Key | Default | Extra |
++----------------+---------------------+------+-----+---------+-------+
+| TABLE_ID       | bigint(21) unsigned | YES  |     | <null>  |       |
+| INDEX_ID       | bigint(21) unsigned | YES  |     | <null>  |       |
+| DB_NAME        | varchar(64)         | YES  |     | <null>  |       |
+| TABLE_NAME     | varchar(64)         | YES  |     | <null>  |       |
+| INDEX_NAME     | varchar(64)         | YES  |     | <null>  |       |
+| TYPE           | varchar(64)         | YES  |     | <null>  |       |
+| MAX_HOT_DEGREE | bigint(21) unsigned | YES  |     | <null>  |       |
+| REGION_COUNT   | bigint(21) unsigned | YES  |     | <null>  |       |
+| FLOW_BYTES     | bigint(21) unsigned | YES  |     | <null>  |       |
++----------------+---------------------+------+-----+---------+-------+
+```
+
+### TIDB_INDEXES table
+
+The `TIDB_INDEXES` table provides the INDEX information of all tables.
+
+{{< copyable "sql" >}}
+
+```sql
+desc TIDB_INDEXES;
+```
+
+```
++---------------+---------------------+------+-----+---------+-------+
+| Field         | Type                | Null | Key | Default | Extra |
++---------------+---------------------+------+-----+---------+-------+
+| TABLE_SCHEMA  | varchar(64)         | YES  |     | <null>  |       |
+| TABLE_NAME    | varchar(64)         | YES  |     | <null>  |       |
+| NON_UNIQUE    | bigint(21) unsigned | YES  |     | <null>  |       |
+| KEY_NAME      | varchar(64)         | YES  |     | <null>  |       |
+| SEQ_IN_INDEX  | bigint(21) unsigned | YES  |     | <null>  |       |
+| COLUMN_NAME   | varchar(64)         | YES  |     | <null>  |       |
+| SUB_PART      | bigint(21) unsigned | YES  |     | <null>  |       |
+| INDEX_COMMENT | varchar(2048)       | YES  |     | <null>  |       |
+| INDEX_ID      | bigint(21) unsigned | YES  |     | <null>  |       |
++---------------+---------------------+------+-----+---------+-------+
+```
+
+### TIKV_REGION_PEERS table
+
+The `TIKV_REGION_PEERS` table provides the peer information of all Regions.
+
+{{< copyable "sql" >}}
+
+```sql
+desc TIKV_REGION_PEERS;
+```
+
+```
++--------------+---------------------+------+-----+---------+-------+
+| Field        | Type                | Null | Key | Default | Extra |
++--------------+---------------------+------+-----+---------+-------+
+| REGION_ID    | bigint(21) unsigned | YES  |     | <null>  |       |
+| PEER_ID      | bigint(21) unsigned | YES  |     | <null>  |       |
+| STORE_ID     | bigint(21) unsigned | YES  |     | <null>  |       |
+| IS_LEARNER   | tinyint(1) unsigned | YES  |     | <null>  |       |
+| IS_LEADER    | tinyint(1) unsigned | YES  |     | <null>  |       |
+| STATUS       | varchar(10)         | YES  |     | <null>  |       |
+| DOWN_SECONDS | bigint(21) unsigned | YES  |     | <null>  |       |
++--------------+---------------------+------+-----+---------+-------+
+```
+
+### TIKV_REGION_STATUS table
+
+The `TIKV_REGION_STATUS` table provides the status information of all Regions.
+
+{{< copyable "sql" >}}
+
+```sql
+desc TIKV_REGION_STATUS;
+```
+
+```
++------------------+---------------------+------+-----+---------+-------+
+| Field            | Type                | Null | Key | Default | Extra |
++------------------+---------------------+------+-----+---------+-------+
+| REGION_ID        | bigint(21) unsigned | YES  |     | <null>  |       |
+| START_KEY        | text                | YES  |     | <null>  |       |
+| END_KEY          | text                | YES  |     | <null>  |       |
+| EPOCH_CONF_VER   | bigint(21) unsigned | YES  |     | <null>  |       |
+| EPOCH_VERSION    | bigint(21) unsigned | YES  |     | <null>  |       |
+| WRITTEN_BYTES    | bigint(21) unsigned | YES  |     | <null>  |       |
+| READ_BYTES       | bigint(21) unsigned | YES  |     | <null>  |       |
+| APPROXIMATE_SIZE | bigint(21) unsigned | YES  |     | <null>  |       |
+| APPROXIMATE_KEYS | bigint(21) unsigned | YES  |     | <null>  |       |
++------------------+---------------------+------+-----+---------+-------+
+```
+
+### TIKV_STORE_STATUS table
+
+The `TIKV_STORE_STATUS` table provides the status information of all TiKV Stores.
+
+{{< copyable "sql" >}}
+
+```sql
+desc TIKV_STORE_STATUS;
+```
+
+```
++-------------------+---------------------+------+-----+---------+-------+
+| Field             | Type                | Null | Key | Default | Extra |
++-------------------+---------------------+------+-----+---------+-------+
+| STORE_ID          | bigint(21) unsigned | YES  |     | <null>  |       |
+| ADDRESS           | varchar(64)         | YES  |     | <null>  |       |
+| STORE_STATE       | bigint(21) unsigned | YES  |     | <null>  |       |
+| STORE_STATE_NAME  | varchar(64)         | YES  |     | <null>  |       |
+| LABEL             | json unsigned       | YES  |     | <null>  |       |
+| VERSION           | varchar(64)         | YES  |     | <null>  |       |
+| CAPACITY          | varchar(64)         | YES  |     | <null>  |       |
+| AVAILABLE         | varchar(64)         | YES  |     | <null>  |       |
+| LEADER_COUNT      | bigint(21) unsigned | YES  |     | <null>  |       |
+| LEADER_WEIGHT     | bigint(21) unsigned | YES  |     | <null>  |       |
+| LEADER_SCORE      | bigint(21) unsigned | YES  |     | <null>  |       |
+| LEADER_SIZE       | bigint(21) unsigned | YES  |     | <null>  |       |
+| REGION_COUNT      | bigint(21) unsigned | YES  |     | <null>  |       |
+| REGION_WEIGHT     | bigint(21) unsigned | YES  |     | <null>  |       |
+| REGION_SCORE      | bigint(21) unsigned | YES  |     | <null>  |       |
+| REGION_SIZE       | bigint(21) unsigned | YES  |     | <null>  |       |
+| START_TS          | datetime unsigned   | YES  |     | <null>  |       |
+| LAST_HEARTBEAT_TS | datetime unsigned   | YES  |     | <null>  |       |
+| UPTIME            | varchar(64)         | YES  |     | <null>  |       |
++-------------------+---------------------+------+-----+---------+-------+
+```
+
+### USER_PRIVILEGES table
 
 The `USER_PRIVILEGES` table provides information about global privileges. This information comes from the `mysql.user` system table:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc USER_PRIVILEGES;
+desc USER_PRIVILEGES;
+```
+
+```
 +----------------|--------------|------|------|---------|-------+
 | Field          | Type         | Null | Key  | Default | Extra |
 +----------------|--------------|------|------|---------|-------+
@@ -416,11 +707,23 @@ mysql> desc USER_PRIVILEGES;
 
 The `VIEWS` table provides information about SQL views:
 
-```
-mysql> create view test.v1 as select 1;
-Query OK, 0 rows affected (0.00 sec)
+{{< copyable "sql" >}}
 
-mysql> select * from views\G
+```sql
+create view test.v1 as select 1;
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
+select * from views;
+```
+
+```
 *************************** 1. row ***************************
        TABLE_CATALOG: def
         TABLE_SCHEMA: test
@@ -553,7 +856,7 @@ Create Table: CREATE TABLE `TIKV_REGION_STATUS` (
 1 row in set (0.00 sec)
 ```
 
-You can implement the `top confver`, `top read` and `top write` operations in pd-ctl via the `ORDER BY X LIMIT Y` operation on the `EPOCH_CONF_VER`, `WRITTEN_BYTES` and `READ_BYTES` columns. 
+You can implement the `top confver`, `top read` and `top write` operations in pd-ctl via the `ORDER BY X LIMIT Y` operation on the `EPOCH_CONF_VER`, `WRITTEN_BYTES` and `READ_BYTES` columns.
 
 You can query the top 3 Regions with the most write data using the following SQL statement:
 
@@ -630,7 +933,7 @@ The `STATE` column shows the execution status of a specific `ANALYZE` task. Its 
 
 ## SLOW\_QUERY table
 
-The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/how-to/maintain/identify-slow-queries.md/#identify-slow-queries).
+The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/v3.0/how-to/maintain/identify-slow-queries.md#identify-slow-queries).
 
 ```sql
 mysql> desc slow_query\G

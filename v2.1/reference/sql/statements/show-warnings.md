@@ -1,12 +1,12 @@
 ---
-title: SHOW WARNINGS | TiDB SQL Statement Reference 
+title: SHOW WARNINGS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
 category: reference
 ---
 
-# SHOW WARNINGS 
+# SHOW WARNINGS
 
-This statement shows a list of warnings that occurred for previously executed statements in the current client connection. As in MySQL, the `sql_mode` impacts which statements will cause errors vs. warnings considerably. 
+This statement shows a list of warnings that occurred for previously executed statements in the current client connection. As in MySQL, the `sql_mode` impacts which statements will cause errors vs. warnings considerably.
 
 ## Synopsis
 
@@ -80,8 +80,8 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/v2.1/report-issue.md) on GitHub.
 
 ## See also
 
-* [SHOW ERRORS](/reference/sql/statements/show-errors.md)
+* [SHOW ERRORS](/v2.1/reference/sql/statements/show-errors.md)

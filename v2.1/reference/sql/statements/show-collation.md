@@ -1,5 +1,5 @@
 ---
-title: SHOW COLLATION | TiDB SQL Statement Reference 
+title: SHOW COLLATION | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW COLLATION for the TiDB database.
 category: reference
 ---
@@ -256,4 +256,4 @@ TiDB does not support collations other than binary. This statement is only provi
 
 ## See also
 
-* [SHOW CHARACTER SET](/reference/sql/statements/show-character-set.md)
+* [SHOW CHARACTER SET](/v2.1/reference/sql/statements/show-character-set.md)

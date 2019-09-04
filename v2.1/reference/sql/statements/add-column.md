@@ -1,10 +1,10 @@
 ---
-title: ADD COLUMN | TiDB SQL Statement Reference 
+title: ADD COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of ADD COLUMN for the TiDB database.
 category: reference
 ---
 
-# ADD COLUMN 
+# ADD COLUMN
 
 The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding a column.
 
@@ -78,5 +78,5 @@ mysql> SELECT * FROM t1;
 
 ## See also
 
-* [ADD INDEX](/reference/sql/statements/add-index.md)
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [ADD INDEX](/v2.1/reference/sql/statements/add-index.md)
+* [CREATE TABLE](/v2.1/reference/sql/statements/create-table.md)

@@ -43,17 +43,11 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join.
 - When the aggregate operation is slow in query, you can set the variable value to 1.
 
-### tidb_opt_insubquery_unfold
-
-- Scope: SESSION
-- Default value: 0
-- This variable is used to set whether the optimizer executes the optimization operation of unfolding the "in-" subquery.
-
 ### tidb_auto_analyze_ratio
 
 - Scope: GLOBAL
 - Default value: 0.5
-- This variable is used to set the threshold when TiDB automatically executes [`ANALYZE TABLE`](/reference/sql/statements/analyze-table.md) in a background thread to update table statistics. For example, a value of 0.5 means that auto-analyze is triggered when greater than 50% of the rows in a table have been modified.  Auto-analyze can be restricted to only execute during certain hours of the day by specifying `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
+- This variable is used to set the threshold when TiDB automatically executes [`ANALYZE TABLE`](/dev/reference/sql/statements/analyze-table.md) in a background thread to update table statistics. For example, a value of 0.5 means that auto-analyze is triggered when greater than 50% of the rows in a table have been modified.  Auto-analyze can be restricted to only execute during certain hours of the day by specifying `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
 
 > **Note:**
 >
@@ -177,16 +171,14 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to divide the inserted data automatically. It is valid only when `autocommit` is enabled.
-- When inserting a large amount of data, you can set the variable value to 1. Then the inserted data is automatically divided into multiple batches and each batch is inserted by a single transaction.
-- This operation might lead to a loss of transaction atomicity. Therefore, it is not recommended to use this parameter in the production environment.
+- When inserting a large amount of data, you can set the variable value to `1`. Then, the inserted data is automatically divided into multiple batches and each batch is inserted by a single transaction. This operation breaks the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ### tidb_batch_delete
 
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to divide the data for deletion automatically. It is valid only when you delete from a single table and `autocommit` is enabled. For the definition of single-table DELETE statement, see [here](https://dev.mysql.com/doc/refman/8.0/en/delete.html).
-- When deleting a large amount of data, you can set the variable value to 1. Then the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction.
-- This operation might lead to a loss of transaction atomicity. Therefore, it is not recommended to use this parameter in the production environment.
+- When deleting a large amount of data, you can set the variable value to `1`. Then, the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction. This operation breaks the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ### tidb_dml_batch_size
 
@@ -194,6 +186,12 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: 20000
 - This variable is used to set the automatically divided batch size of the data for insertion/deletion. It is only valid when `tidb_batch_insert` or `tidb_batch_delete` is enabled.
 - When the data size of a single row is very large, the overall data size of 20 thousand rows exceeds the size limit for a single transaction. In this case, set the variable to a smaller value.
+
+### tidb_init_chunk_size
+
+- Scope: SESSION | GLOBAL
+- Default value: 32
+- This variable is used to set the number of rows for the initial chunk during the execution process.
 
 ### tidb_max_chunk_size
 
@@ -273,7 +271,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION | GLOBAL
 - Default value: 10
-- When a transaction encounters retriable errors (such as transaction conflicts, over slow transaction commit, or table schema changes), this transaction can be re-executed. This variable is used to set the maximum number of the retries.
+- When a transaction encounters retryable errors (such as transaction conflicts, over slow transaction commit, or table schema changes), this transaction can be re-executed. This variable is used to set the maximum number of the retries.
 
 ### tidb_disable_txn_auto_retry
 
@@ -285,23 +283,27 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    To decide whether you can enable automatic retry, see [description of optimistic transactions](/reference/transactions/transaction-isolation.md#description-of-optimistic-transactions).
+    To decide whether you can enable automatic retry, see [description of optimistic transactions](/dev/reference/transactions/transaction-isolation.md#description-of-optimistic-transactions).
 
-### tidb_back_off_weight
+### tidb_backoff_weight
 
 - Scope: SESSION | GLOBAL
 - Default value: 2
-- This variable is used to increase the weight of the maximum time of TiDB `back-off`, that is, the maximum retry time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry time and the minimum value is 1.
+- This variable is used to increase the weight of the maximum time of TiDB `backoff`, that is, the maximum retry time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry time and the minimum value is 1.
 
-    For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_back_off_weight = 2`, the maximum timeout for taking TSO is: *base time * 2 = 30 seconds*.
+    For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time * 2 = 30 seconds*.
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
 
 ### tidb_enable_table_partition
 
 - Scope: SESSION
-- Default value: 0
+- Default value: "auto"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
+    - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+    - `auto` indicates enabling the `TABLE PARTITION` feature. Currently, it indicates enabling range partition and hash partition.
+    - `on` functions the same way as `auto` does.
+- Currently, TiDB only supports range partition and hash partition.
 
 ### tidb_backoff_lock_fast
 
@@ -329,6 +331,12 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: `PRIORITY_LOW`
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
+
+### tidb_ddl_error_count_limit
+
+- Scope: GLOBAL
+- Default value: 512
+- This variable is used to set the number of retries when the DDL operation fails. When the number of retries exceeds the parameter value, the wrong DDL operation is canceled.
 
 ### tidb_force_priority
 
@@ -382,18 +390,128 @@ Usage example:
 set tidb_query_log_max_len = 20
 ```
 
+### tidb_txn_mode
+
+- Scope: SESSION
+- Default value: "", indicating the optimistic locking mode.
+- This variable is used to set the transaction mode of the current session. TiDB 3.0 supports the pessimistic locking mode (experimental). After you set `tidb_txn_mode` to `pessimistic`, all explicit transactions (namely non-autocommit transactions) the session executes become pessimistic transactions. For details, see [TiDB Pessimistic Transaction Mode](/dev/reference/transactions/transaction-pessimistic.md).
+
+### tidb_constraint_check_in_place
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- TiDB uses the optimistic locking model by default. This means that conflict check (unique key check) is performed when the transaction is committed. This variable is used to set whether to do a unique key check each time a row of data is written.
+- If this variable is enabled, the performance might be affected in a scenario where a large batch of data is written. For example:
+
+    - When this variable is disabled:
+
+        ```sql
+        tidb >create table t (i int key)
+        tidb >insert into t values (1);
+        tidb >begin
+        tidb >insert into t values (1);
+        Query OK, 1 row affected
+        tidb >commit; -- Check only when a transaction is committed.
+        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+        ```
+
+    - After this variable is enabled:
+
+        ```sql
+        tidb >set @@tidb_constraint_check_in_place=1
+        tidb >begin
+        tidb >insert into t values (1);
+        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+        ```
+
+### tidb_check_mb4_value_in_utf8
+
+- Scope: SERVER
+- Default value: 1, indicating check the validity of UTF-8 data. This default behavior is compatible with MySQL.
+- This variable is used to set whether to check the validity of UTF-8 data.
+- To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because there is no data validity check in the earlier version. For details, see [FAQs After Upgrade](/dev/faq/upgrade.md).
+
+### tidb_opt_insubq_to_join_and_agg
+
+- Scope: SESSION | GLOBAL
+- Default value: 1
+- This variable is used to set whether to enable the optimization rule that converts a subquery to join and aggregation.
+- For example, after you enable this optimization rule, the subquery is converted as follows:
+
+    ```sql
+    select * from t where t.a in (select aa from t1)
+    ```
+
+    The subquery is converted to join as follows:
+
+    ```sql
+    select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
+    ```
+
+    If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
+
+    ```sql
+    select * from t, t1 where t.a=t1.a
+    ```
+
+### tidb_opt_correlation_threshold
+
+- Scope: SESSION | GLOBAL
+- Default value: 0.9
+- This variable is used to set the threshold value that determines whether to enable estimating the row count by using column order correlation. If the order correlation between the current column and the `handle` column exceeds the threshold value, this method is enabled.
+
+### tidb_opt_correlation_exp_factor
+
+- Scope: SESSION | GLOBAL
+- Default value: 1
+- When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.
+    - When the value is 0, the heuristic method is not used.
+    - When the value is greater than 0:
+        - A larger value indicates that an index scan will probably be used in the heuristic method.
+        - A smaller value indicates that a table scan will probably be used in the heuristic method.  
+
+### tidb_enable_window_function
+
+- Scope: SESSION | GLOBAL
+- Default value: 1, indicating enabling the window function feature.
+- This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `0`.
+
+### tidb_slow_query_file
+
+- Scope: SESSION
+- Default value: ""
+- When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is "tidb-slow.log". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path. For details, see [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md).
+
+### tidb_enable_fast_analyze
+
+- Scope: SESSION | GLOBAL
+- Default value: 0, indicating not enabling the statistics fast `Analyze` feature.
+- This variable is used to set whether to enable the statistics `Fast Analyze` feature.
+- If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to an unoptimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
+
+### tidb_expensive_query_time_threshold
+
+- Scope: SERVER
+- Default value: 60
+- This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
+    - Slow logs are printed after the statement is executed.
+    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
+
 ### tidb_wait_split_region_finish
 
 - Scope: SESSION
-- Default value: 1
-
-Depending on PD scheduling and the load condition of TiKV, Region split might take a long time. This variable determines whether to wait for all Regions to be split before returning the result to the client when executing `SPLIT REGION`. Value 1 means waiting for the split to complete before returning the result. 0 means returning the result without waiting for Region split.
-
-It should be noted that Region split can impact the read/write performance for the Regions being split. For scenarios such as batch writing and data importing, it is recommended to wait for the Region split to finish before data importing.
+- Default value: 1, indicating returning the result after all Regions are scattered.
+- It usually takes a long time to scatter Regions, which is determined by PD scheduling and TiKV loads. This variable is used to set whether to return the result to the client after all Regions are scattered completely when the `SPLIT REGION` statement is being executed. Value `0` indicates returning the value before finishing scattering all Regions.
+- Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write or data importing scenarios, it is recommended to import data after Regions scattering is finished.
 
 ### tidb_wait_split_region_timeout
 
 - Scope: SESSION
 - Default value: 300
+- This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned.
 
-This variable specifies the execution timeout of the `SPLIT REGION` statement in seconds. A timeout error is returned if the operation is out of time.
+### tidb_scatter_region
+
+- Scope: GLOBAL
+- Default value: 0
+- By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.

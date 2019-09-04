@@ -37,8 +37,8 @@ This section describes the configuration of independent deployment of TiKV and T
 For independent deployment of TiKV and TiSpark, it is recommended to refer to the following recommendations:
 
 + Hardware configuration
- - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](/how-to/deploy/hardware-recommendations.md#deployment-recommendations).
- - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G.
+    - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](/v2.1/how-to/deploy/hardware-recommendations.md#deployment-recommendations).
+    - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G.
 
 ### Configuration of independent deployment of Spark and TiSpark
 
@@ -151,7 +151,7 @@ The result is:
 | 600000000 |
 +-------------+
 ```
- 
+
 Spark SQL Interactive shell remains the same:
 
 ```sh
@@ -197,7 +197,7 @@ TiSpark on PySpark is a Python package built to support the Python language with
 
 ## Use TiSpark together with Hive
 
-You can use TiSpark together with Hive. 
+You can use TiSpark together with Hive.
 
 Before starting Spark, you need to set the `HADOOP_CONF_DIR` environment variable to your Hadoop configuration folder and copy `hive-site.xml` to the `spark/conf` folder.
 
@@ -231,7 +231,7 @@ df.write
 .option("isolationLevel", "NONE") // recommended to set isolationLevel to NONE if you have a large DF to load.
 .option("user", "root") // TiDB user here
 .save()
-``` 
+```
 
 It is recommended to set `isolationLevel` to `NONE` to avoid large single transactions which might potentially lead to TiDB OOM.
 
@@ -242,14 +242,14 @@ TiSpark uses TiDB statistic information for the following items:
 1. Determining which index to ues in your query plan with the estimated lowest cost.
 2. Small table broadcasting, which enables efficient broadcast join.
 
-If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](/reference/performance/statistics.md).
+If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](/v2.1/reference/performance/statistics.md).
 
 Starting from TiSpark 2.0, statistics information is default to auto load.
 
 Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
 
 Currently, you can adjust these configurations in your `spark-defaults.conf` file.
-  
+
 | Property name | Default | Description |
 | :--------   | :-----  | :---- |
 | spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |
@@ -263,3 +263,11 @@ A: You can use the existing Spark cluster without a separate deployment, but if 
 Q: Can I mix Spark with TiKV?
 
 A: If TiDB and TiKV are overloaded and run critical online tasks, consider deploying TiSpark separately. You also need to consider using different NICs to ensure that OLTP's network resources are not compromised and affect online business. If the online business requirements are not high or the loading is not large enough, you can consider mixing TiSpark with TiKV deployment.
+
+Q: What can I do if `warning：WARN ObjectStore:568 - Failed to get database` is returned when executing SQL statements using TiSpark?
+
+A: You can ignore this warning. It occurs because Spark tries to load two nonexistent databases (`default` and `global_temp`) in its catalog. If you want to mute this warning, modify [log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43) by adding `log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR` to the `log4j` file in `tispark/conf`. You can add the parameter to the `log4j` file of the `config` under Spark. If the suffix is `template`, you can use the `mv` command to change it to `properties`.
+
+Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned when executing SQL statements using TiSpark?
+
+A: This error occurs because the length of the data written exceeds the length of the data type defined by the database. You can check the field length and adjust it accordingly.

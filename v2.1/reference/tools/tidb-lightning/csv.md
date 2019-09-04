@@ -1,12 +1,12 @@
 ---
-title: TiDB-Lightning CSV Support
-summary: Learn how to import CSV files via TiDB-Lightning.
+title: TiDB Lightning CSV Support
+summary: Learn how to import CSV files via TiDB Lightning.
 category: reference
 ---
 
-# TiDB-Lightning CSV Support
+# TiDB Lightning CSV Support
 
-TiDB-Lightning supports reading CSV (comma-separated values) data source, as well as other
+TiDB Lightning supports reading CSV (comma-separated values) data source, as well as other
 delimited format such as TSV (tab-separated values).
 
 ## File name
@@ -141,7 +141,7 @@ in the field.
 
 ### Non-configurable options
 
-Lightning does not support every option supported by the `LOAD DATA` statement. Some examples:
+TiDB Lightning does not support every option supported by the `LOAD DATA` statement. Some examples:
 
 * The line terminator must only be CR (`\r`), LF (`\n`) or CRLF (`\r\n`), i.e. `LINES TERMINATED BY`
     is not customizable.
@@ -198,7 +198,6 @@ ID    Region    Count
 3     West      10
 4     North     39
 ```
-
 
 ### TPC-H DBGEN
 

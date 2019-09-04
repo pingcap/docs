@@ -10,6 +10,10 @@ This document describes how to quickly deploy a TiDB testing cluster with a sing
 
 With Docker Compose, you can use a YAML file to configure application services in multiple containers. Then, with a single command, you can create and start all the services from your configuration.
 
+> **Warning:**
+>
+> This is for testing only. DO NOT USE in production! Please deploy TiDB with [our Ansible solution](/dev/how-to/deploy/orchestrated/ansible.md) or [TiDB Operator in Kubernetes](/dev/tidb-in-kubernetes/deploy/tidb-operator.md) in production.
+
 ## Prerequisites
 
 Make sure you have installed the following items on your machine:
@@ -44,7 +48,7 @@ Make sure you have installed the following items on your machine:
     mysql -h 127.0.0.1 -P 4000 -u root
     ```
 
-## Monitor the cluster 
+## Monitor the cluster
 
 After you have successfully deployed a TiDB cluster, you can now monitor the TiDB cluster using one of the following methods:
 
@@ -173,6 +177,6 @@ docker-compose exec tispark-master /opt/spark/bin/pyspark
 docker-compose exec tispark-master /opt/spark/bin/sparkR
 ```
 
-For more details about TiSpark, see [here](/how-to/deploy/tispark.md).
+For more details about TiSpark, see [here](/dev/how-to/deploy/tispark.md).
 
-Here is [a 5-minute tutorial](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/) for macOS users that shows how to spin up a standard TiDB cluster using Docker Compose on your local computer.
+Here is [a 5-minute tutorial](https://pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/) for macOS users that shows how to spin up a standard TiDB cluster using Docker Compose on your local computer.

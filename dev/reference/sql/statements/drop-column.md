@@ -1,5 +1,5 @@
 ---
-title: DROP COLUMN | TiDB SQL Statement Reference 
+title: DROP COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP COLUMN for the TiDB database.
 category: reference
 ---
@@ -25,7 +25,6 @@ This statement drops a column from a specified table. `DROP COLUMN` is online in
 **ColumnName:**
 
 ![ColumnName](/media/sqlgram-dev/ColumnName.png)
-
 
 ## Examples
 
@@ -85,6 +84,6 @@ mysql> SELECT * FROM t1;
 
 ## See also
 
-* [ADD COLUMN](/reference/sql/statements/add-column.md)
-* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
+* [ADD COLUMN](/dev/reference/sql/statements/add-column.md)
+* [SHOW CREATE TABLE](/dev/reference/sql/statements/show-create-table.md)
+* [CREATE TABLE](/dev/reference/sql/statements/create-table.md)

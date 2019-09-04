@@ -1,5 +1,5 @@
 ---
-title: FLUSH STATUS | TiDB SQL Statement Reference 
+title: FLUSH STATUS | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH STATUS for the TiDB database.
 category: reference
 ---
@@ -74,4 +74,4 @@ mysql> show status;
 
 ## See also
 
-* [SHOW \[GLOBAL|SESSION\] STATUS](/reference/sql/statements/show-status.md)
+* [SHOW \[GLOBAL|SESSION\] STATUS](/v3.0/reference/sql/statements/show-status.md)

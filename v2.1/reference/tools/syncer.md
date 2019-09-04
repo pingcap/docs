@@ -8,9 +8,9 @@ category: reference
 
 ## About Syncer
 
-Syncer is a tool used to import data incrementally. It is a part of the TiDB enterprise toolset. 
+Syncer is a tool used to import data incrementally. It is a part of the TiDB enterprise toolset.
 
-It can be [downloaded](/reference/tools/download.md) as part of the Enterprise Tools package.
+It can be [downloaded](/v2.1/reference/tools/download.md) as part of the Enterprise Tools package.
 
 ## Syncer architecture
 
@@ -111,7 +111,7 @@ max-retry = 100
 # Skip the DDL statement; the format is **prefix exact match**, for example, you need to fill at least `DROP TABLE` in to skip `DROP TABLE ABC`.
 # skip-ddls = ["ALTER USER", "CREATE USER"]
 
-# After Syncer uses `route-rules` to map the upstream schema and table into `target-schema` and `target-table`, 
+# After Syncer uses `route-rules` to map the upstream schema and table into `target-schema` and `target-table`,
 # Syncer matches the mapped `target-schema` and `target-table` with do/ignore rules,
 # and the matching sequence is: replicate-do-db --> replicate-do-table --> replicate-ignore-db --> replicate-ignore-table.
 # Specify the database name to be replicated. Support regular expressions. Start with '~' to use regular expressions.
@@ -350,16 +350,16 @@ Before replicating data using Syncer, check the following items:
 
     Use the `select @@version;` command to check your database version. Currently, Syncer supports the following versions:
 
-    - 5.5 < MySQL version < 5.8
+    - 5.5 < MySQL version < 8.0
     - MariaDB version >= 10.1.2
 
         In earlier versions of MariaDB, the format of some binlog field types is inconsistent with that in MySQL.
 
-    > **Note:** 
+    > **Note:**
     >
     > If there is a master-slave replication structure between the upstream MySQL/MariaDB servers, then choose the following version.
     >
-    > - 5.7.1 < MySQL version < 5.8
+    > - 5.7.1 < MySQL version < 8.0
     > - MariaDB version >= 10.1.3
 
 2. Check the `server-id` of the source database.
@@ -414,9 +414,9 @@ Before replicating data using Syncer, check the following items:
 
 4. Check user privileges.
 
-    1. Check the user privileges required by mydumper for full data export.
+    1. Check the user privileges required by Mydumper for full data export.
 
-        - To export the full data using mydumper, the user must have the privileges of `select` and `reload`.
+        - To export the full data using Mydumper, the user must have the privileges of `select` and `reload`.
         - You can add the `--no-locks` option when the operation object is RDS, to avoid applying for the `reload` privilege.
 
     2. Check the upstream MySQL or MariaDB user privileges required by Syncer for incremental replication.
@@ -461,8 +461,8 @@ Before replicating data using Syncer, check the following items:
     ```
 
 6. Check the Character Set.
-    
-    TiDB differs from MySQL in [Character Set](/reference/sql/character-set.md).
+
+    TiDB differs from MySQL in [Character Set](/v2.1/reference/sql/character-set.md).
 
 ## Syncer monitoring solution
 
@@ -506,7 +506,7 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 
 1. Log in to the Grafana Web interface.
 
-    - The default address is: http://localhost:3000
+    - The default address is: <http://localhost:3000>
     - The default account name: admin
     - The password for the default account: admin
 
@@ -555,7 +555,6 @@ Syncer provides the metric interface, and requires Prometheus to actively obtain
 
 - metrics: `syncer_binlog_file{node="syncer"}` and `syncer_binlog_file{node="master"}`
 - info: it works with `position of binlog position`. `syncer_binlog_file{node="master"}` indicates the file number of the latest binlog position fetched from MySQL, and `syncer_binlog_file{node="syncer"}` indicates the file number of the binlog position that Syncer has replicated.
-
 
 #### title: execution jobs
 

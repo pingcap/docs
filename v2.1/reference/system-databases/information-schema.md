@@ -12,7 +12,7 @@ As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` t
 
 ### CHARACTER\_SETS table
 
-The `CHARACTER_SETS` table provides information about [character sets](/reference/sql/character-set.md). The default character set in TiDB is `utf8mb4`. Additional character sets in this table are included for compatibility with MySQL:
+The `CHARACTER_SETS` table provides information about [character sets](/v2.1/reference/sql/character-set.md). The default character set in TiDB is `utf8mb4`. Additional character sets in this table are included for compatibility with MySQL:
 
 ```sql
 mysql> SELECT * FROM character_sets;
@@ -132,14 +132,16 @@ CHARACTER_MAXIMUM_LENGTH: NULL
       CHARACTER_SET_NAME: NULL
           COLLATION_NAME: NULL
              COLUMN_TYPE: int(11)
-              COLUMN_KEY: 
-                   EXTRA: 
+              COLUMN_KEY:
+                   EXTRA:
               PRIVILEGES: select,insert,update,references
-          COLUMN_COMMENT: 
-   GENERATION_EXPRESSION: 
+          COLUMN_COMMENT:
+   GENERATION_EXPRESSION:
 1 row in set (0.01 sec)
 ```
+
 The corresponding `SHOW` statement is as follows:
+
 ```sql
 mysql> SHOW COLUMNS FROM t1 FROM test;
 +-------+---------+------+------+---------+-------+
@@ -237,6 +239,7 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 ### SESSION\_VARIABLES table
 
 The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement:
+
 ```sql
 mysql> SELECT * FROM session_variables LIMIT 10;
 +----------------------------------+----------------------+
@@ -254,6 +257,46 @@ mysql> SELECT * FROM session_variables LIMIT 10;
 | max_binlog_cache_size            | 18446744073709547520 |
 +----------------------------------+----------------------+
 10 rows in set (0.00 sec)
+```
+
+## SLOW_QUERY table
+
+The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/v2.1/how-to/maintain/identify-slow-queries.md).
+
+```sql
+mysql> desc information_schema.slow_query;
++---------------+---------------------+------+------+---------+-------+
+| Field         | Type                | Null | Key  | Default | Extra |
++---------------+---------------------+------+------+---------+-------+
+| Time          | timestamp unsigned  | YES  |      | NULL    |       |
+| Txn_start_ts  | bigint(20) unsigned | YES  |      | NULL    |       |
+| User          | varchar(64)         | YES  |      | NULL    |       |
+| Host          | varchar(64)         | YES  |      | NULL    |       |
+| Conn_ID       | bigint(20) unsigned | YES  |      | NULL    |       |
+| Query_time    | double unsigned     | YES  |      | NULL    |       |
+| Process_time  | double unsigned     | YES  |      | NULL    |       |
+| Wait_time     | double unsigned     | YES  |      | NULL    |       |
+| Backoff_time  | double unsigned     | YES  |      | NULL    |       |
+| Request_count | bigint(20) unsigned | YES  |      | NULL    |       |
+| Total_keys    | bigint(20) unsigned | YES  |      | NULL    |       |
+| Process_keys  | bigint(20) unsigned | YES  |      | NULL    |       |
+| DB            | varchar(64)         | YES  |      | NULL    |       |
+| Index_ids     | varchar(100)        | YES  |      | NULL    |       |
+| Is_internal   | tinyint(1) unsigned | YES  |      | NULL    |       |
+| Digest        | varchar(64)         | YES  |      | NULL    |       |
+| Stats         | varchar(512)        | YES  |      | NULL    |       |
+| Cop_proc_avg  | double unsigned     | YES  |      | NULL    |       |
+| Cop_proc_p90  | double unsigned     | YES  |      | NULL    |       |
+| Cop_proc_max  | double unsigned     | YES  |      | NULL    |       |
+| Cop_proc_addr | varchar(64)         | YES  |      | NULL    |       |
+| Cop_wait_avg  | double unsigned     | YES  |      | NULL    |       |
+| Cop_wait_p90  | double unsigned     | YES  |      | NULL    |       |
+| Cop_wait_max  | double unsigned     | YES  |      | NULL    |       |
+| Cop_wait_addr | varchar(64)         | YES  |      | NULL    |       |
+| Mem_max       | bigint(20) unsigned | YES  |      | NULL    |       |
+| Succ          | tinyint(1) unsigned | YES  |      | NULL    |       |
+| Query         | longblob unsigned   | YES  |      | NULL    |       |
++---------------+---------------------+------+------+---------+-------+
 ```
 
 ### STATISTICS table
@@ -322,8 +365,8 @@ MAX_DATA_LENGTH: 0
      CHECK_TIME: NULL
 TABLE_COLLATION: utf8mb4_bin
        CHECKSUM: NULL
- CREATE_OPTIONS: 
-  TABLE_COMMENT: 
+ CREATE_OPTIONS:
+  TABLE_COMMENT:
   TIDB_TABLE_ID: 5
 1 row in set (0.00 sec)
 ```

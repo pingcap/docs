@@ -67,6 +67,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     # visudo
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
+
 4. Generate the SSH key.
 
     Execute the `su` command to switch the user from `root` to `tidb`.
@@ -76,7 +77,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     ```
 
     Create the SSH key for the `tidb` user account and hit the <kbd>Enter</kbd> key when `Enter passphrase` is prompted. After successful execution, the SSH private key file is `/home/tidb/.ssh/id_rsa`, and the SSH public key file is `/home/tidb/.ssh/id_rsa.pub`.
-    
+
     ```
     $ ssh-keygen -t rsa
     Generating public/private rsa key pair.
@@ -192,7 +193,7 @@ You can choose one of the following two types of cluster topology according to y
 
 - [The cluster topology of multiple DM-worker instances on each node](#option-2-use-the-cluster-topology-of-multiple-dm-worker-instances-on-each-node)
 
-    Generally, it is recommended to deploy one DM-worker instance on each node. However, if the CPU and memory of your machine are much better than the required in [Hardware and Software Requirements](/how-to/deploy/hardware-recommendations.md), and you have more than 2 disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 DM-worker instances on a single node.
+    Generally, it is recommended to deploy one DM-worker instance on each node. However, if the CPU and memory of your machine are much better than the required in [Hardware and Software Requirements](/v2.1/how-to/deploy/hardware-recommendations.md), and you have more than 2 disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 DM-worker instances on a single node.
 
 ### Option 1: Use the cluster topology of a single DM-worker instance on each node
 

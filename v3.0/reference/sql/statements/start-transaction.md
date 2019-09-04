@@ -1,10 +1,10 @@
 ---
-title: START TRANSACTION | TiDB SQL Statement Reference 
+title: START TRANSACTION | TiDB SQL Statement Reference
 summary: An overview of the usage of START TRANSACTION for the TiDB database.
 category: reference
 ---
 
-# START TRANSACTION 
+# START TRANSACTION
 
 This statement starts a new transaction inside of TiDB. It is similar to the statements `BEGIN` and `SET autocommit=0`.
 
@@ -34,10 +34,10 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/v3.0/report-issue.md) on GitHub.
 
 ## See also
 
-* [COMMIT](/reference/sql/statements/commit.md)
-* [ROLLBACK](/reference/sql/statements/rollback.md)
-* [BEGIN](/reference/sql/statements/begin.md)
+* [COMMIT](/v3.0/reference/sql/statements/commit.md)
+* [ROLLBACK](/v3.0/reference/sql/statements/rollback.md)
+* [BEGIN](/v3.0/reference/sql/statements/begin.md)

@@ -1,16 +1,16 @@
 ---
-title: TiDB-Lightning Deployment
-summary: Deploy TiDB-Lightning to quickly import large amounts of new data.
+title: TiDB Lightning Deployment
+summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 category: reference
 ---
 
-# TiDB-Lightning Deployment
+# TiDB Lightning Deployment
 
-This document describes the hardware requirements of TiDB-Lightning on separate deployment and mixed deployment, and how to deploy it using Ansible or manually.
+This document describes the hardware requirements of TiDB Lightning on separate deployment and mixed deployment, and how to deploy it using Ansible or manually.
 
 ## Notes
 
-Before starting TiDB-Lightning, note that:
+Before starting TiDB Lightning, note that:
 
 - During the import process, the cluster cannot provide normal services.
 - If `tidb-lightning` crashes, the cluster is left in "import mode". Forgetting to switch back to "normal mode" can lead to a high amount of uncompacted data on the TiKV cluster, and cause abnormally high CPU usage and stall. You can manually switch the cluster back to "normal mode" via the `tidb-lightning-ctl` tool:
@@ -18,6 +18,20 @@ Before starting TiDB-Lightning, note that:
     ```sh
     bin/tidb-lightning-ctl -switch-mode=normal
     ```
+
+- TiDB Lightning is required to have the following privileges in the downstream TiDB:
+
+    | Privilege | Scope |
+    |----:|:------|
+    | SELECT | Tables |
+    | INSERT | Tables |
+    | UPDATE | Tables |
+    | DELETE | Tables |
+    | CREATE | Databases, tables |
+    | DROP | Databases, tables |
+    | ALTER | Tables |
+
+    If the `checksum` configuration item of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
 
 ## Hardware requirements
 
@@ -54,13 +68,13 @@ If you have sufficient machines, you can deploy multiple Lightning/Importer serv
 > - `tikv-importer` stores intermediate data on the RAM to speed up the import process. The typical memory usage can be calculated by using **(`max-open-engines` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
 
 Additionally, the target TiKV cluster should have enough space to absorb the new data.
-Besides [the standard requirements](/how-to/deploy/hardware-recommendations.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/tidb.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Besides [the standard requirements](/dev/how-to/deploy/hardware-recommendations.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/dev/faq/tidb.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
 ## Export data
 
-Use the [`mydumper` tool](/reference/tools/mydumper.md) to export data from MySQL by using the following command:
+Use the [`mydumper` tool](/dev/reference/tools/mydumper.md) to export data from MySQL by using the following command:
 
 ```sh
 ./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 256 -B test -T t1,t2 --skip-tz-utc -o /data/my_database/
@@ -74,18 +88,18 @@ In this command,
 - `-F 256`: means a table is partitioned into chunks and one chunk is 256 MB.
 - `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine, and to disable automatic conversion.
 
-If the data source consists of CSV files, see [CSV support](/reference/tools/tidb-lightning/csv.md) for configuration.
+If the data source consists of CSV files, see [CSV support](/dev/reference/tools/tidb-lightning/csv.md) for configuration.
 
-## Deploy TiDB-Lightning
+## Deploy TiDB Lightning
 
-This section describes two deployment methods of TiDB-Lightning:
+This section describes two deployment methods of TiDB Lightning:
 
-- [Deploy TiDB-Lightning using Ansible](#deploy-tidb-lightning-using-ansible)
-- [Deploy TiDB-Lightning manually](#deploy-tidb-lightning-manually)
+- [Deploy TiDB Lightning using Ansible](#deploy-tidb-lightning-using-ansible)
+- [Deploy TiDB Lightning manually](#deploy-tidb-lightning-manually)
 
-### Deploy TiDB-Lightning using Ansible
+### Deploy TiDB Lightning using Ansible
 
-You can deploy TiDB-Lightning using Ansible together with the [deployment of the TiDB cluster itself using Ansible](/how-to/deploy/orchestrated/ansible.md).
+You can deploy TiDB Lightning using Ansible together with the [deployment of the TiDB cluster itself using Ansible](/dev/how-to/deploy/orchestrated/ansible.md).
 
 1. Edit `inventory.ini` to add the addresses of the `tidb-lightning` and `tikv-importer` servers.
 
@@ -121,7 +135,7 @@ You can deploy TiDB-Lightning using Ansible together with the [deployment of the
         # The listening port for metrics gathering. Should be open to the monitoring servers.
         tidb_lightning_pprof_port: 8289
 
-        # The file path that tidb-lightning reads the data source (mydumper SQL dump or CSV) from.
+        # The file path that tidb-lightning reads the data source (Mydumper SQL dump or CSV) from.
         data_source_dir: "{{ deploy_dir }}/mydumper"
         ```
 
@@ -158,7 +172,7 @@ You can deploy TiDB-Lightning using Ansible together with the [deployment of the
 
 7. After completion, run `scripts/stop_importer.sh` on the `tikv-importer` server to stop Importer.
 
-### Deploy TiDB-Lightning manually
+### Deploy TiDB Lightning manually
 
 #### Step 1: Deploy a TiDB cluster
 
@@ -166,13 +180,13 @@ Before importing data, you need to have a deployed TiDB cluster, with the cluste
 
 You can find deployment instructions in [TiDB Quick Start Guide](https://pingcap.com/docs/QUICKSTART/).
 
-#### Step 2: Download the TiDB-Lightning installation package
+#### Step 2: Download the TiDB Lightning installation package
 
-Download the TiDB-Lightning package (choose the same version as that of the TiDB cluster):
+Download the TiDB Lightning package (choose the same version as that of the TiDB cluster):
 
-- **v2.1.9**: https://download.pingcap.org/tidb-v2.1.9-linux-amd64.tar.gz
-- **v2.0.9**: https://download.pingcap.org/tidb-lightning-v2.0.9-linux-amd64.tar.gz
-- Latest unstable version: https://download.pingcap.org/tidb-lightning-test-xx-latest-linux-amd64.tar.gz
+- **v2.1.9**: <https://download.pingcap.org/tidb-v2.1.9-linux-amd64.tar.gz>
+- **v2.0.9**: <https://download.pingcap.org/tidb-lightning-v2.0.9-linux-amd64.tar.gz>
+- Latest unstable version: <https://download.pingcap.org/tidb-lightning-test-xx-latest-linux-amd64.tar.gz>
 
 #### Step 3: Start `tikv-importer`
 
@@ -231,11 +245,11 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # Number of concurrent import jobs.
     num-import-jobs = 24
     # Maximum duration to prepare Regions.
-    #max-prepare-duration = "5m"
+    # max-prepare-duration = "5m"
     # Split Regions into this size according to the importing data.
-    #region-split-size = "512MB"
+    # region-split-size = "512MB"
     # Stream channel window size. The stream will be blocked on channel full.
-    #stream-channel-window = 128
+    # stream-channel-window = 128
     # Maximum number of open engines.
     max-open-engines = 8
     # Maximum upload speed (bytes per second) from Importer to TiKV.
@@ -258,7 +272,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
 
 2. Mount the data source onto the same machine.
 
-3. Configure `tidb-lightning.toml`.
+3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits.
 
     ```toml
     ### tidb-lightning configuration
@@ -268,7 +282,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     pprof-port = 8289
 
     # Checks if the cluster satisfies the minimum requirement before starting.
-    #check-requirements = true
+    # check-requirements = true
 
     # The maximum number of engines to be opened concurrently.
     # Each table is split into one "index engine" to store indices, and multiple
@@ -283,7 +297,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # The concurrency number of data. It is set to the number of logical CPU
     # cores by default. When deploying together with other components, you can
     # set it to 75% of the size of logical CPU cores to limit the CPU usage.
-    #region-concurrency =
+    # region-concurrency =
 
     # The maximum I/O concurrency. Excessive I/O concurrency causes an increase in
     # I/O latency because the disk's internal buffer is frequently refreshed,
@@ -295,8 +309,14 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     level = "info"
     file = "tidb-lightning.log"
     max-size = 128 # MB
-    max-days = 28
+    max-days = 28 # Old logs are not deleted by default.
     max-backups = 14
+
+    # Server mode
+    # Whether to enable server mode.
+    # server-mode = false
+    # Listening address in server mode.
+    # status-addr = ":8289"
 
     [checkpoint]
     # Whether to enable checkpoints.
@@ -317,11 +337,11 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # If the URL is not specified, the TiDB server from the [tidb] section is used to
     # store the checkpoints. You should specify a different MySQL-compatible
     # database server to reduce the load of the target TiDB cluster.
-    #dsn = "/tmp/tidb_lightning_checkpoint.pb"
+    # dsn = "/tmp/tidb_lightning_checkpoint.pb"
     # Whether to keep the checkpoints after all data are imported. If false, the
     # checkpoints will be deleted. Keeping the checkpoints can aid debugging but
     # will leak metadata about the data source.
-    #keep-after-success = false
+    # keep-after-success = false
 
     [tikv-importer]
     # The listening address of tikv-importer. Change it to the actual address.
@@ -333,7 +353,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     read-block-size = 65536 # Byte (default = 64 KB)
 
     # Minimum size (in terms of source data file) of each batch of import.
-    # Lightning splits a large table into multiple data engine files according to this size.
+    # TiDB Lightning splits a large table into multiple data engine files according to this size.
     batch-size = 107_374_182_400 # Byte (default = 100 GB)
 
     # Engine file needs to be imported sequentially. Due to parallel processing,
@@ -349,7 +369,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # This value should be in the range (0 <= batch-import-ratio < 1).
     batch-import-ratio = 0.75
 
-    # mydumper local source data directory
+    # Mydumper local source data directory
     data-source-dir = "/data/my_database"
     # If no-schema is set to true, tidb-lightning assumes that the table skeletons
     # already exist on the target TiDB cluster, and will not execute the `CREATE
@@ -367,6 +387,8 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # note that the *data* files are always parsed as binary regardless of
     # schema encoding.
     character-set = "auto"
+    # Is it case sensitive.
+    # case-sensitive = false
 
     # Configure how CSV files are parsed.
     [mydumper.csv]
@@ -401,6 +423,8 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     # tidb-lightning imports TiDB as a library and generates some logs itself.
     # This setting controls the log level of the TiDB library.
     log-level = "error"
+    # MySQL SQL Mode configuration
+    # sql-mode = ""
 
     # Sets the TiDB session variable to speed up the Checksum and Analyze operations.
     # See https://pingcap.com/docs/dev/reference/performance/statistics/#control-analyze-concurrency
@@ -417,9 +441,13 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     [post-restore]
     # Performs `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity.
     checksum = true
-    # Performs level-1 compaction after importing each table.
+    # If the value is set to `true`, a level-1 compaction is performed
+    # every time a table is imported.
+    # The default value is `false`.
     level-1-compact = false
-    # Performs full compaction on the whole TiKV cluster at the end of process.
+    # If the value is set to `true`, a full compaction on the whole
+    # TiKV cluster is performed at the end of the import.
+    # The default value is `false`.
     compact = false
     # Performs `ANALYZE TABLE <table>` for each table.
     analyze = true
@@ -434,7 +462,7 @@ Download the TiDB-Lightning package (choose the same version as that of the TiDB
     log-progress = "5m"
 
     # Table filter options. See the corresponding section for details.
-    #[black-white-list]
+    # [black-white-list]
     # ...
     ```
 
