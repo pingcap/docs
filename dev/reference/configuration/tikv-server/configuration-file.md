@@ -462,18 +462,6 @@ Configuration items related to Raftstore
 + Default value: 9s
 + Minimum value: `0`
 
-### `right-derive-when-split`
-
-+ The direction in which a Region splits, left or right. When this value is set to `true`, the Region splits from the right. When this value is set to `false`, the Region splits from the left.
-+ Default value: `true`
-
-> **Note:**
->
-> For example, the start key of Region 1 is `a` and the end key is `b`. Region 1 splits to Region 1 and Region 2.
->
-> + If this parameter is set to `true`, the start key of the split Region 1 is `b` and that of Region 2 is `a`.
-> + If this parameter is set to `false`, the start key of the split Region 1 is `a` and that of Region 2 is `b`.
-
 ### `allow-remove-leader`
 
 + Allow deleting the main switch
