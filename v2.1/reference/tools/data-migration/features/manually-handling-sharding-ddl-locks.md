@@ -211,6 +211,7 @@ The operation processes of MySQL and DM are as follows:
     ```sql
     ALTER TABLE shard_db_1.shard_table_1 ADD COLUMN c2 INT;
     ```
+
     ```sql
     ALTER TABLE shard_db_1.shard_table_2 ADD COLUMN c2 INT;
     ```
@@ -243,7 +244,7 @@ The operation processes of MySQL and DM are as follows:
     ```
 
 4. Due to the application demand, the `DM-worker-2` data in `MySQL-2` is no longer needed to be replicated to the downstream TiDB, and `DM-worker-2` is made offline.
-5. The lock whose ID is ``` test-`shard_db`.`shard_table` ``` on `DM-master` cannot receive the DDL information of `DM-worker-2`.
+5. The lock whose ID is ```test-`shard_db`.`shard_table` ``` on `DM-master` cannot receive the DDL information of `DM-worker-2`.
 
     - The returned result `unsynced` by `show-ddl-locks` has always included the information of `DM-worker-2` (`127.0.0.1:8263`).
 6. Use `unlock-dll-lock` to ask `DM-master` to actively unlock the DDL lock.
@@ -475,6 +476,7 @@ The operation processes are:
         ]
     }
     ```
+
 4. Use `query-status` to confirm if the replication task is normal and no longer at the state of waiting for the lock.
 
 #### Impact

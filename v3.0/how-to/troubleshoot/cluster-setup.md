@@ -38,9 +38,9 @@ For other information, see [Frequently Asked Questions (FAQ)](/v3.0/faq/tidb.md)
 
 See the following for the situations when the `tidb-server` cannot be started:
 
-- Error in the startup parameters.
++ Error in the startup parameters.
     See the [TiDB configuration and options](/v3.0/reference/configuration/tidb-server/configuration.md).
-- The port is occupied.
++ The port is occupied.
     Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `tidb-server` is not occupied.
 + Cannot connect to `pd-server`.
 
@@ -51,12 +51,12 @@ See the following for the situations when the `tidb-server` cannot be started:
 
 See the following for the situations when the `tikv-server` cannot be started:
 
-- Error in the startup parameters: See the [TiKV configuration and options](/v3.0/reference/configuration/tikv-server/configuration.md).
-- The port is occupied: Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `tikv-server` is not occupied.
++ Error in the startup parameters: See the [TiKV configuration and options](/v3.0/reference/configuration/tikv-server/configuration.md).
++ The port is occupied: Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `tikv-server` is not occupied.
 + Cannot connect to `pd-server`.
     - Check if the network between TiDB and PD is running smoothly, including whether the network can be pinged or if there is any issue with the Firewall configuration.
     - If there is no issue with the network, check the state and log of the `pd-server` process.
-- The file is occupied.
++ The file is occupied.
     Do not open two TiKV files on one database file directory.
 
 ## Cannot start `pd-server`
@@ -102,8 +102,8 @@ If you failed to solve the problem, provide the following information:
     - The size of the memory
     - The type of the disk (SSD or Hard Drive Disk)
     - Are they physical machines or virtual machines?
-- Are there other services besides the TiDB cluster?
-- Are the `pd-server`s and `tikv-server`s deployed separately?
-- What is the current operation?
-- Check the CPU thread name using the `top -H` command.
-- Are there any exceptions in the network or IO monitoring data recently?
++ Are there other services besides the TiDB cluster?
++ Are the `pd-server`s and `tikv-server`s deployed separately?
++ What is the current operation?
++ Check the CPU thread name using the `top -H` command.
++ Are there any exceptions in the network or IO monitoring data recently?

@@ -23,7 +23,7 @@ This document describes how to enable TLS authentication in the TiDB cluster. Th
 
 It is recommended to prepare a separate server certificate for TiDB, TiKV and PD, and make sure that they can authenticate each other. The clients of TiDB, TiKV and PD share one client certificate.
 
-You can use multiple tools to generate self-signed certificates, such as `openssl`, `easy-rsa ` and `cfssl`.
+You can use multiple tools to generate self-signed certificates, such as `openssl`, `easy-rsa` and `cfssl`.
 
 See an example of [generating self-signed certificates](/v2.1/how-to/secure/generate-self-signed-certificates.md) using `cfssl`.
 

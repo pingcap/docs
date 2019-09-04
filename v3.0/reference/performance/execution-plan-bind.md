@@ -46,7 +46,6 @@ select * from t where a > ？
 >     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
 >     ```
 
-
 ### Remove binding
 
 {{< copyable "sql" >}}
