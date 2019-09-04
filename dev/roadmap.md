@@ -17,26 +17,26 @@ This document describes the roadmap for TiDB development.
 
 #### Features
 
-* Support TiFlash Storage Engine
+* Support TiFlash storage engine
 * Support Optimizer Trace
-* Support Multi-Column Statistics
-* Support TopN Statistics for Regular CM-Sketch
-* Improve the Plan Cache Feature
-* Support Self-adaptive SQL Engine
+* Support multi-column statistics
+* Support TopN statistics for regular CM-Sketch
+* Improve the Plan Cache feature
+* Support self-adaptive SQL engine
 * Support SQL Tuning Advisor
-* Support SQL Plan Management
+* Support SQL plan management
 * Transaction
-    + Pessimistic Locking General Availability
-    + Support Unlimited Number of Statements in a Transaction
-    + Support 10 GB Transactions
+    + Pessimistic locking general availability
+    + Support unlimited number of statements in a transaction
+    + Support 10 GB transactions
 
 #### Performance
 
-* Improve Load CSV/Data Performance
-* Improve Prepare Statement Performance
-* Support Index for Generated Columns
-* Optimize Some Operators of the SQL Engine
-    + Improve Performance of Queries by Using Indexes to Return to the Table
+* Improve CSV/data loading performance
+* Improve `Prepare` statement performance
+* Support index for generated columns
+* Optimize some operators of the SQL engine
+    + Improve performance of queries by using indexes to return to the table
     + Split Index Join to Index Merge Join and Index Hash Join
     + Radix Hash Join
     + Index Merge
@@ -44,86 +44,86 @@ This document describes the roadmap for TiDB development.
     + Parallel Merge Sort
     + Parallel Merge Join
     + Full Vectorized Expression Evaluation
-* Indexes on Expressions
-* Multi-Index Scan
-* Support External Storage for Join, Aggregate, and Sort Operators
-* Optimize the Execution Engine Concurrency Model
-* Support New Cascades Optimizer and Cascades Planner to Increase the Optimizer Searching Space
+* Indexes on expressions
+* Multi-index scan
+* Support external storage for Join, Aggregate, and Sort operators
+* Optimize the execution engine concurrency model
+* Support new Cascades Optimizer and Cascades Planner to increase the Optimizer searching space
 
 #### Usability
 
-* Improve the Optimizer Hint Feature
-* Quickly Restore Database or Table Metadata and Data
-* Dynamically Modify Configuration Items
-* Automatically Terminate Idle Connections
-* Continue Supporting DDL Statements in MySQL 5.7
-* Refactor Log Content
+* Improve the Optimizer Hint feature
+* Quickly restore database or table metadata and data
+* Dynamically modify configuration items
+* Automatically terminate idle connections
+* Continue supporting DDL statements in MySQL 5.7
+* Refactor log content
 * Support `admin checksum from … to …` to verify the data integrity
-* Support Using Standard SQL Statements to Query the DDL History
-* Support Using Standard SQL Statements to Manage Binlog
-* Support Using Standard SQL Statements to Manage the Cluster
-* Merge Multiple Ctrl Tools into One
+* Support using standard SQL statements to query the DDL history
+* Support using standard SQL statements to manage Binlog
+* Support using standard SQL statements to manage the cluster
+* Merge multiple Ctrl tools into one
 
 #### High Availability
 
-* Support High Service Availability with Binlog
-* Support High Data Reliability with Binlog
+* Support high service availability with Binlog
+* Support high data reliability with Binlog
 
 ### TiKV Server
 
 #### Features
 
-* Support Up to 200+ Nodes in a Cluster
-* Fast Full Backup and Restoration
-* Dynamically Split and Merge Hotspot Regions
-* Fine-grained Memory Control
+* Support up to 200+ nodes in a cluster
+* Fast full backup and restoration
+* Dynamically split and merge hot spot Regions
+* Fine-grained memory control
 * Raft
-    + Joint Consensus
-    + Read-only Replicas
+    + Joint consensus
+    + Read-only replicas
 
 #### Performance
 
-* Improve Scan Performance
-* Dynamically Increase the Number of Worker Threads
-* Flexibly Increase Read-only Replicas
-* Optimize the Scheduling System to Prevent QPS Jitter
+* Improve scan performance
+* Dynamically increase the number of worker threads
+* Flexibly increase read-only replicas
+* Optimize the scheduling system to prevent QPS jitter
 
 #### Usability
 
-* Refactor Log Content
+* Refactor log content
 
 ### TiFlash
 
 #### Features
 
-* Column-based Storage
-* Replicate Data from TiKV Through Raft Learner
-* Snapshot Read
+* Column-based storage
+* Replicate data from TiKV through Raft learner
+* Snapshot read
 
 ### TiSpark
 
 #### Features
 
-* Support Batch Write
-* Support Accessing TiFlash
+* Support batch write
+* Support accessing TiFlash
 
 ## Data Migration
 
 ### Features
 
-* Improve Forward Checking
-* Visualized Management of Replication Rules
-* Visualized Management of Replication Tasks
-* Online Verification on Data Replication
+* Improve forward checking
+* Visualized management of replication rules
+* Visualized management of replication tasks
+* Online verification on data replication
 
 ### Usability
 
-* Refactor Log Format and Content
+* Refactor log format and content
 
 ### High Availability
 
-* Support High Service Availability
-* Support High Data Reliability
+* Support high service availability
+* Support high data reliability
 
 ## TiDB Toolkit
 
@@ -134,7 +134,7 @@ This document describes the roadmap for TiDB development.
 
 ### Performance
 
-* Support Using Multiple `lightning` and `importer` Instances to Parallel Import Data with TiDB Lightning
+* Support using multiple `lightning` and `importer` instances to import data in parallel with TiDB Lightning
 
 ## TiDB Future Plan
 
@@ -142,52 +142,52 @@ This document describes the roadmap for TiDB development.
 
 #### Features
 
-* Common Table Expression
-* Invisible Index
-* Support Modifying Column Types
-* Support Second-level Partitions for Partitioned Tables
-* Support Interchanging Partitioned Tables and Regular Tables
-* Support Inserts and Updates for Views
-* Multi-Schema Change
-* Configure the Number of Replicas and Distribution Strategy by Tables
-* Fine-grained QoS Control
-* Flash Back to Any Point-in-time
+* Common table expression
+* Invisible index
+* Support modifying column types
+* Support second-level partitions for partitioned tables
+* Support interchanging partitioned tables and regular tables
+* Support inserts and updates for Views
+* Multi-schema change
+* Configure the number of replicas and distribution strategy by tables
+* Fine-grained QoS control
+* Flash back to any point-in-time
 
 #### Performance
 
-* Coprocessor Cache
-* New Row Storage Format
-* Distributed Execution Engine
+* Coprocessor cache
+* New row storage format
+* Distributed execution engine
 
 #### Usability
 
-* Full Link Trace Tool
-* Complete Help Information
+* Full link Trace tool
+* Complete Help information
 
 #### Security
 
-* Column-level Privileges
+* Column-level privileges
 
 ### TiKV Server
 
 #### Features
 
-* Fast Incremental Backup and Restoration
-* Flash Back to Any Point-in-time
-* Hierarchical Storage
-* Fine-grained QoS Control
-* Configure the Number of Replicas and Distribution Strategy by Regions
+* Fast incremental backup and restoration
+* Flash back to any point-in-time
+* Hierarchical storage
+* Fine-grained QoS control
+* Configure the number of replicas and distribution strategy by Regions
 * Raft
-    + Chain Replication of Data
-    + Witness Role
-* Storage Engine
-    + Support Splitting SSTables According to Guards During Compaction in RocksDB
-    + Separate Cold and Hot Data
+    + Chain replication of data
+    + Witness role
+* Storage engine
+    + Support splitting SSTables according to Guards During compaction in RocksDB
+    + Separate cold and hot data
 
 #### Performance
 
-* Improve Fast Backup Performance
-* Improve Fast Restoration Performance
+* Improve fast backup performance
+* Improve fast restoration performance
 * 1PC
-* Support Storage Class Memory Hardware
-* New Raft Engine
+* Support storage class memory hardware
+* New Raft engine
