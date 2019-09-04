@@ -35,7 +35,7 @@ Rather, users submit (multiple) *tasks* via the web interface to import data.
 Functions of the title bar, from left to right:
 
 | Icon | Function |
-|----|----|
+|:----|:----|
 | "TiDB Lightning" | Click to go back to the front page |
 | ⚠ | Display any error message from *previous* task |
 | ⓘ | List current and queued tasks; a badge may appear here to indicate number of queued tasks |
