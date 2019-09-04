@@ -10,7 +10,7 @@ This document provides samples for global configuration, task configuration, and
 
 ## Configuration files
 
-TiDB Lightning's global and task configurations have compatible structures. Unless [Server mode](/reference/tools/tidb-lightning/web.md) is enabled, the same file is used for both parts of configuration.
+TiDB Lightning's global and task configurations have compatible structures. Unless [Server mode](/dev/reference/tools/tidb-lightning/web.md) is enabled, the same file is used for both parts of configuration.
 
 ### TiDB Lightning (Global)
 

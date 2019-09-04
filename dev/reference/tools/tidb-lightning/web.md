@@ -57,7 +57,7 @@ Click the **+** button on the title bar to submit a task.
 
 ![Submit task dialog](/media/lightning-web-submit.png)
 
-Tasks are TOML files described as [task configurations](/reference/tools/tidb-lightning/config.md#tidb-lightning-task).
+Tasks are TOML files described as [task configurations](/dev/reference/tools/tidb-lightning/config.md#tidb-lightning-task).
 One could also open a local TOML file by clicking **UPLOAD**.
 
 Click **SUBMIT** to run the task.
