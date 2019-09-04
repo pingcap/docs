@@ -207,9 +207,9 @@ This section shows images of the service panels on the TiKV dashboard.
 
 ![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
 
-### Raft propose
+### Raft proposal
 
-![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)
+![TiKV Dashboard - Raft proposal metrics](/media/tikv-dashboard-raft-propose.png)
 
 ### Raft admin
 
