@@ -18,17 +18,17 @@ To understand the key metrics displayed on the Overview dashboard, check the fol
 
 Service | Panel name | Description | Normal range
 ---------------- | ---------------- | ---------------------------------- | --------------
-Cluster | Store size | The storage size per each TiKV instance |
-Cluster | Available size | The available capacity per each TiKV instance |
-Cluster | Capacity size | The capacity size per each TiKV instance |
-Cluster | CPU | The CPU usage per each TiKV instance |
-Cluster | Memory | The memory usage per each TiKV instance |
-Cluster | IO utilization | The I/O utilization per each TiKV instance |
+Cluster | Store size | The storage size per TiKV instance |
+Cluster | Available size | The available capacity per TiKV instance |
+Cluster | Capacity size | The capacity size per TiKV instance |
+Cluster | CPU | The CPU usage per TiKV instance |
+Cluster | Memory | The memory usage per TiKV instance |
+Cluster | IO utilization | The I/O utilization per TiKV instance |
 Cluster | MBps | The total bytes of read and write in each TiKV instance |
 Cluster | QPS | The QPS per command in each TiKV instance |
 Cluster | Errors-gRPC | The total number of gRPC message failures |
-Cluster | Leaders | The number of leaders per each TiKV instance |
-Cluster | Regions | The number of Regions per each TiKV instance |
+Cluster | Leaders | The number of leaders per TiKV instance |
+Cluster | Regions | The number of Regions per TiKV instance |
 Errors | Server is busy | Indicates occurrences of events that make the TiKV instance unavailable temporarily, such as Write Stall, Channel Full, Scheduler Busy, and Coprocessor Full
  |
 Errors | Server message failures | The number of failed messages between TiKV instances | It should be `0` in normal case.
@@ -36,22 +36,22 @@ Errors | Raftstore errors | The number of Raftstore errors per type on each TiKV
 Errors | Scheduler errors | The number of scheduler errors per type on each TiKV instance |
 Errors | Coprocessor errors | The number of coprocessor errors per type on each TiKV instance |
 Errors | gRPC message errors | The number of gRPC message errors per type on each TiKV instance |
-Errors | Leader drop | The count of dropped leaders per each TiKV instance |
-Errors | Leader missing | The count of missing leaders per each TiKV instance |
-Server | Leaders | The number of leaders per each TiKV instance |
-Server | Regions | The number of Regions per each TiKV instance |
+Errors | Leader drop | The count of dropped leaders per TiKV instance |
+Errors | Leader missing | The count of missing leaders per TiKV instance |
+Server | Leaders | The number of leaders per TiKV instance |
+Server | Regions | The number of Regions per TiKV instance |
 Server | CF size | The size of each column family |
-Server | Store size | The storage size per each TiKV instance |
-Server | Channel full | The number of Channel Full errors per each TiKV instance | It should be `0` in normal case.
+Server | Store size | The storage size per TiKV instance |
+Server | Channel full | The number of Channel Full errors per TiKV instance | It should be `0` in normal case.
 Server | Server message failures  | The number of failed messages between TiKV instances |
-Server | Average Region written keys | The average rate of written keys to Regions per each TiKV instance |
-Server | Average Region written bytes | The average rate of writing bytes to Regions per each TiKV instance |
+Server | Average Region written keys | The average rate of written keys to Regions per TiKV instance |
+Server | Average Region written bytes | The average rate of writing bytes to Regions per TiKV instance |
 Server | Active written leaders | The number of leaders being written on each TiKV instance |
 Server | Approximate Region size | The approximate Region size |
 Raft IO | Apply log duration | The time consumed for Raft to apply logs |
-Raft IO | Apply log duration per server | The time consumed for Raft to apply logs per each TiKV instance |
+Raft IO | Apply log duration per server | The time consumed for Raft to apply logs per TiKV instance |
 Raft IO | Append log duration | The time consumed for Raft to append logs |
-Raft IO | Append log duration per server | The time consumed for Raft to append logs per each TiKV instance |
+Raft IO | Append log duration per server | The time consumed for Raft to append logs per TiKV instance |
 Raft process | Ready handled | The count of handled ready buckets per region |
 Raft process | Process ready duration per server | The time consumed for peer processes to be ready in Raft | It should be less than `2s` (P99.99).
 Raft process | Process tick duration per server | The peer processes in Raft |
@@ -67,7 +67,7 @@ Raft proposal | Raft read/write proposals | The number of proposals per type|
 Raft proposal | Raft read proposals per server | The number of read proposals made by each TiKV instance |
 Raft proposal | Raft write proposals per server | The number of write proposals made by each TiKV instance |
 Raft proposal | Proposal wait duration | The wait time of each proposal |
-Raft proposal | Proposal wait duration per server | The wait time of each proposal per each TiKV instance |
+Raft proposal | Proposal wait duration per server | The wait time of each proposal per TiKV instance |
 Raft proposal | Raft log speed | The rate at which peers propose logs |
 Raft admin | Admin proposals | The number of admin proposals |
 Raft admin | Admin apply | The number of processed apply commands |
@@ -82,7 +82,7 @@ Storage | Storage async snapshot duration | The time consumed by processing asyn
 Storage | Storage async write duration | The time consumed by processing asynchronous write requests | It should be less than `1s` in `.99`.
 Scheduler | Scheduler stage total | The total number of commands at each stage | There should not be lots of errors in a short time.
 Scheduler | Scheduler priority commands | The count of different priority commands |
-Scheduler | Scheduler pending commands | The count of pending commands per each TiKV instance |
+Scheduler | Scheduler pending commands | The count of pending commands per TiKV instance |
 Scheduler - XX | Scheduler stage total | The total number of commands at each stage when executing the batch_get command | There should not be lots of errors in a short time.
 Scheduler - XX | Scheduler command duration | The time consumed when executing the batch_get command | It should be less than `1s`.
 Scheduler - XX | Scheduler latch wait duration | The wait time caused by latch when executing the batch_get command | It should be less than `1s`.
@@ -95,9 +95,9 @@ Scheduler - XX | Scheduler scan details [default] | The keys scan details of def
 Coprocessor | Request duration | The time consumed to handle coprocessor read requests |
 Coprocessor | Wait duration | The time consumed when coprocessor requests are waiting to be handled | It should be less than `10s` (P99.99).
 Coprocessor | Processing duration | The time consumed to handle coprocessor requests |
-Coprocessor | 95% Request duration by store | The time consumed to handle coprocessor read requests per each TiKV instance (P95) |
-Coprocessor | 95% Wait duration by store | The time consumed when coprocessor requests are waiting to be handled per each TiKV instance (P95)|
-Coprocessor | 95% Handling duration by store | The time consumed to handle coprocessor requests per each TiKV instance (P95) |
+Coprocessor | 95% Request duration by store | The time consumed to handle coprocessor read requests per TiKV instance (P95) |
+Coprocessor | 95% Wait duration by store | The time consumed when coprocessor requests are waiting to be handled per TiKV instance (P95)|
+Coprocessor | 95% Handling duration by store | The time consumed to handle coprocessor requests per TiKV instance (P95) |
 Coprocessor | Request errors | The total number of the push down request errors | There should not be lots of errors in a short time.
 Coprocessor | DAG executors | The total number of DAG executors |
 Coprocessor | Scan keys | The number of keys that each request scans |
@@ -162,9 +162,9 @@ RocksDB - XX | Write flow | The flow rate of write operations per type|
 RocksDB - XX | Bytes / Write | The bytes per write operation |
 RocksDB - XX | Compaction flow | The flow rate of compaction operations per type |
 RocksDB - XX | Compaction pending bytes | The pending bytes to be compacted |
-RocksDB - XX | Read amplification | The read amplification per each TiKV instance |
+RocksDB - XX | Read amplification | The read amplification per TiKV instance |
 RocksDB - XX | Compression ratio | The compression ratio of each level |
-RocksDB - XX | Number of snapshots | The number of snapshots per each TiKV instance |
+RocksDB - XX | Number of snapshots | The number of snapshots per TiKV instance |
 RocksDB - XX | Oldest snapshots duration | The time that the oldest unreleased snapshot survivals |
 RocksDB - XX | Number files at each level | The number of SST files for different column families in each level |
 RocksDB - XX | Ingest SST duration seconds | The time consumed to ingest SST files |
