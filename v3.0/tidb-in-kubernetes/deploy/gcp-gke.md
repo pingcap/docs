@@ -289,6 +289,10 @@ To scale the TiDB cluster, modify `tikv_count` or `tidb_count`, to your desired 
 
 Currently, scaling in is not supported since we cannot determine which node to remove. Scaling out needs a few minutes to complete, you can watch the scaling-out process by running:
 
+> **Note:**
+>
+> Scaling in by modifying `tikv_count` can lead to data loss due to deleting the underlying instance before rebalancing. See [this page](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/scale-in-kubernetes/) for more information.
+
 ```bash
 kubectl --kubeconfig credentials/kubeconfig_<gke_cluster_name> get po -n <tidb_cluster_name> --watch
 ```
@@ -331,6 +335,11 @@ variable "override_values" {
   value = file("/path/to/values_file.yaml")
 }
 ```
+
+### Customize logging
+
+GKE uses Fluentd as its default log collector, which then forwards logs to Stackdriver. The Fluentd process can be quite resource hungry and consume a non-trivial share of CPU and RAM.
+Fluent Bit is a more performant and less resource intensive alternative. It is recommended to use Fluent Bit over Fluentd for a production set up. See [this repository](https://github.com/pingcap/k8s-fluent-bit-stackdriver) for an example of how to set up Fluent Bit on a GKE cluster.
 
 ### Customize node pools
 
