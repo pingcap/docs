@@ -2,7 +2,6 @@
 title: Deploy TiDB Offline Using Ansible
 summary: Use Ansible to deploy a TiDB cluster offline.
 category: how-to
-aliases: ['/docs/op-guide/offline-ansible-deployment/']
 ---
 
 # Deploy TiDB Offline Using Ansible
@@ -15,7 +14,7 @@ Before you start, make sure that you have:
 
 1. A download machine
 
-    - The machine must have access to the Internet in order to download TiDB-Ansible, TiDB and related packages.
+    - The machine must have access to the Internet in order to download TiDB Ansible, TiDB and related packages.
     - For Linux operating system, it is recommended to install CentOS 7.3 or later.
 
 2. Several target machines and one Control Machine
@@ -79,7 +78,7 @@ Currently, the TiDB 2.0 GA version and the master version are compatible with An
      ansible 2.5.0
     ```
 
-## Step 4: Download TiDB-Ansible and TiDB packages on the download machine
+## Step 4: Download TiDB Ansible and TiDB packages on the download machine
 
 The relationship between the `tidb-ansible` version and the TiDB version is as follows:
 
@@ -104,20 +103,21 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
     # ansible --version
       ansible 2.5.0
     ```
+
     > **Note:**
     >
     > Make sure that the version of Ansible is 2.5, otherwise a compatibility issue occurs.
 
-2. Download TiDB-Ansible.
+2. Download TiDB Ansible.
 
-    Use the following command to download the corresponding version of TiDB-Ansible from the GitHub [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+    Use the following command to download the corresponding version of TiDB Ansible from the GitHub [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
     > **Note:**
     >
     > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
 
     - Download the tidb-ansible version with a specified tag:
-    
+
         ```
         $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
         ```
@@ -147,7 +147,7 @@ See [Install the NTP service on the target machines](/dev/how-to/deploy/orchestr
 
 > **Note:** If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can ignore this step. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
 
-## Step 7: Configure the CPUfreq governor mode on the target machine 
+## Step 7: Configure the CPUfreq governor mode on the target machine
 
 See [Configure the CPUfreq governor mode on the target machine](/dev/how-to/deploy/orchestrated/ansible.md#step-7-configure-the-cpufreq-governor-mode-on-the-target-machine).
 

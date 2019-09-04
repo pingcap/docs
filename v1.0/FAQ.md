@@ -63,7 +63,7 @@ The architecture of TiDB guarantees that it fully supports geo-distribution and 
 
 #### Does TiDB provide any other knowledge resource besides the documentation?
 
-Currently, [TiDB documentation](https://www.pingcap.com/docs/) is the most important and timely way to get knowledge of TiDB. In addition, we also have some technical communication groups. If you have any needs, contact info@pingcap.com.
+Currently, [TiDB documentation](https://pingcap.com/docs/) is the most important and timely way to get knowledge of TiDB. In addition, we also have some technical communication groups. If you have any needs, contact info@pingcap.com.
 
 #### What are the MySQL variables that TiDB is compatible with?
 
@@ -81,15 +81,15 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 #### TiKV for data storage
 
-See [TiDB Internal (I) - Data Storage](https://www.pingcap.com/blog/2017-07-11-tidbinternal1/).
+See [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/).
 
 #### TiDB for data computing
 
-See [TiDB Internal (II) - Computing](https://www.pingcap.com/blog/2017-07-11-tidbinternal2/).
+See [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/).
 
 #### PD for scheduling
 
-See [TiDB Internal (III) - Scheduling](https://www.pingcap.com/blog/2017-07-20-tidbinternal3/).
+See [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/).
 
 ## Install, deploy and upgrade
 
@@ -449,7 +449,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 
 #### If the leader node is down, will the service be affected? How long?
 
-TiDB uses Raft to synchronize data among multiple replicas and guarantees the strong consistency of data. If one replica goes wrong, the other replicas can guarantee data security. The default number of replicas in each Region is 3. Based on the Raft protocol, a leader is elected in each Region, and if a single Region leader fails, a new Region leader is soon elected after a maximum of 2 * lease time (lease time is 10 seconds).
+TiDB uses Raft to replicate data among multiple replicas and guarantees the strong consistency of data. If one replica goes wrong, the other replicas can guarantee data security. The default number of replicas in each Region is 3. Based on the Raft protocol, a leader is elected in each Region, and if a single Region leader fails, a new Region leader is soon elected after a maximum of 2 * lease time (lease time is 10 seconds).
 
 #### What are the TiKV scenarios that take up high I/O, memory, CPU, and exceed the parameter configuration?
 
@@ -616,7 +616,7 @@ See [Syncer User Guide](docs/tools/syncer.md).
 
 ##### How to configure to monitor Syncer status?
 
-Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
+Download and import [Syncer Json](https://github.com/pingcap/tidb-ansible/blob/master/scripts/syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
 
 ```
 - job_name: ‘syncer_ops’ // task name
@@ -626,19 +626,19 @@ Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/et
 
 Restart Prometheus.
 
-##### Is there a current solution to synchronizing data from TiDB to other databases like HBase and Elasticsearch?
+##### Is there a current solution to replicating data from TiDB to other databases like HBase and Elasticsearch?
 
-No. Currently, the data synchronization depends on the application itself.
+No. Currently, the data replication depends on the application itself.
 
 #### Wormhole
 
-Wormhole is a data synchronization service, which enables the user to easily synchronize all the data or synchronize incrementally using Web console. It supports multiple types of data migration, such as from MySQL to TiDB, and from MongoDB to TiDB.
+Wormhole is a data replication service, which enables the user to easily replicate all the data or replicate incrementally using Web console. It supports multiple types of data migration, such as from MySQL to TiDB, and from MongoDB to TiDB.
 
 ### Migrate the traffic
 
 #### How to migrate the traffic quickly?
 
-It is recommended to build a multi-source MySQL, MongoDB -> TiDB real-time synchronization environment using Syncer or Wormhole. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
+It is recommended to build a multi-source MySQL, MongoDB -> TiDB real-time replication environment using Syncer or Wormhole. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
 
 #### Is there a limit for the total write and read capacity in TiDB?
 

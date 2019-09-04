@@ -2,12 +2,11 @@
 title: TiSpark Quick Start Guide
 summary: Learn how to use TiSpark quickly.
 category: how-to
-aliases: ['/docs/tispark/tispark-quick-start-guide/']
 ---
 
 # TiSpark Quick Start Guide
 
-To make it easy to [try TiSpark](/tispark/tispark-user-guide.md), the TiDB cluster installed using TiDB-Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
+To make it easy to [try TiSpark](/dev/reference/tispark.md), the TiDB cluster installed using TiDB Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
 
 ## Deployment information
 
@@ -15,10 +14,10 @@ To make it easy to [try TiSpark](/tispark/tispark-user-guide.md), the TiDB clust
 - The TiSpark jar package is deployed by default in the `jars` folder in the Spark deployment directory.
 
     ```
-    spark/jars/tispark-SNAPSHOT-jar-with-dependencies.jar
+    spark/jars/tispark-${name_with_version}.jar
     ```
 
-- TiSpark sample data and import scripts are deployed by default in the TiDB-Ansible directory.
+- TiSpark sample data and import scripts are deployed by default in the TiDB Ansible directory.
 
     ```
     tidb-ansible/resources/bin/tispark-sample-data
@@ -30,7 +29,7 @@ To make it easy to [try TiSpark](/tispark/tispark-user-guide.md), the TiDB clust
 
 Download the latest version of JDK 1.8 from [Oracle JDK official download page](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html). The version used in the following example is `jdk-8u141-linux-x64.tar.gz`.
 
-Extract the package and set the environment variables based on your JDK deployment directory.  
+Extract the package and set the environment variables based on your JDK deployment directory.
 
 Edit the `~/.bashrc` file. For example:
 
@@ -117,6 +116,7 @@ First start the spark-shell:
 $ cd spark
 $ bin/spark-shell
 ```
+
 Then query the TiDB table as you are using the native Spark SQL:
 
 ```scala
@@ -184,4 +184,4 @@ The result is:
 -----------------+---------+------------+--------+-----------+
 ```
 
-See [more examples](https://github.com/ilovesoup/tpch/tree/master/sparksql).
+See [more examples](https://github.com/pingcap/tispark-test/tree/master/tpch/sparksql)).

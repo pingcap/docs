@@ -2,7 +2,6 @@
 title: Deploy TiDB Using Ansible
 summary: Use Ansible to deploy a TiDB cluster.
 category: how-to
-aliases: ['/docs/op-guide/ansible-deployment/']
 ---
 
 # Deploy TiDB Using Ansible
@@ -13,18 +12,18 @@ This guide describes how to deploy a TiDB cluster using Ansible. For the product
 
 Ansible is an IT automation tool that can configure systems, deploy software, and orchestrate more advanced IT tasks such as continuous deployments or zero downtime rolling updates.
 
-[TiDB-Ansible](https://github.com/pingcap/tidb-ansible) is a TiDB cluster deployment tool developed by PingCAP, based on Ansible playbook. TiDB-Ansible enables you to quickly deploy a new TiDB cluster which includes PD, TiDB, TiKV, and the cluster monitoring modules.
+[TiDB Ansible](https://github.com/pingcap/tidb-ansible) is a TiDB cluster deployment tool developed by PingCAP, based on Ansible playbook. TiDB Ansible enables you to quickly deploy a new TiDB cluster which includes PD, TiDB, TiKV, and the cluster monitoring modules.
 
-You can use the TiDB-Ansible configuration file to set up the cluster topology and complete all the following operation tasks:
+You can use the TiDB Ansible configuration file to set up the cluster topology and complete all the following operation tasks:
 
 - Initialize operating system parameters
 - Deploy the whole TiDB cluster
 - [Start the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
 - [Stop the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
-- [Modify component configuration](/op-guide/ansible-deployment-rolling-update.md#modify-component-configuration)
-- [Scale the TiDB cluster](/op-guide/ansible-deployment-scale.md)
-- [Upgrade the component version](/op-guide/ansible-deployment-rolling-update.md#upgrade-the-component-version)
-- [Enable the cluster binlog](/tools/tidb-binlog-cluster.md)
+- [Modify component configuration](/dev/how-to/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
+- [Scale the TiDB cluster](/dev/how-to/scale/with-ansible.md)
+- [Upgrade the component version](/dev/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
+- [Enable the cluster binlog](/dev/reference/tidb-binlog-overview.md)
 - [Clean up data of the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
 - [Destroy the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
 
@@ -35,7 +34,7 @@ Before you start, make sure you have:
 1. Several target machines that meet the following requirements:
 
     - 4 or more machines
-    
+
         A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md).
 
     - CentOS 7.3 (64 bit) or later, x86_64 architecture (AMD64)
@@ -43,7 +42,7 @@ Before you start, make sure you have:
 
     > **Note:**
     >
-    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/dev/how-to/get-started/local-cluster/install-from-docker-compose.md) on a single machine.
+    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/dev/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
 
 2. A Control Machine that meets the following requirements:
 
@@ -93,6 +92,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     # visudo
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
+
 4. Generate the SSH key.
 
     Execute the `su` command to switch the user from `root` to `tidb`.
@@ -102,7 +102,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     ```
 
     Create the SSH key for the `tidb` user account and hit the Enter key when `Enter passphrase` is prompted. After successful execution, the SSH private key file is `/home/tidb/.ssh/id_rsa`, and the SSH public key file is `/home/tidb/.ssh/id_rsa.pub`.
-    
+
     ```
     $ ssh-keygen -t rsa
     Generating public/private rsa key pair.
@@ -128,7 +128,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     +----[SHA256]-----+
     ```
 
-## Step 3: Download TiDB-Ansible to the Control Machine
+## Step 3: Download TiDB Ansible to the Control Machine
 
 1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. The relationship between the `tidb-ansible` version and the TiDB version is as follows:
 
@@ -139,14 +139,14 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     | 3.0 version | v3.0.0-beta, v3.0.0-beta.1 | It is currently a beta version which is not recommended to use in the production environment. |
     | `master` branch | None | It includes the newest features and is updated on a daily basis, so it is not recommended to use it in the production environment. |
 
-2. Download the [corresponding TiDB-Ansible versions](https://github.com/pingcap/tidb-ansible/tags) from the [TiDB-Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+2. Download the [corresponding TiDB Ansible versions](https://github.com/pingcap/tidb-ansible/tags) from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
     > **Note:**
     >
     > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
-    
+
     - Download the tidb-ansible version with a specified tag:
-    
+
         ```
         $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
         ```
@@ -167,7 +167,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 Make sure you have logged in to the Control Machine using the `tidb` user account.
 
-It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB-Ansible are compatible with Ansible 2.4 and Ansible 2.5.
+It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 and Ansible 2.5.
 
 1. Install Ansible and the dependencies on the Control Machine:
 
@@ -250,7 +250,7 @@ analyzing CPU 0:
   available cpufreq governors: performance powersave
 ```
 
-Taking the above code for example, the system supports the `performance` and `powersave` modes. 
+Taking the above code for example, the system supports the `performance` and `powersave` modes.
 
 > **Note:**
 >
@@ -274,7 +274,7 @@ analyzing CPU 0:
                   within this range.
 ```
 
-As the above code shows, the current mode is `powersave` in this example. 
+As the above code shows, the current mode is `powersave` in this example.
 
 ### Change the governor mode
 
@@ -451,7 +451,7 @@ TiKV2-2 ansible_host=172.16.10.5 deploy_dir=/data2/deploy tikv_port=20172 labels
 TiKV3-1 ansible_host=172.16.10.6 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv3"
 TiKV3-2 ansible_host=172.16.10.6 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv3"
 
-# If you use tidb-ansible of the master branch to deploy the TiDB cluster and `tikv_metric_method` in the `group_vars/all.yml` file is set to `pull`, you must also configure the TiKV status ports in the topology of multiple TiKV instances, as shown in the following example.
+# When you deploy a TiDB cluster of the 3.0 version, you must configure the TiKV status ports in the topology of multiple TiKV instances, as shown in the following example.
 # TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv1"
 # TiKV1-2 ansible_host=172.16.10.4 deploy_dir=/data2/deploy tikv_port=20172 tikv_status_port=20182 labels="host=tikv1"
 # TiKV2-1 ansible_host=172.16.10.5 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv2"
@@ -481,12 +481,19 @@ location_labels = ["host"]
 
 **Edit the parameters in the service configuration file:**
 
-1. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `block-cache-size` parameter in `tidb-ansible/conf/tikv.yml`:
+1. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `capacity` parameter under `block-cache-size` in `tidb-ansible/conf/tikv.yml`:
 
-    - `rocksdb defaultcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 30%
-    - `rocksdb writecf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 45%
-    - `rocksdb lockcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 2.5% (128 MB at a minimum)
-    - `raftdb defaultcf block-cache-size(GB)`: MEM * 80% / TiKV instance number * 2.5% (128 MB at a minimum)
+    ```
+    storage:
+      block-cache:
+        capacity: "1GB"
+    ```
+
+    > **Note:**
+    >
+    > The number of TiKV instances is the number of TiKV processes on each server.
+
+    Recommended configuration: `capacity` = MEM_TOTAL \* 0.5 / the number of TiKV instances
 
 2. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `high-concurrency`, `normal-concurrency` and `low-concurrency` parameters in the `tidb-ansible/conf/tikv.yml` file:
 
@@ -500,11 +507,16 @@ location_labels = ["host"]
         # low-concurrency: 8
     ```
 
-    Recommended configuration: `number of instances * parameter value = CPU_Vcores * 0.8`.
+    Recommended configuration: the number of TiKV instances \* the parameter value = the number of CPU cores \* 0.8.
 
 3. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
-    - `capacity`: total disk capacity / number of TiKV instances (the unit is GB)
+    ```
+    raftstore:
+      capacity: 0
+    ```
+
+    Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
 
 ## Step 10: Edit variables in the `inventory.ini` file
 
@@ -537,9 +549,9 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | Variable Name | Description |
 | :---- | :------- |
 | cluster_name | the name of a cluster, adjustable |
-| tidb_version | the version of TiDB, configured by default in TiDB-Ansible branches |
+| tidb_version | the version of TiDB, configured by default in TiDB Ansible branches |
 | process_supervision | the supervision way of processes, systemd by default, supervise optional |
-| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/sql/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
+| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/dev/how-to/configure/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
 | enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](/dev/how-to/deploy/hardware-recommendations.md#network-requirements) to the white list |
 | enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
 | set_hostname | to edit the hostname of the managed node based on the IP, False by default |
@@ -623,6 +635,8 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
 
 1. Connect to the TiDB cluster using the MySQL client.
 
+    {{< copyable "sql" >}}
+
     ```sql
     mysql -u root -h 172.16.10.1 -P 4000
     ```
@@ -654,6 +668,7 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 | TiDB          | tidb_port          | 4000         | the communication port for the application and DBA tools |
 | TiDB          | tidb_status_port   | 10080        | the communication port to report TiDB status |
 | TiKV          | tikv_port          | 20160        | the TiKV communication port |
+| TiKV          | tikv_status_port   | 20180        | the communication port to report the TiKV status |
 | PD            | pd_client_port     | 2379         | the communication port between TiDB and PD |
 | PD            | pd_peer_port       | 2380         | the inter-node communication port within the PD cluster |
 | Pump          | pump_port          | 8250         | the pump communication port |
@@ -691,8 +706,13 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 
 1. Run the following command. If it returns `running`, then the NTP service is running:
 
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    sudo systemctl status ntpd.service
     ```
-    $ sudo systemctl status ntpd.service
+
+    ```
     ntpd.service - Network Time Service
     Loaded: loaded (/usr/lib/systemd/system/ntpd.service; disabled; vendor preset: disabled)
     Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
@@ -700,8 +720,13 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 
 2. Run the ntpstat command. If it returns `synchronised to NTP server` (synchronizing with the NTP server), then the synchronization process is normal.
 
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    ntpstat
     ```
-    $ ntpstat
+
+    ```
     synchronised to NTP server (85.199.214.101) at stratum 2
     time correct to within 91 ms
     polling server every 1024 s
@@ -713,46 +738,60 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
 
 - The following condition indicates the NTP service is not synchronizing normally:
 
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    ntpstat
     ```
-    $ ntpstat
+
+    ```
     unsynchronised
     ```
 
 - The following condition indicates the NTP service is not running normally:
 
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    ntpstat
     ```
-    $ ntpstat
+
+    ```
     Unable to talk to NTP daemon. Is it running?
     ```
 
 - To make the NTP service start synchronizing as soon as possible, run the following command. You can replace `pool.ntp.org` with other NTP servers.
 
-    ```
-    $ sudo systemctl stop ntpd.service
-    $ sudo ntpdate pool.ntp.org
-    $ sudo systemctl start ntpd.service
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    sudo systemctl stop ntpd.service && \
+    sudo ntpdate pool.ntp.org && \
+    sudo systemctl start ntpd.service
     ```
 
 - To install the NTP service manually on the CentOS 7 system, run the following command:
 
-    ```
-    $ sudo yum install ntp ntpdate
-    $ sudo systemctl start ntpd.service
-    $ sudo systemctl enable ntpd.service
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    sudo yum install ntp ntpdate
+    sudo systemctl start ntpd.service
+    sudo systemctl enable ntpd.service
     ```
 
 ### How to modify the supervision method of a process from `supervise` to `systemd`?
 
 Run the following command:
 
-```
+```shell
 # process supervision, [systemd, supervise]
 process_supervision = systemd
 ```
 
-For versions earlier than TiDB 1.0.4, the TiDB-Ansible supervision method of a process is `supervise` by default. The previously installed cluster can remain the same. If you need to change the supervision method to `systemd`, stop the cluster and run the following command:
+For versions earlier than TiDB 1.0.4, the TiDB Ansible supervision method of a process is `supervise` by default. The previously installed cluster can remain the same. If you need to change the supervision method to `systemd`, stop the cluster and run the following command:
 
-```
+```shell
 ansible-playbook stop.yml
 ansible-playbook deploy.yml -D
 ansible-playbook start.yml
@@ -762,35 +801,55 @@ ansible-playbook start.yml
 
 Log in to the deployment target machine using the `root` user account, create the `tidb` user and set the login password.
 
+{{< copyable "shell-root" >}}
+
+```shell
+useradd tidb
 ```
-# useradd tidb
-# passwd tidb
+
+{{< copyable "shell-root" >}}
+
+```shell
+passwd tidb
 ```
 
 To configure sudo without password, run the following command, and add `tidb ALL=(ALL) NOPASSWD: ALL` to the end of the file:
 
+{{< copyable "shell-root" >}}
+
+```shell
+visudo
 ```
-# visudo
+
+```
 tidb ALL=(ALL) NOPASSWD: ALL
 ```
 
 Use the `tidb` user to log in to the Control Machine, and run the following command. Replace `172.16.10.61` with the IP of your deployment target machine, and enter the `tidb` user password of the deployment target machine as prompted. Successful execution indicates that SSH mutual trust is already created. This applies to other machines as well.
 
-```
-[tidb@172.16.10.49 ~]$ ssh-copy-id -i ~/.ssh/id_rsa.pub 172.16.10.61
+```shell
+ssh-copy-id -i ~/.ssh/id_rsa.pub 172.16.10.61
 ```
 
 Log in to the Control Machine using the `tidb` user account, and log in to the IP of the target machine using SSH. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
 
+```shell
+ssh 172.16.10.61
 ```
-[tidb@172.16.10.49 ~]$ ssh 172.16.10.61
+
+```
 [tidb@172.16.10.61 ~]$
 ```
 
 After you login to the deployment target machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
 
+{{< copyable "shell-regular" >}}
+
+```shell
+sudo -su root
 ```
-[tidb@172.16.10.61 ~]$ sudo -su root
+
+```
 [root@172.16.10.61 tidb]#
 ```
 
@@ -803,8 +862,11 @@ Enter `import jmespath` in the Python interactive window of the Control Machine.
 - If no error displays, the dependency is successfully installed.
 - If the `ImportError: No module named jmespath` error displays, the Python `jmespath` module is not successfully installed.
 
+```shell
+python
 ```
-$ python
+
+```
 Python 2.7.5 (default, Nov  6 2016, 00:28:07)
 [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
