@@ -12,12 +12,12 @@ A problematic SQL statement can increase the pressure on the entire cluster, res
 
 > **Note:**
 >
-> This document describes the slow query log in TiDB 2.1.8 and later. For the slow query log in earlier versions see [Identifying Slow Queries (earlier)](/how-to/maintain/identify-slow-queries-21.md).
+> This document describes the slow query log in TiDB 2.1.8 and later. For the slow query log in earlier versions see [Identifying Slow Queries (earlier)](/v2.1/how-to/maintain/identify-slow-queries-21.md).
 
 
 ## Obtain the log
 
-In TiDB, the statements whose execution time exceeds [slow-threshold](/reference/configuration/tidb-server/configuration-file.md#slow-threshold) are individually output to [slow-query-file](/reference/configuration/tidb-server/configuration-file.md#slow-query-file) by default, the format of the slow log is compatible, and the slow log file can be directly analyzed with `pt-query-digest`. `slow-threshold` can be modified by the configuration file, which is set to 300ms by default. `slow-query-file` is set to `tidb-slow.log` by default.
+In TiDB, the statements whose execution time exceeds [slow-threshold](/v2.1/reference/configuration/tidb-server/configuration-file.md#slow-threshold) are individually output to [slow-query-file](/v2.1/reference/configuration/tidb-server/configuration-file.md#slow-query-file) by default, the format of the slow log is compatible, and the slow log file can be directly analyzed with `pt-query-digest`. `slow-threshold` can be modified by the configuration file, which is set to 300ms by default. `slow-query-file` is set to `tidb-slow.log` by default.
 
 ## Usage example
 

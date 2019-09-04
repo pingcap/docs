@@ -8,7 +8,7 @@ category: how-to
 
 This page shows you how to manually deploy a multi-node TiDB cluster on multiple machines using Docker.
 
-To learn more, see [TiDB architecture](/architecture.md) and [Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
+To learn more, see [TiDB architecture](/v2.1/architecture.md) and [Software and Hardware Recommendations](/v2.1/how-to/deploy/hardware-recommendations.md).
 
 ## Preparation
 
