@@ -76,7 +76,7 @@ Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansi
 
 >**Note:**
 >
->Pay special attention to the following variables configuration. For variable meaning, see [Description of other variables](/how-to/deploy/orchestrated/ansible.md#edit-other-variables-optional).
+>Pay special attention to the following variables configuration. For variable meaning, see [Description of other variables](/dev/how-to/deploy/orchestrated/ansible.md#edit-other-variables-optional).
 
 1. Make sure that `ansible_user` is the normal user. For unified privilege management, remote installation using the root user is no longer supported. The default configuration uses the `tidb` user as the SSH remote user and the program running user.
 
@@ -86,7 +86,7 @@ Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansi
     ansible_user = tidb
     ```
 
-    You can refer to [How to configure SSH mutual trust and sudo rules on the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) to automatically configure the mutual trust among hosts.
+    You can refer to [How to configure SSH mutual trust and sudo rules on the Control Machine](/dev/how-to/deploy/orchestrated/ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) to automatically configure the mutual trust among hosts.
 
 2. Keep the `process_supervision` variable consistent with that in the previous version. It is recommended to use `systemd` by default.
 
@@ -95,7 +95,7 @@ Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansi
     process_supervision = systemd
     ```
 
-    If you need to modify this variable, see [How to modify the supervision method of a process from `supervise` to `systemd`](/how-to/deploy/orchestrated/ansible.md#how-to-modify-the-supervision-method-of-a-process-from-supervise-to-systemd). Before you upgrade, first use the `/home/tidb/tidb-ansible-bak/` backup branch to modify the supervision method of a process.
+    If you need to modify this variable, see [How to modify the supervision method of a process from `supervise` to `systemd`](/dev/how-to/deploy/orchestrated/ansible.md#how-to-modify-the-supervision-method-of-a-process-from-supervise-to-systemd). Before you upgrade, first use the `/home/tidb/tidb-ansible-bak/` backup branch to modify the supervision method of a process.
 
 ### Edit the configuration file of TiDB cluster components
 
