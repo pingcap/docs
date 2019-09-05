@@ -29,8 +29,7 @@ Cluster | QPS | The QPS per command in each TiKV instance |
 Cluster | Errors-gRPC | The total number of gRPC message failures |
 Cluster | Leaders | The number of leaders per TiKV instance |
 Cluster | Regions | The number of Regions per TiKV instance |
-Errors | Server is busy | Indicates occurrences of events that make the TiKV instance unavailable temporarily, such as Write Stall, Channel Full, Scheduler Busy, and Coprocessor Full
- |
+Errors | Server is busy | Indicates occurrences of events that make the TiKV instance unavailable temporarily, such as Write Stall, Channel Full, Scheduler Busy, and Coprocessor Full|
 Errors | Server message failures | The number of failed messages between TiKV instances | It should be `0` in normal case.
 Errors | Raftstore errors | The number of Raftstore errors per type on each TiKV instance |
 Errors | Scheduler errors | The number of scheduler errors per type on each TiKV instance |
