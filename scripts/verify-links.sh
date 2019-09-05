@@ -48,7 +48,7 @@ for d in dev $(ls -d v[0-9]*); do
     echo "info: checking links under $d directory..."
     sed \
         -e "s#<ROOT>#$ROOT#g" \
-        -e "s#<DOC_ROOT>#$ROOT/$d#g" \
+        -e "s#<DOC_ROOT>#$ROOT#g" \
         scripts/markdown-link-check.tpl > $CONFIG_TMP
     if [ -n "$VERBOSE" ]; then
         cat $CONFIG_TMP
