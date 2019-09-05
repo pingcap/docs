@@ -84,7 +84,7 @@ For the test in single AZ (Available Zone), the following machine types are chos
 | TiDB     | c2-standard-16 | 3     |
 | Sysbench | c2-standard-30 | 1     |
 
-For the test (2019.08) where the result in multiple Azs is compared with that in single AZ, the c2 machine cannot be simultaneously adopted in three AZs within the same GCP Region, so the following machine types are chosen:
+For the test (2019.08) where the result in multiple Azs is compared with that in single AZ, the c2 machine is not simultaneously available in three AZs within the same GCP Region, so the following machine types are chosen:
 
 | Component     | Instance type       | Count  |
 | :---     | :---------     | :---- |
