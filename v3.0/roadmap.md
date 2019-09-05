@@ -1,10 +1,10 @@
 ---
-title: TiDB Roadmap
-summary: Learn about the roadmap of TiDB.
+title: TiDB v3.0 Roadmap
+summary: Learn about the v3.0 roadmap of TiDB.
 category: Roadmap
 ---
 
-# TiDB Roadmap
+# TiDB v3.0 Roadmap
 
 This document defines the roadmap for TiDB development.
 

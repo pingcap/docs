@@ -1,5 +1,5 @@
 ---
-title: TiDB V4.0 Roadmap
+title: TiDB v4.0 Roadmap
 summary: Learn about the v4.0 roadmap of TiDB.
 category: Roadmap
 aliases: ['/docs/ROADMAP/','/docs/roadmap/']
@@ -7,7 +7,7 @@ aliases: ['/docs/ROADMAP/','/docs/roadmap/']
 
 <!-- markdownlint-disable MD001 -->
 
-# TiDB V4.0 Roadmap
+# TiDB v4.0 Roadmap
 
 This document describes the roadmap for TiDB development.
 
@@ -26,8 +26,8 @@ This document describes the roadmap for TiDB development.
 * Support SQL Tuning Advisor
 * Support SQL plan management
 * Transaction
-    + Pessimistic locking general availability
-    + Support unlimited number of statements in a transaction
+    + Pessimistic locking general availability (GA)
+    + Support an unlimited number of statements in a transaction
     + Support 10 GB transactions
 
 #### Performance
@@ -56,18 +56,18 @@ This document describes the roadmap for TiDB development.
 * Quickly restore database or table metadata and data
 * Dynamically modify configuration items
 * Automatically terminate idle connections
-* Continue supporting DDL statements in MySQL 5.7
+* Improve support for DDL statements in MySQL 5.7
 * Refactor log content
-* Support `admin checksum from … to …` to verify the data integrity
+* Support `admin checksum from … to …` to verify data integrity
 * Support using standard SQL statements to query the DDL history
 * Support using standard SQL statements to manage Binlog
 * Support using standard SQL statements to manage the cluster
-* Merge multiple Ctrl tools into one
+* Integrate multiple Ctrl tools into one tool
 
 #### High Availability
 
-* Support high service availability with Binlog
-* Support high data reliability with Binlog
+* Support high service availability with TiDB Binlog
+* Support high data reliability with TiDB Binlog
 
 ### TiKV Server
 
@@ -97,7 +97,7 @@ This document describes the roadmap for TiDB development.
 #### Features
 
 * Column-based storage
-* Replicate data from TiKV through Raft learner
+* Replicate data from TiKV by using Raft learner
 * Snapshot read
 
 ### TiSpark
@@ -134,7 +134,7 @@ This document describes the roadmap for TiDB development.
 
 ### Performance
 
-* Support using multiple `lightning` and `importer` instances to import data in parallel with TiDB Lightning
+* Support parallel data importing by using multiple `lightning` and `importer` instances in TiDB Lightning
 
 ## TiDB Future Plan
 
@@ -146,7 +146,7 @@ This document describes the roadmap for TiDB development.
 * Invisible index
 * Support modifying column types
 * Support second-level partitions for partitioned tables
-* Support interchanging partitioned tables and regular tables
+* Support conversion between partitioned tables and regular tables
 * Support inserts and updates for Views
 * Multi-schema change
 * Configure the number of replicas and distribution strategy by tables
