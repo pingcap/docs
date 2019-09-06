@@ -223,6 +223,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
 
     ```sql
     change drainer to node_state ='paused' for node_id 'drainer1';
+    ```
 
     ```
     Query OK, 0 rows affected (0.01 sec)
