@@ -21,6 +21,35 @@ Assuming that V-A, V-B, V-C are three DM versions in chronological order and the
 > - Unless otherwise stated, all the following upgrade examples assume that all the data replication tasks have been stopped before the upgrade and all the replication tasks are restarted manually after DM upgrade is finished.
 > - The following shows the upgrade procedure of DM versions in reverse chronological order.
 
+## Upgrade to v1.0.0-10-geb2889c9 (1.0 GA)
+
+### Version information
+
+```bash
+Release Version: v1.0.0-10-geb2889c9
+Git Commit Hash: eb2889c9dcfbff6653be9c8720a32998b4627db9
+Git Branch: release-1.0
+UTC Build Time: 2019-09-06 03:18:48
+Go Version: go version go1.12 linux/amd64
+```
+
+### Main changes
+
+- Try to automatically recover the replication task in common abnormal situations
+- Improve compatibility with more DDL syntax
+- Fix the bug that data might get lost because of the upstream database connection exception
+
+### Upgrade operation example
+
+1. Download the new version of DM-Ansible, and confirm that there is `dm_version = v1.0.0` in the `inventory.ini` file.
+2. Run `ansible-playbook local_prepare.yml` to download the new DM binary to the local disk.
+3. Run `ansible-playbook rolling_update.yml` to perform a rolling update for the DM cluster components.
+4. Run `ansible-playbook rolling_update_monitor.yml` to perform a rolling update for the DM monitoring components.
+
+> **Note:**
+>
+> When you upgrade DM to the 1.0 GA version, you need to make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded at the same time. Currently, it is not supported to use `ansible-playbook rolling_update.yml` to upgrade a part of the components.
+
 ## Upgrade to v1.0.0-rc.1-12-gaa39ff9
 
 ### Version information
