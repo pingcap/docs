@@ -2,6 +2,7 @@
 title: Upgrade Data Migration
 summary: Learn how to upgrade a Data Migration version to an incompatible version.
 category: how-to
+aliases: ['/docs/dev/how-to/upgrade/data-migration/']
 ---
 
 # Upgrade Data Migration

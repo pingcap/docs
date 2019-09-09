@@ -93,7 +93,7 @@
     - [Upgrade TiDB Binlog Cluster](/v3.0/how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.0/how-to/troubleshoot/cluster-setup.md)
-    - [Troubleshoot TiDB Data Migration](/v3.0/how-to/troubleshoot/data-migration.md)
+    - [Troubleshoot TiDB Data Migration](/v3.0/reference/tools/data-migration/upgrade.md)
     - [Troubleshoot TiDB Lightning](/v3.0/how-to/troubleshoot/tidb-lightning.md)
 + Reference
   + Tools
@@ -126,6 +126,7 @@
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/v3.0/how-to/migrate/from-aurora.md)
       - [Troubleshoot](/v3.0/how-to/troubleshoot/data-migration.md)
+      - [Upgrade](/v3.0/reference/tools/data-migration/upgrade.md)
       - [FAQ](/v3.0/faq/data-migration.md)
     + TiDB Lightning
       - [Overview](/v3.0/reference/tools/tidb-lightning/overview.md)
