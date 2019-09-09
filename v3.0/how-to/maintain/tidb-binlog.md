@@ -45,7 +45,7 @@ For how to pause, close, check, and modify the state of Drainer, see the [binlog
 
 ### Download `binlogctl`
 
-Your distribution of TiDB or TiDB Binlog may already include binlogctl. If not, download `binlogctl`:
+Your distribution of TiDB or TiDB Binlog might already include binlogctl. If not, download `binlogctl`:
 
 {{< copyable "shell-regular" >}}
 
@@ -54,7 +54,7 @@ wget https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz
 wget https://download.pingcap.org/tidb-{version}-linux-amd64.sha256
 ```
 
-The above command checks the file integrity. If the result is OK, the file is correct.
+The following command checks the file integrity. If the result is OK, the file is correct.
 
 {{< copyable "shell-regular" >}}
 
@@ -195,7 +195,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
     {{< copyable "sql" >}}
 
     ```sql
-    show pump status;
+    show drainer status;
     ```
 
     ```
