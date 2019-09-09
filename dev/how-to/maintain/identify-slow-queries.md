@@ -252,22 +252,22 @@ admin show slow top internal 3
 admin show slow top all 5
 ```
 
-Due to the memory footprint restriction, the stored slow query records count is limited. If the specified `N` is greater than the records count, the returned records count might be smaller than `N`.
+Due to restrictions in memory footprint, the number of slow query records that can be stored is limited. If the specified `N` is greater than the records count, the returned records number might be smaller than `N`.
 
 The table below specifies the details of the output:
 
 | Column name | Description |
 |:------|:---- |
-| start | The starting time of SQL execution |
-| duration | The duration of SQL execution |
-| details | The details of SQL execution |
-| succ | Whether a SQL statement is executed successfully. `1` means success and `0` means failure. |
+| start | The starting time of the SQL execution |
+| duration | The duration of the SQL execution |
+| details | The details of the SQL execution |
+| succ | Whether the SQL statement is executed successfully. `1` means success and `0` means failure. |
 | conn_id | The Connection ID (session ID). For example, you can use the keyword `con:3` to query the log whose session ID is `3`. |
-| transcation_ts | The `commit ts` that a transaction commits |
-| user | The username used for executing the statement |
-| db | The database involved for executing the statement |
-| table_ids | The table ID involved for executing a SQL statement |
-| index_ids | The index ID involved for executing a SQL statement |
-| internal | The SQL statement inside TiDB |
-| digest | The fingerprint of a SQL statement |
+| transcation_ts | The `commit ts` for a transaction commit |
+| user | The user name for the execution of the statement |
+| db | The database involved when the statement is executed |
+| table_ids | The ID of the table involved when the SQL statement is executed |
+| index_ids | The ID of the index involved when the SQL statement is executed |
+| internal | This is a TiDB internal SQL statement |
+| digest | The fingerprint of the SQL statement |
 | sql | The SQL statement that is being executed or has been executed |

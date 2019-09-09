@@ -1,14 +1,14 @@
 ---
-Title: Description of PD Configuration File
-Summary: Learn the PD configuration file.
-Category: reference
+title: Description of PD Configuration File
+summary: Learn the PD configuration file.
+category: reference
 ---
 
 # Description of PD Configuration File
 
 <!-- markdownlint-disable MD001 -->
 
-The PD configuration file supports more options than the command-line parameters. You can find the default configuration file in [conf/config.toml](https://github.com/pingcap/pd/blob/master/conf/config.toml).
+The PD configuration file supports more options than the command-line parameters. You can find the default configuration file [here](https://github.com/pingcap/pd/blob/master/conf/config.toml).
 
 This document only describes parameters that are not included in the command-line parameters. Check [here](/v3.0/reference/configuration/pd-server/configuration.md) for the command line parameters.
 
@@ -20,37 +20,38 @@ This document only describes parameters that are not included in the command-lin
 
 ### `tso-save-interval`
 
-+ The time window that TSO allocates for real-time persistent storage
++ The interval for PD to allocate TSOs for persistent storage in etcd
 + Default value: `3` seconds
 
 ### `initial-cluster-state`
 
-+ The initial state of a cluster
++ The initial state of the cluster
 + Default value: `new`
 
 ### `enable-prevote`
 
-+ To turn on the switch of `raft prevote`
++ Enables or disables `raft prevote`
 + Default value: `true`
 
 ### `quota-backend-bytes`
 
-+ The storage size of the meta-information database, which is 2GB by default.
++ The storage size of the meta-information database, which is 2GB by default
 + Default value: `2147483648`
 
 ### `auto-compaction-mod`
 
-+ The automatic compaction modes of the meta-information database, which include `periodic` (by cycle) and `revision` (by version number).
++ The automatic compaction modes of the meta-information database
++ Available options: `periodic` (by cycle) and `revision` (by version number).
 + Default value: `periodic`
 
 ### `auto-compaction-retention`
 
-+ The time interval for the automatic compaction of the meta-information database when the compaction-mode is `periodic`. When the compaction-mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
++ The time interval for automatic compaction of the meta-information database when `auto-compaction-retention` is `periodic`. When the compaction mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
 + Default value: 1h
 
 ### `force-new-cluster`
 
-+ Force PD to start as a new cluster and modify the number of Raft members to `1`
++ Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
 + Default value: `false`
 
 ### `tick-interval`
@@ -65,7 +66,7 @@ This document only describes parameters that are not included in the command-lin
 
 ### `use-region-storage`
 
-+ To enable independent Region storage
++ Enables or disables independent Region storage
 + Default value: `false`
 
 ## `log`
@@ -125,32 +126,32 @@ Configuration items related to scheduling
 
 ### `max-merge-region-keys`
 
-+ To control the upper limit of the `Region Merge` key. When the Region key is greater than the specified value, the PD does not merge the Region with the adjacent Region.
++ Specifies the upper limit of the `Region Merge` key. When the Region key is greater than the specified value, the PD does not merge the Region with its adjacent Regions.
 + Default value: `200000`
 
 ### `patrol-region-interval`
 
-+ To control the running frequency at which `replicaChecker` checks the health state of a Region. The shorter `replicaChecker` checks, the faster it checks. Normally, the parameter does not need adjustment.
++ Controls the running frequency at which `replicaChecker` checks the health state of a Region. The smaller this value is, the faster `replicaChecker` runs. Normally, you do not need to adjust this parameter.
 + Default value: `100ms`
 
 ### `split-merge-interval`
 
-+ To control the time interval between the `split` and `merge` operations on the same Region. That is to say that the newly split Region will not be merged for a while.
++ Controls the time interval between the `split` and `merge` operations on the same Region. That is to say, a newly split Region will not be merged for a while.
 + Default value: `1h`
 
 ### `max-snapshot-count`
 
-+ To control the number of snapshots that a single store receives or sends at the same time. Scheduling is subject to this configuration to prevent the resources used for normal traffic from preemption.
++ Control the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
 + Default value value: `3`
 
 ### `max-pending-peer-count`
 
-+ To control the upper limit of the pending peer in a single store. Scheduling is subject to this configuration to prevent many Regions whose logs are outdated from being generated on some nodes.
++ Controls the maximum number of pending peers in a single store. PD schedulers depend on this configuration to prevent too many Regions with outdated logs from being generated on some nodes.
 + Default value: `16`
 
 ### `max-store-down-time`
 
-+ The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after specific period of time, it adds copies at other nodes.
++ The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds copies at other nodes.
 + Default value: `30m`
 
 ### `leader-schedule-limit`
@@ -170,52 +171,52 @@ Configuration items related to scheduling
 
 ### `merge-schedule-limit`
 
-+ The tasks of the `Region Merge` scheduling performed at the same time. Set this parameter to `0` to disable `Region Merge`.
++ The number of the `Region Merge` scheduling tasks performed at the same time. Set this parameter to `0` to disable `Region Merge`.
 + Default value: `8`
 
 ### `high-space-ratio`
 
-+ The threshold below which the store space is sufficient
++ The threshold ratio below which the capacity of the store is sufficient
 + Default value: `0.6`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
 
 ### `low-space-ratio`
 
-+ The threshold above which the store space is insufficient
++ The threshold ratio above which the capacity of the space is insufficient
 + Default value: `0.8`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
 
 ### `tolerant-size-ratio`
 
-+ To control the `balance` buffer size
++ Controls the `balance` buffer size
 + Default value: `5`
 + Minimum value: `0`
 
 ### `disable-remove-down-replica`
 
-+ To disable the feature that automatically removes `DownReplica`. When this parameter is set to `true`, PD does not automatically clean up the copy in the down state.
++ Determines whether to disable the feature that automatically removes `DownReplica`. When this parameter is set to `true`, PD does not automatically clean up the copy in the down state.
 + Default value: `false`
 
 ### `disable-replace-offline-replica`
 
-+ To disable the feature that migrates `OfflineReplica`. When this parameter is set to `true`, PD does not migrate the copies in the offline state.
++ Determines whether to disable the feature that migrates `OfflineReplica`. When this parameter is set to `true`, PD does not migrate the replicas in the offline state.
 + Default value: `false`
 
 ### `disable-make-up-replica`
 
-+ To disable the feature that adds copy. When this parameter is set to `true`, PD does not add copies to the Region with insufficient copies.
++ Determines whether to disable the feature that automatically supplements replicas. When this parameter is set to `true`, PD does not supplement replicas for the Region with insufficient replicas.
 + Default value: `false`
 
 ### `disable-remove-extra-replica`
 
-+ To disable the feature that removes extra copies. When this parameter is set to `true`, PD does not remove the extra copies from the Region with excessive copies.
++ Determines whether to disable the feature that removes extra replicas. When this parameter is set to `true`, PD does not remove the extra replicas from the Region with excessive replicas.
 + Default value: `false`
 
 ### `disable-location-replacement`
 
-+ To turn off the switch of isolation level check. When this parameter is set to `true`, PD does not increase the isolation level of the Region copies through scheduling.
++ Determines whether to disable isolation level check. When this parameter is set to `true`, PD does not increase the isolation level of the Region replicas through scheduling.
 + Default value: `false`
 
 ## `replication`
@@ -238,10 +239,10 @@ Configuration items related to labels
 
 ### `key`
 
-+ The label key with which the a store rejects Leader
++ The label key for the store that rejected the Leader
 + Default value: `""`
 
 ### `value`
 
-+ The label value with which the a store rejects Leader
++ The label value for the store that rejected the Leader
 + Default value: `""`

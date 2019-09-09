@@ -236,7 +236,7 @@ You can use the following statement to specify a particular collation that is re
     SET collation_connection = @@collation_database;
     ```
 
-## The optimization levels of character sets and collation of cluster, server, database, table, column, string
+## Optimization levels of character sets and collations
 
 String => Column => Table => Database => Server => Cluster
 

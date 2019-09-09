@@ -20,7 +20,8 @@ This document only describes the parameters that are not included in the command
 
 ### `grpc-compression-type`
 
-+ The compression algorithm for gRPC messages. Value options: `none`, `deflate`, `gzip`.
++ The compression algorithm for gRPC messages
++ Available values: `none`, `deflate`, `gzip`
 + Default value: `none`
 
 ### `grpc-concurrency`
@@ -31,7 +32,7 @@ This document only describes the parameters that are not included in the command
 
 ### `grpc-concurrent-stream`
 
-+ The maximum number of concurrent requests allowed in a gRPC link
++ The maximum number of concurrent requests allowed in a gRPC stream
 + Default value: `1024`
 + Minimum value: `1`
 
@@ -50,25 +51,25 @@ This document only describes the parameters that are not included in the command
 
 ### `server.grpc-keepalive-time`
 
-+ The time interval at which that gRPC sends `keepalive` ping messages
++ The time interval at which that gRPC sends `keepalive` Ping messages
 + Default: `10s`
 + Minimum value: `1s`
 
 ### `server.grpc-keepalive-timeout`
 
-+ To turn off the timeout for gRPC links
-+ Default: 3s
-+ Minimum value: 1s
++ Disables the timeout for gRPC streams
++ Default: `3s`
++ Minimum value: `1s`
 
 ### `server.concurrent-send-snap-limit`
 
-+ The maximum number of snapshots sent at the same time
++ The maximum number of snapshots that can be sent at the same time
 + Default value: `32`
 + Minimum value: `1`
 
 ### `server.concurrent-recv-snap-limit`
 
-+ To accept the maximum number of snapshots at the same time, Default value: 32
++ The maximum number of snapshots that can be received at the same time
 + Default value: `32`
 + Minimum value: `1`
 
@@ -80,16 +81,16 @@ This document only describes the parameters that are not included in the command
 
 ### `server.end-point-request-max-handle-duration`
 
-+ The maximum length of time allowed for a TiDB request to TiKV for processing tasks
-+ Default value: 60s
++ The longest duration allowed for a TiDB request to TiKV for processing tasks
++ Default value: `60s`
 + Minimum value: `1s`
 
 ### `server.snap-max-write-bytes-per-sec`
 
-+ The maximum allowable disk bandwidth when snapshot is being processed
-+ Default value: 1000MB
++ The maximum allowable disk bandwidth for processing snapshots
++ Default value: `1000MB`
 + Unit: KB|MB|GB
-+ Minimum value: 1KB
++ Minimum value: `1KB`
 
 ## readpool.storage
 
@@ -97,19 +98,19 @@ Configuration items related to storage thread pool
 
 ### `high-concurrency`
 
-+ The number of threads in the thread pools that handle `read` requests of high priority
++ The allowable number of concurrent threads that handle high-priority `read` requests
 + Default value: `4`
 + Minimum value: `1`
 
 ### `normal-concurrency`
 
-+ The number of threads in the thread pools that handle `read` requests of normal priority
++ The allowable number of concurrent threads that handle normal-priority `read` requests
 + Default value: `4`
 + Minimum value: `1`
 
 ### `low-concurrency`
 
-+ The number of threads in the thread pools that handle `read` requests of low priority
++ The allowable number of concurrent threads that handle low-priority `read` requests
 + Default value: `4`
 + Minimum value: `1`
 
@@ -133,10 +134,10 @@ Configuration items related to storage thread pool
 
 ### `stack-size`
 
-+ The stack size of threads in the `Storage Read` thread pool
-+ Default value: 10MB
++ The stack size of threads in the Storage read thread pool
++ Default value: `10MB`
 + Unit: KB|MB|GB
-+ Minimum value: 2MB
++ Minimum value: `2MB`
 
 ## `readpool.coprocessor`
 
@@ -144,19 +145,19 @@ Configuration items related to storage thread pool
 
 ### `high-concurrency`
 
-+ The number of threads in thread pool that handle high-priority Coprocessor requests, such as checkpoints
++ The allowable number of concurrent threads that handle high-priority Coprocessor requests, such as checkpoints
 + Default value: `CPU * 0.8`
 + Minimum value: `1`
 
 ### `normal-concurrency`
 
-+ The number of threads in thread pool that handle normal priority Coprocessor requests
++ The allowable number of concurrent threads that handle normal-priority Coprocessor requests
 + Default value: `CPU * 0.8`
 + Minimum value: `1`
 
 ### `low-concurrency`
 
-+ The number of threads in thread pool that handle low priority Coprocessor requests, such as table scan
++ The allowable number of concurrent threads that handle low-priority Coprocessor requests, such as table scan
 + Default value: `CPU * 0.8`
 + Minimum value: `1`
 
@@ -181,9 +182,9 @@ Configuration items related to storage thread pool
 ### `stack-size`
 
 + The stack size of the thread in the Coprocessor thread pool
-+ Default value: 10MB
++ Default value: `10MB`
 + Unit: KB|MB|GB
-+ Minimum value: 2MB
++ Minimum value: `2MB`
 
 ## storage
 
@@ -209,8 +210,8 @@ Configuration items related to storage
 
 ### `scheduler-pending-write-threshold`
 
-+ The maximum value written to the data queue. A `Server Is Busy` error is returned for a new write to TiKV when this value is exceeded.
-+ Default value: 100MB
++ The maximum size of the write queue. A `Server Is Busy` error is returned for a new write to TiKV when this value is exceeded.
++ Default value: `100MB`
 + Unit: MB|GB
 
 ## raftstore
@@ -219,7 +220,7 @@ Configuration items related to Raftstore
 
 ### `sync-log`
 
-+ Whether to perform replication for the data and logs stored on disks
++ Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
 
     > **Note:**
     >
@@ -229,7 +230,7 @@ Configuration items related to Raftstore
 
 ### `prevote`
 
-+ The switch of `prevote`. Enabling this feature helps reduce jitter on the system after recovery from isolation.
++ The switch of `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
 + Default value: `true`
 
 ### `raftdb-path`
@@ -240,57 +241,57 @@ Configuration items related to Raftstore
 ### `raft-base-tick-interval`
 
 + The time interval at which the Raft state machine ticks
-+ Default value: 1s
++ Default value: `1s`
 + Minimum value: greater than `0`
 
 ### `raft-heartbeat-ticks`
 
-+ The number of passing ticks when the heartbeat is sent. This means that a heartbeat is sent at the time interval of `raft-base-tick-interval` * `raft-heartbeat-ticks`.
++ The number of passed ticks when the heartbeat is sent. This means that a heartbeat is sent at the time interval of `raft-base-tick-interval` * `raft-heartbeat-ticks`.
 + Default value: `2`
 + Minimum value: greater than `0`
 
 ### `raft-election-timeout-ticks`
 
-+ The number of passing ticks when Raft election is initiated. This means that if Raft group is in an leaderless state, the Leader election is initiated approximately after the time interval of `raft-base-tick-interval` * `raft-election-timeout-ticks`.
++ The number of passed ticks when Raft election is initiated. This means that if Raft group is missing the leader, a Leader election is initiated approximately after the time interval of `raft-base-tick-interval` * `raft-election-timeout-ticks`.
 + Default value: `10`
 + Minimum value: `raft-heartbeat-ticks`
 
 ### `raft-min-election-timeout-ticks`
 
-+ The minimum number of passing ticks when Raft election is initiated. If the number is `0`, the item uses the value of `raft-election-timeout-ticks`. This value of this item must be no smaller than `raft-election-timeout-ticks`.
++ The minimum number of ticks during which the Raft election is initiated. If the number is `0`, the value of `raft-election-timeout-ticks` is used. The value of this parameter must be greater than or equal to `raft-election-timeout-ticks`.
 + Default value: `0`
 + Minimum value: `0`
 
 ### `raft-max-election-timeout-ticks`
 
-+ The maximum number of passing ticks when Raft election is initiated. If the number is `0`, the item uses the value of `raft-election-timeout-ticks` * `2`.
++ The maximum number of ticks during which the Raft election is initiated. If the number is `0`, the value of `raft-election-timeout-ticks` * `2` is used.
 + Default value: `0`
 + Minimum value: `0`
 
 ### `raft-max-size-per-message`
 
 + The soft limit on the size of a single message packet
-+ Default value: 1MB
++ Default value: `1MB`
 + Minimum value: `0`
 + Unit: MB
 
 ### `raft-max-inflight-msgs`
 
-+ The number of logs to be confirmed. If this number is exceeded, log sending will slow down.
++ The number of logs to be confirmed. If this number is exceeded, log sending slows down.
 + Default value: `256`
 + Minimum value: greater than `0`
 
 ### `raft-entry-max-size`
 
 + The hard limit on the maximum size of a single log
-+ Default value: 8MB
++ Default value: `8MB`
 + Minimum value: `0`
 + Unit: MB|GB
 
 ### `raft-log-gc-tick-interval`
 
-+ The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is not enabled.
-+ Default value: 10s
++ The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is disabled.
++ Default value: `10s`
 + Minimum value: `0`
 
 ### `raft-log-gc-threshold`
@@ -301,47 +302,50 @@ Configuration items related to Raftstore
 
 ### `raft-log-gc-count-limit`
 
-+ The hard limit on the allowable count of residual Raft logs. The default value is the log count that can be accommodated in the 3/4 Region size (calculated as 1MB for each log).
++ The hard limit on the allowable number of residual Raft logs
++ Default value: the log number that can be accommodated in the 3/4 Region size (calculated as 1MB for each log)
 + Minimum value: `0`
 
 ### `raft-log-gc-size-limit`
 
-+ The hard limit on the allowable size of residual Raft logs, defaulting to 3/4 of the Region size.
++ The hard limit on the allowable size of residual Raft logs
++ Default value: 3/4 of the Region size
 + Minimum value: greater than `0`
 
 ### `raft-entry-cache-life-time`
 
 + The maximum remaining time allowed for the log cache in memory.
-+ Default value: 30s
++ Default value: `30s`
 + Minimum value: `0`
 
 ### `raft-reject-transfer-leader-duration`
 
 + The protection time for new nodes, which is used to control the shortest time to migrate Raft Leader to the newly added node. Setting this value too small might lead to the failure of Leader migration.
-+ Default value: 3s
++ Default value: `3s`
 + Minimum value: `0`
 
 ### `split-region-check-tick-interval`
 
-+ Check whether the Region needs time interval for Region splitting. `0` means that this feature is not enabled.
-+ Default value: 10s
++ Checks whether the Region needs time interval for Region splitting. `0` means that this feature is disabled.
++ Default value: `10s`
 + Minimum value: `0`
 
 ### `region-split-check-diff`
 
-+ The maximum value allowed for the Region data to exceed the specified size, defaulting to 1/16 of the Region size.
++ The maximum value allowed for the Region data to exceed the specified size
++ Default value: 1/16 of the Region size.
 + Minimum value: `0`
 
 ### `region-compact-check-interval`
 
-+ The time interval at which to check whether it is necessary to manually trigger RocksDB compaction. `0` means that this feature is not enabled.
-+ Default value: 5m
++ The time interval at which to check whether it is necessary to manually trigger RocksDB compaction. `0` means that this feature is disabled.
++ Default value: `5m`
 + Minimum value: `0`
 
 ### `clean-stale-peer-delay`
 
-+ To delay the time in deleting expired copy data
-+ Default value: 10m
++ Delays the time in deleting expired replica data
++ Default value: `10m`
 + Minimum value: `0`
 
 ### `region-compact-check-step`
@@ -365,39 +369,39 @@ Configuration items related to Raftstore
 
 ### `pd-heartbeat-tick-interval`
 
-+ The time interval at which a Region's heartbeat to PD is triggered. `0` means that this feature is not enabled.
-+ Default value: 1m
++ The time interval at which a Region's heartbeat to PD is triggered. `0` means that this feature is disabled.
++ Default value: `1m`
 + Minimum value: `0`
 
 ### `pd-store-heartbeat-tick-interval`
 
-+ The time interval at which a store's heartbeat to PD is triggered. `0` means that this feature is not enabled.
-+ Default value: 10s
++ The time interval at which a store's heartbeat to PD is triggered. `0` means that this feature is disabled.
++ Default value: `10s`
 + Minimum value: `0`
 
 ### `snap-mgr-gc-tick-interval`
 
-+ The time interval at which the recycle of expired snapshot files is triggered. `0` means that this feature is not enabled.
-+ Default value: 5s
++ The time interval at which the recycle of expired snapshot files is triggered. `0` means that this feature is disabled.
++ Default value: `5s`
 + Minimum value: `0`
 
 ### `snap-gc-timeout`
 
 + The longest time for which a snapshot file is saved
-+ Default value: 4h
++ Default value: `4h`
 + Minimum value: `0`
 
 ### `lock-cf-compact-interval`
 
 + The time interval at which TiKV triggers a manual compaction for the Lock Column Family
-+ Default value: 256MB
-+ Default value: 10m
++ Default value: `256MB`
++ Default value: `10m`
 + Minimum value: `0`
 
 ### `lock-cf-compact-bytes-threshold`
 
 + The size out of which TiKV triggers a manual compaction for the Lock Column Family
-+ Default value: 256MB
++ Default value: `256MB`
 + Minimum value: `0`
 + Unit: MB
 
@@ -415,26 +419,26 @@ Configuration items related to Raftstore
 
 ### `max-peer-down-duration`
 
-+ The longest inactive time allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
-+ Default value: 5m
++ The longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
++ Default value: `5m`
 + Minimum value: `0`
 
 ### `max-leader-missing-duration`
 
-+ The longest time allowed for a peer to be in the leaderless state. If this value is exceeded, the peer verifies with PD whether the peer has been deleted.
-+ Default value: 2h
++ The longest duration allowed for a peer to be in the state where a Raft group is missing the leader. If this value is exceeded, the peer verifies with PD whether the peer has been deleted.
++ Default value: `2h`
 + Minimum value: greater than `abnormal-leader-missing-duration`
 
 ### `abnormal-leader-missing-duration`
 
-+ The longest time allowed for a peer to be in the leaderless state. If this value is exceeded, the peer is seen as abnormal and marked in metrics and logs.
++ The longest duration allowed for a peer to be in the state where a Raft group is missing the leader. If this value is exceeded, the peer is seen as abnormal and marked in metrics and logs.
 + Default value: `10m`
 + Minimum value: greater than `peer-stale-state-check-interval`
 
 ### `peer-stale-state-check-interval`
 
-+ The time interval at which the check for whether a peer is in the leaderless state is triggered
-+ Default value: 5m
++ The time interval to trigger the check for whether a peer is in the state where a Raft group is missing the leader.
++ Default value: `5m`
 + Minimum value: greater than `2 * election-timeout`
 
 ### `leader-transfer-max-log-lag`
@@ -446,25 +450,25 @@ Configuration items related to Raftstore
 ### `snap-apply-batch-size`
 
 + The memory cache size when the imported snapshot file needs to be written into disk
-+ Default value: 10MB
++ Default value: `10MB`
 + Minimum value: `0`
 + Unit: MB
 
 ### `consistency-check-interval`
 
-+ The time interval at which the consistency check is triggered. `0` means that this feature is not enabled.
-+ Default value: 0s
++ The time interval at which the consistency check is triggered. `0` means that this feature is disabled.
++ Default value: `0s`
 + Minimum value: `0`
 
 ### `raft-store-max-leader-lease`
 
 + The longest trusted period of a Raft leader
-+ Default value: 9s
++ Default value: `9s`
 + Minimum value: `0`
 
 ### `allow-remove-leader`
 
-+ Allow deleting the main switch
++ Determines whether to allow deleting the main switch
 + Default value: `false`
 
 ### `merge-max-log-gap`
@@ -476,18 +480,18 @@ Configuration items related to Raftstore
 ### `merge-check-tick-interval`
 
 + The time interval at which TiKV checks whether a Region needs merge
-+ Default value: 10s
++ Default value: `10s`
 + Minimum value: greater than `0`
 
 ### `use-delete-range`
 
-+ Turn on the switch that deletes data from the `rocksdb delete_range` interface.
++ Determines whether to delete data from the `rocksdb delete_range` interface
 + Default value: `false`
 
 ### `cleanup-import-sst-interval`
 
-+ The time interval at which the expired SST file is checked. `0` means that this feature is not enabled.
-+ Default value: 10m
++ The time interval at which the expired SST file is checked. `0` means that this feature is disabled.
++ Default value: `10m`
 + Minimum value: `0`
 
 ### `local-read-batch-size`
@@ -504,7 +508,7 @@ Configuration items related to Raftstore
 
 ### `apply-pool-size`
 
-+ The number of threads in the thread pool that handles data placement
++ The allowable number of threads that handles data placement
 + Default value: `2`
 + Minimum value: greater than `0`
 
@@ -516,13 +520,13 @@ Configuration items related to Raftstore
 
 ### `store-pool-size`
 
-+ The number of threads in the thread pool that process Raft
++ The allowable number of threads that process Raft
 + Default value: `2`
 + Minimum value: greater than `0`
 
 ### `future-poll-size`
 
-+ The number of thread in the thread pool that drives `future`
++ The allowable number of threads that drive `future`
 + Default value: `1`
 + Minimum value: greater than `0`
 
@@ -532,7 +536,7 @@ Configuration items related to Coprocessor
 
 ### `split-region-on-table`
 
-+ To turn on the switch to split Region by table. It is recommended for you to use the feature only in TiDB mode.
++ Determines whether to split Region by table. It is recommended for you to use the feature only in TiDB mode.
 + Default value: `true`
 
 ### `batch-split-limit`
@@ -544,13 +548,13 @@ Configuration items related to Coprocessor
 ### `region-max-size`
 
 + The maximum space of a Region. When the value is exceeded, the system splits a Region into many.
-+ Default value: 144MB`
++ Default value: `144MB`
 + Unit: KB|MB|GB
 
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: 96MB
++ Default value: `96MB`
 + Unit: KB|MB|GB
 
 ### `region-max-keys`
@@ -588,18 +592,19 @@ Configuration items related to RocksDB
 ### `max-manifest-file-size`
 
 + The maximum size of the RocksDB Manifest file
-+ Default value: 128MB
++ Default value: `128MB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `create-if-missing`
 
-+ Automatically create a DB switch
++ Determines whether to automatically create a DB switch
 + Default value: `true`
 
 ### `wal-recovery-mode`
 
-+ The WAL recovery mode. Optional values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3`(`SkipAnyCorruptedRecords`).
++ The WAL recovery mode
++ Available values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3`(`SkipAnyCorruptedRecords`)
 + Default value: `2`
 + Minimum value: `0`
 + Maximum value: `3`
@@ -625,12 +630,12 @@ Configuration items related to RocksDB
 
 ### `enable-statistics`
 
-+ To turn on the switch that automatically optimizes the configuration of Rate LImiter
++ Determines whether to automatically optimize the configuration of Rate LImiter
 + Default value: `false`
 
 ### `stats-dump-period`
 
-+ To turn on the switch of Pipelined Write
++ Enables or disables Pipelined Write
 + Default value: `true`
 
 ### `compaction-readahead-size`
@@ -643,13 +648,13 @@ Configuration items related to RocksDB
 ### `writable-file-max-buffer-size`
 
 + The maximum buffer size used by WritableFileWrite
-+ Default value: 1MB
++ Default value: `1MB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `use-direct-io-for-flush-and-compaction`
 
-+ To use `O_DIRECT` for both reads and writes in background flush and compactions
++ Determines whether to use `O_DIRECT` for both reads and writes in background flush and compactions
 + Default value: `false`
 
 ### `rate-bytes-per-sec`
@@ -661,39 +666,40 @@ Configuration items related to RocksDB
 
 ### `rate-limiter-mode`
 
-+ Rate LImiter mode. Optional values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`).
++ Rate LImiter mode
++ Available values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
 + Default value: `2`
 + Minimum value: `1`
 + Maximum value: `3`
 
 ### `auto-tuned`
 
-+ Turn on the switch that automatically optimizes the configuration of the Rate LImiter
++ Determines whether to automatically optimize the configuration of the Rate LImiter
 + Default value: `false`
 
 ### `enable-pipelined-write`
 
-+ Turn on the switch of Pipelined Write
++ Enables or disables Pipelined Write
 + Default value: `true`
 
 ### `bytes-per-sync`
 
 + The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously
-+ Default value: 1MB
++ Default value: `1MB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `wal-bytes-per-sync`
 
 + The rate at which OS incrementally synchronizes WAL to disk while WAL is being written
-+ Default value: 512KB
++ Default value: `512KB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `info-log-max-size`
 
 + The maximum size of Info log
-+ Default value: 1GB
++ Default value: `1GB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
@@ -719,7 +725,7 @@ Configuration items related to Titan
 
 ### `enabled`
 
-+ Turn on the Titan switch
++ Enables or disables Titan
 + Default value: `false`
 
 ### `dirname`
@@ -729,12 +735,12 @@ Configuration items related to Titan
 
 ### `disable-gc`
 
-+ To turn off Titan's switch to GC of the Blob file
++ Enables or disables GC on Blob files for Titan
 + Default value: `false`
 
 ### `max-background-gc`
 
-+ The number of GC threads in the Titan background
++ The maximum number of GC threads for Titan
 + Default value: `1`
 + Minimum value: `1`
 
@@ -745,7 +751,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `block-size`
 
 + The default size of a RocksDB block
-+ Default value: 64KB
++ Default value: `64KB`
 + Minimum value: `1KB`
 + Unit: KB|MB|GB
 
@@ -758,32 +764,32 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `disable-block-cache`
 
-+ To turn on the switch of block cache
++ Enables or disables block cache
 + Default value: `false`
 
 ### `cache-index-and-filter-blocks`
 
-+ Turn on the switch of caching index and filter
++ Enables or disables caching index and filter
 + Default value: `true`
 
 ### `pin-l0-filter-and-index-blocks`
 
-+ Whether to pin the index and filter of L0
++ Determines whether to pin the index and filter of L0
 + Default value: `true`
 
 ### `use-bloom-filter`
 
-+ To turn on the switch of bloom filter
++ Enables or disables bloom filter
 + Default value: `true`
 
 ### `optimize-filters-for-hits`
 
-+ To turn on the switch that optimizes the hit ratio of the filter
++ Determines whether to optimize the hit ratio of filters
 + Default value: `true`
 
 ### `whole_key_filtering`
 
-+ To turn on the switch that puts the entire key into the bloom filter
++ Determines whether to put the entire key into the bloom filter
 + Default value: `true`
 
 ### `bloom-filter-bits-per-key`
@@ -794,19 +800,20 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `block-based-bloom-filter`
 
-+ To turn on the switch that each block creates a bloom filter
++ Enables or disables each block to create a bloom filter
 + Default value: `false`
 
 ### `read-amp-bytes-per-bit`
 
-+ To turn on the switch of statistics of read amplification. `0`: not enabled. > `0`: enabled.
++ Enables or disables statistics of read amplification. `0`: disabled. > `0`: enabled.
 + Default value: `0`
 + Minimum value: `0`
 
 ### `compression-per-level`
 
-+ The default compression algorithm for each layer. Default value: the first two layers are `No`, and the next five layers are `lz4`.
-+ Default value: [`no`, `no`, `lz4`, `lz4`, `lz4`, `zstd`, `zstd`]
++ The default compression algorithm for each layer
++ Available values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
++ Default value: `No` for the first two layers, and `lz4` for the next five layers
 
 ### `write-buffer-size`
 
@@ -830,14 +837,14 @@ Configuration items related to `rocksdb.defaultcf`
 ### `max-bytes-for-level-base`
 
 + The maximum number of bytes at the base level (L1). Generally, it is set to 4 times the size of memtable.
-+ Default value: 512MB
++ Default value: `512MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `target-file-size-base`
 
 + The size of the target file at the base level
-+ Default: 8MB
++ Default: `8MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -862,19 +869,20 @@ Configuration items related to `rocksdb.defaultcf`
 ### `max-compaction-bytes`
 
 + The maximum number of written bytes per compaction
-+ Default value: 2GB
++ Default value: `2GB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `compaction-pri`
 
-The priority type of compaction. Optional values: `3` (`MinOverlappingRatio`), `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`).
++ The priority type of compaction
++ Available values: `3` (`MinOverlappingRatio`), `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`)
 
 + Default value: `3`
 
 ### `dynamic-level-bytes`
 
-+ To turn on the switch of optimizing dynamic level bytes
++ Determines whether to optimize dynamic level bytes
 + Default value: `true`
 
 ### `num-levels`
@@ -884,29 +892,30 @@ The priority type of compaction. Optional values: `3` (`MinOverlappingRatio`), `
 
 ### `max-bytes-for-level-multiplier`
 
-+ The default amplification for each layer
++ The default amplification multiple for each layer
 + Default value: `10`
 
 ### `rocksdb.defaultcf.compaction-style`
 
-+ Compaction method. Optional values: `level`, `universal`.
++ Compaction method
++ Available values: `level`, `universal`
 + Default value: `level`
 
 ### `disable-auto-compactions`
 
-+ Turn on the switch of automatic compaction
++ Enables or disables automatic compaction
 + Default value: `false`
 
 ### `soft-pending-compaction-bytes-limit`
 
 + The soft limit on the pending compaction bytes
-+ Default value: 64GB
++ Default value: `64GB`
 + Unit: KB|MB|GB
 
 ### `hard-pending-compaction-bytes-limit`
 
 + The hard limit on the pending compaction bytes
-+ Default value: 256GB
++ Default value: `256GB`
 + Unit: KB|MB|GB
 
 ## `rocksdb.defaultcf.titan`
@@ -915,47 +924,48 @@ Configuration items related to `rocksdb.defaultcf.titan`
 
 ### `min-blob-size`
 
-+ The smallest value stored in the Blob file, values below which are stored in the LSM-Tree
-+ Default value: 1KB
++ The smallest value stored in the Blob file. Values smaller than the specified size are stored in the LSM-Tree.
++ Default value: `1KB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `blob-file-compression`
 
-+ The compression algorithm used by the Blob file. Optional values: `no`, `snappy`, `zlib`, `bzip2`, `lz4`, `lz4hc`, `zstd`.
++ The compression algorithm used by the Blob file
++ Available values: `no`, `snappy`, `zlib`, `bzip2`, `lz4`, `lz4hc`, `zstd`
 + Default value: `lz4`
 
 ### `blob-cache-size`
 
 + The cache size of the Blob file
-+ Default value: 0GB
++ Default value: `0GB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `min-gc-batch-size`
 
 + The minimum total size of the Blob files required by GC each time
-+ Default value: 16MB
++ Default value: `16MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `max-gc-batch-size`
 
 + The maximum total size of the Blob files required by GC each time
-+ Default value: 64MB
++ Default value: `64MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `discardable-ratio`
 
-+ The triggering ratio of GC for a Blob file. The file might be selected by GC only if the proportion of the invalid value in a Blob file is higher than this ratio.
++ The triggering ratio of GC for a Blob file. The file can be selected by GC only if the proportion of the invalid values in a Blob file is higher than this ratio.
 + Default value: `0.5`
 + Minimum value: `0`
 + Maximum value: `1`
 
 ### `sample-ratio`
 
-+ The ratio of the read data in the entire Blob file when GC is being performed and the Blob file sampled
++ The ratio of read data to the entire Blob file when sampling the Blob file during GC
 + Default value: `0.1`
 + Minimum value: `0`
 + Maximum value: `1`
@@ -979,12 +989,12 @@ Configuration items related to `rocksdb.writecf`
 
 ### `optimize-filters-for-hits`
 
-+ To turn on the switch that optimizes the hit ratio of the filter
++ Determines whether to optimize the hit ratio of the filter
 + Default value: `false`
 
 ### `whole-key-filtering`
 
-+ To turn on the switch that puts the entire key into the bloom filter
++ Determines whether to put the entire key into the bloom filter
 + Default value: `false`
 
 ## rocksdb.lockcf
@@ -999,7 +1009,7 @@ Configuration items related to `rocksdb.lockcf`
 
 ### `optimize-filters-for-hits`
 
-+ To turn on the switch that optimizes the hit ratio of the filter
++ Determines whether to optimize the hit ratio of the filter
 + Default value: `false`
 
 ### `level0-file-num-compaction-trigger`
@@ -1019,7 +1029,7 @@ Configuration items related to `raftdb`
 
 ### `max-sub-compactions`
 
-+ The number of concurrency for the sub-compaction performed by RocksDB
++ The concurrency value for the sub-compaction operations performed by RocksDB
 + Default value: `1`
 + Minimum value: `1`
 
@@ -1034,7 +1044,7 @@ Configuration items related to `import`
 
 ### `num-threads`
 
-+ The number of threads when processing the RPC request
++ The number of threads to process RPC requests
 + Default value: `8`
 + Minimum value: `1`
 

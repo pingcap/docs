@@ -51,7 +51,7 @@ TiDB is configurable using command-line flags and environment variables. The def
 - Default: ""
 - If this flag is not set, logs are written to the file specified by `--log-file` by default.
 
-## `--status-host`????
+## `--status-host`
 
 - The `HOST` used to monitor the status of TiDB service
 - Default: `0.0.0.0`
@@ -105,21 +105,21 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 ## `--report-status`
 
-- To enable(true) or disable(false) the status report and pprof tool
-- Default: true
-- The value can be (true) or (false). (true) is to enable metrics and pprof. (false) is to disable metrics and pprof.
+- Enables (`true`) or disables (`false`) the status report and pprof tool
+- Default: `true`
+- When set to `true`, this parameter enables metrics and pprof. When set to `false`, this parameter disables metrics and pprof.
 
 ## `--run-ddl`
 
 - To see whether the `tidb-server` runs DDL statements, and set when the number of `tidb-server` is over two in the cluster
-- Default: true
+- Default: `true`
 - The value can be (true) or (false). (true) indicates the `tidb-server` runs DDL itself. (false) indicates the `tidb-server` does not run DDL itself.
 
 ## `--socket string`
 
 - The TiDB services use the unix socket file for external connections.
 - Default: ""
-- You can use “/tmp/tidb.sock” to open the unix socket file.
+- Use `/tmp/tidb.sock` to open the unix socket file.
 
 ## `--status`
 
@@ -131,7 +131,7 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 ## `--store`
 
-- To specify the storage engine used by TiDB in the bottom layer
+- Specifies the storage engine used by TiDB in the bottom layer
 - Default: "mocktikv"
 - You can choose "mocktikv" or "tikv". ("mocktikv" is the local storage engine; "tikv" is a distributed storage engine)
 
@@ -143,5 +143,5 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 ## `-V`
 
-- Output the version of TiDB
+- Outputs the version of TiDB
 - Default: ""

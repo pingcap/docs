@@ -4,44 +4,42 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 category: deployment
 ---
 
-<!-- markdownlint-disable MD001 -->
-
 # TiDB Configuration File Description
 
 <!-- markdownlint-disable MD001 -->
 
-The TiDB configuration file supports more options than command-line parameters. You can find the default configuration file in [config/config.toml.example](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`.
+The TiDB configuration file supports more options than command-line parameters. You can find the default configuration file in [here](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`.
 
 This document describes the options that are not involved in command line options. For command line options, see [here](/dev/reference/configuration/tidb-server/configuration.md).
 
 ### `split-table`
 
-- To create a separate Region for each table
+- Determines whether to create a separate Region for each table
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables.
 
 ### `oom-action`
 
-- To specify the operation when out-of-memory occurs in TiDB
+- Specifies the operation when out-of-memory occurs in TiDB
 - Default value: `log`
 - The valid options are `log` and `cancel`. `log` only prints the log without actual processing. `cancel"` cancels the operation and outputs the log.
 
 ### `mem-quota-query`
 
-- The upper limit on the memory that a single SQL statement can occupy
+- The maximum memory available for a single SQL statement
 - Default value: `34359738368`
-- The request that exceeds this value is handled by the behavior defined by `oom-action`.
+- Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
 
 ### `enable-streaming`
 
-- To enable the data fetch mode of streaming in Coprocessor
+- Determines whether to enable the data fetch mode of streaming in Coprocessor
 - Default value: `false`
 
 ### `lower-case-table-names`
 
-- To configure the value of the `lower_case_table_names` system variable
+- Configures the value of the `lower_case_table_names` system variable
 - Default value: `2`
-- For details, see the [MySQL description](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names) of this variable
+- For details, see the [MySQL description](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names) of this variable.
 
     > **Note:**
     >
@@ -55,34 +53,34 @@ This document describes the options that are not involved in command line option
 
 ### `compatible-kill-query`
 
-+ To set the `KILL` statement to be MySQL compatible
++ Determines whether to set the `KILL` statement to be MySQL compatible
 + Default value: `false`
 + The behavior of `KILL xxx` in TiDB differs from the behavior in MySQL. TiDB requires the `TIDB` keyword, namely, `KILL TIDB xxx`. If `compatible-kill-query` is set to `true`, the `TIDB` keyword is not needed.
 + This distinction is important because the default behavior of the MySQL command-line client, when the user hits `Ctrl + C`, is to create a new connection to the backend and execute the `KILL` statement in that new connection. If a load balancer or proxy has sent the new connection to a different TiDB server instance than the original session, the wrong session could be terminated, which could cause interruption to applications using the cluster. Enable `compatible-kill-query` only if you are certain that the connection you refer to in your `KILL` statement is on the same server to which you send the `KILL` statement.
 
 ### `check-mb4-value-in-utf8`
 
-- Turn on the switch of the `utf8mb4` character check. If this feature is enable, the character set is `utf8` and the `mb4` characters are inserted in `utf8`, then an error is returned.
+- Determines whether to enable the `utf8mb4` character check. When this feature is enable, if the character set is `utf8` and the `mb4` characters are inserted in `utf8`, an error is returned.
 - Default value: `false`
 
 ### `treat-old-version-utf8-as-utf8mb4`
 
-- The switch of the feature that treats the `utf8` character set in old tables as `utf8mb4`
+- Determines whether to treat the `utf8` character set in old tables as `utf8mb4`
 - Default value: `true`
 
 ## Log
 
-The configuration items related to log
+Configuration items related to log
 
 ### `format`
 
-- To specify the log output format
-- The valid options are `json`, `text` and `console`
+- Specifies the log output format
+- Available values: `json`, `text`, `console`
 - Default value: `text`
 
 ### `disable-timestamp`
 
-- Whether to disable outputting timestamp in the log
+- Determines whether to disable outputting timestamp in the log
 - Default value: `false`
 - If you set the value to `true`, the log does not output timestamp
 
@@ -95,13 +93,13 @@ The configuration items related to log
 
 ### `slow-threshold`
 
-- To output the threshold value of consumed time in the slow log
+- Outputs the threshold value of consumed time in the slow log
 - Default value: `300ms`
 - If the value in a query is larger than the default value, it is a slow query and is output to the slow log
 
 ### `expensive-threshold`
 
-- To output the threshold value of the number of rows for the `expensive` operation
+- Outputs the threshold value of the number of rows for the `expensive` operation
 - Default value: `10000`
 - When the number of query rows (including the intermediate results based on statistics) is larger than this value, it is an `expensive` operation and outputs log with the `[EXPENSIVE_QUERY]` prefix.
 
@@ -141,13 +139,13 @@ Configuration items related to log files
 
 #### `log-rotate`
 
-- Whether to create a new log file every day
-- Default value: true
+- Determines whether to create a new log file every day
+- Default value: `true`
 - If you set the parameter to `true`, a new log file is created every day. If you set it to `false`, the log is output to a single log file.
 
 ## Security
 
-Configurations related to security
+Configuration items related to security
 
 ### `ssl-ca`
 
@@ -176,22 +174,22 @@ Configurations related to security
 
 ### `cluster-ssl-cert`
 
-- The path of the ssl certificate file used to connect TiKV or PD with TLS
+- The path of the SSL certificate file used to connect TiKV or PD with TLS
 - Default value: ""
 
 ### `cluster-ssl-key`
 
-- The path of the ssl private key file used to connect TiKV or PD with TLS
+- The path of the SSL private key file used to connect TiKV or PD with TLS
 - Default value: ""
 
 ### `skip-grant-table`
 
-- Whether to skip permission check
+- Determines whether to skip permission check
 - Default value: `false`
 
 ## Performance
 
-Configurations related to performance
+Configuration items related to performance
 
 ### `max-procs`
 
@@ -213,7 +211,7 @@ Configurations related to performance
 
 ### `tcp-keep-alive`
 
-- To enable `keepalive` in the TCP layer
+- Determines whether to enable `keepalive` in the TCP layer
 - Default value: `false`
 
 ### `cross-join`
@@ -238,7 +236,7 @@ Configurations related to performance
 
 ### `run-auto-analyze`
 
-- Whether TiDB executes automatic analysis
+- Determines whether TiDB executes automatic analysis
 - Default value: `true`
 
 ### `feedback-probability`
@@ -249,28 +247,28 @@ Configurations related to performance
 
 ### `query-feedback-limit`
 
-- The maximum number of Query Feedbacks cached in memory. Feedbacks exceeding this limit is discarded.
+- The maximum pieces of query feedback that can be cached in memory. Extra pieces of feedback that exceed this limit are discarded.
 - Default value: `1024`
 
 ### `pseudo-estimate-ratio`
 
-- The ratio of the number of modified rows/the total number of rows in a table. If the value is exceeded, the system assumes that the statistics have expired and the pseudo statistics is used.
+- The ratio of (number of modified rows)/(total number of rows) in a table. If the value is exceeded, the system assumes that the statistics have expired and the pseudo statistics will be used.
 - Default value: `0.8`
 - The minimum value is `0` and the maximum value is `1`.
 
 ### `force-priority`
 
-- Set the priorities of all statements to the value of `force-priority`.
+- Sets the priority for all statements
 - Default: `NO_PRIORITY`
-- Optional values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY`, `DELAYED`.
+- Optional values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY`, `DELAYED`
 
 ## prepared-plan-cache
 
-The Plan Cache configuration of the `prepare` statement.
+The Plan Cache configuration of the `PREPARE` statement
 
 ### `enabled`
 
-- To enable Plan Cache of the `prepare` statement
+- Determines whether to enable Plan Cache of the `PREPARE` statement
 - Default value: `false`
 
 ### `capacity`
@@ -282,7 +280,7 @@ The Plan Cache configuration of the `prepare` statement.
 
 - It is used to prevent `performance.max-memory` from being exceeded. When `max-proc * (1 - prepared-plan-cache.memory-guard-ratio)` is exceeded, the elements in the LRU are removed.
 - Default value: `0.1`
-- The minimum value is `0`; the maximum value is `1`.
+- The minimum value is `0`; the maximum value is `1`
 
 ## tikv-client
 
@@ -306,8 +304,8 @@ The Plan Cache configuration of the `prepare` statement.
 ### `commit-timeout`
 
 - The maximum timeout when executing a transaction commit
-- Default value: 41s
-- It is required to set this value larger than twice of the Raft election timeout
+- Default value: `41s`
+- It is required to set this value larger than twice of the Raft election timeout.
 
 ### `max-txn-time-use`
 
@@ -317,18 +315,18 @@ The Plan Cache configuration of the `prepare` statement.
 
 ### `max-batch-size`
 
-- The maximum number of RPC packets sent in batches. If the value is not `0`, the `BatchCommands` API is used to send requests to TiKV, and the RPC latency can be reduced in the case of high concurrency. It is recommended that you do not modify this value.
+- The maximum number of RPC packets sent in batch. If the value is not `0`, the `BatchCommands` API is used to send requests to TiKV, and the RPC latency can be reduced in the case of high concurrency. It is recommended that you do not modify this value.
 - Default value: `128`
 
 ### `max-batch-wait-time`
 
-- To wait for `max-batch-wait-time` to encapsulate the data packets into a large packet in batch and send it to the TiKV node. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
+- Waits for `max-batch-wait-time` to encapsulate the data packets into a large packet in batch and send it to the TiKV node. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `0`
 - unit: nanoseconds
 
 ### `batch-wait-size`
 
-- The maximum number of packets sent to TiKV in batch. It is not recommended to modify this value.
+- The maximum number of packets sent to TiKV in batch. It is recommended not to modify this value.
 - Default value: `8`
 - If the value is `0`, this feature is disabled.
 
@@ -339,11 +337,11 @@ The Plan Cache configuration of the `prepare` statement.
 
 ### txn-local-latches
 
-Configuration about the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
+Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
 
 ### `enable`
 
-- Turn on or off the memory lock of transactions
+- Determines whether to enable the memory lock of transactions
 - Default value: `false`
 
 ### `capacity`
@@ -357,7 +355,7 @@ Configurations related to TiDB Binlog
 
 ### `enable`
 
-- The switch of binlog
+- Determines whether to enable the switch of binlog
 - Default value: `false`
 
 ### `write-timeout`
@@ -368,7 +366,7 @@ Configurations related to TiDB Binlog
 
 ### `ignore-error`
 
-- The switch of the feature that ignores the errors occurred in the process of writing binlog into Pump. It is recommended not to modify this value.
+- Determines whether to ignore the errors occurred in the process of writing binlog into Pump. It is recommended not to modify this value.
 - Default value: `false`
 - When the value is set to `true` and an error occurs, the writing is stopped and `1` is summed to the monitoring item `tidb_server_critical_error_total`. When the value is `false`, the writing fails and the entire TiDB service is stopped.
 
@@ -388,5 +386,5 @@ Configuration related to the status of TiDB service
 
 ### `record-db-qps`
 
-- The switch of the feature that enters the database-related QPS metrics to Promethus
+- Determines whether to enter the database-related QPS metrics to Promethus
 - Default value: `false`
