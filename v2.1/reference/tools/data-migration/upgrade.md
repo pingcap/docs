@@ -48,7 +48,7 @@ Go Version: go version go1.12 linux/amd64
 
 > **Note:**
 >
-> When you upgrade DM to the 1.0 GA version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded at the same time.
+> When you upgrade DM to the 1.0 GA version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded.
 >
 > For this particular upgrade operation, it is not supported to just upgrade a part of the components. Otherwise, an error might occur.
 
