@@ -41,7 +41,7 @@ Go Version: go version go1.12 linux/amd64
 ### Upgrade operation example
 
 1. Download the new version of DM-Ansible, and confirm that there is `dm_version = v1.0.0` in the `inventory.ini` file.
-2. Run `ansible-playbook local_prepare.yml` to download the new DM binary to the local disk.
+2. Run `ansible-playbook local_prepare.yml` to download the new DM binary file to the local disk.
 3. Run `ansible-playbook rolling_update.yml` to perform a rolling update for the DM cluster components.
 4. Run `ansible-playbook rolling_update_monitor.yml` to perform a rolling update for the DM monitoring components.
 
