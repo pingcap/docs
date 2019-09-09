@@ -35,7 +35,7 @@ Go Version: go version go1.12 linux/amd64
 
 ### Main changes
 
-- Try to automatically recover the replication task in common abnormal situations
+- Try to automatically resume the replication task in common abnormal situations
 - Improve compatibility with more DDL syntax
 - Fix the bug that data might get lost because of the upstream database connection exception
 
