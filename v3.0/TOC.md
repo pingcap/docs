@@ -89,11 +89,11 @@
   + Upgrade
     - [Upgrade to TiDB 3.0](/v3.0/how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](/v3.0/how-to/upgrade/rolling-updates-with-ansible.md)
-    - [Upgrade TiDB Data Migration](/v3.0/how-to/upgrade/data-migration.md)
+    - [Upgrade TiDB Data Migration](/v3.0/reference/tools/data-migration/upgrade.md)
     - [Upgrade TiDB Binlog Cluster](/v3.0/how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.0/how-to/troubleshoot/cluster-setup.md)
-    - [Troubleshoot TiDB Data Migration](/v3.0/reference/tools/data-migration/upgrade.md)
+    - [Troubleshoot TiDB Data Migration](/v3.0/how-to/troubleshoot/data-migration.md)
     - [Troubleshoot TiDB Lightning](/v3.0/how-to/troubleshoot/tidb-lightning.md)
 + Reference
   + Tools
