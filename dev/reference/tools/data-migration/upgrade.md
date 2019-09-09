@@ -48,7 +48,9 @@ Go Version: go version go1.12 linux/amd64
 
 > **Note:**
 >
-> When you upgrade DM to the 1.0 GA version, you need to make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded at the same time. Currently, it is not supported to use `ansible-playbook rolling_update.yml` to upgrade a part of the components.
+> When you upgrade DM to the 1.0 GA version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded at the same time.
+>
+> For this particular upgrade operation, it is not supported to just upgrade a part of the components. Otherwise, an error might occur.
 
 ## Upgrade to v1.0.0-rc.1-12-gaa39ff9
 
