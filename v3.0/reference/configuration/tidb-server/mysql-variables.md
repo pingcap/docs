@@ -11,7 +11,7 @@ The system variables in MySQL are the system parameters that modify the operatio
 
 ## Set the system variables
 
-You can use the [`SET`](/reference/sql/statements/set-variable.md) statement to change the value of the system variables. Before you change, consider the scope of the variable. For more information, see [MySQL Dynamic System Variables](https://dev.mysql.com/doc/refman/5.7/en/dynamic-system-variables.html).
+You can use the [`SET`](/v3.0/reference/sql/statements/set-variable.md) statement to change the value of the system variables. Before you change, consider the scope of the variable. For more information, see [MySQL Dynamic System Variables](https://dev.mysql.com/doc/refman/5.7/en/dynamic-system-variables.html).
 
 ### Set Global variables
 
@@ -22,7 +22,7 @@ SET GLOBAL autocommit = 1;
 SET @@global.autocommit = 1;
 ```
 
-### Set Session Variables
+### Set Session variables
 
 Add the `SESSION` keyword before the variable, use `@@session.` as the modifier, or use no modifier:
 
@@ -117,6 +117,6 @@ The following MySQL system variables are fully supported in TiDB and have the sa
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
-## TiDB Specific System Variables
+## TiDB specific system variables
 
-See [TiDB Specific System Variables](/reference/configuration/tidb-server/tidb-specific-variables.md).
+See [TiDB Specific System Variables](/v3.0/reference/configuration/tidb-server/tidb-specific-variables.md).

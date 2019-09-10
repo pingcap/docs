@@ -28,6 +28,7 @@ This document introduces the hardware and software prerequisites for deploying a
 | fs.file-max | 1000000 |
 | fs.inotify.max_user_watches | 1048576 |
 | fs.inotify.max_user_instances | 1024 |
+| net.ipv4.conf.all.rp_filter | 1 |
 | net.ipv4.neigh.default.gc_thresh1 | 80000 |
 | net.ipv4.neigh.default.gc_thresh2 | 90000 |
 | net.ipv4.neigh.default.gc_thresh3 | 100000 |
@@ -73,7 +74,7 @@ In addition, to permanently disable swaps, remove all the swap-related entries i
 
 ## Hardware and deployment requirements
 
-+ 64-bit generic hardware server platform in the Intel x86-64 architecture and 10 Gigabit NIC (network interface card), which are the same as the server requirements for deploying a TiDB cluster using binary. For details, refer to [Hardware recommendations](/how-to/deploy/hardware-recommendations.md).
++ 64-bit generic hardware server platform in the Intel x86-64 architecture and 10 Gigabit NIC (network interface card), which are the same as the server requirements for deploying a TiDB cluster using binary. For details, refer to [Hardware recommendations](/v3.0/how-to/deploy/hardware-recommendations.md).
 
 + The server's disk, memory and CPU choices depend on the capacity planning of the cluster and the deployment topology. It is recommended to deploy three master nodes, three etcd nodes, and several worker nodes to ensure high availability of the online Kubernetes cluster.
 

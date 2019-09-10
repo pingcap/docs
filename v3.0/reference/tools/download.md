@@ -11,7 +11,7 @@ This document collects the available downloads for most officially maintained ve
 
 ## TiDB Binlog
 
-If you want to download the v3.0 version of [TiDB Binlog](/reference/tidb-binlog-overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
+If you want to download the v3.0 version of [TiDB Binlog](/v3.0/reference/tidb-binlog-overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
 
 In addition, the Kafka version of TiDB Binlog is also provided.
 
@@ -22,7 +22,7 @@ In addition, the Kafka version of TiDB Binlog is also provided.
 
 ## TiDB Lightning
 
-If you want to download the v3.0 version of [TiDB Lightning](/reference/tools/tidb-lightning/overview.md), click the download link in the following table.
+If you want to download the v3.0 version of [TiDB Lightning](/v3.0/reference/tools/tidb-lightning/overview.md), click the download link in the following table.
 
 | Package name | OS | Architecture |  SHA256 checksum |
 |:---|:---|:---|:---|
@@ -30,15 +30,15 @@ If you want to download the v3.0 version of [TiDB Lightning](/reference/tools/ti
 
 ## DM (Data Migration)
 
-If you want to download the latest version of [DM](/reference/tools/data-migration/overview.md), click the download link in the following table. You can also check the [DM Release](https://github.com/pingcap/dm/releases) page.
+If you want to download the latest version of [DM](/v3.0/reference/tools/data-migration/overview.md), click the download link in the following table. You can also check the [DM Release](https://github.com/pingcap/dm/releases) page.
 
 | Package name | OS | Architecture |  SHA256 checksum |
 |:---|:---|:---|:---|
 | [dm-latest-linux-amd64.tar.gz](http://download.pingcap.org/dm-latest-linux-amd64.tar.gz) | Linux | amd64 | [dm-latest-linux-amd64.sha256](http://download.pingcap.org/dm-latest-linux-amd64.sha256) |
 
-## Syncer, Loader, and mydumper
+## Syncer, Loader, and Mydumper
 
-If you want to download the latest version of [Syncer](/reference/tools/syncer.md), [Loader](/reference/tools/loader.md), or [mydumper](/reference/tools/mydumper.md), directly download the tidb-enterprise-tools package, because all these tools are included in this package.
+If you want to download the latest version of [Syncer](/v3.0/reference/tools/syncer.md), [Loader](/v3.0/reference/tools/loader.md), or [Mydumper](/v3.0/reference/tools/mydumper.md), directly download the tidb-enterprise-tools package, because all these tools are included in this package.
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
@@ -48,7 +48,7 @@ This enterprise tools package includes all the following tools:
 
 - Syncer
 - Loader
-- mydumper
-- [binlogctl](/reference/tidb-binlog-overview.md#binlogctl-guide)
+- Mydumper
+- [binlogctl](/v3.0/reference/tidb-binlog-overview.md#binlogctl-guide)
 - ddl_checker
-- [sync_diff_inspector](/reference/tools/sync-diff-inspector.md)
+- [sync_diff_inspector](/v3.0/reference/tools/sync-diff-inspector.md)

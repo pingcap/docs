@@ -10,16 +10,16 @@ This document describes how to back up and restore the data of a TiDB cluster in
 
 TiDB in Kubernetes supports two kinds of backup strategies:
 
-* [Full backup](#full-backup) (scheduled or ad-hoc): use [`mydumper`](/reference/tools/mydumper.md) to take a logical backup of the TiDB cluster.
-* [Incremental backup](#incremental-backup): use [`TiDB-Binlog`](/reference/tidb-binlog-overview.md) to replicate data in the TiDB cluster to another database or take a real-time backup of the data.
+* [Full backup](#full-backup) (scheduled or ad-hoc): use [`mydumper`](/dev/reference/tools/mydumper.md) to take a logical backup of the TiDB cluster.
+* [Incremental backup](#incremental-backup): use [`TiDB Binlog`](/dev/reference/tidb-binlog-overview.md) to replicate data in the TiDB cluster to another database or take a real-time backup of the data.
 
-Currently, TiDB in Kubernetes only supports automatic [restoration](#restore) for full backup taken by `mydumper`. Restoring the incremental backup data by `TiDB-Binlog` requires manual operations.
+Currently, TiDB in Kubernetes only supports automatic [restoration](#restore) for full backup taken by `mydumper`. Restoring the incremental backup data by `TiDB Binlog` requires manual operations.
 
 ## Full backup
 
 Full backup uses `mydumper` to take a logical backup of a TiDB cluster. The backup task creates a PVC ([PersistentVolumeClaim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims)) to store data.
 
-In the default configuration, the backup uses PV ([Persistent Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes)) to store backup data. You can also store the data in [Google Cloud Storage](https://cloud.google.com/storage/) buckets, [Ceph Object Storage](https://ceph.com/ceph-storage/object-storage/) or [Amazon S3](https://aws.amazon.com/s3/) by changing the configuration. In this case, the backup data is temporarily stored in the PV before it is uploaded to object storage. Refer to [TiDB cluster backup configuration](/tidb-in-kubernetes/reference/configuration/backup.md) for all configuration options you have.
+In the default configuration, the backup uses PV ([Persistent Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes)) to store backup data. You can also store the data in [Google Cloud Storage](https://cloud.google.com/storage/) buckets, [Ceph Object Storage](https://ceph.com/ceph-storage/object-storage/) or [Amazon S3](https://aws.amazon.com/s3/) by changing the configuration. In this case, the backup data is temporarily stored in the PV before it is uploaded to object storage. Refer to [TiDB cluster backup configuration](/dev/tidb-in-kubernetes/reference/configuration/backup.md) for all configuration options you have.
 
 You can either set up a scheduled full backup job or take a full backup in an ad-hoc manner.
 
@@ -123,17 +123,6 @@ The `pingcap/tidb-backup` helm chart helps restore a TiDB cluster using backup d
 
 ## Incremental backup
 
-Incremental backup uses [TiDB Binlog](/reference/tidb-binlog-overview.md) to collect binlog data from TiDB and provide real-time backup and replication to downstream platforms.
+Incremental backup uses [TiDB Binlog](/dev/reference/tidb-binlog-overview.md) to collect binlog data from TiDB and provide real-time backup and replication to downstream platforms.
 
-Incremental backup is disabled in the TiDB cluster by default. To create a TiDB cluster with incremental backup enabled or enable incremental backup in existing TiDB cluster, modify the `values.yaml` file:
-
-* Set `binlog.pump.create` to `true`.
-* Set `binlog.drainer.create` to `true`.
-* Set `binlog.pump.storageClassName` and `binlog.drainer.storageClassName` to an available `storageClass` in your Kubernetes cluster.
-* Set `binlog.drainer.destDBType` to your desired downstream storage as needed, which is explained in details below.
-
-Incremental backup supports three types of downstream storage:
-
-* PersistenceVolume: the default downstream storage. You can consider configuring a large PV for `drainer` (by modifying `binlog.drainer.storage`) in this case.
-* MySQL compatible databases: enabled by setting `binlog.drainer.destDBType` to `mysql`. Meanwhile, you must configure the address and credential of the target database in `binlog.drainer.mysql`.
-* Apache Kafka: enabled by setting `binlog.drainer.destDBType` to `kafka`. Meanwhile, you must configure the zookeeper address and Kafka address of the target cluster in `binlog.drainer.kafka`.
+For the detailed guide of maintaining TiDB Binlog in Kubernetes, refer to [TiDB Binlog](/dev/tidb-in-kubernetes/maintain/tidb-binlog.md).

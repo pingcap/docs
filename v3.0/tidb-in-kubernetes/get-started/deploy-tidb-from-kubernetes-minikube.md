@@ -19,7 +19,7 @@ This document describes how to deploy a TiDB cluster in the [minikube](https://k
 
 > **Note:**
 >
-> Although Minikube supports `--vm-driver=none` that uses host docker instead of VM, it is not fully tested with TiDB Operator and may not work. If you want to try TiDB Operator on a system without virtualization support (e.g., on a VPS), you might consider using [DinD](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md) instead.
+> Although Minikube supports `--vm-driver=none` that uses host docker instead of VM, it is not fully tested with TiDB Operator and may not work. If you want to try TiDB Operator on a system without virtualization support (e.g., on a VPS), you might consider using [DinD](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md) instead.
 
 ### Install minikube and start a Kubernetes cluster
 
@@ -63,7 +63,7 @@ After kubectl is installed, test your minikube Kubernetes cluster:
 kubectl cluster-info
 ```
 
-## Install TiDB operator and run a TiDB cluster
+## Install TiDB Operator and run a TiDB cluster
 
 ### Install helm
 
@@ -118,7 +118,7 @@ helm search tidb-cluster -l
 helm search tidb-operator -l
 ```
 
-### Install TiDB operator in the Kubernetes cluster
+### Install TiDB Operator in the Kubernetes cluster
 
 > **Note:**
 >

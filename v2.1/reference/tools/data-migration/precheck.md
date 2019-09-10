@@ -18,7 +18,7 @@ Upstream and downstream database users must have the corresponding read and writ
 
 + Database version
 
-    - 5.5 < MySQL version < 5.8
+    - 5.5 < MySQL version < 8.0
     - MariaDB version >= 10.1.2
 
 + MySQL binlog configuration
@@ -41,7 +41,7 @@ Upstream and downstream database users must have the corresponding read and writ
     TiDB differs from MySQL in compatibility in the following aspects:
 
     - TiDB does not support the foreign key.
-    - [Character set compatibility differs](/reference/sql/character-set.md).
+    - [Character set compatibility differs](/v2.1/reference/sql/character-set.md).
 
 + The consistency of the sharded tables in the multiple upstream MySQL instances
 
