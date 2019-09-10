@@ -1,3 +1,9 @@
+---
+title: DM 1.0-GA Benchmark Report
+summary: Learn about the DM benchmark report.
+category: benchmark
+---
+
 # DM 1.0-GA Benchmark Report
 
 This DM benchmark report describes the test purpose, environment, scenario, and result.
