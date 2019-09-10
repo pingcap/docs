@@ -13,7 +13,7 @@
     - [Sysbench Performance Test - v3.0 vs. v2.1](/dev/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/dev/benchmark/tpcc.md)
     - [DM 1.0-alpha Benchmark Report](/dev/benchmark/dm-v1-alpha.md)
-    - [DM 1.0-GA Benchmark Report](/dev/benchmark/dm-v1-ga.md)
+    - [DM 1.0-GA Benchmark Report](/dev/benchmark/dm-v1.0-ga.md)
 + Concepts
   - [Architecture](/dev/architecture.md)
   + Key Features
