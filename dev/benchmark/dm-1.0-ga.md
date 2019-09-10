@@ -66,7 +66,7 @@ MySQL2 (172.16.4.40) -> DM-worker1 (172.16.4.39) -> TiDB (172.16.4.41)
 
 ### Public configuration or data
 
-#### Database table structure used for the test:
+#### Database table structure used for the test
 
 ```sql
 CREATE TABLE `sbtest` (
@@ -172,4 +172,3 @@ DM sync unit worker-count is 32 in this benchmark case.
 | ------------- | ---------------------------- | ------ | ------------------------- | -------- | --------------------- |
 | insert_only   | 11.3                         | 46691  | 28                        | 29.2k    | 10                    |
 | write_only    | 18.7                         | 66941  | 129                       | 34.6k    | 11                    |
-
