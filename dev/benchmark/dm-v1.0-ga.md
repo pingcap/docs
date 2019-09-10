@@ -110,10 +110,15 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### Benchmark result with different pool size in load unit
 
-Full import data size in benchmark case is 3.78GB.
+Full import data size in benchmark case is 3.78GB, which is generated from sysbench by the following script
+
+```
+sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --table-size=5000000 prepare
+```
 
 | load pool size | latency of execution txn (s) | time (s) | speed (MB/s) | TiDB 99 duration (s) |
 | -------------- | ---------------------------- | -------- | ------------ | -------------------- |
+| 4              | 0.523                        | 360.1    | 10.7         | 0.41                 |
 | 8              | 0.986                        | 267.0    | 14.5         | 0.93                 |
 | 16             | 2.022                        | 265.9    | 14.5         | 2.68                 |
 | 32             | 3.778                        | 262.3    | 14.7         | 6.39                 |
