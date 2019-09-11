@@ -6,10 +6,9 @@ category: reference
 
 # TiDB Lightning Web Interface
 
-TiDB Lightning provides a webpage for viewing the import progress and performing some simple task management.
-This is called the *server mode*.
+TiDB Lightning provides a webpage for viewing the import progress and performing some simple task management. This is called the *server mode*.
 
-To enable Server mode, either start `tidb-lightning` with the `--server-mode` flag
+To enable server mode, either start `tidb-lightning` with the `--server-mode` flag
 
 ```sh
 ./tidb-lightning --server-mode --status-addr :8289
@@ -25,8 +24,7 @@ status-addr = ':8289'
 
 After TiDB Lightning is launched, visit `http://127.0.0.1:8289` to control the program (the actual URL depends on the `status-addr` setting).
 
-In Server mode, TiDB Lightning does not start running immediately.
-Rather, users submit (multiple) *tasks* via the web interface to import data.
+In server mode, TiDB Lightning does not start running immediately. Rather, users submit (multiple) *tasks* via the web interface to import data.
 
 ## Front page
 

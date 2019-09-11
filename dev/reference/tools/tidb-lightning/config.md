@@ -10,7 +10,7 @@ This document provides samples for global configuration, task configuration, and
 
 ## Configuration files
 
-TiDB Lightning's global and task configurations have compatible structures. Unless [Server mode](/dev/reference/tools/tidb-lightning/web.md) is enabled, the same file is used for both parts of configuration.
+TiDB Lightning has two configuration classes: "global" and "task", and they have compatible structures. Their distinction arises only when the [server mode](/dev/reference/tools/tidb-lightning/web.md) is enabled. When server mode is disabled (the default), TiDB Lightning will only execute one task, and the same configuration file is used for both global and task configurations.
 
 ### TiDB Lightning (Global)
 
@@ -22,7 +22,7 @@ TiDB Lightning's global and task configurations have compatible structures. Unle
 status-addr = ':8289'
 
 # Toggle server mode and use of the web interface.
-# See the corresponding section for details.
+# See the "TiDB Lightning Web Interface" section for details.
 server-mode = false
 
 # Logging
@@ -282,7 +282,7 @@ min-available-ratio = 0.05
 
 ### Usage of `tidb-lightning`
 
-| Parameter | Explanation | Overrides setting |
+| Parameter | Explanation | Corresponding setting |
 |:----|:----|:----|
 | --config *file* | Reads global configuration from *file*. If not specified, the default configuration would be used. | |
 | -V | Prints program version | |
@@ -297,9 +297,11 @@ min-available-ratio = 0.05
 | --tidb-status *port* | TiDB status port (default = 10080) | `tidb.status-port` |
 | --tidb-user *user* | User name to connect to TiDB | `tidb.user` |
 
+If a command line parameter and the corresponding setting in the configuration file are both provided, the command line parameter will be used. For example, running `./tidb-lightning -L debug --config cfg.toml` would always set the log level to "debug" regardless of the content of `cfg.toml`.
+
 ## Usage of `tidb-lightning-ctl`
 
-All parameters of `tidb-lightning` can be used in `tidb-lightning-ctl`. Additionally, the following parameter should be supplied to execute the command.
+This tool can execute various actions given one of the following parameters:
 
 | Parameter | Explanation |
 |:----|:----|
@@ -312,13 +314,17 @@ All parameters of `tidb-lightning` can be used in `tidb-lightning-ctl`. Addition
 | --checkpoint-error-ignore *tablename* | Ignores any error recorded in the checkpoint involving the given table |
 | --checkpoint-remove *tablename* | Unconditionally removes the checkpoint of the table |
 
+The *tablename* must either be a qualified table name in the form `` `db`.`tbl` `` (including the backquotes), or the keyword "all".
+
+Additionally, all parameters of `tidb-lightning` described in the section above are valid in `tidb-lightning-ctl`.
+
 ## Usage of `tikv-importer`
 
-| | Parameter | Explanation | Overrides setting |
-|:----|:----|:----|:----|
-| -C | --config *file* | Reads configuration from *file*. If not specified, the default configuration would be used. | |
-| -V | --version | Prints program version | |
-| -A | --addr *ip:port* | Listening address of the TiKV Importer server | `server.addr` |
-| | --import-dir *dir* | Stores engine files in this directory | `import.import-dir` |
-| | --log-level *level* | Log level: trace, debug, info, warn, error, off | `log-level` |
-| | --log-file *file* | Log file path | `log-file` |
+| Parameter | Explanation | Corresponding setting |
+|:----|:----|:----|
+| -C, --config *file* | Reads configuration from *file*. If not specified, the default configuration would be used. | |
+| -V, --version | Prints program version | |
+| -A, --addr *ip:port* | Listening address of the TiKV Importer server | `server.addr` |
+| --import-dir *dir* | Stores engine files in this directory | `import.import-dir` |
+| --log-level *level* | Log level: trace, debug, info, warn, error, off | `log-level` |
+| --log-file *file* | Log file path | `log-file` |
