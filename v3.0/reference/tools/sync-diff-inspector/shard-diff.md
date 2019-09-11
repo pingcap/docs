@@ -1,16 +1,16 @@
 ---
 title: Data Check in the Sharding Scenario
-summary: Learn the data check in a sharding scenario.
+summary: Learn the data check in the sharding scenario.
 category: tools
 ---
 
 # Data Check in the Sharding Scenario
 
-sync-diff-inspector supports data check in the sharding scenario. Assuming that you have two MySQL instances, use a replication tool to replicate the data into TiDB as shown below:
+sync-diff-inspector supports data check in the sharding scenario. Assuming that you have two MySQL instances and now use a replication tool to replicate data into TiDB as shown below:
 
 ![shard-table-sync](/media/shard-table-sync.png)
 
-To configure `table-0` in `table-config`, set `is-sharding=true` and configure the upstream table information in `table-config.source-tables`. Below is an example of the complete configuration.
+To configure `table-0` in `table-config`, set `is-sharding=true` and configure the upstream table information in `table-config.source-tables`. Below is a complete example of the configuration.
 
 ``` toml
 # Diff Configuration.
@@ -22,7 +22,7 @@ log-level = "info"
 
 # sync-diff-inspector divides the data into multiple chunks based on the primary key,
 # unique key, or the index, and then compares the data of each chunk.
-# Compare data in each chunk. Use "chunk-size" to set the size of a chunk.
+# Compares data in each chunk. Uses "chunk-size" to set the size of a chunk.
 chunk-size = 1000
 
 # The number of goroutines created to check data
@@ -38,12 +38,12 @@ use-checksum = true
 # If it is set to true, data is checked only by calculating checksum. Data is not checked after inspection, even if the upstream and downstream checksums are inconsistent.
 only-use-checksum = false
 
-# Whether to use the checkpoint of the last check. If it is enabled, the inspector only checks the last unverified chunks and chunks that failed the verification.
+# Whether to use the checkpoint of the last check. If it is enabled, the inspector only checks the last unchecked chunks and chunks that failed the verification.
 use-checkpoint = true
 
 # If it is set to true, data check is ignored.
 # If it is set to false, data is checked.
-ignore-struct-check = false
+ignore-data-check = false
 
 # If it is set to true, the table struct comparison is ignored.
 # If set to false, the table struct is compared.
@@ -54,7 +54,7 @@ fix-sql-file = "fix.sql"
 
 ######################### Tables config #########################
 
-# Configure the tables of the target databases that need to be checked.
+# Configures the tables of the target databases that need to be checked
 [[check-tables]]
     # The name of the schema in the target database
     schema = "test"
@@ -62,7 +62,7 @@ fix-sql-file = "fix.sql"
     # The list of tables that need to be checked in the target database
     tables = ["table-0"]
 
-# Configure the sharded tables corresponding to this table
+# Configures the sharded tables corresponding to this table
 [[table-config]]
     # The name of the target schema
     schema = "test"
@@ -70,7 +70,7 @@ fix-sql-file = "fix.sql"
     # The name of the table in the target schema
     table = "table-0"
 
-    # Set it to "true" in the sharding scenario
+    # Sets it to "true" in the sharding scenario
     is-sharding = true
 
     # Configuration of the source tables

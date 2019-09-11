@@ -6,7 +6,7 @@ category: tools
 
 # Data Check for TiDB Upstream and Downstream Clusters
 
-You can use TiDB Binlog to build upstream and downstream clusters of TiDB. When Drainer replicates data to TiDB, saving the checkpoint also has the TSO mapping relationship between the upstream and downstream saved as `ts-map`. To check data between the upstream and downstream, configure `snapshot` in sync-diff-inspector.
+You can use TiDB Binlog to build upstream and downstream clusters of TiDB. When Drainer replicates data to TiDB, the checkpoint is saved and the TSO mapping relationship between the upstream and downstream is also saved as `ts-map`. To check data between the upstream and downstream, configure `snapshot` in sync-diff-inspector.
 
 ## Step 1: obtain `ts-map`
 
@@ -23,7 +23,7 @@ mysql> select * from tidb_binlog.checkpoint;
 
 ## Step 2: configure snapshot
 
-Configure the snapshot information of the upstream and downstream databases using the `ts-map` information obtained in the previous step.
+Configure the snapshot information of the upstream and downstream databases by using the `ts-map` information obtained in [Step 1](#step-1-obtain-ts-map).
 
 ```toml
 ######################### Databases config #########################
@@ -36,7 +36,7 @@ Configure the snapshot information of the upstream and downstream databases usin
     password = "123456"
     # The ID of the instance in the source database, the unique identifier of a database instance
     instance-id = "source-1"
-    # Use the snapshot function of TiDB, corresponding to the master-ts in ts-map
+    # Uses the snapshot function of TiDB, corresponding to the master-ts in ts-map
     snapshot = "409621863377928194"
 
 # Configuration of the instance in the target database
@@ -45,11 +45,11 @@ Configure the snapshot information of the upstream and downstream databases usin
     port = 4001
     user = "root"
     password = "123456"
-    # Use the snapshot function of TiDB, corresponding to the slave-ts in ts-map
+    # Uses the snapshot function of TiDB, corresponding to the slave-ts in ts-map
     snapshot = "409621863377928345"
 ```
 
 > **Note:**
 >
-> - Set the `db-type` of Drainer to `tidb` to ensure that `ts-map` is saved in the checkpoint.
+> - Set `db-type` of Drainer to `tidb` to ensure that `ts-map` is saved in the checkpoint.
 > - Modify the Garbage Collection (GC) time of TiKV to ensure that the historical data corresponding to snapshot is not collected by GC during the data check. It is recommended that you modify the GC time to 1 hour and recover the setting after the check.

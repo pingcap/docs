@@ -33,25 +33,25 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 sync-diff-inspector needs to obtain the information of table schema, to query data, and to build the checkpoint database to save breakpoint information. The required database privileges are as follows:
 
 * Upstream database
-    - `SELECT` (check data for comparison)
-    - `SHOW_DATABASES` (view database name)
-    - `RELOAD` (view table schema)
+    - `SELECT` (checks data for comparison)
+    - `SHOW_DATABASES` (views database name)
+    - `RELOAD` (views table schema)
 * Downstream database
-    - `SELECT` (check data for comparison)
-    - `CREATE` (create the checkpoint libraries and tables)
-    - `DELETE` (delete the information on the checkpoint table)
-    - `INSERT` (write data into the checkpoint table)
-    - `UPDATE` (modify the checkpoint table)
-    - `SHOW_DATABASES` (view database name)
-    - `RELOAD` (view table schema)
+    - `SELECT` (checks data for comparison)
+    - `CREATE` (creates checkpoint database and tables)
+    - `DELETE` (deletes information on the checkpoint table)
+    - `INSERT` (writes data into checkpoint table)
+    - `UPDATE` (modifies checkpoint table)
+    - `SHOW_DATABASES` (views database name)
+    - `RELOAD` (views table schema)
 
 ### Configuration File Description
 
 The configuration of sync-diff-inspector consists of three parts:
 
-- `Global config`: General configurations, including log level, chunk size, number of threads to check, etc.
-- `Tables config`: Configure the tables for checking. If some tables have a certain mapping relationship between the upstream and downstream databases or have some special requirements, you must configure these tables.
-- `Databases config`: Configure the instances of the upstream and downstream databases.
+- `Global config`: General configurations, including log level, chunk size, number of threads to check.
+- `Tables config`: Configures the tables for checking. If some tables have a certain mapping relationship between the upstream and downstream databases or have some special requirements, you must configure these tables.
+- `Databases config`: Configures the instances of the upstream and downstream databases.
 
 Below is the description of a complete configuration file:
 
@@ -65,7 +65,7 @@ log-level = "info"
 
 # sync-diff-inspector divides the data into multiple chunks based on the primary key,
 # unique key, or the index, and then compares the data of each chunk.
-# Compare data in each chunk. Use "chunk-size" to set the size of a chunk.
+# Compares data in each chunk. Uses "chunk-size" to set the size of a chunk.
 chunk-size = 1000
 
 # The number of goroutines created to check data
@@ -86,7 +86,7 @@ use-checkpoint = true
 
 # If it is set to true, data check is ignored.
 # If it is set to false, data is checked.
-ignore-struct-check = false
+ignore-data-check = false
 
 # If it is set to true, the table struct comparison is ignored.
 # If set to false, the table struct is compared.
@@ -99,13 +99,13 @@ fix-sql-file = "fix.sql"
 
 # If you need to compare the data of a large number of tables with different schema names or table names, use the table-rule to configure the mapping relationship. You can configure the mapping rule of only schema or only table, or you can also configure the mapping rules of both the schema and table.
 #[[table-rules]]
-    # schema-pattern and table-pattern support regular expressions.
+    # schema-pattern and table-pattern support the wildcard *?
     # schema-pattern = "test_*"
     # table-pattern = "t_*"
     # target-schema = "test"
     # target-table = "t"
 
-# Configure the tables of the target databases that need to be checked.
+# Configures the tables of the target databases that need to be compared.
 [[check-tables]]
     # The name of the schema in the target database
     schema = "test"
@@ -137,7 +137,7 @@ fix-sql-file = "fix.sql"
     # It needs to comply with the syntax of the WHERE clause in SQL.
     range = "age > 10 AND age < 20"
 
-    # Set it to "true" when comparing the data of multiple sharded tables
+    # Sets it to "true" when comparing the data of multiple sharded tables
     # with the data of the combined table.
     is-sharding = false
 
@@ -146,10 +146,10 @@ fix-sql-file = "fix.sql"
     # You need to keep it corresponding to the "charset" setting in the database.
     # collation = "latin1_bin"
 
-    # Ignore checking some columns such as some types (json, bit, blob, etc.)
+    # Ignores checking some columns such as some types (json, bit, blob, etc.)
     # that sync-diff-inspector does not currently support.
     # The floating-point data type behaves differently in TiDB and MySQL. You can use
-    # `ignore-columns` to skip checking these columns
+    # `ignore-columns` to skip checking these columns.
     # ignore-columns = ["name"]
 
 # Configuration example of comparing two tables with different database names and table names.
@@ -160,7 +160,7 @@ fix-sql-file = "fix.sql"
     # The name of the target table
     table = "test2"
 
-    # Set it to "false" in non-sharding scenarios.
+    # Sets it to "false" in non-sharding scenarios.
     is-sharding = false
 
     # Configuration of the source data
@@ -182,7 +182,7 @@ fix-sql-file = "fix.sql"
     password = "123456"
     # The ID of the instance in the source database, the unique identifier of a database instance
     instance-id = "source-1"
-    # Use the snapshot function of TiDB.
+    # Uses the snapshot function of TiDB.
     # If enabled, the history data is used for comparison.
     # snapshot = "2016-10-08 16:45:26"
 
@@ -192,7 +192,7 @@ fix-sql-file = "fix.sql"
     port = 4000
     user = "root"
     password = "123456"
-    # Use the snapshot function of TiDB.
+    # Uses the snapshot function of TiDB.
     # If enabled, the history data is used for comparison.
     # snapshot = "2016-10-08 16:45:26"
 ```
@@ -205,12 +205,12 @@ Run the following command:
 ./bin/sync_diff_inspector --config=./config.toml
 ```
 
-The above command outputs a check report to the log and describes the check result of each table. If data inconsistency exists, the SQL statements used to fix inconsistency are stored to the `fix.sql` file.
+This command outputs a check report to the log and describes the check result of each table. If data inconsistency exists, the SQL statements used to fix inconsistency are stored to the `fix.sql` file.
 
 ### Note
 
-- sync-diff-inspector consumes certain server resources when checking data. You must avoid using sync-diff-inspector to check data during peak business hours.
+- sync-diff-inspector consumes certain server resources when checking data. Avoid using sync-diff-inspector to check data during peak business hours.
 - TiDB uses the `utf8_bin` collation. If you need to compare the data in MySQL with that in TiDB, pay attention to the collation configuration of MySQL tables. If the primary key or unique key is the `varchar` type and the collation configuration in MySQL differs from that in TiDB, then the final check result might be incorrect because of the collation issue. You need to add collation to the sync-diff-inspector configuration file.
-- sync-diff-inspector divides data into chunks first according to TiDB statistics and you should try to guarantee the accuracy of the statistics. You can manually run the `analyze table {table_name}` command when the TiDB server *workload is light*.
+- sync-diff-inspector divides data into chunks first according to TiDB statistics and you should try to guarantee the accuracy of the statistics. You can manually run the `analyze table {table_name}` command when the TiDB server's *workload is light*.
 - Pay special attention to `table-rules`. If you configure `schema-pattern="test1"` and `target-schema="test2"`, the `test1` schema in the source database and the `test2` schema in the target database are compared. If the source database has a `test2` schema, this `test2` schema is also compared with the `test2` schema in the target database.
 - The generated `fix.sql` is only used as a reference for repairing data, and you need to confirm it before executing these SQL statements to repair data.
