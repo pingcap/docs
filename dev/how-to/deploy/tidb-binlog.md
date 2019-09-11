@@ -15,14 +15,14 @@ It is recommended to deploy TiDB Binlog using TiDB Ansible. If you just want to 
 
 ## Hardware requirements
 
-Pump and Drainer can be deployed and run on common 64-bit hardware server platforms with the Intel x86-64 architecture.
+Pump and Drainer are deployed and operate on 64-bit universal hardware server platforms with Intel x86-64 architecture.
 
-The server hardware requirements for development, testing, and the production environment are as follows:
+In environments of development, testing and production, the requirements on server hardware are as follows:
 
 | Service     | The Number of Servers       | CPU   | Disk          | Memory   |
 | :-------- | :-------- | :-------- | :--------------- | :------ |
 | Pump | 3 | 8 core+    | SSD, 200 GB+ | 16G |
-| Drainer | 1 | 8 core+ | SAS, 100 GB+ (If the binlogs are output as local files, the disk size depends on how long these files are retained.) | 16G |
+| Drainer | 1 | 8 core+ | SAS, 100 GB+ (If binlogs are output as local files, the disk size depends on how long these files are retained.) | 16G |
 
 ## Deploy TiDB Binlog using TiDB Ansible
 
