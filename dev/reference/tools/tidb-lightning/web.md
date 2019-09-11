@@ -6,8 +6,8 @@ category: reference
 
 # TiDB Lightning Web Interface
 
-TiDB Lightning provides a webpage for viewing import progress and performs some simple task management.
-This is called *Server mode*.
+TiDB Lightning provides a webpage for viewing the import progress and performing some simple task management.
+This is called the *server mode*.
 
 To enable Server mode, either start `tidb-lightning` with the `--server-mode` flag
 
