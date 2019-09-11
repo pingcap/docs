@@ -33,7 +33,7 @@ Drainer collects and merges binlogs from each Pump, converts the binlog to SQL o
 
 ### `binlogctl` guide
 
-[`binlogctl`](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/binlogctl) is an operations tool for TiDB Binlog with the following features:
+`binlogctl` is an operations tool for TiDB Binlog with the following features:
 
 * Obtaining the current `tso` of TiDB cluster
 * Checking the Pump/Drainer state
