@@ -474,7 +474,6 @@ location_labels = ["host"]
     > **Note:**
     >
     > + The number of TiKV instances is the number of TiKV processes on each server.
-    >
     > + Recommended configuration: `capacity` = MEM_TOTAL \* 0.5 / the number of TiKV instances
 
 2. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `high-concurrency`, `normal-concurrency` and `low-concurrency` parameters in the `tidb-ansible/conf/tikv.yml` file:
