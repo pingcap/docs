@@ -54,7 +54,6 @@ The configuration of sync-diff-inspector consists of three parts:
 - `Tables config`: Configures the tables for checking. If some tables have a certain mapping relationship between the upstream and downstream databases or have some special requirements, you must configure these tables.
 - `Databases config`: Configures the instances of the upstream and downstream databases.
 
-
 Below is the description of a complete configuration file:
 
 ``` toml
