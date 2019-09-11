@@ -19,7 +19,7 @@ The purpose of this test is to test the performance of DM full import and increm
 System information:
 
 | Machine IP  | Operation system              | Kernel version            | File system type |
-| ----------- | ----------------------------- | ------------------------- | ---------------- |
+| :---------: | :---------------------------: | :-----------------------: | :--------------: |
 | 172.16.4.39 | CentOS Linux release 7.6.1810 | 3.10.0-957.1.3.el7.x86_64 | ext4             |
 | 172.16.4.40 | CentOS Linux release 7.6.1810 | 3.10.0-957.1.3.el7.x86_64 | ext4             |
 | 172.16.4.41 | CentOS Linux release 7.6.1810 | 3.10.0-957.1.3.el7.x86_64 | ext4             |
@@ -30,7 +30,7 @@ System information:
 Hardware information:
 
 | Type         |                                                    |
-| ------------ | -------------------------------------------------- |
+| :----------: | :------------------------------------------------: |
 | CPU          | 40 CPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
 | Memory       | 188G                                               |
 | Disk         | 4.0T nvme                                          |
@@ -43,7 +43,7 @@ Others:
 ### Cluster topology
 
 | Machine IP  | Deployment instance                |
-| ----------- | ---------------------------------- |
+| :---------: | :--------------------------------: |
 | 172.16.4.39 | PD1, DM-worker1, DM-master         |
 | 172.16.4.40 | PD2, MySQL1                        |
 | 172.16.4.41 | PD3, TiDB                          |
@@ -100,12 +100,12 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 #### Full import benchmark result
 
 | item                            | dump thread | mydumper extra-args             | dump speed (MB/s) |
-| ------------------------------- | ----------- | ------------------------------- | ----------------- |
+| :-----------------------------: | :---------: | :-----------------------------: | :---------------: |
 | enable single table concurrent  | 32          | "-r 320000 --regex '^sbtest.*'" | 191.03            |
 | disable single table concurrent | 32          | "--regex '^sbtest.*'"           | 72.22             |
 
 | item      | latency of execute transaction (s) | statement per transaction | data size (GB) | time (s) | import speed (MB/s) |
-| --------- | ---------------------------------- | ------------------------- | -------------- | -------- | ------------------- |
+| :-------: | :--------------------------------: | :-----------------------: | :------------: | :------: | :-----------------: |
 | load data | 1.737                              | 4878                      | 38.14          | 2346.9   | 16.64               |
 
 #### Benchmark result with different pool size in load unit
@@ -117,7 +117,8 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 ```
 
 | load pool size | latency of execution txn (s) | time (s) | speed (MB/s) | TiDB 99 duration (s) |
-| -------------- | ---------------------------- | -------- | ------------ | -------------------- |
+| :------------: | :--------------------------: | :------: | :----------: | :------------------: |
+| 2              | 0.250                        | 425.9    | 9.1          | 0.23                 |
 | 4              | 0.523                        | 360.1    | 10.7         | 0.41                 |
 | 8              | 0.986                        | 267.0    | 14.5         | 0.93                 |
 | 16             | 2.022                        | 265.9    | 14.5         | 2.68                 |
@@ -126,13 +127,16 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### Benchmark result with different sql in per statement in dump file
 
-Full import data size in this benchmark case is 3.78GB, load unit pool size  ueses 32.
+Full import data size in this benchmark case is 3.78GB, load unit pool size ueses 32. The statement count is controlled by mydumper parameters.
 
-| sql per statement in dump file | latency of execution txn (s) | time (s) | speed (MB/s) | TiDB 99 duration (s) |
-| ------------------------------ | ---------------------------- | -------- | ------------ | -------------------- |
-| 4903                           | 3.778                        | 262.3    | 14.7         | 6.39                 |
-| 2470                           | 1.962                        | 271.36   | 14.3         | 2.00                 |
-| 1236                           | 1.911                        | 283.3    | 13.7         | 1.50                 |
+| row count in per statement | mydumper extra-args  | latency of execution txn (s) | time (s) | speed (MB/s) | TiDB 99 duration (s) |
+| :------------------------: | :------------------: | :--------------------------: | :------: | :----------: | :------------------: |
+|            7426            | -s 1500000 -r 320000 |            6.982             |  258.3   |     15.0     |        10.34         |
+|            4903            | -s 1000000 -r 320000 |            3.778             |  262.3   |     14.7     |         6.39         |
+|            2470            | -s 500000 -r 320000  |            1.962             |  271.36  |     14.3     |         2.00         |
+|            1236            | -s 250000 -r 320000  |            1.911             |  283.3   |     13.7     |         1.50         |
+|            618             | -s 125000 -r 320000  |            0.683             |  299.9   |     12.9     |         0.73         |
+|            310             |  -s 62500 -r 320000  |            0.413             |  322.6   |     12.0     |         0.49         |
 
 ### Increase replication benchmark case
 
@@ -140,7 +144,7 @@ Full import data size in this benchmark case is 3.78GB, load unit pool size  ues
 
 - Set up environment
 - Use sysbench to create the table and generate the initial data in upstream MySQL
-- Start DM-task in the `all` mode, and wait task enters `sync`unit
+- Start DM-task in the `all` mode, and wait task enters `sync` unit
 - Use sysbench to generate incremental data in upstream MySQL and observe grafana metrics and DM `query-stats`
 
 #### Benchmark result for incremental replication
@@ -154,7 +158,7 @@ sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40
 DM sync unit worker-count is 32 in this benchmark case.
 
 | items                      | qps                                                          | tps                                                          | 95% Latency                  |
-| -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------------------- |
+| :------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :--------------------------: |
 | MySQL                      | 42.79k                                                       | 42.79k                                                       | 1.18ms                       |
 | DM relay log unit          | -                                                            | 11.3MB/s                                                     | 45us (read duration)         |
 | DM binlog replication unit | 22.97k (binlog event received qps, not inclued skipped events) | 45.91k (inner replication job distributed tps, read from query-status) | 20ms (txn execution latency) |
@@ -163,7 +167,7 @@ DM sync unit worker-count is 32 in this benchmark case.
 #### Benchmark result with different sync unit concurrency
 
 | sync unit worker-count | DM tps | DM execution latency (ms) | TiDB qps | TiDB 99 duration (ms) |
-| ---------------------- | ------ | ------------------------- | -------- | --------------------- |
+| :--------------------: | :----: | :-----------------------: | :------: | :-------------------: |
 | 4                      | 14149  | 63                        | 7.1k     | 3                     |
 | 8                      | 29368  | 64                        | 14.9k    | 4                     |
 | 16                     | 46972  | 56                        | 24.9k    | 6                     |
@@ -174,6 +178,6 @@ DM sync unit worker-count is 32 in this benchmark case.
 #### Benchmark result with different SQL distribution
 
 | sysbench type | relay log flush speed (MB/s) | DM tps | DM execution latency (ms) | TiDB qps | TiDB 99 duration (ms) |
-| ------------- | ---------------------------- | ------ | ------------------------- | -------- | --------------------- |
+| :-----------: | :--------------------------: | :----: | :-----------------------: | :------: | :-------------------: |
 | insert_only   | 11.3                         | 46691  | 28                        | 29.2k    | 10                    |
 | write_only    | 18.7                         | 66941  | 129                       | 34.6k    | 11                    |
