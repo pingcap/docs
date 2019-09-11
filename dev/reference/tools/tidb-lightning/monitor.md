@@ -158,8 +158,20 @@ Metrics provided by `tikv-importer` are listed under the namespace `tikv_import_
 
     Bucketed histogram for the duration of an RPC action. Labels:
 
-    - **request**: `switch_mode`/`open_engine`/`write_engine`/`close_engine`/`import_engine`/`cleanup_engine`/`compact_cluster`/`upload`/`ingest`/`compact`
-    - **result**: `ok`/`error`
+    - **request**: what kind of RPC is executed
+        * `switch_mode` — switched a TiKV node to import/normal mode
+        * `open_engine` — opened an engine file
+        * `write_engine` — received data and written into an engine
+        * `close_engine` — closed an engine file
+        * `import_engine` — imported an engine file into the TiKV cluster
+        * `cleanup_engine` — deleted an engine file
+        * `compact_cluster` — explicitly compacted the TiKV cluster
+        * `upload` — uploaded an SST file
+        * `ingest` — ingested an SST file
+        * `compact` — explicitly compacted a TiKV node
+    - **result**: the execution result of the RPC
+        * `ok`
+        * `error`
 
 - **`tikv_import_write_chunk_bytes`** (Histogram)
 
@@ -225,39 +237,70 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
 
     Counts open and closed engine files. Labels:
 
-    - **type**: `open`/`closed`
+    - **type**:
+        * `open`
+        * `closed`
 
 - **`lightning_idle_workers`** (Gauge)
 
-    Counts idle workers. Values should be less than the `*-concurrency` settings and are typically zero. Labels:
+    Counts idle workers. Labels:
 
-    - **name**: `table`/`index`/`region`/`io`/`closed-engine`
+    - **name**:
+        * `table` — number of unused `table-concurrency`, normally 0 until the end of process
+        * `index` — number of unused `index-concurrency`, normally 0 until the end of process
+        * `region` — number of unused `region-concurrency`, normally 0 until the end of process
+        * `io` — number of unused `io-concurrency`, normally close to configured value (default 5), and close to 0 means the disk is too slow
+        * `closed-engine` — number of engines which is closed but not yet cleaned up, normally close to index + table-concurrency (default 8), and close to 0 means TiDB Lightning is faster than TiKV Importer, which will cause TiDB Lightning to stall
 
 - **`lightning_kv_encoder`** (Counter)
 
     Counts open and closed KV encoders. KV encoders are in-memory TiDB instances that convert SQL `INSERT` statements into KV pairs. The net values need to be bounded in a healthy situation. Labels:
 
-    - **type**: `open`/`closed`
+    - **type**:
+        * `open`
+        * `closed`
 
 * **`lightning_tables`** (Counter)
 
     Counts number of tables processed and their status. Labels:
 
-    - **state**: `pending`/`written`/`closed`/`imported`/`altered_auto_inc`/`checksum`/`analyzed`/`completed`
-    - **result**: `success`/`failure`
+    - **state**: a table's status, indicating which phase should have been completed
+        * `pending` — not yet processed
+        * `written` — all data are encoded and sent
+        * `closed` — closed all corresponding engine files
+        * `imported` — all engine files have been imported into the target cluster
+        * `altered_auto_inc` — altered the AUTO_INCREMENT ID
+        * `checksum` — performed checksum
+        * `analyzed` — performed statistics analysis
+        * `completed` — the table has been fully imported and verified
+    - **result**: the result of the current phase
+        * `success` — the phase completed successfully
+        * `failure` — the phase failed (did not complete)
 
 * **`lightning_engines`** (Counter)
 
     Counts number of engine files processed and their status. Labels:
 
-    - **state**: `pending`/`written`/`closed`/`imported`/`completed`
-    - **result**: `success`/`failure`
+    - **state**: an engine's status, indicating which phase should have been completed
+        * `pending` — not yet processed
+        * `written` — all data are encoded and sent
+        * `closed` — closed the engine file
+        * `imported` — the engine file has been imported into the target cluster
+        * `completed` — the engine has been fully imported
+    - **result**: the result of the current phase
+        * `success` — the phase completed successfully
+        * `failure` — the phase failed (did not complete)
 
 - **`lightning_chunks`** (Counter)
 
     Counts number of chunks processed and their status. Labels:
 
-    - **state**: `estimated`/`pending`/`running`/`finished`/`failed`
+    - **state**: a chunk's status, indicating which phase the chunk is in
+        * `estimated` — (not a state) this value gives total number of chunks in current task
+        * `pending` — loaded but not yet processed
+        * `running` — data are being encoded and sent
+        * `finished` — the entire chunk is processed
+        * `failed` — some error happened during processing
 
 - **`lightning_import_seconds`** (Histogram)
 
@@ -293,6 +336,11 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
 
 - **`lightning_apply_worker_seconds`** (Histogram)
 
-    Bucketed histogram for the time needed to acquire an idle worker. Labels:
+    Bucketed histogram for the time needed to acquire an idle worker (see also the `lightning_idle_workers` gauge). Labels:
 
-    - **name**: `table`/`index`/`region`/`io`/`closed-engine`
+    - **name**:
+        * `table`
+        * `index`
+        * `region`
+        * `io`
+        * `closed-engine`
