@@ -29,7 +29,7 @@ System information:
 
 Hardware information:
 
-| Type         |                                                    |
+| Type         | Parameter                                          |
 | :----------: | :------------------------------------------------: |
 | CPU          | 40 CPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
 | Memory       | 188G                                               |
@@ -125,7 +125,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 | 32             | 3.778                        | 262.3    | 14.7         | 6.39                 |
 | 64             | 7.452                        | 281.9    | 13.7         | 8.00                 |
 
-#### Benchmark result with different sql in per statement in dump file
+#### Benchmark result with different row count in per statement
 
 Full import data size in this benchmark case is 3.78GB, load unit pool size ueses 32. The statement count is controlled by mydumper parameters.
 
@@ -145,7 +145,7 @@ Full import data size in this benchmark case is 3.78GB, load unit pool size uese
 - Set up environment
 - Use sysbench to create the table and generate the initial data in upstream MySQL
 - Start DM-task in the `all` mode, and wait task enters `sync` unit
-- Use sysbench to generate incremental data in upstream MySQL and observe grafana metrics and DM `query-stats`
+- Use sysbench to generate incremental data in upstream MySQL and observe grafana metrics and DM `query-status`
 
 #### Benchmark result for incremental replication
 
@@ -190,8 +190,8 @@ we recommend the statement size between 5KB and 1MB, and row count in one statem
 
 ### load unit
 
-we recommend to set pool-size to 16
+we recommend to set `pool-size` to 16
 
 ### sync unit
 
-we recommend to set batch size to 100 and worker-count between 16 and 32.
+we recommend to set `batch` size to 100 and `worker-count` between 16 and 32.
