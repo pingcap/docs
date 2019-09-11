@@ -29,7 +29,7 @@ System information:
 
 Hardware information:
 
-| Type         | Parameter                                          |
+| Type         | Specification                                      |
 | :----------: | :------------------------------------------------: |
 | CPU          | 40 CPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
 | Memory       | 188G                                               |
