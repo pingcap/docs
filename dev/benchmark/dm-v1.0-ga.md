@@ -155,7 +155,7 @@ Upstream sysbench test script:
 sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --report-interval=10 --time=1800 run
 ```
 
-DM sync unit worker-count is 32 in this benchmark case.
+DM sync unit worker-count is 32, batch size is 100 in this benchmark case.
 
 | items                      | qps                                                          | tps                                                          | 95% Latency                  |
 | :------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :--------------------------: |
@@ -181,3 +181,17 @@ DM sync unit worker-count is 32 in this benchmark case.
 | :-----------: | :--------------------------: | :----: | :-----------------------: | :------: | :-------------------: |
 | insert_only   | 11.3                         | 46691  | 28                        | 29.2k    | 10                    |
 | write_only    | 18.7                         | 66941  | 129                       | 34.6k    | 11                    |
+
+## Recommended parameters
+
+### dump unit
+
+we recommend the statement size between 5KB and 1MB, and row count in one statement is approximately 1000-5000, which is based on the row size in your scenario.
+
+### load unit
+
+we recommend to set pool-size to 16
+
+### sync unit
+
+we recommend to set batch size to 100 and worker-count between 16 and 32.
