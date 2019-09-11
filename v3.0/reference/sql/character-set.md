@@ -200,9 +200,9 @@ SELECT _latin1'string' COLLATE latin1_danish_ci;
 
 Rules:
 
-+ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then `CHARACTER SET charset_name` and `COLLATE collation_name` are used directly.
-+ Rule 2: If you specify `CHARACTER SET charset_name` and do not specify `COLLATE collation_name`, then `CHARACTER SET charset_name` and the default collation of `CHARACTER SET charset_name` are used.
-+ Rule 3: If you specify neither `CHARACTER SET charset_name` nor `COLLATE collation_name`, then the character set and collation given by the system variables `character_set_connection` and `collation_connection` are used.
++ Rule 1: If `CHARACTER SET charset_name` and `COLLATE collation_name` are specified, `CHARACTER SET charset_name` and `COLLATE collation_name` are used directly.
++ Rule 2: If `CHARACTER SET charset_name` is specified and `COLLATE collation_name` is not, `CHARACTER SET charset_name` and the default collation of `CHARACTER SET charset_name` are used.
++ Rule 3: If neither `CHARACTER SET charset_name` nor `COLLATE collation_name` is specified, the character set and collation given by the system variables `character_set_connection` and `collation_connection` are used.
 
 ## Connection character sets and collations
 
