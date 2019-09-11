@@ -44,8 +44,8 @@ Others:
 
 | Machine IP  | Deployment instance                |
 | ----------- | ---------------------------------- |
-| 172.16.4.39 | PD1, MySQL1, DM-worker1, DM-master |
-| 172.16.4.40 | PD2, MySQL2, DM-worker2            |
+| 172.16.4.39 | PD1, DM-worker1, DM-master         |
+| 172.16.4.40 | PD2, MySQL1                        |
 | 172.16.4.41 | PD3, TiDB                          |
 | 172.16.4.42 | TiKV1                              |
 | 172.16.4.43 | TiKV2                              |
@@ -62,7 +62,7 @@ Others:
 
 ### Data flow
 
-MySQL2 (172.16.4.40) -> DM-worker1 (172.16.4.39) -> TiDB (172.16.4.41)
+MySQL1 (172.16.4.40) -> DM-worker1 (172.16.4.39) -> TiDB (172.16.4.41)
 
 ### Public configuration or data
 
