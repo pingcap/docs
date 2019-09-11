@@ -134,10 +134,10 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
     | TiDB version | tidb-ansible tag | Note |
     | :-------- | :---------------- | :--- |
-    | 2.0 version | v2.0.10, v2.0.11 | It is the 2.0 stable version which is not recommended for new users to use in the production environment. |
-    | 2.1 version | v2.1.1 ~ v2.1.13 | It is the 2.1 stable version which can be used in the production environment. |
+    | 2.0 version | v2.0.10, v2.0.11 | It is the stable version of 2.0. It is not recommended for new users to use it in the production environment. |
+    | 2.1 version | v2.1.1 ~ v2.1.13 | It is the stable version of 2.1. It can be used in the production environment. |
 
-2. Download the [corresponding TiDB Ansible versions](https://github.com/pingcap/tidb-ansible/tags) from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+2. Download the [corresponding TiDB Ansible versions](https://github.com/pingcap/tidb-ansible/tags) of TiDB 2.0 or 2.1 from [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
     ```
     $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
@@ -146,7 +146,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 > **Note:**
 >
 > - Replace `$tag` with the value of the chosen TAG version. For example, `v2.11.15`.
-> - Deploying and upgrading TiDB clusters requires the corresponding version of `tidb-ansible`. Mixed usage by changing the version in the `inventory.ini` file might cause errors.
+> - Deploying and upgrading TiDB clusters requires the corresponding version of `tidb-ansible`. Otherwise, only changing the version in the `inventory.ini` file might cause errors.
 > - It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
 If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
@@ -488,7 +488,9 @@ location_labels = ["host"]
         # low-concurrency: 8
     ```
 
-    Recommended configuration: the number of TiKV instances \* the parameter value = CPU_Vcores \* 0.8.
+    > **Note:**
+    >
+    > Recommended configuration: the number of TiKV instances \* the parameter value = CPU_Vcores \* 0.8.
 
 3. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
@@ -497,7 +499,9 @@ location_labels = ["host"]
       capacity: 0
     ```
 
-    Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
+    > **Note:**
+    >
+    > Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
 
 ## Step 10: Edit variables in the `inventory.ini` file
 
