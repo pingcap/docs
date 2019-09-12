@@ -27,7 +27,7 @@ enable = true
 driver = "file"
 
 # The schema name (database name) to store the checkpoints
-# Enabled only when driver = "mysql".
+# Enabled only when `driver = "mysql"`.
 # schema = "tidb_lightning_checkpoint"
 
 # The data source name (DSN) indicating the location of the checkpoint storage.
