@@ -22,6 +22,7 @@ This document describes how to enable, configure, store, and control *checkpoint
 enable = true
 
 # The schema name (database name) to store the checkpoints
+# Enabled only when driver = "mysql".
 schema = "tidb_lightning_checkpoint"
 
 # Where to store the checkpoints.
@@ -43,7 +44,7 @@ driver = "file"
 # Whether to keep the checkpoints after all data are imported. If false, the
 # checkpoints are deleted. Keeping the checkpoints can aid debugging but
 # might leak metadata about the data source.
-#keep-after-success = false
+# keep-after-success = false
 ```
 
 ## Checkpoints storage
