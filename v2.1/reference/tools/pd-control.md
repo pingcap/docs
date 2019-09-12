@@ -22,7 +22,7 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 Single-command mode:
 
 ```bash
-./pd-ctl store -u http://127.0.0.1:2379
+./pd-ctl store -d -u http://127.0.0.1:2379
 ```
 
 Interactive mode:
@@ -55,7 +55,7 @@ Use TLS to encrypt:
 ### \-\-detach,-d
 
 + Use single command line mode (not entering readline)
-+ Default: true
++ Default: false
 
 ### --cacert
 
