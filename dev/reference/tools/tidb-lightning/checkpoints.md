@@ -20,14 +20,14 @@ This document describes how to enable, configure, store, and control *checkpoint
 # good state instead of redoing everything.
 enable = true
 
-# The schema name (database name) to store the checkpoints
-# Enabled only when driver = "mysql".
-schema = "tidb_lightning_checkpoint"
-
 # Where to store the checkpoints.
 #  - file:  store as a local file (requires v2.1.1 or later)
 #  - mysql: store into a remote MySQL-compatible database
 driver = "file"
+
+# The schema name (database name) to store the checkpoints
+# Enabled only when driver = "mysql".
+# schema = "tidb_lightning_checkpoint"
 
 # The data source name (DSN) indicating the location of the checkpoint storage.
 #
