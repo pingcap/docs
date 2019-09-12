@@ -32,8 +32,8 @@ Hardware information:
 | Type         | Specification                                      |
 | :----------: | :------------------------------------------------: |
 | CPU          | 40 CPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
-| Memory       | 188G                                               |
-| Disk         | 4.0T nvme                                          |
+| Memory       | 192GB, 12 * 16GB DIMM DDR4 2133 MHz                |
+| Disk         | Intel DC P4510 4TB NVMe PCIe 3.0                   |
 | Network card | 10 Gigabit Ethernet                                |
 
 Others:
@@ -186,7 +186,7 @@ DM sync unit worker-count is 32, batch size is 100 in this benchmark case.
 
 ### dump unit
 
-we recommend the statement size between 5KB and 1MB, and row count in one statement is approximately 1000-5000, which is based on the row size in your scenario.
+we recommend the statement size between 200KB and 1MB, and row count in one statement is approximately 1000-5000, which is based on the row size in your scenario.
 
 ### load unit
 
