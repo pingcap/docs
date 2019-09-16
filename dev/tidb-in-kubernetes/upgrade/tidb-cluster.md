@@ -61,7 +61,7 @@ You can change the configuration of TiDB cluster through the following steps:
 
 ## Force an upgrade of TiDB cluster
 
-If the PD cluster is unavailable due to  factors such as PD configuration error, PD image tag error and NodeAffinity, then [Scaling the TiDB cluster](/tidb-in-kubernetes/scale-in-kubernetes.md), [upgrading the TiDB cluster](#Upgrade-the-version-of-TiDB-cluster) and [changing the TiDB cluster configuration](#Change-the-configuration-of-TiDB-cluster) cannot be operated. In this case, you can use `force-upgrade` (the version of TiDB Operator must be later than v1.0.0-beta.3) to force an upgrade of the cluster to recover cluster functionality.  The specific steps are as follows:
+If the PD cluster is unavailable due to factors such as PD configuration error, PD image tag error and NodeAffinity, then [Scaling the TiDB cluster](/dev/tidb-in-kubernetes/scale-in-kubernetes.md), [upgrading the TiDB cluster](#Upgrade-the-version-of-TiDB-cluster) and [changing the TiDB cluster configuration](#Change-the-configuration-of-TiDB-cluster) cannot be operated. In this case, you can use `force-upgrade` (the version of TiDB Operator must be later than v1.0.0-beta.3) to force an upgrade of the cluster to recover cluster functionality. The specific steps are as follows:
 
 {{< copyable "shell-regular" >}}
 
@@ -73,7 +73,7 @@ Then execute `helm upgrade` command from the corresponding operation.
 
 > **Note:**
 >
-> After the PD cluster recovers, you **must** execute the following command to  disable the forced upgrade, or an exception may occur in the next upgrade:
+> After the PD cluster recovers, you **must** execute the following command to disable the forced upgrade, or an exception may occur in the next upgrade:
 >
 > {{< copyable "shell-regular" >}}
 >
