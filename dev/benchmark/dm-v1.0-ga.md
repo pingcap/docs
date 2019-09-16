@@ -68,6 +68,8 @@ MySQL1 (172.16.4.40) -> DM-worker1 (172.16.4.39) -> TiDB (172.16.4.41)
 
 #### Database table structure used for the test
 
+{{< copyable "sql-regular" >}}
+
 ```sql
 CREATE TABLE `sbtest` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -92,6 +94,8 @@ We use TiDB-ansiable to deploy TiDB cluster, and use default configuration provi
 - Start DM-task in the `full` mode
 
 sysbench test script used for preparing initial data:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --table-size=50000000 prepare
