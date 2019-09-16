@@ -50,7 +50,7 @@ Statistics - Hotspot | Leader distribution in hot read Regions | The total numbe
 Statistics - Hotspot | Peer distribution in hot read Regions | The total number of Regions which are not leader under hot read per each TiKV instance |
 Statistics - Hotspot | Leader read bytes in hot read Regions | The total bytes of hot read on leader Regions per each TiKV instance |
 Statistics - Hotspot | Peer read bytes in hot read Regions | The total bytes of hot read on peer Regions per TiKV instance |
-Scheduler | RHnning schedulers | The current running schedulers |
+Scheduler | Running schedulers | The current running schedulers |
 Scheduler | Balance leader movement | The leader movement details among TiKV instances |
 Scheduler | Balance Region movement | The Region movement details among TiKV instances |
 Scheduler | Balance leader event | The count of balance leader events |
