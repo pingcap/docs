@@ -45,7 +45,7 @@ test> show table t regions;
 1 row in set
 ```
 
-In the above example, `t_43_` is the value of `START_KEY` row. In this value, `t` is the prefix of the table and `43` is the ID of table t. The value of `END_KEY` row is empty (""), which means that it is an infinite value.
+In the above example, `t_43_` is the value of `START_KEY` row. In this value, `t` is the table prefix and `43` is the table ID. The value of `END_KEY` row is empty (""), which means that it is an infinite value.
 
 Use the `SPLIT TABLE REGION` statement to split row data into five Regions.
 
@@ -77,11 +77,11 @@ test> show table t regions;
 In the above example:
 
 * Table t corresponds to six Regions. In these Regions, `98`, `103`, `109`, `113`, and `2` store the row data. `68` stores the index data.
-* For `START_KEY` and `END_KEY` of Region `98`, `t_43` is the prefix and ID of the table t. `_r` is the prefix of the record data in table t. `_i` is the prefix of the index data.
-* In Region `98`, `START_KEY` and `END_KEY` mean that record data in the range of [-inf, 20000) is stored. The ranges of data storage in Regions (`103`, `109`, `113`, `2`) can also be deduced in similar way.
+* For `START_KEY` and `END_KEY` of Region `98`, `t_43` indicates the table prefix and ID. `_r` is the prefix of the record data in table t. `_i` is the prefix of the index data.
+* In Region `98`, `START_KEY` and `END_KEY` mean that record data in the range of `[-inf, 20000)` is stored. In similar way, the ranges of data storage in Regions (`103`, `109`, `113`, `2`) can also be calculated.
 * Region `68` stores the index data. The Startkey of table t's index data is `t_43_i`, which is in the range of Region `68`.
 
-Use `SPLIT TABLE REGION` to split the index data into Regions. In the following example, the index data `name` of table t is split into two Regions in the range of [a,z].
+Use `SPLIT TABLE REGION` to split the index data into Regions. In the following example, the index data `name` of table t is split into two Regions in the range of `[a,z]`.
 
 ```sql
 test> split table t index name between ("a") and ("z") regions 2;
@@ -111,7 +111,7 @@ test> show table t regions;
 7 rows in set
 ```
 
-To check the Region that corresponds to table t in store 1, use the `WHERE` clause:
+To check the Region that corresponds to table t in store 1, use `WHERE` clause:
 
 ```sql
 test> show table t regions where leader_store_id =1;
