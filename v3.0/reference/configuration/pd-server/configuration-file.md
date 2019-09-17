@@ -136,7 +136,7 @@ Configuration items related to scheduling
 
 ### `split-merge-interval`
 
-+ Controls the time interval between the `split` and `merge` operations on the same Region. That is to say, a newly split Region will not be merged for a while.
++ Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
 + Default value: `1h`
 
 ### `max-snapshot-count`
@@ -151,7 +151,7 @@ Configuration items related to scheduling
 
 ### `max-store-down-time`
 
-+ The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds copies at other nodes.
++ The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
 + Default value: `30m`
 
 ### `leader-schedule-limit`
@@ -183,7 +183,7 @@ Configuration items related to scheduling
 
 ### `low-space-ratio`
 
-+ The threshold ratio above which the capacity of the space is insufficient
++ The threshold ratio above which the capacity of the store is insufficient
 + Default value: `0.8`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
@@ -221,11 +221,11 @@ Configuration items related to scheduling
 
 ## `replication`
 
-Configuration items related to copies
+Configuration items related to replicas
 
 ### `max-replicas`
 
-+ The number of copies
++ The number of replicas
 + Default value: `3`
 
 ### `location-labels`

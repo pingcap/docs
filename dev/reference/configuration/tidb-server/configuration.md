@@ -96,11 +96,11 @@ TiDB is configurable using command-line flags and environment variables. The def
 
     > **Note:**
     >
-    > Use the default value. Do not set the value to `0` unless in special situations.
+    > Do not set the value to `0`. Use the default value except for special situations.
 
 ## `--cors`
 
-- The `Access-Control-Allow-Origin` used to set the status service of TiDB `HTTP`
+- Specifies the `Access-Control-Allow-Origin` value for Cross-Origin Request Sharing (CORS) request of the TiDB HTTP status service
 - Default: ""
 
 ## `--report-status`

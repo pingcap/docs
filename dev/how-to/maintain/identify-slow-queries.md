@@ -262,7 +262,7 @@ The table below specifies the details of the output:
 | duration | The duration of the SQL execution |
 | details | The details of the SQL execution |
 | succ | Whether the SQL statement is executed successfully. `1` means success and `0` means failure. |
-| conn_id | The Connection ID (session ID). For example, you can use the keyword `con:3` to query the log whose session ID is `3`. |
+| conn_id | The connection ID for the session |
 | transcation_ts | The `commit ts` for a transaction commit |
 | user | The user name for the execution of the statement |
 | db | The database involved when the statement is executed |

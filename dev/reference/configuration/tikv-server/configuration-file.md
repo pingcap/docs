@@ -230,7 +230,7 @@ Configuration items related to Raftstore
 
 ### `prevote`
 
-+ The switch of `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
++ Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
 + Default value: `true`
 
 ### `raftdb-path`
@@ -252,7 +252,7 @@ Configuration items related to Raftstore
 
 ### `raft-election-timeout-ticks`
 
-+ The number of passed ticks when Raft election is initiated. This means that if Raft group is missing the leader, a Leader election is initiated approximately after the time interval of `raft-base-tick-interval` * `raft-election-timeout-ticks`.
++ The number of passed ticks when Raft election is initiated. This means that if Raft group is missing the leader, a leader election is initiated approximately after the time interval of `raft-base-tick-interval` * `raft-election-timeout-ticks`.
 + Default value: `10`
 + Minimum value: `raft-heartbeat-ticks`
 
@@ -277,7 +277,7 @@ Configuration items related to Raftstore
 
 ### `raft-max-inflight-msgs`
 
-+ The number of logs to be confirmed. If this number is exceeded, log sending slows down.
++ The number of Raft logs to be confirmed. If this number is exceeded, log sending slows down.
 + Default value: `256`
 + Minimum value: greater than `0`
 
@@ -320,19 +320,19 @@ Configuration items related to Raftstore
 
 ### `raft-reject-transfer-leader-duration`
 
-+ The protection time for new nodes, which is used to control the shortest time to migrate Raft Leader to the newly added node. Setting this value too small might lead to the failure of Leader migration.
++ The protection time for new nodes, which is used to control the shortest interval to migrate a leader to the newly added node. Setting this value too small might cause the failure of leader transfer.
 + Default value: `3s`
 + Minimum value: `0`
 
 ### `split-region-check-tick-interval`
 
-+ Checks whether the Region needs time interval for Region splitting. `0` means that this feature is disabled.
++ Specifies the interval at which to check whether the Region split is needed. `0` means that this feature is disabled.
 + Default value: `10s`
 + Minimum value: `0`
 
 ### `region-split-check-diff`
 
-+ The maximum value allowed for the Region data to exceed the specified size
++ The maximum value by which the Region data is allowed to exceed before Region split
 + Default value: 1/16 of the Region size.
 + Minimum value: `0`
 
@@ -413,7 +413,7 @@ Configuration items related to Raftstore
 
 ### `messages-per-tick`
 
-+ The maximum number of messages processed per round
++ The maximum number of messages processed per batch
 + Default value: `4096`
 + Minimum value: `0`
 
@@ -443,13 +443,13 @@ Configuration items related to Raftstore
 
 ### `leader-transfer-max-log-lag`
 
-+ The maximum number of missing logs allowed by the transferee in an attempt to transfer Raft leadership
++ The maximum number of missing logs allowed for the transferee during a Raft leader transfer
 + Default value: `10`
 + Minimum value: `10`
 
 ### `snap-apply-batch-size`
 
-+ The memory cache size when the imported snapshot file needs to be written into disk
++ The memory cache size required when the imported snapshot file is written into the disk
 + Default value: `10MB`
 + Minimum value: `0`
 + Unit: MB
@@ -496,25 +496,25 @@ Configuration items related to Raftstore
 
 ### `local-read-batch-size`
 
-+ The maximum number of read requests processed in one round
++ The maximum number of read requests processed in one batch
 + Default value: `1024`
 + Minimum value: greater than `0`
 
 ### `apply-max-batch-size`
 
-+ The maximum number of requests for processing data placement in one round
++ The maximum number of requests for data flushing in one batch
 + Default value: `1024`
 + Minimum value: greater than `0`
 
 ### `apply-pool-size`
 
-+ The allowable number of threads that handles data placement
++ The allowable number of threads in the pool that flushes data to storage
 + Default value: `2`
 + Minimum value: greater than `0`
 
 ### `store-max-batch-size`
 
-+ The maximum number of requests processed in one round
++ The maximum number of requests processed in one batch
 + Default value: `1024`
 + Minimum value: greater than `0`
 
@@ -541,13 +541,13 @@ Configuration items related to Coprocessor
 
 ### `batch-split-limit`
 
-+ The threshold of Region splitting. Increasing this value speeds up Region splitting.
++ The threshold of Region split in batches. Increasing this value speeds up Region split.
 + Default value: `10`
 + Minimum value: `1`
 
 ### `region-max-size`
 
-+ The maximum space of a Region. When the value is exceeded, the system splits a Region into many.
++ The maximum size of a Region. When the value is exceeded, the Region splits into many.
 + Default value: `144MB`
 + Unit: KB|MB|GB
 
@@ -559,7 +559,7 @@ Configuration items related to Coprocessor
 
 ### `region-max-keys`
 
-+ The maximum number keys allowed in a Region. When this value is exceeded, the system splits a Region into many.
++ The maximum allowable number of keys in a Region. When this value is exceeded, the Region splits into many.
 + Default value: `1440000`
 
 ### `region-split-keys`
@@ -579,7 +579,7 @@ Configuration items related to RocksDB
 
 ### `max-sub-compactions`
 
-+ The number of concurrent sub-compactions in RocksDB
++ The number of sub-compaction operations performed concurrently in RocksDB
 + Default value: `1`
 + Minimum value: `1`
 
@@ -591,7 +591,7 @@ Configuration items related to RocksDB
 
 ### `max-manifest-file-size`
 
-+ The maximum size of the RocksDB Manifest file
++ The maximum size of a RocksDB Manifest file
 + Default value: `128MB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -603,27 +603,27 @@ Configuration items related to RocksDB
 
 ### `wal-recovery-mode`
 
-+ The WAL recovery mode
-+ Available values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3`(`SkipAnyCorruptedRecords`)
++ WAL recovery mode
++ Available values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3` (`SkipAnyCorruptedRecords`)
 + Default value: `2`
 + Minimum value: `0`
 + Maximum value: `3`
 
 ### `wal-dir`
 
-+ The directory in which WAL is stored
++ The directory in which WAL files are stored
 + Default value: `/tmp/tikv/store`
 
 ### `wal-ttl-seconds`
 
-+ The life cycle of the archived WAL. When the value is exceeded, the system deletes the relevant WAL.
++ The living time of the archived WAL files. When the value is exceeded, the system deletes these files.
 + Default value: `0`
 + Minimum value: `0`
 + unit: second
 
 ### `wal-size-limit`
 
-+ The size limit of the archived WAL. When the value is exceeded, the system deletes the relevant WAL.
++ The size limit of the archived WAL files. When the value is exceeded, the system deletes these files.
 + Default value: `0`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -647,7 +647,7 @@ Configuration items related to RocksDB
 
 ### `writable-file-max-buffer-size`
 
-+ The maximum buffer size used by WritableFileWrite
++ The maximum buffer size used in WritableFileWrite
 + Default value: `1MB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -659,7 +659,7 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-+ Rate Limiter limits the rate.
++ The maximum rate permitted by Rate Limiter
 + Default value: `0`
 + Minimum value: `0`
 + Unit: Bytes
@@ -691,7 +691,7 @@ Configuration items related to RocksDB
 
 ### `wal-bytes-per-sync`
 
-+ The rate at which OS incrementally synchronizes WAL to disk while WAL is being written
++ The rate at which OS incrementally synchronizes WAL files to disk while the WAL files are being written
 + Default value: `512KB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -705,7 +705,7 @@ Configuration items related to RocksDB
 
 ### `info-log-roll-time`
 
-+ The time interval at which logs are truncated. If the value is `0`, logs are not truncated.
++ The time interval at which Info logs are truncated. If the value is `0`, logs are not truncated.
 + Default value: `0`
 
 ### `info-log-keep-log-file-num`
@@ -735,12 +735,12 @@ Configuration items related to Titan
 
 ### `disable-gc`
 
-+ Enables or disables GC on Blob files for Titan
++ Determines whether to disable Garbage Collection (GC) that Titan performs to Blob files
 + Default value: `false`
 
 ### `max-background-gc`
 
-+ The maximum number of GC threads for Titan
++ The maximum number of GC threads in Titan
 + Default value: `1`
 + Minimum value: `1`
 
@@ -774,7 +774,7 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `pin-l0-filter-and-index-blocks`
 
-+ Determines whether to pin the index and filter of L0
++ Determines whether to pin the index and filter at L0
 + Default value: `true`
 
 ### `use-bloom-filter`
@@ -789,36 +789,37 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `whole_key_filtering`
 
-+ Determines whether to put the entire key into the bloom filter
++ Determines whether to put the entire key to bloom filter
 + Default value: `true`
 
 ### `bloom-filter-bits-per-key`
 
-+ The length that the bloom filter reserves for each key
++ The length that bloom filter reserves for each key
 + Default value: `10`
 + unit: byte
 
 ### `block-based-bloom-filter`
 
-+ Enables or disables each block to create a bloom filter
++ Determines whether each block creates a bloom filter
 + Default value: `false`
 
 ### `read-amp-bytes-per-bit`
 
-+ Enables or disables statistics of read amplification. `0`: disabled. > `0`: enabled.
++ Enables or disables statistics of read amplification.
++ Available values: `0` (disabled), > `0` (enabled).
 + Default value: `0`
 + Minimum value: `0`
 
 ### `compression-per-level`
 
-+ The default compression algorithm for each layer
++ The default compression algorithm for each level
 + Available values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
-+ Default value: `No` for the first two layers, and `lz4` for the next five layers
++ Default value: `No` for the first two levels, and `lz4` for the next five levels
 
 ### `write-buffer-size`
 
 + Memtable size
-+ Default value: 128MB
++ Default value: `128MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -830,45 +831,45 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `min-write-buffer-number-to-merge`
 
-+ The minimum number of memtables to trigger flush
++ The minimum number of memtables required to trigger flush
 + Default value: `1`
 + Minimum value: `0`
 
 ### `max-bytes-for-level-base`
 
-+ The maximum number of bytes at the base level (L1). Generally, it is set to 4 times the size of memtable.
++ The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable.
 + Default value: `512MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `target-file-size-base`
 
-+ The size of the target file at the base level
++ The size of the target file at base level
 + Default: `8MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `level0-file-num-compaction-trigger`
 
-+ The maximum number of L0 files that trigger compaction
++ The maximum number of files at L0 that trigger compaction
 + Default value: `4`
 + Minimum value: `0`
 
 ### `level0-slowdown-writes-trigger`
 
-+ The maximum number of L0 files that trigger write stall
++ The maximum number of files at L0 that trigger write stall
 + Default value: `20`
 + Minimum value: `0`
 
 ### `level0-stop-writes-trigger`
 
-+ The maximum number of L0 files to completely block write
++ The maximum number of files at L0 required to completely block write
 + Default value: `36`
 + Minimum value: `0`
 
 ### `max-compaction-bytes`
 
-+ The maximum number of written bytes per compaction
++ The maximum number of bytes written into disk per compaction
 + Default value: `2GB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
@@ -877,7 +878,6 @@ Configuration items related to `rocksdb.defaultcf`
 
 + The priority type of compaction
 + Available values: `3` (`MinOverlappingRatio`), `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`)
-
 + Default value: `3`
 
 ### `dynamic-level-bytes`
@@ -887,7 +887,7 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `num-levels`
 
-+ The maximum number of layers in the RocksDB file
++ The maximum number of levels in a RocksDB file
 + Default value: `7`
 
 ### `max-bytes-for-level-multiplier`
@@ -924,56 +924,56 @@ Configuration items related to `rocksdb.defaultcf.titan`
 
 ### `min-blob-size`
 
-+ The smallest value stored in the Blob file. Values smaller than the specified size are stored in the LSM-Tree.
++ The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
 + Default value: `1KB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `blob-file-compression`
 
-+ The compression algorithm used by the Blob file
++ The compression algorithm used in a Blob file
 + Available values: `no`, `snappy`, `zlib`, `bzip2`, `lz4`, `lz4hc`, `zstd`
 + Default value: `lz4`
 
 ### `blob-cache-size`
 
-+ The cache size of the Blob file
++ The cache size of a Blob file
 + Default value: `0GB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `min-gc-batch-size`
 
-+ The minimum total size of the Blob files required by GC each time
++ The minimum total size of Blob files required to perform GC for one time
 + Default value: `16MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `max-gc-batch-size`
 
-+ The maximum total size of the Blob files required by GC each time
++ The maximum total size of Blob files allowed to perform GC for one time
 + Default value: `64MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `discardable-ratio`
 
-+ The triggering ratio of GC for a Blob file. The file can be selected by GC only if the proportion of the invalid values in a Blob file is higher than this ratio.
++ The ratio at which GC is triggered for Blob files. The Blob file can be selected for GC only if the proportion of the invalid values in a Blob file exceeds this ratio.
 + Default value: `0.5`
 + Minimum value: `0`
 + Maximum value: `1`
 
 ### `sample-ratio`
 
-+ The ratio of read data to the entire Blob file when sampling the Blob file during GC
++ The ratio of (data read from a Blob file/the entire Blob file) when sampling the file during GC
 + Default value: `0.1`
 + Minimum value: `0`
 + Maximum value: `1`
 
 ### `merge-small-file-threshold`
 
-+ When the size of the Blob file is smaller than this value, the file might still be selected by GC regardless of the discardable-ratio.
-+ Default value: 8MB
++ When the size of a Blob file is smaller than this value, the Blob file might still be selected for GC. In this situation, `discardable-ratio` is ignored.
++ Default value: `8MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -994,7 +994,7 @@ Configuration items related to `rocksdb.writecf`
 
 ### `whole-key-filtering`
 
-+ Determines whether to put the entire key into the bloom filter
++ Determines whether to put the entire key to bloom filter
 + Default value: `false`
 
 ## rocksdb.lockcf
@@ -1014,7 +1014,7 @@ Configuration items related to `rocksdb.lockcf`
 
 ### `level0-file-num-compaction-trigger`
 
-+ The number of L0 files that trigger compaction
++ The number of files at L0 required to trigger compaction
 + Default value: `1`
 
 ## `raftdb`
@@ -1029,13 +1029,13 @@ Configuration items related to `raftdb`
 
 ### `max-sub-compactions`
 
-+ The concurrency value for the sub-compaction operations performed by RocksDB
++ The number of concurrent sub-compaction operations performed in RocksDB
 + Default value: `1`
 + Minimum value: `1`
 
 ### `wal-dir`
 
-+ The directory in which WAL is stored
++ The directory in which WAL files are stored
 + Default value: `/tmp/tikv/store`
 
 ## `import`
@@ -1050,6 +1050,6 @@ Configuration items related to `import`
 
 ### `num-import-jobs`
 
-+ The number of the concurrent import tasks
++ The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`

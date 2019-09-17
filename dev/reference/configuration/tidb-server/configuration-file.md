@@ -60,7 +60,7 @@ This document describes the options that are not involved in command line option
 
 ### `check-mb4-value-in-utf8`
 
-- Determines whether to enable the `utf8mb4` character check. When this feature is enable, if the character set is `utf8` and the `mb4` characters are inserted in `utf8`, an error is returned.
+- Determines whether to enable the `utf8mb4` character check. When this feature is enabled, if the character set is `utf8` and the `mb4` characters are inserted in `utf8`, an error is returned.
 - Default value: `false`
 
 ### `treat-old-version-utf8-as-utf8mb4`
@@ -80,7 +80,7 @@ Configuration items related to log
 
 ### `disable-timestamp`
 
-- Determines whether to disable outputting timestamp in the log
+- Determines whether to disable timestamp output in the log
 - Default value: `false`
 - If you set the value to `true`, the log does not output timestamp
 
@@ -199,7 +199,7 @@ Configuration items related to performance
 
 ### `max-memory`
 
-- The maximum memory limit for the Prepare cache LRU. If this value exceeds `performance.max-memory * (1 - prepared-plan-cache.memory-guard-ratio)`, the elements in the LRU are removed.
+- The maximum memory limit for the Prepared Least Recently Used (LRU) caching. If this value exceeds `performance.max-memory * (1 - prepared-plan-cache.memory-guard-ratio)`, the elements in the LRU are removed.
 - Default value: `0`
 - This configuration only takes effect when `prepared-plan-cache.enabled` is `true`. When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
 
@@ -291,7 +291,7 @@ The Plan Cache configuration of the `PREPARE` statement
 
 ### `grpc-keepalive-time`
 
-- The `keepalive` time interval of the RPC connection between TiDB and TiKV nodes. If there is no network packet out of this value, the gRPC client executes `ping` command to TiKV to see if it is alive.
+- The `keepalive` time interval of the RPC connection between TiDB and TiKV nodes. If there is no network packet within the specified time interval, the gRPC client executes `ping` command to TiKV to see if it is alive.
 - Default: `10`
 - unit: second
 
@@ -355,7 +355,7 @@ Configurations related to TiDB Binlog
 
 ### `enable`
 
-- Determines whether to enable the switch of binlog
+- Enables or disables binlog
 - Default value: `false`
 
 ### `write-timeout`
@@ -366,7 +366,7 @@ Configurations related to TiDB Binlog
 
 ### `ignore-error`
 
-- Determines whether to ignore the errors occurred in the process of writing binlog into Pump. It is recommended not to modify this value.
+- Determines whether to ignore errors occurred in the process of writing binlog into Pump. It is recommended not to modify this value.
 - Default value: `false`
 - When the value is set to `true` and an error occurs, the writing is stopped and `1` is summed to the monitoring item `tidb_server_critical_error_total`. When the value is `false`, the writing fails and the entire TiDB service is stopped.
 
@@ -377,7 +377,7 @@ Configurations related to TiDB Binlog
 
 ### `strategy`
 
-- The strategy of selecting Pump when binlog is exported. Currently, only the `hash` and `range` methods are supported.
+- The strategy of Pump selection when binlog is exported. Currently, only the `hash` and `range` methods are supported.
 - Default value: `range`
 
 ## status
@@ -386,5 +386,5 @@ Configuration related to the status of TiDB service
 
 ### `record-db-qps`
 
-- Determines whether to enter the database-related QPS metrics to Promethus
+- Determines whether to transmit the database-related QPS metrics to Prometheus
 - Default value: `false`
