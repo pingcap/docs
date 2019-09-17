@@ -71,7 +71,7 @@ Also, starting with TiDB 3.0.4, TiDB supports removing `auto_increment` property
 
 ### Performance schema
 
-Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/v3.0/how-to/monitor/monitor-a-cluster.md#use-prometheus-and-grafana) for performance metrics instead.
+Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/v3.0/how-to/monitor/monitor-a-cluster.md) for performance metrics instead.
 
 ### Query Execution Plan
 
@@ -79,7 +79,7 @@ The output format of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is g
 
 ### Built-in functions
 
-TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#FunctionCallKeyword) for the supported functions.
+TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyword) for the supported functions.
 
 ### DDL
 
@@ -127,7 +127,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-Architecturally, TiDB does support a similar storage engine abstraction to MySQL, and user tables are created in the engine specified by the [`--store`](/v3.0/reference/configuration/tidb-server/configuration.md#store) option used when you start tidb-server (typically `tikv`).
+Architecturally, TiDB does support a similar storage engine abstraction to MySQL, and user tables are created in the engine specified by the [`--store`](/v3.0/reference/configuration/tidb-server/configuration.md#--store) option used when you start tidb-server (typically `tikv`).
 
 ### SQL modes
 
