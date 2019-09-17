@@ -43,7 +43,6 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 >
 > - In the test environment, the TiDB and PD can be deployed on the same server.
 > - For performance-related test, do not use low-performance storage and network hardware configuration, in order to guarantee the correctness of the test result.
-> - TiKV requires NVMe SSD disks to ensure faster reads and writes.
 > - The TiDB server uses the disk to store server logs, so there are no special requirements for the disk type and capacity in the test environment.
 
 ### Production environment
