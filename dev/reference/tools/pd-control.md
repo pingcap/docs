@@ -568,7 +568,7 @@ Description of various types:
 Usage:
 
 ```bash
->> region miss-peer
+>> region check miss-peer
 {
   "count": 2,
   "regions": [......],
