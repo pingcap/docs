@@ -100,7 +100,6 @@ Since TiDB 3.0, some configuration options have changed with support for distrib
 | 3.0 <br/> `tikv_gc_mode = distributed` <br/> `tikv_gc_auto_concurrency = false` | Concurrent | Distributed |
 | 3.0 <br/> `tikv_gc_mode = distributed` <br/> `tikv_gc_auto_concurrency = true` <br/> (default) | Auto-concurrent | Distributed |
 
-
 - Serial: send requests Region by Region.
 - Concurrent: use the number of threads specified in the `tikv_gc_concurrency` option to send requests to each Region concurrently.
 - Auto-concurrent: use the number of TiKV nodes as the number of threads to send requests to each Region concurrently.
