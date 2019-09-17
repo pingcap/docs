@@ -73,7 +73,7 @@ Then execute `helm upgrade` command from the corresponding operation.
 
 > **Note:**
 >
-> After the PD cluster recovers, you **must** execute the following command to disable the forced upgrade, or an exception may occur in the next upgrade:
+> After the PD cluster recovers, you *must* execute the following command to disable the forced upgrade, or an exception may occur in the next upgrade:
 >
 > {{< copyable "shell-regular" >}}
 >
