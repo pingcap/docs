@@ -40,7 +40,7 @@ VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=
 
 ```bash
 # Enters the command line mode to interact with DM-master.
-$ ./dmctl -master-addr 172.16.30.14
+$ ./dmctl -master-addr 172.16.30.14:8261
 Welcome to dmctl
 Release Version: v1.0.0-100-g2bef6f8b
 Git Commit Hash: 2bef6f8beda34c0dff57377005c71589b48aa3c5
@@ -95,7 +95,7 @@ This section describes how to use the task management commands to execute the fo
 
 ### Create the data replication task
 
-You can use the task management command to create the data replication task. Data Migration [prechecks the corresponding privileges and configuration automatically](#precheck-the-upstream-mysql-instance-configuration) while starting the data replication.
+You can use the task management command to create the data replication task. Data Migration [prechecks the corresponding privileges and configuration automatically](/v2.1/reference/tools/data-migration/precheck.md) while starting the data replication.
 
 ```bash
 » help start-task
