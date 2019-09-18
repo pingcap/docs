@@ -28,7 +28,7 @@ Single-command mode:
 Interactive mode:
 
 ```bash
-./pd-ctl -u http://127.0.0.1:2379
+./pd-ctl -i -u http://127.0.0.1:2379
 ```
 
 Use environment variables:
@@ -55,7 +55,7 @@ Use TLS to encrypt:
 ### \-\-detach,-d
 
 + Use single command line mode (not entering readline)
-+ Default: false
++ Default: true
 
 ### --cacert
 
