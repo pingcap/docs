@@ -253,7 +253,7 @@ In EKS, some values are not customizable in `values.yaml`, such as the cluster v
 
 > **Note:**
 >
->It's not recommended to include the following `tidb-cluster` module default configurations in customized `values.yaml`:
+>It's not recommended to include the following default configurations (default configurations of `tidb-cluster` module) in customized `values.yaml`:
 >
 > ```
 > pd:
@@ -347,7 +347,7 @@ output "example-cluster_monitor-hostname" {
 }
 ```
 
-When modification finishes, you can execute `terraform init` and `terraform apply` to create a TiDB cluster.
+When you finish modification, you can execute `terraform init` and `terraform apply` to create a TiDB cluster.
 
 Once you remove `tidb-cluster` module, the corresponding TiDB cluster will be destroyed and EC2 resources will be released accordingly.
 
