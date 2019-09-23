@@ -43,7 +43,7 @@ Try the latest version! Maybe there is new speed improvement.
     * `AUTO_INCREMENT` columns need to be positive, and do not contain the value "0".
     * The UNIQUE and PRIMARY KEYs must have no duplicated entries.
 
-4. If TiDB Lightning has failed before and not properly restarted, a checksum mismatch may happen due to data being out-of-sync.
+4. If TiDB Lightning has failed before and was not properly restarted, a checksum mismatch may happen due to data being out-of-sync. 
 
 **Solutions**:
 
@@ -73,7 +73,7 @@ See the [Checkpoints control](/dev/reference/tools/tidb-lightning/checkpoints.md
 
 ## ResourceTemporarilyUnavailable("Too many open engines …: …")
 
-**Cause**: The number of concurrent engine files exceeds the limit imposed by `tikv-importer`. This could be caused by misconfiguration. Additionally, if `tidb-lightning` exited abnormally, an engine file might be left at a dangling open state, which could cause this error as well.
+**Cause**: The number of concurrent engine files exceeds the limit specified by `tikv-importer`. This could be caused by misconfiguration. Additionally, if `tidb-lightning` exited abnormally, an engine file might be left at a dangling open state, which could cause this error as well.
 
 **Solutions**:
 
