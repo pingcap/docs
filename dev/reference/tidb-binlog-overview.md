@@ -79,6 +79,6 @@ Once you grasp the basics from the above, you can refer to the following documen
 
 - [TiDB Binlog Tutorial](/dev/how-to/get-started/tidb-binlog.md)
 - [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog.md)
-- [iDB Binlog Monitoring](/dev/how-to/monitor/tidb-binlog.md)
+- [TiDB Binlog Monitoring](/dev/how-to/monitor/tidb-binlog.md)
 - [TiDB Binlog Cluster Operations](/dev/how-to/maintain/tidb-binlog.md)
 - [Upgrade TiDB Binlog Cluster](/dev/how-to/upgrade/tidb-binlog.md)

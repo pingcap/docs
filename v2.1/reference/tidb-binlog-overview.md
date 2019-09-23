@@ -80,6 +80,6 @@ Once you grasp the basics from the above, you can refer to the following documen
 
 - [TiDB Binlog Tutorial](/v2.1/how-to/get-started/tidb-binlog.md)
 - [TiDB Binlog Cluster Deployment](/v2.1/how-to/deploy/tidb-binlog.md)
-- [iDB Binlog Monitoring](/v2.1/how-to/monitor/tidb-binlog.md)
+- [TiDB Binlog Monitoring](/v2.1/how-to/monitor/tidb-binlog.md)
 - [TiDB Binlog Cluster Operations](/v2.1/how-to/maintain/tidb-binlog.md)
 - [Upgrade TiDB Binlog Cluster](/v2.1/how-to/upgrade/tidb-binlog.md)
