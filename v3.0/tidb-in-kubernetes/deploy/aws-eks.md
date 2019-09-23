@@ -2,7 +2,7 @@
 title: Deploy TiDB on AWS EKS
 summary: Learn how to deploy a TiDB cluster on AWS EKS.
 category: how-to
-aliases: ['/docs/v3.0/how-to/deploy/tidb-in-kubernetes/aws-eks/']
+aliases: ['/docs/v3.0/how-to/deploy/tidb-in-kubernetes/aws-eks/','/docs/v3.0/how-to/deploy/orchestrated/aws-eks/']
 ---
 
 # Deploy TiDB on AWS EKS
@@ -142,7 +142,7 @@ ssh -i credentials/<cluster_name>.pem centos@<bastion_ip>
 {{< copyable "shell-regular" >}}
 
 ```shell
-mysql -h <tidb_dns> -P <tidb_port> -u root
+mysql -h <tidb_dns> -P 4000 -u root
 ```
 
 The default value of `cluster_name` is `my-cluster`. If the DNS name is not resolvable, be patient and wait a few minutes.
@@ -154,7 +154,7 @@ You can interact with the EKS cluster using `kubectl` and `helm` with the kubeco
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb
+    kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n <cluster_name>
     ```
 
     {{< copyable "shell-regular" >}}
@@ -174,7 +174,7 @@ You can interact with the EKS cluster using `kubectl` and `helm` with the kubeco
     {{< copyable "shell-regular" >}}
 
     ```shell
-    kubectl get po -n tidb
+    kubectl get po -n <cluster_name>
     ```
 
     {{< copyable "shell-regular" >}}
@@ -185,7 +185,7 @@ You can interact with the EKS cluster using `kubectl` and `helm` with the kubeco
 
 ## Monitor
 
-You can access the `monitor_endpoint` address (printed in outputs) using your web browser to view monitoring metrics.
+You can access the `<monitor-dns>:3000` address (printed in outputs) using your web browser to view monitoring metrics.
 
 The initial Grafana login credentials are:
 
@@ -194,24 +194,23 @@ The initial Grafana login credentials are:
 
 ## Upgrade
 
-To upgrade the TiDB cluster, edit the `variables.tf` file with your preferred text editor and modify the `tidb_version` variable to a higher version, and then run `terraform apply`.
+To upgrade the TiDB cluster, edit the `variables.tf` file with your preferred text editor and modify the `default_cluster_version` variable to a higher version, and then run `terraform apply`.
 
-For example, to upgrade the cluster to version 3.0.1, modify the `tidb_version` to `v3.0.1`:
+For example, to upgrade the cluster to version 3.0.1, modify the `default_cluster_version` to `v3.0.1`:
 
 ```hcl
  variable "default_cluster_version" {
-   description = "tidb cluster version"
    default = "v3.0.1"
  }
 ```
 
 > **Note:**
 >
-> The upgrading doesn't finish immediately. You can watch the upgrading process by `kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb --watch`.
+> The upgrading doesn't finish immediately. You can watch the upgrading process by `kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n <cluster_name> --watch`.
 
 ## Scale
 
-To scale the TiDB cluster, edit the `variables.tf` file with your preferred text editor and modify the `tikv_count` or `tidb_count` variable to your desired count, and then run `terraform apply`.
+To scale the TiDB cluster, edit the `variables.tf` file with your preferred text editor and modify the `default_cluster_tikv_count` or `default_cluster_tidb_count` variable to your desired count, and then run `terraform apply`.
 
 For example, to scale out the cluster, you can modify the number of TiDB instances from 2 to 4:
 
@@ -223,7 +222,7 @@ For example, to scale out the cluster, you can modify the number of TiDB instanc
 
 > **Note:**
 >
-> Currently, scaling in is NOT supported because we cannot determine which node to scale. Scaling out needs a few minutes to complete, you can watch the scaling out by `kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n tidb --watch`.
+> Currently, scaling in is NOT supported because we cannot determine which node to scale. Scaling out needs a few minutes to complete, you can watch the scaling out by `kubectl --kubeconfig credentials/kubeconfig_<cluster_name> get po -n <cluster_name> --watch`.
 
 ## Customize
 
@@ -250,7 +249,35 @@ The terraform scripts provide proper default settings for the TiDB cluster in EK
 
 For example, the default cluster uses `./default-cluster.yaml` as the overriding values file, and the ConfigMap rollout feature is enabled in this file.
 
-In EKS, some values are not customizable in `values.yaml`, such as the cluster version, replicas, node selectors, and taints. These variables are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. To customize these variables, you can edit the variables of each `./tidb-cluster` module in the `clusters.tf` file directly.
+In EKS, some values are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelector`, and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `./tidb-cluster` module in the `clusters.tf` file directly.
+
+> **Note:**
+>
+>It's not recommended to include the following `tidb-cluster` module default configurations in customized `values.yaml`:
+>
+> ```
+> pd:
+>   storageClassName: ebs-gp2
+> tikv:
+>   stroageClassName: local-storage
+> tidb:
+>   service:
+>     type: LoadBalancer
+>     annotations:
+>       service.beta.kubernetes.io/aws-load-balancer-internal: '0.0.0.0/0'
+>       service.beta.kubernetes.io/aws-load-balancer-type: nlb
+>       service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: >'true'
+>   separateSlowLog: true
+> monitor:
+>   storage: 100Gi
+>   storageClassName: ebs-gp2
+>   persistent: true
+>   grafana:
+>     config:
+>       GF_AUTH_ANONYMOUS_ENABLED: "true"
+>     service:
+>       type: LoadBalancer
+> ```
 
 ### Customize TiDB Operator
 
@@ -269,10 +296,10 @@ An instance of `./tidb-cluster` module corresponds to a TiDB cluster in the EKS 
 
 ```hcl
 module example-cluster {
-  source = "./tidb-cluster"
+  source = "../modules/aws/tidb-cluster"
 
   # The target EKS, required
-  eks_info = local.eks
+  eks = local.eks
   # The subnets of node pools of this TiDB cluster, required
   subnets = local.subnets
   # TiDB cluster name, required
@@ -319,6 +346,10 @@ output "example-cluster_monitor-hostname" {
   value = module.example-cluster.monitor_hostname
 }
 ```
+
+When modification finishes, you can execute `terraform init` and `terraform apply` to create a TiDB cluster.
+
+Once you remove `tidb-cluster` module, the corresponding TiDB cluster will be destroyed and EC2 resources will be released accordingly.
 
 ## Destroy clusters
 
