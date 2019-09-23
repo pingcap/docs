@@ -21,6 +21,12 @@ In addition, the Kafka version of TiDB Binlog is also provided.
 
 ## DM (Data Migration)
 
+If you want to download the v1.0 GA version of [DM](/v2.1/reference/tools/data-migration/overview.md), click the download link in the following table.
+
+| Package name | OS | Architecture | SHA256 checksum |
+|:---|:---|:---|:---|
+| [dm-v1.0.1-linux-amd64.tar.gz](http://download.pingcap.org/dm-v1.0.1-linux-amd64.tar.gz) | Linux | amd64 | [dm-v1.0.1-linux-amd64.sha256](http://download.pingcap.org/dm-v1.0.1-linux-amd64.sha256) |
+
 If you want to download the latest version of [DM](/v2.1/reference/tools/data-migration/overview.md), click the download link in the following table. You can also check the [DM Release](https://github.com/pingcap/dm/releases) page.
 
 | Package name | OS | Architecture |  SHA256 checksum |
