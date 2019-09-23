@@ -7,6 +7,8 @@ aliases: ['/docs/FAQ/','/docs/faq/tidb/']
 
 # TiDB FAQ
 
+<!-- markdownlint-disable MD026 -->
+
 This document lists the Most Frequently Asked Questions about TiDB.
 
 ## About TiDB
@@ -19,7 +21,7 @@ TiDB is a distributed SQL database that features in horizontal scalability, high
 
 #### What is TiDB's architecture?
 
-The TiDB cluster has three components: the TiDB server, the PD (Placement Driver) server, and the TiKV server. For more details, see [TiDB architecture](/architecture.md).
+The TiDB cluster has three components: the TiDB server, the PD (Placement Driver) server, and the TiKV server. For more details, see [TiDB architecture](/v3.0/architecture.md).
 
 #### Is TiDB based on MySQL?
 
@@ -37,11 +39,11 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 
 #### How is TiDB compatible with MySQL?
 
-Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support trigger, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/reference/mysql-compatibility.md).
+Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support trigger, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/v3.0/reference/mysql-compatibility.md).
 
 #### How is TiDB highly available?
 
-TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [TiDB architecture](/architecture.md).
+TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [TiDB architecture](/v3.0/architecture.md).
 
 #### How is TiDB strongly consistent?
 
@@ -51,9 +53,9 @@ At the bottom layer, TiKV uses a model of replication log + State Machine to rep
 
 #### Does TiDB support distributed transactions?
 
-Yes. TiDB distributes transactions across your cluster, whether it is a few nodes in a single location or many [nodes across multiple datacenters](/how-to/deploy/geographic-redundancy/overview.md).
+Yes. TiDB distributes transactions across your cluster, whether it is a few nodes in a single location or many [nodes across multiple datacenters](/v3.0/how-to/deploy/geographic-redundancy/overview.md).
 
-Inspired by Google's Percolator, the transaction model in TiDB is mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign the monotone increasing timestamp for each transaction, so conflicts can be detected. [PD](/architecture.md#placement-driver-server) works as the timestamp allocator in a TiDB cluster.
+Inspired by Google's Percolator, the transaction model in TiDB is mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign the monotone increasing timestamp for each transaction, so conflicts can be detected. [PD](/v3.0/architecture.md#placement-driver-server) works as the timestamp allocator in a TiDB cluster.
 
 #### What programming language can I use to work with TiDB?
 
@@ -69,11 +71,11 @@ The architecture of TiDB guarantees that it fully supports geo-distribution and 
 
 #### Does TiDB provide any other knowledge resource besides the documentation?
 
-Currently, [TiDB documentation](https://www.pingcap.com/docs/) is the most important and timely way to get knowledge of TiDB. In addition, we also have some technical communication groups. If you have any needs, contact info@pingcap.com.
+Currently, [TiDB documentation](https://pingcap.com/docs/) is the most important and timely way to get knowledge of TiDB. In addition, we also have some technical communication groups. If you have any needs, contact info@pingcap.com.
 
 #### What are the MySQL variables that TiDB is compatible with?
 
-See [The System Variables](/reference/configuration/tidb-server/mysql-variables.md).
+See [The System Variables](/v3.0/reference/configuration/tidb-server/mysql-variables.md).
 
 #### Does TiDB support `select for update`?
 
@@ -91,7 +93,7 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 5000 at most.
 
-#### Does TiDB support XA？
+#### Does TiDB support XA?
 
 No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
@@ -103,18 +105,18 @@ As a standalone database, MySQL can only implement across-database transactions 
 
 The display content of TiDB `show processlist` is almost the same as that of MySQL `show processlist`. TiDB `show processlist` does not display the system process ID. The ID that it displays is the current session ID. The differences between TiDB `show processlist` and MySQL `show processlist` are as follows:
 
-- As TiDB is a distributed database, the `tidb-server` instance is a stateless engine for parsing and executing the SQL statements (for details, see [TiDB architecture](/architecture.md)). `show processlist` displays the session list executed in the `tidb-server` instance that the user logs in to from the MySQL client, not the list of all the sessions running in the cluster. But MySQL is a standalone database and its `show processlist` displays all the SQL statements executed in MySQL.
+- As TiDB is a distributed database, the `tidb-server` instance is a stateless engine for parsing and executing the SQL statements (for details, see [TiDB architecture](/v3.0/architecture.md)). `show processlist` displays the session list executed in the `tidb-server` instance that the user logs in to from the MySQL client, not the list of all the sessions running in the cluster. But MySQL is a standalone database and its `show processlist` displays all the SQL statements executed in MySQL.
 - TiDB `show processlist` displays the estimated memory usage (unit: Byte) of the current session, which is not displayed in MySQL `show processlist`.
 
 #### How to modify the user password and privilege?
 
 To modify the user password in TiDB, it is recommended to use `set password for 'root'@'%' = '0101001';` or `alter`, not `update mysql.user` which might lead to the condition that the password in other nodes is not refreshed timely.
 
-It is recommended to use the official standard statements when modifying the user password and privilege. For details, see [TiDB user account management](/reference/security/user-account-management.md).
+It is recommended to use the official standard statements when modifying the user password and privilege. For details, see [TiDB user account management](/v3.0/reference/security/user-account-management.md).
 
 #### Why does the auto-increment ID of the later inserted data is smaller than that of the earlier inserted data in TiDB?
 
-The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [MySQL Compatibility](/reference/mysql-compatibility.md#auto-increment-id).
+The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [MySQL Compatibility](/v3.0/reference/mysql-compatibility.md#auto-increment-id).
 
 #### How to modify the `sql_mode` in TiDB except using the `set` command?
 
@@ -135,15 +137,15 @@ The configuration method of TiDB `sql_mode` is different from that of MySQL `sql
 
 #### TiKV for data storage
 
-See [TiDB Internal (I) - Data Storage](https://www.pingcap.com/blog/2017-07-11-tidbinternal1/).
+See [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/).
 
 #### TiDB for data computing
 
-See [TiDB Internal (II) - Computing](https://www.pingcap.com/blog/2017-07-11-tidbinternal2/).
+See [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/).
 
 #### PD for scheduling
 
-See [TiDB Internal (III) - Scheduling](https://www.pingcap.com/blog/2017-07-20-tidbinternal3/).
+See [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/).
 
 ## Install, deploy and upgrade
 
@@ -159,7 +161,7 @@ See [TiDB Internal (III) - Scheduling](https://www.pingcap.com/blog/2017-07-20-t
 
 ##### Why it is recommended to deploy the TiDB cluster on CentOS 7?
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems. For details, see [Software and Hardware Requirements](/how-to/deploy/hardware-recommendations.md) for deploying TiDB.
+As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems. For details, see [Software and Hardware Requirements](/v3.0/how-to/deploy/hardware-recommendations.md) for deploying TiDB.
 
 #### Server requirements
 
@@ -198,17 +200,17 @@ If the resources are adequate, it is recommended to use RAID 10 for SSD. If the 
 - PD stores the cluster metadata and has frequent Read and Write requests. It demands a high I/O disk. A disk of low performance will affect the performance of the whole cluster. It is recommended to use SSD disks. In addition, a larger number of Regions has a higher requirement on CPU and memory.
 - TiKV has a high requirement on CPU, memory and disk. It is required to use SSD.
 
-For details, see [Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
+For details, see [Software and Hardware Recommendations](/v3.0/how-to/deploy/hardware-recommendations.md).
 
 ### Install and deploy
 
 #### Deploy TiDB using Ansible (recommended)
 
-See [Ansible Deployment](/how-to/deploy/orchestrated/ansible.md).
+See [Ansible Deployment](/v3.0/how-to/deploy/orchestrated/ansible.md).
 
 ##### Why the modified `toml` configuration for TiKV/PD does not take effect?
 
-You need to set the `--config` parameter in TiKV/PD to make the `toml` configuration effective. TiKV/PD does not read the configuration by default. Currently, this issue only occurs when deploying using Binary. For TiKV, edit the configuration and restart the service. For PD, the configuration file is only read when PD is started for the first time, after which you can modify the configuration using pd-ctl. For details, see [PD Control User Guide](/reference/tools/pd-control.md).
+You need to set the `--config` parameter in TiKV/PD to make the `toml` configuration effective. TiKV/PD does not read the configuration by default. Currently, this issue only occurs when deploying using Binary. For TiKV, edit the configuration and restart the service. For PD, the configuration file is only read when PD is started for the first time, after which you can modify the configuration using pd-ctl. For details, see [PD Control User Guide](/v3.0/reference/tools/pd-control.md).
 
 ##### Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?
 
@@ -229,7 +231,7 @@ Check the time difference between the machine time of the monitor and the time w
 | Variable        | Description                                                |
 | ---- | ------- |
 | cluster_name | the name of a cluster, adjustable |
-| tidb_version | the version of TiDB, configured by default in TiDB-Ansible branches |
+| tidb_version | the version of TiDB, configured by default in TiDB Ansible branches |
 | deployment_method | the method of deployment, binary by default, Docker optional |
 | process_supervision | the supervision way of processes, systemd by default, supervise optional |
 | timezone | the timezone of the managed node, adjustable, `Asia/Shanghai` by default, used with the `set_timezone` variable |
@@ -246,7 +248,7 @@ Check the time difference between the machine time of the monitor and the time w
 
 #### Deploy TiDB offline using Ansible
 
-It is not recommended to deploy TiDB offline using Ansible. If the Control Machine has no access to external network, you can deploy TiDB offline using Ansible. For details, see [Offline Deployment Using Ansible](/how-to/deploy/orchestrated/offline-ansible.md).
+It is not recommended to deploy TiDB offline using Ansible. If the Control Machine has no access to external network, you can deploy TiDB offline using Ansible. For details, see [Offline Deployment Using Ansible](/v3.0/how-to/deploy/orchestrated/offline-ansible.md).
 
 #### How to deploy TiDB quickly using Docker Compose on a single machine?
 
@@ -262,13 +264,13 @@ You can use Docker Compose to build a TiDB cluster locally, including the cluste
 
 2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and the slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
 
-3. In addition to the log, you can also view the slow query using the `admin show slow` command. For details, see [`admin show slow` command](/how-to/maintain/identify-slow-queries.md#admin-show-slow-command).
+3. In addition to the log, you can also view the slow query using the `admin show slow` command. For details, see [`admin show slow` command](/v3.0/how-to/maintain/identify-slow-queries.md#admin-show-slow-command).
 
 #### How to add the `label` configuration if `label` of TiKV was not configured when I deployed the TiDB cluster for the first time?
 
 The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for PD to execute global management and scheduling. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone, rack, host"` (you should configure it based on the practical `label` level name).
 
-For the usage of `pd-ctl`, see [PD Control Instruction](/reference/tools/pd-control.md).
+For the usage of `pd-ctl`, see [PD Control Instruction](/v3.0/reference/tools/pd-control.md).
 
 #### Why does the `dd` command for the disk test use the `oflag=direct` option?
 
@@ -288,11 +290,11 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
-#### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: " ` when deploying TiDB using TiDB-Ansible
+#### Error `UNREACHABLE! "msg": "Failed to connect to the host via ssh: "` when deploying TiDB using TiDB Ansible
 
 Two possible reasons and solutions:
 
-- The SSH mutual trust is not configured as required. It’s recommended to follow [the steps described in the official document](/how-to/deploy/orchestrated/ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) and check whether it is successfully configured using `ansible -i inventory.ini all -m shell -a 'whoami' -b`.
+- The SSH mutual trust is not configured as required. It’s recommended to follow [the steps described in the official document](/v3.0/how-to/deploy/orchestrated/ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) and check whether it is successfully configured using `ansible -i inventory.ini all -m shell -a 'whoami' -b`.
 - If it involves the scenario where a single server is assigned multiple roles, for example, the mixed deployment of multiple components or multiple TiKV instances are deployed on a single server, this error might be caused by the SSH reuse mechanism. You can use the option of `ansible … -f 1` to avoid this error.
 
 ### Upgrade
@@ -313,7 +315,7 @@ Two possible reasons and solutions:
 
 #### How are the rolling updates done?
 
-When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB * 2, PD * 3, TiKV * 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
+When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3). If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
 
 #### How to upgrade when I deploy TiDB using Binary?
 
@@ -368,7 +370,7 @@ Similar to MySQL, TiDB includes static and solid parameters. You can directly mo
 
 #### Where and what are the data directories in TiDB (TiKV)?
 
-TiKV data is located in the [`--data-dir`](/reference/configuration/tikv-server/configuration.md#data-dir), which include four directories of backup, db, raft, and snap, used to store backup, data, Raft data, and mirror data respectively.
+TiKV data is located in the [`--data-dir`](/v3.0/reference/configuration/tikv-server/configuration.md#--data-dir), which include four directories of backup, db, raft, and snap, used to store backup, data, Raft data, and mirror data respectively.
 
 #### What are the system tables in TiDB?
 
@@ -385,7 +387,7 @@ If the cluster is deployed using Ansible, you can use the `ansible-playbook stop
 #### Can `kill` be executed in TiDB?
 
 - You can `kill` DML statements. First use `show processlist` to find the ID corresponding with the session, and then run `kill tidb [session id]`.
-- You can `kill` DDL statements. First use `admin show ddl jobs` to find the ID of the DDL job you need to kill, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/reference/sql/statements/admin.md).
+- You can `kill` DDL statements. First use `admin show ddl jobs` to find the ID of the DDL job you need to kill, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/v3.0/reference/sql/statements/admin.md).
 
 #### Does TiDB support session timeout?
 
@@ -393,7 +395,7 @@ TiDB supports the MySQL configuration settings `wait_timeout` and `interactive_t
 
 #### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
 
-Currently, TiDB has a standard management of various versions. Each release contains a detailed change log and [release notes](/releases/rn.md). Whether it is necessary to upgrade in the production environment depends on the application system. It is recommended to learn the details about the functional differences between the previous and later versions before upgrading.
+Currently, TiDB has a standard management of various versions. Each release contains a detailed change log and [release notes](/v3.0/releases/rn.md). Whether it is necessary to upgrade in the production environment depends on the application system. It is recommended to learn the details about the functional differences between the previous and later versions before upgrading.
 
 Take `Release Version: v1.0.3-1-ga80e796` as an example of version number description:
 
@@ -401,11 +403,11 @@ Take `Release Version: v1.0.3-1-ga80e796` as an example of version number descri
 - `-1` indicates the current version has one commit.
 - `ga80e796` indicates the version `git-hash`.
 
-#### What's the difference between various TiDB master versions? How to avoid using the wrong TiDB-Ansible version?
+#### What's the difference between various TiDB master versions? How to avoid using the wrong TiDB Ansible version?
 
 The TiDB community is highly active. After the 1.0 GA release, the engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Weekly update](https://pingcap.com/weekly/).
 
-It is recommended to deploy the TiDB cluster using the latest version of TiDB-Ansible, which will also be updated along with the TiDB version. TiDB has a unified management of the version number after the 1.0 GA release. You can view the version number using the following two methods:
+It is recommended to deploy the TiDB cluster using the latest version of TiDB Ansible, which will also be updated along with the TiDB version. TiDB has a unified management of the version number after the 1.0 GA release. You can view the version number using the following two methods:
 
 - `select tidb_version()`
 - `tidb-server -V`
@@ -449,11 +451,11 @@ Two reasons:
 
 ### Manage the PD server
 
-#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD.
+#### The `TiKV cluster is not bootstrapped` message is displayed when I access PD
 
 Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed. If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
 
-#### The `etcd cluster ID mismatch` message is displayed when starting PD.
+#### The `etcd cluster ID mismatch` message is displayed when starting PD
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
 
@@ -474,7 +476,7 @@ The client connection can only access the cluster through TiDB. TiDB connects PD
 
 Yes. Currently, you can only update the global number of replicas. When started for the first time, PD reads the configuration file (conf/pd.yml) and uses the max-replicas configuration in it. If you want to update the number later, use the pd-ctl configuration command `config set max-replicas $num` and view the enabled configuration using `config show all`. The updating does not affect the applications and is configured in the background.
 
-Make sure that the total number of TiKV instances is always greater than or equal to the number of replicas you set. For example, 3 replicas need 3 TiKV instances at least. Additional storage requirements need to be estimated before increasing the number of replicas. For more information about pd-ctl, see [PD Control User Guide](/reference/tools/pd-control.md).
+Make sure that the total number of TiKV instances is always greater than or equal to the number of replicas you set. For example, 3 replicas need 3 TiKV instances at least. Additional storage requirements need to be estimated before increasing the number of replicas. For more information about pd-ctl, see [PD Control User Guide](/v3.0/reference/tools/pd-control.md).
 
 #### How to check the health status of the whole cluster when lacking command line cluster management tools?
 
@@ -490,7 +492,7 @@ The offline node usually indicates the TiKV node. You can determine whether the 
 
 #### Why couldn't I connect to the PD server using `127.0.0.1` when I was using the PD Control?
 
-If your TiDB cluster is deployed using TiDB-Ansible, the PD external service port is not bound to `127.0.0.1`, so PD Control does not recognize `127.0.0.1` and you can only connect to it using the local IP address.
+If your TiDB cluster is deployed using TiDB Ansible, the PD external service port is not bound to `127.0.0.1`, so PD Control does not recognize `127.0.0.1` and you can only connect to it using the local IP address.
 
 ### Manage the TiDB server
 
@@ -523,7 +525,7 @@ No. Currently, TiDB only supports the distributed storage engine and the Golevel
 
 #### Can the `Information_schema` support more real information?
 
-As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` tables. Many of these tables also have a corresponding SHOW command. For more information, see [Information Schema](/reference/system-databases/information-schema.md).
+As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` tables. Many of these tables also have a corresponding SHOW command. For more information, see [Information Schema](/v3.0/reference/system-databases/information-schema.md).
 
 #### What's the explanation of the TiDB Backoff type scenario?
 
@@ -543,7 +545,7 @@ When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if e
 
 #### How to control or change the execution priority of SQL commits?
 
-TiDB supports changing the priority on a [per-session](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb-force-priority), [global](/reference/configuration/tidb-server/server-command-option.md#force-priority) or individual statement basis. Priority has the following meaning:
+TiDB supports changing the priority on a [per-session](/v3.0/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_force_priority), [global](/v3.0/reference/configuration/tidb-server/server-command-option.md#force-priority) or individual statement basis. Priority has the following meaning:
 
 - `HIGH_PRIORITY`: this statement has a high priority, that is, TiDB gives priority to this statement and executes it first.
 
@@ -552,6 +554,8 @@ TiDB supports changing the priority on a [per-session](/reference/configuration/
 You can combine the above two parameters with the DML of TiDB to use them. For example:
 
 1. Adjust the priority by writing SQL statements in the database:
+
+    {{< copyable "sql" >}}
 
     ```sql
     select HIGH_PRIORITY | LOW_PRIORITY count(*) from table_name;
@@ -573,6 +577,8 @@ When the modified number or the current total row number is larger than `tidb_au
 
 Its usage is similar to MySQL:
 
+{{< copyable "sql" >}}
+
 ```sql
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
 ```
@@ -581,15 +587,15 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 #### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
 
-Use 3 replicas for test. If you increase the number of replicas, the performance declines but it is more secure. Whether to configure more replicas depends on the specific business needs.
+3 replicas for each Region is sufficient for a testing environment. However, you should never operate a TiKV cluster with under 3 nodes in a production scenario. Depending on infrastructure, workload, and resiliency needs, you may wish to increase this number.
 
-#### The `cluster ID mismatch` message is displayed when starting TiKV.
+#### The `cluster ID mismatch` message is displayed when starting TiKV
 
 This is because the cluster ID stored in local TiKV is different from the cluster ID specified by PD. When a new PD cluster is deployed, PD generates random cluster IDs. TiKV gets the cluster ID from PD and stores the cluster ID locally when it is initialized. The next time when TiKV is started, it checks the local cluster ID with the cluster ID in PD. If the cluster IDs don't match, the `cluster ID mismatch` message is displayed and TiKV exits.
 
 If you previously deploy a PD cluster, but then you remove the PD data and deploy a new PD cluster, this error occurs because TiKV uses the old data to connect to the new PD cluster.
 
-#### The `duplicated store address` message is displayed when starting TiKV.
+#### The `duplicated store address` message is displayed when starting TiKV
 
 This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. This error occurs when there is no data folder under the directory that TiKV `--store` specifies, but you use the previous parameter to restart the TiKV.
 
@@ -605,7 +611,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 
 - The default CF stores real data and the corresponding parameter is in `[rocksdb.defaultcf]`. The write CF stores the data version information (MVCC) and index-related data, and the corresponding parameter is in `[rocksdb.writecf]`. The lock CF stores the lock information and the system uses the default parameter.
 - The Raft RocksDB instance stores Raft logs. The default CF mainly stores Raft logs and the corresponding parameter is in `[raftdb.defaultcf]`.
-- Each CF has an individual block-cache to cache data blocks and improve RocksDB read speed. The size of block-cache is controlled by the `block-cache-size` parameter. A larger value of the parameter means more hot data can be cached and is more favorable to read operation. At the same time, it consumes more system memory.
+- All CFs have a shared block-cache to cache data blocks and improve RocksDB read speed. The size of block-cache is controlled by the `block-cache-size` parameter. A larger value of the parameter means more hot data can be cached and is more favorable to read operation. At the same time, it consumes more system memory.
 - Each CF has an individual write-buffer and the size is controlled by the `write-buffer-size` parameter.
 
 #### Why it occurs that "TiKV channel full"?
@@ -620,7 +626,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 
 #### If a node is down, will the service be affected? If yes, how long?
 
-TiDB uses Raft to replicate data among multiple replicas and guarantees the strong consistency of data. If one replica goes wrong, the other replicas can guarantee data security. The default number of replicas in each Region is 3. Based on the Raft protocol, a leader is elected in each Region, and if a single leader fails, a follower is soon elected as Region leader after a maximum of 2 * lease time (lease time is 10 seconds).
+TiKV uses Raft to replicate data among multiple replicas (by default 3 replicas for each Region). If one replica goes wrong, the other replicas can guarantee data safety. Based on the Raft protocol, if a single leader fails as the node goes down, a follower in another node is soon elected as the Region leader after a maximum of 2 * lease time (lease time is 10 seconds).
 
 #### What are the TiKV scenarios that take up high I/O, memory, CPU, and exceed the parameter configuration?
 
@@ -636,7 +642,7 @@ No. It differs from the table splitting rules of MySQL. In TiKV, the table Range
 
 #### How does Region split?
 
-Region is not divided in advance, but it follows a Region split mechanism. When the Region size exceeds the value of the `region_split_size` or `region-split-keys` parameters, split is triggered. After the split, the information is reported to PD.
+Region is not divided in advance, but it follows a Region split mechanism. When the Region size exceeds the value of the `region-split-size` or `region-split-keys` parameters, split is triggered. After the split, the information is reported to PD.
 
 #### Does TiKV have the `innodb_flush_log_trx_commit` parameter like MySQL, to guarantee the security of data?
 
@@ -654,13 +660,15 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 
 #### How is the write performance in the most strict data available mode (`sync-log = true`)?
 
-Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/sysbench-v4.md).
+Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/dev/benchmark/sysbench-v4.md).
 
 #### Can Raft + multiple replicas in the TiKV architecture achieve absolute data security? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
 
-Data is redundantly copied between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the nodes, will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, for scenarios with a strict requirement on data security, for example, the financial industry, you need to enable the `sync-log` mode.
+Data is redundantly replicated between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
 
-As an alternative to using `sync-log`, you may also consider having five nodes instead of three in your Raft group. This would allow for the failure of two nodes, while still providing data safety.
+As an alternative to using `sync-log`, you may also consider having five replicas instead of three in your Raft group. This would allow for the failure of two replicas, while still providing data safety.
+
+For a standalone TiKV node, it is still recommended to enable the `sync-log` mode. Otherwise, the last write might be lost in case of a node failure.
 
 #### Since TiKV uses the Raft protocol, multiple network roundtrips occur during data writing. What is the actual write delay?
 
@@ -675,13 +683,17 @@ TiKV supports calling the interface separately. Theoretically, you can take an i
 - Reduce the data transmission between TiDB and TiKV
 - Make full use of the distributed computing resources of TiKV to execute computing pushdown
 
-#### The error message `IO error: No space left on device While appending to file` is displayed.
+#### The error message `IO error: No space left on device While appending to file` is displayed
 
 This is because the disk space is not enough. You need to add nodes or enlarge the disk space.
 
 #### Why does the OOM (Out of Memory) error occur frequently in TiKV?
 
 The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 40% of the system memory size by default. When the OOM error occurs frequently in TiKV, you should check whether the value of `block-cache-size` is set too high. In addition, when multiple TiKV instances are deployed on a single machine, you need to explicitly configure the parameter to prevent multiple instances from using too much system memory that results in the OOM error.
+
+#### Can both TiDB data and RawKV data be stored in the same TiKV cluster?
+
+No. TiDB (or data created from the transactional API) relies on a specific key format. It is not compatible with data created from RawKV API (or data from other RawKV-based services).
 
 ### TiDB test
 
@@ -690,7 +702,7 @@ The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 
 At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
 
 - Do not spend too much time on the benchmark test. Pay more attention to the difference of scenarios using TiDB.
-- See [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/sysbench-v4.md).
+- See [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/dev/benchmark/sysbench-v4.md).
 
 #### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
@@ -698,7 +710,7 @@ At the beginning, many users tend to do a benchmark test or a comparison test be
 - In MySQL, the read capacity can be increased by adding slave, but the write capacity cannot be increased except using sharding, which has many problems.
 - In TiDB, both the read and write capacity can be easily increased by adding more nodes.
 
-#### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL.
+#### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL
 
 TiDB is designed for scenarios where sharding is used because the capacity of a MySQL standalone is limited, and where strong consistency and complete distributed transactions are required. One of the advantages of TiDB is pushing down computing to the storage nodes to execute concurrent computing.
 
@@ -708,7 +720,7 @@ TiDB is not suitable for tables of small size (such as below ten million level),
 
 #### How to back up data in TiDB?
 
-Currently, the preferred method for backup is using the [PingCAP fork of mydumper](/reference/tools/mydumper.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is poorer than [`mydumper`](/reference/tools/mydumper.md)/[`loader`](/reference/tools/loader.md) and it needs much more time to back up and restore large volumes of data.
+Currently, the preferred method for backup is using the [PingCAP fork of Mydumper](/v3.0/reference/tools/mydumper.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is poorer than [`mydumper`](/v3.0/reference/tools/mydumper.md)/[`loader`](/v3.0/reference/tools/loader.md) and it needs much more time to back up and restore large volumes of data.
 
 Keep the size of the data file exported from `mydumper` as small as possible. It is recommended to keep the size within 64M. You can set value of the `-F` parameter to 64.
 
@@ -720,11 +732,11 @@ You can edit the `t` parameter of `loader` based on the number of TiKV instances
 
 #### Mydumper
 
-See [mydumper Instructions](/reference/tools/mydumper.md).
+See [Mydumper Instructions](/v3.0/reference/tools/mydumper.md).
 
 #### Loader
 
-See [Loader Instructions](/reference/tools/loader.md).
+See [Loader Instructions](/v3.0/reference/tools/loader.md).
 
 #### How to migrate an application running on MySQL to TiDB?
 
@@ -734,9 +746,15 @@ Because TiDB supports most MySQL syntax, generally you can migrate your applicat
 
 Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Log into the cluster without password and recreate the user, or recreate the `mysql.user` table using the following statement:
 
+{{< copyable "sql" >}}
+
 ```sql
 DROP TABLE IF EXIST mysql.user;
+```
 
+{{< copyable "sql" >}}
+
+```sql
 CREATE TABLE if not exists mysql.user (
     Host        CHAR(64),
     User        CHAR(16),
@@ -765,7 +783,11 @@ CREATE TABLE if not exists mysql.user (
     Event_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
     Trigger_priv      ENUM('N','Y') NOT NULL DEFAULT 'N',
     PRIMARY KEY (Host, User));
+```
 
+{{< copyable "sql" >}}
+
+```sql
 INSERT INTO mysql.user VALUES ("%", "root", "", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y");
 ```
 
@@ -814,7 +836,7 @@ Two solutions:
 
 #### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
 
- Yes, it does. And it supports DDL as well. For details, see [how TiDB reads data from history versions](/how-to/get-started/read-historical-data.md).
+ Yes, it does. And it supports DDL as well. For details, see [how TiDB reads data from history versions](/v3.0/how-to/get-started/read-historical-data.md).
 
 ### Migrate the data online
 
@@ -822,7 +844,7 @@ Two solutions:
 
 ##### Syncer user guide
 
-See [Syncer User Guide](/reference/tools/syncer.md).
+See [Syncer User Guide](/v3.0/reference/tools/syncer.md).
 
 ##### How to configure to monitor Syncer status?
 
@@ -842,7 +864,7 @@ No. Currently, the data replication depends on the application itself.
 
 ##### Does Syncer support replicating only some of the tables when Syncer is replicating data?
 
-Yes. For details, see [Syncer User Guide](/reference/tools/syncer.md)
+Yes. For details, see [Syncer User Guide](/v3.0/reference/tools/syncer.md)
 
 ##### Do frequent DDL operations affect the replication speed of Syncer?
 
@@ -850,7 +872,7 @@ Frequent DDL operations may affect the replication speed. For Sycner, DDL operat
 
 ##### If the machine that Syncer is in is broken and the directory of the `syncer.meta` file is lost, what should I do?
 
-When you replicate data using Syncer GTID, the `syncer.meta` file is constantly updated during the replication process. The current version of Syncer does not contain the design for high availability. The `syncer.meta` configuration file of Syncer is directly stored on the hard disks, which is similar to other tools in the MySQL ecosystem, such as mydumper.
+When you replicate data using Syncer GTID, the `syncer.meta` file is constantly updated during the replication process. The current version of Syncer does not contain the design for high availability. The `syncer.meta` configuration file of Syncer is directly stored on the hard disks, which is similar to other tools in the MySQL ecosystem, such as Mydumper.
 
 Two solutions:
 
@@ -872,7 +894,7 @@ It is recommended to build a multi-source MySQL -> TiDB real-time replication en
 
 The total read capacity has no limit. You can increase the read capacity by adding more TiDB servers. Generally the write capacity has no limit as well. You can increase the write capacity by adding more TiKV nodes.
 
-#### The error message `transaction too large` is displayed.
+#### The error message `transaction too large` is displayed
 
 As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
 
@@ -915,14 +937,16 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 #### How to improve the data loading speed in TiDB?
 
-- The [Lightning](/reference/tools/tidb-lightning/overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
+- The [Lightning](/v3.0/reference/tools/tidb-lightning/overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
 - Data loading in TiDB is related to the status of disks and the whole cluster. When loading data, pay attention to metrics like the disk usage rate of the host, TiClient Error, Backoff, Thread CPU and so on. You can analyze the bottlenecks using these metrics.
 
 #### What should I do if it is slow to reclaim storage space after deleting data?
 
 You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:
 
-```
+{{< copyable "sql" >}}
+
+```sql
 update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";
 ```
 
@@ -930,29 +954,34 @@ update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrenc
 
 ### TiDB execution plan description
 
-See [Understand the Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md).
+See [Understand the Query Execution Plan](/v3.0/reference/performance/understanding-the-query-execution-plan.md).
 
 ### Statistics collection
 
-See [Introduction to Statistics](/reference/performance/statistics.md).
+See [Introduction to Statistics](/v3.0/reference/performance/statistics.md).
 
 #### How to optimize `select count(1)`?
 
-The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb-distsql-scan-concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
+The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/v3.0/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_distsql_scan_concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
 
 Recommendations:
 
-1. Improve the hardware configuration. See [Software and Hardware Requirements](/how-to/deploy/hardware-recommendations.md).
+1. Improve the hardware configuration. See [Software and Hardware Requirements](/v3.0/how-to/deploy/hardware-recommendations.md).
 2. Improve the concurrency. The default value is 10. You can improve it to 50 and have a try. But usually the improvement is 2-4 times of the default value.
 3. Test the `count` in the case of large amount of data.
-4. Optimize the TiKV configuration. See [Performance Tuning for TiKV](/reference/performance/tune-tikv.md).
+4. Optimize the TiKV configuration. See [Performance Tuning for TiKV](/v3.0/reference/performance/tune-tikv.md).
 
 #### How to view the progress of the current DDL job?
 
 You can use `admin show ddl` to view the progress of the current DDL job. The operation is as follows:
 
+{{< copyable "sql" >}}
+
 ```sql
-tidb> admin show ddl\G;
+admin show ddl;
+```
+
+```
 *************************** 1. row ***************************
   SCHEMA_VER: 140
        OWNER: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
@@ -978,7 +1007,7 @@ View the `Healthy` field using `show stats_healthy` and generally you need to ex
 
 #### What is the ID rule when a query plan is presented as a tree? What is the execution order for this tree?
 
-No rule exists for these IDs but the IDs are unique. When IDs are generated, a counter works and adds one when one plan is generated. The execution order has nothing to do with the ID. The whole query plan is a tree and the execution process starts from the root node and the data is returned to the upper level continuously. For details about the query plan, see [Understanding the TiDB Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md).
+No rule exists for these IDs but the IDs are unique. When IDs are generated, a counter works and adds one when one plan is generated. The execution order has nothing to do with the ID. The whole query plan is a tree and the execution process starts from the root node and the data is returned to the upper level continuously. For details about the query plan, see [Understanding the TiDB Query Execution Plan](/v3.0/reference/performance/understanding-the-query-execution-plan.md).
 
 #### In the TiDB query plan, `cop` tasks are in the same root. Are they executed concurrently?
 
@@ -986,7 +1015,7 @@ Currently the computing tasks of TiDB belong to two different types of tasks: `c
 
 `cop task` is the computing task which is pushed down to the KV end for distributed execution; `root task` is the computing task for single point execution on the TiDB end.
 
-Generally the input data of `root task` comes from `cop task`; when `root task` processes data, `cop task` of TiKV can processes data at the same time and waits for the pull of `root task` of TiDB. Therefore, `cop` tasks can be considered as executed concurrently; but their data has an upstream and downstream relationship. During the execution process, they are executed concurrently during some time. For example, the first `cop task` is processing the data in [100, 200] and the second `cop task` is processing the data in [1, 100]. For details, see [Understanding the TiDB Query Plan](/reference/performance/understanding-the-query-execution-plan.md).
+Generally the input data of `root task` comes from `cop task`; when `root task` processes data, `cop task` of TiKV can processes data at the same time and waits for the pull of `root task` of TiDB. Therefore, `cop` tasks can be considered as executed concurrently; but their data has an upstream and downstream relationship. During the execution process, they are executed concurrently during some time. For example, the first `cop task` is processing the data in [100, 200] and the second `cop task` is processing the data in [1, 100]. For details, see [Understanding the TiDB Query Plan](/v3.0/reference/performance/understanding-the-query-execution-plan.md).
 
 ## Database optimization
 
@@ -994,31 +1023,31 @@ Generally the input data of `root task` comes from `cop task`; when `root task` 
 
 #### Edit TiDB options
 
-See [The TiDB Command Options](/reference/configuration/tidb-server/configuration.md).
+See [The TiDB Command Options](/v3.0/reference/configuration/tidb-server/configuration.md).
 
 #### How to scatter the hotspots?
 
-In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [TiDB Specific System Variables and Syntax](/reference/configuration/tidb-server/tidb-specific-variables.md#shard-row-id-bits).
+In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [TiDB Specific System Variables and Syntax](/v3.0/reference/configuration/tidb-server/tidb-specific-variables.md#shard_row_id_bits).
 
 ### TiKV
 
 #### Tune TiKV performance
 
-See [Tune TiKV Performance](/reference/performance/tune-tikv.md).
+See [Tune TiKV Performance](/v3.0/reference/performance/tune-tikv.md).
 
 ## Monitor
 
 ### Prometheus monitoring framework
 
-See [Overview of the Monitoring Framework](/how-to/monitor/overview.md).
+See [Overview of the Monitoring Framework](/v3.0/how-to/monitor/overview.md).
 
 ### Key metrics of monitoring
 
-See [Key Metrics](/reference/key-monitoring-metrics/overview-dashboard.md).
+See [Key Metrics](/v3.0/reference/key-monitoring-metrics/overview-dashboard.md).
 
 #### Is there a better way of monitoring the key metrics?
 
-The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [Key Metrics](/reference/key-monitoring-metrics/overview-dashboard.md).
+The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [Key Metrics](/v3.0/reference/key-monitoring-metrics/overview-dashboard.md).
 
 #### The Prometheus monitoring data is deleted every 15 days by default. Could I set it to two months or delete the monitoring data manually?
 
@@ -1074,6 +1103,8 @@ The accessed Region is not available. A Raft Group is not available, with possib
 
 The interval of `GC Life Time` is too short. The data that should have been read by long transactions might be deleted. You can add `GC Life Time` using the following command:
 
+{{< copyable "sql" >}}
+
 ```sql
 update mysql.tidb set variable_value='30m' where variable_name='tikv_gc_life_time';
 ```
@@ -1106,7 +1137,7 @@ The solution is to use the `--local-infile=1` option when you start the MySQL cl
 
 #### ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point
 
-This error occurs when TiDB fails to access PD. A worker in the TiDB background continuously queries the safepoint from PD and this error occurs if it fails to query within 100s. Generally, it is because the disk on PD is slow and busy or the network failed between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](/reference/error-codes.md).
+This error occurs when TiDB fails to access PD. A worker in the TiDB background continuously queries the safepoint from PD and this error occurs if it fails to query within 100s. Generally, it is because the disk on PD is slow and busy or the network failed between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](/v3.0/reference/error-codes.md).
 
 ### TiDB log error messages
 

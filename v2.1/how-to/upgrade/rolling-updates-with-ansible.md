@@ -1,10 +1,10 @@
 ---
-title: Upgrade TiDB Using TiDB-Ansible
-summary: Use TiDB-Ansible to perform a rolling update for a TiDB cluster.
+title: Upgrade TiDB Using TiDB Ansible
+summary: Use TiDB Ansible to perform a rolling update for a TiDB cluster.
 category: how-to
 ---
 
-# Upgrade TiDB Using TiDB-Ansible
+# Upgrade TiDB Using TiDB Ansible
 
 When you perform a rolling update for a TiDB cluster, the service is shut down serially and is started after you update the service binary and the configuration file. If the load balancing is configured in the front-end, the rolling update of TiDB does not impact the running applications. Minimum requirements: `pd*3, tidb*2, tikv*3`.
 
@@ -16,7 +16,7 @@ When you perform a rolling update for a TiDB cluster, the service is shut down s
 
 - To upgrade between large versions, you must upgrade [`tidb-ansible`](https://github.com/pingcap/tidb-ansible).
 
-    - To upgrade from TiDB 2.0 (TiDB 2.0.1 or later) or TiDB 2.1 RC version to TiDB 2.1 GA version, see [TiDB 2.1 Upgrade Guide](/how-to/upgrade/from-previous-version.md).
+    - To upgrade from TiDB 2.0 (TiDB 2.0.1 or later) or TiDB 2.1 RC version to TiDB 2.1 GA version, see [TiDB 2.1 Upgrade Guide](/v2.1/how-to/upgrade/from-previous-version.md).
     - To upgrade from TiDB 2.0 (TiDB 2.0.1 or later) or TiDB 2.1 RC version to TiDB 3.0, see [TiDB 3.0 Upgrade Guide](https://pingcap.com/docs/v3.0/how-to/upgrade/from-previous-version).
 
 - For a minor upgrade, it is also recommended to update `tidb-ansible` for the latest configuration file templates, features, and bug fixes.

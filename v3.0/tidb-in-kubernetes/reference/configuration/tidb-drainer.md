@@ -10,7 +10,7 @@ This document introduces the configuration parameters for a TiDB Binlog drainer 
 
 ## Configuration parameters
 
-The following table contains all configuration parameters available for the `tidb-drainer` chart.  Refer to [Use Helm](tidb-in-kubernetes/reference/tools/in-kubernetes.md#use-helm) to learn how to configure these parameters.
+The following table contains all configuration parameters available for the `tidb-drainer` chart.  Refer to [Use Helm](/v3.0/tidb-in-kubernetes/reference/tools/in-kubernetes.md#use-helm) to learn how to configure these parameters.
 
 | Parameter | Description | Default Value |
 | :----- | :---- | :----- |
@@ -27,7 +27,7 @@ The following table contains all configuration parameters available for the `tid
 | `resources` | The resource limits and requests of the drainer Pod | `{}` |
 | `nodeSelector` | Ensures that the drainer Pod is only scheduled to the node with the specific key-value pair as the label. Detailed reference: [nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
 | `tolerations` | Applies to drainer Pods, allowing the Pods to be scheduled to the nodes with specified taints. Detailed reference: [taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
-| `affinity` | Defines scheduling policies and preferences of the drainer Pod. Detailed reference:[affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
+| `affinity` | Defines scheduling policies and preferences of the drainer Pod. Detailed reference:[affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-affinity) | `{}` |
 
 The default value of `config` is:
 

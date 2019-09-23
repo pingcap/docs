@@ -10,7 +10,7 @@ category: reference
 
 Syncer is a tool used to import data incrementally. It is a part of the TiDB enterprise toolset.
 
-It can be [downloaded](/reference/tools/download.md) as part of the Enterprise Tools package.
+It can be [downloaded](/dev/reference/tools/download.md) as part of the Enterprise Tools package.
 
 ## Syncer architecture
 
@@ -22,7 +22,7 @@ You can deploy Syncer to any of the machines that can connect to MySQL or the Ti
 
 ## Use Syncer to import data incrementally
 
-Before importing data, read [Check before importing data using Syncer](#check-before-importing-data-using-syncer).
+Before importing data, read [Check before importing data using Syncer](#check-before-replicating-data-using-syncer).
 
 ### 1. Set the position to replicate
 
@@ -350,7 +350,7 @@ Before replicating data using Syncer, check the following items:
 
     Use the `select @@version;` command to check your database version. Currently, Syncer supports the following versions:
 
-    - 5.5 < MySQL version < 5.8
+    - 5.5 < MySQL version < 8.0
     - MariaDB version >= 10.1.2
 
         In earlier versions of MariaDB, the format of some binlog field types is inconsistent with that in MySQL.
@@ -359,7 +359,7 @@ Before replicating data using Syncer, check the following items:
     >
     > If there is a master-slave replication structure between the upstream MySQL/MariaDB servers, then choose the following version.
     >
-    > - 5.7.1 < MySQL version < 5.8
+    > - 5.7.1 < MySQL version < 8.0
     > - MariaDB version >= 10.1.3
 
 2. Check the `server-id` of the source database.
@@ -414,9 +414,9 @@ Before replicating data using Syncer, check the following items:
 
 4. Check user privileges.
 
-    1. Check the user privileges required by mydumper for full data export.
+    1. Check the user privileges required by Mydumper for full data export.
 
-        - To export the full data using mydumper, the user must have the privileges of `select` and `reload`.
+        - To export the full data using Mydumper, the user must have the privileges of `select` and `reload`.
         - You can add the `--no-locks` option when the operation object is RDS, to avoid applying for the `reload` privilege.
 
     2. Check the upstream MySQL or MariaDB user privileges required by Syncer for incremental replication.
@@ -462,7 +462,7 @@ Before replicating data using Syncer, check the following items:
 
 6. Check the Character Set.
 
-    TiDB differs from MySQL in [Character Set](/reference/sql/character-set.md).
+    TiDB differs from MySQL in [Character Set](/dev/reference/sql/character-set.md).
 
 ## Syncer monitoring solution
 

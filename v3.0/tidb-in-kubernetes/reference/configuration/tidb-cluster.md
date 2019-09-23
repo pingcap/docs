@@ -37,7 +37,7 @@ TiDB Operator uses `Helm` to deploy and manage TiDB clusters. The configuration 
 | `discovery.resources.requests.cpu` | The CPU resource request of PD's service discovery component | `80m` |
 | `discovery.resources.requests.memory` | The memory resource request of PD's service discovery component | `50Mi` |
 | `enableConfigMapRollout` | Whether to enable the automatic rolling update of the TiDB cluster. If enabled, the TiDB cluster automatically updates the corresponding components when the `ConfigMap` of this cluster changes. This configuration is only supported in `tidb-operator` v1.0 and later versions. | `false` |
-| `pd.config` | The configuration of PD. Check [this link](https://github.com/pingcap/pd/blob/master/conf/config.toml) for the default PD configuration file (by choosing the tag of the corresponding PD version). You can see [this document](/reference/configuration/pd-server/configuration.md) for the detailed description of the configuration parameters (by choosing the corresponding document version). Here you must **modify the configuration based on the format of the configuration file**. | If the version of TiDB Operator is v1.0.0-beta.3 or earlier, the default value is <br>`nil`<br>If the version of TiDB Operator is later than v1.0.0, the default value is <br>`[log]`<br>`level = "info"`<br>`[replication]`<br>`location-labels = ["region", "zone", "rack", "host"]`.<br>Example of configuration:<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`[log]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`level = "info"`<br>&nbsp;&nbsp;&nbsp;&nbsp;`[replication]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`location-labels = ["region", "zone", "rack", "host"]` |
+| `pd.config` | The configuration of PD. Check [this link](https://github.com/pingcap/pd/blob/master/conf/config.toml) for the default PD configuration file (by choosing the tag of the corresponding PD version). You can see [this document](/v3.0/reference/configuration/pd-server/configuration.md) for the detailed description of the configuration parameters (by choosing the corresponding document version). Here you must **modify the configuration based on the format of the configuration file**. | If the version of TiDB Operator is v1.0.0-beta.3 or earlier, the default value is <br>`nil`<br>If the version of TiDB Operator is later than v1.0.0, the default value is <br>`[log]`<br>`level = "info"`<br>`[replication]`<br>`location-labels = ["region", "zone", "rack", "host"]`.<br>Example of configuration:<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`[log]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`level = "info"`<br>&nbsp;&nbsp;&nbsp;&nbsp;`[replication]`<br>&nbsp;&nbsp;&nbsp;&nbsp;`location-labels = ["region", "zone", "rack", "host"]` |
 | `pd.replicas` | The number of Pods in PD | `3` |
 | `pd.image` | The PD image | `pingcap/pd:v3.0.0-rc.1` |
 | `pd.imagePullPolicy` | The pulling policy for the PD image | `IfNotPresent` |
@@ -51,11 +51,11 @@ TiDB Operator uses `Helm` to deploy and manage TiDB clusters. The configuration 
 | `pd.resources.requests.cpu` | The CPU resource requests of each PD Pod | `nil` |
 | `pd.resources.requests.memory` | The memory resource requests of each PD Pod | `nil` |
 | `pd.resources.requests.storage` | The storage requests of each PD Pod | `1Gi` |
-| `pd.affinity` | Defines PD's scheduling rules and preferences. Detailed reference: [affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
+| `pd.affinity` | Defines PD's scheduling rules and preferences. Detailed reference: [affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-affinity) | `{}` |
 | `pd.nodeSelector` | Ensures that PD Pods are only scheduled to the node with the specific key-value pair as the label. Detailed reference: [nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
 | `pd.tolerations` | Applies to PD Pods, allowing the Pods to be scheduled to the nodes with specified taints. Detailed reference: [taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
 | `pd.annotations` | Adds a specific `annotations` for PD Pods. | `{}` |
-| `tikv.config` | The configuration of TiKV. Check [this link](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) for the default TiKV configuration file (by choosing the tag of the corresponding TiKV version). You can see [this document](/reference/configuration/tikv-server/configuration.md) for the detailed description of the configuration parameters (by choosing the corresponding document version). Here you must **modify the configuration based on the format of the configuration file**. | If the version of TiDB Operator is v1.0.0-beta.3 or earlier, the default value is<br>`nil`<br>If the version of TiDB Operator is later than v1.0.0, the default value is<br>`log-level = "info"`<br>Example of configuration:<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`log-level = "info"` |
+| `tikv.config` | The configuration of TiKV. Check [this link](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) for the default TiKV configuration file (by choosing the tag of the corresponding TiKV version). You can see [this document](/v3.0/reference/configuration/tikv-server/configuration.md) for the detailed description of the configuration parameters (by choosing the corresponding document version). Here you must **modify the configuration based on the format of the configuration file**. | If the version of TiDB Operator is v1.0.0-beta.3 or earlier, the default value is<br>`nil`<br>If the version of TiDB Operator is later than v1.0.0, the default value is<br>`log-level = "info"`<br>Example of configuration:<br>&nbsp;&nbsp;`config:` \|<br>&nbsp;&nbsp;&nbsp;&nbsp;`log-level = "info"` |
 | `tikv.replicas` | The number of Pods in TiKV | `3` |
 | `tikv.image` | The TiKV image | `pingcap/tikv:v3.0.0-rc.1` |
 | `tikv.imagePullPolicy` | The pulling policy for the TiKV image | `IfNotPresent` |
@@ -69,7 +69,7 @@ TiDB Operator uses `Helm` to deploy and manage TiDB clusters. The configuration 
 | `tikv.resources.requests.cpu` | The CPU resource requests of each TiKV Pod | `nil` |
 | `tikv.resources.requests.memory` | The memory resource requests of each TiKV Pod | `nil` |
 | `tikv.resources.requests.storage` | The storage requests of each TiKV Pod | `10Gi` |
-| `tikv.affinity` | Defines TiKV's scheduling rules and preferences. Detailed reference:[affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
+| `tikv.affinity` | Defines TiKV's scheduling rules and preferences. Detailed reference:[affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-affinity) | `{}` |
 | `tikv.nodeSelector` | Ensures that TiKV Pods are only scheduled to the node with the specific key-value pair as the label. Detailed reference: [nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
 | `tikv.tolerations` | Applies to TiKV Pods, allowing TiKV Pods to be scheduled to the nodes with specified taints. Detailed reference: [taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
 | `tikv.annotations` | Adds a specific `annotations` for TiKV Pods. | `{}` |
@@ -89,7 +89,7 @@ TiDB Operator uses `Helm` to deploy and manage TiDB clusters. The configuration 
 | `tidb.resources.requests.memory` | The memory resource requests of each TiDB Pod | `nil` |
 | `tidb.passwordSecretName`| The name of the `Secret` that stores the TiDB username and password. The `Secret` can create a secret with this command: `kubectl create secret generic tidb secret--from literal=root=<root password>--namespace=<namespace>`. If the parameter is unset, TiDB root password is empty. | `nil` |
 | `tidb.initSql`| The initialization script that will be executed after a TiDB cluster is successfully started. | `nil` |
-| `tidb.affinity` | Defines TiDB's scheduling rules and preferences. Detailed reference: [affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity) | `{}` |
+| `tidb.affinity` | Defines TiDB's scheduling rules and preferences. Detailed reference: [affinity-and-anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-affinity) | `{}` |
 | `tidb.nodeSelector` | Ensures that TiDB Pods are only scheduled to the node with the specific key-value pair as the label. Detailed reference: [nodeselector](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#nodeselector) | `{}` |
 | `tidb.tolerations` | Applies to TiDB Pods, allowing TiDB Pods to be scheduled to nodes with specified taints. Detailed reference: [taint-and-toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) | `{}` |
 | `tidb.annotations` | Adds a specific `annotations` for TiDB Pods. | `{}` |
@@ -125,7 +125,7 @@ TiDB Operator uses `Helm` to deploy and manage TiDB clusters. The configuration 
 
 ## Resource configuration
 
-Before deploying a TiDB cluster, it is necessary to configure the resources for each component of the cluster depending on your needs. PD, TiKV and TiDB are the core service components of a TiDB cluster. In a production environment, their resource configurations must be specified according to component needs. Detailed reference: [Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
+Before deploying a TiDB cluster, it is necessary to configure the resources for each component of the cluster depending on your needs. PD, TiKV and TiDB are the core service components of a TiDB cluster. In a production environment, their resource configurations must be specified according to component needs. Detailed reference: [Hardware Recommendations](/v3.0/how-to/deploy/hardware-recommendations.md).
 
 To ensure the proper scheduling and stable operation of the components of the TiDB cluster in Kubernetes, it is recommended to set Guaranteed-level QoS by letting `limits` equal to `requests` when configuring resources. Detailed reference: [Configure Quality of Service for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/).
 
@@ -139,7 +139,7 @@ TiDB is a distributed database and its disaster recovery must ensure that when a
 
 The disaster recovery of TiDB service is essentially based on Kubernetes' scheduling capabilities. To optimize scheduling, TiDB Operator provides a custom scheduler that guarantees the disaster recovery of TiDB service at the host level through the specified scheduling algorithm. Currently, the TiDB cluster uses this scheduler as the default scheduler, which is configured through the item `schedulerName` in the above table.
 
-Disaster recovery at other levels (such as rack, zone, region) are guaranteed by Affinity's `PodAntiAffinity`. `PodAntiAffinity` can avoid the situation where different instances of the same component are deployed on the same physical topology node. In this way, disaster recovery is achieved. Detailed user guide for Affinity: [Affinity & AntiAffinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-baffinity).
+Disaster recovery at other levels (such as rack, zone, region) are guaranteed by Affinity's `PodAntiAffinity`. `PodAntiAffinity` can avoid the situation where different instances of the same component are deployed on the same physical topology node. In this way, disaster recovery is achieved. Detailed user guide for Affinity: [Affinity & AntiAffinity](https://kubernetes.io/docs/concepts/configuration/assign-Pod-node/#affinity-and-anti-affinity).
 
 The following is an example of a typical disaster recovery setup:
 
@@ -193,7 +193,7 @@ affinity:
 
 ### Disaster recovery of data
 
-Before configuring the data disaster recovery, read [Information Configuration of the Cluster Typology](/how-to/deploy/geographic-redundancy/location-awareness.md) which describes how the disaster recovery of the TiDB cluster is implemented.
+Before configuring the data disaster recovery, read [Information Configuration of the Cluster Typology](/v3.0/how-to/deploy/geographic-redundancy/location-awareness.md) which describes how the disaster recovery of the TiDB cluster is implemented.
 
 To add the data disaster recovery feature in Kubernetes:
 

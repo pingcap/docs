@@ -36,7 +36,7 @@ select * from `ANALYZE_STATUS`;
 
 ### CHARACTER_SETS table
 
-The `CHARACTER_SETS` table provides information about [character sets](/reference/sql/character-set.md). Currently, TiDB only supports some of the character sets.
+The `CHARACTER_SETS` table provides information about [character sets](/dev/reference/sql/character-set.md). Currently, TiDB only supports some of the character sets.
 
 {{< copyable "sql" >}}
 
@@ -351,7 +351,7 @@ SELECT * FROM session_variables LIMIT 10;
 
 ## SLOW_QUERY table
 
-The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/how-to/maintain/identify-slow-queries.md).
+The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/dev/how-to/maintain/identify-slow-queries.md).
 
 ```sql
 mysql> desc information_schema.slow_query;
@@ -761,7 +761,7 @@ Create Table: CREATE TABLE `TIDB_INDEXES` (
 
 `INDEX_ID` is the unique ID that TiDB allocates for each index. It can be used to do a join operation with `INDEX_ID` obtained from another table or API.
 
-For example, you can obtain `TABLE_ID` and `INDEX_ID` that are involved in some slow query in the [`SLOW_QUERY` table](#slow-query-table) and then obtain the specific index information using the following SQL statements:
+For example, you can obtain `TABLE_ID` and `INDEX_ID` that are involved in some slow query in the [`SLOW_QUERY` table](#slow_query-table) and then obtain the specific index information using the following SQL statements:
 
 ```sql
 select
@@ -932,7 +932,7 @@ The `STATE` column shows the execution status of a specific `ANALYZE` task. Its 
 
 ## SLOW\_QUERY table
 
-The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/how-to/maintain/identify-slow-queries.md#identify-slow-queries).
+The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md#identify-slow-queries).
 
 ```sql
 mysql> desc slow_query\G

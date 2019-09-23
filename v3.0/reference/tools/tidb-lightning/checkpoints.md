@@ -21,13 +21,14 @@ This document describes how to enable, configure, store, and control *checkpoint
 # good state instead of redoing everything.
 enable = true
 
-# The schema name (database name) to store the checkpoints
-schema = "tidb_lightning_checkpoint"
-
 # Where to store the checkpoints.
 #  - file:  store as a local file (requires v2.1.1 or later)
 #  - mysql: store into a remote MySQL-compatible database
 driver = "file"
+
+# The schema name (database name) to store the checkpoints
+# Enabled only when `driver = "mysql"`.
+# schema = "tidb_lightning_checkpoint"
 
 # The data source name (DSN) indicating the location of the checkpoint storage.
 #
@@ -43,12 +44,12 @@ driver = "file"
 # Whether to keep the checkpoints after all data are imported. If false, the
 # checkpoints are deleted. Keeping the checkpoints can aid debugging but
 # might leak metadata about the data source.
-#keep-after-success = false
+# keep-after-success = false
 ```
 
 ## Checkpoints storage
 
-Lightning supports two kinds of checkpoint storage: a local file or a remote MySQL-compatible database.
+TiDB Lightning supports two kinds of checkpoint storage: a local file or a remote MySQL-compatible database.
 
 * With `driver = "file"`, checkpoints are stored in a local file at the path given by the `dsn` setting. Checkpoints are updated rapidly, so we highly recommend placing the checkpoint file on a drive with very high write endurance, such as a RAM disk.
 

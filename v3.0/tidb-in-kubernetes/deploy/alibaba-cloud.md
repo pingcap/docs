@@ -17,7 +17,7 @@ This document describes how to deploy a TiDB cluster on Alibaba Cloud Kubernetes
     >
     > The access key must be granted permissions to control the corresponding resources.
 
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) >= 1.12
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) >= 1.12
 - [helm](https://github.com/helm/helm/blob/master/docs/install.md#installing-the-helm-client) >= 2.9.1 and <= 2.11.0
 - [jq](https://stedolan.github.io/jq/download/) >= 1.6
 - [terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) 0.11.*
@@ -198,7 +198,7 @@ In the default configuration, the Terraform script creates a new VPC. To use the
 
 ### Configure the TiDB cluster
 
-`./my-cluster.yaml` is the `values.yaml` configuration file in the TiDB cluster. You can configure the TiDB cluster by modifying this file. For supported configuration items, see [Configure the TiDB cluster in Kubernetes](/tidb-in-kubernetes/reference/configuration/tidb-cluster.md).
+`./my-cluster.yaml` is the `values.yaml` configuration file in the TiDB cluster. You can configure the TiDB cluster by modifying this file. For supported configuration items, see [Configure the TiDB cluster in Kubernetes](/v3.0/tidb-in-kubernetes/reference/configuration/tidb-cluster.md).
 
 ## Manage multiple TiDB clusters
 
