@@ -26,7 +26,7 @@ In the Grafana dashboard, the default name of DM is `DM-task`.
 | storage capacity | The total storage capacity of the disk occupied by relay logs  | N/A | N/A |
 | storage remain | The remaining storage capacity of the disk occupied by relay logs | N/A | N/A |
 | binlog file gap between master and relay | The number of binlog files by which the `relay` processing unit is behind the upstream master | N/A | N/A |
-| load progress | The percentage of the completed load unit loading process. The value is between 0% and 100%  | N/A | N/A |
+| load progress | The percentage of the completed `load unit` loading process. The value is between 0% and 100%  | N/A | N/A |
 | binlog file gap between master and syncer | The number of binlog files by which binlog replication is behind the upstream master | N/A | N/A |
 | shard lock resolving | Whether the current subtask is waiting for sharding DDL replication. A value greater than 0 means that the current subtask is waiting for sharding DDL replication | N/A | N/A |
 
@@ -59,14 +59,14 @@ The following metrics show only when `task-mode` is in the `full` or `all` mode.
 
 | Metric name | Description | Alert | Level |
 |:----|:------------|:----|:----|
-| load progress | The data import process percentage of Loader. The value range is 0% ~ 100%. | N/A | N/A |
-| data file size | The total size of the data files in the full data imported by Loader (including the `INSERT INTO` statement) | N/A | N/A |
-| dump process exits with error | Dumper encounters an error within the DM-worker and exits. | Immediate alerts | critical |
-| load process exits with error | Loader encounters an error within the DM-worker and exits. | Immediate alerts | critical |
-| table count | The total number of tables in the full data imported by Loader | N/A | N/A |
-| data file count | The total number of data files in the full data imported by Loader (including the `INSERT INTO` statement) | N/A | N/A |
-| latency of execute transaction | The duration that Loader executes a transaction (in seconds) | N/A | N/A |
-| latency of query | The duration that Loader executes a query (in seconds) | N/A | N/A |
+| load progress | The data import process percentage of `load unit`. The value range is 0% ~ 100%. | N/A | N/A |
+| data file size | The total size of the data files in the full data imported by `load unit` (including the `INSERT INTO` statement) | N/A | N/A |
+| dump process exits with error | `dumper unit` encounters an error within the DM-worker and exits. | Immediate alerts | critical |
+| load process exits with error | `load unit` encounters an error within the DM-worker and exits. | Immediate alerts | critical |
+| table count | The total number of tables in the full data imported by `load unit` | N/A | N/A |
+| data file count | The total number of data files in the full data imported by `load unit` (including the `INSERT INTO` statement) | N/A | N/A |
+| latency of execute transaction | The duration that `load unit` executes a transaction (in seconds) | N/A | N/A |
+| latency of query | The duration that `load unit` executes a query (in seconds) | N/A | N/A |
 
 ### Binlog replication
 
@@ -114,6 +114,6 @@ In the Grafana dashboard, the default name of an instance is `DM-instance`.
 | Metric name | Description | Alert | Level |
 |:----|:------------|:----|:----|
 | task state | The state of subtasks for replication | An alert occurs when the subtask has been paused for more than 10 minutes | critical |
-| load progress | The percentage of loading completion of load unit. The value is between 0% and 100%  | N/A | N/A |
+| load progress | The percentage of loading completion of `load unit`. The value is between 0% and 100%  | N/A | N/A |
 | binlog file gap between master and syncer | The number of binlog files by which binlog replication is behind the upstream master  | N/A | N/A |
 | shard lock resolving | Whether the current subtask is waiting for sharding DDL replication. A value greater than 0 means that the current subtask is waiting for sharding DDL replication | N/A | N/A |
