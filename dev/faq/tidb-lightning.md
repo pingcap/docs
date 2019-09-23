@@ -7,7 +7,7 @@ category: faq
 # TiDB Lightning FAQ
 
 >**Note:**
-> 
+>
 > See also [TiDB Lightning Troubleshooting](/dev/how-to/troubleshoot/tidb-lightning.md) if you have encountered errors.
 
 ## What is the minimum TiDB/TiKV/PD cluster version supported by Lightning?

@@ -43,7 +43,7 @@ Try the latest version! Maybe there is new speed improvement.
     * `AUTO_INCREMENT` columns need to be positive, and do not contain the value "0".
     * The UNIQUE and PRIMARY KEYs must have no duplicated entries.
 
-4. If TiDB Lightning has failed before and was not properly restarted, a checksum mismatch may happen due to data being out-of-sync. 
+4. If TiDB Lightning has failed before and was not properly restarted, a checksum mismatch may happen due to data being out-of-sync.
 
 **Solutions**:
 

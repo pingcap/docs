@@ -247,9 +247,9 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
 
     - **name**:
         * `table` — the remainder of `table-concurrency`, normally 0 until the end of the process
-        * `index` — number of unused `index-concurrency`, normally 0 until the end of process
-        * `region` — number of unused `region-concurrency`, normally 0 until the end of process
-        * `io` — number of unused `io-concurrency`, normally close to configured value (default 5), and close to 0 means the disk is too slow
+        * `index` — the remainder of `index-concurrency`, normally 0 until the end of the process
+        * `region` — the remainder of `region-concurrency`, normally 0 until the end of the process
+        * `io` — the remainder of `io-concurrency`, normally close to configured value (default 5), and close to 0 means the disk is too slow
         * `closed-engine` — number of engines which have been closed but not yet cleaned up, normally close to index + table-concurrency (default 8).  A value close to 0 means TiDB Lightning is faster than TiKV Importer, which might cause TiDB Lightning to stall
 
 - **`lightning_kv_encoder`** (Counter)
@@ -270,7 +270,7 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
         * `closed` — all corresponding engine files closed
         * `imported` — all engine files have been imported into the target cluster
         * `altered_auto_inc` — AUTO_INCREMENT ID altered
-        * `checksum` — checksum performed 
+        * `checksum` — checksum performed
         * `analyzed` — statistics analysis performed
         * `completed` — the table has been fully imported and verified
     - **result**: the result of the current phase
