@@ -96,8 +96,6 @@ Region storage | History last index | The last index where the Region change his
 
 ![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v2.png)
 
-### 
-
 ### Statistics - Balance
 
 ![PD Dashboard - Statistics - Balance metrics](/media/pd-dashboard-balance-v2.png)
