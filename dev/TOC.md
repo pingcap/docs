@@ -296,9 +296,10 @@
       - [Configuration File](/dev/reference/configuration/tidb-server/configuration-file.md)
     + pd-server
       - [Configuration Flags](/dev/reference/configuration/pd-server/configuration.md)
-      - [Configuration Descriptions](/dev/reference/configuration/pd-server/configuration-file.md)
+      - [Configuration File](/dev/reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](/dev/reference/configuration/tikv-server/configuration.md)
+      - [Configuration File](/dev/reference/configuration/tikv-server/configuration-file.md)
   + Key Monitoring Metrics
     - [Overview](/dev/reference/key-monitoring-metrics/overview-dashboard.md)
     - [TiDB](/dev/reference/key-monitoring-metrics/tidb-dashboard.md)

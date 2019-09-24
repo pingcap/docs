@@ -1,10 +1,10 @@
 ---
-title: TiDB Configuration File Description
+title: TiDB Configuration File
 summary: Learn the TiDB configuration file options that are not involved in command line options.
 category: deployment
 ---
 
-# TiDB Configuration File Description
+# TiDB Configuration File
 
 <!-- markdownlint-disable MD001 -->
 

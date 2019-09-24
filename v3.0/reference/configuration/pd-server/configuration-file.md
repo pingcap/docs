@@ -1,16 +1,16 @@
 ---
-title: Description of PD Configuration File
+title: PD Configuration File
 summary: Learn the PD configuration file.
 category: reference
 ---
 
-# Description of PD Configuration File
+# PD Configuration File
 
 <!-- markdownlint-disable MD001 -->
 
-The PD configuration file supports more options than the command-line parameters. You can find the default configuration file [here](https://github.com/pingcap/pd/blob/master/conf/config.toml).
+The PD configuration file supports more options than command-line parameters. You can find the default configuration file [here](https://github.com/pingcap/pd/blob/master/conf/config.toml).
 
-This document only describes parameters that are not included in the command-line parameters. Check [here](/v3.0/reference/configuration/pd-server/configuration.md) for the command line parameters.
+This document only describes parameters that are not included in command-line parameters. Check [here](/v3.0/reference/configuration/pd-server/configuration.md) for the command line parameters.
 
 ### `lease`
 

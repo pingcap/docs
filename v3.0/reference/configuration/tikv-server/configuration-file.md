@@ -1,16 +1,16 @@
 ﻿---
-title: Description of TiKV Configuration File
+title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
 category: reference
 ---
 
-# Description of TiKV Configuration File
+# TiKV Configuration File
 
 <!-- markdownlint-disable MD001 -->
 
-The configuration files of TiKV support more options than the command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) and rename it to `config.toml`.
+The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) and rename it to `config.toml`.
 
-This document only describes the parameters that are not included in the command-line parameters. For more details, see [command-line parameter](/v3.0/reference/configuration/tikv-server/configuration.md).
+This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/v3.0/reference/configuration/tikv-server/configuration.md).
 
 ### `status-thread-pool-size`
 

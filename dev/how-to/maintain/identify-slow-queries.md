@@ -252,9 +252,9 @@ admin show slow top internal 3
 admin show slow top all 5
 ```
 
-Due to restrictions in memory footprint, the number of slow query records that can be stored is limited. If the specified `N` is greater than the records count, the returned records number might be smaller than `N`.
+TiDB stores only a limited number of slow query records because of the limited memory. If the value of `N` in the query command is greater than the records count, the number of returned records is smaller than `N`.
 
-The table below specifies the details of the output:
+The following table shows output details:
 
 | Column name | Description |
 |:------|:---- |

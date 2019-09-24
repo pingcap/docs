@@ -25,7 +25,7 @@ Ensure that you have `SUPER` privilege when setting SQL mode at `GLOBAL` level, 
 ## SQL mode table
 
 | Name | Description |
-| --- | --- |
+| :--- | :--- |
 | `PIPES_AS_CONCAT` | Treats "\|\|" as a string concatenation operator (`+`) (the same as `CONCAT()`), not as an `OR` (full support) |
 | `ANSI_QUOTES` | Treats `"` as an identifier. If `ANSI_QUOTES` is enabled, only single quotes are treated as string literals, and double quotes are treated as identifiers. Therefore, double quotes cannot be used to quote strings. (full support)|
 | `IGNORE_SPACE` | If this mode is enabled, the system ignores space. For example: "user" and "user " are the same. (full support)|

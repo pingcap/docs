@@ -2,6 +2,7 @@
 title: Character Set Support
 summary: Learn about the supported character sets in TiDB.
 category: reference
+aliases: ['/v3.0/docs/sql/character-set-support/','/v3.0/docs/sql/character-set-configuration/']
 ---
 
 # Character Set Support
@@ -185,6 +186,8 @@ The table character set and collation are used as the default values for column 
 ## String character sets and collation
 
 Each character literal in a string has a character set and a collation. When you use a string, this option is available:
+
+{{< copyable "sql" >}}
 
 ```sql
 [_charset_name]'string' [COLLATE collation_name]
