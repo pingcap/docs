@@ -82,7 +82,7 @@ etcd | Raft committed index | The last committed index of Raft |
 etcd | Raft applied index | The last applied index of Raft |
 TiDB | Handled requests count | The count of TiDB requests |
 TiDB | Request handling duration | The time consumed for handling TiDB requests | It should be less than `100ms` (P99).
-Heartbeat | Region heartbeat report | The count of heartbeats reported reported to PD per instance |
+Heartbeat | Region heartbeat report | The count of heartbeats reported to PD per instance |
 Heartbeat | Region heartbeat report error | The count of heartbeats with the `error` status |
 Heartbeat | Region heartbeat report active | The count of heartbeats with the `ok` status |
 Heartbeat | Region schedule push | The count of corresponding schedule commands sent from PD per TiKV instance |
