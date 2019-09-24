@@ -94,36 +94,42 @@ Region storage | History last index | The last index where the Region change his
 
 ### Cluster
 
-![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster.png)
+![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v2.png)
+
+### 
 
 ### Statistics - Balance
 
-![PD Dashboard - Statistics - Balance metrics](/media/pd-dashboard-balance.png)
+![PD Dashboard - Statistics - Balance metrics](/media/pd-dashboard-balance-v2.png)
 
 ### Statistics - Hotspot
 
-![PD Dashboard - Statistics - Hotspot metrics](/media/pd-dashboard-hot-region.png)
+![PD Dashboard - Statistics - Hotspot metrics](/media/pd-dashboard-hotspot.png)
 
 ### Scheduler
 
-![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler.png)
+![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler-v2.png)
 
 ### Operator
 
-![PD Dashboard - Operator metrics](/media/pd-dashboard-operator.png)
+![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v2.png)
 
 ### gRPC
 
-![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc.png)
+![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
 
 ### etcd
 
-![PD Dashboard - etcd metrics](/media/pd-dashboard-etcd.png)
+![PD Dashboard - etcd metrics](/media/pd-dashboard-etcd-v2.png)
 
 ### TiDB
 
-![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb.png)
+![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb-v2.png)
 
 ### Heartbeat
 
-![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat.png)
+![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat-v2.png)
+
+### Region storage
+
+![PD Dashboard - Region storage](/media/pd-dashboard-region-storage.png)
