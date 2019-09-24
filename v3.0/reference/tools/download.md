@@ -11,7 +11,7 @@ This document collects the available downloads for most officially maintained ve
 
 ## TiDB Binlog
 
-If you want to download the v3.0 version of [TiDB Binlog](/v3.0/reference/tidb-binlog-overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
+If you want to download the 3.0 version of [TiDB Binlog](/v3.0/reference/tidb-binlog-overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
 
 In addition, the Kafka version of TiDB Binlog is also provided.
 
@@ -22,7 +22,7 @@ In addition, the Kafka version of TiDB Binlog is also provided.
 
 ## TiDB Lightning
 
-If you want to download the v3.0 version of [TiDB Lightning](/v3.0/reference/tools/tidb-lightning/overview.md), click the download link in the following table.
+If you want to download the 3.0 version of [TiDB Lightning](/v3.0/reference/tools/tidb-lightning/overview.md), click the download link in the following table.
 
 | Package name | OS | Architecture |  SHA256 checksum |
 |:---|:---|:---|:---|
@@ -30,7 +30,7 @@ If you want to download the v3.0 version of [TiDB Lightning](/v3.0/reference/too
 
 ## DM (Data Migration)
 
-If you want to download the v1.0 GA version of [DM](/v3.0/reference/tools/data-migration/overview.md), click the download link in the following table.
+If you want to download the 1.0 GA version of [DM](/v3.0/reference/tools/data-migration/overview.md), click the download link in the following table.
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|

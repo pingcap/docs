@@ -29,7 +29,7 @@ If you want to download the latest version of [TiDB Lightning](/dev/reference/to
 
 ## DM (Data Migration)
 
-If you want to download the v1.0 GA version of [DM](/dev/reference/tools/data-migration/overview.md), click the download link in the following table.
+If you want to download the 1.0 GA version of [DM](/dev/reference/tools/data-migration/overview.md), click the download link in the following table.
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
