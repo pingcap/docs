@@ -245,7 +245,7 @@ customer.write
 .save()
 ```
 
-See [here](./datasource_api_userguide.md) for more details.
+See [here](/dev/reference/tispark/datasource_api_userguide.md) for more details.
 
 ## Load Spark DataFrame into TiDB using JDBC
 

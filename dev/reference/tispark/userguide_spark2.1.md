@@ -271,7 +271,7 @@ TiSpark uses the statistic information for:
 
 For TiSpark to use the statistic information, first make sure that relevant tables have been analyzed.
 
-See [here](/dev/reference/sql/statistics.md) for more details about how to analyze tables.
+See [here](/dev/reference/sql/statements/analyze-table.md) for more details about how to analyze tables.
 
 Load the statistics information from your storage.
 

@@ -8,7 +8,7 @@ category: reference
 
 > **Note:**
 >
-> This is a user guide for TiSpark version earlier 2.0. If you are using version 2.0 or later, refer to [Document for Spark 2.3](/dev/reference/tispark/userguide.md)
+> This is a user guide for TiSpark version earlier 2.0. If you are using version 2.0 or later, refer to [Document for Spark 2.3](/v3.0/reference/tispark/userguide.md)
 
 This document introduces how to set up and use TiSpark, which requires some basic knowledge of Apache Spark. Refer to [Spark website](https://spark.apache.org/docs/latest/index.html) for details.
 
@@ -271,7 +271,7 @@ TiSpark uses the statistic information for:
 
 For TiSpark to use the statistic information, first make sure that relevant tables have been analyzed.
 
-See [here](/dev/reference/sql/statistics.md) for more details about how to analyze tables.
+See [here](/v3.0/reference/sql/statements/analyze-table.md) for more details about how to analyze tables.
 
 Load the statistics information from your storage.
 
