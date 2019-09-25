@@ -135,9 +135,9 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     | TiDB version | tidb-ansible tag | Note |
     | :-------- | :---------------- | :--- |
     | 2.0 version | v2.0.10, v2.0.11 | It is the stable version of 2.0. It is not recommended for new users to use it in the production environment. |
-    | 2.1 version | v2.1.1 ~ v2.1.13 | It is the stable version of 2.1. It can be used in the production environment. |
+    | 2.1 version | v2.1.1 ~ v2.1.17 | It is the stable version of 2.1. It can be used in the production environment. |
 
-2. Download the [corresponding TiDB Ansible versions](https://github.com/pingcap/tidb-ansible/tags) of TiDB 2.0 or 2.1 from [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+2. Download the [corresponding TiDB Ansible versions](https://github.com/pingcap/tidb-ansible/tags) of TiDB 2.0 or 2.1 from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
     ```
     $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
@@ -146,7 +146,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 > **Note:**
 >
 > - Replace `$tag` with the value of the chosen TAG version. For example, `v2.11.15`.
-> - Deploying and upgrading TiDB clusters requires the corresponding version of `tidb-ansible`. Otherwise, only changing the version in the `inventory.ini` file might cause errors.
+> - To deploy and upgrade TiDB clusters, use the corresponding version of `tidb-ansible`. If you only modify the version in the `inventory.ini` file, errors might occur.
 > - It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
 If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).

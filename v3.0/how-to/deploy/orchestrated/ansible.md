@@ -131,7 +131,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 ## Step 3: Download TiDB Ansible to the Control Machine
 
-Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download the [corresponding TAG version](https://github.com/pingcap/tidb-ansible/tags) of TiDB Ansible 3.0 from [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download the [corresponding TAG version](https://github.com/pingcap/tidb-ansible/tags) of TiDB Ansible 3.0 from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
 ```
 $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
@@ -140,7 +140,7 @@ $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
 > **Note:**
 >
 > - Replace `$tag` with the value of the chosen TAG version. For example, `v3.02`.
-> - Deploying and upgrading TiDB clusters requires the corresponding version of `tidb-ansible`. Otherwise, only changing the version in the `inventory.ini` file might cause errors.
+> - To deploy and upgrade TiDB clusters, use the corresponding version of `tidb-ansible`. If you only modify the version in the `inventory.ini` file, errors might occur.
 > - It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
 If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
