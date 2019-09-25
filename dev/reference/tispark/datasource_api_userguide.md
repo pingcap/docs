@@ -6,6 +6,8 @@ category: reference
 
 # TiDB Data Source API User Guide
 
+<!-- markdownlint-disable MD029 -->
+
 The TiDB Connector for Spark enables you to use TiDB as the data source of Apache Spark, similar to other data sources such as PostgreSQL, HDFS, and S3.
 
 The TiDB Connector supports Spark 2.3.0+ and Spark 2.4.0+.
@@ -16,8 +18,8 @@ TiDB Connector supports bi-directional data movement between TiDB and Spark clus
 
 Using the connector, you can perform the following two operations:
 
-  - Populate a Spark DataFrame from a table in TiDB.
-  - Write the contents of a Spark DataFrame to a table in TiDB.
+- Populate a Spark DataFrame from a table in TiDB.
+- Write the contents of a Spark DataFrame to a table in TiDB.
 
 ## Transaction support for write
 
