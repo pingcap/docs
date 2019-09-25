@@ -2,7 +2,7 @@
 title: Character Set Support
 summary: Learn about the supported character sets in TiDB.
 category: reference
-aliases: ['/v3.0/docs/sql/character-set-support/','/v3.0/docs/sql/character-set-configuration/']
+aliases: ['/docs/sql/character-set-support/','/docs/sql/character-set-configuration/']
 ---
 
 # Character Set Support
