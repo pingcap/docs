@@ -26,15 +26,15 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 
 ### Pump
 
-Pump is used to record the binlogs generated in TiDB, sort the binlogs based on the commit time of the transaction, and send binlogs to Drainer for consumption.
+[Pump](https://github.com/pingcap/tidb-binlog/blob/master/pump) is used to record the binlogs generated in TiDB, sort the binlogs based on the commit time of the transaction, and send binlogs to Drainer for consumption.
 
 ### Drainer
 
-Drainer collects and merges binlogs from each Pump, converts the binlog to SQL or data of a specific format, and replicates the data to a specific downstream platform.
+[Drainer](https://github.com/pingcap/tidb-binlog/tree/master/drainer) collects and merges binlogs from each Pump, converts the binlog to SQL or data of a specific format, and replicates the data to a specific downstream platform.
 
 ### `binlogctl` guide
 
-[`binlogctl`](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/binlogctl) is an operations tool for TiDB Binlog with the following features:
+[`binlogctl`](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) is an operations tool for TiDB Binlog with the following features:
 
 * Obtaining the current `tso` of TiDB cluster
 * Checking the Pump/Drainer state
@@ -73,3 +73,13 @@ The server hardware requirements for development, testing, and the production en
     - If your TiDB version is 2.1.9 or later, set `db-type="file"` or `db-type="pb"`.
 
 * If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/v3.0/reference/tools/sync-diff-inspector.md) to verify the data after data replication.
+
+## TiDB Binlog Instructions
+
+Once you grasp the basics from the above, you can refer to the following documents to use TiDB Binlog:
+
+- [TiDB Binlog Tutorial](/v3.0/how-to/get-started/tidb-binlog.md)
+- [TiDB Binlog Cluster Deployment](/v3.0/how-to/deploy/tidb-binlog.md)
+- [TiDB Binlog Monitoring](/v3.0/how-to/monitor/tidb-binlog.md)
+- [TiDB Binlog Cluster Operations](/v3.0/how-to/maintain/tidb-binlog.md)
+- [Upgrade TiDB Binlog Cluster](/v3.0/how-to/upgrade/tidb-binlog.md)
