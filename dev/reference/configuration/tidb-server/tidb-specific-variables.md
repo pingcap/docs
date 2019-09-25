@@ -392,9 +392,9 @@ set tidb_query_log_max_len = 20
 
 ### tidb_txn_mode
 
-- Scope: SESSION
-- Default value: "", indicating the optimistic locking mode.
-- This variable is used to set the transaction mode of the current session. TiDB 3.0 supports the pessimistic locking mode (experimental). After you set `tidb_txn_mode` to `pessimistic`, all explicit transactions (namely non-autocommit transactions) the session executes become pessimistic transactions. For details, see [TiDB Pessimistic Transaction Mode](/dev/reference/transactions/transaction-pessimistic.md).
+- Scope: SESSION | GLOBAL (in TiDB 3.0.4 or later versions)
+- Default value: ""
+- This variable is used to set the transaction mode, which by default is optimistic locking mode. TiDB 3.0 supports the pessimistic locking mode (experimental). After you set `tidb_txn_mode` to `pessimistic`, all explicit transactions (non-autocommit transactions) the session executes become pessimistic transactions. Since TiDB 3.0.4, this variable also supports setting the transaction mode globally. Once set to GLOBAL, only sessions created after modification are affected. For details, see [TiDB Pessimistic Transaction Mode](/dev/reference/transactions/transaction-pessimistic.md).
 
 ### tidb_constraint_check_in_place
 
