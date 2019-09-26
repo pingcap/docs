@@ -1,3 +1,4 @@
+---
 title: Common misuses of TiDB Lightning
 category: reference
 ---
