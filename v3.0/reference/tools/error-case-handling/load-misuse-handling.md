@@ -5,7 +5,7 @@ category: reference
 
 # Common misuses during full data import
 
-This article introduces the common error scenarios caused by using [Loader](/v3.0/reference/tools/loader.md) or [TiDB Data Migration](/dev/reference/tools/data-migration/overview.md) (DM) to import full data, the causes and solutions of which are also provided.
+This article introduces the common error scenarios caused by using [Loader](/v3.0/reference/tools/loader.md) or [TiDB Data Migration](/v3.0/reference/tools/data-migration/overview.md) (DM) to import full data, the causes and solutions of which are also provided.
 
 ## Error: ``Try adjusting the `max_allowed_packet` variable``
 
@@ -18,7 +18,7 @@ packet for query is too large. Try adjusting the 'max_allowed_packet' variable
 ### Reasons
 
 * Both MySQL client and MySQL/TiDB Server have `max_allowed_packet` quotas. If any `max_allowed_packet` quota is violated, the client receives a corresponding error message. Currently, the latest version of Syncer, Loader, DM and TiDB Server all have a default `max_allowed_packet` quota of `64M`.
-    * Please use the latest version, or the latest stable version of the tool. [Click here to download](/dev/reference/tools/download.md).
+    * Please use the latest version, or the latest stable version of the tool. [Click here to download](/v3.0/reference/tools/download.md).
 * Full data import processing module in Loader or DM Loader do not support the segementation of  `dump sqls` files. It is because Mydumper uses the simplest code to implement, as stated in the comment `* Poor man's data dump code *`. If you segment files in Loader or DM, you will need a complete parser based on `TiDB parser` to handle data segmentation, which will cause the following problems:
     * High workload
     * High complexity with poor correctness
