@@ -15,4 +15,4 @@ category: reference
 
 Cast functions and operators enable conversion of values from one data type to another.
 
-For details, see [here](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html).
+For details, see [Cast Functions and Operators](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html).
