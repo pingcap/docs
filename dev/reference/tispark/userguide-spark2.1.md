@@ -324,25 +324,3 @@ Currently, you can adjust these configurations in your `spark.conf` file.
 |Block manager port  |(random)   | spark.blockManager.port  |   |
 |Shuffle server  |  `7337`   | spark.shuffle.service.port  |  Optional; it is only applied if you use the external shuffle service.  |
 |  Application web UI  |  `4040`  |  spark.ui.port | If `4040` has been occupied, then `4041` is used. |
-
-## FAQ
-
-Q: What are the pros and cons of independent deployment as opposed to a shared resource with an existing Spark / Hadoop cluster?
-
-A: You can use the existing Spark cluster without a separate deployment, but if the existing cluster is busy, TiSpark will not be able to achieve the desired speed.
-
-Q: Can I mix Spark with TiKV?
-
-A: If TiDB and TiKV are overloaded and run critical online tasks, consider deploying TiSpark separately.
-
-You also need to consider using different NICs to ensure that OLTP's network resources are not compromised so that online business is not affected.
-
-If the online business requirements are not high or the loading is not large enough, you can mix TiSpark with TiKV deployment.
-
-Q: How to use PySpark with TiSpark?
-
-A: Follow [TiSpark on PySpark](https://github.com/pingcap/tispark/blob/master/python/README_spark2.1.md).
-
-Q: How to use SparkR with TiSpark?
-
-A: Follow [TiSpark on SparkR](https://github.com/pingcap/tispark/blob/master/R/README.md).

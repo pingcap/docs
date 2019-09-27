@@ -286,7 +286,7 @@ TiSpark uses the statistic information for:
 
 For TiSpark to use the statistic information, first make sure that relevant tables have been analyzed.
 
-See [here](https://github.com/pingcap/docs/blob/master/sql/statistics.md) for more details about how to analyze tables.
+See [here](/v3.0/reference/sql/statements/analyze-table.md) for more details about how to analyze tables.
 
 Since TiSpark 2.0, statistics information is default to auto-load.
 
@@ -300,7 +300,7 @@ Currently, you can adjust these configurations in your `spark.conf` file.
 | :--------   | :-----   | :---- |
 | `spark.tispark.statistics.auto_load` | `true` | Whether to load the statistics information automatically during database mapping |
 
-## Reading partition table from TiDB
+## Read partition table from TiDB
 
 TiSpark reads the range and hash partition table from TiDB.
 
@@ -329,33 +329,3 @@ If partition pruning is not applied, TiSpark's reading is equivalent to doing a 
 |Block manager port  |(random)   | spark.blockManager.port  |   |
 |Shuffle server  |  `7337`   | spark.shuffle.service.port  |  Optional; it is only applied if you use the external shuffle service.  |
 |  Application web UI  |  `4040`  |  spark.ui.port | If `4040` has been occupied, then `4041` is used. |
-
-## 13. FAQ
-
-Q: What are the pros and cons of independent deployment as opposed to a shared resource with an existing Spark / Hadoop cluster?
-
-A: You can use the existing Spark cluster without a separate deployment, but if the existing cluster is busy, TiSpark will not be able to achieve the desired speed.
-
-Q: Can I mix Spark with TiKV?
-
-A: If TiDB and TiKV are overloaded and run critical online tasks, consider deploying TiSpark separately.
-
-You also need to consider using different NICs to ensure that OLTP's network resources are not compromised so that online business is not affected.
-
-If the online business requirements are not high or the loading is not large enough, you can mix TiSpark with TiKV deployment.
-
-Q: What can I do if `warning：WARN ObjectStore:568 - Failed to get database` is returned when executing SQL statements using TiSpark?
-
-A: You can ignore this warning. It occurs because Spark tries to load two nonexistent databases (`default` and `global_temp`) in its catalog. If you want to mute this warning, modify [log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43) by adding `log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR` to the `log4j` file in `tispark/conf`. You can add the parameter to the `log4j` file of the `config` under Spark. If the suffix is `template`, you can use the `mv` command to change it to `properties`.
-
-Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned when executing SQL statements using TiSpark?
-
-A: This error occurs because the length of the data written exceeds the length of the data type defined by the database. You can check the field length and adjust it accordingly.
-
-Q: How to use PySpark with TiSpark?
-
-A: Follow [TiSpark on PySpark](https://github.com/pingcap/tispark/blob/master/python/README.md).
-
-Q: How to use SparkR with TiSpark?
-
-A: Follow [TiSpark on SparkR](https://github.com/pingcap/tispark/blob/master/R/README.md).
