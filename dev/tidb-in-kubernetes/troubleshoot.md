@@ -335,7 +335,7 @@ Normally, when a TiKV Pod is in a healthy state (`Running`), the corresponding T
 
 ## Long queries are abnormally interrupted in TiDB
 
-Load Balancers set the idle connection timeout. If no data is sent over a connection for a specific period of time, Load Balancers closes the connection.
+Load Balancers set the idle connection timeout. If no data is sent over a connection for a specific period of time, Load Balancer closes the connection.
 
 If a long query is interrupted when you use TiDB, check the middleware application between the client and the TiDB server.
 If you find that the idle timeout is not long enough for your query, try to set the timeout to a larger value. If you cannot reset it, enable the `tcp-keep-alive` option.
