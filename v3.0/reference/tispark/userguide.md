@@ -8,7 +8,7 @@ category: reference
 
 > **Note:**
 >
-> This is a user guide for TiSpark version later than 2.0. If you are using version earlier than 2.0, refer to [Document for Spark 2.1](/v3.0/reference/tispark/userguide_spark2.1.md)
+> This is a user guide for TiSpark version later than 2.0. If you are using version earlier than 2.0, refer to [Document for Spark 2.1](/v3.0/reference/tispark/userguide-spark2.1.md)
 
 This document introduces how to set up and use TiSpark, which requires some basic knowledge of Apache Spark. Refer to [Spark website](https://spark.apache.org/docs/latest/index.html) for details.
 
@@ -245,7 +245,7 @@ customer.write
 .save()
 ```
 
-See [here](/v3.0/reference/tispark/datasource_api_userguide.md) for more details.
+See [here](/v3.0/reference/tispark/datasource-api-userguide.md) for more details.
 
 ## Load Spark DataFrame into TiDB using JDBC
 

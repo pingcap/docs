@@ -330,8 +330,8 @@
   + TiSpark
     - [Overview](/v3.0/reference/tispark/overview.md)
     - [User Guide](/v3.0/reference/tispark/userguide.md)
-    - [Data Source API User Guide](/v3.0/reference/tispark/datasource_api_userguide.md)
-    - [Use TiDB as Metastore DB](/v3.0/reference/tispark/how_to_use_tidb_as_metastore_db.md)
+    - [Data Source API User Guide](/v3.0/reference/tispark/datasource-api-userguide.md)
+    - [Use TiDB as Metastore DB](/v3.0/reference/tispark/use-tidb-as-metastore-db.md)
   - [TiDB Binlog Cluster Overview](/v3.0/reference/tidb-binlog-overview.md)
   - [Adopters](/v3.0/adopters.md)
 + TiDB in Kubernetes

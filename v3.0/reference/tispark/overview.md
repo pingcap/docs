@@ -31,7 +31,7 @@ Most of the TiSpark logic is inside a thin layer, namely, the [tikv-client](http
     - When using TiSpark 2.1.5 with Spark 2.4.0+, use version `2.1.5-spark_2.4` and follow the [document for Spark 2.3+](/v3.0/reference/tispark/userguide.md).
 
 + TiSpark 1.2.1 is the latest stable version compatible with Spark 2.1.0+.
-    - When using TiSpark 1.2.1, follow the [document for Spark 2.1](/v3.0/reference/tispark/userguide_spark2.1.md).
+    - When using TiSpark 1.2.1, follow the [document for Spark 2.1](/v3.0/reference/tispark/userguide-spark2.1.md).
 
 You might also [build from sources](#how-to-build-from-sources) to try the new features on TiSpark master branch.
 
@@ -181,7 +181,7 @@ customer.write
 .save()
 ```
 
-See [here](/v3.0/reference/tispark/datasource_api_userguide.md) for more details.
+See [here](/v3.0/reference/tispark/datasource-api-userguide.md) for more details.
 
 ## Configuration
 
