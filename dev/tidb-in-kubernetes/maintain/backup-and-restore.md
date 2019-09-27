@@ -131,9 +131,9 @@ For the detailed guide of maintaining TiDB Binlog in Kubernetes, refer to [TiDB 
 
 To decrease the capability of Pump, make Pump nodes offline and then run the `helm upgrade` command to delete Pump pods.
 
-1. Make Pump nodes offline
+1. Make Pump nodes offline from the TiDB cluster
 
-    Suppose there are 3 Pump nodes, and you want to remove the third node and modify `<ordinal-id>` to `2`, run the following command. `<version>` is the current version of TiDB.
+    Suppose there are 3 Pump nodes, and you want to get the third node offline and modify `<ordinal-id>` to `2`, run the following command. `<version>` is the current version of TiDB.
 
     {{< copyable "shell-regular" >}}
 
@@ -141,7 +141,7 @@ To decrease the capability of Pump, make Pump nodes offline and then run the `he
     kubectl run offline-pump-<ordinal-id> --image=pingcap/tidb-binlog:<version> --namespace=<namespace> --restart=OnFailure -- /binlogctl -pd-urls=http://<release-name>-pd:2379 -cmd offline-pump -node-id <release-name>-pump-<ordinal-id>:8250
     ```
 
-    Then, check the log output of Pump. If Pump outputs `pump offline, please delete my pod`, the state of the Pump node is successfully switched to offline.
+    Then, check the log output of Pump. If Pump outputs `pump offline, please delete my pod`, the state of the Pump node is successfully switched to `offline`.
 
     {{< copyable "shell-regular" >}}
 
