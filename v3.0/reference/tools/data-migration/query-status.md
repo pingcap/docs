@@ -19,7 +19,7 @@ This document introduces the query result and subtask status of Data Migration (
     "workers": [                            # DM-worker list.
         {
             "result": true,
-            "worker": "172.17.0.2:10081",   # The `host:port` information of the DM-worker.
+            "worker": "172.17.0.2:8262",   # The `host:port` information of the DM-worker.
             "msg": "",
             "subTaskStatus": [              # The information of all the subtasks of the DM-worker.
                 {
@@ -83,7 +83,7 @@ This document introduces the query result and subtask status of Data Migration (
         },
         {
             "result": true,
-            "worker": "172.17.0.3:10081",
+            "worker": "172.17.0.3:8262",
             "msg": "",
             "subTaskStatus": [
                 {
@@ -112,7 +112,7 @@ This document introduces the query result and subtask status of Data Migration (
         },
         {
             "result": true,
-            "worker": "172.17.0.6:10081",
+            "worker": "172.17.0.6:8262",
             "msg": "",
             "subTaskStatus": [
                 {
