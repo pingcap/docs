@@ -263,3 +263,7 @@ A: You can ignore this warning. It occurs because Spark tries to load two nonexi
 Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned when executing SQL statements using TiSpark?
 
 A: This error occurs because the length of the data written exceeds the length of the data type defined by the database. You can check the field length and adjust it accordingly.
+
+Q: Does TiSpark task read Hive metadata by default?
+
+A: TiSpark searches for the hive library by reading the meta in the hive-site. If TiSpark fails to find it, TiSpark searches for the tidb library instead by reading tidb meta. Do not configure hive's meta in hive site if it is unnecessary for you.
