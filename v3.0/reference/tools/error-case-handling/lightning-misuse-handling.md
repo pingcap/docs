@@ -7,7 +7,7 @@ category: reference
 
 This article introduces common error scenarios in using [TiDB Lightning](/v3.0/reference/tools/tidb-lightning/overview.md) and corresponding solutions.
 
-## error：`checksum mismatched remote vs local`
+## Error: `checksum mismatched remote vs local`
 
 The following error was encountered during data import:
 
@@ -17,10 +17,10 @@ Error: checksum mismatched remote vs local => (checksum: 3828723015727756136 vs 
 
 ### Reasons
 
-* TiDB Lightning has been used to import data previously. This means the data was not cleaned in the corresponding [checkpoint](/v3.0/reference/tools/tidb-lightning/checkpoints.md). You can check first launch log in TiDB Lightning to confirm:
+* TiDB Lightning has been used to import data previously. This means the data was not cleaned in the corresponding [checkpoint](/v3.0/reference/tools/tidb-lightning/checkpoints.md). You can check the first launch log in TiDB Lightning to confirm:
 
     * `[checkpoint] driver = file`. If the log corresponding to TiDB Lightning data import shows `open checkpoint file failed, going to create a new one`, then `checkpoint` is cleaned properly. Otherwise, the remaining data may lead to imported data missing.
-    * `[checkpoint] driver = mysql`. You can use TiDB API`curl http://{TiDBIP}:10080/schema/{checkpoint.schema}/{checkpoint.table}` to query the creation time of corresponding `checkpoint table`, and then confirm whether the remaining data is cleaned.
+    * `[checkpoint] driver = mysql`. You can use TiDB API `curl http://{TiDBIP}:10080/schema/{checkpoint.schema}/{checkpoint.table}` to query the creation time of corresponding `checkpoint table`, and then confirm whether the remaining data is cleaned.
 
 * TiDB Lightning imported conflicting data from data sources.
     * Data in different rows have the same primary key or unique key.
