@@ -286,11 +286,10 @@ Global Flags:
 > **Note:**
 >
 > The differences between `pause-task` and `stop-task` are:
-> 
+>
 > - `pause-task` only pauses a replication task, and the task information is retained in the memory, so that you can query using `query-status`. `stop-task` terminates a replication task and removes all task related information from the memory. This means you cannot use `query-status` to query. Data and the corresponding `dm_meta` like "checkpoint" that have been replicated to downstream are not affected.
 >
 > - `pause-task` is generally used to pause the task for troubleshooting, while `stop-task` is used to permanently end a replication task, or co-work with `start-task` to update the configuration information.
-
 
 #### Command usage example
 
@@ -466,7 +465,7 @@ You can use the `update-task` command to update the data replication task. The f
 - column mapping rules
 
 > **Note:**
-> 
+>
 > If you can make sure that the relay log required by the replication task will not be removed when the task is stopped, it is recommended that you use [Update items that do not support online update](#Update-items-that-do-not-support-online-update) to update task configurations.
 
 #### Update items that support online update
@@ -614,7 +613,6 @@ check-task task-test.yaml
 Relay units automatically run after the DM-worker thread starts. You can use the  `pause-relay` command to pause the running relay units.
 
 When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `pause-relay` to make corresponding changes on DM. For instructions on how to make the change, refer to [虚拟 IP 环境下的上游主从切换](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
-
 
 {{< copyable "" >}}
 
@@ -793,7 +791,7 @@ switch-relay-master -w "172.16.30.15:8262"
 
 ### Manually purge relay log
 
-DM support [Auto clean relay log](/dev/reference/tools/data-migration/relay-log.md#自动数据清理). You can also use `purge-relay` to [手动清理 relay log](/dev/reference/tools/data-migration/relay-log.md#手动数据清理)。
+DM support [Automatic data purge](/dev/reference/tools/data-migration/relay-log.md#automatic-data-purge). You can also use `purge-relay` to [manually purge data](/dev/reference/tools/data-migration/relay-log.md#manual-data-purge).
 
 {{< copyable "" >}}
 
