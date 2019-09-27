@@ -340,7 +340,7 @@ Load Balancers set the idle connection timeout. If no data is sent over a connec
 If a long query is interrupted when you use TiDB, check the middleware application between the client and the TiDB server.
 If you find that the idle timeout is not long enough for your query, try to set the timeout to a larger value. If you cannot reset it, enable the `tcp-keep-alive` option.
 
-In Linux, the keepalive packets are sent at the interval of 7,200 seconds by default. To shorten the interval, configure `sysctls` via the `podSecurityContext` field. Here is an example:
+In Linux, the first keepalive probe packet is sent after 7,200 seconds since the last data packet by default. To shorten the interval, configure `sysctls` via the `podSecurityContext` field. Here is an example:
 
 ```
 tidb:
