@@ -12,7 +12,8 @@
     - [How to Run TPC-C Test on TiDB](/dev/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/dev/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/dev/benchmark/tpcc.md)
-    - [DM Benchmark Report](/dev/benchmark/dm-v1-alpha.md)
+    - [DM 1.0-alpha Benchmark Report](/dev/benchmark/dm-v1-alpha.md)
+    - [DM 1.0-GA Benchmark Report](/dev/benchmark/dm-v1.0-ga.md)
 + Concepts
   - [Architecture](/dev/architecture.md)
   + Key Features
@@ -90,7 +91,7 @@
   + Upgrade
     - [Upgrade to Development Series](/dev/how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](/dev/how-to/upgrade/rolling-updates-with-ansible.md)
-    - [Upgrade TiDB Data Migration](/dev/how-to/upgrade/data-migration.md)
+    - [Upgrade TiDB Data Migration](/dev/reference/tools/data-migration/upgrade.md)
     - [Upgrade TiDB Binlog Cluster](/dev/how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/dev/how-to/troubleshoot/cluster-setup.md)
@@ -127,13 +128,16 @@
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/dev/how-to/migrate/from-aurora.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/data-migration.md)
+      - [Upgrade](/dev/reference/tools/data-migration/upgrade.md)
       - [FAQ](/dev/faq/data-migration.md)
     + TiDB Lightning
       - [Overview](/dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/dev/reference/tools/tidb-lightning/deployment.md)
+      - [Configuration](/dev/reference/tools/tidb-lightning/config.md)
       - [Checkpoints](/dev/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/dev/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/dev/reference/tools/tidb-lightning/csv.md)
+      - [Web Interface](/dev/reference/tools/tidb-lightning/web.md)
       - [Monitor](/dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/dev/faq/tidb-lightning.md)
@@ -350,6 +354,7 @@
     - [Destroy a TiDB cluster](/dev/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
     - [Maintain a Hosting Kubernetes Node](/dev/tidb-in-kubernetes/maintain/kubernetes-node.md)
     - [Backup and Restore](/dev/tidb-in-kubernetes/maintain/backup-and-restore.md)
+    - [Restore Data with TiDB Lightning](/dev/tidb-in-kubernetes/maintain/lightning.md)
     - [Collect Logs](/dev/tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](/dev/tidb-in-kubernetes/maintain/auto-failover.md)
     - [TiDB Binlog](/dev/tidb-in-kubernetes/maintain/tidb-binlog.md)
@@ -392,6 +397,7 @@
     - [3.0.0-beta.1](/dev/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/dev/releases/3.0beta.md)
   + v2.1
+    - [2.1.17](/dev/releases/2.1.17.md)
     - [2.1.16](/dev/releases/2.1.16.md)
     - [2.1.15](/dev/releases/2.1.15.md)
     - [2.1.14](/dev/releases/2.1.14.md)

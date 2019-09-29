@@ -12,7 +12,8 @@
     - [How to Run TPC-C Test on TiDB](/v3.0/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/tpcc.md)
-    - [DM Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
+    - [DM 1.0-alpha Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
+    - [DM 1.0-GA Benchmark Report](/v3.0/benchmark/dm-v1.0-ga.md)
 + Concepts
   - [Architecture](/v3.0/architecture.md)
   + Key Features
@@ -89,7 +90,7 @@
   + Upgrade
     - [Upgrade to TiDB 3.0](/v3.0/how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](/v3.0/how-to/upgrade/rolling-updates-with-ansible.md)
-    - [Upgrade TiDB Data Migration](/v3.0/how-to/upgrade/data-migration.md)
+    - [Upgrade TiDB Data Migration](/v3.0/reference/tools/data-migration/upgrade.md)
     - [Upgrade TiDB Binlog Cluster](/v3.0/how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.0/how-to/troubleshoot/cluster-setup.md)
@@ -126,6 +127,7 @@
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/v3.0/how-to/migrate/from-aurora.md)
       - [Troubleshoot](/v3.0/how-to/troubleshoot/data-migration.md)
+      - [Upgrade](/v3.0/reference/tools/data-migration/upgrade.md)
       - [FAQ](/v3.0/faq/data-migration.md)
     + TiDB Lightning
       - [Overview](/v3.0/reference/tools/tidb-lightning/overview.md)
@@ -349,6 +351,7 @@
     - [Destroy a TiDB cluster](/v3.0/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
     - [Maintain a Hosting Kubernetes Node](/v3.0/tidb-in-kubernetes/maintain/kubernetes-node.md)
     - [Backup and Restore](/v3.0/tidb-in-kubernetes/maintain/backup-and-restore.md)
+    - [Restore Data with TiDB Lightning](/v3.0/tidb-in-kubernetes/maintain/lightning.md)
     - [Collect Logs](/v3.0/tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](/v3.0/tidb-in-kubernetes/maintain/auto-failover.md)
     - [TiDB Binlog](/v3.0/tidb-in-kubernetes/maintain/tidb-binlog.md)
@@ -391,6 +394,7 @@
     - [3.0.0-beta.1](/v3.0/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/v3.0/releases/3.0beta.md)
   + v2.1
+    - [2.1.17](/v3.0/releases/2.1.17.md)
     - [2.1.16](/v3.0/releases/2.1.16.md)
     - [2.1.15](/v3.0/releases/2.1.15.md)
     - [2.1.14](/v3.0/releases/2.1.14.md)
