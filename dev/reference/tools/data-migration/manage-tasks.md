@@ -96,7 +96,7 @@ This section describes how to use the task management commands to execute corres
 
 ### Create the data replication task
 
-You can use the task management command to create the data replication task. Data Migration [prechecks the corresponding privileges and configuration automatically](/dev/reference/tools/data-migration/precheck.md) while starting the data replication.
+You can use the `start-task` command to create the data replication task. Data Migration [prechecks the corresponding privileges and configuration automatically](/dev/reference/tools/data-migration/precheck.md) while starting the data replication.
 
 {{< copyable "" >}}
 
@@ -331,7 +331,7 @@ resume-task test
 
 ### Stop the data replication task
 
-You can use the `stop-task` command to stop a data replication task. For differences between `stop-task` and `pause-task`, refer to [Pause the data replication task](#pause-the-data-replication-task)
+You can use the `stop-task` command to stop a data replication task. For differences between `stop-task` and `pause-task`, refer to [Pause the data replication task](#pause-the-data-replication-task).
 
 ```bash
 help stop-task
@@ -495,7 +495,7 @@ Besides the above commonly used task management commands, there are also other c
 
 ### Check task configuration file
 
-You can use the `check-task` command to check whether a specified configuration file (`task.yaml` of the replication task is valid, or whether the configuration of upstream/downstream database, permission setting, and schema meet the replication requirements. For more details, refer to [Precheck the upstream MySQL instance configuration](/dev/reference/tools/data-migration/precheck.md).
+You can use the `check-task` command to check whether a specified configuration file (`task.yaml`) of the replication task is valid, or whether the configuration of upstream/downstream database, permission setting, and schema meet the replication requirements. For more details, refer to [Precheck the upstream MySQL instance configuration](/dev/reference/tools/data-migration/precheck.md).
 
  `check-task` is also performed before `start-task`.
 
@@ -545,11 +545,11 @@ check-task task-test.yaml
 }
 ```
 
-### Pause the relay unit
+### Pause a relay unit
 
 Relay units automatically run after the DM-worker thread starts. You can use the `pause-relay` command to pause the running relay units.
 
-When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `pause-relay` to make corresponding changes on DM. For instructions on how to make the change, refer to [Upstream Master-Slave Switch in Virtual IP Environment](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
+When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `pause-relay` to make corresponding changes on DM. For instructions on how to make the changes, refer to [Upstream Master-Slave Switch in Virtual IP Environment](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
 
 {{< copyable "" >}}
 
@@ -606,7 +606,7 @@ pause-relay -w "172.16.30.15:8262"
 }
 ```
 
-### Resume relay unit
+### Resume a relay unit
 
 You can use the `resume-relay` command to resume a relay unit in `Paused` state.
 
