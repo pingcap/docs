@@ -24,7 +24,7 @@ Usage of dmctl:
  # Encrypts the database password according to the encryption method provided by DM; used in DM configuration files.
  -encrypt string
        encrypt plaintext to ciphertext
- # The dm-master access address. dmctl interacts with dm-master to complete task management operations.
+ # The DM-master access address. dmctl interacts with dm-master to complete task management operations.
  -master-addr string
        master API server addr
  -rpc-timeout string
@@ -98,6 +98,8 @@ This section describes how to use the task management commands to execute corres
 
 You can use the task management command to create the data replication task. Data Migration [prechecks the corresponding privileges and configuration automatically](/dev/reference/tools/data-migration/precheck.md) while starting the data replication.
 
+{{< copyable "" >}}
+
 ```bash
 help start-task
 start a task as defined in the config file
@@ -114,14 +116,16 @@ Global Flags:
 
 #### Command usage example
 
+{{< copyable "" >}}
+
 ```bash
 start-task [ -w "172.16.30.15:8262"] ./task.yaml
 ```
 
 #### Flags description
 
-- `-w`: (Optional) This flag specifies the group of DM-workers to execute `task.yaml`. If it is set, only subtasks of the specified task on these DM-workers are started.
-- `config_file`: (Required) This flag specifies the file path of `task.yaml`.
+- `-w`: (Optional) Specifies the group of DM-workers to execute `task.yaml`. If it is set, only subtasks of the specified task on these DM-workers are started.
+- `config_file`: (Required) Specifies the file path of `task.yaml`.
 
 #### Returned results
 
@@ -170,107 +174,30 @@ query-status
 
 #### Flags description
 
-- `-w`: (Optional) This flag specifies the group of DM-workers where the subtasks of the replication task (that you want to query) run.
-- `task-name`: (Optional) This flag specifies the task name. If it is not set, the results of all data replication tasks are returned.
+- `-w`: (Optional) Specifies the group of DM-workers where the subtasks of the replication task (that you want to query) run.
+- `task-name`: (Optional) Specifies the task name. If it is not set, the results of all data replication tasks are returned.
 
 #### Returned results
 
-```bash
-query-status
-{
-​    "result": true,
-​    "msg": "",
-​    "workers": [
-​        {
-​            "result": true,
-​            "worker": "172.16.30.15:10081",
-​            "msg": "",
-​            "subTaskStatus": [
-​                {
-​                    "name": "test",
-​                    "stage": "Running",
-​                    "unit": "Sync",
-​                    "result": null,
-​                    "unresolvedDDLLockID": "",
-​                    "sync": {
-​                        "TotalEvents": "0",
-​                        "TotalTps": "0",
-​                        "RecentTps": "0",
-​                        "MasterBinlog": "(mysql-bin.000004, 484)",
-​                        "MasterBinlogGtid": "",
-​                        "SyncerBinlog": "(mysql-bin.000004, 484)",
-​                        "SyncerBinlogGtid": "",
-                        "blockingDDLs": [
-                        ],
-                        "unresolvedGroups": [
-                        ]
-​                    }
-​                }
-​            ],
-​            "relayStatus": {
-​                "MasterBinlog": "(mysql-bin.000004, 484)",
-​                "MasterBinlogGtid": "",
-                "relaySubDir": "0-1.000001",
-​                "RelayBinlog": "(mysql-bin.000004, 484)",
-​                "RelayBinlogGtid": "",
-                "relayCatchUpMaster": true,
-                "stage": "Running",
-                "result": null
-​            }
-​        },
-​        {
-​            "result": true,
-​            "worker": "172.16.30.16:10081",
-​            "msg": "",
-​            "subTaskStatus": [
-​                {
-​                    "name": "test",
-​                    "stage": "Running",
-​                    "unit": "Sync",
-​                    "result": null,
-​                    "unresolvedDDLLockID": "",
-​                    "sync": {
-​                        "TotalEvents": "0",
-​                        "TotalTps": "0",
-​                        "RecentTps": "0",
-​                        "MasterBinlog": "(mysql-bin.000004, 4809)",
-​                        "MasterBinlogGtid": "",
-​                        "SyncerBinlog": "(mysql-bin.000004, 4809)",
-​                        "SyncerBinlogGtid": "",
-                        "blockingDDLs": [
-                        ],
-                        "unresolvedGroups": [
-                        ]
-​                    }
-​                }
-​            ],
-​            "relayStatus": {
-​                "MasterBinlog": "(mysql-bin.000004, 4809)",
-​                "MasterBinlogGtid": "",
-                "relaySubDir": "0-1.000001",
-​                "RelayBinlog": "(mysql-bin.000004, 4809)",
-​                "RelayBinlogGtid": "",
-                "relayCatchUpMaster": true,
-                "stage": "Running",
-                "result": null
-​            }
-​        }
-​    ]
-}
-```
+For detailed description of query parameters and a complete list of returned result, refer to [Query status](/dev/reference/tools/data-migration/query-status/#query-result.md#).
 
-### Check run-time errors
+### Check query errors
 
-You can use `query-error` to check information of errors on replication tasks or relay units. Compared to `query-status`, `query-error` does not retrieve information not related to the error itself.
+You can use `query-error` to check error information on replication tasks or relay units. Compared to `query-status`, `query-error` only retrieves information related to the error itself.
 
-`query-error` is often used to obtain the binlog position information required by `sql-skip`/`sql-replace`. For details on the flags and results of `query-error`, refer to [`query-error` in Skip or Replace Abnormal SQL Statements](dev/reference/tools/data-migration/skip-replace-sqls/#query-error).
+`query-error` is often used to obtain the binlog position information required by `sql-skip`/`sql-replace`. For details on the flags and results of `query-error`, refer to [`query-error` in Skip or Replace Abnormal SQL Statements](/dev/reference/tools/data-migration/skip-replace-sqls/#query-error).
 
-### Pause the data replication task
+### Pause a data replication task
 
 You can use the `pause-task` command to pause a data replication task.
 
+{{< copyable "" >}}
+
 ```bash
 help pause-task
+```
+
+```
 pause a specified running task
 
 Usage:
@@ -287,7 +214,7 @@ Global Flags:
 >
 > The differences between `pause-task` and `stop-task` are:
 >
-> - `pause-task` only pauses a replication task, and the task information is retained in the memory, so that you can query using `query-status`. `stop-task` terminates a replication task and removes all task related information from the memory. This means you cannot use `query-status` to query. Data and the corresponding `dm_meta` like "checkpoint" that have been replicated to downstream are not affected.
+> - `pause-task` only pauses a replication task, and the task information is retained in the memory, so that you can query using `query-status`. `stop-task` terminates a replication task and removes all task related information from the memory. This means you cannot use `query-status` to query. Data and the corresponding `dm_meta` like "checkpoint" that have been replicated to the downstream are not affected.
 >
 > - `pause-task` is generally used to pause the task for troubleshooting, while `stop-task` is used to permanently end a replication task, or co-work with `start-task` to update the configuration information.
 
@@ -299,13 +226,16 @@ pause-task [-w "127.0.0.1:8262"] task-name
 
 #### Flags description
 
-- `-w`: (Optional) This flag specifies the group of DM-workers where the subtasks of the replication task (that you want to pause) run. If it is set, only subtasks on the specified DM-workers are paused.
-- `task-name`: (Required) This flag specifies the task name.
+- `-w`: (Optional) Specifies the group of DM-workers where the subtasks of the replication task (that you want to pause) run. If it is set, only subtasks on the specified DM-workers are paused.
+- `task-name`: (Required) Specifies the task name.
 
 #### Returned results
 
 ```bash
-» pause-task test
+pause-task test
+```
+
+```
 {
 ​    "op": "Pause",
 ​    "result": true,
@@ -335,10 +265,13 @@ pause-task [-w "127.0.0.1:8262"] task-name
 
 ### Resume the data replication task
 
-You can use the `resume-task` command to resume the data replication task in `Paused` state. This is generally used in scenarios where you want to manually resume a data replication task after you handle the errors that cause the task to pause.
+You can use the `resume-task` command to resume the data replication task in the `Paused` state. This is generally used in scenarios where you want to manually resume a data replication task after you handle the errors that cause the task to pause.
 
 ```bash
-» help resume-task
+help resume-task
+```
+
+```
 resume a specified paused task
 
 Usage:
@@ -359,14 +292,16 @@ resume-task [-w "127.0.0.1:8262"] task-name
 
 #### Flags description
 
-- `-w`: (Optional) This flag specifies the group of DM-workers where the subtasks of the replication task (that you want to restart) run. If it is set, only subtasks on the specified DM-workers are restarted.
-- `task-name`: (Required) This flag specifies the task name.
+- `-w`: (Optional) Specifies the group of DM-workers where the subtasks of the replication task (that you want to restart) run. If it is set, only subtasks on the specified DM-workers are restarted.
+- `task-name`: (Required) Specifies the task name.
 
 #### Returned results
 
 ```bash
 resume-task test
+```
 
+```bash
 {
      "op": "Resume",
      "result": true,
@@ -396,10 +331,13 @@ resume-task test
 
 ### Stop the data replication task
 
-You can use the `stop-task`  command to stop a data replication task. For differences between `stop-task` and `pause-task`, refer to [Pause the data replication task](#pause-the-data-replication-task)
+You can use the `stop-task` command to stop a data replication task. For differences between `stop-task` and `pause-task`, refer to [Pause the data replication task](#pause-the-data-replication-task)
 
 ```bash
 help stop-task
+```
+
+```
 stop a specified task
 
 Usage:
@@ -409,7 +347,7 @@ Flags:
  -h, --help   help for stop-task
 
 Global Flags:
- -w, --worker strings   dm-worker ID
+ -w, --worker strings   DM-worker ID
 ```
 
 #### Command usage example
@@ -420,14 +358,16 @@ stop-task [-w "127.0.0.1:8262"]  task-name
 
 #### Flags description
 
-- `-w`: (Optional) This flag specifies the group of DM-workers where the subtasks of the replication task (that you want to stop) run. If it is set, only subtasks on the specified DM-workers are stopped.
-- `task-name`: (Required) This flag specifies the task name.
+- `-w`: (Optional) Specifies the group of DM-workers where the subtasks of the replication task (that you want to stop) run. If it is set, only subtasks on the specified DM-workers are stopped.
+- `task-name`: (Required) Specifies the task name.
 
 #### Returned results
 
 ```bash
 stop-task test
+```
 
+```
 {
      "op": "Stop",
      "result": true,
@@ -478,7 +418,7 @@ You can use the `update-task` command to update the data replication task. The f
 
 3. Update the task configuration using `update-task task.yaml`.
 
-4. Restart the task using `resume-task <task-name>`.
+4. Resume the task using `resume-task <task-name>`.
 
 #### Update items that do not support online update
 
@@ -494,6 +434,9 @@ You can use the `update-task` command to update the data replication task. The f
 
 ```bash
 help update-task
+```
+
+```
 update a task's config for routes, filters, column-mappings, black-white-list
 
 Usage:
@@ -514,14 +457,16 @@ update-task [-w "127.0.0.1:8262"] ./task.yaml
 
 #### Flags description
 
-- `-w`: (Optional) This flag specifies the group of DM-workers where the subtasks of the replication task (that you want to update) run. If it is set, only subtasks on the specified DM-workers are updated.
-- `config-file`: (Required) This flag specifies the file path of `task.yaml`.
+- `-w`: (Optional) Specifies the group of DM-workers where the subtasks of the replication task (that you want to update) run. If it is set, only subtasks on the specified DM-workers are updated.
+- `config-file`: (Required) Specifies the file path of `task.yaml`.
 
 #### Returned results
 
 ```bash
 update-task task_all_black.yaml
+```
 
+```bash
 {
 ​    "result": true,
 ​    "msg": "",
@@ -540,14 +485,6 @@ update-task task_all_black.yaml
 }
 ```
 
-## Refresh worker tasks
-
-You can use the `refresh-worker-tasks` command to forcefully refresh the `task => DM-workers` mapping maintained in the DM-master memory.
-
-> **Note:**
->
-> Generally, you do not need to use it. You can use it only when you are ensured that the `task => DM-workers` mapping exists, but you are still prompted to refresh while you are executing other commands.
-
 ## Manage DDL locks
 
 Currently, DDL lock related commands mainly include `show-ddl-locks`, `unlock-ddl-lock`, `break-ddl-lock`, etc. For more information on their functions, usages, and applicable scenarios, refer to [Handle Sharding DDL Locks Manually](/dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md).
@@ -558,7 +495,7 @@ Besides the above commonly used task management commands, there are also other c
 
 ### Check task configuration file
 
-You can use the `check-task`  command to check whether a specified configuration file (`task.yaml` of the replication task is valid, or whether the configuration of upstream/downstream database, permission setting, and schema meet the replication requirements. For more details, refer to [Precheck the upstream MySQL instance configuration](/dev/reference/tools/data-migration/precheck.md)。
+You can use the `check-task` command to check whether a specified configuration file (`task.yaml` of the replication task is valid, or whether the configuration of upstream/downstream database, permission setting, and schema meet the replication requirements. For more details, refer to [Precheck the upstream MySQL instance configuration](/dev/reference/tools/data-migration/precheck.md).
 
  `check-task` is also performed before `start-task`.
 
@@ -610,9 +547,9 @@ check-task task-test.yaml
 
 ### Pause the relay unit
 
-Relay units automatically run after the DM-worker thread starts. You can use the  `pause-relay` command to pause the running relay units.
+Relay units automatically run after the DM-worker thread starts. You can use the `pause-relay` command to pause the running relay units.
 
-When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `pause-relay` to make corresponding changes on DM. For instructions on how to make the change, refer to [虚拟 IP 环境下的上游主从切换](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
+When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `pause-relay` to make corresponding changes on DM. For instructions on how to make the change, refer to [Upstream Master-Slave Switch in Virtual IP Environment](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
 
 {{< copyable "" >}}
 
@@ -673,7 +610,7 @@ pause-relay -w "172.16.30.15:8262"
 
 You can use the `resume-relay` command to resume a relay unit in `Paused` state.
 
-When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `resume-relay` to make corresponding changes on DM. For instructions on how to make the changes, refer to [虚拟 IP 环境下的上游主从切换](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
+When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `resume-relay` to make corresponding changes on DM. For instructions on how to make the changes, refer to [Upstream Master-Slave Switch in Virtual IP Environment](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
 
 {{< copyable "" >}}
 
@@ -732,9 +669,9 @@ resume-relay -w "172.16.30.15:8262"
 
 ### Switch the sub-directory for relay logs
 
-Relay units stores the binlog data from upstream MySQL instances in sub-directories. You can use the `switch-relay-master` command to swith the relay unit to use a new sub-directory.
+Relay units store the binlog data from upstream MySQL instances in sub-directories. You can use the `switch-relay-master` command to swith the relay unit to use a new sub-directory.
 
-When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `switch-relay-master` to make corresponding changes on DM. For instructions on how to make the changes, refer to [虚拟 IP 环境下的上游主从切换](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
+When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `switch-relay-master` to make corresponding changes on DM. For instructions on how to make the changes, refer to [Upstream Master-Slave Switch in Virtual IP Environment](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
 
 {{< copyable "" >}}
 
@@ -765,7 +702,7 @@ switch-relay-master -w "127.0.0.1:8262"
 
 #### Flags description
 
-- `-w`：(Required) Specifies the DM-worker for which to switch the relay unit
+- `-w`: (Required) Specifies the DM-worker for which to switch the relay unit
 
 #### Returned results
 
@@ -791,7 +728,7 @@ switch-relay-master -w "172.16.30.15:8262"
 
 ### Manually purge relay log
 
-DM support [Automatic data purge](/dev/reference/tools/data-migration/relay-log.md#automatic-data-purge). You can also use `purge-relay` to [manually purge data](/dev/reference/tools/data-migration/relay-log.md#manual-data-purge).
+DM supports [Automatic data purge](/dev/reference/tools/data-migration/relay-log.md#automatic-data-purge). You can also use `purge-relay` to [manually purge data](/dev/reference/tools/data-migration/relay-log.md#manual-data-purge).
 
 {{< copyable "" >}}
 
@@ -825,7 +762,7 @@ purge-relay -w "127.0.0.1:8262" --filename "mysql-bin.000003"
 #### Flags description
 
 - `-w`: (Required) Specifies the DM-worker for which to perform a clean operation
-- `--filename`: (Required)  Specifies the name of the terminal file before which to purge relay log files. For example, if the value is  `mysql-bin.000100`, the clean operation stops at `mysql-bin.000099`.
+- `--filename`: (Required) Specifies the name of the terminal file before which to purge relay log files. For example, if the value is `mysql-bin.000100`, the clean operation stops at `mysql-bin.000099`.
 - `--sub-dir`: (Optional) Specifies the relay log sub-directory corresponding to `--filename`. If not specified, the latest one is used.
 
 #### Returned results
@@ -853,11 +790,11 @@ purge-relay -w "127.0.0.1:8262" --filename "mysql-bin.000003"
 
 ### Preset skip operation
 
-`sql-skip` allows you to preset a skip operation that is to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`. For descriptions of related parameters and results, refer to [`sql-skip`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-skip)。
+`sql-skip` allows you to preset a skip operation to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`. For descriptions of related parameters and results, refer to [`sql-skip`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-skip).
 
 ### Preset replace operation
 
-`sql-replace` allows you to preset a replace operation that is to be executed when the position or the SQL statement of the binlog event matches with the specified binlog-pos or sql-pattern.. For descriptions of related parameters and results, refer to [`sql-replace`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-replace)。
+`sql-replace` allows you to preset a replace operation to be executed when the position or the SQL statement of the binlog event matches with the specified binlog-pos or sql-pattern.. For descriptions of related parameters and results, refer to [`sql-replace`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-replace).
 
 ### Forcefully refresh the `task => DM-workers` mapping
 
@@ -867,9 +804,17 @@ You can use the `refresh-worker-tasks` command to forcefully refresh the `task =
 >
 > Normally it is not necessary to use this command. Use it only when the `task => DM-workers` already exists and you are prompted to refresh it when executing other commands.
 
+## Refresh worker tasks
+
+You can use the `refresh-worker-tasks` command to forcefully refresh the `task => DM-workers` mapping maintained in the DM-master memory.
+
+> **Note:**
+>
+> Normally, you do not need to use this command. Use it only when you are sure that the `task => DM-workers` mapping exists, but you are still prompted to refresh while you are executing other commands.
+
 ## Deprecated or unrecommended commands
 
-The following commands are either deprecated or only used for debugging. They might be completely removed or their semantics might be changed in future versions. **Strongly Not recommended**。
+The following commands are either deprecated or only used for debugging purposes. They might be completely removed or their semantics might be changed in future versions. **Strongly Not Recommended**.
 
 - `migrate-relay`
 - `sql-inject`
