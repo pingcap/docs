@@ -11,7 +11,7 @@ aliases: ['/docs/tools/syncer/']
 
 Syncer is a tool used to import data incrementally. It is a part of the TiDB enterprise toolset.
 
-It can be [downloaded](/reference/tools/download.md) as part of the Enterprise Tools package.
+It can be [downloaded](/v3.0/reference/tools/download.md) as part of the Enterprise Tools package.
 
 ## Syncer architecture
 
@@ -23,7 +23,7 @@ You can deploy Syncer to any of the machines that can connect to MySQL or the Ti
 
 ## Use Syncer to import data incrementally
 
-Before importing data, read [Check before importing data using Syncer](#check-before-importing-data-using-syncer).
+Before importing data, read [Check before importing data using Syncer](#check-before-replicating-data-using-syncer).
 
 ### 1. Set the position to replicate
 
@@ -463,7 +463,7 @@ Before replicating data using Syncer, check the following items:
 
 6. Check the Character Set.
 
-    TiDB differs from MySQL in [Character Set](/reference/sql/character-set.md).
+    TiDB differs from MySQL in [Character Set](/v3.0/reference/sql/character-set.md).
 
 ## Syncer monitoring solution
 

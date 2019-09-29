@@ -161,7 +161,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to set whether to divide the data for deletion automatically. It is valid only when you delete from a single table and `autocommit` is enabled. For the definition of single-table DELETE statement, see [here](https://dev.mysql.com/doc/refman/8.0/en/delete.html).
+- This variable is used to set whether to divide the data for deletion automatically. It is valid only when you delete from a single table and `autocommit` is enabled. For the definition of single-table DELETE statement, see [DELETE Syntax](https://dev.mysql.com/doc/refman/8.0/en/delete.html).
 - When deleting a large amount of data, you can set the variable value to `1`. Then, the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction. This operation breaks the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ### tidb_dml_batch_size
@@ -261,7 +261,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    To decide whether you can enable automatic retry, see [description of optimistic transactions](/reference/transactions/transaction-isolation.md#description-of-optimistic-transactions).
+    To decide whether you can enable automatic retry, see [description of optimistic transactions](/v2.1/reference/transactions/transaction-isolation.md#transaction-retry).
 
 ### tidb_backoff_weight
 

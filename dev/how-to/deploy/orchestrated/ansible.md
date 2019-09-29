@@ -18,14 +18,14 @@ You can use the TiDB Ansible configuration file to set up the cluster topology a
 
 - Initialize operating system parameters
 - Deploy the whole TiDB cluster
-- [Start the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
-- [Stop the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
-- [Modify component configuration](/how-to/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
-- [Scale the TiDB cluster](/how-to/scale/with-ansible.md)
-- [Upgrade the component version](/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
-- [Enable the cluster binlog](/reference/tidb-binlog-overview.md)
-- [Clean up data of the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
-- [Destroy the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
+- [Start the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
+- [Stop the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
+- [Modify component configuration](/dev/how-to/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
+- [Scale the TiDB cluster](/dev/how-to/scale/with-ansible.md)
+- [Upgrade the component version](/dev/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
+- [Enable the cluster binlog](/dev/reference/tidb-binlog-overview.md)
+- [Clean up data of the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
+- [Destroy the TiDB cluster](/dev/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
 
 ## Prepare
 
@@ -35,14 +35,14 @@ Before you start, make sure you have:
 
     - 4 or more machines
 
-        A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
+        A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md).
 
     - CentOS 7.3 (64 bit) or later, x86_64 architecture (AMD64)
     - Network between machines
 
     > **Note:**
     >
-    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
+    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/dev/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
 
 2. A Control Machine that meets the following requirements:
 
@@ -130,38 +130,18 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 ## Step 3: Download TiDB Ansible to the Control Machine
 
-1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. The relationship between the `tidb-ansible` version and the TiDB version is as follows:
+Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download TiDB Ansible from the master branch of the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
-    | TiDB version | tidb-ansible tag | Note |
-    | :-------- | :---------------- | :--- |
-    | 2.0 version | v2.0.10, v2.0.11 | It is the latest 2.0 stable version which can be used in the production environment. |
-    | 2.1 version | v2.1.1 ~ v2.1.8 | It is the latest 2.1 stable version which can be used in the production environment (recommended). |
-    | 3.0 version | v3.0.0-beta, v3.0.0-beta.1 | It is currently a beta version which is not recommended to use in the production environment. |
-    | `master` branch | None | It includes the newest features and is updated on a daily basis, so it is not recommended to use it in the production environment. |
+```
+$ git clone https://github.com/pingcap/tidb-ansible.git
+```
 
-2. Download the [corresponding TiDB Ansible versions](https://github.com/pingcap/tidb-ansible/tags) from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+> **Note:**
+>
+> - To deploy and upgrade TiDB clusters, use the corresponding version of `tidb-ansible`. If you only modify the version in the `inventory.ini` file, errors might occur.
+> - It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
-    > **Note:**
-    >
-    > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
-
-    - Download the tidb-ansible version with a specified tag:
-
-        ```
-        $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
-        ```
-
-    - Download the tidb-ansible version that corresponds to the `master` branch of TiDB:
-
-        ```
-        $ git clone https://github.com/pingcap/tidb-ansible.git
-        ```
-
-    > **Note:**
-    >
-    > It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
-
-    If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
+If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
 
 ## Step 4: Install Ansible and its dependencies on the Control Machine
 
@@ -375,7 +355,7 @@ You can choose one of the following two types of cluster topology according to y
 
 - [The cluster topology of a single TiKV instance on each TiKV node](#option-1-use-the-cluster-topology-of-a-single-tikv-instance-on-each-tikv-node)
 
-    In most cases, it is recommended to deploy one TiKV instance on each TiKV node for better performance. However, if the CPU and memory of your TiKV machines are much better than the required in [Hardware and Software Requirements](/how-to/deploy/hardware-recommendations.md), and you have more than two disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 TiKV instances on a single TiKV node.
+    In most cases, it is recommended to deploy one TiKV instance on each TiKV node for better performance. However, if the CPU and memory of your TiKV machines are much better than the required in [Hardware and Software Requirements](/dev/how-to/deploy/hardware-recommendations.md), and you have more than two disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 TiKV instances on a single TiKV node.
 
 - [The cluster topology of multiple TiKV instances on each TiKV node](#option-2-use-the-cluster-topology-of-multiple-tikv-instances-on-each-tikv-node)
 
@@ -491,9 +471,8 @@ location_labels = ["host"]
 
     > **Note:**
     >
-    > The number of TiKV instances is the number of TiKV processes on each server.
-
-    Recommended configuration: `capacity` = MEM_TOTAL \* 0.5 / the number of TiKV instances
+    > + The number of TiKV instances is the number of TiKV processes on each server.
+    > + Recommended configuration: `capacity` = MEM_TOTAL \* 0.5 / the number of TiKV instances
 
 2. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `high-concurrency`, `normal-concurrency` and `low-concurrency` parameters in the `tidb-ansible/conf/tikv.yml` file:
 
@@ -507,7 +486,9 @@ location_labels = ["host"]
         # low-concurrency: 8
     ```
 
-    Recommended configuration: the number of TiKV instances \* the parameter value = the number of CPU cores \* 0.8.
+    > **Note:**
+    >
+    > Recommended configuration: the number of TiKV instances \* the parameter value = the number of CPU cores \* 0.8.
 
 3. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
@@ -516,7 +497,9 @@ location_labels = ["host"]
       capacity: 0
     ```
 
-    Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
+    > **Note:**
+    >
+    > Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
 
 ## Step 10: Edit variables in the `inventory.ini` file
 
@@ -551,8 +534,8 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | cluster_name | the name of a cluster, adjustable |
 | tidb_version | the version of TiDB, configured by default in TiDB Ansible branches |
 | process_supervision | the supervision way of processes, systemd by default, supervise optional |
-| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/how-to/configure/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
-| enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](/how-to/deploy/hardware-recommendations.md#network-requirements) to the white list |
+| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/dev/how-to/configure/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
+| enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](/dev/how-to/deploy/hardware-recommendations.md#network-requirements) to the white list |
 | enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
 | set_hostname | to edit the hostname of the managed node based on the IP, False by default |
 | enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |

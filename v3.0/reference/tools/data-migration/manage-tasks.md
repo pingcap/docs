@@ -7,7 +7,7 @@ aliases: ['/docs/tools/dm/manage-task/']
 
 # Manage the Data Replication Task
 
-This document describes how to manage and maintain the data replication task using the [dmctl](/reference/tools/data-migration/overview.md#dmctl) component. For the Data Migration cluster deployed using DM-Ansible, the dmctl binary file is in `dm-ansible/dmctl`.
+This document describes how to manage and maintain the data replication task using the [dmctl](/v3.0/reference/tools/data-migration/overview.md#dmctl) component. For the Data Migration cluster deployed using DM-Ansible, the dmctl binary file is in `dm-ansible/dmctl`.
 
 ## dmctl basic usage
 
@@ -41,7 +41,7 @@ VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=
 
 ```bash
 # Enters the command line mode to interact with DM-master.
-$ ./dmctl -master-addr 172.16.30.14
+$ ./dmctl -master-addr 172.16.30.14:8261
 Welcome to dmctl
 Release Version: v1.0.0-100-g2bef6f8b
 Git Commit Hash: 2bef6f8beda34c0dff57377005c71589b48aa3c5
@@ -96,7 +96,7 @@ This section describes how to use the task management commands to execute the fo
 
 ### Create the data replication task
 
-You can use the task management command to create the data replication task. Data Migration [prechecks the corresponding privileges and configuration automatically](#precheck-the-upstream-mysql-instance-configuration) while starting the data replication.
+You can use the task management command to create the data replication task. Data Migration [prechecks the corresponding privileges and configuration automatically](/v3.0/reference/tools/data-migration/precheck.md) while starting the data replication.
 
 ```bash
 » help start-task
@@ -146,7 +146,7 @@ start-task [ -w "172.16.30.15:10081"] ./task.yaml
 
 ### Check the data replication task status
 
-You can use the `query-status` task management command to check the status of the data replication task. For details about the query result and subtask status, see [Query Status](/reference/tools/data-migration/query-status.md).
+You can use the `query-status` task management command to check the status of the data replication task. For details about the query result and subtask status, see [Query Status](/v3.0/reference/tools/data-migration/query-status.md).
 
 ```bash
 » help query-status
@@ -503,7 +503,7 @@ update-task [-w "127.0.0.1:10181"] ./task.yaml
 
 ## Manage the DDL locks
 
-See [Handle Sharding DDL Locks Manually](/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md).
+See [Handle Sharding DDL Locks Manually](/v3.0/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md).
 
 ## Refresh worker tasks
 

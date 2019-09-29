@@ -5,13 +5,13 @@ category: benchmark
 
 # How to Test TiDB Using Sysbench
 
-In this test, Sysbench 1.0.14 and TiDB 3.0 Beta are used. It is recommended to use Sysbench 1.0 or later, which can be downloaded [here](https://github.com/akopytov/sysbench/releases/tag/1.0.14).
+In this test, Sysbench 1.0.14 and TiDB 3.0 Beta are used. It is recommended to use Sysbench 1.0 or later, which can be [downloaded here](https://github.com/akopytov/sysbench/releases/tag/1.0.14).
 
 ## Test environment
 
-- [Hardware recommendations](/how-to/deploy/hardware-recommendations.md)
+- [Hardware recommendations](/dev/how-to/deploy/hardware-recommendations.md)
 
-- The TiDB cluster is deployed according to the [TiDB Deployment Guide](/how-to/deploy/orchestrated/ansible.md). Suppose there are 3 servers in total. It is recommended to deploy 1 TiDB instance, 1 PD instance and 1 TiKV instance on each server. As for disk space, supposing that there are 32 tables and 10M rows of data on each table, it is recommended that the disk space where TiKV's data directory resides is larger than 512 GB.
+- The TiDB cluster is deployed according to the [TiDB Deployment Guide](/dev/how-to/deploy/orchestrated/ansible.md). Suppose there are 3 servers in total. It is recommended to deploy 1 TiDB instance, 1 PD instance and 1 TiKV instance on each server. As for disk space, supposing that there are 32 tables and 10M rows of data on each table, it is recommended that the disk space where TiKV's data directory resides is larger than 512 GB.
 
 The number of concurrent connections to a single TiDB cluster is recommended to be under 500. If you need to increase the concurrency pressure on the entire system, you can add TiDB instances to the cluster whose number depends on the pressure of the test.
 
@@ -59,7 +59,7 @@ enabled = true
 
 Higher log level also means better performance for TiKV.
 
-As TiKV is deployed in clusters, the Raft algorithm can guarantee that data is written into most of the nodes. Therefore, except the scenarios where data security is extremely sensitive, `sync-log` can be disabled in raftstore.
+As TiKV is deployed in clusters, the Raft algorithm can guarantee that data is written into most of the nodes. Therefore, except the scenarios where data safety is extremely important, `sync-log` can be disabled in raftstore.
 
 There are 2 Column Families (Default CF and Write CF) on TiKV cluster which are mainly used to store different types of data. For the Sysbench test, the Column Family that is used to import data has a constant proportion among TiDB clusters:
 
@@ -87,7 +87,7 @@ sync-log = false
 capacity = "30GB"
 ```
 
-For more detailed information on TiKV performance tuning, see [Tune TiKV Performance](/reference/performance/tune-tikv.md).
+For more detailed information on TiKV performance tuning, see [Tune TiKV Performance](/dev/reference/performance/tune-tikv.md).
 
 ## Test process
 
