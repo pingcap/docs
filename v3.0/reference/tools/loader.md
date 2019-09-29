@@ -98,7 +98,7 @@ user = "root"
 password = ""
 port = 4000
 
-# sql_mode used when loading data. If the `sql-mode` value is not provided or set to "@DownstreamDefault", downstream global sql_mode will be used
+# `sql_mode` used when loading data. If the `sql-mode` value is not provided or set to "@DownstreamDefault", downstream global `sql_mode` will be used
 # sql-mode = ""
 
 # max-allowed-packet sets `max_allowed_packet` for database connection,
