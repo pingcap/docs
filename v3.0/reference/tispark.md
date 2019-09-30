@@ -263,3 +263,7 @@ A: You can ignore this warning. It occurs because Spark tries to load two nonexi
 Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned when executing SQL statements using TiSpark?
 
 A: This error occurs because the length of the data written exceeds the length of the data type defined by the database. You can check the field length and adjust it accordingly.
+
+Q: What can I do if `Error：java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdes seriaVersionUID ...` is returned when executing SQL statements using TiSpark?
+
+A: The error message means that you used `class` and `TiRegion` of different versions. Since TiRegion is unique to TiSpark, it is detected that there are multiple TiSpark packages. You need to ensure that the cluster is consistent with the local TiSpark dependencies.
