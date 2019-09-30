@@ -12,7 +12,8 @@
     - [How to Run TPC-C Test on TiDB](/v3.0/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/tpcc.md)
-    - [DM Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
+    - [DM 1.0-alpha Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
+    - [DM 1.0-GA Benchmark Report](/v3.0/benchmark/dm-v1.0-ga.md)
 + Concepts
   - [Architecture](/v3.0/architecture.md)
   + Key Features
@@ -282,6 +283,7 @@
     - [Generated Columns](/v3.0/reference/sql/generated-columns.md)
     - [Partitioning](/v3.0/reference/sql/partitioning.md)
     - [Character Set](/v3.0/reference/sql/character-set.md)
+    - [SQL Mode](/v3.0/reference/sql/sql-mode.md)
     - [Views](/v3.0/reference/sql/views.md)
   + Configuration
     + tidb-server
@@ -291,8 +293,10 @@
       - [Configuration File](/v3.0/reference/configuration/tidb-server/configuration-file.md)
     + pd-server
       - [Configuration Flags](/v3.0/reference/configuration/pd-server/configuration.md)
+      - [Configuration File](/v3.0/reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](/v3.0/reference/configuration/tikv-server/configuration.md)
+      - [Configuration File](/v3.0/reference/configuration/tikv-server/configuration-file.md)
   + Key Monitoring Metrics
     - [Overview](/v3.0/reference/key-monitoring-metrics/overview-dashboard.md)
     - [TiDB](/v3.0/reference/key-monitoring-metrics/tidb-dashboard.md)
