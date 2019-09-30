@@ -18,7 +18,7 @@ This document is targeted for users who want to upgrade from TiDB 2.0 (above V2.
     - Stop the cluster and upgrade to 2.1 directly
     - Roll update to 2.0.1 or later 2.0.x versions, and then roll update to the 2.1 version
 
-> **Note：**
+> **Note:**
 >
 > Do not execute any DDL statements during the upgrading process, otherwise the undefined behavior error might occur.
 
@@ -34,13 +34,34 @@ To make it easy to manage dependencies, use `pip` to install Ansible and its dep
 
 After the installation is finished, you can view the version information using the following command:
 
-```shell
+{{< copyable "shell-regular" >}}
+
+```bash
 $ ansible --version
+```
+
+```
 ansible 2.7.11
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
 $ pip show jinja2
+```
+
+```
 Name: Jinja2
 Version: 2.10
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
 $ pip show jmespath
+```
+
+```
 Name: jmespath
 Version: 0.9.0
 ```
@@ -57,13 +78,16 @@ Version: 0.9.0
 
 2. Back up the `tidb-ansible` folders of TiDB 2.0 or TiDB 2.1 versions using the following command:
 
-    ```shell
+    {{< copyable "shell-regular" >}}
+
+    ```bash
     $ mv tidb-ansible tidb-ansible-bak
-    ```
 
 3. Download the tidb-ansible with the tag corresponding to TiDB 3.0. For more details, See [Download TiDB Ansible to the Control Machine](/v3.0/how-to/deploy/orchestrated/ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`.
 
-    ```shell
+    {{< copyable "shell-regular" >}}
+
+    ```bash
     $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
     ```
 
@@ -75,9 +99,9 @@ Log in to the Control Machine using the `tidb` user account and enter the `/home
 
 Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansible-bak/inventory.ini` backup file.
 
->**Note:**
+> **Note:**
 >
->Pay special attention to the following variables configuration. For variable meaning, see [Description of other variables](/v3.0/how-to/deploy/orchestrated/ansible.md#edit-other-variables-optional).
+> Pay special attention to the following variables configuration. For variable meaning, see [Description of other variables](/v3.0/how-to/deploy/orchestrated/ansible.md#edit-other-variables-optional).
 
 1. Make sure that `ansible_user` is the normal user. For unified privilege management, remote installation using the root user is no longer supported. The default configuration uses the `tidb` user as the SSH remote user and the program running user.
 
@@ -140,7 +164,9 @@ If you have previously customized the configuration file of TiDB cluster compone
 
 Make sure that `tidb_version = v3.0.0` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB 2.1 binary to the Control Machine:
 
-```
+{{< copyable "shell-regular" >}}
+
+```bash
 $ ansible-playbook local_prepare.yml
 ```
 
@@ -148,13 +174,17 @@ $ ansible-playbook local_prepare.yml
 
 - If the `process_supervision` variable uses the default `systemd` parameter, perform a rolling update to the TiDB cluster using `excessive_rolling_update.yml`.
 
-    ```shell
+    {{< copyable "shell-regular" >}}
+
+    ```bash
     $ ansible-playbook excessive_rolling_update.yml
     ```
 
 - If the `process_supervision` variable uses the `supervise` parameter, perform a rolling update to the TiDB cluster using `rolling_update.yml`.
 
-    ```shell
+    {{< copyable "shell-regular" >}}
+
+    ```bash
     $ ansible-playbook rolling_update.yml
     ```
 
@@ -164,6 +194,8 @@ $ ansible-playbook local_prepare.yml
 
 ## Step 6: Perform a rolling update to TiDB monitoring components
 
-```shell
+{{< copyable "shell-regular" >}}
+
+```bash
 $ ansible-playbook rolling_update_monitor.yml
 ```
