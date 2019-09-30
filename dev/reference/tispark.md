@@ -265,4 +265,4 @@ A: This error occurs because the length of the data written exceeds the length o
 
 Q: What can I do if `Error：java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdes seriaVersionUID ...` is returned when executing SQL statements using TiSpark?
 
-A: The error message means that you used `class` and `TiRegion` of different versions. Since TiRegion is unique to TiSpark, it is detected that there are multiple TiSpark packages. You need to ensure that the cluster is consistent with the local TiSpark dependencies.
+A: The error message means that you used `class` and `TiRegion` of different versions. Since `TiRegion` is unique to TiSpark, it is detected that there are multiple TiSpark packages. You need to ensure that the cluster is consistent with the local TiSpark dependencies.
