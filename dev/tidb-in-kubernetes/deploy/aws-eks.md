@@ -238,7 +238,7 @@ By default, the terraform script will create a new VPC. You can use an existing 
 
 An Amazon EC2 instance is also created by default as the bastion machine to connect to the created TiDB cluster. This is because the TiDB service is exposed as an [Internal Elastic Load Balancer](https://aws.amazon.com/blogs/aws/internal-elastic-load-balancers/). The EC2 instance has MySQL and Sysbench pre-installed, so you can use SSH to log into the EC2 instance and connect to TiDB using the ELB endpoint. You can disable the bastion instance creation by setting `create_bastion` to `false` if you already have an EC2 instance in the VPC.
 
-The TiDB version and the number of components are also configurable in `variables.tf`.  You can customize these variables to suit your needs.
+The TiDB version and the number of components are also configurable in `variables.tf`. You can customize these variables to suit your needs.
 
 Currently, the instance type of the TiDB cluster component is not configurable because PD and TiKV depend on [NVMe SSD instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html), and different instance types have different disks.
 
@@ -248,11 +248,11 @@ The terraform scripts provide proper default settings for the TiDB cluster in EK
 
 For example, the default cluster uses `./default-cluster.yaml` as the overriding values file, and the ConfigMap rollout feature is enabled in this file.
 
-In EKS, some values are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelector`, and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `./tidb-cluster` module in the `clusters.tf` file directly.
+In EKS, some values are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelector` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `./tidb-cluster` module in the `clusters.tf` file directly.
 
 > **Note:**
 >
->It's not recommended to include the following configurations (default configurations of `tidb-cluster` module) in customized `values.yaml`:
+>It's not recommended to include the following configurations (default configurations of `tidb-cluster` module) in the customized `values.yaml`:
 >
 > ```
 > pd:
@@ -501,4 +501,4 @@ In addition, you can easily integrate these modules into your own Terraform work
 > * If you want to use these modules outside the tidb-operator project, make sure you copy the whole `modules` directory and keep the relative path of each module inside the directory unchanged.
 > * Due to limitation [hashicorp/terraform#2430](https://github.com/hashicorp/terraform/issues/2430#issuecomment-370685911) of Terraform, the hack processing of Helm provider is necessary in the above example. It is recommended that you keep it in your own Terraform scripts.
 
-If you are unwilling to write Terraform code, you can also copy the `deploy/aws` directory to create new Kubernetes clusters. But note that you cannot copy a directory that you have already run `terraform apply` against, when the Terraform state already exists in local.  In this case, it is recommended to clone a new repository before copying the directory.
+If you are unwilling to write Terraform code, you can also copy the `deploy/aws` directory to create new Kubernetes clusters. But note that you cannot copy a directory that you have already run `terraform apply` against, when the Terraform state already exists in local. In this case, it is recommended to clone a new repository before copying the directory.
