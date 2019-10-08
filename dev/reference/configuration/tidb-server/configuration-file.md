@@ -233,4 +233,4 @@ Configuration about the transaction latch. It is recommended to enable it when m
 ### `capacity`
 
 - The number of slots corresponding to Hash, which automatically adjusts upward to an exponential multiple of 2. Each slot occupies 32 Bytes of memory. If set too small, it might result in slower running speed and poor performance in the scenario where data writing covers a relatively large range (such as importing data).
-- Default: 1024000
+- Default: 2048000
