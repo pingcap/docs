@@ -103,3 +103,7 @@ Before using the DM tool, note the following restrictions:
     - After DM-worker is restarted, the data replication task cannot be automatically restored. You need to manually run `start-task`. For details, see [Manage the Data Replication Task](/v2.1/reference/tools/data-migration/manage-tasks.md).
 
     - After DM-worker is restarted, the DDL lock replication cannot be automatically restored in some conditions. You need to manually handle it. For details, see [Handle Sharding DDL Locks Manually](/v2.1/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md).
+
++ DM-worker connection switch to another MySQL instance
+
+  If DM-worker connects the upstream MySQL instance behind virtual IP (VIP) and you change the MySQL instance that VIP actually directs at, DM might connect to the new and old MySQL instances at the same time. In this situation, the binlog replicated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage. To make necessary changes on DM manually, refer to [DM-worker connection switch behind virtual IP](/v2.1/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#DM-worker-connection-switch-behind-virtual-IP).
