@@ -9,8 +9,14 @@ aliases: ['/docs/tools/binlog/deploy/','/docs/v3.0/how-to/deploy/tidb-binlog/']
 
 This document describes two methods of deploying TiDB Binlog:
 
-- [Deploy TiDB Binlog using TiDB Ansible](#deploy-tidb-binlog-using-tidb-ansible)
-- [Deploy TiDB Binlog using a Binary package](#deploy-tidb-binlog-using-a-binary-package)
+- [TiDB Binlog Cluster Deployment](#tidb-binlog-cluster-deployment)
+  - [Deploy TiDB Binlog using TiDB Ansible](#deploy-tidb-binlog-using-tidb-ansible)
+    - [Step 1: Download TiDB Ansible](#step-1-download-tidb-ansible)
+    - [Step 2: Deploy Pump](#step-2-deploy-pump)
+    - [Step 3: Deploy Drainer](#step-3-deploy-drainer)
+  - [Deploy TiDB Binlog using a Binary package](#deploy-tidb-binlog-using-a-binary-package)
+    - [Download the official Binary package](#download-the-official-binary-package)
+    - [The usage example](#the-usage-example)
 
 It is recommended to deploy TiDB Binlog using TiDB Ansible. If you just want to do a simple testing, you can deploy TiDB Binlog using a Binary package.
 
@@ -71,7 +77,7 @@ In environments of development, testing and production, the requirements on serv
         172.16.10.74
         ```
 
-        Pump retains the data of the latest 7 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file and remove the related comments:
+        Pump retains the data of the latest 7 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file (direct to direct to the pump.yml file in TiDB 3.0.1 or earlier) and remove the related comments:
 
         ```yaml
         global:
