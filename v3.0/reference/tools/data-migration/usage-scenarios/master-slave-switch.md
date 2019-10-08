@@ -6,6 +6,8 @@ category: reference
 
 # DM-worker Connection Switch Between Upstream MySQL Instances
 
+When the upstream MySQL instance that DM-worker connects to needs a downtime maintenance or when the instance crashes unexpectedly, you need to switch the DM-worker connection to another MySQL instance within the same replication group.
+
 This document introduces how to switch the DM-worker connection from one upstream MySQL instance to another within the same master-slave replication cluster.
 
 > **Note:**

@@ -118,7 +118,7 @@
       + Usage Scenarios
         - [Simple Scenario](/dev/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/dev/reference/tools/data-migration/usage-scenarios/shard-merge.md)
-        - [DM-worker Switch Between MySQL Instances](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md)
+        - [DM-worker Connection Switch Between MySQL Instances](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md)
       - [Deploy](/dev/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/dev/reference/tools/data-migration/configure/overview.md)
