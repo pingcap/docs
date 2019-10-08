@@ -412,9 +412,9 @@ You can customize the TiDB operator by specifying overriding values through the 
 {{< copyable "" >}}
 
 ```
-variable "override_values" {	operator_helm_values = <<EOF
+operator_helm_values = <<EOF
 controllerManager:
-}	resources:
+  resources:
     limits:
       cpu: 250m
       memory: 150Mi
