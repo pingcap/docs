@@ -38,7 +38,7 @@ Hardware information:
 
 Others:
 
-* network rtt between servers: rtt min/avg/max/mdev = 0.074/0.088/0.121/0.019 ms
+* Network rtt between servers: rtt min/avg/max/mdev = 0.074/0.088/0.121/0.019 ms
 
 ### Cluster topology
 
@@ -68,7 +68,7 @@ MySQL1 (172.16.4.40) -> DM-worker1 (172.16.4.39) -> TiDB (172.16.4.41)
 
 #### Database table structure used for the test
 
-{{< copyable "sql-regular" >}}
+{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `sbtest` (
@@ -83,7 +83,7 @@ CREATE TABLE `sbtest` (
 
 #### Database configuration
 
-We use TiDB-ansiable to deploy TiDB cluster, and use default configuration provided in TiDB-ansible.
+We use TiDB Ansible to deploy the TiDB cluster, and use default configuration provided in TiDB Ansible.
 
 ### Full import benchmark case
 
@@ -93,7 +93,7 @@ We use TiDB-ansiable to deploy TiDB cluster, and use default configuration provi
 - Use sysbench to create the table and generate the initial data in upstream MySQL
 - Start DM-task in the `full` mode
 
-sysbench test script used for preparing initial data:
+Sysbench test script used for preparing initial data:
 
 {{< copyable "shell-regular" >}}
 
@@ -114,7 +114,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### Benchmark result with different pool size in load unit
 
-Full import data size in benchmark case is 3.78 GB, which is generated from sysbench by the following script
+Full import data size in benchmark case is 3.78 GB, which is generated from sysbench by the following script:
 
 {{< copyable "shell-regular" >}}
 
@@ -133,7 +133,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### Benchmark result with different row count in per statement
 
-Full import data size in this benchmark case is 3.78 GB, load unit pool size ueses 32. The statement count is controlled by mydumper parameters.
+Full import data size in this benchmark case is 3.78 GB, load unit pool size uses 32. The statement count is controlled by mydumper parameters.
 
 | row count in per statement | mydumper extra-args  | latency of execution txn (s) | import time (s) | import speed (MB/s) | TiDB 99 duration (s) |
 | :------------------------: | :------------------: | :--------------------------: | :-------------: | :-----------------: | :------------------: |
@@ -150,8 +150,8 @@ Full import data size in this benchmark case is 3.78 GB, load unit pool size ues
 
 - Set up environment
 - Use sysbench to create the table and generate the initial data in upstream MySQL
-- Start DM-task in the `all` mode, and wait task enters `sync` unit
-- Use sysbench to generate incremental data in upstream MySQL and observe grafana metrics and DM `query-status`
+- Start DM-task in the `all` mode, and wait until the task enters `sync` unit
+- Use sysbench to generate incremental data in upstream MySQL, use `query-status` to watch the DM replication status, and observe the monitoring metrics of DM and TiDB on Grafana
 
 #### Benchmark result for incremental replication
 
@@ -163,13 +163,13 @@ Upstream sysbench test script:
 sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --report-interval=10 --time=1800 run
 ```
 
-DM sync unit worker-count is 32, batch size is 100 in this benchmark case.
+DM sync unit `worker-count` is 32, and `batch` size is 100 in this benchmark case.
 
 | items                      | qps                                                            | tps                                                          | 95% Latency                  |
 | :------------------------: | :------------------------------------------------------------: | :----------------------------------------------------------: | :--------------------------: |
 | MySQL                      | 42.79k                                                         | 42.79k                                                       | 1.18ms                       |
 | DM relay log unit          | -                                                              | 11.3MB/s                                                     | 45us (read duration)         |
-| DM binlog replication unit | 22.97k (binlog event received qps, not inclued skipped events) | -                                                            | 20ms (txn execution latency) |
+| DM binlog replication unit | 22.97k (binlog event received qps, not including skipped events) | -                                                            | 20ms (txn execution latency) |
 | TiDB                       | 31.30k (Begin/Commit 3.93k Insert 22.76k)                      | 4.16k                                                        | 95%: 6.4ms 99%: 9ms          |
 
 #### Benchmark result with different sync unit concurrency
@@ -194,12 +194,12 @@ DM sync unit worker-count is 32, batch size is 100 in this benchmark case.
 
 ### dump unit
 
-we recommend the statement size between 200KB and 1MB, and row count in one statement is approximately 1000-5000, which is based on the row size in your scenario.
+We recommend that the statement size be 200 KB~1 MB, and row count in each statement be approximately 1000~5000, which is based on the actual row size in your scenario.
 
 ### load unit
 
-we recommend to set `pool-size` to 16
+We recommend that you set `pool-size` to 16.
 
 ### sync unit
 
-we recommend to set `batch` size to 100 and `worker-count` between 16 and 32.
+We recommend that you set `batch` size to 100 and `worker-count` to 16~32.
