@@ -177,7 +177,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to set whether to divide the data for deletion automatically. It is valid only when you delete from a single table and `autocommit` is enabled. For the definition of single-table DELETE statement, see [here](https://dev.mysql.com/doc/refman/8.0/en/delete.html).
+- This variable is used to set whether to divide the data for deletion automatically. It is valid only when you delete from a single table and `autocommit` is enabled. For the definition of single-table DELETE statement, see [DELETE Syntax](https://dev.mysql.com/doc/refman/8.0/en/delete.html).
 - When deleting a large amount of data, you can set the variable value to `1`. Then, the data for deletion is automatically divided into multiple batches and each batch is deleted by a single transaction. This operation breaks the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
 
 ### tidb_dml_batch_size
@@ -515,3 +515,9 @@ set tidb_query_log_max_len = 20
 - Scope: GLOBAL
 - Default value: 0
 - By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
+
+### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.8 and v3.0.4</span>
+
+- Scope: SESSION
+- Default value: 0
+- This variable is used to set whether the `auto_increment` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
