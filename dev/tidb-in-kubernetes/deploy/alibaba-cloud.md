@@ -116,7 +116,7 @@ All the instances except ACK mandatory workers are deployed across availability 
     >
     > You can use the `terraform output` command to get the output again.
 
-3. You can then interact with the ACK cluster using `kubectl` or `helm` 
+3. You can then interact with the ACK cluster using `kubectl` or `helm`
 
     {{< copyable "shell-regular" >}}
 
