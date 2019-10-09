@@ -128,7 +128,7 @@ If the column of index idx2 is of time type like timestamp/datetime, and you wan
 SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-This statemnt spilts the region of index idx2 in table t into 10 Regions from  `2010-01-01 00:00:00` to  `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue,  2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)` and so on.
+This statement splits the region of index idx2 in table t into 10 Regions from  `2010-01-01 00:00:00` to  `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue,  2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)` and so on.
 
 Region split methods for other types of index columns are similar.
 
@@ -202,4 +202,4 @@ region4:   [ 3<<61     ,  +inf  )
 
 ## Related session variable
 
-There are two `SPLIT REGION` related session variables: `tidb_wait_split_region_finish` and `tidb_wait_split_region_timeout`. For details, see [TiDB specific system variables and syntax](/v3.0/reference/configuration/tidb-server/tidb-specific-variables.md).
+There are two `SPLIT REGION` related session variables: `tidb_wait_split_region_finish` and `tidb_wait_split_region_timeout`. For details, see [TiDB specific system variables and syntax](/v2.1/reference/configuration/tidb-server/tidb-specific-variables.md).
