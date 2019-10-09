@@ -24,11 +24,11 @@ Usage of dmctl:
  # Encrypts the database password according to the encryption method provided by DM; used in DM configuration files.
  -encrypt string
        encrypt plaintext to ciphertext
- # The DM-master access address. dmctl interacts with dm-master to complete task management operations.
+ # The DM-master access address. dmctl interacts with the DM-master to complete task management operations.
  -master-addr string
        master API server addr
  -rpc-timeout string
-       rpc timeout, default is 10m (default "10m")
+       rpc timeout ("10m" by default)
 ```
 
 ### Database password encryption
@@ -179,13 +179,13 @@ query-status
 
 #### Returned results
 
-For detailed description of query parameters and a complete list of returned result, refer to [Query status](/dev/reference/tools/data-migration/query-status/#query-result.md#).
+For detailed description of query parameters and a complete list of returned result, refer to [Query status](/dev/reference/tools/data-migration/query-status#query-result.md#).
 
 ### Check query errors
 
 You can use `query-error` to check error information on replication tasks or relay units. Compared to `query-status`, `query-error` only retrieves information related to the error itself.
 
-`query-error` is often used to obtain the binlog position information required by `sql-skip`/`sql-replace`. For details on the flags and results of `query-error`, refer to [`query-error` in Skip or Replace Abnormal SQL Statements](/dev/reference/tools/data-migration/skip-replace-sqls/#query-error).
+`query-error` is often used to obtain the binlog position information required by `sql-skip`/`sql-replace`. For details on the flags and results of `query-error`, refer to [`query-error` in Skip or Replace Abnormal SQL Statements](/dev/reference/tools/data-migration/skip-replace-sqls#query-error).
 
 ### Pause a data replication task
 
@@ -549,7 +549,7 @@ check-task task-test.yaml
 
 Relay units automatically run after the DM-worker thread starts. You can use the `pause-relay` command to pause the running relay units.
 
-When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `pause-relay` to make corresponding changes on DM. For instructions on how to make the changes, refer to [Upstream Master-Slave Switch in Virtual IP Environment](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
+When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, use `pause-relay` to make corresponding changes on DM.
 
 {{< copyable "" >}}
 
@@ -610,7 +610,7 @@ pause-relay -w "172.16.30.15:8262"
 
 You can use the `resume-relay` command to resume a relay unit in `Paused` state.
 
-When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `resume-relay` to make corresponding changes on DM. For instructions on how to make the changes, refer to [Upstream Master-Slave Switch in Virtual IP Environment](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
+When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, use `resume-relay` to make corresponding changes on DM.
 
 {{< copyable "" >}}
 
@@ -790,11 +790,11 @@ purge-relay -w "127.0.0.1:8262" --filename "mysql-bin.000003"
 
 ### Preset skip operation
 
-`sql-skip` allows you to preset a skip operation to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`. For descriptions of related parameters and results, refer to [`sql-skip`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-skip).
+You can use `sql-skip` to preset a skip operation to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`. For descriptions of related parameters and results, refer to [`sql-skip`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-skip).
 
 ### Preset replace operation
 
-`sql-replace` allows you to preset a replace operation to be executed when the position or the SQL statement of the binlog event matches with the specified binlog-pos or sql-pattern.. For descriptions of related parameters and results, refer to [`sql-replace`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-replace).
+You can use `sql-replace` to preset a replace operation to be executed when the position or the SQL statement of the binlog event matches with the specified binlog-pos or sql-pattern.. For descriptions of related parameters and results, refer to [`sql-replace`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-replace).
 
 ### Forcefully refresh the `task => DM-workers` mapping
 

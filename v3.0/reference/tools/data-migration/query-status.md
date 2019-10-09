@@ -80,6 +80,7 @@ This document introduces the query result and subtask status of Data Migration (
                 "stage": "Running",             # The status of the `Sync` processing unit of the relay log.
                 "result": null
             }
+            "sourceID": "172.17.0.2:3306"        # ID of the upstream instance or replication group
         },
         {
             "result": true,
