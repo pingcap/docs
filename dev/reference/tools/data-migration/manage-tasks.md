@@ -179,13 +179,13 @@ query-status
 
 #### Returned results
 
-For detailed description of query parameters and a complete list of returned result, refer to [Query status](/dev/reference/tools/data-migration/query-status#query-result.md#).
+For detailed description of query parameters and a complete list of returned result, refer to [Query status](/dev/reference/tools/data-migration/query-status.md).
 
 ### Check query errors
 
 You can use `query-error` to check error information on replication tasks or relay units. Compared to `query-status`, `query-error` only retrieves information related to the error itself.
 
-`query-error` is often used to obtain the binlog position information required by `sql-skip`/`sql-replace`. For details on the flags and results of `query-error`, refer to [`query-error` in Skip or Replace Abnormal SQL Statements](/dev/reference/tools/data-migration/skip-replace-sqls#query-error).
+`query-error` is often used to obtain the binlog position information required by `sql-skip`/`sql-replace`. For details on the flags and results of `query-error`, refer to [`query-error` in Skip or Replace Abnormal SQL Statements](/dev/reference/tools/data-migration/skip-replace-sqls.md#query-error).
 
 ### Pause a data replication task
 
