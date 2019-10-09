@@ -671,7 +671,7 @@ resume-relay -w "172.16.30.15:8262"
 
 Relay units store the binlog data from upstream MySQL instances in sub-directories. You can use the `switch-relay-master` command to swith the relay unit to use a new sub-directory.
 
-When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, you need to use `switch-relay-master` to make corresponding changes on DM. For instructions on how to make the changes, refer to [Upstream Master-Slave Switch in Virtual IP Environment](/dev/reference/tools/data-migration/usage-scenarios/master-slave-switch.md#虚拟-IP-环境下的上游主从切换).
+When you want to switch the DM-worker to connect to an upstream MySQL via a virtual IP, use `switch-relay-master` to make corresponding changes on DM.
 
 {{< copyable "" >}}
 
