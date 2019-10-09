@@ -100,8 +100,8 @@ port = 4000
 
 # `sql_mode` of session level used to connect to the database when loading data. If `sql-mode` is not provided or set to "@DownstreamDefault", the global `sql_mode` for downstream will be used.
 # sql-mode = ""
-# `max-allowed-packet` sets the maximum data packet allowed for database connection, which corresponds to the `max-allowed-packet` in system parameters. If set to 0, the global `max-allowed-packet` for downstream will be used.
-max-allowed-packet = 67108864
+# `max_allowed_packet` sets the maximum data packet allowed for database connection, which corresponds to the `max-allowed-packet` in system parameters. If set to 0, the global `max-allowed-packet` for downstream will be used.
+max_allowed_packet = 67108864
 
 # The sharding replicating rules support wildcharacter.
 # 1. The asterisk character (*, also called "star") matches zero or more characters,
