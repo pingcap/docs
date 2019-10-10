@@ -349,7 +349,7 @@ output "example-cluster_monitor-hostname" {
 
 When you finish modification, you can execute `terraform init` and `terraform apply` to create the TiDB cluster.
 
-If you remove `tidb-cluster` module, the corresponding TiDB cluster will be destroyed and EC2 resources will be released accordingly.
+To delete the TiDB cluster, you can remove the `tidb-cluster` module in `cluster.tf`, execute `terraform apply` and the corresponding EC2 resources will be released as well.
 
 ## Destroy clusters
 
