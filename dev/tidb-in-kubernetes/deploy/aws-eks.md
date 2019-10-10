@@ -248,7 +248,7 @@ The terraform scripts provide proper default settings for the TiDB cluster in EK
 
 For example, the default cluster uses `./default-cluster.yaml` as the overriding values file, and the ConfigMap rollout feature is enabled in this file.
 
-In EKS, some values are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelector` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `./tidb-cluster` module in the `clusters.tf` file directly.
+In EKS, some values are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelector` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `tidb-cluster` module in the `clusters.tf` file directly.
 
 > **Note:**
 >
@@ -291,7 +291,7 @@ variable "operator_values" {
 
 ## Manage multiple TiDB clusters
 
-An instance of `./tidb-cluster` module corresponds to a TiDB cluster in the EKS cluster. If you want to add a new TiDB cluster, you can edit `./cluster.tf` and add a new instance of `./tidb-cluster` module:
+An instance of `tidb-cluster` module corresponds to a TiDB cluster in the EKS cluster. If you want to add a new TiDB cluster, you can edit `./cluster.tf` and add a new instance of `tidb-cluster` module:
 
 ```hcl
 module example-cluster {
@@ -346,9 +346,9 @@ output "example-cluster_monitor-hostname" {
 }
 ```
 
-When you finish modification, you can execute `terraform init` and `terraform apply` to create a TiDB cluster.
+When you finish modification, you can execute `terraform init` and `terraform apply` to create the TiDB cluster.
 
-Once you remove `tidb-cluster` module, the corresponding TiDB cluster will be destroyed and EC2 resources will be released accordingly.
+If you remove `tidb-cluster` module, the corresponding TiDB cluster will be destroyed and EC2 resources will be released accordingly.
 
 ## Destroy clusters
 
