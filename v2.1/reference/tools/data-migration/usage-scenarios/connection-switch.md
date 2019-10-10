@@ -21,11 +21,11 @@ For more details on GTID set, refer to [MySQL documentation](https://dev.mysql.c
 
 ## DM-worker connection switch behind virtual IP
 
-When DM-worker connects the upstream MySQL instance behind virtual IP (VIP) and if you switch the MySQL instance that VIP directs at, you switch the MySQL instance actually connected to DM-worker with the upstream connection address unchanged.
+When DM-worker connects the upstream MySQL instance behind virtual IP (VIP) and if you switch the VIP connection to another MySQL instance, you switch the MySQL instance actually connected to DM-worker with the upstream connection address unchanged.
 
 > **Note:**
 >
-> Make necessary changes on DM in this scenario. Otherwise, when you switch the MySQL instance that VIP actually directs at, DM might connect to the new and old MySQL instances at the same time. In this situation, the binlog replicated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage.
+> Make necessary changes on DM in this scenario. Otherwise, when you switch the VIP connection to another MySQL instance, DM might connect to the new and old MySQL instances at the same time in different connections. In this situation, the binlog replicated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage.
 
 For this VIP to direct at a new MySQL instance, follow these procedures:
 
