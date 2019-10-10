@@ -31,14 +31,20 @@ helm inspect values pingcap/tidb-cluster --version=<chart-version> > /home/tidb/
 > - `chart-version` is the version released by the `tidb-cluster` chart. You can view the currently supported versions by running the `helm search -l tidb-cluster` command.
 > - In the rest of this document, `values.yaml` refers to `/home/tidb/<release-name>/values-<releaseName>.yaml`.
 
+### Storage class
+
 The TiDB cluster uses `local-storage` by default.
 
-- Production environment: local storage is recommended. The actual local storage in Kubernetes clusters might be sorted by disk types, such as `nvme-disks` and `sas-disks`.
-- Demonstration environment or functional verification: you can use network storage, such as `ebs` and `nfs`.
+- For the production environment, local storage is recommended. The actual local storage in Kubernetes clusters might be sorted by disk types, such as `nvme-disks` and `sas-disks`.
+- For the demonstration environment or functional verification, you can use network storage, such as `ebs` and `nfs`.
 
 Different components of a TiDB cluster have different disk requirements. Before deploying a TiDB cluster, select the appropriate storage class for each component according to the storage classes supported by the current Kubernetes cluster and usage scenario. You can set the storage class by modifying `storageClassName` of each component in `values.yaml`. For the [storage classes](/dev/tidb-in-kubernetes/reference/configuration/local-pv.md) supported by the Kubernetes cluster, check with your system administrator.
 
-If you set a storage class that does not exist in the TiDB cluster that you are creating, then the cluster creation is in the Pending state. In this situation, you must [destroy the TiDB cluster in Kubernetes](/dev/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md).
+> **Note:**
+>
+> If you set a storage class that does not exist in the TiDB cluster that you are creating, then the cluster creation is in the Pending state. In this situation, you must [destroy the TiDB cluster in Kubernetes](/dev/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md).
+
+### Cluster topology
 
 The deployed cluster topology by default has 3 PD Pods, 3 TiKV Pods, 2 TiDB Pods, and 1 Monitor Pod. In this deployment topology, the scheduler extender of TiDB Operator requires at least 3 nodes in the Kubernetes cluster based on the principle of high availability. If the number of Kubernetes cluster nodes is less than 3, 1 PD Pod is in the Pending state, and neither TiKV Pods nor TiDB Pods are created.
 
