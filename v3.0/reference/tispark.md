@@ -264,6 +264,6 @@ Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned 
 
 A: This error occurs because the length of the data written exceeds the length of the data type defined by the database. You can check the field length and adjust it accordingly.
 
-Q: What can I do if `Error：java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdes seriaVersionUID ...` is returned when executing SQL statements using TiSpark?
+Q: What can I do if `Error：java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdesc serialVersionUID ...` is returned when TiSpark executing Spark?
 
-A: The error message means that you used `class` and `TiRegion` of different versions. Since `TiRegion` is unique to TiSpark, it is detected that there are multiple TiSpark packages. You need to ensure that the cluster is consistent with the local TiSpark dependencies.
+A: The error message shows a `serialVersionUID` conflict, which occurs because you used `class` and `TiRegion` of different versions. Since `TiRegion` is unique to TiSpark, it is possible that there are multiple TiSpark packages. To fix this error, you need to make sure that TiSpark dependencies are the same for each node in the cluster.
