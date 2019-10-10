@@ -248,7 +248,7 @@ Assuming that you want to remove the `dm_worker3` instance, perform the followin
     $ ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
 
-## Replace a DM-master instance
+## Replace/migrate a DM-master instance
 
 Assuming that the `172.16.10.71` machine needs to be maintained or this machine breaks down, and you need to migrate the DM-master instance from `172.16.10.71` to `172.16.10.80`, perform the following steps:
 
@@ -310,7 +310,7 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
     ansible-playbook rolling_update.yml --tags=dmctl
     ```
 
-## Replace a DM-worker instance
+## Replace/migrate a DM-worker instance
 
 Assuming that the `172.16.10.72` machine needs to be maintained or this machine breaks down, and you need to migrate `dm_worker1` from `172.16.10.72` to `172.16.10.75`, perform the following steps:
 
@@ -350,6 +350,8 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
     Edit the `inventory.ini` file, comment or delete the line where the original `dm_worker1` instance (`172.16.10.72`) that you want to replace exists, and add the information for the new `dm_worker1` instance (`172.16.10.75`).
 
+    To pull the relay log from a different binlog position or GTID Sets, you also need to update corresponding `{relay_binlog_name}` or `{relay_binlog_gtid}`.
+
     ```ini
     [dm_worker_servers]
     dm_worker1 source_id="mysql-replica-01" ansible_host=172.16.10.75 server_id=101 mysql_host=172.16.10.81 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
@@ -364,23 +366,51 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
     $ ansible-playbook deploy.yml --tags=dm-worker -l dm_worker1
     ```
 
-5. Start the new DM-worker instance.
+5. Migrate the relay log.
 
-    ```
+    - If the `172.16.10.72` machine is still accessible, you can directly copy all data from the `{dm_worker_relay_dir}` directory to the corresponding directory of the new DM-worker instance.
+
+    - If `172.16.10.72` machine is no longer accessible, you may need to manually recover data such as the relay log directories in Step 9.
+
+6. Start the new DM-worker instance.
+
+    ```bash
     $ ansible-playbook start.yml --tags=dm-worker -l dm_worker1
     ```
 
-6. Configure and restart the DM-master service.
+7. Configure and restart the DM-master service.
 
-    ```
+    ```bash
     $ ansible-playbook rolling_update.yml --tags=dm-master
     ```
 
-7. Configure and restart the Prometheus service.
+8. Configure and restart the Prometheus service.
 
-    ```
+    ```bash
     $ ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
+
+9. Start and verify data migration task.
+
+    Execute `start-task` command to start data migration task. If no error is reported, then DM-worker migration completes successfully. If the following error is reported, you need to manually fix the relay log directory.
+
+    ```log
+    fail to initial unit Sync of subtask test-task : UUID suffix 000002 with UUIDs [1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000001] not found
+    ```
+
+    This error occurs because the upstream MySQL of the DM-worker instance to be replaced has been switched. You can fix this by following these steps:
+
+    1. Use `stop-task` to stop data migration task.
+
+    2. Use `$ ansible-playbook stop.yml --tags=dm-worker -l dm_worker1` to stop the DM-worker instance.
+
+    3. Update the suffix of the subdirectory in the relay log, such as renaming `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000001` to `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000002`.
+
+    4. Update the index file `server-uuid.index` in the subdirectory of the relay log, such as changing `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000001` to `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000002`.
+
+    5. Use `$ ansible-playbook start.yml --tags=dm-worker -l dm_worker1` to start the DM-worker instance.
+
+    6. Restart and verify data migration task.
 
 ## Switch between master and slave instances
 
