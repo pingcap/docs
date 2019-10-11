@@ -1,4 +1,3 @@
-
 ---
 title: TiDB FAQ
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
@@ -582,15 +581,16 @@ Its usage is similar to MySQL:
 ```sql
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
 ```
+
 #### What are the causes of the "Information schema is changed" error?
 
 TiDB uses the current `schema` to process the SQL statement when executing it, with support for asynchronous online DDL. Therefore, when a DML statement is executed simultaneously with DDL statements, each SQL statement must run against the same `schema`. This is when "Information schema is changed" error might happen. The following are possible causes for this error:
 
 - The tables related to the running DML overlap with the tables of the running DDL.
 - Causes irrelevant to tables
-    
+
     - The DML statement execution took a long time, during which many DDL statements (including the `lock table` statement of the new version) were executed. This caused the number of `schema` versions to exceed 1024 (default value; can be modified via the `tidb_max_delta_schema_count` variable).
-    
+
     - The TiDB instance that received the DML request could not load `schema information` over a long time (network partition with PD or TiKV might cause this). During this period, many DDL statements were executed (including the `lock table` statement), and `schema` had changed for more than 100 versions (currently we do not get information by `schema` version).
   
 > **Note:**
