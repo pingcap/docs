@@ -372,7 +372,7 @@ override_values_file = "./test-cluster.yaml"
 
 The default cluster uses `values/default.yaml` in the `deploy/modules/gcp/tidb-cluster` module as the overriding values file.
 
-In GKE, some values are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelectors` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `./tidb-cluster` module in the `clusters.tf` file directly.
+In GKE, some configuration items are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelectors` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `./tidb-cluster` module in the `clusters.tf` file directly.
 
 > **Note:**
 >
