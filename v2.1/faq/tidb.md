@@ -590,19 +590,19 @@ TiDB uses the current `schema` to process the SQL statement when executing it, w
 - The tables related to the running DML overlap with the tables of the running DDL.
 - Causes irrelevant to tables
     
-    - The DML statement has a long execution time, during which many DDL statments (including the `lock table` statement of the new version) have been executed and cause the number of `schema` versions to exceed 1024 (default value; can be modified via the `tidb_max_delta_schema_count` variable).
+    - The DML statement execution took a long time, during which many DDL statements (including the `lock table` statement of the new version) were executed. This caused the number of `schema` versions to exceed 1024 (default value; can be modified via the `tidb_max_delta_schema_count` variable).
     
-    - The TiDB instance that has received the DML request cannot load `schema information` over a long time (network partition with PD or TiKV might cause this). During this period, many DDL statements have been executed (including the `lock table` statement), and `schema` has changed for more than 100 versions (currently we do not get information by `schema` version).
+    - The TiDB instance that received the DML request could not load `schema information` over a long time (network partition with PD or TiKV might cause this). During this period, many DDL statements were executed (including the `lock table` statement), and `schema` had changed for more than 100 versions (currently we do not get information by `schema` version).
   
 > **Note:**
 >
-> The `create table` operation involves one `schema` change, which is consistent with the number of `schema state` corresponding to the change brought by each DDL operation. For example, the `add column` operation has four versions.
+> The `create table` operation involves one `schema` change, which is consistent with the number of `schema state` changed by each DDL operation. For example, the `add column` operation has four versions.
 
 #### What are the causes of the "Information schema is out of date" error
 
-When executing a DML statement, if TiDB fails to load the latest schema within a DDL lease time (45s by default), the `Information schema is out of date` error might occur. Possible reasons are:
+When executing a DML statement, if TiDB fails to load the latest schema within a DDL lease (45s by default), the `Information schema is out of date` error might occur. Possible causes are:
 
-- The TiDB instance that executed this DML was killed, and the transaction execution corresponding to this DML statement took longer than a DDL lease. The error happens when the transaction is committed.
+- The TiDB instance that executed this DML was killed, and the transaction execution corresponding to this DML statement took longer than a DDL lease. When the transaction was committed, the error occurred.
 - TiDB failed to connect to PD or TiKV while executing this DML statement. This caused TiDB to fail to load schema within a DDL lease or disconnect from PD due to the keepalive setting.
 
 ### Manage the TiKV server
