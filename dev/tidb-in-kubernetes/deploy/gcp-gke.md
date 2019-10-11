@@ -139,12 +139,6 @@ Now that you have configured everything needed, you can launch the script to dep
 {{< copyable "shell-regular" >}}
 
 ```bash
-terraform init
-```
-
-{{< copyable "shell-regular" >}}
-
-```bash
 terraform apply
 ```
 
