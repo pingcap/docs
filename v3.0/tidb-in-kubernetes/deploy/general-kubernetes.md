@@ -43,13 +43,13 @@ Different components of a TiDB cluster have different disk requirements. Before 
 
 > **Note:**
 >
-> If you set a storage class that does not exist in the TiDB cluster that you are creating, then the cluster creation is in the Pending state. In this situation, you must [destroy the TiDB cluster in Kubernetes](/v3.0/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md).
+> If you set a storage class that does not exist in the TiDB cluster that you are creating, then the cluster creation goes to the Pending state. In this situation, you must [destroy the TiDB cluster in Kubernetes](/v3.0/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md).
 
 ### Cluster topology
 
 If you set up a storage class that does not exist in the TiDB cluster that you are creating, then the cluster creation is in the Pending state. In this situation, you must [destroy the TiDB cluster in Kubernetes](/v3.0/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md).
 
-The deployed cluster topology by default has 3 PD Pods, 3 TiKV Pods, 2 TiDB Pods, and 1 Monitor Pod. In this deployment topology, the scheduler extender of TiDB Operator requires at least 3 nodes in the Kubernetes cluster based on the principle of high availability. If the number of Kubernetes cluster nodes is less than 3, 1 PD Pod is in the Pending state, and neither TiKV Pods nor TiDB Pods are created.
+The deployed cluster topology by default has 3 PD Pods, 3 TiKV Pods, 2 TiDB Pods, and 1 Monitor Pod. In this deployment topology, the scheduler extender of TiDB Operator requires at least 3 nodes in the Kubernetes cluster to provide high availability. If the number of Kubernetes cluster nodes is less than 3, 1 PD Pod goes to the Pending state, and neither TiKV Pods nor TiDB Pods are created.
 
 When the number of nodes in the Kubernetes cluster is less than 3, to start the TiDB cluster, you can reduce both the number of PD Pods and TiKV Pods in the default deployment to `1`, or modify the `schedulerName` in `values.yaml` to `default-scheduler`, a built-in scheduler in Kubernetes.
 
