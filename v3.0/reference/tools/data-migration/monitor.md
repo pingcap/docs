@@ -27,7 +27,7 @@ In the Grafana dashboard, the default name of DM is `DM-task`.
 | storage capacity | The total storage capacity of the disk occupied by relay logs | N/A | N/A |
 | storage remain | The remaining storage capacity of the disk occupied by relay logs | N/A | N/A |
 | binlog file gap between master and relay | The number of binlog files by which the `relay` processing unit is behind the upstream master | N/A | N/A |
-| load progress | The percentage of the completed loading process of the load units. The value is between 0%~100% | N/A | N/A |
+| load progress | The percentage of the completed loading process of the load unit. The value is between 0%~100% | N/A | N/A |
 | binlog file gap between master and syncer | The number of binlog files by which binlog replication is behind the upstream master | N/A | N/A |
 | shard lock resolving | Whether the current subtask is waiting for sharding DDL replication. A value greater than 0 means that the current subtask is waiting for sharding DDL replication | N/A | N/A |
 
