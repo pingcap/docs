@@ -84,6 +84,12 @@ If you have limited access to gcr.io, you can try a mirror. For example:
 helm init --upgrade --tiller-image registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:$(helm version --client --short | grep -P -o 'v\d+\.\d+\.\d')
 ```
 
+If you are using FreeBSD grep on macOS,try following command:
+
+```shell
+helm init --upgrade --tiller-image registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:$(helm version --client --short | helm version --client --short | grep -E -o 'v\d+\.\d+\.\d')
+```
+
 Once it is installed, running `helm version` returns both the client and server version. For example:
 
 ```shell
