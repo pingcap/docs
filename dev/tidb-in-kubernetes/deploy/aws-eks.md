@@ -252,31 +252,31 @@ In EKS, some configuration items are not customizable in `values.yaml`, such as 
 
 > **Note:**
 >
->It is not recommended to include the following configurations (default configurations of `tidb-cluster` module) in the customized `values.yaml`:
->
-> ```
-> pd:
->   storageClassName: ebs-gp2
-> tikv:
->   stroageClassName: local-storage
-> tidb:
->   service:
->     type: LoadBalancer
->     annotations:
->       service.beta.kubernetes.io/aws-load-balancer-internal: '0.0.0.0/0'
->       service.beta.kubernetes.io/aws-load-balancer-type: nlb
->       service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: >'true'
->   separateSlowLog: true
-> monitor:
->   storage: 100Gi
->   storageClassName: ebs-gp2
->   persistent: true
->   grafana:
->     config:
->       GF_AUTH_ANONYMOUS_ENABLED: "true"
->     service:
->       type: LoadBalancer
-> ```
+> It is not recommended to include the following configurations (default configurations of `tidb-cluster` module) in the customized `values.yaml`:
+
+```
+pd:
+  storageClassName: ebs-gp2
+tikv:
+  stroageClassName: local-storage
+tidb:
+  service:
+    type: LoadBalancer
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-internal: '0.0.0.0/0'
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: >'true'
+  separateSlowLog: true
+monitor:
+  storage: 100Gi
+  storageClassName: ebs-gp2
+  persistent: true
+  grafana:
+    config:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+    service:
+      type: LoadBalancer
+```
 
 ### Customize TiDB Operator
 
