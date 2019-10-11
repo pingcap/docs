@@ -1,25 +1,25 @@
 ---
-title: List of Operators Pushed Down to TiKV
+title: List of Operators for Pushdown
 summary: This document introduces a list of operators that can be pushed down to TiKV, the related operations of which are also provided.
 category: reference
 ---
 
-# List of Operators Pushed Down to TiKV
+# List of Operators for Pushdown
 
 When TiDB reads data from TiKV, TiDB tries to push down some expressions to TiKV to be processed thus reducing the amount of data transferred and the computational pressure on a single TiDB node. This document introduces operators that TiDB supports for pushdown and how to blacklist specific operators.
 
-## List of operators supported for pushdown
+## List of operators for pushdown
 
-| Categorization | Operators |
+| Type | Operators |
 | :-------------- | :------------------------------------- |
-| [Logical Operations](/dev/reference/sql/functions-and-operators/operators.md#logical-operators) | AND (&&), OR (&#124;&#124;), NOT (!) |
-| [Comparison Operations](/dev/reference/sql/functions-and-operators/operators.md#comparison-functions-and-operators) | <, <=, =, != (<>), >, >=, [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to), [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in), IS NULL, LIKE, IS TRUE, IS FALSE, [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) |
-| [Numeric Operations](/dev/reference/sql/functions-and-operators/numeric-functions-and-operators.md) | +, -, *, /, [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs), [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil), [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling), [`FLOOR()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_floor) |
+| [Logical Functions](/dev/reference/sql/functions-and-operators/operators.md#logical-operators) | AND (&&), OR (&#124;&#124;), NOT (!) |
+| [Comparison Functions](/dev/reference/sql/functions-and-operators/operators.md#comparison-functions-and-operators) | <, <=, =, != (<>), >, >=, [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to), [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in), IS NULL, LIKE, IS TRUE, IS FALSE, [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) |
+| [Numeric Functions](/dev/reference/sql/functions-and-operators/numeric-functions-and-operators.md) | +, -, *, /, [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs), [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil), [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling), [`FLOOR()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_floor) |
 | [Control Flow Functions](/dev/reference/sql/functions-and-operators/control-flow-functions.md) | [`CASE`](https://dev.mysql.com/doc/refman/5.7/en/control-flow-functions.html#operator_case), [`IF()`](https://dev.mysql.com/doc/refman/5.7/en/control-flow-functions.html#function_if), [`IFNULL()`](https://dev.mysql.com/doc/refman/5.7/en/control-flow-functions.html#function_ifnull) |
 | [JSON Functions](/dev/reference/sql/functions-and-operators/json-functions.md) | [JSON_TYPE(json_val)][json_type],<br> [JSON_EXTRACT(json_doc, path[, path] ...)][json_extract],<br> [JSON_UNQUOTE(json_val)][json_unquote],<br> [JSON_OBJECT(key, val[, key, val] ...)][json_object],<br> [JSON_ARRAY([val[, val] ...])][json_array],<br> [JSON_MERGE(json_doc, json_doc[, json_doc] ...)][json_merge],<br> [JSON_SET(json_doc, path, val[, path, val] ...)][json_set],<br> [JSON_INSERT(json_doc, path, val[, path, val] ...)][json_insert],<br> [JSON_REPLACE(json_doc, path, val[, path, val] ...)][json_replace],<br> [JSON_REMOVE(json_doc, path[, path] ...)][json_remove] |
 | [Date and Time Functions](/dev/reference/sql/functions-and-operators/date-and-time-functions.md) | [`DATE_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_date-format)  |
 
-## Blacklist specific operators for pushdown
+## Blacklist specific operators
 
 If unexpected behavior occurs in the calculation of the function due to pushdown operators, you can quickly restore it by blacklisting specific operators. Specifically, you can prohibit operators from being pushing down by putting it on the blacklist `mysql.expr_pushdown_blacklist`.
 
@@ -39,7 +39,7 @@ To remove one or more operators from the blacklist, perform the following steps:
 
 2. Execute `admin reload expr_pushdown_blacklist;` command.
 
-### An example
+### Example
 
 The following example demonstrates how to add `<` and `>` to the blacklist, then remove `>` from the blacklist.
 
@@ -98,31 +98,31 @@ tidb> explain select * from t where a < 2 and a > 2;
 >
 > - `admin reload expr_pushdown_blacklist` only works for TiDB server that executes this SQL statement. To enable the blacklist in every TiDB server in the cluster, you need to execute the SQL statement on each TiDB server.
 > - The blacklist feature of pushdown operators is supported in v3.0.0 or later.
-> - Note that in v3.0.3 or earlier, some of the operators (such as ">", "+", "is null") are not supported to add to the blacklist. This means you have to use aliases (case-insensitive) instead, as shown in the following table.
-
-| Description| Name | Aliases |
-| :--------| :-------- | :---------- |
-| Less than | < | LT |
-| Greater than | > | GT |
-| Less than or equal to | <= | LE |
-| Greater than or equal to | >= | GT |
-| Equal to | = | EQ |
-| Not equal to | != | NE |
-| Not equal | <> | NE |
-| NULL-safe equal | <=> | NullEQ |
-| Bitwise OR | &#124; | bitor |
-| Bitwise AND | && | bitand|
-| Logical OR | &#124;&#124; | or |
-| Logical NOT| ! | not |
-| Specify multiple values in a WHERE | in | IN |
-| Addition | + | PLUS|
-| Subtraction | - | MINUS |
-| Multiplication | * | MUL |
-| Division | / | DIV |
-| Integer division| DIV | INTDIV |
-| NULL value test | IS NULL | ISNULL |
-| True value test | IS TRUE | ISTRUE |
-| False value test | IS FALSE | ISFALSE |
+> - Note that in v3.0.3 or earlier, some of the operators (such as ">", "+", "is null") are not supported to add to the blacklist. This means you have to use aliases (case-insensitive) instead, as shown in the following table:
+>
+>     | Operator Name | Aliases |
+>     | :-------- | :---------- |
+>     | < | LT |
+>     | > | GT |
+>     | <= | LE |
+>     | >= | GT |
+>     | = | EQ |
+>     | != | NE |
+>     | <> | NE |
+>     | <=> | NullEQ |
+>     | &#124; | bitor |
+>     | && | bitand|
+>     | &#124;&#124; | or |
+>     | ! | not |
+>     | in | IN |
+>     | + | PLUS|
+>     |  - | MINUS |
+>     | * | MUL |
+>     |  / | DIV |
+>     | DIV | INTDIV |
+>     | IS NULL | ISNULL |
+>     | IS TRUE | ISTRUE |
+>     | IS FALSE | ISFALSE |
 
 [json_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract
 [json_short_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-column-path
