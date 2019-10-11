@@ -61,7 +61,11 @@ You can change the configuration of TiDB cluster through the following steps:
 
 ## Force an upgrade of TiDB cluster
 
-If the PD cluster is unavailable due to factors such as PD configuration error, PD image tag error and NodeAffinity, then [scaling the TiDB cluster](/dev/tidb-in-kubernetes/scale-in-kubernetes.md), [upgrading the TiDB cluster](#upgrade-the-version-of-tidb-cluster) and [changing the TiDB cluster configuration](#change-the-configuration-of-tidb-cluster) cannot be operated. In this case, you can use `force-upgrade` (the version of TiDB Operator must be later than v1.0.0-beta.3) to force an upgrade of the cluster to recover cluster functionality. The specific steps are as follows:
+If the PD cluster is unavailable due to factors such as PD configuration error, PD image tag error and NodeAffinity, then [scaling the TiDB cluster](/dev/tidb-in-kubernetes/scale-in-kubernetes.md), [upgrading the TiDB cluster](#upgrade-the-version-of-tidb-cluster) and [changing the TiDB cluster configuration](#change-the-configuration-of-tidb-cluster) cannot be done successfully.
+
+In this case, you can use `force-upgrade` (the version of TiDB Operator must be later than v1.0.0-beta.3) to force an upgrade of the cluster to recover cluster functionality.
+
+First, set `annotation` for the cluster:
 
 {{< copyable "shell-regular" >}}
 
@@ -69,9 +73,15 @@ If the PD cluster is unavailable due to factors such as PD configuration error, 
 kubectl annotate --overwrite tc <release-name> -n <namespace> tidb.pingcap.com/force-upgrade=true
 ```
 
-Then execute `helm upgrade` command from the corresponding operation.
+Then execute the `helm upgrade` command to continue your interrupted operation:
 
-> **Note:**
+{{< copyable "shell-regular" >}}
+
+```shell
+helm upgrade <release-name> pingcap/tidb-cluster -f values.yaml --version=<chart-version>
+```
+
+> **Warning:**
 >
 > After the PD cluster recovers, you *must* execute the following command to disable the forced upgrade, or an exception may occur in the next upgrade:
 >
