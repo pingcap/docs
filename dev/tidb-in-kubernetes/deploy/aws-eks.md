@@ -248,11 +248,11 @@ The terraform scripts provide proper default settings for the TiDB cluster in EK
 
 For example, the default cluster uses `./default-cluster.yaml` as the overriding values file, and the ConfigMap rollout feature is enabled in this file.
 
-In EKS, some values are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelector` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `tidb-cluster` module in the `clusters.tf` file directly.
+In EKS, some configuration items are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelector` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `tidb-cluster` module in the `clusters.tf` file directly.
 
 > **Note:**
 >
->It's not recommended to include the following configurations (default configurations of `tidb-cluster` module) in the customized `values.yaml`:
+>It is not recommended to include the following configurations (default configurations of `tidb-cluster` module) in the customized `values.yaml`:
 >
 > ```
 > pd:
