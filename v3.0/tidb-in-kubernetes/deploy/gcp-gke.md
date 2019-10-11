@@ -64,41 +64,41 @@ The Terraform script expects three variables to be provided by the user. You can
 * `GCP_REGION`: The region in which to create the resources, for example: `us-west1`.
 * `GCP_PROJECT`: The GCP project in which everything will be created.
 
-The following steps show how to configure Terraform with the above variables:
+To configure Terraform with the above variables:
 
 1. Replace the `GCP_REGION` with your GCP region.
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-echo GCP_REGION=\"us-west1\" >> terraform.tfvars
-```
+    ```bash
+    echo GCP_REGION=\"us-west1\" >> terraform.tfvars
+    ```
 
 2. Replace the `GCP_PROJECT` with your GCP project name. Make sure you are connected to the correct project.
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-echo "GCP_PROJECT=\"$(gcloud config get-value project)\"" >> terraform.tfvars
-```
+    ```bash
+    echo "GCP_PROJECT=\"$(gcloud config get-value project)\"" >> terraform.tfvars
+    ```
 
 3. Initialize Terraform:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-terraform init
-```
+    ```bash
+    terraform init
+    ```
 
 4. Create a service account for Terraform with restricted permissions and set the credentials path.
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-./create-service-account.sh
-```
+    ```bash
+    ./create-service-account.sh
+    ```
 
-Terraform automatically loads and populates variables from the files matching `terraform.tfvars` or `*.auto.tfvars`. For more information please see the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/variables.html).
+Terraform automatically loads and populates variables from the files matching `terraform.tfvars` or `*.auto.tfvars`. For more information, see the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/variables.html).
 The steps above will populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars` with `GCP_CREDENTIALS_PATH`.
 
 ## Deploy
@@ -107,19 +107,19 @@ Before deployment, you need to decide on instance types.
 
 - If you just want to get a feel for a TiDB deployment and lower your cost, you can use the small settings.
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-cat small.tfvars >> terraform.tfvars
-```
-
-{{< copyable "shell-regular" >}}
+    ```bash
+    cat small.tfvars >> terraform.tfvars
+    ```
 
 - If you want to benchmark a production deployment, run:
 
-```bash
-cat prod.tfvars >> terraform.tfvars
-```
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    cat prod.tfvars >> terraform.tfvars
+    ```
 
 The `prod.tfvars` setup creates a new VPC, two subnetworks, and an f1-micro instance as a bastion machine. This setup is created with the following instance types as worker nodes:
 
@@ -303,9 +303,9 @@ output "how_to_connect_to_example_tidb_cluster_from_bastion" {
 }
 ```
 
-This will print out the exact command to use to connect to the TiDB cluster.
+This will print out the exact command used to connect to the TiDB cluster.
 
-Once you finishes modification, execute `terraform init` and `terraform apply` statements to create the cluster.
+Once you finish modification, execute `terraform init` and `terraform apply` statements to create the cluster.
 
 ## Scale
 
@@ -369,38 +369,38 @@ EOF
 override_values_file = "./test-cluster.yaml"
 ```
 
-The default cluster uses `values/default.yaml` in the `deploy/modules/gcp/tidb-cluster` module as the overriding values file.
+By default, the cluster uses `values/default.yaml` in the `deploy/modules/gcp/tidb-cluster` module as the overriding values file.
 
-In GKE, some configuration items are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelectors` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `tidb-cluster` module in the `clusters.tf` file directly.
+In GKE, some configuration items are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelector` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `tidb-cluster` module in the `clusters.tf` file directly.
 
 > **Note:**
 >
->It's not recommended to include the following configurations (default configurations of `tidb-cluster` module) in the customized `values.yaml`:
->
-> ```
-> pd:
->   storageClassName: pd-ssd
-> tikv:
->   stroageClassName: local-storage
-> tidb:
->   service:
->     type: LoadBalancer
->     annotations:
->       cloud.google.com/load-balancer-type: "Internal"
->   separateSlowLog: true
-> monitor:
->   storageClassName: pd-ssd
->   persistent: true
->   grafana:
->     config:
->       GF_AUTH_ANONYMOUS_ENABLED: "true"
->     service:
->       type: LoadBalancer
-> ```
+> It is not recommended to include the following configurations (default configurations of `tidb-cluster` module) in the customized `values.yaml`:
+
+```
+pd:
+  storageClassName: pd-ssd
+tikv:
+  stroageClassName: local-storage
+tidb:
+  service:
+    type: LoadBalancer
+    annotations:
+      cloud.google.com/load-balancer-type: "Internal"
+  separateSlowLog: true
+monitor:
+  storageClassName: pd-ssd
+  persistent: true
+  grafana:
+    config:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+    service:
+      type: LoadBalancer
+```
 
 ### Customize TiDB Operator
 
-You can customize the TiDB operator by specifying overriding values through the `operator_helm_values` variable or specifying an overriding values file through the `operator_helm_values_file` variable. If both variables are configured, then `operator_helm_values` will be enabled and the value of which will be passed into the `tidb-cluster` module.
+You can customize the TiDB operator by specifying overriding values through the `operator_helm_values` variable or specifying an overriding values file through the `operator_helm_values_file` variable. If both variables are configured, then `operator_helm_values` will be enabled and its value will be passed into the `tidb-cluster` module.
 
 {{< copyable "" >}}
 
@@ -501,11 +501,11 @@ If you no longer need the data and would like to delete the disks in use, there 
 
 - Manual deletion: do this either in Google Cloud Console or using the `gcloud` command-line tool.
 
-- Setting the Kubernetes persistent volume reclaiming policy to `Delete` prior to executing `terraform destroy`: Do this by running the following `kubectl` command before `terraform destroy`
+- Setting the Kubernetes persistent volume reclaiming policy to `Delete` prior to executing `terraform destroy`: Do this by running the following `kubectl` command before `terraform destroy`.
 
-```bash
-kubectl --kubeconfig /path/to/kubeconfig/file get pvc -n namespace-of-tidb-cluster -o jsonpath='{.items[*].spec.volumeName}'|fmt -1 | xargs -I {} kubectl --kubeconfig /path/to/kubeconfig/file patch pv {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
-```
+   ```bash
+    kubectl --kubeconfig /path/to/kubeconfig/file get pvc -n namespace-of-tidb-cluster -o jsonpath='{.items[*].spec.volumeName}'|fmt -1 | xargs -I {} kubectl --kubeconfig /path/to/kubeconfig/file patch pv {} -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
+    ```
 
 This command will get the persistent volume claims (PVCs) in the TiDB cluster namespace and set the reclaiming policy of the persistent volumes to `Delete`. When the PVCs are deleted during `terraform destroy`, the disks are deleted as well.
 
@@ -530,13 +530,13 @@ The best practices for managing multiple Kubernetes clusters are:
 - Creating a new directory for each of your Kubernetes clusters, and
 - Combining the above modules according to your needs via Terraform scripts.
 
-In this case, the Terraform states among clusters do not interfere with each other, and it is convenient to expand. Here's an example (assume you are in the project root):
+In this case, the Terraform states among clusters do not interfere with each other, and it is convenient to expand. Here's an example (assume you are in the project root directory):
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 # assume we are in the project root
-mkdir -p deploy/gcp-staging
+mkdir -p deploy/gcp-staging &&
 vim deploy/gccp-staging/main.tf
 ```
 
@@ -675,7 +675,7 @@ In addition, you can easily integrate these modules into your own Terraform work
 
 > **Note:**
 >
-> * When creating a new directory, please pay attention to its relative path to Terraform modules, which affects the `source` parameter during module calls.
+> * When creating a new directory, pay attention to its relative path to Terraform modules, which affects the `source` parameter during module calls.
 > * If you want to use these modules outside the tidb-operator project, make sure you copy the whole `modules` directory and keep the relative path of each module inside the directory unchanged.
 > * Due to limitation [hashicorp/terraform#2430](https://github.com/hashicorp/terraform/issues/2430#issuecomment-370685911) of Terraform, the hack processing of Helm provider is necessary in the above example. It is recommended that you keep it in your own Terraform scripts.
 
