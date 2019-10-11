@@ -74,7 +74,7 @@ The following steps show how to configure Terraform with the above variables:
 echo GCP_REGION=\"us-west1\" >> terraform.tfvars
 ```
 
-2. Replace the `GCP_PROJECT` to your GCP project name. First make sure you are connected to the correct project.
+2. Replace the `GCP_PROJECT` with your GCP project name. Make sure you are connected to the correct project.
 
 {{< copyable "shell-regular" >}}
 
@@ -99,8 +99,7 @@ terraform init
 ```
 
 Terraform automatically loads and populates variables from the files matching `terraform.tfvars` or `*.auto.tfvars`. For more information please see the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/variables.html).
-The steps above will populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars`
-with `GCP_CREDENTIALS_PATH`.
+The steps above will populate `terraform.tfvars` with `GCP_REGION` and `GCP_PROJECT`, and `credentials.auto.tfvars` with `GCP_CREDENTIALS_PATH`.
 
 ## Deploy
 
@@ -306,7 +305,7 @@ output "how_to_connect_to_example_tidb_cluster_from_bastion" {
 
 This will print out the exact command to use to connect to the TiDB cluster.
 
-Once the modification finishes, execute `terraform init` and `terraform apply` statements to create a cluster.
+Once you finishes modification, execute `terraform init` and `terraform apply` statements to create the cluster.
 
 ## Scale
 
@@ -372,7 +371,7 @@ override_values_file = "./test-cluster.yaml"
 
 The default cluster uses `values/default.yaml` in the `deploy/modules/gcp/tidb-cluster` module as the overriding values file.
 
-In GKE, some configuration items are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelectors` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `./tidb-cluster` module in the `clusters.tf` file directly.
+In GKE, some configuration items are not customizable in `values.yaml`, such as the cluster version, replicas, `NodeSelectors` and `Tolerations`. `NodeSelector` and `Tolerations` are controlled by Terraform to ensure consistency between the infrastructure and TiDB clusters. Cluster version and replicas can be modified in each `tidb-cluster` module in the `clusters.tf` file directly.
 
 > **Note:**
 >
