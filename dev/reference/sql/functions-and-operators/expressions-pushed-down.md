@@ -39,7 +39,7 @@ To remove one or more operators from the blacklist, perform the following steps:
 
 2. Execute `admin reload expr_pushdown_blacklist;` command.
 
-### Example
+### Instance
 
 The following example demonstrates how to add `<` and `>` to the blacklist, then remove `>` from the blacklist.
 
