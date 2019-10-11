@@ -40,7 +40,7 @@ Slow query basics:
 * `Time`: The print time of log.
 * `Query_time`: The execution time of a statement.
 * `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
-* `Digest`: The fingerprint of a SQL statement.
+* `Digest`: The fingerprint of the SQL statement.
 * `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
 * `Is_internal`: Whether a SQL statement is TiDB internal. `true` indicates that a SQL statement is executed internally in TiDB and `false` indicates that a SQL statement is executed by the user.
 * `Index_ids`: The IDs of the indexes involved in a statement.
@@ -53,8 +53,8 @@ Memory usage fields:
 
 User fields:
 
-* `User`: The name of the user who executes a statement.
-* `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to search for the log whose session ID is 3.
+* `User`: The name of the user who executes this statement.
+* `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to search for the log whose session ID is `3`.
 * `DB`: The current database.
 
 TiKV Coprocessor Task fields:
@@ -111,6 +111,8 @@ Usage example
 ### Query the Top-N slow queries of the `test` user
 
 In the following example, the slow queries executed by the `test` user are queried, and the first two results are displayed in reverse order of execution time.
+
+{{< copyable "sql" >}}
 
 ```sql
 select query_time, query, user
@@ -219,7 +221,7 @@ Use `pt-query-digest` to parse TiDB slow logs.
 
 > **Note:**
 >
-> It is recommended to use `pt-query-digest` 3.0.13 or later version.
+> It is recommended to use `pt-query-digest` 3.0.13 or later versions.
 
 For example:
 
@@ -259,11 +261,13 @@ Usage example
 
 Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large increases the pressure on the entire cluster.
 
-The statements whose `wait_time` is very large and `process_time` is very small are usually not problematic. The large `wait_time` is because the statement is blocked by real problematic statements and it has to wait in the execution queue, which leads to a much longer response time.
+The statements whose `wait_time` is very large and `process_time` is very small are usually not problematic. This is because the statement is blocked by real problematic statements and it has to wait in the execution queue, which leads to a much longer response time.
 
 ### `admin show slow` command
 
 In addition to the TiDB log file, you can identify slow queries by running the `admin show slow` command:
+
+{{< copyable "sql" >}}
 
 ```sql
 admin show slow recent N
@@ -271,6 +275,8 @@ admin show slow top [internal | all] N
 ```
 
 `recent N` shows the recent N slow query records, for example:
+
+{{< copyable "sql" >}}
 
 ```sql
 admin show slow recent 10
@@ -281,10 +287,30 @@ If the `internal` option is provided, the returned results would be the inner SQ
 If the `all` option is provided, the returned results would be the user's SQL combinated with inner SQL;
 Otherwise, this command would only return the slow query records from the user's SQL.
 
+{{< copyable "sql" >}}
+
 ```sql
 admin show slow top 3
 admin show slow top internal 3
 admin show slow top all 5
 ```
 
-Due to the memory footprint restriction, the stored slow query records count is limited. If the specified `N` is greater than the records count, the returned records count may be smaller than `N`.
+TiDB stores only a limited number of slow query records because of the limited memory. If the value of `N` in the query command is greater than the records count, the number of returned records is smaller than `N`.
+
+The following table shows output details:
+
+| Column name | Description |
+|:------|:---- |
+| start | The starting time of the SQL execution |
+| duration | The duration of the SQL execution |
+| details | The details of the SQL execution |
+| succ | Whether the SQL statement is executed successfully. `1` means success and `0` means failure. |
+| conn_id | The connection ID for the session |
+| transcation_ts | The `commit ts` for a transaction commit |
+| user | The user name for the execution of the statement |
+| db | The database involved when the statement is executed |
+| table_ids | The ID of the table involved when the SQL statement is executed |
+| index_ids | The ID of the index involved when the SQL statement is executed |
+| internal | This is a TiDB internal SQL statement |
+| digest | The fingerprint of the SQL statement |
+| sql | The SQL statement that is being executed or has been executed |
