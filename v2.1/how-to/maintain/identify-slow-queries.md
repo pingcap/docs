@@ -97,7 +97,7 @@ order by query_time desc
 limit 2;
 ```
 
-Usage example
+Usage example:
 
 ```
 +--------------+------------------------------------------------------------------+
@@ -123,7 +123,7 @@ order by query_time desc
 limit 2;
 ```
 
-Usage example
+Usage example:
 
 ```
 +-------------+------------------------------------------------------------------+----------------+
@@ -149,7 +149,7 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     limit 1;
     ```
 
-    Usage example
+    Usage example:
 
     ```
     +-------------+-----------------------------+------------------------------------------------------------------+
@@ -169,7 +169,7 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     where digest = "4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa";
     ```
 
-    Usage example
+    Usage example:
 
     ```
     +-----------------------------+-------------+
@@ -191,7 +191,7 @@ where is_internal = false
   and stats like '%pseudo%';
 ```
 
-Usage example
+Usage example:
 
 ```
 +-----------------------------+-------------+---------------------------------+
@@ -231,7 +231,7 @@ For example:
 pt-query-digest --report tidb-slow.log
 ```
 
-Usage example
+Usage example:
 
 ```
 # 320ms user time, 20ms system time, 27.00M rss, 221.32M vsz
@@ -259,7 +259,7 @@ Usage example
 
 ## Identify problematic SQL statements
 
-Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large increases the pressure on the entire cluster.
+Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large increase the pressure on the entire cluster.
 
 The statements whose `wait_time` is very large and `process_time` is very small are usually not problematic. This is because the statement is blocked by real problematic statements and it has to wait in the execution queue, which leads to a much longer response time.
 
