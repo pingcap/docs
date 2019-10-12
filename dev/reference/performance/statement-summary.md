@@ -70,7 +70,7 @@ This section shows how to use the statement summary feature to troubleshoot SQL 
 
 ### Could high SQL latency be caused by the server end?
 
-In this example, the client shows slow performance with point queries on the employee table. We can perform a fuzzy search by SQL texts:
+In this example, the client shows slow performance with point queries on the employee table. We can perform a fuzzy query using SQL digest text:
 
 ```sql
 SELECT avg_latency, exec_count, query_sample_text
