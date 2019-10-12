@@ -127,9 +127,9 @@ Incremental backup uses [TiDB Binlog](/dev/reference/tidb-binlog-overview.md) to
 
 For the detailed guide of maintaining TiDB Binlog in Kubernetes, refer to [TiDB Binlog](/dev/tidb-in-kubernetes/maintain/tidb-binlog.md).
 
-### Scale Pump in
+### Scale in Pump
 
-To decrease the capability of Pump, make Pump nodes offline and then run the `helm upgrade` command to delete Pump pods.
+To scale in Pump, make Pump nodes offline and then run the `helm upgrade` command to delete Pump pods.
 
 1. Make Pump nodes offline from the TiDB cluster
 
