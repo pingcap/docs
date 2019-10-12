@@ -380,6 +380,7 @@
   - [TiDB FAQs](/dev/faq/tidb.md)
   - [TiDB Lightning FAQs](/dev/faq/tidb-lightning.md)
   - [Data Migration FAQ](/dev/faq/data-migration.md)
+  - [TiDB Binlog FAQs](/dev/faq/tidb-binlog.md)
   - [Upgrade FAQs](/dev/faq/upgrade.md)
 + Support
   - [Support Resources](/dev/support-resources.md)

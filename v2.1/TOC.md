@@ -319,6 +319,7 @@
 + FAQs
   - [TiDB FAQs](/v2.1/faq/tidb.md)
   - [TiDB Lightning FAQs](/v2.1/faq/tidb-lightning.md)
+  - [TiDB Binlog FAQs](/v2.1/faq/tidb-binlog.md)
   - [Upgrade FAQs](/v2.1/faq/upgrade.md)
 + Support
   - [Support Resources](/v2.1/support-resources.md)

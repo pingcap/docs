@@ -377,6 +377,7 @@
   - [TiDB FAQs](/v3.0/faq/tidb.md)
   - [TiDB Lightning FAQs](/v3.0/faq/tidb-lightning.md)
   - [Data Migration FAQ](/v3.0/faq/data-migration.md)
+  - [TiDB Binlog](/v3.0/faq/tidb-binlog.md)
   - [Upgrade FAQs](/v3.0/faq/upgrade.md)
 + Support
   - [Support Resources](/v3.0/support-resources.md)
