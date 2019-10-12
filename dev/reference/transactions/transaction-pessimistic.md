@@ -34,7 +34,7 @@ To enable the pessimistic transaction mode, choose any of the following three me
 
 - Execute the `set @@tidb_txn_mode = 'pessimistic';` statement to allow all the explicit transactions (namely non-autocommit transactions) processed in this session to be in the pessimistic transaction mode.
 
-- Execute the `set @@global.tidb_txn_mode = 'pessimistic';` statement to allow all newly created sessions of the entire cluster enter the pessimistic transaction mode to execute the explicit transactions.
+- Execute the `set @@global.tidb_txn_mode = 'pessimistic';` statement to allow all newly created sessions of the entire cluster to adopt the pessimistic transaction mode and execute the explicit transactions.
 
 After you set `global.tidb_txn_mode` to `pessimistic`, the pessimistic transaction mode is enabled by default; but you can use the following two methods to adopt the optimistic transaction mode for the transaction:
 
