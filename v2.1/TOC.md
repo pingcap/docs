@@ -57,7 +57,10 @@
       - [Overview](/v2.1/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/v2.1/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/v2.1/how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](/v2.1/how-to/deploy/tidb-binlog.md)
+    + Deploy and Use TiDB Binlog
+      - [TiDB Binlog Cluster Deployment](/v2.1/how-to/deploy/tidb-binlog.md)
+      - [Binlog Slave Client User Guide](/v2.1/reference/tools/tidb-binlog/binlog-slave-client.md)
+      - [Reparo User Guide](/v2.1/reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](/v2.1/how-to/configure/time-zone.md)
     - [Memory Control](/v2.1/how-to/configure/memory-control.md)
@@ -268,6 +271,8 @@
       - [`SHOW TABLE STATUS`](/v2.1/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/v2.1/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/v2.1/reference/sql/statements/show-warnings.md)
+      - [`SHOW TABLE REGIONS`](/v2.1/reference/sql/statements/show-table-regions.md)
+      - [`SPLIT REGION`](/v2.1/reference/sql/statements/split-region.md)
       - [`START TRANSACTION`](/v2.1/reference/sql/statements/start-transaction.md)
       - [`TRACE`](/v2.1/reference/sql/statements/trace.md)
       - [`TRUNCATE`](/v2.1/reference/sql/statements/truncate.md)
