@@ -583,6 +583,7 @@ Its usage is similar to MySQL:
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
 ```
 
+<<<<<<< HEAD
 #### Why the `Information schema is changed` error is reported?
 
 TiDB handles the SQL statement using the `schema` of the time and supports online asynchronous DDL change. A DML statement and a DDL statement might be executed at the same time and you must ensure that each statement is executed using the same `schema`. Therefore, when the DML operation meets the ongoing DDL operation, the `Information schema is changed` error might be reported. Some improvements have been made to prevent too many error reportings during the DML operation.
@@ -598,6 +599,13 @@ Now, there are still a few reasons for this error reporting (the latter two are 
 > + Currently, TiDB does not cache all the `schema` version changes.
 > + For each DDL operation, the number of `schema` version changes is the same with the number of corresponding `schema state` version changes.
 > + Different DDL operations cause different number of `schema` version changes. For example, the `CREATE TABLE` statement causes one `schema` version change while the `ADD COLUMN` statement causes four.
+=======
+#### Error is reported when executing DDL statements under high concurrency?
+
+When executing DDL statements (such as table building in batches) under high concurrency, a very few of them may fail due to key conflicts in the concurrent execution.
+
+It is recommended that the number of concurrent DDL statements should be less than 20, otherwise you need to retry the failed statements from the client.
+>>>>>>> reference, faq: update ddl doc
 
 ### Manage the TiKV server
 
