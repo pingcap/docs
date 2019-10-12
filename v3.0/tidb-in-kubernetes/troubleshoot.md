@@ -336,12 +336,12 @@ Normally, when a TiKV Pod is in a healthy state (`Running`), the corresponding T
 
 ## Long queries are abnormally interrupted in TiDB
 
-Load Balancers set the idle connection timeout. If no data is sent over a connection for a specific period of time, Load Balancers close the connection.
+Load balancers often set the idle connection timeout. If no data is sent over a connection for a specific period of time, load balancer closes the connection.
 
-If a long query is interrupted when you use TiDB, check the middleware application between the client and the TiDB server.
-If you find that the idle timeout is not long enough for your query, try to set the timeout to a larger value. If you cannot reset it, enable the `tcp-keep-alive` option.
+If a long query is interrupted when you use TiDB, check the middleware program between the client and the TiDB server.
+If the idle timeout is not long enough for your query, try to set the timeout to a larger value. If you cannot reset it, enable the `tcp-keep-alive` option in TiDB.
 
-In Linux, the first keepalive probe packet is sent after 7,200 seconds since the last data packet by default. To shorten the interval, configure `sysctls` via the `podSecurityContext` field. Here is an example:
+In Linux, the keepalive probe packet is sent every 7,200 seconds by default. To shorten the interval, configure `sysctls` via the `podSecurityContext` field. Here is an example:
 
 ```
 tidb:
