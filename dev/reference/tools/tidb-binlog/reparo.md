@@ -21,7 +21,7 @@ Usage of Reparo:
     Value: "debug"/"info"/"warn"/"error"/"fatal" ("info" by default)
 -V Prints the version.
 -c int
-    The number of concurrencies of the downstream for the replication process (16 by default). A higher value indicates a better throughput for the replication.
+    The number of concurrencies in the downstream for the replication process (`16` by default). A higher value indicates a better throughput for the replication.
 -config string
     The path of the configuration file
     If the configuration file is specified, Reparo reads the configuration data in this file.
