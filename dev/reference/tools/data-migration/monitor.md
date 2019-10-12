@@ -60,7 +60,7 @@ The following metrics show only when `task-mode` is in the `full` or `all` mode.
 | Metric name | Description | Alert | Severity level |
 |:----|:------------|:----|:----|
 | load progress | The percentage of the completed loading process of the load unit. The value range is 0%~100% | N/A | N/A |
-| data file size | The total size of the data files in the full data imported by the load unit (including the `INSERT INTO` statement) | N/A | N/A |
+| data file size | The total size of the data files (includes the `INSERT INTO` statement) in the full data imported by the load unit | N/A | N/A |
 | dump process exits with error | The dump unit encounters an error within the DM-worker and exits | Immediate alerts | critical |
 | load process exits with error | The load unit encounters an error within the DM-worker and exits | Immediate alerts | critical |
 | table count | The total number of tables in the full data imported by the load unit | N/A | N/A |
