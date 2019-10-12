@@ -12,15 +12,14 @@ The `SHOW TABLE REGIONS` statement is used to show the Region information of a t
 
 ```sql
 SHOW TABLE [table_name] REGIONS [WhereClauseOptional];
-
 SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 ```
 
 Executing `SHOW TABLE REGIONS` returns the following columns:
 
 * `REGION_ID`: The Region ID.
-* `START_KEY`: The Startkey of the Region.
-* `END_KEY`: The Endkey of the Region.
+* `START_KEY`: The start key of the Region.
+* `END_KEY`: The end key of the Region.
 * `LEADER_ID`: The Leader ID of the Region.
 * `LEADER_STORE_ID`: The ID of the store (TiKV) where the Region leader is located.
 * `PEERS`: The IDs of all Region replicas.
@@ -91,9 +90,9 @@ In the above example:
 * Table t corresponds to six Regions. In these Regions, `102`, `106`, `110`, `114`, and `3` store the row data and `98` stores the index data.
 * For `START_KEY` and `END_KEY` of Region `102`, `t_43` indicates the table prefix and ID. `_r` is the prefix of the record data in table t. `_i` is the prefix of the index data.
 * In Region `102`, `START_KEY` and `END_KEY` mean that record data in the range of `[-inf, 20000)` is stored. In similar way, the ranges of data storage in Regions (`103`, `109`, `113`, `2`) can also be calculated.
-* Region `98` stores the index data. The Startkey of table t's index data is `t_43_i`, which is in the range of Region `98`.
+* Region `98` stores the index data. The start key of table t's index data is `t_43_i`, which is in the range of Region `98`.
 
-To check the Region that corresponds to table t in store 1, use `WHERE` clause:
+To check the Region that corresponds to table t in store 1, use the `WHERE` clause:
 
 ```sql
 test> show table t regions where leader_store_id =1;
