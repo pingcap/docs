@@ -60,7 +60,10 @@
       - [Overview](/dev/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/dev/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/dev/how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog.md)
+    + Deploy and Use TiDB Binlog
+      - [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog.md)
+      - [Binlog Slave Client User Guide](/dev/reference/tools/tidb-binlog/binlog-slave-client.md)
+      - [Reparo User Guide](/dev/reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](/dev/how-to/configure/time-zone.md)
     - [Memory Control](/dev/how-to/configure/memory-control.md)
@@ -273,6 +276,7 @@
       - [`SHOW [FULL] PROCESSSLIST`](/dev/reference/sql/statements/show-processlist.md)
       - [`SHOW SCHEMAS`](/dev/reference/sql/statements/show-schemas.md)
       - [`SHOW [FULL] TABLES`](/dev/reference/sql/statements/show-tables.md)
+      - [`SHOW TABLE REGIONS`](/dev/reference/sql/statements/show-table-regions.md)
       - [`SHOW TABLE STATUS`](/dev/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/dev/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/dev/reference/sql/statements/show-warnings.md)
