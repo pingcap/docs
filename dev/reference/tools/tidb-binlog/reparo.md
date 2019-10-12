@@ -49,7 +49,7 @@ Usage of Reparo:
 -safe-mode bool
     Specifies whether to enable safe mode. When enabled, it supports repeated replication.
 -txn-batch int
-    The number of SQL statements of a transaction that is output to the downstream database (20 by default).
+    The number of SQL statements in a transaction that is output to the downstream database (`20` by default).
 ```
 
 ### Description of the configuration file
