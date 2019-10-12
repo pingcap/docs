@@ -87,7 +87,7 @@ log-level = "info"
 # If it is set to "mysql", you need to configure `host`, `port`, `user` and `password` in [dest-db].
 dest-type = "mysql"
 
-# The number of SQL statements of a transaction that is output to the downstream database (20 by default).
+# The number of SQL statements in a transaction that is output to the downstream database (`20` by default).
 txn-batch = 20
 
 # The number of concurrencies of the downstream for the replication process (16 by default). A higher value indicates a better throughput for the replication (16 by default).
