@@ -266,4 +266,4 @@ A: This error occurs because the length of the data written exceeds the length o
 
 Q: What can I do if `Error：java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdesc serialVersionUID ...` is returned when TiSpark is executing a Spark task?
 
-A: The error message shows a `serialVersionUID` inconsistency, which occurs because you have used `class` and `TiRegion` of different versions. Because `TiRegion` only exists in TiSpark, it might be that multiple TiSpark packages are used. To fix this error, you need to make sure that TiSpark dependencies are consistent between the cluster and the local.
+A: The error message shows a `serialVersionUID` inconsistency, which occurs because you have used `class` and `TiRegion` of different versions. Because `TiRegion` only exists in TiSpark, it might be that multiple TiSpark packages are used. To fix this error, you need to make sure that the versions of TiSpark dependency are consistent for each node in the cluster.
