@@ -90,7 +90,7 @@ dest-type = "mysql"
 # The number of SQL statements in a transaction that is output to the downstream database (`20` by default).
 txn-batch = 20
 
-# The number of concurrencies of the downstream for the replication process (16 by default). A higher value indicates a better throughput for the replication (16 by default).
+# The number of concurrencies in the downstream for the replication process (`16` by default). A higher value indicates a better throughput for the replication.
 worker-count = 16
 
 # Safe-mode configuration
