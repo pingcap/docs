@@ -8,15 +8,15 @@ category: reference
 
 ## Overview
 
-TiDB supports the same basic constraints supported in MySQL with the following exceptions:
+The basic constraints supported by TiDB are basically the same as those of MySQL, with the following differences:
 
 - `PRIMARY KEY` and `UNIQUE` constraints are checked lazily by default. By batching checks until when the transaction commits, TiDB is able to reduce network communication. This behavior can be changed by setting `tidb_constraint_check_in_place` to `TRUE`.
 
-- `FOREIGN KEY` constraints are not currently enforced by DML.
+- TiDB supports `FOREIGN KEY` constraints, but it will not be enabled in DML statements.
 
 ## Foreign Key
 
-TiDB currently only supports `FOREIGN KEY` creation in DDL commands. For example:
+TiDB currently supports `FOREIGN KEY` constraints. For example:
 
 ```sql
 CREATE TABLE users (
