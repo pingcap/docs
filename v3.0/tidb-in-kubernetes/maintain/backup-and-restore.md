@@ -130,11 +130,11 @@ For the detailed guide of maintaining TiDB Binlog in Kubernetes, refer to [TiDB 
 
 ### Scale in Pump
 
-To scale in Pump, make Pump nodes offline and then run the `helm upgrade` command to delete Pump pods.
+To scale in Pump, for each Pump node, make the node offline and then run the `helm upgrade` command to delete the corresponding Pump Pod.
 
-1. Make Pump nodes offline from the TiDB cluster
+1. Make a Pump node offline from the TiDB cluster
 
-    Suppose there are 3 Pump nodes, and you want to get the third node offline and modify `<ordinal-id>` to `2`, run the following command. `<version>` is the current version of TiDB.
+    Suppose there are 3 Pump nodes, and you want to get the third node offline and modify `<ordinal-id>` to `2`, run the following command (`<version>` is the current version of TiDB).
 
     {{< copyable "shell-regular" >}}
 
@@ -150,9 +150,9 @@ To scale in Pump, make Pump nodes offline and then run the `helm upgrade` comman
     kubectl logs -f -n <namespace> <release-name>-pump-<ordinal-id>
     ```
 
-2. Delete Pump pods
+2. Delete the corresponding Pump Pod
 
-    Modify `binlog.pump.replicas` in the `values.yaml` file to `2` and then, run the following command to delete Pump pods.
+    Modify `binlog.pump.replicas` in the `values.yaml` file to `2` and then run the following command to delete the Pump Pod.
 
     {{< copyable "shell-regular" >}}
 
