@@ -214,7 +214,7 @@ sysbench $testname \
 
 ### Test conclusion
 
-When you perform frequent write operations (this test involves `UPDATE`, `INSERT` and `DELETE` operations) to the target column of `Add Index` statement, the `Add Index` configuration by default has a significant impact on the online workloads of the system. It is mainly because of the write conflicts caused by the concurrent `Add Index` operation and column update. The performance of the system is as follows:
+When you perform frequent write operations (this test involves `UPDATE`, `INSERT` and `DELETE` operations) to the target column of `Add Index` statement, the default `Add Index` configuration has a significant impact on the online workload of the system. It is mainly because of the write conflicts caused by the concurrent `Add Index` operation and column update. The performance of the system is as follows:
 
 - As the two parameters increase, the value of `TiKV_prewrite_latch_wait_duration` increases significantly, slowing down the write speed.
 - When the value of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` are very large, you can execute the `admin show ddl` command to see multiple retry attempts of the DDL job, such as `Write conflict, txnStartTS 410327455965380624 is stale [try again later], ErrCount:38, SnapshotVersion: 410327228136030220`. In this situation, the `Add Index` operation takes a very long time to complete.
@@ -283,11 +283,11 @@ When you only perform query operations to the target column of `Add Index` state
 
 ## Test plan 3: the target column of `ADD INDEX` statement is not related to the online workloads
 
-1. Start `oltp_read_write` testing.
-2. At the same time with step 1, use `alter table test add index pad_idx(pad)` to add an index.
-3. At the end of step 2 when index is added successfully, stop `oltp_read_only` testing.
-4. Acquire the run time of `alter table ... add index`, the average TPS and QPS of Sysbench in this period.
-5. Gradually increase the value of two parameters `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` and then repeat step 1-4.
+1. Start `oltp_read_write` test.
+2. Perform at the same time with step 1: use `alter table test add index pad_idx(pad)` to add an index.
+3. Perform at the end of step 2: when the index is added successfully, stop `oltp_read_only` test.
+4. Get the duration of `alter table ... add index` and the average TPS and QPS of Sysbench in this period.
+5. Gradually increase the value of two parameters `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size`, and then repeat step 1-4.
 
 ### Test results
 
@@ -345,5 +345,5 @@ When the target column of `Add Index` statement is not related to online workloa
 
 ## Summary
 
-- When you perform frequent write operations (including `INSERT`, `DELETE` and `UPDATE` operations) to the target column of `Add Index` statement, the `ADD INDEX` configuration by default causes relatively frequent write conflicts, which has a great impact on online workloads. At the same time, the `Add Index` operation takes a long time to complete due to continuous retry attempts. In this test, you can modify the product of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to 1/32 of the default value. For example, you can set `tidb_ddl_reorg_worker_cnt` to `4` and `tidb_ddl_reorg_batch_size` to `256` for better performance.
-- When only performing query operations to the target column of `Add Index` statement or the target column is not directly related to online workloads, you can use the `ADD INDEX` configuration by default.
+- When you perform frequent write operations (including `INSERT`, `DELETE` and `UPDATE` operations) to the target column of `Add Index` statement, the default `ADD INDEX` configuration  causes relatively frequent write conflicts, which has a great impact on online workloads. At the same time, the `Add Index` operation takes a long time to complete due to continuous retry attempts. In this test, you can modify the product of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to 1/32 of the default value. For example, you can set `tidb_ddl_reorg_worker_cnt` to `4` and `tidb_ddl_reorg_batch_size` to `256` for better performance.
+- When only performing query operations to the target column of `Add Index` statement or the target column is not directly related to online workloads, you can use the default `ADD INDEX` configuration.
