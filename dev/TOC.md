@@ -61,7 +61,10 @@
       - [Overview](/dev/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/dev/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/dev/how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog.md)
+    + Deploy and Use TiDB Binlog
+      - [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog.md)
+      - [Binlog Slave Client User Guide](/dev/reference/tools/tidb-binlog/binlog-slave-client.md)
+      - [Reparo User Guide](/dev/reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](/dev/how-to/configure/time-zone.md)
     - [Memory Control](/dev/how-to/configure/memory-control.md)
@@ -90,7 +93,7 @@
     - [Scale using Ansible](/dev/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/dev/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to Development Series](/dev/how-to/upgrade/from-previous-version.md)
+    - [Upgrade to TiDB 3.0](/dev/how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](/dev/how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](/dev/reference/tools/data-migration/upgrade.md)
     - [Upgrade TiDB Binlog Cluster](/dev/how-to/upgrade/tidb-binlog.md)
@@ -274,6 +277,7 @@
       - [`SHOW [FULL] PROCESSSLIST`](/dev/reference/sql/statements/show-processlist.md)
       - [`SHOW SCHEMAS`](/dev/reference/sql/statements/show-schemas.md)
       - [`SHOW [FULL] TABLES`](/dev/reference/sql/statements/show-tables.md)
+      - [`SHOW TABLE REGIONS`](/dev/reference/sql/statements/show-table-regions.md)
       - [`SHOW TABLE STATUS`](/dev/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/dev/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/dev/reference/sql/statements/show-warnings.md)
@@ -391,6 +395,7 @@
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
   + v3.0
+    - [3.0.4](/dev/releases/3.0.4.md)
     - [3.0.3](/dev/releases/3.0.3.md)
     - [3.0.2](/dev/releases/3.0.2.md)
     - [3.0.1](/dev/releases/3.0.1.md)
