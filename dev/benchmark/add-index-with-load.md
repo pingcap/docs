@@ -51,7 +51,7 @@ Use Sysbench to import **a table with 2000,000 data** into the Kubernetes cluste
 
 Execute the following command to import data:
 
-{{< copyable "sql" >}}
+{{< copyable "shell-regular" >}}
 
 ```sh
 sysbench oltp_common \
@@ -67,7 +67,7 @@ sysbench oltp_common \
 
 Execute the following command to run the test:
 
-{{< copyable "sql" >}}
+{{< copyable "shell-regular" >}}
 
 ```sh
 sysbench $testname \
