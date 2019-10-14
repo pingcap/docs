@@ -41,7 +41,7 @@ For relay units, manually recover replication using the following solution:
 
     Example: when the error occurs, `binlog-name = "mysql-bin.004451"` and `binlog-pos = 2453`. Update them respectively to `binlog-name = "mysql-bin.004452"` and `binlog-pos = 4`.
 
-5. Restart DM-worker.
+5. Restart the DM-worker.
 
 For binlog replication processing units, manually recover replication using the following solution:
 
