@@ -590,7 +590,7 @@ Now, there are still a few reasons for this error reporting (the latter two are 
 
 + Some tables involved in the DML operation are the same tables involved in the ongoing DDL operation.
 + The DML operation goes on for a long time. During this period, many DDL statements have been executed, which causes more than 1024 `schema` version changes. You can modify this default value by modifying the `tidb_max_delta_schema_count` variable.
-+ The TiDB server that accepts the DML request is not able to load `schema information` for a long time (possibly caused by PD or TiKV network failure). During this period, many DDL statements have been executed, which causes more than 100 `schema` version changes.
++ The TiDB server that accepts the DML request is not able to load `schema information` for a long time (possibly caused by the connection failure between TiDB and PD or TiKV). During this period, many DDL statements have been executed, which causes more than 100 `schema` version changes.
 
 > **Note:**
 >
