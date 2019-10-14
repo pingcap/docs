@@ -387,8 +387,6 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
 When the upstream MySQL instance that DM-worker connects to needs a downtime maintenance or when the instance crashes unexpectedly, you need to switch the DM-worker connection to another MySQL instance within the same replication group.
 
-This document introduces how to switch the DM-worker connection from one upstream MySQL instance to another within the same master-slave replication cluster.
-
 > **Note:**
 >
 > - You can only switch the DM-worker connection to a instance within the same master-slave replication cluster.
