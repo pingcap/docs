@@ -25,7 +25,7 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + `FOREIGN KEY` constraints
 + `FULLTEXT` functions and indexes
 + `SPATIAL` functions and indexes
-+ Character sets other than `utf8mb4` and `utf8`
++ Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + Collations other than `BINARY`
 + Add primary key
 + Drop primary key
@@ -66,6 +66,8 @@ The operations are executed as follows:
 
 1. The client issues the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
 2. The client issues the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
+
+Also, starting with TiDB 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `auto_increment` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
 ### Performance schema
 
