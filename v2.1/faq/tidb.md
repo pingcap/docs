@@ -584,20 +584,21 @@ Its usage is similar to MySQL:
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
 ```
 
-#### What are the causes of the "Information schema is changed" error?
+#### Why the `Information schema is changed` error is reported?
 
-TiDB uses the current `schema` to process the SQL statement when executing it, with support for asynchronous online DDL. Therefore, when a DML statement is executed simultaneously with DDL statements, each SQL statement must run against the same `schema`. This is when "Information schema is changed" error might happen. The following are possible causes for this error:
+TiDB handles the SQL statement using the `schema` of the time and supports online asynchronous DDL change. A DML statement and a DDL statement might be executed at the same time and you must ensure that each statement is executed using the same `schema`. Therefore, when the DML operation meets the ongoing DDL operation, the `Information schema is changed` error might be reported. Some improvements have been made to prevent too many error reportings during the DML operation.
 
-- The tables related to the running DML overlap with the tables of the running DDL.
-- Causes irrelevant to tables
+Now, there are still a few reasons for this error reporting (the latter two are unrelated to tables):
 
-    - The DML statement execution took a long time, during which many DDL statements (including the `lock table` statement of the new version) were executed. This caused the number of `schema` versions to exceed 1024 (default value; can be modified via the `tidb_max_delta_schema_count` variable).
++ Some tables involved in the DML operation are the same tables involved in the ongoing DDL operation.
++ The DML operation goes on for a long time. During this period, many DDL statements have been executed, which causes more than 1024 `schema` version changes. This value is set to `100` in TiDB before v2.1.18. Since v2.1.18, the default value is `1024` which can be modified by modifying the `tidb_max_delta_schema_count` variable.
++ The TiDB server that accepts the DML request is not able to load `schema information` for a long time (possibly caused by the connection failure between TiDB and PD or TiKV). During this period, many DDL statements have been executed, which causes more than 100 `schema` version changes.
 
-    - The TiDB instance that received the DML request could not load `schema information` over a long time (network partition with PD or TiKV might cause this). During this period, many DDL statements were executed (including the `lock table` statement), and `schema` had changed for more than 100 versions (currently we do not get information by `schema` version).
-  
 > **Note:**
 >
-> The `create table` operation involves one `schema` change, which is consistent with the number of `schema state` changed by each DDL operation. For example, the `add column` operation has four versions.
+> + Currently, TiDB does not cache all the `schema` version changes.
+> + For each DDL operation, the number of `schema` version changes is the same with the number of corresponding `schema state` version changes.
+> + Different DDL operations cause different number of `schema` version changes. For example, the `CREATE TABLE` statement causes one `schema` version change while the `ADD COLUMN` statement causes four.
 
 #### What are the causes of the "Information schema is out of date" error
 
