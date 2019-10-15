@@ -103,6 +103,9 @@ You can use the `start-task` command to create the data replication task. Data M
 
 ```bash
 help start-task
+```
+
+```
 start a task as defined in the config file
 
 Usage:
@@ -188,7 +191,7 @@ You can use `query-error` to check error information on replication tasks or rel
 
 `query-error` is often used to obtain the binlog position information required by `sql-skip`/`sql-replace`. For details on the flags and results of `query-error`, refer to [`query-error` in Skip or Replace Abnormal SQL Statements](/v3.0/reference/tools/data-migration/skip-replace-sqls.md#query-error).
 
-### Pause a data replication task
+### Pause the data replication task
 
 You can use the `pause-task` command to pause a data replication task.
 
@@ -441,7 +444,7 @@ help update-task
 update a task's config for routes, filters, column-mappings, black-white-list
 
 Usage:
-  dmctl update-task [-w worker ...] <config-file> [flags]
+  dmctl update-task [-w worker ...] <config_file> [flags]
 
 Flags:
   -h, --help   help for update-task
@@ -492,13 +495,13 @@ Currently, DDL lock related commands mainly include `show-ddl-locks`, `unlock-dd
 
 ## Other task and cluster management commands
 
-Besides the above commonly used task management commands, there are also other commands in DM that are used for managing data replication tasks and DM clusters.
+In addition to the common task management commands above, DM also provides some other commands to manage data replication tasks and DM clusters.
 
-### Check task configuration file
+### Check the task configuration file
 
 You can use the `check-task` command to check whether a specified configuration file (`task.yaml`) of the replication task is valid, or whether the configuration of upstream/downstream database, permission setting, and schema meet the replication requirements. For more details, refer to [Precheck the upstream MySQL instance configuration](/v3.0/reference/tools/data-migration/precheck.md).
 
- `check-task` is also performed before `start-task`.
+When you use `start-task` to start a replication task, DM also executes all checks done by `check-task`.
 
 {{< copyable "" >}}
 
@@ -529,7 +532,7 @@ check-task task.yaml
 
 #### Flags description
 
-+ `config-file`:(Required) Specifies the path of the `task.yaml` file
++ `config-file`: (Required) Specifies the path of the `task.yaml` file
 
 #### Returned results
 

@@ -78,7 +78,7 @@ This document introduces the query result and subtask status of Data Migration (
                                                 # the upstream.
                 "stage": "Running",             # The status of the `Sync` processing unit of the relay log.
                 "result": null
-            }
+            },
             "sourceID": "172.17.0.2:3306"        # ID of the upstream instance or replication group
         },
         {
@@ -108,7 +108,8 @@ This document introduces the query result and subtask status of Data Migration (
                 "relayCatchUpMaster": true,
                 "stage": "Running",
                 "result": null
-            }
+            },
+            "sourceID": "172.17.0.2:3306"
         },
         {
             "result": true,
@@ -145,7 +146,8 @@ This document introduces the query result and subtask status of Data Migration (
                 "relayBinlogGtid": "97b5142f-e19c-11e8-808c-0242ac110005:1-9",
                 "relayCatchUpMaster": true,
                 "stage": "Running",
-                "result": null
+                "result": null,
+                "sourceID": "172.17.0.2:3306"
             }
         }
     ]
