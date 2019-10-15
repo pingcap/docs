@@ -108,7 +108,7 @@ help start-task
 start a task as defined in the config file
 
 Usage:
- dmctl start-task [-w worker ...] <config_file> [flags]
+ dmctl start-task [-w worker ...] <config-file> [flags]
 
 Flags:
  -h, --help   help for start-task
@@ -128,7 +128,7 @@ start-task [ -w "172.16.30.15:8262"] ./task.yaml
 #### Flags description
 
 - `-w`: (Optional) Specifies the group of DM-workers to execute `task.yaml`. If it is set, only subtasks of the specified task on these DM-workers are started.
-- `config_file`: (Required) Specifies the file path of `task.yaml`.
+- `config-file`: (Required) Specifies the file path of `task.yaml`.
 
 #### Returned results
 
@@ -157,6 +157,9 @@ You can use the `query-status` task management command to check the status of th
 
 ```bash
 help query-status
+```
+
+```
 query task status
 
 Usage:
@@ -443,7 +446,7 @@ help update-task
 update a task's config for routes, filters, column-mappings, black-white-list
 
 Usage:
-  dmctl update-task [-w worker ...] <config_file> [flags]
+  dmctl update-task [-w worker ...] <config-file> [flags]
 
 Flags:
   -h, --help   help for update-task
@@ -797,7 +800,7 @@ You can use `sql-skip` to preset a skip operation to be executed when the positi
 
 ### Preset replace operation
 
-You can use `sql-replace` to preset a replace operation to be executed when the position or the SQL statement of the binlog event matches with the specified binlog-pos or sql-pattern.. For descriptions of related parameters and results, refer to [`sql-replace`](/v2.1/reference/tools/data-migration/skip-replace-sqls.md#sql-replace).
+You can use `sql-replace` to preset a replace operation to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`. For descriptions of related parameters and results, refer to [`sql-replace`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-replace).
 
 ### Forcefully refresh the `task => DM-workers` mapping
 
