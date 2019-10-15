@@ -59,7 +59,10 @@
       - [Overview](/v3.0/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/v3.0/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/v3.0/how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](/v3.0/how-to/deploy/tidb-binlog.md)
+    + Deploy and Use TiDB Binlog
+      - [TiDB Binlog Cluster Deployment](/v3.0/how-to/deploy/tidb-binlog.md)
+      - [Binlog Slave Client User Guide](/v3.0/reference/tools/tidb-binlog/binlog-slave-client.md)
+      - [Reparo User Guide](/v3.0/reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](/v3.0/how-to/configure/time-zone.md)
     - [Memory Control](/v3.0/how-to/configure/memory-control.md)
@@ -270,6 +273,7 @@
       - [`SHOW [FULL] PROCESSSLIST`](/v3.0/reference/sql/statements/show-processlist.md)
       - [`SHOW SCHEMAS`](/v3.0/reference/sql/statements/show-schemas.md)
       - [`SHOW [FULL] TABLES`](/v3.0/reference/sql/statements/show-tables.md)
+      - [`SHOW TABLE REGIONS`](/v3.0/reference/sql/statements/show-table-regions.md)
       - [`SHOW TABLE STATUS`](/v3.0/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/v3.0/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/v3.0/reference/sql/statements/show-warnings.md)
@@ -283,6 +287,7 @@
     - [Generated Columns](/v3.0/reference/sql/generated-columns.md)
     - [Partitioning](/v3.0/reference/sql/partitioning.md)
     - [Character Set](/v3.0/reference/sql/character-set.md)
+    - [SQL Mode](/v3.0/reference/sql/sql-mode.md)
     - [Views](/v3.0/reference/sql/views.md)
   + Configuration
     + tidb-server
@@ -292,8 +297,10 @@
       - [Configuration File](/v3.0/reference/configuration/tidb-server/configuration-file.md)
     + pd-server
       - [Configuration Flags](/v3.0/reference/configuration/pd-server/configuration.md)
+      - [Configuration File](/v3.0/reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](/v3.0/reference/configuration/tikv-server/configuration.md)
+      - [Configuration File](/v3.0/reference/configuration/tikv-server/configuration-file.md)
   + Key Monitoring Metrics
     - [Overview](/v3.0/reference/key-monitoring-metrics/overview-dashboard.md)
     - [TiDB](/v3.0/reference/key-monitoring-metrics/tidb-dashboard.md)
@@ -388,6 +395,7 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.4](/v3.0/releases/3.0.4.md)
     - [3.0.3](/v3.0/releases/3.0.3.md)
     - [3.0.2](/v3.0/releases/3.0.2.md)
     - [3.0.1](/v3.0/releases/3.0.1.md)
