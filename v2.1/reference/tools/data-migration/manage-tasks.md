@@ -800,7 +800,7 @@ You can use `sql-skip` to preset a skip operation to be executed when the positi
 
 ### Preset replace operation
 
-You can use `sql-replace` to preset a replace operation to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`. For descriptions of related parameters and results, refer to [`sql-replace`](/dev/reference/tools/data-migration/skip-replace-sqls.md#sql-replace).
+You can use `sql-replace` to preset a replace operation to be executed when the position or the SQL statement of the binlog event matches with the specified `binlog-pos` or `sql-pattern`. For descriptions of related parameters and results, refer to [`sql-replace`](/v2.1/reference/tools/data-migration/skip-replace-sqls.md#sql-replace).
 
 ### Forcefully refresh the `task => DM-workers` mapping
 
