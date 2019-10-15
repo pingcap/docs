@@ -6,7 +6,7 @@ category: tools
 
 # sync-diff-inspector User Guide
 
-[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to compare the data that is stored in databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
+[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
 This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. You can download it at [tidb-enterprise-tools-latest-linux-amd64](https://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz).
 
@@ -22,11 +22,11 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ### Restrictions on usage
 
-* At present, online check is not supported. It is necessary to ensure that no data is written into the upstream-downstream checklist, or that data in a certain range is not changed. You can check data in this range by setting `range`.
+* At present, online check is not supported. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
 
 * `JSON`, `BIT`, `BINARY`, `BLOB` and other types of data are not supported. When data check is being perform, you can set `ignore-columns` to skip checking these types of data.
 
-* `FLOAT`, `DOUBLE` and other floating point types are implemented differently in TiDB and MySQL, so checksum is calculated differently in TiDB and MySQL. If the data checks are inconsistent due to these data types, you must set `ignore-columns` to skip checking these columns.
+* `FLOAT`, `DOUBLE` and other floating point types are implemented differently in TiDB and MySQL, so checksum is calculated differently in TiDB and MySQL. If the data checks are inconsistent due to these data types, set `ignore-columns` to skip checking these columns.
 
 ### Database privilege
 
@@ -45,7 +45,7 @@ sync-diff-inspector needs to obtain the information of table schema, to query da
     - `SHOW_DATABASES` (views database name)
     - `RELOAD` (views table schema)
 
-### Configuration File Description
+### Configuration file description
 
 The configuration of sync-diff-inspector consists of three parts:
 
