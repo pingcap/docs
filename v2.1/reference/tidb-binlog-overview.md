@@ -48,17 +48,6 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 * Pump stores binlogs and sends the binlogs to Drainer in order
 * Drainer reads binlogs of each Pump, merges and sorts the binlogs, and sends the binlogs downstream
 
-## Hardware requirements
-
-Pump and Drainer can be deployed and run on common 64-bit hardware server platforms with the Intel x86-64 architecture.
-
-The server hardware requirements for development, testing, and the production environment are as follows:
-
-| Service     | The Number of Servers       | CPU   | Disk          | Memory   |
-| -------- | -------- | --------| --------------- | ------ |
-| Pump | 3 | 8 core+    | SSD, 200 GB+ | 16G |
-| Drainer | 1 | 8 core+ | SAS, 100 GB+ (If you need to output a local file, use SSD and increase the disk size) | 16G |
-
 ## Notes
 
 * You need to use TiDB v2.0.8-binlog, v2.1.0-rc.5 or a later version. Older versions of TiDB cluster are not compatible with the cluster version of TiDB Binlog.
@@ -72,4 +61,14 @@ The server hardware requirements for development, testing, and the production en
     - If your TiDB version is earlier than 2.1.9, set `db-type="pb"`.
     - If your TiDB version is 2.1.9 or later, set `db-type="file"` or `db-type="pb"`.
 
-* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/v2.1/reference/tools/sync-diff-inspector/overview.md) to verify the data after data replication.
+* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/v2.1/reference/tools/sync-diff-inspector.md) to verify the data after data replication.
+
+## TiDB Binlog Instructions
+
+Once you grasp the basics from the above, you can refer to the following documents to use TiDB Binlog:
+
+- [TiDB Binlog Tutorial](/v2.1/how-to/get-started/tidb-binlog.md)
+- [TiDB Binlog Cluster Deployment](/v2.1/how-to/deploy/tidb-binlog.md)
+- [TiDB Binlog Monitoring](/v2.1/how-to/monitor/tidb-binlog.md)
+- [TiDB Binlog Cluster Operations](/v2.1/how-to/maintain/tidb-binlog.md)
+- [Upgrade TiDB Binlog Cluster](/v2.1/how-to/upgrade/tidb-binlog.md)

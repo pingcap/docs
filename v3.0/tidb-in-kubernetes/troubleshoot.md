@@ -55,7 +55,7 @@ To use the diagnostic mode for troubleshooting:
 
 ## Recover the cluster after accidental deletion
 
-TiDB Operator uses PV (Persistent Volume) and PVC (Persistent Volume Claim) to store persistent data. If you accidentally delete a cluster using `helm delete`, the PV/PVC objects and data are still retained to ensure data security.
+TiDB Operator uses PV (Persistent Volume) and PVC (Persistent Volume Claim) to store persistent data. If you accidentally delete a cluster using `helm delete`, the PV/PVC objects and data are still retained to ensure data safety.
 
 To restore the cluster at this time, use the `helm install` command to create a cluster with the same name. The retained PV/PVC and data are reused.
 
@@ -333,3 +333,25 @@ Normally, when a TiKV Pod is in a healthy state (`Running`), the corresponding T
         ```
 
     After the Pod is re-created, a new store is registered in the TiKV cluster. Then the recovery is completed.
+
+## Long queries are abnormally interrupted in TiDB
+
+Load balancers often set the idle connection timeout. If no data is sent over a connection for a specific period of time, load balancer closes the connection.
+
+If a long query is interrupted when you use TiDB, check the middleware program between the client and the TiDB server.
+If the idle timeout is not long enough for your query, try to set the timeout to a larger value. If you cannot reset it, enable the `tcp-keep-alive` option in TiDB.
+
+In Linux, the keepalive probe packet is sent every 7,200 seconds by default. To shorten the interval, configure `sysctls` via the `podSecurityContext` field. Here is an example:
+
+```
+tidb:
+  ...
+  podSecurityContext:
+    sysctls:
+    - name: net.ipv4.tcp_keepalive_time
+      value: "300"
+```
+
+> **Note:**
+>
+> The configuration above requires TiDB Operator 1.1 or later version.
