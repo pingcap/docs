@@ -2,7 +2,6 @@
 title: TiSpark Overview
 summary: Learn the Overview of TiSpark.
 category: reference
-aliases: ['/docs/reference/tispark/']
 ---
 
 # Overview
@@ -27,11 +26,11 @@ Most of the TiSpark logic is inside a thin layer, namely, the [tikv-client](http
 ## Get TiSpark
 
 + Currently, TiSpark 2.1.5 is the latest stable version, which is highly recommended. It is compatible with Spark 2.3.0+ and Spark 2.4.0+. It is also compatible with TiDB-2.x and TiDB-3.x.
-    - When using TiSpark 2.1.5 with Spark 2.3.0+, use version `2.1.5-spark_2.3` and follow the [document for Spark 2.3+](/v3.0/reference/tispark/userguide.md).
-    - When using TiSpark 2.1.5 with Spark 2.4.0+, use version `2.1.5-spark_2.4` and follow the [document for Spark 2.3+](/v3.0/reference/tispark/userguide.md).
+    - When using TiSpark 2.1.5 with Spark 2.3.0+, use version `2.1.5-spark_2.3` and follow the [document for Spark 2.3+](/v2.1/reference/tispark/userguide.md).
+    - When using TiSpark 2.1.5 with Spark 2.4.0+, use version `2.1.5-spark_2.4` and follow the [document for Spark 2.3+](/v2.1/reference/tispark/userguide.md).
 
 + TiSpark 1.2.1 is the latest stable version compatible with Spark 2.1.0+.
-    - When using TiSpark 1.2.1, follow the [document for Spark 2.1](/v3.0/reference/tispark/userguide-spark2.1.md).
+    - When using TiSpark 1.2.1, follow the [document for Spark 2.1](/v2.1/reference/tispark/userguide-spark2.1.md).
 
 You might also [build from sources](#how-to-build-from-sources) to try the new features on TiSpark master branch.
 
@@ -181,7 +180,7 @@ customer.write
 .save()
 ```
 
-See [here](/v3.0/reference/tispark/datasource-api-userguide.md) for more details.
+See [here](/v2.1/reference/tispark/datasource-api-userguide.md) for more details.
 
 ## Configuration
 
@@ -233,7 +232,7 @@ Do not use `spark.sql.session.timeZone`.
 
 ## Statistics information
 
-For how TiSpark can benefit from TiDB's statistic information, see [here](/v3.0/reference/tispark/userguide.md).
+For how TiSpark can benefit from TiDB's statistic information, see [here](/v2.1/reference/tispark/userguide.md).
 
 ## Compatibility with TiDB 3.0
 
@@ -249,7 +248,7 @@ TiSpark currently **does not support** `view`. Users are not be able to observe 
 
 TiSpark currently supports `Range Partition` and `Hash Partition`. Users can select data from the `Range Partition` table and the `Hash Partition` table through TiSpark.
 
-In most cases, TiSpark use a full table scan on partition tables. Only in certain cases, TiSpark applies partition pruning. For more details, see [here](/v3.0/reference/tispark/userguide.md).
+In most cases, TiSpark use a full table scan on partition tables. Only in certain cases, TiSpark applies partition pruning. For more details, see [here](/v2.1/reference/tispark/userguide.md).
 
 ## Upgrade from TiDB-2.x to TiDB-3.x
 

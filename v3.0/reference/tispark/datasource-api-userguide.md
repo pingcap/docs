@@ -54,33 +54,38 @@ Fow how to use it with extensions enabled, see [code examples with extensions](h
 1. Initiate `SparkConf`.
 
     ```scala
-    val sparkConf = new SparkConf()
-      .setIfMissing("spark.master", "local[*]")
-      .setIfMissing("spark.app.name", getClass.getName)
-      .setIfMissing("spark.sql.extensions", "org.apache.spark.sql.TiExtensions")
-      .setIfMissing("spark.tispark.pd.addresses", "pd0:2379")
-      .setIfMissing("spark.tispark.tidb.addr", "tidb")
-      .setIfMissing("spark.tispark.tidb.password", "")
-      .setIfMissing("spark.tispark.tidb.port", "4000")
-      .setIfMissing("spark.tispark.tidb.user", "root")
+    val sparkConf = new SparkConf().
+      setIfMissing("spark.master", "local[*]").
+      setIfMissing("spark.app.name", getClass.getName).
+      setIfMissing("spark.sql.extensions", "org.apache.spark.sql.TiExtensions").
+      setIfMissing("spark.tispark.pd.addresses", "pd0:2379").
+      setIfMissing("spark.tispark.tidb.addr", "tidb").
+      setIfMissing("spark.tispark.tidb.port", "4000")
+      // if tidb <= 3.x, please set the spark.tispark.write.without_lock_table=true
+      // .setIfMissing("spark.tispark.write.without_lock_table", "true")
 
     val spark = SparkSession.builder.config(sparkConf).getOrCreate()
-    val sqlContext = spark.sqlContext
     ```
 
 2. Read using scala.
 
     ```scala
+    val sqlContext = spark.sqlContext
+
     // use TiDB config in the spark config if no data source config is provided
-    val tidbOptions: Map[String, String] = Map()
-    val df = sqlContext.read
-      .format("tidb")
-      .options(tidbOptions)
-      .option("database", "tpch_test")
-      .option("table", "CUSTOMER")
-      .load()
-      .filter("C_CUSTKEY = 1")
-      .select("C_NAME")
+    val tidbOptions: Map[String, String] = Map(
+      "tidb.user" -> "root",
+      "tidb.password" -> ""
+    )
+
+    val df = sqlContext.read.
+      format("tidb").
+      options(tidbOptions).
+      option("database", "tpch_test").
+      option("table", "CUSTOMER").
+      load().
+      filter("C_CUSTKEY = 1").
+      select("C_NAME")
     df.show()
     ```
 
@@ -102,24 +107,27 @@ Fow how to use it with extensions enabled, see [code examples with extensions](h
     */
 
     // use TiDB config in the spark config if no data source config is provided
-    val tidbOptions: Map[String, String] = Map()
+    val tidbOptions: Map[String, String] = Map(
+      "tidb.user" -> "root",
+      "tidb.password" -> ""
+    )
 
     // data to write
-    val df = sqlContext.read
-      .format("tidb")
-      .options(tidbOptions)
-      .option("database", "tpch_test")
-      .option("table", "ORDERS")
-      .load()
+    val df = sqlContext.read.
+      format("tidb").
+      options(tidbOptions).
+      option("database", "tpch_test").
+      option("table", "ORDERS").
+      load()
 
     // append
-    df.write
-      .format("tidb")
-      .options(tidbOptions)
-      .option("database", "tpch_test")
-      .option("table", "target_table_orders")
-      .mode("append")
-      .save()
+    df.write.
+      format("tidb").
+      options(tidbOptions).
+      option("database", "tpch_test").
+      option("table", "target_table_orders").
+      mode("append").
+      save()
     ```
 
 4. Use another TiDB.
@@ -136,14 +144,14 @@ Fow how to use it with extensions enabled, see [code examples with extensions](h
       "spark.tispark.pd.addresses" -> "pd0:2379"
     )
 
-    val df = sqlContext.read
-      .format("tidb")
-      .options(tidbOptions)
-      .option("database", "tpch_test")
-      .option("table", "CUSTOMER")
-      .load()
-      .filter("C_CUSTKEY = 1")
-      .select("C_NAME")
+    val df = sqlContext.read.
+      format("tidb").
+      options(tidbOptions).
+      option("database", "tpch_test").
+      option("table", "CUSTOMER").
+      load().
+      filter("C_CUSTKEY = 1").
+      select("C_NAME").
     df.show()
     ```
 
@@ -154,155 +162,163 @@ see [code examples without extensions](https://github.com/pingcap/tispark-test/b
 
 1. Initiate `SparkConf`:
 
-```scala
-import org.apache.spark.SparkConf
-import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
+    ```scala
+    import org.apache.spark.SparkConf
+    import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
 
-val sparkConf = new SparkConf()
-  .setIfMissing("spark.master", "local[*]")
-  .setIfMissing("spark.app.name", getClass.getName)
+    val sparkConf = new SparkConf()
+      .setIfMissing("spark.master", "local[*]")
+      .setIfMissing("spark.app.name", getClass.getName)
 
-val spark = SparkSession.builder.config(sparkConf).getOrCreate()
-val sqlContext = spark.sqlContext
-```
+    val spark = SparkSession.builder.config(sparkConf).getOrCreate()
+    val sqlContext = spark.sqlContext
+    ```
+
+    If TiDB version is 3.x or earlier, set `spark.tispark.write.without_lock_table=true.setIfMissing("spark.tispark.write.without_lock_table", "true")`.
 
 2. Read using scala:
 
-```scala
-// TiSpark's common options can also be passed in,
-// for example, spark.tispark.plan.allow_agg_pushdown`, spark.tispark.plan.allow_index_read, etc.
-// spark.tispark.plan.allow_index_read is optional.
-val tidbOptions: Map[String, String] = Map(
-  "tidb.addr" -> "tidb",
-  "tidb.password" -> "",
-  "tidb.port" -> "4000",
-  "tidb.user" -> "root",
-  "spark.tispark.pd.addresses" -> "pd0:2379"
-)
+    ```scala
+    val sqlContext = spark.sqlContext
 
-val df = sqlContext.read
-  .format("tidb")
-  .options(tidbOptions)
-  .option("database", "tpch_test")
-  .option("table", "CUSTOMER")
-  .load()
-  .filter("C_CUSTKEY = 1")
-  .select("C_NAME")
-df.show()
-```
+    // TiSpark's common options can also be passed in,
+    // for example, spark.tispark.plan.allow_agg_pushdown`, spark.tispark.plan.allow_index_read, etc.
+    // spark.tispark.plan.allow_index_read is optional.
+    val tidbOptions: Map[String, String] = Map(
+      "tidb.addr" -> "tidb",
+      "tidb.password" -> "",
+      "tidb.port" -> "4000",
+      "tidb.user" -> "root",
+      "spark.tispark.pd.addresses" -> "pd0:2379"
+    )
+
+    val df = sqlContext.read.
+      format("tidb").
+      options(tidbOptions).
+      option("database", "tpch_test").
+      option("table", "CUSTOMER").
+      load().
+      filter("C_CUSTKEY = 1").
+      select("C_NAME").
+    df.show()
+    ```
 
 3. Write using scala:
 
-```scala
-/* create table before run the code
- CREATE TABLE tpch_test.target_table_customer (
-  `C_CUSTKEY` int(11) NOT NULL,
-  `C_NAME` varchar(25) NOT NULL,
-  `C_ADDRESS` varchar(40) NOT NULL,
-  `C_NATIONKEY` int(11) NOT NULL,
-  `C_PHONE` char(15) NOT NULL,
-  `C_ACCTBAL` decimal(15,2) NOT NULL,
-  `C_MKTSEGMENT` char(10) NOT NULL,
-  `C_COMMENT` varchar(117) NOT NULL
-)
-*/
+    ```scala
+    /* create table before run the code
+    CREATE TABLE tpch_test.target_table_customer (
+      `C_CUSTKEY` int(11) NOT NULL,
+      `C_NAME` varchar(25) NOT NULL,
+      `C_ADDRESS` varchar(40) NOT NULL,
+      `C_NATIONKEY` int(11) NOT NULL,
+      `C_PHONE` char(15) NOT NULL,
+      `C_ACCTBAL` decimal(15,2) NOT NULL,
+      `C_MKTSEGMENT` char(10) NOT NULL,
+      `C_COMMENT` varchar(117) NOT NULL
+    )
+    */
 
-// Common options can also be passed in,
-// for example, spark.tispark.plan.allow_agg_pushdown, spark.tispark.plan.allow_index_read, etc.
-// spark.tispark.plan.allow_index_read is optional.
-val tidbOptions: Map[String, String] = Map(
-  "tidb.addr" -> "127.0.0.1",
-  "tidb.password" -> "",
-  "tidb.port" -> "4000",
-  "tidb.user" -> "root",
-  "spark.tispark.pd.addresses" -> "127.0.0.1:2379"
-)
+    // Common options can also be passed in,
+    // for example, spark.tispark.plan.allow_agg_pushdown, spark.tispark.plan.allow_index_read, etc.
+    // spark.tispark.plan.allow_index_read is optional.
+    val tidbOptions: Map[String, String] = Map(
+      "tidb.addr" -> "127.0.0.1",
+      "tidb.password" -> "",
+      "tidb.port" -> "4000",
+      "tidb.user" -> "root",
+      "spark.tispark.pd.addresses" -> "127.0.0.1:2379"
+    )
 
-val df = readUsingScala(sqlContext)
+    val df = readUsingScala(sqlContext)
 
-// append
-df.write
-  .format("tidb")
-  .options(tidbOptions)
-  .option("database", "tpch_test")
-  .option("table", "target_table_customer")
-  .mode("append")
-  .save()
-```
+    df.write.
+      format("tidb").
+      options(tidbOptions).
+      option("database", "tpch_test").
+      option("table", "target_table_customer").
+      mode("append").
+      save()
+    ```
 
 ## Use data source API in SparkSQL
 
 1. Configure TiDB or PD addresses and enable write through SparkSQL in `conf/spark-defaults.conf` as follows:
 
-```
-spark.tispark.pd.addresses 127.0.0.1:2379
-spark.tispark.tidb.addr 127.0.0.1
-spark.tispark.tidb.port 4000
-spark.tispark.tidb.user root
-spark.tispark.tidb.password password
-spark.tispark.write.allow_spark_sql true
-```
+    ```
+    spark.tispark.pd.addresses 127.0.0.1:2379
+    spark.tispark.tidb.addr 127.0.0.1
+    spark.tispark.tidb.port 4000
+    spark.tispark.write.allow_spark_sql true
+    ```
+
+    If the TiDB version is 3.x or earlier, set `spark.tispark.write.without_lock_table=true spark.tispark.write.without_lock_table true`.
 
 2. Create a new table using mysql-client:
 
-```sql
-CREATE TABLE tpch_test.TARGET_TABLE_CUSTOMER (
-  `C_CUSTKEY` int(11) NOT NULL,
-  `C_NAME` varchar(25) NOT NULL,
-  `C_ADDRESS` varchar(40) NOT NULL,
-  `C_NATIONKEY` int(11) NOT NULL,
-  `C_PHONE` char(15) NOT NULL,
-  `C_ACCTBAL` decimal(15,2) NOT NULL,
-  `C_MKTSEGMENT` char(10) NOT NULL,
-  `C_COMMENT` varchar(117) NOT NULL
-)
-```
+    ```sql
+    CREATE TABLE tpch_test.TARGET_TABLE_CUSTOMER (
+      `C_CUSTKEY` int(11) NOT NULL,
+      `C_NAME` varchar(25) NOT NULL,
+      `C_ADDRESS` varchar(40) NOT NULL,
+      `C_NATIONKEY` int(11) NOT NULL,
+      `C_PHONE` char(15) NOT NULL,
+      `C_ACCTBAL` decimal(15,2) NOT NULL,
+      `C_MKTSEGMENT` char(10) NOT NULL,
+      `C_COMMENT` varchar(117) NOT NULL
+    )
+    ```
 
 3. Register a TiDB table `tpch_test.CUSTOMER` to the Spark Catalog:
 
-```sql
-CREATE TABLE CUSTOMER_SRC USING tidb OPTIONS (database 'tpch_test', table 'CUSTOMER')
-```
+    ```sql
+    CREATE TABLE CUSTOMER_SRC USING tidb OPTIONS (
+      tidb.user 'root',
+      tidb.password '',
+      database 'tpch_test',
+      table 'CUSTOMER'
+    )
+    ```
 
 4. Select data from `tpch_test.CUSTOMER`:
 
-```sql
-SELECT * FROM CUSTOMER_SRC limit 10
-```
+    ```sql
+    SELECT * FROM CUSTOMER_SRC limit 10
+    ```
 
 5. Register another TiDB table `tpch_test.TARGET_TABLE_CUSTOMER` to the Spark Catalog:
 
-```sql
-CREATE TABLE CUSTOMER_DST USING tidb OPTIONS (database 'tpch_test', table 'TARGET_TABLE_CUSTOMER')
-```
+    ```sql
+    CREATE TABLE CUSTOMER_DST USING tidb OPTIONS (database 'tpch_test', table 'TARGET_TABLE_CUSTOMER')
+    ```
 
 6. Write data to `tpch_test.TARGET_TABLE_CUSTOMER`:
 
-```sql
-INSERT INTO CUSTOMER_DST VALUES(1000, 'Customer#000001000', 'AnJ5lxtLjioClr2khl9pb8NLxG2', 9, '19-407-425-2584', 2209.81, 'AUTOMOBILE', '. even, express theodolites upo')
+    ```sql
+    INSERT INTO CUSTOMER_DST VALUES(1000, 'Customer#000001000', 'AnJ5lxtLjioClr2khl9pb8NLxG2', 9, '19-407-425-2584', 2209.81, 'AUTOMOBILE', '. even, express theodolites upo')
 
-INSERT INTO CUSTOMER_DST SELECT * FROM CUSTOMER_SRC
-```
+    INSERT INTO CUSTOMER_DST SELECT * FROM CUSTOMER_SRC
+    ```
 
 ## TiDB Options
 
 The following table shows the TiDB-specific options, which can be passed in through `TiDBOptions` or `SparkConf`.
 
-| Key                         | Short Name    | Required value | Description                                                                                                 | Default |
-| :--------------------------- | :------------- | :-------- | :----------------------------------------------------------------------------------------------------------- | :------- |
-| spark.tispark.pd.addresses  | -             | true     | The addresses of PD clusters, split by comma                                                                        | -       |
-| spark.tispark.tidb.addr     | tidb.addr     | true     | TiDB address, which currently only supports one instance                                                           | -       |
-| spark.tispark.tidb.port     | tidb.port     | true     | TiDB Port                                                                                                   | -       |
-| spark.tispark.tidb.user     | tidb.user     | true     | TiDB User                                                                                                   | -       |
-| spark.tispark.tidb.password | tidb.password | true     | TiDB Password                                                                                               | -       |
-| database                    | -             | true     | TiDB Database                                                                                               | -       |
-| table                       | -             | true     | TiDB Table                                                                                                  | -       |
-| skipCommitSecondaryKey      | -             | false    | Whether to skip the commit phase of secondary keys                                                                                   | false   |
-| enableRegionSplit           | -             | false    | To split Region to avoid hot Region during insertion                                                        | true    |
-| regionSplitNum              | -             | false    | The Region split number defined by user during insertion                                                           | 0       |
-| replace                     | -             | false    | To define the behavior of append                                                                              | false   |
-| lockTTLSeconds              | -             | false    | TiKV's lock TTL. The write duration must be no longer than `lockTTLSeconds`, otherwise write might fail because of the Garbage Collection (GC).              | 3600    |
-| writeConcurrency            | -             | false    | The maximum number of threads that write data to TiKV. It is recommended that `writeConcurrency` is smaller than or equal to 8 * `number of TiKV instance`. | 0       |
+| Key                        | Short Name    | Required value | Description                                                                                                                                                 | Default |
+| -------------------------- | ------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| spark.tispark.pd.addresses | -             | true           | The addresses of PD clusters, split by comma                                                                                                                | -       |
+| spark.tispark.tidb.addr    | tidb.addr     | true           | TiDB address, which currently only supports one instance                                                                                                    | -       |
+| spark.tispark.tidb.port    | tidb.port     | true           | TiDB Port                                                                                                                                                   | -       |
+| spark.tispark.tidb.user    | tidb.user     | true           | TiDB User                                                                                                                                                   | -       |
+| tidb.password              | tidb.password | true           | TiDB Password                                                                                                                                               | -       |
+| database                   | -             | true           | TiDB Database                                                                                                                                               | -       |
+| table                      | -             | true           | TiDB Table                                                                                                                                                  | -       |
+| skipCommitSecondaryKey     | -             | false          | Whether to skip the commit phase of secondary keys                                                                                                          | false   |
+| enableRegionSplit          | -             | false          | To split Region to avoid hot Region during insertion                                                                                                        | true    |
+| regionSplitNum             | -             | false          | The Region split number defined by user during insertion                                                                                                    | 0       |
+| replace                    | -             | false          | To define the behavior of append                                                                                                                            | false   |
+| lockTTLSeconds             | -             | false          | TiKV's lock TTL. The write duration must be no longer than `lockTTLSeconds`, otherwise write might fail because of the Garbage Collection (GC).             | 3600    |
+| writeConcurrency           | -             | false          | The maximum number of threads that write data to TiKV. It is recommended that `writeConcurrency` is smaller than or equal to 8 * `number of TiKV instance`. | 0       |
 
 ## TiDB version and configuration for write
 
