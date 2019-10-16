@@ -104,7 +104,7 @@ Usage of worker:
 
 **Deployment method 2: configuration file**
 
-Below is the DM-worker configuration file. It is recommended that you use this method and write the above configuration to `conf/dm-worker1.toml`.
+Below is the DM-worker configuration file. It is recommended that you use this method and write the following configuration to `conf/dm-worker1.toml`.
 
 ```toml
 # Worker Configuration.
@@ -202,7 +202,7 @@ Usage of dm-master:
 
 **Deployment method 2: configuration file**
 
-Below is the configuration file of DM-master. It is recommended that you use this method and write the above configuration to `conf/dm-master.toml`.
+Below is the configuration file of DM-master. It is recommended that you use this method and write the following configuration to `conf/dm-master.toml`.
 
 ```toml
 # Master Configuration.
