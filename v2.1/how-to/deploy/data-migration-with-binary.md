@@ -57,7 +57,7 @@ Then, you get the encrypted password as shown below. Record this encrypted value
 fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
 ```
 
-You can deploy DM-worker by using command-line parameters or by using the configuration file.
+You can configure DM-worker by using command-line parameters or the configuration file.
 
 **Deployment method 1: DM-worker command-line parameters**
 
@@ -98,9 +98,13 @@ Usage of worker:
         DM-worker address
 ```
 
+> **Note:**
+>
+> In some situations, you cannot use the above method to configure DM-worker because some configurations are not exposed to the command line. Then use the configuration file instead.
+
 **Deployment method 2: configuration file**
 
-Below is the DM-worker configuration file:
+Below is the DM-worker configuration file. It is recommended that you use this method and write the above configuration to `conf/dm-worker1.toml`.
 
 ```toml
 # Worker Configuration.
@@ -155,8 +159,6 @@ port = 3306
 # backoff-max = 5m
 ```
 
-It is recommended that you use method 2 (the configuration file) and write the above configuration to `conf/dm-worker1.toml`.
-
 Then, run the following command in the terminal to operate DM-worker:
 
 {{< copyable "shell-regular" >}}
@@ -169,7 +171,7 @@ In DM-worker2, change `source-id` in the configuration file to `mysql-replica-02
 
 ### Deploy DM-master
 
-You can configure DM-master with two methods.
+You can configure DM-worker by using command-line parameters or the configuration file.
 
 **Deployment method 1: DM-master command-line parameters**
 
@@ -194,9 +196,13 @@ Usage of dm-master:
         Prints the example configuration of DM-master
 ```
 
+> **Note:**
+>
+> In some situations, you cannot use the above method to configure DM-master because some configurations are not exposed to the command line. Then use the configuration file instead.
+
 **Deployment method 2: configuration file**
 
-Below is the configuration file of DM-master:
+Below is the configuration file of DM-master. It is recommended that you use this method and write the above configuration to `conf/dm-master.toml`.
 
 ```toml
 # Master Configuration.
@@ -226,8 +232,6 @@ source-id = "mysql-replica-02"
 dm-worker = "192.168.0.6:8262"
 ```
 
-It is recommended that you use method 2 (the configuration file) and write the above configuration to `conf/dm-master.toml`.
-
 Then, run the following command in the terminal to operate DM-master:
 
 {{< copyable "shell-regular" >}}
@@ -240,7 +244,7 @@ Now, a DM cluster is successfully deployed.
 
 ### Create a data replication task
 
-Suppose that MySQL1 and MySQL2 have several sharded tales on each instance. These tables have the same structure and the same prefix "t" in their table names. The databases that they are in are named with the same prefix "sharding". In each of these tables, there is no conflict between the primary key and the unique key.
+Suppose that MySQL1 and MySQL2 have several sharded tales on each instance. These tables have the same structure and the same prefix "t" in their table names. The databases that they are in are named with the same prefix "sharding". In each sharded table, the primary key and unique key are different from those of all other tables.
 
 Now you need to replicate these sharded tables to the `db_target.t_target` table in TiDB.
 
