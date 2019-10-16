@@ -318,7 +318,11 @@
     - [Optimizer Hints](/v2.1/reference/performance/optimizer-hints.md)
     - [Tune TiKV](/v2.1/reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
-  - [TiSpark](/v2.1/reference/tispark.md)
+  + TiSpark
+    - [Overview](/v2.1/reference/tispark/overview.md)
+    - [User Guide](/v2.1/reference/tispark/userguide.md)
+    - [Data Source API User Guide](/v2.1/reference/tispark/datasource-api-userguide.md)
+    - [Use TiDB as Metastore DB](/v2.1/reference/tispark/use-tidb-as-metastore-db.md)
   - [TiDB Binlog Cluster Overview](/v2.1/reference/tidb-binlog-overview.md)
   - [Adopters](/v2.1/adopters.md)
 + FAQs
