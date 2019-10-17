@@ -584,6 +584,22 @@ Its usage is similar to MySQL:
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
 ```
 
+#### Why the `Information schema is changed` error is reported?
+
+TiDB handles the SQL statement using the `schema` of the time and supports online asynchronous DDL change. A DML statement and a DDL statement might be executed at the same time and you must ensure that each statement is executed using the same `schema`. Therefore, when the DML operation meets the ongoing DDL operation, the `Information schema is changed` error might be reported. Some improvements have been made to prevent too many error reportings during the DML operation.
+
+Now, there are still a few reasons for this error reporting (the latter two are unrelated to tables):
+
++ Some tables involved in the DML operation are the same tables involved in the ongoing DDL operation.
++ The DML operation goes on for a long time. During this period, many DDL statements have been executed, which causes more than 1024 `schema` version changes. This value is set to `100` in TiDB before v2.1.18. Since v2.1.18, the default value is `1024` which can be modified by modifying the `tidb_max_delta_schema_count` variable.
++ The TiDB server that accepts the DML request is not able to load `schema information` for a long time (possibly caused by the connection failure between TiDB and PD or TiKV). During this period, many DDL statements have been executed, which causes more than 100 `schema` version changes.
+
+> **Note:**
+>
+> + Currently, TiDB does not cache all the `schema` version changes.
+> + For each DDL operation, the number of `schema` version changes is the same with the number of corresponding `schema state` version changes.
+> + Different DDL operations cause different number of `schema` version changes. For example, the `CREATE TABLE` statement causes one `schema` version change while the `ADD COLUMN` statement causes four.
+
 ### Manage the TiKV server
 
 #### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
@@ -643,7 +659,7 @@ No. It differs from the table splitting rules of MySQL. In TiKV, the table Range
 
 #### How does Region split?
 
-Region is not divided in advance, but it follows a Region split mechanism. When the Region size exceeds the value of the `region-split-size` or `region-split-keys` parameters, split is triggered. After the split, the information is reported to PD.
+Region is not divided in advance, but it follows a Region split mechanism. When the Region size exceeds the value of the `region-max-size` or `region-max-keys` parameters, split is triggered. After the split, the information is reported to PD.
 
 #### Does TiKV have the `innodb_flush_log_trx_commit` parameter like MySQL, to guarantee the security of data?
 
@@ -663,7 +679,7 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 
 Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/dev/benchmark/sysbench-v4.md).
 
-#### Can Raft + multiple replicas in the TiKV architecture achieve absolute data security? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
+#### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
 
 Data is redundantly replicated between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
 
