@@ -6,7 +6,7 @@ category: reference
 
 # List of Operators for Pushdown
 
-When TiDB reads data from TiKV, TiDB tries to push down some expressions to TiKV to be processed thus reducing the amount of data transferred and the computational pressure on a single TiDB node. This document introduces operators that TiDB supports for pushdown and how to blacklist specific operators.
+When TiDB reads data from TiKV, TiDB tries to push down some expressions to TiKV to be processed thus reducing the amount of data transferred and the computational pressure on a single TiDB node. This document introduces operators that TiDB supports for pushdown and how to prohibit specific operators from being pushed down by putting them on the blacklist.
 
 ## List of operators for pushdown
 
@@ -21,7 +21,7 @@ When TiDB reads data from TiKV, TiDB tries to push down some expressions to TiKV
 
 ## Blacklist specific operators
 
-If unexpected behavior occurs in the calculation of the function due to pushdown operators, you can quickly restore it by blacklisting specific operators. Specifically, you can prohibit operators from being pushing down by putting it on the blacklist `mysql.expr_pushdown_blacklist`.
+If unexpected behavior occurs during the calculation of functions due to pushed down operators, you can quickly restore the execution by blacklisting specific operators. Specifically, you can prohibit operators from being pushing down by putting them on the blacklist `mysql.expr_pushdown_blacklist`.
 
 ### Add to the blacklist
 
