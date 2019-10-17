@@ -6,7 +6,7 @@ category: reference
 
 # TiDB Pessimistic Transaction Mode
 
-By default, TiDB implements an optimistic transaction mode, where the transaction commit might fail because of transaction conflicts. To make sure that the commit succeeds, you need to modify the application and add an automatic retry mechanism. You can avoid this issue by using the pessimistic transaction mode of TiDB.
+By default, TiDB implements the optimistic transaction mode, where the transaction commit might fail because of transaction conflicts. To make sure that the commit succeeds, you need to modify the application and add an automatic retry mechanism. You can avoid this issue by using the pessimistic transaction mode of TiDB.
 
 ## Behaviors of the pessimistic transaction mode
 
@@ -30,21 +30,21 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 To enable the pessimistic transaction mode, choose any of the following three methods that suits your needs:
 
-- Use the `BEGIN PESSIMISTIC;` statement to start the transaction in the pessimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 PESSIMISTIC */;` to make it compatible with the MySQL syntax.
+- Execute the `BEGIN PESSIMISTIC;` statement to allow the transaction to apply the pessimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 PESSIMISTIC */;` to make it compatible with the MySQL syntax.
 
-- Execute the `set @@tidb_txn_mode = 'pessimistic';` statement to allow all the explicit transactions (namely non-autocommit transactions) processed in this session to be in the pessimistic transaction mode.
+- Execute the `set @@tidb_txn_mode = 'pessimistic';` statement to allow all the explicit transactions (namely non-autocommit transactions) processed in this session to apply the pessimistic transaction mode.
 
-- Execute the `set @@global.tidb_txn_mode = 'pessimistic';` statement to allow all newly created sessions of the entire cluster to adopt the pessimistic transaction mode and execute the explicit transactions.
+- Execute the `set @@global.tidb_txn_mode = 'pessimistic';` statement to allow all newly created sessions of the entire cluster to apply the pessimistic transaction mode to execute explicit transactions.
 
-After you set `global.tidb_txn_mode` to `pessimistic`, the pessimistic transaction mode is enabled by default; but you can use the following two methods to adopt the optimistic transaction mode for the transaction:
+After you set `global.tidb_txn_mode` to `pessimistic`, the pessimistic transaction mode is enabled by default; but you can use either of the following two methods to apply the optimistic transaction mode for the transaction:
 
-- Use the `BEGIN OPTIMISTIC;` statement to start the transaction in the optimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 OPTIMISTIC */;` to make it compatible with the MySQL syntax.
+- Execute the `BEGIN OPTIMISTIC;` statement to allow the transaction to apply the optimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 OPTIMISTIC */;` to make it compatible with the MySQL syntax.
 
-- Execute the `set @@tidb_txn_mode = 'optimistic';` statement to allow all the transactions processed in this session to be in the optimistic transaction mode.
+- Execute the `set @@tidb_txn_mode = 'optimistic';` statement to allow all the transactions processed in this session to apply the optimistic transaction mode.
 
-The `BEGIN PESSIMISTIC;` and `BEGIN OPTIMISTIC;` statements take precedence over the `tidb_txn_mode` system variable. Transactions that are opened with these two statements ignore system variables.
+The `BEGIN PESSIMISTIC;` and `BEGIN OPTIMISTIC;` statements take precedence over the `tidb_txn_mode` system variable. Transactions that are started with these two statements will ignore system variables.
 
-To disable the pessimistic transaction mode, you can modify the configuration file and add `enable = false` to the `[pessimistic-txn]` category.
+To disable the pessimistic transaction mode, modify the configuration file and add `enable = false` to the `[pessimistic-txn]` category.
 
 ## Configuration parameter
 
