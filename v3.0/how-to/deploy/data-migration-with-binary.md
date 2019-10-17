@@ -6,8 +6,6 @@ category: how-to
 
 # Deploy Data Migration Cluster Using DM Binary
 
-<!-- markdownlint-disable MD029 -->
-
 This document introduces how to quickly deploy the Data Migration (DM) cluster using DM binary.
 
 ## Preparations
@@ -37,7 +35,7 @@ Here is the address of each node:
 
 Enable the binlog on MySQL1 and on MySQL2. DM-worker1 replicates the data from MySQL1 and DM-worker2 replicates the data from MySQL2.
 
-Based on this scenario, the following sections of this document describe how to deploy the DM cluster.
+Based on this scenario, the following sections describe how to deploy the DM cluster.
 
 ### Deploy DM-worker
 
@@ -75,11 +73,11 @@ Usage of worker:
         Log level. Available values: "debug", "info" (default value), "warn", "error" or "fatal"
   -V    The output version number
   -checker-backoff-max duration
-        The longest waiting time for the automatic recovery after errors are checked in the task check module. The default value is "5m0s" which generally needs no change. It is recommended that you do not change this default value unless you have an in-depth understanding of this parameter.
+        The longest waiting time for the automatic recovery after errors are checked in the task check module. The default value is "5m0s" which generally needs no change. It is not recommended to change this default value unless you have an in-depth understanding of this parameter.
   -checker-backoff-rollback duration
-        The time interval for adjusting the waiting time of the automatic recovery in the task check module. The default value is "5m0s" which generally needs no change. It is recommended that you do not change this default value unless you have an in-depth understanding of this parameter.
+        The time interval for adjusting the waiting time of the automatic recovery in the task check module. The default value is "5m0s" which generally needs no change. It is not recommended to change this default value unless you have an in-depth understanding of this parameter.
   -checker-check-enable
-        Enables or disables the task status check. When it is enabled, DM tries to resume the data replication tasks interrupted by errors. Default value: "true".
+        Enables or disables the task status check. When it is enabled, DM automatically tries to resume the data replication tasks interrupted by errors. Default value: "true".
   -config string
         The path of the configuration file
   -log-file string
@@ -87,7 +85,7 @@ Usage of worker:
   -print-sample-config
         Prints the sample configuration
   -purge-expires int
-        The expiration time of relay logs. DM-worker tries to delete the relay logs whose last modified time is out of this value. Unit: hour.
+        The expiration time of relay logs. DM-worker tries to delete the relay logs whose last modified time exceeds this value. Unit: hour.
   -purge-interval int
         The time interval at which relay logs are regularly checked for expiration. Default value: "3600". Unit: second.
   -purge-remain-space int
@@ -109,7 +107,7 @@ Below is the DM-worker configuration file. It is recommended that you use this m
 ```toml
 # Worker Configuration.
 
-# log configuration
+# Log configuration
 log-level = "info"
 log-file = "dm-worker.log"
 
@@ -133,7 +131,7 @@ relay-dir = "./relay_log"
 # The path in which the metadata of DM-worker is stored
 meta-dir = "dm_worker_meta"
 
-# Enables or disables gtid in the relay log unit
+# Enables or disables gtid in the relay log processing unit
 enable-gtid = false
 
 # The charset configuration in the DSN for connecting MySQL or Mariadb
@@ -159,7 +157,7 @@ port = 3306
 # backoff-max = 5m
 ```
 
-Then, run the following command in the terminal to operate DM-worker:
+Then, execute the following command in the terminal to run DM-worker:
 
 {{< copyable "shell-regular" >}}
 
@@ -167,11 +165,11 @@ Then, run the following command in the terminal to operate DM-worker:
 bin/dm-worker -config conf/dm-worker1.toml
 ```
 
-In DM-worker2, change `source-id` in the configuration file to `mysql-replica-02` and change the `from` configuration part to the address of MySQL2.
+In DM-worker2, change `source-id` in the configuration file to `mysql-replica-02` and change the `from` configuration to the address of MySQL2.
 
 ### Deploy DM-master
 
-You can configure DM-worker by using command-line parameters or the configuration file.
+You can configure DM-master by using command-line parameters or the configuration file.
 
 **Deployment method 1: DM-master command-line parameters**
 
@@ -185,7 +183,7 @@ Below is the description of DM-master command-line parameters:
 Usage of dm-master:
   -L string
         Log level. Available values: "debug", "info" (default value), "warn", "error" or "fatal"
-  -V    The output version
+  -V    Outputs the version information
   -config string
         The path of the configuration file
   -log-file string
@@ -193,7 +191,7 @@ Usage of dm-master:
   -master-addr string
         DM-master address
   -print-sample-config
-        Prints the example configuration of DM-master
+        Prints the sample configuration of DM-master
 ```
 
 > **Note:**
@@ -218,7 +216,7 @@ log-file = "dm-master.log"
 # The listening address of DM-master
 master-addr = ":8261"
 
-# replication group <-> DM-worker configuration
+# DM-worker configuration
 [[deploy]]
 # Corresponding to the source-id in the DM-worker1 configuration file
 source-id = "mysql-replica-01"
@@ -232,7 +230,7 @@ source-id = "mysql-replica-02"
 dm-worker = "192.168.0.6:8262"
 ```
 
-Then, run the following command in the terminal to operate DM-master:
+Then, execute the following command in the terminal to run DM-master:
 
 {{< copyable "shell-regular" >}}
 
@@ -244,124 +242,124 @@ Now, a DM cluster is successfully deployed.
 
 ### Create a data replication task
 
-Suppose that MySQL1 and MySQL2 have several sharded tales on each instance. These tables have the same structure and the same prefix "t" in their table names. The databases that they are in are named with the same prefix "sharding". In each sharded table, the primary key and unique key are different from those of all other tables.
+Suppose that there are several sharded tables on both MySQL1 and MySQL2 instances. These tables have the same structure and the same prefix "t" in their table names. The databases where they are located are named with the same prefix "sharding". In each sharded table, the primary key and unique key are different from those of all other tables.
 
 Now you need to replicate these sharded tables to the `db_target.t_target` table in TiDB.
 
 1. Create the configuration file of the task:
 
-{{< copyable "" >}}
+    {{< copyable "" >}}
 
-```yaml
----
-name: test
-task-mode: all
-is-sharding: true
-meta-schema: "dm_meta"
-remove-meta: false
-enable-heartbeat: true
-timezone: "Asia/Shanghai"
+    ```yaml
+    ---
+    name: test
+    task-mode: all
+    is-sharding: true
+    meta-schema: "dm_meta"
+    remove-meta: false
+    enable-heartbeat: true
+    timezone: "Asia/Shanghai"
 
-target-database:
-  host: "192.168.0.3"
-  port: 4000
-  user: "root"
-  password: "" # if the password is not empty, you also need to configure the encrypted password using dmctl
+    target-database:
+    host: "192.168.0.3"
+    port: 4000
+    user: "root"
+    password: "" # if the password is not empty, you also need to configure the encrypted password using dmctl
 
-mysql-instances:
-  - source-id: "mysql-replica-01"
-    black-white-list:  "instance"
-    route-rules: ["sharding-route-rules-table", "sharding-route-rules-schema"]
-    mydumper-config-name: "global"
-    loader-config-name: "global"
-    syncer-config-name: "global"
+    mysql-instances:
+    - source-id: "mysql-replica-01"
+        black-white-list:  "instance"
+        route-rules: ["sharding-route-rules-table", "sharding-route-rules-schema"]
+        mydumper-config-name: "global"
+        loader-config-name: "global"
+        syncer-config-name: "global"
 
-  - source-id: "mysql-replica-02"
-    black-white-list:  "instance"
-    route-rules: ["sharding-route-rules-table", "sharding-route-rules-schema"]
-    mydumper-config-name: "global"
-    loader-config-name: "global"
-    syncer-config-name: "global"
+    - source-id: "mysql-replica-02"
+        black-white-list:  "instance"
+        route-rules: ["sharding-route-rules-table", "sharding-route-rules-schema"]
+        mydumper-config-name: "global"
+        loader-config-name: "global"
+        syncer-config-name: "global"
 
-black-white-list:
-  instance:
-    do-dbs: ["~^sharding[\\d]+"]
-    do-tables:
-    -  db-name: "~^sharding[\\d]+"
-       tbl-name: "~^t[\\d]+"
+    black-white-list:
+    instance:
+        do-dbs: ["~^sharding[\\d]+"]
+        do-tables:
+        -  db-name: "~^sharding[\\d]+"
+        tbl-name: "~^t[\\d]+"
 
-routes:
-  sharding-route-rules-table:
-    schema-pattern: sharding*
-    table-pattern: t*
-    target-schema: db_target
-    target-table: t_target
+    routes:
+    sharding-route-rules-table:
+        schema-pattern: sharding*
+        table-pattern: t*
+        target-schema: db_target
+        target-table: t_target
 
-  sharding-route-rules-schema:
-    schema-pattern: sharding*
-    target-schema: db_target
+    sharding-route-rules-schema:
+        schema-pattern: sharding*
+        target-schema: db_target
 
-mydumpers:
-  global:
-    mydumper-path: "./bin/mydumper"
-    threads: 4
-    chunk-filesize: 64
-    skip-tz-utc: true
-    extra-args: "--regex '^sharding.*'"
+    mydumpers:
+    global:
+        mydumper-path: "./bin/mydumper"
+        threads: 4
+        chunk-filesize: 64
+        skip-tz-utc: true
+        extra-args: "--regex '^sharding.*'"
 
-loaders:
-  global:
-    pool-size: 16
-    dir: "./dumped_data"
+    loaders:
+    global:
+        pool-size: 16
+        dir: "./dumped_data"
 
-syncers:
-  global:
-    worker-count: 16
-    batch: 100
+    syncers:
+    global:
+        worker-count: 16
+        batch: 100
 
-```
+    ```
 
 2. Write the above configuration to the `conf/task.yaml` file and create the task using dmctl:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-bin/dmctl -master-addr 192.168.0.4:8261
-```
+    ```bash
+    bin/dmctl -master-addr 192.168.0.4:8261
+    ```
 
-```
-Welcome to dmctl
-Release Version: v1.0.0-69-g5134ad1
-Git Commit Hash: 5134ad19fbf6c57da0c7af548f5ca2a890bddbe4
-Git Branch: master
-UTC Build Time: 2019-04-29 09:36:42
-Go Version: go version go1.12 linux/amd64
-»
-```
+    ```
+    Welcome to dmctl
+    Release Version: v1.0.0-69-g5134ad1
+    Git Commit Hash: 5134ad19fbf6c57da0c7af548f5ca2a890bddbe4
+    Git Branch: master
+    UTC Build Time: 2019-04-29 09:36:42
+    Go Version: go version go1.12 linux/amd64
+    »
+    ```
 
-{{< copyable "" >}}
+    {{< copyable "" >}}
 
-```bash
-» start-task conf/task.yaml
-```
+    ```bash
+    » start-task conf/task.yaml
+    ```
 
-```
-{
-    "result": true,
-    "msg": "",
-    "workers": [
-        {
-            "result": true,
-            "worker": "192.168.0.5:8262",
-            "msg": ""
-        },
-        {
-            "result": true,
-            "worker": "192.168.0.6:8262",
-            "msg": ""
-        }
-    ]
-}
-```
+    ```
+    {
+        "result": true,
+        "msg": "",
+        "workers": [
+            {
+                "result": true,
+                "worker": "192.168.0.5:8262",
+                "msg": ""
+            },
+            {
+                "result": true,
+                "worker": "192.168.0.6:8262",
+                "msg": ""
+            }
+        ]
+    }
+    ```
 
 Now, you have successfully created a task to replicate the sharded tables from the MySQL1 and MySQL2 instances to TiDB.
