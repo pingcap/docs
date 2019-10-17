@@ -54,12 +54,12 @@ fix-sql-file = "fix.sql"
 
 ######################### Tables config #########################
 
-# Configures the tables of the target databases that need to be checked
+# Configures the tables of the target database that need to be checked
 [[check-tables]]
     # The name of the schema in the target database
     schema = "test"
 
-    # The list of tables that need to be checked in the target database
+    # The name of tables that need to be checked in the target database
     tables = ["table-0"]
 
 # Configures the sharded tables corresponding to this table
@@ -75,7 +75,7 @@ fix-sql-file = "fix.sql"
 
     # Configuration of the source tables
     [[table-config.source-tables]]
-    # The ID of the instance in the source database
+    # The instance ID of the source database
     instance-id = "MySQL-1"
     schema = "test"
     table  = "table-1"
@@ -87,14 +87,14 @@ fix-sql-file = "fix.sql"
     table  = "table-2"
 
     [[table-config.source-tables]]
-    # The ID of the instance in the source database
+    # The instance ID of the source database
     instance-id = "MySQL-2"
     schema = "test"
     table  = "table-3"
 
 ######################### Databases config #########################
 
-# Configuration of the instance in the source database
+# Configuration of the source database instance
 [[source-db]]
     host = "127.0.0.1"
     port = 3306
@@ -102,7 +102,7 @@ fix-sql-file = "fix.sql"
     password = "123456"
     instance-id = "MySQL-1"
 
-# Configuration of the instance in the source database
+# Configuration of the source database instance
 [[source-db]]
     host = "127.0.0.2"
     port = 3306
@@ -110,7 +110,7 @@ fix-sql-file = "fix.sql"
     password = "123456"
     instance-id = "MySQL-2"
 
-# Configuration of the instance in the target database
+# Configuration of the target database instance
 [target-db]
     host = "127.0.0.3"
     port = 4000

@@ -21,17 +21,17 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ## Usage of sync-diff-inspector
 
-### Restrictions on usage
+### Restrictions
 
 * At present, online check is not supported. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
 
-* `JSON`, `BIT`, `BINARY`, `BLOB` and other types of data are not supported. When data check is being perform, you can set `ignore-columns` to skip checking these types of data.
+* `JSON`, `BIT`, `BINARY`, `BLOB` and other types of data are not supported. When you perform a data check, you need to set `ignore-columns` to skip checking these types of data.
 
-* `FLOAT`, `DOUBLE` and other floating point types are implemented differently in TiDB and MySQL, so checksum is calculated differently in TiDB and MySQL. If the data checks are inconsistent due to these data types, set `ignore-columns` to skip checking these columns.
+* In TiDB and MySQL, `FLOAT`, `DOUBLE` and other floating-point types are implemented differently, so checksum might be calculated differently. If the data checks are inconsistent due to these data types, set `ignore-columns` to skip checking these columns.
 
 ### Database privilege
 
-sync-diff-inspector needs to obtain the information of table schema, to query data, and to build the checkpoint database to save breakpoint information. The required database privileges are as follows:
+sync-diff-inspector needs to obtain the information of table schema, to query data, and to build the `checkpoint` database to save breakpoint information. The required database privileges are as follows:
 
 * Upstream database
     - `SELECT` (checks data for comparison)
@@ -39,10 +39,10 @@ sync-diff-inspector needs to obtain the information of table schema, to query da
     - `RELOAD` (views table schema)
 * Downstream database
     - `SELECT` (checks data for comparison)
-    - `CREATE` (creates checkpoint database and tables)
-    - `DELETE` (deletes information on the checkpoint table)
-    - `INSERT` (writes data into checkpoint table)
-    - `UPDATE` (modifies checkpoint table)
+    - `CREATE` (creates the `checkpoint` database and tables)
+    - `DELETE` (deletes information in the `checkpoint` table)
+    - `INSERT` (writes data into the `checkpoint` table)
+    - `UPDATE` (modifies the `checkpoint` table)
     - `SHOW_DATABASES` (views database name)
     - `RELOAD` (views table schema)
 
@@ -66,7 +66,7 @@ log-level = "info"
 
 # sync-diff-inspector divides the data into multiple chunks based on the primary key,
 # unique key, or the index, and then compares the data of each chunk.
-# Compares data in each chunk. Use "chunk-size" to set the size of a chunk.
+# Uses "chunk-size" to set the size of a chunk.
 chunk-size = 1000
 
 # The number of goroutines created to check data
@@ -98,7 +98,7 @@ fix-sql-file = "fix.sql"
 
 ######################### Tables config #########################
 
-# If you need to compare the data of a large number of tables with different schema names or table names, use the table-rule to configure the mapping relationship. You can configure the mapping rule of only schema or only table, or you can also configure the mapping rules of both the schema and table.
+# If you need to compare the data of a large number of tables with different schema names or table names, use the table-rule to configure the mapping relationship. You can configure the mapping rule only for the schema or table, or you can also configure the mapping rules for both the schema and table.
 #[[table-rules]]
     # schema-pattern and table-pattern support the wildcard *?
     # schema-pattern = "test_*"
@@ -106,7 +106,7 @@ fix-sql-file = "fix.sql"
     # target-schema = "test"
     # target-table = "t"
 
-# Configures the tables of the target databases that need to be checked.
+# Configures the tables of the target database that need to be checked.
 [[check-tables]]
     # The name of the schema in the target database
     schema = "test"
@@ -153,7 +153,7 @@ fix-sql-file = "fix.sql"
     # `ignore-columns` to skip checking these columns
     # ignore-columns = ["name"]
 
-# Configuration example of comparing two tables with different database names and table names.
+# Configuration example of comparing two tables with different schema names and table names.
 [[table-config]]
     # The name of the target schema
     schema = "test"
@@ -175,19 +175,19 @@ fix-sql-file = "fix.sql"
 
 ######################### Databases config #########################
 
-# Configuration of the instance in the source database
+# Configuration of the source database instance
 [[source-db]]
     host = "127.0.0.1"
     port = 3306
     user = "root"
     password = "123456"
-    # The ID of the instance in the source database, the unique identifier of a database instance
+   # The instance ID of the source database, the unique identifier of a database instance
     instance-id = "source-1"
     # Uses the snapshot function of TiDB.
     # If enabled, the history data is used for comparison.
     # snapshot = "2016-10-08 16:45:26"
 
-# Configuration of the instance in the target database
+# Configuration of the target database instance
 [target-db]
     host = "127.0.0.1"
     port = 4000
@@ -206,12 +206,12 @@ Run the following command:
 ./bin/sync_diff_inspector --config=./config.toml
 ```
 
-This command outputs a check report to the log and describes the check result of each table. If data inconsistency exists, the SQL statements used to fix inconsistency are stored to the `fix.sql` file.
+This command outputs a check report to the log and describes the check result of each table. sync-diff-inspector generates the SQL statements to fix inconsistent data and stores these statements in a `fix.sql` file.
 
 ### Note
 
-- sync-diff-inspector consumes certain server resources when checking data. Avoid using sync-diff-inspector to check data during peak business hours.
+- sync-diff-inspector consumes a certain amount of server resources when checking data. Avoid using sync-diff-inspector to check data during peak business hours.
 - TiDB uses the `utf8_bin` collation. If you need to compare the data in MySQL with that in TiDB, pay attention to the collation configuration of MySQL tables. If the primary key or unique key is the `varchar` type and the collation configuration in MySQL differs from that in TiDB, then the final check result might be incorrect because of the collation issue. You need to add collation to the sync-diff-inspector configuration file.
-- sync-diff-inspector divides data into chunks first according to TiDB statistics and you should try to guarantee the accuracy of the statistics. You can manually run the `analyze table {table_name}` command when the TiDB server's *workload is light*.
+- sync-diff-inspector divides data into chunks first according to TiDB statistics and you need to guarantee the accuracy of the statistics. You can manually run the `analyze table {table_name}` command when the TiDB server's *workload is light*.
 - Pay special attention to `table-rules`. If you configure `schema-pattern="test1"` and `target-schema="test2"`, the `test1` schema in the source database and the `test2` schema in the target database are compared. If the source database has a `test2` schema, this `test2` schema is also compared with the `test2` schema in the target database.
 - The generated `fix.sql` is only used as a reference for repairing data, and you need to confirm it before executing these SQL statements to repair data.

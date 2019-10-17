@@ -23,23 +23,25 @@ mysql> select * from tidb_binlog.checkpoint;
 
 ## Step 2: configure snapshot
 
-Configure the snapshot information of the upstream and downstream databases by using the `ts-map` information obtained in [Step 1](#step-1-obtain-ts-map).
+Then configure the snapshot information of the upstream and downstream databases by using the `ts-map` information obtained in [Step 1](#step-1-obtain-ts-map).
+
+Here is a configuration example of the `Databases config` section:
 
 ```toml
 ######################### Databases config #########################
 
-# Configuration of the instance in the source database
+# Configuration of the source database instance
 [[source-db]]
     host = "127.0.0.1"
     port = 4000
     user = "root"
     password = "123456"
-    # The ID of the instance in the source database, the unique identifier of a database instance
+    # The instance ID of the source database, the unique identifier of a database instance
     instance-id = "source-1"
     # Uses the snapshot function of TiDB, corresponding to the master-ts in ts-map
     snapshot = "409621863377928194"
 
-# Configuration of the instance in the target database
+# Configuration of the target database instance
 [target-db]
     host = "127.0.0.1"
     port = 4001
