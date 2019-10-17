@@ -15,7 +15,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 * Compare the table schema and data
 * Generate the SQL statements used to repair data if the data inconsistency exists
-* Support [data check for different database names or table names](/v2.1/reference/tools/sync-diff-inspector/route-diff.md)
+* Support [data check for tables with different schema or table names](/v2.1/reference/tools/sync-diff-inspector/route-diff.md)
 * Support [data check in the sharding scenario](/v2.1/reference/tools/sync-diff-inspector/shard-diff.md)
 * Support [data check for TiDB upstream-downstream clusters](/v2.1/reference/tools/sync-diff-inspector/tidb-diff.md)
 
