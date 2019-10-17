@@ -22,8 +22,6 @@ This test runs in a Kubernetes cluster deployed with 3 TiDB instances, 3 TiKV in
 
 ### Version information
 
-TiDB v3.0.1
-
 | Component  |                  GitHash                   |
 | :--- | :---------------------------------------- |
 | TiDB  | `9e4e8da3c58c65123db5f26409759fe1847529f8` |
