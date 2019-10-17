@@ -59,7 +59,10 @@
       - [Overview](/v3.0/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/v3.0/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/v3.0/how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](/v3.0/how-to/deploy/tidb-binlog.md)
+    + Deploy and Use TiDB Binlog
+      - [TiDB Binlog Cluster Deployment](/v3.0/how-to/deploy/tidb-binlog.md)
+      - [Binlog Slave Client User Guide](/v3.0/reference/tools/tidb-binlog/binlog-slave-client.md)
+      - [Reparo User Guide](/v3.0/reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](/v3.0/how-to/configure/time-zone.md)
     - [Memory Control](/v3.0/how-to/configure/memory-control.md)
@@ -138,6 +141,7 @@
       - [Monitor](/v3.0/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.0/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v3.0/faq/tidb-lightning.md)
+    - [sync-diff-inspector](/v3.0/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/v3.0/reference/tools/pd-control.md)
     - [PD Recover](/v3.0/reference/tools/pd-recover.md)
     - [TiKV Control](/v3.0/reference/tools/tikv-control.md)
@@ -270,6 +274,7 @@
       - [`SHOW [FULL] PROCESSSLIST`](/v3.0/reference/sql/statements/show-processlist.md)
       - [`SHOW SCHEMAS`](/v3.0/reference/sql/statements/show-schemas.md)
       - [`SHOW [FULL] TABLES`](/v3.0/reference/sql/statements/show-tables.md)
+      - [`SHOW TABLE REGIONS`](/v3.0/reference/sql/statements/show-table-regions.md)
       - [`SHOW TABLE STATUS`](/v3.0/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/v3.0/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/v3.0/reference/sql/statements/show-warnings.md)
