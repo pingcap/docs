@@ -6,7 +6,7 @@ category: reference
 
 # List of Operators for Pushdown
 
-When TiDB reads data from TiKV, TiDB tries to push down some expressions to TiKV to be processed thus reducing the amount of data transferred and the computational pressure on a single TiDB node. This document introduces operators that TiDB supports for pushdown and how to prohibit specific operators from being pushed down by putting them on the blacklist.
+When TiDB reads data from TiKV, TiDB tries to push down some expressions to TiKV to be processed thus reducing the amount of data transferred and the computational pressure on a single TiDB node. This document introduces operators that TiDB supports for pushdown and how to prohibit specific operators from being pushed down by adding them to the blacklist.
 
 ## List of operators for pushdown
 
@@ -21,7 +21,7 @@ When TiDB reads data from TiKV, TiDB tries to push down some expressions to TiKV
 
 ## Blacklist specific operators
 
-If unexpected behavior occurs during the calculation of functions due to pushed down operators, you can quickly restore the execution by blacklisting specific operators. Specifically, you can prohibit operators from being pushing down by putting them on the blacklist `mysql.expr_pushdown_blacklist`.
+If unexpected behavior occurs during the calculation of functions due to pushed down operators, you can quickly restore the execution by blacklisting specific operators. Specifically, you can prohibit operators from being pushed down by adding them to the blacklist `mysql.expr_pushdown_blacklist`.
 
 ### Add to the blacklist
 
@@ -97,7 +97,7 @@ tidb> explain select * from t where a < 2 and a > 2;
 > **Note:**
 >
 > - `admin reload expr_pushdown_blacklist` only works for TiDB server that executes this SQL statement. To enable the blacklist in every TiDB server in the cluster, you need to execute the SQL statement on each TiDB server.
-> - The blacklist feature of pushdown operators is supported in v3.0.0 or later.
+> - The blacklist feature of pushed down operators is supported in v3.0.0 or later.
 > - Note that in v3.0.3 or earlier, some of the operators (such as ">", "+", "is null") are not supported to add to the blacklist. This means you have to use aliases (case-insensitive) instead, as shown in the following table:
 >
 >     | Operator Name | Aliases |
