@@ -412,7 +412,7 @@ You can use the `update-task` command to update the data replication task. The f
 
 > **Note:**
 >
-> If you can make sure that the relay log required by the replication task will not be removed when the task is stopped, it is recommended that you use [Update items that do not support online update](#Update-items-that-do-not-support-online-update) to update task configurations.
+> If you can make sure that the relay log required by the replication task will not be removed when the task is stopped, it is recommended that you use [Update items that do not support online update](#update-items-that-do-not-support-online-update) to update task configurations.
 
 #### Update items that support online update
 
