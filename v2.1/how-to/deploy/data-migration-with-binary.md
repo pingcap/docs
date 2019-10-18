@@ -261,20 +261,20 @@ Now you need to replicate these sharded tables to the `db_target.t_target` table
     timezone: "Asia/Shanghai"
 
     target-database:
-    host: "192.168.0.3"
-    port: 4000
-    user: "root"
-    password: "" # if the password is not empty, you also need to configure the encrypted password using dmctl
+      host: "192.168.0.3"
+      port: 4000
+      user: "root"
+      password: "" # if the password is not empty, you also need to configure the encrypted password using dmctl
 
     mysql-instances:
-    - source-id: "mysql-replica-01"
+      - source-id: "mysql-replica-01"
         black-white-list:  "instance"
         route-rules: ["sharding-route-rules-table", "sharding-route-rules-schema"]
         mydumper-config-name: "global"
         loader-config-name: "global"
         syncer-config-name: "global"
 
-    - source-id: "mysql-replica-02"
+      - source-id: "mysql-replica-02"
         black-white-list:  "instance"
         route-rules: ["sharding-route-rules-table", "sharding-route-rules-schema"]
         mydumper-config-name: "global"
@@ -282,25 +282,25 @@ Now you need to replicate these sharded tables to the `db_target.t_target` table
         syncer-config-name: "global"
 
     black-white-list:
-    instance:
+      instance:
         do-dbs: ["~^sharding[\\d]+"]
         do-tables:
         -  db-name: "~^sharding[\\d]+"
-        tbl-name: "~^t[\\d]+"
+           tbl-name: "~^t[\\d]+"
 
     routes:
-    sharding-route-rules-table:
+      sharding-route-rules-table:
         schema-pattern: sharding*
         table-pattern: t*
         target-schema: db_target
         target-table: t_target
 
-    sharding-route-rules-schema:
+      sharding-route-rules-schema:
         schema-pattern: sharding*
         target-schema: db_target
 
     mydumpers:
-    global:
+      global:
         mydumper-path: "./bin/mydumper"
         threads: 4
         chunk-filesize: 64
@@ -308,12 +308,12 @@ Now you need to replicate these sharded tables to the `db_target.t_target` table
         extra-args: "--regex '^sharding.*'"
 
     loaders:
-    global:
+      global:
         pool-size: 16
         dir: "./dumped_data"
 
     syncers:
-    global:
+      global:
         worker-count: 16
         batch: 100
 
