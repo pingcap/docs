@@ -2,7 +2,6 @@
 title: TiSpark Quick Start Guide
 summary: Learn how to use TiSpark quickly.
 category: User Guide
-draft: true
 ---
 
 # TiSpark Quick Start Guide
