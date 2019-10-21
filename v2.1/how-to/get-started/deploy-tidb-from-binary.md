@@ -2,13 +2,14 @@
 title: Local Deployment from Binary Tarball
 summary: Use the binary to deploy a TiDB cluster.
 category: how-to
+aliases: ['/docs/v2.1/how-to/get-started/local-cluster/install-from-binary/']
 ---
 
 # Local Deployment from Binary Tarball
 
 This guide provides installation instructions for all TiDB components on a single developer machine. It is intended for evaluation purposes, and does not match the recommended usage for production systems.
 
-See also [testing environment](/v2.1/how-to/deploy/from-tarball/testing-environment.md) and [production enviroment](/v2.1/how-to/deploy/from-tarball/production-environment.md) deployment.
+See also [testing environment](/v2.1/how-to/deploy/from-tarball/testing-environment.md) and [production environment](/v2.1/how-to/deploy/from-tarball/production-environment.md) deployment.
 
 The following local TCP ports will be used:
 
