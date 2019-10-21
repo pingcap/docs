@@ -25,19 +25,19 @@ When this type of error occurs in the current version, use `stop-task` to stop t
 
 ## What can I do when the relay unit throws error `event from * in * diff from passed-in event *` or a replication task is interrupted with failing to get or parse binlog errors like `get binlog error ERROR 1236 (HY000)` and `binlog checksum mismatch, data may be corrupted` returned?
 
-During the DM process of relay log pulling or incremental replication, this two errors might occur if the binlog file in the upstream exceeds **4 GB**.
+During the DM process of relay log pulling or incremental replication, this two errors might occur if the size of the upstream binlog file exceeds **4 GB**.
 
-**Cause:** When writing relay logs, DM needs to perform event verification based on binlog positions and the size of the binlog file, and store the replicated binlog positions as checkpoints. However, the official method of MySQL to store binlog positions is `uint32`. This means the binlog position offset for a binlog file over 4 GB overflows, hence the errors above.
+**Cause:** When writing relay logs, DM needs to perform event verification based on binlog positions and the size of the binlog file, and store the replicated binlog positions as checkpoints. However, the official MySQL uses `uint32` to store binlog positions. This means the binlog position for a binlog file over 4 GB overflows, and then the errors above occur.
 
 For relay units, manually recover replication using the following solution:
 
-1. Identify in the upstream that the corresponding binlog file has exceeded 4GB when the error occurs.
+1. Identify in the upstream that the size of the corresponding binlog file has exceeded 4GB when the error occurs.
 
 2. Stop the DM-worker.
 
 3. Copy the corresponding binlog file in the upstream to the relay log directory as the relay log file.
 
-4. In the relay log directory, update the corresponding `relay.meta` file to pull from the next binlog position.
+4. In the relay log directory, update the corresponding `relay.meta` file to pull from the next binlog file.
 
     Example: when the error occurs, `binlog-name = "mysql-bin.004451"` and `binlog-pos = 2453`. Update them respectively to `binlog-name = "mysql-bin.004452"` and `binlog-pos = 4`.
 
@@ -45,11 +45,11 @@ For relay units, manually recover replication using the following solution:
 
 For binlog replication processing units, manually recover replication using the following solution:
 
-1. Identify in the upstream the corresponding binlog file has exceeded 4GB when error occurs.
+1. Identify in the upstream that the size of the corresponding binlog file has exceeded 4GB when the error occurs.
 
 2. Stop the replication task using `stop-task`.
 
-3. Update the `binlog_name` in the global checkpoints of the downstream  `dm_meta` database and in each table to the name of the binlog file in error; update `binlog_pos` to a valid position value for which replication has completed, for example, 4.
+3. Update the `binlog_name` in the global checkpoints and in each table checkpoint of the downstream `dm_meta` database to the name of the binlog file in error; update `binlog_pos` to a valid position value for which replication has completed, for example, 4.
 
     Example: the name of the task in error is `dm_test`, the corresponding s`source-id` is `replica-1`, and the corresponding binlog file is `mysql-bin|000001.004451`. Execute the following:
 
