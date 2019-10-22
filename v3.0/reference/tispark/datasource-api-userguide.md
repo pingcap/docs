@@ -8,50 +8,43 @@ category: reference
 
 <!-- markdownlint-disable MD029 -->
 
-The TiDB Connector for Spark enables you to use TiDB as the data source of Apache Spark, similar to other data sources such as PostgreSQL, HDFS, and S3.
+The interaction between TiDB and Spark is enabled by TiDB Connector for Spark, which allows you to use TiDB as the data source of Apache Spark. TiDB Connector supports bi-directional data movement between TiDB and Spark clusters. By using the Connector, you can populate a Spark DataFrame from a table in TiDB and write the contents of a Spark DataFrame to a table in TiDB.
 
-The TiDB Connector supports Spark 2.3.0+ and Spark 2.4.0+.
+This document introduce how to use TiDB Connector and the data source APIs.
 
-## Interaction Between TiDB and Spark
+> **Note:**
+>
+> TiDB Connector supports Spark 2.3.0+ and Spark 2.4.0+.
 
-TiDB Connector supports bi-directional data movement between TiDB and Spark clusters.
+## `Transaction` support for data write
 
-Using the connector, you can perform the following two operations:
+TiDB is a database that supports `transaction`. TiDB Connector for Spark also supports `transaction`, which means that:
 
-- Populate a Spark DataFrame from a table in TiDB.
-- Write the contents of a Spark DataFrame to a table in TiDB.
-
-## Transaction support for write
-
-Because TiDB is a database that supports `transaction`, The TiDB Connector for Spark also supports `transaction`, which means that:
-
-1. all data in DataFrame is written to TiDB successfully if no conflicts exist.
-2. no data in DataFrame is written to TiDB successfully if conflicts exist.
+1. if no conflicts exist, all data in DataFrame is written to TiDB successfully;
+2. if any conflict exists, no data in DataFrame is written to TiDB;
 3. no partial changes are visible to other sessions until the transaction is committed.
 
-## `REPLACE` and `INSERT` syntaxes
+## Writing behavior of TiSpark
 
-TiSpark only supports the `Append` SaveMode. This behavior is controlled by the `replace` option. The default value is `false`.
+TiSpark only supports the `Append` SaveMode. This behavior is controlled by the `REPLACE` option. The default value of this option is `false`.
 
-In addition, if `replace` is true, data to be inserted is duplicated before the insertion.
+If `REPLACE` is true, data to be inserted is duplicated before the insertion. In this case:
 
-+ If `replace` is `true`:
-    - if the primary key or unique index exists in the database, data is updated.
-    - if no same primary key or unique index exists, data is inserted.
+ - if the primary key or unique index exists in the database, data is updated.
+ - if no same primary key or unique index exists, data is inserted.
 
-+ If `replace` is `false`:
-    - if the primary key or unique index exists in the database, data with conflicts expects an exception.
-    - if no same primary key or unique index exists, data is inserted.
+If `REPLACE` is `false`:
+
+  - if the primary key or unique index exists in the database, data with conflicts expects an exception.
+  - if no same primary key or unique index exists, data is inserted.
 
 ## Use Spark connector with extensions enabled
 
-The Spark connector adheres to the standard Spark API, but with the addition of TiDB-specific options.
+The Spark connector adheres to the standard Spark API with the addition of TiDB-specific options.
 
-The connector can be used either with or without extensions enabled.
+Fow how to use it with extensions enabled, refer to [code examples with extensions](https://github.com/pingcap/tispark-test/blob/master/tispark-examples/src/main/scala/com/pingcap/tispark/examples/TiDataSourceExampleWithExtensions.scala).
 
-Fow how to use it with extensions enabled, see [code examples with extensions](https://github.com/pingcap/tispark-test/blob/master/tispark-examples/src/main/scala/com/pingcap/tispark/examples/TiDataSourceExampleWithExtensions.scala).
-
-1. Initiate `SparkConf`.
++ Start `SparkConf`:
 
     ```scala
     val sparkConf = new SparkConf().
@@ -61,18 +54,18 @@ Fow how to use it with extensions enabled, see [code examples with extensions](h
       setIfMissing("spark.tispark.pd.addresses", "pd0:2379").
       setIfMissing("spark.tispark.tidb.addr", "tidb").
       setIfMissing("spark.tispark.tidb.port", "4000")
-      // if tidb <= 3.x, please set the spark.tispark.write.without_lock_table=true
+      // if tidb <= 3.x, set the spark.tispark.write.without_lock_table=true
       // .setIfMissing("spark.tispark.write.without_lock_table", "true")
 
     val spark = SparkSession.builder.config(sparkConf).getOrCreate()
     ```
 
-2. Read using scala.
++ Read data using scala:
 
     ```scala
     val sqlContext = spark.sqlContext
 
-    // use TiDB config in the spark config if no data source config is provided
+    // use TiDB config in the spark config if no data source config is provided.
     val tidbOptions: Map[String, String] = Map(
       "tidb.user" -> "root",
       "tidb.password" -> ""
@@ -89,10 +82,10 @@ Fow how to use it with extensions enabled, see [code examples with extensions](h
     df.show()
     ```
 
-3. Write using scala.
++ Write data using scala:
 
     ```scala
-    /* create table before run the code
+    /* create table before running the code
     CREATE TABLE tpch_test.target_table_orders (
       `O_ORDERKEY` int(11) NOT NULL,
       `O_CUSTKEY` int(11) NOT NULL,
@@ -130,9 +123,9 @@ Fow how to use it with extensions enabled, see [code examples with extensions](h
       save()
     ```
 
-4. Use another TiDB.
++ Use another TiDB server:
 
-   TiDB configuration can be overwritten in data source options, so you can connect to a different TiDB.
+   TiDB configuration can be overwritten in data source options, so you can connect to a different TiDB server.
 
     ```scala
     // TiDB config priority: data source config > spark config
@@ -155,12 +148,12 @@ Fow how to use it with extensions enabled, see [code examples with extensions](h
     df.show()
     ```
 
-## Use Spark connector without extensions enabled
+## Use Spark connector with extensions disabled
 
-For how to use the connector without extensions enabled,
-see [code examples without extensions](https://github.com/pingcap/tispark-test/blob/master/tispark-examples/src/main/scala/com/pingcap/tispark/examples/TiDataSourceExampleWithoutExtensions.scala).
+For how to use the connector with extensions disabled,
+refer to [code examples without extensions](https://github.com/pingcap/tispark-test/blob/master/tispark-examples/src/main/scala/com/pingcap/tispark/examples/TiDataSourceExampleWithoutExtensions.scala).
 
-1. Initiate `SparkConf`:
++ Start `SparkConf`:
 
     ```scala
     import org.apache.spark.SparkConf
@@ -176,7 +169,7 @@ see [code examples without extensions](https://github.com/pingcap/tispark-test/b
 
     If TiDB version is 3.x or earlier, set `spark.tispark.write.without_lock_table=true.setIfMissing("spark.tispark.write.without_lock_table", "true")`.
 
-2. Read using scala:
++ Read data using scala:
 
     ```scala
     val sqlContext = spark.sqlContext
@@ -203,10 +196,10 @@ see [code examples without extensions](https://github.com/pingcap/tispark-test/b
     df.show()
     ```
 
-3. Write using scala:
++ Write data using scala:
 
     ```scala
-    /* create table before run the code
+    /* create table before running the code
     CREATE TABLE tpch_test.target_table_customer (
       `C_CUSTKEY` int(11) NOT NULL,
       `C_NAME` varchar(25) NOT NULL,
@@ -243,7 +236,9 @@ see [code examples without extensions](https://github.com/pingcap/tispark-test/b
 
 ## Use data source API in SparkSQL
 
-1. Configure TiDB or PD addresses and enable write through SparkSQL in `conf/spark-defaults.conf` as follows:
+Follow these steps to use data source API in SparkSQL:
+
+1. Configure TiDB or PD addresses and enable write through SparkSQL in `conf/spark-defaults.conf` as the following commands shows:
 
     ```
     spark.tispark.pd.addresses 127.0.0.1:2379
@@ -269,7 +264,7 @@ see [code examples without extensions](https://github.com/pingcap/tispark-test/b
     )
     ```
 
-3. Register a TiDB table `tpch_test.CUSTOMER` to the Spark Catalog:
+3. Register a TiDB table `tpch_test.CUSTOMER` to the Spark catalog:
 
     ```sql
     CREATE TABLE CUSTOMER_SRC USING tidb OPTIONS (
@@ -286,7 +281,7 @@ see [code examples without extensions](https://github.com/pingcap/tispark-test/b
     SELECT * FROM CUSTOMER_SRC limit 10
     ```
 
-5. Register another TiDB table `tpch_test.TARGET_TABLE_CUSTOMER` to the Spark Catalog:
+5. Register another TiDB table `tpch_test.TARGET_TABLE_CUSTOMER` to the Spark catalog:
 
     ```sql
     CREATE TABLE CUSTOMER_DST USING tidb OPTIONS (database 'tpch_test', table 'TARGET_TABLE_CUSTOMER')
@@ -300,12 +295,12 @@ see [code examples without extensions](https://github.com/pingcap/tispark-test/b
     INSERT INTO CUSTOMER_DST SELECT * FROM CUSTOMER_SRC
     ```
 
-## TiDB Options
+## TiDB options
 
 The following table shows the TiDB-specific options, which can be passed in through `TiDBOptions` or `SparkConf`.
 
 | Key                        | Short Name    | Required value | Description                                                                                                                                                 | Default |
-| -------------------------- | ------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| :-------------------------- | :------------- | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- |
 | spark.tispark.pd.addresses | -             | true           | The addresses of PD clusters, split by comma                                                                                                                | -       |
 | spark.tispark.tidb.addr    | tidb.addr     | true           | TiDB address, which currently only supports one instance                                                                                                    | -       |
 | spark.tispark.tidb.port    | tidb.port     | true           | TiDB Port                                                                                                                                                   | -       |
@@ -314,19 +309,19 @@ The following table shows the TiDB-specific options, which can be passed in thro
 | database                   | -             | true           | TiDB Database                                                                                                                                               | -       |
 | table                      | -             | true           | TiDB Table                                                                                                                                                  | -       |
 | skipCommitSecondaryKey     | -             | false          | Whether to skip the commit phase of secondary keys                                                                                                          | false   |
-| enableRegionSplit          | -             | false          | To split Region to avoid hot Region during insertion                                                                                                        | true    |
+| enableRegionSplit          | -             | false          | Splits the Region to avoid hot Region during insertion                                                                                                        | true    |
 | regionSplitNum             | -             | false          | The Region split number defined by user during insertion                                                                                                    | 0       |
-| replace                    | -             | false          | To define the behavior of append                                                                                                                            | false   |
-| lockTTLSeconds             | -             | false          | TiKV's lock TTL. The write duration must be no longer than `lockTTLSeconds`, otherwise write might fail because of the Garbage Collection (GC).             | 3600    |
-| writeConcurrency           | -             | false          | The maximum number of threads that write data to TiKV. It is recommended that `writeConcurrency` is smaller than or equal to 8 * `number of TiKV instance`. | 0       |
+| replace                    | -             | false          | Defines the behavior of append                                                                                                                            | false   |
+| lockTTLSeconds             | -             | false          | TiKV's lock TTL. The write duration must be no longer than `lockTTLSeconds`, otherwise the write might fail because of the Garbage Collection (GC).             | 3600    |
+| writeConcurrency           | -             | false          | The maximum number of threads for writing data to TiKV. It is recommended that `writeConcurrency` is smaller than or equal to 8 * `number of TiKV instance`. | 0       |
 
-## TiDB version and configuration for write
+## TiDB version and configuration for data write
 
 TiDB's version must be 4.0 or later.
 
 > **Note:**
 >
-> Currently, TiDB 4.0 is not released yet, but you can use code from the TiDB master branch.
+> Currently, TiDB 4.0 is not released yet, but you can use code from [TiDB master branch](https://github.com/pingcap/tidb/tree/master).
 
 Make sure that the following TiDB configuration items are correctly set.
 
@@ -346,9 +341,9 @@ split-table: true
 
 If your TiDB version is earlier than 4.0, set `spark.tispark.write.without_lock_table` to `true` to enable write, but ACID is **not** guaranteed.
 
-## Type conversion for write
+## Type conversion for data write
 
-The following types of SparkSQL Data are currently not supported for writing to TiDB:
+The following types of SparkSQL data currently cannot be written into TiDB:
 
 - BinaryType
 - ArrayType
@@ -389,48 +384,4 @@ The complete conversion metrics are as follows.
 | ENUM       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                |
 | SET        | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                |
 
-## Write benchmark
-
-The following test report is based on 4 machines.
-
-```
-Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz * 2 = 40Vu
-12 * 16G = 188G
-```
-
-`FIO` test result:
-
-```
-WRITE: bw=705MiB/s (740MB/s), 705MiB/s-705MiB/s (740MB/s-740MB/s), io=20.0GiB (21.5GB), run=29034-29034msec
-```
-
-The table schema is:
-
-```
-CREATE TABLE ORDERS  (O_ORDERKEY       INTEGER NOT NULL,
-                      O_CUSTKEY        INTEGER NOT NULL,
-                      O_ORDERSTATUS    CHAR(1) NOT NULL,
-                      O_TOTALPRICE     DECIMAL(15,2) NOT NULL,
-                      O_ORDERDATE      DATE NOT NULL,
-                      O_ORDERPRIORITY  CHAR(15) NOT NULL,
-                      O_CLERK          CHAR(15) NOT NULL,
-                      O_SHIPPRIORITY   INTEGER NOT NULL,
-                      O_COMMENT        VARCHAR(79) NOT NULL);
-
-```
-
-### TiSpark write benchmark
-
-| Count(*)    | Data Size | Parallel Number | Prepare(s) | Pre-write(s) | Commit(s) | Total(s) |
-| :----------- | :--------- | :--------------- | :---------- | :------------ | :---------- | :--------- |
-| 1,500,000   | 165M      | 2               | 17         | 68           | 62         | 148       |
-| 15,000,000  | 1.7G      | 24              | 49         | 157          | 119        | 326       |
-| 150,000,000 | 17G       | 120             | 630        | 1236         | 1098       | 2964      |
-
-## Spark with JDBC benchmark
-
-| Count(*)    | Data Size | Parallel Number | Spark JDBC Write(s) | Comments                            |
-| :----------- | :--------- | :--------------- | :-------------------- | :----------------------------------- |
-| 1,500,000   | 165M      | 24              | 22                   |                                     |
-| 15,000,000  | 1.7G      | 24              | 411                  | Using 120 parallel causes `KV Busy`. |
-| 150,000,000 | 17G       | 24              | 2936                 | Using 120 parallel causes `KV Busy`. |
+For the benchmark test results of TiSpark operations with TiDB, refer to [TiSpark Benchmark Results](/v3.0/reference/tispark/benchmark.md).
