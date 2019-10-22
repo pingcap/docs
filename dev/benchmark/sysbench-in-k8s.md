@@ -450,8 +450,8 @@ This is a test of TiDB using sysbench running in Kubernetes deployed on a typica
 - In the VPC-Native mode, TiDB performs slightly better in Host network than in Pod network. (The difference, ~7%, is measured in QPS. Performance differences caused by the factors below are also measured by QPS.)
 - In Host network, TiDB performs better (~9%) in the read test on Ubuntu provided by GCP than on COS.
 - The TiDB performance is slightly lower (~5%) if it is accessed outside the cluster via Load Balancer.
-- Increased latency among nodes in multiple AZs has certain impact on the TiDB performance (30% ~ 6%. The impact diminishes )
-- The QPS performance is greatly improved (50%-60%) if the Point Select read test is conducted on machines of computing type (compared with general types), because the test mainly consumes CPU resources.
+- Increased latency among nodes in multiple AZs has a certain impact on the TiDB performance (30% ~ 6%; the impact diminishes as the concurrent number increases).
+- The QPS performance is greatly improved (50% ~ 60%) if the Point Select read test is conducted on machines of computing type (compared with general types), because the test mainly consumes CPU resources.
 
 > **Note:**
 >
