@@ -46,7 +46,7 @@
     - [Read Historical Data](/dev/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/dev/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/dev/how-to/get-started/data-migration.md)
-    - [TiSpark Quick Start Guide](/dev/how-to/deploy/tispark.md)
+    - [TiSpark Quick Start Guide](/dev/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -144,6 +144,7 @@
       - [Monitor](/dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/dev/faq/tidb-lightning.md)
+    - [sync-diff-inspector](/dev/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/dev/reference/tools/pd-control.md)
     - [PD Recover](/dev/reference/tools/pd-recover.md)
     - [TiKV Control](/dev/reference/tools/tikv-control.md)
