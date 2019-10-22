@@ -12,7 +12,7 @@ This document describes how to back up and restore the data of a TiDB cluster in
 TiDB in Kubernetes supports two kinds of backup strategies:
 
 * [Full backup](#full-backup) (scheduled or ad-hoc): use [`mydumper`](/v3.0/reference/tools/mydumper.md) to take a logical backup of the TiDB cluster.
-* [Incremental backup](#incremental-backup): use [`TiDB-Binlog`](/v3.0/reference/tidb-binlog-overview.md) to replicate data in the TiDB cluster to another database or take a real-time backup of the data.
+* [Incremental backup](#incremental-backup): use [`TiDB-Binlog`](/v3.0/reference/tools/tidb-binlog/overview.md) to replicate data in the TiDB cluster to another database or take a real-time backup of the data.
 
 Currently, TiDB in Kubernetes only supports automatic [restoration](#restore) for full backup taken by `mydumper`. Restoring the incremental backup data by `TiDB-Binlog` requires manual operations.
 
