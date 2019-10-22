@@ -21,7 +21,7 @@ The corresponding relationship between TiDB Binlog versions and TiDB versions is
 
 > **Note:**
 >
-> If importing the full data is acceptable, you can abandon the old version and deploy TiDB Binlog following [TiDB Binlog Cluster Deployment](/v3.0/how-to/deploy/tidb-binlog.md).
+> If importing the full data is acceptable, you can abandon the old version and deploy TiDB Binlog following [TiDB Binlog Cluster Deployment](/v3.0/reference/tools/tidb-binlog/upgrade.md).
 
 If you want to resume replication from the original checkpoint, perform the following steps to upgrade TiDB Binlog:
 
