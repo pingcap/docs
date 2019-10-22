@@ -83,7 +83,7 @@ You can choose the corresponding operation to stop `tikv-importer` according to 
 
 - For deployment using TiDB Ansible: run `scripts/stop_importer.sh` on the Importer server.
 
-- For manual deployment: if `tikv-importer` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tikv-importer` command and then end the process using the `kill «pid»` command.
+- For manual deployment: if `tikv-importer` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tikv-importer` command and then terminate the process using the `kill «pid»` command.
 
 ## How to stop `tidb-lightning`?
 
@@ -91,7 +91,7 @@ You can choose the corresponding operation to stop `tidb-lightning` according to
 
 - For deployment using TiDB Ansible: run `scripts/stop_lightning.sh` on the Lightning server.
 
-- For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lighting` command and then end the process using the `kill -2 «pid»` command.
+- For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lighting` command and then terminate the process using the `kill -2 «pid»` command.
 
 ## Why `tidb-lightning` suddenly quits while running in background?
 
