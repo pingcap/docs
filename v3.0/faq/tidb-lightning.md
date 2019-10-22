@@ -102,7 +102,7 @@ It is potentially caused by starting `tidb-lightning` incorrectly, which causes 
 2018/08/10 07:29:08.310 main.go:47: [info] Got signal hangup to exit.
 ```
 
-It is not recommended to directly use `nohup` in the command line to start `tidb-lightning`. You can [start `tidb-lightning`](/v2.1/reference/tools/tidb-lightning/deployment.md) by executing a script.
+It is not recommended to directly use `nohup` in the command line to start `tidb-lightning`. You can [start `tidb-lightning`](/v3.0/reference/tools/tidb-lightning/deployment.md) by executing a script.
 
 ## Why my TiDB cluster is using lots of CPU resources and running very slowly after using TiDB Lightning?
 
