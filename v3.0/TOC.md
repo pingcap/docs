@@ -45,7 +45,7 @@
     - [Read Historical Data](/v3.0/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v3.0/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v3.0/how-to/get-started/data-migration.md)
-    - [TiSpark Quick Start Guide](/v3.0/how-to/deploy/tispark.md)
+    - [TiSpark Quick Start Guide](/v3.0/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v3.0/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -141,6 +141,7 @@
       - [Monitor](/v3.0/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.0/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v3.0/faq/tidb-lightning.md)
+    - [sync-diff-inspector](/v3.0/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/v3.0/reference/tools/pd-control.md)
     - [PD Recover](/v3.0/reference/tools/pd-recover.md)
     - [TiKV Control](/v3.0/reference/tools/tikv-control.md)
@@ -273,6 +274,7 @@
       - [`SHOW [FULL] PROCESSSLIST`](/v3.0/reference/sql/statements/show-processlist.md)
       - [`SHOW SCHEMAS`](/v3.0/reference/sql/statements/show-schemas.md)
       - [`SHOW [FULL] TABLES`](/v3.0/reference/sql/statements/show-tables.md)
+      - [`SHOW TABLE REGIONS`](/v3.0/reference/sql/statements/show-table-regions.md)
       - [`SHOW TABLE STATUS`](/v3.0/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/v3.0/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/v3.0/reference/sql/statements/show-warnings.md)
