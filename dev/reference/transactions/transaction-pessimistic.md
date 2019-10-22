@@ -28,7 +28,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 ## Usage of pessimistic transaction mode
 
-To enable the pessimistic transaction mode, choose any of the following three methods that suits your needs:
+To apply the pessimistic transaction mode, choose any of the following three methods that suits your needs:
 
 - Execute the `BEGIN PESSIMISTIC;` statement to allow the transaction to apply the pessimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 PESSIMISTIC */;` to make it compatible with the MySQL syntax.
 
@@ -36,7 +36,7 @@ To enable the pessimistic transaction mode, choose any of the following three me
 
 - Execute the `set @@global.tidb_txn_mode = 'pessimistic';` statement to allow all newly created sessions of the entire cluster to apply the pessimistic transaction mode to execute explicit transactions.
 
-After you set `global.tidb_txn_mode` to `pessimistic`, the pessimistic transaction mode is enabled by default; but you can use either of the following two methods to apply the optimistic transaction mode for the transaction:
+After you set `global.tidb_txn_mode` to `pessimistic`, the pessimistic transaction mode is applied by default; but you can use either of the following two methods to apply the optimistic transaction mode for the transaction:
 
 - Execute the `BEGIN OPTIMISTIC;` statement to allow the transaction to apply the optimistic transaction mode. You can write it in comment style as `BEGIN /*!90000 OPTIMISTIC */;` to make it compatible with the MySQL syntax.
 
