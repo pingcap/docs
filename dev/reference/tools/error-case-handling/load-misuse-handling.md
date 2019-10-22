@@ -38,4 +38,4 @@ packet for query is too large. Try adjusting the 'max_allowed_packet' variable
 
 * If a single row of a wide table exceeds 64M, you need to modify and enable the following two configurations:
     * Execute `set @@global.max_allowed_packet=134217728` (`134217728 = 128M`) in TiDB Server.
-    * Add the configuration item like `max-allowed-packet=128M` to the Loader configuration file or DB configuration in DM task configuration file, and then restart the progress or task.
+    * Add the configuration like `max-allowed-packet=128M` to the Loader configuration file or DB configuration in DM task configuration file, and then restart the progress or task.
