@@ -12,6 +12,7 @@
     - [Sysbench Performance Test - v2.1 vs. v2.0](/v2.1/benchmark/sysbench-v3.md)
     - [TPC-H 50G Performance Test - v2.1 vs. v2.0](/v2.1/benchmark/tpch-v2.md)
     - [DM Benchmark Report](/v2.1/benchmark/dm-v1-alpha.md)
+    - [TiSpark](/v2.1/benchmark/tispark.md)
 + Concepts
   - [Architecture](/v2.1/architecture.md)
   + Key Features
@@ -327,6 +328,7 @@
   - [TiDB FAQs](/v2.1/faq/tidb.md)
   - [TiDB Lightning FAQs](/v2.1/faq/tidb-lightning.md)
   - [Upgrade FAQs](/v2.1/faq/upgrade.md)
+  - [TiSpark FAQs](/v2.1/faq/tispark.md)
 + Support
   - [Support Resources](/v2.1/support-resources.md)
   - [Report an Issue](/v2.1/report-issue.md)

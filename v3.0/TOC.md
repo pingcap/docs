@@ -14,6 +14,7 @@
     - [TPC-C Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/tpcc.md)
     - [DM 1.0-alpha Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
     - [DM 1.0-GA Benchmark Report](/v3.0/benchmark/dm-v1.0-ga.md)
+    - [TiSpark](/v3.0/benchmark/tispark.md)
 + Concepts
   - [Architecture](/v3.0/architecture.md)
   + Key Features
@@ -387,6 +388,7 @@
   - [TiDB Lightning FAQs](/v3.0/faq/tidb-lightning.md)
   - [Data Migration FAQ](/v3.0/faq/data-migration.md)
   - [Upgrade FAQs](/v3.0/faq/upgrade.md)
+  - [TiSpark FAQs](/v30/faq/upgrade.md)
 + Support
   - [Support Resources](/v3.0/support-resources.md)
   - [Report an Issue](/v3.0/report-issue.md)

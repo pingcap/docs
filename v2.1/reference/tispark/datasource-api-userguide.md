@@ -30,13 +30,13 @@ TiSpark only supports the `Append` SaveMode. This behavior is controlled by the 
 
 If `REPLACE` is true, data to be inserted is duplicated before the insertion. In this case:
 
- - if the primary key or unique index exists in the database, data is updated.
- - if no same primary key or unique index exists, data is inserted.
+- if the primary key or unique index exists in the database, data is updated.
+- if no same primary key or unique index exists, data is inserted.
 
 If `REPLACE` is `false`:
 
-  - if the primary key or unique index exists in the database, data with conflicts expects an exception.
-  - if no same primary key or unique index exists, data is inserted.
+- if the primary key or unique index exists in the database, data with conflicts expects an exception.
+- if no same primary key or unique index exists, data is inserted.
 
 ## Use Spark connector with extensions enabled
 
@@ -384,4 +384,4 @@ The complete conversion metrics are as follows.
 | ENUM       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                |
 | SET        | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                |
 
-For the benchmark test results of TiSpark operations with TiDB, refer to [TiSpark Benchmark Results](/v2.1/reference/tispark/benchmark.md).
+For the benchmark test results of TiSpark operations with TiDB, refer to [TiSpark Benchmark Results](/v2.1/benchmark/tispark.md).

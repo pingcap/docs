@@ -1,10 +1,10 @@
 ---
-title: TiSpark Benchmark Results
+title: TiSpark Benchmark
 summary: Learn the TiSpark benchmark results
 category: reference
 ---
 
-# Benchmark test of data write
+# TiSpark Benchmark
 
 This document offers the benchmark results of data write between TiSpark and TiDB.
 
