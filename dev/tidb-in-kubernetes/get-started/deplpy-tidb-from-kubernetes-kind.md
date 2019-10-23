@@ -60,7 +60,7 @@ First, make sure that the Docker is running. Then, you can create a local Kubern
 
     > **Note:**
     >
-    > In this script, the Kubernetes version defaults to v1.12.8, and the Kubernetes cluster starts with six nodes and  for each node the mount count set to 9. You can configure these items in startup options.
+    > In this script, the Kubernetes version defaults to v1.12.8, and the Kubernetes cluster starts with six nodes and for each node the mount count set to 9. You can configure these items in startup options.
     >
     > {{< copyable "shell-regular" >}}
     >
@@ -117,7 +117,7 @@ Refer steps in [Deploy TiDB on General Kubernetes](/dev/tidb-in-kubernetes/deplo
 
 ## Access the database and monitor dashboards
 
-Refer the steps in [](/dev/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md#view-the-monitoring-dashboard).
+Refer the steps in [View the monitoring dashboard](/dev/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md#view-the-monitoring-dashboard).
 
 ## Destroy the TiDB and Kubernetes cluster
 
