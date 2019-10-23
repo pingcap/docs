@@ -6,11 +6,11 @@ category: reference
 
 # TiDB Binlog Cluster Operations
 
-This document introduces:
+This document introduces the following TiDB Binlog cluster operations:
 
-+ the state of Pump or Drainer node
-+ how the Pump or Drainer process is started and exited internally
-+ how to manage Binlog clusters by using the binlogctl tool or by directly performing SQL operations in TiDB
++ The state of Pump and Drainer nodes
++ Starting or exiting a Pump or Drainer process
++ Managing the TiDB Binlog cluster by using the binlogctl tool or by directly performing SQL operations in TiDB
 
 ## Pump or Drainer state
 
@@ -20,27 +20,27 @@ Pump or Drainer state description:
 * `pausing`: in the pausing process
 * `paused`: has been stopped
 * `closing`: in the offline process
-* `offline`: becomes offline
+* `offline`: has been offline
 
 > **Note:**
 >
-> The state information of Pump or Drainer node is maintained internally in Pump or Drainer and regularly updated to the Placement Driver (PD).
+> The state information of a Pump or Drainer node is maintained by the service itself and is regularly updated to the Placement Driver (PD).
 
-## Starting and exiting Pump or Drainer process
+## Starting and exiting a Pump or Drainer process
 
 ### Pump
 
-* Starting: When started, the Pump nodes notifies all Drainer nodes in the `online` state. If the notification is successful, the Pump node sets its state to `online`. Otherwise, the node reports an error, sets its state to `paused` and exits the process.
-* Exiting: The Pump node enters the `paused` or `offline` state before the process is exited normally; if the process is exited abnormally (caused by `kill -9` command, process panic, crash), the node is still in the `online` state.
-    * Pausing: You can pause a Pump process by using the `kill` command (not `kill -9`), entering `Ctrl` + `C` or using the `pause-pump` command in the binlogctl tool. After receiving the instruction, the Pump node sets its state to `pausing`, stops receiving binlog write requests and stops providing binlog data to Drainer nodes.
-    * Closing: You can only close a Pump process by using the `offline-pump` command in the binlogctl tool. After receiving the instruction, the Pump node sets its state to `closing` and stops receiving the binlog write request. The node continues providing binlog to Drainer nodes until all binlog data is consumed by Drainer nodes. Then, the Pump node sets its state to `offline` and exits the process.
+* Starting: When started, the Pump node notifies all Drainer nodes in the `online` state. If the notification is successful, the Pump node sets its state to `online`. Otherwise, the Pump node reports an error, sets its state to `paused` and exits the process.
+* Exiting: The Pump node enters the `paused` or `offline` state before the process is exited normally; if the process is exited abnormally (caused by the `kill -9` command, process panic, crash), the node is still in the `online` state.
+    * Pause: You can pause a Pump process by using the `kill` command (not `kill -9`), pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> or using the `pause-pump` command in the binlogctl tool. After receiving the pause instruction, the Pump node sets its state to `pausing`, stops receiving binlog write requests and stops providing binlog data to Drainer nodes. After all threads are safely exited, the Pump node updates its state to `paused` and exits the process.
+    * Offline: You can only close a Pump process by using the `offline-pump` command in the binlogctl tool. After receiving the offline instruction, the Pump node sets its state to `closing` and stops receiving the binlog write requests. The Pump node continues providing binlog to Drainer nodes until all binlog data is consumed by Drainer nodes. Then, the Pump node sets its state to `offline` and exits the process.
 
 ### Drainer
 
 * Starting: When started, the Drainer node tries to pull binlogs from all Pump nodes which are not in the `offline` state. If it fails to do so, it keeps trying.
 * Exiting: The Drainer node enters the `paused` or `offline` state before the process is exited normally; if the process is exited abnormally (caused by `kill -9`, process panic, crash), the Drainer node is still in the `online` state.
-    * Pausing: You can pause a Drainer process by using the `kill` command (not `kill -9`), entering `Ctrl` + `C` or using the `pause-drainer` command in the binlogctl tool. After receiving the instruction, the Drainer node sets its state to `pausing` and stops pulling binlogs from Pump nodes. After all threads are safely exited, the Drainer node sets its state to `paused` and exits the process.
-    * Closing: You can only close a Drainer process by using the `offline-drainer` command in the binlogctl tool. After receiving the instruction, the Drainer node sets its state to `closing` and stops pulling binlogs from Pump nodes. After all threads are safely exited, the Drainer node updates its state to `offline` and exits the process.
+    * Pause: You can pause a Drainer process by using the `kill` command (not `kill -9`), pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> or using the `pause-drainer` command in the binlogctl tool. After receiving the pause instruction, the Drainer node sets its state to `pausing` and stops pulling binlogs from Pump nodes. After all threads are safely exited, the Drainer node sets its state to `paused` and exits the process.
+    * Offline: You can only close a Drainer process by using the `offline-drainer` command in the binlogctl tool. After receiving the offline instruction, the Drainer node sets its state to `closing` and stops pulling binlogs from Pump nodes. After all threads are safely exited, the Drainer node updates its state to `offline` and exits the process.
 
 For how to pause, close, check, and modify the state of Drainer, see the [binlogctl guide](#binlogctl-guide) as follows.
 
@@ -56,7 +56,7 @@ For how to pause, close, check, and modify the state of Drainer, see the [binlog
 
 * An error occurs during data replication and you need to check the running status and state of Pump or Drainer.
 * While maintaining the cluster, you need to pause or close Pump or Drainer.
-* Pump or Drainer process is exited abnormally and the node state is not updated or is unexpected, which influences the business.
+* Pump or Drainer process is exited abnormally, but the node state is not updated or is unexpected, which influences the application.
 
 ### Download `binlogctl`
 
@@ -77,7 +77,7 @@ The following command checks the file integrity. If the result is OK, the file i
 sha256sum -c tidb-{version}-linux-amd64.sha256
 ```
 
-For TiDB v2.1.0 GA or later version, binlogctl is already contained in the TiDB download package. For other versions, you need to download binlogctl separately.
+For TiDB v2.1.0 GA or later versions, binlogctl is already included in the TiDB download package. For earlier versions, you need to download binlogctl separately.
 
 {{< copyable "shell-regular" >}}
 
@@ -103,9 +103,9 @@ Usage of binlogctl:
 -V
     Outputs the binlogctl version information
 -cmd string
-    the command mode, including "generate_meta" (discarded), "pumps", "drainers", "update-pump" ,"update-drainer", "pause-pump", "pause-drainer", "offline-pump", and "offline-drainer"
+    the command mode, including "generate_meta" (deprecated), "pumps", "drainers", "update-pump" ,"update-drainer", "pause-pump", "pause-drainer", "offline-pump", and "offline-drainer"
 -data-dir string
-    the file path where the checkpoint file of Drainer is stored ("binlog_position" by default) (discarded)
+    the file path where the checkpoint file of Drainer is stored ("binlog_position" by default) (deprecated)
 -node-id string
     ID of Pump or Drainer
 -pd-urls string
@@ -157,13 +157,13 @@ Command example:
     | offline-pump    | Close Pump      | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd offline-pump -node-id ip-127-0-0-1:8250`     |
     | offline-drainer | Close Drainer   | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd offline-drainer -node-id ip-127-0-0-1:8249`  |
 
-    binlogctl sends the `HTTP` request to the Pump or Drainer node. After receiving the request, the node executes the corresponding exiting process.
+    binlogctl sends the HTTP request to the Pump or Drainer node. After receiving the request, the node executes the corresponding exiting procedures.
 
-- Modify the state of Pump or Drainer node in abnormal situations
+- Modify the state of a Pump or Drainer node in abnormal situations
 
-    When a Pump or Drainer node runs normally or when it is paused or closed in the normal process, it is in the right state. But in some abnormal situations, the Pump or Drainer node cannot rightly maintain its state and thus the replication tasks might be influenced. In these situations, use the binlogctl tool to repair the state information.
+    When a Pump or Drainer node runs normally or when it is paused or closed in the normal process, it is in the right state. But in some abnormal situations, the Pump or Drainer node cannot correctly maintain its state, which can influence data replication tasks. In these situations, use the binlogctl tool to repair the state information.
 
-    Set `cmd` to `update-pump` or `update-drainer` to update the state of Pump or Drainer node. The state can be `paused` or `offline`. For example:
+    Set `cmd` to `update-pump` or `update-drainer` to update the state of a Pump or Drainer node. The state can be `paused` or `offline`. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -173,7 +173,7 @@ Command example:
 
     > **Note:**
     >
-    > When a Pump or Drainer node runs normally, it regularly updates its state to PD. But the above command is used to directly modify the Pump or Drainer state saved in PD, so do no use the command when the Pump or Drainer node runs normally. Refer to [TiDB Binlog FAQ](/dev/faq/tidb-binlog.md) to see in what situation you need to use it.
+    > When a Pump or Drainer node runs normally, it regularly updates its state to PD. But the above command is used to directly modify the Pump or Drainer state saved in PD, so do not use the command when the Pump or Drainer node runs normally. Refer to [TiDB Binlog FAQ](/dev/reference/tools/tidb-binlog/faq.md) to see in what situation you need to use it.
 
 ## Use SQL statements to manage Pump or Drainer
 
@@ -231,7 +231,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
     +----------|----------------|--------|--------------------|---------------------|
     ```
 
-- Modify the state of Pump or Drainer node in abnormal situations
+- Modify the state of a Pump or Drainer node in abnormal situations
 
     {{< copyable "sql" >}}
 
@@ -253,7 +253,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
     Query OK, 0 rows affected (0.01 sec)
     ```
 
-    You get the same result to execute the above SQL statements as you use the `update-pump` or `update-drainer` commands in binlogctl.
+    Executing the above SQL statements works the same as the `update-pump` or `update-drainer` commands in binlogctl. Use the above SQL statements **only** when the Pump or Drainer node is in abnormal situations.
 
 > **Note:**
 >

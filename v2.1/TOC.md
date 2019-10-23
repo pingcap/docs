@@ -137,6 +137,8 @@
       - [Monitor](/v2.1/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v2.1/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v2.1/faq/tidb-lightning.md)
+    + TiDB Binlog
+      - [FAQ](/v2.1/reference/tools/tidb-binlog/faq.md)
     - [sync-diff-inspector](/v2.1/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/v2.1/reference/tools/pd-control.md)
     - [PD Recover](/v2.1/reference/tools/pd-recover.md)
@@ -322,7 +324,6 @@
 + FAQs
   - [TiDB FAQs](/v2.1/faq/tidb.md)
   - [TiDB Lightning FAQs](/v2.1/faq/tidb-lightning.md)
-  - [TiDB Binlog FAQs](/v2.1/faq/tidb-binlog.md)
   - [Upgrade FAQs](/v2.1/faq/upgrade.md)
 + Support
   - [Support Resources](/v2.1/support-resources.md)

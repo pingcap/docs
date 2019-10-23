@@ -8,7 +8,7 @@ reference: faq
 
 ## When can I pause or close Pump or Drainer node?
 
-Refer to [TiDB Binlog Cluster Operations](/dev/how-to/maintain/tidb-binlog.md) to learn the description of the Pump or Drainer state and how to start and exit the process.
+Refer to [TiDB Binlog Cluster Operations](/v2.1/how-to/maintain/tidb-binlog.md) to learn the description of the Pump or Drainer state and how to start and exit the process.
 
 Pause a Pump or Drainer node when you need to temporarily stop the service. These situations are:
 
@@ -40,7 +40,7 @@ Close a Pump or Drainer node when you no longer need the service. These situatio
 
     > **Note:**
     >
-    > Do not use the `kill -9` command. Otherwise, the Pump or Drainer node cannot handle signals.
+    > Do not use the `kill -9` command. Otherwise, the Pump or Drainer node cannot process signals.
 
 - If the Pump or Drainer node runs in the foreground, pause it by entering `Ctrl` + `C`.
 - Use the `pause-pump` or `pause-drainer` command in binlogctl.
@@ -63,7 +63,7 @@ For example, when a Drainer process is exited abnormally (caused by directly exi
 
 ## How can I close a Pump or Drainer node?
 
-Currently, you can only use the `offline-pump` or `offline-drainer` command to close a Pump or Drainer node.
+Currently, you can only use the `offline-pump` or `offline-drainer` command in binlogctl to close a Pump or Drainer node.
 
 ## Can I use the `update-pump` or `update-drainer` command in binlogctl to close the Pump or Drainer service?
 
@@ -85,7 +85,7 @@ For other situations, use the `offline-pump` command to close the Pump service, 
 >
 > Do not use the `update-pump` command unless you accept loss of binlog data and data inconsistency between upstream and downstream or unless you no longer need the binlog data stored in the Pump node.
 
-## Can I use the `update-pump` command to set the Pump state to `offline` if I want to close a Pump node that is exited and set to `paused`?
+## Can I use the `update-pump` command in binlogctl to set the Pump state to `offline` if I want to close a Pump node that is exited and set to `paused`?
 
 When a Pump process is exited and the node is in the `paused` state, not all the binlog data in the node is consumed in its downstream Drainer node. Therefore, doing so might risk data inconsistency between upstream and downstream. In this situation, restart the Pump and use the `offline-pump` command to close the Pump node.
 
@@ -95,13 +95,6 @@ Some stale Drainer nodes are left over from historical tasks. Their processes ha
 
 ## Can I use SQL operations such as `change pump` and `change drainer` to pause or close the Pump or Drainer service?
 
-Currently, you can't. These SQL operations directly modifies the state information saved in PD and are functionally equivalent to the `update-pump` and `update-drainer` commands in binlogctl. To pause or close the Pump or Drainer service, use the binlogctl tool.
+Currently, you can't. For more details on these SQL operations, refer to [Use SQL statements to manage Pump or Drainer](/v2.1/how-to/maintain/tidb-binlog.md#use-sql-statements-to-manage-pump-or-drainer).
 
-## What can I do when some DDL statements supported by the upstream database cause error when executed in the downstream database?
-
-To solve the problem, follow these steps:
-
-1. Check `drainer.log`. Search `exec failed` for the last failed DDL operation before the Drainer process is exited.
-2. Change the DDL version to the one compatible to the downstream. Perform this step manually in the downstream database.
-3. Check `drainer.log`. Search for the failed DDL operation and find the `commit-ts` of this operation.
-4. Modify the `drainer.toml` configuration file. Add the `commit-ts` in the `ignore-txn-commit-ts` item and restart the Drainer node.
+These SQL operations directly modifies the state information saved in PD and are functionally equivalent to the `update-pump` and `update-drainer` commands in binlogctl. To pause or close the Pump or Drainer service, use the binlogctl tool.
