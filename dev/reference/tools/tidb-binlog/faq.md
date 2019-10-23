@@ -47,7 +47,7 @@ Close a Pump or Drainer node when you no longer need the service. These situatio
 
 ## Can I use the `update-pump` or `update-drainer` command in binlogctl to pause the Pump or Drainer service?
 
-No, you can't. The `update-pump` or `update-drainer` command is used to directly modify the state information saved in PD without notifying Pump or Drainer to do the corresponding action. Misusing the two commands interrupts data replication and might even cause data loss.
+No. The `update-pump` or `update-drainer` command is used to directly modify the state information saved in PD without notifying Pump or Drainer to do the corresponding action. Misusing the two commands interrupts data replication and might even cause data loss.
 
 ## When can I use the `update-pump` command in binlogctl to set the Pump state to `paused`?
 
@@ -67,7 +67,7 @@ Currently, you can only use the `offline-pump` or `offline-drainer` command in b
 
 ## Can I use the `update-pump` or `update-drainer` command in binlogctl to close the Pump or Drainer service?
 
-No, you can't. The `update-pump` or `update-drainer` command is used to directly modify the state information saved in PD without notifying Pump or Drainer to do the corresponding action. Misusing the two commands interrupts data replication and might even cause data inconsistency. For example:
+No. The `update-pump` or `update-drainer` command is used to directly modify the state information saved in PD without notifying Pump or Drainer to do the corresponding action. Misusing the two commands interrupts data replication and might even cause data inconsistency. For example:
 
 - When a Pump node runs normally or is in the `paused` state, if you use the `update-pump` command to set the Pump state to `offline`, the Drainer node stops pulling the binlog data from the `offline` Pump. In this situation, the newest binlog cannot be replicated to the Drainer node, causing data inconsistency between upstream and downstream.
 - When a Drainer node runs normally, if you use the `update-drainer` command to set the Drainer state to `offline`, the newly started Pump node only notifies Drainer nodes in the `online` state. In this situation, the `offline` Drainer fails to pull the binlog data from the Pump node in time, causing data inconsistency between upstream and downstream.
@@ -95,7 +95,7 @@ Some stale Drainer nodes are left over from historical tasks. Their processes ha
 
 ## Can I use SQL operations such as `change pump` and `change drainer` to pause or close the Pump or Drainer service?
 
-Currently, you can't. For more details on these SQL operations, refer to [Use SQL statements to manage Pump or Drainer](/dev/how-to/maintain/tidb-binlog.md#use-sql-statements-to-manage-pump-or-drainer).
+No. For more details on these SQL operations, refer to [Use SQL statements to manage Pump or Drainer](/dev/how-to/maintain/tidb-binlog.md#use-sql-statements-to-manage-pump-or-drainer).
 
 These SQL operations directly modifies the state information saved in PD and are functionally equivalent to the `update-pump` and `update-drainer` commands in binlogctl. To pause or close the Pump or Drainer service, use the binlogctl tool.
 
