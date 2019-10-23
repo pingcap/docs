@@ -96,6 +96,7 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
     ```
 
 2. Start the full and incremental data migration.
+
 3. Verify that whether the data migration is successfully processed through `query-status` and whether the data from upstream have already merged and replicated in the downstream database.
 
 ## Create/drop tables upstream in the upstream
@@ -107,10 +108,15 @@ From [Merge and Replicate Data from Sharded Tables](/dev/reference/tools/data-mi
 If you need to create a new sharded table in the upstream, perform the following steps:
 
 1. Wait for the coordination of all sharding DDL in upstream sharded tables to finish.
+
 2. Stop the task by `stop-task`.
+
 3. Create a new sharded table in the upstream.
+
 4. Make sure that the configuration in `task.yaml` file allows the newly-added sharded table to be merged in one downstream table with other existing sharded table.
+
 5. Start the task by `start-task`.
+
 6. Verify that whether the data migration is successfully processed through `query-status` and whether the data from upstream have already merged and replicated in the downstream database.
 
 ### Drop sharded tables in the upstream
@@ -118,11 +124,17 @@ If you need to create a new sharded table in the upstream, perform the following
 If you need to drop a sharded table in the upstream, perform the following steps:
 
 1. Drop the existing sharded table, fetch the corresponding `End_log_pos` in the binlog of the `DROP TABLE` statement through [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html), and mark it as `Pos-M`.
+
 2. Fetch the position (`syncerBinlog`) corresponding to the binlog event that has been processed by DM through `query-status`, and mark it as `Pos-S`.
+
 3. When `Pos-S` is greater than `Pos-M`, it means that DM has finished processing the `DROP TABLE` statement, and the data of the table has been replicated to the downstream, so the subsequent operation can be performed. Otherwise, wait for DM to finish replicating the data.
+
 4. Stop the task by `stop-task`.
+
 5. Make sure that the configuration in `task.yaml` file ignores the dropped sharded table in the upstream.
+
 6. Start the task by `start0task`.
+
 7. Verify that whether the data migration is successfully processed by `query-status`.
 
 ## Speed limits and traffic flow control
