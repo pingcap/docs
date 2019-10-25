@@ -6,6 +6,8 @@ reference: faq
 
 # TiDB Binlog FAQ
 
+This document collects the frequently asked questions (FAQs) about TiDB Binlog.
+
 ## When can I pause or close Pump or Drainer node?
 
 Refer to [TiDB Binlog Cluster Operations](/v2.1/how-to/maintain/tidb-binlog.md) to learn the description of the Pump or Drainer state and how to start and exit the process.
