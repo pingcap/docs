@@ -13,7 +13,9 @@ This document tests the interaction effects between online workloads and `ADD IN
 ## Test version, time, and place
 
 TiDB version: v3.0.1
+
 Time: July, 2019
+
 Place: Beijing
 
 ## Test environment
@@ -32,9 +34,9 @@ Sysbench version：1.0.17
 
 ### TiDB parameter configuration
 
-TiDB, TiKV and PD use [TiDB Operator](https://github.com/pingcap/tidb-operator) configuration by default.
+TiDB, TiKV and PD all use the default [TiDB Operator](https://github.com/pingcap/tidb-operator) configuration.
 
-### Cluster Topology
+### Cluster topology
 
 |                 Machine IP                  |   Deployment instance   |
 | :-------------------------------------- | :----------|
@@ -45,7 +47,7 @@ TiDB, TiKV and PD use [TiDB Operator](https://github.com/pingcap/tidb-operator) 
 
 ### Online workloads simulation using Sysbench
 
-Use Sysbench to import **a table with 2000,000 data** into the Kubernetes cluster.
+Use Sysbench to import **a table with 2,000,000 rows of data** into the Kubernetes cluster.
 
 Execute the following command to import data:
 
@@ -82,11 +84,11 @@ sysbench $testname \
     run --tables=1 --table-size=2000000
 ```
 
-## Test plan 1: frequently perform write operations to the target column of `ADD INDEX` statement
+## Test plan 1: frequently perform write operations to the target column of the `ADD INDEX` statement
 
-1. Start `oltp_read_write` test.
+1. Start the `oltp_read_write` test.
 2. Perform at the same time with step 1: use `alter table sbtest1 add index c_idx(c)` to add an index.
-3. Perform at the end of step 2: when the index is added successfully, stop `oltp_read_write` test.
+3. Perform at the end of step 2: when the index is added successfully, stop the `oltp_read_write` test.
 4. Get the duration of `alter table ... add index` and the average TPS and QPS of Sysbench in this period.
 5. Gradually increase the value of two parameters `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size`, and then repeat step 1-4.
 
@@ -212,16 +214,16 @@ sysbench $testname \
 
 ### Test conclusion
 
-When you perform frequent write operations (this test involves `UPDATE`, `INSERT` and `DELETE` operations) to the target column of `Add Index` statement, the default `Add Index` configuration has a significant impact on the online workload of the system. It is mainly because of the write conflicts caused by the concurrent `Add Index` operation and column update. The performance of the system is as follows:
+When you perform frequent write operations (this test involves `UPDATE`, `INSERT` and `DELETE` operations) to the target column of the `ADD INDEX` statement, the default `ADD INDEX` configuration has a significant impact on the online workload of the system. It is mainly because of the write conflicts caused by the concurrent `ADD INDEX` operation and column update. The performance of the system is as follows:
 
-- As the two parameters increase, the value of `TiKV_prewrite_latch_wait_duration` increases significantly, slowing down the write speed.
-- When the value of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` are very large, you can execute the `admin show ddl` command to see multiple retry attempts of the DDL job, such as `Write conflict, txnStartTS 410327455965380624 is stale [try again later], ErrCount:38, SnapshotVersion: 410327228136030220`. In this situation, the `Add Index` operation takes a very long time to complete.
+- As the value of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` parameters increase, the value of `TiKV_prewrite_latch_wait_duration` increases significantly, slowing down the write speed.
+- When the value of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` are very large, you can execute the `admin show ddl` command to see multiple retry attempts of the DDL job, such as `Write conflict, txnStartTS 410327455965380624 is stale [try again later], ErrCount:38, SnapshotVersion: 410327228136030220`. In this situation, the `ADD INDEX` operation takes a very long time to complete.
 
-## Test plan 2: do not perform write operations to the target column of `ADD INDEX` statement (query-only)
+## Test plan 2: do not perform write operations to the target column of the `ADD INDEX` statement (query-only)
 
-1. Start `oltp_read_only` test.
+1. Start the `oltp_read_only` test.
 2. Perform at the same time with step 1: use `alter table sbtest1 add index c_idx(c)` to add an index.
-3. Perform at the end of step 2: when the index is added successfully, stop `oltp_read_only` test.
+3. Perform at the end of step 2: when the index is added successfully, stop the `oltp_read_only` test.
 4. Get the duration of `alter table ... add index` and the average TPS and QPS of Sysbench in this period.
 5. Gradually increase the value of two parameters `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size`, and then repeat step 1-4.
 
@@ -277,13 +279,13 @@ When you perform frequent write operations (this test involves `UPDATE`, `INSERT
 
 ### Test conclusion
 
-When you only perform query operations to the target column of `Add Index` statement, the effect of `Add Index` operation on online workloads is not obvious.
+When you only perform query operations to the target column of the `ADD INDEX` statement, the effect of `ADD INDEX` operations on online workloads is not obvious.
 
-## Test plan 3: the target column of `ADD INDEX` statement is not related to the online workloads
+## Test plan 3: the target column of the `ADD INDEX` statement is irrelevant to online workloads
 
-1. Start `oltp_read_write` test.
+1. Start the `oltp_read_write` test.
 2. Perform at the same time with step 1: use `alter table test add index pad_idx(pad)` to add an index.
-3. Perform at the end of step 2: when the index is added successfully, stop `oltp_read_only` test.
+3. Perform at the end of step 2: when the index is added successfully, stop the `oltp_read_only` test.
 4. Get the duration of `alter table ... add index` and the average TPS and QPS of Sysbench in this period.
 5. Gradually increase the value of two parameters `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size`, and then repeat step 1-4.
 
@@ -339,9 +341,9 @@ When you only perform query operations to the target column of `Add Index` state
 
 ### Test conclusion
 
-When the target column of `Add Index` statement is not related to online workloads, the effect of `Add Index` operations on the workload is not obvious.
+When the target column of the `ADD INDEX` statement is irrelevant to online workloads, the effect of `ADD INDEX` operations on the workload is not obvious.
 
 ## Summary
 
-- When you perform frequent write operations (including `INSERT`, `DELETE` and `UPDATE` operations) to the target column of `Add Index` statement, the default `ADD INDEX` configuration  causes relatively frequent write conflicts, which has a great impact on online workloads. At the same time, the `Add Index` operation takes a long time to complete due to continuous retry attempts. In this test, you can modify the product of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to 1/32 of the default value. For example, you can set `tidb_ddl_reorg_worker_cnt` to `4` and `tidb_ddl_reorg_batch_size` to `256` for better performance.
-- When only performing query operations to the target column of `Add Index` statement or the target column is not directly related to online workloads, you can use the default `ADD INDEX` configuration.
+- When you perform frequent write operations (including `INSERT`, `DELETE` and `UPDATE` operations) to the target column of the `ADD INDEX` statement, the default `ADD INDEX` configuration  causes relatively frequent write conflicts, which has a great impact on online workloads. At the same time, the `ADD INDEX` operation takes a long time to complete due to continuous retry attempts. In this test, you can modify the product of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to 1/32 of the default value. For example, you can set `tidb_ddl_reorg_worker_cnt` to `4` and `tidb_ddl_reorg_batch_size` to `256` for better performance.
+- When only performing query operations to the target column of the `ADD INDEX` statement or the target column is not directly related to online workloads, you can use the default `ADD INDEX` configuration.
