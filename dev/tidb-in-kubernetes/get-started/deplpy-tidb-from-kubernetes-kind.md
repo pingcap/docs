@@ -117,7 +117,7 @@ Refer to the steps in [Deploy TiDB on General Kubernetes](/dev/tidb-in-kubernete
 
 ## Access the database and monitoring dashboards
 
-Refer the steps in [View the monitoring dashboard](/dev/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md#view-the-monitoring-dashboard).
+Refer to the steps in [View the monitoring dashboard](/dev/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md#view-the-monitoring-dashboard).
 
 ## Destroy the TiDB and Kubernetes cluster
 
