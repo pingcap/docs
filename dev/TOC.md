@@ -12,6 +12,7 @@
     - [How to Run TPC-C Test on TiDB](/dev/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/dev/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/dev/benchmark/tpcc.md)
+    - [TiDB in Kubernetes Sysbench Test](/dev/benchmark/sysbench-in-k8s.md)
     - [DM 1.0-alpha Benchmark Report](/dev/benchmark/dm-v1-alpha.md)
     - [DM 1.0-GA Benchmark Report](/dev/benchmark/dm-v1.0-ga.md)
 + Concepts
@@ -46,7 +47,7 @@
     - [Read Historical Data](/dev/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/dev/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/dev/how-to/get-started/data-migration.md)
-    - [TiSpark Quick Start Guide](/dev/how-to/deploy/tispark.md)
+    - [TiSpark Quick Start Guide](/dev/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -144,6 +145,7 @@
       - [Monitor](/dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/dev/faq/tidb-lightning.md)
+    - [sync-diff-inspector](/dev/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/dev/reference/tools/pd-control.md)
     - [PD Recover](/dev/reference/tools/pd-recover.md)
     - [TiKV Control](/dev/reference/tools/tikv-control.md)
