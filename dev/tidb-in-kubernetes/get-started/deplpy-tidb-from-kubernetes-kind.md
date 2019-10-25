@@ -22,6 +22,7 @@ Before deployment, make sure the following requirements are satisfied:
 
     > **Note:**
     >
+    > For macOS, you need to allocate at least 2 CPU cores and 4G Memory to Docker. For details, see [Docker configuration for Mac](https://docs.docker.com/docker-for-mac/#advanced).
 
 - [Docker](https://docs.docker.com/install/): version >= 17.03
 
