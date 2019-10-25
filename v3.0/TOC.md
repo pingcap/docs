@@ -12,6 +12,7 @@
     - [How to Run TPC-C Test on TiDB](/v3.0/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/tpcc.md)
+    - [TiDB in Kubernetes Sysbench Test](/v3.0/benchmark/sysbench-in-k8s.md)
     - [DM 1.0-alpha Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
     - [DM 1.0-GA Benchmark Report](/v3.0/benchmark/dm-v1.0-ga.md)
 + Concepts
@@ -45,7 +46,7 @@
     - [Read Historical Data](/v3.0/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v3.0/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v3.0/how-to/get-started/data-migration.md)
-    - [TiSpark Quick Start Guide](/v3.0/how-to/deploy/tispark.md)
+    - [TiSpark Quick Start Guide](/v3.0/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v3.0/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
