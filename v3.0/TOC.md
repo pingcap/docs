@@ -12,6 +12,7 @@
     - [How to Run TPC-C Test on TiDB](/v3.0/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/tpcc.md)
+    - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/v3.0/benchmark/add-index-with-load.md)
     - [TiDB in Kubernetes Sysbench Test](/v3.0/benchmark/sysbench-in-k8s.md)
     - [DM 1.0-alpha Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
     - [DM 1.0-GA Benchmark Report](/v3.0/benchmark/dm-v1.0-ga.md)
@@ -344,6 +345,7 @@
 + TiDB in Kubernetes
   - [About TiDB Operator](/v3.0/tidb-in-kubernetes/tidb-operator-overview.md)
   + Get Started
+    - [kind](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
     - [DinD](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
     - [GKE](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
     - [Minikube](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
@@ -395,6 +397,7 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.5](/v3.0/releases/3.0.5.md)
     - [3.0.4](/v3.0/releases/3.0.4.md)
     - [3.0.3](/v3.0/releases/3.0.3.md)
     - [3.0.2](/v3.0/releases/3.0.2.md)
