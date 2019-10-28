@@ -78,28 +78,28 @@ sql-mode = ""
 
 Yes, as long as every `tidb-lightning` instance operates on different tables.
 
-## How to stop `tikv-importer`?
+## How to stop the `tikv-importer` process?
 
-You can choose the corresponding operation to stop `tikv-importer` according to your deployment method.
+To stop the `tikv-importer` process, you can choose the corresponding operation according to your deployment method.
 
 - For deployment using TiDB Ansible: run `scripts/stop_importer.sh` on the Importer server.
 
 - For manual deployment: if `tikv-importer` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tikv-importer` command and then terminate the process using the `kill «pid»` command.
 
-## How to stop `tidb-lightning`?
+## How to stop the `tidb-lightning` process?
 
-You can choose the corresponding operation to stop `tidb-lightning` according to your deployment method.
+To stop the `tidb-lightning` process, you can choose the corresponding operation according to your deployment method.
 
 - For deployment using TiDB Ansible: run `scripts/stop_lightning.sh` on the Lightning server.
 
 - For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lighting` command and then terminate the process using the `kill -2 «pid»` command.
 
-## Why `tidb-lightning` suddenly quits while running in background?
+## Why the `tidb-lightning` process suddenly quits while running in background?
 
-It is potentially caused by starting `tidb-lightning` incorrectly, which causes the system to send a SIGHUP signal to stop `tidb-lightning`. In this situation, `tidb-lightning.log` usually outputs the following log:
+It is potentially caused by starting `tidb-lightning` incorrectly, which causes the system to send a SIGHUP signal to stop the `tidb-lightning` process. In this situation, `tidb-lightning.log` usually outputs the following log:
 
 ```
-2018/08/10 07:29:08.310 main.go:47: [info] Got signal hangup to exit.
+[2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 ```
 
 It is not recommended to directly use `nohup` in the command line to start `tidb-lightning`. You can [start `tidb-lightning`](/v3.0/reference/tools/tidb-lightning/deployment.md) by executing a script.
