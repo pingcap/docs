@@ -17,7 +17,7 @@ For details about using Ansible to perform a rolling update to each component, s
 ## Upgrade caveat
 
 - TiDB 2.1 does not support downgrading to v2.0.x or earlier versions due to the adoption of the new storage engine.
-- Parallel DDL is enabled in TiDB 2.1, so the clusters with TiDB version earlier than 2.0.1 cannot upgrade to 2.1 using rolling update. You can choose either of the following two options:
+- Parallel DDL is supported in TiDB 2.1 and later versions. Therefore, for clusters with a TiDB version earlier than 2.0.1, rolling update to TiDB 2.1 is not supported. To upgrade, you can choose either of the following two options:
 
     - Stop the cluster and upgrade to 2.1 directly.
     - Roll update to 2.0.1 or later 2.0.x versions, and then roll update to the 2.1 version.
@@ -34,7 +34,7 @@ For details about using Ansible to perform a rolling update to each component, s
 >
 > If you have installed Ansible and its dependencies, you can skip this step.
 
-TiDB Ansible release-3.0 depends on Ansible 2.4.2 and later versions (`ansible>=2.4.2`) and the Python modules `jinja2>=2.9.6` and `jmespath>=0.9.0`.
+TiDB Ansible release-3.0 depends on Ansible 2.4.2 and later versions (`ansible>=2.4.2`) and the Python modules of `jinja2>=2.9.6` and `jmespath>=0.9.0`.
 
 To make it easy to manage dependencies, use `pip` to install Ansible and its dependencies. For details, see [Install Ansible and its dependencies on the Control Machine](/v2.1/how-to/deploy/orchestrated/ansible.md#step-4-install-ansible-and-its-dependencies-on-the-control-machine). For offline environment, see [Install Ansible and its dependencies offline on the Control Machine](/v2.1/how-to/deploy/orchestrated/offline-ansible.md#step-3-install-ansible-and-its-dependencies-offline-on-the-control-machine).
 
@@ -131,11 +131,11 @@ Edit the `inventory.ini` file. For IP information, see the `/home/tidb/tidb-ansi
 
 ### Edit the configuration file of TiDB cluster components
 
-If you have previously customized the configuration file of TiDB cluster components, refer to the backup file to modify the corresponding configuration file in `/home/tidb/tidb-ansible/conf`.
+If you have previously customized the configuration file of TiDB cluster components, refer to the backup file to modify the corresponding configuration file in the `/home/tidb/tidb-ansible/conf` directory.
 
 **Note the following parameter changes:**
 
-- In TiKV configuration, `end-point-concurrency` is changed to three parameters: `high-concurrency`, `normal-concurrency` and `low-concurrency`.
+- In the TiKV configuration, `end-point-concurrency` is changed to three parameters: `high-concurrency`, `normal-concurrency` and `low-concurrency`.
 
     ```yaml
     readpool:
@@ -153,7 +153,7 @@ If you have previously customized the configuration file of TiDB cluster compone
 
     Recommended configuration: the number of TiKV instances \* the parameter value = the number of CPU cores \* 0.8.
 
-- In TiKV configuration, the `block-cache-size` parameter of different CFs is changed to `block-cache`.
+- In the TiKV configuration, the `block-cache-size` parameter of different CFs is changed to `block-cache`.
 
     ```
     storage:
