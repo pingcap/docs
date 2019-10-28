@@ -342,6 +342,7 @@
 + TiDB in Kubernetes
   - [About TiDB Operator](/v3.0/tidb-in-kubernetes/tidb-operator-overview.md)
   + Get Started
+    - [kind](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
     - [DinD](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
     - [GKE](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
     - [Minikube](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
@@ -393,6 +394,7 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.5](/v3.0/releases/3.0.5.md)
     - [3.0.4](/v3.0/releases/3.0.4.md)
     - [3.0.3](/v3.0/releases/3.0.3.md)
     - [3.0.2](/v3.0/releases/3.0.2.md)
