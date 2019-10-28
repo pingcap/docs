@@ -8,7 +8,7 @@ category: how-to
 
 This tutorial shows how to deploy [TiDB Operator](https://github.com/pingcap/tidb-operator) and a TiDB cluster in Kubernetes on your laptop (Linux or macOS) using [kind](https://kind.sigs.k8s.io/).
 
-kind is a tool for running local Kubernetes clusters using Docker containers as cluster nodes. It is developed for testing local Kubernetes clusters, initially targeting the conformance tests. The cluster version depends on the node image that your kind version uses, but you can specify the image to be used for the nodes and choose any other published version. Refer to [Docker hub](https://hub.docker.com/r/kindest/node/tags) to see available tags.
+kind is a tool for running local Kubernetes clusters using Docker containers as cluster nodes. It is developed for testing local Kubernetes clusters, initially targeting the conformance tests. The Kubernetes cluster version depends on the node image that your kind uses, and you can specify the image to be used for the nodes and choose any other published version. Refer to [Docker hub](https://hub.docker.com/r/kindest/node/tags) to see available tags.
 
 > **Warning:**
 >
@@ -109,19 +109,19 @@ First, make sure that Docker is running. Then, you can create a local Kubernetes
 
 ## Step 2: Deploy TiDB Operator in the Kubernetes cluster
 
-Refer to the steps in [Deploy TiDB Operator](/dev/tidb-in-kubernetes/deploy/tidb-operator.md#install-tidb-operator).
+Refer to the steps in [Deploy TiDB Operator](/v3.0/tidb-in-kubernetes/deploy/tidb-operator.md#install-tidb-operator).
 
 ## Step 3: Deploy a TiDB cluster in the Kubernetes cluster
 
-Refer to the steps in [Deploy TiDB on General Kubernetes](/dev/tidb-in-kubernetes/deploy/general-kubernetes.md#deploy-tidb-cluster).
+Refer to the steps in [Deploy TiDB on General Kubernetes](/v3.0/tidb-in-kubernetes/deploy/general-kubernetes.md#deploy-tidb-cluster).
 
 ## Access the database and monitoring dashboards
 
-Refer to the steps in [View the monitoring dashboard](/dev/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md#view-the-monitoring-dashboard).
+Refer to the steps in [View the monitoring dashboard](/v3.0/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md#view-the-monitoring-dashboard).
 
 ## Destroy the TiDB and Kubernetes cluster
 
-To destroy the local TiDB cluster, refer to the steps in [Destroy TiDB Clusters in Kubernetes](/dev/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md).
+To destroy the local TiDB cluster, refer to the steps in [Destroy TiDB Clusters in Kubernetes](/v3.0/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md).
 
 To destroy the Kubernetes cluster, execute the following command:
 
