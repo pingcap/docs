@@ -130,8 +130,6 @@
       - [Monitor](/v2.1/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v2.1/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v2.1/faq/tidb-lightning.md)
-    + TiDB Binlog
-      - [FAQ](/v2.1/reference/tools/tidb-binlog/faq.md)
     - [sync-diff-inspector](/v2.1/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/v2.1/reference/tools/pd-control.md)
     - [PD Recover](/v2.1/reference/tools/pd-recover.md)
@@ -312,7 +310,7 @@
     - [Tune TiKV](/v2.1/reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](/v2.1/reference/tispark.md)
-  + [TiDB Binlog]
+  + TiDB Binlog
     - [Overview](/v2.1/reference/tools/tidb-binlog/overview.md)
     - [Deploy](/v2.1/reference/tools/tidb-binlog/deploy.md)
     - [Maintain](/v2.1/reference/tools/tidb-binlog/maintain.md)
@@ -320,6 +318,7 @@
     - [Upgrade](/v2.1/reference/tools/tidb-binlog/upgrade.md)
     - [Reparo](/v2.1/reference/tools/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/v2.1/reference/tools/tidb-binlog/binlog-slave-client.md)
+    - [FAQ](/v2.1/reference/tools/tidb-binlog/faq.md)
   - [Adopters](/v2.1/adopters.md)
 + FAQs
   - [TiDB FAQs](/v2.1/faq/tidb.md)

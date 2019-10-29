@@ -136,8 +136,6 @@
       - [Monitor](/v3.0/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.0/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v3.0/faq/tidb-lightning.md)
-    + TiDB Binlog
-      - [FAQ](/v3.0/reference/tools/tidb-binlog/faq.md)
     - [sync-diff-inspector](/v3.0/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/v3.0/reference/tools/pd-control.md)
     - [PD Recover](/v3.0/reference/tools/pd-recover.md)
@@ -334,7 +332,7 @@
     - [Tune TiKV](/v3.0/reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](/v3.0/reference/tispark.md)
-  + [TiDB Binlog]
+  + TiDB Binlog
     - [Overview](/v3.0/reference/tools/tidb-binlog/overview.md)
     - [Deploy](/v3.0/reference/tools/tidb-binlog/deploy.md)
     - [Maintain](/v3.0/reference/tools/tidb-binlog/maintain.md)
@@ -342,6 +340,7 @@
     - [Upgrade](/v3.0/reference/tools/tidb-binlog/upgrade.md)
     - [Reparo](/v3.0/reference/tools/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/v3.0/reference/tools/tidb-binlog/binlog-slave-client.md)
+    - [FAQ](/v3.0/reference/tools/tidb-binlog/faq.md)
   - [Adopters](/v3.0/adopters.md)
 + TiDB in Kubernetes
   - [About TiDB Operator](/v3.0/tidb-in-kubernetes/tidb-operator-overview.md)
