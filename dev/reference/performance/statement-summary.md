@@ -92,11 +92,7 @@ As shown in the result below, `avg_latency` of 1ms and 0.3ms are in the normal r
 
 ### Which categories of SQL statements consume the longest total time?
 
-<<<<<<< HEAD
 To fine tune the system, you can find out the 3 categories of SQL statements with the longest time consumption:
-=======
-To tune the system, we can find out the top 3 categories of SQL statements with the longest time consumption:
->>>>>>> 75c7a8f63f99cf13ae63f348db4ec52517385b0f
 
 ```sql
 SELECT sum_latency, avg_latency, exec_count, query_sample_text
@@ -121,6 +117,8 @@ The result shows that the following three SQL categories consume the longest tim
 
 The statement summary feature is disabled by default. You can enable it by setting a system variable, for example:
 
+{{< copyable "sql" >}}
+
 ```sql
 set global tidb_enable_stmt_summary = true;
 ```
@@ -134,7 +132,7 @@ The `tidb_enable_stmt_summary` system variable has two scopes - global and sessi
 
 The statistics in the system table will be cleared if the statement summary feature is disabled, and will be re-calculated next time the statement summary feature is enabled. Tests have shown that enabling this feature has little impact on performance.
 
-`events_statements_summary_by_digest` is a memory table. To prevent potential memory issues, we need to limit the number of statements to be saved and the longest SQL display length. You can configure these limits using the following parameters under [stmt-summary] of config.toml:
+`events_statements_summary_by_digest` is a memory table. To prevent potential memory issues, we need to limit the number of statements to be saved and the longest SQL display length. You can configure these limits using the following parameters under `[stmt-summary]` of `config.toml`:
 
 - `max-stmt-count` limits the number of SQL categories that can be saved. The default value is 100. If the set limit is exceeded, the most recent SQL statements that remain unused will be removed.
 - `max-sql-length` specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is 4096.
