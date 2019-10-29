@@ -45,9 +45,19 @@ When a cluster is created, a default account `root` is created with no password.
     kubectl create secret generic tidb-secret --from-literal=root=<root-password> --from-literal=developer=<developer-passowrd> --namespace=<namespace>
     ```
 
-    This command creates users `root` and `developer` with their passwords, which are saved in the `tidb-secret` object.
+    This command creates users `root` and `developer` with their passwords, which are saved in the `tidb-secret` object. By default, the regular user `developer` is only granted with `USAGE` privilege; other privileges are set in the configuration item `tidb.initSql`.
 
-3. Deploy the cluster.
+3. Set up a host that has access to TiDB.
+
+    You can set up a host that has access to TiDB via the configuration item `tidb.permitHost` before deploying the cluster. If it is not set, all hosts have access to TiDB. For details, refer to [Mysql GRANT host name](https://dev.mysql.com/doc/refman/5.7/en/grant.html).
+
+    ```
+    tidb:
+      passwordSecretName: tidb-secret
+      permitHost: <mysql-client-host-name>
+    ```
+
+4. Deploy the cluster.
 
     After creating the `secret`, deploy the cluster using the following command:
 
