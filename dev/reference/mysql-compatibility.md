@@ -73,7 +73,7 @@ Also, starting from TiDB 2.1.18 and 3.0.4, TiDB supports using the system variab
 
 Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/dev/how-to/monitor/monitor-a-cluster.md) for performance metrics instead.
 
-TiDB supports the `events_statements_summary_by_digest` table from TiDB 3.04. For more information, see [Statement Summary Table](/dev/reference/performance/statement-summary.md).
+TiDB supports the `events_statements_summary_by_digest` table from TiDB 3.0.4. For more information, see [Statement Summary Table](/dev/reference/performance/statement-summary.md).
 
 ### Query Execution Plan
 
