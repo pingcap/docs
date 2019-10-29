@@ -38,13 +38,14 @@ Close a Pump or Drainer node when you no longer need the service. For example:
 
 ## How can I pause a Pump or Drainer process?
 
-- Directly kill the process
+- Directly kill the process.
 
     > **Note:**
     >
     > Do not use the `kill -9` command. Otherwise, the Pump or Drainer node cannot process signals.
 
 - If the Pump or Drainer node runs in the foreground, pause it by pressing <kbd>Ctrl</kbd>+<kbd>C</kbd>.
+- Use the `pause-pump` or `pause-drainer` command in binlogctl.
 
 ## Can I use the `update-pump` or `update-drainer` command in binlogctl to pause the Pump or Drainer service?
 
