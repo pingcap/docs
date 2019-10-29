@@ -23,7 +23,7 @@ You can use the TiDB Ansible configuration file to set up the cluster topology a
 - [Modify component configuration](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
 - [Scale the TiDB cluster](/v2.1/how-to/scale/with-ansible.md)
 - [Upgrade the component version](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
-- [Enable the cluster binlog](/v2.1/reference/tidb-binlog-overview.md)
+- [Enable the cluster binlog](/v2.1/reference/tools/tidb-binlog/overview.md)
 - [Clean up data of the TiDB cluster](/v2.1/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
 - [Destroy the TiDB cluster](/v2.1/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
 
@@ -431,6 +431,7 @@ Take two TiKV instances on each TiKV node as an example:
 172.16.10.2
 172.16.10.3
 
+# Note: To use labels in TiKV, you must also configure location_labels for PD at the same time.
 [tikv_servers]
 TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv1"
 TiKV1-2 ansible_host=172.16.10.4 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv1"
@@ -463,6 +464,7 @@ TiKV3-2 ansible_host=172.16.10.6 deploy_dir=/data2/deploy tikv_port=20172 labels
 
 ......
 
+# Note: For labels in TiKV to work, you must also configure location_labels for PD when deploying the cluster.
 [pd_servers:vars]
 location_labels = ["host"]
 ```
