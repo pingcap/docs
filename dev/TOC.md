@@ -12,6 +12,8 @@
     - [How to Run TPC-C Test on TiDB](/dev/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/dev/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/dev/benchmark/tpcc.md)
+    - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/dev/benchmark/add-index-with-load.md)
+    - [TiDB in Kubernetes Sysbench Test](/dev/benchmark/sysbench-in-k8s.md)
     - [DM 1.0-alpha Benchmark Report](/dev/benchmark/dm-v1-alpha.md)
     - [DM 1.0-GA Benchmark Report](/dev/benchmark/dm-v1.0-ga.md)
 + Concepts
@@ -46,7 +48,7 @@
     - [Read Historical Data](/dev/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/dev/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/dev/how-to/get-started/data-migration.md)
-    - [TiSpark Quick Start Guide](/dev/how-to/deploy/tispark.md)
+    - [TiSpark Quick Start Guide](/dev/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -60,7 +62,10 @@
       - [Overview](/dev/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/dev/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/dev/how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog.md)
+    + Deploy and Use TiDB Binlog
+      - [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog.md)
+      - [Binlog Slave Client User Guide](/dev/reference/tools/tidb-binlog/binlog-slave-client.md)
+      - [Reparo User Guide](/dev/reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](/dev/how-to/configure/time-zone.md)
     - [Memory Control](/dev/how-to/configure/memory-control.md)
@@ -141,6 +146,7 @@
       - [Monitor](/dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/dev/faq/tidb-lightning.md)
+    - [sync-diff-inspector](/dev/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/dev/reference/tools/pd-control.md)
     - [PD Recover](/dev/reference/tools/pd-recover.md)
     - [TiKV Control](/dev/reference/tools/tikv-control.md)
@@ -273,6 +279,7 @@
       - [`SHOW [FULL] PROCESSSLIST`](/dev/reference/sql/statements/show-processlist.md)
       - [`SHOW SCHEMAS`](/dev/reference/sql/statements/show-schemas.md)
       - [`SHOW [FULL] TABLES`](/dev/reference/sql/statements/show-tables.md)
+      - [`SHOW TABLE REGIONS`](/dev/reference/sql/statements/show-table-regions.md)
       - [`SHOW TABLE STATUS`](/dev/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/dev/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/dev/reference/sql/statements/show-warnings.md)
@@ -340,6 +347,7 @@
 + TiDB in Kubernetes
   - [About TiDB Operator](/dev/tidb-in-kubernetes/tidb-operator-overview.md)
   + Get Started
+    - [kind](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
     - [DinD](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
     - [GKE](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
     - [Minikube](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
@@ -391,6 +399,7 @@
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
   + v3.0
+    - [3.0.5](/dev/releases/3.0.5.md)
     - [3.0.4](/dev/releases/3.0.4.md)
     - [3.0.3](/dev/releases/3.0.3.md)
     - [3.0.2](/dev/releases/3.0.2.md)

@@ -90,9 +90,13 @@ As shown in the result below, `avg_latency` of 1ms and 0.3ms are in the normal r
 2 rows in set (0.00 sec)
 ```
 
-### Which category of SQL statements c longest total time consumption?
+### Which categories of SQL statements consume the longest total time?
 
+<<<<<<< HEAD
 To fine tune the system, you can find out the 3 categories of SQL statements with the longest time consumption:
+=======
+To tune the system, we can find out the top 3 categories of SQL statements with the longest time consumption:
+>>>>>>> 75c7a8f63f99cf13ae63f348db4ec52517385b0f
 
 ```sql
 SELECT sum_latency, avg_latency, exec_count, query_sample_text
@@ -121,14 +125,14 @@ The statement summary feature is disabled by default. You can enable it by setti
 set global tidb_enable_stmt_summary = true;
 ```
 
-The `tidb_enable_stmt_summary` system variable has two scopes - global and session, which work a little differently from other system variables:
+The `tidb_enable_stmt_summary` system variable has two scopes - global and session, which work a little differently from other system variables, as described below:
 
 - Set the global variable to apply to the cluster immediately.
 - Set the session variable to apply to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
 - The session variable has a higher read priority. The global variable will be read only if no session variable is set.
 - Set the session variable to a blank string to re-read the global variable.
 
-The statistics in the system table will be cleared if the statement summary feature is disabled, and will be re-calculated next time the feature is enabled. Tests have shown that enabling this feature has little impact on performance.
+The statistics in the system table will be cleared if the statement summary feature is disabled, and will be re-calculated next time the statement summary feature is enabled. Tests have shown that enabling this feature has little impact on performance.
 
 `events_statements_summary_by_digest` is a memory table. To prevent potential memory issues, we need to limit the number of statements to be saved and the longest SQL display length. You can configure these limits using the following parameters under [stmt-summary] of config.toml:
 
