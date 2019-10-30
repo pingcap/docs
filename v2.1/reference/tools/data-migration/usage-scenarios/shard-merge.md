@@ -124,7 +124,7 @@ Assume that the downstream schema after replication is as follows:
           tbl-name: "log_bak"
     ```
 
-- To satisfy the replication Requirement #8, first refer to [handling conflicts of auto-increment primary key](/v2.1/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handling-conflicts-of-auto-increment-primary-key) to solve conflicts, which guarantees that the data replication does not go wrong when data is replicated to the downstream and the shared table has the same primary key. Then, configure `ignore-checking-items` to skip checking the conflict of auto-increment primary key:
+- To satisfy the replication Requirement #8, first refer to [handling conflicts of auto-increment primary key](https://github.com/pingcap/docs/pull/1604) to solve conflicts, which guarantees that the data replication does not go wrong when data is replicated to the downstream and the shared table has the same primary key. Then, configure `ignore-checking-items` to skip checking the conflict of auto-increment primary key:
 
     {{< copyable "" >}}
 
