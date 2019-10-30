@@ -78,7 +78,7 @@ In environments of development, testing and production, the requirements on serv
         172.16.10.74
         ```
 
-        Pump retains the data of the latest 7 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file (or `pump-cluster.yml` file in TiDB 3.0.0-3.0.2) and remove the related comments:
+        Pump retains the data of the latest 7 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file (direct to the `pump-cluster.yml` file in TiDB 3.0.2 or earlier) and remove the related comments:
 
         ```yaml
         global:
