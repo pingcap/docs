@@ -35,14 +35,13 @@
 + How-to
   + Get Started
     + Start a Local Cluster
-      - [From Binary](/v2.1/how-to/get-started/local-cluster/install-from-binary.md)
-      - [In Kubernetes](/v2.1/how-to/get-started/local-cluster/install-from-kubernetes.md)
+      - [From Binary](/v2.1/how-to/get-started/deploy-tidb-from-binary.md)
     - [Explore SQL with TiDB](/v2.1/how-to/get-started/explore-sql.md)
     - [Import Example Database](/v2.1/how-to/get-started/import-example-database.md)
     - [Read Historical Data](/v2.1/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v2.1/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v2.1/how-to/get-started/data-migration.md)
-    - [TiSpark Quick Start Guide](/v2.1/how-to/deploy/tispark.md)
+    - [TiSpark Quick Start Guide](/v2.1/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v2.1/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -52,15 +51,10 @@
       - [Ansible Deployment (Recommended)](/v2.1/how-to/deploy/orchestrated/ansible.md)
       - [Ansible Offline Deployment](/v2.1/how-to/deploy/orchestrated/offline-ansible.md)
       - [Docker Deployment](/v2.1/how-to/deploy/orchestrated/docker.md)
-      - [Kubernetes Deployment](/v2.1/how-to/deploy/orchestrated/kubernetes.md)
     + Geographic Redundancy
       - [Overview](/v2.1/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/v2.1/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/v2.1/how-to/deploy/data-migration-with-ansible.md)
-    + Deploy and Use TiDB Binlog
-      - [TiDB Binlog Cluster Deployment](/v2.1/how-to/deploy/tidb-binlog.md)
-      - [Binlog Slave Client User Guide](/v2.1/reference/tools/tidb-binlog/binlog-slave-client.md)
-      - [Reparo User Guide](/v2.1/reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](/v2.1/how-to/configure/time-zone.md)
     - [Memory Control](/v2.1/how-to/configure/memory-control.md)
@@ -72,7 +66,6 @@
   + Monitor
     - [Overview](/v2.1/how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](/v2.1/how-to/monitor/monitor-a-cluster.md)
-    - [TiDB Binlog Monitoring](/v2.1/how-to/monitor/tidb-binlog.md)
   + Migrate
     - [Overview](/v2.1/how-to/migrate/overview.md)
     + Migrate from MySQL
@@ -83,9 +76,7 @@
   + Maintain
     - [Common Ansible Operations](/v2.1/how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](/v2.1/how-to/maintain/backup-and-restore.md)
-    - [Identify Slow Queries (2.1.8+)](/v2.1/how-to/maintain/identify-slow-queries.md)
-    - [Identify Slow Queries (earlier)](/v2.1/how-to/maintain/identify-slow-queries-21.md)
-    - [TiDB Binlog Cluster Operations](/v2.1/how-to/maintain/tidb-binlog.md)
+    - [Identify Slow Queries](/v2.1/how-to/maintain/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/v2.1/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v2.1/how-to/scale/horizontally.md)
@@ -93,7 +84,6 @@
     - [Upgrade to TiDB 2.1](/v2.1/how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](/v2.1/reference/tools/data-migration/upgrade.md)
-    - [Upgrade TiDB Binlog Cluster](/v2.1/how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v2.1/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](/v2.1/how-to/troubleshoot/data-migration.md)
@@ -140,6 +130,7 @@
       - [Monitor](/v2.1/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v2.1/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v2.1/faq/tidb-lightning.md)
+    - [sync-diff-inspector](/v2.1/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/v2.1/reference/tools/pd-control.md)
     - [PD Recover](/v2.1/reference/tools/pd-recover.md)
     - [TiKV Control](/v2.1/reference/tools/tikv-control.md)
@@ -319,7 +310,15 @@
     - [Tune TiKV](/v2.1/reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](/v2.1/reference/tispark.md)
-  - [TiDB Binlog Cluster Overview](/v2.1/reference/tidb-binlog-overview.md)
+  + TiDB Binlog
+    - [Overview](/v2.1/reference/tools/tidb-binlog/overview.md)
+    - [Deploy](/v2.1/reference/tools/tidb-binlog/deploy.md)
+    - [Maintain](/v2.1/reference/tools/tidb-binlog/maintain.md)
+    - [Monitor](/v2.1/reference/tools/tidb-binlog/monitor.md)
+    - [Upgrade](/v2.1/reference/tools/tidb-binlog/upgrade.md)
+    - [Reparo](/v2.1/reference/tools/tidb-binlog/reparo.md)
+    - [Binlog Slave Client](/v2.1/reference/tools/tidb-binlog/binlog-slave-client.md)
+    - [FAQ](/v2.1/reference/tools/tidb-binlog/faq.md)
   - [Adopters](/v2.1/adopters.md)
 + FAQs
   - [TiDB FAQs](/v2.1/faq/tidb.md)
