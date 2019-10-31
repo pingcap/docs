@@ -148,6 +148,10 @@ Currently, the `SHOW ANALYZE STATUS` statement returns the following 7 columns:
 | start_time | The time at which the task starts |
 | state | The state of a task, including `pending`, `running`, `finished`, and `failed` |
 
+> **Note:**
+>
+> When TiDB automatically updates the total number of rows and the number of modified rows according to DML statements, `update_time` is also updated. Therefore, `update_time` does not necessarily indicate the last time when the `ANALYZE` statement is executed.
+
 ## View statistics
 
 You can view the statistics status using the following statements.
