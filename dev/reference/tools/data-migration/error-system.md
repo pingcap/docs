@@ -14,7 +14,7 @@ A new error system has been introduced in DM 1.0.0-GA, which has the following f
 
 + Add the error code mechanism
 + Add the error fields such as `class`, `scope` or `level`
-+ Improve the error description, error call chain information and stack call information
++ Improve the error description, error call chain information and stack trace information
 
 For the design and implementation of this error system, refer to [Proposal: Improve Error System](https://github.com/pingcap/dm/blob/master/docs/RFCS/20190722_error_handling.md).
 
@@ -48,9 +48,9 @@ All error messages in DM have the following three components:
 
 - `code`: error code, which is unique for each error type.
 
-    Errors of the same type use the same error code. An error code does not change as DM version changes.
+    DM uses the same error code for the same error type. An error code does not change as DM version changes.
 
-    Some errors might be removed during the DM iteration, but the error code will not be removed. A new error uses the new error code instead of the existing one.
+    Some errors might be removed during the DM iteration, but the error code will not be removed. DM uses a new error code instead of an existing one for a new error type.
 
 - `class`: error classification
 
@@ -83,7 +83,7 @@ All error messages in DM have the following three components:
 
 - `level`: Error level
 
-    The severity level of the error, which includes low, medium, and high.
+    The severity level of the error, which includes `low`, `medium`, and `high`.
 
     The low-level error usually relates to user operation and incorrect input, which does not affect normal replication tasks. The medium-level error usually relates to user configuration, which affects some newly started services but does not affect the existing DM replication status. The high-level error usually needs your solution, otherwise there might be such risks as interrupting replication tasks.
 
@@ -107,7 +107,7 @@ After analyzing the basic error information and the error message description, y
 
 ### Error stack information
 
-DM decides whether to output the error stack information according to the severity of the error. The error stack records the complete stack call information when the error occurs. If you do not fully ensure the error cause based on the basic information and the error message description, use the error stack information to further check the running path of the error code.
+DM decides whether to output the error stack information according to the severity of the error. The error stack records the complete stack trace information when the error occurs. If you do not fully ensure the error cause based on the basic information and the error message description, use the error stack information to further check the running path of the error code.
 
 ## Published error code
 
@@ -118,12 +118,12 @@ You can find out a complete list of error codes from the [published error codes]
 | Error code       | Error description                                                     |  Handling method                                                    |
 | :----------- | :------------------------------------------------------------ | :----------------------------------------------------------- |
 | `code=10001` |  Abnormal database operation.                                              |  Further analyze the error message and error stack.                                |
-| `code=10002` | The `bad connection` error at the bottom of the database. It usually indicates that the connection between DM and the downstream TiDB instance is abnormal (possibly caused by network failure, TiDB restart and so on) and the currently requested data is not sent to TiDB. |  DM provides automatic recovery for such error. If the recovery is not successful for a long time, check the network or TiDB status. |
-| `code=10003` | The `invalid connection` error at the bottom of the database. It usually indicates that the connection between DM and the downstream TiDB instance is abnormal (possibly caused by network failure, TiDB restart and so on) and the currently requested data is partly sent to TiDB.  | DM provides automatic recovery for such error. If the recovery is not successful for a long time, further check the error message and analyze the information based on the actual situation. |
-| `code=10005` |  Occurs when performing the query type SQL statements.                                         |                                                              |
+| `code=10002` | The `bad connection` error from the underlying database. It usually indicates that the connection between DM and the downstream TiDB instance is abnormal (possibly caused by network failure, TiDB restart and so on) and the currently requested data is not sent to TiDB. |  DM provides automatic recovery for such error. If the recovery is not successful for a long time, check the network or TiDB status. |
+| `code=10003` | The `invalid connection` error from the underlying database. It usually indicates that the connection between DM and the downstream TiDB instance is abnormal (possibly caused by network failure, TiDB restart and so on) and the currently requested data is partly sent to TiDB.  | DM provides automatic recovery for such error. If the recovery is not successful for a long time, further check the error message and analyze the information based on the actual situation. |
+| `code=10005` |  Occurs when performing the `QUERY` type SQL statements.                                         |                                                              |
 | `code=10006` |  Occurs when performing the `EXECUTE` type SQL statements, including DDL statements and DML statements of the `INSERT`, `UPDATE`or `DELETE` type. For more detailed error information, check the error message which usually includes the error code and error information returned for database operations.
 |                                                              |
 | `code=11006` |  Occurs when the built-in parser of DM parses the incompatible DDL statements.          |  Refer to [Data Migration - incompatible DDL statements](/dev/how-to/troubleshoot/data-migration.md#incompatible-ddl-statements) for solution. |
-| `code=20010` |   Occurs when TiDB processes the task configuration and decrypts the database password.                   |  Check whether the downstream database password provided in the configuration task is [correctly encrypted using dmctl](/dev/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl). |
+| `code=20010` |   Occurs when decrypting the database password that is provided in task configuration.                   |  Check whether the downstream database password provided in the configuration task is [correctly encrypted using dmctl](/dev/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl). |
 | `code=26002` |  The task check fails to establish database connection. For more detailed error information, check the error message which usually includes the error code and error information returned for database operations. |  Check whether the machine where DM-master is located has permission to access the upstream. |
 | `code=38008` |  An error occurs in the gRPC communication among DM components.                                     |   Check `class`. Find out the error occurs in the interaction of which components. Determine the type of communication error. If the error occurs when establishing gRPC connection, check whether the communication server is working normally. |
