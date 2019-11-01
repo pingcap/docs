@@ -6,7 +6,7 @@ category: reference
 
 # Data Migration Error Message Reference
 
-This document introduces describes the error messages output in Data Migration (DM) and offers solutions to some common error messages.
+This document describes the error messages output in Data Migration (DM) and offers solutions to some common error messages.
 
 ## DM error system
 
