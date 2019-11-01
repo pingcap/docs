@@ -33,28 +33,14 @@ In environments of development, testing and production, the requirements on serv
 
     | tidb-ansible branch | TiDB version | Note |
     | :------------------- | :------------ | :---- |
-    | release-2.0 | 2.0 version | The latest 2.0 stable version. You can use it in the production environment. |
-    | release-2.1 | 2.1 version | The latest 2.1 stable version. You can use it in the production environment (recommended). |
     | master | master version | This version includes the latest features with a daily update. |
 
 2. Use the following command to download the corresponding branch of TiDB Ansible from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible) on GitHub. The default folder name is `tidb-ansible`.
 
-    - Download the 2.0 version:
-
-        ```bash
-        $ git clone -b release-2.0-new-binlog https://github.com/pingcap/tidb-ansible.git
-        ```
-
-    - Download the 2.1 version:
-
-        ```bash
-        $ git clone -b release-2.1 https://github.com/pingcap/tidb-ansible.git
-        ```
-
     - Download the master version:
 
         ```bash
-        $ git clone https://github.com/pingcap/tidb-ansible.git
+        git clone https://github.com/pingcap/tidb-ansible.git
         ```
 
 ### Step 2: Deploy Pump
@@ -140,8 +126,8 @@ In environments of development, testing and production, the requirements on serv
     Use `binlogctl` to check the Pump status. Change the `pd-urls` parameter to the PD address of the cluster. If `State` is `online`, Pump is started successfully.
 
     ```bash
-    $ cd /home/tidb/tidb-ansible
-    $ resources/bin/binlogctl -pd-urls=http://172.16.10.72:2379 -cmd pumps
+    cd /home/tidb/tidb-ansible
+    resources/bin/binlogctl -pd-urls=http://172.16.10.72:2379 -cmd pumps
 
     INFO[0000] pump: {NodeID: ip-172-16-10-72:8250, Addr: 172.16.10.72:8250, State: online, MaxCommitTS: 403051525690884099, UpdateTime: 2018-12-25 14:23:37 +0800 CST}
     INFO[0000] pump: {NodeID: ip-172-16-10-73:8250, Addr: 172.16.10.73:8250, State: online, MaxCommitTS: 403051525703991299, UpdateTime: 2018-12-25 14:23:36 +0800 CST}
@@ -155,8 +141,8 @@ In environments of development, testing and production, the requirements on serv
     Run the following command to use `binlogctl` to generate the `tso` information which is needed for the initial start of Drainer:
 
     ```bash
-    $ cd /home/tidb/tidb-ansible
-    $ resources/bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd generate_meta
+    cd /home/tidb/tidb-ansible
+    resources/bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd generate_meta
     INFO[0000] [pd] create pd client with endpoints [http://192.168.199.118:32379]
     INFO[0000] [pd] leader switches to: http://192.168.199.118:32379, previous:
     INFO[0000] [pd] init cluster id 6569368151110378289
@@ -188,14 +174,14 @@ In environments of development, testing and production, the requirements on serv
     - Assume that the downstream is MySQL:
 
         ```bash
-        $ cd /home/tidb/tidb-ansible/conf
-        $ cp drainer-cluster.toml drainer_mysql_drainer-cluster.toml
-        $ vi drainer_mysql_drainer-cluster.toml
+        cd /home/tidb/tidb-ansible/conf
+        cp drainer-cluster.toml drainer_mysql_drainer-cluster.toml
+        vi drainer_mysql_drainer-cluster.toml
         ```
 
         > **Note:**
         >
-        > Name the configuration file as `alias_drainer-cluster.toml`. Otherwise, the customized configuration file cannot be found during the deployment process.
+        > Name the configuration file as `alias_drainer.toml`. Otherwise, the customized configuration file cannot be found during the deployment process.
 
         Set `db-type` to `mysql` and configure the downstream MySQL information:
 
@@ -210,15 +196,14 @@ In environments of development, testing and production, the requirements on serv
         user = "root"
         password = "123456"
         port = 3306
-        # Time and size limits for flash batch write
         ```
 
     - Assume that the downstream is incremental backup data:
 
         ```bash
-        $ cd /home/tidb/tidb-ansible/conf
-        $ cp drainer-cluster.toml drainer_file_drainer-cluster.toml
-        $ vi drainer_file_drainer-cluster.toml
+        cd /home/tidb/tidb-ansible/conf
+        cp drainer-cluster.toml drainer_file_drainer-cluster.toml
+        vi drainer_file_drainer-cluster.toml
         ```
 
         Set `db-type` to `file`.
@@ -228,8 +213,7 @@ In environments of development, testing and production, the requirements on serv
         # Valid values are "mysql", "file", "kafka", and "flash".
         db-type = "file"
 
-        # Uncomment this if you want to use `file` as `db-type`.
-        # The value can be `gzip`. Leave it empty to disable compression.
+        # Uncomment this if you want to use "file" as "db-type".
         [syncer.to]
         # default data directory: "{{ deploy_dir }}/data.drainer"
         dir = "data.drainer"
@@ -238,13 +222,13 @@ In environments of development, testing and production, the requirements on serv
 4. Deploy Drainer.
 
     ```bash
-    $ ansible-playbook deploy_drainer.yml
+    ansible-playbook deploy_drainer.yml
     ```
 
 5. Start Drainer.
 
     ```bash
-    $ ansible-playbook start_drainer.yml
+    ansible-playbook start_drainer.yml
     ```
 
 ## Deploy TiDB Binlog using a Binary package
@@ -320,6 +304,8 @@ The following part shows how to use Pump and Drainer based on the nodes above.
             the unique ID of a Pump node. If you do not specify this ID, the system automatically generates an ID based on the host name and listening port.
         -pd-urls string
             the address of the PD cluster nodes (-pd-urls="http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379")
+        -fake-binlog-interval int
+            the frequency of a Pump node generating fake binlog (3 by default, in seconds)
         ```
 
     - Taking deploying Pump on "192.168.0.11" as an example, the Pump configuration file is as follows:
@@ -342,7 +328,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # the interval of the heartbeats Pump sends to PD (in seconds)
         heartbeat-interval = 2
 
-        # the address of the PD cluster nodes
+        # the address of the PD cluster nodes (no whitespace)
         pd-urls = "http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379"
 
         # [security]
@@ -399,7 +385,8 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -c int
             the number of the concurrency of the downstream for replication. The bigger the value, the better throughput performance of the concurrency (1 by default).
         -cache-binlog-count int
-            the limit on the number of binlog items in the cache (65536 by default)
+            the limit on the number of binlog items in the cache (512 by default)
+            If a single binlog in the upstream causes OOM in Drainer, try reduce the number of binlog items to reduce memory usage.
         -config string
             the directory of the configuration file. Drainer reads the configuration file first.
             If the corresponding configuration exists in the command line parameters, Drainer uses the configuration of the command line parameters to cover that of the configuration file.
@@ -407,7 +394,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
             the directory where the Drainer data is stored ("data.drainer" by default)
         -dest-db-type string
             the downstream service type of Drainer
-            The value can be "mysql", "kafka", "file", and "flash". ("mysql" by default)
+            The value can be "mysql", "tidb", "kafka", "file", and "flash". ("mysql" by default)
         -detect-interval int
             the interval of checking the online Pump in PD (10 by default, in seconds)
         -disable-detect
@@ -449,13 +436,16 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # the address through which Drainer provides the service ("192.168.0.13:8249")
         addr = "192.168.0.13:8249"
 
+        # the address through which Drainer provides the external service
+        advertise-addr = "192.168.0.13:8249"
+
         # the interval of checking the online Pump in PD (10 by default, in seconds)
         detect-interval = 10
 
         # the directory where the Drainer data is stored "data.drainer" by default)
         data-dir = "data.drainer"
 
-        # the address of the PD cluster nodes
+        # the address of the PD cluster nodes (no whitespace)
         pd-urls = "http://192.168.0.16:2379,http://192.168.0.15:2379,http://192.168.0.14:2379"
 
         # the directory of the log file
@@ -464,9 +454,20 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # Drainer compresses the data when it gets the binlog from Pump. The value can be "gzip". If it is not configured, it will not be compressed
         # compressor = "gzip"
 
+        # [security]
+        # This section is generally commented out if no special security settings are required.
+        # The file path containing a list of trusted SSL CAs connected to the cluster.
+        # ssl-ca = "/path/to/ca.pem"
+        # The path to the X509 certificate that is connected to the cluster in PEM format.
+        # ssl-cert = "/path/to/pump.pem"
+        # The path to the X509 key that is connected to the cluster in PEM format.
+        # ssl-key = "/path/to/pump-key.pem"
+
         # Syncer Configuration
         [syncer]
         # If the item is set, the sql-mode will be used to parse the DDL statement.
+        # If the downstream database is MySQL or TiDB, then the downstream sql-mode
+        # is also set to this value.
         # sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
         # the number of SQL statements of a transaction that are output to the downstream database (20 by default)
@@ -522,6 +523,11 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         password = ""
         port = 3306
 
+        [syncer.to.checkpoint]
+        # When the downstream database is MySQL or TiDB, this option can be
+        # enabled to change the database that holds the checkpoint
+        # schema = "tidb_binlog"
+
         # the directory where the binlog file is stored when `db-type` is set to `file`
         # [syncer.to]
         # dir = "data.drainer"
@@ -538,10 +544,6 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # the topic name of the Kafka cluster that saves the binlog data. The default value is <cluster-id>_obinlog
         # To run multiple Drainers to replicate data to the same Kafka cluster, you need to set different `topic-name`s for each Drainer.
         # topic-name = ""
-
-        [syncer.to.checkpoint]
-        # When the downstream is MySQL or TiDB, this option can be enabled to change the database that holds the checkpoint
-        # schema = "tidb_binlog"
         ```
 
     - Starting Drainer:
@@ -576,3 +578,5 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 > - Make sure that the TiDB Binlog service is enabled in all TiDB instances in a same cluster, otherwise upstream and downstream data inconsistency might occur during data replication. If you want to temporarily run a TiDB instance where the TiDB Binlog service is not enabled, set `run_ddl=false` in the TiDB configuration file.
 > - Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
 > - If you want to start Drainer in an existing TiDB cluster, generally you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to replicate the incremental data from `savepoint`.
+> - When the downstream database is TiDB or MySQL, the  `sql_mode` in both upstream and downstream database should be consistent. In other words, the `sql_mode` should be the same when each SQL statement is executed in the upstream and synchronized in the downstream. You can execute `select @@sql_mode;` statement in upstream and downstream respectively to compare `sql_mode`.
+> - Drainer also fails to synchronize when there are DDL statements that upstream database supports but downstream database does not. An example is synchronizing `CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;` statement when the downstream database MySQL uses the InnoDB engine. In this case, you can configure [skipping transactions](dev/reference/tools/tidb-binlog/faq/#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database) in Drainer, and manually execute compatible statements in the downstream database.
