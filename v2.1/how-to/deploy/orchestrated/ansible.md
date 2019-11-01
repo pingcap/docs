@@ -23,7 +23,7 @@ You can use the TiDB Ansible configuration file to set up the cluster topology a
 - [Modify component configuration](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md#modify-component-configuration)
 - [Scale the TiDB cluster](/v2.1/how-to/scale/with-ansible.md)
 - [Upgrade the component version](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md#upgrade-the-component-version)
-- [Enable the cluster binlog](/v2.1/reference/tidb-binlog-overview.md)
+- [Enable the cluster binlog](/v2.1/reference/tools/tidb-binlog/overview.md)
 - [Clean up data of the TiDB cluster](/v2.1/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
 - [Destroy the TiDB cluster](/v2.1/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
 
@@ -134,34 +134,22 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
     | TiDB version | tidb-ansible tag | Note |
     | :-------- | :---------------- | :--- |
-    | 2.0 version | v2.0.10, v2.0.11 | It is the latest 2.0 stable version which can be used in the production environment. |
-    | 2.1 version | v2.1.1 ~ v2.1.8 | It is the latest 2.1 stable version which can be used in the production environment (recommended). |
-    | 3.0 version | v3.0.0-beta, v3.0.0-beta.1 | It is currently a beta version which is not recommended to use in the production environment. |
-    | `master` branch | None | It includes the newest features and is updated on a daily basis, so it is not recommended to use it in the production environment. |
+    | 2.0 version | v2.0.10, v2.0.11 | It is the stable version of 2.0. It is not recommended for new users to use it in the production environment. |
+    | 2.1 version | v2.1.1 ~ v2.1.17 | It is the stable version of 2.1. It can be used in the production environment. |
 
-2. Download the [corresponding TiDB Ansible versions](https://github.com/pingcap/tidb-ansible/tags) from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+2. Download the [corresponding TiDB Ansible versions](https://github.com/pingcap/tidb-ansible/tags) of TiDB 2.0 or 2.1 from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
-    > **Note:**
-    >
-    > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
+    ```
+    $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
+    ```
 
-    - Download the tidb-ansible version with a specified tag:
+> **Note:**
+>
+> - Replace `$tag` with the value of the chosen TAG version. For example, `v2.11.15`.
+> - To deploy and upgrade TiDB clusters, use the corresponding version of `tidb-ansible`. If you only modify the version in the `inventory.ini` file, errors might occur.
+> - It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
-        ```
-        $ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
-        ```
-
-    - Download the tidb-ansible version that corresponds to the `master` branch of TiDB:
-
-        ```
-        $ git clone https://github.com/pingcap/tidb-ansible.git
-        ```
-
-    > **Note:**
-    >
-    > It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
-
-    If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
+If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
 
 ## Step 4: Install Ansible and its dependencies on the Control Machine
 
@@ -443,6 +431,7 @@ Take two TiKV instances on each TiKV node as an example:
 172.16.10.2
 172.16.10.3
 
+# Note: To use labels in TiKV, you must also configure location_labels for PD at the same time.
 [tikv_servers]
 TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv1"
 TiKV1-2 ansible_host=172.16.10.4 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv1"
@@ -475,6 +464,7 @@ TiKV3-2 ansible_host=172.16.10.6 deploy_dir=/data2/deploy tikv_port=20172 labels
 
 ......
 
+# Note: For labels in TiKV to work, you must also configure location_labels for PD when deploying the cluster.
 [pd_servers:vars]
 location_labels = ["host"]
 ```
@@ -500,7 +490,9 @@ location_labels = ["host"]
         # low-concurrency: 8
     ```
 
-    Recommended configuration: the number of TiKV instances \* the parameter value = CPU_Vcores \* 0.8.
+    > **Note:**
+    >
+    > Recommended configuration: the number of TiKV instances \* the parameter value = CPU_Vcores \* 0.8.
 
 3. If multiple TiKV instances are deployed on a same physical disk, edit the `capacity` parameter in `conf/tikv.yml`:
 
@@ -509,7 +501,9 @@ location_labels = ["host"]
       capacity: 0
     ```
 
-    Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
+    > **Note:**
+    >
+    > Recommended configuration: `capacity` = total disk capacity / the number of TiKV instances. For example, `capacity: "100GB"`.
 
 ## Step 10: Edit variables in the `inventory.ini` file
 
