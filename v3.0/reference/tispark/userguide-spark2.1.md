@@ -10,17 +10,19 @@ category: reference
 >
 > This is a user guide for TiSpark version earlier 2.0. If you are using version 2.0 or later, refer to [Document for Spark 2.3](/v3.0/reference/tispark/userguide.md)
 
-This document introduces how to set up and use TiSpark, which requires some basic knowledge of Apache Spark. Refer to [Spark website](https://spark.apache.org/docs/latest/index.html) for details.
+This document introduces how to deploy and use TiSpark, which requires some basic knowledge of Apache Spark. Refer to [Spark website](https://spark.apache.org/docs/latest/index.html) for details.
 
-## Prerequisites for setting up TiSpark
+## Prerequisites for deploying TiSpark
 
-+ The current version of TiSpark supports Spark 2.1. Spark 2.0 has not been fully tested on TiSpark yet. TiSpark does not support any versions earlier than 2.0, or later than 2.2.
++ The current version of TiSpark supports Spark 2.1. Spark 2.0 has not been fully tested on TiSpark yet. TiSpark does not support any versions earlier than 2.0, or later than 2.2. Refer to [Spark versions supported by TiSpark](/v3.0/reference/tispark/overview.md#spark-versions-supported-by-tiSpark) for detail.
 + TiSpark requires JDK 1.8+ and Scala 2.11 (Spark2.0 + default Scala version).
 + TiSpark runs in any Spark mode such as `YARN`, `Mesos`, and `Standalone`.
 
-## Recommended deployment configurations
+## Configurations
 
-### For independent deployment of Spark cluster and TiSpark cluster
+This section describes the independent deployment of Spark and TiSpark, and hybrid deployment of TiKV and TiSpark.
+
+### Independent deployment of Spark cluster and TiSpark cluster
 
 Refer to the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for detailed hardware recommendations.
 
@@ -28,7 +30,7 @@ Refer to the [Spark official website](https://spark.apache.org/docs/latest/hardw
 
 + It is recommended to provision at least 8 to 16 cores per machine for Spark. First, you must assign all the CPU cores to Spark.
 
-The following is an example based on the `spark-env.sh` configuration:
+This is an example based on the `spark-env.sh` configuration:
 
 ```
 SPARK_EXECUTOR_MEMORY = 32g
@@ -36,17 +38,17 @@ SPARK_WORKER_MEMORY = 32g
 SPARK_WORKER_CORES = 8
 ```
 
-### For hybrid deployment of TiSpark and TiKV cluster
+### Hybrid deployment of TiSpark and TiKV cluster
 
 For the hybrid deployment of TiSpark and TiKV, add the resources required by TiSpark to the resources reserved in TiKV, and allocate 25% of the memory for the system.
 
 ## Deploy TiSpark
 
-Download the TiSpark's jar package [here](https://github.com/pingcap/tispark/releases).
+Download the TiSpark's jar package from [here](https://github.com/pingcap/tispark/releases).
 
-### Deploy TiSpark on the existing Spark cluster
+### Deploy TiSpark on existing Spark cluster
 
-You do not need to reboot the existing Spark cluster for TiSpark to run on it. Instead, use Spark's `--jars` parameter to introduce TiSpark as a dependency:
+Do not reboot the existing Spark cluster for TiSpark to run on it. Instead, use Spark's `--jars` parameter to introduce TiSpark as a dependency:
 
 ```
 Spark-shell --jars $ PATH / tispark-${name_with_version}.jar
@@ -56,56 +58,53 @@ To deploy TiSpark as a default component, place the TiSpark jar package into eac
 
 ```
 $ {SPARK_INSTALL_PATH} / jars
-
 ```
 
 In this way, you can use either `Spark-Submit` or `Spark-Shell` to use TiSpark directly.
 
-### Deploy TiSpark without the Spark cluster
+### Deploy TiSpark without Spark cluster
 
-Without a Spark cluster, it is recommended that you use the Spark Standalone mode by placing a compiled version of Spark on each node on the cluster. For any problem, refer to the [official Spark website](https://spark.apache.org/docs/latest/spark-standalone.html). You are also welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on GitHub.
+To deploy TiSpark without a Spark cluster, it is recommended that you use the Spark `Standalone` mode by placing a compiled version of Spark on each node on the cluster. For any problem, refer to the [official Spark website](https://spark.apache.org/docs/latest/spark-standalone.html). You are also welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on GitHub.
 
-#### Step 1: Download and install
+1. Download [Apache Spark](https://spark.apache.org/downloads.html).
 
-Download [Apache Spark](https://spark.apache.org/downloads.html).
+    + For the Standalone mode without Hadoop support, use Spark **2.1.x** and any version of pre-build with Apache Hadoop 2.x with Hadoop dependencies.
 
-+ For the Standalone mode without Hadoop support, use Spark **2.1.x** and any version of pre-build with Apache Hadoop 2.x with Hadoop dependencies.
+    + If you need to use the Hadoop cluster, choose the corresponding Hadoop version. You can also build Spark from the [source code](https://spark.apache.org/docs/2.1.0/building-spark.html) to match the previous version of the official Hadoop 2.6.
 
-+ If you need to use the Hadoop cluster, choose the corresponding Hadoop version. You can also build Spark from the [source code](https://spark.apache.org/docs/2.1.0/building-spark.html) to match the previous version of the official Hadoop 2.6.
+    > **Note:**
+    >
+    > TiSpark currently only supports Spark 2.1.x.
 
-> **Note:**
->
-> TiSpark currently only supports Spark 2.1.x.
+    Suppose you already have a Spark binary, and the current PATH is `SPARKPATH`, copy the TiSpark jar package to the `$SPARKPATH/jars` directory.
 
-Suppose you already have a Spark binary, and the current PATH is `SPARKPATH`, copy the TiSpark jar package to the `$SPARKPATH/jars` directory.
+2. Start a Master node.
 
-#### Step 2: Start a Master node
+    Execute the following command on the selected Spark-Master node:
 
-Execute the following command on the selected Spark-Master node:
+    ```
+    cd $ SPARKPATH
 
-```
-cd $ SPARKPATH
+    ./sbin/start-master.sh
+    ```
 
-./sbin/start-master.sh
-```
+    After the command is executed, a log file is printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully.
 
-After the command is executed, a log file is printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully.
+    Open the [http://spark-master-hostname:8080](http://spark-master-hostname:8080) to view the cluster information (if you do not change the default port number of Spark-Master).
 
-Open the [http://spark-master-hostname:8080](http://spark-master-hostname:8080) to view the cluster information (if you do not change the default port number of Spark-Master).
+    When you start Spark-Slave, you can also use this panel to confirm whether the Slave is joined to the cluster.
 
-When you start Spark-Slave, you can also use this panel to confirm whether the Slave is joined to the cluster.
+3. Start a Slave node.
 
-#### Step 3: Start a Slave node
+    Similarly, start a Spark-Slave node by executing the following command:
 
-Similarly, start a Spark-Slave node by executing the following command:
+    ```
+    ./sbin/start-slave.sh spark: // spark-master-hostname: 7077
+    ```
 
-```
-./sbin/start-slave.sh spark: // spark-master-hostname: 7077
-```
+    After the command returns, also check whether the Slave node is joined to the Spark cluster correctly from the panel.
 
-After the command returns, also check whether the Slave node is joined to the Spark cluster correctly from the panel.
-
-Repeat the above command on all Slave nodes. After all the Slaves are connected to the Master, you have a Standalone mode Spark cluster.
+    Repeat the above command on all Slave nodes. After all the Slaves are connected to the Master, you have a `Standalone` mode Spark cluster.
 
 #### Spark SQL shell and JDBC Server
 
@@ -232,44 +231,14 @@ tisparkDF.write.saveAsTable("hive_table") // save table to hive
 spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").show // join table across Hive and Tispark
 ```
 
-## Load Spark DataFrame into TiDB using JDBC
-
-TiSpark does not provide a direct way to load data into your TiDB cluster, but you can still do it by using JDBC.
-
-For example:
-
-```scala
-import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
-
-val customer = spark.sql("select * from customer limit 100000")
-// you might repartition source to make it balanced across nodes
-// and increase concurrency
-val df = customer.repartition(32)
-df.write
-.mode(saveMode = "append")
-.format("jdbc")
-.option("driver", "com.mysql.jdbc.Driver")
- // replace the host and port with yours and be sure to use rewrite batch
-.option("url", "jdbc:mysql://127.0.0.1:4000/test?rewriteBatchedStatements=true")
-.option("useSSL", "false")
-// as tested, setting to `150` is a good practice
-.option(JDBCOptions.JDBC_BATCH_INSERT_SIZE, 150)
-.option("dbtable", s"cust_test_select") // database name and table name here
-.option("isolationLevel", "NONE") // recommended to set isolationLevel to NONE if you have a large DF to load.
-.option("user", "root") // TiDB user here
-.save()
-```
-
-It is recommended that you set `isolationLevel` to `NONE` to avoid large single transactions which might lead to TiDB OOM.
-
 ## Statistics information
 
-TiSpark uses the statistic information for:
+TiSpark uses the statistic information in TiDB for:
 
-+ Determining which index to use in your query plan with the lowest estimated cost.
++ Determining which index to use in your query plan with the lowest estimated cost;
 + Small table broadcasting, which enables efficient broadcast join.
 
-For TiSpark to use the statistic information, first make sure that relevant tables have been analyzed.
+For TiSpark to use the statistic information in TiDB, first make sure that relevant tables have been analyzed.
 
 See [here](/v3.0/reference/sql/statements/analyze-table.md) for more details about how to analyze tables.
 
@@ -305,7 +274,7 @@ ti.statisticsManager.loadStatisticsInfo(table, "col1", "col2", "col3")
 >
 > Table statistics is cached in your Spark driver node's memory, so you need to make sure that the memory is large enough for the statistics information.
 
-Currently, you can adjust these configurations in your `spark.conf` file.
+Currently, you can adjust the following configuration in your `spark.conf` file.
 
 | Property Name | Default | Description
 | :--------   | :-----   | :---- |
@@ -315,12 +284,12 @@ Currently, you can adjust these configurations in your `spark.conf` file.
 
 |Port Name| Default Port Number   | Configuration Property   | Notes|
 | :---------------| :------------- | :-----| :-----|
-|Master web UI  | `8080`  | spark.master.ui.port  or SPARK_MASTER_WEBUI_PORT| The value set by `spark.master.ui.port` takes precedence.  |
-|Worker web UI  |  `8081`  | spark.worker.ui.port or SPARK_WORKER_WEBUI_PORT  | The value set by `spark.worker.ui.port` takes precedence.|
-|History server web UI   |  `18080`  | spark.history.ui.port  |Optional; it is only applied if you use the history server.   |
-|Master port   |  `7077`  |   SPARK_MASTER_PORT  |   |
-|Master REST port   |  `6066`  | spark.master.rest.port  | Not needed if you disable the `REST` service.   |
-|Worker port |  (random)   |  SPARK_WORKER_PORT |   |
-|Block manager port  |(random)   | spark.blockManager.port  |   |
-|Shuffle server  |  `7337`   | spark.shuffle.service.port  |  Optional; it is only applied if you use the external shuffle service.  |
-|  Application web UI  |  `4040`  |  spark.ui.port | If `4040` has been occupied, then `4041` is used. |
+|Master web UI  | `8080`  | `spark.master.ui.port` or `SPARK_MASTER_WEBUI_PORT`| The value set by `spark.master.ui.port` takes precedence.  |
+|Worker web UI  |  `8081`  | `spark.worker.ui.port` or `SPARK_WORKER_WEBUI_PORT`  | The value set by `spark.worker.ui.port` takes precedence.|
+|History server web UI   |  `18080`  | `spark.history.ui.port`  |An optional port; it is only applied if you use the history server.   |
+|Master port   |  `7077`  |   `SPARK_MASTER_PORT`  |   |
+|Master REST port   |  `6066`  | `spark.master.rest.port`  | Not needed if you disable the `REST` service.   |
+|Worker port |  (random)   |  `SPARK_WORKER_PORT` |   |
+|Block manager port  |(random)   | `spark.blockManager.port`  |   |
+|Shuffle server  |  `7337`   | `spark.shuffle.service.port`  |  An optional port; it is only applied if you use the external shuffle service.  |
+|  Application web UI  |  `4040`  |  spark.ui.port | If the `4040` port has been occupied, `4041` is used instead. |
