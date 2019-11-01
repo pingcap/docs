@@ -96,18 +96,18 @@ For the [above error sample](#error-message-reference):
 
 ### Error message description
 
-DM uses the descriptive language to indicate the error details in an error message. The [errors.Wrap](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error) mode is adopted to wrap and store every additional layer of error message component on the error call chain. The message component wrapped at the outermost layer describes the error in DM and the message component wrapped at the innermost layer describes the error from the bottommost error location.
+DM uses the descriptive language to indicate the error details in an error message. The [errors.Wrap](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error) mode is adopted to wrap and store every additional layer of error message description on the error call chain. The message description wrapped at the outermost layer indicates the error in DM and the message description wrapped at the innermost layer indicates the error from the bottommost error location.
 
-Taking the above error message as an example:
+Taking the [above error message](#error-message-reference) as an example:
 
-- Error message component of the outermost layer: `grpc request error` describes the error in DM.
-- Error message component of the innermost layer: `connection error: desc = "transport: Error while dialing dial tcp 172.17.0.2:8262: connect: connection refused"` is the error returned when DM-master fails to established the gRPC connection at the bottom layer.
+- The error message description of the outermost layer is `grpc request error`, which describes the error in DM.
+- The error message description of the innermost layer is `connection error: desc = "transport: Error while dialing dial tcp 172.17.0.2:8262: connect: connection refused"`. It is the error returned when DM-master fails to established the gRPC connection at the bottom layer.
 
-After analyzing the basic error information and the error message description, you can determine that this error occurs when DM-master sends gRPC requests to DM-worker but it fails to establish the gRPC connection. This error occurs often because DM-worker is not working normally.
+After analyzing the basic error information and the error message descriptions, you can determine that this error occurs when DM-master sends gRPC requests to DM-worker but it fails to establish the gRPC connection. This error occurs often because DM-worker is not working normally.
 
 ### Error stack information
 
-DM decides whether to output the error stack information according to the severity of the error. The error stack records the complete stack trace information when the error occurs. If you do not fully ensure the error cause based on the basic information and the error message description, use the error stack information to further check the running path of the error code.
+DM decides whether to output the error stack information according to the severity of the error. The error stack records the complete stack trace information when the error occurs. If you do not fully ensure the error cause based on the basic information and the error message descriptions, use the error stack information to further check the running path of the error code.
 
 ## Published error code
 
