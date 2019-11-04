@@ -284,7 +284,7 @@ To import a Grafana dashboard for the PD server, the TiKV server, and the TiDB s
 
     > **Note:**
     >
-    > For the TiKV, PD, and TiDB dashboards, the corresponding JSON files are `tikv_summary.json`, `tikv_details.json`,`tikv_trouble_shooting.json`, `pd.json`, `tidb.json`, and `tidb_summary.json`.
+    > For the TiKV, PD, and TiDB dashboards, the corresponding JSON files are `tikv_summary.json`, `tikv_details.json`, `tikv_trouble_shooting.json`, `pd.json`, `tidb.json`, and `tidb_summary.json`.
 
 4. Click **Load**.
 
