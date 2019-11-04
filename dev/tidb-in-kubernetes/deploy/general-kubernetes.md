@@ -68,7 +68,7 @@ helm install pingcap/tidb-cluster --name=<release-name> --namespace=<namespace> 
 
 > **Note:**
 >
-> [`namespace`](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) is a virtual cluster backed by the same physical cluster. You can give it a name that is easy to remember, such as the same name as `release-name`.
+> A [`namespace`](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) is a virtual cluster backed by the same physical cluster. You can give it a name that is easy to memorize, such as the same name as `release-name`.
 
 You can view the Pod status using the following command:
 
