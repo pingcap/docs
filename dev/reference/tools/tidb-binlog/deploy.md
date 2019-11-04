@@ -39,6 +39,8 @@ In environments of development, testing and production, the requirements on serv
 
     - Download the master version:
 
+        {{< copyable "shell-regular" >}}
+
         ```bash
         git clone https://github.com/pingcap/tidb-ansible.git
         ```
@@ -66,6 +68,8 @@ In environments of development, testing and production, the requirements on serv
 
         Pump retains the data of the latest 7 days by default. You can modify the value of the `gc` variable in the `tidb-ansible/conf/pump.yml` file and remove the related comments:
 
+        {{< copyable "" >}}
+
         ```yaml
         global:
           # an integer value to control the expiry date of the binlog data, which indicates for how long (in days) the binlog data would be stored
@@ -91,6 +95,8 @@ In environments of development, testing and production, the requirements on serv
 
     1. Deploy `pump_servers` and `node_exporters`.
 
+        {{< copyable "shell-regular" >}}
+
         ```
         ansible-playbook deploy.yml --tags=pump -l ${pump1_ip},${pump2_ip},[${alias1_name},${alias2_name}]
         ```
@@ -101,17 +107,23 @@ In environments of development, testing and production, the requirements on serv
 
     2. Start `pump_servers`.
 
+        {{< copyable "shell-regular" >}}
+
         ```
         ansible-playbook start.yml --tags=pump
         ```
 
     3. Update and restart `tidb_servers`.
 
+        {{< copyable "shell-regular" >}}
+
         ```
         ansible-playbook rolling_update.yml --tags=tidb
         ```
 
     4. Update the monitoring data.
+
+        {{< copyable "shell-regular" >}}
 
         ```
         ansible-playbook rolling_update_monitor.yml --tags=prometheus
@@ -124,6 +136,8 @@ In environments of development, testing and production, the requirements on serv
 3. Check the Pump status.
 
     Use `binlogctl` to check the Pump status. Change the `pd-urls` parameter to the PD address of the cluster. If `State` is `online`, Pump is started successfully.
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     cd /home/tidb/tidb-ansible
@@ -139,6 +153,8 @@ In environments of development, testing and production, the requirements on serv
 1. Obtain `initial_commit_ts`.
 
     Run the following command to use `binlogctl` to generate the `tso` information which is needed for the initial start of Drainer:
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     cd /home/tidb/tidb-ansible
@@ -173,6 +189,8 @@ In environments of development, testing and production, the requirements on serv
 
     - Assume that the downstream is MySQL:
 
+        {{< copyable "shell-regular" >}}
+
         ```bash
         cd /home/tidb/tidb-ansible/conf
         cp drainer-cluster.toml drainer_mysql_drainer-cluster.toml
@@ -184,6 +202,8 @@ In environments of development, testing and production, the requirements on serv
         > Name the configuration file as `alias_drainer.toml`. Otherwise, the customized configuration file cannot be found during the deployment process.
 
         Set `db-type` to `mysql` and configure the downstream MySQL information:
+
+        {{< copyable "" >}}
 
         ```toml
         # downstream storage, equal to --dest-db-type
@@ -200,6 +220,8 @@ In environments of development, testing and production, the requirements on serv
 
     - Assume that the downstream is incremental backup data:
 
+        {{< copyable "shell-regular" >}}
+
         ```bash
         cd /home/tidb/tidb-ansible/conf
         cp drainer-cluster.toml drainer_file_drainer-cluster.toml
@@ -207,6 +229,8 @@ In environments of development, testing and production, the requirements on serv
         ```
 
         Set `db-type` to `file`.
+
+        {{< copyable "" >}}
 
         ```toml
         # downstream storage, equal to --dest-db-type
@@ -221,11 +245,15 @@ In environments of development, testing and production, the requirements on serv
 
 4. Deploy Drainer.
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
     ansible-playbook deploy_drainer.yml
     ```
 
 5. Start Drainer.
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     ansible-playbook start_drainer.yml
@@ -237,6 +265,8 @@ In environments of development, testing and production, the requirements on serv
 
 Run the following commands to download the packages:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 version="latest" for nightly builds
 wget https://download.pingcap.org/tidb-latest-linux-amd64.{tar.gz,sha256}
@@ -246,6 +276,8 @@ sha256sum -c tidb-latest-linux-amd64.sha256
 ```
 
 For TiDB v2.1.0 GA or later versions, Pump and Drainer are already included in the TiDB download package. For other TiDB versions, you need to download Pump and Drainer separately using the following command:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 wget https://download.pingcap.org/tidb-binlog-$version-linux-amd64.{tar.gz,sha256}
@@ -363,6 +395,8 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         ```
 
     - The example of starting Pump:
+
+        {{< copyable "shell-regular" >}}
 
         ```bash
         ./bin/pump -config pump.toml
@@ -553,6 +587,8 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         > If the downstream is MySQL/TiDB, to guarantee the data integrity, you need to obtain the `initial-commit-ts` value and make a full backup of the data and restore the data before the initial start of Drainer. For details, see [Deploy Drainer](#step-3-deploy-drainer).
 
         When Drainer is started for the first time, use the `initial-commit-ts` parameter.
+
+        {{< copyable "shell-regular" >}}
 
         ```bash
         ./bin/drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
