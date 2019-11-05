@@ -46,9 +46,9 @@ When a cluster is created, a default account `root` is created with no password.
 
     This command creates users `root` and `developer` with their passwords, which are saved in the `tidb-secret` object. By default, the regular user `developer` is only granted with `USAGE` privilege; other privileges are set in the configuration item `tidb.initSql`.
 
-3. Set up a host that has access to TiDB.
+3. Set a host that has access to TiDB.
 
-    You can set up a host that has access to TiDB via the configuration item `tidb.permitHost` before deploying the cluster. If it is not set, all hosts have access to TiDB. For details, refer to [Mysql GRANT host name](https://dev.mysql.com/doc/refman/5.7/en/grant.html).
+    Before deploying the cluster, you can set a host that has access to TiDB by using the `tidb.permitHost` configuration item. If it is not set, all hosts have access to TiDB. For details, refer to [Mysql GRANT host name](https://dev.mysql.com/doc/refman/5.7/en/grant.html).
 
     ```
     tidb:
