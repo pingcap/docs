@@ -37,6 +37,7 @@ TiDB Operator provides several ways to deploy TiDB clusters in Kubernetes:
 
 + For test environment:
 
+    - [kind](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md): Deploy TiDB clusters in local Kubernetes using kind
     - [DinD](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md): Deploy TiDB clusters in a local DinD environment using TiDB Operator
     - [Minikube](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md): Deploy TiDB clusters in a local Minikube environment using TiDB Operator
     - [GKE](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md): Deploy TiDB clusters on GKE using TiDB Operator
@@ -52,7 +53,7 @@ TiDB Operator provides several ways to deploy TiDB clusters in Kubernetes:
 
         First install TiDB Operator in a Kubernetes cluster according to [Deploy TiDB Operator in Kubernetes](/v3.0/tidb-in-kubernetes/deploy/tidb-operator.md), then deploy your TiDB clusters according to [Deploy TiDB in General Kubernetes](/v3.0/tidb-in-kubernetes/deploy/general-kubernetes.md).
 
-        You also need to adjust the configuration of the Kubernetes cluster based on [Prerequisites for TiDB in Kubernetes](/v3.0/tidb-in-kubernetes/deploy/prerequisites.md) and configure the local PV for your Kubernetes cluster to achieve low latency of local storage for TiKV according to [Local PV Configuration](/v3.0/tidb-in-kubernetes/reference/configuration/local-pv.md).
+        You also need to adjust the configuration of the Kubernetes cluster based on [Prerequisites for TiDB in Kubernetes](/v3.0/tidb-in-kubernetes/deploy/prerequisites.md) and configure the local PV for your Kubernetes cluster to achieve low latency of local storage for TiKV according to [Local PV Configuration](/v3.0/tidb-in-kubernetes/reference/configuration/storage-class.md#local-pv-configuration).
 
 Before deploying TiDB on any of the above two environments, you can always refer to [TiDB Cluster Configuration Document](/v3.0/tidb-in-kubernetes/reference/configuration/tidb-cluster.md) to customize TiDB configurations.
 

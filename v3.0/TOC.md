@@ -376,7 +376,7 @@
     + Configuration
       - [TiDB Cluster](/v3.0/tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
       - [Backup](/v3.0/tidb-in-kubernetes/reference/configuration/backup.md)
-      - [Local PV](/v3.0/tidb-in-kubernetes/reference/configuration/local-pv.md)
+      - [PV](/v3.0/tidb-in-kubernetes/reference/configuration/storage-class.md)
       - [TiDB Drainer](/v3.0/tidb-in-kubernetes/reference/configuration/tidb-drainer.md)
     + Tools
       - [tkctl](/v3.0/tidb-in-kubernetes/reference/tools/tkctl.md)
@@ -409,6 +409,7 @@
     - [3.0.0-beta.1](/v3.0/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/v3.0/releases/3.0beta.md)
   + v2.1
+    - [2.1.18](/v3.0/releases/2.1.18.md)
     - [2.1.17](/v3.0/releases/2.1.17.md)
     - [2.1.16](/v3.0/releases/2.1.16.md)
     - [2.1.15](/v3.0/releases/2.1.15.md)
