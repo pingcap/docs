@@ -11,7 +11,7 @@ This document describes how to back up and restore the data of a TiDB cluster in
 TiDB in Kubernetes supports two kinds of backup strategies:
 
 * [Full backup](#full-backup) (scheduled or ad-hoc): use [`mydumper`](/dev/reference/tools/mydumper.md) to take a logical backup of the TiDB cluster.
-* [Incremental backup](#incremental-backup): use [`TiDB Binlog`](/dev/reference/tidb-binlog-overview.md) to replicate data in the TiDB cluster to another database or take a real-time backup of the data.
+* [Incremental backup](#incremental-backup): use [`TiDB Binlog`](/dev/reference/tools/tidb-binlog/overview.md) to replicate data in the TiDB cluster to another database or take a real-time backup of the data.
 
 Currently, TiDB in Kubernetes only supports automatic [restoration](#restore) for full backup taken by `mydumper`. Restoring the incremental backup data by `TiDB Binlog` requires manual operations.
 
@@ -123,6 +123,38 @@ The `pingcap/tidb-backup` helm chart helps restore a TiDB cluster using backup d
 
 ## Incremental backup
 
-Incremental backup uses [TiDB Binlog](/dev/reference/tidb-binlog-overview.md) to collect binlog data from TiDB and provide real-time backup and replication to downstream platforms.
+Incremental backup uses [TiDB Binlog](/dev/reference/tools/tidb-binlog/overview.md) to collect binlog data from TiDB and provide real-time backup and replication to downstream platforms.
 
 For the detailed guide of maintaining TiDB Binlog in Kubernetes, refer to [TiDB Binlog](/dev/tidb-in-kubernetes/maintain/tidb-binlog.md).
+
+### Scale in Pump
+
+To scale in Pump, for each Pump node, make the node offline and then run the `helm upgrade` command to delete the corresponding Pump Pod.
+
+1. Make a Pump node offline from the TiDB cluster
+
+    Suppose there are 3 Pump nodes, and you want to get the third node offline and modify `<ordinal-id>` to `2`, run the following command (`<version>` is the current version of TiDB).
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    kubectl run offline-pump-<ordinal-id> --image=pingcap/tidb-binlog:<version> --namespace=<namespace> --restart=OnFailure -- /binlogctl -pd-urls=http://<release-name>-pd:2379 -cmd offline-pump -node-id <release-name>-pump-<ordinal-id>:8250
+    ```
+
+    Then, check the log output of Pump. If Pump outputs `pump offline, please delete my pod`, the state of the Pump node is successfully switched to `offline`.
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    kubectl logs -f -n <namespace> <release-name>-pump-<ordinal-id>
+    ```
+
+2. Delete the corresponding Pump Pod
+
+    Modify `binlog.pump.replicas` in the `values.yaml` file to `2` and then run the following command to delete the Pump Pod.
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    helm upgrade <release-name> pingcap/tidb-cluster -f values.yaml --version=<chart-version>
+    ```

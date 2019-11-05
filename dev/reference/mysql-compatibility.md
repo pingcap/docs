@@ -25,7 +25,7 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + `FOREIGN KEY` constraints
 + `FULLTEXT` functions and indexes
 + `SPATIAL` functions and indexes
-+ Character sets other than `utf8mb4` and `utf8`
++ Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + Collations other than `BINARY`
 + Add primary key
 + Drop primary key
@@ -72,6 +72,8 @@ Also, starting from TiDB 2.1.18 and 3.0.4, TiDB supports using the system variab
 ### Performance schema
 
 Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/dev/how-to/monitor/monitor-a-cluster.md) for performance metrics instead.
+
+TiDB supports the `events_statements_summary_by_digest` table from TiDB 3.0.4. For more information, see [Statement Summary Table](/dev/reference/performance/statement-summary.md).
 
 ### Query Execution Plan
 
