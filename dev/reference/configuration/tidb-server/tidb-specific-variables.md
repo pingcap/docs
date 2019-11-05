@@ -517,8 +517,14 @@ set tidb_query_log_max_len = 20
 - Default value: 0
 - By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
 
-### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.8 and v3.0.4</span>
+### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether the `auto_increment` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+
+### tidb_enable_stmt_summary <span class="version-mark">New in v3.0.4</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- This variable is used to enable or disable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `performance_schema.events_statement_summary_by_digest` table to identify and troubleshoot SQL performance issues.
