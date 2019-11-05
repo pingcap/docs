@@ -152,8 +152,8 @@ When you find some network connection issues between Pods from the log or monito
 The Pending state of a Pod is usually caused by conditions of insufficient resources, such as:
 
 - The `StorageClass` of the PVC used by PD, TiKV, Monitor Pod does not exist or the PV is insufficient.
-- No nodes in the Kubernetes cluster can satisfy the CPU or memory requirements applied by the Pod
-- The number of TiKV or PD replicas and the number of nodes in the cluster do not satisfy the high availability scheduling policy of tidb-scheduler
+- No nodes in the Kubernetes cluster can satisfy the CPU or memory requirements requested by the Pod
+- The replicas of TiKV or PD and the number of nodes in the cluster do not satisfy the high availability scheduling policy of tidb-scheduler
 
 You can check the specific reason for Pending by using the `kubectl describe pod` command:
 
@@ -165,7 +165,7 @@ kubectl describe po -n <namespace> <pod-name>
 
 - If the CPU or memory resources are insufficient, you can lower the CPU or memory resources requested by the corresponding component for scheduling, or add a new Kubernetes node.
 
-- If the `StorageClass` of the PVC cannot be found, change `storageClassName` in the `values.yaml` file to the name of the `StorageClass` available in the cluster; run `helm upgrade`; and delete Statefulset and the corresponding PVC. Run the following command to get the `StorageClass` available in the cluster:
+- If the `StorageClass` of the PVC cannot be found, change `storageClassName` in the `values.yaml` file to the name of the `StorageClass` available in the cluster; run `helm upgrade`; and delete Statefulset and the corresponding PVCs. Run the following command to get the `StorageClass` available in the cluster:
 
     {{< copyable "shell-regular" >}}
 
