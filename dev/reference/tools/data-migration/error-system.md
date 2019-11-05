@@ -1,12 +1,12 @@
 ---
-title: Data Migration Error Message Reference
-summary: Learn the error message reference in Data Migration.
+title: Data Migration Error Message Description
+summary: Learn the system and description of error messages in Data Migration.
 category: reference
 ---
 
-# Data Migration Error Message Reference
+# Data Migration Error Message Description
 
-This document describes the error messages output in Data Migration (DM) and offers solutions to some common error messages.
+This document describes the error messages in Data Migration (DM) and offers solutions to some common error messages.
 
 ## DM error system
 
@@ -20,7 +20,7 @@ For the design and implementation of this error system, refer to [Proposal: Impr
 
 ## Error message reference
 
-The following is an actual error message output in DM. Taking this message as a sample, this document explains each field of an error message in detail.
+The following is an actual error message in DM. Taking this message as a sample, this document explains each field of an error message in detail.
 
 ```
 [code=38008:class=dm-master:scope=internal:level=high] grpc request error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: Error while dialing dial tcp 172.17.0.2:8262: connect: connection refused"
@@ -50,11 +50,11 @@ All error messages in DM have the following three components:
 
     DM uses the same error code for the same error type. An error code does not change as DM version changes.
 
-    Some errors might be removed during the DM iteration, but the error code will not be removed. DM uses a new error code instead of an existing one for a new error type.
+    Some errors might be removed during the DM iteration, but the error code will not be removed. DM uses a new error code instead of an existing one for a new error.
 
-- `class`: error classification
+- `class`: error type
 
-    It is used to mark the belonging component where an error occurs (error source).
+    It is used to mark the component where an error occurs (error source).
 
     The table below displays all error types, the corresponding sources and error samples.
 
@@ -107,7 +107,7 @@ After analyzing the basic error information and the error message descriptions, 
 
 ### Error stack information
 
-DM decides whether to output the error stack information according to the severity of the error. The error stack records the complete stack trace information when the error occurs. If you do not fully ensure the error cause based on the basic information and the error message descriptions, use the error stack information to further check the running path of the error code.
+DM decides whether to output the error stack information according to the severity of the error. The error stack records the complete stack trace information when the error occurs. If you cannot figure out the error cause based on the basic information and the error message descriptions, use the error stack information to further check the running path of the error code.
 
 ## Published error code
 
