@@ -61,7 +61,7 @@ Try the latest version! Maybe there is new speed improvement.
 
 **Cause**: [Checkpoint](/dev/reference/tools/tidb-lightning/checkpoints.md) is enabled, and Lightning or Importer has previously abnormally exited. To prevent accidental data corruption, Lightning will not start until the error is addressed.
 
-The error code is an integer less than 25, with possible values of 0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21. The integer indicates the step in the import process when an unexpected exit occurs. The larger the integer is, the later the step might be.
+The error code is an integer less than 25, with possible values of 0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later step where the exit occurs.
 
 **Solutions**:
 
