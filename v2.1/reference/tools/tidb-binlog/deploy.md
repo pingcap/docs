@@ -230,8 +230,8 @@ In environments of development, testing and production, the requirements on serv
 
         ```bash
         cd /home/tidb/tidb-ansible/conf
-        cp drainer-cluster.toml drainer_file_drainer-cluster.toml
-        vi drainer_file_drainer-cluster.toml
+        cp drainer-cluster.toml drainer_file_drainer.toml
+        vi drainer_file_drainer.toml
         ```
 
         Set `db-type` to `file`.
