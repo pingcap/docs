@@ -27,7 +27,7 @@ PVs are created automatically by the system administrator or volume provisioner.
 
 TiKV uses the Raft protocol to replicate data. When a node fails, PD automatically schedules data to fill the missing data replicas; TiKV requires low read and write latency, so local SSD storage is strongly recommended in the production environment.
 
-PD also uses Raft to replicate data. PD is not an I/O-intensive application, but a database for storing cluster meta information, so a local SAS disk or network SSD storage such as EBS General Purpose SSD (gp2) volumes on AWS or SSD persistent disks on GCP can meet the requirements.
+PD also uses Raft to replicate data. PD is not an I/O-intensive application, but a database for storing cluster meta information, so a local SAS drive or network SSD storage such as EBS General Purpose SSD (gp2) volumes on AWS or SSD persistent disks on GCP can meet the requirements.
 
 To ensure availability, it is recommended to use network storage for components such as TiDB monitoring, TiDB Binlog and `tidb-backup` because they do not have redundant replicas. TiDB Binlog's Pump and Drainer components are I/O-intensive applications that require low read and write latency, so it is recommended to use high-performance network storage such as EBS Provisioned IOPS SSD (io1) volumes on AWS or SSD persistent disks on GCP.
 
@@ -88,7 +88,7 @@ Kubernetes currently supports statically allocated local storage. To create a lo
      kubectl get pv | grep local-storage
      ```
 
-    `local-volume-provisioner` creates a volume for each mounted disk. Note that on GKE, this will create local volumes of only 375GiB in size and that you need to manually alter the setup to create larger disks.
+    `local-volume-provisioner` creates a volume for each mounted disk. Note that on GKE, this will create local volumes of only 375GiB in size.
 
 For more information, refer to [Kubernetes local storage](https://kubernetes.io/docs/concepts/storage/volumes/#local) and [local-static-provisioner document](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner#overview).
 
@@ -100,15 +100,14 @@ For more information, refer to [Kubernetes local storage](https://kubernetes.io/
 
 Refer to [Best Practices](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/best-practices.md) for more information on local PV in Kubernetes.
 
-## Instance
+## Data mounting
 
-For monitoring purposes, components like TiDB Binlog and backup use a local disk to storage data. Or you can mount the data into the corresponding directory and create different `StorageClass` in a SAS disk. Specifically:
+If monitoring data, as well as TiDB Binlog and backup data are also stored on the local disk, you can mount them in a SAS drive and create different `StorageClass` for them. For example:
 
-- For a disk storing TiDB Binlog and backup data, you can [bind mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) them into `/mnt/backup` directory. `local-storage` and `StorageClass` can be created afterwards.
-
-- For a disk storing PD data, you can [bind mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) them into `/mnt/sharedssd` directory. `local-storage` and `StorageClass` can be created afterwards.
-
-- For a disk storing TiKV data, you can [mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#use-a-whole-disk-as-a-filesystem-pv) them into `/mnt/ssd` directory. `local-storage` and `StorageClass` can be created afterwards.
+- For a drive storing monitoring data, you can [bind mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) them into `/mnt/disks` directory, and create `local-storage` `StorageClass` for them.
+- For a drive storing TiDB Binlog and backup data, you can [bind mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) them into `/mnt/backup` directory, and create `backup-storage` `StorageClass` for them.
+- For a drive storing PD data, you can [bind mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) them into `/mnt/sharedssd` directory, and create `shared-ssd-storage` `StorageClass` for them.
+- For a drive storing TiKV data, you can [mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#use-a-whole-disk-as-a-filesystem-pv) them into `/mnt/ssd` directory, and create `ssd-storage` `StorageClass` for them.
 
 When you install `local-volume-provisioner`, you need to modify `local-volume-provisioner` [YAML](https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/local-dind/local-volume-provisioner.yaml) file and create the necessary `StorageClass` before executing `kubectl apply` statement. The following is an example of a modified YAML file according to the mount above:
 
@@ -202,7 +201,7 @@ data:
 
 ```
 
-Finally, execute `kubectl apply` statement to install `local-volume-provisioner`.
+Finally, execute `kubectl apply` to install `local-volume-provisioner`.
 
 When you later create a TiDB cluster or backup, configure the corresponding `StorageClass` before use.
 
