@@ -146,6 +146,8 @@
     - [TiKV Control](/dev/reference/tools/tikv-control.md)
     - [TiDB Control](/dev/reference/tools/tidb-control.md)
     - [Download](/dev/reference/tools/download.md)
+  + Best Practices
+    - [Best Practice for High Concurrent Write Scenario](/dev/reference/best-practices/high-concurrency.md)
   - [MySQL Compatibility](/dev/reference/mysql-compatibility.md)
   + SQL
     + SQL Language Structure
