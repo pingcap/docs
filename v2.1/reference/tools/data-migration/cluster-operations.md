@@ -12,16 +12,20 @@ This document introduces the DM cluster operations and considerations when you a
 
 Run the following command to start all the components (including DM-master, DM-worker and the monitoring component) of the whole DM cluster:
 
+{{< copyable "shell-regular" >}}
+
 ```
-$ ansible-playbook start.yml
+ansible-playbook start.yml
 ```
 
 ## Stop a cluster
 
 Run the following command to stop all the components (including DM-master, DM-worker and the monitoring component) of the whole DM cluster:
 
+{{< copyable "shell-regular" >}}
+
 ```
-$ ansible-playbook stop.yml
+ansible-playbook stop.yml
 ```
 
 ## Restart cluster components
@@ -83,15 +87,19 @@ To restart the DM-worker component, you can use either of the following two appr
 
 - Perform a rolling update on DM-worker
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible-playbook rolling_update.yml --tags=dm-worker
+    ansible-playbook rolling_update.yml --tags=dm-worker
     ```
 
 - Stop DM-worker first and then restart it
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible-playbook stop.yml --tags=dm-worker
-    $ ansible-playbook start.yml --tags=dm-worker
+    ansible-playbook stop.yml --tags=dm-worker
+    ansible-playbook start.yml --tags=dm-worker
     ```
 
 ### Restart DM-master
@@ -100,15 +108,19 @@ To restart the DM-master component, you can use either of the following two appr
 
 - Perform a rolling update on DM-master
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible-playbook rolling_update.yml --tags=dm-master
+    ansible-playbook rolling_update.yml --tags=dm-master
     ```
 
 - Stop DM-master first and then restart it
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible-playbook stop.yml --tags=dm-master
-    $ ansible-playbook start.yml --tags=dm-master
+    ansible-playbook stop.yml --tags=dm-master
+    ansible-playbook start.yml --tags=dm-master
     ```
 
 ## Upgrade the component version
@@ -117,20 +129,26 @@ To restart the DM-master component, you can use either of the following two appr
 
     1. Delete the existing file in the `downloads` directory.
 
+        {{< copyable "shell-regular" >}}
+
         ```
-        $ cd /home/tidb/dm-ansible
-        $ rm -rf downloads
+        cd /home/tidb/dm-ansible
+        rm -rf downloads
         ```
 
     2. Use Playbook to download the version of DM binary file as specified in `inventory.ini`, and replace the existing binary in the `/home/tidb/dm-ansible/resource/bin/` directory with it automatically.
 
+        {{< copyable "shell-regular" >}}
+
         ```
-        $ ansible-playbook local_prepare.yml
+        ansible-playbook local_prepare.yml
         ```
 
 2. Use Ansible to perform the rolling update.
 
     1. Perform a rolling update on the DM-worker instance:
+
+        {{< copyable "shell-regular" >}}
 
         ```
         ansible-playbook rolling_update.yml --tags=dm-worker
@@ -138,17 +156,23 @@ To restart the DM-master component, you can use either of the following two appr
 
     2. Perform a rolling update on the DM-master instance:
 
+        {{< copyable "shell-regular" >}}
+
         ```
         ansible-playbook rolling_update.yml --tags=dm-master
         ```
 
     3. Upgrade dmctl:
 
+        {{< copyable "shell-regular" >}}
+
         ```
         ansible-playbook rolling_update.yml --tags=dmctl
         ```
 
     4. Perform a rolling update on DM-worker, DM-master and dmctl:
+
+        {{< copyable "shell-regular" >}}
 
         ```
         ansible-playbook rolling_update.yml
@@ -162,9 +186,14 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
     1. Refer to [Configure the SSH mutual trust and sudo rules on the Control Machine](/v2.1/how-to/deploy/data-migration-with-ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine), log in to the Control Machine using the `tidb` user account and add `172.16.10.74` to the `[servers]` section of the `hosts.ini` file.
 
+        {{< copyable "shell-regular" >}}
+
         ```
-        $ cd /home/tidb/dm-ansible
-        $ vi hosts.ini
+        cd /home/tidb/dm-ansible
+        vi hosts.ini
+        ```
+
+        ```
         [servers]
         172.16.10.74
 
@@ -174,8 +203,10 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
     2. Run the following command and enter the `root` user password for deploying `172.16.10.74` according to the prompt.
 
+        {{< copyable "shell-regular" >}}
+
         ```
-        $ ansible-playbook -i hosts.ini create_users.yml -u root -k
+        ansible-playbook -i hosts.ini create_users.yml -u root -k
         ```
 
         This step creates a `tidb` user on the `172.16.10.74` machine, and configures sudo rules and the SSH mutual trust between the Control Machine and the `172.16.10.74` machine.
@@ -193,26 +224,34 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
 3. Deploy the new DM-worker instance.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook deploy.yml --tags=dm-worker -l dm_worker3
+    ansible-playbook deploy.yml --tags=dm-worker -l dm_worker3
     ```
 
 4. Start the new DM-worker instance.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook start.yml --tags=dm-worker -l dm_worker3
+    ansible-playbook start.yml --tags=dm-worker -l dm_worker3
     ```
 
 5. Configure and restart the DM-master service.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook rolling_update.yml --tags=dm-master
+    ansible-playbook rolling_update.yml --tags=dm-master
     ```
 
 6. Configure and restart the Prometheus service.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook rolling_update_monitor.yml --tags=prometheus
+    ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
 
 ## Remove a DM-worker instance
@@ -221,8 +260,10 @@ Assuming that you want to remove the `dm_worker3` instance, perform the followin
 
 1. Stop the DM-worker instance that you need to remove.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook stop.yml --tags=dm-worker -l dm_worker3
+    ansible-playbook stop.yml --tags=dm-worker -l dm_worker3
     ```
 
 2. Edit the `inventory.ini` file and comment or delete the line where the `dm_worker3` instance exists.
@@ -238,14 +279,18 @@ Assuming that you want to remove the `dm_worker3` instance, perform the followin
 
 3. Configure and restart the DM-master service.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook rolling_update.yml --tags=dm-master
+    ansible-playbook rolling_update.yml --tags=dm-master
     ```
 
 4. Configure and restart the Prometheus service.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook rolling_update_monitor.yml --tags=prometheus
+    ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
 
 ## Replace/migrate a DM-master instance
@@ -256,9 +301,14 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
     1. Refer to [Configure the SSH mutual trust and sudo rules on the Control Machine](/v2.1/how-to/deploy/data-migration-with-ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine), log in to the Control Machine using the `tidb` user account, and add `172.16.10.80` to the `[servers]` section of the `hosts.ini` file.
 
+        {{< copyable "shell-regular" >}}
+
         ```
-        $ cd /home/tidb/dm-ansible
-        $ vi hosts.ini
+        cd /home/tidb/dm-ansible
+        vi hosts.ini
+        ```
+
+        ```
         [servers]
         172.16.10.80
 
@@ -268,8 +318,10 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
     2. Run the following command and enter the `root` user password for deploying `172.16.10.80` according to the prompt.
 
+        {{< copyable "shell-regular" >}}
+
         ```
-        $ ansible-playbook -i hosts.ini create_users.yml -u root -k
+        ansible-playbook -i hosts.ini create_users.yml -u root -k
         ```
 
         This step creates the `tidb` user account on `172.16.10.80`, configures the sudo rules and the SSH mutual trust between the Control Machine and the `172.16.10.80` machine.
@@ -280,8 +332,10 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
     >
     > If the `172.16.10.71` machine breaks down and you cannot log in via SSH, ignore this step.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook stop.yml --tags=dm-master
+    ansible-playbook stop.yml --tags=dm-master
     ```
 
 3. Edit the `inventory.ini` file, comment or delete the line where the DM-master instance that you want to replace exists, and add the information of the new DM-master instance.
@@ -294,17 +348,23 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
 4. Deploy the new DM-master instance.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook deploy.yml --tags=dm-master
+    ansible-playbook deploy.yml --tags=dm-master
     ```
 
 5. Start the new DM-master instance.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook start.yml --tags=dm-master
+    ansible-playbook start.yml --tags=dm-master
     ```
 
 6. Update the dmctl configuration file.
+
+    {{< copyable "shell-regular" >}}
 
     ```
     ansible-playbook rolling_update.yml --tags=dmctl
@@ -318,9 +378,14 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
     1. Refer to [Configure the SSH mutual trust and sudo rules on the Control Machine](/v2.1/how-to/deploy/data-migration-with-ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine), log in to the Control Machine using the `tidb` user account, and add `172.16.10.75` to the `[servers]` section of the `hosts.ini` file.
 
+        {{< copyable "shell-regular" >}}
+
         ```
-        $ cd /home/tidb/dm-ansible
-        $ vi hosts.ini
+        cd /home/tidb/dm-ansible
+        vi hosts.ini
+        ```
+
+        ```
         [servers]
         172.16.10.75
 
@@ -330,8 +395,10 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
     2. Run the following command and enter the `root` user password for deploying `172.16.10.75` according to the prompt.
 
+        {{< copyable "shell-regular" >}}
+
         ```
-        $ ansible-playbook -i hosts.ini create_users.yml -u root -k
+        ansible-playbook -i hosts.ini create_users.yml -u root -k
         ```
 
         This step creates the `tidb` user account on `172.16.10.75`, and configures the sudo rules and the SSH mutual trust between the Control Machine and the `172.16.10.75` machine.
@@ -342,8 +409,10 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
     >
     > If the `172.16.10.72` machine breaks down and you cannot log in via SSH, ignore this step.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook stop.yml --tags=dm-worker -l dm_worker1
+    ansible-playbook stop.yml --tags=dm-worker -l dm_worker1
     ```
 
 3. Edit the `inventory.ini` file and add the new DM-worker instance.
@@ -362,8 +431,10 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
 4. Deploy the new DM-worker instance.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook deploy.yml --tags=dm-worker -l dm_worker1
+    ansible-playbook deploy.yml --tags=dm-worker -l dm_worker1
     ```
 
 5. Migrate the relay log.
@@ -374,20 +445,26 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
 6. Start the new DM-worker instance.
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible-playbook start.yml --tags=dm-worker -l dm_worker1
+    ansible-playbook start.yml --tags=dm-worker -l dm_worker1
     ```
 
 7. Configure and restart the DM-master service.
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible-playbook rolling_update.yml --tags=dm-master
+    ansible-playbook rolling_update.yml --tags=dm-master
     ```
 
 8. Configure and restart the Prometheus service.
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible-playbook rolling_update_monitor.yml --tags=prometheus
+    ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
 
 9. Start and verify data migration task.
@@ -402,13 +479,13 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
     1. Use `stop-task` to stop data migration task.
 
-    2. Use `$ ansible-playbook stop.yml --tags=dm-worker -l dm_worker1` to stop the DM-worker instance.
+    2. Use `ansible-playbook stop.yml --tags=dm-worker -l dm_worker1` to stop the DM-worker instance.
 
-    3. Update the suffix of the subdirectory in the relay log, such as renaming `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000001` to `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000002`.
+    3. Update the suffix of the subdirectory of the relay log, such as renaming `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000001` to `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000002`.
 
     4. Update the index file `server-uuid.index` in the subdirectory of the relay log, such as changing `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000001` to `1ddbf6d3-d3b2-11e9-a4e9-0242ac140003.000002`.
 
-    5. Use `$ ansible-playbook start.yml --tags=dm-worker -l dm_worker1` to start the DM-worker instance.
+    5. Use `ansible-playbook start.yml --tags=dm-worker -l dm_worker1` to start the DM-worker instance.
 
     6. Restart and verify data migration task.
 
