@@ -601,9 +601,9 @@ Now, there are still a few reasons for this error reporting (the latter two are 
 
 #### Error is reported when executing DDL statements under high concurrency?
 
-When executing DDL statements (such as building tables in batches) under high concurrency, a very few of them may fail due to key conflicts in the concurrent execution.
+When you execute DDL statements (such as building tables in batches) under high concurrency, a very few of these statements might fail because of key conflicts during the concurrent execution.
 
-It is recommended that the number of concurrent DDL statements should be less than 20, otherwise you need to retry the failed statements from the client.
+It is recommended to keep the number of concurrent DDL statements under 20. Otherwise, you need to retry the failed statements from the client.
 
 ### Manage the TiKV server
 
