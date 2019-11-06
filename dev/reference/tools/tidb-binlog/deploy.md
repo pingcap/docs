@@ -496,9 +496,9 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # This section is generally commented out if no special security settings are required.
         # The file path containing a list of trusted SSL CAs connected to the cluster.
         # ssl-ca = "/path/to/ca.pem"
-        # The path to the X509 certificate that is connected to the cluster in PEM format.
+        # The path to the X509 certificate in PEM format that is connected to the cluster.
         # ssl-cert = "/path/to/pump.pem"
-        # The path to the X509 key that is connected to the cluster in PEM format.
+        # The path to the X509 key in PEM format that is connected to the cluster.
         # ssl-key = "/path/to/pump-key.pem"
 
         # Syncer Configuration
