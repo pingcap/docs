@@ -100,7 +100,7 @@ For more information, refer to [Kubernetes local storage](https://kubernetes.io/
 
 Refer to [Best Practices](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/best-practices.md) for more information on local PV in Kubernetes.
 
-## Data mounting
+## Disk mount examples
 
 If monitoring data, as well as TiDB Binlog and backup data are also stored on the local disk, you can mount them in a SAS drive and create different `StorageClass` for them. For example:
 
