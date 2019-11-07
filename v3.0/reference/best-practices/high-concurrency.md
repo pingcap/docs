@@ -1,6 +1,6 @@
 ---
 title: Best Practice for High Concurrent and Write Intensive Scenario
-summary: Learn the best practice for high-concurrent and write-intensive scenario.
+summary: Learn the best practice for high concurrent and write intensive scenario.
 category: reference
 ---
 
@@ -10,7 +10,7 @@ A typical scenario for TiDB users is to write data intensively to TiDB in high c
 
 ## Target reader
 
-This document assumes that you have a basic understanding of TiDB. It is recommended that you first read the following three blog articles that explains TiDB fundamentals:
+This document assumes that you have a basic understanding of TiDB. It is recommended that you first read the following three blog articles that explain TiDB fundamentals and [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/):
 
 + [Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/)
 + [Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/)
@@ -26,14 +26,14 @@ The high concurrent and write intensive scenario often occurs in the batch task 
 
 These features pose these challenges to TiDB:
 
-+ The write or read capacity must be horizontally scalable.
++ The write or read capacity must be linearly scalable.
 + Database performance is stable and does not decrease as a huge volume of data is written concurrently.
 
-For a distributed database, it is crucial to fully leverage the capacity of all nodes and to prevent single node from being the bottleneck.
+For a distributed database, it is crucial to fully leverage the capacity of all nodes and to prevent single node from becoming the bottleneck.
 
 ## How data is distributed in TiDB
 
-To address the above challenges, it is necessary to start with the data segmentation and scheduling principles of TiDB. Refer to [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/) for more details.
+To address the above challenges, it is necessary to start with the data segmentation and scheduling principle of TiDB. Refer to [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/) for more details.
 
 TiDB segments data into Regions, each representing a range of data with a size limit of 96M by default. Each Region has multiple replicas, and each group of replicas is called a Raft Group. In a Raft Group, the Region Leader executes the read and write tasks involving the data range. The Region Leader is automatically scheduled by the PD component to different physical nodes evenly to distribute the read and write pressure.
 
@@ -76,7 +76,7 @@ For the cluster topology, 2 TiDB nodes, 3 PD nodes and 6 TiKV nodes are deployed
 
 ![QPS1](/media/best-practices/QPS1.png)
 
-The client starts "intensive" write requests in a short time which is 3K QPS received by TiDB. Theoretically, the load is evenly distributed to 6 TiKV nodes. However, if you look at the CPU usage of each node, the load distribution are clearly lopsided. The `tikv-3` node is the write hotspot.
+The client starts "intensive" write requests in a short time which is 3K QPS received by TiDB. Theoretically, the load pressure is evenly distributed to 6 TiKV nodes. However, if you look at the CPU usage of each node, the load distribution are clearly lopsided. The `tikv-3` node is the write hotspot.
 
 ![QPS2](/media/best-practices/QPS2.png)
 
@@ -84,13 +84,13 @@ The client starts "intensive" write requests in a short time which is 3K QPS rec
 
 [Raft store CPU](/v3.0/reference/key-monitoring-metrics/tikv-dashboard.md) is the CPU usage rate for the `raftstore` thread, usually representing the write load. In this scenario, `tikv-3` is the Leader of this Raft Group; `tikv-0` and `tikv-1` are the followers. The loads of other nodes are almost empty.
 
-The monitoring metrics from PD also confirm that hotspot has been caused.
+The monitoring record from PD also confirms that hotspot has been caused.
 
 ![QPS4](/media/best-practices/QPS4.png)
 
 ## Why hotspot is caused
 
-In the above test, the operation does not reach the ideal performance expected in the best practices. This is because for each new table created in TiDB, one Region is segmented by default to store the data of this table. The data range is:
+In the above test, the operation does not reach the ideal performance expected in the best practices. This is because for each new table created in TiDB, only one Region is segmented by default to store the data of this table. The data range is:
 
 ```
 [CommonPrefix + TableID, CommonPrefix + TableID + 1)
@@ -100,7 +100,7 @@ In a short period of time, a huge volume of data will be continuously written to
 
 ![TiKV Region Split](/media/best-practices/tikv-Region-split.png)
 
-The above image illustrates the Region split process. As data is continuously written into TiKV, TiKV splits a Region into multiple Regions. Because the leader election is started on the store where the Region Leader to be split is located, the two newly split Region Leaders is very likely to stay on the same store. This split process might also happens to the newly split Region 2 and Region 3. In this way, write pressure will concentrate on TiKV-Node 1.
+The above image illustrates the Region split process. As data is continuously written into TiKV, TiKV splits a Region into multiple Regions. Because the leader election is started on the store where the Region Leader to be split is located, the two newly split Region Leaders is likely to stay on the same store. This split process might also happens to the newly split Region 2 and Region 3. In this way, write pressure will concentrate on TiKV-Node 1.
 
 During the continuous write, after finding that hotspot is caused on Node 1, PD evenly distributes the concentrated Leaders to other nodes. If the number of TiKV nodes is more than the number of Region replicas, TiKV will try to migrate these Regions to idle nodes. These two actions during the write are also reflected in the PD's monitoring record:
 
@@ -136,9 +136,9 @@ As can be seen from Image 3, the key of the row data is so encoded that `rowID` 
 
 If the write of `rowID` is completely discrete, the above method will not cause hotspot. If the row ID or index has a fixed range or prefix (for example, discretely insert data into the range of `[2000w, 5000w)`), no hotspot will be caused either. However, if you split a Region using the above method, data might still be written to the same Region at the beginning.
 
-TiDB is a database for general usage and does not make assumptions about the data distribution. So it segments only one Region at the beginning to store the data of a table and automatically splits the Region according to the data distribution after real data is written.
+TiDB is a database for general usage and does not make assumptions about the data distribution. So it segments only one Region at the beginning to store the data of a table and automatically splits the Region according to the data distribution after real data is inserted.
 
-Given this feature and the need to avoid the hotspot problem, TiDB offers the `Split Region` syntaxes for optimizing the data write in the high concurrent and write intensive scenario. Based on the above case, now try to scatter Regions using the `Split Region` syntaxes and observe the load distribution.
+Given this feature and the need to avoid the hotspot problem, TiDB offers the `Split Region` syntaxes for optimizing the data write in the high concurrent and write intensive scenario. Based on the above case, now you can try to scatter Regions using the `Split Region` syntaxes and observe the load distribution.
 
 Because the data to be written in the test is entirely discrete within the positive range, you can use the following statement to pre-split the table into 128 Regions within the range of `minInt64` and `maxInt64`:
 
@@ -174,11 +174,11 @@ Then operate the write load again:
 
 You can see that the hotspot has been eliminated now.
 
-In this case, the table is simple. In other cases, you might also need to consider the hotspot problem of index. For more details about how to pre-split the index Region, refer to [Split Region](/v3.0/reference/sql/statements/split-region.md).
+In this case, the table is simple. In other cases, you might also need to consider the hotspot problem of index. For more details on how to pre-split the index Region, refer to [Split Region](/v3.0/reference/sql/statements/split-region.md).
 
-## More complex hotspot issue
+## More complex hotspot problem
 
-If a table does not have a primary key, or the primary key is not the `Int` type and the user does not want to generate a randomly distributed primary key ID, TiDB provides an implicit `_tidb_rowid` column as the row ID. If you do not use the `SHARD_ROW_ID_BITS` parameter, the values of the `_tidb_rowid` column are basically monotonically increasing, which also causes hotspot. Refer to [`SHARD_ROW_ID_BITS` description](/v3.0/reference/configuration/tidb-server/tidb-specific-variables.md#shard_row_id_bits) for more detail.
+If a table does not have a primary key, or the primary key is not the `Int` type and you do not want to generate a randomly distributed primary key ID, TiDB provides an implicit `_tidb_rowid` column as the row ID. If you do not use the `SHARD_ROW_ID_BITS` parameter, the values of the `_tidb_rowid` column might be monotonically increasing, which also causes hotspot. Refer to [`SHARD_ROW_ID_BITS` description](/v3.0/reference/configuration/tidb-server/tidb-specific-variables.md#shard_row_id_bits) for more detail.
 
 To avoid the hotspot problem in this situation, you can use `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` when creating a table. For more details about `PRE_SPLIT_REGIONS`, refer to [here](/v3.0/reference/sql/statements/split-region.md#pre_split_regions).
 
