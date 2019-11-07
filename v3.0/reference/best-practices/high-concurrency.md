@@ -80,7 +80,7 @@ The client starts "intensive" write requests in a short time which is 3K QPS rec
 
 ![QPS2](/media/best-practices/QPS2.png)
 
-![QPS3](/media/best-practices/QPS3.png)：
+![QPS3](/media/best-practices/QPS3.png)
 
 [Raft store CPU](/v3.0/reference/key-monitoring-metrics/tikv-dashboard.md) is the CPU usage rate for the `raftstore` thread, usually representing the write load. In this scenario, `tikv-3` is the Leader of this Raft Group; `tikv-0` and `tikv-1` are the followers. The loads of other nodes are almost empty.
 
