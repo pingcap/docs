@@ -175,7 +175,7 @@ kubectl describe po -n <namespace> <pod-name>
 
 - If a `StorageClass` exists in the cluster but the available PV is insufficient, you need to add PV resources correspondingly. For Local PV, you can expand it by referring to [Local PV Configuration](/dev/tidb-in-kubernetes/reference/configuration/storage-class.md#local-pv-configuration).
 
-- tidb-scheduler has a high availability scheduling policy for TiKV and PD. For the same TiDB cluster, if there are N replicas of TiKV or PD, then the number of PD Pods that can be scheduled to each node is `M=(N-1)/2` (if N<3 AND M=1) at most, and the number of TiKV Pods that can be scheduled to each node is `M=ceil(N/3)` (if N<3 and M=1; `ceil` means rounding up) at most. If the Pod's state becomes `Pending` because the high availability scheduling policy is not satisfied, you need to add more nodes in the cluster.
+- tidb-scheduler has a high availability scheduling policy for TiKV and PD. For the same TiDB cluster, if there are N replicas of TiKV or PD, then the number of PD Pods that can be scheduled to each node is `M=(N-1)/2` (if N<3, then M=1) at most, and the number of TiKV Pods that can be scheduled to each node is `M=ceil(N/3)` (if N<3, then M=1; `ceil` means rounding up) at most. If the Pod's state becomes `Pending` because the high availability scheduling policy is not satisfied, you need to add more nodes in the cluster.
 
 ## The Pod is in the `CrashLoopBackOff` state
 
