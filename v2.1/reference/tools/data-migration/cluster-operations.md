@@ -14,7 +14,7 @@ Run the following command to start all the components (including DM-master, DM-w
 
 {{< copyable "shell-regular" >}}
 
-```
+```bash
 ansible-playbook start.yml
 ```
 
@@ -24,7 +24,7 @@ Run the following command to stop all the components (including DM-master, DM-wo
 
 {{< copyable "shell-regular" >}}
 
-```
+```bash
 ansible-playbook stop.yml
 ```
 
@@ -98,7 +98,7 @@ To restart the DM-worker component, you can use either of the following two appr
     {{< copyable "shell-regular" >}}
 
     ```bash
-    ansible-playbook stop.yml --tags=dm-worker
+    ansible-playbook stop.yml --tags=dm-worker &&
     ansible-playbook start.yml --tags=dm-worker
     ```
 
@@ -119,7 +119,7 @@ To restart the DM-master component, you can use either of the following two appr
     {{< copyable "shell-regular" >}}
 
     ```bash
-    ansible-playbook stop.yml --tags=dm-master
+    ansible-playbook stop.yml --tags=dm-master &&
     ansible-playbook start.yml --tags=dm-master
     ```
 
@@ -131,8 +131,8 @@ To restart the DM-master component, you can use either of the following two appr
 
         {{< copyable "shell-regular" >}}
 
-        ```
-        cd /home/tidb/dm-ansible
+        ```bash
+        cd /home/tidb/dm-ansible &&
         rm -rf downloads
         ```
 
@@ -140,7 +140,7 @@ To restart the DM-master component, you can use either of the following two appr
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook local_prepare.yml
         ```
 
@@ -150,7 +150,7 @@ To restart the DM-master component, you can use either of the following two appr
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook rolling_update.yml --tags=dm-worker
         ```
 
@@ -158,7 +158,7 @@ To restart the DM-master component, you can use either of the following two appr
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook rolling_update.yml --tags=dm-master
         ```
 
@@ -166,7 +166,7 @@ To restart the DM-master component, you can use either of the following two appr
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook rolling_update.yml --tags=dmctl
         ```
 
@@ -174,7 +174,7 @@ To restart the DM-master component, you can use either of the following two appr
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook rolling_update.yml
         ```
 
@@ -188,8 +188,8 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
         {{< copyable "shell-regular" >}}
 
-        ```
-        cd /home/tidb/dm-ansible
+        ```bash
+        cd /home/tidb/dm-ansible &&
         vi hosts.ini
         ```
 
@@ -205,7 +205,7 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook -i hosts.ini create_users.yml -u root -k
         ```
 
@@ -226,7 +226,7 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook deploy.yml --tags=dm-worker -l dm_worker3
     ```
 
@@ -234,7 +234,7 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook start.yml --tags=dm-worker -l dm_worker3
     ```
 
@@ -242,7 +242,7 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook rolling_update.yml --tags=dm-master
     ```
 
@@ -250,7 +250,7 @@ Assuming that you want to add a DM-worker instance on the `172.16.10.74` machine
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
 
@@ -262,7 +262,7 @@ Assuming that you want to remove the `dm_worker3` instance, perform the followin
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook stop.yml --tags=dm-worker -l dm_worker3
     ```
 
@@ -281,7 +281,7 @@ Assuming that you want to remove the `dm_worker3` instance, perform the followin
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook rolling_update.yml --tags=dm-master
     ```
 
@@ -289,7 +289,7 @@ Assuming that you want to remove the `dm_worker3` instance, perform the followin
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
 
@@ -303,8 +303,8 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
         {{< copyable "shell-regular" >}}
 
-        ```
-        cd /home/tidb/dm-ansible
+        ```bash
+        cd /home/tidb/dm-ansible &&
         vi hosts.ini
         ```
 
@@ -320,7 +320,7 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook -i hosts.ini create_users.yml -u root -k
         ```
 
@@ -334,7 +334,7 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook stop.yml --tags=dm-master
     ```
 
@@ -350,7 +350,7 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook deploy.yml --tags=dm-master
     ```
 
@@ -358,7 +358,7 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook start.yml --tags=dm-master
     ```
 
@@ -366,7 +366,7 @@ Assuming that the `172.16.10.71` machine needs to be maintained or this machine 
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook rolling_update.yml --tags=dmctl
     ```
 
@@ -380,8 +380,8 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
         {{< copyable "shell-regular" >}}
 
-        ```
-        cd /home/tidb/dm-ansible
+        ```bash
+        cd /home/tidb/dm-ansible &&
         vi hosts.ini
         ```
 
@@ -397,7 +397,7 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook -i hosts.ini create_users.yml -u root -k
         ```
 
@@ -411,7 +411,7 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook stop.yml --tags=dm-worker -l dm_worker1
     ```
 
@@ -433,7 +433,7 @@ Assuming that the `172.16.10.72` machine needs to be maintained or this machine 
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook deploy.yml --tags=dm-worker -l dm_worker1
     ```
 
