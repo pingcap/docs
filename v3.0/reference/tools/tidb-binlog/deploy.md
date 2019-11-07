@@ -160,10 +160,10 @@ In environments of development, testing and production, the requirements on serv
 
     ```bash
     cd /home/tidb/tidb-ansible
+    resources/bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd generate_meta
     ```
 
     ```
-    resources/bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd generate_meta
     INFO[0000] [pd] create pd client with endpoints [http://192.168.199.118:32379]
     INFO[0000] [pd] leader switches to: http://192.168.199.118:32379, previous:
     INFO[0000] [pd] init cluster id 6569368151110378289
