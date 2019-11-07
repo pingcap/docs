@@ -46,7 +46,7 @@ The TiDB configuration file supports more options than command line options. You
 - Default: 45s
 - Unit: second
 
-## `compatible-kill-query`
+### `compatible-kill-query`
 
 + To set the `KILL` statement to be MySQL compatible
 + Default: false
