@@ -47,17 +47,6 @@ Use TLS to encrypt:
 
 ## Command line flags
 
-### \-\-pd,-u
-
-+ PD address
-+ Default address: <http://127.0.0.1:2379>
-+ Environment variable: PD_ADDR
-
-### \-\-detach,-d
-
-+ Use single command line mode (not entering readline)
-+ Default: true
-
 ### --cacert
 
 + Specify the path to the certificate file of the trusted CA in PEM format
@@ -68,10 +57,26 @@ Use TLS to encrypt:
 + Specify the path to the certificate of SSL in PEM format
 + Default: ""
 
+### \-\-detach,-d
+
++ Use single command line mode (not entering readline)
++ Default: true
+
+### \-\-interact,-i
+
++ Use interactive mode (entering readline)
++ Default: false
+
 ### --key
 
 + Specify the path to the certificate key file of SSL in PEM format, which is the private key of the certificate specified by `--cert`
 + Default: ""
+
+### \-\-pd,-u
+
++ Specify the PD address
++ Default address: `http://127.0.0.1:2379`
++ Environment variable: `PD_ADDR`
 
 ### --version,-V
 
