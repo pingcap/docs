@@ -97,7 +97,7 @@ In environments of development, testing and production, the requirements on serv
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook deploy.yml --tags=pump -l ${pump1_ip},${pump2_ip},[${alias1_name},${alias2_name}]
         ```
 
@@ -109,7 +109,7 @@ In environments of development, testing and production, the requirements on serv
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook start.yml --tags=pump
         ```
 
@@ -117,7 +117,7 @@ In environments of development, testing and production, the requirements on serv
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook rolling_update.yml --tags=tidb
         ```
 
@@ -125,7 +125,7 @@ In environments of development, testing and production, the requirements on serv
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ansible-playbook rolling_update_monitor.yml --tags=prometheus
         ```
 
@@ -140,7 +140,7 @@ In environments of development, testing and production, the requirements on serv
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd /home/tidb/tidb-ansible
+    cd /home/tidb/tidb-ansible &&
     resources/bin/binlogctl -pd-urls=http://172.16.10.72:2379 -cmd pumps
     ```
 
@@ -159,7 +159,7 @@ In environments of development, testing and production, the requirements on serv
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd /home/tidb/tidb-ansible
+    cd /home/tidb/tidb-ansible &&
     resources/bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd generate_meta
     ```
 
@@ -197,8 +197,8 @@ In environments of development, testing and production, the requirements on serv
         {{< copyable "shell-regular" >}}
 
         ```bash
-        cd /home/tidb/tidb-ansible/conf
-        cp drainer-cluster.toml drainer_mysql_drainer.toml
+        cd /home/tidb/tidb-ansible/conf &&
+        cp drainer-cluster.toml drainer_mysql_drainer.toml &&
         vi drainer_mysql_drainer.toml
         ```
 
@@ -228,8 +228,8 @@ In environments of development, testing and production, the requirements on serv
         {{< copyable "shell-regular" >}}
 
         ```bash
-        cd /home/tidb/tidb-ansible/conf
-        cp drainer-cluster.toml drainer_file_drainer.toml
+        cd /home/tidb/tidb-ansible/conf &&
+        cp drainer-cluster.toml drainer_file_drainer.toml &&
         vi drainer_file_drainer.toml
         ```
 
@@ -273,10 +273,15 @@ Run the following commands to download the packages:
 {{< copyable "shell-regular" >}}
 
 ```bash
-version="latest" for nightly builds
+version="latest" for nightly builds &&
 wget https://download.pingcap.org/tidb-latest-linux-amd64.{tar.gz,sha256}
+```
 
-# Check the file integrity. If the result is OK, the file is correct.
+Check the file integrity. If the result is OK, the file is correct.
+
+{{< copyable "shell-regular" >}}
+
+```bash
 sha256sum -c tidb-latest-linux-amd64.sha256
 ```
 
@@ -286,8 +291,13 @@ For TiDB v2.1.0 GA or later versions, Pump and Drainer are already included in t
 
 ```bash
 wget https://download.pingcap.org/tidb-binlog-$version-linux-amd64.{tar.gz,sha256}
+```
 
-# Check the file integrity. If the result is OK, the file is correct.
+Check the file integrity. If the result is OK, the file is correct.
+
+{{< copyable "shell-regular" >}}
+
+```bash
 sha256sum -c tidb-binlog-$version-linux-amd64.sha256
 ```
 
@@ -311,7 +321,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
     - To view the command line parameters of Pump, execute `./bin/pump -help`:
 
-        ```
+        ```bash
         Usage of Pump:
         -L string
             the output information level of logs: debug, info, warn, error, fatal ("info" by default)
@@ -413,7 +423,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
     - To view the command line parameters of Drainer, execute `./bin/drainer -help`:
 
-        ```
+        ```bash
         Usage of Drainer:
         -L string
             the output information level of logs: debug, info, warn, error, fatal ("info" by default)
