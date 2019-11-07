@@ -84,11 +84,11 @@ The reasons why TiDB Operator failed to schedule a Pod include:
 
 * The Pod is in the `Pending` state, which caused by insufficient resources or HA Policy. Refer to the details in [Troubleshoot TiDB in Kubernetes](/dev/tidb-in-kubernetes/troubleshoot.md#the-pod-is-in-the-pending-state).
 
-* The `taint` property are applied to some Nodes, which refuses the Pod to be scheduled unless that Pod has a matching `toleration`. Refer to the details in [taint & toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+* The `taint` property is applied to some Nodes, which refuses the Pod to be scheduled unless that Pod has a matching `toleration`. Refer to the details in [taint & toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
-* The Pod is stuck in the `ContainerCreating` state and causes scheduling failure. In such case, you can check if there is more than one TiDB Operator deployed in the Kubernetes cluster. Conflicts occur when custom schedulers in multiple TiDB Operators schedule the same Pod in different phases.
+* Scheduling conflict, which causes the Pod stuck in the `ContainerCreating` state. In such case, you can check if there is more than one TiDB Operator deployed in the Kubernetes cluster. Conflicts occur when custom schedulers in multiple TiDB Operators schedule the same Pod in different phases.
 
-    You can execute the following command to verify whether there are more than one TiDB Operator deployed. If more than one record is returned, delete extra TiDB Operator to fix scheduling failure.
+    You can execute the following command to verify whether there are more than one TiDB Operator deployed. If more than one record is returned, delete extra TiDB Operator to fix scheduling conflict.
 
     {{< copyable "shell-regular" >}}
 
