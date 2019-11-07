@@ -153,7 +153,7 @@ The Pending state of a Pod is usually caused by conditions of insufficient resou
 
 - The `StorageClass` of the PVC used by PD, TiKV, Monitor Pod does not exist or the PV is insufficient.
 - No nodes in the Kubernetes cluster can satisfy the CPU or memory resources requested by the Pod
-- The replicas of TiKV or PD and the number of nodes in the cluster do not satisfy the high availability scheduling policy of tidb-scheduler
+- The number of TiKV or PD replicas and the number of nodes in the cluster do not satisfy the high availability scheduling policy of tidb-scheduler
 
 You can check the specific reason for Pending by using the `kubectl describe pod` command:
 
