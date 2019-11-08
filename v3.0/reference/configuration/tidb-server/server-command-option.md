@@ -111,8 +111,8 @@ The complete descriptions of startup options are as follows.
 - The status monitor port of TiDB
 - Default: "10080"
 - This port is used to display the internal data of TiDB, including the [Prometheus statistics](https://prometheus.io/) and [pprof](https://golang.org/pkg/net/http/pprof/).
-- Access the Prometheus statistics at http://host:status_port/metrics.
-- Access the pprof data at http://host:status_port/debug/pprof.
+- Access the Prometheus statistics at <http://host:status_port/metrics>.
+- Access the pprof data at <http://host:status_port/debug/pprof>.
 
 ### \-\-store
 
