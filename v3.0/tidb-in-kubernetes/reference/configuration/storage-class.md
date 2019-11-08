@@ -67,11 +67,28 @@ After volume expansion is enabled, expand the PV using the following method:
 
 ## Local PV configuration
 
-Kubernetes currently supports statically allocated local storage. To create a local storage object, use local-volume-provisioner in the [local-static-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner) repository. The procedure is as follows:
+Kubernetes currently supports statically allocated local storage. To create a local storage object, use `local-volume-provisioner` in the [local-static-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner) repository. The procedure is as follows:
 
-1. Allocate local storage in the nodes of the TiKV cluster. See also [Manage Local Volumes in Kubernetes Cluster](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md).
+1. Pre-allocate local storage in cluster nodes. See the [operation guide](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md) provided by Kubernetes.
 
-2. Deploy local-volume-provisioner. See also [Install local-volume-provisioner with helm](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/tree/master/helm).
+2. Deploy `local-volume-provisioner`.
+
+      {{< copyable "shell-regular" >}}
+
+      ```shell
+     kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/local-dind/local-volume-provisioner.yaml
+     ```
+
+    Check the Pod and PV status with the following commands:
+
+      {{< copyable "shell-regular" >}}
+
+      ```shell
+     kubectl get po -n kube-system -l app=local-volume-provisioner && \
+     kubectl get pv | grep local-storage
+     ```
+
+    `local-volume-provisioner` creates a volume for each mounted disk. Note that on GKE, this will create local volumes of only 375 GiB in size.
 
 For more information, refer to [Kubernetes local storage](https://kubernetes.io/docs/concepts/storage/volumes/#local) and [local-static-provisioner document](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner#overview).
 
@@ -82,6 +99,111 @@ For more information, refer to [Kubernetes local storage](https://kubernetes.io/
 - For capacity isolation, a dedicated partition per volume is recommended.
 
 Refer to [Best Practices](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/best-practices.md) for more information on local PV in Kubernetes.
+
+## Disk mount examples
+
+If the components such as monitoring, TiDB Binlog, and `tidb-backup` use local disk to store data, you can mount them on a SAS disk and create separate `StorageClass` for use. For example:
+
+- For a disk storing monitoring data, you can [bind mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) them into `/mnt/disks` directory, and create `local-storage` `StorageClass` for them.
+- For a disk storing TiDB Binlog and backup data, you can [bind mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) them into `/mnt/backup` directory, and create `backup-storage` `StorageClass` for them.
+- For a disk storing PD data, you can [bind mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) them into `/mnt/sharedssd` directory, and create `shared-ssd-storage` `StorageClass` for them.
+- For a disk storing TiKV data, you can [mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#use-a-whole-disk-as-a-filesystem-pv) them into `/mnt/ssd` directory, and create `ssd-storage` `StorageClass` for them.
+
+When you install `local-volume-provisioner`, you need to modify `local-volume-provisioner` [YAML](https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/local-dind/local-volume-provisioner.yaml) file and create the necessary `StorageClass` before executing `kubectl apply` statement. The following is an example of a modified YAML file according to the mount above:
+
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "local-storage"
+provisioner: "kubernetes.io/no-provisioner"
+volumeBindingMode: "WaitForFirstConsumer"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "ssd-storage"
+provisioner: "kubernetes.io/no-provisioner"
+volumeBindingMode: "WaitForFirstConsumer"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "shared-ssd-storage"
+provisioner: "kubernetes.io/no-provisioner"
+volumeBindingMode: "WaitForFirstConsumer"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "backup-storage"
+provisioner: "kubernetes.io/no-provisioner"
+volumeBindingMode: "WaitForFirstConsumer"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-provisioner-config
+  namespace: kube-system
+data:
+  nodeLabelsForPV: |
+    - kubernetes.io/hostname
+  storageClassMap: |
+    shared-ssd-storage:
+      hostDir: /mnt/sharedssd
+      mountDir: /mnt/sharedssd
+    ssd-storage:
+      hostDir: /mnt/ssd
+      mountDir: /mnt/ssd
+    local-storage:
+      hostDir: /mnt/disks
+      mountDir: /mnt/disks
+    backup-storage:
+      hostDir: /mnt/backup
+      mountDir: /mnt/backup
+---
+
+......
+
+          volumeMounts:
+
+            ......
+
+            - mountPath: /mnt/ssd
+              name: local-ssd
+              mountPropagation: "HostToContainer"
+            - mountPath: /mnt/sharedssd
+              name: local-sharedssd
+              mountPropagation: "HostToContainer"
+            - mountPath: /mnt/disks
+              name: local-disks
+              mountPropagation: "HostToContainer"
+            - mountPath: /mnt/backup
+              name: local-backup
+              mountPropagation: "HostToContainer"
+      volumes:
+
+        ......
+
+        - name: local-ssd
+          hostPath:
+            path: /mnt/ssd
+        - name: local-sharedssd
+          hostPath:
+            path: /mnt/sharedssd
+        - name: local-disks
+          hostPath:
+            path: /mnt/disks
+        - name: local-backup
+          hostPath:
+            path: /mnt/backup
+......
+
+```
+
+Finally, execute `kubectl apply` to install `local-volume-provisioner`.
+
+When you later create a TiDB cluster or backup, configure the corresponding `StorageClass` before use.
 
 ## Data safety
 
