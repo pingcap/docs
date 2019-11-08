@@ -10,7 +10,7 @@ TiDB Operator is an automatic operation system for TiDB clusters in Kubernetes. 
 
 > **Note:**
 >
-> Only one TiDB Operator can be deployed in each Kubernetes cluster.
+> You can only deploy one TiDB Operator in a Kubernetes cluster.
 
 ## Architecture of TiDB Operator
 
