@@ -82,7 +82,7 @@ To check the configuration of the PD, TiKV, and TiDB components of the current c
 
 The reasons why TiDB Operator failed to schedule a Pod include:
 
-* The Pod is in the `Pending` state, which caused by insufficient resources or HA Policy. Refer to the details in [Troubleshoot TiDB in Kubernetes](/dev/tidb-in-kubernetes/troubleshoot.md#the-pod-is-in-the-pending-state).
+* Insufficient resources or HA Policy, which causes the Pod in the `Pending` state. Refer to the details in [Troubleshoot TiDB in Kubernetes](/dev/tidb-in-kubernetes/troubleshoot.md#the-pod-is-in-the-pending-state).
 
 * The `taint` property is applied to some Nodes, which refuses the Pod to be scheduled unless that Pod has a matching `toleration`. Refer to the details in [taint & toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
