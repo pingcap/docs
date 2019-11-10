@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Back End
-summary: Choose how to write data into the TiDB cluster
+summary: Choose how to write data into the TiDB cluster.
 category: reference
 ---
 
@@ -13,7 +13,7 @@ The "Importer" back end (default) requires `tidb-lightning` to first encode the 
 The "TiDB" back end requires `tidb-lightning` to encode these data into SQL `INSERT` statements, and have these executed directly on the TiDB node.
 
 | Back end | "Importer" | "TiDB" |
-|---|---|---|
+|:---|:---|:---|
 | Speed | Fast (~300 GB/hr) | Slow (~50 GB/hr) |
 | Resource usage | High | Low |
 | ACID respected while importing | No | Yes |
@@ -65,7 +65,7 @@ When using the "TiDB" back end, you no longer need `tikv-importer`. Compared wit
 
 ### Manual deployment
 
-There is no need to download and configure `tikv-importer`.
+You do not need to download and configure `tikv-importer`.
 
 Before running `tidb-lightning`, include the following into the configuration file:
 
@@ -87,7 +87,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 ```
 
 | Setting | Behavior on conflict | Equivalent SQL statement |
-|---|---|---|
+|:---|:---|:---|
 | replace | New entries replace old ones | `REPLACE INTO ...` |
 | ignore | Keep old entries and ignore new ones | `INSERT IGNORE INTO ...` |
 | error | Abort import | `INSERT INTO ...` |
