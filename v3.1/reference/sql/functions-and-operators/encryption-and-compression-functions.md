@@ -38,4 +38,3 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 * `DES_DECRYPT()`, `DES_ENCRYPT()`, `OLD_PASSWORD()`, `ENCRYPT()`: these functions were deprecated in MySQL 5.7 and removed in 8.0.
 * `VALIDATE_PASSWORD_STRENGTH()`
 * Functions only available in MySQL Enterprise [Issue #2632](https://github.com/pingcap/tidb/issues/2632)
-
