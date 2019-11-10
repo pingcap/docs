@@ -37,7 +37,7 @@ On February 24, 2018, TiDB 1.1 Beta is released. This release has great improvem
 - Fix the issue that hot spot scheduling violates label constraint
 - Fix other stability issues
 
-## TiKV:
+## TiKV
 
 - Traverse locks using offset + limit to avoid potential GC problems
 - Support resolving locks in batches to improve GC speed
