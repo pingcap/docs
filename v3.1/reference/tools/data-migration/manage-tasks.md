@@ -2,7 +2,6 @@
 title: Manage the Data Replication Task
 summary: Use dmctl to manage the data replication task.
 category: reference
-aliases: ['/docs/tools/dm/manage-task/']
 ---
 
 # Manage the Data Replication Task

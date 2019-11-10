@@ -2,7 +2,6 @@
 title: Install from DBdeployer
 summary: Install TiDB using the DBdeployer package manager.
 category: how-to
-aliases: ['/docs/v3.1/how-to/get-started/local-cluster/install-from-dbdeployer/']
 ---
 
 # Install from DBdeployer

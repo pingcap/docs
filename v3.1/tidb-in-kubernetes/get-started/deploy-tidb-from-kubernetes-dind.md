@@ -2,7 +2,6 @@
 title: Deploy TiDB in Kubernetes Using DinD
 summary: Learn how to quickly deploy a TiDB cluster in Kubernetes Using DinD.
 category: how-to
-aliases: ['/docs/v3.1/how-to/get-started/deploy-tidb-from-kubernetes-dind/']
 ---
 
 # Deploy TiDB in Kubernetes Using DinD

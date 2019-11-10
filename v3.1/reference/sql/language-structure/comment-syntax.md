@@ -2,7 +2,6 @@
 title: Comment Syntax
 summary: Learn about the three comment styles in TiDB.
 category: reference
-aliases: ['/docs/sql/comment-syntax/']
 ---
 
 # Comment Syntax

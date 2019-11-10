@@ -2,7 +2,6 @@
 title: The System Variables
 summary: Learn how to use the system variables in TiDB.
 category: reference
-aliases: ['/docs/sql/variable/']
 ---
 
 # The System Variables

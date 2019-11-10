@@ -2,7 +2,6 @@
 title: Cast Functions and Operators
 summary: Learn about the cast functions and operators.
 category: reference
-aliases: ['/docs/sql/cast-functions-and-operators/']
 ---
 
 # Cast Functions and Operators

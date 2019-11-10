@@ -2,7 +2,6 @@
 title: Deploy TiDB on AWS EKS
 summary: Learn how to deploy a TiDB cluster on AWS EKS.
 category: how-to
-aliases: ['/docs/v3.1/how-to/deploy/tidb-in-kubernetes/aws-eks/','/docs/v3.1/how-to/deploy/orchestrated/aws-eks/']
 ---
 
 # Deploy TiDB on AWS EKS

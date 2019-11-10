@@ -2,7 +2,6 @@
 title: Production Deployment from Binary Tarball
 summary: Use the binary to deploy a TiDB cluster.
 category: how-to
-aliases: ['/docs/op-guide/binary-deployment/']
 ---
 
 # Production Deployment from Binary Tarball
