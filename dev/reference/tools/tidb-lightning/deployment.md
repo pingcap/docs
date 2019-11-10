@@ -8,7 +8,7 @@ category: reference
 
 This document describes the hardware requirements of TiDB Lightning using the default "Importer" back end, and how to deploy it using Ansible or manually.
 
-If you wish to use the "TiDB" back end, also read [TiDB Lightning Back End](/dev/reference/tools/tidb-lightning/backend.md) for the changes to the deployment steps.
+If you wish to use the "TiDB" back end, also read [TiDB Lightning "TiDB" Back End](/dev/reference/tools/tidb-lightning/tidb_backend.md) for the changes to the deployment steps.
 
 ## Notes
 

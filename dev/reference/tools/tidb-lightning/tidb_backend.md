@@ -1,10 +1,10 @@
 ---
-title: TiDB Lightning Back End
+title: TiDB Lightning "TiDB" Back End
 summary: Choose how to write data into the TiDB cluster.
 category: reference
 ---
 
-# TiDB Lightning Back End
+# TiDB Lightning "TiDB" Back End
 
 TiDB Lightning supports two back ends: "Importer" and "TiDB". It determines how `tidb-lightning` delivers data into the target cluster.
 
@@ -57,17 +57,13 @@ When using the "TiDB" back end, you no longer need `tikv-importer`. Compared wit
 
 4. Mount the data source for TiDB Lightning as usual.
 
-5. No need to start `tikv-importer`.
-
-6. Start `tidb-lightning` as usual.
-
-7. No need to stop `tikv-importer`.
+5. Start `tidb-lightning` as usual.
 
 ### Manual deployment
 
 You do not need to download and configure `tikv-importer`.
 
-Before running `tidb-lightning`, include the following into the configuration file:
+Before running `tidb-lightning`, add the following lines into the configuration file:
 
 ```toml
 [tikv-importer]
