@@ -55,10 +55,6 @@
       - [Overview](/v2.1/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/v2.1/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/v2.1/how-to/deploy/data-migration-with-ansible.md)
-    + Deploy and Use TiDB Binlog
-      - [TiDB Binlog Cluster Deployment](/v2.1/how-to/deploy/tidb-binlog.md)
-      - [Binlog Slave Client User Guide](/v2.1/reference/tools/tidb-binlog/binlog-slave-client.md)
-      - [Reparo User Guide](/v2.1/reference/tools/tidb-binlog/reparo.md)
   + Configure
     - [Time Zone](/v2.1/how-to/configure/time-zone.md)
     - [Memory Control](/v2.1/how-to/configure/memory-control.md)
@@ -70,7 +66,6 @@
   + Monitor
     - [Overview](/v2.1/how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](/v2.1/how-to/monitor/monitor-a-cluster.md)
-    - [TiDB Binlog Monitoring](/v2.1/how-to/monitor/tidb-binlog.md)
   + Migrate
     - [Overview](/v2.1/how-to/migrate/overview.md)
     + Migrate from MySQL
@@ -82,7 +77,6 @@
     - [Common Ansible Operations](/v2.1/how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](/v2.1/how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](/v2.1/how-to/maintain/identify-slow-queries.md)
-    - [TiDB Binlog Cluster Operations](/v2.1/how-to/maintain/tidb-binlog.md)
   + Scale
     - [Scale using Ansible](/v2.1/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v2.1/how-to/scale/horizontally.md)
@@ -90,7 +84,6 @@
     - [Upgrade to TiDB 2.1](/v2.1/how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md)
     - [Upgrade TiDB Data Migration](/v2.1/reference/tools/data-migration/upgrade.md)
-    - [Upgrade TiDB Binlog Cluster](/v2.1/how-to/upgrade/tidb-binlog.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v2.1/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](/v2.1/how-to/troubleshoot/data-migration.md)
@@ -101,8 +94,11 @@
     - [Syncer](/v2.1/reference/tools/syncer.md)
     - [Loader](/v2.1/reference/tools/loader.md)
     + TiDB Data Migration
-      - [Overview](/v2.1/reference/tools/data-migration/overview.md)
-      - [Restrictions](/v2.1/reference/tools/data-migration/overview.md#usage-restrictions)
+      + Overview
+        - [DM Overview](/v2.1/reference/tools/data-migration/overview.md)
+        - [Restrictions](/v2.1/reference/tools/data-migration/overview.md#usage-restrictions)
+        - [DM-worker](/v2.1/reference/tools/data-migration/dm-worker-intro.md)
+        - [DM Relay Log](/v2.1/reference/tools/data-migration/dm-worker-intro.md)
       + Features
         - [Table Routing](/v2.1/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v2.1/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
@@ -120,13 +116,17 @@
       + Configure
         - [Overview](/v2.1/reference/tools/data-migration/configure/overview.md)
         - [Task Configuration](/v2.1/reference/tools/data-migration/configure/task-configuration-file.md)
+      + Manage the DM Cluster
+        - [Cluster Operations](/v2.1/reference/tools/data-migration/cluster-operations.md)
+        - [Cluster Upgrade](/v2.1/reference/tools/data-migration/upgrade.md)
+      + Manage Replication Tasks
+        - [Manage Tasks](/v2.1/reference/tools/data-migration/manage-tasks.md)
+        - [Precheck Tasks](/v2.1/reference/tools/data-migration/precheck.md)
+        - [Query Task Status](/v2.1/reference/tools/data-migration/query-status.md)
       - [Monitor](/v2.1/reference/tools/data-migration/monitor.md)
-      - [Manage the Task](/v2.1/reference/tools/data-migration/manage-tasks.md)
-      - [Cluster Operations](/v2.1/reference/tools/data-migration/cluster-operations.md)
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/v2.1/how-to/migrate/from-aurora.md)
       - [Troubleshoot](/v2.1/how-to/troubleshoot/data-migration.md)
-      - [Upgrade](/v2.1/reference/tools/data-migration/upgrade.md)
       - [FAQ](/v2.1/faq/data-migration.md)
     + TiDB Lightning
       - [Overview](/v2.1/reference/tools/tidb-lightning/overview.md)
@@ -317,7 +317,15 @@
     - [Tune TiKV](/v2.1/reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](/v2.1/reference/tispark.md)
-  - [TiDB Binlog Cluster Overview](/v2.1/reference/tidb-binlog-overview.md)
+  + TiDB Binlog
+    - [Overview](/v2.1/reference/tools/tidb-binlog/overview.md)
+    - [Deploy](/v2.1/reference/tools/tidb-binlog/deploy.md)
+    - [Maintain](/v2.1/reference/tools/tidb-binlog/maintain.md)
+    - [Monitor](/v2.1/reference/tools/tidb-binlog/monitor.md)
+    - [Upgrade](/v2.1/reference/tools/tidb-binlog/upgrade.md)
+    - [Reparo](/v2.1/reference/tools/tidb-binlog/reparo.md)
+    - [Binlog Slave Client](/v2.1/reference/tools/tidb-binlog/binlog-slave-client.md)
+    - [FAQ](/v2.1/reference/tools/tidb-binlog/faq.md)
   - [Adopters](/v2.1/adopters.md)
 + FAQs
   - [TiDB FAQs](/v2.1/faq/tidb.md)
@@ -332,6 +340,7 @@
 - [Roadmap](/v2.1/roadmap.md)
 + [Releases](/v2.1/releases/rn.md)
   + v2.1
+    - [2.1.18](/v2.1/releases/2.1.18.md)
     - [2.1.17](/v2.1/releases/2.1.17.md)
     - [2.1.16](/v2.1/releases/2.1.16.md)
     - [2.1.15](/v2.1/releases/2.1.15.md)

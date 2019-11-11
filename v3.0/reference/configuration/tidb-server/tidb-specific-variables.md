@@ -338,6 +338,12 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: 512
 - This variable is used to set the number of retries when the DDL operation fails. When the number of retries exceeds the parameter value, the wrong DDL operation is canceled.
 
+### tidb_max_delta_schema_count <span class="version-mark">New in v3.0.5</span>
+
+- Scope: GLOBAL
+- Default value: 1024
+- This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
+
 ### tidb_force_priority
 
 - Scope: SESSION
@@ -395,7 +401,7 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL (in TiDB 3.0.4 or later)
 - Default value: ""
 - This variable is used to set the transaction mode, which by default is optimistic locking mode. TiDB 3.0 supports the pessimistic locking mode (experimental). After you set `tidb_txn_mode` to `pessimistic`, all explicit transactions (non-autocommit transactions) the session executes become pessimistic transactions.
-- Since TiDB 3.0.4, you can also use this variable to set the transaction mode globally. Once set to GLOBAL, only sessions created after are affected. For details, see [TiDB Pessimistic Transaction Mode](/v3.0/reference/transactions/transaction-pessimistic.md).
+- Since TiDB 3.0.4, you can also use this variable to set the transaction mode globally. Once set to GLOBAL, only sessions created after modification are affected. For details, see [TiDB Pessimistic Transaction Mode](/v3.0/reference/transactions/transaction-pessimistic.md).
 
 ### tidb_constraint_check_in_place
 
@@ -522,3 +528,9 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether the `auto_increment` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+
+### tidb_enable_stmt_summary <span class="version-mark">New in v3.0.4</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- This variable is used to enable or disable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `performance_schema.events_statement_summary_by_digest` table to identify and troubleshoot SQL performance issues.
