@@ -29,7 +29,7 @@ The operations in this tutorial requires several new and clean instances on the 
 
 ## Prepare full backup data
 
-Use [`mydumper`](/dev/reference/tools/mydumper.md) to export data from MySQL:
+Use [`mydumper`](/v3.1/reference/tools/mydumper.md) to export data from MySQL:
 
 {{< copyable "shell-regular" >}}
 
@@ -51,7 +51,7 @@ After executing this command, the full backup data is exported to the `/data/my_
 
 ### Step 1: Deploy TiDB cluster
 
-Before the data import, first you need to deploy a TiDB cluster (later than version v2.0.9). In this tutorial, TiDB v3.0.4 is used. For the deployment method, refer to [TiDB Introduction](/dev/overview.md).
+Before the data import, first you need to deploy a TiDB cluster (later than version v2.0.9). In this tutorial, TiDB v3.0.4 is used. For the deployment method, refer to [TiDB Introduction](/v3.1/overview.md).
 
 ### Step 2: Download TiDB Lightning installation package
 
@@ -117,10 +117,10 @@ Download the TiDB Lightning installation package from the following link:
 
 After the import is completed, TiDB Lightning exits automatically. If the import is successful, `tidb lightning exit` is displayed in the last line of the log.
 
-If any error occurs, refer to [TiDB Lightning Troubleshooting](/dev/how-to/troubleshoot/tidb-lightning.md)
+If any error occurs, refer to [TiDB Lightning Troubleshooting](/v3.1/how-to/troubleshoot/tidb-lightning.md)
 
 ## Summary
 
 This tutorial briefly introduces TiDB Lightning, and describes how to deploy a set of TiDB Lightning cluster and imports the full backup data to the TiDB cluster.
 
-For more details about the features and usage of TiDB Lightning, refer to [TiDB Lightning Overview](/dev/reference/tools/tidb-lightning/overview.md).
+For more details about the features and usage of TiDB Lightning, refer to [TiDB Lightning Overview](/v3.1/reference/tools/tidb-lightning/overview.md).

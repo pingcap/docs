@@ -51,7 +51,7 @@ After executing this command, the full backup data is exported to the `/data/my_
 
 ### Step 1: Deploy TiDB cluster
 
-Before the data import, first you need to deploy a TiDB cluster (later than version v2.0.9 ). In this tutorial, TiDB v3.0.4 is used. For the deployment method, refer to [TiDB Introduction](/v2.1/overview.md).
+Before the data import, first you need to deploy a TiDB cluster (later than version v2.0.9). In this tutorial, TiDB v3.0.4 is used. For the deployment method, refer to [TiDB Introduction](/v2.1/overview.md).
 
 ### Step 2: Download TiDB Lightning installation package
 
