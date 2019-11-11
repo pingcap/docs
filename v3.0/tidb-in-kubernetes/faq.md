@@ -35,7 +35,7 @@ Besides the operation of the Kubernetes cluster itself, there are the following 
 
 ## What is the recommended deployment topology when I use TiDB Operator to orchestrate a TiDB cluster on a public cloud?
 
-To achieve high availability and data security, it is recommended that you deploy the TiDB cluster in at least three availability zones in a production environment.
+To achieve high availability and data safety, it is recommended that you deploy the TiDB cluster in at least three availability zones in a production environment.
 
 In terms of the deployment topology relationship between the TiDB cluster and TiDB services, TiDB Operator supports the following three deployment modes. Each mode has its own merits and demerits, so your choice must be based on actual application needs.
 
@@ -47,7 +47,7 @@ In terms of the deployment topology relationship between the TiDB cluster and Ti
 
 TiDB Operator does not yet support automatically orchestrating TiSpark.
 
-If you want to add the TiSpark component to TiDB in Kubernetes, you must maintain Spark on your own in **the same** Kubernetes cluster. You must ensure that Spark can access the IPs and ports of PD and TiKV instances, and install the TiSpark plugin for Spark. [TiSpark](/v3.0/reference/tispark.md#deploy-tiSpark-on-the-existing-spark-cluster) offers a detailed guide for you to install the TiSpark plugin.
+If you want to add the TiSpark component to TiDB in Kubernetes, you must maintain Spark on your own in **the same** Kubernetes cluster. You must ensure that Spark can access the IPs and ports of PD and TiKV instances, and install the TiSpark plugin for Spark. [TiSpark](/v3.0/reference/tispark.md#deploy-tispark-on-the-existing-spark-cluster) offers a detailed guide for you to install the TiSpark plugin.
 
 To maintain Spark in Kubernetes, refer to [Spark on Kubernetes](http://spark.apache.org/docs/latest/running-on-kubernetes.html).
 
@@ -77,4 +77,22 @@ To check the configuration of the PD, TiKV, and TiDB components of the current c
 
     ```shell
     kubectl exec -it <tidb-pod-name> -c tidb -n <namespace> -- cat /etc/tidb/tidb.toml
+    ```
+
+## Why does TiDB Operator fail to schedule Pods when I deploy the TiDB clusters?
+
+Three possible reasons:
+
+* Insufficient resource or HA Policy causes the Pod stuck in the `Pending` state. Refer to [Troubleshoot TiDB in Kubernetes](/v3.0/tidb-in-kubernetes/troubleshoot.md#the-pod-is-in-the-pending-state) for more details.
+
+* `taint` is applied to some nodes, which prevents the Pod from being scheduled to these nodes unless the Pod has the matching `toleration`. Refer to [taint & toleration](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) for more details.
+
+* Scheduling conflict, which causes the Pod stuck in the `ContainerCreating` state. In such case, you can check if there is more than one TiDB Operator deployed in the Kubernetes cluster. Conflicts occur when custom schedulers in multiple TiDB Operators schedule the same Pod in different phases.
+
+    You can execute the following command to verify whether there is more than one TiDB Operator deployed. If more than one record is returned, delete the extra TiDB Operator to resolve the scheduling conflict.
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    kubectl get deployment --all-namespaces |grep tidb-scheduler
     ```

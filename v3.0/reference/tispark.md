@@ -37,7 +37,7 @@ This section describes the configuration of independent deployment of TiKV and T
 For independent deployment of TiKV and TiSpark, it is recommended to refer to the following recommendations:
 
 + Hardware configuration
-    - For general purposes, please refer to the TiDB and TiKV hardware configuration [recommendations](/v3.0/how-to/deploy/hardware-recommendations.md#deployment-recommendations).
+    - For general purposes, refer to the TiDB and TiKV hardware configuration [recommendations](/v3.0/how-to/deploy/hardware-recommendations.md#development-and-test-environments).
     - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G.
 
 ### Configuration of independent deployment of Spark and TiSpark
@@ -46,7 +46,7 @@ See the [Spark official website](https://spark.apache.org/docs/latest/hardware-p
 
 The following is a short overview of TiSpark configuration.
 
-It is recommended to allocate 32G memory for Spark. Please reserve at least 25% of the memory for the operating system and buffer cache.
+It is recommended to allocate 32G memory for Spark, and reserve at least 25% of the memory for the operating system and buffer cache.
 
 It is recommended to provision at least 8 to 16 cores on per machine for Spark. Initially, you can assign all the CPU cores to Spark.
 
@@ -75,7 +75,7 @@ For the hybrid deployment of TiKV and TiSpark, add TiSpark required resources to
 
 ## Deploy the TiSpark cluster
 
-Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases). Download your desired version of jar package and copy the content to the appropriate folder.
+Download TiSpark's jar package [in the TiSpark releases page](https://github.com/pingcap/tispark/releases). Download your desired version of jar package and copy the content to the appropriate folder.
 
 ### Deploy TiSpark on the existing Spark cluster
 
@@ -93,9 +93,9 @@ If you do not have a Spark cluster, we recommend using the standalone mode. To u
 
 You can download [Apache Spark](https://spark.apache.org/downloads.html)
 
-For the Standalone mode without Hadoop support, use Spark **2.3.x** and any version of Pre-build with Apache Hadoop 2.x with Hadoop dependencies. If you need to use the Hadoop cluster, please choose the corresponding Hadoop version. You can also choose to build from the [source code](https://spark.apache.org/docs/latest/building-spark.html) to match the previous version of the official Hadoop 2.x.
+For the Standalone mode without Hadoop support, use Spark **2.3.x** and any version of Pre-build with Apache Hadoop 2.x with Hadoop dependencies. If you need to use the Hadoop cluster, choose the corresponding Hadoop version. You can also choose to build from the [source code](https://spark.apache.org/docs/latest/building-spark.html) to match the previous version of the official Hadoop 2.x.
 
-Suppose you already have a Spark binaries, and the current PATH is `SPARKPATH`, please copy the TiSpark jar package to the `${SPARKPATH}/jars` directory.
+Suppose you already have a Spark binaries, and the current PATH is `SPARKPATH`, you can copy the TiSpark jar package to the `${SPARKPATH}/jars` directory.
 
 #### Start a Master node
 
@@ -234,7 +234,7 @@ TiSpark uses TiDB statistic information for the following items:
 1. Determining which index to ues in your query plan with the estimated lowest cost.
 2. Small table broadcasting, which enables efficient broadcast join.
 
-If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about how to analyze tables [here](/v3.0/reference/performance/statistics.md).
+If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about [how to analyze tables](/v3.0/reference/performance/statistics.md).
 
 Starting from TiSpark 2.0, statistics information is default to auto load.
 
@@ -263,3 +263,13 @@ A: You can ignore this warning. It occurs because Spark tries to load two nonexi
 Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned when executing SQL statements using TiSpark?
 
 A: This error occurs because the length of the data written exceeds the length of the data type defined by the database. You can check the field length and adjust it accordingly.
+
+Q: Does TiSpark read Hive metadata by default?
+
+A: By default, TiSpark searches for the Hive database by reading the Hive metadata in hive-site. If the search task fails, it searches for the TiDB database instead, by reading the TiDB metadata.
+
+If you do not need this default behavior, do not configure the Hive metadata in hive-site.
+
+Q: What can I do if `Error：java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdesc serialVersionUID ...` is returned when TiSpark is executing a Spark task?
+
+A: The error message shows a `serialVersionUID` conflict, which occurs because you have used `class` and `TiRegion` of different versions. Because `TiRegion` only exists in TiSpark, multiple versions of TiSpark packages might be used. To fix this error, you need to make sure the version of TiSpark dependency is consistent among all nodes in the cluster.

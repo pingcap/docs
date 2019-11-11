@@ -12,7 +12,10 @@
     - [How to Run TPC-C Test on TiDB](/v3.0/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/v3.0/benchmark/tpcc.md)
-    - [DM Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
+    - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/v3.0/benchmark/add-index-with-load.md)
+    - [TiDB in Kubernetes Sysbench Test](/v3.0/benchmark/sysbench-in-k8s.md)
+    - [DM 1.0-alpha Benchmark Report](/v3.0/benchmark/dm-v1-alpha.md)
+    - [DM 1.0-GA Benchmark Report](/v3.0/benchmark/dm-v1.0-ga.md)
 + Concepts
   - [Architecture](/v3.0/architecture.md)
   + Key Features
@@ -44,7 +47,7 @@
     - [Read Historical Data](/v3.0/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v3.0/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v3.0/how-to/get-started/data-migration.md)
-    - [TiSpark Quick Start Guide](/v3.0/how-to/deploy/tispark.md)
+    - [TiSpark Quick Start Guide](/v3.0/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v3.0/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -58,7 +61,6 @@
       - [Overview](/v3.0/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/v3.0/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/v3.0/how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](/v3.0/how-to/deploy/tidb-binlog.md)
   + Configure
     - [Time Zone](/v3.0/how-to/configure/time-zone.md)
     - [Memory Control](/v3.0/how-to/configure/memory-control.md)
@@ -70,7 +72,6 @@
   + Monitor
     - [Overview](/v3.0/how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](/v3.0/how-to/monitor/monitor-a-cluster.md)
-    - [TiDB Binlog Monitoring](/v3.0/how-to/monitor/tidb-binlog.md)
   + Migrate
     - [Overview](/v3.0/how-to/migrate/overview.md)
     + Migrate from MySQL
@@ -82,15 +83,13 @@
     - [Common Ansible Operations](/v3.0/how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](/v3.0/how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](/v3.0/how-to/maintain/identify-slow-queries.md)
-    - [TiDB Binlog Cluster Operations](/v3.0/how-to/maintain/tidb-binlog.md)
   + Scale
     - [Scale using Ansible](/v3.0/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.0/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade to TiDB 3.0](/v3.0/how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](/v3.0/how-to/upgrade/rolling-updates-with-ansible.md)
-    - [Upgrade TiDB Data Migration](/v3.0/how-to/upgrade/data-migration.md)
-    - [Upgrade TiDB Binlog Cluster](/v3.0/how-to/upgrade/tidb-binlog.md)
+    - [Upgrade TiDB Data Migration](/v3.0/reference/tools/data-migration/upgrade.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.0/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](/v3.0/how-to/troubleshoot/data-migration.md)
@@ -101,8 +100,11 @@
     - [Syncer](/v3.0/reference/tools/syncer.md)
     - [Loader](/v3.0/reference/tools/loader.md)
     + TiDB Data Migration
-      - [Overview](/v3.0/reference/tools/data-migration/overview.md)
-      - [Restrictions](/v3.0/reference/tools/data-migration/overview.md#usage-restrictions)
+      + Overview
+        - [DM Overview](/v3.0/reference/tools/data-migration/overview.md)
+        - [Restrictions](/v3.0/reference/tools/data-migration/overview.md#usage-restrictions)
+        - [DM-worker](/v3.0/reference/tools/data-migration/dm-worker-intro.md)
+        - [DM Relay Log](/v3.0/reference/tools/data-migration/dm-worker-intro.md)
       + Features
         - [Table Routing](/v3.0/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v3.0/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
@@ -120,12 +122,19 @@
       + Configure
         - [Overview](/v3.0/reference/tools/data-migration/configure/overview.md)
         - [Task Configuration](/v3.0/reference/tools/data-migration/configure/task-configuration-file.md)
+      + Manage the DM Cluster
+        - [Cluster Operations](/v3.0/reference/tools/data-migration/cluster-operations.md)
+        - [Cluster Upgrade](/v3.0/reference/tools/data-migration/upgrade.md)
+      + Manage Replication Tasks
+        - [Manage Tasks](/v3.0/reference/tools/data-migration/manage-tasks.md)
+        - [Precheck Tasks](/v3.0/reference/tools/data-migration/precheck.md)
+        - [Query Task Status](/v3.0/reference/tools/data-migration/query-status.md)
       - [Monitor](/v3.0/reference/tools/data-migration/monitor.md)
-      - [Manage the Task](/v3.0/reference/tools/data-migration/manage-tasks.md)
-      - [Cluster Operations](/v3.0/reference/tools/data-migration/cluster-operations.md)
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/v3.0/how-to/migrate/from-aurora.md)
-      - [Troubleshoot](/v3.0/how-to/troubleshoot/data-migration.md)
+      + Troubleshoot
+        - [Troubleshooting](/v3.0/how-to/troubleshoot/data-migration.md)
+        - [Error Description](/v3.0/reference/tools/data-migration/error-system.md)
       - [FAQ](/v3.0/faq/data-migration.md)
     + TiDB Lightning
       - [Overview](/v3.0/reference/tools/tidb-lightning/overview.md)
@@ -136,6 +145,7 @@
       - [Monitor](/v3.0/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.0/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v3.0/faq/tidb-lightning.md)
+    - [sync-diff-inspector](/v3.0/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/v3.0/reference/tools/pd-control.md)
     - [PD Recover](/v3.0/reference/tools/pd-recover.md)
     - [TiKV Control](/v3.0/reference/tools/tikv-control.md)
@@ -268,6 +278,7 @@
       - [`SHOW [FULL] PROCESSSLIST`](/v3.0/reference/sql/statements/show-processlist.md)
       - [`SHOW SCHEMAS`](/v3.0/reference/sql/statements/show-schemas.md)
       - [`SHOW [FULL] TABLES`](/v3.0/reference/sql/statements/show-tables.md)
+      - [`SHOW TABLE REGIONS`](/v3.0/reference/sql/statements/show-table-regions.md)
       - [`SHOW TABLE STATUS`](/v3.0/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/v3.0/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/v3.0/reference/sql/statements/show-warnings.md)
@@ -281,6 +292,7 @@
     - [Generated Columns](/v3.0/reference/sql/generated-columns.md)
     - [Partitioning](/v3.0/reference/sql/partitioning.md)
     - [Character Set](/v3.0/reference/sql/character-set.md)
+    - [SQL Mode](/v3.0/reference/sql/sql-mode.md)
     - [Views](/v3.0/reference/sql/views.md)
   + Configuration
     + tidb-server
@@ -290,8 +302,10 @@
       - [Configuration File](/v3.0/reference/configuration/tidb-server/configuration-file.md)
     + pd-server
       - [Configuration Flags](/v3.0/reference/configuration/pd-server/configuration.md)
+      - [Configuration File](/v3.0/reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](/v3.0/reference/configuration/tikv-server/configuration.md)
+      - [Configuration File](/v3.0/reference/configuration/tikv-server/configuration-file.md)
   + Key Monitoring Metrics
     - [Overview](/v3.0/reference/key-monitoring-metrics/overview-dashboard.md)
     - [TiDB](/v3.0/reference/key-monitoring-metrics/tidb-dashboard.md)
@@ -323,14 +337,24 @@
     - [Optimizer Hints](/v3.0/reference/performance/optimizer-hints.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/v3.0/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/v3.0/reference/performance/execution-plan-bind.md)
+    - [Statement Summary Table](/v3.0/reference/performance/statement-summary.md)
     - [Tune TiKV](/v3.0/reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](/v3.0/reference/tispark.md)
-  - [TiDB Binlog Cluster Overview](/v3.0/reference/tidb-binlog-overview.md)
+  + TiDB Binlog
+    - [Overview](/v3.0/reference/tools/tidb-binlog/overview.md)
+    - [Deploy](/v3.0/reference/tools/tidb-binlog/deploy.md)
+    - [Maintain](/v3.0/reference/tools/tidb-binlog/maintain.md)
+    - [Monitor](/v3.0/reference/tools/tidb-binlog/monitor.md)
+    - [Upgrade](/v3.0/reference/tools/tidb-binlog/upgrade.md)
+    - [Reparo](/v3.0/reference/tools/tidb-binlog/reparo.md)
+    - [Binlog Slave Client](/v3.0/reference/tools/tidb-binlog/binlog-slave-client.md)
+    - [FAQ](/v3.0/reference/tools/tidb-binlog/faq.md)
   - [Adopters](/v3.0/adopters.md)
 + TiDB in Kubernetes
   - [About TiDB Operator](/v3.0/tidb-in-kubernetes/tidb-operator-overview.md)
   + Get Started
+    - [kind](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
     - [DinD](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
     - [GKE](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
     - [Minikube](/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
@@ -361,7 +385,7 @@
     + Configuration
       - [TiDB Cluster](/v3.0/tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
       - [Backup](/v3.0/tidb-in-kubernetes/reference/configuration/backup.md)
-      - [Local PV](/v3.0/tidb-in-kubernetes/reference/configuration/local-pv.md)
+      - [PV](/v3.0/tidb-in-kubernetes/reference/configuration/storage-class.md)
       - [TiDB Drainer](/v3.0/tidb-in-kubernetes/reference/configuration/tidb-drainer.md)
     + Tools
       - [tkctl](/v3.0/tidb-in-kubernetes/reference/tools/tkctl.md)
@@ -382,6 +406,8 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.5](/v3.0/releases/3.0.5.md)
+    - [3.0.4](/v3.0/releases/3.0.4.md)
     - [3.0.3](/v3.0/releases/3.0.3.md)
     - [3.0.2](/v3.0/releases/3.0.2.md)
     - [3.0.1](/v3.0/releases/3.0.1.md)
@@ -392,6 +418,8 @@
     - [3.0.0-beta.1](/v3.0/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/v3.0/releases/3.0beta.md)
   + v2.1
+    - [2.1.18](/v3.0/releases/2.1.18.md)
+    - [2.1.17](/v3.0/releases/2.1.17.md)
     - [2.1.16](/v3.0/releases/2.1.16.md)
     - [2.1.15](/v3.0/releases/2.1.15.md)
     - [2.1.14](/v3.0/releases/2.1.14.md)

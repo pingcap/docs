@@ -1,19 +1,19 @@
 ---
-title: Configuration Flags
-summary: Learn some configuration flags for TiDB
+title: Configuration Options
+summary: Learn some configuration options for TiDB
 category: reference
-aliases: ['/docs/op-guide/configuration/','/docs/sql/server-command-option/','/docs/sql/tidb-server/']
+aliases: ['/docs/v3.0/reference/configuration/tidb-server/server-command-option/']
 ---
 
-# Configuration Flags
+# Configuration Options
 
-TiDB is configurable using command-line flags and environment variables. The default TiDB ports are 4000 for client requests and 10080 for status report.
+TiDB is configurable using command-line options and environment variables. The default TiDB ports are 4000 for client requests and 10080 for status report.
 
 ## `--advertise-address`
 
-- The IP address on which to advertise the apiserver to the TiDB server
+- The IP address through which to log into the TiDB server
 - Default: ""
-- This address must be reachable by the rest of the TiDB cluster and the user.
+- This address must be accessible by the rest of the TiDB cluster and the user.
 
 ## `--binlog-socket`
 
@@ -25,14 +25,19 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - The configuration file
 - Default: ""
-- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line flags, TiDB uses the configuration in the command line flags to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](/v3.0/reference/configuration/tidb-server/configuration-file.md).
+- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line options, TiDB uses the configuration in the command line options to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](/v3.0/reference/configuration/tidb-server/configuration-file.md).
+
+## `--cors`
+
+- Specifies the `Access-Control-Allow-Origin` value for Cross-Origin Request Sharing (CORS) request of the TiDB HTTP status service
+- Default: ""
 
 ## `--host`
 
 - The host address that the TiDB server monitors
 - Default: "0.0.0.0"
 - The TiDB server monitors this address.
-- The "0.0.0.0" monitors all network cards by default. If you have multiple network cards, specify the network card that provides service, such as 192.168.100.113.
+- The "0.0.0.0" address monitors all network cards by default. If you have multiple network cards, specify the network card that provides service, such as `192.168.100.113`.
 
 ## `-L`
 
@@ -44,24 +49,20 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - The log file
 - Default: ""
-- If this flag is not set, logs are output to "stderr". If this flag is set, logs are output to the corresponding file, which is automatically rotated in the early morning every day, and the previous file is renamed as a backup.
+- If this option is not set, logs are output to "stderr". If this option is set, logs are output to the corresponding file, which is automatically rotated in the early morning every day, and the previous file is renamed as a backup.
 
 ## `--log-slow-query`
 
 - The directory for the slow query log
 - Default: ""
-- If this flag is not set, logs are written to the file specified by `--log-file` by default.
+- If this option is not set, logs are output to the file specified by `--log-file` by default.
 
 ## `--metrics-addr`
 
 - The Prometheus Pushgateway address
 - Default: ""
 - Leaving it empty stops the Prometheus client from pushing.
-- The format is:
-
-    ```
-    --metrics-addr=192.168.100.115:9091
-    ```
+- The format is `--metrics-addr=192.168.100.115:9091`.
 
 ## `--metrics-interval`
 
@@ -93,37 +94,45 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - Timeout for the PROXY protocol header read
 - Default: 5 (seconds)
-- Generally use the default value and do not set its value to 0. The unit is second.
+
+    > **Note:**
+    >
+    > Do not set the value to `0`. Use the default value except for special situations.
 
 ## `--report-status`
 
-- To enable(true) or disable(false) the status report and pprof tool
-- Default: true
-- The value can be (true) or (false). (true) is to enable metrics and pprof. (false) is to disable metrics and pprof.
+- Enables (`true`) or disables (`false`) the status report and pprof tool
+- Default: `true`
+- When set to `true`, this parameter enables metrics and pprof. When set to `false`, this parameter disables metrics and pprof.
 
 ## `--run-ddl`
 
 - To see whether the `tidb-server` runs DDL statements, and set when the number of `tidb-server` is over two in the cluster
-- Default: true
+- Default: `true`
 - The value can be (true) or (false). (true) indicates the `tidb-server` runs DDL itself. (false) indicates the `tidb-server` does not run DDL itself.
 
 ## `--socket string`
 
 - The TiDB services use the unix socket file for external connections.
 - Default: ""
-- You can use “/tmp/tidb.sock” to open the unix socket file.
+- Use `/tmp/tidb.sock` to open the unix socket file.
 
 ## `--status`
 
 - The status report port for TiDB server
 - Default: "10080"
-- This is used to get server internal data. The data includes [Prometheus metrics](https://prometheus.io/) and [pprof](https://golang.org/pkg/net/http/pprof/).
-- Prometheus metrics can be got through <http://host:status_port/metrics>.
-- Pprof data can be got through <http://host:status_port/debug/pprof>.
+- This port is used to get server internal data. The data includes [Prometheus metrics](https://prometheus.io/) and [pprof](https://golang.org/pkg/net/http/pprof/).
+- Prometheus metrics can be accessed by `"http://host:status_port/metrics"`.
+- pprof data can be accessed by `"http://host:status_port/debug/pprof"`.
+
+## `--status-host`
+
+- The `HOST` used to monitor the status of TiDB service
+- Default: `0.0.0.0`
 
 ## `--store`
 
-- To specify the storage engine used by TiDB in the bottom layer
+- Specifies the storage engine used by TiDB in the bottom layer
 - Default: "mocktikv"
 - You can choose "mocktikv" or "tikv". ("mocktikv" is the local storage engine; "tikv" is a distributed storage engine)
 
@@ -131,10 +140,9 @@ TiDB is configurable using command-line flags and environment variables. The def
 
 - The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
 - Default: 1000
-- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to
-release tokens.
+- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to release tokens.
 
 ## `-V`
 
-- Output the version of TiDB
+- Outputs the version of TiDB
 - Default: ""

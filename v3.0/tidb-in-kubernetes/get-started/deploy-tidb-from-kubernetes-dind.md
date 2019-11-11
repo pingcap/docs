@@ -32,7 +32,7 @@ Before deployment, make sure the following requirements are satisfied:
     > - [Legacy Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_mac/) users must migrate to [Docker for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac) by uninstalling Legacy Docker Toolbox and installing Docker for Mac, because DinD cannot run on Docker Toolbox or Docker Machine.
     > - `kubeadm` validates the installed Docker version during installation. If you are using Docker later than 18.06, there will be warning messages in installation. The cluster might still be able to work normally, but it is recommended to use a Docker version between 17.03 and 18.06 for better compatibility. You can find older versions of docker [here](https://download.docker.com/).
 
-- [Helm Client](https://github.com/helm/helm/blob/master/docs/install.md#installing-the-helm-client): version >= 2.9.0 and < 3.0.0
+- [Helm Client](https://helm.sh/docs/using_helm/#installing-the-helm-client): version >= 2.9.0 and < 3.0.0
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl): 1.10 at least, 1.13 or later recommended
 
     > **Note:**
@@ -349,7 +349,7 @@ To access the TiDB cluster, use `kubectl port-forward` to expose services to the
 
         > **Note:**
         >
-        > If the proxy is set up sucessfully, it will print something like `Forwarding from 0.0.0.0:4000 -> 4000`. After testing, press `Ctrl + C` to stop the proxy and exit.
+        > If the proxy is set up successfully, it will print something like `Forwarding from 0.0.0.0:4000 -> 4000`. After testing, press `Ctrl + C` to stop the proxy and exit.
 
     2. To connect to TiDB using the MySQL client, open a new terminal tab or window and run the following command:
 
@@ -371,7 +371,7 @@ To access the TiDB cluster, use `kubectl port-forward` to expose services to the
 
         > **Note:**
         >
-        > If the proxy is set up sucessfully, it will print something like `Forwarding from 0.0.0.0:3000 -> 3000`. After testing, press `Ctrl + C` to stop the proxy and exit.
+        > If the proxy is set up successfully, it will print something like `Forwarding from 0.0.0.0:3000 -> 3000`. After testing, press `Ctrl + C` to stop the proxy and exit.
 
     2. Then, open your web browser at <http://localhost:3000> to access the Grafana monitoring interface.
 

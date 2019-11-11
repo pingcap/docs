@@ -12,7 +12,10 @@
     - [How to Run TPC-C Test on TiDB](/dev/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/dev/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/dev/benchmark/tpcc.md)
-    - [DM Benchmark Report](/dev/benchmark/dm-v1-alpha.md)
+    - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/dev/benchmark/add-index-with-load.md)
+    - [TiDB in Kubernetes Sysbench Test](/dev/benchmark/sysbench-in-k8s.md)
+    - [DM 1.0-alpha Benchmark Report](/dev/benchmark/dm-v1-alpha.md)
+    - [DM 1.0-GA Benchmark Report](/dev/benchmark/dm-v1.0-ga.md)
 + Concepts
   - [Architecture](/dev/architecture.md)
   + Key Features
@@ -45,7 +48,7 @@
     - [Read Historical Data](/dev/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/dev/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/dev/how-to/get-started/data-migration.md)
-    - [TiSpark Quick Start Guide](/dev/how-to/deploy/tispark.md)
+    - [TiSpark Quick Start Guide](/dev/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md)
     + From Binary Tarball
@@ -59,7 +62,6 @@
       - [Overview](/dev/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/dev/how-to/deploy/geographic-redundancy/location-awareness.md)
     - [Data Migration with Ansible](/dev/how-to/deploy/data-migration-with-ansible.md)
-    - [TiDB Binlog Cluster Deployment](/dev/how-to/deploy/tidb-binlog.md)
   + Configure
     - [Time Zone](/dev/how-to/configure/time-zone.md)
     - [Memory Control](/dev/how-to/configure/memory-control.md)
@@ -71,7 +73,6 @@
   + Monitor
     - [Overview](/dev/how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](/dev/how-to/monitor/monitor-a-cluster.md)
-    - [TiDB Binlog Monitoring](/dev/how-to/monitor/tidb-binlog.md)
   + Migrate
     - [Overview](/dev/how-to/migrate/overview.md)
     + Migrate from MySQL
@@ -83,15 +84,13 @@
     - [Common Ansible Operations](/dev/how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](/dev/how-to/maintain/backup-and-restore.md)
     - [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md)
-    - [TiDB Binlog Cluster Operations](/dev/how-to/maintain/tidb-binlog.md)
   + Scale
     - [Scale using Ansible](/dev/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/dev/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to Development Series](/dev/how-to/upgrade/from-previous-version.md)
+    - [Upgrade to TiDB 3.0](/dev/how-to/upgrade/from-previous-version.md)
     - [Rolling updates with Ansible](/dev/how-to/upgrade/rolling-updates-with-ansible.md)
-    - [Upgrade TiDB Data Migration](/dev/how-to/upgrade/data-migration.md)
-    - [Upgrade TiDB Binlog Cluster](/dev/how-to/upgrade/tidb-binlog.md)
+    - [Upgrade TiDB Data Migration](/dev/reference/tools/data-migration/upgrade.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/dev/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Data Migration](/dev/how-to/troubleshoot/data-migration.md)
@@ -102,8 +101,11 @@
     - [Syncer](/dev/reference/tools/syncer.md)
     - [Loader](/dev/reference/tools/loader.md)
     + TiDB Data Migration
-      - [Overview](/dev/reference/tools/data-migration/overview.md)
-      - [Restrictions](/dev/reference/tools/data-migration/overview.md#usage-restrictions)
+      + Overview
+        - [DM Overview](/dev/reference/tools/data-migration/overview.md)
+        - [Restrictions](/dev/reference/tools/data-migration/overview.md#usage-restrictions)
+        - [DM-worker](/dev/reference/tools/data-migration/dm-worker-intro.md)
+        - [DM Relay Log](/dev/reference/tools/data-migration/dm-worker-intro.md)
       + Features
         - [Table Routing](/dev/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/dev/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
@@ -121,22 +123,32 @@
       + Configure
         - [Overview](/dev/reference/tools/data-migration/configure/overview.md)
         - [Task Configuration](/dev/reference/tools/data-migration/configure/task-configuration-file.md)
+      + Manage the DM Cluster
+        - [Cluster Operations](/dev/reference/tools/data-migration/cluster-operations.md)
+        - [Cluster Upgrade](/dev/reference/tools/data-migration/upgrade.md)
+      + Manage Replication Tasks
+        - [Manage Tasks](/dev/reference/tools/data-migration/manage-tasks.md)
+        - [Precheck Tasks](/dev/reference/tools/data-migration/precheck.md)
+        - [Query Task Status](/dev/reference/tools/data-migration/query-status.md)
       - [Monitor](/dev/reference/tools/data-migration/monitor.md)
-      - [Manage the Task](/dev/reference/tools/data-migration/manage-tasks.md)
-      - [Cluster Operations](/dev/reference/tools/data-migration/cluster-operations.md)
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/dev/how-to/migrate/from-aurora.md)
-      - [Troubleshoot](/dev/how-to/troubleshoot/data-migration.md)
+      + Troubleshoot
+        - [Troubleshooting](/dev/how-to/troubleshoot/data-migration.md)
+        - [Error Description](/dev/reference/tools/data-migration/error-system.md)
       - [FAQ](/dev/faq/data-migration.md)
     + TiDB Lightning
       - [Overview](/dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/dev/reference/tools/tidb-lightning/deployment.md)
+      - [Configuration](/dev/reference/tools/tidb-lightning/config.md)
       - [Checkpoints](/dev/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/dev/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/dev/reference/tools/tidb-lightning/csv.md)
+      - [Web Interface](/dev/reference/tools/tidb-lightning/web.md)
       - [Monitor](/dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/dev/faq/tidb-lightning.md)
+    - [sync-diff-inspector](/dev/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/dev/reference/tools/pd-control.md)
     - [PD Recover](/dev/reference/tools/pd-recover.md)
     - [TiKV Control](/dev/reference/tools/tikv-control.md)
@@ -269,6 +281,7 @@
       - [`SHOW [FULL] PROCESSSLIST`](/dev/reference/sql/statements/show-processlist.md)
       - [`SHOW SCHEMAS`](/dev/reference/sql/statements/show-schemas.md)
       - [`SHOW [FULL] TABLES`](/dev/reference/sql/statements/show-tables.md)
+      - [`SHOW TABLE REGIONS`](/dev/reference/sql/statements/show-table-regions.md)
       - [`SHOW TABLE STATUS`](/dev/reference/sql/statements/show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/dev/reference/sql/statements/show-variables.md)
       - [`SHOW WARNINGS`](/dev/reference/sql/statements/show-warnings.md)
@@ -282,6 +295,7 @@
     - [Generated Columns](/dev/reference/sql/generated-columns.md)
     - [Partitioning](/dev/reference/sql/partitioning.md)
     - [Character Set](/dev/reference/sql/character-set.md)
+    - [SQL Mode](/dev/reference/sql/sql-mode.md)
     - [Views](/dev/reference/sql/views.md)
   + Configuration
     + tidb-server
@@ -291,8 +305,10 @@
       - [Configuration File](/dev/reference/configuration/tidb-server/configuration-file.md)
     + pd-server
       - [Configuration Flags](/dev/reference/configuration/pd-server/configuration.md)
+      - [Configuration File](/dev/reference/configuration/pd-server/configuration-file.md)
     + tikv-server
       - [Configuration Flags](/dev/reference/configuration/tikv-server/configuration.md)
+      - [Configuration File](/dev/reference/configuration/tikv-server/configuration-file.md)
   + Key Monitoring Metrics
     - [Overview](/dev/reference/key-monitoring-metrics/overview-dashboard.md)
     - [TiDB](/dev/reference/key-monitoring-metrics/tidb-dashboard.md)
@@ -324,14 +340,24 @@
     - [Optimizer Hints](/dev/reference/performance/optimizer-hints.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/dev/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/dev/reference/performance/execution-plan-bind.md)
+    - [Statement Summary Table](/dev/reference/performance/statement-summary.md)
     - [Tune TiKV](/dev/reference/performance/tune-tikv.md)
   - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
   - [TiSpark](/dev/reference/tispark.md)
-  - [TiDB Binlog Cluster Overview](/dev/reference/tidb-binlog-overview.md)
+  + TiDB Binlog
+    - [Overview](/dev/reference/tools/tidb-binlog/overview.md)
+    - [Deploy](/dev/reference/tools/tidb-binlog/deploy.md)
+    - [Maintain](/dev/reference/tools/tidb-binlog/maintain.md)
+    - [Monitor](/dev/reference/tools/tidb-binlog/monitor.md)
+    - [Upgrade](/dev/reference/tools/tidb-binlog/upgrade.md)
+    - [Reparo](/dev/reference/tools/tidb-binlog/reparo.md)
+    - [Binlog Slave Client](/dev/reference/tools/tidb-binlog/binlog-slave-client.md)
+    - [FAQ](/dev/reference/tools/tidb-binlog/faq.md)
   - [Adopters](/dev/adopters.md)
 + TiDB in Kubernetes
   - [About TiDB Operator](/dev/tidb-in-kubernetes/tidb-operator-overview.md)
   + Get Started
+    - [kind](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
     - [DinD](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
     - [GKE](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
     - [Minikube](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
@@ -362,7 +388,7 @@
     + Configuration
       - [TiDB Cluster](/dev/tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
       - [Backup](/dev/tidb-in-kubernetes/reference/configuration/backup.md)
-      - [Local PV](/dev/tidb-in-kubernetes/reference/configuration/local-pv.md)
+      - [PV](/dev/tidb-in-kubernetes/reference/configuration/storage-class.md)
       - [TiDB Drainer](/dev/tidb-in-kubernetes/reference/configuration/tidb-drainer.md)
     + Tools
       - [tkctl](/dev/tidb-in-kubernetes/reference/tools/tkctl.md)
@@ -383,6 +409,8 @@
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
   + v3.0
+    - [3.0.5](/dev/releases/3.0.5.md)
+    - [3.0.4](/dev/releases/3.0.4.md)
     - [3.0.3](/dev/releases/3.0.3.md)
     - [3.0.2](/dev/releases/3.0.2.md)
     - [3.0.1](/dev/releases/3.0.1.md)
@@ -393,6 +421,8 @@
     - [3.0.0-beta.1](/dev/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/dev/releases/3.0beta.md)
   + v2.1
+    - [2.1.18](/dev/releases/2.1.18.md)
+    - [2.1.17](/dev/releases/2.1.17.md)
     - [2.1.16](/dev/releases/2.1.16.md)
     - [2.1.15](/dev/releases/2.1.15.md)
     - [2.1.14](/dev/releases/2.1.14.md)

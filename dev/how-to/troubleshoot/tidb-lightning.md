@@ -43,6 +43,8 @@ Try the latest version! Maybe there is new speed improvement.
     * `AUTO_INCREMENT` columns need to be positive, and do not contain the value "0".
     * The UNIQUE and PRIMARY KEYs must have no duplicated entries.
 
+4. If TiDB Lightning has failed before and was not properly restarted, a checksum mismatch may happen due to data being out-of-sync.
+
 **Solutions**:
 
 1. Delete the corrupted data with via `tidb-lightning-ctl`, and restart Lightning to import the affected tables again.
@@ -53,9 +55,13 @@ Try the latest version! Maybe there is new speed improvement.
 
 2. Consider using an external database to store the checkpoints (change `[checkpoint] dsn`) to reduce the target database's load.
 
-## Checkpoint for … has invalid status: 18
+3. If TiDB Lightning was improperly restarted, see also the "[How to properly restart TiDB Lightning](/dev/faq/tidb-lightning.md#how-to-properly-restart-tidb-lightning)" section in the FAQ.
+
+## Checkpoint for … has invalid status: (error code)
 
 **Cause**: [Checkpoint](/dev/reference/tools/tidb-lightning/checkpoints.md) is enabled, and Lightning or Importer has previously abnormally exited. To prevent accidental data corruption, Lightning will not start until the error is addressed.
+
+The error code is an integer less than 25, with possible values of 0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later step where the exit occurs.
 
 **Solutions**:
 
@@ -67,9 +73,9 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 See the [Checkpoints control](/dev/reference/tools/tidb-lightning/checkpoints.md#checkpoints-control) section for other options.
 
-## ResourceTemporarilyUnavailable("Too many open engines …: 8")
+## ResourceTemporarilyUnavailable("Too many open engines …: …")
 
-**Cause**: The number of concurrent engine files exceeds the limit imposed by `tikv-importer`. This could be caused by misconfiguration. Additionally, if `tidb-lightning` exited abnormally, an engine file might be left at a dangling open state, which could cause this error as well.
+**Cause**: The number of concurrent engine files exceeds the limit specified by `tikv-importer`. This could be caused by misconfiguration. Additionally, if `tidb-lightning` exited abnormally, an engine file might be left at a dangling open state, which could cause this error as well.
 
 **Solutions**:
 
@@ -97,7 +103,7 @@ See the [Checkpoints control](/dev/reference/tools/tidb-lightning/checkpoints.md
 
 3. Set `[mydumper] character-set = "binary"` to skip the check. Note that this might introduce mojibake into the target database.
 
-## [sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'
+## [sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'
 
 **Cause**: A table contains a column with the `timestamp` type, but the time value itself does not exist. This is either because of DST changes or the time value has exceeded the supported range (1970 Jan 1st to 2038 Jan 19th).
 
@@ -119,3 +125,7 @@ See the [Checkpoints control](/dev/reference/tools/tidb-lightning/checkpoints.md
     ```
 
 2. When exporting data using Mydumper, make sure to include the `--skip-tz-utc` flag.
+
+3. Ensure the entire cluster is using the same and latest version of `tzdata` (version 2018i or above).
+
+    On CentOS, run `yum info tzdata` to check the installed version and whether there is an update. Run `yum upgrade tzdata` to upgrade the package.

@@ -61,7 +61,7 @@ Currently, when you run the `ANALYZE` statement, the task is divided into multip
 
 #### `tidb_distsql_scan_concurrency`
 
-When you analyze regular columns, you can use the `tidb_distsql_scan_concurrency` parameter to control the number of Region to be read at one time. The default value is `10`.
+When you analyze regular columns, you can use the `tidb_distsql_scan_concurrency` parameter to control the number of Region to be read at one time. The default value is `15`.
 
 #### `tidb_index_serial_scan_concurrency`
 
@@ -92,6 +92,10 @@ Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 | `update_time` | the time of the update |
 | `modify_count` | the number of modified rows |
 | `row_count` | the total number of rows |
+
+> **Note:**
+>
+> When TiDB automatically updates the total number of rows and the number of modified rows according to DML statements, `update_time` is also updated. Therefore, `update_time` does not necessarily indicate the last time when the `ANALYZE` statement is executed.
 
 ### Metadata of columns
 

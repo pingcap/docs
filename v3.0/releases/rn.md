@@ -8,6 +8,8 @@ aliases: ['/docs/releases/rn/']
 
 ## 3.0
 
+- [3.0.5](/v3.0/releases/3.0.5.md)
+- [3.0.4](/v3.0/releases/3.0.4.md)
 - [3.0.3](/v3.0/releases/3.0.3.md)
 - [3.0.2](/v3.0/releases/3.0.2.md)
 - [3.0.1](/v3.0/releases/3.0.1.md)
@@ -20,6 +22,8 @@ aliases: ['/docs/releases/rn/']
 
 ## 2.1
 
+- [2.1.18](/v3.0/releases/2.1.18.md)
+- [2.1.17](/v3.0/releases/2.1.17.md)
 - [2.1.16](/v3.0/releases/2.1.16.md)
 - [2.1.15](/v3.0/releases/2.1.15.md)
 - [2.1.14](/v3.0/releases/2.1.14.md)

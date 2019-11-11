@@ -25,7 +25,7 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + `FOREIGN KEY` constraints
 + `FULLTEXT` functions and indexes
 + `SPATIAL` functions and indexes
-+ Character sets other than `utf8mb4` and `utf8`
++ Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + Collations other than `BINARY`
 + Add primary key
 + Drop primary key
@@ -67,9 +67,13 @@ The operations are executed as follows:
 1. The client issues the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
 2. The client issues the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
+Also, starting with TiDB 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `auto_increment` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+
 ### Performance schema
 
-Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/v3.0/how-to/monitor/monitor-a-cluster.md#use-prometheus-and-grafana) for performance metrics instead.
+Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/v3.0/how-to/monitor/monitor-a-cluster.md) for performance metrics instead.
+
+TiDB supports the `events_statements_summary_by_digest` table from TiDB 3.0.4. For more information, see [Statement Summary Table](/v3.0/reference/performance/statement-summary.md).
 
 ### Query Execution Plan
 
@@ -77,7 +81,7 @@ The output format of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is g
 
 ### Built-in functions
 
-TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#FunctionCallKeyword) for the supported functions.
+TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyword) for the supported functions.
 
 ### DDL
 
@@ -125,7 +129,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-Architecturally, TiDB does support a similar storage engine abstraction to MySQL, and user tables are created in the engine specified by the [`--store`](/v3.0/reference/configuration/tidb-server/configuration.md#store) option used when you start tidb-server (typically `tikv`).
+Architecturally, TiDB does support a similar storage engine abstraction to MySQL, and user tables are created in the engine specified by the [`--store`](/v3.0/reference/configuration/tidb-server/configuration.md#--store) option used when you start tidb-server (typically `tikv`).
 
 ### SQL modes
 

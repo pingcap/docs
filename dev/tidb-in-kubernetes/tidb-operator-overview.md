@@ -8,6 +8,10 @@ category: reference
 
 TiDB Operator is an automatic operation system for TiDB clusters in Kubernetes. It provides a full management life-cycle for TiDB including deployment, upgrades, scaling, backup, fail-over, and configuration changes. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud.
 
+> **Note:**
+>
+> You can only deploy one TiDB Operator in a Kubernetes cluster.
+
 ## Architecture of TiDB Operator
 
 ![TiDB Operator Overview](/media/tidb-operator-overview.png)
@@ -15,7 +19,7 @@ TiDB Operator is an automatic operation system for TiDB clusters in Kubernetes. 
 `TidbCluster` is a custom resource defined by CRD (`CustomResourceDefinition`) and is used to describe the desired state of the TiDB cluster. The following components are responsible for the orchestration and scheduling logic in a TiDB cluster:
 
 * `tidb-controller-manager` is a set of custom controllers in Kubernetes. These controllers constantly compare the desired state recorded in the `TidbCluster` object with the actual state of the TiDB cluster. They adjust the resources in Kubernetes to drive the TiDB cluster to meet the desired state;
-* `tidb-scheduler` is a Kubernetes scheduler extension that injects the TiDB specific scheduling policies to the Kubernetes scheduler;
+* `tidb-scheduler` is a Kubernetes scheduler extension that injects the TiDB specific scheduling policies to the Kubernetes scheduler.
 
 In addition, TiDB Operator also provides `tkctl`, the command-line interface for TiDB clusters in Kubernetes. It is used for cluster operations and troubleshooting cluster issues.
 
@@ -36,6 +40,7 @@ TiDB Operator provides several ways to deploy TiDB clusters in Kubernetes:
 
 + For test environment:
 
+    - [kind](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md): Deploy TiDB clusters in local Kubernetes using kind
     - [DinD](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md): Deploy TiDB clusters in a local DinD environment using TiDB Operator
     - [Minikube](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md): Deploy TiDB clusters in a local Minikube environment using TiDB Operator
     - [GKE](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md): Deploy TiDB clusters on GKE using TiDB Operator
@@ -51,7 +56,7 @@ TiDB Operator provides several ways to deploy TiDB clusters in Kubernetes:
 
         First install TiDB Operator in a Kubernetes cluster according to [Deploy TiDB Operator in Kubernetes](/dev/tidb-in-kubernetes/deploy/tidb-operator.md), then deploy your TiDB clusters according to [Deploy TiDB in General Kubernetes](/dev/tidb-in-kubernetes/deploy/general-kubernetes.md).
 
-        You also need to adjust the configuration of the Kubernetes cluster based on [Prerequisites for TiDB in Kubernetes](/dev/tidb-in-kubernetes/deploy/prerequisites.md) and configure the local PV for your Kubernetes cluster to achieve low latency of local storage for TiKV according to [Local PV Configuration](/dev/tidb-in-kubernetes/reference/configuration/local-pv.md).
+        You also need to adjust the configuration of the Kubernetes cluster based on [Prerequisites for TiDB in Kubernetes](/dev/tidb-in-kubernetes/deploy/prerequisites.md) and configure the local PV for your Kubernetes cluster to achieve low latency of local storage for TiKV according to [Local PV Configuration](/dev/tidb-in-kubernetes/reference/configuration/storage-class.md#local-pv-configuration).
 
 Before deploying TiDB on any of the above two environments, you can always refer to [TiDB Cluster Configuration Document](/dev/tidb-in-kubernetes/reference/configuration/tidb-cluster.md) to customize TiDB configurations.
 

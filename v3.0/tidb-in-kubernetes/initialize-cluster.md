@@ -17,7 +17,17 @@ This document describes how to initialize a TiDB cluster in Kubernetes (K8s), sp
 
 When a cluster is created, a default account `root` is created with no password. This might cause security issues. You can set a password for the `root` account in the following steps:
 
-1. Create a `secret` object.
+1. Create the `Namespace`.
+
+    Before creating the cluster, create the [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/):
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    kubectl create namespace <namespace>
+    ```
+
+2. Create a `secret` object.
 
     Before creating a cluster, create a [`secret`](https://kubernetes.io/docs/concepts/configuration/secret/) to specify the password for `root`:
 
@@ -35,9 +45,19 @@ When a cluster is created, a default account `root` is created with no password.
     kubectl create secret generic tidb-secret --from-literal=root=<root-password> --from-literal=developer=<developer-passowrd> --namespace=<namespace>
     ```
 
-    This command creates users `root` and `developer` with their passwords, which are saved in the `tidb-secret` object.
+    This command creates users `root` and `developer` with their passwords, which are saved in the `tidb-secret` object. By default, the regular user `developer` is only granted with `USAGE` privilege; other privileges are set in the configuration item `tidb.initSql`.
 
-2. Deploy the cluster.
+3. Set a host that has access to TiDB.
+
+    Before deploying the cluster, you can set a host that has access to TiDB by using the `tidb.permitHost` configuration item. If it is not set, all hosts have access to TiDB. For details, refer to [Mysql GRANT host name](https://dev.mysql.com/doc/refman/5.7/en/grant.html).
+
+    ```
+    tidb:
+      passwordSecretName: tidb-secret
+      permitHost: <mysql-client-host-name>
+    ```
+
+4. Deploy the cluster.
 
     After creating the `secret`, deploy the cluster using the following command:
 
