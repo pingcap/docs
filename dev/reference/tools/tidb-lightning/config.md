@@ -90,7 +90,7 @@ driver = "file"
 
 [tikv-importer]
 # Delivery back end, can be "importer" or "tidb".
-#backend = "importer"
+# backend = "importer"
 # The listening address of tikv-importer when back end is "importer". Change it to the actual address.
 addr = "172.16.31.10:8287"
 # Action to do when trying to insert a duplicated entry in the "tidb" back end.

@@ -8,9 +8,9 @@ category: reference
 
 TiDB Lightning supports two back ends: "Importer" and "TiDB". It determines how `tidb-lightning` delivers data into the target cluster.
 
-The "Importer" back end (default) requires `tidb-lightning` to first encode the SQL/CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
+The "Importer" back end (default) requires `tidb-lightning` to first encode the SQL or CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
 
-The "TiDB" back end requires `tidb-lightning` to encode these data into SQL `INSERT` statements, and have these executed directly on the TiDB node.
+The "TiDB" back end requires `tidb-lightning` to encode these data into SQL `INSERT` statements, and has these statements executed directly on the TiDB node.
 
 | Back end | "Importer" | "TiDB" |
 |:---|:---|:---|
@@ -21,10 +21,10 @@ The "TiDB" back end requires `tidb-lightning` to encode these data into SQL `INS
 
 ## Deployment for "TiDB" back end
 
-When using the "TiDB" back end, you no longer need `tikv-importer`. Compared with the [standard deployment procedure](/dev/reference/tools/tidb-lightning/deployment.md),
+When using the "TiDB" back end, you no longer need `tikv-importer`. Compared with the [standard deployment procedure](/dev/reference/tools/tidb-lightning/deployment.md), the "TiDB" back end deployment has the following two differences:
 
-* steps involving `tikv-importer` can all be skipped
-* the configuration must be changed to indicate "TiDB" back end is used
+* Steps involving `tikv-importer` can all be skipped.
+* The configuration must be changed to indicate the "TiDB" back end is used.
 
 ### Ansible deployment
 
@@ -74,7 +74,7 @@ or supplying the `--backend tidb` arguments when executing `tidb-lightning`.
 
 ## Conflict resolution
 
-The "TiDB" back end supports importing to an already-populated table. However, the new data may cause unique key conflict with the old data. You can control how to resolve the conflict by this task configuration
+The "TiDB" back end supports importing to an already-populated table. However, the new data might cause a unique key conflict with the old data. You can control how to resolve the conflict by using this task configuration.
 
 ```toml
 [tikv-importer]
@@ -90,7 +90,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 
 ## Migrating from Loader to TiDB Lightning "TiDB" back end
 
-TiDB Lightning using "TiDB" back end can completely replace functions of [Loader](/dev/reference/tools/loader.md). The following lists how to translate Loader configurations into [TiDB Lightning configurations](/dev/reference/tools/tidb-lightning/config.md).
+TiDB Lightning using the "TiDB" back end can completely replace functions of [Loader](/dev/reference/tools/loader.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/dev/reference/tools/tidb-lightning/config.md).
 
 <table>
 <thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thread>
