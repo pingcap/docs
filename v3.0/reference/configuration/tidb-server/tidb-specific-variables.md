@@ -342,7 +342,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: GLOBAL
 - Default value: 1024
-- This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100-16384. This variable is supported in TiDB 2.1.18 and later versions.
+- This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
 
 ### tidb_force_priority
 
