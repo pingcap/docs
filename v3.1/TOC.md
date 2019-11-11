@@ -151,6 +151,8 @@
     - [TiKV Control](/v3.1/reference/tools/tikv-control.md)
     - [TiDB Control](/v3.1/reference/tools/tidb-control.md)
     - [Download](/v3.1/reference/tools/download.md)
+  + Best Practices
+    - [Best Practice for High Concurrent Write Scenario](/v3.1/reference/best-practices/high-concurrency.md)
   - [MySQL Compatibility](/v3.1/reference/mysql-compatibility.md)
   + SQL
     + SQL Language Structure
