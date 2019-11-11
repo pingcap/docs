@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning "TiDB" Back End
-summary: Choose how to write data into the TiDB cluster
+summary: Choose how to write data into the TiDB cluster.
 category: reference
 ---
 
@@ -8,12 +8,12 @@ category: reference
 
 TiDB Lightning supports two back ends: "Importer" and "TiDB". It determines how `tidb-lightning` delivers data into the target cluster.
 
-The "Importer" back end (default) requires `tidb-lightning` to first encode the SQL/CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
+The "Importer" back end (default) requires `tidb-lightning` to first encode the SQL or CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
 
-The "TiDB" back end requires `tidb-lightning` to encode these data into SQL `INSERT` statements, and have these executed directly on the TiDB node.
+The "TiDB" back end requires `tidb-lightning` to encode these data into SQL `INSERT` statements, and has these statements executed directly on the TiDB node.
 
 | Back end | "Importer" | "TiDB" |
-|---|---|---|
+|:---|:---|:---|
 | Speed | Fast (~300 GB/hr) | Slow (~50 GB/hr) |
 | Resource usage | High | Low |
 | ACID respected while importing | No | Yes |
@@ -21,10 +21,10 @@ The "TiDB" back end requires `tidb-lightning` to encode these data into SQL `INS
 
 ## Deployment for "TiDB" back end
 
-When using the "TiDB" back end, you no longer need `tikv-importer`. Compared with the [standard deployment procedure](/v3.0/reference/tools/tidb-lightning/deployment.md),
+When using the "TiDB" back end, you no longer need `tikv-importer`. Compared with the [standard deployment procedure](/v3.0/reference/tools/tidb-lightning/deployment.md), the "TiDB" back end deployment has the following two differences:
 
-* steps involving `tikv-importer` can all be skipped
-* the configuration must be changed to indicate "TiDB" back end is used
+* Steps involving `tikv-importer` can all be skipped.
+* The configuration must be changed to indicate the "TiDB" back end is used.
 
 ### Ansible deployment
 
@@ -42,9 +42,7 @@ When using the "TiDB" back end, you no longer need `tikv-importer`. Compared wit
     ...
     ```
 
-2. The `tikv_importer_port` setting in `group_vars/all.yml` is ignored, and the file `group_vars/importer_server.yml` does not need to be changed.
-
-    But you need to edit `conf/tidb-lightning.yml` and change the `backend` setting to `tidb`.
+2. The `tikv_importer_port` setting in `group_vars/all.yml` is ignored, and the file `group_vars/importer_server.yml` does not need to be changed. But you need to edit `conf/tidb-lightning.yml` and change the `backend` setting to `tidb`.
 
     ```yaml
     ...
@@ -61,7 +59,7 @@ When using the "TiDB" back end, you no longer need `tikv-importer`. Compared wit
 
 ### Manual deployment
 
-There is no need to download and configure `tikv-importer`.
+You do not need to download and configure `tikv-importer`.
 
 Before running `tidb-lightning`, add the following lines into the configuration file:
 
@@ -74,7 +72,7 @@ or supplying the `--backend tidb` arguments when executing `tidb-lightning`.
 
 ## Conflict resolution
 
-The "TiDB" back end supports importing to an already-populated table. However, the new data may cause unique key conflict with the old data. You can control how to resolve the conflict by this task configuration
+The "TiDB" back end supports importing to an already-populated table. However, the new data might cause a unique key conflict with the old data. You can control how to resolve the conflict by using this task configuration.
 
 ```toml
 [tikv-importer]
@@ -83,14 +81,14 @@ on-duplicate = "replace" # or "error" or "ignore"
 ```
 
 | Setting | Behavior on conflict | Equivalent SQL statement |
-|---|---|---|
+|:---|:---|:---|
 | replace | New entries replace old ones | `REPLACE INTO ...` |
 | ignore | Keep old entries and ignore new ones | `INSERT IGNORE INTO ...` |
 | error | Abort import | `INSERT INTO ...` |
 
 ## Migrating from Loader to TiDB Lightning "TiDB" back end
 
-TiDB Lightning using "TiDB" back end can completely replace functions of [Loader](/v3.0/reference/tools/loader.md). The following lists how to translate Loader configurations into TiDB Lightning configurations.
+TiDB Lightning using the "TiDB" back end can completely replace functions of [Loader](/v3.0/reference/tools/loader.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/v3.0/reference/tools/tidb-lightning/deployment.md#step-4-start-tidb-lightning).
 
 <table>
 <thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thread>

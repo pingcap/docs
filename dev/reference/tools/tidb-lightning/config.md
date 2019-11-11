@@ -295,7 +295,7 @@ min-available-ratio = 0.05
 | -V | Prints program version | |
 | -d *directory* | Directory of the data dump to read from | `mydumper.data-source-dir` |
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
-| --backend *backend* | [Delivery back end](/dev/reference/tools/tidb-lightning/tidb_backend.md) (`importer` or `tidb`) | `tikv-importer.backend` |
+| --backend *backend* | [Delivery back end](/dev/reference/tools/tidb-lightning/tidb-backend.md) (`importer` or `tidb`) | `tikv-importer.backend` |
 | --log-file *file* | Log file path | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
 | --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |

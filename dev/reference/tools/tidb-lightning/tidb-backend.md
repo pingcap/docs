@@ -42,9 +42,7 @@ When using the "TiDB" back end, you no longer need `tikv-importer`. Compared wit
     ...
     ```
 
-2. The `tikv_importer_port` setting in `group_vars/all.yml` is ignored, and the file `group_vars/importer_server.yml` does not need to be changed.
-
-    But you need to edit `conf/tidb-lightning.yml` and change the `backend` setting to `tidb`.
+2. The `tikv_importer_port` setting in `group_vars/all.yml` is ignored, and the file `group_vars/importer_server.yml` does not need to be changed. But you need to edit `conf/tidb-lightning.yml` and change the `backend` setting to `tidb`.
 
     ```yaml
     ...
