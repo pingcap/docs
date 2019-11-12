@@ -125,10 +125,10 @@
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/v2.1/how-to/migrate/from-aurora.md)
       + Troubleshoot
-        - [DM Troubleshooting](/dev/reference/tools/data-migration/troubleshoot/dm.md)
-        - [Error Description](/dev/reference/tools/data-migration/troubleshoot/error-system.md)
-        - [Error Handling](/dev/reference/tools/data-migration/troubleshoot/error-handling.md)
-      - [FAQ](/dev/reference/tools/data-migration/faq.md)
+        - [DM Troubleshooting](/v2.1/reference/tools/data-migration/troubleshoot/dm.md)
+        - [Error Description](/v2.1/reference/tools/data-migration/troubleshoot/error-system.md)
+        - [Error Handling](/v2.1/reference/tools/data-migration/troubleshoot/error-handling.md)
+      - [FAQ](/v2.1/reference/tools/data-migration/faq.md)
     + TiDB Lightning
       - [Overview](/v2.1/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v2.1/reference/tools/tidb-lightning/deployment.md)
