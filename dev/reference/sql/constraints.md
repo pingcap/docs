@@ -16,7 +16,7 @@ TiDB supports the same basic constraints supported in MySQL with the following e
 
 ## Foreign Key
 
-TiDB currently supports `FOREIGN KEY` constraints. For example:
+TiDB currently only supports `FOREIGN KEY` creation in DDL commands. For example:
 
 ```sql
 CREATE TABLE users (
