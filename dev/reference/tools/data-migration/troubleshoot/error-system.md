@@ -2,6 +2,7 @@
 title: Data Migration Error Message Description
 summary: Learn the system and description of error messages in Data Migration.
 category: reference
+aliases: ['/docs/dev/reference/tools/data-migration/error-system/']
 ---
 
 # Data Migration Error Message Description
