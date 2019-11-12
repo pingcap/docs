@@ -7,13 +7,13 @@ aliases: ['/docs/tools/dm/troubleshooting/','/docs/v3.0/how-to/troubleshoot/data
 
 # Data Migration Troubleshooting
 
-This document summarizes some commonly encountered issues when you use Data Migration, and provides the solutions.
+This document describes how to troubleshoot TiDB Data Migration to find the problem.
 
-If you encounter errors while running Data Migration, try the following solution:
+If you encounter errors while running Data Migration, take the following steps to troubleshoot:
 
 1. Execute the `query-status` command to view the task running status and related error output.
 
-2. Check the log content related to the error you encountered. The log files are on the DM-master and DM-worker deployment nodes. To ger key information about errors, see [common errors](/v3.0/reference/tools/data-migration/troubleshoot/error-system.md). Then check [error handling](/v3.0/reference/tools/data-migration/troubleshoot/error-handling.md) to find the corresponding solution.
+2. Check the log content related to the error you encountered. The log files are on the DM-master and DM-worker deployment nodes. To get key information about errors, see [common errors](/v3.0/reference/tools/data-migration/troubleshoot/error-system.md). Then check [error handling](/v3.0/reference/tools/data-migration/troubleshoot/error-handling.md) to find the corresponding solution.
 
 3. If the error you encountered is not involved yet, and you cannot solve the problem yourself by checking the log or monitoring metrics, you can contact the corresponding sales support staff.
 
