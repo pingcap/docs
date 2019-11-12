@@ -149,7 +149,7 @@ If you have previously customized the configuration file of TiDB cluster compone
 
     > **Note:**
     >
-    > For the cluster topology of multiple TiKV instances (processes) on a single machine, you need to modify the three parameters above.
+    > If you upgrade from TiDB 2.0 with a cluster topology of multiple TiKV instances (processes) on a single machine, modify the three parameters above.
 
     Recommended configuration: the number of TiKV instances \* the parameter value = the number of CPU cores \* 0.8.
 

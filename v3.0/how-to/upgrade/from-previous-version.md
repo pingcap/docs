@@ -143,7 +143,7 @@ If you have previously customized the configuration file of TiDB cluster compone
 
     > **Note:**
     >
-    > For the cluster topology of multiple TiKV instances (processes) on a single machine, you need to modify the three parameters above.
+    > If you upgrade from TiDB 2.0 with a cluster topology of multiple TiKV instances (processes) on a single machine, modify the three parameters above.
 
     Recommended configuration: the number of TiKV instances \* the parameter value = the number of CPU cores \* 0.8.
 
@@ -160,6 +160,22 @@ If you have previously customized the configuration file of TiDB cluster compone
     > For the cluster topology of multiple TiKV instances (processes) on a single machine, you need to modify the `capacity` parameter.
 
     Recommended configuration: `capacity` = MEM_TOTAL \* 0.5 / the number of TiKV instances.
+
+- In the TiKV configuration, for the multiple instances on a single machine scenario, you also need to configure the `tikv_status_port` parameter.
+
+    ```
+        [tikv_servers]
+        TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv1"
+        TiKV1-2 ansible_host=172.16.10.4 deploy_dir=/data2/deploy tikv_port=20172 tikv_status_port=20182 labels="host=tikv1"
+        TiKV2-1 ansible_host=172.16.10.5 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv2"
+        TiKV2-2 ansible_host=172.16.10.5 deploy_dir=/data2/deploy tikv_port=20172 tikv_status_port=20182 labels="host=tikv2"
+        TiKV3-1 ansible_host=172.16.10.6 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv3"
+        TiKV3-2 ansible_host=172.16.10.6 deploy_dir=/data2/deploy tikv_port=20172 tikv_status_port=20182 labels="host=tikv3"
+    ```
+
+    > **Note:**
+    >
+    > If you upgrade to TiDB 3.0 with a cluster topology of multiple TiKV instances (processes) on a single machine, configure the `tikv_status_port` parameter. Before configuring the parameter, check for port conflicts.
 
 ## Step 4: Download TiDB 3.0 binary to the Control Machine
 
