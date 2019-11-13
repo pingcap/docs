@@ -30,8 +30,8 @@ Go Version: go version go1.12 linux/amd64
 
 ### Main changes
 
-- Support automatically generating some configuration items to spare manual effort
-- Support automatically generating the parameters of Mydumper database and tables to spare manual effort
+- Support automatically generating some configuration items for DM-worker to reduce manual configuration cost
+- Support automatically generating the parameters of Mydumper database and tables to reduce manual configuration cost
 - Optimize the default output of `query-status` to highlight important information
 - Directly manage the DB connection to the downstream instead of using the built-in connection pool to optimize the handling of and retry for SQL errors
 - Fix the bug that the failure to execute DML statements might cause panic when the DM-worker process is started
@@ -48,9 +48,7 @@ Go Version: go version go1.12 linux/amd64
 
 > **Note:**
 >
-> When you upgrade DM to the 1.0.2 version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded.
->
-> For this particular upgrade operation, it is not supported to just upgrade a part of the components. Otherwise, an error might occur.
+> When you upgrade DM to the 1.0.2 version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded. Do not upgrade only a part of the components. Otherwise, an error might occur.
 
 ## Upgrade to v1.0.1
 
@@ -78,9 +76,7 @@ Go Version: go version go1.12 linux/amd64
 
 > **Note:**
 >
-> When you upgrade DM to the 1.0.1 version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded.
->
-> For this particular upgrade operation, it is not supported to just upgrade a part of the components. Otherwise, an error might occur.
+>  When you upgrade DM to the 1.0.1 version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded. Do not upgrade only a part of the components. Otherwise, an error might occur.
 
 ## Upgrade to v1.0.0-10-geb2889c9 (1.0 GA)
 
@@ -109,9 +105,7 @@ Go Version: go version go1.12 linux/amd64
 
 > **Note:**
 >
-> When you upgrade DM to the 1.0 GA version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded.
->
-> For this particular upgrade operation, it is not supported to just upgrade a part of the components. Otherwise, an error might occur.
+> When you upgrade DM to the 1.0 GA version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded. Do not upgrade only a part of the components. Otherwise, an error might occur.
 
 ## Upgrade to v1.0.0-rc.1-12-gaa39ff9
 
@@ -127,13 +121,13 @@ Go Version: go version go1.11.2 linux/amd64
 
 ### Main changes
 
-Starting from this release, TiDB DM checks all configurations rigorously. Unrecognized configuration triggers an error. This is to ensure that users always know exactly what the configuration is.
+Starting from this release, DM checks all configurations strictly. Unrecognized configuration triggers an error. This is to ensure that users always know exactly what the configuration is.
 
 ### Upgrade notes
 
 Before starting the DM-master or DM-worker, ensure that the obsolete configuration information has been deleted and there are no redundant configuration items.
 
-Otherwise, the starting might fail. In this situation, you can delete the redundant configuration based on the failure information. These are two possible redundant configurations:
+Otherwise, the starting might fail. In this situation, you can delete the deprecated configuration based on the failure information. These are two possible deprecated configurations:
 
 - `meta-file` in `dm-worker.toml`
 - `server-id` in `mysql-instances` in `task.yaml`
