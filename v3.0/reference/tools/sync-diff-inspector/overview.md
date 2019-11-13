@@ -186,8 +186,6 @@ fix-sql-file = "fix.sql"
     # Uses the snapshot function of TiDB.
     # If enabled, the history data is used for comparison.
     # snapshot = "2016-10-08 16:45:26"
-    # Sets the `sql-mode` of the database to parse table structures.
-    # sql-mode = ""
 
 # Configuration of the target database instance
 [target-db]
@@ -198,8 +196,6 @@ fix-sql-file = "fix.sql"
     # Uses the snapshot function of TiDB.
     # If enabled, the history data is used for comparison.
     # snapshot = "2016-10-08 16:45:26"
-    # Sets the `sql-mode` of the database to parse table structures.
-    # sql-mode = ""
 ```
 
 ### Run sync-diff-inspector
