@@ -76,7 +76,7 @@ Go Version: go version go1.12 linux/amd64
 
 > **Note:**
 >
->  When you upgrade DM to the 1.0.1 version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded. Do not upgrade only a part of the components. Otherwise, an error might occur.
+> When you upgrade DM to the 1.0.1 version, you must make sure that all DM cluster components (dmctl, DM-master, and DM-worker) are upgraded. Do not upgrade only a part of the components. Otherwise, an error might occur.
 
 ## Upgrade to v1.0.0-10-geb2889c9 (1.0 GA)
 
