@@ -108,7 +108,7 @@ If the components such as monitoring, TiDB Binlog, and `tidb-backup` use a local
 
     >**Note:**
     >
-    > In this operation, the number of directories depends on the planned number of TiDB clusters. Each directory has a corresponding PV created. Monitoring data for each TiDB cluster use the 1 PV.
+    > In this operation, the number of directories depends on the planned number of TiDB clusters. Each directory has a corresponding PV created. The monitoring data for each TiDB cluster uses 1 PV.
 
 - For a disk storing TiDB Binlog and backup data, follow the [steps](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) to mount the disk first. Then, create multiple directories in disk, and bind mount them into `/mnt/backup` directory. Finally, create `backup-storage` `StorageClass` for them to use.
 
