@@ -227,7 +227,9 @@ password = ""
 port = 3307
 ```
 
-The `flavor` option should be set to `"mysql"` (the default value, and 5.5 < MySQL versions < 8.0 are supported) if migrating from MySQL Server, Percona Server, Percona XtraDB Cluster, or Amazon Aurora or RDS. If migrating from MariaDB Server or MariaDB (Galera) Cluster, use `flavor = "mariadb"` (only MariaDB versions greater than 10.1.2 are supported).
+- If you migrate data from MySQL Server, Percona Server, Percona XtraDB Cluster, Amazon Aurora or RDS, set the `flavor` option to `"mysql"`, which is the default value and supports v5.5 < MySQL versions < v8.0.
+- If you migrate data from MariaDB Server or MariaDB (Galera) Cluster, set `flavor = "mariadb"`, which only supports MariaDB version later than 10.1.2.
+- Starting from DM 1.0.2, DM automatically generates the `flavor` and `server-id` options and you do not need to configure them manually in normal situations.
 
 Tasks are defined in YAML files. First, let's look at dmtask1.yaml:
 

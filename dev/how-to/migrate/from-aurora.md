@@ -126,7 +126,7 @@ black-white-list:
 # Mydumper global configuration. Each instance can quote it by the configuration item name.
 mydumpers:
   global:
-    extra-args: "-B test_db -T test_table"  # Only outputs the `test_table` table of the `test_db` schema and can configure any parameter of Mydumper.
+    extra-args: "-B test_db -T test_table"  # The extra Mydumper argument. Starting from DM 1.0.2, DM automatically generates the "table-list" option. For versions earlier than v1.0.2, you need to configure the option manually.
 ```
 
 ## Step 5: Start the task
