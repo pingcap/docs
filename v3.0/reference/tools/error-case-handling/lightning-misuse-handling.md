@@ -19,7 +19,7 @@ Error: checksum mismatched remote vs local => (checksum: 3828723015727756136 vs 
 
 * TiDB Lightning was used to import data previously, and the corresponding [`checkpoint`](/v3.0/reference/tools/tidb-lightning/checkpoints.md) data was not cleaned up. To confirm this, you can check the log at the first launch of TiDB Lightning:
 
-    * When `[checkpoint] driver = file`, if the log that marks the beginning of data import using TiDB Lightning shows `open checkpoint file failed, going to create a new one`, then the `checkpoint` is cleaned correctly. Otherwise, the remaining data might lead to imported data missing. `[checkpoint] driver = file`.
+    * When `[checkpoint] driver = file`, if the log that marks the beginning of data import using TiDB Lightning shows `open checkpoint file failed, going to create a new one`, then the `checkpoint` is cleaned correctly. Otherwise, the remaining data might lead to imported data missing.
     * When `[checkpoint] driver = mysql`, you can run `curl http://{TiDBIP}:10080/schema/{checkpoint.schema}/{checkpoint.table}` through TiDB API to query the creation time of `checkpoint table`. Then you can confirm whether the `checkpoint` is cleaned correctly.
 
 * There is conflicting data from the data source imported by TiDB Lightning.
@@ -33,4 +33,4 @@ Error: checksum mismatched remote vs local => (checksum: 3828723015727756136 vs 
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
     ```
 
-* Find a way to detect whether there is conflicting data in the data source. TiDB Lightning generally processes large amounts of data, so there is no effective conflict detection mechanism or solution in place yet.
+* Find a way to detect whether there is conflicting data in the data source. TiDB Lightning generally processes large amounts of data, so currently there is no effective conflict detection mechanism or solution yet.
