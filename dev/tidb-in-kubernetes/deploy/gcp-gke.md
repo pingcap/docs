@@ -196,7 +196,7 @@ You can interact with the GKE cluster by using `kubectl` and `helm` with the `cr
 >
 > The default `gke_cluster_name` is `tidb-cluster`, which can be modified by changing `gke_name` in the `variables.tf` file.
 
-- Specify the `--kubeconfig` argument:
+- Specify the `--kubeconfig` option:
 
     {{< copyable "shell-regular" >}}
 
@@ -206,7 +206,7 @@ You can interact with the GKE cluster by using `kubectl` and `helm` with the `cr
 
     > **Note:**
     >
-    > The `--kubeconfig` argument used by the following command requires Helm 2.10.0 or later versions.
+    > The `--kubeconfig` option used by the following command requires Helm 2.10.0 or later versions.
 
     {{< copyable "shell-regular" >}}
 
@@ -553,7 +553,7 @@ This section describes the best practices for managing multiple Kubernetes clust
 
 The Terraform module in TiDB typically combines the following sub-modules:
 
-- `tidb-operator`: provisions the [Kubernetes Control Plane](https://kubernetes.io/docs/concepts/#kubernetes-control-plane) for TiDB clusters
+- `tidb-operator`: provisions the [Kubernetes Control Plane](https://kubernetes.io/docs/concepts/#kubernetes-control-plane) and TiDB Operator for TiDB clusters
 - `tidb-cluster`: creates the resource pool in the target Kubernetes cluster and deploys the TiDB cluster
 - A `vpc` module, a `bastion` module, and a `project-credentials` module: dedicated to TiDB clusters on GKE
 
@@ -562,7 +562,7 @@ The best practices for managing multiple Kubernetes clusters are as follows:
 - Creating a new directory for each of your Kubernetes clusters.
 - Combining the above modules according to your needs via Terraform scripts.
 
-If you use the best practices, the Terraform states among clusters do not interfere with each other, and it is convenient to scale out. Here's an example (assume you are in the project root directory):
+If you use the best practices, the Terraform states among clusters do not interfere with each other, and it is convenient to manage more clusters. Here's an example (assume you are in the project root directory):
 
 {{< copyable "shell-regular" >}}
 
