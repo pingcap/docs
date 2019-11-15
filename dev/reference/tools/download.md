@@ -10,7 +10,7 @@ This document collects the available downloads for most officially maintained ve
 
 ## TiDB Binlog
 
-If you want to download the latest version of [TiDB Binlog](/dev/reference/tools/tidb-binlog/overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
+If you want to download the latest version of [TiDB Binlog](/dev/reference/tidb-binlog/overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
 
 In addition, the Kafka version of TiDB Binlog is also provided.
 
@@ -25,7 +25,7 @@ If you want to download the latest version of [TiDB Lightning](/dev/reference/to
 
 | Package name | OS | Architecture |  SHA256 checksum |
 |:---|:---|:---|:---|
-| [tidb-toolkit-latest-linux-amd64.tar.gz](http://download.pingcap.org/tidb-toolkit-latest-linux-amd64.tar.gz) | Linux | amd64 | [tidb-toolkit-latest-linux-amd64.sha256](http://download.pingcap.org/tidb-toolkit-latest-linux-amd64.sha256) |
+| [tidb-toolkit-latest-linux-amd64.tar.gz](https://download.pingcap.org/tidb-toolkit-latest-linux-amd64.tar.gz) | Linux | amd64 | [tidb-toolkit-latest-linux-amd64.sha256](https://download.pingcap.org/tidb-toolkit-latest-linux-amd64.sha256) |
 
 ## DM (Data Migration)
 
@@ -54,5 +54,5 @@ This enterprise tools package includes all the following tools:
 - Syncer
 - Loader
 - Mydumper
-- [binlogctl](/dev/reference/tools/tidb-binlog/overview.md#binlogctl-guide)
+- [binlogctl](/dev/reference/tidb-binlog/overview.md#binlogctl-guide)
 - [sync_diff_inspector](/dev/reference/tools/sync-diff-inspector/overview.md)
