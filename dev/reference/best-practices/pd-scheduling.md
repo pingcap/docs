@@ -84,7 +84,7 @@ Region merge refers to the process of merging adjacent small Regions by scheduli
 
 ## Query scheduling status
 
-You can check the status of scheduling system through Metrics, pd-ctl and log. This section briefly introduces methods of Metrics and pd-ctl. Refer to [PD monitoring metrics](/dev/reference/key-monitoring-metrics/pd-dashboard.md) and [PD Control user guide](/dev/reference/reference/tools/pd-control.md) for details.
+You can check the status of scheduling system through Metrics, pd-ctl and log. This section briefly introduces methods of Metrics and pd-ctl. Refer to [PD monitoring metrics](/dev/reference/key-monitoring-metrics/pd-dashboard.md) and [PD Control user guide](/dev/reference/tools/pd-control.md) for details.
 
 ### Operator status
 
@@ -143,7 +143,7 @@ You can use pd-ctl to adjust the scheduling strategy from the following three as
 
 pd-ctl supports dynamically creating and deleting Schedulers. You can use the following commands to control the scheduling behavior of PD:
 
-- `scheduler show`: show currently working Schedulers in the system
+- `scheduler show`: show currently running Schedulers in the system
 - `scheduler remove balance-leader-scheduler`: delete (disable) balance-leader-scheduler
 - `scheduler add evict-leader-scheduler-1`: add a scheduler to remove all Leaders in Store 1
 
