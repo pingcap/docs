@@ -65,7 +65,7 @@ See [Create the `tidb` user on the Control Machine and generate the SSH key](/v2
 
 ## Step 3: Install Ansible and its dependencies offline on the Control Machine
 
-Currently, the TiDB 2.0 GA version and the master version are compatible with Ansible 2.5. The versions of Ansible and the related dependencies are listed in the `tidb-ansible/requirements.txt` file.
+Currently, all the versions of Ansible from 2.4 to 2.7.11 are supported. The versions of Ansible and the related dependencies are listed in the `tidb-ansible/requirements.txt` file. The following installation steps take Ansible 2.5 as an example.
 
 1. Download [Ansible 2.5 offline installation package](https://download.pingcap.org/ansible-2.5.0-pip.tar.gz) on the download machine and then upload it to the Control Machine.
 
