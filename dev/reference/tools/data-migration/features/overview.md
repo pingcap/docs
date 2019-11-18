@@ -357,7 +357,7 @@ filters:
 
 > **Note:**
 >
-> The column mapping is not recommended due to its usage restrictions. Refer to [Handling conflicts of uto-increment primary key](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handling-conflicts-of-auto-increment-primary-key) to see recommended solutions.
+> The column mapping is not recommended due to its usage restrictions. Refer to [Handle conflicts of uto-increment primary key](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handle-conflicts-of-auto-increment-primary-key) to see recommended solutions.
 
 The column mapping feature supports modifying the value of table columns. You can execute different modification operations on the specified column according to different expressions. Currently, only the built-in expressions provided by DM are supported.
 

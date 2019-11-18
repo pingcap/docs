@@ -5,21 +5,21 @@ category: reference
 ---
 # Best Practice of Data Migration in the Shard Merge Scenario
 
-This document explains the supported functions and limitations of TiDB Data Migration (DM) in the shard merge scenario and provides a best practice guide to facilitate application for users.
+This document details the supported functions and limitations of TiDB Data Migration (DM) in the shard merge scenario and provides a best practice guide to facilitate application for users.
 
 ## An independent data migration task
 
-In [Merge and Replicate Data from Sharded Tables](/dev/reference/tools/data-migration/features/shard-merge.md), the concept of sharding group is introduced. Simply put, a sharding group consists of all upstream tables that need to be merged and replicated into a same downstream table.
+In [Merge and Replicate Data from Sharded Tables](/dev/reference/tools/data-migration/features/shard-merge.md#principles), the concept of sharding group is introduced. Simply put, a sharding group consists of all upstream tables that need to be merged and replicated into a same downstream table.
 
-The current sharding DDL mechanism has some [usage restrictions](/dev/reference/tools/data-migration/features/shard-merge.md#restrictions) to coordinate the schema changes using DDL statements in different sharded tables. When these restrictions are ineffective due to unexpected reasons, you need to [handle sharding DDL locks manually in DM](/dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md), or even redo the entire data migration.
+The current sharding DDL mechanism has some [usage restrictions](/dev/reference/tools/data-migration/features/shard-merge.md#restrictions) to coordinate the schema changes using DDL statements in different sharded tables. If these restrictions are found to be violated due to unexpected reasons, you need to [handle sharding DDL locks manually in DM](/dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md), or even redo the entire data migration.
 
-Therefore, to mitigate the impact on the performance of data migration caused by exception handling, it is recommended to perform one independent data migration task for each sharding group. *In this case, when an exception is thrown, only a small number of data migration tasks might need to be handled manually while others remain unaffected.*
+Therefore, to mitigate the impact of exception handling on data migration, it is recommended to merge and replicate each sharding group in separate data migration task. *In this case, when an exception is thrown, only a small number of data migration tasks might need to be handled manually while others remain unaffected.*
 
 ## Handle sharding DDL locks manually
 
 In [Merge and Replicate Data from Sharded Tables](/dev/reference/tools/data-migration/features/shard-merge.md#principles), it is clear that sharding DDL lock in DM is a mechanism for coordinating the execution of DDL statements from multiple upstream sharded tables.
 
-Therefore, when you confirm the sharding DDL lock is enabled on the DM-master through `show-ddl-locks` command, or some DM-workers have `unresolvedGroups` or `blockingDDLs` through `query-status` command, do not rush to unlock the sharding DDL lock manually using `unlock-ddl-lock` or `break-ddllock`.
+Therefore, when you confirm there are sharding DDL locks on the DM-master through `show-ddl-locks` command, or some DM-workers have `unresolvedGroups` or `blockingDDLs` through `query-status` command, do not rush to unlock the sharding DDL lock manually using `unlock-ddl-lock` or `break-ddllock`.
 
 Only when you confirm that the current failure to automatically unlock the sharding DDL lock is listed in the [supported scenarios](/dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md#supported-scenarios), can you follow the corresponding solution. For unsupported scenarios, it is recommended to redo the entire data migration. That is, redo the full and incremental data migration after emptying the data in the downstream database and the `dm_meta` information associated with the migration task.
 
@@ -99,7 +99,7 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
 
 3. Run `query-status` to verify that whether the data migration is successfully processed and whether the data from upstream have already been merged and replicated in the downstream database.
 
-## Create/drop tables upstream in the upstream
+## Create/drop tables in the upstream
 
 From [Merge and Replicate Data from Sharded Tables](/dev/reference/tools/data-migration/features/shard-merge.md#principles), it is clear that the coordination of sharding DDL lock depends on whether the downstream database receives the corresponding DDL statements of all upstream sharded tables. In addition, currently DM *does not* support dynamically creating or dropping sharded tables in the upstream. Therefore, to create or drop sharded tables in the upstream, it is recommended to perform the following steps.
 
