@@ -34,7 +34,7 @@ Go Version: go version go1.12 linux/amd64
 - Support automatically generating the parameters of Mydumper database and tables to reduce manual configuration cost
 - Optimize the default output of `query-status` to highlight important information
 - Directly manage the DB connection to the downstream instead of using the built-in connection pool to optimize the handling of and retry for SQL errors
-- Fix the bug that the failure to execute DML statements might cause panic when the DM-worker process is started
+- Fix the panic that might occur when the DM-worker process is started or when the DML statement is failed to execute
 - Fix the bug that the timeout of executing the sharding DDL statements (for example, `ADD INDEX`) might cause that the subsequent sharding DDL statements cannot be correctly coordinated
 - Fix the bug that the `start-task` command cannot be executed when some DM-workers are inaccessible
 - Improve the automatic retry policy for the `1105` error
