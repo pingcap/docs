@@ -168,18 +168,7 @@ See [Edit the `inventory.ini` file to orchestrate the TiDB cluster](/v3.1/how-to
 
 1. You do not need to run the playbook in `ansible-playbook local_prepare.yml`.
 
-2. You can use the `Report` button on the Grafana Dashboard to generate a PDF file. This function depends on the `fontconfig` package and English fonts. To use this function, download the offline installation package, upload it to the `grafana_servers` machine, and install it. This package includes `fontconfig` and `open-sans-fonts`, and only supports the CentOS 7 system.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tar -xzvf grafana-font-rpms.el7.tar.gz &&
-    cd grafana-font-rpms.el7 &&
-    chmod u+x install_grafana_font_rpms.sh &&
-    ./install_grafana_font_rpms.sh
-    ```
-
-3. See [Deploy the TiDB cluster](/v3.1/how-to/deploy/orchestrated/ansible.md#step-11-deploy-the-tidb-cluster).
+2. See [Deploy the TiDB cluster](/v3.1/how-to/deploy/orchestrated/ansible.md#step-11-deploy-the-tidb-cluster).
 
 ## Test the TiDB cluster
 
