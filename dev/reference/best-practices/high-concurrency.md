@@ -16,7 +16,7 @@ This document assumes that you have a basic understanding of TiDB. It is recomme
 + [Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/)
 + [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/)
 
-## High concurrent and write intensive scenario
+## Highly-concurrent write-intensive scenario
 
 The highly concurrent write scenario often occurs when you perform batch tasks in applications, such as clearing, settlement and so on. This scenario has the following features:
 
@@ -110,7 +110,7 @@ After a period of continuous writes, PD automatically schedules the entire TiKV 
 
 In most cases, the above process of causing a hotspot is normal, which is the Region warm-up phase of database. However, you need to avoid this phase in highly-concurrent write-intensive scenarios.
 
-## Avoid hotspot
+## Hotspot solutions
 
 To achieve the ideal performance expected in theory, you can skip the warm-up phase by directly splitting a Region into the desired number of Regions and scheduling these Regions in advance to other nodes in the cluster.
 
@@ -132,7 +132,7 @@ However, TiDB does not automatically perform this pre-split operation. The reaso
 
 ![Table Region Range](/media/best-practices/table-Region-range.png)
 
-From the diagram above, in the encoding rule of keys in a table, the `rowID` is the only variable. In TiDB, `rowID` is an `Int64` integer. However, you might not need to evenly split the `Int64` integer range to the desired number of ranges and then to distribute these ranges to different nodes, because Region split must also be based on the actual situation.
+From the diagram above, according to the encoding rule of a row's key, the `rowID` is the only variable part. In TiDB, `rowID` is an `Int64` integer. However, you might not need to evenly split the `Int64` integer range to the desired number of ranges and then to distribute these ranges to different nodes, because Region split must also be based on the actual situation.
 
 If the write of `rowID` is completely discrete, the above method will not cause hotspots. If the row ID or index has a fixed range or prefix (for example, discretely insert data into the range of `[2000w, 5000w)`), no hotspot will be caused either. However, if you split a Region using the above method, data might still be written to the same Region at the beginning.
 
