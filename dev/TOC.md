@@ -327,6 +327,7 @@
         - [Manage Tasks](/dev/reference/tools/data-migration/manage-tasks.md)
         - [Precheck Tasks](/dev/reference/tools/data-migration/precheck.md)
         - [Query Task Status](/dev/reference/tools/data-migration/query-status.md)
+        - [Skip or Replace Abnormal SQL Statements](/dev/reference/tools/data-migration/skip-replace-sqls.md)
       - [Monitor](/dev/reference/tools/data-migration/monitor.md)
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/dev/how-to/migrate/from-aurora.md)
@@ -356,7 +357,6 @@
   - [About TiDB Operator](/dev/tidb-in-kubernetes/tidb-operator-overview.md)
   + Get Started
     - [kind](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
-    - [DinD](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
     - [GKE](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
     - [Minikube](/dev/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
   + Deploy
