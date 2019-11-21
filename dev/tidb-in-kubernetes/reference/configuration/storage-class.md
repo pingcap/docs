@@ -88,41 +88,41 @@ Kubernetes currently supports statically allocated local storage. To create a lo
      kubectl get pv | grep local-storage
      ```
 
-    `local-volume-provisioner` creates a PV for each mounted point under discovery directory. Note that on GKE, `local-volume-provisioner` creates a local volume of only 375 GiB in size by default.
+    `local-volume-provisioner` creates a PV for each mounting point under discovery directory. Note that on GKE, `local-volume-provisioner` creates a local volume of only 375 GiB in size by default.
 
 For more information, refer to [Kubernetes local storage](https://kubernetes.io/docs/concepts/storage/volumes/#local) and [local-static-provisioner document](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner#overview).
 
 ### Best practices
 
-- The path of a local PV is the unique identifier for the local volume. To avoid conflicts, it is recommended to use the UUID of the device to generate a unique path.
-- For I/O isolation, a dedicated physical disk per volume is recommended to ensure hardware-based isolation.
-- For capacity isolation, a dedicated partition or physical disk per volume is recommended.
+- A local PV's path is its unique identifier. To avoid conflicts, it is recommended to use the UUID of the device to generate a unique path.
+- For I/O isolation, a dedicated physical disk per PV is recommended to ensure hardware-based isolation.
+- For capacity isolation, a partition per PV or a physical disk per PV is recommended.
 
 Refer to [Best Practices](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/best-practices.md) for more information on local PV in Kubernetes.
 
 ## Disk mount examples
 
-If the components such as monitoring, TiDB Binlog, and `tidb-backup` use a local disk to store data, you can mount a SAS disk and create separate `StorageClass` for them to use. Procedures are as follows:
+If the components such as monitoring, TiDB Binlog, and `tidb-backup` use local disks to store data, you can mount SAS disks and create separate `StorageClass` for them to use. Procedures are as follows:
 
-- For a disk storing monitoring data, follow the [steps](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) to mount the disk. Then, create multiple directories in disk, and bind mount them into `/mnt/disks` directory. After that, create `local-storage` `StorageClass` for them to use.
-
-    >**Note:**
-    >
-    > In this operation, the number of directories depends on the planned number of TiDB clusters. Each directory has a corresponding PV created. The monitoring data for each TiDB cluster uses 1 PV.
-
-- For a disk storing TiDB Binlog and backup data, follow the [steps](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) to mount the disk first. Then, create multiple directories in disk, and bind mount them into `/mnt/backup` directory. Finally, create `backup-storage` `StorageClass` for them to use.
+- For a disk storing monitoring data, follow the [steps](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) to mount the disk. First, create multiple directories in disk, and bind mount them into `/mnt/disks` directory. Then, create `local-storage` `StorageClass` for them to use.
 
     >**Note:**
     >
-    > In this operation, the number of directories depends on the planned number of TiDB clusters, the number of Pumps in each cluster and the backup method. Each directory has a corresponding PV created. Each Pump uses 1 PV and each Drainer uses 1 PV. Each [Ad-hoc full backup](/dev/tidb-in-kubernetes/maintain/backup-and-restore.md#ad-hoc-full-backup) uses 1 PV, and all [scheduled full backups](/dev/tidb-in-kubernetes/maintain/backup-and-restore.md#scheduled-full-backup) use 1 PV.
+    > The number of directories you create depends on the planned number of TiDB clusters. For each directory, a corresponding PV will be created. The monitoring data in each TiDB cluster uses one PV.
 
-- For a disk storing PD data, follow the [steps](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) to mount the disk first. Then, create multiple directories in disk, and bind mount them into `/mnt/sharedssd` directory. Finally, create `shared-ssd-storage` `StorageClass` for them to use.
+- For a disk storing TiDB Binlog and backup data, follow the [steps](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) to mount the disk. First, create multiple directories in disk, and bind mount them into `/mnt/backup` directory. Then, create `backup-storage` `StorageClass` for them to use.
 
     >**Note:**
     >
-    > In this operation, the number of directories depends on the planned number of TiDB clusters, and the number of PDs in each cluster. Each directory has a corresponding PV created and each PD uses 1 PV.
+    > The number of directories you create depends on the planned number of TiDB clusters, the number of Pumps in each cluster, and your backup method. For each directory, a corresponding PV will be created. Each Pump uses one PV and each Drainer uses one PV. Each [Ad-hoc full backup](/dev/tidb-in-kubernetes/maintain/backup-and-restore.md#ad-hoc-full-backup) task uses one PV, and all [scheduled full backup](/dev/tidb-in-kubernetes/maintain/backup-and-restore.md#scheduled-full-backup) tasks share one PV.
 
-- For a disk storing TiKV data, you can [mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#use-a-whole-disk-as-a-filesystem-pv) it into `/mnt/ssd` directory, and create `ssd-storage` `StorageClass` for it to use.
+- For a disk storing data in PD, follow the [steps](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) to mount the disk. First, create multiple directories in disk, and bind mount them into `/mnt/sharedssd` directory. Then, create `shared-ssd-storage` `StorageClass` for them to use.
+
+    >**Note:**
+    >
+    > The number of directories you create depends on the planned number of TiDB clusters, and the number of PD servers in each cluster. For each directory, a corresponding PV will be created. Each PD server uses one PV.
+
+- For a disk storing data in TiKV, you can [mount](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#use-a-whole-disk-as-a-filesystem-pv) it into `/mnt/ssd` directory, and create `ssd-storage` `StorageClass` for it to use.
 
 Based on the disk mounts above, you need to modify the [`local-volume-provisioner` YAML file](https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/local-dind/local-volume-provisioner.yaml) accordingly, configure discovery directory and create the necessary `StorageClass`. Here is an example of a modified YAML file:
 
@@ -224,7 +224,7 @@ Finally, execute the `kubectl apply` command to deploy `local-volume-provisioner
 kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/local-dind/local-volume-provisioner.yaml
 ```
 
-When you later create a TiDB cluster or do a backup, configure the corresponding `StorageClass` for use.
+When you later deploy tidb clusters, deploy TiDB Binlog for incremental backups, or do full backups, configure the corresponding `StorageClass` for use.
 
 ## Data safety
 
