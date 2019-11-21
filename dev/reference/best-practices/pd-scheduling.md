@@ -31,7 +31,7 @@ Scheduling process generally has three steps:
 
 1. Collect information
 
-    Each TiKV node periodically reports two heartbeats to PD: `StoreHeartbeat` and `RegionHeartbeat`. `StoreHeartbeat` contains the overall information of Stores including disk capacity, remaining storage, reads and writes traffic. `RegionHeartbeat` contains the overall information of Regions including the range of each Region, peer distribution, peer status, data volume, and reads and writes traffic. PD collects and restores these information for scheduling decisions.
+    Each TiKV node periodically reports two types of heartbeats to PD: `StoreHeartbeat` and `RegionHeartbeat`. `StoreHeartbeat` contains the overall information of Stores including disk capacity, remaining storage, read/write traffic. `RegionHeartbeat` contains the overall information of Regions including the range of each Region, peer distribution, peer status, data volume, and reads and writes traffic. PD collects and restores these information for scheduling decisions.
 
 2. Generate Operators
 
@@ -50,7 +50,7 @@ Scheduling process generally has three steps:
 
 ### Load balancing
 
-Region primarily relies on `balance-leader` and `balance-region` schedulers to achieve load balance. Both schedulers target distributing Regions evenly across all Stores in the cluster but with separate focuses: `balance-leader` attends Region Leader to balance incoming client requests. `balance-region` centers each Region Peer to redistribute the pressure of storage while avoid exceptions like storage failure.
+Region primarily relies on `balance-leader` and `balance-region` schedulers to achieve load balance. Both schedulers target distributing Regions evenly across all Stores in the cluster but with separate focuses: `balance-leader` attends Region Leader to balance incoming client requests. `balance-region` centers each Region Peer to redistribute the pressure of storage while avoid exceptions like out of storage space.
 
 `balance-leader` and `balance-region` share a similar scheduling process. First, they grade different Stores according to their amount of resources. Then, `balance-leader` and `balance-region` constantly select Leaders or Peers from Stores with high scores and transfer them to Stores with low scores. Their grading methods vary though: `balance-leader` uses the sum of all Region Sizes corresponding to Leaders in a Store whereas the way of `balance-region` is relatively complicated. Since the storage capacity of different nodes might be inconsistent, the grading of `balance-region` is:
 
@@ -149,7 +149,7 @@ pd-ctl supports dynamically creating and deleting Schedulers. You can use the fo
 
 ### Add Operators manually
 
-Pd also supports creating or removing Schedulers directly through pd-ctl. For example:
+Pd also supports creating or removing Operators directly through pd-ctl. For example:
 
 - `operator add add-peer 2 5`: add Peers to Region 2 in Store 5
 - `operator add transfer-leader 2 5`: migrate Region 2 Leader to Store 5
@@ -210,7 +210,7 @@ When a Operator is successfully generated but processes slow, possible reasons a
 If the corresponding Operator fails to generate, possible reasons are:
 
 - The Operator is stopped, or `replica-schedule-limit` is set to 0.
-- there is no proper node to migrate Regions. For example, if the capacity of nodes that replace the nodes of same Label is larger than 80%, PD will stop scheduling to avoid the risk of storage failure. In such case, you need to add more nodes or delete some data to free space.
+- there is no proper node to migrate Regions. For example, if the capacity of nodes that replace the nodes of same Label is larger than 80%, PD will stop scheduling to avoid running out of storage space. In such case, you need to add more nodes or delete some data to free space.
 
 ### The speed of putting nodes online is slow
 
