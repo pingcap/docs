@@ -282,7 +282,7 @@
     - [TiKV](/v3.1/reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Alert Rules](/v3.1/reference/alert-rules.md)
   + Best Practices
-    - [Best Practice for High Concurrent Write Scenario](/v3.1/reference/best-practices/high-concurrency.md)
+    - [Highly Concurrent Write Best Practices](/v3.1/reference/best-practices/high-concurrency.md)
   - [TiSpark](/v3.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.1/reference/tidb-binlog/overview.md)
