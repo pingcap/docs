@@ -110,7 +110,7 @@ After a period of continuous writes, PD automatically schedules the entire TiKV 
 
 In most cases, the above process of causing a hotspot is normal, which is the Region warm-up phase of database. However, you need to avoid this phase in highly-concurrent write-intensive scenarios.
 
-## Hotspot solutions
+## Hotspot solution
 
 To achieve the ideal performance expected in theory, you can skip the warm-up phase by directly splitting a Region into the desired number of Regions and scheduling these Regions in advance to other nodes in the cluster.
 
