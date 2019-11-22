@@ -26,7 +26,7 @@ In addition, the Kafka version of TiDB Binlog is also provided.
 
 ## TiDB Lightning
 
-Download [TiDB Lightning](/v3.0/reference/tools/tidb-lightning/overview.md) by clicking the download link in the following table:
+Download [TiDB Lightning](/v3.0/reference/tools/tidb-lightning/overview.md) by using the download link in the following table:
 
 | Package name | OS | Architecture |  SHA256 checksum |
 |:---|:---|:---|:---|
@@ -38,7 +38,7 @@ Download [TiDB Lightning](/v3.0/reference/tools/tidb-lightning/overview.md) by c
 
 ## TiDB DM (Data Migration)
 
-Download [DM](/v3.0/reference/tools/data-migration/overview.md) by clicking the download link in the following table:
+Download [DM](/v3.0/reference/tools/data-migration/overview.md) by using the download link in the following table:
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
