@@ -102,8 +102,6 @@ Refer to [Best Practices](https://github.com/kubernetes-sigs/sig-storage-local-s
 
 ## Disk mount examples
 
-## Disk mount examples
-
 If the components such as monitoring, TiDB Binlog, and `tidb-backup` use local disks to store data, you can mount SAS disks and create separate `StorageClass` for them to use. Procedures are as follows:
 
 - For a disk storing monitoring data, follow the [steps](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/operations.md#sharing-a-disk-filesystem-by-multiple-filesystem-pvs) to mount the disk. First, create multiple directories in disk, and bind mount them into `/mnt/disks` directory. Then, create `local-storage` `StorageClass` for them to use.
