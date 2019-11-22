@@ -281,7 +281,8 @@
     - [PD](/v3.1/reference/key-monitoring-metrics/pd-dashboard.md)
     - [TiKV](/v3.1/reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Alert Rules](/v3.1/reference/alert-rules.md)
-  - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
+  + Best Practices
+    - [Highly Concurrent Write Best Practices](/v3.1/reference/best-practices/high-concurrency.md)
   - [TiSpark](/v3.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.1/reference/tidb-binlog/overview.md)
@@ -326,6 +327,7 @@
         - [Manage Tasks](/v3.1/reference/tools/data-migration/manage-tasks.md)
         - [Precheck Tasks](/v3.1/reference/tools/data-migration/precheck.md)
         - [Query Task Status](/v3.1/reference/tools/data-migration/query-status.md)
+        - [Skip or Replace Abnormal SQL Statements](/v3.1/reference/tools/data-migration/skip-replace-sqls.md)
       - [Monitor](/v3.1/reference/tools/data-migration/monitor.md)
       + Migrate from MySQL compatible database
         - [Migrate from Aurora](/v3.1/how-to/migrate/from-aurora.md)
