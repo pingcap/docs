@@ -1,10 +1,10 @@
 ---
-title: HAProxy in TiDB
-summary: This document describes the best configuration and usage of HAProxy in TiDB.
+title: HAProxy Best Practices
+summary: This document describes best practices for configuration and usage of HAProxy in TiDB.
 category: reference
 ---
 
-# HAProxy in TiDB
+# HAProxy Best Practices
 
 This document describes best practices for configuration and usage of HAProxy in TiDB. HAProxy is a TCP load balancer. TiDB clients can manipulate data by connecting to the floating virtual IP address provided by HAProxy to achieve load balancing in the TiDB server layer.
 
