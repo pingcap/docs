@@ -153,7 +153,8 @@ When you find some network connection issues between Pods from the log or monito
 The Pending state of a Pod is usually caused by conditions of insufficient resources, such as:
 
 - The `StorageClass` of the PVC used by PD, TiKV, Monitor Pod does not exist or the PV is insufficient.
-- No nodes in the Kubernetes cluster can satisfy the CPU or memory applied by the Pod
+- No nodes in the Kubernetes cluster can satisfy the CPU or memory resources requested by the Pod
+- The number of TiKV or PD replicas and the number of nodes in the cluster do not satisfy the high availability scheduling policy of tidb-scheduler
 
 You can check the specific reason for Pending by using the `kubectl describe pod` command:
 
@@ -165,7 +166,7 @@ kubectl describe po -n <namespace> <pod-name>
 
 - If the CPU or memory resources are insufficient, you can lower the CPU or memory resources requested by the corresponding component for scheduling, or add a new Kubernetes node.
 
-- If the `StorageClass` of the PVC cannot be found, delete the TiDB Pod and the corresponding PVC. Then, in the `values.yaml` file, change `storageClassName` to the name of the `StorageClass` available in the cluster. Run the following command to get the `StorageClass` available in the cluster:
+- If the `StorageClass` of the PVC cannot be found, change `storageClassName` in the `values.yaml` file to the name of the `StorageClass` available in the cluster; run `helm upgrade`; and delete Statefulset and the corresponding PVCs. Run the following command to get the `StorageClass` available in the cluster:
 
     {{< copyable "shell-regular" >}}
 
@@ -173,7 +174,9 @@ kubectl describe po -n <namespace> <pod-name>
     kubectl get storageclass
     ```
 
-- If a `StorageClass` exists in the cluster but the available PV is insufficient, you need to add PV resources correspondingly. For Local PV, you can expand it by referring to [Local PV Configuration](/v3.0/tidb-in-kubernetes/reference/configuration/local-pv.md).
+- If a `StorageClass` exists in the cluster but the available PV is insufficient, you need to add PV resources correspondingly. For Local PV, you can expand it by referring to [Local PV Configuration](/v3.0/tidb-in-kubernetes/reference/configuration/storage-class.md#local-pv-configuration).
+
+- tidb-scheduler has a high availability scheduling policy for TiKV and PD. For the same TiDB cluster, if there are N replicas of TiKV or PD, then the number of PD Pods that can be scheduled to each node is `M=(N-1)/2` (if N<3, then M=1) at most, and the number of TiKV Pods that can be scheduled to each node is `M=ceil(N/3)` (if N<3, then M=1; `ceil` means rounding up) at most. If the Pod's state becomes `Pending` because the high availability scheduling policy is not satisfied, you need to add more nodes in the cluster.
 
 ## The Pod is in the `CrashLoopBackOff` state
 
@@ -194,6 +197,10 @@ kubectl -n <namespace> logs -p <pod-name>
 ```
 
 After checking the error messages in the log, you can refer to [Cannot start `tidb-server`](/v3.0/how-to/troubleshoot/cluster-setup.md#cannot-start-tidb-server), [Cannot start `tikv-server`](/v3.0/how-to/troubleshoot/cluster-setup.md#cannot-start-tikv-server), and [Cannot start `pd-server`](/v3.0/how-to/troubleshoot/cluster-setup.md#cannot-start-pd-server) for further troubleshooting.
+
+When the "cluster id mismatch" message appears in the TiKV Pod log, it means that the TiKV Pod might have used old data from other or previous TiKV Pod. If the data on the local disk remain uncleared when you configure local storage in the cluster, or the data is not recycled by the local volume provisioner due to a forced deletion of PV, an error might occur.
+
+If you are confirmed that the TiKV should join the cluster as a new node and that the data on the PV should be deleted, you can delete the TiKV Pod and the corresponding PVC. The TiKV Pod automatically rebuilds and binds the new PV for use. When configuring local storage, delete local storage on the machine to avoid Kubernetes using old data. In cluster operation and maintenance, manage PV using the local volume provisioner and do not delete it forcibly. You can manage the lifecycle of PV by creating, deleting PVCs, and setting `reclaimPolicy` for the PV.
 
 In addition, TiKV might also fail to start when `ulimit` is insufficient. In this case, you can modify the `/etc/security/limits.conf` file of the Kubernetes node to increase the `ulimit`:
 

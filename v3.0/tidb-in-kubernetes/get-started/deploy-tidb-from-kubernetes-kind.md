@@ -2,6 +2,7 @@
 title: Deploy TiDB in Kubernetes Using kind
 summary: Learn how to deploy a TiDB cluster in Kubernetes using kind.
 category: how-to
+aliases: ['/docs/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind/']
 ---
 
 # Deploy TiDB in Kubernetes Using kind
@@ -26,7 +27,7 @@ Before deployment, make sure the following requirements are satisfied:
 
 - [Docker](https://docs.docker.com/install/): version >= 17.03
 
-- [Helm Client](https://github.com/helm/helm/blob/master/docs/install.md#installing-the-helm-client): version >= 2.9.0 and < 3.0.0
+- [Helm Client](https://helm.sh/docs/using_helm/#installing-the-helm-client): version >= 2.9.0 and < 3.0.0
 
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl): version >= 1.10 (1.13 or later recommended)
 

@@ -178,6 +178,10 @@ Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 | `modify_count` | The number of modified rows |
 | `row_count` | The total number of rows |
 
+> **Note:**
+>
+> When TiDB automatically updates the total number of rows and the number of modified rows according to DML statements, `update_time` is also updated. Therefore, `update_time` does not necessarily indicate the last time when the `ANALYZE` statement is executed.
+
 ### Metadata of columns
 
 You can use the `SHOW STATS_HISTOGRAMS` statement to view the number of different values and the number of `NULL` in all the columns.
@@ -199,7 +203,7 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 8 columns
 | `db_name`  |  The database name    |
 | `table_name` | The table name |
 | `partition_name` | The partition name |
-| `column_name` | The column name |
+| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
 | `is_index` | Whether it is an index column or not |
 | `update_time` | The time of the update |
 | `distinct_count` | The number of different values |
@@ -227,7 +231,7 @@ Currently, the `SHOW STATS_BUCKETS` statement returns the following 10 columns:
 | `db_name`  |  The database name    |
 | `table_name` | The table name |
 | `partition_name` | The partition name |
-| `column_name` | The column name |
+| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
 | `is_index` | Whether it is an index column or not |
 | `bucket_id` | The the ID of a bucket |
 | `count` | The number of all the values that falls on the bucket and the previous buckets |
