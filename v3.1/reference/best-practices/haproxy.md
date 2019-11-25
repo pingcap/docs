@@ -16,7 +16,7 @@ This document describes best practices for configuration and usage of HAProxy in
 
 HAProxy is written in year 2000 by Willy Tarreau, the core contributor to the Linux kernel, who is still responsible for the maintenance of the project and provides free software updates in the open source community. The latest stable version 2.0.0 was released on August 16, 2019, bringing more [excellent features](https://www.haproxy.com/blog/haproxy-2-0-and-beyond/).
 
-## Basic Features
+## Basic features
 
 -[High Availability](http://cbonte.github.io/haproxy-dconv/1.9/intro.html#3.3.4): HAProxy provides high availability with support for a graceful shutdown and a seamless switchover;
 -[Load Balancing](http://cbonte.github.io/haproxy-dconv/1.9/configuration.html#4.2-balance): Two major proxy modes are supported: TCP, also known as layer 4, and HTTP, also known as layer 7. No less than 9 load balancing algorithms are supported, such as roundrobin, leastconn and random;
