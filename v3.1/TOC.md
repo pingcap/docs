@@ -153,6 +153,7 @@
       - [Window Functions](/v3.1/reference/sql/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](/v3.1/reference/sql/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/v3.1/reference/sql/functions-and-operators/precision-math.md)
+      - [List of Expressions for Pushdown](/v3.1/reference/sql/functions-and-operators/expressions-pushed-down.md)
     + SQL Statements
       - [`ADD COLUMN`](/v3.1/reference/sql/statements/add-column.md)
       - [`ADD INDEX`](/v3.1/reference/sql/statements/add-index.md)
@@ -281,7 +282,8 @@
     - [PD](/v3.1/reference/key-monitoring-metrics/pd-dashboard.md)
     - [TiKV](/v3.1/reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Alert Rules](/v3.1/reference/alert-rules.md)
-  - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
+  + Best Practices
+    - [Highly Concurrent Write Best Practices](/v3.1/reference/best-practices/high-concurrency.md)
   - [TiSpark](/v3.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.1/reference/tidb-binlog/overview.md)
