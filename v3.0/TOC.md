@@ -142,6 +142,8 @@
     - [TiKV Control](/v3.0/reference/tools/tikv-control.md)
     - [TiDB Control](/v3.0/reference/tools/tidb-control.md)
     - [Download](/v3.0/reference/tools/download.md)
+  + Best Practices
+    - [HAProxy in TiDB](/v3.0/reference/best-practices/haproxy.md)
   - [MySQL Compatibility](/v3.0/reference/mysql-compatibility.md)
   + SQL
     + SQL Language Structure
