@@ -706,10 +706,6 @@ To customize a field, use one of the following two methods:
 - Modify the parameter configuration of `module` in the `*.tf` file directly.
 - Refer to the `variables.tf` file of each module for all the modifiable parameters and set custom values in `terraform.tfvars`.
 
-you can refer to the default Terraform module. Also, you can always refer to the `variables.tf` file of each module to learn about all available parameters.
-
-In addition, you can easily integrate these modules into your own Terraform workflow. If you are familiar with Terraform, this is our recommended way of use.
-
 > **Note:**
 >
 > * When creating a new directory, pay attention to its relative path to Terraform modules, which affects the `source` parameter during module calls.
