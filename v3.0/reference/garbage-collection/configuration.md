@@ -107,7 +107,7 @@ Since TiDB 3.0, some configuration options have changed with support for the dis
 
 ## GC I/O limit
 
-Starting from v3.0.6, TiKV supports GC I/O limit. You can configure `gc.max-write-bytes-per-sec` to limit writes of a GC worker per second, and thus to reduce the impact on normal requests.
+TiKV supports GC I/O limit <span class="version-mark">New in v3.0.6</span>. You can configure `gc.max-write-bytes-per-sec` to limit writes of a GC worker per second, and thus to reduce the impact on normal requests.
 
 `0` indicates disabling this feature.
 
