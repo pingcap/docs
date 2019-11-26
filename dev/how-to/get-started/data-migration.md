@@ -106,7 +106,7 @@ $ pgrep -a mysqld
 17782 mysqld --defaults-group-suffix=3
 ```
 
-## Replicate shards
+## Replicating shards
 
 Our first scenario consists of 3 "shards" with the same schema, but non-overlapping auto-increment primary keys.
 
@@ -431,6 +431,6 @@ As long as the DM master and workers are running the "dmtest1" task, they'll con
 
 ## Conclusion
 
-In this tutorial, a shard migration has been performed from 3 upstream MySQL server instances. You can see how DM not only imports an initial dump of data in the cluster, but can also read binlogs from MySQL to replicate incremental data and to keep the downstream TiDB cluster in sync with the upstream instance(s).
+In this tutorial, a shard migration has been performed from three upstream MySQL server instances. You can see how DM imports an initial dump of data in the cluster, reads binlogs from MySQL to replicate incremental data, and keeps the downstream TiDB cluster in sync with the upstream instances.
 
 For additional information about DM, consult [Data Migration Overview](/dev/reference/tools/data-migration/overview.md) in the TiDB documentation or join the [TiDB Community Slack](https://pingcap.com/tidbslack/) channel!

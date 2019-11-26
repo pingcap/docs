@@ -45,7 +45,7 @@ Assume that the upstream schemas are as follows:
 5. Filter out all the deletion operations in the `user`.`information` table of three upstream instances.
 6. Filter out all the deletion operations in the `store_{01|02}`.`sale_{01|02}` table of three upstream instances.
 7. Filter out the `user`.`log_bak` table of three upstream instances.
-8. Because the `store_{01|02}`.`sale_{01|02}` tables have auto-increment primary keys of the bigint type, the conflict occurs when these tables are merged into TiDB. So you need solutions to avoid the conflict.
+8. Because the `store_{01|02}`.`sale_{01|02}` tables have auto-increment primary keys of the `bigint` type, the conflict occurs when these tables are merged into TiDB. The following text will show you solutions to resolve and avoid the conflict.
 
 ## Downstream instances
 
@@ -124,7 +124,7 @@ Assume that the downstream schema after replication is as follows:
           tbl-name: "log_bak"
     ```
 
-- To satisfy the replication Requirement #8, first refer to [handling conflicts of auto-increment primary key](https://github.com/pingcap/docs/pull/1604) to solve conflicts, which guarantees that the data replication does not go wrong when data is replicated to the downstream and the shared table has the same primary key. Then, configure `ignore-checking-items` to skip checking the conflict of auto-increment primary key:
+- To satisfy the replication Requirement #8, first refer to [handling conflicts of auto-increment primary key](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handle-conflicts-of-auto-increment-primary-key) to solve conflicts. This guarantees that data is successfully replicated to the downstream when sharded tables have duplicate values in the primary key column. Then, configure `ignore-checking-items` to skip checking the conflict of auto-increment primary key:
 
     {{< copyable "" >}}
 
