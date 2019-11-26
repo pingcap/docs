@@ -9,26 +9,26 @@ This document describes the features and limitations of [TiDB Data Migration](ht
 
 ## An independent data migration task
 
-In the [Merge and Replicate Data from Sharded Tables](/dev/reference/tools/data-migration/features/shard-merge.md#principles) document, the definition of "sharding group" is given: A sharding group consists of all upstream tables that need to be merged and replicated into the same downstream table.
+In the [Merge and Replicate Data from Sharded Tables](/v3.0/reference/tools/data-migration/features/shard-merge.md#principles) document, the definition of "sharding group" is given: A sharding group consists of all upstream tables that need to be merged and replicated into the same downstream table.
 
-The current sharding DDL mechanism has some [usage restrictions](/dev/reference/tools/data-migration/features/shard-merge.md#restrictions) to coordinate the schema changes brought by DDL operations in different sharded tables. If these restrictions are violated due to unexpected reasons, you need to [handle sharding DDL locks manually in DM](/dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md), or even redo the entire data migration task.
+The current sharding DDL mechanism has some [usage restrictions](/v3.0/reference/tools/data-migration/features/shard-merge.md#restrictions) to coordinate the schema changes brought by DDL operations in different sharded tables. If these restrictions are violated due to unexpected reasons, you need to [handle sharding DDL locks manually in DM](/v3.0/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md), or even redo the entire data migration task.
 
 To mitigate the impact on data migration when an exception occurs, it is recommended to merge and replicate each sharding group as a separate data migration task. **This might enable that only a small number of data migration tasks need to be handled manually while others remain unaffected.**
 
 ## Handle sharding DDL locks manually
 
-You can easily conclude from [Merge and Replicate Data from Sharded Tables](/dev/reference/tools/data-migration/features/shard-merge.md#principles) that DM's sharding DDL lock is a mechanism for coordinating the execution of DDL operations to the downstream from multiple upstream sharded tables.
+You can easily conclude from [Merge and Replicate Data from Sharded Tables](/v3.0/reference/tools/data-migration/features/shard-merge.md#principles) that DM's sharding DDL lock is a mechanism for coordinating the execution of DDL operations to the downstream from multiple upstream sharded tables.
 
 Therefore, when you find any sharding DDL lock on `DM-master` through `show-ddl-locks` command, or any `unresolvedGroups` or `blockingDDLs` on some DM-workers through `query-status` command, do not rush to manually release the sharding DDL lock through `unlock-ddl-lock` or `break-ddl-lock`.
 
 Instead, you can:
 
-- Follow the corresponding manual solution to handle the scenario if the failure of automatically releasing the sharding DDL lock is one of the [listed abnormal scenarios](/dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md#supported-scenarios).
+- Follow the corresponding manual solution to handle the scenario if the failure of automatically releasing the sharding DDL lock is one of the [listed abnormal scenarios](/v3.0/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md#supported-scenarios).
 - Redo the entire data migration task if it is an unsupported scenario: First, empty the data in the downstream database and the `dm_meta` information associated with the migration task; then, re-execute the full and incremental data migration.
 
 ## Handle conflicts of auto-increment primary key
 
-DM offers the [column mapping](/dev/reference/tools/data-migration/features/overview.md#column-mapping) feature to handle conflicts that might occur in merging the `bigint` type of auto-increment primary key. However, it is **strongly discouraged** to choose this approach. If it is acceptable in the production environment, the following two alternatives are recommended.
+DM offers the [column mapping](/v3.0/reference/tools/data-migration/features/overview.md#column-mapping) feature to handle conflicts that might occur in merging the `bigint` type of auto-increment primary key. However, it is **strongly discouraged** to choose this approach. If it is acceptable in the production environment, the following two alternatives are recommended.
 
 ### Remove the `PRIMARY KEY` attribute of an auto-increment primary key
 
@@ -104,7 +104,7 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
 
 ## Create/drop tables in the upstream
 
-In [Merge and Replicate Data from Sharded Tables](/dev/reference/tools/data-migration/features/shard-merge.md#principles), it is clear that the coordination of sharding DDL lock depends on whether the downstream database receives the DDL statements of all upstream sharded tables. In addition, DM currently **does not support** dynamically creating or dropping sharded tables in the upstream. Therefore, to create or drop sharded tables in the upstream, it is recommended to perform the following steps.
+In [Merge and Replicate Data from Sharded Tables](/v3.0/reference/tools/data-migration/features/shard-merge.md#principles), it is clear that the coordination of sharding DDL lock depends on whether the downstream database receives the DDL statements of all upstream sharded tables. In addition, DM currently **does not support** dynamically creating or dropping sharded tables in the upstream. Therefore, to create or drop sharded tables in the upstream, it is recommended to perform the following steps.
 
 ### Create sharded tables in the upstream
 
