@@ -164,11 +164,21 @@ Use the `compact-cluster` command to manually compact data of the whole TiKV clu
 
 The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
 
-In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism.
+In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism. For example:
 
-```bash
-pd-ctl>> operator add remove-peer <region_id> <peer_id>
-$ tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r 2
+{{< copyable "shell-regular" >}}
+
+```shell
+pd-ctl operator add remove-peer <region_id> <store_id>
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
+```
+
+```
 success!
 ```
 
