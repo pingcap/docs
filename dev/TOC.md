@@ -154,6 +154,7 @@
       - [Window Functions](/dev/reference/sql/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](/dev/reference/sql/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/dev/reference/sql/functions-and-operators/precision-math.md)
+      - [List of Expressions for Pushdown](/dev/reference/sql/functions-and-operators/expressions-pushed-down.md)
     + SQL Statements
       - [`ADD COLUMN`](/dev/reference/sql/statements/add-column.md)
       - [`ADD INDEX`](/dev/reference/sql/statements/add-index.md)
@@ -316,6 +317,7 @@
       + Usage Scenarios
         - [Simple Scenario](/dev/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/dev/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/dev/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/dev/reference/tools/data-migration/configure/overview.md)
