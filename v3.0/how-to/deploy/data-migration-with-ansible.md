@@ -290,7 +290,7 @@ grafana_admin_user = "admin"
 grafana_admin_password = "admin"
 ```
 
-`{version}` is the version number of the DM-Ansible you use. 
+`{version}` is the version number of the DM-Ansible you use.
 
 ### DM-worker configuration parameters description
 
