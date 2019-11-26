@@ -5,9 +5,9 @@ category: reference
 ---
 # Best Practice of Data Migration in the Shard Merge Scenario
 
-This document describes the features and limitations of [TiDB Data Migration](https://github.com/pingcap/dm) (DM) in the shard merge scenario and provides a best practice guide to facilitate application for users.
+This document describes the features and limitations of [TiDB Data Migration](https://github.com/pingcap/dm) (DM) in the shard merge scenario and provides a data migration best practice guide for your application.
 
-## An independent data migration task
+## Use a separate data migration task
 
 In the [Merge and Replicate Data from Sharded Tables](/v3.1/reference/tools/data-migration/features/shard-merge.md#principles) document, the definition of "sharding group" is given: A sharding group consists of all upstream tables that need to be merged and replicated into the same downstream table.
 
@@ -19,7 +19,7 @@ To mitigate the impact on data migration when an exception occurs, it is recomme
 
 You can easily conclude from [Merge and Replicate Data from Sharded Tables](/v3.1/reference/tools/data-migration/features/shard-merge.md#principles) that DM's sharding DDL lock is a mechanism for coordinating the execution of DDL operations to the downstream from multiple upstream sharded tables.
 
-Therefore, when you find any sharding DDL lock on `DM-master` through `show-ddl-locks` command, or any `unresolvedGroups` or `blockingDDLs` on some DM-workers through `query-status` command, do not rush to manually release the sharding DDL lock through `unlock-ddl-lock` or `break-ddl-lock`.
+Therefore, when you find any sharding DDL lock on `DM-master` through `show-ddl-locks` command, or any `unresolvedGroups` or `blockingDDLs` on some DM-workers through `query-status` command, do not rush to manually release the sharding DDL lock through `unlock-ddl-lock` or `break-ddl-lock` commands.
 
 Instead, you can:
 
@@ -30,7 +30,7 @@ Instead, you can:
 
 DM offers the [column mapping](/v3.1/reference/tools/data-migration/features/overview.md#column-mapping) feature to handle conflicts that might occur in merging the `bigint` type of auto-increment primary key. However, it is **strongly discouraged** to choose this approach. If it is acceptable in the production environment, the following two alternatives are recommended.
 
-### Remove the `PRIMARY KEY` attribute of an auto-increment primary key
+### Remove the `PRIMARY KEY` attribute from the column
 
 Assume that the upstream schemas are as follows:
 
@@ -64,7 +64,7 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
 
 2. Start the full and incremental data migration task.
 
-3. Run `query-status` to verify whether the data migration task is successfully processed and whether the data from the upstream have already been merged and replicated to the downstream database.
+3. Run `query-status` to verify whether the data migration task is successfully processed and whether the data from the upstream has already been merged and replicated to the downstream database.
 
 ### Use a composite primary key
 
@@ -82,7 +82,7 @@ CREATE TABLE `tbl_multi_pk` (
 If the following requirements are satisfied:
 
 * The application does not depend on the `PRIMARY KEY` attribute of the `auto_pk_c1` column.
-* The composite primary key that consists of column `auto_pk_c1` and `uuid_c2` is globally unique.
+* The composite primary key that consists of the `auto_pk_c1` and `uuid_c2` columns is globally unique.
 * It is acceptable to use a composite primary key in the application.
 
 Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'` error that is possibly caused by the `auto_pk_c1` column when you merge sharded tables.
