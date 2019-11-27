@@ -168,25 +168,29 @@ In a TiKV instance, you can use this command to set the status of some Regions t
 
 Follow the two steps to set a Region to Tombstone:
 
-{{< copyable "shell-regular" >}}
+1. Take off the corresponding Peer of this Region on the machine in `pd-ctl`:
 
-```shell
-pd-ctl operator add remove-peer <region_id> <store_id>
-```
+    {{< copyable "shell-regular" >}}
 
-{{< copyable "shell-regular" >}}
+    ```shell
+    pd-ctl operator add remove-peer <region_id> <store_id>
+    ```
 
-```shell
-tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
-```
+2. Use the `tombstone` command to set a Region to Tombstone:
 
-```
-success!
-```
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
+    ```
+
+    ```
+    success!
+    ```
 
 > **Note:**
 >
-> - This command only supports the local mode.
+> - The `tombstone` command only supports the local mode.
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether PD can securely switch to Tombstone. Therefore, before setting a PD instance to Tombstone, you need to take off the corresponding Peer of this Region on the machine in `pd-ctl`.
 
 ### Send a `consistency-check` request to TiKV
