@@ -6,7 +6,7 @@ category: reference
 
 # Follower Reads
 
-When you read the Region with hot data in the system, resources of the machine where the Region leader is become fully occupied,causing read bottlenecks. In this situation, enabling follower reads can significantly reduce the load of the leader, and improve the throughput of the whole system by balancing the load among multiple followers. This document introduces the use and implementation mechanism of follower reads.
+When you read the Region with hot data in the system, resources of the machine where the Region leader is become fully occupied, causing read bottlenecks. In this situation, enabling follower reads can significantly reduce the load of the leader, and improve the throughput of the whole system by balancing the load among multiple followers. This document introduces the use and implementation mechanism of follower reads.
 
 ## Overview
 
