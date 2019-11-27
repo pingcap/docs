@@ -36,13 +36,13 @@ For additional information about DM, please consult [Data Migration Overview](/v
 
 We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-server, tikv-server, and tidb-server. Then we'll start a single DM-master and 3 instances of DM-worker.
 
-First, install MySQL 5.7 and download/extract the TiDB packages we'll use:
+First, install MySQL 5.7 and download/extract the TiDB v3.0 and DM v1.0.2 packages we'll use:
 
 ```bash
 sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
 sudo yum install -y mysql-community-server
 curl http://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf -
-curl http://download.pingcap.org/dm-latest-linux-amd64.tar.gz | tar xzf -
+curl http://download.pingcap.org/dm-v1.0.2-linux-amd64.tar.gz | tar xzf -
 curl -L https://github.com/pingcap/docs/raw/master/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
 ```
 
@@ -229,6 +229,8 @@ port = 3307
 
 The `flavor` option should be set to `"mysql"` (the default value, and 5.5 < MySQL versions < 8.0 are supported) if migrating from MySQL Server, Percona Server, Percona XtraDB Cluster, or Amazon Aurora or RDS. If migrating from MariaDB Server or MariaDB (Galera) Cluster, use `flavor = "mariadb"` (only MariaDB versions greater than 10.1.2 are supported).
 
+- If `password` in the `[from]` configuration is not an empty string, you need to use dmctl to encrypt the password. Refer to [Encrypt the upstream MySQL user password using dmctl](/v3.1/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl) for detailed steps.
+
 Tasks are defined in YAML files. First, let's look at dmtask1.yaml:
 
 ```yaml
@@ -280,6 +282,8 @@ There are a number of global options, and several groups of options that define 
 * `is-sharding: true` tells DM that we want multiple DM-worker instances to work on a single task to merge several upstream shards into a single downstream table.
 
 * `ignore-checking-items: ["auto_increment_ID"]` disables DM's detection of potential auto-increment conflicts among the upstream instances. DM can detect that all 3 upstream MySQL servers have an auto-increment column for a table with the same name in the same schema, and that this situation would be expected to lead to conflicts among the several tables. We've avoided that by setting `auto-increment-increment` and `auto-increment-offset` so that each of the MySQL servers gives non-overlapping IDs. So, we tell DM to ignore checking for overlapping auto-increment IDs in this task.
+
+* The `target-database` section defines the information of the connected target database. If `password` is not an empty string, you need to use dmctl to encrypt the password. Refer to [Encrypt the upstream MySQL user password using dmctl](/v3.1/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl) for detailed steps.
 
 * We use `black-white-list` to limit the scope of this task to database `dmtest`.
 
