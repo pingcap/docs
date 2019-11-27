@@ -124,7 +124,7 @@ Assume that the downstream schema after replication is as follows:
           tbl-name: "log_bak"
     ```
 
-- To satisfy the replication Requirement #8, first refer to [handling conflicts of auto-increment primary key](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handle-conflicts-of-auto-increment-primary-key) to solve conflicts. This guarantees that data is successfully replicated to the downstream when sharded tables have duplicate values in the primary key column. Then, configure `ignore-checking-items` to skip checking the conflict of auto-increment primary key:
+- To satisfy the replication Requirement #8, first refer to [handling conflicts of auto-increment primary key](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handle-conflicts-of-auto-increment-primary-key) to solve conflicts. This guarantees that data is successfully replicated to the downstream when the primary key value of one sharded table is duplicate with that of another sharded table. Then, configure `ignore-checking-items` to skip checking the conflict of auto-increment primary key:
 
     {{< copyable "" >}}
 

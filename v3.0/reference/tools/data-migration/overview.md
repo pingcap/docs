@@ -91,7 +91,7 @@ Before using the DM tool, note the following restrictions:
 
 + Sharding
 
-    - If conflict exists between sharded tables, solve the conflict by referring to [handling conflicts of auto-increment primary key](https://github.com/pingcap/docs/pull/1604). Otherwise, data replication is not supported. Conflicting data can cover each other and cause data loss.
+    - If conflict exists between sharded tables, solve the conflict by referring to [handling conflicts of auto-increment primary key](/v3.0/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handle-conflicts-of-auto-increment-primary-key). Otherwise, data replication is not supported. Conflicting data can cover each other and cause data loss.
 
     - For other sharding restrictions, see [Sharding DDL usage restrictions](/v3.0/reference/tools/data-migration/features/shard-merge.md#restrictions).
 
