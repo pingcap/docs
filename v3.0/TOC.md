@@ -154,6 +154,7 @@
       - [Window Functions](/v3.0/reference/sql/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](/v3.0/reference/sql/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/v3.0/reference/sql/functions-and-operators/precision-math.md)
+      - [List of Expressions for Pushdown](/v3.0/reference/sql/functions-and-operators/expressions-pushed-down.md)
     + SQL Statements
       - [`ADD COLUMN`](/v3.0/reference/sql/statements/add-column.md)
       - [`ADD INDEX`](/v3.0/reference/sql/statements/add-index.md)
@@ -312,7 +313,6 @@
         - [Table Routing](/v3.0/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v3.0/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/v3.0/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/v3.0/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/v3.0/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/v3.0/reference/tools/data-migration/features/shard-merge.md)
@@ -321,6 +321,7 @@
       + Usage Scenarios
         - [Simple Scenario](/v3.0/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/v3.0/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/v3.0/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/v3.0/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v3.0/reference/tools/data-migration/configure/overview.md)
