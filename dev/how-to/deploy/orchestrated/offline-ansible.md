@@ -149,7 +149,9 @@ See [Configure the SSH mutual trust and sudo rules on the Control Machine](/dev/
 
 See [Install the NTP service on the target machines](/dev/how-to/deploy/orchestrated/ansible.md#step-6-install-the-ntp-service-on-the-target-machines).
 
-> **Note:** If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can skip this step. See [How to check whether the NTP service is normal](/dev/how-to/deploy/orchestrated/ansible.md#how-to-check-whether-the-ntp-service-is-normal).
+> **Note:**
+>
+> If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can skip this step. See [How to check whether the NTP service is normal](/dev/how-to/deploy/orchestrated/ansible.md#how-to-check-whether-the-ntp-service-is-normal).
 
 ## Step 7: Configure the CPUfreq governor mode on the target machine
 

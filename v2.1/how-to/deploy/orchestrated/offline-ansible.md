@@ -100,7 +100,7 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
 
 | TiDB version | tidb-ansible tag | Note |
 | -------- | ---------------- | --- |
-| 2.0 version | v2.0.10, v2.0.11 | For new users, it is not recommended to use the stable version 2.0 in the production environment. |
+| 2.0 version | v2.0.10, v2.0.11 | The stable version 2.0 is not recommended for new users to use in the production environment. |
 | 2.1 version | v2.1.x | The stable version 2.1 can be used in the production environment. |
 
 > **Note:**
@@ -120,7 +120,7 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
     ```
 
     ```
-      ansible 2.5.0
+    ansible 2.5.0
     ```
 
     > **Note:**
@@ -139,8 +139,8 @@ The relationship between the `tidb-ansible` version and the TiDB version is as f
 
     > **Note:**
     >
-    > Replace `$tag` with the value of the selected tag version, such as `v2.1.15`.
-    > It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
+    > - Replace `$tag` with the value of the selected tag version, such as `v2.1.15`.
+    > - It is required to use the corresponding tidb-ansible version when you deploy and upgrade the TiDB cluster. If you deploy TiDB using a mismatched version of tidb-ansible (such as using tidb-ansible v2.1.4 to deploy TiDB v2.1.6), an error might occur.
 
 3. Run the `local_prepare.yml` playbook, and download TiDB binary online to the download machine.
 
@@ -161,7 +161,9 @@ See [Configure the SSH mutual trust and sudo rules on the Control Machine](/v2.1
 
 See [Install the NTP service on the target machines](/v2.1/how-to/deploy/orchestrated/ansible.md#step-6-install-the-ntp-service-on-the-target-machines).
 
-> **Note:** If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can skip this step. See [How to check whether the NTP service is normal](/v2.1/how-to/deploy/orchestrated/ansible.md#how-to-check-whether-the-ntp-service-is-normal#how-to-check-whether-the-ntp-service-is-normal).
+> **Note:**
+>
+> If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can skip this step. See [How to check whether the NTP service is normal](/v2.1/how-to/deploy/orchestrated/ansible.md#how-to-check-whether-the-ntp-service-is-normal#how-to-check-whether-the-ntp-service-is-normal).
 
 ## Step 7: Configure the CPUfreq governor mode on the target machine
 
