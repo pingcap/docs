@@ -309,7 +309,6 @@
         - [Table Routing](/v3.1/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v3.1/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/v3.1/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/v3.1/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/v3.1/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/v3.1/reference/tools/data-migration/features/shard-merge.md)
@@ -318,6 +317,7 @@
       + Usage Scenarios
         - [Simple Scenario](/v3.1/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/v3.1/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/v3.1/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/v3.1/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v3.1/reference/tools/data-migration/configure/overview.md)
