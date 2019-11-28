@@ -33,9 +33,10 @@ Refer to the [Spark official website](https://spark.apache.org/docs/latest/hardw
 This is an example based on the `spark-env.sh` configuration:
 
 ```
-SPARK_EXECUTOR_MEMORY = 32g
-SPARK_WORKER_MEMORY = 32g
-SPARK_WORKER_CORES = 8
+SPARK_EXECUTOR_CORES: 5
+SPARK_EXECUTOR_MEMORY: 10g
+SPARK_WORKER_CORES: 5
+SPARK_WORKER_MEMORY: 10g
 ```
 
 Add the following lines in `spark-defaults.conf`.
