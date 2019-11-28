@@ -152,7 +152,7 @@ In a TiKV instance, you can use this command to set the status of some Regions t
 
 Follow the two steps to set a Region to Tombstone:
 
-1. Take off the corresponding Peer of this Region on the machine in `pd-ctl`:
+1. Remove the corresponding Peer of this Region on the machine in `pd-ctl`:
 
     {{< copyable "shell-regular" >}}
 
@@ -175,7 +175,7 @@ Follow the two steps to set a Region to Tombstone:
 > **Note:**
 >
 > - The `tombstone` command only supports the local mode.
-> - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether PD can securely switch to Tombstone. Therefore, before setting a PD instance to Tombstone, you need to take off the corresponding Peer of this Region on the machine in `pd-ctl`.
+> - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether PD can safely switch to Tombstone.
 
 ### Send a `consistency-check` request to TiKV
 
