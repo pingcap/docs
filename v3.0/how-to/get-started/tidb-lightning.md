@@ -19,17 +19,17 @@ The TiDB Lightning tool set consists of two components:
 
 ![Architecture of TiDB Lightning tool set](/media/tidb-lightning-architecture.png)
 
-## Prerequisite
+## Prerequisites
 
-The operations in this tutorial requires several new and clean instances on the CentOS 7 system. You can use VMware, VirtualBox and other tools to deploy a virtual host locally or to deploy a small cloud virtual host on a vendor-supplied platform. Because TiDB Lightning consumes a large amount of computer resources, it is recommended that you allocate at least 4 GB for the memory.
+This tutorial assumes you use several new and clean CentOS 7 instances. You can use VMware, VirtualBox or other tools to deploy a virtual machine locally or a small cloud virtual machine on a vendor-supplied platform. Because TiDB Lightning consumes a large amount of computer resources, it is recommended that you allocate at least 4 GB memory for running it.
 
 > **Warning:**
 >
-> The deployment method in this tutorial is only for test and trial, not for the production or development environment.
+> The deployment method in this tutorial is only recommended for test and trial. **Do not apply it in the production or development environment.**
 
 ## Prepare full backup data
 
-Use [`mydumper`](/v3.0/reference/tools/mydumper.md) to export data from MySQL:
+First, use [`mydumper`](/v3.0/reference/tools/mydumper.md) to export data from MySQL:
 
 {{< copyable "shell-regular" >}}
 
@@ -51,7 +51,7 @@ After executing this command, the full backup data is exported to the `/data/my_
 
 ### Step 1: Deploy TiDB cluster
 
-Before the data import, first you need to deploy a TiDB cluster (later than version v2.0.9). In this tutorial, TiDB v3.0.4 is used. For the deployment method, refer to [TiDB Introduction](/v3.0/overview.md).
+Before the data import, you need to deploy a TiDB cluster (later than v2.0.9). In this tutorial, TiDB v3.0.4 is used. For the deployment method, refer to [TiDB Introduction](/v3.0/overview.md).
 
 ### Step 2: Download TiDB Lightning installation package
 
@@ -61,7 +61,7 @@ Download the TiDB Lightning installation package from the following link:
 
 > **Note:**
 >
-> Choose the same version as the TiDB cluster.
+> Choose the same version of TiDB Lightning as that of the TiDB cluster.
 
 ### Step 3: Start `tikv-importer`
 
@@ -70,7 +70,7 @@ Download the TiDB Lightning installation package from the following link:
 2. Configure `tikv-importer.toml`.
 
     ```toml
-    # The template for the TiKV Importer configuration file
+    # The template of the tikv-importer configuration file
 
     # Log file
     log-file = "tikv-importer.log"
@@ -82,11 +82,11 @@ Download the TiDB Lightning installation package from the following link:
     addr = "0.0.0.0:8287"
 
     [import]
-    # The file path in which the engine file is stored.
+    # The directory of the engine file.
     import-dir = "/mnt/ssd/data.import/"
     ```
 
-3. Operate `tikv-importer`:
+3. Run `tikv-importer`:
 
     {{< copyable "shell-regular" >}}
 
@@ -98,7 +98,7 @@ Download the TiDB Lightning installation package from the following link:
 
 1. Upload `bin/tidb-lightning` and `bin/tidb-lightning-ctl` in the installation package to the server where TiDB Lightning is deployed.
 2. Upload the [prepared data source](#prepare-full-backup-data) to the server.
-3. Configure the parameters for `tidb-lightning` and operate `tidb-lightning`. If you directly use the `nohup` command in the command-line to start the `tidb-lightning` process, the process might exit because of the SIGHUP signal received. It is recommended that you use the `nohup` command in the script. For example:
+3. After configuring the parameters properly, use a `nohup` command to start the `tidb-lightning` process. If you directly run the command in the command-line, the process might exit because of the SIGHUP signal received. Instead, it's preferable to run a bash script that contains the `nohup` command:
 
     {{< copyable "shell-regular" >}}
 
@@ -113,14 +113,14 @@ Download the TiDB Lightning installation package from the following link:
             > nohup.out &
     ```
 
-### Step 5: Check data
+### Step 5: Check data integrity
 
-After the import is completed, TiDB Lightning exits automatically. If the import is successful, `tidb lightning exit` is displayed in the last line of the log.
+After the import is completed, TiDB Lightning exits automatically. If the import is successful, you can find `tidb lightning exit` in the last line of the log file.
 
-If any error occurs, refer to [TiDB Lightning Troubleshooting](/v3.0/how-to/troubleshoot/tidb-lightning.md)
+If any error occurs, refer to [TiDB Lightning Troubleshooting](/v3.0/how-to/troubleshoot/tidb-lightning.md).
 
 ## Summary
 
-This tutorial briefly introduces TiDB Lightning, and describes how to deploy a set of TiDB Lightning cluster and imports the full backup data to the TiDB cluster.
+This tutorial briefly introduces what TiDB Lightning is and how to quickly deploy a TiDB Lightning cluster to import full backup data to the TiDB cluster.
 
-For more details about the features and usage of TiDB Lightning, refer to [TiDB Lightning Overview](/v3.0/reference/tools/tidb-lightning/overview.md).
+For detailed features and usage about TiDB Lightning, refer to [TiDB Lightning Overview](/v3.0/reference/tools/tidb-lightning/overview.md).
