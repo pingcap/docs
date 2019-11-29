@@ -1,10 +1,10 @@
 ---
-title: HAProxy Best Practices
+title: Best Practices for Using HAProxy in TiDB
 summary: This document describes best practices for configuration and usage of HAProxy in TiDB.
 category: reference
 ---
 
-# HAProxy Best Practices
+# Best Practices for Using HAProxy in TiDB
 
 This document describes best practices for configuration and usage of [HAProxy](https://github.com/haproxy/haproxy) in TiDB. HAProxy provides load balancing for TCP-based applications. From TiDB clients, you can manipulate data just by connecting to the floating virtual IP address provided by HAProxy, which helps to achieve load balancing in the TiDB server layer.
 
@@ -223,7 +223,7 @@ Method 1: Use `kill -9`.
     kill -9 ${haproxy.pid}
     ```
 
-Method 2: Use `systemd` to stop HAProxy.
+Method 2: Use `systemd`.
 
 {{< copyable "shell-regular" >}}
 
