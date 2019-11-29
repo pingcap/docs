@@ -75,7 +75,7 @@ br backup full \
     --log-file backupfull.log
 ```
 
-In the above `br` command, the `--ratelimit` and `--concurrency` options set upper limits on the speed at which a backup operation is performed (MiB/s) and the number of concurrent executions for each TiKV node, and the BR log is written to the `backupfull.log` file.
+In the above `br` command, the `--ratelimit` option specifies the maximum speed at which a backup operation is performed (MiB/s) on each TiKV node. The `--concurrency` option sets an upper limit on the number of concurrent executions on each TiKV node. `--log-file` specifies that the BR log is written to the `restorefull.log` file.
 
 A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data security. The progress bar is displayed as follows:
 
@@ -108,9 +108,9 @@ br backup table \
     --log-file backuptable.log
 ```
 
-The `table` sub-command has two options: `--db` and `--table`. `--db` specifies the database name and `--table` specifies the table name. The other options have the same meanings as those in [Backup whole cluster](#backup-whole-cluster).
+The `table` sub-command has two options: `--db` and `--table`. `--db` specifies the database name and `--table` specifies the table name. For the meanings of other options, see [Backup all cluster data](#backup-all-cluster-data).
 
-A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then, the BR also checks the backup data to ensure data security.
+A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data security.
 
 ## Restore cluster data
 
@@ -132,7 +132,7 @@ br restore full \
     --log-file restorefull.log
 ```
 
-`--concurrency` specifies how many sub-tasks can be performed concurrently in a restoration operation, and the BR log is written to the `restorefull.log` file.
+In the above command, `--concurrency` specifies how many sub-tasks can be performed concurrently in a restoration operation. `--log-file` specifies that the BR log is written to the `restorefull.log` file.
 
 A progress bar is displayed in the terminal during the restoration. When the progress bar advances to 100%, the restoration is complete. Then, the BR also checks the backup data to ensure data security.
 
@@ -160,7 +160,7 @@ br restore db \
     --log-file restorefull.log
 ```
 
-In the above command, `--db` specifies the name of the database to be restored. The other options have the same meaning as those in [Restore all backup data](#restore-all-backup-data).
+In the above command, `--db` specifies the name of the database to be restored. For the meanings of other options, see [Restore all backup data](#restore-all-backup-data).
 
 ### Restore a table
 
@@ -179,13 +179,13 @@ br restore table \
     --log-file restorefull.log
 ```
 
-In the above command, `--table` specifies the name of the table to be restored. The other options have the same meaning as those in [Restore a database](#restore-a-database).
+In the above command, `--table` specifies the name of the table to be restored. For the meanings of other options, see [Restore a database](#restore-a-database).
 
 ## Best practices
 
 - It is recommended that you mount a shared storage (for example, NFS) on the backup directory specified by `-s`. This makes it easier to collect and manage backup files.
 - It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
-- It is recommended that you perform the backup operation in a low-peak application time to minimize the impact on the application.
+- It is recommended that you perform the backup operation in a low-peak time to minimize the impact on the application.
 
 ## Note
 
@@ -193,7 +193,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 - If the backed up cluster does not have a network storage, before the restoration, copy the backup SST files to the directory specified by `--storage` on each TikV node.
 - Do not perform the backup operation when executing DDL statements on TiDB.
 - Perform the restoration only on new clusters.
-- If the backup time might exceed the [`tikv_gc_life_time`](/dev/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `"10m0s"` by default, increase the value of this configuration.
+- If the backup time might exceed the [`tikv_gc_life_time`](/dev/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default, increase the value of this configuration.
 
     For example, set `tikv_gc_life_time` to `720h`:
 
