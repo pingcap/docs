@@ -284,6 +284,7 @@
   - [Alert Rules](/v3.0/reference/alert-rules.md)
   + Best Practices
     - [Highly Concurrent Write Best Practices](/v3.0/reference/best-practices/high-concurrency.md)
+    - [HAProxy Best Practices](/v3.0/reference/best-practices/haproxy.md)
   - [TiSpark](/v3.0/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.0/reference/tidb-binlog/overview.md)
@@ -308,7 +309,6 @@
         - [Table Routing](/v3.0/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v3.0/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/v3.0/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/v3.0/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/v3.0/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/v3.0/reference/tools/data-migration/features/shard-merge.md)
@@ -317,6 +317,7 @@
       + Usage Scenarios
         - [Simple Scenario](/v3.0/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/v3.0/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/v3.0/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/v3.0/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v3.0/reference/tools/data-migration/configure/overview.md)
@@ -406,6 +407,7 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.6](/v3.0/releases/3.0.6.md)
     - [3.0.5](/v3.0/releases/3.0.5.md)
     - [3.0.4](/v3.0/releases/3.0.4.md)
     - [3.0.3](/v3.0/releases/3.0.3.md)

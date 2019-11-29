@@ -285,6 +285,7 @@
   - [Alert Rules](/dev/reference/alert-rules.md)
   + Best Practices
     - [Highly Concurrent Write Best Practices](/dev/reference/best-practices/high-concurrency.md)
+    - [HAProxy Best Practices](/dev/reference/best-practices/haproxy.md)
   - [TiSpark](/dev/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/dev/reference/tidb-binlog/overview.md)
@@ -309,7 +310,6 @@
         - [Table Routing](/dev/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/dev/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/dev/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/dev/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/dev/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/dev/reference/tools/data-migration/features/shard-merge.md)
@@ -318,6 +318,7 @@
       + Usage Scenarios
         - [Simple Scenario](/dev/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/dev/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/dev/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/dev/reference/tools/data-migration/configure/overview.md)
@@ -409,6 +410,7 @@
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
   + v3.0
+    - [3.0.6](/dev/releases/3.0.6.md)
     - [3.0.5](/dev/releases/3.0.5.md)
     - [3.0.4](/dev/releases/3.0.4.md)
     - [3.0.3](/dev/releases/3.0.3.md)
