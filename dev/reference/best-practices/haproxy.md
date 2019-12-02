@@ -67,7 +67,7 @@ To install the dependencies above, run the following command:
 {{< copyable "shell-regular" >}}
 
 ```bash
-yum-y install epel-release gcc systemd-devel
+yum -y install epel-release gcc systemd-devel
 ```
 
 ## Deploy HAProxy
