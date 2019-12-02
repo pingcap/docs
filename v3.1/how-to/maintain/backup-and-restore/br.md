@@ -148,7 +148,7 @@ Full Restore <---------/...............................................> 17.12%.
 
 To restore a database to the cluster, execute the `br restore db` command. To get help on this command, execute `br restore db -h` or `br restore db --help`.
 
-Usage: Restore a database in the backup data in the `/tmp/backup` directory to the cluster.
+Usage: Restore a database backed up in the `/tmp/backup` directory to the cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -166,7 +166,7 @@ In the above command, `--db` specifies the name of the database to be restored. 
 
 To restore a single table to the cluster, execute the `br restore table` command. To get help on this command, execute `br restore table -h` or `br restore table --help`.
 
-Usage: Restore a database table in the backup data in the `/tmp/backup` directory to the cluster.
+Usage: Restore a table backed up data in the `/tmp/backup` directory to the cluster.
 
 {{< copyable "shell-regular" >}}
 
