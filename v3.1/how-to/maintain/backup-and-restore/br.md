@@ -6,7 +6,7 @@ category: how-to
 
 # Use BR to Backup and Restore Cluster Data
 
-Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [Mydumper/Loader](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document introduces the working principle of BR, describes the command line, and offers detailed use cases of this tool.
+Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [Mydumper/Loader](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document introduces the working principle of BR, describes the command line, and offers detailed use cases and best practices of this tool.
 
 ## Working principle
 
@@ -33,13 +33,13 @@ In this command,
 
 ### Sub-commands
 
-A `br` command consists of multiple layers of sub-command. Currently, BR has the following three sub-commands:
+A `br` command consists of multiple layers of sub-commands. Currently, BR has the following three sub-commands:
 
 * `br backup` is used to backup the data of the TiDB cluster.
 * `br restore` is used to restore the data of the TiDB cluster.
 * `br version` is used to check the version of BR.
 
-Each of the above three sub-commands might include the following three sub-commands:
+Each of the above three sub-commands might include the following three sub-commands to specify the scope of an operation:
 
 * `full` is used to backup or restore all the cluster data.
 * `db` is used to restore the specified database of the cluster.
@@ -183,7 +183,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 ## Best practices
 
-- It is recommended that you mount a shared storage (for example, NFS) on the backup directory specified by `-s`. This makes it easier to collect and manage backup files.
+- It is recommended that you mount a shared storage (for example, NFS) on the backup directory specified by `-s`. Then you will find it easier to collect and manage backup files.
 - It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
 - It is recommended that you perform the backup operation in a low-peak time to minimize the impact on the application.
 
@@ -191,7 +191,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 - BR only supports TiDB v3.1 or later versions.
 - If the backed up cluster does not have a network storage, before the restoration, copy the backup SST files to the directory specified by `--storage` on each TikV node.
-- Do not perform the backup operation when executing DDL statements on TiDB.
+- Do not perform the backup operation when performing DDL operations on TiDB.
 - Currently you cannot perform the backup and restoration on the partition table.
 - Currently you can perform the restoration only on new clusters.
 - If the backup time might exceed the [`tikv_gc_life_time`](/v3.1/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default, increase the value of this configuration.
@@ -276,7 +276,7 @@ CREATE TABLE `sbtest1` (
 
 Suppose that 4 TiKV nodes is used, each with the following configuration:
 
-16 Core，32GB MEM，SSD, 3 replicas
+16 Core, 32GB MEM, SSD, 3 replicas
 
 ### Backup
 
