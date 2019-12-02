@@ -48,6 +48,7 @@
     - [Read Historical Data](/dev/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/dev/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/dev/how-to/get-started/data-migration.md)
+    - [TiDB Lightning Tutorial](/dev/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/dev/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md)
@@ -286,6 +287,7 @@
   - [Alert Rules](/dev/reference/alert-rules.md)
   + Best Practices
     - [Highly Concurrent Write Best Practices](/dev/reference/best-practices/high-concurrency.md)
+    - [HAProxy Best Practices](/dev/reference/best-practices/haproxy.md)
   - [TiSpark](/dev/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/dev/reference/tidb-binlog/overview.md)
@@ -410,6 +412,7 @@
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
   + v3.0
+    - [3.0.6](/dev/releases/3.0.6.md)
     - [3.0.5](/dev/releases/3.0.5.md)
     - [3.0.4](/dev/releases/3.0.4.md)
     - [3.0.3](/dev/releases/3.0.3.md)
