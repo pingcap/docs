@@ -192,7 +192,8 @@ In the above command, `--table` specifies the name of the table to be restored. 
 - BR only supports TiDB v3.1 or later versions.
 - If the backed up cluster does not have a network storage, before the restoration, copy the backup SST files to the directory specified by `--storage` on each TikV node.
 - Do not perform the backup operation when executing DDL statements on TiDB.
-- Perform the restoration only on new clusters.
+- Currently you cannot perform the backup and restoration on the partition table.
+- Currently you can perform the restoration only on new clusters.
 - If the backup time might exceed the [`tikv_gc_life_time`](/v3.1/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default, increase the value of this configuration.
 
     For example, set `tikv_gc_life_time` to `720h`:
@@ -225,3 +226,91 @@ In the above command, `--table` specifies the name of the table to be restored. 
     ./pd-ctl -u ${PDIP}:2379 scheduler add balance-leader-scheduler
     ./pd-ctl -u ${PDIP}:2379 scheduler add balance-region-scheduler
     ```
+
+## Examples
+
+This section shows how to backup and restore the data of an existing cluster.
+
+### Data source and machine configuration
+
+Suppose that the backup and restoration operations are performed on 10 tables in the TiKV cluster, each table with 5 million rows of data. The total data size is 35 GB.
+
+```sql
+MySQL [sbtest]> show tables;
++------------------+
+| Tables_in_sbtest |
++------------------+
+| sbtest1          |
+| sbtest10         |
+| sbtest2          |
+| sbtest3          |
+| sbtest4          |
+| sbtest5          |
+| sbtest6          |
+| sbtest7          |
+| sbtest8          |
+| sbtest9          |
++------------------+
+
+MySQL [sbtest]> select count(*) from sbtest1;
++----------+
+| count(*) |
++----------+
+|  5000000 |
++----------+
+1 row in set (1.04 sec)
+```
+
+The table structure is as follows:
+
+```sql
+CREATE TABLE `sbtest1` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `k` int(11) NOT NULL DEFAULT '0',
+  `c` char(120) NOT NULL DEFAULT '',
+  `pad` char(60) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `k_1` (`k`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin AUTO_INCREMENT=5138499
+```
+
+Suppose that 4 TiKV nodes is used, each with the following configuration:
+
+16 Core，32GB MEM，SSD, 3 replicas
+
+### Backup
+
+Before the backup operation, make sure the following things are done:
+
+- `tikv_gc_life_time` is set to a larger value so that the backup operation will not be interrupted by data loss.
+- No DDL statement is executed on TiDB.
+
+Then execute the following command to backup all the cluster data:
+
+{{< copyable "shell-regular" >}}
+
+```
+bin/br backup full -s local:///tmp/backup --pd "${PDIP}:2379" --log-file backup.log
+```
+
+```
+[INFO] [client.go:288] ["Backup Ranges"] [take=2m25.801322134s]
+[INFO] [schema.go:114] ["backup checksum finished"] [take=4.842154366s]
+```
+
+### Restoration
+
+Before the restoration, make sure that the TiKV cluster to be restored is a new cluster.
+
+Then execute the following command to restore all the cluster data:
+
+{{< copyable "shell-regular" >}}
+
+```
+bin/br restore full -s local:///tmp/backup --pd "${PDIP}:2379" --log-file restore.log
+```
+
+```
+[INFO] [client.go:345] [RestoreAll] [take=2m8.907369337s]
+[INFO] [client.go:435] ["Restore Checksum"] [take=6.385818026s]
+```
