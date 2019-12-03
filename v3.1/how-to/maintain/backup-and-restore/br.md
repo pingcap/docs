@@ -6,7 +6,7 @@ category: how-to
 
 # Use BR to Backup and Restore Cluster Data
 
-Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [Mydumper/Loader](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document introduces the working principle of BR, describes the command line, and offers detailed use cases and best practices of this tool.
+Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document describes the command line, offers detailed use cases and best practices, and introduces the working principle of BR.
 
 ## Command-line description
 
