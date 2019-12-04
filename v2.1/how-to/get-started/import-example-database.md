@@ -54,9 +54,9 @@ end_station_number, end_station, bike_number, member_type);
 
 ### Import all files
 
-**Note:**
-
-For the MySQL client, the local data loading feature is disabled by default. Before you perform the following step, make sure the MySQL client has enabled `local-infile`.
+> **Note:**
+>
+> When you start the MySQL client, use the `--local-infile=1` option.
 
 To import all `*.csv` files into TiDB in a bash loop:
 
