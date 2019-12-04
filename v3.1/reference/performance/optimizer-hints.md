@@ -168,7 +168,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 ### USE_INDEX_MERGE(t1, idx1, idx2)
 
-The `USE_INDEX_MERGE(t1, idx1, idx2)` hint tells the optimizer to access a specific table with the index merge method. The given list of indexes are optional parameters. If you explicitly specify the list, TiDB selects indexes from the list to merge index scans; if you do not give the list of indexes, TiDB selects indexes from all available indexes to merge index scans.
+The `USE_INDEX_MERGE(t1, idx1, idx2)` hint tells the optimizer to access a specific table with the index merge method. The given list of indexes are optional parameters. If you explicitly specify the list, TiDB selects indexes from the list to build index merge; if you do not give the list of indexes, TiDB selects indexes from all available indexes to build index merge.
 
 {{< copyable "sql" >}}
 
@@ -210,7 +210,7 @@ In addition to this hint, an environment variable called `tidb_mem_quota_query` 
 
 ### READ_FROM_REPLICA()
 
-The `READ_FROM_REPLICA()` hint enables TiKV to read consistent data from the follower. For example:
+The `READ_FROM_REPLICA()` hint enables the TiKV server to read consistent data from the follower node. For example:
 
 {{< copyable "sql" >}}
 
