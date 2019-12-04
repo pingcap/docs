@@ -26,11 +26,11 @@ Currently, TiDB supports two categories of hints, which are slightly different i
 
 ## Hints for controlling the optimizer
 
-A hint for controlling the optimizer is tacked on to **any** `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. You can specify the applicable scope of a hint and a table used in a hint by a **query block** introduced below. If you do not explicitly specify a query block for a hint, the hint affects the current query block by default.
+A hint for controlling the optimizer follows behind **any** `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. You can specify the applicable scope of a hint and a table used in a hint by a **query block** introduced below. If you do not explicitly specify a query block for a hint, the hint affects the current query block by default.
 
 ### Query block
 
-Each query and sub-query in a statement corresponds to a different query block, and each query block has its own `QB_NAME`. For example:
+Each query or sub-query in a statement corresponds to a different query block, and each query block has its own `QB_NAME`. For example:
 
 {{< copyable "sql" >}}
 
@@ -66,7 +66,7 @@ This hint means that the `SELECT` query block's name is specified to `QB1`, whic
 select /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * from (select t1.a, t1.b from t t1, t t2 where t1.a = t2.a) t1, t t3 where t1.b = t3.b;
 ```
 
-Also, you can tack on `@QB_NAME` to each table name of a hint to specify which query block the table belongs to.
+Also, you can append `@QB_NAME` to each table name of a hint to specify which query block the table belongs to.
 
 ### SM_JOIN(t1, t2)
 
@@ -84,7 +84,7 @@ select /*+ SM_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 
 The `INL_JOIN(t1, t2)` hint tells the optimizer to use an Index Nested Loop Join for the two tables `t1` and `t2`. This algorithm might consume less system resources and take shorter processing time in some scenarios and might produce an opposite result in other scenarios. If the result set is less than 10,000 rows after the outer table is filtered by the `WHERE` condition, it is recommended to use this hint.
 
-The parameter(s) given in `INL_JOIN()` is the candidate table for the inner table when you create the query plan. For example, `INL_JOIN (t1)` means that TiDB only considers using `t1` as the inner table to create a query plan.
+The parameter(s) given in `INL_JOIN()` is the candidate table for the inner table when you create the query plan. For example, `INL_JOIN(t1)` means that TiDB only considers using `t1` as the inner table to create a query plan.
 
 {{< copyable "sql" >}}
 
@@ -178,11 +178,11 @@ select /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * from t t1 where t1.a > 
 
 ## Hints for setting operation parameters
 
-A hint for setting operation parameters is tacked on to **the first** `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. A hint of this category modifies the operation parameter of the query to which this hint applies.
+A hint for setting operation parameters follows behind **the first** `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. A hint of this category modifies the operation parameter of the query to which this hint applies.
 
 The hints' priority is higher than the default setting and the environment setting.
 
-### MAX\_EXECUTION\_TIME(N)
+### MAX_EXECUTION_TIME(N)
 
 The `MAX_EXECUTION_TIME(N)` hint places a limit `N` (a timeout value in milliseconds) on how long a statement is permitted to execute before the server terminates it. In the following hint, `MAX_EXECUTION_TIME(1000)` means that the timeout is 1000 milliseconds (that is, 1 second):
 
@@ -192,7 +192,7 @@ The `MAX_EXECUTION_TIME(N)` hint places a limit `N` (a timeout value in millisec
 select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.id;
 ```
 
-In addition to this hint, a global variable called `global.max_execution_time` can also limit the execution time of a statement.
+In addition to this hint, the `global.max_execution_time` global variable can also limit the execution time of a statement.
 
 ### MEMORY_QUOTA(N)
 
@@ -206,7 +206,7 @@ In the following hint, `MEMORY_QUOTA(1024 MB)` means that the memory usage limit
 select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
 ```
 
-In addition to this hint, an environment variable called `tidb_mem_quota_query` can also limit the memory usage of a statement.
+In addition to this hint, the `tidb_mem_quota_query` environment variable can also limit the memory usage of a statement.
 
 ### READ_FROM_REPLICA()
 
