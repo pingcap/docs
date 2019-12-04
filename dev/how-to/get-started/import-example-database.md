@@ -54,9 +54,9 @@ end_station_number, end_station, bike_number, member_type);
 
 ### Import all files
 
-**Note:**
-
-When you start the MySQL client, use the `--local-infile=1` option.
+> **Note:**
+>
+> When you start the MySQL client, use the `--local-infile=1` option.
 
 To import all `*.csv` files into TiDB in a bash loop:
 
