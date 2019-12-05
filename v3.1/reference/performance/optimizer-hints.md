@@ -94,7 +94,7 @@ The `INL_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the inde
 select /*+ INL_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 ```
 
-The parameter(s) given in `INL_JOIN()` is the candidate table for the inner table when you create the query plan. For example, `INL_JOIN(t1)` means that TiDB only considers using `t1` as the inner table to create a query plan.
+The parameter(s) given in `INL_JOIN()` is the candidate table for the inner table when you create the query plan. For example, `INL_JOIN(t1)` means that TiDB only considers using `t1` as the inner table to create a query plan. If the candidate table has an alias, you must use the alias as the parameter in `INL_JOIN()`; if it does not has an alias, use the table's original name as the parameter. For example, in the `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;` query, you must use the `t` table's alias `t1` or `t2` rather than `t` as `INL_JOIN()`'s parameter.
 
 > **Note:**
 >
@@ -218,7 +218,7 @@ In addition to this hint, the `tidb_mem_quota_query` environment variable can al
 
 ### READ_FROM_REPLICA()
 
-The `READ_FROM_REPLICA()` hint enables the TiKV server to read consistent data from the follower node. For example:
+The `READ_FROM_REPLICA()` hint enables the feature of reading consistent data from the TiKV follower node. For example:
 
 {{< copyable "sql" >}}
 
