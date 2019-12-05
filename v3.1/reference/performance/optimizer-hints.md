@@ -40,7 +40,7 @@ Each query or sub-query in a statement corresponds to a different query block, a
 select * from (select * from t) t1, (select * from t) t2;
 ```
 
-The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose `QB_NAME` is `sel_1`; the two `SELECT` sub-queries correspond to the second and the third query block, whose `QB_NAME`s are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the two `SELECT` sub-queries with a `DELETE` query and a `UPDATE` query, then their `QB_NAME`s will be `del_1` and `upd_1`.
+The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose `QB_NAME` is `sel_1`; the two `SELECT` sub-queries correspond to the second and the third query block, whose `QB_NAME`s are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the first `SELECT` with `DELETE` or `UPDATE`, then the corresponding `QB_NAME` is `del_1` or `upd_1`.
 
 ### QB_NAME
 
