@@ -331,7 +331,7 @@ Configuration items related to Raftstore
 
 ### `raftstore.peer-stale-state-check-interval`
 
-+ Modifies the state check interval for hibernated Regions. This value also determines the heartbeat interval between the leader and followers of hibernated Regions. This option is only valid when `raftstore.hibernate-regions` is enabled.
++ Modifies the state check interval for Regions. 
 + Default value: 5 min
 
 ### `split-region-check-tick-interval`
