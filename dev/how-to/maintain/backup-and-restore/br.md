@@ -220,9 +220,9 @@ In the above command, `--table` specifies the name of the table to be restored. 
 ## Usage restrictions
 
 - BR only supports TiDB v3.1 or later versions.
-- TiDB cannot perform the backup operation when executing DDL operations.
+- TiDB cannot perform backup operation when executing DDL operations.
 - Currently TiDB does not support backing up and restoring partition tables.
-- Currently you can perform the restoration only on new clusters.
+- Currently you can perform restoration only on new clusters.
 
 ## Examples
 
@@ -320,7 +320,7 @@ BR sends the backup and restoration commands to each TiKV node. After receiving 
 
 ### Backup
 
-When BR performs a backup operation, it first obtains the following information from the PD:
+When BR performs a backup operation, it first obtains the following information from PD:
 
 - The current TS (timestamp) as the time of the backup snapshot
 - The TiKV node information of the current cluster
@@ -369,7 +369,7 @@ When BR performs the restoration, BR performs the following tasks in order:
 
 5. It finds the Region corresponding to the SST file and sends a request to the corresponding TiKV node for downloading the file. Then it sends a request for loading the file after the file is successfully downloaded.
 
-After TiKV receives the request to load the SST file, TiKV uses the Raft mechanism to ensure the strong consistency of the SST data. After the downloaded SST file is loaded successfully, the file will be deleted asynchronously.
+After TiKV receives the request to load the SST file, TiKV uses the Raft mechanism to ensure the strong consistency of the SST data. After the downloaded SST file is loaded successfully, the file is deleted asynchronously.
 
 After the restoration operation, BR performs a checksum calculation on the restored data to compare the stored data with the backed up data.
 
