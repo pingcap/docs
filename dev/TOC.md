@@ -274,6 +274,7 @@
     - [Understanding the Query Execution Plan](/dev/reference/performance/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](/dev/reference/performance/statistics.md)
     - [Optimizer Hints](/dev/reference/performance/optimizer-hints.md)
+    - [Follower Read](/dev/reference/performance/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/dev/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/dev/reference/performance/execution-plan-bind.md)
     - [Statement Summary Table](/dev/reference/performance/statement-summary.md)
@@ -411,6 +412,7 @@
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
   + v3.0
+    - [3.0.7](/dev/releases/3.0.7.md)
     - [3.0.6](/dev/releases/3.0.6.md)
     - [3.0.5](/dev/releases/3.0.5.md)
     - [3.0.4](/dev/releases/3.0.4.md)
