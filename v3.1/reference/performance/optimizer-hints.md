@@ -6,7 +6,7 @@ category: reference
 
 # Optimizer Hints
 
-TiDB supports optimizer hints, based on the comment-like syntax introduced in MySQL 5.7. i.e. `/*+ TIDB_XX(t1, t2) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
+TiDB supports optimizer hints, which are based on the comment-like syntax introduced in MySQL 5.7. For example, one of the common syntaxes is `/*+ HINT_NAME([t1_name [, t2_name] ...]) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
 
 > **Note:**
 >
@@ -14,7 +14,9 @@ TiDB supports optimizer hints, based on the comment-like syntax introduced in My
 
 ## Syntax
 
-Optimizer hints are specified within `/*+ ... */` comments and follow behind the `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. The hint names are case insensitive. If you want to use multiple hints, separate them with commas. For example, the following query uses three different hints:
+Optimizer hints are specified within `/*+ ... */` comments and follow behind the `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. The hint names are case insensitive. If you want to use multiple hints, separate them with commas. 
+
+For example, the following query uses three different hints:
 
 {{< copyable "sql" >}}
 
@@ -22,11 +24,11 @@ Optimizer hints are specified within `/*+ ... */` comments and follow behind the
 select /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) from t t1, t t2 where t1.a = t2.b;
 ```
 
-Currently, TiDB supports two categories of hints, which are slightly different in usage. The first category of hints is used to control the optimizer's behaviors, such as [`/*+ HASH_AGG() */`](#hash_agg); the second category of hints is used to set operation parameters for a single query, such as [`/*+ MEMORY_QUOTA(1024 MB)*/`](#memory_quota1024-mb).
+Currently, TiDB supports two categories of hints, which are slightly different in usage. The first category of hints is used to control the optimizer's behaviors, such as [`/*+ HASH_AGG() */`](#hash_agg); the second category of hints is used to set operation parameters for a single query, such as [`/*+ MEMORY_QUOTA(1024 MB)*/`](#memory_quotan).
 
 ## Hints for controlling the optimizer
 
-A hint for controlling the optimizer follows behind **any** `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. You can specify the applicable scope of a hint and a table used in a hint by a **query block** introduced below. If you do not explicitly specify a query block for a hint, the hint affects the current query block by default.
+A hint for controlling the optimizer follows behind **any** `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. You can specify the applicable scope of a hint or of a table used in a hint by a **query block** introduced below. If you do not explicitly specify a query block for a hint, the hint affects the current query block by default.
 
 ### Query block
 
@@ -38,25 +40,25 @@ Each query or sub-query in a statement corresponds to a different query block, a
 select * from (select * from t) t1, (select * from t) t2;
 ```
 
-The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose `QB_NAME` is `sel_1`; the two sub-queries correspond to the second and the third query block, whose `QB_NAME`s are `sel_2` and `sel_3` respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If `DELETE` and `UPDATE` queries substitute for the two `SELECT` sub-queries, then the `QB_NAME`s are `del_1` and `upd_1`.
+The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose `QB_NAME` is `sel_1`; the two `SELECT` sub-queries correspond to the second and the third query block, whose `QB_NAME`s are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If the two `SELECT` sub-queries are replaced with a `DELETE` query and a `UPDATE` query, then their `QB_NAME`s will be `del_1` and `upd_1`.
 
 ### QB_NAME
 
-When you specify a query block's `QB_NAME` to a value that is different from the default name, the specified and the default `QB_NAME`s are both valid. For example:
+You can specify a query block's `QB_NAME` to a value that is different from the default name. In this case, the specified `QB_NAME` and the default `QB_NAME` are both valid. For example:
 
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ QB_NAME(QB1) */ * from t;
+select /*+ QB_NAME(QB1) */ * from (select * from t) t1, (select * from t) t2;
 ```
 
 This hint means that the `SELECT` query block's name is specified to `QB1`, which makes `QB1` and the default name `sel_1` both valid for the query block.
 
 > **Note:**
 >
-> In the above example, if you use a hint to specify the `QB_NAME` to `sel_2` and do not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
+> In the above example, if the hint specifies the `QB_NAME` to `sel_2` and does not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
 
-### Parameter
+### `@QB_NAME`
 
 `@QB_NAME` is an optional parameter that specifies the query block to which an optimizer-controlling hint (except `QB_NAME`) applies. If the hint includes a leading `@QB_NAME`, the hint applies to the named query block. If there is no leading `@QB_NAME`, the hint applies to the query block where it occurs. For example:
 
@@ -68,9 +70,9 @@ select /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * from (select t1.a, t1.b from t t1
 
 Also, you can append `@QB_NAME` to each table name of a hint to specify which query block the table belongs to.
 
-### SM_JOIN(t1, t2)
+### SM_JOIN(t1_name [, tl_name ...])
 
-The `SM_JOIN(t1, t2)` hint tells the optimizer to use a sort-merge join for the two tables `t1` and `t2`. Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint.
+The `SM_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
 
 {{< copyable "sql" >}}
 
@@ -78,13 +80,13 @@ The `SM_JOIN(t1, t2)` hint tells the optimizer to use a sort-merge join for the 
 select /*+ SM_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 ```
 
-`TIDB_SMJ` is the alias for `SM_JOIN` in TiDB 3.0 and earlier versions. If you are using any of these versions, you have to apply the `TIDB_SMJ(t1, t2)` syntax for the hint instead.
+> **Note:**
+>
+> `TIDB_SMJ` is the alias for `SM_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `SM_JOIN` are both valid names for the hint.
 
-### INL_JOIN(t1, t2)
+### INL_JOIN(t1_name [, tl_name ...])
 
-The `INL_JOIN(t1, t2)` hint tells the optimizer to use an Index Nested Loop Join for the two tables `t1` and `t2`. This algorithm might consume less system resources and take shorter processing time in some scenarios and might produce an opposite result in other scenarios. If the result set is less than 10,000 rows after the outer table is filtered by the `WHERE` condition, it is recommended to use this hint.
-
-The parameter(s) given in `INL_JOIN()` is the candidate table for the inner table when you create the query plan. For example, `INL_JOIN(t1)` means that TiDB only considers using `t1` as the inner table to create a query plan.
+The `INL_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the index nested loop join algorithm for the given table(s). This algorithm might consume less system resources and take shorter processing time in some scenarios and might produce an opposite result in other scenarios. If the result set is less than 10,000 rows after the outer table is filtered by the `WHERE` condition, it is recommended to use this hint. For example:
 
 {{< copyable "sql" >}}
 
@@ -92,11 +94,15 @@ The parameter(s) given in `INL_JOIN()` is the candidate table for the inner tabl
 select /*+ INL_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 ```
 
-`TIDB_INLJ` is the alias for `INL_JOIN` in TiDB 3.0 and earlier versions. If you are using any of these versions, you have to apply the `TIDB_INLJ(t1, t2)` syntax for the hint instead.
+The parameter(s) given in `INL_JOIN()` is the candidate table for the inner table when you create the query plan. For example, `INL_JOIN(t1)` means that TiDB only considers using `t1` as the inner table to create a query plan.
 
-### HASH_JOIN(t1, t2)
+> **Note:**
+>
+> `TIDB_INLJ` is the alias for `INL_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_INLJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_INLJ` and `INL_JOIN` are both valid names for the hint.
 
-The `HASH_JOIN(t1, t2)` hint tells the optimizer to use a hash join for the two tables `t1` and `t2`. This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory.
+### HASH_JOIN(t1_name [, tl_name ...])
+
+The `HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm for the given table(s). This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory. For example:
 
 {{< copyable "sql" >}}
 
@@ -104,11 +110,13 @@ The `HASH_JOIN(t1, t2)` hint tells the optimizer to use a hash join for the two 
 select /*+ HASH_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 ```
 
-`TIDB_HJ` is the alias for `HASH_JOIN` in TiDB 3.0 and earlier versions. If you are using any of these versions, you have to apply the `TIDB_HJ(t1, t2)` syntax for the hint instead.
+> **Note:**
+>
+> `TIDB_HJ` is the alias for `HASH_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_HJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_HJ` and `HASH_JOIN` are both valid names for the hint.
 
 ### HASH_AGG()
 
-The `HASH_AGG()` hint tells the optimizer to use a hash aggregation. This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory.
+The `HASH_AGG()` hint tells the optimizer to use the hash aggregation algorithm. This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory. For example:
 
 {{< copyable "sql" >}}
 
@@ -118,7 +126,7 @@ select /*+ HASH_AGG() */ count(*) from t1，t2 where t1.a > 10 group by t1.id;
 
 ### STREAM_AGG()
 
-The `STREAM_AGG()` hint tells the optimizer to use a stream aggregation. Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint.
+The `STREAM_AGG()` hint tells the optimizer to use the stream aggregation algorithm. Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
 
 {{< copyable "sql" >}}
 
@@ -126,9 +134,9 @@ The `STREAM_AGG()` hint tells the optimizer to use a stream aggregation. General
 select /*+ STREAM_AGG() */ count(*) from t1，t2 where t1.a > 10 group by t1.id;
 ```
 
-### USE_INDEX(t1, idx1, idx2)
+### USE_INDEX(t1_name, idx1_name [, idx2_name ...])
 
-The `USE_INDEX(t1, idx1, idx2)` hint tells the optimizer to use only the given `idx1` and `idx2` indexes for a specified `t1` table. Applying this hint has the same effect as executing the `select * from t t1 use index(idx1, idx2);` statement.
+The `USE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified `t1_name` table. For example, applying the following hint has the same effect as executing the `select * from t t1 use index(idx1, idx2);` statement.
 
 {{< copyable "sql" >}}
 
@@ -136,9 +144,9 @@ The `USE_INDEX(t1, idx1, idx2)` hint tells the optimizer to use only the given `
 select /*+ USE_INDEX(t1, idx1, idx2) */ * from t t1;
 ```
 
-### IGNORE_INDEX(t1, idx1, idx2)
+### IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])
 
-The `IGNORE_INDEX(t1, idx1, idx2)` hint tells the optimizer to ignore the given `idx1` and `idx2` indexes for a specified `t1` table. Applying this hint has the same effect as executing the `select * from t t1 ignore index(idx1, idx2);` statement.
+The `IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to ignore the given index(es) for a specified `t1_name` table. For example, applying the following hint has the same effect as executing the `select * from t t1 ignore index(idx1, idx2);` statement.
 
 {{< copyable "sql" >}}
 
@@ -148,7 +156,7 @@ select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
 
 ### AGG_TO_COP()
 
-The `AGG_TO_COP()` hint tells the optimizer to push down the aggregate operation to the coprocessor. If the optimizer does not push down some aggregate function that is suitable for pushdown, then it is recommended to use this hint.
+The `AGG_TO_COP()` hint tells the optimizer to push down the aggregate operation to the coprocessor. If the optimizer does not push down some aggregate function that is suitable for pushdown, then it is recommended to use this hint. For example:
 
 {{< copyable "sql" >}}
 
@@ -156,9 +164,9 @@ The `AGG_TO_COP()` hint tells the optimizer to push down the aggregate operation
 select /*+ AGG_TO_COP() */ sum(t1.a) from t t1;
 ```
 
-### READ_FROM_STORAGE(TIFLASH[t1, t2], TIKV[t3, t4])
+### READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])
 
-The `READ_FROM_STORAGE(TIFLASH[t1, t2], TIKV[t3, t4])` hint tells the optimizer to read specific table(s) from specific storage engine(s). Currently, this hint supports two storage engine parameters - `TIKV` and `TIFLASH`.
+The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])` hint tells the optimizer to read specific table(s) from specific storage engine(s). Currently, this hint supports two storage engine parameters - `TIKV` and `TIFLASH`. For example:
 
 {{< copyable "sql" >}}
 
@@ -166,9 +174,9 @@ The `READ_FROM_STORAGE(TIFLASH[t1, t2], TIKV[t3, t4])` hint tells the optimizer 
 select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 where t1.a = t2.a;
 ```
 
-### USE_INDEX_MERGE(t1, idx1, idx2)
+### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])
 
-The `USE_INDEX_MERGE(t1, idx1, idx2)` hint tells the optimizer to access a specific table with the index merge method. The given list of indexes are optional parameters. If you explicitly specify the list, TiDB selects indexes from the list to build index merge; if you do not give the list of indexes, TiDB selects indexes from all available indexes to build index merge.
+The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. The given list of indexes are optional parameters. If you explicitly specify the list, TiDB selects indexes from the list to build index merge; if you do not give the list of indexes, TiDB selects indexes from all available indexes to build index merge. For example:
 
 {{< copyable "sql" >}}
 
@@ -198,7 +206,7 @@ In addition to this hint, the `global.max_execution_time` global variable can al
 
 The `MEMORY_QUOTA(N)` hint places a limit `N` (a threshold value in MB or GB) on how much memory a statement is permitted to use. When a statement's memory usage exceeds this limit, TiDB produces a log message based on the statement's over-limit behavior or just terminates it.
 
-In the following hint, `MEMORY_QUOTA(1024 MB)` means that the memory usage limit is 1024 MB:
+In the following hint, `MEMORY_QUOTA(1024 MB)` means that the memory usage is limited to 1024 MB:
 
 {{< copyable "sql" >}}
 
@@ -234,11 +242,11 @@ select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
 
 In addition to this hint, setting the `tidb_enable_index_merge` environment variable also controls whether to enable this feature.
 
-### USE_TOJA(TRUE)
+### USE_TOJA(boolean_value)
 
-The `USE_TOJA(TRUE)` hint enables the optimizer to convert a sub-query in an `in` condition to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
+The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a sub-query) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
 
-For example, the following query will convert the `in (select t2.a from t2) subq` sub-query to corresponding join and aggregation operations:
+For example, the following query will convert `in (select t2.a from t2) subq` to corresponding join and aggregation operations:
 
 {{< copyable "sql" >}}
 
