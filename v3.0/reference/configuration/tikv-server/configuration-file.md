@@ -331,7 +331,7 @@ Configuration items related to Raftstore
 
 ### `raftstore.peer-stale-state-check-interval`
 
-+ Modifies the state check interval for Regions. 
++ Modifies the state check interval for Regions.
 + Default value: 5 min
 
 ### `split-region-check-tick-interval`
