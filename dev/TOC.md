@@ -84,7 +84,7 @@
   + Maintain
     - [Common Ansible Operations](/dev/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
-      - [Use Mydumper/Loader](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md)
+      - [Use `mydumper` and `loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md)
       - [Use BR](/dev/how-to/maintain/backup-and-restore/br.md)
     - [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md)
   + Scale

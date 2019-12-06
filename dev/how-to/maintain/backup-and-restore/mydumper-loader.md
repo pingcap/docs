@@ -1,13 +1,13 @@
 ---
-title: Use `mydumper`/`loader` to Backup and Restore
-summary: Learn how to backup and restore the data of TiDB using `mydumper`/`loader`.
+title: Use `mydumper`and `loader` to Back up and Restore Data
+summary: Learn how to back up and restore the data of TiDB using `mydumper` and `loader`.
 category: how-to
 aliases: ['/docs/dev/how-to/maintain/backup-and-restore/']
 ---
 
-# Use `mydumper`/`loader` to Backup and Restore
+# Use `mydumper` and `loader` to Back up and Restore Data
 
-This document describes how to back up and restore the data of TiDB using `mydumper`/`loader`. Currently, this document only covers full backup and restoration.
+This document describes how to back up and restore the data of TiDB using `mydumper` and `loader`. Currently, this document only covers full backup and restoration.
 
 Suppose that the TiDB service information is as follows:
 

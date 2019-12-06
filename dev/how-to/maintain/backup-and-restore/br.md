@@ -6,7 +6,7 @@ category: how-to
 
 # Use BR to Back up and Restore Data
 
-Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the working principles of BR.
+Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
 
 ## Command-line description
 
@@ -344,11 +344,11 @@ bin/br restore full -s local:///tmp/backup --pd "${PDIP}:2379" --log-file restor
 [INFO] [client.go:435] ["Restore Checksum"] [take=6.385818026s]
 ```
 
-## Working principles
+## Implementation principles
 
-BR sends the backup and restoration commands to each TiKV node. After receiving these commands, TiKV performs the corresponding backup and restoration operations. Each TiKV node has a path in which the backup files generated in the backup operation are stored and from which the stored backup files are read in the restoration.
+BR sends the backup and restoration commands to each TiKV node. After receiving these commands, TiKV performs the corresponding backup and restoration operations. Each TiKV node has a path in which the backup files generated in the backup operation are stored and from which the stored backup files are read during the restoration.
 
-### Backup
+### Backup principle
 
 When BR performs a backup operation, it first obtains the following information from PD:
 
@@ -357,9 +357,9 @@ When BR performs a backup operation, it first obtains the following information 
 
 According to these information, BR starts a TiDB instance internally to obtain the database or table information corresponding to the TS, and filters out the system databases (`information_schema`, `performance_schema`, `mysql`) at the same time.
 
-According to the backup sub-command, two types of backup logic are available:
+According to the backup sub-command, BR adopts the following two types of backup logic:
 
-- Full backup: BR traverses all the tables and constructs the KV range to be backed up according to every table.
+- Full backup: BR traverses all the tables and constructs the KV range to be backed up according to each table.
 - Single table backup: BR constructs the KV range to be backed up according a single table.
 
 Finally, BR collects the KV range to be backed up and sends the complete backup request to the TiKV node of the cluster.
@@ -368,39 +368,39 @@ The structure of the request:
 
 ```
 backup.BackupRequest{
-    ClusterId:    clusterID,   // The cluster ID
+    ClusterId:    clusterID,   // The cluster ID.
     StartKey:     startKey,    // The starting key of the backup (backed up)
     EndKey:       endKey,      // The ending key of the backup (not backed up)
     StartVersion: backupTS,    // The backup snapshot time
     ...
-    Path:         path,        // The path in which backup files are stored
+    Path:         path,        // The path where backup files are stored
     RateLimit:    rateLimit,   // Backup speed (MB/s)
     Concurrency:  concurrency, // The number of threads for the backup operation (4 by default)
 }
 ```
 
-After receiving the backup request, the TiKV node traverses all Region Leaders on the node to find the Regions that overlap with the KV ranges in this request. The TiKV node backs up some or all of the data within the range, and generates the corresponding SST file (named in the format of `storeID_regionID_regionEpoch_tableID`) in the backup path.
+After receiving the backup request, the TiKV node traverses all Region leaders on the node to find the Regions that overlap with the KV ranges in this request. The TiKV node backs up some or all of the data within the range, and generates the corresponding SST file (named in the format of `storeID_regionID_regionEpoch_tableID`) in the backup path.
 
-After finishing backing up the data of the corresponding Region, the TiKV node returns the metadata to BR. BR collects the metadata and stores it in the backupMeta file which is used for restoration.
+After finishing backing up the data of the corresponding Region, the TiKV node returns the metadata to BR. BR collects the metadata and stores it in the `backupMeta` file which is used for restoration.
 
 If checksum is enabled when you execute the backup command, BR calculates the checksum of each backed up table for data check.
 
-### Restoration
+### Restoration principle
 
-When BR performs the restoration, BR performs the following tasks in order:
+During the data restoration process, BR performs the following tasks in order:
 
-1. It parses the backupMeta file in the backup path, and then starts a TiDB instance internally to create the corresponding databases and tables based on the parsed information.
+1. It parses the `backupMeta` file in the backup path, and then starts a TiDB instance internally to create the corresponding databases and tables based on the parsed information.
 
-2. It aggregates the parsed SST file according to the tables and `GroupBy`.
+2. It aggregates the parsed SST files according to the tables and `GroupBy`.
 
 3. It pre-splits Regions according to the key range of the SST file so that every Region corresponds to at least one SST file.
 
-4. It traverses every table to be restored and the SST file corresponding to these tables.
+4. It traverses each table to be restored and the SST file corresponding to each tables.
 
 5. It finds the Region corresponding to the SST file and sends a request to the corresponding TiKV node for downloading the file. Then it sends a request for loading the file after the file is successfully downloaded.
 
 After TiKV receives the request to load the SST file, TiKV uses the Raft mechanism to ensure the strong consistency of the SST data. After the downloaded SST file is loaded successfully, the file is deleted asynchronously.
 
-After the restoration operation, BR performs a checksum calculation on the restored data to compare the stored data with the backed up data.
+After the restoration operation is complete, BR performs a checksum calculation on the restored data to compare the stored data with the backed up data.
 
 ![br-arch](/media/br-arch.png)
