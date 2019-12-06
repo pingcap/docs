@@ -36,75 +36,84 @@ For additional information about DM, please consult [Data Migration Overview](/d
 
 We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-server, tikv-server, and tidb-server. Then we'll start a single DM-master and 3 instances of DM-worker.
 
-First, install MySQL 5.7 and download/extract the TiDB v3.0 and DM v1.0.2 packages we'll use:
+1. Install MySQL 5.7, download and extract the TiDB v3.0 and DM v1.0.2 packages we'll use:
 
-```bash
-sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
-sudo yum install -y mysql-community-server
-curl http://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf -
-curl http://download.pingcap.org/dm-v1.0.2-linux-amd64.tar.gz | tar xzf -
-curl -L https://github.com/pingcap/docs/raw/master/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
-```
+    ```bash
+    sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
+    sudo yum install -y mysql-community-server
+    curl http://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf -
+    curl http://download.pingcap.org/dm-v1.0.2-linux-amd64.tar.gz | tar xzf -
+    curl -L https://github.com/pingcap/docs/raw/master/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
+    ```
 
-Create some directories and symlinks:
+2. Create some directories and symlinks:
 
-```bash
-mkdir -p bin data logs
-ln -sf -t bin/ "$HOME"/*/bin/*
-[[ :$PATH: = *:$HOME/bin:* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
-```
+    ```bash
+    mkdir -p bin data logs
+    ln -sf -t bin/ "$HOME"/*/bin/*
+    [[ :$PATH: = *:$HOME/bin:* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
+    ```
 
-Set up configuration for the 3 instances of MySQL Server we'll start:
+3. Set up configuration for the 3 instances of MySQL Server we'll start:
 
-```bash
-tee -a "$HOME/.my.cnf" <<EoCNF
-[server]
-socket=mysql.sock
-pid-file=mysql.pid
-log-error=mysql.err
-log-bin
-auto-increment-increment=5
-[server1]
-datadir=$HOME/data/mysql1
-server-id=1
-port=3307
-auto-increment-offset=1
-[server2]
-datadir=$HOME/data/mysql2
-server-id=2
-port=3308
-auto-increment-offset=2
-[server3]
-datadir=$HOME/data/mysql3
-server-id=3
-port=3309
-auto-increment-offset=3
-EoCNF
-```
+    ```bash
+    tee -a "$HOME/.my.cnf" <<EoCNF
+    [server]
+    socket=mysql.sock
+    pid-file=mysql.pid
+    log-error=mysql.err
+    log-bin
+    auto-increment-increment=5
+    [server1]
+    datadir=$HOME/data/mysql1
+    server-id=1
+    port=3307
+    auto-increment-offset=1
+    [server2]
+    datadir=$HOME/data/mysql2
+    server-id=2
+    port=3308
+    auto-increment-offset=2
+    [server3]
+    datadir=$HOME/data/mysql3
+    server-id=3
+    port=3309
+    auto-increment-offset=3
+    EoCNF
+    ```
 
-Initialize and start our MySQL instances:
+4. Initialize and start our MySQL instances:
 
-```bash
-for i in 1 2 3
-do
-    echo  "mysql$i"
-    mysqld --defaults-group-suffix="$i" --initialize-insecure
-    mysqld --defaults-group-suffix="$i" &
-done
-```
+    ```bash
+    for i in 1 2 3
+    do
+        echo  "mysql$i"
+        mysqld --defaults-group-suffix="$i" --initialize-insecure
+        mysqld --defaults-group-suffix="$i" &
+    done
+    ```
 
-To make sure your MySQL server instances are all running, you can execute `jobs` and/or `pgrep -a mysqld`:
+5. To make sure your MySQL server instances are all running, you can execute `jobs` and/or `pgrep -a mysqld`:
 
-```
-$ jobs
-[1]   Running                 mysqld --defaults-group-suffix="$i" &
-[2]-  Running                 mysqld --defaults-group-suffix="$i" &
-[3]+  Running                 mysqld --defaults-group-suffix="$i" &
-$ pgrep -a mysqld
-17672 mysqld --defaults-group-suffix=1
-17727 mysqld --defaults-group-suffix=2
-17782 mysqld --defaults-group-suffix=3
-```
+    ```bash
+    jobs
+    ```
+
+    ```
+    [1]   Running                 mysqld --defaults-group-suffix="$i" &
+    [2]-  Running                 mysqld --defaults-group-suffix="$i" &
+    [3]+  Running                 mysqld --defaults-group-suffix="$i" &
+    ```
+
+    ```bash
+    pgrep -a mysqld
+    ```
+
+    ```
+    17672 mysqld --defaults-group-suffix=1
+    17727 mysqld --defaults-group-suffix=2
+    17782 mysqld --defaults-group-suffix=3
+    ```
 
 ## Non-overlapping shards
 
@@ -112,41 +121,41 @@ Our first scenario consists of 3 "shards" with the same schema, but non-overlapp
 
 We achieve that by having set `auto-increment-increment=5` and `auto-increment-offset` in our .my.cnf file. `auto-increment-increment` tells each instance to increment by 5 for each new auto-increment ID it generates, and `auto-increment-offset`, set differently for each instance, tells that instance the offset from 0 to start counting. For example, an instance with `auto-increment-increment=5` and `auto-increment-offset=2` will generate the auto-increment ID sequence {2,7,12,17,22,…}.
 
-Create our MySQL database and table in each of the 3 MySQL Server instances:
+1. Create our MySQL database and table in each of the 3 MySQL Server instances:
 
-```bash
-for i in 1 2 3
-do
-    mysql -h 127.0.0.1 -P "$((3306+i))" -u root <<EoSQL
-        create database dmtest1;
-        create table dmtest1.t1 (id bigint unsigned not null auto_increment primary key, c char(32), port int);
-EoSQL
-done
-```
+    ```bash
+    for i in 1 2 3
+    do
+        mysql -h 127.0.0.1 -P "$((3306+i))" -u root <<EoSQL
+            create database dmtest1;
+            create table dmtest1.t1 (id bigint unsigned not null auto_increment primary key, c char(32), port int);
+    EoSQL
+    done
+    ```
 
-Insert a few hundred rows into each of the MySQL instances:
+2. Insert a few hundred rows into each of the MySQL instances:
 
-```bash
-for i in 1 2 3; do
-    mysql -h 127.0.0.1 -P "$((3306+i))" -u root dmtest1 <<EoSQL
-        insert into t1 values (),(),(),(),(),(),(),();
-        insert into t1 (id) select null from t1;
-        insert into t1 (id) select null from t1;
-        insert into t1 (id) select null from t1;
-        insert into t1 (id) select null from t1;
-        insert into t1 (id) select null from t1;
-        update t1 set c=md5(id), port=@@port;
-EoSQL
-done
-```
+    ```bash
+    for i in 1 2 3; do
+        mysql -h 127.0.0.1 -P "$((3306+i))" -u root dmtest1 <<EoSQL
+            insert into t1 values (),(),(),(),(),(),(),();
+            insert into t1 (id) select null from t1;
+            insert into t1 (id) select null from t1;
+            insert into t1 (id) select null from t1;
+            insert into t1 (id) select null from t1;
+            insert into t1 (id) select null from t1;
+            update t1 set c=md5(id), port=@@port;
+    EoSQL
+    done
+    ```
 
-Select the rows back from the MySQL instances to make sure things look right:
+3. Select the rows back from the MySQL instances to make sure things look right:
 
-```bash
-for i in 1 2 3; do
-    mysql -N -h 127.0.0.1 -P "$((3306+i))" -u root -e 'select * from dmtest1.t1'
-done | sort -n
-```
+    ```bash
+    for i in 1 2 3; do
+        mysql -N -h 127.0.0.1 -P "$((3306+i))" -u root -e 'select * from dmtest1.t1'
+    done | sort -n
+    ```
 
 Note that we have incrementing, non-overlapping IDs in the left-hand column. The port number in the right-hand column shows which instance the rows were inserted into and are being selected from:
 
@@ -182,8 +191,11 @@ dm-master --config=dm-cnf/dm-master.toml &
 
 You can execute `jobs` and/or `ps -a` to make sure these processes are all running:
 
+```bash
+jobs
 ```
-$ jobs
+
+```
 [1]   Running                 mysqld --defaults-group-suffix="$i" &
 [2]   Running                 mysqld --defaults-group-suffix="$i" &
 [3]   Running                 mysqld --defaults-group-suffix="$i" &
@@ -192,7 +204,13 @@ $ jobs
 [6]   Running                 dm-worker --config=dm-cnf/dm-worker$i.toml &
 [7]-  Running                 dm-worker --config=dm-cnf/dm-worker$i.toml &
 [8]+  Running                 dm-master --config=dm-cnf/dm-master.toml &
-$ ps -a
+```
+
+```bash
+ps -a
+```
+
+```
    PID TTY          TIME CMD
  17317 pts/0    00:00:00 screen
  17672 pts/1    00:00:04 mysqld
@@ -291,8 +309,11 @@ There are a number of global options, and several groups of options that define 
 
 The `dmctl` tool is an interactive client that facilitates interaction with the DM cluster. You use it to start tasks, query task status, et cetera. Start the tool by executing `dmctl -master-addr :8261` to get the interactive prompt:
 
+```bash
+dmctl -master-addr :8261
 ```
-$ dmctl -master-addr :8261
+
+```
 Welcome to dmctl
 Release Version: v1.0.0-alpha-69-g5134ad1
 Git Commit Hash: 5134ad19fbf6c57da0c7af548f5ca2a890bddbe4
