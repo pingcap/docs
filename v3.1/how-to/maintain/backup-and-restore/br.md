@@ -401,6 +401,6 @@ During the data restoration process, BR performs the following tasks in order:
 
 After TiKV receives the request to load the SST file, TiKV uses the Raft mechanism to ensure the strong consistency of the SST data. After the downloaded SST file is loaded successfully, the file is deleted asynchronously.
 
-After the restoration operation is complete, BR performs a checksum calculation on the restored data to compare the stored data with the backed up data.
+After the restoration operation is completed, BR performs a checksum calculation on the restored data to compare the stored data with the backed up data.
 
 ![br-arch](/media/br-arch.png)
