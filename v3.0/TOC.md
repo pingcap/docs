@@ -47,6 +47,7 @@
     - [Read Historical Data](/v3.0/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v3.0/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v3.0/how-to/get-started/data-migration.md)
+    - [TiDB Lightning Tutorial](/v3.0/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/v3.0/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v3.0/how-to/deploy/hardware-recommendations.md)
@@ -88,7 +89,6 @@
     - [Scale a TiDB Cluster](/v3.0/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade to TiDB 3.0](/v3.0/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/v3.0/how-to/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.0/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/v3.0/how-to/troubleshoot/tidb-lightning.md)
@@ -284,6 +284,7 @@
   - [Alert Rules](/v3.0/reference/alert-rules.md)
   + Best Practices
     - [Highly Concurrent Write Best Practices](/v3.0/reference/best-practices/high-concurrency.md)
+    - [HAProxy Best Practices](/v3.0/reference/best-practices/haproxy.md)
   - [TiSpark](/v3.0/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.0/reference/tidb-binlog/overview.md)
@@ -308,7 +309,6 @@
         - [Table Routing](/v3.0/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v3.0/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/v3.0/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/v3.0/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/v3.0/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/v3.0/reference/tools/data-migration/features/shard-merge.md)
@@ -317,6 +317,7 @@
       + Usage Scenarios
         - [Simple Scenario](/v3.0/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/v3.0/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/v3.0/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/v3.0/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v3.0/reference/tools/data-migration/configure/overview.md)
@@ -406,6 +407,8 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.7](/v3.0/releases/3.0.7.md)
+    - [3.0.6](/v3.0/releases/3.0.6.md)
     - [3.0.5](/v3.0/releases/3.0.5.md)
     - [3.0.4](/v3.0/releases/3.0.4.md)
     - [3.0.3](/v3.0/releases/3.0.3.md)
