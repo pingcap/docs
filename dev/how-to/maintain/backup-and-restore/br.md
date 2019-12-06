@@ -1,10 +1,10 @@
 ---
-title: Use BR to Backup and Restore Cluster Data
-summary: Learn how to backup and restore data of the TiDB cluster using BR.
+title: Use BR to Back up and Restore Data
+summary: Learn how to back up and restore data of the TiDB cluster using BR.
 category: how-to
 ---
 
-# Use BR to Backup and Restore Cluster Data
+# Use BR to Back up and Restore Data
 
 Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the working principles of BR.
 
@@ -41,7 +41,7 @@ A `br` command consists of multiple layers of sub-commands. Currently, BR has th
 * `br restore`: used to restore the data of the TiDB cluster.
 * `br version`: used to check the version of BR.
 
-Each of the above three sub-commands might include the following three sub-commands to specify the scope of an operation:
+Each of the above three sub-commands might still include the following three sub-commands to specify the scope of an operation:
 
 * `full`: used to back up or restore all the cluster data.
 * `db`: used to restore the specified database of the cluster.
@@ -71,7 +71,7 @@ mysql -h${TiDBIP} -P4000 -u${TIDB_USER} ${password_str} -Nse \
     "update mysql.tidb set variable_value='720h' where variable_name='tikv_gc_life_time'";
 ```
 
-### Back up all cluster data
+### Back up all the cluster data
 
 To back up all the cluster data, execute the `br backup full` command. To get help on this command, execute `br backup full -h` or `br backup full --help`.
 
@@ -93,10 +93,10 @@ br backup full \
 Explanations for some options in the above command are as follows:
 
 * `--ratelimit`: specifies the maximum speed at which a backup operation is performed (MiB/s) on each TiKV node.
-* `--concurrency`: sets an upper limit on the number of concurrent executions on each TiKV node.
-* `--log-file`: specifies that the BR log is written to the `backupfull.log` file.
+* `--concurrency`: sets an upper limit on the number of concurrent operations on each TiKV node.
+* `--log-file`: specifies writing the BR log to the `backupfull.log` file.
 
-A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data security. The progress bar is displayed as follows:
+A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety. The progress bar is displayed as follows:
 
 ```shell
 br backup full \
@@ -108,7 +108,7 @@ br backup full \
 Full Backup <---------/................................................> 17.12%.
 ```
 
-### Back up single table
+### Back up data of a single table
 
 To back up the data of a single table in the cluster, execute the `br backup table` command. To get help on this command, execute `br backup table -h` or `br backup table --help`.
 
@@ -129,14 +129,14 @@ br backup table \
     --log-file backuptable.log
 ```
 
-The `table` sub-command has two options: `--db` and `--table`:
+The `table` sub-command has two options:
 
 * `--db`: specifies the database name
 * `--table`: specifies the table name.
 
-For the meanings of other options, see [Back up all cluster data](#back-up-all-cluster-data).
+For descriptions of other options, see [Back up all cluster data](#back-up-all-cluster-data).
 
-A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data security.
+A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
 
 ## Restore cluster data
 
@@ -144,9 +144,9 @@ To restore the cluster data, use the `br restore` command. You can add the `full
 
 > **Note:**
 >
-> If the backed up cluster does not have a network storage, before the restoration, copy the backup SST files to the path specified by `--storage` on each TikV node.
+> If the backed up cluster does not have a network storage, before the restoration, copy the backup SST files to the path specified by `--storage` on each TiKV node.
 
-### Restore all backup data
+### Restore all the backup data
 
 To restore all the backup data to the cluster, execute the `br restore full` command. To get help on this command, execute `br restore full -h` or `br restore full --help`.
 
@@ -167,9 +167,9 @@ br restore full \
 Explanations for some options in the above command are as follows:
 
 * `--concurrency`: specifies how many sub-tasks can be performed concurrently in a restoration operation.
-* `--log-file`: specifies that the BR log is written to the `restorefull.log` file.
+* `--log-file`: specifies writing the BR log to the `restorefull.log` file.
 
-A progress bar is displayed in the terminal during the restoration. When the progress bar advances to 100%, the restoration is complete. Then the BR also checks the backup data to ensure data security.
+A progress bar is displayed in the terminal during the restoration. When the progress bar advances to 100%, the restoration is complete. Then the BR also checks the backup data to ensure data safety.
 
 ```shell
 br restore full \
@@ -197,7 +197,7 @@ br restore db \
     --log-file restorefull.log
 ```
 
-In the above command, `--db` specifies the name of the database to be restored. For the meanings of other options, see [Restore all backup data](#restore-all-backup-data).
+In the above command, `--db` specifies the name of the database to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-backup-data).
 
 ### Restore a table
 
@@ -218,13 +218,13 @@ br restore table \
     --log-file restorefull.log
 ```
 
-In the above command, `--table` specifies the name of the table to be restored. For the meanings of other options, see [Restore all backup data](#restore-all-backup-data) and [Restore a database](#restore-a-database).
+In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-backup-data) and [Restore a database](#restore-a-database).
 
 ## Best practices
 
-- It is recommended that you mount a shared storage (for example, NFS) on the backup path specified by `-s`. In this way, you will find it easier to collect and manage backup files.
+- It is recommended that you mount a shared storage (for example, NFS) on the backup path specified by `-s`, to make it easier to collect and manage backup files.
 - It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
-- It is recommended that you perform the backup operation in a low-peak time to minimize the impact on the application.
+- It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
 - To speed up the restoration, use pd-ctl to remove the schedulers related to scheduling before the restoration and add back these removed schedulers after the restoration.
 
     Remove schedulers:
@@ -249,18 +249,18 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 ## Usage restrictions
 
-- BR only supports TiDB v3.1 or later versions.
+- BR only supports TiDB v3.1 and later versions.
 - TiDB cannot perform backup operation when executing DDL operations.
-- Currently TiDB does not support backing up and restoring partition tables.
-- Currently you can perform restoration only on new clusters.
+- Currently, TiDB does not support backing up and restoring partitioned tables.
+- Currently, you can perform restoration only on new clusters.
 
 ## Examples
 
 This section shows how to back up and restore the data of an existing cluster. You can estimate the performance of backup and restoration based on machine performance, configuration and data size.
 
-### Data size and machine configuration
+### Data volume and machine configuration
 
-Suppose that the backup and restoration operations are performed on 10 tables in the TiKV cluster, each table with 5 million rows of data. The total data size is 35 GB.
+Suppose that the backup and restoration operations are performed on 10 tables in the TiKV cluster, each table with 5 million rows of data. The total data volume is 35 GB.
 
 ```sql
 MySQL [sbtest]> show tables;
@@ -309,10 +309,10 @@ Suppose that 4 TiKV nodes is used, each with the following configuration:
 
 ### Backup
 
-Before the backup operation, make sure the following things are done:
+Before the backup operation, check the following two items:
 
-- `tikv_gc_life_time` is set to a larger value so that the backup operation will not be interrupted by data loss.
-- No DDL statement is executed on TiDB.
+- You have set `tikv_gc_life_time` set to a larger value so that the backup operation will not be interrupted because of data loss.
+- No DDL statement is being executed on the TiDB cluster.
 
 Then execute the following command to back up all the cluster data:
 
