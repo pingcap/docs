@@ -256,7 +256,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 ## Examples
 
-This section shows how to back up and restore the data of an existing cluster. You can estimate the performance of backup and restoration based on machine performance, configuration and data size.
+This section shows how to back up and restore the data of an existing cluster. You can estimate the performance of backup and restoration based on machine performance, configuration and data volume.
 
 ### Data volume and machine configuration
 
