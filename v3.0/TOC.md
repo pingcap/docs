@@ -89,7 +89,6 @@
     - [Scale a TiDB Cluster](/v3.0/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade to TiDB 3.0](/v3.0/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/v3.0/how-to/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.0/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/v3.0/how-to/troubleshoot/tidb-lightning.md)
@@ -408,6 +407,7 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.7](/v3.0/releases/3.0.7.md)
     - [3.0.6](/v3.0/releases/3.0.6.md)
     - [3.0.5](/v3.0/releases/3.0.5.md)
     - [3.0.4](/v3.0/releases/3.0.4.md)
