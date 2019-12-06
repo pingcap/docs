@@ -1,56 +1,64 @@
 ---
 title: Use BR to Backup and Restore Cluster Data
-summary: Learn how to backup and restore the data of the TiDB cluster using BR.
+summary: Learn how to backup and restore data of the TiDB cluster using BR.
 category: how-to
 ---
 
 # Use BR to Backup and Restore Cluster Data
 
-Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document describes the command line, offers detailed use cases, best practices, usage restrictions, and introduces the working principle of BR.
+Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the working principles of BR.
 
 ## Command-line description
 
-A `br` command consists of sub-commands, options and parameters. The sub-command is the characters without `-` or `--`. The option is the characters that start with `-` or `--`. The parameter is the characters that immediately follow and pass to the sub-command or the option.
+A `br` command consists of sub-commands, options, and parameters.
+
+* Sub-command: the characters without `-` or `--`.
+* Option: the characters that start with `-` or `--`.
+* Parameter: the characters that immediately follow behind and are passed to the sub-command or the option.
 
 This is a complete `br` command:
 
-`br backup full --pd "${PDIP}:2379" -s "local:///tmp/backup"`
+{{< copyable "shell-regular" >}}
 
-In this command,
+```shell
+br backup full --pd "${PDIP}:2379" -s "local:///tmp/backup"
+```
 
-* `backup` is the sub-command of `br`.
-* `full` is the sub-command of `backup`.
-* `-s` or `--storage` specifies the path in which the backup files are stored.
-* `"local:///tmp/backup"` is the parameter of `-s`. `/tmp/backup` is the path in the local disk in which the backup files are stored.
-* `--pd` is the Placement Driver (PD) service address.
-* `"${PDIP}:2379"` is the parameter of `--pd`.
+Explanations for the above command are as follows:
+
+* `backup`: the sub-command of `br`.
+* `full`: the sub-command of `backup`.
+* `-s` (or `--storage`): the option that specifies the path where the backup files are stored.
+* `"local:///tmp/backup"`: the parameter of `-s`. `/tmp/backup` is the path in the local disk where the backup files are stored.
+* `--pd`: the option that specifies the Placement Driver (PD) service address.
+* `"${PDIP}:2379"`: the parameter of `--pd`.
 
 ### Sub-commands
 
 A `br` command consists of multiple layers of sub-commands. Currently, BR has the following three sub-commands:
 
-* `br backup` is used to backup the data of the TiDB cluster.
-* `br restore` is used to restore the data of the TiDB cluster.
-* `br version` is used to check the version of BR.
+* `br backup`: used to back up the data of the TiDB cluster.
+* `br restore`: used to restore the data of the TiDB cluster.
+* `br version`: used to check the version of BR.
 
 Each of the above three sub-commands might include the following three sub-commands to specify the scope of an operation:
 
-* `full` is used to backup or restore all the cluster data.
-* `db` is used to restore the specified database of the cluster.
-* `table` is used to backup or restore a single table in the specified database of the cluster.
+* `full`: used to back up or restore all the cluster data.
+* `db`: used to restore the specified database of the cluster.
+* `table`: used to back up or restore a single table in the specified database of the cluster.
 
 ### Common options
 
-* `--pd` is for connection, specifying the PD server address. For example, `"${PDIP}:2379"`.
-* `-h`/`--help` is used to get help on all sub-commands. For example, `br backup --help`.
-* `--ca` specifies the path to the trusted CA certificate in the PEM format.
-* `--cert` specifies the path to the SSL certificate in the PEM format.
-* `--key` specifies the path to the SSL certificate key in the PEM format.
-* `--status-addr` specifies the listening address through which BR provides statistics to Prometheus.
+* `--pd`: used for connection, specifying the PD server address. For example, `"${PDIP}:2379"`.
+* `-h` (or `--help`): used to get help on all sub-commands. For example, `br backup --help`.
+* `--ca`: specifies the path to the trusted CA certificate in the PEM format.
+* `--cert`: specifies the path to the SSL certificate in the PEM format.
+* `--key`: specifies the path to the SSL certificate key in the PEM format.
+* `--status-addr`: specifies the listening address through which BR provides statistics to Prometheus.
 
-## Backup cluster data
+## Back up cluster data
 
-To backup the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
+To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
 
 If the backup time might exceed the [`tikv_gc_life_time`](/dev/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default, increase the value of this configuration.
 
@@ -63,11 +71,13 @@ mysql -h${TiDBIP} -P4000 -u${TIDB_USER} ${password_str} -Nse \
     "update mysql.tidb set variable_value='720h' where variable_name='tikv_gc_life_time'";
 ```
 
-### Backup all cluster data
+### Back up all cluster data
 
-To backup all the cluster data, execute the `br backup full` command. To get help on this command, execute `br backup full -h` or `br backup full --help`.
+To back up all the cluster data, execute the `br backup full` command. To get help on this command, execute `br backup full -h` or `br backup full --help`.
 
-Usage: Backup all the cluster data to the `/tmp/backup` path of each TiKV node and write the `backupmeta` file to this path.
+**Usage example:**
+
+Back up all the cluster data to the `/tmp/backup` path of each TiKV node and write the `backupmeta` file to this path.
 
 {{< copyable "shell-regular" >}}
 
@@ -80,7 +90,11 @@ br backup full \
     --log-file backupfull.log
 ```
 
-In the above `br` command, the `--ratelimit` option specifies the maximum speed at which a backup operation is performed (MiB/s) on each TiKV node. The `--concurrency` option sets an upper limit on the number of concurrent executions on each TiKV node. `--log-file` specifies that the BR log is written to the `backupfull.log` file.
+Explanations for some options in the above command are as follows:
+
+* `--ratelimit`: specifies the maximum speed at which a backup operation is performed (MiB/s) on each TiKV node.
+* `--concurrency`: sets an upper limit on the number of concurrent executions on each TiKV node.
+* `--log-file`: specifies that the BR log is written to the `backupfull.log` file.
 
 A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data security. The progress bar is displayed as follows:
 
@@ -94,11 +108,13 @@ br backup full \
 Full Backup <---------/................................................> 17.12%.
 ```
 
-### Backup single table
+### Back up single table
 
-To backup the data of a single table in the cluster, execute the `br backup table` command. To get help on this command, execute `br backup table -h` or `br backup table --help`.
+To back up the data of a single table in the cluster, execute the `br backup table` command. To get help on this command, execute `br backup table -h` or `br backup table --help`.
 
-Usage: Backup the data of the `test.usertable` table to the `/tmp/backup` path on each TiKV node and write the `backupmeta` file to this path.
+**Usage example:**
+
+Back up the data of the `test.usertable` table to the `/tmp/backup` path on each TiKV node and write the `backupmeta` file to this path.
 
 {{< copyable "shell-regular" >}}
 
@@ -113,7 +129,12 @@ br backup table \
     --log-file backuptable.log
 ```
 
-The `table` sub-command has two options: `--db` and `--table`. `--db` specifies the database name and `--table` specifies the table name. For the meanings of other options, see [Backup all cluster data](#backup-all-cluster-data).
+The `table` sub-command has two options: `--db` and `--table`:
+
+* `--db`: specifies the database name
+* `--table`: specifies the table name.
+
+For the meanings of other options, see [Back up all cluster data](#back-up-all-cluster-data).
 
 A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data security.
 
@@ -129,7 +150,9 @@ To restore the cluster data, use the `br restore` command. You can add the `full
 
 To restore all the backup data to the cluster, execute the `br restore full` command. To get help on this command, execute `br restore full -h` or `br restore full --help`.
 
-Usage: Restore all the backup data in the `/tmp/backup` path to the cluster.
+**Usage example:**
+
+Restore all the backup data in the `/tmp/backup` path to the cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -141,7 +164,10 @@ br restore full \
     --log-file restorefull.log
 ```
 
-In the above command, `--concurrency` specifies how many sub-tasks can be performed concurrently in a restoration operation. `--log-file` specifies that the BR log is written to the `restorefull.log` file.
+Explanations for some options in the above command are as follows:
+
+* `--concurrency`: specifies how many sub-tasks can be performed concurrently in a restoration operation.
+* `--log-file`: specifies that the BR log is written to the `restorefull.log` file.
 
 A progress bar is displayed in the terminal during the restoration. When the progress bar advances to 100%, the restoration is complete. Then the BR also checks the backup data to ensure data security.
 
@@ -157,7 +183,9 @@ Full Restore <---------/...............................................> 17.12%.
 
 To restore a database to the cluster, execute the `br restore db` command. To get help on this command, execute `br restore db -h` or `br restore db --help`.
 
-Usage: Restore a database backed up in the `/tmp/backup` path to the cluster.
+**Usage example:**
+
+Restore a database backed up in the `/tmp/backup` path to the cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -175,7 +203,9 @@ In the above command, `--db` specifies the name of the database to be restored. 
 
 To restore a single table to the cluster, execute the `br restore table` command. To get help on this command, execute `br restore table -h` or `br restore table --help`.
 
-Usage: Restore a table backed up in the `/tmp/backup` path to the cluster.
+**Usage example:**
+
+Restore a table backed up in the `/tmp/backup` path to the cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -188,7 +218,7 @@ br restore table \
     --log-file restorefull.log
 ```
 
-In the above command, `--table` specifies the name of the table to be restored. For the meanings of other options, see [Restore a database](#restore-a-database).
+In the above command, `--table` specifies the name of the table to be restored. For the meanings of other options, see [Restore all backup data](#restore-all-backup-data) and [Restore a database](#restore-a-database).
 
 ## Best practices
 
@@ -226,7 +256,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 ## Examples
 
-This section shows how to backup and restore the data of an existing cluster. You can estimate the performance of backup and restoration based on machine performance, configuration and data size.
+This section shows how to back up and restore the data of an existing cluster. You can estimate the performance of backup and restoration based on machine performance, configuration and data size.
 
 ### Data size and machine configuration
 
@@ -284,7 +314,7 @@ Before the backup operation, make sure the following things are done:
 - `tikv_gc_life_time` is set to a larger value so that the backup operation will not be interrupted by data loss.
 - No DDL statement is executed on TiDB.
 
-Then execute the following command to backup all the cluster data:
+Then execute the following command to back up all the cluster data:
 
 {{< copyable "shell-regular" >}}
 
@@ -349,7 +379,7 @@ backup.BackupRequest{
 }
 ```
 
-After receiving the backup request, the TiKV node traverses all Region Leaders on the node to find the Regions that overlap with the KV ranges in this request. The TiKV node backups some or all of the data within the range, and generates the corresponding SST file (named in the format of `storeID_regionID_regionEpoch_tableID`) in the backup path.
+After receiving the backup request, the TiKV node traverses all Region Leaders on the node to find the Regions that overlap with the KV ranges in this request. The TiKV node backs up some or all of the data within the range, and generates the corresponding SST file (named in the format of `storeID_regionID_regionEpoch_tableID`) in the backup path.
 
 After finishing backing up the data of the corresponding Region, the TiKV node returns the metadata to BR. BR collects the metadata and stores it in the backupMeta file which is used for restoration.
 
