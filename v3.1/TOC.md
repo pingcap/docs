@@ -47,6 +47,7 @@
     - [Read Historical Data](/v3.1/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v3.1/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v3.1/how-to/get-started/data-migration.md)
+    - [TiDB Lightning Tutorial](/v3.1/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/v3.1/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v3.1/how-to/deploy/hardware-recommendations.md)
@@ -87,8 +88,7 @@
     - [Scale using Ansible](/v3.1/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.1/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to TiDB 3.0](/v3.1/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/v3.1/how-to/upgrade/rolling-updates-with-ansible.md)
+    - [Upgrade to TiDB 3.1](/v3.1/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.1/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/v3.1/how-to/troubleshoot/tidb-lightning.md)
@@ -272,6 +272,7 @@
     - [Understanding the Query Execution Plan](/v3.1/reference/performance/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](/v3.1/reference/performance/statistics.md)
     - [Optimizer Hints](/v3.1/reference/performance/optimizer-hints.md)
+    - [Follower Read](/v3.1/reference/performance/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/v3.1/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/v3.1/reference/performance/execution-plan-bind.md)
     - [Statement Summary Table](/v3.1/reference/performance/statement-summary.md)
@@ -284,6 +285,7 @@
   - [Alert Rules](/v3.1/reference/alert-rules.md)
   + Best Practices
     - [Highly Concurrent Write Best Practices](/v3.1/reference/best-practices/high-concurrency.md)
+    - [HAproxy Best Practices](/v3.1/reference/best-practices/haproxy.md)
   - [TiSpark](/v3.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.1/reference/tidb-binlog/overview.md)
@@ -308,7 +310,6 @@
         - [Table Routing](/v3.1/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v3.1/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/v3.1/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/v3.1/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/v3.1/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/v3.1/reference/tools/data-migration/features/shard-merge.md)
@@ -407,6 +408,8 @@
 - [Roadmap](/v3.1/roadmap.md)
 + [Releases](/v3.1/releases/rn.md)
   + v3.0
+    - [3.0.7](/v3.1/releases/3.0.7.md)
+    - [3.0.6](/v3.1/releases/3.0.6.md)
     - [3.0.5](/v3.1/releases/3.0.5.md)
     - [3.0.4](/v3.1/releases/3.0.4.md)
     - [3.0.3](/v3.1/releases/3.0.3.md)
