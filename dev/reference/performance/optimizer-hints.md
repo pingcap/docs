@@ -58,7 +58,7 @@ This hint means that the `SELECT` query block's name is specified to `QB1`, whic
 >
 > In the above example, if the hint specifies the `QB_NAME` to `sel_2` and does not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
 
-### `@QB_NAME`
+### @QB_NAME
 
 `@QB_NAME` is an optional parameter that specifies the query block to which an optimizer-controlling hint (except `QB_NAME`) applies. If the hint includes a leading `@QB_NAME`, the hint applies to the named query block. If there is no leading `@QB_NAME`, the hint applies to the query block where it occurs. For example:
 
