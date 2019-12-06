@@ -369,13 +369,13 @@ The structure of the request:
 ```
 backup.BackupRequest{
     ClusterId:    clusterID,   // The cluster ID.
-    StartKey:     startKey,    // The starting key of the backup (backed up)
-    EndKey:       endKey,      // The ending key of the backup (not backed up)
-    StartVersion: backupTS,    // The backup snapshot time
+    StartKey:     startKey,    // The starting key of the backup (backed up).
+    EndKey:       endKey,      // The ending key of the backup (not backed up).
+    StartVersion: backupTS,    // The backup snapshot time.
     ...
-    Path:         path,        // The path where backup files are stored
-    RateLimit:    rateLimit,   // Backup speed (MB/s)
-    Concurrency:  concurrency, // The number of threads for the backup operation (4 by default)
+    Path:         path,        // The path where backup files are stored.
+    RateLimit:    rateLimit,   // Backup speed (MB/s).
+    Concurrency:  concurrency, // The number of threads for the backup operation (4 by default).
 }
 ```
 
