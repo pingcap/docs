@@ -435,6 +435,9 @@ Follow the link to download the TiDB Lightning package (choose the same version 
     log-level = "error"
     # MySQL SQL Mode configuration
     # sql-mode = ""
+    # Sets maximum packet size allowed for SQL connections.
+    # Set this to 0 to automatically fetch the `max_allowed_packet` variable from server on every connection.
+    # max-allowed-packet = 67_108_864
 
     # Sets the TiDB session variable to speed up the Checksum and Analyze operations.
     # See https://pingcap.com/docs/dev/reference/performance/statistics/#control-analyze-concurrency

@@ -184,6 +184,9 @@ checksum-table-concurrency = 16
 
 # The default SQL mode used to parse and execute the SQL statements.
 sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
+# Sets maximum packet size allowed for SQL connections.
+# Set this to 0 to automatically fetch the `max_allowed_packet` variable from server on every connection.
+max-allowed-packet = 67_108_864
 
 # When data importing is complete, tidb-lightning can automatically perform
 # the Checksum, Compact and Analyze operations. It is recommended to leave
