@@ -60,10 +60,6 @@ The [black and white lists filtering rule](/dev/reference/tools/data-migration/f
 
 [Binlog event filtering](/dev/reference/tools/data-migration/features/overview.md#binlog-event-filter) is a more fine-grained filtering rule than the black and white lists filtering rule. You can use statements like `INSERT` or `TRUNCATE TABLE` to specify the binlog events of `schema/table` that you need to replicate or filter out.
 
-### Column mapping
-
-The [column mapping](/dev/reference/tools/data-migration/features/overview.md#column-mapping) feature means that the table column value can be modified according to the built-in expression specified by the user, which can be used to resolve the conflicts of the sharding auto-increment primary key IDs.
-
 ### Sharding support
 
 DM supports merging the original sharded instances and tables into TiDB, but with [some restrictions](/dev/reference/tools/data-migration/features/shard-merge.md#restrictions).
@@ -90,11 +86,11 @@ Before using the DM tool, note the following restrictions:
 
     - Currently, TiDB is not compatible with all the DDL statements that MySQL supports. Because DM uses the TiDB parser to process DDL statements, it only supports the DDL syntax supported by the TiDB parser. For details, see [MySQL Compatibility](/dev/reference/mysql-compatibility.md#ddl).
 
-    - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with a specified DDL statement(s). For details, see [Skip or replace abnormal SQL statements](/dev/how-to/troubleshoot/data-migration.md#incompatible-ddl-statements).
+    - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with a specified DDL statement(s). For details, see [Skip or replace abnormal SQL statements](/dev/reference/tools/data-migration/faq.md#how-to-handle-incompatible-ddl-statements).
 
 + Sharding
 
-    - If conflict exists between sharded tables, *only columns with the auto increment primary key* encounter the conflict, and the *column type is bigint*, solve the conflict using [column mapping](/dev/reference/tools/data-migration/features/overview.md#column-mapping). Otherwise, data replication is not supported. Conflicting data can cover each other and cause data loss.
+    - If conflict exists between sharded tables, solve the conflict by referring to [handling conflicts of auto-increment primary key](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handle-conflicts-of-auto-increment-primary-key). Otherwise, data replication is not supported. Conflicting data can cover each other and cause data loss.
 
     - For other sharding restrictions, see [Sharding DDL usage restrictions](/dev/reference/tools/data-migration/features/shard-merge.md#restrictions).
 
