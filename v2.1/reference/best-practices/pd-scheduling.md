@@ -1,10 +1,10 @@
 ---
-title: PD Scheduling
+title: PD Scheduling Best Practices
 summary: Learn best practice and strategy for PD scheduling.
 category: reference
 ---
 
-# PD Scheduling
+# PD Scheduling Best Practices
 
 This document details the principles and strategies of PD scheduling through common scenarios to facilitate your application. This document assumes that you have a basic understanding of TiDB, TiKV and PD with the following core concepts:
 
