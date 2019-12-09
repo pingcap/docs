@@ -27,7 +27,7 @@ Use the following tools for data backup and restoration:
     {{< copyable "shell-regular" >}}
 
     ```bash
-    wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz
+    wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz && \
     wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.sha256
     ```
 
@@ -44,7 +44,7 @@ Use the following tools for data backup and restoration:
     {{< copyable "shell-regular" >}}
 
     ```bash
-    tar -xzf tidb-enterprise-tools-latest-linux-amd64.tar.gz
+    tar -xzf tidb-enterprise-tools-latest-linux-amd64.tar.gz && \
     cd tidb-enterprise-tools-latest-linux-amd64
     ```
 
@@ -123,18 +123,34 @@ To restore data into TiDB, use `loader` to import the previously exported data. 
 
 After the data is imported, you can view the data in TiDB using the MySQL client:
 
-```sql
-mysql -h127.0.0.1 -P4000 -uroot
+{{< copyable "shell-regular" >}}
 
+```shell
+mysql -h127.0.0.1 -P4000 -uroot
+```
+
+{{< copyable "sql" >}}
+
+```sql
 mysql> show tables;
+```
+
+```
 +----------------+
 | Tables_in_test |
 +----------------+
 | t1             |
 | t2             |
 +----------------+
+```
 
+{{< copyable "sql" >}}
+
+```sql
 mysql> select * from t1;
+```
+
+```
 +----+------+
 | id | age  |
 +----+------+
@@ -142,8 +158,15 @@ mysql> select * from t1;
 |  2 |    2 |
 |  3 |    3 |
 +----+------+
+```
 
+{{< copyable "sql" >}}
+
+```sql
 mysql> select * from t2;
+```
+
+```
 +----+------+
 | id | name |
 +----+------+

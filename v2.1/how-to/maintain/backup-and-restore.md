@@ -21,18 +21,31 @@ Use the following tools for data backup and restoration:
 
 ## Download TiDB toolset (Linux)
 
-```bash
-# Download the tool package.
-wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz
-wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.sha256
+1. Download the tool package:
 
-# Check the file integrity. If the result is OK, the file is correct.
-sha256sum -c tidb-enterprise-tools-latest-linux-amd64.sha256
+    {{< copyable "shell-regular" >}}
 
-# Extract the package.
-tar -xzf tidb-enterprise-tools-latest-linux-amd64.tar.gz
-cd tidb-enterprise-tools-latest-linux-amd64
-```
+    ```bash
+    wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz && \
+    wget http://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.sha256
+    ```
+
+2. Check the file integrity. If the result is fine, the file is correct.
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    sha256sum -c tidb-enterprise-tools-latest-linux-amd64.sha256
+    ```
+
+3. Extract the package:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tar -xzf tidb-enterprise-tools-latest-linux-amd64.tar.gz && \
+    cd tidb-enterprise-tools-latest-linux-amd64
+    ```
 
 ## Full backup and restoration using `mydumper`/`loader`
 
@@ -50,6 +63,8 @@ To quickly backup and restore data (especially large amounts of data), refer to 
 ### Backup data from TiDB
 
 Use `mydumper` to backup data from TiDB.
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 ./bin/mydumper -h 127.0.0.1 -P 4000 -u root -t 32 -F 64 -B test -T t1,t2 --skip-tz-utc -o ./var/test
@@ -97,24 +112,42 @@ Then execute two more commands:
 
 To restore data into TiDB, use `loader` to import the previously exported data. See [Loader instructions](/v2.1/reference/tools/loader.md) for more information.
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 ./bin/loader -h 127.0.0.1 -u root -P 4000 -t 32 -d ./var/test
 ```
 
 After the data is imported, you can view the data in TiDB using the MySQL client:
 
-```sql
-mysql -h127.0.0.1 -P4000 -uroot
+{{< copyable "shell-regular" >}}
 
-mysql> show tables;
+```bash
+mysql -h127.0.0.1 -P4000 -uroot
+```
+
+{{< copyable "sql" >}}
+
+```sql
+show tables;
+```
+
+```
 +----------------+
 | Tables_in_test |
 +----------------+
 | t1             |
 | t2             |
 +----------------+
+```
 
-mysql> select * from t1;
+{{< copyable "sql" >}}
+
+```sql
+select * from t1;
+```
+
+```
 +----+------+
 | id | age  |
 +----+------+
@@ -122,8 +155,15 @@ mysql> select * from t1;
 |  2 |    2 |
 |  3 |    3 |
 +----+------+
+```
 
-mysql> select * from t2;
+{{< copyable "sql" >}}
+
+```sql
+select * from t2;
+```
+
+```
 +----+------+
 | id | name |
 +----+------+
