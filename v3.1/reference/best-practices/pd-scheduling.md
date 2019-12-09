@@ -8,14 +8,14 @@ category: reference
 
 This document details the principles and strategies of PD scheduling through common scenarios to facilitate your application. This document assumes that you have a basic understanding of TiDB, TiKV and PD with the following core concepts:
 
-- [leader/follower/learner](/dev/glossary.md#leaderfollowerlearner)
-- [operator](/dev/glossary.md#operator)
-- [operator step](/dev/glossary.md#operator-step)
-- [pending/down](/dev/glossary.md#pendingdown)
-- [region/peer/Raft group](/dev/glossary.md#regionpeerraft-group)
-- [region split](/dev/glossary.md#region-split)
-- [scheduler](/dev/glossary.md#scheduler)
-- [store](/dev/glossary.md#store)
+- [leader/follower/learner](/v3.1/glossary.md#leaderfollowerlearner)
+- [operator](/v3.1/glossary.md#operator)
+- [operator step](/v3.1/glossary.md#operator-step)
+- [pending/down](/v3.1/glossary.md#pendingdown)
+- [region/peer/Raft group](/v3.1/glossary.md#regionpeerraft-group)
+- [region split](/v3.1/glossary.md#region-split)
+- [scheduler](/v3.1/glossary.md#scheduler)
+- [store](/v3.1/glossary.md#store)
 
 > **Note:**
 >
@@ -104,7 +104,7 @@ Region merge refers to the process of merging adjacent small regions. It serves 
 
 ## Query scheduling status
 
-You can check the status of scheduling system through metrics, pd-ctl and logs. This section briefly introduces the methods of metrics and pd-ctl. Refer to [PD Monitoring Metrics](/dev/reference/key-monitoring-metrics/pd-dashboard.md) and [PD Control](/dev/reference/tools/pd-control.md) for details.
+You can check the status of scheduling system through metrics, pd-ctl and logs. This section briefly introduces the methods of metrics and pd-ctl. Refer to [PD Monitoring Metrics](/v3.1/reference/key-monitoring-metrics/pd-dashboard.md) and [PD Control](/v3.1/reference/tools/pd-control.md) for details.
 
 ### Operator status
 
@@ -157,7 +157,7 @@ You can query the list of regions in abnormal states using pd-ctl with region ch
 
 ## Control scheduling strategy
 
-You can use pd-ctl to adjust the scheduling strategy from the following three aspects. Refer to [PD Control](/dev/reference/tools/pd-control.md) for more details.
+You can use pd-ctl to adjust the scheduling strategy from the following three aspects. Refer to [PD Control](/v3.1/reference/tools/pd-control.md) for more details.
 
 ### Add/delete scheduler manually
 
