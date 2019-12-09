@@ -83,7 +83,9 @@
     - [Migrate from CSV](/dev/reference/tools/tidb-lightning/csv.md)
   + Maintain
     - [Common Ansible Operations](/dev/how-to/deploy/orchestrated/ansible-operations.md)
-    - [Backup and Restore](/dev/how-to/maintain/backup-and-restore.md)
+    + Backup and Restore
+      - [Use `mydumper` and `loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md)
+      - [Use BR](/dev/how-to/maintain/backup-and-restore/br.md)
     - [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/dev/how-to/scale/with-ansible.md)
@@ -287,6 +289,7 @@
   + Best Practices
     - [Highly Concurrent Write Best Practices](/dev/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/dev/reference/best-practices/haproxy.md)
+    - [PD Scheduling Best Practices](/dev/reference/best-practices/pd-scheduling.md)
   - [TiSpark](/dev/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/dev/reference/tidb-binlog/overview.md)
