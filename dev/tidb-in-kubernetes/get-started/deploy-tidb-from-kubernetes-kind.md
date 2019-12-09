@@ -120,7 +120,7 @@ Refer to the steps in [Deploy TiDB on General Kubernetes](/dev/tidb-in-kubernete
 
 ## Access the database and monitoring dashboards
 
-To access TiDB clusters, use `kubectl port-forward` command to expose services to the host. The port number used in command are in `<host machine port>:<k8s service port>` format.
+To access the TiDB cluster, use the `kubectl port-forward` command to expose services to the host. The ports in the command are in `<host machine port>:<k8s service port>` format.
 
 - Access TiDB using the MySQL client
 
@@ -134,9 +134,9 @@ To access TiDB clusters, use `kubectl port-forward` command to expose services t
         kubectl port-forward svc/<release-name>-tidb 4000:4000 --namespace=<namespace>
         ```
 
-        If results like `Forwarding from 0.0.0.0:4000 -> 4000` is returned, it means the host machine port is successfully forwarded.
+        If results like `Forwarding from 0.0.0.0:4000 -> 4000` is returned, it means the proxy is set up.
 
-    2. Access TiDB using the MySQL client, and open a **new** terminal tab or window to run the following command:
+    2. To access TiDB using the MySQL client, open a **new** terminal tab or window and run the following command:
 
         {{< copyable "shell-regular" >}}
 
@@ -144,9 +144,9 @@ To access TiDB clusters, use `kubectl port-forward` command to expose services t
         mysql -h 127.0.0.1 -P 4000 -u root
         ```
 
-        When testing finishes, use <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit.
+        When the testing finishes, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the proxy and exit.
 
-- Access TiDB through the monitoring dashboard
+- View the monitoring dashboard
 
     1. Use kubectl to forward the host machine port to the Grafana service port:
 
@@ -156,18 +156,19 @@ To access TiDB clusters, use `kubectl port-forward` command to expose services t
         kubectl port-forward svc/<release-name>-grafana 3000:3000 --namespace=<namespace>
         ```
 
-        If results like `Forwarding from 0.0.0.0:4000 -> 4000` is returned, it means the host machine port is successfully forwarded.
+        If results like `Forwarding from 0.0.0.0:4000 -> 4000` is returned, it means the proxy is set up.
 
     2. Open your web browser at <http://localhost:3000> to access the Grafana monitoring dashboard.
 
         - default username: admin
         - default password: admin
 
-        When testing finishes, use <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit.
+        When the testing finishes, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the proxy and exit.
 
     > **Note:**
     >
-    > If you are deploying kind on a remote machine rather than a local PC, there might be problems connecting to "localhost".
+    > If you are deploying kind on a remote machine rather than a local PC, there might be problems accessing the monitoring dashboard of the remote system through "localhost".
+
     >
     > When you use kubectl 1.13 or later versions, you can expose the port on `0.0.0.0` instead of the default `127.0.0.1` by adding `--address 0.0.0.0` to the `kubectl port-forward` command.
     >
@@ -177,7 +178,7 @@ To access TiDB clusters, use `kubectl port-forward` command to expose services t
     > kubectl port-forward --address 0.0.0.0 -n tidb svc/<release-name>-grafana 3000:3000
     > ```
     >
-    > Then, open your browser at <http://vmip:3000> to access the Grafana monitoring dashboard.
+    > Then, open your browser at `http://<VM's IP address>:3000` to access the Grafana monitoring dashboard.
 
 ## Destroy the TiDB and Kubernetes cluster
 
