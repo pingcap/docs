@@ -41,6 +41,7 @@
     - [Read Historical Data](/v2.1/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v2.1/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v2.1/how-to/get-started/data-migration.md)
+    - [TiDB Lightning Tutorial](/v2.1/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/v2.1/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v2.1/how-to/deploy/hardware-recommendations.md)
@@ -82,7 +83,6 @@
     - [Scale a TiDB Cluster](/v2.1/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade to TiDB 2.1](/v2.1/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v2.1/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/v2.1/how-to/troubleshoot/tidb-lightning.md)

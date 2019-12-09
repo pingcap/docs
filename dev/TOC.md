@@ -48,6 +48,7 @@
     - [Read Historical Data](/dev/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/dev/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/dev/how-to/get-started/data-migration.md)
+    - [TiDB Lightning Tutorial](/dev/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/dev/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md)
@@ -82,14 +83,15 @@
     - [Migrate from CSV](/dev/reference/tools/tidb-lightning/csv.md)
   + Maintain
     - [Common Ansible Operations](/dev/how-to/deploy/orchestrated/ansible-operations.md)
-    - [Backup and Restore](/dev/how-to/maintain/backup-and-restore.md)
+    + Backup and Restore
+      - [Use `mydumper` and `loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md)
+      - [Use BR](/dev/how-to/maintain/backup-and-restore/br.md)
     - [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/dev/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/dev/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to TiDB 3.0](/dev/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/dev/how-to/upgrade/rolling-updates-with-ansible.md)
+    - [Upgrade to the Latest Version](/dev/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/dev/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/dev/how-to/troubleshoot/tidb-lightning.md)
@@ -273,6 +275,7 @@
     - [Understanding the Query Execution Plan](/dev/reference/performance/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](/dev/reference/performance/statistics.md)
     - [Optimizer Hints](/dev/reference/performance/optimizer-hints.md)
+    - [Follower Read](/dev/reference/performance/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/dev/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/dev/reference/performance/execution-plan-bind.md)
     - [Statement Summary Table](/dev/reference/performance/statement-summary.md)
@@ -410,6 +413,7 @@
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
   + v3.0
+    - [3.0.7](/dev/releases/3.0.7.md)
     - [3.0.6](/dev/releases/3.0.6.md)
     - [3.0.5](/dev/releases/3.0.5.md)
     - [3.0.4](/dev/releases/3.0.4.md)
