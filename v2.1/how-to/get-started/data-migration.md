@@ -36,7 +36,7 @@ For additional information about DM, please consult [Data Migration Overview](/v
 
 We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-server, tikv-server, and tidb-server. Then we'll start a single DM-master and 3 instances of DM-worker.
 
-First, install MySQL 5.7 and download/extract the TiDB v3.0 and DM v1.0.2 packages we'll use:
+First, install MySQL 5.7 and download/extract the TiDB v2.1 and DM v1.0.2 packages we'll use:
 
 ```bash
 sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
