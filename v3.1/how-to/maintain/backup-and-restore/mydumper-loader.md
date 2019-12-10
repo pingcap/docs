@@ -50,7 +50,7 @@ Use the following tools for data backup and restoration:
 
 ## Full backup and restoration using `mydumper`/`loader`
 
-Use [`mydumper`](/v3.1/reference/tools/mydumper.md) to export data from TiDB and [`loader`](/v3.1/reference/tools/loader.md) to import the data into TiDB.
+Use [`mydumper`](/v3.1/reference/tools/mydumper.md) to export data from TiDB and [`loader`](/v3.1/reference/tools/loader.md) to import data into TiDB.
 
 > **Note:**
 >
