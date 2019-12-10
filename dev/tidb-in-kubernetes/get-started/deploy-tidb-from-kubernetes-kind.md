@@ -110,7 +110,7 @@ First, make sure that Docker is running. Then, you can create a local Kubernetes
 
 ## Step 2: Deploy TiDB Operator in the Kubernetes cluster
 
-1. Install Helm and configure it with the charts provided by PingCAP. Refer to the steps in [Use Helm](/dev/tidb-in-kubernetes/reference/tools/in-kubernetes.md#use-helm).
+1. Install Helm and add the official PingCAP chart repository to it. Refer to the steps in [Use Helm](/dev/tidb-in-kubernetes/reference/tools/in-kubernetes.md#use-helm).
 
 2. Deploy TiDB Operator. Refer to the steps in [Deploy TiDB Operator](/dev/tidb-in-kubernetes/deploy/tidb-operator.md#install-tidb-operator)
 
@@ -168,7 +168,6 @@ To access the TiDB cluster, use the `kubectl port-forward` command to expose ser
     > **Note:**
     >
     > If you are deploying kind on a remote machine rather than a local PC, there might be problems accessing the monitoring dashboard of the remote system through "localhost".
-
     >
     > When you use kubectl 1.13 or later versions, you can expose the port on `0.0.0.0` instead of the default `127.0.0.1` by adding `--address 0.0.0.0` to the `kubectl port-forward` command.
     >
