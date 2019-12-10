@@ -94,9 +94,9 @@ SET @@GLOBAL.autocommit = {0 | 1};
 
 ## Explicit and implicit transaction
 
-TiDB supports explicit transactions (`[BEGIN|START TRANSACTION]`/`COMMIT`) and implicit transactions (`SET autocommit = 1`).
+TiDB supports explicit transactions (`[BEGIN|START TRANSACTION]` and `COMMIT`) and implicit transactions (`SET autocommit = 1`).
 
-If you set the value of `autocommit` to `1` and start a new transaction through the `[BEGIN|START TRANSACTION]` statement, the autocommit is disabled before `COMMIT`/`ROLLBACK` which makes the transaction becomes explicit.
+If you set the value of `autocommit` to `1` and start a new transaction through the `[BEGIN|START TRANSACTION]` statement, the autocommit is disabled before `COMMIT` or `ROLLBACK` which makes the transaction becomes explicit.
 
 For DDL statements, the transaction is committed automatically and does not support rollback. If you run the DDL statement while the current session is in the process of a transaction, the DDL statement is executed after the current transaction is committed.
 

@@ -8,7 +8,7 @@ category: reference
 
 TiDB implements an optimistic transaction model. Unlike MySQL, which uses row-level locking to avoid write conflict, in TiDB, the write conflict is checked only in the `commit` process during the execution of the statements like `Update`, `Insert`, `Delete`, and so on.
 
-Similarly, statements such as `SELECT .. FOR UPDATE` do not work in the same way as in MySQL. Therefore, it is important to remember to check the returned results of `commit` statements, because even if there is no error in execution, there might be errors during the `COMMIT` process.
+Similarly, statements such as `SELECT .. FOR UPDATE` do not work in the same way as in MySQL. Therefore, it is important to check the returned results of `commit` statements, because even if there is no error in execution, there might be errors during the `COMMIT` process.
 
 ## Transaction restrictions
 
@@ -46,7 +46,7 @@ COMMIT;
 
 > **Note:**
 >
-> The distributed resources in TiDB might not be fully used in the single-threaded workloads of TiDB, so the performance is lower than that of a single-instance deployment of MySQL. This difference is similar to the case of transactions with higher latency TiDB.
+> The distributed resources in TiDB might not be fully used in the single-threaded workloads, so the performance of TiDB is lower than that of a single-instance deployment of MySQL. This difference is similar to the case of transactions with higher latency in TiDB.
 
 ### SELECT .. FOR UPDATE
 
