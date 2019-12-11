@@ -277,7 +277,7 @@ Taking the above code for example, the system supports the `performance` and `po
 
 > **Note:**
 >
-> As the following shows, if it returns "Not Available", it means that the current system does not support CPUfreq configuration and you can skip this step.
+> As the following shows, if it returns `Not Available`, it means that the current system does not support CPUfreq configuration and you can skip this step.
 
 {{< copyable "shell-root" >}}
 
