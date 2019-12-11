@@ -155,7 +155,7 @@ Log in to the Control Machine using the `tidb` user account and enter the `/home
 
 {{< copyable "shell-regular" >}}
 
-```
+```shell
 git clone -b $tag https://github.com/pingcap/tidb-ansible.git
 ```
 
@@ -233,7 +233,7 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
 
     This step creates the `tidb` user account on the target machines, configures the sudo rules and the SSH mutual trust between the Control Machine and the target machines.
 
-To configure the SSH mutual trust and sudo without password manually, see [How to manually configure the SSH mutual trust and sudo without password](#how-to-manually-configure-the-ssh-mutual-trust-and-sudo-without-password)
+To configure the SSH mutual trust and sudo without password manually, see [How to manually configure the SSH mutual trust and sudo without password](#how-to-manually-configure-the-ssh-mutual-trust-and-sudo-without-password).
 
 ## Step 6: Install the NTP service on the target machines
 
