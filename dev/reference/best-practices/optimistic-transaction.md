@@ -8,7 +8,7 @@ category: reference
 
 This document introduces the principles of TiDB's optimistic locking mechanism, and provides best practices for optimistic transactions in various scenarios. This document assumes that you have a basic understanding of [TiDB architecture](/dev/architecture.md) and [Percolator](https://ai.google/research/pubs/pub36726), with the following core concepts:
 
-- [ACID](/dev/glossary.md#ACID)
+- [ACID](/dev/glossary.md#acid)
 - [transaction](/dev/glossary.md#transaction)
 - [optimistic transaction](/dev/glossary.md#optimistic-transaction)
 - [pessimistic transaction](/dev/glossary.md#pessimistic-transaction)
@@ -22,35 +22,27 @@ TiDB adopts Google's Percolator transaction model, a variant of two-phase commit
 
 1. The client begins a transaction.
 
-    TiDB receives the start timestamp from PD and mark it as `start_ts`.
+    TiDB receives the start version number (monotonically increasing in time and globally unique) from PD and mark it as `start_ts`.
 
 2. The client issues a read request.
-
-    a. TiDB receives routing information (how data is distributed among TiKV nodes) from PD.
-
-    b. TiDB receives the data of the `start_ts` version from TiKV.
+    1. TiDB receives routing information (how data is distributed among TiKV nodes) from PD.
+    2. TiDB receives the data of the `start_ts` version from TiKV.
 
 3. The client issues a write request.
 
-    **Data that meets consistency requirement is stored in the memory**.
+    TiDB checks whether the written data satisfies consistency constraints (to ensure the data types are correct and the unique index is met etc.) **Valid data is stored in the memory**.
 
 4. The client issues a commit request.
 
-5. TiDB begins 2PC to ensure the atomicity of distributed transactions and make data physically resides.
+5. TiDB begins 2PC to ensure the atomicity of distributed transactions and persist data in store.
 
-    a. TiDB selects a Primary Key from the data to be written.
-
-    b. TiDB receives the information of data distribution in regions from PD, and groups all keys by region accordingly.
-
-    c. TiDB sends prewrite requests to all TiKV nodes involved. TiKV checks the timestamp for conflict, and evaluates whether it is expired. Then, TiKV locks the data to be written.
-
-    d. TiDB successfully receives all requests in the prewrite phase.
-
-    e. TiDB receives a commit timestamp from PD and marks it as `commit_ts`.
-
-    f. TiDB initiates the second commit to the TiKV nodes where Primary Key is located. TiKV checks the data, and clean the locks left in the prewrite phase.
-
-    g. The second phase is successfully finished.
+    1. TiDB selects a Primary Key from the data to be written.
+    2. TiDB receives the information of region distribution from PD, and groups all keys by region accordingly.
+    3. TiDB sends prewrite requests to all TiKV nodes involved. Then, TiKV checks whether there are conflict or expired versions. Valid data is locked.
+    4. TiDB successfully receives all requests in the prewrite phase.
+    5. TiDB receives a commit version number from PD and marks it as `commit_ts`.
+    6. TiDB initiates the second commit to the TiKV nodes where Primary Key is located. TiKV checks the data, and clean the locks left in the prewrite phase.
+    7. TiDB receives the message that reports the second phase is successfully finished.
 
 6. TiDB returns a message to inform the client that the transaction is successfully committed.
 
@@ -66,9 +58,9 @@ From the process of transactions in TiDB above, it is clear that TiDB transactio
 
 However, TiDB transactions also have the following disadvantages:
 
-* More RPCs
-* Lack of a centralized timestamp manager
-* Frequent OOM (out of memory)
+* Transaction latency due to 2PC
+* Lack of a centralized version manager
+* OOM (out of memory) when extensive data is written in the memory
 
 ## Transaction sizes
 
@@ -85,7 +77,7 @@ UPDATE my_table SET a = 'newer_value' WHERE id = 2;
 UPDATE my_table SET a = 'newest_value' WHERE id = 3;
 ```
 
-In this case, the transaction latency is increased because the two-phase commit requires two sequential rounds of distributed consensus. To improve the performance, you can use an explicit transaction instead, that is, to execute the above three statements within a transaction:
+In this case, the transaction latency is increased because the two-phase commit consumes more time to execute the transaction. To improve the performance, you can use an explicit transaction instead, that is, to execute the above three statements within a transaction:
 
 ```sql
 # improved version.
@@ -100,18 +92,18 @@ Similarly, it is recommended to execute `INSERT` statement within an explicit tr
 
 ### Large transaction
 
-Due to the requirement of 2PC, large transactions that modify data can leads to:
+Due to the requirement of 2PC, a large transaction can leads to:
 
 * OOM when excessive data is written in the memory
 * More conflicts in the prewrite phase
-* Long duration before transactions actually commit
+* Long duration before transactions are actually committed
 
 Therefore, TiDB intentionally imposes some limits on transaction sizes:
 
 * The total number of SQL statements in a transaction is no more than 5,000 (default)
-* Each Key-Value entry is no more than 6 MiB
+* Each Key-Value entry is no more than 6 MB
 * The total number of Key-Value entries is no more than 300,000
-* The total size of Key-Value entries is no more than 100 MiB
+* The total size of Key-Value entries is no more than 100 MB
 
 For each transaction, it is recommended to keep the number of SQL statements between 100 to 500 to achieve an optimal performance.
 
@@ -126,7 +118,7 @@ In TiDB's optimistic locking mechanism, the two-phase commit begins right after 
 
 ### Default behavior for conflicting transactions
 
-TiDB uses an optimistic mechanism for commits, so that changes can be written to the data before the commit actually occurs. In this sense, both types of conflicts are allowed in the prewrite phase. To illustrate this default behavior, assume there are two concurrent transactions A and B update the same row. Their execution results at different time points are as follows:
+To illustrate TiDB's default behavior for conflicting transactions, assume there are two concurrent transactions A and B update the same row. Their execution results at different time points are as follows:
 
 ![Conflicting transactions](/media/best-practices/optimistic-transaction-table1.png)
 
@@ -138,15 +130,15 @@ This procedure is visualized as follows:
 
 2. At `t3`, `txnB` updates the row (`id = 1`).
 
-3. At `t4`, `txnA` updates the same row. Because conflict detection is only performed before the transactions actually commit, this operation successfully executed.
+3. At `t4`, `txnA` updates the same row. Because conflict detection is only performed before the transactions actually commit, this operation is successfully executed.
 
 4. At `t5`, `txnB` commits successfully.
 
-5. At `t6`, `txnA` tries to commit but TiDB responds with an error and informs the client to `try again later`.
+5. At `t6`, `txnA` tries to commit but TiDB responds with an error and informs the client to `try again later`, so `txnA` fails to commit.
 
 ### Automatic retry
 
-TiDB uses optimistic locking by default whereas MySQL applies pessimistic locking. This means that MySQL checks for conflict during the execution of SQL statements, so there are few errors returned in heavy contention scenarios. In the same example above, the conflict is instantly observed when `txnA` updates data at `t4`.
+TiDB uses optimistic locking by default whereas MySQL applies pessimistic locking. This means that MySQL checks for conflicts during the execution of SQL statements, so there are few errors reported in heavy contention scenarios. In the same example above, the conflict is instantly observed when `txnA` updates data at `t4`.
 
 For the convenience of MySQL users, TiDB provides a retry function that runs inside a transaction. If there is a conflict, TiDB retries the write operations automatically. You can set `tidb_disable_txn_auto_retry` and `tidb_retry_limit` to enable or disable this default function:
 
@@ -180,11 +172,11 @@ You can enable automatic retry in either session level or global level:
 
 ### Limits of retry
 
-TiDB automatically retries failed transactions by default, which might lead to lost updates. The reason can be observed with the procedures of retry below:
+TiDB automatically retries failed transactions by default, which might lead to unexpected results. The reason can be observed with the procedures of retry below:
 
 1. Allocate a new timestamp and mark it as `start_ts`.
 
-2. Rollback the SQL statements that contain write operations.
+2. Retry the SQL statements that contain write operations.
 
 3. Implement the two-phase commit.
 
@@ -202,30 +194,32 @@ This instance is visualized as follows:
 
 ![Automatic retry analysis](/media/best-practices/optimistic-transaction-case2.png)
 
-1. As shown, Session B begins `txn2` and Session A begins `txn2` at `t1`.
+1. As shown above, Session A begins `txn2` at `t1` and Session B begins `txn2` at `t2`.
 
 2. Both `txn1` and `txn2` update the same row at the same time.
 
 3. At `t5`, Session B commits `txn2` successfully.
 
 4. At `t8`, a conflict is detected when Session A commits `txn1`, so TiDB automatically retries it.
-    a. TiDB receives a new `start_ts` (i.e. `t8'`).
-    b. TiDB rolls back the statement `update tidb set name='pd' where id =1 and status=1`.
-        i. No matching statement is found in the data of version `t8'`.
-        ii. No data is updated, return to the upper layer.
+    1. TiDB receives a new version number `t8'` and marks it as `start_ts`.
+    2. TiDB retries the statement `update tidb set name='pd' where id =1 and status=1`.
+        1. No matching statement is found in the data of version `t8'`.
+        2. No data is updated, return to the upper layer.
 
 5. TiDB considers that `txn1` is successfully retried, but the data is not updated as expected.
 
-During retrying, TiDB receives a new timestamp to mark the beginning of the transaction. In this case, if the transaction updates data using other query results, a lost update might occur because the read repeatable isolation (also known as snapshot isolation) is violated. You can disable automatic retry to prevent lost updates.
+During retrying, TiDB receives a new version number to mark the beginning of the transaction. In this case, if the transaction updates data using other query results, the results might be unexpected because the `REPEATABLE READ` isolation (also known as Snapshot Isolation) is violated. You can disable automatic retry to avoid this problem.
 
 ### Conflict detection
 
-For the optimistic transaction, it is important to detect whether there are write-write conflicts in the underlying data. Specifically, TiKV needs to read data for detection in the prewrite phase. To optimize this performance, the conflict detection is mainly performed in two layers:
+For the optimistic transaction, it is important to detect whether there are write-write conflicts in the underlying data. Although TiKV reads data for detection **in the prewrite phase**, a conflict pre-detection is also performed for the TiDB clusters to improve the efficiency.
 
-* The TiDB layer. TiDB uses latches to prevent conflicting transactions. If a write-write conflict in the instance is observed after the primary write is issued, it is unnecessary to issue the subsequent writes to the TiKV.
-* The TiKV layer. TiKV also uses latches to prevent conflicting transactions, which is performed in the prewrite phase.
+Because TiDB is a distributed database, the conflict detection in the memory is occurred in two layers:
 
-The latches in the TiDB layer is disabled by default. The specific configuration items are as follows:
+* The TiDB layer. If a write-write conflict in the instance is observed after the primary write is issued, it is unnecessary to issue the subsequent writes to the TiKV.
+* The TiKV layer. TiDB instances are unaware of each other, which means they cannot confirm whether there are conflicts. Therefore, the conflict detection is mainly performed in TiKV.
+
+The conflict detection in the TiDB layer is disabled by default. The specific configuration items are as follows:
 
 ```toml
 [txn-local-latches]
@@ -240,21 +234,21 @@ enabled = false
 capacity = 2048000
 ```
 
-The value of `capacity` mainly affects the accuracy of conflict detection. When performing conflict detection, only the hash value of each key is stored in the memory. Because the probability of collision when hashing is closely related to the probability of wrong detection, you can configure `capacity` to controls the number of slots and enhance the accuracy of conflict detection.
+The value of `capacity` mainly affects the accuracy of conflict detection. During conflict detection, only the hash value of each key is stored in the memory. Because the probability of collision when hashing is closely related to the probability of misdetection, you can configure `capacity` to controls the number of slots and enhance the accuracy of conflict detection.
 
-* The smaller the value of `capacity`, the smaller the occupied memory and the greater the probability of wrong detection.
-* The larger the value of `capacity`, the larger the occupied memory and the smaller the probability of wrong detection.
+* The smaller the value of `capacity`, the smaller the occupied memory and the greater the probability of misdetection.
+* The larger the value of `capacity`, the larger the occupied memory and the smaller the probability of misdetection.
 
-When you confirm that there is no write-write conflict in the upcoming transactions, it is recommended to disable the function of conflict detection.
+When you confirm that there is no write-write conflict in the upcoming transactions (such as importing data), it is recommended to disable the function of conflict detection.
 
-TiKV uses the built-in memory latches to prevent concurrent operations on the same key. But the memory lock in the TiKV layer is strictly performed and cannot be disabled. You can only configure `scheduler-concurrency` to control the number of slots that defined by the modulo operation:
+TiKV also uses a similar mechanism to detect conflicts, but the conflict detection in the TiKV layer cannot be disabled. You can only configure `scheduler-concurrency` to control the number of slots that defined by the modulo operation:
 
 ```toml
 # Controls the number of slots. ("2048000" by default）
 scheduler-concurrency = 2048000
 ```
 
-In addition, TiKV supports monitoring the time spent on waiting latches in Scheduler.
+In addition, TiKV supports monitoring the time spent on waiting latches in scheduler.
 
 ![Scheduler latch wait duration](/media/best-practices/optimistic-transaction-metric.png)
 
