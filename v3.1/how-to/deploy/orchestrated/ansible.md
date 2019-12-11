@@ -172,7 +172,7 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
 
 It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 and Ansible 2.5.
 
-1. Install Ansible and the dependencies on the Control Machine:
+1. Install Ansible and the dependent version information on the Control Machine:
 
     {{< copyable "shell-regular" >}}
 
@@ -181,7 +181,7 @@ It is required to use `pip` to install Ansible and its dependencies, otherwise a
     sudo pip install -r ./requirements.txt
     ```
 
-    Ansible and the related dependencies are in the `tidb-ansible/requirements.txt` file.
+    Ansible and the dependent version information are in the `tidb-ansible/requirements.txt` file.
 
 2. View the version of Ansible:
 
