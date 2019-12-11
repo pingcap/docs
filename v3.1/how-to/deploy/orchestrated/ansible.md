@@ -976,7 +976,12 @@ ansible-playbook start.yml
     Python 2.7.5 (default, Nov  6 2016, 00:28:07)
     [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)] on linux2
     Type "help", "copyright", "credits" or "license" for more information.
-    >>> import jmespath
+    ```
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    import jmespath
     ```
 
 ### The `zk: node does not exist` error when starting Pump/Drainer
