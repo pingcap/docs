@@ -254,8 +254,8 @@ set @@global.tidb_distsql_scan_concurrency = 10
 ### tidb_disable_txn_auto_retry
 
 - Scope: SESSION | GLOBAL
-- Default: on
-- This variable is used to set whether to disable automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+- Default: off
+- This variable is used to set whether to disable automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer. The automatic retry is enabled by default in TiDB v2.1.
 
     Setting the value to `off` means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
 
