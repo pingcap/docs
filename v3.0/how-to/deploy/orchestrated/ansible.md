@@ -64,7 +64,7 @@ Log in to the Control Machine using the `root` user account, and run the corresp
 
     ```shell
     yum -y install epel-release git curl sshpass && \
-    yum -y install python-pip
+    yum -y install python2-pip
     ```
 
 - If you use a Control Machine installed with Ubuntu, run the following command:
@@ -557,7 +557,7 @@ location_labels = ["host"]
 
 1. For the cluster topology of multiple TiKV instances on each TiKV node, you need to edit the `capacity` parameter under `block-cache-size` in `tidb-ansible/conf/tikv.yml`:
 
-    ```
+    ```yaml
     storage:
       block-cache:
         capacity: "1GB"
@@ -709,7 +709,7 @@ The following example uses `tidb` as the user who runs the service.
     > {{< copyable "shell-regular" >}}
     >
     > ```bash
-    > $ sudo yum install fontconfig open-sans-fonts
+    > sudo yum install fontconfig open-sans-fonts
     > ```
 
 5. Start the TiDB cluster.
@@ -726,7 +726,7 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
 
 1. Connect to the TiDB cluster using the MySQL client.
 
-    {{< copyable "sql" >}}
+    {{< copyable "shell-regular" >}}
 
     ```shell
     mysql -u root -h 172.16.10.1 -P 4000

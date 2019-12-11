@@ -726,9 +726,9 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
 
 1. Connect to the TiDB cluster using the MySQL client.
 
-    {{< copyable "sql" >}}
+    {{< copyable "shell-regular" >}}
 
-    ```sql
+    ```shell
     mysql -u root -h 172.16.10.1 -P 4000
     ```
 
