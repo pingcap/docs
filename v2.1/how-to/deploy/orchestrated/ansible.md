@@ -319,9 +319,9 @@ As the above code shows, the current mode is `powersave` in this example.
 
 ### Change the governor mode
 
-You can use either of the following two methods to change the governor mode:
+You can use either of the following two methods to change the governor mode. In the above example, the current governor mode is `powersave` and the following commands change it to `performance`.
 
-- Use the `cpupower frequency-set --governor` command to change the current mode. The current governor mode is `powersave` in the above example and the following command changes it to `performance`:
+- Use the `cpupower frequency-set --governor` command to change the current mode:
 
     {{< copyable "shell-root" >}}
 
