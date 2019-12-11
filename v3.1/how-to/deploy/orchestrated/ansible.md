@@ -160,7 +160,7 @@ git clone -b $tag https://github.com/pingcap/tidb-ansible.git
 
 > **Note:**
 >
-> - Replace `$tag` with the value of the chosen TAG version. For example, `v3.02`.
+> - Replace `$tag` with the value of the chosen TAG version. For example, `v3.0.2`.
 > - To deploy and upgrade TiDB clusters, use the corresponding version of `tidb-ansible`. If you only modify the version in the `inventory.ini` file, errors might occur.
 > - It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
