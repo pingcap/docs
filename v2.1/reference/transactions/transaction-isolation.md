@@ -60,6 +60,8 @@ By default TiDB v2.1 will retry transactions but this might lead to lost updates
 
 When automatic retry is enabled, conflicts in an explicit transaction might lead to unexpected result.
 
+To disable automatic retry, set `tidb_disable_txn_auto_retry = on`. If you set the value of `tidb_retry_limit` to `0`, the automatic retry is also disabled.
+
 Example 1:
 
 | Session1 | Session2 |
