@@ -83,7 +83,6 @@
     - [Scale a TiDB Cluster](/v2.1/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade to TiDB 2.1](/v2.1/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v2.1/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/v2.1/how-to/troubleshoot/tidb-lightning.md)
@@ -261,6 +260,7 @@
   - [Alert Rules](/v2.1/reference/alert-rules.md)
   + Best Practices
     - [HAProxy Best Practices](/v2.1/reference/best-practices/haproxy.md)
+    - [PD Scheduling Best Practices](/v2.1/reference/best-practices/pd-scheduling.md)
   - [TiSpark](/v2.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v2.1/reference/tidb-binlog/overview.md)
