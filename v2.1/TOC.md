@@ -261,6 +261,7 @@
   - [Alert Rules](/v2.1/reference/alert-rules.md)
   + Best Practices
     - [HAProxy Best Practices](/v2.1/reference/best-practices/haproxy.md)
+    - [TiKV Performance Tuning with Massive Region Amount Best Practices](/v2.1/reference/best-practices/massive-regions.md)
   - [TiSpark](/v2.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v2.1/reference/tidb-binlog/overview.md)

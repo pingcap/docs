@@ -286,6 +286,7 @@
   + Best Practices
     - [Highly Concurrent Write Best Practices](/v3.0/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/v3.0/reference/best-practices/haproxy.md)
+    - [TiKV Performance Tuning with Massive Region Amount Best Practices](/v3.0/reference/best-practices/massive-regions.md)
   - [TiSpark](/v3.0/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.0/reference/tidb-binlog/overview.md)
