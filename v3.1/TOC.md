@@ -348,6 +348,7 @@
       - [Checkpoints](/v3.1/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/v3.1/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/v3.1/reference/tools/tidb-lightning/csv.md)
+      - ["TiDB" Back End](/v3.1/reference/tools/tidb-lightning/tidb-backend.md)
       - [Monitor](/v3.1/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.1/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v3.1/faq/tidb-lightning.md)

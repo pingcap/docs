@@ -484,3 +484,9 @@ Follow the link to download the TiDB Lightning package (choose the same version 
     ```sh
     nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
+
+## Upgrading TiDB Lightning
+
+As of v3.1, TiDB Lightning can be upgraded by replacing the binaries alone. No reconfiguration should be needed. See [the FAQ](/v3.1/faq/tidb-lightning.md#how-to-properly-restart-tidb-lightning) for the precise steps of restarting TiDB Lightning.
+
+If an import task is running, we recommend you to wait for its finish before upgrading TiDB Lightning, or be prepared to reimport from scratch, as there is no guaratee that checkpoints work across versions.

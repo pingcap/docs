@@ -26,6 +26,14 @@ When using the "TiDB" back end, you no longer need `tikv-importer`. Compared wit
 * Steps involving `tikv-importer` can all be skipped.
 * The configuration must be changed to indicate the "TiDB" back end is used.
 
+### Hardware requirements
+
+The speed of TiDB Lightning using "TiDB" back end is limited by the SQL processing speed of TiDB. Therefore, even a lower-end machine may max out the possible performance. The recommended hardware configuration is:
+
+* 16 logical cores CPU
+* An SSD large enough to store the entire data source, preferring higher read speed
+* 1 Gigabit network card
+
 ### Ansible deployment
 
 1. The `[importer_server]` section in `inventory.ini` can be left blank.
