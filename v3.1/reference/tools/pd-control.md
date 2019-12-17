@@ -17,6 +17,18 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 >
 > Generally, you don't need to compile source code as the PD Control tool already exists in the released Binary or Docker. However, dev users can refer to the above instruction for compiling source code.
 
+## Download
+
+If you want to download the latest version of `pd-ctl`, directly download the TiDB package, because `pd-ctl` is included in the TiDB package.
+
+| Package name | OS | Architecture | SHA256 checksum |
+|:---|:---|:---|:---|
+| `http://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `http://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
+
+> **Note:**
+>
+> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `latest` is `http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz`. The `latest` version is the latest unpublished version.
+
 ## Usage
 
 Single-command mode:
