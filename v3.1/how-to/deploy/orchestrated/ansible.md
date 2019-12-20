@@ -170,9 +170,9 @@ If you have questions regarding which version to use, email to info@pingcap.com 
 
 Make sure you have logged in to the Control Machine using the `tidb` user account.
 
-It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 and Ansible 2.5.
+It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 ~ 2.7.11 (2.4 ≤ Ansible ≤ 2.7.11).
 
-1. Install Ansible and the dependent version information on the Control Machine:
+1. Install Ansible and the version information dependencies on the Control Machine:
 
     {{< copyable "shell-regular" >}}
 
@@ -181,7 +181,7 @@ It is required to use `pip` to install Ansible and its dependencies, otherwise a
     sudo pip install -r ./requirements.txt
     ```
 
-    Ansible and the dependent version information are in the `tidb-ansible/requirements.txt` file.
+    Ansible and the version information dependencies are in the `tidb-ansible/requirements.txt` file.
 
 2. View the version of Ansible:
 
@@ -334,11 +334,11 @@ You can use either of the following two methods to change the governor mode. In 
 
 Log in to the target machines using the `root` user account.
 
-Format your data disks to the ext4 filesystem and mount the filesystem with the `nodelalloc` and `noatime` options. It is required to mount the `nodelalloc` option, or else the Ansible deployment cannot pass the test. The `noatime` option is optional.
+Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the Ansible deployment cannot pass the test. The `noatime` option is optional.
 
 > **Note:**
 >
-> If your data disks have been formatted to ext4 and have mounted the options, you can uninstall it by running the `umount /dev/nvme0n1p1` command, follow the steps starting from editing the `/etc/fstab` file, and remount the filesystem with options.
+> If your data disks have been formatted to ext4 and have added the mount options, you can uninstall it by running the `umount /dev/nvme0n1p1` command, follow the steps starting from editing the `/etc/fstab` file, and add the options again to the filesystem.
 
 Take the `/dev/nvme0n1` data disk as an example:
 
