@@ -89,7 +89,6 @@
     - [Scale a TiDB Cluster](/v3.0/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade to TiDB 3.0](/v3.0/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/v3.0/how-to/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.0/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/v3.0/how-to/troubleshoot/tidb-lightning.md)
@@ -286,6 +285,7 @@
   + Best Practices
     - [Highly Concurrent Write Best Practices](/v3.0/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/v3.0/reference/best-practices/haproxy.md)
+    - [PD Scheduling Best Practices](/v3.0/reference/best-practices/pd-scheduling.md)
   - [TiSpark](/v3.0/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.0/reference/tidb-binlog/overview.md)
