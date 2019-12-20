@@ -43,7 +43,7 @@ To allow data reading in the follower node without violating linearizability or 
 
 ### Strongly consistent reads
 
-When the follower node processes a read request, it first uses `ReadIndex` of the Raft protocol to interact with the leader of the Region, to obtain the latest `commit index` of the current Raft group. After the latest `commit index` of the leader is applied locally to the follower, the processing of a read request starts.
+When the follower node processes a read request, it first uses `ReadIndex` of the Raft protocol to interact with the leader of the Region, to obtain the latest commit index of the current Raft group. After the latest commit index of the leader is applied locally to the follower, the processing of a read request starts.
 
 ### Follower replica selection strategy
 
