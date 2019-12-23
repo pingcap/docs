@@ -316,7 +316,7 @@
       - [FAQ](/v2.1/reference/tools/data-migration/faq.md)
       + Releases
         + v1.0
-          - [1.0.2](/v2.1/reference/tools/data-migration/releases/1.0.2.md) 
+          - [1.0.2](/v2.1/reference/tools/data-migration/releases/1.0.2.md)
     + TiDB Lightning
       - [Overview](/v2.1/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v2.1/reference/tools/tidb-lightning/deployment.md)
