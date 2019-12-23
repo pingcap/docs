@@ -435,6 +435,10 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
     `sum(increase(tidb_tikvclient_gc_action_result{type="success"}[6h])) < 1`
 
+    > **Note:**
+    >
+    > The `tidb_tikvclient_gc_action_result` metric exists in TiDB 3.* versions but does not have a value. It's because in TiDB 3.* versions garbage collection (GC) is introduced but not performed in TiDB.
+
 * Description:
 
     GC is not performed successfully in a Region within 6 hours, which indicates that GC is not working properly. If GC does not run in a short term, it will not cause much trouble; but if GC keeps down, more and more versions are retained, which slows down the query.
@@ -617,6 +621,10 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 * Alert rule:
 
     `sum(increase(tidb_tikvclient_gc_action_result{type="fail”}[1m])) > 10`
+
+    > **Note:**
+    >
+    > The `tidb_tikvclient_gc_action_result` metric exists in TiDB 3.* versions but does not have a value. It's because in TiDB 3.* versions garbage collection (GC) is introduced but not performed in TiDB.
 
 * Description:
 
