@@ -437,7 +437,7 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
     > **Note:**
     >
-    > In TiDB 3.* versions, the `tidb_tikvclient_gc_action_result` metric exists but does not have a value. It's because garbage collection (GC) is introduced in TiDB 3.* versions but will not be performed in TiDB.
+    > In TiDB 3.* versions, the `tidb_tikvclient_gc_action_result` metric exists but does not have a value. It's because distributed garbage collection (GC) is introduced in the TiDB 3.0 version but will not be performed in TiDB.
 
 * Description:
 
@@ -624,7 +624,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
     > **Note:**
     >
-    > In TiDB 3.* versions, the `tidb_tikvclient_gc_action_result` metric exists but does not have a value. It's because garbage collection (GC) is introduced in TiDB 3.* versions but will not be performed in TiDB.
+    > In TiDB 3.* versions, the `tidb_tikvclient_gc_action_result` metric exists but does not have a value. It's because distributed garbage collection (GC) is introduced in the TiDB 3.0 version but will not be performed in TiDB.
 
 * Description:
 
