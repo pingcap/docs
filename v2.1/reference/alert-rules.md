@@ -816,7 +816,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 ## TiDB Binlog alert rules
 
-For the detailed descriptions of TiDB Binlog alert rules, see [TiDB Binlog monitoring document](/dev/reference/tidb-binlog/monitor.md#alert-rules).
+For the detailed descriptions of TiDB Binlog alert rules, see [TiDB Binlog monitoring document](/v2.1/reference/tidb-binlog/monitor.md#alert-rules).
 
 ## Node_exporter host alert rules
 
