@@ -63,7 +63,7 @@ Because TiDB uses many file descriptors by default, the worker node and its Dock
 
 > **Note:**
 >
-> You need to set `LimitNOFILE` to `1048576` or a larger value rather than the default `infinity`. It's because a [bug](https://github.com/systemd/systemd/commit/6385cb31ef443be3e0d6da5ea62a267a49174688#diff-108b33cf1bd0765d116dd401376ca356L1186) in `systemd` causes that the value of `infinity` is `65536` in some `systemd` versions.
+> You need to explicitly set `LimitNOFILE` to `1048576` or a larger value rather than the default `infinity`. Because of a [bug](https://github.com/systemd/systemd/commit/6385cb31ef443be3e0d6da5ea62a267a49174688#diff-108b33cf1bd0765d116dd401376ca356L1186) in `systemd`, the value of `infinity` is `65536` in some `systemd` versions.
 
 ## Install Helm
 
