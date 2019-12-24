@@ -21,13 +21,13 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 If you want to download the latest version of `pd-ctl`, directly download the TiDB package, because `pd-ctl` is included in the TiDB package.
 
-| Package name | OS | Architecture | SHA256 checksum |
+| Package download link | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
 | `http://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `http://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `v2.1.18` is `http://download.pingcap.org/tidb-v2.1.18-linux-amd64.tar.gz`. You can also download the latest unpublished version by replacing `{version}` with `latest`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v2.1.18`, the package download link is `http://download.pingcap.org/tidb-v2.1.18-linux-amd64.tar.gz`. You can also download the latest unpublished version by replacing `{version}` with `latest`.
 
 ## Usage
 
