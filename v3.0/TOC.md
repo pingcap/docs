@@ -339,6 +339,7 @@
         - [Error Description](/v3.0/reference/tools/data-migration/troubleshoot/error-system.md)
         - [Error Handling](/v3.0/reference/tools/data-migration/troubleshoot/error-handling.md)
       - [FAQ](/v3.0/reference/tools/data-migration/faq.md)
+      - [TiDB DM Glossary](/v3.0/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/v3.0/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v3.0/reference/tools/tidb-lightning/deployment.md)
