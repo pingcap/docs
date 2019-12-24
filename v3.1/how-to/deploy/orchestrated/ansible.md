@@ -170,7 +170,7 @@ If you have questions regarding which version to use, email to info@pingcap.com 
 
 Make sure you have logged in to the Control Machine using the `tidb` user account.
 
-It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 ~ 2.7.11 (2.4 ≤ Ansible ≤ 2.7.11).
+It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, release-3.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 ~ 2.7.11 (2.4 ≤ Ansible ≤ 2.7.11).
 
 1. Install Ansible and the version information dependencies on the Control Machine:
 
