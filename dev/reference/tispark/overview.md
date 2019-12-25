@@ -25,9 +25,9 @@ Most of the TiSpark logic is inside a thin layer, namely, the [tikv-client](http
 
 ## Get TiSpark
 
-+ Currently, TiSpark 2.1.5 is the latest stable version, which is highly recommended. It is compatible with Spark 2.3.0+ and Spark 2.4.0+. It is also compatible with TiDB-2.x and TiDB-3.x.
-    - When using TiSpark 2.1.5 with Spark 2.3.0+, use version `2.1.5-spark_2.3` and follow the [document for Spark 2.3+](/dev/reference/tispark/userguide.md).
-    - When using TiSpark 2.1.5 with Spark 2.4.0+, use version `2.1.5-spark_2.4` and follow the [document for Spark 2.3+](/dev/reference/tispark/userguide.md).
++ Currently, TiSpark 2.1.8 is the latest stable version, which is highly recommended. It is compatible with Spark 2.3.0+ and Spark 2.4.0+. It is also compatible with TiDB-2.x and TiDB-3.x.
+    - When using TiSpark 2.1.8 with Spark 2.3.0+, use version `2.1.8-spark_2.3` and follow the [document for Spark 2.3+](/dev/reference/tispark/userguide.md).
+    - When using TiSpark 2.1.8 with Spark 2.4.0+, use version `2.1.8-spark_2.4` and follow the [document for Spark 2.3+](/dev/reference/tispark/userguide.md).
 
 + TiSpark 1.2.1 is the latest stable version compatible with Spark 2.1.0+.
     - When using TiSpark 1.2.1, follow the [document for Spark 2.1](/dev/reference/tispark/userguide-spark2.1.md).
@@ -53,7 +53,7 @@ If you want to use TiSpark-2.1.x, please use the following configuration:
     <dependency>
       <groupId>com.pingcap.tispark</groupId>
       <artifactId>tispark-core</artifactId>
-      <version>2.1.5-spark_${spark.version}</version>
+      <version>2.1.8-spark_${spark.version}</version>
     </dependency>
 </dependencies>
 ```
@@ -63,6 +63,8 @@ For other build tools, visit <https://search.maven.org/> and search with GroupId
 ## How to build from sources
 
 TiSpark now supports Spark 2.3.0+ or 2.4.0+. The earlier TiSpark versions for Spark 2.1.0+ only contain bug fixes. After these versions, you can still get support for Spark 2.1 until TiSpark 1.2.1.
+
+Currently `java8` is the only choice to build TiSpark, run `mvn -version` to check.
 
 ```
 git clone https://github.com/pingcap/tispark.git
@@ -80,8 +82,8 @@ To skip the tests that you do not need to run, add `-Dmaven.test.skip=true`.
 
 | Spark Version | Recommended TiSpark Version |
 | :------------- | :---------------------- |
-| Spark-2.4.x | TiSpark-2.2.0、TiSpark-2.1.5 |
-| Spark-2.3.x | TiSpark-2.2.0、TiSpark-2.1.5 |
+| Spark-2.4.x | TiSpark-2.2.0、TiSpark-2.1.8 |
+| Spark-2.3.x | TiSpark-2.2.0、TiSpark-2.1.8 |
 | Spark-2.2.x | TiSpark-1.2.1 |
 | Spark-2.1.x | TiSpark-1.2.1 |
 
@@ -89,7 +91,7 @@ To skip the tests that you do not need to run, add `-Dmaven.test.skip=true`.
 
 | TiSpark Version | Latest TiDB Version | Latest TiKV Version | Latest PD Version |
 | :----- | :------ | :------ | :------ |
-| < 1.2 | v2.1.5 | v2.1.5 | v2.1.5 |
+| < 1.2 | v2.1.8 | v2.1.8 | v2.1.8 |
 | 1.2.x | v2.1.x | v2.1.x | v2.1.x |
 | 2.x | v3.0.2 | v3.0.2 | v3.0.2 |
 | Latest (master) | Latest | Latest | Latest |
@@ -180,7 +182,7 @@ customer.write
 .save()
 ```
 
-See [here](/dev/reference/tispark/datasource-api-userguide.md) for more details.
+See [TiDB Data Source API User Guide](/dev/reference/tispark/datasource-api-userguide.md) for more details.
 
 ## Configuration
 
@@ -203,6 +205,7 @@ The configurations in the table below can be put together with `spark-defaults.c
 | `spark.tispark.show_rowid` |  `false` | Whether to show the implicit row ID if the ID exists |
 | `spark.tispark.db_prefix` |  `""` | The string that indicates the extra prefix for all databases in TiDB. This string distinguishes the databases in TiDB from the Hive databases with the same name. |
 | `spark.tispark.request.isolation.level` |  `SI` | Isolation level means whether to resolve locks for the underlying TiDB clusters. When you use the "RC", you get the latest version of record smaller than your `tso` and ignore the locks. If you use "SI", you resolve the locks and get the records depending on whether the resolved lock is committed or aborted.  |
+| `spark.tispark.coprocessor.chunk_batch_size` | `1024` | The number of rows fetched from Coprocessor |
 
 ## `Log4j` configuration
 
@@ -252,10 +255,14 @@ In most cases, TiSpark use a full table scan on partition tables. Only in certai
 
 ## Upgrade from TiDB-2.x to TiDB-3.x
 
-When upgrading from TiDB-2.x to TiDB-3.x,
+When upgrading from TiDB-2.x to TiDB-3.x, check the following items:
 
-+ make sure that you are using at least TiSpark-2.1.2 (TiSpark-2.1.5 is highly recommended);
-+ `tidbMapDatabase` is deprecated after TiSpark-2.x, make sure that you are not using it.
++ You are using TiSpark v2.1.2 or later. TiSpark-2.1.8 is highly recommended;
++ You are not using `tidbMapDatabase`, which is deprecated after TiSpark-2.x.
+
+## Example Programs
+
+Some [sample programs](https://github.com/pingcap/tispark-test/tree/master/tispark-examples) are available for TiSpark. You can run them locally or on a cluster following the document.
 
 ## How to test TiSpark
 

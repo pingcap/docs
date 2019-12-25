@@ -232,6 +232,36 @@ tisparkDF.write.saveAsTable("hive_table") // save table to hive
 spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").show // join table across Hive and Tispark
 ```
 
+## Load Spark DataFrame into TiDB using JDBC
+
+TiSpark does not provide a direct way to load data into your TiDB cluster, but you can still do it by using JDBC.
+
+For example:
+
+```scala
+import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
+
+val customer = spark.sql("select * from customer limit 100000")
+// you might repartition source to make it balanced across nodes
+// and increase concurrency
+val df = customer.repartition(32)
+df.write
+.mode(saveMode = "append")
+.format("jdbc")
+.option("driver", "com.mysql.jdbc.Driver")
+ // replace the host and port with yours and be sure to use rewrite batch
+.option("url", "jdbc:mysql://127.0.0.1:4000/test?rewriteBatchedStatements=true")
+.option("useSSL", "false")
+// as tested, setting to `150` is a good practice
+.option(JDBCOptions.JDBC_BATCH_INSERT_SIZE, 150)
+.option("dbtable", s"cust_test_select") // database name and table name here
+.option("isolationLevel", "NONE") // set isolationLevel to NONE
+.option("user", "root") // TiDB user here
+.save()
+```
+
+Set `isolationLevel` to `NONE` to avoid large single transactions which might lead to TiDB OOM and also avoid the `ISOLATION LEVEL does not support` error (TiDB currently only supports `REPEATABLE-READ`).
+
 ## Statistics information
 
 TiSpark uses the statistic information in TiDB for:

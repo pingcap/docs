@@ -12,7 +12,7 @@ category: reference
 
 This document introduces how to deploy and use TiSpark, which requires some basic knowledge of Apache Spark. Refer to [Spark website](https://spark.apache.org/docs/latest/index.html) for details.
 
-## Prerequisites for deployinf TiSpark
+## Prerequisites for deploying TiSpark
 
 + For TiSpark to be compatible with Spark, refer to [Spark versions supported by TiSpark](/dev/reference/tispark/overview.md#spark-versions-supported-by-tiSpark).
 + TiSpark requires JDK 1.8+ and Scala 2.11 (Spark 2.0 + default Scala version).
@@ -240,12 +240,12 @@ df.write
 // as tested, setting to `150` is a good practice
 .option(JDBCOptions.JDBC_BATCH_INSERT_SIZE, 150)
 .option("dbtable", s"cust_test_select") // database name and table name here
-.option("isolationLevel", "NONE") // recommended to set isolationLevel to NONE if you have a large DF to load.
+.option("isolationLevel", "NONE") // set isolationLevel to NONE
 .option("user", "root") // TiDB user here
 .save()
 ```
 
-It is recommended that you set `isolationLevel` to `NONE` to avoid large single transactions which might lead to TiDB OOM.
+Set `isolationLevel` to `NONE` to avoid large single transactions which might lead to TiDB OOM and also avoid the `ISOLATION LEVEL does not support` error. TiDB currently only supports `REPEATABLE-READ`.
 
 ## Statistics information
 
