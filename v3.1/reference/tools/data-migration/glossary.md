@@ -32,7 +32,7 @@ Binlog replication processing unit is the processing unit internally used in DM-
 
 ### Black & white table list
 
-Black & white table list is the feature that is used to filter or only replicate all operations of some databases or some tables. Refer to [black & white table lists](/v3.1/reference/tools/data-migration/overview.md#black-and-white-lists-replication-at-the-schema-and-table-levels) for details. This feature is similar to [MySQL Replication Filtering](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html) and [MariaDB Replication Filters](https://mariadb.com/kb/en/library/replication-filters/).
+Black & white table list is the feature that filters or only replicates all operations of some databases or some tables. Refer to [black & white table lists](/v3.1/reference/tools/data-migration/overview.md#black-and-white-lists-replication-at-the-schema-and-table-levels) for details. This feature is similar to [MySQL Replication Filtering](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html) and [MariaDB Replication Filters](https://mariadb.com/kb/en/library/replication-filters/).
 
 ## C
 
@@ -40,8 +40,8 @@ Black & white table list is the feature that is used to filter or only replicate
 
 A checkpoint indicates the position from which a full data import or an incremental replication task is paused and resumed, or is stopped and restarted.
 
-- In the full import task, a checkpoint indicates the offset and other information of the successfully imported data in a file that is being imported. A checkpoint is updated in sync with the data import task.
-- In the incremental replication, a checkpoint corresponds to the [binlog position](#binlog-position) and other information of a [binlog event](#binlog-event) that is successfully parsed and replicated to the downstream. A checkpoint is updated after the DDL operation is successfully imported or 30 seconds after the last update.
+- In a full import task, a checkpoint indicates the offset and other information of the successfully imported data in a file that is being imported. A checkpoint is updated in sync with the data import task.
+- In an incremental replication, a checkpoint corresponds to the [binlog position](#binlog-position) and other information of a [binlog event](#binlog-event) that is successfully parsed and replicated to the downstream. A checkpoint is updated after the DDL operation is successfully imported or 30 seconds after the last update.
 
 In addition, the `relay.meta` information corresponding to a [relay processing unit](#relay-processing-unit) works similarly to a checkpoint. A relay processing unit pulls the [binlog event](#binlog-event) from the upstream and writes this event to the [relay log](#relay-log), and writes the [binlog position](#binlog-position) corresponding to this event or the GTID information to `relay.meta`.
 
@@ -49,7 +49,7 @@ In addition, the `relay.meta` information corresponding to a [relay processing u
 
 ### Dump processing unit
 
-The dump processing unit is the processing unit internally used in DM-worker to migrate full data from the upstream. Each subtask corresponds to a dump processing unit.
+The dump processing unit is the processing unit internally used in DM-worker to migrate all data from the upstream. Each subtask corresponds to a dump processing unit.
 
 ## G
 
@@ -61,13 +61,13 @@ The GTID is the global transaction ID of MySQL or MariaDB. With this feature ena
 
 ### Heartbeat
 
-A mechanism that calculates the real-time replication delay between each replication task and MySQL or MariaDB based on real replication data. Refer to [replication delay monitoring](https://pingcap.com/docs/stable/reference/tools/data-migration/features/overview/#replication-delay-monitoring) for details.
+The heartbeat is a mechanism that calculates the real-time replication delay between each replication task and MySQL or MariaDB based on real replication data. Refer to [replication delay monitoring](https://pingcap.com/docs/stable/reference/tools/data-migration/features/overview/#replication-delay-monitoring) for details.
 
 ## L
 
 ### Load processing unit
 
-The load processing unit is the processing unit internally used in DM-worker to migrate the fully exported data to the downstream. Each subtask corresponds to a load processing unit. In the current documentation, the load processing unit is also referred to as import processing unit.
+The load processing unit is the processing unit internally used in DM-worker to import the fully exported data to the downstream. Each subtask corresponds to a load processing unit. In the current documentation, the load processing unit is also referred to as the import processing unit.
 
 ## R
 
@@ -79,7 +79,7 @@ Refer to [TiDB DM relay log](/v3.1/reference/tools/data-migration/relay-log.md) 
 
 ### Relay processing unit
 
-The relay processing unit is the processing unit internally used in DM-worker to pull binlogs from the upstream and write data into relay logs. Each DM-worker instance only has one relay processing unit.
+The relay processing unit is the processing unit internally used in DM-worker to pull binlogs from the upstream and write data into relay logs. Each DM-worker instance has only one relay processing unit.
 
 ## S
 
@@ -91,15 +91,15 @@ In this mode, some statements from the upstream are replicated to the downstream
 
 ### Shard DDL
 
-The shard DDL is the DDL statements that are executed in the upstream and need to be migrated by TiDB DM in the process of merging sharded tables. In the current documentation, the shard DDL is also referred to as sharding DDL.
+The shard DDL is the DDL statements that are executed in the upstream and need to be coordinated and migrated by TiDB DM in the process of merging sharded tables. In the current documentation, the shard DDL is also referred to as the sharding DDL.
 
 ### Shard DDL lock
 
-The shard DDL lock is the lock mechanism that coordinates the replication of shard DDL. Refer to [the implementation principles of merging and replicating data from sharded tables](/v3.1/reference/tools/data-migration/features/shard-merge.md#principles) for details. In the current documentation, the shard DDL lock is also referred to as sharding DDL lock.
+The shard DDL lock is the lock mechanism that coordinates the replication of shard DDL. Refer to [the implementation principles of merging and replicating data from sharded tables](/v3.1/reference/tools/data-migration/features/shard-merge.md#principles) for details. In the current documentation, the shard DDL lock is also referred to as the sharding DDL lock.
 
 ### Shard group
 
-A shard group is all the upstream sharded tables to be merged and replicated to the same table in the downstream. Two-level shard groups are used for implementation in TiDB DM. Refer to [the implementation principles of merging and replicating sharded tables](/v3.1/reference/tools/data-migration/features/shard-merge.md#principles) for details. In the current documentation, a shard group is also referred to as a sharding group.
+A shard group is all the upstream sharded tables to be merged and replicated to the same table in the downstream. Two-level shard groups are used for implementation in TiDB DM. Refer to [the implementation principles of merging and replicating sharded tables](/v3.1/reference/tools/data-migration/features/shard-merge.md#principles) for details. In the current documentation, the shard group is also referred to as the sharding group.
 
 ### Subtask
 
@@ -117,7 +117,7 @@ The table routing feature enables DM to replicate a certain table of the upstrea
 
 ### Task
 
-The data replication task. You start a data replication task after you successfully execute a `start-task` command. In different task configurations, a single data replication task can run on a single DM-worker instance or on multiple DM-worker instances at the same time.
+The data replication task, which is started after you successfully execute a `start-task` command. In different task configurations, a single replication task can run on a single DM-worker instance or on multiple DM-worker instances at the same time.
 
 ### Task status
 
