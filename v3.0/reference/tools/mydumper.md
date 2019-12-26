@@ -80,7 +80,7 @@ Mydumper divides the data of each table into multiple `chunk` according to the v
 
 ### How to configure the `-s --statement-size` option of Mydumper?
 
-Mydumper uses this option to control the size of `Insert Statement` which defaults to about `1` MB. Use this option to avoid the following errors occurring when restoring data:
+Mydumper uses this option to control the size of `Insert Statement` which defaults to `10000000` (about 1 MB). Use this option to avoid the following errors occurring when restoring data:
 
 ```log
 packet for query is too large. Try adjusting the 'max_allowed_packet' variable
@@ -107,7 +107,7 @@ This option can only be set when backing up TiDB’s data. It can be set to `LOW
 
 ### What can I do if an "GC life time is short than transaction duration" error is reported when using Mydumper to back up TiDB's data?
 
-Mydumper uses TiDB's Snapshot Isolation to ensure data consistency when backing up TiDB's data. This error is reported if the historical data of a snapshot is cleared by TiDB's Garbage Collection (GC) during backup. To solve this problem, perform the following steps:
+Mydumper uses the `tidb_snapshot` system variable to ensure data consistency when backing up TiDB's data. This error is reported if the historical data of a snapshot is cleared by TiDB's Garbage Collection (GC) during backup. To solve this problem, perform the following steps:
 
 1. Before using Mydumper to back up data, use MySQL client to check the value of `tikv_gc_life_time` in the TiDB cluster and set it to an appropriate value:
 
