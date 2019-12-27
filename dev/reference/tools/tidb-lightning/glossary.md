@@ -66,11 +66,11 @@ Equivalent to a single file in the data source.
 
 ### Compaction
 
-An operation that merges multiple small SST files into one large SST file, and cleans up the deleted entries.
-TiKV automatically compacts data in background while TiDB Lightning is importing.
+An operation that merges multiple small SST files into one large SST file, and cleans up the deleted entries. TiKV automatically compacts data in background while TiDB Lightning is importing.
+
 > **Note:**
 >
->  For legacy reasons, you can still configure TiDB Lightning to explicitly trigger a compaction every time a table is imported. However, this is not recommended and the corresponding settings are disabled by default.
+> For legacy reasons, you can still configure TiDB Lightning to explicitly trigger a compaction every time a table is imported. However, this is not recommended and the corresponding settings are disabled by default.
 
 See [RocksDB's wiki page on Compaction](https://github.com/facebook/rocksdb/wiki/Compaction) for its technical details.
 
