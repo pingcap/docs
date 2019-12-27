@@ -6,7 +6,7 @@ category: glossary
 
 # TiDB Lightning Glossary
 
-This page explains the special terms used in TiDB Lightning's logs, monitoring, configurations and documentations.
+This page explains the special terms used in TiDB Lightning's logs, monitoring, configurations, and documentation.
 
 <!-- A -->
 
@@ -16,13 +16,13 @@ This page explains the special terms used in TiDB Lightning's logs, monitoring, 
 
 An operation to rebuild the [statistics](/dev/reference/performance/statistics.md) information of a TiDB table, i.e. running the [`ANALYZE TABLE`](/dev/reference/sql/statements/analyze-table.md) statement.
 
-Because TiDB Lightning imports data without going through TiDB, the statistics information is not automatically updated. Therefore, TiDB Lightning would explicitly analyze every table after importing. This step can be omitted by setting the configuration `post-restore.analyze` to `false`.
+Because TiDB Lightning imports data without going through TiDB, the statistics information is not automatically updated. Therefore, TiDB Lightning explicitly analyzes every table after importing. This step can be omitted by setting the `post-restore.analyze` configuration to `false`.
 
 ### `AUTO_INCREMENT_ID`
 
 Every table has an associated `AUTO_INCREMENT_ID` counter to provide the default value of an auto-incrementing column. In TiDB, this counter is additionally used to assign row IDs.
 
-Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREMENT_ID` counter is not automatically updated. Therefore, TiDB Lightning will explicitly alter the `AUTO_INCREMENT_ID` to a valid value. This step is always performed, even if the table has no `AUTO_INCREMENT` columns.
+Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREMENT_ID` counter is not automatically updated. Therefore, TiDB Lightning explicitly alters `AUTO_INCREMENT_ID` to a valid value. This step is always performed, even if the table has no `AUTO_INCREMENT` columns.
 
 <!-- B -->
 
@@ -30,13 +30,13 @@ Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREM
 
 ### Back end
 
-The back end is the destination where TiDB Lightning sends the parsed result to. Sometimes it is also spelled as "backend".
+Back end is the destination where TiDB Lightning sends the parsed result. Also spelled as "backend".
 
 See [TiDB Lightning "TiDB" Back End](/dev/reference/tools/tidb-lightning/tidb-backend.md) for details.
 
 ### Black-white list
 
-A configuration list which specifies which tables should be imported, and which should be excluded.
+A configuration list that specifies which tables to be imported and which should be excluded.
 
 See [TiDB Lightning Table Filter](/dev/reference/tools/tidb-lightning/table-filter.md) for details.
 
@@ -46,17 +46,17 @@ See [TiDB Lightning Table Filter](/dev/reference/tools/tidb-lightning/table-filt
 
 ### Checkpoint
 
-TiDB Lightning continuously saves its progress into a local file or remote database while importing. This allows TiDB Lightning to resume from middle if it spuriously crashed. See the [Checkpoints](/dev/reference/tools/tidb-lightning/checkpoints.md) section for details.
+TiDB Lightning continuously saves its progress into a local file or a remote database while importing. This allows it to resume from an intermediate state should it crashes in the process. See the [Checkpoints](/dev/reference/tools/tidb-lightning/checkpoints.md) section for details.
 
 ### Checksum
 
-In TiDB Lightning, the checksum of a table is a set of 3 numbers calculated from the content of each KV pair in that table. These are respectively:
+In TiDB Lightning, the checksum of a table is a set of 3 numbers calculated from the content of each KV pair in that table. These numbers are respectively:
 
 * the number of KV pairs,
 * total length of all KV pairs, and
 * the bitwise-XOR of [CRC-64-ECMA](https://en.wikipedia.org/wiki/Cyclic_redundancy_check) value each pair.
 
-TiDB Lightning [validates the imported data](/dev/faq/tidb-lightning.md#how-to-ensure-the-integrity-of-the-imported-data) by comparing the [local](/dev/reference/tools/tidb-lightning/glossary.md#local-checksum) and [remote checksums](/dev/reference/tools/tidb-lightning/glossary.md#remote-checksum) of every table. The program would stop if any pair is not equal. This check can be skipped by setting the configuration `post-restore.checksum` to `false`.
+TiDB Lightning [validates the imported data](/dev/faq/tidb-lightning.md#how-to-ensure-the-integrity-of-the-imported-data) by comparing the [local](/dev/reference/tools/tidb-lightning/glossary.md#local-checksum) and [remote checksums](/dev/reference/tools/tidb-lightning/glossary.md#remote-checksum) of every table. The program would stop if any pair does not match. You can skip this check by setting the `post-restore.checksum` configuration to `false`.
 
 See also the [Troubleshooting guide](/dev/how-to/troubleshoot/tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local) for how to properly handle checksum mismatch.
 
@@ -66,9 +66,11 @@ Equivalent to a single file in the data source.
 
 ### Compaction
 
-An operation which merges multiple small SST files into a large SST file, and cleans up deleted entries.
-
-TiKV automatically compacts data in background while TiDB Lightning is importing. Due to legacy reasons, you can configure TiDB Lightning to explicitly trigger a compaction every time a table is imported. This is now discouraged and the corresponding settings are disabled by default.
+An operation that merges multiple small SST files into one large SST file, and cleans up the deleted entries.
+TiKV automatically compacts data in background while TiDB Lightning is importing.
+> **Note:**
+>
+>  For legacy reasons, you can still configure TiDB Lightning to explicitly trigger a compaction every time a table is imported. However, this is not recommended and the corresponding settings are disabled by default.
 
 See [RocksDB's wiki page on Compaction](https://github.com/facebook/rocksdb/wiki/Compaction) for its technical details.
 
@@ -80,7 +82,7 @@ See [RocksDB's wiki page on Compaction](https://github.com/facebook/rocksdb/wiki
 
 An [engine](/dev/reference/tools/tidb-lightning/glossary.md#engine) for sorting actual row data.
 
-When a table is very large, its data is placed into multiple data engines to improve task pipelining and save space of TiKV Importer. By default a new data engine is opened every 100 GB of SQL data, which can be configured through the `mydumper.batch-size` setting.
+When a table is very large, its data is placed into multiple data engines to improve task pipelining and save space of TiKV Importer. By default, a new data engine is opened for every 100 GB of SQL data, which can be configured through the `mydumper.batch-size` setting.
 
 TiDB Lightning processes multiple data engines concurrently. This is controlled by the `lightning.table-concurrency` setting.
 
@@ -92,9 +94,9 @@ TiDB Lightning processes multiple data engines concurrently. This is controlled 
 
 In TiKV Importer, an engine is a RocksDB instance for sorting KV pairs.
 
-TiDB Lightning transfers data to TiKV Importer through engines. It first opens an engine, sends lots of KV pairs to it (with no particular order), and finally closes the engine. The engine will sort the received KV pairs after it is closed. These closed engines can then be further uploaded to the TiKV stores for ingestion.
+TiDB Lightning transfers data to TiKV Importer through engines. It first opens an engine, sends KV pairs to it (with no particular order), and finally closes the engine. The engine sorts the received KV pairs after it is closed. These closed engines can then be further uploaded to the TiKV stores for ingestion.
 
-Engines use TiKV Importer's `import-dir` as temporary storage, which are sometimes referred as "engine files".
+Engines use TiKV Importer's `import-dir` as temporary storage, which are sometimes referred to as "engine files".
 
 See also [data engine](/dev/reference/tools/tidb-lightning/glossary.md#data-engine) and [index engine](/dev/reference/tools/tidb-lightning/glossary.md#index-engine).
 
@@ -104,9 +106,9 @@ See also [data engine](/dev/reference/tools/tidb-lightning/glossary.md#data-engi
 
 ### Import mode
 
-A configuration which optimizes TiKV for writing but reduces read speed and space utility.
+A configuration that optimizes TiKV for writing at the cost of degraded read speed and space usage.
 
-TiDB Lightning automatically switches into and out of import mode while running. However, if TiKV is somehow stuck in import mode, you can use `tidb-lightning-ctl` to [force them revert](/dev/faq/tidb-lightning.md#why-my-tidb-cluster-is-using-lots-of-cpu-resources-and-running-very-slowly-after-using-tidb-lightning) to [normal mode](/dev/reference/tools/tidb-lightning/glossary.md#normal-mode).
+TiDB Lightning automatically switches to and off the import mode while running. However, if TiKV gets stuck in import mode, you can use `tidb-lightning-ctl` to [force revert](/dev/faq/tidb-lightning.md#why-my-tidb-cluster-is-using-lots-of-cpu-resources-and-running-very-slowly-after-using-tidb-lightning) to [normal mode](/dev/reference/tools/tidb-lightning/glossary.md#normal-mode).
 
 ### Index engine
 
@@ -114,13 +116,13 @@ An [engine](/dev/reference/tools/tidb-lightning/glossary.md#engine) for sorting 
 
 Regardless of number of indices, every table is associated with exactly one index engine.
 
-TiDB Lightning processes multiple index engines concurrently. This is controlled by the `lightning.index-concurrency` setting. Since every table has exactly one index engine, this also configures the maximum number of tables to process in at the same time.
+TiDB Lightning processes multiple index engines concurrently. This is controlled by the `lightning.index-concurrency` setting. Since every table has exactly one index engine, this also configures the maximum number of tables to process at the same time.
 
 ### Ingestion
 
 An operation which inserts the entire content of an [SST file](/dev/reference/tools/tidb-lightning/glossary.md#sst-file) into the RocksDB (TiKV) store.
 
-Ingestion is a very fast operation compared with inserting each KV pair one-by-one. This operation is the basis of speed of TiDB Lightning.
+Ingestion is a very fast operation compared with inserting KV pairs one by one. This operation is the determinant factor for the performance of TiDB Lightning.
 
 See [RocksDB's wiki page on Creating and Ingesting SST files](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files) for its technical details.
 
@@ -174,7 +176,7 @@ The [checksum](/dev/reference/tools/tidb-lightning/glossary.md#checksum) of a ta
 
 ### Scattering
 
-An operation which randomly reassigns the leader and members of a [region](/dev/glossary.md#regionpeerraft-group). Scattering ensures the imported data are distributed evenly among all TiKV stores, and thus reduces PD's work.
+An operation which randomly reassigns the leader and the peers of a [region](/dev/glossary.md#regionpeerraft-group). Scattering ensures that the imported data are distributed evenly among TiKV stores. This reduces stress on PD.
 
 ### Splitting
 

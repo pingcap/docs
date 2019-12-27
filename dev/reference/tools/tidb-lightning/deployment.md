@@ -278,6 +278,6 @@ Follow the link to download the TiDB Lightning package (choose the same version 
 
 ## Upgrading TiDB Lightning
 
-As of v3.1, TiDB Lightning can be upgraded by replacing the binaries alone. No reconfiguration should be needed. See [the FAQ](/dev/faq/tidb-lightning.md#how-to-properly-restart-tidb-lightning) for the precise steps of restarting TiDB Lightning.
+You can upgrade TiDB Lightning by replacing the binaries alone. No further configuration is needed. See [FAQ](/dev/faq/tidb-lightning.md#how-to-properly-restart-tidb-lightning) for the detailed instructions of restarting TiDB Lightning.
 
-If an import task is running, we recommend you to wait for its finish before upgrading TiDB Lightning, or be prepared to reimport from scratch, as there is no guaratee that checkpoints work across versions.
+If an import task is running, we recommend you to wait until it finishes before upgrading TiDB Lightning. Otherwise, there might be chances that you need to reimport from scratch, because there is no guarantee that checkpoints work across versions.

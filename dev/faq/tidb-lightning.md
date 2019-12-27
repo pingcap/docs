@@ -33,9 +33,9 @@ If the ["TiDB" back end](/dev/reference/tools/tidb-lightning/tidb-backend.md) is
 * INSERT
 * DELETE
 
-The "Importer" back end does not require these two privileges because data are ingested into TiKV directly, which bypasses the entire TiDB privilege system. This is secure as long as the ports of TiKV, TiKV Importer and TiDB Lightning are not reachable outside the cluster.
+The "Importer" back end does not require these two privileges because data is ingested into TiKV directly, which bypasses the entire TiDB privilege system. This is secure as long as the ports of TiKV, TiKV Importer and TiDB Lightning are not reachable outside the cluster.
 
-If the `checksum` configuration item of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
+If the `checksum` configuration of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
 
 ## TiDB Lightning encountered an error when importing one table. Will it affect other tables? Will the process be terminated?
 
