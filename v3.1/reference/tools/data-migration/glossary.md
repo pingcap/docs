@@ -20,7 +20,7 @@ Binlog events are information about data modification made to a MySQL or MariaDB
 
 ### Binlog event filter
 
-[Binlog event filter](/v3.1/reference/tools/data-migration/features/overview.md#binlog-event-filter) is a more fine-grained filtering rule than the black and white lists filtering rule. Refer to [binlog event filter](/v3.1/reference/tools/data-migration/overview.md#binlog-event-filtering) for details.
+[Binlog event filter](/v3.1/reference/tools/data-migration/features/overview.md#binlog-event-filter) is a more fine-grained filtering feature than the black and white lists filtering rule. Refer to [binlog event filter](/v3.1/reference/tools/data-migration/overview.md#binlog-event-filtering) for details.
 
 ### Binlog position
 
@@ -28,7 +28,7 @@ The binlog position is the offset information of a binlog event in a binlog file
 
 ### Binlog replication processing unit
 
-Binlog replication processing unit is the processing unit internally used in DM-worker to read upstream binlogs or local relay logs, and to migrate these logs to the downstream. Each subtask corresponds to a binlog replication processing unit. In the current documentation, the binlog replication processing unit is also referred to as the sync processing unit.
+Binlog replication processing unit is the processing unit internally used in DM-worker to read upstream binlogs or local relay logs, and to replicate these logs to the downstream. Each subtask corresponds to a binlog replication processing unit. In the current documentation, the binlog replication processing unit is also referred to as the sync processing unit.
 
 ### Black & white table list
 
@@ -40,16 +40,16 @@ Black & white table list is the feature that filters or only replicates all oper
 
 A checkpoint indicates the position from which a full data import or an incremental replication task is paused and resumed, or is stopped and restarted.
 
-- In a full import task, a checkpoint indicates the offset and other information of the successfully imported data in a file that is being imported. A checkpoint is updated in sync with the data import task.
-- In an incremental replication, a checkpoint corresponds to the [binlog position](#binlog-position) and other information of a [binlog event](#binlog-event) that is successfully parsed and replicated to the downstream. A checkpoint is updated after the DDL operation is successfully imported or 30 seconds after the last update.
+- In a full import task, a checkpoint indicates the offset and other information of the successfully imported data in a file that is being imported. A checkpoint is updated synchronously with the data import task.
+- In an incremental replication, a checkpoint corresponds to the [binlog position](#binlog-position) and other information of a [binlog event](#binlog-event) that is successfully parsed and replicated to the downstream. A checkpoint is updated after the DDL operation is successfully replicated or 30 seconds after the last update.
 
-In addition, the `relay.meta` information corresponding to a [relay processing unit](#relay-processing-unit) works similarly to a checkpoint. A relay processing unit pulls the [binlog event](#binlog-event) from the upstream and writes this event to the [relay log](#relay-log), and writes the [binlog position](#binlog-position) corresponding to this event or the GTID information to `relay.meta`.
+In addition, the `relay.meta` information corresponding to a [relay processing unit](#relay-processing-unit) works similarly to a checkpoint. A relay processing unit pulls the [binlog event](#binlog-event) from the upstream and writes this event to the [relay log](#relay-log), and writes the [binlog position](#binlog-position) or the GTID information corresponding to this event to `relay.meta`.
 
 ## D
 
 ### Dump processing unit
 
-The dump processing unit is the processing unit internally used in DM-worker to migrate all data from the upstream. Each subtask corresponds to a dump processing unit.
+The dump processing unit is the processing unit internally used in DM-worker to export all data from the upstream. Each subtask corresponds to a dump processing unit.
 
 ## G
 
@@ -87,7 +87,7 @@ The relay processing unit is the processing unit internally used in DM-worker to
 
 Safe mode is the mode in which DML statements can be imported more than once when the primary key or unique key exists in the table schema.
 
-In this mode, some statements from the upstream are replicated to the downstream only after they are re-written. The `INSERT` statement is re-written as `REPLACE`; the `UPDATE` statement is re-written as `DELETE` and `REPLACE`. TiDB DM automatically enables the safe mode 5 minutes before the replication task is started or resumed. You can manually enable the mode by modifying the `safe-mode` parameter in the task configuration file.
+In this mode, some statements from the upstream are replicated to the downstream only after they are re-written. The `INSERT` statement is re-written as `REPLACE`; the `UPDATE` statement is re-written as `DELETE` and `REPLACE`. TiDB DM automatically enables the safe mode within 5 minutes after the replication task is started or resumed. You can manually enable the mode by modifying the `safe-mode` parameter in the task configuration file.
 
 ### Shard DDL
 
