@@ -56,7 +56,7 @@ sudo apt-get install openssl
     sudo openssl req -new -x509 -nodes -days 365000 -key ca-key.pem -out ca-cert.pem
     ```
 
-3. Enter user information. For example:
+3. Enter detailed certificate information. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -72,7 +72,7 @@ sudo apt-get install openssl
 
     > **Note:**
     >
-    > In the above user information, texts after `:` are the entered user information.
+    > In the above certificate details, texts after `:` are the entered information.
 
 ### Generate server key and certificate
 
@@ -84,7 +84,7 @@ sudo apt-get install openssl
     sudo openssl req -newkey rsa:2048 -days 365000 -nodes -keyout server-key.pem -out server-req.pem
     ```
 
-2. Enter user information. For example:
+2. Enter detailed certificate information. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -153,7 +153,7 @@ After generating the server key and certificate, you need to generate the key an
     sudo openssl req -newkey rsa:2048 -days 365000 -nodes -keyout client-key.pem -out client-req.pem
     ```
 
-2. Enter user information. For example:
+2. Enter detailed certificate information. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -212,12 +212,17 @@ After generating the server key and certificate, you need to generate the key an
 
 ### Verify certificate
 
-Execute the following command to verify certificates:
+Execute the following command to verify certificate:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
 openssl verify -CAfile ca-cert.pem server-cert.pem client-cert.pem
+```
+
+If the certificate is verified, you will see the following result:
+
+```
 server-cert.pem: OK
 client-cert.pem: OK
 ```
