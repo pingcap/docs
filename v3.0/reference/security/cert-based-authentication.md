@@ -268,7 +268,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 First, connect TiDB using the client to configure the login verification. Then, configure the user certificate information to be verified with the following methods:
 
-+ Configure the certificate when creating a user (`create user`):
++ Configure the certificate information to be verified when creating a user (`create user`):
 
     {{< copyable "sql" >}}
 
@@ -277,7 +277,7 @@ First, connect TiDB using the client to configure the login verification. Then, 
     grant all on *.* to 'u1'@'%';
     ```
 
-+ Configure the certificate when granting privilege:
++ Configure the certificate information to be verified when granting privileges:
 
     {{< copyable "sql" >}}
 
@@ -286,7 +286,7 @@ First, connect TiDB using the client to configure the login verification. Then, 
     grant all on *.* to 'u1'@'%' require issuer '/C=US/ST=California/L=San Francisco/O=PingCAP Inc./OU=TiDB/CN=TiDB admin/emailAddress=s@pingcap.com' subject '/C=US/ST=California/L=San Francisco/O=PingCAP Inc./OU=TiDB/CN=tpch-user1/emailAddress=zz@pingcap.com' cipher 'TLS_AES_256_GCM_SHA384';
     ```
 
-+ Configure the certificate when altering a user:
++ Configure the certificate information to be verified when altering a user:
 
     {{< copyable "sql" >}}
 
@@ -294,7 +294,7 @@ First, connect TiDB using the client to configure the login verification. Then, 
     alter user 'u1'@'%' require issuer '/C=US/ST=California/L=San Francisco/O=PingCAP Inc./OU=TiDB/CN=TiDB admin/emailAddress=s@pingcap.com' subject '/C=US/ST=California/L=San Francisco/O=PingCAP Inc./OU=TiDB/CN=tpch-user1/emailAddress=zz@pingcap.com' cipher 'TLS_AES_256_GCM_SHA384';
     ```
 
-In the above three methods, `require subject`, `require issuer`, and `require cipher` are respectively used to check the X509 certificate attributes. You can configure one item or multiple items using the space or `and` as the separator.
+In the above three methods, `require subject`, `require issuer`, and `require cipher` are used to check the X509 certificate attributes. You can configure one item or multiple items using the space or `and` as the separator.
 
 + `require subject`: Specifies the `subject` information of the client certificate when you log in. With this option specified, you do not need to configure `require ssl` or x509. The information to be specified is consistent with the entered `subject` information in [Generate client keys and certificates](#generate-client-keys-and-certificates). You can execute `openssl x509 -noout -subject -in client-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'` to configure this item.
 
@@ -389,7 +389,7 @@ The CA certificate is the basis for mutual verification between the client and s
     cat ca-cert.new.pem ca-cert.old.pem > ca-cert.pem
     ```
 
-After this update, use the combined CA certificate and restart the TiDB server. Then the server accepts both the new and old CA certificates.
+After the above operations, restart the TiDB server with the newly created combined CA certificate. Then the server accepts both the new and old CA certificates.
 
 Also replace the old CA certificate with the combined certificate so that the client accepts both the old and new CA certificates.
 
@@ -430,7 +430,7 @@ Also replace the old CA certificate with the combined certificate so that the cl
 
 ### Update the server key and certificate
 
-1. Generate the new RSA key of the sever:
+1. Generate the new RSA key of the server:
 
     {{< copyable "shell-regular" >}}
 
