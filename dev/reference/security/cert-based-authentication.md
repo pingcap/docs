@@ -6,7 +6,7 @@ category: reference
 
 # Certificate-Based Authentication for Login <span class="version-mark">New in v3.0.8</span>
 
-Starting from v3.0.8, TiDB supports the certificate-based authentication method for users to log into TiDB. Using this method, TiDB issues certificates to different users, uses encrypted connection to transfer data, and verifies certificates when users log in. Compared with the user name and password authentication method commonly used by MySQL users, the MySQL  compatible certificate-based authentication method is securer, and is thus adopted by an increasing number of users.
+Starting from v3.0.8, TiDB supports the certificate-based authentication method for users to log into TiDB. Using this method, TiDB issues certificates to different users, uses encrypted connection to transfer data, and verifies certificates when users log in. Compared with the user name and password authentication method commonly used by MySQL users, the MySQL compatible certificate-based authentication method is securer, and is thus adopted by an increasing number of users.
 
 To use this method, you will perform the following operations:
 
@@ -127,7 +127,7 @@ sudo apt-get install openssl
     sudo openssl x509 -req -in server-req.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.pem
     ```
 
-    The output of the above command (an example):
+    The output of the above command (for example):
 
     {{< copyable "shell-regular" >}}
 
@@ -141,9 +141,9 @@ sudo apt-get install openssl
     >
     > When you log in, TiDB checks whether the information in the `subject` section of the above output is consistent or not.
 
-### Generate client keys and certificates
+### Generate client key and certificate
 
-After generating the server key and certificate, you need to generate the keys and certificates for the client. It is often necessary to generate different keys and certificates for different users.
+After generating the server key and certificate, you need to generate the key and certificate for the client. It is often necessary to generate different keys and certificates for different users.
 
 1. Execute the following command to generate the client key:
 
@@ -196,7 +196,7 @@ After generating the server key and certificate, you need to generate the keys a
     sudo openssl x509 -req -in client-req.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out client-cert.pem
     ```
 
-    The output of the above command (an example):
+    The output of the above command (for example):
 
     {{< copyable "shell-regular" >}}
 
@@ -226,7 +226,7 @@ client-cert.pem: OK
 
 After generating the certificates, configure the server certificate in TiDB and make the client use the client certificate.
 
-### Configure TiDB server
+### Configure certificate on TiDB server
 
 Modify the `security` section in the TiDB configuration file:
 
@@ -245,7 +245,7 @@ Start TiDB logs. If the following information is displayed in the log, the confi
 [INFO] [server.go:264] ["secure connection is enabled"] ["client verification enabled"=true]
 ```
 
-### Configure client
+### Configure certificate on client
 
 Configure the client so that the client uses the client key and certificate for login.
 
@@ -257,9 +257,9 @@ Taking the MySQL client as an example, you can use the newly created client cert
 mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
 ```
 
-## Configure the user certificate information to be verified for login
+## Configure the user certificate information for login verification
 
-Connect TiDB using the client for the authentication configuration. You can configure the user certificate information to be verified for login in the following three ways:
+Connect TiDB using the client to configure the login authentication. You can configure the user certificate information for login verification in the following three methods:
 
 + Configure the certificate when creating a user (`create user`):
 
@@ -287,7 +287,7 @@ Connect TiDB using the client for the authentication configuration. You can conf
     alter user 'u1'@'%' require issuer '/C=US/ST=California/L=San Francisco/O=PingCAP Inc./OU=TiDB/CN=TiDB admin/emailAddress=s@pingcap.com' subject '/C=US/ST=California/L=San Francisco/O=PingCAP Inc./OU=TiDB/CN=tpch-user1/emailAddress=zz@pingcap.com' cipher 'TLS_AES_256_GCM_SHA384';
     ```
 
-In the above three statements, `require subject`, `require issuer`, and `require cipher` are respectively used to check the X509 certificate attributes. You can configure one item or multiple items using the space or `and` as the separator.
+In the above three methods, `require subject`, `require issuer`, and `require cipher` are respectively used to check the X509 certificate attributes. You can configure one item or multiple items using the space or `and` as the separator.
 
 + `require subject`: Specifies the `subject` information of the client certificate when you log in. With this option specified, you do not need to configure `require ssl` or x509. The information to be specified is consistent with the entered `subject` information in [Generate client keys and certificates](#generate-client-keys-and-certificates). You can execute `openssl x509 -noout -subject -in client-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'` to configure this item.
 
@@ -341,7 +341,7 @@ show variables like '%ssl%';
 
 The key and certificate are updated regularly. The following sections introduce how to update the key and certificate.
 
-The CA certificate is the basis for mutual verification between the client and server. To replace the CA certificate, generate a combined certificate that supports the authentication before and after the update. On the client and server, first replace the CA certificate, then replace the client/server key and certificate.
+The CA certificate is the basis for mutual verification between the client and server. To replace the CA certificate, generate a combined certificate that supports the authentication for both old and new certificates. On the client and server, first replace the CA certificate, then replace the client/server key and certificate.
 
 ### Update CA key and certificate
 
@@ -382,9 +382,9 @@ The CA certificate is the basis for mutual verification between the client and s
     cat ca-cert.new.pem ca-cert.old.pem > ca-cert.pem
     ```
 
-After this update, use the new combined CA certificate and restart the TiDB server. Then the server accepts both the new and old CA certificates.
+After this update, use the combined CA certificate and restart the TiDB server. Then the server accepts both the new and old CA certificates.
 
-Also replace the old client certificate with the combined certificate so that the client accepts both the old and new CA certificates.
+Also replace the old CA certificate with the combined certificate so that the client accepts both the old and new CA certificates.
 
 ### Update client key and certificate
 
@@ -403,7 +403,7 @@ Also replace the old client certificate with the combined certificate so that th
 
     > **Note:**
     >
-    > The above command is to replace the client key and certificate and to ensure that the online users are not affected. Therefore, the appended information in the above command must be consistent with the `require subject` information.
+    > The above command is to replace the client key and certificate, and to ensure that the online users are not affected. Therefore, the appended information in the above command must be consistent with the `require subject` information.
 
 2. Use the combined certificate and the new CA key to generate the new client certificate:
 
