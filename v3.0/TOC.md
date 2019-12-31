@@ -339,6 +339,10 @@
         - [Error Description](/v3.0/reference/tools/data-migration/troubleshoot/error-system.md)
         - [Error Handling](/v3.0/reference/tools/data-migration/troubleshoot/error-handling.md)
       - [FAQ](/v3.0/reference/tools/data-migration/faq.md)
+      + Releases
+        + v1.0
+          - [1.0.2](/v3.0/reference/tools/data-migration/releases/1.0.2.md)
+          - [1.0.3](/v3.0/reference/tools/data-migration/releases/1.0.3.md)
     + TiDB Lightning
       - [Overview](/v3.0/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v3.0/reference/tools/tidb-lightning/deployment.md)
@@ -422,6 +426,7 @@
     - [3.0.0-beta.1](/v3.0/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/v3.0/releases/3.0beta.md)
   + v2.1
+    - [2.1.19](/v3.0/releases/2.1.19.md)
     - [2.1.18](/v3.0/releases/2.1.18.md)
     - [2.1.17](/v3.0/releases/2.1.17.md)
     - [2.1.16](/v3.0/releases/2.1.16.md)
