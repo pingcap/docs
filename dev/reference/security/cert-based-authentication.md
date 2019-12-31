@@ -246,7 +246,7 @@ ssl-key ="path/to/server-key.pem"
 ssl-ca="path/to/ca-cert.pem"
 ```
 
-Start TiDB logs. If the following information is displayed in the log, the configuration is successful:
+Start TiDB and check logs. If the following information is displayed in the log, the configuration is successful:
 
 ```
 [INFO] [server.go:264] ["secure connection is enabled"] ["client verification enabled"=true]
