@@ -6,20 +6,22 @@ category: reference
 
 # Certificate-Based Authentication for Login <span class="version-mark">New in v3.0.8</span>
 
-Starting from v3.0.8, TiDB supports the certificate-based authentication method for users to log into TiDB. Using this method, TiDB issues certificates to different users, uses encrypted connection to transfer data, and verifies certificates when users log in. Compared with the user name and password authentication method commonly used by MySQL users, the MySQL compatible certificate-based authentication method is securer, and is thus adopted by an increasing number of users.
+Starting from v3.0.8, TiDB supports a certificate-based authentication method for users to log into TiDB. With this method, TiDB issues certificates to different users, uses encrypted connections to transfer data, and verifies certificates when users log in. Compared with the user name and password authentication method commonly used by MySQL users, the MySQL compatible certificate-based authentication method is securer, and is thus adopted by an increasing number of users.
 
-To use this method, you will perform the following operations:
+To use certificate-based authentication, you might need to perform the following operations:
 
 + Create security keys and certificates
 + Configure certificates for TiDB and the client
 + Configure the user certificate information to be verified when the user logs in
 + Update and replace certificates
 
+The rest of the document introduces in detail how to perform these operations.
+
 ## Create security keys and certificates
 
 ### Install OpenSS
 
-It is recommended that you use [OpenSSL](https://www.openssl.org/) to create keys and certificates. Taking the Debian system as an example, execute the following command to install OpenSSL:
+It is recommended that you use [OpenSSL](https://www.openssl.org/) to create keys and certificates. Taking the Debian operating system as an example, execute the following command to install OpenSSL:
 
 {{< copyable "shell-regular" >}}
 
@@ -208,7 +210,7 @@ After generating the server key and certificate, you need to generate the key an
 
     > **Note:**
     >
-    > The information of the `subject` section in the above output is used for authentication configuration in `require`.
+    > The information of the `subject` section in the above output is used for [certificate configuration for login verification](#configure-the-user-certificate-information-for-login-verification) in the `require` section.
 
 ### Verify certificate
 
@@ -227,11 +229,11 @@ server-cert.pem: OK
 client-cert.pem: OK
 ```
 
-## Configure certificate for TiDB and client
+## Configure TiDB and the client to use certificates
 
-After generating the certificates, configure the server certificate in TiDB and make the client use the client certificate.
+After generating the certificates, you need to configure the TiDB server and the client to use the corresponding server certificate or client certificate.
 
-### Configure certificate on TiDB server
+### Configure TiDB to use server certificate
 
 Modify the `security` section in the TiDB configuration file:
 
@@ -250,7 +252,7 @@ Start TiDB logs. If the following information is displayed in the log, the confi
 [INFO] [server.go:264] ["secure connection is enabled"] ["client verification enabled"=true]
 ```
 
-### Configure certificate on client
+### Configure the client to use client certificate
 
 Configure the client so that the client uses the client key and certificate for login.
 
@@ -264,7 +266,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 ## Configure the user certificate information for login verification
 
-Connect TiDB using the client to configure the login authentication. You can configure the user certificate information for login verification in the following three methods:
+First, connect TiDB using the client to configure the login verification. Then, configure the user certificate information to be verified with the following methods:
 
 + Configure the certificate when creating a user (`create user`):
 
