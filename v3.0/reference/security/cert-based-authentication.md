@@ -264,7 +264,7 @@ First, connect TiDB using the client to configure the login verification. Then, 
 
 ### Get user certificate information
 
-The user certificate information is specified by `require subject`, `require issuer`, and `require cipher`, which are used to check the X509 certificate attributes.
+The user certificate information can be specified by `require subject`, `require issuer`, and `require cipher`, which are used to check the X509 certificate attributes.
 
 + `require subject`: Specifies the `subject` information of the client certificate when you log in. With this option specified, you do not need to configure `require ssl` or x509. The information to be specified is consistent with the entered `subject` information in [Generate client keys and certificates](#generate-client-keys-and-certificates).
 
@@ -296,7 +296,7 @@ The user certificate information is specified by `require subject`, `require iss
 
 ### Configure user certificate information
 
-After getting the user certificate information (`require subject`, `require issuer`, `require cipher`), configure these information to be verified when creating a user, granting privileges, or altering a user. Replace `replaceable` with the corresponding information in the following statements.
+After getting the user certificate information (`require subject`, `require issuer`, `require cipher`), configure these information to be verified when creating a user, granting privileges, or altering a user. Replace `<replaceable>` with the corresponding information in the following statements.
 
 You can configure one option or multiple options using the space or `and` as the separator.
 
@@ -305,7 +305,7 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    create user 'u1'@'%' require issuer 'replaceable' subject 'replaceable' cipher 'replaceable';
+    create user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' cipher '<replaceable>';
     ```
 
 + Configure user certificate when granting privileges:
@@ -313,7 +313,7 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    grant all on *.* to 'u1'@'%' require issuer 'replaceable' subject 'replaceable' cipher 'replaceable';
+    grant all on *.* to 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' cipher '<replaceable>';
     ```
 
 + Configure user certificate when altering a user:
@@ -332,11 +332,15 @@ After the above configuration, the following items will be verified when you log
 
 You can log into TiDB only after all the above items are verified. Otherwise, the `ERROR 1045 (28000): Access denied` error is returned. You can use the following command to check the TLS version, the cipher algorithm and whether the current connection uses the certificate for the login.
 
-{{< copyable "shell-regular" >}}
+Connect the MySQL client and execute the following statement:
 
-```bash
-MySQL [test]> \s
+{{< copyable "sql" >}}
+
+```sql
+\s
 ```
+
+The output:
 
 ```
 --------------
@@ -348,13 +352,15 @@ Current user:        root@127.0.0.1
 SSL:                 Cipher in use is TLS_AES_256_GCM_SHA384
 ```
 
-Connect the MySQL client and execute the following statement:
+Then execute the following statement:
 
 {{< copyable "sql" >}}
 
 ```sql
 show variables like '%ssl%';
 ```
+
+The output:
 
 ```
 +---------------+----------------------------------+
