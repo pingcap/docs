@@ -225,7 +225,7 @@ After generating the certificates, you need to configure the TiDB server and the
 
 ### Configure TiDB to use server certificate
 
-Modify the `[security]` section in the TiDB configuration file. This step specifies the directory in which the CA certificate, the server key, and server certificate are stored. You can replace `path/to/server-cert.pem`, `path/to/server-key.pem`, `path/to/ca-cert.pem` with your own directory.
+Modify the `[security]` section in the TiDB configuration file. This step specifies the directory in which the CA certificate, the server key, and the server certificate are stored. You can replace `path/to/server-cert.pem`, `path/to/server-key.pem`, `path/to/ca-cert.pem` with your own directory.
 
 {{< copyable "" >}}
 
@@ -256,7 +256,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 > **Note:**
 >
-> `/path/to/client-cert.new.pem`, `/path/to/client-key.new.pem`, and `/path/to/ca-cert.pem` specify the directory of the CA certificate, client key, and client certificate. You can replace them with your own directory.
+> `/path/to/client-cert.new.pem`, `/path/to/client-key.new.pem`, and `/path/to/ca-cert.pem` are the directory of the CA certificate, client key, and client certificate. You can replace them with your own directory.
 
 ## Configure the user certificate information for login verification
 
