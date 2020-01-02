@@ -267,7 +267,7 @@ You can use Docker Compose to build a TiDB cluster locally, including the cluste
 
 #### How to add the `label` configuration if `label` of TiKV was not configured when I deployed the TiDB cluster for the first time?
 
-The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for PD to execute global management and scheduling. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone, rack, host"` (you should configure it based on the practical `label` level name).
+The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for PD to execute global management and scheduling. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone,rack,host"` (you should configure it based on the practical `label` level name).
 
 For the usage of `pd-ctl`, see [PD Control Instruction](/dev/reference/tools/pd-control.md).
 
@@ -544,7 +544,7 @@ When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if e
 
 #### How to control or change the execution priority of SQL commits?
 
-TiDB supports changing the priority on a [per-session](/dev/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_force_priority), [global](/dev/reference/configuration/tidb-server/server-command-option.md#force-priority) or individual statement basis. Priority has the following meaning:
+TiDB supports changing the priority on a [per-session](/dev/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_force_priority), [global](/dev/reference/configuration/tidb-server/configuration-file.md#force-priority) or individual statement basis. Priority has the following meaning:
 
 - `HIGH_PRIORITY`: this statement has a high priority, that is, TiDB gives priority to this statement and executes it first.
 
@@ -597,6 +597,19 @@ Now, there are still a few reasons for this error reporting (the latter two are 
 > + Currently, TiDB does not cache all the `schema` version changes.
 > + For each DDL operation, the number of `schema` version changes is the same with the number of corresponding `schema state` version changes.
 > + Different DDL operations cause different number of `schema` version changes. For example, the `CREATE TABLE` statement causes one `schema` version change while the `ADD COLUMN` statement causes four.
+
+#### What are the causes of the "Information schema is out of date" error?
+
+When executing a DML statement, if TiDB fails to load the latest schema within a DDL lease (45s by default), the `Information schema is out of date` error might occur. Possible causes are:
+
+- The TiDB instance that executed this DML was killed, and the transaction execution corresponding to this DML statement took longer than a DDL lease. When the transaction was committed, the error occurred.
+- TiDB failed to connect to PD or TiKV while executing this DML statement. As a result, TiDB failed to load schema within a DDL lease or disconnected from PD due to the keepalive setting.
+
+#### Error is reported when executing DDL statements under high concurrency?
+
+When you execute DDL statements (such as creating tables in batches) under high concurrency, a very few of these statements might fail because of key conflicts during the concurrent execution.
+
+It is recommended to keep the number of concurrent DDL statements under 20. Otherwise, you need to retry the failed statements from the client.
 
 ### Manage the TiKV server
 
@@ -915,7 +928,6 @@ As distributed transactions need to conduct two-phase commit and the bottom laye
 
 - A transaction is limited to 5000 SQL statements (by default)
 - Each Key-Value entry is no more than 6MB
-- The total number of Key-Value entry is no more than 300,000 rows
 - The total size of Key-Value entry is no more than 100MB
 
 There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.

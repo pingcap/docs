@@ -6,7 +6,9 @@ category: reference
 
 # TiDB Lightning Deployment
 
-This document describes the hardware requirements of TiDB Lightning on separate deployment and mixed deployment, and how to deploy it using Ansible or manually.
+This document describes the hardware requirements of TiDB Lightning using the default "Importer" back end, and how to deploy it using Ansible or manually.
+
+If you wish to use the "TiDB" back end, also read [TiDB Lightning "TiDB" Back End](/dev/reference/tools/tidb-lightning/tidb-backend.md) for the changes to the deployment steps.
 
 ## Notes
 
@@ -186,7 +188,7 @@ Follow the link to download the TiDB Lightning package (choose the same version 
 
 - [**v3.0**](https://pingcap.com/docs/v3.0/reference/tools/download/#tidb-lightning)
 - [**v2.1**](https://pingcap.com/docs/v2.1/reference/tools/download/#tidb-lightning)
-- [Latest unstable version](/dev/reference/tools/download.md#tidb-lightning)
+- [Latest development version (unstable)](/dev/reference/tools/download.md#tidb-lightning)
 
 #### Step 3: Start `tikv-importer`
 
@@ -205,7 +207,7 @@ Follow the link to download the TiDB Lightning package (choose the same version 
     [server]
     # The listening address of tikv-importer. tidb-lightning needs to connect to
     # this address to write data.
-    addr = "0.0.0.0:8287"
+    addr = "192.168.20.10:8287"
 
     [metric]
     # The Prometheus client push job name.

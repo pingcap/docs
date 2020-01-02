@@ -116,13 +116,24 @@ black-white-list:
 
 ### Parameter explanation
 
-- `do-dbs`: white lists of the schemas to be replicated
-- `ignore-dbs`: black lists of the schemas to be replicated
-- `do-tables`: white lists of the tables to be replicated
-- `ignore-tables`: black lists of the tables to be replicated
-- In black and white lists, starting with the "~" character indicates it is a [regular expression](https://golang.org/pkg/regexp/syntax/#hdr-syntax).
+- `do-dbs`: white lists of the schemas to be replicated, similar to [`replicate-do-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-slave.html#option_mysqld_replicate-do-db) in MySQL
+- `ignore-dbs`: black lists of the schemas to be replicated, similar to [`replicate-ignore-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-slave.html#option_mysqld_replicate-ignore-db) in MySQL
+- `do-tables`: white lists of the tables to be replicated, similar to [`replicate-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-slave.html#option_mysqld_replicate-do-table) in MySQL
+- `ignore-tables`: black lists of the tables to be replicated, similar to [`replicate-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-slave.html#option_mysqld_replicate-ignore-table) in MySQl
+
+If a value of the above parameters starts with the `~` character, the subsequent characters of this value are treated as a [regular expression](https://golang.org/pkg/regexp/syntax/#hdr-syntax). You can use this parameter to match schema or table names.
 
 ### Filtering process
+
+The filtering rules corresponding to `do-dbs` and `ignore-dbs` are similar to the [Evaluation of Database-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html) in MySQL. The filtering rules corresponding to `do-tables` and `ignore-tables` are similar to the [Evaluation of Table-Level Replication Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html) in MySQL.
+
+> **Note:**
+>
+> In DM and in MySQL, the white and black lists filtering rules are different in the following ways:
+>
+> - In MySQL, [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-slave.html#option_mysqld_replicate-wild-do-table) and [`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-slave.html#option_mysqld_replicate-wild-ignore-table) support wildcard characters. In DM, some parameter values directly supports regular expressions that start with the `~` character.
+> - DM currently only supports binlogs in the `ROW` format, and does not support those in the `STATEMENT` or `MIXED` format. Therefore, the filtering rules in DM correspond to those in the `ROW` format in MySQL.
+> - MySQL determines a DDL statement only by the database name explicitly specified in the `USE` section of the statement. DM determines a statement first based on the database name section in the DDL statement. If the DDL statement does not contain such section, DM determines the statement by the `USE` section. Suppose that the SQL statement to be determined is `USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`; that `replicate-do-db=test_db_1` is configured in MySQL and `do-dbs: ["test_db_1"]` is configured in DM. Then this rule only applies to DM and not to MySQL.
 
 The filtering process is as follows:
 
@@ -322,7 +333,7 @@ filters:
     action: Ignore
 ```
 
-`filter-procedure-rule`  filters out the `^CREATE\\s+PROCEDURE` and `^DROP\\s+PROCEDURE` statements of all tables that match the `test_*`.`t_*` pattern.
+`filter-procedure-rule` filters out the `^CREATE\\s+PROCEDURE` and `^DROP\\s+PROCEDURE` statements of all tables that match the `test_*`.`t_*` pattern.
 
 #### Filter out the SQL statements that the TiDB parser does not support
 
@@ -343,6 +354,10 @@ filters:
 ```
 
 ## Column mapping
+
+> **Note:**
+>
+> The column mapping is not recommended as the primary solution due to its usage restrictions. The preferable solution is [handling conflicts of auto-increment primary key](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handle-conflicts-of-auto-increment-primary-key).
 
 The column mapping feature supports modifying the value of table columns. You can execute different modification operations on the specified column according to different expressions. Currently, only the built-in expressions provided by DM are supported.
 
@@ -390,10 +405,10 @@ Note the following restrictions:
 - If the `table prefix` is not empty, the table name format must be `table prefix` or `table prefix + separator + number (the table ID)`.
 - If the schema/table name does not contain the `… + separator + number` part, the corresponding ID is considered as 0.
 - Restrictions on sharding size:
-    - It supports 16 MySQL or MariaDB instances at most (0 <= instance ID <= 15).
-    - Each instance supports 128 schemas at most (0 <= schema ID  <= 127).
-    - Each schema of each instance supports 256 tables at most (0 <= table ID <= 255).
-    - The ID range of the auto-increment primary key is "0 <= ID <= 17592186044415".
+    - It supports 16 MySQL or MariaDB instances at most (Requirement: 0 <= instance ID <= 15).
+    - Each instance supports 128 schemas at most (Requirement: 0 <= schema ID <= 127).
+    - Each schema of each instance supports 256 tables at most (Requirement: 0 <= table ID <= 255).
+    - The range of the mapped column should meet the requirement: 0 <= ID <= 17592186044415.
     - The `{instance ID, schema ID, table ID}` group must be unique.
 - Currently, the `partition id` expression is a customized feature. If you want to modify this feature, contact the corresponding developers.
 
