@@ -12,11 +12,11 @@ category: reference
 
 It can be [downloaded](/v3.1/reference/tools/download.md) as part of the Enterprise Tools package.
 
-### What enhancements does this contain over regular Mydumper?
+### What enhancements does it contain over regular Mydumper?
 
-+ To ensure backup consistency, for TiDB, it sets the value of [tidb_snapshot](/v3.1/how-to/get-started/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the point in time when the data is backed up instead of using `FLUSH TABLES WITH READ LOCK`.
++ To ensure backup consistency for TiDB, this optimized Mydumper tool sets the value of [tidb_snapshot](/v3.1/how-to/get-started/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the point in time when the data is backed up instead of using `FLUSH TABLES WITH READ LOCK`.
 
-+ It uses the hidden `_tidb_rowid` column of TiDB to optimize the performance of concurrent export of data in a single table.
++ This tool uses the hidden `_tidb_rowid` column of TiDB to optimize the performance of concurrently exporting data from a single table.
 
 ## How to use Mydumper?
 
@@ -37,7 +37,7 @@ It can be [downloaded](/v3.1/reference/tools/download.md) as part of the Enterpr
 
 ### Usage example
 
-To back up data from TiDB, add command line parameters to the following command according to your situation:
+Execute the following command to back up data from TiDB. You can add command line parameters to the command as needed:
 
 {{< copyable "shell-regular" >}}
 
@@ -63,23 +63,23 @@ If the output contains `git_hash` (`d3e6fec8b069daee772d0dbaa47579f67a5947e7` in
 mydumper 0.9.5 (d3e6fec8b069daee772d0dbaa47579f67a5947e7), built against MySQL 5.7.24
 ```
 
-### What can I do if an "invalid mydumper files for there are no `-schema-create.sql` files found" error is reported when using Loader to restore the data backed up by Mydumper?
+### How to resolve the "invalid mydumper files for there are no `-schema-create.sql` files found" error when using Loader to restore the data backed up by Mydumper?
 
-Check whether the `-T` or `-tables-list` option is used when using Mydumper to back up data. If these options are used, Mydumper does not generate the `-schema-create.sql` file.
+Check whether the `-T` or `--tables-list` option is used when using Mydumper to back up data. If these options are used, Mydumper does not generate a file that includes a `CREATE DATABASE` SQL statement.
 
 **Solution**: Create the `{schema-name}-schema-create.sql` file in the directory for data backup of Mydumper. Write "CREATE DATABASE `{schema-name}`" to the file, and then run Loader.
 
-### Why is the TIMESTAMP type data exported using Mydumper inconsistent with that in the database?
+### Why is the TIMESTAMP type of data exported using Mydumper inconsistent with that in the database?
 
-Check whether the time zone of the server running Mydumper is consistent with that of the database. Mydumper converts the TIMESTAMP type data according to the time zone of the server. You can add the `--skip-tz-utc` option to disable the conversion of dates and times.
+Check whether the time zone of the server that is running Mydumper is consistent with that of the database. Mydumper converts the TIMESTAMP type of data according to the time zone of its server. You can add the `--skip-tz-utc` option to disable the conversion of dates and times.
 
 ### How to configure the `-F,--chunk-filesize` option of Mydumper?
 
-Mydumper divides the data of each table into multiple `chunk` according to the value of this option during backup. Each `chunk` is saved to a file with a size of about `chunk-filesize`. In this way, the data is divided into multiple files so that the import speed is improved by using the parallel processing of Loader/TiDB Lightning. If you later use **Loader** to restore the backup files, it is recommended to set the value of this option to `64` (in MB); If you use **TiDB Lightning** to restore files, `256` (in MB) is recommended.
+Mydumper splits the data of each table into multiple chunks according to the value of this option during backup. Each chunk is saved in a file with a size of about `chunk-filesize`. In this way, data is split into multiple files and you can use the parallel processing of Loader/TiDB lightning to improve the import speed. If you later use **Loader** to restore the backup files, it is recommended to set the value of this option to `64` (in MB); If you use **TiDB Lightning** to restore files, `256` (in MB) is recommended.
 
 ### How to configure the `-s --statement-size` option of Mydumper?
 
-Mydumper uses this option to control the size of `Insert Statement` which defaults to `10000000` (about 1 MB). Use this option to avoid the following errors occurring when restoring data:
+Mydumper uses this option to control the size of `Insert Statement` which defaults to `10000000` (about 1 MB). Use this option to avoid the following errors when restoring data:
 
 ```log
 packet for query is too large. Try adjusting the 'max_allowed_packet' variable
@@ -98,13 +98,13 @@ If you restore the data in this situation, Mydumper still reports the `packet fo
 
 ### How to set the `-l, --long-query-guard` option of Mydumper?
 
-Set the value of this option to the estimated time required for backup. If Mydumper runs longer than the value of this option, it reports an error and exits. It is recommended to set the value to `7200` (in seconds) for the first time and then modify it according to your actual backup time.
+Set the value of this option to the estimated time required for a backup. If Mydumper runs longer than this value, it reports an error and exits. It is recommended to set the value to `7200` (in seconds) for the first time of your backup and then modify it according to your actual backup time.
 
 ### How to set the `--tidb-force-priority` option of Mydumper?
 
 This option can only be set when backing up TiDB’s data. It can be set to `LOW_PRIORITY`, `DELAYED`, or `HIGH_PRIORITY`. If you do not want data backup to affect online services, it is recommended to set this option to `LOW_PRIORITY`; if the backup has a higher priority, `HIGH_PRIORITY` is recommended.
 
-### What can I do if an "GC life time is short than transaction duration" error is reported when using Mydumper to back up TiDB's data?
+### How to resolve the "GC life time is short than transaction duration" error when using Mydumper to back up TiDB's data?
 
 Mydumper uses the `tidb_snapshot` system variable to ensure data consistency when backing up TiDB's data. This error is reported if the historical data of a snapshot is cleared by TiDB's Garbage Collection (GC) during backup. To solve this problem, perform the following steps:
 
@@ -143,15 +143,15 @@ Mydumper uses the `tidb_snapshot` system variable to ensure data consistency whe
 
 If this option is set to true, the exported data contains the data of TiDB's hidden columns. Using hidden columns when restoring data to TiDB might cause data inconsistency. Currently, it is not recommended to use this option.
 
-### What can I do if Mydumper reports an "Segmentation Fault" error?
+### How to resolve the "Segmentation Fault" error?
 
 This bug has been fixed. If the error persists, you can upgrade to the latest version of Mydumper.
 
-### What can I do if Mydumper reports an "Error dumping table ({schema}.{table}) data: line ...... (total length ...)" error?
+### How to resolve the "Error dumping table ({schema}.{table}) data: line ...... (total length ...)" error?
 
 This error occurs when Mydumper parses SQL statements. In this situation, use the latest version of Mydumper. If this error persists, you can file an issue to [mydumper/issues](https://github.com/pingcap/mydumper/issues).
 
-### What can I do if Mydumper reports an "Failed to set tidb_snapshot: parsing time \"20190901-10:15:00 +0800\" as \"20190901-10:15:00 +0700 MST\": cannot parse \"\" as \"MST\"" error?
+### How to resolve the "Failed to set tidb_snapshot: parsing time \"20190901-10:15:00 +0800\" as \"20190901-10:15:00 +0700 MST\": cannot parse \"\" as \"MST\"" error?
 
 Check whether the version of TiDB is lower than 2.1.11. If so, upgrade to TiDB 2.1.11 or later versions.
 
