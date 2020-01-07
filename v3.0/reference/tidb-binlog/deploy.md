@@ -154,7 +154,7 @@ In environments of development, testing and production, the requirements on serv
 
 1. Obtain `initial_commit_ts`.
 
-    In TiDB 3.0.6 or later versions, if the synchronization is started from the latest time point, you just need to set `initial_commit_ts` to `-1`. Otherwise, refer to the following methods to obtain a latest timestamp.
+    In TiDB 3.0.6 or later versions, if the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`. Otherwise, refer to the following methods to obtain the latest timestamp.
 
     If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery and must use the timestamp of the full backup.
 
@@ -463,7 +463,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
             It does not support the Rename DDL operation on tables of `ignore schemas`.
         -initial-commit-ts
             If Drainer does not have the related breakpoint information, you can configure the related breakpoint information using this parameter. (In TiDB 3.0.6 or later versions, the value of this parameter is `-1` by default; Before TiDB 3.0.6, the value is `0` by default.)
-            If the value of this parameter is `-1`, Drainer automatically obtains a latest timestamp from PD.
+            If the value of this parameter is `-1`, Drainer automatically obtains the latest timestamp from PD.
         -log-file string
             the path of the log file
         -log-rotate string
