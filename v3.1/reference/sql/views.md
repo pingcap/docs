@@ -20,24 +20,24 @@ Querying a view is similar to querying an ordinary table. However, when TiDB que
 The following example creates a view, queries this view, and delete this view:
 
 ```sql
-tidb> create table t(a int, b int);
+tidb> CREATE TABLE t(a INT, b INT);
 Query OK, 0 rows affected (0.01 sec)
 
-tidb> insert into t values(1, 1),(2,2),(3,3);
+tidb> INSERT INTO t VALUES(1, 1),(2,2),(3,3);
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-tidb> create table s(a int);
+tidb> CREATE TABLE s(a INT);
 Query OK, 0 rows affected (0.01 sec)
 
-tidb> insert into s values(2),(3);
+tidb> INSERT INTO s VALUES(2),(3);
 Query OK, 2 rows affected (0.01 sec)
 Records: 2  Duplicates: 0  Warnings: 0
 
-tidb> create view v as select s.a from t left join s on t.a = s.a;
+tidb> CREATE VIEW v AS SELECT s.a FROM t LEFT JOIN s ON t.a = s.a;
 Query OK, 0 rows affected (0.01 sec)
 
-tidb> select * from v;
+tidb> SELECT * FROM v;
 +------+
 | a    |
 +------+
@@ -47,7 +47,7 @@ tidb> select * from v;
 +------+
 3 rows in set (0.00 sec)
 
-tidb> drop view v;
+tidb> DROP VIEW v;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
