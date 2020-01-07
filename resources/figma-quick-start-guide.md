@@ -31,7 +31,7 @@ Currently, anyone with the link [https://www.figma.com/file/MOBwqkBtuA03agMjeGEG
 
 > **Note:**
 >
-> - **tidb-sketch-book** is a Figma file created by [Jingyi Chen](mailto:chenjingyi@pingcap.com) that collects common shapes for figure designs. When creating a figure, you are recommended to use the objects and colors in this file to maintain a consistent style for figures.
+> - **tidb-sketch-book** is a Figma file that collects common shapes for figure designs. When creating a figure, you are recommended to use the objects and colors in this file to maintain a consistent style for figures.
 > - If you can't open this file, contact [Jingyi Chen](mailto:chenjingyi@pingcap.com) for help.
 
 ![tidb-sketch-book](/media/tidb-sketch-book.png)
