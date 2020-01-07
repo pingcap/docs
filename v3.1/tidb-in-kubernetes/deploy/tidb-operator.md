@@ -28,7 +28,7 @@ Before deploying TiDB Operator, make sure the following items are installed on y
 
 TiDB Operator runs in Kubernetes cluster. You can refer to [the document of how to set up Kubernetes](https://kubernetes.io/docs/setup/) to set up a Kubernetes cluster. Make sure that the Kubernetes version is v1.12 or higher. If you are using AWS, GKE or local machines, here are quick-start tutorials:
 
-* [Local DinD tutorial](/v3.1/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-dind.md)
+* [kind tutorial](/v3.1/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
 * [Google GKE tutorial](/v3.1/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
 * [AWS EKS tutorial](/v3.1/tidb-in-kubernetes/deploy/aws-eks.md)
 
@@ -60,6 +60,10 @@ Because TiDB uses many file descriptors by default, the worker node and its Dock
 
     Set `LimitNOFILE` to be greater than or equal to `1048576`.
 
+    > **Note:**
+    >
+    > You need to explicitly set `LimitNOFILE` to `1048576` or a larger value rather than the default `infinity`. Because of a [bug](https://github.com/systemd/systemd/commit/6385cb31ef443be3e0d6da5ea62a267a49174688#diff-108b33cf1bd0765d116dd401376ca356L1186) in `systemd`, the value of `infinity` is `65536` in some `systemd` versions.
+
 ## Install Helm
 
 Refer to [Use Helm](/v3.1/tidb-in-kubernetes/reference/tools/in-kubernetes.md#use-helm) to install Helm and configre it with the official PingCAP chart Repo.
@@ -69,27 +73,6 @@ Refer to [Use Helm](/v3.1/tidb-in-kubernetes/reference/tools/in-kubernetes.md#us
 ### Prepare local volumes
 
 Refer to [Local PV Configuration](/v3.1/tidb-in-kubernetes/reference/configuration/storage-class.md#local-pv-configuration) to set up local persistent volumes in your Kubernetes cluster.
-
-### Deploy local-static-provisioner
-
-After mounting all data disks on Kubernetes nodes, you can deploy [local-volume-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner) that can automatically provision the mounted disks as Local PersistentVolumes.
-
-{{< copyable "shell-regular" >}}
-
-```shell
-kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/local-dind/local-volume-provisioner.yaml
-```
-
-Check the Pod and PV status with the following commands:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-kubectl get po -n kube-system -l app=local-volume-provisioner && \
-kubectl get pv | grep local-storage
-```
-
-The local-volume-provisioner creates a volume for each mounted disk. Note that on GKE, this will create local volumes of only 375GiB in size and that you need to manually alter the setup to create larger disks.
 
 ## Install TiDB Operator
 

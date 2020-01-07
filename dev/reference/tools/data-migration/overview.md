@@ -60,10 +60,6 @@ The [black and white lists filtering rule](/dev/reference/tools/data-migration/f
 
 [Binlog event filtering](/dev/reference/tools/data-migration/features/overview.md#binlog-event-filter) is a more fine-grained filtering rule than the black and white lists filtering rule. You can use statements like `INSERT` or `TRUNCATE TABLE` to specify the binlog events of `schema/table` that you need to replicate or filter out.
 
-### Column mapping
-
-The [column mapping](/dev/reference/tools/data-migration/features/overview.md#column-mapping) feature means that the table column value can be modified according to the built-in expression specified by the user, which can be used to resolve the conflicts of the sharding auto-increment primary key IDs.
-
 ### Sharding support
 
 DM supports merging the original sharded instances and tables into TiDB, but with [some restrictions](/dev/reference/tools/data-migration/features/shard-merge.md#restrictions).
@@ -94,7 +90,7 @@ Before using the DM tool, note the following restrictions:
 
 + Sharding
 
-    - If conflict exists between sharded tables, *only columns with the auto increment primary key* encounter the conflict, and the *column type is bigint*, solve the conflict using [column mapping](/dev/reference/tools/data-migration/features/overview.md#column-mapping). Otherwise, data replication is not supported. Conflicting data can cover each other and cause data loss.
+    - If conflict exists between sharded tables, solve the conflict by referring to [handling conflicts of auto-increment primary key](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md#handle-conflicts-of-auto-increment-primary-key). Otherwise, data replication is not supported. Conflicting data can cover each other and cause data loss.
 
     - For other sharding restrictions, see [Sharding DDL usage restrictions](/dev/reference/tools/data-migration/features/shard-merge.md#restrictions).
 
@@ -103,3 +99,7 @@ Before using the DM tool, note the following restrictions:
     - After DM-worker is restarted, the data replication task cannot be automatically restored. You need to manually run `start-task`. For details, see [Manage the Data Replication Task](/dev/reference/tools/data-migration/manage-tasks.md).
 
     - After DM-worker is restarted, the DDL lock replication cannot be automatically restored in some conditions. You need to manually handle it. For details, see [Handle Sharding DDL Locks Manually](/dev/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md).
+
++ Switching DM-worker connection to another MySQL instance
+
+    When DM-worker connects the upstream MySQL instance via a virtual IP (VIP), if you switch the VIP connection to another MySQL instance, DM might connect to the new and old MySQL instances at the same time in different connections. In this situation, the binlog replicated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage. To make necessary changes to DM manually, refer to [Switch DM-worker connection via virtual IP](/dev/reference/tools/data-migration/cluster-operations.md#switch-dm-worker-connection-via-virtual-ip).
