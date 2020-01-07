@@ -29,15 +29,15 @@ USE bikeshare;
 
 CREATE TABLE trips (
  trip_id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
- duration integer not null,
- start_date datetime,
- end_date datetime,
- start_station_number integer,
- start_station varchar(255),
- end_station_number integer,
- end_station varchar(255),
- bike_number varchar(255),
- member_type varchar(255)
+ duration INTEGER NOT NULL,
+ start_date DATETIME,
+ end_date DATETIME,
+ start_station_number INTEGER,
+ start_station VARCHAR(255),
+ end_station_number INTEGER,
+ end_station VARCHAR(255),
+ bike_number VARCHAR(255),
+ member_type VARCHAR(255)
 );
 ```
 
