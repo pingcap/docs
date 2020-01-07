@@ -245,9 +245,9 @@ password = ""
 port = 3307
 ```
 
-- If you migrate data from MySQL Server, Percona Server, Percona XtraDB Cluster, Amazon Aurora or RDS, set the `flavor` option to `"mysql"`, which is the default value and supports v5.5 < MySQL versions < v8.0.
+- If you migrate data from MySQL Server, Percona Server, Percona XtraDB Cluster, Amazon Aurora or RDS, set the `flavor` option to `"mysql"`, which is the default value. For this default value, MySQL versions between 5.5 (not included) and 8.0 (not included) are supported.
 - If you migrate data from MariaDB Server or MariaDB (Galera) Cluster, set `flavor = "mariadb"`, which only supports MariaDB version later than 10.1.2.
-- Starting from DM 1.0.2, DM automatically generates the `flavor` and `server-id` options and you do not need to configure them manually in normal situations.
+- Starting from DM 1.0.2, DM automatically generates the `flavor` and `server-id` options. You do not need to manually configure these options in normal situations.
 
 - If `password` in the `[from]` configuration is not an empty string, you need to use dmctl to encrypt the password. Refer to [Encrypt the upstream MySQL user password using dmctl](/dev/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl) for detailed steps.
 
