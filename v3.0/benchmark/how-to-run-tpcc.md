@@ -132,7 +132,7 @@ loadWorkers=32  # The number of concurrent workers that load data.
     {{< copyable "shell-regular" >}}
 
     ```shell
-    cd run && \
+    cd run &&
     ./runSQL.sh props.mysql sql.mysql/tableCreates.sql &&
     ./runSQL.sh props.mysql sql.mysql/indexCreates.sql
     ```
