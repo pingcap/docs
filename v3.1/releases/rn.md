@@ -5,8 +5,13 @@ category: release
 
 # TiDB Release Notes
 
+## 3.1
+
+- [3.1.0-beta](/v3.1/releases/3.1.0-beta.md)
+
 ## 3.0
 
+- [3.0.8](/v3.1/releases/3.0.8.md)
 - [3.0.7](/v3.1/releases/3.0.7.md)
 - [3.0.6](/v3.1/releases/3.0.6.md)
 - [3.0.5](/v3.1/releases/3.0.5.md)
@@ -23,6 +28,7 @@ category: release
 
 ## 2.1
 
+- [2.1.19](/v3.1/releases/2.1.19.md)
 - [2.1.18](/v3.1/releases/2.1.18.md)
 - [2.1.17](/v3.1/releases/2.1.17.md)
 - [2.1.16](/v3.1/releases/2.1.16.md)

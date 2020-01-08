@@ -257,6 +257,7 @@
     - [The TiDB Access Privilege System](/dev/reference/security/privilege-system.md)
     - [TiDB User Account Management](/dev/reference/security/user-account-management.md)
     - [Role-Based Access Control](/dev/reference/security/role-based-access-control.md)
+    - [Certificate-Based Authentication](/dev/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/dev/reference/transactions/overview.md)
     - [Transaction Model](/dev/reference/transactions/transaction-model.md)
@@ -343,6 +344,10 @@
         - [Error Description](/dev/reference/tools/data-migration/troubleshoot/error-system.md)
         - [Error Handling](/dev/reference/tools/data-migration/troubleshoot/error-handling.md)
       - [FAQ](/dev/reference/tools/data-migration/faq.md)
+      + Releases
+        + v1.0
+          - [1.0.2](/dev/reference/tools/data-migration/releases/1.0.2.md)
+          - [1.0.3](/dev/reference/tools/data-migration/releases/1.0.3.md)
     + TiDB Lightning
       - [Overview](/dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/dev/reference/tools/tidb-lightning/deployment.md)
@@ -413,7 +418,10 @@
 - [Adopters](/dev/adopters.md)
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
+  + v3.1
+    - [3.1.0-beta](/dev/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.8](/dev/releases/3.0.8.md)
     - [3.0.7](/dev/releases/3.0.7.md)
     - [3.0.6](/dev/releases/3.0.6.md)
     - [3.0.5](/dev/releases/3.0.5.md)
@@ -428,6 +436,7 @@
     - [3.0.0-beta.1](/dev/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/dev/releases/3.0beta.md)
   + v2.1
+    - [2.1.19](/dev/releases/2.1.19.md)
     - [2.1.18](/dev/releases/2.1.18.md)
     - [2.1.17](/dev/releases/2.1.17.md)
     - [2.1.16](/dev/releases/2.1.16.md)
