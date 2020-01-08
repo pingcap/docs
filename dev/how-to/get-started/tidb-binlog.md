@@ -203,7 +203,7 @@ mysql -h 127.0.0.1 -P 3306 -u root
 ```
 
 ```sql
-show databases;
+SHOW DATABASES;
 ```
 
 Expected output:
@@ -218,7 +218,7 @@ Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-MariaDB [(none)]> show databases;
+MariaDB [(none)]> SHOW DATABASES;
 +--------------------+
 | Database           |
 +--------------------+
@@ -234,9 +234,9 @@ MariaDB [(none)]> show databases;
 Here we can already see the `tidb_binlog` database, which contains the `checkpoint` table used by `drainer` to record up to what point binary logs from the TiDB cluster have been applied.
 
 ```sql
-MariaDB [tidb_binlog]> use tidb_binlog;
+MariaDB [tidb_binlog]> USE tidb_binlog;
 Database changed
-MariaDB [tidb_binlog]> select * from checkpoint;
+MariaDB [tidb_binlog]> SELECT * FROM checkpoint;
 +---------------------+---------------------------------------------+
 | clusterID           | checkPoint                                  |
 +---------------------+---------------------------------------------+
@@ -252,29 +252,29 @@ mysql -h 127.0.0.1 -P 4000 --prompt='TiDB [\d]> ' -u root
 ```
 
 ```sql
-create database tidbtest;
-use tidbtest;
-create table t1 (id int unsigned not null AUTO_INCREMENT primary key);
-insert into t1 () values (),(),(),(),();
-select * from t1;
+CREATE DATABASE tidbtest;
+USE tidbtest;
+CREATE TABLE t1 (id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY);
+INSERT INTO t1 () VALUES (),(),(),(),();
+SELECT * FROM t1;
 ```
 
 Expected output:
 
 ```
-TiDB [(none)]> create database tidbtest;
+TiDB [(none)]> CREATE DATABASE tidbtest;
 Query OK, 0 rows affected (0.12 sec)
 
-TiDB [(none)]> use tidbtest;
+TiDB [(none)]> USE tidbtest;
 Database changed
-TiDB [tidbtest]> create table t1 (id int unsigned not null AUTO_INCREMENT primary key);
+TiDB [tidbtest]> CREATE TABLE t1 (id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY);
 Query OK, 0 rows affected (0.11 sec)
 
-TiDB [tidbtest]> insert into t1 () values (),(),(),(),();
+TiDB [tidbtest]> INSERT INTO t1 () VALUES (),(),(),(),();
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-TiDB [tidbtest]> select * from t1;
+TiDB [tidbtest]> SELECT * FROM t1;
 +----+
 | id |
 +----+
@@ -290,20 +290,20 @@ TiDB [tidbtest]> select * from t1;
 Switching back to the MariaDB client, we should find the new database, new table, and the newly inserted rows:
 
 ```sql
-use tidbtest;
-show tables;
-select * from t1;
+USE tidbtest;
+SHOW TABLES;
+SELECT * FROM t1;
 ```
 
 Expected output:
 
 ```
-MariaDB [(none)]> use tidbtest;
+MariaDB [(none)]> USE tidbtest;
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Database changed
-MariaDB [tidbtest]> show tables;
+MariaDB [tidbtest]> SHOW TABLES;
 +--------------------+
 | Tables_in_tidbtest |
 +--------------------+
@@ -311,7 +311,7 @@ MariaDB [tidbtest]> show tables;
 +--------------------+
 1 row in set (0.00 sec)
 
-MariaDB [tidbtest]> select * from t1;
+MariaDB [tidbtest]> SELECT * FROM t1;
 +----+
 | id |
 +----+
