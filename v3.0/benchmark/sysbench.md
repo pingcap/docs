@@ -32,7 +32,7 @@ Place: Beijing
   | OS       | Linux (CentOS 7.3.1611)       |
   | CPU | 40 vCPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
   | RAM | 128GB |
-  | DISK | 1.5T SSD *2  + Optane SSD* 1 |
+  | DISK | 1.5T SSD \* 2  + Optane SSD \* 1 |
 
 - Sysbench version: 1.0.6
 
