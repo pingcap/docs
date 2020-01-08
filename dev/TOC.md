@@ -48,6 +48,7 @@
     - [Read Historical Data](/dev/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/dev/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/dev/how-to/get-started/data-migration.md)
+    - [TiDB Lightning Tutorial](/dev/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/dev/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/dev/how-to/deploy/hardware-recommendations.md)
@@ -82,14 +83,15 @@
     - [Migrate from CSV](/dev/reference/tools/tidb-lightning/csv.md)
   + Maintain
     - [Common Ansible Operations](/dev/how-to/deploy/orchestrated/ansible-operations.md)
-    - [Backup and Restore](/dev/how-to/maintain/backup-and-restore.md)
+    + Backup and Restore
+      - [Use `mydumper` and `loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md)
+      - [Use BR](/dev/how-to/maintain/backup-and-restore/br.md)
     - [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/dev/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/dev/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to TiDB 3.0](/dev/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/dev/how-to/upgrade/rolling-updates-with-ansible.md)
+    - [Upgrade to the Latest Version](/dev/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/dev/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/dev/how-to/troubleshoot/tidb-lightning.md)
@@ -154,6 +156,7 @@
       - [Window Functions](/dev/reference/sql/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](/dev/reference/sql/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/dev/reference/sql/functions-and-operators/precision-math.md)
+      - [List of Expressions for Pushdown](/dev/reference/sql/functions-and-operators/expressions-pushed-down.md)
     + SQL Statements
       - [`ADD COLUMN`](/dev/reference/sql/statements/add-column.md)
       - [`ADD INDEX`](/dev/reference/sql/statements/add-index.md)
@@ -254,6 +257,7 @@
     - [The TiDB Access Privilege System](/dev/reference/security/privilege-system.md)
     - [TiDB User Account Management](/dev/reference/security/user-account-management.md)
     - [Role-Based Access Control](/dev/reference/security/role-based-access-control.md)
+    - [Certificate-Based Authentication](/dev/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/dev/reference/transactions/overview.md)
     - [Transaction Model](/dev/reference/transactions/transaction-model.md)
@@ -272,6 +276,7 @@
     - [Understanding the Query Execution Plan](/dev/reference/performance/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](/dev/reference/performance/statistics.md)
     - [Optimizer Hints](/dev/reference/performance/optimizer-hints.md)
+    - [Follower Read](/dev/reference/performance/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/dev/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/dev/reference/performance/execution-plan-bind.md)
     - [Statement Summary Table](/dev/reference/performance/statement-summary.md)
@@ -284,6 +289,8 @@
   - [Alert Rules](/dev/reference/alert-rules.md)
   + Best Practices
     - [Highly Concurrent Write Best Practices](/dev/reference/best-practices/high-concurrency.md)
+    - [HAProxy Best Practices](/dev/reference/best-practices/haproxy.md)
+    - [PD Scheduling Best Practices](/dev/reference/best-practices/pd-scheduling.md)
   - [TiSpark](/dev/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/dev/reference/tidb-binlog/overview.md)
@@ -311,7 +318,6 @@
         - [Table Routing](/dev/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/dev/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/dev/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/dev/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/dev/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/dev/reference/tools/data-migration/features/shard-merge.md)
@@ -320,6 +326,7 @@
       + Usage Scenarios
         - [Simple Scenario](/dev/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/dev/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/dev/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/dev/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/dev/reference/tools/data-migration/configure/overview.md)
@@ -340,6 +347,10 @@
         - [Error Description](/dev/reference/tools/data-migration/troubleshoot/error-system.md)
         - [Error Handling](/dev/reference/tools/data-migration/troubleshoot/error-handling.md)
       - [FAQ](/dev/reference/tools/data-migration/faq.md)
+      + Releases
+        + v1.0
+          - [1.0.2](/dev/reference/tools/data-migration/releases/1.0.2.md)
+          - [1.0.3](/dev/reference/tools/data-migration/releases/1.0.3.md)
     + TiDB Lightning
       - [Overview](/dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/dev/reference/tools/tidb-lightning/deployment.md)
@@ -410,7 +421,12 @@
 - [Adopters](/dev/adopters.md)
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
+  + v3.1
+    - [3.1.0-beta](/dev/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.8](/dev/releases/3.0.8.md)
+    - [3.0.7](/dev/releases/3.0.7.md)
+    - [3.0.6](/dev/releases/3.0.6.md)
     - [3.0.5](/dev/releases/3.0.5.md)
     - [3.0.4](/dev/releases/3.0.4.md)
     - [3.0.3](/dev/releases/3.0.3.md)
@@ -423,6 +439,7 @@
     - [3.0.0-beta.1](/dev/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/dev/releases/3.0beta.md)
   + v2.1
+    - [2.1.19](/dev/releases/2.1.19.md)
     - [2.1.18](/dev/releases/2.1.18.md)
     - [2.1.17](/dev/releases/2.1.17.md)
     - [2.1.16](/dev/releases/2.1.16.md)

@@ -80,9 +80,10 @@ It is recommended to provision at least 8 to 16 cores on per machine for Spark. 
 See the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website. The following is an example based on the `spark-env.sh` configuration:
 
 ```sh
-SPARK_EXECUTOR_MEMORY = 32g
-SPARK_WORKER_MEMORY = 32g
-SPARK_WORKER_CORES = 8
+SPARK_EXECUTOR_CORES: 5
+SPARK_EXECUTOR_MEMORY: 10g
+SPARK_WORKER_CORES: 5
+SPARK_WORKER_MEMORY: 10g
 ```
 
 ### Configuration of hybrid deployment of TiKV and TiSpark
@@ -91,7 +92,7 @@ For the hybrid deployment of TiKV and TiSpark, add TiSpark required resources to
 
 ## Deploy the TiSpark cluster
 
-Download TiSpark's jar package [here](http://download.pingcap.org/tispark-0.1.0-SNAPSHOT-jar-with-dependencies.jar).
+Download TiSpark's jar package [here](https://download.pingcap.org/tispark-0.1.0-SNAPSHOT-jar-with-dependencies.jar).
 
 ### Deploy TiSpark on the existing Spark cluster
 
