@@ -154,7 +154,11 @@ In environments of development, testing and production, the requirements on serv
 
 1. Obtain `initial_commit_ts`.
 
-    Run the following command to use `binlogctl` to generate the `tso` information which is needed for the initial start of Drainer:
+    In TiDB 3.0.6 or later versions, if the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`. Otherwise, refer to the following methods to obtain the latest timestamp.
+
+    If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery and must use the timestamp of the full backup.
+
+    To obtain a latest timestamp, run the following command to use `binlogctl` to generate the `tso` information which is needed for the initial start of Drainer:
 
     {{< copyable "shell-regular" >}}
 
@@ -213,7 +217,7 @@ In environments of development, testing and production, the requirements on serv
 
         ```toml
         # downstream storage, equal to --dest-db-type
-        # Valid values are "mysql", "file", "tidb", "kafka", and "flash".
+        # Valid values are "mysql", "file", "tidb", and "kafka".
         db-type = "mysql"
 
         # the downstream MySQL protocol database
@@ -241,7 +245,7 @@ In environments of development, testing and production, the requirements on serv
 
         ```toml
         # downstream storage, equal to --dest-db-type
-        # Valid values are "mysql", "file", "tidb", "kafka", and "flash".
+        # Valid values are "mysql", "file", "tidb", and "kafka".
         db-type = "file"
 
         # Uncomment this if you want to use "file" as "db-type".
@@ -437,7 +441,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         -c int
             the number of the concurrency of the downstream for replication. The bigger the value, the better throughput performance of the concurrency ("1" by default).
         -cache-binlog-count int
-            the limit on the number of binlog items in the cache ("512" by default)
+            the limit on the number of binlog items in the cache ("8" by default)
             If a large single binlog item in the upstream causes OOM in Drainer, try to lower the value of this parameter to reduce memory usage.
         -config string
             the directory of the configuration file. Drainer reads the configuration file first.
@@ -446,7 +450,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
             the directory where the Drainer data is stored ("data.drainer" by default)
         -dest-db-type string
             the downstream service type of Drainer
-            The value can be "mysql", "tidb", "kafka", "file", and "flash". ("mysql" by default)
+            The value can be "mysql", "tidb", "kafka", and "file". ("mysql" by default)
         -detect-interval int
             the interval of checking the online Pump in PD ("10" by default, in seconds)
         -disable-detect
@@ -458,7 +462,8 @@ The following part shows how to use Pump and Drainer based on the nodes above.
             the db filter list ("INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql,test" by default)
             It does not support the Rename DDL operation on tables of `ignore schemas`.
         -initial-commit-ts
-            If Drainer does not have the related breakpoint information, you can configure the related breakpoint information using this parameter. ("0" by default)
+            If Drainer does not have the related breakpoint information, you can configure the related breakpoint information using this parameter. (In TiDB 3.0.6 or later versions, the value of this parameter is `-1` by default; Before TiDB 3.0.6, the value is `0` by default.)
+            If the value of this parameter is `-1`, Drainer automatically obtains the latest timestamp from PD.
         -log-file string
             the path of the log file
         -log-rotate string
@@ -538,7 +543,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         safe-mode = false
 
         # the downstream service type of Drainer ("mysql" by default)
-        # Valid value: "mysql", "kafka", "file", "flash"
+        # Valid value: "mysql", "file", "tidb", and "kafka".
         db-type = "mysql"
 
         # If `commit ts` of the transaction is in the list, the transaction is filtered and not replicated to the downstream.
@@ -575,8 +580,18 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         port = 3306
 
         [syncer.to.checkpoint]
-        # When the downstream is MySQL or TiDB, this option can be enabled to change the database that holds the checkpoint
+        # When the checkpoint type is "mysql" or "tidb", this option can be enabled to change the database that saves the checkpoint
         # schema = "tidb_binlog"
+        # Currently only the "mysql" and "tidb" checkpoint types are supported
+        # You can remove the comment tag to control where to save the checkpoint
+        # The default method of saving the checkpoint for the downstream db-type:
+        # mysql/tidb -> in the downstream MySQL or TiDB database
+        # file/kafka -> file in `data-dir`
+        # type = "mysql"
+        # host = "127.0.0.1"
+        # user = "root"
+        # password = ""
+        # port = 3306
 
         # the directory where the binlog file is stored when `db-type` is set to `file`
         # [syncer.to]

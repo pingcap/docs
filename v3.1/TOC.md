@@ -47,6 +47,7 @@
     - [Read Historical Data](/v3.1/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v3.1/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v3.1/how-to/get-started/data-migration.md)
+    - [TiDB Lightning Tutorial](/v3.1/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/v3.1/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v3.1/how-to/deploy/hardware-recommendations.md)
@@ -81,14 +82,15 @@
     - [Migrate from CSV](/v3.1/reference/tools/tidb-lightning/csv.md)
   + Maintain
     - [Common Ansible Operations](/v3.1/how-to/deploy/orchestrated/ansible-operations.md)
-    - [Backup and Restore](/v3.1/how-to/maintain/backup-and-restore.md)
+    + Backup and Restore
+      - [Use `mydumper` and `loader`](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md)
+      - [Use BR](/v3.1/how-to/maintain/backup-and-restore/br.md)
     - [Identify Slow Queries](/v3.1/how-to/maintain/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/v3.1/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.1/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to TiDB 3.0](/v3.1/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/v3.1/how-to/upgrade/rolling-updates-with-ansible.md)
+    - [Upgrade to TiDB 3.1](/v3.1/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v3.1/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/v3.1/how-to/troubleshoot/tidb-lightning.md)
@@ -153,6 +155,7 @@
       - [Window Functions](/v3.1/reference/sql/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](/v3.1/reference/sql/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/v3.1/reference/sql/functions-and-operators/precision-math.md)
+      - [List of Expressions for Pushdown](/v3.1/reference/sql/functions-and-operators/expressions-pushed-down.md)
     + SQL Statements
       - [`ADD COLUMN`](/v3.1/reference/sql/statements/add-column.md)
       - [`ADD INDEX`](/v3.1/reference/sql/statements/add-index.md)
@@ -271,6 +274,7 @@
     - [Understanding the Query Execution Plan](/v3.1/reference/performance/understanding-the-query-execution-plan.md)
     - [Introduction to Statistics](/v3.1/reference/performance/statistics.md)
     - [Optimizer Hints](/v3.1/reference/performance/optimizer-hints.md)
+    - [Follower Read](/v3.1/reference/performance/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/v3.1/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/v3.1/reference/performance/execution-plan-bind.md)
     - [Statement Summary Table](/v3.1/reference/performance/statement-summary.md)
@@ -281,7 +285,10 @@
     - [PD](/v3.1/reference/key-monitoring-metrics/pd-dashboard.md)
     - [TiKV](/v3.1/reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Alert Rules](/v3.1/reference/alert-rules.md)
-  - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
+  + Best Practices
+    - [Highly Concurrent Write Best Practices](/v3.1/reference/best-practices/high-concurrency.md)
+    - [HAproxy Best Practices](/v3.1/reference/best-practices/haproxy.md)
+    - [PD Scheduling Best Practices](/v3.1/reference/best-practices/pd-scheduling.md)
   - [TiSpark](/v3.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.1/reference/tidb-binlog/overview.md)
@@ -306,7 +313,6 @@
         - [Table Routing](/v3.1/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v3.1/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/v3.1/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/v3.1/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/v3.1/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/v3.1/reference/tools/data-migration/features/shard-merge.md)
@@ -315,6 +321,7 @@
       + Usage Scenarios
         - [Simple Scenario](/v3.1/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/v3.1/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/v3.1/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/v3.1/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v3.1/reference/tools/data-migration/configure/overview.md)
@@ -335,6 +342,10 @@
         - [Error Description](/v3.1/reference/tools/data-migration/troubleshoot/error-system.md)
         - [Error Handling](/v3.1/reference/tools/data-migration/troubleshoot/error-handling.md)
       - [FAQ](/v3.1/reference/tools/data-migration/faq.md)
+      + Releases
+        + v1.0
+          - [1.0.2](/v3.1/reference/tools/data-migration/releases/1.0.2.md)
+          - [1.0.3](/v3.1/reference/tools/data-migration/releases/1.0.3.md)
     + TiDB Lightning
       - [Overview](/v3.1/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v3.1/reference/tools/tidb-lightning/deployment.md)
@@ -403,7 +414,12 @@
 - [Adopters](/v3.1/adopters.md)
 - [Roadmap](/v3.1/roadmap.md)
 + [Releases](/v3.1/releases/rn.md)
+  + v3.1
+    - [3.1.0-beta](/v3.1/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.8](/v3.1/releases/3.0.8.md)
+    - [3.0.7](/v3.1/releases/3.0.7.md)
+    - [3.0.6](/v3.1/releases/3.0.6.md)
     - [3.0.5](/v3.1/releases/3.0.5.md)
     - [3.0.4](/v3.1/releases/3.0.4.md)
     - [3.0.3](/v3.1/releases/3.0.3.md)
@@ -416,6 +432,7 @@
     - [3.0.0-beta.1](/v3.1/releases/3.0.0-beta.1.md)
     - [3.0.0-beta](/v3.1/releases/3.0beta.md)
   + v2.1
+    - [2.1.19](/v3.1/releases/2.1.19.md)
     - [2.1.18](/v3.1/releases/2.1.18.md)
     - [2.1.17](/v3.1/releases/2.1.17.md)
     - [2.1.16](/v3.1/releases/2.1.16.md)

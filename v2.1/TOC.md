@@ -41,6 +41,7 @@
     - [Read Historical Data](/v2.1/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/v2.1/how-to/get-started/tidb-binlog.md)
     - [TiDB Data Migration Tutorial](/v2.1/how-to/get-started/data-migration.md)
+    - [TiDB Lightning Tutorial](/v2.1/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/v2.1/how-to/get-started/tispark.md)
   + Deploy
     - [Hardware Recommendations](/v2.1/how-to/deploy/hardware-recommendations.md)
@@ -82,7 +83,6 @@
     - [Scale a TiDB Cluster](/v2.1/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade to TiDB 2.1](/v2.1/how-to/upgrade/from-previous-version.md)
-    - [Rolling updates with Ansible](/v2.1/how-to/upgrade/rolling-updates-with-ansible.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/v2.1/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/v2.1/how-to/troubleshoot/tidb-lightning.md)
@@ -258,7 +258,9 @@
     - [PD](/v2.1/reference/key-monitoring-metrics/pd-dashboard.md)
     - [TiKV](/v2.1/reference/key-monitoring-metrics/tikv-dashboard.md)
   - [Alert Rules](/v2.1/reference/alert-rules.md)
-  - [Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
+  + Best Practices
+    - [HAProxy Best Practices](/v2.1/reference/best-practices/haproxy.md)
+    - [PD Scheduling Best Practices](/v2.1/reference/best-practices/pd-scheduling.md)
   - [TiSpark](/v2.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v2.1/reference/tidb-binlog/overview.md)
@@ -283,7 +285,6 @@
         - [Table Routing](/v2.1/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/v2.1/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/v2.1/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Column Mapping](/v2.1/reference/tools/data-migration/features/overview.md#column-mapping)
         - [Replication Delay Monitoring](/v2.1/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
         + Sharding Support
           - [Introduction](/v2.1/reference/tools/data-migration/features/shard-merge.md)
@@ -292,6 +293,7 @@
       + Usage Scenarios
         - [Simple Scenario](/v2.1/reference/tools/data-migration/usage-scenarios/simple-replication.md)
         - [Shard Merge Scenario](/v2.1/reference/tools/data-migration/usage-scenarios/shard-merge.md)
+        - [Shard Merge Best Practices](/v2.1/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
       - [Deploy](/v2.1/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v2.1/reference/tools/data-migration/configure/overview.md)
@@ -312,6 +314,10 @@
         - [Error Description](/v2.1/reference/tools/data-migration/troubleshoot/error-system.md)
         - [Error Handling](/v2.1/reference/tools/data-migration/troubleshoot/error-handling.md)
       - [FAQ](/v2.1/reference/tools/data-migration/faq.md)
+      + Releases
+        + v1.0
+          - [1.0.2](/v2.1/reference/tools/data-migration/releases/1.0.2.md)
+          - [1.0.3](/v2.1/reference/tools/data-migration/releases/1.0.3.md)
     + TiDB Lightning
       - [Overview](/v2.1/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v2.1/reference/tools/tidb-lightning/deployment.md)
@@ -341,6 +347,7 @@
 - [Roadmap](/v2.1/roadmap.md)
 + [Releases](/v2.1/releases/rn.md)
   + v2.1
+    - [2.1.19](/v2.1/releases/2.1.19.md)
     - [2.1.18](/v2.1/releases/2.1.18.md)
     - [2.1.17](/v2.1/releases/2.1.17.md)
     - [2.1.16](/v2.1/releases/2.1.16.md)
