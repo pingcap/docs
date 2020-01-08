@@ -15,4 +15,4 @@ PRs have automatic linting from the CI. You can also run markdownlint yourself l
 
 To keep a consistent figure style, you are recommended to use [Figma](https://www.figma.com/) to design a figure.
 
-See [Figma Quick Start Guide](figma-quick-start-guide.md).
+See [Figma Quick Start Guide](/resources/figma-quick-start-guide.md).
