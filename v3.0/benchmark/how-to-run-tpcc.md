@@ -50,7 +50,7 @@ Enter the `benchmarksql` directory and run `ant` to build:
 {{< copyable "shell-regular" >}}
 
 ```shell
-cd benchmarksql
+cd benchmarksql &&
 ant
 ```
 
