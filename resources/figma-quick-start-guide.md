@@ -85,7 +85,7 @@ You are recommended to copy and paste the existing objects within other Frames i
 
     ![Eyedropper](/media/eyedropper.png)
 
-3. Use the eyedropper to hover over the color in the Frame you want to sample. The magnifier window will show you both the color and hex code of the sampled pixel. 
+3. Use the eyedropper to hover over the color in the Frame you want to sample. The magnifier window will show you both the color and hex code of the sampled pixel.
 
     ![Magnifier window](/media/magnifier-window.png)
 
