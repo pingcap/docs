@@ -131,6 +131,8 @@ It is not recommended to directly use `nohup` in the command line to start `tidb
 
 If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. You can force the cluster back to "normal mode" using the following command:
 
+{{< copyable "shell-regular" >}}
+
 ```sh
 tidb-lightning-ctl --switch-mode=normal
 ```
@@ -163,6 +165,8 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 ## How to completely destroy all intermediate data associated with TiDB Lightning?
 
 1. Delete the checkpoint file
+
+    {{< copyable "shell-regular" >}}
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-remove=all

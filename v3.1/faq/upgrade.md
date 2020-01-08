@@ -79,6 +79,8 @@ alter table t change column a a varchar(22) character set utf8;
 
 - According to Point #2, you can obtain the metadata of the table through the HTTP API, and find the column charset by searching the column name and the keyword "Charset".
 
+    {{< copyable "shell-regular" >}}
+
     ```sh
     curl "http://$IP:10080/schema/test/t" | python -m json.tool  # A python tool is used here to format JSON, which is not required and only for the convenience to add comments.
     {
@@ -284,6 +286,8 @@ Solution:
     Starting from v2.1.5, you can set `tidb_check_mb4_value_in_utf8` through the HTTP API and the session variable:
 
     * HTTP API（the HTTP API can be enabled only on a single server）
+
+        {{< copyable "shell-regular" >}}
 
         ```sh
         # Enabled.

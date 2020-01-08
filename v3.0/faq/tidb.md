@@ -280,11 +280,15 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
 
 - Random Read test:
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randread -size=10G -filename=fio_randread_test.txt -name='fio randread test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_result.json
     ```
 
 - The mix test of sequential Write and random Read:
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
@@ -849,6 +853,8 @@ In Sqoop, `--batch` means committing 100 `statement`s in each batch, but by defa
 Two solutions:
 
 - Add the `-Dsqoop.export.records.per.statement=10` option as follows:
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     sqoop export \

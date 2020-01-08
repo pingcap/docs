@@ -107,6 +107,8 @@ It is not recommended to directly use `nohup` in the command line to start `tidb
 
 If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. You can force the cluster back to "normal mode" using the following command:
 
+{{< copyable "shell-regular" >}}
+
 ```sh
 tidb-lightning-ctl --switch-mode=normal
 ```
