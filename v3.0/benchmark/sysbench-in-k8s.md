@@ -125,7 +125,7 @@ The core is configured as below:
 {{< copyable "shell-regular" >}}
 
 ```shell
-sysctl net.core.somaxconn=32768 && \
+sysctl net.core.somaxconn=32768 &&
 sysctl vm.swappiness=0 && \
 sysctl net.ipv4.tcp_syncookies=0
 ```
