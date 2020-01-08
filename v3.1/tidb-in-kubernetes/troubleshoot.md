@@ -349,7 +349,7 @@ If the idle timeout is not long enough for your query, try to set the timeout to
 
 In Linux, the keepalive probe packet is sent every 7,200 seconds by default. To shorten the interval, configure `sysctls` via the `podSecurityContext` field.
 
-- If `--allowed-unsafe-sysctls=net.*` is configurable in [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) in the Kubernetes cluster, configure this parameter in kubelet and configure TiDB in the following way:
+- If `--allowed-unsafe-sysctls=net.*` can be configured for [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) in the Kubernetes cluster, configure this parameter for kubelet and configure TiDB in the following way:
 
     {{< copyable "" >}}
 
@@ -362,7 +362,7 @@ In Linux, the keepalive probe packet is sent every 7,200 seconds by default. To 
           value: "300"
     ```
 
-- If `--allowed-unsafe-sysctls=net.*` is not configurable in kubelet, configure TiDB in the following way:
+- If `--allowed-unsafe-sysctls=net.*` cannot be configured for kubelet, configure TiDB in the following way:
 
     {{< copyable "" >}}
 
