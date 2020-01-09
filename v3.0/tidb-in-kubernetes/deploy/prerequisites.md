@@ -100,7 +100,7 @@ cat /proc/irq/<ir_num>/smp_affinity_list
 
 The above command outputs the decimal value corresponding to the CPU serial number, and the output result is more intuitive.
 
-If all interrupts of a multi-queue network card are assigned to different CPUs, the SMP IRQ Affinity is correctly configured on the machine. If all interrupts are sent to the same CPU, make adjustment according to the following two methods:
+If all interrupts of a multi-queue network card are assigned to different CPUs, the SMP IRQ Affinity is correctly configured on the machine. If all interrupts are sent to the same CPU, make adjustment according to the following two methods. These methods are for the scenario of multi-queue network card and multiple cores.
 
 + Method 1: Enable the [irqbalance](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-tool_reference-irqbalance) service. Use the following command to enable the service on CentOS 7:
 
@@ -112,7 +112,7 @@ If all interrupts of a multi-queue network card are assigned to different CPUs, 
 
 + Method 2: Disable irqbalance and customize the binding relationship between interrupts and CPUs. Refer to the [set_irq_affinity.sh](https://gist.githubusercontent.com/SaveTheRbtz/8875474/raw/0c6e500e81e161505d9111ac77115a2367180d12/set_irq_affinity.sh) script for more details.
 
-The above methods are for the scenario of multi-queue network card and multiple cores. However, for the scenario of single-queue network card and multiple cores, the configuration method is different. In this scenario, you can use [RPS/RFS](https://www.kernel.org/doc/Documentation/networking/scaling.txt) to simulate the Receive Side Scaling (RSS) feature of the network card at the software level. In this scenario, do not use the irqbalance service as described in Method 1. Instead, use the [script](https://gist.githubusercontent.com/SaveTheRbtz/8875474/raw/0c6e500e81e161505d9111ac77115a2367180d12/set_irq_affinity.sh) provided in Method 2 to configure RPS. For the configuration of RFS, refer to [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-networking-configuration_tools#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Configuration_tools-Configuring_Receive_Flow_Steering_RFS).
+For the scenario of single-queue network card and multiple cores, the configuration method is different. In this scenario, you can use [RPS/RFS](https://www.kernel.org/doc/Documentation/networking/scaling.txt) to simulate the Receive Side Scaling (RSS) feature of the network card at the software level. In this scenario, do not use the irqbalance service as described in Method 1. Instead, use the [script](https://gist.githubusercontent.com/SaveTheRbtz/8875474/raw/0c6e500e81e161505d9111ac77115a2367180d12/set_irq_affinity.sh) provided in Method 2 to configure RPS. For the configuration of RFS, refer to [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-networking-configuration_tools#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Configuration_tools-Configuring_Receive_Flow_Steering_RFS).
 
 ## Hardware and deployment requirements
 
