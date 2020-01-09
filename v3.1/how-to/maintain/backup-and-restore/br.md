@@ -61,19 +61,19 @@ If checksum is enabled when you execute the backup command, BR calculates the ch
 
 #### Types of backup files
 
-There are two types of backup files generated in the path where backup files are stored:
+Two types of backup files are generated in the path where backup files are stored:
 
-- **The SST file** stores the data that the TiKV node backed up.
-- **The `backupmeta` file** stores the metadata of this backup operation, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
+- **The SST file**: stores the data that the TiKV node backed up.
+- **The `backupmeta` file**: stores the metadata of this backup operation, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
 
-#### The name format of the SST file
+#### The format of the SST file name
 
 The SST file is named in the format of `storeID_regionID_regionEpoch_keyHash_cf`, where
 
 - `storeID` is the TiKV node ID;
 - `regionID` is the Region ID;
 - `regionEpoch` is the version number of the Region;
-- `keyHash` is the Hash (sha256) value of Range `startKey` which ensures uniqueness;
+- `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures uniqueness of a key;
 - `cf` indicates the [Column Family](/v3.1/reference/performance/tune-tikv.md#tune-tikv-performance) of RocksDB (`default` or `write` by default).
 
 ### Restoration principle
