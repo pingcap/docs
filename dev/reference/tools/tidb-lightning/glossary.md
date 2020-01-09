@@ -176,7 +176,7 @@ The [checksum](/dev/reference/tools/tidb-lightning/glossary.md#checksum) of a ta
 
 ### Scattering
 
-An operation which randomly reassigns the leader and the peers of a [region](/dev/glossary.md#regionpeerraft-group). Scattering ensures that the imported data are distributed evenly among TiKV stores. This reduces stress on PD.
+An operation that randomly reassigns the leader and the peers of a [Region](/dev/glossary.md#regionpeerraft-group). Scattering ensures that the imported data are distributed evenly among TiKV stores. This reduces stress on PD.
 
 ### Splitting
 
