@@ -6,9 +6,9 @@ category: reference
 
 # TiDB Lightning Deployment
 
-This document describes the hardware requirements of TiDB Lightning using the default Importer-back-end, and how to deploy it using Ansible or manually.
+This document describes the hardware requirements of TiDB Lightning using the default Importer-backend, and how to deploy it using Ansible or manually.
 
-If you wish to use the TiDB-back-end, also read [TiDB Lightning TiDB-Back-End](/v3.1/reference/tools/tidb-lightning/tidb-backend.md) for the changes to the deployment steps.
+If you wish to use the TiDB-backend, also read [TiDB Lightning TiDB-Backend](/v3.1/reference/tools/tidb-lightning/tidb-backend.md) for the changes to the deployment steps.
 
 ## Notes
 
@@ -246,9 +246,9 @@ Refer to the [TiDB enterprise tools download page](/v3.1/reference/tools/downloa
     file = "tidb-lightning.log"
 
     [tikv-importer]
-    # Delivery back end, can be "importer" or "tidb".
+    # Delivery backend, can be "importer" or "tidb".
     # backend = "importer"
-    # The listening address of tikv-importer when back end is "importer". Change it to the actual address.
+    # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
     addr = "172.16.31.10:8287"
 
     [mydumper]
