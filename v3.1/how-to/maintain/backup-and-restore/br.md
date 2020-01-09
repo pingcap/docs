@@ -132,7 +132,7 @@ A `br` command consists of multiple layers of sub-commands. Currently, BR has th
 Each of the above three sub-commands might still include the following three sub-commands to specify the scope of an operation:
 
 * `full`: used to back up or restore all the cluster data.
-* `db`: used to backup or restore the specified database of the cluster.
+* `db`: used to back up or restore the specified database of the cluster.
 * `table`: used to back up or restore a single table in the specified database of the cluster.
 
 ### Common options
