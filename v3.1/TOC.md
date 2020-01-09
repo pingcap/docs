@@ -298,6 +298,9 @@
     - [Upgrade](/v3.1/reference/tidb-binlog/upgrade.md)
     - [Reparo](/v3.1/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/v3.1/reference/tidb-binlog/binlog-slave-client.md)
+    + Troubleshoot
+      - [Troubleshooting](/v3.1/reference/tidb-binlog/troubleshoot/binlog.md)
+      - [Error Handling](/v3.1/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/v3.1/reference/tidb-binlog/faq.md)
   + Tools
     - [Mydumper](/v3.1/reference/tools/mydumper.md)
@@ -418,6 +421,7 @@
   + v3.1
     - [3.1.0-beta](/v3.1/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.8](/v3.1/releases/3.0.8.md)
     - [3.0.7](/v3.1/releases/3.0.7.md)
     - [3.0.6](/v3.1/releases/3.0.6.md)
     - [3.0.5](/v3.1/releases/3.0.5.md)
