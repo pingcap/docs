@@ -85,7 +85,7 @@ alter table t change column a a varchar(22) character set utf8;
     curl "http://$IP:10080/schema/test/t" | python -m json.tool
     ```
 
-    Here the python tool is used to format JSON, which is not required and only for the convenience to add comments.
+    A python tool is used here to format JSON, which is not required and only for the convenience to add the comments.
 
     ```json
     {
