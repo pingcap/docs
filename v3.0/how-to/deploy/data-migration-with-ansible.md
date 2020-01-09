@@ -35,15 +35,19 @@ Log in to the Control Machine using the `root` user account, and run the corresp
 
 - If you use a Control Machine installed with CentOS 7, run the following command:
 
+    {{< copyable "shell-root" >}}
+
     ```
-    # yum -y install epel-release git curl sshpass
-    # yum -y install python-pip
+    yum -y install epel-release git curl sshpass &&
+    yum -y install python-pip
     ```
 
 - If you use a Control Machine installed with Ubuntu, run the following command:
 
+    {{< copyable "shell-root" >}}
+
     ```
-    # apt-get -y install git curl sshpass python-pip
+    apt-get -y install git curl sshpass python-pip
     ```
 
 ## Step 2: Create the `tidb` user on the Control Machine and generate the SSH key
@@ -52,20 +56,26 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 1. Create the `tidb` user.
 
+    {{< copyable "shell-root" >}}
+
     ```
-    # useradd -m -d /home/tidb tidb
+    useradd -m -d /home/tidb tidb
     ```
 
 2. Set a password for the `tidb` user account.
 
+    {{< copyable "shell-root" >}}
+
     ```
-    # passwd tidb
+    passwd tidb
     ```
 
 3. Configure sudo without password for the `tidb` user account by adding `tidb ALL=(ALL) NOPASSWD: ALL` to the end of the sudo file:
 
+    {{< copyable "shell-root" >}}
+
     ```
-    # visudo
+    visudo &&
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
@@ -73,8 +83,10 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
     Execute the `su` command to switch the user from `root` to `tidb`.
 
+    {{< copyable "shell-root" >}}
+
     ```
-    # su - tidb
+    su - tidb
     ```
 
     Create the SSH key for the `tidb` user account and hit the <kbd>Enter</kbd> key when `Enter passphrase` is prompted. After successful execution, the SSH private key file is `/home/tidb/.ssh/id_rsa`, and the SSH public key file is `/home/tidb/.ssh/id_rsa.pub`.
@@ -112,8 +124,10 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
 
 2. Run the following command to download DM-Ansible.
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ wget https://download.pingcap.org/dm-ansible-{version}.tar.gz
+    wget https://download.pingcap.org/dm-ansible-{version}.tar.gz
     ```
 
     `{version}` is the DM version that you expect to download, like `v1.0.1` and `v1.0.2`.
@@ -128,19 +142,26 @@ It is required to use `pip` to install Ansible and its dependencies, otherwise a
 
 1. Install DM-Ansible and the dependencies on the Control Machine:
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ tar -xzvf dm-ansible-{version}.tar.gz
-    $ mv dm-ansible-{version} dm-ansible
-    $ cd /home/tidb/dm-ansible
-    $ sudo pip install -r ./requirements.txt
+    tar -xzvf dm-ansible-{version}.tar.gz &&
+    mv dm-ansible-{version} dm-ansible &&
+    cd /home/tidb/dm-ansible &&
+    sudo pip install -r ./requirements.txt
     ```
 
     Ansible and the related dependencies are in the `dm-ansible/requirements.txt` file.
 
 2. View the version of Ansible:
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible --version
+    ansible --version
+    ```
+
+    ```
     ansible 2.5.0
     ```
 
@@ -164,8 +185,10 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
 
 2. Run the following command and input the password of the `root` user account of your deployment target machines.
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    $ ansible-playbook -i hosts.ini create_users.yml -u root -k
+    ansible-playbook -i hosts.ini create_users.yml -u root -k
     ```
 
     This step creates the `tidb` user account on the deployment target machines, configures the sudo rules and the SSH mutual trust between the Control Machine and the deployment target machines.
@@ -173,6 +196,8 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
 ## Step 6: Download DM and the monitoring component installation package to the Control Machine
 
 Make sure the Control Machine is connected to the Internet and run the following command:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 ansible-playbook local_prepare.yml
@@ -313,9 +338,11 @@ For details about the `deploy_dir` configuration, see [Configure the deployment 
 
 Assuming that the upstream MySQL user password is `123456`, configure the generated string to the `mysql_password` variable of DM-worker.
 
+{{< copyable "shell-regular" >}}
+
 ```bash
-$ cd /home/tidb/dm-ansible/resources/bin
-$ ./dmctl -encrypt 123456
+cd /home/tidb/dm-ansible/resources/bin &&
+./dmctl -encrypt 123456 &&
 VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=
 ```
 
@@ -399,11 +426,15 @@ The following example uses `tidb` as the user who runs the service.
 
     Run the following command and if all servers return `tidb`, then the SSH mutual trust is successfully configured:
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
     ansible -i inventory.ini all -m shell -a 'whoami'
     ```
 
     Run the following command and if all servers return `root`, then sudo without password of the `tidb` user is successfully configured:
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     ansible -i inventory.ini all -m shell -a 'whoami' -b
@@ -411,11 +442,15 @@ The following example uses `tidb` as the user who runs the service.
 
 2. Modify kernel parameters, and deploy the DM cluster components and monitoring components.
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
     ansible-playbook deploy.yml
     ```
 
 3. Start the DM cluster.
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     ansible-playbook start.yml
@@ -427,8 +462,10 @@ The following example uses `tidb` as the user who runs the service.
 
 If you need to stop the DM cluster, run the following command:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
-$ ansible-playbook stop.yml
+ansible-playbook stop.yml
 ```
 
 This operation stops all the components in the entire DM cluster in order, which include DM-master, DM-worker, and the monitoring components.
@@ -457,36 +494,46 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
 
 1. Log in to the Control Machine using the `tidb` account, enter the `/home/tidb` directory, and back up the `dm-ansible` folder.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ cd /home/tidb
-    $ mv dm-ansible dm-ansible-bak
+    cd /home/tidb &&
+    mv dm-ansible dm-ansible-bak
     ```
 
 2. Download the specified version of DM-Ansible and extract it.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ cd /home/tidb
-    $ wget https://download.pingcap.org/dm-ansible-{version}.tar.gz
-    $ tar -xzvf dm-ansible-{version}.tar.gz
-    $ mv dm-ansible-{version} dm-ansible
+    cd /home/tidb &&
+    wget https://download.pingcap.org/dm-ansible-{version}.tar.gz &&
+    tar -xzvf dm-ansible-{version}.tar.gz &&
+    mv dm-ansible-{version} dm-ansible
     ```
 
 3. Migrate the `inventory.ini` configuration file.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ cd /home/tidb
-    $ cp dm-ansible-bak/inventory.ini dm-ansible/inventory.ini
+    cd /home/tidb &&
+    cp dm-ansible-bak/inventory.ini dm-ansible/inventory.ini
     ```
 
 4. Migrate the `dmctl` configuration.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ cd /home/tidb/dm-ansible-bak/dmctl
-    $ cp * /home/tidb/dm-ansible/dmctl/
+    cd /home/tidb/dm-ansible-bak/dmctl &&
+    cp * /home/tidb/dm-ansible/dmctl/
     ```
 
 5. Use Playbook to download the latest DM binary file, which substitutes for the binary file in the  `/home/tidb/dm-ansible/resource/bin/` directory automatically.
 
+    {{< copyable "shell-regular" >}}
+
     ```
-    $ ansible-playbook local_prepare.yml
+    ansible-playbook local_prepare.yml
     ```

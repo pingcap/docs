@@ -15,17 +15,23 @@ The time zone in TiDB is decided by the global `time_zone` system variable and t
 
 You can use the following statement to set the global server `time_zone` value at runtime:
 
+{{< copyable "sql" >}}
+
 ```sql
 mysql> SET GLOBAL time_zone = timezone;
 ```
 
 Each client has its own time zone setting, given by the session `time_zone` variable. Initially, the session variable takes its value from the global `time_zone` variable, but the client can change its own time zone with this statement:
 
+{{< copyable "sql" >}}
+
 ```sql
 mysql> SET time_zone = timezone;
 ```
 
 You can use the following statement to view the current values of the global and client-specific time zones:
+
+{{< copyable "sql" >}}
 
 ```sql
 mysql> SELECT @@global.time_zone, @@session.time_zone;
@@ -42,6 +48,8 @@ The current session time zone setting affects the display and storage of time va
 > **Note:**
 >
 > Only the values of the Timestamp data type is affected by time zone. This is because the Timestamp data type uses the literal value + time zone information. Other data types, such as Datetime/Date/Time, do not have time zone information, thus their values are not affected by the changes of time zone.
+
+{{< copyable "sql" >}}
 
 ```sql
 mysql> create table t (ts timestamp, dt datetime);
