@@ -301,7 +301,7 @@
     - [Reparo](/dev/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/dev/reference/tidb-binlog/binlog-slave-client.md)
     + Troubleshoot
-      - [TiDB Binlog Troubleshooting](/dev/reference/tidb-binlog/troubleshoot/binlog.md)
+      - [Troubleshooting](/dev/reference/tidb-binlog/troubleshoot/binlog.md)
       - [Error Handling](/dev/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/dev/reference/tidb-binlog/faq.md)
   + Tools

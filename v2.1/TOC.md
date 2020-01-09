@@ -271,7 +271,7 @@
     - [Reparo](/v2.1/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/v2.1/reference/tidb-binlog/binlog-slave-client.md)
     + Troubleshoot
-      - [TiDB Binlog Troubleshooting](/v2.1/reference/tidb-binlog/troubleshoot/binlog.md)
+      - [Troubleshooting](/v2.1/reference/tidb-binlog/troubleshoot/binlog.md)
       - [Error Handling](/v2.1/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/v2.1/reference/tidb-binlog/faq.md)
   + Tools

@@ -299,7 +299,7 @@
     - [Reparo](/v3.1/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/v3.1/reference/tidb-binlog/binlog-slave-client.md)
     + Troubleshoot
-      - [TiDB Binlog Troubleshooting](/v3.1/reference/tidb-binlog/troubleshoot/binlog.md)
+      - [Troubleshooting](/v3.1/reference/tidb-binlog/troubleshoot/binlog.md)
       - [Error Handling](/v3.1/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/v3.1/reference/tidb-binlog/faq.md)
   + Tools

@@ -10,7 +10,7 @@ This document introduces common errors that you might encounter and solutions to
 
 ## `kafka server: Message was too large, server rejected it to avoid allocation error` is returned when Drainer replicates data to Kafka
 
-Cause: Executing a large transaction in TiDB generates binlog data of large size, which might exceed Kafka's limit on message size.
+Cause: Executing a large transaction in TiDB generates binlog data of a large size, which might exceed Kafka's limit on the message size.
 
 Solution: Adjust the configuration parameters of Kafka as shown below:
 

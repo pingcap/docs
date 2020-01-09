@@ -11,10 +11,10 @@ This document describes how to troubleshoot TiDB Binlog to find the problem.
 
 If you encounter errors while running TiDB Binlog, take the following steps to troubleshoot:
 
-1. Check whether each monitoring metrics is normal or not. Refer to [TiDB Binlog Monitoring](/v2.1/reference/tidb-binlog/monitor.md) for details.
+1. Check whether each monitoring metric is normal or not. Refer to [TiDB Binlog Monitoring](/v2.1/reference/tidb-binlog/monitor.md) for details.
 
 2. Use the [binlogctl tool](/v2.1/reference/tidb-binlog/maintain.md#binlogctl-guide) to check whether the state of each Pump or Drainer node is normal or not.
 
 3. Check whether `ERROR` or `WARN` exists in the Pump log or Drainer log.
 
-After finding out the problem by the above steps, refer to [FAQ](/v2.1/reference/tidb-binlog/faq.md) and [TiDB Binlog Error Handling](/v2.1/reference/tidb-binlog/troubleshoot/error-handling.md) for the solution. If you fail to find the solution or the solution provided does not help, submit an [issue](https://github.com/pingcap/tidb-binlog/issues) or contact our technical staff for help.
+After finding out the problem by the above steps, refer to [FAQ](/v2.1/reference/tidb-binlog/faq.md) and [TiDB Binlog Error Handling](/v2.1/reference/tidb-binlog/troubleshoot/error-handling.md) for the solution. If you fail to find the solution or the solution provided does not help, submit an [issue](https://github.com/pingcap/tidb-binlog/issues) for help.
