@@ -157,6 +157,17 @@ In environments of development, testing and production, the requirements on serv
 
     If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery and must use the timestamp of the full backup.
 
+    If you use mydumper, you can get the timestamp by referring to the field `Pos` in the metadata file within the export directory. An example for the above metadata file is as follows:
+
+    ```
+    Started dump at: 2019-12-30 13:25:41
+    SHOW MASTER STATUS:
+            Log: tidb-binlog
+            Pos: 413580274257362947
+            GTID:
+    Finished dump at: 2019-12-30 13:25:41
+    ```
+
 2. Modify the `tidb-ansible/inventory.ini` file.
 
     Add the deployment machine IPs for `drainer_servers`. Set `initial_commit_ts` to the value you have obtained, which is only used for the initial start of Drainer.
@@ -624,6 +635,6 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 > - To enable the TiDB Binlog service in TiDB server, use the `-enable-binlog` startup parameter in TiDB, or add enable=true to the [binlog] section of the TiDB server configuration file.
 > - Make sure that the TiDB Binlog service is enabled in all TiDB instances in a same cluster, otherwise upstream and downstream data inconsistency might occur during data replication. If you want to temporarily run a TiDB instance where the TiDB Binlog service is not enabled, set `run_ddl=false` in the TiDB configuration file.
 > - Drainer does not support the `rename` DDL operation on the table of `ignore schemas` (the schemas in the filter list).
-> - If you want to start Drainer in an existing TiDB cluster, generally you need to make a full backup of the cluster data, obtain `savepoint`, import the data to the target database, and then start Drainer to replicate the incremental data from `savepoint`.
+> - If you want to start Drainer in an existing TiDB cluster, generally you need to make a full backup of the cluster data, obtain **snapshot timestamp**, import the data to the target database, and then start Drainer to replicate the incremental data from corresponding **snapshot timestamp**.
 > - When the downstream database is TiDB or MySQL, ensure that the `sql_mode` in the upstream and downstream databases are consistent. In other words, the `sql_mode` should be the same when each SQL statement is executed in the upstream and replicated to the downstream. You can execute the `select @@sql_mode;` statement in the upstream and downstream respectively to compare `sql_mode`.
 > - When a DDL statement is supported in the upstream but incompatible with the downstream, Drainer fails to replicate data. An example is to replicate the `CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;` statement when the downstream database MySQL uses the InnoDB engine. In this case, you can configure [skipping transactions](/v3.1/reference/tidb-binlog/faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database) in Drainer, and manually execute compatible statements in the downstream database.
