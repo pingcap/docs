@@ -27,10 +27,21 @@ To avoid this issue, you need to pay attention to:
     {{< copyable "sql" >}}
 
     ```sql
-    tidb > create table t(a varchar(10)) charset=utf8;
+    create table t(a varchar(10)) charset=utf8;
+    ```
+
+    ```
     Query OK, 0 rows affected
     Time: 0.106s
-    tidb > show create table t
+    ```
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    show create table t
+    ```
+
+    ```
     +-------+-------------------------------------------------------+
     | Table | Create Table                                          |
     +-------+-------------------------------------------------------+
@@ -47,7 +58,10 @@ To avoid this issue, you need to pay attention to:
     {{< copyable "sql" >}}
 
     ```sql
-    tidb > alter table t change column a a varchar(20);
+    alter table t change column a a varchar(20);
+    ```
+
+    ```
     ERROR 1105 (HY000): unsupported modify column charset utf8mb4 not match origin utf8
     ```
 
@@ -68,7 +82,7 @@ alter table t change column a a varchar(22) character set utf8;
     {{< copyable "shell-regular" >}}
 
     ```sh
-    curl "http://$IP:10080/schema/test/t" | python -m json.tool  
+    curl "http://$IP:10080/schema/test/t" | python -m json.tool
     ```
 
     Here the python tool is used to format JSON, which is not required and only for the convenience to add comments.
@@ -112,10 +126,21 @@ alter table t change column a a varchar(22) character set utf8;
     {{< copyable "sql" >}}
 
     ```sql
-    tidb > create table t(a varchar(10)) charset=utf8;
+    create table t(a varchar(10)) charset=utf8;
+    ```
+
+    ```
     Query OK, 0 rows affected
     Time: 0.109s
-    tidb > show create table t
+    ```
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    show create table t
+    ```
+
+    ```
     +-------+-------------------------------------------------------+
     | Table | Create Table                                          |
     +-------+-------------------------------------------------------+
@@ -132,7 +157,10 @@ alter table t change column a a varchar(22) character set utf8;
     {{< copyable "sql" >}}
 
     ```sql
-    tidb > show create table t
+    show create table t
+    ```
+
+    ```
     +-------+--------------------------------------------------------------------+
     | Table | Create Table                                                       |
     +-------+--------------------------------------------------------------------+
@@ -142,7 +170,15 @@ alter table t change column a a varchar(22) character set utf8;
     +-------+--------------------------------------------------------------------+
     1 row in set
     Time: 0.007s
-    tidb > alter table t change column a a varchar(20);
+    ```
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    alter table t change column a a varchar(20);
+    ```
+
+    ```
     ERROR 1105 (HY000): unsupported modify charset from utf8mb4 to utf8
     ```
 
@@ -195,9 +231,20 @@ Solution:
     {{< copyable "sql" >}}
 
     ```sql
-    tidb > set @@session.tidb_skip_utf8_check=1;
+    set @@session.tidb_skip_utf8_check=1;
+    ```
+
+    ```
     Query OK, 0 rows affected
-    tidb > insert t values (unhex('f09f8c80'));
+    ```
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    insert t values (unhex('f09f8c80'));
+    ```
+
+    ```
     Query OK, 1 row affected
     ```
 
@@ -206,9 +253,20 @@ Solution:
     {{< copyable "sql" >}}
 
     ```sql
-    tidb > alter table t change column a a varchar(100) character set utf8mb4;
+    alter table t change column a a varchar(100) character set utf8mb4;
+    ```
+
+    ```
     Query OK, 0 rows affected
-    tidb > insert t values (unhex('f09f8c80'));
+    ```
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    insert t values (unhex('f09f8c80'));
+    ```
+
+    ```
     Query OK, 1 row affected
     ```
 
