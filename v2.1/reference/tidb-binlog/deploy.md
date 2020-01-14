@@ -187,7 +187,6 @@ In environments of development, testing and production, the requirements on serv
     Finished dump at: 2019-12-30 13:25:41
     ```
 
-
 2. Modify the `tidb-ansible/inventory.ini` file.
 
     Add the deployment machine IPs for `drainer_servers`. Set `initial_commit_ts` to the value you have obtained, which is only used for the initial start of Drainer.
