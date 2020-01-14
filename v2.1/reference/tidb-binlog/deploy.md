@@ -154,7 +154,7 @@ In environments of development, testing and production, the requirements on serv
 
 1. Obtain `initial_commit_ts`.
 
-    For replication started from the latest time point, you can get the most recent timestamp by using `binlogctl`.
+    For replication started from the latest time point, you can get the most recent timestamp by using `binlogctl` as follows.
 
     Run the following command to generate the `TSO` (Timestamp Oracle) information which can provide globally unique timestamp and is needed for the initial start of Drainer:
 
