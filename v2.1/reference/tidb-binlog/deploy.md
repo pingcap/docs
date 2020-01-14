@@ -176,6 +176,18 @@ In environments of development, testing and production, the requirements on serv
 
     If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery and must use the timestamp of the full backup.
 
+    If you use mydumper, you can get the timestamp by referring to the field `Pos` in the metadata file from the export directory. An example of the metadata file is as follows:
+
+    ```
+    Started dump at: 2019-12-30 13:25:41
+    SHOW MASTER STATUS:
+            Log: tidb-binlog
+            Pos: 413580274257362947
+            GTID:
+    Finished dump at: 2019-12-30 13:25:41
+    ```
+
+
 2. Modify the `tidb-ansible/inventory.ini` file.
 
     Add the deployment machine IPs for `drainer_servers`. Set `initial_commit_ts` to the value you have obtained, which is only used for the initial start of Drainer.
