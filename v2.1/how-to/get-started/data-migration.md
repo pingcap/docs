@@ -41,8 +41,8 @@ We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-ser
     ```bash
     sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
     sudo yum install -y mysql-community-server
-    curl http://download.pingcap.org/tidb-v2.1-linux-amd64.tar.gz | tar xzf -
-    curl http://download.pingcap.org/dm-v1.0.2-linux-amd64.tar.gz | tar xzf -
+    curl https://download.pingcap.org/tidb-v2.1-linux-amd64.tar.gz | tar xzf -
+    curl https://download.pingcap.org/dm-v1.0.2-linux-amd64.tar.gz | tar xzf -
     curl -L https://github.com/pingcap/docs/raw/master/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
     ```
 
@@ -119,7 +119,7 @@ for i in 1 2 3
 do
     mysql -h 127.0.0.1 -P "$((3306+i))" -u root <<EoSQL
         create database dmtest1;
-        create table dmtest1.t1 (id bigint unsigned not null auto_increment primary key, c char(32), port int);
+        create table dmtest1.t1 (id bigint unsigned not null AUTO_INCREMENT primary key, c char(32), port int);
 EoSQL
 done
 ```
