@@ -8,7 +8,7 @@ category: tool
 
 ## About TiDB-Binlog
 
-TiDB-Binlog is a tool for enterprise users to collect binlog files for TiDB and provide real-time backup and replication.
+TiDB-Binlog is a tool for enterprise users to collect binlog files for TiDB and provide near real-time backup and replication.
 
 TiDB-Binlog supports the following scenarios:  
 
@@ -37,8 +37,8 @@ Drainer collects binlog files from each Pump node, converts them into specified 
 
 ```bash
 # Download the tool package.
-wget http://download.pingcap.org/tidb-binlog-latest-linux-amd64.tar.gz
-wget http://download.pingcap.org/tidb-binlog-latest-linux-amd64.sha256
+wget https://download.pingcap.org/tidb-binlog-latest-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-binlog-latest-linux-amd64.sha256
 
 # Check the file integrity. If the result is OK, the file is correct. 
 sha256sum -c tidb-binlog-latest-linux-amd64.sha256
