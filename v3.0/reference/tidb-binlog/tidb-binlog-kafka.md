@@ -11,7 +11,7 @@ This document describes how to deploy the Kafka version of TiDB Binlog.
 
 ## About TiDB Binlog
 
-TiDB Binlog is a tool for enterprise users to collect binlog files for TiDB and provide real-time backup and replication.
+TiDB Binlog is a tool for enterprise users to collect binlog files for TiDB and provide near real-time backup and replication.
 
 TiDB Binlog supports the following scenarios:
 
@@ -54,8 +54,8 @@ The corresponding relationship between the `tidb-ansible` branch and the TiDB ve
 
 ```bash
 # Download the tool package.
-wget http://download.pingcap.org/tidb-binlog-kafka-linux-amd64.tar.gz
-wget http://download.pingcap.org/tidb-binlog-kafka-linux-amd64.sha256
+wget https://download.pingcap.org/tidb-binlog-kafka-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-binlog-kafka-linux-amd64.sha256
 
 # Check the file integrity. If the result is OK, the file is correct.
 sha256sum -c tidb-binlog-kafka-linux-amd64.sha256
@@ -383,8 +383,8 @@ CentOS 7+
 
 ```bash
 # Download PbReader package
-wget http://download.pingcap.org/pb_reader-latest-linux-amd64.tar.gz
-wget http://download.pingcap.org/pb_reader-latest-linux-amd64.sha256
+wget https://download.pingcap.org/pb_reader-latest-linux-amd64.tar.gz
+wget https://download.pingcap.org/pb_reader-latest-linux-amd64.sha256
 
 # Check the file integrity. If the result is OK, the file is correct.
 sha256sum -c pb_reader-latest-linux-amd64.sha256
