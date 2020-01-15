@@ -20,11 +20,11 @@ This document introduces the query result, task status, and subtask status of Da
 {
     "result": true, # Whether the query is successful.
     "msg": "",      # Describes the cause of the unsuccessful query.
-    "tasks": [      # Replication task list.
+    "tasks": [      # Migration task list.
         {
             "taskName": "test-1",           # The task name
-            "taskStatus": "Running",        # The status of the running task, including "New", "Running", "Paused", "Stopped", "Finished", and "Error".
-            "workers": [                    # DM-worker list.
+            "taskStatus": "Running",        # The status of the task, including "New", "Running", "Paused", "Stopped", "Finished", and "Error".
+            "workers": [                    # The list of DM-workers that are used by the task.
                 "127.0.0.1:8262"
             ]
         },
@@ -48,16 +48,16 @@ This document introduces the query result, task status, and subtask status of Da
 }
 ```
 
-For detailed descriptions of `taskStatus` in a task, refer to [Task status](#task-status).
+For detailed descriptions of `taskStatus` under the `tasks` section, refer to [Task status](#task-status).
 
-It is recommended that you use `query-status` by following these steps:
+It is recommended that you use `query-status` by the following steps:
 
 1. Use `query-status` to check whether each on-going task is in the normal state.
 2. If any error occurs in a task, use the `query-status <taskName>` command to see detailed error information. `<taskName>` in this command indicates the name of the task that encounters the error.
 
 ## Task status
 
-The status of a DM replication task depends on the status of each subtask assigned to DM-worker. For detailed descriptions of subtask status, see [Subtask status](#subtask-status). The table below shows how the subtask status is related to task status.
+The status of a DM migration task depends on the status of each subtask assigned to DM-worker. For detailed descriptions of subtask status, see [Subtask status](#subtask-status). The table below shows how the subtask status is related to task status.
 
 |  Subtask status in a task | Task status |
 | :--- | :--- |
