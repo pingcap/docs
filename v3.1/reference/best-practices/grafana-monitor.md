@@ -51,9 +51,9 @@ tidb_executor_statement_total{type="Use"} 466016
 
 The data above is stored in Prometheus and displayed on Grafana. Right-click the **Edit** button on the panel (or directly press the <kbd>E</kbd> key), as shown in the following figure:
 
-![The Edit button on the Metric panel](/media/best-practices/metric-board-edit-entry.png)
+![The Edit button on the Metrics tab](/media/best-practices/metric-board-edit-entry.png)
 
-On the Metric panel, you can see the query expression with the `tidb_executor_statement_total` metric name. The meanings of some items on the panel are as follows:
+On the Metrics tab, you can see the query expression with the `tidb_executor_statement_total` metric name. The meanings of some items on the panel are as follows:
 
 - `rate[1m]`: The growth rate in one minute. It can only be used for the data of counter type.
 - `sum`: The sum of values.
@@ -61,9 +61,9 @@ On the Metric panel, you can see the query expression with the `tidb_executor_st
 - `Legend format`: The format of the metric name.
 - `Resolution`: The step width defaults to 15 seconds. Resolution means whether to generate one data point for multiple pixels.
 
-The query expression on the **Metrics** panel is as follows:
+The query expression on the **Metrics** tab is as follows:
 
-![The query expression on the Metric panel](/media/best-practices/metric-board-expression.jpeg)
+![The query expression on the Metrics tab](/media/best-practices/metric-board-expression.jpeg)
 
 Prometheus supports many query expressions and functions. For more details, refer to [Prometheus official website](https://prometheus.io/docs/prometheus/latest/querying).
 
@@ -113,7 +113,7 @@ Change the baseline to `auto`:
 
 ### Tip 4: Use Shared crosshair or Tooltip
 
-In the **Settings** panel, there is a **Graph Tooltip** setting item which defaults to **Default**.
+In the **Settings** panel, there is a **Graph Tooltip** panel option which defaults to **Default**.
 
 ![Graphic presentation tools](/media/best-practices/graph-tooltip.jpeg)
 
