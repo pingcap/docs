@@ -157,7 +157,7 @@ alter table t change column a a varchar(22) character set utf8;
     {{< copyable "sql" >}}
 
     ```sql
-    show create table t
+    show create table t;
     ```
 
     ```
