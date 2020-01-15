@@ -45,14 +45,14 @@ sudo yum install -y mariadb-server
 Even if you've already started a TiDB cluster, it will be easier to follow along with this tutorial where we will set up a new, simple cluster. We will install from a tarball, using a simplified form of the [Local Deployment](/v3.1/how-to/get-started/deploy-tidb-from-binary.md) guide. You may also wish to refer to [Testing Deployment from Binary Tarball](/v3.1/how-to/deploy/from-tarball/testing-environment.md) for best practices of establishing a real testing deployment, but that goes beyond the scope of this tutorial.
 
 ```bash
-curl -L http://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf -
+curl -L https://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf -
 cd tidb-v3.0-linux-amd64/
 ```
 
 Expected output:
 
 ```
-[kolbe@localhost ~]$ curl -LO http://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf -
+[kolbe@localhost ~]$ curl -LO https://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf -
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  279M  100  279M    0     0  4983k      0  0:00:57  0:00:57 --:--:-- 3638k
@@ -254,7 +254,7 @@ mysql -h 127.0.0.1 -P 4000 --prompt='TiDB [\d]> ' -u root
 ```sql
 create database tidbtest;
 use tidbtest;
-create table t1 (id int unsigned not null auto_increment primary key);
+create table t1 (id int unsigned not null AUTO_INCREMENT primary key);
 insert into t1 () values (),(),(),(),();
 select * from t1;
 ```
@@ -267,7 +267,7 @@ Query OK, 0 rows affected (0.12 sec)
 
 TiDB [(none)]> use tidbtest;
 Database changed
-TiDB [tidbtest]> create table t1 (id int unsigned not null auto_increment primary key);
+TiDB [tidbtest]> create table t1 (id int unsigned not null AUTO_INCREMENT primary key);
 Query OK, 0 rows affected (0.11 sec)
 
 TiDB [tidbtest]> insert into t1 () values (),(),(),(),();

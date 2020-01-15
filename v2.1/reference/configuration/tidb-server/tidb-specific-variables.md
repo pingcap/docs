@@ -254,14 +254,14 @@ set @@global.tidb_distsql_scan_concurrency = 10
 ### tidb_disable_txn_auto_retry
 
 - Scope: SESSION | GLOBAL
-- Default: on
-- This variable is used to set whether to disable automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+- Default: off
+- This variable is used to set whether to disable automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer. The automatic retry is enabled by default in TiDB v2.1.
 
     Setting the value to `off` means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    To decide whether you can enable automatic retry, see [description of optimistic transactions](/v2.1/reference/transactions/transaction-isolation.md#transaction-retry).
+    To decide whether you can enable automatic retry, see [automatic retry and anomalies caused by automatic retry](/v2.1/reference/transactions/transaction-isolation.md#automatic-retry-and-transactional-anomalies-caused-by-automatic-retry).
 
 ### tidb_backoff_weight
 
@@ -368,4 +368,4 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to set whether the `auto_increment` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+- This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
