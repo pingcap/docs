@@ -24,6 +24,8 @@ The state interface monitors the basic information of a specific component in th
 
 The following example uses `http://${host}:${port}/status` to get the current state of the TiDB server and to determine whether the server is alive. The result is returned in JSON format.
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 curl http://127.0.0.1:10080/status
 {
@@ -40,6 +42,8 @@ curl http://127.0.0.1:10080/status
 - Details about API names: see [PD API doc](https://download.pingcap.com/pd-api-v1.html)
 
 The PD interface provides the state of all the TiKV servers and the information about load balancing. See the following example for the information about a single-node TiKV cluster:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 curl http://127.0.0.1:2379/pd/api/v1/stores
@@ -97,25 +101,40 @@ Assume that the TiDB cluster topology is as follows:
 
 #### Step 1: Download the binary package
 
-```bash
-# Downloads the package.
-$ wget https://github.com/prometheus/prometheus/releases/download/v2.2.1/prometheus-2.2.1.linux-amd64.tar.gz
-$ wget https://github.com/prometheus/node_exporter/releases/download/v0.15.2/node_exporter-0.15.2.linux-amd64.tar.gz
-$ wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-4.6.3.linux-x64.tar.gz
+Downloads the package.
 
-# Extracts the package.
-$ tar -xzf prometheus-2.2.1.linux-amd64.tar.gz
-$ tar -xzf node_exporter-0.15.2.linux-amd64.tar.gz
-$ tar -xzf grafana-4.6.3.linux-x64.tar.gz
+{{< copyable "shell-regular" >}}
+
+```bash
+wget https://github.com/prometheus/prometheus/releases/download/v2.2.1/prometheus-2.2.1.linux-amd64.tar.gz &&
+wget https://github.com/prometheus/node_exporter/releases/download/v0.15.2/node_exporter-0.15.2.linux-amd64.tar.gz &&
+wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-4.6.3.linux-x64.tar.gz
+```
+
+Extracts the package.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+tar -xzf prometheus-2.2.1.linux-amd64.tar.gz &&
+tar -xzf node_exporter-0.15.2.linux-amd64.tar.gz &&
+tar -xzf grafana-4.6.3.linux-x64.tar.gz
 ```
 
 #### Step 2: Start `node_exporter` on Node1, Node2, Node3, and Node4
 
-```bash
-$ cd node_exporter-0.15.2.linux-amd64
+{{< copyable "shell-regular" >}}
 
-# Starts the node_exporter service.
-$ ./node_exporter --web.listen-address=":9100" \
+```bash
+cd node_exporter-0.15.2.linux-amd64
+```
+
+Starts the node_exporter service.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+./node_exporter --web.listen-address=":9100" \
     --log.level="info" &
 ```
 
@@ -123,10 +142,14 @@ $ ./node_exporter --web.listen-address=":9100" \
 
 Edit the Prometheus configuration file:
 
-```yml
-$ cd prometheus-2.2.1.linux-amd64
-$ vi prometheus.yml
+{{< copyable "shell-regular" >}}
 
+```bash
+cd prometheus-2.2.1.linux-amd64 &&
+vi prometheus.yml
+```
+
+```ini
 ...
 
 global:
@@ -177,8 +200,10 @@ scrape_configs:
 
 Start the Prometheus service:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
-$ ./prometheus \
+./prometheus \
     --config.file="./prometheus.yml" \
     --web.listen-address=":9090" \
     --web.external-url="http://192.168.199.113:9090/" \
@@ -193,9 +218,11 @@ $ ./prometheus \
 Edit the Grafana configuration file:
 
 ```ini
-$ cd grafana-4.6.3
-$ vi conf/grafana.ini
+cd grafana-4.6.3 &&
+vi conf/grafana.ini
+```
 
+```ini
 ...
 
 [paths]
@@ -235,13 +262,14 @@ path = ./data/dashboards
 url = https://grafana.net
 
 ...
-
 ```
 
 Start the Grafana service:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
-$ ./bin/grafana-server \
+./bin/grafana-server \
     --config="./conf/grafana.ini" &
 ```
 
