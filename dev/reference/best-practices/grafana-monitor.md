@@ -93,7 +93,7 @@ The Y-axis uses a binary logarithmic scale by default:
 
 Switch the Y-axis to a linear scale:
 
-![Switch to a linear scale](/medium/best-practices/axes-scale-linear.jpg)
+![Switch to a linear scale](/media/best-practices/axes-scale-linear.jpg)
 
 > **Recommendation:**
 >
