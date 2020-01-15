@@ -38,7 +38,7 @@ To avoid this issue, you need to pay attention to:
     {{< copyable "sql" >}}
 
     ```sql
-    show create table t
+    show create table t;
     ```
 
     ```
