@@ -130,7 +130,7 @@ mysql-instances:
 
 ### Basic configuration
 
-Refer to the comments in the [template](#task-configuration-file-template-advanced) to see more details. Specific instruction about `task-mode` are as follows:
+Refer to the comments in the [template](#task-configuration-file-template-advanced) to see more details. Detailed explanations about `task-mode` are as follows:
 
 - Description: the task mode that can be used to specify the data replication task to be executed.
 - Value: string (`full`, `incremental`, or `all`).
@@ -147,9 +147,9 @@ Arguments in each feature configuration set are explained in the comments in the
 | `routes` | The routing mapping rule set between the upstream and downstream tables. If the names of the upstream and downstream schemas and tables are the same, this item does not need to be configured. See [Table Routing](/dev/reference/tools/data-migration/features/overview.md#table-routing) for usage scenarios and sample configurations. |
 | `filters` | The binlog event filter rule set of the matched table of the upstream database instance. If binlog filtering is not required, this item does not need to be configured. See [Binlog Event Filter](/dev/reference/tools/data-migration/features/overview.md#binlog-event-filter) for usage scenarios and sample configurations. |
 | `black-white-list` | The filter rule set of the black white list of the matched table of the upstream database instance. It is recommended to specify the schemas and tables that need to be replicated through this item, otherwise all schemas and tables will be replicated. See [Binlog Event Filter](/dev/reference/tools/data-migration/features/overview.md#binlog-event-filter)[Black & White Lists](/dev/reference/tools/data-migration/features/overview.md#black--white-table-lists) for usage scenarios and sample configurations. |
-| `mydumpers` | Configuration arguments of running Mydumper. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `thread` alone using `mydumper-thread`. |
-| `loaders` | Configuration arguments of running Loader. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `pool-size` alone using `loader-thread`. |
-| `syncers` | Configuration arguments of running Syncer. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `worker-count` alone using `syncer-thread`. |
+| `mydumpers` | Configuration arguments of running Mydumper. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `thread` only using `mydumper-thread`. |
+| `loaders` | Configuration arguments of running Loader. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `pool-size` only using `loader-thread`. |
+| `syncers` | Configuration arguments of running Syncer. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `worker-count` only using `syncer-thread`. |
 
 ## Instance configuration
 

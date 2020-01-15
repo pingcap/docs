@@ -85,7 +85,7 @@ The data purge methods for the relay log include automatic purge and manual purg
 
 ### Automatic data purge
 
-You can configure the following three command-line parameters that affect the automatic data purge of DM-worker:
+You can use the following three command-line options to change the automatic data purge strategy of DM-worker:
 
 - `purge-interval`
 

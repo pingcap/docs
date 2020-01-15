@@ -143,7 +143,7 @@ Then, execute the following command in the terminal to run DM-worker:
 bin/dm-worker -config conf/dm-worker1.toml
 ```
 
-In DM-worker2, change `source-id` in the configuration file to `mysql-replica-02` and change the `from` configuration to the address of MySQL2. If you deploy Dm-worker2 and Dm-worker1 on one machine, you need to deploy two dm-worker instances on different paths, otherwise the default path for saving meta-information and relay log will conflict. If DM-worker2 and DM-worker1 are deployed on one machine, you need to deploy two DM-worker instances on different paths. Otherwise, the default path for saving meta-information and relay log will conflict.
+In DM-worker2, change `source-id` in the configuration file to `mysql-replica-02` and change the `from` configuration to the address of MySQL2. If you deploy Dm-worker2 and Dm-worker1 on one machine, you need to deploy two dm-worker instances in different paths, otherwise the default path for saving meta-information and relay log will conflict.
 
 ### Deploy DM-master
 
@@ -240,7 +240,7 @@ Now you need to replicate these sharded tables to the `db_target.t_target` table
       - source-id: "mysql-replica-01"
         black-white-list:  "instance"
         route-rules: ["sharding-route-rules-table", "sharding-route-rules-schema"]
-        mydumper-thread: 4             # The number of threads that Mydumper uses for dumping data, new in v1.0.2 and later
+        mydumper-thread: 4             # The number of threads that Mydumper uses for dumping data, new in v1.0.2 and later versions
         loader-thread: 16              # The number of threads that Loader uses for loading data, new in v1.0.2 and later versions
         syncer-thread: 16              # The number of threads that Syncer uses for replicating incremental data, new in v1.0.2 and later versions
 
