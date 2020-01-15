@@ -292,25 +292,36 @@ Solution:
 
     * HTTP API（the HTTP API can be enabled only on a single server）
 
-        ```sh
-        # Enabled.
-        curl -X POST -d "check_mb4_value_in_utf8=1" http://{TiDBIP}:10080/settings
-        # Disabled.
-        curl -X POST -d "check_mb4_value_in_utf8=0" http://{TiDBIP}:10080/settings
-        ```
+        * To enable HTTP API:
+
+            {{< copyable "shell-regular" >}}
+
+            ```sh
+            curl -X POST -d "check_mb4_value_in_utf8=1" http://{TiDBIP}:10080/settings
+            ```
+
+        * To disable HTTP API:
+
+            {{< copyable "shell-regular" >}}
+
+            ```sh
+            curl -X POST -d "check_mb4_value_in_utf8=0" http://{TiDBIP}:10080/settings
+            ```
 
     * Session variable
 
-        {{< copyable "sql" >}}
+        * To enable session variable:
 
-        ```sql
-        -- Enabled.
-        set @@session.tidb_check_mb4_value_in_utf8 = 1;
-        ```
+            {{< copyable "sql" >}}
 
-        {{< copyable "sql" >}}
+            ```sql
+            set @@session.tidb_check_mb4_value_in_utf8 = 1;
+            ```
 
-        ```sql
-        -- Disabled.
-        set @@session.tidb_check_mb4_value_in_utf8 = 0;
-        ```
+        * To disable session variable:
+
+            {{< copyable "sql" >}}
+
+            ```sql
+            set @@session.tidb_check_mb4_value_in_utf8 = 0;
+            ```

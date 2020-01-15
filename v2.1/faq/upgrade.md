@@ -209,9 +209,20 @@ In TiDB v2.1.1 and earlier versions, if the charset is UTF-8, there is no UTF-8 
     {{< copyable "sql" >}}
 
     ```sql
-    tidb> create table t(a varchar(100) charset utf8);
+    create table t(a varchar(100) charset utf8);
+    ```
+
+    ```
     Query OK, 0 rows affected
-    tidb> insert t values (unhex('f09f8c80'));
+    ```
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    insert t values (unhex('f09f8c80'));
+    ```
+
+    ```
     Query OK, 1 row affected
     ```
 
@@ -220,7 +231,10 @@ In TiDB v2.1.1 and earlier versions, if the charset is UTF-8, there is no UTF-8 
     {{< copyable "sql" >}}
 
     ```sql
-    tidb> insert t values (unhex('f09f8c80'));
+    insert t values (unhex('f09f8c80'));
+    ```
+
+    ```
     ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a
     ```
 
@@ -278,7 +292,7 @@ Solution:
 
     * HTTP API（the HTTP API can be enabled only on a single server）
 
-        * To enable API:
+        * To enable HTTP API:
 
             {{< copyable "shell-regular" >}}
 
@@ -286,7 +300,7 @@ Solution:
             curl -X POST -d "check_mb4_value_in_utf8=1" http://{TiDBIP}:10080/settings
             ```
 
-        * To disable API:
+        * To disable HTTP API:
 
             {{< copyable "shell-regular" >}}
 
@@ -296,7 +310,7 @@ Solution:
 
     * Session variable
 
-        * To enable variable:
+        * To enable session variable:
 
             {{< copyable "sql" >}}
 
@@ -304,7 +318,7 @@ Solution:
             set @@session.tidb_check_mb4_value_in_utf8 = 1;
             ```
 
-        * To disable variable:
+        * To disable session variable:
 
             {{< copyable "sql" >}}
 
