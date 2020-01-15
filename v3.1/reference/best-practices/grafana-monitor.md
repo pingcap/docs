@@ -22,7 +22,7 @@ For TiDB 2.1.3 or later versions, TiDB monitoring uses the pull method instead o
 
 ## Source and display of monitoring data
 
-The three core components of TiDB (TiDB server, TiKV server and PD server) obtain metric information through the HTTP interface. The information is statistically collected from the program code, and the ports are as follows:
+The three core components of TiDB (TiDB server, TiKV server and PD server) obtain metric information through the HTTP interface. These metrics are collected from the program code, and the ports are as follows:
 
 | Component   | Port  |
 | :---------- |:----- |
