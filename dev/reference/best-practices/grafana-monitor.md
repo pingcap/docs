@@ -49,11 +49,11 @@ tidb_executor_statement_total{type="Show"} 500531
 tidb_executor_statement_total{type="Use"} 466016
 ```
 
-The data above is stored in Prometheus and displayed on Grafana. Right-click the **Edit** button on the panel (or directly press the <kbd>E</kbd> key), as shown in the following figure:
+The data above is stored in Prometheus and displayed on Grafana. Right-click the panel and then click the **Edit** button (or directly press the <kbd>E</kbd> key) shown in the following figure:
 
-![The Edit button on the Metrics tab](/media/best-practices/metric-board-edit-entry.png)
+![The Edit entry for the Metrics tab](/media/best-practices/metric-board-edit-entry.png)
 
-On the Metrics tab, you can see the query expression with the `tidb_executor_statement_total` metric name. The meanings of some items on the panel are as follows:
+After clicking the **Edit** button, you can see the query expression with the `tidb_executor_statement_total` metric name on the Metrics tab. The meanings of some items on the panel are as follows:
 
 - `rate[1m]`: The growth rate in one minute. It can only be used for the data of counter type.
 - `sum`: The sum of values.
@@ -79,7 +79,7 @@ In the example shown in the [source and display of monitoring data](#source-and-
 
 Then we can modify the query expression by adding the `instance` dimension beside `type`, and adding `{{instance}}` to the `Legend format` field. In this way, you can check the QPS of different types of SQL statements that are executed on each TiDB server:
 
-![Adds an instance dimension to the query expression](/media/best-practices/add-instance-dimension.jpeg)
+![Add an instance dimension to the query expression](/media/best-practices/add-instance-dimension.jpeg)
 
 ### Tip 2: Switch the scale of the Y-axis
 
@@ -97,11 +97,11 @@ Switch the Y-axis to a linear scale:
 
 > **Recommendation:**
 >
-> Combining the two tips, you can find a `sql_type` dimension to help you immediately analyze whether the `SELECT` statement or the `UPDATE` statement is slow; you can even locate the instance with slow SQL statements.
+> Combining tip 2 with tip 1, you can find a `sql_type` dimension to help you immediately analyze whether the `SELECT` statement or the `UPDATE` statement is slow; you can even locate the instance with slow SQL statements.
 
 ### Tip 3: Modify the baseline of the Y-axis to amplify changes
 
-If you still cannot see the trend after switching to the linear scale. For example, in the following figure, you want to observe the real-time change effect of `Store size` after scaling the cluster; but due to the large baseline, small changes are not visible. In this situation, you can modify the baseline of the Y-axis from `0` to `auto` to zoom in the upper part. Check the two figures from below, you can see that data migration begins.
+If you still cannot see the trend after switching to the linear scale. For example, in the following figure, you want to observe the real-time change effect of `Store size` after scaling the cluster; but due to the large baseline, small changes are not visible. In this situation, you can modify the baseline of the Y-axis from `0` to `auto` to zoom in the upper part. Check the two figures below, you can see that data migration begins.
 
 The baseline defaults to `0`:
 
@@ -147,7 +147,7 @@ Then check the overall trend:
 
 ### Tip 7: Use the API of Prometheus to obtain the result of query expressions
 
-Grafana obtains data through the API of Prometheus. You can use the API to obtain information as well. It also has other usages such as:
+Grafana obtains data through the API of Prometheus and you can use the API to obtain information as well. Besides, it also has the following usages:
 
 - Automatically obtains information such as cluster size and status.
 - Makes minor changes to the expression to provide information for the report, such as counting the total amount of QPS per day, the peak value of QPS per day, and the response time per day.
