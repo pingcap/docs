@@ -37,10 +37,8 @@ Please select a project before proceeding:
 
 This tutorial requires use of the Compute and Container APIs. Please enable them before proceeding:
 
-```
 <walkthrough-enable-apis apis="container.googleapis.com,compute.googleapis.com">
 </walkthrough-enable-apis>
-```
 
 ## Configure gcloud defaults
 
