@@ -8,8 +8,7 @@ category: how-to
 
 This tutorial is designed to be directly [run in Google Cloud Shell](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pingcap/docs&tutorial=v3.1/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md).
 
-<a href="https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pingcap/docs&tutorial=v3.1/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md
-"><img src="https://gstatic.com/cloudssh/images/open-btn.png"/></a>
+<a href="https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pingcap/docs&tutorial=v3.1/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md"><img src="https://gstatic.com/cloudssh/images/open-btn.png"/></a>
 
 It takes you through the following steps:
 
