@@ -61,7 +61,7 @@ The GTID is the global transaction ID of MySQL or MariaDB. With this feature ena
 
 ### Heartbeat
 
-The heartbeat is a mechanism that calculates the delay from the time data is written in the upstream to the time data is processed by the binlog replication processing unit. Refer to [replication delay monitoring](/v3.0/reference/tools/data-migration/features/overview.md/#replication-delay-monitoring) for details.
+The heartbeat is a mechanism that calculates the delay from the time data is written in the upstream to the time data is processed by the binlog replication processing unit. Refer to [replication delay monitoring](/v3.0/reference/tools/data-migration/features/overview.md#replication-delay-monitoring) for details.
 
 ## L
 
