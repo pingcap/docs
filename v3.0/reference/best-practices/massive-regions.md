@@ -6,13 +6,13 @@ category: reference
 
 # TiKV Performance Tuning with Massive Region Amount Best Practices
 
-In the TiDB architecture, data is segmented into key ranges that are called Regions distributed among multiple TiKV instances. As data is written into a cluster, millions or even tens of millions of Regions are created. Too many Regions on a single TiKV instance are a heavy burden that encumbers performance of the whole cluster.
+In the TiDB architecture, data is segmented into key ranges called Regions that are distributed among multiple TiKV instances. As data is written into a cluster, millions or even tens of millions of Regions are created. Too many Regions on a single TiKV instance bring a heavy burden that encumbers the performance of the whole cluster.
 
 This document introduces the workflow of Raftstore (a core module of TiKV), explains why a massive amount of Regions cause performance problem, and offers methods for tuning TiKV performance.
 
 ## Raftstore workflow
 
-A TiKV instance has multiple Regions on it. The Raftstore module drives Raft state machines to process messages for Regions. These messages include processing read and write requests on Regions, persisting and replicating Raft logs, processing Raft heartbeats, and so on. However, an increasing number of Regions influences performance of the whole cluster. To explain this, it is necessary to first learn the workflow of Raftstore, a core module of TiKV.
+A TiKV instance has multiple Regions on it. The Raftstore module drives Raft state machines to process messages for Regions. These messages include processing read and write requests on Regions, persisting and replicating Raft logs, processing Raft heartbeats, and so on. However, an increasing number of Regions influence performance of the whole cluster. To explain this, it is necessary to first learn the workflow of Raftstore.
 
 ![Raftstore Workflow](/media/best-practices/raft-process.png)
 
@@ -20,7 +20,7 @@ A TiKV instance has multiple Regions on it. The Raftstore module drives Raft sta
 >
 > This diagram only illustrates the workflow of Raftstore and does not represent the actual code structure.
 
-From this diagram, requests from TiDB, through the gRPC and storage modules, become the final read and write messages of KV (key-value), and are sent to the corresponding Regions. These messages are not immediately processed but are temporarily stored. Raftstore polls to check if each Region has messages to process. If a Region has messages to process, Raftstore drives the Raft state machine of the Region to process these messages and perform subsequent operations according to the state changes generated from these messages. For example, with a write request, the Raft state machine stores logs into disk and sends the logs to other Region replicas; sends heartbeat information to other Region replicas when the heartbeat interval is reached.
+From this diagram, requests from TiDB, through the gRPC and storage modules, become the final read and write messages of KV (key-value), and are sent to the corresponding Regions. These messages are not immediately processed but are temporarily stored. Raftstore polls to check if each Region has messages to process. If a Region has messages to process, Raftstore drives the Raft state machine of the Region to process these messages and perform subsequent operations according to the state changes generated from these messages. For example, with a write request, the Raft state machine writes logs into disk and sends logs to other Region replicas; sends heartbeat information to other Region replicas when the heartbeat interval is reached.
 
 ## Performance problem
 
@@ -35,17 +35,17 @@ Generally, if the CPU usage of the loaded Raftstore reaches 85% or higher, Rafts
 
 ### Performance monitoring
 
-You can check the following monitoring metrics in Grafana's TiKV panel:
+You can check the following monitoring metrics in Grafana's *TiKV* panel:
 
 + `Raft store CPU` in the *Thread-CPU* panel
 
-    Reference value: lower than `raftstore.store-pool-size * 85%`. TiDB v2.1 does not have `raftstore.store-pool-size`, so you can regard `raftstore.store-pool-size = 1` in v2.1.
+    Reference value: lower than `raftstore.store-pool-size * 85%`. TiDB v2.1 does not have the `raftstore.store-pool-size` item, so you can treat `raftstore.store-pool-size = 1` in v2.1.
 
     ![Check Raftstore CPU](/media/best-practices/raft-store-cpu.png)
 
 + `Propose wait duration` in the *Raft Propose* panel
 
-    `Propose wait duration` is the delay time between sending a request to Raftstore and Raftstore actually starting processing the request. Long delay time means that Raftstore is busy, or that processing the append log is time-consuming so that Raftstore cannot process the request in time.
+    `Propose wait duration` is the delay time between sending a request to Raftstore and Raftstore actually starting processing the request. Long delay time means that Raftstore is busy, or that processing the append log is time-consuming, making Raftstore unable to process the request in time.
 
     Reference value: lower than 50-100 ms according to cluster size
 
@@ -53,7 +53,7 @@ You can check the following monitoring metrics in Grafana's TiKV panel:
 
 ## Performance tuning method
 
-After finding out the cause of the performance problem, solutions are in two types:
+After finding out the cause of performance problem, solutions are in two types:
 
 + Reduce the number of Regions on a single TiKV instance
 + Reduce the number of messages for a single Region
@@ -84,17 +84,17 @@ raft-election-timeout = raft-base-tick-interval * raft-election-timeout-ticks
 raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 ```
 
-If Region Followers does not receive the heartbeat from the Leader within the `raft-election-timeout` interval, they determine that the Leader has failed and start an election. `raft-heartbeat-interval` is the interval at which a Leader sends heartbeat to Followers. Therefore, increasing the value of `raft-base-tick-interval` can reduce the number of network messages sent from Raft state machines but also makes it longer for Raft state machines to detect the Leader failure.
+If Region Followers does not receive the heartbeat from the Leader within the `raft-election-timeout` interval, these Followers determine that the Leader has failed and start an election. `raft-heartbeat-interval` is the interval at which a Leader sends heartbeat to Followers. Therefore, increasing the value of `raft-base-tick-interval` can reduce the number of network messages sent from Raft state machines but also makes it longer for Raft state machines to detect the Leader failure.
 
 ### Method 3: Increase Raftstore concurrency
 
-Raftstore in TiDB v3.0 has been extended to a multi-threaded module, which greatly reduces the possibility that a Raftstore thread becomes the bottleneck.
+Raftstore in TiDB v3.0 has been upgraded to a multi-threaded module, which greatly reduces the possibility that a Raftstore thread becomes the bottleneck.
 
 By default, `raftstore.store-pool-size` is configured to `2` in TiKV. If a bottleneck occurs in Raftstore, you can properly increase the value of this configuration according to actual situation. But to avoid introducing unnecessary thread switching overhead, it is recommended that you do not set this value too high.
 
 ### Method 4: Enable Hibernate Region
 
-In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore does sent tick messages to the Raft state machines of idle Regions where necessary. Then these Raft state machines will not be triggered to generate heartbeat information, greatly reducing the workload of Raftstore.
+In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore does sent tick messages to the Raft state machines of idle Regions when necessary. Then these Raft state machines will not be triggered to generate heartbeat information, greatly reducing the workload of Raftstore.
 
 Up to TiDB v3.0.5, Hibernate Region is still an experimental feature, which is enabled by default in [TiKV master](https://github.com/tikv/tikv/tree/master). You can enable this feature according to your actual need. For the configuration of Hibernate Region, refer to [Configure Hibernate Region](https://github.com/tikv/tikv/blob/master/docs/reference/configuration/raftstore-config.md#hibernate-region).
 
@@ -104,7 +104,7 @@ Up to TiDB v3.0.5, Hibernate Region is still an experimental feature, which is e
 >
 > `Region Merge` is enabled in TiDB v3.0 by default.
 
-You can also reduce the number of Regions by enabling `Region Merge`. Contrary to `Region Split`, `Region Merge` is the process of merging adjacent small Regions by scheduling. After deleting data or executing the `Drop Table` or `Truncate Table` statement, you can merge small Regions or even empty Regions to reduce resource consumption.
+You can also reduce the number of Regions by enabling `Region Merge`. Contrary to `Region Split`, `Region Merge` is the process of merging adjacent small Regions through scheduling. After dropping data or executing the `Drop Table` or `Truncate Table` statement, you can merge small Regions or even empty Regions to reduce resource consumption.
 
 Enable `Region Merge` by setting the following configurations:
 
@@ -118,7 +118,7 @@ Enable `Region Merge` by setting the following configurations:
 
 Refer to [Region Merge](https://github.com/tikv/tikv/blob/master/docs/how-to/configure/region-merge.md) and [PD configuration file](/v3.0/reference/configuration/pd-server/configuration-file.md#schedule) for more details.
 
-The default configuration of the `Region Merge` parameter is rather reserved. You can speed up `Region Merge` process by referring to the method provided in [PD Scheduling Best Practices](/v3.0/reference/best-practices/pd-scheduling.md#region-merge-is-slow).
+The default configuration of the `Region Merge` parameters is rather conservative. You can speed up the `Region Merge` process by referring to the method provided in [PD Scheduling Best Practices](/v3.0/reference/best-practices/pd-scheduling.md#region-merge-is-slow).
 
 ## Other problems and solutions
 
@@ -130,14 +130,14 @@ To address this problem, `use-region-storage` is enabled by default in PD since 
 
 ### PD routing information is not updated in time
 
-In TiKV, pd-worker periodically reports Region Meta information to PD. When TiKV is restarted or switches the Region Leader, PD needs to recalculate Region's `approximate size / keys` through statistics. Therefore, with a large number of Regions, the single-threaded pd-worker might become the bottleneck, causing tasks to be piled up without being processed in time. In this situation, PD cannot obtain certain Region Meta information in time so that the routing information is not updated in time. This problem does not affect the actual reads and writes, but might cause inaccurate PD scheduling and require several round trips when TiDB updates Region cache.
+In TiKV, pd-worker regularly reports Region Meta information to PD. When TiKV is restarted or switches the Region Leader, PD needs to recalculate Region's `approximate size / keys` through statistics. Therefore, with a large number of Regions, the single-threaded pd-worker might become the bottleneck, causing tasks to be piled up without being processed in time. In this situation, PD cannot obtain certain Region Meta information in time so that the routing information is not updated in time. This problem does not affect the actual reads and writes, but might cause inaccurate PD scheduling and require several round trips when TiDB updates Region cache.
 
-You can check *Worker pending tasks* under Task in the TiKV Grafana panel to determine whether pd-worker has tasks piled up. Generally, `pending tasks` should be kept at a relatively low value.
+You can check *Worker pending tasks* under *Task* in the *TiKV Grafana* panel to determine whether pd-worker has tasks piled up. Generally, `pending tasks` should be kept at a relatively low value.
 
 ![Check pd-worker](/media/best-practices/pd-worker-metrics.png)
 
-Currently, pd-worker is optimized for efficiency in [#5620](https://github.com/tikv/tikv/pull/5620) on [TiKV master](https://github.com/tikv/tikv/tree/master), which is applied in versions later than [3.0.5](https://pingcap.com/docs/stable/releases/3.0.5/#tikv) (included). If you encounter a similar problem, it is recommended to upgrade to v3.0.5.
+Currently, pd-worker is optimized for better efficiency in [#5620](https://github.com/tikv/tikv/pull/5620) on [TiKV master](https://github.com/tikv/tikv/tree/master), which is applied in versions later than [3.0.5](https://pingcap.com/docs/stable/releases/3.0.5/#tikv) (included). If you encounter a similar problem, it is recommended to upgrade to v3.0.5 or later version.
 
 ### Prometheus is slow to query metrics
 
-In a large-scale cluster, as the number of TiKV instances increases, Prometheus has greater pressure when querying metrics, making it slower for you to view metrics in Grafana. This problem is eased by configuring pre-calculations in v3.0.
+In a large-scale cluster, as the number of TiKV instances increases, Prometheus has greater pressure to query metrics, making it slower for Grafana to display these metrics. To ease this problem, pre-calculations of metrics is configured in v3.0.
