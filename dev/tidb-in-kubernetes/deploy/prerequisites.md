@@ -71,9 +71,9 @@ If the above command shows that the swap column is all `0`, then swap is disable
 
 In addition, to permanently disable swaps, remove all the swap-related entries in `/etc/fstab`.
 
-After all above configurations are made, check whether you have configured [SMP IRQ Affinity](https://cs.uwaterloo.ca/~brecht/servers/apic/SMP-affinity.txt) on the machine. This configuration is to assign the interrupt of each device to different CPUs to prevent all interrupts from being sent to the same CPU, avoiding potential performance bottleneck. For the TiDB cluster, the rate at which the network card processes packages has a great impact on the throughput of the cluster.
+After all above configurations are made, check whether you have configured [SMP IRQ Affinity](https://cs.uwaterloo.ca/~brecht/servers/apic/SMP-affinity.txt) on the machine. This configuration is to assign the interrupt of each device to different CPUs to prevent all interrupts from being sent to the same CPU, avoiding potential performance bottleneck and taking advantage of multiple cores to increase cluster throughput. For the TiDB cluster, the rate at which the network card processes packages has a great impact on the throughput of the cluster.
 
-Use the following methods to assign the interrupt of a network card to a specific CPU, thus taking advantage of multiple cores to increase cluster throughput.
+Follow these steps to check whether you have configured SMP IRQ Affinity on the machine:
 
 1. Execute the following command to check the interrupt of a network card:
 
@@ -103,11 +103,13 @@ Use the following methods to assign the interrupt of a network card to a specifi
 
     The above command outputs the decimal value corresponding to the CPU serial number. The result is more intuitive.
 
-3. Configure SMP IRQ Affinity.
+If all interrupts of a network card are assigned to different CPUs, the SMP IRQ Affinity is correctly configured on the machine and you do not need further operation.
 
-    For the scenario of multi-queue network card and multiple cores, if all interrupts of a network card are assigned to different CPUs, the SMP IRQ Affinity is correctly configured on the machine. If all interrupts are sent to the same CPU, make adjustment according to the following two methods:
+If all interrupts are sent to the same CPU, configure SMP IRQ Affinity by the following steps:
 
-    + Method 1: Enable the [irqbalance](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-tool_reference-irqbalance) service. Use the following command to enable the service on CentOS 7:
++ For the scenario of multi-queue network card and multiple cores:
+
+    - Method 1: Enable the [irqbalance](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-tool_reference-irqbalance) service. Use the following command to enable the service on CentOS 7:
 
         {{< copyable "shell-regular" >}}
 
@@ -115,11 +117,13 @@ Use the following methods to assign the interrupt of a network card to a specifi
         systemctl start irqbalance
         ```
 
-    + Method 2: Disable irqbalance and customize the binding relationship between interrupts and CPUs. Refer to the [set_irq_affinity.sh](https://gist.githubusercontent.com/SaveTheRbtz/8875474/raw/0c6e500e81e161505d9111ac77115a2367180d12/set_irq_affinity.sh) script for more details.
+    - Method 2: Disable irqbalance and customize the binding relationship between interrupts and CPUs. Refer to the [set_irq_affinity.sh](https://gist.githubusercontent.com/SaveTheRbtz/8875474/raw/0c6e500e81e161505d9111ac77115a2367180d12/set_irq_affinity.sh) script for more details.
 
-    For the scenario of single-queue network card and multiple cores, the configuration method is different. In this scenario, you can use [RPS/RFS](https://www.kernel.org/doc/Documentation/networking/scaling.txt) to simulate the Receive Side Scaling (RSS) feature of the network card at the software level.
++ For the scenario of single-queue network card and multiple cores:
 
-    In this scenario, do not use the irqbalance service as described in Method 1. Instead, use the [script](https://gist.githubusercontent.com/SaveTheRbtz/8875474/raw/0c6e500e81e161505d9111ac77115a2367180d12/set_irq_affinity.sh) provided in Method 2 to configure RPS. For the configuration of RFS, refer to [RFS configuration](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-networking-configuration_tools#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Configuration_tools-Configuring_Receive_Flow_Steering_RFS).
+    To configure SMP IRQ Affinity in this scenario, you can use [RPS/RFS](https://www.kernel.org/doc/Documentation/networking/scaling.txt) to simulate the Receive Side Scaling (RSS) feature of the network card at the software level.
+
+    Do not use the irqbalance service as described in Method 1. Instead, use the [script](https://gist.githubusercontent.com/SaveTheRbtz/8875474/raw/0c6e500e81e161505d9111ac77115a2367180d12/set_irq_affinity.sh) provided in Method 2 to configure RPS. For the configuration of RFS, refer to [RFS configuration](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-networking-configuration_tools#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Configuration_tools-Configuring_Receive_Flow_Steering_RFS).
 
 ## Hardware and deployment requirements
 
