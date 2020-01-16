@@ -306,13 +306,13 @@ Two possible reasons and solutions:
 
 - Apply rolling updates to the TiKV node (only update the TiKV service).
 
-    ```
+    ```bash
     ansible-playbook rolling_update.yml --tags=tikv
     ```
 
 - Apply rolling updates to all services.
 
-    ```
+    ```bash
     ansible-playbook rolling_update.yml
     ```
 
@@ -363,7 +363,7 @@ Solution:
 
 You can log into TiDB like logging into MySQL. For example:
 
-```
+```bash
 mysql -h 127.0.0.1 -uroot -P4000
 ```
 
