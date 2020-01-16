@@ -12,7 +12,7 @@ This document introduces the workflow of Raftstore (a core module of TiKV), expl
 
 ## Raftstore workflow
 
-A TiKV instance has multiple Regions on it. The Raftstore module drives Raft state machines to process messages for Regions. These messages include processing read and write requests on Regions, persisting and replicating Raft logs, processing Raft heartbeats, and so on. However, an increasing number of Regions influence performance of the whole cluster. To explain this, it is necessary to first learn the workflow of Raftstore.
+A TiKV instance has multiple Regions on it. The Raftstore module drives Raft state machines to process messages for Regions. These messages include processing read and write requests on Regions, persisting and replicating Raft logs, and processing Raft heartbeats. However, an increasing number of Regions influence performance of the whole cluster. To explain this, it is necessary to learn the workflow of Raftstore first.
 
 ![Raftstore Workflow](/media/best-practices/raft-process.png)
 
@@ -20,7 +20,7 @@ A TiKV instance has multiple Regions on it. The Raftstore module drives Raft sta
 >
 > This diagram only illustrates the workflow of Raftstore and does not represent the actual code structure.
 
-From this diagram, requests from TiDB, through the gRPC and storage modules, become the final read and write messages of KV (key-value), and are sent to the corresponding Regions. These messages are not immediately processed but are temporarily stored. Raftstore polls to check if each Region has messages to process. If a Region has messages to process, Raftstore drives the Raft state machine of the Region to process these messages and perform subsequent operations according to the state changes generated from these messages. For example, with a write request, the Raft state machine writes logs into disk and sends logs to other Region replicas; sends heartbeat information to other Region replicas when the heartbeat interval is reached.
+From this diagram, requests from TiDB, through the gRPC and storage modules, become the final read and write messages of KV (key-value), and are sent to the corresponding Regions. These messages are not immediately processed but are temporarily stored. Raftstore polls to check if each Region has messages to process. If a Region has messages to process, Raftstore drives the Raft state machine of the Region to process these messages and perform subsequent operations according to the state changes generated from these messages. For example, with a write request, the Raft state machine stores logs into disk and sends logs to other Region replicas; sends heartbeat information to other Region replicas when the heartbeat interval is reached.
 
 ## Performance problem
 
@@ -45,7 +45,7 @@ You can check the following monitoring metrics in Grafana's *TiKV* panel:
 
 + `Propose wait duration` in the *Raft Propose* panel
 
-    `Propose wait duration` is the delay time between sending a request to Raftstore and Raftstore actually starting processing the request. Long delay time means that Raftstore is busy, or that processing the append log is time-consuming, making Raftstore unable to process the request in time.
+    `Propose wait duration` is the delay between the time a request is sent to Raftstore and the time Raftstore actually starts processing the request. Long delay means that Raftstore is busy, or that processing the append log is time-consuming, making Raftstore unable to process the request in time.
 
     Reference value: lower than 50-100 ms according to cluster size
 
@@ -97,7 +97,7 @@ In addition to reducing the number of Regions, you can also reduce pressure on R
 raft-base-tick-interval = "2s"
 ```
 
-`raft-base-tick-interval` is the time interval at which Raftstore drives the Raft state machine of each Region, which means at this time interval, Raftstore sends a tick message to the Raft state machine. Increasing this interval can effectively reduce the number of messages from Raftstore.
+In the above configuration, `raft-base-tick-interval` is the time interval at which Raftstore drives the Raft state machine of each Region, which means at this time interval, Raftstore sends a tick message to the Raft state machine. Increasing this interval can effectively reduce the number of messages from Raftstore.
 
 Note that this interval between tick messages also determines the intervals of `election timeout` and `heartbeat`. See the following example:
 
@@ -120,13 +120,13 @@ To address this problem, `use-region-storage` is enabled by default in PD since 
 
 ### PD routing information is not updated in time
 
-In TiKV, pd-worker regularly reports Region Meta information to PD. When TiKV is restarted or switches the Region Leader, PD needs to recalculate Region's `approximate size / keys` through statistics. Therefore, with a large number of Regions, the single-threaded pd-worker might become the bottleneck, causing tasks to be piled up without being processed in time. In this situation, PD cannot obtain certain Region Meta information in time so that the routing information is not updated in time. This problem does not affect the actual reads and writes, but might cause inaccurate PD scheduling and require several round trips when TiDB updates Region cache.
+In TiKV, pd-worker regularly reports Region Meta information to PD. When TiKV is restarted or switches the Region Leader, PD needs to recalculate Region's `approximate size / keys` through statistics. Therefore, with a large number of Regions, the single-threaded pd-worker might become the bottleneck, causing tasks to be piled up and not processed in time. In this situation, PD cannot obtain certain Region Meta information in time so that the routing information is not updated in time. This problem does not affect the actual reads and writes, but might cause inaccurate PD scheduling and require several round trips when TiDB updates Region cache.
 
 You can check *Worker pending tasks* under *Task* in the *TiKV Grafana* panel to determine whether pd-worker has tasks piled up. Generally, `pending tasks` should be kept at a relatively low value.
 
 ![Check pd-worker](/media/best-practices/pd-worker-metrics.png)
 
-Currently, pd-worker is optimized for better efficiency in [#5620](https://github.com/tikv/tikv/pull/5620) on [TiKV master](https://github.com/tikv/tikv/tree/master), which is applied in versions later than [3.0.5](https://pingcap.com/docs/stable/releases/3.0.5/#tikv) (included). If you encounter a similar problem, it is recommended to upgrade to v3.0.5 or later version.
+Currently, pd-worker is optimized for better efficiency in [#5620](https://github.com/tikv/tikv/pull/5620) on [TiKV master](https://github.com/tikv/tikv/tree/master), which is applied since [v3.0.5](https://pingcap.com/docs/stable/releases/3.0.5/#tikv). If you encounter a similar problem, it is recommended to upgrade to v3.0.5 or later version.
 
 ### Prometheus is slow to query metrics
 
