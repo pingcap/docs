@@ -1,12 +1,138 @@
 ---
 title: TiDB Binlog FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
-reference: faq
+category: faq
 ---
 
 # TiDB Binlog FAQ
 
 This document collects the frequently asked questions (FAQs) about TiDB Binlog.
+
+## What is the impact of enabling TiDB Binlog on the performance of TiDB?
+
+- There is no impact on the query.
+
+- There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In terms of latency, a p-binlog is written concurrently in the prewrite stage before committing the transactions. Generally, writing binlog is faster than the prewrite, so it does not increase latency. You can check the response time of writing binlog in the monitor panel of Pump.
+
+## What permissions does Drainer's account need to synchronize the downstream TiDB/MySQL?
+
+To synchronize the downstream TiDB/MySQL, Drainer's account requires the following permissions:
+
+* Insert
+* Update
+* Delete
+* Create
+* Drop
+* Alter
+* Execute
+* Index
+* Select
+
+## What can I do if the Pump disk is almost full?
+
+If TiDB GC is normal and the **gc_tso** time in the Pump monitoring panel is identical with the configuration file, you can perform the following steps to reduce the amount of space required for a single Pump:
+
+- Modify the **GC** parameter of Pump to reduce the number of days to retain data.
+
+- Add pump pods.
+
+## What can I do if Drainer synchronization is interrupted?
+
+Execute the following command to check whether the status of Pump is normal and whether all the Pump pods that are not in the `offline` state are running.
+
+{{< copyable "shell-regular" >}}
+
+``` bash
+Binlogctl -cmd pumps
+```
+
+Then, check whether the Drainer monitor or log outputs corresponding errors. If so, resolve them accordingly.
+
+## What can I do if Drainer is slow to synchronizes the downstream TiDB/MySQL?
+
+Check the following monitoring items:
+
+- For the **Drainer Event** monitoring metric, check the speed of Drainer synchronizing `INSERT`, `UPDATE` and `DELETE` transactions to the downstream per second.
+
+- For the **SQL Query Time** monitoring metric, check the time Drainer takes to execute SQL statements in the downstream .
+
+Possible causes and solutions for slow synchronization:
+
+- If the synchronized database contains a table without a primary key or unique index, add a primary key to the table.
+
+- If the latency between Drainer and the downstream is high, increase the value of the `worker-count` parameter of Drainer. For cross-machine synchronization, it is recommended to deploy Drainer in the downstream.
+
+- If the load in the downstream is not high, increase the value of the `worker-count` parameter of Drainer.
+
+## What can I do if a Pump pod crashes?
+
+If a Pump pod crashes, Drainer cannot synchronize data to the downstream because it cannot obtain the data of this pump pod. If this Pump pod can return to normal use, Drainer resumes synchronization; if not, perform the following steps:
+
+1. Use [binlogctl to change the state of this Pump pod to `offline`](/dev/reference/tools/tidb-binlog/maintain.md) to discard the data of this Pump pod.
+
+2. Because Drainer cannot obtain the data of this pump pod, the data in the downstream and upstream is inconsistent. In this situation, you need to perform full synchronization and incremental synchronization again. The steps are as follows:
+
+    i. Stop the Drainer.
+
+    ii. Perform a full backup in the upstream.
+
+    iii. Clear the data in the downstream including the `tidb_binlog.checkpoint` table.
+
+    iv. Synchronize the full backup data to the downstream.
+
+    v. Deploy Drainer and use `initialCommitTs` (set `initialCommitTs` as the snapshot timestamp of the full backup) as the start point of initial synchronization.
+
+## What is checkpoint?
+
+Checkpoint records the `commit-ts` that Drainer synchronizes to the downstream. When Drainer restarts, it reads the checkpoint and then synchronizes data to the downstream starting from the corresponding `commit-ts`. The `["write save point"] [ts=411222863322546177]` Drainer log means saving the checkpoint with the corresponding timestamp.
+
+Checkpoint is saved in different files for different types of downstream:
+
+- For MySQL/TiDB, it is saved in the `tidb_binlog.checkpoint` table.
+
+- For Kafka/file, it is saved in the file of the corresponding configuration directory.
+
+The data of kafka/file contains `commit-ts`, so if the checkpoint is lost, you can check the latest `commit-ts` of the downstream data by consuming the latest data in the downstream .
+
+Drainer reads the checkpoint when it starts. If it cannot read the checkpoint, Drainer uses the configured `initialCommitTs` as the start point of the initial synchronization.
+
+## How to redeploy Drainer on the new machine when Drainer fails without affecting the data in the downstream?
+
+If the data in the downstream is not affected, you can redeploy Drainer on the new machine as long as the data can be synchronized from the corresponding checkpoint.
+
+If the checkpoint is not lost, perform the following steps:
+
+1. Deploy and start a new Drainer (Drainer reads checkpoint and resumes synchronization).
+
+2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/how-to/maintain/tidb-binlog.md).
+
+If the checkpoint is lost, perform the following steps:
+
+1. To deploy a new Drainer, obtain the `commit-ts` of the old Drainer as the `initialCommitTs` of the new Drainer.
+
+2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/how-to/maintain/tidb-binlog.md).
+
+## How to restore the data of a cluster using a full backup and a binlog backup file?
+
+1. Clean up the cluster and synchronize a full backup to it.
+
+2. To restore the latest data of the backup file, use Reparo to set `start-tso` = {snapshot timestamp of the full backup + 1} and `end-ts` = 0 (or you can specify a point in time).
+
+## How to redeploy Drainer when Master-Slave synchronization enables `ignore-error` but causes a critical error?
+
+If TiDB fails to write binlog after enabling `ignore-error`, it causes a critical error and TiDB stops writing binlog. In this situation, there is data loss of binlog. To resume synchronization, perform the following steps:
+
+1. Stop the Drainer.
+
+2. Restart the TiDB server instance that causes critical error and resume writing binlog (TiDB does not write binlog to Pump after critical error is returned).
+
+3. Perform a full backup in the upstream.
+
+4. Clear the data in the downstream including the `tidb_binlog.checkpoint` table.
+
+5. Synchronize the full backup data to the downstream.
+
+6. Deploy Drainer and use `initialCommitTs` (set `initialCommitTs` as the snapshot timestamp of the full backup) as the start point of initial synchronization.
 
 ## When can I pause or close a Pump or Drainer node?
 
