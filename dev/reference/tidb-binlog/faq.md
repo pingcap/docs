@@ -68,7 +68,7 @@ Possible causes and solutions for slow synchronization:
 
 If a Pump pod crashes, Drainer cannot synchronize data to the downstream because it cannot obtain the data of this pump pod. If this Pump pod can return to normal use, Drainer resumes synchronization; if not, perform the following steps:
 
-1. Use [binlogctl to change the state of this Pump pod to `offline`](/dev/reference/tools/tidb-binlog/maintain.md) to discard the data of this Pump pod.
+1. Use [binlogctl to change the state of this Pump pod to `offline`](/dev/reference/tidb-binlog/maintain.md) to discard the data of this Pump pod.
 
 2. Because Drainer cannot obtain the data of this pump pod, the data in the downstream and upstream is inconsistent. In this situation, you need to perform full synchronization and incremental synchronization again. The steps are as follows:
 
@@ -104,13 +104,13 @@ If the checkpoint is not lost, perform the following steps:
 
 1. Deploy and start a new Drainer (Drainer reads checkpoint and resumes synchronization).
 
-2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/how-to/maintain/tidb-binlog.md).
+2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/reference/tidb-binlog/maintain.md).
 
 If the checkpoint is lost, perform the following steps:
 
 1. To deploy a new Drainer, obtain the `commit-ts` of the old Drainer as the `initialCommitTs` of the new Drainer.
 
-2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/how-to/maintain/tidb-binlog.md).
+2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/reference/tidb-binlog/maintain.md).
 
 ## How to restore the data of a cluster using a full backup and a binlog backup file?
 
