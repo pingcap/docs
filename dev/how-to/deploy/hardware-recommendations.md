@@ -55,7 +55,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 | Monitor | 8 core+ | 16 GB+ | SAS | Gigabit network card | 1 |
 |     |     |     |      |  Total Server Number   |    9   |
 
-> **Note:**:
+> **Note:**
 >
 > - In the production environment, the TiDB and PD instances can be deployed on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
 > - It is strongly recommended to use higher configuration in the production environment.
