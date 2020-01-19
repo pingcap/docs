@@ -24,6 +24,8 @@ The following local TCP ports will be used:
 
 This guide is for deployment on Linux only. It is recommended to use RHEL/CentOS 7.3 or higher. TiKV requires you to raise the open files limit:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 tidbuser="tidb"
 
