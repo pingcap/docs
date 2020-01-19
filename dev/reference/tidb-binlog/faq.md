@@ -12,7 +12,7 @@ This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 
 - There is no impact on the query.
 
-- There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In terms of latency, a p-binlog is written concurrently in the prewrite stage before committing the transactions. Generally, writing binlog is faster than the prewrite, so it does not increase latency. You can check the response time of writing binlog in the monitor panel of Pump.
+- There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In terms of latency, a p-binlog is written concurrently in the prewrite stage before committing the transactions. Generally, writing binlog is faster than the prewrite, so it does not increase latency. You can check the response time of writing binlog in Pump's monitoring panel.
 
 ## What permissions does Drainer's account need to synchronize the downstream TiDB/MySQL?
 
@@ -30,20 +30,20 @@ To synchronize the downstream TiDB/MySQL, Drainer's account requires the followi
 
 ## What can I do if the Pump disk is almost full?
 
-If TiDB GC is normal and the **gc_tso** time in the Pump monitoring panel is identical with the configuration file, you can perform the following steps to reduce the amount of space required for a single Pump:
+If Pump's GC is normal and the **gc_tso** time in Pump’s monitoring panel is identical with that of the configuration file, you can perform the following steps to reduce the amount of space required for a single Pump:
 
 - Modify the **GC** parameter of Pump to reduce the number of days to retain data.
 
-- Add pump pods.
+- Add pump instances.
 
 ## What can I do if Drainer synchronization is interrupted?
 
-Execute the following command to check whether the status of Pump is normal and whether all the Pump pods that are not in the `offline` state are running.
+Execute the following command to check whether the status of Pump is normal and whether all the Pump instances that are not in the `offline` state are running.
 
 {{< copyable "shell-regular" >}}
 
 ``` bash
-Binlogctl -cmd pumps
+binlogctl -cmd pumps
 ```
 
 Then, check whether the Drainer monitor or log outputs corresponding errors. If so, resolve them accordingly.
@@ -54,23 +54,23 @@ Check the following monitoring items:
 
 - For the **Drainer Event** monitoring metric, check the speed of Drainer synchronizing `INSERT`, `UPDATE` and `DELETE` transactions to the downstream per second.
 
-- For the **SQL Query Time** monitoring metric, check the time Drainer takes to execute SQL statements in the downstream .
+- For the **SQL Query Time** monitoring metric, check the time Drainer takes to execute SQL statements in the downstream.
 
 Possible causes and solutions for slow synchronization:
 
 - If the synchronized database contains a table without a primary key or unique index, add a primary key to the table.
 
-- If the latency between Drainer and the downstream is high, increase the value of the `worker-count` parameter of Drainer. For cross-machine synchronization, it is recommended to deploy Drainer in the downstream.
+- If the latency between Drainer and the downstream is high, increase the value of the `worker-count` parameter of Drainer. For cross-datacenter synchronization, it is recommended to deploy Drainer in the downstream.
 
 - If the load in the downstream is not high, increase the value of the `worker-count` parameter of Drainer.
 
-## What can I do if a Pump pod crashes?
+## What can I do if a Pump instance crashes?
 
-If a Pump pod crashes, Drainer cannot synchronize data to the downstream because it cannot obtain the data of this pump pod. If this Pump pod can return to normal use, Drainer resumes synchronization; if not, perform the following steps:
+If a Pump instance crashes, Drainer cannot synchronize data to the downstream because it cannot obtain the data of this instance. If this Pump instance can return to normal use, Drainer resumes synchronization; if not, perform the following steps:
 
-1. Use [binlogctl to change the state of this Pump pod to `offline`](/dev/reference/tidb-binlog/maintain.md) to discard the data of this Pump pod.
+1. Use [binlogctl to change the state of this Pump instance to `offline`](/dev/reference/tidb-binlog/maintain.md) to discard the data of this Pump instance.
 
-2. Because Drainer cannot obtain the data of this pump pod, the data in the downstream and upstream is inconsistent. In this situation, you need to perform full synchronization and incremental synchronization again. The steps are as follows:
+2. Because Drainer cannot obtain the data of this pump instance, the data in the downstream and upstream is inconsistent. In this situation, you need to perform full synchronization and incremental synchronization again. The steps are as follows:
 
     i. Stop the Drainer.
 
@@ -124,7 +124,7 @@ If TiDB fails to write binlog after enabling `ignore-error`, it causes a critica
 
 1. Stop the Drainer.
 
-2. Restart the TiDB server instance that causes critical error and resume writing binlog (TiDB does not write binlog to Pump after critical error is returned).
+2. Restart the TiDB server instance that causes critical error and resume writing binlog (TiDB does not write binlog to Pump after critical error is triggered).
 
 3. Perform a full backup in the upstream.
 
