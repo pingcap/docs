@@ -16,8 +16,8 @@ The system data is available [for download in .zip files](https://s3.amazonaws.c
 {{< copyable "shell-regular" >}}
 
 ```bash
-mkdir -p bikeshare-data && cd bikeshare-data
-&&
+mkdir -p bikeshare-data &&
+cd bikeshare-data &&
 curl -L --remote-name-all https://s3.amazonaws.com/capitalbikeshare-data/{2010..2017}-capitalbikeshare-tripdata.zip &&
 unzip \*-tripdata.zip
 ```

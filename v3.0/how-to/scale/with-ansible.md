@@ -433,7 +433,7 @@ For example, if you want to remove a TiKV node (node9) with the IP address `172.
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
 
@@ -449,7 +449,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ./pd-ctl -u "http://172.16.10.1:2379" -d member
         ```
 
@@ -457,7 +457,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
 
         {{< copyable "shell-regular" >}}
 
-        ```
+        ```bash
         ./pd-ctl -u "http://172.16.10.1:2379" -d member delete name pd2
         ```
 
@@ -465,7 +465,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ./pd-ctl -u "http://172.16.10.1:2379" -d member
     ```
 
@@ -473,7 +473,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook stop.yml -l 172.16.10.2
     ```
 
@@ -531,7 +531,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook rolling_update.yml
     ```
 
@@ -539,7 +539,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook rolling_update_monitor.yml --tags=prometheus
     ```
 

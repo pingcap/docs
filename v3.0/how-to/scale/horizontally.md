@@ -35,6 +35,11 @@ Get the information about the existing PD nodes through pd-ctl:
 
 ```bash
 ./pd-ctl -u http://host1:2379 -i
+```
+
+{{< copyable "" >}}
+
+```
 >> member
 ```
 
@@ -60,6 +65,11 @@ Delete `pd4` through pd-ctl:
 
 ```bash
 ./pd-ctl -u http://host1:2379
+```
+
+{{< copyable "" >}}
+
+```
 >> member delete name pd4
 ```
 
@@ -76,6 +86,11 @@ Get the information about the existing TiKV nodes through pd-ctl:
 
 ```bash
 ./pd-ctl -u http://host1:2379
+```
+
+{{< copyable "" >}}
+
+```
 >> store
 ```
 
@@ -94,6 +109,11 @@ Assume that you need to delete the TiKV server with a store id 1, you can comple
 
 ```bash
 ./pd-ctl -u http://host1:2379
+```
+
+{{< copyable "" >}}
+
+```
 >> store delete 1
 ```
 
@@ -103,7 +123,15 @@ Then you can check the state of this TiKV:
 
 ```bash
 ./pd-ctl -u http://host1:2379
+```
+
+{{< copyable "" >}}
+
+```
 >> store 1
+```
+
+```
 {
   "store": {
     "id": 1,

@@ -36,7 +36,7 @@ Before you start, make sure that you have:
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     docker pull pingcap/pd:latest
     ```
 

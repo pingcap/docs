@@ -53,7 +53,7 @@ After the data is imported, you can view the data in TiDB using the MySQL client
 
 {{< copyable "shell-regular" >}}
 
-```
+```bash
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 

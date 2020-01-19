@@ -103,12 +103,25 @@ We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-ser
 
 5. To make sure your MySQL server instances are all running, you can execute `jobs` and/or `pgrep -a mysqld`:
 
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    jobs
     ```
-    $ jobs
+
+    ```
     [1]   Running                 mysqld --defaults-group-suffix="$i" &
     [2]-  Running                 mysqld --defaults-group-suffix="$i" &
     [3]+  Running                 mysqld --defaults-group-suffix="$i" &
-    $ pgrep -a mysqld
+    ```
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    pgrep -a mysqld
+    ```
+
+    ```
     17672 mysqld --defaults-group-suffix=1
     17727 mysqld --defaults-group-suffix=2
     17782 mysqld --defaults-group-suffix=3
@@ -198,8 +211,13 @@ dm-master --config=dm-cnf/dm-master.toml &
 
 You can execute `jobs` and/or `ps -a` to make sure these processes are all running:
 
+{{< copyable "shell-regular" >}}
+
+```bash
+jobs
 ```
-$ jobs
+
+```
 [1]   Running                 mysqld --defaults-group-suffix="$i" &
 [2]   Running                 mysqld --defaults-group-suffix="$i" &
 [3]   Running                 mysqld --defaults-group-suffix="$i" &
@@ -208,7 +226,15 @@ $ jobs
 [6]   Running                 dm-worker --config=dm-cnf/dm-worker$i.toml &
 [7]-  Running                 dm-worker --config=dm-cnf/dm-worker$i.toml &
 [8]+  Running                 dm-master --config=dm-cnf/dm-master.toml &
-$ ps -a
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
+ps -a
+```
+
+```
    PID TTY          TIME CMD
  17317 pts/0    00:00:00 screen
  17672 pts/1    00:00:04 mysqld
@@ -307,8 +333,13 @@ There are a number of global options, and several groups of options that define 
 
 The `dmctl` tool is an interactive client that facilitates interaction with the DM cluster. You use it to start tasks, query task status, et cetera. Start the tool by executing `dmctl -master-addr :8261` to get the interactive prompt:
 
+{{< copyable "shell-regular" >}}
+
+```bash
+dmctl -master-addr :8261
 ```
-$ dmctl -master-addr :8261
+
+```
 Welcome to dmctl
 Release Version: v1.0.0-alpha-69-g5134ad1
 Git Commit Hash: 5134ad19fbf6c57da0c7af548f5ca2a890bddbe4
@@ -321,8 +352,13 @@ Go Version: go version go1.12 linux/amd64
 
 To start dmtask1, execute `start-task dm-cnf/dmtask1.yaml`:
 
+{{< copyable "" >}}
+
 ```
 » start-task dm-cnf/dmtask1.yaml
+```
+
+```
 {
     "result": true,
     "msg": "",

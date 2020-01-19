@@ -37,7 +37,7 @@ Log in to the Control Machine using the `root` user account, and run the corresp
 
     {{< copyable "shell-root" >}}
 
-    ```
+    ```bash
     yum -y install epel-release git curl sshpass &&
     yum -y install python-pip
     ```
@@ -46,7 +46,7 @@ Log in to the Control Machine using the `root` user account, and run the corresp
 
     {{< copyable "shell-root" >}}
 
-    ```
+    ```bash
     apt-get -y install git curl sshpass python-pip
     ```
 
@@ -58,7 +58,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
     {{< copyable "shell-root" >}}
 
-    ```
+    ```bash
     useradd -m -d /home/tidb tidb
     ```
 
@@ -66,7 +66,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
     {{< copyable "shell-root" >}}
 
-    ```
+    ```bash
     passwd tidb
     ```
 
@@ -74,7 +74,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
     {{< copyable "shell-root" >}}
 
-    ```
+    ```bash
     visudo &&
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
@@ -85,14 +85,19 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
     {{< copyable "shell-root" >}}
 
-    ```
+    ```bash
     su - tidb
     ```
 
     Create the SSH key for the `tidb` user account and hit the <kbd>Enter</kbd> key when `Enter passphrase` is prompted. After successful execution, the SSH private key file is `/home/tidb/.ssh/id_rsa`, and the SSH public key file is `/home/tidb/.ssh/id_rsa.pub`.
 
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    ssh-keygen -t rsa
     ```
-    $ ssh-keygen -t rsa
+
+    ```
     Generating public/private rsa key pair.
     Enter file in which to save the key (/home/tidb/.ssh/id_rsa):
     Created directory '/home/tidb/.ssh'.
@@ -171,9 +176,14 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
 
 1. Add the IPs of your deployment target machines to the `[servers]` section of the `hosts.ini` file.
 
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    cd /home/tidb/dm-ansible &&
+    vi hosts.ini
     ```
-    $ cd /home/tidb/dm-ansible
-    $ vi hosts.ini
+
+    ```
     [servers]
     172.16.10.71
     172.16.10.72
@@ -496,7 +506,7 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     cd /home/tidb &&
     mv dm-ansible dm-ansible-bak
     ```
@@ -505,7 +515,7 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     cd /home/tidb &&
     wget https://download.pingcap.org/dm-ansible-{version}.tar.gz &&
     tar -xzvf dm-ansible-{version}.tar.gz &&
@@ -516,7 +526,7 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     cd /home/tidb &&
     cp dm-ansible-bak/inventory.ini dm-ansible/inventory.ini
     ```
@@ -525,7 +535,7 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     cd /home/tidb/dm-ansible-bak/dmctl &&
     cp * /home/tidb/dm-ansible/dmctl/
     ```
@@ -534,6 +544,6 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```bash
     ansible-playbook local_prepare.yml
     ```

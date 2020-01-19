@@ -164,8 +164,13 @@ Expected output:
 
 If you execute `jobs`, you should see a list of running daemons:
 
+{{< copyable "shell-regular" >}}
+
+```bash
+jobs
 ```
-[kolbe@localhost tidb-v3.0-linux-amd64]$ jobs
+
+```
 [1]   Running                 ./bin/pd-server --config=pd.toml &>pd.out &
 [2]   Running                 ./bin/tikv-server --config=tikv.toml &>tikv.out &
 [3]-  Running                 ./bin/pump --config=pump.toml &>pump.out &
@@ -181,13 +186,12 @@ You should have all 4 components of our TiDB Cluster running now, and you can no
 {{< copyable "shell-regular" >}}
 
 ```bash
-mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
+mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version();'
 ```
 
 Expected output:
 
 ```
-[kolbe@localhost tidb-v3.0-linux-amd64]$ mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
 *************************** 1. row ***************************
 tidb_version(): Release Version: v3.0.0
 Git Commit Hash: 60965b006877ca7234adaced7890d7b029ed1306
@@ -218,16 +222,9 @@ If you are using an operating system that makes it easier to install MySQL serve
 mysql -h 127.0.0.1 -P 3306 -u root
 ```
 
-{{< copyable "sql" >}}
-
-```sql
-show databases;
-```
-
 Expected output:
 
 ```
-[kolbe@localhost ~]$ mysql -h 127.0.0.1 -P 3306 -u root
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 20
 Server version: 5.5.60-MariaDB MariaDB Server
@@ -236,7 +233,16 @@ Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-MariaDB [(none)]> show databases;
+MariaDB [(none)]>
+```
+
+{{< copyable "sql" >}}
+
+```sql
+show databases;
+```
+
+```
 +--------------------+
 | Database           |
 +--------------------+
@@ -254,9 +260,17 @@ Here we can already see the `tidb_binlog` database, which contains the `checkpoi
 {{< copyable "sql" >}}
 
 ```sql
-MariaDB [tidb_binlog]> use tidb_binlog;
+use tidb_binlog;
+```
+
+```
 Database changed
-MariaDB [tidb_binlog]> select * from checkpoint;
+```
+
+{{< copyable "sql" >}}
+
+```sql
+select * from checkpoint;
 ```
 
 ```
