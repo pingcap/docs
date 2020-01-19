@@ -179,7 +179,7 @@ INSERT INTO t1 VALUES (4, 4), (5, 5);
 
 {{< copyable "shell-regular" >}}
 
-```
+```bash
 mysql -h 127.0.0.1 -P 4000 -u root -p
 ```
 
