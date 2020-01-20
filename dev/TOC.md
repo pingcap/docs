@@ -291,6 +291,7 @@
     - [Highly Concurrent Write Best Practices](/dev/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/dev/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/dev/reference/best-practices/pd-scheduling.md)
+    - [Grafana Best Practices](/dev/reference/best-practices/grafana-monitor.md)
   - [TiSpark](/dev/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/dev/reference/tidb-binlog/overview.md)
@@ -422,6 +423,8 @@
 - [Adopters](/dev/adopters.md)
 - [Roadmap](/dev/roadmap.md)
 + [Releases](/dev/releases/rn.md)
+  + v4.0
+    - [4.0.0-beta](/dev/releases/4.0.0-beta.md)
   + v3.1
     - [3.1.0-beta.1](/dev/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/dev/releases/3.1.0-beta.md)
@@ -502,3 +505,4 @@
     - [RC3](/dev/releases/rc3.md)
     - [RC2](/dev/releases/rc2.md)
     - [RC1](/dev/releases/rc1.md)
++ [Glossary](/dev/glossary.md)
