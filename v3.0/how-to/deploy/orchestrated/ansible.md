@@ -63,7 +63,7 @@ Log in to the Control Machine using the `root` user account, and run the corresp
     {{< copyable "shell-root" >}}
 
     ```shell
-    yum -y install epel-release git curl sshpass && \
+    yum -y install epel-release git curl sshpass &&
     yum -y install python2-pip
     ```
 
@@ -178,7 +178,7 @@ It is required to use `pip` to install Ansible and its dependencies, otherwise a
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd /home/tidb/tidb-ansible && \
+    cd /home/tidb/tidb-ansible &&
     sudo pip install -r ./requirements.txt
     ```
 
@@ -205,7 +205,7 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd /home/tidb/tidb-ansible && \
+    cd /home/tidb/tidb-ansible &&
     vi hosts.ini
     ```
 
@@ -246,7 +246,7 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
 {{< copyable "shell-regular" >}}
 
 ```bash
-cd /home/tidb/tidb-ansible && \
+cd /home/tidb/tidb-ansible &&
 ansible-playbook -i hosts.ini deploy_ntp.yml -u tidb -b
 ```
 
@@ -413,7 +413,7 @@ Take the `/dev/nvme0n1` data disk as an example:
     {{< copyable "shell-root" >}}
 
     ```shell
-    mkdir /data1 && \
+    mkdir /data1 &&
     mount -a
     ```
 
@@ -634,7 +634,6 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | set_hostname | to edit the hostname of the managed node based on the IP, False by default |
 | enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
 | zookeeper_addrs | the zookeeper address of the binlog Kafka cluster |
-| enable_slow_query_log | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
 | deploy_without_tidb | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 | alertmanager_target | optional: If you have deployed `alertmanager` separately, you can configure this variable using the `alertmanager_host:alertmanager_port` format |
 | grafana_admin_user | the username of Grafana administrator; default `admin` |
@@ -851,8 +850,8 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
     {{< copyable "shell-regular" >}}
 
     ```shell
-    sudo systemctl stop ntpd.service && \
-    sudo ntpdate pool.ntp.org && \
+    sudo systemctl stop ntpd.service &&
+    sudo ntpdate pool.ntp.org &&
     sudo systemctl start ntpd.service
     ```
 
@@ -861,8 +860,8 @@ Edit the `inventory.ini` file and add the following host variable after the IP o
     {{< copyable "shell-regular" >}}
 
     ```shell
-    sudo yum install ntp ntpdate && \
-    sudo systemctl start ntpd.service && \
+    sudo yum install ntp ntpdate &&
+    sudo systemctl start ntpd.service &&
     sudo systemctl enable ntpd.service
     ```
 
@@ -885,8 +884,8 @@ For versions earlier than TiDB 1.0.4, the process supervision method of TiDB Ans
 {{< copyable "shell-regular" >}}
 
 ```shell
-ansible-playbook stop.yml && \
-ansible-playbook deploy.yml -D && \
+ansible-playbook stop.yml
+ansible-playbook deploy.yml -D &&
 ansible-playbook start.yml
 ```
 
@@ -897,7 +896,7 @@ ansible-playbook start.yml
     {{< copyable "shell-root" >}}
 
     ```shell
-    useradd tidb && \
+    useradd tidb &&
     passwd tidb
     ```
 
