@@ -32,7 +32,7 @@ Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREM
 
 Back end is the destination where TiDB Lightning sends the parsed result. Also spelled as "backend".
 
-See [TiDB Lightning TiDB-Backend](/dev/reference/tools/tidb-lightning/tidb-backend.md) for details.
+See [TiDB Lightning TiDB-backend](/dev/reference/tools/tidb-lightning/tidb-backend.md) for details.
 
 ### Black-white list
 
@@ -118,7 +118,7 @@ Regardless of number of indices, every table is associated with exactly one inde
 
 TiDB Lightning processes multiple index engines concurrently. This is controlled by the `lightning.index-concurrency` setting. Since every table has exactly one index engine, this also configures the maximum number of tables to process at the same time.
 
-### Ingestion
+### Ingest
 
 An operation which inserts the entire content of an [SST file](/dev/reference/tools/tidb-lightning/glossary.md#sst-file) into the RocksDB (TiKV) store.
 
@@ -186,4 +186,4 @@ An engine is typically very large (around 100 GB), which is not friendly to TiKV
 
 SST is the abbreviation of "sorted string table". An SST file is RocksDB's (and thus TiKV's) native storage format of a collection of KV pairs.
 
-TiKV Importer produces SST files from a closed [engine](/dev/reference/tools/tidb-lightning/glossary.md#engine). These SST files are uploaded and then [ingested](/dev/reference/tools/tidb-lightning/glossary.md#ingestion) into TiKV stores.
+TiKV Importer produces SST files from a closed [engine](/dev/reference/tools/tidb-lightning/glossary.md#engine). These SST files are uploaded and then [ingested](/dev/reference/tools/tidb-lightning/glossary.md#ingest) into TiKV stores.

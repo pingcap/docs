@@ -1,10 +1,10 @@
 ---
-title: TiDB Lightning TiDB-Backend
+title: TiDB Lightning TiDB-backend
 summary: Choose how to write data into the TiDB cluster.
 category: reference
 ---
 
-# TiDB Lightning TiDB-Backend
+# TiDB Lightning TiDB-backend
 
 TiDB Lightning supports two backends: Importer and TiDB. It determines how `tidb-lightning` delivers data into the target cluster.
 
