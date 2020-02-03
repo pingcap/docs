@@ -66,6 +66,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Determines whether to treat the `utf8` character set in old tables as `utf8mb4`.
 - Default value: `true`
 
+### `alter-primary-key`
+
+- Determine whether to add or remove the `primary key`.
+- Default value: `false`
+- Adding or dropping the `primart key` option is disabled by default. When `alter-primary-key` is set to `true`, the option is enabled. However, for the table that already existed, if the `primary key` is an integer, you can not drop the `primary key` of the table even if you set the variable to `true`.
+
 ## Log
 
 Configuration items related to log.

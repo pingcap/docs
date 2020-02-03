@@ -64,7 +64,7 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## MySQL compatibility
 
-* Dropping the `PRIMARY KEY` is not supported.
+* Dropping the `PRIMARY KEY` is not supported by default, however, you can set the `alter-primary-key` to `true` to enable the feature. For more details, see [alter-primary-key](/dev/reference/configuration/tidb-server/configuration-file.md#alter-primary-key).
 
 ## See also
 
