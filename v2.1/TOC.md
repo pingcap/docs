@@ -261,6 +261,7 @@
   + Best Practices
     - [HAProxy Best Practices](/v2.1/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/v2.1/reference/best-practices/pd-scheduling.md)
+    - [Grafana Best Practices](/v2.1/reference/best-practices/grafana-monitor.md)
   - [TiSpark](/v2.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v2.1/reference/tidb-binlog/overview.md)
@@ -321,6 +322,7 @@
         + v1.0
           - [1.0.2](/v2.1/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/v2.1/reference/tools/data-migration/releases/1.0.3.md)
+      - [TiDB DM Glossary](/v2.1/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/v2.1/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v2.1/reference/tools/tidb-lightning/deployment.md)

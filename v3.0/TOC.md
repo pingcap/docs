@@ -287,6 +287,7 @@
     - [Highly Concurrent Write Best Practices](/v3.0/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/v3.0/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/v3.0/reference/best-practices/pd-scheduling.md)
+    - [Grafana Best Practices](/v3.0/reference/best-practices/grafana-monitor.md)
   - [TiSpark](/v3.0/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.0/reference/tidb-binlog/overview.md)
@@ -347,6 +348,7 @@
         + v1.0
           - [1.0.2](/v3.0/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/v3.0/reference/tools/data-migration/releases/1.0.3.md)
+      - [TiDB DM Glossary](/v3.0/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/v3.0/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v3.0/reference/tools/tidb-lightning/deployment.md)
