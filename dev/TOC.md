@@ -291,7 +291,7 @@
     - [Highly Concurrent Write Best Practices](/dev/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/dev/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/dev/reference/best-practices/pd-scheduling.md)
-    - [TiKV Performance Tuning with Massive Region Amount Best Practices](/dev/reference/best-practices/massive-regions.md)
+    - [TiKV Performance Tuning with Massive Regions](/dev/reference/best-practices/massive-regions.md)
   - [TiSpark](/dev/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/dev/reference/tidb-binlog/overview.md)
