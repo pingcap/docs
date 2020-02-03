@@ -17,7 +17,7 @@ Follow the steps in this section if you deploy TiDB Binlog with [TiDB Ansible Pl
 First, upgrade the Pump component:
 
 1. Copy the new version of the binary `pump` file into the`({ resources_dir })/bin` directory.
-2. Execute the `ansible-playbook rolling_update.yml --tags = pump` command to perform a rolling update for Pump.
+2. Execute the `ansible-playbook rolling_update.yml --tags=pump` command to perform a rolling update for Pump.
 
 ### Upgrade Drainer
 
