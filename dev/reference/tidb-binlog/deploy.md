@@ -152,11 +152,13 @@ In environments of development, testing and production, the requirements on serv
 
 ### Step 3: Deploy Drainer
 
-1. Obtain `initial_commit_ts`.
+1. Obtain the value of `initial_commit_ts`.
 
-    If the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`.
+    When Drainer starts for the first time, the timestamp information `initial_commit_ts` is required.
 
-    If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery and must use the timestamp of the full backup.
+    - If the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`.
+
+    - If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery. In this case, the value of `initial_commit_ts` must be obtained from the timestamp information of the full backup.
 
     If you use mydumper, you can get the timestamp by referring to the `Pos` field in the metadata file from the export directory. An example of the metadata file is as follows:
 

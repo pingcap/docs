@@ -151,22 +151,24 @@ In environments of development, testing and production, the requirements on serv
 
 ### Step 3: Deploy Drainer
 
-1. Obtain `initial_commit_ts`.
+1. Obtain the value of `initial_commit_ts`.
 
-    If the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`.
+    When Drainer starts for the first time, the timestamp information `initial_commit_ts` is required.
 
-    If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery and must use the timestamp of the full backup.
+    - If the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`.
 
-    If you use mydumper, you can get the timestamp by referring to the field `Pos` in the metadata file within the export directory. An example for the above metadata file is as follows:
+    - If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery. In this case, the value of `initial_commit_ts` must be obtained from the timestamp information of the full backup.
 
-    ```
-    Started dump at: 2019-12-30 13:25:41
-    SHOW MASTER STATUS:
-            Log: tidb-binlog
-            Pos: 413580274257362947
-            GTID:
-    Finished dump at: 2019-12-30 13:25:41
-    ```
+        If you use mydumper to perform full data backup, you can get the timestamp by referring to the `Pos` field in the metadata file from the export directory. An example of the metadata file is as follows:
+
+        ```
+        Started dump at: 2019-12-30 13:25:41
+        SHOW MASTER STATUS:
+                Log: tidb-binlog
+                Pos: 413580274257362947
+                GTID:
+        Finished dump at: 2019-12-30 13:25:41
+        ```
 
 2. Modify the `tidb-ansible/inventory.ini` file.
 

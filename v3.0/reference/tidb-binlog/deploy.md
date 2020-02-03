@@ -152,40 +152,40 @@ In environments of development, testing and production, the requirements on serv
 
 ### Step 3: Deploy Drainer
 
-1. Obtain `initial_commit_ts`.
+1. Obtain the value of `initial_commit_ts`.
 
-    In TiDB 3.0.6 or later versions, if the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`. Otherwise, refer to the following methods to obtain the latest timestamp.
+    When Drainer starts for the first time, the timestamp information `initial_commit_ts` is required.
 
-    If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery and must use the timestamp of the full backup.
+    - In TiDB 3.0.6 or later versions, if the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`. Otherwise, you need to use `binlogctl` to get the the most recent timestamp information `initial_commit_ts`. Refer to the following method to obtain the latest timestamp.
 
-    If you use mydumper, you can get the timestamp by referring to the field `Pos` in the metadata file within the export directory. An example for the above metadata file is as follows:
+        {{< copyable "shell-regular" >}}
 
-    ```
-    Started dump at: 2019-12-30 13:25:41
-    SHOW MASTER STATUS:
-            Log: tidb-binlog
-            Pos: 413580274257362947
-            GTID:
-    Finished dump at: 2019-12-30 13:25:41
-    ```
+        ```bash
+        cd /home/tidb/tidb-ansible &&
+        resources/bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd generate_meta
+        ```
 
-    To obtain a latest timestamp, run the following command to use `binlogctl` to generate the `tso` information which is needed for the initial start of Drainer:
+        ```
+        INFO[0000] [pd] create pd client with endpoints [http://192.168.199.118:32379]
+        INFO[0000] [pd] leader switches to: http://192.168.199.118:32379, previous:
+        INFO[0000] [pd] init cluster id 6569368151110378289
+        2018/06/21 11:24:47 meta.go:117: [info] meta: &{CommitTS:400962745252184065}
+        ```
 
-    {{< copyable "shell-regular" >}}
+        This command outputs `meta: &{CommitTS:400962745252184065}`, and the value of `CommitTS` is used as the value of the `initial-commit-ts`.
 
-    ```bash
-    cd /home/tidb/tidb-ansible &&
-    resources/bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd generate_meta
-    ```
+    - If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery. In this case, the value of `initial_commit_ts` must be obtained from the timestamp information of the full backup.
 
-    ```
-    INFO[0000] [pd] create pd client with endpoints [http://192.168.199.118:32379]
-    INFO[0000] [pd] leader switches to: http://192.168.199.118:32379, previous:
-    INFO[0000] [pd] init cluster id 6569368151110378289
-    2018/06/21 11:24:47 meta.go:117: [info] meta: &{CommitTS:400962745252184065}
-    ```
+        If you use mydumper to perform full data backup, you can get the timestamp by referring to the `Pos` field in the metadata file from the export directory. An example of the metadata file is as follows:
 
-    This command outputs `meta: &{CommitTS:400962745252184065}`, and the value of `CommitTS` is used as the value of the `initial-commit-ts` parameter needed for the initial start of Drainer.
+        ```
+        Started dump at: 2019-12-30 13:25:41
+        SHOW MASTER STATUS:
+                Log: tidb-binlog
+                Pos: 413580274257362947
+                GTID:
+        Finished dump at: 2019-12-30 13:25:41
+        ```
 
 2. Modify the `tidb-ansible/inventory.ini` file.
 
