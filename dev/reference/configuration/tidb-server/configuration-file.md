@@ -70,7 +70,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Determines whether to add or remove the primary key constraint to or from a column.
 - Default value: `false`
-- Adding or dropping the `primart key` option is disabled by default. When `alter-primary-key` is set to `true`, the option is enabled. However, for the table that already existed, if the `primary key` is an integer, you can not drop the `primary key` of the table even if you set the variable to `true`.
+- With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
 
 ## Log
 
