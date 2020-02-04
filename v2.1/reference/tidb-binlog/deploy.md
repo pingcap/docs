@@ -172,7 +172,7 @@ In environments of development, testing and production, the requirements on serv
         2018/06/21 11:24:47 meta.go:117: [info] meta: &{CommitTS:400962745252184065}
         ```
 
-        This command outputs `meta: &{CommitTS:400962745252184065}`, and the value of `CommitTS` is used as the value of the `initial-commit-ts`.
+        This command outputs `meta: &{CommitTS:400962745252184065}`, and the value of `CommitTS` is the needed value of the `initial-commit-ts`.
 
     - If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery. In this case, the value of `initial_commit_ts` must be the timestamp information of the full backup.
 
