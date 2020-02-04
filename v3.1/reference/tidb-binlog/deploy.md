@@ -157,7 +157,7 @@ In environments of development, testing and production, the requirements on serv
 
     - If the replication is started from the latest time point, you just need to set `initial_commit_ts` to `-1`.
 
-    - If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery. In this case, the value of `initial_commit_ts` must be obtained from the timestamp information of the full backup.
+    - If the downstream database is MySQL or TiDB, to ensure data integrity, you need to perform full data backup and recovery. In this case, the value of `initial_commit_ts` must be the timestamp information of the full backup.
 
         If you use mydumper to perform full data backup, you can get the timestamp by referring to the `Pos` field in the metadata file from the export directory. An example of the metadata file is as follows:
 
