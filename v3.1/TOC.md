@@ -256,6 +256,7 @@
     - [The TiDB Access Privilege System](/v3.1/reference/security/privilege-system.md)
     - [TiDB User Account Management](/v3.1/reference/security/user-account-management.md)
     - [Role-Based Access Control](/v3.1/reference/security/role-based-access-control.md)
+    - [Certificate-Based Authentication](/v3.1/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/v3.1/reference/transactions/overview.md)
     - [Transaction Model](/v3.1/reference/transactions/transaction-model.md)
@@ -289,6 +290,7 @@
     - [Highly Concurrent Write Best Practices](/v3.1/reference/best-practices/high-concurrency.md)
     - [HAproxy Best Practices](/v3.1/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/v3.1/reference/best-practices/pd-scheduling.md)
+    - [Grafana Best Practices](/v3.1/reference/best-practices/grafana-monitor.md)
   - [TiSpark](/v3.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.1/reference/tidb-binlog/overview.md)
@@ -349,12 +351,15 @@
         + v1.0
           - [1.0.2](/v3.1/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/v3.1/reference/tools/data-migration/releases/1.0.3.md)
+      - [TiDB DM Glossary](/v3.1/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/v3.1/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v3.1/reference/tools/tidb-lightning/deployment.md)
+      - [Configuration](/v3.1/reference/tools/tidb-lightning/config.md)
       - [Checkpoints](/v3.1/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/v3.1/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/v3.1/reference/tools/tidb-lightning/csv.md)
+      - [Web Interface](/v3.1/reference/tools/tidb-lightning/web.md)
       - [Monitor](/v3.1/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.1/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v3.1/faq/tidb-lightning.md)
@@ -418,8 +423,10 @@
 - [Roadmap](/v3.1/roadmap.md)
 + [Releases](/v3.1/releases/rn.md)
   + v3.1
+    - [3.1.0-beta.1](/v3.1/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/v3.1/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.9](/v3.1/releases/3.0.9.md)
     - [3.0.8](/v3.1/releases/3.0.8.md)
     - [3.0.7](/v3.1/releases/3.0.7.md)
     - [3.0.6](/v3.1/releases/3.0.6.md)
@@ -495,3 +502,4 @@
     - [RC3](/v3.1/releases/rc3.md)
     - [RC2](/v3.1/releases/rc2.md)
     - [RC1](/v3.1/releases/rc1.md)
++ [Glossary](/v3.1/glossary.md)
