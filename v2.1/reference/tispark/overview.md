@@ -58,7 +58,7 @@ If you want to use TiSpark-2.1.x, please use the following configuration:
 </dependencies>
 ```
 
-For other build tools, visit <https://search.maven.org/> and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap-tikv/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap). This search also lists all the available modules of TiSpark including tikv-client.
+For other build tools, visit <https://search.maven.org/> and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap-tikv/tispark-green.svg)](https://search.maven.org/#search%7Cga%7C1%7Cpingcap). This search also lists all the available modules of TiSpark including tikv-client.
 
 ## How to build from sources
 
@@ -108,7 +108,7 @@ Although TiSpark provides backward compatibility to TiDB, it only guarantees the
 
 ## How to upgrade from Spark 2.1 to Spark 2.3/2.4
 
-For the users of Spark 2.1 who wish to upgrade to the latest TiSpark version on Spark 2.3/2.4, download or install Spark 2.3+/2.4+ by following the instructions on [Apache Spark Site](http://spark.apache.org/downloads.html) and overwrite the old spark version in `$SPARK_HOME`.
+For the users of Spark 2.1 who wish to upgrade to the latest TiSpark version on Spark 2.3/2.4, download or install Spark 2.3+/2.4+ by following the instructions on [Apache Spark Site](https://spark.apache.org/downloads.html) and overwrite the old spark version in `$SPARK_HOME`.
 
 ## Scala version
 

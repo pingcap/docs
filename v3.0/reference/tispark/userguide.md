@@ -104,7 +104,7 @@ To deploy TiSpark without a Spark cluster, it is recommended that you use the Sp
 
     After the command is executed, a log file is printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully.
 
-    Open the [http://spark-master-hostname:8080](http://spark-master-hostname:8080) to view the cluster information (if you do not change the default port number of Spark-Master).
+    Open the [https://spark-master-hostname:8080](https://spark-master-hostname:8080) to view the cluster information (if you do not change the default port number of Spark-Master).
 
     When you start Spark-Slave, you can also use this panel to confirm whether the Slave is joined to the cluster.
 
