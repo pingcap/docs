@@ -8,12 +8,40 @@ category: reference
 
 This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB.
 
+{{< copyable "sql" >}}
+
 ```sql
-ADMIN SHOW DDL
-ADMIN SHOW DDL JOBS
-ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...
-ADMIN CANCEL DDL JOBS job_id [, job_id] ...
-ADMIN CHECK TABLE tbl_name [, tbl_name] ...
+ADMIN SHOW DDL;
+```
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN SHOW DDL JOBS;
+```
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
+```
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
+```
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
+```
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 ```
 
 - `ADMIN SHOW DDL`: To view the currently running DDL jobs.
@@ -76,6 +104,7 @@ mysql> admin show ddl jobs;
     > - If the jobs you want to cancel are finished, the cancellation operation fails.
 
 - `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and corresponding indexes. If the check is passed, an empty result will be returned. On failure, an error message will indicate that data is inconsistent.
+- `ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT`: In extreme cases, it is used to untrusted overwrite the meta information of the table in the storage layer. Here "untrusted" means that the meta information of the original table must be checked by a real person to ensure the unique source of information: `CREATE TABLE STATEMENT`. To make the statement take effect, you need to set the [`repair-mode`](/dev/reference/configuration/tidb-server/configuration-file.md#repair-mode) in the configuration file to `true`, and make sure that the names of tables that need to be fixed are on the [`repair-table-list`](/dev/reference/configuration/tidb-server/configuration-file.md#repair-table-list).
 
 ## MySQL compatibility
 

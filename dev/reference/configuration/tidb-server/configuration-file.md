@@ -66,6 +66,18 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Determines whether to treat the `utf8` character set in old tables as `utf8mb4`.
 - Default value: `true`
 
+### `repair-mode`
+
+- Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
+- Default value: `false`
+- The syntax for the fix is not supported by default, and all table information is loaded when TiDB is started.
+
+### `repair-table-list`
+
+- Lists all bad tables that need to be fixed in instances in the case that the `repair-mode` is set to `true`. An example for the list is: ["db.table1","db.table2"...].
+- Default value: []
+- With the default setting, the list is empty, which means that there is no information about bad tables that need to be fixed.
+
 ## Log
 
 Configuration items related to log.
