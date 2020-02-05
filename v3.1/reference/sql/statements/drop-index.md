@@ -29,7 +29,7 @@ This statement removes an index from a specified table, marking space as free in
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment, c1 INT NOT NULL);
+mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.10 sec)
 
 mysql> INSERT INTO t1 (c1) VALUES (1),(2),(3),(4),(5);
@@ -64,7 +64,7 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## MySQL compatibility
 
-* Dropping the `PRIMARY KEY` is not supported.
+* Removing the primary key constraint from a column is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/v3.1/reference/configuration/tidb-server/configuration-file.md#alter-primary-key).
 
 ## See also
 

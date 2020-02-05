@@ -45,7 +45,7 @@ This statement adds a new index to an existing table. It is an alternative synta
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment, c1 INT NOT NULL);
+mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.10 sec)
 
 mysql> INSERT INTO t1 (c1) VALUES (1),(2),(3),(4),(5);
@@ -89,7 +89,7 @@ The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
-* It is not possible to add a `PRIMARY KEY` to a table.
+* Adding the primary key constraint to a table is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/dev/reference/configuration/tidb-server/configuration-file.md#alter-primary-key).
 
 ## See also
 
