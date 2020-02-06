@@ -80,7 +80,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `repair-table-list`
 
-- Lists all bad tables that need to be repaired in instances in the case that the `repair-mode` is set to `true`. An example for the list is: ["db.table1","db.table2"...].
+- `repair-table-list` is only valid when [`repair-mode`](#repair-mode) is set to `true`. `repair-table-list` is a list of bad tables that need to be repaired in an instance. An example of the list is: ["db.table1","db.table2"...].
 - Default value: []
 - With the default setting, the list is empty, which means that there is no information about bad tables that need to be repaired.
 
