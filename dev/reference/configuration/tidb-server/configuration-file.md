@@ -76,7 +76,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
 - Default value: `false`
-- The syntax for the `repair` is not supported by default, and all table information is loaded when TiDB is started.
+- The `repair` syntax is not supported by default. This means that all tables are loaded when TiDB is started.
 
 ### `repair-table-list`
 
