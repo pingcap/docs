@@ -90,7 +90,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - Does not support creating multiple indexes at the same time.
     - Does not support the `VISIBLE/INVISIBLE` index.
     - Adding an index on a generated column via `ALTER TABLE` is not supported.
-    - Other Index Type (HASH/BTREE/RTREE) is supported in syntax, rather than in function.
+    - Other Index Type (HASH/BTREE/RTREE) is supported in syntax, but not applicable.
 + Add Column:
     - Does not support creating multiple columns at the same time.
     - Does not support setting a column as the `PRIMARY KEY`, or creating a unique index, or specifying `AUTO_INCREMENT` while adding it.
@@ -103,7 +103,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
 + `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
 + `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but it works differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
 
-Table Option does not support the following syntax:
+The following Table Options are not supported in syntax:
     - `WITH/WITHOUT VALIDATION`
     - `SECONDARY_LOAD/SECONDARY_UNLOAD`
     - `CHECK/DROP CHECK`
