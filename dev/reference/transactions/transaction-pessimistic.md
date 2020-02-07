@@ -22,7 +22,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 - All the locks are released when the transaction is committed or rolled back.
 
-- Deadlocks in concurrent transactions can be detected by the deadlock detector. A MySQL-compatible error code `123` is returned.
+- Deadlocks in concurrent transactions can be detected by the deadlock detector. A MySQL-compatible error code `1213` is returned.
 
 - TiDB supports both the optimistic transaction mode and pessimistic transaction mode in the same cluster. You can specify either mode for transaction execution.
 
@@ -52,7 +52,7 @@ To disable the pessimistic transaction mode, modify the configuration file and a
 
 ## Difference with MySQL InnoDB
 
-1. TiDB uses range in the WHERE clause. When executing DML or `SELECT FOR UPDATE` statements, the concurrent `INSERT` statements within the range are not blocked.
+1. When TiDB executing DML or `SELECT FOR UPDATE` statements that use range in the WHERE clause, the concurrent `INSERT` statements within the range are not blocked.
 
     By implementing Gap Lock, InnoDB blocks the execution of concurrent `INSERT` statements within the range. It is mainly used to support statement-based binlog. Therefore, some application sets the isolation level to READ COMMITTED to avoid concurrency performance problems caused by Gap Lock. TiDB does not support Gap Lock, so there is no need to pay the concurrency performance cost.
 
