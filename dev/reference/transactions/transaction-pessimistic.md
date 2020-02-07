@@ -54,7 +54,7 @@ To disable the pessimistic transaction mode, modify the configuration file and a
 
 1. When TiDB executing DML or `SELECT FOR UPDATE` statements that use range in the WHERE clause, the concurrent `INSERT` statements within the range are not blocked.
 
-    By implementing Gap Lock, InnoDB blocks the execution of concurrent `INSERT` statements within the range. It is mainly used to support statement-based binlog. Therefore, some application sets the isolation level to READ COMMITTED to avoid concurrency performance problems caused by Gap Lock. TiDB does not support Gap Lock, so there is no need to pay the concurrency performance cost.
+    By implementing Gap Lock, InnoDB blocks the execution of concurrent `INSERT` statements within the range. It is mainly used to support statement-based binlog. Therefore, some applications set the isolation level to READ COMMITTED to avoid concurrency performance problems caused by Gap Lock. TiDB does not support Gap Lock, so there is no need to pay the concurrency performance cost.
 
 2. TiDB does not support `SELECT LOCK IN SHARE MODE`.
 
