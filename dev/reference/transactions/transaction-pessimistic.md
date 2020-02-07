@@ -58,4 +58,4 @@ To disable the pessimistic transaction mode, modify the configuration file and a
 
 2. TiDB does not support `SELECT LOCK IN SHARE MODE`.
 
-    When `SELECT LOCK IN SHARE MODE` is specified in a statement, it has the same effect as that without the lock, so it does not block the read or write of other transactions.
+    When `SELECT LOCK IN SHARE MODE` is specified in a statement, it has the same effect as that without the lock, so the read or write of other transactions is not blocked.
