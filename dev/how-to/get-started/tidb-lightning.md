@@ -57,7 +57,7 @@ Before the data import, you need to deploy a TiDB cluster (later than v2.0.9). I
 
 Download the TiDB Lightning installation package from the following link:
 
-- **v3.0.4**: [tidb-toolkit-v3.0.4-linux-amd64.tar.gz](http://download.pingcap.org/tidb-toolkit-v3.0.0-linux-amd64.tar.gz)
+- **v3.0.4**: [tidb-toolkit-v3.0.4-linux-amd64.tar.gz](https://download.pingcap.org/tidb-toolkit-v3.0.0-linux-amd64.tar.gz)
 
 > **Note:**
 >
@@ -79,7 +79,7 @@ Download the TiDB Lightning installation package from the following link:
 
     [server]
     # The listening address of tikv-importer. tidb-lightning connects to this address for data write.
-    addr = "0.0.0.0:8287"
+    addr = "192.168.20.10:8287"
 
     [import]
     # The directory of the engine file.

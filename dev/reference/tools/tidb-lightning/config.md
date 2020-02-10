@@ -230,7 +230,7 @@ log-level = "info"
 [server]
 # The listening address of tikv-importer. tidb-lightning needs to connect to
 # this address to write data.
-addr = "0.0.0.0:8287"
+addr = "192.168.20.10:8287"
 # Size of the thread pool for the gRPC server.
 grpc-concurrency = 16
 
@@ -304,6 +304,7 @@ min-available-ratio = 0.05
 | --tidb-port *port* | TiDB server port (default = 4000) | `tidb.port` |
 | --tidb-status *port* | TiDB status port (default = 10080) | `tidb.status-port` |
 | --tidb-user *user* | User name to connect to TiDB | `tidb.user` |
+| --tidb-password *password* | Password to connect to TiDB | `tidb.password` |
 
 If a command line parameter and the corresponding setting in the configuration file are both provided, the command line parameter will be used. For example, running `./tidb-lightning -L debug --config cfg.toml` would always set the log level to "debug" regardless of the content of `cfg.toml`.
 

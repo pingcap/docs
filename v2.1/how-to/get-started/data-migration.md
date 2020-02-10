@@ -36,75 +36,75 @@ For additional information about DM, please consult [Data Migration Overview](/v
 
 We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-server, tikv-server, and tidb-server. Then we'll start a single DM-master and 3 instances of DM-worker.
 
-First, install MySQL 5.7 and download/extract the TiDB packages we'll use:
+1. First, install MySQL 5.7 and download/extract the TiDB v2.1 and DM v1.0.2 packages we'll use:
 
-```bash
-sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
-sudo yum install -y mysql-community-server
-curl http://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
-curl http://download.pingcap.org/dm-latest-linux-amd64.tar.gz | tar xzf -
-curl -L https://github.com/pingcap/docs/raw/master/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
-```
+    ```bash
+    sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
+    sudo yum install -y mysql-community-server
+    curl https://download.pingcap.org/tidb-v2.1-linux-amd64.tar.gz | tar xzf -
+    curl https://download.pingcap.org/dm-v1.0.2-linux-amd64.tar.gz | tar xzf -
+    curl -L https://github.com/pingcap/docs/raw/master/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
+    ```
 
-Create some directories and symlinks:
+2. Create some directories and symlinks:
 
-```bash
-mkdir -p bin data logs
-ln -sf -t bin/ "$HOME"/*/bin/*
-[[ :$PATH: = *:$HOME/bin:* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
-```
+    ```bash
+    mkdir -p bin data logs
+    ln -sf -t bin/ "$HOME"/*/bin/*
+    [[ :$PATH: = *:$HOME/bin:* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
+    ```
 
-Set up configuration for the 3 instances of MySQL Server we'll start:
+3. Set up configuration for the 3 instances of MySQL Server we'll start:
 
-```bash
-tee -a "$HOME/.my.cnf" <<EoCNF
-[server]
-socket=mysql.sock
-pid-file=mysql.pid
-log-error=mysql.err
-log-bin
-auto-increment-increment=5
-[server1]
-datadir=$HOME/data/mysql1
-server-id=1
-port=3307
-auto-increment-offset=1
-[server2]
-datadir=$HOME/data/mysql2
-server-id=2
-port=3308
-auto-increment-offset=2
-[server3]
-datadir=$HOME/data/mysql3
-server-id=3
-port=3309
-auto-increment-offset=3
-EoCNF
-```
+    ```bash
+    tee -a "$HOME/.my.cnf" <<EoCNF
+    [server]
+    socket=mysql.sock
+    pid-file=mysql.pid
+    log-error=mysql.err
+    log-bin
+    auto-increment-increment=5
+    [server1]
+    datadir=$HOME/data/mysql1
+    server-id=1
+    port=3307
+    auto-increment-offset=1
+    [server2]
+    datadir=$HOME/data/mysql2
+    server-id=2
+    port=3308
+    auto-increment-offset=2
+    [server3]
+    datadir=$HOME/data/mysql3
+    server-id=3
+    port=3309
+    auto-increment-offset=3
+    EoCNF
+    ```
 
-Initialize and start our MySQL instances:
+4. Initialize and start our MySQL instances:
 
-```bash
-for i in 1 2 3
-do
-    echo  "mysql$i"
-    mysqld --defaults-group-suffix="$i" --initialize-insecure
-    mysqld --defaults-group-suffix="$i" &
-done
-```
+    ```bash
+    for i in 1 2 3
+    do
+        echo  "mysql$i"
+        mysqld --defaults-group-suffix="$i" --initialize-insecure
+        mysqld --defaults-group-suffix="$i" &
+    done
+    ```
 
-To make sure your MySQL server instances are all running, you can execute `jobs` and/or `pgrep -a mysqld`:
+5. To make sure your MySQL server instances are all running, you can execute `jobs` and/or `pgrep -a mysqld`:
 
-```
-$ jobs
-[1]   Running                 mysqld --defaults-group-suffix="$i" &
-[2]-  Running                 mysqld --defaults-group-suffix="$i" &
-[3]+  Running                 mysqld --defaults-group-suffix="$i" &
-$ pgrep -a mysqld
-17672 mysqld --defaults-group-suffix=1
-17727 mysqld --defaults-group-suffix=2
-17782 mysqld --defaults-group-suffix=3
-```
+    ```
+    $ jobs
+    [1]   Running                 mysqld --defaults-group-suffix="$i" &
+    [2]-  Running                 mysqld --defaults-group-suffix="$i" &
+    [3]+  Running                 mysqld --defaults-group-suffix="$i" &
+    $ pgrep -a mysqld
+    17672 mysqld --defaults-group-suffix=1
+    17727 mysqld --defaults-group-suffix=2
+    17782 mysqld --defaults-group-suffix=3
+    ```
 
 ## Replicating shards
 
@@ -119,7 +119,7 @@ for i in 1 2 3
 do
     mysql -h 127.0.0.1 -P "$((3306+i))" -u root <<EoSQL
         create database dmtest1;
-        create table dmtest1.t1 (id bigint unsigned not null auto_increment primary key, c char(32), port int);
+        create table dmtest1.t1 (id bigint unsigned not null AUTO_INCREMENT primary key, c char(32), port int);
 EoSQL
 done
 ```
@@ -227,7 +227,10 @@ password = ""
 port = 3307
 ```
 
-The `flavor` option should be set to `"mysql"` (the default value, and 5.5 < MySQL versions < 8.0 are supported) if migrating from MySQL Server, Percona Server, Percona XtraDB Cluster, or Amazon Aurora or RDS. If migrating from MariaDB Server or MariaDB (Galera) Cluster, use `flavor = "mariadb"` (only MariaDB versions greater than 10.1.2 are supported).
+- If you migrate data from MySQL Server, Percona Server, Percona XtraDB Cluster, Amazon Aurora or RDS, set the `flavor` option to `"mysql"`, which is the default value. This value is valid only when you are using a MySQL version between 5.5 (not included) and 8.0 (not included).
+- If you migrate data from MariaDB Server or MariaDB (Galera) Cluster, set `flavor = "mariadb"`. You can set this value only when you are using a MariaDB version later than 10.1.2.
+- Starting with DM 1.0.2, DM automatically generates the values of the `flavor` and `server-id` options. You do not need to manually configure these options in normal situations.
+- If `password` in the `[from]` configuration is not an empty string, you need to use dmctl to encrypt the password. Refer to [Encrypt the upstream MySQL user password using dmctl](/v2.1/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl) for detailed steps.
 
 Tasks are defined in YAML files. First, let's look at dmtask1.yaml:
 
@@ -280,6 +283,8 @@ There are a number of global options, and several groups of options that define 
 * `is-sharding: true` tells DM that we want multiple DM-worker instances to work on a single task to merge several upstream shards into a single downstream table.
 
 * `ignore-checking-items: ["auto_increment_ID"]` disables DM's detection of potential auto-increment conflicts among the upstream instances. DM can detect that all 3 upstream MySQL servers have an auto-increment column for a table with the same name in the same schema, and that this situation would be expected to lead to conflicts among the several tables. We've avoided that by setting `auto-increment-increment` and `auto-increment-offset` so that each of the MySQL servers gives non-overlapping IDs. So, we tell DM to ignore checking for overlapping auto-increment IDs in this task.
+
+* The `target-database` section defines the information of the connected target database. If `password` is not an empty string, you need to use dmctl to encrypt the password. Refer to [Encrypt the upstream MySQL user password using dmctl](/v2.1/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl) for detailed steps.
 
 * We use `black-white-list` to limit the scope of this task to database `dmtest`.
 

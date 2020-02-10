@@ -12,7 +12,7 @@ category: faq
 
 ## What is the minimum TiDB/TiKV/PD cluster version supported by Lightning?
 
-The version of TiDB Lightning should be the same as the cluster. The earlist available version is 2.0.9, but we recommend using the latest stable version (3.0).
+The version of TiDB Lightning should be the same as the cluster. The earliest available version is 2.0.9, but we recommend using the latest stable version (3.0).
 
 ## Does TiDB Lightning support importing multiple schemas (databases)?
 
@@ -45,21 +45,21 @@ Depending on the status of `tikv-importer`, the basic sequence of restarting TiD
 
 If `tikv-importer` is still running:
 
-1. [Stop `tidb-lightning`](#how-to-stop-tidb-lightning)
+1. [Stop `tidb-lightning`](#how-to-stop-the-tidb-lightning-process).
 2. Perform the intended modifications, such as fixing the source data, changing settings, replacing hardware etc.
 3. If the modification previously has changed any table, [remove the corresponding checkpoint](/dev/reference/tools/tidb-lightning/checkpoints.md#--checkpoint-remove) too.
-4. Start `tidb-lightning`
+4. Start `tidb-lightning`.
 
 If `tikv-importer` needs to be restarted:
 
-1. [Stop `tidb-lightning`](#how-to-stop-tidb-lightning)
-2. [Stop `tikv-importer`](#how-to-stop-tikv-importer)
+1. [Stop `tidb-lightning`](#how-to-stop-the-tidb-lightning-process).
+2. [Stop `tikv-importer`](#how-to-stop-the-tikv-importer-process).
 3. Perform the intended modifications, such as fixing the source data, changing settings, replacing hardware etc.
-4. Start `tikv-importer`
-5. Start `tidb-lightning` *and wait until the program fails with CHECKSUM error, if any*
+4. Start `tikv-importer`.
+5. Start `tidb-lightning` *and wait until the program fails with CHECKSUM error, if any*.
     * Restarting `tikv-importer` would destroy all engine files still being written, but `tidb-lightning` did not know about it. As of v3.0 the simplest way is to let `tidb-lightning` go on and retry.
 6. [Destroy the failed tables and checkpoints](/dev/how-to/troubleshoot/tidb-lightning.md#checkpoint-for-has-invalid-status)
-7. Start `tidb-lightning` again
+7. Start `tidb-lightning` again.
 
 ## How to ensure the integrity of the imported data?
 
@@ -67,8 +67,11 @@ TiDB Lightning by default performs checksum on the local data source and the imp
 
 You could also execute the `ADMIN CHECKSUM TABLE` SQL command on the target table to recompute the checksum of the imported data.
 
-```text
-mysql> ADMIN CHECKSUM TABLE `schema`.`table`;
+```sql
+ADMIN CHECKSUM TABLE `schema`.`table`;
+```
+
+```
 +---------+------------+---------------------+-----------+-------------+
 | Db_name | Table_name | Checksum_crc64_xor  | Total_kvs | Total_bytes |
 +---------+------------+---------------------+-----------+-------------+
@@ -125,11 +128,13 @@ It is potentially caused by starting `tidb-lightning` incorrectly, which causes 
 [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 ```
 
-It is not recommended to directly use `nohup` in the command line to start `tidb-lightning`. You can [start `tidb-lightning`](/dev/reference/tools/tidb-lightning/deployment.md) by executing a script.
+It is not recommended to directly use `nohup` in the command line to start `tidb-lightning`. You can [start `tidb-lightning`](/dev/reference/tools/tidb-lightning/deployment.md#step-4-start-tidb-lightning) by executing a script.
 
 ## Why my TiDB cluster is using lots of CPU resources and running very slowly after using TiDB Lightning?
 
 If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. You can force the cluster back to "normal mode" using the following command:
+
+{{< copyable "shell-regular" >}}
 
 ```sh
 tidb-lightning-ctl --switch-mode=normal
@@ -162,7 +167,9 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 
 ## How to completely destroy all intermediate data associated with TiDB Lightning?
 
-1. Delete the checkpoint file
+1. Delete the checkpoint file.
+
+    {{< copyable "shell-regular" >}}
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-remove=all

@@ -283,7 +283,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    To decide whether you can enable automatic retry, see [description of optimistic transactions](/v3.1/reference/transactions/transaction-isolation.md#transaction-retry).
+    To decide whether you can enable automatic retry, see [automatic retry and anomalies caused by automatic retry](/v3.1/reference/transactions/transaction-isolation.md#automatic-retry-and-transactional-anomalies-caused-by-automatic-retry).
 
 ### tidb_backoff_weight
 
@@ -527,10 +527,10 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to set whether the `auto_increment` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+- This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
 ### tidb_enable_stmt_summary
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable is used to enable or disable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `performance_schema.events_statement_summary_by_digest` table to identify and troubleshoot SQL performance issues.
+- This variable is used to enable or disable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `performance_schema.events_statements_summary_by_digest` table to identify and troubleshoot SQL performance issues.
