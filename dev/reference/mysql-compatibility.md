@@ -110,7 +110,8 @@ The following Table Options are not supported in syntax:
     - `STATS_AUTO_RECALC/STATS_SAMPLE_PAGES`
     - `SECONDARY_ENGINE`
     - `ENCRYPTION`
-The following Table Partitions are not supported in syntax:
+
++ The following Table Partition syntaxes are not supported:
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
     - `SUBPARTITION`
