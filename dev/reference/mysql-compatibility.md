@@ -103,7 +103,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
 + `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
 + `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but it works differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
 
-The following Table Options are not supported in syntax:
++ The following Table Options are not supported in syntax:
     - `WITH/WITHOUT VALIDATION`
     - `SECONDARY_LOAD/SECONDARY_UNLOAD`
     - `CHECK/DROP CHECK`
