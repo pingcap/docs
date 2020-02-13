@@ -23,7 +23,7 @@ Basic fields:
 
 * `cost_time`: The execution time of a statement when the log is printed.
 * `stats`: Statistical information about tables or indexes involved in statements. `pesudo` indicates that there is no statistical information available; thus, you need to analyze tables or indexes.
-* `table_ids`: The ID of tables involved in the statements.
+* `table_ids`: The IDs of the tables involved in a statement.
 * `txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
 * `sql`: The sql statement.
 
