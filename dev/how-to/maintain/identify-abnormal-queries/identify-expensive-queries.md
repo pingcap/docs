@@ -27,7 +27,7 @@ Basic fields:
 * `txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
 * `sql`: The sql statement.
 
-Memory usage fields:
+Memory usage related fields:
 
 * `mem_max`: Memory used for the statement when the log is printed. The item uses two units to identify memory usage: byte and other readable and adaptable unit (such as MB, GB and so forth).
 
