@@ -29,7 +29,7 @@ Basic fields:
 
 Memory usage related fields:
 
-* `mem_max`: Memory used for the statement when the log is printed. The item uses two units to identify memory usage: byte and other readable and adaptable unit (such as MB, GB and so forth).
+* `mem_max`: Memory usage of a statement when the log is printed. This field has two kinds of units to measure memory usage: byte and other readable and adaptable units (such as MB and GB).
 
 User related fields:
 
