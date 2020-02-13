@@ -31,7 +31,7 @@ Memory usage related fields:
 
 * `mem_max`: Memory used for the statement when the log is printed. The item uses two units to identify memory usage: byte and other readable and adaptable unit (such as MB, GB and so forth).
 
-User fields:
+User related fields:
 
 * `user`: The name of the user who executes the statement.
 * `conn_id`: The Connection ID (session ID). For example, you can use the keyword `con:60026` to search for the log whose session ID is `60026`.
