@@ -12,7 +12,7 @@ This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 
 - There is no impact on the query.
 
-- There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In terms of latency, a p-binlog is written concurrently in the TiKV prewrite stage before committing the transactions. Generally, writing binlog is faster than TiKV prewrite, so it does not increase latency. You can check the response time of writing binlog in Pump's monitoring panel.
+- There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In latency, a p-binlog is written concurrently in the TiKV prewrite stage before the transactions are committed. Generally, writing binlog is faster than TiKV prewrite, so it does not increase latency. You can check the response time of writing binlog in Pump's monitoring panel.
 
 ## What privileges does Drainer need to replicate data to the downstream MySQL or TiDB cluster?
 
@@ -30,19 +30,23 @@ To replicate data to the downstream MySQL or TiDB cluster, Drainer must have the
 
 ## What can I do if the Pump disk is almost full?
 
-If Pump's GC is normal and the **gc_tso** time in Pump’s monitoring panel is identical with that of the configuration file, you can perform the following steps to reduce the amount of space required for a single Pump:
+1. Check whether Pump's GC works well:
 
-- Modify the **GC** parameter of Pump to reduce the number of days to retain data.
+    - Check whether the **gc_tso** time in Pump’s monitoring panel is identical with that of the configuration file.
 
-- Add pump instances.
+2. If GC works well, perform the following steps to reduce the amount of space required for a single Pump:
 
-## What can I do if Drainer replication interrupts?
+    - Modify the **GC** parameter of Pump to reduce the number of days to retain data.
+
+    - Add pump instances.
+
+## What can I do if Drainer replication is interrupted?
 
 Execute the following command to check whether the status of Pump is normal and whether all the Pump instances that are not in the `offline` state are running.
 
 {{< copyable "shell-regular" >}}
 
-``` bash
+```bash
 binlogctl -cmd pumps
 ```
 
@@ -66,21 +70,21 @@ Possible causes and solutions for slow replication:
 
 ## What can I do if a Pump instance crashes?
 
-If a Pump instance crashes, Drainer cannot replicate data to the downstream because it cannot obtain the data of this instance. If this Pump instance can return to normal use, Drainer resumes replication; if not, perform the following steps:
+If a Pump instance crashes, Drainer cannot replicate data to the downstream because it cannot obtain the data of this instance. If this Pump instance can recover to the normal state, Drainer resumes replication; if not, perform the following steps:
 
 1. Use [binlogctl to change the state of this Pump instance to `offline`](/dev/reference/tidb-binlog/maintain.md) to discard the data of this Pump instance.
 
-2. Because Drainer cannot obtain the data of this pump instance, the data in the downstream and upstream is inconsistent. In this situation, perform full and incremental backup again. The steps are as follows:
+2. Because Drainer cannot obtain the data of this pump instance, the data in the downstream and upstream is inconsistent. In this situation, perform full and incremental backups again. The steps are as follows:
 
-    i. Stop the Drainer.
+    1. Stop the Drainer.
 
-    ii. Perform a full backup in the upstream.
+    2. Perform a full backup in the upstream.
 
-    iii. Clear the data in the downstream including the `tidb_binlog.checkpoint` table.
+    3. Clear the data in the downstream including the `tidb_binlog.checkpoint` table.
 
-    iv. Restore the full backup to the downstream.
+    4. Restore the full backup to the downstream.
 
-    v. Deploy Drainer and use `initialCommitTs` (set `initialCommitTs` as the snapshot timestamp of the full backup) as the start point of initial replication.
+    5. Deploy Drainer and use `initialCommitTs` (set `initialCommitTs` as the snapshot timestamp of the full backup) as the start point of initial replication.
 
 ## What is checkpoint?
 
@@ -100,17 +104,17 @@ Drainer reads the checkpoint when it starts. If Drainer cannot read the checkpoi
 
 If the data in the downstream is not affected, you can redeploy Drainer on the new machine as long as the data can be replicated from the corresponding checkpoint.
 
-If the checkpoint is not lost, perform the following steps:
+- If the checkpoint is not lost, perform the following steps:
 
-1. Deploy and start a new Drainer (Drainer can read checkpoint and resumes replication).
+    1. Deploy and start a new Drainer (Drainer can read checkpoint and resumes replication).
 
-2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/reference/tidb-binlog/maintain.md).
+    2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/reference/tidb-binlog/maintain.md).
 
-If the checkpoint is lost, perform the following steps:
+- If the checkpoint is lost, perform the following steps:
 
-1. To deploy a new Drainer, obtain the `commit-ts` of the old Drainer as the `initialCommitTs` of the new Drainer.
+    1. To deploy a new Drainer, obtain the `commit-ts` of the old Drainer as the `initialCommitTs` of the new Drainer.
 
-2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/reference/tidb-binlog/maintain.md).
+    2. Use [binlogctl to change the state of the old Drainer to `offline`](/dev/reference/tidb-binlog/maintain.md).
 
 ## How to restore the data of a cluster using a full backup and a binlog backup file?
 
@@ -118,13 +122,13 @@ If the checkpoint is lost, perform the following steps:
 
 2. To restore the latest data of the backup file, use Reparo to set `start-tso` = {snapshot timestamp of the full backup + 1} and `end-ts` = 0 (or you can specify a point in time).
 
-## How to redeploy Drainer when Master-Slave replication enables `ignore-error` but triggers a critical error?
+## How to redeploy Drainer when enabling `ignore-error` in Master-Slave replication triggers a critical error?
 
-If TiDB fails to write binlog after enabling `ignore-error` and triggers a critical error, TiDB stops writing binlog and binlog data loss occurs. To resume replication, perform the following steps:
+If a critical error is trigged when TiDB fails to write binlog after enabling `ignore-error`, TiDB stops writing binlog and binlog data loss occurs. To resume replication, perform the following steps:
 
-1. Stop the Drainer.
+1. Stop the Drainer instance.
 
-2. Restart the `tidb-server` instance that causes critical error and resume writing binlog (TiDB does not write binlog to Pump after critical error is triggered).
+2. Restart the `tidb-server` instance that triggers critical error and resume writing binlog (TiDB does not write binlog to Pump after critical error is triggered).
 
 3. Perform a full backup in the upstream.
 
