@@ -9,7 +9,7 @@ TiDB allows you to identify expensive queries during SQL execution, so you can d
 
 > **Note:**
 >
-> The difference between the expensive query log and the [slow query log](/dev/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md) is that: the former prints information during the statement execution; the latter prints after the execution. When a statement reaches the threshold of resource usage (be it execution time or memory usage) during execution, TiDB writes information about the statement to the log live.
+> The expensive query log differs from the [slow query log](/dev/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md) in this way: TiDB prints statement information to the expensive query log **as soon as** the statement exceeds the threshold of resource usage (execution time or memory usage); while TiDB prints statement information to the slow query log **after** the statement execution.
 
 ## Usage example
 
