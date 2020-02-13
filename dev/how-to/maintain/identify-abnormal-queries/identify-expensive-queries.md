@@ -19,7 +19,7 @@ TiDB allows you to identify expensive queries during SQL execution, so you can d
 
 ## Fields description
 
-Expensive query basics:
+Basic fields:
 
 * `cost_time`: The execution time for a statement when the log is printed.
 * `stats`: Statistical information about tables or indexes involved in statements. `pesudo` indicates that there is no statistical information available; thus, you need to analyze tables or indexes.
