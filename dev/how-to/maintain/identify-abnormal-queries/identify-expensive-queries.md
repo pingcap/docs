@@ -1,5 +1,5 @@
 ---
-title: IDENTIFY EXPENSIVE QUERIES
+title: Identify Expensive Queries
 category: how to
 ---
 
