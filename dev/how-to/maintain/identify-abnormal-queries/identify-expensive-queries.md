@@ -37,7 +37,7 @@ User related fields:
 * `conn_id`: The Connection ID (session ID). For example, you can use the keyword `con:60026` to search for the log whose session ID is `60026`.
 * `database`: The current database.
 
-TiKV Coprocessor Task fields:
+TiKV Coprocessor task related fields:
 
 * `wait_time`: The total waiting time of all Coprocessor requests of a statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests increases.
 * `request_count`: The number of Coprocessor requests that a statement sends.
