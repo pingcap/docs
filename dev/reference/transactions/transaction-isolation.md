@@ -56,7 +56,7 @@ The MySQL Repeatable Read isolation level is not the snapshot isolation level. T
 
 ## Read Committed isolation level
 
-TiDB supports the Read Committed isolation level only in [Pessimistic Transaction Mode](/dev/reference/transactions/transaction-pessimistic.md). In the optimistic transaction mode, setting the transaction level to Read Committed will not take effect. Transactions will still use the Read Committed isolation level.
+TiDB supports the Read Committed isolation level only in [Pessimistic Transaction Mode](/dev/reference/transactions/transaction-pessimistic.md). In the optimistic transaction mode, setting the transaction isolation level to Read Committed will not take effect. Transactions will still use the Repeatable Read isolation level.
 
 For historical reasons, the Read Committed isolation level of current mainstream databases is essentially the Consistent Read isolation level defined by Oracle. In order to adapt to this situation, the Read Committed isolation level in TiDB pessimistic transactions is also a consistent read behavior in essence.
 
