@@ -35,7 +35,7 @@ User related fields:
 
 * `user`: The name of the user who executes the statement.
 * `conn_id`: The Connection ID (session ID). For example, you can use the keyword `con:60026` to search for the log whose session ID is `60026`.
-* `database`: The current database.
+* `database`: The database where the statement is executed.
 
 TiKV Coprocessor task related fields:
 
