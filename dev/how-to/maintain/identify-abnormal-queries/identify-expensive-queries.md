@@ -5,7 +5,7 @@ category: how to
 
 # Identify Expensive Queries
 
-To help users identify expensive queries during the statement execution, diagnose and improve the performance of SQL execution, TiDB prints the information about statements of which the execution time exceeds [tidb_expensive_query_time_threshold](/dev/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_expensive_query_time_threshold) (the default value is 60 seconds), or the memory usage exceeds [mem-quota-query](/dev/reference/configuration/tidb-server/configuration-file.md#mem-quota-query) (the default value is 32 GB), to the [tidb-server log file](/dev/reference/configuration/tidb-server/configuration-file.md#logfile) (the default file is "tidb.log").
+TiDB allows you to identify expensive queries during SQL execution, so you can diagnose and improve the performance of SQL execution. Specifically, TiDB prints the information about statements whose execution time exceeds [`tidb_expensive_query_time_threshold`](/dev/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_expensive_query_time_threshold) (60 seconds by default) or memory usage exceeds [`mem-quota-query`](/dev/reference/configuration/tidb-server/configuration-file.md#mem-quota-query) (32 GB by default) to the [tidb-server log file](/dev/reference/configuration/tidb-server/configuration-file.md#logfile) ("tidb.log" by default).
 
 > **Note:**
 >
