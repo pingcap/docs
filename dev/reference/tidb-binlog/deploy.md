@@ -569,8 +569,8 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         host = "192.168.0.13"
         user = "root"
         password = ""
-        # When encrypted_password is not empty, password encrypted using
-        # `./binlogctl -cmd encrypt -text string` will be ignored
+        # `encrypted_password` is encrypted using `./binlogctl -cmd encrypt -text string`.
+        # When `encrypted_password` is not empty, the `password` above will be ignored.
         encrypted_password = ""
         port = 3306
 
@@ -587,8 +587,8 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # host = "127.0.0.1"
         # user = "root"
         # password = ""
-        # When encrypted_password is not empty, password encrypted using
-        # `./binlogctl -cmd encrypt -text string` will be ignored
+        # `encrypted_password` is encrypted using `./binlogctl -cmd encrypt -text string`.
+        # When `encrypted_password` is not empty, the `password` above will be ignored.
         # encrypted_password = ""
         # port = 3306
 
