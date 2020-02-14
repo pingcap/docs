@@ -17,7 +17,7 @@ Backup & Restore (BR) is a command-line tool for distributed backup and restorat
 
 ## Recommended deployment configuration
 
-- BR is recommended to be deployed on the PD node.
+- It is recommended that you deploy BR on the PD node.
 - It is recommended that you mount a high-performance SSD to BR nodes and all TiKV nodes. You'd better use the 10Gigabit ethernet card; otherwise, bandwidth is likely to be performance bottleneck during the backup and restore process.
 
 ## Download Binary
