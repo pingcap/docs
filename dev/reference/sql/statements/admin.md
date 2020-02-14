@@ -61,7 +61,7 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 ## Examples
 
-Run the command below to view the last 10 completed DDL jobs in the currently running DDL job queue. When `NUM` is not specified, only the last 10 completed DDL jobs is presented by default.
+Run the following command to view the last 10 completed DDL jobs in the currently running DDL job queue. When `NUM` is not specified, only the last 10 completed DDL jobs is presented by default.
 
 {{< copyable "sql" >}}
 
