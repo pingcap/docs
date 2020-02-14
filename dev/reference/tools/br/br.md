@@ -216,7 +216,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-In the above command, `--db` specifies the name of the database to be backed up. For descriptions of other options, see [Back up all the cluster data](/dev/how-to/maintain/backup-and-restore/br.md#back-up-all-the-cluster-data).
+In the above command, `--db` specifies the name of the database to be backed up. For descriptions of other options, see [Back up all the cluster data](/dev/reference/tools/br/br.md#back-up-all-the-cluster-data).
 
 A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
 
