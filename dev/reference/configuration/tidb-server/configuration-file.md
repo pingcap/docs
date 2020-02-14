@@ -66,6 +66,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Determines whether to treat the `utf8` character set in old tables as `utf8mb4`.
 - Default value: `true`
 
+### `alter-primary-key`
+
+- Determines whether to add or remove the primary key constraint to or from a column.
+- Default value: `false`
+- With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
+
 ## Log
 
 Configuration items related to log.
@@ -112,6 +118,12 @@ Configuration items related to log.
 - The maximum length of SQL output.
 - Default value: `2048`
 - When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
+
+### `max-server-connections`
+
+- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
+- Default value: `4096`
+- When the number of actual client connections is equal to the value of `max-server-connections`, the TiDB server rejects new client connections.
 
 ## log.file
 

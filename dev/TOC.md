@@ -292,6 +292,7 @@
     - [HAProxy Best Practices](/dev/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/dev/reference/best-practices/pd-scheduling.md)
     - [Grafana Best Practices](/dev/reference/best-practices/grafana-monitor.md)
+    - [TiKV Performance Tuning with Massive Regions](/dev/reference/best-practices/massive-regions.md)
   - [TiSpark](/dev/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/dev/reference/tidb-binlog/overview.md)
@@ -352,6 +353,7 @@
         + v1.0
           - [1.0.2](/dev/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/dev/reference/tools/data-migration/releases/1.0.3.md)
+      - [TiDB DM Glossary](/dev/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/dev/reference/tools/tidb-lightning/deployment.md)
@@ -359,10 +361,12 @@
       - [Checkpoints](/dev/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/dev/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/dev/reference/tools/tidb-lightning/csv.md)
+      - [TiDB-backend](/dev/reference/tools/tidb-lightning/tidb-backend.md)
       - [Web Interface](/dev/reference/tools/tidb-lightning/web.md)
       - [Monitor](/dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/dev/faq/tidb-lightning.md)
+      - [Glossary](/dev/reference/tools/tidb-lightning/glossary.md)
     - [sync-diff-inspector](/dev/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/dev/reference/tools/pd-control.md)
     - [PD Recover](/dev/reference/tools/pd-recover.md)
