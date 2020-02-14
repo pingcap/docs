@@ -87,7 +87,7 @@ admin show ddl jobs;
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-Run the command below to view the last 5 completed DDL jobs in the currently running DDL job queue:
+Run the following command to view the last 5 completed DDL jobs in the currently running DDL job queue:
 
 {{< copyable "sql" >}}
 
@@ -108,7 +108,7 @@ admin show ddl jobs 5;
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-Run the command below to view the uncompleted DDL jobs in the test database. The results include the DDL jobs that are running and the last 5 DDL jobs that are completed but failed.
+Run the following command to view the uncompleted DDL jobs in the test database. The results include the DDL jobs that are running and the last 5 DDL jobs that are completed but failed.
 
 {{< copyable "sql" >}}
 
