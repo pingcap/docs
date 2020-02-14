@@ -8,6 +8,8 @@ category: reference
 
 This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB.
 
+To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
+
 {{< copyable "sql" >}}
 
 ```sql
