@@ -84,8 +84,8 @@
     - [Common Ansible Operations](/v3.1/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
       - [Use `mydumper` and `loader`](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md)
-      - [Use BR](/v3.1/how-to/maintain/backup-and-restore/br.md)
-      - [BR Case Demonstrations](/v3.1/how-to/maintain/backup-and-restore/br-case-demo.md)
+      - [Use BR](/v3.1/reference/tools/br/br.md)
+      - [BR Case Demonstrations](/v3.1/reference/tools/br/br-case-demo.md)
     - [Identify Slow Queries](/v3.1/how-to/maintain/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/v3.1/how-to/scale/with-ansible.md)

@@ -6,7 +6,7 @@ category: how-to
 
 # BR Case Demonstrations
 
-[Backup & Restore](/dev/how-to/maintain/backup-and-restore/br.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in four scenarios that aims to help you achieve the following goals:
+[Backup & Restore](/dev/reference/tools/br/br.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in four scenarios that aims to help you achieve the following goals:
 
 * Back up and restore data using a network disk or local disk in the correct way
 * Learn the status of a backup or restoration operation through monitoring metrics
@@ -15,11 +15,11 @@ category: how-to
 
 > **Note:**
 >
-> Pay attention to the [usage restrictions](/dev/how-to/maintain/backup-and-restore/br.md#usage-restrictions) before using BR.
+> Pay attention to the [usage restrictions](/dev/reference/tools/br/br.md#usage-restrictions) before using BR.
 
 ## Audience
 
-You must have the basic understanding of TiDB and TiKV. Before reading this document, it is recommended that you read [Use BR to Back up and Restore Data](/dev/how-to/maintain/backup-and-restore/br.md) first.
+You must have the basic understanding of TiDB and TiKV. Before reading this document, it is recommended that you read [Use BR to Back up and Restore Data](/dev/reference/tools/br/br.md) first.
 
 ## Prerequisites
 
@@ -67,7 +67,7 @@ It is recommended that you use a network disk to back up and restore data. This 
 
 ### Preparation for backup
 
-For the detailed usage of the `br backup` command, refer to [BR command-line description](/dev/how-to/maintain/backup-and-restore/br.md#command-line-description).
+For the detailed usage of the `br backup` command, refer to [BR command-line description](/dev/reference/tools/br/br.md#command-line-description).
 
 1. Before executing the `br backup` command, check the value of the [`tikv_gc_life_time`](/dev/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration item, and adjust the value to an appropriate one in the MySQL client to make sure that [Garbage Collection](/dev/reference/garbage-collection/overview.md) (GC) does not run during the backup operation.
 
@@ -88,7 +88,7 @@ For the detailed usage of the `br backup` command, refer to [BR command-line des
 
 ### Preparation for restoration
 
-For the detailed usage of the `br restore` command, refer to [BR command-line description](/dev/how-to/maintain/backup-and-restore/br.md#command-line-description).
+For the detailed usage of the `br restore` command, refer to [BR command-line description](/dev/reference/tools/br/br.md#command-line-description).
 
 > **Note:**
 >
