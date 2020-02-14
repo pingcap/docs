@@ -17,7 +17,7 @@ ADMIN SHOW DDL;
 ```
 
 `ADMIN SHOW DDL`: To view the currently running DDL jobs.
-
+To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue, use `ADMIN SHOW DDL JOBS`:
 {{< copyable "sql" >}}
 
 ```sql
