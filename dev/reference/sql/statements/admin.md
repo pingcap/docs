@@ -16,7 +16,6 @@ To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
 ADMIN SHOW DDL;
 ```
 
-`ADMIN SHOW DDL`: To view the currently running DDL jobs.
 To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue, use `ADMIN SHOW DDL JOBS`:
 {{< copyable "sql" >}}
 
@@ -26,8 +25,6 @@ ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 
 * `NUM`: To view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
 * `WHERE`: To add filter conditions.
-
-`ADMIN SHOW DDL JOBS`: To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue.
 
 {{< copyable "sql" >}}
 
