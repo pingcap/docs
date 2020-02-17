@@ -153,6 +153,7 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
     > - If the jobs you want to cancel are finished, the cancellation operation fails.
 
 - `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and corresponding indexes. If the check is passed, an empty result will be returned. On failure, an error message will indicate that data is inconsistent.
+- `ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT`: In extreme cases, this statement is used to overwrite the metadata of the stored table in an untrusted way. Here "untrusted" means that it must be ensured that the metadata of the original table is covered by the `CREATE TABLE STATEMENT` operation. In order to use this "REPAIR" statement, you need to first enable the [`repair-mode`](/dev/reference/configuration/tidb-server/configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/dev/reference/configuration/tidb-server/configuration-file.md#repair-table-list).
 
 ## MySQL compatibility
 
