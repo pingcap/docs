@@ -23,8 +23,8 @@ To view all the results in the current DDL job queue (including tasks that are r
 ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 ```
 
-* `NUM`: To view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
-* `WHERE`: To add filter conditions.
+* `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
+* `WHERE`: to add filter conditions.
 
 {{< copyable "sql" >}}
 
