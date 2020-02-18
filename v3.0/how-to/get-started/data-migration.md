@@ -38,23 +38,29 @@ We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-ser
 
 1. First, install MySQL 5.7 and download/extract the TiDB v3.0 and DM v1.0.2 packages we'll use:
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
-    sudo yum install -y mysql-community-server
-    curl http://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf -
-    curl http://download.pingcap.org/dm-v1.0.2-linux-amd64.tar.gz | tar xzf -
+    sudo yum install -y http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm &&
+    sudo yum install -y mysql-community-server &&
+    curl https://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz | tar xzf - &&
+    curl https://download.pingcap.org/dm-v1.0.2-linux-amd64.tar.gz | tar xzf - &&
     curl -L https://github.com/pingcap/docs/raw/master/dev/how-to/get-started/dm-cnf/dm-cnf.tgz | tar xvzf -
     ```
 
 2. Create some directories and symlinks:
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
-    mkdir -p bin data logs
-    ln -sf -t bin/ "$HOME"/*/bin/*
+    mkdir -p bin data logs &&
+    ln -sf -t bin/ "$HOME"/*/bin/* &&
     [[ :$PATH: = *:$HOME/bin:* ]] || echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile && . ~/.bash_profile
     ```
 
 3. Set up configuration for the 3 instances of MySQL Server we'll start:
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     tee -a "$HOME/.my.cnf" <<EoCNF
@@ -84,6 +90,8 @@ We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-ser
 
 4. Initialize and start our MySQL instances:
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
     for i in 1 2 3
     do
@@ -95,12 +103,25 @@ We're going to deploy 3 instances of MySQL Server, and 1 instance each of pd-ser
 
 5. To make sure your MySQL server instances are all running, you can execute `jobs` and/or `pgrep -a mysqld`:
 
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    jobs
     ```
-    $ jobs
+
+    ```
     [1]   Running                 mysqld --defaults-group-suffix="$i" &
     [2]-  Running                 mysqld --defaults-group-suffix="$i" &
     [3]+  Running                 mysqld --defaults-group-suffix="$i" &
-    $ pgrep -a mysqld
+    ```
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    pgrep -a mysqld
+    ```
+
+    ```
     17672 mysqld --defaults-group-suffix=1
     17727 mysqld --defaults-group-suffix=2
     17782 mysqld --defaults-group-suffix=3
@@ -114,17 +135,21 @@ We achieve that by having set `auto-increment-increment=5` and `auto-increment-o
 
 Create our MySQL database and table in each of the 3 MySQL Server instances:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 for i in 1 2 3
 do
     mysql -h 127.0.0.1 -P "$((3306+i))" -u root <<EoSQL
         create database dmtest1;
-        create table dmtest1.t1 (id bigint unsigned not null auto_increment primary key, c char(32), port int);
+        create table dmtest1.t1 (id bigint unsigned not null AUTO_INCREMENT primary key, c char(32), port int);
 EoSQL
 done
 ```
 
 Insert a few hundred rows into each of the MySQL instances:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 for i in 1 2 3; do
@@ -141,6 +166,8 @@ done
 ```
 
 Select the rows back from the MySQL instances to make sure things look right:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 for i in 1 2 3; do
@@ -174,6 +201,8 @@ The package of configuration files we unpacked earlier (dm-cnf.tgz) contains the
 
 We'll start a single tidb-server instance, one DM-worker process for each of the MySQL server instances (3 total), and a single DM-master process:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 tidb-server --log-file=logs/tidb-server.log &
 for i in 1 2 3; do dm-worker --config=dm-cnf/dm-worker$i.toml & done
@@ -182,8 +211,13 @@ dm-master --config=dm-cnf/dm-master.toml &
 
 You can execute `jobs` and/or `ps -a` to make sure these processes are all running:
 
+{{< copyable "shell-regular" >}}
+
+```bash
+jobs
 ```
-$ jobs
+
+```
 [1]   Running                 mysqld --defaults-group-suffix="$i" &
 [2]   Running                 mysqld --defaults-group-suffix="$i" &
 [3]   Running                 mysqld --defaults-group-suffix="$i" &
@@ -192,7 +226,15 @@ $ jobs
 [6]   Running                 dm-worker --config=dm-cnf/dm-worker$i.toml &
 [7]-  Running                 dm-worker --config=dm-cnf/dm-worker$i.toml &
 [8]+  Running                 dm-master --config=dm-cnf/dm-master.toml &
-$ ps -a
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
+ps -a
+```
+
+```
    PID TTY          TIME CMD
  17317 pts/0    00:00:00 screen
  17672 pts/1    00:00:04 mysqld
@@ -227,8 +269,9 @@ password = ""
 port = 3307
 ```
 
-The `flavor` option should be set to `"mysql"` (the default value, and 5.5 < MySQL versions < 8.0 are supported) if migrating from MySQL Server, Percona Server, Percona XtraDB Cluster, or Amazon Aurora or RDS. If migrating from MariaDB Server or MariaDB (Galera) Cluster, use `flavor = "mariadb"` (only MariaDB versions greater than 10.1.2 are supported).
-
+- If you migrate data from MySQL Server, Percona Server, Percona XtraDB Cluster, Amazon Aurora or RDS, set the `flavor` option to `"mysql"`, which is the default value. This value is valid only when you are using a MySQL version between 5.5 (not included) and 8.0 (not included).
+- If you migrate data from MariaDB Server or MariaDB (Galera) Cluster, set `flavor = "mariadb"`. You can set this value only when you are using a MariaDB version later than 10.1.2.
+- Starting with DM 1.0.2, DM automatically generates the values of the `flavor` and `server-id` options. You do not need to manually configure these options in normal situations.
 - If `password` in the `[from]` configuration is not an empty string, you need to use dmctl to encrypt the password. Refer to [Encrypt the upstream MySQL user password using dmctl](/v3.0/how-to/deploy/data-migration-with-ansible.md#encrypt-the-upstream-mysql-user-password-using-dmctl) for detailed steps.
 
 Tasks are defined in YAML files. First, let's look at dmtask1.yaml:
@@ -291,8 +334,13 @@ There are a number of global options, and several groups of options that define 
 
 The `dmctl` tool is an interactive client that facilitates interaction with the DM cluster. You use it to start tasks, query task status, et cetera. Start the tool by executing `dmctl -master-addr :8261` to get the interactive prompt:
 
+{{< copyable "shell-regular" >}}
+
+```bash
+dmctl -master-addr :8261
 ```
-$ dmctl -master-addr :8261
+
+```
 Welcome to dmctl
 Release Version: v1.0.0-alpha-69-g5134ad1
 Git Commit Hash: 5134ad19fbf6c57da0c7af548f5ca2a890bddbe4
@@ -305,8 +353,13 @@ Go Version: go version go1.12 linux/amd64
 
 To start dmtask1, execute `start-task dm-cnf/dmtask1.yaml`:
 
+{{< copyable "" >}}
+
 ```
 » start-task dm-cnf/dmtask1.yaml
+```
+
+```
 {
     "result": true,
     "msg": "",
@@ -334,6 +387,8 @@ Starting the task will kick off the actions defined in the task configuration fi
 
 We can see that all rows have been migrated to the TiDB server:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 mysql -h 127.0.0.1 -P 4000 -u root -e 'select * from t1' dmtest1 | tail
 ```
@@ -355,6 +410,8 @@ Expect this output:
 ```
 
 DM is now acting as a slave to each of the MySQL servers, reading their binary logs to apply updates in realtime to the downstream TiDB server:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 for i in 1 2 3
@@ -385,6 +442,8 @@ Expect this output:
 
 We can see that this is the case by inserting some rows into the upstream MySQL servers, selecting those rows from TiDB, updating those same rows in MySQL, and selecting them again:
 
+{{< copyable "shell-regular" >}}
+
 ```bash
 for i in 1 2 3; do
     mysql -N -h 127.0.0.1 -P "$((3306+i))" -u root -e 'insert into t1 (id) select null from t1' dmtest1
@@ -408,6 +467,8 @@ Expect this output:
 ```
 
 Now update those rows, so we can see that changes to data are correctly propagated to TiDB:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 for i in 1 2 3; do
