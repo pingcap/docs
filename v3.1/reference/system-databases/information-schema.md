@@ -351,7 +351,7 @@ SELECT * FROM session_variables LIMIT 10;
 
 ## SLOW_QUERY table
 
-The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance of the SQL engine, see [Slow Query Log Document](/v3.1/how-to/maintain/identify-slow-queries.md).
+The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance of the SQL engine, see [Slow Query Log Document](/v3.1/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md).
 
 ```sql
 mysql> desc information_schema.slow_query;
