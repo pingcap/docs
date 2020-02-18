@@ -83,7 +83,9 @@
   + Maintain
     - [Common Ansible Operations](/v3.0/how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](/v3.0/how-to/maintain/backup-and-restore.md)
-    - [Identify Slow Queries](/v3.0/how-to/maintain/identify-slow-queries.md)
+  + Identify Abnormal Queries
+      - [Identify Slow Queries](/v3.0/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
+      - [Identify Expensive Queries](/v3.0/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/v3.0/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.0/how-to/scale/horizontally.md)
@@ -357,6 +359,7 @@
       - [Checkpoints](/v3.0/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/v3.0/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/v3.0/reference/tools/tidb-lightning/csv.md)
+      - [TiDB-backend](/v3.0/reference/tools/tidb-lightning/tidb-backend.md)
       - [Web Interface](/v3.0/reference/tools/tidb-lightning/web.md)
       - [Monitor](/v3.0/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.0/how-to/troubleshoot/tidb-lightning.md)
