@@ -85,7 +85,9 @@
     + Backup and Restore
       - [Use `mydumper` and `loader`](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md)
       - [Use BR](/v3.1/how-to/maintain/backup-and-restore/br.md)
-    - [Identify Slow Queries](/v3.1/how-to/maintain/identify-slow-queries.md)
+    + Identify Abnormal Queries
+      - [Identify Slow Queries](/v3.1/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
+      - [Identify Expensive Queries](/v3.1/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/v3.1/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.1/how-to/scale/horizontally.md)
@@ -291,6 +293,7 @@
     - [HAproxy Best Practices](/v3.1/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/v3.1/reference/best-practices/pd-scheduling.md)
     - [Grafana Best Practices](/v3.1/reference/best-practices/grafana-monitor.md)
+    - [TiKV Performance Tuning with Massive Regions](/v3.1/reference/best-practices/massive-regions.md)
   - [TiSpark](/v3.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.1/reference/tidb-binlog/overview.md)
@@ -359,6 +362,7 @@
       - [Checkpoints](/v3.1/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/v3.1/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/v3.1/reference/tools/tidb-lightning/csv.md)
+      - [TiDB-backend](/v3.1/reference/tools/tidb-lightning/tidb-backend.md)
       - [Web Interface](/v3.1/reference/tools/tidb-lightning/web.md)
       - [Monitor](/v3.1/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.1/how-to/troubleshoot/tidb-lightning.md)
