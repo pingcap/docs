@@ -20,7 +20,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8004 | A single transaction is too large. | See [the error message `transaction too large`](/dev/faq/tidb.md#the-error-message-transaction-too-large-is-displayed) for the cause and solution.  |
 | 8005 | Transactions in TiDB encounter write conflicts. | See [the Troubleshoot section](/dev/faq/tidb.md#troubleshoot) for the cause and solution. |
 | 8018 | The plugin cannot be reloaded because it has not been loaded before. |
-| 8019 | The version of the plugin that are being reloaded is different from the previous version. Therefore, the plugin cannot be reloaded. |
+| 8019 | The version of the plugin that is being reloaded is different from the previous version. Therefore, the plugin cannot be reloaded. |
 | 8020 | The table is locked. |
 | 8021 | The key does not exist. |
 | 8022 | The transaction commit fails. You may retry the process. |
