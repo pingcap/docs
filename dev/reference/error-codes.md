@@ -45,7 +45,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8044 | The state of index does not exist. |
 | 8045 | Illegal table data. |
 | 8046 | The state of column information is invisible. |
-| 8047 | The value of the system variable is not supported. It usually occurs in the alarm information after the user sets a variable value that is not supported in the database.
+| 8047 | The value of the system variable is not supported. This error usually occurs in the alarm information when the user sets a variable value that is not supported in the database.
 | 8048 | An unsupported database isolation level is set. |
 | 8049 | It fails to load the privilege related table. |
 | 8050 | An unsupported privilege type is set. |
