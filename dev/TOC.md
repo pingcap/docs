@@ -86,7 +86,7 @@
     + Backup and Restore
       - [Use `mydumper` and `loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md)
       - [Use BR](/dev/reference/tools/br/br.md)
-      - [BR Case Demonstrations](/dev/reference/tools/br/br-case-demo.md)
+      - [BR Scenario Demonstrations](/dev/reference/tools/br/use-case.md)
     - [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/dev/how-to/scale/with-ansible.md)
