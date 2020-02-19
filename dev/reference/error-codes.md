@@ -19,18 +19,18 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8003 | If the data in a row is not consistent with the index when executing the `ADMIN CHECK TABLE` command, TiDB returns this error. |
 | 8004 | A single transaction is too large. | See [the error message `transaction too large`](/dev/faq/tidb.md#the-error-message-transaction-too-large-is-displayed) for the cause and solution.  |
 | 8005 | Transactions in TiDB encounter write conflicts. | See [the Troubleshoot section](/dev/faq/tidb.md#troubleshoot) for the cause and solution. |
-| 8018 | The plugin cannot be reloaded because it is not loaded. |
-| 8019 | The reloaded plugin version is different from the previous one, so the plugin cannot be reloaded. |
+| 8018 | The plugin cannot be reloaded because it has not been loaded. |
+| 8019 | The version of the plugin that are being reloaded is different from the previous version. The plugin cannot be reloaded. |
 | 8020 | The table is locked. |
 | 8021 | The key does not exist. |
-| 8022 | Transactions commit failed. You may retry the process. |
-| 8023 | You cannot set an empty value. |
+| 8022 | The transaction commit fails. You may retry the process. |
+| 8023 | An empty value is not allowed. |
 | 8024 | Illegal transactions. |
 | 8025 | A single Key-Value pair that are being written is too large. |
-| 8026 | This interface is not implemented. |
-| 8027 | The version of table structure is outdated. |
-| 8028 | The table structure has changed. |
-| 8029 | Error value. |
+| 8026 | The interface is not implemented. |
+| 8027 | The table schema version is outdated. |
+| 8028 | The table schema has changed. |
+| 8029 | Incorrect value. |
 | 8030 | |
 | 8031 | A negative number is converted to a positive number, when being converted to an unsigned number. |
 | 8032 | Illegal `year` format. |
