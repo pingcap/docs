@@ -87,6 +87,7 @@
       - [Use BR](/v3.1/reference/tools/br/br.md)
       - [BR Scenario Demonstrations](/v3.1/reference/tools/br/use-case.md)
     - [Identify Slow Queries](/v3.1/how-to/maintain/identify-slow-queries.md)
+    - [Identify Expensive Queries](/v3.1/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/v3.1/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.1/how-to/scale/horizontally.md)
