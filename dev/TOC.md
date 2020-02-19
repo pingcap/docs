@@ -87,8 +87,9 @@
       - [Use `mydumper` and `loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md)
       - [Use BR](/dev/reference/tools/br/br.md)
       - [BR Scenario Demonstrations](/dev/reference/tools/br/use-case.md)
-    - [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md)
-    - [Identify Expensive Queries](/dev/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
+    + Identify Abnormal Queries
+      - [Identify Slow Queries](/dev/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
+      - [Identify Expensive Queries](/dev/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/dev/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/dev/how-to/scale/horizontally.md)
