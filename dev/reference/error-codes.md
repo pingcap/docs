@@ -20,14 +20,14 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8004 | A single transaction is too large. | See [the error message `transaction too large`](/dev/faq/tidb.md#the-error-message-transaction-too-large-is-displayed) for the cause and solution.  |
 | 8005 | Transactions in TiDB encounter write conflicts. | See [the Troubleshoot section](/dev/faq/tidb.md#troubleshoot) for the cause and solution. |
 | 8018 | The plugin cannot be reloaded because it has not been loaded before. |
-| 8019 | The version of the plugin that are being reloaded is different from the previous version. The plugin cannot be reloaded. |
+| 8019 | The version of the plugin that are being reloaded is different from the previous version. Therefore, the plugin cannot be reloaded. |
 | 8020 | The table is locked. |
 | 8021 | The key does not exist. |
 | 8022 | The transaction commit fails. You may retry the process. |
 | 8023 | An empty value is not allowed. |
 | 8024 | Illegal transactions. |
-| 8025 | A single Key-Value pair that are being written is too large. |
-| 8026 | The interface is not implemented. |
+| 8025 | The single Key-Value pair that are being written is too large. |
+| 8026 | The interface has no implementation. |
 | 8027 | The table schema version is outdated. |
 | 8028 | The table schema has changed. |
 | 8029 | Incorrect value. |
@@ -51,12 +51,12 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8050 | An unsupported privilege type is set. |
 | 8051 | Unknown field type. |
 | 8052 | The serial number of the data packet from the client is incorrect. |
-| 8053 | An illegal auto-incrementing value is obtained. |
+| 8053 | An illegal auto-incrementing column value is obtained. |
 | 8055 | The current snapshot is too old. The data may have been garbage collected. |
 | 8056 | Illegal table ID. |
 | 8057 | Illegal field type. |
 | 8058 | You apply an automatic variable type that does not exist. |
-| 8059 | It fails to obtain an automatic random variable. |
+| 8059 | It fails to obtain an auto-random ID. |
 | 8060 | Illegal auto-incrementing offset. |
 | 8061 | Unsupported SQL Hint. |
 | 8062 | An illegal token is used in SQL Hint. It conflicts with reserved words in SQL Hint. |
@@ -69,21 +69,21 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8103 | The plugin name is incorrect. |
 | 8104 | The plugin version does not match. |
 | 8105 | The plugin is repeatedly loaded. |
-| 8106 | The system variable name defined by the plugin does not begin with the name of the plugin. |
+| 8106 | The plugin defines a system variable name that does not begin with the plugin name. |
 | 8107 | The loaded plugin does not specify a version, or the specified version is too low. |
 | 8108 | Unsupported execution plan type. |
 | 8109 | The specified index cannot be found when the index is analyzed. |
 | 8110 | The Cartesian product operation cannot be executed. | Set `cross-join` in the configuration to `true`. |
-| 8111 | When executing the `EXECUTE` statement, the corresponding `Prepare` statement cannot be found.
+| 8111 | When executing the `EXECUTE` statement, the corresponding `Prepare` statement cannot be found. |
 | 8112 | The number of parameters in the `EXECUTE` statement is not consistent with the `Prepare` statement. |
-| 8113 | The table schema involved in the `Execute` statement has changed after the `Prepare` statement is executed. |
+| 8113 | The table schema involved in the `EXECUTE` statement has changed after the `Prepare` statement is executed. |
 | 8114 | Unknown execution plan type. |
 | 8115 | It is not supported to prepare multiple lines of statements. |
-| 8116 | It is not supported to preparing DDL statements. |
+| 8116 | It is not supported to prepare DDL statements. |
 | 8118 | Executor build fails. |
 | 8120 | The `start tso` of transactions cannot be obtained. |
 | 8121 | Privilege check fails. |
-| 8122 | Wild cards are specified, but no corresponding table name is found. |
+| 8122 | No corresponding table name is found, given the specified wild cards. |
 | 8123 | An SQL query with aggregate functions returns non-aggregated columns, which violates the `only_full_group_by` mode. |
 | 8200 | The DDL syntax is not yet supported. |
 | 8201 | TiDB is currently not the DDL owner. |
@@ -91,7 +91,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8203 | Illegal DDL worker. |
 | 8204 | Illegal DDL job. |
 | 8205 | Illegal DDL job mark. |
-| 8206 | The DDL operation in `re-organize` phase timed out.
+| 8206 | The DDL operation in `re-organize` phase timed out. |
 | 8207 | Illegal storage nodes. |
 | 8210 | Illegal DDL state. |
 | 8211 | Panic occurs during the DDL operation in `re-organize` phase. |
