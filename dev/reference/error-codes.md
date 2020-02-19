@@ -69,7 +69,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8103 | The plugin name is incorrect. |
 | 8104 | The plugin version does not match. |
 | 8105 | The plugin is repeatedly loaded. |
-| 8106 | The plugin defines a system variable name that does not begin with the plugin name. |
+| 8106 | The plugin defines a system variable whose name does not begin with the plugin name. |
 | 8107 | The loaded plugin does not specify a version, or the specified version is too low. |
 | 8108 | Unsupported execution plan type. |
 | 8109 | The specified index cannot be found when the index is analyzed. |
