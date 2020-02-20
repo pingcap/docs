@@ -40,7 +40,7 @@ TiDB Binlog is disabled in the TiDB cluster by default. To create a TiDB cluster
 
     > Note:
     >
-    > `<release-name>` needs to be replaced with the Helm release name of the target `tidb-cluster`.
+    > `<release-name>` needs to be replaced with the `Helm-release-name` of the target `tidb-cluster`.
 
     * Configure `tidb.affinity` as follows:
 
