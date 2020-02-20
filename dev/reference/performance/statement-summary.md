@@ -34,7 +34,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 The "plan digest" here refers to the unique identifier calculated through normalized execution plan. The normalization process ignores constants. The same SQL statements may be grouped into different categories since same statements can result with different execution plans. SQL statements under the same category have the same execution plan.
 
-`events_statements_summary_by_digest` is used to save the aggregated results of SQL monitoring metrics. In general, each of the monitoring metrics involves the maximum and average value. For example, the execution latency metric involve two fields: `AVG_LATENCY` (average latency) and `MAX_LATENCY` (maximum latency).
+`events_statements_summary_by_digest` is used to save the aggregated results of SQL monitoring metrics. In general, each of the monitoring metrics involves the maximum and average value. For example, the execution latency metric involves two fields: `AVG_LATENCY` (average latency) and `MAX_LATENCY` (maximum latency).
 
 For the immediacy of monitoring metrics, data in the `events_statements_summary_by_digest` table are periodically cleared, only recent aggregated results are retained. The value of the data clearing cycle is set by the system variable `tidb_stmt_summary_refresh_interval`. If you execute the query right after the clearing, data displayed may be very little.
 
