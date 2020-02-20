@@ -148,7 +148,7 @@ tidb-ctl schema in mysql
     curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
     ```
 
-    Or if on macOS, you can use homebrew to install Helm via the command below:
+    Or if on macOS, you can use Homebrew to install Helm via the following command:
 
     ```bash
     brew install helm@2
