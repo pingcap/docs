@@ -138,7 +138,7 @@ tidb-ctl schema in mysql
 
 ## Use Helm
 
-[Helm](https://helm.sh/) is a package management tool for Kubernetes. Currently we only support Helm version >= 2.9.0 and < 3.0.0. The installation steps are as follows:
+[Helm](https://helm.sh/) is a package management tool for Kubernetes. Make sure your Helm version >= 2.9.0 and < 3.0.0. The installation steps are as follows:
 
 1. Install Helm client
 
