@@ -131,4 +131,4 @@ See the [Figma user guide](https://help.figma.com/category/9-getting-started).
 
     ![Export Frame X](/media/export-frame-x.png)
 
-4. Use a **descriptive** name for the figure. You can use lowercase characters, numbers, and hyphens (-) in the name. **Avoid using uppercase characters, spaces, and underscores**.
+4. Use a **descriptive** name for the figure. You can use lowercase characters, numbers, and hyphens `-` in the name. **Avoid using uppercase characters, spaces, and underscores**.
