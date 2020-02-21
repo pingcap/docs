@@ -58,7 +58,7 @@ Click [tidb-sketch-book](https://www.figma.com/file/MOBwqkBtuA03agMjeGEGUT/tidb-
 
 4. Double-click the file you renamed just now. Choose the **Frame** tool (F) and drag out an area of the screen to make a new Frame. In this example, Frame 19 is created.
 
-    To delete a frame, choose the frame and then press **Shift**+**Command**+**G**.
+    To delete a frame, choose the frame and then press <kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>G</kbd>.
 
     ![Frame](/media/frame.png)
 
@@ -91,17 +91,17 @@ You are recommended to copy and paste the existing objects within other Frames i
 
 #### Copy and paste an object
 
-1. Select the object you want to edit and press **Command**+**C** to copy it.
+1. Select the object you want to edit and press <kbd>Command</kbd>+<kbd>C</kbd> to copy it.
 
-2. Select the target Frame and press **Command**+**V** to paste the object.
+2. Select the target Frame and press <kbd>Command</kbd>+<kbd>V</kbd> to paste the object.
 
 #### Copy and paste multiple objects
 
-1. Select the layers you want to edit in the layers panel and press **Command**+**C** to copy these objects.
+1. Select the layers you want to edit in the layers panel and press <kbd>Command</kbd>+<kbd>C</kbd> to copy these objects.
 
     ![Copy objects](/media/copy-objects.png)
 
-2. Select the target Frame and press **Command**+**V** to paste the objects into the current Frame.
+2. Select the target Frame and press <kbd>Command</kbd>+<kbd>V</kbd> to paste the objects into the current Frame.
 
 #### Round corners
 
