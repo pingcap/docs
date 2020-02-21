@@ -32,7 +32,7 @@ Click [tidb-sketch-book](https://www.figma.com/file/MOBwqkBtuA03agMjeGEGUT/tidb-
 > **Note:**
 >
 > - **tidb-sketch-book** is a Figma file that collects common shapes for figure designs. When creating a figure, you are recommended to use the objects and colors in this file to maintain a consistent style for figures.
-> - If you can't open this file, contact [Jingyi Chen](mailto:chenjingyi@pingcap.com) for help.
+> - If you cannot open this file, contact [Jingyi Chen](mailto:chenjingyi@pingcap.com) for help.
 
 ![tidb-sketch-book](/media/tidb-sketch-book.png)
 
