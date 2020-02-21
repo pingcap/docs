@@ -86,7 +86,7 @@ The data purge methods for the relay log include automatic purge and manual purg
 
 ### Automatic data purge
 
-Automatic data purge includes three configuration items in the DM-worker configuration file:
+You can use the following three command-line options to change the automatic data purge strategy of DM-worker:
 
 - `purge-interval`
 
@@ -103,9 +103,19 @@ Automatic data purge includes three configuration items in the DM-worker configu
     - The amount of remaining disk space in GB less than which the specified DM-worker machine tries to purge the relay log that can be purged securely in the automatic background purge. If it is set to `0`, data purge is not performed according to the remaining disk space.
     - "15" by default, indicating when the available disk space is less than 15GB, DM-master tries to purge the relay log securely.
 
+You can also add a `[purge]` section in the [configuration file of DM-worker](/v3.0/reference/tools/data-migration/configure/dm-worker-configuration-file-full.md) to modify the purge strategy.
+
+```toml
+# relay log purge strategy
+[purge]
+interval = 3600
+expires = 24
+remain-space = 15
+```
+
 ### Manual data purge
 
-Manual data purge means using the `purge-relay` command provided by dmctl to specify `subdir` and the binlog name thus to purge all the relay logs before the specified binlog.
+Manual data purge means using the `purge-relay` command provided by dmctl to specify `subdir` and the binlog name thus to purge all the relay logs **before** the specified binlog. If the `-subdir` option in the command is not specified, all relay logs **before** the current relay log sub-directory are purged.
 
 Assuming that the directory structure of the current relay log is as follows:
 
@@ -131,16 +141,18 @@ e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
 deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
 ```
 
-If you use dmctl to execute the following commands, the corresponding results are as follows:
++ Executing the following `purge-relay` command in dmctl purges all relay log files **before** `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002/mysql-bin.000001`, which is all relay log files in `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`.
 
-```
-# The `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001` directory is purged,
-# while `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002` and `deb76a2b-09cc-11e9-9129-5242cf3bb246.000003` directories are retained.
+    {{< copyable "" >}}
 
-» purge-relay -w 10.128.16.223:10081 --filename mysql-bin.000001 --sub-dir e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
+    ```bash
+    » purge-relay -w 10.128.16.223:10081 --filename mysql-bin.000001 --sub-dir e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
+    ```
 
-# The `deb76a2b-09cc-11es9-9129-5242cf3bb246.000001、e4e0e8ab-09cc-11e9-9220-82cc35207219.000002` directory is purged,
-# while the `deb76a2b-09cc-11e9-9129-5242cf3bb246.000003` directory is retained.
++ Executing the following `purge-relay` command in dmctl purges all relay log file **before the current** (`deb76a2b-09cc-11e9-9129-5242cf3bb246.000003`) directory's `mysql-bin.000001`, which is all relay log files in `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001` and `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002`.
 
-» purge-relay -w 10.128.16.223:10081 --filename mysql-bin.000001
-```
+    {{< copyable "" >}}
+
+    ```bash
+    » purge-relay -w 10.128.16.223:10081 --filename mysql-bin.000001
+    ```

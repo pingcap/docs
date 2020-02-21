@@ -300,6 +300,7 @@
     - [Upgrade](/v3.0/reference/tidb-binlog/upgrade.md)
     - [Reparo](/v3.0/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/v3.0/reference/tidb-binlog/binlog-slave-client.md)
+    - [Glossary](/v3.0/reference/tidb-binlog/glossary.md)
     + Troubleshoot
       - [Troubleshooting](/v3.0/reference/tidb-binlog/troubleshoot/binlog.md)
       - [Error Handling](/v3.0/reference/tidb-binlog/troubleshoot/error-handling.md)
@@ -330,6 +331,8 @@
       - [Deploy](/v3.0/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v3.0/reference/tools/data-migration/configure/overview.md)
+        - [DM-master Configuration](/v3.0/reference/tools/data-migration/configure/dm-master-configuration-file.md)
+        - [DM-worker Configuration](/v3.0/reference/tools/data-migration/configure/dm-worker-configuration-file.md)
         - [Task Configuration](/v3.0/reference/tools/data-migration/configure/task-configuration-file.md)
       + Manage the DM Cluster
         - [Cluster Operations](/v3.0/reference/tools/data-migration/cluster-operations.md)
