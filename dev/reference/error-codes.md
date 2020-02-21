@@ -23,11 +23,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8019 | The version of the plugin that is being reloaded is different from the previous version. Therefore, the plugin cannot be reloaded. |
 | 8020 | The table is locked. |
 | 8021 | The key does not exist. |
-| 8022 | The transaction commit fails. You may retry the process. |
+| 8022 | The transaction commit fails. You can retry the process. |
 | 8023 | An empty value is not allowed. |
-| 8024 | Illegal transactions. |
-| 8025 | The single Key-Value pair that are being written is too large. |
-| 8026 | The interface has no implementation. |
+| 8024 | Invalid transactions. |
+| 8025 | The single Key-Value pair being written is too large. |
+| 8026 | The interface has not been implemented. |
 | 8027 | The table schema version is outdated. |
 | 8028 | The table schema has changed. |
 | 8029 | Incorrect value. |
@@ -38,14 +38,14 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8034 | Incorrect `datetime` value. |
 | 8036 | Illegal `time` format. |
 | 8037 | Illegal `week` format. |
-| 8038 | The field cannot obtain a default value. |
+| 8038 | The field fails to obtain the default value. |
 | 8039 | Index offset is out of range. |
 | 8042 | The state of table schema does not exist. |
 | 8043 | The state of column information does not exist. |
 | 8044 | The state of index does not exist. |
 | 8045 | Illegal table data. |
 | 8046 | The state of column information is invisible. |
-| 8047 | The value of the system variable is not supported. This error usually occurs in the alarm information when the user sets a variable value that is not supported in the database.
+| 8047 | The value of the system variable is not supported. This error usually occurs in the alarm information when the user sets a variable value that is not supported in the database. |
 | 8048 | An unsupported database isolation level is set. |
 | 8049 | It fails to load the privilege related table. |
 | 8050 | An unsupported privilege type is set. |
