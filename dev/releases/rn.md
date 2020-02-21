@@ -5,6 +5,10 @@ category: release
 
 # TiDB Release Notes
 
+## 4.0
+
+- [4.0.0-beta](/dev/releases/4.0.0-beta.md)
+
 ## 3.1
 
 - [3.1.0-beta.1](/dev/releases/3.1.0-beta.1.md)
@@ -12,6 +16,7 @@ category: release
 
 ## 3.0
 
+- [3.0.10](/dev/releases/3.0.10.md)
 - [3.0.9](/dev/releases/3.0.9.md)
 - [3.0.8](/dev/releases/3.0.8.md)
 - [3.0.7](/dev/releases/3.0.7.md)

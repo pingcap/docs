@@ -351,7 +351,7 @@ SELECT * FROM session_variables LIMIT 10;
 
 ## SLOW_QUERY table
 
-The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/dev/how-to/maintain/identify-slow-queries.md).
+The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/dev/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md).
 
 ```sql
 mysql> desc information_schema.slow_query;
@@ -446,28 +446,29 @@ SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user';
 
 ```
 *************************** 1. row ***************************
-  TABLE_CATALOG: def
-   TABLE_SCHEMA: mysql
-     TABLE_NAME: user
-     TABLE_TYPE: BASE TABLE
-         ENGINE: InnoDB
-        VERSION: 10
-     ROW_FORMAT: Compact
-     TABLE_ROWS: 0
- AVG_ROW_LENGTH: 0
-    DATA_LENGTH: 0
-MAX_DATA_LENGTH: 0
-   INDEX_LENGTH: 0
-      DATA_FREE: 0
- AUTO_INCREMENT: 0
-    CREATE_TIME: 2019-03-29 09:17:27
-    UPDATE_TIME: NULL
-     CHECK_TIME: NULL
-TABLE_COLLATION: utf8mb4_bin
-       CHECKSUM: NULL
- CREATE_OPTIONS:
-  TABLE_COMMENT:
-  TIDB_TABLE_ID: 5
+            TABLE_CATALOG: def
+             TABLE_SCHEMA: mysql
+               TABLE_NAME: user
+               TABLE_TYPE: BASE TABLE
+                   ENGINE: InnoDB
+                  VERSION: 10
+               ROW_FORMAT: Compact
+               TABLE_ROWS: 0
+           AVG_ROW_LENGTH: 0
+              DATA_LENGTH: 0
+          MAX_DATA_LENGTH: 0
+             INDEX_LENGTH: 0
+                DATA_FREE: 0
+           AUTO_INCREMENT: 0
+              CREATE_TIME: 2019-03-29 09:17:27
+              UPDATE_TIME: NULL
+               CHECK_TIME: NULL
+          TABLE_COLLATION: utf8mb4_bin
+                 CHECKSUM: NULL
+           CREATE_OPTIONS:
+            TABLE_COMMENT:
+            TIDB_TABLE_ID: 5
+TIDB_ROW_ID_SHARDING_INFO: NULL
 1 row in set (0.00 sec)
 ```
 
@@ -482,6 +483,16 @@ SHOW TABLES
   FROM db_name
   [LIKE 'wild']
 ```
+
+Most of the information in the table is the same as MySQL. Only two columns are newly defined by TiDB:
+
+* `TIDB_TABLE_ID`: to indicate the internal ID of a table. This ID is unique in a TiDB cluster.
+* `TIDDB_ROW_ID_SHARDING_INFO`: to indicate the sharding type of a table. The possible values are as follows:
+    - `"NOT_SHARDED"`: the table is not sharded.
+    - `"NOT_SHARDED(PK_IS_HANDLE)"`: the table that defines an integer Primary Key as its row id is not sharded.
+    - `"PK_AUTO_RANDOM_BITS={bit_number}"`: the table that defines an integer Primary Key as its row id is sharded because the Primary Key is assigned with `AUTO_RANDOM` attribute.
+    - `"SHARD_BITS={bit_number}"`: the table is sharded using `SHARD_ROW_ID_BITS={bit_number}`.
+    - NULL: the table is a system table or view, and thus cannot be sharded.
 
 ### TABLE_CONSTRAINTS table
 
@@ -932,7 +943,7 @@ The `STATE` column shows the execution status of a specific `ANALYZE` task. Its 
 
 ## SLOW\_QUERY table
 
-The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md#identify-slow-queries).
+The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/dev/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md#identify-slow-queries).
 
 ```sql
 mysql> desc slow_query\G
