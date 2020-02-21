@@ -76,7 +76,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8110 | The Cartesian product operation cannot be executed. | Set `cross-join` in the configuration to `true`. |
 | 8111 | When executing the `EXECUTE` statement, the corresponding `Prepare` statement cannot be found. |
 | 8112 | The number of parameters in the `EXECUTE` statement is not consistent with the `Prepare` statement. |
-| 8113 | The table schema involved in the `EXECUTE` statement has changed after the `Prepare` statement is executed. |
+| 8113 | The table schema related in the `EXECUTE` statement has changed after the `Prepare` statement is executed. |
 | 8114 | Unknown execution plan type. |
 | 8115 | It is not supported to prepare multiple lines of statements. |
 | 8116 | It is not supported to prepare DDL statements. |
