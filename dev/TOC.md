@@ -86,7 +86,9 @@
     + Backup and Restore
       - [Use `mydumper` and `loader`](/dev/how-to/maintain/backup-and-restore/mydumper-loader.md)
       - [Use BR](/dev/how-to/maintain/backup-and-restore/br.md)
-    - [Identify Slow Queries](/dev/how-to/maintain/identify-slow-queries.md)
+    + Identify Abnormal Queries
+      - [Identify Slow Queries](/dev/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
+      - [Identify Expensive Queries](/dev/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/dev/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/dev/how-to/scale/horizontally.md)
@@ -291,6 +293,8 @@
     - [Highly Concurrent Write Best Practices](/dev/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/dev/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/dev/reference/best-practices/pd-scheduling.md)
+    - [Grafana Best Practices](/dev/reference/best-practices/grafana-monitor.md)
+    - [TiKV Performance Tuning with Massive Regions](/dev/reference/best-practices/massive-regions.md)
   - [TiSpark](/dev/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/dev/reference/tidb-binlog/overview.md)
@@ -351,6 +355,7 @@
         + v1.0
           - [1.0.2](/dev/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/dev/reference/tools/data-migration/releases/1.0.3.md)
+      - [TiDB DM Glossary](/dev/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/dev/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/dev/reference/tools/tidb-lightning/deployment.md)
@@ -358,10 +363,12 @@
       - [Checkpoints](/dev/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/dev/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/dev/reference/tools/tidb-lightning/csv.md)
+      - [TiDB-backend](/dev/reference/tools/tidb-lightning/tidb-backend.md)
       - [Web Interface](/dev/reference/tools/tidb-lightning/web.md)
       - [Monitor](/dev/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/dev/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/dev/faq/tidb-lightning.md)
+      - [Glossary](/dev/reference/tools/tidb-lightning/glossary.md)
     - [sync-diff-inspector](/dev/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/dev/reference/tools/pd-control.md)
     - [PD Recover](/dev/reference/tools/pd-recover.md)
@@ -427,6 +434,7 @@
     - [3.1.0-beta.1](/dev/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/dev/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.10](/dev/releases/3.0.10.md)
     - [3.0.9](/dev/releases/3.0.9.md)
     - [3.0.8](/dev/releases/3.0.8.md)
     - [3.0.7](/dev/releases/3.0.7.md)
