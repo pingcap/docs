@@ -261,6 +261,8 @@
   + Best Practices
     - [HAProxy Best Practices](/v2.1/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/v2.1/reference/best-practices/pd-scheduling.md)
+    - [Grafana Best Practices](/v2.1/reference/best-practices/grafana-monitor.md)
+    - [TiKV Performance Tuning with Massive Regions](/v2.1/reference/best-practices/massive-regions.md)
   - [TiSpark](/v2.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v2.1/reference/tidb-binlog/overview.md)
@@ -270,6 +272,7 @@
     - [Upgrade](/v2.1/reference/tidb-binlog/upgrade.md)
     - [Reparo](/v2.1/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/v2.1/reference/tidb-binlog/binlog-slave-client.md)
+    - [Glossary](/v2.1/reference/tidb-binlog/glossary.md)
     + Troubleshoot
       - [Troubleshooting](/v2.1/reference/tidb-binlog/troubleshoot/binlog.md)
       - [Error Handling](/v2.1/reference/tidb-binlog/troubleshoot/error-handling.md)
@@ -300,6 +303,8 @@
       - [Deploy](/v2.1/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v2.1/reference/tools/data-migration/configure/overview.md)
+        - [DM-master Configuration](/v2.1/reference/tools/data-migration/configure/dm-master-configuration-file.md)
+        - [DM-worker Configuration](/v2.1/reference/tools/data-migration/configure/dm-worker-configuration-file.md)
         - [Task Configuration](/v2.1/reference/tools/data-migration/configure/task-configuration-file.md)
       + Manage the DM Cluster
         - [Cluster Operations](/v2.1/reference/tools/data-migration/cluster-operations.md)
@@ -321,6 +326,7 @@
         + v1.0
           - [1.0.2](/v2.1/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/v2.1/reference/tools/data-migration/releases/1.0.3.md)
+      - [TiDB DM Glossary](/v2.1/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/v2.1/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v2.1/reference/tools/tidb-lightning/deployment.md)
