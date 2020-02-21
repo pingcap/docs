@@ -23,8 +23,8 @@ worker-addr = ":8262"
 # Represents a MySQL/MariaDB instance or a replication group.
 source-id = "mysql-replica-01"
 
-# Server id of slave for binlog replication.
-# Each instance (master and slave) in the replication group should have a different server id.
+# Server ID of slave for binlog replication.
+# Each instance (master and slave) in the replication group should have a different server ID.
 server-id = 101
 
 # flavor: mysql/mariadb
@@ -33,7 +33,7 @@ flavor = "mysql"
 # The directory used to store relay log.
 relay-dir = "./relay_log"
 
-# Enables gtid in the relay log unit
+# Enables gtid in the relay log unit.
 enable-gtid = false
 
 relay-binlog-name = ""
@@ -72,8 +72,8 @@ backoff-max = "5m"
 | `flavor` | Indicates the release type of MySQL: `"Percona"`, `"mysql"` or `"mariadb"`. In v1.0.2 and later versions, DM automatically detects and fills in the release type. | `"mysql"`|
 | `relay-dir` | Specifies the relay log directory. | `"./relay_log"` |
 | `enable-gtid` | Determines whether DM-worker uses GTID to pull the binlog. If the upstream database has enabled the GTID mode and switching the DM-worker connection to another MySQL instance is needed, set it to `true`. | `false` |
-| `relay-binlog-name` | Specifies the file name from which DM-worker starts to pull the binlog. For example, `"mysql-bin.000002"`. Only used when `enable_gtid` is `false`. DM-worker defaults to pulling the binlogs starting from the earliest one. But in v1.0.2 and later versions, DM-worker defaults to pulling the binlogs starting from the latest one. | |
-| `relay-binlog-gtid` | Specifies the GTID from which DM-worker starts to pull the binlog. For example, `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"`. Only used when `enable_gtid` is `true`. DM-worker defaults to pulling the binlogs starting from the earliest GTID. But in v1.0.2 and later versions, DM-worker defaults to pulling the binlogs starting from the latest GTID. | |
+| `relay-binlog-name` | Specifies the file name from which DM-worker starts to pull the binlog. For example, `"mysql-bin.000002"`. It only works when `enable_gtid` is `false`. If this parameter is not specified, DM-worker defaults to pulling the binlogs starting from the earliest one. But in v1.0.2 and later versions, DM-worker defaults to pulling the binlogs starting from the latest one. | |
+| `relay-binlog-gtid` | Specifies the GTID from which DM-worker starts to pull the binlog. For example, `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"`. It only works when `enable_gtid` is `true`. If this parameter is not specified, DM-worker defaults to pulling the binlogs starting from the earliest GTID. But in v1.0.2 and later versions, DM-worker defaults to pulling the binlogs starting from the latest GTID. | |
 
 ### `[from]`
 
@@ -90,20 +90,20 @@ The `[from]` section contains parameters that affect the connection to the upstr
 
 The `[purge]` section contains parameters that affect the purge strategy of relay log.
 
-Generally, there is no need to manually configure these parameters unless there is a large amount of relay logs or disk capacity is insufficient.
+Generally, there is no need to manually configure these parameters unless there is a large amount of relay logs and disk capacity is insufficient.
 
 | Parameter        | Description                           | Default value |
 | :------------ | :--------------------------------------- | :-------------|
 | `interval` | Sets the time interval at which relay logs are regularly checked for expiration, in seconds. | `3600`  |
-| `expires` | Sets the expiration time for relay logs, in hours. Expired relay logs are deleted by DM. If it is set to "0", the automatic purge is not performed. | `0` |
-| `remain-space` | Sets the minimum amount of free disk space, in gigabytes. When the disk space is smaller than this value, DM-worker tries to delete relay logs. | `15` |
+| `expires` | Sets the expiration time for relay logs, in hours. Expired relay logs are deleted by DM. If this parameter is not specified, the automatic purge is not performed. | `0` |
+| `remain-space` | Sets the minimum amount of free disk space, in gigabytes. When the available disk space is smaller than this value, DM-worker tries to delete relay logs. | `15` |
 
 > **Note:**
 >
 > DM does not perform automatic purge when either of the following is true:
 >
 > * `interval` is set to `0`
-> * both `expires` and `remain-space` are set to `0`
+> * Both `expires` and `remain-space` are set to `0`
 
 ### `[checker]`
 
@@ -113,8 +113,8 @@ The `[checker]` section contains parameters that affect the task status checker.
 | :------------ | :--------------------------------------- | :---------------|
 | `check-enable` | Determines whether to enable task status checker. If it is set to "true", DM tries to resume data replication task that is suspended due to errors. | `true` |
 | `backoff-rollback` | Sets the time interval for adjusting the waiting time of the automatic recovery. | `"5m0s"`|
-| `backoff-max` | Sets the longest waiting time for the automatic recovery after errors are detected. | `"5m0s"`|
+| `backoff-max` | Sets the longest time interval for the automatic recovery after errors are detected. | `"5m0s"`|
 
 > **Note:**
 >
-> Generally, you only need to determine whether to enable the task status checker through `check-enable`. It is not recommended to change the default values of `backoff-rollback` and `backoff-max` unless you have an in-depth understanding of these two parameters.
+> Generally, you only need to determine whether to enable the task status checker through the `check-enable` parameter. It is not recommended to change the default values of `backoff-rollback` and `backoff-max` unless you have an in-depth understanding of these two parameters.

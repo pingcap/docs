@@ -6,7 +6,7 @@ category: reference
 
 # DM-master Configuration File
 
-This document introduces the configuration of DM-master.
+This document introduces the configuration of DM-master, including the configuration file template and configurable items.
 
 ## Configuration file template
 
@@ -35,7 +35,7 @@ dm-worker = "172.16.10.73:8262"
 
 | Name        | Description                                    |
 | :------------ | :--------------------------------------- |
-| `log-file` | The log file. If not specified, the log file is printed onto the standard output. |
+| `log-file` | The log file. If not specified, the log is printed to the standard output. |
 | `master-addr` | The address of DM-master which provides services. You can omit the host name and specify the port number only, such as ":8261". |
 
 ### DM-worker configuration
