@@ -36,7 +36,7 @@ dm-worker = "172.16.10.73:8262"
 | Name        | Description                                    |
 | :------------ | :--------------------------------------- |
 | `log-file` | The log file. If not specified, the log is printed to the standard output. |
-| `master-addr` | The address of DM-master which provides services. You can omit the host name and specify the port number only, such as ":8261". |
+| `master-addr` | The address of DM-master which provides services. You can omit the IP address and specify the port number only, such as ":8261". |
 
 ### DM-worker configuration
 

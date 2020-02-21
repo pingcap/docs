@@ -512,7 +512,7 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd /home/tidb && \
+    cd /home/tidb &&
     mv dm-ansible dm-ansible-bak
     ```
 
@@ -521,9 +521,9 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd /home/tidb && \
-    wget http://download.pingcap.org/dm-ansible-{version}.tar.gz && \
-    tar -xzvf dm-ansible-{version}.tar.gz && \
+    cd /home/tidb &&
+    wget http://download.pingcap.org/dm-ansible-{version}.tar.gz &&
+    tar -xzvf dm-ansible-{version}.tar.gz &&
     mv dm-ansible-{version} dm-ansible
     ```
 
@@ -532,7 +532,7 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd /home/tidb && \
+    cd /home/tidb &&
     cp dm-ansible-bak/inventory.ini dm-ansible/inventory.ini
     ```
 
@@ -541,7 +541,7 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd /home/tidb/dm-ansible-bak/dmctl && \
+    cd /home/tidb/dm-ansible-bak/dmctl &&
     cp * /home/tidb/dm-ansible/dmctl/
     ```
 
