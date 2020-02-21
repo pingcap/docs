@@ -28,12 +28,14 @@ TiDB Lightning requires the following privileges:
 * CREATE
 * DROP
 
-If the target database is used to store checkpoints, it additionally requires these privileges:
+If the [TiDB-backend](/dev/reference/tools/tidb-lightning/tidb-backend.md) is chosen, or the target database is used to store checkpoints, it additionally requires these privileges:
 
 * INSERT
 * DELETE
 
-If the `checksum` configuration item of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
+The Importer-backend does not require these two privileges because data is ingested into TiKV directly, which bypasses the entire TiDB privilege system. This is secure as long as the ports of TiKV, TiKV Importer and TiDB Lightning are not reachable outside the cluster.
+
+If the `checksum` configuration of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
 
 ## TiDB Lightning encountered an error when importing one table. Will it affect other tables? Will the process be terminated?
 
@@ -67,8 +69,11 @@ TiDB Lightning by default performs checksum on the local data source and the imp
 
 You could also execute the `ADMIN CHECKSUM TABLE` SQL command on the target table to recompute the checksum of the imported data.
 
-```text
-mysql> ADMIN CHECKSUM TABLE `schema`.`table`;
+```sql
+ADMIN CHECKSUM TABLE `schema`.`table`;
+```
+
+```
 +---------+------------+---------------------+-----------+-------------+
 | Db_name | Table_name | Checksum_crc64_xor  | Total_kvs | Total_bytes |
 +---------+------------+---------------------+-----------+-------------+
@@ -131,6 +136,8 @@ It is not recommended to directly use `nohup` in the command line to start `tidb
 
 If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. You can force the cluster back to "normal mode" using the following command:
 
+{{< copyable "shell-regular" >}}
+
 ```sh
 tidb-lightning-ctl --switch-mode=normal
 ```
@@ -163,6 +170,8 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 ## How to completely destroy all intermediate data associated with TiDB Lightning?
 
 1. Delete the checkpoint file.
+
+    {{< copyable "shell-regular" >}}
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-remove=all

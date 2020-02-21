@@ -38,7 +38,7 @@ Log in to the Control Machine using the `root` user account, and run the corresp
 
     ```bash
     yum -y install epel-release git curl sshpass &&
-    um -y install python-pip
+    yum -y install python-pip
     ```
 
 - If you use a Control Machine installed with Ubuntu, run the following command:
@@ -74,10 +74,7 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
     {{< copyable "shell-root" >}}
 
     ```bash
-    visudo
-    ```
-
-    ```
+    visudo &&
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
@@ -134,7 +131,7 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
     {{< copyable "shell-regular" >}}
 
     ```bash
-    wget http://download.pingcap.org/dm-ansible-{version}.tar.gz
+    wget https://download.pingcap.org/dm-ansible-{version}.tar.gz
     ```
 
     `{version}` is the DM version that you expect to download, like `v1.0.1` and `v1.0.2`.
@@ -354,10 +351,7 @@ Assuming that the upstream MySQL user password is `123456`, configure the genera
 
 ```bash
 cd /home/tidb/dm-ansible/resources/bin &&
-./dmctl -encrypt 123456
-```
-
-```
+./dmctl -encrypt 123456 &&
 VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=
 ```
 
@@ -522,7 +516,7 @@ dm_master ansible_host=172.16.10.71 dm_master_port=18261
 
     ```bash
     cd /home/tidb &&
-    wget http://download.pingcap.org/dm-ansible-{version}.tar.gz &&
+    wget https://download.pingcap.org/dm-ansible-{version}.tar.gz &&
     tar -xzvf dm-ansible-{version}.tar.gz &&
     mv dm-ansible-{version} dm-ansible
     ```

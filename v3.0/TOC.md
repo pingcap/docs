@@ -83,7 +83,9 @@
   + Maintain
     - [Common Ansible Operations](/v3.0/how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](/v3.0/how-to/maintain/backup-and-restore.md)
-    - [Identify Slow Queries](/v3.0/how-to/maintain/identify-slow-queries.md)
+  + Identify Abnormal Queries
+    - [Identify Slow Queries](/v3.0/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
+    - [Identify Expensive Queries](/v3.0/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/v3.0/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.0/how-to/scale/horizontally.md)
@@ -287,6 +289,8 @@
     - [Highly Concurrent Write Best Practices](/v3.0/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/v3.0/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/v3.0/reference/best-practices/pd-scheduling.md)
+    - [Grafana Best Practices](/v3.0/reference/best-practices/grafana-monitor.md)
+    - [TiKV Performance Tuning with Massive Regions](/v3.0/reference/best-practices/massive-regions.md)
   - [TiSpark](/v3.0/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v3.0/reference/tidb-binlog/overview.md)
@@ -349,12 +353,16 @@
         + v1.0
           - [1.0.2](/v3.0/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/v3.0/reference/tools/data-migration/releases/1.0.3.md)
+      - [TiDB DM Glossary](/v3.0/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/v3.0/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v3.0/reference/tools/tidb-lightning/deployment.md)
+      - [Configuration](/v3.0/reference/tools/tidb-lightning/config.md)
       - [Checkpoints](/v3.0/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/v3.0/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/v3.0/reference/tools/tidb-lightning/csv.md)
+      - [TiDB-backend](/v3.0/reference/tools/tidb-lightning/tidb-backend.md)
+      - [Web Interface](/v3.0/reference/tools/tidb-lightning/web.md)
       - [Monitor](/v3.0/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v3.0/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v3.0/faq/tidb-lightning.md)
@@ -418,6 +426,7 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.10](/v3.0/releases/3.0.10.md)
     - [3.0.9](/v3.0/releases/3.0.9.md)
     - [3.0.8](/v3.0/releases/3.0.8.md)
     - [3.0.7](/v3.0/releases/3.0.7.md)
@@ -494,3 +503,4 @@
     - [RC3](/v3.0/releases/rc3.md)
     - [RC2](/v3.0/releases/rc2.md)
     - [RC1](/v3.0/releases/rc1.md)
++ [Glossary](/v3.0/glossary.md)
