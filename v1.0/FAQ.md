@@ -592,7 +592,7 @@ INSERT INTO mysql.user VALUES ("%", "root", "", "Y", "Y", "Y", "Y", "Y", "Y", "Y
 
 Currently, TiDB does not support `select into outfile`. You can use the following methods to export the data in TiDB:
 
-- See [MySQL uses mysqldump to export part of the table data](http://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the WHERE condition.
+- See [MySQL uses mysqldump to export part of the table data](https://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the WHERE condition.
 - Use the MySQL client to export the results of `select` to a file.
 
 #### How to migrate from DB2 or Oracle to TiDB?
@@ -656,11 +656,7 @@ There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Goog
 
 #### How to import data in batches?
 
-1. When you import data, insert in batches and keep the number of rows within 10,000 for each batch.
-
-2. As for `insert` and `select`, you can open the hidden parameter `set @@session.tidb_batch_insert=1;`, and `insert` will execute large transactions in batches. In this way, you can avoid the timeout caused by large transactions, but this may lead to the loss of atomicity. An error in the process of execution leads to partly inserted transaction. Therefore, use this parameter only when necessary, and use it in session to avoid affecting other statements. When the transaction is finished, use `set @@session.tidb_batch_insert=0` to close it.
-
-3. As for `delete` and `update`, you can use `limit` plus circulation to operate.
+When you import data, insert in batches and keep the number of rows within 10,000 for each batch.
 
 #### Does TiDB release space immediately after deleting data?
 

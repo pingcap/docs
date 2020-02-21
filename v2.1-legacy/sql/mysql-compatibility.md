@@ -48,7 +48,7 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 > 
 > Assume that you have a table with the auto-increment ID:
 > 
-> `create table t(id int unique key auto_increment, c int);`
+> `create table t(id int unique key AUTO_INCREMENT, c int);`
 > 
 > The principle of the auto-increment ID in TiDB is that each tidb-server instance caches a section of ID values (currently 30000 IDs are cached) for allocation and fetches the next section after this section is used up.
 >
@@ -79,14 +79,14 @@ TiDB implements the asynchronous schema changes algorithm in F1. The Data Manipu
 + Drop Index
 + Add Column:
     - Does not support creating multiple columns at the same time.
-    - Does not support setting a column as the primary key, or creating a unique index, or specifying auto_increment while adding it.
+    - Does not support setting a column as the primary key, or creating a unique index, or specifying AUTO_INCREMENT while adding it.
 + Drop Column: Does not support dropping the primary key column or index column.
 + Alter Column
 + Change/Modify Column
     - Supports changing/modifying the types among the following integer types: TinyInt, SmallInt, MediumInt, Int, BigInt.
     - Supports changing/modifying the types among the following string types: Char, Varchar, Text, TinyText, MediumText, LongText
     - Support changing/modifying the types among the following string types: Blob, TinyBlob, MediumBlob, LongBlob.
-    
+
         > **Note:**
         >
         > The changing/modifying column operation cannot make the length of the original type become shorter and it cannot change the unsigned/charset/collate attributes of the column.
@@ -118,17 +118,17 @@ Due to the distributed, 2-phase commit requirement of TiDB, large transactions t
 
 ### Small transactions
 
-Since each transaction in TiDB requires two round trips to the PD leader, small transactions may have higher latencies in TiDB than MySQL. As a hypothetical example, the following query could be improved by moving from `auto_commit` to using an explicit transaction:
+Since each transaction in TiDB requires two round trips to the PD leader, small transactions may have higher latencies in TiDB than MySQL. As a hypothetical example, the following query could be improved by moving from `autocommit` to using an explicit transaction:
 
 ```sql
-# original version with auto_commit
-UPDATE my_table SET a='new_value' WHERE id = 1; 
+# original version with autocommit
+UPDATE my_table SET a='new_value' WHERE id = 1;
 UPDATE my_table SET a='newer_value' WHERE id = 2;
 UPDATE my_table SET a='newest_value' WHERE id = 3;
 
 # improved version
 START TRANSACTION;
-UPDATE my_table SET a='new_value' WHERE id = 1; 
+UPDATE my_table SET a='new_value' WHERE id = 1;
 UPDATE my_table SET a='newer_value' WHERE id = 2;
 UPDATE my_table SET a='newest_value' WHERE id = 3;
 COMMIT;

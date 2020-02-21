@@ -264,7 +264,7 @@ You can use Docker Compose to build a TiDB cluster locally, including the cluste
 
 2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and the slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
 
-3. In addition to the log, you can also view the slow query using the `admin show slow` command. For details, see [`admin show slow` command](/v3.0/how-to/maintain/identify-slow-queries.md#admin-show-slow-command).
+3. In addition to the log, you can also view the slow query using the `admin show slow` command. For details, see [`admin show slow` command](/v3.0/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md#admin-show-slow-command).
 
 #### How to add the `label` configuration if `label` of TiKV was not configured when I deployed the TiDB cluster for the first time?
 
@@ -280,11 +280,15 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
 
 - Random Read test:
 
+    {{< copyable "shell-regular" >}}
+
     ```bash
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randread -size=10G -filename=fio_randread_test.txt -name='fio randread test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_result.json
     ```
 
 - The mix test of sequential Write and random Read:
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
@@ -303,13 +307,13 @@ Two possible reasons and solutions:
 
 - Apply rolling updates to the TiKV node (only update the TiKV service).
 
-    ```
+    ```bash
     ansible-playbook rolling_update.yml --tags=tikv
     ```
 
 - Apply rolling updates to all services.
 
-    ```
+    ```bash
     ansible-playbook rolling_update.yml
     ```
 
@@ -360,7 +364,7 @@ Solution:
 
 You can log into TiDB like logging into MySQL. For example:
 
-```
+```bash
 mysql -h 127.0.0.1 -uroot -P4000
 ```
 
@@ -828,7 +832,7 @@ TiDB can provide services while Loader is running because Loader inserts the dat
 
 Currently, TiDB does not support `select into outfile`. You can use the following methods to export the data in TiDB:
 
-- See [MySQL uses mysqldump to export part of the table data](http://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the WHERE condition.
+- See [MySQL uses mysqldump to export part of the table data](https://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the WHERE condition.
 - Use the MySQL client to export the results of `select` to a file.
 
 #### How to migrate from DB2 or Oracle to TiDB?
@@ -849,6 +853,8 @@ In Sqoop, `--batch` means committing 100 `statement`s in each batch, but by defa
 Two solutions:
 
 - Add the `-Dsqoop.export.records.per.statement=10` option as follows:
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     sqoop export \
@@ -936,11 +942,7 @@ There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Goog
 
 #### How to import data in batches?
 
-1. When you import data, insert in batches and keep the number of rows within 10,000 for each batch.
-
-2. As for `insert` and `select`, you can open the hidden parameter `set @@session.tidb_batch_insert=1;`, and `insert` will execute large transactions in batches. In this way, you can avoid the timeout caused by large transactions, but this may lead to the loss of atomicity. Therefore, it is not recommended to use this parameter in the production environment. An error in the process of execution leads to partly inserted transaction. Therefore, use this parameter only when necessary, and use it in session to avoid affecting other statements. When the transaction is finished, use `set @@session.tidb_batch_insert=0` to close it.
-
-3. As for `delete` and `update`, you can use `limit` plus circulation to operate.
+When you import data, insert in batches and keep the number of rows within 10,000 for each batch.
 
 #### Does TiDB release space immediately after deleting data?
 

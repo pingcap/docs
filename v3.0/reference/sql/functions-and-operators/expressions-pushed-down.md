@@ -98,50 +98,50 @@ tidb> explain select * from t where a < 2 and a > 2;
 >
 > - `admin reload expr_pushdown_blacklist` only takes effect on the TiDB server that executes this SQL statement. To make it apply to all TiDB servers, execute the SQL statement on each TiDB server.
 > - The feature of blacklisting specific expressions is supported in TiDB 3.0.0 or later versions.
-> - TiDB 3.0.3 or earlier versions does not support adding some of the operators (such as ">", "+", "is null") to the blacklist by using their original names. You need to use their aliases (case-insensitive) instead, as shown in the following table:
+> - TiDB 3.0.3 or earlier versions does not support adding some of the operators (such as ">", "+", "is null") to the blacklist by using their original names. You need to use their aliases (case-sensitive) instead, as shown in the following table:
 
 | Operator Name | Aliases |
 | :-------- | :---------- |
-| < | LT |
-| > | GT |
-| <= | LE |
-| >= | GT |
-| = | EQ |
-| != | NE |
-| <> | NE |
-| <=> | NullEQ |
+| < | lt |
+| > | gt |
+| <= | le |
+| >= | ge |
+| = | eq |
+| != | ne |
+| <> | ne |
+| <=> | nulleq |
 | &#124; | bitor |
 | && | bitand|
 | &#124;&#124; | or |
 | ! | not |
-| in | IN |
-| + | PLUS|
-|  - | MINUS |
-| * | MUL |
-|  / | DIV |
-| DIV | INTDIV |
-| IS NULL | ISNULL |
-| IS TRUE | ISTRUE |
-| IS FALSE | ISFALSE |
+| in | in |
+| + | plus|
+| - | minus |
+| * | mul |
+| / | div |
+| DIV | intdiv|
+| IS NULL | isnull |
+| IS TRUE | istrue |
+| IS FALSE | isfalse |
 
-[json_extract]: https://v3.0.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract
-[json_short_extract]: https://v3.0.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-column-path
-[json_short_extract_unquote]: https://v3.0.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-inline-path
-[json_unquote]: https://v3.0.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-unquote
-[json_type]: https://v3.0.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-type
-[json_set]: https://v3.0.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-set
-[json_insert]: https://v3.0.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-insert
-[json_replace]: https://v3.0.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-replace
-[json_remove]: https://v3.0.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-remove
-[json_merge]: https://v3.0.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge
-[json_merge_preserve]: https://v3.0.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge-preserve
-[json_object]: https://v3.0.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-object
-[json_array]: https://v3.0.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-array
-[json_keys]: https://v3.0.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-keys
-[json_length]: https://v3.0.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-length
-[json_valid]: https://v3.0.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-valid
-[json_quote]: https://v3.0.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-quote
-[json_contains]: https://v3.0.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-contains
-[json_contains_path]: https://v3.0.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-contains-path
-[json_arrayagg]: https://v3.0.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_json-arrayagg
-[json_depth]: https://v3.0.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-depth
+[json_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract
+[json_short_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-column-path
+[json_short_extract_unquote]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-inline-path
+[json_unquote]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-unquote
+[json_type]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-type
+[json_set]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-set
+[json_insert]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-insert
+[json_replace]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-replace
+[json_remove]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-remove
+[json_merge]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge
+[json_merge_preserve]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge-preserve
+[json_object]: https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-object
+[json_array]: https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-array
+[json_keys]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-keys
+[json_length]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-length
+[json_valid]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-valid
+[json_quote]: https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-quote
+[json_contains]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-contains
+[json_contains_path]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-contains-path
+[json_arrayagg]: https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_json-arrayagg
+[json_depth]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-depth

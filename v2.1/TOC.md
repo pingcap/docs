@@ -261,6 +261,8 @@
   + Best Practices
     - [HAProxy Best Practices](/v2.1/reference/best-practices/haproxy.md)
     - [PD Scheduling Best Practices](/v2.1/reference/best-practices/pd-scheduling.md)
+    - [Grafana Best Practices](/v2.1/reference/best-practices/grafana-monitor.md)
+    - [TiKV Performance Tuning with Massive Regions](/v2.1/reference/best-practices/massive-regions.md)
   - [TiSpark](/v2.1/reference/tispark.md)
   + TiDB Binlog
     - [Overview](/v2.1/reference/tidb-binlog/overview.md)
@@ -270,6 +272,10 @@
     - [Upgrade](/v2.1/reference/tidb-binlog/upgrade.md)
     - [Reparo](/v2.1/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/v2.1/reference/tidb-binlog/binlog-slave-client.md)
+    - [Glossary](/v2.1/reference/tidb-binlog/glossary.md)
+    + Troubleshoot
+      - [Troubleshooting](/v2.1/reference/tidb-binlog/troubleshoot/binlog.md)
+      - [Error Handling](/v2.1/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/v2.1/reference/tidb-binlog/faq.md)
   + Tools
     - [Mydumper](/v2.1/reference/tools/mydumper.md)
@@ -297,6 +303,8 @@
       - [Deploy](/v2.1/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v2.1/reference/tools/data-migration/configure/overview.md)
+        - [DM-master Configuration](/v2.1/reference/tools/data-migration/configure/dm-master-configuration-file.md)
+        - [DM-worker Configuration](/v2.1/reference/tools/data-migration/configure/dm-worker-configuration-file.md)
         - [Task Configuration](/v2.1/reference/tools/data-migration/configure/task-configuration-file.md)
       + Manage the DM Cluster
         - [Cluster Operations](/v2.1/reference/tools/data-migration/cluster-operations.md)
@@ -314,12 +322,19 @@
         - [Error Description](/v2.1/reference/tools/data-migration/troubleshoot/error-system.md)
         - [Error Handling](/v2.1/reference/tools/data-migration/troubleshoot/error-handling.md)
       - [FAQ](/v2.1/reference/tools/data-migration/faq.md)
+      + Releases
+        + v1.0
+          - [1.0.2](/v2.1/reference/tools/data-migration/releases/1.0.2.md)
+          - [1.0.3](/v2.1/reference/tools/data-migration/releases/1.0.3.md)
+      - [TiDB DM Glossary](/v2.1/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/v2.1/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/v2.1/reference/tools/tidb-lightning/deployment.md)
+      - [Configuration](/v2.1/reference/tools/tidb-lightning/config.md)
       - [Checkpoints](/v2.1/reference/tools/tidb-lightning/checkpoints.md)
       - [Table Filter](/v2.1/reference/tools/tidb-lightning/table-filter.md)
       - [CSV Support](/v2.1/reference/tools/tidb-lightning/csv.md)
+      - [Web Interface](/v2.1/reference/tools/tidb-lightning/web.md)
       - [Monitor](/v2.1/reference/tools/tidb-lightning/monitor.md)
       - [Troubleshoot](/v2.1/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/v2.1/faq/tidb-lightning.md)
@@ -343,6 +358,7 @@
 - [Roadmap](/v2.1/roadmap.md)
 + [Releases](/v2.1/releases/rn.md)
   + v2.1
+    - [2.1.19](/v2.1/releases/2.1.19.md)
     - [2.1.18](/v2.1/releases/2.1.18.md)
     - [2.1.17](/v2.1/releases/2.1.17.md)
     - [2.1.16](/v2.1/releases/2.1.16.md)
@@ -402,3 +418,4 @@
     - [RC3](/v2.1/releases/rc3.md)
     - [RC2](/v2.1/releases/rc2.md)
     - [RC1](/v2.1/releases/rc1.md)
++ [Glossary](/v2.1/glossary.md)
