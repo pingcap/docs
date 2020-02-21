@@ -173,7 +173,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     }%
     ```
 
-3. Decode `handle id (uint64) using `base64decode`.
+3. Decode `handle id (uint64)` using `base64decode`.
 
     ```shell
     $ tidb-ctl base64decode AAAAAAAAAAE=

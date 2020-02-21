@@ -73,4 +73,3 @@ TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.
 * `SOUNDEX()`
 * `SOUNDS LIKE`
 * `WEIGHT_STRING()`
-
