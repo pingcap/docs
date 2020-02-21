@@ -85,7 +85,9 @@
     + Backup and Restore
       - [Use `mydumper` and `loader`](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md)
       - [Use BR](/v3.1/how-to/maintain/backup-and-restore/br.md)
-    - [Identify Slow Queries](/v3.1/how-to/maintain/identify-slow-queries.md)
+    + Identify Abnormal Queries
+      - [Identify Slow Queries](/v3.1/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
+      - [Identify Expensive Queries](/v3.1/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/v3.1/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.1/how-to/scale/horizontally.md)
@@ -332,6 +334,8 @@
       - [Deploy](/v3.1/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v3.1/reference/tools/data-migration/configure/overview.md)
+        - [DM-master Configuration](/v3.1/reference/tools/data-migration/configure/dm-master-configuration-file.md)
+        - [DM-worker Configuration](/v3.1/reference/tools/data-migration/configure/dm-worker-configuration-file.md)
         - [Task Configuration](/v3.1/reference/tools/data-migration/configure/task-configuration-file.md)
       + Manage the DM Cluster
         - [Cluster Operations](/v3.1/reference/tools/data-migration/cluster-operations.md)
@@ -429,6 +433,7 @@
     - [3.1.0-beta.1](/v3.1/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/v3.1/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.10](/v3.1/releases/3.0.10.md)
     - [3.0.9](/v3.1/releases/3.0.9.md)
     - [3.0.8](/v3.1/releases/3.0.8.md)
     - [3.0.7](/v3.1/releases/3.0.7.md)

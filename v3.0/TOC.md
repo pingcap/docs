@@ -83,7 +83,9 @@
   + Maintain
     - [Common Ansible Operations](/v3.0/how-to/deploy/orchestrated/ansible-operations.md)
     - [Backup and Restore](/v3.0/how-to/maintain/backup-and-restore.md)
-    - [Identify Slow Queries](/v3.0/how-to/maintain/identify-slow-queries.md)
+  + Identify Abnormal Queries
+    - [Identify Slow Queries](/v3.0/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
+    - [Identify Expensive Queries](/v3.0/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/v3.0/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/v3.0/how-to/scale/horizontally.md)
@@ -329,6 +331,8 @@
       - [Deploy](/v3.0/reference/tools/data-migration/deploy.md)
       + Configure
         - [Overview](/v3.0/reference/tools/data-migration/configure/overview.md)
+        - [DM-master Configuration](/v3.0/reference/tools/data-migration/configure/dm-master-configuration-file.md)
+        - [DM-worker Configuration](/v3.0/reference/tools/data-migration/configure/dm-worker-configuration-file.md)
         - [Task Configuration](/v3.0/reference/tools/data-migration/configure/task-configuration-file.md)
       + Manage the DM Cluster
         - [Cluster Operations](/v3.0/reference/tools/data-migration/cluster-operations.md)
@@ -423,6 +427,7 @@
 - [Roadmap](/v3.0/roadmap.md)
 + [Releases](/v3.0/releases/rn.md)
   + v3.0
+    - [3.0.10](/v3.0/releases/3.0.10.md)
     - [3.0.9](/v3.0/releases/3.0.9.md)
     - [3.0.8](/v3.0/releases/3.0.8.md)
     - [3.0.7](/v3.0/releases/3.0.7.md)
