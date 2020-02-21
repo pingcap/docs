@@ -21,8 +21,8 @@ On December 26, 2017, TiDB 1.0.5 is released with the following updates:
 ## PD
 
 - Fix the issue that the leaders stop balancing under some circumstances.
-  - [869](https://github.com/pingcap/pd/pull/869)
-  - [874](https://github.com/pingcap/pd/pull/874)
+    - [869](https://github.com/pingcap/pd/pull/869)
+    - [874](https://github.com/pingcap/pd/pull/874)
 - [Fix potential panic during bootstrapping.](https://github.com/pingcap/pd/pull/889)
 
 ## TiKV

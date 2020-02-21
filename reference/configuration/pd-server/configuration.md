@@ -4,6 +4,8 @@ summary: Learn some configuration flags of PD.
 category: reference
 ---
 
+<!-- markdownlint-disable MD034 -->
+
 # PD Configuration Flags
 
 PD is configurable using command-line flags and environment variables.

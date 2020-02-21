@@ -3,6 +3,9 @@ title: TiDB 1.1 Alpha Release Notes
 category: Releases
 ---
 
+<!-- markdownlint-disable MD026 -->
+<!-- markdownlint-disable MD007 -->
+
 # TiDB 1.1 Alpha Release Notes
 
 On January 19, 2018, TiDB 1.1 Alpha is released. This release has great improvement in MySQL compatibility, SQL optimization, stability, and performance.

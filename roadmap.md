@@ -4,6 +4,8 @@ summary: Learn about the roadmap of TiDB.
 category: Roadmap
 ---
 
+<!-- markdownlint-disable MD026 -->
+
 # TiDB Roadmap
 
 This document defines the roadmap for TiDB development.

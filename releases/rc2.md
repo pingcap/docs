@@ -3,6 +3,9 @@ title: TiDB RC2 Release Notes
 category: releases
 ---
 
+<!-- markdownlint-disable MD026 -->
+<!-- markdownlint-disable MD007 -->
+
 # TiDB RC2 Release Notes
 
 On August 4, 2017, TiDB RC4 is released! This release is focused on the compatibility with MySQL, SQL query optimizer, system stability and performance in this version. What’s more, a new permission management mechanism is added and users can control data access in the same way as the MySQL privilege management system.
@@ -32,6 +35,7 @@ On August 4, 2017, TiDB RC4 is released! This release is focused on the compatib
 + Solve the problem of memory leak
 
 ## PD:
+
 + Support location aware replica scheduling
 + Conduct fast scheduling based on the number of region
 + pd-ctl support more features
@@ -41,6 +45,7 @@ On August 4, 2017, TiDB RC4 is released! This release is focused on the compatib
     - Obtain cluster label information
 
 ## TiKV:
+
 + Support Async Apply to improve the entire write performance
 + Use prefix seek to improve the read performance of Write CF
 + Use memory hint prefix to improve the insert performance of Raft CF

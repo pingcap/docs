@@ -3,6 +3,9 @@ title: TiDB 1.1 Beta Release Notes
 category: Releases
 ---
 
+<!-- markdownlint-disable MD026 -->
+<!-- markdownlint-disable MD007 -->
+
 # TiDB 1.1 Beta Release Notes
 
 On February 24, 2018, TiDB 1.1 Beta is released. This release has great improvement in MySQL compatibility, SQL optimization, stability, and performance.
