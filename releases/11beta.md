@@ -8,7 +8,7 @@ aliases: ['/docs/releases/11beta/']
 
 On February 24, 2018, TiDB 1.1 Beta is released. This release has great improvement in MySQL compatibility, SQL optimization, stability, and performance.
 
-## TiDB:
+## TiDB
 
 - Add more monitoring metrics and refine the log
 - Compatible with more MySQL syntax
@@ -23,7 +23,7 @@ On February 24, 2018, TiDB 1.1 Beta is released. This release has great improvem
 - Optimize the query performance of the SQL engine to improve the test result of the Sysbench Select/OLTP by 10%
 - Improve the computing speed of subqueries in the optimizer using the new execution engine; compared with TiDB 1.0, TiDB 1.1 Beta has great improvement in tests like TPC-H and TPC-DS
 
-## PD:
+## PD
 
 - Add the Drop Region debug interface
 - Support setting priority of the PD leader
@@ -37,7 +37,7 @@ On February 24, 2018, TiDB 1.1 Beta is released. This release has great improvem
 - Fix the issue that hot spot scheduling violates label constraint
 - Fix other stability issues
 
-## TiKV:
+## TiKV
 
 - Traverse locks using offset + limit to avoid potential GC problems
 - Support resolving locks in batches to improve GC speed
