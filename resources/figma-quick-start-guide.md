@@ -15,6 +15,10 @@ For details, see the [Figma tutorial](https://help.figma.com/article/12-getting-
 
 Perform the following steps to get started with Figma.
 
+> **Note:**
+>
+> The keyboard shortcuts demonstrated in this document are only for macOS users. For more keyboard shortcuts on macOS and Windows, see [Figma keyboard shortcuts](https://www.figma.com/file/ewSrIu24UagGV8JN4kQNNzMH/KEYBOARD-SHORTCUTS?node-id=0%3A1).
+
 ### Step 1: Create an account
 
 Go to [https://www.figma.com/](https://www.figma.com/) and click **Sign up** to create an account.
@@ -81,7 +85,7 @@ You are recommended to copy and paste the existing objects within other Frames i
 
     ![Fill](/media/fill.png)
 
-2. Click the eyedropper tool icon (keyboard shortcuts: <kbd>Ctrl</kbd>+<kbd>C</kbd> or <kbd>I</kbd>) next to the slider to open the eyedropper tool.
+2. Click the eyedropper tool icon (keyboard shortcuts: <kbd>I</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd>) next to the slider to open the eyedropper tool.
 
     ![Eyedropper](/media/eyedropper.png)
 
