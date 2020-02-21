@@ -81,7 +81,7 @@ You are recommended to copy and paste the existing objects within other Frames i
 
     ![Fill](/media/fill.png)
 
-2. Click the eyedropper tool icon (keyboard shortcuts: **Ctrl**+**C** or **I**) next to the slider to open the eyedropper tool.
+2. Click the eyedropper tool icon (keyboard shortcuts: <kbd>Ctrl</kbd>+<kbd>C</kbd> or <kbd>I</kbd>) next to the slider to open the eyedropper tool.
 
     ![Eyedropper](/media/eyedropper.png)
 
