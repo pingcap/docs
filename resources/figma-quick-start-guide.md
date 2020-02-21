@@ -27,7 +27,7 @@ Go to [https://www.figma.com/](https://www.figma.com/) and click **Sign up** to 
 
 ### Step 2: Open the tidb-sketch-book file
 
-Currently, anyone with the link [https://www.figma.com/file/MOBwqkBtuA03agMjeGEGUT/tidb-sketch-book](https://www.figma.com/file/MOBwqkBtuA03agMjeGEGUT/tidb-sketch-book) can view [tidb-sketch-book](https://www.figma.com/file/MOBwqkBtuA03agMjeGEGUT/tidb-sketch-book).
+Click [tidb-sketch-book](https://www.figma.com/file/MOBwqkBtuA03agMjeGEGUT/tidb-sketch-book) to view the template.
 
 > **Note:**
 >
