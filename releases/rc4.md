@@ -3,6 +3,8 @@ title: TiDB RC4 Release Notes
 category: releases
 ---
 
+<!-- markdownlint-disable MD026 -->
+
 # TiDB RC4 Release Notes
 
 On August 4, 2017, TiDB RC4 is released! This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
@@ -23,7 +25,7 @@ On August 4, 2017, TiDB RC4 is released! This release is focused on MySQL compat
     - Support the automatic choice of the of the `Join` physical operator based on the cost
     - Improved Projection Elimination
 + The version check of schema is based on Table to avoid the impact of DDL on the ongoing transactions
-+ Support ` BatchIndexJoin`
++ Support `BatchIndexJoin`
 + Improve the `Explain` statement
 + Improve the `Index Scan` performance
 + Many enhancements have been introduced to be more compatible with MySQL
