@@ -33,17 +33,17 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8029 | Incorrect value. |
 | 8030 | After an unsigned positive integer is converted to a signed integer, it exceeds the maximum value and displays as a negative integer.|
 | 8031 | When being converted to an unsigned integer, a negative integer is converted to a positive integer. |
-| 8032 | Illegal `year` format. |
-| 8033 | Illegal `year` value. |
+| 8032 | Invalid `year` format. |
+| 8033 | Invalid `year` value. |
 | 8034 | Incorrect `datetime` value. |
-| 8036 | Illegal `time` format. |
-| 8037 | Illegal `week` format. |
+| 8036 | Invalid `time` format. |
+| 8037 | Invalid `week` format. |
 | 8038 | The field fails to obtain the default value. |
 | 8039 | Index offset is out of range. |
 | 8042 | The state of table schema does not exist. |
 | 8043 | The state of column information does not exist. |
 | 8044 | The state of index does not exist. |
-| 8045 | Illegal table data. |
+| 8045 | Invalid table data. |
 | 8046 | The state of column information is invisible. |
 | 8047 | The value of the system variable is not supported. This error usually occurs in the alarm information when the user sets a variable value that is not supported in the database. |
 | 8048 | An unsupported database isolation level is set. |
@@ -51,19 +51,19 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8050 | An unsupported privilege type is set. |
 | 8051 | Unknown field type. |
 | 8052 | The serial number of the data packet from the client is incorrect. |
-| 8053 | An illegal auto-incrementing column value is obtained. |
+| 8053 | An invalid auto-incrementing column value is obtained. |
 | 8055 | The current snapshot is too old. The data may have been garbage collected. |
-| 8056 | Illegal table ID. |
-| 8057 | Illegal field type. |
+| 8056 | Invalid table ID. |
+| 8057 | Invalid field type. |
 | 8058 | You apply an automatic variable type that does not exist. |
 | 8059 | It fails to obtain an auto-random ID. |
-| 8060 | Illegal auto-incrementing offset. |
+| 8060 | Invalid auto-incrementing offset. |
 | 8061 | Unsupported SQL Hint. |
-| 8062 | An illegal token is used in SQL Hint. It conflicts with reserved words in SQL Hint. |
+| 8062 | An invalid token is used in SQL Hint. It conflicts with reserved words in SQL Hint. |
 | 8063 | The limited memory usage set in SQL Hint exceeds the upper limit of the system. The setting in SQL Hint is ignored. |
 | 8064 | It fails to parse SQL Hint. |
-| 8065 | An illegal integer is used in SQL Hint. |
-| 8066 | The second parameter in the `JSON_OBJECTAGG` function is illegal. |
+| 8065 | An invalid integer is used in SQL Hint. |
+| 8066 | The second parameter in the `JSON_OBJECTAGG` function is invalid. |
 | 8101 | The format of plugin ID is incorrect. | The correct format is `[name]-[version]`, and no `-` is allowed in `name` and `version`. |
 | 8102 | Unable to read the plugin definition information. |
 | 8103 | The plugin name is incorrect. |
@@ -88,18 +88,18 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 | 8200 | The DDL syntax is not yet supported. |
 | 8201 | TiDB is currently not the DDL owner. |
 | 8202 | The index cannot be decoded. |
-| 8203 | Illegal DDL worker. |
-| 8204 | Illegal DDL job. |
-| 8205 | Illegal DDL job mark. |
+| 8203 | Invalid DDL worker. |
+| 8204 | Invalid DDL job. |
+| 8205 | Invalid DDL job mark. |
 | 8206 | The DDL operation in `re-organize` phase timed out. |
-| 8207 | Illegal storage nodes. |
-| 8210 | Illegal DDL state. |
+| 8207 | Invalid storage nodes. |
+| 8210 | Invalid DDL state. |
 | 8211 | Panic occurs during the DDL operation in `re-organize` phase. |
-| 8212 | Illegal split range of Region. |
-| 8213 | Illegal DDL job version. |
+| 8212 | Invalid split range of Region. |
+| 8213 | Invalid DDL job version. |
 | 8214 | The DDL operation is terminated. |
 | 8215 | `ADMIN REPAIR TABLE` fails. |
-| 8216 | Illegal automatic random columns. |
+| 8216 | Invalid automatic random columns. |
 | 8221 | Incorrect Key encoding. |
 | 8222 | Incorrect index Key encoding. |
 | 8223 | This error occurs when detecting that the data is not consistent with the index. |
