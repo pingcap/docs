@@ -84,8 +84,7 @@
     - [Common Ansible Operations](/v3.1/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
       - [Use `mydumper` and `loader`](/v3.1/how-to/maintain/backup-and-restore/mydumper-loader.md)
-      - [Use BR](/v3.1/reference/tools/br/br.md)
-      - [BR Scenario Demonstrations](/v3.1/reference/tools/br/use-case.md)
+      - [Use BR](/v3.1/how-to/maintain/backup-and-restore/br.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/v3.1/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
       - [Identify Expensive Queries](/v3.1/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
