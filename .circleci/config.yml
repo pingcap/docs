@@ -25,9 +25,9 @@ jobs:
             markdownlint $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*' ':(exclude)v1.0/*' ':(exclude)v2.0/*' ':(exclude)v2.1-legacy/*')
 
       - run:
-          name: "Check links"
-          command: |
-            scripts/verify-links.sh
+         name: "Check links"
+         command: |
+           scripts/verify-links.sh
 
   build:
     docker:
@@ -55,19 +55,12 @@ jobs:
           command: |
             sudo bash -c 'echo "222.222.95.49 uc.qbox.me" >> /etc/hosts';
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              python3 scripts/upload.py dev/output.pdf tidb-manual-en-dev.pdf;
-              python3 scripts/upload.py v3.0/output.pdf tidb-manual-en-v3.0.pdf;
-              python3 scripts/upload.py v2.1/output.pdf tidb-manual-en-v2.1.pdf;
-            fi
-            if [ "${CIRCLE_BRANCH}" == "website-preview" ]; then
-              python3 scripts/upload.py dev/output.pdf tidb-manual-en-preview-dev-test.pdf;
-              python3 scripts/upload.py v3.0/output.pdf tidb-manual-en-preview-v3.0-test.pdf;
-              python3 scripts/upload.py v2.1/output.pdf tidb-manual-en-preview-v2.1-test.pdf;
+              python3 scripts/upload.py output.pdf tidb-manual-en-dev.pdf;
             fi
 
       - run:
           name: "Copy Generated PDF"
-          command: mkdir /tmp/artifacts && cp dev/output.pdf dev/doc.md /tmp/artifacts
+          command: mkdir /tmp/artifacts && cp output.pdf doc.md /tmp/artifacts
 
       - store_artifacts:
           path: /tmp/artifacts
@@ -84,4 +77,3 @@ workflows:
             branches:
               only:
                 - master
-                - website-preview
