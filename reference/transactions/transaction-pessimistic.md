@@ -76,7 +76,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
     The autocommit `SELECT FOR UPDATE` statement does not wait for lock, either.
 
-## FAQs
+## FAQ
 
 1. The TiDB log shows `pessimistic write conflict, retry statement`.
 
