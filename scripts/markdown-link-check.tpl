@@ -12,9 +12,9 @@
         }
     ],
     "replacementPatterns": [
-		{	
-            "pattern": "^(?!(/|/media/))",	
-            "replacement": "/ERROR:link-must-start-with-slash:"	
+		{
+            "pattern": "^(?!(/|/media/))",
+            "replacement": "/ERROR:link-must-start-with-slash:"
         },
         {
             "comment": "prefix with repo root",
