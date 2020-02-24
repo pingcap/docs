@@ -18,7 +18,7 @@ The [Optimizer Hints](/reference/performance/optimizer-hints.md) document introd
 CREATE [GLOBAL | SESSION] BINDING FOR SelectStmt USING SelectStmt
 ```
 
-This statement binds SQL execution plans at the GLOBAL or SESSION level. The default scope is SESSION. The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, the corresponding optimizer hint is available as long as the parameterized SQL statement and a bound one in the system table are consistent.
+This statement binds SQL execution plans at the GLOBAL or SESSION level. The default scope is SESSION. The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), the corresponding optimizer hint is available. If there are multiple execution plan available, the optimizer chooses to bind the plan with the least cost.
 
 `Parameterization` is a process that converts a constant in SQL to a variable parameter, with standardized processing on the spaces and line breaks in the SQL statement, for example,
 
@@ -76,3 +76,29 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | update_time | Updating time |
 | charset | Character set |
 | collation | Ordering rule |
+
+### Automatically create binding
+
+To enable auto binding creation, set `tidb_capture_plan_baselines` to `on`. The default value is `off`.
+
+> **Note:**
+>
+> The auto binding creation function relies on [Statement Summary](/reference/performance/statement-summary.md). Hence, turn on Statement Summary before using auto binding.
+
+After enabling auto binding creation, for every `bind-info-lease` (3 seconds by default), the historical SQL statements in Statement Summary will be traversed, and the SQL statements that appear at least twice is automatically bound.
+
+### Automatically evolve binding
+
+As the data updates, the previously bound execution plan may no longer be optimal. The automatic binding evolution function can optimize the bound execution plan.
+
+{{< copyable "sql" >}}
+
+```sql
+set global tidb_evolve_plan_baselines = on;
+```
+
+The default value of `tidb_evolve_plan_baselines` is `off`.
+
+After enabling the automatic binding evolution function, if the optimal execution plan selected by the optimizer is not among the bound execution plans, the optimizer marks the plan as an execution plan that waits for verification. For every `bind-info-lease` (3 seconds by default), an execution plan to be verified is selected and compared with a bound execution plan with the least cost, in terms of the actual execution time. If the plan to be verified is better, it is marked as a usable binding.
+
+To reduce the impact that the automatic evolution has on clusters, you may limit the max time of each execution plan by setting `tidb_evolve_plan_task_max_time`. The default value is `600s`. You may limit the time window by setting `tidb_evolve_plan_task_start_time` (`00:00 +0000` by default) and `tidb_evolve_plan_task_end_time` (`23:59 +0000` by default).
