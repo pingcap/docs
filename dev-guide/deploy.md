@@ -1,6 +1,6 @@
 # Build for deployment
 
-For more deployment methods, see [TiDB deployment methods](/_index.md).
+The easiest way to deploy TiDB is to use Docker Compose, see [TiDB Docker Compose Deployment](https://pingcap.com/docs-cn/dev/how-to/get-started/deploy-tidb-from-docker-compose/). For more deployment methods, see [TiDB deployment methods](/_index.md).
 
 ## Before you begin
 
