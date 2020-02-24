@@ -72,7 +72,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 5. The autocommit transactions do not support the pessimistic locking.
 
-    None of the autocommit statements add the pessimistic lock. These statements does not display any difference in the user side, because the nature of pessimistic transactions is to turn the retry of the whole transaction into a single DML retry. The autocommit transactions automatically retry even when TiDB closes the retry, which have the same effect as pessimistic transactions.
+    None of the autocommit statements add the pessimistic lock. These statements do not display any difference in the user side, because the nature of pessimistic transactions is to turn the retry of the whole transaction into a single DML retry. The autocommit transactions automatically retry even when TiDB closes the retry, which has the same effect as pessimistic transactions.
 
     The autocommit `SELECT FOR UPDATE` statement does not wait for lock, either.
 
