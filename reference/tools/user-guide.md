@@ -96,7 +96,7 @@ The following is the basics of Mydumper:
 
 #### Full export tool TiDB Binlog
 
-[TiDB Binlog](/reference/tidb-binlog/overview.md) is a tool used to collect binlog data from TiDB, and provide near real-time backup and replication to downstream platforms.
+[TiDB Binlog](/reference/tidb-binlog/overview.md) is a tool used to collect binlog data from TiDB. It provides near real-time backup and replication to downstream platforms.
 
 The following is the basics of TiDB Binlog:
 
