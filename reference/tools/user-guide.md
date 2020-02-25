@@ -53,7 +53,7 @@ The following is the basics of TiDB Lightning:
 
 [BR](/how-to/maintain/backup-and-restore/br.md) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper and Loader, BR is more efficient, and more suitable for scenarios of huge data volume.
 
-The following is the basics of BR:
+The following are the basics of BR:
 
 - [Types of backup files](/how-to/maintain/backup-and-restore/br.md#types-of-backup-files): The SST file and the `backupmeta` file.
 - Applicable version of TiDB: v3.1 and v4.0.
