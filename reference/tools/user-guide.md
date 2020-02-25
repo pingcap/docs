@@ -23,7 +23,7 @@ The two types of tools are discussed in some details below.
 
 [Loader](/reference/tools/loader.md) is a lightweight full data import tool. Data in the form of SQL is imported into TiDB. Currently this tool is gradually replaced by [TiDB Lightning](#full-import-tool-tidb-lightning), see [TiDB Lightning TiDB-backend Document](/reference/tools/tidb-lightning/tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-backend).
 
-The following is the basics of Loader:
+The following are the basics of Loader:
 
 - Input: Files output by Mydumper.
 - Output: SQL written to TiDB.
@@ -41,7 +41,7 @@ The following is the basics of Loader:
 > - The default mode: Use `tikv-importer` as the backend. In this mode, the cluster can not provide normal services during the data import process. It is used when you import large amounts (TBs) of data.
 > - The second mode: Use `TiDB` as the backend (similar to Loader). The  import speed is slower than that of the default mode. However, the second mode supports online import.
 
-The following is the basics of TiDB Lightning:
+The following are the basics of TiDB Lightning:
 
 - Input:
     - Files output by Mydumper;
@@ -63,7 +63,7 @@ The following are the basics of BR:
 
 [Syncer](/reference/tools/syncer.md) is a tool used for incremental import of real-time binlog data from MySQL/MariaDB into TiDB. It is recommended to use [TiDB Data Migration](#Incremental-import-tool-tidb-data-migration) to replace Syncer.
 
-The following is the basics of Syncer:
+The following are the basics of Syncer:
 
 - Input: Binlog data of MySQL/MariaDB.
 - Output: SQL written to TiDB.
@@ -74,7 +74,7 @@ The following is the basics of Syncer:
 
 [TiDB Data Migration (DM)](/reference/tools/data-migration/overview.md) is an tool used for data migration from MySQL/MariaDB into TiDB. It supports the full data replication and the incremental data replication.
 
-The following is the basics of DM:
+The following are the basics of DM:
 
 - Input: Full data and binlog data of MySQL/MariaDB.
 - Output: SQL written to TiDB.
@@ -87,7 +87,7 @@ The following is the basics of DM:
 
 [Mydumper](/reference/tools/mydumper.md) is a MySQL community tool used for full logical backups of MySQL that also works with TiDB.
 
-The following is the basics of Mydumper:
+The following are the basics of Mydumper:
 
 - Input: MySQL/TiDB clusters.
 - Output: SQL files.
@@ -98,7 +98,7 @@ The following is the basics of Mydumper:
 
 [TiDB Binlog](/reference/tidb-binlog/overview.md) is a tool used to collect binlog data from TiDB. It provides near real-time backup and replication to downstream platforms.
 
-The following is the basics of TiDB Binlog:
+The following are the basics of TiDB Binlog:
 
 - Input: TiDB clusters.
 - Output: MySQL, TiDB, Kafka or incremental backup files.
