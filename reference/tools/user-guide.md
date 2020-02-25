@@ -85,7 +85,7 @@ The following is the basics of DM:
 
 #### Full export tool Mydumper
 
-[Mydumper](/reference/tools/mydumper.md) is a tool used for full logical backups of MySQL/TiDB.
+[Mydumper](/reference/tools/mydumper.md) is a MySQL community tool used for full logical backups of MySQL that also works with TiDB.
 
 The following is the basics of Mydumper:
 
