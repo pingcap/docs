@@ -25,7 +25,7 @@ The two types of tools are discussed in some details below.
 
 The following is the basics of Loader:
 
-- Input: Files output on the Mydumper.
+- Input: Files output by Mydumper.
 - Output: SQL written to TiDB.
 - Applicable version of TiDB: All.
 - Kubernetes: Supported. See [Backup and restore](/tidb-in-kubernetes/maintain/backup-and-restore.md).
