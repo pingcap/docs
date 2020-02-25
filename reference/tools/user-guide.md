@@ -6,7 +6,7 @@ aliases: ['/docs-cn/how-to/migrate/from-mysql/', '/docs-cn/how-to/migrate/increm
 
 # TiDB Ecosystem Tools User Guide
 
-Currently TiDB contains multiple ecosystem tools. Some of these have overlapping functionality, some are different versions of same tools. This document gives introductions of each tools, illustrates the relationships between the tools, and describes the applicable tools specified for each scenarios and each TiDB versions.
+Currently TiDB contains multiple ecosystem tools. Some of these have overlapping functionality, and some are different versions of same tools. This document gives introductions of each tools, illustrates the relationships between the tools, and describes the applicable tools specified for each scenarios and each TiDB versions.
 
 ## TiDB ecosystem tools overview
 
