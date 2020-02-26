@@ -95,7 +95,7 @@ This attribute supports forward compatibility, namely, downgrade compatibility. 
 
 Pay attention to the following restrictions when you use `AUTO_RANDOM`:
 
-- Specify this attribute for the primary key column ***ONLY** of integer type. Otherwise, an error might occur. Refer to [Notes for `alter-primary-key`](#notes-for-alter-primary-key) for exception.
+- Specify this attribute for the primary key column **ONLY** of integer type. Otherwise, an error might occur. Refer to [Notes for `alter-primary-key`](#notes-for-alter-primary-key) for exception.
 - You cannot use `ALTER TABLE` to modify the `AUTO_RANDOM` attribute, including adding or removing the attribute.
 - You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
 - You cannot specify `AUTO_RANDOM` and `AUTO_INCREMENT` for the same column at the same time.
