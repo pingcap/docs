@@ -930,13 +930,14 @@ The total read capacity has no limit. You can increase the read capacity by addi
 
 #### The error message `transaction too large` is displayed
 
-As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
+As distributed transactions need to conduct two-phase commit and the underlying implementation performs Raft replication. If a transaction is very large, the commit process would be quite slow and it's more likely to conflict with other transactions. Morever, the rollback of transactions lead to unnecessary performance penalty. To avoid this problem, we limit the transaction size:
 
 - A transaction is limited to 5000 SQL statements (by default)
 - Each Key-Value entry is no more than 6MB
-- The total size of Key-Value entry is no more than 100MB
 
 There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
+
+By default we limit the total size of Key-Value entries to no more than 100MB, if you need larger transactions, you can change `txn-total-size-limit` in the TiDB configuration file, the maximum value could be up to 10G, do not forget the actual limitation may also depend on the hardware of the RAM.
 
 #### How to import data in batches?
 
