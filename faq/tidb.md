@@ -88,10 +88,6 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 32 characters at most.
 
-#### What is the maximum number of statements in a transaction?
-
-5000 at most.
-
 #### Does TiDB support XA?
 
 No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
