@@ -85,7 +85,7 @@ To enable auto binding creation, set `tidb_capture_plan_baselines` to `on`. The 
 >
 > The auto binding creation function relies on [Statement Summary](/reference/performance/statement-summary.md). Hence, turn on Statement Summary before using auto binding.
 
-After enabling auto binding creation, for every `bind-info-lease` (3 seconds by default), the historical SQL statements in Statement Summary will be traversed, and the SQL statements that appear at least twice is automatically bound.
+After automatic binding creation is enabled, the historical SQL statements in the Statement Summary are traversed every `bind-info-lease` (the default value is `3s`), and bindings are automatically created for SQL statements that appear at least twice.
 
 ### Automatically evolve binding
 
