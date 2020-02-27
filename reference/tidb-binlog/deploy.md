@@ -552,8 +552,8 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # replicate-do-db = ["~^b.*","s1"]
 
         # [syncer.relay]
-        # It saves the TOC of relay log. It is not enabled if the value is empty.
-        # The configuration only comes to effect if the downstream service is TiDB or MySQL.
+        # It saves the catalog of relay log. Relay log is not enabled if the value is empty.
+        # The configuration only comes to effect if the downstream is TiDB or MySQL.
         # log-dir = ""
         # the maximum size of each file
         # max-file-size = 10485760
