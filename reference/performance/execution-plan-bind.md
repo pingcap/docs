@@ -79,7 +79,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 
 ### Automatically create binding
 
-To enable auto binding creation, set `tidb_capture_plan_baselines` to `on`. The default value is `off`.
+To enable automatic binding creation, set `tidb_capture_plan_baselines` to `on`. The default value is `off`.
 
 > **Note:**
 >
