@@ -89,7 +89,7 @@ After automatic binding creation is enabled, the historical SQL statements in th
 
 ### Automatically evolve binding
 
-As the data updates, the previously bound execution plan may no longer be optimal. The automatic binding evolution function can optimize the bound execution plan.
+As data updates, the previously bound execution plan might no longer be optimal. The automatic binding evolution feature can optimize the bound execution plan.
 
 {{< copyable "sql" >}}
 
@@ -99,6 +99,9 @@ set global tidb_evolve_plan_baselines = on;
 
 The default value of `tidb_evolve_plan_baselines` is `off`.
 
-After enabling the automatic binding evolution function, if the optimal execution plan selected by the optimizer is not among the bound execution plans, the optimizer marks the plan as an execution plan that waits for verification. For every `bind-info-lease` (3 seconds by default), an execution plan to be verified is selected and compared with a bound execution plan with the least cost, in terms of the actual execution time. If the plan to be verified is better, it is marked as a usable binding.
+After the automatic binding evolution feature is enabled, if the optimal execution plan selected by the optimizer is not among the bound execution plans, the optimizer marks the plan as an execution plan that waits for verification. Every `bind-info-lease` (the default value is `3s`), an execution plan to be verified is selected and compared with a bound execution plan with the least cost, in terms of the actual execution time. If the plan to be verified is better, it is marked as a usable binding.
 
-To reduce the impact that the automatic evolution has on clusters, you may limit the max time of each execution plan by setting `tidb_evolve_plan_task_max_time`. The default value is `600s`. You may limit the time window by setting `tidb_evolve_plan_task_start_time` (`00:00 +0000` by default) and `tidb_evolve_plan_task_end_time` (`23:59 +0000` by default).
+To reduce the impact that the automatic evolution has on clusters, use the following configurations:
+
+- Set `tidb_evolve_plan_task_max_time` to limit the maximum execution time of each execution plan. The default value is `600s`.
+- Set `tidb_evolve_plan_task_start_time` (`00:00 +0000` by default) and `tidb_evolve_plan_task_end_time` (`23:59 +0000` by default) to limit the time window.
