@@ -1,20 +1,20 @@
 ---
-title: Restart TiDB Cluster in Kubernetes
-summary: Learn how to restart the TiDB cluster in the Kubernetes cluster.
+title: Restart a TiDB Cluster in Kubernetes
+summary: Learn how to restart a TiDB cluster in the Kubernetes cluster.
 category: how-to
 ---
 
-# Restart TiDB Cluster in Kubernetes
+# Restart a TiDB Cluster in Kubernetes
 
-This document describes how to forcibly restart the TiDB cluster in the Kubernetes cluster, including restarting a Pod, restarting all Pods of a component, and restarting all Pods of the TiDB cluster.
+This document describes how to forcibly restart a TiDB cluster in the Kubernetes cluster, including restarting a Pod, restarting all Pods of a component, and restarting all Pods of the TiDB cluster.
 
 > **Note:**
 >
 > TiDB Operator v1.0.x only supports restarting the Pod in a forcible way.
 >
-> - If the PD Pod being restarted is the PD leader, its leadership does not automatically shift, causing the PD service to be momentarily unavailable.
-> - If the TiKV Pod being restarted contains a Region leader of the TiKV cluster, its leadership does not automatically shift, causing the requests of accessing the corresponding data to fail.
-> - Restarting the TiDB Pod causes the requests of accessing this Pod to fail.
+> - If the PD Pod being restarted is the PD leader, its leadership does not automatically shift, which can cause the PD service to be temporarily unavailable.
+> - If the TiKV Pod being restarted contains a Region leader of the TiKV cluster, its leadership does not automatically shift, which can cause the requests of accessing the corresponding data to fail.
+> - Restarting the TiDB Pod can cause the requests of accessing this Pod to fail.
 
 ## Forcibly restart a Pod
 
@@ -46,7 +46,7 @@ kubectl delete pod -n <namespace> -l app.kubernetes.io/component=<component-name
 
 > **Note:**
 >
-> - Replace `<component-name>` in the above commands with `pd`, `tidb`, or `tikv` to forcibly restart all Pods of the `PD`, `TiDB`, or `TiKV` component.
+> - To forcibly restart all Pods of the `PD`, `TiDB`, or `TiKV` component, replace `<component-name>` in the above commands with `pd`, `tidb`, or `tikv` respectively.
 > - Replace `<namespace>` in the above commands with your own namespace.
 
 ## Forcibly restart all Pods of the TiDB cluster
