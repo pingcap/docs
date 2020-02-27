@@ -8,7 +8,7 @@ aliases: ['/docs-cn/dev/reference/tools/tidb-binlog/relay-log/']
 
 When replicating binlogs, Drainer splits transactions from the upstream and replicates the split transactions concurrently to the downstream.
 
-In extreme cases where the upstream clusters is not available and Drainer exits abnormally, the downstream clusters (MySQL or TiDB) may be in the intermediate states with inconsistent data. In such cases, Drainer can use relay log to make sure the downstream clusters are in a consistent state.
+In extreme cases where the upstream clusters are not available and Drainer exits abnormally, the downstream clusters (MySQL or TiDB) may be in the intermediate states with inconsistent data. In such cases, Drainer can use the relay log to make sure the downstream clusters are in a consistent state.
 
 ## Consistent state during Drainer replication
 
@@ -38,9 +38,9 @@ If the upstream clusters are not available, Drainer can restore the downstream c
 > If the relay log data is lost at the same time, this method does not work, but its incidence is very low.
 > Besides, you can use the Network File System to ensure data security of the relay log.
 
-### Trigger scenarios of Drainer consuming binlog from relay log
+### Trigger scenarios of Drainer consuming binlogs from the relay log
 
-If Drainer fails to connect to the Placement Drivers (PD) of the upstream clusters when Drainer is started, and if it detects that `consistent = false` in checkpoint, Drainer will try to read the relay log, and restore the downstream clusters to a consistent state. After that, the Drainer process set the checkpoint `status` to `0` and then exit.
+If Drainer fails to connect to the Placement Drivers (PD) of the upstream clusters when Drainer is started, and if it detects that `consistent = false` in checkpoint, Drainer will try to read the relay log, and restore the downstream clusters to a consistent state. After that, the Drainer process sets the checkpoint `status` to `0` and then exit.
 
 ### GC mechanism of relay log
 
@@ -54,7 +54,7 @@ To enable the relay log, add the following configuration in Drainer:
 
 ```
 [syncer.relay]
-# It saves the catalog of relay log. Relay log is not enabled if the value is empty.
+# It saves the catalog of the relay log. The relay log is not enabled if the value is empty.
 # The configuration only comes to effect if the downstream is TiDB or MySQL.
 log-dir = "/dir/to/save/log"
 ```
