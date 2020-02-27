@@ -39,7 +39,7 @@ If the upstream clusters are not available, Drainer can restore the downstream c
 
 ### Trigger scenarios where Drainer consumes binlogs from the relay log
 
-Where Drainer is started, if it fails to connect to the Placement Drivers (PD) of the upstream clusters, and if it detects that `consistent = false` in checkpoint, Drainer will try to read the relay log, and restore the downstream clusters to a consistent state. After that, the Drainer process sets the checkpoint `status` to `0` and then exits.
+Where Drainer is started, if it fails to connect to the Placement Drivers (PD) of the upstream clusters, and if it detects that `consistent = false` in checkpoint, Drainer will try to read the relay log, and restore the downstream clusters to a consistent state. After that, the Drainer process sets the checkpoint `consistent` to `true` and then exits.
 
 ### GC mechanism of relay log
 
