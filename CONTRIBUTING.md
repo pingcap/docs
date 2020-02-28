@@ -4,6 +4,8 @@ Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited
 
 ## What you can contribute
 
+You can start from any one the following items to help improve [TiDB Docs at the PingCAP website](https://pingcap.com/docs/stable/):
+
 - Fix typos or format (punctuation, space, indentation, code block, etc.)
 - Fix or update inappropriate or outdated descriptions
 - Add missing content (sentence, paragraph, or a new document)
