@@ -103,7 +103,26 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - Does not support changing from `NULL` to `NOT NULL`.
     - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
 + `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
+<<<<<<< HEAD
 + `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but will work differently than MySQL since some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
+=======
++ `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but it works differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
++ Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it's not possible to add multiple columns or indexes in a single statement.
+
++ The following Table Options are not supported in syntax:
+    - `WITH/WITHOUT VALIDATION`
+    - `SECONDARY_LOAD/SECONDARY_UNLOAD`
+    - `CHECK/DROP CHECK`
+    - `STATS_AUTO_RECALC/STATS_SAMPLE_PAGES`
+    - `SECONDARY_ENGINE`
+    - `ENCRYPTION`
+
++ The following Table Partition syntaxes are not supported:
+    - `PARTITION BY LIST`
+    - `PARTITION BY KEY`
+    - `SUBPARTITION`
+    - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
+>>>>>>> 6c7c740... Add note about not supporting multiple ALTER TABLE operations (#1890)
 
 For more information, see [Online Schema Changes](/key-features.md#online-schema-changes).
 
