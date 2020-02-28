@@ -928,7 +928,7 @@ The total read capacity has no limit. You can increase the read capacity by addi
 
 Due to the limitation of the underlying storage engine, each key-value entry (one row) in TiDB should be no more than 6MB.
 
-Distributed transactions need to conduct two-phase commit and the underlying implementation performs Raft replication. If a transaction is very large, the commit process would be quite slow and this transaction is more likely to conflict with other transactions. Moreover, the rollback of a failed transaction leads to an unnecessary performance penalty. To avoid these problems, we limit the default transaction total size of key-value entries to no more than 100MB. If you need larger transactions, change `txn-total-size-limit` in the TiDB configuration file. The maximum value of this configuration item is up to `10G`. The actual limitation might also depend on the hardware of the RAM.
+Distributed transactions need two-phase commit and the underlying implementation performs the Raft replication. If a transaction is very large, the commit process would be quite slow and this transaction is more likely to conflict with other transactions. Moreover, the rollback of a failed transaction leads to an unnecessary performance penalty. To avoid these problems, we limit the total size of key-value entries to no more than 100MB in a transaction by default. If you need larger transactions, change `txn-total-size-limit` in the TiDB configuration file. The maximum value of this configuration item is up to `10G`. The actual limitation might also depend on the hardware of the RAM.
 
 There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
 
