@@ -38,7 +38,7 @@ You can perform full collection using the following syntax.
     ANALYZE TABLE TableNameList [WITH NUM BUCKETS];
     ```
 
-`WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
+  `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
 
 + To collect statistics of the index columns on all `IndexNameList`s in `TableName`:
 
