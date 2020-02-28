@@ -10,23 +10,23 @@ TiDB ("Ti" stands for Titanium) is an open-source NewSQL database that supports 
 
 TiDB can be deployed on-premise or in-cloud. The following deployment options are officially supported by PingCAP:
 
-- [Ansible Deployment](/stable/how-to/deploy/orchestrated/ansible.md): This guide describes how to deploy TiDB using Ansible. It is strongly recommended for production deployment.
-- [Ansible Offline Deployment](/stable/how-to/deploy/orchestrated/offline-ansible.md): If your environment has no access to the internet, you can follow this guide to see how to deploy a TiDB cluster offline using Ansible.
-- [Docker Deployment](/stable/how-to/deploy/orchestrated/docker.md): This guide describes how to deploy TiDB using Docker.
+- [Ansible Deployment](/how-to/deploy/orchestrated/ansible.md): This guide describes how to deploy TiDB using Ansible. It is strongly recommended for production deployment.
+- [Ansible Offline Deployment](/how-to/deploy/orchestrated/offline-ansible.md): If your environment has no access to the internet, you can follow this guide to see how to deploy a TiDB cluster offline using Ansible.
+- [Docker Deployment](/how-to/deploy/orchestrated/docker.md): This guide describes how to deploy TiDB using Docker.
 - Kubernetes Deployment:
 
     You can use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy TiDB on:
 
-    - [AWS EKS (Elastic Kubernetes Service)](/stable/tidb-in-kubernetes/deploy/aws-eks.md)
-    - [GKE (Google Kubernetes Engine)](/stable/tidb-in-kubernetes/deploy/gcp-gke.md)
-    - [Google Cloud Shell](/stable/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
-    - [Alibaba Cloud ACK (Container Service for Kubernetes)](/stable/tidb-in-kubernetes/deploy/alibaba-cloud.md)
+    - [AWS EKS (Elastic Kubernetes Service)](/tidb-in-kubernetes/deploy/aws-eks.md)
+    - [GKE (Google Kubernetes Engine)](/tidb-in-kubernetes/deploy/gcp-gke.md)
+    - [Google Cloud Shell](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
+    - [Alibaba Cloud ACK (Container Service for Kubernetes)](/tidb-in-kubernetes/deploy/alibaba-cloud.md)
 
     Or deploy TiDB locally using:
 
-    - [Minikube](/stable/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
+    - [Minikube](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
 
-- [Binary Tarball Deployment](/stable/how-to/deploy/from-tarball/production-environment.md): This guide describes how to deploy TiDB from a binary tarball in production. Guides for [development](/stable/how-to/get-started/deploy-tidb-from-binary.md) and [testing](/stable/how-to/deploy/from-tarball/testing-environment.md) environments are also available.
+- [Binary Tarball Deployment](/how-to/deploy/from-tarball/production-environment.md): This guide describes how to deploy TiDB from a binary tarball in production. Guides for [development](/how-to/get-started/deploy-tidb-from-binary.md) and [testing](/how-to/deploy/from-tarball/testing-environment.md) environments are also available.
 
 ## Community Provided Blog Posts & Tutorials
 
