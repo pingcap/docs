@@ -34,21 +34,17 @@ You can perform full collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
+    ANALYZE TABLE TableNameList [WITH NUM BUCKETS];
     ```
 
-+ `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
-+ `WITH NUM TOPN` specifies the maximum number of the generated `TOPN`s.
-+ `WITH NUM CMSKETCH DEPTH` specifies the depth of the CM Sketch.
-+ `WITH NUM CMSKETCH WIDTH` specifies the width of the CM Sketch.
-+ `WITH NUM SAMPLES` specifies the number of samples.
+  `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
 
 + To collect statistics of the index columns on all `IndexNameList`s in `TableName`:
 
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
+    ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS];
     ```
 
   The statement collects statistics of all index columns when `IndexNameList` is empty.
@@ -58,7 +54,7 @@ You can perform full collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
+    ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS];
     ```
 
 + To collect statistics of index columns for the partitions in all `PartitionNameList`s in `TableName`:
@@ -66,7 +62,7 @@ You can perform full collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
+    ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS];
     ```
 
 #### Incremental collection
@@ -85,7 +81,7 @@ You can perform incremental collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE INCREMENTAL TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
+    ANALYZE INCREMENTAL TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS];
     ```
 
 + To incrementally collect statistics of index columns for partitions in all `PartitionNameLists` in `TableName`:
@@ -93,7 +89,7 @@ You can perform incremental collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
+    ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS];
     ```
 
 ### Automatic update
