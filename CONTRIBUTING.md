@@ -124,7 +124,7 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 ### Step 8: Create a pull request
 
-1. Visit your fork at https://github.com/$user/docs (replace `$user` with your GitHub ID)
+1. Visit your fork at <https://github.com/$user/docs> (replace `$user` with your GitHub ID)
 2. Click the `Compare & pull request` button next to your `new-branch-name` branch to create your PR. See [Pull Request Title Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style).
 
 Now, your PR is successfully submitted! After this PR is merged, you will automatically become a contributor to TiDB documentation.
