@@ -109,13 +109,12 @@ The syntax is as follows. You can use `ShowLikeOrWhere` to filter the informatio
 SHOW STATS_HEALTHY [ShowLikeOrWhere];
 ```
 
-Currently, the `SHOW STATS_HEALTHY` statement returns the following 4 columns:
+Currently, the `SHOW STATS_HEALTHY` statement returns the following 3 columns:
 
 | Syntax Element | Description  |
 | :-------- | :------------- |
 | `db_name`  | The database name    |
 | `table_name` | The table name |
-| `partition_name` | The partition name |
 | `healthy` | The health state of tables |
 
 ### Metadata of columns
