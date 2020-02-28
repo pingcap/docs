@@ -187,7 +187,7 @@ Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
 ### Health statistics of tables
 
-You can use the `SHOW STATS_HEALTHY` statement to check the health statistics of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health is 0; when `modify_count` < `row_count`, the health is (1 - `modify_count`/` row_count`) * 100.
+You can use the `SHOW STATS_HEALTHY` statement to check the health statistics of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health is 0; when `modify_count` < `row_count`, the health is (1 - `modify_count`/`row_count`) * 100.
 
 The syntax is as follows. You can use `ShowLikeOrWhere` to filter the information you need:
 
