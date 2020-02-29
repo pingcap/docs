@@ -9,7 +9,7 @@ category: reference
 Based on the statistics, the TiDB optimizer chooses the most efficient query execution plan. The statistics collect table-level and column-level information.
 
 - The statistics of a table include the total number of rows and the number of updated rows.
-- The statistics of a column include the number of different values, the number of `NULL`, the histogram, and the Count-Min Sketch of the column.
+- The statistics of a column include the number of different values, the number of `NULL`, the histogram, the `TOPN` value that occurs most frequently in the column, and the Count-Min Sketch of the column.
 
 ## Collect statistics
 
@@ -34,17 +34,21 @@ You can perform full collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableNameList [WITH NUM BUCKETS]
+    ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
     ```
 
-  `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
++ `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
++ `WITH NUM TOPN` specifies the maximum number of the generated `TOPN`s.
++ `WITH NUM CMSKETCH DEPTH` specifies the depth of the CM Sketch.
++ `WITH NUM CMSKETCH WIDTH` specifies the width of the CM Sketch.
++ `WITH NUM SAMPLES` specifies the number of samples.
 
 + To collect statistics of the index columns on all `IndexNameList`s in `TableName`:
 
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS]
+    ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
     ```
 
   The statement collects statistics of all index columns when `IndexNameList` is empty.
@@ -54,7 +58,7 @@ You can perform full collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS]
+    ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
     ```
 
 + To collect statistics of index columns for the partitions in all `PartitionNameList`s in `TableName`:
@@ -62,7 +66,7 @@ You can perform full collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS]
+    ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
     ```
 
 #### Incremental collection
@@ -81,7 +85,7 @@ You can perform incremental collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE INCREMENTAL TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS]
+    ANALYZE INCREMENTAL TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
     ```
 
 + To incrementally collect statistics of index columns for partitions in all `PartitionNameLists` in `TableName`:
@@ -89,7 +93,7 @@ You can perform incremental collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS]
+    ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
     ```
 
 ### Automatic update
@@ -180,6 +184,27 @@ Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 > **Note:**
 >
 > When TiDB automatically updates the total number of rows and the number of modified rows according to DML statements, `update_time` is also updated. Therefore, `update_time` does not necessarily indicate the last time when the `ANALYZE` statement is executed.
+
+### Health state of tables
+
+You can use the `SHOW STATS_HEALTHY` statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` < `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
+
+The syntax is as follows. You can use `ShowLikeOrWhere` to filter the information you need:
+
+{{< copyable "sql" >}}
+
+```sql
+SHOW STATS_HEALTHY [ShowLikeOrWhere];
+```
+
+Currently, the `SHOW STATS_HEALTHY` statement returns the following 4 columns:
+
+| Syntax Element | Description  |
+| :-------- | :------------- |
+| `db_name`  | The database name    |
+| `table_name` | The table name |
+| `partition_name` | The partition name |
+| `healthy` | The health state of tables |
 
 ### Metadata of columns
 
