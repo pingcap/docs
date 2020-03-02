@@ -24,20 +24,19 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `oom-use-tmp-storage`
 
-+ Set to `true` to enable use of temporary disk for some executors when `mem-quota-query` is exceeded.
++ Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
 + Default value:  `true`
-+ Valid options: `true` or `false`
 
 ### `tmp-storage-path`
 
-+ The location of temporary disk storage using by some executors when `mem-quota-query` is exceeded.
++ Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
 + Default value: `<TMPDIR>/tidb/tmp-storage`
 
 ### `oom-action`
 
-- What to do when `mem-quota-query` is exceeded and can not be spilled over to disk any more.
-- Default value: `log`
-- The valid options are `log` and `cancel`. `log` only prints the log without actual processing. `cancel` cancels the operation and outputs the log.
+- Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
+- Default value: `"log"`
+- The valid options are `"log"` and `"cancel"`. When `oom-action="log"`,  it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
 
 ### `enable-streaming`
 
