@@ -86,7 +86,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--tmp-storage-path`
 
-+ TiDB tidb temporary storage path
++ TiDB's temporary storage path
 + Default: `<TMPDIR>/tidb/tmp-storage`
 
 ## `--proxy-protocol-networks`
