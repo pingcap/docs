@@ -172,6 +172,20 @@ The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name
 select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 where t1.a = t2.a;
 ```
 
+### USE_TOJA(boolean_value)
+
+The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a sub-query) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
+
+For example, the following query will convert `in (select t2.a from t2) subq` to corresponding join and aggregation operations:
+
+{{< copyable "sql" >}}
+
+```sql
+select /*+ USE_TOJA(TRUE) */ t1.a, t1.b from t1 where t1.a in (select t2.a from t2) subq;
+```
+
+In addition to this hint, setting the `tidb_opt_insubq_to_join_and_agg` environment variable also controls whether to enable this feature.
+
 ## Hints for setting operation parameters
 
 A hint for setting operation parameters follows behind **the first** `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. A hint of this category modifies the operation parameter of the query to which this hint applies.
@@ -215,17 +229,3 @@ select /*+ READ_FROM_REPLICA() */ * from t;
 ```
 
 In addition to this hint, setting the `tidb_replica_read` environment variable to `'follower'` or `'leader'` also controls whether to enable this feature.
-
-### USE_TOJA(boolean_value)
-
-The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a sub-query) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
-
-For example, the following query will convert `in (select t2.a from t2) subq` to corresponding join and aggregation operations:
-
-{{< copyable "sql" >}}
-
-```sql
-select /*+ USE_TOJA(TRUE) */ t1.a, t1.b from t1 where t1.a in (select t2.a from t2) subq;
-```
-
-In addition to this hint, setting the `tidb_opt_insubq_to_join_and_agg` environment variable also controls whether to enable this feature.
