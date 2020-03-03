@@ -8,10 +8,10 @@ category: how-to
 
 [Backup & Restore](/reference/tools/br/br.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in [four scenarios](#user-scenarios) that aims to help you achieve the following goals:
 
-* Back up and restore data using a network disk or local disk correctly
-* Learn the status of a backup or restoration operation through monitoring metrics
-* Learn how to tune performance during the operation
-* Troubleshoot the possible anomalies during the backup operation
+* Back up and restore data using a network disk or local disk correctly.
+* Learn the status of a backup or restoration operation through monitoring metrics.
+* Learn how to tune performance during the operation.
+* Troubleshoot the possible anomalies during the backup operation.
 
 > **Note:**
 >
@@ -147,8 +147,8 @@ During the backup process, pay attention to the following metrics on the monitor
 
 > **Note:**
 >
-> * In this task, the single table to be backed up has 3 indexes and the task is normally divided into 4 sub-tasks.
-> * The panel in the following image has 13 points on it, which means 9 (namely, 13-4) retries. Region scheduling might occur during the backup process, so a few retries is normal.
+> * In this task, the single table to be backed up has three indexes and the task is normally divided into four sub-tasks.
+> * The panel in the following image has thirteen points on it, which means nine (namely, 13-4) retries. Region scheduling might occur during the backup process, so a few retries is normal.
 
 ![img](/media/br/backup-subtask-duration.png)
 
@@ -412,7 +412,7 @@ If a key is locked during the backup process, BR tries to resolve the lock. A sm
 
 Error message in the log: `log - Error: msg:"Io(Custom { kind: AlreadyExists, error: \"[5_5359_42_123_default.sst] is already exists in /dir/backup_local/\" })"`
 
-If the backup operation fails and the above message occurs, perform one of the following operations and then start backup operation again:
+If the backup operation fails and the above message occurs, perform one of the following operations and then start the backup operation again:
 
 * Change the directory for the backup. For example, change `/dir/backup-2020-01-01/` to `/dir/backup_local/`.
 * Delete the backup directory of all TiKV nodes and BR nodes.
