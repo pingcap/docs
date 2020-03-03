@@ -390,13 +390,8 @@ Configuration related to the status of TiDB service
 
 ### `report-status`
 
-<<<<<<< HEAD
-- Enables or disables the HTTP API service
-- Default value: true
-=======
 - Enables or disables the HTTP API service.
 - Default value: `true`
->>>>>>> 316dcae... reference: add user documentation for auto_random feature (#1875)
 
 ### `record-db-qps`
 
@@ -409,15 +404,6 @@ Configurations related to the `events_statement_summary_by_digest` table
 
 ### max-stmt-count
 
-<<<<<<< HEAD
-- The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table
-- Default value: 100
-
-### max-sql-length
-
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table
-- Default value: 4096
-=======
 - The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
 - Default value: `100`
 
@@ -435,4 +421,3 @@ The `experimental` section describes configurations related to the experimental 
 - Determines whether to allow using `AUTO_RANDOM`.
 - Default value: `false`
 - By default, TiDB does not support using `AUTO_RANDOM`. When the value is `true`, you cannot set `alter-primary-key` to `true` at the same time.
->>>>>>> 316dcae... reference: add user documentation for auto_random feature (#1875)
