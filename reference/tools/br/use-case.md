@@ -4,7 +4,7 @@ summary: Learn the scenario demonstrations of backing up and restoring data usin
 category: how-to
 ---
 
-# BR Case Demonstrations
+# BR Scenario Demonstrations
 
 [Backup & Restore](/reference/tools/br/br.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in [four scenarios](#user-scenarios) that aims to help you achieve the following goals:
 
