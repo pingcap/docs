@@ -6,10 +6,10 @@ category: how-to
 
 # BR Usage Scenarios
 
-[Backup & Restore](/reference/tools/br/br.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in [four scenarios](#user-scenarios) that aims to help you achieve the following goals:
+[Backup & Restore](/reference/tools/br/br.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in [four scenarios](#usage-scenarios) that aims to help you achieve the following goals:
 
 * Back up and restore data using a network disk or local disk correctly.
-* Learn the status of a backup or restoration operation through monitoring metrics.
+* Get the status of a backup or restoration operation through monitoring metrics.
 * Learn how to tune performance during the operation.
 * Troubleshoot the possible anomalies during the backup operation.
 
@@ -19,7 +19,7 @@ category: how-to
 
 ## Audience
 
-You must have the basic understanding of TiDB and TiKV. Before reading this document, it is recommended that you read [Use BR to Back up and Restore Data](/reference/tools/br/br.md) first.
+You are expected to have a basic understanding of [TiDB](https://pingcap.com/docs/stable/) and [TiKV](https://tikv.org/). Before reading this document, it is recommended that you read [Use BR to Back up and Restore Data](/reference/tools/br/br.md) first.
 
 ## Prerequisites
 
@@ -50,9 +50,9 @@ BR directly sends commands to the TiKV cluster and are not dependent on the TiDB
 * TiKV: default configuration
 * PD: default configuration
 
-## User scenarios
+## Usage scenarios
 
-This document describes the following four user scenarios:
+This document describes the following four usage scenarios:
 
 * [Back up a single table to a network disk (recommended)](#back-up-a-single-table-to-a-network-disk-recommended)
 * [Restore data from a network disk (recommended)](#restore-data-from-a-network-disk-recommended)
@@ -125,7 +125,7 @@ bin/br backup table --db batchmark --table order_line -s local:///br_data --pd 1
 
 #### Monitoring metrics for the backup
 
-During the backup process, pay attention to the following metrics on the monitoring panels to learn the status of the backup process.
+During the backup process, pay attention to the following metrics on the monitoring panels to get the status of the backup process.
 
 **Backup CPU Utilization**: the CPU usage rate of each working TiKV node in the backup operation (for example, backup-worker and backup-endpoint).
 
@@ -160,7 +160,7 @@ During the backup process, pay attention to the following metrics on the monitor
 
 ![img](/media/br/checksum-duration.png)
 
-#### Learn the backup results
+#### Backup results explanation
 
 Before executing the backup command, a path in which the log is stored has been specified. You can get the statistical information of the backup operation from this log. Search "summary" in this log, you can see the following information:
 
@@ -225,7 +225,7 @@ bin/br restore table --db batchmark --table order_line -s local:///br_data --pd 
 
 #### Monitoring metrics for the restoration
 
-During the restoration process, pay attention to the following metrics on the monitoring panels to learn the status of the restoration process.
+During the restoration process, pay attention to the following metrics on the monitoring panels to get the status of the restoration process.
 
 **CPU Utilization**: the CPU usage rate of each working TiKV node in the restoration operation.
 
@@ -255,7 +255,7 @@ During the restoration process, pay attention to the following metrics on the mo
 
 ![img](/media/br/restore-checksum.png)
 
-#### Learn the restoration results
+#### Restoration results explanation
 
 Before executing the restoration command, a path in which the log is stored has been specified. You can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
 
@@ -323,9 +323,9 @@ Execute the `br backup` command:
 bin/br backup table --db batchmark --table order_line -s local:///home/tidb/backup_local/ --pd 172.16.5.198:2379 --log-file backup_local.log
 ```
 
-During the backup process, pay attention to the metrics on the monitoring panels to learn the status of the backup process. See [Monitoring metrics for the backup](#monitoring-metrics-for-the-backup) for details.
+During the backup process, pay attention to the metrics on the monitoring panels to get the status of the backup process. See [Monitoring metrics for the backup](#monitoring-metrics-for-the-backup) for details.
 
-#### Learn the backup results
+#### Backup results explanation
 
 Before executing the backup command, a path in which the log is stored has been specified. You can get the statistical information of the backup operation from this log. Search "summary" in this log, you can see the following information:
 
@@ -375,9 +375,9 @@ Execute the `br restore` command:
 bin/br restore table --db batchmark --table order_line -s local:///home/tidb/backup_local/ --pd 172.16.5.198:2379 --log-file restore_local.log
 ```
 
-During the restoration process, pay attention to the metrics on the monitoring panels to learn the status of the restoration process. See [Monitoring metrics for the restoration](#monitoring-metrics-for-the-restoration) for details.
+During the restoration process, pay attention to the metrics on the monitoring panels to get the status of the restoration process. See [Monitoring metrics for the restoration](#monitoring-metrics-for-the-restoration) for details.
 
-#### Learn the restoration results
+#### Restoration results explanation
 
 Before executing the restoration command, a path in which the log is stored has been specified. You can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
 
