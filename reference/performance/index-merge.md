@@ -26,7 +26,7 @@ create table t(a int, b int, c int, unique key(a), unique key(b));
 explain select * from t where a = 1 or b = 1;
 ```
 
-The filter conditions connected by `OR` form the query expression. Within the limitations of one index per table only, `a = 1` cannot be pushed down to the query `a`; neither can `b = 1` be pushed down to the query `b`. To ensure the correct result, the execution plans of `TableScan` are generated after the query:
+The filter conditions in the query expression are connected by `OR`. Within the limitations of one index per table only, `a = 1` cannot be pushed down to the query `a`; neither can `b = 1` be pushed down to the query `b`. To ensure the correct result, the execution plans of `TableScan` are generated after the query:
 
 ```
 +---------------------+----------+-----------+------------------------------------------------------------+
