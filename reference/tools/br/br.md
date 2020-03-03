@@ -343,7 +343,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 - It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
 - It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
 
-For more recommended practices of using BR, refer to [BR Scenario Demonstration](/reference/tools/br/use-case.md).
+For more recommended practices of using BR, refer to [BR Usage Scenarios](/reference/tools/br/use-cases.md).
 
 ## Examples
 
