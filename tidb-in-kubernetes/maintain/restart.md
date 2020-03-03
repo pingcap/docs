@@ -12,8 +12,8 @@ This document describes how to forcibly restart a TiDB cluster in the Kubernetes
 >
 > TiDB Operator v1.0.x only supports restarting the Pod in a forcible way.
 >
-> - If the PD Pod being restarted is the PD leader, its leadership does not automatically shift, which can cause the PD service to be temporarily unavailable.
-> - If the TiKV Pod being restarted contains a Region leader of the TiKV cluster, its leadership does not automatically shift, which can cause the requests of accessing the corresponding data to fail.
+> - If the PD Pod being restarted is the PD leader, its leadership does not automatically transfer, which can cause the PD service to be temporarily unavailable.
+> - If the TiKV Pod being restarted contains a Region leader of the TiKV cluster, its leadership does not automatically transfer, which can cause the requests of accessing the corresponding data to fail.
 > - Restarting the TiDB Pod can cause the requests of accessing this Pod to fail.
 
 ## Forcibly restart a Pod
