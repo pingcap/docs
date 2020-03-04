@@ -55,7 +55,7 @@ Full table scans are inefficient in the cases of high data volume of `t`, while 
 +--------------------+-------+-----------+---------------------------------------------------------------+
 ```
 
-The structure of the `IndexMerge` execution plan is similar to that of the `IndexLookUp` since both can be divided into index scans and full table scans. However, index scans of the `IndexMerge` may include multiple `IndexScan`. When the primary key index of the table is an integer, index scans may include one `TableScan`. For example:
+The structure of the `IndexMerge` execution plan is similar to that of the `IndexLookUp` since both are composed of index scans and table scans. However, index scan part of the `IndexMerge` may include multiple `IndexScan`. When the primary key of the table is an integer, index scans may even include one `TableScan`. For example:
 
 {{< copyable "sql" >}}
 
