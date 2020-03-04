@@ -5,7 +5,7 @@ category: reference
 
 # Access Tables with the Index Merge Method
 
-When the TiDB version is upgraded to 4.0, it allows to access tables with the `IndexMerge` method. With the new method, optimizer can use multiple indexes per table, and merge the results returned by the indexes. In some scenarios, the method makes the query more efficient by avoiding full table scan.
+When the TiDB version is upgraded to 4.0, it allows to access tables with the `IndexMerge` method. With the new method, optimizer can use multiple indexes per table, and merge the results returned by the indexes. In some scenarios, the method makes the query more efficient by avoiding full table scans.
 
 This document introduces the applicable scenarios, the actual use case and the method to enable the `IndexMerge`.
 
@@ -55,7 +55,7 @@ Full table scans are inefficient in the cases of high data volume of `t`, while 
 +--------------------+-------+-----------+---------------------------------------------------------------+
 ```
 
-The structure of the `IndexMerge` execution plan is similar to that of the `IndexLookUp` since both are composed of index scans and table scans. However, index scan part of the `IndexMerge` may include multiple `IndexScan`. When the primary key of the table is an integer, index scans may even include one `TableScan`. For example:
+The structure of the `IndexMerge` execution plan is similar to that of the `IndexLookUp` since both are composed of index scans and full table scans. However, index scan part of the `IndexMerge` may include multiple `IndexScan`. When the primary key of the table is an integer, index scans may even include one `TableScan`. For example:
 
 {{< copyable "sql" >}}
 
