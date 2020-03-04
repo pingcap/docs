@@ -50,7 +50,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 - TiDB supports both the optimistic transaction mode and pessimistic transaction mode in the same cluster. You can specify either mode for transaction execution.
 
-- TiDB sets the lock wait timeout time by the `innodb_wait_timeout` variable. After the lock times out, a MySQL-compatible error code `1205` is returned.
+- TiDB sets the lock wait timeout time by the `innodb_lock_wait_timeout` variable. After the lock times out, a MySQL-compatible error code `1205` is returned.
 
 - TiDB supports the `FOR UPDATE NOWAIT` syntax and does not block and wait for locks to be released. Instead, a MySQL-compatible error code `3572` is returned.
 
