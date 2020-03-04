@@ -38,7 +38,7 @@ The filter conditions in the query expression are connected by `OR`. Within the 
 +---------------------+----------+-----------+------------------------------------------------------------+
 ```
 
-Full table scans are inefficient in the cases of high data volume of `t`. The query only returns two rows. To handle such scenarios, TiDB introduces `IndexMerge` to access tables.
+Full table scans are inefficient in the cases of high data volume of `t`, while the query only returns two rows. To handle such scenarios, TiDB introduces `IndexMerge` to access tables.
 
 ## Actual use cases
 
