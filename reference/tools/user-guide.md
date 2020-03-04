@@ -28,7 +28,7 @@ The following are the basics of Loader:
 - Input: Files output by Mydumper.
 - Output: SQL written to TiDB.
 - Applicable version of TiDB: All.
-- Kubernetes: Supported. See [Backup and restore](/tidb-in-kubernetes/maintain/backup-and-restore.md).
+- Kubernetes: Supported. See [Backup and restore](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md).
 
 #### Full import tool TiDB Lightning
 
