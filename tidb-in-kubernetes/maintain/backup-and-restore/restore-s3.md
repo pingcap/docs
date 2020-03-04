@@ -6,23 +6,13 @@ category: how-to
 
 # Restore Data From S3-Compatible Storage
 
-本文描述了将 Kubernetes 上通过 TiDB Operator 备份的数据恢复到 TiDB 集群的操作过程。底层通过使用 [`loader`](/reference/tools/loader.md) 来恢复数据。
-
-本文使用的备份方式基于 TiDB Operator 新版（v1.1 及以上）的 CRD 实现。基于 Helm Charts 实现的备份恢复方式可参考[基于 Helm Charts 实现的 TiDB 集群备份恢复](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md)。
-
-以下示例将兼容 S3 的存储（指定路径）上的备份数据恢复到 TiDB 集群。
-
 This document describes how to restore the TiDB cluster data backed up by TiDB Operator in Kubernetes. For the underlying implementation, [`loader`](/reference/tools/loader.md) is used to perform the restoration.
 
 The restoration method described in this document is implemented based on CustomResourceDefinition (CRD) in TiDB Operator v1.1 or later versions. For the restoration method implemented based on Helm Charts, refer to [Back up and Restore TiDB Cluster Data Based on Helm Charts](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md).
 
-This document shows a use case in which the backup data stored in the specified path on the S3-compatible storage is restored to the TiDB cluster.
-
-## 环境准备
+This document shows an example in which the backup data stored in the specified path on the S3-compatible storage is restored to the TiDB cluster.
 
 ## Prerequisites
-
-1. 下载文件 [`backup-rbac.yaml`](https://github.com/pingcap/tidb-operator/blob/master/manifests/backup/backup-rbac.yaml)，并在 `test2` 这个 namespace 中创建恢复备份所需的 RBAC 资源，所需命令如下：
 
 1. Download [`backup-rbac.yaml`](https://github.com/pingcap/tidb-operator/blob/master/manifests/backup/backup-rbac.yaml) and execute the following command to create the role-based access control (RBAC) resources in the `test2` namespace:
 
@@ -31,8 +21,6 @@ This document shows a use case in which the backup data stored in the specified 
     ```shell
     kubectl apply -f backup-rbac.yaml -n test2
     ```
-
-2. 创建 `restore-demo2-tidb-secret` secret，该 secret 存放用来访问 TiDB 集群的 root 账号和密钥：
 
 2. Create the `restore-demo2-tidb-secret` secret which stores the root account and password used to access the TiDB cluster:
 
@@ -84,11 +72,7 @@ This document shows a use case in which the backup data stored in the specified 
      kubectl get rt -n test2 -owide
      ```
 
-以上示例将兼容 S3 的存储（`spec.s3.path` 路径下）中的备份数据恢复到 TiDB 集群 (`spec.to.host`)。有关兼容 S3 的存储的配置项，可以参考 [backup-s3.yaml](/tidb-in-kubernetes/maintain/backup-and-restore/backup-s3.md#备份数据到兼容-s3-的存储)。
-
 In the above example, the backup data stored in the `spec.s3.path` path on the S3-compatible storage is restored to the `spec.to.host` TiDB cluster. For the configuration of the S3-compatible storage, refer to [backup-s3.yaml](/tidb-in-kubernetes/maintain/backup-and-restore/backup-s3.md#ad-hoc-backup-process).
-
-更多 `Restore` CR 字段的详细解释：
 
 More `Restore` CRs are as described follows:
 

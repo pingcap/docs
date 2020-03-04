@@ -14,7 +14,7 @@ The backup method described in this document is implemented based on CustomResou
 
 Ad-hoc full backup describes the backup by creating a `Backup` custom resource (CR) object. TiDB Operator performs the specific backup operation based on this `Backup` object. If an error occurs during the backup process, TiDB Operator does not retry and you need to handle this error manually.
 
-To better explain how to perform the backup operation to GCS, this document shows a use case which backs up data of the `demo1` TiDB cluster in the `test1` Kubernetes namespace.
+To better explain how to perform the backup operation to GCS, this document shows an example in which the data of the `demo1` TiDB cluster is backed up to the `test1` Kubernetes namespace.
 
 ### Prerequisites for ad-hoc backup
 
@@ -78,7 +78,7 @@ spec:
   storageSize: 10Gi
 ```
 
-The above case exports and backs up all data of the TiDB cluster to GCS. You can ignore the `location`, `objectAcl`, `bucketAcl`, and `storageClass` items in the GCS configuration.
+In the above two examples, all data of the TiDB cluster is exported and backed up to GCS. You can ignore the `location`, `objectAcl`, `bucketAcl`, and `storageClass` items in the GCS configuration.
 
 `projectId` in the configuration is the unique identifier of the user project on GCP. To learn how to get this identifier, refer to the [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
 
@@ -196,7 +196,7 @@ Execute the following command to check all the backup items:
  kubectl get bk -l tidb.pingcap.com/backup-schedule=demo1-backup-schedule-gcs -n test1
  ```
 
-From the above case, you can see that the `backupSchedule` configuration consists of two part. One is the unique configurations of `backupSchedule` and the other is `backupTemplate`. `backupTemple` specifies the configurations related to the GCS storage, which is the same with the configurations for the ad-hoc full backup to GCS (refer to [GCS backup process](#ad-hoc-backup-process) for details). The following are the unique configurations of `backupSchedule`:
+From the above example, you can see that the `backupSchedule` configuration consists of two part. One is the unique configurations of `backupSchedule` and the other is `backupTemplate`. `backupTemple` specifies the configurations related to the GCS storage, which is the same with the configurations for the ad-hoc full backup to GCS (refer to [GCS backup process](#ad-hoc-backup-process) for details). The following are the unique configurations of `backupSchedule`:
 
 + `.spec.maxBackups`: a backup retention policy, which determines the maximum number of backup items to be retained. When this value is exceeded, the outdated backup items will be deleted. If you set this configuration item to `0`, all backup items are retained.
 + `.spec.maxReservedTime`: a backup retention policy based on the time. For example, if you set the value of this configuration to `24h`, backup items only of recent 24 hours are retained. All backup items out of this time are deleted. For the format of the time, refer to [`func ParseDuration`](https://golang.org/pkg/time/#ParseDuration). If you have set the maximum number of backup items and the longest retention time of backup items at the same time, the latter setting prevails.

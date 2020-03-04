@@ -10,7 +10,7 @@ This document describes how to restore the TiDB cluster data backed up by TiDB O
 
 The restoration method described in this document is implemented based on CustomResourceDefinition (CRD) in TiDB Operator v1.1 or later versions. For the restoration method implemented based on Helm Charts, refer to [Back up and Restore TiDB Cluster Data Based on Helm Charts](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md).
 
-This document shows a use case in which the backup data stored in the specified path on [Google Cloud Storage (GCS)](https://cloud.google.com/storage/docs/) is restored to the TiDB cluster.
+This document shows an example in which the backup data stored in the specified path on [Google Cloud Storage (GCS)](https://cloud.google.com/storage/docs/) is restored to the TiDB cluster.
 
 ## Prerequisites
 
@@ -71,7 +71,7 @@ This document shows a use case in which the backup data stored in the specified 
      kubectl get rt -n test2 -owide
      ```
 
-The above case restores the backup data stored in the specified `spec.gcs.path` path on GCS to the `spec.to.host` TiDB cluster. For the configuration of GCS, refer to [backup-gcs.yaml](/tidb-in-kubernetes/maintain/backup-and-restore/backup-gcs.md#ad-hoc-backup-process).
+In the above example, the backup data stored in the specified `spec.gcs.path` path on GCS is restored to the `spec.to.host` TiDB cluster. For the configuration of GCS, refer to [backup-gcs.yaml](/tidb-in-kubernetes/maintain/backup-and-restore/backup-gcs.md#ad-hoc-backup-process).
 
 More `Restore` CRs are as described follows:
 

@@ -14,7 +14,7 @@ The backup method described in this document is implemented based on CustomResou
 
 Ad-hoc full backup describes the backup by creating a `Backup` custom resource (CR) object. TiDB Operator performs the specific backup operation based on this `Backup` object. If an error occurs during the backup process, TiDB Operator does not retry and you need to handle this error manually.
 
-For the current S3-compatible storages, Ceph and Amazon S3 work normally as tested. Therefore, this document shows use cases which back up data of the `demo1` TiDB cluster in the `test1` Kubernetes namespace to Ceph and Amazon S3 respectively.
+For the current S3-compatible storages, Ceph and Amazon S3 work normally as tested. Therefore, this document shows use examples in which the data of the `demo1` TiDB cluster in the `test1` Kubernetes namespace is backed up to Ceph and Amazon S3 respectively.
 
 ### Prerequisites for ad-hoc backup
 
@@ -109,7 +109,7 @@ For the current S3-compatible storages, Ceph and Amazon S3 work normally as test
       storageSize: 10Gi
     ```
 
-The above two cases export and back up all data of the TiDB cluster to Amazon S3 and Ceph respectively. You can ignore the `region`, `acl`, `endpoint`, and `storageClass` configuration items in the Amazon S3 configuration. You can also leave empty the configuration item fields if you do not need to configure these items as shown in the above Ceph configuration.
+In the above two examples, all data of the TiDB cluster is exported and backed up to Amazon S3 and Ceph respectively. You can ignore the `region`, `acl`, `endpoint`, and `storageClass` configuration items in the Amazon S3 configuration. You can also leave empty the configuration item fields if you do not need to configure these items as shown in the above Ceph configuration.
 
 Amazon S3 supports the following access control list (ACL) polices:
 
