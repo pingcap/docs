@@ -65,7 +65,7 @@ After the deployment is complete, see the following documents to use, operate, a
 + [Scale TiDB Cluster](/tidb-in-kubernetes/scale-in-kubernetes.md)
 + [Upgrade TiDB Cluster](/tidb-in-kubernetes/upgrade/tidb-cluster.md#upgrade-the-version-of-tidb-cluster)
 + [Change the Configuration of TiDB Cluster](/tidb-in-kubernetes/upgrade/tidb-cluster.md#change-the-configuration-of-tidb-cluster)
-+ [Backup and Restore](/tidb-in-kubernetes/maintain/backup-and-restore.md)
++ [Backup and Restore](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md)
 + [Automatic Failover](/tidb-in-kubernetes/maintain/auto-failover.md)
 + [Monitor a TiDB Cluster in Kubernetes](/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
 + [Collect TiDB Logs in Kubernetes](/tidb-in-kubernetes/maintain/log-collecting.md)

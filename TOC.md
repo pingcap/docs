@@ -398,7 +398,13 @@
   + Maintain
     - [Destroy a TiDB cluster](/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
     - [Maintain a Hosting Kubernetes Node](/tidb-in-kubernetes/maintain/kubernetes-node.md)
-    - [Backup and Restore](/tidb-in-kubernetes/maintain/backup-and-restore.md)
+    + Backup and Restore
+      - [Helm Charts-Based Backup and Restoration](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md)
+      + CRD-Based Backup and Restoration
+        - [Back up TiDB Cluster Data to GCS](/tidb-in-kubernetes/maintain/backup-and-restore/backup-gcs.md)
+        - [Restore Data From GCS](/tidb-in-kubernetes/maintain/backup-and-restore/restore-gcs.md)
+        - [Back up TiDB Cluster Data to S3-Compatible Storage](/tidb-in-kubernetes/maintain/backup-and-restore/backup-s3.md)
+        - [Restore Data From S3-Compatible Storage](/tidb-in-kubernetes/maintain/backup-and-restore/restore-s3.md)
     - [Restore Data with TiDB Lightning](/tidb-in-kubernetes/maintain/lightning.md)
     - [Collect Logs](/tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](/tidb-in-kubernetes/maintain/auto-failover.md)

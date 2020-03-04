@@ -1,12 +1,20 @@
 ---
-title: Backup and Restore
-summary: Learn how to back up and restore the data of TiDB cluster in Kubernetes.
+title: Helm Charts-Based Backup and Restoration in Kubernetes
+summary: Learn how to back up and restore the data of TiDB cluster in Kubernetes based on Helm Charts.
 category: how-to
+aliases: ['/docs/dev/tidb-in-kubernetes/maintain/backup-and-store/']
 ---
 
-# Backup and Restore
+# Helm Charts-Based Backup and Restoration in Kubernetes
 
-This document describes how to back up and restore the data of a TiDB cluster in Kubernetes.
+This document describes how to back up and restore the data of a TiDB cluster in Kubernetes based on Helm Charts.
+
+For TiDB Operator 1.1 or later versions, it is recommended that you back up and restore the data of TiDB in Kubernetes based on CustomResourceDefinition (CRD). Refer to the following documents for details:
+
+- [Back up TiDB Cluster Data to GCS](/tidb-in-kubernetes/maintain/backup-and-restore/backup-gcs.md)
+- [Restore Data From GCS](/tidb-in-kubernetes/maintain/backup-and-restore/restore-gcs.md)
+- [Back up TiDB Cluster Data to S3-Compatible Storage](/tidb-in-kubernetes/maintain/backup-and-restore/backup-s3.md)
+- [Restore Data From S3-Compatible Storage](/tidb-in-kubernetes/maintain/backup-and-restore/restore-s3.md)
 
 TiDB in Kubernetes supports two kinds of backup strategies:
 
