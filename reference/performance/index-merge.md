@@ -85,7 +85,7 @@ explain select * from t where a = 1 or b = 1;
 4 rows in set (0.01 sec)
 ```
 
-Note that `IndexMerge` is used only when optimizer use multiple indexes per table. If the condition in the query expression is `a = 1 and b = 1`, the optimizer uses the index `a` or the index `b`, instead of the `IndexMerge`, to access tables.
+Note that `IndexMerge` is considered only when optimizer cannot find single index access method for the table. If the condition in the query expression is `a = 1 and b = 1`, the optimizer uses the index `a` or the index `b`, instead of the `IndexMerge`, to access tables.
 
 ## Enable the `IndexMerge`
 
