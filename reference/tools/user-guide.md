@@ -92,7 +92,7 @@ The following are the basics of Mydumper:
 - Input: MySQL/TiDB clusters.
 - Output: SQL files.
 - Applicable version of TiDB: All.
-- Kubernetes: Supported. [Backup and Restore](/tidb-in-kubernetes/maintain/backup-and-restore.md).
+- Kubernetes: Supported. [Backup and Restore](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md).
 
 #### Full export tool TiDB Binlog
 
