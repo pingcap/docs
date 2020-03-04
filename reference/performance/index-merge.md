@@ -5,7 +5,7 @@ category: reference
 
 # Access Tables with the Index Merge Method
 
-When the TiDB version is upgraded to 4.0, it allows to access tables with the `IndexMerge` method. With the new method, optimizer can use multiple indexes per table, and merge the results returned by the indexes. In some scenarios, the method makes the query more efficient by avoiding multiple unnecessary scans of data.
+When the TiDB version is upgraded to 4.0, it allows to access tables with the `IndexMerge` method. With the new method, optimizer can use multiple indexes per table, and merge the results returned by the indexes. In some scenarios, the method makes the query more efficient by avoiding full table scan.
 
 This document introduces the applicable scenarios, the actual use case and the method to enable the `IndexMerge`.
 
