@@ -107,6 +107,8 @@
       - [User-Defined Variables](/reference/sql/language-structure/user-defined-variables.md)
       - [Expression Syntax](/reference/sql/language-structure/expression-syntax.md)
       - [Comment Syntax](/reference/sql/language-structure/comment-syntax.md)
+    + Attributes
+      - [`AUTO_RANDOM`](/reference/sql/attributes/auto-random.md)
     + Data Types
       - [Overview](/reference/sql/data-types/overview.md)
       - [Default Values](/reference/sql/data-types/default-values.md)
@@ -403,6 +405,7 @@
     - [Collect Logs](/tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](/tidb-in-kubernetes/maintain/auto-failover.md)
     - [TiDB Binlog](/tidb-in-kubernetes/maintain/tidb-binlog.md)
+    - [Restart a TiDB Cluster](/tidb-in-kubernetes/maintain/restart.md)
   - [Scale](/tidb-in-kubernetes/scale-in-kubernetes.md)
   + Upgrade
     - [TiDB Cluster](/tidb-in-kubernetes/upgrade/tidb-cluster.md)
