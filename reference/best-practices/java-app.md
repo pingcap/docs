@@ -353,7 +353,7 @@ Online applications usually do not support modifying the code, but it is often d
 
 #### Flame graph
 
-Obtaining flame graphs in Java applications is tedious. For details, see [Java Flame Graphs Introduction: Fire For Everyone!](Http://psy-lob-saw.blogspot.com/2017/02/flamegraphs-intro-fire-for-everyone.html).
+Obtaining flame graphs in Java applications is tedious. For details, see [Java Flame Graphs Introduction: Fire For Everyone!](/http://psy-lob-saw.blogspot.com/2017/02/flamegraphs-intro-fire-for-everyone.html).
 
 ## Conclusion
 
