@@ -1,8 +1,8 @@
 # Markdown Rules
 
-TiDB documentation is written in Markdown. To ensure the quality and format of documentation, you should follow certain Markdown rules when modifying documents. We set a CI check for Markdown files in the docs repository, which is the[markdownlint check](https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md).
+TiDB documentation is written in Markdown. To ensure the quality and consistent format, you should follow certain Markdown rules when modifying documents. We set a CI check for Markdown files in the docs repository, which is the [markdownlint check](https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md).
 
-If you submit a Pull Request (PR) that does not conform to the rules, your PR might **not pass the markdownlint check**. In such cases, you might not be able to merge this PR.
+If you submit a Pull Request (PR) that does not conform to the rules, your PR might **fail to pass the markdownlint check**. In such cases, you might not be able to merge this PR.
 
 If you are not familiar with the related Markdown rules before submitting a PR, and your PR fails to pass the markdownlint check, don't worry. The error message tells you clearly that which line of which file fails to pass a certain rule, so you can update the documents according to the message.
 
