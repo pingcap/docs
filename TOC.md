@@ -398,6 +398,7 @@
     - [Collect Logs](/tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](/tidb-in-kubernetes/maintain/auto-failover.md)
     - [TiDB Binlog](/tidb-in-kubernetes/maintain/tidb-binlog.md)
+    - [Restart a TiDB Cluster](/tidb-in-kubernetes/maintain/restart.md)
   - [Scale](/tidb-in-kubernetes/scale-in-kubernetes.md)
   + Upgrade
     - [TiDB Cluster](/tidb-in-kubernetes/upgrade/tidb-cluster.md)
@@ -427,6 +428,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v3.0
+    - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)
     - [3.0.9](/releases/3.0.9.md)
     - [3.0.8](/releases/3.0.8.md)
