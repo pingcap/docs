@@ -84,7 +84,8 @@
     - [Common Ansible Operations](/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
       - [Use `mydumper` and `loader`](/how-to/maintain/backup-and-restore/mydumper-loader.md)
-      - [Use BR](/how-to/maintain/backup-and-restore/br.md)
+      - [Use BR](/reference/tools/br/br.md)
+      - [BR Usage Scenarios](/reference/tools/br/use-cases.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
       - [Identify Expensive Queries](/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
@@ -106,6 +107,8 @@
       - [User-Defined Variables](/reference/sql/language-structure/user-defined-variables.md)
       - [Expression Syntax](/reference/sql/language-structure/expression-syntax.md)
       - [Comment Syntax](/reference/sql/language-structure/comment-syntax.md)
+    + Attributes
+      - [`AUTO_RANDOM`](/reference/sql/attributes/auto-random.md)
     + Data Types
       - [Overview](/reference/sql/data-types/overview.md)
       - [Default Values](/reference/sql/data-types/default-values.md)
@@ -401,6 +404,7 @@
     - [Collect Logs](/tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](/tidb-in-kubernetes/maintain/auto-failover.md)
     - [TiDB Binlog](/tidb-in-kubernetes/maintain/tidb-binlog.md)
+    - [Restart a TiDB Cluster](/tidb-in-kubernetes/maintain/restart.md)
   - [Scale](/tidb-in-kubernetes/scale-in-kubernetes.md)
   + Upgrade
     - [TiDB Cluster](/tidb-in-kubernetes/upgrade/tidb-cluster.md)
@@ -433,6 +437,7 @@
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)
     - [3.0.9](/releases/3.0.9.md)
     - [3.0.8](/releases/3.0.8.md)
