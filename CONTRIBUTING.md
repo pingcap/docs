@@ -22,6 +22,7 @@ Before you contribute, please take a quick look at some general information abou
 - [Commit Message Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
 - [Pull Request Title Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
 - [Code Comment Style](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
+- [Markdown Rules](https://github.com/pingcap/community/blob/master/resources/markdownlint-rules.md)
 - Diagram Style: [Figma Quick Start Guide](/resources/figma-quick-start-guide.md)
 
     To keep a consistent style for diagrams, we recommend using [Figma](https://www.figma.com/) to draw or design diagrams. If you need to draw a diagram, refer to the guide and use shapes or colors provided in the template.
