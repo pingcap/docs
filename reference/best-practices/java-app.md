@@ -1,9 +1,10 @@
 ---
-title: Best Practice for Developing Java Applications with TiDB
+title: Best Practices for Developing Java Applications with TiDB
+summary: Learn the best practices for developing Java applications with TiDB.
 category: reference
 ---
 
-# Best Practice for Developing Java Applications with TiDB
+# Best Practices for Developing Java Applications with TiDB
 
 This document introduces the best practice for developing Java applications to better use TiDB. Based on some common Java application components that interact with the backend TiDB database, this document also provides the solutions to commonly encountered issues during development.
 
@@ -15,13 +16,13 @@ Common components that interact with the TiDB database in Java applications incl
 - JDBC API and JDBC drivers: Java applications usually use the standard [JDBC (Java Database Connectivity)](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) API to access a database. To connect to TiDB, you can use a JDBC driver that implements the MySQL protocol via the JDBC API. Such common JDBC drivers for MySQL include [MySQL Connector/J](https://github.com/mysql/mysql-connector-j) and [MariaDB Connector/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#about-mariadb-connectorj).
 - Database connection pool: To reduce the overhead of creating a connection each time it is requested, applications usually use a connection pool to cache and reuse connections. JDBC [DataSource](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html) defines a connection pool API. You can choose from different open-source connection pool implementations as needed.
 - Data access framework: Applications usually use a data access framework such as [MyBatis](https://mybatis.org/mybatis-3/index.html) and [Hibernate](https://hibernate.org/) to further simplify and manage the database access operations.
-- Application implementation: The application logic controls when to send what commands to the database. Some applications use [Spring Transaction](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html) aspects to manage transactions' begin and commit logics.
+- Application implementation: The application logic controls when to send what commands to the database. Some applications use [Spring Transaction](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html) aspects to manage transactions' start and commit logics.
 
 ![Java application components](/media/java-practice-1.png)
 
-As shown above, a Java application may do the following things:
+From the above diagram, you can see that a Java application might do the following things:
 
-- Implement the MySQL protocol via the JDBC API to interact with TiDB
+- Implement the MySQL protocol via the JDBC API to interact with TiDB.
 - Get a persistent connection from the connection pool
 - Use a data access framework such as MyBatis to generate and execute SQL statements
 - Use Spring Transaction to automatically start or stop a transaction
@@ -30,7 +31,7 @@ The rest of this document describes the issues and their solutions when you deve
 
 ## JDBC
 
-Java applications can be encapsulated with various frameworks. In most of the frameworks, JDBC API is called on the lowest level to interact with the database server. For JDBC, it is recommended that you focus on the following things:
+Java applications can be encapsulated with various frameworks. In most of the frameworks, JDBC API is called on the bottommost level to interact with the database server. For JDBC, it is recommended that you focus on the following things:
 
 - JDBC API usage choice
 - API Implementer's parameter configuration
@@ -53,9 +54,9 @@ For batch inserts, you can use the [`addBatch`/`executeBatch` API](https://www.t
 
 > **Note:**
 >
-> In the default MySQL Connector/J implementation, the sending time of the SQL statements that are added to batch with `addBatch()` is delayed until the time when `executeBatch()` is called, but the statements will still be sent one by one during the actual network transfer. Therefore, this method usually does not reduce the amount of communication overhead.
+> In the default MySQL Connector/J implementation, the sending time of the SQL statements that are added to batch with `addBatch()` is delayed to the time when `executeBatch()` is called, but the statements will still be sent one by one during the actual network transfer. Therefore, this method usually does not reduce the amount of communication overhead.
 >
-> If you want to batch network transfer, you need to configure `rewriteBatchedStatements = true` in the JDBC connection parameters (the parameter configuration section is described in detail below).
+> If you want to batch network transfer, you need to configure `rewriteBatchedStatements = true` in the JDBC connection parameters. For the detailed parameter configuration, see [Batch-related parameters](#batch-related-parameters).
 
 #### Use `StreamingResult` to get the execution result
 
@@ -66,13 +67,15 @@ Usually, there are two kinds of processing methods in JDBC:
 - [Set `FetchSize` to `Integer.MIN_VALUE`](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-implementation-notes.html#ResultSet) to ensure that the client does not cache. The client will read the execution result from the network connection through `StreamingResult`.
 - To use Cursor Fetch, first [set `FetchSize`](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html) as a positive integer and configure `useCursorFetch=true` in the JDBC URL.
 
-TiDB supports both methods at the same time, but it is preferred that you use the first method, because it is a simpler implementation and has a better execution efficiency.
+TiDB supports both methods, but it is preferred that you use the first method, because it is a simpler implementation and has a better execution efficiency.
 
 ### MySQL JDBC parameters
 
-JDBC usually provides implementation-related configurations in the form of JDBC URL parameters. This section introduces [MySQL Connector/J's parameter configurations](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-configuration-properties.html). (If you use MariaDB, refer to [MariaDB's parameter configurations](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters). Because we can't cover all configuration items here, we mainly focus on several parameters that may affect performance.
+JDBC usually provides implementation-related configurations in the form of JDBC URL parameters. This section introduces [MySQL Connector/J's parameter configurations](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-configuration-properties.html). (If you use MariaDB, see [MariaDB's parameter configurations](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)). Because this document cannot cover all configuration items, it mainly focuses on several parameters that might affect performance.
 
 #### Prepare-related parameters
+
+This section introduces parameters related to `Prepare`.
 
 ##### `useServerPrepStmts`
 
@@ -105,7 +108,7 @@ The Prepared Statements that exceed this maximum length will not be cached, so t
 You need to check whether this setting is too small if you:
 
 - Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **QPS By Instance**.
-- And find that `cachePrepStmts=true` has been configured, but `COM_STMT_PREPARE` is still mostly equal to `COM_STMT_EXECUTE` and there is `COM_STMT_CLOSE`.
+- And find that `cachePrepStmts=true` has been configured, but `COM_STMT_PREPARE` is still mostly equal to `COM_STMT_EXECUTE` and `COM_STMT_CLOSE` exists.
 
 ##### `prepStmtCacheSize`
 
@@ -213,9 +216,9 @@ Java has many connection pool implementations such as [HikariCP](https://github.
 It is a common practice that the connection pool size is well adjusted according to the application's own needs. Take HikariCP as an example:
 
 - `maximumPoolSize`: The maximum number of connections in the connection pool. If this value is too large, TiDB consumes resources to maintain useless connections. If this value is too small, the application gets slow connections. So configure this value for your own good. For details, see [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
-- `minimumIdle`: The minimum number of idle connections in the connection pool. It is mainly used to store some connections to respond to sudden requests when the application is idle. You can also configure it according to your application needs.
+- `minimumIdle`: The minimum number of idle connections in the connection pool. It is mainly used to reserve some connections to respond to sudden requests when the application is idle. You can also configure it according to your application needs.
 
-When the application uses the connection pool, it needs to return the connection after it is done. It is also recommended that the application use the corresponding connection pool monitoring (such as `metricRegistry`) to monitor the connection pool issue in time.
+The application needs to return the connection after finishing using it. It is also recommended that the application should use the corresponding connection pool monitoring (such as `metricRegistry`) to locate the connection pool issue in time.
 
 ### Probe configuration
 
@@ -227,15 +230,15 @@ If you often see the following error in your Java application:
 The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 ```
 
-If `n` in `n milliseconds ago` is `0` or a very small value, it is usually because the executed SQL operation causes TiDB to exit with exception. To solve this, it is recommended to check the TiDB stderr log.
+If `n` in `n milliseconds ago` is `0` or a very small value, it is usually because the executed SQL operation causes TiDB to exit abnormally. To find the cause, it is recommended to check the TiDB stderr log.
 
-If `n` is a very large value (such as `3600000` in the example), it is likely that this connection was idle for a long time and then closed by the intermediate proxy. The usual solution is to increase the value of the proxy's idle configuration and allow the connection pool to:
+If `n` is a very large value (such as `3600000` in the above example), it is likely that this connection was idle for a long time and then closed by the intermediate proxy. The usual solution is to increase the value of the proxy's idle configuration and allow the connection pool to:
 
 - Check whether the connection is available before using the connection every time
-- Periodically check whether the connection is available using a separate thread
+- Regularly check whether the connection is available using a separate thread.
 - Send a test query regularly to keep alive connections
 
-Different connection pool implementations may support one or more of the above methods. You can check your connection pool documentation to find the corresponding configuration.
+Different connection pool implementations might support one or more of the above methods. You can check your connection pool documentation to find the corresponding configuration.
 
 ## Data access framework
 
@@ -243,15 +246,15 @@ Applications often use some kind of data access framework to simplify database a
 
 ### MyBatis
 
-[MyBatis](http://www.mybatis.org/mybatis-3/) is currently a popular Java data access framework. It is mainly used to manage SQL queries and complete the mapping of result sets and Java objects. MyBatis is highly compatible with TiDB. MyBatis rarely has problems based on its historical issues.
+[MyBatis](http://www.mybatis.org/mybatis-3/) is a popular Java data access framework. It is mainly used to manage SQL queries and complete the mapping between result sets and Java objects. MyBatis is highly compatible with TiDB. MyBatis rarely has problems based on its historical issues.
 
-Here we mainly focus on the following configurations.
+Here this document mainly focuses on the following configurations.
 
-#### Mapper parameter
+#### Mapper parameters
 
 MyBatis Mapper supports two parameters:
 
-- `select 1 from t where id = #{param1}` will be converted to `select 1 from t where id =?` as a Prepared Statement and be "prepared", and the actual parameter will be used for reuse. You can achieve the best performance when using this parameter with the previously mentioned Prepare connection parameters.
+- `select 1 from t where id = #{param1}` will be converted to `select 1 from t where id =?` as a Prepared Statement and be "prepared", and the actual parameter will be used for reuse. You can get the best performance when using this parameter with the previously mentioned Prepare connection parameters.
 - `select 1 from t where id = ${param2}` will be replaced with `select 1 from t where id = 1` as a text file and be executed. If this statement is replaced with different parameters and is executed, MyBatis will send different requests for "preparing" the statements to TiDB. This might cause TiDB to cache a large number of Prepared Statements, and executing SQL operations this way has injection security risks.
 
 #### Dynamic SQL Batch
@@ -310,13 +313,13 @@ You can choose `ExecutorType` during `openSession`. MyBatis supports three types
 - Reuse: The Prepared Statements are cached in `executor`, so that you can reduce duplicate calls for Prepared Statements without using the JDBC `cachePrepStmts`
 - Batch: Each update operation (`INSERT`/`DELETE`/`UPDATE`) will first be added to the batch, and will be executed until the transaction commits or a `SELECT` query is performed. If `rewriteBatchStatements` is enabled in the JDBC layer, it will try to rewrite the statements. If not, the statements will be sent one by one.
 
-Usually, the default value of `ExecutorType` is `Simple`. You need to change `ExecutorType` when calling `openSession`. If it is batch execution, you might find that in a transaction the update or insert statements are executed pretty fast, but it is slower when reading data or committing the transaction. This is actually normal, so you need to note this when troubleshooting slow SQL queries.
+Usually, the default value of `ExecutorType` is `Simple`. You need to change `ExecutorType` when calling `openSession`. If it is the batch execution, you might find that in a transaction the `UPDATE` or `INSERT` statements are executed pretty fast, but it is slower when reading data or committing the transaction. This is actually normal, so you need to note this when troubleshooting slow SQL queries.
 
 ## Spring Transaction
 
 In the real world, applications might use [Spring Transaction](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html) and AOP aspects to start and stop transactions.
 
-By adding the `@Transactional` annotation to the method definition, AOP starts the transaction before the method is called, and commit the transaction before the method returns the result. If your application has a similar need, you can find `@Transactional` in code to determine when the transaction is started and closed.
+By adding the `@Transactional` annotation to the method definition, AOP starts the transaction before the method is called, and commits the transaction before the method returns the result. If your application has a similar need, you can find `@Transactional` in code to determine when the transaction is started and closed.
 
 Pay attention to a special case of embedding. If it occurs, Spring will behave differently based on the [Propagation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html) configuration. Because TiDB does not support savepoint, nested transactions are not supported yet.
 
@@ -324,20 +327,20 @@ Pay attention to a special case of embedding. If it occurs, Spring will behave d
 
 ### Troubleshooting tools
 
-Using the powerful troubleshooting tools of JVM is recommended when an issue occurs in your Java application and you do not know the business logic. Here are a few common tools:
+Using the powerful troubleshooting tools of JVM is recommended when an issue occurs in your Java application and you do not know the application logic. Here are a few common tools:
 
 #### jstack
 
 [jstack](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jstack.html) is similar to pprof/goroutine in Go, which can easily troubleshoot the process stuck issue.
 
-By executing `jstack pid`, you can output the IDs and stack information of all threads in the target process. There is only the Java stack in the default output. If you want to output the C++ stack in the JVM at the same time, add the `-m` option.
+By executing `jstack pid`, you can output the IDs and stack information of all threads in the target process. By default, only the Java stack is output. If you want to output the C++ stack in the JVM at the same time, add the `-m` option.
 
-By using jstack multiple times, you can easily locate the stuck issue (for example, a slow query from application's view due to using Batch ExecutorType in Mybatis) or the application deadlock issue (for example, the application does not send any SQL statement because it is preempting a lock before sending it)
+By using jstack multiple times, you can easily locate the stuck issue (for example, a slow query from application's view due to using Batch ExecutorType in Mybatis) or the application deadlock issue (for example, the application does not send any SQL statement because it is preempting a lock before sending it).
 
 In addition, `top -p $ PID -H` or Java swiss knife are common methods to view the thread ID. Also, to locate the issue of "a thread occupies a lot of CPU resources and I don't know what it is executing", do the following steps:
 
-- Use `printf "%x\n" pid` to convert the thread ID to hexadecimal
-- Go to the jstack output to find the stack information of the corresponding thread
+- Use `printf "%x\n" pid` to convert the thread ID to hexadecimal.
+- Go to the jstack output to find the stack information of the corresponding thread.
 
 #### jmap & mat
 
