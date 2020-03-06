@@ -100,11 +100,11 @@ The parameter(s) given in `INL_JOIN()` is the candidate table for the inner tabl
 
 ### INL_HASH_JOIN
 
-The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm, but in some scenarios the index nested loop hash join algorithm saves more memory resources.
+The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm, but in some scenarios the index nested loop hash join algorithm uses less memory.
 
 ### INL_MERGE_JOIN
 
-The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm which saves more memory than using `INL_JOIN`. The conditions for using this algorithm include all the conditions for using `INL_JOIN`, plus this one: the column sets of the inner table in join keys is the prefix of the inner table, or the index of the inner table is the prefix of the column sets of the inner table in join keys.
+The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm, which consumes less memory than using `INL_JOIN`. The conditions for using this algorithm include all the conditions for using `INL_JOIN` but with one more: the column sets of the inner table in join keys is the prefix of the inner table, or the index of the inner table is the prefix of the column sets of the inner table in join keys.
 
 ### HASH_JOIN(t1_name [, tl_name ...])
 
