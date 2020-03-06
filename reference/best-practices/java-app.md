@@ -359,4 +359,4 @@ Obtaining flame graphs in Java applications is tedious. For details, see [Java F
 
 Based on commonly used Java components that interact with databases, this document describes the common problems and solutions for developing Java applications with TiDB. TiDB is highly compatible with the MySQL protocol, so most of the best practices for MySQL-based Java applications also apply to TiDB.
 
-Join us at [ASK TUG](https://asktug.com/), and share with broad TiDB user group about the practical experience or problems you run into when you use TiDB with Java applications.
+Join us at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P), and share with broad TiDB user group about your experience or problems when you develop Java applications with TiDB.
