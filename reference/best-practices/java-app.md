@@ -218,7 +218,7 @@ It is a common practice that the connection pool size is well adjusted according
 - `maximumPoolSize`: The maximum number of connections in the connection pool. If this value is too large, TiDB consumes resources to maintain useless connections. If this value is too small, the application gets slow connections. So configure this value for your own good. For details, see [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
 - `minimumIdle`: The minimum number of idle connections in the connection pool. It is mainly used to reserve some connections to respond to sudden requests when the application is idle. You can also configure it according to your application needs.
 
-The application needs to return the connection after finishing using it. It is also recommended that the application should use the corresponding connection pool monitoring (such as `metricRegistry`) to locate the connection pool issue in time.
+The application needs to return the connection after finishing using it. It is also recommended that the application use the corresponding connection pool monitoring (such as `metricRegistry`) to locate the connection pool issue in time.
 
 ### Probe configuration
 
