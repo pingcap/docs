@@ -7,6 +7,7 @@ category: release
 
 ## 4.0
 
+- [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
 - [4.0.0-beta](/releases/4.0.0-beta.md)
 
 ## 3.1
@@ -16,6 +17,7 @@ category: release
 
 ## 3.0
 
+- [3.0.11](/releases/3.0.11.md)
 - [3.0.10](/releases/3.0.10.md)
 - [3.0.9](/releases/3.0.9.md)
 - [3.0.8](/releases/3.0.8.md)
