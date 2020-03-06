@@ -5,7 +5,7 @@ category: reference
 
 # Best Practice for Developing Java Applications with TiDB
 
-This document introduces the best practice for developing Java applications to better use TiDB. Based on some common Java application components that interact with the backend TiDB database, this document also provides the commonly encountered questions during development and their answers.
+This document introduces the best practice for developing Java applications to better use TiDB. Based on some common Java application components that interact with the backend TiDB database, this document also provides the solutions to commonly encountered issues during development.
 
 ## Database-related components in Java applications
 
@@ -26,7 +26,7 @@ As shown above, a Java application may do the following things:
 - Use a data access framework such as MyBatis to generate and execute SQL statements
 - Use Spring Transaction to automatically start or stop a transaction
 
-The rest of this document describes the issues that may need extra attention when you develop a Java application with the above components.
+The rest of this document describes the issues and their solutions when you develop a Java application using the above components.
 
 ## JDBC
 
@@ -37,7 +37,7 @@ Java applications can be encapsulated with various frameworks. In most of the fr
 
 ### JDBC API
 
-For the basics of the JDBC API usage, see [JDBC official tutorial](https://docs.oracle.com/javase/tutorial/jdbc/). This section covers the usage of several important APIs.
+For JDBC API usage, see [JDBC official tutorial](https://docs.oracle.com/javase/tutorial/jdbc/). This section covers the usage of several important APIs.
 
 #### Use Prepare API
 
@@ -219,7 +219,7 @@ When the application uses the connection pool, it needs to return the connection
 
 ### Probe configuration
 
-The connection pool maintains long connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally there will be network proxies such as LVS or HAProxy between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period of time. In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
+The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally there will be network proxies such as LVS or HAProxy between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period of time. In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
 
 If you often see the following error in your Java application:
 
