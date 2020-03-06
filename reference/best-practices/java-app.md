@@ -252,7 +252,7 @@ Here we mainly focus on the following configurations.
 MyBatis Mapper supports two parameters:
 
 - `select 1 from t where id = #{param1}` will be converted to `select 1 from t where id =?` as a Prepared Statement and be "prepared", and the actual parameter will be used for reuse. You can achieve the best performance when using this parameter with the previously mentioned Prepare connection parameters.
-- `select 1 from t where id = ${param2}` will be replaced with `select 1 from t where id = 1` as a text file and be executed. If this statement is "prepared" to different parameters, it may cause TiDB to cache a large number of Prepared Statements, and executing SQL operations this way has injection security risks.
+- `select 1 from t where id = ${param2}` will be replaced with `select 1 from t where id = 1` as a text file and be executed. If this statement is replaced with different parameters and is executed, MyBatis will send different requests for "preparing" the statements to TiDB. This might cause TiDB to cache a large number of Prepared Statements, and executing SQL operations this way has injection security risks.
 
 #### Dynamic SQL Batch
 
@@ -294,7 +294,7 @@ If you configure mappings using XML, you can stream read results by configuring 
 </select>
 ```
 
-If you configure mappings using code, you can use `@Options(fetchSize = Integer.MIN_VALUE)` and return `Cursor` so that the SQL results can be read in streaming.
+If you configure mappings using code, you can add the `@Options(fetchSize = Integer.MIN_VALUE)` annotation and keep the type of results as `Cursor` so that the SQL results can be read in streaming.
 
 ```java
 @Select("select * from post")
@@ -332,7 +332,7 @@ Using the powerful troubleshooting tools of JVM is recommended when an issue occ
 
 By executing `jstack pid`, you can output the IDs and stack information of all threads in the target process. There is only the Java stack in the default output. If you want to output the C++ stack in the JVM at the same time, add the `-m` option.
 
-By using jstack multiple times, you can easily locate the stuck issue (such as updating only through Mybatis BatchExecutor flush) or the deadlock issue (such as the failure to send an SQL statement because test programs are preempting a lock in the application)
+By using jstack multiple times, you can easily locate the stuck issue (for example, a slow query from application's view due to using Batch ExecutorType in Mybatis) or the application deadlock issue (for example, the application does not send any SQL statement because it is preempting a lock before sending it)
 
 In addition, `top -p $ PID -H` or Java swiss knife are common methods to view the thread ID. Also, to locate the issue of "a thread occupies a lot of CPU resources and I don't know what it is executing", do the following steps:
 
