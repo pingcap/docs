@@ -23,9 +23,9 @@ Common components that interact with the TiDB database in Java applications incl
 From the above diagram, you can see that a Java application might do the following things:
 
 - Implement the MySQL protocol via the JDBC API to interact with TiDB.
-- Get a persistent connection from the connection pool
-- Use a data access framework such as MyBatis to generate and execute SQL statements
-- Use Spring Transaction to automatically start or stop a transaction
+- Get a persistent connection from the connection pool.
+- Use a data access framework such as MyBatis to generate and execute SQL statements.
+- Use Spring Transaction to automatically start or stop a transaction.
 
 The rest of this document describes the issues and their solutions when you develop a Java application using the above components.
 
@@ -46,7 +46,7 @@ For OLTP (Online Transactional Processing) scenarios, the SQL statements sent by
 
 At present, most upper-level frameworks call the Prepare API for SQL execution. If you use the JDBC API directly for development, pay attention to choosing the Prepare API.
 
-In addition, with the default implementation of MySQL Connector/J, only client-side statements are preprocessed, and the statements are sent to the server in a text file after `?` is replaced on the client. Therefore, in addition to using the Prepare API, you also need to configure `useServerPrepStmts = true` in JDBC connection parameters before you perform statement preprocessing on the TiDB server (the parameter configuration section is described in detail below).
+In addition, with the default implementation of MySQL Connector/J, only client-side statements are preprocessed, and the statements are sent to the server in a text file after `?` is replaced on the client. Therefore, in addition to using the Prepare API, you also need to configure `useServerPrepStmts = true` in JDBC connection parameters before you perform statement preprocessing on the TiDB server. For detailed parameter configuration, see [MySQL JDBC parameters](#mysql-jdbc-parameters).
 
 #### Use Batch API
 
@@ -283,7 +283,7 @@ As mentioned before, you also need to note that the Prepared Statements will not
 
 #### Streaming result
 
-The earlier section introduces how to stream read execution results in JDBC. In addition to the corresponding configurations of JDBC, if you want to read a super large result set in MyBatis, you also need to note that:
+[A previous section](#use-streamingresult-to-get-the-execution-result) introduces how to stream read execution results in JDBC. In addition to the corresponding configurations of JDBC, if you want to read a super large result set in MyBatis, you also need to note that:
 
 - You can set `fetchSize` for a single SQL statement in the mapper configuration (see the previous code block). Its effect is equivalent to calling `setFetchSize` in JDBC.
 - You can use the query interface with `ResultHandler` to avoid getting the entire result set at once.
@@ -324,6 +324,8 @@ By adding the `@Transactional` annotation to the method definition, AOP starts t
 Pay attention to a special case of embedding. If it occurs, Spring will behave differently based on the [Propagation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html) configuration. Because TiDB does not support savepoint, nested transactions are not supported yet.
 
 ## Misc
+
+This section introduces some useful tools for Java to help you troubleshoot issues.
 
 ### Troubleshooting tools
 
