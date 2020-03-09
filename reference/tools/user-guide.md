@@ -19,17 +19,6 @@ The two types of tools are discussed in some details below.
 
 ### Data import tools
 
-#### Full import tool loader (Stop maintenance, not recommended)
-
-[Loader](/reference/tools/loader.md) is a lightweight full data import tool. Data in the form of SQL is imported into TiDB. Currently this tool is gradually replaced by [TiDB Lightning](#full-import-tool-tidb-lightning), see [TiDB Lightning TiDB-backend Document](/reference/tools/tidb-lightning/tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-backend).
-
-The following are the basics of Loader:
-
-- Input: Files output by Mydumper.
-- Output: SQL written to TiDB.
-- Applicable version of TiDB: All.
-- Kubernetes: Supported. See [Backup and restore](/tidb-in-kubernetes/maintain/backup-and-restore.md).
-
 #### Full import tool TiDB Lightning
 
 [TiDB Lightning](/reference/tools/tidb-lightning/overview.md) is a tool used for fast full import of data into a TiDB cluster.
@@ -59,6 +48,28 @@ The following are the basics of BR:
 - Applicable version of TiDB: v3.1 and v4.0.
 - Kubernetes: Supported. Relevant documents are on the way.
 
+#### Incremental and full import tool TiDB Data Migration
+
+[TiDB Data Migration (DM)](/reference/tools/data-migration/overview.md) is an tool used for data migration from MySQL/MariaDB into TiDB. It supports both the full and the incremental data replication.
+
+The following are the basics of DM:
+
+- Input: Full data and binlog data of MySQL/MariaDB.
+- Output: SQL written to TiDB.
+- Applicable version of TiDB: All.
+- Kubernetes: In development.
+
+#### Full import tool loader (Stop maintenance, not recommended)
+
+[Loader](/reference/tools/loader.md) is a lightweight full data import tool. Data in the form of SQL is imported into TiDB. Currently this tool is gradually replaced by [TiDB Lightning](#full-import-tool-tidb-lightning), see [TiDB Lightning TiDB-backend Document](/reference/tools/tidb-lightning/tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-backend).
+
+The following are the basics of Loader:
+
+- Input: Files output by Mydumper.
+- Output: SQL written to TiDB.
+- Applicable version of TiDB: All.
+- Kubernetes: Supported. See [Backup and restore](/tidb-in-kubernetes/maintain/backup-and-restore.md).
+
 #### Incremental import tool Syncer (Stop maintenance, not recommended)
 
 [Syncer](/reference/tools/syncer.md) is a tool used for incremental import of real-time binlog data from MySQL/MariaDB into TiDB. It is recommended to use [TiDB Data Migration](#Incremental-import-tool-tidb-data-migration) to replace Syncer.
@@ -69,17 +80,6 @@ The following are the basics of Syncer:
 - Output: SQL written to TiDB.
 - Applicable version of TiDB: All.
 - Kubernetes: Not supported.
-
-#### Incremental import tool TiDB Data Migration
-
-[TiDB Data Migration (DM)](/reference/tools/data-migration/overview.md) is an tool used for data migration from MySQL/MariaDB into TiDB. It supports the full data replication and the incremental data replication.
-
-The following are the basics of DM:
-
-- Input: Full data and binlog data of MySQL/MariaDB.
-- Output: SQL written to TiDB.
-- Applicable version of TiDB: All.
-- Kubernetes: In development.
 
 ### Data export tools
 
