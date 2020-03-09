@@ -7,7 +7,7 @@ category: reference
 
 When replicating binlogs, Drainer splits transactions from the upstream and replicates the split transactions concurrently to the downstream.
 
-In extreme cases where the upstream clusters are not available and Drainer exits abnormally, the downstream clusters (MySQL or TiDB) may be in the intermediate states with inconsistent data. In such cases, Drainer can use the relay log to ensure that the downstream clusters are in a consistent state.
+In extreme cases where the upstream clusters are not available and Drainer exits abnormally, the downstream clusters (MySQL or TiDB) might be in the intermediate states with inconsistent data. In such cases, Drainer can use the relay log to ensure that the downstream clusters are in a consistent state.
 
 ## Consistent state during Drainer replication
 
@@ -17,8 +17,10 @@ The checkpoint consistency means Drainer checkpoint saves the consistent state o
 
 You can query the downstream checkpoint table as follows:
 
-```
-mysql> select  * from tidb_binlog.checkpoint;
+{{< copyable "sql" >}}
+
+```sql
+select * from tidb_binlog.checkpoint;
 +---------------------+----------------------------------------------------------------+
 | clusterID           | checkPoint                                                     |
 +---------------------+----------------------------------------------------------------+
@@ -34,18 +36,17 @@ If the upstream clusters are not available, Drainer can restore the downstream c
 
 > **Note:**
 >
-> If the relay log data is lost at the same time, this method does not work, but its incidence is very low.
-> Besides, you can use the Network File System to ensure data security of the relay log.
+> If the relay log data is lost at the same time, this method does not work, but its incidence is very low. In addition, you can use the Network File System to ensure data safety of the relay log.
 
 ### Trigger scenarios where Drainer consumes binlogs from the relay log
 
-Where Drainer is started, if it fails to connect to the Placement Drivers (PD) of the upstream clusters, and if it detects that `consistent = false` in checkpoint, Drainer will try to read the relay log, and restore the downstream clusters to a consistent state. After that, the Drainer process sets the checkpoint `consistent` to `true` and then exits.
+When Drainer is started, if it fails to connect to the Placement Driver (PD) of the upstream clusters, and it detects that `consistent = false` in the checkpoint, Drainer will try to read the relay log, and restore the downstream clusters to a consistent state. After that, the Drainer process sets the checkpoint `consistent` to `true` and then exits.
 
 ### GC mechanism of relay log
 
 While Drainer is running, if it confirms that the whole data of a relay log file has been successfully replicated to the downstream, the file is deleted immediately. Therefore, the relay log does not occupy too much space.
 
-If the size of a relay log file reaches 10MB (by default), the file is split, and data is written in the new relay log file.
+If the size of a relay log file reaches 10MB (by default), the file is split, and data is written into a new relay log file.
 
 ## Configuration
 
@@ -55,7 +56,7 @@ To enable the relay log, add the following configuration in Drainer:
 
 ```
 [syncer.relay]
-# It saves the catalog of the relay log. The relay log is not enabled if the value is empty.
+# It saves the directory of the relay log. The relay log is not enabled if the value is empty.
 # The configuration only comes to effect if the downstream is TiDB or MySQL.
 log-dir = "/dir/to/save/log"
 ```
