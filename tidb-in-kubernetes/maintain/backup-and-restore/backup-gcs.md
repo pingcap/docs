@@ -6,15 +6,15 @@ category: how-to
 
 # Back up TiDB Cluster Data to GCS
 
-This document describes how to back up data of the TiDB cluster in Kubernetes to [Google Cloud Storage (GCS)](https://cloud.google.com/storage/docs/). "Backup" in this document refers to full backup (ad-hoc full backup and scheduled full backup). For the underlying implementation, [`mydumper`](/reference/tools/mydumper.md) is used to get the logic backup of the TiDB cluster, and then this backup data is sent to the remote GCS.
+This document describes how to back up the data of the TiDB cluster in Kubernetes to [Google Cloud Storage (GCS)](https://cloud.google.com/storage/docs/). "Backup" in this document refers to full backup (ad-hoc full backup and scheduled full backup). For the underlying implementation, [`mydumper`](/reference/tools/mydumper.md) is used to get the logic backup of the TiDB cluster, and then this backup data is sent to the remote GCS.
 
 The backup method described in this document is implemented based on CustomResourceDefinition (CRD) in TiDB Operator v1.1 or later versions. For the backup method implemented based on Helm Charts, refer to [Back up and Restore TiDB Cluster Data Based on Helm Charts](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md).
 
 ## Ad-hoc full backup to GCS
 
-Ad-hoc full backup describes the backup by creating a `Backup` custom resource (CR) object. TiDB Operator performs the specific backup operation based on this `Backup` object. If an error occurs during the backup process, TiDB Operator does not retry and you need to handle this error manually.
+Ad-hoc full backup describes a backup operation by creating a `Backup` custom resource (CR) object. TiDB Operator performs the specific backup operation based on this `Backup` object. If an error occurs during the backup process, TiDB Operator does not retry and you need to handle this error manually.
 
-To better explain how to perform the backup operation to GCS, this document shows an example in which the data of the `demo1` TiDB cluster is backed up to the `test1` Kubernetes namespace.
+To better explain how to perform the backup operation, this document shows an example in which the data of the `demo1` TiDB cluster is backed up to the `test1` Kubernetes namespace.
 
 ### Prerequisites for ad-hoc backup
 
@@ -34,7 +34,7 @@ To better explain how to perform the backup operation to GCS, this document show
     kubectl create secret generic gcs-secret --from-file=credentials=./google-credentials.json -n test1
     ```
 
-3. Create the `backup-demo1-tidb-secret` secret which stores the root account and password used to access the TiDB cluster:
+3. Create the `backup-demo1-tidb-secret` secret which stores the root account and password needed to access the TiDB cluster:
 
     {{< copyable "shell-regular" >}}
 
@@ -78,7 +78,7 @@ spec:
   storageSize: 10Gi
 ```
 
-In the above two examples, all data of the TiDB cluster is exported and backed up to GCS. You can ignore the `location`, `objectAcl`, `bucketAcl`, and `storageClass` items in the GCS configuration.
+In the above example, all data of the TiDB cluster is exported and backed up to GCS. You can ignore the `location`, `objectAcl`, `bucketAcl`, and `storageClass` items in the GCS configuration.
 
 `projectId` in the configuration is the unique identifier of the user project on GCP. To learn how to get this identifier, refer to the [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
 
@@ -92,7 +92,7 @@ GCS supports the following `storageClass` types:
 
 If `storageClass` is not configured, `COLDLINE` is used by default. For the detailed description of these storage types, refer to [GCS documentation](https://cloud.google.com/storage/docs/storage-classes).
 
-GCS supports the following object access control list (ACL) polices:
+GCS supports the following object access-control list (ACL) polices:
 
 * `authenticatedRead`
 * `bucketOwnerFullControl`
@@ -113,7 +113,7 @@ GCS supports the following bucket ACL policies:
 
 If the bucket ACL policy is not configured, the `private` policy is used by default. For the detailed description of these access control policies, refer to [GCS documentation](https://cloud.google.com/storage/docs/access-control/lists).
 
-After creating the `Backup` CR, use the following command to check the backup status:
+After creating the `Backup` CR, execute the following command to check the backup status:
 
 {{< copyable "shell-regular" >}}
 
@@ -124,10 +124,10 @@ After creating the `Backup` CR, use the following command to check the backup st
 More `Backup` CRs are as described follows:
 
 * `.spec.metadata.namespace`: the namespace where the `Backup` CR is located.
-* `.spec.from.host`: the accessing address of the TiDB cluster to be backed up.
-* `.spec.from.port`: the accessing port of the TiDB cluster to be backed up.
+* `.spec.from.host`: the address of the TiDB cluster to be backed up.
+* `.spec.from.port`: the port of the TiDB cluster to be backed up.
 * `.spec.from.user`: the accessing user of the TiDB cluster to be backed up.
-* `.spec.from.tidbSecretName`: the secrete of the credential required by the TiDB cluster to be backed up.
+* `.spec.from.tidbSecretName`: the secrete of the credential needed by the TiDB cluster to be backed up.
 * `.spec.storageClassName`: the persistent volume (PV) type specified for the backup operation. If this item is not specified, the value of the `default-backup-storage-class-name` parameter (`standard` by default, specified when TiDB Operator is started) is used by default.
 * `.spec.storageSize`: the PV size specified for the backup operation. This value must be greater than size of the TiDB cluster to be backed up.
 
@@ -137,9 +137,9 @@ You can set a backup policy to perform scheduled backups of the TiDB cluster, an
 
 ### Prerequisites for scheduled backup
 
-See the [Prerequisites for the ad-hoc backup](#prerequisites-for-ad-hoc-backup).
+The prerequisites for the scheduled backup is the same with the [prerequisites for ad-hoc backup](#prerequisites-for-ad-hoc-backup).
 
-### scheduled backup process
+### Scheduled backup process
 
 Create the `BackupSchedule` CR to enable the scheduled full backup to GCS:
 
@@ -196,9 +196,9 @@ Execute the following command to check all the backup items:
  kubectl get bk -l tidb.pingcap.com/backup-schedule=demo1-backup-schedule-gcs -n test1
  ```
 
-From the above example, you can see that the `backupSchedule` configuration consists of two part. One is the unique configurations of `backupSchedule` and the other is `backupTemplate`. `backupTemple` specifies the configurations related to the GCS storage, which is the same with the configurations for the ad-hoc full backup to GCS (refer to [GCS backup process](#ad-hoc-backup-process) for details). The following are the unique configurations of `backupSchedule`:
+From the above example, you can see that the `backupSchedule` configuration consists of two part. One is the unique configuration of `backupSchedule` and the other is `backupTemplate`. `backupTemple` specifies the configuration related to the GCS storage, which is the same with the configuration of the ad-hoc full backup to GCS (refer to [GCS backup process](#ad-hoc-backup-process) for details). The following are the unique configuration items of `backupSchedule`:
 
-+ `.spec.maxBackups`: a backup retention policy, which determines the maximum number of backup items to be retained. When this value is exceeded, the outdated backup items will be deleted. If you set this configuration item to `0`, all backup items are retained.
-+ `.spec.maxReservedTime`: a backup retention policy based on the time. For example, if you set the value of this configuration to `24h`, backup items only of recent 24 hours are retained. All backup items out of this time are deleted. For the format of the time, refer to [`func ParseDuration`](https://golang.org/pkg/time/#ParseDuration). If you have set the maximum number of backup items and the longest retention time of backup items at the same time, the latter setting prevails.
-+ `.spec.schedule`: the time scheduling format of Cron. Refer to [Cron](https://en.wikipedia.org/wiki/Cron) for details.
++ `.spec.maxBackups`: A backup retention policy, which determines the maximum number of backup items to be retained. When this value is exceeded, the outdated backup items will be deleted. If you set this configuration item to `0`, all backup items are retained.
++ `.spec.maxReservedTime`: A backup retention policy based on time. For example, if you set the value of this configuration to `24h`, backup items only of recent 24 hours are retained. All backup items out of this time are deleted. For the time format, refer to [`func ParseDuration`](https://golang.org/pkg/time/#ParseDuration). If you have set the maximum number of backup items and the longest retention time of backup items at the same time, the latter setting takes effect.
++ `.spec.schedule`: The time scheduling format of Cron. Refer to [Cron](https://en.wikipedia.org/wiki/Cron) for details.
 + `.spec.pause`: `false` by default. If this parameter is set to `true`, the scheduled scheduling is paused. In this situation, the backup operation will not be performed even if the scheduling time is reached. During this pause, the backup [Garbage Collection](/reference/garbage-collection/overview.md) (GC) runs normally. If you change `true` to `false`, the full backup process is restarted.

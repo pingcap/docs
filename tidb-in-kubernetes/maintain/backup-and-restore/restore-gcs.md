@@ -6,7 +6,7 @@ category: how-to
 
 # Restore Data From GCS
 
-This document describes how to restore the TiDB cluster data backed up by TiDB Operator in Kubernetes For the underlying implementation, [`loader`](/reference/tools/loader.md) is used to perform the restoration.
+This document describes how to restore the TiDB cluster data backed up using TiDB Operator in Kubernetes. For the underlying implementation, [`loader`](/reference/tools/loader.md) is used to perform the restoration.
 
 The restoration method described in this document is implemented based on CustomResourceDefinition (CRD) in TiDB Operator v1.1 or later versions. For the restoration method implemented based on Helm Charts, refer to [Back up and Restore TiDB Cluster Data Based on Helm Charts](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md).
 
@@ -20,9 +20,9 @@ This document shows an example in which the backup data stored in the specified 
 
     ```shell
     kubectl apply -f backup-rbac.yaml -n test2
-    ```：
+    ```
 
-2. Create the `restore-demo2-tidb-secret` secret which stores the root account and password used to access the TiDB cluster:
+2. Create the `restore-demo2-tidb-secret` secret which stores the root account and password needed to access the TiDB cluster:
 
     {{< copyable "shell-regular" >}}
 
@@ -76,9 +76,9 @@ In the above example, the backup data stored in the specified `spec.gcs.path` pa
 More `Restore` CRs are as described follows:
 
 * `.spec.metadata.namespace`: the namespace where the `Restore` CR is located.
-* `.spec.to.host`: the accessing address of the TiDB cluster to be restored.
-* `.spec.to.port`: the accessing port of the TiDB cluster to be restored.
+* `.spec.to.host`: the address of the TiDB cluster to be restored.
+* `.spec.to.port`: the port of the TiDB cluster to be restored.
 * `.spec.to.user`: the accessing user of the TiDB cluster to be restored.
-* `.spec.to.tidbSecretName`: the secrete of the credential required by the TiDB cluster to be restored.
+* `.spec.to.tidbSecretName`: the secrete of the credential needed by the TiDB cluster to be restored.
 * `.spec.storageClassName`: the persistent volume (PV) type specified for the restoration. If this item is not specified, the value of the `default-backup-storage-class-name` parameter (`standard` by default, specified when TiDB Operator is started) is used by default.
 * `.spec.storageSize`: the PV size specified for the restoration. This value must be greater than size of the backed up TiDB cluster.

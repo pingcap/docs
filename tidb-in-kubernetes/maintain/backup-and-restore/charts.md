@@ -9,7 +9,7 @@ aliases: ['/docs/dev/tidb-in-kubernetes/maintain/backup-and-store/']
 
 This document describes how to back up and restore the data of a TiDB cluster in Kubernetes based on Helm Charts.
 
-For TiDB Operator 1.1 or later versions, it is recommended that you back up and restore the data of TiDB in Kubernetes based on CustomResourceDefinition (CRD). Refer to the following documents for details:
+For TiDB Operator 1.1 or later versions, it is recommended that you use the backup and restoration methods based on CustomResourceDefinition (CRD). Refer to the following documents for details:
 
 - [Back up TiDB Cluster Data to GCS](/tidb-in-kubernetes/maintain/backup-and-restore/backup-gcs.md)
 - [Restore Data From GCS](/tidb-in-kubernetes/maintain/backup-and-restore/restore-gcs.md)

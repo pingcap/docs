@@ -6,7 +6,7 @@ category: how-to
 
 # Back up TiDB Cluster Data to S3-Compatible Storage
 
-This document describes how to back up data of the TiDB cluster in Kubernetes to the S3-compatible storage. "Backup" in this document refers to full backup (ad-hoc full backup and scheduled full backup). For the underlying implementation, [`mydumper`](/reference/tools/mydumper.md) is used to get the logic backup of the TiDB cluster, and then this backup data is sent to the S3-compatible storage.
+This document describes how to back up the data of the TiDB cluster in Kubernetes to the S3-compatible storage. "Backup" in this document refers to full backup (ad-hoc full backup and scheduled full backup). For the underlying implementation, [`mydumper`](/reference/tools/mydumper.md) is used to get the logic backup of the TiDB cluster, and then this backup data is sent to the S3-compatible storage.
 
 The backup method described in this document is implemented based on CustomResourceDefinition (CRD) in TiDB Operator v1.1 or later versions. For the backup method implemented based on Helm Charts, refer to [Back up and Restore TiDB Cluster Data Based on Helm Charts](/tidb-in-kubernetes/maintain/backup-and-restore/charts.md).
 
@@ -14,7 +14,7 @@ The backup method described in this document is implemented based on CustomResou
 
 Ad-hoc full backup describes the backup by creating a `Backup` custom resource (CR) object. TiDB Operator performs the specific backup operation based on this `Backup` object. If an error occurs during the backup process, TiDB Operator does not retry and you need to handle this error manually.
 
-For the current S3-compatible storages, Ceph and Amazon S3 work normally as tested. Therefore, this document shows use examples in which the data of the `demo1` TiDB cluster in the `test1` Kubernetes namespace is backed up to Ceph and Amazon S3 respectively.
+For the current S3-compatible storage types, Ceph and Amazon S3 work normally as tested. Therefore, this document shows examples in which the data of the `demo1` TiDB cluster in the `test1` Kubernetes namespace is backed up to Ceph and Amazon S3 respectively.
 
 ### Prerequisites for ad-hoc backup
 
@@ -26,7 +26,7 @@ For the current S3-compatible storages, Ceph and Amazon S3 work normally as test
     kubectl apply -f backup-rbac.yaml -n test1
     ```
 
-2. Create the `s3-secret` secret which stores the credential used to access the S3-compatible storage.
+2. Create the `s3-secret` secret which stores the credential used to access the S3-compatible storage:
 
     {{< copyable "shell-regular" >}}
 
@@ -34,7 +34,7 @@ For the current S3-compatible storages, Ceph and Amazon S3 work normally as test
     kubectl create secret generic s3-secret --from-literal=access_key=xxx --from-literal=secret_key=yyy --namespace=test1
     ```
 
-3. Create the `backup-demo1-tidb-secret` secret which stores the root account and password used to access the TiDB cluster:
+3. Create the `backup-demo1-tidb-secret` secret which stores the root account and password needed to access the TiDB cluster:
 
     {{< copyable "shell-regular" >}}
 
@@ -109,9 +109,9 @@ For the current S3-compatible storages, Ceph and Amazon S3 work normally as test
       storageSize: 10Gi
     ```
 
-In the above two examples, all data of the TiDB cluster is exported and backed up to Amazon S3 and Ceph respectively. You can ignore the `region`, `acl`, `endpoint`, and `storageClass` configuration items in the Amazon S3 configuration. You can also leave empty the configuration item fields if you do not need to configure these items as shown in the above Ceph configuration.
+In the above two examples, all data of the TiDB cluster is exported and backed up to Amazon S3 and Ceph respectively. You can ignore the `region`, `acl`, `endpoint`, and `storageClass` configuration items in the Amazon S3 configuration. S3-compatible storage types other than Amazon S3 can also use configuration similar to that of Amazon S3. You can also leave the configuration item fields empty if you do not need to configure these items as shown in the above Ceph configuration.
 
-Amazon S3 supports the following access control list (ACL) polices:
+Amazon S3 supports the following access-control list (ACL) polices:
 
 * `private`
 * `public-read`
@@ -144,10 +144,10 @@ After creating the `Backup` CR, use the following command to check the backup st
 More `Backup` CRs are as described follows:
 
 * `.spec.metadata.namespace`: the namespace where the `Backup` CR is located.
-* `.spec.from.host`: the accessing address of the TiDB cluster to be backed up.
-* `.spec.from.port`: the accessing port of the TiDB cluster to be backed up.
+* `.spec.from.host`: the address of the TiDB cluster to be backed up.
+* `.spec.from.port`: the port of the TiDB cluster to be backed up.
 * `.spec.from.user`: the accessing user of the TiDB cluster to be backed up.
-* `.spec.from.tidbSecretName`: the secrete of the credential required by the TiDB cluster to be backed up.
+* `.spec.from.tidbSecretName`: the secrete of the credential needed by the TiDB cluster to be backed up.
 * `.spec.storageClassName`: the persistent volume (PV) type specified for the backup operation. If this item is not specified, the value of the `default-backup-storage-class-name` parameter (`standard` by default, specified when TiDB Operator is started) is used by default.
 * `.spec.storageSize`: the PV size specified for the backup operation. This value must be greater than size of the TiDB cluster to be backed up.
 
@@ -168,9 +168,7 @@ You can set a backup policy to perform scheduled backups of the TiDB cluster, an
 
 ### Prerequisites for scheduled backup
 
-同 [Ad-hoc 全量备份环境准备](#ad-hoc-全量备份环境准备)。
-
-See [Prerequisites for ad-hoc backup](#prerequisites-for-ad-hoc-backup)
+The prerequisites for the scheduled backup is the same with the [prerequisites for ad-hoc backup](#prerequisites-for-ad-hoc-backup).
 
 ### Scheduled backup process
 
@@ -257,7 +255,7 @@ After creating the scheduled full backup, use the following command to check the
 kubectl get bks -n test1 -owide
 ```
 
-Execute the followinsg command to check all the backup items:
+Execute the following command to check all the backup items:
 
 {{< copyable "shell-regular" >}}
 
@@ -265,9 +263,9 @@ Execute the followinsg command to check all the backup items:
 kubectl get bk -l tidb.pingcap.com/backup-schedule=demo1-backup-schedule-s3 -n test1
 ```
 
-From the above example, you can see that the `backupSchedule` configuration consists of two part. One is the unique configurations of `backupSchedule` and the other is `backupTemplate`. `backupTemple` specifies the configurations related to the S3-compatible storage, which is the same with the configurations for the ad-hoc full backup to the S3-compatible storage (refer to [Ad-hoc backup process](#ad-hoc-backup-process) for details). The following are the unique configurations of `backupSchedule`:
+From the above two examples, you can see that the `backupSchedule` configuration consists of two part. One is the unique configurations of `backupSchedule` and the other is `backupTemplate`. `backupTemple` specifies the configuration related to the S3-compatible storage, which is the same with the configuration of the ad-hoc full backup to the S3-compatible storage (refer to [Ad-hoc backup process](#ad-hoc-backup-process) for details). The following are the unique configuration items of `backupSchedule`:
 
-+ `.spec.maxBackups`: a backup retention policy, which determines the maximum number of backup items to be retained. When this value is exceeded, the outdated backup items will be deleted. If you set this configuration item to `0`, all backup items are retained.
-+ `.spec.maxReservedTime`: a backup retention policy based on the time. For example, if you set the value of this configuration to `24h`, backup items only of recent 24 hours are retained. All backup items out of this time are deleted. For the format of the time, refer to [`func ParseDuration`](https://golang.org/pkg/time/#ParseDuration). If you have set the maximum number of backup items and the longest retention time of backup items at the same time, the latter setting prevails.
-+ `.spec.schedule`: the time scheduling format of Cron. Refer to [Cron](https://en.wikipedia.org/wiki/Cron) for details.
++ `.spec.maxBackups`: A backup retention policy, which determines the maximum number of backup items to be retained. When this value is exceeded, the outdated backup items will be deleted. If you set this configuration item to `0`, all backup items are retained.
++ `.spec.maxReservedTime`: A backup retention policy based on time. For example, if you set the value of this configuration to `24h`, backup items only of recent 24 hours are retained. All backup items out of this time are deleted. For the time format, refer to [`func ParseDuration`](https://golang.org/pkg/time/#ParseDuration). If you have set the maximum number of backup items and the longest retention time of backup items at the same time, the latter setting takes effect.
++ `.spec.schedule`: The time scheduling format of Cron. Refer to [Cron](https://en.wikipedia.org/wiki/Cron) for details.
 + `.spec.pause`: `false` by default. If this parameter is set to `true`, the scheduled scheduling is paused. In this situation, the backup operation will not be performed even if the scheduling time is reached. During this pause, the backup [Garbage Collection](/reference/garbage-collection/overview.md) (GC) runs normally. If you change `true` to `false`, the full backup process is restarted.
