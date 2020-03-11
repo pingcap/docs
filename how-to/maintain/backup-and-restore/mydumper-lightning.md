@@ -1,5 +1,5 @@
 ---
-title: Use `Mydumper` and `TiDB Lightning` for Backup and Restoration
+title: Use Mydumper and TiDB Lightning for Backup and Restoration
 category: how-to
 aliases: ['/docs-cn/how-to/maintain/backup-and-restore/']
 ---
