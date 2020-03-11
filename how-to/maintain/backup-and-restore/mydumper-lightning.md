@@ -6,7 +6,7 @@ aliases: ['/docs/dev/how-to/maintain/backup-and-restore/']
 
 # Use Mydumper and TiDB Lightning for Data Backup and Restoration
 
-This document describes how to take full back up and restore the data of TiDB using Mydumper and TiDB Lightning. For incremental backup and restoration, refer to [TiDB Binlog](/reference/tidb-binlog/overview.md).
+This document describes how to perform full backup and restoration of the TiDB data using Mydumper and TiDB Lightning. For incremental backup and restoration, refer to [TiDB Binlog](/reference/tidb-binlog/overview.md).
 
 Suppose that the TiDB service information is as follows:
 
