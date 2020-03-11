@@ -64,7 +64,7 @@ Transaction executions related fields:
 * `Local_latch_wait_time`: The time spent in waiting for lock in TiDB during the second phase (commit) of the two-phase commit in transactions.
 * `Write_keys`: The count of keys that the transaction write to the Write CF in TiKV.
 * `Write_size`: The total size of the keys or values when a transaction commits.
-* `Prewrite_region`: The number of TiKV Regions involved in the first phase (prewrite) of the two-phase commit. Each Region triggers one remote procedure call.
+* `Prewrite_region`: The number of TiKV Regions involved in the first phase (prewrite) of the two-phase transaction commit. Each Region triggers a remote procedure call.
 
 Memory usage fields:
 
