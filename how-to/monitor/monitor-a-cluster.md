@@ -105,11 +105,10 @@ wget https://download.pingcap.org/node_exporter-0.17.0.linux-amd64.tar.gz
 wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
 ```
 
-# Extracts the package.
-
 {{< copyable "shell-regular" >}}
 
 ```bash
+# Extracts the package.
 tar -xzf prometheus-2.8.1.linux-amd64.tar.gz
 tar -xzf node_exporter-0.17.0.linux-amd64.tar.gz
 tar -xzf grafana-6.1.6.linux-amd64.tar.gz

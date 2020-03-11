@@ -440,7 +440,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
     ansible-playbook stop.yml -l 172.16.10.2
     ```
 
-> **Note:**
+    > **Note:**
     >
     > In this case, you can stop the services on node2 with only PD nodes on the `172.16.10.2` server. If there are any other services, (for instance, `TiDB`), use `-t` to specify the service (such as `-t tidb`).
 
@@ -501,7 +501,6 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
     ```
 
 6. Restart the Prometheus, and disable the monitoring of Pd nodes used for increasing the capacity:
-
 
     ```
     ansible-playbook stop.yml --tags=prometheus
