@@ -12,19 +12,19 @@ The `DROP SEQUENCE` statement drops the sequence object in TiDB.
 
 **DropSequenceStmt:**
 
-![DropSequenceStmt](/media/sqlgram/DropSequenceStmt.png)
+![DropSequenceStmt](/media/sqlgram-dev/DropSequenceStmt.png)
 
 **OptTemporary:**
 
-![OptTemporary](/media/sqlgram/OptTemporary.png)
+![OptTemporary](/media/sqlgram-dev/OptTemporary.png)
 
 **IfExists:**
 
-![IfExists](/media/sqlgram/IfExists.png)
+![IfExists](/media/sqlgram-dev/IfExists.png)
 
 **TableNameList:**
 
-![TableNameList](/media/sqlgram/TableNameList.png)
+![TableNameList](/media/sqlgram-dev/TableNameList.png)
 
 ## Examples
 
