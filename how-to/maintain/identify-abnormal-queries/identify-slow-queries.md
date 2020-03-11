@@ -59,7 +59,7 @@ Slow query basics:
 The following fields are related to transaction execution:
 
 * `Prewrite_time`: The duration of the first phase (prewrite) of the two-phase transaction commit.
-* `Commit_time`: The time spent on the second phase (commit) of the two-phase commit in transactions.
+* `Commit_time`: The duration of the second phase (commit) of the two-phase transaction commit.
 * `Get_commit_ts_time`: The time spent on getting `commit_ts` during the second phase (commit) of the two-phase transaction commit.
 * `Local_latch_wait_time`: The time that TiDB spends on waiting for the lock before the second phase (commit) of the two-phase transaction commit.
 * `Write_keys`: The count of keys that the transaction writes to the Write CF in TiKV.
