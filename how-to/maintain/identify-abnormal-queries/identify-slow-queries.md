@@ -56,7 +56,7 @@ Slow query basics:
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 * `Plan`: The execution plan of the statement. Use the `select tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
 
-Transaction executions related fields:
+The following fields are related to transaction execution:
 
 * `Prewrite_time`: The duration of the first phase (prewrite) of the two-phase transaction commit.
 * `Commit_time`: The time spent on the second phase (commit) of the two-phase commit in transactions.
