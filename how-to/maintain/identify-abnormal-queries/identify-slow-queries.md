@@ -46,7 +46,7 @@ Slow query basics:
 * `Time`: The print time of log.
 * `Query_time`: The execution time of a statement.
 * `Parse_time`: The syntax parsing time of a statement.
-* `Compile_time`: The query optimization time of a statement.
+* `Compile_time`: The duration of the query optimization.
 * `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
 * `Digest`: The fingerprint of the SQL statement.
 * `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
