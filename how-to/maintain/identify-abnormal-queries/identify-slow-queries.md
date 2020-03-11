@@ -60,7 +60,7 @@ Transaction executions related fields:
 
 * `Prewrite_time`: The duration of the first phase (prewrite) of the two-phase transaction commit.
 * `Commit_time`: The time spent on the second phase (commit) of the two-phase commit in transactions.
-* `Get_commit_ts_time`: The time consumed for get the `commit_ts` timestamp during the second phase (commit) of the two-phase commit in transactions.
+* `Get_commit_ts_time`: The time spent on getting `commit_ts` during the second phase (commit) of the two-phase transaction commit.
 * `Local_latch_wait_time`: The time spent in waiting for lock in TiDB during the second phase (commit) of the two-phase commit in transactions.
 * `Write_keys`: The count of keys that the transaction write to the Write CF in TiKV.
 * `Write_size`: The total size of the keys or values when a transaction commits.
