@@ -11,7 +11,7 @@ This document describes how to take full back up and restore the data of TiDB us
 Suppose that the TiDB service information is as follows:
 
 |Name|Address|Port|User|Password|
-|----|-------|----|----|--------|
+|:----|:-------|:----|:----|:--------|
 |TiDB|127.0.0.1|4000|root|*|
 
 Use the following tools for data backup and restoration:
