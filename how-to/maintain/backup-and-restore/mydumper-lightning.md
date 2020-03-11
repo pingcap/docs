@@ -29,7 +29,7 @@ Use [Mydumper](/reference/tools/mydumper.md) to export data from TiDB and use [T
 >
 > It is recommended to download [Mydumper](/reference/tools/mydumper.md) from the PingCAP website, because the R&D team has adapted `mydumper` for TiDB. It is not recommended to use `mysqldump` which is much slower for both backup and restoration.
 
-### Best practices for full backup and restoration using `Mydumper`/`TiDB Lightning`
+### Best practices for full backup and restoration using Mydumper/TiDB Lightning
 
 To quickly backup and restore data (especially large amounts of data), refer to the following recommendations:
 
