@@ -200,7 +200,8 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
         > You cannot add the `#` character at the beginning of the line. Otherwise, the following configuration cannot take effect.
 
     2. Add `--join="http://172.16.10.1:2379" \`. The IP address (`172.16.10.1`) can be any of the existing PD IP address in the cluster.
-    3. Manually start the PD service in the newly added PD node:
+
+    3. Start the PD service in the newly added PD node:
 
         ```
         {deploy_dir}/scripts/start_pd.sh
@@ -220,25 +221,34 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
         >
         > `pd-ctl` is a command used to check the number of PD nodes.
 
-5. Apply a rolling update to the entire cluster:
-
-    ```
-    ansible-playbook rolling_update.yml
-    ```
-
-6. Start the monitor service:
+5. Start the monitor service:
 
     ```
     ansible-playbook start.yml -l 172.16.10.103
     ```
 
-7. Update the Prometheus configuration and restart the cluster:
+    > **Note:**
+    >
+    > If you use an alias (inventory_name), use `-l` to specify the alias.
+
+6. Update the cluster configuration:
 
     ```
-    ansible-playbook rolling_update_monitor.yml --tags=prometheus
+    ansible-playbook deploy.yml
+    ```
+
+7. Restart the Prometheus, and enable the monitoring of Pd nodes used for increasing the capacity:
+
+    ```
+    ansible-playbook stop.yml --tags=prometheus
+    ansible-playbook start.yml --tags=prometheus
     ```
 
 8. Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform: `http://172.16.10.3:3000`.
+
+> **Note:**
+>
+> The PD Client in TiKV caches PD node list. The list is updated only if the PD leader is switched or the TiKV is restarted to load the latest configuration. After operations of increasing or decreasing the capacity of a PD node, there should be two existing nodes as the members of the PD cluster before the operations to avoid the stale PD node list. If this condition is not met, perform the PD transfer leader operation manually to update the PD node list.
 
 ## Decrease the capacity of a TiDB node
 
@@ -430,6 +440,10 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
     ansible-playbook stop.yml -l 172.16.10.2
     ```
 
+> **Note:**
+    >
+    > In this case, you can stop the services on node2 with only PD nodes on the `172.16.10.2` server. If there are any other services, (for instance, `TiDB`), use `-t` to specify the service (such as `-t tidb`).
+
 4. Edit the `inventory.ini` file and remove the node information:
 
     ```ini
@@ -480,16 +494,22 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
     | node8 | 172.16.10.8 | TiKV3 |
     | node9 | 172.16.10.9 | TiKV4 |
 
-5. Perform a rolling update to the entire TiDB cluster:
+5. Update the cluster configuration:
 
     ```
-    ansible-playbook rolling_update.yml
+    ansible-playbook deploy.yml
     ```
 
-6. Update the Prometheus configuration and restart the cluster:
+6. Restart the Prometheus, and disable the monitoring of Pd nodes used for increasing the capacity:
+
 
     ```
-    ansible-playbook rolling_update_monitor.yml --tags=prometheus
+    ansible-playbook stop.yml --tags=prometheus
+    ansible-playbook start.yml --tags=prometheus
     ```
 
 7. To monitor the status of the entire cluster, open a browser to access the monitoring platform: `http://172.16.10.3:3000`.
+
+> **Note:**
+>
+> The PD Client in TiKV caches PD node list. The list is updated only if the PD leader is switched or the TiKV is restarted to load the latest configuration. After operations of increasing or decreasing the capacity of a PD node, there should be two existing nodes as the members of the PD cluster before the operations to avoid the stale PD node list. If this condition is not met, perform the PD transfer leader operation manually to update the PD node list.
