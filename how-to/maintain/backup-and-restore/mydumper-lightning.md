@@ -19,7 +19,7 @@ Use the following tools for data backup and restoration:
 - [Mydumper](/reference/tools/mydumper.md): to export data from TiDB
 - [TiDB Lightning](/reference/tools/tidb-lightning/overview.md): to import data into TiDB
 
-## Full backup and restoration using `Mydumper`/`TiDB Lightning`
+## Full backup and restoration using Mydumper/TiDB Lightning
 
 `mydumper` is a powerful data backup tool. For more information, see [`maxbube/mydumper`](https://github.com/maxbube/mydumper).
 
