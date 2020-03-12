@@ -295,6 +295,7 @@
   + Best Practices
     - [Highly Concurrent Write Best Practices](/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/reference/best-practices/haproxy.md)
+    - [Java Application Development Best Practices](/reference/best-practices/java-app.md)
     - [PD Scheduling Best Practices](/reference/best-practices/pd-scheduling.md)
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
@@ -322,7 +323,7 @@
         - [DM Overview](/reference/tools/data-migration/overview.md)
         - [Restrictions](/reference/tools/data-migration/overview.md#usage-restrictions)
         - [DM-worker](/reference/tools/data-migration/dm-worker-intro.md)
-        - [DM Relay Log](/reference/tools/data-migration/dm-worker-intro.md)
+        - [DM Relay Log](/reference/tools/data-migration/relay-log.md)
       + Features
         - [Table Routing](/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
@@ -440,6 +441,7 @@
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
+    - [3.1.0-beta.2](/releases/3.1.0-beta.2.md)
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
