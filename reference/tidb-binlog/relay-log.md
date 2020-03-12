@@ -21,6 +21,9 @@ You can query the downstream checkpoint table as follows:
 
 ```sql
 select * from tidb_binlog.checkpoint;
+```
+
+```
 +---------------------+----------------------------------------------------------------+
 | clusterID           | checkPoint                                                     |
 +---------------------+----------------------------------------------------------------+
