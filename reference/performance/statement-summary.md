@@ -257,7 +257,7 @@ The above two system variables have two scopes - global and session, which work 
 
 The statement summary tables are memory tables. To prevent potential memory issues, we need to limit the number of statements to be saved and the longest SQL display length. You can configure these limits using the following parameters under `[stmt-summary]` of `config.toml`:
 
-- `max-stmt-count` limits the number of SQL categories that can be saved. The default value is 200. If the set limit is exceeded, the most recent SQL statements that remain unused will be removed.
+- `max-stmt-count` limits the number of SQL statements that can be stored. The default value is `200`. If the set limit is exceeded, those SQL statements that recently remain unused will be cleared.
 - `max-sql-length` specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is 4096.
 
 > **Note:**
