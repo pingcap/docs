@@ -9,7 +9,7 @@ category: reference
 To better handle SQL performance related issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.6/en/statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
 
 Starting from v3.0.4, TiDB provides the support for the `events_statements_summary_by_digest`
-table. Starting from v3.0.8, TiDB provides the support for the `events_statements_summary_by_digest_history`. In this document, you will learn about the two tables, and how to troubleshoot SQL performance issues with them.
+table. Starting from v3.0.8, TiDB provides the support for the `events_statements_summary_by_digest_history` table. In this document, you will learn about the two tables, and how to troubleshoot SQL performance issues using these tables.
 
 ## `events_statements_summary_by_digest`
 
