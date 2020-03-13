@@ -75,7 +75,7 @@ The following is a sample output of querying `events_statements_summary_by_diges
 
 > **Note:**
 >
-> In TiDB, the time unit of fields in statement summary tables is nanosecond (ns), whereas in MySQL it is picosecond (ps).
+> In TiDB, the time unit of fields in statement summary tables is nanosecond (ns), whereas in MySQL the time unit is picosecond (ps).
 
 ### Fields description
 
