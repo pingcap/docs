@@ -234,7 +234,7 @@ The statistics in the system table will be cleared if the statement summary feat
 
 Another two system variables controlling the statement summary:
 
-- `tidb_stmt_summary_refresh_interval`: The cycle of clearing `events_statements_summary_by_digest`.The time unit is second (s). The default value is `1800`.
+- `tidb_stmt_summary_refresh_interval`: The interval at which the `events_statements_summary_by_digest` table is refreshed.The time unit is second (s). The default value is `1800`.
 - `tidb_stmt_summary_history_size`: The size of each SQL statement category historically stored in the `events_statements_summary_by_digest_history` table. The default value is `24`.
 
 The following is a configuration example of statement summary:
