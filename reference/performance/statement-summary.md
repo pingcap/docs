@@ -38,7 +38,7 @@ The "plan digest" here refers to the unique identifier calculated through normal
 
 For the immediacy of monitoring metrics, data in the `events_statements_summary_by_digest` table are periodically cleared, only recent aggregated results are retained. The value of the data clearing cycle is set by the system variable `tidb_stmt_summary_refresh_interval`. If you execute the query right after the clearing, data displayed may be very little.
 
-Some concepts in TiDB are different from that in MySQL. For this reason, the schema of the `events_statements_summary_by_digest` table in TiDB differs.
+Some concepts in TiDB are different from those in MySQL. For this reason, the schema of the `events_statements_summary_by_digest` table in TiDB greatly differs from that in MySQL.
 
 The following is a sample output of querying `events_statements_summary_by_digest`:
 
