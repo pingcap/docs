@@ -246,7 +246,7 @@ set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-When the configurations take effect, every 30 minutes the `events_statements_summary_by_digest` is cleared. `events_statements_summary_by_digest_history` holds data produced over the last 12-hour period.
+When the above configuration takes effect, every 30 minutes the `events_statements_summary_by_digest` is cleared. `events_statements_summary_by_digest_history` stores data generated over the recent 12 hours.
 
 The above two system variables have two scopes - global and session, which work a little differently from other system variables, as described below:
 
