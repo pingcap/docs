@@ -84,7 +84,7 @@ Basic fields:
 - `STMT_TYPE`: SQL statement type.
 - `SCHEMA_NAME`: The current schema under which SQL statements of this category are executed.
 - `DIGEST`: The digest of SQL statements of this category.
-- `DIGEST_TEXT`: Normalized SQL statement.
+- `DIGEST_TEXT`: The normalized SQL statement.
 - `QUERY_SAMPLE_TEXT`: One of the original SQL statements where SQL statements of this category appeared.
 - `TABLE_NAMES`: All tables involved in SQL statements. If there is more than one table, each is separated by a comma.
 - `INDEX_NAMES`: All SQL indexes used in SQL statements. If there is more than one index, each is separated by a comma.
