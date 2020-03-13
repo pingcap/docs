@@ -32,7 +32,7 @@ After normalization, they are both of the following category:
 select * from employee where id in (...) and salary between ? and ?;
 ```
 
-The "plan digest" here refers to the unique identifier calculated through normalized execution plan. The normalization process ignores constants. The same SQL statements may be grouped into different categories since same statements can result with different execution plans. SQL statements under the same category have the same execution plan.
+The "plan digest" here refers to the unique identifier calculated through normalized execution plan. The normalization process ignores constants. The same SQL statements might be grouped into different categories because the same statements might have different execution plans. SQL statements of the same category have the same execution plan.
 
 `events_statements_summary_by_digest` is used to save the aggregated results of SQL monitoring metrics. In general, each of the monitoring metrics involves the maximum and average value. For example, the execution latency metric involves two fields: `AVG_LATENCY` (average latency) and `MAX_LATENCY` (maximum latency).
 
