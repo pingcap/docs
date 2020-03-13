@@ -262,7 +262,7 @@ The statement summary tables are memory tables. To prevent potential memory issu
 
 > **Note:**
 >
-> The configurations of parameters such as `tidb_stmt_summary_history_size`, `max-stmt-count`, and `max-sql-length` affect memory usage. It is suggested that you adjust the configurations based on your actual scenarios. Setting them to too large values is not recommended.
+> The `tidb_stmt_summary_history_size`, `max-stmt-count`, and `max-sql-length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your actual needs. It is not recommended to set them too large values.
 
 ## Known limitations
 
