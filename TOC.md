@@ -308,6 +308,7 @@
     - [Upgrade](/reference/tidb-binlog/upgrade.md)
     - [Reparo](/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/reference/tidb-binlog/binlog-slave-client.md)
+    - [TiDB Binlog Relay Log](/reference/tidb-binlog/relay-log.md)
     - [Glossary](/reference/tidb-binlog/glossary.md)
     + Troubleshoot
       - [Troubleshooting](/reference/tidb-binlog/troubleshoot/binlog.md)
@@ -362,6 +363,7 @@
         + v1.0
           - [1.0.2](/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/reference/tools/data-migration/releases/1.0.3.md)
+          - [1.0.4](/reference/tools/data-migration/releases/1.0.4.md)
       - [TiDB DM Glossary](/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/reference/tools/tidb-lightning/overview.md)
