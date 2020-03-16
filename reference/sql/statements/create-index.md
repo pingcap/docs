@@ -103,7 +103,7 @@ CREATE INDEX idx ON t ((lower(name)));
 
 The cost of maintaining an expression index is higher than that of maintaining other indexes, because the value of the expression needs to be calculated whenever a row is inserted or updated. The value of the expression is already stored in the index, so this value does not require recalculation when the optimizer selects the expression index.
 
-Therefore, when the query speed outweighs the insert and update speed, you can consider indexing the expressions.
+Therefore, when the query performance outweighs the insert and update performance, you can consider indexing the expressions.
 
 Expression indexes have the same syntax and limitations as in MySQL. They are implemented by building indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/reference/sql/generated-columns.md#limitations).
 
