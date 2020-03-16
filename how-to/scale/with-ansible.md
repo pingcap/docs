@@ -34,43 +34,43 @@ For example, if you want to add two TiDB nodes (node101, node102) with the IP ad
 
     - Edit the `inventory.ini` file:
 
-    ```ini
-    [tidb_servers]
-    172.16.10.4
-    172.16.10.5
-    172.16.10.101
-    172.16.10.102
+        ```ini
+        [tidb_servers]
+        172.16.10.4
+        172.16.10.5
+        172.16.10.101
+        172.16.10.102
 
-    [pd_servers]
-    172.16.10.1
-    172.16.10.2
-    172.16.10.3
+        [pd_servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.3
 
-    [tikv_servers]
-    172.16.10.6
-    172.16.10.7
-    172.16.10.8
-    172.16.10.9
+        [tikv_servers]
+        172.16.10.6
+        172.16.10.7
+        172.16.10.8
+        172.16.10.9
 
-    [monitored_servers]
-    172.16.10.1
-    172.16.10.2
-    172.16.10.3
-    172.16.10.4
-    172.16.10.5
-    172.16.10.6
-    172.16.10.7
-    172.16.10.8
-    172.16.10.9
-    172.16.10.101
-    172.16.10.102
+        [monitored_servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.3
+        172.16.10.4
+        172.16.10.5
+        172.16.10.6
+        172.16.10.7
+        172.16.10.8
+        172.16.10.9
+        172.16.10.101
+        172.16.10.102
 
-    [monitoring_servers]
-    172.16.10.3
+        [monitoring_servers]
+        172.16.10.3
 
-    [grafana_servers]
-    172.16.10.3
-    ```
+        [grafana_servers]
+        172.16.10.3
+        ```
 
     Now the topology is as follows:
 
@@ -90,23 +90,23 @@ For example, if you want to add two TiDB nodes (node101, node102) with the IP ad
 
     - Edit the `hosts.ini` file:
 
-    ```ini
-    [servers]
-    172.16.10.1
-    172.16.10.2
-    172.16.10.3
-    172.16.10.4
-    172.16.10.5
-    172.16.10.6
-    172.16.10.7
-    172.16.10.8
-    172.16.10.9
-    172.16.10.101
-    172.16.10.102
-    [all:vars]
-    username = tidb
-    ntp_server = pool.ntp.org
-    ```
+        ```ini
+        [servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.3
+        172.16.10.4
+        172.16.10.5
+        172.16.10.6
+        172.16.10.7
+        172.16.10.8
+        172.16.10.9
+        172.16.10.101
+        172.16.10.102
+        [all:vars]
+        username = tidb
+        ntp_server = pool.ntp.org
+        ```
 
 2. Initialize the newly added node:
 
