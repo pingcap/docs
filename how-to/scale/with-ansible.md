@@ -237,7 +237,7 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
     ansible-playbook deploy.yml
     ```
 
-7. Restart the Prometheus, and enable the monitoring of Pd nodes used for increasing the capacity:
+7. Restart Prometheus, and enable the monitoring of PD nodes used for increasing the capacity:
 
     ```
     ansible-playbook stop.yml --tags=prometheus
