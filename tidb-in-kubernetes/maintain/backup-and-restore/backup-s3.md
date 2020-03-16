@@ -141,13 +141,13 @@ After creating the `Backup` CR, use the following command to check the backup st
  kubectl get bk -n test1 -owide
  ```
 
-More `Backup` CRs are as described follows:
+More `Backup` CR configurations are as described follows:
 
 * `.spec.metadata.namespace`: the namespace where the `Backup` CR is located.
 * `.spec.from.host`: the address of the TiDB cluster to be backed up.
 * `.spec.from.port`: the port of the TiDB cluster to be backed up.
 * `.spec.from.user`: the accessing user of the TiDB cluster to be backed up.
-* `.spec.from.tidbSecretName`: the secrete of the credential needed by the TiDB cluster to be backed up.
+* `.spec.from.tidbSecretName`: the secret of the credential needed by the TiDB cluster to be backed up.
 * `.spec.storageClassName`: the persistent volume (PV) type specified for the backup operation. If this item is not specified, the value of the `default-backup-storage-class-name` parameter (`standard` by default, specified when TiDB Operator is started) is used by default.
 * `.spec.storageSize`: the PV size specified for the backup operation. This value must be greater than size of the TiDB cluster to be backed up.
 
