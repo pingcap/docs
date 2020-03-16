@@ -82,7 +82,7 @@ TiKV Coprocessor Task fields:
 * `Cop_backoff_{backoff-type}_total_times`: The total times of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_total_time`: The total time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_max_time`: The longest time of backoff caused by an error.
-* `Cop_backoff_{backoff-type}_max_addr`: The cop-task address of the longest time of backoff caused by an error.
+* `Cop_backoff_{backoff-type}_max_addr`: The address of the cop-task that has the longest backoff time caused by an error.
 * `Cop_backoff_{backoff-type}_avg_time`: The average time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_p90_time`: The P90 percentile backoff time caused by an error.
 
