@@ -272,7 +272,7 @@ This section describes how to configure Grafana.
 
     > **Note:**
     >
-    > For the **Change Password** step, choose **Skip**.
+    > For the **Change Password** step, you can choose **Skip**.
 
 2. In the Grafana sidebar menu, click **Data Source** within the **Configuration**.
 
