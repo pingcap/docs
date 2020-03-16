@@ -500,7 +500,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
     ansible-playbook deploy.yml
     ```
 
-6. Restart the Prometheus, and disable the monitoring of Pd nodes used for increasing the capacity:
+6. Restart Prometheus, and disable the monitoring of PD nodes used for increasing the capacity:
 
     ```
     ansible-playbook stop.yml --tags=prometheus
