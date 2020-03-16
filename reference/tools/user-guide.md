@@ -33,7 +33,7 @@ The following are the basics of TiDB Lightning:
 
 - Input:
     - Files output by Mydumper;
-    - CSV-formatted files.
+    - CSV files.
 - Applicable version of TiDB: v2.1 and later versions.
 - Kubernetes: Supported. See [Quick restore data into a TiDB cluster in Kubernetes using TiDB Lightning](/tidb-in-kubernetes/maintain/lightning.md).
 
