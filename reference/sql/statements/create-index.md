@@ -105,7 +105,7 @@ The cost of maintaining an expression index is higher than that of other indexes
 
 Therefore, when the query speed outweighs the insert and update speed, you can consider indexing the expressions.
 
-Expression indexes have the same syntax and limitations as in MySQL. They are implemented by building indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](reference/sql/generated-columns.md#Limitations).
+Expression indexes have the same syntax and limitations as in MySQL. They are implemented by building indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/reference/sql/generated-columns.md#Limitations).
 
 Currently, the optimizer can only use the indexed expressions when the expressions are in the `FIELD` clause, `WHERE` clause, and `ORDER BY` clause. The `GROUP BY` clause will be supported in the future updates.
 
