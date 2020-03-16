@@ -2,6 +2,7 @@
 title: Use BR to Back up and Restore Data
 summary: Learn how to back up and restore data of the TiDB cluster using BR.
 category: how-to
+aliases: ['/docs/dev/how-to/maintain/backup-and-restore/br/']
 ---
 
 # Use BR to Back up and Restore Data
@@ -153,7 +154,7 @@ Each of the above three sub-commands might still include the following three sub
 
 To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
 
-If the backup time might exceed the [`tikv_gc_life_time`](/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default, increase the value of this configuration.
+If the backup time might exceed the [`tikv_gc_life_time`](/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration.
 
 For example, set `tikv_gc_life_time` to `720h`:
 
