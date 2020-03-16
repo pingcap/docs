@@ -221,7 +221,7 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
         >
         > `pd-ctl` is a command used to check the number of PD nodes.
 
-5. Start the monitor service:
+5. Start the monitoring service:
 
     ```
     ansible-playbook start.yml -l 172.16.10.103
