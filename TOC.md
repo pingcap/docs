@@ -85,7 +85,8 @@
     - [Common Ansible Operations](/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
       - [Use `mydumper` and `loader`](/how-to/maintain/backup-and-restore/mydumper-loader.md)
-      - [Use BR](/how-to/maintain/backup-and-restore/br.md)
+      - [Use BR](/reference/tools/br/br.md)
+      - [BR Usage Scenarios](/reference/tools/br/use-cases.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
       - [Identify Expensive Queries](/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
@@ -107,6 +108,8 @@
       - [User-Defined Variables](/reference/sql/language-structure/user-defined-variables.md)
       - [Expression Syntax](/reference/sql/language-structure/expression-syntax.md)
       - [Comment Syntax](/reference/sql/language-structure/comment-syntax.md)
+    + Attributes
+      - [`AUTO_RANDOM`](/reference/sql/attributes/auto-random.md)
     + Data Types
       - [Overview](/reference/sql/data-types/overview.md)
       - [Default Values](/reference/sql/data-types/default-values.md)
@@ -292,6 +295,7 @@
   + Best Practices
     - [Highly Concurrent Write Best Practices](/reference/best-practices/high-concurrency.md)
     - [HAProxy Best Practices](/reference/best-practices/haproxy.md)
+    - [Java Application Development Best Practices](/reference/best-practices/java-app.md)
     - [PD Scheduling Best Practices](/reference/best-practices/pd-scheduling.md)
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
@@ -304,6 +308,7 @@
     - [Upgrade](/reference/tidb-binlog/upgrade.md)
     - [Reparo](/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/reference/tidb-binlog/binlog-slave-client.md)
+    - [TiDB Binlog Relay Log](/reference/tidb-binlog/relay-log.md)
     - [Glossary](/reference/tidb-binlog/glossary.md)
     + Troubleshoot
       - [Troubleshooting](/reference/tidb-binlog/troubleshoot/binlog.md)
@@ -318,7 +323,7 @@
         - [DM Overview](/reference/tools/data-migration/overview.md)
         - [Restrictions](/reference/tools/data-migration/overview.md#usage-restrictions)
         - [DM-worker](/reference/tools/data-migration/dm-worker-intro.md)
-        - [DM Relay Log](/reference/tools/data-migration/dm-worker-intro.md)
+        - [DM Relay Log](/reference/tools/data-migration/relay-log.md)
       + Features
         - [Table Routing](/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
@@ -358,6 +363,7 @@
         + v1.0
           - [1.0.2](/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/reference/tools/data-migration/releases/1.0.3.md)
+          - [1.0.4](/reference/tools/data-migration/releases/1.0.4.md)
       - [TiDB DM Glossary](/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/reference/tools/tidb-lightning/overview.md)
@@ -403,6 +409,7 @@
     - [Collect Logs](/tidb-in-kubernetes/maintain/log-collecting.md)
     - [Automatic Failover](/tidb-in-kubernetes/maintain/auto-failover.md)
     - [TiDB Binlog](/tidb-in-kubernetes/maintain/tidb-binlog.md)
+    - [Restart a TiDB Cluster](/tidb-in-kubernetes/maintain/restart.md)
   - [Scale](/tidb-in-kubernetes/scale-in-kubernetes.md)
   + Upgrade
     - [TiDB Cluster](/tidb-in-kubernetes/upgrade/tidb-cluster.md)
@@ -432,11 +439,14 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+    - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
+    - [3.1.0-beta.2](/releases/3.1.0-beta.2.md)
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)
     - [3.0.9](/releases/3.0.9.md)
     - [3.0.8](/releases/3.0.8.md)
