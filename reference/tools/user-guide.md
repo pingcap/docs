@@ -43,7 +43,7 @@ The following are the basics of TiDB Lightning:
 
 The following are the basics of BR:
 
-- [Types of backup files](/how-to/maintain/backup-and-restore/br.md#types-of-backup-files): The SST file and the `backupmeta` file.
+- [Types of backup files](/reference/tools/br.md#types-of-backup-files): The SST file and the `backupmeta` file.
 - Compatibility: Compatible with TiDB v3.1 and v4.0 versions.
 - Kubernetes: Supported. Relevant documents are on the way.
 
