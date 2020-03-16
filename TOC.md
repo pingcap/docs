@@ -431,6 +431,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v3.0
+    - [3.0.12](/releases/3.0.12.md)
     - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)
     - [3.0.9](/releases/3.0.9.md)
