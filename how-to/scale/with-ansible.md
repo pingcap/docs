@@ -248,7 +248,7 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
 
 > **Note:**
 >
-> The PD Client in TiKV caches PD node list. The list is updated only if the PD leader is switched or the TiKV is restarted to load the latest configuration. After operations of increasing or decreasing the capacity of a PD node, there should be two existing nodes as the members of the PD cluster before the operations to avoid the stale PD node list. If this condition is not met, perform the PD transfer leader operation manually to update the PD node list.
+> The PD Client in TiKV caches the list of PD nodes. Currently, the list is updated only if the PD leader is switched or the TiKV server is restarted to load the latest configuration. To avoid TiKV caching an outdated list, there should be at least two existing PD members in the PD cluster after increasing or decreasing the capacity of a PD node. If this condition is not met, transfer the PD leader manually to update the list of PD nodes.
 
 ## Decrease the capacity of a TiDB node
 
