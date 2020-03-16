@@ -138,7 +138,7 @@ For v2.1, v3.0 and v3.1 of TiDB, the following introduces data migration solutio
 
 #### Migrating MySQL data to TiDB
 
-If the volume is more than TBs of data, the recommended migration solution is:
+If the volume is more than TBs of data, the recommended migration steps are:
 
 1. Export full MySQL data using Mydumper;
 2. Import full backup data into a TiDB cluster using TiDB Lightning;
