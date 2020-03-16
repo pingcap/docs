@@ -30,7 +30,9 @@ Assume that the topology is as follows:
 
 For example, if you want to add two TiDB nodes (node101, node102) with the IP addresses `172.16.10.101` and `172.16.10.102`, take the following steps:
 
-1. Edit the `inventory.ini` file and append the node information:
+1. Edit the `inventory.ini` file and the `hosts.ini` file, and append the node information:
+
+    - Edit the `inventory.ini` file:
 
     ```ini
     [tidb_servers]
@@ -86,11 +88,51 @@ For example, if you want to add two TiDB nodes (node101, node102) with the IP ad
     | node8 | 172.16.10.8 | TiKV3 |
     | node9 | 172.16.10.9 | TiKV4 |
 
+    - Edit the `hosts.ini` file:
+
+    ```ini
+    [servers]
+    172.16.10.1
+    172.16.10.2
+    172.16.10.3
+    172.16.10.4
+    172.16.10.5
+    172.16.10.6
+    172.16.10.7
+    172.16.10.8
+    172.16.10.9
+    172.16.10.101
+    172.16.10.102
+    [all:vars]
+    username = tidb
+    ntp_server = pool.ntp.org
+    ```
+
 2. Initialize the newly added node:
 
-    ```
-    ansible-playbook bootstrap.yml -l 172.16.10.101,172.16.10.102
-    ```
+    1. Configure the SSH mutual trust and sudo rules of the deployment machine on the central control machine:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        ansible-playbook -i hosts.ini create_users.yml -l 172.16.10.101,172.16.10.102 -u root -k
+        ```
+
+    2. Install the NTP service on the deployment target machine:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        ansible-playbook -i hosts.ini deploy_ntp.yml -u tidb -b
+        ```
+
+    3. Initialize the node on the deployment target machine:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        ansible-playbook bootstrap.yml -l 172.16.10.101,172.16.10.102
+        ```
 
     > **Note:**
     >
