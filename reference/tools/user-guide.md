@@ -27,7 +27,7 @@ The two types of tools are discussed in some details below.
 > When you import data into TiDB using TiDB Lightning, there are two modes:
 >
 > - The default mode: Use `tikv-importer` as the backend. In this mode, the cluster can not provide normal services during the data import process. It is used when you import large amounts (TBs) of data.
-> - The second mode: Use `TiDB` as the backend (similar to Loader). The  import speed is slower than that of the default mode. However, the second mode supports online import.
+> - The second mode: Use `TiDB` as the backend (similar to Loader). The import speed is slower than that in the default mode. However, the second mode supports online import.
 
 The following are the basics of TiDB Lightning:
 
