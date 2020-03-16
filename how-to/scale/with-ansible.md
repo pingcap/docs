@@ -229,7 +229,7 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
 
     > **Note:**
     >
-    > If you use an alias (inventory_name), use `-l` to specify the alias.
+    > If you use an alias (inventory_name), use the `-l` option to specify the alias.
 
 6. Update the cluster configuration:
 
