@@ -5,7 +5,7 @@ category: reference
 
 # TiDB Ecosystem Tools User Guide
 
-Currently TiDB contains multiple ecosystem tools. Some of these have overlapping functionality, and some are different versions of same tools. This document gives introductions of each tools, illustrates the relationships between the tools, and describes the applicable tools specified for each scenarios and each TiDB versions.
+Currently, TiDB has multiple ecosystem tools. Some of them have overlapping functionality, and some are different versions of the same tool. This document introduces each of these tools, illustrates their relationship, and describes when to use which tool for each TiDB version.
 
 ## TiDB ecosystem tools overview
 
