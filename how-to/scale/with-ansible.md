@@ -442,7 +442,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
 
     > **Note:**
     >
-    > In this case, you can stop the services on node2 with only PD nodes on the `172.16.10.2` server. If there are any other services, (for instance, `TiDB`), use `-t` to specify the service (such as `-t tidb`).
+    > In this example, you can only stop the PD service on node2. If there are any other services deployed with the IP address `172.16.10.2`, use the `-t` option to specify the service (such as `-t tidb`).
 
 4. Edit the `inventory.ini` file and remove the node information:
 
