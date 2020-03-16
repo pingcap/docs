@@ -36,7 +36,7 @@ The "plan digest" here refers to the unique identifier calculated through normal
 
 `events_statements_summary_by_digest` stores the aggregated results of SQL monitoring metrics. In general, each of the monitoring metrics includes the maximum value and average value. For example, the execution latency metric corresponds to two fields: `AVG_LATENCY` (average latency) and `MAX_LATENCY` (maximum latency).
 
-For the immediacy of monitoring metrics, data in the `events_statements_summary_by_digest` table are periodically cleared, only recent aggregated results are retained. The value of the data clearing cycle is set by the system variable `tidb_stmt_summary_refresh_interval`. If you execute the query right after the clearing, data displayed may be very little.
+To make sure that the monitoring metrics are up to date, data in the `events_statements_summary_by_digest` table is periodically cleared, and only recent aggregated results are retained and displayed. The periodical data clearing is controlled by the `tidb_stmt_summary_refresh_interval` system variable. If you happen to make a query right after the clearing, the data displayed might be very little.
 
 Some concepts in TiDB are different from those in MySQL. For this reason, the schema of the `events_statements_summary_by_digest` table in TiDB greatly differs from that in MySQL.
 
@@ -82,89 +82,89 @@ The following is a sample output of querying `events_statements_summary_by_diges
 Basic fields:
 
 - `STMT_TYPE`: SQL statement type.
-- `SCHEMA_NAME`: The current schema under which SQL statements of this category are executed.
+- `SCHEMA_NAME`: The current schema in which SQL statements of this category are executed.
 - `DIGEST`: The digest of SQL statements of this category.
 - `DIGEST_TEXT`: The normalized SQL statement.
-- `QUERY_SAMPLE_TEXT`: One of the original SQL statements where SQL statements of this category appeared.
+- `QUERY_SAMPLE_TEXT`: The original SQL statements of the SQL category. Only one original statement is taken.
 - `TABLE_NAMES`: All tables involved in SQL statements. If there is more than one table, each is separated by a comma.
 - `INDEX_NAMES`: All SQL indexes used in SQL statements. If there is more than one index, each is separated by a comma.
-- `SAMPLE_USER`: One of the users who execute SQL statements of this category.
-- `PLAN_DIGEST`: Digest of the execution plan.
-- `PLAN`: The original execution plan. If there is more than one statement, display only the execution plan of one statement.
+- `SAMPLE_USER`: The users who execute SQL statements of this category. Only one user is taken.
+- `PLAN_DIGEST`: The digest of the execution plan.
+- `PLAN`: The original execution plan. If there are multiple statements, the plan of only one statement is taken.
 
-Execution time related fields:
+Fields related to execution time:
 
-- `SUMMARY_BEGIN_TIME`: The begin time of the current statistical period.
-- `SUMMARY_END_TIME`: The end time of the current statistical period.
+- `SUMMARY_BEGIN_TIME`: The beginning time of the current summary period.
+- `SUMMARY_END_TIME`: The ending time of the current summary period.
 - `FIRST_SEEN`: The time when SQL statements of this category are seen for the first time.
 - `LAST_SEEN`: The time when SQL statements of this category are seen for the last time.
 
-TiDB server related fields:
+Fields related to TiDB server:
 
 - `EXEC_COUNT`: Total execution times of SQL statements of this category.
-- `SUM_LATENCY`: Total execution latency of SQL statements of this category.
-- `MAX_LATENCY`: Maximum latency of SQL statements of this category.
-- `MIN_LATENCY`: Minimum latency of SQL statements of this category.
-- `AVG_LATENCY`: Average latency of SQL statements of this category.
-- `AVG_PARSE_LATENCY`: Average latency of the parser.
-- `MAX_PARSE_LATENCY`: Maximum latency of the parser.
-- `AVG_COMPILE_LATENCY`: Average latency of the compiler.
-- `MAX_COMPILE_LATENCY`: Maximum latency of the compiler.
-- `AVG_MEM`: Average memory (byte) used.
-- `MAX_MEM`: Maximum memory (byte) used.
+- `SUM_LATENCY`: The total execution latency of SQL statements of this category.
+- `MAX_LATENCY`: The maximum execution latency of SQL statements of this category.
+- `MIN_LATENCY`: The minimum execution latency of SQL statements of this category.
+- `AVG_LATENCY`: The average execution latency of SQL statements of this category.
+- `AVG_PARSE_LATENCY`: The average latency of the parser.
+- `MAX_PARSE_LATENCY`: The maximum latency of the parser.
+- `AVG_COMPILE_LATENCY`: The average latency of the compiler.
+- `MAX_COMPILE_LATENCY`: The maximum latency of the compiler.
+- `AVG_MEM`: The average memory (byte) used.
+- `MAX_MEM`: The maximum memory (byte) used.
 
-TiKV Coprocessor task related fields:
+Fields related to TiKV Coprocessor task:
 
 - `COP_TASK_NUM`: The number of Coprocessor requests that a SQL statement sends.
 - `AVG_COP_PROCESS_TIME`: The average execution time of Coprocessor tasks.
 - `MAX_COP_PROCESS_TIME`: The maximum execution time of Coprocessor tasks.
-- `MAX_COP_PROCESS_ADDRESS`: The address of the Coprocessor task with the longest execution time.
+- `MAX_COP_PROCESS_ADDRESS`: The address of the Coprocessor task with the maximum execution time.
 - `AVG_COP_WAIT_TIME`: The average waiting time of Coprocessor tasks.
 - `MAX_COP_WAIT_TIME`: The maximum waiting time of Coprocessor tasks.
-- `MAX_COP_WAIT_ADDRESS`: The address of the Coprocessor task with the longest waiting time.
+- `MAX_COP_WAIT_ADDRESS`: The address of the Coprocessor task with the maximum waiting time.
 - `AVG_PROCESS_TIME`: The average processing time of SQL statements in TiKV.
 - `MAX_PROCESS_TIME`: The maximum processing time of SQL statements in TiKV.
 - `AVG_WAIT_TIME`: The average waiting time of SQL statements in TiKV.
 - `MAX_WAIT_TIME`: The maximum waiting time of SQL statements in TiKV.
-- `AVG_BACKOFF_TIME`: The average waiting time before retry when a SQL statement encounters errors that require a retry.
-- `MAX_BACKOFF_TIME`: The maximum waiting time before retry when a SQL statement encounters errors that require a retry.
+- `AVG_BACKOFF_TIME`: The average waiting time before retry when a SQL statement encounters an error that requires a retry.
+- `MAX_BACKOFF_TIME`: The maximum waiting time before retry when a SQL statement encounters an error that requires a retry.
 - `AVG_TOTAL_KEYS`: The average number of keys that Coprocessor has scanned.
 - `MAX_TOTAL_KEYS`: The maximum number of keys that Coprocessor has scanned.
 - `AVG_PROCESSED_KEYS`: The average number of keys that Coprocessor has processed. Compared with `avg_total_keys`, `avg_processed_keys` does not include the old versions of MVCC. A great difference between `avg_total_keys` and `avg_processed_keys` indicates that many old versions exist.
 - `MAX_PROCESSED_KEYS`: The maximum number of keys that Coprocessor has processed.
 
-Transaction related fields:
+Transaction-related fields:
 
-- `AVG_PREWRITE_TIME`: The average time consumed during the prewrite phase.
-- `MAX_PREWRITE_TIME`: The maximum time consumed during the prewrite phase.
-- `AVG_COMMIT_TIME`: The average time consumed during the commit phase.
-- `MAX_COMMIT_TIME`: The maximum time consumed during the commit phase.
-- `AVG_GET_COMMIT_TS_TIME`: The average time consumed to get `commit_ts`.
-- `MAX_GET_COMMIT_TS_TIME`: The maximum time consumed to get `commit_ts`.
-- `AVG_COMMIT_BACKOFF_TIME`: The average waiting time before retry over commit when a SQL statement encounters errors that require a retry.
-- `MAX_COMMIT_BACKOFF_TIME`: The maximum waiting time before retry over commit when a SQL statement encounters errors that require a retry.
-- `AVG_RESOLVE_LOCK_TIME`: The average time consumed to solve locking conflicts occurred between transactions.
-- `MAX_RESOLVE_LOCK_TIME`: The maximum time consumed to solve locking conflicts occurred between transactions.
+- `AVG_PREWRITE_TIME`: The average time of the prewrite phase.
+- `MAX_PREWRITE_TIME`: The longest time of the prewrite phase.
+- `AVG_COMMIT_TIME`: The average time of the commit phase.
+- `MAX_COMMIT_TIME`: the longest time of the commit phase.
+- `AVG_GET_COMMIT_TS_TIME`: The average time of getting `commit_ts`.
+- `MAX_GET_COMMIT_TS_TIME`: the longest time of getting `commit_ts`.
+- `AVG_COMMIT_BACKOFF_TIME`: The average waiting time before retry when a SQL statement encounters an error that requires a retry during the commit phase.
+- `MAX_COMMIT_BACKOFF_TIME`: The maximum waiting time before retry when a SQL statement encounters an error that requires a retry during the commit phase.
+- `AVG_RESOLVE_LOCK_TIME`: The average time for resolving lock conflicts occurred between transactions.
+- `MAX_RESOLVE_LOCK_TIME`: the longest time for resolving lock conflicts occurred between transactions.
 - `AVG_LOCAL_LATCH_WAIT_TIME`: The average waiting time of the local transaction.
 - `MAX_LOCAL_LATCH_WAIT_TIME`: The maximum waiting time of the local transaction.
-- `AVG_WRITE_KEYS`: The average count of keys written.
-- `MAX_WRITE_KEYS`: The maximum count of keys written.
+- `AVG_WRITE_KEYS`: The average count of written keys.
+- `MAX_WRITE_KEYS`: The maximum count of written keys..
 - `AVG_WRITE_SIZE`: The average amount of data (byte) written.
 - `MAX_WRITE_SIZE`: The maximum amount of data (byte) written.
-- `AVG_PREWRITE_REGIONS`: The average number of Regions during the prewrite phase.
+- `AVG_PREWRITE_REGIONS`: The average number of Regions involved in the prewrite phase.
 - `MAX_PREWRITE_REGIONS`: The maximum number of Regions during the prewrite phase.
-- `AVG_TXN_RETRY`: The average number of retries of transactions.
+- `AVG_TXN_RETRY`: The average number of transaction retries.
 - `MAX_TXN_RETRY`: The maximum number of retries of transactions.
 - `SUM_BACKOFF_TIMES`: The sum of retries when SQL statements of this category encounter errors that require a retry.
 - `BACKOFF_TYPES`: All types of errors that require retries and the number of retries for each type. The format of the field is: `type:number`. If there is more than one error type, each is separated by a comma, like `txnLock:2,pdRPC:1`.
 - `AVG_AFFECTED_ROWS`: The average number of rows affected.
-- `PREV_SAMPLE_TEXT`:  When the current SQL statement is `commit`, `PREV_SAMPLE_TEXT` is the previous statement. In this case, SQL statements are grouped by the digest and `prev_sample_text`. This means that `COMMIT` statements with different `prev_sample_text` belong to different rows. Otherwise the `PREV_SAMPLE_TEXT` field is an empty string.
+- `PREV_SAMPLE_TEXT`:  When the current SQL statement is `COMMIT`, `PREV_SAMPLE_TEXT` is the previous statement to `COMMIT`. In this case, SQL statements are grouped by the digest and `prev_sample_text`. This means that `COMMIT` statements with different `prev_sample_text` are grouped to different rows. When the current SQL statement is not `COMMIT`, the `PREV_SAMPLE_TEXT` field is an empty string.
 
 ## `events_statements_summary_by_digest_history`
 
-The schema of the `events_statements_summary_by_digest_history` table is identical to that of the `events_statements_summary_by_digest` table. `events_statements_summary_by_digest_history` contains the historical data used to troubleshoot exceptions occurred and compare monitoring metrics of different times.
+The schema of the `events_statements_summary_by_digest_history` table is identical to that of the `events_statements_summary_by_digest` table. `events_statements_summary_by_digest_history` stores the historical data used to troubleshoot anomalies or to compare monitoring metrics of different time.
 
-The `SUMMARY_BEGIN_TIME` field and the `SUMMARY_END_TIME` refer to the begin historical time and the end historical time.
+The `SUMMARY_BEGIN_TIME` field and the `SUMMARY_END_TIME` field refer to the beginning time and the ending time of a historical period.
 
 ## Troubleshooting examples
 
@@ -196,7 +196,7 @@ As shown in the result below, `avg_latency` of 1ms and 0.3ms are in the normal r
 
 ### Which categories of SQL statements consume the longest total time?
 
-If the QPS (queries/sec) decreases significantly from 10:00 A.M. to 10:30 A.M., you can find out the 3 categories of SQL statements with the longest time consumption from the history table:
+If the QPS (queries/sec) decrease significantly from 10:00 A.M. to 10:30 A.M., you can find out the three categories of SQL statements with the longest time consumption from the history table:
 
 {{< copyable "sql" >}}
 
@@ -232,7 +232,7 @@ set global tidb_enable_stmt_summary = true;
 
 The statistics in the system table will be cleared if the statement summary feature is disabled, and will be re-calculated next time the statement summary feature is enabled. Tests have shown that enabling this feature has little impact on performance.
 
-Another two system variables controlling the statement summary:
+Another two system variables that control the statement summary:
 
 - `tidb_stmt_summary_refresh_interval`: The interval at which the `events_statements_summary_by_digest` table is refreshed.The time unit is second (s). The default value is `1800`.
 - `tidb_stmt_summary_history_size`: The size of each SQL statement category historically stored in the `events_statements_summary_by_digest_history` table. The default value is `24`.
