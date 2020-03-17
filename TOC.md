@@ -75,7 +75,7 @@
     - [Overview](/how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](/how-to/monitor/monitor-a-cluster.md)
   + Migrate
-    - [Migration Tools Guide](/reference/tools/user-guide.md)
+    - [Migration Tools User Guide](/reference/tools/user-guide.md)
     + Migrate from MySQL
       - [Migration Case of Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
     - [Migrate from CSV](/reference/tools/tidb-lightning/csv.md)
