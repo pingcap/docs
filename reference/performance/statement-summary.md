@@ -269,4 +269,4 @@ The statement summary tables are memory tables. To prevent potential memory issu
 The Statement summary tables have some known limitations:
 
 - Querying statement summary tables only returns the statement summary of the current TiDB server, not that of the entire cluster.
-- The statement summary will be lost when the TiDB server restarts. This is because statement summary tables are memory tables, and the data is cached in memory instead of persisted on storage.
+- The statement summary will be lost when the TiDB server restarts. This is because statement summary tables are memory tables, and the data is cached in memory instead of being persisted on storage.
