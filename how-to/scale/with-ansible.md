@@ -108,7 +108,7 @@ For example, if you want to add two TiDB nodes (node101, node102) with the IP ad
         ntp_server = pool.ntp.org
         ```
 
-2. Initialize the newly added node:
+2. Initialize the newly added node.
 
     1. Configure the SSH mutual trust and sudo rules of the deployment machine on the central control machine:
 
