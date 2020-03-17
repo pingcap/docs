@@ -30,7 +30,7 @@ Assume that the topology is as follows:
 
 For example, if you want to add two TiDB nodes (node101, node102) with the IP addresses `172.16.10.101` and `172.16.10.102`, take the following steps:
 
-1. Edit the `inventory.ini` file and the `hosts.ini` file, and append the node information:
+1. Edit the `inventory.ini` file and the `hosts.ini` file, and append the node information.
 
     - Edit the `inventory.ini` file:
 
