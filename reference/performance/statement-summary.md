@@ -140,7 +140,7 @@ Transaction-related fields:
 - `AVG_COMMIT_TIME`: The average time of the commit phase.
 - `MAX_COMMIT_TIME`: the longest time of the commit phase.
 - `AVG_GET_COMMIT_TS_TIME`: The average time of getting `commit_ts`.
-- `MAX_GET_COMMIT_TS_TIME`: the longest time of getting `commit_ts`.
+- `MAX_GET_COMMIT_TS_TIME`: The longest time of getting `commit_ts`.
 - `AVG_COMMIT_BACKOFF_TIME`: The average waiting time before retry when a SQL statement encounters an error that requires a retry during the commit phase.
 - `MAX_COMMIT_BACKOFF_TIME`: The maximum waiting time before retry when a SQL statement encounters an error that requires a retry during the commit phase.
 - `AVG_RESOLVE_LOCK_TIME`: The average time for resolving lock conflicts occurred between transactions.
