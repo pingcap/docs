@@ -107,25 +107,110 @@ Assume that the TiDB cluster topology is as follows:
 
 #### Step 1: Download the binary package
 
+<<<<<<< HEAD
 1. Download the package.
+=======
+{{< copyable "shell-regular" >}}
+
+```bash
+# Downloads the package.
+wget https://download.pingcap.org/prometheus-2.8.1.linux-amd64.tar.gz
+wget https://download.pingcap.org/node_exporter-0.17.0.linux-amd64.tar.gz
+wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
+```
+
+{{< copyable "shell-regular" >}}
+
+```bash
+# Extracts the package.
+tar -xzf prometheus-2.8.1.linux-amd64.tar.gz
+tar -xzf node_exporter-0.17.0.linux-amd64.tar.gz
+tar -xzf grafana-6.1.6.linux-amd64.tar.gz
+```
+>>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
 
     {{< copyable "shell-regular" >}}
 
+<<<<<<< HEAD
     ```bash
     wget https://github.com/prometheus/prometheus/releases/download/v2.2.1/prometheus-2.2.1.linux-amd64.tar.gz &&
     wget https://github.com/prometheus/node_exporter/releases/download/v0.15.2/node_exporter-0.15.2.linux-amd64.tar.gz &&
     wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-4.6.3.linux-x64.tar.gz
     ```
+=======
+{{< copyable "shell-regular" >}}
+
+```bash
+cd node_exporter-0.17.0.linux-amd64
+>>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
 
 2. Extract the package.
 
     {{< copyable "shell-regular" >}}
 
+<<<<<<< HEAD
     ```bash
     tar -xzf prometheus-2.2.1.linux-amd64.tar.gz &&
     tar -xzf node_exporter-0.15.2.linux-amd64.tar.gz &&
     tar -xzf grafana-4.6.3.linux-x64.tar.gz
     ```
+=======
+Edit the Prometheus configuration file:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+cd prometheus-2.8.1.linux-amd64 &&
+vi prometheus.yml
+```
+
+```ini
+...
+
+global:
+  scrape_interval:     15s  # By default, scrape targets every 15 seconds.
+  evaluation_interval: 15s  # By default, scrape targets every 15 seconds.
+  # scrape_timeout is set to the global default value (10s).
+  external_labels:
+    cluster: 'test-cluster'
+    monitor: "prometheus"
+
+scrape_configs:
+  - job_name: 'overwritten-nodes'
+    honor_labels: true  # Do not overwrite job & instance labels.
+    static_configs:
+    - targets:
+      - '192.168.199.113:9100'
+      - '192.168.199.114:9100'
+      - '192.168.199.115:9100'
+      - '192.168.199.116:9100'
+      - '192.168.199.117:9100'
+      - '192.168.199.118:9100'
+
+  - job_name: 'tidb'
+    honor_labels: true  # Do not overwrite job & instance labels.
+    static_configs:
+    - targets:
+      - '192.168.199.113:10080'
+
+  - job_name: 'pd'
+    honor_labels: true  # Do not overwrite job & instance labels.
+    static_configs:
+    - targets:
+      - '192.168.199.113:2379'
+      - '192.168.199.114:2379'
+      - '192.168.199.115:2379'
+
+  - job_name: 'tikv'
+    honor_labels: true  # Do not overwrite job & instance labels.
+    static_configs:
+    - targets:
+      - '192.168.199.116:20180'
+      - '192.168.199.117:20180'
+      - '192.168.199.118:20180'
+
+...
+>>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
 
 #### Step 2: Start `node_exporter` on Node1, Node2, Node3, and Node4
 
@@ -137,7 +222,57 @@ Assume that the TiDB cluster topology is as follows:
     cd node_exporter-0.15.2.linux-amd64
     ```
 
+<<<<<<< HEAD
 2. Start the node_exporter service.
+=======
+Edit the Grafana configuration file:
+
+{{< copyable "shell-regular" >}}
+
+```ini
+cd grafana-6.1.6 &&
+vi conf/grafana.ini
+
+...
+
+[paths]
+data = ./data
+logs = ./data/log
+plugins = ./data/plugins
+[server]
+http_port = 3000
+domain = 192.168.199.113
+[database]
+[session]
+[analytics]
+check_for_updates = true
+[security]
+admin_user = admin
+admin_password = admin
+[snapshots]
+[users]
+[auth.anonymous]
+[auth.basic]
+[auth.ldap]
+[smtp]
+[emails]
+[log]
+mode = file
+[log.console]
+[log.file]
+level = info
+format = text
+[log.syslog]
+[event_publisher]
+[dashboards.json]
+enabled = false
+path = ./data/dashboards
+[metrics]
+[grafana_net]
+url = https://grafana.net
+
+...
+>>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
 
     {{< copyable "shell-regular" >}}
 
@@ -295,20 +430,22 @@ This section describes how to configure Grafana.
     - Default account: admin
     - Default password: admin
 
-2. Click the Grafana logo to open the sidebar menu.
+    > **Note:**
+    >
+    > For the **Change Password** step, you can choose **Skip**.
 
-3. In the sidebar menu, click **Data Source**.
+2. In the Grafana sidebar menu, click **Data Source** within the **Configuration**.
 
-4. Click **Add data source**.
+3. Click **Add data source**.
 
-5. Specify the data source information.
+4. Specify the data source information.
 
     - Specify a **Name** for the data source.
     - For **Type**, select **Prometheus**.
     - For **URL**, specify the Prometheus address.
     - Specify other fields as needed.
 
-6. Click **Add** to save the new data source.
+5. Click **Add** to save the new data source.
 
 #### Step 2: Import a Grafana dashboard
 
