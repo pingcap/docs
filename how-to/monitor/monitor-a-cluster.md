@@ -112,9 +112,9 @@ Assume that the TiDB cluster topology is as follows:
     {{< copyable "shell-regular" >}}
 
     ```bash
-    wget https://github.com/prometheus/prometheus/releases/download/v2.2.1/prometheus-2.2.1.linux-amd64.tar.gz &&
-    wget https://github.com/prometheus/node_exporter/releases/download/v0.15.2/node_exporter-0.15.2.linux-amd64.tar.gz &&
-    wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-4.6.3.linux-x64.tar.gz
+    wget https://download.pingcap.org/prometheus-2.8.1.linux-amd64.tar.gz
+    wget https://download.pingcap.org/node_exporter-0.17.0.linux-amd64.tar.gz
+    wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
     ```
 
 2. Extract the package.
@@ -122,9 +122,9 @@ Assume that the TiDB cluster topology is as follows:
     {{< copyable "shell-regular" >}}
 
     ```bash
-    tar -xzf prometheus-2.2.1.linux-amd64.tar.gz &&
-    tar -xzf node_exporter-0.15.2.linux-amd64.tar.gz &&
-    tar -xzf grafana-4.6.3.linux-x64.tar.gz
+    tar -xzf prometheus-2.8.1.linux-amd64.tar.gz
+    tar -xzf node_exporter-0.17.0.linux-amd64.tar.gz
+    tar -xzf grafana-6.1.6.linux-amd64.tar.gz
     ```
 
 #### Step 2: Start `node_exporter` on Node1, Node2, Node3, and Node4
@@ -134,7 +134,7 @@ Assume that the TiDB cluster topology is as follows:
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd node_exporter-0.15.2.linux-amd64
+    cd node_exporter-0.17.0.linux-amd64
     ```
 
 2. Start the node_exporter service.
@@ -153,7 +153,7 @@ Assume that the TiDB cluster topology is as follows:
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd prometheus-2.2.1.linux-amd64 &&
+    cd prometheus-2.8.1.linux-amd64 &&
     vi prometheus.yml
     ```
 
@@ -228,7 +228,7 @@ Assume that the TiDB cluster topology is as follows:
     {{< copyable "shell-regular" >}}
 
     ```bash
-    cd grafana-4.6.3 &&
+    cd grafana-6.1.6 &&
     vi conf/grafana.ini
     ```
 
@@ -295,20 +295,22 @@ This section describes how to configure Grafana.
     - Default account: admin
     - Default password: admin
 
-2. Click the Grafana logo to open the sidebar menu.
+    > **Note:**
+    >
+    > For the **Change Password** step, you can choose **Skip**.
 
-3. In the sidebar menu, click **Data Source**.
+2. In the Grafana sidebar menu, click **Data Source** within the **Configuration**.
 
-4. Click **Add data source**.
+3. Click **Add data source**.
 
-5. Specify the data source information.
+4. Specify the data source information.
 
     - Specify a **Name** for the data source.
     - For **Type**, select **Prometheus**.
     - For **URL**, specify the Prometheus address.
     - Specify other fields as needed.
 
-6. Click **Add** to save the new data source.
+5. Click **Add** to save the new data source.
 
 #### Step 2: Import a Grafana dashboard
 
