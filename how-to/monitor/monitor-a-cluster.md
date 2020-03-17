@@ -109,23 +109,23 @@ Assume that the TiDB cluster topology is as follows:
 
 1. Download the package.
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-wget https://download.pingcap.org/prometheus-2.8.1.linux-amd64.tar.gz
-wget https://download.pingcap.org/node_exporter-0.17.0.linux-amd64.tar.gz
-wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
-```
+    ```bash
+    wget https://download.pingcap.org/prometheus-2.8.1.linux-amd64.tar.gz
+    wget https://download.pingcap.org/node_exporter-0.17.0.linux-amd64.tar.gz
+    wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
+    ```
 
 2. Extract the package.
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-tar -xzf prometheus-2.8.1.linux-amd64.tar.gz
-tar -xzf node_exporter-0.17.0.linux-amd64.tar.gz
-tar -xzf grafana-6.1.6.linux-amd64.tar.gz
-```
+    ```bash
+    tar -xzf prometheus-2.8.1.linux-amd64.tar.gz
+    tar -xzf node_exporter-0.17.0.linux-amd64.tar.gz
+    tar -xzf grafana-6.1.6.linux-amd64.tar.gz
+    ```
 
 #### Step 2: Start `node_exporter` on Node1, Node2, Node3, and Node4
 
