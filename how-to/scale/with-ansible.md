@@ -242,15 +242,10 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
 
 5. Start the monitoring service:
 
-<<<<<<< HEAD
     {{< copyable "shell-regular" >}}
 
     ```bash
-    ansible-playbook rolling_update.yml
-=======
-    ```
     ansible-playbook start.yml -l 172.16.10.103
->>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
     ```
 
     > **Note:**
@@ -259,29 +254,19 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
 
 6. Update the cluster configuration:
 
-<<<<<<< HEAD
     {{< copyable "shell-regular" >}}
 
     ```bash
-    ansible-playbook start.yml -l 172.16.10.103
-=======
-    ```
     ansible-playbook deploy.yml
->>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
     ```
 
 7. Restart Prometheus, and enable the monitoring of PD nodes used for increasing the capacity:
 
-<<<<<<< HEAD
     {{< copyable "shell-regular" >}}
 
     ```bash
-    ansible-playbook rolling_update_monitor.yml --tags=prometheus
-=======
-    ```
     ansible-playbook stop.yml --tags=prometheus
     ansible-playbook start.yml --tags=prometheus
->>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
     ```
 
 8. Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform: `http://172.16.10.3:3000`.
@@ -558,29 +543,19 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
 
 5. Update the cluster configuration:
 
-<<<<<<< HEAD
     {{< copyable "shell-regular" >}}
 
     ```bash
-    ansible-playbook rolling_update.yml
-=======
-    ```
     ansible-playbook deploy.yml
->>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
     ```
 
 6. Restart Prometheus, and disable the monitoring of PD nodes used for increasing the capacity:
 
-<<<<<<< HEAD
     {{< copyable "shell-regular" >}}
 
     ```bash
-    ansible-playbook rolling_update_monitor.yml --tags=prometheus
-=======
-    ```
     ansible-playbook stop.yml --tags=prometheus
     ansible-playbook start.yml --tags=prometheus
->>>>>>> fbcc983... how-to: optimize pd operation and upgrade monitor version (#1989)
     ```
 
 7. To monitor the status of the entire cluster, open a browser to access the monitoring platform: `http://172.16.10.3:3000`.
