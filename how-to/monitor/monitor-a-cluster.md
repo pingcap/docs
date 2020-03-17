@@ -143,7 +143,7 @@ tar -xzf grafana-6.1.6.linux-amd64.tar.gz
 
     ```bash
     ./node_exporter --web.listen-address=":9100" \
-    --log.level="info" &
+        --log.level="info" &
     ```
 
 #### Step 3: Start Prometheus on Node1
