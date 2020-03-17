@@ -156,7 +156,7 @@ Transaction-related fields:
 - `AVG_TXN_RETRY`: The average number of transaction retries.
 - `MAX_TXN_RETRY`: The maximum number of retries of transactions.
 - `SUM_BACKOFF_TIMES`: The sum of retries when SQL statements of this category encounter errors that require a retry.
-- `BACKOFF_TYPES`: All types of errors that require retries and the number of retries for each type. The format of the field is: `type:number`. If there is more than one error type, each is separated by a comma, like `txnLock:2,pdRPC:1`.
+- `BACKOFF_TYPES`: All types of errors that require retries and the number of retries for each type. The format of the field is `type:number`. If there is more than one error type, each is separated by a comma, like `txnLock:2,pdRPC:1`.
 - `AVG_AFFECTED_ROWS`: The average number of rows affected.
 - `PREV_SAMPLE_TEXT`:  When the current SQL statement is `COMMIT`, `PREV_SAMPLE_TEXT` is the previous statement to `COMMIT`. In this case, SQL statements are grouped by the digest and `prev_sample_text`. This means that `COMMIT` statements with different `prev_sample_text` are grouped to different rows. When the current SQL statement is not `COMMIT`, the `PREV_SAMPLE_TEXT` field is an empty string.
 
