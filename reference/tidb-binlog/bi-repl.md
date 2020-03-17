@@ -27,16 +27,16 @@ If the bidirectional replication is enabled between cluster A and cluster B, the
 
 1. Start the TiDB Binlog replication for each of the two clusters.
 2. When the transaction to be replicated passes through the Drainer of cluster A, this Drainer adds the [`_drainer_repl_mark` table](#mark-table) to the transaction, writes this DML event update to the mark table, and replicate this transaction to cluster B.
-3. Cluster B returns a binlog event with the `_drainer_repl_mark` mark table to cluster A. The Drainer of cluster B identifies the mark table with the DML event when parsing the binlog event, and give up replicating this binlog event to cluster A.
+3. Cluster B returns a binlog event with the `_drainer_repl_mark` mark table to cluster A. The Drainer of cluster B identifies the mark table with the DML event when parsing the binlog event, and gives up replicating this binlog event to cluster A.
 
 The replication process from cluster B to cluster A is the same as above. The two clusters can be upstream and downstream of each other.
 
 > **Note:**
 >
-> * When updating the `_drainer_repl_mark` mark table, there must be data changes to generate binlogs.
-> * DDL operations have nothing like transactions, so you need to use the one-way replication method to replicate DDL operations from one cluster to another. See [Replicate DDL operations](#replicate-ddl-operations) for detail.
+> * When updating the `_drainer_repl_mark` mark table, data changes are required to generate binlogs.
+> * DDL operations are not transactional, so you need to use the one-way replication method to replicate DDL operations. See [Replicate DDL operations](#replicate-ddl-operations) for details.
 
-Drainer can use a unique ID for each connection downstream to avoid conflicts. `channel_id` is used to indicate a channel for bidirectional replication. The two clusters should have the same configuration (with the same value) for bidirectional replication.
+Drainer can use a unique ID for each connection to downstream to avoid conflicts. `channel_id` is used to indicate a channel for bidirectional replication. The two clusters should have the same `channel_id` configuration (with the same value).
 
 If you have added or deleted columns in the upstream, there might be more or fewer columns of the data to be replicated to the downstream. Drainer allows this situation by ignoring the added column values or by writing default values to the deleted columns.
 
@@ -88,7 +88,7 @@ sync-ddl = true # DDL replication is needed.
 
 [syncer.to]
 # 1 means SyncFullColumn and 2 means SyncPartialColumn.
-# If set to SyncPartialColumn, Drainer will allow the downstream table
+# If set to SyncPartialColumn, Drainer allows the downstream table
 # structure to have more or fewer columns than the data currently being replicated
 # And remove the STRICT_TRANS_TABLES of the SQL mode to allow fewer columns, and insert zero values downstream.
 sync-mode = 2
@@ -111,7 +111,7 @@ sync-ddl = false  # DDL replication is not needed.
 
 [syncer.to]
 # 1 means SyncFullColumn and 2 means SyncPartialColumn.
-# If set to SyncPartialColumn, Drainer will allow the downstream table
+# If set to SyncPartialColumn, Drainer allows the downstream table
 # structure to have more or fewer columns than the data currently being replicated
 # And remove the STRICT_TRANS_TABLES of the SQL mode to allow fewer columns, and insert zero values downstream.
 sync-mode = 2
