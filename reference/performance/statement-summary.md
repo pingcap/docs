@@ -154,7 +154,7 @@ Transaction-related fields:
 - `AVG_PREWRITE_REGIONS`: The average number of Regions involved in the prewrite phase.
 - `MAX_PREWRITE_REGIONS`: The maximum number of Regions during the prewrite phase.
 - `AVG_TXN_RETRY`: The average number of transaction retries.
-- `MAX_TXN_RETRY`: The maximum number of retries of transactions.
+- `MAX_TXN_RETRY`: The maximum number of transaction retries.
 - `SUM_BACKOFF_TIMES`: The sum of retries when SQL statements of this category encounter errors that require a retry.
 - `BACKOFF_TYPES`: All types of errors that require retries and the number of retries for each type. The format of the field is `type:number`. If there is more than one error type, each is separated by a comma, like `txnLock:2,pdRPC:1`.
 - `AVG_AFFECTED_ROWS`: The average number of rows affected.
