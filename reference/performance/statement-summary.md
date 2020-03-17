@@ -144,7 +144,7 @@ Transaction-related fields:
 - `AVG_COMMIT_BACKOFF_TIME`: The average waiting time before retry when a SQL statement encounters an error that requires a retry during the commit phase.
 - `MAX_COMMIT_BACKOFF_TIME`: The maximum waiting time before retry when a SQL statement encounters an error that requires a retry during the commit phase.
 - `AVG_RESOLVE_LOCK_TIME`: The average time for resolving lock conflicts occurred between transactions.
-- `MAX_RESOLVE_LOCK_TIME`: the longest time for resolving lock conflicts occurred between transactions.
+- `MAX_RESOLVE_LOCK_TIME`: The longest time for resolving lock conflicts occurred between transactions.
 - `AVG_LOCAL_LATCH_WAIT_TIME`: The average waiting time of the local transaction.
 - `MAX_LOCAL_LATCH_WAIT_TIME`: The maximum waiting time of the local transaction.
 - `AVG_WRITE_KEYS`: The average count of written keys.
