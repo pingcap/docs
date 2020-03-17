@@ -148,7 +148,7 @@ Transaction-related fields:
 - `AVG_LOCAL_LATCH_WAIT_TIME`: The average waiting time of the local transaction.
 - `MAX_LOCAL_LATCH_WAIT_TIME`: The maximum waiting time of the local transaction.
 - `AVG_WRITE_KEYS`: The average count of written keys.
-- `MAX_WRITE_KEYS`: The maximum count of written keys..
+- `MAX_WRITE_KEYS`: The maximum count of written keys.
 - `AVG_WRITE_SIZE`: The average amount of written data (in byte).
 - `MAX_WRITE_SIZE`: The maximum amount of written data (in byte).
 - `AVG_PREWRITE_REGIONS`: The average number of Regions involved in the prewrite phase.
