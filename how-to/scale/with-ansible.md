@@ -72,21 +72,21 @@ For example, if you want to add two TiDB nodes (node101, node102) with the IP ad
         172.16.10.3
         ```
 
-    Now the topology is as follows:
+        Now the topology is as follows:
 
-    | Name | Host IP | Services |
-    | ---- | ------- | -------- |
-    | node1 | 172.16.10.1 | PD1 |
-    | node2 | 172.16.10.2 | PD2 |
-    | node3 | 172.16.10.3 | PD3, Monitor |
-    | node4 | 172.16.10.4 | TiDB1 |
-    | node5 | 172.16.10.5 | TiDB2 |
-    | **node101** | **172.16.10.101**|**TiDB3** |
-    | **node102** | **172.16.10.102**|**TiDB4** |
-    | node6 | 172.16.10.6 | TiKV1 |
-    | node7 | 172.16.10.7 | TiKV2 |
-    | node8 | 172.16.10.8 | TiKV3 |
-    | node9 | 172.16.10.9 | TiKV4 |
+        | Name | Host IP | Services |
+        | ---- | ------- | -------- |
+        | node1 | 172.16.10.1 | PD1 |
+        | node2 | 172.16.10.2 | PD2 |
+        | node3 | 172.16.10.3 | PD3, Monitor |
+        | node4 | 172.16.10.4 | TiDB1 |
+        | node5 | 172.16.10.5 | TiDB2 |
+        | **node101** | **172.16.10.101**|**TiDB3** |
+        | **node102** | **172.16.10.102**|**TiDB4** |
+        | node6 | 172.16.10.6 | TiKV1 |
+        | node7 | 172.16.10.7 | TiKV2 |
+        | node8 | 172.16.10.8 | TiKV3 |
+        | node9 | 172.16.10.9 | TiKV4 |
 
     - Edit the `hosts.ini` file:
 
