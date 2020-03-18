@@ -1,5 +1,6 @@
 ---
-title: Access Tables with the Index Merge Method
+title: Access Tables Using IndexMerge
+summary: Learn how to access tables using the `IndexMerge` query execution plan. 
 category: reference
 ---
 
