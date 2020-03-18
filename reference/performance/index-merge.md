@@ -43,7 +43,7 @@ The full table scan is inefficient when a huge volume of data exists in `t`, but
 
 ## Use case
 
-IndexMerge` allows the optimizer to use multiple indexes per table, and merge the results returned by each index before further operation. Take the [above query](#applicable-scenarios) as an example, the generated execution plan is shown as follows:
+`IndexMerge` allows the optimizer to use multiple indexes per table, and merge the results returned by each index before further operation. Take the [above query](#applicable-scenarios) as an example, the generated execution plan is shown as follows:
 
 ```
 +--------------------+-------+-----------+---------------------------------------------------------------+
@@ -97,4 +97,4 @@ Note that `IndexMerge` is used only when the optimizer cannot use a single index
 
     > **Note:**
     >
-    > The SQL Hint has higher precedence than the system variable.
+    > The SQL Hint has a higher priority over the system variable.
