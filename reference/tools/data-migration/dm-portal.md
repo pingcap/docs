@@ -118,7 +118,7 @@ This feature is used to filter the upstream binlog. You can choose the DDL or DM
 
 1. Select the databases or tables that need to be configured.
 
-2. Click the Edit button, and select the binlog types to be filtered.
+2. Click the **Edit** button, and select the binlog types to be filtered.
 
 ![DM Portal InstanceShow](/media/dm-portal-instanceshow.png)
 
@@ -149,7 +149,7 @@ The required binlog filter rules are configured.
 
 1. Select the databases and tables that need to be synced from **Upstream Instance**.
 
-2. Click the Move button and move the selected databases and tables to **Downstream Instance**.
+2. Click the **Move** button and move the selected databases and tables to **Downstream Instance**.
     
     ![DM Portal TableRoute 1](/media/dm-portal-tableroute-1.png)
 
