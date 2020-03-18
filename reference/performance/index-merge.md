@@ -1,24 +1,24 @@
 ---
 title: Access Tables Using IndexMerge
-summary: Learn how to access tables using the `IndexMerge` query execution plan. 
+summary: Learn how to access tables using the `IndexMerge` query execution plan.
 category: reference
 ---
 
 # Access Tables Using IndexMerge
 
-When the TiDB version is upgraded to 4.0, it allows to access tables with the `IndexMerge` method. With the new method, optimizer can use multiple indexes per table, and merge the results returned by the indexes. In some scenarios, the method makes the query more efficient by avoiding full table scans.
+`IndexMerge` is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans.
 
 This document introduces the applicable scenarios, a use case, and how to enable `IndexMerge`.
 
 ## Applicable scenarios
 
-For each table involved in the SQL query, the TiDB optimizer during the physical optimization used to choose one from the following three access methods based on the cost estimation:
+For each table involved in the SQL query, the TiDB optimizer during the physical optimization used to choose one of the following three access methods based on the cost estimation:
 
-- `TableScan`: Scan the table data, with `_tidb_rowid` as the key.
-- `IndexScan`: Scan the index data, with the value of the index column as the key.
-- `IndexLookUp`: Get the `_tidb_rowid` set from the index, with the value of the index column as the key. Then retrieve the corresponding data rows of the tables.
+- `TableScan`: Scans the table data, with `_tidb_rowid` as the key.
+- `IndexScan`: Scans the index data, with the index column values as the key.
+- `IndexLookUp`: Gets the `_tidb_rowid` set from the index, with the index column values as the key, and then retrieves the corresponding data rows of the tables.
 
-These methods allow to use one index per table only. In some cases, the execution produced is not optimal. For example:
+The above methods can use only one index per table. In some cases, the selected execution plan is not optimal. For example:
 
 {{< copyable "sql" >}}
 
@@ -27,7 +27,7 @@ create table t(a int, b int, c int, unique key(a), unique key(b));
 explain select * from t where a = 1 or b = 1;
 ```
 
-The filter conditions in the query expression are connected by `OR`. Within the limitations of one index per table only, `a = 1` cannot be pushed down to the index `a`; neither can `b = 1` be pushed down to the index `b`. To ensure the correct result, the execution plans of `TableScan` are generated for the query:
+In the above query, the filter condition is a `WHERE` clause that uses `OR` as the connector. Because you can use only one index per table, `a = 1` cannot be pushed down to the index `a`; neither can `b = 1` be pushed down to the index `b`. To ensure that the result is correct, the execution plan of `TableScan` is generated for the query:
 
 ```
 +---------------------+----------+-----------+------------------------------------------------------------+
@@ -39,11 +39,11 @@ The filter conditions in the query expression are connected by `OR`. Within the 
 +---------------------+----------+-----------+------------------------------------------------------------+
 ```
 
-Full table scans are inefficient in the cases of high data volume of `t`, while the query only returns two rows at most. To handle such scenarios, TiDB introduces `IndexMerge` to access tables.
+The full table scan is inefficient when a huge volume of data exists in `t`, but the query returns only two rows at most. To handle such a scenario, `IndexMerge` is introduced in TiDB to access tables.
 
-## Actual use cases
+## Use case
 
-`IndexMerge` allows the optimizer to use multiple indexes per table, and merge the results returned by the indexes before further operation.Take the query above as an example, the execution plans generated will be:
+IndexMerge` allows the optimizer to use multiple indexes per table, and merge the results returned by each index before further operation. Take the [above query](#applicable-scenarios) as an example, the generated execution plan is shown as follows:
 
 ```
 +--------------------+-------+-----------+---------------------------------------------------------------+
@@ -56,7 +56,7 @@ Full table scans are inefficient in the cases of high data volume of `t`, while 
 +--------------------+-------+-----------+---------------------------------------------------------------+
 ```
 
-The structure of the `IndexMerge` execution plan is similar to that of the `IndexLookUp` since both are composed of index scans and full table scans. However, index scan part of the `IndexMerge` may include multiple `IndexScan`. When the primary key of the table is an integer, index scans may even include one `TableScan`. For example:
+The structure of the `IndexMerge` execution plan is similar to that of the `IndexLookUp`, both of which consist of index scans and full table scans. However, the index scan part of `IndexMerge` might include multiple `IndexScan`s. When the primary key index of the table is the integer type, index scans might even include `TableScan`. For example:
 
 {{< copyable "sql" >}}
 
@@ -86,9 +86,9 @@ explain select * from t where a = 1 or b = 1;
 4 rows in set (0.01 sec)
 ```
 
-Note that `IndexMerge` is considered only when optimizer cannot find single index access method for the table. If the condition in the query expression is `a = 1 and b = 1`, the optimizer uses the index `a` or the index `b`, instead of the `IndexMerge`, to access tables.
+Note that `IndexMerge` is used only when the optimizer cannot use a single index to access the table. If the condition in the query expression is `a = 1 and b = 1`, the optimizer uses the index `a` or the index `b`, instead of `IndexMerge`, to access the table.
 
-## Enable the `IndexMerge`
+## Enable `IndexMerge`
 
 `IndexMerge` is disabled by default. Enable the `IndexMerge` in one of two ways:
 
