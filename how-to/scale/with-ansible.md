@@ -129,19 +129,11 @@ For example, if you want to add two TiDB nodes (node101, node102) with the IP ad
 
     3. Initialize the node on the deployment target machine:
 
-<<<<<<< HEAD
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    ansible-playbook bootstrap.yml -l 172.16.10.101,172.16.10.102
-    ```
-=======
         {{< copyable "shell-regular" >}}
 
         ```bash
         ansible-playbook bootstrap.yml -l 172.16.10.101,172.16.10.102
         ```
->>>>>>> b878e6c... how-to/scale: add necessary actions on the target machines (#2024)
 
     > **Note:**
     >
