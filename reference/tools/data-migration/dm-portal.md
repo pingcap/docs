@@ -12,22 +12,23 @@ To address this problem, DM provides a simple web program, DM Portal. DM Portal 
 
 ## Features
 
-- Configure replication mode
+### Configure replication mode
 
 DM Portal supports three replication modes of DM:
-    - Full replication
-    - Incremental replication
-    - All (full + incremental)
 
-- Configuring instance information
+- Full replication
+- Incremental replication
+- All (full + incremental)
+
+### Configure instance information
 
 DM Portal can configure the table replication routing, which supports the configuration of merging sharded tables in DM.
 
-- Configuring binlog event filters
+### Configure binlog event filters
 
 DM Portal supports filtering binlog events in databases and tables.
 
-- Generating configuration file
+### Generate configuration file
 
 DM Portal can generate configuration files and download the files to the local server. Meanwhile, it automatically creates a file in the `/tmp/` directory on the dm-portal server.
 
@@ -54,25 +55,25 @@ You can download DM Portal at [dm-portal-latest-linux-amd64.tar.gz](https://down
 
 To deploy DM Portal using DM Ansible, refer to [Deploy Data Migration Using DM-Ansible](/how-to/deploy/data-migration-with-ansible.md) for details.
 
-## User guide
+## Usage
 
 ### Create rules
 
 This feature is used to create a `task.yaml` file. You need to choose the replication mode, configure the upstream and downstream instances, configure table routing, and configure binlog filters.
 
-Steps:
+#### Operation steps
 
-- log in the dm-portal page, and click **Create New Rule**.
+- log in to the dm-portal page, and click **Create New Rule**.
 
 ### Configure basic information
 
 This feature is used to fill in the task name and choose a task type.
 
-Prerequisites:
+#### Prerequisites
 
-- **Create New Sync Rule** is already selected.
+**Create New Sync Rule** is already selected.
 
-Steps:
+#### Operation steps
 
 1. Fill in the task name.
 2. Choose a task type.
@@ -83,15 +84,15 @@ Steps:
 
 This feature is used to configure the upstream and downstream instance information, including Host, Port, Username and Password.
 
-Prerequisites:
+#### Prerequisites
 
-- Task Name and Task Type are already filled in.
+**Task Name** and **Task Type** are already filled in.
 
 > **Note:**
 >
 > If you choose **Incremental** or **All** in Task Type, you need to configure binlog-file and binlog-pos when configuring the upstream instance information.
 
-Steps:
+#### Operation steps
 
 1. Fill in the upstream instance information.
 2. Fill in the downstream instance information.
@@ -103,7 +104,7 @@ Steps:
 
 This feature is used to filter the upstream binlog. You can choose the DDL or DML that needs to be filtered. The filter configured on the database is automatically inherited by tables in that database.
 
-Prerequisites:
+#### Prerequisites
 
 - The upstream and downstream instance information is configured.
 - The connection is verified.
@@ -113,9 +114,10 @@ Prerequisites:
 > - The binlog filter configuration can only be modified in the upstream instance. Once the database or table is moved to the downstream instance, the configuration cannot be modified.
 > - The binlog filter configured on the database is automatically inherited by tables in that database.
 
-Steps:
+#### Operation steps
 
 1. Select the databases or tables that need to be configured.
+
 2. Click the Edit button, and select the binlog types to be filtered.
 
 ![DM Portal InstanceShow](/media/dm-portal-instanceshow.png)
@@ -127,22 +129,23 @@ Steps:
 ### Configure table routing
 
 This feature is used to perform the following operations:
-    - Select the databases and tables that need to be synced, modify their names, and merge databases and tables
-    - Revert the last operation
-    - Reset all configurations of table routing
+
+- Select the databases and tables that need to be synced, modify their names, and merge databases and tables
+- Revert the last operation
+- Reset all configurations of table routing
 
 After the task configuration is completed, DM Portal generates the corresponding `task.yaml` file.
 
-Prerequisites:
+#### Prerequisites
 
-- The required binlog filter rules are configured.
+The required binlog filter rules are configured.
 
 > **Note:**
 >
 > - Batch operation is not supported when you merge databases or tables. You can only drag them one by one.
 > - You can only drag tables when you merge databases or tables. You cannot drag databases.
 
-Steps:
+#### Operation steps
 
 1. Select the databases and tables that need to be synced from **Upstream Instance**.
 
@@ -175,11 +178,11 @@ Steps:
 
         ![DM Portal MoveToNewDB 2](/media/dm-portal-movetonewdb-2.png)
 
-5. Click **Go Back** to revert the last operation.
+5. Click **Go Back** to undo the last operation.
 
     ![DM Portal Revert](/media/dm-portal-revert.png)
 
-6. Click **Reset** to reset the downstream instance.
+6. Click **Reset** to clear the downstream instance.
 
     ![DM Portal Reset](/media/dm-portal-reset.png)
 
