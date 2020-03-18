@@ -97,4 +97,4 @@ Note that `IndexMerge` is used only when the optimizer cannot use a single index
 
     > **Note:**
     >
-    > The SQL Hint has higher precedence than the system variable.
+    > The SQL Hint has a higher priority over the system variable.
