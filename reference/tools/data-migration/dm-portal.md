@@ -1,32 +1,35 @@
 ---
 title: DM Portal Overview
-summary:
+summary: This document introduces the features of DM Portal
 category: reference
 ---
 
 # DM Portal Overview
 
-The current Data Migration (DM) provides a variety of features, including [table routing](/reference/tools/data-migration/features/overview.md#table-routing), [black & white table lists](/reference/tools/data-migration/features/overview.md#black-white-table-lists), [binlog event filter](/reference/tools/data-migration/features/overview.md#binlog-event-filter), [column mapping](/reference/tools/data-migration/features/overview.md#column-mapping), etc. However, these features also increase the complexity of using DM, especially when users are modifying [DM task configurations](/reference/tools/data-migration/configure/task-configuration-file.md).
+The current Data Migration (DM) provides a variety of features, including [table routing](/reference/tools/data-migration/features/overview.md#table-routing), [black & white table lists](/reference/tools/data-migration/features/overview.md#black-white-table-lists), [binlog event filter](/reference/tools/data-migration/features/overview.md#binlog-event-filter), and [column mapping](/reference/tools/data-migration/features/overview.md#column-mapping). However, these features also increase the complexity of using DM, especially when users are modifying [DM task configurations](/reference/tools/data-migration/configure/task-configuration-file.md).
 
-To address this problem, DM provides a simple web program, DM Portal, which enables users to visually configure the required replication tasks and generates a `task.yml` file that can be directly executed by DM.
+To address this problem, DM provides a simple web program, DM Portal. DM Portal enables users to visually configure the required replication tasks, and generates a `task.yaml` file that can be directly executed by DM.
 
 ## Features
 
-- Configuring replication mode
-    - DM Portal supports three replication modes of DM:
-        - Full replication
-        - Incremental replication
-        - All (full + incremental)
+- Configure replication mode
+
+DM Portal supports three replication modes of DM:
+    - Full replication
+    - Incremental replication
+    - All (full + incremental)
 
 - Configuring instance information
-    - DM Portal can configure the table replication routing, which supports the configuration of merging sharded tables in DM.
+
+DM Portal can configure the table replication routing, which supports the configuration of merging sharded tables in DM.
 
 - Configuring binlog event filters
-  - DM Portal supports filtering binlog events in databases and tables.
+
+DM Portal supports filtering binlog events in databases and tables.
 
 - Generating configuration file
-    - DM Portal can generate configuration files and download the files to the local server.
-    - Meanwhile, it automatically creates a file in the `/tmp/` directory on the dm-portal server.
+
+DM Portal can generate configuration files and download the files to the local server. Meanwhile, it automatically creates a file in the `/tmp/` directory on the dm-portal server.
 
 ## Restrictions
 
@@ -38,7 +41,7 @@ The current DM Portal can generate visualized pages that cover most scenarios of
 - The upstream instance configuration on the page can only be used to obtain the upstream table schema. The related upstream instance information still needs to be configured in DM-worker.
 - In the generated `task.yaml` file, mydumper-path is `./bin/mydumper` by default. If you use another path, you should modify the generated `task.yaml` file manually.
 
-## Deploy DM Portal
+## Deploy
 
 ### Deploy using binary
 
@@ -58,18 +61,21 @@ To deploy DM Portal using DM Ansible, refer to [Deploy Data Migration Using DM-A
 This feature is used to create a `task.yaml` file. You need to choose the replication mode, configure the upstream and downstream instances, configure table routing, and configure binlog filters.
 
 Steps:
-    - log in the dm-portal page, and click **Create New Rule**.
+
+- log in the dm-portal page, and click **Create New Rule**.
 
 ### Configure basic information
 
 This feature is used to fill in the task name and choose a task type.
 
-Prerequisites: 
-    - **Create New Sync Rule** is already selected.
+Prerequisites:
+
+- **Create New Sync Rule** is already selected.
 
 Steps:
-    1. Fill in the task name.
-    2. Choose a task type.
+
+1. Fill in the task name.
+2. Choose a task type.
 
 ![DM Portal BasicConfig](/media/dm-portal-basicconfig.png)
 
@@ -78,16 +84,18 @@ Steps:
 This feature is used to configure the upstream and downstream instance information, including Host, Port, Username and Password.
 
 Prerequisites:
-    - Task Name and Task Type are already filled in.
+
+- Task Name and Task Type are already filled in.
 
 > **Note:**
 >
 > If you choose **Incremental** or **All** in Task Type, you need to configure binlog-file and binlog-pos when configuring the upstream instance information.
 
 Steps:
-    1. Fill in the upstream instance information.
-    2. Fill in the downstream instance information.
-    3. Click Next.
+
+1. Fill in the upstream instance information.
+2. Fill in the downstream instance information.
+3. Click Next.
 
 ![DM Portal InstanceConfig](/media/dm-portal-instanceconfig.png)
 
@@ -96,8 +104,9 @@ Steps:
 This feature is used to filter the upstream binlog. You can choose the DDL or DML that needs to be filtered. The filter configured on the database is automatically inherited by tables in that database.
 
 Prerequisites:
-    - The upstream and downstream instance information is configured.
-    - The connection is verified.
+
+- The upstream and downstream instance information is configured.
+- The connection is verified.
 
 > **Note:**
 >
@@ -105,8 +114,9 @@ Prerequisites:
 > - The binlog filter configured on the database is automatically inherited by tables in that database.
 
 Steps:
-    1. Select the databases or tables that need to be configured.
-    2. Click the Edit button, and select the binlog types to be filtered.
+
+1. Select the databases or tables that need to be configured.
+2. Click the Edit button, and select the binlog types to be filtered.
 
 ![DM Portal InstanceShow](/media/dm-portal-instanceshow.png)
 
@@ -124,7 +134,8 @@ This feature is used to perform the following operations:
 After the task configuration is completed, DM Portal generates the corresponding `task.yaml` file.
 
 Prerequisites:
-    - The required binlog filter rules are configured.
+
+- The required binlog filter rules are configured.
 
 > **Note:**
 >
@@ -164,11 +175,11 @@ Steps:
 
         ![DM Portal MoveToNewDB 2](/media/dm-portal-movetonewdb-2.png)
 
-5. Click the Revert button to revert the last operation.
+5. Click **Go Back** to revert the last operation.
 
     ![DM Portal Revert](/media/dm-portal-revert.png)
 
-6. Click the Reset button to reset the downstream instance.
+6. Click **Reset** to reset the downstream instance.
 
     ![DM Portal Reset](/media/dm-portal-reset.png)
 
