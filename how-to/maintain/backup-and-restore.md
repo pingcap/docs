@@ -1,85 +1,58 @@
 ---
-title: Backup and Restore
-summary: Learn how to back up and restore the data of TiDB.
+title: Use Mydumper and TiDB Lightning for Backup and Restoration
 category: how-to
-aliases: ['/docs/op-guide/backup-restore/']
 ---
 
-# Backup and Restore
+# Use Mydumper and TiDB Lightning for Data Backup and Restoration
 
-This document describes how to back up and restore the data of TiDB. Currently, this document only covers full backup and restoration.
+This document describes how to perform full backup and restoration of the TiDB data using Mydumper and TiDB Lightning. For incremental backup and restoration, refer to [TiDB Binlog](/reference/tidb-binlog/overview.md).
 
-Here we assume that the TiDB service information is as follows:
+Suppose that the TiDB service information is as follows:
 
 |Name|Address|Port|User|Password|
-|:----:|:-------:|:----:|:----:|:------:|
+|:----|:-------|:----|:----|:--------|
 |TiDB|127.0.0.1|4000|root|*|
 
 Use the following tools for data backup and restoration:
 
-- `mydumper`: to export data from TiDB
-- `loader`: to import data into TiDB
+- [Mydumper](/reference/tools/mydumper.md): to export data from TiDB
+- [TiDB Lightning](/reference/tools/tidb-lightning/overview.md): to import data into TiDB
 
-## Download TiDB toolset (Linux)
+## Full backup and restoration using Mydumper/TiDB Lightning
 
-1. Download the tool package:
+`mydumper` is a powerful data backup tool. For more information, refer to [`maxbube/mydumper`](https://github.com/maxbube/mydumper).
 
-    {{< copyable "shell-regular" >}}
+Use [Mydumper](/reference/tools/mydumper.md) to export data from TiDB and use [TiDB Lightning](/reference/tools/tidb-lightning/overview.md) to import data into TiDB.
 
-    ```bash
-    wget https://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz &&
-    wget https://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.sha256
-    ```
+> **Note:**
+>
+> It is recommended to download [Mydumper](/reference/tools/mydumper.md) from the PingCAP website, because the R&D team has adapted `mydumper` for TiDB. It is not recommended to use `mysqldump` which is much slower for both backup and restoration.
 
-2. Check the file integrity. If the result is fine, the file is correct.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    sha256sum -c tidb-enterprise-tools-latest-linux-amd64.sha256
-    ```
-
-3. Extract the package:
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tar -xzf tidb-enterprise-tools-latest-linux-amd64.tar.gz &&
-    cd tidb-enterprise-tools-latest-linux-amd64
-    ```
-
-## Full backup and restoration using `mydumper`/`loader`
-
-You can use [`mydumper`](/reference/tools/mydumper.md) to export data from TiDB and [`loader`](/reference/tools/loader.md) to import data into TiDB.
-
-> **Important**: You must use the `mydumper` from the Enterprise Tools package, and not the `mydumper` provided by your operating system's package manager. The upstream version of `mydumper` does not yet handle TiDB correctly ([#155](https://github.com/maxbube/mydumper/pull/155)). Using `mysqldump` is also not recommended, as it is much slower for both backup and restoration.
-
-### Best practices of full backup and restoration using `mydumper`/`loader`
+### Best practices for full backup and restoration using Mydumper/TiDB Lightning
 
 To quickly backup and restore data (especially large amounts of data), refer to the following recommendations:
 
-- Keep the exported data file as small as possible and it is recommended keep it within 64M. You can use the `-F` parameter to set the value.
-- Adjust the `-t` parameter of `loader` based on the number and the load of TiKV instances. It is recommended that you set the value of `-t` to `32`. If the load of TiKV is too high and the `backoffer.maxSleep 15000ms is exceeded` log is displayed many times, decrease the value of `-t`; otherwise, increase the value.
+* Keep the exported data file as small as possible. It is recommended to use the `-F` parameter to set the file size. If you use TiDB Lightning to restore data, it is recommended that you set the value of `-F` to `256` (MB). If you use `loader` for restoration, it is recommended to set the value to `64` (MB).
 
-### Backup data from TiDB
+## Backup data from TiDB
 
 Use `mydumper` to backup data from TiDB.
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-./bin/mydumper -h 127.0.0.1 -P 4000 -u root -t 32 -F 64 -B test -T t1,t2 --skip-tz-utc -o ./var/test
+./bin/mydumper -h 127.0.0.1 -P 4000 -u root -t 32 -F 256 -B test -T t1,t2 --skip-tz-utc -o ./var/test
 ```
 
 In this command,
 
-- `-B test`: means the data is exported from the `test` database.
-- `-T t1,t2`: means only the `t1` and `t2` tables are exported.
-- `-t 32`: means 32 threads are used to export the data.
-- `-F 64`: means a table is partitioned into chunks and one chunk is 64MB.
-- `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
+`-B test` means that the data is exported from the `test` database.
+`-T t1,t2` means that only the `t1` and `t2` tables are exported.
+`-t 32` means that 32 threads are used to export the data.
+`-F 256` means that a table is partitioned into chunks, and one chunk is 256MB.
+`--skip-tz-utc` means to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
 
-If `mydumper` emits error like:
+If `mydumper` returns the following error:
 
 ```
 ** (mydumper:27528): CRITICAL **: 13:25:09.081: Could not read data from testSchema.testTable: GC life time is shorter than transaction duration, transaction starts at 2019-08-05 21:10:01.451 +0800 CST, GC safe point is 2019-08-05 21:14:53.801 +0800 CST
@@ -87,7 +60,7 @@ If `mydumper` emits error like:
 
 Then execute two more commands:
 
-- Step 1: before executing the `mydumper` command, query the GC values of the TiDB cluster and adjust it to a suitable value using the MySQL client.
+1. Before executing the `mydumper` command, query the [GC](/reference/garbage-collection/overview.md) values of the TiDB cluster and adjust it to a suitable value using the MySQL client:
 
     {{< copyable "sql" >}}
 
@@ -110,7 +83,7 @@ Then execute two more commands:
     update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
     ```
 
-- Step 2: after you finish running the `mydumper` command, restore the GC value of the TiDB cluster to its original value in step 1.
+2. After running the `mydumper` command, adjust GC value of the TiDB cluster to its original value in step 1.
 
     {{< copyable "sql" >}}
 
@@ -118,67 +91,6 @@ Then execute two more commands:
     update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
     ```
 
-### Restore data into TiDB
+## Restore data into TiDB
 
-To restore data into TiDB, use `loader` to import the previously exported data. See [Loader instructions](/reference/tools/loader.md) for more information.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-./bin/loader -h 127.0.0.1 -u root -P 4000 -t 32 -d ./var/test
-```
-
-After the data is imported, you can view the data in TiDB using the MySQL client:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-mysql -h127.0.0.1 -P4000 -uroot
-```
-
-{{< copyable "sql" >}}
-
-```sql
-show tables;
-```
-
-```
-+----------------+
-| Tables_in_test |
-+----------------+
-| t1             |
-| t2             |
-+----------------+
-```
-
-{{< copyable "sql" >}}
-
-```sql
-select * from t1;
-```
-
-```
-+----+------+
-| id | age  |
-+----+------+
-|  1 |    1 |
-|  2 |    2 |
-|  3 |    3 |
-+----+------+
-```
-
-{{< copyable "sql" >}}
-
-```sql
-select * from t2;
-```
-
-```
-+----+------+
-| id | name |
-+----+------+
-|  1 | a    |
-|  2 | b    |
-|  3 | c    |
-+----+------+
-```
+To restore data into TiDB, use TiDB Lightning to import the exported data. See [TiDB Lightning Tutorial](/reference/tools/tidb-lightning/tidb-backend.md).
