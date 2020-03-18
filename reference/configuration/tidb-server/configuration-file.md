@@ -19,8 +19,9 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `mem-quota-query`
 
 - The maximum memory available for a single SQL statement.
-- Default value: `34359738368`
+- Default value: `1073741824`
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
+- This value is the initial value of the system variable [`tidb_mem_quota_query`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_mem_quota_query).
 
 ### `oom-use-tmp-storage`
 
@@ -36,7 +37,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `oom-action`
 
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
-- Default value: `"log"`
+- Default value: `"cancel"`
 - The valid options are `"log"` and `"cancel"`. When `oom-action="log"`, it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
 
 ### `enable-streaming`
@@ -145,7 +146,7 @@ Configuration items related to log.
 ### `query-log-max-len`
 
 - The maximum length of SQL output.
-- Default value: `2048`
+- Default value: `4096`
 - When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
 
 ### `max-server-connections`
@@ -252,7 +253,7 @@ Configuration items related to performance.
 
 - The maximum number of statements allowed in a single TiDB transaction.
 - Default value: `5000`
-- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error.
+- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
 ### `tcp-keep-alive`
 
