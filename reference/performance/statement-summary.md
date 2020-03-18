@@ -8,8 +8,8 @@ category: reference
 
 To better handle SQL performance related issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.6/en/statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
 
-Starting from v3.0.4, TiDB provides the support for the `events_statements_summary_by_digest`
-table. Starting from v3.0.8, TiDB provides the support for the `events_statements_summary_by_digest_history` table. In this document, you will learn about the two tables, and how to troubleshoot SQL performance issues using these tables.
+Starting from v3.1.0-beta, TiDB provides the support for the `events_statements_summary_by_digest`
+table. Starting from v3.1.0-beta.1, TiDB provides the support for the `events_statements_summary_by_digest_history` table. In this document, you will learn about the two tables, and how to troubleshoot SQL performance issues using these tables.
 
 ## `events_statements_summary_by_digest`
 
@@ -230,9 +230,6 @@ The statement summary feature is disabled by default. You can enable it by setti
 set global tidb_enable_stmt_summary = true;
 ```
 
-<<<<<<< HEAD
-The `tidb_enable_stmt_summary` system variable has two scopes - global and session, which work a little differently from other system variables:
-=======
 The statistics in the system table will be cleared if the statement summary feature is disabled, and will be re-calculated next time the statement summary feature is enabled. Tests have shown that enabling this feature has little impact on performance.
 
 Another two system variables that control the statement summary:
@@ -252,20 +249,13 @@ set global tidb_stmt_summary_history_size = 24;
 When the above configuration takes effect, every 30 minutes the `events_statements_summary_by_digest` is cleared. `events_statements_summary_by_digest_history` stores data generated over the recent 12 hours.
 
 The above two system variables have two scopes - global and session, which work a little differently from other system variables, as described below:
->>>>>>> bc37dad... reference: update statement summary docs (#1822)
 
 - Set the global variable to apply to the cluster immediately.
 - Set the session variable to apply to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
 - The session variable has a higher read priority. The global variable will be read only if no session variable is set.
 - Set the session variable to a blank string to re-read the global variable.
 
-<<<<<<< HEAD
-The statistics in the system table will be cleared if the statement summary feature is disabled, and will be re-calculated next time the feature is enabled. Tests have shown that enabling this feature has little impact on performance.
-
-`events_statements_summary_by_digest` is a memory table. To prevent potential memory issues, we need to limit the number of statements to be saved and the longest SQL display length. You can configure these limits using the following parameters under `[stmt-summary]` of `config.toml`:
-=======
 The statement summary tables are memory tables. To prevent potential memory issues, you need to limit the number of statements to be saved and the longest SQL display length. You can configure these limits using the following parameters under `[stmt-summary]` of `config.toml`:
->>>>>>> bc37dad... reference: update statement summary docs (#1822)
 
 - `max-stmt-count` limits the number of SQL statements that can be stored. The default value is `200`. If the set limit is exceeded, those SQL statements that recently remain unused will be cleared.
 - `max-sql-length` specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is 4096.
@@ -278,11 +268,5 @@ The statement summary tables are memory tables. To prevent potential memory issu
 
 The statement summary tables have the following limitations:
 
-<<<<<<< HEAD
-- Querying `events_statements_summary_by_digest` only returns the statement summary of the current TiDB server, not the entire cluster.
-- Statement summary tables do not support rolling update. This means that the SQL statistics start to accumulate the second `tidb_enable_stmt_summary` is enabled. As time goes, the numbers mount. This makes it impossible to view the statement summary of the most recent period. Therefore, it's strongly recommended that you enable `tidb_enable_stmt_summary` when you need to troubleshoot issues.
-- The statement summary will be lost when the TiDB server restarts. This is because `events_statements_summary_by_digest` is a memory table, and the data is cached in memory instead of persisted on storage.
-=======
 - Querying statement summary tables only returns the statement summary of the current TiDB server, not that of the entire cluster.
 - The statement summary will be lost when the TiDB server restarts. This is because statement summary tables are memory tables, and the data is cached in memory instead of being persisted on storage.
->>>>>>> bc37dad... reference: update statement summary docs (#1822)
