@@ -1,10 +1,10 @@
 ---
-title: Join Reorder Algorithm Overview
+title: Introduction to Join Reorder
 summary: Use the Join Reorder algorithm to join multiple tables in TiDB.
 category: reference
 ---
 
-# Join Reorder Algorithm Overview
+# Introduction to Join Reorder
 
 In real business scenarios, it is common to join multiple tables. The execution efficiency of join is associated with the order in which each table joins.
 
