@@ -150,7 +150,7 @@ The required binlog filter rules are configured.
 1. Select the databases and tables that need to be synced from **Upstream Instance**.
 
 2. Click the **Move** button and move the selected databases and tables to **Downstream Instance**.
-    
+
     ![DM Portal TableRoute 1](/media/dm-portal-tableroute-1.png)
 
     ![DM Portal TableRoute 2](/media/dm-portal-tableroute-2.png)
