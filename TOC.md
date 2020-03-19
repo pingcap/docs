@@ -377,6 +377,11 @@
       - [Troubleshoot](/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/faq/tidb-lightning.md)
       - [Glossary](/reference/tools/tidb-lightning/glossary.md)
+    + TiCDC
+      - [Overview](/reference/tools/ticdc/overview.md)
+      - [Configure and Use](/reference/tools/ticdc/deploy.md)
+      - [Manage](/reference/tools/ticdc/manage.md)
+      - [Sink URI](/reference/tools/ticdc/sink.md)
     - [sync-diff-inspector](/reference/tools/sync-diff-inspector/overview.md)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
