@@ -119,6 +119,8 @@ loadWorkers=32  # The number of concurrent workers that load data.
 
 ## Load data
 
+**Loading data is usually the most time-consuming and problematic stage of the entire TPC-C test.**
+
 1. Use a MySQL client to connect to the TiDB server and run the following command:
 
     {{< copyable "sql" >}}
@@ -137,7 +139,39 @@ loadWorkers=32  # The number of concurrent workers that load data.
     ./runSQL.sh props.mysql sql.mysql/indexCreates.sql
     ```
 
-3. Run the following script to load data:
+### Use BenchmarkSQL to load data directly
+
+Run the following script to load data:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+./runLoader.sh props.mysql
+```
+
+This process might last for several hours depending on the machine configuration.
+
+### Use TiDB Lightning to load data
+
+The amount of imported data increases with the number of warehouses. When you import more than 1000 warehouse data, you can generate csv files using BenchmarkSQL, and then quickly import the csv files through TiDB Lightning (hereinafter referred to as Lightning). The csv files can be reused multiple times, saving the time required for each generation.
+
+1. Modify the BenchmarkSQL configuration file.
+
+    The csv file of one warehouses requires 77 MB of disk space. To ensure sufficient disk space, add a line to the `benchmarksql/run/props.mysql` file:
+
+    ```text
+    fileLocation=/home/user/csv/  # Absolute path to directory where the csv files are stored
+    ```
+
+    The csv file name should adhere to the Lightning naming rules, namely `{database}.{table}.csv`, because you use TiDB Lightning to load data. Here you can modify the above configuration to:
+
+    ```text
+    fileLocation=/home/user/csv/tpcc.  # Absolute path to directory where the csv files are stored + file name prefix (database)
+    ```
+
+    In this case, the format of the csv file name is similar to `tpcc.bmsql_warehouse.csv`.
+
+2. Generate the csv file.
 
     {{< copyable "shell-regular" >}}
 
@@ -145,7 +179,54 @@ loadWorkers=32  # The number of concurrent workers that load data.
     ./runLoader.sh props.mysql
     ```
 
-This process might last for several hours depending on the machine configuration.
+3. Use Lightning to load data.
+
+    To load data using Lightning, see [TiDB Lightning Deployment](/reference/tools/tidb-lightning/deployment.md). This section will show you how to deploy Lightning using tidb-ansible to load data.
+
+    1. Edit `inventory.ini`.
+
+        It is recommended to specify the deployed IP, the port and the directory manually to avoid anomalies caused by conflicts. For the disk space of `import_dir`, see [TiDB Lightning Deployment](/reference/tools/tidb-lightning/deployment.md). `data_source_dir` refers to the directory where the csv files are stored, as mentioned above.
+
+        ```ini
+        [importer_server]
+        IS1 ansible_host=172.16.5.34 deploy_dir=/data2/is1 tikv_importer_port=13323 import_dir=/data2/import
+        [lightning_server]
+        LS1 ansible_host=172.16.5.34 deploy_dir=/data2/ls1 tidb_lightning_pprof_port=23323 data_source_dir=/home/user/csv
+        ```
+
+    2. Edit `conf/tidb-lightning.yml`.
+
+        ```yaml
+        mydumper:
+            no-schema: true
+            csv:
+                separator: ','
+                delimiter: ''
+                header: false
+                not-null: false
+                'null': 'NULL'
+                backslash-escape: true
+                trim-last-separator: false
+        ```
+
+    3. Deploy Lightning and Importer.
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        ansible-playbook deploy.yml --tags=lightning
+        ```
+
+    4. Start importing data.
+
+       * Log into the server where Lightning and Importer are deployed.
+       * Move into the deployment directory.
+       * Execute `scripts/start_importer.sh` under the Importer directory to start Importer.
+       * Execute `scripts/start_lightning.sh` under the Lightning directory to load data.
+
+       You can see the progress of the import process, or check whether the import process is completed through the log, because ansible is ued for deployment.
+
+### After importing data
 
 After importing data, you can run `sql.common/test.sql` to validate the correctness of the data. If all SQL statements return an empty result, then the data is correctly imported.
 
