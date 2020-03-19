@@ -67,7 +67,7 @@ This feature is used to create a `task.yaml` file. You need to select the replic
 
 #### Operation steps
 
-- log in to the dm-portal page, and click **Create New Rule**.
+Access the dm-portal page, and click **Create New Rule**.
 
 ### Configure the basic information
 
