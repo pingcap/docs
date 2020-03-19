@@ -75,16 +75,14 @@
     - [Overview](/how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](/how-to/monitor/monitor-a-cluster.md)
   + Migrate
-    - [Overview](/how-to/migrate/overview.md)
+    - [Migration Tools User Guide](/reference/tools/user-guide.md)
     + Migrate from MySQL
-      - [Migrate the Full Data](/how-to/migrate/from-mysql.md)
-      - [Migrate the Incremental Data](/how-to/migrate/incrementally-from-mysql.md)
-    - [Migrate from Aurora](/how-to/migrate/from-aurora.md)
+      - [Migration Case of Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
     - [Migrate from CSV](/reference/tools/tidb-lightning/csv.md)
   + Maintain
     - [Common Ansible Operations](/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
-      - [Use `mydumper` and `loader`](/how-to/maintain/backup-and-restore/mydumper-loader.md)
+      - [Use Mydumper and TiDB Lightning](/how-to/maintain/backup-and-restore/mydumper-lightning.md)
       - [Use BR](/reference/tools/br/br.md)
       - [BR Usage Scenarios](/reference/tools/br/use-cases.md)
     + Identify Abnormal Queries
@@ -315,6 +313,7 @@
       - [Error Handling](/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/reference/tidb-binlog/faq.md)
   + Tools
+    - [Tools User Guide](/reference/tools/user-guide.md)
     - [Mydumper](/reference/tools/mydumper.md)
     - [Syncer](/reference/tools/syncer.md)
     - [Loader](/reference/tools/loader.md)
@@ -353,7 +352,7 @@
         - [Skip or Replace Abnormal SQL Statements](/reference/tools/data-migration/skip-replace-sqls.md)
       - [Monitor](/reference/tools/data-migration/monitor.md)
       + Migrate from MySQL compatible database
-        - [Migrate from Aurora](/how-to/migrate/from-aurora.md)
+        - [Migrate from Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
       + [DM Portal](/reference/tools/data-migration/dm-portal.md)
       + Troubleshoot
         - [DM Troubleshooting](/reference/tools/data-migration/troubleshoot/dm.md)
@@ -440,6 +439,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+    - [4.0.0-beta.2](/releases/4.0.0-beta.2.md)
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
@@ -447,6 +447,7 @@
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.12](/releases/3.0.12.md)
     - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)
     - [3.0.9](/releases/3.0.9.md)
