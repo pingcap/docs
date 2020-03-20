@@ -99,7 +99,7 @@ Configuration items related to read pools
 ### `unify-read-pool`
 
 + Whether to use a single thread pool to serve all the read requests.
-+ Default value: `true`
++ Default value: `true` if there are no customized configurations under the `readpool.storage` and `readpool.coprocessor` sections, otherwise `false`.
 
 ## readpool.unified
 
