@@ -6,7 +6,7 @@ Summary: Learn how TiDB Scheduler works
 
 # TiDB Scheduler
 
-This documents introduces how TiDB Scheduler works.
+This document introduces how TiDB Scheduler works.
 
 ## TiDB cluster scheduling requirements
 
