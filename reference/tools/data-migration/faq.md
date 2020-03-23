@@ -48,3 +48,28 @@ Generally, at this time, the relay unit exits with an error and cannot be automa
 4. Clean up downstream replicated data.
 5. Use Ansible to [start the entire DM cluster](/how-to/deploy/data-migration-with-ansible.md#step-9-deploy-the-dm-cluster).
 6. Restart data replication with the new task name, or set `remove-meta` to `true` and `task-mode` to `all`.
+
+## How to handle the error returned by the DDL operation related to the gh-ost table, after `online-ddl-scheme: "gh-ost"` is set?
+
+```
+[unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/dm/pkg/terror.(*Error).Generate ......
+```
+
+The above error can be caused by the following reason:
+
+- In the last `rename ghost_table to origin table` step, DM reads the DDL information in memory, and restores it to the DDL of the origin table.
+- However, the DDL information in memory is obtained in either of the two ways: 
+    - DM [processes the gh-ost table during the `alter ghost_table` operation](/reference/tools/data-migration/features/online-ddl-scheme.md#process-online-ddl-scheme-gh-ost) and records the information of the DDL information of ghost_table;
+    - When dm-worker is restarted to start the task, DM reads the DDL from `dm_meta.{task_name}_onlineddl`.
+
+Therefore, in the process of incremental replication, if the specified Pos skipped the `alter ghost_table` DDL but the Pos is still in the online-ddl process of gh-ost, the ghost_table is not written into memory or `dm_meta.{task_name}_onlineddl` correctly. In such cases, the above error is returned.
+
+You can avoid this error by the following steps:
+
+1. Remove the `online-ddl-scheme` configuration of the task.
+
+2. Configure `_{table_name}_gho`, `_{table_name}_ghc`, and `_{table_name}_del` in `black-white-list.ignore-tables`.
+
+3. Execute the upstream DDL in the downstream TiDB manually.
+
+4. After the Pos is replicated to the position of the gh-ost process, re-enable the `online-ddl-scheme` and comment out `black-white-list.ignore-tables`.

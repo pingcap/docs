@@ -328,6 +328,7 @@
         - [Black and White Lists](/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
         - [Binlog Event Filter](/reference/tools/data-migration/features/overview.md#binlog-event-filter)
         - [Replication Delay Monitoring](/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
+        - [Online-ddl-scheme](/reference/tools/data-migration/features/online-ddl-scheme.md)
         + Sharding Support
           - [Introduction](/reference/tools/data-migration/features/shard-merge.md)
           - [Restrictions](/reference/tools/data-migration/features/shard-merge.md#restrictions)
