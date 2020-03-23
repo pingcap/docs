@@ -101,7 +101,7 @@ This section introduces configuration items related to storage.
 
 #### slow_write_threshold
 
-* The threshold (in seconds) If it takes longer to write a single binlog file than this specified threshold, the write is considered slow write and `"take a long time to write binlog"` is output in the log.
+* The threshold (in seconds) if it takes longer to write a single binlog file than this specified threshold, the write is considered slow write and `"take a long time to write binlog"` is output in the log.
 * Default value: `1`
 
 #### stop-write-at-available-space
@@ -173,7 +173,7 @@ This section introduces the configuration items of Drainer. For the example of a
 ### initial-commit-ts
 
 * Specifies from which commit timestamp the replication task starts. This configuration is only applicable to the Drainer node that started replication for the first time. If a checkpoint already exists downstream, the replication will be performed according to the time recorded in the checkpoint.
-* Default value: `-1`。Drainer 会从 PD 得到一个最新的 timestamp 作为初始时间。Drainer will get a new timestamp from PD as the starting time.
+* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time.
 
 ### synced-check-time
 
