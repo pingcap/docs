@@ -150,9 +150,9 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
     * `synced`: it indicates that the operation has been performed successfully and all TiDB instances have been synced to this state.
     * `rollback done`: it indicates that the operation has failed and has finished rolling back.
     * `rollingback`: it indicates that the operation has failed and is rolling back.
-    * `cancelling`: it indicates that the operation is being cancelled. This state only occurs when you cancel DDL tasks using the `ADMIN CANCEL DDL JOBS` command.
+    * `cancelling`: it indicates that the operation is being cancelled. This state only occurs when you cancel DDL jobs using the `ADMIN CANCEL DDL JOBS` command.
 
-- `ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...`: To view the original SQL statement of the DDL task corresponding to the `job_id`; the `job_id` only searches the running DDL job and the last ten results in the DDL history job queue
+- `ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...`: To view the original SQL statement of the DDL job corresponding to the `job_id`; the `job_id` only searches the running DDL job and the last ten results in the DDL history job queue
 - `ADMIN CANCEL DDL JOBS job_id [, job_id] ...`: To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled. If the operation fails to cancel the jobs, specific reasons are displayed.
 
     > **Note:**
@@ -161,7 +161,7 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
     > - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement.
     > - If the jobs you want to cancel are finished, the cancellation operation fails.
 
-- `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and corresponding indexes. If the check is passed, an empty result will be returned. On failure, an error message will indicate that data is inconsistent.
+- `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and corresponding indexes. If the check is passed, an empty result is returned. On failure, return an error message says that data is inconsistent.
 - `ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT`: In extreme cases, this statement is used to overwrite the metadata of the stored table in an untrusted way. Here "untrusted" means that it must be ensured that the metadata of the original table is covered by the `CREATE TABLE STATEMENT` operation. In order to use this "REPAIR" statement, you need to first enable the [`repair-mode`](/reference/configuration/tidb-server/configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/reference/configuration/tidb-server/configuration-file.md#repair-table-list).
 
 ## MySQL compatibility
