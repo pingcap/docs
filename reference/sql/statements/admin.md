@@ -35,7 +35,7 @@ To view the original SQL statements of the DDL job corresponding to `job_id`, us
 ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
 ```
 
-To cancel the running DDL job corresponding to `job_id`, and return whether the job has been cancelled, use `ADMIN CANCEL DDL JOBS`. This statement returns the message that says whether the job has been cancelled.
+To cancel the running DDL job corresponding to `job_id`, use `ADMIN CANCEL DDL JOBS`. This statement returns the message that says whether the job has been cancelled.
 
 {{< copyable "sql" >}}
 
