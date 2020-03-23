@@ -71,7 +71,7 @@ mysql> SHOW TABLES;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+For TiDB 2.0, you can use the `USE` statement to access any database. For TiDB 3.0 or later versions, it checks whether you have access to the database when using the `USE` statement. This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
 
 ## See also
 
