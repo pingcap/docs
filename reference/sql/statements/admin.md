@@ -27,11 +27,15 @@ ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 * `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
 * `WHERE`: to add filter conditions.
 
+To view the original SQL statements of the DDL job corresponding to the `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
+
 {{< copyable "sql" >}}
 
 ```sql
 ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
 ```
+
+To cancel the running DDL job corresponding to the `job_id`, and return whether the job has been cancelled, use `ADMIN CANCEL DDL JOBS`:
 
 {{< copyable "sql" >}}
 
@@ -39,11 +43,15 @@ ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 ```
 
+To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`:
+
 {{< copyable "sql" >}}
 
 ```sql
 ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 ```
+
+To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`:
 
 {{< copyable "sql" >}}
 
