@@ -6,9 +6,11 @@ category: reference
 
 # Introduction to Join Reorder
 
-In real business scenarios, it is common to join multiple tables. The execution efficiency of join is associated with the order in which each table joins.
+In real application scenarios, it is common to join multiple tables. The execution efficiency of join is associated with the order in which each table joins.
 
 For example:
+
+{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM t1, t2, t3 WHERE t1.a=t2.a AND t3.a=t2.a;
@@ -50,4 +52,4 @@ The current Join Reorder algorithm has the following limitations:
 - The Join Reorder for Outer Join is not supported
 - Limited by the calculation methods of the result sets, the algorithm cannot ensure it selects the optimum join order.
 
-Currently, the `STRAIGHT_JOIN` syntax is supported in TiDB to force a join order. For more information, please refer to [Description of the syntax elements](/reference/sql/statements/select.md#description-of-the-syntax-elements).
+Currently, the `STRAIGHT_JOIN` syntax is supported in TiDB to force a join order. For more information, refer to [Description of the syntax elements](/reference/sql/statements/select.md#description-of-the-syntax-elements).
