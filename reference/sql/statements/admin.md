@@ -27,7 +27,7 @@ ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 * `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
 * `WHERE`: to add filter conditions.
 
-To view the original SQL statements of the DDL job corresponding to the `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
+To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
 
 {{< copyable "sql" >}}
 
@@ -35,7 +35,7 @@ To view the original SQL statements of the DDL job corresponding to the `job_id`
 ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
 ```
 
-To cancel the running DDL job corresponding to the `job_id`, and return whether the job has been cancelled, use `ADMIN CANCEL DDL JOBS`:
+To cancel the running DDL job corresponding to `job_id`, and return whether the job has been cancelled, use `ADMIN CANCEL DDL JOBS`. This statement returns the message that says whether the job has been cancelled.
 
 {{< copyable "sql" >}}
 
@@ -43,7 +43,7 @@ To cancel the running DDL job corresponding to the `job_id`, and return whether 
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 ```
 
-To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`:
+To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`. If the consistency check is passed, an empty result is returned. On failure, return an error message says that data is inconsistent.
 
 {{< copyable "sql" >}}
 
@@ -51,7 +51,7 @@ To check the consistency of all the data and corresponding indexes in the `tbl_n
 ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 ```
 
-To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`:
+To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`. Here “untrusted” means that it must be ensured that the metadata of the original table is covered by the `CREATE TABLE STATEMENT` operation. In order to use this “REPAIR” statement, you need to first enable the `repair-mode` configuration item, and make sure that the tables to be repaired are listed in the `repair-table-list`.
 
 {{< copyable "sql" >}}
 
