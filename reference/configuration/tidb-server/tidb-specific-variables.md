@@ -250,7 +250,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION | GLOBAL
 - Default value: 10
-- When a transaction encounters retryable errors (such as transaction conflicts, over slow transaction commit, or table schema changes), this transaction can be re-executed. This variable is used to set the maximum number of the retries.
+- This variable is used to set the maximum number of the retries. When a transaction encounters retryable errors (such as transaction conflicts, over slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables automatic retry.
 
 ### tidb_disable_txn_auto_retry
 
@@ -262,7 +262,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    To decide whether you can enable automatic retry, see [automatic retry and anomalies caused by automatic retry](/reference/transactions/transaction-isolation.md#automatic-retry-and-transactional-anomalies-caused-by-automatic-retry).
+    To decide whether to enable automatic retry, see [limits of retry](/reference/transactions/transaction-optimistic.md#limits-of-retry).
 
 ### tidb_backoff_weight
 
