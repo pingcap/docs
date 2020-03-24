@@ -1,6 +1,6 @@
 ---
 title: DM Portal Overview
-summary: This document introduces the features of DM Portal.
+summary: Learn the features of DM Portal and how to use it.
 category: reference
 ---
 
@@ -191,3 +191,5 @@ The required binlog filter rules are configured.
     ![DM Portal Reset](/media/dm-portal-reset.png)
 
 7. Click **Finish & Download**. DM Portal automatically downloads the `task.yaml` file to the local computer, and creates a `task.yaml` configuration file in the `/tmp/` directory on the DM Portal server.
+
+    ![DM Portal GenerateConfig](/media/dm-portal-generateconfig.png)
