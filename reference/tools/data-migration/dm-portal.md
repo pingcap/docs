@@ -6,15 +6,17 @@ category: reference
 
 # DM Portal Overview
 
-The current Data Migration (DM) provides a variety of features, including [table routing](/reference/tools/data-migration/features/overview.md#table-routing), [black & white table lists](/reference/tools/data-migration/features/overview.md#black-white-table-lists), and [binlog event filter](/reference/tools/data-migration/features/overview.md#binlog-event-filter). However, these features also increase the complexity of using DM, especially when users are modifying [DM task configurations](/reference/tools/data-migration/configure/task-configuration-file.md).
+Data Migration (DM) provides a variety of features, including [table routing](/reference/tools/data-migration/features/overview.md#table-routing), [black & white table lists](/reference/tools/data-migration/features/overview.md#black-white-table-lists), and [binlog event filter](/reference/tools/data-migration/features/overview.md#binlog-event-filter). However, these features also increase the complexity of using DM, especially when users are modifying [DM task configurations](/reference/tools/data-migration/configure/task-configuration-file.md).
 
 To address this problem, DM provides a simple web application, DM Portal. DM Portal enables users to visually configure the required replication tasks, and generates a `task.yaml` file that can be directly executed by DM.
 
 ## Features
 
+This sections describes the features of DM Portal.
+
 ### Configure the replication mode
 
-DM Portal supports three replication modes of DM:
+DM Portal supports three replication modes:
 
 - Full replication
 - Incremental replication
@@ -22,7 +24,7 @@ DM Portal supports three replication modes of DM:
 
 ### Configure the instance information
 
-DM Portal can configure the table routing, which supports the configuration of merging sharded schemas and tables in DM.
+DM Portal supports configuring table routing, and merging sharded schemas and tables in DM.
 
 ### Configure the binlog event filter
 
@@ -30,11 +32,11 @@ DM Portal supports configuring the binlog event filter in schemas and tables.
 
 ### Generate the configuration file
 
-DM Portal can generate configuration files and download the files to the local computer. Meanwhile, it automatically creates a file in the `/tmp/` directory on the dm-portal server.
+DM Portal supports generating configuration files and downloading these files to your local computer. Meanwhile, it automatically creates a file in the `/tmp/` directory on the dm-portal server.
 
 ## Restrictions
 
-The current DM Portal can generate visualized pages that cover most scenarios of DM configurations, but it also has some restrictions:
+Currently, DM Portal's visualized pages cover most DM configuration scenarios, but with the following restrictions:
 
 - The SQL pattern of [binlog event filter](/reference/tools/data-migration/features/overview.md#binlog-event-filter) is not supported.
 
@@ -44,22 +46,26 @@ The current DM Portal can generate visualized pages that cover most scenarios of
 
 - The upstream instance configuration on the page can only be used to obtain the upstream table schema. The related upstream instance information still needs to be configured in DM-worker.
 
-- In the generated `task.yaml` file, mydumper-path is `./bin/mydumper` by default. If you use another path, you should modify the generated `task.yaml` file manually.
+- In the generated `task.yaml` file, mydumper-path is `./bin/mydumper` by default. If you use another path, modify the generated `task.yaml` file manually.
 
 ## Deploy
 
+This section describes how to deploy DM Portal in two ways: using binary or DM Ansible.
+
 ### Deploy using binary
 
-You can download DM Portal at [dm-portal-latest-linux-amd64.tar.gz](https://download.pingcap.org/dm-portal-latest-linux-amd64.tar.gz). To start DM Portal, run the `./dm-portal` command.
+Download DM Portal at [dm-portal-latest-linux-amd64.tar.gz](https://download.pingcap.org/dm-portal-latest-linux-amd64.tar.gz). To start DM Portal, run the `./dm-portal` command.
 
 - If you run DM Portal locally, visit `127.0.0.1:8280` in your browser.
-- If you run DM Portal on a server, you need to configure a proxy on the server.
+- If you run DM Portal on a server, configure a proxy on the server.
 
 ### Deploy using DM Ansible
 
 To deploy DM Portal using DM Ansible, refer to [Deploy Data Migration Using DM-Ansible](/how-to/deploy/data-migration-with-ansible.md) for details.
 
 ## Usage
+
+This section describes how to use DM Portal.
 
 ### Create rules
 
@@ -164,6 +170,7 @@ The required binlog filter rules are configured.
     ![DM Portal ChangeTableName](/media/dm-portal-changetablename.png)
 
 4. Select the required table to perform the following operation:
+
     - To merge two tables, drag the table onto another table
 
         ![DM Portal MergeTable 1](/media/dm-portal-mergetable-1.png)
