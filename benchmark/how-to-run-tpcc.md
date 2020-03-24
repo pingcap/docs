@@ -121,23 +121,28 @@ loadWorkers=32  # The number of concurrent workers that load data.
 
 **Loading data is usually the most time-consuming and problematic stage of the entire TPC-C test.**
 
-1. Use a MySQL client to connect to the TiDB server and run the following command:
+First, use a MySQL client to connect to the TiDB server and run the following command:
 
-    {{< copyable "sql" >}}
+{{< copyable "sql" >}}
 
-    ```sql
-    create database tpcc;
-    ```
+```sql
+create database tpcc;
+```
 
-2. Run the following BenchmarkSQL script in shell to create tables:
+Second, run the following BenchmarkSQL script in shell to create tables:
 
-    {{< copyable "shell-regular" >}}
+{{< copyable "shell-regular" >}}
 
-    ```shell
-    cd run && \
-    ./runSQL.sh props.mysql sql.mysql/tableCreates.sql && \
-    ./runSQL.sh props.mysql sql.mysql/indexCreates.sql
-    ```
+```shell
+cd run && \
+./runSQL.sh props.mysql sql.mysql/tableCreates.sql && \
+./runSQL.sh props.mysql sql.mysql/indexCreates.sql
+```
+
+Third, use one of the following two ways to load data:
+
+* [Use BenchmarkSQL to load data directly](#use-benchmarksql-to-load-data-directly)
+* [Use TiDB Lightning to load data](#use-tidb-lightning-to-load-data)
 
 ### Use BenchmarkSQL to load data directly
 
@@ -153,25 +158,27 @@ This process might last for several hours depending on the machine configuration
 
 ### Use TiDB Lightning to load data
 
-The amount of imported data increases with the number of warehouses. When you import more than 1000 warehouse data, you can generate csv files using BenchmarkSQL, and then quickly import the csv files through TiDB Lightning (hereinafter referred to as Lightning). The csv files can be reused multiple times, saving the time required for each generation.
+The amount of loaded data increases as the number of warehouses increases. When you need to load more than 1000 warehouses of data, you can first use BenchmarkSQL to generate CSV files, and then quickly load the CSV files through TiDB Lightning (hereinafter referred to as Lightning). The CSV files can be reused multiple times, which saves the time required for each generation.
+
+Follow the steps below to use TiDB Lightning to load data:
 
 1. Modify the BenchmarkSQL configuration file.
 
-    The csv file of one warehouses requires 77 MB of disk space. To ensure sufficient disk space, add a line to the `benchmarksql/run/props.mysql` file:
+    The CSV file of one warehouse requires 77 MB of disk space. To ensure sufficient disk space, add a line to the `benchmarksql/run/props.mysql` file:
 
     ```text
-    fileLocation=/home/user/csv/  # Absolute path to directory where the csv files are stored
+    fileLocation=/home/user/csv/  # The absolute path of the directory where your CSV files are stored
     ```
 
-    The csv file name should adhere to the Lightning naming rules, namely `{database}.{table}.csv`, because you use TiDB Lightning to load data. Here you can modify the above configuration to:
+    It is recommended that the CSV file names adhere to the naming rules in Lightning, that is, `{database}.{table}.csv`, because eventually you'll use Lightning to load data. Here you can modify the above configuration as follows:
 
     ```text
-    fileLocation=/home/user/csv/tpcc.  # Absolute path to directory where the csv files are stored + file name prefix (database)
+    fileLocation=/home/user/csv/tpcc.  # The absolute path of the directory where your CSV files are stored + the file name prefix (database)
     ```
 
-    In this case, the format of the csv file name is similar to `tpcc.bmsql_warehouse.csv`.
+    This will generate CSV files with a naming style such as `tpcc.bmsql_warehouse.csv`.
 
-2. Generate the csv file.
+2. Generate the CSV file.
 
     {{< copyable "shell-regular" >}}
 
@@ -181,11 +188,11 @@ The amount of imported data increases with the number of warehouses. When you im
 
 3. Use Lightning to load data.
 
-    To load data using Lightning, see [TiDB Lightning Deployment](/reference/tools/tidb-lightning/deployment.md). This section will show you how to deploy Lightning using tidb-ansible to load data.
+    To load data using Lightning, see [TiDB Lightning Deployment](/reference/tools/tidb-lightning/deployment.md). The following steps introduce how to use TiDB Ansible to deploy Lightning and use Lightning to load data.
 
     1. Edit `inventory.ini`.
 
-        It is recommended to specify the deployed IP, the port and the directory manually to avoid anomalies caused by conflicts. For the disk space of `import_dir`, see [TiDB Lightning Deployment](/reference/tools/tidb-lightning/deployment.md). `data_source_dir` refers to the directory where the csv files are stored, as mentioned above.
+        It is recommended to manually specify the deployed IP address, the port, and the deployment directory to avoid anomalies caused by conflicts. For the disk space of `import_dir`, see [TiDB Lightning Deployment](/reference/tools/tidb-lightning/deployment.md). `data_source_dir` refers to the directory where the CSV files are stored as mentioned before.
 
         ```ini
         [importer_server]
@@ -217,18 +224,16 @@ The amount of imported data increases with the number of warehouses. When you im
         ansible-playbook deploy.yml --tags=lightning
         ```
 
-    4. Start importing data.
+    4. Start Lightning and Importer.
 
        * Log into the server where Lightning and Importer are deployed.
-       * Move into the deployment directory.
+       * Enter the deployment directory.
        * Execute `scripts/start_importer.sh` under the Importer directory to start Importer.
-       * Execute `scripts/start_lightning.sh` under the Lightning directory to load data.
+       * Execute `scripts/start_lightning.sh` under the Lightning directory to begin to load data.
 
-       You can see the progress of the import process, or check whether the import process is completed through the log, because ansible is ued for deployment.
+       Because you've used TiDB Ansible deployment method, you can see the loading progress of Lightning on the monitoring page, or check whether the loading process is completed through the log.
 
-### After importing data
-
-After importing data, you can run `sql.common/test.sql` to validate the correctness of the data. If all SQL statements return an empty result, then the data is correctly imported.
+Fourth, after successfully loading data, you can run `sql.common/test.sql` to validate the correctness of the data. If all SQL statements return an empty result, then the data is correctly loaded.
 
 ## Run the test
 
