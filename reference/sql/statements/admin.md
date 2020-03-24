@@ -51,7 +51,7 @@ To check the consistency of all the data and corresponding indexes in the `tbl_n
 ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 ```
 
-To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`. Here “untrusted” means that the metadata of the original table must be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement,  first enable the [`repair-mode`](/reference/configuration/tidb-server/configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/reference/configuration/tidb-server/configuration-file.md#repair-table-list).
+To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`. Here “untrusted” means that you need to manually ensure that the metadata of the original table can be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement, enable the [`repair-mode`](/reference/configuration/tidb-server/configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/reference/configuration/tidb-server/configuration-file.md#repair-table-list).
 
 {{< copyable "sql" >}}
 
@@ -162,7 +162,7 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
     > - If the jobs you want to cancel are finished, the cancellation operation fails.
 
 - `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and corresponding indexes. If the check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
-- `ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT`: In extreme cases, this statement is used to overwrite the metadata of the stored table in an untrusted way. Here “untrusted” means that the metadata of the original table must be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement,  first enable the [`repair-mode`](/reference/configuration/tidb-server/configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/reference/configuration/tidb-server/configuration-file.md#repair-table-list).
+- `ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT`: In extreme cases, this statement is used to overwrite the metadata of the stored table in an untrusted way. Here “untrusted” means that you need to manually ensure that the metadata of the original table can be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement, enable the [`repair-mode`](/reference/configuration/tidb-server/configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/reference/configuration/tidb-server/configuration-file.md#repair-table-list).
 
 ## MySQL compatibility
 
