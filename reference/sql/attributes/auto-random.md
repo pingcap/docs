@@ -55,7 +55,7 @@ Then execute the `INSERT` statement such as `INSERT INTO t(b) values...`.  Now t
 
 TiDB automatically assigns values in the following way:
 
-The second highest five digits (no matter the highest digit is signed or unsigned) of the row value in binary (namely, shard bits) are determined by the starting time of the current transaction. The remaining digits are assigned values in an auto-increment order.
+The second highest five digits (no matter the column type is signed or unsigned) of the row value in binary (namely, shard bits) are determined by the starting time of the current transaction. The remaining digits are assigned values in an auto-increment order.
 
 To use different number of shard bits, append a pair of parentheses to `AUTO_RANDOM` and specify the desired number of shard bits in the parentheses. See the following example:
 
