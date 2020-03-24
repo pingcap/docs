@@ -119,7 +119,7 @@ loadWorkers=32  # The number of concurrent workers that load data.
 
 ## Load data
 
-**Loading data is usually the most time-consuming and problematic stage of the entire TPC-C test.**
+**Loading data is usually the most time-consuming and problematic stage of the entire TPC-C test.** This section provides the following four steps to load data.
 
 First, use a MySQL client to connect to the TiDB server and run the following command:
 
