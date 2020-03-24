@@ -82,7 +82,7 @@
   + Maintain
     - [Common Ansible Operations](/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
-      - [Use `mydumper` and `loader`](/how-to/maintain/backup-and-restore/mydumper-loader.md)
+      - [Use Mydumper and TiDB Lightning](/how-to/maintain/backup-and-restore/mydumper-lightning.md)
       - [Use BR](/reference/tools/br/br.md)
       - [BR Usage Scenarios](/reference/tools/br/use-cases.md)
     + Identify Abnormal Queries
@@ -307,13 +307,14 @@
     - [Reparo](/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/reference/tidb-binlog/binlog-slave-client.md)
     - [TiDB Binlog Relay Log](/reference/tidb-binlog/relay-log.md)
+    - [Bidirectional Replication Between TiDB Clusters](/reference/tidb-binlog/bidirectional-replication.md)
     - [Glossary](/reference/tidb-binlog/glossary.md)
     + Troubleshoot
       - [Troubleshooting](/reference/tidb-binlog/troubleshoot/binlog.md)
       - [Error Handling](/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/reference/tidb-binlog/faq.md)
   + Tools
-  + - [Tools User Guide](/reference/tools/user-guide.md)
+    - [Tools User Guide](/reference/tools/user-guide.md)
     - [Mydumper](/reference/tools/mydumper.md)
     - [Syncer](/reference/tools/syncer.md)
     - [Loader](/reference/tools/loader.md)
@@ -382,7 +383,11 @@
       - [Configure and Use](/reference/tools/ticdc/deploy.md)
       - [Manage](/reference/tools/ticdc/manage.md)
       - [Sink URI](/reference/tools/ticdc/sink.md)
-    - [sync-diff-inspector](/reference/tools/sync-diff-inspector/overview.md)
+    + sync-diff-inspector
+      - [Overview](/reference/tools/sync-diff-inspector/overview.md)
+      - [Data Check for Tables with Different Schema or Table Names](/reference/tools/sync-diff-inspector/route-diff.md)
+      - [Data Check in the Sharding Scenario](/reference/tools/sync-diff-inspector/shard-diff.md)
+      - [Data Check for TiDB Upstream and Downstream Clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
     - [TiKV Control](/reference/tools/tikv-control.md)
@@ -443,6 +448,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+    - [4.0.0-beta.2](/releases/4.0.0-beta.2.md)
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
