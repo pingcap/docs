@@ -69,7 +69,7 @@ This section describes how to use DM Portal.
 
 ### Create rules
 
-This feature is used to create a `task.yaml` file. You need to select the replication mode, configure the upstream and downstream instances, configure table routing, and configure the binlog filter.
+This feature is used to create a `task.yaml` file.
 
 #### Operation steps
 
