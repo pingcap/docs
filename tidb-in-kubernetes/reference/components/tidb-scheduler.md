@@ -28,7 +28,7 @@ Scheduling rule 1: Make sure that the number of PD instances scheduled on each n
 
 Scheduling rule 2: If the number of K8s nodes is less than three (In this case, TiKV is not highly available), arbitrary scheduling is supported; otherwise, the number of TiKV instances that can be scheduled on each node must be `ceil(Replicas / 3)`. For example:
 
-| TiKV cluster size (Replicas) | Maximum number of TiKV replicas scheduled on each node | Best scheduling distribution |
+| TiKV cluster size (Replicas) | Maximum number of TiKV instances scheduled on each node | Best scheduling distribution |
 | ------------- | ------------- | ------------- |
 | 3  | 1  | 1,1,1  |
 | 4  | 2  | 1,1,2  |
