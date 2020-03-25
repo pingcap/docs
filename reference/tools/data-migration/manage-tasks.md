@@ -8,11 +8,11 @@ category: reference
 
 This document describes how to manage and maintain the data replication task using the [dmctl](/reference/tools/data-migration/overview.md#dmctl) component. For the Data Migration cluster deployed using DM-Ansible, the dmctl binary file is in `dm-ansible/dmctl`.
 
-The dmctl support the interactive mode for manual operation, and support the command mode for the script.
+The dmctl component supports the interactive mode for manual operations, and also supports the command mode for the script.
 
 ## dmctl interactive mode
 
-This section described the basic use of dmctl commands in interactive mode.
+This section described the basic use of dmctl commands in the interactive mode.
 
 ### dmctl help
 
@@ -827,12 +827,12 @@ You can use the `refresh-worker-tasks` command to forcefully refresh the `task =
 
 ## dmctl command mode
 
-The command mode differs from the interactive mode in that you need to perform the task operation right after executing the dmctl command. The parameters of the task operation in command mode is the same as that in interactive mode.
+The command mode differs from the interactive mode in that you need to append the task operation right after the dmctl command. The parameters of the task operation in the command mode are the same as those in the interactive mode.
 
 > **Note:**
 >
-> + A dmctl command follows a task command only.
-> + The task operation can only be placed at the end of the dmctl command.
+> + A dmctl command must be followed by only one task operation.
+> + The task operation can be placed only at the end of the dmctl command.
 
 {{< copyable "shell-regular" >}}
 
