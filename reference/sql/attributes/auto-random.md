@@ -95,7 +95,7 @@ select * from t;
 select last_insert_id()
 ```
 
-You might see the following results:
+You might see the following result:
 
 ```
 +------------+---+
