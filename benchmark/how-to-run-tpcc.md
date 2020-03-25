@@ -113,26 +113,14 @@ loadWorkers=32  # The number of concurrent workers that load data.
 
 **Loading data is usually the most time-consuming and problematic stage of the entire TPC-C test.** This section provides the following four steps to load data.
 
-<<<<<<< HEAD
-    ```sql
-    create database tpcc
-    ```
-=======
 First, use a MySQL client to connect to the TiDB server and run the following command:
 
 {{< copyable "sql" >}}
->>>>>>> 6d2f1ef... benchmark: add lightning import for TPC-C (#2057)
 
 ```sql
 create database tpcc;
 ```
 
-<<<<<<< HEAD
-    ```shell
-    cd run
-    ./runSQL.sh props.mysql sql.mysql/tableCreates.sql
-    ./runSQL.sh props.mysql sql.mysql/indexCreates.sql
-=======
 Second, run the following BenchmarkSQL script in shell to create tables:
 
 {{< copyable "shell-regular" >}}
@@ -172,7 +160,6 @@ Follow the steps below to use TiDB Lightning to load data:
 
     ```text
     fileLocation=/home/user/csv/  # The absolute path of the directory where your CSV files are stored
->>>>>>> 6d2f1ef... benchmark: add lightning import for TPC-C (#2057)
     ```
 
     It is recommended that the CSV file names adhere to the naming rules in Lightning, that is, `{database}.{table}.csv`, because eventually you'll use Lightning to load data. Here you can modify the above configuration as follows:
