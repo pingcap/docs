@@ -6,7 +6,7 @@ category: reference
 
 # TiDB Transaction Isolation Levels
 
-Transaction isolation is one of the foundations of database transaction processing. Isolation is one of the four key properties of a transaction (commonly referred as [ACID](/glossary.md#acid).
+Transaction isolation is one of the foundations of database transaction processing. Isolation is one of the four key properties of a transaction (commonly referred as [ACID](/glossary.md#acid)).
 
 The SQL-92 standard defines four levels of transaction isolation: Read Uncommitted, Read Committed, Repeatable Read, and Serializable. See the following table for details:
 
@@ -21,7 +21,7 @@ TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REP
 
 > **Note:**
 >
-> In the default configuration of TiDB v3.0, the automatic transaction retry is disabled. For how this feature influences the isolation level and how to enable it, see [automatic retry mechanism](#automatic-retry-and-transactional-anomalies-caused-by-automatic-retry).
+> In the default configuration of TiDB v3.0, the automatic transaction retry is disabled. For how this feature influences the isolation level and how to enable it, see [limits of retry](/reference/transactions/transaction-optimistic.md#limits-of-retry).
 
 TiDB uses the [Percolator transaction model](https://research.google.com/pubs/pub36726.html). A global read timestamp is obtained when the transaction is started, and a global commit timestamp is obtained when the transaction is committed. The execution order of transactions is confirmed based on the timestamps. To know more about the implementation of TiDB transaction model, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
 
