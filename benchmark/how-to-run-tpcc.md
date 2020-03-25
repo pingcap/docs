@@ -123,26 +123,14 @@ loadWorkers=32  # The number of concurrent workers that load data.
 
 First, use a MySQL client to connect to the TiDB server and run the following command:
 
-<<<<<<< HEAD
-    ```sql
-    create database tpcc
-    ```
-=======
 {{< copyable "sql" >}}
->>>>>>> 6d2f1ef... benchmark: add lightning import for TPC-C (#2057)
 
 ```sql
-create database tpcc;
+create database tpcc
 ```
 
 Second, run the following BenchmarkSQL script in shell to create tables:
 
-<<<<<<< HEAD
-    ```shell
-    cd run &&
-    ./runSQL.sh props.mysql sql.mysql/tableCreates.sql &&
-    ./runSQL.sh props.mysql sql.mysql/indexCreates.sql
-=======
 {{< copyable "shell-regular" >}}
 
 ```shell
