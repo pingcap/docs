@@ -47,7 +47,7 @@ SHOW CREATE SEQUENCE seq;
 
 ## MySQL compatibility
 
-Currently, MySQL does not have the `SEQUENCE` option. TiDB `SEQUENCE` borrows from MariaDB. Except for the `SETVAL` function, all other functions have the same progressions with those functions of MariaDB.
+Currently, MySQL does not have the sequence option. The TiDB sequence is borrowed from MariaDB. Except for the `SETVAL` function, all other functions have the same progressions with those functions of MariaDB.
 
 ## See also
 
