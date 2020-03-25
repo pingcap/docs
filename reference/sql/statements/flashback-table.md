@@ -51,7 +51,7 @@ Pay attention to the following conditions and requirements when you enable TiDB 
     FLASHBACK TABLE t;
     ```
 
-- Recover the table data dropped by `TRUNCATE`. Because the dropped table still exists, you need to rename the table to be recovered. Otherwise, an error will be returned indicating that table `t` already exists.
+- Recover the table data dropped by `TRUNCATE`. Because the truncated table still exists, you need to rename the table to be recovered. Otherwise, an error will be returned indicating that table `t` already exists.
 
     ```sql
     TRUNCATE TABLE t;
