@@ -70,7 +70,9 @@ Syntax:
 SET autocommit = {0 | 1}
 ```
 
-If you set the value of `autocommit` to `1`, the status of the current session is autocommit. That is, statements are automatically committed immediately following their execution. If you set the value of `autocommit` to `0`, the status of the current session is non-autocommit. That is, statements are only committed when you execute the `COMMIT` statement. The value of `autocommit` is `1` by default.
+When `autocommit = 1` (default), the status of the current session is autocommit. That is, statements are automatically committed immediately following their execution.
+
+When `autocommit = 0`, the status of the current session is non-autocommit. That is, statements are only committed when you execute the `COMMIT` statement.
 
 > **Note:**
 >
@@ -185,7 +187,7 @@ Similarly, it is recommended to execute `INSERT` statement within an explicit tr
 
 ### Large transaction
 
-Due to the requirement of two-phase commit, a large transaction can leads to:
+Due to the requirement of two-phase commit, a large transaction can lead to:
 
 * OOM when excessive data is written in the memory
 * More conflicts in the prewrite phase
