@@ -16,17 +16,29 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables.
 
-### `oom-action`
-
-- Specifies the operation when out-of-memory occurs in TiDB.
-- Default value: `log`
-- The valid options are `log` and `cancel`. `log` only prints the log without actual processing. `cancel` cancels the operation and outputs the log.
-
 ### `mem-quota-query`
 
 - The maximum memory available for a single SQL statement.
-- Default value: `34359738368`
+- Default value: `1073741824`
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
+- This value is the initial value of the system variable [`tidb_mem_quota_query`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_mem_quota_query).
+
+### `oom-use-tmp-storage`
+
++ Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
++ Default value:  `true`
+
+### `tmp-storage-path`
+
++ Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
++ Default value: `<TMPDIR>/tidb/tmp-storage`
++ It only takes effect when `oom-use-tmp-storage` is `true`.
+
+### `oom-action`
+
+- Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
+- Default value: `"cancel"`
+- The valid options are `"log"` and `"cancel"`. When `oom-action="log"`, it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
 
 ### `enable-streaming`
 
@@ -106,6 +118,12 @@ Configuration items related to log.
 >
 > Discard `disable-timestamp` and use `enable-timestamp` which is semantically easier to understand.
 
+### `enable-slow-log`
+
+- Determines whether to enable the slow query log.
+- Default value: `true`
+- To enable the slow query log, set `enable-slow-log` to `true`. Otherwise, set it to `false`.
+
 ### `slow-query-file`
 
 - The file name of the slow query log.
@@ -128,7 +146,7 @@ Configuration items related to log.
 ### `query-log-max-len`
 
 - The maximum length of SQL output.
-- Default value: `2048`
+- Default value: `4096`
 - When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
 
 ### `max-server-connections`
@@ -235,7 +253,7 @@ Configuration items related to performance.
 
 - The maximum number of statements allowed in a single TiDB transaction.
 - Default value: `5000`
-- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error.
+- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
 ### `tcp-keep-alive`
 
@@ -363,6 +381,11 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
+### `enable-chunk-rpc`
+
+- Determines whether to enable the `Chunk` data encoding format in Coprocessor.
+- Default value: `true`
+
 ### txn-local-latches
 
 Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
@@ -415,7 +438,7 @@ Configuration related to the status of TiDB service.
 ### `report-status`
 
 - Enables or disables the HTTP API service.
-- Default value: true
+- Default value: `true`
 
 ### `record-db-qps`
 
@@ -429,9 +452,19 @@ Configurations related to the `events_statement_summary_by_digest` table.
 ### max-stmt-count
 
 - The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
-- Default value: 100
+- Default value: `100`
 
 ### max-sql-length
 
 - The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
-- Default value: 4096
+- Default value: `4096`
+
+## experimental
+
+The `experimental` section describes configurations related to the experimental features of TiDB. This section is introduced since v3.1.0.
+
+### `allow-auto-random` <span class="version-mark">New in v3.1.0</span>
+
+- Determines whether to allow using `AUTO_RANDOM`.
+- Default value: `false`
+- By default, TiDB does not support using `AUTO_RANDOM`. When the value is `true`, you cannot set `alter-primary-key` to `true` at the same time.
