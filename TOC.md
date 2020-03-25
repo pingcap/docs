@@ -36,12 +36,7 @@
   + Get Started
     + Start a Local Cluster
       - [From Binary](/how-to/get-started/deploy-tidb-from-binary.md)
-<<<<<<< HEAD
-=======
-      - [From Homebrew](/how-to/get-started/deploy-tidb-from-homebrew.md)
-      - [From DBdeployer](/how-to/get-started/deploy-tidb-from-dbdeployer.md)
       - [From Docker Compose](https://pingcap.com/docs/dev/how-to/get-started/deploy-tidb-from-docker-compose/)
->>>>>>> 866d2e3... toc: add docker compose link (#2094)
     - [Explore SQL with TiDB](/how-to/get-started/explore-sql.md)
     - [Import Example Database](/how-to/get-started/import-example-database.md)
     - [Read Historical Data](/how-to/get-started/read-historical-data.md)
