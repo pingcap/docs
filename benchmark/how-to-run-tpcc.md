@@ -126,7 +126,7 @@ First, use a MySQL client to connect to the TiDB server and run the following co
 {{< copyable "sql" >}}
 
 ```sql
-create database tpcc
+create database tpcc;
 ```
 
 Second, run the following BenchmarkSQL script in shell to create tables:
@@ -168,7 +168,7 @@ Follow the steps below to use TiDB Lightning to load data:
 
     ```text
     fileLocation=/home/user/csv/  # The absolute path of the directory where your CSV files are stored
->>>>>>> 6d2f1ef... benchmark: add lightning import for TPC-C (#2057)
+
     ```
 
     It is recommended that the CSV file names adhere to the naming rules in Lightning, that is, `{database}.{table}.csv`, because eventually you'll use Lightning to load data. Here you can modify the above configuration as follows:
