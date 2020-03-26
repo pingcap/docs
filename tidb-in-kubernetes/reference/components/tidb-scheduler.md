@@ -16,6 +16,7 @@ A TiDB cluster includes three key components: PD, TiKV, and TiDB. Each consists 
 
 Scheduling rule 1: Make sure that the number of PD instances scheduled on each node is less than `Replicas / 2`. For example:
 
+| PD cluster size (Replicas) | Maximum number of PD instances scheduled on each node |
 | ------------- | ------------- |
 | 1  | 1  |
 | 2  | 1  |
