@@ -38,7 +38,7 @@ The space occupied by a single character might differ for different character se
 
 ### `TEXT` type
 
-`TEXT` is a string of variable-length. M represents the maximum column length in characters, ranging from 0 to 65,535 bytes. The maximum row length and the character set being used determine the `TEXT` length.
+`TEXT` is a string of variable-length. M represents the maximum column length in characters, ranging from 0 to 65,535. The maximum row length and the character set being used determine the `TEXT` length.
 
 ```sql
 TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
