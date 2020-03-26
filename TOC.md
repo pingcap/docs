@@ -318,7 +318,7 @@
         - [Skip or Replace Abnormal SQL Statements](/reference/tools/data-migration/skip-replace-sqls.md)
       - [Monitor](/reference/tools/data-migration/monitor.md)
       + Migrate from MySQL compatible database
-        - [Migrate from Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
+        - [Migrate from Amazon Aurora](/how-to/migrate/from-aurora.md)
       + [DM Portal](/reference/tools/data-migration/dm-portal.md)
       + Troubleshoot
         - [DM Troubleshooting](/reference/tools/data-migration/troubleshoot/dm.md)
