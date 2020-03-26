@@ -64,7 +64,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 | `MAXVALUE` | `9223372036854775806` or `-1` | Specifies the maximum value of a sequence. When `INCREMENT` > `0`, the default value is `9223372036854775806`. When `INCREMENT` < `0`, the default value is `-1`. |
 | `START` | `MINVALUE` or `MAXVALUE`| Specifies the initial value of a sequence. When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
 | `CACHE` | `1000` | Specifies the size of the local cache sequence in TiDB. |
-| `CYCLE` | `false` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence). When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
+| `CYCLE` | `NO CYCLE` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence). When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
 | `ORDER` | `NO ORDER` | TiDB currently does not support the `ORDER` option and provides only syntax compatibility for it. |
 
 ## `SEQUENCE` function
@@ -198,7 +198,7 @@ You can control a sequence through the following expression functions:
     1 row in set (0.01 sec)
     ```
 
-+ The first valid value of the `nextval()` function for the sequence object is the starting value.
++ The first valid value of the `nextval()` function for the sequence object is the value of `START` parameter.
 
     {{< copyable "sql" >}}
 
@@ -215,7 +215,7 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ Although the `setval()` function can change the position of the current value of the sequence object, it cannot change the fixed increment or decrement of the next value.
++ Although the `setval()` function can change the current value of the sequence object, it cannot change the arithmetic progression rule for the next value.
 
     {{< copyable "sql" >}}
 
@@ -232,7 +232,7 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ When you use `nextval()` to get the next value, the next value will follow the fixed increment or decrement of the sequence.
++ When you use `nextval()` to get the next value, the next value will follow the arithmetic progression rule defined by the sequence.
 
     {{< copyable "sql" >}}
 
@@ -249,7 +249,7 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ In the following example, you can use the next value of the sequence as the default value for the column.
++ You can use the next value of the sequence as the default value for the column, as in the following example.
 
     {{< copyable "sql" >}}
 
@@ -288,7 +288,7 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ In the following example, the value is not specified and the default value of `seq2` is not within the range defined in the above example (`CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;`), so an error is returned.
++ In the following example, the value is not specified, so the default value of `seq2` is used. But the next value of `seq2` is not within the range defined in the above example (`CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;`), so an error is returned.
 
     {{< copyable "sql" >}}
 
@@ -304,17 +304,17 @@ You can control a sequence through the following expression functions:
 
 Currently, MySQL does not have the sequence option. The TiDB sequence is borrowed from MariaDB. Except for the `SETVAL` function, all other functions have the same progressions with those functions of MariaDB.
 
-Progression here means the arithmetic progression in a sequence after the numbers are defined. Although `SETVAL` can set the current value of a sequence, the subsequent values of the sequence still follows the progression.
+Here "progression" means that the numbers in a sequence follow a certain arithmetic progression rule defined by the sequence. Although you can use `SETVAL` to set the current value of a sequence, the subsequent values of the sequence still follow the original progression rule.
 
 For example:
 
 ```
 1, 3, 5, ...            // The sequence starts from 1 and increments by 2.
 select setval(seq, 6)   // Sets the current value of a sequence to 6.
-7, 9, 11, ...           // Subsequent values still follow the progression.
+7, 9, 11, ...           // Subsequent values still follow the progression rule.
 ```
 
-In the `CYCLE` mode, the starting value of a sequence in the first round is `start`, and the starting value in the subsequent rounds is `MinValue` (increment > 0) or `MaxValue` (increment < 0).
+In the `CYCLE` mode, the initial value of a sequence in the first round is the value of the `START` parameter, and the initial value in the subsequent rounds is the value of `MinValue` (`INCREMENT` > 0) or `MaxValue` (`INCREMENT` < 0).
 
 ## See also
 
