@@ -27,26 +27,15 @@ The table routing feature enables DM to replicate a certain table of the upstrea
 ### Parameter configuration
 
 ```yaml
-black-white-list:
+routes:
   rule-1:
-    do-dbs: ["test*"]         # Starting with characters other "~" indicates it is a wildcard;
-                              # v1.0.4 or later versions support the regular expression rules.
-​    do-tables:
-    - db-name: "test[123]"    # Matches test1, test2, and test3.
-      tbl-name: "t[1-5]"      # Matches t1, t2, t3, t4, and t5.
-    - db-name: "test"
-      tbl-name: "t"
+    schema-pattern: "test_*"
+    table-pattern: "t_*"
+    target-schema: "test"
+    target-table: "t"
   rule-2:
-    do-dbs: ["~^test.*"]      # Starting with "~" indicates it is a regular expression.
-​    ignore-dbs: ["mysql"]
-    do-tables:
-    - db-name: "~^test.*"
-      tbl-name: "~^t.*"
-    - db-name: "test"
-      tbl-name: "t"
-    ignore-tables:
-    - db-name: "test"
-      tbl-name: "log"
+    schema-pattern: "test_*"
+    target-schema: "test"
 ```
 
 ### Parameter explanation
@@ -120,7 +109,15 @@ The black and white lists filtering rule of the upstream database instance table
 ```yaml
 black-white-list:
   rule-1:
-    do-dbs: ["~^test.*"]         # Starting with "~" indicates it is a regular expression.
+    do-dbs: ["test*"]         # Starting with characters other "~" indicates it is a wildcard;
+                              # v1.0.4 or later versions support the regular expression rules.
+​    do-tables:
+    - db-name: "test[123]"    # Matches test1, test2, and test3.
+      tbl-name: "t[1-5]"      # Matches t1, t2, t3, t4, and t5.
+    - db-name: "test"
+      tbl-name: "t"
+  rule-2:
+    do-dbs: ["~^test.*"]      # Starting with "~" indicates it is a regular expression.
 ​    ignore-dbs: ["mysql"]
     do-tables:
     - db-name: "~^test.*"
