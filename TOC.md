@@ -42,7 +42,7 @@
       - [From Binary](/how-to/get-started/deploy-tidb-from-binary.md)
       - [From Homebrew](/how-to/get-started/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](/how-to/get-started/deploy-tidb-from-dbdeployer.md)
-      - [In Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md)
+      - [From Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md)
     - [Explore SQL with TiDB](/how-to/get-started/explore-sql.md)
     - [Import Example Database](/how-to/get-started/import-example-database.md)
     - [Read Historical Data](/how-to/get-started/read-historical-data.md)
@@ -277,11 +277,13 @@
   + Performance
     - [Overview](/reference/performance/sql-optimizer-overview.md)
     - [Understanding the Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md)
+    - [Introduction to Join Reorder](/reference/performance/join-reorder.md)
     - [Introduction to Statistics](/reference/performance/statistics.md)
     - [Optimizer Hints](/reference/performance/optimizer-hints.md)
     - [Follower Read](/reference/performance/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/reference/performance/execution-plan-bind.md)
+    - [Access Tables Using `IndexMerge`](/reference/performance/index-merge.md)
     - [Statement Summary Table](/reference/performance/statement-summary.md)
     - [Tune TiKV](/reference/performance/tune-tikv.md)
   + Key Monitoring Metrics
@@ -354,6 +356,7 @@
       - [Monitor](/reference/tools/data-migration/monitor.md)
       + Migrate from MySQL compatible database
         - [Migrate from Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
+      + [DM Portal](/reference/tools/data-migration/dm-portal.md)
       + Troubleshoot
         - [DM Troubleshooting](/reference/tools/data-migration/troubleshoot/dm.md)
         - [Error Description](/reference/tools/data-migration/troubleshoot/error-system.md)
@@ -427,6 +430,8 @@
     + Tools
       - [tkctl](/tidb-in-kubernetes/reference/tools/tkctl.md)
       - [Tools in Kubernetes](/tidb-in-kubernetes/reference/tools/in-kubernetes.md)
+    + Components
+      - [TiDB Scheduler](/tidb-in-kubernetes/reference/components/tidb-scheduler.md)
   - [Troubleshoot](/tidb-in-kubernetes/troubleshoot.md)
   - [FAQs](/tidb-in-kubernetes/faq.md)
 + FAQs
