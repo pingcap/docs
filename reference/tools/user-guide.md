@@ -27,7 +27,7 @@ You can use it in the following two scenarios:
 - Import large amounts of new data quickly
 - Backup and restore all the data
 
-TiDB Lightning supports two back ends: “Importer” and “TiDB”. It determines how tidb-lightning delivers data into the target cluster. The two back ends are as follows:
+TiDB Lightning supports two back ends: "Importer" and "TiDB". It determines how tidb-lightning delivers data into the target cluster. The two back ends are as follows:
 
 1. The default one is [`Importer` back end](/reference/tools/tidb-lightning/overview.md). When using `Importer` as the back end, the cluster cannot provide normal services during the import process. It is used for a large amount of data importing (TB).
 2. The second one is [`TiDB` back end](/reference/tools/tidb-lightning/tidb-backend.md) (just work as [Loader](#tidb-loader-to-be-deprecated)). It is much slower than `Importer` back end model. But the cluster could serve the application during the import process. It is used to handle tens/hundreds of GB data.
@@ -132,13 +132,12 @@ The following are the basics of TiDB Binlog:
 
 #### CDC (Beta, under development, ETA May/June 2020 with TiDB 4.0)
 
-CDC (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in transactional order.
+[CDC](/reference/tools/ticdc/overview.md) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in transactional order.
 
 - Input/Output: 
     - Input: TiDB Cluster
     - Output: MySQL, TiDB, Kafka or incremental backup files
 - Supported TiDB versions: v4.0
-- Document: WIP
 - Kubernetes support: On the development road map, ETA Q2 2020
 
 ## Recommended tools for TiDB versions
