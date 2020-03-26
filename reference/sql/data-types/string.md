@@ -54,7 +54,7 @@ TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `MEDIUMTEXT` type
 
-The `MEDIUMTEXT` type is similar to to the `TEXT` type. The difference is that the maximum column length of `MEDIUMTEXT` is 16,777,215.
+The `MEDIUMTEXT` type is similar to the `TEXT` type. The difference is that the maximum column length of `MEDIUMTEXT` is 16,777,215.
 
 ```sql
 MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
