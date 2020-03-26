@@ -20,7 +20,7 @@ TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`,
 
 ### `VARCHAR` type
 
-`VARCHAR` is a string of variable-length. M represents the maximum column length in characters. The maximum size of `VARCHAR` not cannot exceed 65,535 bytes. The maximum row length and the character set being used determine the `VARCHAR` length.
+`VARCHAR` is a string of variable-length. M represents the maximum column length in characters. The maximum size of `VARCHAR` cannot exceed 65,535 bytes. The maximum row length and the character set being used determine the `VARCHAR` length.
 
 The space occupied by a single character might differ for different character sets. The following table shows the bytes consumed by a single character, and the range of the `VARCHAR` column length in each character set:
 
