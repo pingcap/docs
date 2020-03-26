@@ -493,7 +493,7 @@ The offline node usually indicates the TiKV node. You can determine whether the 
 
 1. Manually stop the relevant services on the offline node.
 2. Delete the `node_exporter` data of the corresponding node from the Prometheus configuration file.
-3. Delete the data of the corresponding node from Ansible `inventory.ini`.
+3. Delete the data of the corresponding node from TiDB Ansible `inventory.ini`.
 
 #### Why couldn't I connect to the PD server using `127.0.0.1` when I was using the PD Control?
 

@@ -173,13 +173,13 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 If you have questions regarding which version to use, email to info@pingcap.com for more information or [file an issue](https://github.com/pingcap/tidb-ansible/issues/new).
 
-## Step 4: Install Ansible and its dependencies on the Control Machine
+## Step 4: Install TiDB Ansible and its dependencies on the Control Machine
 
 Make sure you have logged in to the Control Machine using the `tidb` user account.
 
-It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 ~ 2.7.11 (2.4 ≤ Ansible ≤ 2.7.11).
+It is required to use `pip` to install TiDB Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 ~ 2.7.11 (2.4 ≤ Ansible ≤ 2.7.11).
 
-1. Install Ansible and the dependencies on the Control Machine:
+1. Install TiDB Ansible and the dependencies on the Control Machine:
 
     {{< copyable "shell-regular" >}}
 
@@ -188,9 +188,9 @@ It is required to use `pip` to install Ansible and its dependencies, otherwise a
     sudo pip install -r ./requirements.txt
     ```
 
-    The version information of Ansible and dependencies is in the `tidb-ansible/requirements.txt` file.
+    The version information of TiDB Ansible and dependencies is in the `tidb-ansible/requirements.txt` file.
 
-2. View the version of Ansible:
+2. View the version of TiDB Ansible:
 
     {{< copyable "shell-regular" >}}
 
@@ -341,7 +341,7 @@ You can use either of the following two methods to change the governor mode. In 
 
 Log in to the target machines using the `root` user account.
 
-Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the Ansible deployment cannot pass the test. The `noatime` option is optional.
+Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the TiDB Ansible deployment cannot pass the test. The `noatime` option is optional.
 
 > **Note:**
 >
@@ -947,7 +947,7 @@ ansible-playbook start.yml
 
 ### Error: You need to install jmespath prior to running json_query filter
 
-1. See [Install Ansible and its dependencies on the Control Machine](#step-4-install-ansible-and-its-dependencies-on-the-control-machine) and use `pip` to install Ansible and the corresponding dependencies in the Control Machine. The `jmespath` dependent package is installed by default.
+1. See [Install TiDB Ansible and its dependencies on the Control Machine](#step-4-install-tidb-ansible-and-its-dependencies-on-the-control-machine) and use `pip` to install Ansible and the corresponding dependencies in the Control Machine. The `jmespath` dependent package is installed by default.
 
 2. Run the following command to check whether `jmespath` is successfully installed:
 

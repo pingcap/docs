@@ -29,15 +29,15 @@ For details about using TiDB Ansible to perform a rolling update to components, 
 >
 > Do not execute any DDL statements during the upgrading process, otherwise the undefined behavior error might occur.
 
-## Step 1: Install Ansible and dependencies on the Control Machine
+## Step 1: Install TiDB Ansible and dependencies on the Control Machine
 
 > **Note:**
 >
-> If you have installed Ansible and its dependencies, you can skip this step.
+> If you have installed TiDB Ansible and its dependencies, you can skip this step.
 
 TiDB Ansible release-2.1 depends on Ansible 2.4.2 ~ 2.7.11 (`2.4.2 ≦ ansible < 2.7.11`) and the Python modules of `jinja2 ≧ 2.9.6` and `jmespath ≧ 0.9.0`.
 
-To make it easy to manage dependencies, use `pip` to install Ansible and its dependencies. For details, see [Install Ansible and its dependencies on the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-4-install-ansible-and-its-dependencies-on-the-control-machine). For offline environment, see [Install Ansible and its dependencies offline on the Control Machine](/how-to/deploy/orchestrated/offline-ansible.md#step-3-install-ansible-and-its-dependencies-offline-on-the-control-machine).
+To make it easy to manage dependencies, use `pip` to install TiDB Ansible and its dependencies. For details, see [Install TiDB Ansible and its dependencies on the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-4-install-tidb-ansible-and-its-dependencies-on-the-control-machine). For offline environment, see [Install TiDB Ansible and its dependencies offline on the Control Machine](/how-to/deploy/orchestrated/offline-ansible.md#step-3-install-tidb-ansible-and-its-dependencies-offline-on-the-control-machine).
 
 After the installation is finished, you can view the version information using the following command:
 
@@ -75,7 +75,7 @@ Version: 0.9.3
 
 > **Note:**
 >
-> - You must install Ansible and its dependencies following the above procedures.
+> - You must install TiDB Ansible and its dependencies following the above procedures.
 > - Make sure that the Jinja2 version is correct, otherwise an error occurs when you start Grafana.
 > - Make sure that the jmespath version is correct, otherwise an error occurs when you perform a rolling update to TiKV.
 
