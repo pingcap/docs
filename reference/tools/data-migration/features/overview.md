@@ -109,7 +109,7 @@ The black and white lists filtering rule of the upstream database instance table
 ```yaml
 black-white-list:
   rule-1:
-    do-dbs: ["test*"]         # Starting with characters other "~" indicates it is a wildcard;
+    do-dbs: ["test*"]         # Starting with characters other than "~" indicates that it is a wildcard;
                               # v1.0.4 or later versions support the regular expression rules.
 ​    do-tables:
     - db-name: "test[123]"    # Matches test1, test2, and test3.
@@ -117,7 +117,7 @@ black-white-list:
     - db-name: "test"
       tbl-name: "t"
   rule-2:
-    do-dbs: ["~^test.*"]      # Starting with "~" indicates it is a regular expression.
+    do-dbs: ["~^test.*"]      # Starting with "~" indicates that it is a regular expression.
 ​    ignore-dbs: ["mysql"]
     do-tables:
     - db-name: "~^test.*"
