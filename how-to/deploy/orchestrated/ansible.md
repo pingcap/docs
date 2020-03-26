@@ -1,12 +1,12 @@
 ---
-title: Deploy TiDB Using Ansible
-summary: Use Ansible to deploy a TiDB cluster.
+title: Deploy TiDB Using TiDB Ansible
+summary: Use TiDB Ansible to deploy a TiDB cluster.
 category: how-to
 ---
 
-# Deploy TiDB Using Ansible
+# Deploy TiDB Using TiDB Ansible
 
-This guide describes how to deploy a TiDB cluster using Ansible. For the production environment, it is recommended to deploy TiDB using Ansible.
+This guide describes how to deploy a TiDB cluster using TiDB Ansible. For the production environment, it is recommended to deploy TiDB using TiDB Ansible.
 
 ## Overview
 
@@ -42,7 +42,7 @@ Before you start, make sure you have:
 
     > **Note:**
     >
-    > When you deploy TiDB using Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
+    > When you deploy TiDB using TiDB Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
 
 2. A Control Machine that meets the following requirements:
 
@@ -635,7 +635,7 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | deploy_without_tidb | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 | alertmanager_target | optional: If you have deployed `alertmanager` separately, you can configure this variable using the `alertmanager_host:alertmanager_port` format |
 | grafana_admin_user | the username of Grafana administrator; default `admin` |
-| grafana_admin_password | the password of Grafana administrator account; default `admin`; used to import Dashboard and create the API key using Ansible; update this variable if you have modified it through Grafana web |
+| grafana_admin_password | the password of Grafana administrator account; default `admin`; used to import Dashboard and create the API key using TiDB Ansible; update this variable if you have modified it through Grafana web |
 | collect_log_recent_hours | to collect the log of recent hours; default the recent 2 hours |
 | enable_bandwidth_limit | to set a bandwidth limit when pulling the diagnostic data from the target machines to the Control Machine; used together with the `collect_bandwidth_limit` variable |
 | collect_bandwidth_limit | the limited bandwidth when pulling the diagnostic data from the target machines to the Control Machine; unit: Kbit/s; default 10000, indicating 10Mb/s; for the cluster topology of multiple TiKV instances on each TiKV node, you need to divide the number of the TiKV instances on each TiKV node |
@@ -740,7 +740,7 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
 
 ## Deployment FAQs
 
-This section lists the common questions about deploying TiDB using Ansible.
+This section lists the common questions about deploying TiDB using TiDB Ansible.
 
 ### How to customize the port?
 

@@ -89,7 +89,7 @@
       - [Identify Slow Queries](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md)
       - [Identify Expensive Queries](/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
-    - [Scale using Ansible](/how-to/scale/with-ansible.md)
+    - [Scale using TiDB Ansible](/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade to the Latest Version](/how-to/upgrade/from-previous-version.md)
