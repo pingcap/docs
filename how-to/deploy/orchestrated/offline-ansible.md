@@ -1,6 +1,6 @@
 ---
 title: Deploy TiDB Offline Using TiDB Ansible
-summary: Use Ansible to deploy a TiDB cluster offline.
+summary: Use TiDB Ansible to deploy a TiDB cluster offline.
 category: how-to
 ---
 
