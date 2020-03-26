@@ -15,7 +15,7 @@ Configure sink UIR in the following format. Currently, `scheme` supports `mysql`
 
 ## Configure sink URI with `mysql` or `tidb`
 
-The following command is an configuration example:
+The following command is a configuration example:
 
 {{< copyable "shell-regular" >}}
 

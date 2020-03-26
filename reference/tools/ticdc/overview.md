@@ -34,8 +34,8 @@ This section introduces the replication features of TiCDC.
 
 Currently, the TiCDC sink component supports replicating data to the following downstream databases:
 
-- To databases compatible with MySQL protocol. The sink component provides the final consistency support.
-- To Kafka based on the TiCDC open protocol. The sink component ensures the row-level orderliness, final consistency or strict transactional consistency.
+- Databases compatible with MySQL protocol. The sink component provides the final consistency support.
+- Kafka based on the TiCDC open protocol. The sink component ensures the row-level orderliness, final consistency or strict transactional consistency.
 
 ### Black and white table lists
 
