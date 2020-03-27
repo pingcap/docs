@@ -319,6 +319,7 @@
       - [Monitor](/reference/tools/data-migration/monitor.md)
       + Migrate from MySQL compatible database
         - [Migrate from Amazon Aurora](/how-to/migrate/from-aurora.md)
+      + [DM Portal](/reference/tools/data-migration/dm-portal.md)
       + Troubleshoot
         - [DM Troubleshooting](/reference/tools/data-migration/troubleshoot/dm.md)
         - [Error Description](/reference/tools/data-migration/troubleshoot/error-system.md)
