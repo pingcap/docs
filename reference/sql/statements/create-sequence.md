@@ -59,7 +59,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 |Parameters | Default value | Description |
 | :-- | :-- | :--|
 | `TEMPORARY` | `false` | TiDB currently does not support the `TEMPORARY` option and provides only syntax compatibility for it. |
-| `INCREMENT` | `1` | The increment to use for values. Its positive or negative values can control the growth direction of the sequence. |
+| `INCREMENT` | `1` | Specifies the increment of a sequence. Its positive or negative values can control the growth direction of the sequence. |
 | `MINVALUE` | `1` or `-9223372036854775807` | Specifies the minimum value of a sequence. When `INCREMENT` > `0`, the default value is `1`. When `INCREMENT` < `0`, the default value is `-9223372036854775807`. |
 | `MAXVALUE` | `9223372036854775806` or `-1` | Specifies the maximum value of a sequence. When `INCREMENT` > `0`, the default value is `9223372036854775806`. When `INCREMENT` < `0`, the default value is `-1`. |
 | `START` | `MINVALUE` or `MAXVALUE`| Specifies the initial value of a sequence. When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
@@ -81,7 +81,7 @@ You can control a sequence through the following expression functions:
 
 + `SETVAL`
 
-    This function sets the next value to be returned for a sequence. The first parameter of this function is the `identifier` of the sequence; the second parameter is `num`.
+    This function sets the progression of the current value for a sequence. The first parameter of this function is the `identifier` of the sequence; the second parameter is `num`.
 
 > **Note:**
 >
