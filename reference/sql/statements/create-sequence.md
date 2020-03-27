@@ -135,7 +135,7 @@ You can control a sequence through the following expression functions:
     1 row in set (0.02 sec)
     ```
 
-+ Use the `setval()` function to set the current value of the sequence object:
++ Use the `setval()` function to set the current value (or the current position) of the sequence object:
 
     {{< copyable "sql" >}}
 
