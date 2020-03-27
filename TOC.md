@@ -42,7 +42,7 @@
       - [From Binary](/how-to/get-started/deploy-tidb-from-binary.md)
       - [From Homebrew](/how-to/get-started/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](/how-to/get-started/deploy-tidb-from-dbdeployer.md)
-      - [In Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md)
+      - [From Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md)
     - [Explore SQL with TiDB](/how-to/get-started/explore-sql.md)
     - [Import Example Database](/how-to/get-started/import-example-database.md)
     - [Read Historical Data](/how-to/get-started/read-historical-data.md)
@@ -75,16 +75,14 @@
     - [Overview](/how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](/how-to/monitor/monitor-a-cluster.md)
   + Migrate
-    - [Overview](/how-to/migrate/overview.md)
+    - [Migration Tools User Guide](/reference/tools/user-guide.md)
     + Migrate from MySQL
-      - [Migrate the Full Data](/how-to/migrate/from-mysql.md)
-      - [Migrate the Incremental Data](/how-to/migrate/incrementally-from-mysql.md)
-    - [Migrate from Aurora](/how-to/migrate/from-aurora.md)
+      - [Migration Case of Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
     - [Migrate from CSV](/reference/tools/tidb-lightning/csv.md)
   + Maintain
     - [Common Ansible Operations](/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
-      - [Use `mydumper` and `loader`](/how-to/maintain/backup-and-restore/mydumper-loader.md)
+      - [Use Mydumper and TiDB Lightning](/how-to/maintain/backup-and-restore/mydumper-lightning.md)
       - [Use BR](/reference/tools/br/br.md)
       - [BR Usage Scenarios](/reference/tools/br/use-cases.md)
     + Identify Abnormal Queries
@@ -282,11 +280,13 @@
   + Performance
     - [Overview](/reference/performance/sql-optimizer-overview.md)
     - [Understanding the Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md)
+    - [Introduction to Join Reorder](/reference/performance/join-reorder.md)
     - [Introduction to Statistics](/reference/performance/statistics.md)
     - [Optimizer Hints](/reference/performance/optimizer-hints.md)
     - [Follower Read](/reference/performance/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/reference/performance/execution-plan-bind.md)
+    - [Access Tables Using `IndexMerge`](/reference/performance/index-merge.md)
     - [Statement Summary Table](/reference/performance/statement-summary.md)
     - [Tune TiKV](/reference/performance/tune-tikv.md)
   + Key Monitoring Metrics
@@ -311,12 +311,15 @@
     - [Upgrade](/reference/tidb-binlog/upgrade.md)
     - [Reparo](/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/reference/tidb-binlog/binlog-slave-client.md)
+    - [TiDB Binlog Relay Log](/reference/tidb-binlog/relay-log.md)
+    - [Bidirectional Replication Between TiDB Clusters](/reference/tidb-binlog/bidirectional-replication.md)
     - [Glossary](/reference/tidb-binlog/glossary.md)
     + Troubleshoot
       - [Troubleshooting](/reference/tidb-binlog/troubleshoot/binlog.md)
       - [Error Handling](/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/reference/tidb-binlog/faq.md)
   + Tools
+    - [Tools User Guide](/reference/tools/user-guide.md)
     - [Mydumper](/reference/tools/mydumper.md)
     - [Syncer](/reference/tools/syncer.md)
     - [Loader](/reference/tools/loader.md)
@@ -325,7 +328,7 @@
         - [DM Overview](/reference/tools/data-migration/overview.md)
         - [Restrictions](/reference/tools/data-migration/overview.md#usage-restrictions)
         - [DM-worker](/reference/tools/data-migration/dm-worker-intro.md)
-        - [DM Relay Log](/reference/tools/data-migration/dm-worker-intro.md)
+        - [DM Relay Log](/reference/tools/data-migration/relay-log.md)
       + Features
         - [Table Routing](/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
@@ -355,7 +358,8 @@
         - [Skip or Replace Abnormal SQL Statements](/reference/tools/data-migration/skip-replace-sqls.md)
       - [Monitor](/reference/tools/data-migration/monitor.md)
       + Migrate from MySQL compatible database
-        - [Migrate from Aurora](/how-to/migrate/from-aurora.md)
+        - [Migrate from Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
+      + [DM Portal](/reference/tools/data-migration/dm-portal.md)
       + Troubleshoot
         - [DM Troubleshooting](/reference/tools/data-migration/troubleshoot/dm.md)
         - [Error Description](/reference/tools/data-migration/troubleshoot/error-system.md)
@@ -365,6 +369,7 @@
         + v1.0
           - [1.0.2](/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/reference/tools/data-migration/releases/1.0.3.md)
+          - [1.0.4](/reference/tools/data-migration/releases/1.0.4.md)
       - [TiDB DM Glossary](/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/reference/tools/tidb-lightning/overview.md)
@@ -379,7 +384,11 @@
       - [Troubleshoot](/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/faq/tidb-lightning.md)
       - [Glossary](/reference/tools/tidb-lightning/glossary.md)
-    - [sync-diff-inspector](/reference/tools/sync-diff-inspector/overview.md)
+    + sync-diff-inspector
+      - [Overview](/reference/tools/sync-diff-inspector/overview.md)
+      - [Data Check for Tables with Different Schema or Table Names](/reference/tools/sync-diff-inspector/route-diff.md)
+      - [Data Check in the Sharding Scenario](/reference/tools/sync-diff-inspector/shard-diff.md)
+      - [Data Check for TiDB Upstream and Downstream Clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
     - [TiKV Control](/reference/tools/tikv-control.md)
@@ -424,6 +433,8 @@
     + Tools
       - [tkctl](/tidb-in-kubernetes/reference/tools/tkctl.md)
       - [Tools in Kubernetes](/tidb-in-kubernetes/reference/tools/in-kubernetes.md)
+    + Components
+      - [TiDB Scheduler](/tidb-in-kubernetes/reference/components/tidb-scheduler.md)
   - [Troubleshoot](/tidb-in-kubernetes/troubleshoot.md)
   - [FAQs](/tidb-in-kubernetes/faq.md)
 + FAQs
@@ -440,6 +451,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+    - [4.0.0-beta.2](/releases/4.0.0-beta.2.md)
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
@@ -447,6 +459,7 @@
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.12](/releases/3.0.12.md)
     - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)
     - [3.0.9](/releases/3.0.9.md)

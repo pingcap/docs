@@ -131,7 +131,7 @@ In environments of development, testing and production, the requirements on serv
 
     **Method #2**: Deploy a TiDB cluster containing Pump from scratch.
 
-    For how to use Ansible to deploy the TiDB cluster, see [Deploy TiDB Using Ansible](/how-to/deploy/orchestrated/ansible.md).
+    For how to use TiDB Ansible to deploy the TiDB cluster, see [Deploy TiDB Using TiDB Ansible](/how-to/deploy/orchestrated/ansible.md).
 
 3. Check the Pump status.
 
@@ -550,6 +550,13 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # The regular expression should start with "~".
 
         # replicate-do-db = ["~^b.*","s1"]
+
+        # [syncer.relay]
+        # It saves the directory of the relay log. The relay log is not enabled if the value is empty.
+        # The configuration only comes to effect if the downstream is TiDB or MySQL.
+        # log-dir = ""
+        # the maximum size of each file
+        # max-file-size = 10485760
 
         # [[syncer.replicate-do-table]]
         # db-name ="test"

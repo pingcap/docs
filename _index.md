@@ -10,8 +10,8 @@ TiDB ("Ti" stands for Titanium) is an open-source NewSQL database that supports 
 
 TiDB can be deployed on-premise or in-cloud. The following deployment options are officially supported by PingCAP:
 
-- [Ansible Deployment](/how-to/deploy/orchestrated/ansible.md): This guide describes how to deploy TiDB using Ansible. It is strongly recommended for production deployment.
-- [Ansible Offline Deployment](/how-to/deploy/orchestrated/offline-ansible.md): If your environment has no access to the internet, you can follow this guide to see how to deploy a TiDB cluster offline using Ansible.
+- [Ansible Deployment](/how-to/deploy/orchestrated/ansible.md): This guide describes how to deploy TiDB using TiDB Ansible. It is strongly recommended for production deployment.
+- [Ansible Offline Deployment](/how-to/deploy/orchestrated/offline-ansible.md): If your environment has no access to the internet, you can follow this guide to see how to deploy a TiDB cluster offline using TiDB Ansible.
 - [Docker Deployment](/how-to/deploy/orchestrated/docker.md): This guide describes how to deploy TiDB using Docker.
 - [Docker Compose Deployment](/how-to/get-started/deploy-tidb-from-docker-compose.md): This guide describes how to deploy TiDB using Docker compose. You can follow this guide to quickly deploy a TiDB cluster for testing and development on your local drive.
 - Kubernetes Deployment:
@@ -38,7 +38,7 @@ The following list collects deployment guides and tutorials from the community. 
 - [Developer install guide (single machine)](http://www.tocker.ca/this-blog-now-powered-by-wordpress-tidb.html)
 - [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/)
 
-_Your contribution is also welcome! Feel free to open a [pull request](https://github.com/pingcap/docs/blob/master/dev/overview.md) to add additional links._
+_Your contribution is also welcome! Feel free to open a [pull request](https://github.com/pingcap/docs/blob/master/overview.md) to add additional links._
 
 ## Source Code
 
