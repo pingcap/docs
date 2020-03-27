@@ -150,16 +150,17 @@ Make sure you have logged in to the Control Machine using the `root` user accoun
 
 ## Step 3: Download TiDB Ansible to the Control Machine
 
-Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download TiDB Ansible from the master branch of the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
+Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download the [TAG version](https://github.com/pingcap/tidb-ansible/tags) corresponding to TiDB Ansible 4.0 from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-git clone https://github.com/pingcap/tidb-ansible.git
+git clone -b $tag https://github.com/pingcap/tidb-ansible.git
 ```
 
 > **Note:**
 >
+> - Replace `$tag` with the value of the chosen TAG version. For example, `v4.0.0-beta.2`.
 > - To deploy and upgrade TiDB clusters, use the corresponding version of `tidb-ansible`. If you only modify the version in the `inventory.ini` file, errors might occur.
 > - It is required to download `tidb-ansible` to the `/home/tidb` directory using the `tidb` user account. If you download it to the `/root` directory, a privilege issue occurs.
 
@@ -169,7 +170,7 @@ If you have questions regarding which version to use, email to info@pingcap.com 
 
 Make sure you have logged in to the Control Machine using the `tidb` user account.
 
-It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-2.0, release-2.1, release-3.1, and master branches of TiDB Ansible are compatible with Ansible 2.4 ~ 2.7.11 (2.4 ≤ Ansible ≤ 2.7.11).
+It is required to use `pip` to install Ansible and its dependencies, otherwise a compatibility issue occurs. Currently, the release-4.0 branch of TiDB Ansible is compatible with Ansible 2.5 ~ 2.7.11 (2.5 ≤ Ansible ≤ 2.7.11).
 
 1. Install TiDB Ansible and the dependencies on the Control Machine:
 
@@ -514,13 +515,15 @@ Take two TiKV instances on each TiKV node as an example:
 172.16.10.3
 
 # Note: To use labels in TiKV, you must also configure location_labels for PD at the same time.
+
+# You must also configure status ports in the multi-instance scenario.
 [tikv_servers]
-TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv1"
-TiKV1-2 ansible_host=172.16.10.4 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv1"
-TiKV2-1 ansible_host=172.16.10.5 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv2"
-TiKV2-2 ansible_host=172.16.10.5 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv2"
-TiKV3-1 ansible_host=172.16.10.6 deploy_dir=/data1/deploy tikv_port=20171 labels="host=tikv3"
-TiKV3-2 ansible_host=172.16.10.6 deploy_dir=/data2/deploy tikv_port=20172 labels="host=tikv3"
+TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv1"
+TiKV1-2 ansible_host=172.16.10.4 deploy_dir=/data2/deploy tikv_port=20172 tikv_status_port=20182 labels="host=tikv1"
+TiKV2-1 ansible_host=172.16.10.5 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv2"
+TiKV2-2 ansible_host=172.16.10.5 deploy_dir=/data2/deploy tikv_port=20172 tikv_status_port=20182 labels="host=tikv2"
+TiKV3-1 ansible_host=172.16.10.6 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv3"
+TiKV3-2 ansible_host=172.16.10.6 deploy_dir=/data2/deploy tikv_port=20172 tikv_status_port=20182 labels="host=tikv3"
 
 # When you deploy a TiDB cluster of the 3.0 version, you must configure the TiKV status ports in the topology of multiple TiKV instances, as shown in the following example.
 # TiKV1-1 ansible_host=172.16.10.4 deploy_dir=/data1/deploy tikv_port=20171 tikv_status_port=20181 labels="host=tikv1"
