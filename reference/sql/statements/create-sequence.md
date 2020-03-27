@@ -63,7 +63,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 | `MINVALUE` | `1` or `-9223372036854775807` | Specifies the minimum value of a sequence. When `INCREMENT` > `0`, the default value is `1`. When `INCREMENT` < `0`, the default value is `-9223372036854775807`. |
 | `MAXVALUE` | `9223372036854775806` or `-1` | Specifies the maximum value of a sequence. When `INCREMENT` > `0`, the default value is `9223372036854775806`. When `INCREMENT` < `0`, the default value is `-1`. |
 | `START` | `MINVALUE` or `MAXVALUE`| Specifies the initial value of a sequence. When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
-| `CACHE` | `1000` | Specifies the size of the local cache sequence in TiDB. |
+| `CACHE` | `1000` | Specifies the local cache size of a sequence in TiDB. |
 | `CYCLE` | `NO CYCLE` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence). When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
 | `ORDER` | `NO ORDER` | TiDB currently does not support the `ORDER` option and provides only syntax compatibility for it. |
 
@@ -135,7 +135,7 @@ You can control a sequence through the following expression functions:
     1 row in set (0.02 sec)
     ```
 
-+ Use the `setval()` function to set the position of the current value of the sequence object:
++ Use the `setval()` function to set the current value of the sequence object:
 
     {{< copyable "sql" >}}
 
