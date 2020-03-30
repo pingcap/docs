@@ -148,20 +148,20 @@ Currently, the HTTP interface provides some basic features for query and mainten
 
 Use the following command to get the TiCDC server status:
 
-    {{< copyable "shell-regular" >}}
+{{< copyable "shell-regular" >}}
 
-    ```shell
-    curl http://127.0.0.1:8300/status
-    ```
+```shell
+curl http://127.0.0.1:8300/status
+```
 
-    ```
-    {
-    "version": "0.0.1",
-    "git_hash": "863f8ea889b144244ff53593a45c47ad22d37396",
-    "id": "6d92386a-73fc-43f3-89de-4e337a42b766", # capture id
-    "pid": 12102    # cdc server pid
-    }
-    ```
+```
+{
+"version": "0.0.1",
+"git_hash": "863f8ea889b144244ff53593a45c47ad22d37396",
+"id": "6d92386a-73fc-43f3-89de-4e337a42b766", # capture id
+"pid": 12102    # cdc server pid
+}
+```
 
 ### Evict the owner node
 
