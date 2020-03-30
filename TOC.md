@@ -380,9 +380,9 @@
       - [Glossary](/reference/tools/tidb-lightning/glossary.md)
     + TiCDC
       - [Overview](/reference/tools/ticdc/overview.md)
-      - [Configure and Use](/reference/tools/ticdc/deploy.md)
-      - [Manage](/reference/tools/ticdc/manage.md)
-      - [Sink URI](/reference/tools/ticdc/sink.md)
+      - [Deploy and Use TiCDC](/reference/tools/ticdc/deploy.md)
+      - [Manage TiCDC Cluster and Replication Tasks](/reference/tools/ticdc/manage.md)
+      - [Configure Sink URI](/reference/tools/ticdc/sink.md)
     + sync-diff-inspector
       - [Overview](/reference/tools/sync-diff-inspector/overview.md)
       - [Data Check for Tables with Different Schema or Table Names](/reference/tools/sync-diff-inspector/route-diff.md)
