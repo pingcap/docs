@@ -1,11 +1,12 @@
 ---
 title: Configure Sink URI
+summary: Learn how to configure sink URI.
 category: reference
 ---
 
 # Configure Sink URI
 
-Configure sink UIR in the following format. Currently, `scheme` supports `mysql`, `tidb`, and `kafka`.
+You need to configure sink URI in the following format. Currently, the `scheme` supports `mysql`, `tidb`, and `kafka`.
 
 {{< copyable "" >}}
 
@@ -27,14 +28,14 @@ The parameters in the above command are described as follows:
 
 | Parameter         | Description                                             |
 | :------------ | :------------------------------------------------ |
-| `root`        | The name of the downstream database                             |
+| `root`        | The username of the downstream database                             |
 | `123456`       |  The password of the downstream database                                   |
 | `127.0.0.1`    |  The IP of the downstream database                              |
 | `3306`         |  The port of the downstream database                               |
 | `worker-count` |   The SQL statement count that can be concurrently executed downstream (optional, `16` by default)    |
-| `max-txn-row`  |  The size of transaction batches that can be executed downstream (optional, `256` by default)  |
+| `max-txn-row`  |  The size of a transaction batch that can be executed to the downstream (optional, `256` by default)  |
 
-## Configure sink URI with `kakfa`
+## Configure sink URI with `kafka`
 
 The following command is an configuration example:
 
@@ -52,6 +53,6 @@ The parameters in the above command are described as follows:
 | `9092`               |  The port of downstream Kafka                                        |
 | `cdc-test`           |  The name of the Kafka topic                                    |
 | `kafka-version`      |  The version of downstream Kafka (optional, `2.4.0` by default)                    |
-| `partition-num`      | The number of downstream Kafka partitions (optional. The value must be **NO** greater than the actual number of partitions. If you do not configure this parameter, the partition number will be obtained automatically.) |
+| `partition-num`      | The number of downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number will be obtained automatically.) |
 | `max-message-bytes`  |  The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default)  |
 | `replication-factor` |  The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
