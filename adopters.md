@@ -11,6 +11,8 @@ This is a list of TiDB adopters in various industries.
 
 | Company | Industry | Success Story |
 | :--- | :--- | :--- |
+|[Zhihu](https://en.wikipedia.org/wiki/Zhihu)|Knowledge Sharing|[English](https://pingcap.com/success-stories/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu/); [Chinese](https://pingcap.com/cases-cn/user-case-zhihu/)|
+|[JD Cloud](https://www.crunchbase.com/organization/jd-cloud)|Cloud Computing|[English](https://pingcap.com/success-stories/lesson-learned-from-40-k-qps-and-20-billion-rows-of-data-in-a-single-scale-out-cluster/); [Chinese](https://pingcap.com/cases-cn/user-case-jingdongyun/)|
 |[Mobike](https://en.wikipedia.org/wiki/Mobike)|Ridesharing|[English](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/); [Chinese](https://pingcap.com/cases-cn/user-case-mobike/)|
 |[Jinri Toutiao](https://en.wikipedia.org/wiki/Toutiao)|Mobile News Platform|[Chinese](https://pingcap.com/cases-cn/user-case-toutiao/)|
 |[Yiguo.com](https://www.crunchbase.com/organization/shanghai-yiguo-electron-business)|E-commerce|[English](https://www.datanami.com/2018/02/22/hybrid-database-capturing-perishable-insights-yiguo/); [Chinese](https://pingcap.com/cases-cn/user-case-yiguo)|
