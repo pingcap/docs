@@ -37,7 +37,7 @@ The following are the basics of TiDB Lightning:
 
 #### BR (beta)
 
-[BR](/reference/tools/br/br.md) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/loader, BR is more suitable for scenarios of huge data volume.
+[BR](/reference/tools/br/br.md) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/Loader/Lightning, BR is more suitable for scenarios of huge data volume.
 
 The following are the basics of BR:
 
@@ -180,7 +180,7 @@ The following are the basics of TiDB Binlog:
 - TiDB Full Data Restore:
     - Loader -> Lightning -> BR
 - MySQL Data Migration:
-    - Mydumper/Loader + Syncer -> Loader + DM -> Lightning + DM -> DM (in the next step, we will integrate Lightning into DM)
+    - Mydumper/Loader + Syncer  -> DM (in the next step, we will integrate Lightning into DM)
 - TiDB Incremental Data Migration:
     - TiDB Binlog -> CDC
 
