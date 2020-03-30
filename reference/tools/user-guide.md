@@ -20,12 +20,7 @@ This guide is specifically designed to help you better understand these tools an
 
 #### TiDB Lightning
 
-[TiDB Lightning](/reference/tools/tidb-lightning/overview.md) (Lightning) is a tool used for the fast full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via Mydumper or CSV data source. 
-
-You can use it in the following two scenarios:
-
-- Import large amounts of new data quickly
-- Backup and restore all the data
+[TiDB Lightning](/reference/tools/tidb-lightning/overview.md) (Lightning) is a tool used for the fast full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via Mydumper or CSV data source.
 
 TiDB Lightning supports two back ends: "Importer" and "TiDB". It determines how tidb-lightning delivers data into the target cluster. The two back ends are as follows:
 
@@ -70,7 +65,7 @@ The following are the basics of Loader:
 
 [TiDB Data Migration](/reference/tools/data-migration/overview.md) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB into TiDB. It can help to reduce the operations cost and simplify the troubleshooting process. 
 
-For the full data migration, it uses an embedded Loader. For the incremental data migration, it uses Syncer as its kernel.
+For the full data migration, it uses an embedded Loader and an embedded Mydumper. For the incremental data migration, it uses Syncer as its kernel.
 
 The following are the basics of DM:
 
@@ -132,7 +127,7 @@ The following are the basics of TiDB Binlog:
 
 #### CDC (Beta, under development, ETA May/June 2020 with TiDB 4.0)
 
-[CDC](/reference/tools/ticdc/overview.md) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in transactional order.
+[CDC](/reference/tools/ticdc/overview.md) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in row changed order.
 
 - Input/Output: 
     - Input: TiDB Cluster
@@ -147,12 +142,12 @@ The following are the basics of TiDB Binlog:
 - MySQL full data backup: use Mydumper
 - MySQL full data import to TiDB:
     - TB scale: use TiDB Lightning
-    - Sub-TB scale: Use DM
+    - Sub-TB scale: use DM
 - MySQL incremental data sync to TiDB: use DM
-- TiDB full data backup: Use Mydumper
+- TiDB full data backup: use Mydumper
 - TiDB full data restore:
     - TB scale: use TiDB Lightning
-    - Sub-TB scale: Use DM
+    - Sub-TB scale: use TiDB Lightning
 - TiDB incremental backup & restore: use TiDB-Binlog
 
 ### Recommended tools for TiDB 3.1
@@ -214,7 +209,7 @@ You can use TiDB Binlog to replicate data between TiDB clusters. You can also us
 #### Full backup and restore of the data in TiDB/MySQL clusters
 
 - Use the Mydumper tool for full data backup 
-- Use the Lightning tool for full data restore
+- Use the Lightning tool with `tidb` backend for full data restore
 
 ### For TiDB 3.1
 
@@ -243,7 +238,7 @@ To restore data to a TiDB cluster:
 To restore data to a MySQL cluster:
 
 - Use the Mydumper tool for full data backup
-- Use the Lightning tool for full data restore
+- Use the Lightning tool with `tidb` backend for full data restore
 
 ### For TiDB 4.0
 
@@ -272,4 +267,4 @@ To restore data to a TiDB cluster:
 To restore data to a MySQL cluster:
 
 - Use the Mydumper tool for full data backup
-- Use the Lightning tool for full data restore
+- Use the Lightning tool with `tidb` backend for full data restore
