@@ -32,7 +32,7 @@ The parameters in the above command are described as follows:
 | `123456`       |  The password of the downstream database                                   |
 | `127.0.0.1`    |  The IP of the downstream database                              |
 | `3306`         |  The port of the downstream database                               |
-| `worker-count` |   The SQL statement count that can be concurrently executed downstream (optional, `16` by default)    |
+| `worker-count` |   The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)    |
 | `max-txn-row`  |  The size of a transaction batch that can be executed to the downstream (optional, `256` by default)  |
 
 ## Configure sink URI with `kafka`
