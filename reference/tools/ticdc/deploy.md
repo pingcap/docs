@@ -1,5 +1,6 @@
 ---
 title: Deploy and use TiCDC
+summary: Learn how to deploy and use TiCDC to replicate incremental data.
 category: reference
 ---
 
@@ -7,7 +8,7 @@ category: reference
 
 This document introduces how to deploy and use TiCDC to replicate incremental data.
 
-## Step 1: Deploy TiCDC clusters
+## Step 1: Deploy TiCDC cluster
 
 Suppose that there is a PD node (the client URL is `10.0.10.25:2379`) in the PD cluster that can provide services. If you want to deploy three TiCDC nodes, start the TiCDC cluster using the following commands. You only need to specify the same PD address, and the newly started TiCDC nodes will automatically be added to the TiCDC cluster.
 
@@ -21,7 +22,7 @@ cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_3.log --status-addr=127.
 
 ## Step 2: Create replication task
 
-To replicate all upstream database schemas and tables (except system tables) to the downstream MySQL, use the following command to create the replication task:
+To replicate all upstream database schemas and tables (except system tables) to the downstream MySQL, use the following command to create a replication task:
 
 {{< copyable "shell-regular" >}}
 
@@ -38,7 +39,7 @@ The parameters in the above command are described as follows:
 
 After executing the above command, TiCDC starts to replicate data to the downstream MySQL (`127.0.0.1:3306`) from the specified `start-ts` (`415238226621235200`).
 
-If you want to replicate data to a Kafka cluster, first create the topic in the Kafka cluster (for example, `cdc-test` in the following example is a topic), create partitions, and use the following command to create the replication task:
+If you want to replicate data to a Kafka cluster, first create the topic in the Kafka cluster (for example, `cdc-test` in the following example is a topic), create partitions, and use the following command to create a replication task:
 
 {{< copyable "shell-regular" >}}
 

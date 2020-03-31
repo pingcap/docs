@@ -1,15 +1,16 @@
 ---
 title: Manage TiCDC Cluster and Replication Tasks
+summary: Learn how to manage a TiCDC cluster and replication tasks.
 category: reference
 ---
 
 # Manage TiCDC Cluster and Replication Tasks
 
-Currently, you can manage the TiCDC cluster and replication tasks using the `cdc cli` command-line tool or the HTTP interface.
+Currently, you can manage a TiCDC cluster and replication tasks using the `cdc cli` command-line tool or the HTTP interface.
 
 ## Use `cdc cli` to manage cluster status and data replication task
 
-This section introduces how to use `cdc cli` to manage the TiCDC cluster and the data replication tasks.
+This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks.
 
 ### Manage TiCDC service progress (`capture`)
 
@@ -45,7 +46,7 @@ This section introduces how to use `cdc cli` to manage the TiCDC cluster and the
     create changefeed ID: 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f info {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"config":{"filter-case-sensitive":false,"filter-rules":null,"ignore-txn-commit-ts":null}}
     ```
 
-    - Query the `changefeed` list:
+- Query the `changefeed` list:
 
     {{< copyable "shell-regular" >}}
 
@@ -142,7 +143,9 @@ This section introduces how to use `cdc cli` to manage the TiCDC cluster and the
 
 ## Use HTTP interface to manage cluster status and data replication task
 
-Currently, the HTTP interface provides some basic features for query and maintenance. In the following examples, suppose that the interface IP address for querying the TiCDC server status is `127.0.0.1`, and the port address is `8300` (you can specify the IP and port in `--status-addr=ip:port` when starting the TiCDC server). In later TiCDC versions, these features will be integrated to `cdc cli`.
+Currently, the HTTP interface provides some basic features for query and maintenance. 
+
+In the following examples, suppose that the interface IP address for querying the TiCDC server status is `127.0.0.1`, and the port address is `8300` (you can specify the IP and port in `--status-addr=ip:port` when starting the TiCDC server). In later TiCDC versions, these features will be integrated to `cdc cli`.
 
 ### Get the TiCDC server status
 

@@ -1,5 +1,6 @@
 ---
 title: TiCDC Overview
+summary: Learn what TiCDC is, what features TiCDC provides, etc.
 category: reference
 ---
 
@@ -9,7 +10,9 @@ category: reference
 
 ## TiCDC Architecture
 
-When TiCDC is running, it is a stateless node that achieves high availability through etcd in PD. The TiCDC cluster supports creating multiple replication tasks to replicate data to multiple different downstream platforms. The architecture of TiCDC is shown in the following figure:
+When TiCDC is running, it is a stateless node that achieves high availability through etcd in PD. The TiCDC cluster supports creating multiple replication tasks to replicate data to multiple different downstream platforms.
+
+The architecture of TiCDC is shown in the following figure:
 
 ![TiCDC architecture](/media/cdc-architecture.png)
 
