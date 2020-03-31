@@ -20,11 +20,11 @@ TiDB supports all the MySQL string types, including `CHAR`, `VARCHAR`, `BINARY`,
 
 ### `VARCHAR` type
 
-`VARCHAR` is a string of variable-length. M represents the maximum column length in characters. The maximum size of `VARCHAR` cannot exceed 65,535 bytes. The maximum row length and the character set being used determine the `VARCHAR` length.
+`VARCHAR` is a string of variable-length. M represents the maximum column length in characters (not bytes). The maximum size of `VARCHAR` cannot exceed 65,535 bytes. The maximum row length and the character set being used determine the `VARCHAR` length.
 
 The space occupied by a single character might differ for different character sets. The following table shows the bytes consumed by a single character, and the range of the `VARCHAR` column length in each character set:
 
-| Character Set | Byte(s) per Character | Range of the `VARCHAR` Column Length |
+| Character Set | Byte(s) per Character | Range of the Maximum `VARCHAR` Column Length |
 | ----- | ---- | ---- |
 | ascii | 1 | (0, 65535] |
 | latin1 | 1 | (0, 65535] |
@@ -46,7 +46,7 @@ TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `TINYTEXT` type
 
-The `TINYTEXT` type is similar to the `TEXT` type. The difference is that the maximum column length of `TINYTEXT` is 255.
+The `TINYTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `TINYTEXT` is 255.
 
 ```sql
 TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -54,7 +54,7 @@ TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `MEDIUMTEXT` type
 
-The `MEDIUMTEXT` type is similar to the `TEXT` type. The difference is that the maximum column length of `MEDIUMTEXT` is 16,777,215.
+The `MEDIUMTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `MEDIUMTEXT` is 16,777,215.
 
 ```sql
 MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -62,7 +62,7 @@ MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `LONGTEXT` type
 
-The `LONGTEXT` type is similar to the `TEXT` type. The difference is that the maximum column length of `LONGTEXT` is 4,294,967,295.
+The `LONGTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `LONGTEXT` is 4,294,967,295.
 
 ```sql
 LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -78,7 +78,7 @@ BINARY(M)
 
 ### `VARBINARY` type
 
-The `VARBINARY` type is similar to the `VARCHAR` type. The difference is that the `VARBINARY` stores binary byte strings.
+The `VARBINARY` type is similar to the [`VARCHAR` type](#varchar-type). The difference is that the `VARBINARY` stores binary byte strings.
 
 ```sql
 VARBINARY(M)
@@ -86,7 +86,7 @@ VARBINARY(M)
 
 ### `BLOB` type
 
-`BLOB` is a binary large file. M represents the maximum column length in bytes, ranging from 0 to 65,535.
+`BLOB` is a large binary file. M represents the maximum column length in bytes, ranging from 0 to 65,535.
 
 ```sql
 BLOB[(M)]
@@ -94,7 +94,7 @@ BLOB[(M)]
 
 ### `TINYBLOB` type
 
-The `TINYBLOB` type is similar to the `BLOB` type. The difference is that the maximum column length of `TINYBLOB` is 255.
+The `TINYBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `TINYBLOB` is 255.
 
 ```sql
 TINYBLOB
@@ -102,7 +102,7 @@ TINYBLOB
 
 ### `MEDIUMBLOB` type
 
-The `MEDIUMBLOB` type is similar to the `BLOB` type. The difference is that the maximum column length of `MEDIUMBLOB` is 16,777,215.
+The `MEDIUMBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `MEDIUMBLOB` is 16,777,215.
 
 ```sql
 MEDIUMBLOB
@@ -110,7 +110,7 @@ MEDIUMBLOB
 
 ### `LONGBLOB` type
 
-The `LONGBLOB` type is similar to the `BLOB` type. The difference is that the maximum column length of `LONGBLOB` is 4,294,967,295.
+The `LONGBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `LONGBLOB` is 4,294,967,295.
 
 ```sql
 LONGBLOB
