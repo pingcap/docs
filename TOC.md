@@ -13,7 +13,6 @@
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/add-index-with-load.md)
-    - [TiDB in Kubernetes Sysbench Test](/benchmark/sysbench-in-k8s.md)
     - [DM 1.0-alpha Benchmark Report](/benchmark/dm-v1-alpha.md)
     - [DM 1.0-GA Benchmark Report](/benchmark/dm-v1.0-ga.md)
 + Concepts
