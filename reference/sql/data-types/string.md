@@ -70,7 +70,7 @@ LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `BINARY` type
 
-The `BINARY` type is similar to the `CHAR` type. The difference is that `BINARY` stores binary byte strings.
+The `BINARY` type is similar to the [`CHAR` type](#char-type). The difference is that `BINARY` stores binary byte strings.
 
 ```sql
 BINARY(M)
