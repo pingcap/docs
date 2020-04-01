@@ -9,9 +9,17 @@
   - [TiDB Introduction](/overview.md)
   + Benchmarks
     - [How to Test TiDB Using Sysbench](/benchmark/how-to-run-sysbench.md)
+<<<<<<< HEAD
     - [Sysbench Performance Test - v2.1 vs. v2.0](/benchmark/sysbench-v3.md)
     - [TPC-H 50G Performance Test - v2.1 vs. v2.0](/benchmark/tpch-v2.md)
     - [DM Benchmark Report](/benchmark/dm-v1-alpha.md)
+=======
+    - [How to Run TPC-C Test on TiDB](/benchmark/how-to-run-tpcc.md)
+    - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/sysbench-v4.md)
+    - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/tpcc.md)
+    - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/add-index-with-load.md)
+    - [TiDB in Kubernetes Sysbench Test](/benchmark/sysbench-in-k8s.md)
+>>>>>>> eec9a16... DM: remove all DM related files from docs repo (#2127)
 + Concepts
   - [Architecture](/architecture.md)
   + Key Features
@@ -41,7 +49,7 @@
     - [Import Example Database](/how-to/get-started/import-example-database.md)
     - [Read Historical Data](/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/how-to/get-started/tidb-binlog.md)
-    - [TiDB Data Migration Tutorial](/how-to/get-started/data-migration.md)
+    - [TiDB Data Migration Tutorial](https://pingcap.com/docs/tidb-data-migration/stable/get-started.md)
     - [TiDB Lightning Tutorial](/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/how-to/get-started/tispark.md)
   + Deploy
@@ -56,7 +64,7 @@
     + Geographic Redundancy
       - [Overview](/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/how-to/deploy/geographic-redundancy/location-awareness.md)
-    - [Data Migration with Ansible](/how-to/deploy/data-migration-with-ansible.md)
+    - [Data Migration with Ansible](https://pingcap.com/docs/tidb-data-migration/stable/deploy-a-dm-cluster-using-ansible/)
   + Configure
     - [Time Zone](/how-to/configure/time-zone.md)
     - [Memory Control](/how-to/configure/memory-control.md)
@@ -283,6 +291,7 @@
     - [Mydumper](/reference/tools/mydumper.md)
     - [Syncer](/reference/tools/syncer.md)
     - [Loader](/reference/tools/loader.md)
+<<<<<<< HEAD
     + TiDB Data Migration
       + Overview
         - [DM Overview](/reference/tools/data-migration/overview.md)
@@ -331,6 +340,9 @@
           - [1.0.3](/reference/tools/data-migration/releases/1.0.3.md)
           - [1.0.4](/reference/tools/data-migration/releases/1.0.4.md)
       - [TiDB DM Glossary](/reference/tools/data-migration/glossary.md)
+=======
+    - [Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/)
+>>>>>>> eec9a16... DM: remove all DM related files from docs repo (#2127)
     + TiDB Lightning
       - [Overview](/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/reference/tools/tidb-lightning/deployment.md)
