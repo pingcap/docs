@@ -258,7 +258,7 @@ Configuration items related to performance.
 
 - The size limit of a transaction.
 - Default value: `104857600`
-- The total key-value entries size in bytes should be less than this value. Note, if the `binlog` is enabled, this value should be less than 104857600(100M), because of the limitation of the binlog component; If `binlog` is not enabled, the maximum value of this configuration is 10737418240(10G).
+- The total size of all key-value entries in bytes should be less than this value. Note that if the `binlog` is enabled, this value should be less than `104857600` (which means 100MB), because of the limitation of the binlog component. If `binlog` is not enabled, the maximum value of this configuration is `10737418240` (which means 10GB).
 
 ### `tcp-keep-alive`
 
