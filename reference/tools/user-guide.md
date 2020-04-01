@@ -137,22 +137,7 @@ The following are the basics of TiDB Binlog:
 - Supported TiDB versions: v4.0
 - Kubernetes support: On the development road map, ETA Q2 2020
 
-## Recommended tools for TiDB versions
-
-### Recommended tools for TiDB 3.0 or earlier
-
-- MySQL full data backup: use Mydumper
-- MySQL full data import to TiDB:
-    - TB scale: use TiDB Lightning
-    - Sub-TB scale: use DM
-- MySQL incremental data sync to TiDB: use DM
-- TiDB full data backup: use Mydumper
-- TiDB full data restore:
-    - TB scale: use TiDB Lightning
-    - Sub-TB scale: use TiDB Lightning
-- TiDB incremental backup & restore: use TiDB-Binlog
-
-### Recommended tools for TiDB 3.1
+## Recommended tools for TiDB 3.1
 
 - MySQL full data backup: use Mydumper
 - MySQL full data import to TiDB:
@@ -163,16 +148,7 @@ The following are the basics of TiDB Binlog:
 - TiDB full data restore: use BR
 - TiDB incremental backup & restore: use TiDB-Binlog
 
-### Recommended tools for TiDB 4.0
-
-- MySQL full data backup: use Mydumper
-- MySQL full data import to TiDB:
-    - TB scale: use TiDB Lightning
-    - Sub-TB scale: use DM
-- MySQL incremental data sync to TiDB: use DM
-- TiDB full data backup: use BR
-- TiDB full data restore: use BR
-- TiDB incremental backup & restore: use CDC
+For the recommended tools for other TiDB versions, see [Recommended tools for TiDB versions](https://pingcap.com/docs/dev/reference/tools/user-guide/#recommended-tools-for-tidb-versions).
 
 ## Tools evolution roadmap 
 
@@ -186,13 +162,11 @@ The following are the basics of TiDB Binlog:
 - TiDB Incremental Data Migration:
     - TiDB Binlog -> CDC
 
-## Full-path data migration solution for TiDB 3.0, 3.1 and 4.0
+## Full-path data migration solution for TiDB 3.1
 
-TiDB 3.0 is the recommended version and is also the most widely adopted version. In addition, TiDB 3.1 GA and 4.0 GA will be released this year. The following sections will cover how to migrate data from MySQL to TiDB, between TiDB clusters, and from TiDB to MySQL for each version, as well as how to back up and restore data.
+For TiDB 3.1 versions, this section covers how to migrate data from MySQL to TiDB, between TiDB clusters, and from TiDB to MySQL for each version, as well as how to back up and restore data.
 
-### For TiDB 3.0
-
-#### Migrating MySQL data to TiDB
+### Migrating MySQL data to TiDB
 
 If the MySQL data volume is in TBs:
 
@@ -204,63 +178,11 @@ If the MySQL data volume is in GBs:
 
 - Use DM to migrate MySQL data to TiDB for both full and incremental data import
 
-#### Data replication between TiDB/MySQL clusters
+### Data replication between TiDB/MySQL clusters
 
 You can use TiDB Binlog to replicate data between TiDB clusters. You can also use TiDB Binlog to replicate data to the downstream MySQL cluster.
 
-#### Full backup and restore of the data in TiDB/MySQL clusters
-
-- Use the Mydumper tool for full data backup 
-- Use the Lightning tool with `tidb` backend for full data restore
-
-### For TiDB 3.1
-
-#### Migrating MySQL data to TiDB
-
-If the MySQL data volume is in TBs:
-
-- Use Mydumper to export MySQL full data as a backup
-- Use Lightning to import the full MySQL backup data into TiDB cluster
-- Use DM to replicate incremental MySQL data to TiDB
-
-If the MySQL data volume is in GBs:
-
-- Use DM to migrate MySQL data to TiDB for both full and incremental data import
-
-#### Data replication between TiDB/MySQL clusters
-
-You can use TiDB Binlog to replicate data between TiDB clusters. You can also use TiDB Binlog to replicate data to the downstream MySQL cluster.
-
-#### Full backup and restore of the data in TiDB/MySQL clusters
-
-To restore data to a TiDB cluster:
-
-- Use the BR tool for both full data backup and full data restore
-
-To restore data to a MySQL cluster:
-
-- Use the Mydumper tool for full data backup
-- Use the Lightning tool with `tidb` backend for full data restore
-
-### For TiDB 4.0
-
-#### Migrating MySQL data to TiDB
-
-If the MySQL data volume is in TBs:
-
-- Use Mydumper to export MySQL full data as a backup
-- Use Lightning to import full MySQL backup data into TiDB cluster
-- Use DM to replicate incremental MySQL data to TiDB
-
-If the MySQL data volume is in GBs:
-
-- Use DM to migrate MySQL data to TiDB for both full and incremental data import
-
-#### Data replication between TiDB/MySQL clusters
-
-You can use the TiDB CDC tool to replicate data between TiDB clusters. You can also use the CDC tool to replicate data to the downstream MySQL cluster.
-
-#### Full backup and restore of the data in TiDB/MySQL clusters
+### Full backup and restore of the data in TiDB/MySQL clusters
 
 To restore data to a TiDB cluster:
 
