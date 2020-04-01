@@ -57,7 +57,7 @@ The following are the basics of Loader:
 
 - Input data source: Mydumper’s output file
 - Supported TiDB versions: all versions
-- Kubernetes support: Yes. See [Backup and restore](/tidb-in-kubernetes/maintain/backup-and-restore.md) for details.
+- Kubernetes support: Yes. See [Backup and restore](https://pingcap.com/docs/tidb-in-kubernetes/stable/backup-and-restore-using-helm-charts/) for details.
 
 ### Incremental data import tools
 
@@ -125,7 +125,7 @@ The following are the basics of TiDB Binlog:
     - Input: TiDB Cluster
     - Output: MySQL, TiDB, Kafka or incremental backup files
 - Supported TiDB versions: v2.1 or later
-- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](/tidb-in-kubernetes/maintain/tidb-binlog.md) and [TiDB Binlog Drainer Configurations in Kubernetes](/tidb-in-kubernetes/reference/configuration/tidb-drainer.md) for details.
+- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-binlog/) and [TiDB Binlog Drainer Configurations in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer/) for details.
 
 #### CDC (Beta, under development, ETA May/June 2020 with TiDB 4.0)
 
