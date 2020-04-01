@@ -33,7 +33,7 @@ The following are the basics of TiDB Lightning:
     - The output file of Mydumper
     - CSV file
 - Supported TiDB versions: v2.1 or later
-- Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](/tidb-in-kubernetes/maintain/lightning.md) for details.
+- Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](https://pingcap.com/docs/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning/) for details.
 
 #### BR (beta)
 
@@ -97,7 +97,7 @@ The following are the basics of Mydumper:
     - Input: TiDB/MySQL host:port 
     - Output: schema and insert statements file
 - Supported TiDB versions: all versions
-- Kubernetes support: Yes. See [Backup and Restore](/tidb-in-kubernetes/maintain/backup-and-restore.md) for details.
+- Kubernetes support: Yes. See [Backup and Restore](https://pingcap.com/docs/tidb-in-kubernetes/stable/backup-and-restore-using-helm-charts/) for details.
 
 #### BR (beta)
 
