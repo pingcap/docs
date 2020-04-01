@@ -129,7 +129,7 @@ The following are the basics of TiDB Binlog:
 
 #### CDC (Beta, under development, ETA May/June 2020 with TiDB 4.0)
 
-[CDC](/reference/tools/ticdc/overview.md) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in row changed order.
+[CDC](https://pingcap.com/docs/dev/reference/tools/ticdc/overview/) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in row changed order.
 
 - Input/Output: 
     - Input: TiDB Cluster
