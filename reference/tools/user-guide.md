@@ -63,7 +63,7 @@ The following are the basics of Loader:
 
 #### TiDB Data Migration
 
-[TiDB Data Migration](/reference/tools/data-migration/overview.md) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB into TiDB. It can help to reduce the operations cost and simplify the troubleshooting process. 
+[TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB into TiDB. It can help to reduce the operations cost and simplify the troubleshooting process. 
 
 For the full data migration, it uses an embedded Loader and an embedded Mydumper. For the incremental data migration, it uses Syncer as its kernel.
 
