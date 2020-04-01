@@ -61,6 +61,18 @@ The following are the basics of Loader:
 
 ### Incremental data import tools
 
+#### Syncer (deprecated)
+
+[Syncer](/reference/tools/syncer.md) is a tool used to import data incrementally. It acts as a MySQL slave to read binlog from MySQL/MariaDB master and replicate the binlog to the downstream. It is recommended to use [TiDB Data Migration](#tidb-data-migration) to replace Syncer.
+
+The following are the basics of Syncer:
+
+- Input data source: MySQL/MariaDB binlog service
+- Supported TiDB versions: all versions
+- Kubernetes support: No
+
+### Full and incremental data import tools
+
 #### TiDB Data Migration
 
 [TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB into TiDB. It can help to reduce the operations cost and simplify the troubleshooting process. 
@@ -72,16 +84,6 @@ The following are the basics of DM:
 - Input data source: MySQL/MariaDB master host/port
 - Supported TiDB versions: all versions
 - Kubernetes support: No, under development (the estimated time is 2020 Q2)
-
-#### Syncer (deprecated)
-
-[Syncer](/reference/tools/syncer.md) is a tool used to import data incrementally. It acts as a MySQL slave to read binlog from MySQL/MariaDB master and replicate the binlog to the downstream. It is recommended to use [TiDB Data Migration](#tidb-data-migration) to replace Syncer.
-
-The following are the basics of Syncer:
-
-- Input data source: MySQL/MariaDB binlog service
-- Supported TiDB versions: all versions
-- Kubernetes support: No
 
 ## Data export (backup)
 
