@@ -14,6 +14,7 @@ Use the following command to query the TiDB cluster's `tikv_gc_safe_point` and `
 
 ```sql
 select * from mysql.tidb where variable_name in ('tikv_gc_safe_point','tikv_gc_life_time');
+```
 
 ## Syntax
 
@@ -72,7 +73,7 @@ Therefore, to recover a table, you only need to recover the table metadata and d
 
 The following is the working process of `FLASHBACK TABLE t TO t1`:
 
-1. TiDB searches the recent DDL job history and locates the first DDL operation of the `DROP TABLE` type. If TiDB fails to locate one, an error is returned.
+1. TiDB searches the recent DDL history jobs and locates the first DDL operation of the `DROP TABLE` or the `truncate table` type on table `t`. If TiDB fails to locate one, an error is returned.
 2. TiDB checks whether the starting time of the DDL job is before `tikv_gc_safe_point`. If it is before `tikv_gc_safe_point`, it means that the table dropped by the `DROP` or `TRUNCATE` operation has been cleaned up by the GC and an error is returned.
 3. TiDB uses the starting time of the DDL job as the snapshot to read historical data and read table metadata.
 4. TiDB deletes GC tasks related to table `t` in `mysql.gc_delete_range`.
