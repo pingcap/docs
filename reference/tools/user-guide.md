@@ -103,7 +103,7 @@ The following are the basics of Mydumper:
 
 #### BR (beta)
 
-[BR](/reference/tools/br/br.md) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/loader, BR is more suitable for scenarios of huge data volume.
+[BR](https://pingcap.com/docs/dev/reference/tools/br/br/) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/loader, BR is more suitable for scenarios of huge data volume.
 
 The following are the basics of BR:
 
