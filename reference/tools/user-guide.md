@@ -6,184 +6,185 @@ aliases: ['/docs/v3.0/how-to/migrate/from-mysql/','/docs/v3.0/how-to/migrate/inc
 
 # TiDB Ecosystem Tools User Guide
 
-Currently, TiDB has multiple ecosystem tools. Some of them have overlapping functionality, and some are different versions of the same tool. This document introduces each of these tools, illustrates their relationship, and describes when to use which tool for each TiDB version.
+The TiDB ecosystem has a wealth of tools for data migration, backup & restore for users with different use cases to choose from. 
 
-## TiDB ecosystem tools overview
+- Some of the functionalities of these tools might overlap. For example, TiDB Loader, TiDB Lightning and TiDB DM can all do full data loading. 
+- Some of the tools might have evolved. For example, TiDB Binlog will be evolved to CDC (Change Data Capture). 
+- Some of the tools are designed to support specific TiDB versions and the others might be deprecated as user requirements change.
 
-TiDB ecosystem tools can be divided into:
+This guide is specifically designed to help you better understand these tools and therefore make an informed decision while choosing these tools to support your business.
 
-- Data import tools, including full import tools, backup and restore tools, incremental import tools, and so forth.
-- Data export tools, including full export tools. incremental export tools, and so forth.
+## Data import (restore or data replication)
 
-The two types of tools are discussed in detail below.
+### Full data import tools
 
-### Data import tools
+#### TiDB Lightning
 
-#### Full import tool TiDB Lightning
+[TiDB Lightning](/reference/tools/tidb-lightning/overview.md) (Lightning) is a tool used for the fast full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via Mydumper or CSV data source.
 
-[TiDB Lightning](/reference/tools/tidb-lightning/overview.md) is a tool used for fast full import of data into a TiDB cluster.
+TiDB Lightning supports two back ends: "Importer" and "TiDB". It determines how tidb-lightning delivers data into the target cluster. The two back ends are as follows:
 
-> **Note:**
->
-> When you import data into TiDB using TiDB Lightning, there are two modes:
->
-> - The default mode: Use `tikv-importer` as the backend. In this mode, the cluster can not provide normal services during the data import process. It is used when you import large amounts (TBs) of data.
-> - The second mode: Use `TiDB` as the backend (similar to Loader). The import speed is slower than that in the default mode. However, the second mode supports online import.
+1. The default one is [`Importer` back end](/reference/tools/tidb-lightning/overview.md). When using `Importer` as the back end, the cluster cannot provide normal services during the import process. It is used for a large amount of data importing (TB).
+2. The second one is [`TiDB` back end](/reference/tools/tidb-lightning/tidb-backend.md) (just work as [Loader](#tidb-loader-to-be-deprecated)). It is much slower than `Importer` back end model. But the cluster could serve the application during the import process. It is used to handle tens/hundreds of GB data.
 
 The following are the basics of TiDB Lightning:
 
-- Input:
-    - Files output by Mydumper;
-    - CSV files.
-- Compatibility: Compatible with TiDB v2.1 and later versions.
-- Kubernetes: Supported. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](https://pingcap.com/docs/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning/).
+- Input data source:
+    - The output file of Mydumper
+    - CSV file
+- Supported TiDB versions: v2.1 or later
+- Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](https://pingcap.com/docs/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning/) for details.
 
-#### Backup and restore tool BR
+#### BR (beta)
 
-[BR](https://pingcap.com/docs/dev/how-to/maintain/backup-and-restore/br/) is a command-line tool used for distributed data backup and restoration for a TiDB cluster. Compared with Mydumper and Loader, BR allows you to finish backup and restore tasks with greater efficiency in scenarios of huge data volume.
+[BR](https://pingcap.com/docs/dev/reference/tools/br/br/) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/Loader/Lightning, BR is more suitable for scenarios of huge data volume.
 
 The following are the basics of BR:
 
-- [Types of backup files](https://pingcap.com/docs/dev/reference/tools/br/br/#types-of-backup-files): The SST file and the `backupmeta` file.
-- Compatibility: Compatible with TiDB v3.1 and v4.0 versions.
-- Kubernetes: Supported. Relevant documents are on the way.
+- Input data source: The output file of BR
+- Supported TiDB versions: v3.1 or later
+- Kubernetes support: Yes. The document is WIP.
 
-#### Incremental and full import tool TiDB Data Migration
+#### TiDB Loader (to be deprecated)
 
-[TiDB Data Migration (DM)](https://pingcap.com/docs/tidb-data-migration/stable/overview/) is an tool used for data migration from MySQL/MariaDB into TiDB. It supports both the full and incremental data replication.
+> **Note:**
+> 
+> TiDB Loader is to be deprecated and replaced with [Lightning](/reference/tools/tidb-lightning/tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-back-end).
 
-The following are the basics of DM:
-
-- Input: Full data and binlog data of MySQL/MariaDB.
-- Output: SQL statements written to TiDB.
-- Compatibility: Compatible with all TiDB versions.
-- Kubernetes: In development.
-
-#### Full import tool Loader (Stop maintenance, not recommended)
-
-[Loader](/reference/tools/loader.md) is a lightweight full data import tool. Data is imported into TiDB in the form of SQL statements. Currently, this tool is gradually replaced by [TiDB Lightning](#full-import-tool-tidb-lightning), see [TiDB Lightning TiDB-backend Document](/reference/tools/tidb-lightning/tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-backend).
+[TiDB Loader](/reference/tools/loader.md) is a lightweight full-data importing tool for TiDB. It reads the output file of Mydumper and loads the data into TiDB.
 
 The following are the basics of Loader:
 
-- Input: Files output by Mydumper.
-- Output: SQL statements written to TiDB.
-- Compatibility: Compatible with all TiDB versions.
-- Kubernetes: Supported. See [Backup and restore](https://pingcap.com/docs/tidb-in-kubernetes/stable/backup-and-restore-using-helm-charts/).
+- Input data source: Mydumper’s output file
+- Supported TiDB versions: all versions
+- Kubernetes support: Yes. See [Backup and restore](https://pingcap.com/docs/tidb-in-kubernetes/stable/backup-and-restore-using-helm-charts/) for details.
 
-#### Incremental import tool Syncer (Stop maintenance, not recommended)
+### Incremental data import tools
 
-[Syncer](/reference/tools/syncer.md) is a tool used for incremental import of real-time binlog data from MySQL/MariaDB into TiDB. It is recommended to use [TiDB Data Migration](#Incremental-import-tool-tidb-data-migration) to replace Syncer.
+#### Syncer (deprecated)
+
+[Syncer](/reference/tools/syncer.md) is a tool used to import data incrementally. It acts as a MySQL slave to read binlog from MySQL/MariaDB master and replicate the binlog to the downstream. It is recommended to use [TiDB Data Migration](#tidb-data-migration) to replace Syncer.
 
 The following are the basics of Syncer:
 
-- Input: Binlog data of MySQL/MariaDB.
-- Output: SQL statements written to TiDB.
-- Compatibility: Compatible with all TiDB versions.
-- Kubernetes: Not supported.
+- Input data source: MySQL/MariaDB binlog service
+- Supported TiDB versions: all versions
+- Kubernetes support: No
 
-### Data export tools
+### Full and incremental data import tools
 
-#### Full export tool Mydumper
+#### TiDB Data Migration
 
-[Mydumper](/reference/tools/mydumper.md) is a MySQL community tool used for full logical backups of MySQL that also works with TiDB.
+[TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB into TiDB. It can help to reduce the operations cost and simplify the troubleshooting process. 
+
+For the full data migration, it uses an embedded Loader and an embedded Mydumper. For the incremental data migration, it uses Syncer as its kernel.
+
+The following are the basics of DM:
+
+- Input data source: MySQL/MariaDB master host/port
+- Supported TiDB versions: all versions
+- Kubernetes support: No, under development (the estimated time is 2020 Q2)
+
+## Data export (backup)
+
+### Full data export tools
+
+#### Mydumper
+
+[Mydumper](/reference/tools/mydumper.md) is a tool to create a logical full backup for TiDB.
 
 The following are the basics of Mydumper:
 
-- Input: MySQL/TiDB clusters.
-- Output: SQL files.
-- Compatibility: Compatible with all TiDB versions.
-- Kubernetes: Supported. See [Backup and Restore](https://pingcap.com/docs/tidb-in-kubernetes/stable/backup-and-restore-using-helm-charts/).
+- Input/Output
+    - Input: TiDB/MySQL host:port 
+    - Output: schema and insert statements file
+- Supported TiDB versions: all versions
+- Kubernetes support: Yes. See [Backup and Restore](https://pingcap.com/docs/tidb-in-kubernetes/stable/backup-and-restore-using-helm-charts/) for details.
 
-#### Full export tool TiDB Binlog
+#### BR (beta)
 
-[TiDB Binlog](/reference/tidb-binlog/overview.md) is a tool used to collect binlog data from TiDB. It provides near real-time backup and replication to downstream platforms.
+[BR](https://pingcap.com/docs/dev/reference/tools/br/br/) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/loader, BR is more suitable for scenarios of huge data volume.
+
+The following are the basics of BR:
+
+- Input/Output
+    - Input: TiDB cluster
+    - Output: Full backup file
+- Supported TiDB versions: v3.1 or v4.0
+- Kubernetes support: Yes. The document is WIP.
+
+### Incremental data export tools
+
+#### TiDB Binlog
+
+[TiDB Binlog](/reference/tidb-binlog/overview.md) is a system that collects binlog for TiDB clusters and provides tools for near real-time sync and backup.
 
 The following are the basics of TiDB Binlog:
 
-- Input: TiDB clusters.
-- Output: MySQL, TiDB, Kafka or incremental backup files.
-- Compatibility: Compatible with TiDB v2.1 and later versions.
-- Kubernetes: Supported. See [TiDB Binlog Cluster Operations](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-binlog/) and [TiDB Binlog Drainer Configurations in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer/).
+- Input/Output:
+    - Input: TiDB Cluster
+    - Output: MySQL, TiDB, Kafka or incremental backup files
+- Supported TiDB versions: v2.1 or later
+- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-binlog/) and [TiDB Binlog Drainer Configurations in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer/) for details.
 
-## Tools development roadmap
+#### CDC (Beta, under development, ETA May/June 2020 with TiDB 4.0)
 
-To help you understand the relationships between the above tools, here is a brief introduction to TiDB ecosystem tools development roadmap.
+[CDC](https://pingcap.com/docs/dev/reference/tools/ticdc/overview/) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in row changed order.
 
-### TiDB backup and restore
+- Input/Output: 
+    - Input: TiDB Cluster
+    - Output: MySQL, TiDB, Kafka or incremental backup files
+- Supported TiDB versions: v4.0
+- Kubernetes support: On the development road map, ETA Q2 2020
 
-Mydumper and Loader -> BR:
+## Recommended tools for TiDB 3.0
 
-Mydumper and Loader are inefficient since they back up and restore data on the logical level. BR is much more efficient because it takes advantage of TiDB features for backup and restore tasks. BR can be applied in huge data volume scenarios.
+- MySQL full data backup: use Mydumper
+- MySQL full data import to TiDB:
+    - TB scale: use TiDB Lightning
+    - Sub-TB scale: use DM
+- MySQL incremental data sync to TiDB: use DM
+- TiDB full data backup: use Mydumper
+- TiDB full data restore: use TiDB Lightning
+- TiDB incremental backup & restore: use TiDB-Binlog
 
-### TiDB full data restore
+For the recommended tools for other TiDB versions, see [Recommended tools for TiDB versions](https://pingcap.com/docs/dev/reference/tools/user-guide/#recommended-tools-for-tidb-versions).
 
-Loader -> TiDB Lightning:
+## Tools evolution roadmap 
 
-Loader is inefficient since it performs full data restoration using SQL. TiDB Lightning imports data into TiKV directly, so it is much more efficient and can be used for fast full import of large amounts (more than TBs) of data into a new TiDB cluster.
+- TiDB Full Data Backup:
+    - Mydumper -> BR
+    - Mydumper -> [dumpling](https://github.com/pingcap/dumpling) (under development, replace Lighting in lightweight scenarios)
+- TiDB Full Data Restore:
+    - Loader -> Lightning -> BR
+- MySQL Data Migration:
+    - Mydumper/Loader + Syncer  -> DM (in the next step, we will integrate Lightning into DM)
+- TiDB Incremental Data Migration:
+    - TiDB Binlog -> CDC
 
-TiDB Lightning also integrates the logical data import function of Loader and supports online data import. For details, see [TiDB Lightning TiDB-backend Document](/reference/tools/tidb-lightning/tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-backend).
+## Full-path data migration solution for TiDB 3.0
 
-### MySQL data migration
+TiDB 3.0 is the recommended version and is also the most widely adopted version. In addition, TiDB 3.1 GA and 4.0 GA will be released this year.
 
-- Mydumper, Loader and Syncer -> DM:
+For TiDB 3.0 versions, this section covers how to migrate data from MySQL to TiDB, between TiDB clusters, and from TiDB to MySQL for each version, as well as how to back up and restore data.
 
-    It is tedious to migrate MySQL data to TiDB using Mydumper, Loader, and Syncer. DM provides an integrated data migration approach that improves usability. DM can be also used to merge the sharded schemas and tables.
+### Migrating MySQL data to TiDB
 
-- Loader -> TiDB Lightning:
+If the MySQL data volume is in TBs:
 
-    TiDB Lightning integrates the logical data import function of Loader. See [TiDB Lightning TiDB-backend document](/reference/tools/tidb-lightning/tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-backend) for details. It is used to perform full data restoration.
+- Use Mydumper to export MySQL full data as a backup
+- Use Lightning to import the full MySQL backup data into TiDB cluster
+- Use DM to replicate incremental MySQL data to TiDB
 
-## Data migration solutions
+If the MySQL data volume is in GBs:
 
-For TiDB 2.1, 3.0, and 3.1 versions, this section introduces data migration solutions in typical application scenarios.
+- Use DM to migrate MySQL data to TiDB for both full and incremental data import
 
-### Full link data migration solutions for v3.0
+### Data replication between TiDB/MySQL clusters
 
-#### Migrating MySQL data to TiDB
+You can use TiDB Binlog to replicate data between TiDB clusters. You can also use TiDB Binlog to replicate data to the downstream MySQL cluster.
 
-If the volume is more than TBs of data, the recommended migration steps are:
+### Full backup and restore of the data in TiDB/MySQL clusters
 
-1. Export full MySQL data using Mydumper;
-2. Import full backup data from MySQL into a TiDB cluster using TiDB Lightning;
-3. Replicate the incremental data of MySQL into TiDB.
-
-If the volume is less than TBs of data, it is recommended to migrate MySQL data to TiDB using DM (the migrating process includes full data import and incremental data replication).
-
-#### Replication of TiDB cluster data
-
-It is recommended that you use TiDB Binlog to replicate TiDB data to downstream TiDB/MySQL.
-
-#### Full backup and restore of TiDB cluster data
-
-The recommended steps are:
-
-1. Back up full data using Mydumper;
-2. Restore full data into TiDB/MySQL using TiDB Lightning.
-
-### Full link data migration solutions for v3.1
-
-#### Migrating MySQL data to TiDB
-
-If the volume is more than TBs of data, the recommended migration steps are:
-
-1. Export full MySQL data using Mydumper;
-2. Import full backup data from MySQL into a TiDB cluster using TiDB Lightning;
-3. Replicate the incremental data of MySQL into TiDB.
-
-If the volume is less than TBs of data, it is recommended to migrate MySQL data to TiDB using DM (the migrating process includes full data import and incremental data replication).
-
-#### Replication of TiDB cluster data
-
-It is recommended that you use TiDB Binlog to replicate TiDB data to downstream TiDB/MySQL.
-
-#### Full backup and restore of TiDB cluster data
-
-- Restore to TiDB
-
-    - Back up full data using BR;
-    - Restore full data using BR.
-
-- Restore to MySQL
-
-    - Back up full data using Mydumper;
-    - Restore full data using TiDB Lightning.
+- Use the Mydumper tool for full data backup 
+- Use the Lightning tool with `tidb` backend for full data restore
