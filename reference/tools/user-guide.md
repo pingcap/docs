@@ -145,9 +145,7 @@ The following are the basics of TiDB Binlog:
     - Sub-TB scale: use DM
 - MySQL incremental data sync to TiDB: use DM
 - TiDB full data backup: use Mydumper
-- TiDB full data restore:
-    - TB scale: use TiDB Lightning
-    - Sub-TB scale: use TiDB Lightning
+- TiDB full data restore: use TiDB Lightning
 - TiDB incremental backup & restore: use TiDB-Binlog
 
 For the recommended tools for other TiDB versions, see [Recommended tools for TiDB versions](https://pingcap.com/docs/dev/reference/tools/user-guide/#recommended-tools-for-tidb-versions).
