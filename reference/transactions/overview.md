@@ -94,11 +94,7 @@ SET @@GLOBAL.autocommit = {0 | 1};
 
 ## Explicit and implicit transaction
 
-<<<<<<< HEAD
-TiDB supports explicit transactions (`[BEGIN|START TRANSACTION]` or `COMMIT`) and implicit transactions (`SET autocommit = 1`).
-=======
 TiDB supports explicit transactions (use `[BEGIN|START TRANSACTION]` and `COMMIT` to define the start and end of the transaction) and implicit transactions (`SET autocommit = 1`).
->>>>>>> cbc27e0...  *: refactor transaction documents (#2088)
 
 If you set the value of `autocommit` to `1` and start a new transaction through the `[BEGIN|START TRANSACTION]` statement, the autocommit is disabled before `COMMIT` or `ROLLBACK` which makes the transaction becomes explicit.
 
