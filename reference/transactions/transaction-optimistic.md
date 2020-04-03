@@ -11,10 +11,6 @@ This document introduces the principles of TiDB's optimistic transaction model. 
 
 In TiDB's optimistic transaction model, the two-phase commit begins right after the client executes the `COMMIT` statement. Therefore, the write-write conflict can be observed before the transactions are actually committed.
 
-> **Note:**
->
-> Starting from v3.0.8, TiDB uses the [pessimistic transaction model](/reference/transactions/transaction-pessimistic.md) by default. However, this does not affect your clusters if you upgrading from v3.0.7 or earlier to v3.0.8 (and later). In other words, **only newly created clusters default to using the pessimistic transaction model**.
-
 ## Principles of optimistic transactions
 
 TiDB adopts Google's Percolator transaction model, a variant of two-phase commit (2PC) to ensure the correct completion of a distributed transaction. The procedure is as follows:
