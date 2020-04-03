@@ -163,7 +163,6 @@ In TiDB, a transaction either too small or too large can impair the overall perf
 TiDB uses the default autocommit setting (that is, `autocommit = 1`), which automatically issues a commit when executing each SQL statement. Therefore, each of the following three statements is treated as a transaction:
 
 ```sql
-# original version with autocommit.
 UPDATE my_table SET a = 'new_value' WHERE id = 1;
 UPDATE my_table SET a = 'newer_value' WHERE id = 2;
 UPDATE my_table SET a = 'newest_value' WHERE id = 3;
