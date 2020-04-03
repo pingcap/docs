@@ -6,7 +6,7 @@ category: reference
 
 # Transactions
 
-TiDB supports complete distributed transactions. Both [optimistic](/reference/transactions/transaction-optimistic.md) and [pessimistic transaction models](/reference/transactions/transaction-pessimistic.md)(introduced in TiDB 3.0) are available. This document introduces transaction-related statements, explicit and implicit transactions, isolation levels, lazy check for constraints and transaction sizes.
+TiDB supports complete distributed transactions. Both [optimistic transaction model](/reference/transactions/transaction-optimistic.md) and [pessimistic transaction model](/reference/transactions/transaction-pessimistic.md)(introduced in TiDB 3.0) are available. This document introduces transaction-related statements, explicit and implicit transactions, isolation levels, lazy check for constraints, and transaction sizes.
 
 The common variables include [`autocommit`](#autocommit), [`tidb_disable_txn_auto_retry`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_disable_txn_auto_retry), and [`tidb_retry_limit`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_retry_limit).
 
@@ -72,7 +72,7 @@ SET autocommit = {0 | 1}
 
 When `autocommit = 1` (default), the status of the current session is autocommit. That is, statements are automatically committed immediately following their execution.
 
-When `autocommit = 0`, the status of the current session is non-autocommit. That is, statements are only committed when you execute the `COMMIT` statement.
+When `autocommit = 0`, the status of the current session is non-autocommit. That is, statements are only committed when you manually execute the `COMMIT` statement.
 
 > **Note:**
 >
@@ -160,7 +160,7 @@ In TiDB, a transaction either too small or too large can impair the overall perf
 
 ### Small transactions
 
-TiDB uses the autocommit setting by default, which automatically issues a commit following each SQL statement. Therefore, each of the following three statements is treated as a transaction:
+TiDB uses the default autocommit setting (that is, `autocommit = 1`), which automatically issues a commit when executing each SQL statement. Therefore, each of the following three statements is treated as a transaction:
 
 ```sql
 # original version with autocommit.
@@ -169,7 +169,9 @@ UPDATE my_table SET a = 'newer_value' WHERE id = 2;
 UPDATE my_table SET a = 'newest_value' WHERE id = 3;
 ```
 
-In this case, the transaction latency is increased because the two-phase commit consumes more time to execute the transaction. To improve the performance, you can use an explicit transaction instead, that is, to execute the above three statements within a transaction:
+In this case, the latency is increased because each statement, as a transaction, uses the two-phase commit which consumes more execution time.
+
+To improve the execution efficiency, you can use an explicit transaction instead, that is, to execute the above three statements within a transaction:
 
 ```sql
 START TRANSACTION;
@@ -179,25 +181,25 @@ UPDATE my_table SET a = 'newest_value' WHERE id = 3;
 COMMIT;
 ```
 
-Similarly, it is recommended to execute `INSERT` statement within an explicit transaction.
+Similarly, it is recommended to execute `INSERT` statements within an explicit transaction.
 
 > **Note:**
 >
-> The distributed resources in TiDB might not be fully used in the single-threaded workloads, so the performance of TiDB is lower than that of a single-instance deployment of MySQL. This difference is similar to the case of transactions with higher latency in TiDB.
+> The single-threaded workloads in TiDB might not fully use TiDB's distributed resources, so the performance of TiDB is lower than that of a single-instance deployment of MySQL. This difference is similar to the case of transactions with higher latency in TiDB.
 
 ### Large transaction
 
-Due to the requirement of two-phase commit, a large transaction can lead to:
+Due to the requirement of the two-phase commit, a large transaction can lead to the following issues:
 
-* OOM when excessive data is written in the memory
+* OOM (Out of Memory) when excessive data is written in the memory
 * More conflicts in the prewrite phase
 * Long duration before transactions are actually committed
 
 Therefore, TiDB intentionally imposes some limits on transaction sizes:
 
 * The total number of SQL statements in a transaction is no more than 5,000 (default)
-* Each Key-Value pair is no more than 6 MB
+* Each key-value pair is no more than 6 MB
 
 For each transaction, it is recommended to keep the number of SQL statements between 100 to 500 to achieve an optimal performance.
 
-TiDB sets a default limit of 100 MB for the total size of Key-Value pairs, which can be modified by the `txn-total-size-limit` configuration item in the configuration file. The maximum value of `txn-total-size-limit` is 10 GB. The actual size limit of one transaction also depends on the memory capacity. When executing large transactions, the memory usage of the TiDB process is approximately 6 times larger than the total size of transactions.
+TiDB sets a default limit of 100 MB for the total size of key-value pairs, which can be modified by the `txn-total-size-limit` configuration item in the configuration file. The maximum value of `txn-total-size-limit` is 10 GB. The actual size limit of one transaction also depends on the memory capacity. When executing large transactions, the memory usage of the TiDB process is approximately 6 times larger than the total size of transactions.

@@ -6,7 +6,7 @@ category: reference
 
 # TiDB Pessimistic Transaction Model
 
-Optimistic transaction in TiDB might fail to commit because of transaction conflicts. To make sure that the commit succeeds, you need to modify the application and add an automatic retry mechanism. Using the pessimistic transaction model can avoid this issue.
+An optimistic transaction in TiDB might fail to commit because of transaction conflicts. To make sure that the commit succeeds, you need to modify the application and add an automatic retry mechanism. Using the pessimistic transaction model can avoid this issue.
 
 ## Behaviors of the pessimistic transaction mode
 
