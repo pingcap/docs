@@ -24,7 +24,7 @@ TiFlash is compatible with both TiDB and TiSpark, which enables the user to free
 
 It is recommended that you deploy TiFlash in a different node from TiKV to ensure workload isolation. It is also acceptable to deploy TiFlash and TiKV in the same node, if no business isolation is required.
 
-Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas based on table](/reference/tiflash/use-tiflash.md#).
+Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas for tables](/reference/tiflash/use-tiflash.md#create-tiflash-replicas-for-tables).
 
 TiFlash has three components: the major storage engine, `tiflash proxy`, and `pd buddy`. `tiflash proxy` is responsible for the communication of the Multi-Raft consensus algorithm, while `pd buddy` works with PD to replicate data from TiKV to TiFlash in unit of table.
 
@@ -67,4 +67,4 @@ TiFlash accelerates the computing of TiDB in two ways:
 - The column-based storage engine is more efficient in performing read operation.
 - TiFlash shares part of the computing workload of TiDB.
 
-TiFlash shares computing in the same way as the TiKV coprocessor does: TiDB pushes down the computing that can be completed in the storage layer. Whether the computing can be pushed down depends on the support of TiFlash. For details, see [Computing pushdown supported by TiFlash](/reference/tiflash/use-tiflash.md#computing-pushdown-supported-by-tiflash).
+TiFlash shares computing in the same way as the TiKV coprocessor does: TiDB pushes down the computing that can be completed in the storage layer. Whether the computing can be pushed down depends on the support of TiFlash. For details, see [Supported pushdown calculations](/reference/tiflash/use-tiflash.md#supported-push-down-calculations).
