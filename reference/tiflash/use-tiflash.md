@@ -91,7 +91,7 @@ For tables with TiFlash replicas, the TiDB optimizer automatically determines wh
 
 Engine isolation is to specify that all queries use a replica of the specified engine by configuring the corresponding variable. The optional engines are `tikv` and `tiflash`, with the following two configuration levels:
 
-1. SESSION level. Use the following statement to configure:
+* SESSION level. Use the following statement to configure:
 
     {{< copyable "sql" >}}
 
@@ -109,7 +109,7 @@ Engine isolation is to specify that all queries use a replica of the specified e
 
     The default configuration of the SESSION level inherits from TiDB configuration of the INSTANCE level.
 
-2. TiDB instance-level, namely, INSTANCE level. This level overlaps with the SESSION level. For example, if you have configured "tikv, tiflash" in the SESSION level and "tikv" in the INSTANCE level, only TiKV is read.
+* TiDB instance-level, namely, INSTANCE level. This level overlaps with the SESSION level. For example, if you have configured "tikv, tiflash" in the SESSION level and "tikv" in the INSTANCE level, only TiKV is read.
 
     Add the following configuration item in the TiDB configuration file:
 
@@ -144,17 +144,17 @@ Currently, you can use TiSpark to read TiFlash replicas in a method similar to t
 
 You can configure this parameter in either of the following ways:
 
-1. Add the following item in the `spark-defaults.conf` file:
+* Add the following item in the `spark-defaults.conf` file:
 
     ```
     spark.tispark.use.tiflash true
     ```
 
-2. Add `--conf spark.tispark.use.tiflash=true` in the initialization command when initializing Spark shell or Thrift server.
+* Add `--conf spark.tispark.use.tiflash=true` in the initialization command when initializing Spark shell or Thrift server.
 
-3. Set `spark.conf.set("spark.tispark.use.tiflash", true)` in Spark shell in a real-time manner.
+* Set `spark.conf.set("spark.tispark.use.tiflash", true)` in Spark shell in a real-time manner.
 
-4. Set `set spark.tispark.use.tiflash=true` in Thrift server after the server is connected via beeline.
+* Set `set spark.tispark.use.tiflash=true` in Thrift server after the server is connected via beeline.
 
 ## Supported push-down calculations
 
