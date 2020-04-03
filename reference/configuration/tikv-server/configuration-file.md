@@ -1128,12 +1128,12 @@ Configuration items related to `import`
 + Default value: `8`
 + Minimum value: `1`
 
-## `pessimistic-txn`
+## pessimistic-txn
 
 ### `enabled`
 
-- Enables the pessimistic transaction mode. For pessimistic transaction usage, please refer to the [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
-- Default value: true
+- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
+- Default value: `true`
 
 ### `wait-for-lock-timeout`
 
@@ -1143,5 +1143,5 @@ Configuration items related to `import`
 
 ### `wait-up-delay-duration`
 
-- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest start ts is woken up. Other transactions will be woken up after `wait-up-delay-duration` milliseconds.
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration` milliseconds.
 - Default value: 20
