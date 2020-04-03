@@ -9,11 +9,11 @@ aliases: ['/docs/dev/reference/transactions/transaction-model/']
 
 This document introduces the principles of TiDB's optimistic transaction model. This document assumes that you have a basic understanding of [TiDB architecture](/architecture.md), [Percolator](https://ai.google/research/pubs/pub36726), and the [ACID](/glossary.md#acid) properties of transactions.
 
-In TiDB's optimistic locking mechanism, the two-phase commit begins right after the client executes `COMMIT` statement. Therefore, the write-write conflict can be observed before the transactions are actually committed.
+In TiDB's optimistic transaction model, the two-phase commit begins right after the client executes the `COMMIT` statement. Therefore, the write-write conflict can be observed before the transactions are actually committed.
 
 > **Note:**
 >
-> Starting from v3.0.8, TiDB implements the [pessimistic transaction model](/reference/transactions/transaction-pessimistic.md) by default. However, this does not affect your clusters if you upgrading from v3.0.7 and earlier to v3.0.8 (and later). In other words, **only newly created clusters default to using the pessimistic transaction model**.
+> Starting from v3.0.8, TiDB uses the [pessimistic transaction model](/reference/transactions/transaction-pessimistic.md) by default. However, this does not affect your clusters if you upgrading from v3.0.7 or earlier to v3.0.8 (and later). In other words, **only newly created clusters default to using the pessimistic transaction model**.
 
 ## Principles of optimistic transactions
 
