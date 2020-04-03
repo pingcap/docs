@@ -26,7 +26,7 @@ The parameter of the above command is described as follows:
 
 - `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
 
-If you execute multiple DDL statements on a same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50` but only the second statement (to delete the replica) takes effect.
+If you execute multiple DDL statements on a same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
 
 Create two replicas for the table:
 
@@ -58,11 +58,11 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
 
 * It is recommended that you do not replicate more than 1,000 tables because this lowers the PD scheduling performance. This limit will be removed in later versions.
 
-* TiFlash reserves the `system` database. You cannot create TiFlash replicas for the database named `system` in TiDB. If you forcibly create such TiFlash replica, the result will be an undefined behavior (a temporary restriction).
+* TiFlash reserves the `system` database. You cannot create TiFlash replicas for the table in the database named `system` in TiDB. If you forcibly create such TiFlash replica, the result will be an undefined behavior (a temporary restriction).
 
 ## Check the replication progress
 
-You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replicas status of all tables.
+You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
 
 {{< copyable "sql" >}}
 
@@ -73,11 +73,11 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 In the result of above statement:
 
 * `AVAILABLE` indicates whether the TiFlash replicas of this table is available or not. `1` means available and `0` means unavailable.
-* `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replicas is replicated.
+* `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
 
 ## Use TiDB to read TiFlash replicas
 
-TiDB provides three ways to read TiFlash replicas. If you have added a TiFlash replica without any engine configuration, the CBO mode is used by default.
+TiDB provides three ways to read TiFlash replicas. If you have added a TiFlash replica without any engine configuration, the CBO (cost-based optimization) mode is used by default.
 
 ### Smart selection
 
@@ -118,13 +118,13 @@ Engine isolation is to specify that all queries use a replica of the specified e
     engines = ["tikv", "tiflash"]
     ```
 
-    The SESSION-level default configuration is  `["tikv", "tiflash"]`.
+    The INSTANCE-level default configuration is  `["tikv", "tiflash"]`.
 
-When the engine is configured as "tikv, tiflash", it can read both TiKV and TiFlash replicas at the same time, and the optimizer will automatically choose to read which one. After the engine is specified, if the table in the query does not have a corresponding engine replica (because the TiKV replica always exist, so the only situation is that the engine is configured as `tiflash` but the TiFlash replica does not exist), an error is reported indicating that the table does not have the engine replica.
+When the engine is configured as "tikv, tiflash", it can read both TiKV and TiFlash replicas at the same time, and the optimizer automatically chooses to read which one. After the engine is specified, if the table in the query does not have a corresponding engine replica, an error is reported indicating that the table does not have the engine replica. Because the TiKV replica always exist, so the only situation is that the engine is configured as `tiflash` but the TiFlash replica does not exist.
 
 ### Manual Hint
 
-Manual Hint can force TiDB to use TiFlash replicas for specific table(s) whose priority is lower than the engine isolation. If the engine specified in Hint is not in the engine list, a warning is returned. Here is an example of using the manual Hint:
+Manual Hint can force TiDB to use TiFlash replicas for specific table(s). The priority of manual Hint is lower than the engine isolation. If the engine specified in Hint is not in the engine list, a warning is returned. Here is an example of using the manual Hint:
 
 {{< copyable "sql" >}}
 
@@ -158,7 +158,7 @@ You can configure this parameter in either of the following ways:
 
 ## Supported push-down calculations
 
-TiFlash mainly supports predicate and aggregate push-down calculations. Push-down calculations can help TiDB perform distributed acceleration. Currently, table joins and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in latter versions.
+TiFlash mainly supports predicate and aggregate push-down calculations. Push-down calculations can help TiDB perform distributed acceleration. Currently, table joins and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in later versions.
 
 Currently, TiFlash supports the limited push-down of common expressions. To learn the specific push-down expressions, refer to [expression list](https://github.com/pingcap/tidb/blob/release-3.1/expression/expression.go#L409).
 
