@@ -54,7 +54,7 @@ TiDB adopts Google's Percolator transaction model, a variant of two-phase commit
 From the process of transactions in TiDB above, it is clear that TiDB transactions have the following advantages:
 
 * Simple to understand
-* Implement cross-row transaction based on single-row transaction
+* Implement cross-node transaction based on single-row transaction
 * Decentralized lock management
 
 However, TiDB transactions also have the following disadvantages:
