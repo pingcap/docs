@@ -109,7 +109,7 @@ You can query the content of the slow query log by querying the `INFORMATION_SCH
 >
 > Every time you query the `SLOW_QUERY` table, TiDB reads and parses the current slow query log.
 
-For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time, including the rotated slow log file. You need to specify the `TIME` range to locate the slow log files that need to be parsed. If you don't specify the `TIME` range, TiDB only parses the current slow log file.
+For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time, including the rotated slow log file. You need to specify the `TIME` range to locate the slow log files that need to be parsed. If you don't specify the `TIME` range, TiDB only parses the current slow log file. For example:
 
 * If you don't specify the time range, TiDB only parses the slow query data that TiDB is writing to the slow log file:
 
@@ -157,7 +157,7 @@ For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time,
 
 TiDB 4.0 adds the [`CLUSTER_SLOW_QUERY`](/reference/system-databases/information-schema.md#cluster_slow_query-table) system table to query the slow query information of all TiDB nodes. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. You can use `CLUSTER_SLOW_QUERY` the way you do with [`SLOW_QUERY`](/reference/system-databases/information-schema.md#slow_query-table).
 
-When you query the `CLUSTER_SLOW_QUERY` table, TiDB pushes the computation and the judgment down to other nodes for execution, instead of retrieving all slow query information from other nodes to be executed by one TiDB.
+When you query the `CLUSTER_SLOW_QUERY` table, TiDB pushes the computation and the judgment down to other nodes, instead of retrieving all slow query information from other nodes and executing the operations on one TiDB node.
 
 ## `SLOW_QUERY` / `CLUSTER_SLOW_QUERY` usage examples
 
@@ -175,7 +175,7 @@ order by query_time desc
 limit 2;
 ```
 
-Usage example:
+Output example:
 
 ```
 +--------------+------------------------------------------------------------------+
@@ -201,7 +201,7 @@ order by query_time desc
 limit 2;
 ```
 
-Usage example:
+Output example:
 
 ```
 +-------------+------------------------------------------------------------------+----------------+
@@ -227,7 +227,7 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     limit 1;
     ```
 
-    Usage example:
+    Output example:
 
     ```
     +-------------+-----------------------------+------------------------------------------------------------------+
@@ -247,7 +247,7 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     where digest = "4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa";
     ```
 
-    Usage example:
+    Output example:
 
     ```
     +-----------------------------+-------------+
@@ -269,7 +269,7 @@ where is_internal = false
   and stats like '%pseudo%';
 ```
 
-Usage example:
+Output example:
 
 ```
 +-----------------------------+-------------+---------------------------------+
@@ -299,7 +299,7 @@ having count > 1
 limit 3\G
 ```
 
-Usage example:
+Output example:
 
 ```
 ***************************[ 1. row ]***************************
@@ -316,7 +316,7 @@ digest     | db705c89ca2dfc1d39d10e0f30f285cbbadec7e24da4f15af461b148d8ffb020
 min(query) | SELECT DISTINCT c FROM sbtest11 WHERE id BETWEEN ? AND ? ORDER BY c [arguments: (303359, 303458)];
 ```
 
-Then you can query different plan using the SQL fingerprint in the query result above:
+Then you can query the different plans using the SQL fingerprint in the query result above:
 
 {{< copyable "sql" >}}
 
@@ -328,7 +328,7 @@ where digest='17b4518fde82e32021877878bec2bb309619d384fca944106fcaf9c93b536e94'
 group by plan_digest\G
 ```
 
-Usage example:
+Output example:
 
 ```
 *************************** 1. row ***************************
@@ -353,7 +353,7 @@ plan_digest: 6afbbd21f60ca6c6fdf3d3cd94f7c7a49dd93c00fcf8774646da492e50e204ee
 select instance, count(*) from information_schema.cluster_slow_query where time >= "2020-03-06 00:00:00" and time < now() group by instance;
 ```
 
-Usage example:
+Output example:
 
 ```
 +---------------+----------+
@@ -398,7 +398,7 @@ WHERE t1.digest NOT IN
 ORDER BY  t1.sum_query_time DESC limit 10\G
 ```
 
-Usage example:
+Output example:
 
 ```
 ***************************[ 1. row ]***************************
@@ -443,7 +443,7 @@ For example:
 pt-query-digest --report tidb-slow.log
 ```
 
-Usage example:
+Output example:
 
 ```
 # 320ms user time, 20ms system time, 27.00M rss, 221.32M vsz
