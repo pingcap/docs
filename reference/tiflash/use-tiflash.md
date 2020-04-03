@@ -124,7 +124,7 @@ When the engine is configured as "tikv, tiflash", it can read both TiKV and TiFl
 
 ### Manual Hint
 
-Manual Hint can force TiDB to use TiFlash replicas for specific table(s). The priority of manual Hint is lower than the engine isolation. If the engine specified in Hint is not in the engine list, a warning is returned. Here is an example of using the manual Hint:
+Manual Hint can force TiDB to use TiFlash replicas for specific table(s). The priority of manual Hint is lower than that of engine isolation. If the engine specified in Hint is not in the engine list, a warning is returned. Here is an example of using the manual Hint:
 
 {{< copyable "sql" >}}
 
@@ -140,7 +140,7 @@ Currently, you can use TiSpark to read TiFlash replicas in a method similar to t
 
 > **Notes**
 >
-> When this parameter is set to `true`, only the TiFlash replicas of all tables involved in the query are read and these tables must have TiFlash replicas; for tables that does not have TiFlash replicas, an error is reported. When this parameter is set to `false`, only the TiKV replica is read.
+> When this parameter is set to `true`, only the TiFlash replicas of all tables involved in the query are read and these tables must have TiFlash replicas; for tables that do not have TiFlash replicas, an error is reported. When this parameter is set to `false`, only the TiKV replica is read.
 
 You can configure this parameter in either of the following ways:
 
