@@ -272,7 +272,7 @@ The `keyrange` subcommand is used to query the global or table-related key range
       table: (7400000000000000f8, 7500000000000000f8)
     ```
 
-* Execute the `tidb-ctl keyrange --database={db} --table={tbl}` command to check the table-related key range information:
+* Execute the `tidb-ctl keyrange --database={db} --table={tbl}` command to check the global and table-related key range information:
 
     {{< copyable "shell-regular" >}}
 
