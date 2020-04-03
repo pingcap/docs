@@ -38,11 +38,11 @@ TiDB adopts Google's Percolator transaction model, a variant of two-phase commit
 5. TiDB begins 2PC to ensure the atomicity of distributed transactions and persist data in store.
 
     1. TiDB selects a Primary Key from the data to be written.
-    2. TiDB receives the information of region distribution from PD, and groups all keys by region accordingly.
+    2. TiDB receives the information of Region distribution from PD, and groups all keys by Region accordingly.
     3. TiDB sends prewrite requests to all TiKV nodes involved. Then, TiKV checks whether there are conflict or expired versions. Valid data is locked.
-    4. TiDB successfully receives all requests in the prewrite phase and the prewrite is successful.
+    4. TiDB receives all requests in the prewrite phase and the prewrite is successful.
     5. TiDB receives a commit version number from PD and marks it as `commit_ts`.
-    6. TiDB initiates the second commit to the TiKV nodes where Primary Key is located. TiKV checks the data, and clean the locks left in the prewrite phase.
+    6. TiDB initiates the second commit to the TiKV node where Primary Key is located. TiKV checks the data, and clean the locks left in the prewrite phase.
     7. TiDB receives the message that reports the second phase is successfully finished.
 
 6. TiDB returns a message to inform the client that the transaction is successfully committed.
@@ -54,7 +54,7 @@ TiDB adopts Google's Percolator transaction model, a variant of two-phase commit
 From the process of transactions in TiDB above, it is clear that TiDB transactions have the following advantages:
 
 * Simple to understand
-* Implement cross-row transaction based on single-row transaction
+* Implement cross-node transaction based on single-row transaction
 * Decentralized lock management
 
 However, TiDB transactions also have the following disadvantages:
