@@ -238,8 +238,12 @@
     - [TiDB User Account Management](/reference/security/user-account-management.md)
   + Transactions
     - [Overview](/reference/transactions/overview.md)
-    - [Transaction Model](/reference/transactions/transaction-model.md)
     - [Isolation Levels](/reference/transactions/transaction-isolation.md)
+<<<<<<< HEAD
+=======
+    - [Optimistic Transactions](/reference/transactions/transaction-optimistic.md)
+    - [Pessimistic Transactions](/reference/transactions/transaction-pessimistic.md)
+>>>>>>> cbc27e0...  *: refactor transaction documents (#2088)
   + System Databases
     - [`mysql`](/reference/system-databases/mysql.md)
     - [`information_schema`](/reference/system-databases/information-schema.md)
