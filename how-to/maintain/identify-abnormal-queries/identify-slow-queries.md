@@ -437,7 +437,7 @@ Use `pt-query-digest` to parse TiDB slow logs.
 
 For example:
 
-{{< copyable "shell" >}}
+{{< copyable "shell-regular" >}}
 
 ```shell
 pt-query-digest --report tidb-slow.log

@@ -839,8 +839,13 @@ COLLATION_CONNECTION: utf8_general_ci
 
 The `TIDB_INDEXES` table provides index-related information.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc tidb_indexes\G
+desc tidb_indexes\G
+```
+
+```
 *************************** 1. row ***************************
        Table: TIDB_INDEXES
 Create Table: CREATE TABLE `TIDB_INDEXES` (
@@ -878,8 +883,13 @@ where
 
 The `TIDB_HOT_REGIONS` table provides the hot Region information in the current TiKV instance.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc tidb_hot_regions\G
+desc tidb_hot_regions\G
+```
+
+```
 *************************** 1. row ***************************
        Table: TIDB_HOT_REGIONS
 Create Table: CREATE TABLE `TIDB_HOT_REGIONS` (
@@ -903,8 +913,13 @@ Create Table: CREATE TABLE `TIDB_HOT_REGIONS` (
 
 The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc tikv_store_status\G
+desc tikv_store_status\G
+```
+
+```
 *************************** 1. row ***************************
        Table: TIKV_STORE_STATUS
 Create Table: CREATE TABLE `TIKV_STORE_STATUS` (
@@ -935,8 +950,13 @@ Create Table: CREATE TABLE `TIKV_STORE_STATUS` (
 
 The `TIKV_REGION_STATUS` table shows some basic information of TiKV Regions via PD's API, like the Region ID, starting and ending key-values, and read and write traffic.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc tikv_region_status\G
+desc tikv_region_status\G
+```
+
+```
 *************************** 1. row ***************************
        Table: TIKV_REGION_STATUS
 Create Table: CREATE TABLE `TIKV_REGION_STATUS` (
@@ -965,8 +985,13 @@ select * from tikv_region_status order by written_bytes desc limit 3;
 
 The `TIKV_REGION_PEERS` table shows detailed information of a single Region node in TiKV, like whether it is a learner or leader.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc tikv_region_peers\G
+desc tikv_region_peers\G
+```
+
+```
 *************************** 1. row ***************************
        Table: TIKV_REGION_PEERS
 Create Table: CREATE TABLE `TIKV_REGION_PEERS` (
@@ -1010,8 +1035,13 @@ where
 
 The `ANALYZE_STATUS` table shows the execution status of the `ANALYZE` command in the current cluster.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc analyze_status\G
+desc analyze_status\G
+```
+
+```
 *************************** 1. row ***************************
        Table: ANALYZE_STATUS
 Create Table: CREATE TABLE `ANALYZE_STATUS` (
@@ -1032,8 +1062,13 @@ The `STATE` column shows the execution status of a specific `ANALYZE` task. Its 
 
 The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md#identify-slow-queries).
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> desc slow_query\G
+desc slow_query\G
+```
+
+```
 *************************** 1. row ***************************
        Table: SLOW_QUERY
 Create Table: CREATE TABLE `SLOW_QUERY` (
