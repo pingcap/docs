@@ -12,7 +12,7 @@ In TiFlash, the column-based replica performs asynchronous replication according
 
 ## Architecture
 
-![TiFlash Architecture](/media/tiflash/tiflash-architecture.png)
+![TiFlash Architecture](/media/tiflash/tiflash-architecture.jpg)
 
 The above is the architecture of TiDB in the HTAP form, including TiFlash nodes.
 
