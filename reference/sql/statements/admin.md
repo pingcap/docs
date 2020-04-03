@@ -8,8 +8,6 @@ category: reference
 
 This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB.
 
-<<<<<<< HEAD
-=======
 To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
 
 {{< copyable "sql" >}}
@@ -23,11 +21,8 @@ To view all the results in the current DDL job queue (including tasks that are r
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
+ADMIN SHOW DDL JOBS;
 ```
-
-* `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
-* `WHERE`: to add filter conditions.
 
 To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
 
@@ -41,19 +36,10 @@ To cancel the running DDL job corresponding to `job_id`, use `ADMIN CANCEL DDL J
 
 {{< copyable "sql" >}}
 
->>>>>>> bcecd93... sql: refine doc for admin (#2075)
 ```sql
-ADMIN SHOW DDL
-ADMIN SHOW DDL JOBS
-ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...
-ADMIN CANCEL DDL JOBS job_id [, job_id] ...
-ADMIN CHECK TABLE tbl_name [, tbl_name] ...
+ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 ```
 
-<<<<<<< HEAD
-- `ADMIN SHOW DDL`: To view the currently running DDL jobs.
-- `ADMIN SHOW DDL JOBS`: To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue.
-=======
 To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`. If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
 
 {{< copyable "sql" >}}
@@ -69,7 +55,6 @@ To overwrite the metadata of the stored table in an untrusted way in extreme cas
 ```sql
 ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 ```
->>>>>>> bcecd93... sql: refine doc for admin (#2075)
 
 ## Synopsis
 
