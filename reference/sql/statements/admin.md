@@ -21,18 +21,15 @@ To view all the results in the current DDL job queue (including tasks that are r
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
+ADMIN SHOW DDL JOBS;
 ```
-
-* `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
-* `WHERE`: to add filter conditions.
 
 To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
 
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...
+ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
 ```
 
 To cancel the running DDL job corresponding to `job_id`, use `ADMIN CANCEL DDL JOBS`. Executing this statement returns the message that indicates whether the job has been cancelled.
