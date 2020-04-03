@@ -6,7 +6,7 @@ category: reference
 
 # Transactions
 
-TiDB supports complete distributed transactions. Both [optimistic transaction model](/reference/transactions/transaction-optimistic.md) and [pessimistic transaction model](/reference/transactions/transaction-pessimistic.md)(introduced in TiDB 3.0) are available. This document introduces transaction-related statements, explicit and implicit transactions, isolation levels, lazy check for constraints, and transaction sizes.
+TiDB supports complete distributed transactions and uses [optimistic transaction model](/reference/transactions/transaction-optimistic.md). This document introduces transaction-related statements, explicit and implicit transactions, isolation levels, lazy check for constraints, and transaction sizes.
 
 The common variables include [`autocommit`](#autocommit), [`tidb_disable_txn_auto_retry`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_disable_txn_auto_retry), and [`tidb_retry_limit`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_retry_limit).
 
@@ -200,7 +200,7 @@ Therefore, TiDB intentionally imposes some limits on transaction sizes:
 
 * The total number of SQL statements in a transaction is no more than 5,000 (default)
 * Each key-value pair is no more than 6 MB
+* The total number of key-value entries is no more than 300,000
+* The total size of key-value entries is no more than 100 MB
 
 For each transaction, it is recommended to keep the number of SQL statements between 100 to 500 to achieve an optimal performance.
-
-TiDB sets a default limit of 100 MB for the total size of key-value pairs, which can be modified by the `txn-total-size-limit` configuration item in the configuration file. The maximum value of `txn-total-size-limit` is 10 GB. The actual size limit of one transaction also depends on the memory capacity. When executing large transactions, the memory usage of the TiDB process is approximately 6 times larger than the total size of transactions.
