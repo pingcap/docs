@@ -260,8 +260,8 @@
     - [Certificate-Based Authentication](/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/reference/transactions/overview.md)
-    - [Transaction Model](/reference/transactions/transaction-model.md)
     - [Isolation Levels](/reference/transactions/transaction-isolation.md)
+    - [Optimistic Transactions](/reference/transactions/transaction-optimistic.md)
     - [Pessimistic Transactions](/reference/transactions/transaction-pessimistic.md)
   + System Databases
     - [`mysql`](/reference/system-databases/mysql.md)
@@ -354,6 +354,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v3.1
+    - [3.1.0-rc](/releases/3.1.0-rc.md)
     - [3.1.0-beta.2](/releases/3.1.0-beta.2.md)
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
