@@ -54,8 +54,8 @@ jobs:
           name: "Publish PDF"
           command: |
             sudo bash -c 'echo "222.222.95.49 uc.qbox.me" >> /etc/hosts';
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              python3 scripts/upload.py output.pdf tidb-manual-en-dev.pdf;
+            if [ "${CIRCLE_BRANCH}" == "release-4.0" ]; then
+              python3 scripts/upload.py output.pdf tidb-manual-en-v4.0.pdf;
             fi
 
       - run:
@@ -76,4 +76,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - release-4.0
