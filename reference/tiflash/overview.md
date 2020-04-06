@@ -43,7 +43,7 @@ TiFlash has the following key features:
 
 The replica in TiFlash is asynchronously replicated as a special role, Raft Learner. This means when the TiFlash node is down or high network latency occurs, applications in TiKV can still proceed normally.
 
-This replication mechanism inherits two of the advantages of TiKV: automatic load balancing and high availability.
+This replication mechanism inherits two advantages of TiKV: automatic load balancing and high availability.
 
 - TiFlash does not rely on additional replication channels, but directly receives data from TiKV in a many-to-many manner.
 - As long as the data is not lost in TiKV, you can restore the replica in TiFlash at any time.
