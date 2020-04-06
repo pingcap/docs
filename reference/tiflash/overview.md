@@ -26,7 +26,7 @@ It is recommended that you deploy TiFlash in different nodes from TiKV to ensure
 
 Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in the unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas for tables](/reference/tiflash/use-tiflash.md#create-tiflash-replicas-for-tables).
 
-TiFlash has three components: the major storage engine, `tiflash proxy`, and `pd buddy`. `tiflash proxy` is responsible for the communication of the Multi-Raft consensus algorithm, while `pd buddy` works with PD to replicate data from TiKV to TiFlash in unit of table.
+TiFlash has three components: the major storage engine, `tiflash proxy`, and `pd buddy`. `tiflash proxy` is responsible for the communication using the Multi-Raft consensus algorithm. `pd buddy` works with PD to replicate data from TiKV to TiFlash in the unit of table.
 
 When TiDB receives the DDL command to create replicas in TiFlash, the `pd buddy` component acquires the information of the table to be replicated via the status port of TiDB, and sends the information to PD. After that, PD performs the corresponding data scheduling according to the information provided by `pd buddy`.
 
