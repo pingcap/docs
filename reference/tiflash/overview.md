@@ -14,7 +14,7 @@ In TiFlash, the column-based replicas are asynchronously replicated according to
 
 ![TiFlash Architecture](/media/tiflash/tiflash-architecture.jpg)
 
-The above is the architecture of TiDB in the HTAP form, including TiFlash nodes.
+The above figure is the architecture of TiDB in its HTAP form, including TiFlash nodes.
 
 TiFlash provides the column-based storage, with a layer of coprocessors efficiently implemented by ClickHouse. Similar to TiKV, TiFlash also has a Multi-Raft system, which supports replicating and distributing data in the unit of Region (see [Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/) for details).
 
