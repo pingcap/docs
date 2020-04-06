@@ -24,7 +24,7 @@ TiFlash is compatible with both TiDB and TiSpark, which enables the user to free
 
 It is recommended that you deploy TiFlash in different nodes from TiKV to ensure workload isolation. It is also acceptable to deploy TiFlash and TiKV in the same node if no business isolation is required.
 
-Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas for tables](/reference/tiflash/use-tiflash.md#create-tiflash-replicas-for-tables).
+Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in the unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas for tables](/reference/tiflash/use-tiflash.md#create-tiflash-replicas-for-tables).
 
 TiFlash has three components: the major storage engine, `tiflash proxy`, and `pd buddy`. `tiflash proxy` is responsible for the communication of the Multi-Raft consensus algorithm, while `pd buddy` works with PD to replicate data from TiKV to TiFlash in unit of table.
 
