@@ -22,7 +22,7 @@ TiFlash conducts real-time replication of data in the TiKV nodes at a low cost t
 
 TiFlash is compatible with both TiDB and TiSpark, which enables the user to freely choose between the two computing engines.
 
-It is recommended that you deploy TiFlash in a different node from TiKV to ensure workload isolation. It is also acceptable to deploy TiFlash and TiKV in the same node, if no business isolation is required.
+It is recommended that you deploy TiFlash in different nodes from TiKV to ensure workload isolation. It is also acceptable to deploy TiFlash and TiKV in the same node if no business isolation is required.
 
 Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas for tables](/reference/tiflash/use-tiflash.md#create-tiflash-replicas-for-tables).
 
