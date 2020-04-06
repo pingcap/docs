@@ -8,7 +8,7 @@ category: reference
 
 TiFlash is the key component that makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. As a column-based storage extension of TiKV, TiFlash provides both good isolation level and strong consistency guarantee.
 
-In TiFlash, the column-based replica performs asynchronous replication according to the Raft Learner consensus algorithm. When TiFlash performs read operations, the Snapshot Isolation level of consistency is achieved by validating Raft index and multi-version concurrency control (MVCC).
+In TiFlash, the column-based replicas are asynchronously replicated according to the Raft Learner consensus algorithm. When these replicas are read, the Snapshot Isolation level of consistency is achieved by validating Raft index and multi-version concurrency control (MVCC).
 
 ## Architecture
 
