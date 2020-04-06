@@ -58,7 +58,7 @@ Every time TiFlash receives a read request, the Region replica sends a progress 
 
 TiDB can automatically choose to use TiFlash (column-based) or TiKV (row-based), or use both of them in one query to ensure the best performance. 
 
-This selection mechanism is similar to that of TiDB which chooses different indexes to execute query. TiFlash makes the rational choice based on statistics of the read cost.
+This selection mechanism is similar to that of TiDB which chooses different indexes to execute query. TiFlash makes the appropriate choice based on statistics of the read cost.
 
 ### Computing acceleration
 
