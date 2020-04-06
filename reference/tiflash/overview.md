@@ -28,7 +28,7 @@ Currently, data cannot be written directly into TiFlash. You need to write data 
 
 TiFlash has three components: the major storage engine, `tiflash proxy`, and `pd buddy`. `tiflash proxy` is responsible for the communication using the Multi-Raft consensus algorithm. `pd buddy` works with PD to replicate data from TiKV to TiFlash in the unit of table.
 
-When TiDB receives the DDL command to create replicas in TiFlash, the `pd buddy` component acquires the information of the table to be replicated via the status port of TiDB, and sends the information to PD. After that, PD performs the corresponding data scheduling according to the information provided by `pd buddy`.
+When TiDB receives the DDL command to create replicas in TiFlash, the `pd buddy` component acquires the information of the table to be replicated via the status port of TiDB, and sends the information to PD. Then PD performs the corresponding data scheduling according to the information provided by `pd buddy`.
 
 ## Key features
 
