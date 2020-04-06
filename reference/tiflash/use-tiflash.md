@@ -7,7 +7,7 @@ category: reference
 
 After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated.
 
-You can either use TiDB to read TiFlash replicas for medium-scale OLAP calculations, or use TiSpark to read TiFlash replicas for large-scale OLAP calculations, which is based on your own needs. See the following sections for details:
+You can either use TiDB to read TiFlash replicas for medium-scale analytical processing, or use TiSpark to read TiFlash replicas for large-scale analytical processing, which is based on your own needs. See the following sections for details:
 
 - [Use TiDB to read TiFlash replicas](#use-tidb-to-read-tiflash-replicas)
 - [Use TiSpark to read TiFlash replicas](#use-tispark-to-read-tiflash-replicas)
