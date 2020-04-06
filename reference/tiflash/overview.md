@@ -45,7 +45,7 @@ The replica in TiFlash is asynchronously replicated as a special role, Raft Lear
 
 This replication mechanism inherits two of the advantages of TiKV: automatic load balancing and high availability.
 
-- TiFlash does not depend on additional replication channels, but directly receives data from TiKV in a many-to-many manner.
+- TiFlash does not rely on additional replication channels, but directly receives data from TiKV in a many-to-many manner.
 - As long as the data is not lost in TiKV, you can restore the replica in TiFlash at any time.
 
 ### Consistency
