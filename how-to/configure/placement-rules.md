@@ -6,7 +6,7 @@ category: how-to
 
 # Placement Rules
 
-Placement Rules is an experimental feature introduced since PD v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
+Placement Rules is an experimental feature of the Placement Driver (PD) introduced in v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
 ## Rule system
 
@@ -42,7 +42,7 @@ The following table shows the meaning of each field in a rule:
 + `exists`: includes the given label key.
 + `notExists`: does not include the given label key.
 
-The meaning and function of `LocationLabels` are the same with those before PD v4.0. For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology: The cluster has multiple zones (Availability Zones), each zone has multiple racks, and each rack has multiple hosts. When performing schedule, PD first tries to place the Region's peers in different zones. If this try fails (such as there are three replicas but only two zones in total), PD guarantees to place these replicas in different racks. If the number of racks is not enough to guarantee isolation, then PD tries the host-level isolation.
+The meaning and function of `LocationLabels` are the same with those earlier than v4.0. For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology: the cluster has multiple zones (Availability Zones), each zone has multiple racks, and each rack has multiple hosts. When performing schedule, PD first tries to place the Region's peers in different zones. If this try fails (such as there are three replicas but only two zones in total), PD guarantees to place these replicas in different racks. If the number of racks is not enough to guarantee isolation, then PD tries the host-level isolation.
 
 ## Configure rules
 
@@ -103,43 +103,43 @@ pd-ctl config placement-rules disable
 
 > **Note：**
 >
-> The change of rule affects the PD scheduling in real time. Improper rule setting might result in fewer replicas and affect the high availability of the system.
+> The change of rules affects the PD scheduling in real time. Improper rule setting might result in fewer replicas and affect the high availability of the system.
 
 pd-ctl supports multiple methods to view rules in the system, and the output is a JSON-format rule or a rule list:
 
-**To view the list of all rules**
+- **To view the list of all rules:**
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-pd-ctl config placement-rules show
-```
+    ```bash
+    pd-ctl config placement-rules show
+    ```
 
-**To view the list of all rules in a PD Group**
+- **To view the list of all rules in a PD Group:**
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-pd-ctl config placement-rules show --group=pd
-```
+    ```bash
+    pd-ctl config placement-rules show --group=pd
+    ```
 
-**To view the rule of a specific ID in a Group**
+- **To view the rule of a specific ID in a Group:**
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-pd-ctl config placement-rules show --group=pd --id=default
-```
+    ```bash
+    pd-ctl config placement-rules show --group=pd --id=default
+    ```
 
-**To view the rule list that matches a Region**
+- **To view the rule list that matches a Region:**
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-pd-ctl config placement-rules show --region=2
-```
+    ```bash
+    pd-ctl config placement-rules show --region=2
+    ```
 
-In the above example, `2` is the Region ID.
+    In the above example, `2` is the Region ID.
 
 Adding rules and editing rules are similar. You need to write the corresponding rules into a file and then use the `save` command to save the rules to PD:
 
