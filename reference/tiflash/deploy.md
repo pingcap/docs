@@ -1,14 +1,14 @@
 ---
-title: Deploy TiFlash Cluster
+title: Deploy a TiFlash Cluster
 summary: Learn the requirements and methods of deploying a TiFlash cluster.
 category: reference
 ---
 
-# Deploy TiFlash Cluster
+# Deploy a TiFlash Cluster
 
 > **Note:**
 >
-> If you want to get a first-hand experience on how to use TiFlash RC version, contact [PingCAP](mailto:info@pingcap.com) for more information and assistance.
+> If you want to get a first-hand experience on how to use the TiFlash RC version, contact [PingCAP](mailto:info@pingcap.com) for more information and assistance.
 
 This document introduces the environment requirements for deploying a TiFlash cluster and the deployment methods in different scenarios.
 
@@ -23,7 +23,7 @@ This section provides hardware configuration recommendations based on different 
 
 There is no limit to the number of deployment machines (one at least). A single machine can use multiple disks, but deploying multiple instances on a single machine is not recommended.
 
-It is recommended to use an SSD disk to buffer the real-time data being replicated and written to TiFlash. The performance of this disk need to be not lower than the hard disk used by TiKV. It is recommended that you use a better performance NVMe SSD and the SSD‘s capacity is not less than 10% of the total capacity. Otherwise, it may become the bottleneck of the amount of data that this node can handle.
+It is recommended to use an SSD disk to buffer the real-time data being replicated and written to TiFlash. The performance of this disk need to be not lower than the hard disk used by TiKV. It is recommended that you use a better performance NVMe SSD and the SSD's capacity is not less than 10% of the total capacity. Otherwise, it might become the bottleneck of the amount of data that this node can handle.
 
 For other hard disks, you can use multiple HDDs or regular SSDs. A better hard disk will surely bring better performance.
 
@@ -37,7 +37,7 @@ It is **not** recommended to deploy TiFlash and TiKV on the same disk to prevent
 
 Hard disk selection criteria are the same as [TiFlash standalone deployment](#tiflash-standalone-deployment). The total capacity of the hard disk is roughly: `the to-be-replicated data capacity of the entire TiKV cluster / the number of TiKV replicas / 2`.
 
-For example, the overall planned capacity of TiKV is three replicas, and the recommended capacity of TiFlash will be one sixth of the TiKV cluster. You can choose to replicate part of tables instead of all.
+For example, if the overall planned capacity of TiKV is three replicas, then the recommended capacity of TiFlash will be one sixth of the TiKV cluster. You can choose to replicate part of tables instead of all.
 
 ## TiDB version requirements
 
