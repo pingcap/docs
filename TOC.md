@@ -264,8 +264,8 @@
     - [Certificate-Based Authentication](/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/reference/transactions/overview.md)
-    - [Transaction Model](/reference/transactions/transaction-model.md)
     - [Isolation Levels](/reference/transactions/transaction-isolation.md)
+    - [Optimistic Transactions](/reference/transactions/transaction-optimistic.md)
     - [Pessimistic Transactions](/reference/transactions/transaction-pessimistic.md)
   + System Databases
     - [`mysql`](/reference/system-databases/mysql.md)
@@ -301,6 +301,8 @@
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
   - [TiSpark](/reference/tispark.md)
+  + TiFlash
+    - [Use TiFlash](/reference/tiflash/use-tiflash.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
