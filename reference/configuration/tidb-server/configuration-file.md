@@ -19,8 +19,9 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `mem-quota-query`
 
 - The maximum memory available for a single SQL statement.
-- Default value: `34359738368`
+- Default value: `1073741824`
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
+- This value is the initial value of the system variable [`tidb_mem_quota_query`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_mem_quota_query).
 
 ### `oom-use-tmp-storage`
 
@@ -385,11 +386,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
-
-### `enable-chunk-rpc`
-
-- Determines whether to enable the `Chunk` data encoding format in Coprocessor.
-- Default value: `true`
 
 ### txn-local-latches
 

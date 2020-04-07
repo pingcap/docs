@@ -181,9 +181,9 @@ set @@global.tidb_distsql_scan_concurrency = 10
 ### tidb_mem_quota_query
 
 - Scope: SESSION
-- Default value: 32 GB
+- Default value: 1 GB
 - This variable is used to set the threshold value of memory quota for a query.
-- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
+- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/reference/configuration/tidb-server/configuration-file.md#mem-quota-query).
 
 ### tidb_mem_quota_hashjoin
 
@@ -250,19 +250,19 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION | GLOBAL
 - Default value: 10
-- When a transaction encounters retryable errors (such as transaction conflicts, over slow transaction commit, or table schema changes), this transaction can be re-executed. This variable is used to set the maximum number of the retries.
+- This variable is used to set the maximum number of the retries. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry.
 
 ### tidb_disable_txn_auto_retry
 
 - Scope: SESSION | GLOBAL
 - Default: on
-- This variable is used to set whether to disable automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+- This variable is used to set whether to disable the automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
 
     Setting the value to `off` means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    To decide whether you can enable automatic retry, see [automatic retry and anomalies caused by automatic retry](/reference/transactions/transaction-isolation.md#automatic-retry-and-transactional-anomalies-caused-by-automatic-retry).
+    For more details, see [limits of retry](/reference/transactions/transaction-optimistic.md#limits-of-retry).
 
 ### tidb_backoff_weight
 
@@ -513,3 +513,9 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to enable or disable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `performance_schema.events_statements_summary_by_digest` table to identify and troubleshoot SQL performance issues.
+
+### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
+
+- Scope: SESSION
+- Default value: 1
+- This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor.

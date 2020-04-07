@@ -68,19 +68,19 @@ This hint means that the `SELECT` query block's name is specified to `QB1`, whic
 select /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * from (select t1.a, t1.b from t t1, t t2 where t1.a = t2.a) t1, t t3 where t1.b = t3.b;
 ```
 
-### SM_JOIN(t1_name [, tl_name ...])
+### MERGE_JOIN(t1_name [, tl_name ...])
 
-The `SM_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
+The `MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
 
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ SM_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
+select /*+ MERGE_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 ```
 
 > **Note:**
 >
-> `TIDB_SMJ` is the alias for `SM_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `SM_JOIN` are both valid names for the hint.
+> `TIDB_SMJ` is the alias for `MERGE_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `MERGE_JOIN` are both valid names for the hint.
 
 ### INL_JOIN(t1_name [, tl_name ...])
 
@@ -97,6 +97,14 @@ The parameter(s) given in `INL_JOIN()` is the candidate table for the inner tabl
 > **Note:**
 >
 > `TIDB_INLJ` is the alias for `INL_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_INLJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_INLJ` and `INL_JOIN` are both valid names for the hint.
+
+### INL_HASH_JOIN
+
+The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm, but in some scenarios the index nested loop hash join algorithm uses less memory.
+
+### INL_MERGE_JOIN
+
+The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm, which consumes less memory than using `INL_JOIN`. The conditions for using this algorithm include all the conditions for using `INL_JOIN` but with one more: the column sets of the inner table in join keys is the prefix of the inner table, or the index of the inner table is the prefix of the column sets of the inner table in join keys.
 
 ### HASH_JOIN(t1_name [, tl_name ...])
 
@@ -253,3 +261,17 @@ select /*+ READ_FROM_REPLICA() */ * from t;
 ```
 
 In addition to this hint, setting the `tidb_replica_read` environment variable to `'follower'` or `'leader'` also controls whether to enable this feature.
+
+### IGNORE_PLAN_CACHE()
+
+`IGNORE_PLAN_CACHE()` reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
+
+This hint is used to temporarily disable the Plan Cache when [prepare-plan-cache](/reference/configuration/tidb-server/configuration-file.md#prepared-plan-cache) is enabled.
+
+In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
+
+{{< copyable "sql" >}}
+
+```sql
+prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
+```
