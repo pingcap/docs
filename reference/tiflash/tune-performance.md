@@ -1,5 +1,6 @@
 ---
 title: Tune TiFlash Performance
+summary: Learn how to tune the performance of TiFlash.
 category: reference
 ---
 
