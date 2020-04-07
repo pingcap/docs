@@ -6,13 +6,13 @@ category: how-to
 
 # Placement Rules
 
-Placement Rules is an experimental feature introduced since PD v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. Using these scheduling rules, you can finely control the attributes such as the number of replicas of any continuous data range, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
+Placement Rules is an experimental feature introduced since PD v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes such as the number of replicas of any continuous data range, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
 ## Rule system
 
 The configuration of the whole rule system consists of multiple rules. Each rule can specify attributes such as the number of replicas, the Raft role, the placement location, and the key range in which this rule takes effect. When PD is performing schedule, it first finds the rule corresponding to the Region in the rule system according to the key range of the Region, and then generates the corresponding schedule to make the distribution of the Region replica comply with the rule.
 
-The key ranges of multiple rules can have overlapping parts, which means that a Region can match multiple rules. In this case, PD decides whether the rules override each other or take effect at the same time according to the attributes of rules. If multiple rules take effect at the same time, PD will generate schedules in sequence according to the stacking order of the rules for rule matching.
+The key ranges of multiple rules can have overlapping parts, which means that a Region can match multiple rules. In this case, PD decides whether the rules overwrite each other or take effect at the same time according to the attributes of rules. If multiple rules take effect at the same time, PD will generate schedules in sequence according to the stacking order of the rules for rule matching.
 
 In addition, to meet the requirement that rules from different sources are isolated from each other, the concept of "Group" is also introduced. If you do not want a rule to be affected by other rules in the system (such as being overridden), you can use a separate group for it.
 
@@ -20,29 +20,29 @@ In addition, to meet the requirement that rules from different sources are isola
 
 ### Rule fields
 
-The following table shows the meaning of each field in the rule:
+The following table shows the meaning of each field in a rule:
 
 | Field name           | Type and restriction                      | Description                                |
 | :---            | :---                           | :---                                |
 | `GroupID`         | `string`                         |  The group ID that marks the source of the rule.                |
 | `ID`              | `string`                         |  The unique ID of a rule in a group.                        |
 | `Index`           | `int`                            |   The stacking sequence of rules in a group.                     |
-| `Override`        | `true`/`false`                     | The smaller rule that determines whether to override index (in a group).  |
-| `StartKey`        | `string`, in hexadecimal form                |  Applies to the staring key of a range.                |
+| `Override`        | `true`/`false`                     | The smaller rule that determines whether to overwrite index (in a group).  |
+| `StartKey`        | `string`, in hexadecimal form                |  Applies to the starting key of a range.                |
 | `EndKey`          | `string`, in hexadecimal form                |  Applies to the ending key of a range.                |
 | `Role`            | `string` | Replica roles, including leader/follower/learner.                           |
-| `Count`           | `int`, positive integer                     | The number of replicas.                            |
+| `Count`           | `int`, positive integer                     |  The number of replicas.                            |
 | `LabelConstraint` | `[]Constraint`                    |  Filers nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
 
-`LabelConstraint` is similar to the function in Kubernetes that filters labels based on the four primitives: `in`, `notIn`, `exists`, and `notExists`. The meanings of these four primitives are as follows:
+`LabelConstraint` is similar to the function in Kubernetes that filters labels based on these four primitives: `in`, `notIn`, `exists`, and `notExists`. The meanings of these four primitives are as follows:
 
 + `in`: the label value of the given key is included in the given list.
 + `notIn`: the label value of the given key is not included in the given list.
 + `exists`: includes the given label key.
-+ `notExists`: does not the given label key.
++ `notExists`: does not include the given label key.
 
-The meaning and function of `LocationLabels` are the same with those before PD v4.0. For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology: The cluster has multiple zones (Availability Zones), each zone has multiple racks, and each rack has multiple hosts. When performing schedule, PD first tries to place the Region's peers in different zones. If this try fails (such as there are three replicas but only two zones in total), PD guarantees to place these replicas in different racks. If the number of racks is not enough to guarantee isolation, then PD tries the host-level isolation, and so on.
+The meaning and function of `LocationLabels` are the same with those before PD v4.0. For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology: The cluster has multiple zones (Availability Zones), each zone has multiple racks, and each rack has multiple hosts. When performing schedule, PD first tries to place the Region's peers in different zones. If this try fails (such as there are three replicas but only two zones in total), PD guarantees to place these replicas in different racks. If the number of racks is not enough to guarantee isolation, then PD tries the host-level isolation.
 
 ## Configure rules
 
@@ -59,7 +59,7 @@ By default, the Placement Rules feature is disabled. To enable this feature, you
 enable-placement-rules = true
 ```
 
-In this way, PD enables this feature after the cluster is successfully initialized, and generates corresponding rules according to the `max-replicas` and `location-labels` configurations:
+In this way, PD enables this feature after the cluster is successfully initialized and generates corresponding rules according to the `max-replicas` and `location-labels` configurations:
 
 {{< copyable "" >}}
 
@@ -97,7 +97,7 @@ pd-ctl config placement-rules disable
 
 > **Notes:**
 >
-> After disabling Placement Rules, PD uses the original `max-replicas` and `location-labels` configurations. The modification of rules (when Placement Rules is enabled) will not update these two configurations in real time. In addition, all the Rules that have been configured remains in PD and will be used the next time you enable Placement Rules.
+> After disabling Placement Rules, PD uses the original `max-replicas` and `location-labels` configurations. The modification of rules (when Placement Rules is enabled) will not update these two configurations in real time. In addition, all the rules that have been configured remain in PD and will be used the next time you enable Placement Rules.
 
 ### Set rules using pd-ctl
 
@@ -141,7 +141,7 @@ pd-ctl config placement-rules show --region=2
 
 In the above example, `2` is the Region ID.
 
-Adding rules and editing rules are similar. You need to write the corresponding rules into a file, and then use the `save` command to save the rules to PD:
+Adding rules and editing rules are similar. You need to write the corresponding rules into a file and then use the `save` command to save the rules to PD:
 
 {{< copyable "shell-regular" >}}
 
@@ -167,9 +167,9 @@ EOF
 pd-ctl config placement save --in=rules.json
 ```
 
-The above operation writes `rule1` and `rule2` to PD. If a rule with the same GroupID + ID already exists in the system, this rule is overwritten.
+The above operation writes `rule1` and `rule2` to PD. If a rule with the same `GroupID` + `ID` already exists in the system, this rule is overwritten.
 
-If you need to delete a rule, you only need to set the `count` of the rule to `0`, and the rule with the same GroupID + ID will be deleted. The following command deletes the `pd / rule2` rule:
+To delete a rule, you only need to set the `count` of the rule to `0`, and the rule with the same `GroupID` + `ID` will be deleted. The following command deletes the `pd / rule2` rule:
 
 {{< copyable "shell-regular" >}}
 
@@ -193,7 +193,7 @@ pd-ctl also supports directly saving rules to the file by using the `load` comma
 pd-ctl config placement-rules load
 ```
 
-Executing the above command save all rules to the `rules.json` file.
+Executing the above command saves all rules to the `rules.json` file.
 
 {{< copyable "shell-regular" >}}
 
@@ -201,7 +201,7 @@ Executing the above command save all rules to the `rules.json` file.
 pd-ctl config placement-rules load --group=pd --out=rule.txt
 ```
 
-The above command save the rules of a PD Group to the `rules.json` file.
+The above command saves the rules of a PD Group to the `rules.json` file.
 
 ### Use tidb-ctl to query the table-related key range
 
@@ -256,7 +256,7 @@ You only need to add a rule that limits the key range to the range of metadata, 
 
 ### Place five replicas in three data centers in the proportion of two-two-one, and the Leader should not be in the third data center
 
-Create three rules. Set the number of replicas to `2`, `2`, and `1` respectively. Limit the replicas to the corresponding data centers through `label_constraint` in each rule. In addition, change `role` to `follower` for the data center that does not require a Leader.
+Create three rules. Set the number of replicas to `2`, `2`, and `1` respectively. Limit the replicas to the corresponding data centers through `label_constraint` in each rule. In addition, change `role` to `follower` for the data center that should not have a Leader.
 
 {{< copyable "" >}}
 
