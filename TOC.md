@@ -302,6 +302,10 @@
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
   - [TiSpark](/reference/tispark.md)
+  + TiFlash
+    - [Overview](/reference/tiflash/overview.md)
+    - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
+    - [Use TiFlash](/reference/tiflash/use-tiflash.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
