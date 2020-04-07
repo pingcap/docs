@@ -14,7 +14,7 @@ You can adjust the PD scheduling parameters using [pd-ctl](/reference/tools/pd-c
 
 - [`replica-schedule-limit`](/reference/configuration/pd-server/configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
-    > **Notes**
+    > **Notes:**
     >
     > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
@@ -37,11 +37,11 @@ http_port = The TiFlash HTTP service port.
 
 ```
 [flash]
-    tidb_status_addr = TiDB status address and port. # Multiple addressed are separated with commas.
+    tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
     service_addr = The listening address of TiFlash Raft services and coprocessor services.
 ```
 
-Multiple TiFlash nodes elect a master to add or delete placement rules to PD and you need three parameters to control this process.
+Multiple TiFlash nodes elect a master to add or delete placement rules to PD and, you need three parameters to control this process.
 
 ```
 [flash.flash_cluster]
@@ -60,8 +60,8 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD and
 
 [logger]
     level = log level (available options: trace, debug, information, warning, error).
-    log = tiflash The log path.
-    errorlog = tiflash The error log path.
+    log = The TiFlash log path.
+    errorlog = The TiFlash error log path.
             size = The size of a single log file.
             count = The maximum number of log files to save.
 [raft]
