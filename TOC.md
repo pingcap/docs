@@ -307,6 +307,7 @@
     - [Overview](/reference/tiflash/overview.md)
     - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
     - [Use TiFlash](/reference/tiflash/use-tiflash.md)
+    - [Maintain a TiFlash Cluster](/reference/tiflash/maintain.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
