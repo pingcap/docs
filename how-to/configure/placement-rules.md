@@ -105,7 +105,7 @@ pd-ctl config placement-rules disable
 >
 > The change of rules affects the PD scheduling in real time. Improper rule setting might result in fewer replicas and affect the high availability of the system.
 
-pd-ctl supports multiple methods to view rules in the system, and the output is a JSON-format rule or a rule list:
+pd-ctl supports using the following methods to view rules in the system, and the output is a JSON-format rule or a rule list.
 
 - **To view the list of all rules:**
 
@@ -228,13 +228,13 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 > **Note:**
 >
-> DDL and other operations will cause the table ID to change, and you need to update the corresponding rules synchronously.
+> DDL and other operations can cause table ID changes, so you need to update the corresponding rules at the same time.
 
-## Typical user scenarios
+## Typical usage scenarios
 
-This section introduces the typical user scenarios of Placement Rules.
+This section introduces the typical usage scenarios of Placement Rules.
 
-### Use three replicas for normal tables and five replicas for the metadata to improve cluster disaster tolerance
+### Scenario 1: Use three replicas for normal tables and five replicas for the metadata to improve cluster disaster tolerance
 
 You only need to add a rule that limits the key range to the range of metadata, and set the value of `count` to `5`. Here is an example of this rule:
 
@@ -254,9 +254,9 @@ You only need to add a rule that limits the key range to the range of metadata, 
 }
 ```
 
-### Place five replicas in three data centers in the proportion of 2:2:1, and the Leader should not be in the third data center
+### Scenario 2: Place five replicas in three data centers in the proportion of 2:2:1, and the Leader should not be in the third data center
 
-Create three rules. Set the number of replicas to `2`, `2`, and `1` respectively. Limit the replicas to the corresponding data centers through `label_constraint` in each rule. In addition, change `role` to `follower` for the data center that should not have a Leader.
+Create three rules. Set the number of replicas to `2`, `2`, and `1` respectively. Limit the replicas to the corresponding data centers through `label_constraints` in each rule. In addition, change `role` to `follower` for the data center that does not need a Leader.
 
 {{< copyable "" >}}
 
@@ -301,9 +301,9 @@ Create three rules. Set the number of replicas to `2`, `2`, and `1` respectively
 ]
 ```
 
-### Add two TiFlash replicas for a table
+### Scenario 3: Add two TiFlash replicas for a table
 
-Add a separate rule for the row key of the table and limit `count` to `2`. Use `label_constraint` to ensure that the replicas are generated on the node of `engine = tiflash`. Note that a separate `group_id` is used here to ensure that this rule does not overlap or conflict with rules from other sources in the system.
+Add a separate rule for the row key of the table and limit `count` to `2`. Use `label_constraints` to ensure that the replicas are generated on the node of `engine = tiflash`. Note that a separate `group_id` is used here to ensure that this rule does not overlap or conflict with rules from other sources in the system.
 
 {{< copyable "" >}}
 
@@ -322,9 +322,9 @@ Add a separate rule for the row key of the table and limit `count` to `2`. Use `
 }
 ```
 
-### Add two follower replicas for a table in the Beijing node with high-performance disks
+### Scenario 4: Add two follower replicas for a table in the Beijing node with high-performance disks
 
-The following example shows a more complicated `label_constaint` configuration. In this rule, the replicas must be placed in the bj1 or bj2 machine room, and the disk type must not be hdd.
+The following example shows a more complicated `label_constraints` configuration. In this rule, the replicas must be placed in the `bj1` or `bj2` machine room, and the disk type must not be `hdd`.
 
 {{< copyable "" >}}
 
