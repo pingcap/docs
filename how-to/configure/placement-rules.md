@@ -6,7 +6,7 @@ category: how-to
 
 # Placement Rules
 
-Placement Rules is an experimental feature introduced since PD v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes such as the number of replicas of any continuous data range, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
+Placement Rules is an experimental feature introduced since PD v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
 ## Rule system
 
@@ -27,7 +27,7 @@ The following table shows the meaning of each field in a rule:
 | `GroupID`         | `string`                         |  The group ID that marks the source of the rule.                |
 | `ID`              | `string`                         |  The unique ID of a rule in a group.                        |
 | `Index`           | `int`                            |   The stacking sequence of rules in a group.                     |
-| `Override`        | `true`/`false`                     | The smaller rule that determines whether to overwrite index (in a group).  |
+| `Override`        | `true`/`false`                     | Whether to overwrite rules with smaller index (in a group).  |
 | `StartKey`        | `string`, in hexadecimal form                |  Applies to the starting key of a range.                |
 | `EndKey`          | `string`, in hexadecimal form                |  Applies to the ending key of a range.                |
 | `Role`            | `string` | Replica roles, including leader/follower/learner.                           |
@@ -59,7 +59,7 @@ By default, the Placement Rules feature is disabled. To enable this feature, you
 enable-placement-rules = true
 ```
 
-In this way, PD enables this feature after the cluster is successfully initialized and generates corresponding rules according to the `max-replicas` and `location-labels` configurations:
+In this way, PD enables this feature after the cluster is successfully bootstrapped and generates corresponding rules according to the `max-replicas` and `location-labels` configurations:
 
 {{< copyable "" >}}
 
@@ -75,7 +75,7 @@ In this way, PD enables this feature after the cluster is successfully initializ
 }
 ```
 
-For a initialized cluster, you can also enable Placement Rules online through pd-ctl:
+For a bootstrapped cluster, you can also enable Placement Rules online through pd-ctl:
 
 {{< copyable "shell-regular" >}}
 
@@ -254,7 +254,7 @@ You only need to add a rule that limits the key range to the range of metadata, 
 }
 ```
 
-### Place five replicas in three data centers in the proportion of two-two-one, and the Leader should not be in the third data center
+### Place five replicas in three data centers in the proportion of 2:2:1, and the Leader should not be in the third data center
 
 Create three rules. Set the number of replicas to `2`, `2`, and `1` respectively. Limit the replicas to the corresponding data centers through `label_constraint` in each rule. In addition, change `role` to `follower` for the data center that should not have a Leader.
 
