@@ -244,6 +244,7 @@
     - [Partitioning](/reference/sql/partitioning.md)
     - [Character Set](/reference/sql/character-set.md)
     - [SQL Mode](/reference/sql/sql-mode.md)
+    - [SQL Diagnosis](/reference/system-databases/sql-diagnosis.md)
     - [Views](/reference/sql/views.md)
   + Configuration
     + tidb-server
