@@ -22,7 +22,7 @@ If you want to save machine resources and have no requirement on isolation, you 
     set @@tidb_distsql_scan_concurrency = 80;
     ```
 
-2. Enable the optimization for TiDB Operator by enabling the aggregate pushdown of `JOIN` or `UNION`:
+2. Enable the optimization for TiDB Operator such as the aggregate pushdown of `JOIN` or `UNION`:
 
     {{< copyable "sql" >}}
 
