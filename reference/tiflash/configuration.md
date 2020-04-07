@@ -62,8 +62,8 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD and
     level = log level (available options: trace, debug, information, warning, error).
     log = The TiFlash log path.
     errorlog = The TiFlash error log path.
-            size = The size of a single log file.
-            count = The maximum number of log files to save.
+    size = The size of a single log file.
+    count = The maximum number of log files to save.
 [raft]
     kvstore_path = The storage path of the kvstore data. # The default setting: "{the first directory of the path}/kvstore"
     pd_addr = PD service address. # Multiple addresses are separated with commas.
