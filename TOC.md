@@ -189,6 +189,7 @@
       - [`EXECUTE`](/reference/sql/statements/execute.md)
       - [`EXPLAIN ANALYZE`](/reference/sql/statements/explain-analyze.md)
       - [`EXPLAIN`](/reference/sql/statements/explain.md)
+      - [`FLASHBACK TABLE`](/reference/sql/statements/flashback-table.md)
       - [`FLUSH PRIVILEGES`](/reference/sql/statements/flush-privileges.md)
       - [`FLUSH STATUS`](/reference/sql/statements/flush-status.md)
       - [`FLUSH TABLES`](/reference/sql/statements/flush-tables.md)
@@ -263,8 +264,8 @@
     - [Certificate-Based Authentication](/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/reference/transactions/overview.md)
-    - [Transaction Model](/reference/transactions/transaction-model.md)
     - [Isolation Levels](/reference/transactions/transaction-isolation.md)
+    - [Optimistic Transactions](/reference/transactions/transaction-optimistic.md)
     - [Pessimistic Transactions](/reference/transactions/transaction-pessimistic.md)
   + System Databases
     - [`mysql`](/reference/system-databases/mysql.md)
@@ -300,6 +301,10 @@
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
   - [TiSpark](/reference/tispark.md)
+  + TiFlash
+    - [Overview](/reference/tiflash/overview.md)
+    - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
+    - [Use TiFlash](/reference/tiflash/use-tiflash.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
@@ -368,6 +373,7 @@
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
+    - [3.1.0-rc](/releases/3.1.0-rc.md)
     - [3.1.0-beta.2](/releases/3.1.0-beta.2.md)
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
