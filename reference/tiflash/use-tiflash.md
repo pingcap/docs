@@ -118,7 +118,7 @@ Engine isolation is to specify that all queries use a replica of the specified e
     engines = ["tikv", "tiflash"]
     ```
 
-    The INSTANCE-level default configuration is  `["tikv", "tiflash"]`.
+    The INSTANCE-level default configuration is `["tikv", "tiflash"]`.
 
 When the engine is configured as "tikv, tiflash", it can read both TiKV and TiFlash replicas at the same time, and the optimizer automatically chooses to read which one. After the engine is specified, if the table in the query does not have a corresponding engine replica, an error is reported indicating that the table does not have the engine replica. Because the TiKV replica always exist, so the only situation is that the engine is configured as `tiflash` but the TiFlash replica does not exist.
 
