@@ -11,7 +11,7 @@ To upgrade TiFlash nodes, take the following steps:
 1. Download the new TiFlash binary to the Control Machine by either of the following two methods:
 
     - Download the latest TiDB Ansible, or update the TiDB Ansible git repository by running the `git pull` command. Then run the `ansible-playbook local_prepare.yml` command.
-    - Manually download TiFlash binary and overwrite to `resource/bin/tiflash`.
+    - Manually download TiFlash binary and overwrite `resource/bin/tiflash`.
 
 2. Rolling upgrade TiFlash:
 
