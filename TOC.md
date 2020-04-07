@@ -61,8 +61,14 @@
       - [Configure Location Awareness](/location-awareness.md)
     - [Data Migration with Ansible](https://pingcap.com/docs/tidb-data-migration/stable/deploy-a-dm-cluster-using-ansible/)
   + Configure
+<<<<<<< HEAD
     - [Time Zone](/configure-time-zone.md)
     - [Memory Control](/configure-memory-usage.md)
+=======
+    - [Time Zone](/how-to/configure/time-zone.md)
+    - [Memory Control](/how-to/configure/memory-control.md)
+    - [Placement Rules](/how-to/configure/placement-rules.md)
+>>>>>>> e93c595... how-to: add placement rule guide (#2171)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](/encrypted-connections-with-tls-protocols.md)
