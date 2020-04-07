@@ -61,15 +61,6 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
 
 1. Download the offline package of your desired version and unzip it.
 
-    - If you are using TiDB 4.0 beta version, execute the following command:
-
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        curl -o tidb-ansible-tiflash-4.0-v3-20200331.tar.gz https://download.pingcap.org/tidb-ansible-tiflash-4.0-v3-20200331.tar.gz &&
-        tar zxvf tidb-ansible-tiflash-4.0-v3-20200331.tar.gz
-        ```
-
     - If you are using TiDB 3.1 rc version, execute the following command:
 
         {{< copyable "shell-regular" >}}
