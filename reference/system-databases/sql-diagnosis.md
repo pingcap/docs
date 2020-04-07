@@ -17,9 +17,9 @@ The SQL diagnosis system has the following advantages:
 
 The SQL diagnosis system consists of three major parts:
 
-+ **Cluster information table**: The SQL diagnosis system adds cluster information tables that provide a unified way to get the discrete information of each instance and node. This system fully integrates the cluster topology, hardware information, software information, kernel parameters, monitoring, system information, slow queries, statements, and logs of the entire cluster into the table. So you can query these information using SQL statements.
++ **Cluster information table**: The SQL diagnosis system introduces cluster information tables that provide a unified way to get the discrete information of each instance and node. This system fully integrates the cluster topology, hardware information, software information, kernel parameters, monitoring, system information, slow queries, statements, and logs of the entire cluster into the table. So you can query these information using SQL statements.
 
-+ **Cluster monitoring table**: The SQL diagnosis system adds cluster monitoring tables. All of these tables are in `metrics_schema`, and you can query monitoring information using SQL statements. Compared to the visualized monitoring before v4.0, you can use this SQL-based method to perform correlated queries on all the monitoring information of the entire cluster, and compare the results of different time periods to quickly identify performance bottlenecks. Because the TiDB cluster has many monitoring metrics, the SQL diagnosis system also provides monitoring summary tables, so you can find abnormal monitoring items more easily.
++ **Cluster monitoring table**: The SQL diagnosis system introduces cluster monitoring tables. All of these tables are in `metrics_schema`, and you can query monitoring information using SQL statements. Compared to the visualized monitoring before v4.0, you can use this SQL-based method to perform correlated queries on all the monitoring information of the entire cluster, and compare the results of different time periods to quickly identify performance bottlenecks. Because the TiDB cluster has many monitoring metrics, the SQL diagnosis system also provides monitoring summary tables, so you can find abnormal monitoring items more easily.
 
 + **Automatic diagnosis**: Although you can manually execute SQL statements to query cluster information tables, cluster monitoring tables, and summary tables, the automatic diagnosis is much easier. The SQL diagnosis system performs automatic diagnosis based on the existing cluster information tables and monitoring tables, and provides relevant diagnosis result tables and diagnosis summary tables.
 
@@ -34,7 +34,7 @@ The cluster information tables bring together the information of all nodes and i
 + On the kernel parameter table `information_schema.cluster_systeminfo`, you can query the kernel configuration information of different nodes in the cluster. Currently, TiDB supports querying the sysctl information.
 + On the cluster log table `information_schema.cluster_log`, you can query cluster logs. By pushing down query conditions to each node, the impact of the query on cluster performance is less than that of the `grep` command.
 
-On the system tables earlier than TiDB v4.0, you can only view the current node. TiDB v4.0 adds the corresponding cluster tables and you can have a global view of the entire cluster on a single TiDB node. These tables are currently in `information_schema`, and the query method is the same as other `information_schema` system tables.
+On the system tables earlier than TiDB v4.0, you can only view the current node. TiDB v4.0 introduces the corresponding cluster tables and you can have a global view of the entire cluster on a single TiDB node. These tables are currently in `information_schema`, and the query method is the same as other `information_schema` system tables.
 
 ## Cluster monitoring tables
 
