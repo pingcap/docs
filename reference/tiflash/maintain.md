@@ -6,7 +6,7 @@ category: reference
 
 # Maintain a TiFlash Cluster
 
-This document describes common operations when you maintain a TiFlash cluster, including checking the version, node logout, troubleshooting, critical logs, and a system table.
+This document describes how to perform common operations when you maintain a TiFlash cluster, including checking the TiFlash version, taking TiFlash nodes down, and troubleshooting TiFlash. This document also introduces critical logs and a system table of TiFlash.
 
 ## Check the TiFlash version
 
@@ -30,13 +30,15 @@ There are two ways to check the TiFlash version:
     <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
     ```
 
-## Logout a TiFlash node
+## Take a TiFlash node down
 
-Take the following steps to logout a TiFlash node:
+Taking a TiFlash node down differs from [Scaling in a TiFlash node](/reference/tiflash/scale.md#scale-in-a-tiflash-node) in that the former doesn't remove the node from TiDB Ansible; instead, it just safely shutdown the process.
+
+Follow the steps below to take a TiFlash node down:
 
 > **Note:**
 >
-> After you logout the TiFlash node, if the number of the remaining nodes in the TiFlash cluster is greater than or equal to the maximum replicas of all data tables, you can go directly to step 3.
+> After you take the TiFlash node down, if the number of the remaining nodes in the TiFlash cluster is greater than or equal to the maximum replicas of all data tables, you can go directly to step 3.
 
 1. For a TiDB server, if the number of replicas of tables is greater than or equal to that of the remaining TiFlash nodes in the cluster, execute the following command:
 
@@ -56,7 +58,7 @@ Take the following steps to logout a TiFlash node:
 
 > **Note:**
 >
-> If you don't cancel all tables replicated to TiFlash before all TiFlash nodes in a cluster stop running, you need to manually delete the replication rule in PD. Or you cannot successfully logout the TiFlash node.
+> If you don't cancel all tables replicated to TiFlash before all TiFlash nodes in a cluster stop running, you need to manually delete the replication rule in PD. Or you cannot successfully take the TiFlash node down.
 >
 > To manually delete the replication rule in PD, send the `DELETE` request `http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/<rule_id>`. `rule_id` refers to the `id` of the `rule` to be deleted.
 
@@ -120,7 +122,7 @@ In this case, you can share the pressure by adding TiFlash nodes.
 
 Take the following steps to handle the data file corruption:
 
-1. Refer to [Logout a TiFlash node](#logout-a-tiflash-node) to logout the corresponding TiFlash node.
+1. Refer to [Take a TiFlash node down](#take-a-tiflash-node-down) to take the corresponding TiFlash node down.
 2. Delete the related data of the TiFlash node.
 3. Redeploy the TiFlash node in the cluster.
 
