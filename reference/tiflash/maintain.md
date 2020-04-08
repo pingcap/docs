@@ -24,7 +24,7 @@ There are two ways to check the TiFlash version:
     LD_LIBRARY_PATH=./ ./tiflash version
     ```
 
-- Check the TiFlash version by referring to the TiFlash log. For the log path, see [[logger] in the tiflash.toml configuration file](/reference/tiflash/configuration.md#configuration-file-tiflashtoml). For example:
+- Check the TiFlash version by referring to the TiFlash log. For the log path, see the [logger] part in [Configure the `tiflash.toml` file](/reference/tiflash/configuration.md#configure-the-`tiflash.toml`-file). For example:
 
     ```
     <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
