@@ -1175,7 +1175,7 @@ Stopping component alertmanager
     Stopping instance 10.0.1.4
     Stop alertmanager 10.0.1.4:9104 success
 
-...... Omit some logs ......
+...... Some log ignored ......
 
 Checking service state of pd
     10.0.1.5
@@ -1237,7 +1237,7 @@ Stopping component alertmanager
     Stopping instance 10.0.1.4
     Stop alertmanager 10.0.1.4:9104 success
 
-...... Omit some logs ......
+...... Some log ignored ......
 
     Destroy monitored on 10.0.1.1 success
 Destroying monitored 10.0.1.2
