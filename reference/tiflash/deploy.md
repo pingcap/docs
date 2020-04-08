@@ -57,9 +57,9 @@ This section describes how to install and deploy TiFlash in the following scenar
 
 ### Fresh TiFlash deployment
 
-TiUP Cluster is the deployment tool for TiDB 4.0 or later versions. It is recommended that you use TiUP Cluster to install and deploy TiFlash. The steps are as follows:
+TiUP cluster is the deployment tool for TiDB 4.0 or later versions. It is recommended that you use TiUP cluster to install and deploy TiFlash. The steps are as follows:
 
-1. [Install TiUP](/how-to/deploy/orchestrated/tiup.md).
+1. [Install TiUP](/how-to/deploy/orchestrated/tiup.md#step-2-install-tiup-on-the-control-machine).
 
 2. Install the TiUP cluster component.
 
