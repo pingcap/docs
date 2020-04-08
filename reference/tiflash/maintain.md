@@ -32,8 +32,6 @@ There are two ways to check the TiFlash version:
 
 ## Logout a TiFlash node
 
-Logouting a TiFlash node differs from [Scaling in the TiFlash node](/reference/tiflash/scale.md#scale-in-tiflash-node) in that the logout doesn't remove the node from TiDB Ansible; instead, it just safely shutdown the process.
-
 Take the following steps to logout a TiFlash node:
 
 > **Note:**
