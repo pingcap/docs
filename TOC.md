@@ -309,6 +309,7 @@
     - [Use TiFlash](/reference/tiflash/use-tiflash.md)
     - [Monitor TiFlash](/reference/tiflash/monitor.md)
     - [Scale](/reference/tiflash/scale.md)
+    - [Configure TiFlash](/reference/tiflash/configuration.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
