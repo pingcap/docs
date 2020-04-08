@@ -409,5 +409,32 @@ Configurations related to the `events_statement_summary_by_digest` table
 
 ### max-sql-length
 
+<<<<<<< HEAD
 - The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table
 - Default value: 4096
+=======
+- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
+- Default value: `4096`
+
+## pessimistic-txn
+
+### enable
+
+- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
+- Default value: `true`
+
+### max-retry-count
+
+- The max number of retries of each statement in pessimistic transactions. Exceeding this limit results in error.
+- Default value: `256`
+
+## experimental
+
+The `experimental` section describes configurations related to the experimental features of TiDB. This section is introduced since v3.1.0.
+
+### `allow-auto-random` <span class="version-mark">New in v3.1.0</span>
+
+- Determines whether to allow using `AUTO_RANDOM`.
+- Default value: `false`
+- By default, TiDB does not support using `AUTO_RANDOM`. When the value is `true`, you cannot set `alter-primary-key` to `true` at the same time.
+>>>>>>> 9650128... reference: update documents about pessimistic transaction (#1854)
