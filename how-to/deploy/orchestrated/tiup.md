@@ -8,7 +8,7 @@ category: how-to
 
 ## Stop a cluster
 
-To stop the `tidb-test` cluster, execute the following command:
+To stop the `tidb-test` cluster, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -67,7 +67,7 @@ Stopped cluster `tidb-test` successfully
 >
 > Perform this operation carefully in a production environment. The cleanup task cannot be rolled back after this operation is confirmed.
 
-To destroy the `tidb-test` cluster, including data and services, execute the following command:
+To destroy the `tidb-test` cluster, including data and services, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -432,7 +432,7 @@ tidb_servers:
         --sudo             use root permissions (default false)
     ```
 
-    操作命令，将 tidb-test 集群所有目标主机通过 sudo 权限执行安装命令
+    To use the sudo privilege to execute the installation command for all the target machines in the `tidb-test` cluster, run the following command:
 
     {{< copyable "shell-regular" >}}
 
