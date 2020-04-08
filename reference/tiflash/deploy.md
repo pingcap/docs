@@ -71,9 +71,9 @@ TiUP cluster is the deployment tool for TiDB 4.0 or later versions. It is recomm
 
 3. Write the topology configuration file and save it as `topology.yaml`.
 
-    For details, see [the topology example](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml).
+    You can refer to [the topology configuration file template](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml).
 
-    In addition to configuring the TiDB cluster, you also need to configure the IP of tiflash servers in `tiflash_servers`. Currently the configuration only supports IP but not domain name.
+    In addition to configuring the TiDB cluster, you also need to configure the IP of TiFlash servers in `tiflash_servers`. Currently the configuration only supports IP but not domain name.
 
     If you need to deploy TiFlash, set `replication.enable-placement-rules` in the `pd` section to `true`.
 
@@ -139,6 +139,6 @@ TiUP cluster is the deployment tool for TiDB 4.0 or later versions. It is recomm
 
 2. Execute the `config set enable-placement-rules true` command in [pd-ctl](/reference/tools/pd-control.md) (`resources/bin` in the tidb-ansible directory includes the pd-ctl binary file) to enable PD's Placement Rules feature.
 
-    Currently, pd-ctl is not connected to TiUP Cluster, you need to [download pd-ctl manually](https://download.pingcap.org/tidb-v4.0.0-rc-linux-amd64.tar.gz).
+    Currently, pd-ctl is not connected to TiUP cluster, you need to [manually download pd-ctl](https://download.pingcap.org/tidb-v4.0.0-rc-linux-amd64.tar.gz).
 
 3. Refer to [Scale out a TiFlash node](reference/tiflash/scale.md#scale-out-a-tiflash-node) and deploy TiFlash.
