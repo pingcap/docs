@@ -43,7 +43,7 @@ The software and hardware recommendations for the **Control Machine** are as fol
 The software and hardware recommendations for the **target machines** are as follows:
 
 - It is recommended that you deploy four or more target machines with at least three TiKV instances, and that the TiKV instances are not deployed on the same machine as TiDB and PD instances.
-- Currently it is supported to deploy the TiDB cluster on x86_64 (AMD64) and ARM64 (will support deploying TiUP in 4.0 GA).
+- Currently TiUP only supports deploying the TiDB cluster on x86_64 (AMD64) architecture (TiUP will support deploying TiDB on ARM architecture at 4.0 GA)
     - Under AMD64 architecture, it is recommended to use CentOS 7.3 or above as the operating system.
     - Under ARM architecture, it is recommended to use CentOS 7.6 1810 as the operating system.
 - For the file system of TiKV data files, it is recommended to use EXT4 format. (refer to [Step 3](#step-3-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv)) You can also use CentOS default XFS format.
