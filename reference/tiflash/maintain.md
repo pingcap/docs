@@ -24,7 +24,7 @@ There are two ways to check the TiFlash version:
     LD_LIBRARY_PATH=./ ./tiflash version
     ```
 
-- Check the TiFlash version by referring to the TiFlash log. For the log path, see the `[logger]` part in [configure the `tiflash.toml` file](/reference/tiflash/configuration.md#configure-the-tiflashtoml-file). For example:
+- Check the TiFlash version by referring to the TiFlash log. For the log path, see the `[logger]` part in [the `tiflash.toml` file](/reference/tiflash/configuration.md#configure-the-tiflashtoml-file). For example:
 
     ```
     <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
@@ -48,7 +48,7 @@ Follow the steps below to take a TiFlash node down:
     alter table <db-name>.<table-name> set tiflash replica 0;
     ```
 
-2. To ensure that the TiFlash replicas of these tables are removed, see [View the Table Replication Progress](/reference/tiflash/use-tiflash.md#view-the-table-replication-progress). If you cannot view the replication progress of the related tables, it means that the replicas are removed.
+2. To ensure that the TiFlash replicas of these tables are removed, see [Check the Replication Progress](/reference/tiflash/use-tiflash.md#check-the-replication-progress). If you cannot view the replication progress of the related tables, it means that the replicas are removed.
 
 3. Input the `store` command into [pd-ctl](/reference/tools/pd-control.md) (the binary file is in `resources/bin` of the tidb-ansible directory) to view the `store id` of the TiFlash node.
 
@@ -70,7 +70,7 @@ This section describes some commonly encountered issues when using TiFlash, the 
 
 This is because TiFlash is in an abnormal state caused by configuration errors or environment issues. Take the following steps to identify the faulty component:
 
-1. Check whether PD enables the `Placement Rules` feature (to enable the feature, see the step 2 of [Add a TiFlash component in an existing TiDB Cluster](/reference/tiflash/deploy.md#add-a-TiFlash-component-in-an-existing-TiDB-cluster):
+1. Check whether PD enables the `Placement Rules` feature (to enable the feature, see the step 2 of [Add TiFlash component to an existing TiDB cluster](/reference/tiflash/deploy.md#add-tiflash-component-to-an-existing-tidb-cluster):
 
     {{< copyable "shell-regular" >}}
 
@@ -80,7 +80,7 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
 
     The expected result is `"enable-placement-rules": "true"`.
 
-2. Check whether the TiFlash process in the operation system is working correctly using `UpTime` of the TiFlash-Summary monitor panel.
+2. Check whether the TiFlash process is working correctly by viewing `UpTime` on the TiFlash-Summary monitoring panel.
 
 3. Check whether the TiFlash proxy status is normal through `pd-ctl`.
 
@@ -90,9 +90,9 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
     echo "store" | /path/to/pd-ctl -u http://<pd-ip>:<pd-port>
     ```
 
-    If `store.labels` includes information such as `{"key": "engine", "value": "tiflash"}`, it refers to the TiFlash proxy.
+    The TiFlash proxy's `store.labels` includes information such as `{"key": "engine", "value": "tiflash"}`. You can check this information to confirm a TiFlash proxy.
 
-4. Check whether `pd buddy` can print the logs correctly (the value of `log` in the [flash.flash_cluster] configuration item of the log path, is by default the `tmp` directory configured by the TiFlash configuration file).
+4. Check whether `pd buddy` can correctly print the logs (the log path is the value of `log` in the [flash.flash_cluster] configuration item; the default log path is under the `tmp` directory configured in the TiFlash configuration file).
 
 5. Check whether the value of `max-replicas` in PD is less than or equal to the number of TiKV nodes in the cluster. If not, PD cannot replicate data to TiFlash:
 
@@ -104,19 +104,19 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
 
     Reconfirm the value of `max-replicas`.
 
-6. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to TiFlash.
+6. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to this TiFlash node.
 
 ### TiFlash query time is unstable, and error log prints many `Lock Exception` messages
 
-This is because large amounts of data are written to the cluster, which leads to the situation that the TiFlash query encounters a lock and requires query retry.
+This is because large amounts of data are written to the cluster, which causes that the TiFlash query encounters a lock and requires query retry.
 
-You can set the query timestamp to one second earlier in TiDB (for example, `set @@tidb_snapshot=412881237115666555;`), to reduce the possibility that TiFlash query encounters a lock; thereby mitigating the risk of unstable query time.
+You can set the query timestamp to one second earlier in TiDB (for example, `set @@tidb_snapshot=412881237115666555;`). This makes less TiFlash queries encounter a lock and mitigate the risk of unstable query time.
 
-### Partial queries return `Region Unavailable`
+### Some queries return the `Region Unavailable` error
 
-If the load pressure in TiFlash is so heavy that TiFlash data replication falls behind. Some queries might return error message `Region Unavailable`.
+If the load pressure on TiFlash is too heavy and it causes that TiFlash data replication falls behind, some queries might return the `Region Unavailable` error.
 
-In this case, you can share the pressure by adding TiFlash nodes.
+In this case, you can balance the load pressure by adding more TiFlash nodes.
 
 ### Data file corruption
 
@@ -131,8 +131,8 @@ Take the following steps to handle the data file corruption:
 | Log Information | Log Description |
 |---------------|-------------------|
 | [ 23 ] <Information> KVStore: Start to persist [region 47, applied: term 6 index 10] | Data starts to be replicated (the number in the square brackets at the start of the log refers to the thread ID |
-| [ 30 ] <Debug> CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute() | `Handling DAG request` refers to that TiFlash starts to handle a Coprocessor request |
-| [ 30 ] <Debug> CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute() | `Handle DAG request done` refers to that TiFlash finishes a Coprocessor request |
+| [ 30 ] <Debug> CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute() | Handling DAG request, that is, TiFlash starts to handle a Coprocessor request |
+| [ 30 ] <Debug> CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute() | Handling DAG request done, that is, TiFlash finishes handling a Coprocessor request |
 
 You can find the beginning or the end of a Coprocessor request, and then locate the related logs of the Coprocessor request through the thread ID printed at the start of the log.
 
