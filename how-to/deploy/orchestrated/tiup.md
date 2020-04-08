@@ -1032,7 +1032,6 @@ Started cluster `tidb-test` successfully
 tiup cluster display tidb-test
 ```
 
-预期结果输出，注意 Status 状态信息为 `Up` 说明集群状态正常：
 Expected output (if the `Status` is `Up`, the cluster status is normal):
 
 ```log
