@@ -7,20 +7,16 @@ aliases: ['/docs/dev/how-to/upgrade/rolling-updates-with-ansible/']
 
 # TiDB Latest Development Version Upgrade Guide
 
-This document is targeted for users who want to upgrade from TiDB 2.0, 2.1, 3.0, or 3.1 versions to the latest development version (`latest`), or from an earlier development version to the latest development version. The latest development version is compatible with [TiDB Binlog of the cluster version](/reference/tidb-binlog/overview.md).
-
-> **Warning:**
->
-> The latest development version of TiDB is not a stable version. Do not use it in the production environment.
+This document is targeted for users who want to upgrade from TiDB 2.0, 2.1, 3.0, or 3.1 versions to the TiDB 4.0 version, or from an earlier version of TiDB 4.0 to the later version of TiDB 4.0. The TiDB 4.0 version version is compatible with [TiDB Binlog of the cluster version](/reference/tidb-binlog/overview.md).
 
 ## Upgrade caveat
 
-- Rolling back to 2.1.x or earlier versions after upgrading is not supported.
-- Before upgrading to `latest` from 2.0.6 or earlier versions, check if there are any running DDL operations, especially time-consuming ones like `Add Index`. If there are any, wait for the DDL operations to finish before you upgrade.
-- Parallel DDL is supported in TiDB 2.1 and later versions. Therefore, for clusters with a TiDB version earlier than 2.0.1, rolling update to `latest` is not supported. To upgrade, you can choose either of the following two options:
+- Rolling back to 3.1.x or earlier versions after upgrading is not supported.
+- Before upgrading to 4.0 from 2.0.6 or earlier versions, check if there are any running DDL operations, especially time-consuming ones like `Add Index`. If there are any, wait for the DDL operations to finish before you upgrade.
+- Parallel DDL is supported in TiDB 2.1 and later versions. Therefore, for clusters with a TiDB version earlier than 2.0.1, rolling update to 4.0 is not supported. To upgrade, you can choose either of the following two options:
 
-    - Stop the cluster and upgrade to `latest` directly.
-    - Roll update to 2.0.1 or later 2.0.x versions, and then roll update to the `latest` version.
+    - Stop the cluster and upgrade to 4.0 directly.
+    - Roll update to 2.0.1 or later 2.0.x versions, and then roll update to the 4.0 version.
 
 > **Note:**
 >
@@ -32,7 +28,7 @@ This document is targeted for users who want to upgrade from TiDB 2.0, 2.1, 3.0,
 >
 > If you have installed Ansible and its dependencies, you can skip this step.
 
-The latest development version of TiDB Ansible depends on Ansible 2.4.2 ~ 2.7.11 (`2.4.2 ≦ ansible ≦ 2.7.11`, Ansible 2.7.11 recommended) and the Python modules of `jinja2 ≧ 2.9.6` and `jmespath ≧ 0.9.0`.
+The latest development version of TiDB Ansible depends on Ansible 2.5.0 ~ 2.7.11 (`2.5.0 ≦ ansible ≦ 2.7.11`, Ansible 2.7.11 recommended) and the Python modules of `jinja2 ≧ 2.9.6` and `jmespath ≧ 0.9.0`.
 
 To make it easy to manage dependencies, use `pip` to install Ansible and its dependencies. For details, see [Install Ansible and its dependencies on the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-4-install-tidb-ansible-and-its-dependencies-on-the-control-machine). For offline environment, see [Install Ansible and its dependencies offline on the Control Machine](/how-to/deploy/orchestrated/offline-ansible.md#step-3-install-tidb-ansible-and-its-dependencies-offline-on-the-control-machine).
 
@@ -80,7 +76,7 @@ Version: 0.9.0
 
 1. Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory.
 
-2. Back up the `tidb-ansible` folders of TiDB 2.0, 2.1, 3.0, or an earlier `latest` version using the following command:
+2. Back up the `tidb-ansible` folders of TiDB 2.0, 2.1, 3.0, 3.1, or an earlier `latest` version using the following command:
 
     {{< copyable "shell-regular" >}}
 
@@ -88,12 +84,12 @@ Version: 0.9.0
     mv tidb-ansible tidb-ansible-bak
     ```
 
-3. Download the tidb-ansible with the tag corresponding to the `latest` version of TiDB. For more details, See [Download TiDB-Ansible to the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`.
+3. Download the tidb-ansible with the tag corresponding to the TiDB 4.0 version. For more details, See [Download TiDB-Ansible to the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`. Replace `$tag` with the value of the chosen TAG version. For example, `v4.0.0-beta.2`.
 
     {{< copyable "shell-regular" >}}
 
     ```bash
-    git clone https://github.com/pingcap/tidb-ansible.git
+    git clone -b $tag https://github.com/pingcap/tidb-ansible.git
     ```
 
 ## Step 3: Edit the `inventory.ini` file and the configuration file
@@ -161,11 +157,11 @@ If you have previously customized the configuration file of TiDB cluster compone
 
     > **Note:**
     >
-    > For the cluster topology of multiple TiKV instances (processes) on a single machine, you need to modify the `capacity` parameter.
+    > For the cluster topology of multiple TiKV instances (processes) on a single machine, you need to modify the `capacity` parameter unless the current version has the new configuration.
 
     Recommended configuration: `capacity` = MEM_TOTAL \* 0.5 / the number of TiKV instances.
 
-- In the TiKV configuration, you need to configure the `tikv_status_port` port for the multiple instances on a single machine scenario. Before you configure it, check whether a port conflict exists.
+- In the TiKV configuration, if you upgrade to v4.0 from a version earlier than 3.0, you need to configure the `tikv_status_port` port for the multiple instances on a single machine scenario. Before you configure it, check whether a port conflict exists.
 
     ```
     [tikv_servers]
@@ -179,7 +175,7 @@ If you have previously customized the configuration file of TiDB cluster compone
 
 ## Step 4: Download TiDB latest binary to the Control Machine
 
-Make sure that `tidb_version = latest` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB latest binary to the Control Machine:
+Make sure that `tidb_version = v4.0.x` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB 4.0 binary to the Control Machine:
 
 {{< copyable "shell-regular" >}}
 
