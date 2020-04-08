@@ -63,6 +63,7 @@
   + Configure
     - [Time Zone](/how-to/configure/time-zone.md)
     - [Memory Control](/how-to/configure/memory-control.md)
+    - [Placement Rules](/how-to/configure/placement-rules.md)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](/how-to/secure/enable-tls-clients.md)
@@ -243,6 +244,7 @@
     - [Partitioning](/reference/sql/partitioning.md)
     - [Character Set](/reference/sql/character-set.md)
     - [SQL Mode](/reference/sql/sql-mode.md)
+    - [SQL Diagnosis](/reference/system-databases/sql-diagnosis.md)
     - [Views](/reference/sql/views.md)
   + Configuration
     + tidb-server
@@ -301,6 +303,11 @@
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
   - [TiSpark](/reference/tispark.md)
+  + TiFlash
+    - [Overview](/reference/tiflash/overview.md)
+    - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
+    - [Use TiFlash](/reference/tiflash/use-tiflash.md)
+    - [Monitor TiFlash](/reference/tiflash/monitor.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
