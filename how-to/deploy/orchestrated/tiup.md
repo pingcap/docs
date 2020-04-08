@@ -142,24 +142,6 @@ Log in to the Control Machine using a regular user account (take the `tidb` user
         --version   version for cluster
 
     Use "cluster [command] --help" for more information about a command.
-
-    # cluster 组件提供以下集群管理功能
-    # deploy      集群部署
-    # start       启动 TiDB 集群
-    # stop        关闭 TiDB 集群
-    # restart     重启 TiDB 集群
-    # scale-in    扩容 TiDB 集群
-    # scale-out   缩容 TiDB 集群
-    # destroy     销毁指定 TiDB 集群
-    # upgrade     升级指定 TiDB 集群
-    # exec        在 TiDB 集群的目标主机执行命令
-    # display     展示 TiDB 集群信息
-    # list        展示管理的 TiDB 集群
-    # audit       审计 TiUP 历史操作命令
-    # import      导入 TiDB-Ansible 部署的 TiDB 集群
-    # edit-config 编辑 TiDB 集群参数
-    # reload      重新加载 TiDB 集群或者指定实例的参数配置
-    # help        帮助信息
     ```
 
 4. If it is already installed, update the TiUP cluster component to the latest version:
@@ -801,13 +783,6 @@ Flags:
   -i, --identity_file string   The path of the SSH identity file. If specified, public key authentication will be used.
       --user string            The user name to login via SSH. The user must has root (or sudo) privilege. (default "root")
   -y, --yes                    Skip confirming the topology
-
-# Usage 展示执行命令样例，<> 为必填项
-# Flags 可选参数，有以下的作用： 
-# 通过 -h 可以查看帮助；
-# 通过 -i 执行权限认证； 
-# --user 通过指定用户来完成 ssh 登陆，默认为 root 用户；
-# -y 提过拓扑信息确认直接执行部署任务
 ```
 
 > **Note:**
