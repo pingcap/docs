@@ -40,7 +40,7 @@ Follow the steps below to take a TiFlash node down:
 >
 > After you take the TiFlash node down, if the number of the remaining nodes in the TiFlash cluster is greater than or equal to the maximum replicas of all data tables, you can go directly to step 3.
 
-1. If the number of replicas of tables is greater than or equal to that of the remaining TiFlash nodes in the cluster, execute the following command on those tables in the TiDB client:
+1. If the number of replicas of tables is greater than or equal to that of the remaining TiFlash nodes in the cluster, execute the following command on these tables in the TiDB client:
 
     {{< copyable "sql" >}}
 
@@ -54,7 +54,7 @@ Follow the steps below to take a TiFlash node down:
 
 4. Input `store delete <store_id>` into `pd-ctl`. Here `<store_id>` refers to the `store id` in step 3.
 
-5. When the corresponding `store` of the node disappears, or when `state_name` is changed to `Tomestone`, stop the TiFlash process.
+5. When the corresponding `store` of the node disappears, or when `state_name` is changed to `Tombstone`, stop the TiFlash process.
 
 > **Note:**
 >
@@ -106,7 +106,7 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
 
 6. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to this TiFlash node.
 
-### TiFlash query time is unstable, and error log prints many `Lock Exception` messages
+### TiFlash query time is unstable, and the error log prints many `Lock Exception` messages
 
 This is because large amounts of data are written to the cluster, which causes that the TiFlash query encounters a lock and requires query retry.
 
