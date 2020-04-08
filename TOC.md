@@ -307,6 +307,7 @@
     - [Overview](/reference/tiflash/overview.md)
     - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
     - [Use TiFlash](/reference/tiflash/use-tiflash.md)
+    - [Monitor TiFlash](/reference/tiflash/monitor.md)
     - [Tune TiFlash Performance](/reference/tiflash/tune-performance.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
