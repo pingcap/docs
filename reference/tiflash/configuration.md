@@ -30,7 +30,7 @@ This section introduces the configuration parameters of TiFlash.
 tmp_path = The path in which the TiFlash temporary files are stored.
 path = The TiFlash data storage path.     # If there are multiple directories, separate each directory with a comma. For example, `/ssd_a/data/tiflash,/hdd_b/data/tiflash,/hdd_c/data/tiflash`. If your environment has multiple disks, it is recommended that each path corresponds to one disk and you put disks with best performance at the front to fully use performance of all disks.
 path_realtime_mode = false # The default value is `false`. If you set it to `true` and multiple directories are deployed in the path, the latest data is stored in the first directory and older data is stored in the rest directories.
-listen_host = The TiFlash service listening host. # Generally, it is configured as 0.0.0.0.
+listen_host = The TiFlash service listening host. # Generally, it is configured as `0.0.0.0`.
 tcp_port = The TiFlash TCP service port.
 http_port = The TiFlash HTTP service port.
 ```
@@ -41,7 +41,7 @@ http_port = The TiFlash HTTP service port.
     service_addr = The listening address of TiFlash Raft services and coprocessor services.
 ```
 
-Multiple TiFlash nodes elect a master to add or delete placement rules to PD and, you need three parameters to control this process.
+Multiple TiFlash nodes elect a master to add or delete placement rules to PD, and you need three parameters to control this process.
 
 ```
 [flash.flash_cluster]
