@@ -32,7 +32,7 @@ There are two ways to check the TiFlash version:
 
 ## Take a TiFlash node down
 
-Taking a TiFlash node down differs from [Scaling in a TiFlash node](/reference/tiflash/scale.md#scale-in-a-tiflash-node) in that the former doesn't remove the node from TiDB Ansible; instead, it just safely shutdown the process.
+Taking a TiFlash node down differs from [Scaling in a TiFlash node](/reference/tiflash/scale.md#scale-in-a-tiflash-node) in that the former doesn't remove the node in TiDB Ansible; instead, it just safely shuts down the TiFlash process.
 
 Follow the steps below to take a TiFlash node down:
 
@@ -40,7 +40,7 @@ Follow the steps below to take a TiFlash node down:
 >
 > After you take the TiFlash node down, if the number of the remaining nodes in the TiFlash cluster is greater than or equal to the maximum replicas of all data tables, you can go directly to step 3.
 
-1. For a TiDB server, if the number of replicas of tables is greater than or equal to that of the remaining TiFlash nodes in the cluster, execute the following command:
+1. If the number of replicas of tables is greater than or equal to that of the remaining TiFlash nodes in the cluster, execute the following command on those tables in the TiDB client:
 
     {{< copyable "sql" >}}
 
@@ -48,27 +48,27 @@ Follow the steps below to take a TiFlash node down:
     alter table <db-name>.<table-name> set tiflash replica 0;
     ```
 
-2. To ensure TiFlash replicas of related tables are removed, see [View the Table Replication Progress](/reference/tiflash/use-tiflash.md#view-the-table-replication-progress). If you cannot view the replication progress of the related tables, it means that the replicas are removed.
+2. To ensure that the TiFlash replicas of these tables are removed, see [View the Table Replication Progress](/reference/tiflash/use-tiflash.md#view-the-table-replication-progress). If you cannot view the replication progress of the related tables, it means that the replicas are removed.
 
-3. Input the `store` command into [pd-ctl](/reference/tools/pd-control.md) (the binary file in `resources/bin` in the tidb-ansible directory) to view the `store id` of the TiFlash node.
+3. Input the `store` command into [pd-ctl](/reference/tools/pd-control.md) (the binary file is in `resources/bin` of the tidb-ansible directory) to view the `store id` of the TiFlash node.
 
 4. Input `store delete <store_id>` into `pd-ctl`. Here `<store_id>` refers to the `store id` in step 3.
 
-5. When the corresponding `store` of the node disappeared, or when `state_name` is changed to `Tomestone`, shutdown the TiFlash process.
+5. When the corresponding `store` of the node disappears, or when `state_name` is changed to `Tomestone`, stop the TiFlash process.
 
 > **Note:**
 >
-> If you don't cancel all tables replicated to TiFlash before all TiFlash nodes in a cluster stop running, you need to manually delete the replication rule in PD. Or you cannot successfully take the TiFlash node down.
+> If you don't cancel all tables replicated to TiFlash before all TiFlash nodes stop running, you need to manually delete the replication rule in PD. Or you cannot successfully take the TiFlash node down.
 >
 > To manually delete the replication rule in PD, send the `DELETE` request `http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/<rule_id>`. `rule_id` refers to the `id` of the `rule` to be deleted.
 
 ## TiFlash troubleshooting
 
-This section describes some common questions of TiFlash, the reasons, and the solutions.
+This section describes some commonly encountered issues when using TiFlash, the reasons, and the solutions.
 
-### TiFlash replica is always in an unusable state
+### TiFlash replica is always unavailable
 
-This is because TiFlash is in the exception status caused by the configuration error or the environment problems. You can take the following steps to identify the problem component:
+This is because TiFlash is in an abnormal state caused by configuration errors or environment issues. Take the following steps to identify the faulty component:
 
 1. Check whether PD enables the `Placement Rules` feature (to enable the feature, see the step 2 of [Add a TiFlash component in an existing TiDB Cluster](/reference/tiflash/deploy.md#add-a-TiFlash-component-in-an-existing-TiDB-cluster):
 
