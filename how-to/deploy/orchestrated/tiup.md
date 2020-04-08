@@ -6,7 +6,7 @@ category: how-to
 
 # Deploy a TiDB Cluster Using TiUP
 
-[TiUP](https://github.com/pingcap-incubator/tiup-cluster) is a TiDB operation and maintenance tool written in Golang. TiUP cluster is a cluster management component provided by TiUP. By using the TiUP cluster component, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster; managing TiDB cluster parameters; deploying TiDB Binlog; deploying TiFlash; etc.
+[TiUP](https://github.com/pingcap-incubator/tiup-cluster) is a TiDB operation and maintenance tool written in Golang. TiUP cluster is a cluster management component provided by TiUP. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster; managing TiDB cluster parameters; deploying TiDB Binlog; deploying TiFlash; etc.
 
 This document introduces how to use TiUP to deploy a TiDB cluster. The steps are as follows:
 
@@ -17,11 +17,11 @@ This document introduces how to use TiUP to deploy a TiDB cluster. The steps are
 5. [Start the cluster](#5-start-the-cluster)
 6. [Verify the running status of the cluster](#6-verify-the-running-status-of-the-cluster)
 
-This document also provides commands to stop and destroy a TiDB cluster using TiUP, as well as common problems and solutions of the TiUP deployment method. See the following sections for details:
+This document also provides commands to stop and destroy a TiDB cluster using TiUP, as well as FAQs of the TiUP deployment method. See the following sections for details:
 
 - [Stop a TiDB cluster using TiUP](#stop-a-tidb-cluster-using-tiup)
 - [Destroy a TiDB cluster using TiUP](#destroy-a-tidb-cluster-using-tiup)
-- [Common TiUP deployment issues](#common-tiup-deployment-issues)
+- [TiUP Deployment FAQs](#tiup-deployment-faqs)
 
 ## 1. Prepare the deployment environment
 
@@ -1147,7 +1147,7 @@ MySQL [pingcap]> exit
 Bye
 ```
 
-## Stop a cluster
+## Stop a TiDB cluster using TiUP
 
 To stop the `tidb-test` cluster, run the following command:
 
@@ -1202,7 +1202,7 @@ Checking service state of alertmanager
 Stopped cluster `tidb-test` successfully
 ```
 
-## Destroy a cluster
+## Destroy a TiDB cluster using TiUP
 
 > **Warning:**
 >
@@ -1259,7 +1259,7 @@ Destroy monitored on 10.0.1.4 success
 Destroyed cluster `tidb-test` successfully
 ```
 
-## Deployment FAQs
+## TiUP Deployment FAQs
 
 This section describes common problems and solutions when you deploy TiDB clusters using TiUP.
 
