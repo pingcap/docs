@@ -92,19 +92,9 @@ This document only describes the parameters that are not included in command-lin
 + Unit: KB|MB|GB
 + Minimum value: `1KB`
 
-## readpool
-
-Configuration items related to read pools
-
-### `unify-read-pool`
-
-+ Whether to use a single thread pool to serve all the read requests.
-+ Default value: `true` when there are no customized configurations in the `readpool.storage` and `readpool.coprocessor` sections. Otherwise, the value is `false`.
-
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests.
-They only take effect when `unify-read-pool` is `true`.
 
 ### `min-thread-count`
 
@@ -132,7 +122,11 @@ They only take effect when `unify-read-pool` is `true`.
 ## readpool.storage
 
 Configuration items related to storage thread pool.
-They only take effect when `unify-read-pool` is `false`.
+
+### `use-unified-pool`
+
++ Whether to use the unified thread pool (configured in `readpool.unified`) for storage requests. If it is `false`, a separate thread pool which is configured with the rest options in this section is used.
++ Default value: `false`
 
 ### `high-concurrency`
 
@@ -180,7 +174,11 @@ They only take effect when `unify-read-pool` is `false`.
 ## `readpool.coprocessor`
 
 Configuration items related to the Coprocessor thread pool.
-They only take effect when `unify-read-pool` is `false`.
+
+### `use-unified-pool`
+
++ Whether to use the unified thread pool (configured in `readpool.unified`) for coprocessor requests. If it is `false`, a separate thread pool which is configured with the rest options in this section is used.
++ Default value: If none of the options in this section are set, the default value is `true`. Otherwise, the default value is `false` for the sake of backward compatibility. Please adjust the configurations in `readpool.unified` before enabling it.
 
 ### `high-concurrency`
 
