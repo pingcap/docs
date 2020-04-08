@@ -120,7 +120,7 @@ In this case, you can share the pressure by adding TiFlash nodes.
 
 Take the following steps to handle the data file corruption:
 
-1. Refer to [Logout a TiFlash node](/reference/tiflash/maintain.md#logout-a-tiflash-node) to logout the corresponding TiFlash node.
+1. Refer to [Logout a TiFlash node](#logout-a-tiflash-node) to logout the corresponding TiFlash node.
 2. Delete the related data of the TiFlash node.
 3. Redeploy the TiFlash node in the cluster.
 
