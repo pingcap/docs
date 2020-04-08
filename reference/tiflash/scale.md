@@ -77,7 +77,7 @@ The following example shows how to scale out a TiFlash node if you deploy TiFlas
     ansible-playbook start.yml -l 192.168.1.1
     ```
 
-6. Update the configuration of Prometheus and restart:
+6. Update the configuration of Prometheus and restart it:
 
     {{< copyable "shell-regular" >}}
 
@@ -117,7 +117,7 @@ The following example shows how to scale in a TiFlash node if you stop the TiFla
 
 4. Edit the `inventory.ini` and `hosts.ini` files to remove the node information.
 
-5. Update the configuration of Prometheus and restart:
+5. Update the configuration of Prometheus and restart it:
 
     {{< copyable "shell-regular" >}}
 
