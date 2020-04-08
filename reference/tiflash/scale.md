@@ -12,9 +12,9 @@ This document describes how to scale in and out nodes in the TiFlash cluster.
 
 The following example shows how to scale out a TiFlash node if you deploy TiFlash on the `192.168.1.1` node.
 
-1. Edit the `inventory.ini` file, and add the TiFlash node information:
+1. Edit the `inventory.ini` file to add the TiFlash node information:
 
-    Currently, this feature only supports IP but not domain name.
+    Currently, you can only add IP but not domain name.
 
     {{< copyable "" >}}
 
@@ -23,7 +23,7 @@ The following example shows how to scale out a TiFlash node if you deploy TiFlas
     192.168.1.1
     ```
 
-2. Edit the `hosts.ini` file, and add the node information:
+2. Edit the `hosts.ini` file to add the node information:
 
     {{< copyable "" >}}
 
@@ -89,7 +89,7 @@ The following example shows how to scale out a TiFlash node if you deploy TiFlas
 
 ## Scale in a TiFlash node
 
-The following example shows how to scale in a TiFlash node if you deploy TiFlash on the `192.168.1.1` node.
+The following example shows how to scale in a TiFlash node if you stop the TiFlash service on the `192.168.1.1` node.
 
 > **Note:**
 >
