@@ -34,7 +34,7 @@ If you want to save machine resources and have no requirement on isolation, you 
 
 The number and size of Regions might have some impact on TiFlash performance. Too many small Regions might bring down TiFlash performance by several times.
 
-For user scenarios that focus on analysis and query, it is recommended that you set the Region size to 192MB, and enable the Region Merge feature to ensure that small Regions generated during operation are automatically merged.
+For user scenarios that focus on analysis and query, it is recommended that you set the Region size to 192 MB, and enable the Region Merge feature to ensure that small Regions generated during operation are automatically merged.
 
 This section introduces how to set Region size and enable Region Merge for TiDB clusters that are deployed in different ways.
 
