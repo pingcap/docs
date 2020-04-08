@@ -110,7 +110,7 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
 
 This is because large amounts of data are written to the cluster, which causes that the TiFlash query encounters a lock and requires query retry.
 
-You can set the query timestamp to one second earlier in TiDB (for example, `set @@tidb_snapshot=412881237115666555;`). This makes less TiFlash queries encounter a lock and mitigate the risk of unstable query time.
+You can set the query timestamp to one second earlier in TiDB (for example, `set @@tidb_snapshot=412881237115666555;`). This makes less TiFlash queries encounter a lock and mitigates the risk of unstable query time.
 
 ### Some queries return the `Region Unavailable` error
 
