@@ -38,7 +38,7 @@ The software and hardware recommendations for the **Control Machine** are as fol
 - The Control Machine can be one of the target machines.
 - For the Control Machine' operating system, it is recommended to install CentOS 7.3 or above.
 - The Control Machine needs to access the external Internet to download TiDB and related software installation packages.
-- You need to install TiUP on the Control Machine. (refer to [Step 2](step-2-install-tiup-on-the-control-machine))
+- You need to install TiUP on the Control Machine (refer to [Step 2](step-2-install-tiup-on-the-control-machine).
 
 The software and hardware recommendations for the **target machines** are as follows:
 
