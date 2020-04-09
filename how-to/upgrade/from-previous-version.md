@@ -1,11 +1,10 @@
 ---
-title: TiDB Latest Development Version Upgrade Guide
-summary: Learn how to upgrade to the latest development version of TiDB.
+title: TiDB 4.0 Upgrade Guide
+summary: Learn how to upgrade to TiDB 4.0 versions.
 category: how-to
-aliases: ['/docs/dev/how-to/upgrade/rolling-updates-with-ansible/']
 ---
 
-# TiDB Latest Development Version Upgrade Guide
+# TiDB 4.0 Version Upgrade Guide
 
 This document is targeted for users who want to upgrade from TiDB 2.0, 2.1, 3.0, or 3.1 versions to the TiDB 4.0 version, or from an earlier version of TiDB 4.0 to the later version of TiDB 4.0. The TiDB 4.0 version version is compatible with [TiDB Binlog of the cluster version](/reference/tidb-binlog/overview.md).
 
@@ -84,7 +83,7 @@ Version: 0.9.0
     mv tidb-ansible tidb-ansible-bak
     ```
 
-3. Download the tidb-ansible with the tag corresponding to the TiDB 4.0 version. For more details, See [Download TiDB-Ansible to the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`. Replace `$tag` with the value of the chosen TAG version. For example, `v4.0.0-beta.2`.
+3. Download the tidb-ansible with the tag corresponding to the TiDB 4.0 version. For more details, See [Download TiDB-Ansible to the Control Machine](/how-to/deploy/orchestrated/ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`. Replace `$tag` with the value of the chosen TAG version. For example, `v4.0.0-rc`.
 
     {{< copyable "shell-regular" >}}
 
