@@ -25,7 +25,7 @@ If you need to add a TiFlash node on the `172.19.0.104` node, take the following
 
 2. Run the scale out command:
 
-    {{< copyable "" >}}
+    {{< copyable "shell-regular" >}}
 
     ```shell
     tiup cluster scale-out test scale-out.yaml
