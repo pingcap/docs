@@ -26,4 +26,4 @@ If you need highly available TiFlash service (rather than highly available data)
 
 ## Should I use TiSpark or TiDB server for a query?
 
-It is recommended to use TiDB server if you query single table collection or you use the filtering query, because TiDB server shows better performance on the columnar storage. It is recommended to use TiSpark if you query table joins.
+It is recommended to use TiDB server if you query a single table with filtering and aggregation, because TiDB server shows better performance on the columnar storage. It is recommended to use TiSpark if you query table joins.
