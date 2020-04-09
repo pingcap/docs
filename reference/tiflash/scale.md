@@ -10,7 +10,7 @@ This document describes how to scale in and out nodes in the TiFlash cluster.
 
 ## Scale out a TiFlash node
 
-If you need to add a TiFlash node to the `172.19.0.104` machine, take the following steps:
+If you need to add a TiFlash node to the `172.19.0.104` host, take the following steps:
 
 1. Create the `scale-out.yaml` file to add the TiFlash node information:
 
