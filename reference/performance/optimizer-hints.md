@@ -192,7 +192,7 @@ select /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * from t t1 where t1.a > 
 
 > **Note:**
 >
-> The parameters of `USE_INDEX_MERGE` refer to index names, rather than column names. The index name of the primary key index is `primary`.
+> The parameters of `USE_INDEX_MERGE` refer to index names, rather than column names. The index name of the primary key is `primary`.
 
 ### NO_INDEX_MERGE()
 
