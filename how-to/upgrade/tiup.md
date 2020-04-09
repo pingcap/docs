@@ -10,7 +10,7 @@ This document is targeted for users who want to upgrade from TiDB 3.0 versions t
 
 If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to import the TiDB Ansible configuration and perform the upgrade.
 
-## 1. Upgrade caveat
+## Upgrade caveat
 
 - Rolling back to 3.0 versions after the update is not supported.
 - To update versions earlier than 3.0 to 4.0, first update this version to 3.0 using TiDB Ansible, and use TiUP to import the TiDB Ansible configuration and update the 3.0 version to 4.0.
@@ -24,7 +24,7 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
     - You still use the `'push'` method to collect monitoring metrics (since v3.0, `pull` is the default mode, which is supported if you have not modified this mode).
     - In the `inventory.ini` configuration file, the `node_exporter` or `blackbox_exporter` item of the machine is set to non-default ports through `node_exporter_port` or `blackbox_exporter_port`, which is compatible if you have unified the configuration in the `group_vars` directory.
 
-## 2. Install TiUP on the Control Machine
+## Install TiUP on the Control Machine
 
 1. Execute the following command on the Control Machine to install TiUP:
 
@@ -66,7 +66,7 @@ If you have installed TiUP before, execute the following command to update TiUP 
 tiup update cluster
 ```
 
-## 3. Import TiDB Ansible and the `inventory.ini` configuration to TiUP
+## Import TiDB Ansible and the `inventory.ini` configuration to TiUP
 
 > **Note:**
 >
@@ -74,7 +74,7 @@ tiup update cluster
 > + Currently, the `inventory.ini` configuration file is identified by default. If your configuration file uses another name, specify this name.
 > + Ensure that the state of the current cluster is consistent with the topology in `inventory.ini`; that components of the cluster are operating normally. Otherwise, the cluster metadata becomes abnormal after the import.
 
-### 3.1 Install the cluster management tool
+### Install the cluster management tool
 
 Use the following command to install the cluster management tool:
 
@@ -84,7 +84,7 @@ Use the following command to install the cluster management tool:
 tiup install cluster
 ```
 
-### 3.2 Import the TiDB Ansible cluster to TiUP
+### Import the TiDB Ansible cluster to TiUP
 
 1. Execute the following command to import the TiDB Ansible cluster into TiUP (for example, in the `/home/tidb/tidb-ansible` path). Do not execute this command in the Ansible directory.
 
@@ -117,7 +117,7 @@ tiup install cluster
 
 After the import is complete, you can check the current cluster status by executing the `tiup cluster display <cluster-name>` command to verify the import result. Because the `display` command is used to query the real-time status of each node, it might take a little time to execute the command.
 
-### 3.3 Edit TiUP topology configuration file
+### Edit TiUP topology configuration file
 
 > **Note:**
 >
@@ -142,11 +142,11 @@ After the import is complete, you can check the current cluster status by execut
 >
 > Before upgrading to v4.0, confirm that the parameters modified in v3.0 are compatible in v4.0. See [configuration template](/reference/configuration/tikv-server/configuration-file.md) for details.
 
-## 4. Perform a rolling update to the TiDB cluster
+## Perform a rolling update to the TiDB cluster
 
 This section describes how to perform a rolling update to the TiDB cluster and how to verify the version after the update.
 
-### 4.1 Perform a rolling update to the TiDB cluster (to v4.0.0-rc)
+### Perform a rolling update to the TiDB cluster (to v4.0.0-rc)
 
 {{< copyable "shell-regular" >}}
 
@@ -156,7 +156,7 @@ tiup cluster upgrade <cluster-name> v4.0.0-rc
 
 Performing the rolling update to the cluster will update all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 10 minutes. The instance is directly stopped after this timeout time.
 
-### 4.2 Verify the cluster version
+### Verify the cluster version
 
 Execute the `display` command to view the latest cluster version `TiDB Version`:
 
@@ -172,11 +172,11 @@ TiDB Cluster: <cluster-name>
 TiDB Version: v4.0.0-rc
 ```
 
-## 5. FAQ
+## FAQ
 
 This section describes common problems encountered when updating the TiDB cluster using TiUP.
 
-### 5.1 If an error occurs and the updated is interrupted, how to resume the update from the point of the interruption after fixing this error?
+### If an error occurs and the updated is interrupted, how to resume the update from the point of the interruption after fixing this error?
 
 You can specify `--role` or `--node` to update the specified component or node. Here is the command:
 
@@ -194,7 +194,7 @@ or
 tiup cluster upgrade <cluster-name> v4.0.0-rc --node <ID>
 ```
 
-### 5.2 The evict leader has waited too long during the update. How to skip this step for a quick update?
+### The evict leader has waited too long during the update. How to skip this step for a quick update?
 
 You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the update. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. Here is the command:
 
@@ -204,7 +204,7 @@ You can specify `--force`. Then the processes of transferring PD leader and evic
 tiup cluster upgrade <cluster-name> v4.0.0-rc --force
 ```
 
-### 5.3 How to update the version of tools such as pd-ctl after updating the TiDB cluster?
+### How to update the version of tools such as pd-ctl after updating the TiDB cluster?
 
 Currently, TiUP does not update and manage the version of tools. If you need the tool package of the latest version, directly download the TiDB package and replace `{version}` with the corresponding version such as `v4.0.0-rc`. Here is the download address:
 
@@ -214,7 +214,7 @@ Currently, TiUP does not update and manage the version of tools. If you need the
 https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz
 ```
 
-## 6. TiDB 4.0 compatibility changes
+## TiDB 4.0 compatibility changes
 
 - If you set the value of the `oom-action` parameter to `cancel`, when the query statement triggers the OOM threshold, the statement is killed. In v4.0, in addition to `select`, DML statements such as `insert`/`update`/`delete` might also be killed.
 - TiDB v4.0 supports the length check for table names. The length limit is 64 characters. If you rename a table after the upgrade and the new name exceeds this length limit, an error is reported. v3.0 and earlier versions do not have this error reporting.
