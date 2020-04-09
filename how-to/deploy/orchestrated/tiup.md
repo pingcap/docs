@@ -522,7 +522,7 @@ You need to fill in the result in the configuration file (as described in the St
 >
 > - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
 > 
-> - For the detailed parameter configuration of TiFlash, refer to [TiFlash Parameter Configuration](#tiflash-parameters).
+> - For the detailed parameter configuration of TiFlash, refer to [TiFlash Parameter Configuration](#tiflash-parameter).
 
 {{< copyable "shell-regular" >}}
 
@@ -716,7 +716,7 @@ Key parameters of TiDB:
 >
 > - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
 > 
-> - For the detailed parameter configuration of TiFlash, refer to [TiFlash Parameter Configuration](#tiflash-parameters).
+> - For the detailed parameter configuration of TiFlash, refer to [TiFlash Parameter Configuration](#tiflash-parameter).
 
 {{< copyable "shell-regular" >}}
 
