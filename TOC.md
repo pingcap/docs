@@ -299,8 +299,12 @@
     - [Overview](/reference/tiflash/overview.md)
     - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
     - [Use TiFlash](/reference/tiflash/use-tiflash.md)
+    - [Maintain a TiFlash Cluster](/reference/tiflash/maintain.md)
     - [Monitor TiFlash](/reference/tiflash/monitor.md)
+    - [Scale TiFlash](/reference/tiflash/scale.md)
+    - [Upgrade TiFlash Nodes](/reference/tiflash/upgrade.md)
     - [Configure TiFlash](/reference/tiflash/configuration.md)
+    - [Tune TiFlash Performance](/reference/tiflash/tune-performance.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
