@@ -53,7 +53,7 @@ If you want to stop the TiFlash service on the `172.19.0.104` node, take the fol
 
 2. Check whether the node has been offline successfully using Grafana or pd-ctl (the offline process takes some time).
 
-3. After the `store` corresponding to TiFlash disappears, or the `state_name` becomes `Tomestone`, execute the following command to shutdown the TiFlash process:
+3. After the `store` corresponding to TiFlash disappears, or the `state_name` becomes `Tombstone`, execute the following command to shutdown the TiFlash process:
 
     {{< copyable "shell-regular" >}}
 
