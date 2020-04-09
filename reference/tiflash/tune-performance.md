@@ -6,7 +6,7 @@ category: reference
 
 # Tune TiFlash Performance
 
-This document introduces how to tune the performance of TiFlash, including planning machine resources and tuning TiDB parameters
+This document introduces how to tune the performance of TiFlash, including planning machine resources and tuning TiDB parameters.
 
 ## Plan resources
 
