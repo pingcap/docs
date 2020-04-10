@@ -6,7 +6,7 @@ category: reference
 
 # TiFlash Alert Rules
 
-This documents introduces the alert rules of the TiFlash cluster.
+This document introduces the alert rules of the TiFlash cluster.
 
 ## `TiFlash_schema_error`
 
@@ -14,13 +14,13 @@ This documents introduces the alert rules of the TiFlash cluster.
 
     `increase(tiflash_schema_apply_count{type="failed"}[15m]) > 0`
 
-- Rule description:
+- Description:
 
-    You can get an alert when the schema apply error occurs.
+    When the schema apply error occurs, an alert is triggered.
 
-- How to handle:
+- Solution:
 
-    The error might be caused by the logical problem. Get in touch with the TiFlash R&D.
+    The error might be caused by some wrong logic. Contact [TiFlash R&D](mailto:support@pingcap.com) for support.
 
 ## `TiFlash_schema_apply_duration`
 
@@ -28,13 +28,13 @@ This documents introduces the alert rules of the TiFlash cluster.
 
     `histogram_quantile(0.99, sum(rate(tiflash_schema_apply_duration_seconds_bucket[1m])) BY (le, instance)) > 20`
 
-- Rule description:
+- Description:
 
-    You can get an alert when the probability that the apply duration exceeds 20 seconds is over 99%.
+    When the probability that the apply duration exceeds 20 seconds is over 99%, an alert is triggered.
 
-- How to handle:
+- Solution:
 
-    It might be caused by the internal problems of the TiFlash TMT engine. Get in touch with the TiFlash R&D.
+    It might be caused by the internal problems of the TiFlash TMT engine. Contact [TiFlash R&D](mailto:support@pingcap.com) for support.
 
 ## `TiFlash_raft_read_index_duration`
 
@@ -42,17 +42,17 @@ This documents introduces the alert rules of the TiFlash cluster.
 
     `histogram_quantile(0.99, sum(rate(tiflash_raft_read_index_duration_seconds_bucket[1m])) BY (le, instance)) > 3`
 
-- Rule description:
+- Description:
 
-    You can get an alert when the probability that the read index duration exceeds 3 seconds is over 99%.
+    When the probability that the read index duration exceeds 3 seconds is over 99%, an alert is triggered.
 
     > **Note:**
     >
-    > `read index` is the kvproto request sent to the TiKV leader. TiKV region retries, busy Store, or network problems might lead to long request time of read index.
+    > `read index` is the kvproto request sent to the TiKV leader. TiKV region retries, busy store, or network problems might lead to long request time of `read index`.
 
-- How to handle:
+- Solution:
 
-    The frequent retries might be caused by frequent TiKV cluster split events or frequent TiKV cluster migrations. You can check the TiKV cluster status to identify the retry reason.
+    The frequent retries might be caused by frequent splitting or migration of the TiKV cluster. You can check the TiKV cluster status to identify the retry reason.
 
 ## `TiFlash_raft_wait_index_duration`
 
@@ -60,10 +60,10 @@ This documents introduces the alert rules of the TiFlash cluster.
 
     `histogram_quantile(0.99, sum(rate(tiflash_raft_wait_index_duration_seconds_bucket[1m])) BY (le, instance)) > 2`
 
-- Rule description:
+- Description:
 
-    You can get an alert when the probability that the wait time for Region Raft Index in TiFlash exceeds 2 seconds is over 99%.
+    When the probability that the wait time for Region Raft Index in TiFlash exceeds 2 seconds is over 99%, an alert is triggered.
 
-- How to handle:
+- Solution:
 
-    It might be caused by communications problems between TiKV and Proxy. Get in touch with the TiFlash R&D.
+    It might be caused by a communications error between TiKV and the proxy. Contact [TiFlash R&D](mailto:support@pingcap.com) for support.
