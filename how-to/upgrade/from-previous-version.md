@@ -1,19 +1,10 @@
 ---
-<<<<<<< HEAD
-title: TiDB 4.0 Upgrade Guide
-summary: Learn how to upgrade to TiDB 4.0 versions.
-=======
 title: Upgrade TiDB Using TiDB Ansible
 summary: Learn how to upgrade TiDB using TiDB Ansible.
->>>>>>> 8efeae4... how-to/upgrade: add TiUP upgrade document (#2232)
 category: how-to
 ---
 
-<<<<<<< HEAD
-# TiDB 4.0 Upgrade Guide
-=======
 # Upgrade TiDB Using TiDB Ansible
->>>>>>> 8efeae4... how-to/upgrade: add TiUP upgrade document (#2232)
 
 This document is targeted for users who want to upgrade from TiDB 2.0, 2.1, 3.0, or 3.1 versions to the TiDB 4.0 version, or from an earlier version of TiDB 4.0 to the later version of TiDB 4.0. The TiDB 4.0 version version is compatible with [TiDB Binlog of the cluster version](/reference/tidb-binlog/overview.md).
 
