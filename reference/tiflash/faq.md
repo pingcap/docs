@@ -18,7 +18,7 @@ You can evaluate which tables might require acceleration. The size a single repl
 
 ## How do TiFlash data be highly available?
 
-TiFlash restores data through TiKV. As long as the corresponding Regions in TiKV is available, TiFlash can perform data restore using these Regions.
+TiFlash restores data through TiKV. As long as the corresponding Regions in TiKV are available, TiFlash can perform data restore using these Regions.
 
 ## How many replicas does TiFlash recommend to set up?
 
