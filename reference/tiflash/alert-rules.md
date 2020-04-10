@@ -62,8 +62,8 @@ This document introduces the alert rules of the TiFlash cluster.
 
 - Description:
 
-    When the probability that the wait time for Region Raft Index in TiFlash exceeds 2 seconds is over 99%, an alert is triggered.
+    When the probability that the waiting time for Region Raft Index in TiFlash exceeds 2 seconds is over 99%, an alert is triggered.
 
 - Solution:
 
-    It might be caused by a communications error between TiKV and the proxy. Contact [TiFlash R&D](mailto:support@pingcap.com) for support.
+    It might be caused by a communication error between TiKV and the proxy. Contact [TiFlash R&D](mailto:support@pingcap.com) for support.
