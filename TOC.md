@@ -92,7 +92,7 @@
     - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
-    - [Upgrade TiDB Ansible](/how-to/upgrade/from-previous-version.md)
+    - [Upgrade Using TiDB Ansible](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/how-to/troubleshoot/tidb-lightning.md)
