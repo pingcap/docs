@@ -377,13 +377,15 @@ Usage example:
 set tidb_query_log_max_len = 20
 ```
 
-### tidb_txn_mode
+### tidb_txn_mode <span class="version-mark">New in v3.0.4</span>
 
-- Scope: SESSION | GLOBAL
+- Scope: SESSION (GLOBAL is supported since v3.0.4)
 - Default value: "pessimistic"
-- This variable is used to set the transaction mode. TiDB 3.0 supports the pessimistic transactions. Since TiDB 3.0.8, the [pessimistic transaction mode](/reference/transactions/transaction-pessimistic.md) is enabled by default.
+- This variable is used to set the transaction mode. TiDB v3.0 supports the pessimistic transactions. Since TiDB v3.0.8, the [pessimistic transaction mode](/reference/transactions/transaction-pessimistic.md) is enabled by default.
 - If you upgrade TiDB from v3.0.7 or earlier versions to v3.0.8 or later versions, the default transaction mode does not change. **Only the newly created clusters use the pessimistic transaction mode by default**.
 - If this variable is set to "optimistic" or "", TiDB uses the [optimistic transaction mode](/reference/transactions/transaction-optimistic.md).
+
+Since TiDB v3.0.4, the `tidb_txn_mode` variable supports the GLOBAL scope and can be used to set the global transaction mode. When you modify the global transaction mode, only the sessions created after the modification takes effect uses the new transaction mode.
 
 ### tidb_constraint_check_in_place
 
