@@ -2,7 +2,6 @@
 title: TiDB v4.0 Roadmap
 summary: Learn about the v4.0 roadmap of TiDB.
 category: Roadmap
-aliases: ['/docs/ROADMAP/','/docs/roadmap/']
 ---
 
 <!-- markdownlint-disable MD001 -->
