@@ -74,16 +74,6 @@ tiup update cluster
 > + Currently, the `inventory.ini` configuration file is identified by default. If your configuration file uses another name, specify this name.
 > + Ensure that the state of the current cluster is consistent with the topology in `inventory.ini`; that components of the cluster are operating normally. Otherwise, the cluster metadata becomes abnormal after the import.
 
-### Install the cluster management tool
-
-Use the following command to install the cluster management tool:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-tiup install cluster
-```
-
 ### Import the TiDB Ansible cluster to TiUP
 
 1. Execute the following command to import the TiDB Ansible cluster into TiUP (for example, in the `/home/tidb/tidb-ansible` path). Do not execute this command in the Ansible directory.
@@ -136,7 +126,11 @@ After the import is complete, you can check the current cluster status by execut
     tiup cluster edit-config <cluster-name>
     ```
 
-3. See the configuration template format of [topology](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml) and fill in the modified parameters of the original cluster in the `server_configs` section of the topology file. After the modification is completed, execute the `wq` command to save the change and exit the editing mode. Enter `Y` to confirm the change.
+3. See the configuration template format of [topology](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml) and fill in the modified parameters of the original cluster in the `server_configs` section of the topology file.
+
+    Even if the label has been configured for the cluster, you also need to fill in the label in the configuration according to the format in the template. In later versions, the label will be automatically imported.
+
+    After the modification is completed, execute the `wq` command to save the change and exit the editing mode. Enter `Y` to confirm the change.
 
 > **Note:**
 >
