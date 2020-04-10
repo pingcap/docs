@@ -125,7 +125,7 @@ Configuration items related to storage thread pool.
 
 ### `use-unified-pool`
 
-+ Whether to use the unified thread pool (configured in `readpool.unified`) for storage requests. If it is `false`, a separate thread pool which is configured with the rest options in this section is used.
++ Whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for storage requests. If it is `false`, a separate thread pool which is configured with the rest options in this section (`readpool.storage`) is used.
 + Default value: `false`
 
 ### `high-concurrency`
@@ -177,8 +177,8 @@ Configuration items related to the Coprocessor thread pool.
 
 ### `use-unified-pool`
 
-+ Whether to use the unified thread pool (configured in `readpool.unified`) for coprocessor requests. If it is `false`, a separate thread pool which is configured with the rest options in this section is used.
-+ Default value: If none of the options in this section are set, the default value is `true`. Otherwise, the default value is `false` for the sake of backward compatibility. Please adjust the configurations in `readpool.unified` before enabling it.
++ Whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for coprocessor requests. If it is `false`, a separate thread pool which is configured with the rest options in this section (`readpool.coprocessor`) is used.
++ Default value: If none of the options in this section (`readpool.coprocessor`) are set, the default value is `true`. Otherwise, the default value is `false` for the sake of backward compatibility. Please adjust the configurations in [`readpool.unified`](#readpoolunified) before enabling it.
 
 ### `high-concurrency`
 
