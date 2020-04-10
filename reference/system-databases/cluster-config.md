@@ -6,7 +6,7 @@ category: reference
 
 # CLUSTER_CONFIG
 
-You can use the `CLUSTER_CONFIG` cluster configuration table to get the current configuration of all TiDB/PD/TiKV nodes in the cluster. For TiDB versions earlier than 4.0, you need to access the HTTP API of each node one by one to collect all component configurations.
+You can use the `CLUSTER_CONFIG` cluster configuration table to get the current configuration of all TiDB/PD/TiKV instances in the cluster. For TiDB versions earlier than 4.0, you need to access the HTTP API of each instance one by one to collect all component configurations.
 
 {{< copyable "sql" >}}
 
@@ -27,12 +27,12 @@ desc cluster_config;
 
 Field description:
 
-* `TYPE`: The node type. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: The service address of the node.
+* `TYPE`: The instance type. The optional values are `tidb`, `pd`, and `tikv`.
+* `INSTANCE`: The service address of the instance.
 * `KEY`: The configuration item name.
 * `VALUE`: The configuration item value.
 
-The following example shows how to query the `coprocessor` configuration on the TiKV node using the `CLUSTER_CONFIG` table:
+The following example shows how to query the `coprocessor` configuration on the TiKV instance using the `CLUSTER_CONFIG` table:
 
 {{< copyable "sql" >}}
 
