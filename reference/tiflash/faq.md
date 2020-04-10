@@ -22,7 +22,7 @@ TiFlash restores data through TiKV. As long as the corresponding Regions in TiKV
 
 ## How many replicas does TiFlash recommend to set up?
 
-If you need highly available TiFlash service (rather than highly available data), it is recommended to set up two replicas for TiFlash. If the TiKV replicas are allowed to resume the TiFlash service when TiFlash loses nodes, you can set up a single TiFlash replica.
+If you need highly available TiFlash services (rather than highly available data), it is recommended to set up two replicas for TiFlash. If you allow TiKV replicas to provide analytical services when TiFlash is down, you can set up a single TiFlash replica.
 
 ## Should I use TiSpark or TiDB server for a query?
 
