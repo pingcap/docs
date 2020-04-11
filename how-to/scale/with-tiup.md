@@ -8,11 +8,11 @@ Category: how-to
 
 The capacity of a TiDB cluster can be increased or decreased without affecting the online services.
 
-This document describes how to scale the TiDB, TiKV, PD or TiFlash nodes using TiUP. If you have not installed TiUP, [install TiUP on the Control Machine](/how-to/upgrade/using-tiup.md#install-tiup-on-the-control-machine) and import the cluster into TiUP before you scale the TiDB cluster.
+This document describes how to scale the TiDB, TiKV, PD or TiFlash nodes using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the Control Machine](/how-to/upgrade/using-tiup.md#install-tiup-on-the-control-machine) and import the cluster into TiUP before you scale the TiDB cluster.
 
 To view the current cluster name list, run `tiup cluster list`.
 
-The following example shows the original topology of the cluster:
+For example, if the original topology of the cluster is as follows:
 
 | Host IP | Service |
 |:---|:----|
@@ -35,7 +35,7 @@ If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
 > **Note:**
 >
 > * The port information is not required by default.
-> * If the cluster is deployed on a single machine with multiple instances, you need to allocate different ports. If the ports or directories have conflicts, a notification is sent to you during deployment or scaling.
+> * If multiple instances are deployed on a single machine, you need to allocate different ports for them. If the ports or directories have conflicts, you will receive a notification during deployment or scaling.
 
 Add the scale-out topology configuration in the `scale-out.yaml` file:
 
@@ -53,7 +53,7 @@ tidb_servers:
    status_port: 10080
 ```
 
-To view the whole configuration of the current cluster, run `tiup cluster edit-config <cluster-name>`. The global configuration in `global` and `server_configs` also takes effect in `scale-out.yaml`.
+To view the whole configuration of the current cluster, run `tiup cluster edit-config <cluster-name>`. The global configuration of `global` and `server_configs` also takes effect in `scale-out.yaml`.
 
 After the configuration, the current topology of the cluster is as follows:
 
@@ -156,7 +156,7 @@ ID              Role         Host        Ports                            Status
 10.0.1.5:9293   alertmanager 10.0.1.5    9293/9294                        Up      data/alertmanager-9293  deploy/alertmanager-9293
 ```
 
-### 3.2 Run the scale-in 
+### 3.2 Run the scale-in command
 
 {{< copyable "shell-regular" >}}
 
@@ -170,9 +170,9 @@ If you see the `Scaled cluster <cluster-name> in successfully`, the scale-in ope
 
 ### 3.3 Check the cluster status
 
-The offline process takes some time. If the node to be scaled in becomes `Tombstone`, that means the offline operation is successful.
+The scale-in process takes some time. If the status of the node to be scaled in becomes `Tombstone`, that means the scale-in operation is successful.
 
-To check the offline status, run the following command:
+To check the scale-in status, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -198,19 +198,21 @@ If you want to remove the TiFlash node from the `10.0.1.4` host, take the follow
 
 > **Note:**
 >
-> The offline process described in this section does not delete the data on the offline node. If you need to take the node online again, delete the data manually.
+> The scale-in process described in this section does not delete the data on the node that goes offline. If you need to bring the node back again, delete the data manually.
 
 ### 4.1 Take the node offline
 
-Take down the node to be scaled in. See [Take a TiFlash node down](/reference/tiflash/maintain.md#take-a-tiflash-node-down) for details.
+To take offline the node to be scaled in, refer to [Take a TiFlash node down](/reference/tiflash/maintain.md#take-a-tiflash-node-down).
 
 ### 4.2 Check the node status
 
-Check whether the node has been offline successfully using Grafana or pd-ctl (the offline process takes some time).
+The scale-in process takes some time.
 
-### 4.3 Shutdown the TiFlash process
+You can use Grafana or pd-ctl to check whether the node has been successfully taken offline.
 
-After the `store` corresponding to TiFlash disappears, or the `state_name` becomes `Tombstone`, execute the following command to shutdown the TiFlash process:
+### 4.3 Stop the TiFlash process
+
+After the `store` corresponding to TiFlash disappears, or the `state_name` becomes `Tombstone`, execute the following command to stop the TiFlash process:
 
 {{< copyable "shell-regular" >}}
 
