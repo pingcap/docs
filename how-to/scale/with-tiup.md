@@ -22,7 +22,7 @@ For example, if the original topology of the cluster is as follows:
 | 10.0.1.1 | TiKV |
 | 10.0.1.2 | TiKV |
 
-## 1. Scale out a TiDB/TiKV/PD node
+## Scale out a TiDB/TiKV/PD node
 
 If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
 
@@ -30,7 +30,7 @@ If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
 >
 > You can take similar steps to add the TiKV or PD node.
 
-### 1.1 Configure the scale-out topology
+### Configure the scale-out topology
 
 > **Note:**
 >
@@ -65,7 +65,7 @@ After the configuration, the current topology of the cluster is as follows:
 | 10.0.1.1   | TiKV    |
 | 10.0.1.2   | TiKV    |
 
-### 1.2 Run the scale-out command
+### Run the scale-out command
 
 {{< copyable "shell-regular" >}}
 
@@ -75,7 +75,7 @@ tiup cluster scale-out <cluster-name> scale-out.yaml
 
 If you see the `Scaled cluster <cluster-name> out successfully`, the scale-out operation is successfully completed.
 
-### 1.3 Check the cluster status
+### Check the cluster status
 
 {{< copyable "shell-regular" >}}
 
@@ -85,11 +85,11 @@ tiup cluster display <cluster-name>
 
 Access the monitoring platform at <http://10.0.1.5:3200> using your browser to monitor the status of the cluster and the new node.
 
-## 2. Scale out a TiFlash node
+## Scale out a TiFlash node
 
 If you want to add a TiFlash node to the `10.0.1.4` host, take the following steps.
 
-### 2.1 Add the node information to the `scale-out.yaml` file
+### Add the node information to the `scale-out.yaml` file
 
 Create the `scale-out.yaml` file to add the TiFlash node information.
 
@@ -102,7 +102,7 @@ tiflash_servers:
 
 Currently, you can only add IP but not domain name.
 
-### 2.2 Run the scale-out command
+### Run the scale-out command
 
 {{< copyable "shell-regular" >}}
 
@@ -110,7 +110,7 @@ Currently, you can only add IP but not domain name.
 tiup cluster scale-out <cluster-name> scale-out.yaml
 ```
 
-### 2.3 View the cluster status
+### View the cluster status
 
 {{< copyable "shell-regular" >}}
 
@@ -120,7 +120,7 @@ tiup cluster display <cluster-name>
 
 Access the monitoring platform at <http://10.0.1.5:3200> using your browser, and view the status of the cluster and the new node.
 
-## 3. Scale in a TiDB/TiKV/PD node
+## Scale in a TiDB/TiKV/PD node
 
 If you want to remove a TiKV node from the `10.0.1.5` host, take the following steps.
 
@@ -128,7 +128,7 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
 >
 > You can take similar steps to remove the TiDB or PD node.
 
-### 3.1 View the node ID information
+### View the node ID information
 
 {{< copyable "shell-regular" >}}
 
@@ -156,7 +156,7 @@ ID              Role         Host        Ports                            Status
 10.0.1.5:9293   alertmanager 10.0.1.5    9293/9294                        Up      data/alertmanager-9293  deploy/alertmanager-9293
 ```
 
-### 3.2 Run the scale-in command
+### Run the scale-in command
 
 {{< copyable "shell-regular" >}}
 
@@ -168,7 +168,7 @@ The `--node` parameter is the ID of the node to be taken offline.
 
 If you see the `Scaled cluster <cluster-name> in successfully`, the scale-in operation is successfully completed.
 
-### 3.3 Check the cluster status
+### Check the cluster status
 
 The scale-in process takes some time. If the status of the node to be scaled in becomes `Tombstone`, that means the scale-in operation is successful.
 
@@ -192,7 +192,7 @@ The current topology is as follows:
 
 Access the monitoring platform at <http://10.0.1.5:3200> using your browser to monitor the status of the cluster.
 
-## 4. Scale in a TiFlash node
+## Scale in a TiFlash node
 
 If you want to remove the TiFlash node from the `10.0.1.4` host, take the following steps.
 
@@ -200,17 +200,17 @@ If you want to remove the TiFlash node from the `10.0.1.4` host, take the follow
 >
 > The scale-in process described in this section does not delete the data on the node that goes offline. If you need to bring the node back again, delete the data manually.
 
-### 4.1 Take the node offline
+### Take the node offline
 
 To take offline the node to be scaled in, refer to [Take a TiFlash node down](/reference/tiflash/maintain.md#take-a-tiflash-node-down).
 
-### 4.2 Check the node status
+### Check the node status
 
 The scale-in process takes some time.
 
 You can use Grafana or pd-ctl to check whether the node has been successfully taken offline.
 
-### 4.3 Stop the TiFlash process
+### Stop the TiFlash process
 
 After the `store` corresponding to TiFlash disappears, or the `state_name` becomes `Tombstone`, execute the following command to stop the TiFlash process:
 
@@ -220,7 +220,7 @@ After the `store` corresponding to TiFlash disappears, or the `state_name` becom
 tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000
 ```
 
-### 4.4 View the cluster status
+### View the cluster status
 
 {{< copyable "shell-regular" >}}
 
