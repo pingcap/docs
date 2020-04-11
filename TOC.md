@@ -92,7 +92,8 @@
     - [Scale using TiUP](/how-to/scale/with-tiup.md)
     - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to the Latest Version](/how-to/upgrade/from-previous-version.md)
+    - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
+    - [Upgrade Using TiDB Ansible](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/how-to/troubleshoot/tidb-lightning.md)
@@ -318,7 +319,9 @@
     - [Scale TiFlash](/how-to/scale/with-tiup.md#2-scale-out-a-tiflash-node)
     - [Upgrade TiFlash Nodes](/reference/tiflash/upgrade.md)
     - [Configure TiFlash](/reference/tiflash/configuration.md)
+    - [TiFlash Alert Rules](/reference/tiflash/alert-rules.md)
     - [Tune TiFlash Performance](/reference/tiflash/tune-performance.md)
+    - [FAQ](/reference/tiflash/faq.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
