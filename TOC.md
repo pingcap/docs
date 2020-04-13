@@ -278,6 +278,8 @@
       - [`cluster_info`](/reference/system-databases/cluster-info.md)
       - [`cluster_hardware`](/reference/system-databases/cluster-hardware.md)
       - [`cluster_config`](/reference/system-databases/cluster-config.md)
+      - [`inspection_result`](/reference/system-databases/inspection-result.md)
+      - [`inspection_summary`](/reference/system-databases/inspection-summary.md)
   - [Errors Codes](/reference/error-codes.md)
   - [Supported Client Drivers](/reference/supported-clients.md)
   + Garbage Collection (GC)
