@@ -51,25 +51,25 @@ Diagnose the cluster problem in the period of `"2020-01-16 16:00:54.933", "2020-
 {{< copyable "sql" >}}
 
 ```sql
-mysql> SELECT
-         t1.avg_value / t2.avg_value AS ratio,
-         t1.*,
-         t2.*
-       FROM
-         (
-           SELECT
-             /*+ time_range("2020-01-16 16:00:54.933", "2020-01-16 16:10:54.933")*/ *
-           FROM inspection_summary WHERE rule='read-link'
-         ) t1
-         JOIN
-         (
-           SELECT
-             /*+ time_range("2020-01-16 16:10:54.933","2020-01-16 16:20:54.933")*/ *
-           FROM inspection_summary WHERE rule='read-link'
-         ) t2
-         ON t1.metrics_name = t2.metrics_name
-         and t1.instance = t2.instance
-         and t1.label = t2.label
-       ORDER BY
-         ratio DESC;
+SELECT
+  t1.avg_value / t2.avg_value AS ratio,
+  t1.*,
+  t2.*
+FROM
+  (
+    SELECT
+      /*+ time_range("2020-01-16 16:00:54.933", "2020-01-16 16:10:54.933")*/ *
+    FROM inspection_summary WHERE rule='read-link'
+  ) t1
+  JOIN
+  (
+    SELECT
+      /*+ time_range("2020-01-16 16:10:54.933","2020-01-16 16:20:54.933")*/ *
+    FROM inspection_summary WHERE rule='read-link'
+  ) t2
+  ON t1.metrics_name = t2.metrics_name
+  and t1.instance = t2.instance
+  and t1.label = t2.label
+ORDER BY
+  ratio DESC;
 ```

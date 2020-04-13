@@ -15,7 +15,7 @@ The structure of the `information_schema.inspection_result` diagnosis result tab
 {{< copyable "sql" >}}
 
 ```sql
-mysql> desc inspection_result;
+desc inspection_result;
 ```
 
 ```
