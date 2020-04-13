@@ -24,7 +24,7 @@ The meaning of the fields:
 
 ### `BIT` type
 
-The BIT data type. A type of BIT(M) enables storage of M-bit values. M can range from 1 to 64:
+The BIT data type. A type of BIT(M) enables the storage of M-bit values. M can range from 1 to 64, with the default value of 1:
 
 ```sql
 BIT[(M)]
@@ -68,6 +68,12 @@ The `INTEGER` type and its alias `INT` stores signed values of range [-214748364
 
 ```sql
 INT[(M)] [UNSIGNED] [ZEROFILL]
+```
+
+You can also use another form:
+
+```sql
+INTEGER[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
 ### `BIGINT` type
