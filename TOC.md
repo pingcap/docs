@@ -13,7 +13,6 @@
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/add-index-with-load.md)
-    - [TiDB in Kubernetes Sysbench Test](/benchmark/sysbench-in-k8s.md)
 + Concepts
   - [Architecture](/architecture.md)
   + Key Features
@@ -45,7 +44,7 @@
     - [Import Example Database](/how-to/get-started/import-example-database.md)
     - [Read Historical Data](/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/how-to/get-started/tidb-binlog.md)
-    - [TiDB Data Migration Tutorial](https://pingcap.com/docs/tidb-data-migration/stable/get-started.md)
+    - [TiDB Data Migration Tutorial](https://pingcap.com/docs/tidb-data-migration/stable/get-started/)
     - [TiDB Lightning Tutorial](/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/how-to/get-started/tispark.md)
   + Deploy
@@ -54,9 +53,10 @@
       - [For Testing Environments](/how-to/deploy/from-tarball/testing-environment.md)
       - [For Production Environments](/how-to/deploy/from-tarball/production-environment.md)
     + Orchestrated Deployment
-      - [Ansible Deployment (Recommended)](/how-to/deploy/orchestrated/ansible.md)
-      - [Ansible Offline Deployment](/how-to/deploy/orchestrated/offline-ansible.md)
-      - [Docker Deployment](/how-to/deploy/orchestrated/docker.md)
+      - [Use TiUP (Recommended)](/how-to/deploy/orchestrated/tiup.md)
+      - [Use TiDB Ansible](/how-to/deploy/orchestrated/ansible.md)
+      - [Use TiDB Ansible Offline](/how-to/deploy/orchestrated/offline-ansible.md)
+      - [Use Docker](/how-to/deploy/orchestrated/docker.md)
     + Geographic Redundancy
       - [Overview](/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/how-to/deploy/geographic-redundancy/location-awareness.md)
@@ -64,6 +64,7 @@
   + Configure
     - [Time Zone](/how-to/configure/time-zone.md)
     - [Memory Control](/how-to/configure/memory-control.md)
+    - [Placement Rules](/how-to/configure/placement-rules.md)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](/how-to/secure/enable-tls-clients.md)
@@ -90,7 +91,8 @@
     - [Scale using Ansible](/how-to/scale/with-ansible.md)
     - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to the Latest Version](/how-to/upgrade/from-previous-version.md)
+    - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
+    - [Upgrade Using TiDB Ansible](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/how-to/troubleshoot/tidb-lightning.md)
@@ -190,6 +192,7 @@
       - [`EXECUTE`](/reference/sql/statements/execute.md)
       - [`EXPLAIN ANALYZE`](/reference/sql/statements/explain-analyze.md)
       - [`EXPLAIN`](/reference/sql/statements/explain.md)
+      - [`FLASHBACK TABLE`](/reference/sql/statements/flashback-table.md)
       - [`FLUSH PRIVILEGES`](/reference/sql/statements/flush-privileges.md)
       - [`FLUSH STATUS`](/reference/sql/statements/flush-status.md)
       - [`FLUSH TABLES`](/reference/sql/statements/flush-tables.md)
@@ -243,6 +246,7 @@
     - [Partitioning](/reference/sql/partitioning.md)
     - [Character Set](/reference/sql/character-set.md)
     - [SQL Mode](/reference/sql/sql-mode.md)
+    - [SQL Diagnosis](/reference/system-databases/sql-diagnosis.md)
     - [Views](/reference/sql/views.md)
   + Configuration
     + tidb-server
@@ -264,12 +268,16 @@
     - [Certificate-Based Authentication](/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/reference/transactions/overview.md)
-    - [Transaction Model](/reference/transactions/transaction-model.md)
     - [Isolation Levels](/reference/transactions/transaction-isolation.md)
+    - [Optimistic Transactions](/reference/transactions/transaction-optimistic.md)
     - [Pessimistic Transactions](/reference/transactions/transaction-pessimistic.md)
   + System Databases
     - [`mysql`](/reference/system-databases/mysql.md)
     - [`information_schema`](/reference/system-databases/information-schema.md)
+    + `sql-diagnosis`
+      - [`cluster_info`](/reference/system-databases/cluster-info.md)
+      - [`cluster_hardware`](/reference/system-databases/cluster-hardware.md)
+      - [`cluster_config`](/reference/system-databases/cluster-config.md)
   - [Errors Codes](/reference/error-codes.md)
   - [Supported Client Drivers](/reference/supported-clients.md)
   + Garbage Collection (GC)
@@ -301,6 +309,18 @@
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
   - [TiSpark](/reference/tispark.md)
+  + TiFlash
+    - [Overview](/reference/tiflash/overview.md)
+    - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
+    - [Use TiFlash](/reference/tiflash/use-tiflash.md)
+    - [Maintain a TiFlash Cluster](/reference/tiflash/maintain.md)
+    - [Monitor TiFlash](/reference/tiflash/monitor.md)
+    - [Scale TiFlash](/reference/tiflash/scale.md)
+    - [Upgrade TiFlash Nodes](/reference/tiflash/upgrade.md)
+    - [Configure TiFlash](/reference/tiflash/configuration.md)
+    - [TiFlash Alert Rules](/reference/tiflash/alert-rules.md)
+    - [Tune TiFlash Performance](/reference/tiflash/tune-performance.md)
+    - [FAQ](/reference/tiflash/faq.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
@@ -350,49 +370,7 @@
     - [TiKV Control](/reference/tools/tikv-control.md)
     - [TiDB Control](/reference/tools/tidb-control.md)
     - [Download](/reference/tools/download.md)
-+ TiDB in Kubernetes
-  - [About TiDB Operator](/tidb-in-kubernetes/tidb-operator-overview.md)
-  + Get Started
-    - [kind](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
-    - [GKE](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
-    - [Minikube](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
-  + Deploy
-    - [Prerequisites](/tidb-in-kubernetes/deploy/prerequisites.md)
-    - [TiDB Operator](/tidb-in-kubernetes/deploy/tidb-operator.md)
-    - [TiDB in General Kubernetes](/tidb-in-kubernetes/deploy/general-kubernetes.md)
-    - [TiDB in AWS EKS](/tidb-in-kubernetes/deploy/aws-eks.md)
-    - [TiDB in GCP GKE](/tidb-in-kubernetes/deploy/gcp-gke.md)
-    - [TiDB in Alibaba Cloud ACK](/tidb-in-kubernetes/deploy/alibaba-cloud.md)
-    - [Access TiDB in Kubernetes](/tidb-in-kubernetes/deploy/access-tidb.md)
-  + Configure
-    - [Cluster Initialization](/tidb-in-kubernetes/initialize-cluster.md)
-  - [Monitor](/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
-  + Maintain
-    - [Destroy a TiDB cluster](/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
-    - [Maintain a Hosting Kubernetes Node](/tidb-in-kubernetes/maintain/kubernetes-node.md)
-    - [Backup and Restore](/tidb-in-kubernetes/maintain/backup-and-restore.md)
-    - [Restore Data with TiDB Lightning](/tidb-in-kubernetes/maintain/lightning.md)
-    - [Collect Logs](/tidb-in-kubernetes/maintain/log-collecting.md)
-    - [Automatic Failover](/tidb-in-kubernetes/maintain/auto-failover.md)
-    - [TiDB Binlog](/tidb-in-kubernetes/maintain/tidb-binlog.md)
-    - [Restart a TiDB Cluster](/tidb-in-kubernetes/maintain/restart.md)
-  - [Scale](/tidb-in-kubernetes/scale-in-kubernetes.md)
-  + Upgrade
-    - [TiDB Cluster](/tidb-in-kubernetes/upgrade/tidb-cluster.md)
-    - [TiDB Operator](/tidb-in-kubernetes/upgrade/tidb-operator.md)
-  + Reference
-    + Configuration
-      - [TiDB Cluster](/tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
-      - [Backup](/tidb-in-kubernetes/reference/configuration/backup.md)
-      - [PV](/tidb-in-kubernetes/reference/configuration/storage-class.md)
-      - [TiDB Drainer](/tidb-in-kubernetes/reference/configuration/tidb-drainer.md)
-    + Tools
-      - [tkctl](/tidb-in-kubernetes/reference/tools/tkctl.md)
-      - [Tools in Kubernetes](/tidb-in-kubernetes/reference/tools/in-kubernetes.md)
-    + Components
-      - [TiDB Scheduler](/tidb-in-kubernetes/reference/components/tidb-scheduler.md)
-  - [Troubleshoot](/tidb-in-kubernetes/troubleshoot.md)
-  - [FAQs](/tidb-in-kubernetes/faq.md)
+- [TiDB in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/)
 + FAQs
   - [TiDB FAQs](/faq/tidb.md)
   - [TiDB Lightning FAQs](/faq/tidb-lightning.md)
@@ -407,10 +385,12 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+    - [4.0.0-rc](/releases/4.0.0-rc.md)
     - [4.0.0-beta.2](/releases/4.0.0-beta.2.md)
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
+    - [3.1.0-rc](/releases/3.1.0-rc.md)
     - [3.1.0-beta.2](/releases/3.1.0-beta.2.md)
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
