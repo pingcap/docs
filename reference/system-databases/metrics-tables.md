@@ -6,7 +6,7 @@ category: reference
 
 # METRICS_TABLES
 
-The `METRICS_TABLES` table provides information of all monitoring tables in [`metrics_schema`](/reference/system-databases/metrics-schema.md).
+The `METRICS_TABLES` table provides information of all monitoring tables in the [metrics schema](/reference/system-databases/metrics-schema.md).
 
 {{< copyable "sql" >}}
 
@@ -31,5 +31,5 @@ Field description:
 * `TABLE_NAME`: Corresponds to the table name in `metrics_schema`.
 * `PROMQL`: The working principle of the monitoring table is to map SQL statements to `PromQL` and convert Prometheus results into SQL query results. This field is the expression template of `PromQL`. When getting the data of the monitoring table, the query conditions are used to rewrite the variables in this template to generate the final query expression.
 * `LABELS`: The label for the monitoring item. Each label corresponds to a column in the monitoring table. If the SQL statement contains filter of the corresponding column, the corresponding `PromQL` changes accordingly.
-* `QUANTILE`: The percentile. For monitoring data of the histogram type, specify a default percentile. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
+* `QUANTILE`: The percentile. For monitoring data of the histogram type, a default percentile is specified. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
 * `COMMENT`: The comment for the monitoring table.

@@ -1,12 +1,12 @@
 ---
-title: METRICS_SCHEMA
-summary: Learn the `METRICS_SCHEMA` system table.
+title: Metrics Schema
+summary: Learn the `METRICS_SCHEMA` schema.
 category: reference
 ---
 
 # Metrics Schema
 
-To dynamically observe and compare cluster conditions in different time periods, the SQL diagnosis system introduces cluster monitoring system tables. All monitoring tables are in `metrics_schema`, and you can query the monitoring information using SQL statements. In fact, the data of the three monitoring-related summary tables ([`metrics_summary`](/reference/system-databases/metrics-summary.md), [`metrics_summary_by_label`](/reference/system-databases/metrics-summary.md), and `inspection_result`) are obtained by querying the monitoring tables in `metrics_schema`. Currently, many system tables are added and you can query the information of these tables through the [`information_schema.metrics_tables`](/reference/system-databases/metrics-tables.md) table.
+To dynamically observe and compare cluster conditions of different time periods, the SQL diagnosis system introduces cluster monitoring system tables. All monitoring tables are in the metrics schema, and you can query the monitoring information using SQL statements in this schema. In fact, the data of the three monitoring-related summary tables ([`metrics_summary`](/reference/system-databases/metrics-summary.md), [`metrics_summary_by_label`](/reference/system-databases/metrics-summary.md), and `inspection_result`) are obtained by querying the monitoring tables in the metrics schema. Currently, many system tables are added and you can query the information of these tables through the [`information_schema.metrics_tables`](/reference/system-databases/metrics-tables.md) table.
 
 ## Overview
 
@@ -30,10 +30,10 @@ select * from information_schema.metrics_tables where table_name='tidb_query_dur
 
 Field description:
 
-* `TABLE_NAME`: Corresponds to the table name in `metrics_schema`. In this example, the table name is `tidb_query_duration`.
+* `TABLE_NAME`: Corresponds to the table name in the metrics schema. In this example, the table name is `tidb_query_duration`.
 * `PROMQL`: The working principle of the monitoring table is to map SQL statements to `PromQL` and convert Prometheus results into SQL query results. This field is the expression template of `PromQL`. When getting the data of the monitoring table, the query conditions are used to rewrite the variables in this template to generate the final query expression.
 * `LABELS`: The label for the monitoring item. `tidb_query_duration` has two labels: `instance` and `sql_type`.
-* `QUANTILE`: The percentile. For monitoring data of the histogram type, specify a default percentile. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
+* `QUANTILE`: The percentile. For monitoring data of the histogram type, a default percentile is specified. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
 * `COMMENT`: The comment for the monitoring table. You can see that the `tidb_query_duration` table is used to query the percentile time of the TiDB query execution, such as the query time of P999/P99/P90. The unit is second.
 
 The structure of the `tidb_query_duration` table is queried as follows:
@@ -60,7 +60,7 @@ show create table metrics_schema.tidb_query_duration;
 
 * `time`: The time of the monitoring item.
 * `instance` and `sql_type`: The labels of the `tidb_query_duration` monitoring item. `instance` means the monitoring address. `sql_type` means the type of the executed SQL statement.
-* `quantile`: The percentile. The monitoring item of the Histogram type has this column, which indicates the percentile time of the query. For example, `quantile = 0.9` means to query the time of P90.
+* `quantile`: The percentile. The monitoring item of the histogram type has this column, which indicates the percentile time of the query. For example, `quantile = 0.9` means to query the time of P90.
 * `value`: The value of the monitoring item.
 
 The following statement queries the P99 time within the range of [`2020-03-25 23:40:00`, `2020-03-25 23:42:00`].
