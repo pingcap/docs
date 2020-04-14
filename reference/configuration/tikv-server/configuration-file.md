@@ -257,6 +257,21 @@ Configuration items related to storage
 + Default value: `2GB`
 + Unite: MB|GB
 
+## storage.block-cache
+
+Configuration items related to block cache and shared by RocksDB column families. When these configuration items are enabled, block cache separately configured for each column family is disabled.
+
+### `shared`
+
++ Enables or disables the sharing of block cache.
++ Default value: `true`.
+
+### `capacity`
+
++ The size of the shared block cache.
++ Default value: 45% of the size of total system memory.
++ Unite: KB|MB|GB
+
 ## raftstore
 
 Configuration items related to Raftstore
@@ -1029,6 +1044,25 @@ Configuration items related to `rocksdb.defaultcf.titan`
 + Default value: `8MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
+
+### `blob-run-mode`
+
++ Specifies the running mode of Titan.
++ Available values:
+    + `normal`: Writes data to the blob file when the value size exceeds `min-blob-size`.
+    + `read_only`: Reads the original data in the blob file, but refuses to write new data to the blob file.
+    + `fallback`: Writes data in the blob file back to LSM.
++ Default value: `normal`
+
+### `level-merge`
+
++ Determines whether to optimize the read performance. When `level-merge` is enabled, there is more write amplification.
++ Default value: `true`
+
+### `gc-merge-rewrite`
+
++ Determines whether to write back Titan GC using the merge operator. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
++ Default value: `true`
 
 ## rocksdb.writecf
 
