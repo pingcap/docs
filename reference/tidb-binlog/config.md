@@ -1,5 +1,6 @@
 ---
 title: TiDB Binlog Configuration File
+summary: Learn the configuration items of TiDB Binlog.
 category: reference
 ---
 
@@ -14,27 +15,27 @@ This section introduces the configuration items of Pump. For the example of a co
 ### addr
 
 * Specifies the listening address of HTTP API in the format of `host:port`.
-* Default value: `"127.0.0.1:8250"`
+* Default value: `127.0.0.1:8250`
 
 ### advertise-addr
 
 * Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host:port`.
-* Default value: `"127.0.0.1:8250"`
+* Default value: `127.0.0.1:8250`
 
 ### socket
 
 * The Unix socket address that HTTP API listens to.
-* Default value: `""`
+* Default value: ""
 
 ### pd-urls
 
 * Specifies the comma-separated list of PD URLs. If multiple addresses are specified, when the PD client fails to connect to one address, it automatically tries to connect to another address.
-* Default value: `"http://127.0.0.1:2379"`
+* Default value: `http://127.0.0.1:2379`
 
 ### data-dir
 
 * Specifies the directory where binlogs and their indexes are stored locally.
-* Default value: `"data.pump"`
+* Default value: `data.pump`
 
 ### heartbeat-interval
 
@@ -54,12 +55,12 @@ This section introduces the configuration items of Pump. For the example of a co
 ### log-file
 
 * Specifies the path where log files are stored. If the parameter is set to an empty value, log files are not stored.
-* Default value: `""`
+* Default value: ""
 
 ### log-level
 
 * Specifies the log level.
-* Default value: `"info"`
+* Default value: `info`
 
 ### node-id
 
@@ -73,17 +74,17 @@ This section introduces configuration items related to security.
 #### ssl-ca
 
 * Specifies the file path of the trusted SSL certificate list or CA list. For example, `/path/to/ca.pem`.
-* Default value: `""`
+* Default value: ""
 
 #### ssl-cert
 
 * Specifies the path of the X509 certificate file encoded in the Privacy Enhanced Mail (PEM) format. For example, `/path/to/pump.pem`.
-* Default value: `""`
+* Default value: ""
 
 #### ssl-key
 
 * Specifies the path of the X509 key file encoded in the PEM format. For example, `/path/to/pump-key.pem`.
-* Default value: `""`
+* Default value: ""
 
 ### storage
 
@@ -133,22 +134,22 @@ This section introduces the configuration items of Drainer. For the example of a
 ### addr
 
 * Specifies the listening address of HTTP API in the format of `host:port`.
-* Default value: `"127.0.0.1:8249"`
+* Default value: `127.0.0.1:8249`
 
 ### advertise-addr
 
 * Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host:port`.
-* Default value: `"127.0.0.1:8249"`
+* Default value: `127.0.0.1:8249`
 
 ### log-file
 
 * Specifies the path where log files are stored. If the parameter is set to an empty value, log files are not stored.
-* Default value: `""`
+* Default value: ""
 
 ### log-level
 
 * Specifies the log level.
-* Default value: `"info"`
+* Default value: `info`
 
 ### node-id
 
@@ -158,7 +159,7 @@ This section introduces the configuration items of Drainer. For the example of a
 ### data-dir
 
 * Specifies the directory used to store files that need to be saved during Drainer operation.
-* Default value: `"data.drainer"`
+* Default value: `data.drainer`
 
 ### detect-interval
 
@@ -168,7 +169,7 @@ This section introduces the configuration items of Drainer. For the example of a
 ### pd-urls
 
 * The comma-separated list of PD URLs. If multiple addresses are specified, the PD client will automatically attempt to connect to another address if an error occurs when connecting to one address.
-* Default value: `"http://127.0.0.1:2379"`
+* Default value: `http://127.0.0.1:2379`
 
 ### initial-commit-ts
 
@@ -183,7 +184,7 @@ This section introduces the configuration items of Drainer. For the example of a
 ### compressor
 
 * Specifies the compression algorithm used for data transfer between Pump and Drainer. Currently only the `gzip` algorithm is supported.
-* Default value: `""`, which means no compression.
+* Default value: "", which means no compression.
 
 ### security
 
@@ -192,17 +193,17 @@ This section introduces configuration items related to security.
 #### ssl-ca
 
 * Specifies the file path of the trusted SSL certificate list or CA list. For example, `/path/to/ca.pem`.
-* Default value: `""`
+* Default value: ""
 
 #### ssl-cert
 
 * Specifies the path of the X509 certificate file encoded in the PEM format. For example, `/path/to/drainer.pem`.
-* Default value: `""`
+* Default value: ""
 
 #### ssl-key
 
 * Specifies the path of the X509 key file encoded in the PEM format. For example, `/path/to/pump-key.pem`.
-* Default value: `""`
+* Default value: ""
 
 ### syncer
 
@@ -222,7 +223,7 @@ Default value: `mysql`
 #### sql-mode
 
 * Specifies the SQL mode when the downstream is the `mysql` or `tidb` type. If there is more than one mode, use commas to separate them.
-* Default value: `""`
+* Default value: ""
 
 #### ignore-txn-commit-ts
 
@@ -232,7 +233,7 @@ Default value: `mysql`
 #### ignore-schemas
 
 * Specifies the database to be ignored during replication. If there is more than one database to be ignored, use commas to separate them. If all changes in a binlog file are filtered, the whole binlog file is ignored.
-* Default value: `"INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql"`
+* Default value: `INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql`
 
 #### ignore-table
 
@@ -309,9 +310,9 @@ The `syncer.to` section introduces different types of downstream configuration i
 
 The following configuration items are related to connection to downstream databases:
 
-* `host`: If this item is not set, TiDB Binlog tries to check the `MYSQL_HOST` environment variable which is `"localhost"` by default.
+* `host`: If this item is not set, TiDB Binlog tries to check the `MYSQL_HOST` environment variable which is `localhost` by default.
 * `port`: If this item is not set, TiDB Binlog tries to check the `MYSQL_PORT` environment variable which is `3306` by default.
-* `user`: If this item is not set, TiDB Binlog tries to check the `MYSQL_USER` environment variable which is `"root"` by default.
+* `user`: If this item is not set, TiDB Binlog tries to check the `MYSQL_USER` environment variable which is `root` by default.
 * `password`: If this item is not set, TiDB Binlog tries to check the `MYSQL_PSWD` environment variable which is `""` by default.
 
 #### file
@@ -339,7 +340,7 @@ This section introduces a configuration item related to `syncer.to.checkpoint`.
 
 * Default value: The same as the downstream type. For example, when the downstream is `file`, the progress is saved in the local file system; when the downstream is `mysql`, the progress is saved in the downstream database. If you explicitly specify using `mysql` or `tidb` to store the progress, make the following configuration:
 
-    * `schema`: `"tidb_binlog"` by default.
+    * `schema`: `tidb_binlog` by default.
 
         > **Note:**
         >
