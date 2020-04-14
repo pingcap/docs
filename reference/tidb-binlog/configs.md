@@ -13,12 +13,12 @@ This section introduces the configuration items of Pump. For the example of a co
 
 ### addr
 
-* Specifies the listening address of HTTP API in the format of `host: port`.
+* Specifies the listening address of HTTP API in the format of `host:port`.
 * Default value: `"127.0.0.1:8250"`
 
 ### advertise-addr
 
-* Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host: port`.
+* Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host:port`.
 * Default value: `"127.0.0.1:8250"`
 
 ### socket
@@ -28,7 +28,7 @@ This section introduces the configuration items of Pump. For the example of a co
 
 ### pd-urls
 
-* Specifies the comma-separated list of PD URLs. If multiple addresses are specified, when the PD client fails to connect one address, it automatically tries to connect to another address.
+* Specifies the comma-separated list of PD URLs. If multiple addresses are specified, when the PD client fails to connect to one address, it automatically tries to connect to another address.
 * Default value: `"http://127.0.0.1:2379"`
 
 ### data-dir
@@ -101,7 +101,7 @@ This section introduces configuration items related to storage.
 
 #### slow_write_threshold
 
-* The threshold (in seconds) if it takes longer to write a single binlog file than this specified threshold, the write is considered slow write and `"take a long time to write binlog"` is output in the log.
+* The threshold (in seconds). If it takes longer to write a single binlog file than this specified threshold, the write is considered slow write and `"take a long time to write binlog"` is output in the log.
 * Default value: `1`
 
 #### stop-write-at-available-space
@@ -124,7 +124,7 @@ Currently the storage of Pump is implemented based on [GoLevelDB](https://github
 * write-L0-pause-trigger
 * write-L0-slowdown-trigger
 
-For the detailed description of above items, see [GoLevelDB Document](https://godoc.org/github.com/syndtr/goleveldb/leveldb/opt#Options).
+For the detailed description of the above items, see [GoLevelDB Document](https://godoc.org/github.com/syndtr/goleveldb/leveldb/opt#Options).
 
 ## Drainer
 
@@ -132,12 +132,12 @@ This section introduces the configuration items of Drainer. For the example of a
 
 ### addr
 
-* Specifies the listening address of HTTP API in the format of `host: port`.
+* Specifies the listening address of HTTP API in the format of `host:port`.
 * Default value: `"127.0.0.1:8249"`
 
 ### advertise-addr
 
-* Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host: port`.
+* Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host:port`.
 * Default value: `"127.0.0.1:8249"`
 
 ### log-file
@@ -162,7 +162,7 @@ This section introduces the configuration items of Drainer. For the example of a
 
 ### detect-interval
 
-* Specifies the interval (in seconds) at which PD updates the Pump information
+* Specifies the interval (in seconds) at which PD updates the Pump information.
 * Default value: `5`
 
 ### pd-urls
@@ -172,12 +172,12 @@ This section introduces the configuration items of Drainer. For the example of a
 
 ### initial-commit-ts
 
-* Specifies from which commit timestamp the replication task starts. This configuration is only applicable to the Drainer node that started replication for the first time. If a checkpoint already exists downstream, the replication will be performed according to the time recorded in the checkpoint.
+* Specifies from which commit timestamp the replication task starts. This configuration is only applicable to the Drainer node that starts replication for the first time. If a checkpoint already exists downstream, the replication will be performed according to the time recorded in the checkpoint.
 * Default value: `-1`. Drainer will get a new timestamp from PD as the starting time.
 
 ### synced-check-time
 
-* You can access the `/ status` path through the HTTP API to query the status of Drainer replication. `synced-check-time` specifies how many minutes from the last successful replication is considered as `synced`, that is, the replication is complete.
+* You can access the `/status` path through the HTTP API to query the status of Drainer replication. `synced-check-time` specifies how many minutes from the last successful replication is considered as `synced`, that is, the replication is complete.
 * Default value: `5`
 
 ### compressor
@@ -284,17 +284,17 @@ Default value: `[]`
 
 #### worker-count
 
-* When the downstream is the `mysql` or `tidb` type, DML operations are executed in different batches. This parameter specifies the concurrency numbers of DML operations.
+* When the downstream is the `mysql` or `tidb` type, DML operations are executed concurrently. This parameter specifies the concurrency numbers of DML operations.
 * Default value: `16`
 
 #### disable-dispatch
 
-* Disables the concurrency and forcibly set `work-count` to `1`.
+* Disables the concurrency and forcibly set `worker-count` to `1`.
 * Default value: `false`
 
 #### safe-mode
 
-If Safe mode is enabled, Drainer modifies the replication updates in the following way:
+If the safe mode is enabled, Drainer modifies the replication updates in the following way:
 
 * `Insert` is modified to `Replace Into`
 * `Update` is modified to `Delete` plus `Replace Into`
