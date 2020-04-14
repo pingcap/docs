@@ -616,7 +616,7 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | Variable Name | Description |
 | :---- | :------- |
 | cluster_name | the name of a cluster, adjustable |
-| cpu_architecture | CPU architecture. `amd64` by default, `arm64` optional. |
+| cpu_architecture | CPU architecture. `amd64` by default, `arm64` optional |
 | tidb_version | the version of TiDB, configured by default in TiDB Ansible branches |
 | process_supervision | the supervision way of processes, `systemd` by default, `supervise` optional |
 | timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/how-to/configure/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
