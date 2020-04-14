@@ -327,7 +327,7 @@
     - [Deploy](/reference/tidb-binlog/deploy.md)
     - [Maintain](/reference/tidb-binlog/maintain.md)
     - [Monitor](/reference/tidb-binlog/monitor.md)
-    + [Configure](/reference/tidb-binlog/configs.md)
+    + [Configure](/reference/tidb-binlog/config.md)
       - [Pump](/reference/tidb-binlog/configs.md#pump)
       - [Drainer](/reference/tidb-binlog/configs.md#drainer)
     - [Upgrade](/reference/tidb-binlog/upgrade.md)
