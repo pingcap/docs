@@ -190,6 +190,10 @@ The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optim
 select /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * from t t1 where t1.a > 10 or t1.b > 10;
 ```
 
+> **Note:**
+>
+> The parameters of `USE_INDEX_MERGE` refer to index names, rather than column names. The index name of the primary key is `primary`.
+
 ### NO_INDEX_MERGE()
 
 The `NO_INDEX_MERGE()` hint disables the index merge feature of the optimizer.
@@ -261,3 +265,17 @@ select /*+ READ_FROM_REPLICA() */ * from t;
 ```
 
 In addition to this hint, setting the `tidb_replica_read` environment variable to `'follower'` or `'leader'` also controls whether to enable this feature.
+
+### IGNORE_PLAN_CACHE()
+
+`IGNORE_PLAN_CACHE()` reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
+
+This hint is used to temporarily disable the Plan Cache when [prepare-plan-cache](/reference/configuration/tidb-server/configuration-file.md#prepared-plan-cache) is enabled.
+
+In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
+
+{{< copyable "sql" >}}
+
+```sql
+prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
+```
