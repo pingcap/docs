@@ -60,8 +60,16 @@ The TiDB configuration file supports more options than command line options. You
 
 ### `treat-old-version-utf8-as-utf8mb4`
 
-- Treat the `utf8` character set in the old table as a switch for `utf8mb4`.
-- Default: true
+- Determines whether to treat the `utf8` character set in old tables as `utf8mb4`.
+- Default value: `true`
+
+### `server-version`
+
++ Modifies the version string returned by TiDB in the following situations:
+    - When the built-in `VERSION()` function is used.
+    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/internals/en/connection-phase-packets.html#packet-Protocol::Handshake).
++ Default value: ""
++ By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
 
 ## Log
 
