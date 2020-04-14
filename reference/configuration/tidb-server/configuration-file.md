@@ -84,6 +84,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `false`
 - With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
 
+### `server-version`
+
++ Modifies the version string returned by TiDB in the following situations:
+    - When the built-in `VERSION()` function is used.
+    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/internals/en/connection-phase-packets.html#packet-Protocol::Handshake).
++ Default value: ""
++ By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
+
 ### `repair-mode`
 
 - Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
@@ -152,8 +160,8 @@ Configuration items related to log.
 ### `max-server-connections`
 
 - The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
-- Default value: `4096`
-- When the number of actual client connections is equal to the value of `max-server-connections`, the TiDB server rejects new client connections.
+- Default value: `0`
+- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
 
 ## log.file
 
@@ -459,6 +467,18 @@ Configurations related to the `events_statement_summary_by_digest` table.
 
 - The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
 - Default value: `4096`
+
+## pessimistic-txn
+
+### enable
+
+- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
+- Default value: `true`
+
+### max-retry-count
+
+- The max number of retries of each statement in pessimistic transactions. Exceeding this limit results in error.
+- Default value: `256`
 
 ## experimental
 
