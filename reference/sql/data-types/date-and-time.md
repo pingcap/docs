@@ -180,14 +180,14 @@ The two-digit year-portion contained in date does not explicitly indicate the ac
 
 For `DATETIME`, `DATE` and `TIMESTAMP` types, TiDB follows the following rules to eliminate ambiguity:
 
-- Values between 00 and 69 is converted to a value between 2000 and 2069
+- Values between 01 and 69 is converted to a value between 2001 and 2069
 - Values between 70 and 99 is converted to a value between 1970 and 1999
 
 These rules also apply to the `YEAR` type, with one exception:
 
 When numeral `00` is inserted to `YEAR(4)`, the result is 0000 rather than 2000.
 
-If you want the result to be 2000, specify the value to be 2000, '0' or '00'.
+If you want the result to be 2000, specify the value to be 2000.
 
 The two-digit year-portion might not be properly calculated in some functions such  `MIN()` and  `MAX()`. For these functions, the four-digit format suites better.
 
