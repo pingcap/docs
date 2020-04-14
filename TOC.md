@@ -13,9 +13,6 @@
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/add-index-with-load.md)
-    - [TiDB in Kubernetes Sysbench Test](/benchmark/sysbench-in-k8s.md)
-    - [DM 1.0-alpha Benchmark Report](/benchmark/dm-v1-alpha.md)
-    - [DM 1.0-GA Benchmark Report](/benchmark/dm-v1.0-ga.md)
 + Concepts
   - [Architecture](/architecture.md)
   + Key Features
@@ -42,12 +39,12 @@
       - [From Binary](/how-to/get-started/deploy-tidb-from-binary.md)
       - [From Homebrew](/how-to/get-started/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](/how-to/get-started/deploy-tidb-from-dbdeployer.md)
-      - [In Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md)
+      - [From Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md)
     - [Explore SQL with TiDB](/how-to/get-started/explore-sql.md)
     - [Import Example Database](/how-to/get-started/import-example-database.md)
     - [Read Historical Data](/how-to/get-started/read-historical-data.md)
     - [TiDB Binlog Tutorial](/how-to/get-started/tidb-binlog.md)
-    - [TiDB Data Migration Tutorial](/how-to/get-started/data-migration.md)
+    - [TiDB Data Migration Tutorial](https://pingcap.com/docs/tidb-data-migration/stable/get-started/)
     - [TiDB Lightning Tutorial](/how-to/get-started/tidb-lightning.md)
     - [TiSpark Quick Start Guide](/how-to/get-started/tispark.md)
   + Deploy
@@ -56,16 +53,18 @@
       - [For Testing Environments](/how-to/deploy/from-tarball/testing-environment.md)
       - [For Production Environments](/how-to/deploy/from-tarball/production-environment.md)
     + Orchestrated Deployment
-      - [Ansible Deployment (Recommended)](/how-to/deploy/orchestrated/ansible.md)
-      - [Ansible Offline Deployment](/how-to/deploy/orchestrated/offline-ansible.md)
-      - [Docker Deployment](/how-to/deploy/orchestrated/docker.md)
+      - [Use TiUP (Recommended)](/how-to/deploy/orchestrated/tiup.md)
+      - [Use TiDB Ansible](/how-to/deploy/orchestrated/ansible.md)
+      - [Use TiDB Ansible Offline](/how-to/deploy/orchestrated/offline-ansible.md)
+      - [Use Docker](/how-to/deploy/orchestrated/docker.md)
     + Geographic Redundancy
       - [Overview](/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/how-to/deploy/geographic-redundancy/location-awareness.md)
-    - [Data Migration with Ansible](/how-to/deploy/data-migration-with-ansible.md)
+    - [Data Migration with Ansible](https://pingcap.com/docs/tidb-data-migration/stable/deploy-a-dm-cluster-using-ansible/)
   + Configure
     - [Time Zone](/how-to/configure/time-zone.md)
     - [Memory Control](/how-to/configure/memory-control.md)
+    - [Placement Rules](/how-to/configure/placement-rules.md)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](/how-to/secure/enable-tls-clients.md)
@@ -90,9 +89,11 @@
       - [Identify Expensive Queries](/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/how-to/scale/with-ansible.md)
+    - [Scale using TiUP](/how-to/scale/with-tiup.md)
     - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to the Latest Version](/how-to/upgrade/from-previous-version.md)
+    - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
+    - [Upgrade Using TiDB Ansible](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/how-to/troubleshoot/tidb-lightning.md)
@@ -172,6 +173,7 @@
       - [`COMMIT`](/reference/sql/statements/commit.md)
       - [`CREATE DATABASE`](/reference/sql/statements/create-database.md)
       - [`CREATE INDEX`](/reference/sql/statements/create-index.md)
+      - [`CREATE SEQUENCE`](/reference/sql/statements/create-sequence.md)
       - [`CREATE TABLE LIKE`](/reference/sql/statements/create-table-like.md)
       - [`CREATE TABLE`](/reference/sql/statements/create-table.md)
       - [`CREATE USER`](/reference/sql/statements/create-user.md)
@@ -184,12 +186,14 @@
       - [`DROP COLUMN`](/reference/sql/statements/drop-column.md)
       - [`DROP DATABASE`](/reference/sql/statements/drop-database.md)
       - [`DROP INDEX`](/reference/sql/statements/drop-index.md)
+      - [`DROP SEQUENCE`](/reference/sql/statements/drop-sequence.md)
       - [`DROP TABLE`](/reference/sql/statements/drop-table.md)
       - [`DROP USER`](/reference/sql/statements/drop-user.md)
       - [`DROP VIEW`](/reference/sql/statements/drop-view.md)
       - [`EXECUTE`](/reference/sql/statements/execute.md)
       - [`EXPLAIN ANALYZE`](/reference/sql/statements/explain-analyze.md)
       - [`EXPLAIN`](/reference/sql/statements/explain.md)
+      - [`FLASHBACK TABLE`](/reference/sql/statements/flashback-table.md)
       - [`FLUSH PRIVILEGES`](/reference/sql/statements/flush-privileges.md)
       - [`FLUSH STATUS`](/reference/sql/statements/flush-status.md)
       - [`FLUSH TABLES`](/reference/sql/statements/flush-tables.md)
@@ -213,6 +217,7 @@
       - [`SHOW CHARACTER SET`](/reference/sql/statements/show-character-set.md)
       - [`SHOW COLLATION`](/reference/sql/statements/show-collation.md)
       - [`SHOW [FULL] COLUMNS FROM`](/reference/sql/statements/show-columns-from.md)
+      - [`SHOW CREATE SEQUENCE`](/reference/sql/statements/show-create-sequence.md)
       - [`SHOW CREATE TABLE`](/reference/sql/statements/show-create-table.md)
       - [`SHOW CREATE USER`](/reference/sql/statements/show-create-user.md)
       - [`SHOW DATABASES`](/reference/sql/statements/show-databases.md)
@@ -242,6 +247,7 @@
     - [Partitioning](/reference/sql/partitioning.md)
     - [Character Set](/reference/sql/character-set.md)
     - [SQL Mode](/reference/sql/sql-mode.md)
+    - [SQL Diagnosis](/reference/system-databases/sql-diagnosis.md)
     - [Views](/reference/sql/views.md)
   + Configuration
     + tidb-server
@@ -263,12 +269,16 @@
     - [Certificate-Based Authentication](/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/reference/transactions/overview.md)
-    - [Transaction Model](/reference/transactions/transaction-model.md)
     - [Isolation Levels](/reference/transactions/transaction-isolation.md)
+    - [Optimistic Transactions](/reference/transactions/transaction-optimistic.md)
     - [Pessimistic Transactions](/reference/transactions/transaction-pessimistic.md)
   + System Databases
     - [`mysql`](/reference/system-databases/mysql.md)
     - [`information_schema`](/reference/system-databases/information-schema.md)
+    + `sql-diagnosis`
+      - [`cluster_info`](/reference/system-databases/cluster-info.md)
+      - [`cluster_hardware`](/reference/system-databases/cluster-hardware.md)
+      - [`cluster_config`](/reference/system-databases/cluster-config.md)
   - [Errors Codes](/reference/error-codes.md)
   - [Supported Client Drivers](/reference/supported-clients.md)
   + Garbage Collection (GC)
@@ -277,11 +287,13 @@
   + Performance
     - [Overview](/reference/performance/sql-optimizer-overview.md)
     - [Understanding the Query Execution Plan](/reference/performance/understanding-the-query-execution-plan.md)
+    - [Introduction to Join Reorder](/reference/performance/join-reorder.md)
     - [Introduction to Statistics](/reference/performance/statistics.md)
     - [Optimizer Hints](/reference/performance/optimizer-hints.md)
     - [Follower Read](/reference/performance/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/reference/performance/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/reference/performance/execution-plan-bind.md)
+    - [Access Tables Using `IndexMerge`](/reference/performance/index-merge.md)
     - [Statement Summary Table](/reference/performance/statement-summary.md)
     - [Tune TiKV](/reference/performance/tune-tikv.md)
   + Key Monitoring Metrics
@@ -298,6 +310,18 @@
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
   - [TiSpark](/reference/tispark.md)
+  + TiFlash
+    - [Overview](/reference/tiflash/overview.md)
+    - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
+    - [Use TiFlash](/reference/tiflash/use-tiflash.md)
+    - [Maintain a TiFlash Cluster](/reference/tiflash/maintain.md)
+    - [Monitor TiFlash](/reference/tiflash/monitor.md)
+    - [Scale TiFlash](/how-to/scale/with-tiup.md#scale-out-a-tiflash-node)
+    - [Upgrade TiFlash Nodes](/reference/tiflash/upgrade.md)
+    - [Configure TiFlash](/reference/tiflash/configuration.md)
+    - [TiFlash Alert Rules](/reference/tiflash/alert-rules.md)
+    - [Tune TiFlash Performance](/reference/tiflash/tune-performance.md)
+    - [FAQ](/reference/tiflash/faq.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
@@ -307,6 +331,7 @@
     - [Reparo](/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/reference/tidb-binlog/binlog-slave-client.md)
     - [TiDB Binlog Relay Log](/reference/tidb-binlog/relay-log.md)
+    - [Bidirectional Replication Between TiDB Clusters](/reference/tidb-binlog/bidirectional-replication.md)
     - [Glossary](/reference/tidb-binlog/glossary.md)
     + Troubleshoot
       - [Troubleshooting](/reference/tidb-binlog/troubleshoot/binlog.md)
@@ -317,53 +342,7 @@
     - [Mydumper](/reference/tools/mydumper.md)
     - [Syncer](/reference/tools/syncer.md)
     - [Loader](/reference/tools/loader.md)
-    + TiDB Data Migration
-      + Overview
-        - [DM Overview](/reference/tools/data-migration/overview.md)
-        - [Restrictions](/reference/tools/data-migration/overview.md#usage-restrictions)
-        - [DM-worker](/reference/tools/data-migration/dm-worker-intro.md)
-        - [DM Relay Log](/reference/tools/data-migration/relay-log.md)
-      + Features
-        - [Table Routing](/reference/tools/data-migration/features/overview.md#table-routing)
-        - [Black and White Lists](/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
-        - [Binlog Event Filter](/reference/tools/data-migration/features/overview.md#binlog-event-filter)
-        - [Replication Delay Monitoring](/reference/tools/data-migration/features/overview.md#replication-delay-monitoring)
-        + Sharding Support
-          - [Introduction](/reference/tools/data-migration/features/shard-merge.md)
-          - [Restrictions](/reference/tools/data-migration/features/shard-merge.md#restrictions)
-          - [Handle Sharding DDL Locks Manually](/reference/tools/data-migration/features/manually-handling-sharding-ddl-locks.md)
-      + Usage Scenarios
-        - [Simple Scenario](/reference/tools/data-migration/usage-scenarios/simple-replication.md)
-        - [Shard Merge Scenario](/reference/tools/data-migration/usage-scenarios/shard-merge.md)
-        - [Shard Merge Best Practices](/reference/tools/data-migration/usage-scenarios/best-practice-dm-shard.md)
-      - [Deploy](/reference/tools/data-migration/deploy.md)
-      + Configure
-        - [Overview](/reference/tools/data-migration/configure/overview.md)
-        - [DM-master Configuration](/reference/tools/data-migration/configure/dm-master-configuration-file.md)
-        - [DM-worker Configuration](/reference/tools/data-migration/configure/dm-worker-configuration-file.md)
-        - [Task Configuration](/reference/tools/data-migration/configure/task-configuration-file.md)
-      + Manage the DM Cluster
-        - [Cluster Operations](/reference/tools/data-migration/cluster-operations.md)
-        - [Cluster Upgrade](/reference/tools/data-migration/upgrade.md)
-      + Manage Replication Tasks
-        - [Manage Tasks](/reference/tools/data-migration/manage-tasks.md)
-        - [Precheck Tasks](/reference/tools/data-migration/precheck.md)
-        - [Query Task Status](/reference/tools/data-migration/query-status.md)
-        - [Skip or Replace Abnormal SQL Statements](/reference/tools/data-migration/skip-replace-sqls.md)
-      - [Monitor](/reference/tools/data-migration/monitor.md)
-      + Migrate from MySQL compatible database
-        - [Migrate from Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
-      + Troubleshoot
-        - [DM Troubleshooting](/reference/tools/data-migration/troubleshoot/dm.md)
-        - [Error Description](/reference/tools/data-migration/troubleshoot/error-system.md)
-        - [Error Handling](/reference/tools/data-migration/troubleshoot/error-handling.md)
-      - [FAQ](/reference/tools/data-migration/faq.md)
-      + Releases
-        + v1.0
-          - [1.0.2](/reference/tools/data-migration/releases/1.0.2.md)
-          - [1.0.3](/reference/tools/data-migration/releases/1.0.3.md)
-          - [1.0.4](/reference/tools/data-migration/releases/1.0.4.md)
-      - [TiDB DM Glossary](/reference/tools/data-migration/glossary.md)
+    - [Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/)
     + TiDB Lightning
       - [Overview](/reference/tools/tidb-lightning/overview.md)
       - [Deployment](/reference/tools/tidb-lightning/deployment.md)
@@ -377,53 +356,22 @@
       - [Troubleshoot](/how-to/troubleshoot/tidb-lightning.md)
       - [FAQ](/faq/tidb-lightning.md)
       - [Glossary](/reference/tools/tidb-lightning/glossary.md)
-    - [sync-diff-inspector](/reference/tools/sync-diff-inspector/overview.md)
+    + TiCDC
+      - [Overview](/reference/tools/ticdc/overview.md)
+      - [Deploy and Use TiCDC](/reference/tools/ticdc/deploy.md)
+      - [Manage TiCDC Cluster and Replication Tasks](/reference/tools/ticdc/manage.md)
+      - [Configure Sink URI](/reference/tools/ticdc/sink.md)
+    + sync-diff-inspector
+      - [Overview](/reference/tools/sync-diff-inspector/overview.md)
+      - [Data Check for Tables with Different Schema or Table Names](/reference/tools/sync-diff-inspector/route-diff.md)
+      - [Data Check in the Sharding Scenario](/reference/tools/sync-diff-inspector/shard-diff.md)
+      - [Data Check for TiDB Upstream and Downstream Clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
     - [TiKV Control](/reference/tools/tikv-control.md)
     - [TiDB Control](/reference/tools/tidb-control.md)
     - [Download](/reference/tools/download.md)
-+ TiDB in Kubernetes
-  - [About TiDB Operator](/tidb-in-kubernetes/tidb-operator-overview.md)
-  + Get Started
-    - [kind](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-kind.md)
-    - [GKE](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke.md)
-    - [Minikube](/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-minikube.md)
-  + Deploy
-    - [Prerequisites](/tidb-in-kubernetes/deploy/prerequisites.md)
-    - [TiDB Operator](/tidb-in-kubernetes/deploy/tidb-operator.md)
-    - [TiDB in General Kubernetes](/tidb-in-kubernetes/deploy/general-kubernetes.md)
-    - [TiDB in AWS EKS](/tidb-in-kubernetes/deploy/aws-eks.md)
-    - [TiDB in GCP GKE](/tidb-in-kubernetes/deploy/gcp-gke.md)
-    - [TiDB in Alibaba Cloud ACK](/tidb-in-kubernetes/deploy/alibaba-cloud.md)
-    - [Access TiDB in Kubernetes](/tidb-in-kubernetes/deploy/access-tidb.md)
-  + Configure
-    - [Cluster Initialization](/tidb-in-kubernetes/initialize-cluster.md)
-  - [Monitor](/tidb-in-kubernetes/monitor/tidb-in-kubernetes.md)
-  + Maintain
-    - [Destroy a TiDB cluster](/tidb-in-kubernetes/maintain/destroy-tidb-cluster.md)
-    - [Maintain a Hosting Kubernetes Node](/tidb-in-kubernetes/maintain/kubernetes-node.md)
-    - [Backup and Restore](/tidb-in-kubernetes/maintain/backup-and-restore.md)
-    - [Restore Data with TiDB Lightning](/tidb-in-kubernetes/maintain/lightning.md)
-    - [Collect Logs](/tidb-in-kubernetes/maintain/log-collecting.md)
-    - [Automatic Failover](/tidb-in-kubernetes/maintain/auto-failover.md)
-    - [TiDB Binlog](/tidb-in-kubernetes/maintain/tidb-binlog.md)
-    - [Restart a TiDB Cluster](/tidb-in-kubernetes/maintain/restart.md)
-  - [Scale](/tidb-in-kubernetes/scale-in-kubernetes.md)
-  + Upgrade
-    - [TiDB Cluster](/tidb-in-kubernetes/upgrade/tidb-cluster.md)
-    - [TiDB Operator](/tidb-in-kubernetes/upgrade/tidb-operator.md)
-  + Reference
-    + Configuration
-      - [TiDB Cluster](/tidb-in-kubernetes/reference/configuration/tidb-cluster.md)
-      - [Backup](/tidb-in-kubernetes/reference/configuration/backup.md)
-      - [PV](/tidb-in-kubernetes/reference/configuration/storage-class.md)
-      - [TiDB Drainer](/tidb-in-kubernetes/reference/configuration/tidb-drainer.md)
-    + Tools
-      - [tkctl](/tidb-in-kubernetes/reference/tools/tkctl.md)
-      - [Tools in Kubernetes](/tidb-in-kubernetes/reference/tools/in-kubernetes.md)
-  - [Troubleshoot](/tidb-in-kubernetes/troubleshoot.md)
-  - [FAQs](/tidb-in-kubernetes/faq.md)
+- [TiDB in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/)
 + FAQs
   - [TiDB FAQs](/faq/tidb.md)
   - [TiDB Lightning FAQs](/faq/tidb-lightning.md)
@@ -438,10 +386,12 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+    - [4.0.0-rc](/releases/4.0.0-rc.md)
     - [4.0.0-beta.2](/releases/4.0.0-beta.2.md)
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
+    - [3.1.0-rc](/releases/3.1.0-rc.md)
     - [3.1.0-beta.2](/releases/3.1.0-beta.2.md)
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)

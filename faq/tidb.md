@@ -117,6 +117,10 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql\_mode` of the database; it only supports using the `set` command to configure `sql\_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure it.
 
+#### Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
+
+Since v3.0.8, TiDB supports modifying the version string of the server by modifying [`server-version`](/reference/configuration/tidb-server/configuration-file.md#server-version) in the configuration file. When you deploy TiDB using TiDB Ansible, you can also specify the proper version string by configuring `server-version` in the `conf/tidb.yml` configuration file to avoid the failure of security vulnerability scan.
+
 #### What authentication protocols does TiDB support? What's the process?
 
 - Like MySQL, TiDB supports the SASL protocol for user login authentication and password processing.
@@ -199,7 +203,7 @@ For details, see [Software and Hardware Recommendations](/how-to/deploy/hardware
 
 ### Install and deploy
 
-#### Deploy TiDB using Ansible (recommended)
+#### Deploy TiDB using TiDB Ansible (recommended)
 
 See [Ansible Deployment](/how-to/deploy/orchestrated/ansible.md).
 
@@ -241,9 +245,9 @@ Check the time difference between the machine time of the monitor and the time w
 | enable_slow_query_log | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
 | deploy_without_tidb | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 
-#### Deploy TiDB offline using Ansible
+#### Deploy TiDB offline using TiDB Ansible
 
-It is not recommended to deploy TiDB offline using Ansible. If the Control Machine has no access to external network, you can deploy TiDB offline using Ansible. For details, see [Offline Deployment Using Ansible](/how-to/deploy/orchestrated/offline-ansible.md).
+It is not recommended to deploy TiDB offline using TiDB Ansible. If the Control Machine has no access to external network, you can deploy TiDB offline using TiDB Ansible. For details, see [Offline Deployment Using TiDB Ansible](/how-to/deploy/orchestrated/offline-ansible.md).
 
 #### How to deploy TiDB quickly using Docker Compose on a single machine?
 
@@ -298,7 +302,7 @@ Two possible reasons and solutions:
 
 ### Upgrade
 
-#### How to perform rolling updates using Ansible?
+#### How to perform rolling updates using TiDB Ansible?
 
 - Apply rolling updates to the TiKV node (only update the TiKV service).
 
@@ -318,7 +322,7 @@ When you apply rolling updates to the TiDB services, the running application is 
 
 #### How to upgrade when I deploy TiDB using Binary?
 
-It is not recommended to deploy TiDB using Binary. The support for upgrading using Binary is not as friendly as using Ansible. It is recommended to deploy TiDB using Ansible.
+It is not recommended to deploy TiDB using Binary. The support for upgrading using Binary is not as friendly as using TiDB Ansible. It is recommended to deploy TiDB using TiDB Ansible.
 
 #### Should I upgrade TiKV or all components generally?
 
@@ -381,7 +385,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 #### How to safely stop TiDB?
 
-If the cluster is deployed using Ansible, you can use the `ansible-playbook stop.yml` command to stop the TiDB cluster. If the cluster is not deployed using Ansible, `kill` all the services directly. The components of TiDB will do `graceful shutdown`.
+If the cluster is deployed using TiDB Ansible, you can use the `ansible-playbook stop.yml` command to stop the TiDB cluster. If the cluster is not deployed using TiDB Ansible, `kill` all the services directly. The components of TiDB will do `graceful shutdown`.
 
 #### Can `kill` be executed in TiDB?
 
