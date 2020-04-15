@@ -14,7 +14,7 @@ The Follower Read feature refers to using any follower replica of a Region to se
 
 > **Note:**
 >
-> To achieve strongly consistent reads, the follower node currently needs to request the current execution progress from the leader node (i.e. `ReadIndex`), which causes an additional network request overhead. Therefore, the main benefits of Follower Read are to isolate read and write requests of the cluster and to increase overall read throughput.
+> To achieve strongly consistent reads, the follower node currently needs to request the current execution progress from the leader node (that is `ReadIndex`), which causes an additional network request overhead. Therefore, the main benefits of Follower Read are to isolate read requests from write requests in the cluster and to increase overall read throughput.
 
 ## Usage
 
