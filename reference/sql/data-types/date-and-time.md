@@ -78,7 +78,9 @@ Different types of zero value are shown in the following table:
 
 Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ) if the SQL mode permits such usage.
 
-## Automatic initialization and update of `TIMESTAMP` and `DATETIME`
+<!-- markdownlint-disable MD001 -->
+
+### Automatic initialization and update of `TIMESTAMP` and `DATETIME`
 
 Columns with `TIMESTAMP` or `DATETIME` value type can be automatically initialized or updated to the current time.
 
@@ -102,7 +104,7 @@ CREATE TABLE t1 (
 );
 ```
 
-## Decimal part of time value
+### Decimal part of time value
 
 `DATETIME` and `TIMESTAMP` values can contain a fractional part of up to 6 digits which is accurate to milliseconds. In any column of `DATETIME` or `TIMESTAMP` types, a fractional part is stored instead of being discarded. With a fractional part, the value is in the format of 'YYYY-MM-DD HH:MM:SS[.fraction]', and the fraction ranges from 000000 to 999999. A decimal point must be used to separate the fraction from the rest.
 
@@ -135,7 +137,7 @@ CREATE TABLE t1 (
     1 row in set (0.00 sec)
     ```
 
-## Conversions between date and time types
+### Conversions between date and time types
 
 Sometimes we need to make conversions between date and time types. But some conversions might lead to information loss. For example, `DATE`, `DATETIME` and `TIMESTAMP` values all have their own respective ranges. `TIMESTAMP` should be no earlier than the year 1970 in UTC time or no later than UTC time '2038-01-19 03:14:07'. Based on this rule, '1968-01-01' is a valid date value of `DATE` or `DATETIME`, but becomes 0 when it is converted to `TIMESTAMP`.
 
@@ -176,7 +178,7 @@ mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
 +---------------------|----------------|--------------------+
 ```
 
-## Two-digit year-portion contained in the date
+### Two-digit year-portion contained in the date
 
 The two-digit year-portion contained in date does not explicitly indicate the actual year and is ambiguous.
 
