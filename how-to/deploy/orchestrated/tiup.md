@@ -1350,7 +1350,7 @@ This section describes common problems and solutions when you deploy TiDB cluste
 
 ### TiFlash parameter
 
-| Parameter | Default Configuration | Description |
+| Parameter | Default configuration | Description |
 | :-- | :-- | :-- |
 | ssh_port | 22 | SSH default port |
 | tcp_port | 9000 | TiFlash TCP service port |
