@@ -53,9 +53,10 @@
       - [For Testing Environments](/how-to/deploy/from-tarball/testing-environment.md)
       - [For Production Environments](/how-to/deploy/from-tarball/production-environment.md)
     + Orchestrated Deployment
-      - [Ansible Deployment (Recommended)](/how-to/deploy/orchestrated/ansible.md)
-      - [Ansible Offline Deployment](/how-to/deploy/orchestrated/offline-ansible.md)
-      - [Docker Deployment](/how-to/deploy/orchestrated/docker.md)
+      - [Use TiUP (Recommended)](/how-to/deploy/orchestrated/tiup.md)
+      - [Use TiDB Ansible](/how-to/deploy/orchestrated/ansible.md)
+      - [Use TiDB Ansible Offline](/how-to/deploy/orchestrated/offline-ansible.md)
+      - [Use Docker](/how-to/deploy/orchestrated/docker.md)
     + Geographic Redundancy
       - [Overview](/how-to/deploy/geographic-redundancy/overview.md)
       - [Configure Location Awareness](/how-to/deploy/geographic-redundancy/location-awareness.md)
@@ -63,6 +64,7 @@
   + Configure
     - [Time Zone](/how-to/configure/time-zone.md)
     - [Memory Control](/how-to/configure/memory-control.md)
+    - [Placement Rules](/how-to/configure/placement-rules.md)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](/how-to/secure/enable-tls-clients.md)
@@ -87,9 +89,11 @@
       - [Identify Expensive Queries](/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/how-to/scale/with-ansible.md)
+    - [Scale using TiUP](/how-to/scale/with-tiup.md)
     - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
   + Upgrade
-    - [Upgrade to the Latest Version](/how-to/upgrade/from-previous-version.md)
+    - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
+    - [Upgrade Using TiDB Ansible](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
     - [Troubleshoot Cluster Setup](/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/how-to/troubleshoot/tidb-lightning.md)
@@ -243,6 +247,7 @@
     - [Partitioning](/reference/sql/partitioning.md)
     - [Character Set](/reference/sql/character-set.md)
     - [SQL Mode](/reference/sql/sql-mode.md)
+    - [SQL Diagnosis](/reference/system-databases/sql-diagnosis.md)
     - [Views](/reference/sql/views.md)
   + Configuration
     + tidb-server
@@ -264,12 +269,16 @@
     - [Certificate-Based Authentication](/reference/security/cert-based-authentication.md)
   + Transactions
     - [Overview](/reference/transactions/overview.md)
-    - [Transaction Model](/reference/transactions/transaction-model.md)
     - [Isolation Levels](/reference/transactions/transaction-isolation.md)
+    - [Optimistic Transactions](/reference/transactions/transaction-optimistic.md)
     - [Pessimistic Transactions](/reference/transactions/transaction-pessimistic.md)
   + System Databases
     - [`mysql`](/reference/system-databases/mysql.md)
     - [`information_schema`](/reference/system-databases/information-schema.md)
+    + `sql-diagnosis`
+      - [`cluster_info`](/reference/system-databases/cluster-info.md)
+      - [`cluster_hardware`](/reference/system-databases/cluster-hardware.md)
+      - [`cluster_config`](/reference/system-databases/cluster-config.md)
   - [Errors Codes](/reference/error-codes.md)
   - [Supported Client Drivers](/reference/supported-clients.md)
   + Garbage Collection (GC)
@@ -301,11 +310,26 @@
     - [Grafana Best Practices](/reference/best-practices/grafana-monitor.md)
     - [TiKV Performance Tuning with Massive Regions](/reference/best-practices/massive-regions.md)
   - [TiSpark](/reference/tispark.md)
+  + TiFlash
+    - [Overview](/reference/tiflash/overview.md)
+    - [Deploy a TiFlash Cluster](/reference/tiflash/deploy.md)
+    - [Use TiFlash](/reference/tiflash/use-tiflash.md)
+    - [Maintain a TiFlash Cluster](/reference/tiflash/maintain.md)
+    - [Monitor TiFlash](/reference/tiflash/monitor.md)
+    - [Scale TiFlash](/how-to/scale/with-tiup.md#scale-out-a-tiflash-node)
+    - [Upgrade TiFlash Nodes](/reference/tiflash/upgrade.md)
+    - [Configure TiFlash](/reference/tiflash/configuration.md)
+    - [TiFlash Alert Rules](/reference/tiflash/alert-rules.md)
+    - [Tune TiFlash Performance](/reference/tiflash/tune-performance.md)
+    - [FAQ](/reference/tiflash/faq.md)
   + TiDB Binlog
     - [Overview](/reference/tidb-binlog/overview.md)
     - [Deploy](/reference/tidb-binlog/deploy.md)
     - [Maintain](/reference/tidb-binlog/maintain.md)
     - [Monitor](/reference/tidb-binlog/monitor.md)
+    + [Configure](/reference/tidb-binlog/config.md)
+      - [Pump](/reference/tidb-binlog/config.md#pump)
+      - [Drainer](/reference/tidb-binlog/config.md#drainer)
     - [Upgrade](/reference/tidb-binlog/upgrade.md)
     - [Reparo](/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/reference/tidb-binlog/binlog-slave-client.md)
@@ -365,6 +389,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+    - [4.0.0-rc](/releases/4.0.0-rc.md)
     - [4.0.0-beta.2](/releases/4.0.0-beta.2.md)
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)

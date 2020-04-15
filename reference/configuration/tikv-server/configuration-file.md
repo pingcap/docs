@@ -92,19 +92,9 @@ This document only describes the parameters that are not included in command-lin
 + Unit: KB|MB|GB
 + Minimum value: `1KB`
 
-## readpool
-
-Configuration items related to read pools
-
-### `unify-read-pool`
-
-+ Whether to use a single thread pool to serve all the read requests.
-+ Default value: `true`
-
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests.
-They only take effect when `unify-read-pool` is `true`.
 
 ### `min-thread-count`
 
@@ -132,7 +122,11 @@ They only take effect when `unify-read-pool` is `true`.
 ## readpool.storage
 
 Configuration items related to storage thread pool.
-They only take effect when `unify-read-pool` is `false`.
+
+### `use-unified-pool`
+
++ Determines whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for storage requests. If the value of this parameter is `false`, a separate thread pool is used, which is configured through the rest parameters in this section (`readpool.storage`).
++ Default value: `false`
 
 ### `high-concurrency`
 
@@ -180,7 +174,11 @@ They only take effect when `unify-read-pool` is `false`.
 ## `readpool.coprocessor`
 
 Configuration items related to the Coprocessor thread pool.
-They only take effect when `unify-read-pool` is `false`.
+
+### `use-unified-pool`
+
++ Determines whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for coprocessor requests. If the value of this parameter is `false`, a separate thread pool is used, which is configured through the rest parameters in this section (`readpool.coprocessor`).
++ Default value: If none of the parameters in this section (`readpool.coprocessor`) are set, the default value is `true`. Otherwise, the default value is `false` for the backward compatibility. Adjust the configuration items in [`readpool.unified`](#readpoolunified) before enabling this parameter.
 
 ### `high-concurrency`
 
@@ -1127,3 +1125,21 @@ Configuration items related to `import`
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
+
+## pessimistic-txn
+
+### `enabled`
+
+- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
+- Default value: `true`
+
+### `wait-for-lock-timeout`
+
+- The max time that a pessimistic transaction in TiKV waits for other transactions to release the lock, in milliseconds. If timed out, an error is returned to TiDB, and TiDB retries to add a lock. The lock wait timeout is set by `innodb_lock_wait_timeout`.
+- Default value: 1000
+- Minimum value: 1
+
+### `wait-up-delay-duration`
+
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration` milliseconds.
+- Default value: 20
