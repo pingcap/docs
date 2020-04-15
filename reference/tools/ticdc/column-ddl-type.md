@@ -35,10 +35,10 @@ The column and DDL type codes are encodings defined by [TiCDC Open Protocol](/re
 | Set         | 248  | {"t":248,"v":3} |  |
 | Tiny Blob   | 249  | {"t":249,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | Medium Blob | 250  | {"t":250,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
-| Long Blob   | 251  | {"t":251,"v":"5rWL6K+VdGV4dA=="} | The value is encoded Base64. |
-| Blob        | 252  | {"t":252,"v":"5rWL6K+VdGV4dA=="} | The value is encoded Base64. |
-| Var String  | 253  | {"t":253,"v":"test"} | The value is encoded UTF-8. |
-| String      | 254  | {"t":254,"v":"test"} | The value is encoded UTF-8. |
+| Long Blob   | 251  | {"t":251,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
+| Blob        | 252  | {"t":252,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
+| Var String  | 253  | {"t":253,"v":"test"} | The value is encoded in UTF-8. |
+| String      | 254  | {"t":254,"v":"test"} | The value is encoded in UTF-8. |
 | Geometry    | 255  |  | Unsupported type |
 
 ## DDL Type Code
