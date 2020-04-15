@@ -47,7 +47,8 @@ The software and hardware recommendations for the **target machines** are as fol
     - Under AMD64 architecture, it is recommended to use CentOS 7.3 or above as the operating system.
     - Under ARM architecture, it is recommended to use CentOS 7.6 1810 as the operating system.
 - For the file system of TiKV data files, it is recommended to use EXT4 format. (refer to [Step 3](#step-3-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv)) You can also use CentOS default XFS format.
-- The target machines can communicate with each other on the Intranet. (It is recommended to disable the firewall `firewalld`, or open the required ports between the nodes of the TiDB cluster.)
+- The target machines can communicate with each other on the Intranet. (It is recommended to [disable the firewall `firewalld`](#how-to-stop-the-firewall-service-of-deployment-machines), or open the required ports between the nodes of the TiDB cluster.)
+- If you need to bind CPU cores, [install the `numactl` tool](#how-to-install-the-numactl-tool).
 - If you need to bind CPU cores, install the `numactl` tool.
 
 For other software and hardware recommendations, refer to [TiDB Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
@@ -330,26 +331,44 @@ cat topology.yaml
 ```
 
 ```yaml
-# Global variables are applied to all deployments and as the default value of
-# them if the specific deployment value missing.
+# # Global variables are applied to all deployments and as the default value of
+# # them if the specific deployment value missing.
+
 global:
   user: "tidb"
   ssh_port: 22
   deploy_dir: "/tidb-deploy"
   data_dir: "/tidb-data"
 
+# # Monitored variables are used to all the machine
 monitored:
-  deploy_dir: "/tidb-deploy/monitored-9100"
-  data_dir: "/tidb-data/monitored-9100"
-  log_dir: "/tidb-deploy/monitored-9100/log"
+  node_exporter_port: 9100
+  blackbox_exporter_port: 9115
+  # deploy_dir: "/tidb-deploy/monitored-9100"
+  # data_dir: "/tidb-data/monitored-9100"
+  # log_dir: "/tidb-deploy/monitored-9100/log"
+# # Server configs are used to specify the runtime configuration of TiDB components
+# # All configuration items can be found in TiDB docs:
+# # - TiDB: https://pingcap.com/docs/stable/reference/configuration/tidb-server/configuration-file/
+# # - TiKV: https://pingcap.com/docs/stable/reference/configuration/tikv-server/configuration-file/
+# # - PD: https://pingcap.com/docs/stable/reference/configuration/pd-server/configuration-file/
+# # All configuration items use points to represent the hierarchy, e.g:
+# #   readpool.storage.use-unified-pool
+# #           ^       ^
+# # You can overwrite this configuration via instance-level `config` field
 
 server_configs:
   tidb:
     log.slow-threshold: 300
-    log.level: warn
     binlog.enable: false
     binlog.ignore-error: false
   tikv:
+    # server.grpc-concurrency: 4
+    # raftstore.apply-pool-size: 2
+    # raftstore.store-pool-size: 2
+    # rocksdb.max-sub-compactions: 1
+    # storage.block-cache.capacity: "16GB"
+    # readpool.unified.max-thread-count: 12
     readpool.storage.use-unified-pool: true
     readpool.coprocessor.use-unified-pool: true
   pd:
@@ -357,7 +376,10 @@ server_configs:
     schedule.region-schedule-limit: 2048
     schedule.replica-schedule-limit: 64
     replication.enable-placement-rules: true
-    
+  tiflash:
+    logger.level: "info"
+  # pump:
+  #   gc: 7
 
 pd_servers:
   - host: 10.0.1.4
@@ -365,9 +387,9 @@ pd_servers:
     # name: "pd-1"
     # client_port: 2379
     # peer_port: 2380
-    # deploy_dir: "deploy/pd-2379"
-    # data_dir: "data/pd-2379"
-    # log_dir: "deploy/pd-2379/log"
+    # deploy_dir: "/tidb-deploy/pd-2379"
+    # data_dir: "/tidb-data/pd-2379"
+    # log_dir: "/tidb-deploy/pd-2379/log"
     # numa_node: "0,1"
     # # Config is used to overwrite the `server_configs.pd` values
     # config:
@@ -375,63 +397,112 @@ pd_servers:
     #   schedule.max-merge-region-keys: 200000
   - host: 10.0.1.5
   - host: 10.0.1.6
+
 tidb_servers:
   - host: 10.0.1.7
     # ssh_port: 22
     # port: 4000
     # status_port: 10080
-    # deploy_dir: "deploy/tidb-4000"
-    # log_dir: "deploy/tidb-4000/log"
+    # deploy_dir: "/tidb-deploy/tidb-4000"
+    # log_dir: "/tidb-deploy/tidb-4000/log"
     # numa_node: "0,1"
     # # Config is used to overwrite the `server_configs.tidb` values
     # config:
-    #   log.level: warn
     #   log.slow-query-file: tidb-slow-overwrited.log
   - host: 10.0.1.8
   - host: 10.0.1.9
+
 tikv_servers:
   - host: 10.0.1.1
     # ssh_port: 22
     # port: 20160
     # status_port: 20180
-    # deploy_dir: "deploy/tikv-20160"
-    # data_dir: "data/tikv-20160"
-    # log_dir: "deploy/tikv-20160/log"
+    # deploy_dir: "/tidb-deploy/tikv-20160"
+    # data_dir: "/tidb-data/tikv-20160"
+    # log_dir: "/tidb-deploy/tikv-20160/log"
     # numa_node: "0,1"
     # # Config is used to overwrite the `server_configs.tikv` values
-    #  config:
-    #    server.labels:
-    #      zone: sh
-    #      dc: sha
-    #      rack: rack1
-    #      host: host1
+    # config:
+    #   server.grpc-concurrency: 4
+    #   server.labels: { zone: "zone1", dc: "dc1", host: "host1" }
   - host: 10.0.1.2
   - host: 10.0.1.3
+
 tiflash_servers:
   - host: 10.0.1.10
-    # ssh_port: 22
-    # tcp_port: 9000
-    # http_port: 8123
-    # flash_service_port: 3930
-    # flash_proxy_port: 20170
-    # flash_proxy_status_port: 20292
-    # metrics_port: 8234
-    # deploy_dir: deploy/tiflash-9000
-    # data_dir: deploy/tiflash-9000/data
-    # log_dir: deploy/tiflash-9000/log
-    # numa_node: "0,1"
-    # # Config is used to overwrite the `server_configs.tiflash` values
-    #  config:
-    #    logger:
-    #      level: "info"
-    #  learner_config:
-    #    log-level: "info"
+  # ssh_port: 22
+  # tcp_port: 9000
+  # http_port: 8123
+  # flash_service_port: 3930
+  # flash_proxy_port: 20170
+  # flash_proxy_status_port: 20292
+  # metrics_port: 8234
+  # deploy_dir: /tidb-deploy/tiflash-9000
+  # data_dir: /tidb-data/tiflash-9000
+  # log_dir: /tidb-deploy/tiflash-9000/log
+  # numa_node: "0,1"
+  # # Config is used to overwrite the `server_configs.tiflash` values
+  # config:
+  #   logger.level: "info"
+  # learner_config:
+  #   log-level: "info"
+  #  - host: 10.0.1.15
+  #  - host: 10.0.1.16
+
+# pump_servers:
+#   - host: 10.0.1.17
+#     ssh_port: 22
+#     port: 8250
+#     deploy_dir: "/tidb-deploy/pump-8249"
+#     data_dir: "/tidb-data/pump-8249"
+#     log_dir: "/tidb-deploy/pump-8249/log"
+#     numa_node: "0,1"
+#     # Config is used to overwrite the `server_configs.drainer` values
+#     config:
+#       gc: 7
+#   - host: 10.0.1.18
+#   - host: 10.0.1.19
+# drainer_servers:
+#   - host: 10.0.1.17
+#     port: 8249
+#     data_dir: "/tidb-data/drainer-8249"
+#     # if drainer doesn't have checkpoint, use initial commitTS to initial checkpoint
+#     # will get a latest timestamp from pd if setting to be -1 (default -1)
+#     commit_ts: -1
+#     deploy_dir: "/tidb-deploy/drainer-8249"
+#     log_dir: "/tidb-deploy/drainer-8249/log"
+#     numa_node: "0,1"
+#     # Config is used to overwrite the `server_configs.drainer` values
+#     config:
+#       syncer.db-type: "mysql"
+#       syncer.to.host: "127.0.0.1"
+#       syncer.to.user: "root"
+#       syncer.to.password: ""
+#       syncer.to.port: 3306
+#   - host: 10.0.1.19
+
 monitoring_servers:
   - host: 10.0.1.4
+    # ssh_port: 22
+    # port: 9090
+    # deploy_dir: "/tidb-deploy/prometheus-8249"
+    # data_dir: "/tidb-data/prometheus-8249"
+    # log_dir: "/tidb-deploy/prometheus-8249/log"
+
 grafana_servers:
   - host: 10.0.1.4
+    # port: 3000
+    # deploy_dir: /tidb-deploy/grafana-3000
+
 alertmanager_servers:
   - host: 10.0.1.4
+    # ssh_port: 22
+    # web_port: 9093
+    # cluster_port: 9094
+    # deploy_dir: "/tidb-deploy/alertmanager-9093"
+    # data_dir: "/tidb-data/alertmanager-9093"
+    # log_dir: "/tidb-deploy/alertmanager-9093/log"
+
 ```
 
 ### Scenario 2: Single machine with multiple instances
@@ -452,22 +523,39 @@ You need to fill in the result in the configuration file (as described in the St
 
 - Configuration optimization for TiKV
 
-    - Make `readpool` thread pool self-adaptive. Configure the `readpool.unified.max-thread-count` parameter to make `readpool.storage` and `readpool.coprocessor` share a unified thread pool, and also enable self-adaptive switches for them. The calculation formula is as follows:
-  
+    - Make `readpool` thread pool self-adaptive. Configure the `readpool.unified.max-thread-count` parameter to make `readpool.storage` and `readpool.coprocessor` share a unified thread pool, and also enable self-adaptive switches for them.
+
+        - Enable `readpool.storage` and `readpool.coprocessor`:
+
+            ```yaml
+            readpool.storage.use-unified-pool: true
+            readpool.coprocessor.use-unified-pool: true
+            ```
+
+        - The calculation formula is as follows:
+
         ```
         readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
         ```
 
-    - Make storage CF (all RocksDB column families) memory self-adaptive. Configure the `storage.block-cache.capacity` parameter to automatically balance memory usage among CFs. The calculation formula is as follows:
-   
-        ```
-        storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
-        ```
+    - Make storage CF (all RocksDB column families) memory self-adaptive. Configure the `storage.block-cache.capacity` parameter to automatically balance memory usage among CFs.
 
-    - If multiple TiKV instances are deployed on the same physical disk, you need to modify the `capacity` parameter in `conf/tikv.yml`:
-   
+        - The default setting of the `storage.block-cache` parameter is CF self-adaptive. You do not need to modify this configuration:
+
+            ```yaml
+            storage.block-cache.shared: true
+            ```
+
+        - The calculation formula is as follows:
+
+            ```
+            storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
+            ```
+
+    - If multiple TiKV instances are deployed on the same physical disk, you need to add the `capacity` parameter in the TiKV configuration:
+
         ```
-        raftstore.capactiy = the total disk capacity / the number of TiKV instances
+        raftstore.capacity = the total disk capacity / the number of TiKV instances
         ```
 
 - Label scheduling configuration
@@ -514,7 +602,8 @@ You need to fill in the result in the configuration file (as described in the St
 
 > **Note:**
 >
-> You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines. You can customize the user or keep it the same as the user of the Control Machine.
+> - You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines. You can customize the user or keep it the same as the user of the Control Machine.
+> - By default, `deploy_dir` of each component uses `<deploy_dir>/<components_name>-<port>` in global configuration. For example, if you specify the `tidb` port as `4001`, then the TiDB component's default `deploy_dir` is `tidb-deploy/tidb-4001`. Therefore, when you specify non-default ports in multi-instance scenarios, you do not need to specify `deploy_dir`.
 
 > **Note:**
 >
@@ -531,8 +620,8 @@ cat topology.yaml
 ```
 
 ```yaml
-# Global variables are applied to all deployments and as the default value of
-# them if the specific deployment value missing.
+# # Global variables are applied to all deployments and as the default value of
+# # them if the specific deployment value missing.
 
 global:
   user: "tidb"
@@ -725,8 +814,9 @@ cat topology.yaml
 ```
 
 ```yaml
-# Global variables are applied to all deployments and as the default value of
-# them if the specific deployment value missing.
+# # Global variables are applied to all deployments and as the default value of
+# # them if the specific deployment value missing.
+
 global:
   user: "tidb"
   ssh_port: 22
