@@ -6,7 +6,9 @@ category: reference
 
 # Date and Time Types
 
-TiDB supports the following data types to store temporal values: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`, and `YEAR`. Each of these types has its own range of valid values, and uses a zero value to indicate that it is an invalid value. In addition, the `TIMESTAMP` and `DATETIME` types can automatically generate new time values on modification.
+TiDB supports all MySQL date and time data types to store temporal values: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`, and `YEAR`. For more information, see [Date and Time Data Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html).
+
+Each of these types has its range of valid values, and uses a zero value to indicate that it is an invalid value. In addition, the `TIMESTAMP` and `DATETIME` types can automatically generate new time values on modification.
 
 When dealing with date and time value types, note:
 
