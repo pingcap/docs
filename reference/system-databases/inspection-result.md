@@ -6,9 +6,9 @@ category: reference
 
 # INSPECTION_RESULT
 
-TiDB has some built-in diagnosis rules for detecting faults and hidden dangers in the system.
+TiDB has some built-in diagnosis rules for detecting faults and hidden issues in the system.
 
-This diagnosis feature can help you quickly find problems and reduce your repetitive manual work. You can use the `select * from information_schema.inspection_result` statement to trigger the internal diagnosis.
+The `INSPECTION_RESULT` diagnosis feature can help you quickly find problems and reduce your repetitive manual work. You can use the `select * from information_schema.inspection_result` statement to trigger the internal diagnosis.
 
 The structure of the `information_schema.inspection_result` diagnosis result table `information_schema.inspection_result` is as follows:
 
@@ -36,23 +36,23 @@ desc inspection_result;
 
 Field description:
 
-* `RULE`: The name of the diagnosis rules. Below are the currently available rules:
+* `RULE`: The name of the diagnosis rule. Currently, the following rules are available:
     * `config`: The consistency check of configuration. If the same configuration is inconsistent on different instances, a `warning` diagnosis result is generated.
     * `version`: The consistency check of version. If the same version is inconsistent on different instances, a `warning` diagnosis result is generated.
     * `current-load`: If the current system load is too high, the corresponding `warning` diagnosis result is generated.
-    * `critical-error`: Each module of the system defines a serious error. If a certain serious error exceeds the threshold within the corresponding time period, a warning diagnosis result is generated.
-    * `threshold-check`: The diagnosis system determines thresholds of many metrics. If a threshold is exceeded, the corresponding diagnosis information is generated.
-* `ITEM`: Each rule diagnoses different items. This field indicates the specific diagnosis items under the corresponding rule.
-* `TYPE`: The type of the diagnosis. The optional values are `tidb`, `pd`, and `tikv`.
+    * `critical-error`: Each module of the system defines critical errors. If a critical error exceeds the threshold within the corresponding time period, a warning diagnosis result is generated.
+    * `threshold-check`: The diagnosis system checks the thresholds of a large number of metrics. If a threshold is exceeded, the corresponding diagnosis information is generated.
+* `ITEM`: Each rule diagnoses different items. This field indicates the specific diagnosis items corresponding to each rule.
+* `TYPE`: The instance type of the diagnosis. The optional values are `tidb`, `pd`, and `tikv`.
 * `INSTANCE`: The specific address of the diagnosed instance.
-* `VALUE`: The value obtained for this diagnosis item.
-* `REFERENCE`: The reference value (threshold value) for this diagnosis item. If the difference between `VALUE` and the threshold is large, the corresponding diagnosis information is generated.
+* `VALUE`: The value of a specific diagnosis item.
+* `REFERENCE`: The reference value (threshold value) for this diagnosis item. If the difference between `VALUE` and the threshold is very large, the corresponding diagnosis information is generated.
 * `SEVERITY`: The severity level. The optional values are `warning` and `critical`.
-* `DETAILS`: Diagnosis details, which might contain SQL statement or document links for further investigation.
+* `DETAILS`: Diagnosis details, which might also contain SQL statement(s) or document links for further diagnosis.
 
 ## Diagnosis example
 
-Diagnose the problem with the current time of the cluster.
+Diagnose issues currently existing in the cluster.
 
 {{< copyable "sql" >}}
 
@@ -99,13 +99,13 @@ SEVERITY  | warning
 DETAILS   | max duration of 172.16.5.40:20151 tikv rocksdb-write-duration was too slow
 ```
 
-You can have the following findings from the above diagnosis result:
+The following issues can be detected from the diagnosis result above:
 
-* The first line indicates that TiDB's `log.slow-threshold` configuration value is `0`, which might affect performance.
-* The second line indicates that two different TiDB versions exist in the cluster.
-* The third and fourth lines indicate that the TiKV write delay is too long, and the expected delay is no more than 0.1s. The actual delay is far beyond the expectation.
+* The first row indicates that TiDB's `log.slow-threshold` value is configured to `0`, which might affect performance.
+* The second row indicates that two different TiDB versions exist in the cluster.
+* The third and fourth rows indicate that the TiKV write delay is too long. The expected delay is no more than 0.1 second, while the actual delay is far longer than expected.
 
-Diagnose the cluster problem from "2020-03-26 00:03:00" to "2020-03-26 00:08:00". To specify the time range, you need to use the SQL Hint of `/*+ time_range() */`. See the following query example:
+You can also diagnose issues existing within a specified range, such as from "2020-03-26 00:03:00" to "2020-03-26 00:08:00". To specify the time range, use the SQL Hint of `/*+ time_range() */`. See the following query example:
 
 {{< copyable "sql" >}}
 
@@ -134,10 +134,10 @@ SEVERITY  | warning
 DETAILS   | max duration of 172.16.5.40:10089 tidb get-token-duration is too slow
 ```
 
-You can have the following findings from the above result:
+The following issues can be detected from the diagnosis result above:
 
-* The first line indicates that the `172.16.5.40:4009` TiDB instance is restarted at `2020/03/26 00:05:45.670`.
-* The second line indicates that the maximum `get-token-duration` time of the `172.16.5.40:10089` TiDB instance is 0.234s, but the expected time is less than 0.001s.
+* The first row indicates that the `172.16.5.40:4009` TiDB instance is restarted at `2020/03/26 00:05:45.670`.
+* The second row indicates that the maximum `get-token-duration` time of the `172.16.5.40:10089` TiDB instance is 0.234s, but the expected time is less than 0.001s.
 
 You can also specify conditions, for example, to query the `critical` level diagnosis results:
 
@@ -181,9 +181,9 @@ select * from inspection_rules where type='inspection';
 
 ### `config` diagnosis rule
 
-The `config` diagnosis rule executes the following two diagnosis rules by querying the `CLUSTER_CONFIG` system table:
+The following two diagnosis rules are executed as the `config` diagnosis by querying the `CLUSTER_CONFIG` system table:
 
-* Check whether the configuration values of the same component are consistent. Not all configuration items has this consistency check. Below is a white list of consistency check:
+* Check whether the configuration values of the same component are consistent. Not all configuration items has this consistency check. The white list of consistency check is shown below:
 
     ```go
     // The whitelist of the TiDB configuration consistency check
@@ -247,9 +247,9 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 ### `critical-error` diagnosis rule
 
-The `critical-error` diagnosis rule executes the following two diagnosis rules:
+The following two diagnosis rules are executed as the the `critical-error` diagnosis:
 
-* By querying the related monitoring system tables in `metrics_schema`, detect whether the cluster has the following serious errors:
+* Detect whether the cluster has the following errors by querying the related monitoring system tables in the metrics schema:
 
     |  Component  | Error name | Monitoring table | Error description |
     |  ----  | ----  |  ----  |  ----  |
@@ -261,11 +261,11 @@ The `critical-error` diagnosis rule executes the following two diagnosis rules:
     | TiKV | channel-is-full | tikv_channel_full_total_count | The "channel full" error occurs in TiKV. |
     | TiKV | tikv_engine_write_stall | tikv_engine_write_stall | The "stall" error occurs in TiKV. |
 
-* By querying the `metrics_schema.up` monitoring table and the `CLUSTER_LOG` system table, check if any component is restarted.
+* Check if any component is restarted by querying the `metrics_schema.up` monitoring table and the `CLUSTER_LOG` system table.
 
 ### `threshold-check` diagnosis rule
 
-The `threshold-check` diagnosis rule checks whether the following metrics in the cluster exceed the threshold by querying the related monitoring system tables in `metrics_schema`:
+The `threshold-check` diagnosis rule checks whether the following metrics in the cluster exceed the threshold by querying the related monitoring system tables in the metrics schema:
 
 |  Component  | Monitoring metric | Monitoring table | Expected value |  Description  |
 |  :----  | :----  |  :----  |  :----  |  :----  |
@@ -303,4 +303,4 @@ In addition, this rule also checks whether the following thread CPU usage of a T
 * storage-readpool-low-cpu
 * split-check-cpu
 
-The built-in diagnosis rules are constantly being improved. If you can think of some other diagnosis rules, welcome to create a PR or an issue in the [`tidb` repository](https://github.com/pingcap/tidb).
+The built-in diagnosis rules are constantly being improved. If you have more diagnosis rules, welcome to create a PR or an issue in the [`tidb` repository](https://github.com/pingcap/tidb).
