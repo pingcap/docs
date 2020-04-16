@@ -203,9 +203,10 @@ For details, see [Software and Hardware Recommendations](/how-to/deploy/hardware
 
 ### Install and deploy
 
-#### Deploy TiDB using TiDB Ansible (recommended)
+#### Deploy TiDB for production (recommended)
 
-See [Ansible Deployment](/how-to/deploy/orchestrated/ansible.md).
+- [TiUP Deployment](how-to/deploy/orchestrated/tiup.md)
+- [Ansible Deployment](/how-to/deploy/orchestrated/ansible.md)
 
 ##### Why the modified `toml` configuration for TiKV/PD does not take effect?
 
