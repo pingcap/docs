@@ -36,11 +36,11 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `temp-storage-quota`
 
-+ Specifies the storage quota for the storage in `tmp-storage-path`.
++ Specifies the quota for the storage in `tmp-storage-path`. The unit is byte.
 + When a single SQL statement uses a temporary disk and the total volume of the temporary disk of the TiDB server exceeds this configuration value, the current SQL operation is cancelled and the `Out of Global Storage Quota!` error is returned.
 + When the value of this configuration is smaller than `0`, the above check and limit do not apply.
 + Default value: `-1`
-+ When the remaining available storage in `tmp-storage-path` is lower than the value defined by `temp-storage-quota`, the TiDB server reports an error when it is started and exits.
++ When the remaining available storage in `tmp-storage-path` is lower than the value defined by `temp-storage-quota`, the TiDB server reports an error when it is started, and exits.
 
 ### `oom-action`
 
