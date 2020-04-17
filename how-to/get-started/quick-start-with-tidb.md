@@ -3,6 +3,7 @@ title: Quick Start with TiDB
 summary: Learn how to quick start your first TiDB cluster and try out the features.
 category: how-to
 ---
+
 # Quick Start with TiDB
 
 This document describes how to try out TiDB, a distributed SQL database. You can choose any of the following three methods to start your first TiDB cluster:
