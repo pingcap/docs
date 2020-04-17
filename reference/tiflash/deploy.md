@@ -59,7 +59,7 @@ This section describes how to install and deploy TiFlash in the following scenar
 
 For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading an offline installation package. The steps are as follows:
 
-1. Download TiDB Ansible corresponding to the tag of the TiDB 3.1 version:
+1. Download TiDB Ansible with the specified tag corresponding to the TiDB 3.1 version:
 
     {{< copyable "shell-regular" >}}
 
@@ -67,7 +67,7 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
     git clone -b $tag https://github.com/pingcap/tidb-ansible.git
     ```
 
- 2. Execute the following `local prepare` command to download the binary files of TiDB, TiKV, PD components:
+ 2. Download the binary files of TiDB, TiKV, PD components:
 
     {{< copyable "shell-regular" >}}
 
