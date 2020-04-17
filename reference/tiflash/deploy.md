@@ -67,7 +67,7 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
     git clone -b $tag https://github.com/pingcap/tidb-ansible.git
     ```
 
- 2. Download the binary files of TiDB, TiKV, PD components:
+ 2. Download the binary files of TiDB, TiKV, PD, and other components:
 
     {{< copyable "shell-regular" >}}
 
