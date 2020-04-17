@@ -6,7 +6,13 @@ category: reference
 
 # Upgrade TiFlash Nodes
 
+> **Note:**
+>
+> To upgrade TiFlash from the Pre-RC version to a later version, contact [PingCAP](mailto:info@pingcap.com) for more information and help.
+
 Currently, you cannot upgrade TiFlash by running the `tiup cluster upgrade` command. Instead, take the following steps to upgrade TiFlash:
+
+Before the upgrade, make sure that the cluster is started. To upgrade TiFlash nodes, take the following steps:
 
 1. Refer to [Scale in a TiFlash node](/how-to/scale/with-tiup.md#sclale-in-a-tiflash-node), and scale in all the TiFlash nodes.
 
