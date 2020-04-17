@@ -6,9 +6,9 @@ category: reference
 
 # Upgrade TiFlash Nodes
 
-Currently, TiFlash does not support upgrading using `tiup cluster upgrade`. To upgrade TiFlash, take the following steps:
+Currently, you cannot upgrade TiFlash by running the `tiup cluster upgrade` command. Instead, take the following steps to upgrade TiFlash:
 
-1. Refer to [Scale in a TiFlash node](/how-to/scale/with-tiup.md#sclale-in-a-tiflash-node), and scale in all the nodes in TiFlash.
+1. Refer to [Scale in a TiFlash node](/how-to/scale/with-tiup.md#sclale-in-a-tiflash-node), and scale in all the TiFlash nodes.
 
 2. Run the upgrade command:
 
