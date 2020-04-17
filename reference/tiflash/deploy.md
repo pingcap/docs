@@ -59,18 +59,23 @@ This section describes how to install and deploy TiFlash in the following scenar
 
 For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading an offline installation package. The steps are as follows:
 
-1. Download the offline package of your desired version and unzip it.
+1. Download TiDB Ansible with the specified tag corresponding to the TiDB 3.1 version:
 
-    - If you are using TiDB 3.1 rc version, execute the following command:
+    {{< copyable "shell-regular" >}}
 
-        {{< copyable "shell-regular" >}}
+    ```shell
+    git clone -b $tag https://github.com/pingcap/tidb-ansible.git
+    ```
 
-        ```shell
-        curl -o tidb-ansible-tiflash-3.1-rc.tar.gz https://download.pingcap.org/tidb-ansible-tiflash-3.1-rc.tar.gz &&
-        tar zxvf tidb-ansible-tiflash-3.1-rc.tar.gz
-        ```
+ 2. Download the binary files of TiDB, TiKV, PD, and other components:
 
-2. Edit the `inventory.ini` configuration file. In addition to [configuring for TiDB cluster deployment](/how-to/deploy/orchestrated/ansible.md#step-9-edit-the-inventoryini-file-to-orchestrate-the-tidb-cluster), you also need to specify the IPs of your TiFlash servers under the `[tiflash_servers]` section (currently only IPs are supported; domain names are not supported).
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    ansible-playbook local_prepare.yml
+    ```
+
+3. Edit the `inventory.ini` configuration file. In addition to [configuring for TiDB cluster deployment](/how-to/deploy/orchestrated/ansible.md#step-9-edit-the-inventoryini-file-to-orchestrate-the-tidb-cluster), you also need to specify the IPs of your TiFlash servers under the `[tiflash_servers]` section (currently only IPs are supported; domain names are not supported).
 
     If you want to customize the deployment directory, configure the `data_dir` parameter. If you want multi-disk deployment, separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
 
@@ -81,10 +86,10 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
     192.168.1.1 data_dir=/data1/tiflash/data,/data2/tiflash/data
     ```
 
-3. Complete the [remaining steps](/how-to/deploy/orchestrated/ansible.md#step-10-edit-variables-in-the-inventoryini-file) of the TiDB Ansible deployment process.
+4. Complete the [remaining steps](/how-to/deploy/orchestrated/ansible.md#step-10-edit-variables-in-the-inventoryini-file) of the TiDB Ansible deployment process.
 
-4. To verify that TiFlash has been successfully deployed:
-    
+5. To verify that TiFlash has been successfully deployed:
+
     1. Execute the `pd-ctl store http://your-pd-address` command in [pd-ctl](/reference/tools/pd-control.md) (`resources/bin` in the tidb-ansible directory includes the pd-ctl binary file).
     2. Observe that the status of the deployed TiFlash instance is "Up".
 
