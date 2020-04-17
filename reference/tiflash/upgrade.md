@@ -8,7 +8,7 @@ category: reference
 
 > **Note:**
 >
-> To upgrade from the TiFlash Pre-RC version to a later version, contact [PingCAP](mailto:info@pingcap.com) for more information and help.
+> To upgrade TiFlash from the Pre-RC version to a later version, contact [PingCAP](mailto:info@pingcap.com) for more information and help.
 
 Before the upgrade, make sure that the cluster is started. To upgrade TiFlash nodes, take the following steps:
 
