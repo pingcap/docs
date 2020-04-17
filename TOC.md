@@ -36,6 +36,7 @@
 + How-to
   + Get Started
     + Start a Cluster
+      - [Quick Start with TiDB](/how-to/get-started/quick-start-with-tidb.md)
       - [From Binary](/how-to/get-started/deploy-tidb-from-binary.md)
       - [From Homebrew](/how-to/get-started/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](/how-to/get-started/deploy-tidb-from-dbdeployer.md)
