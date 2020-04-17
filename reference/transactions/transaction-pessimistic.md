@@ -78,7 +78,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
     The autocommit `SELECT FOR UPDATE` statement does not wait for lock, either.
 
-6. The data read by `EMBEDDED SELECT` in the statement is locked.
+6. The data read by `EMBEDDED SELECT` in the statement is not locked.
 
 ## FAQ
 
