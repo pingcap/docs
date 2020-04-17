@@ -205,7 +205,7 @@ For details, see [Software and Hardware Recommendations](/how-to/deploy/hardware
 
 #### Deploy TiDB for production (recommended)
 
-- [TiUP Deployment](/how-to/deploy/orchestrated/tiup.md)
+See [TiUP Deployment](/how-to/deploy/orchestrated/tiup.md).
 
 ##### Why the modified `toml` configuration for TiKV/PD does not take effect?
 
