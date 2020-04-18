@@ -1370,7 +1370,7 @@ v3.1.0-rc                 2020-04-02T23:43:17.456327834+08:00  linux/amd64,darwi
 v4.0.0-beta               2020-03-13T12:43:55.508190493+08:00  linux/amd64,darwin/amd64
 v4.0.0-beta.1             2020-03-13T12:30:08.913759828+08:00  linux/amd64,darwin/amd64
 v4.0.0-beta.2             2020-03-18T22:52:00.830626492+08:00  linux/amd64,darwin/amd64
-v4.0.0-rc                 2020-04-09T00:10:32+08:00            linux/amd64,darwin/amd64
+v4.0.0-rc      YES        2020-04-09T00:10:32+08:00            linux/amd64,darwin/amd64
 nightly                   2020-04-10T08:42:23+08:00            darwin/amd64,linux/amd64
 ```
 
