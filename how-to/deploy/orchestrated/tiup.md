@@ -561,7 +561,7 @@ You need to fill in the result in the configuration file (as described in the St
 - Label scheduling configuration
 
     Because multiple TiKV instances are deployed on a single machine, in order to avoid losing 2 replicas of the default 3 replicas in the Region Group during machine downtime which causes cluster unavailability, you can use labels to implement intelligent scheduling of PD.
- 
+
     - TiKV configuration
 
         Configure the same host-level label information on the same physical machines:
@@ -1185,7 +1185,7 @@ To stop the `tidb-test` cluster, run the following command:
 {{< copyable "shell-regular" >}}
 
 ```shell
-cluster stop tidb-test
+tiup cluster stop tidb-test
 ```
 
 If the output log includes ```Stopped cluster `tidb-test` successfully```, then the cluster is successfully stopped.
