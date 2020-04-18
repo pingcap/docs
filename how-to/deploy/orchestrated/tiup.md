@@ -939,7 +939,7 @@ tiup cluster deploy tidb-test v4.0.0-rc ./topology.yaml --user root -i /home/roo
 In the above command:
 
 - The name of the TiDB cluster deployed through TiUP cluster is `tidb-test`.
-- The deployment version is `v4.0.0-rc`. For other supported versions, see [How to view the TiDB versions supported by TiUP](how-to-view-the-tidb-versions-supported-by-tiup).
+- The deployment version is `v4.0.0-rc`. For other supported versions, see [How to view the TiDB versions supported by TiUP](#how-to-view-the-tidb-versions-supported-by-tiup).
 - The initialization configuration file is `topology.yaml`.
 - Log in to the target machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 
