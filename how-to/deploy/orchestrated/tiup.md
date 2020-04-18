@@ -1376,7 +1376,7 @@ nightly                   2020-04-10T08:42:23+08:00            darwin/amd64,linu
 
 ### How to view the TiDB components supported by TiUP 
 
-Execute the following command to view the components and versions that TiUP supports managing:
+Execute the following command to view the TiDB components that TiUP supports managing:
 
 ```shell
 tiup list
