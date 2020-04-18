@@ -1393,7 +1393,7 @@ In the following output:
 Available components (Last Modified: 2020-02-27T15:20:35+08:00):
 Name               Installed                                                                                                             Platforms                 Description
 ----               ---------                                                                                                             ---------                 -----------
-tidb               YES(v3.0.12,v4.0.0-rc)                                                                                            darwin/amd64,linux/amd64  TiDB is an open source distributed HTAP database compatible with the MySQL protocol
+tidb               YES(v4.0.0-rc)                                                                                                    darwin/amd64,linux/amd64  TiDB is an open source distributed HTAP database compatible with the MySQL protocol
 tikv               YES(v3.0.12,v4.0.0-rc)                                                                                            darwin/amd64,linux/amd64  Distributed transactional key-value database, originally created to complement TiDB
 pd                 YES(v3.0.12,v4.0.0-rc)                                                                                            darwin/amd64,linux/amd64  PD is the abbreviation for Placement Driver. It is used to manage and schedule the TiKV cluster
 playground         YES(v0.0.5)                                                                                                           darwin/amd64,linux/amd64  Bootstrap a local TiDB cluster
