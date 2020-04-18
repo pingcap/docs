@@ -1374,7 +1374,7 @@ v4.0.0-rc                 2020-04-09T00:10:32+08:00            linux/amd64,darwi
 nightly                   2020-04-10T08:42:23+08:00            darwin/amd64,linux/amd64
 ```
 
-### How to view components and versions supported by TiUP 
+### How to view the TiDB components supported by TiUP 
 
 Execute the following command to view the components and versions that TiUP supports managing:
 
