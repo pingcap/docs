@@ -8,13 +8,13 @@ category: how-to
 
 This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following three methods to start your first TiDB cluster:
 
-- [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
-- [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
-- [Deploy a quasi-production test environment on a single machine using TiUP cluster](#deploya-quasi-production-test-environment-on-a-single-machine-using-tiup-cluster)
-
 > **Note:**
 >
 > For production environments, **do not** deploy TiDB with the following three methods. Instead, it is recommended that you [deploy TiDB using TiUP](/how-to/deploy/orchestrated/tiup.md).
+
+- [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
+- [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
+- [Deploy a quasi-production test environment on a single machine using TiUP cluster](#deploya-quasi-production-test-environment-on-a-single-machine-using-tiup-cluster)
 
 ## Try out TiDB with one click using TiDB-Wasm
 
@@ -42,15 +42,15 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 2. Declare the global environment variable:
 
+    > **Note:**
+    >
+    > After the installation, TiUP gives the absolute path of the corresponding `profile` file. You need to modify the following `source` command according to the path.
+
     {< copyable "shell-regular" >}}
 
     ```shell
     source .bash_profile
     ``` 
-
-    > **Note:**
-    >
-    > After the installation, TiUP gives the absolute path of the corresponding `profile` file. You need to modify the following `source` command according to the path.
 
 3. Install TiUP Playground:
 
