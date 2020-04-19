@@ -14,7 +14,7 @@ This document describes how to try out TiDB, a distributed SQL database, in a fe
 
 > **Note:**
 >
-> It is not recommended to deploy TiDB for production environments with the above three methods. Instead, you can [deploy TiDB using TiUP](/how-to/deploy/orchestrated/tiup.md).
+> For production environments, **do not** deploy TiDB with the following three methods. Instead, it is recommended that you [deploy TiDB using TiUP](/how-to/deploy/orchestrated/tiup.md).
 
 ## Try out TiDB with one click using TiDB-Wasm
 
@@ -50,7 +50,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     > **Note:**
     >
-    > After the installation, TiUP gives the absolute path of the corresponding `profile` file. You need to modify the above `source` command according to the path.
+    > After the installation, TiUP gives the absolute path of the corresponding `profile` file. You need to modify the following `source` command according to the path.
 
 3. Install TiUP Playground:
 
