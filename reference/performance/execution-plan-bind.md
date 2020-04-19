@@ -89,7 +89,7 @@ After automatic binding creation is enabled, the historical SQL statements in th
 
 ### Automatically evolve binding
 
-As data updates, the previously bound execution plan might no longer be optimal. The automatic binding evolution feature can optimize the bound execution plan.
+As data updates, the previously bound execution plan might no longer be optimal. The automatic binding evolution feature can optimize the bound execution plan. Use the following statement to enable automatic binding evolution:
 
 {{< copyable "sql" >}}
 
@@ -99,7 +99,41 @@ set global tidb_evolve_plan_baselines = on;
 
 The default value of `tidb_evolve_plan_baselines` is `off`.
 
-After the automatic binding evolution feature is enabled, if the optimal execution plan selected by the optimizer is not among the bound execution plans, the optimizer marks the plan as an execution plan that waits for verification. Every `bind-info-lease` (the default value is `3s`), an execution plan to be verified is selected and compared with a bound execution plan with the least cost, in terms of the actual execution time. If the plan to be verified is better, it is marked as a usable binding.
+> **Note:**
+>
+> The global variable doesn't take effect in the current session. It only takes effect in a newly created session. To enable automatic binding evolution in the current session, change the key word `global` to `session`.
+
+After the automatic binding evolution feature is enabled, if the optimal execution plan selected by the optimizer is not among the bound execution plans, the optimizer marks the plan as an execution plan that waits for verification. Every `bind-info-lease` (the default value is `3s`), an execution plan to be verified is selected and compared with a bound execution plan with the least cost, in terms of the actual execution time. If the plan to be verified is better, it is marked as a usable binding. The following use case describes the preceding process.
+
+Let table `t` be defined as:
+
+{{< copyable "sql" >}}
+
+```sql
+create table t(a int, b int, key(a), key(b));
+```
+
+Perform the following query on table `t`:
+
+{{< copyable "sql" >}}
+
+```sql
+select * from t where a < 100 and b < 100;
+```
+
+Rows in the table that satisfy condition `a < 100` are rare. However, for some reasons, the optimizer mistakenly chooses the full table scan instead of the optimal execution plan that uses index `a`. Users can use the following statement to create a binding first:
+
+{{< copyable "sql" >}}
+
+```sql
+create global binding for select * from t where a < 100 and b < 100 using select * from t use index(a) where a < 100 and b < 100;
+```
+
+When the previous query is executed again, the optimizer chooses index `a` under the interference of the binding created previously to reduce the query time.
+
+Assuming that as insertions and deletions are performed on the table, the number of rows that satisfy condition `a < 100` grows while the number of rows that satisfy condition `b < 100` not, still using index `a` under the binding's interference might no longer be optimal.
+
+The binding evolution can address this kind of problems. When the optimizer senses changes in table data, it generates an execution plan against the query that uses index `b`. However, because of the binding's presence, this query plan is not adopted and executed. Instead, it is stored in the backend evolution lists. During the evolution process, if it is verified that the time spent on executing the query plan is significantly shorter than that using index `a` (that is the current binding's execution plan), index `b` is added into available binding lists. After this process, when the query is executed again, the optimizer first generates the execution plan that uses index `b` and makes sure that it is in the binding lists. Then the optimizer adopts and executes it to reduce the query time after data updates.
 
 To reduce the impact that the automatic evolution has on clusters, use the following configurations:
 
