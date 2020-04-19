@@ -1,12 +1,12 @@
 ---
 title: Quick Start with TiDB
-summary: Learn how to quick start your first TiDB cluster and try out the features.
+summary: Learn how to quickly start your first TiDB cluster and try out the features.
 category: how-to
 ---
 
 # Quick Start with TiDB
 
-This document describes how to try out TiDB, a distributed SQL database. You can choose any of the following three methods to start your first TiDB cluster:
+This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following three methods to start your first TiDB cluster:
 
 - [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
 - [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
@@ -21,9 +21,9 @@ This document describes how to try out TiDB, a distributed SQL database. You can
 - Scenario: Have a first taste on the basic features of TiDB, such as syntax and compatibility.
 - Time required: Instant
 
-TiDB-Wasm is a TiDB cluster running in the browser. You can use TiDB simply by opening a web page and perform basic operations such as executing SQL statements and verifying compatibility.
+TiDB-Wasm is a TiDB cluster running in the browser. With TiDB-Wasm, you can use TiDB simply by opening a web page and perform basic operations such as executing SQL statements and verifying compatibility.
 
-Click to [try TiDB-Wasm](https://tour.pingcap.com). The TiDB cluster will be built in the memory, expectedly in around 10 seconds.
+Click to try TiDB-Wasm: <https://tour.pingcap.com>. The TiDB cluster will be built in the memory, which takes about 10 seconds.
 
 ## Deploy a local test environment using TiUP Playground
 
@@ -68,7 +68,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     tiup update playground
     ```
 
-4. Execute the following command in the current session to start the cluster:
+4. Start the cluster in the current session:
 
     - If you want to start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, and 1 PD instance, run the following command:
 
@@ -78,7 +78,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground
         ```
     
-    - If you want to specify the version and the number of the component instances, run the following command:
+    - If you want to specify the TiDB version and the number of the instances of each component, run a command like this:
 
         {{< copyable "shell-regular" >}}
 
@@ -88,9 +88,9 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     
         The command downloads a v4.0.0-rc cluster to the local machine and starts it.
 
-        `--monitor` means that the monitoring component will also be deployed.
+        `--monitor` means that the monitoring component is also deployed.
 
-        The execution results show the access methods of the cluster:
+        This command returns the access methods of the cluster:
 
         ```log
         CLUSTER START SUCCESSFULLY, Enjoy it ^-^
@@ -124,7 +124,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup clean --all
         ```
 
-## Deploy a quasi-production test environment on a single machine using TiUP cluster
+## Set up a quasi-production environment on a single machine using TiUP cluster
 
 - Scenario: Experience a smallest TiDB cluster with the complete topology and simulate the production deployment steps on a single Linux server.
 - Time required: 10 minutes
@@ -136,11 +136,11 @@ This section describes how to deploy a TiDB cluster using a YAML file of the sma
 Prepare a deployment machine that meets the following requirements:
 
 - CentOS 7.3 or a later version is installed
-- The Linux OS has access to the Internet, which can be used to download TiDB and related software installation packages
+- The Linux OS has access to the Internet, which is required to download TiDB and related software installation packages
 
-The smallest TiDB topology is as follows:
+The smallest TiDB cluster topology is as follows:
 
-| Instance | Number | IP | Configuration |
+| Instance | Count | IP | Configuration |
 |:-- | :-- | :-- | :-- |
 | TiKV | 3 | 10.0.1.1 <br> 10.0.1.1 <br> 10.0.1.1 | Avoid conflict between the port and the directory |
 | TiDB | 1 | 10.0.1.1 | The default port <br> Global directory configuration |
@@ -150,8 +150,8 @@ The smallest TiDB topology is as follows:
 
 Other requirements for the deployment machine:
 
-- Know the root user password
-- Stop the firewall service of the deployment machine, or open the port needed by the TiDB cluster nodes
+- The `root` user and its password is required
+- [Stop the firewall service of the deployment machine](/how-to/deploy/orchestrated/tiup.md#how-to-stop-the-firewall-service-of-deployment-machines), or open the port needed by the TiDB cluster nodes
 - Currently, TiUP only supports deploying TiDB on the x86_64 (AMD64) architecture (the ARM architecture will be supported in TiDB 4.0 GA):
 
     - It is recommended to use CentOS 7.3 or later versions on AMD64
@@ -161,7 +161,7 @@ Other requirements for the deployment machine:
 
 > **Note:**
 >
-> You can log in to the host as any ordinary user or the root user of the Linux OS. The following steps use the root user as an example.
+> You can log in to the deployment machine as a regular user or the `root` user. The following steps use the `root` user as an example.
 
 1. Download and install TiUP:
 
@@ -187,7 +187,7 @@ Other requirements for the deployment machine:
     tiup update cluster
     ```
 
-4. Use the root user access to increase the connection limit of the `sshd` service. This is because TiUP needs to simulate deployment on multiple machines.
+4. Use the `root` user privilege to increase the connection limit of the `sshd` service. This is because TiUP needs to simulate deployment on multiple machines.
 
     1. Modify `/etc/ssh/sshd_config`, and set `MaxSessions` to `20`.
     2. Restart the `sshd` service:
@@ -200,7 +200,7 @@ Other requirements for the deployment machine:
 
 5. Create and start the cluster:
 
-    Edit the configuration file according to the following template, and name it as `topology.yaml`:
+    Edit the configuration file according to the following template, and name it as `topo.yaml`:
 
     {{< copyable "shell-regular" >}}
 
@@ -259,7 +259,7 @@ Other requirements for the deployment machine:
      - host: 10.0.1.1
     ```
 
-    - `user: "tidb"`: Use the `tidb` system user to perform the internal management of the cluster. By default, use port 22 to log in to the target machine via SSH.
+    - `user: "tidb"`: Use the `tidb` system user (automatically created during deployment) to perform the internal management of the cluster. By default, use port 22 to log in to the target machine via SSH.
     - `replication.enable-placement-rules`: This PD parameter is set to ensure that TiFlash runs normally.
     - `host`: The IP of the deployment machine.
 
@@ -272,9 +272,9 @@ Other requirements for the deployment machine:
     ```
 
     - `<cluster-name>`: Set the cluster name
-    - `<tidb-version>`: Set the cluster version. Choose the TiDB version currently supported by running the `tiup list tidb --refresh` command
+    - `<tidb-version>`: Set the TiDB cluster version. You can see all the supported TiDB versions by running the `tiup list tidb --refresh` command
 
-    Enter "y" and the root password to complete the deployment:
+    Enter "y" and the `root` user's password to complete the deployment:
 
     ```log
     Do you want to continue? [y/N]:  y
@@ -303,7 +303,7 @@ Other requirements for the deployment machine:
 
     - Access the TiDB Dashboard at <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
 
-    - To view the currently deployed cluster list, run the following command:
+    - To view the currently deployed cluster list:
 
         {{< copyable "shell-regular" >}}
 
@@ -311,7 +311,7 @@ Other requirements for the deployment machine:
         tiup cluster list
         ```
     
-    - To view the cluster topology and status, run the following command:
+    - To view the cluster topology and status:
 
          {{< copyable "shell-regular" >}}
 
