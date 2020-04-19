@@ -1,16 +1,16 @@
 ---
-title: Quick Start with TiDB
-summary: Learn how to quickly start your first TiDB cluster and try out the features.
+title: Quick Start Guide for the TiDB Database Platform
+summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
 category: how-to
 ---
 
-# Quick Start with TiDB
-
-This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following three methods to start your first TiDB cluster:
+# Quick Start Guide for the TiDB Database Platform
 
 > **Note:**
 >
 > For production environments, **do not** deploy TiDB with the following three methods. Instead, it is recommended that you [deploy TiDB using TiUP](/how-to/deploy/orchestrated/tiup.md).
+
+This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following three methods to get started with the TiDB database platform:
 
 - [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
 - [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
@@ -18,12 +18,12 @@ This document describes how to try out TiDB, a distributed SQL database, in a fe
 
 ## Try out TiDB with one click using TiDB-Wasm
 
-- Scenario: Have a first taste on the basic features of TiDB, such as syntax and compatibility.
+- Scenario: Experiment with TiDB SQL and test the TiDB compatibility with MySQL queries.
 - Time required: Instant
 
-TiDB-Wasm is a TiDB cluster running in the browser. With TiDB-Wasm, you can use TiDB simply by opening a web page and perform basic operations such as executing SQL statements and verifying compatibility.
+TiDB-Wasm enables you to run a TiDB server instance in a browser so that you can experiment with SQL and test TiDB compatibility with MySQL queries.
 
-Click to try TiDB-Wasm: <https://tour.pingcap.com>. The TiDB cluster will be built in the memory, which takes about 10 seconds.
+Click to try TiDB-Wasm playground: <https://tour.tidb.io>. It takes about 10 seconds to launch the TiDB server instance in your browser. The playground walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations.
 
 ## Deploy a local test environment using TiUP Playground
 
@@ -44,7 +44,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     > **Note:**
     >
-    > After the installation, TiUP gives the absolute path of the corresponding `profile` file. You need to modify the following `source` command according to the path.
+    > After the installation, TiUP displays the absolute path of the corresponding `profile` file. You need to modify the following `source` command according to the path.
 
     {< copyable "shell-regular" >}}
 
@@ -124,7 +124,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup clean --all
         ```
 
-## Set up a quasi-production environment on a single machine using TiUP cluster
+## Set up a test environment on a single machine using TiUP cluster
 
 - Scenario: Experience a smallest TiDB cluster with the complete topology and simulate the production deployment steps on a single Linux server.
 - Time required: 10 minutes

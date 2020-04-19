@@ -7,6 +7,7 @@
 
 + Introduction
   - [TiDB Introduction](/overview.md)
+  - [Quick Start with TiDB](/how-to/get-started/quick-start-with-tidb.md)
   + Benchmarks
     - [How to Test TiDB Using Sysbench](/benchmark/how-to-run-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/how-to-run-tpcc.md)
@@ -36,7 +37,6 @@
 + How-to
   + Get Started
     + Start a Cluster
-      - [Quick Start with TiDB](/how-to/get-started/quick-start-with-tidb.md)
       - [From Binary](/how-to/get-started/deploy-tidb-from-binary.md)
       - [From Homebrew](/how-to/get-started/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](/how-to/get-started/deploy-tidb-from-dbdeployer.md)
