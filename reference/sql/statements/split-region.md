@@ -216,7 +216,7 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     create table t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
     ```
 
-    After creating the table `t`, a Region is split for each partition. Use the `SHOW TABLE REGIONS` syntax to see the Region of this table:
+    After creating the table `t`, a Region is split for each partition. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table:
 
     {{< copyable "sql" >}}
 
@@ -241,7 +241,7 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     split partition table t between (0) and (10000) regions 4;
     ```
 
-3. Use the `SHOW TABLE REGIONS` syntax to see the Region of this table again. You can see that this table now has ten Regions, each partition with five Regions, four of which are the row data and one is the index data.
+3. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table again. You can see that this table now has ten Regions, each partition with five Regions, four of which are the row data and one is the index data.
 
     {{< copyable "sql" >}}
 
@@ -276,7 +276,7 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
 
 #### Split Region for a single partition
 
-You can specify the partition to be split. See the following steps for example:
+You can specify the partition to be split. See the following usage example:
 
 1. Create a partitioned table:
 
@@ -305,7 +305,7 @@ You can specify the partition to be split. See the following steps for example:
     split partition table t partition (p2) between (10000) and (20000) regions 2;
     ```
 
-4. Use the `SHOW TABLE REGIONS` syntax to see the Region of this table:
+4. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table:
 
     {{< copyable "sql" >}}
 
