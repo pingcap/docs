@@ -131,7 +131,7 @@ create global binding for select * from t where a < 100 and b < 100 using select
 
 When the query above is executed again, the optimizer selects index `a` (influenced by the binding created above) to reduce the query time.
 
-Assuming that as insertions and deletions are performed on the table, the number of rows that satisfy condition `a < 100` grows while the number of rows that satisfy condition `b < 100` not, still using index `a` under the binding's interference might no longer be optimal.
+Assuming that as insertions and deletions are performed on table `t`, an increasing number of rows meet the `a < 100` condition and a decreasing number of rows meet the `b < 100` condition. At this time, using index `a` under the binding might no longer be the optimal plan.
 
 The binding evolution can address this kind of problems. When the optimizer senses changes in table data, it generates an execution plan against the query that uses index `b`. However, because of the binding's presence, this query plan is not adopted and executed. Instead, it is stored in the backend evolution lists. During the evolution process, if it is verified that the time spent on executing the query plan is significantly shorter than that using index `a` (that is the current binding's execution plan), index `b` is added into available binding lists. After this process, when the query is executed again, the optimizer first generates the execution plan that uses index `b` and makes sure that it is in the binding lists. Then the optimizer adopts and executes it to reduce the query time after data updates.
 
