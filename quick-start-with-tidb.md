@@ -14,7 +14,7 @@ This document describes how to try out TiDB, a distributed SQL database, in a fe
 
 - [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
 - [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
-- [Deploy a quasi-production test environment on a single machine using TiUP cluster](#deploya-quasi-production-test-environment-on-a-single-machine-using-tiup-cluster)
+- [Set up a test environment on a single machine using TiUP cluster](#set-up-a-test-environment-on-a-single-machine-using-tiup-cluster)
 
 ## Try out TiDB with one click using TiDB-Wasm
 
