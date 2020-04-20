@@ -121,7 +121,7 @@ Perform the following query on table `t`:
 select * from t where a < 100 and b < 100;
 ```
 
-Rows in the table that satisfy condition `a < 100` are rare. However, for some reasons, the optimizer mistakenly chooses the full table scan instead of the optimal execution plan that uses index `a`. Users can use the following statement to create a binding first:
+In the table defined above, few rows meet the `a < 100` condition. But for some reason, the optimizer mistakenly selects the full table scan instead of the optimal execution plan that uses index `a`. You can first use the following statement to create a binding:
 
 {{< copyable "sql" >}}
 
