@@ -462,7 +462,7 @@ Before replicating data using Syncer, check the following items:
 
 6. Check the Character Set.
 
-    TiDB differs from MySQL in [Character Set](/reference/sql/character-set.md).
+    TiDB differs from MySQL in [Character Set](/reference/sql/characterset-and-collation.md).
 
 7. Check whether the table to be replicated has a primary key or a unique index.
 

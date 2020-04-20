@@ -157,6 +157,12 @@ Configuration items related to log.
 - Default value: `4096`
 - When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
 
+### `new_collations_enabled_on_first_bootstrap`
+
++ Enables or disables the new Collation support.
++ Default value: `false`
++ Note: This configuration takes effect only for the TiDB cluster that has just been initialized. After the initialization, you cannot use this configuration item to enable and disable the new Collation support. When a TiDB cluster is upgraded to v4.0, because the cluster is initialized before, both `true` and `false` values of this configuration item are taken as `false`.
+
 ### `max-server-connections`
 
 - The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
