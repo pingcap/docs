@@ -47,7 +47,7 @@ The software and hardware recommendations for the **target machines** are as fol
     - Under AMD64 architecture, it is recommended to use CentOS 7.3 or above as the operating system.
     - Under ARM architecture, it is recommended to use CentOS 7.6 1810 as the operating system.
 - For the file system of TiKV data files, it is recommended to use EXT4 format. (refer to [Step 3](#step-3-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv)) You can also use CentOS default XFS format.
-- The target machines can communicate with each other on the Intranet. (It is recommended to [disable the firewall `firewalld`](#how-to-stop-the-firewall-service-of-deployment-machines), or open the required ports between the nodes of the TiDB cluster.)
+- The target machines can communicate with each other on the Intranet. (It is recommended to [disable the firewall `firewalld`](#how-to-stop-the-firewall-service-of-deployment-machines), or enable the required ports between the nodes of the TiDB cluster.)
 - If you need to bind CPU cores, [install the `numactl` tool](#how-to-install-the-numactl-tool).
 - If you need to bind CPU cores, install the `numactl` tool.
 
@@ -1335,7 +1335,7 @@ tidb_servers:
 
 ### How to view the TiDB versions supported by TiUP
 
-Execute the following command to view the TiDB versions that TiUP supports managing:
+Execute the following command to view the TiDB versions that TiUP supports:
 
 ```shell
 tiup list tidb --refresh
@@ -1376,7 +1376,7 @@ nightly                   2020-04-10T08:42:23+08:00            darwin/amd64,linu
 
 ### How to view the TiDB components supported by TiUP 
 
-Execute the following command to view the TiDB components that TiUP supports managing:
+Execute the following command to view the TiDB components that TiUP supports:
 
 ```shell
 tiup list
