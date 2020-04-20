@@ -43,7 +43,7 @@ The following example shows the result of the `SPLIT` statement:
 ```
 
 * `TOTAL_SPLIT_REGION`: the number of newly split Regions.
-* `SCATTER_FINISH_RATIO`: the scattering rate of the newly split Regions. `1.0` means that all Regions are scattered. `0.5` means that only half of the Regions are scattered and the rest are being scattered.
+* `SCATTER_FINISH_RATIO`: the completion rate of scattering for newly split Regions. `1.0` means that all Regions are scattered. `0.5` means that only half of the Regions are scattered and the rest are being scattered.
 
 ### Split Table Region
 
@@ -188,7 +188,7 @@ region4  [("c", "")                    , maxIndexValue               )
 
 ### Split Regions for partitioned tables
 
-Splitting Regions for partitioned tables is the same as splitting Regions for normal tables. The only difference is that the split operation is performed for every partition.
+Splitting Regions for partitioned tables is the same as splitting Regions for ordinary tables. The only difference is that the same split operation is performed for every partition.
 
 + The syntax of even split:
 
@@ -208,17 +208,15 @@ Splitting Regions for partitioned tables is the same as splitting Regions for no
 
 #### Examples
 
-Create a partitioned table `t`:
+1. Create a partitioned table `t`.
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-create table t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
-```
+    ```sql
+    create table t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
+    ```
 
-After creating the table `t`, a Region is split for each partition. See the following steps for example:
-
-1. Use the `SHOW TABLE REGIONS` syntax to see the Region of this table:
+    After creating the table `t`, a Region is split for each partition. Use the `SHOW TABLE REGIONS` syntax to see the Region of this table:
 
     {{< copyable "sql" >}}
 
@@ -268,13 +266,13 @@ After creating the table `t`, a Region is split for each partition. See the foll
     +-----------+---------------+---------------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-You can also split Regions for the index of each partition. For example, you can split the `[1000,10000]` range of the `idx` index into two Regions:
+4. You can also split Regions for the index of each partition. For example, you can split the `[1000,10000]` range of the `idx` index into two Regions:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-split partition table t index idx between (1000) and (10000) regions 2;
-```
+    ```sql
+    split partition table t index idx between (1000) and (10000) regions 2;
+    ```
 
 #### Split Region for a single partition
 
