@@ -129,7 +129,7 @@ In the table defined above, few rows meet the `a < 100` condition. But for some 
 create global binding for select * from t where a < 100 and b < 100 using select * from t use index(a) where a < 100 and b < 100;
 ```
 
-When the previous query is executed again, the optimizer chooses index `a` under the interference of the binding created previously to reduce the query time.
+When the query above is executed again, the optimizer selects index `a` (influenced by the binding created above) to reduce the query time.
 
 Assuming that as insertions and deletions are performed on the table, the number of rows that satisfy condition `a < 100` grows while the number of rows that satisfy condition `b < 100` not, still using index `a` under the binding's interference might no longer be optimal.
 
