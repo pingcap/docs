@@ -18,34 +18,34 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 
 ## Unsupported features
 
-+ Stored procedures and functions
-+ Triggers
-+ Events
-+ User-defined functions
-+ `FOREIGN KEY` constraints
-+ `FULLTEXT`/`SPATIAL` functions and indexes
-+ Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
-+ Collations other than `BINARY`
-+ Add/drop primary key
-+ SYS schema
-+ Optimizer trace
-+ XML Functions
-+ X-Protocol
-+ Savepoints
-+ Column-level privileges
-+ `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
-+ `CREATE TABLE tblName AS SELECT stmt` syntax
-+ `CREATE TEMPORARY TABLE` syntax
-+ `CHECK TABLE` syntax
-+ `CHECKSUM TABLE` syntax
-+ `SELECT INTO FILE` syntax
-+ `GET_LOCK` and `RELEASE_LOCK` functions
+- Stored procedures and functions
+- Triggers
+- Events
+- User-defined functions
+- `FOREIGN KEY` constraints
+- `FULLTEXT`/`SPATIAL` functions and indexes
+- Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
+- Collations other than `BINARY`
+- Add/drop primary key
+- SYS schema
+- Optimizer trace
+- XML Functions
+- X-Protocol
+- Savepoints
+- Column-level privileges
+- `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
+- `CREATE TABLE tblName AS SELECT stmt` syntax
+- `CREATE TEMPORARY TABLE` syntax
+- `CHECK TABLE` syntax
+- `CHECKSUM TABLE` syntax
+- `SELECT INTO FILE` syntax
+- `GET_LOCK` and `RELEASE_LOCK` functions
 
 ## Features that are different from MySQL
 
 ### Auto-increment ID
 
-In TiDB, auto-increment columns are only guaranteed to be incremental and unique but are *not* guaranteed to be allocated sequentially. Currently, TiDB allocates IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs will not be sequential.
+In TiDB, auto-increment columns are only guaranteed to be incremental and unique but are _not_ guaranteed to be allocated sequentially. Currently, TiDB allocates IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs will not be sequential.
 
 > **Note:**
 >
@@ -54,7 +54,7 @@ In TiDB, auto-increment columns are only guaranteed to be incremental and unique
 Assume that you have a table with the auto-increment ID:
 
 ```sql
-create table t(id int unique key AUTO_INCREMENT, c int);
+CREATE TABLE t(id int unique key AUTO_INCREMENT, c int);
 ```
 
 The principle of the auto-increment ID in TiDB is that each tidb-server instance caches a section of ID values (currently 30000 IDs are cached) for allocation and fetches the next section after this section is used up.
@@ -63,10 +63,10 @@ Assume that the cluster contains two tidb-server instances, namely Instance A an
 
 The operations are executed as follows:
 
-1. The client issues the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
-2. The client issues the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
+1. The client issues the `INSERT INTO t VALUES (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
+2. The client issues the `INSERT INTO t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
-Also, starting from TiDB 2.1.18 and 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+Also, starting from TiDB 2.1.18 and 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
 ### Performance schema
 
@@ -86,37 +86,38 @@ TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL G
 
 In TiDB DDL does not block reads or writes to tables while in operation. However, some restrictions currently apply to DDL changes:
 
-+ Add Index:
-    - Does not support creating multiple indexes at the same time.
-    - Does not support the `VISIBLE/INVISIBLE` index.
-    - Adding an index on a generated column via `ALTER TABLE` is not supported.
-    - Other Index Type (HASH/BTREE/RTREE) is supported in syntax, but not applicable.
-+ Add Column:
-    - Does not support creating multiple columns at the same time.
-    - Does not support setting a column as the `PRIMARY KEY`, or creating a unique index, or specifying `AUTO_INCREMENT` while adding it.
-+ Drop Column: Does not support dropping the `PRIMARY KEY` column or index column.
-+ Change/Modify Column:
-    - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`.
-    - Does not support modifying the precision of `DECIMAL` data types.
-    - Does not support changing the `UNSIGNED` attribute.
-    - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
-+ `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
-+ `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but it works differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
-+ Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it's not possible to add multiple columns or indexes in a single statement.
+- Add Index:
+  - Does not support creating multiple indexes at the same time.
+  - Does not support the `VISIBLE/INVISIBLE` index.
+  - Adding an index on a generated column via `ALTER TABLE` is not supported.
+  - Other Index Type (HASH/BTREE/RTREE) is supported in syntax, but not applicable.
+- Add Column:
+  - Does not support creating multiple columns at the same time.
+  - Does not support setting a column as the `PRIMARY KEY`, or creating a unique index, or specifying `AUTO_INCREMENT` while adding it.
+- Drop Column: Does not support dropping the `PRIMARY KEY` column or index column.
+- Change/Modify Column:
+  - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`.
+  - Does not support modifying the precision of `DECIMAL` data types.
+  - Does not support changing the `UNSIGNED` attribute.
+  - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
+- `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
+- `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but it works differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
+- Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it's not possible to add multiple columns or indexes in a single statement.
 
-+ The following Table Options are not supported in syntax:
-    - `WITH/WITHOUT VALIDATION`
-    - `SECONDARY_LOAD/SECONDARY_UNLOAD`
-    - `CHECK/DROP CHECK`
-    - `STATS_AUTO_RECALC/STATS_SAMPLE_PAGES`
-    - `SECONDARY_ENGINE`
-    - `ENCRYPTION`
+- The following Table Options are not supported in syntax:
 
-+ The following Table Partition syntaxes are not supported:
-    - `PARTITION BY LIST`
-    - `PARTITION BY KEY`
-    - `SUBPARTITION`
-    - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
+  - `WITH/WITHOUT VALIDATION`
+  - `SECONDARY_LOAD/SECONDARY_UNLOAD`
+  - `CHECK/DROP CHECK`
+  - `STATS_AUTO_RECALC/STATS_SAMPLE_PAGES`
+  - `SECONDARY_ENGINE`
+  - `ENCRYPTION`
+
+- The following Table Partition syntaxes are not supported:
+  - `PARTITION BY LIST`
+  - `PARTITION BY KEY`
+  - `SUBPARTITION`
+  - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
 
 For more information, see [Online Schema Changes](/key-features.md#online-schema-changes).
 
@@ -198,31 +199,31 @@ It is recommended to use the historical reads feature of `tidb_snapshot` to prod
 ### Default differences
 
 - Default character set:
-    - The default value in TiDB is `utf8mb4`.
-    - The default value in MySQL 5.7 is `latin1`, but changes to `utf8mb4` in MySQL 8.0.
+  - The default value in TiDB is `utf8mb4`.
+  - The default value in MySQL 5.7 is `latin1`, but changes to `utf8mb4` in MySQL 8.0.
 - Default collation:
-    - The default collation of `utf8mb4` in TiDB is `utf8mb4_bin`.
-    - The default collation of `utf8mb4` in MySQL 5.7 is `utf8mb4_general_ci`, but changes to `utf8mb4_0900_ai_ci` in MySQL 8.0.
-    - You can use the [`SHOW CHARACTER SET`](/reference/sql/statements/show-character-set.md) statement to check the default collations of all character sets.
+  - The default collation of `utf8mb4` in TiDB is `utf8mb4_bin`.
+  - The default collation of `utf8mb4` in MySQL 5.7 is `utf8mb4_general_ci`, but changes to `utf8mb4_0900_ai_ci` in MySQL 8.0.
+  - You can use the [`SHOW CHARACTER SET`](/reference/sql/statements/show-character-set.md) statement to check the default collations of all character sets.
 - Default value of `foreign_key_checks`:
-    - The default value in TiDB is `OFF` and currently TiDB only supports `OFF`.
-    - The default value in MySQL 5.7 is `ON`.
+  - The default value in TiDB is `OFF` and currently TiDB only supports `OFF`.
+  - The default value in MySQL 5.7 is `ON`.
 - Default SQL mode:
-    - The default SQL mode in TiDB includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
-    - The default SQL mode in MySQL:
-        - The default SQL mode in MySQL 5.7 is the same as TiDB.
-        - The default SQL mode in MySQL 8.0 includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`.
+  - The default SQL mode in TiDB includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
+  - The default SQL mode in MySQL:
+    - The default SQL mode in MySQL 5.7 is the same as TiDB.
+    - The default SQL mode in MySQL 8.0 includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`.
 - Default value of `lower_case_table_names`:
-    - The default value in TiDB is 2 and currently TiDB only supports 2.
-    - The default value in MySQL:
-        - On Linux: 0
-        - On Windows: 1
-        - On macOS: 2
+  - The default value in TiDB is 2 and currently TiDB only supports 2.
+  - The default value in MySQL:
+    - On Linux: 0
+    - On Windows: 1
+    - On macOS: 2
 - Default value of `explicit_defaults_for_timestamp`:
-    - The default value in TiDB is `ON` and currently TiDB only supports `ON`.
-    - The default value in MySQL:
-        - For MySQL 5.7: `OFF`
-        - For MySQL 8.0: `ON`
+  - The default value in TiDB is `ON` and currently TiDB only supports `ON`.
+  - The default value in MySQL:
+    - For MySQL 5.7: `OFF`
+    - For MySQL 8.0: `ON`
 
 ### Date and Time
 
@@ -249,7 +250,7 @@ It is not recommended to unset the `NO_ZERO_DATE` and `NO_ZERO_IN_DATE` SQL mode
 
 #### Handling of space at the end of string line
 
-Currently, when inserting data, TiDB keeps the space at the end of the line for the `VARCHAR` type, and truncate the space for the `CHAR` type. In case there is no index, TiDB behaves exactly the same as MySQL. 
+Currently, when inserting data, TiDB keeps the space at the end of the line for the `VARCHAR` type, and truncate the space for the `CHAR` type. In case there is no index, TiDB behaves exactly the same as MySQL.
 
 If there is a `UNIQUE` index on the `VARCHAR` data, MySQL truncates the space at the end of the `VARCHAR` line before determining whether the data is duplicated, which is similar to the processing of the `CHAR` type, while TiDB keeps the space.
 
@@ -259,7 +260,7 @@ When making a comparison, MySQL first truncates the constant and the space at th
 
 The following column types are supported by MySQL, but not by TiDB:
 
-+ FLOAT4/FLOAT8
-+ FIXED (alias for DECIMAL)
-+ SERIAL (alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE)
-+ SQL_TSI_* (including SQL_TSI_YEAR, SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND)
+- FLOAT4/FLOAT8
+- FIXED (alias for DECIMAL)
+- SERIAL (alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE)
+- SQL*TSI*\* (including SQL_TSI_YEAR, SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND)
