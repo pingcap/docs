@@ -353,7 +353,7 @@ To disable this error reporting, use `set @@tidb_skip_utf8_check=1;` to skip the
 
 For more information, see [Connection Character Sets and Collations in MySQL](https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html).
 
-## Collation support
+## Collation support framework
 
 The syntax support and semantic support for the collation is affected by the [`new_collation_enable`](/reference/configuration/tidb-server/configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item. The syntax support and semantic support are different. The former indicates that TiDB can parse and set collations. The latter inicates that TiDB can correctly use collations when comparing strings.
 
