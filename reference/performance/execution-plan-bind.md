@@ -101,7 +101,7 @@ The default value of `tidb_evolve_plan_baselines` is `off`.
 
 > **Note:**
 >
-> The global variable doesn't take effect in the current session. It only takes effect in a newly created session. To enable automatic binding evolution in the current session, change the key word `global` to `session`.
+> The global variable does not take effect in the current session. It only takes effect in a newly created session. To enable automatic binding evolution in the current session, change the keyword `global` to `session`.
 
 After the automatic binding evolution feature is enabled, if the optimal execution plan selected by the optimizer is not among the bound execution plans, the optimizer marks the plan as an execution plan that waits for verification. Every `bind-info-lease` (the default value is `3s`), an execution plan to be verified is selected and compared with a bound execution plan with the least cost, in terms of the actual execution time. If the plan to be verified is better, it is marked as a usable binding. The following use case describes the preceding process.
 
