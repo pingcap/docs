@@ -7,13 +7,13 @@
 
 + Introduction
   - [TiDB Introduction](/overview.md)
-  - [Quick Start with TiDB](/how-to/get-started/quick-start-with-tidb.md)
   + Benchmarks
     - [How to Test TiDB Using Sysbench](/benchmark/how-to-run-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/add-index-with-load.md)
+- [Quick Start with TiDB](/quick-start-with-tidb.md)
 + Concepts
   - [Architecture](/architecture.md)
   + Key Features
