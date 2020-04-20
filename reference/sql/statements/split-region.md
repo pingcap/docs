@@ -188,7 +188,7 @@ region4  [("c", "")                    , maxIndexValue               )
 
 ### Split Regions for partitioned tables
 
-Splitting Regions for partitioned tables is the same as splitting Regions for normal tables. The only difference is that every partition is split a Region.
+Splitting Regions for partitioned tables is the same as splitting Regions for normal tables. The only difference is that the split operation is performed for every partition.
 
 + The syntax of even split:
 
@@ -243,7 +243,7 @@ After creating the table `t`, a Region is split for each partition. See the foll
     split partition table t between (0) and (10000) regions 4;
     ```
 
-3. Use the `SHOW TABLE REGIONS` syntax to see the Region of this table again, you can see that this table now has ten Regions, each partition with five Regions, four of which are the row data and one is the index data.
+3. Use the `SHOW TABLE REGIONS` syntax to see the Region of this table again. You can see that this table now has ten Regions, each partition with five Regions, four of which are the row data and one is the index data.
 
     {{< copyable "sql" >}}
 
