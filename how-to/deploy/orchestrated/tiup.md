@@ -420,7 +420,7 @@ tikv_servers:
     # data_dir: "/tidb-data/tikv-20160"
     # log_dir: "/tidb-deploy/tikv-20160/log"
     # numa_node: "0,1"
-    # # Config is used to overwrite the `server_configs.tikv` values
+    # # The following configs are used to overwrite the `server_configs.tikv` values.
     # config:
     #   server.grpc-concurrency: 4
     #   server.labels: { zone: "zone1", dc: "dc1", host: "host1" }
@@ -440,7 +440,7 @@ tiflash_servers:
   # data_dir: /tidb-data/tiflash-9000
   # log_dir: /tidb-deploy/tiflash-9000/log
   # numa_node: "0,1"
-  # # Config is used to overwrite the `server_configs.tiflash` values
+  # # The following configs are used to overwrite the `server_configs.tiflash` values.
   # config:
   #   logger.level: "info"
   # learner_config:
