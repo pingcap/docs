@@ -6,7 +6,7 @@ category: how-to
 
 # Deploy a TiDB Cluster Using TiUP
 
-[TiUP](https://github.com/pingcap-incubator/tiup-cluster) is a TiDB operation and maintenance tool written in Golang. TiUP cluster is a cluster management component provided by TiUP. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster; managing TiDB cluster parameters; deploying TiDB Binlog; deploying TiFlash; etc.
+[TiUP](https://github.com/pingcap-incubator/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP cluster](https://github.com/pingcap-incubator/tiup-cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster; managing TiDB cluster parameters; deploying TiDB Binlog; deploying TiFlash; etc.
 
 This document introduces how to use TiUP to deploy a TiDB cluster. The steps are as follows:
 
@@ -47,7 +47,8 @@ The software and hardware recommendations for the **target machines** are as fol
     - Under AMD64 architecture, it is recommended to use CentOS 7.3 or above as the operating system.
     - Under ARM architecture, it is recommended to use CentOS 7.6 1810 as the operating system.
 - For the file system of TiKV data files, it is recommended to use EXT4 format. (refer to [Step 3](#step-3-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv)) You can also use CentOS default XFS format.
-- The target machines can communicate with each other on the Intranet. (It is recommended to disable the firewall `firewalld`, or open the required ports between the nodes of the TiDB cluster.)
+- The target machines can communicate with each other on the Intranet. (It is recommended to [disable the firewall `firewalld`](#how-to-stop-the-firewall-service-of-deployment-machines), or enable the required ports between the nodes of the TiDB cluster.)
+- If you need to bind CPU cores, [install the `numactl` tool](#how-to-install-the-numactl-tool).
 - If you need to bind CPU cores, install the `numactl` tool.
 
 For other software and hardware recommendations, refer to [TiDB Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
@@ -304,17 +305,24 @@ The following sections provide a cluster configuration template for each of the 
 
 | Instance | Count | Physical Machine Configuration | IP | Other Configuration |
 | :-- | :-- | :-- | :-- | :-- |
-| TiKV | 3 | 16 Vcore 32GB * 1 | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port; <br> Global directory configuration |
-| TiDB |3 | 16 Vcore 32GB * 1 | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port; <br>  Global directory configuration |
-| PD | 3 |4 Vcore 8GB * 1 |10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port; <br> Global directory configuration |
+| TiKV | 3 | 16 Vcore 32GB * 1 | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration; <br> Global directory configuration |
+| TiDB |3 | 16 Vcore 32GB * 1 | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration; <br>  Global directory configuration |
+| PD | 3 |4 Vcore 8GB * 1 |10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration; <br> Global directory configuration |
+| TiFlash | 1 | 32 VCore 64 GB * 1 | 10.0.1.10 | Default port configuration; <br> Global directory configuration |
 
 #### Step 4: Edit the configuration file template topology.yaml
 
 > **Note:**
 >
-> You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines.
+> You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines. You can customize the user or keep it the same as the user of the Control Machine.
+
+> **Note:**
+>
+> - If you need to [deploy TiFlash](/reference/tiflash/deploy.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/how-to/configure/placement-rules.md) feature.
+>
+> - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
 > 
-> You can customize the user or keep it the same as the user of the Control Machine.
+> - For the detailed parameter configuration of TiFlash, refer to [TiFlash Parameter Configuration](#tiflash-parameter).
 
 {{< copyable "shell-regular" >}}
 
@@ -323,33 +331,55 @@ cat topology.yaml
 ```
 
 ```yaml
-# Global variables are applied to all deployments and as the default value of
-# them if the specific deployment value missing.
+# # Global variables are applied to all deployments and as the default value of
+# # them if the specific deployment value missing.
+
 global:
   user: "tidb"
   ssh_port: 22
   deploy_dir: "/tidb-deploy"
   data_dir: "/tidb-data"
 
+# # Monitored variables are used to all the machine
 monitored:
-  deploy_dir: "/tidb-deploy/monitored-9100"
-  data_dir: "/tidb-data/monitored-9100"
-  log_dir: "/tidb-deploy/monitored-9100/log"
+  node_exporter_port: 9100
+  blackbox_exporter_port: 9115
+  # deploy_dir: "/tidb-deploy/monitored-9100"
+  # data_dir: "/tidb-data/monitored-9100"
+  # log_dir: "/tidb-deploy/monitored-9100/log"
+# # Server configs are used to specify the runtime configuration of TiDB components
+# # All configuration items can be found in TiDB docs:
+# # - TiDB: https://pingcap.com/docs/stable/reference/configuration/tidb-server/configuration-file/
+# # - TiKV: https://pingcap.com/docs/stable/reference/configuration/tikv-server/configuration-file/
+# # - PD: https://pingcap.com/docs/stable/reference/configuration/pd-server/configuration-file/
+# # All configuration items use points to represent the hierarchy, e.g:
+# #   readpool.storage.use-unified-pool
+# #           ^       ^
+# # You can overwrite this configuration via instance-level `config` field
 
 server_configs:
   tidb:
     log.slow-threshold: 300
-    log.level: warn
     binlog.enable: false
     binlog.ignore-error: false
   tikv:
+    # server.grpc-concurrency: 4
+    # raftstore.apply-pool-size: 2
+    # raftstore.store-pool-size: 2
+    # rocksdb.max-sub-compactions: 1
+    # storage.block-cache.capacity: "16GB"
+    # readpool.unified.max-thread-count: 12
     readpool.storage.use-unified-pool: true
     readpool.coprocessor.use-unified-pool: true
   pd:
     schedule.leader-schedule-limit: 4
     schedule.region-schedule-limit: 2048
     schedule.replica-schedule-limit: 64
-    
+    replication.enable-placement-rules: true
+  tiflash:
+    logger.level: "info"
+  # pump:
+  #   gc: 7
 
 pd_servers:
   - host: 10.0.1.4
@@ -357,9 +387,9 @@ pd_servers:
     # name: "pd-1"
     # client_port: 2379
     # peer_port: 2380
-    # deploy_dir: "deploy/pd-2379"
-    # data_dir: "data/pd-2379"
-    # log_dir: "deploy/pd-2379/log"
+    # deploy_dir: "/tidb-deploy/pd-2379"
+    # data_dir: "/tidb-data/pd-2379"
+    # log_dir: "/tidb-deploy/pd-2379/log"
     # numa_node: "0,1"
     # # Config is used to overwrite the `server_configs.pd` values
     # config:
@@ -367,51 +397,119 @@ pd_servers:
     #   schedule.max-merge-region-keys: 200000
   - host: 10.0.1.5
   - host: 10.0.1.6
+
 tidb_servers:
   - host: 10.0.1.7
     # ssh_port: 22
     # port: 4000
     # status_port: 10080
-    # deploy_dir: "deploy/tidb-4000"
-    # log_dir: "deploy/tidb-4000/log"
+    # deploy_dir: "/tidb-deploy/tidb-4000"
+    # log_dir: "/tidb-deploy/tidb-4000/log"
     # numa_node: "0,1"
     # # Config is used to overwrite the `server_configs.tidb` values
     # config:
-    #   log.level: warn
     #   log.slow-query-file: tidb-slow-overwrited.log
   - host: 10.0.1.8
   - host: 10.0.1.9
+
 tikv_servers:
   - host: 10.0.1.1
     # ssh_port: 22
     # port: 20160
     # status_port: 20180
-    # deploy_dir: "deploy/tikv-20160"
-    # data_dir: "data/tikv-20160"
-    # log_dir: "deploy/tikv-20160/log"
+    # deploy_dir: "/tidb-deploy/tikv-20160"
+    # data_dir: "/tidb-data/tikv-20160"
+    # log_dir: "/tidb-deploy/tikv-20160/log"
     # numa_node: "0,1"
     # # Config is used to overwrite the `server_configs.tikv` values
-    #  config:
-    #    server.labels:
-    #      zone: sh
-    #      dc: sha
-    #      rack: rack1
-    #      host: host1
+    # config:
+    #   server.grpc-concurrency: 4
+    #   server.labels: { zone: "zone1", dc: "dc1", host: "host1" }
   - host: 10.0.1.2
   - host: 10.0.1.3
+
+tiflash_servers:
+  - host: 10.0.1.10
+  # ssh_port: 22
+  # tcp_port: 9000
+  # http_port: 8123
+  # flash_service_port: 3930
+  # flash_proxy_port: 20170
+  # flash_proxy_status_port: 20292
+  # metrics_port: 8234
+  # deploy_dir: /tidb-deploy/tiflash-9000
+  # data_dir: /tidb-data/tiflash-9000
+  # log_dir: /tidb-deploy/tiflash-9000/log
+  # numa_node: "0,1"
+  # # Config is used to overwrite the `server_configs.tiflash` values
+  # config:
+  #   logger.level: "info"
+  # learner_config:
+  #   log-level: "info"
+  #  - host: 10.0.1.15
+  #  - host: 10.0.1.16
+
+# pump_servers:
+#   - host: 10.0.1.17
+#     ssh_port: 22
+#     port: 8250
+#     deploy_dir: "/tidb-deploy/pump-8249"
+#     data_dir: "/tidb-data/pump-8249"
+#     log_dir: "/tidb-deploy/pump-8249/log"
+#     numa_node: "0,1"
+#     # Config is used to overwrite the `server_configs.drainer` values
+#     config:
+#       gc: 7
+#   - host: 10.0.1.18
+#   - host: 10.0.1.19
+# drainer_servers:
+#   - host: 10.0.1.17
+#     port: 8249
+#     data_dir: "/tidb-data/drainer-8249"
+#     # if drainer doesn't have checkpoint, use initial commitTS to initial checkpoint
+#     # will get a latest timestamp from pd if setting to be -1 (default -1)
+#     commit_ts: -1
+#     deploy_dir: "/tidb-deploy/drainer-8249"
+#     log_dir: "/tidb-deploy/drainer-8249/log"
+#     numa_node: "0,1"
+#     # Config is used to overwrite the `server_configs.drainer` values
+#     config:
+#       syncer.db-type: "mysql"
+#       syncer.to.host: "127.0.0.1"
+#       syncer.to.user: "root"
+#       syncer.to.password: ""
+#       syncer.to.port: 3306
+#   - host: 10.0.1.19
+
 monitoring_servers:
   - host: 10.0.1.4
+    # ssh_port: 22
+    # port: 9090
+    # deploy_dir: "/tidb-deploy/prometheus-8249"
+    # data_dir: "/tidb-data/prometheus-8249"
+    # log_dir: "/tidb-deploy/prometheus-8249/log"
+
 grafana_servers:
   - host: 10.0.1.4
+    # port: 3000
+    # deploy_dir: /tidb-deploy/grafana-3000
+
 alertmanager_servers:
   - host: 10.0.1.4
+    # ssh_port: 22
+    # web_port: 9093
+    # cluster_port: 9094
+    # deploy_dir: "/tidb-deploy/alertmanager-9093"
+    # data_dir: "/tidb-data/alertmanager-9093"
+    # log_dir: "/tidb-deploy/alertmanager-9093/log"
+
 ```
 
 ### Scenario 2: Single machine with multiple instances
 
 #### Deployment requirements
 
-The physical machines on which TiDB and TiKV components are deployed have a 2-way processor with 16 vcores per way, and the memory also meets the standard.
+The physical machines on which TiDB and TiKV components are deployed have a 2-way processor with 16 Vcores per way, and the memory also meets the standard.
 
 In order to improve the resource utilization, you can deploy multiple instances on a single machine, that is, you can bind the cores through numa to isolate CPU resources used by TiDB and TiKV instances.
 
@@ -425,28 +523,45 @@ You need to fill in the result in the configuration file (as described in the St
 
 - Configuration optimization for TiKV
 
-    - Make `readpool` thread pool self-adaptive. Configure the `readpool.unified.max-thread-count` parameter to make `readpool.storage` and `readpool.coprocessor` share a unified thread pool, and also enable self-adaptive switches for them. The calculation formula is as follows:
-  
+    - Make `readpool` thread pool self-adaptive. Configure the `readpool.unified.max-thread-count` parameter to make `readpool.storage` and `readpool.coprocessor` share a unified thread pool, and also enable self-adaptive switches for them.
+
+        - Enable `readpool.storage` and `readpool.coprocessor`:
+
+            ```yaml
+            readpool.storage.use-unified-pool: true
+            readpool.coprocessor.use-unified-pool: true
+            ```
+
+        - The calculation formula is as follows:
+
         ```
         readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
         ```
 
-    - Make storage CF (all RocksDB column families) memory self-adaptive. Configure the `storage.block-cache.capacity` parameter to automatically balance memory usage among CFs. The calculation formula is as follows:
-   
-        ```
-        storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
-        ```
+    - Make storage CF (all RocksDB column families) memory self-adaptive. Configure the `storage.block-cache.capacity` parameter to automatically balance memory usage among CFs.
 
-    - If multiple TiKV instances are deployed on the same physical disk, you need to modify the `capacity` parameter in `conf/tikv.yml`:
-   
+        - The default setting of the `storage.block-cache` parameter is CF self-adaptive. You do not need to modify this configuration:
+
+            ```yaml
+            storage.block-cache.shared: true
+            ```
+
+        - The calculation formula is as follows:
+
+            ```
+            storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
+            ```
+
+    - If multiple TiKV instances are deployed on the same physical disk, you need to add the `capacity` parameter in the TiKV configuration:
+
         ```
-        raftstore.capactiy = the total disk capacity / the number of TiKV instances
+        raftstore.capacity = the total disk capacity / the number of TiKV instances
         ```
 
 - Label scheduling configuration
 
     Because multiple TiKV instances are deployed on a single machine, in order to avoid losing 2 replicas of the default 3 replicas in the Region Group during machine downtime which causes cluster unavailability, you can use labels to implement intelligent scheduling of PD.
- 
+
     - TiKV configuration
 
         Configure the same host-level label information on the same physical machines:
@@ -481,12 +596,22 @@ You need to fill in the result in the configuration file (as described in the St
 | TiKV | 6 | 32 Vcore 64GB * 3 | 10.0.1.1<br> 10.0.1.2<br> 10.0.1.3 | 1. Distinguish between instance-level port and status_port; <br> 2. Configure `readpool` and `storage` global parameters and the `raftstore` parameter; <br> 3. Configure instance-level host-dimension labels; <br> 4. Configure numa to bind cores|
 | TiDB | 6 | 32 Vcore 64GB * 3 | 10.0.1.7<br> 10.0.1.8<br> 10.0.1.9 | Configure numa to bind cores |
 | PD | 3 | 16 Vcore 32 GB | 10.0.1.4<br> 10.0.1.5<br> 10.0.1.6 | Configure `location_lables` parameter |
+| TiFlash | 1 | 32 VCore 64 GB | 10.0.1.10 | Default port; <br> Customized deployment directory - the `data_dir` parameter is set to `/data1/tiflash/data` |
 
 #### Step 4: Edit the configuration file template topology.yaml
 
 > **Note:**
 >
-> When you configure the file template, you might need to modify the necessary parameters, IP, port and directory.
+> - You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines. You can customize the user or keep it the same as the user of the Control Machine.
+> - By default, `deploy_dir` of each component uses `<deploy_dir>/<components_name>-<port>` of the global configuration. For example, if you specify the `tidb` port as `4001`, then the TiDB component's default `deploy_dir` is `tidb-deploy/tidb-4001`. Therefore, when you specify non-default ports in multi-instance scenarios, you do not need to specify `deploy_dir` again.
+
+> **Note:**
+>
+> - If you need to [deploy TiFlash](/reference/tiflash/deploy.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/how-to/configure/placement-rules.md) feature.
+>
+> - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
+> 
+> - For the detailed parameter configuration of TiFlash, refer to [TiFlash Parameter Configuration](#tiflash-parameter).
 
 {{< copyable "shell-regular" >}}
 
@@ -495,8 +620,8 @@ cat topology.yaml
 ```
 
 ```yaml
-# Global variables are applied to all deployments and as the default value of
-# them if the specific deployment value missing.
+# # Global variables are applied to all deployments and as the default value of
+# # them if the specific deployment value missing.
 
 global:
   user: "tidb"
@@ -517,9 +642,10 @@ server_configs:
     readpool.storage.use-unified-pool: true
     readpool.coprocessor.use-unified-pool: true
     storage.block-cache.capacity: "<fill in the calculated result from the calculation formula provided before>"
-    raftstore.capactiy: "<fill in the calculated result from the calculation formula provided before>"
+    raftstore.capacity: "<fill in the calculated result from the calculation formula provided before>"
   pd:
     replication.location-labels: ["host"]
+    replication.enable-placement-rules: true
 
 pd_servers:
   - host: 10.0.1.4
@@ -573,8 +699,7 @@ tikv_servers:
     log_dir: "/tidb-deploy/tikv-20160/log"
     numa_node: "0"
     config:
-      server.labels:
-        host: tikv1
+      server.labels: { host: "tikv1" }
   - host: 10.0.1.1
     port: 20161
     status_port: 20181
@@ -583,8 +708,7 @@ tikv_servers:
     log_dir: "/tidb-deploy/tikv-20161/log"
     numa_node: "1"
     config:
-      server.labels:
-        host: tikv1
+      server.labels: { host: "tikv1" }
   - host: 10.0.1.2
     port: 20160
     status_port: 20180
@@ -593,8 +717,7 @@ tikv_servers:
     log_dir: "/tidb-deploy/tikv-20160/log"
     numa_node: "0"
     config:
-      server.labels:
-        host: tikv2
+      server.labels: { host: "tikv2" }
   - host: 10.0.1.2
     port: 20161
     status_port: 20181
@@ -603,8 +726,7 @@ tikv_servers:
     log_dir: "/tidb-deploy/tikv-20161/log"
     numa_node: "1"
     config:
-      server.labels:
-        host: tikv2
+      server.labels: { host: "tikv2" }
   - host: 10.0.1.3
     port: 20160
     status_port: 20180
@@ -613,8 +735,7 @@ tikv_servers:
     log_dir: "/tidb-deploy/tikv-20160/log"
     numa_node: "0"
     config:
-      server.labels:
-        host: tikv3
+      server.labels: { host: "tikv3" }
   - host: 10.0.1.3
     port: 20161
     status_port: 20181
@@ -623,16 +744,16 @@ tikv_servers:
     log_dir: "/tidb-deploy/tikv-20161/log"
     numa_node: "1"
     config:
-      server.labels:
-        host: tikv3
+      server.labels: { host: "tikv3" }
+tiflash_servers:
+  - host: 10.0.1.10
+    data_dir: /data1/tiflash/data
 monitoring_servers:
- - host: 10.0.1.7
-
+  - host: 10.0.1.7
 grafana_servers:
- - host: 10.0.1.7
-
+  - host: 10.0.1.7
 alertmanager_servers:
- - host: 10.0.1.7
+  - host: 10.0.1.7
 ```
 
 ### Scenario 3: Use TiDB Binlog deployment template
@@ -659,17 +780,26 @@ Key parameters of TiDB:
 
 | Instance | Physical Machine Configuration | IP | Other Configuration |
 | :-- | :-- | :-- | :-- |
-| TiKV | 16 vcore 32 GB * 3 | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
-|TiDB | 16 vcore 32 GB * 3 | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration;<br>`enable_binlog` enabled; <br> `ignore-error` enabled |
-| PD | 4 vcore 8 GB * 3| 10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration |
-| Pump|8 vcore 16GB * 3|10.0.1.6<br>10.0.1.7<br>10.0.1.8 | Default port configuration; <br> The GC time is set to 7 days |
-| Drainer | 8 vcore 16GB | 10.0.1.9 | Default port configuration; <br>Set default initialization commitTS |
+| TiKV | 16 Vcore 32 GB * 3 | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
+|TiDB | 16 Vcore 32 GB * 3 | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration;<br>`enable_binlog` enabled; <br> `ignore-error` enabled |
+| PD | 4 Vcore 8 GB * 3| 10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration |
+| TiFlash | 1 | 32 VCore 64 GB  | 10.0.1.10 | Default port configuration; <br> Customized deployment directory - the `data_dir` parameter is set to `/data1/tiflash/data,/data2/tiflash/data` for multi-disk deployment |
+| Pump|8 Vcore 16GB * 3|10.0.1.6<br>10.0.1.7<br>10.0.1.8 | Default port configuration; <br> The GC time is set to 7 days |
+| Drainer | 8 Vcore 16GB | 10.0.1.9 | Default port configuration; <br>Set default initialization commitTS |
 
 #### Step 4: Edit the configuration file template topology.yaml
 
 > **Note:**
 >
-> When you configure the file template, if you do not need to customize the port or directory, just modify the IP.
+> You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines. You can customize the user or keep it the same as the user of the Control Machine.
+
+> **Note:**
+>
+> - If you need to [deploy TiFlash](/reference/tiflash/deploy.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/how-to/configure/placement-rules.md) feature.
+>
+> - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
+> 
+> - For the detailed parameter configuration of TiFlash, refer to [TiFlash Parameter Configuration](#tiflash-parameter).
 
 {{< copyable "shell-regular" >}}
 
@@ -678,8 +808,9 @@ cat topology.yaml
 ```
 
 ```yaml
-# Global variables are applied to all deployments and as the default value of
-# them if the specific deployment value missing.
+# # Global variables are applied to all deployments and as the default value of
+# # them if the specific deployment value missing.
+
 global:
   user: "tidb"
   ssh_port: 22
@@ -696,6 +827,8 @@ server_configs:
   tidb:
     binlog.enable: true
     binlog.ignore-error: true
+  pd:
+    replication.enable-placement-rules: true
 
 pd_servers:
   - host: 10.0.1.4
@@ -750,12 +883,15 @@ drainer_servers:
       syncer.to.user: "root"
       syncer.to.password: ""
       syncer.to.port: 4000
+tiflash_servers:
+  - host: 10.0.1.10
+    data_dir: /data1/tiflash/data,/data2/tiflash/data 
 monitoring_servers:
- - host: 10.0.1.4
+  - host: 10.0.1.4
 grafana_servers:
- - host: 10.0.1.4
+  - host: 10.0.1.4
 alertmanager_servers:
- - host: 10.0.1.4
+  - host: 10.0.1.4
 ```
 
 ## 3. Execute the deployment command
@@ -781,7 +917,7 @@ Usage:
 Flags:
   -h, --help                   help for deploy
   -i, --identity_file string   The path of the SSH identity file. If specified, public key authentication will be used.
-      --user string            The user name to login via SSH. The user must has root (or sudo) privilege. (default "root")
+      --user string            The user name to login via SSH. The user must have root (or sudo) privilege. (default "root")
   -y, --yes                    Skip confirming the topology
 ```
 
@@ -797,78 +933,17 @@ Flags:
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster deploy tidb-test v4.0.0-beta.2 ./topology.yaml --user root -i /home/root/.ssh/gcp_rsa
+tiup cluster deploy tidb-test v4.0.0-rc ./topology.yaml --user root -i /home/root/.ssh/gcp_rsa
 ```
 
 In the above command:
 
 - The name of the TiDB cluster deployed through TiUP cluster is `tidb-test`.
-- The deployment version is `v4.0.0-beta.2`.
+- The deployment version is `v4.0.0-rc`. For other supported versions, see [How to view the TiDB versions supported by TiUP](#how-to-view-the-tidb-versions-supported-by-tiup).
 - The initialization configuration file is `topology.yaml`.
-- Log in to the target machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` permissions to complete the deployment
+- Log in to the target machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 
-Expected output will include `Started cluster tidb-test successfully`:
-
-```log
-Starting /home/tidb/.tiup/components/cluster/v0.0.9/cluster deploy tidb-test v4.0.0-beta.2 ./topology.yaml --user root --identity_file /home/root/.ssh/gcp_rsa
-Please confirm your topology:
-TiDB Cluster: tidb-test
-TiDB Version: v4.0.0-beta.2
-Type          Host          Ports        Directories
-----          ----          -----        -----------
-pd            10.0.1.4  2379/2380    /tidb-deploy/pd-2379,/tidb-data/pd-2379
-pd            10.0.1.5  2379/2380    /tidb-deploy/pd-2379,/tidb-data/pd-2379
-pd            10.0.1.6  2379/2380    /tidb-deploy/pd-2379,/tidb-data/pd-2379
-tikv          10.0.1.1  2060/20080   /tidb-deploy/tikv-2060,/tidb-data/tikv-2060
-tikv          10.0.1.2  2060/20080   /tidb-deploy/tikv-2060,/tidb-data/tikv-2060
-tikv          10.0.1.3  2060/20080   /tidb-deploy/tikv-2060,/tidb-data/tikv-2060
-tidb          10.0.1.7  4000/10080   /tidb-deploy/tidb-4000
-tidb          10.0.1.8  4000/10080   /tidb-deploy/tidb-4000
-tidb          10.0.1.9  4000/10080   /tidb-deploy/tidb-4000
-prometheus    10.0.1.4  9090         /tidb-deploy/prometheus-9090,/tidb-data/prometheus-9090
-grafana       10.0.1.4  3000         /tidb-deploy/grafana-3000
-alertmanager  10.0.1.4  9104/9105    /tidb-deploy/alertmanager-9104,/tidb-data/alertmanager-9104
-Attention:
-    1. If the topology is not what you expected, check your yaml file.
-    2. Please confirm there is no port/directory conflicts in same host.
-Do you want to continue? [y/N]:  y
-Input SSH password:
-+ [ Serial ] - SSHKeyGen: path=/home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa
-+ [Parallel] - Download: component=blackbox_exporter, version=v0.12.0
-+ [Parallel] - Download: component=pd, version=v4.0.0-beta.2
-+ [Parallel] - Download: component=node_exporter, version=v0.17.0
-+ [Parallel] - Download: component=tikv, version=v4.0.0-beta.2
-+ [Parallel] - Download: component=tidb, version=v4.0.0-beta.2
-+ [Parallel] - Download: component=alertmanager, version=v0.17.0
-+ [Parallel] - Download: component=prometheus, version=v2.8.1
-+ [Parallel] - Download: component=grafana, version=v6.1.6
-
-......Some log ignored......
-
-Checking service state of pd
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 09:54:22 CST; 50s ago
-Checking service state of tikv
-    10.0.1.1
-           Active: active (running) since Saturday 2020-04-04 09:54:35 CST; 38s ago
-    10.0.1.2
-           Active: active (running) since Saturday 2020-04-04 09:54:38 CST; 37s ago
-    10.0.1.3
-           Active: active (running) since Saturday 2020-04-04 09:54:41 CST; 35s ago
-Checking service state of tidb
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 09:54:56 CST; 22s ago
-Checking service state of prometheus
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 09:55:03 CST; 16s ago
-Checking service state of grafana
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 09:55:05 CST; 16s ago
-Checking service state of alertmanager
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 09:55:08 CST; 14s ago
-Started cluster `tidb-test` successfully
-```
+At the end of the output log, you will see ```Deployed cluster `tidb-test` successfully```. This indicates that the deployment is successful.
 
 ## 4. Verify the deployment status of the cluster
 
@@ -906,7 +981,7 @@ Expected output will include the name, deployment user, version, and secret key 
 Starting /home/tidb/.tiup/components/cluster/v0.4.3/cluster list
 Name              User  Version        Path                                                        PrivateKey
 ----              ----  -------        ----                                                        ----------
-tidb-test         tidb  v4.0.0-beta.2  /home/tidb/.tiup/storage/cluster/clusters/tidb-test         /home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa
+tidb-test         tidb  v4.0.0-rc  /home/tidb/.tiup/storage/cluster/clusters/tidb-test         /home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa
 ```
 
 ### Step 7: Check the status of `tidb-test`
@@ -917,26 +992,27 @@ tidb-test         tidb  v4.0.0-beta.2  /home/tidb/.tiup/storage/cluster/clusters
 tiup cluster display tidb-test
 ```
 
-Expected output will include the instance ID, role, host, listening port, and status (started, so the status is `Down`/`inactive`), and directory information:
+Expected output will include the instance ID, role, host, listening port, and status (because the cluster is not started yet, so the status is `Down`/`inactive`), and directory information:
 
 ```log
 Starting /home/tidb/.tiup/components/cluster/v0.4.3/cluster display tidb-test
 TiDB Cluster: tidb-test
-TiDB Version: v4.0.0-beta.2
-ID                  Role          Host          Ports        Status    Data Dir                        Deploy Dir
---                  ----          ----          -----        ------    --------                        ----------
-10.0.1.4:9104   alertmanager  10.0.1.4  9104/9105    inactive  /tidb-data/alertmanager-9104  /tidb-deploy/alertmanager-9104
-10.0.1.4:3000   grafana       10.0.1.4  3000         inactive  -                             /tidb-deploy/grafana-3000
-10.0.1.4:2379   pd            10.0.1.4  2379/2380    Down      /tidb-data/pd-2379            /tidb-deploy/pd-2379
-10.0.1.5:2379   pd            10.0.1.5  2379/2380    Down      /tidb-data/pd-2379            /tidb-deploy/pd-2379
-10.0.1.6:2379   pd            10.0.1.6  2379/2380    Down      /tidb-data/pd-2379            /tidb-deploy/pd-2379
-10.0.1.4:9090   prometheus    10.0.1.4  9090         inactive  /tidb-data/prometheus-9090    /tidb-deploy/prometheus-9090
-10.0.1.7:4000   tidb          10.0.1.7  4000/10080   Down      -                             /tidb-deploy/tidb-4000
-10.0.1.8:4000   tidb          10.0.1.8  4000/10080   Down      -                             /tidb-deploy/tidb-4000
-10.0.1.9:4000   tidb          10.0.1.9  4000/10080   Down      -                             /tidb-deploy/tidb-4000
-10.0.1.1:20160  tikv          10.0.1.1  20160/20180  Down      /tidb-data/tikv-20160         /tidb-deploy/tikv-2060
-10.0.1.2:20160  tikv          10.0.1.2  20160/20180  Down      /tidb-data/tikv-20160         /tidb-deploy/tikv-2060
-10.0.1.3:20160  tikv          10.0.1.4  20160/20180  Down      /tidb-data/tikv-20160         /tidb-deploy/tikv-2060
+TiDB Version: v4.0.0-rc
+ID                  Role          Host          Ports                            Status    Data Dir                        Deploy Dir
+--                  ----          ----          -----                            ------    --------                        ----------
+10.0.1.4:9104       alertmanager  10.0.1.4      9104/9105                        inactive  /tidb-data/alertmanager-9104    /tidb-deploy/alertmanager-9104
+10.0.1.4:3000       grafana       10.0.1.4      3000                             inactive  -                               /tidb-deploy/grafana-3000
+10.0.1.4:2379       pd            10.0.1.4      2379/2380                        Down      /tidb-data/pd-2379              /tidb-deploy/pd-2379
+10.0.1.5:2379       pd            10.0.1.5      2379/2380                        Down      /tidb-data/pd-2379              /tidb-deploy/pd-2379
+10.0.1.6:2379       pd            10.0.1.6      2379/2380                        Down      /tidb-data/pd-2379              /tidb-deploy/pd-2379
+10.0.1.4:9090       prometheus    10.0.1.4      9090                             inactive  /tidb-data/prometheus-9090      /tidb-deploy/prometheus-9090
+10.0.1.7:4000       tidb          10.0.1.7      4000/10080                       Down      -                               /tidb-deploy/tidb-4000
+10.0.1.8:4000       tidb          10.0.1.8      4000/10080                       Down      -                               /tidb-deploy/tidb-4000
+10.0.1.9:4000       tidb          10.0.1.9      4000/10080                       Down      -                               /tidb-deploy/tidb-4000
+10.0.1.10:9000      tiflash       10.0.1.4      9000/8123/3930/20170/20292/8234  Down      /tidb-data-lzs/tiflash-10000    /tidb-deploy-lzs/tiflash-10000
+10.0.1.1:20160      tikv          10.0.1.1      20160/20180                      Down      /tidb-data/tikv-20160           /tidb-deploy/tikv-2060
+10.0.1.2:20160      tikv          10.0.1.2      20160/20180                      Down      /tidb-data/tikv-20160           /tidb-deploy/tikv-2060
+10.0.1.3:20160      tikv          10.0.1.4      20160/20180                      Down      /tidb-data/tikv-20160           /tidb-deploy/tikv-2060
 ```
 
 ## 5. Start the cluster
@@ -949,53 +1025,7 @@ ID                  Role          Host          Ports        Status    Data Dir 
 tiup cluster start tidb-test
 ```
 
-If the expected output returns `Started cluster tidb-test successfully`, it means that the startup is successful:
-
-```log
-Starting /home/tidb/.tiup/components/cluster/v0.4.3/cluster start tidb-test
-+ [ Serial ] - SSHKeySet: privateKey=/home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa, publicKey=/home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa.pub
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.1
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.2
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [ Serial ] - ClusterOperate: operation=StartOperation, options={Roles:[] Nodes:[] Force:false}
-Starting component pd
-    Starting instance pd 10.0.1.4:2379
-    Start pd 10.0.1.4:2379 success
-Starting component node_exporter
-    Starting instance 10.0.1.4
-    Start 10.0.1.4 success
-
-......Some log ignored......
-
-    Checking service state of pd
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 01:08:04 CST; 43s ago
-Checking service state of tikv
-    10.0.1.1
-           Active: active (running) since Saturday 2020-04-04 01:08:15 CST; 33s ago
-    10.0.1.2
-           Active: active (running) since Saturday 2020-04-04 01:08:18 CST; 31s ago
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 01:08:21 CST; 29s ago
-Checking service state of tidb
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 01:08:36 CST; 16s ago
-Checking service state of prometheus
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 01:08:39 CST; 15s ago
-Checking service state of grafana
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 01:08:41 CST; 14s ago
-Checking service state of alertmanager
-    10.0.1.4
-           Active: active (running) since Saturday 2020-04-04 01:08:44 CST; 12s ago
-Started cluster `tidb-test` successfully
-```
+If the output log includes ```Started cluster `tidb-test` successfully```, it means that the startup is successful.
 
 ## 6. Verify the running status of the cluster
 
@@ -1012,28 +1042,29 @@ Expected output (if the `Status` is `Up`, the cluster status is normal):
 ```log
 Starting /home/tidb/.tiup/components/cluster/v0.4.3/cluster display tidb-test
 TiDB Cluster: tidb-test
-TiDB Version: v4.0.0-beta.2
-ID                  Role          Host          Ports        Status     Data Dir                        Deploy Dir
---                  ----          ----          -----        ------     --------                        ----------
-10.0.1.4:9104   alertmanager  10.0.1.4  9104/9105    Up         /tidb-data/alertmanager-9104  /tidb-deploy/alertmanager-9104
-10.0.1.4:3000   grafana       10.0.1.4  3000         Up         -                             /tidb-deploy/grafana-3000
-10.0.1.4:2379   pd            10.0.1.4  2379/2380    Healthy|L  /tidb-data/pd-2379            /tidb-deploy/pd-2379
-10.0.1.5:2379   pd            10.0.1.5  2379/2380    Healthy    /tidb-data/pd-2379            /tidb-deploy/pd-2379
-10.0.1.6:2379   pd            10.0.1.6  2379/2380    Healthy    /tidb-data/pd-2379            /tidb-deploy/pd-2379
-10.0.1.4:9090   prometheus    10.0.1.4  9090         Up         /tidb-data/prometheus-9090    /tidb-deploy/prometheus-9090
-10.0.1.7:4000   tidb          10.0.1.7  4000/10080   Up         -                             /tidb-deploy/tidb-4000
-10.0.1.8:4000   tidb          10.0.1.8  4000/10080   Up         -                             /tidb-deploy/tidb-4000
-10.0.1.9:4000   tidb          10.0.1.9  4000/10080   Up         -                             /tidb-deploy/tidb-4000
-10.0.1.1:2060   tikv          10.0.1.1  2060/20080   Up         /tidb-data/tikv-2060          /tidb-deploy/tikv-2060
-10.0.1.2:2060   tikv          10.0.1.2  2060/20080   Up         /tidb-data/tikv-2060          /tidb-deploy/tikv-2060
-10.0.1.3:2060   tikv          10.0.1.4  2060/20080   Up         /tidb-data/tikv-2060          /tidb-deploy/tikv-2060
+TiDB Version: v4.0.0-rc
+ID              Role          Host      Ports                            Status     Data Dir                        Deploy Dir
+--              ----          ----      -----                            ------     --------                        ----------
+10.0.1.4:9104   alertmanager  10.0.1.4  9104/9105                        Up         /tidb-data/alertmanager-9104    /tidb-deploy/alertmanager-9104
+10.0.1.4:3000   grafana       10.0.1.4  3000                             Up         -                               /tidb-deploy/grafana-3000
+10.0.1.4:2379   pd            10.0.1.4  2379/2380                        Healthy|L  /tidb-data/pd-2379              /tidb-deploy/pd-2379
+10.0.1.5:2379   pd            10.0.1.5  2379/2380                        Healthy    /tidb-data/pd-2379              /tidb-deploy/pd-2379
+10.0.1.6:2379   pd            10.0.1.6  2379/2380                        Healthy    /tidb-data/pd-2379              /tidb-deploy/pd-2379
+10.0.1.4:9090   prometheus    10.0.1.4  9090                             Up         /tidb-data/prometheus-9090      /tidb-deploy/prometheus-9090
+10.0.1.7:4000   tidb          10.0.1.7  4000/10080                       Up         -                               /tidb-deploy/tidb-4000
+10.0.1.8:4000   tidb          10.0.1.8  4000/10080                       Up         -                               /tidb-deploy/tidb-4000
+10.0.1.9:4000   tidb          10.0.1.9  4000/10080                       Up         -                               /tidb-deploy/tidb-4000
+10.0.1.10:9000  tiflash       10.0.1.4  9000/8123/3930/20170/20292/8234  Up         /tidb-data-lzs/tiflash-9000     /tidb-deploy-lzs/tiflash-9000
+10.0.1.1:2060   tikv          10.0.1.1  2060/20080                       Up         /tidb-data/tikv-2060            /tidb-deploy/tikv-2060
+10.0.1.2:2060   tikv          10.0.1.2  2060/20080                       Up         /tidb-data/tikv-2060            /tidb-deploy/tikv-2060
+10.0.1.3:2060   tikv          10.0.1.4  2060/20080                       Up         /tidb-data/tikv-2060            /tidb-deploy/tikv-2060
 ```
 
 ### Step 10: Check TiDB cluster status through TiDB Dashboard and Grafana
 
 #### Check TiDB cluster status through TiDB Dashboard
 
-Log in to TiDB Dashboard via `{pd-leader-ip}:2379/dashboard`:
+Log in to TiDB Dashboard via `{pd-leader-ip}:2379/dashboard` with the `root` user and password (empty by default) of the TiDB database. If you have modified the password of the `root` user, then enter the modified password.
 
 ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
 
@@ -1051,7 +1082,7 @@ Click Overview monitoring page to check TiDB port and load information:
 
 ![Grafana-overview](/media/tiup/grafana-overview.png)
 
-### Log in to the database to execute simple SQL statements
+### Step 11: Log in to the database to execute simple SQL statements
 
 > **Note:**
 >
@@ -1154,53 +1185,10 @@ To stop the `tidb-test` cluster, run the following command:
 {{< copyable "shell-regular" >}}
 
 ```shell
-cluster stop tidb-test
+tiup cluster stop tidb-test
 ```
 
-The expected output is as follows. `Stopped cluster tidb-test successfully` indicates the cluster is successfully stopped.
-
-```log
-Starting /home/tidb/.tiup/components/cluster/v0.4.3/cluster stop tidb-test
-+ [ Serial ] - SSHKeySet: privateKey=/home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa, publicKey=/home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa.pub
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.5
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.5
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.2
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.1
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [ Serial ] - ClusterOperate: operation=StopOperation, options={Roles:[] Nodes:[] Force:false}
-Stopping component alertmanager
-    Stopping instance 10.0.1.4
-    Stop alertmanager 10.0.1.4:9104 success
-
-...... Some log ignored ......
-
-Checking service state of pd
-    10.0.1.5
-           Active: inactive (dead) since Saturday 2020-04-04 15:35:42 CST; 15s ago
-Checking service state of tikv
-    10.0.1.1
-           Active: inactive (dead) since Saturday 2020-04-04 15:35:21 CST; 38s ago
-    10.0.1.2
-           Active: inactive (dead) since Saturday 2020-04-04 15:35:23 CST; 37s ago
-    10.0.1.3
-           Active: inactive (dead) since Saturday 2020-04-04 15:35:24 CST; 37s ago
-Checking service state of tidb
-    10.0.1.5
-           Active: inactive (dead) since Saturday 2020-04-04 15:35:15 CST; 49s ago
-Checking service state of prometheus
-    10.0.1.4
-           Active: inactive (dead) since Saturday 2020-04-04 15:35:12 CST; 53s ago
-Checking service state of grafana
-    10.0.1.4
-           Active: inactive (dead) since Saturday 2020-04-04 15:35:10 CST; 56s ago
-Checking service state of alertmanager
-    10.0.1.4
-           Active: inactive (dead) since Saturday 2020-04-04 15:35:09 CST; 59s ago
-Stopped cluster `tidb-test` successfully
-```
+If the output log includes ```Stopped cluster `tidb-test` successfully```, then the cluster is successfully stopped.
 
 ## Destroy a TiDB cluster using TiUP
 
@@ -1216,48 +1204,7 @@ To destroy the `tidb-test` cluster, including data and services, run the followi
 tiup cluster destroy tidb-test
 ```
 
-The expected output is as follows. `Destroy cluster tidb-test successfully` indicates the cluster is successfully destroyed.
-
-```log
-Starting /home/tidb/.tiup/components/cluster/v0.4.3/cluster destroy tidb-test
-This operation will destroy TiDB v4.0.0-beta.2 cluster tidb-test and its data.
-Do you want to continue? [y/N]: y
-Destroying cluster...
-+ [ Serial ] - SSHKeySet: privateKey=/home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa, publicKey=/home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa.pub
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.2
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.1
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [Parallel] - UserSSH: user=tidb, host=10.0.1.4
-+ [ Serial ] - ClusterOperate: operation=StopOperation, options={Roles:[] Nodes:[] Force:false}
-Stopping component alertmanager
-    Stopping instance 10.0.1.4
-    Stop alertmanager 10.0.1.4:9104 success
-
-...... Some log ignored ......
-
-    Destroy monitored on 10.0.1.1 success
-Destroying monitored 10.0.1.2
-Destroying monitored
-    Destroying instance 10.0.1.2
-Destroy monitored on 10.0.1.2 success
-Destroying monitored 10.0.1.4
-Destroying monitored
-    Destroying instance 10.0.1.4
-Destroy monitored on 10.0.1.4 success
-Destroying component pd
-Destroying instance 10.0.1.4
-Deleting paths on 10.0.1.4: /tidb-data/pd-2379 /tidb-deploy/pd-2379 /tidb-deploy/pd-2379/log /etc/systemd/system/pd-2379.service
-Destroy 10.0.1.4 success
-Destroying monitored 10.0.1.4
-Destroying monitored
-    Destroying instance 10.0.1.4
-Destroy monitored on 10.0.1.4 success
-Destroyed cluster `tidb-test` successfully
-```
+If the output log includes ```Destroy cluster `tidb-test` successfully```, then the cluster is successfully destroyed.
 
 ## TiUP Deployment FAQs
 
@@ -1296,6 +1243,21 @@ This section describes common problems and solutions when you deploy TiDB cluste
 | Instance | `data_dir` | inherit global configuration | data directory |
 | Instance | `log_dir` | inherit global configuration | log directory |
 
+### TiFlash parameter
+
+| Parameter | Default configuration | Description |
+| :-- | :-- | :-- |
+| ssh_port | 22 | SSH default port |
+| tcp_port | 9000 | TiFlash TCP service port |
+| http_port | 8123 | TiFlash HTTP service port |
+| flash_service_port | 3930 | TiFlash RAFT service port and Coprocessor service port |
+| flash_proxy_port | 20170 | TiFlash Proxy service port |
+| flash_proxy_status_port | 20292 | Prometheus pulling TiFlash Proxy metrics port |
+| metrics_port | 8234 | Prometheus pulling TiFlash metrics port |
+| deploy_dir | /home/tidb/deploy/tiflash-9000 | TiFlash deployment directory |
+| data_dir | /home/tidb/deploy/tiflash-9000/data | TiFlash data storage directory |
+| log_dir | /home/tidb/deploy/tiflash-9000/log | TiFlash log storage directory |
+
 ### Parameter module configuration
 
 This section describes the parameter module configuration in descending order.
@@ -1318,7 +1280,6 @@ tidb_servers:
     numa_node: "0,1"
     # Config is used to overwrite the `server_configs.tidb` values
     config:
-      log.level: warn
       log.slow-query-file: tidb-slow-overwritten.log
 ```
 
@@ -1339,21 +1300,23 @@ tidb_servers:
     ```yaml
     server_configs:
     tidb:
-        binlog.enable: false
-        binlog.ignore-error: false
+      log.slow-threshold: 300
+      binlog.enable: false
+      binlog.ignore-error: false
     tikv:
-        readpool.storage.low-concurrency: 8
-        server.labels:
-        zone: sh
-        dc: sha
-        rack: rack1
-        host: host1
+      # server.grpc-concurrency: 4
+      # raftstore.apply-pool-size: 2
+      # raftstore.store-pool-size: 2
+      # rocksdb.max-sub-compactions: 1
+      # storage.block-cache.capacity: "16GB"
+      # readpool.unified.max-thread-count: 12
+      readpool.storage.use-unified-pool: true
+      readpool.coprocessor.use-unified-pool: true
     pd:
-        replication.enable-placement-rules: true
-        label-property:
-        reject-leader:
-            - key: "dc"
-            value: "bja"
+      schedule.leader-schedule-limit: 4
+      schedule.region-schedule-limit: 2048
+      schedule.replica-schedule-limit: 64
+      replication.enable-placement-rules: true
     pump:
         gc: 7
     ```
@@ -1369,6 +1332,85 @@ tidb_servers:
     data_dir: "data/monitored-9100"
     log_dir: "deploy/monitored-9100/log"
     ```
+
+### How to view the TiDB versions supported by TiUP
+
+Execute the following command to view the TiDB versions that TiUP supports:
+
+```shell
+tiup list tidb --refresh
+```
+
+In the following output:
+
+- `Version` is the supported TiDB version
+- `Installed` is the currently installed version
+- `Release` is the release time
+- `Platforms` is the supported platform
+
+```log
+Available versions for tidb (Last Modified: 2020-02-26T15:20:35+08:00):
+Version        Installed  Release:                             Platforms
+-------        ---------  --------                             ---------
+master                    2020-03-18T08:39:11.753360611+08:00  linux/amd64,darwin/amd64
+v3.0.1                    2020-04-07T17:53:00+08:00            linux/amd64,darwin/amd64
+v3.0.2                    2020-04-08T23:38:37+08:00            linux/amd64,darwin/amd64
+v3.0.3                    2020-03-27T22:41:16.279411145+08:00  linux/amd64,darwin/amd64
+v3.0.4                    2020-03-27T22:43:35.362550386+08:00  linux/amd64,darwin/amd64
+v3.0.5                    2020-03-27T22:46:01.016467032+08:00  linux/amd64,darwin/amd64
+v3.0.6                    2020-03-13T11:55:17.941641963+08:00  linux/amd64,darwin/amd64
+v3.0.7                    2020-03-13T12:02:22.538128662+08:00  linux/amd64,darwin/amd64
+v3.0.8                    2020-03-17T14:03:29.575448277+08:00  linux/amd64,darwin/amd64
+v3.0.9                    2020-03-13T13:02:15.947260351+08:00  linux/amd64,darwin/amd64
+v3.0.10                   2020-03-13T14:11:53.774527401+08:00  linux/amd64,darwin/amd64
+v3.0.11                   2020-03-13T15:31:06.94547891+08:00   linux/amd64,darwin/amd64
+v3.0.12                   2020-03-20T11:36:28.18950808+08:00   linux/amd64,darwin/amd64
+v3.1.0-beta.2             2020-03-19T00:48:48.266468238+08:00  linux/amd64,darwin/amd64
+v3.1.0-rc                 2020-04-02T23:43:17.456327834+08:00  linux/amd64,darwin/amd64
+v4.0.0-beta               2020-03-13T12:43:55.508190493+08:00  linux/amd64,darwin/amd64
+v4.0.0-beta.1             2020-03-13T12:30:08.913759828+08:00  linux/amd64,darwin/amd64
+v4.0.0-beta.2             2020-03-18T22:52:00.830626492+08:00  linux/amd64,darwin/amd64
+v4.0.0-rc      YES        2020-04-09T00:10:32+08:00            linux/amd64,darwin/amd64
+nightly                   2020-04-10T08:42:23+08:00            darwin/amd64,linux/amd64
+```
+
+### How to view the TiDB components supported by TiUP 
+
+Execute the following command to view the TiDB components that TiUP supports:
+
+```shell
+tiup list
+```
+
+In the following output:
+
+- `Name` is the supported component name
+- `Installed` is whether or not the component is installed
+- `Platforms` is the supported platform
+- `Description` is the component description
+
+```log
+Available components (Last Modified: 2020-02-27T15:20:35+08:00):
+Name               Installed                                                                                                             Platforms                 Description
+----               ---------                                                                                                             ---------                 -----------
+tidb               YES(v4.0.0-rc)                                                                                                    darwin/amd64,linux/amd64  TiDB is an open source distributed HTAP database compatible with the MySQL protocol
+tikv               YES(v4.0.0-rc)                                                                                                    darwin/amd64,linux/amd64  Distributed transactional key-value database, originally created to complement TiDB
+pd                 YES(v4.0.0-rc)                                                                                                    darwin/amd64,linux/amd64  PD is the abbreviation for Placement Driver. It is used to manage and schedule the TiKV cluster
+playground         YES(v0.0.5)                                                                                                           darwin/amd64,linux/amd64  Bootstrap a local TiDB cluster
+client                                                                                                                                   darwin/amd64,linux/amd64  A simple mysql client to connect TiDB
+prometheus                                                                                                                               darwin/amd64,linux/amd64  The Prometheus monitoring system and time series database.
+tpc                                                                                                                                      darwin/amd64,linux/amd64  A toolbox to benchmark workloads in TPC
+package                                                                                                                                  darwin/amd64,linux/amd64  A toolbox to package tiup component
+grafana                                                                                                                                  linux/amd64,darwin/amd64  Grafana is the open source analytics & monitoring solution for every database
+alertmanager                                                                                                                             darwin/amd64,linux/amd64  Prometheus alertmanager
+blackbox_exporter                                                                                                                        darwin/amd64,linux/amd64  Blackbox prober exporter
+node_exporter                                                                                                                            darwin/amd64,linux/amd64  Exporter for machine metrics
+pushgateway                                                                                                                              darwin/amd64,linux/amd64  Push acceptor for ephemeral and batch jobs
+tiflash                                                                                                                                  linux/amd64               The TiFlash Columnar Storage Engine
+drainer                                                                                                                                  linux/amd64               The drainer componet of TiDB binlog service
+pump                                                                                                                                     linux/amd64               The pump componet of TiDB binlog service
+cluster            YES(v0.4.6)  linux/amd64,darwin/amd64  Deploy a TiDB cluster for production
+```
 
 ### How to check whether the NTP service is normal
 
