@@ -405,7 +405,7 @@ tidb_servers:
     # deploy_dir: "/tidb-deploy/tidb-4000"
     # log_dir: "/tidb-deploy/tidb-4000/log"
     # numa_node: "0,1"
-    # # The following configs are used to overwrite the `server_configs.pd` values.
+    # # The following configs are used to overwrite the `server_configs.tidb` values.
     # config:
     #   log.slow-query-file: tidb-slow-overwrited.log
   - host: 10.0.1.8
@@ -456,7 +456,7 @@ tiflash_servers:
 #     data_dir: "/tidb-data/pump-8249"
 #     log_dir: "/tidb-deploy/pump-8249/log"
 #     numa_node: "0,1"
-#     # The following configs are used to overwrite the `server_configs.pd` values.
+#     # The following configs are used to overwrite the `server_configs.drainer` values.
 #     config:
 #       gc: 7
 #   - host: 10.0.1.18
@@ -471,7 +471,7 @@ tiflash_servers:
 #     deploy_dir: "/tidb-deploy/drainer-8249"
 #     log_dir: "/tidb-deploy/drainer-8249/log"
 #     numa_node: "0,1"
-#     # The following configs are used to overwrite the `server_configs.pd` values.
+#     # The following configs are used to overwrite the `server_configs.drainer` values.
 #     config:
 #       syncer.db-type: "mysql"
 #       syncer.to.host: "127.0.0.1"
@@ -846,7 +846,7 @@ pump_servers:
     port: 8250
     deploy_dir: "/tidb-deploy/pump-8249"
     data_dir: "/tidb-data/pump-8249"
-    # The following configs are used to overwrite the `server_configs.pd` values.
+    # The following configs are used to overwrite the `server_configs.drainer` values.
     config:
       gc: 7
   - host: 10.0.1.7
@@ -854,7 +854,7 @@ pump_servers:
     port: 8250
     deploy_dir: "/tidb-deploy/pump-8249"
     data_dir: "/tidb-data/pump-8249"
-    # The following configs are used to overwrite the `server_configs.pd` values.
+    # The following configs are used to overwrite the `server_configs.drainer` values.
     config:
       gc: 7
   - host: 10.0.1.8
@@ -862,7 +862,7 @@ pump_servers:
     port: 8250
     deploy_dir: "/tidb-deploy/pump-8249"
     data_dir: "/tidb-data/pump-8249"
-    # The following configs are used to overwrite the `server_configs.pd` values.
+    # The following configs are used to overwrite the `server_configs.drainer` values.
     config:
       gc: 7
 drainer_servers:
@@ -873,7 +873,7 @@ drainer_servers:
     # Will get a latest timestamp from pd if commit_ts is set to -1 (the default value).
     commit_ts: -1
     deploy_dir: "/tidb-deploy/drainer-8249"
-    # The following configs are used to overwrite the `server_configs.pd` values.
+    # The following configs are used to overwrite the `server_configs.drainer` values.
     config:
       syncer.db-type: "tidb"
       syncer.to.host: "10.0.1.9"
@@ -1275,7 +1275,7 @@ tidb_servers:
     deploy_dir: "deploy/tidb-4000"
     log_dir: "deploy/tidb-4000/log"
     numa_node: "0,1"
-    # The following configs are used to overwrite the `server_configs.pd` values.
+    # The following configs are used to overwrite the `server_configs.drainer` values.
     config:
       log.slow-query-file: tidb-slow-overwritten.log
 ```
