@@ -189,8 +189,8 @@ Other requirements for the deployment machine:
     {{< copyable "shell-regular" >}}
 
     ```yaml
-    # # Global variables are applied to all deployments and as the default value of
-    # # them if the specific deployment value missing.
+    # # Global variables are applied to all deployments and used as the default value of
+    # # The deployments if a specific deployment value is missing.
      
     global:
      user: "tidb"
