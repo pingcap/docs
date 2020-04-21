@@ -18,7 +18,7 @@ The structure of the `information_schema.inspection_result` diagnosis result tab
 desc inspection_result;
 ```
 
-```
+```sql
 +-----------+--------------+------+------+---------+-------+
 | Field     | Type         | Null | Key  | Default | Extra |
 +-----------+--------------+------+------+---------+-------+
@@ -60,7 +60,7 @@ Diagnose issues currently existing in the cluster.
 select * from inspection_result\G
 ```
 
-```
+```sql
 ***************************[ 1. row ]***************************
 RULE      | config
 ITEM      | log.slow-threshold
@@ -113,7 +113,7 @@ You can also diagnose issues existing within a specified range, such as from "20
 select /*+ time_range("2020-03-26 00:03:00", "2020-03-26 00:08:00") */ * from inspection_result\G
 ```
 
-```
+```sql
 ***************************[ 1. row ]***************************
 RULE      | critical-error
 ITEM      | server-down
@@ -167,7 +167,7 @@ You can query the existing diagnosis rules by querying the `inspection_rules` sy
 select * from inspection_rules where type='inspection';
 ```
 
-```
+```sql
 +-----------------+------------+---------+
 | NAME            | TYPE       | COMMENT |
 +-----------------+------------+---------+
@@ -233,7 +233,7 @@ The `version` diagnosis rule checks whether the version hash of the same compone
 select * from inspection_result where rule='version'\G
 ```
 
-```
+```sql
 ***************************[ 1. row ]***************************
 RULE      | version
 ITEM      | git_hash

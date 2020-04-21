@@ -16,7 +16,7 @@ The structure of the `information_schema.inspection_summary` inspection summary 
 desc inspection_summary;
 ```
 
-```
+```sql
 +--------------+-----------------------+------+------+---------+-------+
 | Field        | Type                  | Null | Key  | Default | Extra |
 +--------------+-----------------------+------+------+---------+-------+
