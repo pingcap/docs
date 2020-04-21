@@ -197,7 +197,7 @@ Other requirements for the deployment machine:
      deploy_dir: "/tidb-deploy"
      data_dir: "/tidb-data"
      
-    # # Monitored variables are used to all the machine
+    # # Monitored variables are applied to all the machines.
     monitored:
      node_exporter_port: 9100
      blackbox_exporter_port: 9115
