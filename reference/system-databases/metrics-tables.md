@@ -14,7 +14,7 @@ The `METRICS_TABLES` table provides information of all monitoring tables in the 
 desc metrics_tables;
 ```
 
-```
+```sql
 +------------+-----------------+------+------+---------+-------+
 | Field      | Type            | Null | Key  | Default | Extra |
 +------------+-----------------+------+------+---------+-------+

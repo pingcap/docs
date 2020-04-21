@@ -19,7 +19,7 @@ The two tables summarize all monitoring data to for you to check each monitoring
 desc metrics_summary;
 ```
 
-```
+```sql
 +--------------+-----------------------+------+------+---------+-------+
 | Field        | Type                  | Null | Key  | Default | Extra |
 +--------------+-----------------------+------+------+---------+-------+
@@ -58,7 +58,7 @@ order by avg_value desc
 limit 3\G
 ```
 
-```
+```sql
 ***************************[ 1. row ]***************************
 METRICS_NAME | tidb_get_token_duration
 QUANTILE     | 0.99
@@ -99,7 +99,7 @@ order by avg_value desc
 limit 10\G
 ```
 
-```
+```sql
 ***************************[ 1. row ]***************************
 INSTANCE     | 172.16.5.40:10089
 METRICS_NAME | tidb_get_token_duration
@@ -132,9 +132,9 @@ MAX_VALUE    | 0.008241
 COMMENT      | The quantile of TiDB query durations(second)
 ```
 
-The second and third lines of the above query results indicate that the `Select` and `Rollback` statements on `tidb_query_duration` have a long average execution time.
+The second and third lines of the query results above indicate that the `Select` and `Rollback` statements on `tidb_query_duration` have a long average execution time.
 
-In addition to the above example, you can use the monitoring summary table to quickly find the module with the largest change from the monitoring data by comparing the full link monitoring items of the two time periods, and quickly locate the bottleneck. The following example compares all monitoring items in two periods (where t1 is the baseline) and sorts these items according to the greatest difference:
+In addition to the example above, you can use the monitoring summary table to quickly find the module with the largest change from the monitoring data by comparing the full link monitoring items of the two time periods, and quickly locate the bottleneck. The following example compares all monitoring items in two periods (where t1 is the baseline) and sorts these items according to the greatest difference:
 
 * Period t1：`("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
 * Period t2：`("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
@@ -160,7 +160,7 @@ JOIN
 ORDER BY  ratio DESC limit 10;
 ```
 
-```
+```sql
 +----------------+------------------------------------------+----------------+------------------+---------------------------------------------------------------------------------------------+
 | ratio          | metrics_name                             | t1_avg_value   | t2_avg_value     | comment                                                                                     |
 +----------------+------------------------------------------+----------------+------------------+---------------------------------------------------------------------------------------------+
@@ -177,13 +177,13 @@ ORDER BY  ratio DESC limit 10;
 +----------------+------------------------------------------+----------------+------------------+---------------------------------------------------------------------------------------------+
 ```
 
-From the above query result:
+From the query above result:
 
 * `tib_slow_query_cop_process_total_time` (the time consumption of `cop process` in TiDB slow queries) in the period t2 is 5,865 times higher than that in period t1.
 * `tidb_distsql_partial_scan_key_total_num` (the number of keys to scan requested by TiDB’s `distsql`) in period t2 is 3,648 times higher than that in period t1. During period t2, `tidb_slow_query_cop_wait_total_time` (the waiting time of Coprocessor requesting to queue up in the TiDB slow query) is 267 times higher than that in period t1.
 * `tikv_cop_total_response_size` (the size of the TiKV Coprocessor request result) in period t2 is 192 times higher than that in period t1.
 * `tikv_cop_scan_details` in period t2 (the scan requested by the TiKV Coprocessor) is 105 times higher than that in period t1.
 
-From the above result, you can see that the Coprocessor request in period t2 is much higher than period t1, which causes TiKV Coprocessor to be overloaded, and there is a `cop task` waiting. It might be that some large queries appear in period t2 that bring more load.
+From the result above, you can see that the Coprocessor request in period t2 is much higher than period t1, which causes TiKV Coprocessor to be overloaded, and there is a `cop task` waiting. It might be that some large queries appear in period t2 that bring more load.
 
 In fact, during the entire time period from t1 to t2, the `go-ycsb` pressure test is being run. Then 20 `tpch` queries are run during period t2, so it is the `tpch` queries that cause many Coprocessor requests.

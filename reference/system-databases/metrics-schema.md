@@ -6,7 +6,7 @@ category: reference
 
 # Metrics Schema
 
-To dynamically observe and compare cluster conditions of different time periods, the SQL diagnosis system introduces cluster monitoring system tables. All monitoring tables are in the metrics schema, and you can query the monitoring information using SQL statements in this schema. In fact, the data of the three monitoring-related summary tables ([`metrics_summary`](/reference/system-databases/metrics-summary.md), [`metrics_summary_by_label`](/reference/system-databases/metrics-summary.md), and `inspection_result`) are obtained by querying the monitoring tables in the metrics schema. Currently, many system tables are added and you can query the information of these tables through the [`information_schema.metrics_tables`](/reference/system-databases/metrics-tables.md) table.
+To dynamically observe and compare cluster conditions of different time ranges, the SQL diagnosis system introduces cluster monitoring system tables. All monitoring tables are in the metrics schema, and you can query the monitoring information using SQL statements in this schema. The data of the three monitoring-related summary tables ([`metrics_summary`](/reference/system-databases/metrics-summary.md), [`metrics_summary_by_label`](/reference/system-databases/metrics-summary.md), and `inspection_result`) are all obtained by querying the monitoring tables in the metrics schema. Currently, many system tables are added, so you can query the information of these tables using the [`information_schema.metrics_tables`](/reference/system-databases/metrics-tables.md) table.
 
 ## Overview
 
@@ -20,7 +20,7 @@ Query the information related to the `tidb_query_duration` table on `information
 select * from information_schema.metrics_tables where table_name='tidb_query_duration';
 ```
 
-```
+```sql
 +---------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------+----------+----------------------------------------------+
 | TABLE_NAME          | PROMQL                                                                                                                                                   | LABELS            | QUANTILE | COMMENT                                      |
 +---------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------+----------+----------------------------------------------+
@@ -36,7 +36,7 @@ Field description:
 * `QUANTILE`: The percentile. For monitoring data of the histogram type, a default percentile is specified. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
 * `COMMENT`: The comment for the monitoring table. You can see that the `tidb_query_duration` table is used to query the percentile time of the TiDB query execution, such as the query time of P999/P99/P90. The unit is second.
 
-The structure of the `tidb_query_duration` table is queried as follows:
+To query the schema of the `tidb_query_duration` table, execute the following statement:
 
 {{< copyable "sql" >}}
 
@@ -44,7 +44,7 @@ The structure of the `tidb_query_duration` table is queried as follows:
 show create table metrics_schema.tidb_query_duration;
 ```
 
-```
+```sql
 +---------------------+--------------------------------------------------------------------------------------------------------------------+
 | Table               | Create Table                                                                                                       |
 +---------------------+--------------------------------------------------------------------------------------------------------------------+
@@ -71,7 +71,7 @@ The following statement queries the P99 time within the range of [`2020-03-25 23
 select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
 ```
 
-```
+```sql
 +---------------------+-------------------+----------+----------+----------------+
 | time                | instance          | sql_type | quantile | value          |
 +---------------------+-------------------+----------+----------+----------------+
@@ -87,12 +87,12 @@ select * from metrics_schema.tidb_query_duration where value is not null and tim
 +---------------------+-------------------+----------+----------+----------------+
 ```
 
-The first row of the above query result means that at the time of 2020-03-25 23:40:00, on the TiDB instance `172.16.5.40:10089`, the P99 execution time of the `Insert` type statement is 0.509929485256 seconds. The meanings of other rows are similar. Other values of the `sql_type` column is described as follows:
+The first row of the query result above means that at the time of 2020-03-25 23:40:00, on the TiDB instance `172.16.5.40:10089`, the P99 execution time of the `Insert` type statement is 0.509929485256 seconds. The meanings of other rows are similar. Other values of the `sql_type` column are described as follows:
 
 * `Select`: The `select` type statement is executed.
 * `internal`: The internal SQL statement of TiDB, which is used to update the statistical information and get the global variables.
 
-The execution plan of the above statement is as follows:
+To view the execution plan of the statement above, execute the following statement:
 
 {{< copyable "sql" >}}
 
@@ -100,7 +100,7 @@ The execution plan of the above statement is as follows:
 desc select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
 ```
 
-```
+```sql
 +------------------+----------+------+---------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id               | estRows  | task | access object             | operator info                                                                                                                                                                                          |
 +------------------+----------+------+---------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -109,14 +109,14 @@ desc select * from metrics_schema.tidb_query_duration where value is not null an
 +------------------+----------+------+---------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-From the above result, you can see that `PromQL`, `start_time`, `end_time`, and the value of `step`. During actual execution, TiDB calls the `query_range` HTTP API interface of Prometheus to query the monitoring data.
+From the result above, you can see that `PromQL`, `start_time`, `end_time`, and `step` are in the execution plan. During the execution process, TiDB calls the `query_range` HTTP API of Prometheus to query the monitoring data.
 
-You might find that during the range of [`2020-03-25 23:40:00`, `2020-03-25 23:42:00`], each label only has three time values. In the execution plan, the value of `step` is 1 minute, which is determined by the following two variables:
+You might find that in the range of [`2020-03-25 23:40:00`, `2020-03-25 23:42:00`], each label only has three time values. In the execution plan, the value of `step` is 1 minute, which is determined by the following two variables:
 
-* `tidb_metric_query_step`: The resolution step of the query. To get the `query_range` data from Prometheus, you need to specify `start`, `end`, and `step`. `step` uses the value of this variable.
-* `tidb_metric_query_range_duration`: When querying the monitoring, the `$ RANGE_DURATION` field in `PROMQL` is replaced with the value of this variable. The default value is 60 seconds.
+* `tidb_metric_query_step`: The query resolution step width. To get the `query_range` data from Prometheus, you need to specify `start_time`, `end_time`, and `step`. `step` uses the value of this variable.
+* `tidb_metric_query_range_duration`: When the monitoring data is queried, the value of the `$ RANGE_DURATION` field in `PROMQL` is replaced with the value of this variable. The default value is 60 seconds.
 
-To view the values of monitoring items with different granularities, you can modify the above two session variables before querying the monitoring table. For example:
+To view the values of monitoring items with different granularities, you can modify the two session variables above before querying the monitoring table. For example:
 
 1. Modify the values of the two session variables and set the time granularity to 30 seconds.
 
@@ -139,7 +139,7 @@ To view the values of monitoring items with different granularities, you can mod
     select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
     ```
 
-    ```
+    ```sql
     +---------------------+-------------------+----------+----------+-----------------+
     | time                | instance          | sql_type | quantile | value           |
     +---------------------+-------------------+----------+----------+-----------------+
@@ -169,7 +169,7 @@ To view the values of monitoring items with different granularities, you can mod
     desc select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
     ```
 
-    ```
+    ```sql
     +------------------+----------+------+---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | id               | estRows  | task | access object             | operator info                                                                                                                                                                                         |
     +------------------+----------+------+---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
