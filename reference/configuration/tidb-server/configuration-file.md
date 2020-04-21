@@ -104,6 +104,25 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: []
 - The list is empty by default. This means that there are no bad tables that need to be repaired.
 
+### `new_collations_enabled_on_first_bootstrap`
+
+- Enables or disables the new Collation support.
+- Default value: `false`
+- Note: This configuration takes effect only for the TiDB cluster that has just been initialized. After the initialization, you cannot use this configuration item to enable and disable the new Collation support. When a TiDB cluster is upgraded to v4.0, because the cluster is initialized before, both `true` and `false` values of this configuration item are taken as `false`.
+
+### `max-server-connections`
+
+- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
+- Default value: `0`
+- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
+
+### `max-index-length`
+
+- Sets the maximum allowable length of the newly created index.
+- Default value: `3072`
+- Unit: byte
+- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
+
 ## Log
 
 Configuration items related to log.
@@ -156,18 +175,6 @@ Configuration items related to log.
 - The maximum length of SQL output.
 - Default value: `4096`
 - When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
-
-### `new_collations_enabled_on_first_bootstrap`
-
-+ Enables or disables the new Collation support.
-+ Default value: `false`
-+ Note: This configuration takes effect only for the TiDB cluster that has just been initialized. After the initialization, you cannot use this configuration item to enable and disable the new Collation support. When a TiDB cluster is upgraded to v4.0, because the cluster is initialized before, both `true` and `false` values of this configuration item are taken as `false`.
-
-### `max-server-connections`
-
-- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
-- Default value: `0`
-- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
 
 ## log.file
 
