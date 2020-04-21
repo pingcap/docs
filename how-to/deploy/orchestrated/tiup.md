@@ -13,7 +13,7 @@ This document introduces how to use TiUP to deploy a TiDB cluster. The steps are
 - [Step 1: Prepare the right machines for deployment](#step-1-prepare-the-right-machines-for-deployment)
 - [Step 2: Install TiUP on the Control Machine](#step-2-install-tiup-on-the-control-machine)
 - [Step 3: Mount the data disk ext4 filesystem with options on the target machines that deploy TiKV](#step-3-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv)
-- [Step 4: Configure the initialization configuration file `topology.yaml`](#step-4-configure-the-initialization-configuration-file-topologyyaml)
+- [Step 4: Edit the initialization configuration file `topology.yaml`](#step-4-edit-the-initialization-configuration-file-topologyyaml)
 - [Step 5: Execute the deployment command](#step-5-execute-the-deployment-command)
 - [Step 6: Check the clusters managed by TiUP](#step-6-check-the-clusters-managed-by-tiup)
 - [Step 7: Check the status of the deployed TiDB cluster](#step-7-check-the-status-of-the-deployed-tidb-cluster)
