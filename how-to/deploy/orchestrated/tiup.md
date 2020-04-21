@@ -281,9 +281,9 @@ Take the `/dev/nvme0n1` data disk as an example:
 
     If the filesystem is ext4 and `nodelalloc` is included in the mount options, you have successfully mount the data disk ext4 filesystem with options on the target machines.
 
-## Step 4: Configure the initialization configuration file `topology.yaml`
+## Step 4: Edit the initialization configuration file `topology.yaml`
 
-You need to manually write the cluster initialization configuration file. For the full configuration template, refer to [Github TiUP Project](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml).
+You need to manually create and edit the cluster initialization configuration file. For the full configuration template, refer to [Github TiUP Project](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml).
 
 You need to create a YAML configuration file on the Control Machine, such as `topology.yaml`.
 
