@@ -190,8 +190,7 @@ Other requirements for the deployment machine:
 
     ```yaml
     # # Global variables are applied to all deployments and used as the default value of
-    # # The deployments if a specific deployment value is missing.
-     
+    # # the deployments if a specific deployment value is missing.
     global:
      user: "tidb"
      ssh_port: 22
