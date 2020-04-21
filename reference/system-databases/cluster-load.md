@@ -14,7 +14,7 @@ The `CLUSTER_LOAD` cluster load table provides the current load information of t
 desc cluster_load;
 ```
 
-```
+```sql
 +-------------+--------------+------+------+---------+-------+
 | Field       | Type         | Null | Key  | Default | Extra |
 +-------------+--------------+------+------+---------+-------+
@@ -48,7 +48,7 @@ The following example shows how to query the current load information of cpu usi
 select * from cluster_load where device_type='cpu' and device_name='cpu';
 ```
 
-```
+```sql
 +------+-----------------+-------------+-------------+--------+---------------+
 | TYPE | INSTANCE        | DEVICE_TYPE | DEVICE_NAME | NAME   | VALUE         |
 +------+-----------------+-------------+-------------+--------+---------------+

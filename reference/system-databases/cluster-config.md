@@ -14,7 +14,7 @@ You can use the `CLUSTER_CONFIG` cluster configuration table to get the current 
 desc cluster_config;
 ```
 
-```
+```sql
 +----------+--------------+------+------+---------+-------+
 | Field    | Type         | Null | Key  | Default | Extra |
 +----------+--------------+------+------+---------+-------+
@@ -40,7 +40,7 @@ The following example shows how to query the `coprocessor` configuration on the 
 select * from cluster_config where type='tikv' and `key` like 'coprocessor%';
 ```
 
-```
+```sql
 +------+-----------------+-----------------------------------+----------+
 | TYPE | INSTANCE        | KEY                               | VALUE    |
 +------+-----------------+-----------------------------------+----------+

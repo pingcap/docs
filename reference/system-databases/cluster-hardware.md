@@ -14,7 +14,7 @@ The `CLUSTER_HARDWARE` hardware system table provides the hardware information o
 desc cluster_hardware;
 ```
 
-```
+```sql
 +-------------+--------------+------+------+---------+-------+
 | Field       | Type         | Null | Key  | Default | Extra |
 +-------------+--------------+------+------+---------+-------+
@@ -48,7 +48,7 @@ The following example shows how to query the CPU information using the `CLUSTER_
 select * from cluster_hardware where device_type='cpu' and device_name='cpu' and name like '%cores';
 ```
 
-```
+```sql
 +------+-----------------+-------------+-------------+--------------------+-------+
 | TYPE | INSTANCE        | DEVICE_TYPE | DEVICE_NAME | NAME               | VALUE |
 +------+-----------------+-------------+-------------+--------------------+-------+

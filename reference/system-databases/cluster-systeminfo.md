@@ -14,7 +14,7 @@ You can use the `CLUSTER_SYSTEMINFO` kernel parameter table to query the kernel 
 desc cluster_systeminfo;
 ```
 
-```
+```sql
 +-------------+--------------+------+------+---------+-------+
 | Field       | Type         | Null | Key  | Default | Extra |
 +-------------+--------------+------+------+---------+-------+
@@ -43,7 +43,7 @@ The following example shows how to query the kernel version of all servers in th
 select * from CLUSTER_SYSTEMINFO where name like '%kernel.osrelease%'
 ```
 
-```
+```sql
 +------+-------------------+-------------+-------------+------------------+----------------------------+
 | TYPE | INSTANCE          | SYSTEM_TYPE | SYSTEM_NAME | NAME             | VALUE                      |
 +------+-------------------+-------------+-------------+------------------+----------------------------+
