@@ -13,6 +13,7 @@
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/add-index-with-load.md)
+- [Quick Start with TiDB](/quick-start-with-tidb.md)
 + Concepts
   - [Architecture](/architecture.md)
   + Key Features
@@ -279,6 +280,9 @@
       - [`cluster_info`](/reference/system-databases/cluster-info.md)
       - [`cluster_hardware`](/reference/system-databases/cluster-hardware.md)
       - [`cluster_config`](/reference/system-databases/cluster-config.md)
+      - [`cluster_load`](/reference/system-databases/cluster-load.md)
+      - [`cluster_systeminfo`](/reference/system-databases/cluster-systeminfo.md)
+      - [`cluster_log`](/reference/system-databases/cluster-log.md)
   - [Errors Codes](/reference/error-codes.md)
   - [Supported Client Drivers](/reference/supported-clients.md)
   + Garbage Collection (GC)
@@ -394,6 +398,7 @@
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
+    - [3.1.0 GA](/releases/3.1.0-ga.md)
     - [3.1.0-rc](/releases/3.1.0-rc.md)
     - [3.1.0-beta.2](/releases/3.1.0-beta.2.md)
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
