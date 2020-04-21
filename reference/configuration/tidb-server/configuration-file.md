@@ -80,6 +80,34 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: ""
 + By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
 
+<<<<<<< HEAD
+=======
+### `repair-mode`
+
+- Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
+- Default value: `false`
+- The `repair` syntax is not supported by default. This means that all tables are loaded when TiDB is started.
+
+### `repair-table-list`
+
+- `repair-table-list` is only valid when [`repair-mode`](#repair-mode) is set to `true`. `repair-table-list` is a list of bad tables that need to be repaired in an instance. An example of the list is: ["db.table1","db.table2"...].
+- Default value: []
+- The list is empty by default. This means that there are no bad tables that need to be repaired.
+
+### `max-server-connections`
+
+- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
+- Default value: `0`
+- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
+
+### `max-index-length`
+
+- Sets the maximum allowable length of the newly created index.
+- Default value: `3072`
+- Unit: byte
+- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
+
+>>>>>>> 34f61a6... reference: add a description of max-index-length (#2303)
 ## Log
 
 Configuration items related to log
