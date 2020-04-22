@@ -93,7 +93,7 @@ To manually delete the replication rules in PD, take the following steps:
     ]
     ```
 
-2. Delete all the data replication rules related to TiFlash. The following command deletes the rule whose `id` is `table-45-r`:
+2. Delete all the data replication rules related to TiFlash. The following example command deletes the rule whose `id` is `table-45-r`:
 
     {{< copyable "shell-regular" >}}
 
