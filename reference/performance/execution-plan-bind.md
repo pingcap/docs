@@ -20,7 +20,7 @@ CREATE [GLOBAL | SESSION] BINDING FOR SelectStmt USING SelectStmt
 
 This statement binds SQL execution plans at the GLOBAL or SESSION level. The default scope is SESSION. The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost.
 
-When a SQL statement has bound execution plans in both GLOBAL and SESSION scopes, because the optimizer ignores the bound execution plan in the GLOBAL scope when it encounters the SESSION binding, the bound execution plan of this statement in the SESSION scope overrides the execution plan in the GLOBAL scope.
+When a SQL statement has bound execution plans in both GLOBAL and SESSION scopes, because the optimizer ignores the bound execution plan in the GLOBAL scope when it encounters the SESSION binding, the bound execution plan of this statement in the SESSION scope shields the execution plan in the GLOBAL scope.
 
 For example:
 
@@ -82,7 +82,7 @@ DROP [GLOBAL | SESSION] BINDING FOR SelectStmt
 
 This statement removes a specified execution plan binding at the GLOBAL or SESSION level. The default scope is SESSION.
 
-Generally, the binding in the SESSION scope is mainly used for test or in special situations. For a binding to take effect in all TiDB processes, you need to use the GLOBAL binding. The SESSION binding overrides the GLOBAL binding until the end of the SESSION.
+Generally, the binding in the SESSION scope is mainly used for test or in special situations. For a binding to take effect in all TiDB processes, you need to use the GLOBAL binding. The SESSION binding shields the GLOBAL binding until the end of the SESSION.
 
 In the following example, the SESSION binding is dropped.
 
@@ -94,7 +94,7 @@ drop session binding for select * from t1, t2 where t1.id = t2.id;
 explain select * from t1,t2 where t1.id = t2.id;
 ```
 
-In the example above, the dropped binding in the SESSION scope overrides the corresponding binding in the GLOBAL scope. The optimizer does not add the `TIDB_SMJ(t1, t2)` hint to the statement. The top node of the execution plan in the `explain` result is not fixed to MergeJoin by this hint. Instead, the top node is independently selected by the optimizer according to the cost estimation.
+In the example above, the dropped binding in the SESSION scope shields the corresponding binding in the GLOBAL scope. The optimizer does not add the `TIDB_SMJ(t1, t2)` hint to the statement. The top node of the execution plan in the `explain` result is not fixed to MergeJoin by this hint. Instead, the top node is independently selected by the optimizer according to the cost estimation.
 
 ### View binding
 
