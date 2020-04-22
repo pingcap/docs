@@ -91,7 +91,7 @@ In addition, to view the shard bit number of the table with the `AUTO_RANDOM` at
 
 You can use `select last_insert_id ()` to see the last implicit ID assigned by TiDB. For example:
 
-Values assigned to the `AUTO_RANDOM` column affects `last_insert_id()`. You can use `select last_insert_id ()` to get the ID that TiDB last implicitly assigns. For example:
+Values assigned to the `AUTO_RANDOM` column affect `last_insert_id()`. You can use `select last_insert_id ()` to get the ID that TiDB last implicitly assigns. For example:
 
 {{< copyable "sql" >}}
 
