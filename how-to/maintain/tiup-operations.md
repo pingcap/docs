@@ -16,7 +16,9 @@ This document describes the common operations when you administer a TiDB cluster
 
 ## View the cluster list
 
-You can manage multiple TiDB clusters using the TiUP cluster component. After each TiDB cluster is deployed, the cluster will appear in the TiUP cluster list. To view the list, run the following command:
+You can manage multiple TiDB clusters using the TiUP cluster component. After each TiDB cluster is deployed, the cluster will appear in the TiUP cluster list.
+
+To view the list, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -112,7 +114,7 @@ When the cluster is in operation, if you need to modify the parameters of a comp
 
     For more information on the configuration parameters of components, refer to [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/v4.0.0-rc/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml), and [PD `config.toml.example`](https://github.com/pingcap/pd/blob/v4.0.0-rc/conf/config.toml).
 
-3. Roll out the configuration and restart the corresponding components by running the `reload` command:
+3. Rolling update the configuration and restart the corresponding components by running the `reload` command:
 
     {{< copyable "shell-regular" >}}
 
@@ -134,7 +136,7 @@ Run the `tiup cluster reload ${cluster-name} -N tidb` command to rolling restart
 
 ## Stop the cluster
 
-The components in the TiDB cluster are stopped in the following order (The monitoring component is also started):
+The components in the TiDB cluster are stopped in the following order (The monitoring component is also stopped):
 
 Drainer -> TiFlash -> TiDB -> Pump -> TiKV -> PD
 
