@@ -37,7 +37,7 @@ It is **not** recommended to deploy TiFlash and TiKV on the same disk to prevent
 
 Hard disk selection criteria are the same as [TiFlash standalone deployment](#tiflash-standalone-deployment). The total capacity of the hard disk is roughly: `the to-be-replicated data capacity of the entire TiKV cluster / the number of TiKV replicas * the number of TiFlash replicas`.
 
-For example, if the overall planned capacity of TiKV is 1TB, with 3 replicas, and TiFlash is 2 replicas, then the recommended capacity of TiFlash will be (1024GB / 3 * 2). You can choose to replicate part of tables instead of all.
+For example, if the overall planned capacity of TiKV is 1TB, each Region in TiKV has 3 replicas, and each Region in TiFlash has 2 replicas, then the recommended capacity of TiFlash will be (1024GB / 3 * 2). You can choose to replicate part of tables instead of all.
 
 ## TiDB version requirements
 
