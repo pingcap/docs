@@ -86,6 +86,8 @@ Generally, the binding in the SESSION scope is mainly used for test or in specia
 
 In the following example, the SESSION binding is dropped.
 
+The following example is based on the example above in which the SESSION binding shields the GLOBAL binding:
+
 ```sql
 -- Drops the binding created in the SESSION scope.
 drop session binding for select * from t1, t2 where t1.id = t2.id;
