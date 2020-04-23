@@ -27,6 +27,10 @@ You can use the TiDB Ansible configuration file to set up the cluster topology a
 - [Clean up data of the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
 - [Destroy the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
 
+> **Note:**
+>
+> For production environments, it is recommended that you deploy TiDB [using TiUP](/how-to/deploy/orchestrated/tiup.md). You can also deploy TiDB using TiDB Ansible. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
+
 ## Prepare
 
 Before you start, make sure you have:
@@ -37,7 +41,7 @@ Before you start, make sure you have:
 
         A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
 
-    - CentOS 7.3 (64 bit) or later, x86_64 architecture (AMD64)
+    - x86_64 architecture (AMD64) with CentOS 7.3 (64 bit) or later; Or x86_64 architecture (ARM64) with CentOS 7.6 1810 or later.
     - Network between machines
 
     > **Note:**
@@ -616,8 +620,9 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | Variable Name | Description |
 | :---- | :------- |
 | cluster_name | the name of a cluster, adjustable |
+| cpu_architecture | CPU architecture. `amd64` by default, `arm64` optional |
 | tidb_version | the version of TiDB, configured by default in TiDB Ansible branches |
-| process_supervision | the supervision way of processes, systemd by default, supervise optional |
+| process_supervision | the supervision way of processes, `systemd` by default, `supervise` optional |
 | timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/how-to/configure/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
 | enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](/how-to/deploy/hardware-recommendations.md#network-requirements) to the white list |
 | enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
