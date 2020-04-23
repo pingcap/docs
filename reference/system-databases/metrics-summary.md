@@ -6,12 +6,12 @@ category: reference
 
 # METRICS_SUMMARY
 
-Because the TiDB cluster has many monitoring metrics, the SQL diagnosis system also provides the following two monitoring summary tables for you to easily find abnormal monitoring items:
+The TiDB cluster has many monitoring metrics. To make it easy to detect abnormal monitoring metrics, TiDB 4.0 introduces the following two monitoring summary tables:
 
 * `information_schema.metrics_summary`
 * `information_schema.metrics_summary_by_label`
 
-The two tables summarize all monitoring data to for you to check each monitoring metric with higher efficiency. Compare to `information_schema.metrics_summary`, the `information_schema.metrics_summary_by_label` table has an additional `label` column and performs differentiated statistics according to different labels.
+The two tables summarize all monitoring data for you to check each monitoring metric efficiently. Compared with `information_schema.metrics_summary`, the `information_schema.metrics_summary_by_label` table has an additional `label` column and performs differentiated statistics according to different labels.
 
 {{< copyable "sql" >}}
 
@@ -39,12 +39,12 @@ Field description:
 * `QUANTILE`: The percentile. You can specify `QUANTILE` using SQL statements. For example:
     * `select * from metrics_summary where quantile=0.99` specifies viewing the data of the 0.99 percentile.
     * `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` specifies viewing the data of the 0.8, 0.90, 0.99, 0.999 percentiles at the same time.
-* `SUM_VALUE, AVG_VALUE, MIN_VALUE, and MAX_VALUE` respectively mean the sum, the average value, the minimum value, and the maximum value.
+* `SUM_VALUE`, `AVG_VALUE`, `MIN_VALUE`, and `MAX_VALUE` respectively mean the sum, the average value, the minimum value, and the maximum value.
 * `COMMENT`: The comment for the corresponding monitoring table.
 
 For example:
 
-To query the three groups of monitoring items with the highest average time consumption in the TiDB cluster in the time range of `'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`, you can directly query the `information_schema.metrics_summary` table and use the `/*+ time_range() */` hint to specify the time range. The SQL statement is built as follows:
+To query the three groups of monitoring items with the highest average time consumption in the TiDB cluster within the time range of `'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`, you can directly query the `information_schema.metrics_summary` table and use the `/*+ time_range() */` hint to specify the time range. The SQL statement is as follows:
 
 {{< copyable "sql" >}}
 
@@ -85,7 +85,7 @@ MAX_VALUE    | 0.013
 COMMENT      | The quantile of kv requests durations by store
 ```
 
-Similarly, below is an example of querying the `metrics_summary_by_label` monitoring summary table:
+Similarly, the following example queries the `metrics_summary_by_label` monitoring summary table:
 
 {{< copyable "sql" >}}
 
@@ -132,14 +132,14 @@ MAX_VALUE    | 0.008241
 COMMENT      | The quantile of TiDB query durations(second)
 ```
 
-The second and third lines of the query results above indicate that the `Select` and `Rollback` statements on `tidb_query_duration` have a long average execution time.
+The second and third rows of the query results above indicate that the `Select` and `Rollback` statements on `tidb_query_duration` have a long average execution time.
 
 In addition to the example above, you can use the monitoring summary table to quickly find the module with the largest change from the monitoring data by comparing the full link monitoring items of the two time periods, and quickly locate the bottleneck. The following example compares all monitoring items in two periods (where t1 is the baseline) and sorts these items according to the greatest difference:
 
 * Period t1：`("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
 * Period t2：`("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
-The monitoring items of the two time periods are joined according to `METRICS_NAME` and sorted according to the difference value. `TIME_RANGE` is the hint that specifies the quey time.
+The monitoring items of the two time periods are joined according to `METRICS_NAME` and sorted according to the difference value. `TIME_RANGE` is the hint that specifies the query time.
 
 {{< copyable "sql" >}}
 
@@ -177,13 +177,13 @@ ORDER BY  ratio DESC limit 10;
 +----------------+------------------------------------------+----------------+------------------+---------------------------------------------------------------------------------------------+
 ```
 
-From the query above result:
+From the query result above, you can get the following information:
 
 * `tib_slow_query_cop_process_total_time` (the time consumption of `cop process` in TiDB slow queries) in the period t2 is 5,865 times higher than that in period t1.
 * `tidb_distsql_partial_scan_key_total_num` (the number of keys to scan requested by TiDB’s `distsql`) in period t2 is 3,648 times higher than that in period t1. During period t2, `tidb_slow_query_cop_wait_total_time` (the waiting time of Coprocessor requesting to queue up in the TiDB slow query) is 267 times higher than that in period t1.
 * `tikv_cop_total_response_size` (the size of the TiKV Coprocessor request result) in period t2 is 192 times higher than that in period t1.
 * `tikv_cop_scan_details` in period t2 (the scan requested by the TiKV Coprocessor) is 105 times higher than that in period t1.
 
-From the result above, you can see that the Coprocessor request in period t2 is much higher than period t1, which causes TiKV Coprocessor to be overloaded, and there is a `cop task` waiting. It might be that some large queries appear in period t2 that bring more load.
+From the result above, you can see that the Coprocessor requests in period t2 are much more than those in period t1. This causes TiKV Coprocessor to be overloaded, and the `cop task` has to wait. It might be that some large queries appear in period t2 that bring more load.
 
-In fact, during the entire time period from t1 to t2, the `go-ycsb` pressure test is being run. Then 20 `tpch` queries are run during period t2, so it is the `tpch` queries that cause many Coprocessor requests.
+In fact, during the entire time period from t1 to t2, the `go-ycsb` pressure test is running. Then 20 `tpch` queries are running during period t2. So it is the `tpch` queries that cause many Coprocessor requests.
