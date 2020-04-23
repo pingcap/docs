@@ -181,9 +181,9 @@ select * from inspection_rules where type='inspection';
 
 ### `config` diagnosis rule
 
-The following two diagnosis rules are executed as the `config` diagnosis by querying the `CLUSTER_CONFIG` system table:
+In the `config` diagnosis rule, the following two diagnosis rules are executed by querying the `CLUSTER_CONFIG` system table:
 
-* Check whether the configuration values of the same component are consistent. Not all configuration items has this consistency check. The white list of consistency check is shown below:
+* Check whether the configuration values of the same component are consistent. Not all configuration items has this consistency check. The white list of consistency check is as follows:
 
     ```go
     // The whitelist of the TiDB configuration consistency check
@@ -247,21 +247,21 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 ### `critical-error` diagnosis rule
 
-The following two diagnosis rules are executed as the the `critical-error` diagnosis:
+In `critical-error` diagnosis rule, the following two diagnosis rules are executed:
 
 * Detect whether the cluster has the following errors by querying the related monitoring system tables in the metrics schema:
 
     |  Component  | Error name | Monitoring table | Error description |
     |  ----  | ----  |  ----  |  ----  |
     | TiDB | panic-count | tidb_panic_count_total_count | Panic occurs in TiDB. |
-    | TiDB | binlog-error | tidb_binlog_error_total_count | An error occurs when TiDB writes binlog files. |
+    | TiDB | binlog-error | tidb_binlog_error_total_count | An error occurs when TiDB writes binlog. |
     | TiKV | critical-error | tikv_critical_error_total_coun | The critical error of TiKV. |
     | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | The TiKV scheduler is too busy, which makes TiKV temporarily unavailable. |
     | TiKV | coprocessor-is-busy | tikv_coprocessor_is_busy_total_count | The TiKV Coprocessor is too busy. |
     | TiKV | channel-is-full | tikv_channel_full_total_count | The "channel full" error occurs in TiKV. |
     | TiKV | tikv_engine_write_stall | tikv_engine_write_stall | The "stall" error occurs in TiKV. |
 
-* Check if any component is restarted by querying the `metrics_schema.up` monitoring table and the `CLUSTER_LOG` system table.
+* Check whether any component is restarted by querying the `metrics_schema.up` monitoring table and the `CLUSTER_LOG` system table.
 
 ### `threshold-check` diagnosis rule
 
@@ -287,9 +287,9 @@ The `threshold-check` diagnosis rule checks whether the following metrics in the
 | TiKV | region-score-balance | pd_scheduler_store_status  | < 0.05 |  Checks whether the Region score of each TiKV instance is balanced. The expected difference between instances is less than 5%. |
 | TiKV | store-available-balance | pd_scheduler_store_status  | < 0.2 | Checks whether the available storage of each TiKV instance is balanced. The expected difference between instances is less than 20%. |
 | TiKV | region-count | pd_scheduler_store_status  | < 20000 |  Checks the number of Regions on each TiKV instance. The expected number of Regions in a single instance is less than 20,000. |
-| PD | region-health | pd_region_health | < 100  |  Detects the number of Regions in the middle of scheduling in the cluster. The expected number is less than 100 in total. |
+| PD | region-health | pd_region_health | < 100  |  Detects the number of Regions that are in the process of scheduling in the cluster. The expected number is less than 100 in total. |
 
-In addition, this rule also checks whether the following thread CPU usage of a TiKV instance is too high:
+In addition, this rule also checks whether the CPU usage of the following threads in a TiKV instance is too high:
 
 * scheduler-worker-cpu
 * coprocessor-normal-cpu
