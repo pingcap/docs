@@ -82,11 +82,9 @@ DROP [GLOBAL | SESSION] BINDING FOR SelectStmt
 
 This statement removes a specified execution plan binding at the GLOBAL or SESSION level. The default scope is SESSION.
 
-Generally, the binding in the SESSION scope is mainly used for test or in special situations. For a binding to take effect in all TiDB processes, you need to use the GLOBAL binding.  A created SESSION binding shields the corresponding GLOBAL binding until the end of the SESSION, even if the SESSION binding is dropped before the session closes. In this case, no binding takes effect and the plan is selected by the optimizer.
+Generally, the binding in the SESSION scope is mainly used for test or in special situations. For a binding to take effect in all TiDB processes, you need to use the GLOBAL binding. A created SESSION binding shields the corresponding GLOBAL binding until the end of the SESSION, even if the SESSION binding is dropped before the session closes. In this case, no binding takes effect and the plan is selected by the optimizer.
 
-In the following example, the SESSION binding is dropped.
-
-The following example is based on the example above in which the SESSION binding shields the GLOBAL binding:
+The following example is based on the example in [create binding](#create-binding) in which the SESSION binding shields the GLOBAL binding:
 
 ```sql
 -- Drops the binding created in the SESSION scope.
