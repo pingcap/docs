@@ -89,8 +89,6 @@ show warnings
 
 In addition, to view the shard bit number of the table with the `AUTO_RANDOM` attribute, you can see the value of the `PK_AUTO_RANDOM_BITS=x` mode in the `TIDB_ROW_ID_SHARDING_INFO` column in the `information_schema.tables` system table. `x` is the number of shard bits.
 
-You can use `select last_insert_id ()` to see the last implicit ID assigned by TiDB. For example:
-
 Values assigned to the `AUTO_RANDOM` column affect `last_insert_id()`. You can use `select last_insert_id ()` to get the ID that TiDB last implicitly assigns. For example:
 
 {{< copyable "sql" >}}
