@@ -5,7 +5,7 @@ category: how-to
 
 # Common TiUP Operations
 
-This document describes the common operations when you administer a TiDB cluster using TiUP, including the following operations:
+This document describes the following common operations when you operate and maintain a TiDB cluster using TiUP.
 
 - View the cluster list
 - Start the cluster
@@ -16,7 +16,7 @@ This document describes the common operations when you administer a TiDB cluster
 
 ## View the cluster list
 
-You can manage multiple TiDB clusters using the TiUP cluster component. After each TiDB cluster is deployed, the cluster will appear in the TiUP cluster list.
+You can manage multiple TiDB clusters using the TiUP cluster component. When a TiDB cluster is deployed, the cluster appears in the TiUP cluster list.
 
 To view the list, run the following command:
 
@@ -30,7 +30,7 @@ tiup cluster list
 
 The components in the TiDB cluster are started in the following order (The monitoring component is also started):
 
-PD -> TiKV -> Pump -> TiDB -> TiFlash -> Drainer
+**PD -> TiKV -> Pump -> TiDB -> TiFlash -> Drainer**
 
 To start the cluster, run the following command:
 
@@ -42,7 +42,7 @@ tiup cluster start ${cluster-name}
 
 > **Note:**
 >
-> Replace `${cluster-name}` with the name of your cluster. If you forget the cluster name, run `tiup cluster list`.
+> Replace `${cluster-name}` with the name of your cluster. If you forget the cluster name, check it by running `tiup cluster list`.
 
 You can start only some of the components by adding the `-R` or `-N` parameters in the command. For example:
 
@@ -68,7 +68,7 @@ You can start only some of the components by adding the `-R` or `-N` parameters 
 
 ## View the cluster status
 
-After starting the cluster, check the status of each component to ensure that they work normally. TiUP provides the `display` command, so you do not have to log in to every machine to view the process time.
+After starting the cluster, check the status of each component to ensure that they work normally. TiUP provides the `display` command, so you do not have to log in to every machine to view the component status.
 
 {{< copyable "shell-regular" >}}
 
@@ -90,7 +90,7 @@ When the cluster is in operation, if you need to modify the parameters of a comp
 
 2. Configure the parameters:
 
-    - If the configuration is globally effective, edit `server_configs`:
+    - If the configuration is globally effective for a component, edit `server_configs`:
     
         ```
         server_configs:
@@ -132,13 +132,13 @@ server_configs:
     performance.txn-total-size-limit: 1073741824
 ```
 
-Run the `tiup cluster reload ${cluster-name} -N tidb` command to rolling restart the TiDB component.
+Then run the `tiup cluster reload ${cluster-name} -N tidb` command to rolling restart the TiDB component.
 
 ## Stop the cluster
 
 The components in the TiDB cluster are stopped in the following order (The monitoring component is also stopped):
 
-Drainer -> TiFlash -> TiDB -> Pump -> TiKV -> PD
+**Drainer -> TiFlash -> TiDB -> Pump -> TiKV -> PD**
 
 To stop the cluster, run the following command:
 
