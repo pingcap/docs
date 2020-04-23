@@ -105,7 +105,7 @@ The default value of `tidb_evolve_plan_baselines` is `off`.
 
 After the automatic binding evolution feature is enabled, if the optimal execution plan selected by the optimizer is not among the binding execution plans, the optimizer marks the plan as an execution plan that waits for verification. At every `bind-info-lease` (the default value is `3s`) interval, an execution plan to be verified is selected and compared with the binding execution plan that has the least cost in terms of the actual execution time. If the plan to be verified has shorter execution time, this plan is marked as a usable binding. The following example describes the process above.
 
-Let table `t` be defined as:
+Assume that table `t` is defined as follows:
 
 {{< copyable "sql" >}}
 
