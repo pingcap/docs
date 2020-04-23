@@ -34,6 +34,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `<TMPDIR>/tidb/tmp-storage`
 + It only takes effect when `oom-use-tmp-storage` is `true`.
 
+### `tmp-storage-quota`
+
++ Specifies the quota for the storage in `tmp-storage-path`. The unit is byte.
++ When a single SQL statement uses a temporary disk and the total volume of the temporary disk of the TiDB server exceeds this configuration value, the current SQL operation is cancelled and the `Out of Global Storage Quota!` error is returned.
++ When the value of this configuration is smaller than `0`, the above check and limit do not apply.
++ Default value: `-1`
++ When the remaining available storage in `tmp-storage-path` is lower than the value defined by `tmp-storage-quota`, the TiDB server reports an error when it is started, and exits.
+
 ### `oom-action`
 
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
@@ -104,6 +112,19 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: []
 - The list is empty by default. This means that there are no bad tables that need to be repaired.
 
+### `max-server-connections`
+
+- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
+- Default value: `0`
+- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
+
+### `max-index-length`
+
+- Sets the maximum allowable length of the newly created index.
+- Default value: `3072`
+- Unit: byte
+- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
+
 ## Log
 
 Configuration items related to log.
@@ -156,12 +177,6 @@ Configuration items related to log.
 - The maximum length of SQL output.
 - Default value: `4096`
 - When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
-
-### `max-server-connections`
-
-- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
-- Default value: `0`
-- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
 
 ## log.file
 
