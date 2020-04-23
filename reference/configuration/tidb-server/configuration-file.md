@@ -80,6 +80,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: ""
 + By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
 
+### `max-index-length`
+
+- Sets the maximum allowable length of the newly created index.
+- Default value: `3072`
+- Unit: byte
+- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
+
 ## Log
 
 Configuration items related to log
