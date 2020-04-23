@@ -1,5 +1,6 @@
 ---
 title: Common TiUP Operations
+summary: Learn the common operations to operate and maintain a TiDB cluster using TiUP.
 category: how-to
 ---
 
