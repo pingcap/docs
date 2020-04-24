@@ -1,8 +1,10 @@
 # Docs SIG Contributor List
+
+This is the list of people who have contributed to the docs repository.
  
 **NOTE**:
  
-* This This contributor list is updated on a bi-weekly basis.
+* This contributor list is updated on a bi-weekly basis.
 * Last update time: 2020-04-24
 
 ## Contributors
