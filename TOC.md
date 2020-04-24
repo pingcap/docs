@@ -284,6 +284,14 @@
       - [`cluster_load`](/reference/system-databases/cluster-load.md)
       - [`cluster_systeminfo`](/reference/system-databases/cluster-systeminfo.md)
       - [`cluster_log`](/reference/system-databases/cluster-log.md)
+<<<<<<< HEAD
+=======
+      - [`metrics_schema`](/reference/system-databases/metrics-schema.md)
+      - [`metrics_tables`](/reference/system-databases/metrics-tables.md)
+      - [`metrics_summary`](/reference/system-databases/metrics-summary.md)
+      - [`inspection_result`](/reference/system-databases/inspection-result.md)
+      - [`inspection_summary`](/reference/system-databases/inspection-summary.md)
+>>>>>>> b948a68... reference: add 2 inspection tables (#2261)
   - [Errors Codes](/reference/error-codes.md)
   - [Supported Client Drivers](/reference/supported-clients.md)
   + Garbage Collection (GC)
