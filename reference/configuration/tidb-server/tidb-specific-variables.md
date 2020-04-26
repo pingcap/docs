@@ -280,7 +280,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: "on"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
     - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
-    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition type. Currently, it indicates enabling range partition and hash partition and range columns partition with the single column case.
+    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
     - `auto` functions the same way as `on` does.
 
 - Currently, TiDB only supports range partition and hash partition.
