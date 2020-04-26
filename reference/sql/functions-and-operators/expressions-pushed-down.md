@@ -40,7 +40,7 @@ tidb> desc mysql.expr_pushdown_blacklist;
 Field description:
 
 + `name`: the name of the function that is prohibited from being pushed down.
-+ `store_type`: specifies the function is prohibited from being pushed down to which storage engine. Currently, TiDB supports the three storage engines: `tikv`, `tidb`, and `tiflash`. `store_type` is case-insensitive. If a function is prohibited from being pushed down to multiple storage engines, use a comma to separate each engine.
++ `store_type`: specifies to which storage engine the function is prohibited from being pushed down. Currently, TiDB supports the three storage engines: `tikv`, `tidb`, and `tiflash`. `store_type` is case-insensitive. If a function is prohibited from being pushed down to multiple storage engines, use a comma to separate each engine.
 + `reason` : The reason why the function is blacklisted.
 
 ### Add to the blacklist
