@@ -80,6 +80,7 @@
       - [Migration Case of Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
     - [Migrate from CSV](/reference/tools/tidb-lightning/csv.md)
   + Maintain
+    - [Common TiUP Operations](/how-to/maintain/tiup-operations.md)
     - [Common Ansible Operations](/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
       - [Use Mydumper and TiDB Lightning](/how-to/maintain/backup-and-restore/mydumper-lightning.md)
@@ -283,6 +284,11 @@
       - [`cluster_load`](/reference/system-databases/cluster-load.md)
       - [`cluster_systeminfo`](/reference/system-databases/cluster-systeminfo.md)
       - [`cluster_log`](/reference/system-databases/cluster-log.md)
+      - [`metrics_schema`](/reference/system-databases/metrics-schema.md)
+      - [`metrics_tables`](/reference/system-databases/metrics-tables.md)
+      - [`metrics_summary`](/reference/system-databases/metrics-summary.md)
+      - [`inspection_result`](/reference/system-databases/inspection-result.md)
+      - [`inspection_summary`](/reference/system-databases/inspection-summary.md)
   - [Errors Codes](/reference/error-codes.md)
   - [Supported Client Drivers](/reference/supported-clients.md)
   + Garbage Collection (GC)
@@ -368,6 +374,8 @@
       - [Deploy and Use TiCDC](/reference/tools/ticdc/deploy.md)
       - [Manage TiCDC Cluster and Replication Tasks](/reference/tools/ticdc/manage.md)
       - [Configure Sink URI](/reference/tools/ticdc/sink.md)
+      - [TiCDC Open Protocol](/reference/tools/ticdc/open-protocol.md)
+      - [Column and DDL Type Codes](/reference/tools/ticdc/column-ddl-type.md)
     + sync-diff-inspector
       - [Overview](/reference/tools/sync-diff-inspector/overview.md)
       - [Data Check for Tables with Different Schema or Table Names](/reference/tools/sync-diff-inspector/route-diff.md)
@@ -404,6 +412,7 @@
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.13](/releases/3.0.13.md)
     - [3.0.12](/releases/3.0.12.md)
     - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)
