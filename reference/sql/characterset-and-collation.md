@@ -32,32 +32,9 @@ SHOW CHARACTER SET;
 
 > **Note:**
 >
-> Each character set corresponds to only one default collation.
+> Each character set might correspond to multiple collations, but by default each character set corresponds to only one collation.
 
-## Collation support
-
-TiDB only supports binary collations. This means that unlike MySQL, in TiDB string comparisons are both case sensitive and accent sensitive:
-
-{{< copyable "sql" >}}
-
-```sql
-SELECT * FROM information_schema.collations;
-```
-
-```sql
-+----------------+--------------------+------+------------+-------------+---------+
-| COLLATION_NAME | CHARACTER_SET_NAME | ID   | IS_DEFAULT | IS_COMPILED | SORTLEN |
-+----------------+--------------------+------+------------+-------------+---------+
-| utf8mb4_bin    | utf8mb4            |   46 | Yes        | Yes         |       1 |
-| latin1_bin     | latin1             |   47 | Yes        | Yes         |       1 |
-| binary         | binary             |   63 | Yes        | Yes         |       1 |
-| ascii_bin      | ascii              |   65 | Yes        | Yes         |       1 |
-| utf8_bin       | utf8               |   83 | Yes        | Yes         |       1 |
-+----------------+--------------------+------+------------+-------------+---------+
-5 rows in set (0.00 sec)
-```
-
-At least one collation corresponds to a character set. You can use the following statement to view the collation (under the [new supporting framework for collations](#new-supporting-framework-for-collations)) that corresponds to the character set.
+You can use the following statement to view the collation (under the [new framework for collations](#new-framework-for-collations)) that corresponds to the character set.
 
 {{< copyable "sql" >}}
 
@@ -66,78 +43,13 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 ```
 
 ```sql
-+-------------+---------+------+---------+----------+---------+
-| Collation   | Charset | Id   | Default | Compiled | Sortlen |
-+-------------+---------+------+---------+----------+---------+
-| utf8mb4_bin | utf8mb4 |   46 | Yes     | Yes      |       1 |
-+-------------+---------+------+---------+----------+---------+
-1 row in set (0.00 sec)
-```
-
-Each character set has a default collation. For example, the default collation for `utf8mb4` is `utf8mb4_bin`.
-
-For compatibility with MySQL, TiDB will allow other collation names to be used:
-
-{{< copyable "sql" >}}
-
-```sql
-CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY AUTO_INCREMENT, b VARCHAR(10)) COLLATE utf8mb4_unicode_520_ci;
-```
-
-```sql
-Query OK, 0 rows affected (0.00 sec)
-```
-
-{{< copyable "sql" >}}
-
-```sql
-INSERT INTO t1 VALUES (1, 'a');
-```
-
-```sql
-Query OK, 1 row affected (0.00 sec)
-```
-
-{{< copyable "sql" >}}
-
-```sql
-SELECT * FROM t1 WHERE b = 'a';
-```
-
-```sql
-+---+------+
-| a | b    |
-+---+------+
-| 1 | a    |
-+---+------+
-1 row in set (0.00 sec)
-```
-
-{{< copyable "sql" >}}
-
-```sql
-SELECT * FROM t1 WHERE b = 'A';
-```
-
-```sql
-Empty set (0.00 sec)
-```
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW CREATE TABLE t1\G
-```
-
-```sql
-*************************** 1. row ***************************
-       Table: t1
-Create Table: CREATE TABLE `t1` (
-  `a` int(11) NOT NULL AUTO_INCREMENT,
-  `b` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`a`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci AUTO_INCREMENT=30002
-1 row in set (0.00 sec)
++--------------------+---------+------+---------+----------+---------+
+| Collation          | Charset | Id   | Default | Compiled | Sortlen |
++--------------------+---------+------+---------+----------+---------+
+| utf8mb4_bin        | utf8mb4 |   46 | Yes     | Yes      |       1 |
+| utf8mb4_general_ci | utf8mb4 |   45 |         | Yes      |       1 |
++--------------------+---------+------+---------+----------+---------+
+2 rows in set (0.00 sec)
 ```
 
 ## Cluster character set and collation
@@ -232,7 +144,7 @@ SELECT @@character_set_database, @@collation_database;
 1 row in set (0.00 sec)
 ```
 
-You can also see the two values in INFORMATION_SCHEMA:
+You can also see the two values in `INFORMATION_SCHEMA`:
 
 ```sql
 SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
@@ -361,11 +273,11 @@ For more information, see [Connection Character Sets and Collations in MySQL](ht
 
 The syntax support and semantic support for the collation are influenced by the [`new_collation_enable`](/reference/configuration/tidb-server/configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item. The syntax support and semantic support are different. The former indicates that TiDB can parse and set collations. The latter indicates that TiDB can correctly use collations when comparing strings.
 
-Before v4.0, TiDB only supports syntactically parsing most of the MySQL collations but semantically takes all collations as binary collations, which is the [old supporting framework for collations](#old-supporting-framework-for-collations).
+Before v4.0, TiDB only supports syntactically parsing most of the MySQL collations but semantically takes all collations as binary collations, which is the [old framework for collations](#old-framework-for-collations).
 
-Since v4.0, TiDB supports semantically parsing different collations and strictly following the collations when comparing strings, which is the [new supporting framework for collations](#new-supporting-framework-for-collations).
+Since v4.0, TiDB supports semantically parsing different collations and strictly following the collations when comparing strings, which is the [new framework for collations](#new-framework-for-collations).
 
-### Old supporting framework for collations
+### Old framework for collations
 
 Before v4.0, you can specify most of the MySQL collations in TiDB, and these collations are processed according to the default collations, which means that the byte order determines the character order. Different from MySQL, TiDB fills in spaces according to collation's `PADDING` attribute before comparing characters, which causes the following behavior differences:
 
@@ -382,9 +294,9 @@ insert into t1 values ('a ');
 Query OK, 1 row affected # In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
 ```
 
-### New supporting framework for collations
+### New framework for collations
 
-In TiDB 4.0, a complete supporting framework for collations is introduced. This new framework supports semantically parsing collations and introduces the `new_collation_enabled_on_first_boostrap` configuration item to decide whether to enable the new framework when a cluster is first initialized. If you initialize the cluster after the configuration item is enabled, you can check whether the new collation is enabled through the `new_collation_enabled` variable in the `mysql`.`tidb` table:
+In TiDB 4.0, a complete framework for collations is introduced. This new framework supports semantically parsing collations and introduces the `new_collation_enabled_on_first_boostrap` configuration item to decide whether to enable the new framework when a cluster is first initialized. If you initialize the cluster after the configuration item is enabled, you can check whether the new collation is enabled through the `new_collation_enabled` variable in the `mysql`.`tidb` table:
 
 {{< copyable "sql" >}}
 
@@ -401,7 +313,7 @@ select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled
 1 row in set (0.00 sec)
 ```
 
-Under the new supporting framework, TiDB support the `utf8_general_ci` and `utf8mb4_general_ci` collations which are compatible with MySQL.
+Under the new framework, TiDB support the `utf8_general_ci` and `utf8mb4_general_ci` collations which are compatible with MySQL.
 
 When `utf8_general_ci` or `utf8mb4_general_ci` is used, the string comparison is case-insensitive and accent-insensitive. At the same time, TiDB also corrects the collation's `PADDING` behavior:
 
