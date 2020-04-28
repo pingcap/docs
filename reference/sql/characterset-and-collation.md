@@ -279,7 +279,7 @@ Since v4.0, TiDB supports semantically parsing different collations and strictly
 
 ### Old framework for collations
 
-Before v4.0, you can specify most of the MySQL collations in TiDB, and these collations are processed according to the default collations, which means that the byte order determines the character order. Different from MySQL, TiDB fills in spaces according to collation's `PADDING` attribute before comparing characters, which causes the following behavior differences:
+Before v4.0, you can specify most of the MySQL collations in TiDB, and these collations are processed according to the default collations, which means that the byte order determines the character order. Different from MySQL, TiDB deletes the space at the end of the character according to the `PADDING` attribute of the collation before comparing characters, which causes the following behavior differences:
 
 {{< copyable "sql" >}}
 
