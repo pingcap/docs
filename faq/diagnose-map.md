@@ -14,6 +14,23 @@ category: faq
 
 ### 6.3 TiDB lightning
 
+- 6.3.1: TiDB lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning Github](https://github.com/pingcap/tidb-lightning).
+
+- 6.3.2: Import is slow.
+
+    - `region-concurrency` is set too high. This causes different threads to compete for resources, which reduces efficiency. Three ways to troubleshoot:
+
+        - Search `region-concurrency` from the start of the log to see the parameter TiDB Lightning reads.
+        - If TiDB Lightning shares a server with other services such as Importer, you must manually set `region-concurrency` to 75% of the CPU units on that server.
+        - If the CPU has set a limit (such as an upper limit specified by Kubernetes), TiDB Lightning might not be able to find the limit. You need to manually modify `region-concurrency`.
+
+    - The table schema is complicated. Each index adds extra Key-Value pairs. If there are N indexes, the actually data being imported is around N+1 times of the Mydumper file size. Therefore, if the index is not important, you might remove the index from the schema and add it back by using CREATE INDEX after the import is completed.
+    - The version of TiDB Lightning is old. Try the latest version, which might improve this issue.
+
+6.3.3: `"checksum failed: checksum mismatched remote vs local"`.
+
+    - Reason 1: This table 
+
 ## 7. Common log analysis
 
 ### 7.1 TiDB
