@@ -126,7 +126,7 @@ After the import is complete, you can check the current cluster status by execut
     tiup cluster edit-config <cluster-name>
     ```
 
-3. See the configuration template format of [topology](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml) and fill in the modified parameters of the original cluster in the `server_configs` section of the topology file.
+3. See the configuration template format of [topology](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml) and fill in the modified parameters of the original cluster in the `server_configs` section of the topology file.
 
     Even if the label has been configured for the cluster, you also need to fill in the label in the configuration according to the format in the template. In later versions, the label will be automatically imported.
 
@@ -148,7 +148,11 @@ This section describes how to perform a rolling update to the TiDB cluster and h
 tiup cluster upgrade <cluster-name> v4.0.0-rc
 ```
 
-Performing the rolling update to the cluster will update all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 10 minutes. The instance is directly stopped after this timeout time.
+Performing the rolling update to the cluster will update all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes. The instance is directly stopped after this timeout time.
+
+To perform the upgrade immediately without evicting the leader, specify `--force` in the command above. This method causes performance jitter but not data loss.
+
+To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a super large value, for example, `--transfer-timeout 100000000` (unit: second).
 
 ### Verify the cluster version
 
