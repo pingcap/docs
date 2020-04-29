@@ -51,7 +51,8 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - When the aggregate with distinct operation is slow in query, you can set the variable value to 1.
 
 For example, in the following execution plan, `distinct a` is pushed down to Coprocessor, and a group by column ` test.t.a` is added to `HashAgg_5`.
-```mysql
+
+```
 mysql> set session tidb_opt_distinct_agg_push_down = 1;
 Query OK, 0 rows affected (0.00 sec)
 
