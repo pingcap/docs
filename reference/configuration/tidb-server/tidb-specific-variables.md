@@ -50,7 +50,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with distinct(like `select count(distinct a) from t`) to Coprocessor.
 - When the aggregate with distinct operation is slow in query, you can set the variable value to 1.
 
-For example, in the following execution plan, `distinct a` is pushed down to Coprocessor, and a group by column ` test.t.a` is added to `HashAgg_5`.
+For example, in the following execution plan, `distinct a` is pushed down to Coprocessor, and a group by column `test.t.a` is added to `HashAgg_5`.
 
 ```
 mysql> set session tidb_opt_distinct_agg_push_down = 1;
