@@ -1,35 +1,487 @@
 ---
-title: TiDB Common Issue Diagnose Map
+title: TiDB Cluster Troubleshooting Map
 summary:
 category: faq
 ---
 
-# TiDB Common Issue Diagnose Map
+# TiDB Cluster Troubleshooting Map
+
+## 1. Service Unavailable
+
+### 1.1 The client reports `Region is Unavailable` error
+
+- 1.1.1 `Region is Unavailable` is usually because a Region is not available for a period of time. You might encounter `TiKV server is busy`, or the request to TiKV fails due to `not leader` or `epoch not match`，or the request to TiKV time out. In such cases, TiDB performs a `backoff` retry mechanism. When the `backoff` exceeds a threshold (20s by default), the error will be sent to the client. Within the `backoff` threshold, this errors is not visible to the client.
+
+- 1.1.2 Multiple TiKV instances OOM at the same time, which causes no Leader in a Region for a period of time. See [case-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md) in Chinese.
+
+- 1.1.3 TiKV reports `TiKV server is busy`，and exceeds the `backoff` time. For more details, refer to 4.3. `TiKV server is busy` is a result of the internal flow control mechanism and should not be counted in the `backoff` time. This issue will be fixed.
+
+- 1.1.4 Multiple TiKV instances failed to start, which causes no Leader in a Region. When multiple TiKV instances are deployed in a physical machine, the failure of the physical machine can cause no Leader in a Region if the label is not property configured. See [case-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md).
+
+- 1.1.5 When a follower apply is lagged in a previous epoch, after the Follower becomes Leader, it rejects the request with `epoch not match`. See [case-958](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case958.md) (TiKV needs to optimize its mechanism).
+
+### 1.2 PD errors cause service unavailable
+
+Refer to 5 PD issues.
+
+## 2. Latency increases significantly
+
+### 2.1 Transient increase
+
+- 2.1.1 Wrong TiDB execution plan causes latency increase. Refer to 3.3.
+- 2.1.2 PD Leader election issue or OOM. Refer to 5.2 and 5.3.
+- 2.1.3 A significant number of Leader drops in some TiKV instances. Refer to 4.4.
+
+### 2.2 Persistent and significant increase
+
+- 2.2.1 TiKV single thread bottleneck
+
+    - Too many regions in a TiKV instance causes a single gRPC thread to be the bottleneck (Check the Grafana -> TiKV-details -> `Thread CPU/gRPC CPU Per Thread` metric).In versions above v3.x, you can enable `Hibernate Region` to resolve the issue，see [case-612](./diagnose-case-study/case612.md)。
+
+    - For versons below v3.0, when the raftstore thread or the apply thread becomes bottleneck（grafana -> TiKV-details -> `Thread CPU/raft store CPU 和 Async apply CPU` exceeds `80%`), we can scale out TiKV（v2.x）instances or upgrade to v3.x with multithreading，see [case-517](./diagnose-case-study/case517.md)。
+
+- 2.2.2 CPU load increase
+
+- 2.2.3 TiKV slow write, refer to 4.5
+
+- 2.2.4 TiDB wrong execution plan，refer to 3.3
+
+## 3. TiDB Issues
+
+### 3.1 DDL
+
+- 3.1.1 Modify length of `decimal` field report error `"ERROR 1105 (HY000): unsupported modify decimal column precision"`, see [case-1004](./diagnose-case-study/case1004.md)，TiDB doesn't support changing length of `decimal` field.
+
+- 3.1.2 TiDB DDL job hangs / slow execution（use `admin show ddl jobs` to check DDL progress）
+
+	- Reason 1：Network issue to other compoments（PD / TiKV).
+
+	- Reason 2：Early versions of（below v3.0.8）TiDB heavy internal load.（a lot of goroutines at high concurrency）
+
+	- Reason 3：Early versions of（v2.1.15 & v3.0.0-rc1 之前） PD 实例删除 TiDB key 无效的问题，会导致每次 DDL 变更都需要等 2 个 lease（很慢）
+
+	- Other unknown reasons（please file issues at github.com/pingcap/tidb）
+
+	- Solution：Reason 1 needs to check the network connection between TiDB and TiKV/PD.；Reason 2，3 are already fixed in later versions，and upgrade can fix the issues. Other reasons can use DDL owner migration to mitigate the issue.
+
+	- DDL owner migration
+
+	    - 1：If the TiDB server can be connected，execute owner election command：`curl -X POST http://{TiDBIP}:10080/ddl/owner/resign`
+
+		- 2：if the TiDB server cannot be connected，use `tidb-ctl` delele DDL owner from the PD to trigger re-election：`tidb-ctl etcd delowner [LeaseID] [flags] + ownerKey`
+
+- 3.1.3 TiDB report `"information schema is changed"` error in log
+
+	- Reason 1：DML operations touch tables that are under DDL. We can use `admin show ddl job` to check the DDLs that are currently in progress。
+
+	- Reason 2：当前执行的 DML 时间太久，且这段时间内执行了很多 DDL（新版本 `lock table` 也会导致 shema 版本变化），导致中间 `schema version` 变更超过 1024 个版本数
+
+    - Reason 2：DML execution takes long time and many DDL executions during the DML execution（新版本 `lock table` 也会导致 shema 版本变化），导致中间 `schema version` 变更超过 1024 个版本数
+
+	- 原因3：当前执行 DML 请求的 TiDB 实例长时间不能加载到新的 `schema information` （与 PD 或者 TiKV 网络问题等都会导致此问题），而这段时间内执行了很多 DDL 语句（也包括 `lock table` 语句），导致中间 `schema version` 变更超过 1024 个版本数
+
+	- Solution：The first two reasons do not impact the application, as the failed DML will be retried. For reason 3, need to check the network between TiDB and TiKV/PD.
+
+	- Background：`schema version` 的增长数量与每个 DDL 变更操作的 `schema state` 个数一致， 例如：`create table` 操作会有 1 个版本变更，`add column` 操作会有 4 个版本变更（详情可以参考 [online schema change](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf)）。所以太多的 column 变更操作会导致 `schema version` 增长的很快。
+
+- 3.1.4 TiDB report `"information schema is out of date"`in log
+
+	- Reason 1：The TiDB server that executes the DML is `graceful kill` and prepare to exit and this will cause the execution time of the transaction that contains the DML to exceed the DDL lease. An error will be reported when the transaction commits. 
+
+	- Reason 2：There is a period of time that the TiDB server that execute the DML，有一段时间连不上 PD 和 TiKV，导致以下问题：
+        1. The TiDB server did not load the new schema exceed one DDL lease (`45s` by default).
+        2. The TiDB server disconnects with PD for connections with `keep alive` is set to true. 
+
+	- Reason 3：TiKV has high load or there is timeout in TiKV压力大或者是网络超时，通过监控 grafana -> TiDB 和 TiKV 节点的负载情况。
+
+	- Solution：For reason 1，when TiDB starts up, the DML can be manually retried. For reason 2, we need to check the network between the TiDB server and PD/TIKV. For reason 3, we need to investigate why TiKV is busy，please refer to 4 TiKV Issues.
+
+### 3.2 OOM Issues
+
+- 3.2.1 Symptom
+
+	- Client：client reports error `"ERROR 2013 (HY000): Lost connection to MySQL server during query"`
+
+	- Check the log
+
+		- Execute `dmesg -T | grep tidb-server`. The result shows the OOM-killer log around the timepoint when the error occurs.
+
+		- You can grep the "Welcome to TiDB" log around the timepoint after the error occurs (namely, the time when tidb-server restarts).
+
+		- You can grep `"fatal error: runtime: out of memory" 或 "cannot allocate memory"` in `tidb_stderr.log`.
+
+        - In v2.1.8 or earlier versions, you can grep `"fatal error: stack overflow"` in the `tidb_stderr.log`.
+
+	- Monitor：tidb-server instance memory usage increases sharply in a short period of time. 
+
+- 3.2.2 Locate the SQL that causes OOM. (Currently all versions cannot locate SQL accurately. You need to analyze whether OOM is caused by the SQL after you find the SQL)
+
+	- For versions `> = v3.0.0`, `grep “expensive_query”` in tidb.log. That log message records SQL queries that are timeout or exceed memory quota.
+	- For versions `< v3.0.0`, `grep “memory exceeds quota”` in tidb.log to locate SQL queries that exceed memory quota.
+  
+  > **Note:**
+  >
+  > The default threshold for a single SQL memory usage is `32GB` (in bytes, scope:`SESSION`). You can set this parameter by configuring `tidb_mem_quota_query`. You can also modify the `mem-quota-query` item (in bytes) in the configuration file by hot loading the configuration items.
+
+- 3.2.3 Mitigate OOM Issues
+
+	- By enabling `SWAP`, you can alleviate the OOM issue caused by overuse of memory by large queries. When the memory is insufficient, this method can have impact on the performance of large queries due to the I/O overhead.
+
+- 3.2.4 OOM typical reasons
+
+	- The SQL query has join，通过 explain 查看发现该 join 选用 `HashJoin` 算法且 `inner` 端的表很大。如 TiDB-4116
+	- 
+
+	- 单条 `UPDATE/ DELETE` 涉及的查询数据量太大。见案例 [case-882](./diagnose-case-study/case882.md)
+
+	- SQL 中包含 `Union` 连接的多条子查询。见案例 [case-1828](./diagnose-case-study/case1828.md)
+
+### 3.3 Wrong execution plan
+
+- 3.3.1 Symptom
+
+	- SQL query execution time is much longer compared with compared with before or the execution plan suddenly changed. If the execution plan is logged in the slow log, we can inspect the execution plan. 如果慢日志中输出了执行计划，可以直接对比执行计划
+
+	- SQL query execution time is much slower compared with other databases such as MySQL. Compare the SQL 执行时间相比于其他数据库(例如 MySQL)有较大差距；可以对比其他数据库执行计划，例如 `Join Order` 是否不同
+
+	- 慢日志中 SQL 执行时间 `Scan Keys` 数目较大
+    - In 
+    
+- 3.3.2: Investigate the execution plan
+
+    - `explain analyze {SQL}`. When the execution time is acceptable, compare `count` in the result of `explain analyze` and `row` in `execution info`. If a large difference is found in the `TableScan/IndexScan` row, it is likely that the statistics has a problem. If a large difference is found in other rows, the problem might not be in the statistics.
+
+	- `select count(*)`。When the execution plan contains a `join` operation, `explain analyze` might take a long time. You can check whether the problem is in the statistics by executing `select count(*)` for the conditions on `TableScan/IndexScan` and compraing the `row count` information in the `explain` result.
+
+- 3.3.3 Mitigation
+
+	- For v3.0 and later versions, use the `SQL Bind` feature to bind the execution plan.
+	- Update the statistics. If you are roughly sure that the problem is caused by the statitstics, [dump the statistics](https://pingcap.com/docs/stable/reference/performance/statistics/#export-statistics). If the cause is outdated statistics, such as the `modify count/row count` in `show stats_meta` is greater than a certain value (e.g. 0.3), or the table has a time column index, you can try recover by using `analyze table`. If `auto analyze` is configured, check if the `tidb_auto_analyze_ratio` system variable is too large (> 0.3), and if the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
+
+	- For other situations, report a bug.
+
+### 3.4 SQL Execution
+
+- 3.4.1: The client reports the `ERROR 1265(01000) Data Truncated` error. This is because the way TiDB internally calculates the precision of `Decimal` type is incompatible with that of MySQL (expected to be fixed in v3.0.10). The specific causes are as follows:
+
+    - In MySQL, if two large-precision `Decimal` are divided and the result exceeds the maximum decimal precision (`30`), only `30` digits are reserved and no error is reported;
+    - In TiDB, the calculation result is the same as in MySQL, but inside the structure that represents `Decimal`, a field that represents decimal precision still retains the actual precision.
+    - Take `(0.1^30) / 10` as an example. The results in TiDB and MySQL are both `0`, because the precision is `30`. However, in TiDB, the field that represents the precision is still `31`.
+    - After multiple `Decimal` division calculations, even though the result is correct, this precision could grow larger and larger, and eventually exceed the threshold in TiDB (`72`), and the `Data Truncated` error is reported. The multiplication of `Decimal` does not have this issue, because the out of bounds is bypassed, and the precision is set to the maximum precision limit.
+    - Solution: You can bypass this issue by manually adding `Cast(xx as decimal(a, b))`, in which `a` and `b` are the target precisions.
+
+## 4. TiKV
+
+### 4.1 TiKV panics and fails to start
+
+- 4.1.1: `sync-log = false`. The `unexpected raft log index: last_index X < applied_index Y` error is returned after the machine is powered off, which is expected. You can restore the Region using `tikv-ctl`.
+
+- 4.1.2: If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off. This error is expected. The `fsync` of virtual machines is not reliable, so you need to restore the Region using `tikv-ctl`. 
+
+- 4.1.3: For other unexpected causes, report a bug.
+
+### 4.2 TiKV OOM
+
+- 4.2.1: If the `block-cache` configuration is too large, it might cause OOM. To verify the cause of the problem, check the `block cache size` of RocksDB by selecting the corresponding instance in the monitor `Grafana -> TiKV-details`. Meanwhile, check whether the `[storage.block-cache] capacity = # "1GB" `parameter is set properly. By default, TiKV ’s` block-cache` is set to `45%` of the total memory of the machine. You need to explicitl specify this parameter when you deploy TiKV in the container, because TiKV obtains the memory of the physical machine, which might exceed the memory limit of the container.
+
+- 4.2.2: Coprocessor receives many large queries and returns a large volume of data. gRPC fails to send the data returned by the coprocessor, which results in OOM. To verify the cause, you can check whether `response size` exceeds the `network outbound` traffic by viewing the monitor `Grafana -> TiKV-details -> coprocessor overview`.
+
+- 4.2.3: Other components occupy too much memory. This issue is unexpected. You can report a bug.
+
+### 4.3 The client reports the `server is busy` error
+
+Check the specific cause for busy by viewing the monitor `Grafana -> TiKV -> errors`. `server is busy` is the traffic control mechanism of TiKV, which can inform `tidb/ti-client` that TiKV are currently under too much pressure and should retry later.
+
+- 4.3.1: TiKV RocksDB encounters `write stall`. A TiKV has two RocksDB instances, one in `data/raft` to save Raft log, another in `data/db` to save the real data. You can check the specific cause for stall by running `grep "Stalling" RocksDB` in the log. The RocksDB log is a file starting with `LOG`, and `LOG` is the current log.
+
+	- Too many `level0 sst` causes stall. You can add the `[rocksdb] max-sub-compactions = 2（or 3）` parameter to speed up `level0 sst` compaction. The compaction task from level0 to level1 is divided into several subtasks (the max number is the value of `max-sub-compactions`) to be executed concurrently. See [case-815](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case815.md) in Chinese.
+	
+    - Too many `pending compaction bytes` causes stall. The disk I/O fails to keep up with the write operations in business peaks. You can alleviate this problem by increasing the `soft-pending-compaction-bytes-limit` and `hard-pending-compaction-bytes-limit` of the corresponding CF.
+
+        - The default value of the pending compaction bytes is `64GB`. If it reaches the threshold, RocksDB slows down the write speed. You can set `[rocksdb.defaultcf] soft-pending-compaction-bytes-limit` to `128GB`.
+        - The default value of the pending compaction bytes is `256GB`. If it reaches the threshold (this is not likely to happen, because RocksDB slows down the write after it reaches `soft-pending-compaction-bytes-limit`), RocksDB stops the write. You can set `hard-pending-compaction-bytes-limit` to `512GB`. See [case-275](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case275.md) in Chinese.
+        - If the disk I/O capacity fails to keep up with the write for a long time, it is recommended to scale up your disk. If the disk throughput reaches the upper limit and causes write stall (for example, the SATA SSD is much lower than NVME SSD), while the CPU resources is sufficient, you can try a compression algorithm of higher compression ratio. This way, the CPU resources is traded for disk resources, and the pressure on the disk is eased.
+        - If the default CF compaction sees a high pressure, change the `[rocksdb.defaultcf] compression-per-level` parameter from `["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]` to `["no", "no", "zstd", "zstd", "zstd", "zstd", "zstd"]`.
+	
+    - Too many memtable causes stall. This usually occurs when the amount of instant writes is large and the memtable flushes to the disk slowly. If the disk write speed cannot be improved, and this issue only occurs during business peaks, you can alleviate it by increasing the `max-write-buffer-number` of the corresponding CF.
+
+        - For example, set `[rocksdb.defaultcf] max-write-buffer-number` to `8` (5 by default). Note that this might cause more memory usage in the peak, because more memtable might be in the memory.
+
+- 4.3.2 `scheduler too busy`
+
+	- Serious write conflict. `latch wait duration` is high. You can view `latch wait duration` in the monitor `Grafana -> TiKV-details -> scheduler prewrite/scheduler commit`. When the write tasks pile up in scheduler, the pending write tasks exceed the threshold set in `[storage] scheduler-pending-write-threshold = "100MB"`. TODO: Verify the cause by viewing the metric corresponding to `MVCC_CONFLICT_COUNTER`.
+	- Slow write causes write tasks to pile up. The data being written to TiKV exceeds the threshold set by `[storage] scheduler-pending-write-threshold = "100MB"`. Refer to 4.5.
+
+- 4.3.3: `raftstore is busy`. The processing of messages is slower than the receiving of messages. The short-term `channel full` status does not affect the service, but if the error persists for a long time, it might cause Leader switch.
+
+    - `append log` encounters stall. Refer to 4.3.1.
+    - `append log duration` is high, which causes untimely processing of messages. You can refer to 4.5 to anaylyze why `append log duration` is high.
+    - Raftstore receives a large batch of messages in an instant (check in the TiKV Raft messages dashboard), and fails to process them. Usually the short-term `channel full` status does not affect the service.
+
+- 4.3.4: TiKV coprocessor is in a queue. The number of piled up tasks execeeds `coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`. Too many large queries leads to the piling up of coprocessor. You need to check whether the execution plan change causes a large number of table scan operations. Refer to 3.3.
+
+### 4.4 Some TiKV nodes drop Leader frequently
+
+- 4.4.1: Re-election because TiKV is restarted
+
+	- After TiKV panics, it is pulled up by systemd and runs normally. You can check whether panic has occurred in TiKV by viewing the TiKV log. Since this situation is unexpected, report a bug if it happens.
+	- TiKV is stopped or killed by a third party and then pulled up by systemd. Check the cause by viewing `dmesg` and the TiKV log. 
+	- TiKV OOM and is restarted. Refer to 4.2.
+	- TiKV is hung because of dynamically adjusting `THP` (Transparent Hugepage). See case [case-500](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case500.md) in Chinese.
+
+- 4.4.2: TiKV RocksDB encounters write stall and thus results in re-election. You chan check if the monitor `grafana -> TiKV-details -> errors` shows `server is busy`. Refer to 4.3.1.
+
+- 4.4.3: Re-election because of network isolation
+
+### 4.5 TiKV write is slow
+
+- 4.5.1: Check whether the TiKV write is low by viewing the `prewrite/commit/raw-put` (only for raw kv clusters) duration of TiKV gRPC. Generally, you can locate the slow phase according to the performance-map. Some common situations are listed as follows.
+
+- 4.5.2: The scheduler CPU is busy (only for transaction kv). The `scheduler command duration` of `prewrite/commit` is longer than the sum of `scheduler latch wait duration` and `storage async write duartion`. The scheduler worker has a high CPU demand, such as over 80% of `scheduler-worker-pool-size` * 100%, or the CPU resources of the entire machine are relatively limited. If the write workload is large, check if `[storage] scheduler-worker-pool-size` is set too small. For other situations, report a bug.
+
+- 4.5.3: Append log is slow. The `Raft IO/append log duration` in TiKV Grafana is high, usually because the disk write is slow. You can verify the cause by checking the `WAL Sync Duration max` value of RocksDB - raft. For other situations, report a bug.
+
+- 4.5.4: The raftstore thread is busy. The Raft Propose/propose wait duration is significantly larger than the append log duration in TiKV Grafana. Take the following methods: 
+
+    - Check whether the `[raftstore] store-pool-size` configuration is too small. It is recommended to set the value between `1` and `5` and not to set it too large.
+    - Check whether the CPU resources on the machine are insufficient.
+
+- 4.5.5: Apply is slow. The Raft IO/apply log duration in TiKV Grafana is high, which usually comes with a high Raft Propose/apply wait duration. The possible causes are as follows:
+    - `[raftstore] apply-pool-size` is too small (it is recommended to set the value between `1` and `5` and not to set it too large), and the thread CPU/apply CPU is large.
+    - The CPU resources on the machine are insufficient.
+    - Region write into a hotspot. A single apply thread has high CPU usage. Currently, we cannot properly address the hotspot problem on a single Region, which is being improved. To view the CPU usage of each thread, modify the Grafana expression and add `by (instance, name)`.
+    - RocksDB write is slow. RocksDB kv/max write duration is high. A single raft log might contain multiple KV. When writing into RocksDB, 128 KVs are written into RocksDB in a write batch. Therefore, an apply log might be associated with multiple writes in RocksDB.
+    - For other situations, report a bug.
+
+- 4.5.6: Raft commit log is slow. The Raft IO/commit log duration in TiKV Grafana is high (this metric is only supported in Grafana after v4.x). Every Region corresponds to an independent Raft group. Raft has a traffic control mechanism, similar to the sliding window mechanism of TCP. You can control the size of the sliding window by configuring the `[raftstore] raft-max-inflight-msgs = 256` parameter. If there is a write hotspot and the commit log duration is high, you can adjust the parameter, such as increasing it to 1024.
+
+- 4.5.7: For other situations, refer to the write path on performance-map and conduct an analysis.
+
+## 5. PD issues
+
+### 5.1 PD scheduling
+
+- 5.1.1: Merge
+
+	- Empty Regions across tables cannot be merged. You need to modify the `[coprocessor] split-region-on-table = false` parameter in TiKV, which is `false` in v4.x by default. See [case-896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md) in Chinese.
+
+	- Region merge is slow. You can check whether the merged operator is generated by accessing the monitor dashboard in `Grafana -> PD -> operator`. To accelerate the merge, increase the value of `merge-schedule-limit`.
+
+- 5.1.2: Add replicas or take replicas online/offline
+
+	- The TiKV disk uses 80% of the capacity. PD does not add replicas. The number of miss peers increases. You need to scale out TiKV. See [case-801](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case801.md) in Chinese.
+
+	- What a TiKV node is taken offline, some Region cannot be migrated to other nodes. This issue has been fixed in v3.0.4 ([#5526](https://github.com/tikv/tikv/pull/5526)). See [case-870](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case870.md) in Chinese.
+
+- 5.1.3 Balance 
+
+	- The Leader/Region count is not evenly distributed. See [case-394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md) and [case-759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md). The major cause is that the balance depends on the size of Region/Leader to perform scheduling, so it might result in the uneven distribution of the count. In v4.0, you can set the scheduling policy of Leader to `count`-based or `size`-based by configuring a newly added parameter, `[leader-schedule-policy]`.
+
+### 5.2 PD election
+
+- 5.2.1: PD switches Leader.
+
+	- Cause 1: Disk. The disk where the PD node is located has full I/O capacity. You need to check whether PD is deployed on the same disk as other components with high I/O demand and the health of the disk, and verify the cause by accessing the monitor `Grafana -> disk performance -> latency/load`. You can also use the FIO tool to run a check on the disk if necessary. See [case-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md) in Chinese.
+
+	- Cause 2: Network. The PD log shows `lost the TCP streaming connection`. You need to check whether there is a problem with the network between PD and verify the cause by viewing `round trip` in the monitor `Grafana -> PD -> etcd`. See [case-177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md) in Chinese.
+
+	- Cause 3: High system load. The log shows `server is likely overloaded`. See [case-214](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case214.md) in Chinese.
+
+- 5.2.2: PD cannot elect a Leader or the election is slow.
+
+	- PD cannot elect a Leader: The PD log shows `lease is not expired`. [This issue](https://github.com/etcd-io/etcd/issues/10355) has been fixed in v3.0.x and v2.1.19. See [case-875](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case875.md) in Chinese.
+
+	- The election is slow: The Region loading duration is long. You can check this issue by running `grep "regions cost"` in the PD log. If the result is in seconds, it means the Region loading is slow. You can enable the `region storage` feature in v3.0 by setting `use-region-storage` to `true`, which significantly reduce the Region loading duration. See [case-429](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case429.md) in Chinese.
+
+- 5.2.3: PD timed out when TiDB executes SQL statements.
+
+	- PD doesn't have a Leader or switches Leader. Refer to 5.2.1 and 5.2.2.
+	- Network issue. Check whether the network from TiDB to PD Leader is running normally by accessing the monitor `Grafana -> blackbox_exporter -> ping latency`.
+	- PD panics. Report a bug.
+	- PD OOM. Refer to 5.3.
+    - If the issue has other causes, get goroutine by running `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2` and report a bug.
+
+- 5.2.4: Other issues
+
+	- PD reports the `FATAL` error, and the log shows `range failed to find revision pair`. This issue has been fixed in v3.0.8 ([#2040](https://github.com/pingcap/pd/pull/2040)). For details, see [case-947](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case947.md) in Chinese.
+	- For other issues, report a bug.
+
+### 5.3 PD OOM
+
+- 5.3.1: When the `/api/v1/regions` interface is used, too many Regions might cause PD OOM. This issue has been fixed in v3.0.8 ([#1986](https://github.com/pingcap/pd/pull/1986)).
+
+- 5.3.2: PD OOM during the rolling upgrade. The size of gRPC messages is not limited, and the monitor shows that TCP InSegs is relatively large. This issue has been fixed in v3.0.6 ([#1952](https://github.com/pingcap/pd/pull/1952)). For details, see [case-852](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case852.md).
+
+### 5.4 Grafana display
+
+- 5.4.1: The monitoring `Grafana -> PD -> cluster -> role` displays follower. The Grafana expression issue has been fixed in v3.0.8 ([#1065](https://github.com/pingcap/tidb-ansible/pull/1065)). For details, see [case-1022](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1022.md).
 
 ## 6. Ecosystem tools
 
-### 6.1 Binlog
+### 6.1 TiDB Binlog
 
-### 6.2 DM
+- 6.1.1: TiDB Binlog is a tool that collects changes from TiDB and provides near real-time backup and replication to downstream TiDB or MySQL platforms. For details, see [TiDB Binlog on GitHub](https://github.com/pingcap/tidb-binlog).
+
+- 6.1.2: The `Update Time` in Pump/Drainer Status is updated normally, and no anomaly shows in the log, but no data is written to the downstream.
+
+	- Binlog is not enabled in the TiDB configuration. Modify the `[binlog]` configuration in TiDB.
+
+- 6.1.3: `sarama` in Drainer reports the `EOF` error.
+
+	- The Kafka client version in Drainer is inconsistent with the version of Kafka. You need to modify the `[syncer.to] kafka-version` configuration. See TOOL-199.
+
+- 6.1.4: Drainer fails to write to Kafka and panics, and Kafka reports the `Message was too large` error.
+
+	- The binlog data is too large, which causes the single message written to Kafka is too large. You need to modify the following configuration of Kafka:
+
+        ```conf
+        message.max.bytes=1073741824
+        replica.fetch.max.bytes=1073741824
+        fetch.message.max.bytes=1073741824
+        ```
+
+        For details, see [case-789](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case789.md) in Chinese.
+
+- 6.1.5: Inconsistent data in upstream and downstream
+
+	- Cause 1: Some TiDB nodes do not enable binlog. For v3.0.6 or later versions, you can check the binlog status of all the nodes by accessing the `http://127.0.0.1:10080/info/all` interface. For versions earlier than v3.0.6, you can check the binlog status by viewing the configuration file.
+
+	- Cause 2: Some TiDB nodes go into the `ignore binlog` status. For v3.0.6 or later versions, you can check the binlog status of all the nodes by accessing the `http://127.0.0.1:10080/info/all` interface.For versions earlier than v3.0.6, check the TiDB log to see whether it contains the `ignore binlog` keyword.
+
+	- Cause 3: The value of the timestamp column is inconsistent in upstream and downstream.
+
+		- This is caused by different time zones. You need to ensure that Drainer is in the same time zone as the upstream and downstream databases. Drainer obtains its time zone from `/etc/localtime` and does not support the `TZ` environment variable. See [case-826](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case826.md).
+
+		- In TiDB, the default value of timestamp is `null`, but the same default value in MySQL 5.7 (not including MySQL 8.0) is the current time. Therefore, when the timestamp in upstream TiDB is `null` and the downstream is MySQL 5.7, the data in the timestamp columns are inconsistent. You need to run `set @@global.explicit_defaults_for_timestamp=on;` in the upstream before enabling binlog. See TOOL-1539.
+
+	- For situations not covered in the above cases, report a bug.
+
+- 6.1.6: Slow replication
+
+	- Cause 1: The downstream is TiDB/MySQL, and the upstream performs frequent DDL operations. See [case-1023](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1023.md).
+
+	- Cause 2: The downstream is TiDB/MySQL, and the table to be replicated has no primary key and no unique index, which causes reduced performance in binlog. It is recommended to add primary key or unique index.
+
+	- Cause 3: If the downstream outputs to files, check whether the output disk or network disk is slow.
+
+	- For situations not covered in the above cases, report a bug.
+
+- 6.1.7: Pump cannot write binlog and reports the `no space left on device` error.
+
+	- The local disk space is insufficient for Pump to write binlog data normally. You need to clean up the disk space and then restart Pump.
+
+- 6.1.8: Pump reports the `fail to notify all living drainer` error during start.
+
+	- Cause: When Pump is started, it notifies all Drainer nodes that are in the `online` state. If it fails to notify Drainer, this error log is printed.
+	- Solution: Use the binlogctl tool to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes that are in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump. See the case [fail-to-notify-all-living-drainer](https://pingcap.com/docs/stable/reference/tidb-binlog/troubleshoot/error-handling/#fail-to-notify-all-living-drainer-is-returned-when-pump-is-started).
+
+- 6.1.9: Draienr reports the `gen update sqls failed: table xxx: row data is corruption []` error.
+
+	- Trigger: The upstream performs DML operations on this table while performing DROP COLUMN DDL. This issue has been fixed in v3.0.6. See [case-820](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case820.md) in Chinese.
+
+- 6.1.10: Drainer replication is stuck. The process remains active but the checkpoint is not updated.
+
+	- This issues has been fixed in v3.0.4. See [case-741](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case741.md) in Chinese.
+
+- 6.1.11: Any component panics.
+
+	- Report a bug.
+
+### 6.2 Data Migration
+
+- 6.2.1: TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM on GitHub](https://github.com/pingcap/dm/).
+
+- 6.2.2: `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you run `query status` or check the log.
+
+	- For database related passwords in all the DM configuration files, use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it.
+	- In addition, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges](https://pingcap.com/docs/tidb-data-migration/stable/precheck/) automatically while starting the data replication task.
+	- To deploy different versions of DM-worker/DM-master/dmctl in a DM cluster, see the [case study on AskTUG](https://asktug.com/t/dm1-0-0-ga-access-denied-for-user/1049/5).
+
+- 6.2.3: A replication task is interrupted with the `driver: bad connection` error returned
+
+	- The `driver: bad connection` error indicates that anomalies have occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart and so on), and that the data of the current request has not yet been sent to TiDB at that moment.
+
+		- For versions earlier than 1.0.0 GA, when this error occurs, you need to stop the task by running `stop-task` and then restart the task by running `start-task`.
+		- For 1.0.0 GA, an automatic retry mechanism for this type of error is added. See [dm#265](https://github.com/pingcap/dm/pull/265).
+
+- 6.2.4: A replication task is interrupted with the `invalid connection` error
+
+	- The `invalid connection` error indicates that anomalies have occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, TiKV busy and so on), and that a part of the data for the current request has been sent to TiDB. Because DM has the feature of concurrently replicating data to the downstream in replication tasks, several errors might occur when a task is interrupted. You can check these errors by running `query-status` or `query-error`.
+
+		- If only the `invalid connection` error occurs during the incremental replication process, DM retries the task automatically.
+        - If DM does not retry or fails to retry automatically because of version problems (automatic retry is supported since v1.0.0-rc.1), use `stop-task` to stop the task and then use `start-task` to restart the task.
+
+- 6.2.5: The relay unit throws error `event from * in * diff from passed-in event *`, or a replication task is interrupted with an error that fails to get or parse binlog like `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`
+
+	- During the process that DM pulls relay log or the incremental replication, this two errors might occur if the size of the upstream binlog file exceeds 4 GB.
+    - Cause: When writing relay logs, DM needs to perform event verification based on binlog positions and the binlog file size, and store the replicated binlog positions as checkpoints. However, the official MySQL uses uint32 to store binlog positions, which means the binlog position for a binlog file over 4 GB overflows, and then the errors above occur.
+
+	- Solution: For relay units and binlog replication processing units, [manually recover replication](https://pingcap.com/docs/tidb-data-migration/dev/error-handling/#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-replication-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned).
+
+- 6.2.6: The DM replication is interrupted, and the log returns `ERROR 1236 (HY000) The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`
+
+	- Check whether the master binlog is purged.
+	- Check the position information recorded in `relay.meta`.
+
+		- `relay.meta` has recorded the empty GTID information. DM-worker saves the GTID information in memory to `relay.meta` when it exits or regularly (every 30s). When DM-worker does not obtain the upstream GTID information, it saves the empty GTID information to `relay.meta`. See the [case study](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case772.md) in Chinese.
+        - The binlog event recorded in `relay.meta` triggers the incomplete recover process and records the wrong GTID information. This issue is fixed in v1.0.2, and might still occur in versions earlier than v1.0.2.
+
+- 6.2.7: The DM replication process returns an error `Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`.
+
+	- This value cannot be successfully written into MySQL 8.0 or TiDB, but can be written into MySQL 5.7. You can skip the data format check by enabling the `tidb_skip_utf8_check` parameter.
 
 ### 6.3 TiDB lightning
 
-- 6.3.1: TiDB lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning Github](https://github.com/pingcap/tidb-lightning).
+- 6.3.1: TiDB lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb-lightning).
 
-- 6.3.2: Import is slow.
+- 6.3.2: Import speed is too slow.
+    
+    There are three reasons why TiDB Lightning becomes slow:
 
-    - `region-concurrency` is set too high. This causes different threads to compete for resources, which reduces efficiency. Three ways to troubleshoot:
+    - Cause 1: `region-concurrency` is set too high, which causes thread contention and reduces performance. Three ways to troubleshoot:
 
-        - Search `region-concurrency` from the start of the log to see the parameter TiDB Lightning reads.
-        - If TiDB Lightning shares a server with other services such as Importer, you must manually set `region-concurrency` to 75% of the CPU units on that server.
-        - If the CPU has set a limit (such as an upper limit specified by Kubernetes), TiDB Lightning might not be able to find the limit. You need to manually modify `region-concurrency`.
+        - The setting can be found from the start of the log by searching `region-concurrency`.
+        - If TiDB Lightning shares a server with other services (e.g. Importer), you must manually set `region-concurrency` to 75% of the total number of CPU cores on that server.
+        - If there is a quota on CPU (e.g. limited by Kubernetes settings), Lightning might not be able to read this out. In this case, `region-concurrency` must also be manually reduced.
 
-    - The table schema is complicated. Each index adds extra Key-Value pairs. If there are N indexes, the actually data being imported is around N+1 times of the Mydumper file size. Therefore, if the index is not important, you might remove the index from the schema and add it back by using CREATE INDEX after the import is completed.
-    - The version of TiDB Lightning is old. Try the latest version, which might improve this issue.
+    - Cause 2: Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the Mydumper output. If the indices are negligible, you may first remove them from the schema, and add them back via CREATE INDEX after the import is complete.
+    - Cause 3: The version of TiDB Lightning is old. Try the latest version, which might improve the import speed.
 
-6.3.3: `"checksum failed: checksum mismatched remote vs local"`.
+- 6.3.3: `"checksum failed: checksum mismatched remote vs local"`.
 
-    - Reason 1: This table 
+	- Cause 1: The table might already have data before. These old data can affect the final checksum.
+
+	- Cause 2: If the checksum of the target database is 0, which means nothing is imported, it is possible that the cluster is too hot and fails to take in any data.
+
+	- Cause 3: If the data source is generated by the machine and not backed up by Mydumper, ensure it respects the constrains of the table. For example:
+
+	    - `AUTO_INCREMENT` columns need to be positive, and do not contain the value “0”.
+	    - UNIQUE and PRIMARY KEYs must not have duplicate entries.
+
+	- Solution: See [Troubleshooting Solution](https://pingcap.com/docs/stable/how-to/troubleshoot/tidb-lightning/#checksum-failed-checksum-mismatched-remote-vs-local).
+
+- 6.3.4 `"Checkpoint for … has invalid status:（error code)"`
+
+	- Cause: Checkpoint is enabled, and Lightning or Importer has previously abnormally exited. To prevent accidental data corruption, Lightning will not start until the error is addressed. The error code is an integer less than 25, with possible values of 0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later the exit occurs.
+
+	- Solution: See [Troubleshooting Solution](https://pingcap.com/docs/stable/how-to/troubleshoot/tidb-lightning/#checkpoint-for--has-invalid-status-error-code).
+
+- 6.3.5 `"ResourceTemporarilyUnavailable("Too many open engines …: 8")"`
+
+	- Cause: The number of concurrent engine files exceeds the limit specified by tikv-importer. This could be caused by misconfiguration. Additionally, even when the configuration is correct, if tidb-lightning has exited abnormally before, an engine file might be left at a dangling open state, which could cause this error as well.
+	- Solution: See [Troubleshooting Solution](https://pingcap.com/docs/stable/how-to/troubleshoot/tidb-lightning/#resourcetemporarilyunavailabletoo-many-open-engines--).
+
+- 6.3.6 `"cannot guess encoding for input file, please convert to UTF-8 manually"`
+
+	- Cause: TiDB Lightning only supports the UTF-8 and GB-18030 encodings. This error means the file is not in any of these encodings. It is also possible that the file has mixed encoding, such as containing a string in UTF-8 and another string in GB-18030, due to historical ALTER TABLE executions.
+
+	- Solution: See [Troubleshooting Solution](https://pingcap.com/docs/stable/how-to/troubleshoot/tidb-lightning/#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually).
+
+- 6.3.7 `"[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'"`
+
+	- Cause: A timestamp type entry has a time value that does not exist. This is either because of DST changes or because the time value has exceeded the supported range (Jan 1st 1970 to Jan 19th 2038).
+
+	- Solution: See [Troubleshooting Solution](https://pingcap.com/docs/stable/how-to/troubleshoot/tidb-lightning/#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-).
 
 ## 7. Common log analysis
 
