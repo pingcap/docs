@@ -195,7 +195,7 @@ Refer to 5 PD issues.
 
 ### 4.3 The client reports the `server is busy` error
 
-Check the specific cause for busy by viewing the monitor `Grafana -> TiKV -> errors`. `server is busy` is the traffic control mechanism of TiKV, which can inform `tidb/ti-client` that TiKV are currently under too much pressure and should retry later.
+Check the specific cause for busy by viewing the monitor `Grafana -> TiKV -> errors`. `server is busy` is the flow control mechanism of TiKV, which can inform `tidb/ti-client` that TiKV are currently under too much pressure and should retry later.
 
 - 4.3.1 TiKV RocksDB encounters `write stall`. A TiKV has two RocksDB instances, one in `data/raft` to save Raft log, another in `data/db` to save the real data. You can check the specific cause for stall by running `grep "Stalling" RocksDB` in the log. The RocksDB log is a file starting with `LOG`, and `LOG` is the current log.
 
@@ -258,7 +258,7 @@ Check the specific cause for busy by viewing the monitor `Grafana -> TiKV -> err
     - RocksDB write is slow. RocksDB kv/max write duration is high. A single raft log might contain multiple KV. When writing into RocksDB, 128 KVs are written into RocksDB in a write batch. Therefore, an apply log might be associated with multiple writes in RocksDB.
     - For other situations, report a bug.
 
-- 4.5.6 Raft commit log is slow. The Raft IO/commit log duration in TiKV Grafana is high (this metric is only supported in Grafana after v4.x). Every Region corresponds to an independent Raft group. Raft has a traffic control mechanism, similar to the sliding window mechanism of TCP. You can control the size of the sliding window by configuring the `[raftstore] raft-max-inflight-msgs = 256` parameter. If there is a write hotspot and the commit log duration is high, you can adjust the parameter, such as increasing it to 1024.
+- 4.5.6 Raft commit log is slow. The Raft IO/commit log duration in TiKV Grafana is high (this metric is only supported in Grafana after v4.x). Every Region corresponds to an independent Raft group. Raft has a flow control mechanism, similar to the sliding window mechanism of TCP. You can control the size of the sliding window by configuring the `[raftstore] raft-max-inflight-msgs = 256` parameter. If there is a write hotspot and the commit log duration is high, you can adjust the parameter, such as increasing it to 1024.
 
 - 4.5.7 For other situations, refer to the write path on performance-map and conduct an analysis.
 
