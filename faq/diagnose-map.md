@@ -1,10 +1,10 @@
 ---
-title: TiDB Cluster Troubleshooting Map
-summary:
+title: TiDB Troubleshooting Map
+summary: Learns how to troubleshoot common issues in TiDB.
 category: faq
 ---
 
-# TiDB Cluster Troubleshooting Map
+# TiDB Troubleshooting Map
 
 ## 1. Service Unavailable
 
