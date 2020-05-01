@@ -276,12 +276,13 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 ### tidb_enable_table_partition
 
-- Scope: SESSION
-- Default value: "auto"
+- Scope: SESSION | GLOBAL
+- Default value: "on"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
     - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
-    - `auto` indicates enabling the `TABLE PARTITION` feature. Currently, it indicates enabling range partition and hash partition.
-    - `on` functions the same way as `auto` does.
+    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
+    - `auto` functions the same way as `on` does.
+
 - Currently, TiDB only supports range partition and hash partition.
 
 ### tidb_backoff_lock_fast
@@ -350,6 +351,14 @@ Usage of statements:
 
 - `CREATE TABLE`: `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
 - `ALTER TABLE`: `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`
+
+### tidb_row_format_version
+
+- Scope: GLOBAL
+- Default value: `2`
+- Controls the format version of the newly saved data in the table. In TiDB v4.0, the [new storage row format](https://github.com/pingcap/tidb/blob/master/docs/design/2018-07-19-row-format.md) version `2` is used by default to save new data.
+- If you upgrade from a TiDB version earlier than 4.0.0 to 4.0.0, the format version is not changed, and TiDB continues to use the old format of version `1` to write data to the table, which means that **only newly created clusters use the new data format by default**.
+- Note that modifying this variable does not affect the old data that has been saved, but applies the corresponding version format only to the newly written data after modifying this variable.
 
 ## tidb_slow_log_threshold
 

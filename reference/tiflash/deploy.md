@@ -35,9 +35,9 @@ See [Hardware recommendations for TiKV server](/how-to/deploy/hardware-recommend
 
 It is **not** recommended to deploy TiFlash and TiKV on the same disk to prevent mutual interference.
 
-Hard disk selection criteria are the same as [TiFlash standalone deployment](#tiflash-standalone-deployment). The total capacity of the hard disk is roughly: `the to-be-replicated data capacity of the entire TiKV cluster / the number of TiKV replicas / 2`.
+Hard disk selection criteria are the same as [TiFlash standalone deployment](#tiflash-standalone-deployment). The total capacity of the hard disk is roughly: `the to-be-replicated data capacity of the entire TiKV cluster / the number of TiKV replicas * the number of TiFlash replicas`.
 
-For example, if the overall planned capacity of TiKV is three replicas, then the recommended capacity of TiFlash will be one sixth of the TiKV cluster. You can choose to replicate part of tables instead of all.
+For example, if the overall planned capacity of TiKV is 1TB, each Region in TiKV has 3 replicas, and each Region in TiFlash has 2 replicas, then the recommended capacity of TiFlash will be `1024GB / 3 * 2`. You can choose to replicate part of the tables instead of all.
 
 ## TiDB version requirements
 
@@ -71,7 +71,7 @@ TiUP cluster is the deployment tool for TiDB 4.0 or later versions. It is recomm
 
 3. Write the topology configuration file and save it as `topology.yaml`.
 
-    You can refer to [the topology configuration file template](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml).
+    You can refer to [the topology configuration file template](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml).
 
     In addition to configuring the TiDB cluster, you also need to configure the IP of TiFlash servers in `tiflash_servers`. Currently the configuration only supports IP but not domain name.
 
