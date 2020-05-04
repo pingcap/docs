@@ -19,7 +19,7 @@ This section describes the basic information about our open-source organization:
 
 - **Organization name**: PingCAP
 
-- **Organization description**: [PingCAP Inc.](https://pingcap.com/about/) is a software company founded in April 2015, dedicated to building [TiDB](https://github.com/pingcap/tidb), an open-source, distributed, Hybrid Transactional and Analytical Processing (HTAP) database. PingCAP is the primary developer, maintainer, and driver of TiDB and its associated open-source communities. It is a venture-backed company, which announced its 50 million USD Series C round financing in September 2018.
+- **Organization description**: [PingCAP Inc.](https://pingcap.com/about/) is a software company founded in April 2015, dedicated to building [TiDB](https://github.com/pingcap/tidb), an open-source, distributed, Hybrid Transactional and Analytical Processing (HTAP) database. PingCAP is the primary developer, maintainer, and driver of TiDB and its associated [open-source communities](https://github.com/pingcap/community). It is a venture-backed company, which announced its 50 million USD Series C round financing in September 2018.
 
 - **Reference links:**
 
