@@ -23,7 +23,7 @@ This section describes the basic information about our open-source organization:
 
 - **Reference links:**
 
-    - open-source repository: <https://github.com/pingcap/tidb>
+    - Open-source repository: <https://github.com/pingcap/tidb>
     - Website: <https://pingcap.com>
 
 - **Email:** [gsod-tidb@pingcap.com](mailto:gsod-tidb@pingcap.com)
@@ -43,7 +43,7 @@ TiDB 4.0 Documentation Improvement
 
 ### Project description
 
-1. Improve the current [TiDB 4.0 documentation](https://pingcap.com/docs) to make it more user-friendly. This can include reorganizing the content in a single document or within several documents, to make it easier to use and understand.
+1. Improve the current [TiDB 4.0 documentation](https://pingcap.com/docs/v4.0/) to make it more user-friendly. This can include reorganizing the content in a single document or within several documents, to make it easier to use and understand.
 
 2. Execute user acceptance tests for TiDB 4.0 how-to guides and tutorials. This can include executing a usability test by following the existing document, such as testing the deployment of TiDB or TiDB ecosystem tools. In the process of testing, the technical writer might find it necessary to update some steps or outdated description or the content structure. Then they can file Pull Requests to improve the documentation based on tests.
 
@@ -53,5 +53,5 @@ TiDB 4.0 Documentation Improvement
 
 - The open-source project: <https://github.com/pingcap/tidb>
 - Existing documentation: <https://pingcap.com/docs>
-- [How-to guides and tutorials](https://pingcap.com/docs/stable/how-to/deploy/orchestrated/tiup/): topics about how to deploy, configure, scale, or monitor a TiDB cluster in different ways
+- [How-to guides and tutorials](https://pingcap.com/docs/v4.0/how-to/deploy/orchestrated/tiup/): topics about how to deploy, configure, scale, or monitor a TiDB cluster in different ways
 - [Related open-source projects](https://github.com/pingcap/community/blob/master/special-interest-groups/sig-docs/README.md) that are also involved in the whole TiDB documentation
