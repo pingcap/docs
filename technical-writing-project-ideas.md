@@ -30,8 +30,8 @@ This section describes the basic information about our open-source organization:
 
 - **Display name:**
 
-    -  Administrator: [lilin90](https://github.com/lilin90)
-    -  Mentor: Coco
+    - Administrator: [lilin90](https://github.com/lilin90)
+    - Mentor: Coco
 
 ## Project ideas
 
