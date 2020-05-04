@@ -45,7 +45,7 @@ TiDB 4.0 Documentation Improvement
 
 1. Improve the current [TiDB 4.0 documentation](https://pingcap.com/docs/v4.0/) to make it more user-friendly. This can include reorganizing the content in a single document or within several documents, to make it easier to use and understand.
 
-2. Execute user acceptance tests for TiDB 4.0 how-to guides and tutorials. This can include executing a usability test by following the existing document, such as testing the deployment of TiDB or TiDB ecosystem tools. In the process of testing, the technical writer might find it necessary to update some steps or outdated description or the content structure. Then they can file Pull Requests to improve the documentation based on tests.
+2. Execute user acceptance tests for TiDB 4.0 how-to guides and tutorials. For example, a technical writer can test a deployment guide's usability by following the instructions step by step and see whether anything need to be improved (such as updating unclear or outdated descriptions, adding missing steps or necessary information, or refining the content structure). Then, they can file Pull Requests to improve the documentation based on tests.
 
 3. Review [GitHub Pull Requests about TiDB 4.0 documentation](https://github.com/pingcap/docs/pulls). This can include reviewing the language and content organization in docs Pull Requests filed by a contributor, a developer, a Database Administrator, or another Technical Writer.
 
