@@ -93,9 +93,6 @@ mysql> select _tidb_rowid, id from t;
 3 rows in set (0.01 sec)
 ```
 
-
-
-
 ### Performance schema
 
 Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/how-to/monitor/monitor-a-cluster.md) for performance metrics instead.
