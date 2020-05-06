@@ -381,6 +381,9 @@
       - [Data Check for Tables with Different Schema or Table Names](/reference/tools/sync-diff-inspector/route-diff.md)
       - [Data Check in the Sharding Scenario](/reference/tools/sync-diff-inspector/shard-diff.md)
       - [Data Check for TiDB Upstream and Downstream Clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
+    + TiUP
+      - [Deploy and Maintain TiDB Online Cluster](/reference/tools/tiup/cluster.md)
+      - [Stress Test TiDB Using TiUP](/reference/tools/tiup/bench.md)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
     - [TiKV Control](/reference/tools/tikv-control.md)
