@@ -68,11 +68,9 @@ The operations are executed as follows:
 
 Also, starting from TiDB 2.1.18 and 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
->**Note:**
+> **Note:**
 >
->If the primary key is not specified, '_tibd_rowid' will be used to identify the row in TiDB. Allocation of this variable and auto-increment column will the same allocator. If the auto-increment column is specified as the primary key, then the column will be used to identify rows. So, there will be the following situation.
-
-
+> If the primary key is not specified, `_tibd_rowid` will be used to identify the row in TiDB. Allocation of this variable and auto-increment column will the same allocator. If the auto-increment column is specified as the primary key, then the column will be used to identify rows. So, there will be the following situation.
 
 ```sql
 mysql> create table t(id int unique key AUTO_INCREMENT);
