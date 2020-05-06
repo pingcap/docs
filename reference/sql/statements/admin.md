@@ -52,7 +52,7 @@ ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 
 **AdminStmt:**
 
-![AdminStmt](/media/sqlgram-v2.1/AdminStmt.png)
+![AdminStmt](/media/sqlgram/AdminStmt.png)
 
 ## Examples
 

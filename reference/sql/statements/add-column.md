@@ -12,23 +12,23 @@ The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. Thi
 
 **AlterTableStmt:**
 
-![AlterTableStmt](/media/sqlgram-v2.1/AlterTableStmt.png)
+![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
 
 **AlterTableSpec:**
 
-![AlterTableSpec](/media/sqlgram-v2.1/AlterTableSpec.png)
+![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
 
 **ColumnKeywordOpt:**
 
-![ColumnKeywordOpt](/media/sqlgram-v2.1/ColumnKeywordOpt.png)
+![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
 
 **ColumnDef:**
 
-![ColumnDef](/media/sqlgram-v2.1/ColumnDef.png)
+![ColumnDef](/media/sqlgram/ColumnDef.png)
 
 **ColumnPosition:**
 
-![ColumnPosition](/media/sqlgram-v2.1/ColumnPosition.png)
+![ColumnPosition](/media/sqlgram/ColumnPosition.png)
 
 ## Examples
 
