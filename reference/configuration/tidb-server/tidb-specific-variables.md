@@ -50,9 +50,19 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with distinct(like `select count(distinct a) from t`) to Coprocessor.
 - When the aggregate with distinct operation is slow in query, you can set the variable value to 1.
 
-For example, in the following execution plan, `distinct a` is pushed down to Coprocessor, and a group by column `test.t.a` is added to `HashAgg_5`.
+In the following example, before `tidb_opt_distinct_agg_push_down` is on, tidb needs to read all data from tikv and execute `disctinct` on tidb side. After `tidb_opt_distinct_agg_push_down` is turned on,` distinct a` is pushed down to Coprocessor, and a group by column `test.t.a` is added to `HashAgg_5`.
 
 ```
+mysql> desc select count(distinct a) from test.t;
++-------------------------+----------+-----------+---------------+------------------------------------------+
+| id                      | estRows  | task      | access object | operator info                            |
++-------------------------+----------+-----------+---------------+------------------------------------------+
+| StreamAgg_6             | 1.00     | root      |               | funcs:count(distinct test.t.a)->Column#4 |
+| └─TableReader_10        | 10000.00 | root      |               | data:TableFullScan_9                     |
+|   └─TableFullScan_9     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo           |
++-------------------------+----------+-----------+---------------+------------------------------------------+
+3 rows in set (0.01 sec)
+
 mysql> set session tidb_opt_distinct_agg_push_down = 1;
 Query OK, 0 rows affected (0.00 sec)
 
