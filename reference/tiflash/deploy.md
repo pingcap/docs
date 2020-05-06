@@ -27,7 +27,7 @@ It is recommended to use an SSD disk to buffer the real-time data being replicat
 
 For other hard disks, you can use multiple HDDs or regular SSDs. A better hard disk will surely bring better performance.
 
-TiFlash supports multi-directory storage, so there is no need to use RAID.
+TiFlash supports [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment), so there is no need to use RAID.
 
 ### TiFlash and TiKV are deployed on the same node
 
@@ -86,7 +86,11 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
     192.168.1.1 data_dir=/data1/tiflash/data,/data2/tiflash/data
     ```
 
+<<<<<<< HEAD
 4. Complete the [remaining steps](/how-to/deploy/orchestrated/ansible.md#step-10-edit-variables-in-the-inventoryini-file) of the TiDB Ansible deployment process.
+=======
+    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want to [deploy TiFlash on multiple disks](/reference/tiflash/configuration.md#multi-disk-deployment), separate each directory with commas. For example:
+>>>>>>> 58b3210...  tiflash: add more explanation for multi disk deployment (#2467)
 
 5. To verify that TiFlash has been successfully deployed:
 
