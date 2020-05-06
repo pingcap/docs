@@ -1,6 +1,6 @@
 ---
 title: Stress Test TiDB Using TiUP Bench Component
-summary:
+summary: Learns how to stress test TiDB with TPC-C and TPC-H workloads using TiUP.
 category: tools
 ---
 
