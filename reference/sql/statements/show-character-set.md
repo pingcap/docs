@@ -12,15 +12,15 @@ This statement provides a static list of available character sets in TiDB. The o
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram-v3.0/ShowStmt.png)
+![ShowStmt](/media/sqlgram/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram-v3.0/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
 **CharsetKw:**
 
-![CharsetKw](/media/sqlgram-v3.0/CharsetKw.png)
+![CharsetKw](/media/sqlgram/CharsetKw.png)
 
 ## Examples
 
