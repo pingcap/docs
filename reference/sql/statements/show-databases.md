@@ -14,11 +14,11 @@ This statement shows a list of databases that the current user has privileges to
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram-v3.0/ShowStmt.png)
+![ShowStmt](/media/sqlgram/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram-v3.0/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
 ## Examples
 
