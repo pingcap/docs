@@ -216,9 +216,9 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_mem_quota_query
 
 - Scope: SESSION
-- Default value: 32 GB
+- Default value: 1 GB
 - This variable is used to set the threshold value of memory quota for a query.
-- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
+- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/reference/configuration/tidb-server/configuration-file.md#mem-quota-query).
 
 ### tidb_mem_quota_hashjoin
 
@@ -285,19 +285,19 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Default value: 10
-- When a transaction encounters retryable errors (such as transaction conflicts, over slow transaction commit, or table schema changes), this transaction can be re-executed. This variable is used to set the maximum number of the retries.
+- This variable is used to set the maximum number of the retries. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry.
 
 ### tidb_disable_txn_auto_retry
 
 - Scope: SESSION | GLOBAL
 - Default: on
-- This variable is used to set whether to disable automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+- This variable is used to set whether to disable the automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
 
     Setting the value to `off` means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    To decide whether you can enable automatic retry, see [automatic retry and anomalies caused by automatic retry](/reference/transactions/transaction-isolation.md#automatic-retry-and-transactional-anomalies-caused-by-automatic-retry).
+    For more details, see [limits of retry](/reference/transactions/transaction-optimistic.md#limits-of-retry).
 
 ### tidb_backoff_weight
 
@@ -311,12 +311,13 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_enable_table_partition
 
-- Scope: SESSION
-- Default value: "auto"
+- Scope: SESSION | GLOBAL
+- Default value: "on"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
     - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
-    - `auto` indicates enabling the `TABLE PARTITION` feature. Currently, it indicates enabling range partition and hash partition.
-    - `on` functions the same way as `auto` does.
+    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
+    - `auto` functions the same way as `on` does.
+
 - Currently, TiDB only supports range partition and hash partition.
 
 ### tidb_backoff_lock_fast
@@ -328,13 +329,13 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_ddl_reorg_worker_cnt
 
 - Scope: GLOBAL
-- Default value: 16
+- Default value: 4
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
 ### tidb_ddl_reorg_batch_size
 
 - Scope: GLOBAL
-- Default value: 1024
+- Default value: 256
 - This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
     - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
     - If the transaction conflict does not exist, you can set the batch size to a large value. The maximum value is 10240. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
@@ -386,6 +387,14 @@ Usage of statements:
 - `CREATE TABLE`: `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
 - `ALTER TABLE`: `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`
 
+### tidb_row_format_version
+
+- Scope: GLOBAL
+- Default value: `2`
+- Controls the format version of the newly saved data in the table. In TiDB v4.0, the [new storage row format](https://github.com/pingcap/tidb/blob/master/docs/design/2018-07-19-row-format.md) version `2` is used by default to save new data.
+- If you upgrade from a TiDB version earlier than 4.0.0 to 4.0.0, the format version is not changed, and TiDB continues to use the old format of version `1` to write data to the table, which means that **only newly created clusters use the new data format by default**.
+- Note that modifying this variable does not affect the old data that has been saved, but applies the corresponding version format only to the newly written data after modifying this variable.
+
 ## tidb_slow_log_threshold
 
 - Scope: SESSION
@@ -401,7 +410,7 @@ set tidb_slow_log_threshold = 200
 ## tidb_query_log_max_len
 
 - Scope: SESSION
-- Default value: 2048 (bytes)
+- Default value: 4096 (bytes)
 - The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
 
 Usage example:
@@ -412,16 +421,17 @@ set tidb_query_log_max_len = 20
 
 ### tidb_txn_mode
 
-- Scope: SESSION | GLOBAL (in TiDB 3.0.4 or later)
-- Default value: ""
-- This variable is used to set the transaction mode, which by default is optimistic locking mode. TiDB 3.0 supports the pessimistic locking mode (experimental). After you set `tidb_txn_mode` to `pessimistic`, all explicit transactions (non-autocommit transactions) the session executes become pessimistic transactions.
-- Since TiDB 3.0.4, you can also use this variable to set the transaction mode globally. Once set to GLOBAL, only sessions created after modification are affected. For details, see [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
+- Scope: SESSION | GLOBAL
+- Default value: "pessimistic"
+- This variable is used to set the transaction mode. TiDB 3.0 supports the pessimistic transactions. Since TiDB 3.0.8, the [pessimistic transaction mode](/reference/transactions/transaction-pessimistic.md) is enabled by default.
+- If you upgrade TiDB from v3.0.7 or earlier versions to v3.0.8 or later versions, the default transaction mode does not change. **Only the newly created clusters use the pessimistic transaction mode by default**.
+- If this variable is set to "optimistic" or "", TiDB uses the [optimistic transaction mode](/reference/transactions/transaction-optimistic.md).
 
 ### tidb_constraint_check_in_place
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- TiDB uses the optimistic locking model by default. This means that conflict check (unique key check) is performed when the transaction is committed. This variable is used to set whether to do a unique key check each time a row of data is written.
+- TiDB supports the optimistic transaction model. This means that conflict check (unique key check) is performed when the transaction is committed. This variable is used to set whether to do a unique key check each time a row of data is written.
 - If this variable is enabled, the performance might be affected in a scenario where a large batch of data is written. For example:
 
     - When this variable is disabled:
@@ -548,3 +558,9 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to enable or disable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `performance_schema.events_statements_summary_by_digest` table to identify and troubleshoot SQL performance issues.
+
+### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
+
+- Scope: SESSION
+- Default value: 1
+- This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor.

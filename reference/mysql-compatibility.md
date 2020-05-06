@@ -14,7 +14,7 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 
 > **Note:**
 >
-> This page refers to general differences between MySQL and TiDB. Please also see the dedicated pages for [Security](/reference/security/compatibility.md) and [Transaction Model](/reference/transactions/transaction-model.md) compatibility.
+> This page refers to general differences between MySQL and TiDB. Refer to the dedicated pages for [Security](/reference/security/compatibility.md) and [Pessimistic Transaction Model](/reference/transactions/transaction-pessimistic.md#difference-with-mysql-innodb) compatibility.
 
 ## Unsupported features
 
@@ -54,7 +54,7 @@ In TiDB, auto-increment columns are only guaranteed to be incremental and unique
 Assume that you have a table with the auto-increment ID:
 
 ```sql
-create table t(id int unique key AUTO_INCREMENT, c int);
+CREATE TABLE t(id int unique key AUTO_INCREMENT, c int);
 ```
 
 The principle of the auto-increment ID in TiDB is that each tidb-server instance caches a section of ID values (currently 30000 IDs are cached) for allocation and fetches the next section after this section is used up.
@@ -63,8 +63,8 @@ Assume that the cluster contains two tidb-server instances, namely Instance A an
 
 The operations are executed as follows:
 
-1. The client issues the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
-2. The client issues the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
+1. The client issues the `INSERT INTO t VALUES (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
+2. The client issues the `INSERT INTO t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
 Also, starting from TiDB 2.1.18 and 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
@@ -102,6 +102,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
 + `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
 + `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but it works differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
++ Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it's not possible to add multiple columns or indexes in a single statement.
 
 + The following Table Options are not supported in syntax:
     - `WITH/WITHOUT VALIDATION`
@@ -245,6 +246,14 @@ Because they are built-in, named time zones in TiDB might behave slightly differ
 #### Zero month and zero day
 
 It is not recommended to unset the `NO_ZERO_DATE` and `NO_ZERO_IN_DATE` SQL modes, which are enabled by default in TiDB as in MySQL. While TiDB supports operating with these modes disabled, the TiKV coprocessor does not. Executing certain statements that push down date and time processing functions to TiKV might result in a statement error.
+
+#### Handling of space at the end of string line
+
+Currently, when inserting data, TiDB keeps the space at the end of the line for the `VARCHAR` type, and truncate the space for the `CHAR` type. In case there is no index, TiDB behaves exactly the same as MySQL. 
+
+If there is a `UNIQUE` index on the `VARCHAR` data, MySQL truncates the space at the end of the `VARCHAR` line before determining whether the data is duplicated, which is similar to the processing of the `CHAR` type, while TiDB keeps the space.
+
+When making a comparison, MySQL first truncates the constant and the space at the end of the column, while TiDB keeps them to enable exact comparison.
 
 ### Type system differences
 

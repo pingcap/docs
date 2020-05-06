@@ -21,7 +21,7 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-compression-type`
 
 + The compression algorithm for gRPC messages
-+ Available values: `none`, `deflate`, `gzip`
++ Optional values: `none`, `deflate`, `gzip`
 + Default value: `none`
 
 ### `grpc-concurrency`
@@ -92,9 +92,41 @@ This document only describes the parameters that are not included in command-lin
 + Unit: KB|MB|GB
 + Minimum value: `1KB`
 
+## readpool.unified
+
+Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
+
+### `min-thread-count`
+
++ The minimal working thread count of the unified read pool.
++ Default value: `1`
+
+### `max-thread-count`
+
++ The maximum working thread count of the unified read pool.
++ Default value: `MAX(4, CPU * 0.8)`
+
+### `stack-size`
+
++ The stack size of the threads in the unified thread pool.
++ Default value: `10MB`
++ Unit: KB|MB|GB
++ Minimum value: `2MB`
+
+### `max-tasks-per-worker`
+
++ The maximum number of tasks allowed for a single thread in the unified read pool. `Server Is Busy` is returned when the value is exceeded.
++ Default value: `2000`
++ Minimum value: `2`
+
 ## readpool.storage
 
-Configuration items related to storage thread pool
+Configuration items related to storage thread pool.
+
+### `use-unified-pool`
+
++ Determines whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for storage requests. If the value of this parameter is `false`, a separate thread pool is used, which is configured through the rest parameters in this section (`readpool.storage`).
++ Default value: `false`
 
 ### `high-concurrency`
 
@@ -141,7 +173,12 @@ Configuration items related to storage thread pool
 
 ## `readpool.coprocessor`
 
- Configuration items related to the Coprocessor thread pool
+Configuration items related to the Coprocessor thread pool.
+
+### `use-unified-pool`
+
++ Determines whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for coprocessor requests. If the value of this parameter is `false`, a separate thread pool is used, which is configured through the rest parameters in this section (`readpool.coprocessor`).
++ Default value: If none of the parameters in this section (`readpool.coprocessor`) are set, the default value is `true`. Otherwise, the default value is `false` for the backward compatibility. Adjust the configuration items in [`readpool.unified`](#readpoolunified) before enabling this parameter.
 
 ### `high-concurrency`
 
@@ -213,6 +250,27 @@ Configuration items related to storage
 + The maximum size of the write queue. A `Server Is Busy` error is returned for a new write to TiKV when this value is exceeded.
 + Default value: `100MB`
 + Unit: MB|GB
+
+### `reserve-space`
+
++ The size of the temporary file that preoccupies the extra space when TiKV is started. The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV runs out of disk space and cannot be started normally, you can delete this file as an emergency intervention and set `reserve-space` to `0MB`.
++ Default value: `2GB`
++ Unite: MB|GB
+
+## storage.block-cache
+
+Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF). When these configuration items are enabled, block cache separately configured for each column family is disabled.
+
+### `shared`
+
++ Enables or disables the sharing of block cache.
++ Default value: `true`
+
+### `capacity`
+
++ The size of the shared block cache.
++ Default value: 45% of the size of total system memory
++ Unit: KB|MB|GB
 
 ## raftstore
 
@@ -614,7 +672,7 @@ Configuration items related to RocksDB
 ### `wal-recovery-mode`
 
 + WAL recovery mode
-+ Available values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3` (`SkipAnyCorruptedRecords`)
++ Optional values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3` (`SkipAnyCorruptedRecords`)
 + Default value: `2`
 + Minimum value: `0`
 + Maximum value: `3`
@@ -677,7 +735,7 @@ Configuration items related to RocksDB
 ### `rate-limiter-mode`
 
 + Rate LImiter mode
-+ Available values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
++ Optional values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
 + Default value: `2`
 + Minimum value: `1`
 + Maximum value: `3`
@@ -816,14 +874,14 @@ Configuration items related to `rocksdb.defaultcf`
 ### `read-amp-bytes-per-bit`
 
 + Enables or disables statistics of read amplification.
-+ Available values: `0` (disabled), > `0` (enabled).
++ Optional values: `0` (disabled), > `0` (enabled).
 + Default value: `0`
 + Minimum value: `0`
 
 ### `compression-per-level`
 
 + The default compression algorithm for each level
-+ Available values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
++ Optional values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
 + Default value: `No` for the first two levels, and `lz4` for the next five levels
 
 ### `write-buffer-size`
@@ -887,7 +945,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Available values: `3` (`MinOverlappingRatio`), `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`)
++ Optional values: `3` (`MinOverlappingRatio`), `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`)
 + Default value: `3`
 
 ### `dynamic-level-bytes`
@@ -908,7 +966,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `rocksdb.defaultcf.compaction-style`
 
 + Compaction method
-+ Available values: `level`, `universal`
++ Optional values: `level`, `universal`
 + Default value: `level`
 
 ### `disable-auto-compactions`
@@ -942,7 +1000,7 @@ Configuration items related to `rocksdb.defaultcf.titan`
 ### `blob-file-compression`
 
 + The compression algorithm used in a Blob file
-+ Available values: `no`, `snappy`, `zlib`, `bzip2`, `lz4`, `lz4hc`, `zstd`
++ Optional values: `no`, `snappy`, `zlib`, `bzip2`, `lz4`, `lz4hc`, `zstd`
 + Default value: `lz4`
 
 ### `blob-cache-size`
@@ -986,6 +1044,25 @@ Configuration items related to `rocksdb.defaultcf.titan`
 + Default value: `8MB`
 + Minimum value: `0`
 + Unit: KB|MB|GB
+
+### `blob-run-mode`
+
++ Specifies the running mode of Titan.
++ Optional values:
+    + `normal`: Writes data to the blob file when the value size exceeds `min-blob-size`.
+    + `read_only`: Refuses to write new data to the blob file, but still reads the original data from the blob file.
+    + `fallback`: Writes data in the blob file back to LSM.
++ Default value: `normal`
+
+### `level-merge`
+
++ Determines whether to optimize the read performance. When `level-merge` is enabled, there is more write amplification.
++ Default value: `true`
+
+### `gc-merge-rewrite`
+
++ Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
++ Default value: `true`
 
 ## rocksdb.writecf
 
@@ -1082,3 +1159,21 @@ Configuration items related to `import`
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
+
+## pessimistic-txn
+
+### `enabled`
+
+- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
+- Default value: `true`
+
+### `wait-for-lock-timeout`
+
+- The max time that a pessimistic transaction in TiKV waits for other transactions to release the lock, in milliseconds. If timed out, an error is returned to TiDB, and TiDB retries to add a lock. The lock wait timeout is set by `innodb_lock_wait_timeout`.
+- Default value: 1000
+- Minimum value: 1
+
+### `wait-up-delay-duration`
+
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration` milliseconds.
+- Default value: 20

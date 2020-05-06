@@ -88,10 +88,6 @@ The character sets of TiDB use UTF-8 by default and currently only support UTF-8
 
 32 characters at most.
 
-#### What is the maximum number of statements in a transaction?
-
-5000 at most.
-
 #### Does TiDB support XA?
 
 No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
@@ -120,6 +116,10 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 #### How to modify the `sql_mode` in TiDB except using the `set` command?
 
 The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql\_mode` of the database; it only supports using the `set` command to configure `sql\_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure it.
+
+#### Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
+
+Since v3.0.8, TiDB supports modifying the version string of the server by modifying [`server-version`](/reference/configuration/tidb-server/configuration-file.md#server-version) in the configuration file. When you deploy TiDB using TiDB Ansible, you can also specify the proper version string by configuring `server-version` in the `conf/tidb.yml` configuration file to avoid the failure of security vulnerability scan.
 
 #### What authentication protocols does TiDB support? What's the process?
 
@@ -203,9 +203,9 @@ For details, see [Software and Hardware Recommendations](/how-to/deploy/hardware
 
 ### Install and deploy
 
-#### Deploy TiDB using Ansible (recommended)
+#### Deploy TiDB for production (recommended)
 
-See [Ansible Deployment](/how-to/deploy/orchestrated/ansible.md).
+See [TiUP Deployment](/how-to/deploy/orchestrated/tiup.md).
 
 ##### Why the modified `toml` configuration for TiKV/PD does not take effect?
 
@@ -245,9 +245,9 @@ Check the time difference between the machine time of the monitor and the time w
 | enable_slow_query_log | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
 | deploy_without_tidb | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 
-#### Deploy TiDB offline using Ansible
+#### Deploy TiDB offline using TiDB Ansible
 
-It is not recommended to deploy TiDB offline using Ansible. If the Control Machine has no access to external network, you can deploy TiDB offline using Ansible. For details, see [Offline Deployment Using Ansible](/how-to/deploy/orchestrated/offline-ansible.md).
+It is not recommended to deploy TiDB offline using TiDB Ansible. If the Control Machine has no access to external network, you can deploy TiDB offline using TiDB Ansible. For details, see [Offline Deployment Using TiDB Ansible](/how-to/deploy/orchestrated/offline-ansible.md).
 
 #### How to deploy TiDB quickly using Docker Compose on a single machine?
 
@@ -302,7 +302,7 @@ Two possible reasons and solutions:
 
 ### Upgrade
 
-#### How to perform rolling updates using Ansible?
+#### How to perform rolling updates using TiDB Ansible?
 
 - Apply rolling updates to the TiKV node (only update the TiKV service).
 
@@ -322,7 +322,7 @@ When you apply rolling updates to the TiDB services, the running application is 
 
 #### How to upgrade when I deploy TiDB using Binary?
 
-It is not recommended to deploy TiDB using Binary. The support for upgrading using Binary is not as friendly as using Ansible. It is recommended to deploy TiDB using Ansible.
+It is not recommended to deploy TiDB using Binary. The support for upgrading using Binary is not as friendly as using TiDB Ansible. It is recommended to deploy TiDB using TiDB Ansible.
 
 #### Should I upgrade TiKV or all components generally?
 
@@ -385,7 +385,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 #### How to safely stop TiDB?
 
-If the cluster is deployed using Ansible, you can use the `ansible-playbook stop.yml` command to stop the TiDB cluster. If the cluster is not deployed using Ansible, `kill` all the services directly. The components of TiDB will do `graceful shutdown`.
+If the cluster is deployed using TiDB Ansible, you can use the `ansible-playbook stop.yml` command to stop the TiDB cluster. If the cluster is not deployed using TiDB Ansible, `kill` all the services directly. The components of TiDB will do `graceful shutdown`.
 
 #### Can `kill` be executed in TiDB?
 
@@ -692,7 +692,7 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 
 #### How is the write performance in the most strict data available mode (`sync-log = true`)?
 
-Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/dev/benchmark/sysbench-v4.md).
+Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](/benchmark/sysbench-v4.md).
 
 #### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
 
@@ -734,7 +734,7 @@ No. TiDB (or data created from the transactional API) relies on a specific key f
 At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
 
 - Do not spend too much time on the benchmark test. Pay more attention to the difference of scenarios using TiDB.
-- See [Performance test result for TiDB using Sysbench](https://github.com/pingcap/docs/blob/master/dev/benchmark/sysbench-v4.md).
+- See [Performance test result for TiDB using Sysbench](/benchmark/sysbench-v4.md).
 
 #### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
@@ -882,7 +882,7 @@ See [Syncer User Guide](/reference/tools/syncer.md).
 
 ##### How to configure to monitor Syncer status?
 
-Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/dev/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
+Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
 
 ```
 - job_name: 'syncer_ops' // task name
@@ -930,11 +930,9 @@ The total read capacity has no limit. You can increase the read capacity by addi
 
 #### The error message `transaction too large` is displayed
 
-As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
+Due to the limitation of the underlying storage engine, each key-value entry (one row) in TiDB should be no more than 6MB.
 
-- A transaction is limited to 5000 SQL statements (by default)
-- Each Key-Value entry is no more than 6MB
-- The total size of Key-Value entry is no more than 100MB
+Distributed transactions need two-phase commit and the underlying implementation performs the Raft replication. If a transaction is very large, the commit process would be quite slow and this transaction is more likely to conflict with other transactions. Moreover, the rollback of a failed transaction leads to an unnecessary performance penalty. To avoid these problems, we limit the total size of key-value entries to no more than 100MB in a transaction by default. If you need larger transactions, change `txn-total-size-limit` in the TiDB configuration file. The maximum value of this configuration item is up to `10G`. The actual limitation might also depend on the hardware of the RAM.
 
 There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
 

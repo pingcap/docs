@@ -16,17 +16,37 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables.
 
-### `oom-action`
-
-- Specifies the operation when out-of-memory occurs in TiDB.
-- Default value: `log`
-- The valid options are `log` and `cancel`. `log` only prints the log without actual processing. `cancel` cancels the operation and outputs the log.
-
 ### `mem-quota-query`
 
 - The maximum memory available for a single SQL statement.
-- Default value: `34359738368`
+- Default value: `1073741824`
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
+- This value is the initial value of the system variable [`tidb_mem_quota_query`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_mem_quota_query).
+
+### `oom-use-tmp-storage`
+
++ Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
++ Default value:  `true`
+
+### `tmp-storage-path`
+
++ Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
++ Default value: `<TMPDIR>/tidb/tmp-storage`
++ It only takes effect when `oom-use-tmp-storage` is `true`.
+
+### `tmp-storage-quota`
+
++ Specifies the quota for the storage in `tmp-storage-path`. The unit is byte.
++ When a single SQL statement uses a temporary disk and the total volume of the temporary disk of the TiDB server exceeds this configuration value, the current SQL operation is cancelled and the `Out of Global Storage Quota!` error is returned.
++ When the value of this configuration is smaller than `0`, the above check and limit do not apply.
++ Default value: `-1`
++ When the remaining available storage in `tmp-storage-path` is lower than the value defined by `tmp-storage-quota`, the TiDB server reports an error when it is started, and exits.
+
+### `oom-action`
+
+- Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
+- Default value: `"cancel"`
+- The valid options are `"log"` and `"cancel"`. When `oom-action="log"`, it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
 
 ### `enable-streaming`
 
@@ -72,6 +92,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `false`
 - With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
 
+### `server-version`
+
++ Modifies the version string returned by TiDB in the following situations:
+    - When the built-in `VERSION()` function is used.
+    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/internals/en/connection-phase-packets.html#packet-Protocol::Handshake).
++ Default value: ""
++ By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
+
 ### `repair-mode`
 
 - Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
@@ -83,6 +111,19 @@ The TiDB configuration file supports more options than command-line parameters. 
 - `repair-table-list` is only valid when [`repair-mode`](#repair-mode) is set to `true`. `repair-table-list` is a list of bad tables that need to be repaired in an instance. An example of the list is: ["db.table1","db.table2"...].
 - Default value: []
 - The list is empty by default. This means that there are no bad tables that need to be repaired.
+
+### `max-server-connections`
+
+- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
+- Default value: `0`
+- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
+
+### `max-index-length`
+
+- Sets the maximum allowable length of the newly created index.
+- Default value: `3072`
+- Unit: byte
+- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
 
 ## Log
 
@@ -134,14 +175,8 @@ Configuration items related to log.
 ### `query-log-max-len`
 
 - The maximum length of SQL output.
-- Default value: `2048`
-- When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
-
-### `max-server-connections`
-
-- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
 - Default value: `4096`
-- When the number of actual client connections is equal to the value of `max-server-connections`, the TiDB server rejects new client connections.
+- When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
 
 ## log.file
 
@@ -241,7 +276,13 @@ Configuration items related to performance.
 
 - The maximum number of statements allowed in a single TiDB transaction.
 - Default value: `5000`
-- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error.
+- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
+
+### `txn-total-size-limit`
+
+- The size limit of a transaction.
+- Default value: `104857600`
+- The total size of all key-value entries in bytes should be less than this value. Note that if the `binlog` is enabled, this value should be less than `104857600` (which means 100MB), because of the limitation of the binlog component. If `binlog` is not enabled, the maximum value of this configuration is `10737418240` (which means 10GB).
 
 ### `tcp-keep-alive`
 
@@ -421,7 +462,7 @@ Configuration related to the status of TiDB service.
 ### `report-status`
 
 - Enables or disables the HTTP API service.
-- Default value: true
+- Default value: `true`
 
 ### `record-db-qps`
 
@@ -435,9 +476,31 @@ Configurations related to the `events_statement_summary_by_digest` table.
 ### max-stmt-count
 
 - The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
-- Default value: 100
+- Default value: `100`
 
 ### max-sql-length
 
 - The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
-- Default value: 4096
+- Default value: `4096`
+
+## pessimistic-txn
+
+### enable
+
+- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
+- Default value: `true`
+
+### max-retry-count
+
+- The max number of retries of each statement in pessimistic transactions. Exceeding this limit results in error.
+- Default value: `256`
+
+## experimental
+
+The `experimental` section describes configurations related to the experimental features of TiDB. This section is introduced since v3.1.0.
+
+### `allow-auto-random` <span class="version-mark">New in v3.1.0</span>
+
+- Determines whether to allow using `AUTO_RANDOM`.
+- Default value: `false`
+- By default, TiDB does not support using `AUTO_RANDOM`. When the value is `true`, you cannot set `alter-primary-key` to `true` at the same time.

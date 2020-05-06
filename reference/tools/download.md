@@ -37,7 +37,7 @@ Download [TiDB Lightning](/reference/tools/tidb-lightning/overview.md) by using 
 
 ## BR (backup and restore)
 
-Download [BR](/how-to/maintain/backup-and-restore/br.md) by using the download link in the following table:
+Download [BR](/reference/tools/br/br.md) by using the download link in the following table:
 
 | Package name | OS | Architecure | SHA256 checksum |
 |:---|:---|:---|:---|
@@ -49,7 +49,7 @@ Download [BR](/how-to/maintain/backup-and-restore/br.md) by using the download l
 
 ## TiDB DM (Data Migration)
 
-Download [DM](/reference/tools/data-migration/overview.md) by using the download link in the following table:
+Download [DM](https://pingcap.com/docs/tidb-data-migration/stable/overview/) by using the download link in the following table:
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
@@ -65,7 +65,7 @@ If you want to download the latest version of [Syncer](/reference/tools/syncer.m
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
-| [tidb-enterprise-tools-latest-linux-amd64.tar.gz](https://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz) | Linux | amd64 | [tidb-enterprise-tools-latest-linux-amd64.sha256](https://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.sha256) |
+| [tidb-enterprise-tools-nightly-linux-amd64.tar.gz](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz) | Linux | amd64 | [tidb-enterprise-tools-nightly-linux-amd64.sha256](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.sha256) |
 
 This enterprise tools package includes all the following tools:
 

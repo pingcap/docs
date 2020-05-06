@@ -12,11 +12,11 @@ The `USE` statement selects a current database for the user session.
 
 **UseStmt:**
 
-![UseStmt](/media/sqlgram-dev/UseStmt.png)
+![UseStmt](/media/sqlgram/UseStmt.png)
 
 **DBName:**
 
-![DBName](/media/sqlgram-dev/DBName.png)
+![DBName](/media/sqlgram/DBName.png)
 
 ## Examples
 
@@ -71,7 +71,9 @@ mysql> SHOW TABLES;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+In TiDB 2.0 versions, you can use `USE` statements to access any database. In TiDB 3.0 or later versions, TiDB checks whether you have the privilege to access the database when you use `USE` statements.
+
+Currently, `USE` statements are understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
 
 ## See also
 
