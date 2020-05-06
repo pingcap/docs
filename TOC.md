@@ -97,6 +97,7 @@
     - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
     - [Upgrade Using TiDB Ansible](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
+    - [TiDB Troubleshooting Map](/how-to/troubleshoot/diagnose-map.md)
     - [Troubleshoot Cluster Setup](/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/how-to/troubleshoot/tidb-lightning.md)
 + Reference
@@ -391,7 +392,6 @@
   - [TiDB FAQs](/faq/tidb.md)
   - [TiDB Lightning FAQs](/faq/tidb-lightning.md)
   - [Upgrade FAQs](/faq/upgrade.md)
-  - [TiDB Troubleshooting Map](/faq/diagnose-map.md)
 + Support
   - [Support Resources](/support-resources.md)
   - [Report an Issue](/report-issue.md)
