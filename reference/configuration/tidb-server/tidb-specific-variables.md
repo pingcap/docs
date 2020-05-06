@@ -47,12 +47,12 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with distinct(like `select count(distinct a) from t`) to Coprocessor.
-- When the aggregate with distinct operation is slow in query, you can set the variable value to 1.
+- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with `distinct` (such as `select count(distinct a) from t`) to Coprocessor.
+- When the aggregate function with the `distinct` operation is slow in the query, you can set the variable value to `1`.
 
-In the following example, before `tidb_opt_distinct_agg_push_down` is on, tidb needs to read all data from tikv and execute `disctinct` on tidb side. After `tidb_opt_distinct_agg_push_down` is turned on,` distinct a` is pushed down to Coprocessor, and a group by column `test.t.a` is added to `HashAgg_5`.
+In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `disctinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
 
-```
+```sql
 mysql> desc select count(distinct a) from test.t;
 +-------------------------+----------+-----------+---------------+------------------------------------------+
 | id                      | estRows  | task      | access object | operator info                            |
