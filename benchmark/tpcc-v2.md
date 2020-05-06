@@ -1,5 +1,6 @@
 ---
 title: TiDB TPC-C Performance Test Report -- v4.0 vs. v3.0
+summary: Compares the TPC-C performance of TiDB 4.0 and TiDB 3.0 using BenchmarkSQL.
 category: benchmark
 ---
 
