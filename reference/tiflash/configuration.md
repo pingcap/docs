@@ -81,7 +81,7 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD, an
 
 ### Multi-disk deployment
 
-TiFlash supports multi-disk deployment, controlled by the two parameters `path` and `path_realtime_mode` in the [`tiflash.toml` file](#configure-the-tiflashtoml-file).
+TiFlash supports multi-disk deployment, controlled by the `path` and `path_realtime_mode` parameters in the [`tiflash.toml` file](#configure-the-tiflashtoml-file).
 
 If there are multiple data storage directories in `path`, separate each with a comma. For example, `/ssd_a/data/tiflash,/hdd_b/data/tiflash,/hdd_c/data/tiflash`. If there are multiple disks in your environment, it is recommended that each directory corresponds to one disk and you put disks with the best performance at the front to maximize the performance of all disks.
 
