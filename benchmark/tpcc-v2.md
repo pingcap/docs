@@ -12,7 +12,7 @@ This test aims to compare the TPC-C performance of TiDB 4.0 and TiDB 3.0.
 
 ## Test version, time, and place
 
-TiDB version: v4.0.0-rc vs. v3.0.8
+TiDB versions: v4.0.0-rc vs. v3.0.8
 
 Time: April, 2020
 
@@ -101,9 +101,9 @@ pipelined = true
 
 ### Cluster topology
 
-* 1 TiKV instance is deployed on each `i3.4xlarge`, 3 in total.
-* 1 TiDB instance is deployed on each `c5.4xlarge`, 2 in total.
-* 1 PD instance is deployed on each `m5.xlarge`, 3 in total.
+* 1 TiKV instance is deployed on each `i3.4xlarge` machine, 3 in total.
+* 1 TiDB instance is deployed on each `c5.4xlarge` machine, 2 in total.
+* 1 PD instance is deployed on each `m5.xlarge` machine, 3 in total.
 
 ## Test result
 
