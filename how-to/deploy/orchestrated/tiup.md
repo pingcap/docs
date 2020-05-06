@@ -1106,9 +1106,9 @@ alertmanager_servers:
 
 | Instance | Number | Physical Machine Configuration | IP | Other Configuration |
 | :-- | :-- | :-- | :-- | :-- |
-| TiKV | 3 | 16 Vcore 32 GB | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
-| TiDB | 3 | 16 Vcore 32 GB | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration |
-| PD | 3| 4 Vcore 8 GB | 10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration |
+| TiKV | 3 | 16 VCore 32 GB | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
+| TiDB | 3 | 16 VCore 32 GB | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration |
+| PD | 3| 4 VCore 8 GB | 10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration |
 | TiFlash | 1 | 32 VCore 64 GB  | 10.0.1.10 | Default port configuration; <br> Customized deployment directory - the `data_dir` parameter is set to `/data1/tiflash/data,/data2/tiflash/data` for [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment) |
 | CDC | 3 | 8 VCore 16GB | 10.0.1.6<br>10.0.1.7<br>10.0.1.8 | Default port configuration |
 

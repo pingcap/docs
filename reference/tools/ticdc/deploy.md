@@ -18,7 +18,7 @@ This section describes how to deploy TiCDC in the following different scenarios:
 
 ### Fresh deploy TiCDC using TiUP
 
-TiUP cluster is the deployment tool for TiDB 4.0 and later versions. TiDB v4.0.0-rc.1 or later version is required when you deploy and run TiCDC.
+TiUP cluster is the deployment tool for TiDB 4.0 and later versions. You must deploy and run TiCDC on TiDB v4.0.0-rc.1 or a later version.
 
 To deploy TiCDC, take the following steps:
 
@@ -45,12 +45,15 @@ To deploy TiCDC, take the following steps:
       - host: 172.19.0.101
       - host: 172.19.0.102
       - host: 172.19.0.103
+    
     tidb_servers:
       - host: 172.19.0.101
+    
     tikv_servers:
       - host: 172.19.0.101
       - host: 172.19.0.102
       - host: 172.19.0.103
+    
     cdc_servers:
       - host: 172.19.0.101
       - host: 172.19.0.102
@@ -85,7 +88,7 @@ To deploy TiCDC, take the following steps:
 
 ### Add TiCDC component to an existing TiDB cluster using TiUP
 
-1. Check if the current TiDB version supports TiCDC. If not, upgrade the TiDB cluster to 4.0.0 rc.1 or later versions.
+1. Check if your TiDB version supports TiCDC. If not, upgrade the TiDB cluster to 4.0.0 rc.1 or later versions.
 
 2. Refer to [Scale out a TiDB/TiKV/PD node](/how-to/scale/with-tiup.md#scale-out-a-tidbtikvpd-node) and deploy TiCDC.
 
