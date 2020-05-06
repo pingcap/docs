@@ -12,7 +12,11 @@ This statement changes the user password for a user account in the TiDB system d
 
 **SetStmt:**
 
+<<<<<<< HEAD
 ![SetStmt](/media/sqlgram-v2.1/SetStmt.png)
+=======
+![SetStmt](/media/sqlgram/SetStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

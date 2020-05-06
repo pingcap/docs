@@ -14,7 +14,11 @@ By design, this statement is not compatible with MySQL by default. This helps pr
 
 **KillStmt:**
 
+<<<<<<< HEAD
 ![KillStmt](/media/sqlgram-v2.1/KillStmt.png)
+=======
+![KillStmt](/media/sqlgram/KillStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

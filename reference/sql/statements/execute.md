@@ -12,11 +12,19 @@ The `EXECUTE` statement provides an SQL interface to server-side prepared statem
 
 **ExecuteStmt:**
 
+<<<<<<< HEAD
 ![ExecuteStmt](/media/sqlgram-v2.1/ExecuteStmt.png)
 
 **Identifier:**
 
 ![Identifier](/media/sqlgram-v2.1/Identifier.png)
+=======
+![ExecuteStmt](/media/sqlgram/ExecuteStmt.png)
+
+**Identifier:**
+
+![Identifier](/media/sqlgram/Identifier.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

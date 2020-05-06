@@ -15,6 +15,7 @@ This statement modifies an existing table to conform to a new table structure. T
 
 **AlterTableStmt:**
 
+<<<<<<< HEAD
 ![AlterTableStmt](/media/sqlgram-v2.1/AlterTableStmt.png)
 
 **TableName:**
@@ -24,6 +25,17 @@ This statement modifies an existing table to conform to a new table structure. T
 **AlterTableSpec:**
 
 ![AlterTableSpec](/media/sqlgram-v2.1/AlterTableSpec.png)
+=======
+![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**AlterTableSpec:**
+
+![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

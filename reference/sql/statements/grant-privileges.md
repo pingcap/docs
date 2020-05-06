@@ -12,6 +12,7 @@ This statement allocates privileges to a pre-existing user in TiDB. The privileg
 
 **GrantStmt:**
 
+<<<<<<< HEAD
 ![GrantStmt](/media/sqlgram-v2.1/GrantStmt.png)
 
 **PrivElemList:**
@@ -37,6 +38,33 @@ This statement allocates privileges to a pre-existing user in TiDB. The privileg
 **UserSpecList:**
 
 ![UserSpecList](/media/sqlgram-v2.1/UserSpecList.png)
+=======
+![GrantStmt](/media/sqlgram/GrantStmt.png)
+
+**PrivElemList:**
+
+![PrivElemList](/media/sqlgram/PrivElemList.png)
+
+**PrivElem:**
+
+![PrivElem](/media/sqlgram/PrivElem.png)
+
+**PrivType:**
+
+![PrivType](/media/sqlgram/PrivType.png)
+
+**ObjectType:**
+
+![ObjectType](/media/sqlgram/ObjectType.png)
+
+**PrivLevel:**
+
+![PrivLevel](/media/sqlgram/PrivLevel.png)
+
+**UserSpecList:**
+
+![UserSpecList](/media/sqlgram/UserSpecList.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

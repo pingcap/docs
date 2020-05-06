@@ -14,6 +14,7 @@ TiDB will also automatically update its statistics over time as it discovers tha
 
 **AnalyzeTableStmt:**
 
+<<<<<<< HEAD
 ![AnalyzeTableStmt](/media/sqlgram-v2.1/AnalyzeTableStmt.png)
 
 **TableNameList:**
@@ -23,6 +24,17 @@ TiDB will also automatically update its statistics over time as it discovers tha
 **TableName:**
 
 ![TableName](/media/sqlgram-v2.1/TableName.png)
+=======
+![AnalyzeTableStmt](/media/sqlgram/AnalyzeTableStmt.png)
+
+**TableNameList:**
+
+![TableNameList](/media/sqlgram/TableNameList.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

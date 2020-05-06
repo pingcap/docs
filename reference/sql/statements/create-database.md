@@ -12,6 +12,7 @@ This statement creates a new database in TiDB. The MySQL terminology for 'databa
 
 **CreateDatabaseStmt:**
 
+<<<<<<< HEAD
 ![CreateDatabaseStmt](/media/sqlgram-v2.1/CreateDatabaseStmt.png)
 
 **DatabaseSym:**
@@ -29,6 +30,25 @@ This statement creates a new database in TiDB. The MySQL terminology for 'databa
 **DatabaseOptionListOpt:**
 
 ![DatabaseOptionListOpt](/media/sqlgram-v2.1/DatabaseOptionListOpt.png)
+=======
+![CreateDatabaseStmt](/media/sqlgram/CreateDatabaseStmt.png)
+
+**DatabaseSym:**
+
+![DatabaseSym](/media/sqlgram/DatabaseSym.png)
+
+**IfNotExists:**
+
+![IfNotExists](/media/sqlgram/IfNotExists.png)
+
+**DBName:**
+
+![DBName](/media/sqlgram/DBName.png)
+
+**DatabaseOptionListOpt:**
+
+![DatabaseOptionListOpt](/media/sqlgram/DatabaseOptionListOpt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Syntax
 

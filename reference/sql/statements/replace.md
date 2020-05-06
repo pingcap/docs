@@ -12,6 +12,7 @@ The `REPLACE` statement is semantically a combined `DELETE`+`INSERT` statement. 
 
 **ReplaceIntoStmt:**
 
+<<<<<<< HEAD
 ![ReplaceIntoStmt](/media/sqlgram-v2.1/ReplaceIntoStmt.png)
 
 **PriorityOpt:**
@@ -29,6 +30,25 @@ The `REPLACE` statement is semantically a combined `DELETE`+`INSERT` statement. 
 **InsertValues:**
 
 ![InsertValues](/media/sqlgram-v2.1/InsertValues.png)
+=======
+![ReplaceIntoStmt](/media/sqlgram/ReplaceIntoStmt.png)
+
+**PriorityOpt:**
+
+![PriorityOpt](/media/sqlgram/PriorityOpt.png)
+
+**IntoOpt:**
+
+![IntoOpt](/media/sqlgram/IntoOpt.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**InsertValues:**
+
+![InsertValues](/media/sqlgram/InsertValues.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

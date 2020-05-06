@@ -12,6 +12,7 @@ This statement creates a new table in the currently selected database. See also 
 
 **CreateTableStmt:**
 
+<<<<<<< HEAD
 ![CreateTableStmt](/media/sqlgram-v2.1/CreateTableStmt.png)
 
 **IfNotExists:**
@@ -53,6 +54,49 @@ This statement creates a new table in the currently selected database. See also 
 **TableOptionListOpt:**
 
 ![TableOptionListOpt](/media/sqlgram-v2.1/TableOptionListOpt.png)
+=======
+![CreateTableStmt](/media/sqlgram/CreateTableStmt.png)
+
+**IfNotExists:**
+
+![IfNotExists](/media/sqlgram/IfNotExists.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**TableElementListOpt:**
+
+![TableElementListOpt](/media/sqlgram/TableElementListOpt.png)
+
+**TableElement:**
+
+![TableElement](/media/sqlgram/TableElement.png)
+
+**PartitionOpt:**
+
+![PartitionOpt](/media/sqlgram/PartitionOpt.png)
+
+**ColumnDef:**
+
+![ColumnDef](/media/sqlgram/ColumnDef.png)
+
+**ColumnName:**
+
+![ColumnName](/media/sqlgram/ColumnName.png)
+
+**Type:**
+
+![Type](/media/sqlgram/Type.png)
+
+**ColumnOptionListOpt:**
+
+![ColumnOptionListOpt](/media/sqlgram/ColumnOptionListOpt.png)
+
+**TableOptionListOpt:**
+
+![TableOptionListOpt](/media/sqlgram/TableOptionListOpt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Syntax
 

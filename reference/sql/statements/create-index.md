@@ -12,6 +12,7 @@ This statement adds a new index to an existing table. It is an alternative synta
 
 **CreateIndexStmt:**
 
+<<<<<<< HEAD
 ![CreateIndexStmt](/media/sqlgram-v2.1/CreateIndexStmt.png)
 
 **CreateIndexStmtUnique:**
@@ -41,6 +42,37 @@ This statement adds a new index to an existing table. It is an alternative synta
 **IndexOption:**
 
 ![IndexOption](/media/sqlgram-v2.1/IndexOption.png)
+=======
+![CreateIndexStmt](/media/sqlgram/CreateIndexStmt.png)
+
+**CreateIndexStmtUnique:**
+
+![CreateIndexStmtUnique](/media/sqlgram/CreateIndexStmtUnique.png)
+
+**Identifier:**
+
+![Identifier](/media/sqlgram/Identifier.png)
+
+**IndexTypeOpt:**
+
+![IndexTypeOpt](/media/sqlgram/IndexTypeOpt.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**IndexColNameList:**
+
+![IndexColNameList](/media/sqlgram/IndexColNameList.png)
+
+**IndexOptionList:**
+
+![IndexOptionList](/media/sqlgram/IndexOptionList.png)
+
+**IndexOption:**
+
+![IndexOption](/media/sqlgram/IndexOption.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

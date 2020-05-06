@@ -14,6 +14,7 @@ To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
 
 **ShowStmt:**
 
+<<<<<<< HEAD
 ![ShowStmt](/media/sqlgram-v2.1/ShowStmt.png)
 
 **ShowTargetFilterable:**
@@ -23,6 +24,17 @@ To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
 **ShowDatabaseNameOpt:**
 
 ![ShowDatabaseNameOpt](/media/sqlgram-v2.1/ShowDatabaseNameOpt.png)
+=======
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+
+**ShowTargetFilterable:**
+
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+
+**ShowDatabaseNameOpt:**
+
+![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

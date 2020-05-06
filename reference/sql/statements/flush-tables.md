@@ -12,6 +12,7 @@ This statement is included for compatibility with MySQL. It has no effective usa
 
 **FlushStmt:**
 
+<<<<<<< HEAD
 ![FlushStmt](/media/sqlgram-v2.1/FlushStmt.png)
 
 **NoWriteToBinLogAliasOpt:**
@@ -33,6 +34,29 @@ This statement is included for compatibility with MySQL. It has no effective usa
 **WithReadLockOpt:**
 
 ![WithReadLockOpt](/media/sqlgram-v2.1/WithReadLockOpt.png)
+=======
+![FlushStmt](/media/sqlgram/FlushStmt.png)
+
+**NoWriteToBinLogAliasOpt:**
+
+![NoWriteToBinLogAliasOpt](/media/sqlgram/NoWriteToBinLogAliasOpt.png)
+
+**FlushOption:**
+
+![FlushOption](/media/sqlgram/FlushOption.png)
+
+**TableOrTables:**
+
+![TableOrTables](/media/sqlgram/TableOrTables.png)
+
+**TableNameListOpt:**
+
+![TableNameListOpt](/media/sqlgram/TableNameListOpt.png)
+
+**WithReadLockOpt:**
+
+![WithReadLockOpt](/media/sqlgram/WithReadLockOpt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

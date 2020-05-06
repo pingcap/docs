@@ -12,6 +12,7 @@ The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major diffe
 
 **ExplainSym:**
 
+<<<<<<< HEAD
 ![ExplainSym](/media/sqlgram-v2.1/ExplainSym.png)
 
 **ExplainStmt:**
@@ -21,6 +22,17 @@ The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major diffe
 **ExplainableStmt:**
 
 ![ExplainableStmt](/media/sqlgram-v2.1/ExplainableStmt.png)
+=======
+![ExplainSym](/media/sqlgram/ExplainSym.png)
+
+**ExplainStmt:**
+
+![ExplainStmt](/media/sqlgram/ExplainStmt.png)
+
+**ExplainableStmt:**
+
+![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

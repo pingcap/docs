@@ -14,6 +14,7 @@ The statements `SHOW [FULL] FIELDS FROM`, `DESC <table>`, `DESCRIBE <table>` and
 
 **ShowStmt:**
 
+<<<<<<< HEAD
 ![ShowStmt](/media/sqlgram-v2.1/ShowStmt.png)
 
 **ShowTargetFilterable:**
@@ -23,6 +24,17 @@ The statements `SHOW [FULL] FIELDS FROM`, `DESC <table>`, `DESCRIBE <table>` and
 **OptFull:**
 
 ![OptFull](/media/sqlgram-v2.1/OptFull.png)
+=======
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+
+**ShowTargetFilterable:**
+
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+
+**OptFull:**
+
+![OptFull](/media/sqlgram/OptFull.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

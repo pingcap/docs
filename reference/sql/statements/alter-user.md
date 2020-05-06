@@ -12,6 +12,7 @@ This statement changes an existing user inside the TiDB privilege system. In the
 
 **AlterUserStmt:**
 
+<<<<<<< HEAD
 ![AlterUserStmt](/media/sqlgram-v2.1/AlterUserStmt.png)
 
 **UserSpecList:**
@@ -21,6 +22,17 @@ This statement changes an existing user inside the TiDB privilege system. In the
 **UserSpec:**
 
 ![UserSpec](/media/sqlgram-v2.1/UserSpec.png)
+=======
+![AlterUserStmt](/media/sqlgram/AlterUserStmt.png)
+
+**UserSpecList:**
+
+![UserSpecList](/media/sqlgram/UserSpecList.png)
+
+**UserSpec:**
+
+![UserSpec](/media/sqlgram/UserSpec.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

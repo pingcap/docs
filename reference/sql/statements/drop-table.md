@@ -14,6 +14,7 @@ By design `DROP TABLE` will also drop views, as they share the same namespace as
 
 **DropTableStmt:**
 
+<<<<<<< HEAD
 ![DropTableStmt](/media/sqlgram-v2.1/DropTableStmt.png)
 
 **TableOrTables:**
@@ -23,6 +24,17 @@ By design `DROP TABLE` will also drop views, as they share the same namespace as
 **TableNameList:**
 
 ![TableNameList](/media/sqlgram-v2.1/TableNameList.png)
+=======
+![DropTableStmt](/media/sqlgram/DropTableStmt.png)
+
+**TableOrTables:**
+
+![TableOrTables](/media/sqlgram/TableOrTables.png)
+
+**TableNameList:**
+
+![TableNameList](/media/sqlgram/TableNameList.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

@@ -12,6 +12,7 @@ This statement provides a static list of available character sets in TiDB. The o
 
 **ShowStmt:**
 
+<<<<<<< HEAD
 ![ShowStmt](/media/sqlgram-v2.1/ShowStmt.png)
 
 **ShowTargetFilterable:**
@@ -21,6 +22,17 @@ This statement provides a static list of available character sets in TiDB. The o
 **CharsetKw:**
 
 ![CharsetKw](/media/sqlgram-v2.1/CharsetKw.png)
+=======
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+
+**ShowTargetFilterable:**
+
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+
+**CharsetKw:**
+
+![CharsetKw](/media/sqlgram/CharsetKw.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

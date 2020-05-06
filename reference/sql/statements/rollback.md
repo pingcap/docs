@@ -12,7 +12,11 @@ This statement reverts all changes in the current transaction inside of TIDB.  I
 
 **Statement:**
 
+<<<<<<< HEAD
 ![Statement](/media/sqlgram-v2.1/Statement.png)
+=======
+![Statement](/media/sqlgram/Statement.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

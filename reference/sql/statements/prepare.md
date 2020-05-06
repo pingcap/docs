@@ -12,7 +12,11 @@ The `PREPARE` statement provides an SQL interface to server-side prepared statem
 
 **PreparedStmt:**
 
+<<<<<<< HEAD
 ![PreparedStmt](/media/sqlgram-v2.1/PreparedStmt.png)
+=======
+![PreparedStmt](/media/sqlgram/PreparedStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

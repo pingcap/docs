@@ -12,11 +12,19 @@ This statement shows the exact statement to recreate an existing table using SQL
 
 **ShowStmt:**
 
+<<<<<<< HEAD
 ![ShowStmt](/media/sqlgram-v2.1/ShowStmt.png)
 
 **TableName:**
 
 ![TableName](/media/sqlgram-v2.1/TableName.png)
+=======
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

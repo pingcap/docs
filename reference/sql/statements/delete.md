@@ -12,7 +12,11 @@ The `DELETE` statement removes rows from a specified table.
 
 **DeleteFromStmt:**
 
+<<<<<<< HEAD
 ![DeleteFromStmt](/media/sqlgram-v2.1/DeleteFromStmt.png)
+=======
+![DeleteFromStmt](/media/sqlgram/DeleteFromStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

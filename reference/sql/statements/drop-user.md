@@ -12,11 +12,19 @@ This statement removes a user from the TiDB system database. The optional keywor
 
 **DropUserStmt:**
 
+<<<<<<< HEAD
 ![DropUserStmt](/media/sqlgram-v2.1/DropUserStmt.png)
 
 **Username:**
 
 ![Username](/media/sqlgram-v2.1/Username.png)
+=======
+![DropUserStmt](/media/sqlgram/DropUserStmt.png)
+
+**Username:**
+
+![Username](/media/sqlgram/Username.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 
