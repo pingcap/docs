@@ -15,15 +15,15 @@ This statement modifies an existing table to conform to a new table structure. T
 
 **AlterTableStmt:**
 
-![AlterTableStmt](/media/sqlgram-v2.1/AlterTableStmt.png)
+![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram-v2.1/TableName.png)
+![TableName](/media/sqlgram/TableName.png)
 
 **AlterTableSpec:**
 
-![AlterTableSpec](/media/sqlgram-v2.1/AlterTableSpec.png)
+![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
 
 ## Examples
 

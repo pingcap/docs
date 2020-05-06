@@ -12,31 +12,31 @@ This statement removes privileges from an existing user.
 
 **GrantStmt:**
 
-![GrantStmt](/media/sqlgram-v2.1/GrantStmt.png)
+![GrantStmt](/media/sqlgram/GrantStmt.png)
 
 **PrivElemList:**
 
-![PrivElemList](/media/sqlgram-v2.1/PrivElemList.png)
+![PrivElemList](/media/sqlgram/PrivElemList.png)
 
 **PrivElem:**
 
-![PrivElem](/media/sqlgram-v2.1/PrivElem.png)
+![PrivElem](/media/sqlgram/PrivElem.png)
 
 **PrivType:**
 
-![PrivType](/media/sqlgram-v2.1/PrivType.png)
+![PrivType](/media/sqlgram/PrivType.png)
 
 **ObjectType:**
 
-![ObjectType](/media/sqlgram-v2.1/ObjectType.png)
+![ObjectType](/media/sqlgram/ObjectType.png)
 
 **PrivLevel:**
 
-![PrivLevel](/media/sqlgram-v2.1/PrivLevel.png)
+![PrivLevel](/media/sqlgram/PrivLevel.png)
 
 **UserSpecList:**
 
-![UserSpecList](/media/sqlgram-v2.1/UserSpecList.png)
+![UserSpecList](/media/sqlgram/UserSpecList.png)
 
 ## Examples
 

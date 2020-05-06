@@ -12,7 +12,7 @@ The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, 
 
 **SetStmt:**
 
-![SetStmt](/media/sqlgram-v2.1/SetStmt.png)
+![SetStmt](/media/sqlgram/SetStmt.png)
 
 ## Examples
 

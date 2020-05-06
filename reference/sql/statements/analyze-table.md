@@ -14,15 +14,15 @@ TiDB will also automatically update its statistics over time as it discovers tha
 
 **AnalyzeTableStmt:**
 
-![AnalyzeTableStmt](/media/sqlgram-v2.1/AnalyzeTableStmt.png)
+![AnalyzeTableStmt](/media/sqlgram/AnalyzeTableStmt.png)
 
 **TableNameList:**
 
-![TableNameList](/media/sqlgram-v2.1/TableNameList.png)
+![TableNameList](/media/sqlgram/TableNameList.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram-v2.1/TableName.png)
+![TableName](/media/sqlgram/TableName.png)
 
 ## Examples
 
