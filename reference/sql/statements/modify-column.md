@@ -12,6 +12,7 @@ The `ALTER TABLE.. MODIFY COLUMN` statement modifies a column on an existing tab
 
 **AlterTableStmt:**
 
+<<<<<<< HEAD
 ![AlterTableStmt](/media/sqlgram-v3.0/AlterTableStmt.png)
 
 **AlterTableSpec:**
@@ -29,6 +30,25 @@ The `ALTER TABLE.. MODIFY COLUMN` statement modifies a column on an existing tab
 **ColumnPosition:**
 
 ![ColumnPosition](/media/sqlgram-v3.0/ColumnPosition.png)
+=======
+![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+
+**AlterTableSpec:**
+
+![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+
+**ColumnKeywordOpt:**
+
+![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
+
+**ColumnDef:**
+
+![ColumnDef](/media/sqlgram/ColumnDef.png)
+
+**ColumnPosition:**
+
+![ColumnPosition](/media/sqlgram/ColumnPosition.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

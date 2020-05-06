@@ -12,7 +12,11 @@ This statement shows a list of assignable privileges in TiDB. It is a static lis
 
 **ShowStmt:**
 
+<<<<<<< HEAD
 ![ShowStmt](/media/sqlgram-v3.0/ShowStmt.png)
+=======
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

@@ -12,6 +12,7 @@ This statement triggers TiDB to reload the in-memory copy of privileges from the
 
 **FlushStmt:**
 
+<<<<<<< HEAD
 ![FlushStmt](/media/sqlgram-v3.0/FlushStmt.png)
 
 **NoWriteToBinLogAliasOpt:**
@@ -21,6 +22,17 @@ This statement triggers TiDB to reload the in-memory copy of privileges from the
 **FlushOption:**
 
 ![FlushOption](/media/sqlgram-v3.0/FlushOption.png)
+=======
+![FlushStmt](/media/sqlgram/FlushStmt.png)
+
+**NoWriteToBinLogAliasOpt:**
+
+![NoWriteToBinLogAliasOpt](/media/sqlgram/NoWriteToBinLogAliasOpt.png)
+
+**FlushOption:**
+
+![FlushOption](/media/sqlgram/FlushOption.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

@@ -14,6 +14,7 @@ Both `TRUNCATE TABLE tableName` and `TRUNCATE tableName` are valid syntax.
 
 **TruncateTableStmt:**
 
+<<<<<<< HEAD
 ![TruncateTableStmt](/media/sqlgram-v3.0/TruncateTableStmt.png)
 
 **OptTable:**
@@ -23,6 +24,17 @@ Both `TRUNCATE TABLE tableName` and `TRUNCATE tableName` are valid syntax.
 **TableName:**
 
 ![TableName](/media/sqlgram-v3.0/TableName.png)
+=======
+![TruncateTableStmt](/media/sqlgram/TruncateTableStmt.png)
+
+**OptTable:**
+
+![OptTable](/media/sqlgram/OptTable.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

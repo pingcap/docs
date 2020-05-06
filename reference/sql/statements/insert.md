@@ -12,6 +12,7 @@ This statement inserts new rows into a table.
 
 **InsertIntoStmt:**
 
+<<<<<<< HEAD
 ![InsertIntoStmt](/media/sqlgram-v3.0/InsertIntoStmt.png)
 
 **PriorityOpt:**
@@ -33,6 +34,29 @@ This statement inserts new rows into a table.
 **InsertValues:**
 
 ![InsertValues](/media/sqlgram-v3.0/InsertValues.png)
+=======
+![InsertIntoStmt](/media/sqlgram/InsertIntoStmt.png)
+
+**PriorityOpt:**
+
+![PriorityOpt](/media/sqlgram/PriorityOpt.png)
+
+**IgnoreOptional:**
+
+![IgnoreOptional](/media/sqlgram/IgnoreOptional.png)
+
+**IntoOpt:**
+
+![IntoOpt](/media/sqlgram/IntoOpt.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**InsertValues:**
+
+![InsertValues](/media/sqlgram/InsertValues.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

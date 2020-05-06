@@ -14,6 +14,7 @@ The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternat
 
 **ExplainSym:**
 
+<<<<<<< HEAD
 ![ExplainSym](/media/sqlgram-v3.0/ExplainSym.png)
 
 **ExplainStmt:**
@@ -23,6 +24,17 @@ The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternat
 **ExplainableStmt:**
 
 ![ExplainableStmt](/media/sqlgram-v3.0/ExplainableStmt.png)
+=======
+![ExplainSym](/media/sqlgram/ExplainSym.png)
+
+**ExplainStmt:**
+
+![ExplainStmt](/media/sqlgram/ExplainStmt.png)
+
+**ExplainableStmt:**
+
+![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

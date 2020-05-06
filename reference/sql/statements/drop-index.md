@@ -12,6 +12,7 @@ This statement removes an index from a specified table, marking space as free in
 
 **AlterTableStmt:**
 
+<<<<<<< HEAD
 ![AlterTableStmt](/media/sqlgram-v3.0/AlterTableStmt.png)
 
 **AlterTableSpec:**
@@ -25,6 +26,21 @@ This statement removes an index from a specified table, marking space as free in
 **Identifier:**
 
 ![Identifier](/media/sqlgram-v3.0/Identifier.png)
+=======
+![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+
+**AlterTableSpec:**
+
+![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+
+**KeyOrIndex:**
+
+![KeyOrIndex](/media/sqlgram/KeyOrIndex.png)
+
+**Identifier:**
+
+![Identifier](/media/sqlgram/Identifier.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

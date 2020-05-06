@@ -12,6 +12,7 @@ This statement executes an expression, without returning a result. In MySQL, a c
 
 **DoStmt:**
 
+<<<<<<< HEAD
 ![DoStmt](/media/sqlgram-v3.0/DoStmt.png)
 
 **ExpressionList:**
@@ -21,6 +22,17 @@ This statement executes an expression, without returning a result. In MySQL, a c
 **Expression:**
 
 ![Expression](/media/sqlgram-v3.0/Expression.png)
+=======
+![DoStmt](/media/sqlgram/DoStmt.png)
+
+**ExpressionList:**
+
+![ExpressionList](/media/sqlgram/ExpressionList.png)
+
+**Expression:**
+
+![Expression](/media/sqlgram/Expression.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

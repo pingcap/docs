@@ -12,6 +12,7 @@ This statement drops an view object from the currently selected database. It doe
 
 **DropViewStmt:**
 
+<<<<<<< HEAD
 ![DropViewStmt](/media/sqlgram-v3.0/DropViewStmt.png)
 
 **TableNameList:**
@@ -21,6 +22,17 @@ This statement drops an view object from the currently selected database. It doe
 **TableName:**
 
 ![TableName](/media/sqlgram-v3.0/TableName.png)
+=======
+![DropViewStmt](/media/sqlgram/DropViewStmt.png)
+
+**TableNameList:**
+
+![TableNameList](/media/sqlgram/TableNameList.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 
