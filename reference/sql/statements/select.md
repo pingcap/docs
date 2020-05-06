@@ -13,6 +13,7 @@ The `SELECT` statement is used to read data from TiDB.
 
 **SelectStmt:**
 
+<<<<<<< HEAD
 ![SelectStmt](/media/sqlgram-v3.0/SelectStmt.png)
 
 **FromDual:**
@@ -58,6 +59,53 @@ The `SELECT` statement is used to read data from TiDB.
 **SelectLockOpt:**
 
 ![SelectLockOpt](/media/sqlgram-v3.0/SelectLockOpt.png)
+=======
+![SelectStmt](/media/sqlgram/SelectStmt.png)
+
+**FromDual:**
+
+![FromDual](/media/sqlgram/FromDual.png)
+
+**WhereClauseOptional:**
+
+![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
+
+**SelectStmtOpts:**
+
+![SelectStmtOpts](/media/sqlgram/SelectStmtOpts.png)
+
+**SelectStmtFieldList:**
+
+![SelectStmtFieldList](/media/sqlgram/SelectStmtFieldList.png)
+
+**TableRefsClause:**
+
+![TableRefsClause](/media/sqlgram/TableRefsClause.png)
+
+**WhereClauseOptional:**
+
+![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
+
+**SelectStmtGroup:**
+
+![SelectStmtGroup](/media/sqlgram/SelectStmtGroup.png)
+
+**HavingClause:**
+
+![HavingClause](/media/sqlgram/HavingClause.png)
+
+**OrderByOptional:**
+
+![OrderByOptional](/media/sqlgram/OrderByOptional.png)
+
+**SelectStmtLimit:**
+
+![SelectStmtLimit](/media/sqlgram/SelectStmtLimit.png)
+
+**SelectLockOpt:**
+
+![SelectLockOpt](/media/sqlgram/SelectLockOpt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Description of the syntax elements
 

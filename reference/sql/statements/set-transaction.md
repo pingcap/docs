@@ -12,6 +12,7 @@ The `SET TRANSACTION` statement can be used to change the current isolation leve
 
 **SetStmt:**
 
+<<<<<<< HEAD
 ![SetStmt](/media/sqlgram-v3.0/SetStmt.png)
 
 **TransactionChar:**
@@ -21,6 +22,17 @@ The `SET TRANSACTION` statement can be used to change the current isolation leve
 **IsolationLevel:**
 
 ![IsolationLevel](/media/sqlgram-v3.0/IsolationLevel.png)
+=======
+![SetStmt](/media/sqlgram/SetStmt.png)
+
+**TransactionChar:**
+
+![TransactionChar](/media/sqlgram/TransactionChar.png)
+
+**IsolationLevel:**
+
+![IsolationLevel](/media/sqlgram/IsolationLevel.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

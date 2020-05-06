@@ -53,7 +53,11 @@ ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 
 **AdminStmt:**
 
+<<<<<<< HEAD
 ![AdminStmt](/media/sqlgram-v3.0/AdminStmt.png)
+=======
+![AdminStmt](/media/sqlgram/AdminStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

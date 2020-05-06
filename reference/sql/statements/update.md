@@ -12,6 +12,7 @@ The `UPDATE` statement is used to modify data in a specified table.
 
 **UpdateStmt:**
 
+<<<<<<< HEAD
 ![UpdateStmt](/media/sqlgram-v3.0/UpdateStmt.png)
 
 **TableRef:**
@@ -29,6 +30,25 @@ The `UPDATE` statement is used to modify data in a specified table.
 **WhereClauseOptional:**
 
 ![WhereClauseOptional](/media/sqlgram-v3.0/WhereClauseOptional.png)
+=======
+![UpdateStmt](/media/sqlgram/UpdateStmt.png)
+
+**TableRef:**
+
+![TableRef](/media/sqlgram/TableRef.png)
+
+**TableRefs:**
+
+![TableRefs](/media/sqlgram/TableRefs.png)
+
+**AssignmentList:**
+
+![AssignmentList](/media/sqlgram/AssignmentList.png)
+
+**WhereClauseOptional:**
+
+![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

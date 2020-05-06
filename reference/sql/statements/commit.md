@@ -14,7 +14,11 @@ In the absence of a `BEGIN` or `START TRANSACTION` statement, the default behavi
 
 **CommitStmt:**
 
+<<<<<<< HEAD
 ![CommitStmt](/media/sqlgram-v3.0/CommitStmt.png)
+=======
+![CommitStmt](/media/sqlgram/CommitStmt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

@@ -12,6 +12,7 @@ This statement shows various statistics about tables in TiDB. If the statistics 
 
 **ShowStmt:**
 
+<<<<<<< HEAD
 ![ShowStmt](/media/sqlgram-v3.0/ShowStmt.png)
 
 **ShowTargetFilterable:**
@@ -21,6 +22,17 @@ This statement shows various statistics about tables in TiDB. If the statistics 
 **ShowDatabaseNameOpt:**
 
 ![ShowDatabaseNameOpt](/media/sqlgram-v3.0/ShowDatabaseNameOpt.png)
+=======
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+
+**ShowTargetFilterable:**
+
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+
+**ShowDatabaseNameOpt:**
+
+![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

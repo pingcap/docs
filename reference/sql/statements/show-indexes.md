@@ -12,6 +12,7 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table.  
 
 **ShowStmt:**
 
+<<<<<<< HEAD
 ![ShowStmt](/media/sqlgram-v3.0/ShowStmt.png)
 
 **ShowTargetFilterable:**
@@ -29,6 +30,25 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table.  
 **TableName:**
 
 ![TableName](/media/sqlgram-v3.0/TableName.png)
+=======
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+
+**ShowTargetFilterable:**
+
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+
+**ShowIndexKwd:**
+
+![ShowIndexKwd](/media/sqlgram/ShowIndexKwd.png)
+
+**FromOrIn:**
+
+![FromOrIn](/media/sqlgram/FromOrIn.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 

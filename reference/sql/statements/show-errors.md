@@ -14,11 +14,19 @@ The behavior of which statements generate errors vs. warnings is highly influenc
 
 **ShowStmt:**
 
+<<<<<<< HEAD
 ![ShowStmt](/media/sqlgram-v3.0/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
 ![ShowTargetFilterable](/media/sqlgram-v3.0/ShowTargetFilterable.png)
+=======
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+
+**ShowTargetFilterable:**
+
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+>>>>>>> 359cdb7... media: replace sqlgram-dev, sqlgram-3.0, sqlgram-2.1 with sqlgram  (#2434)
 
 ## Examples
 
