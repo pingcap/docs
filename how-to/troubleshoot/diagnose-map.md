@@ -1,7 +1,7 @@
 ---
 title: TiDB Troubleshooting Map
 summary: Learns how to troubleshoot common issues in TiDB.
-category: faq
+category: how-to
 ---
 
 # TiDB Troubleshooting Map
