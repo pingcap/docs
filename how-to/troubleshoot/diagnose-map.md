@@ -10,19 +10,19 @@ category: how-to
 
 ### 1.1 The client reports `Region is Unavailable` error
 
-- 1.1.1 `Region is Unavailable` is usually because a Region is not available for a period of time. You might encounter `TiKV server is busy`, or the request to TiKV fails due to `not leader` or `epoch not match`，or the request to TiKV time out. In such cases, TiDB performs a `backoff` retry mechanism. When the `backoff` exceeds a threshold (20s by default), the error will be sent to the client. Within the `backoff` threshold, this errors is not visible to the client.
+- 1.1.1 `Region is Unavailable` is usually because a Region is not available for a period of time. You might encounter `TiKV server is busy`, or the request to TiKV fails due to `not leader` or `epoch not match`, or the request to TiKV time out. In such cases, TiDB performs a `backoff` retry mechanism. When the `backoff` exceeds a threshold (20s by default), the error will be sent to the client. Within the `backoff` threshold, this errors is not visible to the client.
 
-- 1.1.2 Multiple TiKV instances OOM at the same time, which causes no Leader in a Region for a period of time. See [case-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md) in Chinese.
+- 1.1.2 Multiple TiKV instances are OOM at the same time, which causes no Leader in a Region for a period of time. See [case-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md) in Chinese.
 
-- 1.1.3 TiKV reports `TiKV server is busy`，and exceeds the `backoff` time. For more details, refer to 4.3. `TiKV server is busy` is a result of the internal flow control mechanism and should not be counted in the `backoff` time. This issue will be fixed.
+- 1.1.3 TiKV reports `TiKV server is busy`, and exceeds the `backoff` time. For more details, refer to [4.3](#43-the-client-reports-the-server-is-busy-error). `TiKV server is busy` is a result of the internal flow control mechanism and should not be counted in the `backoff` time. This issue will be fixed.
 
-- 1.1.4 Multiple TiKV instances failed to start, which causes no Leader in a Region. When multiple TiKV instances are deployed in a physical machine, the failure of the physical machine can cause no Leader in a Region if the label is not property configured. See [case-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md) in Chinese.
+- 1.1.4 Multiple TiKV instances failed to start, which causes no Leader in a Region. When multiple TiKV instances are deployed in a physical machine, the failure of the physical machine can cause no Leader in a Region if the label is not properly configured. See [case-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md) in Chinese.
 
 - 1.1.5 When a follower apply is lagged in a previous epoch, after the Follower becomes Leader, it rejects the request with `epoch not match`. See [case-958](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case958.md) in Chinese (TiKV needs to optimize its mechanism).
 
 ### 1.2 PD errors cause service unavailable
 
-Refer to 5 PD issues.
+Refer to [PD issues](#5-pd-issues).
 
 ## 2. Latency increases significantly
 
@@ -36,9 +36,9 @@ Refer to 5 PD issues.
 
 - 2.2.1 TiKV single thread bottleneck
 
-    - Too many regions in a TiKV instance causes a single gRPC thread to be the bottleneck (Check the Grafana -> TiKV-details -> `Thread CPU/gRPC CPU Per Thread` metric).In versions above v3.x, you can enable `Hibernate Region` to resolve the issue. See [case-612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md) in Chinese.
+    - Too many Regions in a TiKV instance causes a single gRPC thread to be the bottleneck (Check the Grafana -> TiKV-details -> `Thread CPU/gRPC CPU Per Thread` metric). In v3.x or later versions, you can enable `Hibernate Region` to resolve the issue. See [case-612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md) in Chinese.
 
-    - For versions earlier than v3.0, when the raftstore thread or the apply thread becomes the bottleneck (Grafana -> TiKV-details -> `Thread CPU/raft store CPU` and `Async apply CPU` exceeds `80%`), you can scale out TiKV (v2.x)instances or upgrade to v3.x with multi-threading. <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
+    - For versions earlier than v3.0, when the raftstore thread or the apply thread becomes the bottleneck (Grafana -> TiKV-details -> `Thread CPU/raft store CPU` and `Async apply CPU` exceeds `80%`), you can scale out TiKV (v2.x) instances or upgrade to v3.x with multi-threading. <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
 
 - 2.2.2 CPU load increase
 
@@ -50,11 +50,11 @@ Refer to 5 PD issues.
 
 ### 3.1 DDL
 
-- 3.1.1  An error `ERROR 1105 (HY000): unsupported modify decimal column precision` is reported when you modify the length of `decimal` field.<!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB does not support changing the length of `decimal` field.
+- 3.1.1  An error `ERROR 1105 (HY000): unsupported modify decimal column precision` is reported when you modify the length of the `decimal` field.<!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB does not support changing the length of the `decimal` field.
 
 - 3.1.2 TiDB DDL job hangs or executes slowly (use `admin show ddl jobs` to check DDL progress)
 
-    - Cause 1：Network issue to other components（PD / TiKV).
+    - Cause 1：Network issue to other components (PD/TiKV).
 
     - Cause 2：Early versions of TiDB (earlier than v3.0.8) have heavy internal load because of a lot of goroutine at high concurrency.
 
@@ -65,13 +65,13 @@ Refer to 5 PD issues.
     - Solution:
 
         - For cause 1, check the network connection between TiDB and TiKV/PD. 
-        - For cause 2 and 3, the issues are already fixed in later versions. You can upgrade to a higher version. 
-        - For other causes, you can use the following plan for DDL owner migration.
+        - For cause 2 and 3, the issues are already fixed in later versions. You can upgrade TiDB to a later version. 
+        - For other causes, you can use the following solution of migrating the DDL owner.
 
     - DDL owner migration:
 
-        - If you can connect to the TiDB server, execute the owner election command again：`curl -X POST http://{TiDBIP}:10080/ddl/owner/resign`
-        - 2：if you cannot connect to the TiDB server, use `tidb-ctl` to delete the DDL owner from the etcd of the PD cluster to trigger re-election：`tidb-ctl etcd delowner [LeaseID] [flags] + ownerKey`
+        - If you can connect to the TiDB server, execute the owner election command again: `curl -X POST http://{TiDBIP}:10080/ddl/owner/resign`
+        - If you cannot connect to the TiDB server, use `tidb-ctl` to delete the DDL owner from the etcd of the PD cluster to trigger re-election: `tidb-ctl etcd delowner [LeaseID] [flags] + ownerKey`
 
 - 3.1.3 TiDB reports `information schema is changed` error in log
 
@@ -79,26 +79,26 @@ Refer to 5 PD issues.
 
     - Cause 2: The current DML executes too long. During the time, many DDLs are executed, which causes `schema version` changes to be more than 1024. The new version `lock table` might also cause schema version changes.
 
-    - Cause 3: The TiDB instance that are currently executing DML cannot load the new `schema information` (maybe caused by network issues with PD or TiKV). During this time, many DDL statements are executed (including `lock table`), which causes `schema version` changes to be more than 1024.
+    - Cause 3: The TiDB instance that is currently executing DML statements cannot load the new `schema information` (maybe caused by network issues with PD or TiKV). During this time, many DDL statements are executed (including `lock table`), which causes `schema version` changes to be more than 1024.
 
-    - Solution：The first two causes do not impact the application, as the related DMLs retry after the failure. For cause 3, you need to check the network between TiDB and TiKV/PD.
+    - Solution：The first two causes do not impact the application, as the related DML operations retry after failure. For cause 3, you need to check the network between TiDB and TiKV/PD.
 
-    - Background: The increase number of `schema version` is consistent with the number of `schema state` of each DDL change operation. For example, the `create table` operation has 1 version change, and the `add column` operation has 4 version changes. Therefore, too many column change operations might cause `schema version` to increase fast. For details, refer to [online schema change](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf). 
+    - Background: The increased number of `schema version` is consistent with the number of `schema state` of each DDL change operation. For example, the `create table` operation has 1 version change, and the `add column` operation has 4 version changes. Therefore, too many column change operations might cause `schema version` to increase fast. For details, refer to [online schema change](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf).
 
 - 3.1.4 TiDB reports `information schema is out of date` in log
 
-    - Cause 1：The TiDB server that executes the DML is stopped by `graceful kill` and prepares to exit, and the execution time of the transaction that contains the DML exceeds one DDL lease. An error is reported when the transaction commits. 
+    - Cause 1：The TiDB server that is executing the DML statement is stopped by `graceful kill` and prepares to exit. The execution time of the transaction that contains the DML statement exceeds one DDL lease. An error is reported when the transaction is committed. 
 
-    - Cause 2: The TiDB server cannot connect to PD or TiKV when it executes the DML, which causes the following problems:
+    - Cause 2: The TiDB server cannot connect to PD or TiKV when it is executing the DML statement, which causes the following problems:
 
         - The TiDB server did not load the new schema within one DDL lease (`45s` by default); or
-        - The TiDB server disconnects with PD for connections with `keep alive`. 
+        - The TiDB server disconnects from PD with the `keep alive` setting.
 
     - Cause 3: TiKV has high load or network timed out. Check the node loads in `Grafana -> TiDB and TiKV`.
 
     - Solution:
     
-        - For cause 1, retry the DML when TiDB is started.
+        - For cause 1, retry the DML operation when TiDB is started.
         - For cause 2, check the network between the TiDB server and PD/TiKV.
         - For cause 3, investigate why TiKV is busy. Refer to 4 TiKV issues.
 
@@ -106,7 +106,7 @@ Refer to 5 PD issues.
 
 - 3.2.1 Symptom
 
-    - Client：The client reports error `ERROR 2013 (HY000): Lost connection to MySQL server during query`.
+    - Client: The client reports the error `ERROR 2013 (HY000): Lost connection to MySQL server during query`.
 
     - Check the log
 
@@ -118,9 +118,9 @@ Refer to 5 PD issues.
 
         - In v2.1.8 or earlier versions, you can grep `fatal error: stack overflow` in the `tidb_stderr.log`.
 
-    - Monitor：The memory usage of tidb-server instance increases sharply in a short period of time. 
+    - Monitor：The memory usage of tidb-server instances increases sharply in a short period of time. 
 
-- 3.2.2 Locate the SQL that causes OOM. (Currently all versions cannot locate SQL accurately. You need to analyze whether OOM is caused by the SQL after you find the SQL.)
+- 3.2.2 Locate the SQL statement that causes OOM. (Currently all versions of TiDB cannot locate SQL accurately. You still need to analyze whether OOM is caused by the SQL statement after you locate one.)
 
     - For versions `>= v3.0.0`, `grep “expensive_query”` in `tidb.log`. That log message records SQL queries that timed out or exceed memory quota.
     - For versions `< v3.0.0`, `grep “memory exceeds quota”` in `tidb.log` to locate SQL queries that exceed memory quota.
