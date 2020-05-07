@@ -14,7 +14,7 @@ You can use the following TiUP sub-commands to manage components:
 - uninstall: Uninstalls a component.
 - status: Checks the status of a running component.
 - clean: Cleans up the instance on which a component is deployed.
-- help: Prints the help information.
+- help: Prints the help information. If the sub-command is appended to a command, the usage of this command is printed. 
 
 This document introduces the common component management operations and the corresponding sub-commands.
 
