@@ -8,11 +8,11 @@ category: tools
 
 You can use the following TiUP sub-commands to manage components:
 
-- list: Queries the component list. By using this sub-command, you can see all the available components to install and all the available versions of each component.
+- list: Queries the component list. By using this sub-command, you can see all the optional components to install and all the optional versions of each component.
 - install: Installs the specific version of a component.
-- update: Upgrades a component to the latest version.
+- update: Updates a component to the latest version.
 - uninstall: Uninstalls a component.
-- status: Checks the status of an operating component.
+- status: Checks the status of a running component.
 - clean: Cleans up the instance on which a component is deployed.
 - help: Prints the help information.
 
@@ -22,12 +22,12 @@ This document introduces the common component management operations and the corr
 
 You can use the `tiup list` command to query the component list. This usage of this command is as follows:
 
-- `tiup list`: checks which components can be currently installed.
-- `tiup list ${component}`: checks which versions of a certain component can be installed.
+- `tiup list`: checks which components can be installed.
+- `tiup list ${component}`: checks which versions of a specific component can be installed.
 
 You can also use the following two flags in the above commands:
 
-- `--installed`: checks which components or which versions of a certain component have been installed locally.
+- `--installed`: checks which components or which version of a specific component has been installed locally.
 - `--refresh`: gets the latest list of components on the server and the version list of each component.
 
 Example 1: View all currently installed components.
@@ -50,8 +50,8 @@ tiup list tikv --refresh
 
 You can use the `tiup install` command to query the component list. This usage of this command is as follows:
 
-- `tiup install <component>`: installs the latest stable version of the specified component.
-- `tiup install <component>:[version]`: installs the specified version of the specified component.
+- `tiup install <component>`: installs the latest stable version of a specified component.
+- `tiup install <component>:[version]`: installs the specified version of a specified component.
 
 Example 1: Use TiUP to install the latest stable version of TiDB.
 
@@ -153,11 +153,11 @@ You can use the `tiup status` command to check the operating status of a compone
 tiup status
 ```
 
-By executing this command, you will get a list of instances, one instance per line. The list contains these columns:
+By executing this command, you will get a list of instances, one instance per line. The list contains the following columns:
 
 - `Name`: The tag name of the instance.
 - `Component`: The component name of the instance.
-- `PID`: The operating process ID of the instance.
+- `PID`: The process ID of the operating instance.
 - `Status`: The instance status. `RUNNING` means that the instance is operating. `TERM` means that the instance is terminated.
 - `Created Time`: The starting time of the instance.
 - `Directory`: The working directory of the instance, which can be specified using `--tag`.
@@ -188,7 +188,7 @@ Example 1: Clean up the component instance with the `experiment` tag name.
 tiup clean experiment
 ```
 
-Example 2: Clean all component instances.
+Example 2: Clean up all component instances.
 
 {{< copyable "shell-regular" >}}
 
@@ -215,8 +215,8 @@ The following flags are supported in this command:
 
 `component` is the component to be uninstalled. `version` is the version to be uninstalled. Both `component` and `version` can be ignored in the `tiup uninstall` command. If you ignore either one of these two, you need to add the `--all` flag.
 
-- If the version is ignored, adding `--all` means to install all versions of this component.
-- If the version and the component are both ignored, adding `--all` means to install all components of all versions.
+- If the version is ignored, adding `--all` means to uninstall all versions of this component.
+- If the version and the component are both ignored, adding `--all` means to uninstall all components of all versions.
 
 Example: Uninstall TiDB v3.0.8.
 
