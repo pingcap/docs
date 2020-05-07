@@ -13,6 +13,7 @@
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/sysbench-v4.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/add-index-with-load.md)
+- [Quick Start with TiDB](/quick-start-with-tidb.md)
 + Concepts
   - [Architecture](/architecture.md)
   + Key Features
@@ -79,6 +80,7 @@
       - [Migration Case of Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
     - [Migrate from CSV](/reference/tools/tidb-lightning/csv.md)
   + Maintain
+    - [Common TiUP Operations](/how-to/maintain/tiup-operations.md)
     - [Common Ansible Operations](/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
       - [Use Mydumper and TiDB Lightning](/how-to/maintain/backup-and-restore/mydumper-lightning.md)
@@ -89,6 +91,7 @@
       - [Identify Expensive Queries](/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/how-to/scale/with-ansible.md)
+    - [Scale using TiUP](/how-to/scale/with-tiup.md)
     - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
@@ -280,6 +283,14 @@
       - [`cluster_info`](/reference/system-databases/cluster-info.md)
       - [`cluster_hardware`](/reference/system-databases/cluster-hardware.md)
       - [`cluster_config`](/reference/system-databases/cluster-config.md)
+      - [`cluster_load`](/reference/system-databases/cluster-load.md)
+      - [`cluster_systeminfo`](/reference/system-databases/cluster-systeminfo.md)
+      - [`cluster_log`](/reference/system-databases/cluster-log.md)
+      - [`metrics_schema`](/reference/system-databases/metrics-schema.md)
+      - [`metrics_tables`](/reference/system-databases/metrics-tables.md)
+      - [`metrics_summary`](/reference/system-databases/metrics-summary.md)
+      - [`inspection_result`](/reference/system-databases/inspection-result.md)
+      - [`inspection_summary`](/reference/system-databases/inspection-summary.md)
   - [Errors Codes](/reference/error-codes.md)
   - [Supported Client Drivers](/reference/supported-clients.md)
   + Garbage Collection (GC)
@@ -317,7 +328,7 @@
     - [Use TiFlash](/reference/tiflash/use-tiflash.md)
     - [Maintain a TiFlash Cluster](/reference/tiflash/maintain.md)
     - [Monitor TiFlash](/reference/tiflash/monitor.md)
-    - [Scale TiFlash](/reference/tiflash/scale.md)
+    - [Scale TiFlash](/how-to/scale/with-tiup.md#scale-out-a-tiflash-node)
     - [Upgrade TiFlash Nodes](/reference/tiflash/upgrade.md)
     - [Configure TiFlash](/reference/tiflash/configuration.md)
     - [TiFlash Alert Rules](/reference/tiflash/alert-rules.md)
@@ -328,6 +339,9 @@
     - [Deploy](/reference/tidb-binlog/deploy.md)
     - [Maintain](/reference/tidb-binlog/maintain.md)
     - [Monitor](/reference/tidb-binlog/monitor.md)
+    + [Configure](/reference/tidb-binlog/config.md)
+      - [Pump](/reference/tidb-binlog/config.md#pump)
+      - [Drainer](/reference/tidb-binlog/config.md#drainer)
     - [Upgrade](/reference/tidb-binlog/upgrade.md)
     - [Reparo](/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/reference/tidb-binlog/binlog-slave-client.md)
@@ -362,6 +376,8 @@
       - [Deploy and Use TiCDC](/reference/tools/ticdc/deploy.md)
       - [Manage TiCDC Cluster and Replication Tasks](/reference/tools/ticdc/manage.md)
       - [Configure Sink URI](/reference/tools/ticdc/sink.md)
+      - [TiCDC Open Protocol](/reference/tools/ticdc/open-protocol.md)
+      - [Column and DDL Type Codes](/reference/tools/ticdc/column-ddl-type.md)
     + sync-diff-inspector
       - [Overview](/reference/tools/sync-diff-inspector/overview.md)
       - [Data Check for Tables with Different Schema or Table Names](/reference/tools/sync-diff-inspector/route-diff.md)
@@ -387,16 +403,20 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+    - [4.0.0-rc.1](/releases/4.0.0-rc.1.md)
     - [4.0.0-rc](/releases/4.0.0-rc.md)
     - [4.0.0-beta.2](/releases/4.0.0-beta.2.md)
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
+    - [3.1.1](/releases/3.1.1.md)
+    - [3.1.0 GA](/releases/3.1.0-ga.md)
     - [3.1.0-rc](/releases/3.1.0-rc.md)
     - [3.1.0-beta.2](/releases/3.1.0-beta.2.md)
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.13](/releases/3.0.13.md)
     - [3.0.12](/releases/3.0.12.md)
     - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)

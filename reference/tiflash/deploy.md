@@ -27,7 +27,7 @@ It is recommended to use an SSD disk to buffer the real-time data being replicat
 
 For other hard disks, you can use multiple HDDs or regular SSDs. A better hard disk will surely bring better performance.
 
-TiFlash supports multi-directory storage, so there is no need to use RAID.
+TiFlash supports [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment), so there is no need to use RAID.
 
 ### TiFlash and TiKV are deployed on the same node
 
@@ -35,9 +35,9 @@ See [Hardware recommendations for TiKV server](/how-to/deploy/hardware-recommend
 
 It is **not** recommended to deploy TiFlash and TiKV on the same disk to prevent mutual interference.
 
-Hard disk selection criteria are the same as [TiFlash standalone deployment](#tiflash-standalone-deployment). The total capacity of the hard disk is roughly: `the to-be-replicated data capacity of the entire TiKV cluster / the number of TiKV replicas / 2`.
+Hard disk selection criteria are the same as [TiFlash standalone deployment](#tiflash-standalone-deployment). The total capacity of the hard disk is roughly: `the to-be-replicated data capacity of the entire TiKV cluster / the number of TiKV replicas * the number of TiFlash replicas`.
 
-For example, if the overall planned capacity of TiKV is three replicas, then the recommended capacity of TiFlash will be one sixth of the TiKV cluster. You can choose to replicate part of tables instead of all.
+For example, if the overall planned capacity of TiKV is 1TB, each Region in TiKV has 3 replicas, and each Region in TiFlash has 2 replicas, then the recommended capacity of TiFlash will be `1024GB / 3 * 2`. You can choose to replicate part of the tables instead of all.
 
 ## TiDB version requirements
 
@@ -71,7 +71,7 @@ TiUP cluster is the deployment tool for TiDB 4.0 or later versions. It is recomm
 
 3. Write the topology configuration file and save it as `topology.yaml`.
 
-    You can refer to [the topology configuration file template](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml).
+    You can refer to [the topology configuration file template](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml).
 
     In addition to configuring the TiDB cluster, you also need to configure the IP of TiFlash servers in `tiflash_servers`. Currently the configuration only supports IP but not domain name.
 
@@ -97,7 +97,7 @@ TiUP cluster is the deployment tool for TiDB 4.0 or later versions. It is recomm
       - host: 172.19.0.103
     ```
 
-    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want to deploy TiFlash on multiple disks, separate each directory with commas. For example:
+    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want to [deploy TiFlash on multiple disks](/reference/tiflash/configuration.md#multi-disk-deployment), separate each directory with commas. For example:
 
     {{< copyable "" >}}
 
@@ -141,4 +141,4 @@ TiUP cluster is the deployment tool for TiDB 4.0 or later versions. It is recomm
 
     Currently, pd-ctl is not connected to TiUP cluster, you need to [manually download pd-ctl](https://download.pingcap.org/tidb-v4.0.0-rc-linux-amd64.tar.gz).
 
-3. Refer to [Scale out a TiFlash node](/reference/tiflash/scale.md#scale-out-a-tiflash-node) and deploy TiFlash.
+3. Refer to [Scale out a TiFlash node](/how-to/scale/with-tiup.md#scale-out-a-tiflash-node) and deploy TiFlash.

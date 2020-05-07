@@ -32,7 +32,7 @@ There are two ways to check the TiFlash version:
 
 ## Take a TiFlash node down
 
-Taking a TiFlash node down differs from [Scaling in a TiFlash node](/reference/tiflash/scale.md#scale-in-a-tiflash-node) in that the former doesn't remove the node in TiDB Ansible; instead, it just safely shuts down the TiFlash process.
+Taking a TiFlash node down differs from [Scaling in a TiFlash node](/how-to/scale/with-tiup.md#scale-in-a-tiflash-node) in that the former doesn't remove the node in TiDB Ansible; instead, it just safely shuts down the TiFlash process.
 
 Follow the steps below to take a TiFlash node down:
 
@@ -58,9 +58,48 @@ Follow the steps below to take a TiFlash node down:
 
 > **Note:**
 >
-> If you don't cancel all tables replicated to TiFlash before all TiFlash nodes stop running, you need to manually delete the replication rule in PD. Or you cannot successfully take the TiFlash node down.
->
-> To manually delete the replication rule in PD, send the `DELETE` request `http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/<rule_id>`. `rule_id` refers to the `id` of the `rule` to be deleted.
+> If you don't cancel all tables replicated to TiFlash before all TiFlash nodes stop running, you need to manually delete the replication rules in PD. Or you cannot successfully take the TiFlash node down.
+
+To manually delete the replication rules in PD, take the following steps:
+
+1. Query all the data replication rules related to TiFlash in the current PD instance:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    curl http://<pd_ip>:<pd_port>/pd/api/v1/config/rules/group/tiflash
+    ```
+
+    ```
+    [
+      {
+        "group_id": "tiflash",
+        "id": "table-45-r",
+        "override": true,
+        "start_key": "7480000000000000FF2D5F720000000000FA",
+        "end_key": "7480000000000000FF2E00000000000000F8",
+        "role": "learner",
+        "count": 1,
+        "label_constraints": [
+          {
+            "key": "engine",
+            "op": "in",
+            "values": [
+              "tiflash"
+            ]
+          }
+        ]
+      }
+    ]
+    ```
+
+2. Delete all the data replication rules related to TiFlash. The following example command deletes the rule whose `id` is `table-45-r`:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    curl -v -X DELETE http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/table-45-r
+    ```
 
 ## TiFlash troubleshooting
 

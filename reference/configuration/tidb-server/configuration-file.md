@@ -34,6 +34,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `<TMPDIR>/tidb/tmp-storage`
 + It only takes effect when `oom-use-tmp-storage` is `true`.
 
+### `tmp-storage-quota`
+
++ Specifies the quota for the storage in `tmp-storage-path`. The unit is byte.
++ When a single SQL statement uses a temporary disk and the total volume of the temporary disk of the TiDB server exceeds this configuration value, the current SQL operation is cancelled and the `Out of Global Storage Quota!` error is returned.
++ When the value of this configuration is smaller than `0`, the above check and limit do not apply.
++ Default value: `-1`
++ When the remaining available storage in `tmp-storage-path` is lower than the value defined by `tmp-storage-quota`, the TiDB server reports an error when it is started, and exits.
+
 ### `oom-action`
 
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
@@ -84,6 +92,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `false`
 - With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
 
+### `server-version`
+
++ Modifies the version string returned by TiDB in the following situations:
+    - When the built-in `VERSION()` function is used.
+    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/internals/en/connection-phase-packets.html#packet-Protocol::Handshake).
++ Default value: ""
++ By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
+
 ### `repair-mode`
 
 - Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
@@ -95,6 +111,19 @@ The TiDB configuration file supports more options than command-line parameters. 
 - `repair-table-list` is only valid when [`repair-mode`](#repair-mode) is set to `true`. `repair-table-list` is a list of bad tables that need to be repaired in an instance. An example of the list is: ["db.table1","db.table2"...].
 - Default value: []
 - The list is empty by default. This means that there are no bad tables that need to be repaired.
+
+### `max-server-connections`
+
+- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
+- Default value: `0`
+- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
+
+### `max-index-length`
+
+- Sets the maximum allowable length of the newly created index.
+- Default value: `3072`
+- Unit: byte
+- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
 
 ## Log
 
@@ -148,12 +177,6 @@ Configuration items related to log.
 - The maximum length of SQL output.
 - Default value: `4096`
 - When the length of the statement is longer than `query-log-max-len`, the statement is truncated to output.
-
-### `max-server-connections`
-
-- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
-- Default value: `4096`
-- When the number of actual client connections is equal to the value of `max-server-connections`, the TiDB server rejects new client connections.
 
 ## log.file
 

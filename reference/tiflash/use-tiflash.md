@@ -72,7 +72,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 
 In the result of above statement:
 
-* `AVAILABLE` indicates whether the TiFlash replicas of this table is available or not. `1` means available and `0` means unavailable.
+* `AVAILABLE` indicates whether the TiFlash replicas of this table is available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
 * `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
 
 ## Use TiDB to read TiFlash replicas
@@ -81,11 +81,44 @@ TiDB provides three ways to read TiFlash replicas. If you have added a TiFlash r
 
 ### Smart selection
 
-For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use TiFlash replicas based on the cost estimation. You can use the `explain analyze` statement to check whether or not a TiFlash replica is selected. See the following figure:
+For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use TiFlash replicas based on the cost estimation. You can use the `desc` or `explain analyze` statement to check whether or not a TiFlash replica is selected. For example:
 
-![tidb-display](/media/tiflash/tidb-display.png)
+{{< copyable "sql" >}}
 
-`cop [tiflash]` means that the task will be sent to TiFlash for processing. If you have not selected a TiFlash replica, you can try to update the statistics using the `analyze table` statement, and then check the result using the `explain analyze` statement.
+```sql
+desc select count(*) from test.t;
+```
+
+```
++--------------------------+---------+--------------+---------------+--------------------------------+
+| id                       | estRows | task         | access object | operator info                  |
++--------------------------+---------+--------------+---------------+--------------------------------+
+| StreamAgg_9              | 1.00    | root         |               | funcs:count(1)->Column#4       |
+| └─TableReader_17         | 1.00    | root         |               | data:TableFullScan_16          |
+|   └─TableFullScan_16     | 1.00    | cop[tiflash] | table:t       | keep order:false, stats:pseudo |
++--------------------------+---------+--------------+---------------+--------------------------------+
+3 rows in set (0.00 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
+explain analyze select count(*) from test.t;
+```
+
+```
++--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
+| id                       | estRows | actRows | task         | access object | execution info                                                       | operator info                  | memory    | disk |
++--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
+| StreamAgg_9              | 1.00    | 1       | root         |               | time:83.8372ms, loops:2                                              | funcs:count(1)->Column#4       | 372 Bytes | N/A  |
+| └─TableReader_17         | 1.00    | 1       | root         |               | time:83.7776ms, loops:2, rpc num: 1, rpc time:83.5701ms, proc keys:0 | data:TableFullScan_16          | 152 Bytes | N/A  |
+|   └─TableFullScan_16     | 1.00    | 1       | cop[tiflash] | table:t       | time:43ms, loops:1                                                   | keep order:false, stats:pseudo | N/A       | N/A  |
++--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
+```
+
+`cop[tiflash]` means that the task will be sent to TiFlash for processing. If you have not selected a TiFlash replica, you can try to update the statistics using the `analyze table` statement, and then check the result using the `explain analyze` statement.
+
+Note that if a table has only a single TiFlash replica and the related node cannot provide service, queries in the CBO mode will repeatedly retry. In this situation, you need to specify the engine or use the manual Hint to read data from TiKV.
 
 ### Engine isolation
 
