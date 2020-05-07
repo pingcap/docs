@@ -38,7 +38,7 @@ Refer to 5 PD issues.
 
     - Too many regions in a TiKV instance causes a single gRPC thread to be the bottleneck (Check the Grafana -> TiKV-details -> `Thread CPU/gRPC CPU Per Thread` metric).In versions above v3.x, you can enable `Hibernate Region` to resolve the issue. See [case-612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md) in Chinese.
 
-    - For versions earlier than v3.0, when the raftstore thread or the apply thread becomes the bottleneck (Grafana -> TiKV-details -> `Thread CPU/raft store CPU` and `Async apply CPU` exceeds `80%`), you can scale out TiKV (v2.x)instances or upgrade to v3.x with multi-threading. See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.
+    - For versions earlier than v3.0, when the raftstore thread or the apply thread becomes the bottleneck (Grafana -> TiKV-details -> `Thread CPU/raft store CPU` and `Async apply CPU` exceeds `80%`), you can scale out TiKV (v2.x)instances or upgrade to v3.x with multi-threading. <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
 
 - 2.2.2 CPU load increase
 
@@ -50,7 +50,7 @@ Refer to 5 PD issues.
 
 ### 3.1 DDL
 
-- 3.1.1  An error `ERROR 1105 (HY000): unsupported modify decimal column precision` is reported when you modify the length of `decimal` field. See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. TiDB does not support changing the length of `decimal` field.
+- 3.1.1  An error `ERROR 1105 (HY000): unsupported modify decimal column precision` is reported when you modify the length of `decimal` field.<!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB does not support changing the length of `decimal` field.
 
 - 3.1.2 TiDB DDL job hangs or executes slowly (use `admin show ddl jobs` to check DDL progress)
 
@@ -204,7 +204,7 @@ Check the specific cause for busy by viewing the monitor `Grafana -> TiKV -> err
     - Too many `pending compaction bytes` causes stall. The disk I/O fails to keep up with the write operations in business peaks. You can alleviate this problem by increasing the `soft-pending-compaction-bytes-limit` and `hard-pending-compaction-bytes-limit` of the corresponding CF.
 
         - The default value of the pending compaction bytes is `64GB`. If it reaches the threshold, RocksDB slows down the write speed. You can set `[rocksdb.defaultcf] soft-pending-compaction-bytes-limit` to `128GB`.
-        - The default value of the pending compaction bytes is `256GB`. If it reaches the threshold (this is not likely to happen, because RocksDB slows down the write after it reaches `soft-pending-compaction-bytes-limit`), RocksDB stops the write. You can set `hard-pending-compaction-bytes-limit` to `512GB`. See [case-275](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case275.md) in Chinese.
+        - The default value of the pending compaction bytes is `256GB`. If it reaches the threshold (this is not likely to happen, because RocksDB slows down the write after it reaches `soft-pending-compaction-bytes-limit`), RocksDB stops the write. You can set `hard-pending-compaction-bytes-limit` to `512GB`.<!-- See [case-275](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case275.md) in Chinese.-->
         - If the disk I/O capacity fails to keep up with the write for a long time, it is recommended to scale up your disk. If the disk throughput reaches the upper limit and causes write stall (for example, the SATA SSD is much lower than NVME SSD), while the CPU resources is sufficient, you can try a compression algorithm of higher compression ratio. This way, the CPU resources is traded for disk resources, and the pressure on the disk is eased.
         - If the default CF compaction sees a high pressure, change the `[rocksdb.defaultcf] compression-per-level` parameter from `["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]` to `["no", "no", "zstd", "zstd", "zstd", "zstd", "zstd"]`.
     
@@ -315,7 +315,7 @@ Check the specific cause for busy by viewing the monitor `Grafana -> TiKV -> err
 
 - 5.3.1 When the `/api/v1/regions` interface is used, too many Regions might cause PD OOM. This issue has been fixed in v3.0.8 ([#1986](https://github.com/pingcap/pd/pull/1986)).
 
-- 5.3.2 PD OOM during the rolling upgrade. The size of gRPC messages is not limited, and the monitor shows that TCP InSegs is relatively large. This issue has been fixed in v3.0.6 ([#1952](https://github.com/pingcap/pd/pull/1952)). For details, see [case-852](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case852.md).
+- 5.3.2 PD OOM during the rolling upgrade. The size of gRPC messages is not limited, and the monitor shows that TCP InSegs is relatively large. This issue has been fixed in v3.0.6 ([#1952](https://github.com/pingcap/pd/pull/1952)). <!--For details, see [case-852](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case852.md).-->
 
 ### 5.4 Grafana display
 
@@ -429,7 +429,7 @@ Check the specific cause for busy by viewing the monitor `Grafana -> TiKV -> err
     - Check the position information recorded in `relay.meta`.
 
         - `relay.meta` has recorded the empty GTID information. DM-worker saves the GTID information in memory to `relay.meta` when it exits or regularly (every 30s). When DM-worker does not obtain the upstream GTID information, it saves the empty GTID information to `relay.meta`. See the [case study](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case772.md) in Chinese.
-        - The binlog event recorded in `relay.meta` triggers the incomplete recover process and records the wrong GTID information. This issue is fixed in v1.0.2, and might still occur in versions earlier than v1.0.2.
+        - The binlog event recorded in `relay.meta` triggers the incomplete recover process and records the wrong GTID information. This issue is fixed in v1.0.2, and might still occur in versions earlier than v1.0.2. <!--See [case-764](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case764.md).-->
 
 - 6.2.7 The DM replication process returns an error `Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`.
 
