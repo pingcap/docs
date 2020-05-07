@@ -23,32 +23,33 @@ Starting component `cluster`: /Users/joshua/.tiup/components/cluster/v0.4.9/clus
 Deploy a TiDB cluster for production
 
 Usage:
-  tiup cluster [flags]
-  tiup [command]
+  cluster [flags]
+  cluster [command]
 
 Available Commands:
-  deploy      Deploy the cluster
-  start       Start the deployed cluster
-  stop        Stop the cluster
-  restart     Restart the cluster
-  scale-in    Scale in the cluster
-  scale-out   Scale out the cluster
-  destroy     Destroy the cluster
-  upgrade     Upgrade the cluster
-  exec        Execute commands on one or multiple machines in the cluster
-  display     Get the cluster information
-  list        Get the cluster list
-  audit       View the cluster operation log
-  import      Import a cluster deployed using TiDB-Ansible
-  edit-config Edit the configuration of the TiDB cluster
-  reload      Reload cluster configurations when necessary
-  patch       Replace deployed components in the cluster with temporary component packages
-  help        Print help information
+  check       Perform preflight checks for the cluster
+  deploy      Deploy a cluster for production
+  start       Start a TiDB cluster
+  stop        Stop a TiDB cluster
+  restart     Restart a TiDB cluster
+  scale-in    Scale in a TiDB cluster
+  scale-out   Scale out a TiDB cluster
+  destroy     Destroy a specified cluster
+  upgrade     Upgrade a specified TiDB cluster
+  exec        Run shell command on host in the tidb cluster
+  display     Display information of a TiDB cluster
+  list        List all clusters
+  audit       Show audit log of cluster operation
+  import      Import an exist TiDB cluster from TiDB-Ansible
+  edit-config Edit TiDB cluster config
+  reload      Reload a TiDB cluster's config and restart if needed
+  patch       Replace the remote package with a specified package and restart the service
+  help        Help about any command
 
 Flags:
-  -h, --help              Help information
-      --ssh-timeout int   SSH connection timeout
-  -y, --yes               Skip all confirmation steps
+  -h, --help              help for cluster
+      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+  -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
 ## Deploy the cluster
@@ -337,16 +338,16 @@ The parameters for the upgrade command is as follows:
 
 ```bash
 Usage:
-  tiup cluster upgrade <cluster-name> <version> [flags]
+  cluster upgrade <cluster-name> <version> [flags]
 
 Flags:
-      --force                  Force upgrade without transferring Leader (dangerous)
-  -h, --help                   Help information
-      --transfer-timeout int   Transfer Leader timeout
+      --force                  Force upgrade won't transfer leader
+  -h, --help                   help for upgrade
+      --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
-      --ssh-timeout int   SSH connection timeout
-  -y, --yes               Skip all confirmation steps
+      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+  -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
 For example, the following command upgrades the cluster to v4.0.0-rc:
@@ -391,18 +392,18 @@ tiup cluster patch --help
 Replace the remote package with a specified package and restart the service
 
 Usage:
-  tiup cluster patch <cluster-name> <package-path> [flags]
+  cluster patch <cluster-name> <package-path> [flags]
 
 Flags:
-  -h, --help                   Help information
-  -N, --node strings           Specifies the node to be replaced
-      --overwrite              Use the currently specified temporary package in the future scale-out operation
-  -R, --role strings           Specifies the service type to be replaced
-      --transfer-timeout int   Transfer Leader timeout
+  -h, --help                   help for patch
+  -N, --node strings           Specify the nodes
+      --overwrite              Use this package in the future scale-out operations
+  -R, --role strings           Specify the role
+      --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
-      --ssh-timeout int   SSH connection timeout
-  -y, --yes               Skip all confirmation steps
+      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+  -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
 If a TiDB hotfix package is in `/tmp/tidb-hotfix.tar.gz` and you want to replace all the TiDB packages in the cluster, run the following command:
@@ -437,18 +438,18 @@ tiup cluster import --help
 Import an exist TiDB cluster from TiDB-Ansible
 
 Usage:
-  tiup cluster import [flags]
+  cluster import [flags]
 
 Flags:
-  -d, --dir string         Directory of TiDB-Ansible. Defaults to the current directory.
-  -h, --help               Help Information
-      --inventory string   Name of the inventory file ("inventory.ini" by default)
-      --no-backup          Do not back up the Ansible directory. Used in the Ansible directory that has multiple inventory files.
-  -r, --rename NAME        Rename the imported cluster
+  -d, --dir string         The path to TiDB-Ansible directory
+  -h, --help               help for import
+      --inventory string   The name of inventory file (default "inventory.ini")
+      --no-backup          Don't backup ansible dir, useful when there're multiple inventory files
+  -r, --rename NAME        Rename the imported cluster to NAME
 
 Global Flags:
-      --ssh-timeout int   SSH connection timeout
-  -y, --yes               Skip all confirmation steps
+      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+  -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
 You can use either of the following two commands to import a TiDB Ansible cluster:
@@ -505,20 +506,24 @@ The first column is `audit-id`. To view the execution log of a certain command, 
 tiup cluster audit 4BLhr0
 ```
 
-## Run commands on a machine in cluster
+## Run shell command on host in the TiDB cluster
 
-To run a command on the machine in the cluster, use the `exec` command. The usage of the `exec` command is as follows:
+To run a command on host in the TiDB cluster, use the `exec` command. The usage of the `exec` command is as follows:
 
 ```bash
 Usage:
-  tiup cluster exec <cluster-name> [flags]
+  cluster exec <cluster-name> [flags]
 
 Flags:
-      --command string   The command to be executed ("ls" by default)
-  -h, --help             Help information
-  -N, --node strings     Specify the ID of the node that you execute command on. Use the `display` command to get the node ID.
-  -R, --role strings     Specify the role to be executed
-      --sudo             Whether to use root privilege ("false" by default)
+      --command string   the command run on cluster host (default "ls")
+  -h, --help             help for exec
+  -N, --node strings     Only exec on host with specified nodes
+  -R, --role strings     Only exec on host with specified roles
+      --sudo            use root permissions (default false)
+
+Global Flags:
+      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+  -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
 For example, to execute `ls /tmp` on all TiDB nodes, run the following command:
