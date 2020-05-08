@@ -31,6 +31,7 @@ Similar to MySQL, the encrypted connections in TiDB consist of single connection
     ```sql
     create user 'u1'@'%'  require ssl;
     ```
+
 > **Note:**
 >
 > If the logged-in user has been configured to verify the user certificate using the [TiDB Certificate-Based Authentication for Login] (/reference/security/cert-based-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
