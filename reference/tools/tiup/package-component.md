@@ -25,16 +25,16 @@ Usage:
   tiup package target [flags]
 
 Flags:
-  -C, -- string          Switch the directory before packaging with the tar command. Similar to `tar-C`.
-      --arch string      The processor architecture (GOARCH, by default) the component is running on
-      --desc string      Component description
-      --entry string     Where the component binary files of the component are relative to the package
-  -h, --help             Help information
-      --hide tiup list   Hide the component from the tiup list
-      --name string      Component name
-      --os string        The operating system (GOOS, by default) the component is running on
-      --release string   Component version
-      --standalone       Whether the component can run independently (for example, PD can't, but the playground can)
+  -C, -- string          Change directory before compress
+      --arch string      Target ARCH of the package (default "GOARCH")
+      --desc string      Description of the package
+      --entry string     Entry point of the package
+  -h, --help             help for tiup
+      --hide tiup list   Don't show the component in tiup list
+      --name string      Name of the package
+      --os string        Target OS of the package (default "GOOS")
+      --release string   Version of the package
+      --standalone       Can the component run standalone
 ```
 
 ## Usage example: Add the `Hello World` component
