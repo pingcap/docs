@@ -927,14 +927,14 @@ Key parameters of TiDB:
 
 #### Topology
 
-| Instance | Physical Machine Configuration | IP | Other Configuration |
-| :-- | :-- | :-- | :-- |
-| TiKV | 16 Vcore 32 GB * 3 | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
-|TiDB | 16 Vcore 32 GB * 3 | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration;<br>`enable_binlog` enabled; <br> `ignore-error` enabled |
-| PD | 4 Vcore 8 GB * 3| 10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration |
+| Instance | Count | Physical Machine Configuration | IP | Other Configuration |
+| :-- | :-- | :-- | :-- | :-- |
+| TiKV | 3 | 16 Vcore 32 GB | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
+|TiDB | 3 | 16 Vcore 32 GB | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration;<br>`enable_binlog` enabled; <br> `ignore-error` enabled |
+| PD | 3 | 4 Vcore 8 GB | 10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration |
 | TiFlash | 1 | 32 VCore 64 GB  | 10.0.1.10 | Default port configuration; <br> Customized deployment directory - the `data_dir` parameter is set to `/data1/tiflash/data,/data2/tiflash/data` for multi-disk deployment |
-| Pump|8 Vcore 16GB * 3|10.0.1.6<br>10.0.1.7<br>10.0.1.8 | Default port configuration; <br> The GC time is set to 7 days |
-| Drainer | 8 Vcore 16GB | 10.0.1.9 | Default port configuration; <br>Set default initialization commitTS |
+| Pump| 3 | 8 Vcore 16GB |10.0.1.6<br>10.0.1.7<br>10.0.1.8 | Default port configuration; <br> The GC time is set to 7 days |
+| Drainer | 1 | 8 Vcore 16GB | 10.0.1.9 | Default port configuration; <br>Set default initialization commitTS |
 
 #### Edit the configuration file template topology.yaml
 
@@ -1104,7 +1104,7 @@ alertmanager_servers:
 
 #### Topology
 
-| Instance | Number | Physical Machine Configuration | IP | Other Configuration |
+| Instance | Count | Physical Machine Configuration | IP | Other Configuration |
 | :-- | :-- | :-- | :-- | :-- |
 | TiKV | 3 | 16 VCore 32 GB | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
 | TiDB | 3 | 16 VCore 32 GB | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration |
