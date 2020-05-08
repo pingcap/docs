@@ -16,33 +16,35 @@ The basic usage of the playground component is shown as follows:
 tiup playground [version] [flags]
 ```
 
-If you directly execute the command above, the locally installed TiDB/TiKV/PD component is used or the stable version of these components start a cluster that consists of one TiKV instance, one TiDB instance, and one PD instance. The following tasks will be performed:
+If you directly execute the `tiup playground` command, TiUP uses the locally installed TiDB, TiKV, and PD components or installs the stable version of these components to start a TiDB cluster that consists of one TiKV instance, one TiDB instance, and one PD instance.
+
+This command actually performs the following operations:
 
 - Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v0.0.6, then this command works the same as `tiup playground:v0.0.6`.
 - If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
 - Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v4.0.0-rc, then this command works the same as `tiup playground:v0.0.6 v4.0.0-rc`.
-- The playground component does not specify the number of each component. By default, a cluster that consists of one TiDB instance, one TiKV instance, and one PD instance is started.
+- Because this command does not specify the number of each component. By default, a smallest cluster that consists of one TiDB instance, one TiKV instance, and one PD instance is started.
 - After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the TiDB Dashboard.
 
 The command-line flags of the playground component are described as follows:
 
 ```bash
 Flags:
-      --db int                   Specifies the number of TiDB instances in the cluster, 1 by default.
-      --db.binpath string        Specifies the location of TiDB binary files, for development and debugging. You can ignore this flag.
-      --db.config string         Specifies TiDB configuration files, for development and debugging. You can ignore this flag.
-  -h, --help                     Prints the help information.
-      --host string              Sets the listening address of each component (127.0.0.1 by default). For other computers to access components, you can set the address to 0.0.0.0.
-      --kv int                   Specifies the number of TiKV instances in the cluster, 1 by default.
-      --kv.binpath string        Specifies the location of TiKV binary files, for development and debugging. You can ignore this flag.
-      --kv.config string         Specifies TiKV configuration files, for development and debugging. You can ignore this flag.
-      --monitor                  Determines whether to start the monitor.
-      --pd int                   Specifies the number of PD instances in the cluster, 1 by default.
-      --pd.binpath string        Specifies the location of PD binary files, for development and debugging. You can ignore this flag.
-      --pd.config string         Specifies PD configuration files, for development and debugging. You can ignore this flag.
-      --tiflash int              Specifies the number of TiFlash instances in the cluster, 0 by default.
-      --tiflash.binpath string   Specifies the location of TiFlash binary files, for development and debugging. You can ignore this flag.
-      --tiflash.config string    Specifies TiFlash configuration files, for development and debugging. You can ignore this flag.
+      --db int                   TiDB instance number (default 1)
+      --db.binpath string        TiDB instance binary path
+      --db.config string         TiDB instance configuration file
+  -h, --help                     help for tiup
+      --host string              Playground cluster host (default "127.0.0.1")
+      --kv int                   TiKV instance number (default 1)
+      --kv.binpath string        TiKV instance binary path
+      --kv.config string         TiKV instance configuration file
+      --monitor                  Start prometheus component
+      --pd int                   PD instance number (default 1)
+      --pd.binpath string        PD instance binary path
+      --pd.config string         PD instance configuration file
+      --tiflash int              TiFlash instance number
+      --tiflash.binpath string   TiFlash instance binary path
+      --tiflash.config string    TiFlash instance configuration file
 ```
 
 ## Examples
@@ -107,4 +109,4 @@ TiUP provides the `client` component, which is used to automatically find and co
 tiup client
 ```
 
-This command provides a list of playground clusters that the current machine has started on the console. Select the playground cluster to connected. After clicking <kbd>Enter</kbd>, a built-in MySQL client is opened to connect to TiDB.
+This command provides a list of TiDB clusters that are started by playground on the current machine on the console. Select the TiDB cluster to connected. After clicking <kbd>Enter</kbd>, a built-in MySQL client is opened to connect to TiDB.
