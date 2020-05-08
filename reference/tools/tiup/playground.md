@@ -1,14 +1,14 @@
 ---
 title: Quickly Deploy a Local TiDB Cluster
-summary: Learn how to quickly deploy the local TiDB cluster using the playground component of TiUP.
+summary: Learn how to quickly deploy a local TiDB cluster using the playground component of TiUP.
 category: tools
 ---
 
 # Quickly Deploy a Local TiDB Cluster
 
-The TiDB cluster is a distributed system that consists of multiple components. A typical TiDB cluster consists of at least three PD nodes, three TiKV nodes, and two TiDB nodes. If you want to try TiDB quickly, it is time-consuming and not easy to manually deploy so many components. This document introduces the playground component of TiUP and how to quickly build a local TiDB test environment using the playground component.
+The TiDB cluster is a distributed system that consists of multiple components. A typical TiDB cluster consists of at least three PD nodes, three TiKV nodes, and two TiDB nodes. If you want to have a quick experience on TiDB, you might find it time-consuming and complicated to manually deploy so many components. This document introduces the playground component of TiUP and how to use it to quickly build a local TiDB test environment.
 
-## Overview of playground
+## TiUP playground overview
 
 The basic usage of the playground component is shown as follows:
 
@@ -18,13 +18,13 @@ tiup playground [version] [flags]
 
 If you directly execute the command above, the locally installed TiDB/TiKV/PD component is used or the stable version of these components start a cluster that consists of one TiKV instance, one TiDB instance, and one PD instance. The following tasks will be performed:
 
-- The version is not specified. In this situation, TiUP uses the latest version of the installed playground component. Assume that the latest version is v0.0.6, this command will work the same as `tiup playground:v0.0.6`.
-- If you have not used TiUP to install the TiDB/TiKV/PD component, the playground component uses the latest stable version of these components, and then these instances are started and operated.
-- The version of each TiDB/PD/TiKV component is not specified. By default, the latest released version of each component is used. Assume that the latest version is v4.0.0-rc, this command will work the same as `tiup playground:v0.0.6 v4.0.0-rc`.
+- Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v0.0.6, then this command works the same as `tiup playground:v0.0.6`.
+- If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
+- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v4.0.0-rc, then this command works the same as `tiup playground:v0.0.6 v4.0.0-rc`.
 - The playground component does not specify the number of each component. By default, a cluster that consists of one TiDB instance, one TiKV instance, and one PD instance is started.
-- After starting each component, the playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the dashboard.
+- After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the TiDB Dashboard.
 
-The flags of the playground command-line tool are described as follows:
+The command-line flags of the playground component are described as follows:
 
 ```bash
 Flags:
@@ -69,7 +69,7 @@ This command starts Prometheus on port 9090 to display the time series data in t
 
 ### Override PD's default configuration
 
-Copy the [PD configuration template](https://github.com/pingcap/pd/blob/master/conf/config.toml). If you copy the configuration file to the `~/config/pd.toml` path and make some changes according to your need, execute the following command to override PD's default configuration:
+First, you need to copy the [PD configuration template](https://github.com/pingcap/pd/blob/master/conf/config.toml). Assume you place the copied file to `~/config/pd.toml` and make some changes according to your need, then you can execute the following command to override PD's default configuration:
 
 {{< copyable "shell-regular" >}}
 
@@ -79,7 +79,7 @@ tiup playground --pd.config ~/config/pd.toml
 
 ### Replace the default binary files
 
-By default, when playground is started, each component is started using the binary files from the official image package. If you want to put a temporarily compiled local binary file into the cluster for testing, you can use the `--{comp}.binpath` flag for replacement. For example, execute the following command to replace the binary file of TiDB:
+By default, when playground is started, each component is started using the binary files from the official mirror images. If you want to put a temporarily compiled local binary file into the cluster for testing, you can use the `--{comp}.binpath` flag for replacement. For example, execute the following command to replace the binary file of TiDB:
 
 {{< copyable "shell-regular" >}}
 
@@ -89,7 +89,7 @@ tiup playground --db.binpath /xx/tidb-server
 
 ### Start multiple component instances
 
-By default, only one instance is started for TiDB/TiKV/PD. To start multiple instances for each component, add the following flag:
+By default, only one instance is started for each TiDB, TiKV, and PD component. To start multiple instances for each component, add the following flag:
 
 {{< copyable "shell-regular" >}}
 
@@ -97,9 +97,9 @@ By default, only one instance is started for TiDB/TiKV/PD. To start multiple ins
 tiup playground v3.0.10 --db 3 --pd 3 --kv 3
 ```
 
-## Quickly connect to the started playground cluster
+## Quickly connect to the TiDB cluster started by playground
 
-TiUP provides the `client` component, which is used to automatically find and connect to a locally-started playground cluster. The usage is as follows:
+TiUP provides the `client` component, which is used to automatically find and connect to a local TiDB cluster started by playground. The usage is as follows:
 
 {{< copyable "shell-regular" >}}
 
