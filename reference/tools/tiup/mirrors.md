@@ -1,12 +1,12 @@
 ---
-title: Create a Private Image
-summary: Learn how to create a private image.
+title: Create a Private Mirror
+summary: Learn how to create a private mirror.
 category: tools
 ---
 
-# Create a Private Image
+# Create a Private Mirror
 
-When creating a private cloud, usually, you need to use an isolated network environment, where the official image of TiUP is not accessible. Therefore, you can create a private image, which is mainly implemented by the `mirrors` component. You can also use `mirrors` for offline deployment.
+When creating a private cloud, usually, you need to use an isolated network environment, where the official mirror of TiUP is not accessible. Therefore, you can create a private mirror, which is mainly implemented by the `mirrors` component. You can also use `mirrors` for offline deployment.
 
 ## `mirrors` description
 
@@ -72,11 +72,11 @@ The `tiup mirrors` command provides a number of optional flags (might be more in
 
 - Determines whether to override local packages
 
-    The `--overwrite` flag determines whether to override the local package with the package of the official image, if the specified `<target-dir>` contains the package you need to download. If you set this flag, the local package is overridden.
+    The `--overwrite` flag determines whether to override the local package with the package of the official mirror, if the specified `<target-dir>` contains the package you need to download. If you set this flag, the local package is overridden.
 
 - Determines whether to use the full clone
 
-    If you specify the `--full` flag, you can clone the official image completely.
+    If you specify the `--full` flag, you can clone the official mirror completely.
 
     > **Note:**
     >
@@ -86,9 +86,9 @@ The `tiup mirrors` command provides a number of optional flags (might be more in
 
     If you only clone packages from one or more specific platforms, use `-os` and `-arch` to specify the platform. For example:
 
-    - Execute the `tiup mirros <target-dir> --os=linux` command to clone from linux.
-    - Execute the `tiup mirros <target-dir> --arch=amd64` command to clone from amd64.
-    - Execute the `tiup mirros <target-dir> --os=linux --arch=amd64` command to clone from linux/amd64.
+    - Execute the `tiup mirros <target-dir> --os=linux` command to clone for linux.
+    - Execute the `tiup mirros <target-dir> --arch=amd64` command to clone for amd64.
+    - Execute the `tiup mirros <target-dir> --os=linux --arch=amd64` command to clone for linux/amd64.
 
 - Determines whether to clone the specific version of the packages
 
@@ -100,7 +100,7 @@ The `tiup mirrors` command provides a number of optional flags (might be more in
 
 ## Usage examples
 
-This section introduces the usage examples of `mirrors`, including offline installation of a TiDB cluster, and the creation of a private image.
+This section introduces the usage examples of `mirrors`, including offline installation of a TiDB cluster, and the creation of a private mirror.
 
 ### Offline install a TiDB cluster using TiUP
 
@@ -156,9 +156,9 @@ If you want to offline install a TiDB cluster of the v4.0.0-rc version in an iso
 
 After you complete the deployment, refer to [Deploy and Maintain the TiDB Online Cluster Using TiUP](/reference/tools/tiup/cluster.md) for more details of the cluster operations.
 
-### Create a private image
+### Create a private mirror
 
-The process of creating a private image is similar to that of creating an offline installer. The only difference is that you need to upload the content of the `package` directory to CDN or a file server. Execute the following command to create a private image:
+The process of creating a private mirror is similar to that of creating an offline installer. The only difference is that you need to upload the content of the `package` directory to CDN or a file server. Execute the following command to create a private mirror:
 
 {{< copyable "shell-regular" >}}
 
@@ -167,9 +167,9 @@ cd package
 python -m SimpleHTTPServer 8000
 ```
 
-Now you have created a private image at <http://127.0.0.1:8000>.
+Now you have created a private mirror at <http://127.0.0.1:8000>.
 
-Then execute the following command to install TiUP using the private image:
+Then execute the following command to install TiUP using the private mirror:
 
 {{< copyable "shell-regular" >}}
 
@@ -178,4 +178,4 @@ export TIUP_MIRRORS=http://127.0.0.1:8000
 curl $TIUP_MIRRORS/install.sh | sh
 ```
 
-After importing the `PATH` variable, you can start to use TiUP. Make sure that the `TIUP_MIRRORS` variable points to the private image.
+After importing the `PATH` variable, you can start to use TiUP. Make sure that the `TIUP_MIRRORS` variable points to the private mirror.
