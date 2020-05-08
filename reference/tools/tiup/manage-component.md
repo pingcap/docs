@@ -1,6 +1,6 @@
 ---
 title: Manage TiUP Components with TiUP Commands
-summary: Learn how to manage components using TiUP.
+summary: Learn how to manage TiUP components using TiUP commands.
 category: tools
 ---
 
@@ -8,13 +8,13 @@ category: tools
 
 You can use the following TiUP commands to manage components in the TiUP ecosystem:
 
-- list: Queries the component list. By using this sub-command, you can see all the optional components to install and all the optional versions of each component.
+- list: Queries the component list. By using this TiUP command, you can see all the optional components to install and all the optional versions of each component.
 - install: Installs the specific version of a component.
 - update: Updates a component to the latest version.
 - uninstall: Uninstalls a component.
 - status: Checks the status of a running component.
 - clean: Cleans up the instance on which a component is deployed.
-- help: Prints the help information. If the sub-command is appended to a command, the usage of this command is printed. 
+- help: Prints the help information. If you append another TiUP command to this command, the usage of the appended command is printed.
 
 This document introduces the common component management operations and the corresponding TiUP commands.
 
