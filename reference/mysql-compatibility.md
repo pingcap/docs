@@ -70,7 +70,7 @@ Also, starting from TiDB 2.1.18 and 3.0.4, TiDB supports using the system variab
 
 > **Note:**
 >
-> If the primary key is not specified, `_tibd_rowid` will be used to identify the row in TiDB. Allocation of this variable and auto-increment column will the same allocator. If the auto-increment column is specified as the primary key, then the column will be used to identify rows. So, there will be the following situation.
+> If the primary key is not specified, TiDB uses the `_tibd_rowid` column to identify rows. The values of the `_tibd_rowid` column and the auto-increment column (if there is) are assigned by the same allocator. If the auto-increment column is specified as the primary key, then TiDB uses this column to identify rows. Therefore, there might be the following situations.
 
 ```sql
 mysql> create table t(id int unique key AUTO_INCREMENT);
