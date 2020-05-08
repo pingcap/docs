@@ -130,7 +130,7 @@ TiUP commands are implemented in TiUP's internal code and used for package manag
 
 For example, if you run the `tiup list` command, TiUP directly runs its own internal code; if you run the `tiup playground` command, TiUP first checks whether there is a local package named "playground", and if not, TiUP downloads the package from the mirror, and then run it.
 
-All TiUP commands are described in [Managing Components with TiUP](/reference/tools/tiup/manage-component.md). All TiUP components are divided into the following topics by component:
+All TiUP commands are described in [Managing Components with TiUP Commands](/reference/tools/tiup/manage-component.md). All TiUP components are divided into the following topics by component:
 
 - [Quickly Deploy a Local TiDB Cluster](/reference/tools/tiup/playground.md): introduce the playground component
 - [Deploy and Maintain an Online TiDB Cluster](/reference/tools/tiup/cluster.md): introduce the cluster component
