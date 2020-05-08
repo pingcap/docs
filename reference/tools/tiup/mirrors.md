@@ -80,7 +80,7 @@ The `tiup mirrors` command provides a number of optional flags (might be more in
 
     > **Note:**
     >
-    > If `--full` and other flags are not specified, only some meta information is cloned.
+    > If `--full` and the other flags are not specified, only some meta information is cloned.
 
 - Determines whether to clone packages from the specific platform
 
@@ -88,7 +88,7 @@ The `tiup mirrors` command provides a number of optional flags (might be more in
 
     - Execute the `tiup mirros <target-dir> --os=linux` command to clone from linux.
     - Execute the `tiup mirros <target-dir> --arch=amd64` command to clone from amd64.
-    - Execute the `tiup mirros <target-dir> --os=linux --arch=amd64` command to clone from linux and amd64.
+    - Execute the `tiup mirros <target-dir> --os=linux --arch=amd64` command to clone from linux/amd64.
 
 - Determines whether to clone the specific version of the packages
 
