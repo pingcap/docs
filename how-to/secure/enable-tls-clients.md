@@ -6,7 +6,7 @@ category: how-to
 
 # Enable TLS for MySQL Clients
 
-It is recommended to use the encrypted connection to ensure data security because non-encrypted connection might lead to information leak.
+It is recommended to use the encrypted connection to ensure data security because non-encrypted connection might lead to an information leak.
 
 The TiDB server supports the encrypted connection based on the TLS (Transport Layer Security). The protocol is consistent with MySQL encrypted connections and is directly supported by existing MySQL clients such as MySQL operation tools and MySQL drivers. TLS is sometimes referred to as SSL (Secure Sockets Layer). Because the SSL protocol has [known security vulnerabilities](https://en.wikipedia.org/wiki/Transport_Layer_Security), TiDB does not support it. TiDB supports the following versions: TLS 1.0, TLS 1.1, and TLS 1.2, TLS 1.3.
 
@@ -24,7 +24,7 @@ The encrypted connections in TiDB are disabled by default. To use encrypted conn
 Similar to MySQL, the encrypted connections in TiDB consist of single connection. The connection is optional by default. For a TiDB server with encrypted connections enabled, you can choose to securely connect to the TiDB server through an encrypted connection, or to use a generally unencrypted connection. If the encrypted connections are enforced as required, both of the following two ways are available:
 
 + Configure the launch parameter `--require-secure-transport` to enable encrypted connections to the TiDB server for all users.
-+ Specify `require ssl` when you creat a user (`create user`), grant permissions (`grant`) or modify an existing user (`alter user`), so that the encrypted connection  to the TiDB server is enabled for the specified user. The following is an example of creating a user:
++ Specify `require ssl` when you create a user (`create user`), grant permissions (`grant`) or modify an existing user (`alter user`), so that the encrypted connection to the TiDB server is enabled for the specified user. The following is an example of creating a user:
 
     {{< copyable "sql" >}}
 
@@ -75,7 +75,7 @@ ssl-cert = "certs/server-cert.pem"
 ssl-key = "certs/server-key.pem"
 ```
 
-If the certificate parameters are correct, TiDB outputs `secure connection is enabled` when started, otherwise it outputs `secure connection is NOT ENABLED`.
+If the certificate parameters are correct, TiDB outputs `secure connection is enabled` when started; otherwise, it outputs `secure connection is NOT ENABLED`.
 
 ## Reload certificate, key, and CA
 
@@ -103,7 +103,7 @@ If the `ssl-ca` parameter is not specified in the TiDB server or MySQL client, t
   1. Specify the `ssl-cert` and `ssl-key` parameters in the TiDB server.
   2. Specify the `--ssl-ca` parameter in the MySQL client.
   3. Specify the `--ssl-mode` to `VERIFY_CA` at least in the MySQL client.
-  4. Make sure that the certificate (`ssl-cert`) configured by the TiDB server is signed by the CA specified by the client `--ssl-ca` parameter, otherwise the authentication fails.
+  4. Make sure that the certificate (`ssl-cert`) configured by the TiDB server is signed by the CA specified by the client `--ssl-ca` parameter; otherwise, the authentication fails.
 
 + To authenticate the MySQL client from the TiDB server:
   1. Specify the `ssl-cert`, `ssl-key`, and `ssl-ca` parameters in the TiDB server.
@@ -112,7 +112,7 @@ If the `ssl-ca` parameter is not specified in the TiDB server or MySQL client, t
 
 - To perform mutual authentication, meet both of the above requirements.
 
-By default, you can choose to authenticate the client from the server. Even if the client does not present its certificate of identification during the TLS handshake, the TLS connection can be established. You can also require the client to be authenticated through `require 509` when creating a user (`create user`), granting permissions (`grant`), or modifying an existing user (`alter user`). The following is an example of creating an user:
+By default, you can choose to authenticate the client from the server. Even if the client does not present its certificate of identification during the TLS handshake, the TLS connection can be established. You can also require the client to be authenticated through `require 509` when creating a user (`create user`), granting permissions (`grant`), or modifying an existing user (`alter user`). The following is an example of creating a user:
 
 {{< copyable "sql" >}}
 
