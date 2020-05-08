@@ -10,7 +10,7 @@ When creating a private cloud, usually, you need to use an isolated network envi
 
 ## `mirrors` description
 
-Execute the following command to get the help documentation of the `mirrors` component:
+Execute the following command to get the help information of the `mirrors` component:
 
 {{< copyable "shell-regular" >}}
 
@@ -57,7 +57,7 @@ Flags:
   -h, --help                        help for tiup
 ```
 
-The basic use of the `tiup mirrors` command is as follows:
+The basic usage of the `tiup mirrors` command is as follows:
 
 {{< copyable "shell-regular" >}}
 
@@ -65,18 +65,18 @@ The basic use of the `tiup mirrors` command is as follows:
 tiup mirrors <target-dir> [global-version] [flags]
 ```
 
-- `target-dir`: The directory which stores cloned data.
-- `global-version`: Used to quickly set a global version for all components.
+- `target-dir`: used to specifies the directory in which cloned data is stored.
+- `global-version`: used to quickly set a global version for all components.
 
-The `tiup mirrors` command provides a number of optional flags (might be more in the future). These flags can be divided into four categories according to their purposes:
+The `tiup mirrors` command provides many optional flags (might provide more in the future). These flags can be divided into the following four categories according to their intended usages:
 
-- Determines whether to override local packages
+- Determines whether to overwrite local packages
 
-    The `--overwrite` flag determines whether to override the local package with the package of the official mirror, if the specified `<target-dir>` contains the package you need to download. If you set this flag, the local package is overridden.
+    The `--overwrite` flag determines whether to overwrite the local package with the package of the official mirror, if the specified `<target-dir>` directory contains the package you need to download. If you set this flag, the local package is overwritten.
 
 - Determines whether to use the full clone
 
-    If you specify the `--full` flag, you can clone the official mirror completely.
+    If you specify the `--full` flag, you can clone the official mirror fully.
 
     > **Note:**
     >
@@ -84,27 +84,27 @@ The `tiup mirrors` command provides a number of optional flags (might be more in
 
 - Determines whether to clone packages from the specific platform
 
-    If you only clone packages from one or more specific platforms, use `-os` and `-arch` to specify the platform. For example:
+    If you want to clone packages only for a specific platform, use `-os` and `-arch` to specify the platform. For example:
 
     - Execute the `tiup mirros <target-dir> --os=linux` command to clone for linux.
     - Execute the `tiup mirros <target-dir> --arch=amd64` command to clone for amd64.
     - Execute the `tiup mirros <target-dir> --os=linux --arch=amd64` command to clone for linux/amd64.
 
-- Determines whether to clone the specific version of the packages
+- Determines whether to clone a specific version of a package
 
-    If you clone only one version (not all versions) of a component, use `--<component>=<version>` to specify the version. For example:
+    If you want to clone only one version (not all versions) of a component, use `--<component>=<version>` to specify this version. For example:
 
-    - Execute the `tiup mirrors <target-dir> --tidb v4` command to clone the v4 version of TiDB.
-    - Execute the `tiup mirros <target-dir> --tidb v4 --tikv all` command to clone the v4 version of TiDB, as well as all versions of TiKV.
+    - Execute the `tiup mirrors <target-dir> --tidb v4` command to clone the v4 version of the TiDB component.
+    - Execute the `tiup mirros <target-dir> --tidb v4 --tikv all` command to clone the v4 version of the TiDB component and all versions of the TiKV component.
     - Execute the `tiup mirrors <target-dir> v4.0.0-rc` command to clone the v4.0.0-rc version of all components in a cluster.
 
 ## Usage examples
 
 This section introduces the usage examples of `mirrors`, including offline installation of a TiDB cluster, and the creation of a private mirror.
 
-### Offline install a TiDB cluster using TiUP
+### Install a TiDB cluster offline using TiUP
 
-If you want to offline install a TiDB cluster of the v4.0.0-rc version in an isolated environment, take the following steps:
+If you want to install a TiDB cluster of the v4.0.0-rc version in an isolated environment, take the following steps:
 
 1. Pull the required components on a machine connected to the external network:
 
@@ -114,9 +114,9 @@ If you want to offline install a TiDB cluster of the v4.0.0-rc version in an iso
     tiup mirrors package --os=linux v4.0.0-rc
     ```
 
-    Then you can create a `package` directory in the current directory. The `package` directory contains necessary components packages to start a cluster.
+    Then a `package` directory is created in the current directory. This `package` directory contains necessary components packages to start a cluster.
 
-2. Use the `tar` command to archive the components packages and send it to the central control machine that is in the isolated environment:
+2. Use the `tar` command to pack the components package and send this package to the central control machine that is in the isolated environment:
 
     {{< copyable "shell-regular" >}}
 
@@ -158,7 +158,7 @@ After you complete the deployment, refer to [Deploy and Maintain the TiDB Online
 
 ### Create a private mirror
 
-The process of creating a private mirror is similar to that of creating an offline installer. The only difference is that you need to upload the content of the `package` directory to CDN or a file server. Execute the following command to create a private mirror:
+The process of creating a private mirror is similar to that of creating an offline installer. The only difference is that, to create a private mirror, you need to upload the content of the `package` directory to CDN or a file server. Execute the following command to create a private mirror:
 
 {{< copyable "shell-regular" >}}
 
