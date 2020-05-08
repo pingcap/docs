@@ -1,12 +1,12 @@
 ---
 title: Create a Private Image
-category: tools
 summary: Learn how to create a private image.
+category: tools
 ---
 
 # Create a Private Image
 
-Creating a private cloud is usually in an isolated network environment, where the official image of TiUP is not accessible. Therefore, you can create a private image, which is mainly implemented by the `mirrors` component. You can also use `mirrors` for offline deployment.
+When creating a private cloud, usually, you need to use an isolated network environment, where the official image of TiUP is not accessible. Therefore, you can create a private image, which is mainly implemented by the `mirrors` component. You can also use `mirrors` for offline deployment.
 
 ## `mirrors` description
 
