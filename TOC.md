@@ -382,7 +382,7 @@
       - [Data Check in the Sharding Scenario](/reference/tools/sync-diff-inspector/shard-diff.md)
       - [Data Check for TiDB Upstream and Downstream Clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
     + TiUP
-      - [Create a Private Image](/reference/tools/tiup/mirrors.md)
+      - [Create a Private Mirror](/reference/tools/tiup/mirrors.md)
       - [Package a Component](/reference/tools/tiup/package-component.md)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
