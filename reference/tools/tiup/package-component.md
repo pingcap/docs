@@ -6,11 +6,11 @@ category: tools
 
 # Package a Component
 
-When you add a new component or add a version of an existing component, you need to use the `tar` command to package the component files and then upload it to the mirror repository. Packaging with `tar` is not difficult. However, it is hard to update the meta information of the repository, because you must avoid destroying the information about existing components during the update.
+If you want to add a new component or add a version of an existing component, use the `tar` command to package the component files and then upload these packaged files to the mirror repository. Packaging with `tar` is not difficult. However, it is not easy to update the meta information of the repository without destroying the information of existing components.
 
-Therefore, TiUP provides the `package` component, which is used to package the new TiUP component and the directory for generating the component package.
+To make it easy, TiUP provides the `package` component, which is used to package the newly added TiUP component and generate the directory of this component.
 
-Execute the following command to get the help documentation of the `mirrors` component:
+Execute the following command to get the help information of the `mirrors` component:
 
 {{< copyable "shell-root" >}}
 
@@ -39,11 +39,11 @@ Flags:
 
 ## Usage example: Add the `Hello World` component
 
-This section introduces the development and packaging of the `Hello World` component. The only function of this component is to output the content of its configuration file. The content is "Hello World".
+This section introduces the development and packaging process of the `Hello World` component. The only function of this component is to output the content of its configuration file. The content is "Hello World".
 
-For simplicity, use the bash script to develop this component. The following are the detailed instructions:
+To make it simple, the bash script is used to develop this component. See the following steps for details:
 
-1. Create the configuration file for the `Hello World` component. The content is "Hello World".
+1. Create the configuration file of the `Hello World` component. The content of this file is "Hello World".
 
     {{< copyable "shell-regular" >}}
 
@@ -66,9 +66,13 @@ For simplicity, use the bash script to develop this component. The following are
     chmod 755 hello.sh
     ```
 
-    The `TIUP_COMPONENT_INSTALL_DIR` environment variable is passed in by TiUP at run time. This variable points to the installation directory of the component.
+    The `TIUP_COMPONENT_INSTALL_DIR` environment variable is passed in when TiUP is running. This variable points to the installation directory of the component.
 
-3. Refer to [Create a Private Mirror](/reference/tools/tiup/mirrors.md) to create an offline or a private mirror (You cannot publish your package because currently you cannot use the `publish` feature of the official mirror). Make sure the `TIUP_MIRRORS` variable points to the mirror after the mirror is created.
+3. Refer to [Create a Private Mirror](/reference/tools/tiup/mirrors.md) and create an offline or a private mirror accordingly. Make sure the `TIUP_MIRRORS` variable points to the mirror after this mirror is created.
+
+    > **Note:**
+    >
+    > You cannot publish your package, because the `publish` feature of the official mirror is currently unavailable.
 
 4. Packaging:
 
@@ -78,11 +82,11 @@ For simplicity, use the bash script to develop this component. The following are
     tiup package hello.sh config.txt --name=hello --entry=hello.sh --release=v0.0.1
     ```
 
-    You can create a `package` directory, where stores the packaged files and the meta information.
+    A `package` directory is created in this step. The packaged files and the meta information are stored in this directory.
 
-5. Upload to the repository:
+5. Upload the packaged files to the repository:
 
-    You can only upload to your mirror created in step 3, since currently you cannot publish to the official repository. Execute the following command to copy all files in the `package` directory into `<target-dir>`. For details of `<target-dir>`, you can refer to the [`mirrors` description](/reference/tools/tiup/mirrors.md#mirrors-description).
+    You can upload the packaged files only to the mirror created by yourself in step 3, because currently you cannot publish the files to the official repository. Execute the following command to copy all files in the `package` directory into `<target-dir>`. For details of `<target-dir>`, refer to the [`mirrors` description](/reference/tools/tiup/mirrors.md#mirrors-description).
 
     {{< copyable "shell-regular" >}}
 
@@ -90,7 +94,7 @@ For simplicity, use the bash script to develop this component. The following are
     cp package/* path/to/mirror/
     ```
 
-    If the directory created in step 3 happens to be in the current directory and the directory name is `package`, you do not need to copy it manually.
+    If the directory created in step 3 happens to be in the current directory and the directory name happens to be `package`, you do not need to copy the files manually.
 
 6. Check whether the `Hello World` component is created successfully:
 
