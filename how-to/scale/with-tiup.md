@@ -22,7 +22,7 @@ For example, if the original topology of the cluster is as follows:
 | 10.0.1.1 | TiKV |
 | 10.0.1.2 | TiKV |
 
-## Scale out a TiDB/TiKV/PD node
+## Scale out a TiDB/TiKV/PD/TiCDC node
 
 If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
 
@@ -120,7 +120,7 @@ If you want to add a TiFlash node to the `10.0.1.4` host, take the following ste
 
     Access the monitoring platform at <http://10.0.1.5:3200> using your browser, and view the status of the cluster and the new node.
 
-## Scale in a TiDB/TiKV/PD node
+## Scale in a TiDB/TiKV/PD/TiCDC node
 
 If you want to remove a TiKV node from the `10.0.1.5` host, take the following steps.
 
