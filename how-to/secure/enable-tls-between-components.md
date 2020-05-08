@@ -35,7 +35,7 @@ This section describes how to enable TLS authentication in a TiDB cluster. TLS a
 
    - TiDB
 
-   Configure in the configuration file or command line arguments:
+        Configure in the configuration file or command line arguments:
 
         ```toml
         [security]
@@ -73,29 +73,29 @@ This section describes how to enable TLS authentication in a TiDB cluster. TLS a
         key-path = "/path/to/pd-server-key.pem"
         ```
 
-   Now mutual authentication among TiDB components is enabled.
+    Now mutual authentication among TiDB components is enabled.
 
-   > **Note:
-   >
-   > If you have enabled TLS in a TiDB cluster when you connect to the cluster using tidb-ctl, tikv-ctl, or pd-ctl, you need to specify the client certificate. For example:
+    > **Note:
+    >
+    > If you have enabled TLS in a TiDB cluster when you connect to the cluster using tidb-ctl, tikv-ctl, or pd-ctl, you need to specify the client certificate. For example:
 
-   {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-   ```bash
-   ./tidb-ctl -u https://127.0.0.1:10080 --ca /path/to/ca.pem --ssl-cert /path/to/client.pem --ssl-key /path/to/client-key.pem
-   ```
+    ```bash
+    ./tidb-ctl -u https://127.0.0.1:10080 --ca /path/to/ca.pem --ssl-cert /path/to/client.pem --ssl-key /path/to/client-key.pem
+    ```
 
-   {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-   ```bash
-   ./pd-ctl -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
-   ```
+    ```bash
+    ./pd-ctl -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
+    ```
 
-   {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-   ```bash
-   ./tikv-ctl --host="127.0.0.1:20160" --ca-path="/path/to/ca.pem" --cert-path="/path/to/client.pem" --key-path="/path/to/clinet-key.pem"
-   ```
+    ```bash
+    ./tikv-ctl --host="127.0.0.1:20160" --ca-path="/path/to/ca.pem" --cert-path="/path/to/client.pem" --key-path="/path/to/clinet-key.pem"
+    ```
 
 3. Configure Common Name
 
