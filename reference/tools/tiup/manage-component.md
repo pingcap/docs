@@ -79,7 +79,7 @@ tiup install tikv:v3.0.6
 
 ## Upgrade components
 
-After PingCAP has released a new version of a component, you can use the `tiup update` command to upgrade this component. The usage of this command is basically the same as that of `tiup install`, except for the following flags:
+After a new version of a component is published, you can use the `tiup update` command to upgrade this component. The usage of this command is basically the same as that of `tiup install`, except for the following flags:
 
 - `--all`: Upgrades all components.
 - `--nightly`: Upgrades to the nightly version.
