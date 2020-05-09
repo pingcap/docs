@@ -10,6 +10,8 @@ If you want to add a new component or add a version of an existing component, us
 
 To make it easy, TiUP provides the `package` component, which is used to package the newly added TiUP component and generate the directory of this component.
 
+## TiUP `package` overview
+
 Execute the following command to get the help information of the `mirrors` component:
 
 {{< copyable "shell-root" >}}
