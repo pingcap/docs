@@ -384,6 +384,7 @@
       - [Data Check in the Sharding Scenario](/reference/tools/sync-diff-inspector/shard-diff.md)
       - [Data Check for TiDB Upstream and Downstream Clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
     + TiUP
+      - [Manage Components with Commands](/reference/tools/tiup/manage-component.md)
       - [Quickly Deploy a Local TiDB Cluster](/reference/tools/tiup/playground.md)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
