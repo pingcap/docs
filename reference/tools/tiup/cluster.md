@@ -334,7 +334,7 @@ Before the upgrade, TiUP cluster checks whether the configuration file of each c
 
 ### Upgrade command
 
-The parameters for the upgrade command is as follows:
+The flags for the upgrade command is as follows:
 
 ```bash
 Usage:
@@ -380,7 +380,7 @@ The command sends the configuration to the target machine and restarts the clust
 
 ## Update component
 
-For normal upgrade, you can use the `upgrade` command. But in some scenarios, such as debugging, you might need to replace the currently running cluster with a temporary package. To achieve this, use the `patch` command:
+For normal upgrade, you can use the `upgrade` command. But in some scenarios, such as debugging, you might need to replace the currently running component with a temporary package. To achieve this, use the `patch` command:
 
 {{< copyable "shell-root" >}}
 
@@ -452,7 +452,7 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-You can use either of the following two commands to import a TiDB Ansible cluster:
+You can use either of the following commands to import a TiDB Ansible cluster:
 
 {{< copyable "shell-regular" >}}
 
@@ -479,7 +479,7 @@ Flags:
   -h, --help   help for audit
 ```
 
-If the `[audit-id]` parameter is not specified, the command shows a list of commands that have been executed. For example:
+If the `[audit-id]` flag is not specified, the command shows a list of commands that have been executed. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -498,7 +498,7 @@ ID      Time                       Command
 4BKKDx  2020-04-28T16:36:57+08:00  /Users/joshua/.tiup/components/cluster/v0.4.9/cluster deploy test v4.0.0-rc /tmp/topology.yaml
 ```
 
-The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of the command as a parameter as follows:
+The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
 
 {{< copyable "shell-regular" >}}
 
@@ -506,9 +506,9 @@ The first column is `audit-id`. To view the execution log of a certain command, 
 tiup cluster audit 4BLhr0
 ```
 
-## Run shell command on host in the TiDB cluster
+## Run commands on a host in the TiDB cluster
 
-To run a command on host in the TiDB cluster, use the `exec` command. The usage of the `exec` command is as follows:
+To run command on a host in the TiDB cluster, use the `exec` command. The usage of the `exec` command is as follows:
 
 ```bash
 Usage:
@@ -536,7 +536,7 @@ tiup cluster exec test-cluster --command='ls /tmp'
 
 ## Cluster controllers
 
-Before TiUP is released, you can control the cluster using `tidb-ctl`, `tikv-ctl`, `pd-ctl`, and other tools. To make the tools easier to download and use, TiUP integrate them into an all-in-one component, `ctl`.
+Before TiUP is released, you can control the cluster using `tidb-ctl`, `tikv-ctl`, `pd-ctl`, and other tools. To make the tools easier to download and use, TiUP integrates them into an all-in-one component, `ctl`.
 
 ```bash
 Usage:
