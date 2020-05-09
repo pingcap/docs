@@ -75,7 +75,7 @@ This section describes how to enable TLS authentication in a TiDB cluster. TLS a
 
     Now mutual authentication among TiDB components is enabled.
 
-    > **Note:
+    > **Note:**
     >
     > If you have enabled TLS in a TiDB cluster when you connect to the cluster using tidb-ctl, tikv-ctl, or pd-ctl, you need to specify the client certificate. For example:
 
