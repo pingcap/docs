@@ -6,11 +6,11 @@ category: tools
 
 # Deploy and Maintain an Online TiDB Cluster Using TiUP
 
-This document focuses on how to use the TiUP cluster component. If you want to see the complete steps of online deployment, refer to [Deploy a TiDB Cluster Using TiUP](/how-to/deploy/orchestrated/tiup.md).
+This document focuses on how to use the TiUP cluster component. For the complete steps of online deployment, refer to [Deploy a TiDB Cluster Using TiUP](/how-to/deploy/orchestrated/tiup.md).
 
-Similar to the TiUP playground component used for local deployment, the TiUP cluster component quickly deploys TiDB for production environment. Compared with playground, the cluster component provides more powerful cluster management features, including upgrading, scaling, and even operation and auditing.
+Similar to [the TiUP playground component](/reference/tools/tiup/playground.md) used for local deployment, the TiUP cluster component quickly deploys TiDB for production environment. Compared with playground, the cluster component provides more powerful cluster management features, including upgrading, scaling, and even operation and auditing.
 
-To see the help file of the cluster component, run the following command:
+For the help information of the cluster component, run the following command:
 
 ```bash
 tiup cluster
@@ -54,13 +54,13 @@ Flags:
 
 ## Deploy the cluster
 
-To deploy the cluster, run the `tiup cluster deploy` command. The common usage of the command is as follows:
+To deploy the cluster, run the `tiup cluster deploy` command. The usage of the command is as follows:
 
 ```bash
 tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
-You need to provide the cluster name, the TiDB version, and a topology file of the cluster to run this command.
+This command requires you to provide the cluster name, the TiDB cluster version, and a topology file of the cluster.
 
 To write a topology file, refer to [the example](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml). The following file is an example of the simplest topology:
 
@@ -100,7 +100,7 @@ Save the file as `/tmp/topology.yaml`. If you want to use TiDB v3.0.12 and your 
 tiup cluster deploy prod-cluster v3.0.12 /tmp/topology.yaml
 ```
 
-During the execution, TiUP confirms your topology again and requires the root password of the target machine:
+During the execution, TiUP asks you to confirm your topology again and requires the root password of the target machine:
 
 ```bash
 Please confirm your topology:
@@ -125,7 +125,7 @@ Attention:
 Do you want to continue? [y/N]:
 ```
 
-After you enter the password, tiup-cluster downloads the required components and deploy them on the corresponding machines. When you see the following sentence, the deployment is successful:
+After you enter the password, TiUP cluster downloads the required components and deploy them on the corresponding machines. When you see the following message, the deployment is successful:
 
 ```bash
 Deployed cluster `prod-cluster` successfully
@@ -133,7 +133,7 @@ Deployed cluster `prod-cluster` successfully
 
 ## View the cluster list
 
-After the cluster is successfully deployed, view the cluster list by running the `tiup cluster list` command:
+After the cluster is successfully deployed, view the cluster list by running the following command:
 
 {{< copyable "shell-root" >}}
 
@@ -162,7 +162,7 @@ If you forget the name of your cluster, view the cluster list by running `tiup c
 
 ## Check the cluster status
 
-TiUP provides the `tiup cluster display` command to view the status of each component in the cluster. With this command, you don't have to log in to each machine separately to see the component status. The usage of the command is as follows:
+TiUP provides the `tiup cluster display` command to view the status of each component in the cluster. With this command, you don't have to log in to each machine to see the component status. The usage of the command is as follows:
 
 {{< copyable "shell-root" >}}
 
@@ -197,11 +197,11 @@ For the PD component, the `Status` column shows `Healthy` or `Down`, and sometim
 
 > **Note:**
 >
-> This section describes only the example syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/how-to/scale/with-tiup.md).
+> This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/how-to/scale/with-tiup.md).
 
-Scaling in a node means taking the node offline. This operation removes the node from the cluster and deletes the related data files.
+Scaling in a node means taking the node offline. This operation removes the node from the cluster and deletes the remaining data files.
 
-Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time to see if the node is successfully taken offline, special treatment is given to the TiKV and TiDB Binlog components.
+Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiDB Binlog components.
 
 - For TiKV and Binlog:
 
