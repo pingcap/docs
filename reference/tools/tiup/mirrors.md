@@ -154,7 +154,7 @@ If you want to install a TiDB cluster of the v4.0.0-rc version in an isolated en
     export TIUP_MIRRORS=/tmp/package
     ```
 
-After you complete the deployment, refer to [Deploy and Maintain the TiDB Online Cluster Using TiUP](/reference/tools/tiup/cluster.md) for more details of the cluster operations.
+After you complete the deployment, refer to [Deploy and Maintain an Online TiDB Cluster Using TiUP](/reference/tools/tiup/cluster.md) for more details of the cluster operations.
 
 ### Create a private mirror
 
