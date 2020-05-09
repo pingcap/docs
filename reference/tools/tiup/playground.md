@@ -23,7 +23,7 @@ This command actually performs the following operations:
 - Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v0.0.6, then this command works the same as `tiup playground:v0.0.6`.
 - If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
 - Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v4.0.0-rc, then this command works the same as `tiup playground:v0.0.6 v4.0.0-rc`.
-- Because this command does not specify the number of each component. By default, a smallest cluster that consists of one TiDB instance, one TiKV instance, and one PD instance is started.
+- Because this command does not specify the number of each component, TiUP playground, by default, starts a smallest cluster that consists of one TiDB instance, one TiKV instance, and one PD instance.
 - After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the TiDB Dashboard.
 
 The command-line flags of the playground component are described as follows:
@@ -81,7 +81,7 @@ tiup playground --pd.config ~/config/pd.toml
 
 ### Replace the default binary files
 
-By default, when playground is started, each component is started using the binary files from the official mirror images. If you want to put a temporarily compiled local binary file into the cluster for testing, you can use the `--{comp}.binpath` flag for replacement. For example, execute the following command to replace the binary file of TiDB:
+By default, when playground is started, each component is started using the binary files from the official mirror. If you want to put a temporarily compiled local binary file into the cluster for testing, you can use the `--{comp}.binpath` flag for replacement. For example, execute the following command to replace the binary file of TiDB:
 
 {{< copyable "shell-regular" >}}
 
@@ -109,4 +109,4 @@ TiUP provides the `client` component, which is used to automatically find and co
 tiup client
 ```
 
-This command provides a list of TiDB clusters that are started by playground on the current machine on the console. Select the TiDB cluster to connected. After clicking <kbd>Enter</kbd>, a built-in MySQL client is opened to connect to TiDB.
+This command provides a list of TiDB clusters that are started by playground on the current machine on the console. Select the TiDB cluster to be connected. After clicking <kbd>Enter</kbd>, a built-in MySQL client is opened to connect to TiDB.
