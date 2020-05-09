@@ -209,13 +209,13 @@ Because the offline process of the TiKV and TiDB Binlog components is asynchrono
     - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV/Binlog node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
 
         1. Stop the service of the node that has been taken offline.
-        2. Clean up the data file related to the node.
-        3. Update the cluster topology and remove the node.
+        2. Clean up the data files related to the node.
+        3. Remove the node from the cluster topology.
 
 - For other components:
 
-    - When taking the PD component down, TiUP cluster quickly deletes the specified node from the cluster through API, stops the specified PD service and deletes the related data file.
-    - When taking other components down, TiUP cluster directly stops the service and deletes the related data file.
+    - When taking the PD component down, TiUP cluster quickly deletes the specified node from the cluster through API, stops the service of the specified PD node, and deletes the related data files.
+    - When taking other components down, TiUP cluster directly stops the node service and deletes the related data files.
 
 The basic usage of the scale-in command:
 
@@ -223,7 +223,7 @@ The basic usage of the scale-in command:
 tiup cluster scale-in <cluster-name> -N <node-id>
 ```
 
-To use this command, you need to specify at least two parameters: the cluster name and the node ID. The node ID can be obtained by using the `tiup cluster display` command as in the previous section.
+To use this command, you need to specify at least two flags: the cluster name and the node ID. The node ID can be obtained by using the `tiup cluster display` command in the previous section.
 
 For example, to scale in the TiKV node on `172.16.5.140`, run the following command:
 
@@ -266,21 +266,21 @@ After PD schedules the data on the node to other TiKV nodes, this node will be d
 
 > **Note:**
 >
-> This section describes only the example syntax of the scale-out command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/how-to/scale/with-tiup.md).
+> This section describes only the syntax of the scale-out command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/how-to/scale/with-tiup.md).
 
-The scale-out operation has an inner logic similar to that of deployment. The TiUP cluster component firstly ensures the SSH connection of the node, creates the required directory on the target node, then executes the deployment, and starts the service.
+The scale-out operation has an inner logic similar to that of deployment: the TiUP cluster component firstly ensures the SSH connection of the node, creates the required directories on the target node, then executes the deployment operation, and starts the node service.
 
 When you scale out PD, the node is added to the cluster by `join`, and the configurations of services associated with PD are updated. When you scale out other services, the service is started directly and added to the cluster.
 
-All services conduct correctness validation when they are scaled out. The validation results shows whether the scaling-out is successful.
+All services conduct correctness validation when they are scaled out. The validation results show whether the scaling-out is successful.
 
 To scale out a TiKV node and a PD node in the `tidb-test` cluster, take the following steps:
 
-1. Create a `scale.yaml` file, and add IP of the new TiKV and PD nodes:
+1. Create a `scale.yaml` file, and add IPs of the new TiKV and PD nodes:
 
     > **Note:**
     >
-    > Create a topology file, which includes only the description of the new nodes, not the existing nodes.
+    > You need to create a topology file, which includes only the description of the new nodes, not the existing nodes.
 
     ```yaml
     ---
@@ -306,7 +306,7 @@ To scale out a TiKV node and a PD node in the `tidb-test` cluster, take the foll
 
 > **Note:**
 >
-> This section describes only the example syntax of the upgrade command. For detailed steps of online upgrade, refer to [Upgrade TiDB Using TiUP](/how-to/upgrade/using-tiup.md).
+> This section describes only the syntax of the upgrade command. For detailed steps of online upgrade, refer to [Upgrade TiDB Using TiUP](/how-to/upgrade/using-tiup.md).
 
 The rolling upgrade feature leverages the distributed capabilities of TiDB. The upgrade process is made as transparent as possible to the application, and does not affect the business.
 
