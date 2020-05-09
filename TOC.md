@@ -385,6 +385,12 @@
       - [Data Check for TiDB Upstream and Downstream Clusters](/reference/tools/sync-diff-inspector/tidb-diff.md)
     + TiUP
       - [TiUP Overview](/reference/tools/tiup/overview.md)
+      - [Manage Components with Commands](/reference/tools/tiup/manage-component.md)
+      - [Quickly Deploy a Local TiDB Cluster](/reference/tools/tiup/playground.md)
+      - [Deploy and Maintain an Online TiDB Cluster](/reference/tools/tiup/cluster.md)
+      - [Create a Private Mirror](/reference/tools/tiup/mirrors.md)
+      - [Package a Component](/reference/tools/tiup/package-component.md)
+      - [Stress Test TiDB Using TiUP](/reference/tools/tiup/bench.md)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
     - [TiKV Control](/reference/tools/tikv-control.md)
@@ -418,6 +424,7 @@
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
+    - [3.0.14](/releases/3.0.14.md)
     - [3.0.13](/releases/3.0.13.md)
     - [3.0.12](/releases/3.0.12.md)
     - [3.0.11](/releases/3.0.11.md)
