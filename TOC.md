@@ -386,13 +386,10 @@
     + TiUP
       - [Manage Components with Commands](/reference/tools/tiup/manage-component.md)
       - [Quickly Deploy a Local TiDB Cluster](/reference/tools/tiup/playground.md)
-<<<<<<< HEAD
-=======
       - [Deploy and Maintain an Online TiDB Cluster](/reference/tools/tiup/cluster.md)
       - [Create a Private Mirror](/reference/tools/tiup/mirrors.md)
       - [Package a Component](/reference/tools/tiup/package-component.md)
       - [Stress Test TiDB Using TiUP](/reference/tools/tiup/bench.md)
->>>>>>> 64d4f87... TiUP: add mirrors.md and package-component.md (#2481)
     - [PD Control](/reference/tools/pd-control.md)
     - [PD Recover](/reference/tools/pd-recover.md)
     - [TiKV Control](/reference/tools/tikv-control.md)
