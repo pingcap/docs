@@ -65,7 +65,7 @@ The basic usage of the `tiup mirrors` command is as follows:
 tiup mirrors <target-dir> [global-version] [flags]
 ```
 
-- `target-dir`: used to specifies the directory in which cloned data is stored.
+- `target-dir`: used to specify the directory in which cloned data is stored.
 - `global-version`: used to quickly set a global version for all components.
 
 The `tiup mirrors` command provides many optional flags (might provide more in the future). These flags can be divided into the following four categories according to their intended usages:
