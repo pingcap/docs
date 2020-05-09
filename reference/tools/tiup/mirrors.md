@@ -8,7 +8,7 @@ category: tools
 
 When creating a private cloud, usually, you need to use an isolated network environment, where the official mirror of TiUP is not accessible. Therefore, you can create a private mirror, which is mainly implemented by the `mirrors` component. You can also use `mirrors` for offline deployment.
 
-## `mirrors` description
+## TiUP `mirrors` overview
 
 Execute the following command to get the help information of the `mirrors` component:
 
