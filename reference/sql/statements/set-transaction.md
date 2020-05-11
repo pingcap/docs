@@ -12,15 +12,15 @@ The `SET TRANSACTION` statement can be used to change the current isolation leve
 
 **SetStmt:**
 
-![SetStmt](/media/sqlgram-v3.0/SetStmt.png)
+![SetStmt](/media/sqlgram/SetStmt.png)
 
 **TransactionChar:**
 
-![TransactionChar](/media/sqlgram-v3.0/TransactionChar.png)
+![TransactionChar](/media/sqlgram/TransactionChar.png)
 
 **IsolationLevel:**
 
-![IsolationLevel](/media/sqlgram-v3.0/IsolationLevel.png)
+![IsolationLevel](/media/sqlgram/IsolationLevel.png)
 
 ## Examples
 

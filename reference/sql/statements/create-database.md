@@ -12,23 +12,23 @@ This statement creates a new database in TiDB. The MySQL terminology for 'databa
 
 **CreateDatabaseStmt:**
 
-![CreateDatabaseStmt](/media/sqlgram-v3.0/CreateDatabaseStmt.png)
+![CreateDatabaseStmt](/media/sqlgram/CreateDatabaseStmt.png)
 
 **DatabaseSym:**
 
-![DatabaseSym](/media/sqlgram-v3.0/DatabaseSym.png)
+![DatabaseSym](/media/sqlgram/DatabaseSym.png)
 
 **IfNotExists:**
 
-![IfNotExists](/media/sqlgram-v3.0/IfNotExists.png)
+![IfNotExists](/media/sqlgram/IfNotExists.png)
 
 **DBName:**
 
-![DBName](/media/sqlgram-v3.0/DBName.png)
+![DBName](/media/sqlgram/DBName.png)
 
 **DatabaseOptionListOpt:**
 
-![DatabaseOptionListOpt](/media/sqlgram-v3.0/DatabaseOptionListOpt.png)
+![DatabaseOptionListOpt](/media/sqlgram/DatabaseOptionListOpt.png)
 
 ## Syntax
 
