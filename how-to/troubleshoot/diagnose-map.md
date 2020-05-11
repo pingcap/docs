@@ -6,7 +6,7 @@ category: how-to
 
 # TiDB Troubleshooting Map
 
-This document summarizes common errors in TiDB and other components. You can use this map to diagnose and solve issues when you encounter related problems.
+This document summarizes common issues in TiDB and other components. You can use this map to diagnose and solve issues when you encounter related problems.
 
 ## 1. Service Unavailable
 
@@ -137,7 +137,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
 - 3.2.4 Typical reasons for OOM
 
-    - The SQL query has `join`. If you view the SQL statement by using `explain`, you can find that the `join` operation selects `HashJoin` algorithm and the `inner` table is large.
+    - The SQL query has `join`. If you view the SQL statement by using `explain`, you can find that the `join` operation selects the `HashJoin` algorithm and the `inner` table is large.
 
     - The data volume of a single `UPDATE/DELETE` query is too large. See [case-882](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case882.md) in Chinese.
 
