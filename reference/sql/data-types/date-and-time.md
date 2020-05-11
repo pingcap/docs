@@ -79,13 +79,7 @@ Different types of zero value are shown in the following table:
 
 Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ) if the SQL mode permits such usage.
 
-<<<<<<< HEAD
 ## Automatic initialization and update of `TIMESTAMP` and `DATETIME`
-=======
-<!-- markdownlint-disable MD001 -->
-
-### Automatic initialization and update of `TIMESTAMP` and `DATETIME`
->>>>>>> 613981d... reference/sql: update data types (#2257)
 
 Columns with `TIMESTAMP` or `DATETIME` value type can be automatically initialized or updated to the current time.
 
