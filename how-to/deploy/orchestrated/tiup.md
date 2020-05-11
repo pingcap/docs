@@ -1911,7 +1911,9 @@ cdc                             darwin/amd64,linux/amd64,linux/arm64
 
 TiDB requires sufficient memory space for operation. It is not recommended to use swap as a buffer for insufficient memory, which might reduce performance. Therefore, it is recommended to disable the system swap permanently.
 
-Note that if you disable the system swap by using `swapoff -a`, the setting will be invalid after the machine is restarted.
+> **Note:**
+>
+> Do not disable the system swap by executing `swapoff -a`, or this setting will be invalid after the machine is restarted.
 
 To disable the system swap, execute the following command:
 
