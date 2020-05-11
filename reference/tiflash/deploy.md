@@ -27,7 +27,7 @@ It is recommended to use an SSD disk to buffer the real-time data being replicat
 
 For other hard disks, you can use multiple HDDs or regular SSDs. A better hard disk will surely bring better performance.
 
-TiFlash supports multi-directory storage, so there is no need to use RAID.
+TiFlash supports [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment), so there is no need to use RAID.
 
 ### TiFlash and TiKV are deployed on the same node
 
@@ -77,7 +77,7 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
 
 3. Edit the `inventory.ini` configuration file. In addition to [configuring for TiDB cluster deployment](/how-to/deploy/orchestrated/ansible.md#step-9-edit-the-inventoryini-file-to-orchestrate-the-tidb-cluster), you also need to specify the IPs of your TiFlash servers under the `[tiflash_servers]` section (currently only IPs are supported; domain names are not supported).
 
-    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want multi-disk deployment, separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
+    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment), separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
 
     {{< copyable "" >}}
 
@@ -101,7 +101,7 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
 
 3. Edit the `inventory.ini` configuration file. You need to specify the IPs of your TiFlash servers under the `[tiflash_servers]` section (currently only IPs are supported; domain names are not supported).
 
-    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want multi-disk deployment, separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
+    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment) separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
 
     {{< copyable "" >}}
 
