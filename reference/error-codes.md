@@ -17,7 +17,7 @@ In addition, TiDB has the following unique error codes:
 
     The memory used by the request exceeds the threshold limit for the TiDB memory usage.
 
-    Increase the memory limit of a single SQL statement by configuring `mem-quota-query`.
+    Increase the memory limit for a single SQL statement by configuring `mem-quota-query`.
 
 * Error Number: 8002
 
@@ -29,7 +29,7 @@ In addition, TiDB has the following unique error codes:
 
     If the data in a row is not consistent with the index when executing the `ADMIN CHECK TABLE` command, TiDB returns this error. This error is commonly seen when you check the data corruption in the table.
 
-    You can contact PingCAP for support or seek help via the official forum.
+    You can contact PingCAP for support or seek help in the official forum.
 
 * Error Number: 8004
 
@@ -53,7 +53,7 @@ In addition, TiDB has the following unique error codes:
 
     The version of the plugin that is being reloaded is different from the previous version. Therefore, the plugin cannot be reloaded, and this error is returned.
 
-    You can reload the plugin if the plugin version is the same as the previous one.
+    You can reload the plugin by ensuring that the plugin version is the same as the previous one.
 
 * Error Number: 8020
 
@@ -63,7 +63,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8021
 
-    When the key that is being read in TiKV does not exist, this error is returned. This error is used internally, and the external result is an empty read.
+    When the key to be read from TiKV does not exist, this error is returned. This error is used internally, and the external result is an empty read.
 
 * Error Number: 8022
 
@@ -77,9 +77,9 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8024
 
-    Invalid transactions. If it is found that no transaction ID (Start Timestamp) is obtained for the transaction that is being executed, which means this transaction is invalid, this error is returned.
+    Invalid transactions. If TiDB finds that no transaction ID (Start Timestamp) is obtained for the transaction that is being executed, which means this transaction is invalid, this error is returned.
 
-    Usually this error does not occur. If you encounter this error, contact PingCAP for support or seek help via the official forum.
+    Usually this error does not occur. If you encounter this error, contact PingCAP for support or seek help in the official forum.
 
 * Error Number: 8025
 
@@ -93,16 +93,15 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8027
 
-    The table schema version is outdated. TiDB uses the F1 online schema change algorithm to execute DDL. When the table schema version of TiDB server is older than that of the entire system, this error is returned if you execute a SQL statement.
+    The table schema version is outdated. TiDB uses the F1 online schema change algorithm to execute DDL statements. When the table schema version of the TiDB server is earlier than that of the entire system, this error is returned if you execute a SQL statement.
 
-    When this error occurs, check the network between the TiDB server and PD Leader.
+    When this error occurs, check the network between the TiDB server and the PD Leader.
 
 * Error Number: 8028
 
-    The table schema has changed.
     TiDB does not support table lock, which is called metadata lock in MySQL and might be called intention lock in other databases.
 
-    When a transaction is executed, the transaction cannot perceive the table schema changes. Therefore, when committing a transaction, TiDB checks the table schema related the transaction. If the related table schema has changed during the execution, the transaction commit will fail.
+    When a transaction is executed, the transaction cannot recognize the table schema changes. Therefore, when committing a transaction, TiDB checks the table schema related the transaction. If the related table schema has changed during the execution, the transaction commit will fail and this error is returned.
 
     The application can safely retry the whole transaction.
 
@@ -128,7 +127,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8037
 
-    Invalid `mode` format is used in the `week` function. `mode` must be 1 digit in [0, 7].
+    Invalid `mode` format is used in the `week` function. `mode` must be 1 digit within [0, 7].
 
 * Error Number: 8038
 
