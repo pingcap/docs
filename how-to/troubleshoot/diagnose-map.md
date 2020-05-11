@@ -241,7 +241,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 4.3.2 `scheduler too busy`
 
-    - Serious write conflict. `latch wait duration` is high. You can view `latch wait duration` in the monitor **Grafana** -> **TiKV-details** -> **scheduler prewrite**/**scheduler commit**. When the write tasks pile up in the scheduler, the pending write tasks exceed the threshold set in `[storage] scheduler-pending-write-threshold` (100MB). TODO: Verify the cause by viewing the metric corresponding to `MVCC_CONFLICT_COUNTER`.
+    - Serious write conflict. `latch wait duration` is high. You can view `latch wait duration` in the monitor **Grafana** -> **TiKV-details** -> **scheduler prewrite**/**scheduler commit**. When the write tasks pile up in the scheduler, the pending write tasks exceed the threshold set in `[storage] scheduler-pending-write-threshold` (100MB). You can verify the cause by viewing the metric corresponding to `MVCC_CONFLICT_COUNTER`.
     
     - Slow write causes write tasks to pile up. The data being written to TiKV exceeds the threshold set by `[storage] scheduler-pending-write-threshold` (100MB). Refer to [4.5](#45-tikv-write-is-slow).
 
@@ -257,21 +257,21 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 4.4.1 Re-election because TiKV is restarted
 
-    - After TiKV panics, it is pulled up by systemd and runs normally. You can check whether panic has occurred by viewing the TiKV log. Since this issue is unexpected, [report a bug](https://github.com/tikv/tikv/issues/new?template=bug-report.md) if it happens.
+    - After TiKV panics, it is pulled up by systemd and runs normally. You can check whether panic has occurred by viewing the TiKV log. Because this issue is unexpected, [report a bug](https://github.com/tikv/tikv/issues/new?template=bug-report.md) if it happens.
     
     - TiKV is stopped or killed by a third party and then pulled up by systemd. Check the cause by viewing `dmesg` and the TiKV log. 
     
     - TiKV is OOM, which causes restart. Refer to [4.2](#42-tikv-oom).
     
-    - TiKV is hung because of dynamic adjust of `THP` (Transparent Hugepage). See case [case-500](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case500.md) in Chinese.
+    - TiKV is hung because of dynamically adjusting `THP` (Transparent Hugepage). See case [case-500](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case500.md) in Chinese.
 
-- 4.4.2 TiKV RocksDB encounters write stall and thus results in re-election. You chan check if the monitor **Grafana** -> **TiKV-details** -> **errors** shows `server is busy`. Refer to [4.3.1](#43-the-client-reports-the-server-is-busy-error).
+- 4.4.2 TiKV RocksDB encounters write stall and thus results in re-election. You can check if the monitor **Grafana** -> **TiKV-details** -> **errors** shows `server is busy`. Refer to [4.3.1](#43-the-client-reports-the-server-is-busy-error).
 
 - 4.4.3 Re-election because of network isolation.
 
 ### 4.5 TiKV write is slow
 
-- 4.5.1 Check whether the TiKV write is low by viewing the `prewrite/commit/raw-put` duration of TiKV gRPC (only for raw kv clusters). Generally, you can locate the slow phase according to the [performance-map](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png). Some common situations are listed as follows.
+- 4.5.1 Check whether the TiKV write is low by viewing the `prewrite/commit/raw-put` duration of TiKV gRPC (only for raw KV clusters). Generally, you can locate the slow phase according to the [performance-map](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png). Some common situations are listed as follows.
 
 - 4.5.2 The scheduler CPU is busy (only for transaction kv). 
 
@@ -287,9 +287,9 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 4.5.4 The raftstore thread is busy.
 
-    The Raft Propose/propose wait duration is significantly larger than the append log duration in TiKV Grafana. Take the following methods: 
+    The **Raft Propose**/`propose wait duration` is significantly larger than the append log duration in TiKV Grafana. Take the following methods: 
 
-    - Check whether the `[raftstore] store-pool-size` configuration is too small. It is recommended to set the value between `1` and `5` and not too large.
+    - Check whether the `[raftstore] store-pool-size` configuration value is too small. It is recommended to set the value between `1` and `5` and not too large.
     - Check whether the CPU resources on the machine are insufficient.
 
 - 4.5.5 Apply is slow.
@@ -462,8 +462,8 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - The `driver: bad connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart and so on), and that the data of the current request has not yet been sent to TiDB.
 
-        - For versions earlier than 1.0.0 GA, stop the task by running `stop-task` and then restart the task by running `start-task`.
-        - For 1.0.0 GA or later versions, an automatic retry mechanism for this type of error is added. See [#265](https://github.com/pingcap/dm/pull/265).
+        - For versions earlier than DM 1.0.0 GA, stop the task by running `stop-task` and then restart the task by running `start-task`.
+        - For DM 1.0.0 GA or later versions, an automatic retry mechanism for this type of error is added. See [#265](https://github.com/pingcap/dm/pull/265).
 
 - 6.2.4 A replication task is interrupted with the `invalid connection` error.
 
@@ -506,7 +506,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
         - The setting can be found from the start of the log by searching `region-concurrency`.
         - If TiDB Lightning shares a server with other services (e.g. Importer), you must manually set `region-concurrency` to 75% of the total number of CPU cores on that server.
-        - If there is a quota on CPU (e.g. limited by Kubernetes settings), Lightning might not be able to read this out. In this case, `region-concurrency` must also be manually reduced.
+        - If there is a quota on CPU (for example, limited by Kubernetes settings), TiDB Lightning might not be able to read this out. In this case, `region-concurrency` must also be manually reduced.
 
     - Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the Mydumper output. If the indices are negligible, you may first remove them from the schema, and add them back via `CREATE INDEX` after the import is complete.
     - The version of TiDB Lightning is old. Try the latest version, which might improve the import speed.
