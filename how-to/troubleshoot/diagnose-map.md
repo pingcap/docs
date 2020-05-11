@@ -169,7 +169,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
 ### 3.4 SQL execution error
 
-- 3.4.1 The client reports the `ERROR 1265(01000) Data Truncated` error. This is because the way TiDB internally calculates the precision of `Decimal` type is incompatible with that of MySQL (expected to be fixed in v3.0.10).
+- 3.4.1 The client reports the `ERROR 1265(01000) Data Truncated` error. This is because the way TiDB internally calculates the precision of `Decimal` type is incompatible with that of MySQL. This issue has been fixed in v3.0.10 ([#14438](https://github.com/pingcap/tidb/pull/14438)).
 
     - Cause:
 
