@@ -57,6 +57,7 @@ To check the consistency of all the data and corresponding indexes in the `tbl_n
 ```sql
 ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 ```
+
 If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
 
 ## Synopsis
