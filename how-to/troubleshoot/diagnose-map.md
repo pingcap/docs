@@ -1,10 +1,12 @@
 ---
 title: TiDB Troubleshooting Map
-summary: Learn how to troubleshoot common issues in TiDB.
+summary: Learn how to troubleshoot common errors in TiDB.
 category: how-to
 ---
 
 # TiDB Troubleshooting Map
+
+This document summarizes common errors in TiDB and other components. You can use this map to diagnose and solve issues when you encounter related problems.
 
 ## 1. Service Unavailable
 
@@ -22,7 +24,7 @@ category: how-to
 
 ### 1.2 PD errors cause service unavailable
 
-Refer to [PD issues](#5-pd-issues).
+Refer to [5 PD issues](#5-pd-issues).
 
 ## 2. Latency increases significantly
 
@@ -135,7 +137,7 @@ Refer to [PD issues](#5-pd-issues).
 
 - 3.2.4 Typical reasons for OOM
 
-    - The SQL query has `join`. If you view the SQL by using `explain`, you can find the `join` operation selects `HashJoin` algorithm and the `inner` table is large, such as in TiDB-4116.
+    - The SQL query has `join`. If you view the SQL statement by using `explain`, you can find that the `join` operation selects `HashJoin` algorithm and the `inner` table is large.
 
     - The data volume of a single `UPDATE/DELETE` query is too large. See [case-882](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case882.md) in Chinese.
 
@@ -269,7 +271,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 4.5 TiKV write is slow
 
-- 4.5.1 Check whether the TiKV write is low by viewing the `prewrite/commit/raw-put duration` of TiKV gRPC (only for raw kv clusters). Generally, you can locate the slow phase according to the performance-map. Some common situations are listed as follows.
+- 4.5.1 Check whether the TiKV write is low by viewing the `prewrite/commit/raw-put duration` of TiKV gRPC (only for raw kv clusters). Generally, you can locate the slow phase according to the [performance-map](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png). Some common situations are listed as follows.
 
 - 4.5.2 The scheduler CPU is busy (only for transaction kv). 
 
@@ -308,7 +310,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     The Raft IO/commit log duration in TiKV Grafana is high (this metric is only supported in Grafana after v4.x). Every Region corresponds to an independent Raft group. Raft has a flow control mechanism, similar to the sliding window mechanism of TCP. You can control the size of the sliding window by configuring the `[raftstore] raft-max-inflight-msgs = 256` parameter. If there is a write hot spot and the commit log duration is high, you can adjust the parameter, such as increasing it to `1024`.
 
-- 4.5.7 For other situations, refer to the write path on performance-map and analyze the cause.
+- 4.5.7 For other situations, refer to the write path on [performance-map](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png) and analyze the cause.
 
 ## 5. PD issues
 
