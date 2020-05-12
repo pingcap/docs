@@ -1,17 +1,17 @@
 ---
-title: TiDB Controller User Guide
-summary: Use TiDB Controller to obtain TiDB status information for debugging.
+title: TiDB Control User Guide
+summary: Use TiDB Control to obtain TiDB status information for debugging.
 category: reference
 ---
 
-# TiDB Controller User Guide
+# TiDB Control User Guide
 
-TiDB Controller is a command line tool of TiDB, usually used to obtain the status information of TiDB for debugging.
+TiDB Control is a command line tool of TiDB, usually used to obtain the status information of TiDB for debugging.
 
 ## Compile from source code
 
 - Compilation environment requirement: [Go](https://golang.org/) Version 1.7 or later
-- Compilation procedures: Go to the root directory of the [TiDB Controller project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
+- Compilation procedures: Go to the root directory of the [TiDB Control project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
 - Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
 
 ## Usage introduction
@@ -32,7 +32,9 @@ Usage example: `tidb-ctl schema in mysql -n db`
 
 ### Get help
 
-Use `tidb-ctl -h/--help` to get the help information. `tidb-ctl` consists of multiple layers of commands. You can use `-h/--help` to get the help information of `tidb-ctl` and all other subcommands.
+Use `tidb-ctl -h/--help` to get usage information.
+
+TiDB Control consists of multiple layers of commands. You can use `-h/--help` after each command/subcommand to get its respective usage information.
 
 ### Connect
 
@@ -42,7 +44,7 @@ tidb-ctl -H/--host {TiDB service address} -P/--port {TiDB service port}
 
 If you do not add an address or a port, the default value is used. The default address is `127.0.0.1` (service address must be the IP address); the default port is `10080`. Connection options are top-level options and apply to all of the following commands.
 
-Currently, TiDB Controller can obtain four categories of information using the following four commands:
+Currently, TiDB Control can obtain four categories of information using the following four commands:
 
 - `tidb-ctl mvcc`: MVCC information
 - `tidb-ctl region`: Region information
