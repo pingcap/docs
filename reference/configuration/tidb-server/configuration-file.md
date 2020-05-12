@@ -258,6 +258,10 @@ Configuration about performance.
 
 The Plan Cache configuration of the `prepare` statement.
 
+> **Warning:**
+>
+> This is still an experimental feature. It is recommended **not** to use this feature in the production environment.
+
 ### `enabled`
 
 - To enable Plan Cache of the `prepare` statement

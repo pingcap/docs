@@ -6,6 +6,10 @@ category: reference
 
 # Generated Columns
 
+> **Warning:**
+>
+> This is still an experimental feature. It is recommended **not** to use this feature in the production environment.
+
 TiDB supports generated columns as part of MySQL 5.7 compatibility. One of the primary use cases for generated columns is to extract data out of a JSON data type and enable it to be indexed.
 
 ## Index JSON using stored generated column
