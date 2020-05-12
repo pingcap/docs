@@ -12,11 +12,11 @@ This statement renames an existing table to a new name.
 
 **RenameTableStmt:**
 
-![RenameTableStmt](/media/sqlgram-v2.1/RenameTableStmt.png)
+![RenameTableStmt](/media/sqlgram/RenameTableStmt.png)
 
 **TableToTable:**
 
-![TableToTable](/media/sqlgram-v2.1/TableToTable.png)
+![TableToTable](/media/sqlgram/TableToTable.png)
 
 ## Examples
 

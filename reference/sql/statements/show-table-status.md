@@ -12,15 +12,15 @@ This statement shows various statistics about tables in TiDB. If the statistics 
 
 **ShowStmt:**
 
-![ShowStmt](/media/sqlgram-v2.1/ShowStmt.png)
+![ShowStmt](/media/sqlgram/ShowStmt.png)
 
 **ShowTargetFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram-v2.1/ShowTargetFilterable.png)
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
 **ShowDatabaseNameOpt:**
 
-![ShowDatabaseNameOpt](/media/sqlgram-v2.1/ShowDatabaseNameOpt.png)
+![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
 
 ## Examples
 

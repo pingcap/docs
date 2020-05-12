@@ -14,15 +14,15 @@ The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternat
 
 **ExplainSym:**
 
-![ExplainSym](/media/sqlgram-v2.1/ExplainSym.png)
+![ExplainSym](/media/sqlgram/ExplainSym.png)
 
 **ExplainStmt:**
 
-![ExplainStmt](/media/sqlgram-v2.1/ExplainStmt.png)
+![ExplainStmt](/media/sqlgram/ExplainStmt.png)
 
 **ExplainableStmt:**
 
-![ExplainableStmt](/media/sqlgram-v2.1/ExplainableStmt.png)
+![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
 
 ## Examples
 

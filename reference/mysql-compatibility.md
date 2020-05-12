@@ -59,7 +59,7 @@ Assume that you have a table with the auto-increment ID:
 {{< copyable "sql" >}}
 
 ```sql
-create table t(id int unique key AUTO_INCREMENT, c int);
+CREATE TABLE t(id int unique key AUTO_INCREMENT, c int);
 ```
 
 The principle of the auto-increment ID in TiDB is that each tidb-server instance caches a section of ID values (currently 30000 IDs are cached) for allocation and fetches the next section after this section is used up.
@@ -68,10 +68,33 @@ Assume that the cluster contains two tidb-server instances, namely Instance A an
 
 The operations are executed as follows:
 
-1. The client issues the `insert into t values (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
-2. The client issues the `insert into t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
+1. The client issues the `INSERT INTO t VALUES (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
+2. The client issues the `INSERT INTO t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
 Also, starting from TiDB 2.1.18, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+
+> **Note:**
+>
+> If the primary key is not specified, TiDB uses the `_tibd_rowid` column to identify rows. The values of the `_tibd_rowid` column and the auto-increment column (if there is) are assigned by the same allocator. If the auto-increment column is specified as the primary key, then TiDB uses this column to identify rows. Therefore, there might be the following situations.
+
+```sql
+mysql> create table t(id int unique key AUTO_INCREMENT);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into t values(),(),();
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select _tidb_rowid, id from t;
++-------------+------+
+| _tidb_rowid | id   |
++-------------+------+
+|           4 |    1 |
+|           5 |    2 |
+|           6 |    3 |
++-------------+------+
+3 rows in set (0.01 sec)
+```
 
 ### Performance schema
 

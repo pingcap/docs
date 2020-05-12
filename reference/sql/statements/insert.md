@@ -12,27 +12,27 @@ This statement inserts new rows into a table.
 
 **InsertIntoStmt:**
 
-![InsertIntoStmt](/media/sqlgram-v2.1/InsertIntoStmt.png)
+![InsertIntoStmt](/media/sqlgram/InsertIntoStmt.png)
 
 **PriorityOpt:**
 
-![PriorityOpt](/media/sqlgram-v2.1/PriorityOpt.png)
+![PriorityOpt](/media/sqlgram/PriorityOpt.png)
 
 **IgnoreOptional:**
 
-![IgnoreOptional](/media/sqlgram-v2.1/IgnoreOptional.png)
+![IgnoreOptional](/media/sqlgram/IgnoreOptional.png)
 
 **IntoOpt:**
 
-![IntoOpt](/media/sqlgram-v2.1/IntoOpt.png)
+![IntoOpt](/media/sqlgram/IntoOpt.png)
 
 **TableName:**
 
-![TableName](/media/sqlgram-v2.1/TableName.png)
+![TableName](/media/sqlgram/TableName.png)
 
 **InsertValues:**
 
-![InsertValues](/media/sqlgram-v2.1/InsertValues.png)
+![InsertValues](/media/sqlgram/InsertValues.png)
 
 ## Examples
 

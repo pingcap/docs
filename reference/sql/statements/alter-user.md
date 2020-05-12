@@ -12,15 +12,15 @@ This statement changes an existing user inside the TiDB privilege system. In the
 
 **AlterUserStmt:**
 
-![AlterUserStmt](/media/sqlgram-v2.1/AlterUserStmt.png)
+![AlterUserStmt](/media/sqlgram/AlterUserStmt.png)
 
 **UserSpecList:**
 
-![UserSpecList](/media/sqlgram-v2.1/UserSpecList.png)
+![UserSpecList](/media/sqlgram/UserSpecList.png)
 
 **UserSpec:**
 
-![UserSpec](/media/sqlgram-v2.1/UserSpec.png)
+![UserSpec](/media/sqlgram/UserSpec.png)
 
 ## Examples
 
