@@ -34,7 +34,7 @@ Regardless of data encryption method, data keys are encrypted using AES256 in GC
 To enable encryption, you can add the encryption section in TiKV's config file:
 
 ```
-[encryption]
+[security.encryption]
 data-encryption-method = aes128-ctr
 data-key-rotation-period = 7d
 ```
@@ -44,7 +44,7 @@ Possible values for `data-encryption-method` are "aes128-ctr", "aes-192-ctr", "a
 Master key has to be specified if encryption is enabled (i.e. `data-encryption-method` is not "plaintext"). To specify a AWS KMS CMK as master key, add the `encryption.master-key` section after the `encryption` section:
 
 ```
-[encryption.master-key]
+[security.encryption.master-key]
 type = "kms"
 key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
 region = "us-west-2"
@@ -56,7 +56,7 @@ The `key-id` specifies the key id for the KMS CMK. The `region` is the AWS regio
 To specify a master key that's stored in a file, the master key config would look like the following:
 
 ```
-[encryption.master-key]
+[security.encryption.master-key]
 type = "file"
 path = "/path/to/key/file"
 ```
@@ -76,12 +76,12 @@ Currently we don't support online master key rotation. Rotating master key would
 Here is an example config for rotating the KMS CMK:
 
 ```
-[encryption.master-key]
+[security.encryption.master-key]
 type = "kms"
 key-id = "50a0c603-1c6f-11e6-bb9e-3fadde80ce75"
 region = "us-west-2"
 
-[encryption.previous-master-key]
+[security.encryption.previous-master-key]
 type = "kms"
 key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
 region = "us-west-2"
