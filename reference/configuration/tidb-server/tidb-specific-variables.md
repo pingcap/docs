@@ -43,6 +43,41 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join.
 - When the aggregate operation is slow in query, you can set the variable value to 1.
 
+### tidb_opt_distinct_agg_push_down
+
+- Scope: SESSION
+- Default value: 0
+- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with `distinct` (such as `select count(distinct a) from t`) to Coprocessor.
+- When the aggregate function with the `distinct` operation is slow in the query, you can set the variable value to `1`.
+
+In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `disctinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
+
+```sql
+mysql> desc select count(distinct a) from test.t;
++-------------------------+----------+-----------+---------------+------------------------------------------+
+| id                      | estRows  | task      | access object | operator info                            |
++-------------------------+----------+-----------+---------------+------------------------------------------+
+| StreamAgg_6             | 1.00     | root      |               | funcs:count(distinct test.t.a)->Column#4 |
+| └─TableReader_10        | 10000.00 | root      |               | data:TableFullScan_9                     |
+|   └─TableFullScan_9     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo           |
++-------------------------+----------+-----------+---------------+------------------------------------------+
+3 rows in set (0.01 sec)
+
+mysql> set session tidb_opt_distinct_agg_push_down = 1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc select count(distinct a) from test.t;
++---------------------------+----------+-----------+---------------+------------------------------------------+
+| id                        | estRows  | task      | access object | operator info                            |
++---------------------------+----------+-----------+---------------+------------------------------------------+
+| HashAgg_8                 | 1.00     | root      |               | funcs:count(distinct test.t.a)->Column#3 |
+| └─TableReader_9           | 1.00     | root      |               | data:HashAgg_5                           |
+|   └─HashAgg_5             | 1.00     | cop[tikv] |               | group by:test.t.a,                       |
+|     └─TableFullScan_7     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo           |
++---------------------------+----------+-----------+---------------+------------------------------------------+
+4 rows in set (0.00 sec)
+```
+
 ### tidb_auto_analyze_ratio
 
 - Scope: GLOBAL
@@ -276,12 +311,13 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
 ### tidb_enable_table_partition
 
-- Scope: SESSION
-- Default value: "auto"
+- Scope: SESSION | GLOBAL
+- Default value: "on"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
     - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
-    - `auto` indicates enabling the `TABLE PARTITION` feature. Currently, it indicates enabling range partition and hash partition.
-    - `on` functions the same way as `auto` does.
+    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
+    - `auto` functions the same way as `on` does.
+
 - Currently, TiDB only supports range partition and hash partition.
 
 ### tidb_backoff_lock_fast
@@ -350,6 +386,14 @@ Usage of statements:
 
 - `CREATE TABLE`: `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
 - `ALTER TABLE`: `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`
+
+### tidb_row_format_version
+
+- Scope: GLOBAL
+- Default value: `2`
+- Controls the format version of the newly saved data in the table. In TiDB v4.0, the [new storage row format](https://github.com/pingcap/tidb/blob/master/docs/design/2018-07-19-row-format.md) version `2` is used by default to save new data.
+- If you upgrade from a TiDB version earlier than 4.0.0 to 4.0.0, the format version is not changed, and TiDB continues to use the old format of version `1` to write data to the table, which means that **only newly created clusters use the new data format by default**.
+- Note that modifying this variable does not affect the old data that has been saved, but applies the corresponding version format only to the newly written data after modifying this variable.
 
 ## tidb_slow_log_threshold
 

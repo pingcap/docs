@@ -6,15 +6,15 @@ category: reference
 
 # CLUSTER_HARDWARE
 
-The `CLUSTER_HARDWARE` hardware system table provides the hardware information of the server where each node of the cluster is located.
+The `CLUSTER_HARDWARE` hardware system table provides the hardware information of the server where each instance of the cluster is located.
 
 {{< copyable "sql" >}}
 
 ```sql
-desc cluster_hardware;
+desc information_schema.cluster_hardware;
 ```
 
-```
+```sql
 +-------------+--------------+------+------+---------+-------+
 | Field       | Type         | Null | Key  | Default | Extra |
 +-------------+--------------+------+------+---------+-------+
@@ -30,7 +30,7 @@ desc cluster_hardware;
 Field description:
 
 * `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/reference/system-databases/cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: Corresponds to the `STATUS_ADDRESS` field in the [`information_schema.cluster_info`](/reference/system-databases/cluster-info.md) cluster information table.
+* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/reference/system-databases/cluster-info.md) cluster information table.
 * `DEVICE_TYPE`: Hardware type. Currently, you can query the `cpu`, `memory`, `disk`, and `net` types.
 * `DEVICE_NAME`: Hardware name. The value of `DEVICE_NAME` varies with `DEVICE_TYPE`.
     * `cpu`: The hardware name is cpu.
@@ -45,15 +45,15 @@ The following example shows how to query the CPU information using the `CLUSTER_
 {{< copyable "sql" >}}
 
 ```sql
-select * from cluster_hardware where device_type='cpu' and device_name='cpu' and name like '%cores';
+select * from information_schema.cluster_hardware where device_type='cpu' and device_name='cpu' and name like '%cores';
 ```
 
-```
+```sql
 +------+-----------------+-------------+-------------+--------------------+-------+
 | TYPE | INSTANCE        | DEVICE_TYPE | DEVICE_NAME | NAME               | VALUE |
 +------+-----------------+-------------+-------------+--------------------+-------+
-| tidb | 127.0.0.1:10080 | cpu         | cpu         | cpu-logical-cores  | 8     |
-| tidb | 127.0.0.1:10080 | cpu         | cpu         | cpu-physical-cores | 4     |
+| tidb | 0.0.0.0:4000    | cpu         | cpu         | cpu-logical-cores  | 8     |
+| tidb | 0.0.0.0:4000    | cpu         | cpu         | cpu-physical-cores | 4     |
 | pd   | 127.0.0.1:2379  | cpu         | cpu         | cpu-logical-cores  | 8     |
 | pd   | 127.0.0.1:2379  | cpu         | cpu         | cpu-physical-cores | 4     |
 | tikv | 127.0.0.1:20160 | cpu         | cpu         | cpu-logical-cores  | 8     |
