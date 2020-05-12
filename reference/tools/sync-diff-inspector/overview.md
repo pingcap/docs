@@ -28,7 +28,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 * In TiDB and MySQL, `FLOAT`, `DOUBLE` and other floating-point types are implemented differently, so checksum might be calculated differently. If the data checks are inconsistent due to these data types, set `ignore-columns` to skip checking these columns.
 
-* Support checking tables that do not contain primary keys or unique indexes. However, if data is inconsistent, the SQL statements are probably not be able to repair the data correctly.
+* Support checking tables that do not contain the primary key or the unique index. However, if data is inconsistent, the generated SQL statements might not be able to repair the data correctly.
 
 ### Database privilege
 
