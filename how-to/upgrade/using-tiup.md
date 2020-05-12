@@ -116,7 +116,7 @@ After the import is complete, you can check the current cluster status by execut
 > - The configuration parameters in the original cluster have not been modified.
 > - You want to use the default parameters of `4.0` after the upgrade.
 
-1. Enter the `tidb-ansible / conf` configuration directory and confirm the modified parameters in the configuration template.
+1. Enter `~/.tiup/storage/cluster/clusters/{cluster_name}/config`, the backup directory of TiDB Ansible, and confirm the modified parameters in the configuration template.
 
 2. Enter the `vi` editing mode of the topology file:
 
@@ -126,7 +126,7 @@ After the import is complete, you can check the current cluster status by execut
     tiup cluster edit-config <cluster-name>
     ```
 
-3. See the configuration template format of [topology](https://github.com/pingcap-incubator/tiops/blob/master/topology.example.yaml) and fill in the modified parameters of the original cluster in the `server_configs` section of the topology file.
+3. See the configuration template format of [topology](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml) and fill in the modified parameters of the original cluster in the `server_configs` section of the topology file.
 
     Even if the label has been configured for the cluster, you also need to fill in the label in the configuration according to the format in the template. In later versions, the label will be automatically imported.
 
