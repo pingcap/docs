@@ -495,6 +495,10 @@ Configuration items related to Raftstore
 
 ### `use-delete-range`
 
+> **Warning:**
+>
+> This is still an experimental feature. It is recommended **not** to use this feature in the production environment.
+
 + Determines whether to delete data from the `rocksdb delete_range` interface
 + Default value: `false`
 
@@ -732,6 +736,10 @@ Configuration items related to RocksDB
 ## rocksdb.titan
 
 Configuration items related to Titan
+
+> **Warning:**
+>
+> This is still an experimental feature. It is recommended **not** to use this feature in the production environment.
 
 ### `enabled`
 
