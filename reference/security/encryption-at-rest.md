@@ -87,7 +87,17 @@ key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
 region = "us-west-2"
 ```
 
-### Caveat
+### Monitoring
+
+To monitor encryption-at-rest, if you deploy TiKV with Grafana, you can look at the "Encryption" pannel in "TiKV-Details" dashboard. There are a few metrics to look for:
+
+* Encryption initialized: 1 if encryption is initialized during TiKV startup, 0 otherwise. In case of master key rotation, after encryption is initialized, TiKV do not need access to the previous master key.
+* Encryption data keys: number of existings data keys. The number is bumped by 1 after each time data key rotation happened. Use this metrics to monitor if data key rotation works as expected.
+* Encrypted files: number of encrypted data files currently exists. Compare this number to existings data files in the data directory to estimate portion of data being encrypted, when turning on encryption for a previously unencrypted cluster.
+* Encryption meta file size: size of the encryption meta data files.
+* Read/Write encryption meta duration: the extra overhead for operate on encryption metadata.
+
+### Caveats
 
 The current version of TiKV encryption has some drawbacks that need to be noted when use. We are working actively to address those issues and improvments are in the pipe for future versions.
 
