@@ -32,13 +32,9 @@ Usage example: `tidb-ctl schema in mysql -n db`
 
 ### Get help
 
-<<<<<<< HEAD
-Use `tidb-ctl -h/--help` to get the help information. `tidb-ctl` consists of multiple layers of commands. You can use `-h/--help` to get the help information of `tidb-ctl` and all other subcommands.
-=======
 Use `tidb-ctl -h/--help` to get usage information.
 
 TiDB Control consists of multiple layers of commands. You can use `-h/--help` after each command/subcommand to get its respective usage information.
->>>>>>> 25fc1ef... reference: rename TiDB Controller to TiDB Control (#2304)
 
 ### Connect
 
