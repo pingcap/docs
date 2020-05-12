@@ -44,7 +44,7 @@ tidb-ctl -H/--host {TiDB service address} -P/--port {TiDB service port}
 
 If you do not add an address or a port, the default value is used. The default address is `127.0.0.1` (service address must be the IP address); the default port is `10080`. Connection options are top-level options and apply to all of the following commands.
 
-Currently, TiDB Controller can obtain four categories of information using the following four commands:
+Currently, TiDB Control can obtain four categories of information using the following four commands:
 
 - `tidb-ctl mvcc`: MVCC information
 - `tidb-ctl region`: Region information
