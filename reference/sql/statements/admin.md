@@ -108,22 +108,6 @@ mysql> admin show ddl jobs;
     * `rollingback`: it indicates that the operation has failed and is rolling back.
     * `cancelling`: it indicates that the operation is being cancelled. This state only occurs when you cancel DDL jobs using the `ADMIN CANCEL DDL JOBS` command.
 
-<<<<<<< HEAD
-- `ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...`: To view the original SQL statement of the DDL job corresponding to the `job_id`; the `job_id` only searches the running DDL job and the last ten results in the DDL history job queue
-- `ADMIN CANCEL DDL JOBS job_id [, job_id] ...`: To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled. If the operation fails to cancel the jobs, specific reasons are displayed.
-
-    > **Note:**
-    >
-    > Only this operation can cancel DDL jobs. All other operations and environment changes (such as machine restart and cluster restart) cannot cancel these jobs.
-    >
-    > This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement.
-    >
-    > If the jobs you want to cancel are finished, the cancellation operation fails.
-
-- `ADMIN CHECK TABLE tbl_name [, tbl_name] ...`: To check the consistency of all the data in the specified table and corresponding indexes. If the check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
-
-=======
->>>>>>> 8ffe5fb... sql: remove duplicate content (#2516)
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.
