@@ -97,6 +97,7 @@
     - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
     - [Upgrade Using TiDB Ansible](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
+    - [TiDB Troubleshooting Map](/how-to/troubleshoot/diagnose-map.md)
     - [Troubleshoot Cluster Setup](/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/how-to/troubleshoot/tidb-lightning.md)
 + Reference
@@ -249,7 +250,7 @@
     - [Constraints](/reference/sql/constraints.md)
     - [Generated Columns](/reference/sql/generated-columns.md)
     - [Partitioning](/reference/sql/partitioning.md)
-    - [Character Set](/reference/sql/character-set.md)
+    - [Character Set and Collation](/reference/sql/characterset-and-collation.md)
     - [SQL Mode](/reference/sql/sql-mode.md)
     - [SQL Diagnosis](/reference/system-databases/sql-diagnosis.md)
     - [Views](/reference/sql/views.md)
