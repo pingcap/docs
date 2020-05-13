@@ -1,5 +1,5 @@
 ---
-title: Enable TLS Authentication and encrypt the stored data
+title: Enable TLS Authentication and Encrypt the Stored Data
 summary: Learn how to enable TLS authentication and encrypt the stored data in a TiDB cluster.
 category: how-to
 ---
