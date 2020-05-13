@@ -12,7 +12,7 @@ TiKV supports encryption-at-rest starting from v4.0.0. The feature allows TiKV t
 
 Also from v4.0.0, BR supports S3 server-side encryption (SSE) when backing up to S3. A customer owned AWS KMS key can also be used together with S3 server-side encrytion.
 
-### Caveats
+## Caveats
 
 The current version of TiKV encryption has some drawbacks that we are working actively to address in the future versions.
 
