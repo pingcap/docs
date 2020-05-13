@@ -219,8 +219,8 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 Rules:
 
-+ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then `charset_name` and `collation_name` are used directly.
-+ Rule 2: If you specify `CHARACTER SET charset_name` but do not specify `COLLATE collation_name`, `charset_name` and the default collation of `charset_name` are used.
++ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then the `charset_name` character set and the `collation_name` collation are used directly.
++ Rule 2: If you specify `CHARACTER SET charset_name` but do not specify `COLLATE collation_name`, the `charset_name` character set and the default collation of `charset_name` are used.
 + Rule 3: If you specify neither `CHARACTER SET charset_name` nor `COLLATE collation_name`, the character set and collation given by the system variables `character_set_connection` and `collation_connection` are used.
 
 ## Client connection character set and collation
@@ -265,8 +265,8 @@ String > Column > Table > Database > Server > Cluster
 
 ## General rules on selecting character sets and collation
 
-+ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then `charset_name` and `collation_name` are used directly.
-+ Rule 2: If you specify `CHARACTER SET charset_name` and do not specify `COLLATE collation_name`, then `charset_name` and the default collation of `charset_name` are used.
++ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then the `charset_name` character set and the `collation_name` collation are used directly.
++ Rule 2: If you specify `CHARACTER SET charset_name` and do not specify `COLLATE collation_name`, then the `charset_name` character set and the default collation of `charset_name` are used.
 + Rule 3: If you specify neither `CHARACTER SET charset_name` nor `COLLATE collation_name`, the character set and collation with higher optimization levels are used.
 
 ## Validity check of characters
