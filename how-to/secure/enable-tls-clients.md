@@ -123,7 +123,7 @@ create user 'u1'@'%'  require x509;
 
 > **Note:**
 >
-> If the login user has configured using the [TiDB Certificate-Based Authentication for Login] (/reference/security/cert-based-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
+> If the login user has configured using the [TiDB Certificate-Based Authentication for Login](/reference/security/cert-based-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
 
 ## Check whether the current connection uses encryption
 
