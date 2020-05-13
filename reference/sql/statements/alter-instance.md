@@ -1,6 +1,6 @@
 ---
 title: ALTER INSTANCE
-summary: Learn the overview of the ALTER INSTANCE usage in TiDB.
+summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
 category: reference
 ---
 
