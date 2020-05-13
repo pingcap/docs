@@ -25,7 +25,6 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + `FOREIGN KEY` constraints
 + `FULLTEXT`/`SPATIAL` functions and indexes
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
-+ Collations other than `BINARY`
 + Add/drop primary key
 + SYS schema
 + Optimizer trace
@@ -68,6 +67,29 @@ The operations are executed as follows:
 
 Also, starting from TiDB 2.1.18 and 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
+> **Note:**
+>
+> If the primary key is not specified, TiDB uses the `_tibd_rowid` column to identify rows. The values of the `_tibd_rowid` column and the auto-increment column (if there is) are assigned by the same allocator. If the auto-increment column is specified as the primary key, then TiDB uses this column to identify rows. Therefore, there might be the following situations.
+
+```sql
+mysql> create table t(id int unique key AUTO_INCREMENT);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into t values(),(),();
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select _tidb_rowid, id from t;
++-------------+------+
+| _tidb_rowid | id   |
++-------------+------+
+|           4 |    1 |
+|           5 |    2 |
+|           6 |    3 |
++-------------+------+
+3 rows in set (0.01 sec)
+```
+
 ### Performance schema
 
 Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/how-to/monitor/monitor-a-cluster.md) for performance metrics instead.
@@ -89,7 +111,6 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
 + Add Index:
     - Does not support creating multiple indexes at the same time.
     - Does not support the `VISIBLE/INVISIBLE` index.
-    - Adding an index on a generated column via `ALTER TABLE` is not supported.
     - Other Index Type (HASH/BTREE/RTREE) is supported in syntax, but not applicable.
 + Add Column:
     - Does not support creating multiple columns at the same time.
@@ -99,7 +120,6 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`.
     - Does not support modifying the precision of `DECIMAL` data types.
     - Does not support changing the `UNSIGNED` attribute.
-    - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
 + `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
 + `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but it works differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
 + Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it's not possible to add multiple columns or indexes in a single statement.
@@ -246,14 +266,6 @@ Because they are built-in, named time zones in TiDB might behave slightly differ
 #### Zero month and zero day
 
 It is not recommended to unset the `NO_ZERO_DATE` and `NO_ZERO_IN_DATE` SQL modes, which are enabled by default in TiDB as in MySQL. While TiDB supports operating with these modes disabled, the TiKV coprocessor does not. Executing certain statements that push down date and time processing functions to TiKV might result in a statement error.
-
-#### Handling of space at the end of string line
-
-Currently, when inserting data, TiDB keeps the space at the end of the line for the `VARCHAR` type, and truncate the space for the `CHAR` type. In case there is no index, TiDB behaves exactly the same as MySQL. 
-
-If there is a `UNIQUE` index on the `VARCHAR` data, MySQL truncates the space at the end of the `VARCHAR` line before determining whether the data is duplicated, which is similar to the processing of the `CHAR` type, while TiDB keeps the space.
-
-When making a comparison, MySQL first truncates the constant and the space at the end of the column, while TiDB keeps them to enable exact comparison.
 
 ### Type system differences
 
