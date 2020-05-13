@@ -7,7 +7,7 @@ aliases: ['/docs/dev/how-to/maintain/backup-and-restore/br/']
 
 # Use BR to Back up and Restore Data
 
-Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/how-to/maintain/backup-and-restore/mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
+[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/how-to/maintain/backup-and-restore/mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
 
 ## Usage restrictions
 
@@ -262,7 +262,14 @@ To restore the cluster data, use the `br restore` command. You can add the `full
 
 > **Note:**
 >
-> If the backed up cluster does not have a network storage, before the restoration, copy the backup SST files to the path specified by `--storage` on each TiKV node.
+> If you use the local storage, you **must** copy all back up SST files to every TiKV node in the path specified by `--storage`.
+>
+> Even if each TiKV node eventually only need to read a part of the all SST files, they all need full access to the complete archive because:
+>
+> * Data are replicated into multiple peers. When ingesting SSTs, these files have to be present on *all* peers. This is unlike back up where reading from a single node is enough.
+> * Where each peer is scattered to during restore is random. We don't know in advance which node will read which file.
+>
+> These can be avoided using shared storage, e.g. mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file, so these caveats no longer apply.
 
 ### Restore all the backup data
 
