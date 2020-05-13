@@ -30,7 +30,7 @@ ALTER INSTANCE RELOAD TLS;
 
 ## MySQL compatibility
 
-The `ALTER INSTANCE RELOAD TLS` statement only supports reloading from the original configuration path. It dose not support the dynamic modification of the loading path, nor does it support dynamic enablement of the TLS encrypted connection feature when TiDB is started. This feature is disabled by default when you restart TiDB.
+The `ALTER INSTANCE RELOAD TLS` statement only supports reloading from the original configuration path. It does not support dynamically modifying the loading path or dynamically enabling the TLS encrypted connection feature when TiDB is started. This feature is disabled by default when you restart TiDB.
 
 ## See also
 
