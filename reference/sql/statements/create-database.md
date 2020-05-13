@@ -12,23 +12,23 @@ This statement creates a new database in TiDB. The MySQL terminology for 'databa
 
 **CreateDatabaseStmt:**
 
-![CreateDatabaseStmt](/media/sqlgram-dev/CreateDatabaseStmt.png)
+![CreateDatabaseStmt](/media/sqlgram/CreateDatabaseStmt.png)
 
 **DatabaseSym:**
 
-![DatabaseSym](/media/sqlgram-dev/DatabaseSym.png)
+![DatabaseSym](/media/sqlgram/DatabaseSym.png)
 
 **IfNotExists:**
 
-![IfNotExists](/media/sqlgram-dev/IfNotExists.png)
+![IfNotExists](/media/sqlgram/IfNotExists.png)
 
 **DBName:**
 
-![DBName](/media/sqlgram-dev/DBName.png)
+![DBName](/media/sqlgram/DBName.png)
 
 **DatabaseOptionListOpt:**
 
-![DatabaseOptionListOpt](/media/sqlgram-dev/DatabaseOptionListOpt.png)
+![DatabaseOptionListOpt](/media/sqlgram/DatabaseOptionListOpt.png)
 
 ## Syntax
 
@@ -45,7 +45,7 @@ create_specification:
 
 If you create an existing database and does not specify `IF NOT EXISTS`, an error is displayed.
 
-The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently, TiDB only supports some of the character sets and collations. For details, see [Character Set Support](/reference/sql/character-set.md).
+The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently, TiDB only supports some of the character sets and collations. For details, see [Character Set and Collation Support](/reference/sql/characterset-and-collation.md).
 
 ## Examples
 
