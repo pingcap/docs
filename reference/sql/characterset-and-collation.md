@@ -1,6 +1,6 @@
 ---
 title: Character Set and Collation
-summary: Learn about the supported character sets in TiDB.
+summary: Learn about the supported character sets and collations in TiDB.
 category: reference
 aliases: ['/docs/dev/reference/sql/character-set/']
 ---
@@ -34,7 +34,7 @@ SHOW CHARACTER SET;
 >
 > Each character set might correspond to multiple collations, but by default each character set corresponds to only one collation.
 
-You can use the following statement to view the collation (under the [new framework for collations](#new-framework-for-collations)) that corresponds to the character set.
+You can use the following statement to view the collations (under the [new framework for collations](#new-framework-for-collations)) that corresponds to the character set.
 
 {{< copyable "sql" >}}
 
@@ -146,6 +146,8 @@ SELECT @@character_set_database, @@collation_database;
 
 You can also see the two values in `INFORMATION_SCHEMA`:
 
+{{< copyable "sql" >}}
+
 ```sql
 SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
 FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'db_name';
@@ -177,11 +179,11 @@ CREATE TABLE t1(a int) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-The database character set and collation are used as the default values for table definitions if the table character set and collation are not specified in individual column definitions.
+If the table character set and collation are not specified, the database character set and collation are used as their default values.
 
 ## Column character set and collation
 
-See the following table for the character set and collation syntax for columns:
+You can use the following statement to specify the character set and collation for columns:
 
 ```sql
 col_name {CHAR | VARCHAR | TEXT} (col_length)
@@ -193,11 +195,11 @@ col_name {ENUM | SET} (val_list)
     [COLLATE collation_name]
 ```
 
-The table character set and collation are used as the default values for column definitions if the column character set and collation are not specified in individual column definitions.
+If the column character set and collation are not specified, the table character set and collation are used as their default values.
 
 ## String character sets and collation
 
-Each character literal in a string has a character set and a collation. When you use a string, this option is available:
+Each string corresponds to a character set and a collation. When you use a string, this option is available:
 
 {{< copyable "sql" >}}
 
@@ -207,6 +209,8 @@ Each character literal in a string has a character set and a collation. When you
 
 Example:
 
+{{< copyable "sql" >}}
+
 ```sql
 SELECT 'string';
 SELECT _utf8mb4'string';
@@ -215,17 +219,21 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 Rules:
 
-+ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then `CHARACTER SET charset_name` and `COLLATE collation_name` are used directly.
-+ Rule 2: If you specify `CHARACTER SET charset_name` but do not specify `COLLATE collation_name`, `CHARACTER SET charset_name` and the default collation of `CHARACTER SET charset_name` are used.
++ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then `charset_name` and `collation_name` are used directly.
++ Rule 2: If you specify `CHARACTER SET charset_name` but do not specify `COLLATE collation_name`, `charset_name` and the default collation of `charset_name` are used.
 + Rule 3: If you specify neither `CHARACTER SET charset_name` nor `COLLATE collation_name`, the character set and collation given by the system variables `character_set_connection` and `collation_connection` are used.
 
-## Connection character sets and collations
+## Client connection character set and collation
 
 + The server character set and collation are the values of the `character_set_server` and `collation_server` system variables.
 
-+ The character set and collation of the default database are the values of the `character_set_database` and `collation_database` system variables. You can use `character_set_connection` and `collation_connection` to specify the character set and collation for each connection. The `character_set_client` variable is to set the client character set. Before returning the result, the `character_set_results` system variable indicates the character set in which the server returns query results to the client, including the metadata of the result.
++ The character set and collation of the default database are the values of the `character_set_database` and `collation_database` system variables.
 
-You can use the following statement to specify a particular collation that is related to the client:
+You can use `character_set_connection` and `collation_connection` to specify the character set and collation for each connection. The `character_set_client` variable is to set the client character set.
+
+Before returning the result, the `character_set_results` system variable indicates the character set in which the server returns query results to the client, including the metadata of the result.
+
+You can use the following statement to set the character set and collation that is related to the client:
 
 + `SET NAMES 'charset_name' [COLLATE 'collation_name']`
 
@@ -257,25 +265,23 @@ String > Column > Table > Database > Server > Cluster
 
 ## General rules on selecting character sets and collation
 
-+ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then `CHARACTER SET charset_name` and `COLLATE collation_name` are used directly.
-+ Rule 2: If you specify `CHARACTER SET charset_name` and do not specify `COLLATE collation_name`, then `CHARACTER SET charset_name` and the default comparison collation of `CHARACTER SET charset_name` are used.
++ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then `charset_name` and `collation_name` are used directly.
++ Rule 2: If you specify `CHARACTER SET charset_name` and do not specify `COLLATE collation_name`, then `charset_name` and the default collation of `charset_name` are used.
 + Rule 3: If you specify neither `CHARACTER SET charset_name` nor `COLLATE collation_name`, the character set and collation with higher optimization levels are used.
 
 ## Validity check of characters
 
-For the specified `utf8` or `utf8mb4` character set, TiDB only supports the valid `utf8` character, and reports the `incorrect utf8 value` error when the character is invalid. This validity check of characters in TiDB is compatible with MySQL 8.0 but incompatible with MySQL 5.7 or earlier versions.
+If the specified character set is `utf8` or `utf8mb4`, TiDB only supports the valid `utf8` characters. For invalid characters, TiDB reports the `incorrect utf8 value` error. This validity check of characters in TiDB is compatible with MySQL 8.0 but incompatible with MySQL 5.7 or earlier versions.
 
 To disable this error reporting, use `set @@tidb_skip_utf8_check=1;` to skip the character check.
-
-For more information, see [Connection Character Sets and Collations in MySQL](https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html).
 
 ## Collation support framework
 
 The syntax support and semantic support for the collation are influenced by the [`new_collations_enabled_on_first_bootstrap`](/reference/configuration/tidb-server/configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item. The syntax support and semantic support are different. The former indicates that TiDB can parse and set collations. The latter indicates that TiDB can correctly use collations when comparing strings.
 
-Before v4.0, TiDB only supports syntactically parsing most of the MySQL collations but semantically takes all collations as binary collations, which is the [old framework for collations](#old-framework-for-collations).
+Before v4.0, TiDB provides only the [old framework for collations](#old-framework-for-collations). In this framework, TiDB supports syntactically parsing most of the MySQL collations but semantically takes all collations as binary collations.
 
-Since v4.0, TiDB supports semantically parsing different collations and strictly following the collations when comparing strings, which is the [new framework for collations](#new-framework-for-collations).
+Since v4.0, TiDB supports a [new framework for collations](#new-framework-for-collations). In this framework, TiDB semantically parses different collations and strictly follows the collations when comparing strings.
 
 ### Old framework for collations
 
