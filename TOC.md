@@ -11,6 +11,7 @@
     - [How to Test TiDB Using Sysbench](/benchmark/how-to-run-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/how-to-run-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/sysbench-v4.md)
+    - [TPC-C Performance Test - v4.0 vs. v3.0](/benchmark/tpcc-v2.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/add-index-with-load.md)
 - [Quick Start with TiDB](/quick-start-with-tidb.md)
@@ -97,6 +98,7 @@
     - [Upgrade Using TiUP (Recommended)](/how-to/upgrade/using-tiup.md)
     - [Upgrade Using TiDB Ansible](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
+    - [TiDB Troubleshooting Map](/how-to/troubleshoot/diagnose-map.md)
     - [Troubleshoot Cluster Setup](/how-to/troubleshoot/cluster-setup.md)
     - [Troubleshoot TiDB Lightning](/how-to/troubleshoot/tidb-lightning.md)
 + Reference
@@ -170,6 +172,7 @@
       - [`ADD INDEX`](/reference/sql/statements/add-index.md)
       - [`ADMIN`](/reference/sql/statements/admin.md)
       - [`ALTER DATABASE`](/reference/sql/statements/alter-database.md)
+      - [`ALTER INSTANCE`](/reference/sql/statements/alter-instance.md)
       - [`ALTER TABLE`](/reference/sql/statements/alter-table.md)
       - [`ALTER USER`](/reference/sql/statements/alter-user.md)
       - [`ANALYZE TABLE`](/reference/sql/statements/analyze-table.md)
@@ -249,7 +252,7 @@
     - [Constraints](/reference/sql/constraints.md)
     - [Generated Columns](/reference/sql/generated-columns.md)
     - [Partitioning](/reference/sql/partitioning.md)
-    - [Character Set](/reference/sql/character-set.md)
+    - [Character Set and Collation](/reference/sql/characterset-and-collation.md)
     - [SQL Mode](/reference/sql/sql-mode.md)
     - [SQL Diagnosis](/reference/system-databases/sql-diagnosis.md)
     - [Views](/reference/sql/views.md)
