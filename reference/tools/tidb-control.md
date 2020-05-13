@@ -46,7 +46,7 @@ TiDB Control consists of multiple layers of commands. You can use `-h/--help` af
 - `--pdhost`: PD Service address (default 127.0.0.1)
 - `--pdport`: PD Service port (default 2379)
 - `--ca`: The CA file path used on the TLS connection
-- `--ssl-key`: The key file path used on the TLS connection
+- `--ssl-key`: The key file path used for the TLS connection
 - `--ssl-cert`: The certificate file path used for the TLS connection
 
 `--pdhost` and `--pdport` are mainly used in the `etcd` subcommand. For example, `tidb-ctl etcd ddlinfo`. If you do not specify the address and the port, the following default value is used:
