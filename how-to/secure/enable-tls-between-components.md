@@ -12,16 +12,16 @@ This document introduces how to enable TLS authentication and encrypt the stored
 
 This section describes how to enable TLS authentication in a TiDB cluster. TLS authentication can be applied to the following scenarios:
 
-- The **mutual authentication** between TiDB components, including the authentication among TiDB, TiKV, and PD, between TiDB Control and TiDB, between TiKV Control and TiKV, between PD Control and PD, between TiKV peers, and between PD peers. Once enabled, the mutual authentication applies to all components, rather than only part of the components.
+- The **mutual authentication** between TiDB components, including the authentication among TiDB, TiKV, and PD; the authentication between TiDB Control and TiDB, between TiKV Control and TiKV, between PD Control and PD; the authentication between TiKV peers, and between PD peers. Once enabled, the mutual authentication applies to all components, rather than to part of the components.
 - The **one-way** and **mutual authentication** between the TiDB server and the MySQL Client.
 
 > **Note:**
 >
-> The authentication between the MySQL Client and the TiDB server involves one set of certificates, while the authentication among TiDB components uses another set of certificates.
+> The authentication between the MySQL Client and the TiDB server uses one set of certificates, while the authentication among TiDB components uses another set of certificates.
 
 ## Enable mutual TLS authentication among TiDB components
 
-1. Prepare certificates
+1. Prepare certificates.
 
     It is recommended to prepare a server certificate for TiDB, TiKV, and PD separately. Make sure that these components can authenticate each other. The clients of TiDB, TiKV, and PD share one client certificate.
 
@@ -29,7 +29,7 @@ This section describes how to enable TLS authentication in a TiDB cluster. TLS a
 
     If you choose `cfssl`, you can refer to [generating self-signed certificates](/how-to/secure/generate-self-signed-certificates.md).
 
-2. Configure certificates
+2. Configure certificates.
 
    To enable mutual authentication among TiDB components, configure the certificates of TiDB, TiKV, and PD as follows.
 
@@ -73,7 +73,7 @@ This section describes how to enable TLS authentication in a TiDB cluster. TLS a
         key-path = "/path/to/pd-server-key.pem"
         ```
 
-    Now mutual authentication among TiDB components is enabled.
+    After certificates are configured as above, mutual authentication among TiDB components is enabled.
 
     > **Note:**
     >
@@ -97,9 +97,9 @@ This section describes how to enable TLS authentication in a TiDB cluster. TLS a
     ./tikv-ctl --host="127.0.0.1:20160" --ca-path="/path/to/ca.pem" --cert-path="/path/to/client.pem" --key-path="/path/to/clinet-key.pem"
     ```
 
-3. Configure Common Name
+3. Configure Common Name.
 
-    The Common Name is used for caller verification. In general, the callee needs to verify the caller's identity, apart from the key, the certificates, and the CA provided by the caller. For example, TiKV can only be accessed by TiDB, and other visitors are blocked even though they have legitimate certificates. It is recommended to identify the certificate user using `Common Name` when generating the certificate, and to check the caller's identity by configuring the `Common Name` list for the callee.
+    The Common Name is used for caller verification. In general, the callee needs to verify the caller's identity, in addition to verifying the key, the certificates, and the CA provided by the caller. For example, TiKV can only be accessed by TiDB, and other visitors are blocked even though they have legitimate certificates. It is recommended to mark the certificate user identity using `Common Name` when generating the certificate, and to check the caller's identity by configuring the `Common Name` list for the callee.
 
     - TiDB
 
@@ -133,21 +133,21 @@ This section describes how to enable TLS authentication in a TiDB cluster. TLS a
         cert-allowed-cn = ["TiKV-Server", "TiDB-Server", "PD-Control"]
         ```
 
-4. Reload certificates
+4. Reload certificates.
 
-    To reload the certificates and the keys, TiDB, PD, and TiKV reread the current certificates and the key files each time a new connection is created. Currently, you cannot reload CA.
+    To reload the certificates and the keys, TiDB, PD, and TiKV reread the current certificates and the key files each time a new connection is created. Currently, you cannot reload the CA certificate. 
 
 ## Enable TLS authentication between the MySQL client and TiDB server
 
-You can refer to [Use Encrypted Connections](/how-to/secure/enable-tls-clients.md).
+Refer to [Use Encrypted Connections](/how-to/secure/enable-tls-clients.md).
 
 ## Encrypt stored data
 
-For a TiDB cluster, users' data are stored in TiKV. The TiDB cluster encrypts these data once you configure the encrypted storage feature in TiKV. This section introduces how to configure the encrypted feature in TiKV.
+In a TiDB cluster, user data is stored in TiKV. Once you configure the encrypted storage feature in TiKV, the TiDB cluster encrypts this data. This section introduces how to configure the data encryption feature in TiKV.
 
 1. Generate the token file.
 
-    The token file stores the keys used to encrypt users' data and to decrypt the encrypted data.
+    The token file stores the keys used to encrypt the user data and to decrypt the encrypted data.
 
     {{< copyable "shell-regular" >}}
 
@@ -163,18 +163,18 @@ For a TiDB cluster, users' data are stored in TiKV. The TiDB cluster encrypts th
 
     ```toml
     [security]
-    # Cipher file 的存储路径
+    # Storage path of the Cipher file.
     cipher-file = "/path/to/cipher-file-256"
     ```
 
 > **Note:**
 >
-> When you import data into a cluster using [Lightning](/reference/tools/tidb-lightning/overview.md), if the target cluster has enabled the encrypted storage feature, the SST files generated by Lightning must be encrypted.
+> When you import data into a cluster using [TiDB Lightning](/reference/tools/tidb-lightning/overview.md), if the storage encryption feature is enabled in the target cluster, the SST files generated by TiDB Lightning must be encrypted.
 
 ### Limitations
 
-The following are some limitations of the encrypted storage feature:
+The limitations of the storage encryption feature are as follows:
 
-- If a cluster has not enabled the feature before, you cannot enable this feature.
-- If a cluster has enabled the feature, you cannot disable this feature.
+- If the feature has not been enabled in the cluster before, you cannot enable this feature.
+- If the feature is enabled in the cluster, you cannot disable this feature.
 - You cannot enable the feature for some TiKV instances while disabling it for other instances in one cluster. You can only enable or disable this feature for all TiKV instances. This is because if you enable the encrypted storage feature, data are encrypted during data migration.
