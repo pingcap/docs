@@ -155,4 +155,3 @@ When a PD cluster is created, a new cluster ID is generated. You can determine t
 ### An error `dial tcp 10.0.1.13:2379: connect: connection refused` is returned when you execute pd-recover
 
 The PD service is required when you execute pd-recover. Deploy and start the PD cluster before you use pd-recover.
-
