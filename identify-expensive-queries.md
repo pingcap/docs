@@ -5,11 +5,11 @@ category: how to
 
 # Identify Expensive Queries
 
-TiDB allows you to identify expensive queries during SQL execution, so you can diagnose and improve the performance of SQL execution. Specifically, TiDB prints the information about statements whose execution time exceeds [`tidb_expensive_query_time_threshold`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_expensive_query_time_threshold) (60 seconds by default) or memory usage exceeds [`mem-quota-query`](/reference/configuration/tidb-server/configuration-file.md#mem-quota-query) (32 GB by default) to the [tidb-server log file](/reference/configuration/tidb-server/configuration-file.md#logfile) ("tidb.log" by default).
+TiDB allows you to identify expensive queries during SQL execution, so you can diagnose and improve the performance of SQL execution. Specifically, TiDB prints the information about statements whose execution time exceeds [`tidb_expensive_query_time_threshold`](/tidb-specific-system-variables.md#tidb_expensive_query_time_threshold) (60 seconds by default) or memory usage exceeds [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query) (32 GB by default) to the [tidb-server log file](/tidb-configuration-file.md#logfile) ("tidb.log" by default).
 
 > **Note:**
 >
-> The expensive query log differs from the [slow query log](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md) in this way: TiDB prints statement information to the expensive query log **as soon as** the statement exceeds the threshold of resource usage (execution time or memory usage); while TiDB prints statement information to the slow query log **after** the statement execution.
+> The expensive query log differs from the [slow query log](/identify-slow-queries.md) in this way: TiDB prints statement information to the expensive query log **as soon as** the statement exceeds the threshold of resource usage (execution time or memory usage); while TiDB prints statement information to the slow query log **after** the statement execution.
 
 ## Expensive query log example
 

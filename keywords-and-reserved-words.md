@@ -29,7 +29,7 @@ mysql> CREATE TABLE test.select (BEGIN int, END int);
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-The following list shows the keywords and reserved words in TiDB. Most of the reserved words are labelled with `(R)`. [Window functions'](/reference/sql/functions-and-operators/window-functions.md) reserved words are labelled with `(R-Window)`.
+The following list shows the keywords and reserved words in TiDB. Most of the reserved words are labelled with `(R)`. [Window functions'](/functions-and-operators/window-functions.md) reserved words are labelled with `(R-Window)`.
 
 {{< tabs-panel "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" >}}
 

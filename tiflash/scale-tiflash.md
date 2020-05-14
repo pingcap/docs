@@ -95,7 +95,7 @@ The following example shows how to scale in a TiFlash node if you stop the TiFla
 >
 > The offline process described in this section does not delete the data on the offline node. If you need to take the node online again, delete the data manually.
 
-1. Take down the node to be scaled in. See [Take a TiFlash node down](/reference/tiflash/maintain.md#take-a-tiflash-node-down) for details.
+1. Take down the node to be scaled in. See [Take a TiFlash node down](/tiflash/maintain-tiflash.md#take-a-tiflash-node-down) for details.
 
 2. Check whether the node has been offline successfully using Grafana or pd-ctl (the offline process takes some time).
 

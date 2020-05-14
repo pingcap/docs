@@ -10,7 +10,7 @@ category: how-to
 
 PD schedules according to the topology of the TiKV cluster to maximize the TiKV's capability for disaster recovery.
 
-Before you begin, see [Deploy TiDB Using TiDB Ansible (Recommended)](/how-to/deploy/orchestrated/ansible.md) and [Deploy TiDB Using Docker](/how-to/deploy/orchestrated/docker.md).
+Before you begin, see [Deploy TiDB Using TiDB Ansible (Recommended)](/online-deployment-using-ansible.md) and [Deploy TiDB Using Docker](/test-deployment-using-docker.md).
 
 ## TiKV reports the topological information
 

@@ -6,9 +6,9 @@ category: reference
 
 # Transactions
 
-TiDB supports complete distributed transactions. Both [optimistic transaction model](/reference/transactions/transaction-optimistic.md) and [pessimistic transaction model](/reference/transactions/transaction-pessimistic.md)(introduced in TiDB 3.0) are available. This document introduces transaction-related statements, explicit and implicit transactions, isolation levels, lazy check for constraints, and transaction sizes.
+TiDB supports complete distributed transactions. Both [optimistic transaction model](/optimistic-transaction.md) and [pessimistic transaction model](/pessimistic-transaction.md)(introduced in TiDB 3.0) are available. This document introduces transaction-related statements, explicit and implicit transactions, isolation levels, lazy check for constraints, and transaction sizes.
 
-The common variables include [`autocommit`](#autocommit), [`tidb_disable_txn_auto_retry`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_disable_txn_auto_retry), and [`tidb_retry_limit`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_retry_limit).
+The common variables include [`autocommit`](#autocommit), [`tidb_disable_txn_auto_retry`](/tidb-specific-system-variables.md#tidb_disable_txn_auto_retry), and [`tidb_retry_limit`](/tidb-specific-system-variables.md#tidb_retry_limit).
 
 ## Common syntax
 
@@ -110,7 +110,7 @@ SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 ## Lazy check of constraints
 
-**Lazy check** means that by default TiDB will not check [primary key](/reference/sql/constraints.md#primary-key) or [unique constraints](/reference/sql/constraints.md#unique) when an `INSERT` statement is executed, but instead checks when the transaction is committed. In TiDB, the lazy check is performed for values written by ordinary `INSERT` statements.
+**Lazy check** means that by default TiDB will not check [primary key](/constraints.md#primary-key) or [unique constraints](/constraints.md#unique) when an `INSERT` statement is executed, but instead checks when the transaction is committed. In TiDB, the lazy check is performed for values written by ordinary `INSERT` statements.
 
 For example:
 

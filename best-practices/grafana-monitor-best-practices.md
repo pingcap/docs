@@ -6,7 +6,7 @@ category: reference
 
 # Best Practices for Monitoring TiDB Using Grafana
 
-When you [deploy a TiDB cluster using TiDB Ansible](/how-to/deploy/orchestrated/ansible.md), a set of [Grafana + Prometheus monitoring platform](/how-to/monitor/overview.md) is deployed simultaneously to collect and display metrics for various components and machines in the TiDB cluster. This document describes best practices for monitoring TiDB using Grafana. It aims to help you use metrics to analyze the status of the TiDB cluster and diagnose problems.
+When you [deploy a TiDB cluster using TiDB Ansible](/online-deployment-using-ansible.md), a set of [Grafana + Prometheus monitoring platform](/tidb-monitoring-framework.md) is deployed simultaneously to collect and display metrics for various components and machines in the TiDB cluster. This document describes best practices for monitoring TiDB using Grafana. It aims to help you use metrics to analyze the status of the TiDB cluster and diagnose problems.
 
 ## Monitoring architecture
 

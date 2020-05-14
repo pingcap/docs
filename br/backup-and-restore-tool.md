@@ -7,7 +7,7 @@ aliases: ['/docs/v3.1/how-to/maintain/backup-and-restore/br/']
 
 # Use BR to Back up and Restore Data
 
-[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/how-to/maintain/backup-and-restore/mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
+[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/backup-and-restore-using-mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
 
 ## Usage restrictions
 
@@ -23,7 +23,7 @@ aliases: ['/docs/v3.1/how-to/maintain/backup-and-restore/br/']
 
 ## Download Binary
 
-Refer to the [download page](/reference/tools/download.md#br-backup-and-restore) for more information.
+Refer to the [download page](/download-ecosystem-tools.md#br-backup-and-restore) for more information.
 
 ## Implementation principles
 
@@ -80,7 +80,7 @@ The SST file is named in the format of `storeID_regionID_regionEpoch_keyHash_cf`
 - `regionID` is the Region ID;
 - `regionEpoch` is the version number of the Region;
 - `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures the uniqueness of a key;
-- `cf` indicates the [Column Family](/reference/performance/tune-tikv.md#tune-tikv-performance) of RocksDB (`default` or `write` by default).
+- `cf` indicates the [Column Family](/tune-tikv-performance.md#tune-tikv-performance) of RocksDB (`default` or `write` by default).
 
 ### Restoration principle
 
@@ -154,7 +154,7 @@ Each of the above three sub-commands might still include the following three sub
 
 To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
 
-If the backup time might exceed the [`tikv_gc_life_time`](/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration.
+If the backup time might exceed the [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration.
 
 For example, set `tikv_gc_life_time` to `720h`:
 
@@ -222,7 +222,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-In the above command, `--db` specifies the name of the database to be backed up. For descriptions of other options, see [Back up all the cluster data](/reference/tools/br/br.md#back-up-all-the-cluster-data).
+In the above command, `--db` specifies the name of the database to be backed up. For descriptions of other options, see [Back up all the cluster data](/br/backup-and-restore-tool.md#back-up-all-the-cluster-data).
 
 A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
 
@@ -351,7 +351,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 - It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
 - It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
 
-For more recommended practices of using BR, refer to [BR Usage Scenarios](/reference/tools/br/use-cases.md).
+For more recommended practices of using BR, refer to [BR Usage Scenarios](/br/backup-and-restore-use-cases.md).
 
 ## Examples
 

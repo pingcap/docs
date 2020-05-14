@@ -96,7 +96,7 @@ enabled = true
 
 ### Configure TiKV
 
-You can use the basic configuration at the beginning. Then after the test is run, you can adjust it based on the metrics on Grafana and the [TiKV Tuning Instructions](/reference/performance/tune-tikv.md).
+You can use the basic configuration at the beginning. Then after the test is run, you can adjust it based on the metrics on Grafana and the [TiKV Tuning Instructions](/tune-tikv-performance.md).
 
 ### Configure BenchmarkSQL
 
@@ -178,11 +178,11 @@ Follow the steps below to use TiDB Lightning to load data:
 
 3. Use Lightning to load data.
 
-    To load data using Lightning, see [TiDB Lightning Deployment](/reference/tools/tidb-lightning/deployment.md). The following steps introduce how to use TiDB Ansible to deploy Lightning and use Lightning to load data.
+    To load data using Lightning, see [TiDB Lightning Deployment](/tidb-lightning/deploy-tidb-lightning.md). The following steps introduce how to use TiDB Ansible to deploy Lightning and use Lightning to load data.
 
     1. Edit `inventory.ini`.
 
-        It is recommended to manually specify the deployed IP address, the port, and the deployment directory to avoid anomalies caused by conflicts. For the disk space of `import_dir`, see [TiDB Lightning Deployment](/reference/tools/tidb-lightning/deployment.md). `data_source_dir` refers to the directory where the CSV files are stored as mentioned before.
+        It is recommended to manually specify the deployed IP address, the port, and the deployment directory to avoid anomalies caused by conflicts. For the disk space of `import_dir`, see [TiDB Lightning Deployment](/tidb-lightning/deploy-tidb-lightning.md). `data_source_dir` refers to the directory where the CSV files are stored as mentioned before.
 
         ```ini
         [importer_server]

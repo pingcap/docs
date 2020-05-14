@@ -27,11 +27,11 @@ It is recommended to use an SSD disk to buffer the real-time data being replicat
 
 For other hard disks, you can use multiple HDDs or regular SSDs. A better hard disk will surely bring better performance.
 
-TiFlash supports [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment), so there is no need to use RAID.
+TiFlash supports [multi-disk deployment](/tiflash/tiflash-configuration.md#multi-disk-deployment), so there is no need to use RAID.
 
 ### TiFlash and TiKV are deployed on the same node
 
-See [Hardware recommendations for TiKV server](/how-to/deploy/hardware-recommendations.md#server-recommendations), and increase the memory capacity and the number of and CPU cores as needed.
+See [Hardware recommendations for TiKV server](/hardware-and-software-requirements.md#server-recommendations), and increase the memory capacity and the number of and CPU cores as needed.
 
 It is **not** recommended to deploy TiFlash and TiKV on the same disk to prevent mutual interference.
 
@@ -75,9 +75,9 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
     ansible-playbook local_prepare.yml
     ```
 
-3. Edit the `inventory.ini` configuration file. In addition to [configuring for TiDB cluster deployment](/how-to/deploy/orchestrated/ansible.md#step-9-edit-the-inventoryini-file-to-orchestrate-the-tidb-cluster), you also need to specify the IPs of your TiFlash servers under the `[tiflash_servers]` section (currently only IPs are supported; domain names are not supported).
+3. Edit the `inventory.ini` configuration file. In addition to [configuring for TiDB cluster deployment](/online-deployment-using-ansible.md#step-9-edit-the-inventoryini-file-to-orchestrate-the-tidb-cluster), you also need to specify the IPs of your TiFlash servers under the `[tiflash_servers]` section (currently only IPs are supported; domain names are not supported).
 
-    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment), separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
+    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want [multi-disk deployment](/tiflash/tiflash-configuration.md#multi-disk-deployment), separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
 
     {{< copyable "" >}}
 
@@ -86,22 +86,22 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
     192.168.1.1 data_dir=/data1/tiflash/data,/data2/tiflash/data
     ```
 
-4. Complete the [remaining steps](/how-to/deploy/orchestrated/ansible.md#step-10-edit-variables-in-the-inventoryini-file) of the TiDB Ansible deployment process.
+4. Complete the [remaining steps](/online-deployment-using-ansible.md#step-10-edit-variables-in-the-inventoryini-file) of the TiDB Ansible deployment process.
 
 5. To verify that TiFlash has been successfully deployed:
 
-    1. Execute the `pd-ctl store http://your-pd-address` command in [pd-ctl](/reference/tools/pd-control.md) (`resources/bin` in the tidb-ansible directory includes the pd-ctl binary file).
+    1. Execute the `pd-ctl store http://your-pd-address` command in [pd-ctl](/pd-control.md) (`resources/bin` in the tidb-ansible directory includes the pd-ctl binary file).
     2. Observe that the status of the deployed TiFlash instance is "Up".
 
 ### Add TiFlash component to an existing TiDB cluster
 
-1. First, confirm that your current TiDB version supports TiFlash, otherwise you need to upgrade your TiDB cluster to 3.1 rc or higher according to [TiDB Upgrade Guide](/how-to/upgrade/from-previous-version.md).
+1. First, confirm that your current TiDB version supports TiFlash, otherwise you need to upgrade your TiDB cluster to 3.1 rc or higher according to [TiDB Upgrade Guide](/upgrade-tidb-using-ansible.md).
 
-2. Execute the `config set enable-placement-rules true` command in [pd-ctl](/reference/tools/pd-control.md) (`resources/bin` in the tidb-ansible directory includes the pd-ctl binary file) to enable PD's Placement Rules feature.
+2. Execute the `config set enable-placement-rules true` command in [pd-ctl](/pd-control.md) (`resources/bin` in the tidb-ansible directory includes the pd-ctl binary file) to enable PD's Placement Rules feature.
 
 3. Edit the `inventory.ini` configuration file. You need to specify the IPs of your TiFlash servers under the `[tiflash_servers]` section (currently only IPs are supported; domain names are not supported).
 
-    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment) separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
+    If you want to customize the deployment directory, configure the `data_dir` parameter. If you want [multi-disk deployment](/tiflash/tiflash-configuration.md#multi-disk-deployment) separate the deployment directories with commas (note that the parent directory of each `data_dir` directory needs to give the `tidb` user write permissions). For example:
 
     {{< copyable "" >}}
 
@@ -127,5 +127,5 @@ For fresh TiFlash deployment, it is recommended to deploy TiFlash by downloading
 
 5. To verify that TiFlash has been successfully deployed:
 
-    1. Execute the `pd-ctl store http://your-pd-address` command in [pd-ctl](/reference/tools/pd-control.md) (`resources/bin` in the tidb-ansible directory includes the pd-ctl binary file).
+    1. Execute the `pd-ctl store http://your-pd-address` command in [pd-ctl](/pd-control.md) (`resources/bin` in the tidb-ansible directory includes the pd-ctl binary file).
     2. Observe that the status of the deployed TiFlash instance is "Up".

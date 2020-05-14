@@ -8,11 +8,11 @@ category: how-to
 
 This page shows you how to manually deploy a multi-node TiDB cluster on multiple machines using Docker.
 
-To learn more, see [TiDB architecture](/architecture.md) and [Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
+To learn more, see [TiDB architecture](/architecture.md) and [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
 > **Warning:**
 >
-> This is for testing only. DO NOT USE in production! Please deploy TiDB with [our Ansible solution](/how-to/deploy/orchestrated/ansible.md) or [TiDB Operator in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-operator/) in production.
+> This is for testing only. DO NOT USE in production! Please deploy TiDB with [our Ansible solution](/online-deployment-using-ansible.md) or [TiDB Operator in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-operator/) in production.
 
 ## Preparation
 
