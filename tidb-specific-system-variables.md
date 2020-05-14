@@ -240,7 +240,7 @@ set @@global.tidb_distsql_scan_concurrency = 10
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    For more details, see [limits of retry](/reference/transactions/transaction-optimistic.md#limits-of-retry).
+    For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
 
 ### tidb_backoff_weight
 

@@ -68,13 +68,13 @@ If you have sufficient machines, you can deploy multiple Lightning/Importer serv
 > - `tikv-importer` stores intermediate data on the RAM to speed up the import process. The typical memory usage can be calculated by using **(`max-open-engines` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
 
 Additionally, the target TiKV cluster should have enough space to absorb the new data.
-Besides [the standard requirements](/how-to/deploy/hardware-recommendations.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/tidb.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/tidb-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
 ## Export data
 
-Use the [`mydumper` tool](/reference/tools/mydumper.md) to export data from MySQL by using the following command:
+Use the [`mydumper` tool](/mydumper-overview.md) to export data from MySQL by using the following command:
 
 ```sh
 ./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 256 -B test -T t1,t2 --skip-tz-utc -o /data/my_database/
@@ -88,7 +88,7 @@ In this command,
 - `-F 256`: means a table is partitioned into chunks and one chunk is 256 MB.
 - `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine, and to disable automatic conversion.
 
-If the data source consists of CSV files, see [CSV support](/reference/tools/tidb-lightning/csv.md) for configuration.
+If the data source consists of CSV files, see [CSV support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md) for configuration.
 
 ## Deploy TiDB Lightning
 
@@ -99,7 +99,7 @@ This section describes two deployment methods of TiDB Lightning:
 
 ### Deploy TiDB Lightning using TiDB Ansible
 
-You can deploy TiDB Lightning using TiDB Ansible together with the [deployment of the TiDB cluster itself using TiDB Ansible](/how-to/deploy/orchestrated/ansible.md).
+You can deploy TiDB Lightning using TiDB Ansible together with the [deployment of the TiDB cluster itself using TiDB Ansible](/online-deployment-using-ansible.md).
 
 1. Edit `inventory.ini` to add the addresses of the `tidb-lightning` and `tikv-importer` servers.
 
@@ -182,7 +182,7 @@ You can find deployment instructions in [TiDB Quick Start Guide](https://pingcap
 
 #### Step 2: Download the TiDB Lightning installation package
 
-Refer to the [TiDB enterprise tools download page](/reference/tools/download.md#tidb-lightning) to download the TiDB Lightning package (choose the same version as that of the TiDB cluster).
+Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package (choose the same version as that of the TiDB cluster).
 
 #### Step 3: Start `tikv-importer`
 
@@ -216,7 +216,7 @@ Refer to the [TiDB enterprise tools download page](/reference/tools/download.md#
     import-dir = "/mnt/ssd/data.import/"
     ```
 
-    The above only shows the essential settings. See the [Configuration](/reference/tools/tidb-lightning/config.md#tikv-importer) section for the full list of settings.
+    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tikv-importer) section for the full list of settings.
 
 3. Run `tikv-importer`.
 
@@ -262,7 +262,7 @@ Refer to the [TiDB enterprise tools download page](/reference/tools/download.md#
     ```
 
     The above only shows the essential settings.
-    See the [Configuration](/reference/tools/tidb-lightning/config.md#tidb-lightning-global) section for the full list of settings.
+    See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
 
 4. Run `tidb-lightning`.
 

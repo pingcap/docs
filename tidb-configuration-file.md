@@ -8,7 +8,7 @@ category: deployment
 
 # TiDB Configuration File Description
 
-The TiDB configuration file supports more options than command line options. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/reference/configuration/tidb-server/configuration.md).
+The TiDB configuration file supports more options than command line options. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
 
 ### `split-table`
 
