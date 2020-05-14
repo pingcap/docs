@@ -80,7 +80,7 @@
     - [Identify Slow Queries](/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
-    - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
+    - [Scale a TiDB Cluster](/horizontal-scale.md)
   + Upgrade
     - [Upgrade to TiDB 2.1](/upgrade-tidb-using-ansible.md)
   - Troubleshoot
