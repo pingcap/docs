@@ -59,7 +59,7 @@ However, TiDB transactions also have the following disadvantages:
 * In need of a centralized version manager
 * OOM (out of memory) when extensive data is written in the memory
 
-To avoid potential problems in application, refer to [transaction sizes](/reference/transactions/overview.md#transaction-size) to see more details.
+To avoid potential problems in application, refer to [transaction sizes](/transaction-overview.md#transaction-size) to see more details.
 
 ## Transaction retries
 
@@ -113,7 +113,7 @@ You can enable the automatic retry in either session level or global level:
 
 ### Limits of retry
 
-By default, TiDB will not retry transactions because this might lead to lost updates and damaged [`REPEATABLE READ` isolation](/reference/transactions/transaction-isolation.md).
+By default, TiDB will not retry transactions because this might lead to lost updates and damaged [`REPEATABLE READ` isolation](/transaction-isolation-levels.md).
 
 The reason can be observed from the procedures of retry:
 

@@ -6,7 +6,7 @@ category: how-to
 
 # Identify Slow Queries
 
-To help users identify slow queries, analyze and improve the performance of SQL execution, TiDB outputs the statements whose execution time exceeds [slow-threshold](/reference/configuration/tidb-server/configuration-file.md#slow-threshold) (The default value is 300 milliseconds) to [slow-query-file](/reference/configuration/tidb-server/configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
+To help users identify slow queries, analyze and improve the performance of SQL execution, TiDB outputs the statements whose execution time exceeds [slow-threshold](/tidb-configuration-file.md#slow-threshold) (The default value is 300 milliseconds) to [slow-query-file](/tidb-configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
 
 ## Usage example
 
@@ -75,7 +75,7 @@ TiKV Coprocessor Task fields:
 
 ## Memory mapping in slow log
 
-You can query the contents of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/reference/system-databases/information-schema.md#information-schema).
+You can query the contents of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/system-tables/system-table-information-schema.md#information-schema).
 
 > **Note:**
 >

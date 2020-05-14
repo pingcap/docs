@@ -21,7 +21,7 @@ TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REP
 
 > **Note:**
 >
-> In the default configuration of TiDB v2.1, the automatic transaction retry is enabled. For additional context on this feature and how to disable it, see [automatic retry](/reference/transactions/transaction-optimistic.md#automatic-retry).
+> In the default configuration of TiDB v2.1, the automatic transaction retry is enabled. For additional context on this feature and how to disable it, see [automatic retry](/optimistic-transaction.md#automatic-retry).
 
 ## Repeatable Read
 

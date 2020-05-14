@@ -9,7 +9,7 @@ aliases: ['/docs/v2.1/how-to/get-started/local-cluster/install-from-binary/']
 
 This guide provides installation instructions for all TiDB components on a single developer machine. It is intended for evaluation purposes, and does not match the recommended usage for production systems.
 
-See also [testing environment](/how-to/deploy/from-tarball/testing-environment.md) and [production environment](/how-to/deploy/from-tarball/production-environment.md) deployment.
+See also [testing environment](/test-deployment-from-binary-tarball.md) and [production environment](/production-deployment-from-binary-tarball.md) deployment.
 
 The following local TCP ports will be used:
 
@@ -37,7 +37,7 @@ sudo cp /tmp/tidb.conf /etc/security/limits.d/
 sudo sysctl -w fs.file-max=1000000
 ```
 
-See the [production deployment](/how-to/deploy/from-tarball/production-environment.md) optional kernel tuning parameters.
+See the [production deployment](/production-deployment-from-binary-tarball.md) optional kernel tuning parameters.
 
 ## Create a database running user account
 

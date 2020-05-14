@@ -53,4 +53,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [GRANT](/reference/sql/statements/grant-privileges.md)
+* [GRANT](/sql-statements/sql-statement-grant-privileges.md)

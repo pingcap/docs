@@ -10,11 +10,11 @@ category: reference
 
 [Mydumper](https://github.com/pingcap/mydumper) is a fork project optimized for TiDB. It is recommended to use this tool for logical backups of TiDB.
 
-It can be [downloaded](/reference/tools/download.md) as part of the Enterprise Tools package.
+It can be [downloaded](/download-ecosystem-tools.md) as part of the Enterprise Tools package.
 
 ### What enhancements does it contain over regular Mydumper?
 
-+ To ensure backup consistency for TiDB, this optimized Mydumper tool sets the value of [tidb_snapshot](/how-to/get-started/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the point in time when the data is backed up instead of using `FLUSH TABLES WITH READ LOCK`.
++ To ensure backup consistency for TiDB, this optimized Mydumper tool sets the value of [tidb_snapshot](/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the point in time when the data is backed up instead of using `FLUSH TABLES WITH READ LOCK`.
 
 + This tool uses the hidden `_tidb_rowid` column of TiDB to optimize the performance of concurrently exporting data from a single table.
 

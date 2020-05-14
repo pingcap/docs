@@ -10,7 +10,7 @@ This document collects the available downloads for most officially maintained ve
 
 ## TiDB Binlog
 
-If you want to download the latest version of [TiDB Binlog](/reference/tidb-binlog/overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
+If you want to download the latest version of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
 
 In addition, the Kafka version of TiDB Binlog is also provided.
 
@@ -25,7 +25,7 @@ In addition, the Kafka version of TiDB Binlog is also provided.
 
 ## TiDB Lightning
 
-Download [TiDB Lightning](/reference/tools/tidb-lightning/overview.md) by using the download link in the following table:
+Download [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) by using the download link in the following table:
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
@@ -49,7 +49,7 @@ Download [DM](https://pingcap.com/docs/tidb-data-migration/stable/overview/) by 
 
 ## Syncer, Loader, and Mydumper
 
-If you want to download the latest version of [Syncer](/reference/tools/syncer.md), [Loader](/reference/tools/loader.md), or [Mydumper](/reference/tools/mydumper.md), directly download the tidb-enterprise-tools package, because all these tools are included in this package.
+If you want to download the latest version of [Syncer](/syncer-overview.md), [Loader](/loader-overview.md), or [Mydumper](/mydumper-overview.md), directly download the tidb-enterprise-tools package, because all these tools are included in this package.
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
@@ -61,4 +61,4 @@ This enterprise tools package includes all the following tools:
 - Loader
 - Mydumper
 - ddl_checker
-- [sync-diff-inspector](/reference/tools/sync-diff-inspector/overview.md)
+- [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)
