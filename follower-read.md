@@ -2,6 +2,7 @@
 title: Follower Read
 summary: This document describes the use and implementation of Follower Read.
 category: reference
+aliases: ['/docs/stable/reference/performance/follower-read/']
 ---
 
 # Follower Read

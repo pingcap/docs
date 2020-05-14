@@ -2,6 +2,7 @@
 title: Literal Values
 summary: Learn how to use various literal values.
 category: reference
+aliases: ['/docs/stable/reference/sql/language-structure/literal-values/']
 ---
 
 # Literal Values

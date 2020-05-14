@@ -2,6 +2,7 @@
 title: Create a Private Mirror
 summary: Learn how to create a private mirror.
 category: tools
+aliases: ['/docs/stable/reference/tools/tiup/mirrors/']
 ---
 
 # Create a Private Mirror

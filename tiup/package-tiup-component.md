@@ -2,6 +2,7 @@
 title: Package a Component
 summary: Learn how to package a component.
 category: tools
+aliases: ['/docs/stable/reference/tools/tiup/package-component/']
 ---
 
 # Package a Component

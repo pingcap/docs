@@ -2,6 +2,7 @@
 title: Identify Slow Queries
 summary: Use the slow query log to identify problematic SQL statements.
 category: how-to
+aliases: ['/docs/stable/how-to/maintain/identify-abnormal-queries/identify-slow-queries/']
 ---
 
 # Identify Slow Queries

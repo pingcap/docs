@@ -2,6 +2,7 @@
 title: TiDB Binlog Overview
 summary: Learn overview of the cluster version of TiDB Binlog.
 category: reference
+aliases: ['/docs/stable/reference/tidb-binlog/overview/']
 ---
 
 # TiDB Binlog Cluster Overview

@@ -2,6 +2,7 @@
 title: Configure TiFlash
 summary: Learn how to configure TiFlash.
 category: reference
+aliases: ['/docs/stable/reference/tiflash/configuration/']
 ---
 
 # Configure TiFlash

@@ -2,6 +2,7 @@
 title: CLUSTER_LOAD
 summary: Learn the `CLUSTER_LOAD` cluster load table.
 category: reference
+aliases: ['/docs/stable/reference/system-databases/cluster-load/']
 ---
 
 # CLUSTER_LOAD

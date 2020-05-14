@@ -2,6 +2,7 @@
 title: Configuration Options
 summary: Learn the configuration options in TiDB.
 category: reference
+aliases: ['/docs/stable/reference/configuration/tidb-server/configuration/']
 ---
 
 # Configuration Options
