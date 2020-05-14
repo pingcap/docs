@@ -2,6 +2,7 @@
 title: TiDB Control User Guide
 summary: Use TiDB Control to obtain TiDB status information for debugging.
 category: reference
+aliases: ['/docs/v2.1/reference/tools/tidb-control/']
 ---
 
 # TiDB Control User Guide

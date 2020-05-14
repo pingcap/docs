@@ -2,7 +2,7 @@
 title: TiDB 2.1 Upgrade Guide
 summary: Learn how to upgrade from TiDB 2.0 (TiDB 2.0.1 or later versions) or TiDB 2.1 RC version to TiDB 2.1 GA version.
 category: how-to
-aliases: ['/docs/v2.1/how-to/upgrade/rolling-updates-with-ansible/']
+aliases: ['/docs/v2.1/how-to/upgrade/from-previous-version/','/docs/v2.1/how-to/upgrade/rolling-updates-with-ansible/']
 ---
 
 # TiDB 2.1 Upgrade Guide
