@@ -194,7 +194,7 @@ You can configure this parameter in either of the following ways:
 
 > **Note:**
 >
-> The feature that enables TiFlash to support the new framework for collations in TiDB is in development. Currently, if you enable the [new framework for collations](character-set-and-collation.md#new-framework-for-collations) in TiDB, none of the expressions can be pushed down. This restriction will be removed in later versions.
+> The feature that enables TiFlash to support the new framework for collations in TiDB is in development. Currently, if you enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) in TiDB, none of the expressions can be pushed down. This restriction will be removed in later versions.
 
 TiFlash mainly supports predicate and aggregate push-down calculations. Push-down calculations can help TiDB perform distributed acceleration. Currently, table joins and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in later versions.
 
