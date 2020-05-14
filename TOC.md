@@ -84,7 +84,7 @@
     - [Identify Expensive Queries](/how-to/maintain/identify-abnormal-queries/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/how-to/scale/with-ansible.md)
-    - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
+    - [Scale a TiDB Cluster](/horizontal-scale.md)
   + Upgrade
     - [Upgrade to TiDB 3.0](/how-to/upgrade/from-previous-version.md)
   - Troubleshoot
