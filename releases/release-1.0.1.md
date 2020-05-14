@@ -1,6 +1,7 @@
 ---
 title: TiDB 1.0.1 Release Notes
 category: Releases
+aliases: ['/docs/v3.1/releases/101/']
 ---
 
 # TiDB 1.0.1 Release Notes

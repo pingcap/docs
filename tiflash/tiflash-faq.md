@@ -2,6 +2,7 @@
 title: TiFlash FAQ
 summary: Learn the frequently asked questions (FAQs) and answers about TiFlash.
 category: faq
+aliases: ['/docs/v3.1/reference/tiflash/faq/']
 ---
 
 # TiFlash FAQ

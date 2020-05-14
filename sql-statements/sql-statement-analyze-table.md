@@ -2,6 +2,7 @@
 title: ANALYZE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of ANALYZE TABLE for the TiDB database.
 category: reference
+aliases: ['/docs/v3.1/reference/sql/statements/analyze-table/']
 ---
 
 # ANALYZE TABLE

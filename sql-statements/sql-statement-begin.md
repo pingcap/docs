@@ -2,6 +2,7 @@
 title: BEGIN | TiDB SQL Statement Reference
 summary: An overview of the usage of BEGIN for the TiDB database.
 category: reference
+aliases: ['/docs/v3.1/reference/sql/statements/begin/']
 ---
 
 # BEGIN

@@ -2,6 +2,7 @@
 title: String types
 summary: Learn about the string types supported in TiDB.
 category: reference
+aliases: ['/docs/v3.1/reference/sql/data-types/string/']
 ---
 
 # String Types

@@ -2,6 +2,7 @@
 title: ALTER INSTANCE
 summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
 category: reference
+aliases: ['/docs/v3.1/reference/sql/statements/alter-instance/']
 ---
 
 # ALTER INSTANCE

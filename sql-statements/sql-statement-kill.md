@@ -2,6 +2,7 @@
 title: KILL [TIDB] | TiDB SQL Statement Reference
 summary: An overview of the usage of KILL [TIDB] for the TiDB database.
 category: reference
+aliases: ['/docs/v3.1/reference/sql/statements/kill/']
 ---
 
 # KILL [TIDB]

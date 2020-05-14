@@ -2,6 +2,7 @@
 title: START TRANSACTION | TiDB SQL Statement Reference
 summary: An overview of the usage of START TRANSACTION for the TiDB database.
 category: reference
+aliases: ['/docs/v3.1/reference/sql/statements/start-transaction/']
 ---
 
 # START TRANSACTION
