@@ -44,4 +44,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW COLLATION](/reference/sql/statements/show-collation.md)
+* [SHOW COLLATION](/sql-statements/sql-statement-show-collation.md)

@@ -61,7 +61,7 @@ TiDB Ansible version: 3.0.8
     - Make the `tidb_enable_table_partition` variable support `GLOBAL SCOPE` [#14091](https://github.com/pingcap/tidb/pull/14091)
     - Fix the issue that the user privilege might be missing or mistakenly added because the newly added privilege is not correctly granted to the corresponding user when a new privilege is added [#14178](https://github.com/pingcap/tidb/pull/14178)
     - Fix the issue that the `CheckStreamTimeoutLoop` goroutine might leak because `rpcClient` does not close when the TiKV server is disconnected [#14227](https://github.com/pingcap/tidb/pull/14227)
-    - Support certificate-based authentication ([User document](/reference/security/cert-based-authentication.md)) [#13955](https://github.com/pingcap/tidb/pull/13955)
+    - Support certificate-based authentication ([User document](/certificate-authentication.md)) [#13955](https://github.com/pingcap/tidb/pull/13955)
 + Transaction
     - Update the default value of the `tidb_txn_mode` variable from `""` to `"pessimistic"` when a new cluster is created [#14171](https://github.com/pingcap/tidb/pull/14171)
     - Fix the issue that the lock waiting time is too long for a pessimistic transaction because the lock waiting time for a single statement is not reset when a transaction is retried [#13990](https://github.com/pingcap/tidb/pull/13990)

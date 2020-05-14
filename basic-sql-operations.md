@@ -7,7 +7,7 @@ aliases: ['/docs/try-tidb']
 
 # Explore SQL with TiDB
 
-TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](/reference/mysql-compatibility.md#unsupported-features).
+TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
 To experiment with SQL and test out TiDB compatibility with MySQL queries, you can [run TiDB directly in your web browser without installing it](https://tour.tidb.io/). You can also first deploy a TiDB cluster and then run SQL statements in it.
 

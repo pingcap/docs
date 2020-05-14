@@ -6,7 +6,7 @@ category: reference
 
 # MODIFY COLUMN
 
-The `ALTER TABLE.. MODIFY COLUMN` statement modifies a column on an existing table. The modification can include changing the data type and attributes. To rename at the same time, use the [`CHANGE COLUMN`](/reference/sql/statements/change-column.md) statement instead.
+The `ALTER TABLE.. MODIFY COLUMN` statement modifies a column on an existing table. The modification can include changing the data type and attributes. To rename at the same time, use the [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement instead.
 
 ## Synopsis
 
@@ -69,8 +69,8 @@ ERROR 1105 (HY000): can't run multi schema change
 
 ## See also
 
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
-* [ADD COLUMN](/reference/sql/statements/add-column.md)
-* [DROP COLUMN](/reference/sql/statements/drop-column.md)
-* [CHANGE COLUMN](/reference/sql/statements/change-column.md)
+* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+* [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+* [CHANGE COLUMN](/sql-statements/sql-statement-change-column.md)
