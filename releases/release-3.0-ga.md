@@ -118,8 +118,8 @@ On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible versio
 
 ## PD
 
-- Support re-creating a cluster from a single node
-- Migrate Region metadata from etcd to the go-leveldb storage engine to solve the storage bottleneck in etcd for large-scale clusters
++ Support re-creating a cluster from a single node
++ Migrate Region metadata from etcd to the go-leveldb storage engine to solve the storage bottleneck in etcd for large-scale clusters
 + API
     - Add the `remove-tombstone` API to clear Tombstone stores
     - Add the `ScanRegions` API to batch query Region information
@@ -147,18 +147,18 @@ On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible versio
 
 ## TiKV
 
-- Support distributed GC and concurrent lock resolving for improved GC performance
-- Support reversed `raw_scan` and `raw_batch_scan`
-- Support Multi-thread Raftstore and Multi-thread Apply to improve scalabilities, concurrency capacity, and resource usage within a single node. Performance improves by 70% under the same level of pressure
-- Support batch receiving and sending Raft messages, improving TPS by 7% for write intensive scenarios
-- Support checking RocksDB Level 0 files before applying snapshots to avoid write stall
-- Introduce Titan, a key-value plugin that improves write performance for scenarios with value sizes greater than 1KiB, and relieves write amplification in certain degrees
-- Support the pessimistic transaction model (**Experimental**)
-- Support getting monitoring information via HTTP
-- Modify the semantics of `Insert` to allow Prewrite to succeed only when there is no Key
-- Develop a unified log format specification with restructured log system to facilitate collection and analysis by tools
-- Add performance metrics related to configuration information and key bound crossing
-- Support Local Reader in RawKV to improve performance
++ Support distributed GC and concurrent lock resolving for improved GC performance
++ Support reversed `raw_scan` and `raw_batch_scan`
++ Support Multi-thread Raftstore and Multi-thread Apply to improve scalabilities, concurrency capacity, and resource usage within a single node. Performance improves by 70% under the same level of pressure
++ Support batch receiving and sending Raft messages, improving TPS by 7% for write intensive scenarios
++ Support checking RocksDB Level 0 files before applying snapshots to avoid write stall
++ Introduce Titan, a key-value plugin that improves write performance for scenarios with value sizes greater than 1KiB, and relieves write amplification in certain degrees
++ Support the pessimistic transaction model (**Experimental**)
++ Support getting monitoring information via HTTP
++ Modify the semantics of `Insert` to allow Prewrite to succeed only when there is no Key
++ Develop a unified log format specification with restructured log system to facilitate collection and analysis by tools
++ Add performance metrics related to configuration information and key bound crossing
++ Support Local Reader in RawKV to improve performance
 + Engine
     - Optimize memory management to reduce memory allocation and copying for `Iterator Key Bound Option`
     - Support `block cache` sharing among different column families

@@ -13,7 +13,7 @@ On November 13, 2017, TiDB 1.0.2 is released with the following updates:
 - Support the `Alter Table Add Column (ColumnDef ColumnPosition)` syntax
 - Optimize the queries whose `where` conditions are contradictory
 - Optimize the `Add Index` operation to rectify the progress and reduce repetitive operations
-- Optimize the ` Index Look Join` operator to accelerate the query speed for small data size
+- Optimize the `Index Look Join` operator to accelerate the query speed for small data size
 - Fix the issue with prefix index judgment
 
 ## Placement Driver (PD)
