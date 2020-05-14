@@ -10,7 +10,7 @@ The `ALTER INSTANCE` statement is used to make changes to a single TiDB instance
 
 ## RELOAD TLS
 
-You can execute the `ALTER INSTANCE RELOAD TLS` statement to reload the certificate ([`ssl-cert`](/reference/configuration/tidb-server/configuration-file.md#ssl-cert)), the key ([`ssl-key`](/reference/configuration/tidb-server/configuration-file.md#ssl-key)), and the CA ([`ssl-ca`](/reference/configuration/tidb-server/configuration-file.md#ssl-ca)) from the original configuration path.
+You can execute the `ALTER INSTANCE RELOAD TLS` statement to reload the certificate ([`ssl-cert`](/tidb-configuration-file.md#ssl-cert)), the key ([`ssl-key`](/tidb-configuration-file.md#ssl-key)), and the CA ([`ssl-ca`](/tidb-configuration-file.md#ssl-ca)) from the original configuration path.
 
 The newly loaded certificate, key, and CA take effect on the connection that is established after the statement is successfully executed. The connection established before this statement execution is not affected.
 
@@ -34,4 +34,4 @@ The `ALTER INSTANCE RELOAD TLS` statement only supports reloading from the origi
 
 ## See also
 
-[Enable Client TLS](/how-to/secure/enable-tls-clients.md).
+[Enable Client TLS](/encrypted-connections-with-tls-protocols.md).

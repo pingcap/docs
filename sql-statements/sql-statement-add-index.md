@@ -68,13 +68,13 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding multiple indexes at the same time is currently not supported.
-* Adding the primary key constraint to a table is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/reference/configuration/tidb-server/configuration-file.md#alter-primary-key).
+* Adding the primary key constraint to a table is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/tidb-configuration-file.md#alter-primary-key).
 
 ## See also
 
-* [CREATE INDEX](/reference/sql/statements/create-index.md)
-* [DROP INDEX](/reference/sql/statements/drop-index.md)
-* [RENAME INDEX](/reference/sql/statements/rename-index.md)
-* [ADD COLUMN](/reference/sql/statements/add-column.md)
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [EXPLAIN](/reference/sql/statements/explain.md)
+* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+* [EXPLAIN](/sql-statements/sql-statement-explain.md)

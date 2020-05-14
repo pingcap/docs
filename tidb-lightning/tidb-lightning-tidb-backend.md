@@ -21,7 +21,7 @@ The TiDB-backend requires `tidb-lightning` to encode these data into SQL `INSERT
 
 ## Deployment for TiDB-backend
 
-When using the TiDB-backend, you no longer need `tikv-importer`. Compared with the [standard deployment procedure](/reference/tools/tidb-lightning/deployment.md), the TiDB-backend deployment has the following two differences:
+When using the TiDB-backend, you no longer need `tikv-importer`. Compared with the [standard deployment procedure](/tidb-lightning/deploy-tidb-lightning.md), the TiDB-backend deployment has the following two differences:
 
 * Steps involving `tikv-importer` can all be skipped.
 * The configuration must be changed to indicate the TiDB-backend is used.
@@ -96,7 +96,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 
 ## Migrating from Loader to TiDB Lightning TiDB-backend
 
-TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](/reference/tools/loader.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/reference/tools/tidb-lightning/config.md).
+TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](/loader-overview.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
 
 <table>
 <thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thread>

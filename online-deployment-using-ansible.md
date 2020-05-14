@@ -18,18 +18,18 @@ You can use the TiDB Ansible configuration file to set up the cluster topology a
 
 - Initialize operating system parameters
 - Deploy the whole TiDB cluster
-- [Start the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#start-a-cluster)
-- [Stop the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#stop-a-cluster)
-- [Modify component configuration](/how-to/upgrade/from-previous-version.md#edit-the-configuration-file-of-tidb-cluster-components)
-- [Scale the TiDB cluster](/how-to/scale/with-ansible.md)
-- [Upgrade the component version](/how-to/upgrade/from-previous-version.md#step-5-perform-a-rolling-update-to-tidb-cluster-components)
-- [Enable the cluster binlog](/reference/tidb-binlog/overview.md)
-- [Clean up data of the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#clean-up-cluster-data)
-- [Destroy the TiDB cluster](/how-to/deploy/orchestrated/ansible-operations.md#destroy-a-cluster)
+- [Start the TiDB cluster](/maintain-tidb-using-ansible.md#start-a-cluster)
+- [Stop the TiDB cluster](/maintain-tidb-using-ansible.md#stop-a-cluster)
+- [Modify component configuration](/upgrade-tidb-using-ansible.md#edit-the-configuration-file-of-tidb-cluster-components)
+- [Scale the TiDB cluster](/scale-tidb-using-ansible.md)
+- [Upgrade the component version](/upgrade-tidb-using-ansible.md#step-5-perform-a-rolling-update-to-tidb-cluster-components)
+- [Enable the cluster binlog](/tidb-binlog/tidb-binlog-overview.md)
+- [Clean up data of the TiDB cluster](/maintain-tidb-using-ansible.md#clean-up-cluster-data)
+- [Destroy the TiDB cluster](/maintain-tidb-using-ansible.md#destroy-a-cluster)
 
 > **Note:**
 >
-> For production environments, it is recommended that you deploy TiDB [using TiUP](/how-to/deploy/orchestrated/tiup.md). You can also deploy TiDB using TiDB Ansible. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
+> For production environments, it is recommended that you deploy TiDB [using TiUP](/production-deployment-using-tiup.md). You can also deploy TiDB using TiDB Ansible. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/deploy-test-cluster-using-docker-compose.md) on a single machine.
 
 ## Prepare
 
@@ -39,14 +39,14 @@ Before you start, make sure you have:
 
     - 4 or more machines
 
-        A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
+        A standard TiDB cluster contains 6 machines. You can use 4 machines for testing. For more details, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
     - x86_64 architecture (AMD64) with CentOS 7.3 (64 bit) or later; Or x86_64 architecture (ARM64) with CentOS 7.6 1810 or later.
     - Network between machines
 
     > **Note:**
     >
-    > When you deploy TiDB using TiDB Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/how-to/get-started/deploy-tidb-from-docker-compose.md) on a single machine.
+    > When you deploy TiDB using TiDB Ansible, **use SSD disks for the data directory of TiKV and PD nodes**. Otherwise, it cannot pass the check. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/deploy-test-cluster-using-docker-compose.md) on a single machine.
 
 2. A Control Machine that meets the following requirements:
 
@@ -449,7 +449,7 @@ You can choose one of the following two types of cluster topology according to y
 
 - [The cluster topology of a single TiKV instance on each TiKV node](#option-1-use-the-cluster-topology-of-a-single-tikv-instance-on-each-tikv-node)
 
-    In most cases, it is recommended to deploy one TiKV instance on each TiKV node for better performance. However, if the CPU and memory of your TiKV machines are much better than the required in [Hardware and Software Requirements](/how-to/deploy/hardware-recommendations.md), and you have more than two disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 TiKV instances on a single TiKV node.
+    In most cases, it is recommended to deploy one TiKV instance on each TiKV node for better performance. However, if the CPU and memory of your TiKV machines are much better than the required in [Hardware and Software Requirements](/hardware-and-software-requirements.md), and you have more than two disks in one node or the capacity of one SSD is larger than 2 TB, you can deploy no more than 2 TiKV instances on a single TiKV node.
 
 - [The cluster topology of multiple TiKV instances on each TiKV node](#option-2-use-the-cluster-topology-of-multiple-tikv-instances-on-each-tikv-node)
 
@@ -623,8 +623,8 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | cpu_architecture | CPU architecture. `amd64` by default, `arm64` optional |
 | tidb_version | the version of TiDB, configured by default in TiDB Ansible branches |
 | process_supervision | the supervision way of processes, `systemd` by default, `supervise` optional |
-| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/how-to/configure/time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
-| enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](/how-to/deploy/hardware-recommendations.md#network-requirements) to the white list |
+| timezone | the global default time zone configured when a new TiDB cluster bootstrap is initialized; you can edit it later using the global `time_zone` system variable and the session `time_zone` system variable as described in [Time Zone Support](/configure-time-zone.md); the default value is `Asia/Shanghai` and see [the list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for more optional values |
+| enable_firewalld | to enable the firewall, closed by default; to enable it, add the ports in [network requirements](/hardware-and-software-requirements.md#network-requirements) to the white list |
 | enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
 | set_hostname | to edit the hostname of the managed node based on the IP, False by default |
 | enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |

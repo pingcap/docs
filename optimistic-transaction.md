@@ -13,7 +13,7 @@ In TiDB's optimistic transaction model, the two-phase commit begins right after 
 
 > **Note:**
 >
-> Starting from v3.0.8, TiDB uses the [pessimistic transaction model](/reference/transactions/transaction-pessimistic.md) by default. However, this does not affect your clusters if you upgrading from v3.0.7 or earlier to v3.0.8 (and later). In other words, **only newly created clusters default to using the pessimistic transaction model**.
+> Starting from v3.0.8, TiDB uses the [pessimistic transaction model](/pessimistic-transaction.md) by default. However, this does not affect your clusters if you upgrading from v3.0.7 or earlier to v3.0.8 (and later). In other words, **only newly created clusters default to using the pessimistic transaction model**.
 
 ## Principles of optimistic transactions
 
@@ -63,7 +63,7 @@ However, TiDB transactions also have the following disadvantages:
 * In need of a centralized version manager
 * OOM (out of memory) when extensive data is written in the memory
 
-To avoid potential problems in application, refer to [transaction sizes](/reference/transactions/overview.md#transaction-size) to see more details.
+To avoid potential problems in application, refer to [transaction sizes](/transaction-overview.md#transaction-size) to see more details.
 
 ## Transaction retries
 
@@ -117,7 +117,7 @@ You can enable the automatic retry in either session level or global level:
 
 ### Limits of retry
 
-By default, TiDB will not retry transactions because this might lead to lost updates and damaged [`REPEATABLE READ` isolation](/reference/transactions/transaction-isolation.md).
+By default, TiDB will not retry transactions because this might lead to lost updates and damaged [`REPEATABLE READ` isolation](/transaction-isolation-levels.md).
 
 The reason can be observed from the procedures of retry:
 

@@ -47,19 +47,19 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 * TiDB uses the built-in Pump Client to send the binlog to each Pump
 * Pump stores binlogs and sends the binlogs to Drainer in order
 * Drainer reads binlogs of each Pump, merges and sorts the binlogs, and sends the binlogs downstream
-* Drainer supports [relay log](/reference/tidb-binlog/relay-log.md). By the relay log, Drainer ensures that the downstream clusters are in a consistent state.
+* Drainer supports [relay log](/tidb-binlog/tidb-binlog-relay-log.md). By the relay log, Drainer ensures that the downstream clusters are in a consistent state.
 
 ## Notes
 
 * You need to use TiDB v2.0.8-binlog, v2.1.0-rc.5 or a later version. Older versions of TiDB cluster are not compatible with the cluster version of TiDB Binlog.
 
-* Drainer supports replicating binlogs to MySQL, TiDB, Kafka or local files. If you need to replicate binlogs to other Drainer unsuppored destinations, you can set Drainer to replicate the binlog to Kafka and read the data in Kafka for customized processing according to binlog slave protocol. See [Binlog Slave Client User Guide](/reference/tidb-binlog/binlog-slave-client.md).
+* Drainer supports replicating binlogs to MySQL, TiDB, Kafka or local files. If you need to replicate binlogs to other Drainer unsuppored destinations, you can set Drainer to replicate the binlog to Kafka and read the data in Kafka for customized processing according to binlog slave protocol. See [Binlog Slave Client User Guide](/tidb-binlog/binlog-slave-client.md).
 
-* To use TiDB Binlog for recovering incremental data, set the config `db-type` to `file` (local files in the proto buffer format). Drainer converts the binlog to data in the specified [proto buffer format](https://github.com/pingcap/tidb-binlog/blob/master/proto/binlog.proto) and writes the data to local files. In this way, you can use [Reparo](/reference/tidb-binlog/reparo.md) to recover data incrementally.
+* To use TiDB Binlog for recovering incremental data, set the config `db-type` to `file` (local files in the proto buffer format). Drainer converts the binlog to data in the specified [proto buffer format](https://github.com/pingcap/tidb-binlog/blob/master/proto/binlog.proto) and writes the data to local files. In this way, you can use [Reparo](/tidb-binlog/tidb-binlog-reparo.md) to recover data incrementally.
 
     Pay attention to the value of `db-type`:
 
     - If your TiDB version is earlier than 2.1.9, set `db-type="pb"`.
     - If your TiDB version is 2.1.9 or later, set `db-type="file"` or `db-type="pb"`.
 
-* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/reference/tools/sync-diff-inspector/overview.md) to verify the data after data replication.
+* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to verify the data after data replication.

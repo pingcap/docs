@@ -6,7 +6,7 @@ category: reference
 
 # Execution Plan Binding
 
-The [Optimizer Hints](/reference/performance/optimizer-hints.md) document introduces how to select a specific execution plan using Hint. However, sometimes you need to interfere with execution selection without modifying SQL statements. Execution Plan Binding provides a set of functionalities to do this.
+The [Optimizer Hints](/optimizer-hints.md) document introduces how to select a specific execution plan using Hint. However, sometimes you need to interfere with execution selection without modifying SQL statements. Execution Plan Binding provides a set of functionalities to do this.
 
 ## Syntax
 
@@ -123,7 +123,7 @@ To enable automatic binding creation, set `tidb_capture_plan_baselines` to `on`.
 
 > **Note:**
 >
-> Because the automatic binding creation function relies on [Statement Summary](/reference/performance/statement-summary.md), make sure to enable Statement Summary before using automatic binding.
+> Because the automatic binding creation function relies on [Statement Summary](/statement-summary-tables.md), make sure to enable Statement Summary before using automatic binding.
 
 After automatic binding creation is enabled, the historical SQL statements in the Statement Summary are traversed every `bind-info-lease` (the default value is `3s`), and bindings are automatically created for SQL statements that appear at least twice.
 

@@ -60,5 +60,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE DATABASE](/reference/sql/statements/create-database.md)
-* [ALTER DATABASE](/reference/sql/statements/alter-database.md)
+* [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
+* [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)

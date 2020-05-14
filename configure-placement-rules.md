@@ -46,7 +46,7 @@ The meaning and function of `LocationLabels` are the same with those earlier tha
 
 ## Configure rules
 
-The operations in this section are based on [pd-ctl](/reference/tools/pd-control.md), and the commands involved in the operations also support calls via HTTP API.
+The operations in this section are based on [pd-ctl](/pd-control.md), and the commands involved in the operations also support calls via HTTP API.
 
 ### Enable Placement Rules
 

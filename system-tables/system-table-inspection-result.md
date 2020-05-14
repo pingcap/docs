@@ -274,7 +274,7 @@ The `threshold-check` diagnosis rule checks whether the following metrics in the
 |  Component  | Monitoring metric | Monitoring table | Expected value |  Description  |
 |  :----  | :----  |  :----  |  :----  |  :----  |
 | TiDB | tso-duration              | pd_tso_wait_duration                | < 50ms  |   The time it takes to get the transaction TSO timestamp. |
-| TiDB | get-token-duration        | tidb_get_token_duration             | < 1ms   |  Queries the time it takes to get the token. The related TiDB configuration item is [`token-limit`](/reference/configuration/tidb-server/configuration.md#token-limit).  |
+| TiDB | get-token-duration        | tidb_get_token_duration             | < 1ms   |  Queries the time it takes to get the token. The related TiDB configuration item is [`token-limit`](/command-line-flags-for-tidb-configuration.md#token-limit).  |
 | TiDB | load-schema-duration      | tidb_load_schema_duration           | < 1s    |   The time it takes for TiDB to update and load the schema metadata.|
 | TiKV | scheduler-cmd-duration    | tikv_scheduler_command_duration     | < 0.1s  |  The time it takes for TiKV to execute the KV `cmd` request. |
 | TiKV | handle-snapshot-duration  | tikv_handle_snapshot_duration       | < 30s   |  The time it takes for TiKV to handle the snapshot. |

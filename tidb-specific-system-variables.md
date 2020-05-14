@@ -82,7 +82,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: GLOBAL
 - Default value: 0.5
-- This variable is used to set the threshold when TiDB automatically executes [`ANALYZE TABLE`](/reference/sql/statements/analyze-table.md) in a background thread to update table statistics. For example, a value of 0.5 means that auto-analyze is triggered when greater than 50% of the rows in a table have been modified. Auto-analyze can be restricted to only execute during certain hours of the day by specifying `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
+- This variable is used to set the threshold when TiDB automatically executes [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) in a background thread to update table statistics. For example, a value of 0.5 means that auto-analyze is triggered when greater than 50% of the rows in a table have been modified. Auto-analyze can be restricted to only execute during certain hours of the day by specifying `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
 
 > **Note:**
 >
@@ -218,7 +218,7 @@ mysql> desc select count(distinct a) from test.t;
 - Scope: SESSION
 - Default value: 1 GB
 - This variable is used to set the threshold value of memory quota for a query.
-- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/reference/configuration/tidb-server/configuration-file.md#mem-quota-query).
+- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
 
 ### tidb_mem_quota_hashjoin
 
@@ -297,7 +297,7 @@ mysql> desc select count(distinct a) from test.t;
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
-    For more details, see [limits of retry](/reference/transactions/transaction-optimistic.md#limits-of-retry).
+    For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
 
 ### tidb_backoff_weight
 
@@ -423,9 +423,9 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: "pessimistic"
-- This variable is used to set the transaction mode. TiDB 3.0 supports the pessimistic transactions. Since TiDB 3.0.8, the [pessimistic transaction mode](/reference/transactions/transaction-pessimistic.md) is enabled by default.
+- This variable is used to set the transaction mode. TiDB 3.0 supports the pessimistic transactions. Since TiDB 3.0.8, the [pessimistic transaction mode](/pessimistic-transaction.md) is enabled by default.
 - If you upgrade TiDB from v3.0.7 or earlier versions to v3.0.8 or later versions, the default transaction mode does not change. **Only the newly created clusters use the pessimistic transaction mode by default**.
-- If this variable is set to "optimistic" or "", TiDB uses the [optimistic transaction mode](/reference/transactions/transaction-optimistic.md).
+- If this variable is set to "optimistic" or "", TiDB uses the [optimistic transaction mode](/optimistic-transaction.md).
 
 ### tidb_constraint_check_in_place
 
@@ -460,7 +460,7 @@ set tidb_query_log_max_len = 20
 - Scope: SERVER
 - Default value: 1, indicating check the validity of UTF-8 data. This default behavior is compatible with MySQL.
 - This variable is used to set whether to check the validity of UTF-8 data.
-- To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because there is no data validity check in the earlier version. For details, see [FAQs After Upgrade](/faq/upgrade.md).
+- To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because there is no data validity check in the earlier version. For details, see [FAQs After Upgrade](/faq/upgrade-faq.md).
 
 ### tidb_opt_insubq_to_join_and_agg
 
@@ -511,7 +511,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION
 - Default value: ""
-- When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is "tidb-slow.log". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path. For details, see [Identify Slow Queries](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md).
+- When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is "tidb-slow.log". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path. For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_enable_fast_analyze
 

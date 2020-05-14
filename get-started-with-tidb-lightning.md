@@ -29,7 +29,7 @@ This tutorial assumes you use several new and clean CentOS 7 instances. You can 
 
 ## Prepare full backup data
 
-First, use [`mydumper`](/reference/tools/mydumper.md) to export data from MySQL:
+First, use [`mydumper`](/mydumper-overview.md) to export data from MySQL:
 
 {{< copyable "shell-regular" >}}
 
@@ -117,10 +117,10 @@ Download the TiDB Lightning installation package from the following link:
 
 After the import is completed, TiDB Lightning exits automatically. If the import is successful, you can find `tidb lightning exit` in the last line of the log file.
 
-If any error occurs, refer to [TiDB Lightning Troubleshooting](/how-to/troubleshoot/tidb-lightning.md).
+If any error occurs, refer to [TiDB Lightning Troubleshooting](/troubleshoot-tidb-lightning.md).
 
 ## Summary
 
 This tutorial briefly introduces what TiDB Lightning is and how to quickly deploy a TiDB Lightning cluster to import full backup data to the TiDB cluster.
 
-For detailed features and usage about TiDB Lightning, refer to [TiDB Lightning Overview](/reference/tools/tidb-lightning/overview.md).
+For detailed features and usage about TiDB Lightning, refer to [TiDB Lightning Overview](/tidb-lightning/tidb-lightning-overview.md).

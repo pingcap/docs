@@ -6,9 +6,9 @@ category: tools
 
 # Deploy and Maintain an Online TiDB Cluster Using TiUP
 
-This document focuses on how to use the TiUP cluster component. For the complete steps of online deployment, refer to [Deploy a TiDB Cluster Using TiUP](/how-to/deploy/orchestrated/tiup.md).
+This document focuses on how to use the TiUP cluster component. For the complete steps of online deployment, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
-Similar to [the TiUP playground component](/reference/tools/tiup/playground.md) used for local deployment, the TiUP cluster component quickly deploys TiDB for production environment. Compared with playground, the cluster component provides more powerful cluster management features, including upgrading, scaling, and even operation and auditing.
+Similar to [the TiUP playground component](/tiup/tiup-playground.md) used for local deployment, the TiUP cluster component quickly deploys TiDB for production environment. Compared with playground, the cluster component provides more powerful cluster management features, including upgrading, scaling, and even operation and auditing.
 
 For the help information of the cluster component, run the following command:
 
@@ -197,7 +197,7 @@ For the PD component, the `Status` column shows `Healthy` or `Down`, and sometim
 
 > **Note:**
 >
-> This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/how-to/scale/with-tiup.md).
+> This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
 
 Scaling in a node means taking the node offline. This operation removes the node from the cluster and deletes the remaining data files.
 
@@ -266,7 +266,7 @@ After PD schedules the data on the node to other TiKV nodes, this node will be d
 
 > **Note:**
 >
-> This section describes only the syntax of the scale-out command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/how-to/scale/with-tiup.md).
+> This section describes only the syntax of the scale-out command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
 
 The scale-out operation has an inner logic similar to that of deployment: the TiUP cluster component firstly ensures the SSH connection of the node, creates the required directories on the target node, then executes the deployment operation, and starts the node service.
 
@@ -306,7 +306,7 @@ To scale out a TiKV node and a PD node in the `tidb-test` cluster, take the foll
 
 > **Note:**
 >
-> This section describes only the syntax of the upgrade command. For detailed steps of online upgrade, refer to [Upgrade TiDB Using TiUP](/how-to/upgrade/using-tiup.md).
+> This section describes only the syntax of the upgrade command. For detailed steps of online upgrade, refer to [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md).
 
 The rolling upgrade feature leverages the distributed capabilities of TiDB. The upgrade process is made as transparent as possible to the application, and does not affect the business.
 

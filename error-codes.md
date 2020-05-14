@@ -35,13 +35,13 @@ In addition, TiDB has the following unique error codes:
 
     A single transaction is too large.
 
-    See [the error message `transaction too large`](/faq/tidb.md#the-error-message-transaction-too-large-is-displayed) for the cause and solution.
+    See [the error message `transaction too large`](/faq/tidb-faq.md#the-error-message-transaction-too-large-is-displayed) for the cause and solution.
 
 * Error Number: 8005
 
     Transactions in TiDB encounter write conflicts.
 
-    See [the Troubleshoot section](/faq/tidb.md#troubleshoot) for the cause and solution.
+    See [the Troubleshoot section](/faq/tidb-faq.md#troubleshoot) for the cause and solution.
 
 * Error Number: 8018
 
@@ -455,13 +455,13 @@ In addition, TiDB has the following unique error codes:
 
     A single transaction is too large.
 
-    See [the error message `transaction too large`](/faq/tidb.md#the-error-message-transaction-too-large-is-displayed) for the solution.
+    See [the error message `transaction too large`](/faq/tidb-faq.md#the-error-message-transaction-too-large-is-displayed) for the solution.
 
 * Error Number: 9007
 
     Transactions in TiKV encounter write conflicts.
 
-    See [the Troubleshoot section](/faq/tidb.md#troubleshoot) for the cause and solution.
+    See [the Troubleshoot section](/faq/tidb-faq.md#troubleshoot) for the cause and solution.
 
 * Error Number: 9008
 
@@ -469,4 +469,4 @@ In addition, TiDB has the following unique error codes:
 
 ## Troubleshooting
 
-See the [troubleshooting](/how-to/troubleshoot/cluster-setup.md) and [FAQ](/faq/tidb.md) documents.
+See the [troubleshooting](/troubleshoot-tidb-cluster.md) and [FAQ](/faq/tidb-faq.md) documents.

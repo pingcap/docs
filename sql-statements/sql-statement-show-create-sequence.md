@@ -51,5 +51,5 @@ Currently, MySQL does not have the sequence option. The TiDB sequence is borrowe
 
 ## See also
 
-* [CREATE SEQUENCE](/reference/sql/statements/create-sequence.md)
-* [DROP SEQUENCE](/reference/sql/statements/drop-sequence.md)
+* [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+* [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)

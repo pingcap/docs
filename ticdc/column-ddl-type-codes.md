@@ -6,7 +6,7 @@ category: reference
 
 # Column and DDL Type Codes
 
-The column and DDL type codes are encodings defined by [TiCDC Open Protocol](/reference/tools/ticdc/open-protocol.md). The column type code identifies the column data type in Row Changed Events. The DDL type code identifies the DDL statement type in DDL Events.
+The column and DDL type codes are encodings defined by [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md). The column type code identifies the column data type in Row Changed Events. The DDL type code identifies the DDL statement type in DDL Events.
 
 ## Column Type Code
 

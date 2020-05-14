@@ -20,12 +20,12 @@ This guide is specifically designed to help you better understand these tools an
 
 #### TiDB Lightning
 
-[TiDB Lightning](/reference/tools/tidb-lightning/overview.md) (Lightning) is a tool used for the fast full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via Mydumper or CSV data source.
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) (Lightning) is a tool used for the fast full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via Mydumper or CSV data source.
 
 TiDB Lightning supports two back ends: "Importer" and "TiDB". It determines how tidb-lightning delivers data into the target cluster. The two back ends are as follows:
 
-1. The default one is [`Importer` back end](/reference/tools/tidb-lightning/overview.md). When using `Importer` as the back end, the cluster cannot provide normal services during the import process. It is used for a large amount of data importing (TB).
-2. The second one is [`TiDB` back end](/reference/tools/tidb-lightning/tidb-backend.md) (just work as [Loader](#tidb-loader-to-be-deprecated)). It is much slower than `Importer` back end model. But the cluster could serve the application during the import process. It is used to handle tens/hundreds of GB data.
+1. The default one is [`Importer` back end](/tidb-lightning/tidb-lightning-overview.md). When using `Importer` as the back end, the cluster cannot provide normal services during the import process. It is used for a large amount of data importing (TB).
+2. The second one is [`TiDB` back end](/tidb-lightning/tidb-lightning-tidb-backend.md) (just work as [Loader](#tidb-loader-to-be-deprecated)). It is much slower than `Importer` back end model. But the cluster could serve the application during the import process. It is used to handle tens/hundreds of GB data.
 
 The following are the basics of TiDB Lightning:
 
@@ -37,7 +37,7 @@ The following are the basics of TiDB Lightning:
 
 #### BR (beta)
 
-[BR](/reference/tools/br/br.md) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/Loader/Lightning, BR is more suitable for scenarios of huge data volume.
+[BR](/br/backup-and-restore-tool.md) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/Loader/Lightning, BR is more suitable for scenarios of huge data volume.
 
 The following are the basics of BR:
 
@@ -49,9 +49,9 @@ The following are the basics of BR:
 
 > **Note:**
 > 
-> TiDB Loader is to be deprecated and replaced with [Lightning](/reference/tools/tidb-lightning/tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-back-end).
+> TiDB Loader is to be deprecated and replaced with [Lightning](/tidb-lightning/tidb-lightning-tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-back-end).
 
-[TiDB Loader](/reference/tools/loader.md) is a lightweight full-data importing tool for TiDB. It reads the output file of Mydumper and loads the data into TiDB.
+[TiDB Loader](/loader-overview.md) is a lightweight full-data importing tool for TiDB. It reads the output file of Mydumper and loads the data into TiDB.
 
 The following are the basics of Loader:
 
@@ -63,7 +63,7 @@ The following are the basics of Loader:
 
 #### Syncer (deprecated)
 
-[Syncer](/reference/tools/syncer.md) is a tool used to import data incrementally. It acts as a MySQL slave to read binlog from MySQL/MariaDB master and replicate the binlog to the downstream. It is recommended to use [TiDB Data Migration](#tidb-data-migration) to replace Syncer.
+[Syncer](/syncer-overview.md) is a tool used to import data incrementally. It acts as a MySQL slave to read binlog from MySQL/MariaDB master and replicate the binlog to the downstream. It is recommended to use [TiDB Data Migration](#tidb-data-migration) to replace Syncer.
 
 The following are the basics of Syncer:
 
@@ -91,7 +91,7 @@ The following are the basics of DM:
 
 #### Mydumper
 
-[Mydumper](/reference/tools/mydumper.md) is a tool to create a logical full backup for TiDB.
+[Mydumper](/mydumper-overview.md) is a tool to create a logical full backup for TiDB.
 
 The following are the basics of Mydumper:
 
@@ -103,7 +103,7 @@ The following are the basics of Mydumper:
 
 #### BR (beta)
 
-[BR](/reference/tools/br/br.md) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/loader, BR is more suitable for scenarios of huge data volume.
+[BR](/br/backup-and-restore-tool.md) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with Mydumper/loader, BR is more suitable for scenarios of huge data volume.
 
 The following are the basics of BR:
 
@@ -117,7 +117,7 @@ The following are the basics of BR:
 
 #### TiDB Binlog
 
-[TiDB Binlog](/reference/tidb-binlog/overview.md) is a system that collects binlog for TiDB clusters and provides tools for near real-time sync and backup.
+[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a system that collects binlog for TiDB clusters and provides tools for near real-time sync and backup.
 
 The following are the basics of TiDB Binlog:
 
@@ -129,7 +129,7 @@ The following are the basics of TiDB Binlog:
 
 #### CDC (Beta, under development, ETA May/June 2020 with TiDB 4.0)
 
-[CDC](/reference/tools/ticdc/overview.md) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in row changed order.
+[CDC](/ticdc/ticdc-overview.md) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in row changed order.
 
 - Input/Output: 
     - Input: TiDB Cluster

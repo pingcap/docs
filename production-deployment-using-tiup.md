@@ -52,7 +52,7 @@ The software and hardware recommendations for the **target machines** are as fol
 - [Disable the system swap](#how-to-disable-system-swap) on all the deployment machines.
 - If you need to bind CPU cores, [install the `numactl` tool](#how-to-install-the-numactl-tool).
 
-For other software and hardware recommendations, refer to [TiDB Software and Hardware Recommendations](/how-to/deploy/hardware-recommendations.md).
+For other software and hardware recommendations, refer to [TiDB Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
 ### Step 2: Install TiUP on the Control Machine
 
@@ -320,7 +320,7 @@ The following sections provide a cluster configuration template for each of the 
 
 > **Note:**
 >
-> - If you need to [deploy TiFlash](/reference/tiflash/deploy.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/how-to/configure/placement-rules.md) feature.
+> - If you need to [deploy TiFlash](/tiflash/deploy-tiflash.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/configure-placement-rules.md) feature.
 >
 > - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
 > 
@@ -658,7 +658,7 @@ You need to fill in the result in the configuration file (as described in the St
 
 > **Note:**
 >
-> - If you need to [deploy TiFlash](/reference/tiflash/deploy.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/how-to/configure/placement-rules.md) feature.
+> - If you need to [deploy TiFlash](/tiflash/deploy-tiflash.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/configure-placement-rules.md) feature.
 >
 > - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
 > 
@@ -932,7 +932,7 @@ Key parameters of TiDB:
 | TiKV | 3 | 16 Vcore 32 GB | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
 |TiDB | 3 | 16 Vcore 32 GB | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration;<br>`enable_binlog` enabled; <br> `ignore-error` enabled |
 | PD | 3 | 4 Vcore 8 GB | 10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration |
-| TiFlash | 1 | 32 VCore 64 GB | 10.0.1.10 | Default port configuration; <br> Customized deployment directory - the `data_dir` parameter is set to `/data1/tiflash/data,/data2/tiflash/data` for [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment) |
+| TiFlash | 1 | 32 VCore 64 GB | 10.0.1.10 | Default port configuration; <br> Customized deployment directory - the `data_dir` parameter is set to `/data1/tiflash/data,/data2/tiflash/data` for [multi-disk deployment](/tiflash/tiflash-configuration.md#multi-disk-deployment) |
 | Pump| 3 | 8 Vcore 16GB |10.0.1.6<br>10.0.1.7<br>10.0.1.8 | Default port configuration; <br> The GC time is set to 7 days |
 | Drainer | 1 | 8 Vcore 16GB | 10.0.1.9 | Default port configuration; <br>Set default initialization commitTS |
 
@@ -944,7 +944,7 @@ Key parameters of TiDB:
 
 > **Note:**
 >
-> - If you need to [deploy TiFlash](/reference/tiflash/deploy.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/how-to/configure/placement-rules.md) feature.
+> - If you need to [deploy TiFlash](/tiflash/deploy-tiflash.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/configure-placement-rules.md) feature.
 >
 > - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
 > 
@@ -1100,7 +1100,7 @@ alertmanager_servers:
 
 - Use `/tidb-deploy` as the default deployment directory 
 - Use `/tidb-data` as the data directory
-- Start TiCDC. After deploying the TiCDC cluster, [create the replication task by running `cdc cli`](/reference/tools/ticdc/deploy.md#step-2-create-replication-task)
+- Start TiCDC. After deploying the TiCDC cluster, [create the replication task by running `cdc cli`](/ticdc/deploy-ticdc.md#step-2-create-replication-task)
 
 #### Topology
 
@@ -1109,7 +1109,7 @@ alertmanager_servers:
 | TiKV | 3 | 16 VCore 32 GB | 10.0.1.1 <br> 10.0.1.2 <br> 10.0.1.3 | Default port configuration |
 | TiDB | 3 | 16 VCore 32 GB | 10.0.1.7 <br> 10.0.1.8 <br> 10.0.1.9 | Default port configuration |
 | PD | 3| 4 VCore 8 GB | 10.0.1.4 <br> 10.0.1.5 <br> 10.0.1.6 | Default port configuration |
-| TiFlash | 1 | 32 VCore 64 GB  | 10.0.1.10 | Default port configuration; <br> Customized deployment directory - the `data_dir` parameter is set to `/data1/tiflash/data,/data2/tiflash/data` for [multi-disk deployment](/reference/tiflash/configuration.md#multi-disk-deployment) |
+| TiFlash | 1 | 32 VCore 64 GB  | 10.0.1.10 | Default port configuration; <br> Customized deployment directory - the `data_dir` parameter is set to `/data1/tiflash/data,/data2/tiflash/data` for [multi-disk deployment](/tiflash/tiflash-configuration.md#multi-disk-deployment) |
 | CDC | 3 | 8 VCore 16GB | 10.0.1.6<br>10.0.1.7<br>10.0.1.8 | Default port configuration |
 
 #### Edit the configuration file template topology.yaml
@@ -1118,7 +1118,7 @@ alertmanager_servers:
 >
 > - When you edit the template, only edit IP if you do not need to customize the port or directory.
 >
-> - If you need to [deploy TiFlash](/reference/tiflash/deploy.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/how-to/configure/placement-rules.md) feature.
+> - If you need to [deploy TiFlash](/tiflash/deploy-tiflash.md), set `replication.enable-placement-rules` to `true` in the `topology.yaml` configuration file to enable PD’s [Placement Rules](/configure-placement-rules.md) feature.
 >
 > - Currently, the instance-level configuration `"-host"` under `tiflash_servers` only supports IP, not domain name.
 > 

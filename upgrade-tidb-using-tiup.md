@@ -134,7 +134,7 @@ After the import is complete, you can check the current cluster status by execut
 
 > **Note:**
 >
-> Before upgrading to v4.0, confirm that the parameters modified in v3.0 are compatible in v4.0. See [configuration template](/reference/configuration/tikv-server/configuration-file.md) for details.
+> Before upgrading to v4.0, confirm that the parameters modified in v3.0 are compatible in v4.0. See [configuration template](/tikv-configuration-file.md) for details.
 
 ## Perform a rolling update to the TiDB cluster
 

@@ -22,7 +22,7 @@ TiUP cluster is a deployment tool for TiDB 4.0 and later versions. You must depl
 
 To deploy TiCDC, take the following steps:
 
-1. [Install TiUP](/how-to/deploy/orchestrated/tiup.md).
+1. [Install TiUP](/production-deployment-using-tiup.md).
 
 2. Install the TiUP cluster component:
 
@@ -90,7 +90,7 @@ To deploy TiCDC, take the following steps:
 
 1. Check if your TiDB version supports TiCDC. If not, upgrade the TiDB cluster to 4.0.0 rc.1 or later versions.
 
-2. Refer to [Scale out a TiDB/TiKV/PD/TiCDC node](/how-to/scale/with-tiup.md#scale-out-a-tidbtikvpdticdc-node) and deploy TiCDC.
+2. Refer to [Scale out a TiDB/TiKV/PD/TiCDC node](/scale-tidb-using-tiup.md#scale-out-a-tidbtikvpdticdc-node) and deploy TiCDC.
 
     This is an example of the scale-out configuration file:
 
@@ -139,7 +139,7 @@ The parameters in the above command are described as follows:
 
 - `pd`: The URL of the PD client.
 - `start-ts`: Specifies the starting TSO of the replication task. If this parameter is not specified or specified as `0`, the current TSO is used as the starting TSO of the replication task.
-- `sink-uri`: The sink address. Currently, the address can be configured to `mysql`, `tidb`, or `kafka`. For how to configure sink URI, refer to [Configure Sink URI](/reference/tools/ticdc/sink.md).
+- `sink-uri`: The sink address. Currently, the address can be configured to `mysql`, `tidb`, or `kafka`. For how to configure sink URI, refer to [Configure Sink URI](/ticdc/sink-url.md).
 - `config`: The configuration of the replication task. Currently, this configuration supports the black & white lists and skipping specific transaction of certain `commit-ts`.
 
 After executing the above command, TiCDC starts to replicate data to the downstream MySQL (`127.0.0.1:3306`) from the specified `start-ts` (`415238226621235200`).
