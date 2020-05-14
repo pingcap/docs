@@ -5,7 +5,7 @@ category: reference
 
 # Common Misuses During Full Data Import
 
-This document introduces the common error scenarios in using [Loader](/reference/tools/loader.md) or [TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/overview/) (DM) during the full data import process, and also provides their reasons and solutions.
+This document introduces the common error scenarios in using [Loader](/loader-overview.md) or [TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/overview/) (DM) during the full data import process, and also provides their reasons and solutions.
 
 ## Error: ```Try adjusting the `max_allowed_packet` variable```
 
@@ -18,7 +18,7 @@ packet for query is too large. Try adjusting the 'max_allowed_packet' variable
 ### Reasons
 
 * Both MySQL client and MySQL/TiDB Server have `max_allowed_packet` quotas. If any of the `max_allowed_packet` quotas is violated, the client receives a corresponding error message. Currently, the latest version of Syncer, Loader, DM, and TiDB Server all have a default `max_allowed_packet` quota of `64M`.
-    * Please use the latest version, or the latest stable version of the tool. See the [download page](/reference/tools/download.md).
+    * Please use the latest version, or the latest stable version of the tool. See the [download page](/download-ecosystem-tools.md).
 * The full data import processing module in Loader or DM does not support splitting `dump sqls` files.
 
 ### Solutions

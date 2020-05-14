@@ -72,7 +72,7 @@ Possible causes and solutions for slow replication:
 
 If a Pump instance crashes, Drainer cannot replicate data to the downstream because it cannot obtain the data of this instance. If this Pump instance can recover to the normal state, Drainer resumes replication; if not, perform the following steps:
 
-1. Use [binlogctl to change the state of this Pump instance to `offline`](/reference/tidb-binlog/maintain.md) to discard the data of this Pump instance.
+1. Use [binlogctl to change the state of this Pump instance to `offline`](/tidb-binlog/maintain-tidb-binlog-cluster.md) to discard the data of this Pump instance.
 
 2. Because Drainer cannot obtain the data of this pump instance, the data in the downstream and upstream is inconsistent. In this situation, perform full and incremental backups again. The steps are as follows:
 
@@ -108,13 +108,13 @@ If the data in the downstream is not affected, you can redeploy Drainer on the n
 
     1. Deploy and start a new Drainer (Drainer can read checkpoint and resumes replication).
 
-    2. Use [binlogctl to change the state of the old Drainer to `offline`](/reference/tidb-binlog/maintain.md).
+    2. Use [binlogctl to change the state of the old Drainer to `offline`](/tidb-binlog/maintain-tidb-binlog-cluster.md).
 
 - If the checkpoint is lost, perform the following steps:
 
     1. To deploy a new Drainer, obtain the `commit-ts` of the old Drainer as the `initialCommitTs` of the new Drainer.
 
-    2. Use [binlogctl to change the state of the old Drainer to `offline`](/reference/tidb-binlog/maintain.md).
+    2. Use [binlogctl to change the state of the old Drainer to `offline`](/tidb-binlog/maintain-tidb-binlog-cluster.md).
 
 ## How to restore the data of a cluster using a full backup and a binlog backup file?
 
@@ -140,7 +140,7 @@ If a critical error is trigged when TiDB fails to write binlog after enabling `i
 
 ## When can I pause or close a Pump or Drainer node?
 
-Refer to [TiDB Binlog Cluster Operations](/reference/tidb-binlog/maintain.md) to learn the description of the Pump or Drainer state and how to start and exit the process.
+Refer to [TiDB Binlog Cluster Operations](/tidb-binlog/maintain-tidb-binlog-cluster.md) to learn the description of the Pump or Drainer state and how to start and exit the process.
 
 Pause a Pump or Drainer node when you need to temporarily stop the service. For example:
 
@@ -227,7 +227,7 @@ Some stale Drainer nodes are left over from historical tasks. Their processes ha
 
 ## Can I use SQL operations such as `change pump` and `change drainer` to pause or close the Pump or Drainer service?
 
-No. For more details on these SQL operations, refer to [Use SQL statements to manage Pump or Drainer](/reference/tidb-binlog/maintain.md#use-sql-statements-to-manage-pump-or-drainer).
+No. For more details on these SQL operations, refer to [Use SQL statements to manage Pump or Drainer](/tidb-binlog/maintain-tidb-binlog-cluster.md#use-sql-statements-to-manage-pump-or-drainer).
 
 These SQL operations directly modifies the state information saved in PD and are functionally equivalent to the `update-pump` and `update-drainer` commands in binlogctl. To pause or close the Pump or Drainer service, use the binlogctl tool.
 

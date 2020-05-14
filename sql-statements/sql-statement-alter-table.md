@@ -8,8 +8,8 @@ category: reference
 
 This statement modifies an existing table to conform to a new table structure. The statement `ALTER TABLE` can be used to:
 
-* [`ADD`](/reference/sql/statements/add-index.md), [`DROP`](/reference/sql/statements/drop-index.md), or [`RENAME`](/reference/sql/statements/rename-index.md) indexes
-* [`ADD`](/reference/sql/statements/add-column.md), [`DROP`](/reference/sql/statements/drop-column.md), [`MODIFY`](/reference/sql/statements/modify-column.md) or [`CHANGE`](/reference/sql/statements/change-column.md) columns
+* [`ADD`](/sql-statements/sql-statement-add-index.md), [`DROP`](/sql-statements/sql-statement-drop-index.md), or [`RENAME`](/sql-statements/sql-statement-rename-index.md) indexes
+* [`ADD`](/sql-statements/sql-statement-add-column.md), [`DROP`](/sql-statements/sql-statement-drop-column.md), [`MODIFY`](/sql-statements/sql-statement-modify-column.md) or [`CHANGE`](/sql-statements/sql-statement-change-column.md) columns
 
 ## Synopsis
 
@@ -65,11 +65,11 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## See also
 
-* [ADD COLUMN](/reference/sql/statements/add-column.md)
-* [DROP COLUMN](/reference/sql/statements/drop-column.md)
-* [ADD INDEX](/reference/sql/statements/add-index.md)
-* [DROP INDEX](/reference/sql/statements/drop-index.md)
-* [RENAME INDEX](/reference/sql/statements/rename-index.md)
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [DROP TABLE](/reference/sql/statements/drop-table.md)
-* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+* [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

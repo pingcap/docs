@@ -6,7 +6,7 @@ category: reference
 
 # Upgrade TiDB Binlog
 
-This document introduces how to upgrade TiDB Binlog that is deployed with TiDB Ansible and deployed manually to the latest [cluster](/reference/tidb-binlog/overview.md) version. There is also a section on how to upgrade TiDB Binlog from an earlier incompatible version (Kafka/Local version) to the latest version.
+This document introduces how to upgrade TiDB Binlog that is deployed with TiDB Ansible and deployed manually to the latest [cluster](/tidb-binlog/tidb-binlog-overview.md) version. There is also a section on how to upgrade TiDB Binlog from an earlier incompatible version (Kafka/Local version) to the latest version.
 
 ## Upgrade TiDB Binlog deployed with TiDB Ansible
 
@@ -61,7 +61,7 @@ The corresponding relationship between TiDB Binlog versions and TiDB versions is
 
 > **Note:**
 >
-> If importing the full data is acceptable, you can abandon the old version and deploy TiDB Binlog following [TiDB Binlog Cluster Deployment](/reference/tidb-binlog/upgrade.md).
+> If importing the full data is acceptable, you can abandon the old version and deploy TiDB Binlog following [TiDB Binlog Cluster Deployment](/tidb-binlog/upgrade-tidb-binlog.md).
 
 If you want to resume replication from the original checkpoint, perform the following steps to upgrade TiDB Binlog:
 

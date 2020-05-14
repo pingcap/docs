@@ -66,7 +66,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [DROP TABLE](/reference/sql/statements/drop-table.md)
-* [DELETE](/reference/sql/statements/delete.md)
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [SHOW CREATE TABLE](/reference/sql/statements/show-create-table.md)
+* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+* [DELETE](/sql-statements/sql-statement-delete.md)
+* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

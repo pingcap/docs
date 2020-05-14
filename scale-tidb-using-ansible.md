@@ -251,7 +251,7 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
 
         > **Note:**
         >
-        > Before start, you need to ensure that the `health` status of the newly added PD node is "true", using [PD Control](/reference/tools/pd-control.md). Otherwise, the PD service might fail to start and an error message `["join meet error"] [error="etcdserver: unhealthy cluster"]` is returned in the log.
+        > Before start, you need to ensure that the `health` status of the newly added PD node is "true", using [PD Control](/pd-control.md). Otherwise, the PD service might fail to start and an error message `["join meet error"] [error="etcdserver: unhealthy cluster"]` is returned in the log.
 
     4. Use `pd-ctl` to check whether the new node is added successfully:
 
