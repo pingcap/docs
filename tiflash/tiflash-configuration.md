@@ -10,15 +10,15 @@ This document introduces the configuration parameters related to the deployment 
 
 ## PD scheduling parameters
 
-You can adjust the PD scheduling parameters using [pd-ctl](/reference/tools/pd-control.md) (the binary file in `resources/bin` in the tidb-ansible directory):
+You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md) (the binary file in `resources/bin` in the tidb-ansible directory):
 
-- [`replica-schedule-limit`](/reference/configuration/pd-server/configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
+- [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
     > **Notes:**
     >
     > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
-- [`store-balance-rate`](/reference/configuration/pd-server/configuration-file.md#store-balance-rate): limits the rate at which each store is scheduled.
+- [`store-balance-rate`](/pd-configuration-file.md#store-balance-rate): limits the rate at which each store is scheduled.
 
 ## TiFlash configuration parameters
 

@@ -36,7 +36,7 @@ select * from `ANALYZE_STATUS`;
 
 ### CHARACTER_SETS table
 
-The `CHARACTER_SETS` table provides information about [character sets](/reference/sql/characterset-and-collation.md). Currently, TiDB only supports some of the character sets.
+The `CHARACTER_SETS` table provides information about [character sets](/character-set-and-collation.md). Currently, TiDB only supports some of the character sets.
 
 {{< copyable "sql" >}}
 
@@ -351,7 +351,7 @@ SELECT * FROM session_variables LIMIT 10;
 
 ## SLOW_QUERY table
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md).
+The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
 
 {{< copyable "sql" >}}
 
@@ -414,7 +414,7 @@ desc information_schema.slow_query;
 
 ## CLUSTER_SLOW_QUERY table
 
-The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes in the cluster, which is the parsing result of the TiDB slow log files. You can use the `CLUSTER_SLOW_QUERY` table the way you do with [`SLOW_QUERY`](#slow_query-table). The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md).
+The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes in the cluster, which is the parsing result of the TiDB slow log files. You can use the `CLUSTER_SLOW_QUERY` table the way you do with [`SLOW_QUERY`](#slow_query-table). The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
 
 {{< copyable "sql" >}}
 
@@ -1060,7 +1060,7 @@ The `STATE` column shows the execution status of a specific `ANALYZE` task. Its 
 
 ## SLOW\_QUERY table
 
-The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/how-to/maintain/identify-abnormal-queries/identify-slow-queries.md#identify-slow-queries).
+The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/identify-slow-queries.md#identify-slow-queries).
 
 {{< copyable "sql" >}}
 

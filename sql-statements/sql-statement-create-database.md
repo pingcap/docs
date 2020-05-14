@@ -45,7 +45,7 @@ create_specification:
 
 If you create an existing database and does not specify `IF NOT EXISTS`, an error is displayed.
 
-The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently, TiDB only supports some of the character sets and collations. For details, see [Character Set and Collation Support](/reference/sql/characterset-and-collation.md).
+The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently, TiDB only supports some of the character sets and collations. For details, see [Character Set and Collation Support](/character-set-and-collation.md).
 
 ## Examples
 
@@ -73,7 +73,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [USE](/reference/sql/statements/use.md)
-* [ALTER DATABASE](/reference/sql/statements/alter-database.md)
-* [DROP DATABASE](/reference/sql/statements/drop-database.md)
-* [SHOW DATABASES](/reference/sql/statements/show-databases.md)
+* [USE](/sql-statements/sql-statement-use.md)
+* [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)
+* [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)
+* [SHOW DATABASES](/sql-statements/sql-statement-show-databases.md)

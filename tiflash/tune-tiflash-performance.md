@@ -14,7 +14,7 @@ If you want to save machine resources and have no requirement on isolation, you 
 
 ## Tune TiDB parameters
 
-1. For the TiDB node dedicated to OLAP/TiFlash, it is recommended that you increase the value of the [`tidb_distsql_scan_concurrency`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_distsql_scan_concurrency) configuration item for this node to `80`:
+1. For the TiDB node dedicated to OLAP/TiFlash, it is recommended that you increase the value of the [`tidb_distsql_scan_concurrency`](/tidb-specific-system-variables.md#tidb_distsql_scan_concurrency) configuration item for this node to `80`:
 
     {{< copyable "sql" >}}
 

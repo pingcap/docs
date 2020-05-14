@@ -7,9 +7,9 @@ aliases: ['/docs-cn/dev/how-to/maintain/identify-slow-queries/']
 
 # Identify Slow Queries
 
-To help users identify slow queries, analyze and improve the performance of SQL execution, TiDB outputs the statements whose execution time exceeds [slow-threshold](/reference/configuration/tidb-server/configuration-file.md#slow-threshold) (The default value is 300 milliseconds) to [slow-query-file](/reference/configuration/tidb-server/configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
+To help users identify slow queries, analyze and improve the performance of SQL execution, TiDB outputs the statements whose execution time exceeds [slow-threshold](/tidb-configuration-file.md#slow-threshold) (The default value is 300 milliseconds) to [slow-query-file](/tidb-configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
 
-TiDB enables the slow query log by default. You can enable or disable the feature by modifying the configuration [`enable-slow-log`](/reference/configuration/tidb-server/configuration-file.md#enable-slow-log).
+TiDB enables the slow query log by default. You can enable or disable the feature by modifying the configuration [`enable-slow-log`](/tidb-configuration-file.md#enable-slow-log).
 
 ## Usage example
 
@@ -103,7 +103,7 @@ TiKV Coprocessor Task fields:
 
 ## Memory mapping in slow log
 
-You can query the content of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/reference/system-databases/information-schema.md#information-schema).
+You can query the content of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/system-tables/system-table-information-schema.md#information-schema).
 
 > **Note:**
 >
@@ -155,7 +155,7 @@ For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time,
 >
 > If the slow log files of the specified time range are removed, or there is no slow query, the query returns NULL.
 
-TiDB 4.0 adds the [`CLUSTER_SLOW_QUERY`](/reference/system-databases/information-schema.md#cluster_slow_query-table) system table to query the slow query information of all TiDB nodes. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. You can use `CLUSTER_SLOW_QUERY` the way you do with [`SLOW_QUERY`](/reference/system-databases/information-schema.md#slow_query-table).
+TiDB 4.0 adds the [`CLUSTER_SLOW_QUERY`](/system-tables/system-table-information-schema.md#cluster_slow_query-table) system table to query the slow query information of all TiDB nodes. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. You can use `CLUSTER_SLOW_QUERY` the way you do with [`SLOW_QUERY`](/system-tables/system-table-information-schema.md#slow_query-table).
 
 When you query the `CLUSTER_SLOW_QUERY` table, TiDB pushes the computation and the judgment down to other nodes, instead of retrieving all slow query information from other nodes and executing the operations on one TiDB node.
 

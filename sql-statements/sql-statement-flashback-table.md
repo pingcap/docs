@@ -69,7 +69,7 @@ Pay attention to the following conditions and requirements when you enable TiDB 
 
 When deleting a table, TiDB only deletes the table metadata, and writes the table data (row data and index data) to be deleted to the `mysql.gc_delete_range` table. The GC Worker in the TiDB background periodically removes from the `mysql.gc_delete_range` table the keys that exceed the GC lifetime.
 
-Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. For details of snapshot read, refer to [Read Historical Data](/how-to/get-started/read-historical-data.md).
+Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. For details of snapshot read, refer to [Read Historical Data](/read-historical-data.md).
 
 The following is the working process of `FLASHBACK TABLE t TO t1`:
 

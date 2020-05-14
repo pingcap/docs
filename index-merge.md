@@ -93,7 +93,7 @@ Note that `IndexMerge` is used only when the optimizer cannot use a single index
 `IndexMerge` is disabled by default. Enable the `IndexMerge` in one of two ways:
 
 - Set the `tidb_enable_index_merge` system variable to `1`;
-- Use the SQL Hint [`USE_INDEX_MERGE`](/reference/performance/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) in the query.
+- Use the SQL Hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) in the query.
 
     > **Note:**
     >

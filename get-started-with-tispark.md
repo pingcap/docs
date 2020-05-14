@@ -7,7 +7,7 @@ aliases: ['/docs/dev/how-to/deploy/tispark/']
 
 # TiSpark Quick Start Guide
 
-To make it easy to [try TiSpark](/reference/tispark.md), the TiDB cluster installed using TiDB Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
+To make it easy to [try TiSpark](/tispark-overview.md), the TiDB cluster installed using TiDB Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
 
 ## Deployment information
 

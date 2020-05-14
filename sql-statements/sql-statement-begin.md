@@ -38,6 +38,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [COMMIT](/reference/sql/statements/commit.md)
-* [ROLLBACK](/reference/sql/statements/rollback.md)
-* [START TRANSACTION](/reference/sql/statements/start-transaction.md)
+* [COMMIT](/sql-statements/sql-statement-commit.md)
+* [ROLLBACK](/sql-statements/sql-statement-rollback.md)
+* [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)

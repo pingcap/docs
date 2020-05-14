@@ -87,7 +87,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | :---------- | :----- | :--------------------- |
     | UpdateOrDelete | String |  Identifies whether the row is updated or deleted in the Event. The optional values are `u` or `d`. |
     | Column Name    | String |  The column name.  |
-    | Column Type    | Number |  The column type. See [Column and DDL Type Codes](/reference/tools/ticdc/column-ddl-type.md) for details.  |
+    | Column Type    | Number |  The column type. See [Column and DDL Type Codes](/ticdc/column-ddl-type-codes.md) for details.  |
     | Where Handle   | Bool   |  Determines whether this column can be the filter condition of the `Where` clause. When this column is unique on the table, `Where Handle` is `true`. |
     | Column Value   | Any    | The Column value.   |
 
@@ -122,7 +122,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | Parameter       | Type   | Description           |
     | :-------- | :----- | :------------ |
     | DDL Query | String | DDL Query SQL |
-    | DDL Type  | String | The DDL type. See [Column and DDL Type Codes](/reference/tools/ticdc/column-ddl-type.md) for details.    |
+    | DDL Type  | String | The DDL type. See [Column and DDL Type Codes](/ticdc/column-ddl-type-codes.md) for details.    |
 
 ### Resolved Event
 

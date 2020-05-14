@@ -318,5 +318,5 @@ In the `CYCLE` mode, the initial value of a sequence in the first round is the v
 
 ## See also
 
-* [DROP SEQUENCE](/reference/sql/statements/drop-sequence.md)
-* [SHOW CREATE SEQUENCE](/reference/sql/statements/show-create-sequence.md)
+* [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
+* [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)

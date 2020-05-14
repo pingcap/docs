@@ -24,7 +24,7 @@ There are two ways to check the TiFlash version:
     LD_LIBRARY_PATH=./ ./tiflash version
     ```
 
-- Check the TiFlash version by referring to the TiFlash log. For the log path, see the `[logger]` part in [the `tiflash.toml` file](/reference/tiflash/configuration.md#configure-the-tiflashtoml-file). For example:
+- Check the TiFlash version by referring to the TiFlash log. For the log path, see the `[logger]` part in [the `tiflash.toml` file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). For example:
 
     ```
     <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
@@ -32,7 +32,7 @@ There are two ways to check the TiFlash version:
 
 ## Take a TiFlash node down
 
-Taking a TiFlash node down differs from [Scaling in a TiFlash node](/how-to/scale/with-tiup.md#scale-in-a-tiflash-node) in that the former doesn't remove the node in TiDB Ansible; instead, it just safely shuts down the TiFlash process.
+Taking a TiFlash node down differs from [Scaling in a TiFlash node](/scale-tidb-using-tiup.md#scale-in-a-tiflash-node) in that the former doesn't remove the node in TiDB Ansible; instead, it just safely shuts down the TiFlash process.
 
 Follow the steps below to take a TiFlash node down:
 
@@ -48,9 +48,9 @@ Follow the steps below to take a TiFlash node down:
     alter table <db-name>.<table-name> set tiflash replica 0;
     ```
 
-2. To ensure that the TiFlash replicas of these tables are removed, see [Check the Replication Progress](/reference/tiflash/use-tiflash.md#check-the-replication-progress). If you cannot view the replication progress of the related tables, it means that the replicas are removed.
+2. To ensure that the TiFlash replicas of these tables are removed, see [Check the Replication Progress](/tiflash/use-tiflash.md#check-the-replication-progress). If you cannot view the replication progress of the related tables, it means that the replicas are removed.
 
-3. Input the `store` command into [pd-ctl](/reference/tools/pd-control.md) (the binary file is in `resources/bin` of the tidb-ansible directory) to view the `store id` of the TiFlash node.
+3. Input the `store` command into [pd-ctl](/pd-control.md) (the binary file is in `resources/bin` of the tidb-ansible directory) to view the `store id` of the TiFlash node.
 
 4. Input `store delete <store_id>` into `pd-ctl`. Here `<store_id>` refers to the `store id` in step 3.
 
@@ -109,7 +109,7 @@ This section describes some commonly encountered issues when using TiFlash, the 
 
 This is because TiFlash is in an abnormal state caused by configuration errors or environment issues. Take the following steps to identify the faulty component:
 
-1. Check whether PD enables the `Placement Rules` feature (to enable the feature, see the step 2 of [Add TiFlash component to an existing TiDB cluster](/reference/tiflash/deploy.md#add-tiflash-component-to-an-existing-tidb-cluster):
+1. Check whether PD enables the `Placement Rules` feature (to enable the feature, see the step 2 of [Add TiFlash component to an existing TiDB cluster](/tiflash/deploy-tiflash.md#add-tiflash-component-to-an-existing-tidb-cluster):
 
     {{< copyable "shell-regular" >}}
 
