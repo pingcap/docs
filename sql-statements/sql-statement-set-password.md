@@ -2,6 +2,7 @@
 title: SET PASSWORD | TiDB SQL Statement Reference
 summary: An overview of the usage of SET PASSWORD for the TiDB database.
 category: reference
+aliases: ['/docs/v3.0/reference/sql/statements/set-password/']
 ---
 
 # SET PASSWORD

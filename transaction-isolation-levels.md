@@ -2,7 +2,7 @@
 title: TiDB Transaction Isolation Levels
 summary: Learn about the transaction isolation levels in TiDB.
 category: reference
-aliases: ['/docs/sql/transaction-isolation/']
+aliases: ['/docs/v3.0/reference/transactions/transaction-isolation/','/docs/sql/transaction-isolation/']
 ---
 
 # TiDB Transaction Isolation Levels

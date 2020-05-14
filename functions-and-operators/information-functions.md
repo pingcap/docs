@@ -2,7 +2,7 @@
 title: Information Functions
 summary: Learn about the information functions.
 category: reference
-aliases: ['/docs/sql/information-functions/']
+aliases: ['/docs/v3.0/reference/sql/functions-and-operators/information-functions/','/docs/sql/information-functions/']
 ---
 
 # Information Functions

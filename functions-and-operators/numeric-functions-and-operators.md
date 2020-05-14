@@ -2,7 +2,7 @@
 title: Numeric Functions and Operators
 summary: Learn about the numeric functions and operators.
 category: reference
-aliases: ['/docs/sql/numeric-functions-and-operators/']
+aliases: ['/docs/v3.0/reference/sql/functions-and-operators/numeric-functions-and-operators/','/docs/sql/numeric-functions-and-operators/']
 ---
 
 # Numeric Functions and Operators

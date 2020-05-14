@@ -2,6 +2,7 @@
 title: SHOW WARNINGS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
 category: reference
+aliases: ['/docs/v3.0/reference/sql/statements/show-warnings/']
 ---
 
 # SHOW WARNINGS
