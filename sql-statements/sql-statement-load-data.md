@@ -47,6 +47,6 @@ Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 
 ## See also
 
-* [INSERT](/reference/sql/statements/insert.md)
-* [Optimistic Transaction Model](/reference/transactions/transaction-optimistic.md)
-* [Import Example Database](/how-to/get-started/import-example-database.md)
+* [INSERT](/sql-statements/sql-statement-insert.md)
+* [Optimistic Transaction Model](/optimistic-transaction.md)
+* [Import Example Database](/import-example-data.md)

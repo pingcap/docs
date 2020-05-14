@@ -13,11 +13,11 @@ The capacity of a TiDB cluster can be increased or reduced without affecting onl
 
 > **Note:**
 >
-> If your TiDB cluster is deployed using TiDB Ansible, see [Scale the TiDB Cluster Using TiDB Ansible](/how-to/scale/with-ansible.md).
+> If your TiDB cluster is deployed using TiDB Ansible, see [Scale the TiDB Cluster Using TiDB Ansible](/scale-tidb-using-ansible.md).
 
 The following part shows you how to add or delete PD, TiKV or TiDB nodes.
 
-About `pd-ctl` usage, refer to [PD Control User Guide](/reference/tools/pd-control.md).
+About `pd-ctl` usage, refer to [PD Control User Guide](/pd-control.md).
 
 ## PD
 
