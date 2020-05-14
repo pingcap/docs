@@ -2,7 +2,7 @@
 title: TiKV Configuration Flags
 summary: Learn some configuration flags of TiKV.
 category: reference
-aliases: ['/docs/op-guide/tikv-configuration/']
+aliases: ['/docs/v3.0/reference/configuration/tikv-server/configuration/','/docs/op-guide/tikv-configuration/']
 ---
 
 # TiKV Configuration Flags

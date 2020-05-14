@@ -2,6 +2,7 @@
 title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
 category: reference
+aliases: ['/docs/v3.0/reference/sql/statements/show-indexes/']
 ---
 
 # SHOW INDEXES [FROM|IN]

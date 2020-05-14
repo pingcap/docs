@@ -1,7 +1,7 @@
 ---
 title: TiDB 1.0.8 Release Notes
 category: Releases
-aliases: ['/docs/releases/108/']
+aliases: ['/docs/v3.0/releases/108/','/docs/releases/108/']
 ---
 
 # TiDB 1.0.8 Release Notes

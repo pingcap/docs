@@ -1,7 +1,7 @@
 ---
 title: TiDB Ecosystem Tools User Guide
 category: reference
-aliases: ['/docs/v3.0/how-to/migrate/from-mysql/','/docs/v3.0/how-to/migrate/incrementally-from-mysql/','/docs/v3.0/how-to/migrate/overview/']
+aliases: ['/docs/v3.0/reference/tools/user-guide/','/docs/v3.0/how-to/migrate/from-mysql/','/docs/v3.0/how-to/migrate/incrementally-from-mysql/','/docs/v3.0/how-to/migrate/overview/']
 ---
 
 # TiDB Ecosystem Tools User Guide

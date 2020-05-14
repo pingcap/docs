@@ -2,6 +2,7 @@
 title: TiDB Pessimistic Transaction Model
 summary: Learn the pessimistic transaction model in TiDB.
 category: reference
+aliases: ['/docs/v3.0/reference/transactions/transaction-pessimistic/']
 ---
 
 # TiDB Pessimistic Transaction Model

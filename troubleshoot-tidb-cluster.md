@@ -2,7 +2,7 @@
 title: TiDB Cluster Troubleshooting Guide
 summary: Learn how to diagnose and resolve issues when you use TiDB.
 category: how-to
-aliases: ['/docs/trouble-shooting/']
+aliases: ['/docs/v3.0/how-to/troubleshoot/cluster-setup/','/docs/trouble-shooting/']
 ---
 
 # TiDB Cluster Troubleshooting Guide
