@@ -1,5 +1,5 @@
 ---
-title: Encryption-At-Rest
+title: Encryption-At-Rest for TiKV
 summary: Learn how to enable encryption-at-rest to protect sensitive data.
 category: reference
 ---
