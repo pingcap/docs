@@ -16,7 +16,7 @@ Also from v4.0.0, BR supports S3 server-side encryption (SSE) when backing up to
 
 The current version of TiKV encryption has some drawbacks that we are working actively to address in the future versions.
 
-* When deploying a TiDB cluster, the majority of a user's data is stored in TiKV nodes, and that data will be encrypted when encryption is enabled. However there is a small amount of user data stored in PD nodes as metadata (e.g secondary index keys used as TiKV region boundaries). As of v4.0.0, PD doesn't support encryption-at-rest. We recommend using storage level encryption (e.g. file system encryption) to help protect sensitive data stored in PD.
+* When a TiDB cluster is deployed, the majority of user data is stored in TiKV nodes, and that data will be encrypted when encryption is enabled. However, there is a small amount of user data stored in PD nodes as metadata (for example, secondary index keys used as TiKV region boundaries). As of v4.0.0, PD doesn't support encryption-at-rest. It is recommended to use storage-level encryption (for example, file system encryption) to help protect sensitive data stored in PD.
 * As of v4.0.0, TiFlash doesn't support encryption-at-rest. When deploying TiKV with TiFlash, data stored in TiFlash is not encrypted.
 * TiKV currently does not exclude encryption keys and user data from core dumps. It is adviced to disable core dumps for the TiKV process when using encryption-at-rest. This is not currently handled by TiKV itself.
 * TiKV tracks encrypted data files using the absolute path of the files. As a result, once encryption is turned on for a TiKV node, the user should not change data file paths config such as `storage.data-dir`, `raftstore.raftdb-path`, `rocksdb.wal-dir` and `raftdb.wal-dir`.
