@@ -93,7 +93,6 @@
   + Scale
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
     - [Scale using TiUP](/scale-tidb-using-tiup.md)
-    - [Scale a TiDB Cluster](/how-to/scale/horizontally.md)
   + Upgrade
     - [Upgrade Using TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     - [Upgrade Using TiDB Ansible](/upgrade-tidb-using-ansible.md)
