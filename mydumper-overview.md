@@ -2,6 +2,7 @@
 title: Mydumper Instructions
 summary: Use Mydumper to export data from TiDB.
 category: reference
+aliases: ['/docs/stable/reference/tools/mydumper/']
 ---
 
 # Mydumper Instructions

@@ -1,6 +1,7 @@
 ---
 title: TiDB RC3 Release Notes
 category: releases
+aliases: ['/docs/stable/releases/rc3/']
 ---
 
 # TiDB RC3 Release Notes

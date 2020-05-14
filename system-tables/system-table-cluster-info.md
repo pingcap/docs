@@ -2,6 +2,7 @@
 title: CLUSTER_INFO
 summary: Learn the `CLUSTER_INFO` cluster topology information table.
 category: reference
+aliases: ['/docs/stable/reference/system-databases/cluster-info/']
 ---
 
 # CLUSTER_INFO

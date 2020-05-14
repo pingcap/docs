@@ -2,6 +2,7 @@
 title: CREATE SEQUENCE
 summary: An overview of the usage of CREATE SEQUENCE for the TiDB database.
 category: reference
+aliases: ['/docs/stable/reference/sql/statements/create-sequence/']
 ---
 
 # CREATE SEQUENCE

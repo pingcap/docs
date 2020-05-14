@@ -2,6 +2,7 @@
 title: Placement Rules
 summary: Learn how to configure Placement Rules.
 category: how-to
+aliases: ['/docs/stable/how-to/configure/placement-rules/']
 ---
 
 # Placement Rules

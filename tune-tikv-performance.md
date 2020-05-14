@@ -2,6 +2,7 @@
 title: Tune TiKV Performance
 summary: Learn how to tune the TiKV parameters for optimal performance.
 category: reference
+aliases: ['/docs/stable/reference/performance/tune-tikv/']
 ---
 
 # Tune TiKV Performance

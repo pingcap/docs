@@ -2,6 +2,7 @@
 title: Configure Sink URI
 summary: Learn how to configure sink URI.
 category: reference
+aliases: ['/docs/stable/reference/tools/ticdc/sink/']
 ---
 
 # Configure Sink URI

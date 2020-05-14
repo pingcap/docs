@@ -1,6 +1,7 @@
 ---
 title: Pre-GA release notes
 category: releases
+aliases: ['/docs/stable/releases/prega/']
 ---
 
 # Pre-GA Release Notes
