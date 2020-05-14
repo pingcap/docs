@@ -2,6 +2,7 @@
 title: DEALLOCATE | TiDB SQL Statement Reference
 summary: An overview of the usage of DEALLOCATE for the TiDB database.
 category: reference
+aliases: ['/docs/v2.1/reference/sql/statements/deallocate/']
 ---
 
 # DEALLOCATE

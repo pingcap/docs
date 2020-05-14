@@ -2,6 +2,7 @@
 title: CREATE INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE INDEX for the TiDB database.
 category: reference
+aliases: ['/docs/v2.1/reference/sql/statements/create-index/']
 ---
 
 # CREATE INDEX

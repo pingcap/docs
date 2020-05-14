@@ -2,6 +2,7 @@
 title: CHANGE COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of CHANGE COLUMN for the TiDB database.
 category: reference
+aliases: ['/docs/v2.1/reference/sql/statements/change-column/']
 ---
 
 # CHANGE COLUMN

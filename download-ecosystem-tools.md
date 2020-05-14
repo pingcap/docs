@@ -2,6 +2,7 @@
 title: Download
 summary: Download the most officially maintained versions of TiDB enterprise tools.
 category: reference
+aliases: ['/docs/v2.1/reference/tools/download/']
 ---
 
 # Download
