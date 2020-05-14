@@ -57,6 +57,6 @@ In the above example, `x'2c'` is the hexadecimal representation of the `,` chara
 
 ## See also
 
-* [INSERT](/reference/sql/statements/insert.md)
-* [Optimistic Transaction Model](/reference/transactions/transaction-optimistic.md)
-* [Import Example Database](/how-to/get-started/import-example-database.md)
+* [INSERT](/sql-statements/sql-statement-insert.md)
+* [Optimistic Transaction Model](/optimistic-transaction.md)
+* [Import Example Database](/import-example-data.md)

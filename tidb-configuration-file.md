@@ -8,7 +8,7 @@ category: deployment
 
 # TiDB Configuration File
 
-The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/reference/configuration/tidb-server/configuration.md).
+The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
 
 ### `split-table`
 
@@ -21,7 +21,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 - The maximum memory available for a single SQL statement.
 - Default value: `1073741824`
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
-- This value is the initial value of the system variable [`tidb_mem_quota_query`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_mem_quota_query).
+- This value is the initial value of the system variable [`tidb_mem_quota_query`](/tidb-specific-system-variables.md#tidb_mem_quota_query).
 
 ### `oom-use-tmp-storage`
 
@@ -493,7 +493,7 @@ Configurations related to the `events_statement_summary_by_digest` table.
 
 ### enable
 
-- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md).
+- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
 - Default value: `true`
 
 ### max-retry-count

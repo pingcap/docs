@@ -88,13 +88,13 @@ Enable `Region Merge` by configuring the following parameters:
 >> pd-ctl config set merge-schedule-limit 8
 ```
 
-Refer to [Region Merge](https://github.com/tikv/tikv/blob/master/docs/how-to/configure/region-merge.md) and the following three configuration parameters in the [PD configuration file](/reference/configuration/pd-server/configuration-file.md#schedule) for more details:
+Refer to [Region Merge](https://github.com/tikv/tikv/blob/master/docs/how-to/configure/region-merge.md) and the following three configuration parameters in the [PD configuration file](/pd-configuration-file.md#schedule) for more details:
 
-- [`max-merge-region-size`](/reference/configuration/pd-server/configuration-file.md#max-merge-region-size)
-- [`max-merge-region-keys`](/reference/configuration/pd-server/configuration-file.md#max-merge-region-keys)
-- [`merge-schedule-limit`](/reference/configuration/pd-server/configuration-file.md#merge-schedule-limit)
+- [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
+- [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
+- [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
 
-The default configuration of the `Region Merge` parameters is rather conservative. You can speed up the `Region Merge` process by referring to the method provided in [PD Scheduling Best Practices](/reference/best-practices/pd-scheduling.md#region-merge-is-slow).
+The default configuration of the `Region Merge` parameters is rather conservative. You can speed up the `Region Merge` process by referring to the method provided in [PD Scheduling Best Practices](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow).
 
 ### Method 4: Increase the number of TiKV instances
 
@@ -142,7 +142,7 @@ You can check **Worker pending tasks** under **Task** in the **TiKV Grafana** pa
 
 ![Check pd-worker](/media/best-practices/pd-worker-metrics.png)
 
-Currently, pd-worker is optimized for better efficiency in [#5620](https://github.com/tikv/tikv/pull/5620) on [TiKV master](https://github.com/tikv/tikv/tree/master), which is applied since [v3.0.5](/releases/3.0.5.md#tikv). If you encounter a similar problem, it is recommended to upgrade to v3.0.5 or later versions.
+Currently, pd-worker is optimized for better efficiency in [#5620](https://github.com/tikv/tikv/pull/5620) on [TiKV master](https://github.com/tikv/tikv/tree/master), which is applied since [v3.0.5](/releases/release-3.0.5.md#tikv). If you encounter a similar problem, it is recommended to upgrade to v3.0.5 or later versions.
 
 ### Prometheus is slow to query metrics
 

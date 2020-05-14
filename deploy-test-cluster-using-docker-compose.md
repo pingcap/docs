@@ -12,7 +12,7 @@ With Docker Compose, you can use a YAML file to configure application services i
 
 > **Warning:**
 >
-> This is for testing only. DO NOT USE in production! It is recommended to deploy TiDB using [TiUP](/how-to/deploy/orchestrated/tiup.md) or [TiDB Operator in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-operator/) in production.
+> This is for testing only. DO NOT USE in production! It is recommended to deploy TiDB using [TiUP](/production-deployment-using-tiup.md) or [TiDB Operator in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-operator/) in production.
 
 ## Prerequisites
 
@@ -179,6 +179,6 @@ docker-compose exec tispark-master /opt/spark/bin/pyspark
 docker-compose exec tispark-master /opt/spark/bin/sparkR
 ```
 
-For more details about TiSpark, see [TiSpark Quick Start Guide](/how-to/get-started/tispark.md).
+For more details about TiSpark, see [TiSpark Quick Start Guide](/get-started-with-tispark.md).
 
 Here is [a 5-minute tutorial](https://pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/) for macOS users that shows how to spin up a standard TiDB cluster using Docker Compose on your local computer.

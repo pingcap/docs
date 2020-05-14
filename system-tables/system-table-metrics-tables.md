@@ -6,7 +6,7 @@ category: reference
 
 # METRICS_TABLES
 
-The `METRICS_TABLES` table provides information of all monitoring tables in the [metrics schema](/reference/system-databases/metrics-schema.md).
+The `METRICS_TABLES` table provides information of all monitoring tables in the [metrics schema](/system-tables/system-table-metrics-schema.md).
 
 {{< copyable "sql" >}}
 

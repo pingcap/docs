@@ -8,7 +8,7 @@ Category: how-to
 
 The capacity of a TiDB cluster can be increased or decreased without affecting the online services.
 
-This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash nodes using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the Control Machine](/how-to/upgrade/using-tiup.md#install-tiup-on-the-control-machine) and import the cluster into TiUP before you scale the TiDB cluster.
+This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash nodes using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the Control Machine](/upgrade-tidb-using-tiup.md#install-tiup-on-the-control-machine) and import the cluster into TiUP before you scale the TiDB cluster.
 
 To view the current cluster name list, run `tiup cluster list`.
 
@@ -202,7 +202,7 @@ If you want to remove the TiFlash node from the `10.0.1.4` host, take the follow
 
 1. Take the node offline:
 
-    To take offline the node to be scaled in, refer to [Take a TiFlash node down](/reference/tiflash/maintain.md#take-a-tiflash-node-down).
+    To take offline the node to be scaled in, refer to [Take a TiFlash node down](/tiflash/maintain-tiflash.md#take-a-tiflash-node-down).
 
 2. Check the node status:
 

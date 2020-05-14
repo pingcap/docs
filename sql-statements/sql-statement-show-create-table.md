@@ -41,7 +41,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [DROP TABLE](/reference/sql/statements/drop-table.md)
-* [SHOW TABLES](/reference/sql/statements/show-tables.md)
-* [SHOW COLUMNS FROM](/reference/sql/statements/show-columns-from.md)
+* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+* [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)
+* [SHOW COLUMNS FROM](/sql-statements/sql-statement-show-columns-from.md)

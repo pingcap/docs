@@ -5,7 +5,7 @@ category: how-to
 
 # Use Mydumper and TiDB Lightning for Data Backup and Restoration
 
-This document describes how to perform full backup and restoration of the TiDB data using Mydumper and TiDB Lightning. For incremental backup and restoration, refer to [TiDB Binlog](/reference/tidb-binlog/overview.md).
+This document describes how to perform full backup and restoration of the TiDB data using Mydumper and TiDB Lightning. For incremental backup and restoration, refer to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
 Suppose that the TiDB service information is as follows:
 
@@ -15,18 +15,18 @@ Suppose that the TiDB service information is as follows:
 
 Use the following tools for data backup and restoration:
 
-- [Mydumper](/reference/tools/mydumper.md): to export data from TiDB
-- [TiDB Lightning](/reference/tools/tidb-lightning/overview.md): to import data into TiDB
+- [Mydumper](/mydumper-overview.md): to export data from TiDB
+- [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md): to import data into TiDB
 
 ## Full backup and restoration using Mydumper/TiDB Lightning
 
 `mydumper` is a powerful data backup tool. For more information, refer to [`maxbube/mydumper`](https://github.com/maxbube/mydumper).
 
-Use [Mydumper](/reference/tools/mydumper.md) to export data from TiDB and use [TiDB Lightning](/reference/tools/tidb-lightning/overview.md) to import data into TiDB.
+Use [Mydumper](/mydumper-overview.md) to export data from TiDB and use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data into TiDB.
 
 > **Note:**
 >
-> It is recommended to download [Mydumper](/reference/tools/mydumper.md) from the PingCAP website, because the R&D team has adapted `mydumper` for TiDB. It is not recommended to use `mysqldump` which is much slower for both backup and restoration.
+> It is recommended to download [Mydumper](/mydumper-overview.md) from the PingCAP website, because the R&D team has adapted `mydumper` for TiDB. It is not recommended to use `mysqldump` which is much slower for both backup and restoration.
 
 ### Best practices for full backup and restoration using Mydumper/TiDB Lightning
 
@@ -60,7 +60,7 @@ If `mydumper` returns the following error:
 
 Then execute two more commands:
 
-1. Before executing the `mydumper` command, query the [GC](/reference/garbage-collection/overview.md) values of the TiDB cluster and adjust it to a suitable value using the MySQL client:
+1. Before executing the `mydumper` command, query the [GC](/garbage-collection-overview.md) values of the TiDB cluster and adjust it to a suitable value using the MySQL client:
 
     {{< copyable "sql" >}}
 
@@ -93,4 +93,4 @@ Then execute two more commands:
 
 ## Restore data into TiDB
 
-To restore data into TiDB, use TiDB Lightning to import the exported data. See [TiDB Lightning Tutorial](/reference/tools/tidb-lightning/tidb-backend.md).
+To restore data into TiDB, use TiDB Lightning to import the exported data. See [TiDB Lightning Tutorial](/tidb-lightning/tidb-lightning-tidb-backend.md).

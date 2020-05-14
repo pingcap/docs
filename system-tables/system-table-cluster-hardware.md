@@ -29,8 +29,8 @@ desc information_schema.cluster_hardware;
 
 Field description:
 
-* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/reference/system-databases/cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/reference/system-databases/cluster-info.md) cluster information table.
+* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/system-tables/system-table-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
+* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/system-tables/system-table-cluster-info.md) cluster information table.
 * `DEVICE_TYPE`: Hardware type. Currently, you can query the `cpu`, `memory`, `disk`, and `net` types.
 * `DEVICE_NAME`: Hardware name. The value of `DEVICE_NAME` varies with `DEVICE_TYPE`.
     * `cpu`: The hardware name is cpu.

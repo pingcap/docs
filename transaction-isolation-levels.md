@@ -21,7 +21,7 @@ TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REP
 
 > **Note:**
 >
-> In the default configuration of TiDB v3.0, the automatic transaction retry is disabled. For how this feature influences the isolation level and how to enable it, see [automatic retry](/reference/transactions/transaction-optimistic.md#automatic-retry).
+> In the default configuration of TiDB v3.0, the automatic transaction retry is disabled. For how this feature influences the isolation level and how to enable it, see [automatic retry](/optimistic-transaction.md#automatic-retry).
 
 TiDB uses the [Percolator transaction model](https://research.google.com/pubs/pub36726.html). A global read timestamp is obtained when the transaction is started, and a global commit timestamp is obtained when the transaction is committed. The execution order of transactions is confirmed based on the timestamps. To know more about the implementation of TiDB transaction model, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
 
@@ -56,7 +56,7 @@ The MySQL Repeatable Read isolation level is not the snapshot isolation level. T
 
 ## Read Committed isolation level
 
-TiDB supports the Read Committed isolation level only in the [Pessimistic Transaction Mode](/reference/transactions/transaction-pessimistic.md). In the optimistic transaction mode, setting the transaction isolation level to Read Committed does not take effect. Transactions will still use the Repeatable Read isolation level.
+TiDB supports the Read Committed isolation level only in the [Pessimistic Transaction Mode](/pessimistic-transaction.md). In the optimistic transaction mode, setting the transaction isolation level to Read Committed does not take effect. Transactions will still use the Repeatable Read isolation level.
 
 For historical reasons, the Read Committed isolation level of current mainstream databases is essentially the Consistent Read isolation level defined by Oracle. In order to adapt to this situation, the Read Committed isolation level in TiDB pessimistic transactions is also a consistent read behavior in essence.
 

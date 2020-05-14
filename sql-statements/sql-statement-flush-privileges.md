@@ -35,4 +35,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [Privilege Management](/reference/security/privilege-system.md)
+* [Privilege Management](/privilege-management.md)

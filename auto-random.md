@@ -10,11 +10,11 @@ category: reference
 >
 > `AUTO_RANDOM` is still an experimental feature. It is **NOT** recommended that you use this attribute in the production environment. In later TiDB versions, the syntax or semantics of `AUTO_RANDOM` might change.
 
-Before using the `AUTO_RANDOM` attribute, set `allow-auto-random = true` in the `experimental` section of the TiDB configuration file. Refer to [`allow-auto-random`](/reference/configuration/tidb-server/configuration-file.md#allow-auto-random) for details.
+Before using the `AUTO_RANDOM` attribute, set `allow-auto-random = true` in the `experimental` section of the TiDB configuration file. Refer to [`allow-auto-random`](/tidb-configuration-file.md#allow-auto-random) for details.
 
 ## User scenario
 
-When you write data intensively into TiDB and TiDB has the table with a primary key of the auto-increment integer type, hotspot issue might occur. To solve the hotspot issue, you can use the `AUTO_RANDOM` attribute. Refer to [Highly Concurrent Write Best Practices](/reference/best-practices/high-concurrency.md#complex-hotspot-problems) for details.
+When you write data intensively into TiDB and TiDB has the table with a primary key of the auto-increment integer type, hotspot issue might occur. To solve the hotspot issue, you can use the `AUTO_RANDOM` attribute. Refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md#complex-hotspot-problems) for details.
 
 Take the following created table as an example:
 
