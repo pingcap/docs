@@ -2,6 +2,7 @@
 title: TiFlash Alert Rules
 summary: Learn the alert rules of the TiFlash cluster.
 category: reference
+aliases: ['/docs/v3.1/reference/tiflash/alert-rules/']
 ---
 
 # TiFlash Alert Rules

@@ -2,6 +2,7 @@
 title: TiDB Binlog Cluster Deployment
 summary: Learn how to deploy TiDB Binlog cluster.
 category: reference
+aliases: ['/docs/v3.1/reference/tidb-binlog/deploy/']
 ---
 
 # TiDB Binlog Cluster Deployment

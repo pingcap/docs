@@ -2,6 +2,7 @@
 title: Scale the TiFlash Cluster
 summary: Learn how to scale in and out nodes in the TiFlash cluster.
 category: reference
+aliases: ['/docs/v3.1/reference/tiflash/scale/']
 ---
 
 # Scale the TiFlash Cluster

@@ -1,6 +1,7 @@
 ---
 title: Cross-DC Deployment Solutions
 category: how-to
+aliases: ['/docs/v3.1/how-to/deploy/geographic-redundancy/overview/']
 ---
 
 # Cross-DC Deployment Solutions

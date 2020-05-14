@@ -2,6 +2,7 @@
 title: Control Flow Functions
 summary: Learn about the Control Flow functions.
 category: reference
+aliases: ['/docs/v3.1/reference/sql/functions-and-operators/control-flow-functions/']
 ---
 
 # Control Flow Functions
