@@ -10,9 +10,9 @@ On October 16, 2017, TiDB 1.0 is now released! This release is focused on MySQL 
 ## TiDB
 
 - The SQL query optimizer:
-  - Adjust the cost model
-  - Analyze pushdown
-  - Function signature pushdown
+    - Adjust the cost model
+    - Analyze pushdown
+    - Function signature pushdown
 - Optimize the internal data format to reduce the interim data size
 - Enhance the MySQL compatibility
 - Support the `NO_SQL_CACHE` syntax and limit the cache usage in the storage engine

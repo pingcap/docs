@@ -18,7 +18,7 @@ On October 23, 2018, TiDB 2.1 RC4 is released. Compared with TiDB 2.1 RC3, this 
     - Fix the panic issue of the `PointGet` operator when a column of a table appears multiple times in the result set [#7943](https://github.com/pingcap/tidb/pull/7943)
     - Fix the panic issue caused by too large values in the `Limit` subclause [#8002](https://github.com/pingcap/tidb/pull/8002)
     - Fix the panic issue during the execution process of the `AddDate`/`SubDate` statement in some cases [#8009](https://github.com/pingcap/tidb/pull/8009)
-- Statistics
++ Statistics
     - Fix the issue of judging the prefix of the histogram low-bound of the combined index as out of range [#7856](https://github.com/pingcap/tidb/pull/7856)
     - Fix the memory leak issue caused by statistics collecting [#7873](https://github.com/pingcap/tidb/pull/7873)
     - Fix the panic issue when the histogram is empty [#7928](https://github.com/pingcap/tidb/pull/7928)

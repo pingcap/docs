@@ -75,8 +75,8 @@ If a number is inserted into an exact type column (DECIMAL or integer), it is in
 
 - If the value has too many digits in the fractional part, rounding occurs and a warning is generated.
 - If the value has too many digits in the integer part, it is too large and is handled as follows:
-  - If strict mode is not enabled, the value is truncated to the nearest legal value and a warning is generated.
-  - If strict mode is enabled, an overflow error occurs.
+    - If strict mode is not enabled, the value is truncated to the nearest legal value and a warning is generated.
+    - If strict mode is enabled, an overflow error occurs.
 
 To insert strings into numeric columns, TiDB handles the conversion from string to number as follows if the string has nonnumeric contents:
 
