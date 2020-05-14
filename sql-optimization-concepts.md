@@ -19,7 +19,7 @@ Based on rules, logical optimization applies some optimization rules to the inpu
 - Push down predicates
 - Partition pruning
 - Push down TopN and Limit
-- [Join Reorder](/reference/performance/join-reorder.md)
+- [Join Reorder](/join-reorder.md)
 
 ## Physical optimization
 

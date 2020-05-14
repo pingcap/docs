@@ -6,7 +6,7 @@ category: reference
 
 # Metrics Schema
 
-To dynamically observe and compare cluster conditions of different time ranges, the SQL diagnosis system introduces cluster monitoring system tables. All monitoring tables are in the metrics schema, and you can query the monitoring information using SQL statements in this schema. The data of the three monitoring-related summary tables ([`metrics_summary`](/reference/system-databases/metrics-summary.md), [`metrics_summary_by_label`](/reference/system-databases/metrics-summary.md), and `inspection_result`) are all obtained by querying the monitoring tables in the metrics schema. Currently, many system tables are added, so you can query the information of these tables using the [`information_schema.metrics_tables`](/reference/system-databases/metrics-tables.md) table.
+To dynamically observe and compare cluster conditions of different time ranges, the SQL diagnosis system introduces cluster monitoring system tables. All monitoring tables are in the metrics schema, and you can query the monitoring information using SQL statements in this schema. The data of the three monitoring-related summary tables ([`metrics_summary`](/system-tables/system-table-metrics-summary.md), [`metrics_summary_by_label`](/system-tables/system-table-metrics-summary.md), and `inspection_result`) are all obtained by querying the monitoring tables in the metrics schema. Currently, many system tables are added, so you can query the information of these tables using the [`information_schema.metrics_tables`](/system-tables/system-table-metrics-tables.md) table.
 
 ## Overview
 

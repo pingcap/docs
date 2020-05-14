@@ -10,7 +10,7 @@ This document provides samples for global configuration, task configuration, and
 
 ## Configuration files
 
-TiDB Lightning has two configuration classes: "global" and "task", and they have compatible structures. Their distinction arises only when the [server mode](/reference/tools/tidb-lightning/web.md) is enabled. When server mode is disabled (the default), TiDB Lightning will only execute one task, and the same configuration file is used for both global and task configurations.
+TiDB Lightning has two configuration classes: "global" and "task", and they have compatible structures. Their distinction arises only when the [server mode](/tidb-lightning/tidb-lightning-web-interface.md) is enabled. When server mode is disabled (the default), TiDB Lightning will only execute one task, and the same configuration file is used for both global and task configurations.
 
 ### TiDB Lightning (Global)
 
@@ -298,7 +298,7 @@ min-available-ratio = 0.05
 | -V | Prints program version | |
 | -d *directory* | Directory of the data dump to read from | `mydumper.data-source-dir` |
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
-| --backend *backend* | [Delivery backend](/reference/tools/tidb-lightning/tidb-backend.md) (`importer` or `tidb`) | `tikv-importer.backend` |
+| --backend *backend* | [Delivery backend](/tidb-lightning/tidb-lightning-tidb-backend.md) (`importer` or `tidb`) | `tikv-importer.backend` |
 | --log-file *file* | Log file path | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
 | --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |

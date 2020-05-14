@@ -34,15 +34,15 @@ Similar to MySQL, the encrypted connections in TiDB consist of single connection
 
 > **Note:**
 >
-> If the login user has configured using the [TiDB Certificate-Based Authentication for Login](/reference/security/cert-based-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
+> If the login user has configured using the [TiDB Certificate-Based Authentication for Login](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
 
 ## Configure TiDB to use encrypted connections
 
 See the following desrciptions about the related parameters to enable encrypted connections:
 
-- [`ssl-cert`](/reference/configuration/tidb-server/configuration-file.md#ssl-cert): specifies the file path of the SSL certificate
-- [`ssl-key`](/reference/configuration/tidb-server/configuration-file.md#ssl-key): specifies the private key that matches the certificate
-- [`ssl-ca`](/reference/configuration/tidb-server/configuration-file.md#ssl-ca): (optional) specifies the file path of the trusted CA certificate
+- [`ssl-cert`](/tidb-configuration-file.md#ssl-cert): specifies the file path of the SSL certificate
+- [`ssl-key`](/tidb-configuration-file.md#ssl-key): specifies the private key that matches the certificate
+- [`ssl-ca`](/tidb-configuration-file.md#ssl-ca): (optional) specifies the file path of the trusted CA certificate
 
 To enable encrypted connections in the TiDB server, you must specify both of the `ssl-cert` and `ssl-key` parameters in the configuration file when you start the TiDB server. You can also specify the `ssl-ca` parameter for client authentication (see [Enable authentication](#enable-authentication)).
 
@@ -80,7 +80,7 @@ If the certificate parameters are correct, TiDB outputs `secure connection is en
 
 ## Reload certificate, key, and CA
 
-To replace the certificate, the key or CA, first replace the corresponding files, then execute the [`ALTER INSTANCE RELOAD TLS`](/reference/sql/statements/alter-instance.md) statement on the running TiDB instance to reload the certificate ([`ssl-cert`](/reference/configuration/tidb-server/configuration-file.md#ssl-cert)), the key ([`ssl-key`](/reference/configuration/tidb-server/configuration-file.md#ssl-key)), and the CA ([`ssl-ca`](/reference/configuration/tidb-server/configuration-file.md#ssl-ca)) from the original configuration path. In this way, you do not need to restart the TiDB instance.
+To replace the certificate, the key or CA, first replace the corresponding files, then execute the [`ALTER INSTANCE RELOAD TLS`](/sql-statements/sql-statement-alter-instance.md) statement on the running TiDB instance to reload the certificate ([`ssl-cert`](/tidb-configuration-file.md#ssl-cert)), the key ([`ssl-key`](/tidb-configuration-file.md#ssl-key)), and the CA ([`ssl-ca`](/tidb-configuration-file.md#ssl-ca)) from the original configuration path. In this way, you do not need to restart the TiDB instance.
 
 The newly loaded certificate, key, and CA take effect on the connection that is established after the statement is successfully executed. The connection established before the statement execution is not affected.
 
@@ -123,7 +123,7 @@ create user 'u1'@'%'  require x509;
 
 > **Note:**
 >
-> If the login user has configured using the [TiDB Certificate-Based Authentication for Login](/reference/security/cert-based-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
+> If the login user has configured using the [TiDB Certificate-Based Authentication for Login](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
 
 ## Check whether the current connection uses encryption
 

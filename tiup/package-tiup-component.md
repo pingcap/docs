@@ -70,7 +70,7 @@ To make it simple, the bash script is used to develop this component. See the fo
 
     The `TIUP_COMPONENT_INSTALL_DIR` environment variable is passed in when TiUP is running. This variable points to the installation directory of the component.
 
-3. Refer to [Create a Private Mirror](/reference/tools/tiup/mirrors.md) and create an offline or a private mirror accordingly. Make sure the `TIUP_MIRRORS` variable points to the mirror after this mirror is created.
+3. Refer to [Create a Private Mirror](/tiup/tiup-mirrors.md) and create an offline or a private mirror accordingly. Make sure the `TIUP_MIRRORS` variable points to the mirror after this mirror is created.
 
     > **Note:**
     >
@@ -88,7 +88,7 @@ To make it simple, the bash script is used to develop this component. See the fo
 
 5. Upload the packaged files to the repository:
 
-    You can upload the packaged files only to the mirror created by yourself in step 3, because currently you cannot publish the files to the official repository. Execute the following command to copy all files in the `package` directory into `<target-dir>`. For details of `<target-dir>`, refer to the [`mirrors` description](/reference/tools/tiup/mirrors.md#mirrors-description).
+    You can upload the packaged files only to the mirror created by yourself in step 3, because currently you cannot publish the files to the official repository. Execute the following command to copy all files in the `package` directory into `<target-dir>`. For details of `<target-dir>`, refer to the [`mirrors` description](/tiup/tiup-mirrors.md#mirrors-description).
 
     {{< copyable "shell-regular" >}}
 

@@ -6,7 +6,7 @@ category: how-to
 
 # BR Usage Scenarios
 
-[Backup & Restore](/reference/tools/br/br.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in [four scenarios](#usage-scenarios) that aims to help you achieve the following goals:
+[Backup & Restore](/br/backup-and-restore-tool.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in [four scenarios](#usage-scenarios) that aims to help you achieve the following goals:
 
 * Back up and restore data using a network disk or local disk correctly.
 * Get the status of a backup or restoration operation through monitoring metrics.
@@ -15,11 +15,11 @@ category: how-to
 
 > **Note:**
 >
-> Pay attention to the [usage restrictions](/reference/tools/br/br.md#usage-restrictions) before using BR.
+> Pay attention to the [usage restrictions](/br/backup-and-restore-tool.md#usage-restrictions) before using BR.
 
 ## Audience
 
-You are expected to have a basic understanding of [TiDB](https://pingcap.com/docs/stable/) and [TiKV](https://tikv.org/). Before reading this document, it is recommended that you read [Use BR to Back up and Restore Data](/reference/tools/br/br.md) first.
+You are expected to have a basic understanding of [TiDB](https://pingcap.com/docs/stable/) and [TiKV](https://tikv.org/). Before reading this document, it is recommended that you read [Use BR to Back up and Restore Data](/br/backup-and-restore-tool.md) first.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ This section introduces the recommended method of deploying TiDB, cluster versio
 
 ### Deployment method
 
-It is recommended that you deploy the TiDB cluster using [TiDB Ansible](/how-to/deploy/orchestrated/ansible.md) and get BR by downloading [TiDB Toolkit](/reference/tools/download.md#br-backup-and-restore).
+It is recommended that you deploy the TiDB cluster using [TiDB Ansible](/online-deployment-using-ansible.md) and get BR by downloading [TiDB Toolkit](/download-ecosystem-tools.md#br-backup-and-restore).
 
 ### Cluster versions
 
@@ -67,9 +67,9 @@ It is recommended that you use a network disk to back up and restore data. This 
 
 ### Preparation for backup
 
-For the detailed usage of the `br backup` command, refer to [BR command-line description](/reference/tools/br/br.md#command-line-description).
+For the detailed usage of the `br backup` command, refer to [BR command-line description](/br/backup-and-restore-tool.md#command-line-description).
 
-1. Before executing the `br backup` command, check the value of the [`tikv_gc_life_time`](/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration item, and adjust the value appropriately in the MySQL client to make sure that [Garbage Collection](/reference/garbage-collection/overview.md) (GC) does not run during the backup operation.
+1. Before executing the `br backup` command, check the value of the [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) configuration item, and adjust the value appropriately in the MySQL client to make sure that [Garbage Collection](/garbage-collection-overview.md) (GC) does not run during the backup operation.
 
     {{< copyable "sql" >}}
 
@@ -88,7 +88,7 @@ For the detailed usage of the `br backup` command, refer to [BR command-line des
 
 ### Preparation for restoration
 
-For the detailed usage of the `br restore` command, refer to [BR command-line description](/reference/tools/br/br.md#command-line-description).
+For the detailed usage of the `br restore` command, refer to [BR command-line description](/br/backup-and-restore-tool.md#command-line-description).
 
 > **Note:**
 >

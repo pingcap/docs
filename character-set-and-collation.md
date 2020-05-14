@@ -277,7 +277,7 @@ To disable this error reporting, use `set @@tidb_skip_utf8_check=1;` to skip the
 
 ## Collation support framework
 
-The syntax support and semantic support for the collation are influenced by the [`new_collations_enabled_on_first_bootstrap`](/reference/configuration/tidb-server/configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item. The syntax support and semantic support are different. The former indicates that TiDB can parse and set collations. The latter indicates that TiDB can correctly use collations when comparing strings.
+The syntax support and semantic support for the collation are influenced by the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item. The syntax support and semantic support are different. The former indicates that TiDB can parse and set collations. The latter indicates that TiDB can correctly use collations when comparing strings.
 
 Before v4.0, TiDB provides only the [old framework for collations](#old-framework-for-collations). In this framework, TiDB supports syntactically parsing most of the MySQL collations but semantically takes all collations as binary collations.
 

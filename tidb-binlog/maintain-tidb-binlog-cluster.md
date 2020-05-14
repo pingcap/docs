@@ -175,7 +175,7 @@ Command example:
 
     > **Note:**
     >
-    > When a Pump or Drainer node runs normally, it regularly updates its state to PD. But the above command is used to directly modify the Pump or Drainer state saved in PD, so do not use the command when the Pump or Drainer node runs normally. Refer to [TiDB Binlog FAQ](/reference/tidb-binlog/faq.md) to see in what situation you need to use it.
+    > When a Pump or Drainer node runs normally, it regularly updates its state to PD. But the above command is used to directly modify the Pump or Drainer state saved in PD, so do not use the command when the Pump or Drainer node runs normally. Refer to [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md) to see in what situation you need to use it.
 
 ## Use SQL statements to manage Pump or Drainer
 

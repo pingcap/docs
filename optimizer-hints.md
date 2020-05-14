@@ -270,7 +270,7 @@ In addition to this hint, setting the `tidb_replica_read` environment variable t
 
 `IGNORE_PLAN_CACHE()` reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
 
-This hint is used to temporarily disable the Plan Cache when [prepare-plan-cache](/reference/configuration/tidb-server/configuration-file.md#prepared-plan-cache) is enabled.
+This hint is used to temporarily disable the Plan Cache when [prepare-plan-cache](/tidb-configuration-file.md#prepared-plan-cache) is enabled.
 
 In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
 

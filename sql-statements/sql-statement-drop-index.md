@@ -64,11 +64,11 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## MySQL compatibility
 
-* Removing the primary key constraint from a column is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/reference/configuration/tidb-server/configuration-file.md#alter-primary-key).
+* Removing the primary key constraint from a column is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/tidb-configuration-file.md#alter-primary-key).
 
 ## See also
 
-* [SHOW INDEX](/reference/sql/statements/show-index.md)
-* [CREATE INDEX](/reference/sql/statements/create-index.md)
-* [ADD INDEX](/reference/sql/statements/add-index.md)
-* [RENAME INDEX](/reference/sql/statements/rename-index.md)
+* [SHOW INDEX](/sql-statements/sql-statement-show-index.md)
+* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)

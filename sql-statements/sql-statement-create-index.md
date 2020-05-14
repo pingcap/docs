@@ -105,25 +105,25 @@ The cost of maintaining an expression index is higher than that of maintaining o
 
 Therefore, when the query performance outweighs the insert and update performance, you can consider indexing the expressions.
 
-Expression indexes have the same syntax and limitations as in MySQL. They are implemented by building indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/reference/sql/generated-columns.md#limitations).
+Expression indexes have the same syntax and limitations as in MySQL. They are implemented by building indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
 
 Currently, the optimizer can use the indexed expressions when the expressions are only in the `FIELD` clause, `WHERE` clause, and `ORDER BY` clause. The `GROUP BY` clause will be supported in future updates.
 
 ## Associated session variables
 
-The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size` and `tidb_ddl_reorg_priority`. Refer to [TiDB-specific system variables](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_ddl_reorg_worker_cnt) for details.
+The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size` and `tidb_ddl_reorg_priority`. Refer to [TiDB-specific system variables](/tidb-specific-system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
 
 ## MySQL compatibility
 
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key constraint to a table is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/reference/configuration/tidb-server/configuration-file.md#alter-primary-key).
+* Adding the primary key constraint to a table is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/tidb-configuration-file.md#alter-primary-key).
 
 ## See also
 
-* [ADD INDEX](/reference/sql/statements/add-index.md)
-* [DROP INDEX](/reference/sql/statements/drop-index.md)
-* [RENAME INDEX](/reference/sql/statements/rename-index.md)
-* [ADD COLUMN](/reference/sql/statements/add-column.md)
-* [CREATE TABLE](/reference/sql/statements/create-table.md)
-* [EXPLAIN](/reference/sql/statements/explain.md)
+* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+* [EXPLAIN](/sql-statements/sql-statement-explain.md)
