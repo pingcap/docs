@@ -6,7 +6,7 @@ category: reference
 
 # PD Recover User Guide
 
-PD Recover is a disaster recovery tool of PD, used to recover the PD cluster which cannot start or provide services normally. PD Recover is downloaded with tidb-ansible in `resource/bin/pd-recover`.
+PD Recover is a disaster recovery tool of PD, used to recover the PD cluster which cannot start or provide services normally. PD Recover is downloaded with tidb-ansible in the `resource/bin/pd-recover` path.
 
 ## Quick Start
 
@@ -14,7 +14,7 @@ This section describes how to use PD Recover to recover a PD cluster.
 
 ### Get cluster ID
 
-The cluster ID can be obtained in the log of PD, TiKV or TiDB. You can either use `ansible ad-hoc` in the Control Machine, or view the log directly on the server.
+The cluster ID can be obtained from the log of PD, TiKV or TiDB. To get the cluster ID, you can either use the `ansible ad-hoc` command in the Control Machine, or view the log directly on the server.
 
 #### Get [info] cluster ID from PD log (recommended)
 
@@ -66,9 +66,9 @@ ansible -i inventory.ini tikv_servers -m shell -a 'cat {{deploy_dir}}/log/tikv* 
 
 ### Get Alloc ID (TiKV StoreID)
 
-When you specify `alloc-id`, you need to specify a value greater than the currently largest `Alloc ID`. You can either use `ansible ad-hoc` in the Control Machine, or view the log directly on the server.
+The `alloc-id` value you specify must be larger than the currently largest `Alloc ID` value. To get `Alloc ID`, you can either use the `ansible ad-hoc` command in the Control Machine, or view the log directly on the server.
 
-#### Get [info] allocates id from PD log
+#### Get `[info] allocates id` from PD log
 
 To get the `[info]` allocates id from the PD log, run the following command:
 
@@ -148,10 +148,10 @@ ansible-playbook rolling_update.yml --tags=tidb,tikv
 
 ## FAQ
 
-### Multiple cluster IDs are found when you get the cluster ID
+### Multiple cluster IDs are found when getting the cluster ID
 
 When a PD cluster is created, a new cluster ID is generated. You can determine the cluster ID of the old cluster by viewing the log.
 
-### An error `dial tcp 10.0.1.13:2379: connect: connection refused` is returned when you execute pd-recover
+### The error `dial tcp 10.0.1.13:2379: connect: connection refused` is returned when executing `pd-recover`
 
-The PD service is required when you execute pd-recover. Deploy and start the PD cluster before you use pd-recover.
+The PD service is required when you execute `pd-recover`. Deploy and start the PD cluster before you use PD Recover.
