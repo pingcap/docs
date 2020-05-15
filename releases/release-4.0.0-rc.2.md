@@ -15,11 +15,11 @@ TiUP version: 4.0.0-rc.2
 
 + TiDB
 
-    - Change the size limit for a single transaction from 100 MB to infinite. However, if TiDB Binlog is enabled and the downstream is Kafka, configure the `txn-total-size-limit` parameter according to the message size limit of 1 GB in kafka [#16941](https://github.com/pingcap/tidb/blob/master/config/config.toml.example#L243) [#16941](https://github.com/pingcap/tidb/pull/16941)
+    - Change the size limit for a single transaction from 100 MB to infinite. However, if TiDB Binlog is enabled and the downstream is Kafka, configure the `txn-total-size-limit` parameter according to the message size limit of 1 GB in kafka [#16941](https://github.com/pingcap/tidb/pull/16941)
     - Change the behavior from querying the default time range to returning an error and requesting a specified time range if the time range is not specified when querying the `CLUSTER_LOG` table [#17003](https://github.com/pingcap/tidb/pull/17003)
-    - If the unsupported  `sub-partition` or `linear hash` option is specified when creating the partitioned table using the `CREATE TABLE` statement, the normal table is created rather than the partitioned table with the options ignored [#17197](https://github.com/pingcap/tidb/pull/17197)
+    - If the unsupported `sub-partition` or `linear hash` option is specified when creating the partitioned table using the `CREATE TABLE` statement, the normal table is created rather than the partitioned table with the options ignored [#17197](https://github.com/pingcap/tidb/pull/17197)
 
-+ TiKV 
++ TiKV
 
     - Move the encryption-related configuration to the security-related configuration, which means changing `[encryption]` in the TiKV configuration file to `[security.encryption]` [#7810](https://github.com/tikv/tikv/pull/7810)
 
@@ -27,7 +27,7 @@ TiUP version: 4.0.0-rc.2
 
     - TiDB Lightning
 
-        - Change the default SQL mode to  `ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER` when importing data to improve compatibility [#316](https://github.com/pingcap/tidb-lightning/pull/316)
+        - Change the default SQL mode to `ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER` when importing data to improve compatibility [#316](https://github.com/pingcap/tidb-lightning/pull/316)
         - Disallow accessing the PD or TiKV port in the tidb-backend mode [#312](https://github.com/pingcap/tidb-lightning/pull/312)
         - Print the log information to the tmp file by default, and print the path of the tmp file when TiDB Lightning is started [#313](https://github.com/pingcap/tidb-lightning/pull/313)
 
@@ -35,12 +35,12 @@ TiUP version: 4.0.0-rc.2
 
 + TiDB
 
-    - Fix the issue that the wrong partition is chosen when the `WHERE` clause  has only one equivalent condition [#17054](https://github.com/pingcap/tidb/pull/17054)
+    - Fix the issue that the wrong partition is chosen when the `WHERE` clause has only one equivalent condition [#17054](https://github.com/pingcap/tidb/pull/17054)
     - Fix the issue of wrong results caused by building the incorrect Index range when the `WHERE` clause only contains the string column [#16660](https://github.com/pingcap/tidb/pull/16660)
     - Fix the panic issue that occurs when executing the `PointGet` query in the transaction after the `DELETE` operation [#16991](https://github.com/pingcap/tidb/pull/16991)
     - Fix the issue that the GC worker might encounter the deadlock when an error occurs [#16915](https://github.com/pingcap/tidb/pull/16915)
     - Avoid the unnecessary RegionMiss retry when the TiKV response is slow but not down [#16956](https://github.com/pingcap/tidb/pull/16956)
-    - Change the log level in the client in the handshake phase of  the MySQL protocol to `DEBUG` to solve the problem that interferes with log output [#16881](https://github.com/pingcap/tidb/pull/16881)
+    - Change the log level in the client in the handshake phase of the MySQL protocol to `DEBUG` to solve the problem that interferes with log output [#16881](https://github.com/pingcap/tidb/pull/16881)
     - Fix the issue that the Region is not pre-split according to the `PRE_SPLIT_REGIONS` information defined by the table after the `TRUNCATE` operation [#16776](https://github.com/pingcap/tidb/pull/16776)
     - Fix the issue of soaring goroutine caused by retry when TiKV is unavailable during the second phase of the two-phase commit [#16876](https://github.com/pingcap/tidb/pull/16876)
     - Fix the panic issue of statement execution when some expressions cannot be pushed down [#16869](https://github.com/pingcap/tidb/pull/16869)
@@ -57,7 +57,7 @@ TiUP version: 4.0.0-rc.2
 
     - Add support for the `BACKUP` and `RESTORE` commands to back up and restore data [#16960](https://github.com/pingcap/tidb/pull/16960)
     - Support pre-checking the data volume in a single Region before commit and pre-splitting the Region when the data volume exceeds the threshold [#16959](https://github.com/pingcap/tidb/pull/16959)
-    - Add the new  `LAST_PLAN_FROM_CACHE`  variable with a `Session` scope to indicate whether the last executed statement hits the plan cache [#16830](https://github.com/pingcap/tidb/pull/16830)
+    - Add the new `LAST_PLAN_FROM_CACHE` variable with a `Session` scope to indicate whether the last executed statement hits the plan cache [#16830](https://github.com/pingcap/tidb/pull/16830)
     - Support recording the `Cop_time` information in slow log and the `SLOW_LOG` table [#16904](https://github.com/pingcap/tidb/pull/16904)
     - Add in Grafana more metrics that monitor the memory status of Go Runtime [#16928](https://github.com/pingcap/tidb/pull/16928)
     - Support outputting the `forUpdateTS` and `Read Consistency` isolation level information in General Log [#16946](https://github.com/pingcap/tidb/pull/16946)
@@ -76,7 +76,7 @@ TiUP version: 4.0.0-rc.2
     - Support encryption debugging for tikv-ctl, so that tikv-ctl can be used to operate and manage the cluster when the encryption storage is enabled [#7698](https://github.com/tikv/tikv/pull/7698)
     - Support encrypting the lock column family in snapshots [#7712](https://github.com/tikv/tikv/pull/7712)
     - Use the heatmap in the Grafana dashboard for Raftstore latency summary to better diagnose the jitter issue [#7717](https://github.com/tikv/tikv/pull/7717)
-    - Support setting the upper limit for the size of  the gRPC message [#7824](https://github.com/tikv/tikv/pull/7824)
+    - Support setting the upper limit for the size of the gRPC message [#7824](https://github.com/tikv/tikv/pull/7824)
     - Add in Grafana dashboard the encryption-related monitoring metrics [#7827](https://github.com/tikv/tikv/pull/7827)
     - Support Application-Layer Protocol Negotiation (ALPN) [#7825](https://github.com/tikv/tikv/pull/7825)
     - Add more statistics about Titan [#7818](https://github.com/tikv/tikv/pull/7818)
@@ -89,7 +89,7 @@ TiUP version: 4.0.0-rc.2
 
 + TiFlash
 
-    - Change the name of  the Count graph of **Read Index** in Grafana to **Ops**
+    - Change the name of the Count graph of **Read Index** in Grafana to **Ops**
     - Optimize the data for opening file descriptors when the system load is low to reduce system resource consumption
     - Add the capacity-related configuration parameter to limit the the data storage capacity
 
@@ -125,7 +125,7 @@ TiUP version: 4.0.0-rc.2
     - Fix the issue that a physical query plan cannot be generated when using the `MergeJoin` hint and the `TableDual` operator exists [#17016](https://github.com/pingcap/tidb/pull/17016)
     - Fix the wrong capitalization of the values in the `Stmt_Type` column of the Statement Summary table [#17018](https://github.com/pingcap/tidb/pull/17018)
     - Fix the issue that the `Permission Denied` error is reported because the service cannot be started when different users use the same `tmp-storage-path` [#16996](https://github.com/pingcap/tidb/pull/16996)
-    - Fix the issue that the `NotNullFlag` result type is incorrectly set for an expression whose result type is determined by multiple input columns, such as `CASE WHEN` [#16995](https://github.com/pingcap/tidb/pull/16995) 
+    - Fix the issue that the `NotNullFlag` result type is incorrectly set for an expression whose result type is determined by multiple input columns, such as `CASE WHEN` [#16995](https://github.com/pingcap/tidb/pull/16995)
     - Fix the issue that the green GC might leave unresolved locks when dirty stores exist [#16949](https://github.com/pingcap/tidb/pull/16949)
     - Fix the issue that the green GC might leave unresolved locks when encountering a single key with multiple different locks [#16948](https://github.com/pingcap/tidb/pull/16948)
     - Fix the issue of inserting a wrong value in the `INSERT VALUE` statement because a sub-query refers to a parent query column [#16952](https://github.com/pingcap/tidb/pull/16952)
@@ -161,7 +161,7 @@ TiUP version: 4.0.0-rc.2
     - Fix the issue that the SQL statement fails to execute when an invalid date is stored [#7268](https://github.com/tikv/tikv/pull/7268)
     - Fix the issue that the backup data cannot be restored from GCS [#7739](https://github.com/tikv/tikv/pull/7739)
     - Fix the issue that KMS key ID is not validated during encryption at rest [#7719](https://github.com/tikv/tikv/pull/7719)
-    - Fix the underlying correctness issue of  the Coprocessor in compilers of different architecture  [#7714](https://github.com/tikv/tikv/pull/7714) [#7730](https://github.com/tikv/tikv/pull/7730)
+    - Fix the underlying correctness issue of the Coprocessor in compilers of different architecture  [#7714](https://github.com/tikv/tikv/pull/7714) [#7730](https://github.com/tikv/tikv/pull/7730)
     - Fix the `snapshot ingestion` error when encrytion is enabled [#7815](https://github.com/tikv/tikv/pull/7815)
     - Fix the `Invalid cross-device link` error when rewriting the configuration file [#7817](https://github.com/tikv/tikv/pull/7817)
     - Fix the issue of wrong toml format when writing the configuration file to an empty file [#7817](https://github.com/tikv/tikv/pull/7817)
@@ -176,24 +176,24 @@ TiUP version: 4.0.0-rc.2
     - Fix the issue that there is no default output when using the `scheduler config shuffle-region-scheduler` command in pd-ctl [#2416](https://github.com/pingcap/pd/pull/2416)
 
 + TiFlash
-    
+
     - Fix the issue that the wrong information of used capacity is report in some scenarios
 
 + Tools
 
     - TiDB Binlog
-    
+
         - Fix the issue that data of the `mediumint` type is not processed when the downstream is Kafka [#962](https://github.com/pingcap/tidb-binlog/pull/962)
-        - Fix the issue that the reparo fails to parse the DDL statement when the database name in DDL is a keyword  [#961](https://github.com/pingcap/tidb-binlog/pull/961)
-    
+        - Fix the issue that the reparo fails to parse the DDL statement when the database name in DDL is a keyword [#961](https://github.com/pingcap/tidb-binlog/pull/961)
+
     - TiCDC
-    
+
         - Fix the issue of using the wrong time zone when the `TZ` environment variable is not set [#512](https://github.com/pingcap/ticdc/pull/512)
         - Fix the issue that the owner does not clean up the resources when the server exits because some errors are not handled correctly [#528](https://github.com/pingcap/ticdc/pull/528)
         - Fix the issue that TiCDC might be stuck when reconnecting to TiKV [#531](https://github.com/pingcap/ticdc/pull/531)
         - Optimize the memory usage when initializing the table schema [#534](https://github.com/pingcap/ticdc/pull/534)
         - Use the `watch` mode to monitor the replication status changes and perform quasi-real-time updates to reduce replication delay [#481](https://github.com/pingcap/ticdc/pull/481)
-    
+
     + BR
-        
+
         - Fix the issue that inserting data might trigger the `duplicate entry` error after BR restores a table with the `auto_random` attribute [#241](https://github.com/pingcap/br/issues/241)
