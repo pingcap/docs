@@ -6,7 +6,7 @@ This repository stores all the source files of [TiDB Docs at the PingCAP website
 
 Currently, we maintain the following versions of TiDB documentation in different branches:
 
-| Branch name | TiDB doc version |
+| Branch name | TiDB docs version |
 | :---------|:----------|
 | [`master`](https://github.com/pingcap/docs/tree/master) | The latest development version |
 | [`release-4.0`](https://github.com/pingcap/docs/tree/release-4.0) | 4.0 RC version |
@@ -16,4 +16,6 @@ Currently, we maintain the following versions of TiDB documentation in different
 
 ## Contributing
 
-See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to get started. 🤓
+[<img src="media/contribution-map.png" alt="contribution-map" width="180">](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-docs)
+
+See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
