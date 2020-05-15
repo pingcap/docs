@@ -413,7 +413,7 @@ EXPLAIN SELECT /*+ INL_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ## Optimization example
 
-For more details, refer to [bikeshare example database](/import-example-database.md).
+For more details, refer to [bikeshare example database](/import-example-data.md).
 
 {{< copyable "sql" >}}
 
