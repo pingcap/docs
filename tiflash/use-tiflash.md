@@ -198,7 +198,7 @@ You can configure this parameter in either of the following ways:
 
 TiFlash mainly supports predicate and aggregate push-down calculations. Push-down calculations can help TiDB perform distributed acceleration. Currently, table joins and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in later versions.
 
-Currently, TiFlash supports the limited push-down of common expressions. To learn the specific push-down expressions, refer to [expression list](https://github.com/pingcap/tidb/blob/692e0098b1207ef26ea18bedfcc9ba067604da3c/expression/expression.go#L1115).
+Currently, TiFlash supports pushing down a limited number of expressions. To learn the supported expressions, refer to [expression list](https://github.com/pingcap/tidb/blob/692e0098b1207ef26ea18bedfcc9ba067604da3c/expression/expression.go#L1115).
 
 TiFlash does not support push-down calculations in the following situations:
 
