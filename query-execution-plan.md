@@ -475,5 +475,5 @@ After adding the index, use `IndexScan_24` to directly read the data that meets 
 
 * [EXPLAIN](/sql-statements/sql-statement-explain.md)
 * [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md.md)
+* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 * [TRACE](/sql-statements/sql-statement-trace.md)
