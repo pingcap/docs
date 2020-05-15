@@ -6,7 +6,7 @@ category: reference
 
 # PD Recover User Guide
 
-PD Recover is a disaster recovery tool of PD, used to recover the PD cluster which cannot start or provide services normally. PD Recover is downloaded with tidb-ansible in the `resource/bin/pd-recover` path.
+PD Recover is a disaster recovery tool of PD, used to recover the PD cluster which cannot start or provide services normally. PD Recover is downloaded with TiDB Ansible in the `resource/bin/pd-recover` path.
 
 ## Quick Start
 
@@ -16,7 +16,7 @@ This section describes how to use PD Recover to recover a PD cluster.
 
 The cluster ID can be obtained from the log of PD, TiKV or TiDB. To get the cluster ID, you can either use the `ansible ad-hoc` command in the Control Machine, or view the log directly on the server.
 
-#### Get [info] cluster ID from PD log (recommended)
+#### Get `[info] cluster ID` from PD log (recommended)
 
 To get the `[info]` cluster ID from the PD log, run the following command:
 
@@ -32,7 +32,7 @@ ansible -i inventory.ini pd_servers -m shell -a 'cat {{deploy_dir}}/log/pd.log |
 ……
 ```
 
-#### Get [info] cluster ID from TiDB log
+#### Get `[info] cluster ID` from TiDB log
 
 To get the `[info]` cluster ID from the TiDB log, run the following command:
 
@@ -48,7 +48,7 @@ ansible -i inventory.ini tidb_servers -m shell -a 'cat {{deploy_dir}}/log/tidb*.
 ……
 ```
 
-#### Get [info] PD cluster from TiKV log
+#### Get `[info] PD cluster` from TiKV log
 
 To get the `[info]` PD cluster from the TiKV log, run the following command:
 
@@ -64,7 +64,7 @@ ansible -i inventory.ini tikv_servers -m shell -a 'cat {{deploy_dir}}/log/tikv* 
 ……
 ```
 
-### Get Alloc ID (TiKV StoreID)
+### Get `Alloc ID` (TiKV StoreID)
 
 The `alloc-id` value you specify must be larger than the currently largest `Alloc ID` value. To get `Alloc ID`, you can either use the `ansible ad-hoc` command in the Control Machine, or view the log directly on the server.
 
@@ -85,7 +85,7 @@ ansible -i inventory.ini pd_servers -m shell -a 'cat {{deploy_dir}}/log/pd* | gr
 ……
 ```
 
-#### Get [info] alloc store id from TiKV log
+#### Get `[info] alloc store id` from TiKV log
 
 To get the `[info]` alloc store id from the TiKV log, run the following command:
 
