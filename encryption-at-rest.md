@@ -119,7 +119,7 @@ To enable S3 server-side encryption when backup to S3 using BR, pass `--s3.sse` 
 ./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms
 ```
 
-To use a custom AWS KMS CMK that you created and owned, pass `--s3.sse-kms-key-id` in addition. In this case, both the BR process and all the TiKV nodes in the cluster would need access to the KMS CMK (e.g. via AWS IAM), and the KMS CMK needs to be in the same AWS region as the S3 bucket used for store the backup. It is adviced to grant access to the KMS CMK to BR process and TiKV nodes via AWS IAM. Please refer to AWS documentation for usage of IAM. Example:
+To use a custom AWS KMS CMK that you created and owned, pass `--s3.sse-kms-key-id` in addition. In this case, both the BR process and all the TiKV nodes in the cluster would need access to the KMS CMK (e.g. via AWS IAM), and the KMS CMK needs to be in the same AWS region as the S3 bucket used to store the backup. It is advised to grant access to the KMS CMK to BR process and TiKV nodes via AWS IAM. Refer to AWS documentation for usage of [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html). For example:
 
 ```
 ./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.region <region> --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
