@@ -55,6 +55,8 @@ Possible values for `data-encryption-method` are "aes128-ctr", "aes192-ctr", "ae
 
 The master key has to be specified if encryption is enabled (i.e. `data-encryption-method` is not "plaintext"). To specify a AWS KMS CMK as master key, add the `encryption.master-key` section after the `encryption` section:
 
+{{< copyable "" >}}
+
 ```
 [security.encryption.master-key]
 type = "kms"
