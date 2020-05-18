@@ -51,7 +51,7 @@ data-encryption-method = aes128-ctr
 data-key-rotation-period = 7d
 ```
 
-Possible values for `data-encryption-method` are "aes128-ctr", "aes192-ctr", "aes256-ctr" and "plaintext". The default value is "plaintext", which means encryption is not turned on. `data-key-rotation-period` defines how often TiKV rotates the data key. Encryption can be turned on for a fresh TiKV cluster, or an existing TiKV cluster, though only data written after encryption is enabled is guaranteed to be encrypted. To disable encryption, remove `data-encryption-method` in config file, or reset it to "plaintext", and restart TiKV. To change encryption method, update `data-encryption-method` in config file and restart TiKV.
+Possible values for `data-encryption-method` are "aes128-ctr", "aes192-ctr", "aes256-ctr" and "plaintext". The default value is "plaintext", which means encryption is not turned on. `data-key-rotation-period` defines how often TiKV rotates the data key. Encryption can be turned on for a fresh TiKV cluster, or an existing TiKV cluster, though only data written after encryption is enabled is guaranteed to be encrypted. To disable encryption, remove `data-encryption-method` in the config file, or reset it to "plaintext", and restart TiKV. To change encryption method, update `data-encryption-method` in the config file and restart TiKV.
 
 The master key has to be specified if encryption is enabled (i.e. `data-encryption-method` is not "plaintext"). To specify a AWS KMS CMK as master key, add the `encryption.master-key` section after the `encryption` section:
 
