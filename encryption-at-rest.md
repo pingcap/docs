@@ -103,7 +103,7 @@ region = "us-west-2"
 
 ### Monitoring
 
-To monitor encryption-at-rest, if you deploy TiKV with Grafana, you can look at the "Encryption" panel in the "TiKV-Details" dashboard. There are a few metrics to look for:
+To monitor encryption-at-rest, if you deploy TiKV with Grafana, you can look at the **Encryption** panel in the **TiKV-Details** dashboard. There are a few metrics to look for:
 
 * Encryption initialized: 1 if encryption is initialized during TiKV startup, 0 otherwise. In case of master key rotation, after encryption is initialized, TiKV do not need access to the previous master key.
 * Encryption data keys: number of existings data keys. The number is bumped by 1 after each time data key rotation happened. Use this metrics to monitor if data key rotation works as expected.
