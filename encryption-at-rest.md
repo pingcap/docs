@@ -83,7 +83,7 @@ Here `path` is the path to the key file. The file must contain a 256 bits (or 16
 
 ### Rotating the Master Key
 
-To rotate master key, you have to specify both of the new master key and old master key in the config, and restart TiKV. Use `security.encryption.master-key` to specify the new master key, and use `security.encryption.previous-master-key` to specify the old master key. The config format for `security.encryption.previous-master-key` is the same as `encryption.master-key`. On restart TiKV must access both of the old and new master key, but once TiKV is up and running, TiKV will only need access to the new key. It is okay to leave the `encryption.previous-master-key` config in the config file from that on. Even on restart, TiKV will only try to use the old key if it fail to decrypt existing data using the new master key.
+To rotate master key, you have to specify both of the new master key and old master key in the config, and restart TiKV. Use `security.encryption.master-key` to specify the new master key, and use `security.encryption.previous-master-key` to specify the old master key. The config format for `security.encryption.previous-master-key` is the same as `encryption.master-key`. On restart TiKV must access both of the old and new master key, but once TiKV is up and running, TiKV will only need access to the new key. It is okay to leave the `encryption.previous-master-key` config in the config file from that on. Even on restart, TiKV only tries to use the old key if it fails to decrypt existing data using the new master key.
 
 Currently online master key rotation is not supported, so you need to restart TiKV. It is advised to do a rolling restart to a running TiKV cluster serving online query.
 
