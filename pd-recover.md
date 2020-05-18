@@ -19,7 +19,7 @@ The cluster ID can be obtained from the log of PD, TiKV or TiDB. To get the clus
 
 #### Get `[info] cluster ID` from PD log (recommended)
 
-To get the `[info]` cluster ID from the PD log, run the following command:
+To get the `[info] cluster id` from the PD log, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -35,7 +35,7 @@ ansible -i inventory.ini pd_servers -m shell -a 'cat {{deploy_dir}}/log/pd.log |
 
 #### Get `[info] cluster ID` from TiDB log
 
-To get the `[info]` cluster ID from the TiDB log, run the following command:
+To get the `[info] cluster ID` from the TiDB log, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -51,7 +51,7 @@ ansible -i inventory.ini tidb_servers -m shell -a 'cat {{deploy_dir}}/log/tidb*.
 
 #### Get `[info] PD cluster` from TiKV log
 
-To get the `[info]` PD cluster from the TiKV log, run the following command:
+To get the `[info] PD cluster` from the TiKV log, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -71,7 +71,7 @@ The `alloc-id` value you specify must be larger than the currently largest `Allo
 
 #### Get `[info] allocates id` from PD log
 
-To get the `[info]` allocates id from the PD log, run the following command:
+To get the `[info] allocates id` from the PD log, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -88,7 +88,7 @@ ansible -i inventory.ini pd_servers -m shell -a 'cat {{deploy_dir}}/log/pd* | gr
 
 #### Get `[info] alloc store id` from TiKV log
 
-To get the `[info]` alloc store id from the TiKV log, run the following command:
+To get the `[info] alloc store id` from the TiKV log, run the following command:
 
 {{< copyable "shell-regular" >}}
 
