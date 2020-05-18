@@ -43,6 +43,8 @@ Regardless of data encryption method, data keys are encrypted using AES256 in GC
 
 To enable encryption, you can add the encryption section in TiKV's config file:
 
+{{< copyable "" >}}
+
 ```
 [security.encryption]
 data-encryption-method = aes128-ctr
