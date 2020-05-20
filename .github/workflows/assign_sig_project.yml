@@ -1,4 +1,4 @@
-name: Auto Assign to Docs SIG Project
+name: Auto Assign to Project
 
 on:
   issues:
@@ -13,8 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Assign to Docs SIG Project
     steps:
-    - name: Assign NEW issues and NEW pull requests to Docs SIG Project
+    - name: Assign to Docs SIG Project
       uses: srggrs/assign-one-project-github-action@1.2.0
       if: github.event.action == 'opened'
       with:
         project: 'https://github.com/pingcap/docs/projects/1'
+    - name: Assign to Translation/Welcome Column
+      uses: srggrs/assign-one-project-github-action@1.2.0
+      if: |
+        contains(github.event.pull_request.labels.*.name, 'translation/welcome')
+      with:
+        project: 'https://github.com/pingcap/docs/projects/1'
+        column_name: 'Translation/Welcome'
