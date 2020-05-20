@@ -4,7 +4,7 @@ on:
   issues:
     types: [opened, labeled, closed]
   pull_request:
-    types: [opened, labeled, closed]
+    types: [opened, labeled, unlabeled, closed]
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -37,7 +37,9 @@ jobs:
     - name: Assign Closed PR
       uses: srggrs/assign-one-project-github-action@1.2.0
       if: |
-        github.event.action == 'closed' && github.event = 'pull_request'
+        github.event.action == 'closed' &&
+        github.event = 'pull_request' &&
+        ! contains(github.event.pull_request.labels.*.name, 'translation/welcome')
       with:
         project: 'https://github.com/pingcap/docs/projects/1'
         column_name: 'PR: Done'
