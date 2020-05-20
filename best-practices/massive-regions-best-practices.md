@@ -143,7 +143,7 @@ You can check **Worker pending tasks** under **Task** in the **TiKV Grafana** pa
 
 ![Check pd-worker](/media/best-practices/pd-worker-metrics.png)
 
-We have optimized pd-worker for better performance since [v3.0.5](/releases/release-3.0.5.md#tikv). If you encounter a similar problem, it is recommended to upgrade to a latest version.
+pd-worker has been optimized for better performance since [v3.0.5](/releases/release-3.0.5.md#tikv). If you encounter a similar problem, it is recommended to upgrade to the latest version.
 
 ### Prometheus is slow to query metrics
 
