@@ -1,0 +1,20 @@
+name: Auto Assign to Docs SIG Project
+
+on:
+  issues:
+    types: [opened, labeled]
+  pull_request:
+    types: [opened, labeled]
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  assign_one_project:
+    runs-on: ubuntu-latest
+    name: Assign to Docs SIG Project
+    steps:
+    - name: Assign NEW issues and NEW pull requests to Docs SIG Project
+      uses: srggrs/assign-one-project-github-action@1.2.0
+      if: github.event.action == 'opened'
+      with:
+        project: 'https://github.com/pingcap/docs/projects/1'
