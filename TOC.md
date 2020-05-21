@@ -331,7 +331,6 @@
     - [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md)
     - [Monitor TiFlash](/tiflash/monitor-tiflash.md)
     - [Scale TiFlash](/scale-tidb-using-tiup.md#scale-out-a-tiflash-node)
-    - [Upgrade TiFlash Nodes](/tiflash/upgrade-tiflash.md)
     - [Configure TiFlash](/tiflash/tiflash-configuration.md)
     - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
