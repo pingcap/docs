@@ -74,7 +74,8 @@
     - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
   + Monitor
     - [Overview](/tidb-monitoring-framework.md)
-    - [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
+    - [Monitor deploy](/monitor-deploy.md)
+    - [Tidb-monitoring API](/tidb-monitoring-api.md)
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
