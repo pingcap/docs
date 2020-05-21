@@ -324,18 +324,6 @@
     - [Grafana Best Practices](/best-practices/grafana-monitor-best-practices.md)
     - [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   - [TiSpark](/tispark-overview.md)
-  + TiFlash
-    - [Overview](/tiflash/tiflash-overview.md)
-    - [Deploy a TiFlash Cluster](/tiflash/deploy-tiflash.md)
-    - [Use TiFlash](/tiflash/use-tiflash.md)
-    - [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md)
-    - [Monitor TiFlash](/tiflash/monitor-tiflash.md)
-    - [Scale TiFlash](/scale-tidb-using-tiup.md#scale-out-a-tiflash-node)
-    - [Upgrade TiFlash Nodes](/tiflash/upgrade-tiflash.md)
-    - [Configure TiFlash](/tiflash/tiflash-configuration.md)
-    - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
-    - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-    - [FAQ](/tiflash/tiflash-faq.md)
   + TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Deploy](/tidb-binlog/deploy-tidb-binlog.md)
