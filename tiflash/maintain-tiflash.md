@@ -7,7 +7,7 @@ aliases: ['/docs/dev/reference/tiflash/maintain/']
 
 # Maintain a TiFlash Cluster
 
-This document describes how to perform common operations when you maintain a TiFlash cluster, including checking the TiFlash version, taking TiFlash nodes down, and troubleshooting TiFlash. This document also introduces critical logs and a system table of TiFlash.
+This document describes how to perform common operations when you maintain a TiFlash cluster, including checking the TiFlash version, and taking TiFlash nodes down. This document also introduces critical logs and a system table of TiFlash.
 
 ## Check the TiFlash version
 
