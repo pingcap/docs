@@ -2,9 +2,9 @@ name: Auto Assign to Project
 
 on:
   issues:
-    types: [opened, labeled, closed]
+    types: [opened, labeled]
   pull_request:
-    types: [opened, labeled, unlabeled, closed]
+    types: [opened, labeled]
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -16,37 +16,22 @@ jobs:
     - name: Assign Open Issue
       uses: srggrs/assign-one-project-github-action@1.2.0
       if: |
-        github.event.action == 'opened' && github.event == 'issue'
+        github.event.action == 'opened' && github.event_name == 'issue'
       with:
         project: 'https://github.com/pingcap/docs/projects/1'
         column_name: 'Issue: Backlog'
-    - name: Assign Closed Issue
-      uses: srggrs/assign-one-project-github-action@1.2.0
-      if: |
-        github.event.action == 'closed' && github.event == 'issue'
-      with:
-        project: 'https://github.com/pingcap/docs/projects/1'
-        column_name: 'Issue: Resolved'
     - name: Assign Open PR
       uses: srggrs/assign-one-project-github-action@1.2.0
       if: |
-        github.event.action == 'opened' && github.event == 'pull_request'
+        github.event.action == 'opened' && github.event_name == 'pull_request'
       with:
         project: 'https://github.com/pingcap/docs/projects/1'
         column_name: 'PR: In Progress'
-    - name: Assign Closed PR
-      uses: srggrs/assign-one-project-github-action@1.2.0
-      if: |
-        github.event.action == 'closed' &&
-        github.event == 'pull_request' &&
-        ! contains(github.event.pull_request.labels.*.name, 'translation/welcome')
-      with:
-        project: 'https://github.com/pingcap/docs/projects/1'
-        column_name: 'PR: Done'
     - name: Assign Translation/Welcome PR
       uses: srggrs/assign-one-project-github-action@1.2.0
       if: |
-        contains(github.event.pull_request.labels.*.name, 'translation/welcome')
+        contains(github.event.pull_request.labels.*.name, 'translation/welcome') ||
+        contains(github.event.issue.labels.*.name, 'translation/welcome') ||
       with:
-        project: 'https://github.com/pingcap/docs/projects/1'
-        column_name: 'Translation/Welcome'
+        project: 'https://github.com/pingcap/docs/projects/2'
+        column_name: 'To do'
