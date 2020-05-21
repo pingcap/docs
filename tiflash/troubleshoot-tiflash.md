@@ -1,15 +1,15 @@
 ---
-title: Troubleshoot a TiFlash cluseter
+title: Troubleshoot a TiFlash Cluster
 summary: Learn common operations when you troubleshoot a TiFlash cluster.
 category: reference
 aliases: ['/docs/dev/reference/tiflash/troubleshoot/']
 ---
 
-## TiFlash troubleshooting
+# Troubleshoot a TiFlash Cluster
 
 This section describes some commonly encountered issues when using TiFlash, the reasons, and the solutions.
 
-### TiFlash replica is always unavailable
+## TiFlash replica is always unavailable
 
 This is because TiFlash is in an abnormal state caused by configuration errors or environment issues. Take the following steps to identify the faulty component:
 
@@ -49,19 +49,19 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
 
 6. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to this TiFlash node.
 
-### TiFlash query time is unstable, and the error log prints many `Lock Exception` messages
+## TiFlash query time is unstable, and the error log prints many `Lock Exception` messages
 
 This is because large amounts of data are written to the cluster, which causes that the TiFlash query encounters a lock and requires query retry.
 
 You can set the query timestamp to one second earlier in TiDB. For example, if the current time is '2020-04-08 20:15:01', you can execute `set @@tidb_snapshot='2020-04-08 20:15:00';` before you execute the query. This makes less TiFlash queries encounter a lock and mitigates the risk of unstable query time.
 
-### Some queries return the `Region Unavailable` error
+## Some queries return the `Region Unavailable` error
 
 If the load pressure on TiFlash is too heavy and it causes that TiFlash data replication falls behind, some queries might return the `Region Unavailable` error.
 
 In this case, you can balance the load pressure by adding more TiFlash nodes.
 
-### Data file corruption
+## Data file corruption
 
 Take the following steps to handle the data file corruption:
 
