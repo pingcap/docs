@@ -7,7 +7,7 @@ aliases: ['/docs/dev/reference/tools/ticdc/troubleshoot-ticdc/']
 
 # Common Problems and Troubleshooting
 
-This document lists some common problems while using TiCDC and gives appropriate solutions. It also summarizes some common operation failures and ways to fix them.
+This document includes some common problems while using TiCDC and appropriate solutions. It also summarizes some common operation failures and ways to fix them.
 
 ## How to choose start-ts while starting a task
 
