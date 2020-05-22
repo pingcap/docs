@@ -16,7 +16,7 @@ First, you should know that the `start-ts` of a replication task corresponds to 
 - The value of `start-ts` should be larger than current `tikv_gc_safe_point`, otherwise, an error would occur when creating the task.
 - While starting the task, you should ensure that the downstream has already got all the data previous to `start-ts`. You can relax this requirement accordingly, if the replication task is for message queue or other scenarios, in which strict data consistency between upstream and downstream is not strictly required.
 
-If `start-ts` is not specified or specified 0 `start-ts=0`, when the task gets started, it will get the current TSO from PD and start to replicate data from this TSO.
+If `start-ts` is not specified or specified 0 `start-ts=0`, when the task gets started, it will get the current TSO from PD and start to replicate data from it.
 
 ## When a task gets started, it prompts that some tables cannot be replicated
 
