@@ -18,6 +18,6 @@ First, you should know that the `start-ts` of a replication task corresponds to 
 
 If `start-ts` is not specified or specified 0 `start-ts=0`, when the task gets started, it will get the current TSO from PD and start to replicate data from this TSO.
 
-## When a task gets started, it prompts that some tables cannot be synchronized
+## When a task gets started, it prompts that some tables cannot be replicated
 
 When using `cdc cli changefeed create` to create a replication task, it will check if the upstream tables comply with the [restrictions](/ticdc/ticdc-overview.md#restrictions). If there are tables , it will prompt that `some tables are not eligible to replicate` and list out the ineligible tables. If you choose `Y` or `y`, you will continue creating the replication task and automatically ignore all the updates of these ineligible tables. If you choose other inputs, the replication task will not be created.
