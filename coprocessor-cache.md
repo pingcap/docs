@@ -10,7 +10,7 @@ Starting from v4.0, the TiDB instance supports caching the results of the calcul
 
 ## Configuration
 
-You can configure Coprocessor Cache via the `tikv-client.copr-cache` configuration items in the TiDB configuration file. For details about how to enable and configure Coprocessor Cache, see [TiDB Configuration File](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v40).
+You can configure Coprocessor Cache via the `tikv-client.copr-cache` configuration items in the TiDB configuration file. For details about how to enable and configure Coprocessor Cache, see [TiDB Configuration File](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400).
 
 ## Feature description
 
