@@ -2,7 +2,6 @@
 title: Key Visualizer
 suammary: Learn the Key Visualizer feature.
 category: how-to
-aliases: ['/docs/dev/how-to/monitor/key-visualizer/']
 ---
 
 # Key Visualizer
