@@ -6,6 +6,7 @@ aliases: ['/docs/dev/reference/configuration/tidb-server/configuration-file/']
 ---
 
 <!-- markdownlint-disable MD001 -->
+<!-- markdownlint-disable MD024 -->
 
 # TiDB Configuration File
 
