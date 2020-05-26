@@ -9,7 +9,7 @@ aliases: ['/docs/dev/reference/sql/statements/backup/']
 
 This statement performs a distributed backup of the cluster.
 
-The `BACKUP` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md.md), except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also applies here.
+The `BACKUP` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md), except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also applies here.
 
 Running `BACKUP` requires `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read/write permission to the destination.
 
@@ -120,7 +120,6 @@ Use `RATE_LIMIT` to limit the average upload speed per TiKV node to reduce netwo
 By default, every TiKV node would run 4 backup threads. This value can be adjusted with the `CONCURRENCY` option.
 
 Before backup is completed, `BACKUP` would perform a checksum against the data on the cluster to verify correctness. This step can be disabled with the `CHECKSUM` option if you are confident that this is unnecessary.
-
 
 {{< copyable "sql" >}}
 

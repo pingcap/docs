@@ -9,7 +9,7 @@ aliases: ['/docs/dev/reference/sql/statements/restore/']
 
 This statement performs a distributed restore from a backup archive previously produced by a [`BACKUP` statement](/sql-statements/sql-statement-backup.md).
 
-The `RESTORE` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md.md), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also applies here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that
+The `RESTORE` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also applies here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that
 
 * The cluster is "offline", and the current TiDB session is the only active SQL connection to access all tables being restored.
 * When performing a full restore, the tables being restored should not already exist, because existing data may be overridden and causes inconsistency between the data and indices.
