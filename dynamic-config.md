@@ -14,7 +14,7 @@ This document describes how to use the dynamic configuration change feature.
 
 The feature of dynamic configuration change is to online update the configuration of components (including TiKV and PD) using SQL statements.
 
-Dynamic configuration change cannot be used to update the TiDB configuration. If you want to change the behavior of TiDB, modify its corresponding SQL variables.
+Dynamic configuration change cannot be used to update the TiDB configuration. If you want to change the behavior of TiDB, modify TiDB's corresponding SQL variables.
 
 ## Common Operations
 
@@ -25,7 +25,7 @@ This section describes the common operations of dynamic configuration change.
 To view the configuration of all instances in the cluster, use the `show config` SQL statement. The result is as follows:
 
 ```
-mysql> show config;
+show config;
 +------+-----------------+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Type | Instance        | Name                                                      | Value                                                                                                                                                                                                                                                                            |
 +------+-----------------+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -43,10 +43,10 @@ mysql> show config;
 You can filter the result in terms of fields. For example:
 
 ```
-mysql> show config where type='tidb'
-mysql> show config where instance in (...)
-mysql> show config where name like '%log%'
-mysql> show config where type='tikv' and name='log-level'
+show config where type='tidb'
+show config where instance in (...)
+show config where name like '%log%'
+show config where type='tikv' and name='log-level'
 ```
 
 ### Modify instance configuration
@@ -61,17 +61,17 @@ set config "127.0.0.1:2379" log.level="info"
 If the modification is successful, `Query OK` is returned:
 
 ```
-mysql> set config '127.0.0.1:2379' log.level='info';
+set config '127.0.0.1:2379' log.level='info';
 Query OK, 0 rows affected (0.01 sec)
 ```
 
 If an error occurs during the batch modification, a warning is returned:
 
 ```
-mysql> set config tikv log-level='warn';
+set config tikv log-level='warn';
 Query OK, 0 rows affected, 1 warning (0.04 sec)
 
-mysql> show warnings;
+show warnings;
 +---------+------+---------------------------------------------------------------------------------------------------------------+
 | Level   | Code | Message                                                                                                       |
 +---------+------+---------------------------------------------------------------------------------------------------------------+
