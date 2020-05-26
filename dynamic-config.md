@@ -162,11 +162,11 @@ For detailed parameter description, refer to [PD Configuration File](https://pin
 | raftstore.lock-cf-compact-bytes-threshold | The size out of which TiKV triggers a manual compaction for the Lock Column Family |
 | raftstore.messages-per-tick | The maximum number of messages processed per batch |
 | raftstore.max-peer-down-duration | The longest inactive duration allowed for a peer |
-| raftstore.max-leader-missing-duration | The longest duration allowed for a peer to be in the state where a Raft group is missing the Leader |
-| raftstore.abnormal-leader-missing-duration | 允许副本处于无主状态的时间 |
+| raftstore.max-leader-missing-duration | The longest duration allowed for a peer to be in the state where a Raft group is missing the leader. If this value is exceeded, the peer verifies with PD whether the peer has been deleted. |
+| raftstore.abnormal-leader-missing-duration | The longest duration allowed for a peer to be in the state where a Raft group is missing the leader. If this value is exceeded, the peer is seen as abnormal and marked in metrics and logs. |
 | raftstore.peer-stale-state-check-interval | The time interval to trigger the check for whether a peer is in the state where a Raft group is missing the leader |
 | raftstore.consistency-check-interval | The time interval at which the consistency check is triggered |
-| raftstore.raft-store-max-leader-lease | Region 主可信任期的最长时间 |
+| raftstore.raft-store-max-leader-lease | The longest trusted period of a Raft Leader |
 | raftstore.allow-remove-leader | Determines whether to allow deleting the main switch |
 | raftstore.merge-check-tick-interval | The time interval at which TiKV checks whether a Region needs merge |
 | raftstore.cleanup-import-sst-interval | The time interval at which the expired SST file is checked |
