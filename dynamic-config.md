@@ -204,9 +204,9 @@ For detailed parameter description, refer to [PD Configuration File](/pd-configu
 | {db-name}.{cf-name}.hard-pending-compaction-bytes-limit | The hard limit on the pending compaction bytes |
 | {db-name}.{cf-name}.titan.blob-run-mode | The mode of processing blob files |
 
-In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` prefix is configurations related to RocksDB. The value of `db-name` can be `rocksdb` or `raftdb`.
+In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` prefix are configurations related to RocksDB. The optional values of `db-name` are `rocksdb` and `raftdb`.
 
-- When `db-name` is `rocksdb`, the value of `cf-name` can be `defaultcf`, `writecf`, `lockcf`, and `raftcf`.
+- When `db-name` is `rocksdb`, the optional values of `cf-name` are `defaultcf`, `writecf`, `lockcf`, and `raftcf`.
 - When `db-name` is `raftdb`, the value of `cf-name` can be `defaultcf`.
 
 For detailed parameter description, refer to [TiKV Configuration File](/tikv-configuration-file.md).
