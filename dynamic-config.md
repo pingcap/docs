@@ -133,7 +133,7 @@ This section lists the parameters supported by dynamic configuration change.
 | pd-server.dashboard-address | Sets the dashboard address |
 | replication-mode.replication-mode | Sets the backup mode |
 
-For detailed parameter description, refer to [PD Configuration File](https://pingcap.com/docs/stable/pd-configuration-file/).
+For detailed parameter description, refer to [PD Configuration File](/pd-configuration-file.md).
 
 ### TiKV
 
