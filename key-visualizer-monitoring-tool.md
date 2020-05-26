@@ -48,7 +48,7 @@ For detailed introduction of Region, refer to [TiDB Internal (I) - Data Storage]
 
 ### Hotspot
 
-The hotspot issue is typical during the usage of TiDB, where high traffic is concentrated on a small range of data. Because consecutive data ranges are often processed on the same TiKV instance, the TiKV instance on which the hotspot occurs become the performance bottleneck of the whole application. The hotspot issue commonly occurs in the following scenarios:
+The hotspot issue is typical during the usage of TiDB, where high traffic is concentrated on a small range of data. Because consecutive data ranges are often processed on the same TiKV instance, the TiKV instance on which the hotspot occurs becomes the performance bottleneck of the whole application. The hotspot issue commonly occurs in the following scenarios:
 
 + Write adjacent data into a table with the `AUTO_INCREMENT` primary key, which causes a hotspot issue on this table.
 + Write adjacent time data into the time index of a table, which causes a hotspot issue on the table index.
