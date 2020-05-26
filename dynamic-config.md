@@ -10,11 +10,11 @@ This document describes how to use the dynamic configuration change feature.
 
 > **Note:**
 >
-> This feature is experimental. It is **NOT** recommended to use the feature in production.
+> This feature is experimental. It is **NOT** recommended to use this feature in the production environment.
 
-Dynamic configuration change is to online update the configuration of components using SQL, including TiKV and PD.
+The feature of dynamic configuration change is to online update the configuration of components (including TiKV and PD) using SQL statements.
 
-Dynamic configuration change cannot be used to update TiDB configuration. If you want to change the behavior of TiDB, modify its corresponding SQL variables.
+Dynamic configuration change cannot be used to update the TiDB configuration. If you want to change the behavior of TiDB, modify its corresponding SQL variables.
 
 ## Common Operations
 
@@ -40,7 +40,7 @@ mysql> show config;
 ...
 ```
 
-You can filter the result in terms of fields by using the following statements:
+You can filter the result in terms of fields. For example:
 
 ```
 mysql> show config where type='tidb'
@@ -53,7 +53,7 @@ mysql> show config where type='tikv' and name='log-level'
 
 To modify configuration according to the instance address and type, use the `set config` SQL statement:
 
-```
+```sql
 set config tikv log.level="info"
 set config "127.0.0.1:2379" log.level="info"
 ```
@@ -65,7 +65,7 @@ mysql> set config '127.0.0.1:2379' log.level='info';
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-If an error occurs during the batch modification, it returns as a warning:
+If an error occurs during the batch modification, a warning is returned:
 
 ```
 mysql> set config tikv log-level='warn';
@@ -82,11 +82,11 @@ mysql> show warnings;
 
 > **Note:**
 >
-> To avoid confusing dynamic configuration with SQL variables, you can view TiDB configuration using `show config`, but cannot modify it, which causes an error. If you want to dynamically modify TiDB behaviors, use the corresponding SQL variables.
+> To avoid confusing dynamic configuration with SQL variables, you can view TiDB configuration using `show config`, but you cannot modify the configuration, which causes an error. If you want to dynamically modify TiDB behaviors, use the corresponding SQL variables.
 >
-> The name of some configuration items might have conflict with TiDB keywords, such as `limit` and `key`. For these configuration items, use backtick `` ` `` to enclose them. For example, ``tikv-client.`store-limit` ``.
+> The names of some configuration items might conflict with TiDB keywords, such as `limit` and `key`. For these configuration items, use backtick `` ` `` to enclose them. For example, ``tikv-client.`store-limit` ``.
 >
-> The batch modification operation cannot guarantee atomicity. Some instances might succeed, while others might fail. If you modify the configuration of the entire TiKV cluster using `set tikv key=val`, some instances might fail. You can use `show warnings` to check the result.
+> The batch modification operation cannot guarantee atomicity. On some instances, this operation might succeed, while on other instances, it might fail. If you modify the configuration of the entire TiKV cluster using `set tikv key=val`, your modification might fail on some instances. You can use `show warnings` to check the result.
 
 ## Supported parameters
 
@@ -124,7 +124,7 @@ This section lists the parameters supported by dynamic configuration change.
 | schedule.enable-one-way-merge | Enables one-way merge, which only allows merging with the next adjacent Region |
 | replication.max-replicas | Sets the maximum number of replicas |
 | replication.location-labels | The topology information of a TiKV cluster |
-| replication.enable-placement-rules | Enables placement rules |
+| replication.enable-placement-rules | Enables Placement Rules |
 | replication.strictly-match-label | Enables the label check |
 | pd-server.use-region-storage | Enables independent Region storage |
 | pd-server.max-gap-reset-ts | Sets the maximum interval of resetting timestamp (BR) |
@@ -209,4 +209,4 @@ In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` pre
 - When `db-name` is `rocksdb`, the value of `cf-name` can be `defaultcf`, `writecf`, `lockcf`, and `raftcf`.
 - When `db-name` is `raftdb`, the value of `cf-name` can be `defaultcf`.
 
-For detailed parameter descriptions, refer to [TiKV Configuration File](/tikv-configuration-file.md).
+For detailed parameter description, refer to [TiKV Configuration File](/tikv-configuration-file.md).
