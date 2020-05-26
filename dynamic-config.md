@@ -84,7 +84,7 @@ mysql> show warnings;
 >
 > To avoid confusing dynamic configuration with SQL variables, you can view TiDB configuration using `show config`, but cannot modify it, which causes an error. If you want to dynamically modify TiDB behaviors, use the corresponding SQL variables.
 >
-> The name of some configuration items might have conflict with TiDB keywords, such as `limit` and `key`. For these configuration items, use backtick `` ` `` to enclose them. For example, `` tikv-client.`store-limit` ``.
+> The name of some configuration items might have conflict with TiDB keywords, such as `limit` and `key`. For these configuration items, use backtick `` ` `` to enclose them. For example, ``tikv-client.`store-limit` ``.
 >
 > The batch modification operation cannot guarantee atomicity. Some instances might succeed, while others might fail. If you modify the configuration of the entire TiKV cluster using `set tikv key=val`, some instances might fail. You can use `show warnings` to check the result.
 
