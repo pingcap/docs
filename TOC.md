@@ -334,6 +334,7 @@
     - [Configure TiFlash](/tiflash/tiflash-configuration.md)
     - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+    - [Troubleshoot a TiFlash Cluster](/tiflash/troubleshoot-tiflash.md)
     - [FAQ](/tiflash/tiflash-faq.md)
   + TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
