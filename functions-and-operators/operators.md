@@ -29,7 +29,7 @@ This document describes the operators precedence, comparison functions and opera
 | [DIV](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_div) | Integer division |
 | [/](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_divide) | Division operator |
 | [=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal) | Equal operator |
-| [<=>](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to) | NULL-safe equal to operator |
+| [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to) | NULL-safe equal to operator |
 | [>](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than) | Greater than operator |
 | [>=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than-or-equal) | Greater than or equal operator |
 | [IS](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is) | Test a value against a boolean |
@@ -46,7 +46,7 @@ This document describes the operators precedence, comparison functions and opera
 | [%, MOD](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_mod) | Modulo operator |
 | [NOT, !](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_not) | Negates value |
 | [NOT BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-between) | Check whether a value is not within a range of values |
-| [!=, <>](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-equal) | Not equal operator |
+| [!=, `<>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-equal) | Not equal operator |
 | [NOT LIKE](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_not-like) | Negation of simple pattern matching |
 | [NOT REGEXP](https://dev.mysql.com/doc/refman/5.7/en/regexp.html#operator_not-regexp) | Negation of REGEXP |
 | [\|\|, OR](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_or) | Logical OR |
@@ -92,7 +92,7 @@ For details, see [Operator Precedence](https://dev.mysql.com/doc/refman/5.7/en/o
 | [BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_between) | Check whether a value is within a range of values |
 | [COALESCE()](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) | Return the first non-NULL argument |
 | [=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal) | Equal operator |
-| [<=>](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to) | NULL-safe equal to operator |
+| [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to) | NULL-safe equal to operator |
 | [>](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than) | Greater than operator |
 | [>=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than-or-equal) | Greater than or equal operator |
 | [GREATEST()](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_greatest) | Return the largest argument |
@@ -108,7 +108,7 @@ For details, see [Operator Precedence](https://dev.mysql.com/doc/refman/5.7/en/o
 | [<=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_less-than-or-equal) | Less than or equal operator |
 | [LIKE](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_like) | Simple pattern matching |
 | [NOT BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-between) | Check whether a value is not within a range of values |
-| [!=, <>](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-equal) | Not equal operator |
+| [!=, `<>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-equal) | Not equal operator |
 | [NOT IN()](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_not-in) | Check whether a value is not within a set of values |
 | [NOT LIKE](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_not-like) | Negation of simple pattern matching |
 | [STRCMP()](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#function_strcmp) | Compare two strings |
