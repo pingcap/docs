@@ -15,9 +15,9 @@ You can configure Coprocessor Cache via the `tikv-client.copr-cache` configurati
 ## Feature description
 
 + When a SQL statement is executed on a single TiDB instance for the first time, the execution result is not cached.
-+ Calculation results are cache in the memory of TiDB. If the TiDB instance is restarted, the cache becomes invalid.
++ Calculation results are cached in the memory of TiDB. If the TiDB instance is restarted, the cache becomes invalid.
 + The cache is not shared among TiDB instances.
-+ The cached result is the result of push-down calculations. Even if the result hits the cache, TiDB still performs calculation.
++ Only push-down calculation result is cached. Even if cache is hit, TiDB still need to perform subsequent calculation.
 + The cache is in the unit of Region. Writing data to a Region causes the Region cache to be invalid. For this reason, the Coprocessor Cache feature mainly takes effect on the data that rarely changes.
 + When push-down calculation requests are the same, the cache is hit. Usually in the following scenarios, the push-down calculation requests are the same or partially the same:
     - The SQL statements are the same. For example, the same SQL statement is executed repeatedly.
