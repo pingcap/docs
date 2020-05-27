@@ -42,7 +42,7 @@ Only one `BACKUP` and [`RESTORE`](/sql-statements/sql-statement-restore.md) task
 
 ## Examples
 
-### Backup databases
+### Back up databases
 
 {{< copyable "sql" >}}
 
@@ -81,7 +81,7 @@ BACKUP TABLE `test`.`sbtest01` TO 'local:///mnt/backup/sbtest01/';
 BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 ```
 
-### Backup the entire cluster
+### Back up the entire cluster
 
 {{< copyable "sql" >}}
 

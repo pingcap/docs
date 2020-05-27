@@ -37,12 +37,12 @@ Cloud storages such as S3 and GCS sometimes require additional configuration for
 | `secret-access-key` | The secret access key |
 | `region` | Service Region for Amazon S3 (default to `us-east-1`) |
 | `use-accelerate-endpoint` | Whether to use the accelerate endpoint on Amazon S3 (default to `false`) |
-| `endpoint` | URL of custom endpoint for S3-compatible services (e.g. `https://s3.example.com/`) |
+| `endpoint` | URL of custom endpoint for S3-compatible services (for example, `https://s3.example.com/`) |
 | `force-path-style` | Use path style access rather than virtual hosted style access (default to `false`) |
 | `storage-class` | Storage class of the uploaded objects (for example, `STANDARD`, `STANDARD_IA`) |
 | `sse` | Server-side encryption algorithm used to encrypt the upload (empty, `AES256` or `aws:kms`) |
 | `sse-kms-key-id` | If `sse` is set to `aws:kms`, specifies the KMS ID |
-| `acl` | Canned ACL of the uploaded objects (e.g. `private`, `authenticated-read`, etc.) |
+| `acl` | Canned ACL of the uploaded objects (for example, `private`, `authenticated-read`) |
 
 > **Note:**
 >
@@ -60,8 +60,8 @@ Cloud storages such as S3 and GCS sometimes require additional configuration for
 | Parameter | Meaning |
 |----------:|---------|
 | `credentials-file` | The path to the credentials JSON file on the TiDB node |
-| `storage-class` | Storage class of the uploaded objects (e.g. `STANDARD`, `COLDLINE`, etc.) |
-| `predefined-acl` | Predefined ACL of the uploaded objects (e.g. `private`, `project-private`, etc.) |
+| `storage-class` | Storage class of the uploaded objects (for example, `STANDARD`, `COLDLINE`) |
+| `predefined-acl` | Predefined ACL of the uploaded objects (for example, `private`, `project-private`) |
 
 When `credentials-file` is not specified, BR will try to infer the credentials from the environment, in the following order:
 
