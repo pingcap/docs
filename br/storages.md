@@ -6,7 +6,7 @@ category: reference
 
 # BR storages
 
-BR supports reading and writing data on the local filesystem, as well as Amazon S3 and Google Cloud Storage. These are distinguished by the URL scheme in the `--storage` parameter passed into BR.
+BR supports reading and writing data on the local filesystem, as well as on Amazon S3 and Google Cloud Storage. These are distinguished by the URL scheme in the `--storage` parameter passed into BR.
 
 ## Schemes
 
@@ -21,7 +21,7 @@ The following services are supported:
 
 ## Parameters
 
-Cloud storages such as S3 and GCS sometimes require additional configuration on how to connect to them. These are provided via query parameters e.g.
+Cloud storages such as S3 and GCS sometimes require additional configuration for connection. You can specify parameters for such configuration. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -31,20 +31,22 @@ Cloud storages such as S3 and GCS sometimes require additional configuration on 
 
 ### S3 parameters
 
-| Parameter | Meaning |
+| Parameter | Description |
 |----------:|---------|
 | `access-key` | The access key |
 | `secret-access-key` | The secret access key |
-| `region` | Service region for Amazon S3 (default to `us-east-1`) |
+| `region` | Service Region for Amazon S3 (default to `us-east-1`) |
 | `use-accelerate-endpoint` | Whether to use the accelerate endpoint on Amazon S3 (default to `false`) |
 | `endpoint` | URL of custom endpoint for S3-compatible services (e.g. `https://s3.example.com/`) |
 | `force-path-style` | Use path style access rather than virtual hosted style access (default to `false`) |
-| `storage-class` | Storage class of the uploaded objects (e.g. `STANDARD`, `STANDARD_IA`, etc.) |
+| `storage-class` | Storage class of the uploaded objects (for example, `STANDARD`, `STANDARD_IA`) |
 | `sse` | Server-side encryption algorithm used to encrypt the upload (empty, `AES256` or `aws:kms`) |
 | `sse-kms-key-id` | If `sse` is set to `aws:kms`, specifies the KMS ID |
 | `acl` | Canned ACL of the uploaded objects (e.g. `private`, `authenticated-read`, etc.) |
 
-Note: we do not recommend passing in the access key and secret access key directly in the storage URL, as they will be logged in plain text. BR will try to infer these from the environment, in the following order:
+> **Note:**
+>
+> It is not recommended to pass in the access key and secret access key directly in the storage URL, because these keys are logged in plain text. BR tries to infer these keys from the environment in the following order:
 
 1. `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables
 2. `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY` environment variables

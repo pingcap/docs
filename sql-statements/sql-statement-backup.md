@@ -6,15 +6,15 @@ category: reference
 
 # BACKUP
 
-This statement performs a distributed backup of the cluster.
+This statement is used to perform a distributed backup of the TiDB cluster.
 
-The `BACKUP` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md), except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also applies here.
+The `BACKUP` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md) does, except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and warnings of BR also apply in this statement.
 
-Running `BACKUP` requires `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read/write permission to the destination.
+Executing `BACKUP` requires `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read or write permission to the destination.
 
-The `BACKUP` statement is blocking, and will finish only after the entire backup task is finished, failed, or canceled. A long-lasting connection should be prepared for running `BACKUP`. The task can be canceled using the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
+The `BACKUP` statement is blocked until the entire backup task is finished, failed, or canceled. A long-lasting connection should be prepared for executing `BACKUP`. The task can be canceled using the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
 
-Only one `BACKUP` and [`RESTORE`](/sql-statements/sql-statement-restore.md) task can be executed at a time. If a `BACKUP` or `RESTORE` task is already running on the same TiDB server, the new `BACKUP` execution will wait until all previous tasks are done.
+Only one `BACKUP` and [`RESTORE`](/sql-statements/sql-statement-restore.md) task can be executed at a time. If a `BACKUP` or `RESTORE` statement is already being executed on the same TiDB server, the new `BACKUP` execution will wait until all previous tasks are finished.
 
 `BACKUP` can only be used with "tikv" storage engine. Using `BACKUP` with the "mocktikv" engine will fail.
 
@@ -59,19 +59,19 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 1 row in set (58.453 sec)
 ```
 
-This will backup the `test` database into local filesystem. The data will be saved as SST files in the `/mnt/backup/2020/04/` folders distributed among all TiDB and TiKV nodes.
+In the example above, the `test` database is backed up into the local filesystem. The data is saved as SST files in the `/mnt/backup/2020/04/` directories distributed among all TiDB and TiKV nodes.
 
-On complete, it will display the result in one row of
+The first row of the result above is described as follows:
 
 | Column | Meaning |
 |--------|---------|
 | `Destination` | The destination URL |
 | `Size` |  The total size of the backup archive, in bytes |
-| `BackupTS` | The TSO of the snapshot when the backup is created (useful for [incremental backup](#Incremental-backup)) |
-| `Queue Time` | The timestamp (in current time zone) when the `BACKUP` task was queued. |
+| `BackupTS` | The TSO of the snapshot when the backup is created (useful for [incremental backup](#incremental-backup)) |
+| `Queue Time` | The timestamp (in current time zone) when the `BACKUP` task is queued. |
 | `Execution Time` | The timestamp (in current time zone) when the `BACKUP` task starts to run. |
 
-### Backup tables
+### Back up tables
 
 {{< copyable "sql" >}}
 
@@ -93,7 +93,7 @@ Note that the system tables (`mysql.*`, `INFORMATION_SCHEMA.*`, `PERFORMANCE_SCH
 
 ### Remote destinations
 
-BR supports backing up to S3 or GCS:
+BR supports backing up data to S3 or GCS:
 
 {{< copyable "sql" >}}
 
