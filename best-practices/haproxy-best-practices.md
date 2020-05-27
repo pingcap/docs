@@ -113,7 +113,7 @@ haproxy --help
 | `-vv` | Displays the version, build options, libraries versions and usable pollers. |
 | `-d` | Enables debug mode. |
 | `-db` | Disables background mode and multi-process mode. |
-| `-dM [<byte>]` | Forces memory poisoning, which means that each and every memory region allocated with malloc() or pool_alloc2() will be filled with \<byte> before being passed to the caller. |
+| `-dM [<byte>]` | Forces memory poisoning, which means that each and every memory region allocated with malloc() or pool_alloc2() will be filled with `<byte>` before being passed to the caller. |
 | `-V` | Enables verbose mode (disables quiet mode). |
 | `-D` | Starts as a daemon.|
 | `-C <dir>` | Changes to directory `<dir>` before loading configuration files. |
