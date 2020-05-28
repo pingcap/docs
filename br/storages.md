@@ -57,7 +57,7 @@ Cloud storages such as S3 and GCS sometimes require additional configuration for
 
 ### GCS parameters
 
-| Parameter | Meaning |
+| Parameter | Description |
 |----------:|---------|
 | `credentials-file` | The path to the credentials JSON file on the TiDB node |
 | `storage-class` | Storage class of the uploaded objects (for example, `STANDARD`, `COLDLINE`) |
