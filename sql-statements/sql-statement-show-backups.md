@@ -25,7 +25,7 @@ Use `SHOW BACKUPS` to query `BACKUP` tasks and use `SHOW RESTORES` to query `RES
 In one connection, execute the following statement:
 
 ```sql
-mysql> BACKUP DATABASE `test` TO 's3://example-bucket/backup-01/?region=us-west-1';
+BACKUP DATABASE `test` TO 's3://example-bucket/backup-01/?region=us-west-1';
 ```
 
 Before the backup completes, run `SHOW BACKUPS` in a new connection:
@@ -42,7 +42,7 @@ mysql> SHOW BACKUPS;
 
 The first row of the result above is described as follows:
 
-| Column | Meaning |
+| Column | Description |
 |--------|---------|
 | `Destination` | The destination URL (with all parameters stripped to avoid leaking secret keys) |
 | `State` | State of the task |

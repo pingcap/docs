@@ -8,11 +8,11 @@ category: reference
 
 This statement performs a distributed restore from a backup archive previously produced by a [`BACKUP` statement](/sql-statements/sql-statement-backup.md).
 
-The `RESTORE` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also applies here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that
+The `RESTORE` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also apply here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that the following requirements are met:
 
 * The cluster is "offline", and the current TiDB session is the only active SQL connection to access all tables being restored.
-* When performing a full restore, the tables being restored should not already exist, because existing data may be overridden and causes inconsistency between the data and indices.
-* When performing an incremental restore, the tables should be at the exact same state as the `LAST_BACKUP` timestamp when the backup was created.
+* When a full restore is being performed, the tables being restored should not already exist, because existing data might be overridden and causes inconsistency between the data and indices.
+* When an incremental restore is being performed, the tables should be at the exact same state as the `LAST_BACKUP` timestamp when the backup is created.
 
 Running `RESTORE` requires `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read permission from the destination.
 
@@ -59,7 +59,7 @@ RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 1 row in set (28.961 sec)
 ```
 
-This will restore everything from a backup archive at the local filesystem. The data will be read as SST files from the `/mnt/backup/2020/04/` folders distributed among all TiDB and TiKV nodes.
+In the example above, all data is restored from a backup archive at the local filesystem. The data is read as SST files from the `/mnt/backup/2020/04/` directories distributed among all TiDB and TiKV nodes.
 
 The first row of the result above is described as follows:
 
