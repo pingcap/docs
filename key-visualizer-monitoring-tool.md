@@ -48,7 +48,7 @@ For detailed introduction of Region, refer to [TiDB Internal (I) - Data Storage]
 
 ### Hotspot
 
-The hotspot issue is typical during the usage of TiDB, where high traffic is concentrated on a small range of data. Because consecutive data ranges are often processed on the same TiKV instance, the TiKV instance on which the hotspot occurs becomes the performance bottleneck of the whole application. The hotspot issue often occurs in the following scenarios:
+When you use the TiDB database, the hotspot issue is typical, where high traffic is concentrated on a small range of data. Because consecutive data ranges are often processed on the same TiKV instance, the TiKV instance on which the hotspot occurs becomes the performance bottleneck of the whole application. The hotspot issue often occurs in the following scenarios:
 
 + Write adjacent data into a table with the `AUTO_INCREMENT` primary key, which causes a hotspot issue on this table.
 + Write adjacent time data into the time index of a table, which causes a hotspot issue on the table index.
@@ -57,7 +57,9 @@ For more details about hotspot, refer to [Highly Concurrent Write Best Practices
 
 ### Heatmap
 
-The heatmap is the core part of Key visualizer, which shows the change of a metric over time. The X axis of the heatmap indicates the time. The Y axis of the heatmap indicates the consecutive Regions based on key ranges that cover all schemas and tables of the TiDB cluster. Colder colors in the heatmap indicate lower read and write traffic of Regions in that period of time. Hotter (brighter) colors indicate higher traffic.
+The heatmap is the core part of Key Visualizer, which shows the change of a metric over time. The X-axis of the heatmap indicates the time. The Y-axis of the heatmap indicates the consecutive Regions based on key ranges that cover all schemas and tables of the TiDB cluster. 
+
+Colder colors in the heatmap indicate lower read and write traffic of Regions in that period of time. Hotter (brighter) colors indicate higher traffic.
 
 ### Region compression
 
