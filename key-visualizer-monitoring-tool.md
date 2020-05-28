@@ -33,7 +33,7 @@ The following image is a demonstration of the Key Visualizer interface:
 From the interface above, you can see the following objects:
 
 + A large heatmap that shows changes of the overall traffic over time.
-+ The detailed information of heatmap axises.
++ The detailed information of a certain coordinate point.
 + Information of tables, indexes, and so on (on the left side of the heatmap).
 
 ## Basic concepts
