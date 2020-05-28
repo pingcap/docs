@@ -1,5 +1,5 @@
 ---
-title: Interaction Test on Online Workloads and `ADD INDEX` Operations
+title: Interaction Test on Online Workloads and ADD INDEX Operations
 summary: This document tests the interaction effects between online workloads and `ADD INDEX` operations.
 category: benchmark
 aliases: ['/docs/v3.1/benchmark/add-index-with-load/']
