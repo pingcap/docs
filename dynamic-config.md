@@ -65,7 +65,6 @@ set config "127.0.0.1:2379" log.level="info"
 
 If the modification is successful, `Query OK` is returned:
 
-
 ```sql
 Query OK, 0 rows affected (0.01 sec)
 ```
