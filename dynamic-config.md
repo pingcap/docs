@@ -24,7 +24,7 @@ This section describes the common operations of dynamic configuration change.
 
 To view the configuration of all instances in the cluster, use the `show config` SQL statement. The result is as follows:
 
-```
+```sql
 show config;
 +------+-----------------+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Type | Instance        | Name                                                      | Value                                                                                                                                                                                                                                                                            |
@@ -42,7 +42,7 @@ show config;
 
 You can filter the result in terms of fields. For example:
 
-```
+```sql
 show config where type='tidb'
 show config where instance in (...)
 show config where name like '%log%'
@@ -60,14 +60,14 @@ set config "127.0.0.1:2379" log.level="info"
 
 If the modification is successful, `Query OK` is returned:
 
-```
+```sql
 set config '127.0.0.1:2379' log.level='info';
 Query OK, 0 rows affected (0.01 sec)
 ```
 
 If an error occurs during the batch modification, a warning is returned:
 
-```
+```sql
 set config tikv log-level='warn';
 Query OK, 0 rows affected, 1 warning (0.04 sec)
 
@@ -80,13 +80,11 @@ show warnings;
 1 row in set (0.00 sec)
 ```
 
-> **Note:**
->
-> To avoid confusing dynamic configuration with SQL variables, you can view TiDB configuration using `show config`, but you cannot modify the configuration, which causes an error. If you want to dynamically modify TiDB behaviors, use the corresponding SQL variables.
->
-> The names of some configuration items might conflict with TiDB keywords, such as `limit` and `key`. For these configuration items, use backtick `` ` `` to enclose them. For example, ``tikv-client.`store-limit` ``.
->
-> The batch modification operation cannot guarantee atomicity. On some instances, this operation might succeed, while on other instances, it might fail. If you modify the configuration of the entire TiKV cluster using `set tikv key=val`, your modification might fail on some instances. You can use `show warnings` to check the result.
+To avoid confusing dynamic configuration with SQL variables, you can view TiDB configuration using `show config`, but you cannot modify the configuration, which causes an error. If you want to dynamically modify TiDB behaviors, use the corresponding SQL variables.
+
+The names of some configuration items might conflict with TiDB keywords, such as `limit` and `key`. For these configuration items, use backtick `` ` `` to enclose them. For example, ``tikv-client.`store-limit` ``.
+
+The batch modification operation cannot guarantee atomicity. On some instances, this operation might succeed, while on other instances, it might fail. If you modify the configuration of the entire TiKV cluster using `set tikv key=val`, your modification might fail on some instances. You can use `show warnings` to check the result.
 
 ## Supported parameters
 
