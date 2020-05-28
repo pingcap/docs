@@ -24,11 +24,8 @@ This section describes the common operations of dynamic configuration change.
 
 To view the configuration of all instances in the cluster, use the `show config` SQL statement. The result is as follows:
 
-<<<<<<< HEAD
-=======
 {{< copyable "sql" >}}
 
->>>>>>> a3ce0dd... refine format of dynamic config doc (#2622)
 ```sql
 show config;
 ```
@@ -69,20 +66,13 @@ set config "127.0.0.1:2379" log.level="info"
 If the modification is successful, `Query OK` is returned:
 
 ```sql
-<<<<<<< HEAD
-set config '127.0.0.1:2379' log.level='info';
-=======
->>>>>>> a3ce0dd... refine format of dynamic config doc (#2622)
 Query OK, 0 rows affected (0.01 sec)
 ```
 
 If an error occurs during the batch modification, a warning is returned:
 
-<<<<<<< HEAD
-=======
 {{< copyable "sql" >}}
 
->>>>>>> a3ce0dd... refine format of dynamic config doc (#2622)
 ```sql
 set config tikv log-level='warn';
 ```
