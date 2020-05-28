@@ -1,6 +1,6 @@
 ---
 title: Key Visualizer
-suammary: Learn the Key Visualizer feature.
+summary: Learn how to monitor traffic using the Key Visualizer tool.
 category: how-to
 ---
 
@@ -10,7 +10,7 @@ Key Visualizer is a feature for analyzing the usage of TiDB and troubleshooting 
 
 ## Access Key Visualizer
 
-Key Visualizer is one of the TiDB Dashboard components. It is directly integrated to PD instances and does not require a separate deployment. You can access this TiDB Dashboard component on any PD instance via browsers by using the following address:
+As one of the offerings of TiDB Dashboard, Key Visualizer is directly integrated into PD instances and does not require a separate deployment. You can access TiDB Dashboard on any PD instance via your browser by using the following address:
 
 {{< copyable "" >}}
 
@@ -21,8 +21,8 @@ http://PDAddress:PDPort/dashboard
 > **Note:**
 >
 > + If multiple PD instances exist, you can use any PD instance address to access TiDB Dashboard.
-> + By default, `PDPort` is `2379`. If you have modified the corresponding PD parameter, use the corresponding modified PD port.
-> + You need the `root` account of TiDB to log into TiDB Dashboard.
+> + By default, `PDPort` is `2379`. If you have modified the corresponding PD parameter during deployment, use the modified PD port.
+> + You need to use the `root` account of TiDB to log into TiDB Dashboard.
 
 ## Interface demonstration
 
