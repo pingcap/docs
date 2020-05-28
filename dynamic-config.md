@@ -24,8 +24,13 @@ This section describes the common operations of dynamic configuration change.
 
 To view the configuration of all instances in the cluster, use the `show config` SQL statement. The result is as follows:
 
+{{< copyable "sql" >}}
+
 ```sql
 show config;
+```
+
+```sql
 +------+-----------------+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Type | Instance        | Name                                                      | Value                                                                                                                                                                                                                                                                            |
 +------+-----------------+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -60,18 +65,35 @@ set config "127.0.0.1:2379" log.level="info"
 
 If the modification is successful, `Query OK` is returned:
 
+{{< copyable "sql" >}}
+
 ```sql
 set config '127.0.0.1:2379' log.level='info';
+```
+
+```sql
 Query OK, 0 rows affected (0.01 sec)
 ```
 
 If an error occurs during the batch modification, a warning is returned:
 
+{{< copyable "sql" >}}
+
 ```sql
 set config tikv log-level='warn';
-Query OK, 0 rows affected, 1 warning (0.04 sec)
+```
 
+```sql
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
 show warnings;
+```
+
+```sql
 +---------+------+---------------------------------------------------------------------------------------------------------------+
 | Level   | Code | Message                                                                                                       |
 +---------+------+---------------------------------------------------------------------------------------------------------------+
@@ -93,7 +115,7 @@ This section lists the parameters supported by dynamic configuration change.
 ### PD
 
 | Parameter | Description |
-| --- | --- |
+| :--- | :--- |
 | `log.level` | The log level |
 | `cluster-version` | The cluster version |
 | `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MB) |
