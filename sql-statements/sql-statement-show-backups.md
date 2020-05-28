@@ -22,13 +22,13 @@ Use `SHOW BACKUPS` to query `BACKUP` tasks and use `SHOW RESTORES` to query `RES
 
 ## Examples
 
-In one connection, execute
+In one connection, execute the following statement:
 
 ```sql
 mysql> BACKUP DATABASE `test` TO 's3://example-bucket/backup-01/?region=us-west-1';
 ```
 
-Before the backup completes, run `SHOW BACKUPS` in a new connection
+Before the backup completes, run `SHOW BACKUPS` in a new connection:
 
 ```sql
 mysql> SHOW BACKUPS;
@@ -40,7 +40,7 @@ mysql> SHOW BACKUPS;
 1 row in set (0.00 sec)
 ```
 
-The columns are
+The first row of the result above is described as follows:
 
 | Column | Meaning |
 |--------|---------|
@@ -69,7 +69,7 @@ Use the `LIKE` clause to filter out tasks by matching the destination URL agains
 SHOW BACKUPS LIKE 's3://%';
 ```
 
-Use the `WHERE` clause to filter by columns
+Use the `WHERE` clause to filter by columns.
 
 {{< copyable "sql" >}}
 

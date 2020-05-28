@@ -63,7 +63,7 @@ In the example above, the `test` database is backed up into the local filesystem
 
 The first row of the result above is described as follows:
 
-| Column | Meaning |
+| Column | Description |
 |--------|---------|
 | `Destination` | The destination URL |
 | `Size` |  The total size of the backup archive, in bytes |

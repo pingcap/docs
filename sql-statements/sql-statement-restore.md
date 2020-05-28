@@ -61,9 +61,9 @@ RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 
 This will restore everything from a backup archive at the local filesystem. The data will be read as SST files from the `/mnt/backup/2020/04/` folders distributed among all TiDB and TiKV nodes.
 
-On complete, it will display the result in one row of
+The first row of the result above is described as follows:
 
-| Column | Meaning |
+| Column | Description |
 |--------|---------|
 | `Destination` | The destination URL to read from |
 | `Size` |  The total size of the backup archive, in bytes |
@@ -85,7 +85,7 @@ RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/202
 
 ### Remote destinations
 
-BR supports restoring from S3 or GCS:
+BR supports restoring data from S3 or GCS:
 
 {{< copyable "sql" >}}
 
@@ -125,7 +125,7 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
 
 There is no special syntax to perform incremental restore. TiDB will recognize whether the backup archive is full or incremental and take appropriate action. You only need to apply each incremental restore in correct order.
 
-For instance, if we create backup as
+For instance, if a backup task is created as follows:
 
 {{< copyable "sql" >}}
 
@@ -135,7 +135,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket/inc-backup-1' SNAPSHOT = 41497185
 BACKUP DATABASE `test` TO 's3://example-bucket/inc-backup-2' SNAPSHOT = 416353458585600 LAST_BACKUP = 414971854848000;
 ```
 
-then we should apply the restore in the same order
+then the same order should be applied in the restore:
 
 {{< copyable "sql" >}}
 
