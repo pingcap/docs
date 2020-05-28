@@ -158,7 +158,7 @@ For detailed parameter description, refer to [PD Configuration File](/pd-configu
 ### TiKV
 
 | Parameter | Description |
-| --- | --- |
+| :--- | :--- |
 | `refresh-config-interval` | The time interval at which the configuration is updated |
 | `raftstore.sync-log` | Determines whether to force commits to be flushed to raft-log synchronously for persistent storage |
 | `raftstore.raft-entry-max-size` | The maximum size of a single log |
