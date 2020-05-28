@@ -50,7 +50,7 @@ Only one `BACKUP` and `RESTORE` task can be executed at a time. If a `BACKUP` or
 RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 ```
 
-```
+```sql
 +------------------------------+-----------+----------+---------------------+---------------------+
 | Destination                  | Size      | BackupTS | Queue Time          | Execution Time      |
 +------------------------------+-----------+----------+---------------------+---------------------+
@@ -64,7 +64,7 @@ In the example above, all data is restored from a backup archive at the local fi
 The first row of the result above is described as follows:
 
 | Column | Description |
-|--------|---------|
+| :-------- | :--------- |
 | `Destination` | The destination URL to read from |
 | `Size` |  The total size of the backup archive, in bytes |
 | `BackupTS` | (not used) |
@@ -79,7 +79,11 @@ You can specify which databases or tables to restore. If some databases or table
 
 ```sql
 RESTORE DATABASE `test` FROM 'local:///mnt/backup/2020/04/';
+```
 
+{{< copyable "sql" >}}
+
+```sql
 RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/2020/04/';
 ```
 

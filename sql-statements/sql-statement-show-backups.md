@@ -24,14 +24,21 @@ Use `SHOW BACKUPS` to query `BACKUP` tasks and use `SHOW RESTORES` to query `RES
 
 In one connection, execute the following statement:
 
+{{< copyable "sql" >}}
+
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket/backup-01/?region=us-west-1';
 ```
 
 Before the backup completes, run `SHOW BACKUPS` in a new connection:
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> SHOW BACKUPS;
+SHOW BACKUPS;
+```
+
+```sql
 +--------------------------------+---------+----------+---------------------+---------------------+-------------+------------+
 | Destination                    | State   | Progress | Queue_Time          | Execution_Time      | Finish_Time | Connection |
 +--------------------------------+---------+----------+---------------------+---------------------+-------------+------------+
@@ -43,7 +50,7 @@ mysql> SHOW BACKUPS;
 The first row of the result above is described as follows:
 
 | Column | Description |
-|--------|---------|
+| :-------- | :--------- |
 | `Destination` | The destination URL (with all parameters stripped to avoid leaking secret keys) |
 | `State` | State of the task |
 | `Progress` | Estimated progress in the current state as a percentage |
@@ -54,8 +61,13 @@ The first row of the result above is described as follows:
 
 The connection ID can be used to cancel a backup/restore task via the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
 
+{{< copyable "sql" >}}
+
 ```sql
-mysql> KILL TIDB QUERY 4;
+KILL TIDB QUERY 4;
+```
+
+```sql
 Query OK, 0 rows affected (0.00 sec)
 ```
 

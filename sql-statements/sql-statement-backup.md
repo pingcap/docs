@@ -50,7 +50,7 @@ Only one `BACKUP` and [`RESTORE`](/sql-statements/sql-statement-restore.md) task
 BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 ```
 
-```
+```sql
 +------------------------------+-----------+-----------------+---------------------+---------------------+
 | Destination                  | Size      | BackupTS        | Queue Time          | Execution Time      |
 +------------------------------+-----------+-----------------+---------------------+---------------------+
@@ -64,7 +64,7 @@ In the example above, the `test` database is backed up into the local filesystem
 The first row of the result above is described as follows:
 
 | Column | Description |
-|--------|---------|
+| :-------- | :--------- |
 | `Destination` | The destination URL |
 | `Size` |  The total size of the backup archive, in bytes |
 | `BackupTS` | The TSO of the snapshot when the backup is created (useful for [incremental backup](#incremental-backup)) |
@@ -77,7 +77,11 @@ The first row of the result above is described as follows:
 
 ```sql
 BACKUP TABLE `test`.`sbtest01` TO 'local:///mnt/backup/sbtest01/';
+```
 
+{{< copyable "sql" >}}
+
+```sql
 BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 ```
 
