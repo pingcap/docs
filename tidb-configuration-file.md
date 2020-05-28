@@ -429,7 +429,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 ### `capacity-mb`
 
-- The total size of the cached data. When the cache space is full, old cache entries is evicted.
+- The total size of the cached data. When the cache space is full, old cache entries are evicted.
 - Default value: `1000`
 - Unit: MB
 
