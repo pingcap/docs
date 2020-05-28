@@ -75,6 +75,7 @@
   + Monitor
     - [Overview](/tidb-monitoring-framework.md)
     - [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
+    - [Monitor Traffic Using Key Visualizer](/key-visualizer-monitoring-tool.md)
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
@@ -87,6 +88,7 @@
       - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
       - [Use BR](/br/backup-and-restore-tool.md)
       - [BR Usage Scenarios](/br/backup-and-restore-use-cases.md)
+      - [BR storages](/br/backup-and-restore-storages.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
@@ -175,6 +177,7 @@
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
+      - [`BACKUP`](/sql-statements/sql-statement-backup.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
@@ -213,6 +216,7 @@
       - [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
       - [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
       - [`REPLACE`](/sql-statements/sql-statement-replace.md)
+      - [`RESTORE`](/sql-statements/sql-statement-restore.md)
       - [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
       - [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
       - [`SELECT`](/sql-statements/sql-statement-select.md)
@@ -220,6 +224,7 @@
       - [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+      - [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
       - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       - [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
@@ -267,6 +272,7 @@
     + tikv-server
       - [Configuration Flags](/command-line-flags-for-tikv-configuration.md)
       - [Configuration File](/tikv-configuration-file.md)
+    - [Dynamic Configuration Change](/dynamic-config.md)
   + Security
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [The TiDB Access Privilege System](/privilege-management.md)
@@ -335,6 +341,7 @@
     - [Configure TiFlash](/tiflash/tiflash-configuration.md)
     - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+    - [Troubleshoot a TiFlash Cluster](/tiflash/troubleshoot-tiflash.md)
     - [FAQ](/tiflash/tiflash-faq.md)
   + TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
