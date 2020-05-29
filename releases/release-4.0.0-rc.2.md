@@ -15,7 +15,7 @@ TiUP version: 4.0.0-rc.2
 
 + TiDB
 
-    - Change the size limit for a single transaction from 100 MB to infinite. However, if TiDB Binlog is enabled and the downstream is Kafka, configure the `txn-total-size-limit` parameter according to the message size limit of 1 GB in kafka [#16941](https://github.com/pingcap/tidb/pull/16941)
+    - Remove the size limit for a single transaction (100 MB) when TiDB Binlog is enabled. Now the size limit for a transaction is 10 GB. However, if TiDB Binlog is enabled and the downstream is Kafka, configure the `txn-total-size-limit` parameter according to the message size limit of 1 GB in Kafka [#16941](https://github.com/pingcap/tidb/pull/16941)
     - Change the behavior from querying the default time range to returning an error and requesting a specified time range if the time range is not specified when querying the `CLUSTER_LOG` table [#17003](https://github.com/pingcap/tidb/pull/17003)
     - If the unsupported `sub-partition` or `linear hash` option is specified when creating the partitioned table using the `CREATE TABLE` statement, the normal table is created rather than the partitioned table with the options ignored [#17197](https://github.com/pingcap/tidb/pull/17197)
 
@@ -103,7 +103,7 @@ TiUP version: 4.0.0-rc.2
 
         - Support managing the replication task by using `cdc cli` (changefeed) [#546](https://github.com/pingcap/ticdc/pull/546)
 
-    - BR
+    - Backup & Restore (BR)
 
         - Support automatically adjusting GC time during backup [#257](https://github.com/pingcap/br/pull/257)
         - Adjust PD parameters when restoring data to speed up the restoration [#198](https://github.com/pingcap/br/pull/198)
@@ -194,6 +194,6 @@ TiUP version: 4.0.0-rc.2
         - Optimize the memory usage when initializing the table schema [#534](https://github.com/pingcap/ticdc/pull/534)
         - Use the `watch` mode to monitor the replication status changes and perform quasi-real-time updates to reduce replication delay [#481](https://github.com/pingcap/ticdc/pull/481)
 
-    + BR
+    + Backup & Restore (BR)
 
         - Fix the issue that inserting data might trigger the `duplicate entry` error after BR restores a table with the `auto_random` attribute [#241](https://github.com/pingcap/br/issues/241)
