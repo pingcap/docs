@@ -79,11 +79,11 @@ source /home/tidb/.bash_profile
 
 Log in to the target machines using the `root` user account.
 
-Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount parameters to the filesystem. It is required to add the `nodelalloc` parameter, or else the TiUP deployment cannot pass the test. The `noatime` parameter is optional.
+Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the TiUP deployment cannot pass the test. The `noatime` option is optional.
 
 > **Note:**
 >
-> If your data disks have been formatted to ext4 and have mounted the disks, you can uninstall it by running the `umount /dev/nvme0n1p1` command, follow the steps starting from editing the `/etc/fstab` file, and add the parameters again to the filesystem.
+> If your data disks have been formatted to ext4 and have added the mount options, you can uninstall it by running the `umount /dev/nvme0n1p1` command, follow the steps starting from editing the `/etc/fstab` file, and add the options again to the filesystem.
 
 Take the `/dev/nvme0n1` data disk as an example:
 
@@ -140,7 +140,7 @@ Take the `/dev/nvme0n1` data disk as an example:
     └─nvme0n1p1 ext4         c51eb23b-195c-4061-92a9-3fad812cc12f
     ```
 
-5. Edit the `/etc/fstab` file and add the mount parameters:
+5. Edit the `/etc/fstab` file and add the mount options:
 
     {{< copyable "shell-root" >}}
 
@@ -169,7 +169,7 @@ Take the `/dev/nvme0n1` data disk as an example:
     mount -t ext4
     ```
 
-    If the filesystem is ext4 and `nodelalloc` is included in the mount parameters, the steps above are successful.
+    If the filesystem is ext4 and `nodelalloc` is included in the mount options, you have successfully mount the data disk ext4 filesystem with options on the target machines.
 
     ```
     /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
