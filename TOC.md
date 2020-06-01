@@ -72,9 +72,11 @@
       - [Enable TLS For MySQL Clients](/encrypted-connections-with-tls-protocols.md)
       - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
     - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
+    - [Encryption-At-Rest](/encryption-at-rest.md)
   + Monitor
     - [Overview](/tidb-monitoring-framework.md)
     - [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
+    - [Monitor Traffic Using Key Visualizer](/key-visualizer-monitoring-tool.md)
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
@@ -87,6 +89,7 @@
       - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
       - [Use BR](/br/backup-and-restore-tool.md)
       - [BR Usage Scenarios](/br/backup-and-restore-use-cases.md)
+      - [BR storages](/br/backup-and-restore-storages.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
@@ -175,6 +178,7 @@
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
+      - [`BACKUP`](/sql-statements/sql-statement-backup.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
@@ -213,6 +217,7 @@
       - [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
       - [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
       - [`REPLACE`](/sql-statements/sql-statement-replace.md)
+      - [`RESTORE`](/sql-statements/sql-statement-restore.md)
       - [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
       - [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
       - [`SELECT`](/sql-statements/sql-statement-select.md)
@@ -220,6 +225,7 @@
       - [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+      - [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
       - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       - [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
@@ -267,6 +273,7 @@
     + tikv-server
       - [Configuration Flags](/command-line-flags-for-tikv-configuration.md)
       - [Configuration File](/tikv-configuration-file.md)
+    - [Dynamic Configuration Change](/dynamic-config.md)
   + Security
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [The TiDB Access Privilege System](/privilege-management.md)
@@ -309,6 +316,7 @@
     - [Execution Plan Binding](/execution-plan-binding.md)
     - [Access Tables Using `IndexMerge`](/index-merge.md)
     - [Statement Summary Table](/statement-summary-tables.md)
+    - [Coprocessor Cache](/coprocessor-cache.md)
     - [Tune TiKV](/tune-tikv-performance.md)
   + Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
@@ -331,10 +339,10 @@
     - [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md)
     - [Monitor TiFlash](/tiflash/monitor-tiflash.md)
     - [Scale TiFlash](/scale-tidb-using-tiup.md#scale-out-a-tiflash-node)
-    - [Upgrade TiFlash Nodes](/tiflash/upgrade-tiflash.md)
     - [Configure TiFlash](/tiflash/tiflash-configuration.md)
     - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+    - [Troubleshoot a TiFlash Cluster](/tiflash/troubleshoot-tiflash.md)
     - [FAQ](/tiflash/tiflash-faq.md)
   + TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
@@ -413,6 +421,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/release-notes.md)
   + v4.0
+    - [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
     - [4.0.0-rc.1](/releases/release-4.0.0-rc.1.md)
     - [4.0.0-rc](/releases/release-4.0.0-rc.md)
     - [4.0.0-beta.2](/releases/release-4.0.0-beta.2.md)
