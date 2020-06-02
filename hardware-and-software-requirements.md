@@ -35,7 +35,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 > **Note:**
 >
-> It is required that you [deploy TiUP on the Control Machine](/tiup/tiup-documentation-guide.md) to operate and manage TiDB clusters.
+> It is required that you deploy TiUP on the Control Machine to operate and manage TiDB clusters.
 
 ### Target machines
 
