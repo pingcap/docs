@@ -7,8 +7,6 @@ aliases: ['/docs/dev/how-to/deploy/hardware-recommendations/']
 
 # Software and Hardware Recommendations
 
-## About
-
 As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## Linux OS version requirements
@@ -37,7 +35,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 > **Note:**
 >
-> [Deploy TiUP](/tiup/tiup-cluster.md) on the Control Machine to operate and manage TiDB clusters.
+> It is required that you [deploy TiUP](/tiup/tiup-cluster.md) on the Control Machine to operate and manage TiDB clusters.
 
 ### Target machines
 
@@ -48,7 +46,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 ## Server recommendations
 
-You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or the hardware server platform in the ARM architecture. The requirements and recommendations about server hardware configuration (ignoring the resources occupied by the operating system itself) for development, test, and production environments are as follows:
+You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. The requirements and recommendations about server hardware configuration (ignoring the resources occupied by the operating system itself) for development, test, and production environments are as follows:
 
 ### Development and test environments
 
@@ -64,7 +62,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - In the test environment, the TiDB and PD instances can be deployed on the same server.
 > - For performance-related test, do not use low-performance storage and network hardware configuration, in order to guarantee the correctness of the test result.
 > - For the TiKV server, it is recommended to use NVMe SSDs to ensure faster reads and writes.
-> - If you only want to verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB and test the features on a single machine.
+> - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
 > - The TiDB server uses the disk to store server logs, so there are no special requirements for the disk type and capacity in the test environment.
 
 ### Production environment
