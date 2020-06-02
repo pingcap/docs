@@ -103,7 +103,7 @@ set global tidb_disable_txn_auto_retry=0;
 ## Test plan
 
 1. Deploy TiDB v4.0 and v3.0 using TiUP.
-2. Use Sysbench to import 16 tables, each table with 1 million rows of data.
+2. Use Sysbench to import 16 tables, each table with 10 million rows of data.
 3. Execute the `analyze table` statement on each table.
 4. Back up the data used for restore before different concurrency tests, which ensures data consistency for each test.
 5. Start the Sysbench client to perform the `point_select`, `read_write`, `update_index`, and `update_non_index` tests. Pressurize TiDB via AWS NLB. In each type of test, the warm-up takes 1 minute and the test takes 5 minutes.
