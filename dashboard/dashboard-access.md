@@ -1,7 +1,7 @@
 ---
 title: Access TiDB Dashboard
 summary: Learn how to access TiDB Dashboard.
-category: how-to
+category: dashboard
 ---
 
 # Access TiDB Dashboard
