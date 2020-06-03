@@ -6,21 +6,25 @@ category: how-to
 
 # TiDB Environment and System Configuration Check
 
-This document describes the environment check operations before deploying TiDB. The following steps are sequenced in order of priorities.
+This document describes the environment check operations before deploying TiDB. The following steps are ordered by priorities.
 
 ## Mount the data disk ext4 filesystem with options on the target machines that deploy TiKV
 
-For production environment deployments, it is recommended to use NVMe SSD of EXT4 filesystem to store TiKV data. This configuration is the best practice, whose reliability, security, and stability have been proven in a large number of online scenarios.
+For production deployments, it is recommended to use NVMe SSD of EXT4 filesystem to store TiKV data. This configuration is the best practice, whose reliability, security, and stability have been proven in a large number of online scenarios.
 
 > **Note:**
 >
-> It is recommended to use the EXT4 file system format for the data directory of the target machines that deploy TiKV. Compared with the XFS file system format, we support more deployment cases that use the EXT4 file system format.
+> It is recommended to use the EXT4 filesystem format for the data directory of the target machines that deploy TiKV. Compared with the XFS filesystem format, we support more deployment cases that use the EXT4 filesystem format.
 >
 > For the production environment, use the EXT4 file system format.
 
 Log in to the target machines using the `root` user account.
 
-Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the TiUP deployment cannot pass the test. The `noatime` option is optional.
+Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the TiUP deployment cannot pass the precheck. The `noatime` option is optional.
+
+> **Note:**
+>
+> If your data disks have been formatted to ext4 and have added the mount options, you can uninstall it by running the `umount /dev/nvme0n1p1` command, skip directly to the fifth step below to edit the `/etc/fstab` file, and add the options again to the file system.
 
 Take the `/dev/nvme0n1` data disk as an example:
 
@@ -36,7 +40,7 @@ Take the `/dev/nvme0n1` data disk as an example:
     Disk /dev/nvme0n1: 1000 GB
     ```
 
-2. Create the partition table.
+2. Create the partition.
 
     {{< copyable "shell-root" >}}
 
