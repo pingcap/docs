@@ -132,7 +132,7 @@ sysctl -p
 
 This section describes how to stop the firewall service of Target Machines.
 
-In TiDB clusters, the access ports between nodes must be open to ensure the normal transmission of information such as read and write requests and data heartbeat. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target node. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the related port information to the whitelist of the firewall service.
+In TiDB clusters, the access ports between nodes must be open to ensure the transmission of information such as read and write requests and data heartbeats. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target machine. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the needed port information to the whitelist of the firewall service.
 
 1. Check the firewall status. Take CentOS Linux release 7.7.1908 (Core) as an example.
 
