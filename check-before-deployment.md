@@ -12,19 +12,13 @@ This document describes the environment check operations before deploying TiDB. 
 
 For production deployments, it is recommended to use NVMe SSD of EXT4 filesystem to store TiKV data. This configuration is the best practice, whose reliability, security, and stability have been proven in a large number of online scenarios.
 
-> **Note:**
->
-> It is recommended to use the EXT4 filesystem format for the data directory of the target machines that deploy TiKV. Compared with the XFS filesystem format, we support more deployment cases that use the EXT4 filesystem format.
->
-> For the production environment, use the EXT4 file system format.
-
 Log in to the target machines using the `root` user account.
 
 Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the TiUP deployment cannot pass the precheck. The `noatime` option is optional.
 
 > **Note:**
 >
-> If your data disks have been formatted to ext4 and have added the mount options, you can uninstall it by running the `umount /dev/nvme0n1p1` command, skip directly to the fifth step below to edit the `/etc/fstab` file, and add the options again to the file system.
+> If your data disks have been formatted to ext4 and have added the mount options, you can uninstall it by running the `umount /dev/nvme0n1p1` command, skip directly to the fifth step below to edit the `/etc/fstab` file, and add the options again to the filesystem.
 
 Take the `/dev/nvme0n1` data disk as an example:
 
