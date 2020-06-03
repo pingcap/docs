@@ -18,7 +18,7 @@ Before you start, make sure that you have:
     - The machine must have access to the Internet in order to download TiDB Ansible, TiDB and related packages.
     - For Linux operating system, it is recommended to install CentOS 7.3 or later.
 
-2. Several target machines and one Control Machine
+2. Several Target Machines and one Control Machine
 
     - For system requirements and configuration, see [Prepare the environment](/online-deployment-using-ansible.md#prepare).
     - It is acceptable without access to the Internet.
@@ -146,21 +146,21 @@ Currently, all the versions of TiDB Ansible from 2.4 to 2.7.11 are supported. Th
 
 See [Configure the SSH mutual trust and sudo rules on the Control Machine](/online-deployment-using-ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine).
 
-## Step 6: Install the NTP service on the target machines
+## Step 6: Install the NTP service on the Target Machines
 
-See [Install the NTP service on the target machines](/online-deployment-using-ansible.md#step-6-install-the-ntp-service-on-the-target-machines).
+See [Install the NTP service on the Target Machines](/online-deployment-using-ansible.md#step-6-install-the-ntp-service-on-the-target-machines).
 
 > **Note:**
 >
-> If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can skip this step. See [How to check whether the NTP service is normal](/online-deployment-using-ansible.md#how-to-check-whether-the-ntp-service-is-normal).
+> If the time and time zone of all your Target Machines are same, the NTP service is on and is normally synchronizing time, you can skip this step. See [How to check whether the NTP service is normal](/online-deployment-using-ansible.md#how-to-check-whether-the-ntp-service-is-normal).
 
-## Step 7: Configure the CPUfreq governor mode on the target machine
+## Step 7: Configure the CPUfreq governor mode on the Target Machine
 
-See [Configure the CPUfreq governor mode on the target machine](/online-deployment-using-ansible.md#step-7-configure-the-cpufreq-governor-mode-on-the-target-machine).
+See [Configure the CPUfreq governor mode on the Target Machine](/online-deployment-using-ansible.md#step-7-configure-the-cpufreq-governor-mode-on-the-target-machine).
 
-## Step 8: Mount the data disk ext4 filesystem with options on the target machines
+## Step 8: Mount the data disk ext4 filesystem with options on the Target Machines
 
-See [Mount the data disk ext4 filesystem with options on the target machines](/online-deployment-using-ansible.md#step-8-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines).
+See [Mount the data disk ext4 filesystem with options on the Target Machines](/online-deployment-using-ansible.md#step-8-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines).
 
 ## Step 9: Edit the `inventory.ini` file to orchestrate the TiDB cluster
 

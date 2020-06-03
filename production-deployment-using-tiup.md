@@ -13,7 +13,7 @@ This document introduces how to use TiUP to deploy a TiDB cluster. The steps are
 
 - [Step 1: Prepare the right machines for deployment](#step-1-prepare-the-right-machines-for-deployment)
 - [Step 2: Install TiUP on the Control Machine](#step-2-install-tiup-on-the-control-machine)
-- [Step 3: Mount the data disk ext4 filesystem with options on the target machines that deploy TiKV](#step-3-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv)
+- [Step 3: Mount the data disk ext4 filesystem with options on the Target Machines that deploy TiKV](#step-3-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv)
 - [Step 4: Edit the initialization configuration file `topology.yaml`](#step-4-edit-the-initialization-configuration-file-topologyyaml)
 - [Step 5: Execute the deployment command](#step-5-execute-the-deployment-command)
 - [Step 6: Check the clusters managed by TiUP](#step-6-check-the-clusters-managed-by-tiup)
@@ -37,20 +37,20 @@ Here are the steps of preparing your deployment environment.
 
 The software and hardware recommendations for the **Control Machine** are as follows:
 
-- The Control Machine can be one of the target machines.
+- The Control Machine can be one of the Target Machines.
 - For the Control Machine' operating system, it is recommended to install CentOS 7.3 or above.
 - The Control Machine needs to access the external Internet to download TiDB and related software installation packages.
 - You need to install TiUP on the Control Machine. Refer to [Step 2](#step-2-install-tiup-on-the-control-machine) for installation steps.
 
-The software and hardware recommendations for the **target machines** are as follows:
+The software and hardware recommendations for the **Target Machines** are as follows:
 
-- It is recommended that you deploy four or more target machines with at least three TiKV instances, and that the TiKV instances are not deployed on the same machine as TiDB and PD instances.
+- It is recommended that you deploy four or more Target Machines with at least three TiKV instances, and that the TiKV instances are not deployed on the same machine as TiDB and PD instances.
 - Currently TiUP only supports deploying the TiDB cluster on x86_64 (AMD64) architecture (TiUP will support deploying TiDB on ARM architecture at 4.0 GA)
     - Under AMD64 architecture, it is recommended to use CentOS 7.3 or above as the operating system.
     - Under ARM architecture, it is recommended to use CentOS 7.6 1810 as the operating system.
 - For the file system of TiKV data files, it is recommended to use EXT4 format. (refer to [Step 3](#step-3-mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv)) You can also use CentOS default XFS format.
-- The target machines can communicate with each other on the Intranet. (It is recommended to [disable the firewall `firewalld`](#how-to-stop-the-firewall-service-of-deployment-machines), or enable the required ports between the nodes of the TiDB cluster.)
-- [Disable the system swap](#how-to-disable-system-swap) on all the deployment machines.
+- The Target Machines can communicate with each other on the Intranet. (It is recommended to [disable the firewall `firewalld`](#how-to-stop-the-firewall-service-of-deployment-machines), or enable the required ports between the nodes of the TiDB cluster.)
+- [Disable the system swap](#how-to-disable-system-swap) on all the Target Machines.
 - If you need to bind CPU cores, [install the `numactl` tool](#how-to-install-the-numactl-tool).
 
 For other software and hardware recommendations, refer to [TiDB Software and Hardware Recommendations](/hardware-and-software-requirements.md).
@@ -176,15 +176,15 @@ Log in to the Control Machine using a regular user account (take the `tidb` user
     /home/tidb/.tiup/components/cluster/v0.4.3/cluster
     ```
 
-### Step 3: Mount the data disk ext4 filesystem with options on the target machines that deploy TiKV
+### Step 3: Mount the data disk ext4 filesystem with options on the Target Machines that deploy TiKV
 
 > **Note:**
 >
-> It is recommended to use the EXT4 file system format for the data directory of the target machines that deploy TiKV. Compared with the XFS file system format, we support more deployment cases that use the EXT4 file system format.
+> It is recommended to use the EXT4 file system format for the data directory of the Target Machines that deploy TiKV. Compared with the XFS file system format, we support more deployment cases that use the EXT4 file system format.
 > 
 > **For the production environment, use the EXT4 file system format.**
 
-Log in to the target machines using the `root` user account.
+Log in to the Target Machines using the `root` user account.
 
 Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the TiUP deployment cannot pass the test. The `noatime` option is optional.
 
@@ -280,7 +280,7 @@ Take the `/dev/nvme0n1` data disk as an example:
     /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
     ```
 
-    If the filesystem is ext4 and `nodelalloc` is included in the mount options, you have successfully mount the data disk ext4 filesystem with options on the target machines.
+    If the filesystem is ext4 and `nodelalloc` is included in the mount options, you have successfully mount the data disk ext4 filesystem with options on the Target Machines.
 
 ## Step 4: Edit the initialization configuration file `topology.yaml`
 
@@ -317,7 +317,7 @@ The following sections provide a cluster configuration template for each of the 
 
 > **Note:**
 >
-> You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines. You can customize the user or keep it the same as the user of the Control Machine.
+> You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the Target Machines. You can customize the user or keep it the same as the user of the Control Machine.
 
 > **Note:**
 >
@@ -654,7 +654,7 @@ You need to fill in the result in the configuration file (as described in the St
 
 > **Note:**
 >
-> - You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines. You can customize the user or keep it the same as the user of the Control Machine.
+> - You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the Target Machines. You can customize the user or keep it the same as the user of the Control Machine.
 > - By default, `deploy_dir` of each component uses `<deploy_dir>/<components_name>-<port>` of the global configuration. For example, if you specify the `tidb` port as `4001`, then the TiDB component's default `deploy_dir` is `tidb-deploy/tidb-4001`. Therefore, when you specify non-default ports in multi-instance scenarios, you do not need to specify `deploy_dir` again.
 
 > **Note:**
@@ -941,7 +941,7 @@ Key parameters of TiDB:
 
 > **Note:**
 >
-> You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the target machines. You can customize the user or keep it the same as the user of the Control Machine.
+> You do not need to manually create the `tidb` user, because the TiUP cluster component will automatically create the `tidb` user on the Target Machines. You can customize the user or keep it the same as the user of the Control Machine.
 
 > **Note:**
 >
@@ -1216,7 +1216,7 @@ In the above command:
 - The name of the TiDB cluster deployed through TiUP cluster is `tidb-test`.
 - The deployment version is `v4.0.0-rc`. For other supported versions, see [How to view the TiDB versions supported by TiUP](#how-to-view-the-tidb-versions-supported-by-tiup).
 - The initialization configuration file is `topology.yaml`.
-- Log in to the target machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` privileges to complete the deployment.
+- Log in to the Target Machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 
 At the end of the output log, you will see ```Deployed cluster `tidb-test` successfully```. This indicates that the deployment is successful.
 
@@ -1777,7 +1777,7 @@ cdc                             darwin/amd64,linux/amd64,linux/arm64
 
 ### How to manually configure the SSH mutual trust and sudo without password
 
-1. Log in to the deployment target machine respectively using the `root` user account, create the `tidb` user and set the login password.
+1. Log in to the Target Machine respectively using the `root` user account, create the `tidb` user and set the login password.
 
     {{< copyable "shell-root" >}}
 
@@ -1798,7 +1798,7 @@ cdc                             darwin/amd64,linux/amd64,linux/arm64
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
-3. Use the `tidb` user to log in to the Control Machine, and run the following command. Replace `10.0.1.1` with the IP of your deployment target machine, and enter the `tidb` user password of the deployment target machine as prompted. Successful execution indicates that SSH mutual trust is already created. This applies to other machines as well.
+3. Use the `tidb` user to log in to the Control Machine, and run the following command. Replace `10.0.1.1` with the IP of your Target Machine, and enter the `tidb` user password of the Target Machine as prompted. Successful execution indicates that SSH mutual trust is already created. This applies to other machines as well.
 
     {{< copyable "shell-regular" >}}
 
@@ -1806,7 +1806,7 @@ cdc                             darwin/amd64,linux/amd64,linux/arm64
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 
-4. Log in to the Control Machine using the `tidb` user account, and log in to the IP of the target machine using `ssh`. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
+4. Log in to the Control Machine using the `tidb` user account, and log in to the IP of the Target Machine using `ssh`. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
 
     {{< copyable "shell-regular" >}}
 
@@ -1818,7 +1818,7 @@ cdc                             darwin/amd64,linux/amd64,linux/arm64
     [tidb@10.0.1.1 ~]$
     ```
 
-5. After you login to the deployment target machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
+5. After you login to the Target Machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
 
     {{< copyable "shell-regular" >}}
 
@@ -1830,7 +1830,7 @@ cdc                             darwin/amd64,linux/amd64,linux/arm64
     [root@10.0.1.1 tidb]#
     ```
 
-### How to stop the firewall service of deployment machines
+### How to stop the firewall service of Target Machines
 
 1. Check the firewall status. Take CentOS Linux release 7.7.1908 (Core) as an example.
 
@@ -1900,7 +1900,7 @@ cdc                             darwin/amd64,linux/amd64,linux/arm64
         --sudo             use root permissions (default false)
     ```
 
-    To use the sudo privilege to execute the installation command for all the target machines in the `tidb-test` cluster, run the following command:
+    To use the sudo privilege to execute the installation command for all the Target Machines in the `tidb-test` cluster, run the following command:
 
     {{< copyable "shell-regular" >}}
 

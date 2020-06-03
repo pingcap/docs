@@ -36,7 +36,7 @@ You can use the TiDB Ansible configuration file to set up the cluster topology a
 
 Before you start, make sure you have:
 
-1. Several target machines that meet the following requirements:
+1. Several Target Machines that meet the following requirements:
 
     - 4 or more machines
 
@@ -53,7 +53,7 @@ Before you start, make sure you have:
 
     > **Note:**
     >
-    > The Control Machine can be one of the target machines.
+    > The Control Machine can be one of the Target Machines.
 
     - CentOS 7.3 (64 bit) or later with Python 2.7 installed
     - Access to the Internet
@@ -203,7 +203,7 @@ It is required to use `pip` to install Ansible and its dependencies, otherwise a
 
 Make sure you have logged in to the Control Machine using the `tidb` user account.
 
-1. Add the IPs of your target machines to the `[servers]` section of the `hosts.ini` file.
+1. Add the IPs of your Target Machines to the `[servers]` section of the `hosts.ini` file.
 
     {{< copyable "shell-regular" >}}
 
@@ -226,7 +226,7 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
     ntp_server = pool.ntp.org
     ```
 
-2. Run the following command and input the `root` user account password of your target machines.
+2. Run the following command and input the `root` user account password of your Target Machines.
 
     {{< copyable "shell-regular" >}}
 
@@ -234,15 +234,15 @@ Make sure you have logged in to the Control Machine using the `tidb` user accoun
     ansible-playbook -i hosts.ini create_users.yml -u root -k
     ```
 
-    This step creates the `tidb` user account on the target machines, configures the sudo rules and the SSH mutual trust between the Control Machine and the target machines.
+    This step creates the `tidb` user account on the Target Machines, configures the sudo rules and the SSH mutual trust between the Control Machine and the Target Machines.
 
 To configure the SSH mutual trust and sudo without password manually, see [How to manually configure the SSH mutual trust and sudo without password](#how-to-manually-configure-the-ssh-mutual-trust-and-sudo-without-password).
 
-## Step 6: Install the NTP service on the target machines
+## Step 6: Install the NTP service on the Target Machines
 
 > **Note:**
 >
-> If the time and time zone of all your target machines are same, the NTP service is on and is normally synchronizing time, you can ignore this step. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
+> If the time and time zone of all your Target Machines are same, the NTP service is on and is normally synchronizing time, you can ignore this step. See [How to check whether the NTP service is normal](#how-to-check-whether-the-ntp-service-is-normal).
 
 Make sure you have logged in to the Control Machine using the `tidb` user account, run the following command:
 
@@ -253,11 +253,11 @@ cd /home/tidb/tidb-ansible && \
 ansible-playbook -i hosts.ini deploy_ntp.yml -u tidb -b
 ```
 
-The NTP service is installed and started using the software repository that comes with the system on the target machines. The default NTP server list in the installation package is used. The related `server` parameter is in the `/etc/ntp.conf` configuration file.
+The NTP service is installed and started using the software repository that comes with the system on the Target Machines. The default NTP server list in the installation package is used. The related `server` parameter is in the `/etc/ntp.conf` configuration file.
 
 To make the NTP service start synchronizing as soon as possible, the system executes the `ntpdate` command to set the local date and time by polling `ntp_server` in the `hosts.ini` file. The default server is `pool.ntp.org`, and you can also replace it with your NTP server.
 
-## Step 7: Configure the CPUfreq governor mode on the target machine
+## Step 7: Configure the CPUfreq governor mode on the Target Machine
 
 For details about CPUfreq, see [the CPUfreq Governor documentation](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/power_management_guide/cpufreq_governors).
 
@@ -326,7 +326,7 @@ You can use either of the following two methods to change the governor mode. In 
     cpupower frequency-set --governor performance
     ```
 
-- Run the following command to set the mode on the target machine in batches:
+- Run the following command to set the mode on the Target Machine in batches:
 
     {{< copyable "shell-regular" >}}
 
@@ -334,9 +334,9 @@ You can use either of the following two methods to change the governor mode. In 
     ansible -i hosts.ini all -m shell -a "cpupower frequency-set --governor performance" -u tidb -b
     ```
 
-## Step 8: Mount the data disk ext4 filesystem with options on the target machines
+## Step 8: Mount the data disk ext4 filesystem with options on the Target Machines
 
-Log in to the target machines using the `root` user account.
+Log in to the Target Machines using the `root` user account.
 
 Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the Ansible deployment cannot pass the test. The `noatime` option is optional.
 
@@ -432,7 +432,7 @@ Take the `/dev/nvme0n1` data disk as an example:
     /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
     ```
 
-    If the filesystem is ext4 and `nodelalloc` is included in the mount options, you have successfully mount the data disk ext4 filesystem with options on the target machines.
+    If the filesystem is ext4 and `nodelalloc` is included in the mount options, you have successfully mount the data disk ext4 filesystem with options on the Target Machines.
 
 ## Step 9: Edit the `inventory.ini` file to orchestrate the TiDB cluster
 
@@ -444,7 +444,7 @@ Log in to the Control Machine using the `tidb` user account, and edit the `tidb-
 
 > **Note:**
 >
-> It is required to use the internal IP address to deploy. If the SSH port of the target machines is not the default 22 port, you need to add the `ansible_port` variable. For example, `TiDB1 ansible_host=172.16.10.1 ansible_port=5555`.
+> It is required to use the internal IP address to deploy. If the SSH port of the Target Machines is not the default 22 port, you need to add the `ansible_port` variable. For example, `TiDB1 ansible_host=172.16.10.1 ansible_port=5555`.
 
 You can choose one of the following two types of cluster topology according to your scenario:
 
@@ -635,13 +635,13 @@ To enable the following control variables, use the capitalized `True`. To disabl
 | grafana_admin_user | the username of Grafana administrator; default `admin` |
 | grafana_admin_password | the password of Grafana administrator account; default `admin`; used to import Dashboard and create the API key using TiDB Ansible; update this variable if you have modified it through Grafana web |
 | collect_log_recent_hours | to collect the log of recent hours; default the recent 2 hours |
-| enable_bandwidth_limit | to set a bandwidth limit when pulling the diagnostic data from the target machines to the Control Machine; used together with the `collect_bandwidth_limit` variable |
-| collect_bandwidth_limit | the limited bandwidth when pulling the diagnostic data from the target machines to the Control Machine; unit: Kbit/s; default 10000, indicating 10Mb/s; for the cluster topology of multiple TiKV instances on each TiKV node, you need to divide the number of the TiKV instances on each TiKV node |
+| enable_bandwidth_limit | to set a bandwidth limit when pulling the diagnostic data from the Target Machines to the Control Machine; used together with the `collect_bandwidth_limit` variable |
+| collect_bandwidth_limit | the limited bandwidth when pulling the diagnostic data from the Target Machines to the Control Machine; unit: Kbit/s; default 10000, indicating 10Mb/s; for the cluster topology of multiple TiKV instances on each TiKV node, you need to divide the number of the TiKV instances on each TiKV node |
 | prometheus_storage_retention | the retention time of the monitoring data of Prometheus (30 days by default); this is a new configuration in the `group_vars/monitoring_servers.yml` file in 2.1.7, 3.0 and the later tidb-ansible versions |
 
 ## Step 11: Deploy the TiDB cluster
 
-When `ansible-playbook` runs Playbook, the default concurrent number is 5. If many deployment target machines are deployed, you can add the `-f` parameter to specify the concurrency, such as `ansible-playbook deploy.yml -f 10`.
+When `ansible-playbook` runs Playbook, the default concurrent number is 5. If many Target Machines are deployed, you can add the `-f` parameter to specify the concurrency, such as `ansible-playbook deploy.yml -f 10`.
 
 The following example uses `tidb` as the user who runs the service.
 
@@ -886,7 +886,7 @@ ansible-playbook start.yml
 
 ### How to manually configure the SSH mutual trust and sudo without password?
 
-1. Log in to the deployment target machine respectively using the `root` user account, create the `tidb` user and set the login password.
+1. Log in to the Target Machine respectively using the `root` user account, create the `tidb` user and set the login password.
 
     {{< copyable "shell-root" >}}
 
@@ -907,7 +907,7 @@ ansible-playbook start.yml
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
-3. Use the `tidb` user to log in to the Control Machine, and run the following command. Replace `172.16.10.61` with the IP of your deployment target machine, and enter the `tidb` user password of the deployment target machine as prompted. Successful execution indicates that SSH mutual trust is already created. This applies to other machines as well.
+3. Use the `tidb` user to log in to the Control Machine, and run the following command. Replace `172.16.10.61` with the IP of your Target Machine, and enter the `tidb` user password of the Target Machine as prompted. Successful execution indicates that SSH mutual trust is already created. This applies to other machines as well.
 
     {{< copyable "shell-regular" >}}
 
@@ -915,7 +915,7 @@ ansible-playbook start.yml
     ssh-copy-id -i ~/.ssh/id_rsa.pub 172.16.10.61
     ```
 
-4. Log in to the Control Machine using the `tidb` user account, and log in to the IP of the target machine using SSH. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
+4. Log in to the Control Machine using the `tidb` user account, and log in to the IP of the Target Machine using SSH. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
 
     {{< copyable "shell-regular" >}}
 
@@ -927,7 +927,7 @@ ansible-playbook start.yml
     [tidb@172.16.10.61 ~]$
     ```
 
-5. After you login to the deployment target machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
+5. After you login to the Target Machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
 
     {{< copyable "shell-regular" >}}
 

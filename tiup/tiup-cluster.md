@@ -101,7 +101,7 @@ Save the file as `/tmp/topology.yaml`. If you want to use TiDB v3.0.12 and your 
 tiup cluster deploy -p prod-cluster v3.0.12 /tmp/topology.yaml
 ```
 
-During the execution, TiUP asks you to confirm your topology again and requires the root password of the target machine (the `-p` flag means inputting password):
+During the execution, TiUP asks you to confirm your topology again and requires the root password of the Target Machine (the `-p` flag means inputting password):
 
 ```bash
 Please confirm your topology:
@@ -377,7 +377,7 @@ TiUP cluster opens the configuration file in the vi editor. After editing the fi
 tiup cluster reload prod-cluster
 ```
 
-The command sends the configuration to the target machine and restarts the cluster to make the configuration take effect.
+The command sends the configuration to the Target Machine and restarts the cluster to make the configuration take effect.
 
 ## Update component
 

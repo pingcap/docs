@@ -8,11 +8,11 @@ category: how-to
 
 This document describes the environment check operations before deploying TiDB. The following steps are ordered by priorities.
 
-## Mount the data disk ext4 filesystem with options on the target machines that deploy TiKV
+## Mount the data disk ext4 filesystem with options on the Target Machines that deploy TiKV
 
 For production deployments, it is recommended to use NVMe SSD of EXT4 filesystem to store TiKV data. This configuration is the best practice, whose reliability, security, and stability have been proven in a large number of online scenarios.
 
-Log in to the target machines using the `root` user account.
+Log in to the Target Machines using the `root` user account.
 
 Format your data disks to the ext4 filesystem and add the `nodelalloc` and `noatime` mount options to the filesystem. It is required to add the `nodelalloc` option, or else the TiUP deployment cannot pass the precheck. The `noatime` option is optional.
 
@@ -108,7 +108,7 @@ Take the `/dev/nvme0n1` data disk as an example:
     /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
     ```
 
-    If the filesystem is ext4 and `nodelalloc` is included in the mount options, you have successfully mount the data disk ext4 filesystem with options on the target machines.
+    If the filesystem is ext4 and `nodelalloc` is included in the mount options, you have successfully mount the data disk ext4 filesystem with options on the Target Machines.
 
 ## Check and disable system swap
 
@@ -128,9 +128,9 @@ swapoff -a && swapon -a
 sysctl -p
 ```
 
-## Check and stop the firewall service of deployment machines
+## Check and stop the firewall service of Target Machines
 
-This section describes how to stop the firewall service of deployment machines.
+This section describes how to stop the firewall service of Target Machines.
 
 In TiDB clusters, the access ports between nodes must be open to ensure the normal transmission of information such as read and write requests and data heartbeat. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target node. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the related port information to the whitelist of the firewall service.
 
@@ -253,7 +253,7 @@ At present, the common solution to clock synchronization is to use the Network T
 
 This section describes how to manually configure the SSH mutual trust and sudo without password. It is recommended to use TiUP for deployment, which automatically configure SSH mutual trust and login without password. If you deploy TiDB clusters using TiUP, ignore this section.
 
-1. Log in to the deployment target machine respectively using the `root` user account, create the `tidb` user and set the login password.
+1. Log in to the Target Machine respectively using the `root` user account, create the `tidb` user and set the login password.
 
     {{< copyable "shell-root" >}}
 
@@ -274,7 +274,7 @@ This section describes how to manually configure the SSH mutual trust and sudo w
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
-3. Use the `tidb` user to log in to the Control Machine, and run the following command. Replace `10.0.1.1` with the IP of your deployment target machine, and enter the `tidb` user password of the deployment target machine as prompted. After the command is executed, SSH mutual trust is already created. This applies to other machines as well.
+3. Use the `tidb` user to log in to the Control Machine, and run the following command. Replace `10.0.1.1` with the IP of your Target Machine, and enter the `tidb` user password of the Target Machine as prompted. After the command is executed, SSH mutual trust is already created. This applies to other machines as well.
 
     {{< copyable "shell-regular" >}}
 
@@ -282,7 +282,7 @@ This section describes how to manually configure the SSH mutual trust and sudo w
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 
-4. Log in to the Control Machine using the `tidb` user account, and log in to the IP of the target machine using `ssh`. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
+4. Log in to the Control Machine using the `tidb` user account, and log in to the IP of the Target Machine using `ssh`. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
 
     {{< copyable "shell-regular" >}}
 
@@ -294,7 +294,7 @@ This section describes how to manually configure the SSH mutual trust and sudo w
     [tidb@10.0.1.1 ~]$
     ```
 
-5. After you login to the deployment target machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
+5. After you login to the Target Machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
 
     {{< copyable "shell-regular" >}}
 
@@ -341,7 +341,7 @@ This section describes how to install the NUMA tool. In online environments, bec
         --sudo             use root permissions (default false)
     ```
 
-    To use the sudo privilege to execute the installation command for all the target machines in the `tidb-test` cluster, run the following command:
+    To use the sudo privilege to execute the installation command for all the Target Machines in the `tidb-test` cluster, run the following command:
 
     {{< copyable "shell-regular" >}}
 
