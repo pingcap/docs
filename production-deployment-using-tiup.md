@@ -7,7 +7,7 @@ aliases: ['/docs/dev/how-to/deploy/orchestrated/tiup/']
 
 # Deploy a TiDB Cluster Using TiUP
 
-[TiUP](https://github.com/pingcap-incubator/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP cluster](https://github.com/pingcap-incubator/tiup-cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster, and manage TiDB cluster parameters.
+[TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster, and manage TiDB cluster parameters.
 
 TiUP supports deploying TiDB, TiFlash, TiDB Binlog, and TiCDC. This document introduces how to deploy clusters of different topologies.
 
