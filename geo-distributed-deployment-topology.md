@@ -41,7 +41,7 @@ This section describes the key parameter configuration of the TiDB geo-distribut
 
 - The TiKV configuration:
 
-    The same host level label information is configured for the same physical machine.
+    The same host-level label information is configured for the same physical machine.
 
     ```yaml
     config:
