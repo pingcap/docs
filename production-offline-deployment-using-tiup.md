@@ -8,7 +8,28 @@ category: how-to
 
 This document describes how to deploy a TiDB cluster offline using TiUP.
 
-## Step 1: Deploy the online TiUP component
+## Step 1: Prepare the TiUP offline component package
+
+You can either download the official package, or manually wrap up a package.
+
+### Download the official TiUP offline component package
+
+Download the prepared offline mirror package at <http://download.pingcap.org> by running the following command:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+wget http://download.pingcap.org/tidb-community-server-${version}-linux-amd64.tar.gz
+mv tidb-community-server-${version}-linux-amd64.tar.gz package.tar.gz
+```
+
+In the command above, replace `${version}` with the offline mirror version you want to download, such as `v4.0.0`.
+
+`package.tar.gz` is a separate offline environment package.
+
+### Manually wrap up an offline component package using `tiup mirror clone`
+
+#### Deploy the online TiUP component
 
 Log in to a machine that has access to the Internet using a regular user account. Perform the following steps:
 
@@ -36,7 +57,7 @@ Log in to a machine that has access to the Internet using a regular user account
     which tiup
     ```
 
-## Step 2: Pull the image using TiUP
+#### Pull the mirror using TiUP
 
 The following steps show how to install a v4.0.0 TiDB cluster using the `tidb` user account in an isolated environment.
 
@@ -58,7 +79,7 @@ The following steps show how to install a v4.0.0 TiDB cluster using the `tidb` u
 
     `package.tar.gz` is an independent offline environment package.
 
-## Step 3: Deploy the offline TiUP component
+## Step 2: Deploy the offline TiUP component
 
 After sending the package to the Control Machine of the target cluster, install the TiUP component by running the following command:
 
@@ -71,7 +92,7 @@ sh local_install.sh &&
 source /home/tidb/.bash_profile
 ```
 
-## Step 4: Mount the TiKV data disk
+## Step 3: Mount the TiKV data disk
 
 > **Note:**
 >
@@ -175,9 +196,9 @@ Take the `/dev/nvme0n1` data disk as an example:
     /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
     ```
 
-## Step 5: Edit the initialization configuration file `topology.yaml`
+## Step 4: Edit the initialization configuration file `topology.yaml`
 
-You need to manually create and edit the cluster initialization configuration file. For the full configuration template, refer to [Github TiUP Project](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml).
+You need to manually create and edit the cluster initialization configuration file. For the full configuration template, refer to the [TiUP configuration parameter template](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml).
 
 Create a YAML configuration file on the Control Machine, such as `topology.yaml`:
 
@@ -227,7 +248,7 @@ alertmanager_servers:
   - host: 10.0.1.4
 ```
 
-## Step 6: Deploy the TiDB cluster
+## Step 5: Deploy the TiDB cluster
 
 `/path/to/mirror` is the location of the offline mirror package that is output by running the `local_install.sh` command:
 
