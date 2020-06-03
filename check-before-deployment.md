@@ -173,6 +173,8 @@ TiDB is a distributed database system that requires clock synchronization betwee
 
 At present, the common solution to clock synchronization is to use the Network Time Protocol (NTP) services. You can use the `pool.ntp.org` timing service on the Internet, or build your own NTP service in an offline environment.
 
+To check whether the NTP service is installed and whether it synchronizes with the NTP server normally, take the following steps:
+
 1. Run the following command. If it returns `running`, then the NTP service is running.
 
     {{< copyable "shell-regular" >}}
@@ -187,67 +189,57 @@ At present, the common solution to clock synchronization is to use the Network T
     Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
     ```
 
-2. Run the `ntpstat` command. If it returns `synchronised to NTP server` (synchronizing with the NTP server), then the synchronization process is normal.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    ntpstat
-    ```
-
-    ```
-    synchronised to NTP server (85.199.214.101) at stratum 2
-    time correct to within 91 ms
-    polling server every 1024 s
-    ```
+2. Run the `ntpstat` command to check whether the NTP service synchronizes with the NTP server. 
 
     > **Note:**
     >
     > For the Ubuntu system, you need to install the `ntpstat` package.
 
-- The following situation indicates the NTP service is not synchronizing normally:
-
-   {{< copyable "shell-regular" >}}
-
-    ```bash
-    ntpstat
-    ```
-
-    ```
-    unsynchronised
-    ```
-
-- The following situation indicates the NTP service is not running normally:
-
     {{< copyable "shell-regular" >}}
 
     ```bash
     ntpstat
     ```
 
-    ```
-    Unable to talk to NTP daemon. Is it running?
-    ```
+    - If it returns `synchronised to NTP server` (synchronizing with the NTP server), then the synchronization process is normal.
 
-- To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
+        ```
+        synchronised to NTP server (85.199.214.101) at stratum 2
+        time correct to within 91 ms
+        polling server every 1024 s
+        ```
 
-    {{< copyable "shell-regular" >}}
+    - The following situation indicates the NTP service is not synchronizing normally:
 
-    ```bash
-    sudo systemctl stop ntpd.service && \
-    sudo ntpdate pool.ntp.org && \
-    sudo systemctl start ntpd.service
-    ```
+        ```
+        unsynchronised
+        ```
 
-- To install the NTP service manually on the CentOS 7 system, run the following command:
+    - The following situation indicates the NTP service is not running normally:
 
-    {{< copyable "shell-regular" >}}
+        ```
+        Unable to talk to NTP daemon. Is it running?
+        ```
 
-    ```bash
-    sudo yum install ntp ntpdate && \
-    sudo systemctl start ntpd.service && \
-    sudo systemctl enable ntpd.service
-    ```
+To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+sudo systemctl stop ntpd.service && \
+sudo ntpdate pool.ntp.org && \
+sudo systemctl start ntpd.service
+```
+
+To install the NTP service manually on the CentOS 7 system, run the following command:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+sudo yum install ntp ntpdate && \
+sudo systemctl start ntpd.service && \
+sudo systemctl enable ntpd.service
+```
 
 ## Manually configure the SSH mutual trust and sudo without password
 
