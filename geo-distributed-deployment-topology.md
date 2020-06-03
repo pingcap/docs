@@ -1,6 +1,6 @@
 ---
 title: Geo-distributed Deployment topology
-summary:
+summary: Learn the geo-distributed deployment topology of TiDB.
 category: how-to
 ---
 
