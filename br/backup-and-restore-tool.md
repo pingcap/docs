@@ -133,11 +133,11 @@ Explanations for the above command are as follows:
 > 
 > - When the `local` storage is used, the backup data are scattered in the local file system of each node.
 >
-> - It is **not recommended** to backup to a local disk in the production environment because you **have to** manually aggregate these data to complete the data restoration. For more information, see [Restore Cluster Data](#restore-cluster-data).
+> - It is **not recommended** to back up to a local disk in the production environment because you **have to** manually aggregate these data to complete the data restoration. For more information, see [Restore Cluster Data](#restore-cluster-data).
 >
 > - Aggregating these backup data might cause redundancy and bring troubles to operation and maintenance. Even worse, if restoring data without aggregating these data, you can receive a rather confusing error message `SST file not found`.
 > 
-> - It is recommended to mount the NFS disk on each node, or backup to the `S3` object storage.
+> - It is recommended to mount the NFS disk on each node, or back up to the `S3` object storage.
 
 ### Sub-commands
 
@@ -299,14 +299,14 @@ br backup full \
 
 ### Back up incremental data
 
-If you want to backup incrementally, you only need to specify the **last backup timestamp** `--lastbackupts` during backup.
+If you want to back up incrementally, you only need to specify the **last backup timestamp** `--lastbackupts`.
 
 The following are some limitations of the incremental backup:
 
 - The incremental backup needs to be under a different path from the previous full backup.
 - No GC (Garbage Collection) happens between the start time of the incremental backup and `lastbackupts`.
 
-Execute the following command to backup the incremental data between `(LAST_BACKUP_TS, current PD timestamp)`:
+Execute the following command to back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp)`:
 
 {{< copyable "shell-regular" >}}
 
@@ -335,7 +335,7 @@ In the above example, the incremental backup data includes the written data and 
 
 In some scenarios, TiKV might run independently of TiDB. Given that, BR also supports bypassing the TiDB layer and backing up data in TiKV.
 
-For example, you can execute the following command to backup all keys between `[0x31, 0x3130303030303030)` of the default CF to `$BACKUP_DIR`:
+For example, you can execute the following command to back up all keys between `[0x31, 0x3130303030303030)` of the default CF to `$BACKUP_DIR`:
 
 {{< copyable "shell-regular" >}}
 
