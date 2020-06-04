@@ -43,7 +43,7 @@ This area shows the latency of 99.9%, 99%, and 90% of queries in the entire clus
 
 ## Top SQL statements
 
-This area shows the ten types of SQL statements that have accumulated the longest execution time in the entire cluster over the recent period. SQL statements with different query parameters but of the same structure are classified into the same SQl type and displayed in the same row:
+This area shows the ten types of SQL statements that have accumulated the longest execution time in the entire cluster over the recent period. SQL statements with different query parameters but of the same structure are classified into the same SQL type and displayed in the same row:
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
