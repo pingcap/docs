@@ -19,7 +19,8 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md) (the 
     >
     > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
-- [`store-balance-rate`](/pd-configuration-file.md#store-balance-rate): limits the rate at which each store is scheduled.
+- [`store-balance-rate`](/pd-configuration-file.md#store-balance-rate): limits the region balance rate at which each store (i.e. TiKV or TiFlash) is scheduled. Note that modifying this setting only works for later added stores. If you would like to modify current sotres', use the following command.
+- Use command `pd-ctl -u <pd_id:pd_port> store limit <store_id> <value>` to modify a specific store's region balance rate immediately. Note that this setting inherits `store-balance-rate` if you didn't specified. You can use `pd-ctl -u <pd_id:pd_port> store limit` to check the current setting. And `store_id` can be found by `pd-ctl -u <pd_id:pd_port> store`.
 
 ## TiFlash configuration parameters
 
@@ -34,6 +35,8 @@ path_realtime_mode = false # The default value is `false`. If you set it to `tru
 listen_host = The TiFlash service listening host. # Generally, it is configured as `0.0.0.0`.
 tcp_port = The TiFlash TCP service port.
 http_port = The TiFlash HTTP service port.
+mark_cache_size = 5368709120 # The memory cache limit of metadata of data blocks, normally you don't need to modify.
+minmax_index_cache_size = 5368709120 # The memory cache limit of min-max index of data blocks, normally you don't need to modify.
 ```
 
 ```
@@ -70,6 +73,10 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD, an
     pd_addr = PD service address. # Multiple addresses are separated with commas.
 [status]
     metrics_port = The port through which Prometheus pulls metrics information.
+[profiles]
+[profiles.default]
+    dt_enable_logical_split = true # Wheter the segment of DeltaTree Storage Engine use logical split or not. Logical split can lower the write amplification, and improve write speed. The drawback is waste of disk space. By default true.
+    max_memory_usage_for_all_queries = 0 # The memory usage limit of all queries. By default 0 means no limit.
 ```
 
 ### Configure the `tiflash-learner.toml` file
