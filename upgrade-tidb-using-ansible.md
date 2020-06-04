@@ -175,7 +175,7 @@ If you have previously customized the configuration file of TiDB cluster compone
 
 ## Step 4: Download TiDB latest binary to the control machine
 
-Make sure that `tidb_version = v4.0.x` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB 4.0 binary to the control machine:
+Make sure that `tidb_version = v4.0.x` is in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB 4.0 binary to the control machine:
 
 {{< copyable "shell-regular" >}}
 
