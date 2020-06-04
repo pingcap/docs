@@ -26,7 +26,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 ## Software recommendations
 
-### control machine
+### Control machine
 
 | Software | Version |
 | :--- | :--- |
