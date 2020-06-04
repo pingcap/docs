@@ -10,7 +10,7 @@ Release date: April 8, 2020
 
 TiDB version: 4.0.0-rc
 
-TiUP version: 0.0.3
+TiUP version: 1.0.1
 
 > **Warning:**
 >

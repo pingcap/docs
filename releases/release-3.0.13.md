@@ -10,7 +10,7 @@ Release date: April 22, 2020
 
 TiDB version: 3.0.13
 
-TiUP version: 3.0.13
+TiUP version: 1.0.1
 
 ## Bug Fixes
 
