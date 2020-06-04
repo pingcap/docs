@@ -12,7 +12,7 @@ On the cluster information page, you can view the running status of TiDB, TiKV, 
 
 You can use one of the following two methods to access the cluster information page:
 
-- After logging into TiDB Dashboard, click **Cluster Info** on the left navigation bar:
+- After logging into TiDB Dashboard, click **Cluster Info** on the left navigation menu:
 
   ![Access cluster information page ](/media/dashboard/dashboard-cluster-info-access.png)
 

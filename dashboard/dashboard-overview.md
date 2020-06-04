@@ -43,11 +43,11 @@ This area shows the latency of 99.9%, 99%, and 90% of queries in the entire clus
 
 ## Top SQL statements
 
-This area shows the ten types of SQL statements that have accumulated the longest execution time in the entire cluster over the recent period. SQL statements with different query parameters but of the same structure are classified into the same SQl type of and displayed in the same row:
+This area shows the ten types of SQL statements that have accumulated the longest execution time in the entire cluster over the recent period. SQL statements with different query parameters but of the same structure are classified into the same SQl type and displayed in the same row:
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
-The information shown in this area is consistent with the more detailed [SQL statement analysis page](/dashboard/dashboard-statement-list.md). You can click the **Top SQL Statements** heading to view the complete list. For details of the columns in this table, see [SQL statement analysis page](/dashboard/dashboard-statement-list.md).
+The information shown in this area is consistent with the more detailed [SQL statement analysis page](/dashboard/dashboard-statement-list.md). You can click the **Top SQL Statements** heading to view the complete list. For details of the columns on this table, see [SQL statement analysis page](/dashboard/dashboard-statement-list.md).
 
 > **Note:**
 >
@@ -59,7 +59,7 @@ By default, this area shows the latest 10 slow queries in the entire cluster ove
 
 ![Recent slow queries](/media/dashboard/dashboard-overview-slow-query.png)
 
-By default, the SQL query that is executed longer than 300 millisecond is counted as a slow query and displayed in the table. You can change this threshold using the [tidb_slow_log_threshold](/tidb-specific-system-variables.md#tidb_slow_log_threshold) variable or the[slow-threshold](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
+By default, the SQL query that is executed longer than 300 milliseconds is counted as a slow query and displayed on the table. You can change this threshold using the [tidb_slow_log_threshold](/tidb-specific-system-variables.md#tidb_slow_log_threshold) variable or the [slow-threshold](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
 
 The content displayed in this area is consistent with the more detailed [slow query page](/dashboard/dashboard-slow-query.md). You can click the **Recent Slow Queries** title to view the complete list. For details of the columns in this table, see this [slow query page](/dashboard/dashboard-slow-query.md).
 
@@ -76,7 +76,7 @@ This area summarizes the total number of instances and abnormal instances of TiD
 The statuses in the image above are described as follows:
 
 - Up: The instance is running properly (including the offline storage instance).
-- Down: The instance is running abnormally, such as network disconnection, process panic, and son on.
+- Down: The instance is running abnormally, such as network disconnection, process panic, and so on.
 
 Click the **Instance** title to enter the [cluster information page](/dashboard/dashboard-cluster-info.md) that shows the detailed running status of each instance.
 
@@ -84,10 +84,10 @@ Click the **Instance** title to enter the [cluster information page](/dashboard/
 
 This area provides links for you to view detailed monitor and alert:
 
-![monitor and alert](/media/dashboard/dashboard-overview-monitor.png)
+![Monitor and alert](/media/dashboard/dashboard-overview-monitor.png)
 
 - **View Metrics**: Click this link to jump to the Grafana dashboard where you can view detailed monitoring information of the cluster. For details of each monitoring metric in the Grafana dashboard, see [monitoring metrics](/grafana-overview-dashboard.md).
-- **View Alerts**: Click this link to jump to the AlertManager page where you can view detailed alert information of the cluster. If alerts exist for the cluster, the number of alerts will be directly shown in the link text.
+- **View Alerts**: Click this link to jump to the AlertManager page where you can view detailed alert information of the cluster. If alerts exist in the cluster, the number of alerts is directly shown in the link text.
 - **Run Diagnostics**: Click this link to jump to the more detailed [cluster diagnostics page](/dashboard/dashboard-diagnostics-access.md).
 
 > **Note:**

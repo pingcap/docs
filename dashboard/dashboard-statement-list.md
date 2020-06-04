@@ -14,7 +14,7 @@ On this page, SQL queries with a consistent structure (even if the query paramet
 
 You can use one of the following two methods to access the SQL statement summary page:
 
-- After logging into TiDB Dashboard, click **SQL Statements** on the left navigation bar:
+- After logging into TiDB Dashboard, click **SQL Statements** on the left navigation menu:
 
   ![Access SQL statement summary page](/media/dashboard/dashboard-statement-access.png)
 
