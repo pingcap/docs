@@ -11,7 +11,7 @@ This document introduces the configuration parameters related to the deployment 
 
 ## PD scheduling parameters
 
-You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note that you can use `tiup ctl pd` to replace `pd-ctl -u <pd_id:pd_port>` if using tiup to deploy and manage your cluster.
+You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note that you can use `tiup ctl pd` to replace `pd-ctl -u <pd_ip:pd_port>` if using tiup to deploy and manage your cluster.
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
@@ -20,7 +20,7 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
     > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
 - [`store-balance-rate`](/pd-configuration-file.md#store-balance-rate): limits the region balance rate at which each store (i.e. TiKV or TiFlash) is scheduled. Note that modifying this setting only works for later added stores. If you would like to modify current sotres', use the following command.
-- Use command `pd-ctl -u <pd_id:pd_port> store limit <store_id> <value>` to modify a specific store's region balance rate immediately. Note that this setting inherits `store-balance-rate` if you didn't specified. You can use `pd-ctl -u <pd_id:pd_port> store limit` to check the current setting. And `store_id` can be found by `pd-ctl -u <pd_id:pd_port> store`.
+    - Use command `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` to modify a specific store's region balance rate immediately. Note that this setting inherits `store-balance-rate` if you didn't specified. You can use `pd-ctl -u <pd_ip:pd_port> store limit` to check the current setting. And `store_id` can be found by `pd-ctl -u <pd_ip:pd_port> store`.
 
 ## TiFlash configuration parameters
 
