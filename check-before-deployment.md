@@ -286,7 +286,7 @@ This section describes how to manually configure the SSH mutual trust and sudo w
     [tidb@10.0.1.1 ~]$
     ```
 
-5. After you login to the Target Machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
+5. After you log in to the Target Machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
 
     {{< copyable "shell-regular" >}}
 
