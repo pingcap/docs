@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Cluster Diagnostics Page
-summary: Learn how to use the cluster diagnostics.
+summary: Learn how to use the cluster diagnostics page.
 category: how-to
 ---
 
