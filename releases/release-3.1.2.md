@@ -9,7 +9,7 @@ Release date: June 4, 2020
 
 TiDB version: 3.1.2
 
-TiUP version: 3.1.2
+TiDB Ansible version: 3.1.2
 
 ## Bug Fixes
 
