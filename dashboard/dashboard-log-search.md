@@ -6,7 +6,7 @@ category: how-to
 
 # TiDB Dashboard Log Search Page
 
-On the log search page of TiDB Dashboard, you can search logs on all nodes, preview the search result and download logs.
+On the log search page of TiDB Dashboard, you can search logs of all nodes, preview the search result and download logs.
 
 ## Access the page
 
