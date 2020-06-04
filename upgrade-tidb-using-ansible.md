@@ -84,11 +84,7 @@ Version: 0.9.0
     mv tidb-ansible tidb-ansible-bak
     ```
 
-<<<<<<< HEAD
-3. Download the tidb-ansible with the tag corresponding to the TiDB 4.0 version. For more details, See [Download TiDB-Ansible to the Control Machine](/online-deployment-using-ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`. Replace `$tag` with the value of the chosen TAG version. For example, `v4.0.0-rc`.
-=======
-3. Download the tidb-ansible with the tag corresponding to the `latest` version of TiDB. For more details, See [Download TiDB-Ansible to the control machine](/online-deployment-using-ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`.
->>>>>>> 8a6411d... how-to: add check-before-deployment.md (#2656)
+3. Download the tidb-ansible with the tag corresponding to the TiDB 4.0 version. For more details, See [Download TiDB-Ansible to the control machine](/online-deployment-using-ansible.md#step-3-download-tidb-ansible-to-the-control-machine). The default folder name is `tidb-ansible`. Replace `$tag` with the value of the chosen TAG version. For example, `v4.0.0-rc`.
 
     {{< copyable "shell-regular" >}}
 
@@ -179,11 +175,7 @@ If you have previously customized the configuration file of TiDB cluster compone
 
 ## Step 4: Download TiDB latest binary to the control machine
 
-<<<<<<< HEAD
-Make sure that `tidb_version = v4.0.x` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB 4.0 binary to the Control Machine:
-=======
-Make sure that `tidb_version = latest` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB latest binary to the control machine:
->>>>>>> 8a6411d... how-to: add check-before-deployment.md (#2656)
+Make sure that `tidb_version = v4.0.x` in the `tidb-ansible/inventory.ini` file, and then run the following command to download TiDB 4.0 binary to the control machine:
 
 {{< copyable "shell-regular" >}}
 

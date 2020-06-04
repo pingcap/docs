@@ -155,11 +155,7 @@ Make sure you have logged in to the control machine using the `root` user accoun
 
 ## Step 3: Download TiDB Ansible to the control machine
 
-<<<<<<< HEAD
-Log in to the Control Machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download the [TAG version](https://github.com/pingcap/tidb-ansible/tags) corresponding to TiDB Ansible 4.0 from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
-=======
-Log in to the control machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download TiDB Ansible from the master branch of the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
->>>>>>> 8a6411d... how-to: add check-before-deployment.md (#2656)
+Log in to the control machine using the `tidb` user account and enter the `/home/tidb` directory. Run the following command to download the [TAG version](https://github.com/pingcap/tidb-ansible/tags) corresponding to TiDB Ansible 4.0 from the [TiDB Ansible project](https://github.com/pingcap/tidb-ansible). The default folder name is `tidb-ansible`.
 
 {{< copyable "shell-regular" >}}
 
