@@ -151,11 +151,11 @@ After the import is complete, you can check the current cluster status by execut
 >
 > Before upgrading to v4.0, confirm that the parameters modified in v3.0 are compatible in v4.0. See [configuration template](/tikv-configuration-file.md) for details.
 
-## Perform a rolling update to the TiDB cluster
+## Perform a rolling upgrade to the TiDB cluster
 
-This section describes how to perform a rolling update to the TiDB cluster and how to verify the version after the update.
+This section describes how to perform a rolling upgrade to the TiDB cluster and how to verify the version after the upgrade.
 
-### Rolling update the TiDB cluster to a specified version
+### Rolling upgrade the TiDB cluster to a specified version
 
 {{< copyable "shell-regular" >}}
 
@@ -171,7 +171,7 @@ For example, if you want to update the cluster to v4.0.0:
 tiup cluster upgrade <cluster-name> v4.0.0
 ```
 
-Performing the rolling update to the cluster will update all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes. The instance is directly stopped after this timeout time.
+Performing the rolling upgrade to the cluster will upgrade all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes. The instance is directly stopped after this timeout time.
 
 To perform the upgrade immediately without evicting the leader, specify `--force` in the command above. This method causes performance jitter but not data loss.
 
@@ -197,13 +197,13 @@ TiDB Version: v4.0.0
 
 This section describes common problems encountered when updating the TiDB cluster using TiUP.
 
-### If an error occurs and the update is interrupted, how to resume the update after fixing this error?
+### If an error occurs and the upgrade is interrupted, how to resume the upgrade after fixing this error?
 
-Re-execute the `tiup cluster upgrade` command to resume the update. The upgrade operation restarts the nodes that have been previously upgraded. In subsequent 4.0 versions, TiDB will support resuming the upgrade from the interrupted point.
+Re-execute the `tiup cluster upgrade` command to resume the upgrade. The upgrade operation restarts the nodes that have been previously upgraded. In subsequent 4.0 versions, TiDB will support resuming the upgrade from the interrupted point.
 
-### The evict leader has waited too long during the update. How to skip this step for a quick update?
+### The evict leader has waited too long during the upgrade. How to skip this step for a quick upgrade?
 
-You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the update. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. Here is the command:
+You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. Here is the command:
 
 {{< copyable "shell-regular" >}}
 
@@ -211,7 +211,7 @@ You can specify `--force`. Then the processes of transferring PD leader and evic
 tiup cluster upgrade <cluster-name> v4.0.0 --force
 ```
 
-### How to update the version of tools such as pd-ctl after updating the TiDB cluster?
+### How to update the version of tools such as pd-ctl after upgrading the TiDB cluster?
 
 Currently, TiUP does not update and manage the version of tools. If you need the tool package of the latest version, directly download the TiDB package and replace `{version}` with the corresponding version such as `v4.0.0`. Here is the download address:
 
