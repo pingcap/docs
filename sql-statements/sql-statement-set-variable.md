@@ -5,7 +5,7 @@ category: reference
 aliases: ['/docs/v2.1/reference/sql/statements/set-variable/']
 ---
 
-# SET [GLOBAL|SESSION] <variable>
+# `SET [GLOBAL|SESSION] <variable>`
 
 The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, of either `SESSION` or `GLOBAL` scope. Note that similar to MySQL, changes to `GLOBAL` variables will not apply to either existing connections, or the local connection. Only new sessions will reflect the changes to the value.
 
@@ -71,4 +71,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [SHOW \[GLOBAL|SESSION\] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+* [`SHOW [GLOBAL|SESSION] VARIABLES`](/sql-statements/sql-statement-show-variables.md)
