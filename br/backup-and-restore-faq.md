@@ -8,8 +8,6 @@ category: FAQ
 
 This document lists the frequently asked questions (FAQs) and the solutions about Backup & Restore (BR).
 
-If the problems are not covered in this document and cannot be resolved, you can raise questions in the [AskTUG](http://asktug.com) community.
-
 ## What should I do if the error message `could not read local://...:download sst failed` is returned during data restoration?
 
 When you restore data, each node must have access to **all** backup files (SST files). By default, if `local` storage is used, you cannot restore data because the backup files are scattered among different nodes. Therefore, you have to copy the backup file of each TiKV node to the other TiKV nodes.
