@@ -18,7 +18,7 @@ Make sure that you have read the following documents:
 - [Hardware and software requirements](/hardware-and-software-requirements.md)
 - [Environment and system configuration check](/check-before-deployment.md)
 
-### Step 2: Install TiUP on the control machine
+## Step 2: Install TiUP on the control machine
 
 Log in to the control machine using a regular user account (take the `tidb` user as an example). All the following TiUP installation and cluster management operations can be performed by the `tidb` user.
 
@@ -106,7 +106,7 @@ The following topology documents provide a cluster configuration template for ea
 
     This topology takes the typical architecture of three data centers in two cities as an example. It introduces the geo-distributed deployment architecture and the key configuration that requires attention.
 
-### Step 4: Execute the deployment command
+## Step 4: Execute the deployment command
 
 > **Note:**
 >
@@ -131,7 +131,7 @@ In the above command:
 
 At the end of the output log, you will see ```Deployed cluster `tidb-test` successfully```. This indicates that the deployment is successful.
 
-### Step 5: Check the clusters managed by TiUP
+## Step 5: Check the clusters managed by TiUP
 
 {{< copyable "shell-regular" >}}
 
@@ -148,7 +148,7 @@ Name              User  Version        Path                                     
 tidb-test         tidb  v4.0.0      /home/tidb/.tiup/storage/cluster/clusters/tidb-test         /home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa
 ```
 
-### Step 6: Check the status of the deployed TiDB cluster
+## Step 6: Check the status of the deployed TiDB cluster
 
 For example, execute the following command to check the status of the `tidb-test` cluster:
 
@@ -170,7 +170,7 @@ tiup cluster start tidb-test
 
 If the output log includes ```Started cluster `tidb-test` successfully```, the start is successful.
 
-### Step 8: Verify the running status of the TiDB cluster
+## Step 8: Verify the running status of the TiDB cluster
 
 - Check the TiDB cluster status using TiUP:
 
