@@ -381,7 +381,15 @@ In special cases (such as when a node need to be forcibly taken down), or if the
     curl -X POST 'http://<pd-address>/pd/api/v1/store/<store_id>/state?state=Tombstone'
     ```
 
-4. Manually delete TiFlash data files, whose location is in TiFlash's configuration file.
+4. Manually delete TiFlash data files (whose location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).
+
+5. Manually update TiUP's cluster configuration file (delete the information of the TiFlash node that goes down in edit mode).
+
+    {{< copyable "shell-regular">}
+
+    ```shell
+    tiup cluster edit-config <cluster-name>
+    ```
 
 > **Note:**
 >
