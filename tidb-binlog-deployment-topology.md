@@ -22,8 +22,8 @@ TiDB Binlog is the widely used component for replicating incremental data. It pr
 
 ### Topology templates
 
-- [The simple template for the TiDB Binlog topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml)
-- [The complex template for the TiDB Binlog topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
+- [The simple template for the TiDB Binlog topology](https://github.com/pingcap/docs/blob/release-4.0/config-templates/simple-tidb-binlog.yaml)
+- [The complex template for the TiDB Binlog topology](https://github.com/pingcap/docs/blob/release-4.0/config-templates/complex-tidb-binlog.yaml)
 
 ### Key parameters
 
