@@ -22,7 +22,7 @@ TiDB version: 4.0.0 GA
 
 * TiKV
     - Fix the `DefaultNotFound` error that occurs when backing up using Backup & Restore (BR) [#7937](https://github.com/tikv/tikv/pull/7937)
-    - Fix system panics caused by the out-of-order `ReadIndex` packages  [#7930](https://github.com/tikv/tikv/pull/7930)
+    - Fix system panics caused by the out-of-order `ReadIndex` packages [#7930](https://github.com/tikv/tikv/pull/7930)
     - Fix system panics caused by incorrectly removing snapshot files after TiKV is restarted [#7927](https://github.com/tikv/tikv/pull/7927)
 
 * TiFlash
