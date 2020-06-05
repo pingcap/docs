@@ -8,7 +8,7 @@ category: benchmark
 
 ## Test purpose
 
-This test aims to compare the Sysbench performances of TiDB 4.0 and TiDB 3.0 in the OLTP (Online Transactional Processing) scenario.
+This test aims to compare the Sysbench performances of TiDB 4.0 and TiDB 3.0 in the Online Transactional Processing (OLTP) scenario.
 
 ## Test environment (AWS EC2）
 
@@ -25,9 +25,9 @@ This test aims to compare the Sysbench performances of TiDB 4.0 and TiDB 3.0 in 
 
 | Service type   | Software version    |
 |:----------|:-----------|
-| PD        | 3.0、4.0   |
-| TiDB      | 3.0、4.0   |
-| TiKV      | 3.0、4.0   |
+| PD        | 3.0 and 4.0   |
+| TiDB      | 3.0 and 4.0   |
+| TiKV      | 3.0 and 4.0   |
 | Sysbench  | 1.0.20     |
 
 ### Parameter configuration
@@ -37,7 +37,7 @@ This test aims to compare the Sysbench performances of TiDB 4.0 and TiDB 3.0 in 
 {{< copyable "" >}}
 
 ```yaml
-log.level: “error”
+log.level: "error"
 performance.max-procs: 20
 prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
@@ -64,7 +64,7 @@ readpool.coprocessor.normal-concurrency: 5
 {{< copyable "" >}}
 
 ```yaml
-log.level: “error”
+log.level: "error"
 performance.max-procs: 20
 prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
@@ -153,22 +153,22 @@ sysbench $testname \
 
 Compared with v3.0, the Point Select performance of TiDB v4.0 has increased by 14%.
 
-![Point Select](/media/sysbench_v4vsv3_point_select.png)
+![Point Select](/media/sysbench-v4vsv3-point-select.png)
 
 ### Update Non-index performance
 
 Compared with v3.0, the Update Non-index performance of TiDB v4.0 has increased by 15%.
 
-![Update Non-index](/media/sysbench_v4vsv3_update_non_index.png)
+![Update Non-index](/media/sysbench-v4vsv3-update-non-index.png)
 
 ### Update Index performance
 
 Compared with v3.0, the Update Index performance of TiDB v4.0 has increased by 17%.
 
-![Update Index](/media/sysbench_v4vsv3_update_index.png)
+![Update Index](/media/sysbench-v4vsv3-update-index.png)
 
-### Read Write performance
+### Read-write performance
 
-Compared with v3.0, the Read Write performance of TiDB v4.0 has increased by 31%.
+Compared with v3.0, the read-write performance of TiDB v4.0 has increased by 31%.
 
-![Read Write](/media/sysbench_v4vsv3_read_write.png)
+![Read Write](/media/sysbench-v4vsv3-read-write.png)
