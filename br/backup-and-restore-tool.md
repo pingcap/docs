@@ -498,7 +498,7 @@ In the above example, all the backed up keys in the range `[0x31, 0x313030303030
 
 > **Warning:**
 > 
-> This feature is in the experiment, without being thoroughly tested. It also relies on the unstable `Placement Rules` of PD. It is highly **not recommended** to use this feature in the production environment.
+> This feature is in the experiment, without being thoroughly tested. It also relies on the unstable `Placement Rules` feature of PD. It is highly **not recommended** to use this feature in the production environment.
 
 During data restoration, writing too much data affects the performance of the online cluster. To avoid this effect as much as possible, BR supports [Placement rules](/configure-placement-rules.md) to isolate resources. In this case, downloading and importing SST are only performed on a few specified nodes (or "restore nodes" for short). Take the following steps to complete the online restore.
 
