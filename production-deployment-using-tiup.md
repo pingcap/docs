@@ -16,9 +16,9 @@ TiUP supports deploying TiDB, TiFlash, TiDB Binlog, and TiCDC. This document int
 - [Hardware and software requirements](/hardware-and-software-requirements.md)
 - [Environment and system configuration check](/check-before-deployment.md)
 
-### Step 2: Install TiUP on the Control Machine
+### Step 2: Install TiUP on the control machine
 
-Log in to the Control Machine using a regular user account (take the `tidb` user as an example). All the following TiUP installation and cluster management operations can be performed by the `tidb` user.
+Log in to the control machine using a regular user account (take the `tidb` user as an example). All the following TiUP installation and cluster management operations can be performed by the `tidb` user.
 
 1. Install TiUP by executing the following command:
 
@@ -78,7 +78,7 @@ You need to manually create and edit the cluster initialization configuration fi
 
 The following examples cover six common scenarios. You need to create a configuration file `topology.yaml` according to the topology description and templates in the corresponding links. For other scenarios, edit the configuration according to multiple templates.
 
-You need to create a YAML configuration file on the Control Machine, such as `topology.yaml`.
+You need to create a YAML configuration file on the control machine, such as `topology.yaml`.
 
 The following sections provide a cluster configuration template for each of the following common scenarios:
 
