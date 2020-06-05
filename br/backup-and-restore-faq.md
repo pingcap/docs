@@ -30,15 +30,15 @@ Because these system libraries do not exist in the backup files, no conflict occ
 
 ## What should I do to resolve the `Permission denied` error, even if I have tried to run BR using root in vain?
 
-You need to confirm whether TiKV has access to the backup directory. To back up data, confirm whether TiKV has write privilege. To restore data, confirm whether it has read privilege.
+You need to confirm whether TiKV has access to the backup directory. To back up data, confirm whether TiKV has the write permission. To restore data, confirm whether it has the read permission.
 
-Running BR with root might fail due to the disk privilege, because the backup files (SST files) are saved by TiKV.
+Running BR with root might fail due to the disk permission, because the backup files (SST files) are saved by TiKV.
 
 > **Note:**
 >
-> You might encounter the same problem during data restoration. When the SST files are read for the first time, the reading privilege is verified. The execution duration of DDL suggests that there might be a long interval between checking the privilege and running BR. You might receive the error message `Permission denied` after waiting for a long time.
+> You might encounter the same problem during data restoration. When the SST files are read for the first time, the read permission is verified. The execution duration of DDL suggests that there might be a long interval between checking the permission and running BR. You might receive the error message `Permission denied` after waiting for a long time.
 >
-> Therefore, It is recommended to check the privilege before data restoration.
+> Therefore, It is recommended to check the permission before data restoration.
 
 ## What should I do to resolve the `Io(Os...)` error?
 
