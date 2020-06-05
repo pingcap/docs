@@ -62,6 +62,7 @@
       - [Use TiDB Ansible](/online-deployment-using-ansible.md)
       - [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
       - [Use Docker](/test-deployment-using-docker.md)
+    + [Check Cluster Status](/post-installation-check.md)
     + Geographic Redundancy
       - [Overview](/geo-redundancy-deployment.md)
       - [Configure Location Awareness](/location-awareness.md)
@@ -428,6 +429,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/release-notes.md)
   + v4.0
+    - [4.0 GA](/releases/release-4.0-ga.md)
     - [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
     - [4.0.0-rc.1](/releases/release-4.0.0-rc.1.md)
     - [4.0.0-rc](/releases/release-4.0.0-rc.md)
