@@ -9,7 +9,7 @@ aliases: ['/docs/dev/how-to/deploy/orchestrated/tiup/']
 
 [TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster, and manage TiDB cluster parameters.
 
-TiUP supports deploying TiDB, TiFlash, TiDB Binlog, and TiCDC. This document introduces how to deploy TiDB clusters of different topologies.
+TiUP supports deploying TiDB, TiFlash, TiDB Binlog, TiCDC, and monitoring system. This document introduces how to deploy TiDB clusters of different topologies.
 
 ## Step 1: Prerequisites and precheck
 
@@ -158,7 +158,7 @@ For example, execute the following command to check the status of the `tidb-test
 tiup cluster display tidb-test
 ```
 
-Expected output will include the instance ID, role, host, listening port, and status (because the cluster is not started yet, so the status is `Down`/`inactive`), and directory information.
+Expected output includes the instance ID, role, host, listening port, and status (because the cluster is not started yet, so the status is `Down`/`inactive`), and directory information.
 
 ## Step 7: Start the TiDB cluster
 
@@ -172,7 +172,7 @@ If the output log includes ```Started cluster `tidb-test` successfully```, the s
 
 ### Step 8: Verify the running status of the TiDB cluster
 
-- Check the TiDB cluster status using TiUP
+- Check the TiDB cluster status using TiUP:
 
     {{< copyable "shell-regular" >}}
 
@@ -190,4 +190,4 @@ If the output log includes ```Started cluster `tidb-test` successfully```, the s
     mysql -u root -h 10.0.1.4 -P 4000
     ```
 
-For more ways to verify the cluster status, see [Verify the Cluster Running Status](/post-installation-check.md).
+In addition, you also need to verify the status of the monitoring system, TiDB Dashboard, and the execution of simple SQL commands. For the specific operations, see [Verify Cluster Status](/post-installation-check.md).
