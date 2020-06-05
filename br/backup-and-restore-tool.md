@@ -301,7 +301,7 @@ br backup full \
 
 If you want to back up incrementally, you only need to specify the **last backup timestamp** `--lastbackupts`.
 
-The following are some limitations of the incremental backup:
+The incremental backup has two limitations:
 
 - The incremental backup needs to be under a different path from the previous full backup.
 - No GC (Garbage Collection) happens between the start time of the incremental backup and `lastbackupts`.
