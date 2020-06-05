@@ -492,7 +492,7 @@ br restore raw --pd $PD_ADDR \
     --format hex \
     --cf default
 
-In the above example. all the backed up keys in the range `[0x31, 0x3130303030303030)` are restored to the TiKV cluster. The coding methods of these keys are identical to that of [keys during the backup process](#back-up-raw-kv-experimental-feature)
+In the above example, all the backed up keys in the range `[0x31, 0x3130303030303030)` are restored to the TiKV cluster. The coding methods of these keys are identical to that of [keys during the backup process](#back-up-raw-kv-experimental-feature)
 
 ### Online restore (experimental feature)
 
