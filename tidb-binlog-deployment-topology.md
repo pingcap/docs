@@ -12,7 +12,7 @@ TiDB Binlog is the widely used component for replicating incremental data. It pr
 
 ## Topology information
 
-| Instance | Number | Physical machine configuration | IP | Configuration |
+| Instance | Count | Physical machine configuration | IP | Configuration |
 | :-- | :-- | :-- | :-- | :-- |
 | TiDB | 3 | 16 VCore 32 GB | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port configuration; <br/> Enable `enable_binlog`; <br/> Enable `ignore-error` |
 | PD | 3 | 4 VCore 8 GB | 10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port configuration |

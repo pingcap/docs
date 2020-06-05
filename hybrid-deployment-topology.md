@@ -14,7 +14,7 @@ The deployment machine has multiple CPU processors with sufficient memory. To im
 
 ## Topology information
 
-| Instance | Number | Physical machine configuration | IP | Configuration |
+| Instance | Count | Physical machine configuration | IP | Configuration |
 | :-- | :-- | :-- | :-- | :-- |
 | TiDB | 6 | 32 VCore 64GB | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | Configure NUMA to bind CPU cores |
 | PD | 3 | 16 VCore 32 GB | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | Configure the `location_lables` parameter |
