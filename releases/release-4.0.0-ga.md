@@ -27,7 +27,6 @@ TiDB version: 4.0.0 GA
 
 * TiFlash
     - Fix the possible data loss issue that occurs when the system panics because of incorrect processing logic of `Raft Admin Command`
-    New features
 
 ## New features
 
@@ -53,7 +52,7 @@ TiDB version: 4.0.0 GA
 * PD
     - Support specifying the reverse proxy resource prefix for built-in TiDB Dashboard [#2457](https://github.com/pingcap/pd/pull/2457)
     - Support returning the `pending peer` and `down peer` information in interfaces of the PD client Region [#2443](https://github.com/pingcap/pd/pull/2443)
-    - Add monitoring items such as `Direction of hotspot move leader`, `Direction of hotspot move peer`, `Hot cache read entry number` [#2448](https://github.com/pingcap/pd/pull/2448)
+    - Add monitoring items such as `Direction of hotspot move leader`, `Direction of hotspot move peer`, and `Hot cache read entry number` [#2448](https://github.com/pingcap/pd/pull/2448)
 
 * Tools
     + BR 
@@ -80,8 +79,7 @@ TiDB version: 4.0.0 GA
     - Fix the issue that the GC worker is blocked when the system error occurs [#16915](https://github.com/pingcap/tidb/pull/16915)
     - Fix the issue that the UNIQUE constraint on a boolean column results in an incorrect result in a comparison [#17306](https://github.com/pingcap/tidb/pull/17306)
     - Fix system panics caused by incorrect processing logic when `tidb_opt_agg_push_down` is enabled and the aggregation function pushes down the partition table [#17328](https://github.com/pingcap/tidb/pull/17328)
-    - Fix the issue of accessing failed TiKV nodes in some cases #17342
-    - Fix the issue that the `isolation-read` configuration item in `tidb.toml` does not take effect [#17342](https://github.com/pingcap/tidb/pull/17342)
+    - Fix the issue of accessing failed TiKV nodes in some cases [#17342](https://github.com/pingcap/tidb/pull/17342)
     - Fix the issue that the `isolation-read` configuration item in `tidb.toml` does not take effect [#17322](https://github.com/pingcap/tidb/pull/17322)
     - Fix the issue of incorrect order of output results due to incorrect processing logic when `hint` is used to enforce the stream aggregation [#17347](https://github.com/pingcap/tidb/pull/17347)
     - Fix the behavior that `insert` processes DIV under different `SQL_MODE` [#17314](https://github.com/pingcap/tidb/pull/17314)
