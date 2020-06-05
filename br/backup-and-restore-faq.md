@@ -32,7 +32,7 @@ Because these system libraries do not exist in the backup files, no conflict occ
 
 You need to confirm whether TiKV has access to the backup directory. To back up data, confirm whether TiKV has the write permission. To restore data, confirm whether it has the read permission.
 
-Running BR with root might fail due to the disk permission, because the backup files (SST files) are saved by TiKV.
+Running BR with the root access might fail due to the disk permission, because the backup files (SST files) are saved by TiKV.
 
 > **Note:**
 >
