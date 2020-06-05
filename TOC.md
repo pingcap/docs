@@ -87,6 +87,7 @@
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
       - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
+      - [Use Dumpling for export or backup](/export-or-backup-using-dumpling.md)
       - [Use BR](/br/backup-and-restore-tool.md)
       - [BR Usage Scenarios](/br/backup-and-restore-use-cases.md)
       - [BR storages](/br/backup-and-restore-storages.md)
