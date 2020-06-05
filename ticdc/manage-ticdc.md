@@ -11,7 +11,7 @@ This document describes how to deploy a TiCDC cluster and how to manage the TiCD
 
 ## Deploy TiCDC
 
-### Using TiUP to deploy TiCDC
+### Use TiUP
 
 #### Deploy a TiDB cluster with the TiCDC component
 
@@ -23,9 +23,11 @@ For details, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-
 
 2. To deploy TiCDC, refer to [Scale out a TiDB/TiKV/PD/TiCDC node](/scale-tidb-using-tiup.md#scale-out-a-tidbtikvpdticdc-node).
 
-### Deploy a TiCDC component on an existing TiDB cluster using Binary
+### Use Binary
 
-Suppose that in the PD cluster, there is a PD node (the client URL is `10.0.10.25:2379`) that can provide services. If you want to deploy three TiCDC nodes, start the TiCDC cluster by executing the following commands. Note that you only need to specify the same PD address, the newly started nodes automatically join the TiCDC cluster.
+Binary only supports deploying the TiCDC component on an existing TiDB cluster.
+
+Suppose that the PD cluster has a PD node (the client URL is `10.0.10.25:2379`) that can provide services. If you want to deploy three TiCDC nodes, start the TiCDC cluster by executing the following commands. Note that you only need to specify the same PD address, the newly started nodes automatically join the TiCDC cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -37,8 +39,8 @@ cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_3.log --addr=0.0.0.0:830
 
 The following are descriptions of options available in the `cdc server` command:
 
-- `gc-ttl`: The TTL (Time To Live) of the service level `GC safepoint` in PD set by TiCDC, specified in seconds. The default value is `86400`, which means 24 hours.
-- `pd`: URL of the PD client.
+- `gc-ttl`: The TTL (Time To Live) of the service level `GC safepoint` in PD set by TiCDC, in seconds. The default value is `86400`, which means 24 hours.
+- `pd`: The URL of the PD client.
 - `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the service.
 - `advertise-addr`: The access address of TiCDC to the outside world.
 - `tz`: Time zone used by the TiCDC service. TiCDC uses this time zone when time data types such as `TIMESTAMP` are converted internally or when data are replicated to the downstream. The default is the local time zone in which the process runs.
@@ -47,7 +49,7 @@ The following are descriptions of options available in the `cdc server` command:
 
 ## Use `cdc cli` to manage cluster status and data replication task
 
-This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks. In the following interface description, it is assumed that PD listens on `127.0.0.1` and the port is `2379`.
+This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks. The following interface description assumes that PD listens on `127.0.0.1` and the port is `2379`.
 
 ### Manage TiCDC service progress (`capture`)
 
@@ -191,11 +193,11 @@ The information returned consists of `"info"` and `"status"` of the replication 
 
 In the above command:
 
-- `resolved-ts`: The largest transaction `TS` in the current `changfeed`. Note that this `TS` has been successfully sent from TiKV to TiCDC.
+- `resolved-ts`: The largest transaction `TS` in the current `changefeed`. Note that this `TS` has been successfully sent from TiKV to TiCDC.
 - `checkpoint-ts`: The largest transaction `TS` in the current `changefeed` that has been successfully written to the downstream.
 - `admin-job-type`: The status of a `changefeed`:
     - `0`: The state is normal. It is the initial status.
-    - `1`: The task is paused. When the task is paused, all replicated `processor`s exit, while the configuration and the replication status of the task are retained.
+    - `1`: The task is paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
     - `2`: The task is resumed. The replication task resumes from `checkpoint-ts`.
     - `3`: The task is removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
 
