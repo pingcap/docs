@@ -52,7 +52,7 @@
     - [TiDB Lightning Tutorial](/get-started-with-tidb-lightning.md)
     - [TiSpark Quick Start Guide](/get-started-with-tispark.md)
   + Deploy
-    - [Hardware Recommendations](/hardware-and-software-requirements.md)
+    - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
     + From Binary Tarball
       - [For Testing Environments](/test-deployment-from-binary-tarball.md)
       - [For Production Environments](/production-deployment-from-binary-tarball.md)
@@ -275,7 +275,6 @@
     + tikv-server
       - [Configuration Flags](/command-line-flags-for-tikv-configuration.md)
       - [Configuration File](/tikv-configuration-file.md)
-    - [Dynamic Configuration Change](/dynamic-config.md)
   + Security
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [The TiDB Access Privilege System](/privilege-management.md)
@@ -430,6 +429,7 @@
     - [4.0.0-beta.1](/releases/release-4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/release-4.0.0-beta.md)
   + v3.1
+    - [3.1.2](/releases/release-3.1.2.md)
     - [3.1.1](/releases/release-3.1.1.md)
     - [3.1.0 GA](/releases/release-3.1.0-ga.md)
     - [3.1.0-rc](/releases/release-3.1.0-rc.md)
