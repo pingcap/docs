@@ -24,4 +24,4 @@ This document describes the minimal deployment topology of TiDB clusters.
 
 > **Note:**
 >
-> You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the deployment machines. You can customize the user, or keep the user consistent with the Control Machine.
+> You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
