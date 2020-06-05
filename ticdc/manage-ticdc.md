@@ -11,7 +11,14 @@ This document describes how to deploy a TiCDC cluster and how to manage the TiCD
 
 ## Deploy TiCDC
 
+You can deploy TiCDC using either TiUP or Binary.
+
 ### Use TiUP
+
+If you use TiUP to deploy TiCDC, you can choose one of the following ways:
+
+- Deploy TiCDC when deploying a TiDB cluster
+- Deploy a TiCDC component on an existing TiDB cluster
 
 #### Deploy a TiDB cluster with the TiCDC component
 
