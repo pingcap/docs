@@ -56,7 +56,6 @@ To replicate data to TiDB or MySQL, you must ensure that the following requireme
 
 Currently, The following scenarios are not supported:
 
-- The replication of partition tables.
 - The TiKV cluster that uses RawKV alone.
 - The [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) in TiDB v4.0. Before you enable this feature, make sure that the downstream cluster is the TiDB cluster with the same collation as those in the upstream; otherwise, inconsistent collations lead to the issue that the data cannot be located.
 - The [DDL operation `CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) and the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB v4.0. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
