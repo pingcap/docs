@@ -90,7 +90,7 @@ TiDB version: 4.0.0 GA
     - Fix the issue that the system fails to start because TiDB incorrectly processes the `DROP DATABASE` statement in some scenarios
     - Fix the issue that the method of collecting CPU information in `Server_info` is different from that in other components
     - Fix the issue that the error `Too Many Pings` is reported when the `Query` statement is executed if `batch coprocessor` is enabled
-    - Fix the issue that Dashboard fails to display the correct  `deploy path` information because TiFlash does not report the related information
+    - Fix the issue that Dashboard fails to display the correct `deploy path` information because TiFlash does not report the related information
 
 * TiKV
     - Fix the `DefaultNotFound` error that occurs when backing up using BR  [#7937](https://github.com/tikv/tikv/pull/7937)
