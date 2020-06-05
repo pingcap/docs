@@ -317,7 +317,7 @@ br backup full\
     --lastbackupts ${LAST_BACKUP_TS}
 ```
 
-Execute the `validate` command to get the timestamp of the last backup. For example:
+To get the timestamp of the last backup, execute the `validate` command. For example:
 
 {{< copyable "shell-regular" >}}
 
