@@ -471,6 +471,8 @@ br restore full \
     --log-file restorefull.log
 ```
 
+In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore a database](#restore-a-database).
+
 ### Restore incremental data
 
 Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster.
