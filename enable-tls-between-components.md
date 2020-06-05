@@ -24,7 +24,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
     You can use tools like `openssl`, `easy-rsa` and `cfssl` to generate self-signed certificates.
 
-    If you choose `cfssl`, you can refer to [generating self-signed certificates](/generate-self-signed-certificates.md).
+    If you choose `openssl`, you can refer to [generating self-signed certificates](/generate-self-signed-certificates.md).
 
 2. Configure certificates.
 
