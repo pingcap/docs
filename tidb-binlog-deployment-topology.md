@@ -36,11 +36,11 @@ The key parameters in the topology configuration templates are as follows:
 
 - `binlog.ignore-error: true`
 
-    - It is recommended to enable this configuration for high availability scenarios.
-    - If set to `true`, when an error occurs, TiDB stops writing into Binlog, and adds `1` to the value of the `tidb_server_critical_error_total` monitoring metric.
-    - If set to `false`, when TiDB fails to write into Binlog, the whole TiDB service is stopped.
+    - It is recommended to enable this configuration in high availability scenarios.
+    - If set to `true`, when an error occurs, TiDB stops writing data into binlog, and adds `1` to the value of the `tidb_server_critical_error_total` monitoring metric.
+    - If set to `false`, when TiDB fails to write data into binlog, the whole TiDB service is stopped.
 
 > **Note:**
 >
 > - When editing the configuration file template, if you do not need custom ports or directories, modify the IP only.
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the deployment machines. You can customize the user, or keep the user consistent with the Control Machine.
+> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
