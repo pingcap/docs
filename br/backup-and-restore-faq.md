@@ -10,17 +10,17 @@ This document lists the Frequently Asked Questions (FAQ) and the solutions about
 
 If the problems are not covered in this document and cannot be resolved, you can raise questions in the [AskTUG](http://asktug.com) community.
 
-## What should I do if the error message `could not read local://...:download sst failed` is returned when restoring data
+## What should I do if the error message `could not read local://...:download sst failed` is returned during data restoration?
 
 When restoring data, each node must have access to **all** backup files (SST files). By default, if `local` storage is used, you cannot restore data because the backup files are scattered among different nodes. Therefore, you have to copy the backup file of each TiKV node to the other TiKV nodes.
 
 It is recommended to mount an NFS disk as a backup disk during backup. For details, see [Back up a single table to a network disk](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended).
 
-## How much does it affect the cluster during BR backup?
+## How much does it affect the cluster during backup using BR?
 
 When you use the `oltp_read_only` scenario of `sysbench` to back up to a disk (make sure the backup disk and the service disk are different) at full rate, the cluster QPS is decreased by 15%-25%. The impact on the cluster depends on the table schema.
 
-To control the impact of backup, you can use the `--ratelimit` parameter to limit the backup rate.
+To reduce the impact on the cluster, you can use the `--ratelimit` parameter to limit the backup rate.
 
 ## Does BR back up system tables? During data restoration, do they raise conflict?
 
@@ -36,7 +36,7 @@ Running BR with root might fail due to the disk privilege, because the backup fi
 
 > **Note:**
 >
-> You might encounter the same problem during data restoration. When reading the SST files for the first time, the reading privilege is verified. The execution duration of DDL suggests that there might be a long interval between checking the privilege and running BR. You might receive the error message `Permission denied` after waiting for a long time.
+> You might encounter the same problem during data restoration. When the SST files are read for the first time, the reading privilege is verified. The execution duration of DDL suggests that there might be a long interval between checking the privilege and running BR. You might receive the error message `Permission denied` after waiting for a long time.
 >
 > Therefore, It is recommended to check the privilege before data restoration.
 
@@ -46,12 +46,12 @@ Almost all of these problems are system call errors that occur when TiKV writes 
  
 For example, you might encounter the `Code: 22(invalid argument)` error when backing up data to the network disk built by `samba`.
 
-## Where are the files backed up by BR stored when I use `local` storage?
+## Where are the backed up files stored when I use `local` storage?
  
 When you use `local` storage, `backupmeta` is generated on the node where BR is running, and backup files are generated on the Leader nodes of each Region.
 
 ## How about the size of the backup data? Are there replicas of the backup?
 
-During data backup, backup files are generated on the Leader nodes of each Region. Therefore, the size of the backup is equal to the data size, with no redundant replicas. Therefore, the total data size is approximately the total number of TiKV data divided by the number of replicas.
+During data backup, backup files are generated on the Leader nodes of each Region. The size of the backup is equal to the data size, with no redundant replicas. Therefore, the total data size is approximately the total number of TiKV data divided by the number of replicas.
 
 However, if you want to restore data locally, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
