@@ -75,7 +75,9 @@ The following steps show how to install a v4.0.0 TiDB cluster using the `tidb` u
 
     {{< copyable "shell-regular" >}}
 
+    ```bash
     tar czvf package.tar.gz package
+    ```
 
     `package.tar.gz` is an independent offline environment package.
 
