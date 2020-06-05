@@ -306,7 +306,7 @@ The incremental backup has two limitations:
 - The incremental backup needs to be under a different path from the previous full backup.
 - No GC (Garbage Collection) happens between the start time of the incremental backup and `lastbackupts`.
 
-Execute the following command to back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp)`:
+To back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]`, execute the following command:
 
 {{< copyable "shell-regular" >}}
 
