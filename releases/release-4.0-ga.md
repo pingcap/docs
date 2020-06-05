@@ -1,13 +1,13 @@
 ---
-title: TiDB 4.0.0 GA Release Notes
+title: TiDB 4.0 GA Release Notes
 category: Releases
 ---
 
-# TiDB 4.0.0 GA Release Notes
+# TiDB 4.0 GA Release Notes
 
 Release date: May 28, 2020
 
-TiDB version: 4.0.0 GA
+TiDB version: 4.0.0
 
 ## Compatibility Changes
 
