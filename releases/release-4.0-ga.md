@@ -28,7 +28,7 @@ TiDB version: 4.0.0
 * TiFlash
     - Fix the possible data loss issue that occurs when the system panics because of incorrect processing logic of `Raft Admin Command`
 
-## New features
+## New Features
 
 * TiDB
     - Add the `committer-concurrency` configuration item to control the number of `goroutines` in the retry-commit phase [#16849](https://github.com/pingcap/tidb/pull/16849)
@@ -64,7 +64,7 @@ TiDB version: 4.0.0
         - Support scheduling multiple tables in the same scheduling task generation cycle [#572](https://github.com/pingcap/ticdc/pull/572)
         - Add information about node roles in HTTP API [#591](https://github.com/pingcap/ticdc/pull/591)
 
-## Bug fixes
+## Bug Fixes
 
 * TiDB
 
