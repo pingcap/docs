@@ -79,4 +79,4 @@ You can view the errors triggered by the execution of SQL statements on each TiD
 
 ![GC status](/media/garbage-collation-panel.png)
 
-You can check whether the GC (Garbage Collection) status is normal by viewing the time when the last GC happens. If the GC is abnormal, it might lead to excessive historical data and decrease the access efficiency.
+You can check whether the GC (Garbage Collection) status is normal by viewing the time when the last GC happens. If the GC is abnormal, it might lead to excessive historical data, thereby decreasing the access efficiency.
