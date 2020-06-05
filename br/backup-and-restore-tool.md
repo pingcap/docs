@@ -331,7 +331,7 @@ In the above example, the incremental backup data includes the newly written dat
 
 > **Warning:**
 > 
-> This feature is in the experiment, without being thoroughly tested. It is highly **not recommended** to use this feature in the production environment.
+> This feature is experimental and not thoroughly tested. It is highly **not recommended** to use this feature in the production environment.
 
 In some scenarios, TiKV might run independently of TiDB. Given that, BR also supports bypassing the TiDB layer and backing up data in TiKV.
 
