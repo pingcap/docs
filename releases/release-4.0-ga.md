@@ -43,7 +43,7 @@ TiDB version: 4.0.0
 
 * TiFlash
     - Support filtering out the data corresponding to the qualified `TSO` through the `min commit ts` value of the `Lock CF` when the Learner reads the data
-    - Add the feature that the system explicitly reports an error to avoid incorrect calculation result when the value of `TIMESTAMP` type is less than `1970-01-01 00:00:00`
+    - Add the feature that the system explicitly reports an error to avoid incorrect calculation results when the value of `TIMESTAMP` type is less than `1970-01-01 00:00:00`
     - Support using flags in regular expressions when searching logs
 
 * TiKV
@@ -58,7 +58,6 @@ TiDB version: 4.0.0
     + Backup & Restore (BR)
         - Support the backup and restore of `Sequence` and `View` [#242](https://github.com/pingcap/br/pull/242)
     + TiCDC
-
         - Support checking the validity of `Sink URI` when creating `Changefeed` [#561](https://github.com/pingcap/ticdc/pull/561)
         - Support checking whether the PD and TiKV versions meet the system requirements during system startup [#570](https://github.com/pingcap/ticdc/pull/570)
         - Support scheduling multiple tables in the same scheduling task generation cycle [#572](https://github.com/pingcap/ticdc/pull/572)
@@ -85,6 +84,7 @@ TiDB version: 4.0.0
     - Fix the behavior that `insert` processes DIV under different `SQL_MODE` [#17314](https://github.com/pingcap/tidb/pull/17314)
 
 * TiFlash
+
     - Fix the issue that the matching behavior of regular expressions in the  search log feature is inconsistent with other components
     - Fix the issue of excessive restart time when nodes write large amounts of data by disabling the delay processing optimization of `Raft Compact Log Command` by default
     - Fix the issue that the system fails to start because TiDB incorrectly processes the `DROP DATABASE` statement in some scenarios
@@ -93,14 +93,16 @@ TiDB version: 4.0.0
     - Fix the issue that Dashboard fails to display the correct `deploy path` information because TiFlash does not report the related information
 
 * TiKV
+
     - Fix the `DefaultNotFound` error that occurs when backing up using BR  [#7937](https://github.com/tikv/tikv/pull/7937)
     - Fix system panics caused by out-of-order `ReadIndex` packets [#7930](https://github.com/tikv/tikv/pull/7930)
-    - Fix the unexpected error is returned because the read request callback function is not called [#7921](https://github.com/tikv/tikv/pull/7921)
+    - Fix the issue that an unexpected error is returned because the read request callback function is not called [#7921](https://github.com/tikv/tikv/pull/7921)
     - Fix system panics caused by incorrectly removing snapshot files when TiKV is restarted [#7927](https://github.com/tikv/tikv/pull/7927)
     - Fix the issue that the `master key` cannot be rotated due to incorrect processing logic in storage encryption [#7898](https://github.com/tikv/tikv/pull/7898)
     - Fix the issue that the received `lock cf` file of the snapshot is not encrypted when the storage encryption is enabled [#7922](https://github.com/tikv/tikv/pull/7922)
 
 * PD
+
     - Fix the 404 error when deleting `evict-leader-scheduler` or `grant-leader-scheduler` using pd-ctl [#2446](https://github.com/pingcap/pd/pull/2446)
     - Fix the issue that the `presplit` feature might not work properly when the TiFlash replica exists [#2447](https://github.com/pingcap/pd/pull/2447)
 
