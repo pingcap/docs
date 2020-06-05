@@ -68,42 +68,31 @@ Note that the `--sql` option can be used only for exporting CSV files for now. H
 > 
 > Currently, Dumpling does not support exporting only certain tables specified by users (i.e. `-T` flag, see [this issue](https://github.com/pingcap/dumpling/issues/76)). If you do need this feature, you can use [MyDumper](/backup-and-restore-using-mydumper-lightning.md) instead.
 
-默认情况下，导出的文件会存储到 `./export-<current local time>` 目录下。常用参数如下：
 The exported file is stored in the `. /export-<current local time>` directory by default. Commonly used parameters are as follows:
 
-- `-o` 用于选择存储导出文件的目录。
-- `-F` 选项用于指定单个文件的最大大小（和 MyDumper 不同，这里的单位是字节）。
-- `-r` 选项用于指定单个文件的最大记录数（或者说，数据库中的行数）。
+- `-o` is used to select the directory where the exported files are stored.
+- `-F` option is used to specify the maximum size of a single file (the unit here is byte, different from MyDumper).
+- `-r` option is used to specify the maximum number of records (or the number of rows in the database) for a single file.
 
-- `-o` is used to select the directory where the exported file will be stored.
-- `-F` is used to specify the maximum size of a single file (different from MyDumper, the unit here is byte).
-- `-r` is used to specify the maximum number of records (or, rather, the number of rows in the database) for a single file.
-
-利用以上参数可以让 Dumpling 的并行度更高。
 You can use the above parameters to provide Dumpling with a higher degree of parallelism.
 
-还有一个尚未在上面展示出来的标志是 `--consistency <consistency level>`，这个标志控制导出数据“一致性保证”的方式。对于 TiDB 来说，默认情况下，会通过获取某个时间戳的快照来保证一致性（即 `--consistency snapshot`）。在使用 snapshot 来保证一致性的时候，可以使用 `--snapshot` 参数指定要备份的时间戳。还可以使用以下的一致性级别：
-Another flag that has not yet been shown above is the `--consistency <consistency level>`, which controls the way in which data is exported for "consistency assurance". For TiDB, consistency is ensured by getting a snapshot of a certain timestamp by default (i.e. `--consistency snapshot`). When using snapshot for consistency, you can use the `--snapshot` parameter to specify the timestamp to back up. You can also use the following levels of consistency:
+Another flag that is not mentioned above is `--consistency <consistency level>`, which controls the way in which data is exported for "consistency assurance". For TiDB, consistency is ensured by getting a snapshot of a certain timestamp by default (i.e. `--consistency snapshot`). When using snapshot for consistency, you can use the `--snapshot` parameter to specify the timestamp to be backed up. You can also use the following levels of consistency:
 
-
-- `flush`：使用 [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) 来保证一致性。
-- `snapshot`：获取指定时间戳的一致性快照并导出。
-- `lock`：为待导出的所有表上读锁。
-- `none`：不做任何一致性保证。
-- `auto`：对 MySQL 使用 `flush`，对 TiDB 使用 `snapshot`。
-
-- `FLUSH`: use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to ensure consistency.
+- `flush`: Use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to ensure consistency.
 - `snapshot`: Get a consistent snapshot of the specified timestamp and export it.
-- `lock`: Add locks to read all tables to be exported.
-- `none`: No guarantee of consistency.
-- `auto`: use `flush` for MySQL and `snapshot` for TiDB.
+- `lock`: Add read locks on all tables to be exported.
+- `none`: No guarantee for consistency.
+- `auto`: Use `flush` for MySQL and `snapshot` for TiDB.
 
-一切完成之后，你应该可以在 `/tmp/test` 看到导出的文件了：
 After everything is done, you can see the exported file in `/tmp/test`:
 
-```shell
-$ ls -lh /tmp/test | awk '{print $5 "\t" $9}'
+{{< copyable "shell-regular" >}}
 
+```shell
+ls -lh /tmp/test | awk '{print $5 "\t" $9}'
+```
+
+```
 140B  metadata
 66B   test-schema-create.sql
 300B  test.sbtest1-schema.sql
@@ -114,8 +103,7 @@ $ ls -lh /tmp/test | awk '{print $5 "\t" $9}'
 190K  test.sbtest3.0.sql
 ```
 
-另外，假如数据量非常大，可以提前调长 GC 时间，以避免因为导出过程中发生 GC 导致导出失败：
-In addition, if the data volume is very large, you can extend the GC time in advance to avoid export failure due to GC occurring during the export process.
+In addition, if the data volume is very large, to avoid export failure due to GC during the export process, you can extend the GC time in advance:
 
 {{< copyable "sql" >}}
 
@@ -123,8 +111,7 @@ In addition, if the data volume is very large, you can extend the GC time in adv
 update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
 ```
 
-在操作结束之后，再将 GC 时间调回原样（默认是 `10m`）：
-After the operation is completed, you can set the GC time back to the same (default is `10m`):
+After your operation is completed, set the GC time back (the default value is `10m`):
 
 {{< copyable "sql" >}}
 
@@ -132,5 +119,4 @@ After the operation is completed, you can set the GC time back to the same (defa
 update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
 ```
 
-最后，所有的这些导出数据都可以用 [Lightning](/tidb-lightning/tidb-lightning-tidb-backend.md) 导入回 TiDB。
-Finally, you can import all this exported data back to TiDB using [Lightning](/tidb-lightning/tidb-lightning-tidb-backend.md).
+Finally, all the exported data can be imported back to TiDB using [Lightning](/tidb-lightning/tidb-lightning-tidb-backend.md).
