@@ -10,7 +10,7 @@ As a distributed database, TiDB is more complicated than the stand-alone databas
 
 ## Key indicators of Dashboard
 
-Starting from v4.0, TiDB provides a new operation and maintenance management tool, TiDB Dashboard. This tool is integrated into the PD component. Its default address is `http://${pd-ip}:${pd_port}/dashboard`.
+Starting from v4.0, TiDB provides a new operation and maintenance management tool, TiDB Dashboard. This tool is integrated into the PD component. The address is `http://${pd-ip}:${pd_port}/dashboard` by default.
 
 TiDB Dashboard simplifies the operation and maintenance of the TiDB database. You can view the running status of the entire TiDB cluster through one interface, including cluster information, the running of SQL statements, data hotspots, searching logs, and real-time performance analysis, etc.
 
