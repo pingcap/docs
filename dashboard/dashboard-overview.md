@@ -29,7 +29,7 @@ This area shows the number of successful and failed queries per second for the e
 
 > **Note:**
 >
-> This feature is available only in the cluster where the Prometheus monitoring component is deployed. If Prometheus is not deployed, there will be a display failure.
+> This feature is available only in the cluster where the Prometheus monitoring component is deployed. If Prometheus is not deployed, an error will be displayed.
 
 ## Latency
 
@@ -39,7 +39,7 @@ This area shows the latency of 99.9%, 99%, and 90% of queries in the entire clus
 
 > **Note:**
 >
-> This feature is available only on the cluster where the Prometheus monitoring component is deployed. If Prometheus is not deployed, there will be a display failure.
+> This feature is available only on the cluster where the Prometheus monitoring component is deployed. If Prometheus is not deployed, an error will be displayed.
 
 ## Top SQL statements
 
@@ -47,11 +47,11 @@ This area shows the ten types of SQL statements that have accumulated the longes
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
-The information shown in this area is consistent with the more detailed [SQL statement analysis page](/dashboard/dashboard-statement-list.md). You can click the **Top SQL Statements** heading to view the complete list. For details of the columns on this table, see [SQL statement analysis page](/dashboard/dashboard-statement-list.md).
+The information shown in this area is consistent with the more detailed [SQL Statements Page](/dashboard/dashboard-statement-list.md). You can click the **Top SQL Statements** heading to view the complete list. For details of the columns on this table, see [SQL Statements Page](/dashboard/dashboard-statement-list.md).
 
 > **Note:**
 >
-> This feature is available only on the cluster where SQL statement analysis is enabled.
+> This feature is available only on the cluster where SQL Statements feature is enabled.
 
 ## Recent slow queries
 
@@ -61,7 +61,7 @@ By default, this area shows the latest 10 slow queries in the entire cluster ove
 
 By default, the SQL query that is executed longer than 300 milliseconds is counted as a slow query and displayed on the table. You can change this threshold using the [tidb_slow_log_threshold](/tidb-specific-system-variables.md#tidb_slow_log_threshold) variable or the [slow-threshold](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
 
-The content displayed in this area is consistent with the more detailed [slow query page](/dashboard/dashboard-slow-query.md). You can click the **Recent Slow Queries** title to view the complete list. For details of the columns in this table, see this [slow query page](/dashboard/dashboard-slow-query.md).
+The content displayed in this area is consistent with the more detailed [Slow Queries Page](/dashboard/dashboard-slow-query.md). You can click the **Recent Slow Queries** title to view the complete list. For details of the columns in this table, see this [Slow Queries Page](/dashboard/dashboard-slow-query.md).
 
 > **Note:**
 >
@@ -78,7 +78,7 @@ The statuses in the image above are described as follows:
 - Up: The instance is running properly (including the offline storage instance).
 - Down: The instance is running abnormally, such as network disconnection, process panic, and so on.
 
-Click the **Instance** title to enter the [cluster information page](/dashboard/dashboard-cluster-info.md) that shows the detailed running status of each instance.
+Click the **Instance** title to enter the [Cluster Info Page](/dashboard/dashboard-cluster-info.md) that shows the detailed running status of each instance.
 
 ## Monitor and alert
 

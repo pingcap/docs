@@ -1,10 +1,10 @@
 ---
-title: Execution Details of TiDB Dashboard
+title: Statement Execution Details of TiDB Dashboard
 summary: View the execution details of a single SQL statement in TiDB Dashboard.
 category: how-to
 ---
 
-# Execution Details of TiDB Dashboard
+# Statement Execution Details of TiDB Dashboard
 
 Click any item in the list to enter the detail page of the SQL statement to view more detailed information. This information includes the following parts:
 
@@ -24,13 +24,13 @@ The execution detail of plans includes the following information:
 
 ![Execution details of plans](/media/dashboard/dashboard-statement-plans-detail.png)
 
-### Basic information
+### Basic Tab
 
 The basic information of a SQL execution includes the table name, index name, execution times, and total duration. The **Description** column provides detailed description of each field.
 
 ![Basic information](/media/dashboard/dashboard-statement-plans-basic.png)
 
-### Execution time
+### Time Tab
 
 Click the **Time** tab, and you can see how long each stage of the execution plan is lasted.
 
@@ -40,19 +40,19 @@ Click the **Time** tab, and you can see how long each stage of the execution pla
 
 ![Execution time](/media/dashboard/dashboard-statement-plans-time.png)
 
-### Coprocessor read
+### Coprocessor Read Tab
 
 Click the **Coprocessor Read** tab, and you can see information related to Coprocessor read.
 
 ![Coprocessor read](/media/dashboard/dashboard-statement-plans-cop-read.png)
 
-### Transaction
+### Transaction Tab
 
 Click the **Transaction** tab, and you can see information related to execution plan and transaction, such as the average number of written keys or the maximum number of written keys.
 
 ![Transaction](/media/dashboard/dashboard-statement-plans-transaction.png)
 
-### Slow query
+### Slow Query Tab
 
 If an execution plan is executed too slowly, you can see its associated slow query records under the **Slow Query** tab.
 

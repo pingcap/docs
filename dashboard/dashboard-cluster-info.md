@@ -14,7 +14,7 @@ You can use one of the following two methods to access the cluster information p
 
 - After logging into TiDB Dashboard, click **Cluster Info** on the left navigation menu:
 
-  ![Access cluster information page ](/media/dashboard/dashboard-cluster-info-access.png)
+  ![Access cluster information page](/media/dashboard/dashboard-cluster-info-access.png)
 
 - Visit <http://127.0.0.1:2379/dashboard/#/cluster_info/instance> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
@@ -30,17 +30,17 @@ The list includes the following information:
 
 - Address: The instance address.
 - Status: The running status of the instance.
-- Start time: The start time of the instance.
+- Up Time: The start time of the instance.
 - Version: The instance version number.
-- Deployment path: The directory in which the instance binary file is located.
-- Git Hash value: The Git Hash value corresponding to the instance binary file.
+- Deployment directory: The directory in which the instance binary file is located.
+- Git Hash: The Git Hash value corresponding to the instance binary file.
 
 An instance has the following running status:
 
 - Up: The instance is running properly.
 - Down or Unreachable: The instance is not started or a network problem exits on the corresponding host.
 - Tombstone: The data on the instance has been completely migrated out and the scaling-in is complete. This status exists only on TiKV or TiFlash instances.
-- Offline: The data on the instance is being migrated out and the scaling-in is being performed. This status exists only on TiKV or TiFlash instances.
+- Leaving: The data on the instance is being migrated out and the scaling-in is being performed. This status exists only on TiKV or TiFlash instances.
 - Unknown: The running state of the unknown instance.
 
 > **Note:**
@@ -59,11 +59,11 @@ The list includes the following information:
 
 - Address: The Host IP address.
 - CPU: The number of logical cores of the host CPU.
-- CPU usage: The user-mode and kernel-mode CPU usage in the current 1 second.
-- Physical memory: The total physical memory size of the host.
-- Memory usage: The current memory usage of the host.
-- Deployment disk: The file system of the disk on the host on which the instance is running and the mounting path of this disk.
-- Disk usage: The space usage of the disk on the host on which the instance is running.
+- CPU Usage: The user-mode and kernel-mode CPU usage in the current 1 second.
+- Memory: The total physical memory size of the host.
+- Memory Usage: The current memory usage of the host.
+- Disk: The file system of the disk on the host on which the instance is running and the mounting path of this disk.
+- Disk Usage: The space usage of the disk on the host on which the instance is running.
 
 > **Note:**
 >
