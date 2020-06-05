@@ -140,7 +140,7 @@ This section describes how to enable TLS authentication in a TiDB cluster. TLS a
 
 ## Enable TLS authentication between the MySQL client and TiDB server
 
-Refer to [Use Encrypted Connections](/encrypted-connections-with-tls-protocols.md).
+Refer to [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md).
 
 ## Encrypt stored data
 
