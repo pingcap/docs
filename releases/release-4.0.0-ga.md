@@ -78,7 +78,7 @@ TiDB version: 4.0.0 GA
     - Fix the issue of inaccurate `duration` monitoring metric of the `SELECT` statement in Grafana [#16561](https://github.com/pingcap/tidb/pull/16561)
     - Fix the issue that the GC worker is blocked when the system error occurs [#16915](https://github.com/pingcap/tidb/pull/16915)
     - Fix the issue that the `UNIQUE` constraint on a boolean column results in an incorrect result in a comparison [#17306](https://github.com/pingcap/tidb/pull/17306)
-    - Fix system panics caused by incorrect processing logic when `tidb_opt_agg_push_down` is enabled and the aggregation function pushes down the partition table [#17328](https://github.com/pingcap/tidb/pull/17328)
+    - Fix system panics caused by incorrect processing logic when `tidb_opt_agg_push_down` is enabled and the aggregation function pushes down the partitioned table [#17328](https://github.com/pingcap/tidb/pull/17328)
     - Fix the issue of accessing failed TiKV nodes in some cases [#17342](https://github.com/pingcap/tidb/pull/17342)
     - Fix the issue that the `isolation-read` configuration item in `tidb.toml` does not take effect [#17322](https://github.com/pingcap/tidb/pull/17322)
     - Fix the issue of incorrect order of output results due to incorrect processing logic when `hint` is used to enforce the stream aggregation [#17347](https://github.com/pingcap/tidb/pull/17347)
