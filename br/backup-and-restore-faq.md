@@ -6,7 +6,7 @@ category: FAQ
 
 # Backup & Restore FAQ
 
-This document lists the Frequently Asked Questions (FAQ) and the solutions about Backup & Restore (BR).
+This document lists the frequently asked questions (FAQs) and the solutions about Backup & Restore (BR).
 
 If the problems are not covered in this document and cannot be resolved, you can raise questions in the [AskTUG](http://asktug.com) community.
 
