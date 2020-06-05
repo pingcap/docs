@@ -89,10 +89,11 @@
     - [Common TiUP Operations](/maintain-tidb-using-tiup.md)
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
-      - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
       - [Use BR](/br/backup-and-restore-tool.md)
       - [BR Usage Scenarios](/br/backup-and-restore-use-cases.md)
       - [BR storages](/br/backup-and-restore-storages.md)
+      - [BR FAQ](/br/backup-and-restore-faq.md)
+      - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
