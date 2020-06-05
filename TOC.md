@@ -89,11 +89,10 @@
     - [Common TiUP Operations](/maintain-tidb-using-tiup.md)
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
-      - [Use BR](/br/backup-and-restore-tool.md)
-      - [BR Usage Scenarios](/br/backup-and-restore-use-cases.md)
-      - [BR storages](/br/backup-and-restore-storages.md)
-      - [BR FAQ](/br/backup-and-restore-faq.md)
       - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
+      + Use BR
+        - [Use BR](/br/backup-and-restore-tool.md)
+        - [BR Use Cases](/br/backup-and-restore-use-cases.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
@@ -367,6 +366,12 @@
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
   + Tools
     - [Tools User Guide](/ecosystem-tool-user-guide.md)
+    - [Download](/download-ecosystem-tools.md)
+    + Backup & Restore (BR)
+      - [Use BR](/br/backup-and-restore-tool.md)
+      - [BR Use Cases](/br/backup-and-restore-use-cases.md)
+      - [BR storages](/br/backup-and-restore-storages.md)
+      - [BR FAQ](/br/backup-and-restore-faq.md)
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
@@ -408,7 +413,6 @@
     - [PD Recover](/pd-recover.md)
     - [TiKV Control](/tikv-control.md)
     - [TiDB Control](/tidb-control.md)
-    - [Download](/download-ecosystem-tools.md)
 - [TiDB in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/)
 + FAQs
   - [TiDB FAQs](/faq/tidb-faq.md)
