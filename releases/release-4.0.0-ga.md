@@ -38,7 +38,7 @@ TiDB version: 4.0.0 GA
     - Support the `insert/replace into tbl_name partition`(`partition_name_list`) statement [#17313](https://github.com/pingcap/tidb/pull/17313)
     - Support checking the value of `collations` when using the `Distinct` function [#17240](https://github.com/pingcap/tidb/pull/17240)
     - Support the `is null` filter condition during the Hash partition pruning [#17310](https://github.com/pingcap/tidb/pull/17310)
-    - Support `admin check index`, `admin cleanup index`, and `admin recover index` in partition tables [#17392](https://github.com/pingcap/tidb/pull/17392) [#17405](https://github.com/pingcap/tidb/pull/17405)  [#17317](https://github.com/pingcap/tidb/pull/17317)
+    - Support `admin check index`, `admin cleanup index`, and `admin recover index` in partition tables [#17392](https://github.com/pingcap/tidb/pull/17392) [#17405](https://github.com/pingcap/tidb/pull/17405) [#17317](https://github.com/pingcap/tidb/pull/17317)
     - Support range partition pruning for the `in` expressions  [#17320](https://github.com/pingcap/tidb/pull/17320)
 
 * TiFlash
@@ -55,7 +55,7 @@ TiDB version: 4.0.0 GA
     - Add monitoring items such as `Direction of hotspot move leader`, `Direction of hotspot move peer`, and `Hot cache read entry number` [#2448](https://github.com/pingcap/pd/pull/2448)
 
 * Tools
-    + BR 
+    + Backup & Restore (BR)
         - Support the backup and restore of `Sequence` and `View` [#242](https://github.com/pingcap/br/pull/242)
     + TiCDC
 
