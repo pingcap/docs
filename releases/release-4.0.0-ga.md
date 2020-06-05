@@ -34,7 +34,7 @@ TiDB version: 4.0.0 GA
     - Add the `committer-concurrency` configuration item to control the number of `goroutines` in the retry-commit phase [#16849](https://github.com/pingcap/tidb/pull/16849)
     - Support the `show table partition regions` syntax [#17294](https://github.com/pingcap/tidb/pull/17294)
     - Add the `tmp-storage-quota` configuration item to limit the temporary disk space used by the TiDB server [#15700](https://github.com/pingcap/tidb/pull/15700)
-    - Support checking whether the partition table uses a unique prefix index when creating and changing tables [#17213](https://github.com/pingcap/tidb/pull/17213)
+    - Support checking whether the partitioned table uses a unique prefix index when creating and changing tables [#17213](https://github.com/pingcap/tidb/pull/17213)
     - Support the `insert/replace into tbl_name partition`(`partition_name_list`) statement [#17313](https://github.com/pingcap/tidb/pull/17313)
     - Support checking the value of `collations` when using the `Distinct` function [#17240](https://github.com/pingcap/tidb/pull/17240)
     - Support the `is null` filter condition during the Hash partition pruning [#17310](https://github.com/pingcap/tidb/pull/17310)
