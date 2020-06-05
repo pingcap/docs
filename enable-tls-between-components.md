@@ -1,11 +1,11 @@
 ---
-title: Enable TLS Authentication and Encrypt the Stored Data
-summary: Learn how to enable TLS authentication and encrypt the stored data in a TiDB cluster.
+title: Enable TLS Between TiDB Components
+summary: Learn how to enable TLS authentication between TiDB components.
 category: how-to
 aliases: ['/docs/dev/how-to/secure/enable-tls-between-components/']
 ---
 
-# Enable TLS Authentication and Encrypt the Stored Data
+# Enable TLS Between TiDB Components
 
 This document introduces how to enable TLS authentication and encrypt the stored data in a TiDB cluster.
 
