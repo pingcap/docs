@@ -335,7 +335,7 @@ In the above example, the incremental backup data includes the newly written dat
 
 In some scenarios, TiKV might run independently of TiDB. Given that, BR also supports bypassing the TiDB layer and backing up data in TiKV.
 
-For example, you can execute the following command to back up all keys between `[0x31, 0x3130303030303030)` of the default CF to `$BACKUP_DIR`:
+For example, you can execute the following command to back up all keys between `[0x31, 0x3130303030303030)` in the default CF to `$BACKUP_DIR`:
 
 {{< copyable "shell-regular" >}}
 
