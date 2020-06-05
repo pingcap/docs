@@ -9,7 +9,7 @@ Release date: May 28, 2020
 
 TiDB version: 4.0.0 GA
 
-## Compatibility changes
+## Compatibility Changes
 
 * TiDB
     - Optimize the error message of the large-sized transactions for easier troubleshooting [#17219](https://github.com/pingcap/tidb/pull/17219)
