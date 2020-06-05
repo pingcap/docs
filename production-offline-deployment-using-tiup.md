@@ -1,6 +1,6 @@
 ---
 title: Deploy a TiDB Cluster Offline Using TiUP
-summary:
+summary: Introduce how to deploy a TiDB cluster offline using TiUP.
 category: how-to
 ---
 
@@ -10,7 +10,7 @@ This document describes how to deploy a TiDB cluster offline using TiUP.
 
 ## Step 1: Prepare the TiUP offline component package
 
-You can either download the official package, or manually wrap up a package.
+You can either download the official package, or manually pack a component package.
 
 ### Download the official TiUP offline component package
 
@@ -27,7 +27,9 @@ In the command above, replace `${version}` with the offline mirror version you w
 
 `package.tar.gz` is a separate offline environment package.
 
-### Manually wrap up an offline component package using `tiup mirror clone`
+### Manually pack an offline component package using `tiup mirror clone`
+
+The steps are below.
 
 #### Deploy the online TiUP component
 
@@ -59,7 +61,7 @@ Log in to a machine that has access to the Internet using a regular user account
 
 #### Pull the mirror using TiUP
 
-The following steps show how to install a v4.0.0 TiDB cluster using the `tidb` user account in an isolated environment.
+Assume that you are installing a v4.0.0 TiDB cluster using the `tidb` user account in an isolated environment, take the following steps:
 
 1. Pull the needed components on a machine that has access to the Internet:
 
@@ -71,7 +73,7 @@ The following steps show how to install a v4.0.0 TiDB cluster using the `tidb` u
 
     The command above creates a directory named `package` in the current directory, which contains the component package necessary for starting a cluster.
 
-2. Pack the component package by using the `tar` command and send the package to the Control Machine in the isolated environment:
+2. Pack the component package by using the `tar` command and send the package to the control machine in the isolated environment:
 
     {{< copyable "shell-regular" >}}
 
@@ -83,7 +85,7 @@ The following steps show how to install a v4.0.0 TiDB cluster using the `tidb` u
 
 ## Step 2: Deploy the offline TiUP component
 
-After sending the package to the Control Machine of the target cluster, install the TiUP component by running the following command:
+After sending the package to the control machine of the target cluster, install the TiUP component by running the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -202,7 +204,7 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 You need to manually create and edit the cluster initialization configuration file. For the full configuration template, refer to the [TiUP configuration parameter template](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml).
 
-Create a YAML configuration file on the Control Machine, such as `topology.yaml`:
+Create a YAML configuration file on the control machine, such as `topology.yaml`:
 
 {{< copyable "shell-regular" >}}
 
@@ -210,7 +212,7 @@ Create a YAML configuration file on the Control Machine, such as `topology.yaml`
 cat topology.yaml
 ```
 
-```
+```yaml
 # # Global variables are applied to all deployments and used as the default value of
 # # the deployments if a specific deployment value is missing.
 global:
@@ -252,7 +254,7 @@ alertmanager_servers:
 
 ## Step 5: Deploy the TiDB cluster
 
-`/path/to/mirror` is the location of the offline mirror package that is output by running the `local_install.sh` command:
+`/path/to/mirror` is the location of the offline mirror package that is output by the `local_install.sh` command:
 
 {{< copyable "shell-regular" >}}
 
@@ -265,7 +267,7 @@ tiup cluster start tidb-test
 > **Parameter description:**
 >
 > - The name of the cluster deployed by the TiUP cluster is `tidb-test`.
-> - The deployment version is `v4.0.0-rc`. To obtain other supported versions, run `tiup list tidb`.
+> - The deployment version is `v4.0.0`. To obtain other supported versions, run `tiup list tidb`.
 > - The initialization configuration file is `topology.yaml`.
 > - `–user tidb`: log in to the target machine using the `tidb` user account to complete the cluster deployment. The `tidb` user needs to have `ssh` and `sudo` privileges of the target machine. You can use other users with `ssh` and `sudo` privileges to complete the deployment.
 > - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `-user`) that has access to the deployment machine. `[-p]` is used to input the user password interactively.
