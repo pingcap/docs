@@ -18,7 +18,7 @@ TiDB version: 4.0.0 GA
     - Optimize the structure of the `Changefeed` configuration file to improve usability [#588](https://github.com/pingcap/ticdc/pull/588)
     - Add the `ignore-txn-start-ts` configuration item, and change the condition from `commit_ts` to `start_ts` during transactions filtering [#589](https://github.com/pingcap/ticdc/pull/589)
 
-## Important bug fixes
+## Important Bug Fixes
 
 * TiKV
     - Fix the `DefaultNotFound` error that occurs when backing up using Backup & Restore (BR) [#7937](https://github.com/tikv/tikv/pull/7937)
