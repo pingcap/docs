@@ -6,7 +6,7 @@ category: how-to
 
 # Geo-distributed Deployment topology
 
-This document takes the typical architecture of 3 data centers (DC) in 2 cities as an example, and introduces the geo-distributed deployment architecture and the key configuration.
+This document takes the typical architecture of three data centers (DC) in two cities as an example, and introduces the geo-distributed deployment architecture and the key configuration.
 
 ## Topology information
 
@@ -37,7 +37,7 @@ This section describes the key parameter configuration of the TiDB geo-distribut
 
 - The label configuration:
 
-    Since TiKV is deployed across different data centers, if the physical machines go down, the Region Group might lose three of the default five replicas, which causes the cluster unavailability. To address this issue, you can use the label configuration to enable the smart scheduling of PD. In this way, PD ensures that the Region Group does not allow three replicas to be located in TiKV instances on the same machine in the same cabinet of the same data center.
+    Since TiKV is deployed across different data centers, if the physical machines go down, the Region Group might lose three of the default five replicas, which causes the cluster unavailability. To address this issue, you can configure the labels to enable the smart scheduling of PD, which ensures that the Region Group does not allow three replicas to be located in TiKV instances on the same machine in the same cabinet of the same data center.
 
 - The TiKV configuration:
 
@@ -52,7 +52,7 @@ This section describes the key parameter configuration of the TiDB geo-distribut
         host: host2
     ```
 
-- To prevent remote TiVK nodes from launching unnecessary Raft elections, it is required to increase the minimum and maximum number of ticks that the remote TiKV nodes need to launch an election. The two parameters are set to `0` by default.
+- To prevent remote TiKV nodes from launching unnecessary Raft elections, it is required to increase the minimum and maximum number of ticks that the remote TiKV nodes need to launch an election. The two parameters are set to `0` by default.
 
     ```yaml
     raftstore.raft-min-election-timeout-ticks: 1000
@@ -84,4 +84,4 @@ This section describes the key parameter configuration of the TiDB geo-distribut
 
 > **Note:**
 >
-> You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the deployment machines. You can customize the user, or keep the user consistent with the Control Machine.
+> You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.

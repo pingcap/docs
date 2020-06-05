@@ -10,7 +10,7 @@ This document describes the topology and key parameters of the TiKV and TiDB hyb
 
 The hybrid deployment is usually used in the following scenario:
 
-The deployment machine has multiple CPU processors with sufficient memory. To improve the utilization rate of the physical machine resources, multiple instances can be deployed on a single machine, that is, TiDB and TiKV are bound with the CPU core through NUMA to isolate CPU resources. PD and Prometheus are deployed mixedly, but their data directories need to have separate file systems.
+The deployment machine has multiple CPU processors with sufficient memory. To improve the utilization rate of the physical machine resources, multiple instances can be deployed on a single machine, that is, TiDB and TiKV's CPU resources are isolated through NUMA node bindings. PD and Prometheus are deployed together, but their data directories need to use separate file systems.
 
 ## Topology information
 
@@ -28,7 +28,7 @@ The deployment machine has multiple CPU processors with sufficient memory. To im
 
 ### Key parameters
 
-This section introduces the key parameters used when you deploy multiple instances on a single machine, which is mainly used in scenarios when multiple instances of TiDB and TiKV are deployed on a single machine. You need to fill in the results into the configuration template according to the calculation methods provided below.
+This section introduces the key parameters when you deploy multiple instances on a single machine, which is mainly used in scenarios when multiple instances of TiDB and TiKV are deployed on a single machine. You need to fill in the results into the configuration template according to the calculation methods provided below.
 
 - Optimize the configuration of TiKV
 
@@ -69,7 +69,7 @@ This section introduces the key parameters used when you deploy multiple instanc
 
 - The label scheduling configuration
 
-    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Region Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD. In this way, PD ensures that the Region Group has more than two replicas in multiple TiKV instances on the same machine.
+    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Region Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD, which ensures that the Region Group has more than two replicas in multiple TiKV instances on the same machine.
 
     - The TiKV configuration
 
@@ -92,7 +92,7 @@ This section introduces the key parameters used when you deploy multiple instanc
 
 - `numa_node` core binding
 
-    - In the instance parameter module, configure the corresponding `numa_node` parameter and add the number of cores in the corresponding physical CPU.
+    - In the instance parameter module, configure the corresponding `numa_node` parameter and add the number of CPU cores.
     
     - Before using NUMA to bind cores, make sure that the numactl tool is installed, and confirm the information of CPUs in the physical machines. After that, configure the parameters.
 
@@ -102,4 +102,4 @@ This section introduces the key parameters used when you deploy multiple instanc
 >
 > - When editing the configuration file template, modify the required parameter, IP, port, and directory.
 > - Each component uses the global `<deploy_dir>/<components_name>-<port>` as their `deploy_dir` by default. For example, if TiDB specifies the `4001` port, its `deploy_dir` is `/tidb-deploy/tidb-4001` by default. Therefore, in multi-instance scenarios, when specifying a non-default port, you do not need to specify the directory again.
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the deployment machines. You can customize the user, or keep the user consistent with the Control Machine.
+> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
