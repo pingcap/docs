@@ -14,6 +14,8 @@ Starting from v4.0, TiDB provides a new operation and maintenance management too
 
 TiDB Dashboard simplifies the operation and maintenance of the TiDB database. You can view the running status of the entire TiDB cluster through one interface, including cluster information, the running of SQL statements, data hotspots, searching logs, and real-time performance analysis, etc.
 
+## Cluster status
+
 ### Instance panel
 
 ![Instance panel](/media/instance-status-panel.png)
