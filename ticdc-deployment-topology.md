@@ -4,13 +4,13 @@ summary: Learn the deployment topology of TiCDC based on the minimal TiDB topolo
 category: how-to
 ---
 
+# TiCDC Deployment Topology
+
 > **Note:**
 >
 > TiCDC is an experimental feature. It is **NOT** recommended to use TiCDC in production environments.
 
-# TiCDC Deployment Topology
-
-This document describes the deployment topology of TiCDC based on the minimal TiDB topology. 
+This document describes the deployment topology of TiCDC based on the minimal cluster topology. 
 
 TiCDC is a tool for replicating the incremental data of TiDB, introduced in TiDB 4.0. It supports multiple downstream platforms, such as TiDB, MySQL, and MQ. Compared with TiDB Binlog, TiCDC has lower latency and native high availability.
 
@@ -31,4 +31,4 @@ TiCDC is a tool for replicating the incremental data of TiDB, introduced in TiDB
 
 > **Note:**
 >
-> You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the deployment machines. You can customize the user, or keep the user consistent with the Control Machine.
+> You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
