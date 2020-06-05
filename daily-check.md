@@ -69,7 +69,7 @@ The time it takes TiDB to obtain TSO from PD. The following lists reasons for lo
 
 ![Overview panel](/media/overview-panel.png)
 
-You can view the load, memory available, network traffic, and IO utilities. When a bottleneck is found, it is recommended to scale out the capacity, or to optimize the cluster topology, SQL, cluster parameters, etc.
+You can view the load, memory available, network traffic, and I/O utilities. When a bottleneck is found, it is recommended to scale out the capacity, or to optimize the cluster topology, SQL, cluster parameters, etc.
 
 ### Exceptions
 
