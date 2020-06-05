@@ -58,6 +58,7 @@
       - [For Production Environments](/production-deployment-from-binary-tarball.md)
     + Orchestrated Deployment
       - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+      - [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
       - [Use TiDB Ansible](/online-deployment-using-ansible.md)
       - [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
       - [Use Docker](/test-deployment-using-docker.md)
@@ -437,6 +438,7 @@
     - [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    - [3.0.15](/releases/release-3.0.15.md)
     - [3.0.14](/releases/release-3.0.14.md)
     - [3.0.13](/releases/release-3.0.13.md)
     - [3.0.12](/releases/release-3.0.12.md)
