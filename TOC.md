@@ -335,7 +335,6 @@
     + Backup & Restore (BR)
       - [Use BR](/br/backup-and-restore-tool.md)
       - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      - [BR storages](/br/backup-and-restore-storages.md)
       - [BR FAQ](/br/backup-and-restore-faq.md)
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
