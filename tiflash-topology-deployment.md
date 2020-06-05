@@ -8,7 +8,7 @@ category: how-to
 
 This document describes the deployment topology of TiFlash based on the minimal TiDB topology.
 
-TiFlash is a columnar storage engine, and has become the standard configuration for the cluster topology. It is suitable for real-time HTAP applications.
+TiFlash is a columnar storage engine, and gradually becomes the standard cluster topology. It is suitable for real-time HTAP applications.
 
 ## Topology information
 
@@ -27,10 +27,10 @@ TiFlash is a columnar storage engine, and has become the standard configuration 
 
 ### Key parameters
 
-- To enable the [Placement Rules](/configure-placement-rules.md) feature of PD, set the value of `replication.enable-placement-rules` in the configuration templates to `true`.
+- To enable the [Placement Rules](/configure-placement-rules.md) feature of PD, set the value of `replication.enable-placement-rules` in the configuration template to `true`.
 - The instance level `"-host"` configuration in `tiflash_servers` only supports IP, not domain name.
 - For detailed TiFlash parameter description, see [TiFlash Configuration](/tiflash/tiflash-configuration.md).
 
 > **Note:**
 >
-> You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the deployment machines. You can customize the user, or keep the user consistent with the Control Machine.
+> You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
