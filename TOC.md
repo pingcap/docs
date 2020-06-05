@@ -10,8 +10,10 @@
   + Benchmarks
     - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
+    + [Sysbench Performance Test - v4.0 vs. v3.0](/benchmark/benchmark-sysbench-v4-vs-v3.md)
+    + [TPC-H Performance Test - v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+    + [TPC-C Performance Test - v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
-    - [TPC-C Performance Test - v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - [Quick Start with TiDB](/quick-start-with-tidb.md)
@@ -56,6 +58,7 @@
       - [For Production Environments](/production-deployment-from-binary-tarball.md)
     + Orchestrated Deployment
       - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+      - [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
       - [Use TiDB Ansible](/online-deployment-using-ansible.md)
       - [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
       - [Use Docker](/test-deployment-using-docker.md)
@@ -428,6 +431,7 @@
     - [4.0.0-beta.1](/releases/release-4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/release-4.0.0-beta.md)
   + v3.1
+    - [3.1.2](/releases/release-3.1.2.md)
     - [3.1.1](/releases/release-3.1.1.md)
     - [3.1.0 GA](/releases/release-3.1.0-ga.md)
     - [3.1.0-rc](/releases/release-3.1.0-rc.md)
@@ -435,6 +439,7 @@
     - [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    - [3.0.15](/releases/release-3.0.15.md)
     - [3.0.14](/releases/release-3.0.14.md)
     - [3.0.13](/releases/release-3.0.13.md)
     - [3.0.12](/releases/release-3.0.12.md)
