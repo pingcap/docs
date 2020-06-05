@@ -303,33 +303,29 @@ The current topology is as follows:
 
 ## Scale in a TiFlash node
 
-If you want to remove the TiFlash node from the `10.0.1.4` host, take the following steps.
+If you want to remove a TiFlash node from the `10.0.1.4` host, take the following steps.
 
-> **Note:**
->
-> The scale-in process described in this section does not delete the data on the node that goes offline. If you need to bring the node back again, delete the data manually.
+### 1. Adjust the number of replicas of the tables according to the number of remaining TiFlash nodes
 
-1. Take the node offline:
+Before the node goes down, make sure that the number of remaining nodes in the TiFlash cluster is no smaller than the maximum number of replicas of all tables. Otherwise, modify the number of TiFlash replicas of the related tables.
 
-    To take offline the node to be scaled in, refer to [Take a TiFlash node down](/tiflash/maintain-tiflash.md#take-a-tiflash-node-down).
+1. For all tables whose replicas are greater than the number of remaining TiFlash nodes in the cluster, execute the following command in the TiDB client:
 
-2. Check the node status:
+    {{< copyable "sql" >}}
 
-    The scale-in process takes some time.
-
-    You can use Grafana or pd-ctl to check whether the node has been successfully taken offline.
-
-3. Scale in the TiFlash node:
-
-    After the `store` corresponding to TiFlash disappears, or the `state_name` becomes `Tombstone`, it means that the TiFlash node has successfully gone offline. Then execute the following command to scale in the TiFlash node:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000
+    ```sql
+    alter table <db-name>.<table-name> set tiflash replica 0;
     ```
 
-4. View the cluster status:
+2. Wait for the TiFlash replicas of the related tables to be deleted. [Check the table replication progress](/tiflash/use-tiflash.md#check-the-replication-progress) and the replicas are deleted if the replication information of the related tables is not found.
+
+### 2. Scale in the TiFlash node
+
+Next, perform the scale-in operation with one of the following solutions.
+
+#### Solution 1: Using TiUP to scale in the TiFlash node
+
+1. First, confirm the name of the node to be taken down:
 
     {{< copyable "shell-regular" >}}
 
@@ -337,17 +333,100 @@ If you want to remove the TiFlash node from the `10.0.1.4` host, take the follow
     tiup cluster display <cluster-name>
     ```
 
-    Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster.
+2. Scale in the TiFlash node (assume that the node name is `10.0.1.4:9000` from Step 1):
 
-The current topology is as follows:
+    {{< copyable "shell-regular" >}}
 
-| Host IP   | Service   |
-|:----|:----|
-| 10.0.1.3   | TiDB + TiFlash + TiCDC  |
-| 10.0.1.4   | TiDB + PD + TiCDC **（TiFlash is deleted）**  |
-| 10.0.1.5   | TiDB + Monitor  |
-| 10.0.1.1   | TiKV    |
-| 10.0.1.2   | TiKV    |
+    ```shell
+    tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000
+    ```
+
+#### Solution 2: Manually scale in the TiFlash node
+
+In special cases (such as when a node need to be forcibly taken down), or if the TiUP scale-in operation fails, you can manually scale in a TiFlash node with the following steps.
+
+1. Use the store command of pd-ctl to view the store ID corresponding to this TiFlash node.
+
+    * Enter the store command in [pd-ctl](/pd-control.md) (the binary file is under `resources/bin` in the tidb-ansible directory).
+
+    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl pd`:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        tiup ctl pd -u <pd-address> store
+        ```
+
+2. Scale in the TiFlash node in pd-ctl:
+
+    * Enter `store delete <store_id>` in pd-ctl (`<store_id>` is the store ID of the TiFlash node found in the previous step.
+
+    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl pd`:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        tiup ctl pd -u <pd-address> store delete <store_id>
+        ```
+
+3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
+
+    If, after waiting for a long time, the node still fails to disappear or the `state_name` fails to become `Tombstone`, consider using the following command to force the node out of the cluster.
+
+    **Note that the command will directly discard the replicas on the TiFlash node, which might cause the query to fail.**
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    curl -X POST 'http://<pd-address>/pd/api/v1/store/<store_id>/state?state=Tombstone'
+    ```
+
+4. Manually delete TiFlash data files, whose location is in TiFlash's configuration file.
+
+> **Note:**
+>
+> Before all TiFlash nodes in the cluster stop running, if not all tables replicated to TiFlash are canceled, you need to manually clean up the replication rules in PD, or the TiFlash node cannot be taken down successfully.
+
+The steps to manually clean up the replication rules in PD are below:
+
+1. View all data replication rules related to TiFlash in the current PD instance:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    curl http://<pd_ip>:<pd_port>/pd/api/v1/config/rules/group/tiflash
+    ```
+
+    ```
+    [
+      {
+        "group_id": "tiflash",
+        "id": "table-45-r",
+        "override": true,
+        "start_key": "7480000000000000FF2D5F720000000000FA",
+        "end_key": "7480000000000000FF2E00000000000000F8",
+        "role": "learner",
+        "count": 1,
+        "label_constraints": [
+          {
+            "key": "engine",
+            "op": "in",
+            "values": [
+              "tiflash"
+            ]
+          }
+        ]
+      }
+    ]
+    ```
+
+2. Remove all data replication rules related to TiFlash. Take the rule whose `id` is `table-45-r` as an example. Delete it by the following command:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    curl -v -X DELETE http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/table-45-r
+    ```
 
 ## Scale in a TiCDC node
 
