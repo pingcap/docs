@@ -351,7 +351,7 @@ br backup raw --pd $PD_ADDR \
 Here, the parameters of `--start`  and `--end` are decoded using the method specified by `--format` before being sent to TiKV. Currently, the following methods are available:
 
 - "raw": The input string is directly encoded as a key in binary format.
-- "hex": The default encoding method. The input string is seen as a hexadecimal number.
+- "hex": The default encoding method. The input string is treated as a hexadecimal number.
 - "escape": First escape the input string, and then encode it into binary format.
 
 ## Restore cluster data
