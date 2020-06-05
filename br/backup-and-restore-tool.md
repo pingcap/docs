@@ -447,7 +447,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 If you restore data from the Amazon S3 backend, instead of `local` storage, you need to specify the S3 storage path in the `storage` sub-command, and allow the BR node and the TiKV node to access to Amazon S3.
 
-Pass `SecretKey` and `AccessKey` of the account that has permission to access the S3 backend to the BR node. Here `SecretKey` and `AccessKey` are passed as environment variables. And then pass the permission to the TiKV node through BR.
+Pass `SecretKey` and `AccessKey` of the account that has permission to access the S3 backend to the BR node. Here `SecretKey` and `AccessKey` are passed as environment variables. Then pass the permission to the TiKV node through BR.
 
 {{< copyable "shell-regular" >}}
 
