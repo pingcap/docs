@@ -54,4 +54,4 @@ When you use `local` storage, `backupmeta` is generated on the node where BR is 
 
 During data backup, backup files are generated on the Leader nodes of each Region. The size of the backup is equal to the data size, with no redundant replicas. Therefore, the total data size is approximately the total number of TiKV data divided by the number of replicas.
 
-However, if you want to restore data locally, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
+However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
