@@ -20,7 +20,7 @@ If you use TiUP to deploy TiCDC, you can choose one of the following ways:
 - Deploy TiCDC when deploying a TiDB cluster
 - Deploy a TiCDC component on an existing TiDB cluster
 
-#### Deploy a TiDB cluster with the TiCDC component
+#### Deploy TiCDC when deploying a TiDB cluster
 
 For details, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file).
 
