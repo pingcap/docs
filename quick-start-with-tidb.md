@@ -2,6 +2,7 @@
 title: Quick Start Guide for the TiDB Database Platform
 summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
 category: how-to
+aliases: ['/docs/QUICKSTART']
 ---
 
 # Quick Start Guide for the TiDB Database Platform
@@ -117,7 +118,7 @@ This section describes how to deploy a TiDB cluster using a YAML file of the sma
 
 ### Prepare
 
-Prepare a deployment machine that meets the following requirements:
+Prepare a target machine that meets the following requirements:
 
 - CentOS 7.3 or a later version is installed
 - The Linux OS has access to the Internet, which is required to download TiDB and related software installation packages
@@ -126,16 +127,16 @@ The smallest TiDB cluster topology is as follows:
 
 | Instance | Count | IP | Configuration |
 |:-- | :-- | :-- | :-- |
-| TiKV | 3 | 10.0.1.1 <br> 10.0.1.1 <br> 10.0.1.1 | Avoid conflict between the port and the directory |
-| TiDB | 1 | 10.0.1.1 | The default port <br> Global directory configuration |
-| PD | 1 | 10.0.1.1 | The default port <br> Global directory configuration |
-| TiFlash | 1 | 10.0.1.1 | The default port <br> Global directory configuration |
-| Monitor | 1 | 10.0.1.1 | The default port <br> Global directory configuration |
+| TiKV | 3 | 10.0.1.1 <br/> 10.0.1.1 <br/> 10.0.1.1 | Avoid conflict between the port and the directory |
+| TiDB | 1 | 10.0.1.1 | The default port <br/> Global directory configuration |
+| PD | 1 | 10.0.1.1 | The default port <br/> Global directory configuration |
+| TiFlash | 1 | 10.0.1.1 | The default port <br/> Global directory configuration |
+| Monitor | 1 | 10.0.1.1 | The default port <br/> Global directory configuration |
 
-Other requirements for the deployment machine:
+Other requirements for the target machine:
 
 - The `root` user and its password is required
-- [Stop the firewall service of the deployment machine](/production-deployment-using-tiup.md#how-to-stop-the-firewall-service-of-deployment-machines), or open the port needed by the TiDB cluster nodes
+- [Stop the firewall service of the target machine](/production-deployment-using-tiup.md#how-to-stop-the-firewall-service-of-deployment-machines), or open the port needed by the TiDB cluster nodes
 - Currently, TiUP only supports deploying TiDB on the x86_64 (AMD64) architecture (the ARM architecture will be supported in TiDB 4.0 GA):
 
     - It is recommended to use CentOS 7.3 or later versions on AMD64
@@ -145,7 +146,7 @@ Other requirements for the deployment machine:
 
 > **Note:**
 >
-> You can log in to the deployment machine as a regular user or the `root` user. The following steps use the `root` user as an example.
+> You can log in to the target machine as a regular user or the `root` user. The following steps use the `root` user as an example.
 
 1. Download and install TiUP:
 
@@ -244,7 +245,7 @@ Other requirements for the deployment machine:
 
     - `user: "tidb"`: Use the `tidb` system user (automatically created during deployment) to perform the internal management of the cluster. By default, use port 22 to log in to the target machine via SSH.
     - `replication.enable-placement-rules`: This PD parameter is set to ensure that TiFlash runs normally.
-    - `host`: The IP of the deployment machine.
+    - `host`: The IP of the target machine.
 
 6. Execute the cluster deployment command:
 
@@ -255,7 +256,7 @@ Other requirements for the deployment machine:
     ```
 
     - `<cluster-name>`: Set the cluster name
-    - `<tidb-version>`: Set the TiDB cluster version. You can see all the supported TiDB versions by running the `tiup list tidb --refresh` command
+    - `<tidb-version>`: Set the TiDB cluster version. You can see all the supported TiDB versions by running the `tiup list tidb` command
 
     Enter "y" and the `root` user's password to complete the deployment:
 
