@@ -483,7 +483,7 @@ Restoring incremental data is similar to [restoring full data using BR](#restore
 > 
 > This feature is in the experiment, without being thoroughly tested. It is highly **not recommended** to use this feature in the production environment.
 
-Similar to [backing up Rwa KV](#back-up-raw-kv-experimental-feature), you can execute the following command to restore Raw KV:
+Similar to [backing up Raw KV](#back-up-raw-kv-experimental-feature), you can execute the following command to restore Raw KV:
 
 {{< copyable "shell-regular" >}}
 
