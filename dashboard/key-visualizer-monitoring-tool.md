@@ -1,13 +1,13 @@
 ---
 title: Key Visualizer Page
-summary: Learn how to monitor traffic using the Key Visualizer page.
+summary: Learn how to use Key Visualizer to monitor traffic.
 category: how-to
 aliases: ['/docs/dev/key-visualizer-monitoring-tool/']
 ---
 
 # Key Visualizer Page
 
-The Key Visualizer page of TiDB Dashboard is used to analyze the usage of TiDB and troubleshooting the traffic hotspot. This page visually shows the traffic of the TiDB cluster over a period of time.
+The Key Visualizer page of TiDB Dashboard is used to analyze the usage of TiDB and troubleshoot traffic hotspots. This page visually shows the traffic of the TiDB cluster over a period of time.
 
 ## Access Key Visualizer page
 
@@ -21,7 +21,7 @@ You can use one of the following two methods to access the Key Visualizer page:
 
 > **Note:**
 >
-> The Key Visualizer feature is disabled by default. If you use this feature for the first time, You need to manually enable it. Follow the interface guide to enable this feature, or see the [Settings](#settings) section of this document.
+> The Key Visualizer feature is disabled by default. If you use this feature for the first time, You need to manually enable it. To enable this feature, follow the interface guide or see the [Settings](#settings) section of this document.
 
 ## Interface demonstration
 
@@ -74,7 +74,7 @@ To use the Key Visualizer page for the first time, you need to manually enable t
 
 ![Feature disabled](/media/dashboard/dashboard-keyviz-not-enabled.png)
 
-After this feature is enabled, you can open the settings page by clicking the **Settings** icon at the upper right corner:
+After this feature is enabled, you can open the settings page by clicking the **Settings** icon in the upper right corner:
 
 ![Settings icon](/media/dashboard/dashboard-keyviz-settings-button.png)
 
@@ -82,7 +82,7 @@ The settings page is shown as follows:
 
 ![Settings page](/media/dashboard/dashboard-keyviz-settings.png)
 
-Set whether to start the data collection through the switch, and click **Save** to take effect. After enabling the feature, you can see that the toolbar is available:
+Set whether to start data collection through the switch, and click **Save** to take effect. After enabling the feature, you can see that the toolbar is available:
 
 ![Toolbar](/media/dashboard/dashboard-keyviz-toolbar.png)
 
