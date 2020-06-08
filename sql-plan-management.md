@@ -136,7 +136,7 @@ After automatic binding creation is enabled, the historical SQL statements in th
 
 > **Note:**
 >
-> Because TiDB has some embedded SQL statements to ensure the correctness of some functions, baseline capturing by default automatically shields these SQL statements.
+> Because TiDB has some embedded SQL statements to ensure the correctness of some features, baseline capturing by default automatically shields these SQL statements.
 
 ## Baseline evolution
 
