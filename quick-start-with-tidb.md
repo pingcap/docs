@@ -302,3 +302,17 @@ Other requirements for the target machine:
 TiDB-Wasm enables you to run a TiDB server instance in a browser so that you can experiment with SQL and test TiDB compatibility with MySQL queries.
 
 Click to try TiDB-Wasm playground: <https://tour.tidb.io>. It takes about 10 seconds to launch the TiDB server instance in your browser. The playground walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations.
+
+## What's next
+
+- If you have just deployed a TiDB cluster for the local test environment:
+
+    - Learn [Basic SQL operations in TiDB](/basic-sql-operations.md)
+    - Learn [TiDB key features and scenarios](/overview.md)
+    - Learn [TiDB's compatibility with MySQL](/mysql-compatibility.md)
+
+- If you are ready to deploy a TiDB cluster for the production environment:
+
+    - [Deploy TiDB online using TiUP](/production-deployment-using-tiup.md)
+    - [Deploy TiDB online using TiUP](/production-offline-deployment-using-tiup.md)
+    - [Deploy TiDB on Cloud using TiDB Operator](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/)
