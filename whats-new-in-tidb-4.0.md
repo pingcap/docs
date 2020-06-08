@@ -49,7 +49,7 @@ TiUP is a new package manager tool introduced in v4.0 that is used to manage all
 
 ### SQL features
 
-- Introduce the automatic capture and evolution of SQL Bind to SQL Plan Management, which improves the usability and stability of the execution plan. See [SQL Plan Management](/execution-plan-binding.md) for details.
+- Introduce the automatic capture and evolution of SQL Bind to SQL Plan Management, which improves the usability and stability of the execution plan. See [SQL Plan Management](/sql-plan-management.md) for details.
 - Add 15 new SQL Hints to control the behavior of the optimizer that generates the execution plan and the behavior of the execution engine that executes queries. See [SQL Hint](/optimizer-hints.md) for details.
 - Support the `SELECT INTO OUTFILE` statement which is used to export table data into the specified text file. Using this feature with Load Data, you can easily import and export data between databases.
 - Support customizing the sequence object and provide the `CACHE/NO_CACHE` and `CYCLE/NO_CYCLE` options to define different sequence attributes. You can use the sequence to replace the third-party ID generation. See [Sequence](/sql-statements/sql-statement-create-sequence.md) for details.
