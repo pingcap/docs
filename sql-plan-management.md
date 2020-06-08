@@ -7,13 +7,13 @@ aliases: ['/docs/dev/reference/performance/execution-plan-bind/','/docs/dev/exec
 
 # SQL Plan Management (SPM)
 
-SQL Plan Management is a set of functions that execute SQL binding to manually interfere with the SQL execution plans. These functions include SQL binding, baseline capturing, and baseline evolution.
+SQL Plan Management is a set of functions that execute SQL bindings to manually interfere with SQL execution plans. These functions include SQL binding, baseline capturing, and baseline evolution.
 
 ## SQL binding
 
-SQL binding is the basis of SPM. The [Optimizer Hints](/optimizer-hints.md) document introduces how to select a specific execution plan using Hint. However, sometimes you need to interfere with execution selection without modifying SQL statements. With SQL binding, you can select a specified execution plan without modifying SQL statements.
+An SQL binding is the basis of SPM. The [Optimizer Hints](/optimizer-hints.md) document introduces how to select a specific execution plan using hints. However, sometimes you need to interfere with execution selection without modifying SQL statements. With SQL bindings, you can select a specified execution plan without modifying SQL statements.
 
-### Create binding
+### Create a binding
 
 {{< copyable "sql" >}}
 
@@ -49,7 +49,7 @@ explain select * from t1, t2 where t1.id = t2.id;
 
 When the first `select` statement is being executed, the optimizer adds the `sm_join(t1, t2)` hint to the statement through the binding in the GLOBAL scope. The top node of the execution plan in the `explain` result is MergeJoin. When the second `select` statement is being executed, the optimizer uses the binding in the SESSION scope instead of the binding in the GLOBAL scope and adds the `hash_join(t1, t2)` hint to the statement. The top node of the execution plan in the `explain` result is HashJoin.
 
-`Parameterization` is a process that converts a constant in SQL to a variable parameter, with standardized processing on the spaces and line breaks in the SQL statement, for example,
+`Parameterization` is a process that converts a constant in an SQL statement to a variable parameter, with standardized processing on the spaces and line breaks in the SQL statement, for example,
 
 {{< copyable "sql" >}}
 
@@ -59,7 +59,7 @@ select * from t where a >    1
 select * from t where a > ？
 ```
 
-Each standardized SQL statement can have only one binding created using `CREATE BINDING` at a time. When multiple bindings are created for the same standardized SQL, the last created binding is be retained, and all previous bindings (created and evolved) are marked as deleted. But session bindings and global bindings can coexist and are not affected by this logic.
+Each standardized SQL statement can have only one binding created using `CREATE BINDING` at a time. When multiple bindings are created for the same standardized SQL statement, the last created binding is retained, and all previous bindings (created and evolved) are marked as deleted. But session bindings and global bindings can coexist and are not affected by this logic.
 
 In addition, when you create a binding, TiDB requires that the session is in a database context, which means that a database is specified when the client is connected or `use ${database}` is executed.
 
@@ -118,7 +118,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | original_sql  |  Original SQL statement after parameterization |
 | bind_sql | Bound SQL statement with hints |
 | default_db | Default database |
-| status | Status including Using, Deleted, Invalid, rejected, and pending verification|
+| status | Status including Using, Deleted, Invalid, Rejected, and Pending verification|
 | create_time | Creating time |
 | update_time | Updating time |
 | charset | Character set |
@@ -140,7 +140,7 @@ After automatic binding creation is enabled, the historical SQL statements in th
 
 ## Baseline evolution
 
-Baseline evolution is an important function of SPM introduced in TiDB v4.0.0-rc.
+Baseline evolution is an important feature of SPM introduced in TiDB v4.0.0-rc.
 
 As data updates, the previously bound execution plan might no longer be optimal. The baseline evolution feature can automatically optimize the bound execution plan.
 
