@@ -343,7 +343,7 @@ Next, perform the scale-in operation with one of the following solutions.
 
 #### Solution 2: Manually scale in the TiFlash node
 
-In special cases (such as when a node need to be forcibly taken down), or if the TiUP scale-in operation fails, you can manually scale in a TiFlash node with the following steps.
+In special cases (such as when a node needs to be forcibly taken down), or if the TiUP scale-in operation fails, you can manually scale in a TiFlash node with the following steps.
 
 1. Use the store command of pd-ctl to view the store ID corresponding to this TiFlash node.
 
