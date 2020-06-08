@@ -10,7 +10,7 @@ The instance profiling page summarizes the internal performance data of each TiD
 
 The summarized performance data can be displayed as a flame graph or a directed acyclic graph, which visually shows the internal operations and proportions performed on the instances during the performance summary period. With this graph, you can quickly learn the main CPU resource consumption of these instances.
 
-## Access instance profiling page
+## Access the page
 
 You can access the instance profiling page using one of the following methods:
 
@@ -18,7 +18,7 @@ You can access the instance profiling page using one of the following methods:
 
   ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 
-- visit <http://127.0.0.1:2379/dashboard/#/instance_profiling> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+- Visit <http://127.0.0.1:2379/dashboard/#/instance_profiling> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 ## Start Profiling
 

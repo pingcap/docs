@@ -22,11 +22,11 @@ You can use TiDB Dashboard in the following desktop browsers which are common an
 
 > **Note:**
 >
-> If you use the browsers above of earlier versions or other browsers to access TiDB Dashboard, some interfaces might not work properly.
+> If you use the browsers above of earlier versions or other browsers to access TiDB Dashboard, some functions might not work properly.
 
-## Login
+## Sign in
 
-For the first-time access, TiDB Dashboard displays the user login interface, as shown in the image below. You can log in using the TiDB `root` account.
+For the first-time access, TiDB Dashboard displays the user sign in interface, as shown in the image below. You can sign in using the TiDB `root` account.
 
 ![Login interface](/media/dashboard/dashboard-access-login.png)
 
@@ -37,7 +37,7 @@ If the one of the following situations exists, the login might fail:
 - TiDB is not started or cannot be accessed.
 - Wrong `root` password.
 
-Once you have logged in, the login status remains within the next 24 hours. To learn how to log out, refer to the [Log out](#log-out) section.
+Once you have signed in, the session remains valid within the next 24 hours. To learn how to sign out, refer to the [Logout](#logout) section.
 
 ## Switch language
 
@@ -46,7 +46,7 @@ The following languages are supported in TiDB Dashboard:
 - Chinese (simplified)
 - English
 
-In the login interface, you can click the **Switch Language** drop-down box to switch the interface language.
+In the **sign in** page, you can click the **Switch Language** drop-down box to switch the interface language.
 
 ![Switch language](/media/dashboard/dashboard-access-switch-language.png)
 
