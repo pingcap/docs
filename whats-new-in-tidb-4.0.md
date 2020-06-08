@@ -18,7 +18,7 @@ TiDB v4.0 was officially released on May 28th, 2020. In this release, we have ma
 
 ### Storage engine
 
-+ TiFlash is a key component that makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. Complying with the Multi-Raft Learner protocol, TiFlash replicates data from TiKV in real time, which ensures that data is strongly consistent between TiKV, a row-based storage engine, and TiFlash, a columnar storage engine. You can deploy TiKV and TiFlash on different machines to isolate HTAP resources. See [TiFlash](/tiflash/tiflash-overview.md) for details.
++ TiFlash is a key component that makes TiDB essentially a Hybrid Transactional/Analytical Processing (HTAP) database. Complying with the Multi-Raft Learner protocol, TiFlash replicates data from TiKV in real time, which ensures that data is strongly consistent between TiKV, a row-based storage engine, and TiFlash, a columnar storage engine. You can deploy TiKV and TiFlash on different machines to isolate HTAP resources. See [TiFlash](/tiflash/tiflash-overview.md) for details.
 + In v4.0, TiKV provides new storage formats to improve the efficiency of encoding and decoding in the wide-table scenario.
 
 ### TiDB Dashboard
