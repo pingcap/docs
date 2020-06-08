@@ -25,14 +25,14 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
     - You still use the `'push'` method to collect monitoring metrics (since v3.0, `pull` is the default mode, which is supported if you have not modified this mode).
     - In the `inventory.ini` configuration file, the `node_exporter` or `blackbox_exporter` item of the machine is set to non-default ports through `node_exporter_port` or `blackbox_exporter_port`, which is compatible if you have unified the configuration in the `group_vars` directory.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
-- Before you upgrade from v2.0.6 or earlier to v4.0.0 or later, you have to make sure that no DDL operations are running in the cluster, especially the `Add Index` operation that is time-consuming. Perform the upgrade after all DDL operations are completed.
-- Starting from v2.1, TiDB enables parallel DDL. Therefore, clusters **older than v2.0.1** cannot be rolling upgraded to v4.0.0 or later. Instead, you can choose the following solutions:
+- Before you upgrade from v2.0.6 or earlier to v4.0.0 or later, you must make sure that no DDL operations are running in the cluster, especially the `Add Index` operation that is time-consuming. Perform the upgrade after all DDL operations are completed.
+- Starting from v2.1, TiDB enables parallel DDL. Therefore, clusters **older than v2.0.1** cannot be upgraded to v4.0.0 or later via a direct rolling upgrade. Instead, you can choose one of the following solutions:
     - Upgrade directly from TiDB v2.0.1 or earlier to v4.0.0 or later in planned downtime
     - Rolling upgrade to v2.0.1 or a later 2.0 version, then rolling upgrade to v4.0.0 or later
 
 > **Note:**
 >
-> Do not execute any DDL request during the upgrade, or an undefined behavior issue might occur.
+> Do not execute any DDL request during the upgrade, otherwise an undefined behavior issue might occur.
 
 ## Install TiUP on the Control Machine
 
@@ -72,7 +72,7 @@ If you have installed TiUP before, execute the following command to update TiUP 
 
 > **Note:**
 >
-> If the result of `tiup --version` shows that your TiUP version is below v1.0.0, run `tiup update --self` first to update the TiUP version before running the following command.
+> If the result of `tiup --version` shows that your TiUP version is earlier than v1.0.0, run `tiup update --self` first to update the TiUP version before running the following command.
 
 {{< copyable "shell-regular" >}}
 
@@ -155,7 +155,7 @@ After the import is complete, you can check the current cluster status by execut
 
 This section describes how to perform a rolling upgrade to the TiDB cluster and how to verify the version after the upgrade.
 
-### Rolling upgrade the TiDB cluster to a specified version
+### Upgrade the TiDB cluster to a specified version
 
 {{< copyable "shell-regular" >}}
 
@@ -163,7 +163,7 @@ This section describes how to perform a rolling upgrade to the TiDB cluster and 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to update the cluster to v4.0.0:
+For example, if you want to upgrade the cluster to v4.0.0:
 
 {{< copyable "shell-regular" >}}
 
@@ -171,7 +171,7 @@ For example, if you want to update the cluster to v4.0.0:
 tiup cluster upgrade <cluster-name> v4.0.0
 ```
 
-Performing the rolling upgrade to the cluster will upgrade all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes. The instance is directly stopped after this timeout time.
+Performing a rolling upgrade to the cluster will upgrade all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes. The instance is directly stopped after this timeout time.
 
 To perform the upgrade immediately without evicting the leader, specify `--force` in the command above. This method causes performance jitter but not data loss.
 
@@ -223,7 +223,7 @@ https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz
 
 ### Failure to upgrade the TiFlash component during the cluster upgrade
 
-Before v4.0.0-rc.2, TiFlash might have some incompatibility issues. This might cause problems when you upgrade a cluster that includes the TiFlash component to v4.0.0-rc.2 or a later version. If so, go to [ASK TUG](https://asktug.com/) and ask for R&D support.
+Before v4.0.0-rc.2, TiFlash might have some incompatibility issues. This might cause problems when you upgrade a cluster that includes the TiFlash component to v4.0.0-rc.2 or a later version. If so, [contact the R&D support](mailto:support@pingcap.com).
 
 ## TiDB 4.0 compatibility changes
 
@@ -231,6 +231,6 @@ Before v4.0.0-rc.2, TiFlash might have some incompatibility issues. This might c
 - TiDB v4.0 supports the length check for table names. The length limit is 64 characters. If you rename a table after the upgrade and the new name exceeds this length limit, an error is reported. v3.0 and earlier versions do not have this error reporting.
 - TiDB v4.0 supports the length check for partition names of the partitioned tables. The length limit is 64 characters. After the upgrade, if you create or alter a partitioned table with a partition name that exceeds the length limit, an error is expected to occur in 4.0 versions, but not in 3.0 and earlier versions.
 - In v4.0, the format of the `explain` execution plan is improved. Pay attention to any automatic analysis program that is customized for `explain`.
-- TiDB v4.0 supports [read committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level). After upgrading to v4.0, setting the isolation level to `READ-COMMITTED` in a pessimistic transaction takes effect. In 3.0 and earlier versions, the setting does not take effect.
+- TiDB v4.0 supports [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level). After upgrading to v4.0, setting the isolation level to `READ-COMMITTED` in a pessimistic transaction takes effect. In 3.0 and earlier versions, the setting does not take effect.
 - In v4.0, executing `alter reorganize partition` returns an error. In earlier versions, no error is reported because only the syntax is supported and the statement is not taking any effect.
 - In v4.0, creating `linear hash partition` or `subpartition` tables does not take effect and they are converted to regular tables. In earlier versions, they are converted to regular partitioned tables.
