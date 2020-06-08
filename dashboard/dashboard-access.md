@@ -14,7 +14,7 @@ To access TiDB Dashboard, visit <http://127.0.0.1:2379/dashboard> via your brows
 
 ## Browser compatibility
 
-You can use TiDB Dashboard in the following desktop browsers which are common and updated timely:
+You can use TiDB Dashboard in the following common desktop browsers of a relatively newer version:
 
 - Chrome >= 77
 - Firefox >= 68
@@ -30,7 +30,7 @@ For the first-time access, TiDB Dashboard displays the user sign in interface, a
 
 ![Login interface](/media/dashboard/dashboard-access-login.png)
 
-If the one of the following situations exists, the login might fail:
+If one of the following situations exists, the login might fail:
 
 - TiDB `root` user does not exist.
 - PD is not started or cannot be accessed.
@@ -43,10 +43,10 @@ Once you have signed in, the session remains valid within the next 24 hours. To 
 
 The following languages are supported in TiDB Dashboard:
 
-- Chinese (simplified)
 - English
+- Chinese (simplified)
 
-In the **sign in** page, you can click the **Switch Language** drop-down box to switch the interface language.
+In the **SQL User Sign In** page, you can click the **Switch Language** drop-down list to switch the interface language.
 
 ![Switch language](/media/dashboard/dashboard-access-switch-language.png)
 
