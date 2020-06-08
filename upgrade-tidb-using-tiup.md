@@ -28,7 +28,7 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
 - Before you upgrade from v2.0.6 or earlier to v4.0.0 or later, you must make sure that no DDL operations are running in the cluster, especially the `Add Index` operation that is time-consuming. Perform the upgrade after all DDL operations are completed.
 - Starting from v2.1, TiDB enables parallel DDL. Therefore, clusters **older than v2.0.1** cannot be upgraded to v4.0.0 or later via a direct rolling upgrade. Instead, you can choose one of the following solutions:
     - Upgrade directly from TiDB v2.0.1 or earlier to v4.0.0 or later in planned downtime
-    - Rolling upgrade to v2.0.1 or a later 2.0 version, then rolling upgrade to v4.0.0 or later
+    - Perform a rolling upgrade from the current version to v2.0.1 or a later 2.0 version, then perform another rolling upgrade to v4.0.0 or later
 
 > **Note:**
 >
