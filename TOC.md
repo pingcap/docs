@@ -10,8 +10,10 @@
   + Benchmarks
     - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
+    + [Sysbench Performance Test - v4.0 vs. v3.0](/benchmark/benchmark-sysbench-v4-vs-v3.md)
+    + [TPC-H Performance Test - v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+    + [TPC-C Performance Test - v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
-    - [TPC-C Performance Test - v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - [Quick Start with TiDB](/quick-start-with-tidb.md)
@@ -50,15 +52,17 @@
     - [TiDB Lightning Tutorial](/get-started-with-tidb-lightning.md)
     - [TiSpark Quick Start Guide](/get-started-with-tispark.md)
   + Deploy
-    - [Hardware Recommendations](/hardware-and-software-requirements.md)
+    - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
     + From Binary Tarball
       - [For Testing Environments](/test-deployment-from-binary-tarball.md)
       - [For Production Environments](/production-deployment-from-binary-tarball.md)
     + Orchestrated Deployment
       - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+      - [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
       - [Use TiDB Ansible](/online-deployment-using-ansible.md)
       - [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
       - [Use Docker](/test-deployment-using-docker.md)
+    + [Check Cluster Status](/post-installation-check.md)
     + Geographic Redundancy
       - [Overview](/geo-redundancy-deployment.md)
       - [Configure Location Awareness](/location-awareness.md)
@@ -87,9 +91,9 @@
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
       - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
-      - [Use BR](/br/backup-and-restore-tool.md)
-      - [BR Usage Scenarios](/br/backup-and-restore-use-cases.md)
-      - [BR storages](/br/backup-and-restore-storages.md)
+      + Use BR
+        - [Use BR](/br/backup-and-restore-tool.md)
+        - [BR Use Cases](/br/backup-and-restore-use-cases.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
@@ -273,7 +277,6 @@
     + tikv-server
       - [Configuration Flags](/command-line-flags-for-tikv-configuration.md)
       - [Configuration File](/tikv-configuration-file.md)
-    - [Dynamic Configuration Change](/dynamic-config.md)
   + Security
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [The TiDB Access Privilege System](/privilege-management.md)
@@ -364,6 +367,12 @@
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
   + Tools
     - [Tools User Guide](/ecosystem-tool-user-guide.md)
+    - [Download](/download-ecosystem-tools.md)
+    + Backup & Restore (BR)
+      - [Use BR](/br/backup-and-restore-tool.md)
+      - [BR Use Cases](/br/backup-and-restore-use-cases.md)
+      - [BR storages](/br/backup-and-restore-storages.md)
+      - [BR FAQ](/br/backup-and-restore-faq.md)
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
@@ -405,7 +414,6 @@
     - [PD Recover](/pd-recover.md)
     - [TiKV Control](/tikv-control.md)
     - [TiDB Control](/tidb-control.md)
-    - [Download](/download-ecosystem-tools.md)
 - [TiDB in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/)
 + FAQs
   - [TiDB FAQs](/faq/tidb-faq.md)
@@ -421,6 +429,7 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/release-notes.md)
   + v4.0
+    - [4.0 GA](/releases/release-4.0-ga.md)
     - [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
     - [4.0.0-rc.1](/releases/release-4.0.0-rc.1.md)
     - [4.0.0-rc](/releases/release-4.0.0-rc.md)
@@ -428,6 +437,7 @@
     - [4.0.0-beta.1](/releases/release-4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/release-4.0.0-beta.md)
   + v3.1
+    - [3.1.2](/releases/release-3.1.2.md)
     - [3.1.1](/releases/release-3.1.1.md)
     - [3.1.0 GA](/releases/release-3.1.0-ga.md)
     - [3.1.0-rc](/releases/release-3.1.0-rc.md)
@@ -435,6 +445,7 @@
     - [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    - [3.0.15](/releases/release-3.0.15.md)
     - [3.0.14](/releases/release-3.0.14.md)
     - [3.0.13](/releases/release-3.0.13.md)
     - [3.0.12](/releases/release-3.0.12.md)
