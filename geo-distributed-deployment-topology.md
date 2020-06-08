@@ -19,7 +19,7 @@ This document takes the typical architecture of three data centers (DC) in two c
 
 ### Topology templates
 
-- [The geo-distributed topology template](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
+- [The geo-distributed topology template](https://github.com/pingcap/docs/blob/release-4.0/config-templates/geo-redundancy-deployment.yaml)
 
 ### Key parameters
 
