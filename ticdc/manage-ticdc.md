@@ -351,14 +351,3 @@ For nodes other than owner nodes, executing the above command will return the fo
 ```
 election: not leader
 ```
-
-## Error handling
-
-This section introduces how to handle the error occurred when using TiCDC to replicate data.
-
-### An error occurs when TiCDC replicates statements downstream
-
-When an error occurs when TiCDC executes DDL or DML statements downstream, the replication task is stopped.
-
-- If the error occurs because of downstream anomalies or network jitter, directly resume the replication task;
-- If the error occurs because the downstream is incompatible with the SQL statement, resuming the task will fail. In this situation, you can configure the `ignore-txn-commit-ts` parameter in the replication configuration to skip the transaction at `commit-ts` and resume the task.
