@@ -6,7 +6,7 @@ category: how-to
 
 # Export or Backup Data Using Dumpling
 
-This document introduces how to use the [Dumpling](https://github.com/pingcap/dumpling) tool to export or backup data in TiDB. Dumpling exports data stored in TiDB as SQL or CSV data files and can be used to complete logical full backup or export.
+This document introduces how to use the [Dumpling](https://github.com/pingcap/dumpling) tool to export or backup data in TiDB. Dumpling exports data stored in TiDB as SQL or CSV data files and can be used to make a logical full backup or export.
 
 For backups of SST files (KV pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
 
@@ -68,7 +68,7 @@ Note that the `--sql` option can be used only for exporting CSV files for now. H
 > 
 > Currently, Dumpling does not support exporting only certain tables specified by users (i.e. `-T` flag, see [this issue](https://github.com/pingcap/dumpling/issues/76)). If you do need this feature, you can use [MyDumper](/backup-and-restore-using-mydumper-lightning.md) instead.
 
-The exported file is stored in the `. /export-<current local time>` directory by default. Commonly used parameters are as follows:
+The exported file is stored in the `./export-<current local time>` directory by default. Commonly used parameters are as follows:
 
 - `-o` is used to select the directory where the exported files are stored.
 - `-F` option is used to specify the maximum size of a single file (the unit here is byte, different from MyDumper).
