@@ -2,11 +2,7 @@
 title: SQL Plan Management (SPM)
 summary: Learn about SQL Plan Management in TiDB.
 category: reference
-<<<<<<< HEAD:execution-plan-binding.md
-aliases: ['/docs/stable/reference/performance/execution-plan-bind/']
-=======
-aliases: ['/docs/dev/reference/performance/execution-plan-bind/','/docs/dev/execution-plan-binding/']
->>>>>>> 71e8033... update SPM document (#2679):sql-plan-management.md
+aliases: ['/docs/stable/reference/performance/execution-plan-bind/','/docs/stable/execution-plan-binding/']
 ---
 
 # SQL Plan Management (SPM)
