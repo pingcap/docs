@@ -15,7 +15,7 @@ This page shows the overview of the entire TiDB cluster, including the following
 - The node count and status of each instance.
 - Monitor and alert messages.
 
-## Enter the page
+## Access the page
 
 After logging into TiDB Dashboard, the overview page is entered by default, or you can click **Overview** on the left navigation bar to enter this page:
 
