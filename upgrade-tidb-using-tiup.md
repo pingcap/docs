@@ -34,9 +34,9 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
 >
 > Do not execute any DDL request during the upgrade, otherwise an undefined behavior issue might occur.
 
-## Install TiUP on the Control Machine
+## Install TiUP on the control machine
 
-1. Execute the following command on the Control Machine to install TiUP:
+1. Execute the following command on the control machine to install TiUP:
 
     {{< copyable "shell-regular" >}}
 
