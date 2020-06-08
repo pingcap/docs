@@ -327,33 +327,6 @@ LAST_BACKUP_TS=`br validate decode --field="end-version" -s local:///home/tidb/b
 
 In the above example, the incremental backup data includes the newly written data and the DDLs between `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR restores DDLs first and then restores the written data.
 
-### Back up Raw KV (experimental feature)
-
-> **Warning:**
-> 
-> This feature is experimental and not thoroughly tested. It is highly **not recommended** to use this feature in the production environment.
-
-In some scenarios, TiKV might run independently of TiDB. Given that, BR also supports bypassing the TiDB layer and backing up data in TiKV.
-
-For example, you can execute the following command to back up all keys between `[0x31, 0x3130303030303030)` in the default CF to `$BACKUP_DIR`:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-br backup raw --pd $PD_ADDR \
-    -s "local://$BACKUP_DIR" \
-    --start 31 \
-    --end 3130303030303030 \
-    --format hex \
-    --cf default
-```
-
-Here, the parameters of `--start`  and `--end` are decoded using the method specified by `--format` before being sent to TiKV. Currently, the following methods are available:
-
-- "raw": The input string is directly encoded as a key in binary format.
-- "hex": The default encoding method. The input string is treated as a hexadecimal number.
-- "escape": First escape the input string, and then encode it into binary format.
-
 ## Restore cluster data
 
 To restore the cluster data, use the `br restore` command. You can add the `full`, `db` or `table` sub-command to specify the scope of your restoration: the whole cluster, a database or a single table.
@@ -476,61 +449,6 @@ In the above command, `--table` specifies the name of the table to be restored. 
 ### Restore incremental data
 
 Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster.
-
-### Restore Raw KV (experimental feature)
-
-> **Warning:**
-> 
-> This feature is in the experiment, without being thoroughly tested. It is highly **not recommended** to use this feature in the production environment.
-
-Similar to [backing up Raw KV](#back-up-raw-kv-experimental-feature), you can execute the following command to restore Raw KV:
-
-{{< copyable "shell-regular" >}}
-
-br restore raw --pd $PD_ADDR \
-    -s "local://$BACKUP_DIR" \
-    --start 31 \
-    --end 3130303030303030 \
-    --format hex \
-    --cf default
-
-In the above example, all the backed up keys in the range `[0x31, 0x3130303030303030)` are restored to the TiKV cluster. The coding methods of these keys are identical to that of [keys during the backup process](#back-up-raw-kv-experimental-feature)
-
-### Online restore (experimental feature)
-
-> **Warning:**
-> 
-> This feature is in the experiment, without being thoroughly tested. It also relies on the unstable `Placement Rules` feature of PD. It is highly **not recommended** to use this feature in the production environment.
-
-During data restoration, writing too much data affects the performance of the online cluster. To avoid this effect as much as possible, BR supports [Placement rules](/configure-placement-rules.md) to isolate resources. In this case, downloading and importing SST are only performed on a few specified nodes (or "restore nodes" for short). To complete the online restore, take the following steps.
-
-1. Configure PD, and start Placement rules:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    echo "config set enable-placement-rules true" | pd-ctl
-    ```
-
-2. Edit the configuration file of the "restore node" in TiKV, and specify "restore" to the `server` configuration item:
-
-    {{< copyable "" >}}
-
-    ```
-    [server]
-    labels = { exclusive = "restore" }
-    ```
-
-3. Start TiKV of the "restore node" and restore the backed up files using BR. Compared with the offline restore, you only need to add the `--online` flag:
-
-    {{< copyable "shell-regular" >}}
-
-    ```
-    br restore full \
-        -s "local://$BACKUP_DIR" \
-        --pd $PD_ADDR \
-        --online
-    ```
 
 ## Best practices
 
