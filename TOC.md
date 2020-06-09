@@ -3,7 +3,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD032 -->
 
-## 目录
+## Documentation List
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
@@ -487,6 +487,14 @@
     - [1.1 Beta](/releases/release-1.1-beta.md)
     - [1.1 Alpha](/releases/release-1.1-alpha.md)
   + v1.0
+    - [1.0.8](/releases/release-1.0.8.md)
+    - [1.0.7](/releases/release-1.0.7.md)
+    - [1.0.6](/releases/release-1.0.6.md)
+    - [1.0.5](/releases/release-1.0.5.md)
+    - [1.0.4](/releases/release-1.0.4.md)
+    - [1.0.3](/releases/release-1.0.3.md)
+    - [1.0.2](/releases/release-1.0.2.md)
+    - [1.0.1](/releases/release-1.0.1.md)
     - [1.0](/releases/release-1.0-ga.md)
     - [Pre-GA](/releases/release-pre-ga.md)
     - [RC4](/releases/release-rc.4.md)
