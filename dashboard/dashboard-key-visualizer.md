@@ -19,10 +19,6 @@ You can use one of the following two methods to access the Key Visualizer page:
 
 * Visit <http://127.0.0.1:2379/dashboard/#/keyviz> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
-> **Note:**
->
-> The Key Visualizer feature is disabled by default. If you use this feature for the first time, You need to manually enable it. To enable this feature, follow the interface guide or see the [Settings](#settings) section of this document.
-
 ## Interface demonstration
 
 The following image is a demonstration of the Key Visualizer page:
@@ -151,7 +147,7 @@ This section shows and interprets four common types of heatmap in Key Visualizer
 
 ### Evenly distributed workload
 
-![Balanced ](/media/dashboard/dashboard-keyviz-well-dist.png)
+![Balanced](/media/dashboard/dashboard-keyviz-well-dist.png)
 
 In the heatmap above, bright and dark colors are a fine-grained mix. This indicates that reads or writes are evenly distributed over time and among key ranges. The workload is evenly distributed to all nodes, which is ideal for a distributed database.
 
