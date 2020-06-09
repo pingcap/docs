@@ -396,6 +396,7 @@
       - [Deploy and Use TiCDC](/ticdc/deploy-ticdc.md)
       - [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
       - [Configure Sink URI](/ticdc/sink-url.md)
+      - [Troubleshoot TiCDC Issues](/ticdc/troubleshoot-ticdc.md)
       - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
       - [Column and DDL Type Codes](/ticdc/column-ddl-type-codes.md)
     + sync-diff-inspector
