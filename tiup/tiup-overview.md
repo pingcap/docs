@@ -7,11 +7,7 @@ aliases: ['/docs/dev/reference/tools/tiup/overview/']
 
 # TiUP Overview
 
-Package manager or package management system is widely used to automate the process of installing and managing system software and application software. Package management tools greatly simplify software's installation, upgrade, and maintenance processes. For example, almost all Linux operating systems that use RPM use Yum for package management, while Anaconda makes it very easy to manage the Python environment and related packages.
-
-In the past, there was no dedicated package management tool in the TiDB ecosystem. Users could only manually manage various packages through different configuration files and folders. Some third-party monitoring and reporting tools such as Prometheus even required additional special management, which made the operation and maintenance work much more difficult.
-
-Starting with TiDB 4.0, TiUP, as a new tool, assumes the role of a package manager and is responsible for managing components in the TiDB ecosystem, such as TiDB, PD, TiKV, and so on. When you want to run any component in the TiDB ecosystem, you just need to execute a single line of TiUP commands, which is far easier to manage.
+Starting with TiDB 4.0, TiUP, as the package manager, makes it far easier to manage different cluster components in the TiDB ecosystem. Now you can run any component with only a single line of TiUP commands.
 
 ## Install TiUP
 
@@ -95,7 +91,7 @@ Examples:
   $ tiup update --all                  # Update all installed components to the latest version
   $ tiup update --nightly              # Update all installed components to the nightly version
   $ tiup update --self                 # Update the "tiup" to the latest version
-  $ tiup list --refresh                # Fetch the latest supported components list
+  $ tiup list                          # Fetch the latest supported components list
   $ tiup status                        # Display all running/terminated instances
   $ tiup clean <name>                  # Clean the data of running/terminated instance (Kill process if it's running)
   $ tiup clean --all                   # Clean the data of all running/terminated instances
@@ -124,8 +120,8 @@ The output is long but you can focus on only two parts:
 
 > **Note:**
 >
-> - The number of available components will continue to grow. To check the latest supported components, execute the `tiup list --refresh` command.
-> - The list of available versions of components will also continue to grow. To check the latest supported component versions, execute the `tiup list <component> --refresh` command.
+> - The number of available components will continue to grow. To check the latest supported components, execute the `tiup list` command.
+> - The list of available versions of components will also continue to grow. To check the latest supported component versions, execute the `tiup list <component>` command.
 
 TiUP commands are implemented in TiUP's internal code and used for package management operations, while TiUP components are independent component packages installed by TiUP commands.
 
