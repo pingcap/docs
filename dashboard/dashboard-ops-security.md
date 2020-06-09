@@ -76,4 +76,4 @@ It is recommended that you see [Use TiDB Dashboard through Reverse Proxy](/dashb
 ## Other recommended safety measures
 
 - [Enable TLS Authentication and Encrypt the Stored Data](/enable-tls-between-components.md)
-- [Enable encrypted transmission for communication between TiDB client servers](/encrypted-connections-with-tls-protocols.md)
+- [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
