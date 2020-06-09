@@ -22,21 +22,21 @@ Assume that the topology of the instance cluster is as follows:
 
 ## Install OpenSSL
 
-For Debian or Ubuntu OS:
+- For Debian or Ubuntu OS:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-apt install openssl
-```
+    ```bash
+    apt install openssl
+    ```
 
-For RedHat or CentOS OS:
+- For RedHat or CentOS OS:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```bash
-yum install openssl
-```
+    ```bash
+    yum install openssl
+    ```
 
 You can also refer to OpenSSL's official [download document](https://www.openssl.org/source/) for installation.
 
