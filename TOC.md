@@ -367,7 +367,8 @@
       - [Error Handling](/tidb-binlog/handle-tidb-binlog-errors.md)
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
   + Tools
-    - [Tools User Guide](/ecosystem-tool-user-guide.md)
+    - [Overview](/ecosystem-tool-user-guide.md)
+    - [Use Cases](/ecosystem-tool-user-case.md)
     - [Download](/download-ecosystem-tools.md)
     + Backup & Restore (BR)
       - [Use BR](/br/backup-and-restore-tool.md)
