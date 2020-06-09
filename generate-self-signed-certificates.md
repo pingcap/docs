@@ -44,7 +44,7 @@ You can also refer to OpenSSL's official [download document](https://www.openssl
 
 A certificate authority (CA) is a trusted entity that issues digital certificates. In practice, contact your administrator to issue the certificate or use a trusted CA. CA manages multiple certificate pairs. Here you only need to generate an original pair of certificates as follows.
 
-1. Generate root key:
+1. Generate the root key:
 
     {{< copyable "shell-regular" >}}
 
@@ -70,7 +70,9 @@ A certificate authority (CA) is a trusted entity that issues digital certificate
 
 ## Issue certificates for individual components
 
-### Certificates that may be used in the cluster
+This section describes how to issue certificates for individual components.
+
+### Certificates that might be used in the cluster
 
 - tidb-server certificate: used by TiDB to authenticate TiDB for other components and clients
 - tikv-server certificate: used by TiKV to authenticate TiKV for other components and clients
@@ -79,7 +81,7 @@ A certificate authority (CA) is a trusted entity that issues digital certificate
 
 ### Issue certificates to TiKV instances
 
-To issue a certificate to a TiKV instance, the steps are as follows:
+To issue a certificate to a TiKV instance, perform the following steps:
 
 1. Generate the private key corresponding to the certificate:
 
@@ -89,7 +91,7 @@ To issue a certificate to a TiKV instance, the steps are as follows:
     openssl genrsa -out tikv.key 2048
     ```
 
-2. Make a copy of the OpenSSL configuration template file (Refer to the actual location of your template file because it may have more than one location):
+2. Make a copy of the OpenSSL configuration template file (Refer to the actual location of your template file because it might have more than one location):
 
     {{< copyable "shell-regular" >}}
 
@@ -137,7 +139,7 @@ To issue a certificate to a TiKV instance, the steps are as follows:
     openssl x509 -text -in tikv.crt -noout
     ```
 
-7. Confirm that the following files occur in your current directory:
+7. Confirm that the following files exist in your current directory:
 
     ```
     root.crt
@@ -149,7 +151,7 @@ The process of issuing certificates for other TiDB components is similar and wil
 
 ### Issue certificates for clients
 
-To issue a certificate to a client, the steps are as follows:
+To issue a certificate to a client, perform the following steps:
 
 1. Generate the private key corresponding to the certificate:
 
