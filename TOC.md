@@ -7,6 +7,7 @@
 
 + Introduction
   - [TiDB Introduction](/overview.md)
+  - [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
   + Benchmarks
     - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
@@ -73,14 +74,14 @@
     - [Placement Rules](/configure-placement-rules.md)
   + Secure
     + Transport Layer Security (TLS)
-      - [Enable TLS For MySQL Clients](/encrypted-connections-with-tls-protocols.md)
+      - [Enable TLS for MySQL Clients and Servers](/enable-tls-between-clients-and-servers.md)
       - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
+    - [Encrypt Stored Data](/enable-encrypt-stored-data.md)
     - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
     - [Encryption-At-Rest](/encryption-at-rest.md)
   + Monitor
     - [Overview](/tidb-monitoring-framework.md)
     - [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
-    - [Monitor Traffic Using Key Visualizer](/key-visualizer-monitoring-tool.md)
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
@@ -316,7 +317,7 @@
     - [Optimizer Hints](/optimizer-hints.md)
     - [Follower Read](/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/check-cluster-status-using-sql-statements.md)
-    - [Execution Plan Binding](/execution-plan-binding.md)
+    - [SQL Plan Management](/sql-plan-management.md)
     - [Access Tables Using `IndexMerge`](/index-merge.md)
     - [Statement Summary Table](/statement-summary-tables.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
