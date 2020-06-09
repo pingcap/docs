@@ -29,7 +29,7 @@ In this report, some small buttons are described as follows:
 
 * **i** icon: You can move your mouse to the **i** icon to see the explanatory note of the row.
 * **expand**: Click **expand** to see details about this monitoring metric. For example, the detailed information of `tidb_get_token` in the image above includes the monitoring information of each TiDB instance's latency.
-* **fold**: Contrary to **expand**, the button is used to fold detailed monitoring information.
+* **collapse**: Contrary to **expand**, the button is used to fold detailed monitoring information.
 
 All monitoring metrics basically correspond to those on the TiDB Grafna monitoring dashboard. After a module is found to be abnormal, you can view more monitoring information on the TiDB Grafna.
 
