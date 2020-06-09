@@ -5,9 +5,9 @@ category: how-to
 
 # Deploy TiDB Dashboard
 
-The TiDB Dashboard interface is built into the PD component of TiDB v4.0 or higher, and no additional deployment is required. You can just deploy a standard TiDB cluster and TiDB Dashboard is be integrated natively.
+The TiDB Dashboard interface is built into the PD component of TiDB v4.0 or higher, and no additional deployment is required. You can just deploy a standard TiDB cluster, and TiDB Dashboard is integrated natively.
 
-See to the following documents to learn how to deploy a standard TiDB cluster:
+See the following documents to learn how to deploy a standard TiDB cluster:
 
 + [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md#deploy-a-local-test-environment-using-tiup-playground)
 + [Deploy TiDB in Production Environment](/production-deployment-using-tiup.md)
@@ -83,7 +83,7 @@ tiup cluster display CLUSTER_NAME --dashboard
 
 > **Warning:**
 >
-> If you change the instance to run TiDB Dashboard, the local data stored in the previous TiDB Dashboard instance will be lost, including the traffic visualization history and historical search records.
+> If you change the instance to run TiDB Dashboard, the local data stored in the previous TiDB Dashboard instance will be lost, including the traffic visualization history and search history.
 
 ## Disable TiDB Dashboard
 
@@ -129,10 +129,10 @@ You can also re-enable TiDB Dashboard by manually specifying which PD instance p
 
 > **Warning:**
 >
-> If the newly enabled TiDB Dashboard instance is inconsistent with the previous instance that provides the TiDB Dashboard service, the local data stored in the previous TiDB Dashboard instance will be lost, including traffic visualization history and historical search records.
+> If the newly enabled TiDB Dashboard instance is inconsistent with the previous instance that provides the TiDB Dashboard service, the local data stored in the previous TiDB Dashboard instance will be lost, including traffic visualization history and search history.
 
-## Next
+## What's next
 
-- See [Access TiDB Dashboard](/dashboard/dashboard-access.md) to learn how to access and sign into the TiDB Dashboard interface.
+- See [Access TiDB Dashboard](/dashboard/dashboard-access.md) to learn how to access and log into the TiDB Dashboard interface.
 
 - See [Improve TiDB Dashboard Security](/dashboard/dashboard-ops-security.md) to learn how to enhance the security of TiDB Dashboard, such as configuring a firewall.

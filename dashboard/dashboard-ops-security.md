@@ -10,7 +10,7 @@ Although you need to sign into TiDB Dashboard before accessing it, TiDB Dashboar
 
 ## Set a strong password for TiDB `root` user
 
-The account system of TiDB Dashboard is consistent with that of TiDB SQL users. By default, TiDB's `root` user has no password, so accessing TiDB Dashboard does not require password authentication, which will give the malicious visitor great privileges, including executing privileged SQL statements.
+The account system of TiDB Dashboard is consistent with that of TiDB SQL users. By default, TiDB's `root` user has no password, so accessing TiDB Dashboard does not require password authentication, which will give the malicious visitor high privileges, including executing privileged SQL statements.
 
 It is recommended that you set a strong password for TiDB `root` user. See [TiDB User Account Management](/user-account-management.md) for details.
 
@@ -38,7 +38,7 @@ In the test environment, you might need to configure the firewall to open the Ti
 
 When multiple PD instances are deployed, only one of the PD instances actually runs TiDB Dashboard, and browser redirection occurs when you access other PD instances. Therefore, you need to ensure that the firewall is configured with the correct IP address. For details of this mechanism, see [Deployment with multiple PD instances](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances).
 
-When using the TiUP deployment tool, you can use the following command to view the address of the PD instance that actually runs TiDB Dashboard (replace `CLUSTER_NAME` with the cluster name):
+When using the TiUP deployment tool, you can view the address of the PD instance that actually runs TiDB Dashboard by running the following command (replace `CLUSTER_NAME` with the cluster name):
 
 {{< copyable "shell-regular" >}}
 
