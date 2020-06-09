@@ -6,7 +6,7 @@ category: how-to
 
 # TiDB Dashboard Introduction
 
-TiDB Dashboard is a graphical interface provided by TiDB since v4.0, which is used to monitor and diagnose TiDB clusters. TiDB Dashboard is built into the PD component of TiDB and does not require independent deployment.
+TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster, which is available since v4.0. It is built into the PD component and does not require an independent deployment.
 
 ![TiDB Dashboard interface](/media/dashboard/dashboard-intro.gif)
 

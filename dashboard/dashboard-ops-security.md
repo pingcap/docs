@@ -1,10 +1,10 @@
 ---
-title: Improve TiDB Dashboard Security
+title: Secure TiDB Dashboard
 summary: Learn how to improve the security of TiDB Dashboard.
 category: how-to
 ---
 
-# Improve TiDB Dashboard Security
+# Secure TiDB Dashboard
 
 Although you need to sign into TiDB Dashboard before accessing it, TiDB Dashboard is designed to be accessed by trusted user entities by default. When you want to provide TiDB Dashboard to external network users or untrusted users for access, take the following measures to avoid security vulnerabilities.
 

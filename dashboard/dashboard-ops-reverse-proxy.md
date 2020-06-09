@@ -1,11 +1,11 @@
 ---
-title: Use TiDB Dashboard Through Reverse Proxy
+title: Use TiDB Dashboard behind a Reverse Proxy
 category: how-to
 ---
 
-# Use TiDB Dashboard Through Reverse Proxy
+# Use TiDB Dashboard behind a Reverse Proxy
 
-You can use a reverse proxy to safely provide the TiDB Dashboard service from the internal network to the external network.
+You can use a reverse proxy to safely expose the TiDB Dashboard service from the internal network to the external.
 
 ## Use NGINX reverse proxy
 

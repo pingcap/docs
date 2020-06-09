@@ -5,7 +5,7 @@ category: how-to
 
 # Deploy TiDB Dashboard
 
-The TiDB Dashboard interface is built into the PD component of TiDB v4.0 or higher, and no additional deployment is required. You can just deploy a standard TiDB cluster, and TiDB Dashboard is integrated natively.
+The TiDB Dashboard UI is built into the PD component for v4.0 or higher versions, and no additional deployment is required. Simply deploy a standard TiDB cluster, and TiDB Dashboard will be there.
 
 See the following documents to learn how to deploy a standard TiDB cluster:
 
@@ -19,21 +19,21 @@ See the following documents to learn how to deploy a standard TiDB cluster:
 
 ## Deployment with multiple PD instances
 
-When multiple PD instances are deployed in the cluster, only one of these instances provides the TiDB Dashboard service.
+When multiple PD instances are deployed in the cluster, only one of these instances serves the TiDB Dashboard.
 
-PD instances, when running for the first time, automatically negotiate with each other and choose one instance to provide the TiDB Dashboard service. After the negotiation is completed, the TiDB Dashboard service will always run on the chosen instance no matter it is restarted or scaled out, unless this instance is manually scaled in. TiDB Dashboard will not run on other PD instances. This negotiation process can be completed automatically without user intervention.
+When PD instances are running for the first time, they automatically negotiate with each other to choose one instance to serve the TiDB Dashboard. TiDB Dashboard will not run on other PD instances. The TiDB Dashboard service will be always run on the chosen PD instance no matter PD instances are restarted or new PD instances are joined. However there will be a re-negotiation when the PD instance that serves TiDB Dashboard is removed from the cluster (scaled-in). The negotiation process does not need user intervention.
 
-When you access a PD instance that does not provide the TiDB Dashboard service, the browser receives a redirection instruction and automatically guides you to re-access the PD instance that provides the TiDB Dashboard service, so that you can use the service normally. This process is shown in the image below.
+When you access a PD instance that does not serve TiDB Dashboard, the browser will be redirected automatically to guide you to access the PD instance that serves the TiDB Dashboard, so that you can access the service normally. This process is illustrated in the image below.
 
 ![Process Schematic](/media/dashboard/dashboard-ops-multiple-pd.png)
 
 > **Note:**
 >
-> The PD instance that provides the TiDB Dashboard service might not be consistent with the PD leader.
+> The PD instance that serves TiDB Dashboard might not be a PD leader.
 
-### Check the PD instance that actually provides the TiDB Dashboard service
+### Check the PD instance that actually serves TiDB Dashboard
 
-If a started cluster is deployed using TiUP, you can use the `tiup cluster display` command to check which PD node provides the TiDB Dashboard service. Replace `CLUSTER_NAME` with the cluster name.
+For a running cluster deployed using TiUP, you can use the `tiup cluster display` command to see which PD instance serves TiDB Dashboard. Replace `CLUSTER_NAME` with the cluster name.
 
 {{< copyable "shell-regular" >}}
 
@@ -58,9 +58,9 @@ http://192.168.0.123:2379/dashboard/
 > tiup update cluster --force
 > ```
 
-### Switch to another PD instance to provide TiDB Dashboard service
+### Switch to another PD instance to serve TiDB Dashboard
 
-If a started cluster is deployed using TiUP, you can use the `tiup ctl pd` command to change the PD instance that provides the TiDB Dashboard service, or re-specify a PD instance to provide the TiDB Dashboard service with TiDB Dashboard disabled:
+For a running cluster deployed using TiUP, you can use the `tiup ctl pd` command to change the PD instance that serves TiDB Dashboard, or re-specify a PD instance to serve TiDB Dashboard when it is disabled:
 
 {{< copyable "shell-regular" >}}
 
@@ -73,7 +73,7 @@ In the command above:
 - Replace `127.0.0.1:2379` with the IP and port of any PD instance.
 - Replace `9.9.9.9:2379` with the IP and port of the new PD instance that you desire to run the TiDB Dashboard service.
 
-After the modification above, you can use the `tiup cluster display` command to confirm whether the modification takes effect (replace `CLUSTER_NAME` with the cluster name):
+You can use the `tiup cluster display` command to see whether the modification is taking effect (replace `CLUSTER_NAME` with the cluster name):
 
 {{< copyable "shell-regular" >}}
 
@@ -83,11 +83,11 @@ tiup cluster display CLUSTER_NAME --dashboard
 
 > **Warning:**
 >
-> If you change the instance to run TiDB Dashboard, the local data stored in the previous TiDB Dashboard instance will be lost, including the traffic visualization history and search history.
+> If you change the instance to run TiDB Dashboard, the local data stored in the previous TiDB Dashboard instance will be lost, including the Key Visualize history and search history.
 
 ## Disable TiDB Dashboard
 
-If a started cluster is deployed using TiUP, use the `tiup ctl pd` command to disable TiDB Dashboard on all PD instances (replace `127.0.0.1:2379` with the IP and port of any PD instance):
+For a running cluster deployed using TiUP, use the `tiup ctl pd` command to disable TiDB Dashboard on all PD instances (replace `127.0.0.1:2379` with the IP and port of any PD instance):
 
 {{< copyable "shell-regular" >}}
 
@@ -109,7 +109,7 @@ Dashboard is not started.
 
 ## Re-enable TiDB Dashboard
 
-If a started cluster is deployed using TiUP, use the `tiup ctl pd` command to request PD to renegotiate an instance to run TiDB Dashboard (replace `127.0.0.1:2379` with the IP and port of any PD instance) :
+For a running cluster deployed using TiUP, use the `tiup ctl pd` command to request PD to renegotiate an instance to run TiDB Dashboard (replace `127.0.0.1:2379` with the IP and port of any PD instance):
 
 {{< copyable "shell-regular" >}}
 
@@ -117,7 +117,7 @@ If a started cluster is deployed using TiUP, use the `tiup ctl pd` command to re
 tiup ctl pd -u http://127.0.0.1:2379 config set dashboard-address auto
 ```
 
-After executing the command above, use the `tiup cluster display` command to view the TiDB Dashboard instance address automatically negotiated by PD (replace `CLUSTER_NAME` with the cluster name):
+After executing the command above, you can use the `tiup cluster display` command to view the TiDB Dashboard instance address automatically negotiated by PD (replace `CLUSTER_NAME` with the cluster name):
 
 {{< copyable "shell-regular" >}}
 
@@ -125,11 +125,11 @@ After executing the command above, use the `tiup cluster display` command to vie
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-You can also re-enable TiDB Dashboard by manually specifying which PD instance provides the TiDB Dashboard service. For specific operations, see [Switch to another PD instance to provide TiDB Dashboard service](#switch-to-another-pd-instance-to-provide-tidb-dashboard-service).
+You can also re-enable TiDB Dashboard by manually specifying the PD instance that serves TiDB Dashboard. See [Switch to another PD instance to serve TiDB Dashboard](#switch-to-another-pd-instance-to-serve-tidb-dashboard).
 
 > **Warning:**
 >
-> If the newly enabled TiDB Dashboard instance is inconsistent with the previous instance that provides the TiDB Dashboard service, the local data stored in the previous TiDB Dashboard instance will be lost, including traffic visualization history and search history.
+> If the newly enabled TiDB Dashboard instance is different with the previous instance that served the TiDB Dashboard, the local data stored in the previous TiDB Dashboard instance will be lost, including Key Visualize history and search history.
 
 ## What's next
 
