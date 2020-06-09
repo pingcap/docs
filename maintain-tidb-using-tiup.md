@@ -134,7 +134,7 @@ server_configs:
     performance.txn-total-size-limit: 1073741824
 ```
 
-Then run the `tiup cluster reload ${cluster-name} -N tidb` command to rolling restart the TiDB component.
+Then run the `tiup cluster reload ${cluster-name} -R tidb` command to rolling restart the TiDB component.
 
 ## Replace with a hotfix package
 
