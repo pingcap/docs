@@ -1,6 +1,6 @@
 ---
 title: Handle TiCDC Issues
-summary: Learn how to troubleshoot TiCDC issues.
+summary: Learn how to handle TiCDC issues.
 category: reference
 ---
 
