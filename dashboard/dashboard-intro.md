@@ -10,11 +10,11 @@ TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB clu
 
 ![TiDB Dashboard interface](/media/dashboard/dashboard-intro.gif)
 
-TiDB Dashboard is open-sourced on [Github](https://github.com/pingcap-incubator/tidb-dashboard).
+TiDB Dashboard is open-sourced on [GitHub](https://github.com/pingcap-incubator/tidb-dashboard).
 
 This document introduces the main features of TiDB Dashboard. You can click links in the following sections to learn more details.
 
-## Show the overall running status of TiDB cluster
+## Show the overall running status of the TiDB cluster
 
 You can use TiDB Dashboard to learn the TiDB cluster's queries per second (QPS), execution time, the types of SQL statements that consume the most resources, and other overview information.
 

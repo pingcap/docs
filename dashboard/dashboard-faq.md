@@ -15,7 +15,7 @@ This document summarizes the frequently asked questions (FAQs) and answers about
 When multiple PD instances are deployed in a cluster, only one of the PD instances actually runs the TiDB Dashboard service. If you access other PD instances than this Dashboard-running one, your browser redirects you to another address. If the firewall or reverse proxy is not properly configured for accessing TiDB Dashboard, after the visiting the Dashboard, you might be redirected to an internal address that is protected by the firewall or reverse proxy.
 
 - See [TiDB Dashboard Multi-PD Instance Deployment](/dashboard/dashboard-ops-deploy.md#) to learn the working principle of TiDB Dashboard with multiple PD instances.
-- See [Use TiDB Dashboard through Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) to learn how to correctly configure reverse proxy.
+- See [Use TiDB Dashboard through a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) to learn how to correctly configure a reverse proxy.
 - See [Improve TiDB Dashboard Security](/dashboard/dashboard-ops-security.md) to learn how to correctly configure the firewall.
 
 ### When TiDB Dashboard is deployed with dual network interface cards (NICs), TiDB Dashboard cannot be accessed using another NIC
@@ -26,7 +26,7 @@ If you have deployed TiDB using the `tiup cluster` or `tiup playground` command,
 
 ## UI-related FAQ
 
-### `prometheus_not_found` error is shown in **QPS** and **Latency** sections on the Overview page
+### A `prometheus_not_found` error is shown in **QPS** and **Latency** sections on the Overview page
 
 The **QPS** and **Latency** sections on the **Overview** page require a cluster with Prometheus deployed. Otherwise, the error is shown. You can solve this problem by deploying a Prometheus instance in the cluster.
 
@@ -55,6 +55,6 @@ If your deployment tool is TiUP, take the following steps to solve this problem.
 
    Even if the cluster has been started, still execute this command. This command does not affect the normal application in the cluster, but refreshes and reports the metrics addresses, so that the monitoring metrics can be displayed normally in TiDB Dashboard.
 
-### `invalid connection` error is shown in **Top SQL Statements** and **Recent Slow Queries** on the Overview page
+### An `invalid connection` error is shown in **Top SQL Statements** and **Recent Slow Queries** on the Overview page
 
 The possible reason is that you have enabled the `prepared-plan-cache` feature of TiDB. As an experimental feature, when enabled, `prepared-plan-cache` might not function properly in specific TiDB versions, which could cause this problem in TiDB Dashboard (and other applications). You can disable `prepared-plan-cache` by updating [TiDB Configuration file](/tidb-configuration-file.md#prepared-plan-cache) to solve this problem.
