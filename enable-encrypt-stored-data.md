@@ -1,10 +1,10 @@
 ---
-title: Enable stored data encryption
+title: Enable Stored Data Encryption
 summary: Introduce how to enable encryption for stored data.
 category: how-to
 ---
 
-# Enable stored data encryption
+# Enable Stored Data Encryption
 
 In a TiDB cluster, user data is stored in TiKV. Once you configure the encrypted storage feature in TiKV, the TiDB cluster encrypts this data. This section introduces how to configure the data encryption feature in TiKV.
 

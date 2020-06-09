@@ -7,7 +7,7 @@ aliases: ['/docs/dev/how-to/secure/enable-tls-between-components/']
 
 # Enable TLS Between TiDB Components
 
-This document describes how to enable encrypted data transmission between components within a TiDB cluster. Once enabled, encrypted transmission are used between the following components:
+This document describes how to enable encrypted data transmission between components within a TiDB cluster. Once enabled, encrypted transmission is used between the following components:
 
 - TiDB and TiKV; TiDB and PD
 - TiKV and PD
