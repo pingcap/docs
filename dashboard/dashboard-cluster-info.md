@@ -38,10 +38,10 @@ The list includes the following information:
 An instance has the following running status:
 
 - Up: The instance is running properly.
-- Down or Unreachable: The instance is not started or a network problem exits on the corresponding host.
+- Down or Unreachable: The instance is not started or a network problem exists on the corresponding host.
 - Tombstone: The data on the instance has been completely migrated out and the scaling-in is complete. This status exists only on TiKV or TiFlash instances.
-- Leaving: The data on the instance is being migrated out and the scaling-in is being performed. This status exists only on TiKV or TiFlash instances.
-- Unknown: The running state of the unknown instance.
+- Leaving: The data on the instance is being migrated out and the scaling-in is in process. This status exists only on TiKV or TiFlash instances.
+- Unknown: The running state of the instance is unknown.
 
 > **Note:**
 >

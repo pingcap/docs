@@ -46,7 +46,7 @@ On the list page, click the **Settings** button on the top right to change the s
 
 ![Settings entry](/media/dashboard/dashboard-statement-setting-entry.png)
 
-After clicking the **Settings** button, you can see the following setting page:
+After clicking the **Settings** button, you can see the following setting dialog box:
 
 ![Settings](/media/dashboard/dashboard-statement-settings.png)
 
@@ -59,6 +59,6 @@ See [Configurations of Statement Summary Tables](/statement-summary-tables.md#co
 
 > **Note:**
 >
-> + Because the statement system table is only stored in memory, after SQL Statements feature is disabled, the data in the system table will be cleared.
+> + Because the statement system table is only stored in memory, after the SQL Statements feature is disabled, the data in the system table will be cleared.
 >
-> + The values of `Collect interval` and `retain` duration affect the memory usage, so it is recommended to adjust this value according to the actual situation. The value of `retain duration` should not be set too large.
+> + The values of `Collect interval` and `retain duration` affect the memory usage, so it is recommended to adjust these values according to the actual situation. The value of `retain duration` should not be set too large.

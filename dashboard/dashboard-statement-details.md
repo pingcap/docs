@@ -26,13 +26,13 @@ The execution detail of plans includes the following information:
 
 ### Basic Tab
 
-The basic information of a SQL execution includes the table name, index name, execution times, and total duration. The **Description** column provides detailed description of each field.
+The basic information of a SQL execution includes the table names, index name, execution count, and total latency. The **Description** column provides detailed description of each field.
 
 ![Basic information](/media/dashboard/dashboard-statement-plans-basic.png)
 
 ### Time Tab
 
-Click the **Time** tab, and you can see how long each stage of the execution plan is lasted.
+Click the **Time** tab, and you can see how long each stage of the execution plan lasts.
 
 > **Note:**
 >
@@ -48,7 +48,7 @@ Click the **Coprocessor Read** tab, and you can see information related to Copro
 
 ### Transaction Tab
 
-Click the **Transaction** tab, and you can see information related to execution plan and transaction, such as the average number of written keys or the maximum number of written keys.
+Click the **Transaction** tab, and you can see information related to execution plans and transactions, such as the average number of written keys or the maximum number of written keys.
 
 ![Transaction](/media/dashboard/dashboard-statement-plans-transaction.png)
 

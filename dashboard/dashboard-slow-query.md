@@ -8,7 +8,7 @@ category: how-to
 
 On the Slow Queries page of TiDB Dashboard, you can search and view all slow queries in the cluster.
 
-By default, SQL queries with an execution time of more than 300 milliseconds are considered as slow queries. These queries are recorded in the [slow query logs](/identify-slow-queries.md). You can search the recorded slow queries using TiDB Dashboard. You can adjust the threshold of slow queries through the [`tidb_slow_log_threshold`](/tidb-specific-system-variables.md#tidb_slow_log_threshold) session variable or the [`slow-threshold`](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
+By default, SQL queries with an execution time of more than 300 milliseconds are considered as slow queries. These queries are recorded in the [slow query logs](/identify-slow-queries.md) and can be searched via TiDB Dashboard. You can adjust the threshold of slow queries through the [`tidb_slow_log_threshold`](/tidb-specific-system-variables.md#tidb_slow_log_threshold) session variable or the [`slow-threshold`](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
 
 > **Note:**
 >
@@ -40,7 +40,7 @@ Click **Columns** on the page and you can choose to see more columns. You can mo
 
 ### Sort by Column
 
-By default, the list is sorted by **Finish Time** in reverse order. Click column headings to sort by the column or switch the sorting order:
+By default, the list is sorted by **Finish Time** in the descending order. Click column headings to sort by the column or switch the sorting order:
 
 ![Modify sorting basis](/media/dashboard/dashboard-slow-queries-list3.png)
 
@@ -49,8 +49,8 @@ By default, the list is sorted by **Finish Time** in reverse order. Click column
 Click any item in the list to display detailed execution information of the slow query, including:
 
 - Query: The text of the SQL statement (see area 1 in the image below);
-- Plan: The execution plan of the slow query. See [Understand the Query Execution Plan](/query-execution-plan.md) to learn how to read the execution plan (area 2 in the image below);
-- Other sorted SQL execution information (area 3 in the image below).
+- Plan: The execution plan of the slow query. See [Understand the Query Execution Plan](/query-execution-plan.md) to learn how to read the execution plan (see area 2 in the image below);
+- Other sorted SQL execution information (see area 3 in the image below).
 
 ![View execution details](/media/dashboard/dashboard-slow-queries-detail1.png)
 
