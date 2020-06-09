@@ -41,6 +41,14 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 
 Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support trigger, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
+When using the MySQL 8.0 client, if it fails to connect to TiDB, try to add the `default-auth` and `default-character-set` options:
+
+```
+mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
+```
+
+This problem is caused by charset and [authentication scheme related compatibility](/security-compatibility-with-mysql.md).
+
 #### How is TiDB highly available?
 
 TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [TiDB architecture](/architecture.md).
