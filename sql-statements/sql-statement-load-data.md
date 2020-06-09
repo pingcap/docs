@@ -19,15 +19,15 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 
 ### `LocalOpt`
 
-You can specify that the imported data file is located on the client or server by configuring the `LocalOpt` parameter. Currently TiDB only supports data import from the client, so when importing data, set `LocalOpt` to `Local`.
+You can specify that the imported data file is located on the client or on the server by configuring the `LocalOpt` parameter. Currently, TiDB only supports data import from the client. Therefore, when importing data, set the value of `LocalOpt` to `Local`.
 
 ### `Fields` and `Lines`
 
 You can specify how to process the data format by configuring the `Fields` and `Lines` parameters.
 
-- `FIELDS TERMINATED BY`: Specify the separating character of the data.
-- `FIELDS ENCLOSED BY`: Specify the enclosing character of the data.
-- `LINES TERMINATED BY`: Specify the line terminator, if you want to end a line with a certain character.
+- `FIELDS TERMINATED BY`: Specifies the separating character of each data.
+- `FIELDS ENCLOSED BY`: Specifies the enclosing character of each data.
+- `LINES TERMINATED BY`: Specifies the line terminator, if you want to end a line with a certain character.
 
 Take the following data format as an example:
 
@@ -42,7 +42,7 @@ If you want to extract `bob`, `20`, and `street 1`, specify the separating chara
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
 ```
 
-If you do not specify the processing parameters, the imported data is processed in the following manner:
+If you do not specify the parameters above, the imported data is processed in the following way by default:
 
 ```sql
 FIELDS TERMINATED BY '\t' ENCLOSED BY ''
@@ -51,9 +51,9 @@ LINES TERMINATED BY '\n'
 
 ### `IGNORE number LINES`
 
-You can ignore the first `number` lines of the file by configuring the `IGNORE number LINES` parameter. For example, if you configure `IGNORE 1 LINES`, the first line of the file is ignored.
+You can ignore the first `number` lines of a file by configuring the `IGNORE number LINES` parameter. For example, if you configure `IGNORE 1 LINES`, the first line of a file is ignored.
 
-In addition, for the `DuplicateOpt`, `CharsetOpt`, and `LoadDataSetSpecOpt` parameters, TiDB currently only supports parsing syntax.
+In addition, TiDB currently only supports parsing the syntax of the `DuplicateOpt`, `CharsetOpt`, and `LoadDataSetSpecOpt` parameters.
 
 ## Examples
 
@@ -80,7 +80,7 @@ Query OK, 0 rows affected (0.14 sec)
 
 The following example imports data using `LOAD DATA`. Comma is specified as the separating character. The double quotation marks that enclose the data is ignored. The first line of the file is ignored.
 
-If you see the error message `ERROR 1148 (42000): the used command is not allowed with this TiDB version`, refer to [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version)
+If you see the error message `ERROR 1148 (42000): the used command is not allowed with this TiDB version`, refer to [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version).
 
 {{< copyable "sql" >}}
 
