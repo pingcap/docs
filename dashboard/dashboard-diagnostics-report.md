@@ -12,7 +12,7 @@ This document introduces the content of the diagnostic report and viewing tips. 
 
 The diagnostic report consists of the following parts:
 
-* Basic information: Includes the time range for generating reports, hardware information of the cluster, the version information of cluster topology.
+* Basic information: Includes the time range of the diagnostic report, hardware information of the cluster, the version information of cluster topology.
 * Diagnostic information: Shows the results of automatic diagnostics.
 * Load information: Includes CPU, memory and other load information of the server, TiDB, PD, or TiKV.
 * Overview information: Includes the consumed time and error information of each TiDB, PD, or TiKV module.
@@ -23,15 +23,15 @@ An example of the diagnostic report is as follows:
 
 ![Sample report](/media/dashboard/dashboard-diagnostics-example-table.png)
 
-In the image above, **Total Time Consume** in the top blue box is the report name. The information in the red box below explains the meaning of this report and the meaning of each field in the report.
+In the image above, **Total Time Consume** in the top blue box is the report name. The information in the red box below explains the content of this report and the meaning of each field in the report.
 
 In this report, some small buttons are described as follows:
 
 * **i** icon: You can move your mouse to the **i** icon to see the explanatory note of the row.
-* **expand**: Click **expand** to see more detailed information of this monitoring metric. For example, the detailed information of `tidb_get_token` in the image above includes the monitoring information of each TiDB instance's latency.
+* **expand**: Click **expand** to see details about this monitoring metric. For example, the detailed information of `tidb_get_token` in the image above includes the monitoring information of each TiDB instance's latency.
 * **fold**: Contrary to **expand**, the button is used to fold detailed monitoring information.
 
-All monitoring metrics basically correspond to those on the TiDB Grafna monitoring dashboard. After a module is found to be abnormal, you can view more detailed monitoring information on the TiDB Grafna monitoring dashboard.
+All monitoring metrics basically correspond to those on the TiDB Grafna monitoring dashboard. After a module is found to be abnormal, you can view more monitoring information on the TiDB Grafna.
 
 In addition, the `TOTAL_TIME` and `TOTAL_COUNT` metrics in this report are monitoring data read from Prometheus, so calculation inaccuracy might exits in their statistics.
 
@@ -39,15 +39,15 @@ Each part of this report is introduced as follows.
 
 ### Basic information
 
-#### Report Time Range
+#### Diagnostics Time Range
 
-The time range for generating the report includes the start time and end time.
+The time range for generating the diagnostics report includes the start time and end time.
 
 ![Report time range](/media/dashboard/dashboard-diagnostics-report-time-range.png)
 
-#### Cluster Hardware
+#### Cluster Hardware Info
 
-The hardware information of each server in the cluster includes information such as CPU, memory, and disk.
+Cluster Hardware Info includes information such as CPU, memory, and disk of each server in the cluster.
 
 ![Cluster hardware report](/media/dashboard/dashboard-diagnostics-cluster-hardware.png)
 
@@ -55,12 +55,12 @@ The fields in the table above are described as follows:
 
 * `HOST`: The IP address of the server.
 * `INSTANCE`: The number of instances deployed on the server. For example, `pd * 1` means that this server has 1 PD instance deployed; `tidb * 2 pd * 1` means that this server has 2 TiDB instances and 1 PD instance deployed.
-* `CPU_CORES`: Indicates the number of CPU cores of the server, physical cores or logical cores.
+* `CPU_CORES`: Indicates the number of CPU cores (physical cores or logical cores) of the server.
 * `MEMORY`: Indicates the memory size of the server. The unit is GB.
 * `DISK`: Indicates the server disk size. The unit is GB.
 * `UPTIME`: The uptime of the server. The unit is day.
 
-#### Cluster Info
+#### Cluster Topology Info
 
 The `Cluster Info` table shows the cluster topology information. The information in this table are from TiDB [information_schema.cluster_info](/system-tables/system-table-cluster-info.md) system table.
 
@@ -78,9 +78,9 @@ The fields in the table above are described as follows:
 
 ### Diagnostic information
 
-TiDB has built-in automatic diagnostic results. For the meaning and description of each field, see [information_schema.inspection-result](/system-tables/system-table-inspection-result.md) system table.
+TiDB has built-in automatic diagnostic results. For the description of each field, see [information_schema.inspection-result](/system-tables/system-table-inspection-result.md) system table.
 
-### Load information
+### Load Info
 
 #### Node Load Info
 
