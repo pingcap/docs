@@ -1,5 +1,6 @@
 ---
 title: Deploy TiDB Dashboard
+summary: Learn how to deploy TiDB Dashboard.
 category: how-to
 ---
 
@@ -21,7 +22,7 @@ See the following documents to learn how to deploy a standard TiDB cluster:
 
 When multiple PD instances are deployed in the cluster, only one of these instances serves the TiDB Dashboard.
 
-When PD instances are running for the first time, they automatically negotiate with each other to choose one instance to serve the TiDB Dashboard. TiDB Dashboard will not run on other PD instances. The TiDB Dashboard service will be always run on the chosen PD instance no matter PD instances are restarted or new PD instances are joined. However there will be a re-negotiation when the PD instance that serves TiDB Dashboard is removed from the cluster (scaled-in). The negotiation process does not need user intervention.
+When PD instances are running for the first time, they automatically negotiate with each other to choose one instance to serve the TiDB Dashboard. TiDB Dashboard will not run on other PD instances. The TiDB Dashboard service will always be provided by the chosen PD instance no matter PD instances are restarted or new PD instances are joined. However, there will be a re-negotiation when the PD instance that serves TiDB Dashboard is removed from the cluster (scaled-in). The negotiation process does not need user intervention.
 
 When you access a PD instance that does not serve TiDB Dashboard, the browser will be redirected automatically to guide you to access the PD instance that serves the TiDB Dashboard, so that you can access the service normally. This process is illustrated in the image below.
 
@@ -133,6 +134,6 @@ You can also re-enable TiDB Dashboard by manually specifying the PD instance tha
 
 ## What's next
 
-- See [Access TiDB Dashboard](/dashboard/dashboard-access.md) to learn how to access and log into the TiDB Dashboard interface.
+- To learn how to access and log into the TiDB Dashboard UI, see [Access TiDB Dashboard](/dashboard/dashboard-access.md).
 
-- See [Improve TiDB Dashboard Security](/dashboard/dashboard-ops-security.md) to learn how to enhance the security of TiDB Dashboard, such as configuring a firewall.
+- To learn how to enhance the security of TiDB Dashboard, such as configuring a firewall, see [Improve TiDB Dashboard Security](/dashboard/dashboard-ops-security.md).
