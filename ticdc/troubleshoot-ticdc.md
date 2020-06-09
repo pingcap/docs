@@ -1,12 +1,12 @@
 ---
-title: Troubleshoot TiCDC Issues
+title: Handle TiCDC Issues
 summary: Learn how to troubleshoot TiCDC issues.
 category: reference
 ---
 
-# Troubleshoot TiCDC Issues
+# Handle TiCDC Issues
 
-This document introduces the common issues and errors that you might often encountered when using TiCDC and provides the corresponding maintenance and troubleshooting methods.
+This document introduces the common issues and errors that you might encounter when using TiCDC usage, and the corresponding maintenance and troubleshooting methods.
 
 ## How to choose `start-ts` when starting a task
 
