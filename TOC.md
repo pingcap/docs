@@ -15,40 +15,38 @@
   + [Try Out TiDB](/quick-start-with-tidb.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
 + Deploy
-  + [软硬件环境需求](/hardware-and-software-requirements.md)
-  + [环境与系统配置检查](/check-before-deployment.md)
-  + 配置拓扑结构
-    + [最小部署拓扑结构](/minimal-deployment-topology.md)
-    + [TiFlash 部署拓扑](/tiflash-deployment-topology.md)
-    + [TiCDC 部署拓扑](/ticdc-deployment-topology.md)
-    + [TiDB Binlog 部署拓扑](/tidb-binlog-deployment-topology.md)
-    + [跨机房部署拓扑结构](/geo-distributed-deployment-topology.md)
-    + [混合部署拓扑结构](/hybrid-deployment-topology.md)
-  + 安装与启动
-    + Linux 环境
-      + [使用 TiUP 部署（推荐）](/production-deployment-using-tiup.md)
-      + [使用 TiUP 离线部署（推荐）](/production-offline-deployment-using-tiup.md)
-      + [使用 Ansible 部署](/online-deployment-using-ansible.md)
-      + [使用 Ansible 离线部署](/offline-deployment-using-ansible.md)
-  + [验证集群状态](/post-installation-check.md)
-  + 性能测试报告及重现指南
-    + [如何用 Sysbench 测试 TiDB](/benchmark/benchmark-tidb-using-sysbench.md)
-    + [如何对 TiDB 进行 TPC-C 测试](/benchmark/benchmark-tidb-using-tpcc.md)
-    + [Sysbench 性能对比 - v4.0 对比 v3.0](/benchmark/benchmark-sysbench-v4-vs-v3.md)
-    + [TPC-H 性能对比 - v4.0 对比 v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-    + [TPC-C 性能对比 - v4.0 对比 v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
-    + [Sysbench 性能对比 - v3.0 对比 v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
-    + [TPC-C 性能对比 - v3.0 对比 v2.1](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
-    + [线上负载与 ADD INDEX 相互影响测试](/benchmark/online-workloads-and-add-index-operations.md)
+  + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
+  + [Environment Configuration Checklist](/check-before-deployment.md)
+  + Topology Patterns
+    + [Minimal Topology](/minimal-deployment-topology.md)
+    + [TiFlash Topology](/tiflash-deployment-topology.md)
+    + [TiCDC Topology](/ticdc-deployment-topology.md)
+    + [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
+    + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
+    + [Hybrid Topology](/hybrid-deployment-topology.md)
+  + Install and Start
+    + Linux OS
+      + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+      + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
+      + [Use TiDB Ansible](/online-deployment-using-ansible.md)
+      + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
+  + [Verify Cluster Status](/post-installation-check.md)
+  + Benchmarks
+    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
+    + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
+    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
+    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
+    + [v3.0 Sysbench Performance Test](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
+    + [v3.0 TPC-C Performance Test](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
+    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
 + Migrate
-  + [支持的数据迁移路径](/data-migration-route.md)
-  + 从 MySQL 迁移至 TiDB
-    + [从 Mydumper 文件迁移](/migrate-from-mysql-mydumper-files.md)
-    + [使用 DM 工具从 Amazon Aurora MySQL 迁移](/migrate-from-aurora-mysql-database.md)
-  + 从 CSV 文件迁移至 TiDB
-    + [使用 TiDB Lightning 导入 CSV 文件](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-    + [使用 LOAD DATA 语句导入 CSV 文件](/sql-statements/sql-statement-load-data.md)
-  + [从 SQL 文件迁移到 TiDB](/migrate-from-mysql-mydumper-files.md)
+  + [Migration Tools Guide](/ecosystem-tool-user-guide.md)
+  + Migrate from MySQL
+    + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
+  + Migrate from CSV Files
+    + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
 + Maintain
   + 升级 TiDB 版本
     + [使用 TiUP 升级（推荐）](/upgrade-tidb-using-tiup.md)
