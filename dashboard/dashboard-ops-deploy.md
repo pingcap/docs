@@ -25,7 +25,7 @@ PD instances, when running for the first time, automatically negotiate with each
 
 When you access a PD instance that does not provide the TiDB Dashboard service, the browser receives a redirection instruction and automatically guides you to re-access the PD instance that provides the TiDB Dashboard service, so that you can use the service normally. This process is shown in the image below.
 
-![Process Schematic](/media/dashboard/dashboard-ops-multiple-pd.svg)
+![Process Schematic](/media/dashboard/dashboard-ops-multiple-pd.png)
 
 > **Note:**
 >
@@ -41,7 +41,7 @@ If a started cluster is deployed using TiUP, you can use the `tiup cluster displ
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-The sample output is as follows:
+A sample output is as follows:
 
 ```bash
 http://192.168.0.123:2379/dashboard/
