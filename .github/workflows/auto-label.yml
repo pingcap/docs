@@ -1,9 +1,6 @@
 name: Auto Label
 on:
   pull_request:
-    branches:
-      - master
-      - 'release-**'
     tags-ignore:
       - '**-cherry-pick'
       - 'translation/**'
