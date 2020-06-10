@@ -76,7 +76,9 @@
     - [Migrate from CSV](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
   + Maintain
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
-    - [Backup and Restore](/backup-and-restore.md)
+    + Backup and Restore
+      - [Use Mydumper and TiDB Lightning](/backup-and-restore.md)
+      - [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
     - [Identify Slow Queries](/identify-slow-queries.md)
   + Scale
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
