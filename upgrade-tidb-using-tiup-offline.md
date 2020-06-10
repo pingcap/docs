@@ -25,6 +25,6 @@ This document describes how to upgrade TiDB using TiUP offline mirror.
 
     The offline mirror is successfully updated. After the overwrite upgrade, if an error is reported when TiUP is running, the cause might be that `manifest` is not updated. You can execute `rm -rf ~/.tiup/manifests` before using TiUP.
 
-## Update TiDB cluster
+## Upgrade TiDB cluster
 
 After the local mirror is updated, refer to [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md) to upgrade the TiDB cluster.
