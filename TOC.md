@@ -265,7 +265,7 @@
     - [Partitioning](/partitioned-table.md)
     - [Character Set and Collation](/character-set-and-collation.md)
     - [SQL Mode](/sql-mode.md)
-    - [SQL Diagnosis](/system-tables/system-table-sql-diagnosis.md)
+    - [SQL Diagnosis](/system-tables/system-table-sql-diagnostics.md)
     - [Views](/views.md)
   + Configuration
     + tidb-server
