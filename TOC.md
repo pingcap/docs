@@ -78,10 +78,22 @@
     - [Migrate from CSV](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
   + Maintain
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
+<<<<<<< HEAD
     - [Backup and Restore](/backup-and-restore-using-mydumper-lightning.md)
   + Identify Abnormal Queries
     - [Identify Slow Queries](/identify-slow-queries.md)
     - [Identify Expensive Queries](/identify-expensive-queries.md)
+=======
+    + Backup and Restore
+      - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
+      - [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
+      + Use BR
+        - [Use BR](/br/backup-and-restore-tool.md)
+        - [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    + Identify Abnormal Queries
+      - [Identify Slow Queries](/identify-slow-queries.md)
+      - [Identify Expensive Queries](/identify-expensive-queries.md)
+>>>>>>> dcb4bb2... dumpling: add export-or-backup-using-dumpling.md (#2705)
   + Scale
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
     - [Scale a TiDB Cluster](/horizontal-scale.md)
