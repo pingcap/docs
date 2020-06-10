@@ -293,7 +293,7 @@
       + [JSON Functions](/functions-and-operators/json-functions.md)
       + [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
       + [Window Functions](/functions-and-operators/window-functions.md)
-      + [Miscellaneous Functions]](/functions-and-operators/miscellaneous-functions.md)
+      + [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
       + [Precision Math](/functions-and-operators/precision-math.md)
       + [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
     + [Constraints](/constraints.md)
