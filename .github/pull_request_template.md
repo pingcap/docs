@@ -20,5 +20,5 @@
 
 <!--Give us some reference link(s) that might help quickly review and merge your PR.-->
 
-- This PR is translated from:<!--Give links here-->
-- Other reference link(s):<!--Give links here-->
+- This PR is translated from:
+- Other reference link(s):
