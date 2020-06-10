@@ -7,7 +7,7 @@ aliases: ['/docs/dev/reference/performance/statement-summary/']
 
 # Statement Summary Tables
 
-To better handle SQL performance-related issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.6/en/statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
+To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.6/en/statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
 
 Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema`. These system tables are similar to `events_statements_summary_by_digest`.
 
