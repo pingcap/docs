@@ -79,10 +79,13 @@
   + [Identify Slow Queries](/identify-slow-queries.md)
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
+  + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
+  + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
 + Performance Tuning
   + Software Tuning
     + Configuration
+      + [TiKV Follower Read](/follower-read.md)
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
   + SQL Tuning
