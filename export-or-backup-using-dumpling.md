@@ -8,8 +8,6 @@ category: how-to
 
 This document introduces how to use the [Dumpling](https://github.com/pingcap/dumpling) tool to export or backup data in TiDB. Dumpling exports data stored in TiDB as SQL or CSV data files and can be used to make a logical full backup or export.
 
-For backups of SST files (KV pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
-
 When using Dumpling, you need to execute the export command on a running cluster. This document assumes that there is a TiDB instance on the `127.0.0.1:4000` host and that this TiDB instance has a root user without a password.
 
 ## Export data from TiDB
@@ -66,7 +64,7 @@ Note that the `--sql` option can be used only for exporting CSV files for now. H
 
 > **Note:**
 > 
-> Currently, Dumpling does not support exporting only certain tables specified by users (i.e. `-T` flag, see [this issue](https://github.com/pingcap/dumpling/issues/76)). If you do need this feature, you can use [MyDumper](/backup-and-restore-using-mydumper-lightning.md) instead.
+> Currently, Dumpling does not support exporting only certain tables specified by users (i.e. `-T` flag, see [this issue](https://github.com/pingcap/dumpling/issues/76)). If you do need this feature, you can use [MyDumper](/mydumper-overview.md) instead.
 
 The exported file is stored in the `./export-<current local time>` directory by default. Commonly used parameters are as follows:
 
@@ -119,4 +117,4 @@ After your operation is completed, set the GC time back (the default value is `1
 update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
 ```
 
-Finally, all the exported data can be imported back to TiDB using [Lightning](/tidb-lightning/tidb-lightning-tidb-backend.md).
+Finally, all the exported data can be imported back to TiDB using [Lightning](/tidb-lightning/tidb-lightning-overview.md).
