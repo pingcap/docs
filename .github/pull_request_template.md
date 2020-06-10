@@ -12,7 +12,7 @@
 - [ ] v4.0 (TiDB 4.0 versions)
 - [ ] v3.1 (TiDB 3.1 versions)
 - [ ] v3.0 (TiDB 3.0 versions)
-- [ ] v2.1 (TiDB 2.1 versions)
+- [ ] v2.1 (TiDB 2.1 versions) 
 
 **If you select two or more versions from above**, to trigger the bot to cherry-pick this PR to your desired release version branch(es), you **must** add corresponding labels such as **needs-cherry-pick-4.0**, **needs-cherry-pick-3.1**, **needs-cherry-pick-3.0**, and **needs-cherry-pick-2.1**.
 
