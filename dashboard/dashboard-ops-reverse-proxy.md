@@ -13,7 +13,7 @@ You can use a reverse proxy to safely expose the TiDB Dashboard service from the
 
 When multiple PD instances are deployed in the cluster, only one of the PD instances actually runs TiDB Dashboard. Therefore, you need to ensure that the upstream of the reverse proxy points to the correct address. For details of this mechanism, see [Deployment with multiple PD instances](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances).
 
-When you use the TiUP deployment tool, execute the following command to get the actual TiDB Dashboard address (replace `CLUSTER_NAME` with the cluster name):
+When you use the TiUP tool for deployment, execute the following command to get the actual TiDB Dashboard address (replace `CLUSTER_NAME` with your cluster name):
 
 {{< copyable "shell-regular" >}}
 
@@ -55,11 +55,11 @@ When you use [NGINX](https://nginx.org/) as the reverse proxy, take the followin
     }
     ```
 
-    Configure the URL filled in `proxy_pass` to be the actual address of the TiDB Dashboard obtained in [Step 1: Get the actual TiDB Dashboard address](#step-1-get-the-actual-tidb-dashboard-address).
+    Configure the URL filled in `proxy_pass` to be the actual address of the TiDB Dashboard obtained in [Step 1](#step-1-get-the-actual-tidb-dashboard-address).
 
    > **Warning:**
    >
-   > Keep the `/dashboard/` path in the `proxy_pass` directive to ensure that only the services under this path are reverse proxied. Otherwise, security risks will be introduced. See [Improve TiDB Dashboard Security](/dashboard/dashboard-ops-security.md).
+   > You must keep the `/dashboard/` path in the `proxy_pass` directive to ensure that only the services under this path are reverse proxied. Otherwise, security risks will be introduced. See [Improve TiDB Dashboard Security](/dashboard/dashboard-ops-security.md).
 
 2. Restart NGINX for the configuration to take effect.
 
@@ -139,7 +139,7 @@ For a deployed cluster:
         dashboard.public-path-prefix: /foo
     ```
 
-3. Perform a rolling restart to all PD instances to for the modified configuration to take effect (replace `CLUSTER_NAME` with cluster name):
+3. Perform a rolling restart to all PD instances for the modified configuration to take effect (replace `CLUSTER_NAME` with your cluster name):
 
     {{< copyable "shell-regular" >}}
 
