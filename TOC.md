@@ -30,9 +30,6 @@
       + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
       + [Use TiDB Ansible](/online-deployment-using-ansible.md)
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
-      + From Binary Tarball (Deprecated)
-        + [Production Deployment](/production-deployment-from-binary-tarball.md)
-        + [Testing Deployment](/test-deployment-from-binary-tarball.md)
   + [Verify Cluster Status](/post-installation-check.md)
   + Benchmarks
     + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
