@@ -6,7 +6,7 @@
 
 ### Which TiDB version(s) do your changes apply to? (Required)
 
-<!--Tick the checkbox(es) below to choose the TiDB version(s) that your changes apply to.--> 
+<!--Tick the checkbox(es) below to choose the TiDB version(s) that your changes apply to.-->
 
 - [ ] master (the latest development version)
 - [ ] v4.0 (TiDB 4.0 versions)
