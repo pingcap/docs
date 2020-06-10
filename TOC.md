@@ -82,6 +82,7 @@
 + Performance Tuning
   + Software Tuning
     + Configuration
+      + [TiKV Memory Tuning](/tune-tikv-memory-performance.md)
       + [TiKV Follower Read](/follower-read.md)
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
