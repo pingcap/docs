@@ -20,13 +20,13 @@ If you need to import full data from MySQL or Aurora, use [Dumpling](/export-or-
 
 If you need to migrate both full data and incremental data from MySQL/Aurora, use [TiDB Data Migration](https://pingcap.com/docs-cn/tidb-data-migration/stable/overview/) (DM) to perform the full and incremental data migration.
 
-If the full data volume is large (at TB level), you can first use [Dumpling](/export-or-backup-using-dumpling.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to perform the full data migration, and then use DM to perform the incremental data migration.
+If the full data volume is large (at the TB level), you can first use [Dumpling](/export-or-backup-using-dumpling.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to perform the full data migration, and then use DM to perform the incremental data migration.
 
 ## Back up and restore TiDB cluster
 
 If you need to back up a TiDB cluster or restore backed up data to the cluster, use [BR](/br/backup-and-restore-tool.md) (Backup & Restore).
 
-In addition, BR can also be used to perform [incremental backup](/br/backup-and-restore-tool.md#back-up-incremental-data) and [incremental restoration](/br/backup-and-restore-tool.md#restore-incremental-data) of TiDB cluster data.
+In addition, BR can also be used to perform [incremental backup](/br/backup-and-restore-tool.md#back-up-incremental-data) and [incremental restore](/br/backup-and-restore-tool.md#restore-incremental-data) of TiDB cluster data.
 
 ## Migrate data from TiDB
 
@@ -36,4 +36,4 @@ If you also need to migrate incremental data, use [TiDB Binlog](/tidb-binlog/tid
 
 ## TiDB incremental data subscription
 
-If you need to subscribe to the change of TiDB incremental data, use [TiDB Binlog](/tidb-binlog/binlog-slave-client.md).
+If you need to subscribe to TiDB's incremental changes, use [TiDB Binlog](/tidb-binlog/binlog-slave-client.md).

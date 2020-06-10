@@ -25,8 +25,8 @@ The following are the basics of Dumpling:
 
 TiDB Lightning supports two modes:
 
-- `importer`: This mode uses tikv-importer as the back end, which is usually for importing a large amount of data (TB). During the import, the cluster cannot provide normal services.
-- `tidb`: This mode uses TiDB/MySQL as the back end, which is slower than the `importer` mode but can be performed online. It also supports importing data to MySQL.
+- `importer`: This mode uses tikv-importer as the backend, which is usually for importing a large amount of data (at the TB level). During the import, the cluster cannot provide services.
+- `tidb`: This mode uses TiDB/MySQL as the backend, which is slower than the `importer` mode but can be performed online. It also supports importing data to MySQL.
 
 The following are the basics of TiDB Lightning:
 
@@ -40,19 +40,19 @@ The following are the basics of TiDB Lightning:
 >
 > The Loader tool is no longer maintained. For scenarios related to Loader, it is recommended that you use the `tidb` mode of TiDB Lighting instead.
 
-## Back up and restore
+## Backup and restore
 
-[BR](/br/backup-and-restore-tool.md) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. BR can effectively back up and restore TiDB clusters of huge data volume.
+[Backup & Restore](/br/backup-and-restore-tool.md) (BR) is a command-line tool for distributed backup and restore of the TiDB cluster data. BR can effectively back up and restore TiDB clusters of huge data volume.
 
 The following are the basics of BR:
 
-- Input and output data source: SST + `backupmeta` file
+- [Input and output data source](/br/backup-and-restore-tool.md#types-of-backup-files): SST + `backupmeta` file
 - Supported TiDB versions: v3.1 and v4.0
 - Kubernetes support: Yes. See [Back up Data to S3-Compatible Storage Using BR](https://pingcap.com/docs/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br/) and [Restore Data from S3-Compatible Storage Using BR](https://pingcap.com/docs/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br/) for details.
 
-## Incremental log replication
+## Incremental data replication
 
-[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides near real-time sync and backup. It can be used for incremental data replication between TiDB clusters, such as making a TiDB cluster the slave cluster of another TiDB cluster.
+[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides near real-time sync and backup. It can be used for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
 
 The following are the basics of TiDB Binlog:
 
@@ -64,7 +64,7 @@ The following are the basics of TiDB Binlog:
 
 ### Data migration
 
-[TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB into TiDB.
+[TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB to TiDB.
 
 The following are the basics of DM:
 
@@ -83,4 +83,4 @@ If the data volume is at the TB level, take the following steps:
 
 > **Note:**
 >
-> The Syncer tool is no longer maintained. For scenarios related to Syncer, it is recommended that you use the data incremental feature of DM instead.
+> The Syncer tool is no longer maintained. For scenarios related to Syncer, it is recommended that you use DM's incremental task mode instead.
