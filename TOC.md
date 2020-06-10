@@ -154,6 +154,9 @@
   + [Loader](/loader-overview.md)
   + [Mydumper](/mydumper-overview.md)
   + [Syncer](/syncer-overview.md)
+  + TiSpark
+    + [Quick Start](/get-started-with-tispark.md)
+    + [User Guide](/tispark-overview.md)
 + Reference
   + [Architecture](/architecture.md)
   + Key Monitoring Metrics
