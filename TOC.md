@@ -72,8 +72,6 @@
   + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   + [Monitoring API](/tidb-monitoring-api.md)
   + [Deploy Monitoring Services](/deploy-monitoring-services.md)
-  + [Monitoring Framework](/tidb-monitoring-framework.md)
-  + [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
   + [TiDB Cluster Alert Rules](/alert-rules.md)
   + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
 + Troubleshoot
