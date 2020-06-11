@@ -17,10 +17,6 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 
 ## Parameters
 
-### `LocalOpt`
-
-You can specify that the imported data file is located on the client or on the server by configuring the `LocalOpt` parameter. Currently, TiDB only supports data import from the client. Therefore, when importing data, set the value of `LocalOpt` to `Local`.
-
 ### `Fields` and `Lines`
 
 You can specify how to process the data format by configuring the `Fields` and `Lines` parameters.
@@ -52,8 +48,6 @@ LINES TERMINATED BY '\n'
 ### `IGNORE number LINES`
 
 You can ignore the first `number` lines of a file by configuring the `IGNORE number LINES` parameter. For example, if you configure `IGNORE 1 LINES`, the first line of a file is ignored.
-
-In addition, TiDB currently only supports parsing the syntax of the `DuplicateOpt`, `CharsetOpt`, and `LoadDataSetSpecOpt` parameters.
 
 ## Examples
 
