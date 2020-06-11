@@ -80,6 +80,7 @@
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
       - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
+      - [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
       + Use BR
         - [Use BR](/br/backup-and-restore-tool.md)
         - [BR Use Cases](/br/backup-and-restore-use-cases.md)
@@ -330,7 +331,8 @@
       - [Error Handling](/tidb-binlog/handle-tidb-binlog-errors.md)
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
   + Tools
-    - [Tools User Guide](/ecosystem-tool-user-guide.md)
+    - [Overview](/ecosystem-tool-user-guide.md)
+    - [Use Cases](/ecosystem-tool-user-case.md)
     - [Download](/download-ecosystem-tools.md)
     + Backup & Restore (BR)
       - [Use BR](/br/backup-and-restore-tool.md)

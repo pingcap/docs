@@ -1,11 +1,11 @@
 ---
-title: Download
+title: Download Tools
 summary: Download the most officially maintained versions of TiDB enterprise tools.
 category: reference
 aliases: ['/docs/v3.1/reference/tools/download/']
 ---
 
-# Download
+# Download Tools
 
 This document collects the available downloads for most officially maintained versions of TiDB enterprise tools.
 
