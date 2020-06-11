@@ -315,6 +315,7 @@
   + Tools
     - [Overview](/ecosystem-tool-user-guide.md)
     - [Use Cases](/ecosystem-tool-user-case.md)
+    - [Download](/download-ecosystem-tools.md)
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
@@ -341,7 +342,6 @@
     - [PD Recover](/pd-recover.md)
     - [TiKV Control](/tikv-control.md)
     - [TiDB Control](/tidb-control.md)
-    - [Download](/download-ecosystem-tools.md)
 - [TiDB in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/)
 + FAQs
   - [TiDB FAQs](/faq/tidb-faq.md)
