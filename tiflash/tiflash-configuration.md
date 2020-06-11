@@ -77,7 +77,7 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD, an
     metrics_port = The port through which Prometheus pulls metrics information.
 [profiles]
 [profiles.default]
-    dt_enable_logical_split = true # Wheter the segment of DeltaTree Storage Engine use logical split or not. Logical split can lower the write amplification, and improve write speed. The drawback is waste of disk space. By default true.
+    dt_enable_logical_split = true # The default value is `true`. This parameter determines whether the segment of DeltaTree Storage Engine uses logical split. Using the logical split can reduce the write amplification, and improve the write speed. However, these are at the cost of disk space waste.
     max_memory_usage_for_all_queries = 0 # The memory usage limit of the generated intermediate data when queries are executed. The default value is `0`, which means no limit.
 ```
 
