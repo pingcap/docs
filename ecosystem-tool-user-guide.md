@@ -38,7 +38,7 @@ The following are the basics of TiDB Lightning:
 
 > **Note:**
 >
-> The Loader tool is no longer maintained. For scenarios related to Loader, it is recommended that you use the `tidb` mode of TiDB Lighting instead.
+> The Loader tool is no longer maintained. For scenarios related to Loader, it is recommended that you use the [`tidb` mode of TiDB Lighting](/tidb-lightning/tidb-lightning-tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-backend) instead.
 
 ## Backup and restore
 
@@ -62,65 +62,7 @@ The following are the basics of TiDB Binlog:
 - Supported TiDB versions: v2.1 or later
 - Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-binlog/) and [TiDB Binlog Drainer Configurations in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer/) for details.
 
-<<<<<<< HEAD
-#### CDC (Beta, under development, ETA May/June 2020 with TiDB 4.0)
-
-[CDC](https://pingcap.com/docs/dev/reference/tools/ticdc/overview/) (Change Data Capture) is a system that collects changelog for key value pairs in TiKV and outputs to downstream systems in row changed order.
-
-- Input/Output: 
-    - Input: TiDB Cluster
-    - Output: MySQL, TiDB, Kafka or incremental backup files
-- Supported TiDB versions: v4.0
-- Kubernetes support: On the development road map, ETA Q2 2020
-
-## Recommended tools for TiDB 3.1
-
-- MySQL full data backup: use Mydumper
-- MySQL full data import to TiDB:
-    - TB scale: use TiDB Lightning
-    - Sub-TB scale: use DM
-- MySQL incremental data sync to TiDB: use DM
-- TiDB full data backup: use BR
-- TiDB full data restore: use BR
-- TiDB incremental backup & restore: use TiDB-Binlog
-
-For the recommended tools for other TiDB versions, see [Recommended tools for TiDB versions](https://pingcap.com/docs/dev/reference/tools/user-guide/#recommended-tools-for-tidb-versions).
-
-## Tools evolution roadmap 
-
-- TiDB Full Data Backup:
-    - Mydumper -> BR
-    - Mydumper -> [dumpling](https://github.com/pingcap/dumpling) (under development, replace Lighting in lightweight scenarios)
-- TiDB Full Data Restore:
-    - Loader -> Lightning -> BR
-- MySQL Data Migration:
-    - Mydumper/Loader + Syncer  -> DM (in the next step, we will integrate Lightning into DM)
-- TiDB Incremental Data Migration:
-    - TiDB Binlog -> CDC
-
-## Full-path data migration solution for TiDB 3.1
-
-For TiDB 3.1 versions, this section covers how to migrate data from MySQL to TiDB, between TiDB clusters, and from TiDB to MySQL for each version, as well as how to back up and restore data.
-
-### Migrating MySQL data to TiDB
-
-If the MySQL data volume is in TBs:
-
-- Use Mydumper to export MySQL full data as a backup
-- Use Lightning to import the full MySQL backup data into TiDB cluster
-- Use DM to replicate incremental MySQL data to TiDB
-
-If the MySQL data volume is in GBs:
-
-- Use DM to migrate MySQL data to TiDB for both full and incremental data import
-
-### Data replication between TiDB/MySQL clusters
-
-You can use TiDB Binlog to replicate data between TiDB clusters. You can also use TiDB Binlog to replicate data to the downstream MySQL cluster.
-
-### Full backup and restore of the data in TiDB/MySQL clusters
-=======
-### Data migration
+## Data migration
 
 [TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB to TiDB.
 
@@ -130,7 +72,6 @@ The following are the basics of DM:
 - Output: TiDB cluster
 - Supported TiDB versions: all versions
 - Kubernetes support: No, under development
->>>>>>> 37cbeea... reference: refine the ecosystem tools user guide (#2759)
 
 If the data volume is below the TB level, it is recommended to migrate data from MySQL/MariaDB to TiDB directly using DM. The migration process includes the full data import and export and the incremental data replication.
 
