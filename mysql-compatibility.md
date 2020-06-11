@@ -93,7 +93,7 @@ mysql> select _tidb_rowid, id from t;
 
 ### Performance schema
 
-Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/monitor-a-tidb-cluster.md) for performance metrics instead.
+Performance schema tables return empty results in TiDB. TiDB uses a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) for performance metrics instead.
 
 TiDB supports the `events_statements_summary_by_digest` table from TiDB 3.0.4. For more information, see [Statement Summary Table](/statement-summary-tables.md).
 
