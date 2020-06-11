@@ -315,14 +315,7 @@
   + Tools
     - [Overview](/ecosystem-tool-user-guide.md)
     - [Use Cases](/ecosystem-tool-user-case.md)
-<<<<<<< HEAD
-=======
     - [Download](/download-ecosystem-tools.md)
-    + Backup & Restore (BR)
-      - [Use BR](/br/backup-and-restore-tool.md)
-      - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      - [BR FAQ](/br/backup-and-restore-faq.md)
->>>>>>> 096ea27... tools: add a missing tool download link in TOC (#2800)
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
