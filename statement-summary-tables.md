@@ -9,12 +9,12 @@ aliases: ['/docs/dev/reference/performance/statement-summary/']
 
 To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.6/en/statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
 
-Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema`. These system tables are similar to `events_statements_summary_by_digest`.
+Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema`. These system tables are similar to `events_statements_summary_by_digest` in terms of functions.
 
-- `statements_summary`
-- `statements_summary_history`
-- `cluster_statements_summary`
-- `cluster_statements_summary_history`
+- [`statements_summary`](#statements_summary)
+- [`statements_summary_history`](#statements_summary_history)
+- [`cluster_statements_summary`](#cluster_statements_summary-and-cluster_statements_summary_history)
+- [`cluster_statements_summary_history`](#cluster_statements_summary-and-cluster_statements_summary_history)
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
@@ -108,7 +108,7 @@ Use the following system variables to control the statement summary:
 
 The following shows a configuration example:
 
--{{< copyable "sql" >}}
+{{< copyable "sql" >}}
 
 ```sql
 set global tidb_enable_stmt_summary = true;
@@ -133,7 +133,7 @@ The above system variables have two scopes: global and session. These scopes wor
 
 The statement summary tables have the following limitations:
 
-- The statement summary data are lost when the TiDB server is restarted. This is because statement summary tables are memory tables, and the data is cached in memory instead of being persisted on storage.
+The statement summary data are lost when the TiDB server is restarted. This is because statement summary tables are memory tables, and the data is cached in memory instead of being persisted on storage.
 
 ## Troubleshooting examples
 
