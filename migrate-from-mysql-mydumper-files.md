@@ -17,8 +17,6 @@ Before you start the migration, [deploy TiDB Lightning](/tidb-lightning/deploy-t
 > **Note:**
 >
 > - If you choose the Importer-backend to import data, you need to deploy `tikv-importer` along with TiDB Lightning. During the import process, the TiDB cluster cannot provide services. This mode imports data quickly, which is suitable for importing a large amount of data (above the TB level).
-> - If you choose the TiDB-backend, deploy TiDB Lightning only. The cluster can provide services normally during the import.
-> - For detailed differences between the two backend mode, see [TiDB Lightning Backend](/tidb-lightning/tidb-lightning-tidb-backend.md).
 
 ## Step 2: Configure data source of TiDB Lightning
 
