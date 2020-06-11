@@ -36,7 +36,7 @@ listen_host = The TiFlash service listening host. # Generally, it is configured 
 tcp_port = The TiFlash TCP service port.
 http_port = The TiFlash HTTP service port.
 mark_cache_size = 5368709120 # The memory cache limit of metadata of data blocks, normally you don't need to modify.
-minmax_index_cache_size = 5368709120 # The memory cache limit of min-max index of data blocks, normally you don't need to modify.
+minmax_index_cache_size = 5368709120 # The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
 ```
 
 ```
