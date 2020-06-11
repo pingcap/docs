@@ -186,7 +186,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 In the `config` diagnosis rule, the following two diagnosis rules are executed by querying the `CLUSTER_CONFIG` system table:
 
-* Check whether the configuration values of the same component are consistent. Not all configuration items has this consistency check. The white list of consistency check is as follows:
+* Check whether the configuration values of the same component are consistent. Not all configuration items has this consistency check. The allowlist of consistency check is as follows:
 
     ```go
     // The whitelist of the TiDB configuration consistency check
