@@ -133,9 +133,9 @@ create table t (a bigint primary key auto_random)
 
 The above two statements have the same meaning.
 
-In the result of `show create table`, the `AUTO_RANDOM` attribute is commented out. This comment includes a attribute indicator (for example, `/*T![auto_rand] auto_random */`). Here `auto_rand` indicates that the `AUTO_RANDOM` attribute is introduced in v3.1.0. TiDB of a lower version ignores the `AUTO_RANDOM` attribute in the above comment.
+In the result of `show create table`, the `AUTO_RANDOM` attribute is commented out. This comment includes a attribute identifier (for example, `/*T![auto_rand] auto_random */`). Here `auto_rand` represents the `AUTO_RANDOM` attribute. Only the version of TiDB that implements the feature corresponding to this identifier can parse the SQL statement fragment properly.
 
-This attribute supports forward compatibility, namely, downgrade compatibility. TiDB earlier than v3.1.0 ignores the `AUTO_RANDOM` attribute of a table (with the above comment), so TiDB of earlier versions can also use the table with the attribute.
+This attribute supports forward compatibility, namely, downgrade compatibility. TiDB that has not implemented this feature ignores the `AUTO_RANDOM` attribute of a table (with the above comment), so TiDB of earlier versions can also use the table with the attribute.
 
 ## Restrictions
 
