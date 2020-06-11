@@ -62,6 +62,7 @@
     + Use BR Tool
       + [Use BR Tool](/br/backup-and-restore-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
+      + [BR storages](/br/backup-and-restore-storages.md)
   + [Daily Checklist](/daily-check.md)
   + [Maintain TiCDC](/ticdc/manage-ticdc.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -97,7 +98,9 @@
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
+        + [Access Tables Using `IndexMerge`](/index-merge.md)
 + Tutorials
+  + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
   + Best Practices
     + [Java Application Development](/best-practices/java-app-best-practices.md)
     + [Use HAProxy](/best-practices/haproxy-best-practices.md)
@@ -146,7 +149,11 @@
     + [Troubleshoot](/troubleshoot-tidb-lightning.md)
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     + [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
-  + [TiCDC](/ticdc/ticdc-overview.md)
+  + TiCDC
+      - [Overview](/ticdc/ticdc-overview.md)
+      - [Configure Sink URI](/ticdc/sink-url.md)
+      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+      - [Column and DDL Type Codes](/ticdc/column-ddl-type-codes.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -197,6 +204,7 @@
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
+      - [`BACKUP`](/sql-statements/sql-statement-backup.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -236,6 +244,7 @@
       - [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
       - [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
       - [`REPLACE`](/sql-statements/sql-statement-replace.md)
+      - [`RESTORE`](/sql-statements/sql-statement-restore.md)
       - [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
       - [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
       - [`SELECT`](/sql-statements/sql-statement-select.md)
@@ -243,6 +252,7 @@
       - [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+      - [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
       - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       - [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
@@ -369,6 +379,7 @@
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
+      + [FAQ](/tiflash/tiflash-faq.md)
   + TiUP
     + [Overview](/tiup/tiup-overview.md)
     + [Manage TiUP Components](/tiup/manage-tiup-component.md)
@@ -378,8 +389,6 @@
       + [tiup-mirror](/tiup/tiup-mirrors.md)
       + [tiup-bench](/tiup/tiup-bench.md)
   + [Errors Codes](/error-codes.md)
-  + [TiCDC Overview](/ticdc/ticdc-overview.md)
-  + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
 + FAQs
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
