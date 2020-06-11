@@ -8,7 +8,6 @@
 + Introduction
   - [TiDB Introduction](/overview.md)
   + Benchmarks
-<<<<<<< HEAD
     - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
@@ -75,8 +74,10 @@
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
+      - [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
       - [Migration Case of Amazon Aurora](/migrate-from-aurora-mysql-database.md)
-    - [Migrate from CSV](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    - [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    - [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
   + Maintain
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
@@ -85,31 +86,6 @@
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
-=======
-    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
-    + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
-    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
-    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
-    + [v3.0 Sysbench Performance Test](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
-    + [v3.0 TPC-C Performance Test](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
-    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
-+ Migrate
-  + [Migration Tools Guide](/ecosystem-tool-user-guide.md)
-  + Migrate from MySQL
-    + [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
-    + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
-  + Migrate from CSV Files
-    + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-    + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
-  + [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
-+ Maintain
-  + Upgrade
-    + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
-    + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
-    + [Use TiDB Operator](https://pingcap.com/docs/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster/)
-    + [Use TiDB Ansible](/upgrade-tidb-using-ansible.md)
->>>>>>> ab764f1... migrate: migrate from mysql files (#2771)
   + Scale
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
     - [Scale a TiDB Cluster](/horizontal-scale.md)
