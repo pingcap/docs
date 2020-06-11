@@ -28,7 +28,7 @@ This document takes the TiDB-backend as an example. Create the `tidb-lightning.t
 
     ```
     [mydumper]
-    # data source directory
+    # Data source directory
     data-source-dir = "/data/export"
     ```
 
