@@ -69,6 +69,7 @@
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
 + Monitor and Alert
+  + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   + [Monitoring API](/tidb-monitoring-api.md)
   + [Deploy Monitoring Services](/deploy-monitoring-services.md)
   + [Monitoring Framework](/tidb-monitoring-framework.md)
