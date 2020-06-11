@@ -287,6 +287,11 @@
       - [Error Handling](/tidb-binlog/handle-tidb-binlog-errors.md)
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
   + Tools
+<<<<<<< HEAD
+=======
+    - [Overview](/ecosystem-tool-user-guide.md)
+    - [Use Cases](/ecosystem-tool-user-case.md)
+>>>>>>> 42f41a7... tools: add ecosystem tools overview and use case in 3.0 (#2795)
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
