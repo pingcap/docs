@@ -52,6 +52,7 @@
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
+    + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
     + [Use TiDB Operator](https://pingcap.com/docs/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster/)
     + [Use TiDB Ansible](/upgrade-tidb-using-ansible.md)
   + Scale
@@ -112,7 +113,8 @@
     + [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   + [Use Placement Rules](/configure-placement-rules.md)
 + TiDB Ecosystem Tools
-  + [Tools Guide](/ecosystem-tool-user-guide.md)
+  + [Overview](/ecosystem-tool-user-guide.md)
+  + [Use Cases](/ecosystem-tool-user-case.md)
   + [Download](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
     + [BR FAQ](/br/backup-and-restore-faq.md)
