@@ -188,6 +188,7 @@
   + SQL
     + SQL Language Structure and Syntax
       + Attributes
+        + [AUTO_INCREMENT](/auto-increment.md)
         + [AUTO_RANDOM](/auto-random.md)
       + [Literal Values](/literal-values.md)
       + [Schema Object Names](/schema-object-names.md)
