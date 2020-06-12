@@ -142,7 +142,7 @@ TiDB supports storage engine abstraction similar to MySQL, but you need to speci
 
 ### SQL modes
 
-- The compatibility modes deprecated in MySQL 5.7 and removed in MySQL 8.0 are not supported (such as `ORACLE` and `POSTGRESQL`).
+- Does not support the compatibility mode, such as `ORACLE` and `POSTGRESQL`. The compatibility mode is deprecated in MySQL 5.7 and removed in MySQL 8.0.
 - The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
 - The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are supported for compatibility, but are not applicable to TiDB.
 
