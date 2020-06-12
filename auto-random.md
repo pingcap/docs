@@ -118,11 +118,7 @@ TiDB supports parsing the version comment syntax. See the following example:
 {{< copyable "sql" >}}
 
 ```sql
-<<<<<<< HEAD
-create table t (a int primary key /*T!30100 auto_random */)
-=======
-create table t (a bigint primary key /*T![auto_rand] auto_random */)
->>>>>>> 48e7da5... update auto-random.md (#2811)
+create table t (a int primary key /*T![auto_rand] auto_random */)
 ```
 
 {{< copyable "sql" >}}
