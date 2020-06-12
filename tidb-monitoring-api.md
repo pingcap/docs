@@ -19,7 +19,6 @@ The state interface monitors the basic information of a specific component in th
 
 - TiDB API address: `http://${host}:${port}`
 - Default port: `10080`
-- Details about API names: see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
 
 The following example uses `http://${host}:${port}/status` to get the current state of the TiDB server and to determine whether the server is alive. The result is returned in JSON format.
 
