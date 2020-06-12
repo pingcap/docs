@@ -9,7 +9,7 @@ aliases: ['/docs/dev/reference/transactions/transaction-optimistic/','/docs/dev/
 
 This document introduces the principles of TiDB's optimistic transaction model and related features.
 
-TiDB uses the optimistic transaction model by default. In TiDB's optimistic transaction model, the two-phase commit begins only after the transaction is committed.
+TiDB uses the optimistic transaction model by default. In TiDB's optimistic transaction model, for write-write conflicts, the two-phase commit begins only when the transaction is committed.
 
 > **Note:**
 >
