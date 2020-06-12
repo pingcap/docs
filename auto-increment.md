@@ -167,7 +167,7 @@ mysql> select * from t;
 1 row in set (0.01 sec)
 ```
 
-At this time, if you invalidate the auto-increment cache of this column and redo the implicit assignment, the result is as follows:
+At this time, if you invalidate the auto-increment cache of this column and redo the implicit insertion, the result is as follows:
 
 ```sql
 mysql> delete from t;
@@ -188,7 +188,7 @@ mysql> select * from t;
 1 row in set (0.00 sec)
 ```
 
-The re-assigned value is `101`, which means the size of cache allocated to the auto-increment ID is `100`.
+The re-assigned value is `101`. This shows that the size of cache allocated to the auto-increment ID is `100`.
 
 In addition, when the length of consecutive IDs in a batch insert statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can be inserted properly.
 
