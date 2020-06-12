@@ -43,13 +43,16 @@
 + Migrate
   + [Migration Tools Guide](/ecosystem-tool-user-guide.md)
   + Migrate from MySQL
+    + [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
     + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
   + Migrate from CSV Files
     + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
     + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
+  + [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
+    + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
     + [Use TiDB Operator](https://pingcap.com/docs/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster/)
     + [Use TiDB Ansible](/upgrade-tidb-using-ansible.md)
   + Scale
@@ -80,6 +83,7 @@
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+  + [Handle TiCDC Issues](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
 + Performance Tuning
   + Software Tuning
@@ -111,7 +115,8 @@
     + [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   + [Use Placement Rules](/configure-placement-rules.md)
 + TiDB Ecosystem Tools
-  + [Tools Guide](/ecosystem-tool-user-guide.md)
+  + [Overview](/ecosystem-tool-user-guide.md)
+  + [Use Cases](/ecosystem-tool-user-case.md)
   + [Download](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
     + [BR FAQ](/br/backup-and-restore-faq.md)
