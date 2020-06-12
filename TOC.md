@@ -74,8 +74,10 @@
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
+      - [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
       - [Migration Case of Amazon Aurora](/migrate-from-aurora-mysql-database.md)
-    - [Migrate from CSV](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    - [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    - [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
   + Maintain
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
