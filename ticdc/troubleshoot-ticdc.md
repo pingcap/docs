@@ -6,11 +6,11 @@ category: reference
 
 # Handle TiCDC Issues
 
-This document introduces the common issues and errors that you might encounter when using TiCDC usage, and the corresponding maintenance and troubleshooting methods.
+This document introduces the common issues and errors that you might encounter when using TiCDC, and the corresponding maintenance and troubleshooting methods.
 
 ## How to choose `start-ts` when starting a task
 
-The `start-ts` of a replication task corresponds to a Time Sharing Option (TSO) in the upstream TiDB cluster. From this TSO, TiCDC requests data in a replication task. Therefore, the `start-ts` of the replication task must meet the following requirements:
+The `start-ts` of a replication task corresponds to a Timestamp Oracle (TSO) in the upstream TiDB cluster. TiCDC requests data from this TSO in a replication task. Therefore, the `start-ts` of the replication task must meet the following requirements:
 
 - The value of `start-ts` is larger than the `tikv_gc_safe_point` value of the current TiDB cluster. Otherwise, you will fail to create a task.
 - Before starting a task, ensure that the downstream has all data before `start-ts`. For scenarios such as replicating data to message queues, if the data consistency between upstream and downstream is not required, you can relax this requirement according to your application need.
