@@ -1,15 +1,15 @@
 ---
-title: Deploy Monitoring Services for TiDB Cluster
+title: Deploy Monitoring Services for the TiDB Cluster
 summary: Learn how to deploy monitoring services for the TiDB cluster.
 category: how-to
 aliases: ['/docs/dev/how-to/monitor/monitor-a-cluster/','/docs/dev/monitor-a-tidb-cluster/']
 ---
 
-# Deploy Monitoring Services for TiDB Cluster
+# Deploy Monitoring Services for the TiDB Cluster
 
-This document is useful if you want to manually deploy the TiDB monitoring and alert services.
+This document is intended for users who want to manually deploy TiDB monitoring and alert services.
 
-If you deploy the TiDB cluster using TiUP, the monitoring and alert services are automatically deployed, and no manual deployment is required.
+If you deploy the TiDB cluster using TiUP, the monitoring and alert services are automatically deployed, and no manual deployment is needed.
 
 ## Deploy Prometheus and Grafana
 

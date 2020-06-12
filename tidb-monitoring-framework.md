@@ -37,15 +37,15 @@ Grafana is an open source project for analyzing and visualizing metrics. TiDB us
 - {TiDB_Cluster_name}-Lightning: Monitoring metrics related to TiDB Lightning.
 - {TiDB_Cluster_name}-Node_exporter: Monitoring metrics related to the operating system.
 - {TiDB_Cluster_name}-Overview: Monitoring overview related to important components.
-- {TiDB_Cluster_name}-PD: Monitoring metrics related to PD server.
+- {TiDB_Cluster_name}-PD: Monitoring metrics related to the PD server.
 - {TiDB_Cluster_name}-Performance-Read: Monitoring metrics related to read performance.
 - {TiDB_Cluster_name}-Performance-Write: Monitoring metrics related to write performance.
-- {TiDB_Cluster_name}-TiDB: Detailed monitoring metrics related to TiDB server.
+- {TiDB_Cluster_name}-TiDB: Detailed monitoring metrics related to the TiDB server.
 - {TiDB_Cluster_name}-TiDB-Summary: Monitoring overview related to TiDB.
 - {TiDB_Cluster_name}-TiFlash-Proxy-Summary: Monitoring overview of the proxy server that is used to replicate data to TiFlash.
 - {TiDB_Cluster_name}-TiFlash-Summary: Monitoring overview related to TiFlash.
-- {TiDB_Cluster_name}-TiKV-Details: Detailed monitoring metrics related to TiKV server.
-- {TiDB_Cluster_name}-TiKV-Summary: Monitoring overview related to TiKV server.
+- {TiDB_Cluster_name}-TiKV-Details: Detailed monitoring metrics related to the TiKV server.
+- {TiDB_Cluster_name}-TiKV-Summary: Monitoring overview related to the TiKV server.
 - {TiDB_Cluster_name}-TiKV-Trouble-Shooting: Monitoring metrics related to the TiKV error diagnostics.
 
 Each group has multiple panel labels of monitoring metrics, and each panel contains detailed information of multiple monitoring metrics. For example, the **Overview** monitoring group has five panel labels, and each labels corresponds to a monitoring panel. See the following UI:
