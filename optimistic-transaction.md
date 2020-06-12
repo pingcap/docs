@@ -13,11 +13,11 @@ TiDB uses the optimistic transaction model by default. In TiDB's optimistic tran
 
 > **Note:**
 >
-> Starting from v3.0.8, the newly created TiDB clusters use the [pessimistic transaction model](/pessimistic-transaction.md) by default. However, this does not affect your clusters if you upgrading from v3.0.7 or earlier to v3.0.8 (and later). In other words, **only newly created clusters default to using the pessimistic transaction model**.
+> Starting from v3.0.8, newly created TiDB clusters use the [pessimistic transaction model](/pessimistic-transaction.md) by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction model**.
 
 ## Principles of optimistic transactions
 
-To support distributed transactions, TiDB adopts two-phase commit (2PC) in the optimistic transaction model. The procedure is as follows:
+To support distributed transactions, TiDB adopts two-phase commit (2PC) in optimistic transactions. The procedure is as follows:
 
 ![2PC in TiDB](/media/2pc-in-tidb.png)
 
@@ -36,7 +36,7 @@ To support distributed transactions, TiDB adopts two-phase commit (2PC) in the o
 
 4. The client issues a commit request.
 
-5. TiDB begins 2PC to ensure the atomicity of transactions and persist data in store.
+5. TiDB begins 2PC, and persist data in store while guaranteeing the atomicity of transactions.
 
     1. TiDB selects a Primary Key from the data to be written.
     2. TiDB receives the information of Region distribution from PD, and groups all keys by Region accordingly.
@@ -66,11 +66,11 @@ However, TiDB transactions also have the following disadvantages:
 
 ## Transaction retries
 
-In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. TiDB uses optimistic concurrency control by default, whereas MySQL applies pessimistic concurrency control. This means that MySQL adds locks during the execution of a SQL statement, and its Repeatable Read isolation level allows for non-repeatable reads, so commits generally do not encounter exceptions. To lower the difficulty of adapting applications, TiDB provides a retry function that runs inside the database.
+In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. TiDB uses optimistic concurrency control by default, whereas MySQL applies pessimistic concurrency control. This means that MySQL adds locks during SQL execution, and its Repeatable Read isolation level allows for non-repeatable reads, so commits generally do not encounter exceptions. To lower the difficulty of adapting applications, TiDB provides an internal retry mechanism.
 
 ### Automatic retry
 
-If write-write conflict occurs during a transaction commit, TiDB retries the write operations automatically. You can enable or disable this default function by setting `tidb_disable_txn_auto_retry` to `off` and set the retry limit by configuring `tidb_retry_limit`:
+If a write-write conflict occurs during the transaction commit, TiDB automatically retries the SQL statement that includes write operations. You can enable the automatic retry by setting `tidb_disable_txn_auto_retry` to `off` and set the retry limit by configuring `tidb_retry_limit`:
 
 ```toml
 # Whether to disable automatic retry. ("on" by default)
@@ -130,7 +130,7 @@ If your application can tolerate lost updates, and does not require `REPEATABLE 
 
 ## Conflict detection
 
-Because TiDB is a distributed database, the conflict detection in the memory is performed in the TiKV layer, mainly in the prewrite phase. TiDB instances are stateless and unaware of each other, which means they cannot confirm whether there are conflicts or not. Therefore, the conflict detection is performed in the TiKV layer.
+As a distributed database, TiDB performs in-memory conflict detection in the TiKV layer, mainly in the prewrite phase. TiDB instances are stateless and unaware of each other, which means they cannot know whether their writes result in conflicts across the cluster. Therefore, conflict detection is performed in the TiKV layer.
 
 The configuration is as follows:
 
