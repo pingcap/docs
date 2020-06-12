@@ -19,7 +19,7 @@ To migrate data from MySQL to TiDB, it is recommended to use one of the followin
 
 #### Scenarios
 
-You can use Mydumper and TiDB Lightning to migrate full data when the data size is greater than 1TB. If you need to replicate incremental data, it is recommended to [use TiDB Data Migration (DM)](#use-dm) to create an incremental replication task.
+You can use Mydumper and TiDB Lightning to migrate full data when the data size is greater than 1 TB. If you need to replicate incremental data, it is recommended to [use DM](#use-dm) to create an incremental replication task.
 
 #### Migration method
 
