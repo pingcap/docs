@@ -12,7 +12,7 @@ This document describes the paths you can use to migrate data to TiDB, including
 
 To migrate data from MySQL to TiDB, it is recommended to use one of the following methods:
 
-- [Use Mydumper and TiDB Lightning (full data)](#use-mydumper-and-tidb-lightning-full-data).
+- [Use Mydumper and TiDB Lightning](#use-mydumper-and-tidb-lightning-full-data) to migrate full data.
 - [Use DM (full and incremental data)](#use-dm).
 
 ### Use Mydumper and TiDB Lightning (full data)
