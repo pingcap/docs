@@ -181,7 +181,7 @@ TiDB supports storage engine abstraction similar to MySQL, but you need to speci
 #### Named timezone
 
 + TiDB uses all time zone rules currently installed in the system for calculation (usually the `tzdata` package). You can use all time zone names without importing the time zone table data. You cannot modify the calculation rules by importing the time zone table data.
-+ MySQL uses the local timezone by default and relies on the current timezone rules built into the system (such as when to start daylight saving time) for calculation; and the timezone cannot be specified by the timezone name without [importing the timezone table data](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation).
++ MySQL uses the local time zone by default and relies on the current time zone rules built into the system (such as when to start daylight saving time) for calculation; and the time zone cannot be specified by the time zone name without [importing the time zone table data](https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html#time-zone-installation).
 
 > **Note:**
 >
