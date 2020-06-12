@@ -60,6 +60,8 @@ Slow query basics:
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 * `Plan`: The execution plan of the statement. Use the `select tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
+* `Prepared`: Whether this statement is a `Prepare` or `Execute` request or not.
+* `Plan_from_cache`: Whether this statement hits the execution plan cache.
 
 The following fields are related to transaction execution:
 
