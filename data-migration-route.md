@@ -24,7 +24,7 @@ You can use Mydumper and TiDB Lightning to migrate full data when the data size 
 #### Migration method
 
 1. Use Mydumper to export the full MySQL data.
-2. Use TiDB Lightning to import the full data to TiDB. For details, refer to [Migrate from Mydumper Files]((/migrate-from-mysql-mydumper-files.md))
+2. Use TiDB Lightning to import the full data to TiDB. For details, refer to [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md).
 
 ### Use DM
 
