@@ -6,7 +6,7 @@ category: reference
 
 # SHOW PLUGINS
 
-`SHOW PLUGINS` could show all plugins installed in TiDB, including plugin's status and version informantion.
+`SHOW PLUGINS` shows all plugins installed in TiDB, including each plugin's status and version information.
 
 ## Synopsis
 
