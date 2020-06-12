@@ -57,7 +57,7 @@ You can migrate data from heterogeneous databases that are not compatible with t
 
     - Use the `LOAD DATA` statement.
 
-        Execute the `LOAD DATA` statement in TiDB to import CSV files. This is more convenient, though manual intervention is required to check the consistency and integrity of the data if an error or interruption occurs during the import. Therefore, it is **not recommended** to use this method in the production environment. For details, refer to [LOAD DATA](/sql-statements/sql-statement-load-data.md).
+        Execute the `LOAD DATA` statement in TiDB to import CSV files. This is more convenient, but if an error or interruption occurs during the import, manual intervention is required to check the consistency and integrity of the data. Therefore, it is **not recommended** to use this method in the production environment. For details, refer to [LOAD DATA](/sql-statements/sql-statement-load-data.md).
 
 ### Migrate data from SQL files to TiDB
 
