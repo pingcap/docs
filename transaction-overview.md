@@ -39,7 +39,7 @@ All of the above three statements are used to start a transaction with the same 
 
 > **Note:**
 >
-> Unlike MySQL, TiDB takes a snapshot of the current database after executing the above statements. MySQL's `BEGIN` and `START TRANSACTION` takes the snapshot after executing the first `SELECT` statement (not `SELECT FOR UPDATE`) that reads data from InnoDB when a transaction is started. `START TRANSACTION WITH CONSISTENT SNAPSHOT` takes a snapshot during the execution of the statement. As a result, `BEGIN`, `START TRANSACTION` and `START TRANSACTION WITH CONSISTENT SNAPSHOT` are equivalent to `START TRANSACTION WITH CONSISTENT SNAPSHOT` in MySQL.
+> Unlike MySQL, TiDB takes a snapshot of the current database after executing the statements above. MySQL's `BEGIN` and `START TRANSACTION` take a snapshot after executing the first `SELECT` statement (not `SELECT FOR UPDATE`) that reads data from InnoDB after a transaction is started. `START TRANSACTION WITH CONSISTENT SNAPSHOT` takes a snapshot during the execution of the statement. As a result, `BEGIN`, `START TRANSACTION`, and `START TRANSACTION WITH CONSISTENT SNAPSHOT` are equivalent to `START TRANSACTION WITH CONSISTENT SNAPSHOT` in MySQL.
 
 ### `COMMIT`
 
@@ -126,7 +126,7 @@ The lazy check is important because if you perform a unique constraint check on 
 > **Note:**
 >
 > + This optimization only takes effect in optimistic transactions.
-> + This optimization does not take effect for `INSERT IGNORE` and `INSERT ON DUPLICATE KEY UPDATE`, only for normal `INSERT` statements. The behavior can also be disabled by setting `tidb_constraint_check_in_place=TRUE`.
+> + This optimization does not take effect for `INSERT IGNORE` and `INSERT ON DUPLICATE KEY UPDATE`, but only for normal `INSERT` statements. The behavior can also be disabled by setting `tidb_constraint_check_in_place=TRUE`.
 
 ## Statement rollback
 
@@ -160,7 +160,7 @@ TiDB supports both optimistic and pessimistic transactions, and optimistic trans
 
 By default, TiDB sets the total size of a single transaction to no more than 100 MB. You can modify this default value via `txn-total-size-limit` in the configuration file. The maximum value of `txn-total-size-limit` is 10 GB.
 
-The actual individual transaction size limit also depends on the amount of remaining memory available to the server, because when a transaction is executed, the TiDB process consumes approximately six times more memory than the transaction size.
+The actual individual transaction size limit also depends on the amount of remaining memory available to the server, because when a transaction is executed, the memory usage of the TiDB process is approximately six times larger than the total size of transactions.
 
 Before v4.0, TiDB restricts the total number of key-value pairs for a single transaction to no more than 300,000. This limitation is removed since v4.0.
 
@@ -168,4 +168,4 @@ Before v4.0, TiDB restricts the total number of key-value pairs for a single tra
 >
 > Usually, TiDB Binlog is enabled to replicate data to the downstream. In some scenarios, message middleware such as Kafka is used to consume binlogs that are replicated to the downstream.
 >
-> Taking Kafka as an example, the upper limit of Kafka's single message processing capability is 1 GB. Therefore, when `txn-total-size-limit` is set to more than 1 GB, it might happen that the transaction is successfully executed in TiDB, but the downstream Kafka reports an error. In order to avoid this situation, you need to decide the actual value of `txn-total-size-limit` according to the limit of the end consumer. For example, if Kafka is used downstream, `txn-total-size-limit` must not exceed 1 GB.
+> Taking Kafka as an example, the upper limit of Kafka's single message processing capability is 1 GB. Therefore, when `txn-total-size-limit` is set to more than 1 GB, it might happen that the transaction is successfully executed in TiDB, but the downstream Kafka reports an error. To avoid this situation, you need to decide the actual value of `txn-total-size-limit` according to the limit of the end consumer. For example, if Kafka is used downstream, `txn-total-size-limit` must not exceed 1 GB.
