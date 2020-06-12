@@ -9,7 +9,7 @@ aliases: ['/docs/dev/reference/tools/ticdc/troubleshoot/']
 
 This document summarizes some common issues and the solutions you might encounter when using TiCDC.
 
-## How to select `start-ts` when starting a task?
+## How to select `start-ts` when starting a task
 
 `start-ts` used in the replication task corresponds to a TSO in the upstream TiDB cluster. The replication task starts to request data from this TSO. Therefore, `start-ts` must meet the following requirements:
 
@@ -18,7 +18,7 @@ This document summarizes some common issues and the solutions you might encounte
 
 If you do not specify `start-ts` or set `start-ts=0` instead, go to PD to get a current TSO when starting a task. Then start the replication from the TSO.
 
-## What can I do if some tables cannot be replicated when the replication task is started?
+## Some tables cannot be replicated when the replication task is started
 
 When you use `cdc cli changefeed create` to create a replication task, cli first checks whether the upstream tables comply with the [replication restrictions](/ticdc/ticdc-overview.md#restrictions). If there is any table that does not meet the restrictions, you can receive the message `some tables are not eligible to replicate`, with these tables listed in the message.
 
@@ -52,7 +52,7 @@ The replication interrupt might occur in the following scenarios:
 
 Starting from TiDB v4.0.0-rc.1, PD allows external services to set the GC safepoint. Any service can register and update its GC safepoint. PD makes sure that any KV data smaller than the GC safepoint can not be cleared by TiKV GC. TiCDC enables this feature. This ensures that the data consumed by TiCDC in TiKV cannot be cleaned up by the GC in the case of unavailable TiCDC or interrupted replication tasks.
 
-When starting the CDC server, you can specify the TTL of GC safepoint using `gc-ttl`. TTL represents the maximum time that TiCDC saves data smaller than the GC safepoint set by PD after the TiCDC service is stopped. The default value is `86400` (in seconds).
+When starting the CDC server, you can specify the TTL of GC safepoint using `gc-ttl`. TTL represents the maximum time that TiCDC saves the data smaller than the GC safepoint set by PD after the TiCDC service is stopped. The default value is `86400` (in seconds).
 
 If the replication task is interrupted for a long time, the accumulated unconsumed data is large. OOM might occur at the initial start of TiCDC. In this case, you can enable the file sorting feature provided by TiCDC. This feature sorts files using the file system. To enable this feature, you need to pass `--sort-engine=file` and `--sort-dir=/path/to/sort_dir` into `cdc cli` when creating a replication task. An example is as follows:
 
