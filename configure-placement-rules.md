@@ -7,6 +7,10 @@ aliases: ['/docs/dev/how-to/configure/placement-rules/']
 
 # Placement Rules
 
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use this attribute in the production environment.
+
 Placement Rules is an experimental feature of the Placement Driver (PD) introduced in v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
 ## Rule system

@@ -84,6 +84,10 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## Expression index
 
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use this attribute in the production environment.
+
 TiDB can build indexes not only on one or more columns in a table, but also on an expression. When queries involve expressions, expression indexes can speed up those queries.
 
 Take the following query as an example:
