@@ -250,7 +250,7 @@ Check the time difference between the machine time of the monitor and the time w
 
 > **Warning:**
 >
-> TiDB Ansible deployment method is deprecated since TiDB v4.0. [Use TiUP to deploy TiDB](/production-offline-deployment-using-tiup.md) instead.
+> It is not recommended to deploy TiDB using TiDB Ansible since TiDB v4.0. [Use TiUP to deploy TiDB](/production-offline-deployment-using-tiup.md) instead.
 
 #### How to deploy TiDB quickly using Docker Compose on a single machine?
 
