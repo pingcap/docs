@@ -44,7 +44,7 @@ You can migrate data from CSV/SQL files to TiDB.
 
 #### Scenarios
 
-You can migrate data from heterogeneous databases that are not compatible with MySQL protocol to TiDB.
+You can migrate data from heterogeneous databases that are not compatible with the MySQL protocol to TiDB.
 
 #### Migration method
 
@@ -53,7 +53,7 @@ You can migrate data from heterogeneous databases that are not compatible with M
 
     - Use TiDB Lightning.
 
-        Its import speed is fast. It is recommended to use TiDB Lightning in the case of large amount of data in CSV files. For details, refer to [TiDB Lightning CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
+        Its import speed is fast. It is recommended to use TiDB Lightning in the case of large amounts of data in CSV files. For details, refer to [TiDB Lightning CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
 
     - Use the `LOAD DATA` statement.
 
