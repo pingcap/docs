@@ -272,6 +272,7 @@
       + [`SHOW INDEX [FROM|IN]`](/sql-statements/sql-statement-show-index.md)
       + [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       + [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
+      + [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)
       + [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
       + [`SHOW [FULL] PROCESSSLIST`](/sql-statements/sql-statement-show-processlist.md)
       + [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
@@ -402,6 +403,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.1](/releases/release-4.0.1.md)
     + [4.0 GA](/releases/release-4.0-ga.md)
     + [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
     + [4.0.0-rc.1](/releases/release-4.0.0-rc.1.md)
