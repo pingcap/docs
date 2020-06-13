@@ -63,7 +63,7 @@ For historical reasons, the Read Committed isolation level of current mainstream
 
 > **Note:**
 >
-> The Read Committed isolation level only takes effect in the [pessimistic transaction Mode](/pessimistic-transaction.md). In the [optimistic transaction mode](/optimistic-transaction.md), setting the transaction isolation level to `Read Committed` does not take effect and transactions still use the Repeatable Read isolation level.
+> The Read Committed isolation level only takes effect in the [pessimistic transaction mode](/pessimistic-transaction.md). In the [optimistic transaction mode](/optimistic-transaction.md), setting the transaction isolation level to `Read Committed` does not take effect and transactions still use the Repeatable Read isolation level.
 
 ## Difference between TiDB and MySQL Read Committed
 
