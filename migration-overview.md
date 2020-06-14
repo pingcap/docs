@@ -1,12 +1,12 @@
 ---
-title: Data Migration Path
-summary: This document describes the paths you can use to migrate data to TiDB.
+title: Migration Overview
+summary: This document describes how to migrate data from databases or data formats (CSV/SQL).
 category: reference
 ---
 
-# Data Migration Path
+# Migration Overview
 
-This document describes the paths you can use to migrate data to TiDB, including migrating data from MySQL to TiDB and from CSV/SQL files to TiDB.
+This document describes how to migrate data to TiDB, including migrating data from MySQL and from CSV/SQL files.
 
 ## Migrate from MySQL to TiDB
 
