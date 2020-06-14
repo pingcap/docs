@@ -46,8 +46,9 @@
     + [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
     + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
   + Migrate from CSV Files
-    + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-    + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
+    + Migrate from CSV Files
+      + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+      + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
   + [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
 + Maintain
   + Upgrade
