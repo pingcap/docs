@@ -1,6 +1,6 @@
 ---
 # when the issuer is not a bot, assign yikeke as reviewer
-((?!sre-bot).)*:
+^(?!sre-bot)$:
   - yikeke
   - TomShawn
 
