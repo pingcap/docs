@@ -2,6 +2,7 @@
 # when the issuer is not a bot, assign yikeke as reviewer
 ((?!sre-bot).)*:
   - yikeke
+  - TomShawn
 
 # # you can set multiple reviewers
 # smith:
