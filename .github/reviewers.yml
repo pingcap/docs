@@ -1,0 +1,16 @@
+---
+# when the issuer is not a bot, assign yikeke as reviewer
+((?!sre-bot).)*:
+  - yikeke
+
+# # you can set multiple reviewers
+# smith:
+#   - user1
+#   - user2
+# # you can use regexp to match issuer
+# john.*:
+#   - foo
+#   - bar
+# # fallback
+# .*:
+#   - foo
