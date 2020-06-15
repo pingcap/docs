@@ -15,7 +15,7 @@ According to the severity level, alert rules are divided into three categories (
 
 ## TiDB alert rules
 
-This section gives the alert rules for the TiDB component.
+This section gives the alert rules for the TiDB component.  
 
 ### Emergency-level alerts
 
