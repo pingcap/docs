@@ -97,7 +97,7 @@ This document only describes the parameters that are not included in command-lin
 
 > **Warning:**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use this attribute in the production environment.
+> Unified read pool is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
 
