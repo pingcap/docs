@@ -11,7 +11,7 @@ To dynamically observe and compare cluster conditions of different time ranges, 
 
 ## Overview
 
-To illustrate how to use the monitoring table and how it works, take the `tidb_query_duration` monitoring table in `metrics_schema` as an example. The principles of other monitoring tables are similar to `tidb_query_duration`.
+Taking the `tidb_query_duration` monitoring table in `metrics_schema` as an example, this section illustrates how to use this monitoring table and how it works. The working principles of other monitoring tables are similar to `tidb_query_duration`.
 
 Query the information related to the `tidb_query_duration` table on `information_schema.metrics_tables`:
 
@@ -32,7 +32,7 @@ select * from information_schema.metrics_tables where table_name='tidb_query_dur
 Field description:
 
 * `TABLE_NAME`: Corresponds to the table name in `metrics_schema` . In this example, the table name is `tidb_query_duration`.
-* `PROMQL`: The working principle of the monitoring table is to first map SQL statements to `PromQL`, then request data from Prometheus, and convert Prometheus results into SQL query results. This field is the expression template of `PromQL`. When you query the data of the monitoring table, the query conditions are used to rewrite the variables in this template to generate the final query expression.
+* `PROMQL`: The working principle of the monitoring table is to first map SQL statements to `PromQL`, then to request data from Prometheus, and to convert Prometheus results into SQL query results. This field is the expression template of `PromQL`. When you query the data of the monitoring table, the query conditions are used to rewrite the variables in this template to generate the final query expression.
 * `LABELS`: The label for the monitoring item. `tidb_query_duration` has two labels: `instance` and `sql_type`.
 * `QUANTILE`: The percentile. For monitoring data of the histogram type, a default percentile is specified. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
 * `COMMENT`: Explanations for the monitoring table. You can see that the `tidb_query_duration` table is used to query the percentile time of the TiDB query execution, such as the query time of P999/P99/P90. The unit is second.

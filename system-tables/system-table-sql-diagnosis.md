@@ -48,7 +48,7 @@ To dynamically observe and compare cluster conditions in different time periods,
 Because the TiDB cluster has many monitoring metrics, TiDB provides the following monitoring summary tables in v4.0:
 
 + The monitoring summary table [`information_schema.metrics_summary`](/system-tables/system-table-metrics-summary.md) summarizes all monitoring data to for you to check each monitoring metric with higher efficiency.
-+ [`information_schema.metrics_summary_by_label`](/system-tables/system-table-metrics-summary.md)) also summarizes all monitoring data. Particularly, this table aggregates statistics using different labels of each monitoring item.
++ [`information_schema.metrics_summary_by_label`](/system-tables/system-table-metrics-summary.md)) also summarizes all monitoring data. Particularly, this table aggregates statistics using different labels of each monitoring metric.
 
 ## Automatic diagnosis
 

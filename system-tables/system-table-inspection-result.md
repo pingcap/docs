@@ -39,7 +39,7 @@ desc information_schema.inspection_result;
 Field description:
 
 * `RULE`: The name of the diagnosis rule. Currently, the following rules are available:
-    * `config`: Checks the consistency and the rationality of configuration. If the same configuration is inconsistent on different instances, a `warning` diagnosis result is generated.
+    * `config`: Checks whether the configuration is consistent and proper. If the same configuration is inconsistent on different instances, a `warning` diagnosis result is generated.
     * `version`: The consistency check of version. If the same version is inconsistent on different instances, a `warning` diagnosis result is generated.
     * `node-load`: Checks the server load. If the current system load is too high, the corresponding `warning` diagnosis result is generated.
     * `critical-error`: Each module of the system defines critical errors. If a critical error exceeds the threshold within the corresponding time period, a warning diagnosis result is generated.

@@ -50,7 +50,7 @@ Usage example:
 
 Both the diagnosis result table and the diagnosis monitoring summary table can specify the diagnosis time range using `hint`. `select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary` is the monitoring summary for the `2020-03-07 12:00:00` to `2020-03-07 13:00:00` period. Like the monitoring summary table, you can use the `inspection_summary` table to quickly find the monitoring items with large differences by comparing the data of two different periods.
 
-The following is an example that illustrates how to read the monitoring items of the system link by comparing two periods:
+The following example compares the monitoring metrics of read links in two time periods:
 
 * `(2020-01-16 16:00:54.933, 2020-01-16 16:10:54.933)`
 * `(2020-01-16 16:10:54.933, 2020-01-16 16:20:54.933)` 
