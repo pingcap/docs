@@ -48,7 +48,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 > **Warning:**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use this attribute in the production environment.
+> This function currently counts the memory during the writing process, which is an experimental feature. For users who want to rely on this feature to cancel the write operation, it is not recommended to configure it as cancel in the production environment.
 
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
 - Default value: `"cancel"`
