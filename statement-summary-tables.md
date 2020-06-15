@@ -155,7 +155,7 @@ SELECT avg_latency, exec_count, query_sample_text
 
 {{< copyable "sql" >}}
 
-```
+```sql
 +-------------+------------+------------------------------------------+
 | avg_latency | exec_count | query_sample_text                        |
 +-------------+------------+------------------------------------------+
