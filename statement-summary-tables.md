@@ -11,10 +11,16 @@ To better handle SQL performance issues, MySQL has provided [statement summary t
 
 Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema`. These system tables are similar to `events_statements_summary_by_digest` in terms of functions.
 
-- [`statements_summary`](#statements_summary)
-- [`statements_summary_history`](#statements_summary_history)
-- [`cluster_statements_summary`](#cluster_statements_summary-and-cluster_statements_summary_history)
-- [`cluster_statements_summary_history`](#cluster_statements_summary-and-cluster_statements_summary_history)
+- [Statement Summary Tables](#statement-summary-tables)
+  - [`statements_summary`](#statements_summary)
+  - [`statements_summary_history`](#statements_summary_history)
+  - [`cluster_statements_summary` and `cluster_statements_summary_history`](#cluster_statements_summary-and-cluster_statements_summary_history)
+  - [Parameter configuration](#parameter-configuration)
+  - [Limitations](#limitations)
+  - [Troubleshooting examples](#troubleshooting-examples)
+    - [Could high SQL latency be caused by the server end?](#could-high-sql-latency-be-caused-by-the-server-end)
+    - [Which categories of SQL statements consume the longest total time?](#which-categories-of-sql-statements-consume-the-longest-total-time)
+    - [Fields description](#fields-description)
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
@@ -210,7 +216,7 @@ Basic fields:
 - `PLAN_DIGEST`: The digest of the execution plan.
 - `PLAN`: The original execution plan. If there are multiple statements, the plan of only one statement is taken.
 - `PLAN_CACHE_HITS`: The total number of times that SQL statements of this category hit the plan cache.
-- `PLAN_IN_CACHE`: Determines whether the previous execution of SQL statements of this category hit the plan cache.
+- `PLAN_IN_CACHE`: Indicates whether the previous execution of SQL statements of this category hit the plan cache.
 
 Fields related to execution time:
 
