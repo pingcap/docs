@@ -120,7 +120,7 @@ After the configuration above takes effect, every 30 minutes the `statements_sum
 
 The above system variables have two scopes: global and session. These scopes work differently from other system variables:
 
-- Set the global variable to apply to the cluster immediately.
+- After setting the global variable, your setting applies to the whole cluster immediately.
 - Set the session variable to apply to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
 - The session variable has a higher read priority. The global variable is read only when no session variable is set.
 - Set the session variable to a blank string to re-read the global variable.
