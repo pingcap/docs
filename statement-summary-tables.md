@@ -116,7 +116,7 @@ set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-When the above configuration takes effect, every 30 minutes the `statements_summary` is cleared. `statements_summary_history` stores data generated over the recent 12 hours.
+After the configuration above takes effect, every 30 minutes the `statements_summary` table is cleared. The `statements_summary_history` table stores data generated over the recent 12 hours.
 
 The above system variables have two scopes: global and session. These scopes work differently from other system variables:
 
