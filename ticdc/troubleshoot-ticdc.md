@@ -55,4 +55,3 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --start-ts=415238226621235
 > **Note:**
 >
 > TiCDC (the 4.0 version) does not support dynamically modifying the file sorting and memory sorting yet.
-
