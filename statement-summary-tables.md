@@ -182,7 +182,7 @@ The result shows that the following three categories of SQL statements consume t
 
 {{< copyable "sql" >}}
 
-```
+```sql
 +-------------+-------------+------------+-----------------------------------------------------------------------+
 | sum_latency | avg_latency | exec_count | query_sample_text                                                     |
 +-------------+-------------+------------+-----------------------------------------------------------------------+
