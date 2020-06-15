@@ -11,16 +11,10 @@ To better handle SQL performance issues, MySQL has provided [statement summary t
 
 Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema`. These system tables are similar to `events_statements_summary_by_digest` in terms of features.
 
-- [Statement Summary Tables](#statement-summary-tables)
-  - [`statements_summary`](#statements_summary)
-  - [`statements_summary_history`](#statements_summary_history)
-  - [`cluster_statements_summary` and `cluster_statements_summary_history`](#cluster_statements_summary-and-cluster_statements_summary_history)
-  - [Parameter configuration](#parameter-configuration)
-  - [Limitations](#limitations)
-  - [Troubleshooting examples](#troubleshooting-examples)
-    - [Could high SQL latency be caused by the server end?](#could-high-sql-latency-be-caused-by-the-server-end)
-    - [Which categories of SQL statements consume the longest total time?](#which-categories-of-sql-statements-consume-the-longest-total-time)
-    - [Fields description](#fields-description)
+- [`statements_summary`](#statements_summary)
+- [`statements_summary_history`](#statements_summary_history)
+- [`cluster_statements_summary`](#cluster_statements_summary-and-cluster_statements_summary_history)
+- [`cluster_statements_summary_history`](#cluster_statements_summary-and-cluster_statements_summary_history)
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
