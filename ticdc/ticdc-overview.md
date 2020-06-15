@@ -67,9 +67,9 @@ Currently, The following scenarios are not supported:
 
 For details, see [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md).
 
-## TiCDC FAQ and Troubleshooting
+## Troubleshoot TiCDC
 
-For details, refer to [FAQ and Troubleshooting](/ticdc/troubleshoot-ticdc.md).
+For details, refer to [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md).
 
 ## TiCDC Open Protocol
 
