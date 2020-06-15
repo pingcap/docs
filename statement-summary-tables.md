@@ -118,7 +118,7 @@ set global tidb_stmt_summary_history_size = 24;
 
 After the configuration above takes effect, every 30 minutes the `statements_summary` table is cleared. The `statements_summary_history` table stores data generated over the recent 12 hours.
 
-The above system variables have two scopes: global and session. These scopes work differently from other system variables:
+The system variables above have two scopes: global and session. These scopes work differently from other system variables:
 
 - After setting the global variable, your setting applies to the whole cluster immediately.
 - Set the session variable to apply to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
