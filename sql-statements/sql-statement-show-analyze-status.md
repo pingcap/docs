@@ -6,7 +6,7 @@ category: reference
 
 # SHOW ANALYZE STATUS
 
-The `SHOW ANALYZE STATUS` statement provides the statistical information collection task being executed by TiDB and a limited number of historical task records.
+The `SHOW ANALYZE STATUS` statement shows the statistics collection tasks being executed by TiDB and a limited number of historical task records.
 
 ## Synopsis
 
