@@ -37,6 +37,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 * In MySQL, with the exception of Group Replication with multiple primaries, it is not typical that a `COMMIT` statement could result in an error. By contrast, TiDB uses optimistic concurrency control and conflicts may result in `COMMIT` returning an error.
 * Be default, `UNIQUE` and `PRIMARY KEY` constraint checks are deffered until statement commit. This behavior can be changed by setting `tidb_constraint_check_in_place=TRUE`.
+* TiDB only has syntactic support for `CompletionTypeWithinTransaction`. Closing the connection or continuing to open a new transaction commit option is not supported.
 
 ## See also
 
