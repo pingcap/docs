@@ -85,7 +85,7 @@ The following is a sample output of querying `statements_summary`:
 
 ## `statements_summary_history`
 
-The table schema of `statements_summary_history` is identical to that of `statements_summary`. `statements_summary_history` saves the historical data of a time range. By checking historical data, you can troubleshoot anomalies and compare monitoring indicators of different time ranges.
+The table schema of `statements_summary_history` is identical to that of `statements_summary`. `statements_summary_history` saves the historical data of a time range. By checking historical data, you can troubleshoot anomalies and compare monitoring metrics of different time ranges.
 
 The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the begin time and the end time of the historical time range.
 
