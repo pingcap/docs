@@ -7,13 +7,13 @@ aliases: ['/docs/dev/reference/sql/statements/do/']
 
 # DO
 
-`DO` executes the expressions but does not return any results. In most respects, `DO` is shorthand for `SELECT expr, ...`.
+`DO` executes the expressions but does not return any results. In most cases, `DO` is equivalent to `SELECT expr, ...` that does not return a result.
 
 > **Note:**
 >
 > `DO` only executes expressions. It cannot be used in all cases where `SELECT` can be used. For example, `DO id FROM t1` is invalid because it references a table. 
 
-In MySQL, a common use-case is to execute stored procedure or trigger. Since TiDB does not provide stored procedure or trigger, this function has a more limited use.
+In MySQL, a common use case is to execute stored procedure or trigger. Since TiDB does not provide stored procedure or trigger, this function has a limited use.
 
 ## Synopsis
 
@@ -31,7 +31,7 @@ In MySQL, a common use-case is to execute stored procedure or trigger. Since TiD
 
 ## Examples
 
-This SELECT statement pauses, but also produces a result set
+This SELECT statement pauses, but also produces a result set.
 
 ```sql
 mysql> SELECT SLEEP(5);

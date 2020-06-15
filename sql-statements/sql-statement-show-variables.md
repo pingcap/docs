@@ -25,7 +25,7 @@ This statement shows a list of variables for the scope of either `GLOBAL` or `SE
 
 ## Examples
 
-List all TiDB specific variables. For the meaning of them, refer to [TiDB Specific System Variables](/tidb-specific-system-variables.md).
+List all TiDB specific variables. For detailed description, refer to [TiDB Specific System Variables](/tidb-specific-system-variables.md).
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';

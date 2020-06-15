@@ -11,7 +11,7 @@ The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, 
 
 > **Note:**
 >
-> Similar to MySQL, changes to `GLOBAL` variables will not apply to either existing connections, or the local connection. Only new sessions will reflect the changes to the value.
+> Similar to MySQL, changes to `GLOBAL` variables do not apply to either existing connections, or the local connection. Only new sessions reflect the changes to the value.
 
 ## Synopsis
 
@@ -46,7 +46,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 ```
 
 Update the value of `sql_mode` globally.
-Checking the value of `SQL_mode` after the update, you can see that the value of SESSION level has not been updated:
+If you check the value of `SQL_mode` after the update, you can see that the value of `SESSION` level has not been updated:
 
 ```sql
 mysql> SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER';
