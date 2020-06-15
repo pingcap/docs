@@ -36,7 +36,7 @@ Empty set (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is partly compatible with MySQL. TiDB only has syntactic support for `CompletionTypeWithinTransaction`. Closing the connection or continuing to open a new transaction commit option is not supported. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is partly compatible with MySQL. TiDB only has syntactic support for `CompletionTypeWithinTransaction`. Closing the connection or continuing to open a new transaction after the transaction is rolled back is not supported. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
 
 ## See also
 

@@ -61,7 +61,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 
 * TiDB supports the ability to set a transaction as read-only in syntax only.
 * The isolation levels `READ-UNCOMMITTED` and `SERIALIZABLE` are not supported.
-* Snapshot isolation (Snapshot Isolation) technology to achieve optimistic transaction `REPEATABLE-READ` isolation level, partly compatible with MySQL.
+* The `REPEATABLE-READ` isolation level is achieved through using the snapshot isolation technology, which is partly compatible with MySQL.
 * In pessimistic transactions, TiDB supports two isolation levels compatible with MySQL: `REPEATABLE-READ` and `READ-COMMITTED`. For a detailed description, see [Isolation Levels](/transaction-isolation-levels.md).
 
 ## See also

@@ -7,7 +7,7 @@ aliases: ['/docs/dev/reference/sql/statements/start-transaction/']
 
 # START TRANSACTION
 
-This statement starts a new transaction inside of TiDB. It is similar to the statements `BEGIN`.
+This statement starts a new transaction inside of TiDB. It is similar to the statement `BEGIN`.
 
 In the absence of a `START TRANSACTION` statement, every statement will by default autocommit in its own transaction. This behavior ensures MySQL compatibility.
 
