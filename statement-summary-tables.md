@@ -137,7 +137,7 @@ The statement summary data are lost when the TiDB server is restarted. This is b
 
 ## Troubleshooting examples
 
-This section shows how to use the statement summary feature to troubleshoot SQL performance issues.
+This section provides two examples to show how to use the statement summary feature to troubleshoot SQL performance issues.
 
 ### Could high SQL latency be caused by the server end?
 
