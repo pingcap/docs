@@ -91,7 +91,7 @@ The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the start time 
 
 ## `cluster_statements_summary` and `cluster_statements_summary_history`
 
-`statements_summary` and `statements_summary_history` display the statement summary data of a single TiDB server only. To query the data of the entire cluster, you need to query `cluster_statements_summary` and `cluster_statements_summary_history`.
+`statements_summary` and `statements_summary_history` display the statement summary data of only a single TiDB server. To query the data of the entire cluster, you need to query `cluster_statements_summary` and `cluster_statements_summary_history`.
 
 `cluster_statements_summary` displays the `statements_summary` data of each TiDB server, and `cluster_statements_summary_history` displays the `statements_summary_history` data of each TiDB server. These two tables use the `INSTANCE` field to represent the address of the TiDB server. The other fields are the same as those in `statements_summary`.
 
