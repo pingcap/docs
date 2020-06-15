@@ -9,7 +9,7 @@ aliases: ['/docs/dev/how-to/configure/placement-rules/']
 
 > **Warning:**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use this attribute in the production environment.
+> In the scenario of using TiFlash, the Placement Rules has been extensively tested and can be used in a production environment. Except for the scenarios where TiFlash is used, using Placement Rules alone has not been extensively tested, so it is not recommended to enable this feature separately in a production environment.
 
 Placement Rules is an experimental feature of the Placement Driver (PD) introduced in v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
