@@ -52,6 +52,7 @@ BackupRequest{
     ClusterId,      // The cluster ID.
     StartKey,       // The starting key of the backup (backed up).
     EndKey,         // The ending key of the backup (not backed up).
+    StartVersion,   // The version of the last backup snapshot, used for the incremental backup.
     EndVersion,     // The backup snapshot time.
     StorageBackend, // The path where backup files are stored.
     RateLimit,      // Backup speed (MB/s).
@@ -61,6 +62,8 @@ BackupRequest{
 After receiving the backup request, the TiKV node traverses all Region leaders on the node to find the Regions that overlap with the KV ranges in this request. The TiKV node backs up some or all of the data within the range, and generates the corresponding SST file.
 
 After finishing backing up the data of the corresponding Region, the TiKV node returns the metadata to BR. BR collects the metadata and stores it in the `backupmeta` file which is used for restoration.
+
+If `StartVersion` is not `0`, the backup is seen as an incremental backup. In addition to KVs, BR also collects DDLs between `[StartVersion, EndVersion)`. During data restoration, these DDLs are restored first.
 
 If checksum is enabled when you execute the backup command, BR calculates the checksum of each backed up table for data check.
 
@@ -122,12 +125,10 @@ Explanations for the above command are as follows:
 * `backup`: the sub-command of `br`.
 * `full`: the sub-command of `backup`.
 * `-s` (or `--storage`): the option that specifies the path where the backup files are stored.
-* `"local:///tmp/backup"`: the parameter of `-s`. `/tmp/backup` is the path in the local disk where the backup files are stored.
+* `"local:///tmp/backup"`: the parameter of `-s`. `/tmp/backup` is the path in the local disk where the backed up files of each TiKV node are stored.
 * `--pd`: the option that specifies the Placement Driver (PD) service address.
 * `"${PDIP}:2379"`: the parameter of `--pd`.
 
-<<<<<<< HEAD
-=======
 > **Note:**
 >
 > - When the `local` storage is used, the backup data are scattered in the local file system of each node.
@@ -138,7 +139,6 @@ Explanations for the above command are as follows:
 >
 > - It is recommended to mount the NFS disk on each node, or back up to the `S3` object storage.
 
->>>>>>> f95277a... br: update --version (#2765)
 ### Sub-commands
 
 A `br` command consists of multiple layers of sub-commands. Currently, BR has the following three sub-commands:
@@ -185,15 +185,12 @@ To back up all the cluster data, execute the `br backup full` command. To get he
 
 Back up all the cluster data to the `/tmp/backup` path of each TiKV node and write the `backupmeta` file to this path.
 
-<<<<<<< HEAD
-=======
 > **Note:**
 >
 > + If the backup disk and the service disk are different, it has been tested that online backup reduces QPS of the read-only online service by about 15%-25% in case of full-speed backup. If you want to reduce the impact on QPS, use `--ratelimit` to limit the rate.
 >
 > + If the backup disk and the service disk are the same, the backup competes with the service for I/O resources. This might decrease the QPS of the read-only online service by more than half. Therefore, it is **highly not recommended** to back up the online service data to the TiKV data disk.
 
->>>>>>> f95277a... br: update --version (#2765)
 {{< copyable "shell-regular" >}}
 
 ```shell
@@ -268,12 +265,10 @@ The `table` sub-command has two options:
 * `--db`: specifies the database name
 * `--table`: specifies the table name.
 
-For descriptions of other options, see [Back up all cluster data](#back-up-all-cluster-data).
+For descriptions of other options, see [Back up all cluster data](#back-up-all-the-cluster-data).
 
 A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
 
-<<<<<<< HEAD
-=======
 ### Back up data to Amazon S3 backend
 
 If you back up the data to the Amazon S3 backend, instead of `local` storage, you need to specify the S3 storage path in the `storage` sub-command, and allow the BR node and the TiKV node to access Amazon S3.
@@ -359,7 +354,6 @@ Here, the parameters of `--start`  and `--end` are decoded using the method spec
 - "hex": The default encoding method. The input string is treated as a hexadecimal number.
 - "escape": First escape the input string, and then encode it into binary format.
 
->>>>>>> f95277a... br: update --version (#2765)
 ## Restore cluster data
 
 To restore the cluster data, use the `br restore` command. You can add the `full`, `db` or `table` sub-command to specify the scope of your restoration: the whole cluster, a database or a single table.
@@ -373,7 +367,7 @@ To restore the cluster data, use the `br restore` command. You can add the `full
 > - Data are replicated into multiple peers. When ingesting SSTs, these files have to be present on *all* peers. This is unlike back up where reading from a single node is enough.
 > - Where each peer is scattered to during restore is random. We don't know in advance which node will read which file.
 >
-> These can be avoided using shared storage, e.g. mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file, so these caveats no longer apply.
+> These can be avoided using shared storage, for example mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file, so these caveats no longer apply.
 
 ### Restore all the backup data
 
@@ -426,7 +420,7 @@ br restore db \
     --log-file restorefull.log
 ```
 
-In the above command, `--db` specifies the name of the database to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-backup-data).
+In the above command, `--db` specifies the name of the database to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data)).
 
 ### Restore a table
 
@@ -447,9 +441,6 @@ br restore table \
     --log-file restorefull.log
 ```
 
-<<<<<<< HEAD
-In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-backup-data) and [Restore a database](#restore-a-database).
-=======
 In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data) and [Restore a database](#restore-a-database).
 
 ### Restore data from Amazon S3 backend
@@ -540,7 +531,6 @@ During data restoration, writing too much data affects the performance of the on
         --pd $PD_ADDR \
         --online
     ```
->>>>>>> f95277a... br: update --version (#2765)
 
 ## Best practices
 
