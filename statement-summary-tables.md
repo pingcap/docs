@@ -141,7 +141,7 @@ This section shows how to use the statement summary feature to troubleshoot SQL 
 
 ### Could high SQL latency be caused by the server end?
 
-In this example, the client shows slow performance with point queries on the employee table. You can perform a fuzzy search on SQL texts:
+In this example, the client shows slow performance with point queries on the `employee` table. You can perform a fuzzy search on SQL texts:
 
 {{< copyable "sql" >}}
 
