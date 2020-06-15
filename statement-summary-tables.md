@@ -97,7 +97,7 @@ The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the start time 
 
 ## Parameter configuration
 
-Use the following system variables to control the statement summary:
+The following system variables are used to control the statement summary:
 
 - `tidb_enable_stmt_summary`: Determines whether the statement summary feature is enabled. `1` represents `enable`, `0` means `disable`. The feature is enabled by default. The statistics in the system table are cleared if this feature is disabled. The statistics are re-calculated next time the feature is enabled. Tests have shown that enabling this feature has little impact on performance.
 - `tidb_stmt_summary_refresh_interval`: The interval at which the `statements_summary` table is refreshed. The time unit is second (s). The default value is `1800`.
