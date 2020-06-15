@@ -167,7 +167,7 @@ SELECT avg_latency, exec_count, query_sample_text
 
 ### Which categories of SQL statements consume the longest total time?
 
-If the QPS decreases significantly from 10:00 A.M. to 10:30 A.M., you can find out the three categories of SQL statements with the longest time consumption from the history table:
+If the QPS decrease significantly from 10:00 to 10:30, you can find out the three categories of SQL statements with the longest time consumption from the history table:
 
 {{< copyable "sql" >}}
 
