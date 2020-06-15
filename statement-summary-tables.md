@@ -104,7 +104,7 @@ The following system variables are used to control the statement summary:
 - `tidb_stmt_summary_history_size`: The size of each SQL statement category stored in the `statements_summary_history` table. The default value is `24`.
 - `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `200`. If the limit is exceeded, those SQL statements that recently remain unused are cleared.
 - `tidb_stmt_summary_max_sql_length`: Specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is `4096`.
-- `tidb_stmt_summary_internal_query`: Determines whether to count the TiDB SQL statements. `1` means `count`, 0 means `not count`. The default value is `0`.
+- `tidb_stmt_summary_internal_query`: Determines whether to count the TiDB SQL statements. `1` means to count, and `0` means not to count. The default value is `0`.
 
 The following shows a configuration example:
 
