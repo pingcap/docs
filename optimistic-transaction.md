@@ -23,7 +23,7 @@ To support distributed transactions, TiDB adopts two-phase commit (2PC) in optim
 
 1. The client begins a transaction.
 
-    TiDB receives the timestamp (monotonically increasing in time and globally unique) from PD as the unique transaction ID of the current transaction, which is called `start_ts`. TiDB implements multi-version concurrency control, so `start_ts` also serves as the database snapshot version obtained by this transaction. The transaction can only read the data available for the `start_ts` version.
+    TiDB gets a timestamp (monotonically increasing in time and globally unique) from PD as the unique transaction ID of the current transaction, which is called `start_ts`. TiDB implements multi-version concurrency control, so `start_ts` also serves as the version of the database snapshot obtained by this transaction. This means that the transaction can only read the data from the database at `start_ts`.
 
 2. The client issues a read request.
 
