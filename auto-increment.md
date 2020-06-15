@@ -6,11 +6,11 @@ category: reference
 
 # AUTO_INCREMENT
 
-This document introduces the `AUTO_INCREMENT` column attribute in terms of its concept, working principles, auto-increment related features, and restrictions.
+This document introduces the `AUTO_INCREMENT` column attribute, including its concept, implementation principles, auto-increment related features, and restrictions.
 
 ## Concept 
 
-`AUTO_INCREMENT` is a column attribute that is used to automatically fill in default column values. When the `INSERT` statement does not specify the value of the `AUTO_INCREMENT` column, the system automatically assign a value to this column. The value is unique, as well as incremental and continuous in **special cases**.
+`AUTO_INCREMENT` is a column attribute that is used to automatically fill in default column values. When the `INSERT` statement does not specify values for the `AUTO_INCREMENT` column, the system automatically assigns values to this column. Each value is unique, as well as incremental and continuous in **special cases**.
 
 You can use it as in the following example:
 
@@ -67,23 +67,23 @@ mysql> select * from t;
 
 The usage above is the same as that of `AUTO_INCREMENT` in MySQL. However, in terms of the specific value that is implicitly assigned, TiDB differs from MySQL significantly.
 
-## Working principles
+## Implementation principles
 
 TiDB implements the `AUTO_INCREMENT` implicit assignment in the following way:
 
-For each auto-increment column, a globally visible key-value pair is used to record the maximum ID that has been assigned. In a distributed environment, communication between nodes has some overhead. Therefore, to avoid the issue of write amplification, each TiDB node applies for a batch of consecutive IDs as cache when assigning IDs, and then applies for the next batch of IDs after the first batched is assigned. TiDB nodes do not have to apply to the storage node for IDs at each assigning. For example:
+For each auto-increment column, a globally visible key-value pair is used to record the maximum ID that has been assigned. In a distributed environment, communication between nodes has some overhead. Therefore, to avoid the issue of write amplification, each TiDB node applies for a batch of consecutive IDs as caches when assigning IDs, and then applies for the next batch of IDs after the first batch is assigned. Therefore, TiDB nodes do not apply to the storage node for IDs when assigning IDs each time. For example:
 
 ```sql
 create table t(id int unique key AUTO_INCREMENT, c int);
 ```
 
-Assume two TiDB instances, `A` and `B`, in the cluster. If you execute an `INSERT` statement for the `t` table on `A` and `B` respectively:
+Assume two TiDB instances, `A` and `B`, in the cluster. If you execute an `INSERT` statement on the `t` table on `A` and `B` respectively:
 
 ```sql
 insert into t (c) values (1)
 ```
 
-Instance `A` might cache the auto-increment ID of `[1,30000]`, and instance `B` might cache the auto-increment ID of `[30001,60000]`. In the future `INSERT` statements, these cached ID of each instance will be assigned to the `AUTO_INCREMENT` column as the default value.
+Instance `A` might cache the auto-increment IDs of `[1,30000]`, and instance `B` might cache the auto-increment IDs of `[30001,60000]`. In `INSERT` statements to be executed, these cached IDs of each instance will be assigned to the `AUTO_INCREMENT` column as the default values.
 
 ## Basic Features
 
@@ -91,19 +91,19 @@ Instance `A` might cache the auto-increment ID of `[1,30000]`, and instance `B` 
 
 > **Warning:**
 >
-> When the cluster has multiple TiDB instances, if the table schema contains the auto-increment ID, it is recommended not to use explicit insert and implicit assignment at the same time (i.e. using the default value of the auto-increment column and the custom value). Otherwise, it might break the uniqueness of implicitly assigned values.
+> When the cluster has multiple TiDB instances, if the table schema contains the auto-increment IDs, it is recommended not to use explicit insert and implicit assignment at the same time, which means using the default values of the auto-increment column and the custom values. Otherwise, it might break the uniqueness of implicitly assigned values.
 
 In the example above, perform the following operations in order:
 
 1. The client inserts a statement `insert into t values (2, 1)` to instance `B`, which sets `id` to `2`. The statement is successfully executed.
 
-2. The client sends a statement `insert into t (c) (1)` to instance `A`. This statement does not specify the value of `id`, so the ID is assigned by `A`. At present, because `A` caches the ID of `[1, 30000]`, it might assign `2` as the value of the auto-increment ID, and increases the local counter by `1`. At this time, the data whose ID is `2` already exists in the database, so the `Duplicated Error` error is returned.
+2. The client sends a statement `insert into t (c) (1)` to instance `A`. This statement does not specify the value of `id`, so the ID is assigned by `A`. At present, because `A` caches the IDs of `[1, 30000]`, it might assign `2` as the value of the auto-increment ID, and increases the local counter by `1`. At this time, the data whose ID is `2` already exists in the database, so the `Duplicated Error` error is returned.
 
 ### Increment
 
-TiDB guarantees that implicitly assigned value of the `AUTO_INCREMENT` column are incremental only in the cluster with a single TiDB instance. That is, for the same auto-increment column, the value assigned earlier is smaller than the value assigned later. However, in a cluster with multiple instances, TiDB cannot guarantee that the auto-increment column is incremental.
+TiDB guarantees that implicitly assigned values of the `AUTO_INCREMENT` column are incremental only in the cluster with a single TiDB instance. That is, for the same auto-increment column, the value assigned earlier is smaller than the value assigned later. However, in a cluster with multiple instances, TiDB cannot guarantee that the auto-increment column is incremental.
 
-In the example above, if you first execute an `INSERT` statement in instance `B`, and then execute an `INSERT` statement in instance `A`. Because of the principle of caching auto-increment ID, the auto-increment column might implicitly assign `30002` and `2` respectively. The assigned values are not incremental in the time order.
+In the example above, if you first execute an `INSERT` statement on instance `B`, and then execute an `INSERT` statement on instance `A`. Because of the behavior of caching auto-increment ID, the auto-increment column might be implicitly assigned `30002` and `2` respectively. The assigned values are not incremental in the time order.
 
 ### Continuity
 
@@ -123,9 +123,9 @@ insert into t values (), (), (), ()
 
 Even if other TiDB instances are performing concurrent write operations, or if the current instance does not have enough cached IDs left, the assigned values are still continuous.
 
-### Relationship with `_tidb_rowid`
+### Relation with `_tidb_rowid`
 
-If no primary key of integer type exists, TiDB uses `_tidb_rowid` to identify rows. `_tidb_rowid` uses the same allocator with the auto-increment column (if any). In such cases, the cache size might be shared between `_tidb_rowid` and the auto-increment column. Therefore, you might encounter the following situation:
+If the primary key of integer type does not exist, TiDB uses `_tidb_rowid` to identify rows. `_tidb_rowid` and the auto-increment column (if any) share an allocator. In such cases, the cache size might be consumed by both `_tidb_rowid` and the auto-increment column. Therefore, you might encounter the following situation:
 
 ```sql
 mysql> create table t(id int unique key AUTO_INCREMENT);
@@ -148,7 +148,7 @@ mysql> select _tidb_rowid, id from t;
 
 ### Cache size control
 
-In earlier versions of TiDB, the cache size of the auto-increment ID was transparent to users. Starting from v3.0.14, v3.1.2, and v4.0.rc-2, TiDB has introduced the `AUTO_ID_CACHE` table option to allow users to set the cache size allocated to the auto-increment ID.
+In earlier versions of TiDB, the cache size of the auto-increment ID was transparent to users. Starting from v3.0.14, v3.1.2, and v4.0.rc-2, TiDB has introduced the `AUTO_ID_CACHE` table option to allow users to set the cache size for allocating the auto-increment ID.
 
 ```sql
 mysql> create table t(a int auto_increment key) AUTO_ID_CACHE 100;
@@ -188,15 +188,15 @@ mysql> select * from t;
 1 row in set (0.00 sec)
 ```
 
-The re-assigned value is `101`. This shows that the size of cache allocated to the auto-increment ID is `100`.
+The re-assigned value is `101`. This shows that the size of cache for allocating the auto-increment ID is `100`.
 
-In addition, when the length of consecutive IDs in a batch insert statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can be inserted properly.
+In addition, when the length of consecutive IDs in a batch `insert` statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can be inserted properly.
 
-### Auto-increment step and offset
+### Auto-increment step size and offset
 
-Starting from v3.0.9 and v4.0.0-rc.1, similar to the behavior of MySQL, the value implicitly assigned by auto-increment columns is controlled by the `@@auto_increment_increment` and `@@auto_increment_offset` session variables.
+Starting from v3.0.9 and v4.0.0-rc.1, similar to the behavior of MySQL, the value implicitly assigned to the auto-increment column is controlled by the `@@auto_increment_increment` and `@@auto_increment_offset` session variables.
 
-The value (ID) implicitly assigned by auto-increment columns satisfies the following equation: 
+The value (ID) implicitly assigned to auto-increment columns satisfies the following equation: 
 
 `(ID - auto_increment_offset) % auto_increment_increment == 0`
 
@@ -206,6 +206,6 @@ Currently, `AUTO_INCREMENT` has the following restrictions when used in TiDB:
 
 - It must be defined on the column of the primary key or unique index.
 - It must be defined on the column of `INTEGER`, `FLOAT`, or `DOUBLE` type.
-- It cannot be specified on the same column as the `DEFAULT` column.
+- It cannot be specified on the same column with the `DEFAULT` column value.
 - `ALTER TABLE` cannot be used to add the `AUTO_INCREMENT` attribute.
-- `ALTER TABLE` can be used to remove the `AUTO_INCREMENT` attribute. However, starting from v2.1.18 and v3.0.4, TiDB uses the session variable `@@tidb_allow_remove_auto_inc` to control whether `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` can be used to remove the `AUTO_INCREMENT` attribute of a column. By default, `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE`cannot remove the `AUTO_INCREMENT` attribute.
+- `ALTER TABLE` can be used to remove the `AUTO_INCREMENT` attribute. However, starting from v2.1.18 and v3.0.4, TiDB uses the session variable `@@tidb_allow_remove_auto_inc` to control whether `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` can be used to remove the `AUTO_INCREMENT` attribute of a column. By default, you cannot use `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` to remove the `AUTO_INCREMENT` attribute.
