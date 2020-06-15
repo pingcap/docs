@@ -48,10 +48,9 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-## Presplit region
+## Pre-split region
 
-The table built with `CREATE TABLE LIKE` inherits the attribute `PRE_SPLIT_REGIONS`. When creating a table, the region on the new table will be split. 
-如果被复制的表定义了 `PRE_SPLIT_REGIONS` 属性，则通过 `CREATE TABLE LIKE` 语句复制的表，会继承该属性并在建表时预切分 Region。For details of `PRE_SPLIT_REGIONS`, see [`CREATE TABLE` Statement](/sql-statements/sql-statement-create-table.md)。
+If the table to be copied is defined with the `PRE_SPLIT_REGIONS` attribute, the table created using the `CREATE TABLE LIKE` statement inherits this attribute, and the Region on the new table will be split. For details of `PRE_SPLIT_REGIONS`, see [`CREATE TABLE` Statement](/sql-statements/sql-statement-create-table.md).
 
 ## MySQL compatibility
 
