@@ -121,17 +121,17 @@ After the configuration above takes effect, every 30 minutes the `statements_sum
 The system variables above have two scopes: global and session. These scopes work differently from other system variables:
 
 - After setting the global variable, your setting applies to the whole cluster immediately.
-- Set the session variable to apply to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
+- After setting the session variable, your setting applies to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
 - The session variable has a higher read priority. The global variable is read only when no session variable is set.
-- Set the session variable to a blank string to re-read the global variable.
+- If you set the session variable to a blank string, the global variable is re-read.
 
 > **Note:**
 >
 > The `tidb_stmt_summary_history_size`, `tidb_stmt_summary_max_stmt_count`, and `tidb_stmt_summary_max_sql_length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your needs. It is not recommended to set them too large values.
 
-## Limitations
+## Limitation
 
-The statement summary tables have the following limitations:
+The statement summary tables have the following limitation:
 
 The statement summary data are lost when the TiDB server is restarted. This is because statement summary tables are memory tables, and the data is cached in memory instead of being persisted on storage.
 
