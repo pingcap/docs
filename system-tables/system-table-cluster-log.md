@@ -65,7 +65,7 @@ select time,instance,left(message,150) from information_schema.cluster_log where
 +-------------------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-The above query results show the process of executing a DDL:
+The query results above show the process of executing a DDL statement:
 
 1. The request with a DDL JOB ID of `80` is sent to the `127.0.0.1:4002` TiDB instance.
 2. The `127.0.0.1:4000` TiDB instance processes this DDL request, which indicates that the `127.0.0.1:4000` instance is the DDL owner at that time.
