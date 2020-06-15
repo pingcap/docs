@@ -13,7 +13,7 @@ To dynamically observe and compare cluster conditions of different time ranges, 
 
 To illustrate how to use the monitoring table and how it works, take the `tidb_query_duration` monitoring table in `metrics_schema` as an example. The principles of other monitoring tables are similar to `tidb_query_duration`.
 
-To query the information related to the `tidb_query_duration` table on `information_schema.metrics_tables`, execute the following command:
+Query the information related to the `tidb_query_duration` table on `information_schema.metrics_tables`:
 
 {{< copyable "sql" >}}
 
@@ -112,7 +112,7 @@ desc select * from metrics_schema.tidb_query_duration where value is not null an
 
 From the result above, you can see that `PromQL`, `start_time`, `end_time`, and `step` are in the execution plan. During the execution process, TiDB calls the `query_range` HTTP API of Prometheus to query the monitoring data.
 
-You might find that in the range of [`2020-03-25 23:40:00`, `2020-03-25 23:42:00`], each label only has three time values. In the execution plan, the value of `step` is 1 minute, which means that the interval of these three values is 1 minute. `step` is determined by the following two session variables:
+You might find that in the range of [`2020-03-25 23:40:00`, `2020-03-25 23:42:00`], each label only has three time values. In the execution plan, the value of `step` is 1 minute, which means that the interval of these values is 1 minute. `step` is determined by the following two session variables:
 
 * `tidb_metric_query_step`: The query resolution step width. To get the `query_range` data from Prometheus, you need to specify `start_time`, `end_time`, and `step`. `step` uses the value of this variable.
 * `tidb_metric_query_range_duration`: When the monitoring data is queried, the value of the `$ RANGE_DURATION` field in `PROMQL` is replaced with the value of this variable. The default value is 60 seconds.
