@@ -6,7 +6,7 @@ category: reference
 
 # SET ROLE
 
-The statement `SET ROLE` is used to enable role(s) in current sessiom. User could use privileges of role(s) after enable them.  
+The `SET ROLE` statement is used to enable roles in the current session. After enabling roles, users can use the privileges of the role(s).  
 
 ## Synopsis
 
