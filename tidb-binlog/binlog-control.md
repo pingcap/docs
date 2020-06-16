@@ -8,7 +8,7 @@ category: reference
 
 [Binlog Control](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) (`binlogctl` for short) is a command line tool for TiDB Binlog. You can use `binlogctl` to manage TiDB Binlog clusters.
 
-`binlogctl` can be used to:
+You can use `binlogctl` to:
 
 * check the state of Pump or Drainer
 * pause or close Pump or Drainer
