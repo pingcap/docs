@@ -8,7 +8,7 @@ aliases: ['/docs/dev/reference/sql/statements/drop-user/']
 # DROP USER
 
 This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist.
-This statement require `CREATE USER` privilege.
+This statement requires the `CREATE USER` privilege.
 
 ## Synopsis
 
