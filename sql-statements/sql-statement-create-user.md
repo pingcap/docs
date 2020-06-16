@@ -58,7 +58,7 @@ CREATE USER 'newuser3'@'%' REQUIRE SSL IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.02 sec)
 ``` 
 
-Create a user which require X.509 certificate at login.
+Create a user who is required to use X.509 certificate at login.
 
 ```sql
 CREATE USER 'newuser4'@'%' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O=PingCAP' IDENTIFIED BY 'newuserpassword';
