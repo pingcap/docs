@@ -71,5 +71,4 @@ This document describes the common limitations of TiDB, including the maximum id
 
 | Type       | Upper limit   |
 |:----------|:----------|
-|  The number of key-value pairs written in a single `INSERT` statement       |  3000000      |
-|  The number of rows written in a single transaction     |  3000000 / The number of indexes on a single table     |
+| The number of SQL statements in a single transaction |  When the optimistic transaction is used and the transaction retry is enabled, the default upper limit is 5000, which can be changed through [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit). |
