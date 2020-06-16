@@ -6,6 +6,10 @@ category: how-to
 
 # Placement Rules
 
+> **Note:**
+>
+> Currently, this is an experimental feature. It is recommended that you do not use this feature in the production environment.
+
 Placement Rules is an experimental feature of the Placement Driver (PD) introduced in v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
 ## Rule system
@@ -84,6 +88,10 @@ pd-ctl config placement-rules enable
 ```
 
 PD also generates default rules based on the `max-replicas` and `location-labels` configurations.
+
+> **Note:**
+>
+> After enabling Placement Rules, the previously configured `max-replicas` and `location-labels` no longer take effect. To adjust the replica policy, use the interface related to Placement Rules.
 
 ### Disable Placement Rules
 
