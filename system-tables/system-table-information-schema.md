@@ -523,7 +523,7 @@ desc select count(*) from information_schema.cluster_slow_query where user = 'u1
 
 In the above execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
 
-Currently, because information of the system tables is not collected in the statistics, sometimes some aggregation operators cannot be pushed down, which results in slow execution. You can manually specify the SQL HINT for aggregation pushdown to push down the aggregation operators. For example:
+Currently, because statistics of the system tables are not collected, sometimes some aggregation operators cannot be pushed down, which results in slow execution. In this case, you can manually specify the SQL HINT to push down the aggregation operators. For example:
 
 {{< copyable "sql" >}}
 
