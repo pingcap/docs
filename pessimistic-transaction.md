@@ -11,11 +11,11 @@ To make the usage of TiDB closer to traditional databases and reduce the cost of
 
 > **Note:**
 >
-> Starting from v3.0.8, the newly created TiDB clusters use the pessimistic transaction model by default. However, this does not affect your clusters if you upgrading from v3.0.7 or earlier to v3.0.8 (and later). In other words, **only newly created clusters default to using the pessimistic transaction model**.
+> Starting from v3.0.8, newly created TiDB clusters use the pessimistic transaction model by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction model**.
 
 ## Switch transaction mode
 
-You can set the transaction mode by configuring the [`tidb_txn_mode`](/tidb-specific- system-variables.md#tidb_txn_mode) system variable. The following command sets all explicit transactions (that is, non-autocommit transactions) executed by newly created sessions in the cluster to the pessimistic transaction model:
+You can set the transaction mode by configuring the [`tidb_txn_mode`](/tidb-specific-system-variables.md#tidb_txn_mode) system variable. The following command sets all explicit transactions (that is, non-autocommit transactions) executed by newly created sessions in the cluster to the pessimistic transaction mode:
 
 {{< copyable "sql" >}}
 
