@@ -67,11 +67,12 @@ Query OK, 1 row affected (0.02 sec)
 
 ## MySQL compatibility
 
-* Several of the `CREATE` options are not yet supported by TiDB, and will be parsed but ignored.
-* TiDB don't support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, `WITH MAX_USER_CONNECTIONS` in `CREATE USER`.
-* TiDB don't support `DEFAULT ROLE` option.
-* TiDB don't support `PASSWORD EXPIRE`, `PASSWORD HISTORY` or other options related to password.
-* TiDB don't support  `ACCOUNT LOCK`, `ACCOUNT UNLOCK` option.
+The following `CREATE USER` options are not yet supported by TiDB, and will be parsed but ignored:
+
+* TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
+* TiDB does not support the `DEFAULT ROLE` option.
+* TiDB does not support `PASSWORD EXPIRE`, `PASSWORD HISTORY` or other options related to password.
+* TiDB does not support the `ACCOUNT LOCK` and `ACCOUNT UNLOCK` options.
 
 ## See also
 
