@@ -44,7 +44,7 @@ mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.04 sec)
 ```
 
-Create a user which could only be login at `192.168.1.1`.
+Create a user who can only log in to `192.168.1.1`.
 
 ```sql
 mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';
