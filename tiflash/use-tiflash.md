@@ -180,7 +180,7 @@ Engine isolation has higher priority over CBO and hint, and hint has higher prio
 
 > **Note:**
 >
-> The MySQL client cleared optimizer hints by default before version 5.7.7. To use the hint syntax in these early versions, start the client with the `--comments` option, for example, `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
+> The MySQL client of 5.7.7 or earlier versions clears optimizer hints by default. To use the hint syntax in these early versions, start the client with the `--comments` option, for example, `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
 
 ## Use TiSpark to read TiFlash replicas
 
