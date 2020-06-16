@@ -51,7 +51,7 @@ mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user which enforce using TLS connection.
+Create a user who is enforced to log in using TLS connection.
 
 ```sql
 CREATE USER 'newuser3'@'%' REQUIRE SSL IDENTIFIED BY 'newuserpassword';
