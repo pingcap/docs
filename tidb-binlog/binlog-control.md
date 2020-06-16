@@ -60,26 +60,29 @@ Command line parameters:
 
 ```
 Usage of binlogctl:
--V
-    Outputs the binlogctl version information
--cmd string
-    The command mode, including "generate_meta" (deprecated), "pumps", "drainers", "update-pump" ,"update-drainer", "pause-pump", "pause-drainer", "offline-pump", and "offline-drainer"
--data-dir string
-    The file path where the checkpoint file of Drainer is stored ("binlog_position" by default) (deprecated)
--node-id string
-    The ID of Pump or Drainer
--pd-urls string
-    The address of PD. If multiple addresses exist, use "," to separate each ("http://127.0.0.1:2379" by default)
--ssl-ca string
-    The file path of SSL CAs
--ssl-cert string
-    The file path of the X509 certificate file in the PEM format
--ssl-key string
-    The file path of the X509 key file in the PEM format
--time-zone string
-    If a time zone is set, the corresponding time of the obtained `TSO` is printed in the "generate_meta" mode. For example, "Asia/Shanghai" is the CST time zone and "Local" is the local time zone
--show-offline-nodes
-    Used with the `-cmd pumps` or `-cmd drainers` command. The two commands do not show the offline node by default unless this parameter is explicitly specified
+  -V    prints version and exit
+  -cmd string
+        operator: "generate_meta", "pumps", "drainers", "update-pump", "update-drainer", "pause-pump", "pause-drainer", "offline-pump", "offline-drainer", "encrypt" (default "pumps")
+  -data-dir string
+        meta directory path (default "binlog_position")
+  -node-id string
+        id of node, use to update some node with operation update-pump, update-drainer, pause-pump, pause-drainer, offline-pump and offline-drainer
+  -pd-urls string
+        a comma separated list of PD endpoints (default "http://127.0.0.1:2379")
+  -show-offline-nodes
+        include offline nodes when querying pumps/drainers
+  -ssl-ca string
+        Path of file that contains list of trusted SSL CAs for connection with cluster components.
+  -ssl-cert string
+        Path of file that contains X509 certificate in PEM format for connection with cluster components.
+  -ssl-key string
+        Path of file that contains X509 key in PEM format for connection with cluster components.
+  -state string
+        set node's state, can set to online, pausing, paused, closing or offline.
+  -text string
+        text to be encrypt when using encrypt command
+  -time-zone Asia/Shanghai
+        set time zone if you want save time info in savepoint file, for example Asia/Shanghai for CST time, `Local` for local time
 ```
 
 Command examples:
