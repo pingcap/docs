@@ -6,7 +6,7 @@ category: reference
 
 # SHOW BUILTINS
 
-`SHOW BUILTINS` is uesd to list all supported builtin functions in TiDB.
+`SHOW BUILTINS` is used to list all supported builtin functions in TiDB.
 
 ## Synopsis
 
@@ -300,4 +300,4 @@ SHOW BUILTINS;
 
 ## MySQL compatibility
 
-`SHOW BUILTINS` is specific in TiDB.
+`SHOW BUILTINS` is a new syntax in TiDB.
