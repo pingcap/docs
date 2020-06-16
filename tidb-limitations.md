@@ -67,7 +67,7 @@ This document describes the common usage limitations of TiDB, including the maxi
 | TEXT       | 6 MB bytes      |
 | BLOB       | 6 MB bytes      |
 
-## Limitation on SQL statements
+## Limitations on SQL statements
 
 | Type       | Upper limit   |
 |:----------|:----------|
