@@ -75,8 +75,10 @@
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
+      - [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
       - [Migration Case of Amazon Aurora](/migrate-from-aurora-mysql-database.md)
-    - [Migrate from CSV](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    - [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    - [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
   + Maintain
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
@@ -213,6 +215,7 @@
       - [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+      - [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
       - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       - [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
