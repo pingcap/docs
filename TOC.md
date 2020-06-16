@@ -278,6 +278,8 @@
       + [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
       + [`SHOW [FULL] PROCESSSLIST`](/sql-statements/sql-statement-show-processlist.md)
       + [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
+      + [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-histograms.md)
+      + [`SHOW STATES_META`](/sql-statements/sql-statement-show-stats-meta.md)
       + [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
       + [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
       + [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
