@@ -21,7 +21,7 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 - [`store-balance-rate`](/pd-configuration-file.md#store-balance-rate): limits the rate at which Regions of each TiKV/TiFlash store are scheduled. Note that this parameter takes effect only when the stores have newly joined the cluster. If you want to change the setting for existing stores, use the following command.
     - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. (To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command. 
-    - If you do not set the scheduling rate of the specified Region, this Region inherits the value of `store-balance-rate`. 
+    - If you do not set the scheduling rate for Regions of a specified store, this store inherits the setting of `store-balance-rate`. 
     - You can execute the `pd-ctl -u <pd_ip:pd_port> store limit` command to view the value of `store-balance-rate`.
 
 ## TiFlash configuration parameters
