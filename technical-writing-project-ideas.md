@@ -53,5 +53,5 @@ TiDB 4.0 Documentation Improvement
 
 - The open-source project: <https://github.com/pingcap/tidb>
 - Existing documentation: <https://pingcap.com/docs>
-- [How-to guides and tutorials](https://pingcap.com/docs/v4.0/how-to/deploy/orchestrated/tiup/): topics about how to deploy, configure, scale, or monitor a TiDB cluster in different ways
+- [How-to guides and tutorials](/production-deployment-using-tiup.md): topics about how to deploy, configure, scale, or monitor a TiDB cluster in different ways
 - [Related open-source projects](https://github.com/pingcap/community/blob/master/special-interest-groups/sig-docs/README.md) that are also involved in the whole TiDB documentation
