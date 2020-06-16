@@ -72,7 +72,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-Execute `SET ROLE` to enable default role(s).
+Execute the following `SET ROLE` statement to enable the default role(s).
 
 {{< copyable "sql" >}}
 
