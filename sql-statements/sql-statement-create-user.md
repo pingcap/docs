@@ -37,7 +37,7 @@ This statement creates a new user, specified with a password. In the MySQL privi
 
 ## Examples
 
-Create a user with password `newuserpassword`.
+Create a user with the `newuserpassword` password.
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
