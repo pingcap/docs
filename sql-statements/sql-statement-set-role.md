@@ -36,7 +36,7 @@ GRANT 'r1', 'r2', 'r3' TO 'u1'@'%';
 SET DEFAULT ROLE 'r1' TO 'u1'@'%'; 
 ```
 
-Login as `'u1'@'%'` and execute `SET ROLE` statement to enable all roles.
+Log in as `'u1'@'%'` and execute the following `SET ROLE` statement to enable all roles.
 
 {{< copyable "sql" >}}
 
