@@ -90,7 +90,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-Execute `SET ROLE` to cancel all enable role(s).
+Execute the following `SET ROLE` statement to cancel all enabled role(s).
 
 {{< copyable "sql" >}}
 
