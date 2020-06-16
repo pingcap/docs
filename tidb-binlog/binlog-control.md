@@ -10,15 +10,15 @@ category: reference
 
 You can use `binlogctl` to:
 
-* check the state of Pump or Drainer
-* pause or close Pump or Drainer
-* handle the abnormal state of Pump or Drainer
+* Check the state of Pump or Drainer
+* Pause or close Pump or Drainer
+* Handle the abnormal state of Pump or Drainer
 
 The following are its usage scenarios:
 
 * An error occurs during data replication or you need to check the running state of Pump or Drainer.
 * You need to pause or close Pump or Drainer when maintaining the cluster.
-* Pump or Drainer process is exited abnormally, while the node state is not updated or is unexpected. This affects the data replication task.
+* A Pump or Drainer process exits abnormally, while the node state is not updated or is unexpected. This affects the data replication task.
 
 ## Download `binlogctl`
 
@@ -75,7 +75,7 @@ Usage of binlogctl:
 -ssl-cert string
     The file path of the X509 certificate file in the PEM format
 -ssl-key string
-    The file path of X509 key file of the PEM format
+    The file path of the X509 key file in the PEM format
 -time-zone string
     If a time zone is set, the corresponding time of the obtained `TSO` is printed in the "generate_meta" mode. For example, "Asia/Shanghai" is the CST time zone and "Local" is the local time zone
 -show-offline-nodes
@@ -86,7 +86,7 @@ Command examples:
 
 - Check the state of all the Pump or Drainer nodes.
 
-    Set `cmd` as `pumps` or `drainers`. For example:
+    Set `cmd` to `pumps` or `drainers`. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -112,7 +112,7 @@ Command examples:
 
     You can use the following commands to pause or close services:
 
-    | cmd             | Description           | Example                                                                                             |
+    | Command             | Description           | Example                                                                                             |
     | :--------------- | :------------- | :------------------------------------------------------------------------------------------------|
     | pause-pump      | Pause Pump      | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-pump -node-id ip-127-0-0-1:8250`       |
     | pause-drainer   | Pause Drainer   | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-drainer -node-id ip-127-0-0-1:8249`    |
@@ -123,7 +123,7 @@ Command examples:
 
 - Modify the state of a Pump or Drainer node in abnormal states.
 
-    When a Pump or Drainer node runs normally or when it is paused or closed in the normal process, it is in the right state. In abnormal states, the Pump or Drainer node cannot correctly maintain its state. This affects data replication tasks. In this case, use `binlogctl` to repair the state information.
+    When a Pump or Drainer node runs normally or when it is paused or closed in the normal process, it is in the normal state. In abnormal states, the Pump or Drainer node cannot correctly maintain its state. This affects data replication tasks. In this case, use `binlogctl` to repair the state information.
 
     To update the state of a Pump or Drainer node, set `cmd` to `update-pump` or `update-drainer`. The state can be `paused` or `offline`. For example:
 
@@ -135,4 +135,4 @@ Command examples:
 
     > **Note:**
     >
-    > When a Pump or Drainer node runs normally, it regularly updates its state to PD. The above command is used to directly modify the Pump or Drainer state saved in PD; therefore, do not use the command when the Pump or Drainer node runs normally. For more information, refer to [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md).
+    > When a Pump or Drainer node runs normally, it regularly updates its state to PD. The above command directly modifies the Pump or Drainer state saved in PD; therefore, do not use the command when the Pump or Drainer node runs normally. For more information, refer to [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md).
