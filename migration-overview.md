@@ -30,7 +30,7 @@ You can use Mydumper and TiDB Lightning to migrate full data when the data size 
 
 #### Scenarios
 
-You can use DM to migrate full MySQL data and to replicate incremental data. Note that the size of the full data must be less than 1 TB. Otherwise, it is recommended to use Mydumper and TiDB Lightning to import the full data, and then use DM to replicate the incremental data.
+You can use DM to migrate full MySQL data and to replicate incremental data. It is suggested that the size of the full data is less than 1 TB. Otherwise, it is recommended to use Mydumper and TiDB Lightning to import the full data, and then use DM to replicate the incremental data.
 
 #### Migration method
 
