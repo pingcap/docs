@@ -57,14 +57,14 @@ Create Table: CREATE TABLE `t1` (
 
 ## MySQL compatibility
 
-* Making multiple changes in a single `ALTER TABLE` statement is not currently supported. For example:
+* Does not support modifying multiple columns in a single `ALTER TABLE` statement. For example:
 
     ```sql
     ALTER TABLE t1 MODIFY col1 BIGINT, MODIFY id BIGINT NOT NULL;
     ERROR 1105 (HY000): Unsupported multi schema change
     ```
 
-* Lossy data type changes and some of the other type changes are not supported(including changes from integer to string or `BLOB`). For example:
+* Does not support changes of lossy data types and some other types (including changes from integer to string or to `BLOB`). For example:
 
     ```sql
     CREATE TABLE t1 (col1 BIGINT);
@@ -72,7 +72,7 @@ Create Table: CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column length 11 is less than origin 20
     ```
 
-* Modifying precision of the `DECIMAL` data type is not supported. For example:
+* Does not support modifying the precision of the `DECIMAL` data type. For example:
 
     ```sql
     CREATE TABLE t (a DECIMAL(5, 3));
