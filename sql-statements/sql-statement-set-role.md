@@ -54,7 +54,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-Execute `SET ROLE` to enable `'r2'` and `'r3'`.
+Execute the following `SET ROLE` statement to enable `'r2'` and `'r3'`.
 
 {{< copyable "sql" >}}
 
