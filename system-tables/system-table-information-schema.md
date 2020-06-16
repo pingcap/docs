@@ -529,7 +529,6 @@ Currently, because statistics of the system tables are not collected, sometimes 
 
 ```sql
 select /*+ AGG_TO_COP() */ count(*) from information_schema.cluster_slow_query group by user;
-```
 
 ### STATISTICS table
 
