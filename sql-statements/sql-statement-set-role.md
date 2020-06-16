@@ -25,7 +25,7 @@ The `SET ROLE` statement is used to enable roles in the current session. After e
 ## Examples
 
 Create a user `'u1'@'%'` and three roles: `'r1'@'%'`, `'r2'@'%'` and `'r3'@'%'`.
-Grant roles to `'u1'@'%'` and set `'r1'@'%'` as defualt role of `'u1'@'%'`.
+Grant these roles to `'u1'@'%'` and set `'r1'@'%'` as the defualt role of `'u1'@'%'`.
 
 {{< copyable "sql" >}}
 
