@@ -82,6 +82,7 @@
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+  + [Handle TiCDC Issues](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
 + Performance Tuning
   + Software Tuning
@@ -180,7 +181,6 @@
   + Secure
     + [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
-    + [Encrypt Stored Data](/enable-encrypt-stored-data.md)
     + [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
     + [Encryption-At-Rest](/encryption-at-rest.md)
   + Privileges
@@ -192,6 +192,7 @@
   + SQL
     + SQL Language Structure and Syntax
       + Attributes
+        + [AUTO_INCREMENT](/auto-increment.md)
         + [AUTO_RANDOM](/auto-random.md)
       + [Literal Values](/literal-values.md)
       + [Schema Object Names](/schema-object-names.md)
@@ -256,7 +257,9 @@
       + [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
       + [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       + [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+      + [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
       + [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
+      + [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)
       + [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       + [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       + [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
@@ -271,6 +274,7 @@
       + [`SHOW INDEX [FROM|IN]`](/sql-statements/sql-statement-show-index.md)
       + [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       + [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
+      + [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)
       + [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
       + [`SHOW [FULL] PROCESSSLIST`](/sql-statements/sql-statement-show-processlist.md)
       + [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
@@ -401,6 +405,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.1](/releases/release-4.0.1.md)
     + [4.0 GA](/releases/release-4.0-ga.md)
     + [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
     + [4.0.0-rc.1](/releases/release-4.0.0-rc.1.md)
