@@ -46,6 +46,10 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `oom-action`
 
+> **Warning:**
+>
+> This feature is still an experimental feature, which counts the memory during the writing process. For users who want to use this feature to cancel the write operation, it is not recommended to configure it as `cancel` in the production environment.
+
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
 - Default value: `"log"`
 - The valid options are `"log"` and `"cancel"`. When `oom-action="log"`, it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
