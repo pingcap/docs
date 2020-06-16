@@ -63,6 +63,7 @@
   + Configure
     - [Time Zone](/configure-time-zone.md)
     - [Memory Control](/configure-memory-usage.md)
+    - [Placement Rules](/configure-placement-rules.md)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](/encrypted-connections-with-tls-protocols.md)
@@ -74,8 +75,10 @@
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
+      - [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
       - [Migration Case of Amazon Aurora](/migrate-from-aurora-mysql-database.md)
-    - [Migrate from CSV](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    - [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    - [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
   + Maintain
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
@@ -212,6 +215,7 @@
       - [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+      - [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
       - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       - [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
@@ -331,7 +335,8 @@
       - [Error Handling](/tidb-binlog/handle-tidb-binlog-errors.md)
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
   + Tools
-    - [Tools User Guide](/ecosystem-tool-user-guide.md)
+    - [Overview](/ecosystem-tool-user-guide.md)
+    - [Use Cases](/ecosystem-tool-user-case.md)
     - [Download](/download-ecosystem-tools.md)
     + Backup & Restore (BR)
       - [Use BR](/br/backup-and-restore-tool.md)
