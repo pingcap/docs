@@ -194,7 +194,7 @@ The synopsis of `SHOW STATS_HEALTHY` is:
 
 ![ShowStatsHealthy](/media/sqlgram/ShowStatsHealthy.png)
 
-and the synopsis of `ShowLikeOrWhereOpt` part is:
+and the synopsis of the `ShowLikeOrWhereOpt` part is:
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
