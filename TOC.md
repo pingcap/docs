@@ -104,7 +104,7 @@
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
 + Tutorials
-  + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
+  + [Multi-DC in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + Best Practices
     + [Java Application Development](/best-practices/java-app-best-practices.md)
     + [Use HAProxy](/best-practices/haproxy-best-practices.md)
