@@ -66,7 +66,7 @@ Usage of binlogctl:
   -data-dir string
         meta directory path (default "binlog_position")
   -node-id string
-        id of node, used to update some node with operation update-pump, update-drainer, pause-pump, pause-drainer, offline-pump and offline-drainer
+        id of node, used to update some nodes with operations update-pump, update-drainer, pause-pump, pause-drainer, offline-pump and offline-drainer
   -pd-urls string
         a comma separated list of PD endpoints (default "http://127.0.0.1:2379")
   -show-offline-nodes
@@ -78,11 +78,11 @@ Usage of binlogctl:
   -ssl-key string
         Path of file that contains X509 key in PEM format for connection with cluster components.
   -state string
-        set node's state, can set to online, pausing, paused, closing or offline.
+        set node's state, can be set to online, pausing, paused, closing or offline.
   -text string
-        text to be encrypt when using encrypt command
+        text to be encrypted when using encrypt command
   -time-zone Asia/Shanghai
-        set time zone if you want save time info in savepoint file, for example Asia/Shanghai for CST time, `Local` for local time
+        set time zone if you want to save time info in savepoint file; for example, Asia/Shanghai for CST time, `Local` for local time
 ```
 
 Command examples:
