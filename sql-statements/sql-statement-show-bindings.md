@@ -1,0 +1,54 @@
+---
+title: SHOW BINDINGS
+summary: Use of SHOW BINDINGS binding in TiDB database.
+category: reference
+---
+
+# SHOW BINDINGS
+
+The `SHOW BINDINGS` statement is used to display information about all created SQL BIND.
+
+## Statement Diagram
+
+**ShowStmt:**
+
+![ShowStmt](/media/sqlgram/ShowStmt.png)
+
+**ShowTargetFilterable:**
+
+![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+
+**GlobalScope:**
+
+![GlobalScope](/media/sqlgram/GlobalScope.png)
+
+**ShowLikeOrWhereOpt**
+
+![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+
+## Statement Description
+
+{{< copyable "sql" >}}
+
+```sql
+SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhereOpt];
+```
+
+This statement outputs the execution plan bindings at the GLOBAL or SESSION level. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
+
+| Column Name | Note |
+| :-------- | :------------- |
+| original_sql  |  Original SQL statement after parameterization |
+| bind_sql | Bound SQL statement with hints |
+| default_db | Default database |
+| status | Status including 'Using', 'Deleted', 'Invalid', 'Rejected', and 'Pending verification'|
+| create_time | Creating time |
+| update_time | Updating time |
+| charset | Character set |
+| collation | Ordering rule |
+| source | Create way，include 'manual', 'capture' and 'evolve' |
+
+## See also
+
+* [CREATE BINDING](/sql-statements/sql-statement-create-binding.md)
+* [DROP BINDING](/sql-statements/sql-statement-drop-binding.md)
