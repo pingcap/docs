@@ -205,7 +205,7 @@ The description of columns in the `COLUMNS` table is as follows:
 * `CHARACTER_MAXIMUM_LENGTH`: For string columns, the maximum length in characters.
 * `CHARACTER_OCTET_LENGTH`: For string columns, the maximum length in bytes.
 * `NUMERIC_PRECISION`: The numeric precision of a number-type column.
-* `NUMERIC_SCALE`: The numeric scale of a number column.
+* `NUMERIC_SCALE`: The numeric scale of a number-type column.
 * `DATETIME_PRECISION`: For time-type columns, the fractional seconds precision.
 * `CHARACTER_SET_NAME`: The name of the character set of a string column.
 * `COLLATION_NAME`: The name of the collation of a string column.
