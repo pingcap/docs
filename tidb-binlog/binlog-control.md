@@ -66,7 +66,7 @@ Usage of binlogctl:
   -data-dir string
         meta directory path (default "binlog_position")
   -node-id string
-        id of node, use to update some node with operation update-pump, update-drainer, pause-pump, pause-drainer, offline-pump and offline-drainer
+        id of node, used to update some node with operation update-pump, update-drainer, pause-pump, pause-drainer, offline-pump and offline-drainer
   -pd-urls string
         a comma separated list of PD endpoints (default "http://127.0.0.1:2379")
   -show-offline-nodes
