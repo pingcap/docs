@@ -11,6 +11,7 @@
   + [Key Features](/key-features.md)
   + Compatibility
     + [MySQL Compatibility](/mysql-compatibility.md)
+  + [TiDB Limitations](/tidb-limitations.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
@@ -67,7 +68,7 @@
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
   + [Daily Checklist](/daily-check.md)
-  + [Maintain TiCDC](/ticdc/manage-ticdc.md)
+  + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
@@ -83,7 +84,7 @@
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-  + [Handle TiCDC Issues](/ticdc/troubleshoot-ticdc.md)
+  + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
 + Performance Tuning
   + Software Tuning
@@ -155,11 +156,7 @@
     + [Troubleshoot](/troubleshoot-tidb-lightning.md)
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     + [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
-  + TiCDC
-    + [Overview](/ticdc/ticdc-overview.md)
-    + [Configure Sink URI](/ticdc/sink-url.md)
-    + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-    + [Column and DDL Type Codes](/ticdc/column-ddl-type-codes.md)
+  + [TiCDC](/ticdc/ticdc-overview.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -182,7 +179,6 @@
   + Secure
     + [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
-    + [Encrypt Stored Data](/enable-encrypt-stored-data.md)
     + [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
     + [Encryption-At-Rest](/encryption-at-rest.md)
   + Privileges
@@ -194,6 +190,7 @@
   + SQL
     + SQL Language Structure and Syntax
       + Attributes
+        + [AUTO_INCREMENT](/auto-increment.md)
         + [AUTO_RANDOM](/auto-random.md)
       + [Literal Values](/literal-values.md)
       + [Schema Object Names](/schema-object-names.md)
@@ -256,9 +253,12 @@
       + [`SELECT`](/sql-statements/sql-statement-select.md)
       + [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
       + [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
+      + [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
       + [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       + [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+      + [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
       + [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
+      + [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)
       + [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       + [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       + [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
@@ -273,10 +273,12 @@
       + [`SHOW INDEX [FROM|IN]`](/sql-statements/sql-statement-show-index.md)
       + [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       + [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
+      + [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)
       + [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
       + [`SHOW [FULL] PROCESSSLIST`](/sql-statements/sql-statement-show-processlist.md)
       + [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
       + [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
+      + [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
       + [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
       + [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
       + [`SHOW [FULL] TABLES`](/sql-statements/sql-statement-show-tables.md)
@@ -395,6 +397,8 @@
       + [tiup-mirror](/tiup/tiup-mirrors.md)
       + [tiup-bench](/tiup/tiup-bench.md)
   + [Errors Codes](/error-codes.md)
+  + [TiCDC Overview](/ticdc/ticdc-overview.md)
+  + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
@@ -403,6 +407,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.1](/releases/release-4.0.1.md)
     + [4.0 GA](/releases/release-4.0-ga.md)
     + [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
     + [4.0.0-rc.1](/releases/release-4.0.0-rc.1.md)
