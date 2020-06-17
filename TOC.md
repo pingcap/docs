@@ -11,6 +11,7 @@
   + [Key Features](/key-features.md)
   + Compatibility
     + [MySQL Compatibility](/mysql-compatibility.md)
+  + [TiDB Limitations](/tidb-limitations.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
@@ -67,13 +68,14 @@
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
   + [Daily Checklist](/daily-check.md)
-  + [Maintain TiCDC](/ticdc/manage-ticdc.md)
+  + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
 + Monitor and Alert
-  + [Monitoring Framework](/tidb-monitoring-framework.md)
-  + [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
+  + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
+  + [Monitoring API](/tidb-monitoring-api.md)
+  + [Deploy Monitoring Services](/deploy-monitoring-services.md)
   + [TiDB Cluster Alert Rules](/alert-rules.md)
   + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
 + Troubleshoot
@@ -82,7 +84,7 @@
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-  + [Handle TiCDC Issues](/ticdc/troubleshoot-ticdc.md)
+  + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
 + Performance Tuning
   + Software Tuning
@@ -154,11 +156,7 @@
     + [Troubleshoot](/troubleshoot-tidb-lightning.md)
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     + [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
-  + TiCDC
-    + [Overview](/ticdc/ticdc-overview.md)
-    + [Configure Sink URI](/ticdc/sink-url.md)
-    + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-    + [Column and DDL Type Codes](/ticdc/column-ddl-type-codes.md)
+  + [TiCDC](/ticdc/ticdc-overview.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -255,6 +253,7 @@
       + [`SELECT`](/sql-statements/sql-statement-select.md)
       + [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
       + [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
+      + [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
       + [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       + [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
       + [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
@@ -281,6 +280,7 @@
       + [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-histograms.md)
       + [`SHOW STATES_META`](/sql-statements/sql-statement-show-stats-meta.md)
       + [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
+      + [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
       + [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
       + [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
       + [`SHOW [FULL] TABLES`](/sql-statements/sql-statement-show-tables.md)
@@ -399,6 +399,8 @@
       + [tiup-mirror](/tiup/tiup-mirrors.md)
       + [tiup-bench](/tiup/tiup-bench.md)
   + [Errors Codes](/error-codes.md)
+  + [TiCDC Overview](/ticdc/ticdc-overview.md)
+  + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
