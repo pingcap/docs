@@ -28,7 +28,7 @@ The SQL diagnostic system consists of three major parts:
 
 + **Cluster monitoring table**: The SQL diagnostic system introduces cluster monitoring tables. All of these tables are in `metrics_schema`, and you can query monitoring information using SQL statements. Compared to the visualized monitoring before v4.0, you can use this SQL-based method to perform correlated queries on all the monitoring information of the entire cluster, and compare the results of different time periods to quickly identify performance bottlenecks. Because the TiDB cluster has many monitoring metrics, the SQL diagnostic system also provides monitoring summary tables, so you can find abnormal monitoring items more easily.
 
-+ **Automatic diagnostics**: Although you can manually execute SQL statements to query cluster information tables, cluster monitoring tables, and summary tables to locate problems, the automatic diagnostics is quicker for locating common anomalies. The SQL diagnostic system performs automatic diagnostics based on the existing cluster information tables and monitoring tables, and provides relevant diagnostic result tables and diagnostic summary tables.
+**Automatic diagnostics**: Although you can manually execute SQL statements to query cluster information tables, cluster monitoring tables, and summary tables to locate issues, the automatic diagnostics allows you to quickly locate common issues. The SQL diagnostic system performs automatic diagnostics based on the existing cluster information tables and monitoring tables, and provides relevant diagnostic result tables and diagnostic summary tables.
 
 ## Cluster information tables
 
@@ -52,11 +52,11 @@ To dynamically observe and compare cluster conditions in different time periods,
 Because the TiDB cluster has many monitoring metrics, TiDB provides the following monitoring summary tables in v4.0:
 
 + The monitoring summary table [`information_schema.metrics_summary`](/system-tables/system-table-metrics-summary.md) summarizes all monitoring data to for you to check each monitoring metric with higher efficiency.
-+ The monitoring summary table [`information_schema.metrics_summary_by_label`](/system-tables/system-table-metrics-summary.md)) also summarizes all monitoring data and aggregates these data by labels, but this table performs aggregated statistics according to different labels.
++ [`information_schema.metrics_summary_by_label`](/system-tables/system-table-metrics-summary.md)) also summarizes all monitoring data. Particularly, this table aggregates statistics using different labels of each monitoring metric.
 
 ## Automatic diagnostics
 
-On the cluster information tables  and cluster monitoring tables above, you need to manually execute SQL statements to troubleshoot the cluster. Since v4.0, TiDB provides diagnostic-related system tables based on the existing basic information tables, so that the diagnostics is automatically executed. The following are the system tables related to the automatic diagnostics:
+On the cluster information tables and cluster monitoring tables above, you need to manually execute SQL statements to troubleshoot the cluster. TiDB v4.0 supports the automatic diagnostics. You can use diagnostic-related system tables based on the existing basic information tables, so that the diagnostics is automatically executed. The following are the system tables related to the automatic diagnostics:
 
 + The diagnostic result table [`information_schema.inspection_result`](/system-tables/system-table-inspection-result.md) displays the diagnostic result of the system. The diagnostics is passively triggered. Executing `select * from inspection_result` triggers all diagnostic rules to diagnose the system, and the faults or risks in the system are displayed in the results.
 + The diagnostic summary table [`information_schema.inspection_summary`](/system-tables/system-table-inspection-summary.md) summarizes the monitoring information of a specific link or module. You can troubleshoot and locate problems based on the context of the entire module or link.
