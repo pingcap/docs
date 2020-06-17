@@ -6,7 +6,7 @@ category: reference
 
 # DROP STATS
 
-`DROP STATS` 语句用于从当前所选定的数据库中删除选定表的统计信息。
+`DROP STATS` statement is used to delete the statistical information of the selected table from the selected database.
 
 ## Synopsis
 
