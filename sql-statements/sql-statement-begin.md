@@ -35,7 +35,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-TiDB can carry the option of `PESSIMISTIC` or `OPTIMISTIC` when executing the `BEGIN` statement to indicate the type of transaction this statement opens.
+You can add the `PESSIMISTIC` or `OPTIMISTIC` option to the `BEGIN` statement in TiDB to indicate the type of transaction that this statement starts.
 
 ## See also
 
