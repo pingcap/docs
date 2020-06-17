@@ -73,12 +73,14 @@
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
 + Monitor and Alert
-  + [Monitoring Framework](/tidb-monitoring-framework.md)
-  + [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
+  + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
+  + [Monitoring API](/tidb-monitoring-api.md)
+  + [Deploy Monitoring Services](/deploy-monitoring-services.md)
   + [TiDB Cluster Alert Rules](/alert-rules.md)
   + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
 + Troubleshoot
   + [Identify Slow Queries](/identify-slow-queries.md)
+  + [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
