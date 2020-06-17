@@ -200,13 +200,13 @@ The description of columns in the `COLUMNS` table is as follows:
 * `COLUMN_NAME`: The name of the column.
 * `ORDINAL_POSITION`: The position of the column in the table.
 * `COLUMN_DEFAULT`: The default value of the column. If the explicit default value is `NULL`, or if the column definition does not include the `default` clause, this value is `NULL`.
-* `IS_NULLABLE`: Whether the column is nullable. If the column can store empty value, this value is `YES`; otherwise, it is `NO`.
+* `IS_NULLABLE`: Whether the column is nullable. If the column can store null values, this value is `YES`; otherwise, it is `NO`.
 * `DATA_TYPE`: The type of data in the column.
-* `CHARACTER_MAXIMUM_LENGTH`: The maximum length of a string column, in characters.
-* `CHARACTER_OCTET_LENGTH`: The maximum length of a string column, in bytes.
+* `CHARACTER_MAXIMUM_LENGTH`: For string columns, the maximum length in characters.
+* `CHARACTER_OCTET_LENGTH`: For string columns, the maximum length in bytes.
 * `NUMERIC_PRECISION`: The numeric precision of a number-type column.
 * `NUMERIC_SCALE`: The numeric scale of a number column.
-* `DATETIME_PRECISION`: The fractional second precision of a time column.
+* `DATETIME_PRECISION`: For time-type columns, the fractional seconds precision.
 * `CHARACTER_SET_NAME`: The name of the character set of a string column.
 * `COLLATION_NAME`: The name of the collation of a string column.
 * `COLUMN_TYPE`: The column type.
