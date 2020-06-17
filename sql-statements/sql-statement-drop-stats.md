@@ -6,7 +6,7 @@ category: reference
 
 # DROP STATS
 
-`DROP STATS` statement is used to delete the statistical information of the selected table from the selected database.
+The `DROP STATS` statement is used to delete the statistics of the selected table from the selected database.
 
 ## Synopsis
 
