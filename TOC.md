@@ -11,6 +11,7 @@
   + [Key Features](/key-features.md)
   + Compatibility
     + [MySQL Compatibility](/mysql-compatibility.md)
+  + [TiDB Limitations](/tidb-limitations.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
@@ -72,12 +73,14 @@
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
 + Monitor and Alert
-  + [Monitoring Framework](/tidb-monitoring-framework.md)
-  + [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
+  + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
+  + [Monitoring API](/tidb-monitoring-api.md)
+  + [Deploy Monitoring Services](/deploy-monitoring-services.md)
   + [TiDB Cluster Alert Rules](/alert-rules.md)
   + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
 + Troubleshoot
   + [Identify Slow Queries](/identify-slow-queries.md)
+  + [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
@@ -131,6 +134,7 @@
     + [Upgrade](/tidb-binlog/upgrade-tidb-binlog.md)
     + [Monitor](/tidb-binlog/monitor-tidb-binlog-cluster.md)
     + [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
+    + [binlogctl](/tidb-binlog/binlog-control.md)
     + [Binlog Slave Client](/tidb-binlog/binlog-slave-client.md)
     + [TiDB Binlog Relay Log](/tidb-binlog/tidb-binlog-relay-log.md)
     + [Bidirectional Replication Between TiDB Clusters](/tidb-binlog/bidirectional-replication-between-tidb-clusters.md)
@@ -260,6 +264,7 @@
       + [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       + [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       + [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
+      + [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)
       + [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)
       + [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
       + [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
