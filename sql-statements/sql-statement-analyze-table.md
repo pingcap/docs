@@ -11,7 +11,7 @@ This statement updates the statistics that TiDB builds on tables and indexes. It
 
 TiDB will also automatically update its statistics over time as it discovers that they are inconsistent with its own estimates.
 
-At present, TiDB collects statistical information in two ways: full collection and incremental collection, which are realized through the `ANALYZE TABLE` and `ANALYZE INCREMENTAL TABLE` statements respectively. For detailed usage of these two statements, please refer to [introduction to statistics](/statistics.md)
+Currently, TiDB collects statistical information in two ways: full collection and (implemented using `ANALYZE TABLE` statement) and incremental collection (implemented using the `ANALYZE INCREMENTAL TABLE` statement). For detailed usage of these two statements, please refer to [introduction to statistics](/statistics.md)
 
 ## Synopsis
 
@@ -66,7 +66,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 This statement is syntactically similar with MySQL. However, `ANALYZE TABLE` may take significantly longer to execute on TiDB, as internally it operates in a different manner.
 
-MySQL does not support the `ANALYZE INCREMENTAL TABLE` statement. TiDB supports incremental collection of statistics. For usage, please refer to [incremental collection document](/statistics.md#incremental-collection).
+MySQL does not support the `ANALYZE INCREMENTAL TABLE` statement. TiDB supports incremental collection of statistics. For detailed usage, refer to [incremental collection](/statistics.md#incremental-collection).
 
 ## See also
 
