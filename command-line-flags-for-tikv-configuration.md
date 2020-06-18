@@ -29,8 +29,8 @@ TiKV supports some readable unit conversions for command line parameters.
 
 + The port through which the TiKV service status is listened
 + Default: "20180"
-+ The Prometheus statistics can be accessed via `http://host:status_port/metrics`.
-+ The Profile data can be accessed via `http://host:status_port/debug/pprof/profile`.
++ The Prometheus can access this status information via `http://host:status_port/metrics`.
++ The Profile can access this status information via `http://host:status_port/debug/pprof/profile`.
 
 ## `--advertise-status-addr`
 
