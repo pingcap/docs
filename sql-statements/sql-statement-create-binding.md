@@ -8,7 +8,7 @@ category: reference
 
 The `CREATE BINDING` statement is used to create a new SQL bind on TiDB.
 
-## Statement Diagram
+## Synopsis
 
 **CreateBindingStmt:**
 
