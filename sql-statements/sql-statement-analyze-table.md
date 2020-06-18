@@ -11,7 +11,7 @@ This statement updates the statistics that TiDB builds on tables and indexes. It
 
 TiDB will also automatically update its statistics over time as it discovers that they are inconsistent with its own estimates.
 
-Currently, TiDB collects statistical information in two ways: full collection (implemented using `ANALYZE TABLE` statement) and incremental collection (implemented using the `ANALYZE INCREMENTAL TABLE` statement). For detailed usage of these two statements, refer to [introduction to statistics](/statistics.md)
+Currently, TiDB collects statistical information in two ways: full collection (implemented using the `ANALYZE TABLE` statement) and incremental collection (implemented using the `ANALYZE INCREMENTAL TABLE` statement). For detailed usage of these two statements, refer to [introduction to statistics](/statistics.md)
 
 ## Synopsis
 
