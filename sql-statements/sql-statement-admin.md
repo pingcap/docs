@@ -9,7 +9,7 @@ aliases: ['/docs/dev/reference/sql/statements/admin/']
 
 This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB.
 
-## DDL Related ADMIN Extension Statement
+## DDL related statement
 
 To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
 
@@ -74,7 +74,7 @@ If the consistency check is passed, an empty result is returned. Otherwise, an e
 ADMIN CHECK INDEX tbl_name idx_name;
 ```
 
-The above statement is used to check the consistency of the column data and index data corresponding to the' idx_name' index in the' tbl_name' table. If it passes the check, an empty query result will be returned; Otherwise, an error message with inconsistent data is returned.
+The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table. If the consistency check is passed, an empty result is returned; otherwise, an error message is returned indicating that the data is inconsistent.
 
 {{< copyable "sql" >}}
 
@@ -82,7 +82,7 @@ The above statement is used to check the consistency of the column data and inde
 ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_val)] ...;
 ```
 
-The above statement is used to check the consistency of the column data and index data corresponding to the' idx_name' index in the' tbl_name' table, and specifies the data range to be checked. If it passes the check, an empty query result will be returned; Otherwise, an error message with inconsistent data is returned.
+The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table, with the data range (to be checked) specified. If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
 
 {{< copyable "sql" >}}
 
@@ -90,7 +90,7 @@ The above statement is used to check the consistency of the column data and inde
 ADMIN CHECKSUM TABLE tbl_name [, tbl_name] ...;
 ```
 
-The above statement will obtain the 64-bit checksum value of tbl_name', which can be obtained by calculating CRC64 of all key value pairs (including row data and index data) in the table.
+The above statement is used to get the 64-bit checksum value of `tbl_name'. This value is obtained by calculating CRC64 of all key value pairs (including row data and index data) in the table.
 
 ## `ADMIN RELOAD` statement
 
@@ -152,7 +152,7 @@ The above statement can generate the binding of SQL Plan from the `SELECT` state
 ADMIN EVOLVE bindings;
 ```
 
-After the automatic binding function is turned on, the evolution of SQL Plan binding information is triggered every ` bind-info-leave` (default value is `3s`). The above statement is used to actively trigger this evolution.
+After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every ` bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
 
 {{< copyable "sql" >}}
 
@@ -188,7 +188,7 @@ ADMIN SHOW SLOW RECENT N;
 ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 ```
 
-For detailed usage, refer to [admin show slow statement] (/identify-slow-queues.md#admin-show-slow-command)
+For details, refer to [admin show slow statement](/identify-slow-queues.md#admin-show-slow-command)
 
 ## Synopsis
 
