@@ -6,7 +6,7 @@ category: reference
 
 # LOAD STATS
 
-The `LOAD STATS` statement is used to load statistics data into TiDB.
+The `LOAD STATS` statement is used to load the statistics into TiDB.
 
 ## Synopsis
 
