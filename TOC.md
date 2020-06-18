@@ -42,7 +42,7 @@
     + [v3.0 TPC-C Performance Test](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
     + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
 + Migrate
-  + [Migration Tools Guide](/ecosystem-tool-user-guide.md)
+  + [Overview](/migration-overview.md)
   + Migrate from MySQL
     + [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
     + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
@@ -134,6 +134,7 @@
     + [Upgrade](/tidb-binlog/upgrade-tidb-binlog.md)
     + [Monitor](/tidb-binlog/monitor-tidb-binlog-cluster.md)
     + [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
+    + [binlogctl](/tidb-binlog/binlog-control.md)
     + [Binlog Slave Client](/tidb-binlog/binlog-slave-client.md)
     + [TiDB Binlog Relay Log](/tidb-binlog/tidb-binlog-relay-log.md)
     + [Bidirectional Replication Between TiDB Clusters](/tidb-binlog/bidirectional-replication-between-tidb-clusters.md)
@@ -287,6 +288,7 @@
       + [`SHOW [FULL] TABLES`](/sql-statements/sql-statement-show-tables.md)
       + [`SHOW [GLOBAL|SESSION] VARIABLES`](/sql-statements/sql-statement-show-variables.md)
       + [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)
+      + [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md)
       + [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
       + [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
       + [`TRACE`](/sql-statements/sql-statement-trace.md)
