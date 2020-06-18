@@ -16,7 +16,7 @@ The `LOAD STATS` statement is used to load the statistics into TiDB.
 
 ## Examples
 
-Users can access the address `http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}` to download the TiDB instance's statistics data.
+You can access the address `http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}` to download the TiDB instance's statistics.
 
 You can also use `LOAD STATS ${stats_path}` to load the specific statistics file.
 
