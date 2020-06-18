@@ -8,7 +8,7 @@ category: reference
 
 The `DROP BINDING` statement is used to drop a SQL bind on TiDB.
 
-## Statement Diagram
+## Synopsis
 
 **DropBindingStmt:**
 
