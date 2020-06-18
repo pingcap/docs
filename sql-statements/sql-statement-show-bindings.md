@@ -45,7 +45,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | create_time | Created time |
 | update_time | Updated time |
 | charset | Character set |
-| collation | Ordering rule |
+| collation | Sorting rule |
 | source | Create way，include 'manual', 'capture' and 'evolve' |
 
 ## See also
