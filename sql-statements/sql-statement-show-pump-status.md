@@ -6,9 +6,9 @@ category: reference
 
 # SHOW PUMP STATUS
 
-`SHOW PUMP STATUS` statements displays the status information for all Pumps in the cluster.
+The `SHOW PUMP STATUS` statement displays the status information for all Pump nodes in the cluster.
 
-## 示例
+## Examples
 
 {{< copyable "sql" >}}
 

@@ -10,7 +10,7 @@ The `CHANGE PUMP` statement modifies the status information for Pump in the clus
 
 > **Tip:**
 >
-> Pump's state is automatically reported to PD during running, and the statement is used to modify the state information stored in PD only when the state under abnormal circumstances to be inconsistent with the state information stored in PD.
+> Pump's state is automatically reported to PD while running. Only when Pump is under abnormal circumstances and its state is inconsistent with the state information stored in PD, you can use the `CHANGE PUMP` statement to modify the state information stored in PD.
 
 ## Examples
 
@@ -31,7 +31,7 @@ SHOW PUMP STATUS;
 2 rows in set (0.00 sec)
 ```
 
-It can be seen that pump1's state has not been updated for more than a day, the Pump is in an abnormal state, but the `State` remains' Online '. After using 'CHANGE PUMP', the Pump's `State` is changed to 'paused' :
+It can be seen that pump1's state has not been updated for more than a day, the Pump is in an abnormal state, but the `State` remains `Online`. After using `CHANGE PUMP`, the Pump's `State` is changed to 'paused' :
 
 {{< copyable "sql" >}}
 

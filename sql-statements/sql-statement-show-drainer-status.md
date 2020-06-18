@@ -6,7 +6,7 @@ category: reference
 
 # SHOW DRAINER STATUS
 
-`SHOW DRAINER STATUS` statements displays the status information for all Drainers in the cluster.
+The `SHOW DRAINER STATUS` statement displays the status information for all Drainer nodes in the cluster.
 
 ## Examples
 

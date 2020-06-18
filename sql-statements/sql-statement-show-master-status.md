@@ -6,9 +6,9 @@ category: reference
 
 # SHOW MASTER STATUS
 
-`SHOW MASTER STATUS` statements displays the latest TSO in the cluster.
+The `SHOW MASTER STATUS` statement displays the latest TSO in the cluster.
 
-## 示例
+## Examples
 
 {{< copyable "sql" >}}
 
@@ -27,7 +27,7 @@ SHOW MASTER STATUS;
 
 ## MySQL compatibility
 
-The output of `SHOW MASTER STATUS` is designed to match MySQL. However, the execution results are different, with binlog location information in MySQL and the latest TSO information in TiDB.
+The output of `SHOW MASTER STATUS` is designed to match MySQL. However, the execution results are different in that the MySQL result is the binlog location information and the TiDB result is the latest TSO information.
 
 ## See also
 
