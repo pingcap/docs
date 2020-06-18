@@ -7,7 +7,7 @@ aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/g
 
 # Deployment Solution for Multiple Data Centers in One City
 
-As a NewSQL database, TiDB excels in the best features of the traditional relational database and the scalability of the NoSQL database and is of course, highly available across data centers (hereinafter referred to as DC). This document introduces the deployment solution for multi-DCs in one city.
+As a NewSQL database, TiDB excels in the best features of the traditional relational database and the scalability of the NoSQL database and is of course, highly available across data centers (DC). This document introduces the deployment solution for multi-DCs in one city.
 
 ## Raft protocol
 
