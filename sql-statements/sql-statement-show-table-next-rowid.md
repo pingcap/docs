@@ -6,9 +6,9 @@ category: reference
 
 # SHOW TABLE NEXT_ROW_ID
 
-`SHOW TABLE NEXT_ROW_ID` is used to show the details for some special columns, including
+`SHOW TABLE NEXT_ROW_ID` is used to show the details of some special columns of a table, including:
 
-* `AUTO_INCREMENT` column created automatically, aka `_tidb_rowid` column.
+* `AUTO_INCREMENT` column automatically created by TiDB, namely, `_tidb_rowid` column.
 * `AUTO_INCREMENT` column created by users.
 * [`AUTO_RANDOM`](/auto-random.md) column created by users.
 * [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) created by users.
@@ -25,7 +25,7 @@ category: reference
 
 ## Examples
 
-For newly created tables, NEXT_GLOBAL_ROW_ID is 1 because no Row ID is allocated.
+For newly created tables, `NEXT_GLOBAL_ROW_ID` is `1` because no Row ID is allocated.
 
 {{< copyable "sql" >}}
 
