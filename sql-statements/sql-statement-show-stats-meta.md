@@ -6,24 +6,24 @@ category: reference
 
 # SHOW STATS_META
 
-You can use `SHOW STATS_META` to know how many rows in a table and how many rows are changed in that table. And when you are using this statement, you can use `ShowLikeOrWhere` clause to filter the needed information.
+You can use `SHOW STATS_META` to view how many rows are in a table and how many rows are changed in that table. When using this statement, you can filter the needed information by the `ShowLikeOrWhere` clause.
 
-Currently there're 6 columns the  `SHOW STATS_META` will output：
+Currently, the `SHOW STATS_META` statement outputs 6 columns：
 
-| Grammar element | Description            |
+| Syntax element | Description            |
 | -------- | ------------- |
 | db_name  |  Database name    |
 | table_name | Table name |
 | partition_name| Partition name |
 | update_time | Last updated time |
-| modify_count | How many rows are changed |
+| modify_count | The number of rows modified |
 | row_count | The total row count |
 
 > **注意：**
 >
-> The `update_time` will be updated when TiDB update the `modify_count` and the `row_count` fields by `DML` statements. So you cannot regard the `update_time` as the last execution time of the `ANALYZE` stetament.
+> The `update_time` is updated when TiDB updates the `modify_count` and `row_count` fields according to DML statements. So `update_time` is not the last execution time of the `ANALYZE` statement.
 
-## 语法图
+## Synopsis
 
 **ShowStmt**
 
@@ -37,7 +37,7 @@ Currently there're 6 columns the  `SHOW STATS_META` will output：
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## 示例
+## Examples
 
 {{< copyable "sql" >}}
 
@@ -73,11 +73,11 @@ show stats_meta where table_name = 't2';
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-`SHOW STATS_META` is a TiDB specific grammer, thus there's no compatibility problem with MySQL.
+`SHOW STATS_META` is a TiDB specific syntax, and thus not compatible with MySQL.
 
-## 另请参阅
+## See also
 
 * [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
 * [Introduction to Statistics](/statistics.md)

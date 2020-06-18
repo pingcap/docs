@@ -6,9 +6,9 @@ category: reference
 
 # SHOW STATS_HISTOGRAMS
 
-This statement shows the histogram information collected by the  `ANALYZE` statement.
+This statement shows the histogram information collected by the `ANALYZE` statement.
 
-## 语法图
+## Synopsis
 
 **ShowStmt**
 
@@ -22,7 +22,7 @@ This statement shows the histogram information collected by the  `ANALYZE` state
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## 示例
+## Examples
 
 {{< copyable "sql" >}}
 
@@ -59,7 +59,7 @@ show stats_histograms where table_name = 't2';
 
 ## MySQL compatibility
 
-`SHOW STATS_HISTOGRAMS` is a TiDB specific grammer, thus there is no compatibility problem with MySQL.
+`SHOW STATS_HISTOGRAMS` is a TiDB specific syntax, and thus not compatible with MySQL.
 
 ## See also
 
