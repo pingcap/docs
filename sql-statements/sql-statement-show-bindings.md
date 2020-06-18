@@ -26,7 +26,7 @@ The `SHOW BINDINGS` statement is used to display information about all created S
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Statement Description
+## Syntax description
 
 {{< copyable "sql" >}}
 
