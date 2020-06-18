@@ -20,7 +20,7 @@ Users can access the address `http://${tidb-server-ip}:${tidb-server-status-port
 
 Users can use `LOAD STATS ${stats_path}` to load the specific statistics file.
 
-The `${stats_path}` can be an absolute path or a relative path, and here is an example:
+The `${stats_path}` can be an absolute path or a relative path. If you use a relative path, the corresponding file is found starting from the path where `tidb-server` is started. Here is an example:
 
 {{< copyable "sql" >}}
 
