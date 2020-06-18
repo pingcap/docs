@@ -22,7 +22,7 @@ The `DROP BINDING` statement is used to drop a SQL bind on TiDB.
 
 ![SelectStmt](/media/sqlgram/SelectStmt.png)
 
-## Statement Description
+## Syntax description
 
 {{< copyable "sql" >}}
 
