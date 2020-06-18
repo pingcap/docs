@@ -108,6 +108,7 @@
         + [Access Tables Using `IndexMerge`](/index-merge.md)
 + Tutorials
   + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
+  + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
   + Best Practices
     + [Java Application Development](/best-practices/java-app-best-practices.md)
     + [Use HAProxy](/best-practices/haproxy-best-practices.md)
