@@ -129,7 +129,7 @@ In the deployment model of three DCs in two cities, the design of labels should 
 
 ![Label logical definition](/media/three-data-centers-in-two-cities-deployment-03.png)
 
-PD 设置为 PD 设置 TiKV 部署位置等级信息。
+Add level information of TiKV labels in the PD configuration:
 
 ```yaml
 server_configs:
