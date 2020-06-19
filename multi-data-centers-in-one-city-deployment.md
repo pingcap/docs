@@ -7,14 +7,14 @@ aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/g
 
 # Deployment Solution for Multiple Data Centers in One City
 
-As a NewSQL database, TiDB excels in the best features of the traditional relational database and the scalability of the NoSQL database and is of course, highly available across data centers (DC). This document introduces the deployment solution for multi-DCs in one city.
+As a NewSQL database, TiDB excels in the best features of the traditional relational database and the scalability of the NoSQL database and is of course, highly available across data centers (DC). This document introduces the deployment solution for multiple DCs in one city.
 
 ## Raft protocol
 
-Raft is a distributed consensus algorithm. Using this algorithm, both PD and TiKV, among components of the TiDB cluster, achieve disaster recovery of data. Raft's disaster recovery capability is implemented through the following mechanisms:
+Raft is a distributed consensus algorithm. Using this algorithm, both PD and TiKV, among components of the TiDB cluster, achieve disaster recovery of data, which is implemented through the following mechanisms:
 
-- Raft members are essentially log replication and state machines. Among Raft members, data replication is implemented by replicating logs. Raft members change their own states in different conditions so as to elect a leader to provide external services.
-- Raft is a voting system, which follows a majority protocol. In a Raft group, if a member gets the majority of votes, its membership changes to leader. This is to say when the majority of nodes are still in the Raft group, a leader can be elected to provide services to the outside.
+- In essence, Raft members are log replication and state machines. Among Raft members, data replication is implemented by replicating logs. Raft members change their own states in different conditions so as to elect a leader to provide services to the outside.
+- Raft is a voting system, which follows a majority protocol. In a Raft group, if a member gets the majority of votes, its membership changes to leader. This is to say when the majority of nodes remain in the Raft group, a leader can be elected to provide services to the outside.
 
 To take advantage of Raft's reliability, the following conditions must be met in a real deployment scenario:
 
@@ -23,7 +23,7 @@ To take advantage of Raft's reliability, the following conditions must be met in
 - At lease three DCs are provided in case one DC fails.
 - At lease three cities are planned for deployment in case data safety issue occurs in one city.
 
-From the conditions above, you can see that the native Raft protocol's support for even number of replicas is not so good. Considering the influence of cross-city network latency, three DCs in the same city might be most suitable for a high-availability and disaster-tolerant solution of Raft deployment.
+From the conditions above, you can see that the native Raft protocol's support for even number of replicas is not so good. Considering the impact of cross-city network latency, three DCs in the same city might be most suitable for a highly available and disaster tolerant solution of Raft deployment.
 
 ## Deployment solution for three DCs in one city
 
@@ -39,13 +39,13 @@ TiDB, TiKV and PD are distributed among three DCs, which is the most common depl
 
 - All replicas are distributed among three DCs, with high availability and disaster recovery capability.
 - No data will be lost if one DC is down (RPO = 0).
-- Even if one DC is down, the other two DCs will initiate leader election and automatically resume services within a reasonable amount of time (within 20 seconds in most cases) and no data is lost (RTO <= 20s). See the following diagram for more information:
+- Even if one DC is down, the other two DCs will initiate leader election and automatically resume services within a reasonable amount of time (within 20 seconds (s) in most cases) and no data is lost (RTO <= 20s). See the following diagram for more information:
 
 ![Disaster Recovery for 3-DC Deployment](/media/deploy-3dc-dr.png)
 
 **Disadvantages**
 
-The performance is limited by the network latency.
+The performance is affected by the network latency.
 
 - For writes, all the data has to be replicated to at least 2 DCs. Because TiDB uses 2-phase commit for writes, the write latency is at least twice the latency of the network between two DCs.
 - The read performance will also suffer if the leader is not in the same DC as the TiDB node with the read request.
@@ -59,10 +59,10 @@ If not all of the three DCs need to provide service to the applications, you can
 
 **Advantages:**
 
-The cluster's read performance and the capability to get TSO can be improved. A configuration template of scheduling policy is as follows:
+The cluster's read performance and the capability to get TSO are improved. A configuration template of scheduling policy is as follows:
 
 ```shell
--- Evicts all leaders of other DCs to one DC that provide services to the application.
+-- Evicts all leaders of other DCs to the DC that provides services to the application.
 config set label-property reject-leader LabelName labelValue
 
 -- Migrates PD leaders and sets priority.
@@ -76,20 +76,20 @@ member leader_priority pdName3 3
 
 - Write scenarios are still affected by network latency across DCs. This is because Raft follows the majority protocol and all written data must be replicated to at least two DCs.
 - The TiDB server is in one DC.
-- Application traffic are processed by one DC and the performance is limited by the network bandwidth load of that DC.
+- All application traffic is processed by one DC and the performance is limited by the network bandwidth pressure of that DC.
 - The capability to get TSO and the read performance are affected by whether the PD server and TiKV server are up in the DC that processes application traffic. If these servers are down, application is still affected by the cross-center network latency.
 
 ### Deployment example
 
 #### Topology example
 
-This following example assumes that three DCs (IDC1, IDC2, and IDC3) are located in one city; each IDC has two sets of racks and each rack has three servers. The example ignores the mixed deployment or the scenario where one machine is deployed on multiple instances. The deployment of a TiDB cluster (three replicas) for three DCs in one city is as follows:
+The following example assumes that three DCs (IDC1, IDC2, and IDC3) are located in one city; each IDC has two sets of racks and each rack has three servers. The example ignores the hybrid deployment or the scenario where one machine is deployed on multiple instances. The deployment of a TiDB cluster (three replicas) for three DCs in one city is as follows:
 
-![3-DC in one city](/media/multi-data-centers-in-one-city-deployment-sample.png)
+![3-DC in One City](/media/multi-data-centers-in-one-city-deployment-sample.png)
 
 #### TiKV labels
 
-TiKV is a multi-Raft system where data is divided into Regions and each Region is 96 MB by default. Three replicas of each Region forms a Raft group. For a TiDB cluster of three replicas, because the number of Region replicas is independent of the TiKV instance numbers, three replicas of a Region are only scheduled to three TiKV instances. This means that even if the cluster is scaled out to have N TiKV instances, it is still a cluster of three replicas.
+TiKV is a multi-Raft system where data is divided into Regions and each Region is 96 MB by default. Three replicas of each Region form a Raft group. For a TiDB cluster of three replicas, because the number of Region replicas is independent of the TiKV instance numbers, three replicas of a Region are only scheduled to three TiKV instances. This means that even if the cluster is scaled out to have N TiKV instances, it is still a cluster of three replicas.
 
 Because a Raft group of three replicas tolerates failure of only one replica, even if the cluster is scaled out to have N TiKV instances, this cluster still tolerates failure of only one replica. Two failed TiKV instances might cause some Regions to lose replicas and the data in this cluster is no longer complete. SQL requests that access data from these Regions will fail. The probability of two simultaneous failures among N TiKV instances is much higher than the probability of two simultaneous failures among 3 TiKV instances. This means that the more TiKV instances the multi-Raft system is scaled out to have, the less the availability of the system.
 
@@ -97,7 +97,7 @@ Because of the limitation described above, `label` is used to describe the locat
 
 #### TiKV labels planning example
 
-You need to design and plan TiKV labels according to your existing physical resources and the disaster recovery capability, which improves the availability and disaster recovery capability of the system. You also need to configure the relevant `tidb-ansible inventory.ini` file according to the planned topology:
+You need to design and plan TiKV labels according to your existing physical resources and the disaster recovery capability, which improves the availability and disaster recovery of the system. You also need to configure the relevant `tidb-ansible inventory.ini` file according to the planned topology:
 
 ```ini
 [tikv_servers]
@@ -123,9 +123,9 @@ location_labels = ["zone","dc","rack","host"]
 
 In the example above, `zone` is the logical availability zone level and used to control the isolation of replicas (currently three replicas are in the cluster).
 
-Considering that the DC might be scaled out, the three-layer label structure (`dc`, `rack`, `host`) is not directly used. Assume that `d2`, `d3`, and `d4` are to be scaled out, you only need to scale out the DCs in the corresponding availability zone and scale out the racks in the corresponding DC.
+Considering that the DC might be scaled out in the future, the three-layer label structure (`dc`, `rack`, `host`) is not directly adopted. Assume that `d2`, `d3`, and `d4` are to be scaled out, you only need to scale out the DCs in the corresponding availability zone and scale out the racks in the corresponding DC.
 
-If this three-layer label structure is directly used, after scaling out a DC, you might need to use a new label and data in TiKV as a whole needs to be rebalanced.
+If this three-layer label structure is directly adopted, after scaling out a DC, you might need to use a new label and data in TiKV as a whole needs to be rebalanced.
 
 ### High availability and disaster recovery analysis
 
