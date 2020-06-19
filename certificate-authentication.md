@@ -5,9 +5,9 @@ category: reference
 aliases: ['/docs/dev/reference/security/cert-based-authentication/']
 ---
 
-# Certificate-Based Authentication for Login <span class="version-mark">New in v3.0.8</span>
+# Certificate-Based Authentication for Login
 
-Starting from v3.0.8, TiDB supports a certificate-based authentication method for users to log into TiDB. With this method, TiDB issues certificates to different users, uses encrypted connections to transfer data, and verifies certificates when users log in. This approach is more secure than the traditional password-based authentication method commonly used by MySQL users and is thus adopted by an increasing number of users.
+TiDB supports a certificate-based authentication method for users to log into TiDB. With this method, TiDB issues certificates to different users, uses encrypted connections to transfer data, and verifies certificates when users log in. This approach is more secure than the traditional password-based authentication method commonly used by MySQL users and is thus adopted by an increasing number of users.
 
 To use certificate-based authentication, you might need to perform the following operations:
 
@@ -20,15 +20,7 @@ The rest of the document introduces in detail how to perform these operations.
 
 ## Create security keys and certificates
 
-### Install OpenSSL
-
-It is recommended that you use [OpenSSL](https://www.openssl.org/) to create keys and certificates. Taking the Debian operation system as an example, execute the following command to install OpenSSL:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-sudo apt-get install openssl
-```
+It is recommended that you use [OpenSSL](https://www.openssl.org/) to create keys and certificates. The certificate generation process is similar to the process described in [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md). The following paragraphs demonstrate on how to configure more attribute fields that need to be verified in the certificate.
 
 ### Generate CA key and certificate
 
