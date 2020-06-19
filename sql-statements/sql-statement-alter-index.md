@@ -183,7 +183,7 @@ This means that you cannot set this implicit primary key to `Invisible`.
 
 > **Note:**
 >
-> TiDB does not actually creates an **implicit primary key**. TiDB is compatible with this MySQL restriction only in behavior.
+> TiDB does not actually create an **implicit primary key**. TiDB is compatible with this MySQL restriction only in behavior.
 
 {{< copyable "sql" >}}
 
@@ -195,7 +195,7 @@ CREATE TABLE t2(c1 INT NOT NULL, UNIQUE(c1) INVISIBLE);
 ERROR 3522 (HY000): A primary key index cannot be invisible
 ```
 
-## Reference
+## See also
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
