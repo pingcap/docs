@@ -11,6 +11,8 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 
 ## DDL related statement
 
+### `admin show DDL`
+
 To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
 
 {{< copyable "sql" >}}
@@ -18,6 +20,8 @@ To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
 ```sql
 ADMIN SHOW DDL;
 ```
+
+### `admin show DDL jobs`
 
 To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue, use `ADMIN SHOW DDL JOBS`:
 
@@ -30,6 +34,8 @@ ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 * `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
 * `WHERE`: to add filter conditions.
 
+### `admin show DDL queries`
+
 To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
 
 {{< copyable "sql" >}}
@@ -39,6 +45,8 @@ ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
 ```
 
 You can only searches the running DDL job corresponding to `job_id` and the last ten results in the DDL history job queue.
+
+### `admin cancel DDL jobs`
 
 To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled, use `ADMIN CANCEL DDL JOBS`:
 
@@ -83,6 +91,8 @@ ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_
 ```
 
 The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table, with the data range (to be checked) specified. If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
+
+### `admin checksum`
 
 {{< copyable "sql" >}}
 
