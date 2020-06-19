@@ -152,7 +152,7 @@ The above statement can generate the binding of SQL Plan from the `SELECT` state
 ADMIN EVOLVE bindings;
 ```
 
-After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every ` bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
+After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
 
 {{< copyable "sql" >}}
 
