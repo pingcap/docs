@@ -8,7 +8,7 @@ category: reference
 
 The `SHOW BINDINGS` statement is used to display information about all created SQL bindings.
 
-## Statement Diagram
+## Synopsis
 
 **ShowStmt:**
 

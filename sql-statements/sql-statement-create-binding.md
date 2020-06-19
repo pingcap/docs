@@ -24,7 +24,7 @@ The `CREATE BINDING` statement is used to create a new SQL bind on TiDB.
 
 ****
 
-## Statement Description 
+## Syntax description 
 
 {{< copyable "sql" >}}
 
