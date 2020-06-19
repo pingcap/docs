@@ -59,6 +59,10 @@ The `SELECT` statement is used to read data from TiDB.
 
 ![SelectLockOpt](/media/sqlgram/SelectLockOpt.png)
 
+**WindowClauseOptional**
+
+![WindowClauseOptional](/media/sqlgram/WindowClauseOptional.png)
+
 ## Description of the syntax elements
 
 |Syntax Element|Description|
