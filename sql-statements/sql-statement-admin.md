@@ -100,7 +100,7 @@ The above statement is used to check the consistency of the column data and inde
 ADMIN CHECKSUM TABLE tbl_name [, tbl_name] ...;
 ```
 
-The above statement is used to get the 64-bit checksum value of `tbl_name'. This value is obtained by calculating CRC64 of all key value pairs (including row data and index data) in the table.
+The above statement is used to get the 64-bit checksum value of `tbl_name`. This value is obtained by calculating CRC64 of all key-value pairs (including row data and index data) in the table.
 
 ## `ADMIN RELOAD` statement
 
