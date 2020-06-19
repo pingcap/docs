@@ -311,3 +311,7 @@ LOAD STATS 'file_name'
 ```
 
 `file_name` is the file name of the statistics to be imported.
+
+## See also
+
+* [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
