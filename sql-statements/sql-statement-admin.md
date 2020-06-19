@@ -188,7 +188,7 @@ ADMIN SHOW SLOW RECENT N;
 ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 ```
 
-For details, refer to [admin show slow statement](/identify-slow-queues.md#admin-show-slow-command)
+For details, refer to [admin show slow statement](/identify-slow-queries.md#admin-show-slow-command)
 
 ## Synopsis
 
