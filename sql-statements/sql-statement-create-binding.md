@@ -36,7 +36,6 @@ This statement binds SQL execution plans at the GLOBAL or SESSION scope. The def
 
 The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `on` (`on` by default), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost.
 
-
 ## See also
 
 * [DROP BINDING](/sql-statements/sql-statement-drop-binding.md)
