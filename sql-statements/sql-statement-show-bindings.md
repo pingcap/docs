@@ -46,7 +46,6 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | update_time | Updated time |
 | charset | Character set |
 | collation | Sorting rule |
-| source | Create way，include 'manual', 'capture' and 'evolve' |
 
 ## See also
 
