@@ -15,6 +15,10 @@ This statement provides a static list of available character sets in TiDB. The o
 
 ![ShowCharsetStmt](/media/sqlgram/ShowCharsetStmt.png)
 
+**CharsetKw:**
+
+![CharsetKw](/media/sqlgram/CharsetKw.png)
+
 ## Examples
 
 ```sql
@@ -33,7 +37,7 @@ mysql> SHOW CHARACTER SET;
 
 ## MySQL compatibility
 
-The usage of this statement is understood to be fully compatible with MySQL. However, charsets in TiDB may have different default collations compared with MySQL, the details can be found in [Compatibility with MySQL](/mysql-compatibility.md). Any other compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+The usage of this statement is understood to be fully compatible with MySQL. However, charsets in TiDB may have different default collations compared with MySQL. For details, refer to [Compatibility with MySQL](/mysql-compatibility.md). Any other compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
 
 ## See also
 

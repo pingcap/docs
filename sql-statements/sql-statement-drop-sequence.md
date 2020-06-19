@@ -15,10 +15,6 @@ The `DROP SEQUENCE` statement drops the sequence object in TiDB.
 
 ![DropSequenceStmt](/media/sqlgram/DropSequenceStmt.png)
 
-**OptTemporary:**
-
-![OptTemporary](/media/sqlgram/OptTemporary.png)
-
 **IfExists:**
 
 ![IfExists](/media/sqlgram/IfExists.png)
