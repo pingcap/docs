@@ -279,6 +279,32 @@ The user certificate information can be specified by `require subject`, `require
     openssl x509 -noout -subject -in ca-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'
     ```
 
++ `require san`: Specifies the `Subject Alternative Name` information of the CA certificate that issues the user certificate. The information to be specified is consistent with the [`alt_names` of the `openssl.cnf` configuration file](/generate-self-signed-certificates.md) used to generate the client certificate.
+
+    + Execute the following command to get the information of the `require san` item in the generated certificate:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        openssl x509 -noout -ext subjectAltName -in client.crt
+        ```
+
+    + `require san` currently supports the following `Subject Alternative Name` check items:
+
+        - URI
+        - IP
+        - DNS
+
+    + Multiple check items can be configured after connecting by commas. For example, configure as follows for the `u1` user:
+
+        {{< copyable "sql" >}}
+
+        ```sql
+        create user 'u1'@'%' require san 'DNS:d1,URI:spiffe://example.org/myservice1,URI:spiffe://example.org/myservice2'
+        ```
+
+    The above configuration only allows the `u1` user to log in to TiDB using the certificate with the URI item `spiffe://example.org/myservice1` or `spiffe://example.org/myservice2` and the DNS item `d1`.
+
 + `require cipher`: Checks the cipher method supported by the client. Use the following statement to check the list of supported cipher methods:
 
     {{< copyable "sql" >}}
@@ -289,7 +315,7 @@ The user certificate information can be specified by `require subject`, `require
 
 ### Configure user certificate information
 
-After getting the user certificate information (`require subject`, `require issuer`, `require cipher`), configure these information to be verified when creating a user, granting privileges, or altering a user. Replace `<replaceable>` with the corresponding information in the following statements.
+After getting the user certificate information (`require subject`, `require issuer`, `require san`, `require cipher`), configure these information to be verified when creating a user, granting privileges, or altering a user. Replace `<replaceable>` with the corresponding information in the following statements.
 
 You can configure one option or multiple options using the space or `and` as the separator.
 
@@ -298,7 +324,7 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    create user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' cipher '<replaceable>';
+    create user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
     ```
 
 + Configure user certificate when granting privileges:
@@ -306,7 +332,7 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    grant all on *.* to 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' cipher '<replaceable>';
+    grant all on *.* to 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
     ```
 
 + Configure user certificate when altering a user:
@@ -314,7 +340,7 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    alter user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' cipher '<replaceable>';
+    alter user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
     ```
 
 After the above configuration, the following items will be verified when you log in:
@@ -322,6 +348,7 @@ After the above configuration, the following items will be verified when you log
 + SSL is used; the CA that issues the client certificate is consistent with the CA configured in the server.
 + The `issuer` information of the client certificate matches the information specified in `require issuer`.
 + The `subject` information of the client certificate matches the information specified in `require cipher`.
++ The `Subject Alternative Name` information of the client certificate matches the information specified in `require san`.
 
 You can log into TiDB only after all the above items are verified. Otherwise, the `ERROR 1045 (28000): Access denied` error is returned. You can use the following command to check the TLS version, the cipher algorithm and whether the current connection uses the certificate for the login.
 
