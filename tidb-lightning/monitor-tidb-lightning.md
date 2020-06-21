@@ -36,9 +36,12 @@ You need to configure Prometheus to make it discover the servers. For instance, 
 ```yaml
 ...
 scrape_configs:
-  - job_name: 'tidb-lightning'
+  - job_name: 'lightning'
     static_configs:
-      - targets: ['192.168.20.10:8289', '192.168.20.9:8286']
+      - targets: ['192.168.20.10:8289']
+  - job_name: 'tikv-importer'
+    static_configs:
+      - targets: ['192.168.20.9:8286']
 ```
 
 ## Grafana dashboard
