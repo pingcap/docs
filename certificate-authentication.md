@@ -295,7 +295,7 @@ The user certificate information can be specified by `require subject`, `require
         - IP
         - DNS
 
-    + Multiple check items can be configured after connecting by commas. For example, configure as follows for the `u1` user:
+    + Multiple check items can be configured after they are connected by commas. For example, configure `require san` as follows for the `u1` user:
 
         {{< copyable "sql" >}}
 
