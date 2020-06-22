@@ -46,6 +46,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | update_time | Updated time |
 | charset | Character set |
 | collation | Sorting rule |
+| source | The way binding created, including manual (created by SQL `create [global] binding`), capture (captured automatically by TiDB) and evolve (evolved automatically by TiDB) |
 
 ## See also
 
