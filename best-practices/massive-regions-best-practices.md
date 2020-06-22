@@ -69,11 +69,7 @@ By default, `raftstore.store-pool-size` is configured to `2` in TiKV. If a bottl
 
 In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages between the Raft leader and the followers for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore does sent tick messages to the Raft state machines of idle Regions if not necessary. Then these Raft state machines will not be triggered to generate heartbeat messages, which can greatly reduce the workload of Raftstore.
 
-<<<<<<< HEAD
-Up to TiDB v3.1.0-beta.1, Hibernate Region is still an experimental feature, which is enabled by default in [TiKV master](https://github.com/tikv/tikv/tree/master). You can enable this feature according to your needs. For the configuration of Hibernate Region, refer to [Configure Hibernate Region](https://github.com/tikv/tikv/blob/master/docs/reference/configuration/raftstore-config.md#hibernate-region).
-=======
 Hibernate Region is enabled by default in [TiKV master](https://github.com/tikv/tikv/tree/master). You can enable this feature according to your needs. For the configuration of Hibernate Region, refer to [Configure Hibernate Region](https://github.com/tikv/tikv/blob/master/docs/reference/configuration/raftstore-config.md#hibernate-region).
->>>>>>> 3e28802... best-practice: update massive regions to match 4.0 (#2595)
 
 ### Method 3: Enable `Region Merge`
 
