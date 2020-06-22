@@ -11,9 +11,33 @@ The statements `SET NAMES`, `SET CHARACTER SET` and `SET CHARSET` modify the var
 
 ## Synopsis
 
-**SetStmt:**
+**SetNamesStmt:**
 
-![SetStmt](/media/sqlgram/SetStmt.png)
+![SetNamesStmt](/media/sqlgram/SetNamesStmt.png)
+
+**VariableAssignmentList:**
+
+![VariableAssignmentList](/media/sqlgram/VariableAssignmentList.png)
+
+**VariableAssignment:**
+
+![VariableAssignment](/media/sqlgram/VariableAssignment.png)
+
+**CharsetName:**
+
+![CharsetName](/media/sqlgram/CharsetName.png)
+
+**StringName:**
+
+![StringName](/media/sqlgram/StringName.png)
+
+**CharsetKw:**
+
+![CharsetKw](/media/sqlgram/CharsetKw.png)
+
+**CharsetNameOrDefault:**
+
+![CharsetNameOrDefault](/media/sqlgram/CharsetNameOrDefault.png)
 
 ## Examples
 
@@ -77,5 +101,5 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 ## See also
 
 * [SHOW \[GLOBAL|SESSION\] VARIABLES](/sql-statements/sql-statement-show-variables.md)
-* [SET <variable>](/sql-statements/sql-statement-set-variable.md)
+* [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
 * [Character Set and Collation Support](/character-set-and-collation.md)
