@@ -19,10 +19,6 @@ The `ALTER TABLE.. CHANGE COLUMN` statement changes a column on an existing tabl
 
 ![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
 
-**ColumnKeywordOpt:**
-
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
-
 **ColumnName:**
 
 ![ColumnName](/media/sqlgram/ColumnName.png)
@@ -65,6 +61,8 @@ ERROR 1105 (HY000): can't run multi schema change
 
 * Making multiple changes in a single `ALTER TABLE` statement is not currently supported.
 * Only certain types of data type changes are supported. For example, an `INTEGER` to `BIGINT` is supported, but the reverse is not possible. Changing from an integer to a string format or blob is not supported.
+* Modifying precision of the `DECIMAL` type is not supported.
+* Changing the `UNSIGNED` attribute is not supported.
 
 ## See also
 
