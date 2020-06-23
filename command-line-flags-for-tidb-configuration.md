@@ -42,7 +42,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 ## `--enable-binlog`
 
 + Enables or disables generating TiDB binlog
-+ 默认：false
++ Default: false
 
 ## `-L`
 
