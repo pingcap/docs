@@ -1,11 +1,11 @@
 ---
-title: TiDB Lightning FAQ
+title: TiDB Lightning FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
 category: faq
 aliases: ['/docs/dev/faq/tidb-lightning/']
 ---
 
-# TiDB Lightning FAQ
+# TiDB Lightning FAQs
 
 >**Note:**
 >
@@ -135,7 +135,15 @@ It is not recommended to directly use `nohup` in the command line to start `tidb
 
 ## Why my TiDB cluster is using lots of CPU resources and running very slowly after using TiDB Lightning?
 
-If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. You can force the cluster back to "normal mode" using the following command:
+If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. The current mode can be retrieved using the following command:
+
+{{< copyable "shell-regular" >}}
+
+```sh
+tidb-lightning-ctl --fetch-mode
+```
+
+You can force the cluster back to "normal mode" using the following command:
 
 {{< copyable "shell-regular" >}}
 
