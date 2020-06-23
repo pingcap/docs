@@ -66,7 +66,7 @@ SHOW CREATE TABLE t1;
 
 ## Invisible index
 
-Invisible index is a new feature introduced in MySQL 8.0 that sets an index to invisible so that the optimizer no longer uses this index. Using this feature, you can easily check whether to use or not to use the query plan of an index, and avoid resource-consuming operations such as `Drop index` or `Add index`.
+Invisible indexes are a new feature introduced in MySQL 8.0 that sets an index to invisible so that the optimizer no longer uses this index. Using this feature, you can easily check whether to use or not to use the query plan of an index, and avoid resource-consuming operations such as `DROP INDEX` or `ADD INDEX`.
 
 {{< copyable "sql" >}}
 
@@ -75,7 +75,7 @@ CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-You can check an invisible index using the `Create Table` statement. The invisible index is identified with `/*!80000 INVISIBLE */`:
+You can check an invisible index using the `CREATE TABLE` statement. The invisible index is identified with `/*!80000 INVISIBLE */`:
 
 {{< copyable "sql" >}}
 
@@ -183,7 +183,7 @@ This means that you cannot set this implicit primary key to `Invisible`.
 
 > **Note:**
 >
-> TiDB does not actually create an **implicit primary key**. TiDB is compatible with this MySQL restriction only in behavior.
+> TiDB does not actually create an **implicit primary key**. TiDB is compatible with this MySQL restriction only in behaviors.
 
 {{< copyable "sql" >}}
 
