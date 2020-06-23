@@ -332,7 +332,7 @@ $ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/d
 /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
 ```
 
-To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. Please refer to [Encryption-At-Rest](/encryption-at-rest.md) document for how to config master key. Also with the command, the `security.encryption.previous-master` config will be ignored, and master key rotation will not be triggered.
+To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. Please refer to [Encryption-At-Rest](/encryption-at-rest.md) document for how to config master key. Also with the command, the `security.encryption.previous-master-key` config will be ignored, and master key rotation will not be triggered.
 
 ```
 [storage]
