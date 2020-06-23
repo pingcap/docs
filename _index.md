@@ -13,7 +13,7 @@ category: introduction
 <ColumnTitle>About TiDB</ColumnTitle>
 
 - [TiDB Introduction](/overview.md)
-- [Key Features](/key-features.md)
+- [Basic Features](/basic-features.md)
 - [Compatibility with MySQL](/mysql-compatibility.md)
 - [Usage Limitations](/tidb-limitations.md)
 
