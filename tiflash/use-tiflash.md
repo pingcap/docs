@@ -121,7 +121,16 @@ Note that if a table has only a single TiFlash replica and the related node cann
 
 ### Engine isolation
 
-Engine isolation is to specify that all queries use a replica of the specified engine by configuring the corresponding variable. The optional engines are `tikv` and `tiflash`, with the following two configuration levels:
+Engine isolation is to specify that all queries use a replica of the specified engine by configuring the corresponding variable. The optional engines are "tikv", "tidb" (indicates the internal memory table area of TiDB, which stores some TiDB system tables and cannot be actively used by users), and "tiflash", with the following two configuration levels:
+
+* TiDB instance-level, namely, INSTANCE level. Add the following configuration item in the TiDB configuration file:
+
+    ```
+    [isolation-read]
+    engines = ["tikv", "tidb", "tiflash"]
+    ```
+
+    **The INSTANCE-level default configuration is `["tikv", "tidb", "tiflash"]`.**
 
 * SESSION level. Use the following statement to configure:
 
@@ -139,20 +148,15 @@ Engine isolation is to specify that all queries use a replica of the specified e
     set SESSION tidb_isolation_read_engines = "engine list separated by commas";
     ```
 
-    The default configuration of the SESSION level inherits from TiDB configuration of the INSTANCE level.
+    The default configuration of the SESSION level inherits from the configuration of the TiDB INSTANCE level.
 
-* TiDB instance-level, namely, INSTANCE level. This level overlaps with the SESSION level. For example, if you have configured "tikv, tiflash" in the SESSION level and "tikv" in the INSTANCE level, only TiKV is read.
+The final engine configuration is the session-level configuration, that is, the session-level configuration overrides the instance-level configuration. For example, if you have configured "tikv" in the INSTANCE level and "tiflash" in the SESSION level, then the TiFlash replicas are read. If the final engine configuration is "tikv" and "tiflash", then the TiKV and TiFlash replicas are both read, and the Optimizer automatically selects a better engine to execute.
 
-    Add the following configuration item in the TiDB configuration file:
+> **注意：**
+>
+> 由于 TiDB Dashboard 等组件需要读取一些存储于 TiDB 内存表区的系统表，因此建议实例级别 engine 配置中始终加入 "tidb" engine。
 
-    ```
-    [isolation-read]
-    engines = ["tikv", "tiflash"]
-    ```
-
-    The INSTANCE-level default configuration is `["tikv", "tiflash"]`.
-
-When the engine is configured as "tikv, tiflash", it can read both TiKV and TiFlash replicas at the same time, and the optimizer automatically chooses to read which one. After the engine is specified, if the table in the query does not have a corresponding engine replica, an error is reported indicating that the table does not have the engine replica. Because the TiKV replica always exist, so the only situation is that the engine is configured as `tiflash` but the TiFlash replica does not exist.
+如果查询中的表没有对应 engine 的副本，比如配置了 engine 为 "tiflash" 而该表没有 TiFlash 副本，则查询会报该表不存在该 engine 副本的错。
 
 ### Manual hint
 
