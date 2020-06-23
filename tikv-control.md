@@ -335,6 +335,7 @@ $ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/d
 To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. Please refer to [Encryption-At-Rest](/encryption-at-rest.md) document for how to config master key. Also with the command, the `security.encryption.previous-master-key` config will be ignored, and master key rotation will not be triggered.
 
 ```
+# conf.toml
 [storage]
 data-dir = "/path/to/tikv/data"
 
