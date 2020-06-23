@@ -367,4 +367,4 @@ Type "I consent" to continue, anything else to exit: I consent
 
 > **Note**
 >
-> The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. 
+> The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
