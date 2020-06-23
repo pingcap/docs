@@ -13,6 +13,10 @@ You can either use TiDB to read TiFlash replicas for medium-scale analytical pro
 - [Use TiDB to read TiFlash replicas](#use-tidb-to-read-tiflash-replicas)
 - [Use TiSpark to read TiFlash replicas](#use-tispark-to-read-tiflash-replicas)
 
+> **Note:**
+>
+> If you [use TiDB to read TiFlash replicas](#use-tidb-to-read-tiflash-replicas) in a transaction that contains any write operation (for example, `SELECT ... FOR UPDATE` followed by `UPDATE ...`), currently the behavior is undefined, this restriction will be removed in later versions.
+
 ## Create TiFlash replicas for tables
 
 After TiFlash is connected to the TiKV cluster, data replication by default does not begin. You can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for a specific table:
