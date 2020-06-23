@@ -144,7 +144,7 @@ Currently, the optimizer can use the indexed expressions when the expressions ar
 
 ## Invisible index
 
-Invisible index is a new feature introduced in MySQL 8.0 that sets an index to invisible so that the optimizer no longer uses this index.
+Invisible indexes are a new feature introduced in MySQL 8.0 that sets an index to invisible so that the optimizer no longer uses this index.
 
 ```sql
 CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
