@@ -72,10 +72,10 @@ TiDB automatically maps the SQL structure into Key-Value structure. For details,
 
 Simply put, TiDB performs the following operations:
 
-* A row of data is mapped to a Key-Value pair. Key is prefixed with `TableID` and suffixed with the row ID.
-* An index is mapped as a Key-Value pair. Key is prefixed with `TableID+IndexID` and suffixed with the index value.
+* A row of data is mapped to a Key-Value pair. The key is prefixed with `TableID` and suffixed with the row ID.
+* An index is mapped as a Key-Value pair. The key is prefixed with `TableID+IndexID` and suffixed with the index value.
 
-The data or indexes in the same table have the same prefix. These Key-Values are at adjacent positions in the Key space of TiKV. Therefore, when the amount of data to be written is large and all is written to one table, the write hotspot is created. The situation gets worse when some index values of the continuous written data is also continuous (e.g. fields that increase with time, like `update time`), which creates a few write hotspots and becomes the bottleneck of the entire system. 
+The data or indexes in the same table have the same prefix. These Key-Values are at adjacent positions in the key space of TiKV. Therefore, when the amount of data to be written is large and all is written to one table, the write hotspot is created. The situation gets worse when some index values of the continuous written data is also continuous (e.g. fields that increase with time, like `update time`), which creates a few write hotspots and becomes the bottleneck of the entire system. 
 
 Similarly, if all data is read from a focused small range (e.g. the continuous tens or hundreds of thousands of rows of data), an access hotspot of data is likely to occur.
 
@@ -110,7 +110,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
     - Columns of the index have already met the query requirement. Assume that the `c` column on the `t` table has an index and the query is `select c from t where c > 10;`. At this time, all needed data can be obtained if you access the index. This situation is called `Covering Index`. But if you focus more on the query performance, you can put into index a portion of columns that do not need to be filtered but need to be returned in the query result, creating composite index. Take `select c1, c2 from t where c1 > 10;` as an example. You can optimize this query by creating composite index `Index c12 (c1, c2)`.
 
-    - The Primary Key of the table is integer. In this case, TiDB uses the value of Primary Key as row ID. Thus, if the query condition is on Primary Key, you can directly construct the range of the row ID, scan the table data, and get the result.
+    - The primary key of the table is integer. In this case, TiDB uses the value of the primary key as row ID. Thus, if the query condition is on Primary Key, you can directly construct the range of the row ID, scan the table data, and get the result.
 
 * Query concurrency
 
