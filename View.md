@@ -37,7 +37,7 @@ example:
 select * from information_schema.views;
 ```
 
-You can view the relevant meta information of the view by querying the table, Such  as `TABLE_CATALOG`, `TABLE_SCHEMA`, `TABLE_NAME`, `VIEW_DEFINITION`, `CHECK_OPTION`, `IS_UPDATABLE`, `DEFINER`, `SECURITY_TYPE`, `CHARACTER_SET_CLIENT`, `COLLATION_CONNECTION`
+You can view the relevant meta information of the view by querying the table, Including `TABLE_CATALOG`, `TABLE_SCHEMA`, `TABLE_NAME`, `VIEW_DEFINITION`, `CHECK_OPTION`, `IS_UPDATABLE`, `DEFINER`, `SECURITY_TYPE`, `CHARACTER_SET_CLIENT`, `COLLATION_CONNECTION`
 
 ```sql
 +---------------+--------------+------------+------------------------------------------------------------------------+--------------+--------------+----------------+---------------+----------------------+----------------------+
@@ -189,5 +189,5 @@ Query OK, 0 rows affected (0.02 sec)
  Now views in TiDB are subject to the following limitations:
 
 * Materialized views are not supported yet.
-* Views in TiDB are read-only, does not support write operations such as `UPDATE`, `INSERT`, `DELETE`, `TRUNCATE`.
-* For created views,  the only supported DDL opertion is `DROP`, i.e., `DROP [VIEW | TABLE]`.
+* Views in TiDB are read-only, does not support write DML such as `UPDATE`, `INSERT`, `DELETE`, `TRUNCATE`.
+* For created views,  the only supported DDL is `DROP`, i.e., `DROP [VIEW | TABLE]`.
