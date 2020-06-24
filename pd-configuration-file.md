@@ -211,7 +211,7 @@ Configuration items related to scheduling
 ### `tolerant-size-ratio`
 
 + Controls the `balance` buffer size
-+ Default value: `0` (automatically adjusted buffer size)
++ Default value: `0` (automatically adjusts the buffer size)
 + Minimum value: `0`
 
 ### `disable-remove-down-replica`
@@ -261,7 +261,7 @@ Configuration items related to replicas
 
 ### `strictly-match-label`
 
-+ Enables the strict check for whether the TiKV label matches PD's location-label.
++ Enables the strict check for whether the TiKV label matches PD's `location-labels`.
 + Default value: `false`
 
 ### `enable-placement-rules`
@@ -269,7 +269,7 @@ Configuration items related to replicas
 + Enables `placement-rules`.
 + Default value: `false`
 + See [Placement Rules](/configure-placement-rules.md).
-+ An experimental feature of v4.0.
++ An experimental feature of TiDB 4.0.
 
 ## `label-property`
 
