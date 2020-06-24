@@ -315,9 +315,9 @@ You can specify the column family that your query is against using the `--column
 
 ### Dump encryption metadata
 
-Use the `encryption-meta` subcommand to dump encryption metadata. There are two types of metadata that it can dump: encryption info for data files, and the list of data encryption keys used.
+Use the `encryption-meta` subcommand to dump encryption metadata. The subcommand can dump two types of metadata: encryption info for data files, and the list of data encryption keys used.
 
-To dump encryption info for data files, use the `encryption-meta dump-file` subcommand. You need to create a tikv config file to specify `data-dir` for the tikv deployment:
+To dump encryption info for data files, use the `encryption-meta dump-file` subcommand. You need to create a TiKV config file to specify `data-dir` for the TiKV deployment:
 
 ```
 # conf.toml
@@ -325,14 +325,14 @@ To dump encryption info for data files, use the `encryption-meta dump-file` subc
 data-dir = "/path/to/tikv/data"
 ```
 
-The `--path` option can be used to specify absolute or relative path to the data file of interest. The command may give empty output if the data file is not encrypted though. If `--path` is not provided, encryption info for all data files will be printed.
+The `--path` option can be used to specify an absolute or relative path to the data file of interest. The command might give empty output if the data file is not encrypted. If `--path` is not provided, encryption info for all data files will be printed.
     
 ```bash
 $ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
 /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
 ```
 
-To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. Please refer to [Encryption-At-Rest](/encryption-at-rest.md) document for how to config master key. Also with the command, the `security.encryption.previous-master-key` config will be ignored, and master key rotation will not be triggered.
+To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. For how to config master key, refer to [Encryption-At-Rest](/encryption-at-rest.md). Also with this command, the `security.encryption.previous-master-key` config will be ignored, and the master key rotation will not be triggered.
 
 ```
 # conf.toml
@@ -345,7 +345,7 @@ key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
 region = "us-west-2"
 ```
 
-Note if the master key is a AWS KMS key, `tikv-ctl` needs to have access to the KMS key. Access to a AWS KMS key can be granted to `tikv-ctl` via environment variable, AWS default config file, or IAM role, whichever is suitable. Please refer to AWS document for usage.
+Note if the master key is a AWS KMS key, `tikv-ctl` needs to have access to the KMS key. Access to a AWS KMS key can be granted to `tikv-ctl` via environment variable, AWS default config file, or IAM role, whichever is suitable. Refer to AWS document for usage.
 
 The `--ids` option can be used to specified a list of comma-separated data encryption key ids to print. If `--ids` is not provided, all data encryption keys will be printed, along with current key id, which is the id of the latest active data encryption key.
 
