@@ -4,7 +4,7 @@ TiDB supports views, A view acts as a virtual table, It can be created from SELE
 
 ## query views
 
-You can query a view in a similar way as you query an actual table. When the query is actually executed, the view is expanded into the SELECT statement defined when the view was created, and then the expanded query statment is executed.
+You can query a view in a similar way as you query an actual table. When the query is going to be actually executed, the view is expanded into the SELECT statement defined when the view was created, and then the expanded query statment is executed.
 
 ## view metadata
 
