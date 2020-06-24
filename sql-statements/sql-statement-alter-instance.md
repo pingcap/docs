@@ -19,7 +19,13 @@ When an error occurs during reloading, by default, this error message is returne
 
 ## Syntax diagram
 
+**AlterInstanceStmt:**
+
 ![AlterInstanceStmt](/media/sqlgram/AlterInstanceStmt.png)
+
+**InstanceOption:**
+
+![InstanceOption](/media/sqlgram/InstanceOption.png)
 
 ## Example
 
@@ -35,4 +41,4 @@ The `ALTER INSTANCE RELOAD TLS` statement only supports reloading from the origi
 
 ## See also
 
-[Enable Client TLS](/encrypted-connections-with-tls-protocols.md).
+[Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md).

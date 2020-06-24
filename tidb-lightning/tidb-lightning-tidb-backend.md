@@ -100,7 +100,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](/loader-overview.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
 
 <table>
-<thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thread>
+<thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -225,6 +225,29 @@ user = "root"
 password = ""
 
 #sql-mode = ""
+```
+
+</td></tr>
+<tr><td>
+
+```toml
+# [[route-rules]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
+# target-schema = "shard_db"
+# target-table = "shard_table"
+```
+
+</td><td>
+
+```toml
+# [[routes]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
+# target-schema = "shard_db"
+# target-table = "shard_table"
 ```
 
 </td></tr>
