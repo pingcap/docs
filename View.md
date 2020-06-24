@@ -18,7 +18,7 @@ example：
 show create view v;
 ```
 
-This statement shows the `CREATE VIEW` statement that creates the named view. And show the value of the `character_set_client` and `collation_connection` system variable when the view was created. 
+This statement shows the `CREATE VIEW` statement that created the named view. And show the value of the `character_set_client` and `collation_connection` system variable when the view was created. 
 
 ```sql
 +------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
