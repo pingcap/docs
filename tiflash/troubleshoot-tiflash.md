@@ -22,7 +22,7 @@ The issue might occur due to different reasons. It is recommended that you troub
      dnf install libnsl
      ```
 
-2. Check the system's `ulimit` parameter setting.
+2. Check your system's `ulimit` parameter setting.
 
      {{< copyable "shell-regular" >}}
 
@@ -30,7 +30,7 @@ The issue might occur due to different reasons. It is recommended that you troub
      ulimit -n 1000000
      ```
 
-3. Use the PD Control tool to check whether there is any TiFlash instance that failed to go offline on the node (same IP and Port) and force them to go offline. For detailed steps, refer to [Scale in a TiFlash node](/scale-tidb-using-tiup.md#scale-in-a-tiflash-node).
+3. Use the PD Control tool to check whether there is any TiFlash instance that failed to go offline on the node (same IP and Port) and force the instance(s) to go offline. For detailed steps, refer to [Scale in a TiFlash node](/scale-tidb-using-tiup.md#scale-in-a-tiflash-node).
 
 If the above methods cannot resolve your issue, save the TiFlash log files and email to [info@pingcap.com](mailto:info@pingcap.com) for more information.
 
