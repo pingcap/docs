@@ -6,9 +6,9 @@ category: reference
 
 # TiDB Best Practices
 
-This document summarizes the best practices of using TiDB, including the use of SQL and optimization tips for OLAP/OLTP scenarios, especially the optimization options specific for TiDB.
+This document summarizes the best practices of using TiDB, including the use of SQL and optimization tips for Online Analytical Processing (OLAP) and Online Transactional Processing (OLTP) scenarios, especially the optimization options specific for TiDB.
 
-Before you read this document, it is recommended that you read three blog posts that introduces the technical principles of TiDB:
+Before you read this document, it is recommended that you read three blog posts that introduce the technical principles of TiDB:
 
 * [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/)
 * [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/)
@@ -20,9 +20,9 @@ Database is a generic infrastructure system. It is important to consider various
 
 TiDB is a distributed database compatible with the MySQL protocol and syntax. But with the internal implementation and supporting of distributed storage and transactions, the way of using TiDB is different from MySQL.
 
-## Basic Concepts
+## Basic concepts
 
-The best practices are closely related to its implementation principles. It is recommended that you learn some of the basic mechanisms, including the Raft consensus algorithm, distributed transactions, data sharding, load balancing, the mapping solution from SQL to KV, the implementation method of secondary indexing, and distributed execution engines.
+The best practices are closely related to its implementation principles. It is recommended that you learn some of the basic mechanisms, including the Raft consensus algorithm, distributed transactions, data sharding, load balancing, the mapping solution from SQL to Key-Value (KV), the implementation method of secondary indexing, and distributed execution engines.
 
 This section is an introduction to these concepts. For detailed information, refer to [PingCAP blog posts](https://pingcap.com/blog/).
 
@@ -30,7 +30,7 @@ This section is an introduction to these concepts. For detailed information, ref
 
 Raft is a consensus algorithm that ensures data replication with strong consistency. At the bottom layer, TiDB uses Raft to replicate data. TiDB writes data to the majority of the replicas before returning the result of success. In this way, even though a few replicas might get lost, the system still has the latest data. For example, if there are three replicas, the system does not return the result of success until data has been written to two replicas. Whenever a replica is lost, at least one of the remaining two replicas have the latest data.
 
-To store three replicas, compared with the replication of Master-Slave, Raft is more efficient. The write latency of Raft depends on the two fastest replicas, instead of the slowest one. Therefore, the implementation of geo-distributed and multiple active data centers becomes possible by using the Raft replication. In the typical scenario of three data centers distributing in two sites, to guarantee the data consistency, TiDB just needs to successfully write data into the local data center and the closer one, instead of writing to all three data-centers. However, this does not mean that cross-data center deployment can be implemented in any scenario. When the amount of data to be written is large, the bandwidth and latency between data centers become the key factors. If the write speed exceeds the bandwidth or the latency is too high, the Raft replication mechanism still cannot work well.
+To store three replicas, compared with the replication of Master-Slave, Raft is more efficient. The write latency of Raft depends on the two fastest replicas, instead of the slowest one. Therefore, the implementation of geo-distributed and multiple active data centers becomes possible by using the Raft replication. In the typical scenario of three data centers distributing in two sites, to guarantee the data consistency, TiDB just needs to successfully write data into the local data center and the closer one, instead of writing to all three data centers. However, this does not mean that cross-data center deployment can be implemented in any scenario. When the amount of data to be written is large, the bandwidth and latency between data centers become the key factors. If the write speed exceeds the bandwidth or the latency is too high, the Raft replication mechanism still cannot work well.
 
 ### Distributed transactions
 
@@ -44,19 +44,19 @@ TiDB provides complete distributed transactions and the model has some optimizat
 
 * Pessimistic transaction model
 
-    In TiDB, the pessimistic transaction model has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `select for update`.
+    In TiDB, the pessimistic transaction model has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
     
-    However, if the business scenario itself has fewer conflicts, the optimistic transaction model has better performance.
+    However, if the application scenario has fewer conflicts, the optimistic transaction model has better performance.
 
 * Transaction size limit
 
-    As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow, and the following Raft replication process is thus struck. To avoid this problem, the transaction size is limited:
+    As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow, and the following Raft replication process is thus stuck. To avoid this problem, the transaction size is limited:
 
-    - A transaction is limited to 5000 SQL statements (by default)
+    - A transaction is limited to 5,000 SQL statements (by default)
     - Each Key-Value entry is no more than 6 MB
-    - The total size of Key-Value entry is no more than 10 GB.
+    - The total size of Key-Value entries is no more than 10 GB.
 
-    Similar limits can also be found in [Google Cloud Spanner](https://cloud.google.com/spanner/quotas).
+    You can find similar limits in [Google Cloud Spanner](https://cloud.google.com/spanner/quotas).
 
 ### Data sharding
 
@@ -64,7 +64,7 @@ TiKV automatically shards bottom-layered data according to the Range of Key. Eac
 
 ### Load balancing
 
-PD balances the load of the cluster according to the status of the entire TiKV cluster. The unit of scheduling is Region and the logic is the strategy configured by PD.
+Placement Driver (PD) balances the load of the cluster according to the status of the entire TiKV cluster. The unit of scheduling is Region and the logic is the strategy configured by PD.
 
 ### SQL on KV
 
@@ -87,18 +87,18 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
 * The more secondary indexes, the better?
 
-    Secondary indexes can speed up query, but adding an index has side effects. The previous section introduces the storage model of index. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
+    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
     
-    In addition, too many indexes affects the runtime of the optimizer, and inappropriate index misleads the optimizer. Thus, the more secondary indexes is not necessarily the better.
+    In addition, too many indexes affects the runtime of the optimizer, and inappropriate indexes mislead the optimizer. Thus, more secondary indexes does not mean better performance.
 
 * Which columns should create indexes?
 
-    As is mentioned above, index is important but the number of indexes should be proper. Appropriate indexes needs to be created according to the characteristics of applications. In principle, indexes should be created for the columns needed in the query to improve the performance. The following are situations that need to create indexes:
+    As is mentioned above, index is important but the number of indexes should be proper. You must create appropriate indexes according to the application characteristics. In principle, you need to create an index on the columns involved in the query to improve the performance. The following are situations that need to create indexes:
 
-    - For columns with a high degree of differentiation, the number of filtered rows is remarkably reduced through index.
-    - If there are multiple query criteria, you can choose composite indexes. Note to put the columns with the equivalent condition before composite index.
+    - For columns with a high degree of differentiation, filtered rows are remarkably reduced through indexes.
+    - If there are multiple query criteria, you can choose composite indexes. Note to put the columns with the equivalent condition before composite indexes.
 
-    For example, if a commonly-used query is `select * from t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query condition to create an index prefix and then scan.
+    For example, if a commonly used query is `select * from t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query condition to create an index prefix and then scan.
 
 * The difference between querying through indexes and directly scanning the table
 
@@ -114,7 +114,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
 * Query concurrency
 
-    As data is distributed across many Regions, TiDB makes query concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, the OLTP query usually does not involve a large amount of data and the low concurrency is enough. But for the OLAP query, the concurrency is high and TiDB modifies the query concurrency through the following system variables:
+    As data is distributed across many Regions, queries run in TiDB concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, the OLTP query usually does not involve a large amount of data and the low concurrency is enough. But for the OLAP query, the concurrency is high and TiDB modifies the query concurrency through the following system variables:
 
     - [`tidb_distsql_scan_concurrency`](/tidb-specific-system-variables.md#tidb_distsql_scan_concurrency):
     
@@ -122,19 +122,19 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
     - [`tidb_index_lookup_size`](/tidb-specific-system-variables.md#tidb_index_lookup_size):
         
-        If it needs to access the index to get row IDs before accessing the table data, it uses a batch of row IDs as a single request to access the table data. This parameter can set the size of a batch. The larger batch increases latency, while the smaller one might lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
+        If it needs to access the index to get row IDs before accessing the table data, it uses a batch of row IDs as a single request to access the table data. This parameter sets the size of a batch. The larger batch increases latency, while the smaller one might lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
     
     - [`tidb_index_lookup_concurrency`](/tidb-specific-system-variables.md#tidb_index_lookup_concurrency):
 
         If it needs to access the index to get row IDs before accessing the table data, the concurrency of getting data through row IDs every time is modified through this parameter.
     
-* Ensure the order of results through index
+* Ensure the order of results through indexes
 
-    Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. It has been mentioned earlier that the model of scanning index and getting row is parallel + pipeline. If the row is returned according to the index order, a high concurrency between two queries does not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [`tidb_index_serial_scan_concurrency`](/tidb-specific-system-variables.md#tidb_index_serial_scan_concurrency) variable.
+    You can use indexes to filter or sort data. Firstly, get row IDs according to the index order. Then, return the row content according to the return order of row IDs. In this way, the returned results are ordered according to the index column. It has been mentioned earlier that the model of scanning index and getting row is parallel + pipeline. If the row is returned according to the index order, a high concurrency between two queries does not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [`tidb_index_serial_scan_concurrency`](/tidb-specific-system-variables.md#tidb_index_serial_scan_concurrency) variable.
 
 * Reverse index scan
 
-    TiDB supports scanning an ascending index in reverse order, at a speed slower than normal scan by 20%. If the data is changed frequently and thus too many versions exist, the performance overhead might be higher. It is recommended to avoid reverse index scan as much as possible.
+    TiDB supports scanning an ascending index in reverse order, at a speed slower than normal scan by 20%. If the data is changed frequently and thus too many versions exist, the performance overhead might be higher. It is recommended to avoid reverse index scans as much as possible.
 
 ## Scenarios and practices
 
@@ -146,7 +146,7 @@ Before deployment, read [Software and Hardware Requirements](/hardware-and-softw
 
 It is recommended to deploy the TiDB cluster using [TiUP](/production-deployment-using-tiup.md). This tool can deploy, stop, destroy, and upgrade the whole cluster, which is quite convenient. It is not recommended to manually deploy the TiDB cluster, which might be troublesome to maintain and upgrade later.
 
-### Data Import
+### Data import
 
 To improve the write performance during the import process, you can tune TiKV's parameters as stated in [Tune TiKV Performance](/tune-tikv-performance.md).
 
@@ -156,13 +156,13 @@ As mentioned before, TiDB limits the size of a single transaction in the Key-Val
 
 > **Note:**
 >
-> The size limit for transactions needs to consider the overhead of TiDB encoding and the extra transaction Key. It is recommended that **the number of rows of each transaction is less than 200 and the data size of a single row is less than 100 KB**; otherwise, the performance is bad.
+> When you set the size limit for transactions, you need to consider the overhead of TiDB encoding and the extra transaction Key. It is recommended that **the number of rows of each transaction is less than 200 and the data size of a single row is less than 100 KB**; otherwise, the performance is bad.
 
-It is recommended to split statements into batches or add `limit` to the statements, whether they are `insert`, `update` or `delete` statements.
+It is recommended to split statements into batches or add a limit to the statements, whether they are `INSERT`, `UPDATE` or `DELETE` statements.
 
 When deleting a large amount of data, it is recommended to use `Delete * from t where xx limit 5000;`. It deletes through the loop and use `Affected Rows == 0` as a condition to end the loop.
 
-If the amount of data that needs to be deleted at a time is large, this loop method gets slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all is garbage collected) and affect the following `Delete` statement. If possible, it is recommended to refine the `Where` condition. Assume that you need to delete all data on `2017-05-26`, you can use the following statements:
+If the amount of data that needs to be deleted at a time is large, this loop method gets slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all is cleared by Garbage Collection) and affect the following `DELETE` statement. If possible, it is recommended to refine the `WHERE` condition. Assume that you need to delete all data on `2017-05-26`, you can use the following statements:
 
 ```sql
 for i from 0 to 23:
@@ -177,13 +177,13 @@ This pseudocode means to split huge chunks of data into small ones and then dele
 
 For query requirements and specific statements, refer to [TiDB Specific System Variables](/tidb-specific-system-variables.md).
 
-You can control the concurrency of SQL execution through the `SET` statement and the selection of the `Join` operator through Hint.
+You can control the concurrency of SQL execution through the `SET` statement and the selection of the `Join` operator through hints.
 
-In addition, you can also use MySQL's standard index selection, the `Hint` syntax, or control the optimizer to select index through `Use Index/Ignore Index hint`.
+In addition, you can also use MySQL's standard index selection, the hint syntax, or control the optimizer to select indexes through `Use Index`/`Ignore Index hint`.
 
-If the business scenario has both OLTP and OLAP workloads, you can send the OLTP request and OLAP request to different TiDB servers, diminishing the impact of OLAP on OLTP. It is recommended to use machines with high configurations (e.g. more processor cores, larger memory) for the TiDB server that carries OLAP business.
+If the application scenario has both OLTP and OLAP workloads, you can send the OLTP request and OLAP request to different TiDB servers, diminishing the impact of OLAP on OLTP. It is recommended to use machines with high-performance hardware (e.g. more processor cores, larger memory) for the TiDB server that processes OLAP workloads.
 
-To completely isolate OLTP and OLAP workloads, it is recommended to run OLAP applications on TiFlash. TiFlash is a columnar storage engine with great performance on OLAP workloads. TiFlash can achieve physical isolation on the storage layer and guarantees consistency read.
+To completely isolate OLTP and OLAP workloads, it is recommended to run OLAP applications on TiFlash. TiFlash is a columnar storage engine with great performance on OLAP workloads. TiFlash can achieve physical isolation on the storage layer and guarantees consistent reads.
 
 ### Monitoring and log
 
@@ -193,9 +193,9 @@ TiDB uses [Grafana + Prometheus](/tidb-monitoring-framework.md) to monitor the s
 
 There are lots of items in the monitoring system, the majority of which are for TiDB developers. You do not have to understand these items without an in-depth knowledge of the source code. Some items that are related to applications or to the state of system key components are selected and put in a separate `overview` panel for users.
 
-In addition to monitoring, you can also view the system logs. The three components of TiDB, tidb-server, tikv-server and pd-server, each has a `--log-file` parameter. If this parameter has been configured when the cluster is started, logs will be stored in the file configured by the parameter and log files are automatically archived on a daily basis. If the `--log-file` parameter has not been configured, log will be output to `stderr`.
+In addition to monitoring, you can also view the system logs. The three components of TiDB, tidb-server, tikv-server, and pd-server, each has a `--log-file` parameter. If this parameter has been configured when the cluster is started, logs are stored in the file configured by the parameter and log files are automatically archived on a daily basis. If the `--log-file` parameter has not been configured, the log is output to `stderr`.
 
-Starting from TiDB 4.0, TiDB provides TiDB Dashboard UI to improve usability. You can access TiDB Dashboard by visiting <http://${PD_IP}:${PD_PORT}/dashboard> in your browser. TiDB Dashboard provides features such as viewing cluster status, performance analysis, traffic visualization, SQL diagnosis and log searching.
+Starting from TiDB 4.0, TiDB provides TiDB Dashboard UI to improve usability. You can access TiDB Dashboard by visiting <http://${PD_IP}:${PD_PORT}/dashboard> in your browser. TiDB Dashboard provides features such as viewing cluster status, performance analysis, traffic visualization, cluster diagnostics, and log searching.
 
 ### Documentation
 
@@ -207,7 +207,7 @@ TiDB also has many useful ecosystem tools. See [Ecosystem Tool Overview](/ecosys
 
 For more articles on the technical details of TiDB, see the [PingCAP official blog site](https://pingcap.com/blog/).
 
-## Best Scenarios for TiDB
+## Best scenarios for TiDB
 
 TiDB is suitable for the following scenarios:
 
@@ -215,4 +215,4 @@ TiDB is suitable for the following scenarios:
 - You do not want to do sharding
 - The access mode has no obvious hotspot
 - Transactions, strong consistency, and disaster recovery are required
-- You hope to have real-time HTAP and reduce storage link
+- You hope to have real-time Hybrid Transaction/Analytical Processing (HTAP) analytics and reduce storage links
