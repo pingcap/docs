@@ -315,6 +315,7 @@
     - [Scale TiFlash](/tiflash/scale-tiflash.md)
     - [Upgrade TiFlash Nodes](/tiflash/upgrade-tiflash.md)
     - [Configure TiFlash](/tiflash/tiflash-configuration.md)
+    - [Command-line Flags](/tiflash/tiflash-command-line-flags.md)
     - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
     - [FAQ](/tiflash/tiflash-faq.md)
