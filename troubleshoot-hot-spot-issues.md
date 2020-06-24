@@ -148,7 +148,7 @@ More detailed instructions can be read [AUTO_RANDOM](https://pingcap.com/docs/st
 
 TiDB supports push-down computing results caching from 4.0(i.e. Coprocessor Cache functionality). When this function is turned on, the result of TiKV calculation will be pushed back on the TiDB instance side.
 
-A more detailed description can be read in the [push-down results cache ](https://pingcap.com/docs/stable/coprocessor-cache/#configuration) document.
+A more detailed description can be read in the [push-down results cache](https://pingcap.com/docs/stable/coprocessor-cache/#configuration) document.
 
 **Other relevant information**
 
