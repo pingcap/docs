@@ -3,6 +3,7 @@ title: TiDB hot region problem handling
 category: reference
 ---
 # TiDB hot region problem handling
+
 This article applies to TiDB 4.0 version, Introduce methods to locate and solve the problem of reading and writing hot regions.
 
 TiDB is a distributed database and has a load balancing mechanism inside,The purpose is to distribute the business load as evenly as possible to different computing (or storage) nodes,Make better use of your server resources.
@@ -68,7 +69,7 @@ Move the mouse over the bright block, You can see what table or index has a lot 
 
 ![Dashboard Example 4](/media/troubleshoot-hot-spot-issues-4.png)
 
-> [ Prior to version 4.0 hot spot location can refer to this document](https://book.tidb.io/session4/chapter7/hotspot-resolved.html)
+> [Prior to version 4.0 hot spot location can refer to this document](https://book.tidb.io/session4/chapter7/hotspot-resolved.html)
 
 ## Use SHARD_ROW_ID_BITS to process hot spots
 
@@ -81,6 +82,7 @@ SHARD_ROW_ID_BITS = 6 represents 64 slices
 SHARD_ROW_ID_BITS = 0 represents the default value of 1 sharding
 
 For example:
+
 ```sql
 CREATE TABLE：CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;
 ALTER TABLE：ALTER TABLE t SHARD_ROW_ID_BITS = 4;
