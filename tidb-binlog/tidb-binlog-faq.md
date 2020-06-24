@@ -238,10 +238,6 @@ To solve the problem, follow these steps:
 
 1. Check `drainer.log`. Search `exec failed` for the last failed DDL operation before the Drainer process is exited.
 2. Change the DDL version to the one compatible to the downstream. Perform this step manually in the downstream database.
-<<<<<<< HEAD
-3. Check `drainer.log`. Search for the failed DDL operation and find the `commit-ts` of this operation.
-4. Modify the `drainer.toml` configuration file. Add the `commit-ts` in the `ignore-txn-commit-ts` item and restart the Drainer node.
-=======
 3. Check `drainer.log`. Search for the failed DDL operation and find the `commit-ts` of this operation. For example:
 
     ```
@@ -249,4 +245,3 @@ To solve the problem, follow these steps:
     ```
 
 4. Modify the `drainer.toml` configuration file. Add the `commit-ts` in the `ignore-txn-commit-ts` item and restart the Drainer node.
->>>>>>> 4a204d1... Update tune-tikv-performance.md (#2977)
