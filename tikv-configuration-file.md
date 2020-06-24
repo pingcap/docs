@@ -1186,4 +1186,5 @@ Configuration items related to `import`
 ### `pipelined`
 
 This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which causes the failure of pessimistic transaction commit.
-+ Default value: false
+
+The default value of `pipelined` is `false`.
