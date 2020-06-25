@@ -1,4 +1,3 @@
-aliases: ['/docs/v4.0/TOC/']
 # TiDB Documentation
 
 <!-- markdownlint-disable MD007 -->

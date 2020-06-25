@@ -1,4 +1,3 @@
-aliases: ['/docs/v4.0/CONTRIBUTING/']
 # TiDB Documentation Contributing Guide
 
 Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited about the prospect of you joining [TiDB Community](https://github.com/pingcap/community/).
