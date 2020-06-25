@@ -2,7 +2,7 @@
 title: Reparo User Guide
 summary: Learn to use Reparo.
 category: reference
-aliases: ['/docs/v4.0/tidb-binlog/tidb-binlog-reparo/','/docs/stable/reference/tidb-binlog/reparo/']
+aliases: ['/docs/stable/tidb-binlog/tidb-binlog-reparo/','/docs/v4.0/tidb-binlog/tidb-binlog-reparo/','/docs/stable/reference/tidb-binlog/reparo/']
 ---
 
 # Reparo User Guide

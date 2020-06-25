@@ -2,7 +2,7 @@
 title: TiDB Architecture
 summary: The key architecture components of the TiDB platform
 category: introduction
-aliases: ['/docs/v4.0/architecture/']
+aliases: ['/docs/stable/architecture/','/docs/v4.0/architecture/']
 ---
 
 # TiDB Architecture

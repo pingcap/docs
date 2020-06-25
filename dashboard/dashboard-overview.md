@@ -2,7 +2,7 @@
 title: Overview Page
 summary: Learn the overview page of TiDB Dashboard.
 category: how-to
-aliases: ['/docs/v4.0/dashboard/dashboard-overview/']
+aliases: ['/docs/stable/dashboard/dashboard-overview/','/docs/v4.0/dashboard/dashboard-overview/']
 ---
 
 # Overview Page

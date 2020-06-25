@@ -2,7 +2,7 @@
 title: DROP SEQUENCE
 summary: An overview of the usage of DROP SEQUENCE for the TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-drop-sequence/','/docs/stable/reference/sql/statements/drop-sequence/']
+aliases: ['/docs/stable/sql-statements/sql-statement-drop-sequence/','/docs/v4.0/sql-statements/sql-statement-drop-sequence/','/docs/stable/reference/sql/statements/drop-sequence/']
 ---
 
 # DROP SEQUENCE

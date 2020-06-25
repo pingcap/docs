@@ -1,7 +1,7 @@
 ---
 title: TiDB 4.0.0 Beta.2 Release Notes
 category: Releases
-aliases: ['/docs/v4.0/releases/release-4.0.0-beta.2/','/docs/stable/releases/4.0.0-beta.2/']
+aliases: ['/docs/stable/releases/release-4.0.0-beta.2/','/docs/v4.0/releases/release-4.0.0-beta.2/','/docs/stable/releases/4.0.0-beta.2/']
 ---
 
 # TiDB 4.0.0 Beta.2 Release Notes

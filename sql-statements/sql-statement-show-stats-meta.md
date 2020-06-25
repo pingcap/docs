@@ -2,7 +2,7 @@
 title: SHOW STATS_META
 summary: An overview of the usage of SHOW STATS_META for TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-show-stats-meta/']
+aliases: ['/docs/stable/sql-statements/sql-statement-show-stats-meta/','/docs/v4.0/sql-statements/sql-statement-show-stats-meta/']
 ---
 
 # SHOW STATS_META

@@ -2,7 +2,7 @@
 title: DROP STATS
 summary: An overview of the usage of DROP STATS for the TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-drop-stats/']
+aliases: ['/docs/stable/sql-statements/sql-statement-drop-stats/','/docs/v4.0/sql-statements/sql-statement-drop-stats/']
 ---
 
 # DROP STATS

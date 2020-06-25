@@ -2,7 +2,7 @@
 title: TiDB Dashboard Cluster Diagnostic Page
 summary: Learn how to use the cluster diagnostic page.
 category: how-to
-aliases: ['/docs/v4.0/dashboard/dashboard-diagnostics-access/']
+aliases: ['/docs/stable/dashboard/dashboard-diagnostics-access/','/docs/v4.0/dashboard/dashboard-diagnostics-access/']
 ---
 
 # TiDB Dashboard Cluster Diagnostics Page

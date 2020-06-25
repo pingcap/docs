@@ -2,7 +2,7 @@
 title: Statement Summary Tables
 summary: Learn about Statement Summary Table in TiDB.
 category: reference
-aliases: ['/docs/v4.0/statement-summary-tables/','/docs/stable/reference/performance/statement-summary/']
+aliases: ['/docs/stable/statement-summary-tables/','/docs/v4.0/statement-summary-tables/','/docs/stable/reference/performance/statement-summary/']
 ---
 
 # Statement Summary Tables

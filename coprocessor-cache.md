@@ -2,7 +2,7 @@
 title: Coprocessor Cache
 summary: Learn the features of Coprocessor Cache.
 category: reference
-aliases: ['/docs/v4.0/coprocessor-cache/']
+aliases: ['/docs/stable/coprocessor-cache/','/docs/v4.0/coprocessor-cache/']
 ---
 
 # Coprocessor Cache

@@ -2,7 +2,7 @@
 title: Export or Backup Data Using Dumpling
 summary: Use the Dumpling tool to export or backup data in TiDB.
 category: how-to
-aliases: ['/docs/v4.0/export-or-backup-using-dumpling/']
+aliases: ['/docs/stable/export-or-backup-using-dumpling/','/docs/v4.0/export-or-backup-using-dumpling/']
 ---
 
 # Export or Backup Data Using Dumpling

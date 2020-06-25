@@ -2,7 +2,7 @@
 title: TiDB Memory Control
 summary: Learn how to configure the memory quota of a query and avoid OOM (out of memory).
 category: how-to
-aliases: ['/docs/v4.0/configure-memory-usage/','/docs/stable/how-to/configure/memory-control/']
+aliases: ['/docs/stable/configure-memory-usage/','/docs/v4.0/configure-memory-usage/','/docs/stable/how-to/configure/memory-control/']
 ---
 
 # TiDB Memory Control

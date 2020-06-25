@@ -2,7 +2,7 @@
 title: DROP BINDING
 summary: Use of DROP BINDING in TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-drop-binding/']
+aliases: ['/docs/stable/sql-statements/sql-statement-drop-binding/','/docs/v4.0/sql-statements/sql-statement-drop-binding/']
 ---
 
 # DROP BINDING
