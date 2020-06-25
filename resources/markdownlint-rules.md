@@ -1,4 +1,3 @@
-aliases: ['/docs/dev/resources/markdownlint-rules/']
 # Markdown Rules
 
 TiDB documentation is written in Markdown. To ensure the quality and consistent format, you should follow certain Markdown rules when modifying documents. We set a CI check for Markdown files in the docs repository, which is the [markdownlint check](https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md).
