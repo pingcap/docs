@@ -1,7 +1,7 @@
 ---
 title: TiDB 2.0.9 Release Notes
 category: Releases
-aliases: ['/docs/stable/releases/209/']
+aliases: ['/docs/v4.0/releases/release-2.0.9/','/docs/stable/releases/209/']
 ---
 
 # TiDB 2.0.9 Release Notes

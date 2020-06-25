@@ -2,6 +2,7 @@
 title: TiDB Monitoring API
 summary: Learn the API of TiDB monitoring services.
 category: how-to
+aliases: ['/docs/v4.0/tidb-monitoring-api/']
 ---
 
 # TiDB Monitoring API

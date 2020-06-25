@@ -2,7 +2,7 @@
 title: Encryption and Compression Functions
 summary: Learn about the encryption and compression functions.
 category: reference
-aliases: ['/docs/stable/reference/sql/functions-and-operators/encryption-and-compression-functions/']
+aliases: ['/docs/v4.0/functions-and-operators/encryption-and-compression-functions/','/docs/stable/reference/sql/functions-and-operators/encryption-and-compression-functions/']
 ---
 
 # Encryption and Compression Functions

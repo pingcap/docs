@@ -2,7 +2,7 @@
 title: TiDB Cluster Alert Rules
 summary: Learn the alert rules in a TiDB cluster.
 category: reference
-aliases: ['/docs/stable/reference/alert-rules/']
+aliases: ['/docs/v4.0/alert-rules/','/docs/stable/reference/alert-rules/']
 ---
 
 <!-- markdownlint-disable MD024 -->

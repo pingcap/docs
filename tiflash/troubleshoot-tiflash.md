@@ -2,6 +2,7 @@
 title: Troubleshoot a TiFlash Cluster
 summary: Learn common operations when you troubleshoot a TiFlash cluster.
 category: reference
+aliases: ['/docs/v4.0/tiflash/troubleshoot-tiflash/']
 ---
 
 # Troubleshoot a TiFlash Cluster

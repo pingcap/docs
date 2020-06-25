@@ -2,7 +2,7 @@
 title: Local Deployment from Binary Tarball
 summary: Use the binary to deploy a TiDB cluster.
 category: how-to
-aliases: ['/docs/stable/how-to/get-started/deploy-tidb-from-binary/']
+aliases: ['/docs/v4.0/deploy-tidb-from-binary/','/docs/stable/how-to/get-started/deploy-tidb-from-binary/']
 ---
 
 # Local Deployment from Binary Tarball

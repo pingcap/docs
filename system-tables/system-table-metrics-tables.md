@@ -2,7 +2,7 @@
 title: METRICS_TABLES
 summary: Learn the `METRICS_TABLES` system table.
 category: reference
-aliases: ['/docs/stable/reference/system-databases/metrics-tables/']
+aliases: ['/docs/v4.0/system-tables/system-table-metrics-tables/','/docs/stable/reference/system-databases/metrics-tables/']
 ---
 
 # METRICS_TABLES

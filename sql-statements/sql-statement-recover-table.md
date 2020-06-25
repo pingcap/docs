@@ -2,7 +2,7 @@
 title: RECOVER TABLE
 summary: An overview of the usage of RECOVER TABLE for the TiDB database.
 category: reference
-aliases: ['/docs/stable/reference/sql/statements/recover-table/']
+aliases: ['/docs/v4.0/sql-statements/sql-statement-recover-table/','/docs/stable/reference/sql/statements/recover-table/']
 ---
 
 # RECOVER TABLE

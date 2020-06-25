@@ -2,7 +2,7 @@
 title: Error Codes and Troubleshooting
 summary: Learn about the error codes and solutions in TiDB.
 category: reference
-aliases: ['/docs/stable/reference/error-codes/']
+aliases: ['/docs/v4.0/error-codes/','/docs/stable/reference/error-codes/']
 ---
 
 # Error Codes and Troubleshooting

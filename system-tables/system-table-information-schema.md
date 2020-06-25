@@ -2,7 +2,7 @@
 title: Information Schema
 summary: Learn how to use Information Schema in TiDB.
 category: reference
-aliases: ['/docs/stable/reference/system-databases/information-schema/']
+aliases: ['/docs/v4.0/system-tables/system-table-information-schema/','/docs/stable/reference/system-databases/information-schema/']
 ---
 
 # Information Schema

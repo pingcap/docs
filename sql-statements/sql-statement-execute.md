@@ -2,7 +2,7 @@
 title: EXECUTE | TiDB SQL Statement Reference
 summary: An overview of the usage of EXECUTE for the TiDB database.
 category: reference
-aliases: ['/docs/stable/reference/sql/statements/execute/']
+aliases: ['/docs/v4.0/sql-statements/sql-statement-execute/','/docs/stable/reference/sql/statements/execute/']
 ---
 
 # EXECUTE

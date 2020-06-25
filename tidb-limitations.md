@@ -2,6 +2,7 @@
 title: TiDB Limitations
 summary: Learn the usage limitations of TiDB.
 category: introduction
+aliases: ['/docs/v4.0/tidb-limitations/']
 ---
 
 # TiDB Limitations

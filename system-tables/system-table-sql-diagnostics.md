@@ -2,7 +2,7 @@
 title: SQL Diagnostics
 summary: Understand SQL diagnostics in TiDB.
 category: reference
-aliases: ['/docs/stable/reference/system-databases/sql-diagnosis/','/docs/stable/system-tables/system-table-sql-diagnosis/']
+aliases: ['/docs/v4.0/system-tables/system-table-sql-diagnostics/','/docs/stable/reference/system-databases/sql-diagnosis/','/docs/stable/system-tables/system-table-sql-diagnosis/']
 ---
 
 # SQL Diagnostics

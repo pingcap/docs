@@ -2,6 +2,7 @@
 title: SHOW BUILTINS
 summary: The usage of SHOW BUILTINS in TiDB.
 category: reference
+aliases: ['/docs/v4.0/sql-statements/sql-statement-show-builtins/']
 ---
 
 # SHOW BUILTINS

@@ -2,7 +2,7 @@
 title: TiDB Lightning Overview
 summary: Learn about Lightning and the whole architecture.
 category: reference
-aliases: ['/docs/stable/reference/tools/tidb-lightning/overview/']
+aliases: ['/docs/v4.0/tidb-lightning/tidb-lightning-overview/','/docs/stable/reference/tools/tidb-lightning/overview/']
 ---
 
 # TiDB Lightning Overview

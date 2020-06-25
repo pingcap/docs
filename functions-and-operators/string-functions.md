@@ -2,7 +2,7 @@
 title: String Functions
 summary: Learn about the string functions in TiDB.
 category: reference
-aliases: ['/docs/stable/reference/sql/functions-and-operators/string-functions/']
+aliases: ['/docs/v4.0/functions-and-operators/string-functions/','/docs/stable/reference/sql/functions-and-operators/string-functions/']
 ---
 
 # String Functions
