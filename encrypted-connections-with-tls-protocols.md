@@ -2,7 +2,7 @@
 title: Enable TLS for MySQL Clients
 summary: Use the encrypted connection to ensure data security.
 category: how-to
-aliases: ['/docs/v2.1/how-to/secure/enable-tls-clients/']
+aliases: ['/docs/v2.1/encrypted-connections-with-tls-protocols/','/docs/v2.1/how-to/secure/enable-tls-clients/']
 ---
 
 # Enable TLS for MySQL Clients

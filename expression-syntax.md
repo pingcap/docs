@@ -2,7 +2,7 @@
 title: Expression Syntax
 summary: Learn about the expression syntax in TiDB.
 category: reference
-aliases: ['/docs/v2.1/reference/sql/language-structure/expression-syntax/']
+aliases: ['/docs/v2.1/expression-syntax/','/docs/v2.1/reference/sql/language-structure/expression-syntax/']
 ---
 
 # Expression Syntax

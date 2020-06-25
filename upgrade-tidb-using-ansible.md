@@ -2,7 +2,7 @@
 title: TiDB 2.1 Upgrade Guide
 summary: Learn how to upgrade from TiDB 2.0 (TiDB 2.0.1 or later versions) or TiDB 2.1 RC version to TiDB 2.1 GA version.
 category: how-to
-aliases: ['/docs/v2.1/how-to/upgrade/from-previous-version/','/docs/v2.1/how-to/upgrade/rolling-updates-with-ansible/']
+aliases: ['/docs/v2.1/upgrade-tidb-using-ansible/','/docs/v2.1/how-to/upgrade/from-previous-version/','/docs/v2.1/how-to/upgrade/rolling-updates-with-ansible/']
 ---
 
 # TiDB 2.1 Upgrade Guide
@@ -11,7 +11,7 @@ This document describes how to upgrade from TiDB 2.0 to 2.1 versions, or from an
 
 > **Note:**
 >
-> TiDB 2.1 is not compatible with the Kafka version of TiDB Binlog. If your current TiDB cluster has already been using the [Kafka version of TiDB Binlog](/tidb-binlog/tidb-binlog-kafka-deployment.md), you need to [upgrade it to the cluster version of TiDB Binlog](/tidb-binlog/upgrade-tidb-binlog.md).
+> TiDB 2.1 is not compatible with the Kafka version of TiDB Binlog. If your current TiDB cluster has already been using the Kafka version of TiDB Binlog, you need to [upgrade it to the cluster version of TiDB Binlog](/tidb-binlog/upgrade-tidb-binlog.md).
 
 For details about using TiDB Ansible to perform a rolling update to components, see [Perform a rolling update to TiDB cluster components](/upgrade-tidb-using-ansible.md#step-5-perform-a-rolling-update-to-tidb-cluster-components).
 

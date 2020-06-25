@@ -2,7 +2,7 @@
 title: Backup and Restore
 summary: Learn how to back up and restore the data of TiDB.
 category: how-to
-aliases: ['/docs/v2.1/how-to/maintain/backup-and-restore/']
+aliases: ['/docs/v2.1/backup-and-restore/','/docs/v2.1/how-to/maintain/backup-and-restore/']
 ---
 
 # Backup and Restore

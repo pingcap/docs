@@ -1,7 +1,7 @@
 ---
 title: TiDB 3.0 GA Release Notes
 category: Releases
-aliases: ['/docs/v2.1/releases/3.0-ga/']
+aliases: ['/docs/v2.1/releases/release-3.0-ga/','/docs/v2.1/releases/3.0-ga/']
 ---
 
 <!-- markdownlint-disable MD032 -->

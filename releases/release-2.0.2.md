@@ -1,7 +1,7 @@
 ---
 title: TiDB 2.0.2 Release Notes
 category: Releases
-aliases: ['/docs/v2.1/releases/202/']
+aliases: ['/docs/v2.1/releases/release-2.0.2/','/docs/v2.1/releases/202/']
 ---
 
 # TiDB 2.0.2 Release Notes

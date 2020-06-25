@@ -2,6 +2,7 @@
 title: TiDB Roadmap
 summary: Learn about the roadmap of TiDB.
 category: Roadmap
+aliases: ['/docs/v2.1/roadmap/']
 ---
 
 # TiDB Roadmap

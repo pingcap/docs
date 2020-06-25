@@ -2,7 +2,7 @@
 title: PD Configuration Flags
 summary: Learn some configuration flags of PD.
 category: reference
-aliases: ['/docs/v2.1/reference/configuration/pd-server/configuration/']
+aliases: ['/docs/v2.1/pd-configuration-file/','/docs/v2.1/reference/configuration/pd-server/configuration/']
 ---
 
 # PD Configuration Flags
