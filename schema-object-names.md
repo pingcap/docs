@@ -2,7 +2,7 @@
 title: Schema Object Names
 summary: Learn about the schema object names (identifiers) in TiDB.
 category: reference
-aliases: ['/docs/v3.0/reference/sql/language-structure/schema-object-names/','/docs/sql/schema-object-names/']
+aliases: ['/docs/v3.0/schema-object-names/','/docs/v3.0/reference/sql/language-structure/schema-object-names/','/docs/sql/schema-object-names/']
 ---
 
 # Schema Object Names

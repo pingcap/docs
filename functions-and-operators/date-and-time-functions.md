@@ -2,7 +2,7 @@
 title: Date and Time Functions
 summary: Learn how to use the data and time functions.
 category: reference
-aliases: ['/docs/v3.0/reference/sql/functions-and-operators/date-and-time-functions/','/docs/sql/date-and-time-functions/']
+aliases: ['/docs/v3.0/functions-and-operators/date-and-time-functions/','/docs/v3.0/reference/sql/functions-and-operators/date-and-time-functions/','/docs/sql/date-and-time-functions/']
 ---
 
 # Date and Time Functions

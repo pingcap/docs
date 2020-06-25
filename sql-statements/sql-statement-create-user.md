@@ -2,7 +2,7 @@
 title: CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE USER for the TiDB database.
 category: reference
-aliases: ['/docs/v3.0/reference/sql/statements/create-user/']
+aliases: ['/docs/v3.0/sql-statements/sql-statement-create-user/','/docs/v3.0/reference/sql/statements/create-user/']
 ---
 
 # CREATE USER

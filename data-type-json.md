@@ -2,7 +2,7 @@
 title: TiDB Data Type
 summary: Learn about the JSON data type in TiDB.
 category: reference
-aliases: ['/docs/v3.0/reference/sql/data-types/json/']
+aliases: ['/docs/v3.0/data-type-json/','/docs/v3.0/reference/sql/data-types/json/']
 ---
 
 # JSON Type

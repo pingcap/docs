@@ -2,7 +2,7 @@
 title: Report an Issue
 summary: Report an issue with your TiDB installation.
 category: support
-aliases: ['/docs/report-issue/']
+aliases: ['/docs/v3.0/report-issue/','/docs/report-issue/']
 ---
 
 # Report an Issue

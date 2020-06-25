@@ -2,7 +2,7 @@
 title: TiDB Optimistic Transaction Model
 summary: Learn the optimistic transaction model in TiDB.
 category: reference
-aliases: ['/docs/v3.0/reference/transactions/transaction-optimistic/','/docs/v3.0/reference/transactions/transaction-model/']
+aliases: ['/docs/v3.0/optimistic-transaction/','/docs/v3.0/reference/transactions/transaction-optimistic/','/docs/v3.0/reference/transactions/transaction-model/']
 ---
 
 # TiDB Optimistic Transaction Model

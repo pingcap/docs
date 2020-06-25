@@ -2,7 +2,7 @@
 title: TRUNCATE | TiDB SQL Statement Reference
 summary: An overview of the usage of TRUNCATE for the TiDB database.
 category: reference
-aliases: ['/docs/v3.0/reference/sql/statements/truncate/']
+aliases: ['/docs/v3.0/sql-statements/sql-statement-truncate/','/docs/v3.0/reference/sql/statements/truncate/']
 ---
 
 # TRUNCATE

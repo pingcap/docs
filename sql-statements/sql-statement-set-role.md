@@ -2,6 +2,7 @@
 title: SET ROLE | TiDB SQL Statement Reference
 summary: An overview of the usage of SET ROLE for the TiDB database.
 category: reference
+aliases: ['/docs/v3.0/sql-statements/sql-statement-set-role/']
 ---
 
 # SET ROLE
