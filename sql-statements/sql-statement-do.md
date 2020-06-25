@@ -2,7 +2,7 @@
 title: DO | TiDB SQL Statement Reference
 summary: An overview of the usage of DO for the TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-do/','/docs/stable/reference/sql/statements/do/']
+aliases: ['/docs/stable/sql-statements/sql-statement-do/','/docs/v4.0/sql-statements/sql-statement-do/','/docs/stable/reference/sql/statements/do/']
 ---
 
 # DO

@@ -2,7 +2,7 @@
 title: Connect with us
 summary: Learn about how to connect with us.
 category: community
-aliases: ['/docs/v4.0/community/']
+aliases: ['/docs/stable/community/','/docs/v4.0/community/']
 ---
 
 # Connect with us

@@ -2,7 +2,7 @@
 title: TiDB Lightning Monitoring
 summary: Learn about the monitor configuration and monitoring metrics of TiDB Lightning.
 category: reference
-aliases: ['/docs/v4.0/tidb-lightning/monitor-tidb-lightning/','/docs/stable/reference/tools/tidb-lightning/monitor/']
+aliases: ['/docs/stable/tidb-lightning/monitor-tidb-lightning/','/docs/v4.0/tidb-lightning/monitor-tidb-lightning/','/docs/stable/reference/tools/tidb-lightning/monitor/']
 ---
 
 # TiDB Lightning Monitoring

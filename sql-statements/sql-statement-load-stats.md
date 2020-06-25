@@ -2,7 +2,7 @@
 title: LOAD STATS
 summary: An overview of the usage of LOAD STATS for the TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-load-stats/']
+aliases: ['/docs/stable/sql-statements/sql-statement-load-stats/','/docs/v4.0/sql-statements/sql-statement-load-stats/']
 ---
 
 # LOAD STATS

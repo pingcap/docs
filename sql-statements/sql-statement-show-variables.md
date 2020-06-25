@@ -2,7 +2,7 @@
 title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-show-variables/','/docs/stable/reference/sql/statements/show-variables/']
+aliases: ['/docs/stable/sql-statements/sql-statement-show-variables/','/docs/v4.0/sql-statements/sql-statement-show-variables/','/docs/stable/reference/sql/statements/show-variables/']
 ---
 
 # SHOW [GLOBAL|SESSION] VARIABLES

@@ -2,7 +2,7 @@
 title: TiUP Overview
 summary: Introduce the TiUP tool and its ecosystem.
 category: tools
-aliases: ['/docs/v4.0/tiup/tiup-overview/','/docs/stable/reference/tools/tiup/overview/']
+aliases: ['/docs/stable/tiup/tiup-overview/','/docs/v4.0/tiup/tiup-overview/','/docs/stable/reference/tools/tiup/overview/']
 ---
 
 # TiUP Overview

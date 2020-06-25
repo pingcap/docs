@@ -2,7 +2,7 @@
 title: AUTO_INCREMENT
 summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 category: reference
-aliases: ['/docs/v4.0/auto-increment/']
+aliases: ['/docs/stable/auto-increment/','/docs/v4.0/auto-increment/']
 ---
 
 # AUTO_INCREMENT

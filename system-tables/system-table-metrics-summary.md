@@ -2,7 +2,7 @@
 title: METRICS_SUMMARY
 summary: Learn the `METRICS_SUMMARY` system table.
 category: reference
-aliases: ['/docs/v4.0/system-tables/system-table-metrics-summary/','/docs/stable/reference/system-databases/metrics-summary/']
+aliases: ['/docs/stable/system-tables/system-table-metrics-summary/','/docs/v4.0/system-tables/system-table-metrics-summary/','/docs/stable/reference/system-databases/metrics-summary/']
 ---
 
 # METRICS_SUMMARY

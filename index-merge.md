@@ -2,7 +2,7 @@
 title: Access Tables Using `IndexMerge`
 summary: Learn how to access tables using the `IndexMerge` query execution plan.
 category: reference
-aliases: ['/docs/v4.0/index-merge/','/docs/stable/reference/performance/index-merge/']
+aliases: ['/docs/stable/index-merge/','/docs/v4.0/index-merge/','/docs/stable/reference/performance/index-merge/']
 ---
 
 # Access Tables Using `IndexMerge`

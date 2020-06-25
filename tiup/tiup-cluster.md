@@ -2,7 +2,7 @@
 title: Deploy and Maintain an Online TiDB Cluster Using TiUP
 summary: Learns how to deploy and maintain an online TiDB cluster using TiUP.
 category: tools
-aliases: ['/docs/v4.0/tiup/tiup-cluster/','/docs/stable/reference/tools/tiup/cluster/']
+aliases: ['/docs/stable/tiup/tiup-cluster/','/docs/v4.0/tiup/tiup-cluster/','/docs/stable/reference/tools/tiup/cluster/']
 ---
 
 # Deploy and Maintain an Online TiDB Cluster Using TiUP

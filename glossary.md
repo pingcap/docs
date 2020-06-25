@@ -2,7 +2,7 @@
 title: Glossary
 summary: Glossaries about TiDB.
 category: glossary
-aliases: ['/docs/v4.0/glossary/']
+aliases: ['/docs/stable/glossary/','/docs/v4.0/glossary/']
 ---
 
 # Glossary

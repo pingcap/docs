@@ -2,7 +2,7 @@
 title: SELECT | TiDB SQL Statement Reference
 summary: An overview of the usage of SELECT for the TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-select/','/docs/stable/reference/sql/statements/select/']
+aliases: ['/docs/stable/sql-statements/sql-statement-select/','/docs/v4.0/sql-statements/sql-statement-select/','/docs/stable/reference/sql/statements/select/']
 ---
 
 # SELECT

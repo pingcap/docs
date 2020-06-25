@@ -1,7 +1,7 @@
 ---
 title: Technical Writing Project Ideas
 summary: Learn about the project ideas of TiDB documentation.
-aliases: ['/docs/v4.0/technical-writing-project-ideas/']
+aliases: ['/docs/stable/technical-writing-project-ideas/','/docs/v4.0/technical-writing-project-ideas/']
 ---
 
 # Technical Writing Project Ideas

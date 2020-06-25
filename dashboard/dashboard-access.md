@@ -2,7 +2,7 @@
 title: Access TiDB Dashboard
 summary: Learn how to access TiDB Dashboard.
 category: how-to
-aliases: ['/docs/v4.0/dashboard/dashboard-access/']
+aliases: ['/docs/stable/dashboard/dashboard-access/','/docs/v4.0/dashboard/dashboard-access/']
 ---
 
 # Access TiDB Dashboard

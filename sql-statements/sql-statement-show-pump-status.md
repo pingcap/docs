@@ -2,7 +2,7 @@
 title: SHOW PUMP STATUS
 summary: An overview of the usage of SHOW PUMP STATUS for the TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-show-pump-status/']
+aliases: ['/docs/stable/sql-statements/sql-statement-show-pump-status/','/docs/v4.0/sql-statements/sql-statement-show-pump-status/']
 ---
 
 # SHOW PUMP STATUS

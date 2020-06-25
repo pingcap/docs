@@ -1,7 +1,7 @@
 ---
 title: TiDB Ecosystem Tools Overview
 category: reference
-aliases: ['/docs/v4.0/ecosystem-tool-user-guide/','/docs/stable/reference/tools/user-guide/']
+aliases: ['/docs/stable/ecosystem-tool-user-guide/','/docs/v4.0/ecosystem-tool-user-guide/','/docs/stable/reference/tools/user-guide/']
 ---
 
 # TiDB Ecosystem Tools Overview

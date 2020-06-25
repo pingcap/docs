@@ -2,7 +2,7 @@
 title: Aggregate (GROUP BY) Functions
 summary: Learn about the supported aggregate functions in TiDB.
 category: reference
-aliases: ['/docs/v4.0/functions-and-operators/aggregate-group-by-functions/','/docs/stable/reference/sql/functions-and-operators/aggregate-group-by-functions/']
+aliases: ['/docs/stable/functions-and-operators/aggregate-group-by-functions/','/docs/v4.0/functions-and-operators/aggregate-group-by-functions/','/docs/stable/reference/sql/functions-and-operators/aggregate-group-by-functions/']
 ---
 
 # Aggregate (GROUP BY) Functions

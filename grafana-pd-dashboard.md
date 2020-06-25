@@ -2,7 +2,7 @@
 title: Key Monitoring Metrics of PD
 summary: Learn some key metrics displayed on the Grafana PD dashboard.
 category: reference
-aliases: ['/docs/v4.0/grafana-pd-dashboard/','/docs/stable/reference/key-monitoring-metrics/pd-dashboard/']
+aliases: ['/docs/stable/grafana-pd-dashboard/','/docs/v4.0/grafana-pd-dashboard/','/docs/stable/reference/key-monitoring-metrics/pd-dashboard/']
 ---
 
 # Key Monitoring Metrics of PD

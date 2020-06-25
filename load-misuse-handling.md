@@ -1,7 +1,7 @@
 ---
 title: Common Misuses During Full Data Import
 category: reference
-aliases: ['/docs/v4.0/load-misuse-handling/','/docs/stable/reference/tools/error-case-handling/load-misuse-handling/']
+aliases: ['/docs/stable/load-misuse-handling/','/docs/v4.0/load-misuse-handling/','/docs/stable/reference/tools/error-case-handling/load-misuse-handling/']
 ---
 
 # Common Misuses During Full Data Import

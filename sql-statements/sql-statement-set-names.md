@@ -2,7 +2,7 @@
 title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
 summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
 category: reference
-aliases: ['/docs/v4.0/sql-statements/sql-statement-set-names/','/docs/stable/reference/sql/statements/set-names/']
+aliases: ['/docs/stable/sql-statements/sql-statement-set-names/','/docs/v4.0/sql-statements/sql-statement-set-names/','/docs/stable/reference/sql/statements/set-names/']
 ---
 
 # SET [NAMES|CHARACTER SET]

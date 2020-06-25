@@ -2,7 +2,7 @@
 title: TiFlash Deployment Topology
 summary: Learn the deployment topology of TiFlash based on the minimal TiDB topology.
 category: how-to
-aliases: ['/docs/v4.0/tiflash-deployment-topology/']
+aliases: ['/docs/stable/tiflash-deployment-topology/','/docs/v4.0/tiflash-deployment-topology/']
 ---
 
 # TiFlash Deployment Topology
