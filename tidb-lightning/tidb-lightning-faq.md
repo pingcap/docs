@@ -2,7 +2,7 @@
 title: TiDB Lightning FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
 category: faq
-aliases: ['/docs/v2.1/faq/tidb-lightning/']
+aliases: ['/docs/v2.1/tidb-lightning/tidb-lightning-faq/','/docs/v2.1/faq/tidb-lightning/']
 ---
 
 # TiDB Lightning FAQ

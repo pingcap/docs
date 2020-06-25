@@ -2,7 +2,7 @@
 title: ADMIN | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN for the TiDB database.
 category: reference
-aliases: ['/docs/v2.1/reference/sql/statements/admin/']
+aliases: ['/docs/v2.1/sql-statements/sql-statement-admin/','/docs/v2.1/reference/sql/statements/admin/']
 ---
 
 # ADMIN

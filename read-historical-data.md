@@ -2,7 +2,7 @@
 title: Read Historical Data
 summary: Learn about how TiDB reads data from history versions.
 category: how-to
-aliases: ['/docs/v2.1/how-to/get-started/read-historical-data/']
+aliases: ['/docs/v2.1/read-historical-data/','/docs/v2.1/how-to/get-started/read-historical-data/']
 ---
 
 # Read Historical Data

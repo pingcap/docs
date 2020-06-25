@@ -1,7 +1,7 @@
 ---
 title: TiDB RC4 Release Notes
 category: releases
-aliases: ['/docs/v2.1/releases/rc4/']
+aliases: ['/docs/v2.1/releases/release-rc.4/','/docs/v2.1/releases/rc4/']
 ---
 
 # TiDB RC4 Release Notes

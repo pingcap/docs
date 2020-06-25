@@ -2,7 +2,7 @@
 title: Function and Operator Reference
 summary: Learn how to use the functions and operators.
 category: reference
-aliases: ['/docs/v2.1/reference/sql/functions-and-operators/reference/']
+aliases: ['/docs/v2.1/functions-and-operators/functions-and-operators-overview/','/docs/v2.1/reference/sql/functions-and-operators/reference/']
 ---
 
 # Function and Operator Reference

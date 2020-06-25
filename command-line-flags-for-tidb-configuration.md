@@ -2,7 +2,7 @@
 title: Configuration Options
 summary: Learn the configuration options in TiDB.
 category: reference
-aliases: ['/docs/v2.1/reference/configuration/tidb-server/configuration/','/docs/v2.1/reference/configuration/tidb-server/server-command-option/']
+aliases: ['/docs/v2.1/command-line-flags-for-tidb-configuration/','/docs/v2.1/reference/configuration/tidb-server/configuration/','/docs/v2.1/reference/configuration/tidb-server/server-command-option/']
 ---
 
 # Configuration Options

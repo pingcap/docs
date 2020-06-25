@@ -2,7 +2,7 @@
 title: Understand the Query Execution Plan
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 category: reference
-aliases: ['/docs/v2.1/reference/performance/understanding-the-query-execution-plan/']
+aliases: ['/docs/v2.1/query-execution-plan/','/docs/v2.1/reference/performance/understanding-the-query-execution-plan/']
 ---
 
 # Understand the Query Execution Plan

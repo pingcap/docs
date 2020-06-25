@@ -2,7 +2,7 @@
 title: TiDB Binlog Glossary
 summary: Learn the terms used in TiDB Binlog.
 category: glossary
-aliases: ['/docs/v2.1/reference/tidb-binlog/glossary/']
+aliases: ['/docs/v2.1/tidb-binlog/tidb-binlog-glossary/','/docs/v2.1/reference/tidb-binlog/glossary/']
 ---
 
 # TiDB Binlog Glossary

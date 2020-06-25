@@ -2,7 +2,7 @@
 title: TiDB Binlog Local Deployment
 summary: Learn how to install, deploy and monitor TiDB Binlog.
 category: reference
-aliases: ['/docs/v2.1/reference/tidb-binlog/tidb-binlog-local/']
+aliases: ['/docs/v2.1/tidb-binlog/tidb-binlog-local-deployment/','/docs/v2.1/reference/tidb-binlog/tidb-binlog-local/']
 ---
 
 # TiDB Binlog Local Deployment

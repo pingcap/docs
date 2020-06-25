@@ -2,7 +2,7 @@
 title: TiDB Binlog Configuration File
 summary: Learn the configuration items of TiDB Binlog.
 category: reference
-aliases: ['/docs/v2.1/reference/tidb-binlog/config/']
+aliases: ['/docs/v2.1/tidb-binlog/tidb-binlog-configuration-file/','/docs/v2.1/reference/tidb-binlog/config/']
 ---
 
 # TiDB Binlog Configuration File
