@@ -1,7 +1,7 @@
 ---
 title: TiDB 2.1.14 Release Notes
 category: Releases
-aliases: ['/docs/v3.1/releases/2.1.14/']
+aliases: ['/docs/v3.1/releases/release-2.1.14/','/docs/v3.1/releases/2.1.14/']
 ---
 
 # TiDB 2.1.14 Release Notes
