@@ -2,7 +2,7 @@
 title: Upgrade TiDB Using TiUP
 summary: Learn how to upgrade TiDB using TiUP.
 category: how-to
-aliases: ['/docs/stable/how-to/upgrade/using-tiup/']
+aliases: ['/docs/v4.0/upgrade-tidb-using-tiup/','/docs/stable/how-to/upgrade/using-tiup/']
 ---
 
 # Upgrade TiDB Using TiUP

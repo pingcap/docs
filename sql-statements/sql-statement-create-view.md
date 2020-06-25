@@ -2,7 +2,7 @@
 title: CREATE VIEW | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE VIEW for the TiDB database.
 category: reference
-aliases: ['/docs/stable/reference/sql/statements/create-view/']
+aliases: ['/docs/v4.0/sql-statements/sql-statement-create-view/','/docs/stable/reference/sql/statements/create-view/']
 ---
 
 # CREATE VIEW

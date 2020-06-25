@@ -2,7 +2,7 @@
 title: SHOW [FULL] TABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] TABLES for the TiDB database.
 category: reference
-aliases: ['/docs/stable/reference/sql/statements/show-tables/']
+aliases: ['/docs/v4.0/sql-statements/sql-statement-show-tables/','/docs/stable/reference/sql/statements/show-tables/']
 ---
 
 # SHOW [FULL] TABLES

@@ -1,3 +1,4 @@
+aliases: ['/docs/v4.0/README/']
 # TiDB Documentation
 
 Welcome to TiDB documentation!

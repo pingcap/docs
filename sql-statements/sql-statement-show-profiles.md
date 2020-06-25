@@ -2,6 +2,7 @@
 title: SHOW PROFILES
 summary: An overview of the usage of SHOW PROFILES for the TiDB database.
 category: reference
+aliases: ['/docs/v4.0/sql-statements/sql-statement-show-profiles/']
 ---
 
 # SHOW PROFILES

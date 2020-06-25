@@ -2,7 +2,7 @@
 title: EXPLAIN | TiDB SQL Statement Reference
 summary: An overview of the usage of EXPLAIN for the TiDB database.
 category: reference
-aliases: ['/docs/stable/reference/sql/statements/explain/']
+aliases: ['/docs/v4.0/sql-statements/sql-statement-explain/','/docs/stable/reference/sql/statements/explain/']
 ---
 
 # EXPLAIN

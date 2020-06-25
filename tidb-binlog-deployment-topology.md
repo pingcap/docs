@@ -2,6 +2,7 @@
 title: TiDB Binlog Deployment Topology
 summary: Learn the deployment topology of TiDB Binlog based on the minimal TiDB topology.
 category: how-to
+aliases: ['/docs/v4.0/tidb-binlog-deployment-topology/']
 ---
 
 # TiDB Binlog Deployment Topology

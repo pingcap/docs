@@ -2,6 +2,7 @@
 title: Instance Profiling Page
 summary: Learn the instance profiling page of TiDB Dashboard.
 category: how-to
+aliases: ['/docs/v4.0/dashboard/dashboard-profiling/']
 ---
 
 # Instance Profiling Page

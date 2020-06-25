@@ -1,7 +1,7 @@
 ---
 title: TiCDC Open Protocol
 category: reference
-aliases: ['/docs/stable/reference/tools/ticdc/open-protocol/']
+aliases: ['/docs/v4.0/ticdc/ticdc-open-protocol/','/docs/stable/reference/tools/ticdc/open-protocol/']
 ---
 
 # TiCDC Open Protocol

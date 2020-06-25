@@ -2,7 +2,7 @@
 title: Syncer User Guide
 summary: Use Syncer to import data incrementally to TiDB.
 category: reference
-aliases: ['/docs/stable/reference/tools/syncer/']
+aliases: ['/docs/v4.0/syncer-overview/','/docs/stable/reference/tools/syncer/']
 ---
 
 # Syncer User Guide

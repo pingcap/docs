@@ -2,7 +2,7 @@
 title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
 category: how-to
-aliases: ['/docs/stable/how-to/deploy/orchestrated/tiup/','/docs/stable/tiflash/deploy-tiflash/']
+aliases: ['/docs/v4.0/production-deployment-using-tiup/','/docs/stable/how-to/deploy/orchestrated/tiup/','/docs/stable/tiflash/deploy-tiflash/']
 ---
 
 # Deploy a TiDB Cluster Using TiUP

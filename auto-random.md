@@ -2,7 +2,7 @@
 title: AUTO_RANDOM
 summary: Learn the AUTO_RANDOM attribute.
 category: reference
-aliases: ['/docs/stable/reference/sql/attributes/auto-random/']
+aliases: ['/docs/v4.0/auto-random/','/docs/stable/reference/sql/attributes/auto-random/']
 ---
 
 # AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>

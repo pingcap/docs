@@ -2,7 +2,7 @@
 title: SHOW [FULL] FIELDS FROM | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] FIELDS FROM for the TiDB database.
 category: reference
-aliases: ['/docs/stable/reference/sql/statements/show-fields-from/']
+aliases: ['/docs/v4.0/sql-statements/sql-statement-show-fields-from/','/docs/stable/reference/sql/statements/show-fields-from/']
 ---
 
 # SHOW [FULL] FIELDS FROM

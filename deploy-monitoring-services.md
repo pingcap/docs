@@ -2,7 +2,7 @@
 title: Deploy Monitoring Services for the TiDB Cluster
 summary: Learn how to deploy monitoring services for the TiDB cluster.
 category: how-to
-aliases: ['/docs/stable/how-to/monitor/monitor-a-cluster/','/docs/stable/monitor-a-tidb-cluster/']
+aliases: ['/docs/v4.0/deploy-monitoring-services/','/docs/stable/how-to/monitor/monitor-a-cluster/','/docs/stable/monitor-a-tidb-cluster/']
 ---
 
 # Deploy Monitoring Services for the TiDB Cluster

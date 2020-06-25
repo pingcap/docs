@@ -2,6 +2,7 @@
 title: Statement Execution Details of TiDB Dashboard
 summary: View the execution details of a single SQL statement in TiDB Dashboard.
 category: how-to
+aliases: ['/docs/v4.0/dashboard/dashboard-statement-details/']
 ---
 
 # Statement Execution Details of TiDB Dashboard

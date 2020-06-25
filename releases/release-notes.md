@@ -1,7 +1,7 @@
 ---
 title: Release Notes
 category: release
-aliases: ['/docs/stable/releases/rn/']
+aliases: ['/docs/v4.0/releases/release-notes/','/docs/stable/releases/rn/']
 ---
 
 # TiDB Release Notes

@@ -1,7 +1,7 @@
 ---
 title: TiDB 1.0.4 Release Notes
 category: Releases
-aliases: ['/docs/stable/releases/104/']
+aliases: ['/docs/v4.0/releases/release-1.0.4/','/docs/stable/releases/104/']
 ---
 
 # TiDB 1.0.4 Release Notes

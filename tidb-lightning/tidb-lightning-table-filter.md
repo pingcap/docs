@@ -2,7 +2,7 @@
 title: TiDB Lightning Table Filter
 summary: Use black and white lists to filter out tables, ignoring them during import.
 category: reference
-aliases: ['/docs/stable/reference/tools/tidb-lightning/table-filter/']
+aliases: ['/docs/v4.0/tidb-lightning/tidb-lightning-table-filter/','/docs/stable/reference/tools/tidb-lightning/table-filter/']
 ---
 
 # TiDB Lightning Table Filter
