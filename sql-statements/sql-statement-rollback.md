@@ -2,7 +2,7 @@
 title: ROLLBACK | TiDB SQL Statement Reference
 summary: An overview of the usage of ROLLBACK for the TiDB database.
 category: reference
-aliases: ['/docs/v3.0/reference/sql/statements/rollback/']
+aliases: ['/docs/v3.0/sql-statements/sql-statement-rollback/','/docs/v3.0/reference/sql/statements/rollback/']
 ---
 
 # ROLLBACK

@@ -2,7 +2,7 @@
 title: Deploy a TiDB Cluster from Homebrew
 summary: Install TiDB using the Homebrew package manager.
 category: how-to
-aliases: ['/docs/v3.0/how-to/get-started/deploy-tidb-from-homebrew/','/docs/v3.0/how-to/get-started/local-cluster/install-from-homebrew/']
+aliases: ['/docs/v3.0/deploy-tidb-from-homebrew/','/docs/v3.0/how-to/get-started/deploy-tidb-from-homebrew/','/docs/v3.0/how-to/get-started/local-cluster/install-from-homebrew/']
 ---
 
 # Deploy a TiDB Cluster from Homebrew

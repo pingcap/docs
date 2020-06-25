@@ -2,7 +2,7 @@
 title: Execution Plan Binding
 summary: Learn about execution plan binding operations in TiDB.
 category: reference
-aliases: ['/docs/v3.0/reference/performance/execution-plan-bind/']
+aliases: ['/docs/v3.0/execution-plan-binding/','/docs/v3.0/reference/performance/execution-plan-bind/']
 ---
 
 # Execution Plan Binding

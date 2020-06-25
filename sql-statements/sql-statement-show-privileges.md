@@ -2,7 +2,7 @@
 title: SHOW PRIVILEGES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW PRIVILEGES for the TiDB database.
 category: reference
-aliases: ['/docs/v3.0/reference/sql/statements/show-privileges/']
+aliases: ['/docs/v3.0/sql-statements/sql-statement-show-privileges/','/docs/v3.0/reference/sql/statements/show-privileges/']
 ---
 
 # SHOW PRIVILEGES

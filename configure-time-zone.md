@@ -2,7 +2,7 @@
 title: Time Zone Support
 summary: Learn how to set the time zone and its format.
 category: how-to
-aliases: ['/docs/v3.0/how-to/configure/time-zone/','/docs/sql/time-zone/']
+aliases: ['/docs/v3.0/configure-time-zone/','/docs/v3.0/how-to/configure/time-zone/','/docs/sql/time-zone/']
 ---
 
 # Time Zone Support

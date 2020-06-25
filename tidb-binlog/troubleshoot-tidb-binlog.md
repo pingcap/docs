@@ -2,7 +2,7 @@
 title: TiDB Binlog Troubleshooting
 summary: Learn the troubleshooting process of TiDB Binlog.
 category: reference
-aliases: ['/docs/v3.0/reference/tidb-binlog/troubleshoot/binlog/','/docs/v3.0/how-to/troubleshoot/tidb-binlog/']
+aliases: ['/docs/v3.0/tidb-binlog/troubleshoot-tidb-binlog/','/docs/v3.0/reference/tidb-binlog/troubleshoot/binlog/','/docs/v3.0/how-to/troubleshoot/tidb-binlog/']
 ---
 
 # TiDB Binlog Troubleshooting

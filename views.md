@@ -2,7 +2,7 @@
 title: Views
 summary: Learn how to use views in TiDB.
 category: reference
-aliases: ['/docs/v3.0/reference/sql/views/']
+aliases: ['/docs/v3.0/views/','/docs/v3.0/reference/sql/views/']
 ---
 
 # Views

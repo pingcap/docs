@@ -2,7 +2,7 @@
 title: TiDB 3.0 Upgrade Guide
 summary: Learn how to upgrade to TiDB 3.0 versions.
 category: how-to
-aliases: ['/docs/v3.0/how-to/upgrade/from-previous-version/','/docs/v3.0/how-to/upgrade/to-tidb-3.0/','/docs/v2.1/how-to/upgrade/to-tidb-3.0/','/docs/v3.0/how-to/upgrade/rolling-updates-with-ansible/']
+aliases: ['/docs/v3.0/upgrade-tidb-using-ansible/','/docs/v3.0/how-to/upgrade/from-previous-version/','/docs/v3.0/how-to/upgrade/to-tidb-3.0/','/docs/v2.1/how-to/upgrade/to-tidb-3.0/','/docs/v3.0/how-to/upgrade/rolling-updates-with-ansible/']
 ---
 
 # TiDB 3.0 Upgrade Guide
