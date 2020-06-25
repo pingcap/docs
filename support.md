@@ -2,7 +2,7 @@
 title: Support Resources
 summary: Find support resources for your TiDB installation.
 category: support
-aliases: ['/docs/v3.1/support-resources/']
+aliases: ['/docs/v3.1/support/','/docs/v3.1/support-resources/']
 ---
 
 # Support Resources

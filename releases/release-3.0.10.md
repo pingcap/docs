@@ -1,7 +1,7 @@
 ---
 title: TiDB 3.0.10 Release Notes
 category: Releases
-aliases: ['/docs/v3.1/releases/3.0.10/']
+aliases: ['/docs/v3.1/releases/release-3.0.10/','/docs/v3.1/releases/3.0.10/']
 ---
 
 # TiDB 3.0.10 Release Notes

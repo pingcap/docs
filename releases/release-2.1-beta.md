@@ -1,7 +1,7 @@
 ---
 title: TiDB 2.1 Beta Release Notes
 category: Releases
-aliases: ['/docs/v3.1/releases/21beta/']
+aliases: ['/docs/v3.1/releases/release-2.1-beta/','/docs/v3.1/releases/21beta/']
 ---
 
 # TiDB 2.1 Beta Release Notes

@@ -2,7 +2,7 @@
 title: TiDB Binlog FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
 category: faq
-aliases: ['/docs/v3.1/reference/tidb-binlog/faq/']
+aliases: ['/docs/v3.1/tidb-binlog/tidb-binlog-faq/','/docs/v3.1/reference/tidb-binlog/faq/']
 ---
 
 # TiDB Binlog FAQ

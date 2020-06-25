@@ -2,7 +2,7 @@
 title: Connectors and APIs
 summary: Learn about the connectors and APIs.
 category: reference
-aliases: ['/docs/v3.1/reference/supported-clients/']
+aliases: ['/docs/v3.1/connectors-and-apis/','/docs/v3.1/reference/supported-clients/']
 ---
 
 # Connectors and APIs

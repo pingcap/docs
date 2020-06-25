@@ -2,6 +2,7 @@
 title: TiDB v3.0 Roadmap
 summary: Learn about the v3.0 roadmap of TiDB.
 category: Roadmap
+aliases: ['/docs/v3.1/roadmap/']
 ---
 
 # TiDB v3.0 Roadmap
