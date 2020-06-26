@@ -24,8 +24,8 @@ This document provides a detailed description of these key metrics.
 - Memory：The memory usage per TiKV instance
 - IO utilization：The I/O utilization per TiKV instance
 - MBps：The total bytes of read and write in each TiKV instance
-- QPS：	The QPS per command in each TiKV instance
-- Errps：	The total number of gRPC message failures
+- QPS：The QPS per command in each TiKV instance
+- Errps：The total number of gRPC message failures
 - leader：The number of leaders per TiKV instance
 - Region：The number of Regions per TiKV instance
 - Uptime：The runtime of TiKV since last restart
