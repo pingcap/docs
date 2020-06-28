@@ -149,7 +149,6 @@ The `tid` subcommand is used to get table information and structure by table id.
 
 For example, the table id of `mysql.stat_meta` is 21, you can use `tidb-ctl schema tid -i 21` to obtain the detail of `mysql.stat_meta`.
 
-
 ```json
 {
  "id": 21,
