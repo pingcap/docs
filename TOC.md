@@ -416,7 +416,7 @@
     + TiUP Components
       + [tiup-playground](/tiup/tiup-playground.md)
       + [tiup-cluster](/tiup/tiup-cluster.md)
-      + [tiup-mirror](/tiup/tiup-mirrors.md)
+      + [tiup-mirror](/tiup/tiup-mirror.md)
       + [tiup-bench](/tiup/tiup-bench.md)
   + [Errors Codes](/error-codes.md)
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
