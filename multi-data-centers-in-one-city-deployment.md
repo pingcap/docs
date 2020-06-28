@@ -5,7 +5,7 @@ category: how-to
 aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/geo-redundancy-deployment/','/tidb/dev/geo-redundancy-deployment']
 ---
 
-# Deployment Solution for Multiple Data Centers in One City
+# Multiple Data Centers in One City Deployment
 
 As a NewSQL database, TiDB excels in the best features of the traditional relational database and the scalability of the NoSQL database and is of course, highly available across data centers (DC). This document introduces the deployment solution for multiple DCs in one city.
 
