@@ -2,6 +2,7 @@
 title: Deploy TiDB Dashboard
 summary: Learn how to deploy TiDB Dashboard.
 category: how-to
+aliases: ['/docs/dev/dashboard/dashboard-ops-deploy/']
 ---
 
 # Deploy TiDB Dashboard
@@ -12,7 +13,7 @@ See the following documents to learn how to deploy a standard TiDB cluster:
 
 + [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md#deploy-a-local-test-environment-using-tiup-playground)
 + [Deploy TiDB in Production Environment](/production-deployment-using-tiup.md)
-+ [Kubernetes environment deployment](https://pingcap.com/docs/tidb-in-kubernetes/stable/access-dashboard/)
++ [Kubernetes environment deployment](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/access-dashboard)
 
 > **Note:**
 >
