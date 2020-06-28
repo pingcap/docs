@@ -15,7 +15,7 @@ This document describes the concept of user-defined variables of TiDB and the me
 
 The format of the user-defined variables is `@var_name`. The characters that compose `var_name` can be any characters that can compose an identifier, including the numbers `0-9`, the letters `a-zA-Z`, the underscore `_`, the dollar sign `$`, and the UTF-8 characters. In addition, it also includes the English period `.`. The user-defined variables are case-insensitive.
 
-The user-defined variables are session specific, which means a user variable defined by one client cannot be seen or used by other clients connections.
+The user-defined variables are session-specific, which means a user variable defined by one client connection cannot be seen or used by other client connections.
 
 ## Set the user-defined variables
 
@@ -149,7 +149,7 @@ EXECUTE stmt USING @a, @b;
 +------------+
 ```
 
-The user-defined variables will not be used as identifiers in SQL statements. For example:
+The contents of the user-defined variables will not be used as identifiers in the SQL statements. For example:
 
 {{< copyable "sql" >}}
 
