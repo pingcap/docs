@@ -22,9 +22,12 @@ There are two kinds of generated columns: virtual and stored. A virtual generate
 You can create an index on a generated column whether it is virtual or stored.
 
 ## Usage of Generated columns
+
 One of the main usage of generated columns: extracting data from the JSON data type and indexing the data.
 
 In both MySQL 5.7 and TiDB, columns of type JSON can not be indexed directly. i.e. The following table structure is **not supported**:
+
+{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE person (
@@ -40,6 +43,7 @@ To index a JSON column, you must extract it as a generated column first.
 Using the `city` field in `address_info` as an example, you can create a virtual generated column and add an index for it:
 
 {{< copyable "sql" >}}
+
 ```sql
 CREATE TABLE person (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -63,6 +67,7 @@ SELECT name, id FROM person WHERE city = 'Beijing';
 ```sql
 EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
 ```
+
 ```
 +---------------------------------+---------+-----------+--------------------------------+-------------------------------------------------------------+
 | id                              | estRows | task      | access object                  | operator info                                               |
@@ -80,6 +85,7 @@ From the query execution plan, it can be seen that the index of city is used to 
 If no data exists at path `$.city`, `JSON_EXTRACT` returns `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual generated  column as follows:
 
 {{< copyable "sql" >}}
+
 ```sql
 CREATE TABLE person (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -103,6 +109,7 @@ ERROR 1048 (23000): Column 'city' cannot be null
 When an expression in a query is equivalent to a generated column with an index, TiDB replaces the expression with the corresponding generated column, so that the optimizer can take that index into account during execution plan construction.
 
 For example, the following example creates a generated column for the expression `a+1` and adds an index:
+
 ```sql
 create table t(a int);
 desc select a+1 from t where a+1=3;
@@ -127,6 +134,7 @@ desc select a+1 from t where a+1=3;
 +------------------------+---------+-----------+-------------------------+---------------------------------------------+
 2 rows in set (0.01 sec)
 ```
+
 > **Note:**
 >
 > Only when the expression type and the generated column type are strictly equal, the replacement will be performed.
@@ -138,7 +146,6 @@ desc select a+1 from t where a+1=3;
 ## Limitations of Generated columns
 
 The current limitations of JSON and generated columns are as follows:
-
 - You cannot add the generated column through `ALTER TABLE`.
 - You can neither convert a generated stored column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a generated stored column.
 - Not all [JSON functions](/functions-and-operators/json-functions.md) are supported;
