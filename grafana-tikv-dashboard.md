@@ -5,15 +5,15 @@ category: reference
 aliases: ['/docs/dev/grafana-tikv-dashboard/','/docs/dev/reference/key-monitoring-metrics/tikv-dashboard/']
 ---
 
-# The metrics description of TiKV
+# Description of TiKV Monitoring Metrics
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node_exporter, and so on. A lot of metrics are there to help you diagnose.
 
-You can get an overview of the component TiKV status from the TiKV dashboard, where the key metrics are displayed. According to the [Performance Map](https://asktug.com/_/tidb-performance-map/#/), you can check whether the status of the cluster is as expected.
+You can get an overview of the component TiKV status from the **TiKV-Details** dashboard, where the key metrics are displayed. According to the [Performance Map](https://asktug.com/_/tidb-performance-map/#/), you can check whether the status of the cluster is as expected.
 
-This document provides a detailed description of these key metrics.
+This document provides a detailed description of these key metrics on the **TiKV-Details** dashboard.
 
 ## Cluster
 
@@ -25,7 +25,7 @@ This document provides a detailed description of these key metrics.
 - IO utilization：The I/O utilization per TiKV instance
 - MBps：The total bytes of read and write in each TiKV instance
 - QPS：The QPS per command in each TiKV instance
-- Errps：The total number of gRPC message failures
+- Errps：The rate of gRPC message failures
 - leader：The number of leaders per TiKV instance
 - Region：The number of Regions per TiKV instance
 - Uptime：The runtime of TiKV since last restart
@@ -53,27 +53,27 @@ This document provides a detailed description of these key metrics.
 - Channel full：The number of Channel Full errors per TiKV instance. It should be `0` in normal case.
 - Active written leaders：The number of leaders being written on each TiKV instance
 - Approximate Region size：The approximate Region size
-- Approximate Region size Histogram：The histogram of approximate Region size
-- Region average written keys：The average rate of written keys to Regions per TiKV instance
-- Region average written bytes：The average rate of writing bytes to Regions per TiKV instance
+- Approximate Region size Histogram：The histogram of each approximate Region size
+- Region average written keys：The average number of written keys to Regions per TiKV instance
+- Region average written bytes: The average written bytes to Regions per TiKV instance
 
 ![TiKV Dashboard - Server metrics](/media/tikv-dashboard-server.png)
 
 ## gRPC
 
-- gRPC message count：The number of gRPC messages
+- gRPC message count: The number of gRPC messages per type
 - gRPC message failed：The number of failed gRPC messages
-- 99% gRPC message duration：99% duration of gRPC messages
-- Average gRPC message duration：Average duration of gRPC messages
+- 99% gRPC message duration: The gRPC message duration per message type (P99)
+- Average gRPC message duration: The average execution time of gRPC messages
 - gRPC batch size：The batch size of gRPC messages between TiDB and TiKV
-- raft message batch size：The batch size of raft messages
+- Raft message batch size：The batch size of Raft messages between TiKV instances
 
 ## Thread CPU
 
 - Raft store CPU：The CPU utilization of the raftstore thread. The CPU usage should be less than 80% * `raftstore.store-pool-size` in normal case.
-- Async apply CPU：The CPU utilization of async apply. The CPU usage should be less than 80% * `raftstore.apply-pool-size` in normal case.
-- Scheduler worker CPU：The CPU utilization of scheduler. The CPU usage should be less than 90% * `storage.scheduler-worker-pool-size` in normal case.
-- gRPC poll CPU：The CPU utilization of gRPC. The CPU usage should be less than 80% * `server.grpc-concurrency` in normal case.
+- Async apply CPU：The CPU utilization of the `async apply` thread. The CPU usage should be less than 90% * `raftstore.apply-pool-size` in normal cases.
+- Scheduler worker CPU：The CPU utilization of the `scheduler worker` thread. The CPU usage should be less than 90% * `storage.scheduler-worker-pool-size` in normal cases.
+- gRPC poll CPU：The CPU utilization of the `gRPC` thread. The CPU usage should be less than 80% * `server.grpc-concurrency` in normal cases.
 - Unified read pool CPU：The CPU utilization of unified read pool
 - Storage ReadPool CPU：The CPU utilization of readpool
 - Coprocessor CPU：The CPU utilization of coprocessor
@@ -85,13 +85,13 @@ This document provides a detailed description of these key metrics.
 ## PD
 
 - PD requests：The count of requests that TiKV sends to PD
-- PD request duration (average)：The time consumed by requests that TiKV sends to PD
+- PD request duration (average)：The average time consumed by requests that TiKV sends to PD
 - PD heartbeats：The total number of PD heartbeat messages
 - PD validate peers：The total number of peers validated by the PD worker
 
 ## Raft IO
 
-- Apply log duration：Raft apply The time consumed for Raft to apply logs
+- Apply log duration：The time consumed for Raft to apply logs
 - Apply log duration per server：The time consumed for Raft to apply logs per TiKV instance
 - Append log duration：The time consumed for Raft to append logs
 - Append log duration per server：The time consumed for Raft to append logs per TiKV instance
@@ -102,35 +102,35 @@ This document provides a detailed description of these key metrics.
 
 ## Raft process
 
-- Ready handled：The count of handled ready buckets per region
+- Ready handled：The count of handled ready operations per second
 - 0.99 Duration of Raft store events：The time consumed by raftstore events (P99)
 - Process ready duration：The time consumed for processes to be ready in Raft
-- Process ready duration per server：The time consumed for peer processes to be ready in Raft. It should be less than 2s(P99.99).
+- Process ready duration per server：The time consumed for peer processes to be ready in Raft. It should be less than 2 seconds (P99.99).
 
 ![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
 ## Raft message
 
-- Sent messages per server：The number of Raft messages sent by each TiKV instance
-- Flush messages per server：The number of Raft messages flushed by each TiKV instance
-- Receive messages per server：The number of Raft messages received by each TiKV instance
-- Messages：The number of Raft messages sent per type
-- Vote：The number of Vote messages sent in Raft
+- Sent messages per server：The number of Raft messages sent per second by each TiKV instance
+- Flush messages per server：The number of Raft messages flushed per second by the Raft client in each TiKV instance
+- Receive messages per server：The number of Raft messages received per second by each TiKV instance
+- Messages：The number of Raft messages sent per type per second
+- Vote：The number of Vote messages sent in Raft per second
 - Raft dropped messages：The number of dropped Raft messages per type
 
 ![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
 
 ## Raft propose
 
-- Raft apply proposals per ready：The number of Raft proposals of all Regions per ready handled bucket
+- Raft apply proposals per ready：The histogram of the number of proposals that each ready operation containes in a batch while applying proposal.
 - Raft read/write proposals：The number of proposals per type
 - Raft read proposals per server：The number of read proposals made by each TiKV instance
 - Raft write proposals per server：The number of write proposals made by each TiKV instance
-- Propose wait duration：The wait time of each proposal
-- Propose wait duration per server：The wait time of each proposal per TiKV instance
-- Apply wait duration：The apply time of each proposal
-- Apply wait duration per server：The apply time of each proposal per TiKV instance
-- Raft log speed：The rate at which peers propose logs
+- Propose wait duration：The histogram of wait time of each proposal
+- Propose wait duration per server：The histogram of wait time of each proposal per TiKV instance
+- Apply wait duration：The histogram of apply time of each proposal
+- Apply wait duration per server：The histogram of apply time of each proposal per TiKV instance
+- Raft log speed：The average rate at which peers propose logs
 
 ![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)
 
@@ -138,8 +138,8 @@ This document provides a detailed description of these key metrics.
 
 - Admin proposals：The number of admin proposals
 - Admin apply：The number of processed apply commands
-- Check split：The number of raftstore split checks
-- 99.99% Check split duration：The time consumed when running split checks (P99.99)
+- Check split：The number of raftstore split check commands
+- 99.99% Check split duration：The time consumed when running split check commands (P99.99)
 
 ![TiKV Dashboard - Raft admin metrics](/media/tikv-dashboard-raft-admin.png)
 
@@ -386,11 +386,11 @@ This document provides a detailed description of these key metrics.
 - Encrypt/decrypt data nanos：The histogram of time on encrypting/decrypting data ecch time
 - Read/write encryption meta duration：The time consumed for reading/writing encryption meta file
 
-## 面板常见参数的解释
+## Explanation of Common Parameters
 
-### gRPC 消息类型
+### gRPC Message Type
 
-1. 使用事务型接口的命令：
+1. Transactional API：
 
     - kv_get：The command of getting the latest version of data specified by ts
     - kv_scan：The command of scanning a continuous piece of data
@@ -408,7 +408,7 @@ This document provides a detailed description of these key metrics.
     - kv_gc：The command of GC
     - kv_delete_range：The command of deleting a continuous piece of data from TiKV
 
-2. 非事务型的裸命令：
+2. Raw API：
 
     - raw_get：The command of getting the value of key
     - raw_batch_get：The command of getting the value of batch keys
