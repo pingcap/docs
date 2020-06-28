@@ -407,8 +407,12 @@
       + [Use TiFlash](/tiflash/use-tiflash.md)
       + [FAQ](/tiflash/tiflash-faq.md)
   + TiUP
+    + [Documentation Guide](/tiup/tiup-documentation-guide.md)
     + [Overview](/tiup/tiup-overview.md)
-    + [Manage TiUP Components](/tiup/manage-tiup-component.md)
+    + [Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md)
+    + [Manage TiUP Components](/tiup/tiup-component-management.md)
+    + [FAQ](/tiup/tiup-faq.md)
+    + [Troubleshooting Guide](/tiup/tiup-troubleshooting-guide.md)
     + TiUP Components
       + [tiup-playground](/tiup/tiup-playground.md)
       + [tiup-cluster](/tiup/tiup-cluster.md)

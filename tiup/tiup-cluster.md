@@ -65,6 +65,10 @@ This command requires you to provide the cluster name, the TiDB cluster version,
 
 To write a topology file, refer to [the example](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml). The following file is an example of the simplest topology:
 
+> **Note:**
+>
+> The deployment and scale topology file used by the TiUP cluster component is written using [yaml](https://yaml.org/spec/1.2/spec.html) syntax, so make sure that the indentation is correct.
+
 ```yaml
 ---
 
