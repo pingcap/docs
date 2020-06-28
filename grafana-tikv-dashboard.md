@@ -116,7 +116,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 - Receive messages per server：The number of Raft messages received per second by each TiKV instance
 - Messages：The number of Raft messages sent per type per second
 - Vote：The number of Vote messages sent in Raft per second
-- Raft dropped messages：The number of dropped Raft messages per type
+- Raft dropped messages：The number of dropped Raft messages per type per second
 
 ![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
 
