@@ -13,11 +13,11 @@ aliases: ['/docs/dev/generated-columns/','/docs/dev/reference/sql/generated-colu
 
 This document introduces the concept and usage of generated columns.
 
-## Basic concepts of generated columns
+## Basic concepts of Generated columns
 
 Unlike general columns, the value of the generated column is calculated by the expression in the column definition. When inserting or updating a generated column, you cannot assign a value, you can only use `DEFAULT`.
 
-There are two kinds of generated columns: virtual and stored. A virtual generated column occupies no storage and is computed when it is read. A stored generated column is computed when it is written (inserted or updated) and occupies storage as if it were a normal column. Compared with the virtual generated columns, the stored generated columns perform better, but it takes up more disk space.
+There are two kinds of generated columns: virtual and stored. A virtual generated column occupies no storage and is computed when it is read. A stored generated column is computed when it is written (inserted or updated) and occupies storage. Compared with the virtual generated columns, the stored generated columns perform better, but it takes up more disk space.
 
 You can create an index on a generated column whether it is virtual or stored.
 
@@ -77,7 +77,7 @@ EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
 
 From the query execution plan, it can be seen that the index of city is used to read the `HANDLE` of the row that meets the condition `city ='Beijing'`, and then use this `HANDLE` to read the data of the row.
 
-If no data exists at path `$.city`, `JSON_EXTRACT` returns `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the generated virtual column as follows:
+If no data exists at path `$.city`, `JSON_EXTRACT` returns `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual generated  column as follows:
 
 {{< copyable "sql" >}}
 ```sql
@@ -99,7 +99,7 @@ mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Co
 ERROR 1048 (23000): Column 'city' cannot be null
 ```
 
-## Generated columns index replacement
+## Generated columns index replacement rule
 When an expression in a query is equivalent to a generated column with an index, TiDB replaces the expression with the corresponding generated column, so that the optimizer can take that index into account during execution plan construction.
 
 For example, the following example creates a generated column for the expression `a+1` and adds an index:
@@ -129,7 +129,7 @@ desc select a+1 from t where a+1=3;
 ```
 > **Note:**
 >
-> Only when the expression type to be replaced and the generated column type are strictly equal, the conversion will be performed.
+> Only when the expression type and the generated column type are strictly equal, the replacement will be performed.
 >
 > In the above example, the column type of `a` is int and the column type of `a+1` is bigint. If the type of the generated column is set to int, the replacement will not occur.
 >
