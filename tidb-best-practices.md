@@ -60,7 +60,7 @@ TiDB provides complete distributed transactions and the model has some optimizat
 
 ### Data sharding
 
-TiKV automatically shards bottom-layered data according to the Range of Key. Each Region is a range of Key, which is a left-closed and right-open interval, `[StartKey, EndKey)`. When the amount of Key-Value pairs in a Region exceeds a certain value, the Region automatically splits into two.
+TiKV automatically shards bottom-layered data according to the range of keys. Each Region is a range of keys, which is a left-closed and right-open interval, `[StartKey, EndKey)`. When the amount of Key-Value pairs in a Region exceeds a certain value, the Region automatically splits into two.
 
 ### Load balancing
 
@@ -110,7 +110,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
     - Columns of the index have already met the query requirement. Assume that the `c` column on the `t` table has an index and the query is `select c from t where c > 10;`. At this time, all needed data can be obtained if you access the index. This situation is called `Covering Index`. But if you focus more on the query performance, you can put into index a portion of columns that do not need to be filtered but need to be returned in the query result, creating composite index. Take `select c1, c2 from t where c1 > 10;` as an example. You can optimize this query by creating composite index `Index c12 (c1, c2)`.
 
-    - The primary key of the table is integer. In this case, TiDB uses the value of the primary key as row ID. Thus, if the query condition is on Primary Key, you can directly construct the range of the row ID, scan the table data, and get the result.
+    - The primary key of the table is integer. In this case, TiDB uses the value of the primary key as row ID. Thus, if the query condition is on the primary key, you can directly construct the range of the row ID, scan the table data, and get the result.
 
 * Query concurrency
 
@@ -156,7 +156,7 @@ As mentioned before, TiDB limits the size of a single transaction in the Key-Val
 
 > **Note:**
 >
-> When you set the size limit for transactions, you need to consider the overhead of TiDB encoding and the extra transaction Key. It is recommended that **the number of rows of each transaction is less than 200 and the data size of a single row is less than 100 KB**; otherwise, the performance is bad.
+> When you set the size limit for transactions, you need to consider the overhead of TiDB encoding and the extra transaction key. It is recommended that **the number of rows of each transaction is less than 200 and the data size of a single row is less than 100 KB**; otherwise, the performance is bad.
 
 It is recommended to split statements into batches or add a limit to the statements, whether they are `INSERT`, `UPDATE` or `DELETE` statements.
 
