@@ -26,10 +26,11 @@ You can use the `tiup list` command to query the component list. This usage of t
 - `tiup list`: checks which components can be installed.
 - `tiup list ${component}`: checks which versions of a specific component can be installed.
 
-You can also use the following two flags in the above commands:
+You can also use the following flags in the above commands:
 
 - `--installed`: checks which components or which version of a specific component has been installed locally.
-- `--refresh`: gets the latest list of components on the server and the version list of each component.
+-`--all`: View all components, including the hidden ones
+-`--verbose`: View all columns (including installed versions and supported platforms)
 
 Example 1: View all currently installed components.
 
