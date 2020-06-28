@@ -57,10 +57,10 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [JSON_LENGTH(json_doc[, path])][json_length] | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
 | [JSON_TYPE(json_val)][json_type] | Returns a string indicating the type of a JSON value |
 | [JSON_VALID(json_val)][json_valid] | Returns 0 or 1 to indicate whether a value is valid JSON |
+
 ## Unsupported functions
 
 The following JSON functions are unsupported in TiDB. You can track the progress in adding them in [TiDB #7546](https://github.com/pingcap/tidb/issues/7546):
-
 
 * `JSON_MERGE_PATCH`
 * `JSON_PRETTY`
