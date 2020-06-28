@@ -2,7 +2,7 @@
 title: Introduction to Statistics
 summary: Learn how the statistics collect table-level and column-level information.
 category: reference
-aliases: ['/docs/dev/reference/performance/statistics/']
+aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 ---
 
 # Introduction to Statistics
@@ -161,15 +161,13 @@ You can view the statistics status using the following statements.
 
 You can use the `SHOW STATS_META` statement to view the total number of rows and the number of updated rows.
 
-Syntax as follows:
+The syntax of `ShowLikeOrWhereOpt` is as follows:
 
 {{< copyable "sql" >}}
 
 ```sql
 SHOW STATS_META [ShowLikeOrWhere]
 ```
-
-This statement returns the total number of all the rows in all the tables and the number of updated rows. You can use `ShowLikeOrWhere` to filter the information you need.
 
 Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
@@ -313,3 +311,7 @@ LOAD STATS 'file_name'
 ```
 
 `file_name` is the file name of the statistics to be imported.
+
+## See also
+
+* [DROP STATS](/sql-statements/sql-statement-drop-stats.md)

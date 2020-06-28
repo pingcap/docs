@@ -2,7 +2,7 @@
 title: EXPLAIN | TiDB SQL Statement Reference
 summary: An overview of the usage of EXPLAIN for the TiDB database.
 category: reference
-aliases: ['/docs/dev/reference/sql/statements/explain/']
+aliases: ['/docs/dev/sql-statements/sql-statement-explain/','/docs/dev/reference/sql/statements/explain/']
 ---
 
 # EXPLAIN
@@ -92,7 +92,7 @@ mysql> EXPLAIN DELETE FROM t1 WHERE c1=3;
 3 rows in set (0.00 sec)
 ```
 
-If you do not specify the `FORMAT`, or specify `FORMAT = "row"`, `EXPLAIN` statement will output the results in a tabular format. See [Understand the Query Execution Plan](https://pingcap.com/docs/dev/reference/performance/understanding-the-query-execution-plan/) for more information.
+If you do not specify the `FORMAT`, or specify `FORMAT = "row"`, `EXPLAIN` statement will output the results in a tabular format. See [Understand the Query Execution Plan](/query-execution-plan.md) for more information.
 
 In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
 

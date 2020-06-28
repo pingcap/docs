@@ -2,9 +2,14 @@
 title: TiDB Dashboard Introduction
 summary: Introduce TiDB Dashboard.
 category: how-to
+aliases: ['/docs/dev/dashboard/dashboard-intro/']
 ---
 
 # TiDB Dashboard Introduction
+
+> **Warning:**
+>
+> TiDB Dashboard is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster, which is available since v4.0. It is built into the PD component and does not require an independent deployment.
 

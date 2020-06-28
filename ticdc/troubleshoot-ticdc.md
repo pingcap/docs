@@ -1,10 +1,11 @@
 ---
-title: Handle TiCDC Issues
-summary: Learn how to handle TiCDC issues.
+title: Troubleshoot TiCDC
+summary: Learn how to troubleshoot issues you might encounter when you use TiCDC.
 category: reference
+aliases: ['/docs/dev/ticdc/troubleshoot-ticdc/']
 ---
 
-# Handle TiCDC Issues
+# Troubleshoot TiCDC
 
 This document introduces the common issues and errors that you might encounter when using TiCDC, and the corresponding maintenance and troubleshooting methods.
 

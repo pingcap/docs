@@ -2,7 +2,7 @@
 title: Key Metrics
 summary: Learn some key metrics displayed on the Grafana Overview dashboard.
 category: reference
-aliases: ['/docs/dev/reference/key-monitoring-metrics/overview-dashboard/']
+aliases: ['/docs/dev/grafana-overview-dashboard/','/docs/dev/reference/key-monitoring-metrics/overview-dashboard/']
 ---
 
 # Key Metrics
@@ -75,4 +75,4 @@ System Info | IO Util | the disk usage ratio, 100% at a maximum; generally you n
 
 ## Interface of the Overview dashboard
 
-![Overview Dashboard](/media/overview.png)
+![overview](/media/grafana-monitor-overview.png)

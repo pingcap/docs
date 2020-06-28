@@ -2,7 +2,7 @@
 title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
 category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-indexes/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-indexes/','/docs/dev/reference/sql/statements/show-indexes/']
 ---
 
 # SHOW INDEXES [FROM|IN]
@@ -11,13 +11,9 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table.  
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowIndexStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowIndexStmt](/media/sqlgram/ShowIndexStmt.png)
 
 **ShowIndexKwd:**
 
@@ -30,6 +26,10 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table.  
 **TableName:**
 
 ![TableName](/media/sqlgram/TableName.png)
+
+**ShowLikeOrWhereOpt:**
+
+![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 ## Examples
 
