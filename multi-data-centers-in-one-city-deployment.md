@@ -1,8 +1,8 @@
 ---
-title: Deployment Solution for Multiple Data Centers in One City
-summary: Learn the deployment solution for multi-data centers in one city.
+title: Multiple Data Centers in One City Deployment
+summary: Learn the deployment solution to multi-data centers in one city.
 category: how-to
-aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/geo-redundancy-deployment/']
+aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/geo-redundancy-deployment/','/tidb/dev/geo-redundancy-deployment']
 ---
 
 # Deployment Solution for Multiple Data Centers in One City
@@ -39,7 +39,7 @@ TiDB, TiKV and PD are distributed among three DCs, which is the most common depl
 
 - All replicas are distributed among three DCs, with high availability and disaster recovery capability.
 - No data will be lost if one DC is down (RPO = 0).
-- Even if one DC is down, the other two DCs will initiate leader election and automatically resume services within a reasonable amount of time (within 20 seconds (s) in most cases) and no data is lost (RTO <= 20s). See the following diagram for more information:
+- Even if one DC is down, the other two DCs will initiate leader election and automatically resume services within a reasonable amount of time (within 20 seconds in most cases) and no data is lost (RTO <= 20s). See the following diagram for more information:
 
 ![Disaster Recovery for 3-DC Deployment](/media/deploy-3dc-dr.png)
 
@@ -91,7 +91,7 @@ The following example assumes that three DCs (IDC1, IDC2, and IDC3) are located 
 
 TiKV is a multi-Raft system where data is divided into Regions and each Region is 96 MB by default. Three replicas of each Region form a Raft group. For a TiDB cluster of three replicas, because the number of Region replicas is independent of the TiKV instance numbers, three replicas of a Region are only scheduled to three TiKV instances. This means that even if the cluster is scaled out to have N TiKV instances, it is still a cluster of three replicas.
 
-Because a Raft group of three replicas tolerates failure of only one replica, even if the cluster is scaled out to have N TiKV instances, this cluster still tolerates failure of only one replica. Two failed TiKV instances might cause some Regions to lose replicas and the data in this cluster is no longer complete. SQL requests that access data from these Regions will fail. The probability of two simultaneous failures among N TiKV instances is much higher than the probability of two simultaneous failures among 3 TiKV instances. This means that the more TiKV instances the multi-Raft system is scaled out to have, the less the availability of the system.
+Because a Raft group of three replicas tolerates only one replica failure, even if the cluster is scaled out to have N TiKV instances, this cluster still tolerates only one replica failure. Two failed TiKV instances might cause some Regions to lose replicas and the data in this cluster is no longer complete. SQL requests that access data from these Regions will fail. The probability of two simultaneous failures among N TiKV instances is much higher than the probability of two simultaneous failures among three TiKV instances. This means that the more TiKV instances the multi-Raft system is scaled out to have, the less the availability of the system.
 
 Because of the limitation described above, `label` is used to describe the location information of TiKV. The label information is refreshed to the TiKV startup configuration file with deployment or rolling upgrade operations. The started TiKV reports its latest label information to PD. Based on the user-registered label name (the label metadata) and the TiKV topology, PD optimally schedules Region replicas and improves the system availability.
 
@@ -123,7 +123,7 @@ location_labels = ["zone","dc","rack","host"]
 
 In the example above, `zone` is the logical availability zone level and used to control the isolation of replicas (currently three replicas are in the cluster).
 
-Considering that the DC might be scaled out in the future, the three-layer label structure (`dc`, `rack`, `host`) is not directly adopted. Assume that `d2`, `d3`, and `d4` are to be scaled out, you only need to scale out the DCs in the corresponding availability zone and scale out the racks in the corresponding DC.
+Considering that the DC might be scaled out in the future, the three-layer label structure (`dc`, `rack`, `host`) is not directly adopted. Assuming that `d2`, `d3`, and `d4` are to be scaled out, you only need to scale out the DCs in the corresponding availability zone and scale out the racks in the corresponding DC.
 
 If this three-layer label structure is directly adopted, after scaling out a DC, you might need to use a new label and data in TiKV as a whole needs to be rebalanced.
 
