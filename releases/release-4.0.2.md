@@ -51,6 +51,7 @@ TiDB version: 4.0.2
     - Set a suitable default store limit of the TiFlash stores [#2559](https://github.com/pingcap/pd/pull/2559)
 
 + TiFlash
+
     - Support new aggregation function `APPROX_COUNT_DISTINCT` in Coprocessor
     - Enable rough set filter feature by default
     - Enable TiFlash running on ARM architecture
