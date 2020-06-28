@@ -93,7 +93,7 @@ Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has t
 - `tidb-ctl schema`
 - `tidb-ctl table`
 
-### The `schema` connand.
+### The `schema` connand
 
 #### The `in` subcommand
 
@@ -161,8 +161,8 @@ For example, the table id of `mysql.stat_meta` is 21, you can use `tidb-ctl sche
   ...
 }
 ``` 
-Like the `in` subcommand, if you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure. 
 
+Like the `in` subcommand, if you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure.
 
 #### The `base64decode` subcommand
 
