@@ -9,9 +9,17 @@ aliases: ['/docs/dev/tidb-control/','/docs/dev/reference/tools/tidb-control/']
 
 TiDB Control is a command line tool of TiDB, usually used to obtain the status information of TiDB for debugging.
 
-## Compile from source code
+## Get TiDB Control
 
-- Compilation environment requirement: [Go](https://golang.org/) Version 1.7 or later
+This section describes tow method to get TiDB Control.
+
+### Install TiDB Control by TiUP
+
+After installing TiUP, you can use `tiup ctl tidb` command to get and execute TiDB Control.
+
+### Compile from source code
+
+- Compilation environment requirement: [Go](https://golang.org/) Version 1.13 or later
 - Compilation procedures: Go to the root directory of the [TiDB Control project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
 - Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
 
@@ -32,15 +40,33 @@ Usage example: `tidb-ctl schema in mysql -n db`
 - `-n`: the option
 - `db`: the flag of `-n`
 
+Currently, TiDB Control contains following commands:
+
+- `tidb-ctl base64decode`: BASE64 decode
+- `tidb-ctl decoder`: for KEY decode
+- `tidb-ctl etcd`: for operating etcd
+- `tidb-ctl log`: format the log file to expand the single-line stack information
+- `tidb-ctl mvcc`: MVCC information
+- `tidb-ctl region`: Region information
+- `tidb-ctl schema`: Schema information
+- `tidb-ctl table`: Table information
+
 ### Get help
 
 Use `tidb-ctl -h/--help` to get usage information.
 
 TiDB Control consists of multiple layers of commands. You can use `-h/--help` after each command/subcommand to get its respective usage information.
 
-### Connect
+The following example shows how to obtain the schema information:
 
-`tidb-ctl` has 4 connection related options:
+Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has two subcommands: `in` and `tid`.
+
+- `in` is used to obtain the table schema of all tables in the database through the database name.
+- `tid` is used to obtain the table schema by using the unique `table_id` in the whole database.
+
+### Global options
+
+`tidb-ctl` has 7 connection related global options:
 
 - `--host`: TiDB Service address (default 127.0.0.1)
 - `--port`: TiDB Service port (default 10080)
@@ -58,31 +84,20 @@ TiDB Control consists of multiple layers of commands. You can use `-h/--help` af
 
 **Connection options are global options that apply to all the following commands:**
 
-- `tidb-ctl base64decode`: BASE64 decode
-- `tidb-ctl decoder`: for KEY decode
-- `tidb-ctl etcd`: for operating etcd
-- `tidb-ctl log`: format the log file to expand the single-line stack information
-- `tidb-ctl mvcc`: MVCC information
-- `tidb-ctl region`: Region information
-- `tidb-ctl schema`: Schema information
-- `tidb-ctl table`: Table information
+- `tidb-ctl base64decode`
+- `tidb-ctl decoder`
+- `tidb-ctl etcd`
+- `tidb-ctl log`
+- `tidb-ctl mvcc`
+- `tidb-ctl region`
+- `tidb-ctl schema`
+- `tidb-ctl table`
 
-For details about how to use the above `tidb-ctl` commands, use `tidb-ctl SUBCOMMAND --help` to get the help information.
+### The `schema` connand.
 
-### Usage examples
+#### The `in` subcommand
 
-The following example shows how to obtain the schema information:
-
-Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has two subcommands: `in` and `tid`.
-
-- `in` is used to obtain the table schema of all tables in the database through the database name.
-- `tid` is used to obtain the table schema by using the unique `table_id` in the whole database.
-
-#### The `in` command
-
-You can use `tidb-ctl schema in -h/--help` to get the help information of the `in` subcommand.
-
-##### Basic usage
+The `in` subcommand is used to get table information from target database.
 
 ```bash
 tidb-ctl schema in <database name>
@@ -127,6 +142,28 @@ The result is displayed in the JSON format. (The above output is truncated.)
     (The above output is also truncated.)
 
     If you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure. For example, `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`.
+
+#### The `tid` subcommand
+
+The `tid` subcommand is used to get table information and structure by table id.
+
+For example, the table id of `mysql.stat_meta` is 21, you can use `tidb-ctl schema tid -i 21` to obtain the detail of `mysql.stat_meta`.
+
+
+```json
+{
+ "id": 21,
+ "name": {
+  "O": "stats_meta",
+  "L": "stats_meta"
+ },
+ "charset": "utf8mb4",
+ "collate": "utf8mb4_bin",
+  ...
+}
+``` 
+Like the `in` subcommand, if you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure. 
+
 
 #### The `base64decode` subcommand
 
