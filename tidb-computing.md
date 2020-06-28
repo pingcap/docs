@@ -131,7 +131,7 @@ For example, `select count(*) from user where name = "TiDB"` such a SQL statemen
 3. filter data: for each row of data read, calculate `name = "TiDB"` expression. Returns up this line if true, otherwise discards this line of data.
 4. calculate `Count(*)`: for each line that meets the requirements, accumulate to the result of `Count(*)`.
 
-** The entire process is illustrated as follows:**
+**The entire process is illustrated as follows:**
 
 ![naive sql flow](/media/tidb-computing-native-sql-flow.jpeg)
 
