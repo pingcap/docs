@@ -12,7 +12,7 @@ For the computation layer dependent storage schemes, this article only introduce
 
 ## Mapping of table data to Key-Value
 
-This section describes the scheme for mapping data to (Key, Value) key-value pairs in TiDB. Data here consists of the following two main aspects.
+This section describes the scheme for mapping data to (Key, Value) key-value pairs in TiDB. Data here consists of the following two main aspects:
 
 - Data for each row in the table, hereinafter referred to as table data.
 - Data for all indexes in the table, hereinafter referred to as index data.
@@ -55,7 +55,7 @@ Value: null
 
 ### Summary of mapping relationships
 
-`tablePrefix`, `recordPrefixSep`, and `indexPrefixSep` in all of the above encoding rules are string constants that are used to distinguish between other Data in Key space, defined as follows:
+`tablePrefix`, `recordPrefixSep`, and `indexPrefixSep` in all of the above encoding rules are string constants that are used to distinguish between other data in Key space, defined as follows:
 
 ```
 tablePrefix     = []byte{'t'}
@@ -69,7 +69,7 @@ Also note that in the above schemes, regardless of table data or index data key 
 
 Finally, a simple example is used to understand the Key-Value mapping relationship of TiDB. Suppose the following table exists in TiDB.
 
-``sql
+```sql
 CREATE TABLE User {
      ID int,
      Name varchar(20),
@@ -138,7 +138,7 @@ For example, `select count(*) from user where name = "TiDB"` such a SQL statemen
 This solution is intuitive and feasible, but has some obvious problems in a distributed database scenario.
 
 - As the data is being scanned, each row is read out of TiKV via a KV operation at least once RPC overhead, which can be very high if there is a lot of data to scan.
-- Not all rows meet the filter criteria `name = "TiDB"`. If the conditions are not met, you can not read them out.
+- Not all rows meet the filter criteria `name = "TiDB"`. If the conditions are not met, they are unnessary to be read out.
 - The value of the rows that meet the requirements doesn't mean anything, in fact, all needed here is the information of how many rows of data.
 
 ### Distributed SQL operations
