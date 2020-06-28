@@ -15,7 +15,7 @@ You can either use TiDB to read TiFlash replicas for medium-scale analytical pro
 
 > **Note:**
 >
-> If you [use TiDB to read TiFlash replicas](#use-tidb-to-read-tiflash-replicas) in a transaction that contains any write operation (for example, `SELECT ... FOR UPDATE` followed by `UPDATE ...`), currently the behavior is undefined, this restriction will be removed in later versions.
+> If you [use TiDB to read TiFlash replicas](#use-tidb-to-read-tiflash-replicas) in a transaction that contains any write operation (for example, `SELECT ... FOR UPDATE` followed by `UPDATE ...`), currently the behavior is undefined. This restriction will be removed in later versions.
 
 ## Create TiFlash replicas for tables
 
@@ -160,7 +160,7 @@ The final engine configuration is the session-level configuration, that is, the 
 >
 > Because TiDB Dashboard and other components need to read some system tables stored in the TiDB memory table area, it is recommended to always add the "tidb" engine to the instance-level engine configuration.
 
-If the queried table does not have a replica of the specified engine, for example, the engine is configured as "tiflash" but the table does not have a TiFlash replica, the query returns an error.
+If the queried table does not have a replica of the specified engine (for example, the engine is configured as "tiflash" but the table does not have a TiFlash replica), the query returns an error.
 
 ### Manual hint
 
@@ -188,7 +188,7 @@ If the table specified by a hint does not have a replica of the specified engine
 >
 > The MySQL client of 5.7.7 or earlier versions clears optimizer hints by default. To use the hint syntax in these early versions, start the client with the `--comments` option, for example, `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
 
-### The relationship of the three ways
+### The relationship of smart selection, engine isolation, and manual hint
 
 In the above three ways of reading TiFlash replicas, engine isolation specifies the overall range of available replicas of engines; within this range, manual hint provides statement-level and table-level engine selection that is more fine-grained; finally, CBO makes the decision and selects a replica of an engine based on cost estimation within the specified engine list.
 
