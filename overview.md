@@ -11,7 +11,7 @@ aliases: ['/docs/dev/overview/']
 
 TiDB can be deployed on-premise or in-cloud. The following deployment options are officially supported by PingCAP:
 
-- [TiUP Deployment](/production-deployment-using-tiup.md): This guide describes how to deploy TiDB using [TiUP](https://github.com/pingcap-incubator/tiup). It is strongly recommended for production deployment.
+- [TiUP Deployment](/production-deployment-using-tiup.md): This guide describes how to deploy TiDB using [TiUP](https://github.com/pingcap/tiup). It is strongly recommended for production deployment.
 - [Docker Deployment](/test-deployment-using-docker.md): This guide describes how to deploy TiDB using Docker.
 - [Docker Compose Deployment](/deploy-test-cluster-using-docker-compose.md): This guide describes how to deploy TiDB using Docker compose. You can follow this guide to quickly deploy a TiDB cluster for testing and development on your local drive.
 - Kubernetes Deployment:
