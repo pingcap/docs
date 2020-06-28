@@ -19,6 +19,7 @@ TiDB version: 4.0.2
     - Change diagnostic rule `current-load` to `node-check` [#17660](https://github.com/pingcap/tidb/pull/17660)
 
 + PD
+
     - Improve the way to set store limit by removing `store-balance-rate` [#2557](https://github.com/pingcap/pd/pull/2557)
 
 ## New Features
