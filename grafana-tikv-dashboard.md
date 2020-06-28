@@ -61,8 +61,8 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## gRPC
 
-- gRPC message count: The number of gRPC messages per type
-- gRPC message failed：The number of failed gRPC messages
+- gRPC message count: The rate of gRPC messages per type
+- gRPC message failed：The rate of failed gRPC messages
 - 99% gRPC message duration: The gRPC message duration per message type (P99)
 - Average gRPC message duration: The average execution time of gRPC messages
 - gRPC batch size：The batch size of gRPC messages between TiDB and TiKV
@@ -70,24 +70,24 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Thread CPU
 
-- Raft store CPU：The CPU utilization of the raftstore thread. The CPU usage should be less than 80% * `raftstore.store-pool-size` in normal case.
+- Raft store CPU：The CPU utilization of the `raftstore` thread. The CPU usage should be less than 80% * `raftstore.store-pool-size` in normal case.
 - Async apply CPU：The CPU utilization of the `async apply` thread. The CPU usage should be less than 90% * `raftstore.apply-pool-size` in normal cases.
 - Scheduler worker CPU：The CPU utilization of the `scheduler worker` thread. The CPU usage should be less than 90% * `storage.scheduler-worker-pool-size` in normal cases.
 - gRPC poll CPU：The CPU utilization of the `gRPC` thread. The CPU usage should be less than 80% * `server.grpc-concurrency` in normal cases.
-- Unified read pool CPU：The CPU utilization of unified read pool
-- Storage ReadPool CPU：The CPU utilization of readpool
-- Coprocessor CPU：The CPU utilization of coprocessor
-- RocksDB CPU：The CPU utilization of RocksDB
-- Split check CPU：The CPU utilization of split check
-- GC worker CPU：The CPU utilization of GC worker 
-- Snapshot worker CPU：The CPU utilization of snapshot worker
+- Unified read pool CPU：The CPU utilization of `unified read pool` thread
+- Storage ReadPool CPU：The CPU utilization of `storage read pool` thread
+- Coprocessor CPU：The CPU utilization of `coprocessor` thread
+- RocksDB CPU：The CPU utilization of RocksDB thread
+- Split check CPU：The CPU utilization of `split check` thread
+- GC worker CPU：The CPU utilization of `GC worker` thread 
+- Snapshot worker CPU：The CPU utilization of `snapshot worker` thread
 
 ## PD
 
-- PD requests：The count of requests that TiKV sends to PD
+- PD requests：The rate of requests that TiKV sends to PD
 - PD request duration (average)：The average time consumed by requests that TiKV sends to PD
-- PD heartbeats：The total number of PD heartbeat messages
-- PD validate peers：The total number of peers validated by the PD worker
+- PD heartbeats：The rate of heartbeat messages sended from TiKV to PD
+- PD validate peers：The rate of messages that sended from TiKV to PD to validate peer
 
 ## Raft IO
 
@@ -105,15 +105,15 @@ This document provides a detailed description of these key metrics on the **TiKV
 - Ready handled：The count of handled ready operations per second
 - 0.99 Duration of Raft store events：The time consumed by raftstore events (P99)
 - Process ready duration：The time consumed for processes to be ready in Raft
-- Process ready duration per server：The time consumed for peer processes to be ready in Raft. It should be less than 2 seconds (P99.99).
+- Process ready duration per server：The time consumed for peer processes to be ready in Raft per TiKV instance. It should be less than 2 seconds (P99.99).
 
 ![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
 ## Raft message
 
-- Sent messages per server：The number of Raft messages sent per second by each TiKV instance
-- Flush messages per server：The number of Raft messages flushed per second by the Raft client in each TiKV instance
-- Receive messages per server：The number of Raft messages received per second by each TiKV instance
+- Sent messages per server：The number of Raft messages sent by each TiKV instance per second
+- Flush messages per server：The number of Raft messages flushed by the Raft client in each TiKV instance per second
+- Receive messages per server：The number of Raft messages received by each TiKV instance per second
 - Messages：The number of Raft messages sent per type per second
 - Vote：The number of Vote messages sent in Raft per second
 - Raft dropped messages：The number of dropped Raft messages per type per second
@@ -123,9 +123,9 @@ This document provides a detailed description of these key metrics on the **TiKV
 ## Raft propose
 
 - Raft apply proposals per ready：The histogram of the number of proposals that each ready operation containes in a batch while applying proposal.
-- Raft read/write proposals：The number of proposals per type
-- Raft read proposals per server：The number of read proposals made by each TiKV instance
-- Raft write proposals per server：The number of write proposals made by each TiKV instance
+- Raft read/write proposals：The number of proposals per type per second
+- Raft read proposals per server：The number of read proposals made by each TiKV instance per second
+- Raft write proposals per server：The number of write proposals made by each TiKV instance per second
 - Propose wait duration：The histogram of wait time of each proposal
 - Propose wait duration per server：The histogram of wait time of each proposal per TiKV instance
 - Apply wait duration：The histogram of apply time of each proposal
@@ -136,9 +136,9 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Raft admin
 
-- Admin proposals：The number of admin proposals
-- Admin apply：The number of processed apply commands
-- Check split：The number of raftstore split check commands
+- Admin proposals：The number of admin proposals per second
+- Admin apply：The number of processed apply commands per second
+- Check split：The number of raftstore split check commands per second
 - 99.99% Check split duration：The time consumed when running split check commands (P99.99)
 
 ![TiKV Dashboard - Raft admin metrics](/media/tikv-dashboard-raft-admin.png)
@@ -157,8 +157,8 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Storage
 
-- Storage command total：The total number of received commands per type
-- Storage async request error：The total number of engine asynchronous request errors
+- Storage command total：The number of received command by type per second
+- Storage async request error：The number of engine asynchronous request errors per second
 - Storage async snapshot duration：The time consumed by processing asynchronous snapshot requests. It should be less than `1s` in `.99`.
 - Storage async write duration：The time consumed by processing asynchronous write requests. It should be less than `1s` in `.99`.
 
@@ -166,7 +166,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Scheduler
 
-- Scheduler stage total：The total number of commands at each stage. There should not be lots of errors in a short time.
+- Scheduler stage total：The number of commands at each stage per second. There should not be lots of errors in a short time.
 - Scheduler writing bytes：The total bytes of writing bytes per TiKV instance
 - Scheduler priority commands：The count of different priority commands
 - Scheduler pending commands：The count of pending commands per TiKV instance
@@ -175,7 +175,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Scheduler - commit
 
-- Scheduler stage total：The total number of commands at each stage when executing the commit command. There should not be lots of errors in a short time.
+- Scheduler stage total：The number of commands at each stage per second when executing the commit command. There should not be lots of errors in a short time.
 - Scheduler command duration：The time consumed when executing the commit command. It should be less than `1s`.
 - Scheduler latch wait duration：The wait time caused by latch when executing the commit command. It should be less than `1s`.
 - Scheduler keys read：The count of keys read by a commit command
@@ -189,7 +189,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Scheduler - pessimistic_rollback
 
-- Scheduler stage total：The total number of commands at each stage when executing the pessimistic_rollback command. There should not be lots of errors in a short time.
+- Scheduler stage total：The number of commands at each stage per second when executing the pessimistic_rollback command. There should not be lots of errors in a short time.
 - Scheduler command duration：The time consumed when executing the pessimistic_rollback command. It should be less than `1s`.
 - Scheduler latch wait duration：The wait time caused by latch when executing the pessimistic_rollback command. It should be less than `1s`.
 - Scheduler keys read：The count of keys read by a pessimistic_rollback command
@@ -201,7 +201,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Scheduler - prewrite
 
-- Scheduler stage total：The total number of commands at each stage when executing the prewrite command. There should not be lots of errors in a short time.
+- Scheduler stage total：The number of commands at each stage per second when executing the prewrite command. There should not be lots of errors in a short time.
 - Scheduler command duration：The time consumed when executing the prewrite command. It should be less than `1s`.
 - Scheduler latch wait duration：The wait time caused by latch when executing the prewrite command. It should be less than `1s`.
 - Scheduler keys read：The count of keys read by a prewrite command
@@ -213,7 +213,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Scheduler - rollback
 
-- Scheduler stage total：The total number of commands at each stage when executing the rollback command. There should not be lots of errors in a short time.
+- Scheduler stage total：The number of commands at each stage per second when executing the rollback command. There should not be lots of errors in a short time.
 - Scheduler command duration：The time consumed when executing the rollback command. It should be less than `1s`.
 - Scheduler latch wait duration：The wait time caused by latch when executing the rollback command. It should be less than `1s`.
 - Scheduler keys read：The count of keys read by a rollback command
@@ -236,7 +236,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 - TiKV AutoGC Working：The status of Auto GC 
 - ResolveLocks Progress：The progress of the first phase of GC(ResolveLocks)
 - TiKV Auto GC Progress：The progress of the second phase of GC
-- TiKV Auto GC SafePoint：TiKV GC safr point value, safe point is the current GC timestamp
+- TiKV Auto GC SafePoint：TiKV GC safe point value, safe point is the current GC timestamp
 - GC lifetime：The lifetime of TiDB GC
 - GC interval：The interval of TiDB GC
 
@@ -250,19 +250,19 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Task
 
-- Worker handled tasks：The number of tasks handled by worker
-- Worker pending tasks：Current number of pending and running tasks of worker. It should be less than `1000` in normal case.
-- FuturePool handled tasks：The number of tasks handled by future_pool
-- FuturePool pending tasks：Current number of pending and running tasks of future_pool
+- Worker handled tasks：The number of tasks handled by worker persecond
+- Worker pending tasks：Current number of pending and running tasks of worker per second. It should be less than `1000` in normal case.
+- FuturePool handled tasks：The number of tasks handled by future_pool per second
+- FuturePool pending tasks：Current number of pending and running tasks of future_pool per second
 
 ## Coprocessor Overview
 
-- Request duration：The time consumed to handle coprocessor read requests
-- Total Requests：The number of total coprocessor request
+- Request duration：The total time spent from receiving the coprocessor request to the end of processing
+- Total Requests：The number of requests by type per second
 - Handle duration：The histogram of time spent actually processing coprocessor requests per minute
-- Total Request Errors：The total number of the coprocessor request errors
-- Total KV Cursor Operations：The total number of the KV cursor operations, such as select, index, analyze_table, analyze_index, checksum_table, checksum_index, and so on.
-- KV Cursor Operations：The histogram of KV cursor operations
+- Total Request Errors：The number of request error of Coprocessor.  There should not be lots of errors in a short time.
+- Total KV Cursor Operations：The total number of the KV cursor operations by type per second, such as select, index, analyze_table, analyze_index, checksum_table, checksum_index, and so on.
+- KV Cursor Operations：The histogram of KV cursor operations by type per second
 - Total RocksDB Perf Statistics：The performance statistics of RocksDB
 - Total Response Size：The total size of coprocessor response
 
@@ -272,12 +272,12 @@ This document provides a detailed description of these key metrics on the **TiKV
 - 95% Handle duration by store：The time consumed to handle coprocessor requests per TiKV instance (P95)
 - Wait duration：The time consumed when coprocessor requests are waiting to be handled. It should be less than `10s`(P99.99).
 - 95% Wait duration by store：The time consumed when coprocessor requests are waiting to be handled per TiKV instance (P95)
-- Total DAG Requests：The total number of DAG requests
-- Total DAG Executors：The total number of DAG executors
-- Total Ops Details (Table Scan)：The total number of RocksDB internal operations when executing select scan
-- Total Ops Details (Index Scan)：The total number of RocksDB internal operations when executing index scan
-- Total Ops Details by CF (Table Scan)：The select scan details for each CF
-- Total Ops Details by CF (Index Scan)：The index scan details for each CF
+- Total DAG Requests：The number of DAG requests per second
+- Total DAG Executors：The number of DAG executors per second
+- Total Ops Details (Table Scan)：The number of RocksDB internal operations per second when executing select scan in coprocessor
+- Total Ops Details (Index Scan)：The number of RocksDB internal operations per second when executing index scan in coprocessor
+- Total Ops Details by CF (Table Scan)：The number of RocksDB internal operations for each CF per second when executing select scan in coprocessor
+- Total Ops Details by CF (Index Scan)：The number of RocksDB internal operations for each CF per second when executing index scan in coprocessor
 
 ## Threads
 
@@ -288,16 +288,16 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## RocksDB - kv/raft
 
-- Get operations：The count of get operations
+- Get operations：The count of get operations per second
 - Get duration：The time consumed when executing get operations
-- Seek operations：The count of seek operations
+- Seek operations：The count of seek operations per second
 - Seek duration：The time consumed when executing seek operations
-- Write operations：The count of write operations
+- Write operations：The count of write operations per second
 - Write duration：The time consumed when executing write operations
-- WAL sync operations：The count of WAL sync operations
+- WAL sync operations：The count of WAL sync operations per second
 - Write WAL duration：The time consumed for writing WAL
 - WAL sync duration：The time consumed when executing WAL sync operations
-- Compaction operationsThe count of compaction and flush operations
+- Compaction operationsThe count of compaction and flush operations per second
 - Compaction duration：The time consumed when executing the compaction and flush operations
 - SST read duration：The time consumed when reading SST files
 - Write stall duration：Write stall duration. It should be `0` in normal case.
