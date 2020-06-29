@@ -2,10 +2,14 @@
 title: User-Defined Variables
 summary: Learn how to use user-defined variables.
 category: reference
-aliases: ['/docs/dev/reference/sql/language-structure/user-defined-variables/']
+aliases: ['/docs/dev/user-defined-variables/','/docs/dev/reference/sql/language-structure/user-defined-variables/']
 ---
 
 # User-Defined Variables
+
+> **Warning:**
+>
+> User-defined variables are still an experimental feature. It is **NOT** recommended that you use them in the production environment.
 
 The format of the user-defined variables is `@var_name`. `@var_name` consists of alphanumeric characters, `_`, and `$`. The user-defined variables are case-insensitive.
 
