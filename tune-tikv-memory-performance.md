@@ -1,8 +1,8 @@
 ---
 title: Tune TiKV Memory Parameter Performance
 summary: Learn how to tune the TiKV parameters for optimal performance.
-category: tuning
-aliases: ['/docs/dev/reference/performance/tune-tikv/','/docs/dev/tune-tikv-performance/']
+category: reference
+aliases: ['/docs/dev/tune-tikv-performance/','/docs/dev/reference/performance/tune-tikv/']
 ---
 
 # Tune TiKV Memory Parameter Performance
@@ -33,7 +33,7 @@ Each CF also has a separate `write buffer`. You can configure the size by settin
 ## Parameter specification
 
 ```
-# Log level: trace, debug, info, warn, error, off.
+# Log level: trace, debug, warn, error, info, off.
 log-level = "info"
 
 [server]

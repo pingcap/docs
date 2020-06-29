@@ -54,12 +54,12 @@
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
-    + [Use TiDB Operator](https://pingcap.com/docs/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster/)
+    + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
     + [Use TiDB Ansible](/upgrade-tidb-using-ansible.md)
   + Scale
     + [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     + [Use TiDB Ansible](/scale-tidb-using-ansible.md)
-    + [Use TiDB Operator](https://pingcap.com/docs/tidb-in-kubernetes/stable/scale-a-tidb-cluster/)
+    + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
     + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
     + [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
@@ -110,6 +110,7 @@
 + Tutorials
   + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
   + Best Practices
+    + [Use TiDB](/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
     + [Use HAProxy](/best-practices/haproxy-best-practices.md)
     + [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
@@ -392,6 +393,7 @@
   + Command Line Flags
     + [tidb-server](/command-line-flags-for-tidb-configuration.md)
     + [tikv-server](/command-line-flags-for-tikv-configuration.md)
+    + [tiflash-server](/tiflash/tiflash-command-line-flags.md)
     + [pd-server](/command-line-flags-for-pd-configuration.md)
   + Configuration File Parameters
     + [tidb-server](/tidb-configuration-file.md)

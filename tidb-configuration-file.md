@@ -2,7 +2,7 @@
 title: TiDB Configuration File
 summary: Learn the TiDB configuration file options that are not involved in command line options.
 category: deployment
-aliases: ['/docs/dev/reference/configuration/tidb-server/configuration-file/']
+aliases: ['/docs/dev/tidb-configuration-file/','/docs/dev/reference/configuration/tidb-server/configuration-file/']
 ---
 
 <!-- markdownlint-disable MD001 -->
@@ -352,6 +352,10 @@ Configuration items related to performance.
 ## prepared-plan-cache
 
 The Plan Cache configuration of the `PREPARE` statement.
+
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 ### `enabled`
 
