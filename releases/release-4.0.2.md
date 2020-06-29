@@ -147,7 +147,7 @@ TiDB version: 4.0.2
     - Check the correctness of the `pd-server.dashboard-address` configuration item [#2517](https://github.com/pingcap/pd/pull/2517)
     - Fix the panic issue of PD when setting `store-limit-mode` to `auto` [#2544](https://github.com/pingcap/pd/pull/2544)
     - Fix the issue that hotspots cannot be identified in some cases [#2463](https://github.com/pingcap/pd/pull/2463)
-    - Fix the placement rules issue that prevent store changing to tombstone [#2546](https://github.com/pingcap/pd/pull/2546)
+    - Fix the issue that Placement Rules prevent the store from changing to `tombstone` in some cases [#2546](https://github.com/pingcap/pd/pull/2546)
     - Fix the panic issue of PD when upgrading from earlier versions in some cases [#2564](https://github.com/pingcap/pd/pull/2564)
 
 + TiFlash
