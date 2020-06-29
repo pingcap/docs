@@ -284,12 +284,6 @@ Configuration items related to performance.
 - Default value: `0`
 - This configuration only takes effect when `prepared-plan-cache.enabled` is `true`. When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
 
-### `txn-total-size-limit`
-
-- The size limit of a single transaction in TiDB.
-- Default value: `104857600` (in bytes)
-- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `10737418240` (10 GB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
-
 ### `stmt-count-limit`
 
 - The maximum number of statements allowed in a single TiDB transaction.
@@ -298,9 +292,9 @@ Configuration items related to performance.
 
 ### `txn-total-size-limit`
 
-- The size limit of a transaction.
-- Default value: `104857600`
-- The total size of all key-value entries in bytes should be less than this value. Note that if the `binlog` is enabled, this value should be less than `104857600` (which means 100MB), because of the limitation of the binlog component. If `binlog` is not enabled, the maximum value of this configuration is `10737418240` (which means 10GB).
+- The size limit of a single transaction in TiDB.
+- Default value: `104857600` (in bytes)
+- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `10737418240` (10 GB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
 
 ### `tcp-keep-alive`
 
