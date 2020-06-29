@@ -27,7 +27,7 @@ TiDB version: 4.0.2
 + TiDB
 
     - Support the `MEMORY_QUOTA()` hint in `INSERT` statements [#18101](https://github.com/pingcap/tidb/pull/18101)
-    - Support authentication based on TLS certificate SAN field [#17698](https://github.com/pingcap/tidb/pull/17698)
+    - Support authentication based on the `SAN` field of TLS certificate [#17698](https://github.com/pingcap/tidb/pull/17698)
     - Support collation for the `REGEXP()` function [#17581](https://github.com/pingcap/tidb/pull/17581)
     - Support the `sql_select_limit` session and global variable [#17604](https://github.com/pingcap/tidb/pull/17604)
     - Support splitting the Region for the newly added partition by default [#17665](https://github.com/pingcap/tidb/pull/17665)
@@ -39,7 +39,7 @@ TiDB version: 4.0.2
     - Add the `PLAN_IN_CACHE` and `PLAN_CACHE_HITS` columns in the `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST` table to indicate the plan cache usage of SQL statements [#17493](https://github.com/pingcap/tidb/pull/17493)
     - Add the `enable-collect-execution-info` configuration item and the `tidb_enable_collect_execution_info` session variable to control whether to collect execution information of each operator and record the information in the slow query log [#18073](https://github.com/pingcap/tidb/pull/18073) [#18072](https://github.com/pingcap/tidb/pull/18072)
     - Add the `tidb_slow_log_masking` global variable to control whether to desensitize the queries in slow query log [#17694](https://github.com/pingcap/tidb/pull/17694)
-    - Add config check for `storage.block-cache.capacity` of TiKV config in `INFORMATION_SCHEMA.INSPECTION_RESULT` [#17671](https://github.com/pingcap/tidb/pull/17671)
+    - Add a diagnostic rule in the `INFORMATION_SCHEMA.INSPECTION_RESULT` table for the `storage.block-cache.capacity` TiKV configuration item [#17671](https://github.com/pingcap/tidb/pull/17671)
 
 + TiKV
 
@@ -73,7 +73,7 @@ TiDB version: 4.0.2
     - Reduce the query latency caused by the Golang memory allocation when CM-Sketch consumes too much memory [#17545](https://github.com/pingcap/tidb/pull/17545)
     - Reduce the QPS recovery duration of a cluster when a TiKV server is in the failure recovery process [#17681](https://github.com/pingcap/tidb/pull/17681)
     - Support pushing aggregate functions to TiKV/TiFlash Coprocessor on partition tables [#17655](https://github.com/pingcap/tidb/pull/17655)
-    - Improve row count estimation for index equal condition [#17611](https://github.com/pingcap/tidb/pull/17611)
+    - Improve the accuracy of row count estimation for index equal conditions [#17611](https://github.com/pingcap/tidb/pull/17611)
 
 + TiKV
 
@@ -90,17 +90,17 @@ TiDB version: 4.0.2
 
 + TiDB
 
-    - Fix the incorrect execution plan in plan cache after `tidb_isolation_read_engines` is changed [#17570](https://github.com/pingcap/tidb/pull/17570)
-    - Fix the occasionally runtime error in executing the `EXPLAIN FOR CONNECTION` statement [#18124](https://github.com/pingcap/tidb/pull/18124)
-    - Fix the incorrect result of session variable `last_plan_from_cache` [#18111](https://github.com/pingcap/tidb/pull/18111)
+    - Fix the issue of incorrect execution plan obtained from the plan cache after `tidb_isolation_read_engines` is changed [#17570](https://github.com/pingcap/tidb/pull/17570)
+    - Fix the occasional runtime error that occurs when executing the `EXPLAIN FOR CONNECTION` statement [#18124](https://github.com/pingcap/tidb/pull/18124)
+    - Fix the incorrect result of the `last_plan_from_cache` session variable in some cases [#18111](https://github.com/pingcap/tidb/pull/18111)
     - Fix the runtime error that occurs when executing the `UNIX_TIMESTAMP()` function from the plan cache [#18002](https://github.com/pingcap/tidb/pull/18002) [#17673](https://github.com/pingcap/tidb/pull/17673)
     - Fix the runtime error when the child of `HashJoin` executor returns the `NULL` column [#17937](https://github.com/pingcap/tidb/pull/17937)
-    - Fix the runtime error caused by parallelly executing "DROP DATABASE" and other DDL on the same database [#17659](https://github.com/pingcap/tidb/pull/17659)
+    - Fix the runtime error caused by concurrently executing the `DROP DATABASE` statement and other DDL statements in the same database [#17659](https://github.com/pingcap/tidb/pull/17659)
     - Fix the incorrect result of the `COERCIBILITY()` function on user variables [#17890](https://github.com/pingcap/tidb/pull/17890)
-    - Fix occasionally hang in the `IndexMergeJoin` executor [#18091](https://github.com/pingcap/tidb/pull/18091)
+    - Fix the issue that the `IndexMergeJoin` executor occasionally gets stuck [#18091](https://github.com/pingcap/tidb/pull/18091)
     - Fix the hang issue of the `IndexMergeJoin` executor when out of memory quota and query cancelling is triggered [#17654](https://github.com/pingcap/tidb/pull/17654)
     - Fix the excessive counting memory usage of the `Insert` and `Replace` executors [#18062](https://github.com/pingcap/tidb/pull/18062)
-    - Fix stopping replicating data to TiFlash storage when `DROP DATABASE` and `DROP TABLE` of the same database running concurrently [#17901](https://github.com/pingcap/tidb/pull/17901)
+    - Fix the issue that the data replication to TiFlash storage is stopped when `DROP DATABASE` and `DROP TABLE` are executed concurrently in the same database [#17901](https://github.com/pingcap/tidb/pull/17901)
     - Fix the `BACKUP`/`RESTORE` failure between TiDB and the object storage service [#17844](https://github.com/pingcap/tidb/pull/17844)
     - Fix the incorrect error message of privilege check failure when access is denied [#17724](https://github.com/pingcap/tidb/pull/17724)
     - Discard the query feedbacks generated from the `DELETE`/`UPDATE` statement [#17843](https://github.com/pingcap/tidb/pull/17843)
@@ -110,19 +110,19 @@ TiDB version: 4.0.2
     - Fix the incorrect decimal property for the result of the `COUNT()` function [#17704](https://github.com/pingcap/tidb/pull/17704)
     - Fix the incorrect result of the `HEX()` function when the type of input is the binary string [#17620](https://github.com/pingcap/tidb/pull/17620)
     - Fix the issue that an empty result is returned when querying the `INFORMATION_SCHEMA.INSPECTION_SUMMARY` table without filter condition [#17697](https://github.com/pingcap/tidb/pull/17697)
-    - Fix `ALTER USER` with hash string result in rehashed password issue [#17646](https://github.com/pingcap/tidb/pull/17646)
+    - Fix the issue that using the hashed password in `ALTER USER` might cause error [#17646](https://github.com/pingcap/tidb/pull/17646)
     - Support collation for `ENUM` and `SET` values [#17701](https://github.com/pingcap/tidb/pull/17701)
-    - Fix the pre-split Region timeout constraint not work issue on `CREATE TABLE` [#17619](https://github.com/pingcap/tidb/pull/17619)
-    - Fix an issue that may break the atomicity of DDL job: when a DDL job is retried, the schema is unexpectedly updated [#17608](https://github.com/pingcap/tidb/pull/17608)
+    - Fix the issue that the timeout mechanism for pre-splitting Regions does not work when creating a table [#17619](https://github.com/pingcap/tidb/pull/17619)
+    - Fix the issue that the schema is unexpectedly updated when a DDL job is retried, which might break the atomicity of DDL jobs [#17608](https://github.com/pingcap/tidb/pull/17608)
     - Fix the incorrect result of the `FIELD()` function when the argument contains the column [#17562](https://github.com/pingcap/tidb/pull/17562)
     - Fix the issue that the `max_execution_time` hint does not work occasionally [#17536](https://github.com/pingcap/tidb/pull/17536)
-    - Fix the redundant concurrency information in the result of `EXPLAIN ANALYZE` [#17350](https://github.com/pingcap/tidb/pull/17350)
+    - Fix the issue that the concurrency information is redundantly printed in the result of `EXPLAIN ANALYZE` [#17350](https://github.com/pingcap/tidb/pull/17350)
     - Fix the incompatible behavior of `%h` on the `STR_TO_DATE` function [#17498](https://github.com/pingcap/tidb/pull/17498)
-    - Fix the infinite follower/learner retry issue when `tidb_replica_read` is set to `follower` and there is a network partition between the leader and follower/learner [#17443](https://github.com/pingcap/tidb/pull/17443)
+    - Fix the issue that the follower/learner keeps retrying when `tidb_replica_read` is set to `follower` and there is a network partition between the leader and the follower/learner [#17443](https://github.com/pingcap/tidb/pull/17443)
     - Fix the issue that TiDB sends too many pings to PD follower in some cases [#17947](https://github.com/pingcap/tidb/pull/17947)
     - Fix the issue that the range partition table of older versions cannot be loaded in TiDB v4.0 [#17983](https://github.com/pingcap/tidb/pull/17983)
     - Fix the SQL statement timeout issue when multiple Region requests fail at the same time by assigning different `Backoffer` for each Region [#17585](https://github.com/pingcap/tidb/pull/17585)
-    - Fix the incompatible behavior on parsing datetime delimiters [#17501](https://github.com/pingcap/tidb/pull/17501)
+    - Fix the MySQL incompatible behavior when parsing `DateTime` delimiters [#17501](https://github.com/pingcap/tidb/pull/17501)
     - Fix the issue that TiKV requests are occasionally sent to the TiFlash server [#18105](https://github.com/pingcap/tidb/pull/18105)
 
 + TiKV
