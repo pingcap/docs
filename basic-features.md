@@ -44,7 +44,7 @@ This document introduces the basic features of TiDB.
 
 - Fully supports standard utility statements, such as `DESCRIBE`, `EXPLAIN`, `USE`, and so on.
 
-- Fully supports the `GROUP BY` and `ORDER BY` SQL sub-statements.
+- Fully supports the `GROUP BY` and `ORDER BY` clauses.
 
 - Fully supports the standard `LEFT OUTER JOIN` and `RIGHT OUTER JOIN` SQL statements.
 
