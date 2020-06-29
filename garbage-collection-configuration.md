@@ -44,8 +44,8 @@ update mysql.tidb set VARIABLE_VALUE="24h" where VARIABLE_NAME="tikv_gc_life_tim
 > In addition to the following GC configuration parameters, the `mysql.tidb` system table also contains records that store the status of the storage components in a TiDB cluster, among which GC related ones are included, as listed below:
 >
 > - `tikv_gc_leader_uuid`, `tikv_gc_leader_desc` and `tikv_gc_leader_lease`: Records the information of the GC leader
-> - `tikv_gc_last_run_time`: The duration of the previous GC (updated when each round of GC begins)
-> - `tikv_gc_safe_point`: The current safe point (updated when each round of GC begins)
+> - `tikv_gc_last_run_time`: The duration of the latest GC (updated at the beginning of each round of GC)
+> - `tikv_gc_safe_point`: The current safe point (updated at the beginning of each round of GC)
 
 ## `tikv_gc_enable`
 
@@ -97,10 +97,10 @@ update mysql.tidb set VARIABLE_VALUE="24h" where VARIABLE_NAME="tikv_gc_life_tim
 >
 > Green GC is still an experimental feature. It is recommended **NOT** to use it in the production environment.
 
-This parameter specifies the way of scanning locks in the Resolve Locks step of GC, which means whether or not to enable Green GC (experimental feature). In the Resolve Locks step of GC, TiKV needs to scan all locks in the cluster. With Green GC disabled, TiDB scan locks in the unit of Regions. Green GC provides the "physical scanning" feature, which means that each TiKV node can bypass the Raft layer to directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#raftstorehibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
+This parameter specifies the way of scanning locks in the Resolve Locks step of GC, that is, whether to enable Green GC (experimental feature) or not. In the Resolve Locks step of GC, TiKV needs to scan all locks in the cluster. With Green GC disabled, TiDB scans locks by Regions. Green GC provides the "physical scanning" feature, which means that each TiKV node can bypass the Raft layer to directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#raftstorehibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
 
-- `"legacy"` (default): Uses the old way of scanning, which means to disable Green GC.
-- `"physical"`: Uses the physical scanning method, which means to enable Green GC.
+- `"legacy"` (default): Uses the old way of scanning, that is, disable Green GC.
+- `"physical"`: Uses the physical scanning method, that is, enable Green GC.
 
 > **Note:**
 >
@@ -129,7 +129,7 @@ Since TiDB 3.0, some configuration options have changed with support for the dis
 - Auto-concurrent: requests are sent to each Region concurrently with the number of TiKV nodes as concurrency value.
 - Distributed: no need for TiDB to send requests to TiKV to trigger GC because each TiKV handles GC on its own.
 
-In addition, if Green GC (experimental feature) is enabled, which means setting the value of [`tikv_gc_scan_lock_mode`](#tikv_gc_scan_lock_mode-experimental-feature) to `physical`, the processing of GC is not affected by the configuration above.
+In addition, if Green GC (experimental feature) is enabled, that is, setting the value of [`tikv_gc_scan_lock_mode`](#tikv_gc_scan_lock_mode-experimental-feature) to `physical`, the processing of Resolve Lock is not affected by the concurrency configuration above.
 
 ## GC I/O limit
 
