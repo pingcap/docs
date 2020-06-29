@@ -41,7 +41,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--enable-binlog`
 
-+ Enables or disables generating TiDB binlog
++ Enables or disables TiDB binlog generation
 + Default: false
 
 ## `-L`
@@ -169,7 +169,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--affinity-cpus`
 
-+ Sets the affinity of TiDB server CPU, which is separated by commas. For example, "1,2,3".
++ Sets the CPU affinity of TiDB servers, which is separated by commas. For example, "1,2,3".
 + Default: ""
 
 ## `--repair-mode`

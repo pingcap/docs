@@ -288,7 +288,7 @@ Configuration items related to performance.
 
 - The size limit of a single transaction in TiDB.
 - Default value: `104857600` (in bytes)
-- In a single transaction, the total size of key-value records cannot exceed this value. The upper limit of this configuration value is `10737418240` (10 GB). Note that if you have used the binlog whose downstream consumer is Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. In this case, an error is returned if this limit is exceeded.
+- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `10737418240` (10 GB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
 
 ### `stmt-count-limit`
 
@@ -542,7 +542,7 @@ Configurations related to the `events_statement_summary_by_digest` table.
 
 ### max-retry-count
 
-- The max number of retries of each statement in pessimistic transactions. The number of retries that exceeds this limit results in error.
+- The maximum number of retries of each statement in pessimistic transactions. If the number of retries exceeds this limit, an error occurs.
 - Default value: `256`
 
 ## experimental
