@@ -55,7 +55,7 @@ TiDB version: 4.0.2
 + TiFlash
 
     - Support new aggregation function `APPROX_COUNT_DISTINCT` in Coprocessor
-    - Enable rough set filter feature by default
+    - Enable the `rough set filter` feature by default
     - Enable TiFlash to run on the ARM architecture
     - Support pushing down the `JSON_LENGTH` function in Coprocessor
 
@@ -63,8 +63,8 @@ TiDB version: 4.0.2
 
     - TiCDC
 
-        - Support for migrating sub-tasks to new captures [#665](https://github.com/pingcap/ticdc/pull/665)
-        - Add a command to delete CDC GC TTL [#652](https://github.com/pingcap/ticdc/pull/652)
+        - Support migrating sub-tasks to new `capture`s [#665](https://github.com/pingcap/ticdc/pull/665)
+        - Add a `cli` command to delete the TiCDC GC TTL [#652](https://github.com/pingcap/ticdc/pull/652)
         - Support canal protocol in MQ sink [#649](https://github.com/pingcap/ticdc/pull/649)
 
 ## Improvements
