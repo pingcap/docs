@@ -117,7 +117,7 @@ TiDB version: 4.0.2
     - Fix the incorrect decimal property for the result of the `COUNT()` function [#17704](https://github.com/pingcap/tidb/pull/17704)
     - Fix the incorrect result of the `HEX()` function when the type of input is the binary string [#17620](https://github.com/pingcap/tidb/pull/17620)
     - Fix the issue that an empty result is returned when querying the `INFORMATION_SCHEMA.INSPECTION_SUMMARY` table without filter condition [#17697](https://github.com/pingcap/tidb/pull/17697)
-    - Fix the issue that using the hashed password in `ALTER USER` might cause error [#17646](https://github.com/pingcap/tidb/pull/17646)
+    - Fix the issue that the hashed password used by the `ALTER USER` statement to update user information is unexpected [#17646](https://github.com/pingcap/tidb/pull/17646)
     - Support collation for `ENUM` and `SET` values [#17701](https://github.com/pingcap/tidb/pull/17701)
     - Fix the issue that the timeout mechanism for pre-splitting Regions does not work when creating a table [#17619](https://github.com/pingcap/tidb/pull/17619)
     - Fix the issue that the schema is unexpectedly updated when a DDL job is retried, which might break the atomicity of DDL jobs [#17608](https://github.com/pingcap/tidb/pull/17608)
