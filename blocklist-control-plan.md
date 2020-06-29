@@ -201,7 +201,7 @@ Whether the blocklist takes effect can be observed in the `EXPLAIN` result(See [
     3 rows in set (0.00 sec)
     ```
 
-4. Remove one expression(here is `>`) from the blacklist and execute `admin reload expr_pushdown_blacklist`.
+4. Remove one expression(here is `>`) from the blocklist and execute `admin reload expr_pushdown_blacklist`.
 
     {{< copyable "sql" >}}
 
