@@ -146,4 +146,4 @@ TiDB version: 4.0.2
 + TiFlash
 
     - Fix the issue that the proxy might panic when the `region not found` error occurs
-    - Fix the issue that I/O exception thrown in drop table may lead to TiFlash schema sync failure
+    - Fix the issue that the I/O exception thrown in `drop table` might lead to synchronization failure of TiFlash schema
