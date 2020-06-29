@@ -2,7 +2,7 @@
 title: TiDB Docker Compose Deployment
 summary: Use Docker Compose to quickly deploy a TiDB testing cluster.
 category: how-to
-aliases: ['/docs/dev/how-to/get-started/deploy-tidb-from-docker-compose/']
+aliases: ['/docs/dev/deploy-test-cluster-using-docker-compose/','/docs/dev/how-to/get-started/deploy-tidb-from-docker-compose/']
 ---
 
 # TiDB Docker Compose Deployment
@@ -13,7 +13,7 @@ With Docker Compose, you can use a YAML file to configure application services i
 
 > **Warning:**
 >
-> This is for testing only. DO NOT USE in production! It is recommended to deploy TiDB using [TiUP](/production-deployment-using-tiup.md) or [TiDB Operator in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-tidb-operator/) in production.
+> This is for testing only. DO NOT USE in production! It is recommended to deploy TiDB using [TiUP](/production-deployment-using-tiup.md) or [TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/deploy-tidb-operator) in production.
 
 ## Prerequisites
 
