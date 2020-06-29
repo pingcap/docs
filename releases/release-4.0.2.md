@@ -40,6 +40,7 @@ TiDB version: 4.0.2
     - Add the `enable-collect-execution-info` configuration item and the `tidb_enable_collect_execution_info` session variable to control whether to collect execution information of each operator and record the information in the slow query log [#18073](https://github.com/pingcap/tidb/pull/18073) [#18072](https://github.com/pingcap/tidb/pull/18072)
     - Add the `tidb_slow_log_masking` global variable to control whether to desensitize the queries in slow query log [#17694](https://github.com/pingcap/tidb/pull/17694)
     - Add a diagnostic rule in the `INFORMATION_SCHEMA.INSPECTION_RESULT` table for the `storage.block-cache.capacity` TiKV configuration item [#17671](https://github.com/pingcap/tidb/pull/17671)
+    - Add the `BACKUP` and `RESTORE` SQL statements to back up and restore data [#15274](https://github.com/pingcap/tidb/pull/15274)
 
 + TiKV
 
@@ -85,6 +86,12 @@ TiDB version: 4.0.2
     - Improve backward compatibility when upgrading from an older version [#786](https://github.com/pingcap/tics/pull/786)
     - Reduce memory consumption of delta index [#787](https://github.com/pingcap/tics/pull/787)
     - Use the more efficient update algorithm for delta index [#794](https://github.com/pingcap/tics/pull/794)
+
++ Tools
+
+    - BR
+
+        - Improve the performance by pipelining the restore process [#266](https://github.com/pingcap/br/pull/266)
 
 ## Bug Fixes
 
