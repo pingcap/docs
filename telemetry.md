@@ -9,9 +9,11 @@ By default, TiDB, TiUP and TiDB Dashboard collect usage information and share it
 
 ## What gets shared?
 
-The usage information includes the deployment characteristics of the cluster, hardware information and user performed operations. The followings describe details for each component. Note that the details that get shared may change over time. The changes will be announced in release notes if that happens.
+The followings describe shared usage information in detail for each component. The details that get shared may change over time. The changes will be announced in release notes if that happens.
 
-In all cases, data stored in the cluster by users will not be shared. You may also refer to [PingCAP Privacy Policy](https://pingcap.com/privacy-policy/).
+> **Note:**
+>
+> **In all cases**, data stored in the cluster by users will **not** be shared. You may also refer to [PingCAP Privacy Policy](https://pingcap.com/privacy-policy/).
 
 ### TiDB
 
@@ -21,6 +23,8 @@ When TiDB telemetry collection is enabled, the TiDB cluster will collect usage d
 - Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name, etc.
 
 To view the full content of the usage information shared to PingCAP, execute the following SQL statement:
+
+{{< copyable "sql" >}}
 
 ```sql
 ADMIN SHOW TELEMETRY;
@@ -46,7 +50,9 @@ When TiUP telemetry collection is enabled, user operations to TiUP will be share
 
 To view the full content of the usage information shared to PingCAP, set `TIUP_CLUSTER_DEBUG=enable` environment variable when executing the TiUP command, for example:
 
-```bash
+{{< copyable "shell-regular" >}}
+
+```shell
 TIUP_CLUSTER_DEBUG=enable tiup cluster list
 ```
 
@@ -63,6 +69,8 @@ Detailed configure steps for different deployment tools are listed below.
 
 Create a configuration file `tidb_config.toml` with the following content:
 
+{{< copyable "" >}}
+
 ```toml
 enable-telemetry = false
 ```
@@ -78,13 +86,17 @@ See [TiDB Configuration Options](/command-line-flags-for-tidb-configuration.md#-
 
 Create a configuration file `tidb_config.toml` with the following content:
 
+{{< copyable "" >}}
+
 ```toml
 enable-telemetry = false
 ```
 
 When starting TiUP Playground, specify the command line parameter `--db.config tidb_config.toml` to take effect, for example:
 
-```bash
+{{< copyable "shell-regular" >}}
+
+```shell
 tiup playground --db.config tidb_config.toml
 ```
 
@@ -96,6 +108,8 @@ See [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md) for details.
   <summary>TiUP Cluster deployment</summary>
 
 Modify the deployment topology file `topology.yaml` to add or modify the following:
+
+{{< copyable "" >}}
 
 ```yaml
 server_configs:
@@ -137,6 +151,8 @@ See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubern
 
 For deployed TiDB clusters, you can also modify the system variable [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry) to dynamically opt out the TiDB telemetry collection:
 
+{{< copyable "sql" >}}
+
 ```sql
 SET GLOBAL tidb_enable_telemetry = 0;
 ```
@@ -154,6 +170,8 @@ Detailed configure steps for different deployment tools are listed below.
 
 Create a configuration file `pd_config.toml` with the following content:
 
+{{< copyable "" >}}
+
 ```toml
 [dashboard]
 disable-telemetry = true
@@ -170,6 +188,8 @@ See [PD Configuration Flags](/command-line-flags-for-pd-configuration.md#--confi
 
 Create a configuration file `pd_config.toml` with the following content:
 
+{{< copyable "" >}}
+
 ```toml
 [dashboard]
 disable-telemetry = true
@@ -177,7 +197,9 @@ disable-telemetry = true
 
 When starting TiUP Playground, specify the command line parameter `--pd.config pd_config.toml` to take effect, for example:
 
-```bash
+{{< copyable "shell-regular" >}}
+
+```shell
 tiup playground --pd.config pd_config.toml
 ```
 
@@ -189,6 +211,8 @@ See [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md) for details.
   <summary>TiUP Cluster deployment</summary>
 
 Modify the deployment topology file `topology.yaml` to add or modify the following:
+
+{{< copyable "" >}}
 
 ```yaml
 server_configs:
@@ -234,40 +258,17 @@ See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubern
 
 To opt out the TiUP telemetry collection, execute the following command:
 
-```bash
+{{< copyable "shell-regular" >}}
+
+```shell
 tiup telemetry disable
-```
-
-## Reset telemetry ID
-
-The usage information shared by TiDB, TiDB Dashboard and TiUP contain a randomly generated telemetry ID to distinguish different clusters or users.
-
-### Reset TiDB telemetry ID
-
-Execute the following SQL statement to reset and generate a new TiDB telemetry ID:
-
-```sql
-ADMIN RESET TELEMETRY_ID;
-```
-
-### Reset TiDB Dashboard telemetry ID
-
-After accessing TiDB Dashboard, use Chrome Chrome DevTools or Firefox Developer Tools to clear the Local Storage item prefixed with `mp_` to reset and generate a new TiDB Dashboard telemetry ID:
-
-- [View And Edit Local Storage With Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)
-- [Working with Local Storage using Storage Inspector of Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools/Storage_Inspector/Local_Storage_Session_Storage)
-
-### Reset TiUP telemetry ID
-
-Execute the following command to reset and generate new TiUP telemetry ID:
-
-```bash
-tiup telemetry reset
 ```
 
 ## Check telemetry status
 
 For TiDB telemetry, execute the following SQL statement to check the telemetry status:
+
+{{< copyable "sql" >}}
 
 ```sql
 ADMIN SHOW TELEMETRY;
@@ -277,7 +278,9 @@ If the `DATA_PREVIEW` column is empty, TiDB telemetry is off. If not, TiDB telem
 
 For TiUP telemetry, execute the following command to check the telemetry status:
 
-```bash
+{{< copyable "shell-regular" >}}
+
+```shell
 tiup telemetry status
 ```
 
