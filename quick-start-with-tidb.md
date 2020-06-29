@@ -2,6 +2,7 @@
 title: Quick Start Guide for the TiDB Database Platform
 summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
 category: how-to
+aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-docker/']
 ---
 
 # Quick Start Guide for the TiDB Database Platform
@@ -314,4 +315,4 @@ Click to try TiDB-Wasm playground: <https://tour.tidb.io>. It takes about 10 sec
 
     - [Deploy TiDB online using TiUP](/production-deployment-using-tiup.md)
     - [Deploy TiDB offline using TiUP](/production-offline-deployment-using-tiup.md)
-    - [Deploy TiDB on Cloud using TiDB Operator](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/)
+    - [Deploy TiDB on Cloud using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1)
