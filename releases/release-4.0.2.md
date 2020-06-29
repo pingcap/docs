@@ -89,7 +89,7 @@ TiDB version: 4.0.2
 
 + Tools
 
-    - BR
+    - Backup & Restore (BR)
 
         - Improve the performance by pipelining the restore process [#266](https://github.com/pingcap/br/pull/266)
 
