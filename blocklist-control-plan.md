@@ -1,14 +1,14 @@
 ---
-title: The Blacklist of Optimization Rules and Expression Pushdown
-summary: Learn about the blacklist to control the optimization rules and the behavior of expression pushdown.
+title: The Blocklist of Optimization Rules and Expression Pushdown
+summary: Learn about the blocklist to control the optimization rules and the behavior of expression pushdown.
 category: performance
 ---
 
-# The Blacklist of Optimization Rules and Expression Pushdown
+# The Blocklist of Optimization Rules and Expression Pushdown
 
-This document introduces how we use the blacklist of optimization rules and the blacklist of expression pushdown to control the behavior of TiDB.
+This document introduces how we use the blocklist of optimization rules and the blocklist of expression pushdown to control the behavior of TiDB.
 
-## The Blacklist of Optimization Rules
+## The Blocklist of Optimization Rules
 
 ### Important Optimization Rules
 
@@ -28,7 +28,7 @@ This document introduces how we use the blacklist of optimization rules and the 
 
 ### Disable Optimization Rules
 
-We can use the **Blacklist of Optimization Rules** to disable some of them if some rules lead to a sub-optimal execution plan for some special queries.
+We can use the **Blocklist of Optimization Rules** to disable some of them if some rules lead to a sub-optimal execution plan for some special queries.
 
 #### Usage
 
@@ -65,9 +65,9 @@ We can use the **Blacklist of Optimization Rules** to disable some of them if so
     admin reload opt_rule_blacklist;
     ```
 
-## The Blacklist of Expression Pushdown
+## The Blocklist of Expression Pushdown
 
-**The Blacklist of Expression Pushdown** is one way to tuning the expression pushdown, mainly used to disable some expression of some specific data types.
+**The Blocklist of Expression Pushdown** is one way to tuning the expression pushdown, mainly used to disable some expression of some specific data types.
 
 ### Expressions which are supported to be pushed down
 
@@ -82,7 +82,7 @@ We can use the **Blacklist of Optimization Rules** to disable some of them if so
 
 ### Disable the pushdown of specific expression
 
-When we got wrong results due to the expression pushdown, use the blacklist can make a quick recovery for the business. More clearly, you can add some of the supported functions or operators to the table `mysql.expr_pushdown_blacklist` to disable the pushdown of some specific expressions.
+When we got wrong results due to the expression pushdown, use the blocklist can make a quick recovery for the business. More clearly, you can add some of the supported functions or operators to the table `mysql.expr_pushdown_blacklist` to disable the pushdown of some specific expressions.
 
 The schema of `mysql.expr_pushdown_blacklist` is shown as below:
 
@@ -110,21 +110,21 @@ Here is the description of each field:
     - The `store_type` `tidb` decides whether the expression can be executed in other TiDB Server when reading the TiDB memory table.
     - The `store_type` `tikv` decides whether the expression can be executed in TiKV Server's Coprocessor component.
     - The `store_type` `tiflash` decides whether the expression can be executed in TiFlash Server's Coprocessor component.
-+ `reason`: To record the reason why this expression is added to the blacklist.
++ `reason`: To record the reason why this expression is added to the blocklist.
 
 ### Usage
 
-#### Add to the blacklist
+#### Add to the blocklist
 
-Using the following procedures if you want to add one or more expressions to the blacklist:
+Using the following procedures if you want to add one or more expressions to the blocklist:
 
 1. Insert the corresponding function name or operator name and the set of components you want to disable the pushdown to the table `mysql.expr_pushdown_blacklist`.
 
 2. Execute `admin reload expr_pushdown_blacklist`.
 
-### Remove from the blacklist
+### Remove from the blocklist
 
-Using the following procedures if you want to remove one or more expressions from the blacklist:
+Using the following procedures if you want to remove one or more expressions from the blocklist:
 
 1. Delete the corresponding function name or operator name and the set of components you want to disable the pushdown from the table `mysql.expr_pushdown_blacklist`.
 
@@ -134,11 +134,11 @@ Using the following procedures if you want to remove one or more expressions fro
 >
 > `admin reload expr_pushdown_blacklist` only takes effect on the TiDB Server which runs this statement. If you need all TiDB Server of the cluster to disable some rules, you need to run this command on each of the TiDB Server.
 
-## Example of the Expression Blacklist
+## Example of the Expression Blocklist
 
-The following example first adds the operator `<` and `>` to the blacklist then removes the operator `>` from the blacklist.
+The following example first adds the operator `<` and `>` to the blocklist then removes the operator `>` from the blocklist.
 
-Whether the blacklist takes effect can be observed in the `EXPLAIN` result(See [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)).
+Whether the blocklist takes effect can be observed in the `EXPLAIN` result(See [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)).
 
 1. The predicates `a < 2` and `a > 2` in the `WHERE` clause of the following SQL statement can be pushed down to TiKV.
 

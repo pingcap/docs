@@ -106,7 +106,7 @@
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
-        + [The Blacklist of Optimization Rules and Expression Pushdown](/blacklist-control-plan.md)
+        + [The Blacklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
   + Best Practices
