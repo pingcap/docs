@@ -15,7 +15,7 @@ TiDB version: 4.0.2
 
     - Remove sensitive information in the slow query log and the statement summary table [#18130](https://github.com/pingcap/tidb/pull/18130)
     - Forbid negative value in the sequence cache [#18103](https://github.com/pingcap/tidb/pull/18103)
-    - Remove tombstone TiKV and TiFlash servers from the `CLUSTER_INFO` table [#17953](https://github.com/pingcap/tidb/pull/17953)
+    - Remove tombstone TiKV and TiFlash stores from the `CLUSTER_INFO` table [#17953](https://github.com/pingcap/tidb/pull/17953)
     - Change the diagnostic rule from `current-load` to `node-check` [#17660](https://github.com/pingcap/tidb/pull/17660)
 
 + PD
