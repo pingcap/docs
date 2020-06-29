@@ -29,6 +29,10 @@ After installation, you can check the version of TiUP:
 tiup --version
 ```
 
+> **Note:**
+>
+> By default, TiUP shares usage details with PingCAP to help understand how to improve the product. For details that get shared and how to opt out of collection, see [Telemetry](/telemetry.md).
+
 ## TiUP ecosystem introduction
 
 TiUP is not only a package manager in the TiDB ecosystem. Its ultimate mission is to enable everyone to use TiDB ecosystem tools **easier than ever before** by building its own ecosystem. This requires introducing additional packages to enrich the TiUP ecosystem.

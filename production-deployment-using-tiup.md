@@ -205,3 +205,7 @@ If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB clust
 
 - [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
 - [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
+
+> **Note:**
+>
+> By default, TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details that get shared and how to opt out of collection, see [Telemetry](/telemetry.md).

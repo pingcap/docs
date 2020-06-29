@@ -271,3 +271,19 @@ Configuration items related to labels
 
 + The label value for the store that rejected the Leader
 + Default value: `""`
+
+## `dashboard`
+
+Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built-inside PD.
+
+### `public-path-prefix`
+
++ When TiDB Dashboard is served behind a reverse proxy, this sets the public URL path prefix for all web resources.
++ Default value: `"/dashboard"`
++ Please do not modify this configuration item when TiDB Dashboard is not deployed behind a reverse proxy, otherwise there maybe access problems. See [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) for details.
+
+### `disable-telemetry`
+
++ Whether the telemetry collection of TiDB Dashboard is disabled.
++ Default value: `false`
++ See [Telemetry](/telemetry.md) for details.

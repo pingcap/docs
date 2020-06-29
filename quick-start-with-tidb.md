@@ -316,3 +316,7 @@ Click to try TiDB-Wasm playground: <https://tour.tidb.io>. It takes about 10 sec
     - [Deploy TiDB online using TiUP](/production-deployment-using-tiup.md)
     - [Deploy TiDB offline using TiUP](/production-offline-deployment-using-tiup.md)
     - [Deploy TiDB on Cloud using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1)
+
+> **Note:**
+>
+> By default, TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details that get shared and how to opt out of collection, see [Telemetry](/telemetry.md).
