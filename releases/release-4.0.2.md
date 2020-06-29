@@ -20,7 +20,7 @@ TiDB version: 4.0.2
 
 + PD
 
-    - Improve the way to set store limit by removing `store-balance-rate` [#2557](https://github.com/pingcap/pd/pull/2557)
+    - Persist `store-limit` and remove `store-balance-rate` [#2557](https://github.com/pingcap/pd/pull/2557)
 
 ## New Features
 
@@ -144,7 +144,7 @@ TiDB version: 4.0.2
 
 + PD
 
-    - Add config check for `pd-server.dashboard-address` of PD config [#2517](https://github.com/pingcap/pd/pull/2517)
+    - Check the correctness of the `pd-server.dashboard-address` configuration item [#2517](https://github.com/pingcap/pd/pull/2517)
     - Fix the panic issue of PD when setting `store-limit-mode` to `auto` [#2544](https://github.com/pingcap/pd/pull/2544)
     - Fix the issue that hotspots cannot be identified in some cases [#2463](https://github.com/pingcap/pd/pull/2463)
     - Fix the placement rules issue that prevent store changing to tombstone [#2546](https://github.com/pingcap/pd/pull/2546)
