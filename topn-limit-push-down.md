@@ -9,7 +9,7 @@ The Limit clause in SQL corresponds to the Limit operator node in the TiDB execu
 
 Similar to predicate pushdown, TopN (and Limit, the same below) will be pushed down in the execution plan tree as close to the data source as possible for completing the data filtering as early as possible, thereby significantly reducing data transmission or Calculated overhead.
 
-Please refer to [Optimization Rules and Blacklist for Expression Pushdown](blacklist-control-plan.md) when you want to close the rule.
+Please refer to [Optimization Rules and Blacklist for Expression Pushdown](/blacklist-control-plan.md) when you want to close the rule.
 
 ## Examples
 
