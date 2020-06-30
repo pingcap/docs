@@ -6,25 +6,25 @@ category: tutorials
 
 # Three Data Centers in Two Cities Deployment
 
-This document introduces the architecture and configuration of the deployment solution for three data centers (DC) in two cities.
+This document introduces the architecture and configuration of the three data centers (DC) in two cities deployment.
 
 ## Overview
 
-The model of three DCs in two cities is a highly available and disaster tolerant deployment solution. In this model, the three DCs in two cities are interconnected. If one DC fails or suffers from disaster, other DCs can operate as normal and take over the the key applications or all applications. Compared with the the deployment solution for multi-DC in one city, this solution has the advantage of cross-city high availability and can survive city-level natural disasters.
+The architecture of three DCs in two cities is a highly available and disaster tolerant deployment solution that provides a production data center, a disaster recovery center in the same city, and a disaster recovery centers in another city. In this mode, the three DCs in two cities are interconnected. If one DC fails or suffers from a disaster, other DCs can still operate well and take over the the key applications or all applications. Compared with the the multi-DC in one city deployment, this solution has the advantage of cross-city high availability and can survive city-level natural disasters.
 
-TiDB, a distributed database, natively supports the three-DC-in-two-city architecture by the virtue of Raft algorithm, and guarantees the consistency and high availability of data within a database cluster. Because the network latency across DCs in the same city is relatively low, the application traffic can be dispatched to two DCs in the same city, and the traffic load can be shared by these two DCs by controlling the distribution of Region leaders and PD leaders.
+The distributed database TiDB natively supports the three-DC-in-two-city architecture by using the Raft algorithm, and guarantees the consistency and high availability of data within a database cluster. Because the network latency across DCs in the same city is relatively low, the application traffic can be dispatched to two DCs in the same city, and the traffic load can be shared by these two DCs by controlling the distribution of TiKV Region leaders and PD leaders.
 
 ## Architecture
 
-This document takes the example of Beijing and Xi'an to explain the deployment model of three DCs in two cities for the distributed database of TiDB.
+This section takes the example of Beijing and Xi'an to explain the deployment mode of three DCs in two cities for the distributed database of TiDB.
 
-In this example, two DCs (IDC1 and IDC2) are located in Beijing and the other DC (IDC3) is located in Xi'an. The network latency between IDC1 and IDC2 is lower than 3 milliseconds. The network latency between IDC3 and IDC1/IDC2 in Beijing is about 20 milliseconds (ISP dedicated network is used).
+In this example, two DCs (IDC1 and IDC2) are located in Beijing and another DC (IDC3) is located in Xi'an. The network latency between IDC1 and IDC2 is lower than 3 milliseconds. The network latency between IDC3 and IDC1/IDC2 in Beijing is about 20 milliseconds (ISP dedicated network is used).
 
 The architecture of the cluster deployment is as follows:
 
-- The TiDB cluster is deployed with the three-DC-in-two-city model: IDC1 in Beijing, IDC2 in Beijing, and IDC3 in Xi'an.
-- The cluster has five replicas, two in IDC1, two in IDC2, and one in IDC3. In the TiKV component, each rack has a label, which means that each rack has a replica.
-- The Raft protocol is adopted to ensure the consistency and high availability of data, which is transparent to users.
+- The TiDB cluster is deployed to three DCs in two cities: IDC1 in Beijing, IDC2 in Beijing, and IDC3 in Xi'an.
+- The cluster has five replicas, two in IDC1, two in IDC2, and one in IDC3. For the TiKV component, each rack has a label, which means that each rack has a replica.
+- The Raft protocol is adopted to ensure consistency and high availability of data, which is transparent to users.
 
 ![3-DC-in-2-city architecture](/media/three-data-centers-in-two-cities-deployment-01.png)
 
@@ -32,15 +32,15 @@ This architecture is highly available. The distribution of Region leaders is res
 
 - **Advantages**
 
-    - Region leaders are in DCs of the same city with low latency, so the write speed is faster.
-    - The two DCs can provide services to the outside at the same time, so the resources usage rate is higher.
-    - When one DC fails, services are still available and data safety is ensured.
+    - Region leaders are in DCs of the same city with low latency, so the write is faster.
+    - The two DCs can provide services at the same time, so the resources usage rate is higher.
+    - If one DC fails, services are still available and data safety is ensured.
 
 - **Disadvantages**
 
-    - Because the data consistency is achieved by the Raft algorithm, when two DCs in the same city fail at the same time, there is only one surviving replica in the disaster recovery DC in another city (Xi'an), which does not meet the requirement of Raft algorithm that most replicas survive. As a result, the cluster will be temporarily unavailable. Maintenance staff needs to recover the cluster from the one surviving replica, and some hot data that has not been replicated is lost. Occurrence of such a case is few.
-    - Because dedicated network is used, the network infrastructure of this architecture has a high cost.
-    - Five replicas are configured in three DCs in two cities, data redundancy increases, which has higher storage cost.
+    - Because the data consistency is achieved by the Raft algorithm, when two DCs in the same city fail at the same time, only one surviving replica remains in the disaster recovery DC in another city (Xi'an). This cannot meet the requirement of the Raft algorithm that most replicas survive. As a result, the cluster can be temporarily unavailable. Maintenance staff needs to recover the cluster from the one surviving replica and a small amount of hot data that has not been replicated will be lost. But this case is a rare occurrence.
+    - Because the ISP dedicated network is used, the network infrastructure of this architecture has a high cost.
+    - Five replicas are configured in three DCs in two cities, data redundancy increases, which brings a higher storage cost.
 
 ### Deployment details
 
@@ -49,9 +49,9 @@ The configuration of the three DCs in two cities (Beijing and Xi'an) deployment 
 ![3-DC-2-city](/media/three-data-centers-in-two-cities-deployment-02.png)
 
 - From the illustration above, you can see that Beijing has two DCs: IDC1 and IDC2. IDC1 has three sets of racks: RAC1, RAC2, and RAC3. IDC2 has two racks: RAC4 and RAC5. The IDC3 DC in Xi'an has the RAC6 rack.
-- From the RAC1 rack illustrated above, TiDB and PD services are deployed on the same server. There are another two TiKV servers, each with two TiKV instances (tikv-server) deployed, which is similar to RAC2, RAC4, RAC5 and RAC6.
-- The TiDB server, the control machine, and the monitoring server are on RAC3. The TiDB server is deployed for regular maintenance and backup. TiDB Ansible, Prometheus, Grafana, and the restore tool are deployed on the control machine and monitoring machine.
-- Another backup server can be added to deploy Mydumper and Drainer. Drainer exports `file` files to save binlog data to a specified location, thus achieving incremental backup.
+- From the RAC1 rack illustrated above, TiDB and PD services are deployed on the same server. Each of the two TiKV servers are deployed with two TiKV instances (tikv-server). This is similar to RAC2, RAC4, RAC5, and RAC6.
+- The TiDB server, the control machine, and the monitoring server are on RAC3. The TiDB server is deployed for regular maintenance and backup. TiDB Ansible, Prometheus, Grafana, and the restore tools are deployed on the control machine and monitoring machine.
+- Another backup server can be added to deploy Mydumper and Drainer. Drainer saves binlog data to a specified location by outputting files, to achieve incremental backup.
 
 ## Configuration
 
@@ -125,11 +125,11 @@ alertmanager_servers:
 
 ### Labels design
 
-In the deployment model of three DCs in two cities, the design of labels should have thought for availability and disaster recovery. It is recommended that you define the four levels (`dc`, `zone`, `rack`, `host`) based on the physical structure of the deployment.
+In the deployment of three DCs in two cities, the label design requires taking availability and disaster recovery into account. It is recommended that you define the four levels (`dc`, `zone`, `rack`, `host`) based on the physical structure of the deployment.
 
 ![Label logical definition](/media/three-data-centers-in-two-cities-deployment-03.png)
 
-Add level information of TiKV labels in the PD configuration:
+In the PD configuration, add level information of TiKV labels:
 
 ```yaml
 server_configs:
@@ -160,7 +160,7 @@ tikv_servers:
 
 ### Optimize parameter configuration
 
-In the deployment model of three DCs in two cities, in addition to the regular configuration parameters, adjust the component parameters to optimize performance.
+In the deployment of three DCs in two cities, to optimize performance, you need to not only configure regular parameters, but also adjust component parameters.
 
 - Enable gRPC message compression in TiKV. Because data of the cluster is transmitted in the network, you can enable the gRPC message compression to lower the network traffic.
 
@@ -168,7 +168,7 @@ In the deployment model of three DCs in two cities, in addition to the regular c
     server.grpc-compression-type: gzip
     ```
 
-- Adjust the PD balance buffer size and increase the tolerance of PD. Because PD calculates the score of each object according to the situation of the node as the basis for scheduling, when the difference between the scores of leaders (or Regions) of two stores is less than the specified multiple of the Region size, PD considers that balance is achieved.
+- Adjust the PD balance buffer size and increase the tolerance of PD. Because PD calculates the score of each object according to the situation of the node as the basis for scheduling, when the difference between the scores of leaders (or Regions) of two stores is less than the specified multiple of the Region size, PD believes the balance is achieved.
 
     ```yaml
     schedule.tolerant-size-ratio: 20.0
