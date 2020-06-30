@@ -15,18 +15,7 @@ You can either download the official package, or manually pack a component packa
 
 ### Download the official TiUP offline component package
 
-Download the prepared offline mirror package at <http://download.pingcap.org> by running the following command:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-wget http://download.pingcap.org/tidb-community-server-${version}-linux-amd64.tar.gz
-mv tidb-community-server-${version}-linux-amd64.tar.gz package.tar.gz
-```
-
-In the command above, replace `${version}` with the offline mirror version you want to download, such as `v4.0.0`.
-
-`package.tar.gz` is a separate offline environment package.
+Download the prepared offline mirror package at <https://pingcap.com/download> and rename it as `package.tar.gz`.
 
 ### Manually pack an offline component package using `tiup mirror clone`
 
