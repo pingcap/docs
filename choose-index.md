@@ -54,7 +54,7 @@ After using the Skyline-Pruning rule to rule out inappropriate indexes, the sele
 
 According to these factors and the cost model, the optimizer selects a index with the lowest cost to access the table.
 
-#### Common Problems with Cost Selection Tunning.
+#### Common Problems with Cost Selection Tunning
 
 1. The estimated number of rows is not accurate?
 
