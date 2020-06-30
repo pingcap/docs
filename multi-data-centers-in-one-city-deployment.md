@@ -29,7 +29,7 @@ The native Raft protocol does not have a good support for an even number of repl
 
 TiDB clusters can be deployed in three DCs in the same city. In this solution, data replication across the three DCs is implemented using the Raft protocol within the cluster. These three DCs can provide read and write services at the same time. Data consistency is not affected even if one DC fails.
 
-### Architecture
+### Simple architecture
 
 TiDB, TiKV and PD are distributed among three DCs, which is the most common deployment with the highest availability.
 
