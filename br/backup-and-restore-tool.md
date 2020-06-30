@@ -275,7 +275,7 @@ To back up multiple tables with more complex criteria, execute the `br backup fu
 
 **Usage example:**
 
-Back up the data of all tables in the form `db*.tbl*` to the `/tmp/backup` path on each TiKV node and write the `backupmeta` file to this path.
+The following command backs up the data of all tables in the form `db*.tbl*` to the `/tmp/backup` path on each TiKV node and writes the `backupmeta` file to this path.
 
 {{< copyable "shell-regular" >}}
 
@@ -468,7 +468,7 @@ To restore multiple tables with more complex criteria, execute the `br restore f
 
 **Usage example:**
 
-Restore a subset of tables backed up in the `/tmp/backup` path to the cluster.
+The following command restores a subset of tables backed up in the `/tmp/backup` path to the cluster.
 
 {{< copyable "shell-regular" >}}
 

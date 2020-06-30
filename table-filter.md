@@ -2,26 +2,26 @@
 title: Table Filter
 summary: Usage of table filter feature in TiDB tools.
 category: reference
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-table-filter/', '/docs/dev/reference/tools/tidb-lightning/table-filter/', '/tidb-lightning-table-filter/']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-table-filter/','/docs/dev/reference/tools/tidb-lightning/table-filter/','/tidb/dev/tidb-lightning-table-filter/']
 ---
 
 # Table Filter
 
-The TiDB ecosystem tools operate on the all databases by default, but oftentimes only a subset is needed. Say, we only want to work with the schemas in the form `foo*` and `bar*` and nothing else.
+The TiDB ecosystem tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
 
-All TiDB tools since 4.0 share a common filter syntax to define subsets, which we specify here.
+Since TiDB 4.0, all TiDB ecosystem tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
 
 ## Usage
 
 ### CLI
 
-Table filters can be supplied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form `db.table`, where each part can be a wildcard (further explained in the next section). The following lists example usage in each tool.
+Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage in each tool.
 
 * [BR](/br/backup-and-restore-tool.md):
 
     {{< copyable "shell-regular" >}}
 
-    ```bash
+    ```shell
     ./br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
     #                ^~~~~~~~~~~~~~~~~~~~~~~
     ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
@@ -48,7 +48,7 @@ Table filters can be supplied to the tools using multiple `-f` or `--filter` com
 
 ### TOML configuration files
 
-Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists example usage in each tool.
+Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists the example usage in each tool.
 
 * Lightning:
 
@@ -57,7 +57,7 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
     filter = ['foo*.*', 'bar*.*']
     ```
 
-* CDC:
+* [TiCDC](/ticdc/ticdc-overview.md):
 
     ```toml
     [filter]
@@ -72,7 +72,7 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
 
 ### Plain table names
 
-Each table filter rule consists of a "schema pattern" and a "table pattern", separated by a dot (`.`). Tables which fully-qualified name matching the rules are accepted.
+Each table filter rule consists of a "schema pattern" and a "table pattern", separated by a dot (`.`). Tables whose fully-qualified name matches the rules are accepted.
 
 ```
 db1.tbl1
@@ -80,7 +80,7 @@ db2.tbl2
 db3.tbl3
 ```
 
-A plain name must only consist of valid [identifier characters](/schema-object-names.md), that is
+A plain name must only consist of valid [identifier characters](/schema-object-names.md), such as:
 
 * digits (`0` to `9`)
 * letters (`a` to `z`, `A` to `Z`)
@@ -88,7 +88,7 @@ A plain name must only consist of valid [identifier characters](/schema-object-n
 * `_`
 * non ASCII characters (U+0080 to U+10FFFF)
 
-All other ASCII characters are reserved. Some punctuations have special meanings, described below.
+All other ASCII characters are reserved. Some punctuations have special meanings, as described in the next section.
 
 ### Wildcards
 
@@ -105,7 +105,7 @@ data.*
 *.backup_*
 ```
 
-"Character" here means a Unicode code point, for instance
+"Character" here means a Unicode code point, such as:
 
 * U+00E9 (é) is 1 character.
 * U+0065 U+0301 (é) are 2 characters.
@@ -113,9 +113,9 @@ data.*
 
 ### File import
 
-Include an `@` at the beginning of the rule to specify a file name. The table filter parser treats each line of the imported file as additional filter rules.
+To import a file as the filter rule, include an `@` at the beginning of the rule to specify the file name. The table filter parser treats each line of the imported file as additional filter rules.
 
-For example, if a file `config/filter.txt` has content:
+For example, if a file `config/filter.txt` has the following content:
 
 ```
 employees.*
@@ -135,7 +135,7 @@ A filter file cannot further import another file.
 
 Inside a filter file, leading and trailing white-spaces of every line are trimmed. Furthermore, blank lines (empty strings) are ignored.
 
-A leading `#` marks a comment and is ignored. `#` not at start of line may be considered syntax error.
+A leading `#` marks a comment and is ignored. `#` not at start of line is considered syntax error.
 
 ```
 # this line is a comment
@@ -155,7 +155,7 @@ An `!` at the beginning of the rule means the pattern after it is used to exclud
 
 ### Escape character
 
-Precede any special character by a `\` to turn it into an identifier character.
+To turn a special character into an identifier character, precede it with a backslash `\`.
 
 ```
 db\.with\.dots.*
@@ -175,7 +175,7 @@ Besides `\`, special characters can also be suppressed by quoting using `"` or `
 `db.with.dots`.`tbl\2`
 ```
 
-The quote characters can be included within an identifier by doubling the character.
+The quotation mark can be included within an identifier by doubling itself.
 
 ```
 "foo""bar".`foo``bar`
@@ -183,7 +183,7 @@ The quote characters can be included within an identifier by doubling the charac
 foo\"bar.foo\`bar
 ```
 
-Quoted identifier cannot span multiple lines.
+Quoted identifiers cannot span multiple lines.
 
 It is invalid to partially quote an identifier:
 
@@ -203,7 +203,7 @@ These regular expressions use the [Go dialect](https://pkg.go.dev/regexp/syntax?
 
 > **Note:**
 >
-> Every `/` in the regex must be escaped as `\/`, including inside `[…]`. You cannot place an unescaped `/` between `\Q…\E`.
+> Every `/` in the regular expression must be escaped as `\/`, including inside `[…]`. You cannot place an unescaped `/` between `\Q…\E`.
 
 ## Multiple rules
 
@@ -219,7 +219,7 @@ To build a block list, an explicit `*.*` must be used as the first rule, otherwi
 ./dumpling -f '*.*' -f '!*.Password'
 ```
 
-In a filter list, if a table name matches multiple patterns, the last match decides the outcome. For instance, given
+In a filter list, if a table name matches multiple patterns, the last match decides the outcome. For instance:
 
 ```
 # rule 1
@@ -230,7 +230,7 @@ employees.*
 *.departments
 ```
 
-We get:
+The filtered outcome is as follows:
 
 | Table name            | Rule 1 | Rule 2 | Rule 3 | Outcome          |
 |-----------------------|--------|--------|--------|------------------|
