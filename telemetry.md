@@ -148,9 +148,9 @@ See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubern
 
 </details>
 
-### Opt out TiDB telemetry for deployed TiDB clusters
+### Disable TiDB telemetry for deployed TiDB clusters
 
-For deployed TiDB clusters, you can also modify the system variable [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry) to dynamically opt out the TiDB telemetry collection:
+For deployed TiDB clusters, you can also modify the system variable [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry) to dynamically disable the TiDB telemetry collection:
 
 {{< copyable "sql" >}}
 
@@ -160,9 +160,9 @@ SET GLOBAL tidb_enable_telemetry = 0;
 
 Note that disabling by configuration files takes precedence over system variables. That is, when telemetry collection is disabled by configuration files, the value of the system variable will be ignored.
 
-### Opt out TiDB Dashboard telemetry
+### Disable TiDB Dashboard telemetry
 
-Configure [`dashboard.disable-telemetry = true`](/pd-configuration-file.md#disable-telemetry) for all PD instances to opt out the TiDB Dashboard telemetry collection. Running clusters need to be restarted to take effect.
+Configure [`dashboard.disable-telemetry = true`](/pd-configuration-file.md#disable-telemetry) for all PD instances to disable the TiDB Dashboard telemetry collection. Running clusters need to be restarted to take effect.
 
 Detailed configure steps for different deployment tools are listed below.
 
@@ -255,9 +255,9 @@ See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubern
 
 </details>
 
-### Opt out TiUP telemetry
+### Disable TiUP telemetry
 
-To opt out the TiUP telemetry collection, execute the following command:
+To disable the TiUP telemetry collection, execute the following command:
 
 {{< copyable "shell-regular" >}}
 
