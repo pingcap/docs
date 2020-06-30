@@ -1,9 +1,12 @@
 ---
 title: Literal Values
-summary: Learn how to use various literal values.
+summary: This article introduces the literal values ​​of TiDB SQL statements.
 category: reference
 aliases: ['/docs/dev/literal-values/','/docs/dev/reference/sql/language-structure/literal-values/']
 ---
+
+TiDB literals include character literals, numeric literals, time and date literals, hexadecimal, binary literals, and NULL literals.
+Each of these literal values ​​is introduced below.
 
 # Literal Values
 
@@ -28,11 +31,13 @@ Quoted strings placed next to each other are concatenated to a single string. Th
 
 If the `ANSI_QUOTES` SQL MODE is enabled, string literals can be quoted only within single quotation marks because a string quoted within double quotation marks is interpreted as an identifier.
 
-A binary string is a string of bytes. Each binary string has a character set and collation named `binary`. A non-binary string is a string of characters. It has a character set other than `binary` and a collation that is compatible with the character set.
+The string is divided into the following two types:
 
-For both types of strings, comparisons are based on the numeric values of the string unit. For binary strings, the unit is the byte. For non-binary strings, the unit is the character and some character sets support multibyte characters.
++ Binary string: It consists of a sequence of bytes, whose charset and collation are both `binary`, and use **byte** as the unit when comparing with each other.
++ Non-binary character string: It is composed of a sequence of characters. There are various charsets and collations other than `binary`. When comparing with each other, use **characters** (a character may contain multiple bytes, depending on the choice of charset) as
+unit.
 
-A string literal may have an optional `character set introducer` and `COLLATE clause`, to designate it as a string that uses a specific character set and collation. TiDB only supports this in syntax, but does not process it.
+A string literal may have an optional `character set introducer` and `COLLATE clause`, to designate it as a string that uses a specific character set and collation. 
 
 ```
 [_charset_name]'string' [COLLATE collation_name]
@@ -54,26 +59,23 @@ SELECT n'some text';
 SELECT _utf8'some text';
 ```
 
-Escape characters:
+To represent some special characters in a string, you can use escape characters to escape:
 
-- `\0`: An ASCII NUL (X'00') character
-- `\'`: A single quote (') character
-- `\"`: A double quote (")character
-- `\b`: A backspace character
-- `\n`: A newline (linefeed) character
-- `\r`: A carriage return character
-- `\t`: A tab character
-- `\z`: ASCII 26 (Ctrl + Z)
-- `\\`: A backslash `\` character
-- `\%`: A `%` character
-- `\_`: A `_` character
+| Escape Characters | Meaning |
+| :---------------- | :------ |
+| \\0 | ASCII NUL (X'00') character |
+| \\' | Single quote |
+| \\" | Double quotes |
+| \\b | Backspace symbol |
+| \\n | Line break |
+| \\r | Carriage return |
+| \\t | tab character (tab character) |
+| \\z | ASCII 26 (Ctrl + Z) |
+| \\\\ | Backslash \\ |
+| \\% | \% |
+| \\_ | \_ |
 
-You can use the following ways to include quote characters within a string:
-
-- A `'` inside a string quoted with `'` may be written as `''`.
-- A `"` inside a string quoted with `"` may be written as `""`.
-- Precede the quote character by an escape character `\`.
-- A `'` inside a string quoted with `"` needs no special treatment, and a `"` inside a string quoted with `'` needs no special treatment either.
+If you want to represent `"` in the string surrounded by `'`, or `'` in the string surrounded by `"`, you don't need to use escape characters.
 
 For more information, see [String Literals in MySQL](https://dev.mysql.com/doc/refman/5.7/en/string-literals.html).
 
@@ -89,11 +91,63 @@ Numeric literals can also be represented in scientific notation, such as `1.2E3,
 
 For more information, see [Numeric Literals in MySQL](https://dev.mysql.com/doc/refman/5.7/en/number-literals.html).
 
-## NULL values
+## Date and Time Literals
 
-The `NULL` value means “no data”. NULL can be written in any letter case. A synonym is `\N` (case sensitive).
+There are several formats for Date and Time literals, such as a string representation or a numeric representation.
+In TiDB, when TiDB expects a Date, it will treat `'2017-08-24'`, `'20170824'`, `20170824` as Date.
 
-Be aware that the `NULL` value is different from values such as `0` for numeric types or the empty string `''` for string types.
+The TiDB Date value has the following formats:
+
+* `'YYYY-MM-DD'` or `'YY-MM-DD'`, the `-` separator here is not strict, it can be any punctuation mark.
+For example, `'2017-08-24'`, `'2017&08&24'`, `'2012@12^31'` are all the same.
+The only thing that needs special treatment is the'.' sign, which is used as a decimal point to separate the integer and decimal parts.
+* `'YYYYMMDDHHMMSS'` or `'YYMMDDHHMMSS'`, for example `'20170824104520'` and `'170824104520'` are regarded as `'2017-08-24 10:45:20'`, but if you provide a value out of range, such as `'170824304520'`, then this is not a valid Date literal.
+* `YYYYMMDDHHMMSS` or `YYMMDDHHMMSS`, note that there is no single or double quotes, it is a number. For example, `20170824104520` is expressed as `'2017-08-24 10:45:20'`.
+
+DATETIME or TIMESTAMP value can be followed by a decimal part, used to represent microseconds (accuracy up to 6 decimal places), separated by a decimal point `.`.
+
+If there are only two numbers in the year part of date, which is ambiguous (recommended to use the four-digit format), TiDB will try to explain with the following rules:
+
+* If the year value is in the range of `70-99`, it will be converted to `1970-1999`.
+* If the year value is in the range of `00-69`, it is converted to `2000-2069`.
+
+For month or day values ​​less than 10, `'2017-8-4'` is the same as `'2017-08-04'`. The same is true for Time, for example, `'2017-08-24 1:2:3'` is the same as `'2017-08-24 01:02:03'`.
+
+In the context where Date or Time is required, TiDB will select the specified format according to the length of the value:
+
+* 6 numbers will be interpreted as `YYMMDD`.
+* 12 digits will be interpreted as `YYMMDDHHMMSS`.
+* 8 digits will be interpreted as `YYYYMMDD`.
+* 14 digits will be interpreted as `YYYYMMDDHHMMSS`.
+
+For the Time type, TiDB is expressed in the following format:
+
+* `'D HH:MM:SS'`, or `'HH:MM:SS'`, `'HH:MM'`, `'D HH:MM'`, `'D HH'`, `'SS'`, where D means days, the legal range is `0-34`.
+* The value `HHMMSS`, for example `231010` is interpreted as `'23:10:10'`.
+* The values ​​`SS`, `MMSS`, and `HHMMSS` can all be regarded as Time.
+
+The decimal point of the Time type is also `.`, with a precision of up to 6 digits after the decimal point.
+
+More [details] (https://dev.mysql.com/doc/refman/5.7/en/date-and-time-literals.html).
+
+## Boolean Literals
+
+The constants `TRUE` and `FALSE` are equal to 1 and 0, which is not case sensitive.
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT TRUE, true, tRuE, FALSE, FaLsE, false;
+```
+
+```
++------+------+------+-------+-------+-------+
+| TRUE | true | tRuE | FALSE | FaLsE | false |
++------+------+------+-------+-------+-------+
+|    1 |    1 |    1 |     0 |     0 |     0 |
++------+------+------+-------+-------+-------+
+1 row in set (0.00 sec)
+```
 
 ## Hexadecimal literals
 
@@ -126,8 +180,7 @@ mysql> select X'0aff';
 +---------+
 | X'0aff' |
 +---------+
-|
-       |
+| 0x0aff  |
 +---------+
 1 row in set (0.00 sec)
 ```
@@ -151,56 +204,6 @@ mysql> SELECT X'54694442';
 +-------------+
 | TiDB        |
 +-------------+
-1 row in set (0.00 sec)
-```
-
-## Date and time literals
-
-Date and time values can be represented in several formats, such as quoted strings or as numbers. When TiDB expects a date, it interprets any of `'2015-07-21'`, `'20150721'` and `20150721` as a date.
-
-TiDB supports the following formats for date values:
-
-- As a string in either `'YYYY-MM-DD'` or `'YY-MM-DD'` format. The `-` delimiter is "relaxed" in syntax. Any punctuation character may be used as the delimiter between date parts. For example, `'2017-08-24'`, `'2017&08&24'` and `'2012@12^31'` are equivalent. The only delimiter recognized is the `.` character, which is treated as a decimal point to separate the integer and fractional parts. The date and time parts can be separated by `T` other than a space. For example, `2017-8-24 10:42:00` and `2017-8-24T10:42:00` are equivalent.
-- As a string with no delimiters in either `'YYYYMMDDHHMMSS'` or `'YYMMDDHHMMSS'` format. For example, `'20170824104520'` and `'170824104520'` are interpreted as `'2017-08-24 10:45:20'`. But `'170824304520'` is illegal because the hour part exceeds the legal range.
-- As a number in either `YYYYMMDDHHMMSS` or `YYMMDDHHMMSS` format, without single quotation marks or double quotation marks. For example, `20170824104520` is interpreted as `'2017-08-24 10:45:20'`.
-
-A DATETIME or TIMESTAMP value can include a trailing fractional seconds part in up to microseconds (6 digits) precision. The fractional part should always be separated from the rest of the time by a decimal point.
-
-Dates containing two-digit year values are ambiguous. It is recommended to use the four-digit format. TiDB interprets two-digit year values using the following rules:
-
-- Year values in the range of `70-99` are converted to `1970-1999`.
-- Year values in the range of `00-69` are converted to `2000-2069`.
-
-For values specified as strings that include date part delimiters, it is unnecessary to specify two digits for month or day values that are less than 10. `'2017-8-4'` is the same as `'2017-08-04'`. Similarly, for values specified as strings that include time part delimiters, it is unnecessary to specify two digits for hour, minute, or second values that are less than 10. `'2017-08-24 1:2:3'` is the same as `'2017-08-24 01:02:03'`.
-
-In TiDB, the date or time values specified as numbers are interpreted according their length:
-
-- 6 digits: `YYMMDD`
-- 12 digits: `YYMMDDHHMMSS`
-- 8 digits: `YYYYMMDD`
-- 14 digits: `YYYYMMDDHHMMSS`
-
-TiDB supports the following formats for time values:
-
-- As a string in `'D HH:MM:SS'` format. You can also use one of the following “relaxed” syntaxes: `'HH:MM:SS'`, `'HH:MM'`, `'D HH:MM'`, `'D HH'`, or `'SS'`. Here D represents days and the legal value range is `0-34`.
-- As a number in `'HHMMSS'` format. For example, `231010` is interpreted as `'23:10:10'`.
-- A number in any of the `SS`, `MMSS` or `HHMMSS` format can be treated as time.
-
-The time value can also include a trailing fractional part in up to 6 digits precision. The `.` character represents the decimal point.
-
-For more information, see [Date and Time Literals in MySQL](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-literals.html).
-
-## Boolean literals
-
-The constants `TRUE` and `FALSE` evaluate to 1 and 0 respectively, which are not case sensitive.
-
-```sql
-mysql> SELECT TRUE, true, tRuE, FALSE, FaLsE, false;
-+------+------+------+-------+-------+-------+
-| TRUE | true | tRuE | FALSE | FaLsE | false |
-+------+------+------+-------+-------+-------+
-|    1 |    1 |    1 |     0 |     0 |     0 |
-+------+------+------+-------+-------+-------+
 1 row in set (0.00 sec)
 ```
 
@@ -243,3 +246,11 @@ mysql> SELECT b+0, BIN(b), HEX(b) FROM t;
 +------+--------+--------+
 3 rows in set (0.00 sec)
 ```
+
+## NULL Values
+
+`NULL` means the data is empty, it is case-insensitive, and is synonymous with `\N` (case-sensitive).
+
+> **Note:**
+>
+> `NULL` is not the same as `0`, nor the empty string `''`.
