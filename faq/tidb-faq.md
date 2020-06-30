@@ -744,7 +744,7 @@ You can evaluate which tables might require acceleration. The size of a single r
 
 TiFlash restores data through TiKV. As long as the corresponding Regions in TiKV are available, TiFlash can restore data from these Regions.
 
-#### How many replicas does TiFlash recommend to set up?
+#### How many replicas are recommended for TiFlash?
 
 If you need highly available TiFlash services (rather than highly available data), it is recommended to set up two replicas for TiFlash. If you allow TiKV replicas to provide analytical services when TiFlash is down, you can set up a single TiFlash replica.
 
