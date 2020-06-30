@@ -32,7 +32,7 @@ BlockCache discards the least recently used data according to the LRU algorithm.
 
 The data written to RocksDB will be written to MemTable firstly. When the size of a MemTable exceeds 128MB, it will switch to a new MemTable. There are 2 RocksDB instances in TiKV, a total of 4 ColumnFamily. The size limit of a single MemTable for each ColumnFamily is 128MB. A maximum of 5 MemTables can exist at the same time, otherwise, the foreground writes will be blocked. The memory occupied by this part is at most 2.5GB (4 x 5 x 128MB). It is not recommended to change since it costs less memory.
 
-**##** RocksDB Space Usaga
+## RocksDB Space Usage
 
 * Multi-version: RocksDB is a key-value storage engine with LSM-tree structure, and the data in MemTable will be flushed to L0 first. There may be overlap between the ranges of SSTs at the L0 (because the file is arranged in the order of which they are generated). As a result, there may be multiple versions of the same key in L0. When a file is merged from L0 to L1, it will be cut into multiple files according to a certain size (the default is 8MB). The key range of each file on the same level does not overlap with each other, so there is only one version for each key on L1 and subsequent levels.
 * Space amplification: The total size of files on each level is x (the default is 10) times that of the previous level, so 90% of the data is stored in the last level. It also means that the space amplification of RocksDB does not exceed 1.11 (L0 has fewer data and can be ignored).
