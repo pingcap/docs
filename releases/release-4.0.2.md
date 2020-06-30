@@ -22,6 +22,10 @@ TiDB version: 4.0.2
 
     - Persist `store-limit` and remove `store-balance-rate` [#2557](https://github.com/pingcap/pd/pull/2557)
 
+## New Change
+
+- By default, TiDB and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product [#18180](https://github.com/pingcap/tidb/pull/18180). For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
+
 ## New Features
 
 + TiDB
