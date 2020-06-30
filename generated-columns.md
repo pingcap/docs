@@ -100,6 +100,7 @@ CREATE TABLE person (
 Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation return errors:
 
 {{< copyable "sql" >}}
+
 ```sql
 mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
 ERROR 1048 (23000): Column 'city' cannot be null
@@ -147,8 +148,8 @@ desc select a+1 from t where a+1=3;
 ## Limitations of Generated columns
 
 The current limitations of JSON and generated columns are as follows:
+
 - You cannot add the generated column through `ALTER TABLE`.
 - You can neither convert a generated stored column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a generated stored column.
 - Not all [JSON functions](/functions-and-operators/json-functions.md) are supported;
 - Currently, the generated column index replacement rule is valid only when the generated column is a virtual generated column. It is not valid on the stored generated column, but the index can still be used by directly using the generated column itself.
-
