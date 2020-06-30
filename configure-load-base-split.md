@@ -1,7 +1,7 @@
 ---
 title: Load Base Split
 summary: Learn the feature of Load Base Split.
-category: how-to
+category: tutorials
 ---
 
 # Load Base Split
@@ -10,7 +10,7 @@ Load Base Split is a new feature introduced in TiDB 4.0. It aims to solve the ho
 
 ## Scenarios
 
-In TiDB, it is easy to create hotspots when the load is concentrated on certain nodes. PD tries to schedule the Hot Regions so that they are distributed as evenly as possible across all nodes for better performance.
+In TiDB, it is easy to generate hotspots when the load is concentrated on certain nodes. PD tries to schedule the hot Regions so that they are distributed as evenly as possible across all nodes for better performance.
 
 However, the minimum unit for PD scheduling is Region. If the number of hotspots in a cluster is smaller than the number of nodes, or if a few hotspots have far more load than other Regions, PD can only move the hotspot from one node to another, but not make the entire cluster share the load.
 
@@ -23,9 +23,9 @@ Previously, the solution to this problem was to manually execute a command to sp
 
 ## Implementation principles
 
-Load Base Split automatically splits the Region based on statistics. It identifies the Regions whose read load consistently exceeds the threshold for 10 seconds, and splits these Regions at proper positions. When choosing the split position, Load Base Split tries to balance the access load of both Regions after the split and avoid access across Regions.
+Load Base Split automatically splits the Region based on statistics. It identifies the Regions whose read load consistently exceeds the threshold for 10 seconds, and splits these Regions at a proper position. When choosing the split position, Load Base Split tries to balance the access load of both Regions after the split and avoid access across Regions.
 
-The Region split by Load Base Split will not be merged quickly. On the one hand, PD's `MergeChecker` skips the hot Region; on the other hand, PD also determines whether to merge two Regions according to `QPS` in the heartbeat information, to avoid the merge of two Regions with high `QPS`.
+The Region split by Load Base Split will not be merged quickly. On the one hand, PD's `MergeChecker` skips the hot Regions; on the other hand, PD also determines whether to merge two Regions according to `QPS` in the heartbeat information, to avoid the merging of two Regions with high `QPS`.
 
 ## Usage
 
