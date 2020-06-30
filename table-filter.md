@@ -32,7 +32,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
     {{< copyable "shell-regular" >}}
 
-    ```bash
+    ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
     #          ^~~~~~~~~~~~~~~~~~~~~~~
     ```
@@ -41,7 +41,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
     {{< copyable "shell-regular" >}}
 
-    ```bash
+    ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
     #                ^~~~~~~~~~~~~~~~~~~~~~~
     ```
