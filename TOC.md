@@ -107,7 +107,7 @@
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
 + Tutorials
-  + [Multi-DC in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
+  + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + Best Practices
     + [Use TiDB](/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
