@@ -13,7 +13,7 @@ This section introduces how to select a index to access a table, and some relate
 
 Before introducing index selection, it is important to understand how TiDB accesses tables, what triggers they are, what differences they make, and what the pros and cons are.
 
-### The operators of access tables
+### The Operators of Access Tables
 
 | Operator | Trigger Conditions | Applicable Scenarios | Explanations |
 | :------- | :------- | :------- | :---- |
