@@ -76,14 +76,14 @@ Create a configuration file `tidb_config.toml` with the following content:
 enable-telemetry = false
 ```
 
-Specify the command line parameter `--config=tidb_config.toml` when starting TiDB to take effect.
+Specify the `--config=tidb_config.toml` command-line parameter when starting TiDB for the configuration file above to take effect.
 
 See [TiDB Configuration Options](/command-line-flags-for-tidb-configuration.md#--config) and [TiDB Configuration File](/tidb-configuration-file.md#enable-telemetry) for details.
 
 </details>
 
 <details>
-  <summary>TiUP Playground</summary>
+  <summary>Deployment using TiUP Playground</summary>
 
 Create a configuration file `tidb_config.toml` with the following content:
 
@@ -93,7 +93,7 @@ Create a configuration file `tidb_config.toml` with the following content:
 enable-telemetry = false
 ```
 
-When starting TiUP Playground, specify the command line parameter `--db.config tidb_config.toml` to take effect, for example:
+When starting TiUP Playground, specify the `--db.config tidb_config.toml` command-line parameter for the configuration file above to take effect. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -106,9 +106,9 @@ See [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md) for details.
 </details>
 
 <details>
-  <summary>TiUP Cluster deployment</summary>
+  <summary>Deployment using TiUP Cluster</summary>
 
-Modify the deployment topology file `topology.yaml` to add or modify the following:
+Modify the deployment topology file `topology.yaml` to add content as follows:
 
 {{< copyable "" >}}
 
@@ -121,7 +121,7 @@ server_configs:
 </details>
 
 <details>
-  <summary>Ansible deployment</summary>
+  <summary>Deployment using TiDB Ansible</summary>
 
 Locate the following contents in the configuration file `tidb-ansible/conf/tidb.yml`:
 
@@ -129,7 +129,7 @@ Locate the following contents in the configuration file `tidb-ansible/conf/tidb.
 # enable-telemetry: true
 ```
 
-And change to:
+And change this content as follow:
 
 ```yaml
 enable-telemetry: false
@@ -140,7 +140,7 @@ See [Deploy TiDB Using TiDB Ansible](/online-deployment-using-ansible.md) for de
 </details>
 
 <details>
-  <summary>Kubernetes deployment via TiDB Operator</summary>
+  <summary>Deployment in Kubernetes via TiDB Operator</summary>
 
 Configure `spec.tidb.config.enable-telemetry: false` in `tidb-cluster.yaml` or TidbCluster Custom Resource.
 
@@ -158,13 +158,15 @@ For deployed TiDB clusters, you can also modify the system variable [`tidb_enabl
 SET GLOBAL tidb_enable_telemetry = 0;
 ```
 
-Note that disabling by configuration files takes precedence over system variables. That is, when telemetry collection is disabled by configuration files, the value of the system variable will be ignored.
+> **Note:**
+>
+> When you disable telemetry, using configuration files has higher priority over using system variables. That is, after telemetry collection is disabled by configuration files, the value of the system variable will be ignored.
 
 ### Disable TiDB Dashboard telemetry
 
-Configure [`dashboard.disable-telemetry = true`](/pd-configuration-file.md#disable-telemetry) for all PD instances to disable the TiDB Dashboard telemetry collection. Running clusters need to be restarted to take effect.
+Configure [`dashboard.disable-telemetry = true`](/pd-configuration-file.md#disable-telemetry) to disable the TiDB Dashboard telemetry collection on all PD instances. You need to restart the running clusters for the configuration to take effect.
 
-Detailed configure steps for different deployment tools are listed below.
+Detailed steps to disable telemetry for different deployment tools are listed below.
 
 <details>
   <summary>Binary deployment</summary>
@@ -185,7 +187,7 @@ See [PD Configuration Flags](/command-line-flags-for-pd-configuration.md#--confi
 </details>
 
 <details>
-  <summary>TiUP Playground</summary>
+  <summary>Deployment using TiUP Playground</summary>
 
 Create a configuration file `pd_config.toml` with the following content:
 
@@ -209,9 +211,9 @@ See [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md) for details.
 </details>
 
 <details>
-  <summary>TiUP Cluster deployment</summary>
+  <summary>Deployment using TiUP Cluster</summary>
 
-Modify the deployment topology file `topology.yaml` to add or modify the following:
+Modify the deployment topology file `topology.yaml` to add the following content:
 
 {{< copyable "" >}}
 
@@ -224,9 +226,9 @@ server_configs:
 </details>
 
 <details>
-  <summary>Ansible deployment</summary>
+  <summary>Deployment using TiDB Ansible</summary>
 
-Locate the following contents in the configuration file `tidb-ansible/conf/pd.yml`:
+Locate the following content in the `tidb-ansible/conf/pd.yml` configuration file:
 
 ```yaml
 dashboard:
@@ -234,7 +236,7 @@ dashboard:
   # disable-telemetry: false
 ```
 
-And change to:
+And change the content as follows:
 
 ```yaml
 dashboard:
@@ -247,7 +249,7 @@ See [Deploy TiDB Using TiDB Ansible](/online-deployment-using-ansible.md) for de
 </details>
 
 <details>
-  <summary>Kubernetes deployment via TiDB Operator</summary>
+  <summary>Deployment in Kubernetes via TiDB Operator</summary>
 
 Configure `spec.pd.config.dashboard.disable-telemetry: true` in `tidb-cluster.yaml` or TidbCluster Custom Resource.
 
@@ -275,7 +277,7 @@ For TiDB telemetry, execute the following SQL statement to check the telemetry s
 ADMIN SHOW TELEMETRY;
 ```
 
-If the `DATA_PREVIEW` column is empty, TiDB telemetry is off. If not, TiDB telemetry is on. You can also check when the usage information was shared previously according to the `LAST_STATUS` column.
+If the `DATA_PREVIEW` column in the execution result is empty, TiDB telemetry is disabled. If not, TiDB telemetry is enabled. You can also check when the usage information was shared previously according to the `LAST_STATUS` column and whether the sharing was successful or not.
 
 For TiUP telemetry, execute the following command to check the telemetry status:
 
@@ -287,9 +289,9 @@ tiup telemetry status
 
 ## Compliance
 
-In order to meet compliance requirements in different countries or regions, the usage information will be sent to servers located in different countries according to the IP address of the sender machine as follows:
+To meet compliance requirements in different countries or regions, the usage information is sent to servers located in different countries according to the IP address of the sender machine:
 
-- For IP addresses from mainland China, usage information will be sent and stored on cloud servers in mainland China.
-- For IP addresses other than mainland China, usage information will be sent and stored on cloud servers in US.
+- For IP addresses from the Chinese mainland, usage information is sent to and stored on cloud servers in the Chinese mainland.
+- For IP addresses from outside of the Chinese mainland, usage information is sent to and stored on cloud servers in the US.
 
 See [PingCAP Privacy Policy](https://pingcap.com/privacy-policy) for details.

@@ -144,9 +144,9 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
 
-- Enables or disables the telemetry collection of TiDB.
+- Enables or disables the telemetry collection in TiDB.
 - Default value: `true`
-- When this configuration is set to `false` for all TiDB instances, the telemetry collection of TiDB will be disabled and system variable [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry) will not taking effect. See [Telemetry](/telemetry.md) for details.
+- When this configuration is set to `false` for all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
 ## Log
 
