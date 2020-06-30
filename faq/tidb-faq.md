@@ -2,11 +2,7 @@
 title: TiDB FAQ
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
 category: faq
-<<<<<<< HEAD
-aliases: ['/docs/stable/faq/tidb-faq/','/docs/v4.0/faq/tidb-faq/','/docs/stable/faq/tidb/']
-=======
-aliases: ['/docs/dev/faq/tidb-faq/','/docs/dev/faq/tidb/','/docs/dev/tiflash/tiflash-faq/','/docs/dev/reference/tiflash/faq/','/tidb/dev/tiflash-faq']
->>>>>>> 9d79246... integrate tiflash faq into tidb-faq.md and add aliases; add one lightning faq (#3069)
+aliases: ['/docs/stable/faq/tidb-faq/','/docs/v4.0/faq/tidb-faq/','/docs/stable/faq/tidb/','/docs/stable/tiflash/tiflash-faq/','/docs/stable/reference/tiflash/faq/','/tidb/v4.0/tiflash-faq']
 ---
 
 # TiDB FAQ
