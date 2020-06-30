@@ -1,7 +1,7 @@
 ---
 title: Operating System Tuning
 summary: Learn how to tune the parameters of the operating system.
-category: reference
+category: tuning
 ---
 
 # Operating System Tuning
@@ -10,16 +10,16 @@ This document introduces how to tune each subsystem of CentOS 7.
 
 > **Note:**
 >
-> + The default configuration of the CentOS 7 operating system is suitable for most services running under moderate workload. Adjusting the performance of a particular subsystem might negatively affects other subsystems. Therefore, before tuning the system, back up all user data and configuration information;
-> + Fully test all the changes in the test environment before applying to the production environment.
+> + The default configuration of the CentOS 7 operating system is suitable for most services running under moderate workloads. Adjusting the performance of a particular subsystem might negatively affects other subsystems. Therefore, before tuning the system, back up all the user data and configuration information.
+> + Fully test all the changes in the test environment before applying them to the production environment.
 
 ## Performance analysis methods
 
-System tuning must be based on the results of system performance analysis, so this document first lists common methods for performance analysis.
+System tuning must be based on the results of system performance analysis. This section lists common methods for performance analysis.
 
 ### In 60 seconds
 
-[*Linux Performance Analysis in 60,000 Milliseconds*](http://www.brendangregg.com/Articles/Netflix_Linux_Perf_Analysis_60s.pdf) is published by the author Brendan Gregg and the Netflix Performance Engineering team. All used tools can be obtained from the official release of Linux. You can analyze outputs of the following list items to troubleshoot most common performance issues.
+[*Linux Performance Analysis in 60,000 Milliseconds*](http://www.brendangregg.com/Articles/Netflix_Linux_Perf_Analysis_60s.pdf) is published by the author Brendan Gregg and the Netflix Performance Engineering team. All tools used can be obtained from the official release of Linux. You can analyze outputs of the following list items to troubleshoot most common performance issues.
 
 + `uptime`
 + `dmesg | tail`
@@ -46,36 +46,36 @@ Starting from CentOS 7.6, the Linux kernel has supported Berkeley Packet Filter 
 
 This section introduces performance tuning based on the classified kernel subsystems.
 
-### CPU -- frequency scaling
+### CPU—frequency scaling
 
-cpufreq is a module that dynamically adjusts the CPU frequency and supports five modes. To ensure service performance, select the performance mode and fix the CPU frequency at the highest supported operating frequency without dynamic adjustment. The command for this operation is `cpupower frequency-set --governor performance`.
+cpufreq is a module that dynamically adjusts the CPU frequency. It supports five modes. To ensure service performance, select the performance mode and fix the CPU frequency at the highest supported operating frequency without dynamic adjustment. The command for this operation is `cpupower frequency-set --governor performance`.
 
-### CPU -- interrupt affinity
+### CPU—interrupt affinity
 
 - Automatic balance can be implemented through the `irqbalance` service.
 - Manual balance:
     - Identify the devices that need to balance interrupts. Starting from CentOS 7.5, the system automatically configures the best interrupt affinity for certain devices and their drivers, such as devices that use the `be2iscsi` driver and NVMe settings. You can no longer manually configure interrupt affinity for such devices.
     - For other devices, check the chip manual to see whether these devices support distributing interrupts.
         - If they do not, all interrupts of these devices are routed to the same CPU and cannot be modified.
-        - If they do, calculate the `smp_affinity` mask and set the corresponding configuration file. For details, see [kernel document](https://www.kernel.org/doc/Documentation/IRQ-affinity.txt).
+        - If they do, calculate the `smp_affinity` mask and set the corresponding configuration file. For details, see the [kernel document](https://www.kernel.org/doc/Documentation/IRQ-affinity.txt).
 
 ### NUMA CPU binding
 
 To avoid accessing memory across Non-Uniform Memory Access (NUMA) nodes as much as possible, you can bind a thread/process to certain CPU cores by setting the CPU affinity of the thread. For ordinary programs, you can use the `numactl` command for the CPU binding. For detailed usage, see the Linux manual pages. For network interface card (NIC) interrupts, see [tune network](#tune-network).
 
-### Memory -- transparent huge page (THP)
+### Memory—transparent huge page (THP)
 
-It is **NOT** recommended to use THP for database applications, because databases often have sparse rather than continuous memory access patterns. If high-level memory fragmentation is serious, a higher latency will occur when THP pages are allocated. If the direct compaction is enabled for THP, the CPU usage will surge. Therefore, it is recommended to disable the direct compaction for THP.
+It is **NOT** recommended to use THP for database applications, because databases often have sparse rather than continuous memory access patterns. If high-level memory fragmentation is serious, a higher latency will occur when THP pages are allocated. If the direct compaction is enabled for THP, the CPU usage will surge. Therefore, it is recommended to disable THP.
 
-``` sh
+```sh
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 echo never > /sys/kernel/mm/transparent_hugepage/defrag
 ```
 
-### Memory -- virtual memory parameters
+### Memory—virtual memory parameters
 
 - `dirty_ratio` percentage ratio. When the total amount of dirty page caches reach this percentage ratio of the total system memory, the system starts to use the `pdflush` operation to write the dirty page caches to disk. The default value of `dirty_ratio` is 20% and usually does not need adjustment. For high-performance SSDs such as NVMe devices, lowering this value helps improve the efficiency of memory reclamation.
-- `dirty_background_ratio` percentage ratio. When the total amount of dirty page caches reach this percentage ratio of the total system memory, the system starts to write the dirty page caches to disk in the background. The default value of `dirty_ratio` is 10% and usually does not need adjustment. For high-performance SSDs such as NVMe devices, lower value helps improve the efficiency of memory reclamation.
+- `dirty_background_ratio` percentage ratio. When the total amount of dirty page caches reach this percentage ratio of the total system memory, the system starts to write the dirty page caches to the disk in the background. The default value of `dirty_ratio` is 10% and usually does not need adjustment. For high-performance SSDs such as NVMe devices, setting a lower value helps improve the efficiency of memory reclamation.
 
 ### Storage and file system
 
@@ -89,13 +89,13 @@ The I/O scheduler determines when and how long I/O operations run on the storage
 echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 ```
 
-#### Formatting parameters -- block size
+#### Formatting parameters—block size
 
 Blocks are the working units of the file system. The block size determines how much data can be stored in a single block, and thus determines the minimum amount of data to be written or read each time.
 
-The default block size is suitable for most scenarios. However, if the block size (or the size of multiple blocks) is the same or slightly larger than the amount of data normally read or written each time, the file system performs better and the data storage efficiency is higher. Small files still uses the entire block. Files can be distributed among  multiple blocks, but this will increase runtime overhead.
+The default block size is suitable for most scenarios. However, if the block size (or the size of multiple blocks) is the same or slightly larger than the amount of data normally read or written each time, the file system performs better and the data storage efficiency is higher. Small files still uses the entire block. Files can be distributed among multiple blocks, but this will increase runtime overhead.
 
-When using the `mkfs` command to format a device, specify the block size as a part of the file system options. The parameters that specify the block size vary with the file system. For details, see the corresponding mkfs manual pages.
+When using the `mkfs` command to format a device, specify the block size as a part of the file system options. The parameters that specify the block size vary with the file system. For details, see the corresponding `mkfs` manual pages, such as using `man mkfs.ext4`.
 
 #### `mount` parameters
 
