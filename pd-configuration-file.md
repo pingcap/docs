@@ -278,9 +278,9 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 ### `public-path-prefix`
 
-+ When TiDB Dashboard is served behind a reverse proxy, this item sets the public URL path prefix for all web resources.
++ When TiDB Dashboard is accessed behind a reverse proxy, this item sets the public URL path prefix for all web resources.
 + Default value: `/dashboard`
-+ Do **not** modify this configuration item when TiDB Dashboard is not served behind a reverse proxy; otherwise, access issues might occur. See [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) for details.
++ Do **not** modify this configuration item when TiDB Dashboard is accessed not behind a reverse proxy; otherwise, access issues might occur. See [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) for details.
 
 ### `disable-telemetry`
 

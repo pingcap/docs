@@ -1,14 +1,14 @@
 ---
 title: Telemetry
-summary: Learn the telemetry feature, how to disable and view the status of this feature.
+summary: Learn the telemetry feature, how to disable the feature and view its status.
 category: reference
 ---
 
 # Telemetry
 
-By default, TiDB, TiUP and TiDB Dashboard collect usage information and share the information with PingCAP to help understand how to improve the product. For example, this usage information helps to prioritize new features.
+By default, TiDB, TiUP and TiDB Dashboard collect usage information and share the information with PingCAP to help understand how to improve the product. For example, this usage information helps prioritize new features.
 
-## What gets shared?
+## What is shared?
 
 The following sections describe the shared usage information in detail for each component. The usage details that get shared might change over time. These changes (if any) will be announced in [release notes](/releases/release-notes.md).
 
@@ -33,11 +33,11 @@ ADMIN SHOW TELEMETRY;
 
 ### TiDB Dashboard
 
-When the telemetry collection feature is enabled in TiDB Dashboard, user operations on the TiDB Dashboard web UI will be shared, including (but not limited to):
+When the telemetry collection feature is enabled in TiDB Dashboard, usage information on the TiDB Dashboard web UI will be shared, including (but not limited to):
 
 - A randomly generated telemetry ID.
 - User operation information, such as the name of the TiDB Dashboard web page accessed by the user.
-- Browser and OS information, such as browser name, OS name, screen resolution.
+- Browser and OS information, such as browser name, OS name, and screen resolution.
 
 To view the full content of the usage information shared to PingCAP, use the [Network Activity Inspector of Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/network) or the [Network Monitor of Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor).
 
@@ -47,7 +47,7 @@ When the telemetry collection feature is enabled in TiUP, user operations with T
 
 - A randomly generated telemetry ID.
 - Execution status of TiUP commands, such as whether the execution is successful and the execution duration.
-- Deployment characteristics, such as the size of hardware, TiDB components versions, deployment configuration names that have been modified.
+- Deployment characteristics, such as the size of hardware, TiDB components versions, and deployment configuration names that have been modified.
 
 To view the full content of the usage information shared to PingCAP, set the `TIUP_CLUSTER_DEBUG=enable` environment variable when executing the TiUP command. For example:
 
@@ -61,7 +61,7 @@ TIUP_CLUSTER_DEBUG=enable tiup cluster list
 
 ### Disable TiDB telemetry at deployment
 
-When deploying TiDB clusters, configure [`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry) to disable the TiDB telemetry collection on all TiDB instances. You can also use this setting to disable telemetry in the deployed TiDB clusters, which do not take effect until you restart the clusters.
+When deploying TiDB clusters, configure [`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry) to disable the TiDB telemetry collection on all TiDB instances. You can also use this setting to disable telemetry in an existing TiDB cluster, which does not take effect until you restart the cluster.
 
 Detailed steps to disable telemetry in different deployment tools are listed below.
 
@@ -108,7 +108,7 @@ See [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md) for details.
 <details>
   <summary>Deployment using TiUP Cluster</summary>
 
-Modify the deployment topology file `topology.yaml` to add content as follows:
+Modify the deployment topology file `topology.yaml` to add the following content:
 
 {{< copyable "" >}}
 
@@ -150,7 +150,7 @@ See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubern
 
 ### Disable TiDB telemetry for deployed TiDB clusters
 
-For deployed TiDB clusters, you can also modify the system variable [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry) to dynamically disable the TiDB telemetry collection:
+In existing TiDB clusters, you can also modify the system variable [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry) to dynamically disable the TiDB telemetry collection:
 
 {{< copyable "sql" >}}
 
@@ -160,7 +160,7 @@ SET GLOBAL tidb_enable_telemetry = 0;
 
 > **Note:**
 >
-> When you disable telemetry, using configuration files has higher priority over using system variables. That is, after telemetry collection is disabled by configuration files, the value of the system variable will be ignored.
+> When you disable telemetry, the configuration file has a higher priority over system variable. That is, after telemetry collection is disabled by the configuration file, the value of the system variable will be ignored.
 
 ### Disable TiDB Dashboard telemetry
 
