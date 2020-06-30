@@ -7,54 +7,28 @@ aliases: ['/docs/dev/architecture/']
 
 # TiDB Architecture
 
-The TiDB platform is comprised of three key components: the TiDB server, the PD server, and the TiKV server. In addition, TiDB also provides the [TiSpark](https://github.com/pingcap/tispark/) component for complex OLAP requirements and the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview) to make things simpler for the deployment and management on cloud.
+Compared to traditional databases, TiDB has the following advantages: 
+* Has distributed architecture and supports elastic scalability, flexible capacity expansion & reduction
+* Fully compatible with the MySQL protocol and the common features and syntax of MySQL, able to directly replicate from MySQL in most scenarios
+* Supports high availability in default and executes data recovery and failover autometicly; transparent to the business
+* Supports ACID transaction, suitable for scenarios requiring strong consistency such as bank transfer
+* A rich toolchain ecosystem covers a variety of scenarios including data migration, synchronization, backup, etc.
 
-![image alt text](/media/tidb-architecture.png)
+![image alt text](/media/tidb-architecture-1.png)
 
 ## TiDB server
 
-The TiDB server is in charge of the following operations:
+The TiDB server is in charge of external exposure the MySQL protocol connection endpoint, receiving SQL requests, processing and optimizing SQL related logics, and generates distributed execution plans finally. The TiDB server itself is stateless. It is horizontally scalable and provides the unified interface to the outside through the load balancing components such as Linux Virtual Server (LVS), HAProxy, or F5. It does not store data and is for computing and SQL analyzing only, transmitting actual data read request to TiKV nodes (or TiFlash nodes).
 
-1. Receiving the SQL requests
+## Placement Driver (PD) server
 
-2. Processing the SQL related logics
+The PD server is the managing component of the entire cluster and is in charge of storing real-time data distribution of every single TiKV node and overall topology structure of the entire TiDB cluster, providing Dashboard management UI, and allocating transaction IDs. The PD server can be seen as ‘The Brain’ of the entire cluster’ since it is not only for storage the metadata of the cluster, but also scheduling and load balancing regions in the TiKV cluster. Besides, The PD server at least three nodes which leads to high availability. It is recommended to deploy PD as an odd number of nodes.
 
-3. Locating the TiKV address for storing and computing data through Placement Driver (PD)
+## Storage servers
+### TiKV server
 
-4. Exchanging data with TiKV
+The TiKV server is responsible for storing data. From an external view, TiKV is a distributed transactional Key-Value storage engine. Region is the basic unit to store data. Each Region stores the data for a particular Key Range which is a left-closed and right-open interval from StartKey to EndKey. There are multiple Regions in each TiKV node. APIs of TiKV provides native supports to distributed transactions as in Key-Value and supports SI (Snapshot Isolation) level isolation in default, which is the core of how TiDB supports distributed transactions at SQL level. After processing SQL, SQL plan will transfer to actual calling of TiKV APIs. As a result, data will be stored in TiKV. Besides, all data will be autometically maintained as multiple replicas (Three replicas in default), which supports high availability and failover naturally.
 
-5. Returning the result
+### TiFlash Server
 
-The TiDB server is stateless. It does not store data and it is for computing only. TiDB is horizontally scalable and provides the unified interface to the outside through the load balancing components such as Linux Virtual Server (LVS), HAProxy, or F5.
-
-## Placement Driver server
-
-The Placement Driver (PD) server is the managing component of the entire cluster and is in charge of the following three operations:
-
-1. Storing the metadata of the cluster such as the region location of a specific key.
-
-2. Scheduling and load balancing regions in the TiKV cluster, including but not limited to data migration and Raft group leader transfer.
-
-3. Allocating the transaction ID that is globally unique and monotonically increasing.
-
-The PD server ensures redundancy by using the Raft consensus algorithm. The Raft leader is responsible for handling all operations, with remaining PD servers available for high availability only. It is recommended to deploy PD as an odd number of nodes.
-
-## TiKV server
-
-The TiKV server is responsible for storing data. From an external view, TiKV is a distributed transactional Key-Value storage engine. Region is the basic unit to store data. Each Region stores the data for a particular Key Range which is a left-closed and right-open interval from StartKey to EndKey. There are multiple Regions in each TiKV node. TiKV uses the Raft protocol for replication to ensure the data consistency and disaster recovery. The replicas of the same Region on different nodes compose a Raft Group. The load balancing of the data among different TiKV nodes is carried out by PD through scheduling the load in units of Region.
-
-## TiSpark
-
-TiSpark deals with the complex OLAP requirements. TiSpark makes Spark SQL directly run on the storage layer of the TiDB cluster, combines the advantages of the distributed TiKV cluster, and integrates into the big data ecosystem. With TiSpark, TiDB can support both OLTP and OLAP scenarios in one cluster, so the users never need to worry about data replication.
-
-## TiDB Operator
-
-TiDB Operator empowers TiDB users to deploy and manage TiDB clusters on mainstream cloud infrastructure (Kubernetes).
-
-TiDB Operator:
-
-+ Combines the best practices of the container orchestration from the cloud-native community with the know-how of TiDB operation and maintenance.
-
-+ Capable of quick deployment, mixed deployment among multiple clusters, automatic operation and maintenance, automatic fail-over, etc.
-
-+ Makes it user-friendly to use and manage TiDB.
+The TiFlash Server is a special kind of storage server. Differs to normal TiKV, TiFlash is a kind of column-oriented storage server which is mainly designed for OLAP scenarios. 
