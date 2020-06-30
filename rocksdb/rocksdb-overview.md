@@ -13,7 +13,7 @@ RocksDB allows users to create multiple Column Families. Column Families have th
 
 ## TiKV Architecture
 
-The architecture of  TiKV is illustrated as follows:
+The architecture of TiKV is illustrated as follows:
 
 ![TiKV RocksDB](/media/tikv-rocksdb.png)
 
