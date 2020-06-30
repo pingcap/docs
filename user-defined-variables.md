@@ -7,7 +7,7 @@ aliases: ['/docs/dev/user-defined-variables/','/docs/dev/reference/sql/language-
 
 # User-Defined Variables
 
-This document describes the concept of user-defined variables of TiDB and the methods to set and read the user-defined variables.
+This document describes the concept of user-defined variables in TiDB and the methods to set and read the user-defined variables.
 
 > **Warning:**
 >
@@ -38,10 +38,10 @@ For the assignment operator, you can also use `:=`. For example:
 {{< copyable "sql" >}}
 
 ```sql
-SET @favorite_db = 'TiDB';
+SET @favorite_db := 'TiDB';
 ```
 
-The content to the right of the assignment operator can be any legal expression. For example:
+The content to the right of the assignment operator can be any valid expression. For example:
 
 {{< copyable "sql" >}}
 
@@ -62,7 +62,7 @@ To read a user-defined variable, you can use the `SELECT` statement to query:
 {{< copyable "sql" >}}
 
 ```sql
-SELECT @a1, @a2, @t3
+SELECT @a1, @a2, @a3
 ```
 
 ```
@@ -76,7 +76,7 @@ SELECT @a1, @a2, @t3
 You can also assign values in the `SELECT` statement:
 
 ```sql
-SELECT @a1, @a2, @t3, @a4 := @a1+@a2+@a3;
+SELECT @a1, @a2, @a3, @a4 := @a1+@a2+@a3;
 ```
 
 ```
@@ -129,7 +129,7 @@ SELECT @not_exist;
 +------------+
 ```
 
-In addition to the `SELECT` statement to read the user-defined variables, another common usage is the `PREPARE` statement. For example:
+In addition to using the `SELECT` statement to read the user-defined variables, another common usage is the `PREPARE` statement. For example:
 
 {{< copyable "sql" >}}
 
@@ -149,7 +149,7 @@ EXECUTE stmt USING @a, @b;
 +------------+
 ```
 
-The contents of the user-defined variables will not be used as identifiers in the SQL statements. For example:
+The contents of the user-defined variables are not recognized as identifiers in the SQL statements. For example:
 
 {{< copyable "sql" >}}
 
