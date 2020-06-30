@@ -79,7 +79,6 @@ EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
 +---------------------------------+---------+-----------+--------------------------------+-------------------------------------------------------------+
 ```
 
-
 From the query execution plan, it can be seen that the index of city is used to read the `HANDLE` of the row that meets the condition `city ='Beijing'`, and then use this `HANDLE` to read the data of the row.
 
 If no data exists at path `$.city`, `JSON_EXTRACT` returns `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual generated  column as follows:
@@ -97,6 +96,7 @@ CREATE TABLE person (
 ```
 
 ## Validation of Generated columns
+
 Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation return errors:
 
 {{< copyable "sql" >}}
@@ -106,6 +106,7 @@ ERROR 1048 (23000): Column 'city' cannot be null
 ```
 
 ## Generated columns index replacement rule
+
 When an expression in a query is equivalent to a generated column with an index, TiDB replaces the expression with the corresponding generated column, so that the optimizer can take that index into account during execution plan construction.
 
 For example, the following example creates a generated column for the expression `a+1` and adds an index:
