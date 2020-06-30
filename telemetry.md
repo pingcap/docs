@@ -180,7 +180,7 @@ Create a configuration file `pd_config.toml` with the following content:
 disable-telemetry = true
 ```
 
-Specify the command line parameter `--config=pd_config.toml` when starting PD to take effect.
+Specify the `--config=pd_config.toml` command-line parameter when starting PD to take effect.
 
 See [PD Configuration Flags](/command-line-flags-for-pd-configuration.md#--config) and [PD Configuration File](/pd-configuration-file.md#disable-telemetry) for details.
 
@@ -198,7 +198,7 @@ Create a configuration file `pd_config.toml` with the following content:
 disable-telemetry = true
 ```
 
-When starting TiUP Playground, specify the command line parameter `--pd.config pd_config.toml` to take effect, for example:
+When starting TiUP Playground, specify the `--pd.config pd_config.toml` command-line parameter to take effect, for example:
 
 {{< copyable "shell-regular" >}}
 
