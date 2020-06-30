@@ -2,7 +2,7 @@
 title: CHANGE COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of CHANGE COLUMN for the TiDB database.
 category: reference
-aliases: ['/docs/dev/reference/sql/statements/change-column/']
+aliases: ['/docs/dev/sql-statements/sql-statement-change-column/','/docs/dev/reference/sql/statements/change-column/']
 ---
 
 # CHANGE COLUMN
@@ -18,10 +18,6 @@ The `ALTER TABLE.. CHANGE COLUMN` statement changes a column on an existing tabl
 **AlterTableSpec:**
 
 ![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
-
-**ColumnKeywordOpt:**
-
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
 
 **ColumnName:**
 

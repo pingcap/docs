@@ -2,7 +2,7 @@
 title: ADD INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of ADD INDEX for the TiDB database.
 category: reference
-aliases: ['/docs/dev/reference/sql/statements/add-index/']
+aliases: ['/docs/dev/sql-statements/sql-statement-add-index/','/docs/dev/reference/sql/statements/add-index/']
 ---
 
 # ADD INDEX
@@ -19,17 +19,53 @@ The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This
 
 ![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
 
-**ColumnKeywordOpt:**
+**Constraint:**
 
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
+![Constraint](/media/sqlgram/Constraint.png)
 
-**ColumnDef:**
+**ConstraintKeywordOpt:**
 
-![ColumnDef](/media/sqlgram/ColumnDef.png)
+![ConstraintKeywordOpt](/media/sqlgram/ConstraintKeywordOpt.png)
 
-**ColumnPosition:**
+**ConstraintElem:**
 
-![ColumnPosition](/media/sqlgram/ColumnPosition.png)
+![ConstraintElem](/media/sqlgram/ConstraintElem.png)
+
+**IndexNameAndTypeOpt:**
+
+![IndexNameAndTypeOpt](/media/sqlgram/IndexNameAndTypeOpt.png)
+
+**IndexPartSpecificationList:**
+
+![IndexPartSpecificationList](/media/sqlgram/IndexPartSpecificationList.png)
+
+**IndexPartSpecification:**
+
+![IndexPartSpecification](/media/sqlgram/IndexPartSpecification.png)
+
+**IndexOptionList:**
+
+![IndexOptionList](/media/sqlgram/IndexOptionList.png)
+
+**IndexOption:**
+
+![IndexOption](/media/sqlgram/IndexOption.png)
+
+**KeyOrIndex:**
+
+![KeyOrIndex](/media/sqlgram/KeyOrIndex.png)
+
+**IndexKeyTypeOpt:**
+
+![IndexKeyTypeOpt](/media/sqlgram/IndexKeyTypeOpt.png)
+
+**IndexInvisible:**
+
+![IndexInvisible](/media/sqlgram/IndexInvisible.png)
+
+**IndexTypeName:**
+
+![IndexTypeName](/media/sqlgram/IndexTypeName.png)
 
 ## Examples
 

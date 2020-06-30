@@ -2,7 +2,7 @@
 title: TiDB Lightning TiDB-backend
 summary: Choose how to write data into the TiDB cluster.
 category: reference
-aliases: ['/docs/dev/reference/tools/tidb-lightning/tidb-backend/']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/']
 ---
 
 # TiDB Lightning TiDB-backend
@@ -225,6 +225,29 @@ user = "root"
 password = ""
 
 #sql-mode = ""
+```
+
+</td></tr>
+<tr><td>
+
+```toml
+# [[route-rules]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
+# target-schema = "shard_db"
+# target-table = "shard_table"
+```
+
+</td><td>
+
+```toml
+# [[routes]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
+# target-schema = "shard_db"
+# target-table = "shard_table"
 ```
 
 </td></tr>
