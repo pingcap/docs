@@ -7,9 +7,33 @@ aliases: ['/docs/dev/tikv-control/','/docs/dev/reference/tools/tikv-control/']
 
 # TiKV Control User Guide
 
-TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster.
+TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. Its installation directory is as follows:
 
-When you compile TiKV, the `tikv-ctl` command is also compiled at the same time. If the cluster is deployed using TiDB Ansible, the `tikv-ctl` binary file exists in the corresponding `tidb-ansible/resources/bin` directory. If the cluster is deployed using the binary, the `tikv-ctl` file is in the `bin` directory together with other files such as `tidb-server`, `pd-server`, `tikv-server`, etc.
+* If the cluster is deployed using TiDB Ansible, it exists in the `resources/bin` subdirectory under the `ansible` directory.
+* If the cluster is deployed using TiUP, it exists in `~/.tiup/components/ctl/{VERSION}/` directory.
+
+[TiUP](https://github.com/pingcap-incubator/tiuptiup) is a deployment tool introduced later than `tidb-ansible`, and its usage is more simplified. `tikv-ctl` is also integrated in the `tiup` command. Execute the following command to call the `tikv-ctl` tool:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+tiup ctl tikv
+```
+
+```
+Starting component `ctl`: ~/.tiup/components/ctl/v4.0.0-rc.2/ctl tikv
+TiKV Control (tikv-ctl)
+Release Version:   4.0.0-rc.2
+Edition:           Community
+Git Commit Hash:   2fdb2804bf8ffaab4b18c4996970e19906296497
+Git Commit Branch: heads/refs/tags/v4.0.0-rc.2
+UTC Build Time:    2020-05-15 11:58:49
+Rust Version:      rustc 1.42.0-nightly (0de96d37f 2019-12-19)
+Enable Features:   jemalloc portable sse protobuf-codec
+Profile:           dist_release
+```
+
+You can add the appropriate parameters and subcommands behind `tiup ctl tikv`.
 
 ## General options
 
@@ -149,7 +173,11 @@ The properties can be used to check whether the Region is healthy or not. If not
 
 ### Compact data of each TiKV manually
 
-Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. You can use the `--db` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`. Also, the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
+Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. 
+
+- Use the `--host` option to specify the TiKV that you need to compact.
+- Use the `-d` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`.
+- Use the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db compact -d kv
@@ -164,29 +192,39 @@ Use the `compact-cluster` command to manually compact data of the whole TiKV clu
 
 The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
 
-In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism.
+In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped so as to avoid the failure to restart because those Regions's Raft state machine are damaged. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism.
 
-Follow the two steps to set a Region to Tombstone:
+Under normal circumstances, you can remove the corresponding Peer of this Region using `remove-peer` command:
 
-1. Remove the corresponding Peer of this Region on the machine in `pd-ctl`:
+{{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+```shell
+pd-ctl operator add remove-peer <region_id> <store_id>
+```
 
-    ```shell
-    pd-ctl operator add remove-peer <region_id> <store_id>
-    ```
+Then use the tikv-ctl to set a Region to Tombstone in the corresponding TiKV instance so it will skip this Region's health check at startup:
 
-2. Use the `tombstone` command to set a Region to Tombstone:
+{{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+```shell
+tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
+```
 
-    ```shell
-    tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
-    ```
+```
+success!
+```
 
-    ```
-    success!
-    ```
+However, in some cases, when it is not convenient to remove this Peer of this Region from PD, you can specify the `--force` option of tikv-ctl to force it to tombstone:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>,<region_id> --force
+```
+
+```
+success!
+```
 
 > **Note:**
 >
@@ -277,7 +315,8 @@ success!
 
 Use the `recover-mvcc` command in circumstances where TiKV cannot run normally caused by MVCC data corruption. It cross-checks 3 CFs ("default", "write", "lock") to recover from various kinds of inconsistency.
 
-Use the `-r` option to specify involved Regions by `region_id`. Use the `-p` option to specify PD endpoints.
+- Use the `-r` option to specify involved Regions by `region_id`. 
+- Use the `-p` option to specify PD endpoints.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
@@ -292,7 +331,7 @@ success!
 
 ### Ldb Command
 
-The ldb command line tool offers multiple data access and database administration commands. Some examples are listed below.
+The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below.
 For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
 
 Examples of data access sequence:
