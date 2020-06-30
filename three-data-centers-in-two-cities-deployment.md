@@ -1,10 +1,10 @@
 ---
-title: Deployment Solution for Three Data Centers in Two Cities
-summary: Learn the deployment solution for three data centers in two cities.
-category: how-to
+title: Three Data Centers in Two Cities Deployment
+summary: Learn the deployment solution to three data centers in two cities.
+category: tutorials
 ---
 
-# Deployment Solution for Three Data Centers in Two Cities
+# Three Data Centers in Two Cities Deployment
 
 This document introduces the architecture and configuration of the deployment solution for three data centers (DC) in two cities.
 
