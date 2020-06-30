@@ -740,7 +740,7 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
 
 > **Note:**
 >
-> By default, TiDB periodically shares usage details with PingCAP to help understand how to improve the product. For details that get shared and how to opt out of collection, see [Telemetry](/telemetry.md).
+> By default, TiDB periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
 
 ## Deployment FAQs
 

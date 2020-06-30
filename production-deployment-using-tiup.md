@@ -208,4 +208,4 @@ If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB clust
 
 > **Note:**
 >
-> By default, TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details that get shared and how to opt out of collection, see [Telemetry](/telemetry.md).
+> By default, TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).

@@ -69,4 +69,4 @@ See [Profile Instances Page](/dashboard/dashboard-profiling.md) for details.
 
 > **Note:**
 >
-> By default, TiDB Dashboard shares usage details with PingCAP to help understand how to improve the product. For details that get shared and how to opt out of collection, see [Telemetry](/telemetry.md).
+> By default, TiDB Dashboard shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).

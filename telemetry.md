@@ -1,11 +1,12 @@
 ---
 title: Telemetry
+summary: Learn the telemetry feature, how to disable and view the status of this feature.
 category: reference
 ---
 
 # Telemetry
 
-By default, TiDB, TiUP and TiDB Dashboard collect usage information and share it with PingCAP to help understand how to improve the product. For example, this usage information helps to prioritize new features.
+By default, TiDB, TiUP and TiDB Dashboard collect usage information and share the information with PingCAP to help understand how to improve the product. For example, this usage information helps to prioritize new features.
 
 ## What gets shared?
 
