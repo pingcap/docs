@@ -206,6 +206,7 @@
       + [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       + [`ADMIN`](/sql-statements/sql-statement-admin.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
+      + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       + [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       + [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
@@ -406,7 +407,6 @@
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
-      + [FAQ](/tiflash/tiflash-faq.md)
     + TiKV
       + [RocksDB Overview](/rocksdb/rocksdb-overview.md)
   + TiUP
@@ -417,6 +417,7 @@
       + [tiup-cluster](/tiup/tiup-cluster.md)
       + [tiup-mirror](/tiup/tiup-mirrors.md)
       + [tiup-bench](/tiup/tiup-bench.md)
+  + [Telemetry](/telemetry.md)
   + [Errors Codes](/error-codes.md)
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
