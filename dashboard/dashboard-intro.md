@@ -2,7 +2,7 @@
 title: TiDB Dashboard Introduction
 summary: Introduce TiDB Dashboard.
 category: how-to
-aliases: ["/docs/dev/dashboard/dashboard-intro/"]
+aliases: ['/docs/dev/dashboard/dashboard-intro/']
 ---
 
 # TiDB Dashboard Introduction

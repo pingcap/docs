@@ -9,18 +9,18 @@ By default, TiDB, TiUP and TiDB Dashboard collect usage information and share it
 
 ## What gets shared?
 
-The followings describe shared usage information in detail for each component. The details that get shared may change over time. The changes will be announced in release notes if that happens.
+The following sections describe the shared usage information in detail for each component. The usage details that get shared might change over time. These changes (if any) will be announced in [release notes](/releases/release-notes.md).
 
 > **Note:**
 >
-> **In all cases**, data stored in the cluster by users will **not** be shared. You may also refer to [PingCAP Privacy Policy](https://pingcap.com/privacy-policy/).
+> In **ALL** cases, user data stored in the TiDB cluster will **NOT** be shared. You can also refer to [PingCAP Privacy Policy](https://pingcap.com/privacy-policy).
 
 ### TiDB
 
-When TiDB telemetry collection is enabled, the TiDB cluster will collect usage details on an daily basis, including (but not limited to):
+When the telemetry collection feature is enabled in TiDB, the TiDB cluster collects usage details on a daily basis. These usage details include but are not limited to:
 
 - A randomly generated telemetry ID.
-- Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name, etc.
+- Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name.
 
 To view the full content of the usage information shared to PingCAP, execute the following SQL statement:
 
@@ -32,23 +32,23 @@ ADMIN SHOW TELEMETRY;
 
 ### TiDB Dashboard
 
-When TiDB Dashboard telemetry collection is enabled, user operations to TiDB Dashboard web UI will be shared, including (but not limited to):
+When the telemetry collection feature is enabled in TiDB Dashboard, user operations on the TiDB Dashboard web UI will be shared, including (but not limited to):
 
 - A randomly generated telemetry ID.
-- User operation information, such as the name of the TiDB Dashboard web page user accessed, etc.
-- Browser and OS information, such as browser name, OS name, screen resolution, etc.
+- User operation information, such as the name of the TiDB Dashboard web page accessed by the user.
+- Browser and OS information, such as browser name, OS name, screen resolution.
 
 To view the full content of the usage information shared to PingCAP, use the [Network Activity Inspector of Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/network) or the [Network Monitor of Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor).
 
 ### TiUP
 
-When TiUP telemetry collection is enabled, user operations to TiUP will be shared, including (but not limited to):
+When the telemetry collection feature is enabled in TiUP, user operations with TiUP will be shared, including (but not limited to):
 
 - A randomly generated telemetry ID.
-- Command execution status, such as whether execution is successful, execution duration, etc.
-- Deployment characteristics, such as the size of hardware, TiDB components versions, deployment configuration names that have been modified, etc.
+- Execution status of TiUP commands, such as whether the execution is successful and the execution duration.
+- Deployment characteristics, such as the size of hardware, TiDB components versions, deployment configuration names that have been modified.
 
-To view the full content of the usage information shared to PingCAP, set `TIUP_CLUSTER_DEBUG=enable` environment variable when executing the TiUP command, for example:
+To view the full content of the usage information shared to PingCAP, set the `TIUP_CLUSTER_DEBUG=enable` environment variable when executing the TiUP command. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -56,13 +56,13 @@ To view the full content of the usage information shared to PingCAP, set `TIUP_C
 TIUP_CLUSTER_DEBUG=enable tiup cluster list
 ```
 
-## Opt out telemetry
+## Disable telemetry
 
-### Opt out TiDB telemetry at deployment
+### Disable TiDB telemetry at deployment
 
-When deploying TiDB clusters, configure [`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry) for all TiDB instances to opt out the TiDB telemetry collection. Deployed TiDB clusters also respect this configuration item but a restart is needed to take effect.
+When deploying TiDB clusters, configure [`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry) to disable the TiDB telemetry collection on all TiDB instances. You can also use this setting to disable telemetry in the deployed TiDB clusters, which do not take effect until you restart the clusters.
 
-Detailed configure steps for different deployment tools are listed below.
+Detailed steps to disable telemetry in different deployment tools are listed below.
 
 <details>
   <summary>Binary deployment</summary>
@@ -291,4 +291,4 @@ In order to meet compliance requirements in different countries or regions, the 
 - For IP addresses from mainland China, usage information will be sent and stored on cloud servers in mainland China.
 - For IP addresses other than mainland China, usage information will be sent and stored on cloud servers in US.
 
-See [PingCAP Privacy Policy](https://pingcap.com/privacy-policy/) for details.
+See [PingCAP Privacy Policy](https://pingcap.com/privacy-policy) for details.
