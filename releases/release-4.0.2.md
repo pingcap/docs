@@ -53,7 +53,7 @@ TiDB version: 4.0.2
 
 + PD
 
-    - Support the operator to fail fast when trying to remove a leader peer [#2551](https://github.com/pingcap/pd/pull/2551)
+    - Support the operator to fail immediately when trying to remove a leader peer [#2551](https://github.com/pingcap/pd/pull/2551)
     - Set a suitable default store limit for TiFlash stores [#2559](https://github.com/pingcap/pd/pull/2559)
 
 + TiFlash
@@ -151,7 +151,7 @@ TiDB version: 4.0.2
     - Check the correctness of the `pd-server.dashboard-address` configuration item [#2517](https://github.com/pingcap/pd/pull/2517)
     - Fix the panic issue of PD when setting `store-limit-mode` to `auto` [#2544](https://github.com/pingcap/pd/pull/2544)
     - Fix the issue that hotspots cannot be identified in some cases [#2463](https://github.com/pingcap/pd/pull/2463)
-    - Fix the issue that Placement Rules prevent the store from changing to `tombstone` in some cases [#2546](https://github.com/pingcap/pd/pull/2546)
+    - Fix the issue that placement rules prevent the store from changing to `tombstone` in some cases [#2546](https://github.com/pingcap/pd/pull/2546)
     - Fix the panic issue of PD when upgrading from earlier versions in some cases [#2564](https://github.com/pingcap/pd/pull/2564)
 
 + TiFlash
