@@ -8,7 +8,7 @@
 + About TiDB
   + [TiDB Introduction](/overview.md)
   + [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
-  + [Key Features](/key-features.md)
+  + [Basic Features](/basic-features.md)
   + Compatibility
     + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
@@ -90,7 +90,8 @@
 + Performance Tuning
   + Software Tuning
     + Configuration
-      + [TiKV Tuning](/tune-tikv-performance.md)
+      + [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+      + [Tune TiKV Memory](/tune-tikv-memory-performance.md)
       + [TiKV Follower Read](/follower-read.md)
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
@@ -109,6 +110,7 @@
 + Tutorials
   + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
   + Best Practices
+    + [Use TiDB](/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
     + [Use HAProxy](/best-practices/haproxy-best-practices.md)
     + [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
@@ -205,6 +207,7 @@
       + [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       + [`ADMIN`](/sql-statements/sql-statement-admin.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
+      + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       + [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       + [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
@@ -405,7 +408,6 @@
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
-      + [FAQ](/tiflash/tiflash-faq.md)
   + TiUP
     + [Documentation Guide](/tiup/tiup-documentation-guide.md)
     + [Overview](/tiup/tiup-overview.md)
@@ -418,6 +420,7 @@
       + [tiup-cluster](/tiup/tiup-cluster.md)
       + [tiup-mirror](/tiup/tiup-mirror.md)
       + [tiup-bench](/tiup/tiup-bench.md)
+  + [Telemetry](/telemetry.md)
   + [Errors Codes](/error-codes.md)
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
