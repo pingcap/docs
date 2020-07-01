@@ -14,7 +14,7 @@ TiUP supports specifying the mirror source through the `TIUP_MIRRORS` environmen
 
 TiUP does not support third-party components for the time being, but the TiUP Team has developed the TiUP component development specifications and is developing the tiup-publish component. After everything is ready, a contributor can publish their own components to TiUP's official mirrors by using the `tiup publish <comp> <version>` command.
 
-## What is the difference between tiup-playground and tiup-cluster?
+## What is the difference between the TiUP playground and TiUP cluster components?
 
 The TiUP playground component is mainly used to build a stand-alone development environment on Linux or macOS operating systems. It helps you get started quickly and run a specified version of the TiUP cluster easily. The TiUP cluster component is mainly used to deploy and maintain a production environment cluster, which is usually a large-scale cluster.
 
