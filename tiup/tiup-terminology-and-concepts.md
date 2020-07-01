@@ -13,13 +13,13 @@ The TiUP program contains only a few commands for downloading, updating, and uni
 
 By running the `tiup <component>` command, you can run a component supported by TiUP. The running logic is:
 
-1. If you specify a version of a component through `tiup <component>[:version]`:
++ If you specify a version of a component through `tiup <component>[:version]`:
 
     - If the component does not have any version installed locally, TiUP downloads the latest stable version from the mirror server.
-    - If the component has one or more versions installed locally, but there is no version specified by you, TiUP downloads the version from the mirror server.
+    - If the component has one or more versions installed locally, but there is no version specified by you, TiUP downloads the specified version from the mirror server.
     - If the specified version of the component is installed locally, TiUP sets the environment variable to run the installed version.
 
-2. If you run a component through `tiup <component>` and specify no version:
++ If you run a component through `tiup <component>` and specify no version:
 
     - If the component does not have any version installed locally, TiUP downloads the latest stable version from the mirror server.
     - If one or more versions have been installed locally, TiUP sets the environment variable to run the latest installed version.
@@ -30,5 +30,5 @@ All components of TiUP are downloaded from the TiUP mirrors. TiUP mirrors contai
 
 TiUP mirrors can be a local file directory or an online HTTP server:
 
-1. `TIUP_MIRRORS=/path/to/local tiup list`
-2. `TIUP_MIRRORS=https://private-mirrors.example.com tiup list`
++ `TIUP_MIRRORS=/path/to/local tiup list`
++ `TIUP_MIRRORS=https://private-mirrors.example.com tiup list`

@@ -11,7 +11,7 @@ This document introduces some common issues when you use TiUP and the troublesho
 
 ### Can't see the latest component list using `tiup list`
 
-TiUP does not update the latest component list from the mirror server every time. You can force refresh the component list by running `tiup list`.
+TiUP does not update the latest component list from the mirror server every time. You can forcibly refresh the component list by running `tiup list`.
 
 ### Can't see the latest version information of a component using `tiup list <component>`
 
@@ -19,23 +19,23 @@ Same as the previous issue, the component version information is only obtained f
 
 ### Component downloading process is interrupted
 
-Unstable network might result in an interrupted component downloading process. You can try to download again. If you cannot download it after trying multiple times, it might be caused by the CDN server and you can report the issue [here](https://github.com/pingcap/tiup/issues).
+Unstable network might result in an interrupted component downloading process. You can try to download the component again. If you cannot download it after trying multiple times, it might be caused by the CDN server and you can report the issue [here](https://github.com/pingcap/tiup/issues).
 
 ### A checksum error occurs during component downloading process
 
-Because the CDN server has a short cache time, the new checksum file might not match the component package. Try to download again after 5 minutes. If it still does not match, report the issue [here](https://github.com/pingcap/tiup/issues).
+Because the CDN server has a short cache time, the new checksum file might not match the component package. Try to download again after 5 minutes. If the new checksum file still does not match the component package, report the issue [here](https://github.com/pingcap/tiup/issues).
 
 ## Troubleshoot TiUP cluster component
 
-### Prompt `unable to authenticate, attempted methods [none publickey]` during deployment
+### `unable to authenticate, attempted methods [none publickey]` is prompted during deployment
 
 During deployment, component packages are uploaded to the remote host and the initialization is performed. This process requires connecting to the remote host. This error is caused by the failure to find the SSH private key to connect to the remote host. 
 
-To solve this issue, confirm whether you specify the private key by running `tiup cluster deploy -i identity_file`:
+To solve this issue, confirm whether you have specified the private key by running `tiup cluster deploy -i identity_file`:
 
 1. If the `-i` flag is not specified, it might be that TiUP does not automatically find the private key path. It is recommended to explicitly specify the private key path using `-i`.
 2. If the `-i` flag is specified, it might be that TiUP cannot log in to the remote host using the specified private key. You can verify it by manually executing the `ssh -i identity_file user@remote` command.
-3. If a password is used to log in to the remote host, make sure that you have specified the `-p` parameter and entered the correct login password.
+3. If a password is used to log in to the remote host, make sure that you have specified the `-p` flag and entered the correct login password.
 
 ### The process of upgrading the cluster using the TiUP cluster component is interrupted
 
@@ -45,7 +45,7 @@ The upgrade process can be divided into the following steps:
 
 1. Back up the old version of components on all nodes
 2. Distribute new components to remote
-3. Rolling restart all components
+3. Perform a rolling restart to all components
 
 If the upgrade is interrupted during a rolling restart, instead of repeating the `tiup cluster upgrade` operation, you can use `tiup cluster restart -N <node1> -N <node2>` to restart the nodes that have not completed the restart.
 
@@ -53,4 +53,4 @@ If the number of un-restarted nodes of the same component is relatively large, y
 
 ### During the upgrade, you find that `node_exporter-9100.service/blackbox_exporter-9115.service` does not exist
 
-If you previously migrated your cluster from TiDB Ansible and the exporter was not deployed before in TiDB Ansible, this situation might happen. To solve it, you can manually copy the missing files from other nodes to the new node for the time being. The TiUP team will complete the missing components during the migration process.
+If you previously migrated your cluster from TiDB Ansible and the exporter was not deployed in TiDB Ansible, this situation might happen. To solve it, you can manually copy the missing files from other nodes to the new node for the time being. The TiUP team will complete the missing components during the migration process.

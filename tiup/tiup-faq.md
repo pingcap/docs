@@ -15,11 +15,11 @@ TiUP does not support third-party components for the time being, but the TiUP Te
 
 ## What is the difference between tiup-playground and tiup-cluster?
 
-The TiUP playground component is mainly used to build a stand-alone development environment on Linux or Mac operating systems. It helps you get started quickly and run a specified version of the TiUP cluster easily. The TiUP cluster component is mainly used to deploy and maintain a production environment cluster, which is usually a large-scale cluster.
+The TiUP playground component is mainly used to build a stand-alone development environment on Linux or macOS operating systems. It helps you get started quickly and run a specified version of the TiUP cluster easily. The TiUP cluster component is mainly used to deploy and maintain a production environment cluster, which is usually a large-scale cluster.
 
-## How do I write the topology file for the tiup-cluster component?
+## How do I write the topology file for the TiUP cluster component?
 
-Refer to [these templates](https://github.com/pingcap/tiup/tree/master/examples) to write the topology file. The templates includes:
+Refer to [these templates](https://github.com/pingcap/tiup/tree/master/examples) to write the topology file. The templates include:
 
 1. Multi-DC deployment topology
 2. Minimal deployment topology
@@ -29,11 +29,11 @@ You can edit your topology file based on the templates and your needs.
 
 ## Can multiple instances be deployed on the same host?
 
-You can use the TiUP cluster component to deploy multiple instances on the same host, but with different ports and directories configured, otherwise directory and port conflicts might occur.
+You can use the TiUP cluster component to deploy multiple instances on the same host, but with different ports and directories configured; otherwise, directory and port conflicts might occur.
 
 ## Are port and directory conflicts detected within the same cluster?
 
-Port and directory conflicts in the same cluster are detected during deployment and scaling. If there are any directory or port conflict, the deployment or scaling process is interrupted.
+Port and directory conflicts in the same cluster are detected during deployment and scaling. If there is any directory or port conflict, the deployment or scaling process is interrupted.
 
 ## Are port and directory conflicts detected among different clusters?
 
