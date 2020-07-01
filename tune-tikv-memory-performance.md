@@ -1,13 +1,8 @@
 ---
 title: Tune TiKV Memory Parameter Performance
 summary: Learn how to tune the TiKV parameters for optimal performance.
-<<<<<<< HEAD:tune-tikv-performance.md
-category: reference
-aliases: ['/docs/stable/tune-tikv-performance/','/docs/v4.0/tune-tikv-performance/','/docs/stable/reference/performance/tune-tikv/']
-=======
 category: tuning
-aliases: ['/docs/dev/tune-tikv-performance/','/docs/dev/reference/performance/tune-tikv/','/tidb/dev/tune-tikv-performance']
->>>>>>> e554165... *: add tuing TiKV thread pool performance (#2989):tune-tikv-memory-performance.md
+aliases: ['/docs/stable/tune-tikv-performance/','/docs/v4.0/tune-tikv-performance/','/docs/stable/reference/performance/tune-tikv/','/tidb/v4.0/tune-tikv-performance']
 ---
 
 # Tune TiKV Memory Parameter Performance
