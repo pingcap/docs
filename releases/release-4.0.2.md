@@ -5,7 +5,7 @@ category: Releases
 
 # TiDB 4.0.2 Release Notes
 
-Release date: June 30, 2020
+Release date: July 1, 2020
 
 TiDB version: 4.0.2
 
