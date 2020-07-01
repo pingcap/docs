@@ -2,11 +2,7 @@
 title: Manage TiUP Components with TiUP Commands
 summary: Learn how to manage TiUP components using TiUP commands.
 category: tools
-<<<<<<< HEAD:tiup/manage-tiup-component.md
-aliases: ['/docs/stable/tiup/manage-tiup-component/','/docs/v4.0/tiup/manage-tiup-component/','/docs/stable/reference/tools/tiup/manage-component/']
-=======
-aliases: ['/tidb/dev/manage-tiup-component','/docs/dev/tiup/manage-tiup-component/','/docs/dev/reference/tools/tiup/manage-component/']
->>>>>>> 9ddacd5... Update TiUP documentation from Special Week changes (#3052):tiup/tiup-component-management.md
+aliases: ['/tidb/v4.0/manage-tiup-component','/docs/stable/tiup/manage-tiup-component/','/docs/v4.0/tiup/manage-tiup-component/','/docs/stable/reference/tools/tiup/manage-component/']
 ---
 
 # Manage TiUP Components with TiUP Commands
