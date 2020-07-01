@@ -2,11 +2,7 @@
 title: TiDB Introduction
 summary: Learn about the key features and usage scenarios of TiDB.
 category: introduction
-<<<<<<< HEAD
-aliases: ['/docs/stable/overview/','/docs/v4.0/overview/']
-=======
-aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview/']
->>>>>>> 724a55b... *: add TiDB basic features and update overview (#2999)
+aliases: ['/docs/stable/overview/','/docs/v4.0/overview/','/docs/dev/key-features/','/tidb/dev/key-features']
 ---
 
 # TiDB Introduction
