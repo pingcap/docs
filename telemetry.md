@@ -148,7 +148,7 @@ See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubern
 
 > **Note:**
 >
-> This configration item requires at least TiDB Operator v1.1.2 to take effect.
+> This configuration item requires TiDB Operator v1.1.2 or later to take effect.
 
 </details>
 
@@ -261,7 +261,7 @@ See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubern
 
 > **Note:**
 >
-> This configration item requires at least TiDB Operator v1.1.2 to take effect.
+> This configuration item requires TiDB Operator v1.1.2 or later to take effect.
 
 </details>
 
