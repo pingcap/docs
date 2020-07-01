@@ -67,6 +67,7 @@
       + [Use BR Tool](/br/backup-and-restore-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
+  + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -90,7 +91,13 @@
 + Performance Tuning
   + Software Tuning
     + Configuration
+<<<<<<< HEAD
       + [TiKV Tuning](/tune-tikv-performance.md)
+=======
+      + [Tune TiDB Memory](/configure-memory-usage.md)
+      + [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+      + [Tune TiKV Memory](/tune-tikv-memory-performance.md)
+>>>>>>> 1fe4797... Update TOC.md (#3100)
       + [TiKV Follower Read](/follower-read.md)
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
