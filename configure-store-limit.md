@@ -39,7 +39,7 @@ To view the limit setting of the current store, run the following commands:
 {{< copyable "shell-regular" >}}
 
 ```bash
-store limit                         // Shows the speed limit of adding or deleting peers in all stores.
+store limit                         // Shows the speed limit of adding and deleting peers in all stores.
 store limit add-peer                // Shows the speed limit of adding peers in all stores.
 store limit remove-peer             // Shows the speed limit of deleting peers in all stores. 
 ```
@@ -51,7 +51,7 @@ To set the speed limit for all stores, run the following commands:
 {{< copyable "shell-regular" >}}
 
 ```bash
-store limit all 5                   // All stores can at most add or delete 5 peers per minute.
+store limit all 5                   // All stores can at most add and delete 5 peers per minute.
 store limit all 5 add-peer          // All stores can at most add 5 peers per minute.
 store limit all 5 remove-peer       // All stores can at most delete 5 peers per minute.
 ```
@@ -63,7 +63,7 @@ To set the speed limit for a single store, run the following commands:
 {{< copyable "shell-regular" >}}
 
 ```bash
-store limit 1 5                     // store 1 can at most add or delete 5 peers per minute.
+store limit 1 5                     // store 1 can at most add and delete 5 peers per minute.
 store limit 1 5 add-peer            // store 1 can at most add 5 peers per minute.
 store limit 1 5 remove-peer         // store 1 can at most delete 5 peers per minute.
 ```
