@@ -91,13 +91,9 @@
 + Performance Tuning
   + Software Tuning
     + Configuration
-<<<<<<< HEAD
-      + [TiKV Tuning](/tune-tikv-performance.md)
-=======
       + [Tune TiDB Memory](/configure-memory-usage.md)
       + [Tune TiKV Threads](/tune-tikv-thread-performance.md)
       + [Tune TiKV Memory](/tune-tikv-memory-performance.md)
->>>>>>> 1fe4797... Update TOC.md (#3100)
       + [TiKV Follower Read](/follower-read.md)
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
