@@ -32,7 +32,7 @@ System tuning must be based on the results of system performance analysis. This 
 + `sar -n TCP,ETCP 1`
 + `top`
 
-For detailed usage, see the Linux manual pages.
+For detailed usage, see the corresponding `man` instructions.
 
 ### perf
 
