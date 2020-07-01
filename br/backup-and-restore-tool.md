@@ -285,7 +285,7 @@ br backup full \
     --filter 'db*.tbl*' \
     --storage "local:///tmp/backup" \
     --ratelimit 120 \
-    --log-file backuptable.log
+    --log-file backupfull.log
 ```
 
 ### Back up data to Amazon S3 backend
