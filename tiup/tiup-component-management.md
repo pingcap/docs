@@ -30,7 +30,7 @@ You can also use the following flags in the above commands:
 
 - `--installed`: checks which components or which version of a specific component has been installed locally.
 -`--all`: views all components, including the hidden ones
--`--verbose`: View all columns (including installed versions and supported platforms)
+-`--verbose`: views all columns (including installed versions and supported platforms)
 
 Example 1: View all currently installed components.
 
