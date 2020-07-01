@@ -48,7 +48,7 @@ TiDB version: 4.0.2
 
 + TiKV
 
-    - Add `encryption-meta` command for TiKV Control [#8103](https://github.com/tikv/tikv/pull/8103)
+    - Support the `encryption-meta` command in TiKV Control [#8103](https://github.com/tikv/tikv/pull/8103)
     - Add a perf context metric for `RocksDB::WriteImpl` [#7991](https://github.com/tikv/tikv/pull/7991)
 
 + PD
