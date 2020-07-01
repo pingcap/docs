@@ -1,5 +1,6 @@
 ---
 title: TiUP Troubleshooting Guide
+summary: Introduce the troubleshooting methods and solutions if you encounter issues when using TiUP.
 category: tools
 ---
 
@@ -33,9 +34,9 @@ During deployment, component packages are uploaded to the remote host and the in
 
 To solve this issue, confirm whether you have specified the private key by running `tiup cluster deploy -i identity_file`:
 
-1. If the `-i` flag is not specified, it might be that TiUP does not automatically find the private key path. It is recommended to explicitly specify the private key path using `-i`.
-2. If the `-i` flag is specified, it might be that TiUP cannot log in to the remote host using the specified private key. You can verify it by manually executing the `ssh -i identity_file user@remote` command.
-3. If a password is used to log in to the remote host, make sure that you have specified the `-p` flag and entered the correct login password.
+- If the `-i` flag is not specified, it might be that TiUP does not automatically find the private key path. It is recommended to explicitly specify the private key path using `-i`.
+- If the `-i` flag is specified, it might be that TiUP cannot log in to the remote host using the specified private key. You can verify it by manually executing the `ssh -i identity_file user@remote` command.
+- If a password is used to log in to the remote host, make sure that you have specified the `-p` flag and entered the correct login password.
 
 ### The process of upgrading the cluster using the TiUP cluster component is interrupted
 

@@ -1,5 +1,6 @@
 ---
 title: TiUP FAQ
+summary: Provide answers to common questions asked by TiUP users.
 category: tools
 ---
 
@@ -21,9 +22,9 @@ The TiUP playground component is mainly used to build a stand-alone development 
 
 Refer to [these templates](https://github.com/pingcap/tiup/tree/master/examples) to write the topology file. The templates include:
 
-1. Multi-DC deployment topology
-2. Minimal deployment topology
-3. Complete topology file
+- Multi-DC deployment topology
+- Minimal deployment topology
+- Complete topology file
 
 You can edit your topology file based on the templates and your needs.
 
