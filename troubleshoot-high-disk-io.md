@@ -57,7 +57,7 @@ In addition, some other content may be needed to help locate whether the bottlen
   
     - The `apply-pool-size` configuration of `[raftstore]` is too small (recommended between [1, 5], not recommended to be too large), Thread CPU/apply cpu is relatively high;
     - The machine's CPU resources are not enough.
-    - Region write hotspot issue, the CPU usage of a single apply thread is relatively high (by modifying the Grafana expression, plus by (instance, name) to see the CPU usage of each thread), temporarily for the hot write of a single Region is no solution, this scene is being optimized recently.
+    - Write hotspot issue of a single Region (Currently, the solution to this issue is still on the way). The CPU usage of a single `apply` thread is high (which can be viewed by modifying the Grafana expression, appended with `by (instance, name)`).
     - It is slow to write RocksDB, and the RocksDB kv/max write duration is relatively high (a single Raft log may contain many kvs. When writing RocksDB, 128 kvs will be written to RocksDB in a batch write, so one apply log may involve multiple RocksDB writes).
     - In other cases, bugs need to be reported.
 
