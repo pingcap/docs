@@ -110,7 +110,8 @@
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
 + Tutorials
-  + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
+  + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
+  + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
   + Best Practices
     + [Use TiDB](/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
@@ -412,12 +413,16 @@
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
   + TiUP
+    + [Documentation Guide](/tiup/tiup-documentation-guide.md)
     + [Overview](/tiup/tiup-overview.md)
-    + [Manage TiUP Components](/tiup/manage-tiup-component.md)
+    + [Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md)
+    + [Manage TiUP Components](/tiup/tiup-component-management.md)
+    + [FAQ](/tiup/tiup-faq.md)
+    + [Troubleshooting Guide](/tiup/tiup-troubleshooting-guide.md)
     + TiUP Components
       + [tiup-playground](/tiup/tiup-playground.md)
       + [tiup-cluster](/tiup/tiup-cluster.md)
-      + [tiup-mirror](/tiup/tiup-mirrors.md)
+      + [tiup-mirror](/tiup/tiup-mirror.md)
       + [tiup-bench](/tiup/tiup-bench.md)
   + [Telemetry](/telemetry.md)
   + [Errors Codes](/error-codes.md)
@@ -431,6 +436,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.2](/releases/release-4.0.2.md)
     + [4.0.1](/releases/release-4.0.1.md)
     + [4.0 GA](/releases/release-4.0-ga.md)
     + [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
