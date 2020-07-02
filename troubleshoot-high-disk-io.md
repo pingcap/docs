@@ -53,7 +53,7 @@ In addition, some other panel metrics might help you determine whether the bottl
     - Whether the value of `store-pool-size` of `[raftstore]` is too small. It is recommended to set this value between `[1,5]` and not too large.
     - Whether the CPU resource of the machine is insufficient.
 
-- Apply log is slow. TiKV Grafana's Raft I/O and apply log duration are relatively high, usually accompanied by a relatively high Raft Propose/apply wait duration. The possible situations are as follows:
+- `append log` is slow. TiKV Grafana's `Raft I/O` and `append log duration` metrics are relatively high, which might usually occur along with relatively high `Raft Propose`/`apply wait duration`. The possible causes are as follows:
   
     - The `apply-pool-size` configuration of `[raftstore]` is too small (recommended between [1, 5], not recommended to be too large), Thread CPU/apply cpu is relatively high;
     - Insufficient CPU resources on the machine.
