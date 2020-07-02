@@ -29,7 +29,7 @@ For the first situation above (only one machine with high I/O usage), you can fu
 
 The main storage component of the TiDB cluster is TiKV. One TiKV instance contains two RocksDB instances: one for storing Raft logs, located in `data/raft`, and the other for storing real data, located in `data/db`.
 
-In `TiKV-Details`> `Raft IO`, you can see the relevant metrics for disk writes of these two instances:
+In **TiKV-Details** > **Raft IO**, you can see the metrics related to disk writes of these two instances:
 
 - `Append log duration`: This monitor indicates the response time of RocksDB writes that store Raft logs. The .99 response should be within 50ms.
 - `Apply log duration`: This monitor indicates the response time for RocksDB writes that store real data. The .99 response should be within 100ms.
