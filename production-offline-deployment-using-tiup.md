@@ -2,6 +2,7 @@
 title: Deploy a TiDB Cluster Offline Using TiUP
 summary: Introduce how to deploy a TiDB cluster offline using TiUP.
 category: how-to
+aliases: ['/docs/dev/production-offline-deployment-using-tiup/']
 ---
 
 # Deploy a TiDB Cluster Offline Using TiUP
@@ -14,7 +15,7 @@ You can either download the official package, or manually pack a component packa
 
 ### Download the official TiUP offline component package
 
-Download the prepared offline mirror package at <http://download.pingcap.org> by running the following command:
+Download the prepared offline mirror package at `http://download.pingcap.org` by running the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -275,3 +276,7 @@ tiup cluster start tidb-test
 If you see the ``Deployed cluster `tidb-test` successfully`` output at the end of the log, the deployment is successful.
 
 After the deployment, see [Deploy and Maintain TiDB Using TiUP](/tiup/tiup-cluster.md) for the cluster operations.
+
+> **Note:**
+>
+> By default, TiDB and TiUP share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).

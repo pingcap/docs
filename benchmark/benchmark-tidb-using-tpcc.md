@@ -1,7 +1,7 @@
 ---
 title: How to Run TPC-C Test on TiDB
 category: benchmark
-aliases: ['/docs/dev/benchmark/how-to-run-tpcc/']
+aliases: ['/docs/dev/benchmark/benchmark-tidb-using-tpcc/','/docs/dev/benchmark/how-to-run-tpcc/']
 ---
 
 # How to Run TPC-C Test on TiDB
@@ -105,7 +105,7 @@ enabled = true
 
 ### Configure TiKV
 
-You can use the basic configuration at the beginning. Then after the test is run, you can adjust it based on the metrics on Grafana and the [TiKV Tuning Instructions](/tune-tikv-performance.md).
+You can use the basic configuration at the beginning. Then after the test is run, you can adjust it based on the metrics on Grafana and the [Tune TiKV Thread Performance](/tune-tikv-thread-performance.md).
 
 ### Configure BenchmarkSQL
 
