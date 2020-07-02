@@ -8,7 +8,7 @@
 + About TiDB
   + [TiDB Introduction](/overview.md)
   + [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
-  + [Key Features](/key-features.md)
+  + [Basic Features](/basic-features.md)
   + Compatibility
     + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
@@ -67,6 +67,7 @@
       + [Use BR Tool](/br/backup-and-restore-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
+  + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -90,7 +91,9 @@
 + Performance Tuning
   + Software Tuning
     + Configuration
-      + [TiKV Tuning](/tune-tikv-performance.md)
+      + [Tune TiDB Memory](/configure-memory-usage.md)
+      + [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+      + [Tune TiKV Memory](/tune-tikv-memory-performance.md)
       + [TiKV Follower Read](/follower-read.md)
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
@@ -107,7 +110,7 @@
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
 + Tutorials
-  + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
+  + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
   + Best Practices
     + [Use TiDB](/tidb-best-practices.md)
@@ -207,6 +210,7 @@
       + [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       + [`ADMIN`](/sql-statements/sql-statement-admin.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
+      + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       + [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       + [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
@@ -407,15 +411,19 @@
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
-      + [FAQ](/tiflash/tiflash-faq.md)
   + TiUP
+    + [Documentation Guide](/tiup/tiup-documentation-guide.md)
     + [Overview](/tiup/tiup-overview.md)
-    + [Manage TiUP Components](/tiup/manage-tiup-component.md)
+    + [Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md)
+    + [Manage TiUP Components](/tiup/tiup-component-management.md)
+    + [FAQ](/tiup/tiup-faq.md)
+    + [Troubleshooting Guide](/tiup/tiup-troubleshooting-guide.md)
     + TiUP Components
       + [tiup-playground](/tiup/tiup-playground.md)
       + [tiup-cluster](/tiup/tiup-cluster.md)
-      + [tiup-mirror](/tiup/tiup-mirrors.md)
+      + [tiup-mirror](/tiup/tiup-mirror.md)
       + [tiup-bench](/tiup/tiup-bench.md)
+  + [Telemetry](/telemetry.md)
   + [Errors Codes](/error-codes.md)
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
@@ -427,6 +435,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.2](/releases/release-4.0.2.md)
     + [4.0.1](/releases/release-4.0.1.md)
     + [4.0 GA](/releases/release-4.0-ga.md)
     + [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
