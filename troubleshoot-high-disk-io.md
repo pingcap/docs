@@ -8,7 +8,7 @@ category: reference
 
 This article mainly introduces how to locate and deal with the problem of high TiDB disk I/O usage.
 
-## Confirm the current I/O indicators
+## Check the current I/O metrics
 
 When the system response slows down, if the bottleneck of the CPU and the bottleneck of data transaction conflicts have been investigated, you need to start with I/O indicators to help determine the current system bottleneck.
 
