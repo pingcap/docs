@@ -91,6 +91,7 @@
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
   + Scale
+<<<<<<< HEAD
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
   + Upgrade
     - [Upgrade to TiDB 3.1](/upgrade-tidb-using-ansible.md)
@@ -98,6 +99,128 @@
     - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
     - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
     - [Troubleshoot TiDB Lightning](/troubleshoot-tidb-lightning.md)
+=======
+    + [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
+    + [Use TiDB Ansible](/scale-tidb-using-ansible.md)
+    + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
+  + Backup and Restore
+    + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
+    + [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
+    + Use BR Tool
+      + [Use BR Tool](/br/backup-and-restore-tool.md)
+      + [BR Use Cases](/br/backup-and-restore-use-cases.md)
+      + [BR storages](/br/backup-and-restore-storages.md)
+  + [Configure Time Zone](/configure-time-zone.md)
+  + [Daily Checklist](/daily-check.md)
+  + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
+  + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
+  + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
+  + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
++ Monitor and Alert
+  + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
+  + [Monitoring API](/tidb-monitoring-api.md)
+  + [Deploy Monitoring Services](/deploy-monitoring-services.md)
+  + [TiDB Cluster Alert Rules](/alert-rules.md)
+  + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
++ Troubleshoot
+  + [Identify Slow Queries](/identify-slow-queries.md)
+  + [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
+  + [Identify Expensive Queries](/identify-expensive-queries.md)
+  + [Statement Summary Tables](/statement-summary-tables.md)
+  + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
+  + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+  + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
+  + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
++ Performance Tuning
+  + Software Tuning
+    + Configuration
+      + [Tune TiDB Memory](/configure-memory-usage.md)
+      + [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+      + [Tune TiKV Memory](/tune-tikv-memory-performance.md)
+      + [TiKV Follower Read](/follower-read.md)
+      + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
+    + [Coprocessor Cache](/coprocessor-cache.md)
+  + SQL Tuning
+    + [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)
+    + SQL Optimization
+      + [SQL Optimization Process](/sql-optimization-concepts.md)
+      + Logic Optimization
+        + [Join Reorder](/join-reorder.md)
+      + Physical Optimization
+        + [Statistics](/statistics.md)
+      + Control Execution Plan
+        + [Optimizer Hints](/optimizer-hints.md)
+        + [SQL Plan Management](/sql-plan-management.md)
+        + [Access Tables Using `IndexMerge`](/index-merge.md)
++ Tutorials
+  + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
+  + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
+  + Best Practices
+    + [Use TiDB](/tidb-best-practices.md)
+    + [Java Application Development](/best-practices/java-app-best-practices.md)
+    + [Use HAProxy](/best-practices/haproxy-best-practices.md)
+    + [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
+    + [Grafana Monitoring](/best-practices/grafana-monitor-best-practices.md)
+    + [PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
+    + [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
+  + [Use Placement Rules](/configure-placement-rules.md)
+  + [Use Load Base Split](/configure-load-base-split.md)
+  + [Use Store Limit](/configure-store-limit.md)
++ TiDB Ecosystem Tools
+  + [Overview](/ecosystem-tool-user-guide.md)
+  + [Use Cases](/ecosystem-tool-user-case.md)
+  + [Download](/download-ecosystem-tools.md)
+  + Backup & Restore (BR)
+    + [BR FAQ](/br/backup-and-restore-faq.md)
+    + [Use BR Tool](/br/backup-and-restore-tool.md)
+    + [BR Use Cases](/br/backup-and-restore-use-cases.md)
+  + TiDB Binlog
+    + [Overview](/tidb-binlog/tidb-binlog-overview.md)
+    + [Deploy](/tidb-binlog/deploy-tidb-binlog.md)
+    + [Maintain](/tidb-binlog/maintain-tidb-binlog-cluster.md)
+    + [Configure](/tidb-binlog/tidb-binlog-configuration-file.md)
+      + [Pump](/tidb-binlog/tidb-binlog-configuration-file.md#pump)
+      + [Drainer](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
+    + [Upgrade](/tidb-binlog/upgrade-tidb-binlog.md)
+    + [Monitor](/tidb-binlog/monitor-tidb-binlog-cluster.md)
+    + [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
+    + [binlogctl](/tidb-binlog/binlog-control.md)
+    + [Binlog Slave Client](/tidb-binlog/binlog-slave-client.md)
+    + [TiDB Binlog Relay Log](/tidb-binlog/tidb-binlog-relay-log.md)
+    + [Bidirectional Replication Between TiDB Clusters](/tidb-binlog/bidirectional-replication-between-tidb-clusters.md)
+    + [Glossary](/tidb-binlog/tidb-binlog-glossary.md)
+    + Troubleshoot
+      + [Troubleshoot](/tidb-binlog/troubleshoot-tidb-binlog.md)
+      + [Handle Errors](/tidb-binlog/handle-tidb-binlog-errors.md)
+    + [FAQ](/tidb-binlog/tidb-binlog-faq.md)
+  + TiDB Lightning
+    + [Overview](/tidb-lightning/tidb-lightning-overview.md)
+    + [Tutorial](/get-started-with-tidb-lightning.md)
+    + [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
+    + [Configure](/tidb-lightning/tidb-lightning-configuration.md)
+    + Key Features
+      + [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
+      + [Table Filter](/tidb-lightning/tidb-lightning-table-filter.md)
+      + [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+      + [TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md)
+      + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
+    + [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
+    + [Troubleshoot](/troubleshoot-tidb-lightning.md)
+    + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
+    + [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
+  + [TiCDC](/ticdc/ticdc-overview.md)
+  + sync-diff-inspector
+    + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
+    + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
+    + [Data Check in Sharding Scenarios](/sync-diff-inspector/shard-diff.md)
+    + [Data Check for TiDB Upstream/Downstream Clusters](/sync-diff-inspector/upstream-downstream-diff.md)
+  + [Loader](/loader-overview.md)
+  + [Mydumper](/mydumper-overview.md)
+  + [Syncer](/syncer-overview.md)
+  + TiSpark
+    + [Quick Start](/get-started-with-tispark.md)
+    + [User Guide](/tispark-overview.md)
+>>>>>>> 23e53ef... tutorial: add doc for store limit (#2947)
 + Reference
   + SQL
     - [MySQL Compatibility](/mysql-compatibility.md)
