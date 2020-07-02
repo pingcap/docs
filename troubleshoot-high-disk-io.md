@@ -50,7 +50,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 - `append log` is slow. TiKV Grafana's `Raft I/O` and `append log duration` metrics are relatively high, which is often due to slow disk writes. You can check the value of `WAL Sync Duration max` in **RocksDB-raft** to determine the cause of slow `append log`. Otherwise, you might need to report a bug.
 - The `raftstore` thread is busy. In TiKV Grafana, `Raft Propose`/`propose wait duration` is significantly higher than `append log duration`. Please check the following aspects for troubleshooting:
 
-    - Is the `store-pool-size` configuration of `[raftstore]` too small (this value is recommended between [1,5], not too large).
+    - Whether the value of `store-pool-size` of `[raftstore]` is too small. It is recommended to set this value between `[1,5]` and not too large.
     - Is machine's CPU insufficient.
 
 - Apply log is slow. TiKV Grafana's Raft I/O and apply log duration are relatively high, usually accompanied by a relatively high Raft Propose/apply wait duration. The possible situations are as follows:
