@@ -34,7 +34,7 @@ In **TiKV-Details** > **Raft IO**, you can see the metrics related to disk write
 - `Append log duration`: This metric indicates the response time of writes into RockDB that stores Raft logs. The `.99` response time should be within 50 ms.
 - `Apply log duration`: This metric indicates the response time of writes into RockDB that stores real data. The `.99` response should be within 100 ms.
 
-These two monitors also have `.. per server` monitor panels to provide assistance to view hotspot writes.
+These two metrics also have the **.. per server** monitoring panel to help you view the write hotspots.
 
 #### The third type of panel
 
