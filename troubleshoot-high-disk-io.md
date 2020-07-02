@@ -58,7 +58,7 @@ In addition, some other content may be needed to help locate whether the bottlen
     - The `apply-pool-size` configuration of `[raftstore]` is too small (recommended between [1, 5], not recommended to be too large), Thread CPU/apply cpu is relatively high;
     - The machine's CPU resources are not enough.
     - Write hotspot issue of a single Region (Currently, the solution to this issue is still on the way). The CPU usage of a single `apply` thread is high (which can be viewed by modifying the Grafana expression, appended with `by (instance, name)`).
-    - It is slow to write RocksDB, and the RocksDB kv/max write duration is relatively high (a single Raft log may contain many kvs. When writing RocksDB, 128 kvs will be written to RocksDB in a batch write, so one apply log may involve multiple RocksDB writes).
+    - Slow write into RocksDB, and `RocksDB kv`/`max write duration` is high. A single Raft log might contain multiple key-value pairs (kv). 128 kvs are written to RocksDB in a batch, so one `apply` log might involve multiple RocksDB writes.
     - In other cases, bugs need to be reported.
 
 - Raft commit log is slow. TiKV Grafana's Raft I/O and commit log duration are relatively high (this metric is only available in Grafana 4.x). Each Region corresponds to an independent Raft group. Raft has a flow control mechanism, similar to the sliding window mechanism of TCP, through the parameter [raftstore] raft-max-inflight-msgs = 256 to control the size of the sliding window, if there is a hot spot Write and commit log duration is relatively high, you can moderately change the parameters, such as 1024.
