@@ -47,7 +47,7 @@ In `TiKV-Details`> `Storage`, there are monitor related to storage:
 
 In addition, some other content may be needed to help locate whether the bottleneck is I/O, and you can try to set some recommended parameters. By checking the prewrite/commit/raw-put of TiKV gRPC (raw kv cluster only) duration, it is confirmed that TiKV write is indeed slow. Several common situations are as follows:
 
-- Append log is slow. TiKV Grafana's Raft I/O and append log duration are relatively high. Usually, it is due to slow disk writing. You can check the value of WAL Sync Duration max of RocksDB-raft to confirm, otherwise you may need to report a bug.
+- `append log` is slow. TiKV Grafana's `Raft I/O` and `append log duration` metrics are relatively high, which is often due to slow disk writes. You can check the value of `WAL Sync Duration max` in **RocksDB-raft** to determine the cause of slow `append log`. Otherwise, you might need to report a bug.
 - The raftstore thread is busy. TiKV grafana's Raft Propose/propose wait duration is significantly higher than append log duration. Please check the following two points:
 
     - Is the `store-pool-size` configuration of `[raftstore]` too small (this value is recommended between [1,5], not too large).
