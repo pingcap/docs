@@ -27,6 +27,7 @@ The following is the description of PD Dashboard metrics items:
 ![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
 
 ## Key metrics description
+
 ## Cluster
 
 - PD scheduler config: The list of PD scheduler configurations
@@ -35,8 +36,8 @@ The following is the description of PD Dashboard metrics items:
 - Current ID allocation: The maximun allocatable ID for new store/peer
 - Region label isolation level: The number of Regions in different label levels
 - Label distribution: The distribution status of the labels in the cluster
-![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
 
+![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
 
 ## Operator
 
@@ -130,7 +131,6 @@ The following is the description of PD Dashboard metrics items:
 - Raft applied index: The last applied index of Raft
 
 ![PD Dashboard - etcd metrics](/media/pd-dashboard-etcd-v2.png)
-
 
 Cluster | Label distribution | The distribution status of the labels in the cluster |
 Cluster | pd_cluster_metadata | The metadata of the PD cluster including cluster ID, the timestamp, and the generated ID. |
