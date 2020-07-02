@@ -51,7 +51,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 - The `raftstore` thread is busy. In TiKV Grafana, `Raft Propose`/`propose wait duration` is significantly higher than `append log duration`. Please check the following aspects for troubleshooting:
 
     - Whether the value of `store-pool-size` of `[raftstore]` is too small. It is recommended to set this value between `[1,5]` and not too large.
-    - Is machine's CPU insufficient.
+    - Whether the CPU resource of the machine is insufficient.
 
 - Apply log is slow. TiKV Grafana's Raft I/O and apply log duration are relatively high, usually accompanied by a relatively high Raft Propose/apply wait duration. The possible situations are as follows:
   
