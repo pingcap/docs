@@ -10,7 +10,7 @@ This document introduces how to locate and address the issue of high disk I/O us
 
 ## Check the current I/O metrics
 
-When the system response slows down, if the bottleneck of the CPU and the bottleneck of data transaction conflicts have been investigated, you need to start with I/O indicators to help determine the current system bottleneck.
+If TiDB's response slows down after you have troubleshot the CPU bottleneck and the bottleneck caused by transaction conflicts, you need to check I/O metrics to help determine the current system bottleneck.
 
 ### Locate I/O problems from monitor
 
