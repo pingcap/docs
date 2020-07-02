@@ -20,7 +20,7 @@ The quickest way to locate I/O issues is to view the overall I/O  status from th
 
 In `Overview`> `System Info`> `IO Util`, you can see the I/O status of each machine in the cluster. This metric is similar to `util` in the Linux `iostat` monitor. The higher percentage represents higher disk I/O usage:
 
-- If there is only one machine with high I/O in the monitor, it can assist in judging that there are currently reading and writing hot spots.
+- If there is only one machine with high I/O usage in the monitor, currently there might be read and write hotspots on this machine.
 - If the I/O of most machines in the monitor is high, then the cluster now has a high I/O load.
 
 If you find that the I/O of a certain machine is relatively high, you can further monitor the use of I/O from monitor `Disk-Performance Dashboard`, combined with metrics such as `Disk Latency` and `Disk Load` to determine whether there is an abnormality, and if necessary use the fio tool to test the disk.
