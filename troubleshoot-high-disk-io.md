@@ -27,7 +27,7 @@ For the first situation above (only one machine with high I/O usage), you can fu
 
 #### The second type of monitoring panels
 
-The main persistence component of the TiDB cluster is TiKV cluster. One TiKV instance contains two RocksDB instances: one for storing Raft logs, located in data/raft, and one for storing real data, located in data/db.
+The main storage component of the TiDB cluster is TiKV. One TiKV instance contains two RocksDB instances: one for storing Raft logs, located in `data/raft`, and the other for storing real data, located in `data/db`.
 
 In `TiKV-Details`> `Raft IO`, you can see the relevant metrics for disk writes of these two instances:
 
