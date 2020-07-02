@@ -55,7 +55,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 
 - `append log` is slow. TiKV Grafana's `Raft I/O` and `append log duration` metrics are relatively high, which might usually occur along with relatively high `Raft Propose`/`apply wait duration`. The possible causes are as follows:
   
-    - The `apply-pool-size` configuration of `[raftstore]` is too small (recommended between [1, 5], not recommended to be too large), Thread CPU/apply cpu is relatively high;
+    - The value of `apply-pool-size` of `[raftstore]` is too small. It is recommended to set this value between `[1, 5]` and not too large. The value of `Thread CPU`/`apply cpu` is also relatively high.
     - Insufficient CPU resources on the machine.
     - Write hotspot issue of a single Region (Currently, the solution to this issue is still on the way). The CPU usage of a single `apply` thread is high (which can be viewed by modifying the Grafana expression, appended with `by (instance, name)`).
     - Slow write into RocksDB, and `RocksDB kv`/`max write duration` is high. A single Raft log might contain multiple key-value pairs (kv). 128 kvs are written to RocksDB in a batch, so one `apply` log might involve multiple RocksDB writes.
