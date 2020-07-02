@@ -59,7 +59,7 @@ In addition, some other content may be needed to help locate whether the bottlen
     - Insufficient CPU resources on the machine.
     - Write hotspot issue of a single Region (Currently, the solution to this issue is still on the way). The CPU usage of a single `apply` thread is high (which can be viewed by modifying the Grafana expression, appended with `by (instance, name)`).
     - Slow write into RocksDB, and `RocksDB kv`/`max write duration` is high. A single Raft log might contain multiple key-value pairs (kv). 128 kvs are written to RocksDB in a batch, so one `apply` log might involve multiple RocksDB writes.
-    - In other cases, bugs need to be reported.
+    - For other causes, report them as bugs.
 
 - `raft commit log` is slow. In TiKV Grafana, `Raft I/O` and `commit log duration` (only available in Grafana 4.x) metrics are relatively high. Each Region corresponds to an independent Raft group. Raft has a flow control mechanism similar to the sliding window mechanism of TCP. To control the size of a sliding window, adjust the `[raftstore] raft-max-inflight-msgs` parameter. if there is a write hotspot and `commit log duration` is high, you can properly set this parameter to a larger value, such as `1024`.
 
