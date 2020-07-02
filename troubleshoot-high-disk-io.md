@@ -25,7 +25,7 @@ In `Overview`> `System Info`> `IO Util`, you can see the I/O status of each mach
 
 For the first situation above (only one machine with high I/O usage), you can further observe I/O metrics from the **Disk-Performance Dashboard** such as `Disk Latency` and `Disk Load` to determine whether any anomaly exists. If necessary, use the fio tool to check the disk.
 
-#### The second type of panel
+#### The second type of monitoring panels
 
 The main persistence component of the TiDB cluster is TiKV cluster. One TiKV instance contains two RocksDB instances: one for storing Raft logs, located in data/raft, and one for storing real data, located in data/db.
 
