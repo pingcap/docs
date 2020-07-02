@@ -25,6 +25,13 @@ TiKV supports some readable unit conversions for command line parameters.
 - If the client cannot connect to TiKV through the default monitoring address because of Docker or NAT network, you must manually set the advertise address explicitly.
 - For example, the internal IP address of Docker is 172.17.0.1, while the IP address of the host is 192.168.100.113 and the port mapping is set to `-p 20160:20160`. In this case, you can set `--advertise-addr` to "192.168.100.113:20160". The client can find this service through 192.168.100.113:20160.
 
+## `--status-addr`
+
++ The port through which the TiKV service status is listened
++ Default: "20180"
++ The Prometheus can access this status information via `http://host:status_port/metrics`.
++ The Profile can access this status information via `http://host:status_port/debug/pprof/profile`.
+
 ## `-C, --config`
 
 - The config file
