@@ -6,7 +6,7 @@ category: reference
 
 # The processing method of TiDB disk io usage is too high
 
-This article mainly introduces how to locate and deal with the problem of high TiDB disk I/O usage.
+This document introduces how to locate and address the issue of high disk I/O usage in TiDB.
 
 ## Check the current I/O metrics
 
