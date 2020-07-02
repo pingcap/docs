@@ -9,6 +9,24 @@ Release date: July 03, 2020
 
 TiDB version: 3.0.16
 
+## Improvements
+
++ TiDB
+
+    - Planner: support `is null` filter condition in hash partition pruning [#17308](https://github.com/pingcap/tidb/pull/17308)
+    - Assign different `Backoffer` for each region to avoid the SQL command timeout issue when multiple region requests fail at the same time [#17583](https://github.com/pingcap/tidb/pull/17583)
+    - Split partition region when adding a new partition [#17668](https://github.com/pingcap/tidb/pull/17668)
+    - Discard feedbacks generated from `delete` / `update` statements [#17841](https://github.com/pingcap/tidb/pull/17841)
+    - Correct the usage of json.Unmarshal in job.DecodeArgs to be compatible with future Go versions [#17887](https://github.com/pingcap/tidb/pull/17887)
+    - Remove sensitive information in slow-log and statement [#18128](https://github.com/pingcap/tidb/pull/18128)
+    - Datetime parsing now matches MySQL 5.7 behavior for delimiters [#17499](https://github.com/pingcap/tidb/pull/17499)
+    - `%h` in date formats should now be in 1..12 range [#17496](https://github.com/pingcap/tidb/pull/17496)
+
++ TiKV
+
+    - Do not send store heartbeat when snapshot received [#8145](https://github.com/tikv/tikv/pull/8145)
+    - Improve PD client log [#8091](https://github.com/tikv/tikv/pull/8091)
+
 ## Bug Fixes
 
 + TiDB
@@ -35,21 +53,3 @@ TiDB version: 3.0.16
 + PD
 
     - Fix the 404 problem when using region key in pd-ctl [#2577](https://github.com/pingcap/pd/pull/2577)
-
-## Improvements
-
-+ TiDB
-
-    - Planner: support `is null` filter condition in hash partition pruning [#17308](https://github.com/pingcap/tidb/pull/17308)
-    - Assign different `Backoffer` for each region to avoid the SQL command timeout issue when multiple region requests fail at the same time [#17583](https://github.com/pingcap/tidb/pull/17583)
-    - Split partition region when adding a new partition [#17668](https://github.com/pingcap/tidb/pull/17668)
-    - Discard feedbacks generated from `delete` / `update` statements [#17841](https://github.com/pingcap/tidb/pull/17841)
-    - Correct the usage of json.Unmarshal in job.DecodeArgs to be compatible with future Go versions [#17887](https://github.com/pingcap/tidb/pull/17887)
-    - Remove sensitive information in slow-log and statement [#18128](https://github.com/pingcap/tidb/pull/18128)
-    - Datetime parsing now matches MySQL 5.7 behavior for delimiters [#17499](https://github.com/pingcap/tidb/pull/17499)
-    - `%h` in date formats should now be in 1..12 range [#17496](https://github.com/pingcap/tidb/pull/17496)
-
-+ TiKV
-
-    - Do not send store heartbeat when snapshot received [#8145](https://github.com/tikv/tikv/pull/8145)
-    - Improve PD client log [#8091](https://github.com/tikv/tikv/pull/8091)
