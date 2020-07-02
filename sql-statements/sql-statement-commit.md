@@ -2,7 +2,7 @@
 title: COMMIT | TiDB SQL Statement Reference
 summary: An overview of the usage of COMMIT for the TiDB database.
 category: reference
-aliases: ['/docs/dev/reference/sql/statements/commit/']
+aliases: ['/docs/dev/sql-statements/sql-statement-commit/','/docs/dev/reference/sql/statements/commit/']
 ---
 
 # COMMIT
@@ -16,6 +16,10 @@ In the absence of a `BEGIN` or `START TRANSACTION` statement, the default behavi
 **CommitStmt:**
 
 ![CommitStmt](/media/sqlgram/CommitStmt.png)
+
+**CompletionTypeWithinTransaction:**
+
+![CompletionTypeWithinTransaction](/media/sqlgram/CompletionTypeWithinTransaction.png)
 
 ## Examples
 

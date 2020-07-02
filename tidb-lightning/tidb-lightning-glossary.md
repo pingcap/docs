@@ -2,7 +2,7 @@
 title: TiDB Lightning Glossary
 summary: List of special terms used in TiDB Lightning.
 category: glossary
-aliases: ['/docs/dev/reference/tools/tidb-lightning/glossary/']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-glossary/','/docs/dev/reference/tools/tidb-lightning/glossary/']
 ---
 
 # TiDB Lightning Glossary
@@ -63,7 +63,9 @@ See also the [Troubleshooting guide](/troubleshoot-tidb-lightning.md#checksum-fa
 
 ### Chunk
 
-Equivalent to a single file in the data source.
+A continuous range of source data, normally equivalent to a single file in the data source.
+
+When a file is too large, Lightning may split a file into multiple chunks.
 
 ### Compaction
 
