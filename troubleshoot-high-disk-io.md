@@ -16,7 +16,7 @@ If TiDB's response slows down after you have troubleshot the CPU bottleneck and 
 
 The quickest way to locate I/O issues is to view the overall I/O  status from the monitor, such as the Grafana dashboard which is deployed by default by TiDB Ansible and TiUP. The dashboard panels related to I/O include **Overview**, **Node_exporter**, **Disk-Performance**.
 
-#### The first type of panel
+#### The first type of monitoring panels
 
 In `Overview`> `System Info`> `IO Util`, you can see the I/O status of each machine in the cluster. This metric is similar to `util` in the Linux `iostat` monitor. The higher percentage represents higher disk I/O usage:
 
