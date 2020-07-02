@@ -56,7 +56,7 @@ In addition, some other content may be needed to help locate whether the bottlen
 - Apply log is slow. TiKV Grafana's Raft I/O and apply log duration are relatively high, usually accompanied by a relatively high Raft Propose/apply wait duration. The possible situations are as follows:
   
     - The `apply-pool-size` configuration of `[raftstore]` is too small (recommended between [1, 5], not recommended to be too large), Thread CPU/apply cpu is relatively high;
-    - The machine's CPU resources are not enough.
+    - Insufficient CPU resources on the machine.
     - Write hotspot issue of a single Region (Currently, the solution to this issue is still on the way). The CPU usage of a single `apply` thread is high (which can be viewed by modifying the Grafana expression, appended with `by (instance, name)`).
     - Slow write into RocksDB, and `RocksDB kv`/`max write duration` is high. A single Raft log might contain multiple key-value pairs (kv). 128 kvs are written to RocksDB in a batch, so one `apply` log might involve multiple RocksDB writes.
     - In other cases, bugs need to be reported.
