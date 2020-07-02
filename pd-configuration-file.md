@@ -256,7 +256,7 @@ Configuration items related to replicas
 ### `location-labels`
 
 + The topology information of a TiKV cluster
-+ Default value: []
++ Default value: `[]`
 + [Cluster topology configuration](/location-awareness.md)
 
 ### `strictly-match-label`
