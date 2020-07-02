@@ -2,7 +2,7 @@
 title: DROP INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP INDEX for the TiDB database.
 category: reference
-aliases: ['/docs/dev/reference/sql/statements/drop-index/']
+aliases: ['/docs/dev/sql-statements/sql-statement-drop-index/','/docs/dev/reference/sql/statements/drop-index/']
 ---
 
 # DROP INDEX
@@ -81,3 +81,4 @@ Query OK, 0 rows affected (0.30 sec)
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 * [ADD INDEX](/sql-statements/sql-statement-add-index.md)
 * [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)

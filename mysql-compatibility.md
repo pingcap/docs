@@ -2,7 +2,7 @@
 title: Compatibility with MySQL
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
 category: reference
-aliases: ['/docs/dev/reference/mysql-compatibility/']
+aliases: ['/docs/dev/mysql-compatibility/','/docs/dev/reference/mysql-compatibility/']
 ---
 
 # Compatibility with MySQL
@@ -205,4 +205,4 @@ The following column types are supported by MySQL, but **NOT** by TiDB:
 + FLOAT4/FLOAT8
 + FIXED (alias for DECIMAL)
 + SERIAL (alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE)
-+ SQL_TSI_* (including SQL_TSI_YEAR, SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND)
++ `SQL_TSI_*` (including SQL_TSI_YEAR, SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND)
