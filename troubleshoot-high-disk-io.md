@@ -61,7 +61,7 @@ In addition, some other content may be needed to help locate whether the bottlen
     - Slow write into RocksDB, and `RocksDB kv`/`max write duration` is high. A single Raft log might contain multiple key-value pairs (kv). 128 kvs are written to RocksDB in a batch, so one `apply` log might involve multiple RocksDB writes.
     - In other cases, bugs need to be reported.
 
-- Raft commit log is slow. TiKV Grafana's Raft I/O and commit log duration are relatively high (this metric is only available in Grafana 4.x). Each Region corresponds to an independent Raft group. Raft has a flow control mechanism, similar to the sliding window mechanism of TCP, through the parameter [raftstore] raft-max-inflight-msgs = 256 to control the size of the sliding window, if there is a hot spot Write and commit log duration is relatively high, you can moderately change the parameters, such as 1024.
+- `raft commit log` is slow. In TiKV Grafana, `Raft I/O` and `commit log duration` (only available in Grafana 4.x) metrics are relatively high. Each Region corresponds to an independent Raft group. Raft has a flow control mechanism similar to the sliding window mechanism of TCP. To control the size of a sliding window, adjust the `[raftstore] raft-max-inflight-msgs` parameter. if there is a write hotspot and `commit log duration` is high, you can properly set this parameter to a larger value, such as `1024`.
 
 ### Locate I/O problems from log
 
