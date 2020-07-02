@@ -12,7 +12,7 @@ This document introduces how to locate and address the issue of high disk I/O us
 
 If TiDB's response slows down after you have troubleshot the CPU bottleneck and the bottleneck caused by transaction conflicts, you need to check I/O metrics to help determine the current system bottleneck.
 
-### Locate I/O problems from monitor
+### Locate I/O issues from monitor
 
 The fastest position method is to view the overall I/O situation from the monitor. You can view the correspond I/O monitor from the Grafana monitor component, which is deployed by the default cluster deployment tool (TiDB-Ansible, TiUP). The Dashboard relate to I/O has `Overview`, `Node_exporter`, `Disk-Performance`.
 
