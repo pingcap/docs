@@ -18,7 +18,7 @@ The fastest position method is to view the overall I/O situation from the monito
 
 #### The first type of panel
 
-In `Overview`> `System Info`> `IO Util`, you can see the I/O status of each machine in the cluster. This indicator is similar to util in Linux iostat monitor. The higher percentage represents the higher disk I/O usage:
+In `Overview`> `System Info`> `IO Util`, you can see the I/O status of each machine in the cluster. This metric is similar to `util` in the Linux `iostat` monitor. The higher percentage represents higher disk I/O usage:
 
 - If there is only one machine with high I/O in the monitor, it can assist in judging that there are currently reading and writing hot spots.
 - If the I/O of most machines in the monitor is high, then the cluster now has a high I/O load.
