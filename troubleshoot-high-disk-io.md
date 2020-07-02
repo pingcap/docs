@@ -32,7 +32,7 @@ The main storage component of the TiDB cluster is TiKV. One TiKV instance contai
 In **TiKV-Details** > **Raft IO**, you can see the metrics related to disk writes of these two instances:
 
 - `Append log duration`: This metric indicates the response time of writes into RockDB that stores Raft logs. The `.99` response time should be within 50 ms.
-- `Apply log duration`: This monitor indicates the response time for RocksDB writes that store real data. The .99 response should be within 100ms.
+- `Apply log duration`: This metric indicates the response time of writes into RockDB that stores real data. The `.99` response should be within 100 ms.
 
 These two monitors also have `.. per server` monitor panels to provide assistance to view hotspot writes.
 
