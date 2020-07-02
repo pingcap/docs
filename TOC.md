@@ -121,6 +121,7 @@
     + [PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
     + [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   + [Use Placement Rules](/configure-placement-rules.md)
+  + [Use Load Base Split](/configure-load-base-split.md)
   + [Use Store Limit](/configure-store-limit.md)
 + TiDB Ecosystem Tools
   + [Overview](/ecosystem-tool-user-guide.md)
