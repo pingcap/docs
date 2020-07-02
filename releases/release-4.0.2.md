@@ -136,7 +136,7 @@ TiDB version: 4.0.2
     - Fix the SQL statement timeout issue when multiple Region requests fail at the same time by assigning different `Backoffer` for each Region [#17585](https://github.com/pingcap/tidb/pull/17585)
     - Fix the MySQL incompatible behavior when parsing `DateTime` delimiters [#17501](https://github.com/pingcap/tidb/pull/17501)
     - Fix the issue that TiKV requests are occasionally sent to the TiFlash server [#18105](https://github.com/pingcap/tidb/pull/18105)
-    - Fix the issue that cause inconsistent read/writes result when lock is met that point to a primary key has be insert/delete in the same transaction [#18250](https://github.com/pingcap/tidb/pull/18250)
+    - Fix the data inconsistency issue occurred because the lock of a written and deleted primary key in one transaction is resolved by another transaction [#18250](https://github.com/pingcap/tidb/pull/18250)
 
 + TiKV
 
