@@ -36,7 +36,7 @@ In **TiKV-Details** > **Raft IO**, you can see the metrics related to disk write
 
 These two metrics also have the **.. per server** monitoring panel to help you view the write hotspots.
 
-#### The third type of panel
+#### The third type of monitoring panels
 
 In `TiKV-Details`> `Storage`, there are monitor related to storage:
 
