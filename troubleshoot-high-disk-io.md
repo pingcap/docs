@@ -1,5 +1,5 @@
 ---
-title: TiDB Disk I/O Excessive Treatment
+title: Troubleshoot High Disk I/O Usage in TiDB
 summary: Learn how to locate and deal with the problem of high TiDB storage I/O.
 category: reference
 ---
