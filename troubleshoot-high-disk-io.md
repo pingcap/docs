@@ -38,7 +38,7 @@ These two metrics also have the **.. per server** monitoring panel to help you v
 
 #### The third type of monitoring panels
 
-In `TiKV-Details`> `Storage`, there are monitor related to storage:
+In **TiKV-Details** > **Storage**, there are monitoring metrics related to storage:
 
 - `Storage command total`: the number of different commands received.
 - `Storage async write duration`: Includes monitoring metrics such as `disk sync duration`, which might be related to Raft I/O. If you encounter an abnormal situation, check the working statuses of related components by checking logs.
