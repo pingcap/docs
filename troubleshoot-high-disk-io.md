@@ -23,7 +23,7 @@ In `Overview`> `System Info`> `IO Util`, you can see the I/O status of each mach
 - If there is only one machine with high I/O usage in the monitor, currently there might be read and write hotspots on this machine.
 - If the I/O usage of most machines in the monitor is high, the cluster now has high I/O loads.
 
-If you find that the I/O of a certain machine is relatively high, you can further monitor the use of I/O from monitor `Disk-Performance Dashboard`, combined with metrics such as `Disk Latency` and `Disk Load` to determine whether there is an abnormality, and if necessary use the fio tool to test the disk.
+For the first situation above (only one machine with high I/O usage), you can further observe I/O metrics from the **Disk-Performance Dashboard** such as `Disk Latency` and `Disk Load` to determine whether any anomaly exists. If necessary, use the fio tool to check the disk.
 
 #### The second type of panel
 
