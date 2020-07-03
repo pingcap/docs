@@ -15,7 +15,7 @@ TiDB version: 3.0.16
 
     - Planner: support `is null` filter condition in hash partition pruning [#17308](https://github.com/pingcap/tidb/pull/17308)
     - Assign different `Backoffer` for each region to avoid the SQL command timeout issue when multiple region requests fail at the same time [#17583](https://github.com/pingcap/tidb/pull/17583)
-    - Split partition region when adding a new partition [#17668](https://github.com/pingcap/tidb/pull/17668)
+    - Split separate Regions for the newly added partition [#17668](https://github.com/pingcap/tidb/pull/17668)
     - Discard feedbacks generated from `delete` / `update` statements [#17841](https://github.com/pingcap/tidb/pull/17841)
     - Correct the usage of json.Unmarshal in job.DecodeArgs to be compatible with future Go versions [#17887](https://github.com/pingcap/tidb/pull/17887)
     - Remove sensitive information in slow-log and statement [#18128](https://github.com/pingcap/tidb/pull/18128)
