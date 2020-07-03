@@ -11,7 +11,7 @@ This article introduces the keywords in TiDB, the differences between reserved w
 
 Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`. Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**.
 
-The reserved keywords must be quoted to be used as an identifier :
+To use the reserved keywords as identifiers, you must enclose them in backticks `` ` ``:
 
 {{< copyable "sql" >}}
 
