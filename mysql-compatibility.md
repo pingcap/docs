@@ -95,7 +95,7 @@ In TIDB, all supported DDL changes are performed online. The MySQL DDL assertion
 The following major restrictions apply to DDL versus MySQL:
 
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
-* Support for different types of indexes (HASH/BTREE/RTREE/FULLTEXT) is not supported, and will be parsed and ignored when specified.
+* Support for different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) is not supported, and will be parsed and ignored when specified.
 * Adding/Dropping the primary key is unsupported unless `alter-primary-key` is enabled.
 * Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
 * Change/Modify decimal columns does not support changing the prevision.
