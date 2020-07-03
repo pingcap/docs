@@ -7,7 +7,8 @@ aliases: ['/docs/dev/architecture/']
 
 # TiDB Architecture
 
-Compared to traditional databases, TiDB has the following advantages: 
+Compared to traditional databases, TiDB has the following advantages:
+
 * Has distributed architecture and supports elastic scalability, flexible capacity expansion & reduction
 * Fully compatible with the MySQL protocol and the common features and syntax of MySQL, able to directly replicate from MySQL in most scenarios
 * Supports high availability in default and executes data recovery and failover autometicly; transparent to the business
