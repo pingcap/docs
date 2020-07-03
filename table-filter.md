@@ -2,7 +2,7 @@
 title: Table Filter
 summary: Usage of table filter feature in TiDB tools.
 category: reference
-aliases: ['/docs/stable/tidb-lightning/tidb-lightning-table-filter/','/docs/v4.0/tidb-lightning/tidb-lightning-table-filter/','/docs/stable/reference/tools/tidb-lightning/table-filter/','/docs/v4.0/reference/tools/tidb-lightning/table-filter/','/tidb/v4.0/tidb-lightning-table-filter/']
+aliases: ['/docs/stable/tidb-lightning/tidb-lightning-table-filter/','/docs/stable/reference/tools/tidb-lightning/table-filter/','/tidb/stable/tidb-lightning-table-filter/','/tidb/v4.0/tidb-lightning-table-filter/']
 ---
 
 # Table Filter
