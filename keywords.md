@@ -45,7 +45,7 @@ CREATE TABLE `select` (BEGIN int, END int);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-In the special case, the reserved keywords need not be quoted for using the qualifier `.`:
+In the special case, the reserved keywords do not need backticks if they are used with the `.` delimiter:
 
 {{< copyable "sql" >}}
 
