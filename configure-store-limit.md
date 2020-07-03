@@ -1,7 +1,7 @@
 ---
 title: Store Limit
 summary: Learn the feature of Store Limit.
-category: tutorials
+category: how-to
 ---
 
 # Store Limit
@@ -39,9 +39,9 @@ To view the limit setting of the current store, run the following commands:
 {{< copyable "shell-regular" >}}
 
 ```bash
-store limit                         // Shows the speed limit of adding and deleting peers in all stores.
-store limit add-peer                // Shows the speed limit of adding peers in all stores.
-store limit remove-peer             // Shows the speed limit of deleting peers in all stores. 
+store limit                         // Shows the speed limit of adding learners/peers in all stores (if a specific type is not set, this command shows the speed of adding learners/peers).
+store limit region-add              // Shows the speed limit of adding learners/peers in all stores.
+store limit region-remove           // Shows the speed limit of deleting learners/peers in all stores. 
 ```
 
 ### Set limit for all stores
@@ -51,9 +51,9 @@ To set the speed limit for all stores, run the following commands:
 {{< copyable "shell-regular" >}}
 
 ```bash
-store limit all 5                   // All stores can at most add and delete 5 peers per minute.
-store limit all 5 add-peer          // All stores can at most add 5 peers per minute.
-store limit all 5 remove-peer       // All stores can at most delete 5 peers per minute.
+store limit all 5                   // All stores can at most add 5 learns/peers per minute (if a specific type is not set, this command sets the speed of adding learners/peers).
+store limit all 5 region-add        // All stores can at most add 5 learns/peers per minute.
+store limit all 5 region-remove     // All stores can at most delete 5 learns/peers per minute.
 ```
 
 ### Set limit for a single store
@@ -63,7 +63,17 @@ To set the speed limit for a single store, run the following commands:
 {{< copyable "shell-regular" >}}
 
 ```bash
-store limit 1 5                     // store 1 can at most add and delete 5 peers per minute.
-store limit 1 5 add-peer            // store 1 can at most add 5 peers per minute.
-store limit 1 5 remove-peer         // store 1 can at most delete 5 peers per minute.
+store limit 1 5                     // store 1 can at most add 5 learners/peers per minute (if a specific type is not set, this command sets the speed of adding learners/peers).
+store limit 1 5 region-add          // store 1 can at most add 5 learners/peers per minute.
+store limit 1 5 region-remove       // store 1 can at most delete 5 learners/peers per minute.
+```
+
+### Persist store limit modification
+
+Because the store limit is a mapping in the memory, the above modification is reset after the leader is switched or PD is restarted. If you want to persist the modification, run the following command:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+config set store-balance-rate 20    // All stores can at most add 20 learners/peers or delete 20 peers per minute.
 ```
