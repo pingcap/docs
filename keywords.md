@@ -1,12 +1,8 @@
 ---
 title: Keywords
+summary: Learn the keywords and reserved words in TiDB.
 category: reference
-<<<<<<< HEAD:keywords-and-reserved-words.md
-aliases: ['/docs/stable/keywords-and-reserved-words/','/docs/v4.0/keywords-and-reserved-words/','/docs/stable/reference/sql/language-structure/keywords-and-reserved-words/']
-=======
-summary: Keywords and Reserved Words
-aliases: ['/docs/dev/keywords-and-reserved-words/','/docs/dev/reference/sql/language-structure/keywords-and-reserved-words/','tidb/dev/keywords-and-reserved-words/']
->>>>>>> 9329f34... sql: add keywords (#3063):keywords.md
+aliases: ['/docs/stable/keywords-and-reserved-words/','/docs/v4.0/keywords-and-reserved-words/','/docs/stable/reference/sql/language-structure/keywords-and-reserved-words/','tidb/v4.0/keywords-and-reserved-words/','tidb/stable/keywords-and-reserved-words/']
 ---
 
 # Keywords
