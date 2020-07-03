@@ -378,7 +378,7 @@ Similar to MySQL, TiDB includes static and solid parameters. You can directly mo
 
 #### Where and what are the data directories in TiDB (TiKV)?
 
-TiKV data is located in the [`--data-dir`](/tikv-configuration-file.md#data-dir), which include four directories of backup, db, raft, and snap, used to store backup, data, Raft data, and mirror data respectively.
+TiKV data is located in the [`--data-dir`](/tikv-configuration-file.md#--data-dir), which include four directories of backup, db, raft, and snap, used to store backup, data, Raft data, and mirror data respectively.
 
 #### What are the system tables in TiDB?
 
