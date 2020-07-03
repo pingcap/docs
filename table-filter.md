@@ -57,17 +57,6 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
     filter = ['foo*.*', 'bar*.*']
     ```
 
-* [TiCDC](/ticdc/ticdc-overview.md):
-
-    ```toml
-    [filter]
-    rules = ['foo*.*', 'bar*.*']
-
-    [[sink.dispatchers]]
-    matcher = ['db1.*', 'db2.*', 'db3.*']
-    dispatcher = 'ts'
-    ```
-
 ## Syntax
 
 ### Plain table names
