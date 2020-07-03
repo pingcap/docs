@@ -204,3 +204,8 @@ If you have deployed [TiFlash](/tiflash/tiflash-overview.md) along with the TiDB
 If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB cluster, see the following documents:
 
 - [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
+- [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
+
+> **Note:**
+>
+> By default, TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
