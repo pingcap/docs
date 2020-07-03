@@ -32,7 +32,7 @@ TiDB version: 3.0.16
 + TiDB
 
     - Fix read/write inconsistent result when meet lock that point to a primary key has be insert/delete in own txn [#18248](https://github.com/pingcap/tidb/pull/18248)
-    - Fix "Got too many pings" grpc error log in PD-server follower [#17944](https://github.com/pingcap/tidb/pull/17944)
+    - Fix the `Got too many pings` gRPC error log in the PD server-side followers [17944](https://github.com/pingcap/tidb/pull/17944)
     - Fix panic when the child of HashJoin returns TypeNull column [#17935](https://github.com/pingcap/tidb/pull/17935)
     - Fix error message when access denied [#17722](https://github.com/pingcap/tidb/pull/17722)
     - Fix JSON comparison for int and float [#17715](https://github.com/pingcap/tidb/pull/17715)
