@@ -393,7 +393,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 1. Transactional API：
 
     - kv_get：The command of getting the latest version of data specified by ts
-    - kv_scan：The command of scanning a continuous piece of data
+    - kv_scan：The command of scanning a range of data
     - kv_prewrite：The command of prewriting the data to be committed at first phase of 2PC
     - kv_pessimistic_lock：The command of adding a pessimistic lock to the key to prevent other transaction from modifying
     - kv_pessimistic_rollback：The command of deleting the pessimistic lock on the key
@@ -406,16 +406,16 @@ This document provides a detailed description of these key metrics on the **TiKV
     - kv_scan_lock：The command of scanning all locks with a version number before `max_version` to clean up expired transactions
     - kv_resolve_lock：The command of committing or rollback the transaction lock, according to the transaction status.
     - kv_gc：The command of GC
-    - kv_delete_range：The command of deleting a continuous piece of data from TiKV
+    - kv_delete_range：The command of deleting a range of data from TiKV
 
 2. Raw API：
 
     - raw_get：The command of getting the value of key
     - raw_batch_get：The command of getting the value of batch keys
-    - raw_scan：The command of scanning a continuous piece of data
+    - raw_scan：The command of scanning a range of data
     - raw_batch_scan：The command of scanning multiple consecutive data
     - raw_put：The command of writing a key/value pair
     - raw_batch_put：The command of writing a batch of key/value pairs
     - raw_delete：The command of deleting a key/value pair
     - raw_batch_delete：The command of a batch of key/value pairs
-    - raw_delete_range：The command of deleting a continuous interval
+    - raw_delete_range：The command of deleting a range of data
