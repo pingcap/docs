@@ -13,43 +13,43 @@ TiDB version: 3.0.16
 
 + TiDB
 
-    - Planner: support `is null` filter condition in hash partition pruning [#17308](https://github.com/pingcap/tidb/pull/17308)
-    - Assign different `Backoffer` for each region to avoid the SQL command timeout issue when multiple region requests fail at the same time [#17583](https://github.com/pingcap/tidb/pull/17583)
+    - Support the `is null` filter condition in hash partition pruning [#17308](https://github.com/pingcap/tidb/pull/17308)
+    - Assign different `Backoffer`s to each Region to avoid the SQL timeout issue when multiple Region requests fail at the same time [#17583](https://github.com/pingcap/tidb/pull/17583)
     - Split separate Regions for the newly added partition [#17668](https://github.com/pingcap/tidb/pull/17668)
-    - Discard feedbacks generated from `delete` / `update` statements [#17841](https://github.com/pingcap/tidb/pull/17841)
-    - Correct the usage of json.Unmarshal in job.DecodeArgs to be compatible with future Go versions [#17887](https://github.com/pingcap/tidb/pull/17887)
-    - Remove sensitive information in slow-log and statement [#18128](https://github.com/pingcap/tidb/pull/18128)
-    - Datetime parsing now matches MySQL 5.7 behavior for delimiters [#17499](https://github.com/pingcap/tidb/pull/17499)
+    - Discard feedbacks generated from the `delete` or `update` statement [#17841](https://github.com/pingcap/tidb/pull/17841)
+    - Correct the usage of `json.Unmarshal` in `job.DecodeArgs` to be compatible with future Go versions [#17887](https://github.com/pingcap/tidb/pull/17887)
+    - Remove sensitive information in the slow query log and the statement summary table [#18128](https://github.com/pingcap/tidb/pull/18128)
+    - Match the MySQL behavior with `DateTime` delimiters [#17499](https://github.com/pingcap/tidb/pull/17499)
     - `%h` in date formats should now be in 1..12 range [#17496](https://github.com/pingcap/tidb/pull/17496)
 
 + TiKV
 
-    - Do not send store heartbeat when snapshot received [#8145](https://github.com/tikv/tikv/pull/8145)
-    - Improve PD client log [#8091](https://github.com/tikv/tikv/pull/8091)
+    - Avoid sending store heartbeats to PD after snapshots are received [#8145](https://github.com/tikv/tikv/pull/8145)
+    - Improve the PD client log [#8091](https://github.com/tikv/tikv/pull/8091)
 
 ## Bug Fixes
 
 + TiDB
 
-    - Fix read/write inconsistent result when meet lock that point to a primary key has be insert/delete in own txn [#18248](https://github.com/pingcap/tidb/pull/18248)
+    - Fix the data inconsistency issue occurred because the lock of a written and deleted primary key in one transaction is resolved by another transaction [#18248](https://github.com/pingcap/tidb/pull/18248)
     - Fix the `Got too many pings` gRPC error log in the PD server-side followers [17944](https://github.com/pingcap/tidb/pull/17944)
-    - Fix panic when the child of HashJoin returns TypeNull column [#17935](https://github.com/pingcap/tidb/pull/17935)
-    - Fix error message when access denied [#17722](https://github.com/pingcap/tidb/pull/17722)
-    - Fix JSON comparison for int and float [#17715](https://github.com/pingcap/tidb/pull/17715)
-    - Failpoint: update failpoint which will cause data race before [#17710](https://github.com/pingcap/tidb/pull/17710)
+    - Fix the panic issue that might occur when the child of HashJoin returns the `TypeNull` column [#17935](https://github.com/pingcap/tidb/pull/17935)
+    - Fix the error message when access is denied [#17722](https://github.com/pingcap/tidb/pull/17722)
+    - Fix JSON comparison issue for the `int` and `float` types [#17715](https://github.com/pingcap/tidb/pull/17715)
+    - Update the failpoint which causes data race [#17710](https://github.com/pingcap/tidb/pull/17710)
     - Fix the issue that the timeout pre-split Regions might not work when creating tables [#17617](https://github.com/pingcap/tidb/pull/17617)
     - Fix the panic caused by ambiguous error messages after the sending failure [#17378](https://github.com/pingcap/tidb/pull/17378)
-    - Fix flashback table failed in some special cases [#17165](https://github.com/pingcap/tidb/pull/17165)
-    - Util: fix the wrong result when where stmt only have string column [#16658](https://github.com/pingcap/tidb/pull/16658)
-    - Fix error of query when `only_full_group_by` SQL mode is set [#16620](https://github.com/pingcap/tidb/pull/16620)
-    - Fix wrong return length for case when function [#16562](https://github.com/pingcap/tidb/pull/16562)
+    - Fix the issue that `FLASHBACK TABLE` might fail in some special cases [#17165](https://github.com/pingcap/tidb/pull/17165)
+    - Fix the issue of inaccurate range calculation results when statements only have string columns [#16658](https://github.com/pingcap/tidb/pull/16658)
+    - Fix the query error occurred when the `only_full_group_by` SQL mode is set [#16620](https://github.com/pingcap/tidb/pull/16620)
+    - Fix the issue that the field length of results returned from the `case when` function is inaccurate [#16562](https://github.com/pingcap/tidb/pull/16562)
     - Fix the type inference for the decimal property in the `count` aggregate function [#17702](https://github.com/pingcap/tidb/pull/17702)
 
 + TiKV
 
-    - Fix potential wrong result read from ingested file [#8039](https://github.com/tikv/tikv/pull/8039)
-    - Fix a case that a peer can not be removed when its store is isolated during multiple merge process [#8005](https://github.com/tikv/tikv/pull/8005)
+    - Fix the potential wrong result read from ingested files [#8039](https://github.com/tikv/tikv/pull/8039)
+    - Fix the issue that a peer can not be removed when its store is isolated during multiple merge processes [#8005](https://github.com/tikv/tikv/pull/8005)
 
 + PD
 
-    - Fix the 404 problem when using region key in pd-ctl [#2577](https://github.com/pingcap/pd/pull/2577)
+    - Fix the `404` error when querying Region keys in PD Control [#2577](https://github.com/pingcap/pd/pull/2577)
