@@ -37,7 +37,7 @@ TiDB version: 3.0.16
     - Fix error message when access denied [#17722](https://github.com/pingcap/tidb/pull/17722)
     - Fix JSON comparison for int and float [#17715](https://github.com/pingcap/tidb/pull/17715)
     - Failpoint: update failpoint which will cause data race before [#17710](https://github.com/pingcap/tidb/pull/17710)
-    - Fix pre-split region timeout constraint not work when create table [#17617](https://github.com/pingcap/tidb/pull/17617)
+    - Fix the issue that the timeout pre-split Regions might not work when creating tables [#17617](https://github.com/pingcap/tidb/pull/17617)
     - Fix the panic caused by ambiguous error messages after the sending failure [#17378](https://github.com/pingcap/tidb/pull/17378)
     - Fix flashback table failed in some special cases [#17165](https://github.com/pingcap/tidb/pull/17165)
     - Util: fix the wrong result when where stmt only have string column [#16658](https://github.com/pingcap/tidb/pull/16658)
