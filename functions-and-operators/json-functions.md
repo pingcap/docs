@@ -47,7 +47,7 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [JSON_SET(json_doc, path, val[, path, val] ...)][json_set]  | Inserts or updates data in a JSON document and returns the result |
 | [JSON_UNQUOTE(json_val)][json_unquote] |  Unquotes a JSON value and returns the result as a string |
 | [JSON_ARRAY_APPEND(json_doc, path, val[, path, val] ...)][json_array_append] | Appends values to the end of the indicated arrays within a JSON document and returns the result |
-| [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)][json_array_insert] | Updates a JSON document, inserting into an array within the document and returning the modified document |
+| [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)][json_array_insert] | Insert values into the specified location of a JSON document and returns the result |
 
 ## Functions that return JSON value attributes
 
