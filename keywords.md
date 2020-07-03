@@ -2,7 +2,7 @@
 title: Keywords
 category: reference
 summary: Keywords and Reserved Words
-aliases: ['/docs-cn/dev/keywords-and-reserved-words/','/docs-cn/dev/reference/sql/language-structure/keywords-and-reserved-words/']
+aliases: ['/docs/dev/keywords-and-reserved-words/','/docs/dev/reference/sql/language-structure/keywords-and-reserved-words/','tidb/dev/keywords-and-reserved-words/']
 ---
 
 # Keywords
