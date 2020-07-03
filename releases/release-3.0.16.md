@@ -43,7 +43,7 @@ TiDB version: 3.0.16
     - Util: fix the wrong result when where stmt only have string column [#16658](https://github.com/pingcap/tidb/pull/16658)
     - Fix error of query when `only_full_group_by` SQL mode is set [#16620](https://github.com/pingcap/tidb/pull/16620)
     - Fix wrong return length for case when function [#16562](https://github.com/pingcap/tidb/pull/16562)
-    - Fix the `typeInfer` issue for the decimal property in the `count` aggregate function [#17702](https://github.com/pingcap/tidb/pull/17702)
+    - Fix the type inference for the decimal property in the `count` aggregate function [#17702](https://github.com/pingcap/tidb/pull/17702)
 
 + TiKV
 
