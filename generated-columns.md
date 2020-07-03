@@ -95,7 +95,7 @@ CREATE TABLE person (
 );
 ```
 
-## Validation of Generated columns
+## Validation of generated columns
 
 Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation return errors:
 
