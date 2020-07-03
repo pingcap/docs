@@ -64,6 +64,7 @@
     - [Time Zone](/configure-time-zone.md)
     - [Memory Control](/configure-memory-usage.md)
     - [Placement Rules](/configure-placement-rules.md)
+    - [Store Limit](/configure-store-limit.md)
   + Secure
     + Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](/encrypted-connections-with-tls-protocols.md)
