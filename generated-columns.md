@@ -150,6 +150,6 @@ desc select a+1 from t where a+1=3;
 The current limitations of JSON and generated columns are as follows:
 
 - You cannot add the generated column through `ALTER TABLE`.
-- You can neither convert a generated stored column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a generated stored column.
+- You can neither convert a stored generated column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a stored generated column.
 - Not all [JSON functions](/functions-and-operators/json-functions.md) are supported;
 - Currently, the generated column index replacement rule is valid only when the generated column is a virtual generated column. It is not valid on the stored generated column, but the index can still be used by directly using the generated column itself.
