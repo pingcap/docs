@@ -145,7 +145,7 @@ desc select a+1 from t where a+1=3;
 >
 > For type conversion rules, see [Type Conversion of Expression Evaluation] (/functions-and-operators/type-conversion-in-expression-evaluation.md).
 
-## Limitations of Generated columns
+## Limitations
 
 The current limitations of JSON and generated columns are as follows:
 
