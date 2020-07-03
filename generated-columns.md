@@ -13,7 +13,7 @@ aliases: ['/docs/dev/generated-columns/','/docs/dev/reference/sql/generated-colu
 
 This document introduces the concept and usage of generated columns.
 
-## Basic concepts of Generated columns
+## Basic concepts
 
 Unlike general columns, the value of the generated column is calculated by the expression in the column definition. When inserting or updating a generated column, you cannot assign a value, you can only use `DEFAULT`.
 
