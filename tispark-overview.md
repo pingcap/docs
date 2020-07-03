@@ -21,7 +21,7 @@ TiSpark is an OLAP solution that runs Spark SQL directly on TiKV, the distribute
 + It utilizes several strategies to push down the computing to reduce the size of dataset handling by Spark SQL, which accelerates the query execution. It also uses the TiDB built-in statistical information for the query plan optimization.
 + From the data integration point of view, TiSpark and TiDB serve as a solution for running both transaction and analysis directly on the same platform without building and maintaining any ETLs. It simplifies the system architecture and reduces the cost of maintenance.
 + You can deploy and utilize tools from the Spark ecosystem for further data processing and manipulation on TiDB. For example, using TiSpark for data analysis and ETL; retrieving data from TiKV as a machine learning data source; generating reports from the scheduling system and so on.
-+ Also, TiSpark supports distributed writing to TiKV. Compared to using Spark combined with JDBC to write to TiDB, distributed writing to TiKV can implement transactions (either all data are written successfully or all writes fail), and the writes are faster.
++ Also, TiSpark supports distributed writes to TiKV. Compared to using Spark combined with JDBC to write to TiDB, distributed writes to TiKV can implement transactions (either all data are written successfully or all writes fail), and the writes are faster.
 
 ## Environment setup
 
