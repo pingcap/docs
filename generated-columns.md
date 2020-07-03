@@ -21,7 +21,7 @@ There are two kinds of generated columns: virtual and stored. A virtual generate
 
 You can create an index on a generated column whether it is virtual or stored.
 
-## Usage of Generated columns
+## Usage
 
 One of the main usage of generated columns: extracting data from the JSON data type and indexing the data.
 
