@@ -139,7 +139,7 @@ desc select a+1 from t where a+1=3;
 
 > **Note:**
 >
-> Only when the expression type and the generated column type are strictly equal, the replacement will be performed.
+> Only when the expression type and the generated column type are strictly equal, the replacement is performed.
 >
 > In the above example, the column type of `a` is int and the column type of `a+1` is bigint. If the type of the generated column is set to int, the replacement will not occur.
 >
