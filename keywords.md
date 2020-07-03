@@ -33,7 +33,7 @@ CREATE TABLE `select` (a INT);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-The not-reserved keywords do not require quoting. Such as `BEGIN` and `END` :
+The non-reserved keywords do not require backticks, such as `BEGIN` and `END`, which can be successfully used as identifiers in the following statement:
 
 {{< copyable "sql" >}}
 
