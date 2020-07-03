@@ -20,7 +20,7 @@ TiDB version: 3.0.16
     - Correct the usage of `json.Unmarshal` in `job.DecodeArgs` to be compatible with future Go versions [#17887](https://github.com/pingcap/tidb/pull/17887)
     - Remove sensitive information in the slow query log and the statement summary table [#18128](https://github.com/pingcap/tidb/pull/18128)
     - Match the MySQL behavior with `DateTime` delimiters [#17499](https://github.com/pingcap/tidb/pull/17499)
-    - `%h` in date formats should now be in 1..12 range [#17496](https://github.com/pingcap/tidb/pull/17496)
+    - Handle `%h` in date formats in the range that is consistent with MySQL [#17496](https://github.com/pingcap/tidb/pull/17496)
 
 + TiKV
 
