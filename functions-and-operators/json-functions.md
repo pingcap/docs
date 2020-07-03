@@ -39,6 +39,7 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | --------------------------------- | ----------- |
 | [JSON_APPEND(json_doc, path, value)][json_append] | An alias to `JSON_ARRAY_APPEND` |
 | [JSON_ARRAY_APPEND(json_doc, path, value)][json_array_append] | Appends a value to the end of a JSON array at a specified path |
+| [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)][json_array_insert] | Inserts an array into the json document and returns the modified document |
 | [JSON_INSERT(json_doc, path, val[, path, val] ...)][json_insert] | Inserts data into a JSON document and returns the result |
 | [JSON_MERGE(json_doc, json_doc[, json_doc] ...)][json_merge]  | A deprecated alias for `JSON_MERGE_PRESERVE` |
 | [JSON_MERGE_PRESERVE(json_doc, json_doc[, json_doc] ...)][json_merge_preserve]  | Merges two or more JSON documents and returns the merged result |
@@ -54,18 +55,32 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [JSON_DEPTH(json_doc)][json_depth] | Returns the maximum depth of a JSON document |
 | [JSON_LENGTH(json_doc[, path])][json_length] | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
 | [JSON_TYPE(json_val)][json_type] | Returns a string indicating the type of a JSON value |
+| [JSON_VALID(json_doc)][json_valid] | Checks if a json_doc is valid JSON. Useful for checking a column before converting it to the json type. |
+
+## Utility Functions
+
+| Function Name and Syntactic Sugar | Description |
+| --------------------------------- | ----------- |
+| [JSON_STORAGE_SIZE(json_doc)][json_storage_size] | Returns an approximate size of bytes required to store the json value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
+
+## Aggregate Functions
+
+| Function Name and Syntactic Sugar | Description |
+| --------------------------------- | ----------- |
+| [JSON_OBJECTAGG(key, value)][json_objectagg] | Provides an aggregation of values for a given key. |
 
 ## Unsupported functions
 
 The following JSON functions are unsupported in TiDB. You can track the progress in adding them in [TiDB #7546](https://github.com/pingcap/tidb/issues/7546):
 
-* `JSON_ARRAY_INSERT`
 * `JSON_MERGE_PATCH`
 * `JSON_PRETTY`
-* `JSON_STORAGE_SIZE`
-* `JSON_VALID`
 * `JSON_ARRAYAGG`
-* `JSON_OBJECTAGG`
+
+## See also
+
+* [JSON Function Reference](https://dev.mysql.com/doc/refman/5.7/en/json-function-reference.html)
+* [JSON Data Type](/data-type-json.md)
 
 [json_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract
 [json_short_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-column-path
@@ -91,3 +106,7 @@ The following JSON functions are unsupported in TiDB. You can track the progress
 [json_search]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-search
 [json_append]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-append
 [json_array_append]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-append
+[json_array_insert]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-insert
+[json_storage_size]: https://dev.mysql.com/doc/refman/5.7/en/json-utility-functions.html#function_json-storage-size
+[json_valid]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-valid
+[json_objectagg]: https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg
