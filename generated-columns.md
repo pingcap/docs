@@ -54,7 +54,7 @@ CREATE TABLE person (
 );
 ```
 
-In this table, the `city` column is a **virtual generated column**, and there is an index on `city` column. The following query can use the index to speed up:
+In this table, the `city` column is a **virtual generated column** and has an index. The following query can use the index to speed up the execution:
 
 {{< copyable "sql" >}}
 
