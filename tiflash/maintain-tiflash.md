@@ -33,7 +33,7 @@ There are two ways to check the TiFlash version:
 
 ## Take a TiFlash node down
 
-Taking a TiFlash node down differs from [Scaling in a TiFlash node](/tiflash/maintain-tiflash.md#take-a-tiflash-node-down) in that the former doesn't remove the node in TiDB Ansible; instead, it just safely shuts down the TiFlash process.
+Taking a TiFlash node down differs from [Scaling in a TiFlash node](/tiflash/scale-tiflash.md#scale-in-a-tiflash-node) in that the former doesn't remove the node in TiDB Ansible; instead, it just safely shuts down the TiFlash process.
 
 Follow the steps below to take a TiFlash node down:
 
@@ -162,7 +162,7 @@ In this case, you can balance the load pressure by adding more TiFlash nodes.
 
 Take the following steps to handle the data file corruption:
 
-1. Refer to [Take a TiFlash node down](/tiflash/maintain-tiflash.md#take-a-tiflash-node-down) to take the corresponding TiFlash node down.
+1. Refer to [Take a TiFlash node down](#take-a-tiflash-node-down) to take the corresponding TiFlash node down.
 2. Delete the related data of the TiFlash node.
 3. Redeploy the TiFlash node in the cluster.
 
