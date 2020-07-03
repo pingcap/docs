@@ -2,7 +2,7 @@
 title: Table Filter
 summary: Usage of table filter feature in TiDB tools.
 category: reference
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-table-filter/','/docs/dev/reference/tools/tidb-lightning/table-filter/','/tidb/dev/tidb-lightning-table-filter/']
+aliases: ['/docs/v3.0/tidb-lightning/tidb-lightning-table-filter/','/docs/v3.0/reference/tools/tidb-lightning/table-filter/','/tidb/v3.0/tidb-lightning-table-filter/']
 ---
 
 # Table Filter
@@ -16,17 +16,6 @@ Since TiDB 4.0, all TiDB ecosystem tools share a common filter syntax to define 
 ### CLI
 
 Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage in each tool.
-
-* [BR](/br/backup-and-restore-tool.md):
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    ./br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
-    #                ^~~~~~~~~~~~~~~~~~~~~~~
-    ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
-    #                 ^~~~~~~~~~~~~~~~~~~~~~~
-    ```
 
 * [Dumpling](/export-or-backup-using-dumpling.md):
 
@@ -55,17 +44,6 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
     ```toml
     [mydumper]
     filter = ['foo*.*', 'bar*.*']
-    ```
-
-* [TiCDC](/ticdc/ticdc-overview.md):
-
-    ```toml
-    [filter]
-    rules = ['foo*.*', 'bar*.*']
-
-    [[sink.dispatchers]]
-    matcher = ['db1.*', 'db2.*', 'db3.*']
-    dispatcher = 'ts'
     ```
 
 ## Syntax

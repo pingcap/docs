@@ -134,26 +134,9 @@ no-schema = false
 # schema encoding.
 character-set = "auto"
 
-<<<<<<< HEAD
-=======
-# Assumes the input data are "strict" to speed up processing.
-# Implications of strict-format = true are:
-#  * in CSV, every value cannot contain literal new lines (U+000A and U+000D, or \r and \n) even
-#    when quoted, i.e. new lines are strictly used to separate rows.
-# Strict format allows Lightning to quickly locate split positions of a large file for parallel
-# processing. However, if the input data is not strict, it may split a valid data in half and
-# corrupt the result.
-# The default value is false for safety over speed.
-strict-format = false
-
-# If strict-format is true, Lightning will split large CSV files into multiple chunks to process in
-# parallel. max-region-size is the maximum size of each chunk after splitting.
-# max-region-size = 268_435_456 # Byte (default = 256 MB)
-
 # Only import tables if these wildcard rules are matched. See the corresponding section for details.
 filter = ['*.*']
 
->>>>>>> 68375a7... tidb-lightning,br: replaced black-white-list by table-filter (#3065)
 # Configures how CSV files are parsed.
 [mydumper.csv]
 # Separator between fields, should be an ASCII character.
@@ -225,13 +208,6 @@ analyze = true
 switch-mode = "5m"
 # Duration between which an import progress is printed to the log.
 log-progress = "5m"
-<<<<<<< HEAD
-
-# Table filter options. See the corresponding section for details.
-# [black-white-list]
-# ...
-=======
->>>>>>> 68375a7... tidb-lightning,br: replaced black-white-list by table-filter (#3065)
 ```
 
 ### TiKV Importer
@@ -312,13 +288,8 @@ min-available-ratio = 0.05
 | -V | Prints program version | |
 | -d *directory* | Directory of the data dump to read from | `mydumper.data-source-dir` |
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
-<<<<<<< HEAD
-| --log-file *file* | Log file path | `lightning.log-file` |
-=======
 | -f *rule* | [Table filter rules](/table-filter.md) (can be specified multiple times) | `mydumper.filter` |
-| --backend *backend* | [Delivery backend](/tidb-lightning/tidb-lightning-tidb-backend.md) (`importer` or `tidb`) | `tikv-importer.backend` |
-| --log-file *file* | Log file path (default = a temporary file in `/tmp`) | `lightning.log-file` |
->>>>>>> 68375a7... tidb-lightning,br: replaced black-white-list by table-filter (#3065)
+| --log-file *file* | Log file path | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
 | --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |
 | --pd-urls *host:port* | PD endpoint address | `tidb.pd-addr` |
