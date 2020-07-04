@@ -66,6 +66,10 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 Empty set (0.00 sec)
 ```
 
+## MySQL compatibility
+
+This statement is a TiDB extension.
+
 ## See also
 
 * [Introduction to Statistics](/statistics.md)

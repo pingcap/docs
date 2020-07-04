@@ -30,7 +30,7 @@ SHOW PUMP STATUS;
 
 ## MySQL compatibility
 
-MySQL dosen't support this statement.
+This statement is a TiDB extension.
 
 ## See also
 

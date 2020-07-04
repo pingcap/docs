@@ -35,7 +35,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be partly compatible with MySQL.
+This statement is understood to be mostly compatible with MySQL.
 
 * `START TRANSACTION` is equivalent to MySQL’s `START TRANSACTION WITH CONSISTENT SNAPSHOT`, that is, after `START TRANSACTION`, a `SELECT` statement (not `SELECT FOR UPDATE`) is executed to read data from any table in InnoDB.
 * `READ ONLY` and its extended options are only syntactically compatible, and its effect is equivalent to `START TRANSACTION`.

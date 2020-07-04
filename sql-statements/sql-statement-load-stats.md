@@ -33,6 +33,10 @@ LOAD STATS '/tmp/stats.json';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
+## MySQL compatibility
+
+TODO
+
 ## See also
 
 * [Statistics](/statistics.md)

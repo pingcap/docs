@@ -45,6 +45,10 @@ show analyze status;
 8 rows in set (0.00 sec)
 ```
 
+## MySQL compatibility
+
+TODO
+
 ## See also
 
 * [ANALYZE_STATUS table](/system-tables/system-table-information-schema.md#analyze_status-table)

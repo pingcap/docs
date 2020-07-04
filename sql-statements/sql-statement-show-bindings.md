@@ -1,11 +1,11 @@
 ---
-title: SHOW BINDINGS
+title: SHOW [GLOBAL|SESSION] BINDINGS
 summary: Use of SHOW BINDINGS binding in TiDB database.
 category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-show-bindings/']
 ---
 
-# SHOW BINDINGS
+# SHOW GLOBAL|SESSION] BINDINGS
 
 The `SHOW BINDINGS` statement is used to display information about all created SQL bindings.
 
@@ -48,6 +48,10 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | charset | Character set |
 | collation | Sorting rule |
 | source | The way in which a binding is created, including `manual` (created by the `create [global] binding` SQL statement), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
+
+
+## MySQL compatibility
+
 
 ## See also
 

@@ -26,3 +26,7 @@ SHOW PROFILES
 ```
 Empty set (0.00 sec)
 ```
+
+## MySQL compatibility
+
+## See also
