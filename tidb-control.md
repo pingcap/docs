@@ -13,7 +13,7 @@ TiDB Control is a command-line tool of TiDB, usually used to obtain the status i
 
 You can get TiDB Control using the following two methods.
 
-### Install TiDB Control by TiUP
+### Install TiDB Control using TiUP
 
 After installing TiUP, you can use `tiup ctl tidb` command to get and execute TiDB Control.
 
