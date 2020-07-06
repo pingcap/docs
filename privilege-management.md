@@ -313,7 +313,7 @@ Requires the `GRANT` privilege and those privileges targeted by the `REVOKE` sta
 
 ### SET GLOBAL
 
-Requires `SUPER` privielges.
+Requires `SUPER` privilege to set global variables.
 
 ### ADMIN
 
