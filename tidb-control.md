@@ -93,7 +93,7 @@ Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has t
 - `tidb-ctl schema`
 - `tidb-ctl table`
 
-### The `schema` connand
+### The `schema` command
 
 #### The `in` subcommand
 
