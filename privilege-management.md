@@ -325,7 +325,7 @@ Requires `SUPER` privilege.
 
 ### KILL
 
-Requires `SUPER` privielges when killing other user connections.
+Requires `SUPER` privilege to kill other user sessions.
 
 ## Implementation of the privilege system
 
