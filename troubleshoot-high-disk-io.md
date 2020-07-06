@@ -71,7 +71,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 
 - "Write stall" appears in TiKV RocksDB logs.
 
-    It may be that too much level0 sst causes stalls. You can add the parameter `[rocksdb] max-sub-compactions = 2 (or 3)` to speed up the compaction of level0 sst. This parameter means that the compaction tasks of level0 to level1 can be divided into `max-sub-compactions` subtasks to multi-threaded concurrent execution.
+    It might be that too many level-0 SST files cause the write stall. To address the issue, you can add the `[rocksdb] max-sub-compactions = 2 (or 3)` parameter to speed up the compaction of level-0 SST files. This parameter means that the compaction tasks of level-0 to level-1 can be divided into `max-sub-compactions` subtasks for multi-threaded concurrent execution.
 
     If the disk's I/O capability fail to keep up with the write, it is recommended to scale-in. If the throughput of the disk reaches the upper limit (for example, the throughput of SATA SSD will be much lower than that of NVME SSD), resulting in write stall, but the CPU resource is relatively sufficient, you can try to use a higher compression ratio compression algorithm to relieve the pressure on the disk, use CPU resources Change disk resources.
     
