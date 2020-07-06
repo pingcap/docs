@@ -187,7 +187,7 @@ TiDB supports storage engine abstraction similar to MySQL, but you need to speci
 By default, the `NO_ZERO_DATE` and `NO_ZERO_IN_DATE` modes are enabled in TiDB, which is the same in MySQL, but TiDB and MySQL handle the two SQL modes differently in the following aspects:
 
 - The two SQL modes above are enabled in TiDB in the non-strict mode where no warning is prompted for inserting values of zero month/zero day/zero date. In MySQL, such `INSERT` operations prompt warning.
-- In the strict mode, when `NO_ZERO_DATE` is enabled, you can still insert values of zero date ; when `NO_ZERO_IN_DATE` is enabled, you cannot insert date of zero month/zero day. In the strict mode of MySQL, you can insert neither of them.
+- In the strict mode, when `NO_ZERO_DATE` is enabled, you can still insert values of zero date; when `NO_ZERO_IN_DATE` is enabled, you cannot insert date of zero month/zero day. In the strict mode of MySQL, you can insert neither of them.
 
 ### Type system differences
 
