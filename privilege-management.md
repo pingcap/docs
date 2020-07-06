@@ -307,7 +307,7 @@ Requires additional `CREATE USER` privilege to create a user implicitly.
 
 ### REVOKE
 
-Requires the `GRANT` privilege and those privileges targeted by `REVOKE` statement.
+Requires the `GRANT` privilege and those privileges targeted by the `REVOKE` statement.
 
 `REVOKE ROLE` requires `SUPER` privilege.
 
