@@ -5,7 +5,7 @@ category: performance
 
 # Distinct Optimization
 
-This document introduces the `distinct` optimization in the TiDB query optimizer. Including `SELECT DISTINCT` and `DISTINCT` in the aggregate functions.
+This document introduces the `distinct` optimization in the TiDB query optimizer, including `SELECT DISTINCT` and `DISTINCT` in the aggregate functions.
 
 ## `DISTINCT` modifier in `SELECT` statements
 
@@ -23,11 +23,11 @@ mysql> explain SELECT DISTINCT a from t;
 3 rows in set (0.00 sec)
 ```
 
-## `DISTINCT` option in aggregate function
+## `DISTINCT` option in aggregate functions
 
-Usually, aggregate function with `DISTINCT` option is executed in the TiDB layer in a single threded execution model.
+Usually, aggregate functions with the `DISTINCT` option is executed in the TiDB layer in a single-threaded execution model.
 
-The system variable [`tidb_opt_distinct_agg_push_down`](/tidb-specific-system-variables.md#tidb_opt_distinct_agg_push_down) or the [`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down) config item in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV/TiFlash Coprocessor.
+The [`tidb_opt_distinct_agg_push_down`](/tidb-specific-system-variables.md#tidb_opt_distinct_agg_push_down) system variable or the [`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down) configuration item in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV/TiFlash Coprocessor.
 
 Take the following queries as an example of this optimization. `tidb_opt_distinct_agg_push_down` is disabled by default, which means the aggregate functions is executed in the TiDB layer. After enableing this optimization by setting its value to `1`, `count(distinct a)` is pushed to TiKV/TiFlash Coprocessor: there is a `HashAgg_5` in the TiKV Coprocessor to dedpulicate column `a` in the TiKV Coprocessor. It may helps to reduce the compution overhead of `HashAgg_8` in the TiDB layer.
 
