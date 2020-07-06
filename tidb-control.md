@@ -97,7 +97,7 @@ Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has t
 
 #### The `in` subcommand
 
-The `in` subcommand is used to get table information from target database.
+`in` is used to obtain the table schema of all tables in the database through the database name.
 
 ```bash
 tidb-ctl schema in <database name>
