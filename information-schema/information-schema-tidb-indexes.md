@@ -12,8 +12,8 @@ The `TIDB_INDEXES` table provides the INDEX information of all tables.
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
-desc TIDB_INDEXES;
+USE information_schema;
+DESC tidb_indexes;
 ```
 
 ```
@@ -36,17 +36,17 @@ desc TIDB_INDEXES;
 
 `INDEX_ID` is the unique ID that TiDB allocates for each index. It can be used to do a join operation with `INDEX_ID` obtained from another table or API.
 
-For example, you can obtain `TABLE_ID` and `INDEX_ID` that are involved in some slow query in the [`SLOW_QUERY` table](#slow_query-table) and then obtain the specific index information using the following SQL statements:
+For example, you can obtain `TABLE_ID` and `INDEX_ID` that are involved in some slow query in the [`SLOW_QUERY` table](/information-schema/information-schema-slow-query.md) and then obtain the specific index information using the following SQL statements:
 
 ```sql
 SELECT
-   tidb_indexes.*
+ tidb_indexes.*
 FROM
-   tidb_indexes,
-   tables
+ tidb_indexes,
+ tables
 WHERE
-   tidb_indexes.table_schema = tables.table_schema
-   AND tidb_indexes.table_name = tidb_indexes.table_name
-   AND tables.tidb_table_id = ?
-   AND index_id = ?
+  tidb_indexes.table_schema = tables.table_schema
+ AND tidb_indexes.table_name = tidb_indexes.table_name
+ AND tables.tidb_table_id = ?
+ AND index_id = ?
 ```

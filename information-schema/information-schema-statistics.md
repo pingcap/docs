@@ -7,13 +7,13 @@ category: reference
 
 # STATISTICS
 
-The `STATISTICS` table provides information about table indexes:
+The `STATISTICS` table provides information about table indexes.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
-desc statistics;
+USE information_schema;
+DESC statistics;
 ```
 
 ```

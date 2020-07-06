@@ -12,8 +12,8 @@ The `SESSION_VARIABLES` table provides information about session variables. The 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
-desc session_variables;
+USE information_schema;
+DESC session_variables;
 ```
 
 ```

@@ -7,12 +7,12 @@ category: reference
 
 # SCHEMATA
 
-The `SCHEMATA` table provides information about databases. The table data is equivalent to the result of the `SHOW DATABASES` statement:
+The `SCHEMATA` table provides information about databases. The table data is equivalent to the result of the `SHOW DATABASES` statement.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 desc SCHEMATA;
 ```
 

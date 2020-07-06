@@ -6,12 +6,12 @@ category: reference
 
 # COLLATIONS
 
-The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table.  Currently this table is included only for compatibility with MySQL, as TiDB only supports binary collation:
+The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table.  Currently this table is included only for compatibility with MySQL.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC collations;
 ```
 

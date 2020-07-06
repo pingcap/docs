@@ -7,15 +7,13 @@ category: reference
 
 # KEY_COLUMN_USAGE
 
-The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such as the primary key constraint:
-
+The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such as the primary key constraint.
 
 {{< copyable "sql" >}}
 
-
 ```sql
-use information_schema;
-desc key_column_usage;
+USE information_schema;
+DESC key_column_usage;
 ```
 
 ```

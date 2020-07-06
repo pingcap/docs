@@ -12,7 +12,7 @@ You can use the `CLUSTER_SYSTEMINFO` kernel parameter table to query the kernel 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC cluster_systeminfo;
 ```
 

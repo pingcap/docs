@@ -11,7 +11,7 @@ The `ANALYZE_STATUS` table provides information about the running tasks that col
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC analyze_status;
 ```
 

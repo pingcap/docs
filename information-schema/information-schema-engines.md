@@ -4,7 +4,7 @@ summary: Learn the `ENGINES` information_schema table.
 category: reference
 ---
 
-### ENGINES
+# ENGINES
 
 The `ENGINES` table provides information about storage engines. For compatibility, TiDB will always describe InnoDB as the only supported engine. In addition, other column values in the `ENGINES` table are also fixed values.
 
@@ -12,7 +12,7 @@ The `ENGINES` table provides information about storage engines. For compatibilit
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC engines;
 ```
 

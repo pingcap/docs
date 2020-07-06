@@ -12,7 +12,7 @@ The `CLUSTER_INFO` cluster topology table provides the current topology informat
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 desc cluster_info;
 ```
 

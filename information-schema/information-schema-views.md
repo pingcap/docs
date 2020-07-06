@@ -6,12 +6,12 @@ category: reference
 
 # VIEWS
 
-The `VIEWS` table provides information about SQL views:
+The `VIEWS` table provides information about SQL views.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC views;
 ```
 

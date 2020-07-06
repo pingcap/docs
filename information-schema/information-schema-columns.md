@@ -4,14 +4,14 @@ summary: Learn the `COLUMNS` information_schema table.
 category: reference
 ---
 
-### COLUMNS
+# COLUMNS
 
-The `COLUMNS` table provides detailed information about columns in tables:
+The `COLUMNS` table provides detailed information about columns in tables.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC columns;
 ```
 

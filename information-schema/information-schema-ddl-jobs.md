@@ -7,13 +7,12 @@ category: reference
 
 # DDL_JOBS
 
-
-
+The `DDL_JOBS` table provides an `INFORMATION_SCHEMA` interface to the `ADMIN SHOW DDL JOBS` command. It provides both the current status and a short history of DDL operations across the TiDB cluster.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC ddl_jobs;
 ```
 
@@ -35,4 +34,66 @@ DESC ddl_jobs;
 | QUERY        | varchar(64) | YES  |      | NULL    |       |
 +--------------+-------------+------+------+---------+-------+
 12 rows in set (0.00 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM ddl_jobs LIMIT 3\G
+```
+
+```sql
+*************************** 1. row ***************************
+      JOB_ID: 44
+     DB_NAME: mysql
+  TABLE_NAME: opt_rule_blacklist
+    JOB_TYPE: create table
+SCHEMA_STATE: public
+   SCHEMA_ID: 3
+    TABLE_ID: 43
+   ROW_COUNT: 0
+  START_TIME: 2020-07-06 15:24:27
+    END_TIME: 2020-07-06 15:24:27
+       STATE: synced
+       QUERY: CREATE TABLE IF NOT EXISTS mysql.opt_rule_blacklist (
+		name char(100) NOT NULL
+	);
+*************************** 2. row ***************************
+      JOB_ID: 42
+     DB_NAME: mysql
+  TABLE_NAME: expr_pushdown_blacklist
+    JOB_TYPE: create table
+SCHEMA_STATE: public
+   SCHEMA_ID: 3
+    TABLE_ID: 41
+   ROW_COUNT: 0
+  START_TIME: 2020-07-06 15:24:27
+    END_TIME: 2020-07-06 15:24:27
+       STATE: synced
+       QUERY: CREATE TABLE IF NOT EXISTS mysql.expr_pushdown_blacklist (
+		name char(100) NOT NULL,
+		store_type char(100) NOT NULL DEFAULT 'tikv,tiflash,tidb',
+		reason varchar(200)
+	);
+*************************** 3. row ***************************
+      JOB_ID: 40
+     DB_NAME: mysql
+  TABLE_NAME: stats_top_n
+    JOB_TYPE: create table
+SCHEMA_STATE: public
+   SCHEMA_ID: 3
+    TABLE_ID: 39
+   ROW_COUNT: 0
+  START_TIME: 2020-07-06 15:24:26
+    END_TIME: 2020-07-06 15:24:27
+       STATE: synced
+       QUERY: CREATE TABLE if not exists mysql.stats_top_n (
+		table_id bigint(64) NOT NULL,
+		is_index tinyint(2) NOT NULL,
+		hist_id bigint(64) NOT NULL,
+		value longblob,
+		count bigint(64) UNSIGNED NOT NULL,
+		index tbl(table_id, is_index, hist_id)
+	);
+3 rows in set (0.01 sec)
 ```

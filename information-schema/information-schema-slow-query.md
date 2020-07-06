@@ -12,8 +12,8 @@ The `SLOW_QUERY` table provides the slow query information of the current node, 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
-desc slow_query;
+USE information_schema;
+DESC slow_query;
 ```
 
 ```

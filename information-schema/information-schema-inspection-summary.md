@@ -14,7 +14,8 @@ The structure of the `information_schema.inspection_summary` inspection summary 
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.inspection_summary;
+USE information_schema;
+DESC inspection_summary;
 ```
 
 ```sql
@@ -31,7 +32,7 @@ desc information_schema.inspection_summary;
 | MAX_VALUE    | double(22,6) | YES  |      | NULL    |       |
 | COMMENT      | varchar(256) | YES  |      | NULL    |       |
 +--------------+--------------+------+------+---------+-------+
-9 rows in set
+9 rows in set (0.00 sec)
 ```
 
 Field description:

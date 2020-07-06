@@ -4,14 +4,14 @@ summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` information_schema ta
 category: reference
 ---
 
-### COLLATION_CHARACTER_SET_APPLICABILITY
+# COLLATION_CHARACTER_SET_APPLICABILITY
 
-The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applicable character set name.  Similar to the `COLLATIONS` table, it is included only for compatibility with MySQL:
+The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applicable character set name.  Similar to the `COLLATIONS` table, it is included only for compatibility with MySQL.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC collation_character_set_applicability;
 ```
 

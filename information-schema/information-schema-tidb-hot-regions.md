@@ -12,8 +12,8 @@ The `TIDB_HOT_REGIONS` table provides information about hotspot Regions.
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
-desc TIDB_HOT_REGIONS;
+USE information_schema;
+DESC tidb_hot_regions;
 ```
 
 ```

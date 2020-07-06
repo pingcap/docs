@@ -12,7 +12,7 @@ The `CLUSTER_LOAD` cluster load table provides the current load information of t
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC cluster_load;
 ```
 

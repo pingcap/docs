@@ -7,12 +7,12 @@ aliases: ['/docs/dev/system-tables/system-table-cluster-config/','/docs/dev/refe
 
 # CLUSTER_CONFIG
 
-You can use the `CLUSTER_CONFIG` cluster configuration table to get the current configuration of all TiDB/PD/TiKV instances in the cluster. For TiDB versions earlier than 4.0, you need to access the HTTP API of each instance one by one to collect all component configurations.
+You can use the `CLUSTER_CONFIG` cluster configuration table to get the current configuration of all server components in the cluster. This simplifies the usage over earlier releases of TiDB, where obtaining similar information would require accessing the HTTP API end points of each instance.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC cluster_config;
 ```
 

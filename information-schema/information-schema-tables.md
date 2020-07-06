@@ -12,8 +12,8 @@ The `TABLES` table provides information about tables in databases:
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
-desc tables;
+USE information_schema;
+DESC tables;
 ```
 
 ```

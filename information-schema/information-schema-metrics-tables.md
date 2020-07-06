@@ -7,12 +7,13 @@ aliases: ['/docs/dev/system-tables/system-table-metrics-tables/','/docs/dev/refe
 
 # METRICS_TABLES
 
-The `INFORMATION_SCHEMA.METRICS_TABLES` table provides information of all monitoring tables in the [metrics_schema](/system-tables/system-table-metrics-schema.md) database.
+The `METRICS_TABLES` table provides the PromQL (Prometheus Query Language) definition for each of the views in the [metrics_schema](/metrics-schema.md) database.
 
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.metrics_tables;
+USE information_schema;
+DESC metrics_tables;
 ```
 
 ```sql
@@ -34,3 +35,45 @@ Field description:
 * `LABELS`: The label for the monitoring item. Each label corresponds to a column in the monitoring table. If the SQL statement contains the filter of the corresponding column, the corresponding `PromQL` changes accordingly.
 * `QUANTILE`: The percentile. For monitoring data of the histogram type, a default percentile is specified. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
 * `COMMENT`: The comment about the monitoring table.
+
+
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM metrics_tables LIMIT 5\G
+```
+
+```sql
+*************************** 1. row ***************************
+TABLE_NAME: abnormal_stores
+    PROMQL: sum(pd_cluster_status{ type=~"store_disconnected_count|store_unhealth_count|store_low_space_count|store_down_count|store_offline_count|store_tombstone_count"})
+    LABELS: instance,type
+  QUANTILE: 0
+   COMMENT: 
+*************************** 2. row ***************************
+TABLE_NAME: etcd_disk_wal_fsync_rate
+    PROMQL: delta(etcd_disk_wal_fsync_duration_seconds_count{$LABEL_CONDITIONS}[$RANGE_DURATION])
+    LABELS: instance
+  QUANTILE: 0
+   COMMENT: The rate of writing WAL into the persistent storage
+*************************** 3. row ***************************
+TABLE_NAME: etcd_wal_fsync_duration
+    PROMQL: histogram_quantile($QUANTILE, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{$LABEL_CONDITIONS}[$RANGE_DURATION])) by (le,instance))
+    LABELS: instance
+  QUANTILE: 0.99
+   COMMENT: The quantile time consumed of writing WAL into the persistent storage
+*************************** 4. row ***************************
+TABLE_NAME: etcd_wal_fsync_total_count
+    PROMQL: sum(increase(etcd_disk_wal_fsync_duration_seconds_count{$LABEL_CONDITIONS}[$RANGE_DURATION])) by (instance)
+    LABELS: instance
+  QUANTILE: 0
+   COMMENT: The total count of writing WAL into the persistent storage
+*************************** 5. row ***************************
+TABLE_NAME: etcd_wal_fsync_total_time
+    PROMQL: sum(increase(etcd_disk_wal_fsync_duration_seconds_sum{$LABEL_CONDITIONS}[$RANGE_DURATION])) by (instance)
+    LABELS: instance
+  QUANTILE: 0
+   COMMENT: The total time of writing WAL into the persistent storage
+5 rows in set (0.00 sec)
+```

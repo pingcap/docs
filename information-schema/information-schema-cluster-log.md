@@ -14,7 +14,7 @@ To get the logs of the TiDB cluster before v4.0, you need to log in to each inst
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC cluster_log;
 ```
 

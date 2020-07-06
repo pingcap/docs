@@ -12,7 +12,7 @@ The `CLUSTER_HARDWARE` hardware system table provides the hardware information o
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
+USE information_schema;
 DESC cluster_hardware;
 ```
 

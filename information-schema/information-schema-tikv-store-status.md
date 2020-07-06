@@ -7,13 +7,13 @@ category: reference
 
 # TIKV_STORE_STATUS
 
-The `TIKV_STORE_STATUS` table provides the status information of all TiKV Stores.
+The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
-DESC TIKV_STORE_STATUS;
+USE information_schema;
+DESC tikv_store_status;
 ```
 
 ```
@@ -41,41 +41,4 @@ DESC TIKV_STORE_STATUS;
 | UPTIME            | varchar(64) | YES  |      | NULL    |       |
 +-------------------+-------------+------+------+---------+-------+
 19 rows in set (0.00 sec)
-```
-
-## TIKV\_STORE\_STATUS table
-
-The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.
-
-{{< copyable "sql" >}}
-
-```sql
-desc tikv_store_status\G
-```
-
-```
-*************************** 1. row ***************************
-       Table: TIKV_STORE_STATUS
-Create Table: CREATE TABLE `TIKV_STORE_STATUS` (
-  `STORE_ID` bigint(21) unsigned DEFAULT NULL,
-  `ADDRESS` varchar(64) DEFAULT NULL,
-  `STORE_STATE` bigint(21) unsigned DEFAULT NULL,
-  `STORE_STATE_NAME` varchar(64) DEFAULT NULL,
-  `LABEL` json unsigned DEFAULT NULL,
-  `VERSION` varchar(64) DEFAULT NULL,
-  `CAPACITY` varchar(64) DEFAULT NULL,
-  `AVAILABLE` varchar(64) DEFAULT NULL,
-  `LEADER_COUNT` bigint(21) unsigned DEFAULT NULL,
-  `LEADER_WEIGHT` bigint(21) unsigned DEFAULT NULL,
-  `LEADER_SCORE` bigint(21) unsigned DEFAULT NULL,
-  `LEADER_SIZE` bigint(21) unsigned DEFAULT NULL,
-  `REGION_COUNT` bigint(21) unsigned DEFAULT NULL,
-  `REGION_WEIGHT` bigint(21) unsigned DEFAULT NULL,
-  `REGION_SCORE` bigint(21) unsigned DEFAULT NULL,
-  `REGION_SIZE` bigint(21) unsigned DEFAULT NULL,
-  `START_TS` datetime unsigned DEFAULT NULL,
-  `LAST_HEARTBEAT_TS` datetime unsigned DEFAULT NULL,
-  `UPTIME` varchar(64) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-1 row in set (0.01 sec)
 ```

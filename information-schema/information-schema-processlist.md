@@ -7,16 +7,19 @@ category: reference
 
 # PROCESSLIST
 
-`PROCESSLIST`, just like `show processlist`, is used to view the requests that are being handled.
+`PROCESSLIST`, just like `SHOW PROCESSLIST`, is used to view the requests that are being handled.
 
-The `PROCESSLIST` table has a `MEM` column that `show processlist` does not have. `MEM` means the occupied memory of the requests being handled, and its unit is `byte`.
+The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`:
+
+* A `MEM` column to show memory occupied by the request being handled (in bytes)
+* A `TxnStart` column to show the start time of the transaction
 
 {{< copyable "sql" >}}
 
 
 ```sql
-use information_schema;
-desc processlist;
+USE information_schema;
+DESC processlist;
 ```
 
 ```

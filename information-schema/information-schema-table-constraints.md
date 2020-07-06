@@ -7,13 +7,13 @@ category: reference
 
 # TABLE_CONSTRAINTS
 
-The `TABLE_CONSTRAINTS` table describes which tables have constraints:
+The `TABLE_CONSTRAINTS` table describes which tables have constraints.
 
 {{< copyable "sql" >}}
 
 ```sql
-use information_schema;
-desc table_constraints;
+USE information_schema;
+DESC table_constraints;
 ```
 
 ```
