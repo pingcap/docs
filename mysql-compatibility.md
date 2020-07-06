@@ -9,7 +9,7 @@ aliases: ['/docs/stable/mysql-compatibility/','/docs/v4.0/mysql-compatibility/',
 
 TiDB is fully compatible with the MySQL 5.7 protocol and the common features and syntax of MySQL 5.7. The ecosystem tools for MySQL 5.7 (PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader) and the MySQL client can be used for TiDB.
 
-However, some features of MySQL have not been implemented in the distributed database TiDB yet, or are only syntactically supported, because these features are difficult to implement or have low ROI (Return On Investment).
+However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superceded by JSON), security issues (such as `SELECT INTO OUTFILE`), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
 > **Note:**
 >
@@ -21,8 +21,8 @@ However, some features of MySQL have not been implemented in the distributed dat
 + Triggers
 + Events
 + User-defined functions
-+ `FOREIGN KEY` constraints
-+ `FULLTEXT`/`SPATIAL` functions and indexes
++ `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
++ `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + Add/drop primary key
 + SYS schema
@@ -36,7 +36,7 @@ However, some features of MySQL have not been implemented in the distributed dat
 + `CREATE TEMPORARY TABLE` syntax
 + `CHECK TABLE` syntax
 + `CHECKSUM TABLE` syntax
-+ `GET_LOCK` and `RELEASE_LOCK` functions
++ `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
 
 ## Features that are different from MySQL
 
@@ -75,7 +75,7 @@ mysql> select _tidb_rowid, id from t;
 
 ### Performance schema
 
-TiDB uses a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) to store and query the performance monitoring metrics. Some performance schema tables return empty results in TiDB.
+TiDB uses a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) to store and query the performance monitoring metrics. Performance schema tables return empty results in TiDB.
 
 ### Query Execution Plan
 
@@ -83,10 +83,13 @@ The output format, output content, and the privilege setting of Query Execution 
 
 ### Built-in functions
 
-TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyword) for the supported functions.
+TiDB supports most of the MySQL built-in functions, but not all. The statement `SHOW BUILTINS` provides a list of functions that are available.
+
+See also: [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyword).
 
 ### DDL
 
+<<<<<<< HEAD
 + Add Index:
     - Does not support creating multiple indexes using a single SQL statement.
     - Supports creating index of different types (HASH/BTREE/RTREE) only in syntax, not implemented yet.
@@ -119,6 +122,19 @@ TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL G
     - `ENCRYPTION`
 
 + The Table Partition supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
+=======
+In TiDB, all supported DDL changes are performed online. The MySQL DDL assertions `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` can also be used to assert which algorithm will be used to modify the table (which might differ from MySQL).
+
+The following major restrictions apply to DDL versus MySQL:
+
+* Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
+* Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
+* Adding/Dropping the primary key is unsupported unless [`alter-primary-key`](/tidb-configuration-file.md#alter-primary-key) is enabled.
+* Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
+* Change/Modify decimal columns does not support changing the prevision.
+* Change/Modify integer columns does not permit changing the `UNSIGNED` attribute.
+* Table Partitioning supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
+>>>>>>> 061857f... mysql-compatibility: Improve MySQL Compatibility (#3151)
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
     - `SUBPARTITION`
@@ -126,11 +142,13 @@ TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL G
 
 ### Analyze table
 
-[`ANALYZE TABLE`](/statistics.md#manual-collection) works differently in TiDB than in MySQL, in that it is a relatively lightweight and short-lived operation in MySQL/InnoDB, while in TiDB it completely rebuilds the statistics for a table and can take much longer to complete.
+[Statistics Collection](/statistics.md#manual-collection) works differently in TiDB than in MySQL, in that it is a relatively lightweight and short-lived operation in MySQL/InnoDB, while in TiDB it completely rebuilds the statistics for a table and can take much longer to complete.
+
+These differences are documented futher in [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md).
 
 ### Views
 
-For the views feature, TiDB does not support write operations like `UPDATE`, `INSERT`, and `DELETE`.
+Views in TiDB are not updatable. They do not support write operations such as `UPDATE`, `INSERT`, and `DELETE`.
 
 ### Storage engines
 
@@ -140,9 +158,9 @@ TiDB supports storage engine abstraction similar to MySQL, but you need to speci
 
 ### SQL modes
 
-- Does not support the compatibility mode, such as `ORACLE` and `POSTGRESQL`. The compatibility mode is deprecated in MySQL 5.7 and removed in MySQL 8.0.
+- Does not support the compatibility modes, such as `ORACLE` and `POSTGRESQL`. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
 - The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
-- The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are supported for compatibility, but are not applicable to TiDB.
+- The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are accepted for compatibility, but are not applicable to TiDB.
 
 ### Default differences
 
