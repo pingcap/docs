@@ -17,7 +17,7 @@ Range partitioning is used to resolve the performance issues caused by a large a
 
 ### Range partitioning
 
-When a table is partitioned by Range, each partition contains rows for which the partitioning expression value lies within a given Range. Ranges have to be contiguous but not overlapping. You can define it by using the `VALUES LESS THAN`.
+When a table is partitioned by Range, each partition contains rows for which the partitioning expression value lies within a given Range. Ranges have to be contiguous but not overlapping. You can define it by using `VALUES LESS THAN`.
 
 Assume you need to create a table that contains personnel records as follows:
 
@@ -385,10 +385,10 @@ Empty set (0.00 sec)
 
 You can see that the inserted record `(NULL, 'mothra')` falls into the same partition as `(0, 'gigan')`.
 
-> **Attention**
-> The processing of NULL by Hash partition here is the same as [Document description of MySQL](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html), but it is not consistent with the actual behavior of MySQL. In other words, MySQL's documentation is not consistent with its implementation.
+> **Note:**
+> `NULL` values by Hash partitions in TiDB are handled in the same way as described in [How MySQL Partitioning Handles NULL](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html), which, however, is not consistent with the actual behavior of MySQL. In other words, MySQL's implementation in this case is not consistent with its documentation.
 > 
-> The final behavior of TiDB is subject to the description in this document.
+> In this case, the actual behavior of TiDB is in line with the description of this document.
 
 ## Partition management
 
@@ -901,7 +901,7 @@ Query OK, 0 rows affected (0.12 sec)
 
 You can add a non-unique index by using `ALTER TABLE` statements. But if you want to add a unique index, the `c1` column must be included in the unique index.
 
-When using a partitioned table, the prefix index cannot be specified as a unique attribute:
+When using a partitioned table, you cannot specify the prefix index as a unique attribute:
 
 {{< copyable "sql" >}}
 
@@ -1050,6 +1050,6 @@ select * from t;
 5 rows in set (0.00 sec)
 ```
 
-The environment variable `tidb_enable_table_partition` can control whether to enable the partition table function. If this variable is set to `off`, the partition information will be ignored when the table is built, and the table will be built as a normal table.
+The `tidb_enable_table_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `off`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
 
-This variable is only used to build the table, and it is invalid to modify the variable after the table has been built. For details, see [TiDB specific system variables] (/tidb-specific-system-variables.md#tidb_enable_table_partition).
+This variable is only used in table creation. After the table is created, it is invalid to modify this variable value. For details, see [TiDB specific system variables](/tidb-specific-system-variables.md#tidb_enable_table_partition).
