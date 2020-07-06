@@ -162,7 +162,7 @@ For example, the table id of `mysql.stat_meta` is 21, you can use `tidb-ctl sche
 }
 ``` 
 
-Like the `in` subcommand, if you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure.
+Like the `in` subcommand, if you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to specify the host and port.
 
 #### The `base64decode` command
 
