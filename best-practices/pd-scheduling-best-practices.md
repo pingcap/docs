@@ -264,9 +264,9 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
         - Set `key-type` to `"txn"` or `"raw"`. You can modify the parameter dynamically.
         - Keep `key-type` as `table` and set `enable-cross-table-merge` to `true`. You can modify the parameter dynamically.
 
-    > **Note:**
-    >
-    > After placement rules are enabled, properly switch the value of `key-type` between `txn`and `raw` to avoid the failure of decoding.
+        > **Note:**
+        >
+        > After placement rules are enabled, properly switch the value of `key-type` between `txn` and `raw` to avoid the failure of decoding.
 
 For v3.0.4 and v2.1.16 or earlier, the `approximate_keys` of regions are inaccurate in specific circumstances (most of which occur after dropping tables), which makes the number of keys break the constraints of `max-merge-region-keys`. To avoid this problem, you can adjust `max-merge-region-keys` to a larger value.
 
