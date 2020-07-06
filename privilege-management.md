@@ -317,7 +317,7 @@ Requires `SUPER` privilege to set global variables.
 
 ### ADMIN
 
-Requires `SUPER` privielges.
+Requires `SUPER` privilege.
 
 ### SET DEFAULT ROLE
 
