@@ -36,7 +36,6 @@ However, some features of MySQL are not supported. This could be because there i
 + `CREATE TEMPORARY TABLE` syntax
 + `CHECK TABLE` syntax
 + `CHECKSUM TABLE` syntax
-+ `SELECT INTO OUTFILE/DUMPFILE` syntax [#4350](https://github.com/pingcap/tidb/issues/4350)
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
 
 ## Features that are different from MySQL
