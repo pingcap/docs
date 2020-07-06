@@ -14,7 +14,7 @@ In the transaction of TiDB which has two-phase commit (2PC) that included the Pr
 
 ![two-phase of optimistic transaction mode](/media/troubleshooting-lock-pic-01.png)
  
-More than details information about Percolator and  TiDB’s algorithm of transaction, see them in [Google's Percolator](https://ai.google/research/pubs/pub36726)。
+More than details information about Percolator and TiDB’s algorithm of the transaction, see them in [Google's Percolator](https://ai.google/research/pubs/pub36726)。
 
 ### Prewrite Pharse
  
