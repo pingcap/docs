@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_CONFIG
-summary: Learn the `CLUSTER_CONFIG` cluster configuration system table.
+summary: Learn the `CLUSTER_CONFIG` information_schema table.
 category: reference
 aliases: ['/docs/dev/system-tables/system-table-cluster-config/','/docs/dev/reference/system-databases/cluster-config/']
 ---
@@ -12,7 +12,8 @@ You can use the `CLUSTER_CONFIG` cluster configuration table to get the current 
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.cluster_config;
+use information_schema;
+DESC cluster_config;
 ```
 
 ```sql
@@ -38,18 +39,19 @@ The following example shows how to query the `coprocessor` configuration on the 
 {{< copyable "sql" >}}
 
 ```sql
-select * from information_schema.cluster_config where type='tikv' and `key` like 'coprocessor%';
+SELECT * FROM cluster_config WHERE type='tikv' AND `key` LIKE 'coprocessor%';
 ```
 
 ```sql
-+------+-----------------+-----------------------------------+----------+
-| TYPE | INSTANCE        | KEY                               | VALUE    |
-+------+-----------------+-----------------------------------+----------+
-| tikv | 127.0.0.1:20160 | coprocessor.batch-split-limit     | 10       |
-| tikv | 127.0.0.1:20160 | coprocessor.region-max-keys       | 1.44e+06 |
-| tikv | 127.0.0.1:20160 | coprocessor.region-max-size       | 144MiB   |
-| tikv | 127.0.0.1:20160 | coprocessor.region-split-keys     | 960000   |
-| tikv | 127.0.0.1:20160 | coprocessor.region-split-size     | 96MiB    |
-| tikv | 127.0.0.1:20160 | coprocessor.split-region-on-table | false    |
-+------+-----------------+-----------------------------------+----------+
++------+-----------------+-----------------------------------+---------+
+| TYPE | INSTANCE        | KEY                               | VALUE   |
++------+-----------------+-----------------------------------+---------+
+| tikv | 127.0.0.1:20165 | coprocessor.batch-split-limit     | 10      |
+| tikv | 127.0.0.1:20165 | coprocessor.region-max-keys       | 1440000 |
+| tikv | 127.0.0.1:20165 | coprocessor.region-max-size       | 144MiB  |
+| tikv | 127.0.0.1:20165 | coprocessor.region-split-keys     | 960000  |
+| tikv | 127.0.0.1:20165 | coprocessor.region-split-size     | 96MiB   |
+| tikv | 127.0.0.1:20165 | coprocessor.split-region-on-table | false   |
++------+-----------------+-----------------------------------+---------+
+6 rows in set (0.00 sec)
 ```

@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_HARDWARE
-summary: Learn the `CLUSTER_HARDWARE` cluster hardware system table.
+summary: Learn the `CLUSTER_HARDWARE` information_schema table.
 category: reference
 aliases: ['/docs/dev/system-tables/system-table-cluster-hardware/','/docs/dev/reference/system-databases/cluster-hardware/']
 ---
@@ -12,7 +12,8 @@ The `CLUSTER_HARDWARE` hardware system table provides the hardware information o
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.cluster_hardware;
+use information_schema;
+DESC cluster_hardware;
 ```
 
 ```sql
@@ -26,6 +27,7 @@ desc information_schema.cluster_hardware;
 | NAME        | varchar(256) | YES  |      | NULL    |       |
 | VALUE       | varchar(128) | YES  |      | NULL    |       |
 +-------------+--------------+------+------+---------+-------+
+6 rows in set (0.00 sec)
 ```
 
 Field description:
@@ -46,18 +48,19 @@ The following example shows how to query the CPU information using the `CLUSTER_
 {{< copyable "sql" >}}
 
 ```sql
-select * from information_schema.cluster_hardware where device_type='cpu' and device_name='cpu' and name like '%cores';
+SELECT * FROM cluster_hardware WHERE device_type='cpu' AND device_name='cpu' AND name LIKE '%cores';
 ```
 
 ```sql
 +------+-----------------+-------------+-------------+--------------------+-------+
 | TYPE | INSTANCE        | DEVICE_TYPE | DEVICE_NAME | NAME               | VALUE |
 +------+-----------------+-------------+-------------+--------------------+-------+
-| tidb | 0.0.0.0:4000    | cpu         | cpu         | cpu-logical-cores  | 8     |
-| tidb | 0.0.0.0:4000    | cpu         | cpu         | cpu-physical-cores | 4     |
-| pd   | 127.0.0.1:2379  | cpu         | cpu         | cpu-logical-cores  | 8     |
-| pd   | 127.0.0.1:2379  | cpu         | cpu         | cpu-physical-cores | 4     |
-| tikv | 127.0.0.1:20160 | cpu         | cpu         | cpu-logical-cores  | 8     |
-| tikv | 127.0.0.1:20160 | cpu         | cpu         | cpu-physical-cores | 4     |
+| tidb | 0.0.0.0:4000    | cpu         | cpu         | cpu-logical-cores  | 16    |
+| tidb | 0.0.0.0:4000    | cpu         | cpu         | cpu-physical-cores | 8     |
+| pd   | 127.0.0.1:2379  | cpu         | cpu         | cpu-logical-cores  | 16    |
+| pd   | 127.0.0.1:2379  | cpu         | cpu         | cpu-physical-cores | 8     |
+| tikv | 127.0.0.1:20165 | cpu         | cpu         | cpu-logical-cores  | 16    |
+| tikv | 127.0.0.1:20165 | cpu         | cpu         | cpu-physical-cores | 8     |
 +------+-----------------+-------------+-------------+--------------------+-------+
+6 rows in set (0.03 sec)
 ```

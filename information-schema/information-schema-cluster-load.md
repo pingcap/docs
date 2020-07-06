@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_LOAD
-summary: Learn the `CLUSTER_LOAD` cluster load table.
+summary: Learn the `CLUSTER_LOAD` information_schema table.
 category: reference
 aliases: ['/docs/dev/system-tables/system-table-cluster-load/','/docs/dev/reference/system-databases/cluster-load/']
 ---
@@ -12,7 +12,8 @@ The `CLUSTER_LOAD` cluster load table provides the current load information of t
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.cluster_load;
+use information_schema;
+DESC cluster_load;
 ```
 
 ```sql
@@ -26,6 +27,7 @@ desc information_schema.cluster_load;
 | NAME        | varchar(256) | YES  |      | NULL    |       |
 | VALUE       | varchar(128) | YES  |      | NULL    |       |
 +-------------+--------------+------+------+---------+-------+
+6 rows in set (0.00 sec)
 ```
 
 Field description:
@@ -46,21 +48,22 @@ The following example shows how to query the current load information of cpu usi
 {{< copyable "sql" >}}
 
 ```sql
-select * from information_schema.cluster_load where device_type='cpu' and device_name='cpu';
+SELECT * FROM cluster_load WHERE device_type='cpu' AND device_name='cpu';
 ```
 
 ```sql
 +------+-----------------+-------------+-------------+--------+-------+
 | TYPE | INSTANCE        | DEVICE_TYPE | DEVICE_NAME | NAME   | VALUE |
 +------+-----------------+-------------+-------------+--------+-------+
-| tidb | 0.0.0.0:4000    | cpu         | cpu         | load1  | 0.39  |
-| tidb | 0.0.0.0:4000    | cpu         | cpu         | load5  | 0.36  |
-| tidb | 0.0.0.0:4000    | cpu         | cpu         | load15 | 0.66  |
-| pd   | 127.0.0.1:2379  | cpu         | cpu         | load1  | 0.39  |
-| pd   | 127.0.0.1:2379  | cpu         | cpu         | load5  | 0.36  |
-| pd   | 127.0.0.1:2379  | cpu         | cpu         | load15 | 0.66  |
-| tikv | 127.0.0.1:20160 | cpu         | cpu         | load1  | 0.39  |
-| tikv | 127.0.0.1:20160 | cpu         | cpu         | load5  | 0.36  |
-| tikv | 127.0.0.1:20160 | cpu         | cpu         | load15 | 0.66  |
+| tidb | 0.0.0.0:4000    | cpu         | cpu         | load1  | 0.13  |
+| tidb | 0.0.0.0:4000    | cpu         | cpu         | load5  | 0.25  |
+| tidb | 0.0.0.0:4000    | cpu         | cpu         | load15 | 0.31  |
+| pd   | 127.0.0.1:2379  | cpu         | cpu         | load1  | 0.13  |
+| pd   | 127.0.0.1:2379  | cpu         | cpu         | load5  | 0.25  |
+| pd   | 127.0.0.1:2379  | cpu         | cpu         | load15 | 0.31  |
+| tikv | 127.0.0.1:20165 | cpu         | cpu         | load1  | 0.13  |
+| tikv | 127.0.0.1:20165 | cpu         | cpu         | load5  | 0.25  |
+| tikv | 127.0.0.1:20165 | cpu         | cpu         | load15 | 0.31  |
 +------+-----------------+-------------+-------------+--------+-------+
+9 rows in set (1.50 sec)
 ```

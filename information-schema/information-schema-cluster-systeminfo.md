@@ -12,7 +12,8 @@ You can use the `CLUSTER_SYSTEMINFO` kernel parameter table to query the kernel 
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.cluster_systeminfo;
+use information_schema;
+DESC cluster_systeminfo;
 ```
 
 ```sql
@@ -41,7 +42,7 @@ Field description:
 The following example shows how to query the kernel version of all servers in the cluster using the `CLUSTER_SYSTEMINFO` system information table.
 
 ```sql
-select * from information_schema.cluster_systeminfo where name like '%kernel.osrelease%'
+SELECT * FROM cluster_systeminfo WHERE name LIKE '%kernel.osrelease%'
 ```
 
 ```sql

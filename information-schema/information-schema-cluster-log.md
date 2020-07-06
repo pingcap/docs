@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_LOG
-summary: Learn the `CLUSTER_LOG` cluster log table.
+summary: Learn the `CLUSTER_LOG` information_schema table.
 category: reference
 aliases: ['/docs/dev/system-tables/system-table-cluster-log/','/docs/dev/reference/system-databases/cluster-log/']
 ---
@@ -14,7 +14,8 @@ To get the logs of the TiDB cluster before v4.0, you need to log in to each inst
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.cluster_log;
+use information_schema;
+DESC cluster_log;
 ```
 
 ```sql
@@ -49,7 +50,7 @@ The following example shows how to query the execution process of a DDL statemen
 {{< copyable "sql" >}}
 
 ```sql
-select time,instance,left(message,150) from information_schema.cluster_log where message like '%ddl%job%ID.80%' and type='tidb' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00'
+SELECT time,instance,left(message,150) FROM cluster_log WHERE message LIKE '%ddl%job%ID.80%' AND type='tidb' AND time > '2020-05-18 20:40:00' AND time < '2020-05-18 21:40:00'
 ```
 
 ```sql
