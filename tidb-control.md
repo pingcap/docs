@@ -145,7 +145,7 @@ The result is displayed in the JSON format. (The above output is truncated.)
 
 #### The `tid` subcommand
 
-The `tid` subcommand is used to get table information and structure by table id.
+- `tid` is used to obtain the table schema by using the unique `table_id` in the whole database.
 
 For example, the table ID of `mysql.stat_meta` is `21`. You can use `tidb-ctl schema tid -i 21` to obtain the detail of `mysql.stat_meta`.
 
