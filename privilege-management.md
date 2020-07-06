@@ -161,7 +161,7 @@ SHOW GRANTS; -- show grants for the current user
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
-For example, create a user `rw_user@192.168.%` and grant it with write privilege on `test.write_table` and global read privilege.
+For example, create a user `rw_user@192.168.%` and grant the user with write privilege on the `test.write_table` table and global read privilege.
 
 ```sql
 CREATE USER `rw_user`@`192.168.%`;
