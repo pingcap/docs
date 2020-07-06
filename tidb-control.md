@@ -45,7 +45,7 @@ Currently, TiDB Control has the following subcommands:
 - `tidb-ctl base64decode`: used for `BASE64` decoding
 - `tidb-ctl decoder`: for KEY decode
 - `tidb-ctl etcd`: for operating etcd
-- `tidb-ctl log`: format the log file to expand the single-line stack information
+- `tidb-ctl log`: used to format the log file to expand the single-line stack information
 - `tidb-ctl mvcc`: MVCC information
 - `tidb-ctl region`: Region information
 - `tidb-ctl schema`: Schema information
