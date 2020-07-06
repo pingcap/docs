@@ -301,7 +301,7 @@ Requires the `CREATE USER` privilege.
 
 Requires the `GRANT` privilege with the privileges granted by `GRANT`.
 
-Requires additional `CREATE USER` privilege when create user implicitly.
+Requires additional `CREATE USER` privilege to create a user implicitly.
 
 `GRANT ROLE` requires `SUPER` privilege.
 
