@@ -205,7 +205,7 @@
         + [AUTO_RANDOM](/auto-random.md)
       + [Literal Values](/literal-values.md)
       + [Schema Object Names](/schema-object-names.md)
-      + [Keywords and Reserved Words](/keywords-and-reserved-words.md)
+      + [Keywords and Reserved Words](/keywords.md)
       + [User-Defined Variables](/user-defined-variables.md)
       + [Expression Syntax](/expression-syntax.md)
       + [Comment Syntax](/comment-syntax.md)
@@ -458,6 +458,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.16](/releases/release-3.0.16.md)
     + [3.0.15](/releases/release-3.0.15.md)
     + [3.0.14](/releases/release-3.0.14.md)
     + [3.0.13](/releases/release-3.0.13.md)
