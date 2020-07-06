@@ -65,7 +65,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 
 ### Locate I/O issues from log
 
-- If the client reports `server is busy` error, especially the error message of `raftstore is busy`, it will be related to I/O problem.
+- If the client reports errors such as `server is busy` or especially `raftstore is busy`, the errors might be related to I/O issues.
 
     You can check the monitoring panel (**Grafana** -> **TiKV** -> **errors**) to confirm the specific cause of the `busy` error. `server is busy` is TiKV's flow control mechanism. In this way, TiKV informs `tidb/ti-client` that the current pressure of TiKV is too high, and the client should try later.
 
