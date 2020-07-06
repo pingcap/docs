@@ -9,7 +9,7 @@ aliases: ['/docs/dev/mysql-compatibility/','/docs/dev/reference/mysql-compatibil
 
 TiDB is fully compatible with the MySQL 5.7 protocol and the common features and syntax of MySQL 5.7. The ecosystem tools for MySQL 5.7 (PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader) and the MySQL client can be used for TiDB.
 
-However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superceded by JSON), security issues (such as SELECT INTO OUTFILE), or a lack of current demand versus effort required (such as stored procedures and functions). Some features may also be difficult to implement as a distributed system.
+However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superceded by JSON), security issues (such as `SELECT INTO OUTFILE`), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
 > **Note:**
 >
@@ -89,7 +89,7 @@ See also: [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyw
 
 ### DDL
 
-In TIDB, all supported DDL changes are performed online. The MySQL DDL assertions `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` can also be used to assert which algorithm will be used to modify the table (which may differ from MySQL).
+In TiDB, all supported DDL changes are performed online. The MySQL DDL assertions `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` can also be used to assert which algorithm will be used to modify the table (which might differ from MySQL).
 
 The following major restrictions apply to DDL versus MySQL:
 
