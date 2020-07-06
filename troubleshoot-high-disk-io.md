@@ -63,7 +63,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 
 - `raft commit log` is slow. In TiKV Grafana, `Raft I/O` and `commit log duration` (only available in Grafana 4.x) metrics are relatively high. Each Region corresponds to an independent Raft group. Raft has a flow control mechanism similar to the sliding window mechanism of TCP. To control the size of a sliding window, adjust the `[raftstore] raft-max-inflight-msgs` parameter. if there is a write hotspot and `commit log duration` is high, you can properly set this parameter to a larger value, such as `1024`.
 
-### Locate I/O problems from log
+### Locate I/O issues from log
 
 - If the client reports `server is busy` error, especially the error message of `raftstore is busy`, it will be related to I/O problem.
 
