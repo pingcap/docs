@@ -66,7 +66,7 @@ Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has t
 
 ### Global options
 
-`tidb-ctl` has 7 connection related global options:
+`tidb-ctl` has the following connection-related global options:
 
 - `--host`: TiDB Service address (default 127.0.0.1)
 - `--port`: TiDB Service port (default 10080)
