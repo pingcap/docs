@@ -321,7 +321,7 @@ Requires `SUPER` privilege.
 
 ### SET DEFAULT ROLE
 
-Requires `SUPER` privielges.
+Requires `SUPER` privilege.
 
 ### KILL
 
