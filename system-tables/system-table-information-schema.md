@@ -1,13 +1,80 @@
 ---
 title: Information Schema
-summary: Learn how to use Information Schema in TiDB.
+summary: TiDB implements the ANSI-standard information_schema for viewing system metadata.
 category: reference
 aliases: ['/docs/dev/system-tables/system-table-information-schema/','/docs/dev/reference/system-databases/information-schema/']
 ---
 
 # Information Schema
 
-As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` tables. Many of these tables also have a corresponding `SHOW` command. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.
+Information Schema is an ANSI-standard way of viewing system metadata. In addition to providing many of the `INFORMATION_SCHEMA` tables available in MySQL, TiDB also provides a number of extensions.
+
+Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.
+
+| Table Name                   | TiDB Extension | Description |
+|------------------------------|----------------|-------------|
+| `ANALYZE_STATUS`             | Yes | Provides information about tasks to collect statistics. |
+| `CHARACTER_SETS`             | No  | Provides a list of character sets the server supports. |
+| `CLUSTER_CONFIG`             | Yes | Provides details about configuration settings for the entire TiDB cluster. |
+| `CLUSTER_HARDWARE`           | Yes | Provides details on the underlying physical hardware discovered on each TiDB component. |
+| `CLUSTER_INFO`               | Yes | TODO |
+| `CLUSTER_LOAD`               | Yes | TODO |
+| `CLUSTER_LOG`                | Yes | Provides a log for the entire TiDB cluster |
+| `CLUSTER_PROCESSLIST`        | Yes | Provides a cluster-level view of the "PROCESSLIST" table. |
+| `CLUSTER_SLOW_QUERY`         | Yes | Provides a cluster-level view of the "SLOW_QUERY" table. |
+| `CLUSTER_STATEMENTS_SUMMARY` | Yes | TODO |
+| `CLUSTER_STATEMENTS_SUMMARY_HISTORY` | Yes |
+| `CLUSTER_SYSTEMINFO`         | Yes | TODO |
+| `COLLATIONS`                 | No  | Provides a list of collations that the server supports. |
+| `COLLATION_CHARACTER_SET_APPLICABILITY` | No | Explains which collations apply to which character sets. |
+| `COLUMNS`                    | No  | TODO |
+| `COLUMN_PRIVILEGES`          | No  | Not implemented by TiDB. Returns zero rows. |
+| `COLUMN_STATISTICS`          | No  | TODO |
+| `DDL_JOBS`                   | Yes | TODO |
+| `ENGINES`                    | No  | TODO |
+| `EVENTS`                     | No  | Not implemented by TiDB. Returns zero rows. |
+| `FILES`                      | No  | Not implemented by TiDB. Returns zero rows. |
+| `GLOBAL_STATUS`              | No  | Not implemented by TiDB. Returns zero rows. |
+| `GLOBAL_VARIABLES`           | No  | Not implemented by TiDB. Returns zero rows. |
+| `INSPECTION_RESULT`          | Yes | TODO |
+| `INSPECTION_RULES`           | Yes | TODO |
+| `INSPECTION_SUMMARY`         | Yes | TODO |
+| `KEY_COLUMN_USAGE`           | No  | TODO |
+| `METRICS_SUMMARY`            | Yes | TODO |
+| `METRICS_SUMMARY_BY_LABEL`   | Yes | TODO |
+| `METRICS_TABLES`             | Yes | TODO |
+| `OPTIMIZER_TRACE`            | No  | Not implemented by TiDB. Returns zero rows. |
+| `PARAMETERS`                 | No  | Not implemented by TiDB. Returns zero rows. |
+| `PARTITIONS`                 | No  | Provides a list of table partitions. |
+| `PLUGINS`                    | No  | Not implemented by TiDB. Returns zero rows. |
+| `PROCESSLIST`                | No  | Provides similar information to the command `SHOW PROCESSLIST`. |
+| `PROFILING`                  | No  | Not implemented by TiDB. Returns zero rows. |
+| `REFERENTIAL_CONSTRAINTS`    | No  | Not implemented by TiDB. Returns zero rows. |
+| `ROUTINES`                   | No  | Not implemented by TiDB. Returns zero rows. |
+| `SCHEMATA`                   | No  | Provides similar information to `SHOW DATABASES`. |
+| `SCHEMA_PRIVILEGES`          | No  | Not implemented by TiDB. Returns zero rows. |
+| `SEQUENCES`                  | Yes | The TiDB implementation of sequences is based on MariaDB. |
+| `SESSION_STATUS`             | No  | Not implemented by TiDB. Returns zero rows. |
+| `SESSION_VARIABLES`          | No  | Provides similar functionality to the command `SHOW SESSION VARIABLES` |
+| `SLOW_QUERY`                 | Yes | Provides information on slow queries on the current TiDB server. |
+| `STATEMENTS_SUMMARY`         | Yes | Similar to PFS statement summary in MySQL. |
+| `STATEMENTS_SUMMARY_HISTORY` | Yes | Similar to PFS statement summary history in MySQL. |
+| `STATISTICS`                 | No  | Provides information on table indexes. |
+| `TABLES`                     | No  | Provides a list of tables that the current user has visibility of. Similar to `SHOW TABLES`. |
+| `TABLESPACES`                | No  | Not implemented by TiDB. Returns zero rows. |
+| `TABLE_CONSTRAINTS`          | No  | Provides information on primary keys, unique indexes and foreign keys. |
+| `TABLE_PRIVILEGES`           | No  | Not implemented by TiDB. Returns zero rows. |
+| `TIDB_HOT_REGIONS`           | Yes | TODO |
+| `TIDB_INDEXES`               | Yes | TODO |
+| `TIDB_SERVERS_INFO`          | Yes | TODO |
+| `TIFLASH_REPLICA`            | Yes | TODO |
+| `TIKV_REGION_PEERS`          | Yes | TODO |
+| `TIKV_REGION_STATUS`         | Yes | TODO |
+| `TIKV_STORE_STATUS`          | Yes | TODO |
+| `TRIGGERS`                   | No  | Not implemented by TiDB. Returns zero rows. |
+| `USER_PRIVILEGES`            | No  | Not implemented by TiDB. Returns zero rows. |
+| `VIEWS`                      | No  | Provides a list of views that the current user has visibility of. Similar to running `SHOW FULL TABLES WHERE table_type = 'VIEW'` |
+
 
 ## Fully Supported Information Schema Tables
 
@@ -1211,25 +1278,3 @@ Create Table: CREATE TABLE `SLOW_QUERY` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 1 row in set (0.00 sec)
 ```
-
-## Unsupported Information Schema Tables
-
-The following `INFORMATION_SCHEMA` tables are present in TiDB, but will always return zero rows:
-
-* `COLUMN_PRIVILEGES`
-* `EVENTS`
-* `FILES`
-* `GLOBAL_STATUS`
-* `GLOBAL_VARIABLES`
-* `OPTIMIZER_TRACE`
-* `PARAMETERS`
-* `PARTITIONS`
-* `PLUGINS`
-* `PROFILING`
-* `REFERENTIAL_CONSTRAINTS`
-* `ROUTINES`
-* `SCHEMA_PRIVILEGES`
-* `SESSION_STATUS`
-* `TABLESPACES`
-* `TABLE_PRIVILEGES`
-* `TRIGGERS`

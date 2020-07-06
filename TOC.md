@@ -356,10 +356,9 @@
     + [Views](/views.md)
     + [Partitioning](/partitioned-table.md)
     + [Character Set and Collation](/character-set-and-collation.md)
-    + System Tables
+    + System Databases
       + [`mysql`](/system-tables/system-table-overview.md)
       + [`information_schema`](/system-tables/system-table-information-schema.md)
-      + sql-diagnosis
         + [`cluster_info`](/system-tables/system-table-cluster-info.md)
         + [`cluster_hardware`](/system-tables/system-table-cluster-hardware.md)
         + [`cluster_config`](/system-tables/system-table-cluster-config.md)
@@ -371,6 +370,7 @@
         + [`metrics_summary`](/system-tables/system-table-metrics-summary.md)
         + [`inspection_result`](/system-tables/system-table-inspection-result.md)
         + [`inspection_summary`](/system-tables/system-table-inspection-summary.md)
+      + [`metrics_schema`](#)
   + UI
     + TiDB Dashboard
       + [Overview](/dashboard/dashboard-intro.md)
