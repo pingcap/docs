@@ -7,7 +7,11 @@ aliases: ['/docs/v2.1/test-deployment-using-docker/','/docs/v2.1/how-to/deploy/o
 
 # Deploy TiDB Using Docker
 
-This page shows you how to manually deploy a multi-node TiDB cluster on multiple machines using Docker.
+> **Warning:**
+>
+> The Docker deployment method provided in this document is no longer maintained. If you want to test TiDB, it is recommended to refer to [Quick Start Guide for the TiDB Database Platform](https://docs.pingcap.com/tidb/dev/quick-start-with-tidb) for deployment. For **production environment**, **do not use** Docker for deployment, but [deploy TiDB with TiDB Ansible](/online-deployment-using-ansible.md) or [TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.0/deploy-tidb-operator).
+
+This document shows you how to manually deploy a multi-node TiDB cluster on multiple machines using Docker.
 
 To learn more, see [TiDB architecture](/architecture.md) and [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
