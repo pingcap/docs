@@ -91,5 +91,5 @@ The cluster deployment tool (TiDB-Ansible, TiUP) is an alarm component that is d
 ## I/O problem handling plan
 
 1. When it is confirmed as a I/O hotspot issue, you need to refer to [TiDB Hot Issue Processing] (/troubleshoot-hot-spot-issues.md) to eliminate the related I/O hotspot situation.
-2. When it is confirmed that the overall I/O has reached the bottleneck, and the ability to judge the I/O from the business side will continue to keep up, then you can take advantage of the distributed database's scale capability and adopt the scheme of expanding the number of TiKV nodes to obtain greater overall I/O throughput.
++ When it is confirmed that the overall I/O performance has become the bottleneck, and you can determine that the I/O performance will keep falling behind from the application side, then you can take advantage of the distributed database's capability to scale and scale out the number of TiKV nodes to have greater overall I/O throughput.
 + Adjust some of the parameters as described above, and use computing/memory resources to make up for disk storage resources.
