@@ -40,7 +40,7 @@ Usage example: `tidb-ctl schema in mysql -n db`
 - `-n`: the option
 - `db`: the flag of `-n`
 
-Currently, TiDB Control contains following commands:
+Currently, TiDB Control has the following subcommands:
 
 - `tidb-ctl base64decode`: BASE64 decode
 - `tidb-ctl decoder`: for KEY decode
