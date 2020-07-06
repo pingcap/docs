@@ -7,7 +7,7 @@ aliases: ['/docs/dev/tidb-control/','/docs/dev/reference/tools/tidb-control/']
 
 # TiDB Control User Guide
 
-TiDB Control is a command line tool of TiDB, usually used to obtain the status information of TiDB for debugging.
+TiDB Control is a command-line tool of TiDB, usually used to obtain the status information of TiDB for debugging. This document introduces the features of TiDB Control and how to use these features.
 
 ## Get TiDB Control
 
