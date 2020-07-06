@@ -82,7 +82,7 @@ mysql> SELECT user,host,password FROM mysql.user WHERE user='idontexist';
 1 row in set (0.00 sec)
 ```
 
-You can use fuzzy matching to grant privileges to databases.
+You can use fuzzy matching in `GRANT` to grant privileges to databases.
 
 ```sql
 mysql> GRANT ALL PRIVILEGES ON `te%`.* TO genius;
