@@ -9,7 +9,7 @@ aliases: ['/docs/v3.1/tidb-lightning/tidb-lightning-table-filter/','/docs/v3.1/r
 
 The TiDB ecosystem tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
 
-Since TiDB 4.0, all TiDB ecosystem tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
+Several TiDB ecosystem tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
 
 ## Usage
 
