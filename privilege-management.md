@@ -169,7 +169,7 @@ GRANT SELECT ON *.* TO `rw_user`@`192.168.%`;
 GRANT INSERT, UPDATE ON `test`.`write_table` TO `rw_user`@`192.168.%`;
 ```
 
-Show grants for this user.
+Show granted privileges of the `rw_user@192.168.%` user:
 
 ```sql
 SHOW GRANTS FOR `rw_user`@`192.168.%`;
