@@ -67,7 +67,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 
 - If the client reports `server is busy` error, especially the error message of `raftstore is busy`, it will be related to I/O problem.
 
-    You can check the monitor: grafana -> TiKV -> errors to confirm the specific busy reason. Among them, `server is busy` is TiKV's flow control mechanism. In this way, TiKV informs `tidb/ti-client` that the current pressure of TiKV is too high, and try again later.
+    You can check the monitoring panel (**Grafana** -> **TiKV** -> **errors**) to confirm the specific cause of the `busy` error. `server is busy` is TiKV's flow control mechanism. In this way, TiKV informs `tidb/ti-client` that the current pressure of TiKV is too high, and the client should try later.
 
 - "Write stall" appears in TiKV RocksDB logs.
 
