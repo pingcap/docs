@@ -7,73 +7,73 @@ aliases: ['/docs/dev/system-tables/system-table-information-schema/','/docs/dev/
 
 # Information Schema
 
-Information Schema is an ANSI-standard way of viewing system metadata. In addition to providing many of the `INFORMATION_SCHEMA` tables available in MySQL, TiDB also provides a number of extensions.
+Information Schema provides an ANSI-standard way of viewing system metadata. TiDB also provides a number of custom `INFORMATION_SCHEMA` tables, in addition to the tables included for MySQL compatibility.
 
 Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.
 
-| Table Name                   | TiDB Extension | Description |
-|------------------------------|----------------|-------------|
-| `ANALYZE_STATUS`             | Yes | Provides information about tasks to collect statistics. |
-| `CHARACTER_SETS`             | No  | Provides a list of character sets the server supports. |
-| `CLUSTER_CONFIG`             | Yes | Provides details about configuration settings for the entire TiDB cluster. |
-| `CLUSTER_HARDWARE`           | Yes | Provides details on the underlying physical hardware discovered on each TiDB component. |
-| `CLUSTER_INFO`               | Yes | TODO |
-| `CLUSTER_LOAD`               | Yes | TODO |
-| `CLUSTER_LOG`                | Yes | Provides a log for the entire TiDB cluster |
-| `CLUSTER_PROCESSLIST`        | Yes | Provides a cluster-level view of the "PROCESSLIST" table. |
-| `CLUSTER_SLOW_QUERY`         | Yes | Provides a cluster-level view of the "SLOW_QUERY" table. |
-| `CLUSTER_STATEMENTS_SUMMARY` | Yes | TODO |
-| `CLUSTER_STATEMENTS_SUMMARY_HISTORY` | Yes |
-| `CLUSTER_SYSTEMINFO`         | Yes | TODO |
-| `COLLATIONS`                 | No  | Provides a list of collations that the server supports. |
-| `COLLATION_CHARACTER_SET_APPLICABILITY` | No | Explains which collations apply to which character sets. |
-| `COLUMNS`                    | No  | TODO |
-| `COLUMN_PRIVILEGES`          | No  | Not implemented by TiDB. Returns zero rows. |
-| `COLUMN_STATISTICS`          | No  | TODO |
-| `DDL_JOBS`                   | Yes | TODO |
-| `ENGINES`                    | No  | TODO |
-| `EVENTS`                     | No  | Not implemented by TiDB. Returns zero rows. |
-| `FILES`                      | No  | Not implemented by TiDB. Returns zero rows. |
-| `GLOBAL_STATUS`              | No  | Not implemented by TiDB. Returns zero rows. |
-| `GLOBAL_VARIABLES`           | No  | Not implemented by TiDB. Returns zero rows. |
-| `INSPECTION_RESULT`          | Yes | TODO |
-| `INSPECTION_RULES`           | Yes | TODO |
-| `INSPECTION_SUMMARY`         | Yes | TODO |
-| `KEY_COLUMN_USAGE`           | No  | TODO |
-| `METRICS_SUMMARY`            | Yes | TODO |
-| `METRICS_SUMMARY_BY_LABEL`   | Yes | TODO |
-| `METRICS_TABLES`             | Yes | TODO |
-| `OPTIMIZER_TRACE`            | No  | Not implemented by TiDB. Returns zero rows. |
-| `PARAMETERS`                 | No  | Not implemented by TiDB. Returns zero rows. |
-| `PARTITIONS`                 | No  | Provides a list of table partitions. |
-| `PLUGINS`                    | No  | Not implemented by TiDB. Returns zero rows. |
-| `PROCESSLIST`                | No  | Provides similar information to the command `SHOW PROCESSLIST`. |
-| `PROFILING`                  | No  | Not implemented by TiDB. Returns zero rows. |
-| `REFERENTIAL_CONSTRAINTS`    | No  | Not implemented by TiDB. Returns zero rows. |
-| `ROUTINES`                   | No  | Not implemented by TiDB. Returns zero rows. |
-| `SCHEMATA`                   | No  | Provides similar information to `SHOW DATABASES`. |
-| `SCHEMA_PRIVILEGES`          | No  | Not implemented by TiDB. Returns zero rows. |
-| `SEQUENCES`                  | Yes | The TiDB implementation of sequences is based on MariaDB. |
-| `SESSION_STATUS`             | No  | Not implemented by TiDB. Returns zero rows. |
-| `SESSION_VARIABLES`          | No  | Provides similar functionality to the command `SHOW SESSION VARIABLES` |
-| `SLOW_QUERY`                 | Yes | Provides information on slow queries on the current TiDB server. |
-| `STATEMENTS_SUMMARY`         | Yes | Similar to PFS statement summary in MySQL. |
-| `STATEMENTS_SUMMARY_HISTORY` | Yes | Similar to PFS statement summary history in MySQL. |
-| `STATISTICS`                 | No  | Provides information on table indexes. |
-| `TABLES`                     | No  | Provides a list of tables that the current user has visibility of. Similar to `SHOW TABLES`. |
-| `TABLESPACES`                | No  | Not implemented by TiDB. Returns zero rows. |
-| `TABLE_CONSTRAINTS`          | No  | Provides information on primary keys, unique indexes and foreign keys. |
-| `TABLE_PRIVILEGES`           | No  | Not implemented by TiDB. Returns zero rows. |
-| `TIDB_HOT_REGIONS`           | Yes | TODO |
-| `TIDB_INDEXES`               | Yes | TODO |
-| `TIDB_SERVERS_INFO`          | Yes | TODO |
-| `TIFLASH_REPLICA`            | Yes | TODO |
-| `TIKV_REGION_PEERS`          | Yes | TODO |
-| `TIKV_REGION_STATUS`         | Yes | TODO |
-| `TIKV_STORE_STATUS`          | Yes | TODO |
-| `TRIGGERS`                   | No  | Not implemented by TiDB. Returns zero rows. |
-| `USER_PRIVILEGES`            | No  | Not implemented by TiDB. Returns zero rows. |
-| `VIEWS`                      | No  | Provides a list of views that the current user has visibility of. Similar to running `SHOW FULL TABLES WHERE table_type = 'VIEW'` |
+| Table Name                                                                         | TiDB Extension | Description |
+|------------------------------------------------------------------------------------|----------------|-------------|
+| [`ANALYZE_STATUS`](#analyze_status_table)                                          | Yes | Provides information about tasks to collect statistics. |
+| [`CHARACTER_SETS`](#character_sets_table)                                          | No  | Provides a list of character sets the server supports. |
+| [`CLUSTER_CONFIG`](/system-tables/system-table-cluster-config.md)                  | Yes | Provides details about configuration settings for the entire TiDB cluster. |
+| [`CLUSTER_HARDWARE`](/system-tables/system-table-cluster-info.md)                  | Yes | Provides details on the underlying physical hardware discovered on each TiDB component. |
+| [`CLUSTER_INFO`](/system-tables/system-table-cluster-info.md)                      | Yes | Provides details on the current cluster topology. |
+| [`CLUSTER_LOAD`](/system-tables/system-table-cluster-load.md)                      | Yes | Provides current load information for TiDB servers in the cluster. |
+| [`CLUSTER_LOG`](/system-tables/system-table-cluster-log.md)                        | Yes | Provides a log for the entire TiDB cluster |
+| [`CLUSTER_PROCESSLIST`](#todo)                                                     | Yes | Provides a cluster-level view of the "PROCESSLIST" table. |
+| [`CLUSTER_SLOW_QUERY`](#todo)                                                      | Yes | Provides a cluster-level view of the "SLOW_QUERY" table. |
+| [`CLUSTER_STATEMENTS_SUMMARY`](#todo)                                              | Yes | Provides a cluster-level view of the "STATEMENTS_SUMMARY" table. |
+| [`CLUSTER_STATEMENTS_SUMMARY_HISTORY`](#todo)                                      | Yes | Provides a cluster-level view of the "CLUSTER_STATEMENTS_SUMMARY_HISTORY" table. |
+| [`CLUSTER_SYSTEMINFO`](/system-tables/system-table-cluster-systeminfo.md)          | Yes | Provides details about kernel parameter configuration for servers in the cluster. |
+| [`COLLATIONS`](#collations_table)                                                  | No  | Provides a list of collations that the server supports. |
+| [`COLLATION_CHARACTER_SET_APPLICABILITY`](#collation_character_set_applicability_table) | No  | Explains which collations apply to which character sets. |
+| [`COLUMNS`](#columns_table)                                                        | No  | TODO |
+| `COLUMN_PRIVILEGES`                                                                | No  | Not implemented by TiDB. Returns zero rows. |
+| `COLUMN_STATISTICS`                                                                | No  | TODO |
+| [`DDL_JOBS`](#todo)                                                                | Yes | TODO |
+| [`ENGINES`](#engines_table)                                                        | No  | Provides a list of supported storage engines. |
+| `EVENTS`                                                                           | No  | Not implemented by TiDB. Returns zero rows. |
+| `FILES`                                                                            | No  | Not implemented by TiDB. Returns zero rows. |
+| `GLOBAL_STATUS`                                                                    | No  | Not implemented by TiDB. Returns zero rows. |
+| `GLOBAL_VARIABLES`                                                                 | No  | Not implemented by TiDB. Returns zero rows. |
+| [`INSPECTION_RESULT`](/system-tables/system-table-cluster-inspection-result.md)    | Yes | Triggers internal diagnostics checks. |
+| [`INSPECTION_RULES`](#todo)                                                        | Yes | TODO |
+| [`INSPECTION_SUMMARY`](/system-tables/system-table-cluster-inspection-summary.md)  | Yes | TODO |
+| [`KEY_COLUMN_USAGE`](#key_column_usage_table)                                      | No  | TODO |
+| [`METRICS_SUMMARY`](/system-tables/system-table-cluster-metrics-summary.md)        | Yes | TODO |
+| [`METRICS_SUMMARY_BY_LABEL`](#todo)                                                | Yes | TODO |
+| [`METRICS_TABLES`](/system-tables/system-table-cluster-metrics-tables.md)          | Yes | TODO |
+| `OPTIMIZER_TRACE`                                                                  | No  | Not implemented by TiDB. Returns zero rows. |
+| `PARAMETERS`                                                                       | No  | Not implemented by TiDB. Returns zero rows. |
+| [`PARTITIONS`](#partitions_table)                                                  | No  | Provides a list of table partitions. |
+| `PLUGINS`                                                                          | No  | Not implemented by TiDB. Returns zero rows. |
+| [`PROCESSLIST`](#processlist_table)                                                | No  | Provides similar information to the command `SHOW PROCESSLIST`. |
+| `PROFILING`                                                                        | No  | Not implemented by TiDB. Returns zero rows. |
+| `REFERENTIAL_CONSTRAINTS`                                                          | No  | Not implemented by TiDB. Returns zero rows. |
+| `ROUTINES`                                                                         | No  | Not implemented by TiDB. Returns zero rows. |
+| [`SCHEMATA`](#schemata_table)                                                      | No  | Provides similar information to `SHOW DATABASES`. |
+| `SCHEMA_PRIVILEGES`                                                                | No  | Not implemented by TiDB. Returns zero rows. |
+| [`SEQUENCES`](#sequences_table)                                                    | Yes | The TiDB implementation of sequences is based on MariaDB. |
+| `SESSION_STATUS`                                                                   | No  | Not implemented by TiDB. Returns zero rows. |
+| [`SESSION_VARIABLES`](#session_variables_table)                                    | No  | Provides similar functionality to the command `SHOW SESSION VARIABLES` |
+| [`SLOW_QUERY`](#todo)                                                              | Yes | Provides information on slow queries on the current TiDB server. |
+| [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)                               | Yes | Similar to PFS statement summary in MySQL. |
+| [`STATEMENTS_SUMMARY_HISTORY`](/statement-summary-tables.md)                       | Yes | Similar to PFS statement summary history in MySQL. |
+| [`STATISTICS`](#statistics_table)                                                  | No  | Provides information on table indexes. |
+| [`TABLES`](#tables_table)                                                          | No  | Provides a list of tables that the current user has visibility of. Similar to `SHOW TABLES`. |
+| `TABLESPACES`                                                                      | No  | Not implemented by TiDB. Returns zero rows. |
+| [`TABLE_CONSTRAINTS`](#table_constraints_table)                                    | No  | Provides information on primary keys, unique indexes and foreign keys. |
+| `TABLE_PRIVILEGES`                                                                 | No  | Not implemented by TiDB. Returns zero rows. |
+| [`TIDB_HOT_REGIONS`](#todo)                                                        | Yes | TODO |
+| [`TIDB_INDEXES`](#todo)                                                            | Yes | TODO |
+| [`TIDB_SERVERS_INFO`](#todo)                                                       | Yes | TODO |
+| [`TIFLASH_REPLICA`](#todo)                                                         | Yes | TODO |
+| [`TIKV_REGION_PEERS`](#todo)                                                       | Yes | TODO |
+| [`TIKV_REGION_STATUS`](#todo)                                                      | Yes | TODO |
+| [`TIKV_STORE_STATUS`](#todo)                                                       | Yes | TODO |
+| `TRIGGERS`                                                                         | No  | Not implemented by TiDB. Returns zero rows. |
+| `USER_PRIVILEGES`                                                                  | No  | Not implemented by TiDB. Returns zero rows. |
+| [`VIEWS`](#views_table)                                                            | No  | Provides a list of views that the current user has visibility of. Similar to running `SHOW FULL TABLES WHERE table_type = 'VIEW'` |
 
 
 ## Fully Supported Information Schema Tables

@@ -356,7 +356,7 @@
     + [Views](/views.md)
     + [Partitioning](/partitioned-table.md)
     + [Character Set and Collation](/character-set-and-collation.md)
-    + System Databases
+    + System Tables
       + [`mysql`](/system-tables/system-table-overview.md)
       + [`information_schema`](/system-tables/system-table-information-schema.md)
         + [`cluster_info`](/system-tables/system-table-cluster-info.md)
