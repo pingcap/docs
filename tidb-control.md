@@ -43,13 +43,13 @@ Usage example: `tidb-ctl schema in mysql -n db`
 Currently, TiDB Control has the following subcommands:
 
 - `tidb-ctl base64decode`: used for `BASE64` decoding
-- `tidb-ctl decoder`: for KEY decode
+- `tidb-ctl decoder`: used for `KEY` decoding
 - `tidb-ctl etcd`: for operating etcd
 - `tidb-ctl log`: used to format the log file to expand the single-line stack information
-- `tidb-ctl mvcc`: MVCC information
-- `tidb-ctl region`: Region information
-- `tidb-ctl schema`: Schema information
-- `tidb-ctl table`: Table information
+- `tidb-ctl mvcc`: used to get the mvcc information
+- `tidb-ctl region`: used to get the region information
+- `tidb-ctl schema`: used to get the schema information
+- `tidb-ctl table`: used to get the table information
 
 ### Get help
 
@@ -81,17 +81,6 @@ Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has t
 - The default service address of TiDB and PD: `127.0.0.1`. The service address must be an IP address.
 - The default service port of TiDB: `10080`.
 - The default service port of PD: `2379`.
-
-**Connection options are global options that apply to all the following commands:**
-
-- `tidb-ctl base64decode`
-- `tidb-ctl decoder`
-- `tidb-ctl etcd`
-- `tidb-ctl log`
-- `tidb-ctl mvcc`
-- `tidb-ctl region`
-- `tidb-ctl schema`
-- `tidb-ctl table`
 
 ### The `schema` command
 
@@ -145,7 +134,7 @@ The result is displayed in the JSON format. (The above output is truncated.)
 
 #### The `tid` subcommand
 
-- `tid` is used to obtain the table schema by using the unique `table_id` in the whole database.
+- `tid` is used to obtain the table schema by using the unique `table_id` in the whole database. you can use `in` subcommand to get all table id of certain schema and use `tid` subcommand to get detail table information.
 
 For example, the table ID of `mysql.stat_meta` is `21`. You can use `tidb-ctl schema tid -i 21` to obtain the detail of `mysql.stat_meta`.
 
