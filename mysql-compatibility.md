@@ -89,40 +89,6 @@ See also: [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyw
 
 ### DDL
 
-<<<<<<< HEAD
-+ Add Index:
-    - Does not support creating multiple indexes using a single SQL statement.
-    - Supports creating index of different types (HASH/BTREE/RTREE) only in syntax, not implemented yet.
-+ Add Column:
-    - Does not support setting the `PRIMARY KEY` and `UNIQUE KEY`. Does not support setting the  `AUTO_INCREMENT` attribute. Otherwise, the `unsupported add column '%s' constraint PRIMARY/UNIQUE/AUTO_INCREMENT KEY` error might be output.
-+ Drop Column
-    - Does not support dropping the `PRIMARY KEY` column or index column. Otherwise, the `Unsupported drop integer primary key/column a with index covered` error might be output.
-+ Drop Primary Key
-    - Only supports dropping the primary key of the tables with `alter-primary-key` enabled when the tables are created. Otherwise, the `Unsupported drop primary key when alter-primary-key is false` error might be output.
-+ Order By
-    - Ignores all options related to column ordering.
-+ Change/Modify Column:
-    - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or from `VARCHAR(255)` to `VARCHAR(10)`. Otherwise, the `length %d is less than origin %d` error might be output.
-    - Does not support modifying the precision of `DECIMAL` data types. Otherwise, the `can't change decimal column precision` error might be output.
-    - Does not support changing the `UNSIGNED` attribute. Otherwise, the `can't change unsigned integer to signed or vice versa` error might be output.
-    - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
-+ `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`
-    - The syntax is supported, but not implemented in TiDB yet. All DDL changes that are supported do not lock the table.
-+ `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`
-    - TiDB supports the `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` syntax, but they work differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB.
-    - The syntax of `ALGORITHM=COPY` is supported, but not implemented in TiDB yet. It returns a warning.
-+ Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
-
-+ The `AUTO_INCREMENT`, `CHARACTER SET`, `COLLATE`, and `COMMENT` Table Options are supported in syntax. The following Table Options are not supported in syntax:
-    - `WITH/WITHOUT VALIDATION`
-    - `SECONDARY_LOAD/SECONDARY_UNLOAD`
-    - `CHECK/DROP CHECK`
-    - `STATS_AUTO_RECALC/STATS_SAMPLE_PAGES`
-    - `SECONDARY_ENGINE`
-    - `ENCRYPTION`
-
-+ The Table Partition supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
-=======
 In TiDB, all supported DDL changes are performed online. The MySQL DDL assertions `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` can also be used to assert which algorithm will be used to modify the table (which might differ from MySQL).
 
 The following major restrictions apply to DDL versus MySQL:
@@ -134,7 +100,6 @@ The following major restrictions apply to DDL versus MySQL:
 * Change/Modify decimal columns does not support changing the prevision.
 * Change/Modify integer columns does not permit changing the `UNSIGNED` attribute.
 * Table Partitioning supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
->>>>>>> 061857f... mysql-compatibility: Improve MySQL Compatibility (#3151)
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
     - `SUBPARTITION`
