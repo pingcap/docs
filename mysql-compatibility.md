@@ -90,7 +90,6 @@ TiDB supports most of the MySQL built-in functions, but not all. See [TiDB SQL G
 + Add Index:
     - Does not support creating multiple indexes using a single SQL statement.
     - Supports creating index of different types (HASH/BTREE/RTREE) only in syntax, not implemented yet.
-    - Supports the `VISIBLE`/`INVISIBLE` index and ignores other options.
 + Add Column:
     - Does not support setting the `PRIMARY KEY` and `UNIQUE KEY`. Does not support setting the  `AUTO_INCREMENT` attribute. Otherwise, the `unsupported add column '%s' constraint PRIMARY/UNIQUE/AUTO_INCREMENT KEY` error might be output.
 + Drop Column
