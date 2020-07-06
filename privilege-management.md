@@ -279,7 +279,7 @@ Requires the `INSERT` and `SELECT` privileges for the table.
 
 `SHOW CREATE VIEW` requires the `SHOW VIEW` privilege.
 
-`SHOW GRANTS` requires the `SELECT` privilege to the `mysql` database. If the target user is current user, `SHOW GRANTS` dosen't require any privilege.
+`SHOW GRANTS` requires the `SELECT` privilege to the `mysql` database. If the target user is current user, `SHOW GRANTS` does not require any privilege.
 
 ### CREATE ROLE/USER
 
