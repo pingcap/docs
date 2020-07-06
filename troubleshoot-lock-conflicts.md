@@ -8,7 +8,7 @@ category: troubleshoot
  
 TiDB can support complete distributed transactions. As of version of v3.0, TiDB provides optimistic transaction mode and pessimistic transaction mode. This document introduces how to troubleshooting and resolve when TiDB has usually lock conflict.
 
-## Optimistic Rransaction Mode
+## Optimistic Transaction Mode
 
 In the transaction of TiDB which has two-phase commit (2PC) that included the Prewrite phase and the Commit phase. The procedure is as follows:
 
