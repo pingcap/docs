@@ -79,7 +79,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 
 ### I/O problem found from alarm
 
-The cluster deployment tool (TiDB-Ansible, TiUP) is an alarm component that is deployed by default. Officials have preset related alarm items and thresholds. I/O related items include:
+The cluster deployment tools (TiDB Ansible and TiUP) deploy the cluster with alert components by default that have built-in alert items and thresholds. The following alert items are related to I/O:
 
 - TiKV_write_stall
 - TiKV_raft_log_lag
