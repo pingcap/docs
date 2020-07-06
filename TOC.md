@@ -172,8 +172,7 @@
     + [Quick Start](/get-started-with-tispark.md)
     + [User Guide](/tispark-overview.md)
 + Reference
-  + Architecture
-    + [Overview](/architecture.md)
+  + [Architecture](/architecture.md)
   + Key Monitoring Metrics
     + [Overview](/grafana-overview-dashboard.md)
     + [TiDB](/grafana-tidb-dashboard.md)
