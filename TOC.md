@@ -159,7 +159,7 @@
     + [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     + Key Features
       + [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
-      + [Table Filter](/tidb-lightning/tidb-lightning-table-filter.md)
+      + [Table Filter](/table-filter.md)
       + [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       + [TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md)
       + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -205,7 +205,7 @@
         + [AUTO_RANDOM](/auto-random.md)
       + [Literal Values](/literal-values.md)
       + [Schema Object Names](/schema-object-names.md)
-      + [Keywords and Reserved Words](/keywords-and-reserved-words.md)
+      + [Keywords and Reserved Words](/keywords.md)
       + [User-Defined Variables](/user-defined-variables.md)
       + [Expression Syntax](/expression-syntax.md)
       + [Comment Syntax](/comment-syntax.md)
@@ -431,6 +431,7 @@
   + [Errors Codes](/error-codes.md)
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+  + [Table Filter](/table-filter.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
@@ -457,6 +458,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.16](/releases/release-3.0.16.md)
     + [3.0.15](/releases/release-3.0.15.md)
     + [3.0.14](/releases/release-3.0.14.md)
     + [3.0.13](/releases/release-3.0.13.md)

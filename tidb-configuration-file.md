@@ -146,7 +146,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Enables or disables the telemetry collection in TiDB.
 - Default value: `true`
-- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
+- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
 ## Log
 
@@ -372,7 +372,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - The number of cached statements.
 - Default value: `100`
-- The type is `uint`. Values less than 0 are converted to large integers.
+- The type is `uint`. Values less than `0` are converted to large integers.
 
 ### `memory-guard-ratio`
 
