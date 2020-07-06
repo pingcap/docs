@@ -9,10 +9,10 @@ aliases: ['/docs/dev/tikv-control/','/docs/dev/reference/tools/tikv-control/']
 
 TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. Its installation directory is as follows:
 
-* If the cluster is deployed using TiDB Ansible, it exists in the `resources/bin` subdirectory under the `ansible` directory.
-* If the cluster is deployed using TiUP, it exists in `~/.tiup/components/ctl/{VERSION}/` directory.
+* If the cluster is deployed using TiDB Ansible, `tikv-ctl` directory is in the `resources/bin` subdirectory under the `ansible` directory.
+* If the cluster is deployed using TiUP, `tikv-ctl` directory is in the in `~/.tiup/components/ctl/{VERSION}/` directory.
 
-[TiUP](https://github.com/pingcap-incubator/tiuptiup) is a deployment tool introduced later than `tidb-ansible`, and its usage is more simplified. `tikv-ctl` is also integrated in the `tiup` command. Execute the following command to call the `tikv-ctl` tool:
+[TiUP](https://github.com/pingcap-incubator/tiuptiup) is a deployment tool introduced later than TiDB Ansible, and its usage is simpler. `tikv-ctl` is also integrated in the `tiup` command. Execute the following command to call the `tikv-ctl` tool:
 
 {{< copyable "shell-regular" >}}
 
@@ -33,7 +33,7 @@ Enable Features:   jemalloc portable sse protobuf-codec
 Profile:           dist_release
 ```
 
-You can add the appropriate parameters and subcommands behind `tiup ctl tikv`.
+You can add corresponding parameters and subcommands after `tiup ctl tikv`.
 
 ## General options
 
@@ -192,9 +192,9 @@ Use the `compact-cluster` command to manually compact data of the whole TiKV clu
 
 The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
 
-In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped so as to avoid the failure to restart because those Regions's Raft state machine are damaged. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism.
+In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped to avoid the restart failure caused by damaged Raft state machines of those Regions. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue the reads and writes through the Raft mechanism.
 
-Under normal circumstances, you can remove the corresponding Peer of this Region using `remove-peer` command:
+In general cases, you can remove the corresponding Peer of this Region using the `remove-peer` command:
 
 {{< copyable "shell-regular" >}}
 
@@ -202,7 +202,7 @@ Under normal circumstances, you can remove the corresponding Peer of this Region
 pd-ctl operator add remove-peer <region_id> <store_id>
 ```
 
-Then use the tikv-ctl to set a Region to Tombstone in the corresponding TiKV instance so it will skip this Region's health check at startup:
+Then use the `tikv-ctl` tool to set a Region to tombstone on the corresponding TiKV instance to skip the health check for this Region at startup:
 
 {{< copyable "shell-regular" >}}
 
@@ -214,7 +214,7 @@ tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
 success!
 ```
 
-However, in some cases, when it is not convenient to remove this Peer of this Region from PD, you can specify the `--force` option of tikv-ctl to force it to tombstone:
+However, in some cases, you cannot easily remove this Peer of this Region from PD, so you can specify the `--force` option in `tikv-ctl` to forcibly set the Peer to tombstone:
 
 {{< copyable "shell-regular" >}}
 
