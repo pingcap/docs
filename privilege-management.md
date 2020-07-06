@@ -200,7 +200,7 @@ You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGE
 | Update         | `UpdatePriv`     | Updates the table data             |
 | Delete         | `DeletePriv`     | Deleted the table data             |
 | Reload         | `ReloadPriv`     | Executes the `FLUSH` statement       |
-| Config         | `ConfigPriv`     | Dynamicly reload configuration             |
+| Config         | `ConfigPriv`     | Dynamically reloads configuration             |
 | Trigger        | `TriggerPriv`    | /                 |
 | Process        | `ProcessPriv`    | Displays the running task       |
 | Execute        | `ExecutePriv`    | Executes the `EXECUTE` statement       |
