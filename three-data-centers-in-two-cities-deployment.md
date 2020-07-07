@@ -2,6 +2,7 @@
 title: Three Data Centers in Two Cities Deployment
 summary: Learn the deployment solution to three data centers in two cities.
 category: tutorials
+aliases: ['/docs/stable/three-data-centers-in-two-cities-deployment/','/docs/v4.0/three-data-centers-in-two-cities-deployment/']
 ---
 
 # Three Data Centers in Two Cities Deployment

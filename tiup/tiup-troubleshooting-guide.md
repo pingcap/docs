@@ -2,6 +2,7 @@
 title: TiUP Troubleshooting Guide
 summary: Introduce the troubleshooting methods and solutions if you encounter issues when using TiUP.
 category: tools
+aliases: ['/docs/stable/tiup/tiup-troubleshooting-guide/','/docs/v4.0/tiup/tiup-troubleshooting-guide/']
 ---
 
 # TiUP Troubleshooting Guide
