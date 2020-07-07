@@ -93,7 +93,7 @@ For example, the hardware configuration is as follows:
 
     export TZ=Asia/Shanghai
 
-    # Different TiDB instances on the same machine need to specify different cpunodebind and membind to bind different Numa nodes
+    # You need to specify different cpunodebind and membind for different TiDB instances on the same machine to bind different Numa nodes.
     exec numactl --cpunodebind=0  --membind=0 bin/tidb-server \
         -P 4111 \
         --status="10191" \
