@@ -6,7 +6,7 @@ category: performance
 
 # TopN and Limit operator push down
 
-The Limit clause in SQL corresponds to the Limit operator node in the TiDB execution plan tree, and the ORDER BY clause corresponds to the Sort operator. So adjacent Limit operator and Sort operator will be merged into the TopN operator node. It means that top N records will be returned according to a sorting rule. On the other hand, the Limit operator is equivalent to the TopN operator node with a null sorting rule.
+In the TiDB execution plan tree, the `LIMIT` clause in SQL corresponds to the Limit operator node, and the `ORDER BY` clause corresponds to the Sort operator node. The adjacent Limit operator and Sort operator are combined as the TopN operator node, which means that the top N records are returned according to a certain collation. That is to say, a Limit operator is equivalent to a TopN operator node with a null collation.
 
 Similar to predicate pushdown, TopN and Limit are pushed down in the execution plan tree to a position as close to the data source as possible so that the required data is filtered at an early stage. In this way, the pushdown significantly reduces the overhead of data transmission and calculation.
 
