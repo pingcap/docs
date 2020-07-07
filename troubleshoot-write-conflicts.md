@@ -8,7 +8,7 @@ category: how-to
 
 This article is an introduction to the reason and solutions of write conflict in optimistic transaction.
 
-Before TiDB v3.0.8, optimistic transaction is the defalut transaction model in TiDB. The transaction doesn't check the confliction during the execution, it checks the confliction when committing the transaction. If the write conflict exists when committing the transaction, the transaction will be auto-retry in TiDB internal when TiDB has enabled the auto-retry and the retry count doesn't exceeded the limie. Then, TiDB will return the result of transaction execution to the client. Therefore, the write latency of TiDB cluster will be higher when there are a lot of write conflict exists.
+Before TiDB v3.0.8, optimistic transaction is the defalut transaction model in TiDB. The transaction doesn't check the confliction during the execution, it checks the confliction when committing the transaction. If the write conflict exists when committing the transaction, the transaction will be auto-retry in TiDB internal when TiDB has enabled the auto-retry and the retry count doesn't exceeded the limit. Then, TiDB will return the result of transaction execution to the client. Therefore, the write latency of TiDB cluster will be higher when there are a lot of write conflict exists.
 
 ## The reason of write conflict
 
@@ -23,7 +23,7 @@ After the client send a `COMMIT` request to TiDB, TiDB starts the 2PC process:
 5. TiDB sends `commit` request to the TiKV region which contain the primary key of the transaction. When TiKV executes `commit` request, TiKV checks the validity of the data and clear the lock that left in `prewrite` request.
 6. After the `commit` request returns successfully, TiDB return success to the client.
 
-The write conflict occurs in the `prewrite` stage. When the transaction found a new version of the key (key.commit_ts > txn.start_ts), that's write conflict.
+The write conflict occurs in the `prewrite` stage. When the transaction found a new version of the key (data.commit_ts > txn.start_ts), that's write conflict.
 
 ## How to detect the write conflict exists in the cluster?
 
@@ -40,7 +40,7 @@ You can check the following monitoring metrics under **KV Errors** in the **TiDB
     ![lock-resolve-ops](/media/troubleshooting-write-conflict-lock-resolve-ops.png)
 
     `not_expired` means the TTL of lock was not expired, Then the conflict transaction can't resolve locks until the TTL was expired.
-    `wait_expire` means the transaction needs to wait the lock to expired.
+    `wait_expired` means the transaction needs to wait the lock to expired.
     `expired` means the TTL of lock was expired, Then the conflict transaction can resolve this lock.
 
 * **KV Retry Duration** indicates the duration of re-sends the KV request:
