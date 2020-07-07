@@ -106,10 +106,14 @@ Visible from the flow chart, after setting the SHARD_ROW_ID_BITS, the flow hotsp
 
 AUTO_RANDOM processing of self-increased primary key hot spot table is suitable to replace self-increased primary key and solve the writing hot spot brought by self-increased primary key.
 
-> The function is currently experimental and is not recommended for use in the production environment. Can be enabled using the following configuration:
+> **Note:**
 >
+> Currently, this is an experimental feature, so it is not recommended to use it in the production environment. To enable this feature, use the following configuration:
+>
+> ```
 > [experimental]\
 > allow-auto-random = true
+> ```
 
 After using this function, the TiDB will generate randomly distributed and non-repeated primary keys to achieve the purpose of discrete write, scattered write hot spots.
 
