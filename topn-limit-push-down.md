@@ -95,7 +95,7 @@ TopN can't be pushed down into the Inner Join. Taking the query above as an exam
 
 That is the reason why opN can't be pushed down into the Outer Join for the Inner table. TopN can not be pushed down when sorting by multiple columns on multiple tables. such as `t.a+s.a`.Only if the TopN exclusively depends on sorting outer table columns, it can be pushed down. 
 
-### Example 4: Conversion of TopN to Limit
+### Example 4: Convert TopN to Limit
 
 {{< copyable "sql" >}}
 
