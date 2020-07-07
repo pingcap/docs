@@ -53,7 +53,7 @@ Performance problems are not necessarily caused by hot spots, there may be a num
 
 - Read hot spot basis: open the monitor panel TIKV-Details Thread_CPU, see if there is any obvious tikv particularly high.
 
-### Use TiDB Dashboard to locate the hot tables
+### Use TiDB Dashboard to locate hotspot tables
 
 The "Hot spot Visualization" feature in TiDB Dashboard helps users narrow down hot spot screening to table level,  Here is an example of the thermal diagram shown by the Hotspot Visualization function, where the horizontal coordinates are time, and the vertical coordinates arrange tables and indexes, The brighter the color, the greater the flow. You can switch to display read or write traffic in the toolbar.
 
