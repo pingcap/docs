@@ -759,7 +759,7 @@ It is recommended to use TiDB server if you query a single table mainly using fi
 At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
 
 - Do not spend too much time on the benchmark test. Pay more attention to the difference of scenarios using TiDB.
-- See [Performance test result for TiDB using Sysbench](/benchmark/v3.0-performance-benchmarking-with-sysbench.md).
+- See [Performance test result for TiDB using Sysbench](https://docs.pingcap.com/tidb/v3.0/v3.0-performance-benchmarking-with-sysbench).
 
 #### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
