@@ -81,7 +81,7 @@
   + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
 + Troubleshoot
   + [Identify Slow Queries](/identify-slow-queries.md)
-  + [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
+  + [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)

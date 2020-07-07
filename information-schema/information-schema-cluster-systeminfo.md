@@ -2,7 +2,7 @@
 title: CLUSTER_SYSTEMINFO
 summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
 category: reference
-aliases: ['/docs/dev/system-tables/system-table-cluster-systeminfo/','/docs/dev/reference/system-databases/cluster-systeminfo/']
+aliases: ['/docs/dev/system-tables/system-table-cluster-systeminfo/','/docs/dev/reference/system-databases/cluster-systeminfo/','/tidb/dev/system-table-cluster-systeminfo/']
 ---
 
 # CLUSTER_SYSTEMINFO
@@ -32,8 +32,8 @@ DESC cluster_systeminfo;
 
 Field description:
 
-* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/system-tables/system-table-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/system-tables/system-table-cluster-info.md) cluster information table.
+* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
+* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) cluster information table.
 * `SYSTEM_TYPE`: The system type. Currently, you can query the `system` system type.
 * `SYSTEM_NAME`: The system name. Currently, you can query the `sysctl` system name.
 * `NAME`: The configuration name corresponding to `sysctl`.

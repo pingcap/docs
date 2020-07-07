@@ -4,7 +4,6 @@ summary: Learn the `TABLE_CONSTRAINTS` information_schema table.
 category: reference
 ---
 
-
 # TABLE_CONSTRAINTS
 
 The `TABLE_CONSTRAINTS` table describes which tables have constraints.

@@ -2,12 +2,12 @@
 title: Metrics Schema
 summary: Learn the `METRICS_SCHEMA` schema.
 category: reference
-aliases: ['/docs/dev/system-tables/system-table-metrics-schema/','/docs/dev/reference/system-databases/metrics-schema/']
+aliases: ['/docs/dev/system-tables/system-table-metrics-schema/','/docs/dev/reference/system-databases/metrics-schema/','/tidb/dev/system-table-metrics-schema/']
 ---
 
 # Metrics Schema
 
-The `METRICS_SCHEMA` is a set of views on top of TiDB metrics that are stored in Prometheus. The source of the PromQL (Prometheus Query Language) for each of the tables is available in [`INFORMATION_SCHEMA.METRICS_TABLES`](/informaition-schema/information-schema-metrics-tables.md).
+The `METRICS_SCHEMA` is a set of views on top of TiDB metrics that are stored in Prometheus. The source of the PromQL (Prometheus Query Language) for each of the tables is available in [`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md).
 
 {{< copyable "sql" >}}
 

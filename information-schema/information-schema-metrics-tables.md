@@ -2,7 +2,7 @@
 title: METRICS_TABLES
 summary: Learn the `METRICS_TABLES` system table.
 category: reference
-aliases: ['/docs/dev/system-tables/system-table-metrics-tables/','/docs/dev/reference/system-databases/metrics-tables/']
+aliases: ['/docs/dev/system-tables/system-table-metrics-tables/','/docs/dev/reference/system-databases/metrics-tables/',''/tidb/dev/system-table-metrics-tables/'']
 ---
 
 # METRICS_TABLES
@@ -35,8 +35,6 @@ Field description:
 * `LABELS`: The label for the monitoring item. Each label corresponds to a column in the monitoring table. If the SQL statement contains the filter of the corresponding column, the corresponding `PromQL` changes accordingly.
 * `QUANTILE`: The percentile. For monitoring data of the histogram type, a default percentile is specified. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
 * `COMMENT`: The comment about the monitoring table.
-
-
 
 {{< copyable "sql" >}}
 

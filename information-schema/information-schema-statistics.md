@@ -4,7 +4,6 @@ summary: Learn the `STATISTICS` information_schema table.
 category: reference
 ---
 
-
 # STATISTICS
 
 The `STATISTICS` table provides information about table indexes.

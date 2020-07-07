@@ -4,7 +4,6 @@ summary: Learn the `TABLES` information_schema table.
 category: reference
 ---
 
-
 # TABLES
 
 The `TABLES` table provides information about tables in databases:

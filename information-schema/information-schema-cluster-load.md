@@ -2,7 +2,7 @@
 title: CLUSTER_LOAD
 summary: Learn the `CLUSTER_LOAD` information_schema table.
 category: reference
-aliases: ['/docs/dev/system-tables/system-table-cluster-load/','/docs/dev/reference/system-databases/cluster-load/']
+aliases: ['/docs/dev/system-tables/system-table-cluster-load/','/docs/dev/reference/system-databases/cluster-load/','/tidb/dev/system-table-cluster-load/']
 ---
 
 # CLUSTER_LOAD
@@ -32,8 +32,8 @@ DESC cluster_load;
 
 Field description:
 
-* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/system-tables/system-table-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/system-tables/system-table-cluster-info.md) cluster information table.
+* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
+* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) cluster information table.
 * `DEVICE_TYPE`: Hardware type. Currently, you can query the `cpu`, `memory`, `disk`, and `net` types.
 * `DEVICE_NAME`: Hardware name. The value of `DEVICE_NAME` varies with `DEVICE_TYPE`.
     * `cpu`: The hardware name is cpu.

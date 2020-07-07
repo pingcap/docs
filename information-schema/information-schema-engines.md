@@ -8,7 +8,6 @@ category: reference
 
 The `ENGINES` table provides information about storage engines. For compatibility, TiDB will always describe InnoDB as the only supported engine. In addition, other column values in the `ENGINES` table are also fixed values.
 
-
 {{< copyable "sql" >}}
 
 ```sql

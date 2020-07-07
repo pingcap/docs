@@ -4,7 +4,6 @@ summary: Learn the `USER_PRIVILEGES` information_schema table.
 category: reference
 ---
 
-
 # USER_PRIVILEGES
 
 The `USER_PRIVILEGES` table provides information about global privileges. This information comes from the `mysql.user` system table:

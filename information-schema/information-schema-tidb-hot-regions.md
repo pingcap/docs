@@ -4,7 +4,6 @@ summary: Learn the `TIDB_HOT_REGIONS` information_schema table.
 category: reference
 ---
 
-
 # TIDB_HOT_REGIONS
 
 The `TIDB_HOT_REGIONS` table provides information about hotspot Regions.
@@ -36,4 +35,3 @@ DESC tidb_hot_regions;
 
 - `TABLE_ID` and `INDEX_ID` are IDs generated for the corresponding table and index in TiDB.
 - `TYPE` is the type for a hot Region. Its value can be `READ` or `WRITE`.
-

@@ -2,7 +2,7 @@
 title: INSPECTION_SUMMARY
 summary: Learn the `INSPECTION_SUMMARY` inspection summary table.
 category: reference
-aliases: ['/docs/dev/system-tables/system-table-inspection-summary/','/docs/dev/reference/system-databases/inspection-summary/']
+aliases: ['/docs/dev/system-tables/system-table-inspection-summary/','/docs/dev/reference/system-databases/inspection-summary/','/tidb/dev/system-table-inspection-summary/']
 ---
 
 # INSPECTION_SUMMARY

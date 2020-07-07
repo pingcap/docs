@@ -4,7 +4,6 @@ summary: Learn the `PROCESSLIST` information_schema table.
 category: reference
 ---
 
-
 # PROCESSLIST
 
 `PROCESSLIST`, just like `SHOW PROCESSLIST`, is used to view the requests that are being handled.
@@ -15,7 +14,6 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `TxnStart` column to show the start time of the transaction
 
 {{< copyable "sql" >}}
-
 
 ```sql
 USE information_schema;
@@ -60,7 +58,6 @@ SELECT * FROM processlist\G
 TxnStart: 
 1 row in set (0.00 sec)
 ```
-
 
 ## CLUSTER_PROCESSLIST
 

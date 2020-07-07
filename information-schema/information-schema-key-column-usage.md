@@ -4,7 +4,6 @@ summary: Learn the `KEY_COLUMN_USAGE` information_schema table.
 category: reference
 ---
 
-
 # KEY_COLUMN_USAGE
 
 The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such as the primary key constraint.

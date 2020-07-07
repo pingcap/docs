@@ -4,7 +4,6 @@ summary: Learn the `SESSION_VARIABLES` information_schema table.
 category: reference
 ---
 
-
 # SESSION_VARIABLES
 
 The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement.

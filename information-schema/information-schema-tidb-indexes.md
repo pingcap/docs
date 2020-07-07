@@ -4,7 +4,6 @@ summary: Learn the `TIDB_INDEXES` information_schema table.
 category: reference
 ---
 
-
 # TIDB_INDEXES
 
 The `TIDB_INDEXES` table provides the INDEX information of all tables.

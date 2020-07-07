@@ -4,7 +4,6 @@ summary: Learn the `TIKV_STORE_STATUS` information_schema table.
 category: reference
 ---
 
-
 # TIKV_STORE_STATUS
 
 The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.

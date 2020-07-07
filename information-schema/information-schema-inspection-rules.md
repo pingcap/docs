@@ -6,7 +6,7 @@ category: reference
 
 # INSPECTION_RULES
 
-The `INSPECTION_RULES` table provides information about which diagnostic tests are run in an inspection result. See [inspection result](/information-schema/information-schema/inspection-result.md) for example usage.
+The `INSPECTION_RULES` table provides information about which diagnostic tests are run in an inspection result. See [inspection result](/information-schema/information-schema-inspection-result.md) for example usage.
 
 {{< copyable "sql" >}}
 

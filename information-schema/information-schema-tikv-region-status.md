@@ -8,7 +8,6 @@ category: reference
 
 The `TIKV_REGION_STATUS` table shows some basic information of TiKV Regions via PD's API, like the Region ID, starting and ending key-values, and read and write traffic.
 
-
 {{< copyable "sql" >}}
 
 ```sql

@@ -4,7 +4,6 @@ summary: Learn the `DDL_JOBS` information_schema table.
 category: reference
 ---
 
-
 # DDL_JOBS
 
 The `DDL_JOBS` table provides an `INFORMATION_SCHEMA` interface to the `ADMIN SHOW DDL JOBS` command. It provides both the current status and a short history of DDL operations across the TiDB cluster.
@@ -56,8 +55,8 @@ SCHEMA_STATE: public
     END_TIME: 2020-07-06 15:24:27
        STATE: synced
        QUERY: CREATE TABLE IF NOT EXISTS mysql.opt_rule_blacklist (
-		name char(100) NOT NULL
-	);
+        name char(100) NOT NULL
+    );
 *************************** 2. row ***************************
       JOB_ID: 42
      DB_NAME: mysql
@@ -71,10 +70,10 @@ SCHEMA_STATE: public
     END_TIME: 2020-07-06 15:24:27
        STATE: synced
        QUERY: CREATE TABLE IF NOT EXISTS mysql.expr_pushdown_blacklist (
-		name char(100) NOT NULL,
-		store_type char(100) NOT NULL DEFAULT 'tikv,tiflash,tidb',
-		reason varchar(200)
-	);
+        name char(100) NOT NULL,
+        store_type char(100) NOT NULL DEFAULT 'tikv,tiflash,tidb',
+        reason varchar(200)
+    );
 *************************** 3. row ***************************
       JOB_ID: 40
      DB_NAME: mysql
@@ -88,12 +87,12 @@ SCHEMA_STATE: public
     END_TIME: 2020-07-06 15:24:27
        STATE: synced
        QUERY: CREATE TABLE if not exists mysql.stats_top_n (
-		table_id bigint(64) NOT NULL,
-		is_index tinyint(2) NOT NULL,
-		hist_id bigint(64) NOT NULL,
-		value longblob,
-		count bigint(64) UNSIGNED NOT NULL,
-		index tbl(table_id, is_index, hist_id)
-	);
+        table_id bigint(64) NOT NULL,
+        is_index tinyint(2) NOT NULL,
+        hist_id bigint(64) NOT NULL,
+        value longblob,
+        count bigint(64) UNSIGNED NOT NULL,
+        index tbl(table_id, is_index, hist_id)
+    );
 3 rows in set (0.01 sec)
 ```
