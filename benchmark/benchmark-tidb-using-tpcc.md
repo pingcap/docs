@@ -62,7 +62,7 @@ For example, the hardware configuration is as follows:
 | RAM | 128GB |
 | DISK | Optane 500GB SSD |
 
-1. Because this type of CPU has a NUMA architecture, it is recommended to [bind the core using `numactl`](/check-before-deployment.md#install-the-numactl-tool).
+1. Because this type of CPU has a NUMA architecture, it is recommended to [bind the core using `numactl`](https://docs.pingcap.com/tidb/v4.0/check-before-deployment#安装-numactl-工具).
 
 2. Execute the `lscpu` command to view the NUMA nodes. The result is similar to:
 
