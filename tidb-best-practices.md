@@ -2,6 +2,7 @@
 title: TiDB Best Practices
 summary: Learn the best practices of using TiDB.
 category: reference
+aliases: ['/docs/stable/tidb-best-practices/','/docs/v4.0/tidb-best-practices/']
 ---
 
 # TiDB Best Practices
