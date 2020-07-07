@@ -49,7 +49,7 @@ If among transactions is read-write conflict, the tidb log has below message:
 
 
        * txnStartTS: The transaction is reading request which start timestamp is start_ts, for example, the start_ts is 416643508703592451
-       * txnStartTS: If read-write conflict has happened, when the current transaction of reading request will try to backoff. TxnLockFast is one of the backoff types.
+       * backoff_types: If read-write conflict has happened, when the current transaction of reading request will try to backoff. TxnLockFast is one of the backoff types.
        * backoff_ms: This value is the time that the read request transaction attempts to backoff, and the time unit is milliseconds. The message is 255 milliseconds to try to backoff.
        * region_id: Region ID corresponding to the target key of the read request.
 
