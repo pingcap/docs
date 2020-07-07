@@ -1,5 +1,5 @@
 ---
-title: TiDB hot region problem handling
+title: Troubleshoot Hotspot Issues
 category: reference
 ---
 # TiDB hot region problem handling
