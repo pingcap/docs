@@ -108,7 +108,7 @@ For example, the hardware configuration is as follows:
     >
     > Direct modification of `run_tidb.sh` may be overwritten. So in a production environment, it is recommended to use TiUP if you need to bind the core.
 
-4. You can deploy a HAproxy to balance the load of multiple TiDB nodes. It is recommended to configure `nbproc` as the number of CPU cores.
+4. You can deploy an HAproxy to balance the loads on multiple TiDB nodes. It is recommended to configure `nbproc` as the number of CPU cores.
 
 ## Edit the configuration
 
