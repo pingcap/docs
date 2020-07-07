@@ -2,7 +2,7 @@
 title: TiDB Specific System Variables
 summary: Use system variables specific to TiDB to optimize performance.
 category: reference
-aliases: ['/docs/dev/reference/configuration/tidb-server/tidb-specific-variables/']
+aliases: ['/docs/dev/tidb-specific-system-variables/','/docs/dev/reference/configuration/tidb-server/tidb-specific-variables/']
 ---
 
 # TiDB Specific System Variables
@@ -396,6 +396,12 @@ Usage of statements:
 - If you upgrade from a TiDB version earlier than 4.0.0 to 4.0.0, the format version is not changed, and TiDB continues to use the old format of version `1` to write data to the table, which means that **only newly created clusters use the new data format by default**.
 - Note that modifying this variable does not affect the old data that has been saved, but applies the corresponding version format only to the newly written data after modifying this variable.
 
+### tidb_record_plan_in_slow_log
+
+- Scope: SESSION
+- Default value: `1`
+- Controls whether to include the execution plan of slow queries in the slow log.
+
 ## tidb_slow_log_threshold
 
 - Scope: SESSION
@@ -581,3 +587,9 @@ set tidb_query_log_max_len = 20
     * `0`: Never send requests in batches
     * `1`: Aggregation and join requests are sent in batches
     * `2`: All coprocessor requests are sent in batches
+
+### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 version</span>
+
+- Scope: GLOBAL
+- Default value: 1
+- This variable dynamically controls whether the telemetry collection in TiDB is enabled. By setting the value to `0`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.

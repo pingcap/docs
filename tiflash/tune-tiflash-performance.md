@@ -2,7 +2,7 @@
 title: Tune TiFlash Performance
 summary: Learn how to tune the performance of TiFlash.
 category: reference
-aliases: ['/docs/dev/reference/tiflash/tune-performance/']
+aliases: ['/docs/dev/tiflash/tune-tiflash-performance/','/docs/dev/reference/tiflash/tune-performance/']
 ---
 
 # Tune TiFlash Performance
@@ -25,7 +25,7 @@ If you want to save machine resources and have no requirement on isolation, you 
 
 2. Enable the super batch feature:
 
-    You can use the [`tidb_allow_batch_cop`](/tidb-specific-system-variables.md#tidb_allow_batch_cop) variable to set whether to merge Region requests when reading from TiFlash.
+    You can use the [`tidb_allow_batch_cop`](/tidb-specific-system-variables.md#tidb_allow_batch_cop-new-in-v40-version) variable to set whether to merge Region requests when reading from TiFlash.
 
     When the number of Regions involved in the query is relatively large, try to set this variable to `1` (effective for coprocessor requests with `aggregation` operators that are pushed down to TiFlash), or set this variable to `2` (effective for all coprocessor requests that are pushed down to TiFlash).
 

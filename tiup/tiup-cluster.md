@@ -2,7 +2,7 @@
 title: Deploy and Maintain an Online TiDB Cluster Using TiUP
 summary: Learns how to deploy and maintain an online TiDB cluster using TiUP.
 category: tools
-aliases: ['/docs/dev/reference/tools/tiup/cluster/']
+aliases: ['/docs/dev/tiup/tiup-cluster/','/docs/dev/reference/tools/tiup/cluster/']
 ---
 
 # Deploy and Maintain an Online TiDB Cluster Using TiUP
@@ -63,7 +63,11 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 This command requires you to provide the cluster name, the TiDB cluster version, and a topology file of the cluster.
 
-To write a topology file, refer to [the example](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml). The following file is an example of the simplest topology:
+To write a topology file, refer to [the example](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml). The following file is an example of the simplest topology:
+
+> **Note:**
+>
+> The topology file used by the TiUP cluster component for deployment and scaling is written using [yaml](https://yaml.org/spec/1.2/spec.html) syntax, so make sure that the indentation is correct.
 
 ```yaml
 ---
