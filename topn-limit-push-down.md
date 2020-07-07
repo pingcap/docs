@@ -65,7 +65,7 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 8 rows in set (0.01 sec)
 ```
 
-In this query, the sorting of the TopN operator only depends on the columns in the outer table t, so TopN can be pushed down before Join, to reduce the computational of Join. Besides, TiDB also pushed TopN down to the storage layer.
+In this query, the collation of the TopN operator only depends on the columns in the outer table `t`, so a calculation can be performed before pushing down TopN to Join, to reduce the calculation cost of the Join operation. Besides, TiDB also pushes TopN down to the storage layer.
 
 ### Example 3: TopN can't be pushed down into the Join
 
