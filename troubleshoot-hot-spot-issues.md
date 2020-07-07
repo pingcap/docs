@@ -45,7 +45,7 @@ Meanwhile, RowID default in the TiDB is incremented in the order of self-increme
 
 Index hot spots are similar to table hot spots, and common hot spots appear in fields that are monotonously increasing in time order, or insert scenes with a large number of repeated values.
 
-## Identification of hot issues
+## Identify hotspot issues
 
 Performance problems are not necessarily caused by hot spots, there may be a number of factors together, before checking need to confirm whether it is related to hot spots.
 
