@@ -73,7 +73,7 @@ Move the mouse over the bright block, You can see what table or index has a lot 
 
 > [Prior to version 4.0 hot spot location can refer to this document](https://book.tidb.io/session4/chapter7/hotspot-resolved.html)
 
-## Use SHARD_ROW_ID_BITS to process hot spots
+## Use `SHARD_ROW_ID_BITS` to process hotspots
 
  When a primary key is non-integer or a table without a primary key or a joint primary key, TiDB use an implicit self-increasing RowID. A large number of writes write a data set to a single Region, resulting in writing hot spots.
 
