@@ -14,7 +14,7 @@ To disable this rule,  refer to [Optimization Rules and Blocklist for Expression
 
 ## Examples
 
-The following describes TopN pushdown through some examples.
+This section describes TopN pushdown through some examples.
 
 ### Example 1: Push down to the Coprocessor in the storage layer
 
