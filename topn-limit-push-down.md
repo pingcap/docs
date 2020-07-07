@@ -122,4 +122,4 @@ explain select * from t left join s on t.a = s.a order by t.id limit 10;
 
 ```
 
-In the above query, TopN is first pushed to the outer table t. Because TopN needs to sort by `t.id` which is the primary key,  it can be directly readout in order  (`keep order: true`) without extra sorting in TopN, and Simplified to Limit.
+In the query above, TopN is first pushed to the outer table `t`. TopN needs to sort by `t.id`, which is the primary key and can be directly read in order  (`keep order: true`) without extra sorting in TopN. Therefore, TopN is simplied as Limit.
