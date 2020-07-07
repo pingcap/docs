@@ -539,7 +539,7 @@ In the communication process between the TiDB server and the TiKV server, the `S
 
 #### What's the maximum number of concurrent connections that TiDB supports?
 
-By default, there is no limit on the maximum number of connections per TiDB server. A limit may be enforced by setting `max-server-connections` in the config.toml file. If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
+By default, there is no limit on the maximum number of connections per TiDB server. A limit may be enforced by setting `max-server-connections` in the `config.toml` file. If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
 
 #### How to view the creation time of a table?
 
