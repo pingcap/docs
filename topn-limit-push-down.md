@@ -39,7 +39,7 @@ explain select * from t order by a limit 10;
 
 In this query, the TopN operator node is pushed down to TiKV for data filtering, and each Coprocessor returns only 10 records to TiDB. After TiDB aggregates the data, the final filtering is performed.
 
-### Example 2: TopN can be pushed down into the Join (sorting only depends on the columns in the outer table)
+### Example 2: TopN can be pushed down into Join (sorting only depends on the columns in the outer table)
 
 {{< copyable "sql" >}}
 
