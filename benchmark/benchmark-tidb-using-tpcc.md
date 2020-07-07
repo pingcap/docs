@@ -70,7 +70,7 @@ For example, the hardware configuration is as follows:
 
 1. Because this type of CPU has a NUMA architecture, it is recommended to [bind the core using `numactl`](/check-before-deployment.md#install-the-numactl-tool).
 
-2. Start TiDB using the following command:
+2. Execute the `lscpu` command to view the NUMA nodes. The result is similar to:
 
     ```text
     NUMA node0 CPU(s):     0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38
