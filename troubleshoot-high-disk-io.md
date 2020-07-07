@@ -15,7 +15,7 @@ If TiDB's response slows down after you have troubleshot the CPU bottleneck and 
 
 ### Locate I/O issues from monitor
 
-The quickest way to locate I/O issues is to view the overall I/O  status from the monitor, such as the Grafana dashboard which is deployed by default by TiDB Ansible and TiUP. The dashboard panels related to I/O include **Overview**, **Node_exporter**, **Disk-Performance**.
+The quickest way to locate I/O issues is to view the overall I/O status from the monitor, such as the Grafana dashboard which is deployed by default by TiDB Ansible and TiUP. The dashboard panels related to I/O include **Overview**, **Node_exporter**, **Disk-Performance**.
 
 #### The first type of monitoring panels
 
@@ -49,7 +49,7 @@ In **TiKV-Details** > **Storage**, there are monitoring metrics related to stora
 In addition, some other panel metrics might help you determine whether the bottleneck is I/O, and you can try to set some parameters. By checking the prewrite/commit/raw-put (for raw key-value clusters only) of TiKV gRPC duration, you can determine that the bottleneck is indeed the slow TiKV write. The common situations of slow TiKV writes are as follows:
 
 - `append log` is slow. TiKV Grafana's `Raft I/O` and `append log duration` metrics are relatively high, which is often due to slow disk writes. You can check the value of `WAL Sync Duration max` in **RocksDB-raft** to determine the cause of slow `append log`. Otherwise, you might need to report a bug.
-- The `raftstore` thread is busy. In TiKV Grafana, `Raft Propose`/`propose wait duration` is significantly higher than `append log duration`. Please check the following aspects for troubleshooting:
+- The `raftstore` thread is busy. In TiKV Grafana, `Raft Propose`/`propose wait duration` is significantly higher than `append log duration`. Check the following aspects for troubleshooting:
 
     - Whether the value of `store-pool-size` of `[raftstore]` is too small. It is recommended to set this value between `[1,5]` and not too large.
     - Whether the CPU resource of the machine is insufficient.
@@ -62,7 +62,7 @@ In addition, some other panel metrics might help you determine whether the bottl
     - Slow write into RocksDB, and `RocksDB kv`/`max write duration` is high. A single Raft log might contain multiple key-value pairs (kv). 128 kvs are written to RocksDB in a batch, so one `apply` log might involve multiple RocksDB writes.
     - For other causes, report them as bugs.
 
-- `raft commit log` is slow. In TiKV Grafana, `Raft I/O` and `commit log duration` (only available in Grafana 4.x) metrics are relatively high. Each Region corresponds to an independent Raft group. Raft has a flow control mechanism similar to the sliding window mechanism of TCP. To control the size of a sliding window, adjust the `[raftstore] raft-max-inflight-msgs` parameter. if there is a write hotspot and `commit log duration` is high, you can properly set this parameter to a larger value, such as `1024`.
+- `raft commit log` is slow. In TiKV Grafana, `Raft I/O` and `commit log duration` (only available in Grafana 4.x) metrics are relatively high. Each Region corresponds to an independent Raft group. Raft has a flow control mechanism similar to the sliding window mechanism of TCP. To control the size of a sliding window, adjust the `[raftstore] raft-max-inflight-msgs` parameter. If there is a write hotspot and `commit log duration` is high, you can properly set this parameter to a larger value, such as `1024`.
 
 ### Locate I/O issues from log
 
@@ -74,11 +74,11 @@ In addition, some other panel metrics might help you determine whether the bottl
 
     It might be that too many level-0 SST files cause the write stall. To address the issue, you can add the `[rocksdb] max-sub-compactions = 2 (or 3)` parameter to speed up the compaction of level-0 SST files. This parameter means that the compaction tasks of level-0 to level-1 can be divided into `max-sub-compactions` subtasks for multi-threaded concurrent execution.
 
-    If the disk's I/O capability fail to keep up with the write, it is recommended to scale-in. If the throughput of the disk reaches the upper limit (for example, the throughput of SATA SSD will be much lower than that of NVME SSD), resulting in write stall, but the CPU resource is relatively sufficient, you can try to use a higher compression ratio compression algorithm to relieve the pressure on the disk, use CPU resources Change disk resources.
+    If the disk's I/O capability fails to keep up with the write, it is recommended to scale up the disk. If the throughput of the disk reaches the upper limit  (for example, the throughput of SATA SSD is much lower than that of NVMe SSD), which results in write stall, but the CPU resource is relatively sufficient, you can try to use a compression algorithm of higher compression ratio to relieve the pressure on the disk, that is, use CPU resources to make up for disk resources.
     
     For example, when the pressure of `default cf compaction` is relatively high, you can change the parameter`[rocksdb.defaultcf] compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd" , "zstd"]`  to `compression-per-level = ["no", "no", "zstd", "zstd", "zstd", "zstd", "zstd"]`.
 
-### I/O problem found from alarm
+### I/O issues found in alerts
 
 The cluster deployment tools (TiDB Ansible and TiUP) deploy the cluster with alert components by default that have built-in alert items and thresholds. The following alert items are related to I/O:
 
@@ -92,5 +92,5 @@ The cluster deployment tools (TiDB Ansible and TiUP) deploy the cluster with ale
 ## Handle I/O issues
 
 + When an I/O hotspot issue is confirmed to occur, you need to refer to Handle TiDB Hotspot Issues to eliminate the I/O hotspots.
-+ When it is confirmed that the overall I/O performance has become the bottleneck, and you can determine that the I/O performance will keep falling behind from the application side, then you can take advantage of the distributed database's capability to scale and scale out the number of TiKV nodes to have greater overall I/O throughput.
++ When it is confirmed that the overall I/O performance has become the bottleneck, and you can determine that the I/O performance will keep falling behind in the application side, then you can take advantage of the distributed database's capability of scaling and scale out the number of TiKV nodes to have greater overall I/O throughput.
 + Adjust some of the parameters as described above, and use computing/memory resources to make up for disk storage resources.
