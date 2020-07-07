@@ -68,7 +68,7 @@ For example, the hardware configuration is as follows:
 | RAM | 128GB |
 | DISK | Optane 500GB SSD |
 
-1. Because this type of CPU has an NUMA architecture, it is recommended to bind the core using `numactl`.
+1. Because this type of CPU has a NUMA architecture, it is recommended to [bind the core using `numactl`](/check-before-deployment.md#install-the-numactl-tool).
 
 2. Start TiDB using the following command:
 
