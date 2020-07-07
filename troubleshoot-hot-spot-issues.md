@@ -8,7 +8,7 @@ aliases: ['/docs/dev/troubleshoot-hot-spot-issues/']
 
 This document describes how to locate and resolve the problem of read and write hotspots.
 
-TiDB is a distributed database and has a load balancing mechanism inside,The purpose is to distribute the business load as evenly as possible to different computing (or storage) nodes,Make better use of your server resources.
+As a distributed database, TiDB has a load balancing mechanism to distribute the application loads as evenly as possible to different computing or storage nodes, to make better use of server resources.
 However, the mechanism is not omnipotent. In some scenarios, some business loads may not be well dispersed, affecting performance, forming a single point of high load, and causing hot spots.
 
 ## Common hot spots
