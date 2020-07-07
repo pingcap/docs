@@ -93,7 +93,7 @@ explain select * from t join s on t.a = s.a order by t.id limit 10;
 
 TopN cannot be pushed down before `Inner Join`. Taking the query above as an example, if you get 100 records after Join, then you can have 10 records left after TopN. However, if TopN is performed first to get 10 records, only 5 records are left after Join. The pushdown might result in different results. 
 
-That is the reason why opN can't be pushed down into the Outer Join for the Inner table. TopN can not be pushed down when sorting by multiple columns on multiple tables. such as `t.a+s.a`.Only if the TopN exclusively depends on sorting outer table columns, it can be pushed down. 
+Similarly, TopN can neither be pushed down into the Outer Join for the inner table, nor can it be pushed down when its collation is related to columns on multiple tables, such as `t.a+s.a`. Only when the collation of TopN exclusively depends on columns on the outer table, can it be pushed down. 
 
 ### Example 4: Convert TopN to Limit
 
