@@ -109,11 +109,6 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-## MySQL compatibility
-
-TODO
-
-
 ## See also
 
 * [Role-Based Access Control](/role-based-access-control.md)

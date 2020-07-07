@@ -51,8 +51,7 @@ Query OK, 0 rows affected (0.03 sec)
 
 ## MySQL compatibility
 
-This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
-
+Currently, sequence object is not supported by MySQL.
 
 ## See also
 

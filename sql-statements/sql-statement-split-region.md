@@ -1,11 +1,11 @@
 ---
-title: SPLIT TABLE
+title: Split Region
 summary: An overview of the usage of Split Region for the TiDB database.
 category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-split-region/','/docs/dev/reference/sql/statements/split-region/']
 ---
 
-# SPLIT TABLE
+# Split Region
 
 For each new table created in TiDB, one Region is segmented by default to store the data of this table. This default behavior is controlled by `split-table` in the configuration file. When the data in this Region exceeds the default Region size limit, the Region starts to split into two.
 

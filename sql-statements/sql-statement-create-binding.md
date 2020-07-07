@@ -9,10 +9,9 @@ aliases: ['/docs/dev/sql-statements/sql-statement-create-binding/']
 
 This statement creates a new execution plan binding in TiDB. Binding can be used to inject a hint into a statement without requiring changes to the underlying query.
 
-BINDING can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
 
-The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `on` (`on` by default), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost.
-
+The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `ON` (default), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost.
 
 ## Synopsis
 
@@ -30,7 +29,7 @@ The bound SQL statement is parameterized and stored in the system table. When a 
 
 ****
 
-## Syntax description 
+## Examples
 
 {{< copyable "sql" >}}
 
@@ -108,7 +107,7 @@ mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 +-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
 3 rows in set (0.22 sec)
 
-mysql> SHOW BINDINGS\G
+mysql> SHOW SESSION BINDINGS\G
 *************************** 1. row ***************************
 Original_sql: select * from t1 where b = ?
     Bind_sql: SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123
@@ -140,8 +139,8 @@ This statement is a TiDB extension.
 
 ## See also
 
-* [DROP [SESSION|GLOBAL] BINDING](/sql-statements/sql-statement-drop-binding.md)
-* [SHOW BINDINGS](/sql-statements/sql-statement-show-bindings.md)
-* ANALYZE TABLE
-* Optimizer Hints
-* Plan Binding
+* [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
+* [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
+* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
+* [Optimizer Hints](/optimizer-hints.md)
+* [SQL Plan Management](/sql-plan-management.md)

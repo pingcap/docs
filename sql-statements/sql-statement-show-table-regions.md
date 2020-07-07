@@ -156,10 +156,6 @@ test> show table t regions;
 7 rows in set
 ```
 
-## MySQL compatibility
-
-This statement is a TiDB extension.
-
 ## See also
 
 * [SPLIT REGION](/sql-statements/sql-statement-split-region.md)

@@ -5,9 +5,11 @@ category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-drop-binding/']
 ---
 
-# DROP BINDING
+# DROP [GLOBAL|SESSION] BINDING
 
 This statement removes a binding from a specific SQL statement. Bindings can be used to inject a hint into a statement without requiring changes to the underlying query.
+
+A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
 
 ## Synopsis
 
@@ -101,7 +103,7 @@ mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 +-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
 3 rows in set (0.22 sec)
 
-mysql> SHOW BINDINGS\G
+mysql> SHOW SESSION BINDINGS\G
 *************************** 1. row ***************************
 Original_sql: select * from t1 where b = ?
     Bind_sql: SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123
@@ -126,7 +128,7 @@ mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 +-------------------------------+---------+---------+-----------+----------------------+-------------------------------------------------------------------------+-----------------------------------+----------------+------+
 3 rows in set (0.01 sec)
 
-mysql> SHOW BINDINGS\G
+mysql> SHOW SESSION BINDINGS\G
 Empty set (0.00 sec)
 ```
 
@@ -136,8 +138,8 @@ This statement is a TiDB extension.
 
 ## See also
 
-* [DROP [SESSION|GLOBAL] BINDING](/sql-statements/sql-statement-drop-binding.md)
-* [SHOW BINDINGS](/sql-statements/sql-statement-show-bindings.md)
-* ANALYZE TABLE
-* Optimizer Hints
-* Plan Binding
+* [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
+* [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
+* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
+* [Optimizer Hints](/optimizer-hints.md)
+* [SQL Plan Management](/sql-plan-management.md)

@@ -88,9 +88,6 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 
 This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
 
-TODO: note the behavior of setting MySQL specific variables.
-
 ## See also
 
 * [SHOW \[GLOBAL|SESSION\] VARIABLES](/sql-statements/sql-statement-show-variables.md)
-* link to system variables reference.

@@ -79,7 +79,7 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## MySQL compatibility
 
-Both the format of `EXPLAIN ANALYZE` and the potential execution plans in TiDB differ substaintially from MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

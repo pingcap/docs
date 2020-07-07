@@ -155,10 +155,3 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 ## MySQL compatibility
 
 This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
-
-TODO: note that some values are fake.
-
-## See also
-
-* SET variable
-* Link to all variables.
