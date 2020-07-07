@@ -73,9 +73,29 @@ For example, the hardware configuration is as follows:
 
 3. Start TiDB by adding `numactl` to the `{tidb_deploy_path}/scripts/run_tidb.sh` start-up script:
 
-    ```shell
-    nohup taskset -c 0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38 bin/tidb-server
-    nohup taskset -c 1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39 bin/tidb-server
+    ```text
+    #!/bin/bash
+    set -e
+
+    ulimit -n 1000000
+
+    # WARNING: This file was auto-generated. Do not edit!
+    #          All your edit might be overwritten!
+    DEPLOY_DIR=/home/damon/deploy/tidb1-1
+
+    cd "${DEPLOY_DIR}" || exit 1
+
+    export TZ=Asia/Shanghai
+
+    # You need to specify different cpunodebind and membind for different TiDB instances on the same machine to bind different Numa nodes.
+    exec numactl --cpunodebind=0  --membind=0 bin/tidb-server \
+        -P 4111 \
+        --status="10191" \
+        --advertise-address="172.16.4.53" \
+        --path="172.16.4.10:2490" \
+        --config=conf/tidb.toml \
+        --log-slow-query="/home/damon/deploy/tidb1-1/log/tidb_slow_query.log" \
+        --log-file="/home/damon/deploy/tidb1-1/log/tidb.log" 2>> "/home/damon/deploy/tidb1-1/log/tidb_stderr.log"
     ```
 
     > **Note:**
