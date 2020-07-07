@@ -77,7 +77,7 @@ For example, the hardware configuration is as follows:
     NUMA node1 CPU(s):     1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39
     ```
 
-3. Start TiDB by modifying the starting script `{tidb_deploy_path}/scripts/run_tidb.sh`  and adding `numactl`:
+3. Start TiDB by adding `numactl` to the `{tidb_deploy_path}/scripts/run_tidb.sh` start-up script:
 
     ```text
     #!/bin/bash
