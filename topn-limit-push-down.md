@@ -91,7 +91,7 @@ explain select * from t join s on t.a = s.a order by t.id limit 10;
 6 rows in set (0.00 sec)
 ```
 
-TopN can't be pushed down into the Inner Join. Taking the query above as an example, if you get 100 records after Join, then do TopN can leave 10 records. If the remaining 10 records are filtered before TopN, there may be 5 left after the Join is done. It will make results differences.
+TopN cannot be pushed down before `Inner Join`. Taking the query above as an example, if you get 100 records after Join, then you can have 10 records left after TopN. However, if TopN is performed first to get 10 records, only 5 records are left after Join. The pushdown might result in different results. 
 
 That is the reason why opN can't be pushed down into the Outer Join for the Inner table. TopN can not be pushed down when sorting by multiple columns on multiple tables. such as `t.a+s.a`.Only if the TopN exclusively depends on sorting outer table columns, it can be pushed down. 
 
