@@ -1,5 +1,6 @@
 ---
-title: TopN and Limit operator push down
+title: TopN and Limit Operator Pushdown
+summary: Learn the implementation of TopN and Limit pushdown.
 category: performance
 ---
 
