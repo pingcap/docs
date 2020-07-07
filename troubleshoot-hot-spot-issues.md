@@ -4,7 +4,7 @@ summary: Learn how to locate and resolve read or write hotspot issues in TiDB.
 category: troubleshoot
 aliases: ['/docs/dev/troubleshoot-hot-spot-issues/']
 ---
-# TiDB hot region problem handling
+# Troubleshoot Hotspot Issues
 
 This document describes how to locate and resolve the problem of read and write hotspots.
 
