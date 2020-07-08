@@ -168,8 +168,8 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 - Scheduler stage total：The number of commands at each stage per second. There should not be lots of errors in a short time.
 - Scheduler writing bytes：The total written bytes of commands processed by each TiKV instance
-- Scheduler priority commands：The count of different priority commands
-- Scheduler pending commands：The count of pending commands per TiKV instance
+- Scheduler priority commands：The count of different priority commands per second
+- Scheduler pending commands：The count of pending commands per TiKV instance per second
 
 ![TiKV Dashboard - Scheduler metrics](/media/tikv-dashboard-scheduler.png)
 
@@ -234,9 +234,9 @@ This document provides a detailed description of these key metrics on the **TiKV
 - TiDB GC seconds：The GC duration
 - GC speed：The number of keys deleted by GC per second
 - TiKV AutoGC Working：The status of Auto GC 
-- ResolveLocks Progress：The progress of the first phase of GC(ResolveLocks)
+- ResolveLocks Progress：The progress of the first phase of GC(Resolve Locks)
 - TiKV Auto GC Progress：The progress of the second phase of GC
-- TiKV Auto GC SafePoint：TiKV GC safe point value, safe point is the current GC timestamp
+- TiKV Auto GC SafePoint：The value of TiKV GC safe point. The safe point is the current GC timestamp
 - GC lifetime：The lifetime of TiDB GC
 - GC interval：The interval of TiDB GC
 
@@ -250,17 +250,17 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Task
 
-- Worker handled tasks：The number of tasks handled by worker persecond
+- Worker handled tasks：The number of tasks handled by worker per second
 - Worker pending tasks：Current number of pending and running tasks of worker per second. It should be less than `1000` in normal case.
-- FuturePool handled tasks：The number of tasks handled by future_pool per second
-- FuturePool pending tasks：Current number of pending and running tasks of future_pool per second
+- FuturePool handled tasks：The number of tasks handled by future pool per second
+- FuturePool pending tasks：Current number of pending and running tasks of future pool per second
 
 ## Coprocessor Overview
 
-- Request duration：The total time spent from receiving the coprocessor request to the end of processing
+- Request duration：The total time spent from receiving the coprocessor request to the end of request processing
 - Total Requests：The number of requests by type per second
 - Handle duration：The histogram of time spent actually processing coprocessor requests per minute
-- Total Request Errors：The number of request error of Coprocessor.  There should not be lots of errors in a short time.
+- Total Request Errors：The number of request errors of Coprocessor. There should not be lots of errors in a short time.
 - Total KV Cursor Operations：The total number of the KV cursor operations by type per second, such as select, index, analyze_table, analyze_index, checksum_table, checksum_index, and so on.
 - KV Cursor Operations：The histogram of KV cursor operations by type per second
 - Total RocksDB Perf Statistics：The performance statistics of RocksDB
@@ -269,11 +269,11 @@ This document provides a detailed description of these key metrics on the **TiKV
 ## Coprocessor Detail
 
 - Handle duration：The histogram of time spent actually processing coprocessor requests per minute
-- 95% Handle duration by store：The time consumed to handle coprocessor requests per TiKV instance (P95)
-- Wait duration：The time consumed when coprocessor requests are waiting to be handled. It should be less than `10s`(P99.99).
-- 95% Wait duration by store：The time consumed when coprocessor requests are waiting to be handled per TiKV instance (P95)
-- Total DAG Requests：The number of DAG requests per second
-- Total DAG Executors：The number of DAG executors per second
+- 95% Handle duration by store：The time consumed to handle coprocessor requests per TiKV instance per second (P95)
+- Wait duration：The time consumed when coprocessor requests are waiting to be handled. It should be less than `10s` (P99.99).
+- 95% Wait duration by store：The time consumed when coprocessor requests are waiting to be handled per TiKV instance per second (P95)
+- Total DAG Requests：The total number of DAG requests per second
+- Total DAG Executors：The total number of DAG executors per second
 - Total Ops Details (Table Scan)：The number of RocksDB internal operations per second when executing select scan in coprocessor
 - Total Ops Details (Index Scan)：The number of RocksDB internal operations per second when executing index scan in coprocessor
 - Total Ops Details by CF (Table Scan)：The number of RocksDB internal operations for each CF per second when executing select scan in coprocessor
@@ -297,7 +297,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 - WAL sync operations：The count of WAL sync operations per second
 - Write WAL duration：The time consumed for writing WAL
 - WAL sync duration：The time consumed when executing WAL sync operations
-- Compaction operationsThe count of compaction and flush operations per second
+- Compaction operations: The count of compaction and flush operations per second
 - Compaction duration：The time consumed when executing the compaction and flush operations
 - SST read duration：The time consumed when reading SST files
 - Write stall duration：Write stall duration. It should be `0` in normal case.
@@ -325,12 +325,12 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Titan - All
 
-- Blob file count：The number of Titan blob file
+- Blob file count：The number of Titan blob files
 - Blob file size：The total size of Titan blob file
 - Live blob size：The total size of valid blob record
 - Blob cache hit：The hit rate of Titan block cache
 - Iter touched blob file count：The number of blob file involved in a single iterator
-- Blob file discardable ratio distribution：The distribution of blob file failure blob record ratio
+- Blob file discardable ratio distribution：The ratio distribution of blob record failure of blob files
 - Blob key size：The size of Titan blob keys
 - Blob value size：The size of Titan blob values
 - Blob get operations：The count of get operations in Titan blob
@@ -344,7 +344,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 - Blob file read duration：The time consumed when reading Titan blob file
 - Blob file write duration：The time consumed when writing Titan blob file
 - Blob file sync operations：The count of blob file sync operations
-- Blob file sync duration：The time consumed when sync blob file
+- Blob file sync duration：The time consumed when synchronizing blob file
 - Blob GC action：The count of Titan GC actions
 - Blob GC duration：The Titan GC duration
 - Blob GC keys flow：The flow rate of keys read and written by Titan GC
@@ -357,11 +357,11 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 - Thread CPU：The CPU utilization of the lock manager thread
 - Handled tasks：The number of taks handled by lock manager
-- Waiter lifetime duration：The time consumed for the transaction waitting for the lock to be released
-- Wait table：The status information of wait table, including the number of locks and the number of transactions waitting for the lock
+- Waiter lifetime duration：The waiting time of the transaction for the lock to be released
+- Wait table：The status information of wait table, including the number of locks and the number of transactions waiting for the lock
 - Deadlock detect duration：The time consumed for detecting deadlock
 - Detect error：The number of errors encountered when detecting deadlock, including the number of deadlocks
-- Deadlock detector leader：The information about the node where the deadlock detector leader is located
+- Deadlock detector leader：The information of the node where the deadlock detector leader is located
 
 ## Memory
 
@@ -374,16 +374,16 @@ This document provides a detailed description of these key metrics on the **TiKV
 - Backup Duration：The time consumed for backup
 - Backup Flow：The total bytes of backup
 - Disk Throughput：The disk throughput per instance
-- Backup Range Duration：The time consumed for range backup
-- Backup Errors：The number of errors encountered when making a backup
+- Backup Range Duration：The time consumed for backing up a range
+- Backup Errors：The number of errors encountered during a backup
 
 ## Encryption
 
 - Encryption data keys：The total number of encrypted data keys
 - Encrypted files：The number of encrypted files
-- Encryption initialized：It shows whether encryption is enabled, `1` means enabled.
-- Encryption meta files size：The size of meta file about encrpytion
-- Encrypt/decrypt data nanos：The histogram of time on encrypting/decrypting data ecch time
+- Encryption initialized：Shows whether encryption is enabled, `1` means enabled.
+- Encryption meta files size：The size of the encryption meta file
+- Encrypt/decrypt data nanos：The histogram of duration on encrypting/decrypting data each time
 - Read/write encryption meta duration：The time consumed for reading/writing encryption meta file
 
 ## Explanation of Common Parameters
@@ -395,12 +395,12 @@ This document provides a detailed description of these key metrics on the **TiKV
     - kv_get：The command of getting the latest version of data specified by ts
     - kv_scan：The command of scanning a range of data
     - kv_prewrite：The command of prewriting the data to be committed at first phase of 2PC
-    - kv_pessimistic_lock：The command of adding a pessimistic lock to the key to prevent other transaction from modifying
+    - kv_pessimistic_lock：The command of adding a pessimistic lock to the key to prevent other transaction from modifying this key
     - kv_pessimistic_rollback：The command of deleting the pessimistic lock on the key
     - kv_txn_heart_beat：The command of updating `lock_ttl` for pessimistic transactions or large transactions to prevent them from rolling back
     - kv_check_txn_status：The command of checking the status of the transaction
     - kv_commit：The command of committing the data written by prewrite command
-    - kv_cleanup：The command of rolling back a transaction, it will abolished in 4.0
+    - kv_cleanup：The command of rolling back a transaction, which is deprecated in v4.0
     - kv_batch_get：The command of getting the value of batch key at once, similar to `kv_get`.
     - kv_batch_rollback：The command of batch rollback of multiple prewrite transaction
     - kv_scan_lock：The command of scanning all locks with a version number before `max_version` to clean up expired transactions
@@ -413,7 +413,7 @@ This document provides a detailed description of these key metrics on the **TiKV
     - raw_get：The command of getting the value of key
     - raw_batch_get：The command of getting the value of batch keys
     - raw_scan：The command of scanning a range of data
-    - raw_batch_scan：The command of scanning multiple consecutive data
+    - raw_batch_scan：The command of scanning multiple consecutive data range
     - raw_put：The command of writing a key/value pair
     - raw_batch_put：The command of writing a batch of key/value pairs
     - raw_delete：The command of deleting a key/value pair
