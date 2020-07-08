@@ -7,7 +7,7 @@ aliases: ['/docs/dev/troubleshoot-write-conflicts/']
 
 # Troubleshoot Write Conflicts in Optimistic Transactions
 
-This article is an introduction to the reason and solutions of write conflict in optimistic transaction.
+This document introduces the reason of and solutions to write conflicts in optimistic transactions.
 
 Before TiDB v3.0.8, optimistic transaction is the defalut transaction model in TiDB. The transaction doesn't check the confliction during the execution, it checks the confliction when committing the transaction. If the write conflict exists when committing the transaction, the transaction will be auto-retry in TiDB internal when TiDB has enabled the auto-retry and the retry count doesn't exceeded the limit. Then, TiDB will return the result of transaction execution to the client. Therefore, the write latency of TiDB cluster will be higher when there are a lot of write conflict exists.
 
