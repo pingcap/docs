@@ -167,7 +167,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 ## Scheduler
 
 - Scheduler stage total：The number of commands at each stage per second. There should not be lots of errors in a short time.
-- Scheduler writing bytes：The total bytes of writing bytes per TiKV instance
+- Scheduler writing bytes：The total written bytes of commands processed by each TiKV instance
 - Scheduler priority commands：The count of different priority commands
 - Scheduler pending commands：The count of pending commands per TiKV instance
 
