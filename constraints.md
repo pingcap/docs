@@ -11,7 +11,7 @@ TiDB supports the same constraint as MySQL.
 
 ## NOT NULL
 
-NOT NULL constraints supported by TiDB are the same as those supported by MySQL
+NOT NULL constraints supported by TiDB are the same as those supported by MySQL.
 
 For Example：
 
