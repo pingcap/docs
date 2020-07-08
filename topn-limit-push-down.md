@@ -1,22 +1,24 @@
 ---
 title: TopN and Limit Operator Pushdown
-summary: Learn the implementation of TopN and Limit pushdown.
+summary: Learn the implementation of TopN and Limit operator pushdown.
 category: performance
 ---
 
-# TopN and Limit operator push down
+# TopN and Limit Operator Pushdown
+
+This document describes the implementation of TopN and Limit operator pushdown.
 
 In the TiDB execution plan tree, the `LIMIT` clause in SQL corresponds to the Limit operator node, and the `ORDER BY` clause corresponds to the Sort operator node. The adjacent Limit operator and Sort operator are combined as the TopN operator node, which means that the top N records are returned according to a certain collation. That is to say, a Limit operator is equivalent to a TopN operator node with a null collation.
 
 Similar to predicate pushdown, TopN and Limit are pushed down in the execution plan tree to a position as close to the data source as possible so that the required data is filtered at an early stage. In this way, the pushdown significantly reduces the overhead of data transmission and calculation.
 
-To disable this rule,  refer to [Optimization Rules and Blocklist for Expression Pushdown](/blocklist-control-plan.md).
+To disable this rule, refer to [Optimization Rules and Blocklist for Expression Pushdown](/blocklist-control-plan.md).
 
 ## Examples
 
-This section describes TopN pushdown through some examples.
+This section illustrates TopN pushdown through some examples.
 
-### Example 1: Push down to the Coprocessor in the storage layer
+### Example 1: Push down to the Coprocessors in the storage layer
 
 {{< copyable "sql" >}}
 
@@ -39,7 +41,7 @@ explain select * from t order by a limit 10;
 
 In this query, the TopN operator node is pushed down to TiKV for data filtering, and each Coprocessor returns only 10 records to TiDB. After TiDB aggregates the data, the final filtering is performed.
 
-### Example 2: TopN can be pushed down into Join (sorting only depends on the columns in the outer table)
+### Example 2: TopN can be pushed down into Join (the collation only depends on the columns in the outer table)
 
 {{< copyable "sql" >}}
 
@@ -67,7 +69,7 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 
 In this query, the collation of the TopN operator only depends on the columns in the outer table `t`, so a calculation can be performed before pushing down TopN to Join, to reduce the calculation cost of the Join operation. Besides, TiDB also pushes TopN down to the storage layer.
 
-### Example 3: TopN can't be pushed down into the Join
+### Example 3: TopN cannot be pushed down before Join
 
 {{< copyable "sql" >}}
 
@@ -91,9 +93,9 @@ explain select * from t join s on t.a = s.a order by t.id limit 10;
 6 rows in set (0.00 sec)
 ```
 
-TopN cannot be pushed down before `Inner Join`. Taking the query above as an example, if you get 100 records after Join, then you can have 10 records left after TopN. However, if TopN is performed first to get 10 records, only 5 records are left after Join. The pushdown might result in different results. 
+TopN cannot be pushed down before `Inner Join`. Taking the query above as an example, if you get 100 records after Join, then you can have 10 records left after TopN. However, if TopN is performed first to get 10 records, only 5 records are left after Join. In such cases, the pushdown results in different results. 
 
-Similarly, TopN can neither be pushed down into the Outer Join for the inner table, nor can it be pushed down when its collation is related to columns on multiple tables, such as `t.a+s.a`. Only when the collation of TopN exclusively depends on columns on the outer table, can it be pushed down. 
+Similarly, TopN can neither be pushed down to the inner table of Outer Join, nor can it be pushed down when its collation is related to columns on multiple tables, such as `t.a+s.a`. Only when the collation of TopN exclusively depends on columns on the outer table, can TopN be pushed down. 
 
 ### Example 4: Convert TopN to Limit
 
@@ -122,4 +124,4 @@ explain select * from t left join s on t.a = s.a order by t.id limit 10;
 
 ```
 
-In the query above, TopN is first pushed to the outer table `t`. TopN needs to sort by `t.id`, which is the primary key and can be directly read in order  (`keep order: true`) without extra sorting in TopN. Therefore, TopN is simplied as Limit.
+In the query above, TopN is first pushed to the outer table `t`. TopN needs to sort by `t.id`, which is the primary key and can be directly read in order  (`keep order: true`) without extra sorting in TopN. Therefore, TopN is simplified as Limit.

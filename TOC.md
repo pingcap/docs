@@ -99,6 +99,7 @@
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [TopN and Limit Pushdown](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
         + [Statistics](/statistics.md)
