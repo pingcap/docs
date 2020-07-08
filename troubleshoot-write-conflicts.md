@@ -19,7 +19,7 @@ After the client sends a `COMMIT` request to TiDB, TiDB starts the 2PC process:
 
 1. TiDB chooses one key from all keys in the transaction as the primary key of the transaction.
 2. TiDB sends the `prewrite` request to all the TiKV Regions involved in this commit. TiKV judges whether all keys can preview successfully.
-3. After all `prewrite` requests return successful result, go to the next step.
+3. TiDB receives the result that all `prewrite` requests are successful.
 4. TiDB gets the `commit_ts` from PD.
 5. TiDB sends the `commit` request to the TiKV Region that contains the primary key of the transaction. After TiKV receives the `commit` request, it checks the validity of the data and clears the locks left in the `prewrite` stage.
 6. After the `commit` request returns successfully, TiDB returns success to the client.
