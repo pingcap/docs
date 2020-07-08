@@ -404,11 +404,11 @@
     + [MySQL System Variables](/system-variables.md)
     + [TiDB Specific System Variables](/tidb-specific-system-variables.md)
   + Storage Engines
+    + TiKV
+      + [RocksDB Overview](/rocksdb/rocksdb-overview.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
-    + TiKV
-      + [RocksDB Overview](/rocksdb/rocksdb-overview.md)
   + TiUP
     + [Overview](/tiup/tiup-overview.md)
     + [Manage TiUP Components](/tiup/manage-tiup-component.md)
