@@ -149,8 +149,8 @@ When the add/delete primary key feature is enabled, TiDB allows adding/deleting 
 
 ## FOREIGN KEY
 
->note：
-
+> **Note:**
+>
 > TiDB has limited support for foreign key constraints.
 
 TiDB supports creating `FOREIGN KEY` creation in DDL commands.
