@@ -15,7 +15,7 @@ Before TiDB v3.0.8, TiDB uses the optimistic transaction model by default. In th
 
 TiDB implements its transactions by using the [Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Peng.pdf) transaction model. `percolator` is generally an implementation of 2PC. For the detailed 2PC process, see [TiDB Optimistic Transaction Model](/optimistic-transaction.md).
 
-After the client send a `COMMIT` request to TiDB, TiDB starts the 2PC process:
+After the client sends a `COMMIT` request to TiDB, TiDB starts the 2PC process:
 
 1. TiDB chooses one key from all keys in the transaction as the primary key of the transaction.
 2. TiDB sends `prewrite` requests to the TiKV regions which contain the all keys of the transaction.
