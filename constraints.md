@@ -44,7 +44,7 @@ Query OK, 1 row affected (0.03 sec)
 
 ## UNIQUE KEY
 
-In TiDB's optimistic transcation mode, UNIQUE constraints are checked lazily by default. By batching checks until when the transaction commits, TiDB can reduce network overhead and improve performance.
+In TiDB's optimistic transcation mode, UNIQUE constraints are [checked lazily](/transaction-overview.md#lazy-check-of-constraints) by default. By batching checks when the transaction is committed, TiDB can reduce network overhead and improve performance.
 
 For Example:
 
