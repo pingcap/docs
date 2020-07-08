@@ -24,7 +24,7 @@ After the client send a `COMMIT` request to TiDB, TiDB starts the 2PC process:
 5. TiDB sends the `commit` request to the TiKV Region that contains the primary key of the transaction. After TiKV receives the `commit` request, it checks the validity of the data and clears the locks left in the `prewrite` stage.
 6. After the `commit` request returns successfully, TiDB returns success to the client.
 
-The write conflict occurs in the `prewrite` stage. When the transaction found a new version of the key (data.commit_ts > txn.start_ts), that's write conflict.
+The write conflict occurs in the `prewrite` stage. When the transaction finds that another transaction is writing the current key (`data.commit_ts` > `txn.start_ts`), a write conflict occurs.
 
 ## How to detect the write conflict exists in the cluster?
 
