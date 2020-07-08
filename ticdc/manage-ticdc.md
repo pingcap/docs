@@ -2,7 +2,7 @@
 title: Manage TiCDC Cluster and Replication Tasks
 summary: Learn how to manage a TiCDC cluster and replication tasks.
 category: reference
-aliases: ['/docs/dev/reference/tools/ticdc/manage/']
+aliases: ['/docs/dev/ticdc/manage-ticdc/','/docs/dev/reference/tools/ticdc/manage/']
 ---
 
 # Manage TiCDC Cluster and Replication Tasks
@@ -28,7 +28,7 @@ For details, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-
 
 1. First, make sure that the current TiDB version supports TiCDC; otherwise, you need to upgrade the TiDB cluster to `v4.0.0 rc.1` or later versions.
 
-2. To deploy TiCDC, refer to [Scale out a TiDB/TiKV/PD/TiCDC node](/scale-tidb-using-tiup.md#scale-out-a-tidbtikvpdticdc-node).
+2. To deploy TiCDC, refer to [Scale out a TiCDC node](/scale-tidb-using-tiup.md#scale-out-a-ticdc-node).
 
 ### Use Binary
 
