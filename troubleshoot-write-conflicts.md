@@ -5,7 +5,7 @@ category: troubleshoot
 aliases: ['/docs/dev/troubleshoot-write-conflicts/']
 ---
 
-# TiDB Write Conflict In Optimistic Transaction Troubleshooting
+# Troubleshoot Write Conflicts in Optimistic Transactions
 
 This article is an introduction to the reason and solutions of write conflict in optimistic transaction.
 
