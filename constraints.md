@@ -81,7 +81,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ```
 
 The first `INSERT` statement will not cause duplicate key errors, which is consistent with MySQL's rules. This check will be delayed until the transaction is committed.
-You can disable this behavior by setting  `tidb_constraint_check_in_place` to  `1`  (this variable setting has no effect on pessimistic transaction mode, pessimistic transaction mode always check constraints when the statement is executed). If this behavior is disabled, the unique constraint will be checked when the statement is executed.
+You can disable this behavior by setting  `tidb_constraint_check_in_place` to  `1`. This variable setting does not take effect on pessimistic transactions, because in the pessimistic transaction mode the constraints are always checked when the statement is executed. If this behavior is disabled, the unique constraint is checked when the statement is executed.
 
 For Example
 
