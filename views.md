@@ -178,6 +178,9 @@ Query OK, 0 rows affected (0.01 sec)
 
 ```sql
 select * from v;
+```
+
+```sql
 +------+
 | a    |
 +------+
