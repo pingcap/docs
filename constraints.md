@@ -115,7 +115,7 @@ The first  `INSERT` statement caused a duplicate key error. This causes addition
 
 ## PRIMARY KEY
 
-Like MySQL, primary key constraints contain unique constraints, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraint  of TiDB are also similar to MySQL.
+Like MySQL, primary key constraints contain unique constraints, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraints of TiDB are also similar to those of MySQL.
 
 For Example
 
