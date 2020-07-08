@@ -26,7 +26,7 @@ After the client send a `COMMIT` request to TiDB, TiDB starts the 2PC process:
 
 The write conflict occurs in the `prewrite` stage. When the transaction finds that another transaction is writing the current key (`data.commit_ts` > `txn.start_ts`), a write conflict occurs.
 
-## How to detect the write conflict exists in the cluster?
+## Detect write conflicts
 
 You can check the following monitoring metrics under **KV Errors** in the **TiDB Grafana** panel:
 
