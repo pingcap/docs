@@ -46,7 +46,7 @@ Query OK, 1 row affected (0.03 sec)
 
 In TiDB's optimistic transcation mode, UNIQUE constraints are [checked lazily](/transaction-overview.md#lazy-check-of-constraints) by default. By batching checks when the transaction is committed, TiDB can reduce network overhead and improve performance.
 
-For Example:
+For example:
 
 ```sql
 DROP TABLE IF EXISTS users;
