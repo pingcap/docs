@@ -1,3 +1,10 @@
+---
+title: Constraints
+summary: Learn how SQL Constraints apply to TiDB.
+category: reference
+aliases: ['/docs/dev/constraints/','/docs/dev/reference/sql/constraints/']
+---
+
 # Constraint
 
 TiDB supports the same constraint as MySQL.

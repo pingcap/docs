@@ -2,7 +2,7 @@
 title: CREATE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE TABLE for the TiDB database.
 category: reference
-aliases: ['/docs/dev/reference/sql/statements/create-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-create-table/','/docs/dev/reference/sql/statements/create-table/']
 ---
 
 # CREATE TABLE
@@ -185,6 +185,7 @@ index_option:
     KEY_BLOCK_SIZE [=] value
   | index_type
   | COMMENT 'string'
+  | {VISIBLE | INVISIBLE}
 ```
 
 The `KEY_BLOCK_SIZE` in `index_option` is currently only supported in syntax.

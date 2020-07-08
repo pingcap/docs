@@ -2,14 +2,14 @@
 title: TiDB Lightning Deployment
 summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 category: reference
-aliases: ['/docs/dev/reference/tools/tidb-lightning/deployment/']
+aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/deployment/']
 ---
 
 # TiDB Lightning Deployment
 
 This document describes the hardware requirements of TiDB Lightning using the default Importer-backend, and how to deploy it using TiDB Ansible or manually.
 
-If you wish to use the TiDB-backend, also read [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for the changes to the deployment steps.
+If you do not want the TiDB services to be impacted, read [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for the changes to the deployment steps.
 
 ## Notes
 
@@ -97,7 +97,7 @@ If the data source consists of CSV files, see [CSV support](/tidb-lightning/migr
 
 This section describes two deployment methods of TiDB Lightning:
 
-- [Deploy TiDB Lightning using TiDB Ansible](#deploy-tidb-lightning-using-ansible)
+- [Deploy TiDB Lightning using TiDB Ansible](#deploy-tidb-lightning-using-tidb-ansible)
 - [Deploy TiDB Lightning manually](#deploy-tidb-lightning-manually)
 
 ### Deploy TiDB Lightning using TiDB Ansible

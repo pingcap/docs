@@ -1,3 +1,10 @@
+---
+title: Views
+summary: Learn how to use views in TiDB.
+category: reference
+aliases: ['/docs/dev/views/','/docs/dev/reference/sql/views/']
+---
+
 # views
 
 TiDB supports views, A view acts as a virtual table,  It can be created from `SELECT`  statements. On the one hand, Using the view can only expose safe columns and data to users, to ensure the security of sensitive columns and data in the underlying table.
