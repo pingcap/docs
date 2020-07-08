@@ -37,7 +37,7 @@ Query OK, 1 row affected (0.03 sec)
 
 ## UNIQUE KEY
 
-In TiDB's optimistic transcation mode, TiDB will do lazy check for unique constraints by default. By performing batch checks when transactions are committed, TiDB can reduce network overhead and improve performance.
+In TiDB's optimistic transcation mode, UNIQUE constraints are checked lazily by default. By batching checks until when the transaction commits, TiDB can reduce network overhead and improve performance.
 
 For Example:
 
@@ -108,7 +108,7 @@ The first  `INSERT` statement caused a duplicate key error. This causes addition
 
 ## PRIMARY KEY
 
-Like MySQL, primary key constraints contain unique constraint, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraint  of TiDB are also similar to MySQL.
+Like MySQL, primary key constraints contain unique constraints, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraint  of TiDB are also similar to MySQL.
 
 For Example
 
@@ -132,9 +132,9 @@ CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-* table `t2` failed to create, Because column  `a` is defined as the primary key and cannot allow NULL values.
-* table `t3` failed to create, Because a table can only have one primary key.
-* table  t4 was created successfully, Although there can be only one primary key, TiDB supports the definition of a multi-column combination as a composite primary key.
+* table `t2` failed to be created, Because column `a` is defined as the primary key and permitted  NULL values.
+* table `t3` failed to be created, Because a table can only have one primary key.
+* table  t4 was created successfully, Because even though there can be only one primary key, it may be defined as a composite of multiple columns.
 
 In addition to the above rules, by default, TiDB has an additional restriction that once a table is successfully created, its primary key cannot be changed. If you need to add/remove the primary key, you need to set  `alter-primary-key`  to  `true`  in the TiDB configuration file, and restart the TiDB instance to make it effective.
 
@@ -144,9 +144,9 @@ When the add/delete primary key feature is enabled, TiDB allows adding/deleting 
 
 >note：
 
-TiDB has limited support for foreign key constraint.
+TiDB has limited support for foreign key constraints.
 
-TiDB supports creating foreign key constraint.
+TiDB supports creating `FOREIGN KEY` creation in DDL commands.
 
 For Example
 
@@ -176,14 +176,14 @@ FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders')
 3 rows in set (0.00 sec)
 ```
 
-TiDB also supports using ALTER TABLE command to delete foreign keys (DROP FOREIGN KEY) or add foreign keys (ADD FOREIGN KEY)
+TiDB also supports the syntax to `DROP FOREIGN KEY` and `ADD FOREIGN KEY` via the `ALTER TABLE` command.
 
 ```sql
 ALTER TABLE orders DROP FOREIGN KEY fk_user_id;
 ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 ```
 
-### Note
+### Notes
 
 TiDB supports foreign keys in order to avoid errors due to this syntax when migrating other databases to TiDB.
 
