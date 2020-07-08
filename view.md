@@ -1,6 +1,6 @@
 # view
 
-TiDB supports views, A view acts as a virtual table,  It can be created from `SELECT`  statements. On the one hand, Using the view can only expose safe columns and data to the user, to ensure the security of sensitive columns and data in the underlying table.
+TiDB supports views, A view acts as a virtual table,  It can be created from `SELECT`  statements. On the one hand, Using the view can only expose safe columns and data to users, to ensure the security of sensitive columns and data in the underlying table.
 
 On the other hand, defining complex queries that frequently appear as views can make complex queries simpler and more convenient.
 
@@ -186,10 +186,10 @@ drop view v;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-## View limitations
+## Limitations
 
  Now views in TiDB are subject to the following limitations:
 
 * Materialized views are not supported yet.
-* Views in TiDB are read-only, does not support write operations such as `UPDATE`,`INSERT`,`DELETE`,`TRUNCATE`
+* Views in TiDB are read-only and do not support write operations like  `UPDATE`,`INSERT`,`DELETE`,`TRUNCATE` and so on.
 * For created views,  the only supported DDL opertion is `DROP`, i.e., `DROP [VIEW | TABLE]`
