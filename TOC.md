@@ -88,6 +88,7 @@
   + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+  + [TiDB Write Conflict In Optimistic Transaction Troubleshooting](/troubleshoot-write-conflicts.md)
 + Performance Tuning
   + System Tuning
     + [Operating System Tuning](/tune-operating-system.md)
