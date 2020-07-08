@@ -1,31 +1,32 @@
 ---
-title: TiDB Write Conflict In Optimistic Transaction Troubleshooting
-summary: Learn about common errors and solutions of write conflict in optimistic transaction.
-category: how-to
+title: Troubleshoot Write Conflicts in Optimistic Transactions
+summary: Learn about the reason of and solutions to write conflicts in optimistic transactions.
+category: troubleshoot
+aliases: ['/docs/dev/troubleshoot-write-conflicts/']
 ---
 
-# TiDB Write Conflict In Optimistic Transaction Troubleshooting
+# Troubleshoot Write Conflicts in Optimistic Transactions
 
-This article is an introduction to the reason and solutions of write conflict in optimistic transaction.
+This document introduces the reason of and solutions to write conflicts in optimistic transactions.
 
-Before TiDB v3.0.8, optimistic transaction is the defalut transaction model in TiDB. The transaction doesn't check the confliction during the execution, it checks the confliction when committing the transaction. If the write conflict exists when committing the transaction, the transaction will be auto-retry in TiDB internal when TiDB has enabled the auto-retry and the retry count doesn't exceeded the limit. Then, TiDB will return the result of transaction execution to the client. Therefore, the write latency of TiDB cluster will be higher when there are a lot of write conflict exists.
+Before TiDB v3.0.8, TiDB uses the optimistic transaction model by default. In this model, TiDB does not check conflicts during transaction execution. Instead, while the transaction is finally committed, the two-phase commit (2PC) is triggered and TiDB checks write conflicts. If a write conflict exists and the auto-retry mechanism is enabled, then TiDB retries the transaction within limited times. If the retry succeeds or has reached the upper limit on retry times, TiDB returns the result of transaction execution to the client. Therefore, if a lot of write conflicts exist in the TiDB cluster, the duration can be longer.
 
-## The reason of write conflict
+## The reason of write conflicts
 
-TiDB use [Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Peng.pdf) transaction model as transaction implemention. And `percolator` is generally an implementation of 2PC. Please refer to [optimistic transaction document](/optimistic-transaction.md) for the specific 2PC process.
+TiDB implements its transactions by using the [Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Peng.pdf) transaction model. `percolator` is generally an implementation of 2PC. For the detailed 2PC process, see [TiDB Optimistic Transaction Model](/optimistic-transaction.md).
 
-After the client send a `COMMIT` request to TiDB, TiDB starts the 2PC process:
+After the client sends a `COMMIT` request to TiDB, TiDB starts the 2PC process:
 
 1. TiDB chooses one key from all keys in the transaction as the primary key of the transaction.
-2. TiDB sends `prewrite` requests to the TiKV regions which contain the all keys of the transaction.
-3. After all `prewrite` requests return successful result, go to the next step.
+2. TiDB sends the `prewrite` request to all the TiKV Regions involved in this commit. TiKV judges whether all keys can preview successfully.
+3. TiDB receives the result that all `prewrite` requests are successful.
 4. TiDB gets the `commit_ts` from PD.
-5. TiDB sends `commit` request to the TiKV region which contain the primary key of the transaction. When TiKV executes `commit` request, TiKV checks the validity of the data and clear the lock that left in `prewrite` request.
-6. After the `commit` request returns successfully, TiDB return success to the client.
+5. TiDB sends the `commit` request to the TiKV Region that contains the primary key of the transaction. After TiKV receives the `commit` request, it checks the validity of the data and clears the locks left in the `prewrite` stage.
+6. After the `commit` request returns successfully, TiDB returns success to the client.
 
-The write conflict occurs in the `prewrite` stage. When the transaction found a new version of the key (data.commit_ts > txn.start_ts), that's write conflict.
+The write conflict occurs in the `prewrite` stage. When the transaction finds that another transaction is writing the current key (`data.commit_ts` > `txn.start_ts`), a write conflict occurs.
 
-## How to detect the write conflict exists in the cluster?
+## Detect write conflicts
 
 You can check the following monitoring metrics under **KV Errors** in the **TiDB Grafana** panel:
 
@@ -49,7 +50,7 @@ You can check the following monitoring metrics under **KV Errors** in the **TiDB
 
 You can also use `[kv:9007]Write conflict` as the key word to search in TiDB log. The key word also indicates the write conflict exists in the cluster.
 
-## How to resolve the write-conflict?
+## Resolve write conflicts
 
 If there were many write conflict in the cluster, you can find out the write conflict key and the reason, then try to change the application logic to avoid write conflict. When the write conflict exists in the cluster, you can see the similar log as below in TiDB log file:
 
