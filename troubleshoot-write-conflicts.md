@@ -11,7 +11,7 @@ This document introduces the reason of and solutions to write conflicts in optim
 
 Before TiDB v3.0.8, TiDB uses the optimistic transaction model by default. In this model, TiDB does not check conflicts during transaction execution. Instead, while the transaction is finally committed, the two-phase commit (2PC) is triggered and TiDB checks write conflicts. If a write conflict exists and the auto-retry mechanism is enabled, then TiDB retries the transaction within limited times. If the retry succeeds or has reached the upper limit on retry times, TiDB returns the result of transaction execution to the client. Therefore, if a lot of write conflicts exist in the TiDB cluster, the duration can be longer.
 
-## The reason of write conflict
+## The reason of write conflicts
 
 TiDB use [Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Peng.pdf) transaction model as transaction implemention. And `percolator` is generally an implementation of 2PC. Please refer to [optimistic transaction document](/optimistic-transaction.md) for the specific 2PC process.
 
