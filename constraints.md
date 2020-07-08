@@ -139,9 +139,9 @@ CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-* table `t2` failed to be created, Because column `a` is defined as the primary key and permitted  NULL values.
-* table `t3` failed to be created, Because a table can only have one primary key.
-* table  t4 was created successfully, Because even though there can be only one primary key, it may be defined as a composite of multiple columns.
+* Table `t2` failed to be created, because column `a` is defined as the primary key and does not allow NULL values.
+* Table `t3` failed to be created, because a table can only have one primary key.
+* Table `t4` was created successfully, because even though there can be only one primary key, TiDB supports defining multiple columns as the composite primary key.
 
 In addition to the above rules, by default, TiDB has an additional restriction that once a table is successfully created, its primary key cannot be changed. If you need to add/remove the primary key, you need to set  `alter-primary-key`  to  `true`  in the TiDB configuration file, and restart the TiDB instance to make it effective.
 
