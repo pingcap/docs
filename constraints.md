@@ -145,7 +145,7 @@ Query OK, 0 rows affected (0.10 sec)
 
 In addition to the rules above, by default, TiDB has an additional restriction that once a table is successfully created, its primary key cannot be changed. If you need to add/remove the primary key, you need to set  `alter-primary-key`  to  `true`  in the TiDB configuration file, and restart the TiDB instance to make it effective.
 
-When the add/delete primary key feature is enabled, TiDB allows adding/deleting primary key to the table. However, it should be noted that, for an integer type primary key table created when the feature is not enabled, even if the add/delete primary key feature is enabled, the primary key cannot be deleted.
+When the add/delete primary key feature is enabled, TiDB allows adding/deleting primary key to the table. However, it should be noted that, if a table with an integer type primary key has been created before the feature is enabled, you cannot delete its primary key constraint even when you enabled the add/delete primary key feature.
 
 ## FOREIGN KEY
 
