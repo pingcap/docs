@@ -1,7 +1,8 @@
 ---
 title: Troubleshoot Write Conflicts in Optimistic Transactions
 summary: Learn about the reason of and solutions to write conflicts in optimistic transactions.
-category: how-to
+category: troubleshoot
+aliases: ['/docs/dev/troubleshoot-write-conflicts/']
 ---
 
 # TiDB Write Conflict In Optimistic Transaction Troubleshooting
