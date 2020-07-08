@@ -15,15 +15,15 @@ You can get an overview of the component PD status from the PD dashboard, where 
 
 The following is the description of PD Dashboard metrics items:
 
-- PD role: The role of current PD instance
+- PD role: The role of the current PD instance
 - Storage capacity: The total storage capacity for this TiDB cluster
-- Current storage size: The current storage size of the cluster
-- Current storage usage: The total number of Regions without replicas
+- Current storage size: The storage size that is currently used by the TiDB cluster
+- Current storage usage: The current storage usage rate
 - Normal stores: The count of healthy storage instances
-- Number of Regions: The total count of Regions of the cluster 
+- Number of Regions: The total count of cluster Regions
 - Abnormal stores: The count of unhealthy stores. The normal value is `0`. If the number is bigger than `0`, it means at least one instance is abnormal.
-- Region health: The health status of Regions indicated via count of unusual Regions including pending peers, down peers, extra peers, offline peers, missing peers, learner peers and incorrect namespaces. The number of pending peers should be less than `100`. The missing peers should not be persistently greater than `0`.
-- Current peer count: The current peer count of the cluster
+- Region health: The health status of Regions indicated via the count of unusual Regions including pending peers, down peers, extra peers, offline peers, missing peers, learner peers and incorrect namespaces. Generally, the number of pending peers should be less than `100`. The missing peers should not be persistently greater than `0`. If many empty Regions exist, enable Region Merge in time.
+- Current peer count: The current count of all cluster peers
 ![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
 
 ## Key metrics description
@@ -33,7 +33,7 @@ The following is the description of PD Dashboard metrics items:
 - PD scheduler config: The list of PD scheduler configurations
 - Cluster ID: The unique identifier of the cluster
 - Current TSO: The physical part of current allocated TSO
-- Current ID allocation: The maximun allocatable ID for new store/peer
+- Current ID allocation: The maximum allocatable ID for new store/peer
 - Region label isolation level: The number of Regions in different label levels
 - Label distribution: The distribution status of the labels in the cluster
 
@@ -42,13 +42,13 @@ The following is the description of PD Dashboard metrics items:
 ## Operator
 
 - Schedule operator create: The number of newly created operators per type  
-- Schedule operator check: The number of checked operator per type. It mainly checks if the current step is finished; if yes, it returns the next step to be executed
+- Schedule operator check: The number of checked operator per type. It mainly checks whether the current step is finished; if yes, it returns the next step to be executed
 - Schedule operator finish: The number of finished operators per type
 - Schedule operator timeout: The number of timeout operators per type
 - Schedule operator replaced or canceled: The number of replaced or canceled operators per type
 - Schedule operators count by state: The number of operators per state
-- Operator finish duration: The max duration of finished operators
-- Operator step duration: The max duration of finished operator step
+- Operator finish duration: The maximum duration of finished operators
+- Operator step duration: The maximum duration of finished operator steps
 
 ![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v4.png)
 
@@ -70,26 +70,26 @@ The following is the description of PD Dashboard metrics items:
 
 ## Statistics - hot write
 
-- Hot Region's leader distribution: Leader distribution in hot write Regions. The total number of leader Regions in hot write on each TiKV instance
-- Total written bytes on hot leader Regions: The total written bytes by Leader regions in hot write on leader Regions for each TiKV instance
-- Hot write Region's peer distribution: Peer distribution in hot write Regions. The total number of peer Regions under in hot write on each TiKV instance
-- Total written bytes on hot peer Regions: Peer written bytes in hot write Regions. The total bytes of hot write on peer Regions per each TiKV instance
-- Store Write rate bytes: The total written bytes fo each TiKV instance
-- Store Write rate keys: The total written keys fo each TiKV instance
-- Hot cache write entry number: The number of peers of each TiKV which are considered by the writing hotspot detection module
-- Selector events:  The event count of Selector in the hotspot scheduling module
+- Hot Region's leader distribution: The total number of leader Regions that have become write hotspots on each TiKV instance
+- Total written bytes on hot leader Regions: The total written bytes by leader Regions that have become write hotspots on each TiKV instance
+- Hot write Region's peer distribution: The total number of peer Regions that have become write hotspots on each TiKV instance
+- Total written bytes on hot peer Regions: The written bytes of all peer Regions that have become write hotspots on each TiKV instance
+- Store Write rate bytes: The total written bytes on each TiKV instance
+- Store Write rate keys: The total written keys on each TiKV instance
+- Hot cache write entry number: The number of peers on each TiKV instance that are in the write hotspot statistics module
+- Selector events: The event count of Selector in the hotspot scheduling module
 - Direction of hotspot move leader: The direction of leader movement in the hotsport scheduling. The positive number means scheduling into the instance. The negtive number means scheduling out of the instance
-- Direction of hotspot move peer: The direction of pear movement in the hotsport scheduling. The positive number means scheduling into the instance. The negtive number means scheduling out of the instance
+- Direction of hotspot move peer: The direction of peer movement in the hotspot scheduling. The positive number means scheduling into the instance. The negative number means scheduling out of the instance
 
 ![PD Dashboard - Hot write metrics](/media/pd-dashboard-hotwrite-v4.png)
 
 ## Statistics - hot read
 
-- Hot Region's leader distribution: The total number of leader Regions in hot read per each TiKV instance
-- Total read bytes on hot leader Regions: Leader read bytes in hot read Regions. The total bytes of hot read on leader Regions per each TiKV instance
-- Store read rate bytes: The total readed bytes fo each TiKV instance
-- Store read rate keys: The total readed keys fo each TiKV instance
-- Hot cache read entry number: The number of peers of each TiKV which are considered by the reading  hotspot detection module
+- Hot Region's leader distribution: The total number of leader Regions that have become read hotspots on each TiKV instance
+- Total read bytes on hot leader Regions: The total read bytes of leaders that have become read hotspots on each TiKV instance
+- Store read rate bytes: The total read bytes of each TiKV instance
+- Store read rate keys: The total read keys of each TiKV instance
+- Hot cache read entry number: The number of peers that are in the read hotspot statistics module on each TiKV instance
 
 ![PD Dashboard - Hot read metrics](/media/pd-dashboard-hotread-v4.png)
 
@@ -107,15 +107,15 @@ The following is the description of PD Dashboard metrics items:
 - Region merge checker: The merge checker's status
 - Filter target: The number of attempts that the store is selected as the scheduling target but failed to pass the filter
 - Filter source: The number of attempts that the store is selected as the scheduling source but failed to pass the filter
-- Balance Direction: The number of the Store is selected as the target of source of scheduling
+- Balance Direction: The number of times that the Store is selected as the target or source of scheduling
 - Store Limit: The flow control limitation of scheduling on the Store
 
 ![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler-v4.png)
 
 ## gRPC
 
-- Completed commands rate: The rate per command type type at which gRPC commands are completed
-- 99% Completed commands duration: The rate per command type type at which gRPC commands are completed (P99)
+- Completed commands rate: The rate per command type at which gRPC commands are completed
+- 99% Completed commands duration: The rate per command type at which gRPC commands are completed (P99)
 
 ![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
 
@@ -123,7 +123,7 @@ The following is the description of PD Dashboard metrics items:
 
 - Handle transactions count: The rate at which etcd handles transactions
 - 99% Handle transactions duration: The transaction handling rate (P99)
-- 99% WAL fsync duration: The time consumed for writing WAL into the persistent storage (P99) | The value is less than `1s`
+- 99% WAL fsync duration: The time consumed for writing WAL into the persistent storage. It is less than `1s` (P99)
 - 99% Peer round trip time seconds: The network latency for etcd (P99) | The value is less than `1s`
 - etcd disk WAL fsync rate: The rate of writing WAL into the persistent storage
 - Raft term: The current term of Raft
@@ -138,15 +138,15 @@ Cluster | Region health | The health status of Regions indicated via count of un
 
 ## TiDB
 
-- PD Server TSO handle time and Client recv time: The duration from PD receive TSO request to PD client get the TSO respones
+- PD Server TSO handle time and Client recv time: The duration between PD receiving the TSO request and the PD client getting the TSO response
 - Handle requests count: The count of TiDB requests
-- Handle requests duration: The time consumed for handling TiDB requests | It should be less than `100ms` (P99)
+- Handle requests duration: The time consumed for handling TiDB requests. It should be less than `100ms` (P99)
 
 ![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb-v4.png)
 
 ## Heartbeat
 
-- Heartbeat region event QPS: The QPS of handling heartbeat message, inlcuding updating cache and persisting data
+- Heartbeat region event QPS: The QPS of handling heartbeat messages, including updating the cache and persisting data
 - Region heartbeat report: The count of heartbeats reported to PD per instance
 - Region heartbeat report error: The count of heartbeats with the `error` status
 - Region heartbeat report active: The count of heartbeats with the `ok` status
