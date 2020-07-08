@@ -38,9 +38,9 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 Query OK, 1 row affected (0.03 sec)
 ```
 
-* The first  `INSERT`  statement succeeded. Because it is possible to assign `NULL` to the `AUTO_INCREMENT` column. TiDB will generate sequence numbers automatically.
-* The second  `INSERT`  statement failed. Because  column `age` is defined as `NOT NULL`.
-* The third  `INSERT`  statement succeed.  Because column `last_login` is not explicitly defined as  `NOT NULL`. NULL values ​​are allowed by default.
+* The first `INSERT` statement succeeds because it is possible to assign `NULL` to the `AUTO_INCREMENT` column. TiDB generates sequence numbers automatically.
+* The second `INSERT` statement fails because the `age` column is defined as `NOT NULL`.
+* The third `INSERT` statement succeeds because the `last_login` column is not explicitly defined as `NOT NULL`. NULL values ​​are allowed by default.
 
 ## UNIQUE KEY
 
