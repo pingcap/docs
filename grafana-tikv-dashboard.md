@@ -151,7 +151,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Unified Read Pool
 
-- Time used by level：The time consumed for each level in unified read pool, level 0 means small query 
+- Time used by level：The time consumed for each level in the unified read pool. Level 0 means small queries.
 - Level 0 chance：The proportion of level 0 tasks in unified read pool
 - Running tasks：The number of tasks running concurrently in the unified read pool
 
