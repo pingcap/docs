@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Write Conflicts in Optimistic Transactions
-summary: Learn about common errors and solutions of write conflict in optimistic transaction.
+summary: Learn about the reason of and solutions to write conflicts in optimistic transactions.
 category: how-to
 ---
 
