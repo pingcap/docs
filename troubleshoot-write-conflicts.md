@@ -50,7 +50,7 @@ You can check the following monitoring metrics under **KV Errors** in the **TiDB
 
 You can also use `[kv:9007]Write conflict` as the key word to search in TiDB log. The key word also indicates the write conflict exists in the cluster.
 
-## How to resolve the write-conflict?
+## Resolve write conflicts
 
 If there were many write conflict in the cluster, you can find out the write conflict key and the reason, then try to change the application logic to avoid write conflict. When the write conflict exists in the cluster, you can see the similar log as below in TiDB log file:
 
