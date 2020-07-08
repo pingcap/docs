@@ -13,7 +13,7 @@ TiDB supports the same constraint as MySQL.
 
 NOT NULL constraints supported by TiDB are the same as those supported by MySQL.
 
-For Example：
+For example:
 
 ```sql
 CREATE TABLE users (
