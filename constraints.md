@@ -192,7 +192,7 @@ ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 
 ### Notes
 
-TiDB supports foreign keys in order to avoid errors due to this syntax when migrating other databases to TiDB.
+TiDB supports foreign keys to avoid errors caused by this syntax when you migrate data from other databases to TiDB.
 
 However, TiDB does not perform constraint checking on foreign keys in DML statements. For example, even if there is no record with id=123 in the users table, the following transactions can be submitted successfully.
 
