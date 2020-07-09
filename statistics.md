@@ -2,7 +2,7 @@
 title: Introduction to Statistics
 summary: Learn how the statistics collect table-level and column-level information.
 category: reference
-aliases: ['/docs/dev/reference/performance/statistics/']
+aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 ---
 
 # Introduction to Statistics
@@ -161,15 +161,13 @@ You can view the statistics status using the following statements.
 
 You can use the `SHOW STATS_META` statement to view the total number of rows and the number of updated rows.
 
-Syntax as follows:
+The syntax of `ShowLikeOrWhereOpt` is as follows:
 
 {{< copyable "sql" >}}
 
 ```sql
 SHOW STATS_META [ShowLikeOrWhere]
 ```
-
-This statement returns the total number of all the rows in all the tables and the number of updated rows. You can use `ShowLikeOrWhere` to filter the information you need.
 
 Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
@@ -190,13 +188,13 @@ Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
 You can use the `SHOW STATS_HEALTHY` statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` < `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
 
-The syntax is as follows. You can use `ShowLikeOrWhere` to filter the information you need:
+The synopsis of `SHOW STATS_HEALTHY` is:
 
-{{< copyable "sql" >}}
+![ShowStatsHealthy](/media/sqlgram/ShowStatsHealthy.png)
 
-```sql
-SHOW STATS_HEALTHY [ShowLikeOrWhere];
-```
+and the synopsis of the `ShowLikeOrWhereOpt` part is:
+
+![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 Currently, the `SHOW STATS_HEALTHY` statement returns the following 4 columns:
 
@@ -239,13 +237,17 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 8 columns
 
 You can use the `SHOW STATS_BUCKETS` statement to view each bucket of the histogram.
 
-Syntax as follows:
+The syntax is as follows:
 
 {{< copyable "sql" >}}
 
 ```sql
 SHOW STATS_BUCKETS [ShowLikeOrWhere]
 ```
+
+The diagram is as follows:
+
+![SHOW STATS_BUCKETS](/media/sqlgram/SHOW_STATS_BUCKETS.png)
 
 This statement returns information about all the buckets. You can use `ShowLikeOrWhere` to filter the information you need.
 
@@ -313,3 +315,7 @@ LOAD STATS 'file_name'
 ```
 
 `file_name` is the file name of the statistics to be imported.
+
+## See also
+
+* [DROP STATS](/sql-statements/sql-statement-drop-stats.md)

@@ -2,14 +2,14 @@
 title: TiCDC Overview
 summary: Learn what TiCDC is, what features TiCDC provides, etc.
 category: reference
-aliases: ['/docs/dev/reference/tools/ticdc/overview/']
+aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/overview/']
 ---
 
 # TiCDC Overview
 
 > **Note:**
-> 
-> TiCDC is experimental. It is **not recommended** to use this feature in the production environment.
+>
+> TiCDC is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 [TiCDC](https://github.com/pingcap/ticdc) is a tool for replicating the incremental data of TiDB. This tool is implemented by pulling TiKV change logs. It can restore data to a consistent state with any upstream TSO, and provides [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md) to support other systems to subscribe to data changes.
 
@@ -66,6 +66,10 @@ Currently, The following scenarios are not supported:
 ## Manage TiCDC Cluster and Replication Tasks
 
 For details, see [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md).
+
+## Troubleshoot TiCDC
+
+For details, refer to [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md).
 
 ## TiCDC Open Protocol
 

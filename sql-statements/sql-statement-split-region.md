@@ -2,7 +2,7 @@
 title: Split Region
 summary: An overview of the usage of Split Region for the TiDB database.
 category: reference
-aliases: ['/docs/dev/reference/sql/statements/split-region/']
+aliases: ['/docs/dev/sql-statements/sql-statement-split-region/','/docs/dev/reference/sql/statements/split-region/']
 ---
 
 # Split Region
@@ -12,6 +12,36 @@ For each new table created in TiDB, one Region is segmented by default to store 
 In the above case, because there is only one Region at the beginning, all write requests occur on the TiKV where the Region is located. If there are a large number of writes for the newly created table, hotspots are caused.
 
 To solve the hotspot problem in the above scenario, TiDB introduces the pre-split function, which can pre-split multiple Regions for a certain table according to the specified parameters and scatter them to each TiKV node.
+
+## Synopsis
+
+**SplitRegionStmt:**
+
+![SplitRegionStmt](/media/sqlgram/SplitRegionStmt.png)
+
+**SplitSyntaxOption:**
+
+![SplitSyntaxOption](/media/sqlgram/SplitSyntaxOption.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**PartitionNameListOpt:**
+
+![PartitionNameListOpt](/media/sqlgram/PartitionNameListOpt.png)
+
+**SplitOption:**
+
+![SplitOption](/media/sqlgram/SplitOption.png)
+
+**RowValue:**
+
+![RowValue](/media/sqlgram/RowValue.png)
+
+**Int64Num:**
+
+![Int64Num](/media/sqlgram/Int64Num.png)
 
 ## Usage of Split Region
 

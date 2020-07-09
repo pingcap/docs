@@ -2,12 +2,12 @@
 title: Upgrade TiDB Using TiUP
 summary: Learn how to upgrade TiDB using TiUP.
 category: how-to
-aliases: ['/docs/dev/how-to/upgrade/using-tiup/']
+aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-tiup/']
 ---
 
 # Upgrade TiDB Using TiUP
 
-This document is targeted for users who want to upgrade from TiDB 3.0 versions to TiDB 4.0 versions, or from TiDB 4.0 to a later version.
+This document is targeted for users who want to upgrade from TiDB 3.0 or 3.1 versions to TiDB 4.0 versions, or from TiDB 4.0 to a later version.
 
 If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to import the TiDB Ansible configuration and perform the upgrade.
 
@@ -192,6 +192,10 @@ Starting /home/tidblk/.tiup/components/cluster/v1.0.0/cluster display <cluster-n
 TiDB Cluster: <cluster-name>
 TiDB Version: v4.0.0
 ```
+
+> **Note:**
+>
+> By default, TiUP and TiDB (starting from v4.0.2) share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
 
 ## FAQ
 
