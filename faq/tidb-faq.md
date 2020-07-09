@@ -43,6 +43,8 @@ Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support 
 
 If you use the MySQL 8.0 client and it fails to connect to TiDB, try to add the `default-auth` and `default-character-set` options:
 
+{{< copyable "shell-regular" >}}
+
 ```
 mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
 ```
