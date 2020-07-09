@@ -15,6 +15,8 @@ NOT NULL constraints supported by TiDB are the same as those supported by MySQL.
 
 For example:
 
+{{< copyable "sql" >}}
+
 ```sql
 CREATE TABLE users (
  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -23,18 +25,33 @@ CREATE TABLE users (
 );
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 INSERT INTO users (id,age,last_login) VALUES (NULL,123,NOW());
+```
+
+```
 Query OK, 1 row affected (0.02 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 INSERT INTO users (id,age,last_login) VALUES (NULL,NULL,NOW());
+```
+
+```
 ERROR 1048 (23000): Column 'age' cannot be null
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
+```
+
+```
 Query OK, 1 row affected (0.03 sec)
 ```
 
@@ -44,9 +61,11 @@ Query OK, 1 row affected (0.03 sec)
 
 ## UNIQUE KEY
 
-In TiDB's optimistic transcation mode, UNIQUE constraints are [checked lazily](/transaction-overview.md#lazy-check-of-constraints) by default. By batching checks when the transaction is committed, TiDB can reduce network overhead and improve performance.
+In TiDB's optimistic transaction mode, UNIQUE constraints are [checked lazily](/transaction-overview.md#lazy-check-of-constraints) by default. By batching checks when the transaction is committed, TiDB can reduce network overhead and improve performance.
 
 For example:
+
+{{< copyable "sql" >}}
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -58,29 +77,50 @@ CREATE TABLE users (
 INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 START TRANSACTION;
+```
+
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
+```
+
+```
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 INSERT INTO users (username) VALUES ('steve'),('elizabeth');
+```
+
+```
 Query OK, 2 rows affected (0.00 sec)
 Records: 2  Duplicates: 0  Warnings: 0
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 COMMIT;
+```
+
+```
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ```
 
 The first `INSERT` statement will not cause duplicate key errors, which is consistent with MySQL's rules. This check will be delayed until the transaction is committed.
+
 You can disable this behavior by setting  `tidb_constraint_check_in_place` to  `1`. This variable setting does not take effect on pessimistic transactions, because in the pessimistic transaction mode the constraints are always checked when the statement is executed. If this behavior is disabled, the unique constraint is checked when the statement is executed.
 
 For example:
@@ -95,18 +135,33 @@ CREATE TABLE users (
 INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 SET tidb_constraint_check_in_place = 1;
+```
+
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
+
+{{< copyable "sql" >}}
 
 ```sql
 START TRANSACTION;
+```
+
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
+```
+
+```
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ..
 ```
@@ -117,25 +172,45 @@ The first  `INSERT` statement caused a duplicate key error. This causes addition
 
 Like MySQL, primary key constraints contain unique constraints, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraints of TiDB are also similar to those of MySQL.
 
-For Example
+For example:
+
+{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
+```
+
+```
 Query OK, 0 rows affected (0.12 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 CREATE TABLE t2 (a INT NULL PRIMARY KEY);
+```
+
+```
 ERROR 1171 (42000): All parts of a PRIMARY KEY must be NOT NULL; if you need NULL in a key, use UNIQUE instead
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 CREATE TABLE t3 (a INT NOT NULL PRIMARY KEY, b INT NOT NULL PRIMARY KEY);
+```
+
+```
 ERROR 1068 (42000): Multiple primary key defined
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
+```
+
+```
 Query OK, 0 rows affected (0.10 sec)
 ```
 
@@ -155,9 +230,9 @@ When the add/delete primary key feature is enabled, TiDB allows adding/deleting 
 
 TiDB supports creating `FOREIGN KEY` creation in DDL commands.
 
-For Example
+For example:
 
-```plain
+```sql
 CREATE TABLE users (
  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
  doc JSON
@@ -170,12 +245,14 @@ CREATE TABLE orders (
 );
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 SELECT table_name, column_name, constraint_name, referenced_table_name, referenced_column_name
 FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders');
 ```
 
-```sql
+```
 +------------+-------------+-----------------+-----------------------+------------------------+
 | table_name | column_name | constraint_name | referenced_table_name | referenced_column_name |
 +------------+-------------+-----------------+-----------------------+------------------------+
@@ -188,6 +265,8 @@ FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders')
 
 TiDB also supports the syntax to `DROP FOREIGN KEY` and `ADD FOREIGN KEY` via the `ALTER TABLE` command.
 
+{{< copyable "sql" >}}
+
 ```sql
 ALTER TABLE orders DROP FOREIGN KEY fk_user_id;
 ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
@@ -195,14 +274,14 @@ ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 
 ### Notes
 
-TiDB supports foreign keys to avoid errors caused by this syntax when you migrate data from other databases to TiDB.
+* TiDB supports foreign keys to avoid errors caused by this syntax when you migrate data from other databases to TiDB.
 
-However, TiDB does not perform constraint checking on foreign keys in DML statements. For example, even if there is no record with id=123 in the users table, the following transactions can be submitted successfully.
+    However, TiDB does not perform constraint checking on foreign keys in DML statements. For example, even if there is no record with id=123 in the users table, the following transactions can be submitted successfully.
 
-```sql
-START TRANSACTION;
-INSERT INTO orders (user_id, doc) VALUES (123, NULL);
-COMMIT;
-```
+    ```sql
+    START TRANSACTION;
+    INSERT INTO orders (user_id, doc) VALUES (123, NULL);
+    COMMIT;
+    ```
 
 * TiDB does not display foreign key information in the result of executing the `SHOW CREATE TABLE` statement.

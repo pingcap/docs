@@ -5,29 +5,32 @@ category: reference
 aliases: ['/docs/dev/views/','/docs/dev/reference/sql/views/']
 ---
 
-# views
+# Views
 
-TiDB supports views, A view acts as a virtual table,  It can be created from `SELECT`  statements. On the one hand, Using the view can only expose safe columns and data to users, to ensure the security of sensitive columns and data in the underlying table.
+TiDB supports views. A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view. Using views has the following benefits:
 
-On the other hand, defining complex queries that frequently appear as views can make complex queries simpler and more convenient.
+- Exposing only safe fields and data to users to ensure security of sensitive fields and data stored in the underlying table.
+- Defining complex queries that frequently appear as views to make complex queries easier and more convenient.
 
-## query views
+## Query views
 
-You can query a view in a similar way as you query an actual table. When the query is actually executed, the view is expanded into the SELECT statement defined when the view was created, and then the expanded query statment is executed.
+Querying a view is similar to querying an ordinary table. However, when TiDB queries a view, it actually queries the `SELECT` statement associated with the view.
 
-## metadata of view
+## Show metadata
 
-To obtain metadata about views:
+To obtain the metadata of views, choose any of the following methods.
 
-### use the `SHOW CREATE TABLE view_name` or `SHOW CREATE VIEW view_name` statement
+### Use the `SHOW CREATE TABLE view_name` or `SHOW CREATE VIEW view_name` statement
 
-example：
+Usage example:
+
+{{< copyable "sql" >}}
 
 ```sql
 show create view v;
 ```
 
-This statement shows the `CREATE VIEW` statement that created the named view. And show the value of the `character_set_client` and `collation_connection` system variable when the view was created.
+This statement shows the `CREATE VIEW` statement corresponding to this view and the value of the `character_set_client` and `collation_connection` system variables when the view was created.
 
 ```sql
 +------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
@@ -38,15 +41,17 @@ This statement shows the `CREATE VIEW` statement that created the named view. 
 1 row in set (0.00 sec)
 ```
 
-### query the `INFORMATION_SCHEMA.VIEWS` table
+### Query the `INFORMATION_SCHEMA.VIEWS` table
 
-example:
+Usage example:
+
+{{< copyable "sql" >}}
 
 ```sql
 select * from information_schema.views;
 ```
 
-You can view the relevant meta information of the view by querying the table,  i.e., `TABLE_CATALOG`,`TABLE_SCHEMA`,`TABLE_NAME`,`VIEW_DEFINITION`,`CHECK_OPTION`,`IS_UPDATABLE`,`DEFINER`,`SECURITY_TYPE`,`CHARACTER_SET_CLIENT`,`COLLATION_CONNECTION`
+You can view the relevant meta information of the view by querying this table, such as `TABLE_CATALOG`, `TABLE_SCHEMA`, `TABLE_NAME`, `VIEW_DEFINITION`, `CHECK_OPTION`, `IS_UPDATABLE`, `DEFINER`, `SECURITY_TYPE`, `CHARACTER_SET_CLIENT`, and `COLLATION_CONNECTION`.
 
 ```sql
 +---------------+--------------+------------+------------------------------------------------------------------------+--------------+--------------+----------------+---------------+----------------------+----------------------+
@@ -57,17 +62,19 @@ You can view the relevant meta information of the view by querying the table,  i
 1 row in set (0.00 sec)
 ```
 
-### use the HTTP API
+### Use the HTTP APIs
 
-example:
+Usage example:
+
+{{< copyable "" >}}
 
 ```sql
 curl http://127.0.0.1:10080/schema/test/v
 ```
 
-By visiting `http://{TiDBIP}:10080/schema/{db}/{view}`, you can  get all the meta-information for the view.
+By visiting `http://{TiDBIP}:10080/schema/{db}/{view}`, you can get all the metadata for the view.
 
-```shell
+```
 {
  "id": 122,
  "name": {
@@ -147,40 +154,67 @@ By visiting `http://{TiDBIP}:10080/schema/{db}/{view}`, you can  get all the met
 
 ## Example
 
-The following example will create a view, query the view, and finally delete the view.
+The following example creates a view, queries this view, and delete this view:
+
+{{< copyable "sql" >}}
 
 ```sql
 create table t(a int, b int);
+```
+
+```
 Query OK, 0 rows affected (0.01 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 insert into t values(1, 1),(2,2),(3,3);
+```
+
+```
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 create table s(a int);
+```
+
+```
 Query OK, 0 rows affected (0.01 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 insert into s values(2),(3);
+```
+
+```
 Query OK, 2 rows affected (0.01 sec)
 Records: 2  Duplicates: 0  Warnings: 0
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 create view v as select s.a from t left join s on t.a = s.a;
+```
+
+```
 Query OK, 0 rows affected (0.01 sec)
 ```
+
+{{< copyable "sql" >}}
 
 ```sql
 select * from v;
 ```
 
-```sql
+```
 +------+
 | a    |
 +------+
@@ -191,15 +225,25 @@ select * from v;
 3 rows in set (0.00 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 drop view v;
+```
+
+```
 Query OK, 0 rows affected (0.02 sec)
 ```
 
 ## Limitations
 
- Now views in TiDB are subject to the following limitations:
+Currently, views in TiDB are subject to the following limitations:
 
 * Materialized views are not supported yet.
-* Views in TiDB are read-only and do not support write operations like  `UPDATE`,`INSERT`,`DELETE`,`TRUNCATE` and so on.
-* For created views,  the only supported DDL opertion is `DROP`, i.e., `DROP [VIEW | TABLE]`
+* Views in TiDB are read-only and do not support write operations such as `UPDATE`, `INSERT`, `DELETE`, and `TRUNCATE`.
+* For created views, the only supported DDL operation is `DROP [VIEW | TABLE]`
+
+## See also
+
+- [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
+- [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
