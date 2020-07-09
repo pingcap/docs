@@ -53,7 +53,7 @@ At the bottom layer, TiKV uses a model of replication log + State Machine to rep
 
 #### Does TiDB support distributed transactions?
 
-Yes. TiDB distributes transactions across your cluster, whether it is a few nodes in a single location or many [nodes across multiple datacenters](/geo-redundancy-deployment.md).
+Yes. TiDB distributes transactions across your cluster, whether it is a few nodes in a single location or many [nodes across multiple data centers](/multi-data-centers-in-one-city-deployment.md).
 
 Inspired by Google's Percolator, the transaction model in TiDB is mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign the monotone increasing timestamp for each transaction, so conflicts can be detected. [PD](/architecture.md#placement-driver-server) works as the timestamp allocator in a TiDB cluster.
 
@@ -102,7 +102,7 @@ As a standalone database, MySQL can only implement across-database transactions 
 The display content of TiDB `show processlist` is almost the same as that of MySQL `show processlist`. TiDB `show processlist` does not display the system process ID. The ID that it displays is the current session ID. The differences between TiDB `show processlist` and MySQL `show processlist` are as follows:
 
 - As TiDB is a distributed database, the `tidb-server` instance is a stateless engine for parsing and executing the SQL statements (for details, see [TiDB architecture](/architecture.md)). `show processlist` displays the session list executed in the `tidb-server` instance that the user logs in to from the MySQL client, not the list of all the sessions running in the cluster. But MySQL is a standalone database and its `show processlist` displays all the SQL statements executed in MySQL.
-- TiDB `show processlist` displays the estimated memory usage (unit: Byte) of the current session, which is not displayed in MySQL `show processlist`.
+- The `State` column in TiDB is not continually updated during query execution. As TiDB supports parallel query, each statement may be in multiple _states_ at once, and thus it is difficult to simplify to a single value.
 
 #### How to modify the user password and privilege?
 
@@ -539,7 +539,7 @@ In the communication process between the TiDB server and the TiKV server, the `S
 
 #### What's the maximum number of concurrent connections that TiDB supports?
 
-The current TiDB version has no limit for the maximum number of concurrent connections. If too large concurrency leads to an increase of response time, you can increase the capacity by adding TiDB nodes.
+By default, there is no limit on the maximum number of connections per TiDB server. A limit may be enforced by setting `max-server-connections` in the `config.toml` file. If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
 
 #### How to view the creation time of a table?
 
@@ -1021,7 +1021,7 @@ Recommendations:
 1. Improve the hardware configuration. See [Software and Hardware Requirements](/hardware-and-software-requirements.md).
 2. Improve the concurrency. The default value is 10. You can improve it to 50 and have a try. But usually the improvement is 2-4 times of the default value.
 3. Test the `count` in the case of large amount of data.
-4. Optimize the TiKV configuration. See [Performance Tuning for TiKV](/tune-tikv-performance.md).
+4. Optimize the TiKV configuration. See [Tune TiKV Thread Performance](/tune-tikv-thread-performance.md) and [Tune TiKV Memory Performance](/tune-tikv-memory-performance.md).
 
 #### How to view the progress of the current DDL job?
 
@@ -1051,7 +1051,7 @@ From the above results, you can get that the `add index` operation is being proc
 
 #### Does TiDB support CBO (Cost-Based Optimization)? If yes, to what extent?
 
-Yes. TiDB uses the cost-based optimizer. The cost model and statistics are constantly optimized. TiDB also supports correlation algorithms like hash join and soft merge.
+Yes. TiDB uses the cost-based optimizer. The cost model and statistics are constantly optimized. TiDB also supports join algorithms like hash join and sort-merge join.
 
 #### How to determine whether I need to execute `analyze` on a table?
 
@@ -1085,7 +1085,7 @@ In TiDB, data is divided into Regions for management. Generally, the TiDB hotspo
 
 #### Tune TiKV performance
 
-See [Tune TiKV Performance](/tune-tikv-performance.md).
+See [Tune TiKV Thread Performance](/tune-tikv-thread-performance.md) and [Tune TiKV Memory Performance](/tune-tikv-memory-performance.md).
 
 ## Monitor
 
