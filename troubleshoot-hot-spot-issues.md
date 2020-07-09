@@ -2,8 +2,8 @@
 title: Troubleshoot Hotspot Issues
 summary: Learn how to locate and resolve read or write hotspot issues in TiDB.
 category: troubleshoot
-aliases: ['/docs/dev/troubleshoot-hot-spot-issues/']
 ---
+
 # Troubleshoot Hotspot Issues
 
 This document describes how to locate and resolve the problem of read and write hotspots.
@@ -15,75 +15,87 @@ TiDB provides a complete solution to troubleshooting, resolving or avoiding hots
 
 ## Common hotspots
 
+This section describes TiDB encoding rules, table hotspots, and index hotspots.
+
 ### TiDB encoding rules
 
-TiDB assigns a TableID to each table,Each index is assigned an IndexID, and each row is assigned a RowID (By default, if the table USES an integer Primary Key, the value of the Primary Key is treated as RowID).Among them, TableID is unique in the entire cluster, and IndexID/RowID is unique in the table. These IDs are all int64 types.
+TiDB assigns a TableID to each table, an IndexID to each index, and a RowID to each row. By default, if the table uses an integer primary key, the value of the primary key is treated as the RowID. Among these IDs, TableID is unique in the entire cluster, while IndexID and RowID are unique in the table. The type of all these IDs is int64.
 
-Each row of data is encoded as a key-value pair according to the following rules:
+Each row of data is encoded as a key-value pair according to the following rule:
 
-```text
+```
 Key: tablePrefix{tableID}_recordPrefixSep{rowID}
 Value: [col1, col2, col3, col4]
 ```
 
-The TablePrefix/recordPrefixSep of Key are specific string constants, which are used to distinguish other data in the KV space.
+The `tablePrefix` and `recordPrefixSep` of the key are specific string constants, used to distinguish from other data in the KV space.
 
-For Index data, key-value pair is encoded according to the following rules:
+For Index data, the key-value pair is encoded according to the following rule:
 
-```text
-Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
-Value: null
 ```
+Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
+Value: rowID
+```
+
+Index data has two types: the unique index and the non-unique index.
+
+- For unique indexes, you can follow the coding rules above. 
+- For non-unique indexes, a unique key cannot be constructed through this encoding, because the `tablePrefix{tableID}_indexPrefixSep{indexID}` of the same index is the same and the `ColumnsValue` of multiple rows might be the same. The encoding rule for non-unique indexes is as follows:
+
+    ```
+    Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
+    Value: null
+    ```
 
 ### Table hotspots
 
-From TiDB coding rules, The data of the same table will be in a range prefixed by the beginning of the table id, and the order of the data is arranged in the order of the RowID values. When RowID values are incremented during table insert, The inserted line can only be appended at the end. When the region reaches a certain size, it will split, then it can only be appended at the end of the range range, and can always be insert on one region to form a hot spot.
+According to TiDB coding rules, the data of the same table is in a range prefixed by the beginning of the TableID, and the data is arranged in the order of RowID values. When RowID values are incremented during table inserting, the inserted line can only be appended to the end. The Region will split after it reaches a certain size, and then it still can only be appended to the end of the range. The `INSERT` operation can only be executed on one Region, forming a hotspot.
 
-The common increment type self-increment primary key is the sequential increment, by default, when the primary key is integer type, will use the primary key value as the RowID, at this time the RowID is the sequential increment, in a large number of insert to form writing hot spot of the table.
+The common auto-increment primary key is sequentially increasing. When the primary key is of the integer type, the value of the primary key is used as the RowID by default. At this time, the RowID is sequentially increasing, and a write hotspot of the table forms when a large number of `INSERT` operations exist.
 
-Meanwhile, RowID default in the TiDB is incremented in the order of self-increment. When the primary key is not an integer type, the writing hot spot will also be encountered.
+Meanwhile, the RowID in TiDB is also sequentially auto-incremental by default. When the primary key is not an integer type, you might also encounter the problem of write hotspots.
 
 ### Index hotspots
 
-Index hot spots are similar to table hot spots, and common hot spots appear in fields that are monotonously increasing in time order, or insert scenes with a large number of repeated values.
+Index hotspots are similar to table hotspots. Common index hotspots appear in fields that are monotonously increasing in time order, or `INSERT` scenarios with a large number of repeated values.
 
 ## Identify hotspot issues
 
-Performance problems are not necessarily caused by hot spots, there may be a number of factors together, before checking need to confirm whether it is related to hot spots.
+Performance problems are not necessarily caused by hotspots and might be caused by multiple factors. Before troubleshooting issues, confirm whether it is related to hotspots.
 
-- The basis for judging and writing hot spots:Open the Hot Write panel in the TiKV-Trouble-Shooting of the monitoring panel (as shown in the figure below) to observe whether there is a phenomenon that the index of individual TiKV nodes is significantly higher than that of other nodes in the monitoring Raftstore CPU.
+- To judge write hotspots, open **Hot Write** in the **TiKV-Trouble-Shooting** monitoring panel to check whether the Raftstore CPU metric value of any TiKV node is significantly higher than that of other nodes.
 
-- Read hot spot basis: open the monitor panel TIKV-Details Thread_CPU, see if there is any obvious tikv particularly high.
+- To judge read hotspots, open **Thread_CPU** in the **TiKV-Details** monitoring panel to check whether the coprocessor CPU metric value of any TiKV node is particularly high.
 
 ### Use TiDB Dashboard to locate hotspot tables
 
-The "Key Visualizer" feature in TiDB Dashboard helps users narrow down hot spot screening to table level,  Here is an example of the thermal diagram shown by the Hotspot Visualization function, where the horizontal coordinates are time, and the vertical coordinates arrange tables and indexes, The brighter the color, the greater the flow. You can switch to display read or write traffic in the toolbar.
+The **Key Visualizer** feature in [TiDB Dashboard](/dashboard/dashboard-intro.md) helps users narrow down hotspot troubleshooting scope to the table level. The following is an example of the thermal diagram shown by **Key Visualizer**. The horizontal axis of the graph is time, and the vertical axis are various tables and indexes. The brighter the color, the greater the load. You can switch the read or write flow in the toolbar.
 
 ![Dashboard Example 1](/media/troubleshoot-hot-spot-issues-1.png)
 
-When the following bright slashes (diagonal up or diagonal down) appear in the write flow graph, Since writing only appears at the end, As the number region tables increases, they appear ladder-shaped. This shows that the table constitutes a writing hotspot:
+The following bright diagonal lines (oblique upward or downward) can appear in the write flow graph. Because the write only appears at the end, as the number of table Regions becomes larger, it appears as a ladder. This indicates that a write hotspot shows in this table:
 
 ![Dashboard Example 2](/media/troubleshoot-hot-spot-issues-2.png)
 
-For reading hot spots, a bright horizontal line is generally shown in the thermodynamic diagram, Usually small tables with a large number of accesses, as shown in the figure below:
+For read hotspots, a bright horizontal line is generally shown in the thermal diagram. Usually these are caused by small tables with a large number of accesses, shown as follows:
 
 ![Dashboard Example 3](/media/troubleshoot-hot-spot-issues-3.png)
 
-Move the mouse over the bright block, You can see what table or index has a lot of traffic, for example:
+Hover over the bright block, you can see what table or index has a heavy load. For example:
 
 ![Dashboard Example 4](/media/troubleshoot-hot-spot-issues-4.png)
 
-> [Prior to version 4.0 hot spot location can refer to this document](https://book.tidb.io/session4/chapter7/hotspot-resolved.html)
-
 ## Use `SHARD_ROW_ID_BITS` to process hotspots
 
- When a primary key is non-integer or a table without a primary key or a joint primary key, TiDB use an implicit self-increasing RowID. A large number of writes write a data set to a single Region, resulting in writing hot spots.
+When a primary key is non-integer or a table without a primary key or a joint primary key, TiDB use an implicit self-increasing RowID. A large number of writes write a data set to a single Region, resulting in writing hot spots.
 
- By setting SHARD_ROW_ID_BITS, RowID can be broken out and written to multiple different regions, Alleviate write hot issues. However, excessively large Settings cause the number of RPC requests to be enlarged, increasing CPU and network overhead.
+By setting SHARD_ROW_ID_BITS, RowID can be broken out and written to multiple different regions, Alleviate write hot issues. However, excessively large Settings cause the number of RPC requests to be enlarged, increasing CPU and network overhead.
 
+```
 SHARD_ROW_ID_BITS = 4 represents 16 slices 
 SHARD_ROW_ID_BITS = 6 represents 64 slices 
 SHARD_ROW_ID_BITS = 0 represents the default value of 1 sharding
+```
 
 For example:
 
