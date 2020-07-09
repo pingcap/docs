@@ -8,7 +8,7 @@ category: performance
 
 If you find that the execution speed of some query does not reach the expectation, it might be caused by the wrong usage of indexes.
 
-You can first view the [health state of tables](statistics.md#health-state-of-tables) in the statistics, and then solve this issue according to the different health states.
+You can first view the [health state of tables](/statistics.md#health-state-of-tables) in the statistics, and then solve this issue according to the different health states.
 
 ## Low health state
 
