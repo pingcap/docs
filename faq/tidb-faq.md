@@ -41,7 +41,7 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 
 Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support trigger, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
-When using the MySQL 8.0 client, if it fails to connect to TiDB, try to add the `default-auth` and `default-character-set` options:
+If you use the MySQL 8.0 client and it fails to connect to TiDB, try to add the `default-auth` and `default-character-set` options:
 
 ```
 mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
