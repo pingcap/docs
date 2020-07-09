@@ -7,6 +7,8 @@ aliases: ['/docs/dev/schema-object-names/','/docs/dev/reference/sql/language-str
 
 # Schema Object Names
 
+<!-- markdownlint-disable MD038 -->
+
 This article introduces schema object names in TiDB SQL statements.
 
 Schema object names are used to name all schema objects in TiDB, including database, table, index, column, alias, etc. You can quote these objects by identifiers in SQL statements.
