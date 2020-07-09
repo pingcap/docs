@@ -13,13 +13,13 @@ This document describes how to deploy a TiDB cluster offline using TiUP.
 
 ### Option 1: Download the official TiUP offline component package
 
-Download the prepared offline install package at [Official Download Page](https://pingcap.com/download)
+Download the prepared TiUP offline package from the [Download TiDB](https://pingcap.com/download) page.
 
 ### Option 2: Manually pack an offline component package using `tiup mirror clone`
 
 The steps are below.
 
-- Download the TiUP pacakge manager
+- Install the TiUP package manager online.
 
     1. Install the TiUP tool:
 
@@ -74,7 +74,7 @@ After sending the package to the control machine of the target cluster, install 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tar xzvf tidb-community-server-${version}-linux-amd64.tar.gz &&
+tar xzvf tidb-community-server-${version}-linux-amd64.tar.gz
 sh tidb-community-server-${version}-linux-amd64/local_install.sh
 source /home/tidb/.bash_profile
 ```
