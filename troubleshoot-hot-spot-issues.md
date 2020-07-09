@@ -9,9 +9,11 @@ aliases: ['/docs/dev/troubleshoot-hot-spot-issues/']
 This document describes how to locate and resolve the problem of read and write hotspots.
 
 As a distributed database, TiDB has a load balancing mechanism to distribute the application loads as evenly as possible to different computing or storage nodes, to make better use of server resources.
-However, the mechanism is not omnipotent. In some scenarios, some business loads may not be well dispersed, affecting performance, forming a single point of high load, and causing hot spots.
+However, in certain scenarios, some application loads cannot be well distributed, which can affect the performance and form a single point of high load, also known as a hotspot.
 
-## Common hot spots
+TiDB provides a complete solution to troubleshooting, resolving or avoiding hotspots. By balancing load hotspots, overall performance can be improved, including improving QPS and reducing latency.
+
+## Common hotspots
 
 ### TiDB encoding rules
 
@@ -33,7 +35,7 @@ Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
 Value: null
 ```
 
-### Table of hot spots
+### Table hotspots
 
 From TiDB coding rules, The data of the same table will be in a range prefixed by the beginning of the table id, and the order of the data is arranged in the order of the RowID values. When RowID values are incremented during table insert, The inserted line can only be appended at the end. When the region reaches a certain size, it will split, then it can only be appended at the end of the range range, and can always be insert on one region to form a hot spot.
 
@@ -41,7 +43,7 @@ The common increment type self-increment primary key is the sequential increment
 
 Meanwhile, RowID default in the TiDB is incremented in the order of self-increment. When the primary key is not an integer type, the writing hot spot will also be encountered.
 
-### Index hot spots
+### Index hotspots
 
 Index hot spots are similar to table hot spots, and common hot spots appear in fields that are monotonously increasing in time order, or insert scenes with a large number of repeated values.
 
