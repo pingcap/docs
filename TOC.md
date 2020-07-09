@@ -8,7 +8,7 @@
 + About TiDB
   + [TiDB Introduction](/overview.md)
   + [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
-  + [Key Features](/key-features.md)
+  + [Basic Features](/basic-features.md)
   + Compatibility
     + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
@@ -67,6 +67,7 @@
       + [Use BR Tool](/br/backup-and-restore-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
+  + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -88,9 +89,13 @@
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
 + Performance Tuning
+  + System Tuning
+    + [Operating System Tuning](/tune-operating-system.md)
   + Software Tuning
     + Configuration
-      + [TiKV Tuning](/tune-tikv-performance.md)
+      + [Tune TiDB Memory](/configure-memory-usage.md)
+      + [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+      + [Tune TiKV Memory](/tune-tikv-memory-performance.md)
       + [TiKV Follower Read](/follower-read.md)
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
@@ -108,7 +113,8 @@
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
 + Tutorials
-  + [Geo-Redundant Deployment](/geo-redundancy-deployment.md)
+  + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
+  + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
   + Best Practices
     + [Use TiDB](/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
@@ -118,6 +124,8 @@
     + [PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
     + [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   + [Use Placement Rules](/configure-placement-rules.md)
+  + [Use Load Base Split](/configure-load-base-split.md)
+  + [Use Store Limit](/configure-store-limit.md)
 + TiDB Ecosystem Tools
   + [Overview](/ecosystem-tool-user-guide.md)
   + [Use Cases](/ecosystem-tool-user-case.md)
@@ -152,7 +160,7 @@
     + [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     + Key Features
       + [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
-      + [Table Filter](/tidb-lightning/tidb-lightning-table-filter.md)
+      + [Table Filter](/table-filter.md)
       + [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       + [TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md)
       + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -198,7 +206,7 @@
         + [AUTO_RANDOM](/auto-random.md)
       + [Literal Values](/literal-values.md)
       + [Schema Object Names](/schema-object-names.md)
-      + [Keywords and Reserved Words](/keywords-and-reserved-words.md)
+      + [Keywords and Reserved Words](/keywords.md)
       + [User-Defined Variables](/user-defined-variables.md)
       + [Expression Syntax](/expression-syntax.md)
       + [Comment Syntax](/comment-syntax.md)
@@ -207,6 +215,7 @@
       + [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       + [`ADMIN`](/sql-statements/sql-statement-admin.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
+      + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       + [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       + [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
@@ -220,6 +229,7 @@
       + [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)
       + [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
       + [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
+      + [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
       + [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
       + [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)
       + [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
@@ -234,8 +244,9 @@
       + [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
       + [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
       + [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
+      + [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
       + [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)
-      - [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)
+      + [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)
       + [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)
       + [`DROP USER`](/sql-statements/sql-statement-drop-user.md)
       + [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)
@@ -247,6 +258,7 @@
       + [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
       + [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)
       + [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+      + [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
       + [`INSERT`](/sql-statements/sql-statement-insert.md)
       + [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
       + [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
@@ -259,6 +271,7 @@
       + [`REPLACE`](/sql-statements/sql-statement-replace.md)
       + [`RESTORE`](/sql-statements/sql-statement-restore.md)
       + [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+      + [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
       + [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
       + [`SELECT`](/sql-statements/sql-statement-select.md)
       + [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
@@ -279,6 +292,7 @@
       + [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
       + [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
       + [`SHOW DRAINER STATUS`](/sql-statements/sql-statement-show-drainer-status.md)
+      + [`SHOW DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       + [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
       + [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
       + [`SHOW [FULL] FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
@@ -407,18 +421,23 @@
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
-      + [FAQ](/tiflash/tiflash-faq.md)
   + TiUP
+    + [Documentation Guide](/tiup/tiup-documentation-guide.md)
     + [Overview](/tiup/tiup-overview.md)
-    + [Manage TiUP Components](/tiup/manage-tiup-component.md)
+    + [Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md)
+    + [Manage TiUP Components](/tiup/tiup-component-management.md)
+    + [FAQ](/tiup/tiup-faq.md)
+    + [Troubleshooting Guide](/tiup/tiup-troubleshooting-guide.md)
     + TiUP Components
       + [tiup-playground](/tiup/tiup-playground.md)
       + [tiup-cluster](/tiup/tiup-cluster.md)
-      + [tiup-mirror](/tiup/tiup-mirrors.md)
+      + [tiup-mirror](/tiup/tiup-mirror.md)
       + [tiup-bench](/tiup/tiup-bench.md)
+  + [Telemetry](/telemetry.md)
   + [Errors Codes](/error-codes.md)
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+  + [Table Filter](/table-filter.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
@@ -427,6 +446,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.2](/releases/release-4.0.2.md)
     + [4.0.1](/releases/release-4.0.1.md)
     + [4.0 GA](/releases/release-4.0-ga.md)
     + [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
@@ -444,6 +464,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.16](/releases/release-3.0.16.md)
     + [3.0.15](/releases/release-3.0.15.md)
     + [3.0.14](/releases/release-3.0.14.md)
     + [3.0.13](/releases/release-3.0.13.md)
