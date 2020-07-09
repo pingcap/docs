@@ -49,7 +49,7 @@ If you use the MySQL 8.0 client and it fails to connect to TiDB, try to add the 
 mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
 ```
 
-This problem is caused by charset and [authentication scheme related compatibility](/security-compatibility-with-mysql.md).
+This problem occurs because MySQL 8.0 changes the [authentication plugin](/security-compatibility-with-mysql.md) default in MySQL 5.7. To solve this problem, you need to add the options above to specify using the old encryption method.
 
 #### How is TiDB highly available?
 
