@@ -45,6 +45,8 @@ If you use the MySQL 8.0 client and it fails to connect to TiDB, try to add the 
 
 {{< copyable "shell-regular" >}}
 
+{{< copyable "shell-regular" >}}
+
 ```shell
 mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
 ```
