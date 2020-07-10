@@ -229,25 +229,27 @@ tidb-ctl base64decode [table_id] [base64_data]
     e not found in data
     ```
 
-#### The `decoder` subcommand
+### The `decoder` command
 
 - The following example shows how to decode the row key, similar to decoding the index key.
 
     ```shell
-    $ ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
-    table_id: -9223372036854775780
-    row_id: -9223372036854775558
+    $ ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
+    format: table_row
+    table_id: -9223372036854775780      table_id: -9223372036854775780
+    row_id: -9223372036854775558        row_id: -9223372036854775558
     ```
 
 - The following example shows how to decode `value`.
 
     ```shell
-    $ ./tidb-ctl decoder -f value -k AhZoZWxsbyB3b3JsZAiAEA==
-    type: bytes, value: hello world
-    type: bigint, value: 1024
+    $ ./tidb-ctl decoder AhZoZWxsbyB3b3JsZAiAEA==
+    format: index_value
+    type: bigint, value: 1024       index_value[0]: {type: bytes, value: hello world}
+    index_value[1]: {type: bigint, value: 1024}
     ```
 
-#### The `etcd` subcommand
+### The `etcd` command
 
 - `tidb-ctl etcd ddlinfo` is used to obtain DDL information.
 - `tidb-ctl etcd putkey KEY VALUE` is used to add KEY VALUE to etcd (All the KEYs are added to the `/tidb/ddl/all_schema_versions/` directory).
@@ -265,11 +267,11 @@ tidb-ctl base64decode [table_id] [base64_data]
     tidb-ctl etcd delkey "/tidb/ddl/all_schema_versions/bar"
     ```
 
-#### The `log` subcommand
+### The `log` command
 
 The stack information for the TiDB error log is in one line format. You could use `tidb-ctl log` to change its format to multiple lines.
 
-#### The `keyrange` subcommand
+### The `keyrange` command
 
 The `keyrange` subcommand is used to query the global or table-related key range information, which is output in the hexadecimal form.
 
