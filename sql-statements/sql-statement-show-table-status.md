@@ -1,7 +1,6 @@
 ---
 title: SHOW TABLE STATUS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW TABLE STATUS for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-show-table-status/','/docs/v4.0/sql-statements/sql-statement-show-table-status/','/docs/stable/reference/sql/statements/show-table-status/']
 ---
 

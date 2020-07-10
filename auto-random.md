@@ -1,7 +1,6 @@
 ---
 title: AUTO_RANDOM
 summary: Learn the AUTO_RANDOM attribute.
-category: reference
 aliases: ['/docs/stable/auto-random/','/docs/v4.0/auto-random/','/docs/stable/reference/sql/attributes/auto-random/']
 ---
 

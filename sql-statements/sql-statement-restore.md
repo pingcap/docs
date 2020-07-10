@@ -1,7 +1,6 @@
 ---
 title: RESTORE | TiDB SQL Statement Reference
 summary: An overview of the usage of RESTORE for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-restore/','/docs/v4.0/sql-statements/sql-statement-restore/']
 ---
 

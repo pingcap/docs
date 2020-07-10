@@ -1,7 +1,6 @@
 ---
 title: Precision Math
 summary: Learn about the precision math in TiDB.
-category: reference
 aliases: ['/docs/stable/functions-and-operators/precision-math/','/docs/v4.0/functions-and-operators/precision-math/','/docs/stable/reference/sql/functions-and-operators/precision-math/']
 ---
 

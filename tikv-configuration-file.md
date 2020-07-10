@@ -1,7 +1,6 @@
 ﻿---
 title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
-category: reference
 aliases: ['/docs/stable/tikv-configuration-file/','/docs/v4.0/tikv-configuration-file/','/docs/stable/reference/configuration/tikv-server/configuration-file/']
 ---
 

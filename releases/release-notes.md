@@ -1,6 +1,5 @@
 ---
 title: Release Notes
-category: release
 aliases: ['/docs/stable/releases/release-notes/','/docs/v4.0/releases/release-notes/','/docs/stable/releases/rn/']
 ---
 

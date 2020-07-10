@@ -1,7 +1,6 @@
 ---
 title: CREATE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE TABLE for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-create-table/','/docs/v4.0/sql-statements/sql-statement-create-table/','/docs/stable/reference/sql/statements/create-table/']
 ---
 

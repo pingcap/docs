@@ -1,7 +1,6 @@
 ---
 title: SHOW SCHEMAS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW SCHEMAS for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-show-schemas/','/docs/v4.0/sql-statements/sql-statement-show-schemas/','/docs/stable/reference/sql/statements/show-schemas/']
 ---
 

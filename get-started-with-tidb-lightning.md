@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Tutorial
 summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
-category: how-to
 aliases: ['/docs/stable/get-started-with-tidb-lightning/','/docs/v4.0/get-started-with-tidb-lightning/','/docs/stable/how-to/get-started/tidb-lightning/']
 ---
 

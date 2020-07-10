@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard Log Search Page
 summary: Learn how to search logs of all nodes using the log search page of TiDB Dashboard.
-category: how-to
 aliases: ['/docs/stable/dashboard/dashboard-log-search/','/docs/v4.0/dashboard/dashboard-log-search/']
 ---
 

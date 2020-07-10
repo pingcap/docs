@@ -1,7 +1,6 @@
 ---
 title: INSPECTION_SUMMARY
 summary: Learn the `INSPECTION_SUMMARY` inspection summary table.
-category: reference
 aliases: ['/docs/stable/system-tables/system-table-inspection-summary/','/docs/v4.0/system-tables/system-table-inspection-summary/','/docs/stable/reference/system-databases/inspection-summary/']
 ---
 

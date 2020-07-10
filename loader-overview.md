@@ -1,7 +1,6 @@
 ---
 title: Loader Instructions
 summary: Use Loader to load data to TiDB.
-category: reference
 aliases: ['/docs/stable/loader-overview/','/docs/v4.0/loader-overview/','/docs/stable/reference/tools/loader/']
 ---
 

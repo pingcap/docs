@@ -1,7 +1,6 @@
 ---
 title: Manage TiCDC Cluster and Replication Tasks
 summary: Learn how to manage a TiCDC cluster and replication tasks.
-category: reference
 aliases: ['/docs/stable/ticdc/manage-ticdc/','/docs/v4.0/ticdc/manage-ticdc/','/docs/stable/reference/tools/ticdc/manage/']
 ---
 
