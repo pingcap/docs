@@ -70,7 +70,7 @@ Similar to MySQL, TiDB supports a variant of C comment style:
 /*! Specific code */
 ```
 
-The same as MySQL, TiDB runs the statements in the comment.
+In this comment style, TiDB runs the statements in the comment. The syntax is used to make these SQL statements ignored in other databases and run only in TiDB.
 
 For example:
 
@@ -84,12 +84,7 @@ In TiDB, you can also use another version:
 SELECT STRAIGHT_JOIN col1 FROM table1,table2 WHERE ...
 ```
 
-If the server version number is specified in the comment, for example, `/*!50110 KEY_BLOCK_SIZE=1024 */`, in MySQL it means that the contents in this comment is processed only when the MySQL version is or higher than 5.1.10. But in TiDB, the MySQL version number does not work and all contents in the comment are processed. 
-
-TiDB has its own comment syntax for the version number， which can be divided into the following two types:
-
-* `/*T! Specific code */`: This syntax can only be parsed and executed by TiDB, and be ignored in other databases.
-* `/*T![feature_id] Specific code */`: This syntax is used to ensure compatibility between different versions of TiDB. TiDB can parse the SQL fragment in this comment only if it implements the  corresponding feature of `feature_id` in the current version. For example, as the `AUTO_RANDOM` feature is introduced in v3.1.1, this version can parse `/*T![auto_rand] auto_random */` into `auto_random`. While the `AUTO_RANDOM` feature is not implemented in v3.0.0, the SQL statement fragment above is ignored.
+If the server version number is specified in the comment, for example, `/*!50110 KEY_BLOCK_SIZE=1024 */`, in MySQL it means that the contents in this comment is processed only when the MySQL version is or higher than 5.1.10. But in TiDB, the MySQL version number does not work and all contents in the comment are processed. TiDB has its own comment syntax for the version number. The format of this syntax is `/*T!30100 XXX */`.
 
 Another type of comment is specially treated as the Hint optimizer:
 
