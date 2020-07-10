@@ -5,37 +5,8 @@
 
 ## Documentation List
 
-<<<<<<< HEAD
 + Introduction
   - [TiDB Introduction](/overview.md)
-=======
-+ About TiDB
-  + [TiDB Introduction](/overview.md)
-  + [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
-  + [Basic Features](/basic-features.md)
-  + [MySQL Compatibility](/mysql-compatibility.md)
-  + [TiDB Limitations](/tidb-limitations.md)
-+ Quick Start
-  + [Try Out TiDB](/quick-start-with-tidb.md)
-  + [Learn TiDB SQL](/basic-sql-operations.md)
-+ Deploy
-  + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
-  + [Environment Configuration Checklist](/check-before-deployment.md)
-  + Topology Patterns
-    + [Minimal Topology](/minimal-deployment-topology.md)
-    + [TiFlash Topology](/tiflash-deployment-topology.md)
-    + [TiCDC Topology](/ticdc-deployment-topology.md)
-    + [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
-    + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
-    + [Hybrid Topology](/hybrid-deployment-topology.md)
-  + Install and Start
-    + Linux OS
-      + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
-      + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
-      + [Use TiDB Ansible](/online-deployment-using-ansible.md)
-      + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
-  + [Verify Cluster Status](/post-installation-check.md)
->>>>>>> ab766b1... sql-mode: update compatibility (#3192)
   + Benchmarks
     - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
