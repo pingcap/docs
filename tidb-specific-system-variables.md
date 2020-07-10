@@ -609,7 +609,6 @@ set tidb_query_log_max_len = 20
 - After this switch is enabled, if an isolation level not supported by TiDB is assigned to `tx_isolation`, no error will be reported.
 
 ### tidb_low_resolution_tso
-
 - Scope:SESSION
 - Default value:0
 - This variable is used to set whether to enable the low precision tso feature. After this feature is enabled, new transactions will use a ts updated every 2s to read data
