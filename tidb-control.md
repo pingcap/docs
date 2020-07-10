@@ -47,7 +47,7 @@ Currently, TiDB Control has the following subcommands:
 - `tidb-ctl etcd`: for operating etcd
 - `tidb-ctl log`: used to format the log file to expand the single-line stack information
 - `tidb-ctl mvcc`: used to get the MVCC information
-- `tidb-ctl region`: used to get the region information
+- `tidb-ctl region`: used to get the Region information
 - `tidb-ctl schema`: used to get the schema information
 - `tidb-ctl table`: used to get the table information
 
