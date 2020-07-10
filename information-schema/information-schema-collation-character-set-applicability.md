@@ -1,7 +1,6 @@
 ---
 title: COLLATION_CHARACTER_SET_APPLICABILITY
 summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` information_schema table.
-category: reference
 ---
 
 # COLLATION_CHARACTER_SET_APPLICABILITY

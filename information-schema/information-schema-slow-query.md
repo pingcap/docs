@@ -1,7 +1,6 @@
 ---
 title: SLOW_QUERY
 summary: Learn the `SLOW_QUERY` information_schema table.
-category: reference
 ---
 
 # SLOW_QUERY

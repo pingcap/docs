@@ -1,7 +1,6 @@
 ---
 title: SEQUENCES
 summary: Learn the `SEQUENCES` information_schema table.
-category: reference
 ---
 
 # SEQUENCES

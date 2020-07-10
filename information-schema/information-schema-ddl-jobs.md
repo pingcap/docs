@@ -1,7 +1,6 @@
 ---
 title: DDL_JOBS
 summary: Learn the `DDL_JOBS` information_schema table.
-category: reference
 ---
 
 # DDL_JOBS

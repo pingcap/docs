@@ -1,7 +1,6 @@
 ---
 title: COLUMNS
 summary: Learn the `COLUMNS` information_schema table.
-category: reference
 ---
 
 # COLUMNS

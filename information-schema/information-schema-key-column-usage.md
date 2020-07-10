@@ -1,7 +1,6 @@
 ---
 title: KEY_COLUMN_USAGE
 summary: Learn the `KEY_COLUMN_USAGE` information_schema table.
-category: reference
 ---
 
 # KEY_COLUMN_USAGE

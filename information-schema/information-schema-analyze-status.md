@@ -1,7 +1,6 @@
 ---
 title: ANALYZE_STATUS
 summary: Learn the `ANALYZE_STATUS` information_schema table.
-category: reference
 ---
 
 # ANALYZE_STATUS

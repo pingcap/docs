@@ -1,7 +1,6 @@
 ---
 title: SCHEMATA
 summary: Learn the `SCHEMATA` information_schema table.
-category: reference
 ---
 
 # SCHEMATA

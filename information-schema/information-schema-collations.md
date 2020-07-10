@@ -1,7 +1,6 @@
 ---
 title: COLLATIONS
 summary: Learn the `COLLATIONS` information_schema table.
-category: reference
 ---
 
 # COLLATIONS

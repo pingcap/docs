@@ -1,7 +1,6 @@
 ---
 title: PROCESSLIST
 summary: Learn the `PROCESSLIST` information_schema table.
-category: reference
 ---
 
 # PROCESSLIST

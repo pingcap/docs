@@ -1,7 +1,6 @@
 ---
 title: TIKV_STORE_STATUS
 summary: Learn the `TIKV_STORE_STATUS` information_schema table.
-category: reference
 ---
 
 # TIKV_STORE_STATUS

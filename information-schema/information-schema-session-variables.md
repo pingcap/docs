@@ -1,7 +1,6 @@
 ---
 title: SESSION_VARIABLES
 summary: Learn the `SESSION_VARIABLES` information_schema table.
-category: reference
 ---
 
 # SESSION_VARIABLES

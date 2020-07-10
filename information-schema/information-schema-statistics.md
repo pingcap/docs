@@ -1,7 +1,6 @@
 ---
 title: STATISTICS
 summary: Learn the `STATISTICS` information_schema table.
-category: reference
 ---
 
 # STATISTICS

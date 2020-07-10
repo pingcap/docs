@@ -1,7 +1,6 @@
 ---
 title: INSPECTION_RULES
 summary: Learn the `INSPECTION_RULES` information_schema table.
-category: reference
 ---
 
 # INSPECTION_RULES

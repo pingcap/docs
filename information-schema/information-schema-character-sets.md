@@ -1,7 +1,6 @@
 ---
 title: CHARACTER_SETS
 summary: Learn the `CHARACTER_SETS` information_schema table.
-category: reference
 ---
 
 # CHARACTER_SETS

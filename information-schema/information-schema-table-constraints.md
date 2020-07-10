@@ -1,7 +1,6 @@
 ---
 title: TABLE_CONSTRAINTS
 summary: Learn the `TABLE_CONSTRAINTS` information_schema table.
-category: reference
 ---
 
 # TABLE_CONSTRAINTS

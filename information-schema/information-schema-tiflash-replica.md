@@ -1,7 +1,6 @@
 ---
 title: TIFLASH_REPLICA
 summary: Learn the `TIFLASH_REPLICA` information_schema table.
-category: reference
 ---
 
 # TIFLASH_REPLICA

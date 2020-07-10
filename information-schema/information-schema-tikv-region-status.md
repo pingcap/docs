@@ -1,7 +1,6 @@
 ---
 title: TIKV_REGION_STATUS
 summary: Learn the `TIKV_REGION_STATUS` information_schema table.
-category: reference
 ---
 
 # TIKV_REGION_STATUS

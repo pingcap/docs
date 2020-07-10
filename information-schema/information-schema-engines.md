@@ -1,7 +1,6 @@
 ---
 title: ENGINES
 summary: Learn the `ENGINES` information_schema table.
-category: reference
 ---
 
 # ENGINES

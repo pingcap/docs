@@ -1,7 +1,6 @@
 ---
 title: TABLE_STORAGE_STATS
 summary: Learn the `TABLE_STORAGE_STATS` information_schema table.
-category: reference
 ---
 
 # TABLE_STORAGE_STATS

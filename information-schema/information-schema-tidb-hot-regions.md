@@ -1,7 +1,6 @@
 ---
 title: TIDB_HOT_REGIONS
 summary: Learn the `TIDB_HOT_REGIONS` information_schema table.
-category: reference
 ---
 
 # TIDB_HOT_REGIONS

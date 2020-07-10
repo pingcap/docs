@@ -1,7 +1,6 @@
 ---
 title: TIDB_INDEXES
 summary: Learn the `TIDB_INDEXES` information_schema table.
-category: reference
 ---
 
 # TIDB_INDEXES

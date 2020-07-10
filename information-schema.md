@@ -1,7 +1,6 @@
 ---
 title: Information Schema
 summary: TiDB implements the ANSI-standard information_schema for viewing system metadata.
-category: reference
 aliases: ['/docs/dev/information-schema/information-schema-information-schema/','/docs/dev/reference/system-databases/information-schema/','/tidb/dev/system-table-information-schema/']
 ---
 

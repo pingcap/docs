@@ -1,7 +1,6 @@
 ---
 title: TABLES
 summary: Learn the `TABLES` information_schema table.
-category: reference
 ---
 
 # TABLES

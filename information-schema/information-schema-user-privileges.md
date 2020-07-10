@@ -1,7 +1,6 @@
 ---
 title: USER_PRIVILEGES
 summary: Learn the `USER_PRIVILEGES` information_schema table.
-category: reference
 ---
 
 # USER_PRIVILEGES

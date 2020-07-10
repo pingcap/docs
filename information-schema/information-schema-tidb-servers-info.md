@@ -1,7 +1,6 @@
 ---
 title: TIDB_SERVERS_INFO
 summary: Learn the `TIDB_SERVERS_INFO` information_schema table.
-category: reference
 ---
 
 # TIDB_SERVERS_INFO
