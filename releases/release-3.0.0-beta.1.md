@@ -1,6 +1,5 @@
 ---
 title: TiDB 3.0.0 Beta.1 Release Notes
-category: Releases
 aliases: ['/docs/v3.0/releases/release-3.0.0-beta.1/','/docs/v3.0/releases/3.0.0-beta.1/','/docs/releases/3.0.0-beta.1/']
 ---
 

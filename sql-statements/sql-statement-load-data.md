@@ -1,7 +1,6 @@
 ---
 title: LOAD DATA | TiDB SQL Statement Reference
 summary: An overview of the usage of LOAD DATA for the TiDB database.
-category: reference
 aliases: ['/docs/v3.0/sql-statements/sql-statement-load-data/','/docs/v3.0/reference/sql/statements/load-data/']
 ---
 

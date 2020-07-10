@@ -1,7 +1,6 @@
 ---
 title: Partitioning
 summary: Learn how to use partitioning in TiDB.
-category: reference
 aliases: ['/docs/v3.0/partitioned-table/','/docs/v3.0/reference/sql/partitioning/']
 ---
 

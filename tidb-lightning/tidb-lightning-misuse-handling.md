@@ -1,6 +1,5 @@
 ---
 title: Common Misuses of TiDB Lightning
-category: reference
 aliases: ['/docs/v3.0/tidb-lightning/tidb-lightning-misuse-handling/','/docs/v3.0/reference/tools/error-case-handling/lightning-misuse-handling/']
 ---
 

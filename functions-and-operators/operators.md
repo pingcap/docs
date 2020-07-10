@@ -1,7 +1,6 @@
 ---
 title: Operators
 summary: Learn about the operators precedence, comparison functions and operators, logical operators, and assignment operators.
-category: reference
 aliases: ['/docs/v3.0/functions-and-operators/operators/','/docs/v3.0/reference/sql/functions-and-operators/operators/','/docs/sql/operators/']
 ---
 
