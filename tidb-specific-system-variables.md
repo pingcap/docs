@@ -365,6 +365,21 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: 0
 - This variable is used to set whether to allow `insert`, `replace` and `update` statements to operate on the column `_tidb_rowid`. It is not allowed by default. This variable can be used only when importing data with TiDB tools.
 
+## SHARD_ROW_ID_BITS
+
+For the tables with non-integer PK or without PK, TiDB uses an implicit auto-increment ROW ID. When a large number of `INSERT` operations occur, the data is written into a single Region, causing a write hot spot.
+
+To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The ROW ID is scattered and the data is written into multiple different Regions. But setting an overlarge value might lead to an excessively large number of RPC requests, which increases the CPU and network overheads.
+
+- `SHARD_ROW_ID_BITS = 4` indicates 16 shards
+- `SHARD_ROW_ID_BITS = 6` indicates 64 shards
+- `SHARD_ROW_ID_BITS = 0` indicates the default 1 shard
+
+Usage of statements:
+
+- `CREATE TABLE`: `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
+- `ALTER TABLE`: `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`
+
 ### tidb_row_format_version
 
 - Scope: GLOBAL
