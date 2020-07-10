@@ -650,19 +650,19 @@ set tidb_query_log_max_len = 20
 ### tidb_evolve_plan_task_max_time <span class="version-mark">New in v4.0</span>
 
 - Scope: GLOBAL
-- Default value:600
+- Default value: 600
 - This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature. The unit is second.
 
 ### tidb_evolve_plan_task_start_time <span class="version-mark">New in v4.0</span>
 
 - Scope: GLOBAL
-- Default value:00:00 +0000
+- Default value: 00:00 +0000
 - This variable is used to set the start time of baseline evolution in a day.
 
 ### tidb_evolve_plan_task_end_time <span class="version-mark">New in v4.0</span>
 
 - Scope: GLOBAL
-- Default value:23:59 +0000
+- Default value: 23:59 +0000
 - This variable is used to set the end time of baseline evolution in a day.
 
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0 version</span>
