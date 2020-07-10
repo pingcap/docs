@@ -11,7 +11,7 @@ TiDB Control is a command-line tool of TiDB, usually used to obtain the status i
 
 ## Get TiDB Control
 
-You can get TiDB Control using the following two methods.
+You can get TiDB Control by installing it using TiUP or by compiling it from source code.
 
 ### Install TiDB Control using TiUP
 
