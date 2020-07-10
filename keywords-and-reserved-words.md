@@ -1,7 +1,6 @@
 ---
 title: Keywords and Reserved Words
 summary: Learn about the keywords and reserved words in TiDB.
-category: reference
 aliases: ['/docs/v2.1/keywords-and-reserved-words/','/docs/v2.1/reference/sql/language-structure/keywords-and-reserved-words/']
 ---
 

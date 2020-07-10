@@ -1,7 +1,6 @@
 ---
 title: TiDB Cluster Alert Rules
 summary: Learn the alert rules in a TiDB cluster.
-category: reference
 aliases: ['/docs/v2.1/alert-rules/','/docs/v2.1/reference/alert-rules/']
 ---
 

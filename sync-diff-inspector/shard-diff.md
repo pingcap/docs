@@ -1,7 +1,6 @@
 ---
 title: Data Check in the Sharding Scenario
 summary: Learn the data check in the sharding scenario.
-category: tools
 aliases: ['/docs/v2.1/sync-diff-inspector/shard-diff/','/docs/v2.1/reference/tools/sync-diff-inspector/shard-diff/']
 ---
 

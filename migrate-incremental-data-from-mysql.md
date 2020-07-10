@@ -1,7 +1,6 @@
 ---
 title: Migrate Incrementally Using Syncer
 summary: Use `mydumper`, `loader` and `syncer` tools to migrate data from MySQL to TiDB.
-category: how-to
 aliases: ['/docs/v2.1/migrate-incremental-data-from-mysql/','/docs/v2.1/how-to/migrate/incrementally-from-mysql/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Connect with us
 summary: Learn about how to connect with us.
-category: community
 aliases: ['/docs/v2.1/community/']
 ---
 

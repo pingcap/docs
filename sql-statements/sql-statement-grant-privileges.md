@@ -1,7 +1,6 @@
 ---
 title: GRANT <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of GRANT <privileges> for the TiDB database.
-category: reference
 aliases: ['/docs/v2.1/sql-statements/sql-statement-grant-privileges/','/docs/v2.1/reference/sql/statements/grant-privileges/']
 ---
 

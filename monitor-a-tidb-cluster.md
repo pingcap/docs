@@ -1,7 +1,6 @@
 ---
 title: Monitor a TiDB Cluster
 summary: Learn how to monitor the state of a TiDB cluster.
-category: how-to
 aliases: ['/docs/v2.1/monitor-a-tidb-cluster/','/docs/v2.1/how-to/monitor/monitor-a-cluster/']
 ---
 
