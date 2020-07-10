@@ -307,9 +307,9 @@ mysql> desc select count(distinct a) from test.t;
 - Scope: SESSION | GLOBAL
 - Default value: "on"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
-    - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
-    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
-    - `auto` functions the same way as `on` does.
+  - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+  - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
+  - `auto` functions the same way as `on` does.
 
 - Currently, TiDB only supports range partition and hash partition.
 
@@ -330,8 +330,8 @@ mysql> desc select count(distinct a) from test.t;
 - Scope: GLOBAL
 - Default value: 256
 - This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
-    - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
-    - If the transaction conflict does not exist, you can set the batch size to a large value. The maximum value is 10240. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
+  - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
+  - If the transaction conflict does not exist, you can set the batch size to a large value. The maximum value is 10240. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
 
 ### tidb_ddl_reorg_priority
 
@@ -423,27 +423,26 @@ set tidb_query_log_max_len = 20
 - Default value: 0
 - TiDB supports the optimistic transaction model. This means that conflict check (unique key check) is performed when the transaction is committed. This variable is used to set whether to do a unique key check each time a row of data is written.
 - If this variable is enabled, the performance might be affected in a scenario where a large batch of data is written. For example:
+  - When this variable is disabled:
 
-    - When this variable is disabled:
+    ```sql
+    tidb >create table t (i int key)
+    tidb >insert into t values (1);
+    tidb >begin
+    tidb >insert into t values (1);
+    Query OK, 1 row affected
+    tidb >commit; -- Check only when a transaction is committed.
+    ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+     ```
 
-        ```sql
-        tidb >create table t (i int key)
-        tidb >insert into t values (1);
-        tidb >begin
-        tidb >insert into t values (1);
-        Query OK, 1 row affected
-        tidb >commit; -- Check only when a transaction is committed.
-        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
-        ```
+  - After this variable is enabled:
 
-    - After this variable is enabled:
-
-        ```sql
-        tidb >set @@tidb_constraint_check_in_place=1
-        tidb >begin
-        tidb >insert into t values (1);
-        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
-        ```
+    ```sql
+    tidb >set @@tidb_constraint_check_in_place=1
+    tidb >begin
+    tidb >insert into t values (1);
+    ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+     ```
 
 ### tidb_check_mb4_value_in_utf8
 
@@ -486,10 +485,10 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL
 - Default value: 1
 - When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.
-    - When the value is 0, the heuristic method is not used.
-    - When the value is greater than 0:
-        - A larger value indicates that an index scan will probably be used in the heuristic method.
-        - A smaller value indicates that a table scan will probably be used in the heuristic method.
+  - When the value is 0, the heuristic method is not used.
+  - When the value is greater than 0:
+    - A larger value indicates that an index scan will probably be used in the heuristic method.
+    - A smaller value indicates that a table scan will probably be used in the heuristic method.
 
 ### tidb_enable_window_function
 
@@ -515,8 +514,8 @@ set tidb_query_log_max_len = 20
 - Scope: SERVER
 - Default value: 60
 - This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
-    - Slow logs are printed after the statement is executed.
-    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
+  - Slow logs are printed after the statement is executed.
+  - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
 
 ### tidb_wait_split_region_finish
 
@@ -645,8 +644,8 @@ set tidb_query_log_max_len = 20
 - Default value: off
 - This variable is used to control whether to enable the baseline evolution feature. For more details, see [Baseline Evolution](/execution-plan-binding.md#自动演进绑定).
 - To reduce the impact of automatic evolution on the cluster, use the following configurations:
-    - Set `tidb_evolve_plan_task_max_time` to limit the maximum execution time of each execution plan.The default value is 600s
-    - Set `tidb_evolve_plan_task_start_time` and `tidb_evolve_plan_task_end_time` to limit the time window. The default values are respectively `00:00 +0000` and `23:59 +0000`.
+  - Set `tidb_evolve_plan_task_max_time` to limit the maximum execution time of each execution plan.The default value is 600s
+  - Set `tidb_evolve_plan_task_start_time` and `tidb_evolve_plan_task_end_time` to limit the time window. The default values are respectively `00:00 +0000` and `23:59 +0000`.
 
 ### tidb_evolve_plan_task_max_time <span class="version-mark">New in v4.0</span>
 
@@ -671,10 +670,9 @@ set tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to control how TiDB sends a coprocessor request to TiFlash. It has the following values:
-
-    * `0`: Never send requests in batches
-    * `1`: Aggregation and join requests are sent in batches
-    * `2`: All coprocessor requests are sent in batches
+  - `0`: Never send requests in batches
+  - `1`: Aggregation and join requests are sent in batches
+  - `2`: All coprocessor requests are sent in batches
 
 ### tidb_enable_cascades_planner
 
