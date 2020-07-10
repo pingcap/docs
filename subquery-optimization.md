@@ -1,10 +1,9 @@
 ---
-title: Subquery related optimizations
-summary: Understand optimizations related to subqueries
-category: performance
+title: Subquery Related Optimizations
+summary: Understand optimizations related to subqueries.
 ---
 
-# Subquery related optimization
+# Subquery Related Optimizations
 
 This article mainly introduces subquery related optimizations.
 
@@ -16,20 +15,20 @@ Subqueries usually appear in the following situations:
 - `EXISTS (SELECT ... FROM ...)`
 - `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
-Sometimes a subquery contains non-subquery columns, such as `select * from t where t.a in (select * from t2 where t.b=t2.b)`. The `t.b` column in the subquery does not belong to the subquery, it is introduced from the outside of the subquery. This kind of subquery is usually called a "correlated subquery", and the externally introduced column is called a "correlated column". For optimizations about correlated subquery, see [decorrelating subqueries] (/correlated-subquery-optimization.md ). This article focuses on subqueries that do not involve correlated columns.
+Sometimes a subquery contains non-subquery columns, such as `select * from t where t.a in (select * from t2 where t.b=t2.b)`. The `t.b` column in the subquery does not belong to the subquery, it is introduced from the outside of the subquery. This kind of subquery is usually called a "correlated subquery", and the externally introduced column is called a "correlated column". For optimizations about correlated subquery, see [Decorrelation of correlated subquery](/correlated-subquery-optimization.md). This article focuses on subqueries that do not involve correlated columns.
 
 By default, subqueries use `semi join` mentioned in [Understanding TiDB Execution Plan](/query-execution-plan.md) as the execution method. For some special subqueries, TiDB do some logical rewrite to get better performance.
 
 ## `... < ALL (SELECT ... FROM ...)` or `... > ANY (SELECT ... FROM ...)`
 
-In this case, `ALL` and `ANY` can be replaced by `MAX` and `MIN`. When the table is empty, the result of `MAX(EXPR)` and `MIN(EXPR)` will be NULL, it works when the result of `EXPR` contains `NULL`. Whether the result of `EXPR` contains `NULL` may affect the final result of the expression, so the complete rewrite is given in the following form:
+In this case, `ALL` and `ANY` can be replaced by `MAX` and `MIN`. When the table is empty, the result of `MAX(EXPR)` and `MIN(EXPR)` is NULL. It works the same when the result of `EXPR` contains `NULL`. Whether the result of `EXPR` contains `NULL` may affect the final result of the expression, so the complete rewrite is given in the following form:
 
-- `t.id < all (select s.id from s)` will be rewritten as `t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`.
-- `t.id < any (select s.id from s)` will be rewritten as `t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`.
+- `t.id < all (select s.id from s)` is rewritten as `t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`
+- `t.id < any (select s.id from s)` is rewritten as `t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`
 
 ## `... != ANY (SELECT ... FROM ...)`
 
-In this case, if all the values from the subquery are distinct, it enough to compare the query with them. If the number of different values in the subquery is more than one, then there must be inequality. Therefore, such subqueries can be rewritten as follows:
+In this case, if all the values from the subquery are distinct, it is enough to compare the query with them. If the number of different values in the subquery is more than one, then there must be inequality. Therefore, such subqueries can be rewritten as follows:
 
 - `select * from t where t.id != any (select s.id from s)` is rewritten as `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`
 
@@ -42,7 +41,8 @@ In this case, when the number of different values in the subquery is more than o
 ## `... IN (SELECT ... FROM ...)`
 
 In this case, the subquery of `IN` is rewritten into `SELECT ... FROM ... GROUP ...`, and then rewritten into the normal form of `JOIN`.
-For example, `select * from t1 where t1.a in (select t2.a from t2)` will be rewritten as `select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`. The `DISTINCT` attribute here can be eliminated automatically if `t2.a` has the `UNIQUE` attribute.
+
+For example, `select * from t1 where t1.a in (select t2.a from t2)` is rewritten as `select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`. The `DISTINCT` attribute here can be eliminated automatically if `t2.a` has the `UNIQUE` attribute.
 
 {{< copyable "sql" >}}
 
@@ -63,11 +63,11 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-This rewrite will get better performance when the `IN` subquery is relatively small and the external query is relatively large, because without rewriting, using `index join` with t2 as the driving table is impossible. However, the disadvantage is that when the aggregation cannot be automatically eliminated during the rewritten and the `t2` table is relatively large, this rewrite will affect the performance of the query. Currently, the variable [tidb\_opt\_insubq\_to\_join\_and\_agg](/tidb-specific-system-variables.md#tidb_opt_insubq_to_join_and_agg) is used to control this optimization. When this optimization is not suitable, you can manually turn off it.
+This rewrite gets better performance when the `IN` subquery is relatively small and the external query is relatively large, because without rewriting, using `index join` with t2 as the driving table is impossible. However, the disadvantage is that when the aggregation cannot be automatically eliminated during the rewrite and the `t2` table is relatively large, this rewrite affects the performance of the query. Currently, the variable [tidb\_opt\_insubq\_to\_join\_and\_agg](/tidb-specific-system-variables.md#tidb_opt_insubq_to_join_and_agg) is used to control this optimization. When this optimization is not suitable, you can manually disable it.
 
 ## `EXISTS` subquery and `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
-At present, for a subquery in such scenarios, if the subquery is not a correlated subquery, TiDB evaluate it in advance in the optimization stage, and directly replace it with a result set. As shown in the figure below, the `EXISTS` subquery is evaluated to `TRUE` in the optimization stage in advance, so it does not show in the final execution result.
+At present, for a subquery in such scenarios, if the subquery is not a correlated subquery, TiDB evaluates it in advance in the optimization stage, and directly replaces it with a result set. As shown in the figure below, the `EXISTS` subquery is evaluated to `TRUE` in the optimization stage in advance, so it does not show in the final execution result.
 
 {{< copyable "sql" >}}
 
