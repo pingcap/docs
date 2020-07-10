@@ -1,24 +1,23 @@
 ---
-title: Decorrelation of correlated subquery
-summary: Understand how to decorrelate correlated subqueries
-category: performance
+title: Decorrelation of Correlated Subquery
+summary: Understand how to decorrelate correlated subqueries.
 ---
 
-# Decorrelation of correlated subquery
+# Decorrelation of Correlated Subquery
 
-[Subquery related optimization] (/subquery-optimization.md) describes how TiDB handles subqueries when there are no correlated columns. Decorrelation of correlated subquery is complex, this article introduces some simple scenarios and the scope that the optimization rule applies to.
+[Subquery related optimizations](/subquery-optimization.md) describes how TiDB handles subqueries when there are no correlated columns. Because decorrelation of correlated subquery is complex, this article introduces some simple scenarios and the scope to which the optimization rule applies.
 
 ## Introduction
 
-Take `select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` as an example, the subquery `t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` here refers to the correlated column in the query condition `t2.b=t1.b`, this condition happens to be an equivalent condition, so the query can be rewritten as `select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`. In this way, a correlated subquery is rewritten into `JOIN`.
+Take `select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` as an example. The subquery `t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` here refers to the correlated column in the query condition `t2.b=t1.b`, this condition happens to be an equivalent condition, so the query can be rewritten as `select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`. In this way, a correlated subquery is rewritten into `JOIN`.
 
 The reason why TiDB needs to do this rewriting is that the correlated subquery is bound to its external query result every time the subquery is executed. In the above example, if `t1.a` has 10 million values, this subquery would repeat 10 million times, because the condition `t2.b=t1.b` varies with the value of `t1.a`. When the correlation is lifted somehow, this subquery would execute only once.
 
 ## Restrictions
 
-The disadvantage of this rewriting is that when the correlation is not resolved, the optimizer can use the index on the correlated column. That is to say, although this subquery may repeat many times, the index can be used to filter data each time. While after using the rewriting rule, the position of the correlated column usually changes. Although the subquery is only executed once, the single execution time would be longer than that without decorrelation.
+The disadvantage of this rewriting is that when the correlation is not lifted, the optimizer can use the index on the correlated column. That is, although this subquery may repeat many times, the index can be used to filter data each time. After using the rewriting rule, the position of the correlated column usually changes. Although the subquery is only executed once, the single execution time would be longer than that without decorrelation.
 
-Therefore, when there are few external values, do not do decorrelation may bring better execution performance. At present, this optimization can be turned off by setting `subquery decorrelation` optimization rules in [blocklist of optimization rules and expression pushdown](/blacklist-control-plan.md).
+Therefore, when there are few external values, do not perform decorrelation, because it may bring better execution performance. At present, this optimization can be disabled by setting `subquery decorrelation` optimization rules in [blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md).
 
 ## Example
 
@@ -47,7 +46,7 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 
 ```
 
-The above is an example where the optimization takes effect, `HashJoin_11` is a normal `inner join`.
+The above is an example where the optimization takes effect. `HashJoin_11` is a normal `inner join`.
 
 Then, turn off the subquery decorrelation rules:
 
