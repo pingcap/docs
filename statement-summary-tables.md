@@ -1,7 +1,6 @@
 ---
 title: Statement Summary Tables
 summary: Learn about Statement Summary Table in TiDB.
-category: reference
 aliases: ['/docs/v3.1/statement-summary-tables/','/docs/v3.1/reference/performance/statement-summary/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Backup & Restore FAQ
 summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
-category: FAQ
 aliases: ['/docs/v3.1/br/backup-and-restore-faq/']
 ---
 

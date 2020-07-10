@@ -1,7 +1,6 @@
 ---
 title: SHOW [GLOBAL|SESSION] STATUS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [GLOBAL|SESSION] STATUS for the TiDB database.
-category: reference
 aliases: ['/docs/v3.1/sql-statements/sql-statement-show-status/','/docs/v3.1/reference/sql/statements/show-status/']
 ---
 
