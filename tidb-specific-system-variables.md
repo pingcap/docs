@@ -649,19 +649,19 @@ set tidb_query_log_max_len = 20
 
 ### tidb_evolve_plan_task_max_time <span class="version-mark">New in v4.0</span>
 
-- Scope:GLOBAL
+- Scope: GLOBAL
 - Default value:600
 - This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature. The unit is second.
 
 ### tidb_evolve_plan_task_start_time <span class="version-mark">New in v4.0</span>
 
-- Scope:GLOBAL
+- Scope: GLOBAL
 - Default value:00:00 +0000
 - This variable is used to set the start time of baseline evolution in a day.
 
 ### tidb_evolve_plan_task_end_time <span class="version-mark">New in v4.0</span>
 
-- Scope:GLOBAL
+- Scope: GLOBAL
 - Default value:23:59 +0000
 - This variable is used to set the end time of baseline evolution in a day.
 
@@ -676,55 +676,55 @@ set tidb_query_log_max_len = 20
 
 ### tidb_enable_cascades_planner
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to control whether to enable the cascades planner feature.
 
 ### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: 4
 - This variable is used to set the concurrency degree of the window operator. 
 
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: 1
 - This variable is used to control whether to enable vectorized execution.
 
 ### tidb_enable_index_merge <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to control whether to enable the index merge feature.
 
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to control whether to enable `get_lock` and `release_lock` functions. These two functions are not implemented, and always return 1 in the current version of TiDB.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION
+- Scope: SESSION
 - Default value: tikv, tiflash, tidb
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
 ### tidb_metric_query_step <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION
+- Scope: SESSION
 - Default value: 60
 - This variable is used to set the step of the Prometheus statement generated when querying METRIC_SCHEMA. The unit is second.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION
+- Scope: SESSION
 - Default value: 60
 - This variable is used to set the range duration of the Prometheus statement generated when querying METRIC_SCHEMA. The unit is second.
 
