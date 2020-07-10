@@ -547,7 +547,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 1 (the value of the default configuration file)
-- This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `performance_schema.events_statements_summary_by_digest` table to identify and troubleshoot SQL performance issues.
+- This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `performance_schema.events_statements_summary_by_digest` system table to identify and troubleshoot SQL performance issues.
 
 ### tidb_stmt_summary_internal_query <span class="version-mark">New in v4.0</span>
 
@@ -571,7 +571,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 200 (the value of the default configuration file)
-- This variable is used to set the maximum number of the statement that the statement summary holds in memory.
+- This variable is used to set the maximum number of statements that the statement summary stores in memory.
 
 ### tidb_stmt_summary_max_sql_length <span class="version-mark">New in v4.0</span>
 
@@ -593,32 +593,32 @@ set tidb_query_log_max_len = 20
 
 ### ddl_slow_threshold
 
-- Scope:SESSION
-- Default value:300
-- Ddl operations will be output to the log if its time consumption exceeds the threshold value. The unit is millisecond.
+- Scope: SESSION
+- Default value: 300
+- DDL operations whose execution time exceeds the threshold value are output to the log. The unit is millisecond.
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION
-- Default value:0
+- Scope: SESSION
+- Default value: 0
 - This variable is used to control whether to mark the corresponding SQL statement in the profile output to identify and troubleshoot performance issues.
 
 ### tidb_skip_isolation_level_check
 
-- Scope:SESSION
-- Default value:0
-- After this switch is enabled, if an isolation level not supported by TiDB is assigned to `tx_isolation`, no error will be reported.
+- Scope: SESSION
+- Default value: 0
+- After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported.
 
 ### tidb_low_resolution_tso
 
-- Scope:SESSION
-- Default value:0
-- This variable is used to set whether to enable the low precision tso feature. After this feature is enabled, new transactions will use a ts updated every 2s to read data
-- The main scenario is to reduce the overhead of acquiring tso for small read-only transactions when old data can be tolerated.
+- Scope: SESSION
+- Default value: 0
+- This variable is used to set whether to enable the low precision TSO feature. After this feature is enabled, new transactions use a timestamp updated every 2 seconds to read data.
+- The main applicable scenario is to reduce the overhead of acquiring TSO for small read-only transactions when reading old data is acceptable.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION
+- Scope: SESSION
 - Default value: leader
 - This variable is used to control where TiDB reads data. Here are three options:
     - leader: Read only from leader node
@@ -627,43 +627,43 @@ set tidb_query_log_max_len = 20
 
 ### tidb_use_plan_baselines <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: on
-- This variable is used to control whether to enable the execution plan binding feature. It is enabled by default, and can be disabled by assigning the value off. For the use of the execution plan binding, see [Execution Plan Binding](/execution-plan-binding.md#创建绑定).
+- This variable is used to control whether to enable the execution plan binding feature. It is enabled by default, and can be disabled by assigning the `off` value. For the use of the execution plan binding, see [Execution Plan Binding](/sql-plan-management.md#create-a-binding).
 
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: off
-- This variable is used to control whether to enable the automatic binding feature. This feature depends on the Statement Summary, so you need to turn on the Statement Summary before using automatic binding.
-- After this feature is enabled, the historical SQL statements in the Statement Summary will be traversed periodically, and bindings will be automatically created for SQL statements that appear at least twice.
+- This variable is used to control whether to enable the [baseline capturing](/sql-plan-management.md#baseline-capturing) feature. This feature depends on the statement summary, so you need to enable the statement summary before you use baseline capturing.
+- After this feature is enabled, the historical SQL statements in the statement summary are traversed periodically, and bindings are automatically created for SQL statements that appear at least twice.
 
 ### tidb_evolve_plan_baselines <span class="version-mark">New in v4.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: off
-- This variable is used to control whether to enable the baseline evolution feature. For more details, see [Baseline Evolution](/execution-plan-binding.md#自动演进绑定).
-- To reduce the impact of automatic evolution on the cluster, use the following configurations:
-    - Set `tidb_evolve_plan_task_max_time` to limit the maximum execution time of each execution plan.The default value is 600s
+- This variable is used to control whether to enable the baseline evolution feature. For detailed introduction or usage , see [Baseline Evolution](/sql-plan-management.md#baseline-evolution).
+- To reduce the impact of baseline evolution on the cluster, use the following configurations:
+    - Set `tidb_evolve_plan_task_max_time` to limit the maximum execution time of each execution plan. The default value is 600s.
     - Set `tidb_evolve_plan_task_start_time` and `tidb_evolve_plan_task_end_time` to limit the time window. The default values are respectively `00:00 +0000` and `23:59 +0000`.
 
 ### tidb_evolve_plan_task_max_time <span class="version-mark">New in v4.0</span>
 
 - Scope:GLOBAL
 - Default value:600
-- This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature.The unit is second.
+- This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature. The unit is second.
 
 ### tidb_evolve_plan_task_start_time <span class="version-mark">New in v4.0</span>
 
 - Scope:GLOBAL
 - Default value:00:00 +0000
-- This variable is used to set the start time of automatic evolution in a day.
+- This variable is used to set the start time of baseline evolution in a day.
 
 ### tidb_evolve_plan_task_end_time <span class="version-mark">New in v4.0</span>
 
 - Scope:GLOBAL
 - Default value:23:59 +0000
-- This variable is used to set the end time of automatic evolution in a day.
+- This variable is used to set the end time of baseline evolution in a day.
 
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0 version</span>
 
@@ -678,7 +678,7 @@ set tidb_query_log_max_len = 20
 
 - Scope:SESSION | GLOBAL
 - Default value: 0
-- This variable is used to control whether to enabled the cascades planner feature.
+- This variable is used to control whether to enable the cascades planner feature.
 
 ### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
 
@@ -702,7 +702,7 @@ set tidb_query_log_max_len = 20
 
 - Scope:SESSION | GLOBAL
 - Default value: 0
-- This variable is used to control whether to enable `get_lock` and `release_lock` functions. These two functions are not implemented, and always return 1 in the current version of TiDB,.
+- This variable is used to control whether to enable `get_lock` and `release_lock` functions. These two functions are not implemented, and always return 1 in the current version of TiDB.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
