@@ -423,26 +423,27 @@ set tidb_query_log_max_len = 20
 - Default value: 0
 - TiDB supports the optimistic transaction model. This means that conflict check (unique key check) is performed when the transaction is committed. This variable is used to set whether to do a unique key check each time a row of data is written.
 - If this variable is enabled, the performance might be affected in a scenario where a large batch of data is written. For example:
+
     - When this variable is disabled:
 
-      ```sql
-      tidb >create table t (i int key)
-      tidb >insert into t values (1);
-      tidb >begin
-      tidb >insert into t values (1);
-      Query OK, 1 row affected
-      tidb >commit; -- Check only when a transaction is committed.
-      ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
-       ```
+        ```sql
+        tidb >create table t (i int key)
+        tidb >insert into t values (1);
+        tidb >begin
+        tidb >insert into t values (1);
+        Query OK, 1 row affected
+        tidb >commit; -- Check only when a transaction is committed.
+        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+        ```
 
     - After this variable is enabled:
 
-      ```sql
-      tidb >set @@tidb_constraint_check_in_place=1
-      tidb >begin
-      tidb >insert into t values (1);
-      ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
-       ```
+        ```sql
+        tidb >set @@tidb_constraint_check_in_place=1
+        tidb >begin
+        tidb >insert into t values (1);
+        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+        ```
 
 ### tidb_check_mb4_value_in_utf8
 
