@@ -487,8 +487,8 @@ set tidb_query_log_max_len = 20
 - When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.
     - When the value is 0, the heuristic method is not used.
     - When the value is greater than 0:
-      - A larger value indicates that an index scan will probably be used in the heuristic method.
-      - A smaller value indicates that a table scan will probably be used in the heuristic method.
+        - A larger value indicates that an index scan will probably be used in the heuristic method.
+        - A smaller value indicates that a table scan will probably be used in the heuristic method.
 
 ### tidb_enable_window_function
 
@@ -609,6 +609,7 @@ set tidb_query_log_max_len = 20
 - After this switch is enabled, if an isolation level not supported by TiDB is assigned to `tx_isolation`, no error will be reported.
 
 ### tidb_low_resolution_tso
+
 - Scope:SESSION
 - Default value:0
 - This variable is used to set whether to enable the low precision tso feature. After this feature is enabled, new transactions will use a ts updated every 2s to read data
