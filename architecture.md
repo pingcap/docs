@@ -15,7 +15,7 @@ Compared to traditional databases, TiDB has the following advantages:
 * Supports ACID transaction, suitable for scenarios requiring strong consistency such as bank transfer
 * A rich toolchain ecosystem covers a variety of scenarios including data migration, synchronization, backup, etc.
 
-![TiDB Architecture](/media/tidb-architecture-1.png)
+![TiDB Architecture](/media/tidb-architecture.png)
 
 ## TiDB server
 
