@@ -1,12 +1,12 @@
 ---
 title: High Reliability FAQ
-summary: Introduce the most frequently asked questions relating to high reliability.
+summary: Introduce the FAQs relating to high reliability.
 category: FAQ
 ---
 
 # High Reliability FAQ
 
-This document introduces the most frequently asked questions relating to high reliability.
+This document introduces the FAQs relating to high reliability.
 
 ## Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
 
