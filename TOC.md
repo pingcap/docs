@@ -442,6 +442,8 @@
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
   + [Upgrade FAQs](/faq/upgrade-faq.md)
+  + [License FAQ](/faq/licensing-faq.md)
+  + [Migration FAQ](/faq/migration-tidb-faq.md)
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
