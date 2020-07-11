@@ -1,12 +1,12 @@
 ---
 title: High Availability FAQ
-summary: Introduce the most frequently asked questions relating to high availability.
+summary: Introduce the FAQs relating to high availability.
 category: FAQ
 ---
 
 # High Availability FAQ
 
-This document introduces the most frequently asked questions relating to high availability.
+This document introduces the FAQS relating to high availability.
 
 ## How is TiDB strongly consistent?
 
