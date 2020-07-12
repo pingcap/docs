@@ -4,7 +4,7 @@ summary: An overview of the usage of GRANT <role> for the TiDB database.
 category: reference
 ---
 
-# GRANT <role>
+# `GRANT <role>`
 
 Assigns a previously created role to an existing user. The user can use then use the statement `SET ROLE <rolename>` to assume the privileges of the role, or `SET ROLE ALL` to assume all roles that have been assigned.
 
@@ -161,10 +161,10 @@ This statement is understood to be fully compatible with roles, which are a feat
 
 ## See also
 
-* [GRANT <privileges>](/sql-statements/sql-statement-grant-privileges.md)
+* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 * [CREATE ROLE](/sql-statements/sql-statement-create-role.md)
 * [DROP ROLE](/sql-statements/sql-statement-drop-role.md)
-* [REVOKE <role>](/sql-statements/sql-statement-revoke-role.md)
+* [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
 * [SET ROLE](/sql-statements/sql-statement-set-role.md)
 * [SET DEFAULT ROLE](/sql-statements/sql-statement-set-default-role.md)
 * [Role-Based Access Control](/role-based-access-control.md)
