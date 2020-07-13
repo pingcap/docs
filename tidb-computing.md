@@ -88,7 +88,7 @@ Suppose there are 3 rows of data in the table.
 3, "PD", "Manager", 30
 ```
 
-First, each row of data is mapped to a (Key, Value) key-value pair, and the table has an `int` type primary key, so the value of `RowID` is the value of this primary key. Suppose the table has `TableID` of 10, then its table data stored on TiKV is:
+Each row of data is mapped to a (Key, Value) key-value pair, and the table has an `int` type primary key, so the value of `RowID` is the value of this primary key. Suppose the table's `TableID` is 10, and then its table data stored on TiKV is:
 
 ```
 t10_r1 --> ["TiDB", "SQL  Layer", 10]
