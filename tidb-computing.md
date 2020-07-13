@@ -108,7 +108,7 @@ The above example shows the mapping rule from a relational model to a Key-Value 
 
 ## Meta-information management
 
-Each `Database` and `Table` in TiDB has meta information, aka its definition and various attributes. This information also needs to be persistent, and TiDB stores this information in TiKV as well.
+Each database and table in TiDB has metadata that indicates its definition and various attributes. This information also needs to be persisted, and TiDB stores this information in TiKV as well.
 
 Each `Database` / `Table` is assigned an unique ID. As the unique identifier, when encoded as Key-Value, this ID is encoded in the Key with the `m_` prefix. This constructs a Key, and stores the serialized meta information in Value.
 
