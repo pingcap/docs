@@ -129,7 +129,7 @@ For example, to execute the `select count(*) from user where name = "TiDB"` SQL 
 1. Construct the Key Range: all `RowID` in a table are in `[0,  MaxInt64)` range. According to the row data `Key` encoding rule, using `0` and `MaxInt64` can construct a `[StartKey, EndKey)` range that is left-inclusive and right-exclusive.
 2. Scan Key Range: read the data in TiKV according to the key range constructed above.
 3. Filter data: for each row of data read, calculate the `name = "TiDB"` expression. If the result is true, return to this row. If not, skip this row.
-4. calculate `Count(*)`: for each line that meets the requirements, accumulate to the result of `Count(*)`.
+4. Calculate `Count(*)`: for each row that meets the requirements, add up to the result of `Count(*)`.
 
 **The entire process is illustrated as follows:**
 
