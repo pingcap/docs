@@ -145,7 +145,7 @@ This solution is intuitive and feasible, but has some obvious problems in a dist
 
 To solve the problems above, the computation should be as close to the storage node as possible to avoid a large number of RPC callings. First of all, the SQL predicate condition `name = "TiDB"` should be pushed down to the storage node for computation, so that only valid rows are returned, which avoids meaningless network transfers. Then, the aggregation function `Count(*)` can also be pushed down to the storage nodes for pre-aggregation, and each node only has to return a result of `Count(*)`. The SQL layer will sum up the `Count(*)` results returned by each node.
 
-The following is a schematic representation of the data returned layer by layer.
+The following image shows how data returns layer by layer:
 
 ![dist sql flow](/media/tidb-computing-dist-sql-flow.png)
 
