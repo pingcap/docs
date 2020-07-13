@@ -374,15 +374,19 @@ This section introduces the configuration of a replication task.
 # The default value is true.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = true
+
 [filter]
 # Ignores the transaction of specified start_ts.
 ignore-txn-start-ts = [1, 2]
+
 # Filter rules.
 # Filter syntax: https://github.com/pingcap/tidb-tools/tree/master/pkg/table-filter#syntax.
 rules = ['*.*', '!test.*']
+
 [mounter]
 # mounter thread counts, which is used to decode the TiKV output data.
 worker-num = 16
+
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
 # Supports four dispatchers: default, ts, rowid, and table
@@ -393,6 +397,7 @@ dispatchers = [
 # For the sink of MQ type, you can specify the protocol format of the message.
 # Currently two protocols are supported: default and canal. The default protocol is TiCDC Open Protocol.
 protocol = "default"
+
 [cyclic-replication]
 # Whether to enable cyclic replication.
 enable = false
