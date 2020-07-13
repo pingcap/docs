@@ -4,7 +4,7 @@ category: reference
 aliases: ['/docs/dev/predicates-push-down.md/','/docs/dev/reference/performance/predicates-push-down/']
 ---
 
-# Predicates Push Down(PPD)
+# Predicates Push Down (PPD)
 
 This document introduces one of the TiDB's logic optimization rules—Predicate Push Down(PPD). It aims to help readers understand the predicate push down and know its suitable and unsuitable scenarios.
 
