@@ -106,7 +106,7 @@ t10_i1_30_3 --> null
 
 The above example shows the mapping rule from a relational model to a Key-Value model in TiDB, and the consideration behind this mapping scheme.
 
-## Meta-information management
+## Metadata management
 
 Each database and table in TiDB has metadata that indicates its definition and various attributes. This information also needs to be persisted, and TiDB stores this information in TiKV as well.
 
