@@ -7,7 +7,7 @@ category: reference
 
 This document introduces one of the TiDB's logic optimization rules—Predicate Push Down (PPD). It aims to help you understand the predicate push down and know its applicable and inapplicable scenarios.
 
-PPD pushes down selection operators as close to data source as possible to complete data filtering as early as possible. Thereby significantly reducing the cost of data transmission or computation. 
+PPD pushes down selection operators to data source as close as possible to complete data filtering as early as possible, which significantly reduces the cost of data transmission or computation. 
 
 ## Examples
 
