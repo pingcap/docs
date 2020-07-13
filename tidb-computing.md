@@ -126,7 +126,7 @@ The simplest solution to SQL computing is the [mapping of table data to Key-Valu
 
 For example, to execute the `select count(*) from user where name = "TiDB"` SQL statement, TiDB needs to read all data in the table, then checks whether the `name` field is `TiDB`, and if so, returns this row. The process is as follows:
 
-1. construct the Key Range: all `RowID` in a table are in `[0,  MaxInt64)` range. According to the row data `Key` encoding rule, using `0` and `MaxInt64` can construct a `[StartKey, EndKey)` range that is left-included, right-excluded.
+1. Construct the Key Range: all `RowID` in a table are in `[0,  MaxInt64)` range. According to the row data `Key` encoding rule, using `0` and `MaxInt64` can construct a `[StartKey, EndKey)` range that is left-inclusive and right-exclusive.
 2. scan Key Range: read the data in TiKV according to the key range constructed above.
 3. filter data: for each row of data read, calculate `name = "TiDB"` expression. Returns up this line if true, otherwise discards this line of data.
 4. calculate `Count(*)`: for each line that meets the requirements, accumulate to the result of `Count(*)`.
