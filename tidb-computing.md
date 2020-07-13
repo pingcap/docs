@@ -124,7 +124,7 @@ The nodes at this layer are stateless. These nodes themselves do not store data 
 
 The simplest solution to SQL computing is the [mapping of table data to Key-Value](#mapping-of-table-data-to-key-value) as described in the previous section, which maps SQL queries to KV queries, acquires the corresponding data through the KV interface, and performs various computations.
 
-For example, `select count(*) from user where name = "TiDB"` such a SQL statement. It needs to read all the data in the table, then check if the `name` field is `TiDB`, and if so, returns this line. The process is as follows:
+For example, to execute the `select count(*) from user where name = "TiDB"` SQL statement, TiDB needs to read all data in the table, then checks whether the `name` field is `TiDB`, and if so, returns this row. The process is as follows:
 
 1. construct the Key Range: all `RowID` in a table are in `[0,  MaxInt64)` range. According to the row data `Key` encoding rule, using `0` and `MaxInt64` can construct a `[StartKey, EndKey)` range that is left-included, right-excluded.
 2. scan Key Range: read the data in TiKV according to the key range constructed above.
