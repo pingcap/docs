@@ -19,7 +19,7 @@ This section describes the scheme for mapping data to (Key, Value) key-value pai
 
 ### Mapping of table data to Key-Value
 
-In a relational database, a table may have many columns. To map the data from each column in a row to a (Key, Value) key-value pair, you need to consider how to construct the Key. First of all, OLTP scenarios have a large number of operations such as adding, deleting, changing and searching for single or multiple rows, which require the database to read a line of data quickly. Therefore, it is best to have a unique ID (either explicit or implicit) for the corresponding key to facilitate a quick location. Second, many OLAP queries require a full table scan. If you can encode the keys of all rows in a table into a range, the whole table can be efficiently scanned by range queries.
+In a relational database, a table might have many columns. To map the data of each column in a row to a (Key, Value) key-value pair, you need to consider how to construct the Key. First of all, in OLTP scenarios, there are many operations such as adding, deleting, changing, and searching for data on a single or multiple rows, which requires the database to read a row of data quickly. Therefore, each key should have a unique ID (either explicit or implicit) to make it quick to locate. Secondly, many OLAP queries require a full table scan. If you can encode the keys of all rows in a table into a range, the whole table can be efficiently scanned by range queries.
 
 Based on the above considerations, the mapping of table data to Key-Value in TiDB is designed as follows:
 
