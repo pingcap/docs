@@ -267,8 +267,6 @@ tidb-ctl base64decode [table_id] [base64_data]
 ### The `log` command
 
 The stack information for the TiDB error log is in one line format. You could use `tidb-ctl log` to change its format to multiple lines.
-<<<<<<< HEAD
-=======
 
 ### The `keyrange` command
 
@@ -322,4 +320,3 @@ The `keyrange` subcommand is used to query the global or table-related key range
         index c4: (74800000000000002f5f698000000000000003, 74800000000000002f5f698000000000000004)
       table rows: (74800000000000002f5f72, 748000000000000030)
     ```
->>>>>>> 64044c7... update document of tidb-ctl (#3048)
