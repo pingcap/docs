@@ -77,7 +77,7 @@ Two solutions:
 
 ### Syncer infrastructure
 
-See[Parsing TiDB online data synchronization tool Syncer](https://pingcap.com/blog-cn/tidb-syncer/)in Chinese.
+See [Parsing TiDB online data synchronization tool Syncer](https://pingcap.com/blog-cn/tidb-syncer/)in Chinese.
 
 #### Syncer user guide
 
