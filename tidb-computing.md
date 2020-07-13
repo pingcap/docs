@@ -104,7 +104,7 @@ t10_i1_20_2 --> null
 t10_i1_30_3 --> null
 ```
 
-The above example shows the mapping rule from a relational model to a Key-Value model in TiDB, and the consideration behind the selection of this scheme.
+The above example shows the mapping rule from a relational model to a Key-Value model in TiDB, and the consideration behind this mapping scheme.
 
 ## Meta-information management
 
