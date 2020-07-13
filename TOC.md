@@ -9,8 +9,7 @@
   + [TiDB Introduction](/overview.md)
   + [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
   + [Basic Features](/basic-features.md)
-  + Compatibility
-    + [MySQL Compatibility](/mysql-compatibility.md)
+  + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
@@ -88,6 +87,7 @@
   + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+  + [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
 + Performance Tuning
   + System Tuning
     + [Operating System Tuning](/tune-operating-system.md)
@@ -273,6 +273,7 @@
       + [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
       + [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
       + [`SELECT`](/sql-statements/sql-statement-select.md)
+      + [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       + [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
       + [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
       + [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
@@ -291,7 +292,6 @@
       + [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
       + [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
       + [`SHOW DRAINER STATUS`](/sql-statements/sql-statement-show-drainer-status.md)
-      + [`SHOW DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       + [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
       + [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
       + [`SHOW [FULL] FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
