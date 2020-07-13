@@ -7,7 +7,7 @@ aliases: ['/docs/dev/system-variables/','/docs/dev/reference/configuration/tidb-
 
 # System Variables
 
-TiDB system variables behavior similar to MySQL, in that settings may apply on a `SESSION`, `GLOBAL` or both `SESSION` and `GLOBAL` scope. Changes to `GLOBAL` scoped variables **only apply** to new connections to TiDB. Variables can be set with the [`SET` statement](/sql-statements/sql-statement-set-variable.md) on a per-session or global basis:
+TiDB system variables behave similar to MySQL, in that settings may apply on a `SESSION`, `GLOBAL` or both `SESSION` and `GLOBAL` scope. Changes to `GLOBAL` scoped variables **only apply** to new connections to TiDB. Variables can be set with the [`SET` statement](/sql-statements/sql-statement-set-variable.md) on a per-session or global basis:
 
 ```sql
 # These two identical statements change a session variable
