@@ -110,7 +110,7 @@ The above example shows the mapping rule from a relational model to a Key-Value 
 
 Each database and table in TiDB has metadata that indicates its definition and various attributes. This information also needs to be persisted, and TiDB stores this information in TiKV as well.
 
-Each `Database` / `Table` is assigned an unique ID. As the unique identifier, when encoded as Key-Value, this ID is encoded in the Key with the `m_` prefix. This constructs a Key, and stores the serialized meta information in Value.
+Each database or table is assigned a unique ID. As the unique identifier, when table data is encoded to Key-Value, this ID is encoded in the Key with the `m_` prefix. This constructs a key-value pair with the serialized metadata stored in it.
 
 Besides, TiDB also uses a dedicated (Key, Value) key pair to store the latest version number of the current all tables structure information. This key-value pair is global, and its version number is increased by 1 each time the state of the DDL operation changes. TiDB stores this key-value pair persistently in the PD Server with a key of "/tidb/ddl/global_schema_version", and Value is the version number value of int64 type. Refers to Google F1's  Online Schema change algorithm, TiDB keeps a background thread constantly checking whether the version number of the table structure information stored in the PD Server changes, and ensuring to get the changes of version in a certain time.
 
