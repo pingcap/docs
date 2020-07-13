@@ -43,8 +43,8 @@ TiDB supports three comment styles:
     +------+
     1 row in set (0.00 sec)
     ```
-
-And this style requires at least one whitespace after `--`:
+    
+    And this style requires at least one whitespace after `--`:
 
    {{< copyable "sql" >}}
 
