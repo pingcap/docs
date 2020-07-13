@@ -20,7 +20,6 @@ Yes. But it differs from MySQL in syntax. As a distributed database, TiDB uses t
 
 The character sets of TiDB use UTF-8 by default and currently only support UTF-8. The string of TiDB uses the memcomparable format.
 
-
 ## What is the maximum number of statements in a transaction?
 
 The maximum number of statements in a transaction is 5000 by default.
