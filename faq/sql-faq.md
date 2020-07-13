@@ -1,6 +1,6 @@
 ---
 title: SQL FAQ
-summary: Introduce the most frequently asked questions relating to SQL.
+summary: Introduce the FAQs relating to SQL.
 category: FAQ
 ---
 
