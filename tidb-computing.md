@@ -96,7 +96,7 @@ t10_r2 --> ["TiKV", "KV  Engine", 20]
 t10_r3 --> ["PD", " Manager", 30]
 ```
 
-In addition to the primary key, the table has a non-unique ordinary secondary index, `idxAge`. Suppose the `IndexID` is 1, then its index data stored on TiKV is:
+In addition to the primary key, the table has a non-unique ordinary secondary index, `idxAge`. Suppose the `IndexID` is `1`, and then its index data stored on TiKV is:
 
 ```
 t10_i1_10_1 --> null
