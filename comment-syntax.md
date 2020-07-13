@@ -1,13 +1,7 @@
 ---
 title: Comment Syntax
-<<<<<<< HEAD
-summary: Learn about the three comment styles in TiDB.
-category: reference
-aliases: ['/docs/v3.1/comment-syntax/','/docs/v3.1/reference/sql/language-structure/comment-syntax/']
-=======
 summary: This document introduces the comment syntax supported by TiDB.
-aliases: ['/docs/dev/comment-syntax/','/docs/dev/reference/sql/language-structure/comment-syntax/']
->>>>>>> 0af9946... comment-syntax: add TiDB-specific comment syntax (#3238)
+aliases: ['/docs/v3.1/comment-syntax/','/docs/v3.1/reference/sql/language-structure/comment-syntax/']
 ---
 
 # Comment Syntax
