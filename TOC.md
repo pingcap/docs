@@ -79,12 +79,13 @@
   + [TiDB Cluster Alert Rules](/alert-rules.md)
   + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
 + Troubleshoot
+  + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Identify Slow Queries](/identify-slow-queries.md)
   + [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
+  + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
-  + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
   + [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
@@ -107,6 +108,7 @@
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
         + [Statistics](/statistics.md)
+      + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
@@ -415,6 +417,8 @@
     + [pd-server](/pd-configuration-file.md)
   + [System Variables](/system-variables.md)
   + Storage Engines
+    + TiKV
+      + [TiKV Overview](/tikv-overview.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
