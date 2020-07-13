@@ -11,7 +11,7 @@ PPD pushes down selection operators to data source as close as possible to compl
 
 ## Examples
 
-The following cases describes the optimization of PPD. Examples 1, 2, and 3 are cases where PPD is applicable, and examples 4, 5, and 6 are cases where PPD is not applicable.
+The following cases describe the optimization of PPD. Case 1, 2, and 3 are scenarios where PPD is applicable, and Case 4, 5, and 6 are scenarios where PPD is not applicable.
 
 ### Case 1: push predicates to storage layer
 
