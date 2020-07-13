@@ -1,6 +1,6 @@
 ---
 title: TiKV Overview
-category: reference
+summary: An overview of the TiKV storage engine.
 ---
 
 # TiKV Overview
