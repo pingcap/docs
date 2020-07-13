@@ -105,9 +105,9 @@
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
-        + [Join Reorder](/join-reorder.md)
         + [Subquery Related Optimizations](/subquery-optimization.md)
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        + [Join Reorder](/join-reorder.md)
       + Physical Optimization
         + [Statistics](/statistics.md)
       + Control Execution Plan
