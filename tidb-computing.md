@@ -1,29 +1,28 @@
 ---
 title: Computation of TiDB Database
-summary: Understand the computating layer of the TiDB database.
-category: introduction
+summary: Understand the computing layer of the TiDB database.
 ---
 
 # Computation of TiDB Database
 
-Based on the distributed storage capability provided by TiKV, TiDB builds the computing engine that combines great transactional processing capability with good data analysis capability. This document starts by introducing a data mapping algorithm that maps data from TiDB database tables to TiKV's (Key, Value) key-value pairs, then introduces how TiDB manages metadata, and finally illustrates the architecture of the TiDB SQL layer.
+Based on the distributed storage provided by TiKV, TiDB builds the computing engine that combines great capability of transactional processing with that of data analysis. This document starts by introducing a data mapping algorithm that maps data from TiDB database tables to (Key, Value) key-value pairs in TiKV, then introduces how TiDB manages metadata, and finally illustrates the architecture of the TiDB SQL layer.
 
 For the storage solution on which the computing layer is dependent, this document only introduces the row-based storage structure of TiKV. For OLAP services, TiDB introduces a column-based storage solution [TiFlash](/tiflash/tiflash-overview.md) as a TiKV extension.
 
 ## Mapping table data to Key-Value
 
-This section describes the scheme for mapping data to (Key, Value) key-value pairs in TiDB. Data to be mapped here consists of the following two types:
+This section describes the scheme for mapping data to (Key, Value) key-value pairs in TiDB. Data to be mapped here includes the following two types:
 
 - Data of each row in the table, hereinafter referred to as table data.
 - Data of all indexes in the table, hereinafter referred to as index data.
 
 ### Mapping of table data to Key-Value
 
-In a relational database, a table might have many columns. To map the data of each column in a row to a (Key, Value) key-value pair, you need to consider how to construct the Key. First of all, in OLTP scenarios, there are many operations such as adding, deleting, changing, and searching for data on a single or multiple rows, which requires the database to read a row of data quickly. Therefore, each key should have a unique ID (either explicit or implicit) to make it quick to locate. Secondly, many OLAP queries require a full table scan. If you can encode the keys of all rows in a table into a range, the whole table can be efficiently scanned by range queries.
+In a relational database, a table might have many columns. To map the data of each column in a row to a (Key, Value) key-value pair, you need to consider how to construct the Key. First of all, in OLTP scenarios, there are many operations such as adding, deleting, changing, and searching for data on a single or multiple rows, which needs the database to read a row of data quickly. Therefore, each key should have a unique ID (either explicit or implicit) to make it quick to locate. Then, many OLAP queries require a full table scan. If you can encode the keys of all rows in a table into a range, the whole table can be efficiently scanned by range queries.
 
-Based on the above considerations, the mapping of table data to Key-Value in TiDB is designed as follows:
+Based on the considerations above, the mapping of table data to Key-Value in TiDB is designed as follows:
 
-- To ensure that data from the same table is kept together for easy searching, TiDB assigns a table ID to each table denoted by `TableID`. Table ID is an integer that is unique throughout the cluster.
+- To ensure that data from the same table is kept together for easy searching, TiDB assigns a table ID to each table represented by `TableID`. Table ID is an integer that is unique throughout the cluster.
 - TiDB assigns a row ID, represented by `RowID`, to each row of data in the table. The row ID is also an integer, unique within the table. For row ID, TiDB has made a small optimization: if a table has an integer type primary key, TiDB uses the value of this primary key as the row ID.
 
 Each row of data is encoded as a (Key, Value) key-value pair according to the following rule:
@@ -35,7 +34,7 @@ Value: [col1, col2, col3, col4]
 
 `tablePrefix` and `recordPrefixSep` are both special string constants used to distinguish other data in Key space. The exact values of the string constants are introduced in [Summary of mapping relationships](#summary-of-mapping-relationships).
 
-### Mapping of Indexed Data to Key-Value
+### Mapping of indexed data to Key-Value
 
 TiDB supports both primary keys and secondary indexes (both unique and non-unique indexes). Similar to the table data mapping scheme, TiDB assigns an index ID to each index of the table represented by `IndexID`.
 
@@ -63,7 +62,7 @@ recordPrefixSep = []byte{'r'}
 indexPrefixSep  = []byte{'i'}
 ```
 
-Also note that in the above mapping schemes, regardless of table data or index data key encoding scheme, all rows in a table have the same key prefix, and all the data of an index also has the same prefix. Data with the same prefixes are thus arranged together in TiKV's key space. Therefore, by carefully designing the encoding scheme of the suffix part to ensure that the pre-encoding and post-encoding comparisons remain the same, the table data or index data can be stored in the TiKV in an ordered manner. Using this encoding scheme, all row data in a table is arranged orderly by `RowID` in the TiKV's key space, and the data of a particular index is also arranged sequentially in the key space according to the specific value of the index data (`indexedColumnsValue`).
+Also note that in the above encoding schemes, no matter table data or index data key encoding scheme, all rows in a table have the same key prefix, and all data of an index also has the same prefix. Data with the same prefixes are thus arranged together in TiKV's key space. Therefore, by carefully designing the encoding scheme of the suffix part to ensure that the pre-encoding and post-encoding comparisons remain the same, the table data or index data can be stored in TiKV in an ordered manner. Using this encoding scheme, all row data in a table is arranged orderly by `RowID` in the TiKV's key space, and the data of a particular index is also arranged sequentially in the key space according to the specific value of the index data (`indexedColumnsValue`).
 
 ### Example of Key-Value mapping relationship
 
@@ -88,7 +87,7 @@ Suppose there are 3 rows of data in the table.
 3, "PD", "Manager", 30
 ```
 
-Each row of data is mapped to a (Key, Value) key-value pair, and the table has an `int` type primary key, so the value of `RowID` is the value of this primary key. Suppose the table's `TableID` is 10, and then its table data stored on TiKV is:
+Each row of data is mapped to a (Key, Value) key-value pair, and the table has an `int` type primary key, so the value of `RowID` is the value of this primary key. Suppose the table's `TableID` is `10`, and then its table data stored on TiKV is:
 
 ```
 t10_r1 --> ["TiDB", "SQL  Layer", 10]
@@ -112,9 +111,9 @@ Each database and table in TiDB has metadata that indicates its definition and v
 
 Each database or table is assigned a unique ID. As the unique identifier, when table data is encoded to Key-Value, this ID is encoded in the Key with the `m_` prefix. This constructs a key-value pair with the serialized metadata stored in it.
 
-In addition, TiDB also uses a dedicated (Key, Value) key-value pair to store the latest version number of all table structure information. This key-value pair is global, and its version number is increased by 1 each time the state of the DDL operation changes. TiDB stores this key-value pair persistently in the PD server with the key of `/tidb/ddl/global_schema_version`, and Value is the version number value of the `int64` type. Inspired by Google F1's  Online Schema change algorithm, TiDB keeps a background thread that constantly checks whether the version number of the table structure information stored in the PD server changes. This thread also ensures that the changes of version can be obtained within a certain period of time.
+In addition, TiDB also uses a dedicated (Key, Value) key-value pair to store the latest version number of structure information of all tables. This key-value pair is global, and its version number is increased by `1` each time the state of the DDL operation changes. TiDB stores this key-value pair persistently in the PD server with the key of `/tidb/ddl/global_schema_version`, and Value is the version number value of the `int64` type. Inspired by Google F1's Online Schema change algorithm, TiDB keeps a background thread that constantly checks whether the version number of the table structure information stored in the PD server changes. This thread also ensures that the changes of version can be obtained within a certain period of time.
 
-## Introduction to the SQL layer
+## SQL layer overview
 
 TiDB's SQL layer, TiDB Server, translates SQL statements into Key-Value operations, forwards the operations to TiKV, the distributed Key-Value storage layer, assembles the results returned by TiKV, and finally returns the query results to the client.
 
@@ -128,18 +127,18 @@ For example, to execute the `select count(*) from user where name = "TiDB"` SQL 
 
 1. Construct the Key Range: all `RowID` in a table are in `[0,  MaxInt64)` range. According to the row data `Key` encoding rule, using `0` and `MaxInt64` can construct a `[StartKey, EndKey)` range that is left-inclusive and right-exclusive.
 2. Scan Key Range: read the data in TiKV according to the key range constructed above.
-3. Filter data: for each row of data read, calculate the `name = "TiDB"` expression. If the result is true, return to this row. If not, skip this row.
+3. Filter data: for each row of data read, calculate the `name = "TiDB"` expression. If the result is `true`, return to this row. If not, skip this row.
 4. Calculate `Count(*)`: for each row that meets the requirements, add up to the result of `Count(*)`.
 
 **The entire process is illustrated as follows:**
 
 ![naive sql flow](/media/tidb-computing-native-sql-flow.jpeg)
 
-This solution is intuitive and feasible, but has some obvious problems in a distributed database scenario.
+This solution is intuitive and feasible, but has some obvious problems in a distributed database scenario:
 
-- As the data is being scanned, each row is read out of TiKV via a KV operation with at least one RPC overhead, which can be very high if there is a large amount of data to be scanned.
-- It is not applicable to all rows. Data that doesn't meet the conditions doesn't need to be read.
-- The value of the rows that meet the conditions is meaningless. In fact, all needed here is just the number of rows.
+- As the data is being scanned, each row is read from TiKV via a KV operation with at least one RPC overhead, which can be very high if there is a large amount of data to be scanned.
+- It is not applicable to all rows. Data that does not meet the conditions does not need to be read.
+- The value of the rows that meets the conditions is meaningless. In fact, all needed here is just the number of rows.
 
 ### Distributed SQL operations
 
@@ -149,10 +148,10 @@ The following image shows how data returns layer by layer:
 
 ![dist sql flow](/media/tidb-computing-dist-sql-flow.png)
 
-### Architecture of the SQL layer
+### Architecture of SQL layer
 
 The previous sections introduce some functions of the SQL layer and I hope you have a basic understanding of how SQL statements are handled. In fact, TiDB's SQL layer is much more complicated, with many modules and layers. The following diagram lists the important modules and calling relationships:
 
 ![tidb sql layer](/media/tidb-computing-tidb-sql-layer.png)
 
-The user's SQL request is sent to TiDB Server either directly or via `Load Balancer`. TiDB Server will parse `MySQL Protocol Packet`, get the content of requests, parse the SQL request syntactically and semantically, develop and optimize query plans, execute a query plan, get and process the data. All data is stored in the TiKV cluster, so in this process, TiDB Server needs to interact with TiKV and gets the data. Finally, TiDB Server needs to return the query results to the user.
+The user's SQL request is sent to TiDB Server either directly or via `Load Balancer`. TiDB Server will parse `MySQL Protocol Packet`, get the content of requests, parse the SQL request syntactically and semantically, develop and optimize query plans, execute a query plan, get and process the data. All data is stored in the TiKV cluster, so in this process, TiDB Server needs to interact with TiKV and get the data. Finally, TiDB Server needs to return the query results to the user.
