@@ -1,5 +1,5 @@
 ---
-title: TiDB database computation
+title: Computation of TiDB Database
 summary: Understand the computating layer of the TiDB database.
 category: introduction
 ---
