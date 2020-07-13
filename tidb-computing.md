@@ -12,7 +12,7 @@ For the storage solution on which the computing layer is dependent, this documen
 
 ## Mapping table data to Key-Value
 
-This section describes the scheme for mapping data to (Key, Value) key-value pairs in TiDB. Data here consists of the following two main aspects:
+This section describes the scheme for mapping data to (Key, Value) key-value pairs in TiDB. Data to be mapped here consists of the following two types:
 
 - Data for each row in the table, hereinafter referred to as table data.
 - Data for all indexes in the table, hereinafter referred to as index data.
