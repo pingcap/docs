@@ -7,6 +7,7 @@ aliases: ['/docs/dev/comment-syntax/','/docs/dev/reference/sql/language-structur
 # Comment Syntax
 
 This document describes the comment syntax supported by TiDB.
+
 TiDB supports three comment styles:
 
 - Use `#` to comment a line:
