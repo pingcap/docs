@@ -66,17 +66,12 @@ None of the `DELETE`, `TRUNCATE` and `DROP` operations release data immediately.
 
 Yes. But the `load data` does not support the `replace into` syntax.
 
-## 数据删除后查询速度为何会变慢？
-
 ## Why does the query speed getting slow after deleting data?
 
 Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the [Region Merge](https://github.com/pingcap/docs/blob/master/best-practices/massive-regions-best-practices.md) feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
 
-大量删除数据后，会有很多无用的 key 存在，影响查询效率。可以尝试开启 [Region Merge](https://pingcap.com/docs-cn/v3.0/best-practices/massive-regions-best-practices/#方法五开启-region-merge) 功能，具体看参考[最佳实践](https://pingcap.com/blog-cn/tidb-best-practice/)中的删除数据部分。
-
-## 对数据做删除操作之后，空间回收比较慢，如何处理？
-
-可以设置并行 GC，加快对空间的回收速度。默认并发为 1，最大可调整为 tikv 实例数量的 50%。可使用 `update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";` 命令来调整。
+## What should I do if it is slow to reclaim storage space after deleting data?
+You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:`update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";` 
 
 ## Does `show processlist` display the system process ID?
 
