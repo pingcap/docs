@@ -138,7 +138,7 @@ For example, to execute the `select count(*) from user where name = "TiDB"` SQL 
 This solution is intuitive and feasible, but has some obvious problems in a distributed database scenario.
 
 - As the data is being scanned, each row is read out of TiKV via a KV operation with at least one RPC overhead, which can be very high if there is a large amount of data to be scanned.
-- Not all rows meet the filter criteria `name = "TiDB"`. If the conditions are not met, they are unnessary to be read out.
+- It is not applicable to all rows. Data that doesn't meet the conditions doesn't need to be read.
 - The value of the rows that meet the requirements doesn't mean anything, in fact, all needed here is the information of how many rows of data.
 
 ### Distributed SQL operations
