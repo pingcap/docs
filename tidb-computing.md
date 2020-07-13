@@ -122,7 +122,7 @@ The nodes at this layer are stateless. These nodes themselves do not store data 
 
 ### SQL computing
 
-The simplest solution is through the [mapping of table data to Key-Value](#mapping-of-table-data-to-key-value) as described in the previous section scheme, mapping SQL queries to KV queries, and then acquires the corresponding data through the KV interface and performs various computations.
+The simplest solution to SQL computing is the [mapping of table data to Key-Value](#mapping-of-table-data-to-key-value) as described in the previous section, which maps SQL queries to KV queries, acquires the corresponding data through the KV interface, and performs various computations.
 
 For example, `select count(*) from user where name = "TiDB"` such a SQL statement. It needs to read all the data in the table, then check if the `name` field is `TiDB`, and if so, returns this line. The process is as follows:
 
