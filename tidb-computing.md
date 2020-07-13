@@ -4,7 +4,7 @@ summary: Understand the computating layer of the TiDB database.
 category: introduction
 ---
 
-# Computation of TiDB database
+# Computation of TiDB Database
 
 Based on the distributed storage capability provided by TiKV, TiDB builds the computing engine that combines great transactional processing capability with good data analysis capability. This document starts by introducing a data mapping algorithm that maps data from TiDB database tables to TiKV's (Key, Value) key-value pairs, then introduces how TiDB manages metadata, and finally illustrates the architecture of the TiDB SQL layer.
 
