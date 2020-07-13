@@ -39,7 +39,7 @@ Value: [col1, col2, col3, col4]
 
 TiDB supports both primary keys and secondary indexes (both unique and non-unique indexes). Similar to the table data mapping scheme, TiDB assigns an index ID to each index of the table represented by `IndexID`.
 
-For primary keys and unique indexes, it is needed to quickly locate the corresponding RowID based on the key value, so it is encoded as follows (Key, Value) Key-value pairs.
+For primary keys and unique indexes, it is needed to quickly locate the corresponding `RowID` based on the key-value pair, so such a key-value pair is encoded as follows.
 
 ```
 Key:   tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
