@@ -12,7 +12,7 @@ If you use TiDB Ansible or TiUP to deploy the TiDB cluster, the monitoring syste
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. The TiDB dashboard consists of the TiDB panel and the TiDB Summary panel. The differences between the two panels are different in the following aspects:
 
 - TiDB panel: provides as comprehensive information as possible for troubleshooting cluster anomalies.
-- TiDB Summary Panel: extracts parts of the TiDB panel information with which users are most concerned, with some modifications. It provides data (such as QPS, TPS, response delay) that users care about in the daily database operations, which serve as the monitoring information to be displayed or reported.
+- TiDB Summary Panel: extracts parts of the TiDB panel information with which users are most concerned, with some modifications. It provides data (such as QPS, TPS, response delay) that users care about in the daily database operations, which serves as the monitoring information to be displayed or reported.
 
 This document describes some key monitoring metrics displayed on the TiDB dashboard.
 
@@ -34,11 +34,11 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 - Query Detail
     - Duration 80/95/99/999 By Instance: the statistics of the execution time for SQL statements on each TiDB instance (different percentiles)
     - Failed Query OPM Detail: the statistics of error types (such as syntax errors and primary key conflicts) according to the errors occurred when executing SQL statements on each TiDB instance
-    - Internal SQL OPS: the internal SQL statements executed per second in the entire TiDB cluster. The internal SQL statements are automatically executed in. There are generally triggered by user SQL statements or internally scheduled tasks.
+    - Internal SQL OPS: the internal SQL statements executed per second in the entire TiDB cluster. The internal SQL statements are internally executed and are generally triggered by user SQL statements or internally scheduled tasks.
 
 - Server
     - Uptime: the runtime of each TiDB instance
-    - Memory Usage: the memory usage statistics of each TiDB instance, which is are divided into the memory occupied by processes and the memory applied by Golang on the heap
+    - Memory Usage: the memory usage statistics of each TiDB instance, which is divided into the memory occupied by processes and the memory applied by Golang on the heap
     - CPU Usage: the statistics of CPU usage of each TiDB instance
     - Connection Count: the number of clients connected to each TiDB instance
     - Open FD Count: the statistics of opened file descriptors of each TiDB instance
@@ -63,9 +63,9 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Session Retry Error OPS: the number of errors encountered during the transaction retry per second
     - KV Transaction OPS: the number of transactions executed per second within each TiDB instance
         - A user transaction might trigger multiple transaction executions in TiDB, including reading internal metadata, atomic retries of the user transaction, and so on
-        - TiDB's internal scheduled tasks also operates on the database through transactions, which is also included in this panel
+        - TiDB's internally scheduled tasks also operate on the database through transactions, which are also included in this panel
     - KV Transaction Duration: the time spent on executing transactions within each TiDB
-    - Commit Token Wait Duration: the wait duration in the flow control queue during the transaction commit. If the wait duration is long, it means that the transaction to commit is too large and the flow is controlled. If the system still has resources available, you can speed up the committing by increasing the `committer-concurrency` value in the TiDB configuration file
+    - Commit Token Wait Duration: the wait duration in the flow control queue during the transaction commit. If the wait duration is long, it means that the transaction to commit is too large and the flow is controlled. If the system still has resources available, you can speed up the commit process by increasing the `committer-concurrency` value in the TiDB configuration file
     - Transaction Max Write KV Num: the maximum number of key-value pairs written by a single transaction
     - Transaction Max Write Size Bytes: the maximum key-value pair size written by a single transaction
     - Transaction Regions Num 90: 90% of the number of Regions written by a single transaction
@@ -92,7 +92,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Partial Num: the number of Partial results for each SQL statement
 
 - KV Errors
-    - KV Backoff Duration: the total time that a KV retry request lasts. TiDB may encounter an error when sending a request to TiKV. TiDB has a retry mechanism for every request to TiKV. The total time of a request retry is recorded here
+    - KV Backoff Duration: the total duration that a KV retry request lasts. TiDB might encounter an error when sending a request to TiKV. TiDB has a retry mechanism for every request to TiKV. This `KV Backoff Duration` item records the total time of a request retry.
     - TiClient Region Error OPS: the number of Region related error messages returned by TiKV
     - KV Backoff OPS: the number of error messages returned by TiKV
     - Lock Resolve OPS: the number of TiDB operations to resolve locks. When TiDB's read or write request encounters a lock, it tries to resolve the lock
@@ -154,7 +154,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 - GC
     - Worker Action OPM: the number of GC related operations, including `run_job`, `resolve_lock`, and `delete\_range`
     - Duration 99: the time consumed by GC related operations
-    - Config: the configuration of GC data life time and GC run interval
+    - Config: the configuration of GC data life time and GC running interval
     - GC Failure OPM: the number of failed GC related operations
     - Delete Range Failure OPM: the number of times the `Delete Range` has failed
     - Too Many Locks Error OPM: the number of the error that GC clears up too many locks
