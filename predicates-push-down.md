@@ -28,7 +28,7 @@ explain select * from t where a < 1;
 3 rows in set (0.00 sec)
 ```
 
-In this query，pushing down the predicate `a < 1` on TiKV to filter the data can reduce the overhead caused by network transmission.
+In this query, pushing down the predicate `a < 1` to the TiKV layer to filter the data can reduce the overhead of network transmission.
 
 ### Case 1: push predicates to storage layer
 
