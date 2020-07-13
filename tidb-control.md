@@ -2,7 +2,7 @@
 title: TiDB Control User Guide
 summary: Use TiDB Control to obtain TiDB status information for debugging.
 category: reference
-aliases: ['/docs/v2.1/tidb-control/','/docs/v2.1/reference/tools/tidb-control/']
+aliases: ['/docs/dev/tidb-control/','/docs/dev/reference/tools/tidb-control/']
 ---
 
 # TiDB Control User Guide
@@ -25,16 +25,17 @@ After installing TiUP, you can use `tiup ctl tidb` command to get and execute Ti
 
 ## Usage introduction
 
-The usage of `tidb-ctl` consists of command (including subcommand), option, and flag.
+This section describes how to use commands, subcommands, options, and flags in `tidb-ctl`.
 
 - command: characters without `-` or `--`
+- subcommand: characters without `-` or `--` that follow a command
 - option: characters with `-` or `--`
-- flag: characters exactly following the command or option, passing value to the command or option
+- flag: characters exactly following a command/subcommand or option, passing value to the command/subcommand or option
 
 Usage example: `tidb-ctl schema in mysql -n db`
 
 - `schema`: the command
-- `in`: the subcommand of schema
+- `in`: the subcommand of `schema`
 - `mysql`: the flag of `in`
 - `-n`: the option
 - `db`: the flag of `-n`
@@ -60,11 +61,6 @@ The following example shows how to obtain the schema information:
 
 Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has two subcommands: `in` and `tid`.
 
-<<<<<<< HEAD
-```
-tidb-ctl -H/--host {TiDB service address} -P/--port {TiDB service port}
-```
-=======
 - `in` is used to obtain the table schema of all tables in the database through the database name.
 - `tid` is used to obtain the table schema by using the unique `table_id` in the whole database.
 
@@ -81,45 +77,22 @@ tidb-ctl -H/--host {TiDB service address} -P/--port {TiDB service port}
 - `--ssl-cert`: The certificate file path used for the TLS connection
 
 `--pdhost` and `--pdport` are mainly used in the `etcd` subcommand. For example, `tidb-ctl etcd ddlinfo`. If you do not specify the address and the port, the following default value is used:
->>>>>>> 64044c7... update document of tidb-ctl (#3048)
 
-If you do not add an address or a port, the default value is used. The default address is `127.0.0.1` (service address must be the IP address); the default port is `10080`. Connection options are top-level options and apply to all of the following commands.
+- The default service address of TiDB and PD: `127.0.0.1`. The service address must be an IP address.
+- The default service port of TiDB: `10080`.
+- The default service port of PD: `2379`.
 
-<<<<<<< HEAD
-Currently, TiDB Control can obtain four categories of information using the following four commands:
-
-- `tidb-ctl mvcc`: MVCC information
-- `tidb-ctl region`: Region information
-- `tidb-ctl schema`: Schema information
-- `tidb-ctl table`: Table information
-
-### Examples
-
-The following example shows how to obtain the schema information:
-
-Use `tidb-ctl schema -h` to get the help information of the subcommands. `schema` has two subcommands: `in` and `tid`.
-
-- `in` is used to obtain the table schema of all tables in the database through the database name.
-- `tid` is used to obtain the table schema through the unique `table_id` in the whole database.
-
-#### The `in` command
-
-You can also use `tidb-ctl schema in -h/--help` to get the help information of the `in` subcommand.
-
-##### Basic usage
-=======
 ### The `schema` command
 
 #### The `in` subcommand
 
 `in` is used to obtain the table schema of all tables in the database through the database name.
->>>>>>> 64044c7... update document of tidb-ctl (#3048)
 
-```
-tidb-ctl schema in {database name}
+```bash
+tidb-ctl schema in <database name>
 ```
 
-For example, `tidb-ctl schema in mysql` returns the following result:
+For example, running `tidb-ctl schema in mysql` returns the following result:
 
 ```json
 [
@@ -137,9 +110,9 @@ For example, `tidb-ctl schema in mysql` returns the following result:
 ]
 ```
 
-The result is long and displayed in JSON. The above result is a truncated one.
+The result is displayed in the JSON format. (The above output is truncated.)
 
-- If you want to specify the table name, use `tidb-ctl schema in {database} -n {table name}` to filter.
+- If you want to specify the table name, use `tidb-ctl schema in <database> -n <table name>` to filter.
 
     For example, `tidb-ctl schema in mysql -n db` returns the table schema of the `db` table in the `mysql` database:
 
@@ -155,9 +128,6 @@ The result is long and displayed in JSON. The above result is a truncated one.
     }
     ```
 
-<<<<<<< HEAD
-    The above result is a truncated one, too.
-=======
     (The above output is also truncated.)
 
     If you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure. For example, `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`.
@@ -304,8 +274,52 @@ The stack information for the TiDB error log is in one line format. You could us
 ### The `keyrange` command
 
 The `keyrange` subcommand is used to query the global or table-related key range information, which is output in the hexadecimal form.
->>>>>>> 64044c7... update document of tidb-ctl (#3048)
 
-- If you want to specify the server address, use the `-H -P` option.
+* Execute the `tidb-ctl keyrange` command to check the global key range information:
 
-    For example, `tidb-ctl -H 127.0.0.1 -P 10080 schema in mysql -n db`.
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    tidb-ctl keyrange
+    ```
+
+    ```
+    global ranges:
+      meta: (6d, 6e)
+      table: (74, 75)
+    ```
+
+* Add the `--encode` option to display encoded keys (in the same format as in TiKV and PD):
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    tidb-ctl keyrange --encode
+    ```
+
+    ```
+    global ranges:
+      meta: (6d00000000000000f8, 6e00000000000000f8)
+      table: (7400000000000000f8, 7500000000000000f8)
+    ```
+
+* Execute the `tidb-ctl keyrange --database={db} --table={tbl}` command to check the global and table-related key range information:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    tidb-ctl keyrange --database test --table ttt
+    ```
+
+    ```
+    global ranges:
+      meta: (6d, 6e)
+      table: (74, 75)
+    table ttt ranges: (NOTE: key range might be changed after DDL)
+      table: (74800000000000002f, 748000000000000030)
+      table indexes: (74800000000000002f5f69, 74800000000000002f5f72)
+        index c2: (74800000000000002f5f698000000000000001, 74800000000000002f5f698000000000000002)
+        index c3: (74800000000000002f5f698000000000000002, 74800000000000002f5f698000000000000003)
+        index c4: (74800000000000002f5f698000000000000003, 74800000000000002f5f698000000000000004)
+      table rows: (74800000000000002f5f72, 748000000000000030)
+    ```
