@@ -30,7 +30,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
-- whether automatically commit a transaction
+- Whether automatically commit a transaction.
 
 ### ddl_slow_threshold
 
