@@ -155,4 +155,4 @@ The previous sections introduce some functions of the SQL layer and I hope you h
 
 ![tidb sql layer](/media/tidb-computing-tidb-sql-layer.png)
 
-The user's SQL request is sent to TiDB Server either directly or via `Load Balancer`. TiDB Server will parse `MySQL Protocol Packet`, getting the content of requests, parsing syntax and semantic analysis of SQL, developing and optimizing query plans, executing a query plan , fetching and processing the data. The data is all stored in the TiKV cluster, so in this process, TiDB Server needs to interact with the TiKV and gets the data. Finally, TiDB Server needs to return the query results to the user.
+The user's SQL request is sent to TiDB Server either directly or via `Load Balancer`. TiDB Server will parse `MySQL Protocol Packet`, get the content of requests, parse the SQL request syntactically and semantically, develop and optimize query plans, execute a query plan, get and process the data. All data is stored in the TiKV cluster, so in this process, TiDB Server needs to interact with TiKV and gets the data. Finally, TiDB Server needs to return the query results to the user.
