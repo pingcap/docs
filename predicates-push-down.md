@@ -44,7 +44,7 @@ explain select * from t where a < substring('123', 1, 1);
 +-------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
-This query has the same execution plan as the query in case 1, because the input parameters of the `substring` of the predicate `a < substring('123', 1, 1)` are constants, so they can be calculated in advance. Then simplify to get the equivalent predicate `a < 1`. Further, TiDB can push `a < 1` down to TiKV.
+This query has the same execution plan as the query in case 1, because the input parameters of the `substring` of the predicate `a < substring('123', 1, 1)` are constants, so they can be calculated in advance. Then the predicate is simplified to the equivalent predicate `a < 1`. After that, TiDB can push `a < 1` down to TiKV.
 
 ### Case 3: push predicates below join operator
 
