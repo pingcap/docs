@@ -1,7 +1,6 @@
 ---
 title: Column Pruning
 summary: Learn about the usage of column pruning in TiDB.
-category: performance
 ---
 
 # Column Pruning
