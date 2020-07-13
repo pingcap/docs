@@ -63,7 +63,7 @@ recordPrefixSep = []byte{'r'}
 indexPrefixSep  = []byte{'i'}
 ```
 
-Also note that in the above schemes, regardless of table data or index data key encoding scheme, all rows in a table have the same key prefix, and all the data of an index also has the same prefix. Data with the same prefixes are thus arranged together in TiKV's Key space. Therefore, by carefully designing the encoding scheme of the suffix part to ensure that the pre and post-encoding comparisons remain the same, the table data or index data can be stored in the TiKV in an ordered manner. With this encoding, all rows of data in a table are arranged orderly by `RowID` in the TiKV's Key space, and the data for a particular index will also be arranged sequentially in the Key space according to the specific value of the index data (the `indexedColumnsValue`).
+Also note that in the above mapping schemes, regardless of table data or index data key encoding scheme, all rows in a table have the same key prefix, and all the data of an index also has the same prefix. Data with the same prefixes are thus arranged together in TiKV's key space. Therefore, by carefully designing the encoding scheme of the suffix part to ensure that the pre-encoding and post-encoding comparisons remain the same, the table data or index data can be stored in the TiKV in an ordered manner. Using this encoding scheme, all row data in a table is arranged orderly by `RowID` in the TiKV's key space, and the data of a particular index is also arranged sequentially in the key space according to the specific value of the index data (`indexedColumnsValue`).
 
 ### Example of Key-Value mapping relationship
 
