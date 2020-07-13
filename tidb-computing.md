@@ -55,7 +55,7 @@ Value: null
 
 ### Summary of mapping relationships
 
-`tablePrefix`, `recordPrefixSep`, and `indexPrefixSep` in all of the above encoding rules are string constants that are used to distinguish between other data in Key space, defined as follows:
+`tablePrefix`, `recordPrefixSep`, and `indexPrefixSep` in all of the above encoding rules are string constants that are used to distinguish a KV from other data in the Key space, which are defined as follows:
 
 ```
 tablePrefix     = []byte{'t'}
