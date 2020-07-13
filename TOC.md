@@ -107,6 +107,7 @@
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
         + [Statistics](/statistics.md)
+      + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
@@ -417,6 +418,8 @@
     + [MySQL System Variables](/system-variables.md)
     + [TiDB Specific System Variables](/tidb-specific-system-variables.md)
   + Storage Engines
+    + TiKV
+      + [TiKV Overview](/tikv-overview.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
