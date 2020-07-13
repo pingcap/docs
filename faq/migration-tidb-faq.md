@@ -138,8 +138,6 @@ Distributed transactions need two-phase commit and the underlying implementation
 
 There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
 
-在 Google 的 Cloud Spanner 上面，也有类似的[限制](https://cloud.google.com/spanner/docs/limits)。
-
 ### How to import data in batches?
 
 When you import data, insert in batches and keep the number of rows within 10,000 for each batch.
