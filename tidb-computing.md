@@ -10,7 +10,7 @@ Based on the distributed storage capability provided by TiKV, TiDB builds the co
 
 For the storage solution on which the computing layer is dependent, this document only introduces the row-based storage structure of TiKV. For OLAP services, TiDB introduces a column-based storage solution [TiFlash](/tiflash/tiflash-overview.md) as a TiKV extension.
 
-## Mapping of table data to Key-Value
+## Mapping table data to Key-Value
 
 This section describes the scheme for mapping data to (Key, Value) key-value pairs in TiDB. Data here consists of the following two main aspects:
 
