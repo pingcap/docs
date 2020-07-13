@@ -1,6 +1,6 @@
 ---
 title: TiDB database computation
-summary: Understand the computation layer of the TiDB database.
+summary: Understand the computating layer of the TiDB database.
 category: introduction
 ---
 
