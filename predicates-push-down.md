@@ -1,7 +1,6 @@
 ---
 title: Predicates Push Down
 category: reference
-aliases: ['/docs/dev/predicates-push-down.md/','/docs/dev/reference/performance/predicates-push-down/']
 ---
 
 # Predicates Push Down (PPD)
