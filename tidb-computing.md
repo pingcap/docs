@@ -116,7 +116,7 @@ In addition, TiDB also uses a dedicated (Key, Value) key-value pair to store the
 
 ## Introduction to the SQL layer
 
-TiDB's SQL layer, TiDB Server, is responsible for translating the SQL into Key-Value operation to the common distributed Key-Value storage layer TiKV, assembling the results returned by TiKV, and returning the query results to the client ultimately.
+TiDB's SQL layer, TiDB Server, translates SQL statements into Key-Value operations, forwards the operations to TiKV, the distributed Key-Value storage layer, assembles the results returned by TiKV, and finally returns the query results to the client.
 
 The nodes at this layer are stateless, the nodes themselves do not store data, and the nodes are completely equal.
 
