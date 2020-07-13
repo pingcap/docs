@@ -1,7 +1,6 @@
 ---
 title: Troubleshoot Hotspot Issues
 summary: Learn how to locate and resolve read or write hotspot issues in TiDB.
-category: troubleshoot
 ---
 
 # Troubleshoot Hotspot Issues
