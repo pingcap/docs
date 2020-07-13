@@ -82,7 +82,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: `2^64 - 1` (18446744073709551615)
-- The maximum number of rows to return from the `SELECT` statements.
+- The maximum number of rows returned by the `SELECT` statements.
 
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0 version</span>
 
