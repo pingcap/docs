@@ -68,7 +68,7 @@ explain select * from t join s on t.a = s.a where t.a < 1;
 
 In this query, the predicate `t.a < 1` is pushed below join to filter in advance, which can reduce the calculation overhead of join.
 
-In addition，This SQL executes an inner join, and the `ON` condition is `t.a = s.a`. The predicate `s.a <1` can be derived from `t.a < 1` and pushed down to `s` table below the join operator. Filtering the `s` table can further reduce the calculation of join.
+In addition，This SQL statement has an inner join executed, and the `ON` condition is `t.a = s.a`. The predicate `s.a <1` can be derived from `t.a < 1` and pushed down to `s` table below the join operator. Filtering the `s` table can further reduce the calculation overhead of join.
 
 ### Case 4: predicates that are not supported by storage layers cannot be pushed down
 
