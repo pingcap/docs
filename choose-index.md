@@ -1,19 +1,19 @@
 ---
 title: Index Selection
-category: performance
+summary: Choose the best indexes for TiDB query optimization.
 ---
 
 # Index Selection
 
-Reading data from storage engines is one of the most time-consuming parts during the SQL execution. Up to now, TiDB supports reading data from different storage engines and different indexes. Query execution performance depends largely on whether you select a suitable index or not.
+Reading data from storage engines is one of the most time-consuming steps during the SQL execution. Currently, TiDB supports reading data from different storage engines and different indexes. Query execution performance depends largely on whether you select a suitable index or not.
 
-This section introduces how to select a index to access a table, and some related ways to control index selection.
+This document introduces how to select an index to access a table, and some related ways to control index selection.
 
-## Access Tables
+## Access tables
 
-Before introducing index selection, it is important to understand how TiDB accesses tables, what triggers they are, what differences they make, and what the pros and cons are.
+Before introducing index selection, it is important to understand the ways TiDB accesses tables, what triggers each way, what differences each way makes, and what the pros and cons are.
 
-### The Operators of Access Tables
+### Operators for accessing tables
 
 | Operator | Trigger Conditions | Applicable Scenarios | Explanations |
 | :------- | :------- | :------- | :---- |
@@ -23,15 +23,15 @@ Before introducing index selection, it is important to understand how TiDB acces
 | IndexReader | A table has one or more indexes, and the columns needed for the calculation are included in the indexes. | When there is a smaller range query on the indexes, or when there is an order requirement for indexed columns. | When multiple indexes exist, a reasonable index is selected based on the cost estimation. |
 | IndexLookupReader | A table has one or more indexes, and the columns needed for calculation are not completely included in the index. | Same as IndexReader. |  Since the index does not completely cover calculated columns, it needs to retrieve rows from a table after reading indexes. There is an extra cost compared to IndexReader operator. |
 
-> Note：
-> 
-> The TableReader operator is based on the _tidb_rowid column index, TiFlash is a column storage index, so the choice of index is the choice of a access tables operator.
+> **Note:**
+>
+> The TableReader operator is based on the `_tidb_rowid` column index, and TiFlash is a column storage index, so the choice of index is the choice of a access tables operator.
 
-## Index Selection
+## Index selection rules
 
 TiDB provides a heuristic rule named Skyline-Pruning based on the cost estimation of each access tables operator.It can reduce the probability of wrong index selection caused by wrong estimation.
 
-### Skyline-Pruning
+### Skyline-pruning
 
 Skyline-pruning is a heuristic filtering rule for indexes. To judge an index, the following three dimensions are needed:
 
@@ -43,7 +43,7 @@ Skyline-pruning is a heuristic filtering rule for indexes. To judge an index, th
 
 For these three dimensions, if an index named idx_a is not worse than the index named idx_b in all three dimensions and one of the dimensions is better than Idx_b, then idx_a is preferred.
 
-### Selection Based on the Cost Estimation
+### Selection based on cost estimation
 
 After using the Skyline-Pruning rule to rule out inappropriate indexes, the selection of indexes is based entirely on the cost estimation. The cost estimation of access tables requires the following considerations:
 
@@ -68,7 +68,7 @@ According to these factors and the cost model, the optimizer selects a index wit
 
     In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of tidb_opt_network_factor parameter in order to reduce the cost for retrieving rows from tables.
 
-## Control Index Selection
+## Control index selection
 
 The index selection can be controlled by a single query through [Optimizer Hints](/optimizer-hints.md).
 
