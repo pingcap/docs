@@ -46,7 +46,7 @@ Key:   tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
 Value: RowID
 ```
 
-For ordinary secondary indexes that do not need to satisfy the uniqueness constraint, a single key may correspond to multiple rows. It needs to query corresponding RowID according to the range of keys. Therefore, it is encoded as a (Key, Value) key-value pair according to the following rule:
+For ordinary secondary indexes that do not need to satisfy the uniqueness constraint, a single key might correspond to multiple rows. It needs to query corresponding `RowID` according to the range of keys. Therefore, the key-value pair must be encoded according to the following rule:
 
 ```
 Key:   tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_{RowID}
