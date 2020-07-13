@@ -78,7 +78,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`
 - This variable controls a number of MySQL compatibility behaviors. See [SQL Mode](/sql-mode.md) for more information.
 
-### sql_select_limit
+### sql_select_limit <span class="version-mark">New in v4.0.2 version</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `2^64 - 1` (18446744073709551615)
