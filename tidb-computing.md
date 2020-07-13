@@ -67,7 +67,7 @@ Also note that in the above mapping schemes, regardless of table data or index d
 
 ### Example of Key-Value mapping relationship
 
-Finally, a simple example is used to understand the Key-Value mapping relationship of TiDB. Suppose the following table exists in TiDB.
+This section shows a simple example for you to understand the Key-Value mapping relationship of TiDB. Suppose the following table exists in TiDB.
 
 ```sql
 CREATE TABLE User {
