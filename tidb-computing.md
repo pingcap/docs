@@ -33,7 +33,7 @@ Key:   tablePrefix{TableID}_recordPrefixSep{RowID}
 Value: [col1, col2, col3, col4]
 ```
 
-`tablePrefix` and `recordPrefixSep` are both special string constants used to distinguish other data in Key space. The exact value is given in the summary that follows.
+`tablePrefix` and `recordPrefixSep` are both special string constants used to distinguish other data in Key space. The exact values of the string constants are introduced in [Summary of mapping relationships](#summary-of-mapping-relationships).
 
 ### Mapping of Indexed Data to Key-Value
 
