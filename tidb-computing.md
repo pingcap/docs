@@ -139,7 +139,7 @@ This solution is intuitive and feasible, but has some obvious problems in a dist
 
 - As the data is being scanned, each row is read out of TiKV via a KV operation with at least one RPC overhead, which can be very high if there is a large amount of data to be scanned.
 - It is not applicable to all rows. Data that doesn't meet the conditions doesn't need to be read.
-- The value of the rows that meet the requirements doesn't mean anything, in fact, all needed here is the information of how many rows of data.
+- The value of the rows that meet the conditions is meaningless. In fact, all needed here is just the number of rows.
 
 ### Distributed SQL operations
 
