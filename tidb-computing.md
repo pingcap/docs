@@ -151,7 +151,7 @@ The following image shows how data returns layer by layer:
 
 ### Architecture of the SQL layer
 
-With the above example, I hope you have a basic understanding of how SQL statements are handled. In fact, TiDB's SQL layer is much more complex, with many modules and layers. The following diagram lists the important modules and calling relationships:
+The previous sections introduce some functions of the SQL layer and I hope you have a basic understanding of how SQL statements are handled. In fact, TiDB's SQL layer is much more complicated, with many modules and layers. The following diagram lists the important modules and calling relationships:
 
 ![tidb sql layer](/media/tidb-computing-tidb-sql-layer.png)
 
