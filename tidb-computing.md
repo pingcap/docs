@@ -24,7 +24,7 @@ In a relational database, a table might have many columns. To map the data of ea
 Based on the above considerations, the mapping of table data to Key-Value in TiDB is designed as follows:
 
 - To ensure that data from the same table is kept together for easy searching, TiDB assigns a table ID to each table denoted by `TableID`. Table ID is an integer that is unique throughout the cluster.
-- TiDB assigns a row ID, represented by `RowID`, to each row of data in the table. The row ID is also an integer, unique within the table. For row ID, TiDB has made a small optimization, if a table has integer type primary key, TiDB will use primary key value as the row ID of this row of data.
+- TiDB assigns a row ID, represented by `RowID`, to each row of data in the table. The row ID is also an integer, unique within the table. For row ID, TiDB has made a small optimization: if a table has an integer type primary key, TiDB uses the value of this primary key as the row ID.
 
 Each row of data is encoded as a (Key, Value) key-value pair according to the following rule:
 
