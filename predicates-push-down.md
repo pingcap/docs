@@ -131,7 +131,7 @@ In this query，there is a predicate `a < @a` on table `t`. The `@a` of the pred
 
 As can be seen from `explain` results, the predicate is not like case 2, which is simplified to `a < 1` and pushed down to TiKV. This is because the value of the user variable `@a` may change during the computation, and TiKV is not aware of the changes. So TiDB does not replace `@a` with `1`, and does not push down it to TiKV.
 
-An example to help understand is as follows：
+An example to help you understand is as follows：
 
 ```sql
 create table t(id int primary key, a int);
