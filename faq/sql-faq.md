@@ -159,7 +159,7 @@ See [Understand the Query Execution Plan](/query-execution-plan.md).
 
 See [Introduction to Statistics](/statistics.md).
 
-#### How to optimize `select count(1)`?
+### How to optimize `select count(1)`?
 
 The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/tidb-specific-system-variables.md#tidb_distsql_scan_concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
 
@@ -170,7 +170,7 @@ Recommendations:
 3. Test the `count` in the case of large amount of data.
 4. Optimize the TiKV configuration. See [Tune TiKV Thread Performance](/tune-tikv-thread-performance.md) and [Tune TiKV Memory Performance](/tune-tikv-memory-performance.md).
 
-## How to view the progress of the current DDL job?
+### How to view the progress of the current DDL job?
 
 You can use `admin show ddl` to view the progress of the current DDL job. The operation is as follows:
 
@@ -190,25 +190,25 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 From the above results, you can get that the `add index` operation is being processed currently. You can also get from the `RowCount` field of the `RUNNING_JOBS` column that now the `add index` operation has added 77312 rows of indexes.
 
-#### How to view the DDL job?
+### How to view the DDL job?
 
 - `admin show ddl`: to view the running DDL job
 - `admin show ddl jobs`: to view all the results in the current DDL job queue (including tasks that are running and waiting to run) and the last ten results in the completed DDL job queue
 - `admin show ddl job queries 'job_id' [, 'job_id'] ...`: to view the original SQL statement of the DDL task corresponding to the `job_id`; the `job_id` only searches the running DDL job and the last ten results in the DDL history job queue.
 
-## Does TiDB support CBO (Cost-Based Optimization)? If yes, to what extent?
+### Does TiDB support CBO (Cost-Based Optimization)? If yes, to what extent?
 
 Yes. TiDB uses the cost-based optimizer. The cost model and statistics are constantly optimized. TiDB also supports join algorithms like hash join and sort-merge join.
 
-## How to determine whether I need to execute `analyze` on a table?
+### How to determine whether I need to execute `analyze` on a table?
 
 View the `Healthy` field using `show stats_healthy` and generally you need to execute `analyze` on a table when the field value is smaller than 60.
 
-## What is the ID rule when a query plan is presented as a tree? What is the execution order for this tree?
+### What is the ID rule when a query plan is presented as a tree? What is the execution order for this tree?
 
 No rule exists for these IDs but the IDs are unique. When IDs are generated, a counter works and adds one when one plan is generated. The execution order has nothing to do with the ID. The whole query plan is a tree and the execution process starts from the root node and the data is returned to the upper level continuously. For details about the query plan, see [Understanding the TiDB Query Execution Plan](/query-execution-plan.md).
 
-## In the TiDB query plan, `cop` tasks are in the same root. Are they executed concurrently?
+### In the TiDB query plan, `cop` tasks are in the same root. Are they executed concurrently?
 
 Currently the computing tasks of TiDB belong to two different types of tasks: `cop task` and `root task`.
 
@@ -222,11 +222,9 @@ Generally the input data of `root task` comes from `cop task`; when `root task` 
 
 See [The TiDB Command Options](/command-line-flags-for-tidb-configuration.md).
 
-#### How to scatter the hotspots?
+### How to scatter the hotspots?
 
 In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [TiDB Specific System Variables and Syntax](/tidb-specific-system-variables.md#shard_row_id_bits).
-
-### TiKV
 
 ### Tune TiKV performance
 
