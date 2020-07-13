@@ -1,6 +1,5 @@
 ---
 title: Comment Syntax
-category: reference
 summary: This document introduces the comment syntax supported by TiDB.
 aliases: ['/docs/dev/comment-syntax/','/docs/dev/reference/sql/language-structure/comment-syntax/']
 ---
