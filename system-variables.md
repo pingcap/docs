@@ -257,7 +257,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable is used to control whether to enable the cascades planner feature.
+- This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
 
 ### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
 
@@ -437,6 +437,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 32
+- Range: 1 - 32
 - This variable is used to set the number of rows for the initial chunk during the execution process.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
@@ -456,7 +457,8 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 1024
-- This variable is used to set the maximum number of rows in a chunk during the execution process.
+- Minimum value: 32
+- This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues.
 
 ### tidb_max_delta_schema_count <span class="version-mark">New in v2.1.18 and v3.0.5</span>
 
@@ -683,7 +685,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION
 - Default value: 0
-- After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported.
+- After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.
 
 ```sql
 tidb> set tx_isolation='serializable';
