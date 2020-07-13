@@ -120,7 +120,7 @@ TiDB's SQL layer, TiDB Server, translates SQL statements into Key-Value operatio
 
 The nodes at this layer are stateless. These nodes themselves do not store data and are completely equivalent.
 
-### SQL algorithm
+### SQL computing
 
 The simplest solution is through the [mapping of table data to Key-Value](#mapping-of-table-data-to-key-value) as described in the previous section scheme, mapping SQL queries to KV queries, and then acquires the corresponding data through the KV interface and performs various computations.
 
