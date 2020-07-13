@@ -8,7 +8,7 @@ category: introduction
 
 Based on the distributed storage capability provided by TiKV, TiDB builds the computing engine that combines great transactional processing capability with good data analysis capability. This document starts by introducing a data mapping algorithm that maps data from TiDB database tables to TiKV's (Key, Value) key-value pairs, then introduces how TiDB manages metadata, and finally illustrates the architecture of the TiDB SQL layer.
 
-For the computation layer dependent storage schemes, this article only introduces TiKV based row storage structures. For analytic services, TiDB introduces a column storage scheme as a TiKV extension - [TiFlash](/tiflash/tiflash-overview.md).
+For the storage solution on which the computing layer is dependent, this document only introduces the row-based storage structure of TiKV. For OLAP services, TiDB introduces a column-based storage solution [TiFlash](/tiflash/tiflash-overview.md) as a TiKV extension.
 
 ## Mapping of table data to Key-Value
 
