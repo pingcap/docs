@@ -391,7 +391,7 @@ dispatchers = [
     {matcher = ['test3.*', 'test4.*'], dispatcher = "rowid"},
 ]
 # For the sink of MQ type, you can specify the protocol format of the message.
-# Currently two protocols are supported: default and canal. The default protocol default is TiCDC Open Protocol.
+# Currently two protocols are supported: default and canal. The default protocol is TiCDC Open Protocol.
 protocol = "default"
 [cyclic-replication]
 # Whether to enable cyclic replication.
@@ -406,8 +406,8 @@ sync-ddl = true
 
 ### Notes for compatibility
 
-* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed  and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
-* In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md).
+* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
+* In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
 
 ## Cyclic replication
 
@@ -415,7 +415,7 @@ sync-ddl = true
 >
 > Currently (v4.0.2), cyclic replication is still an experimental feature. It is **NOT** recommended to use it in the production environment.
 
-The cyclic replication feature supports replicating data across multiple independent TiDB clusters. For example, TiDB clusters A, cluster B, and cluster C all have a table named `test.user_data`, with respective written data into this table. With the cyclic replication feature, the data written into `test.user_data` in one cluster can be replicated to the other two clusters, so that the `test.user_data` table in the three clusters is consistent with each other.
+The cyclic replication feature supports replicating data across multiple independent TiDB clusters. For example, TiDB clusters A, cluster B, and cluster C all have a table named `test.user_data` and write data into this table respectively. With the cyclic replication feature, the data written into `test.user_data` in one cluster can be replicated to the other two clusters, so that the `test.user_data` table in the three clusters is consistent with each other.
 
 ### Usage example
 
@@ -429,7 +429,7 @@ To use the cyclic replication feature, you need to configure the following param
 + `--cyclic-filter-replica-ids`: Specifies the data source ID to be filtered, which is usually the downstream cluster ID.
 + `--cyclic-sync-ddl`: Determines whether to replicate DDL statements to the downstream. DDL replication can only be enabled in the TiCDC component of one cluster.
 
-Take the following steps to create a cyclic replication task:
+To create a cyclic replication task, take the following steps:
 
 1. [Enable the TiCDC component](#deploy-ticdc) in TiDB cluster A, cluster B, and cluster C.
 
@@ -506,9 +506,9 @@ Take the following steps to create a cyclic replication task:
 ### Usage notes
 
 + Before creating the cyclic replication task, you must execute `cdc cli changefeed cyclic create-marktables` to create the mark tables for the cyclic replication.
-+ Tables with cyclic replication enabled only contain the [a-zA-Z0-9_] characters.
++ Tables with cyclic replication enabled only contain the `[a-zA-Z0-9_]` characters.
 + Before creating the cyclic replication task, the tables for the task must be created.
 + After enabling the cyclic replication, you cannot create a table that will be replicated by the cyclic replication task.
 + To perform online DDL operations, ensure the following requirements are met:
     - The TiCDC components of multiple clusters form a one-way DDL replication chain, which is not cyclic. For example, in the example above, only the TiCDC component of cluster C disables `sync-ddl`.
-    - DDL operations must be performed on the cluster that is the starting point of the one-way DDL replication chain.
+    - DDL operations must be performed on the cluster that is the starting point of the one-way DDL replication chain, such as cluster A in the example above.
