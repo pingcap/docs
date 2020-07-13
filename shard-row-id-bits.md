@@ -5,7 +5,7 @@ summary: Learn the SHARD_ROW_ID_BITS attribute.
 
 # SHARD_ROW_ID_BITS
 
-This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used to set the number of bits of the implicit sharded `_tidb_rowid`.
+This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used to set the number of bits of the shards after the implicit `_tidb_rowid` is sharded.
 
 ## Concept
 
