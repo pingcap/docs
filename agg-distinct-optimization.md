@@ -1,6 +1,6 @@
 ---
 title: Distinct Optimization
-category: performance
+summary: Introduce the `distinct` optimization in the TiDB query optimizer.
 ---
 
 # Distinct Optimization
