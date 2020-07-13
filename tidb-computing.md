@@ -149,7 +149,7 @@ The following image shows how data returns layer by layer:
 
 ![dist sql flow](/media/tidb-computing-dist-sql-flow.png)
 
-### SQL layer architecture
+### Architecture of the SQL layer
 
 With the above example, I hope you have a basic understanding of how SQL statements are handled. In fact, TiDB's SQL layer is much more complex, with many modules and layers. The following diagram lists the important modules and calling relationships:
 
