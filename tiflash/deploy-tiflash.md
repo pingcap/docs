@@ -1,7 +1,6 @@
 ---
 title: Deploy a TiFlash Cluster
 summary: Learn the requirements and methods of deploying a TiFlash cluster.
-category: reference
 aliases: ['/docs/v3.1/tiflash/deploy-tiflash/','/docs/v3.1/reference/tiflash/deploy/']
 ---
 

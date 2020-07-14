@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning TiDB-backend
 summary: Choose how to write data into the TiDB cluster.
-category: reference
 aliases: ['/docs/v3.1/tidb-lightning/tidb-lightning-tidb-backend/','/docs/v3.1/reference/tools/tidb-lightning/tidb-backend/']
 ---
 

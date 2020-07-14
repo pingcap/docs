@@ -1,7 +1,6 @@
 ---
 title: COMMIT | TiDB SQL Statement Reference
 summary: An overview of the usage of COMMIT for the TiDB database.
-category: reference
 aliases: ['/docs/v3.1/sql-statements/sql-statement-commit/','/docs/v3.1/reference/sql/statements/commit/']
 ---
 

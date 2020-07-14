@@ -1,7 +1,6 @@
 ---
 title: Generated Columns
 summary: Learn how to use generated columns.
-category: reference
 aliases: ['/docs/v3.1/generated-columns/','/docs/v3.1/reference/sql/generated-columns/']
 ---
 

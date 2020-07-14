@@ -1,6 +1,5 @@
 ---
 title: Use TiFlash
-category: reference
 aliases: ['/docs/v3.1/tiflash/use-tiflash/','/docs/v3.1/reference/tiflash/use-tiflash/']
 ---
 

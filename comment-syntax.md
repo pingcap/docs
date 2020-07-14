@@ -1,6 +1,6 @@
 ---
 title: Comment Syntax
-summary: This document introduces the comment syntax supported by TiDB.
+summary: Learn about the three comment styles in TiDB.
 aliases: ['/docs/v3.1/comment-syntax/','/docs/v3.1/reference/sql/language-structure/comment-syntax/']
 ---
 

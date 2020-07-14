@@ -1,7 +1,6 @@
 ---
 title: Placement Rules
 summary: Learn how to configure Placement Rules.
-category: how-to
 aliases: ['/docs/v3.1/configure-placement-rules/']
 ---
 
