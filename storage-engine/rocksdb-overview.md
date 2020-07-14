@@ -1,7 +1,6 @@
 ---
 title: RocksDB Overview
 summary: Learn the basic concepts and working principles of RocksDB.
-category: reference
 ---
 
 # RocksDB Overview
