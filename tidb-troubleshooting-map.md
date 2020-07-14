@@ -1,7 +1,6 @@
 ---
 title: TiDB Troubleshooting Map
 summary: Learn how to troubleshoot common errors in TiDB.
-category: how-to
 aliases: ['/docs/v3.0/tidb-troubleshooting-map/','/docs/v3.0/how-to/troubleshoot/diagnose-map/']
 ---
 

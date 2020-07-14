@@ -1,6 +1,5 @@
 ---
 title: Identify Expensive Queries
-category: how to
 aliases: ['/docs/v3.0/identify-expensive-queries/','/docs/v3.0/how-to/maintain/identify-abnormal-queries/identify-expensive-queries/']
 ---
 

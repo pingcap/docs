@@ -1,7 +1,6 @@
 ---
 title: PD Configuration Flags
 summary: Learn some configuration flags of PD.
-category: reference
 aliases: ['/docs/v3.0/command-line-flags-for-pd-configuration/','/docs/v3.0/reference/configuration/pd-server/configuration/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: TiDB User Account Management
 summary: Learn how to manage a TiDB user account.
-category: reference
 aliases: ['/docs/v3.0/user-account-management/','/docs/v3.0/reference/security/user-account-management/','/docs/sql/user-account-management/']
 ---
 
