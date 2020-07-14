@@ -11,7 +11,7 @@ summary: Introduce the FAQs relating to migration in TiDB.
 
 Yes. See [Mydumper Instructions](/mydumper-overview.md).
 
-###  Does TiDB support Loader?
+### Does TiDB support Loader?
 
 Yes. See [Loader Instructions](/loader-overview.md).
 
@@ -91,6 +91,7 @@ Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/et
     static_configs:
       - targets: [’10.10.1.1:10096’] // Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
 ```
+
 Restart Prometheus.
 
 #### Is there a current solution to replicating data from TiDB to other databases like HBase and Elasticsearch?
