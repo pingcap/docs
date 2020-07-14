@@ -41,6 +41,16 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 
 Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support trigger, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
+If you use the MySQL 8.0 client and it fails to connect to TiDB, try to add the `default-auth` and `default-character-set` options:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
+```
+
+This problem occurs because MySQL 8.0 changes the [authentication plugin](/security-compatibility-with-mysql.md) default in MySQL 5.7. To solve this problem, you need to add the options above to specify using the old encryption method.
+
 #### How is TiDB highly available?
 
 TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [TiDB architecture](/architecture.md).
@@ -551,7 +561,7 @@ When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if e
 
 #### How to control or change the execution priority of SQL commits?
 
-TiDB supports changing the priority on a [per-session](/tidb-specific-system-variables.md#tidb_force_priority), [global](/tidb-configuration-file.md#force-priority) or individual statement basis. Priority has the following meaning:
+TiDB supports changing the priority on a [per-session](/system-variables.md#tidb_force_priority), [global](/tidb-configuration-file.md#force-priority) or individual statement basis. Priority has the following meaning:
 
 - `HIGH_PRIORITY`: this statement has a high priority, that is, TiDB gives priority to this statement and executes it first.
 
@@ -1014,7 +1024,7 @@ See [Introduction to Statistics](/statistics.md).
 
 #### How to optimize `select count(1)`?
 
-The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/tidb-specific-system-variables.md#tidb_distsql_scan_concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
+The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/system-variables.md#tidb_distsql_scan_concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
 
 Recommendations:
 
@@ -1079,7 +1089,7 @@ See [The TiDB Command Options](/command-line-flags-for-tidb-configuration.md).
 
 #### How to scatter the hotspots?
 
-In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [TiDB Specific System Variables and Syntax](/tidb-specific-system-variables.md#shard_row_id_bits).
+In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md#shard_row_id_bits).
 
 ### TiKV
 
