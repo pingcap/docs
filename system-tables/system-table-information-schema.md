@@ -801,6 +801,18 @@ desc TIDB_INDEXES;
 +---------------+---------------------+------+-----+---------+-------+
 ```
 
+Fields in the `TIDB_INDEXES` table are described as follows:
+
+* `TABLE_SCHEMA`: The name of the schema to which the index belongs.
+* `TABLE_NAME`: The name of the table to which the index belongs.
+* `NON_UNIQUE`: If the index is unique, the value is `0`; otherwise, the value is `1`.
+* `KEY_NAME`: The index name. If the index is the primary key, the name is `PRIMARY`.
+* `SEQ_IN_INDEX`: The sequential number of columns in the index, which starts from `1`.
+* `COLUMN_NAME`: The name of the column where the index is located.
+* `SUB_PART`: The prefix length of the index. If the the column is partly indexed, the `SUB_PART` value is the count of the indexed characters; otherwise, the value is `NULL`.
+* `INDEX_COMMENT`: The comment of the index, which is made when the index is created.
+* `INDEX_ID`: The index ID.
+
 ### TIKV_REGION_PEERS table
 
 The `TIKV_REGION_PEERS` table provides the peer information of all Regions.
@@ -909,6 +921,13 @@ desc USER_PRIVILEGES;
 4 rows in set (0.00 sec)
 ```
 
+Fields in the `USER_PRIVILEGES` table are described as follows:
+
+* `GRANTEE`: The name of the granted user, which is in the format of `'user_name'@'host_name'`.
+* `TABLE_CATALOG`: The name of the catalog to which the table belongs. This value is always `def`.
+* `PRIVILEGE_TYPE`: The privilege type to be granted. Only one privilege type is shown in each row.
+* `IS_GRANTABLE`: If you have the `GRANT OPTION` privilege, the value is `YES`; otherwise, the value is `NO`.
+
 ### VIEWS table
 
 The `VIEWS` table provides information about SQL views:
@@ -943,6 +962,19 @@ CHARACTER_SET_CLIENT: utf8
 COLLATION_CONNECTION: utf8_general_ci
 1 row in set (0.00 sec)
 ```
+
+Fields in the `VIEWS` table are described as follows:
+
+* `TABLE_CATALOG`: The name of the catalog to which the view belongs. This value is always `def`.
+* `TABLE_SCHEMA`: The name of the schema to which the view belongs.
+* `TABLE_NAME`: The view name.
+* `VIEW_DEFINITION`: The definition of view, which is made by the `SELECT` statement when the view is created.
+* `CHECK_OPTION`: The `CHECK_OPTION` value. The value options are `NONE`, `CASCADE`, and `LOCAL`.
+* `IS_UPDATABLE`: Whether `UPDATE`/`INSERT`/`DELETE` is applicable to the view. In TiDB, the value is always `NO`.
+* `DEFINER`: The name of the user who creates the view, which is in the format of `'user_name'@'host_name'`.
+* `SECURITY_TYPE`: The `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
+* `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
+* `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
 
 ## TIDB\_INDEXES table
 
