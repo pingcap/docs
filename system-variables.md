@@ -1,8 +1,12 @@
 ---
 title: System Variables
 summary: Use system variables to optimize performance or alter running behavior.
+<<<<<<< HEAD
 category: reference
 aliases: ['/tidb/stable/tidb-specific-system-variables','/docs/stable/system-variables/','/docs/v4.0/system-variables/','/docs/stable/reference/configuration/tidb-server/mysql-variables/','/docs/stable/tidb-specific-system-variables/','/docs/v4.0/tidb-specific-system-variables/','/docs/stable/reference/configuration/tidb-server/tidb-specific-variables/']
+=======
+aliases: ['/docs/dev/system-variables/','/docs/dev/reference/configuration/tidb-server/mysql-variables/', '/docs/dev/tidb-specific-system-variables/','/docs/dev/reference/configuration/tidb-server/tidb-specific-variables/','/tidb/dev/tidb-specific-system-variables']
+>>>>>>> b799472... add distinct-agg-push-down in tidb config file (#3259)
 ---
 
 # System Variables
