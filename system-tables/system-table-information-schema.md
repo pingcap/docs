@@ -21,7 +21,7 @@ The `ANALYZE_STATUS` table provides information about the running tasks that col
 select * from `ANALYZE_STATUS`;
 ```
 
-```
+```sql
 +--------------+------------+----------------+-------------------+----------------+---------------------+----------+
 | TABLE_SCHEMA | TABLE_NAME | PARTITION_NAME | JOB_INFO          | PROCESSED_ROWS | START_TIME          | STATE    |
 +--------------+------------+----------------+-------------------+----------------+---------------------+----------+
@@ -45,7 +45,7 @@ The `CHARACTER_SETS` table provides information about [character sets](/characte
 SELECT * FROM character_sets;
 ```
 
-```
+```sql
 +--------------------+----------------------+---------------+--------+
 | CHARACTER_SET_NAME | DEFAULT_COLLATE_NAME | DESCRIPTION   | MAXLEN |
 +--------------------+----------------------+---------------+--------+
@@ -68,7 +68,7 @@ The `COLLATIONS` table provides a list of collations that correspond to characte
 SELECT * FROM collations WHERE character_set_name='utf8mb4';
 ```
 
-```
+```sql
 +------------------------+--------------------+------+------------+-------------+---------+
 | COLLATION_NAME         | CHARACTER_SET_NAME | ID   | IS_DEFAULT | IS_COMPILED | SORTLEN |
 +------------------------+--------------------+------+------------+-------------+---------+
@@ -112,7 +112,7 @@ The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applica
 SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
 ```
 
-```
+```sql
 +------------------------+--------------------+
 | COLLATION_NAME         | CHARACTER_SET_NAME |
 +------------------------+--------------------+
@@ -156,7 +156,7 @@ The `COLUMNS` table provides detailed information about columns in tables:
 CREATE TABLE test.t1 (a int);
 ```
 
-```
+```sql
 1 row in set (0.01 sec)
 ```
 
@@ -166,7 +166,7 @@ CREATE TABLE test.t1 (a int);
 SELECT * FROM information_schema.columns WHERE table_schema='test' AND TABLE_NAME='t1';
 ```
 
-```
+```sql
 *************************** 1. row ***************************
            TABLE_CATALOG: def
             TABLE_SCHEMA: test
@@ -228,7 +228,7 @@ The corresponding `SHOW` statement is as follows:
 SHOW COLUMNS FROM t1 FROM test;
 ```
 
-```
+```sql
 +-------+---------+------+------+---------+-------+
 | Field | Type    | Null | Key  | Default | Extra |
 +-------+---------+------+------+---------+-------+
@@ -247,7 +247,7 @@ The `ENGINES` table provides information about storage engines. For compatibilit
 SELECT * FROM engines;
 ```
 
-```
+```sql
 *************************** 1. row ***************************
       ENGINE: InnoDB
      SUPPORT: DEFAULT
@@ -277,7 +277,7 @@ The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such 
 SELECT * FROM key_column_usage WHERE table_schema='mysql' and table_name='user';
 ```
 
-```
+```sql
 *************************** 1. row ***************************
            CONSTRAINT_CATALOG: def
             CONSTRAINT_SCHEMA: mysql
@@ -314,7 +314,7 @@ The description of columns in the `KEY_COLUMN_USAGE` table is as follows:
 * `CONSTRAINT_NAME`: The name of the constraint.
 * `TABLE_CATALOG`: The name of the catalog to which the table belongs. The value is always `def`.
 * `TABLE_SCHEMA`: The name of the schema to which the table belongs.
-* `TABLE_NAME`: The name of the table with constraints. 
+* `TABLE_NAME`: The name of the table with constraints.
 * `COLUMN_NAME`: The name of the column with constraints.
 * `ORDINAL_POSITION`: The position of the column in the constraint, rather than in the table. The position number starts from `1`.
 * `POSITION_IN_UNIQUE_CONSTRAINT`: The unique constraint and the primary key constraint are empty. For foreign key constraints, this column is the position of the referenced table's key.
@@ -328,7 +328,7 @@ The description of columns in the `KEY_COLUMN_USAGE` table is as follows:
 
 The `PROCESSLIST` table has a `MEM` column that `show processlist` does not have. `MEM` means the occupied memory of the requests being handled, and its unit is `byte`.
 
-```
+```sql
 +----+------+------+--------------------+---------+------+-------+---------------------------+-----+
 | ID | USER | HOST | DB                 | COMMAND | TIME | STATE | INFO                      | MEM |
 +----+------+------+--------------------+---------+------+-------+---------------------------+-----+
@@ -346,7 +346,7 @@ The `SCHEMATA` table provides information about databases. The table data is equ
 select * from SCHEMATA;
 ```
 
-```
+```sql
 *************************** 1. row ***************************
               CATALOG_NAME: def
                SCHEMA_NAME: INFORMATION_SCHEMA
@@ -384,7 +384,7 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 SELECT * FROM information_schema.cluster_processlist;
 ```
 
-```
+```sql
 +-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
 | INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               |
 +-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
@@ -406,7 +406,7 @@ The `SESSION_VARIABLES` table provides information about session variables. The 
 SELECT * FROM session_variables LIMIT 10;
 ```
 
-```
+```sql
 +----------------------------------+----------------------+
 | VARIABLE_NAME                    | VARIABLE_VALUE       |
 +----------------------------------+----------------------+
@@ -561,7 +561,7 @@ When the cluster system table is queried, TiDB does not obtain data from all nod
 desc select count(*) from information_schema.cluster_slow_query where user = 'u1';
 ```
 
-```
+```sql
 +--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
 | id                       | estRows  | task      | access object            | operator info                                        |
 +--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
@@ -593,7 +593,7 @@ The `STATISTICS` table provides information about table indexes:
 desc statistics;
 ```
 
-```
+```sql
 +---------------+---------------+------+------+---------+-------+
 | Field         | Type          | Null | Key  | Default | Extra |
 +---------------+---------------+------+------+---------+-------+
@@ -640,7 +640,7 @@ The `TABLES` table provides information about tables in databases:
 SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user';
 ```
 
-```
+```sql
 *************************** 1. row ***************************
             TABLE_CATALOG: def
              TABLE_SCHEMA: mysql
@@ -700,7 +700,7 @@ The `TABLE_CONSTRAINTS` table describes which tables have constraints:
 SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
 ```
 
-```
+```sql
 *************************** 1. row ***************************
 CONSTRAINT_CATALOG: def
  CONSTRAINT_SCHEMA: mysql
@@ -759,7 +759,7 @@ The `TIDB_HOT_REGIONS` table provides information about hotspot Regions.
 desc TIDB_HOT_REGIONS;
 ```
 
-```
+```sql
 +----------------+---------------------+------+-----+---------+-------+
 | Field          | Type                | Null | Key | Default | Extra |
 +----------------+---------------------+------+-----+---------+-------+
@@ -785,7 +785,7 @@ The `TIDB_INDEXES` table provides the INDEX information of all tables.
 desc TIDB_INDEXES;
 ```
 
-```
+```sql
 +---------------+---------------------+------+-----+---------+-------+
 | Field         | Type                | Null | Key | Default | Extra |
 +---------------+---------------------+------+-----+---------+-------+
@@ -823,7 +823,7 @@ The `TIKV_REGION_PEERS` table provides the peer information of all Regions.
 desc TIKV_REGION_PEERS;
 ```
 
-```
+```sql
 +--------------+---------------------+------+-----+---------+-------+
 | Field        | Type                | Null | Key | Default | Extra |
 +--------------+---------------------+------+-----+---------+-------+
@@ -847,7 +847,7 @@ The `TIKV_REGION_STATUS` table provides the status information of all Regions.
 desc TIKV_REGION_STATUS;
 ```
 
-```
+```sql
 +------------------+---------------------+------+-----+---------+-------+
 | Field            | Type                | Null | Key | Default | Extra |
 +------------------+---------------------+------+-----+---------+-------+
@@ -873,7 +873,7 @@ The `TIKV_STORE_STATUS` table provides the status information of all TiKV Stores
 desc TIKV_STORE_STATUS;
 ```
 
-```
+```sql
 +-------------------+---------------------+------+-----+---------+-------+
 | Field             | Type                | Null | Key | Default | Extra |
 +-------------------+---------------------+------+-----+---------+-------+
@@ -909,7 +909,7 @@ The `USER_PRIVILEGES` table provides information about global privileges. This i
 desc USER_PRIVILEGES;
 ```
 
-```
+```sql
 +----------------|--------------|------|------|---------|-------+
 | Field          | Type         | Null | Key  | Default | Extra |
 +----------------|--------------|------|------|---------|-------+
@@ -938,7 +938,7 @@ The `VIEWS` table provides information about SQL views:
 create view test.v1 as select 1;
 ```
 
-```
+```sql
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -948,7 +948,7 @@ Query OK, 0 rows affected (0.00 sec)
 select * from views;
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        TABLE_CATALOG: def
         TABLE_SCHEMA: test
@@ -986,7 +986,7 @@ The `TIDB_INDEXES` table provides index-related information.
 desc tidb_indexes\G
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        Table: TIDB_INDEXES
 Create Table: CREATE TABLE `TIDB_INDEXES` (
@@ -1030,7 +1030,7 @@ The `TIDB_HOT_REGIONS` table provides the hot Region information in the current 
 desc tidb_hot_regions\G
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        Table: TIDB_HOT_REGIONS
 Create Table: CREATE TABLE `TIDB_HOT_REGIONS` (
@@ -1060,7 +1060,7 @@ The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD'
 desc tikv_store_status\G
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        Table: TIKV_STORE_STATUS
 Create Table: CREATE TABLE `TIKV_STORE_STATUS` (
@@ -1097,7 +1097,7 @@ The `TIKV_REGION_STATUS` table shows some basic information of TiKV Regions via 
 desc tikv_region_status\G
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        Table: TIKV_REGION_STATUS
 Create Table: CREATE TABLE `TIKV_REGION_STATUS` (
@@ -1118,7 +1118,7 @@ You can implement the `top confver`, `top read` and `top write` operations in pd
 
 You can query the top 3 Regions with the most write data using the following SQL statement:
 
-```
+```sql
 select * from tikv_region_status order by written_bytes desc limit 3;
 ```
 
@@ -1132,7 +1132,7 @@ The `TIKV_REGION_PEERS` table shows detailed information of a single Region node
 desc tikv_region_peers\G
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        Table: TIKV_REGION_PEERS
 Create Table: CREATE TABLE `TIKV_REGION_PEERS` (
@@ -1182,7 +1182,7 @@ The `ANALYZE_STATUS` table shows the execution status of the `ANALYZE` command i
 desc analyze_status\G
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        Table: ANALYZE_STATUS
 Create Table: CREATE TABLE `ANALYZE_STATUS` (
@@ -1209,7 +1209,7 @@ The `SLOW_QUERY` table maps slow query logs. Its column names and field names of
 desc slow_query\G
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        Table: SLOW_QUERY
 Create Table: CREATE TABLE `SLOW_QUERY` (
