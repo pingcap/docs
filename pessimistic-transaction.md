@@ -15,7 +15,7 @@ To make the usage of TiDB closer to traditional databases and reduce the cost of
 
 ## Switch transaction mode
 
-You can set the transaction mode by configuring the [`tidb_txn_mode`](/tidb-specific-system-variables.md#tidb_txn_mode) system variable. The following command sets all explicit transactions (that is, non-autocommit transactions) executed by newly created sessions in the cluster to the pessimistic transaction mode:
+You can set the transaction mode by configuring the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) system variable. The following command sets all explicit transactions (that is, non-autocommit transactions) executed by newly created sessions in the cluster to the pessimistic transaction mode:
 
 {{< copyable "sql" >}}
 
@@ -41,7 +41,7 @@ The `BEGIN PESSIMISTIC;` and `BEGIN OPTIMISTIC;` statements take precedence over
 
 ## Behaviors
 
-Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Difference with MySQL InnoDB](#difference-with-mysql-innoDB).
+Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Difference with MySQL InnoDB](#difference-with-mysql-innodb).
 
 - When you perform the `SELECT FOR UPDATE` statement, transactions read the **lastest** committed data and apply a pessimistic lock on the data being read.
 
