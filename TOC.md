@@ -105,6 +105,7 @@
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [Predicates Push Down](/predicates-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
         + [Statistics](/statistics.md)
@@ -416,12 +417,11 @@
     + [tikv-server](/tikv-configuration-file.md)
     + [tiflash-server](/tiflash/tiflash-configuration.md)
     + [pd-server](/pd-configuration-file.md)
-  + System Variables
-    + [MySQL System Variables](/system-variables.md)
-    + [TiDB Specific System Variables](/tidb-specific-system-variables.md)
+  + [System Variables](/system-variables.md)
   + Storage Engines
     + TiKV
       + [TiKV Overview](/tikv-overview.md)
+      + [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
