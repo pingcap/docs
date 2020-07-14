@@ -355,8 +355,6 @@ Configuration items related to performance.
 - Default: `NO_PRIORITY`
 - Optional values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY` and `DELAYED`.
 
-<<<<<<< HEAD
-=======
 ### `distinct-agg-push-down`
 
 - Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
@@ -369,7 +367,6 @@ Configuration items related to performance.
 + Default value: `20971520`
 + When `nested-loop-join-cache-capacity` is set to `0`, nested loop join cache is disabled by default. When the LRU size is larger than the value of `nested-loop-join-cache-capacity`, the elements in the LRU are removed.
 
->>>>>>> b799472... add distinct-agg-push-down in tidb config file (#3259)
 ## prepared-plan-cache
 
 The Plan Cache configuration of the `PREPARE` statement.
