@@ -1,7 +1,6 @@
 ---
 title: CREATE INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE INDEX for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-create-index/','/docs/dev/reference/sql/statements/create-index/']
 ---
 
@@ -155,7 +154,7 @@ For details, see [Invisible index](/sql-statements/sql-statement-alter-index.md#
 
 ## Associated session variables
 
-The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size` and `tidb_ddl_reorg_priority`. Refer to [TiDB-specific system variables](/tidb-specific-system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
+The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size` and `tidb_ddl_reorg_priority`. Refer to [system variables](/system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
 
 ## MySQL compatibility
 
