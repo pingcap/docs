@@ -1,7 +1,6 @@
 ---
 title: High Reliability FAQ
 summary: Introduce the FAQs relating to high reliability.
-category: FAQ
 ---
 
 # High Reliability FAQ
