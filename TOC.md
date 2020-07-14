@@ -105,6 +105,7 @@
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [Max/Min Eliminate](/max-min-eliminate.md)
         + [Predicates Push Down](/predicates-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization

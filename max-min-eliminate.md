@@ -1,0 +1,94 @@
+---
+title: Max/Min Eliminate
+summary: Introduce the rules for eliminating Max/Min functions.
+---
+
+# Max/Min Eliminate
+
+When a SQL statement contains `max`/`min` functions, the query optimizer tries to convert the `max`/`min` aggregate functions to the TopN operator by applying the `max`/`min` eliminating rule. In this way, TiDB can perform the query more efficiently through indexes.
+
+This optimization rule is divided into two types in terms of the number of `max`/`min` functions in the `select` statement:
+
+- [The statement with only one `max`/`min` function](#one-max-min-function)
+- [The statement with multiple `max`/`min` functions](#multiple-max-min-functions)
+
+## One `max`/`min` function
+
+When a SQL statement meets the following conditions, this rule is applied:
+
+- The statement contains only one aggregate function, which is `max` or `min`.
+- The aggregate function has no related `group by` clause.
+
+For example:
+
+{{< copyable "sql" >}}
+
+```sql
+select max(a) from t
+```
+
+The optimization rule rewrites the statement as follows:
+
+{{< copyable "sql" >}}
+
+```sql
+select max(a) from (select a from t where a is not null order by a desc limit 1) t
+```
+
+When column `a` has an index, or when column `a` is the prefix of some composite index, with the help of index, the new SQL statement can find the maximum or minimum value by scanning only one row of data. This optimization avoids full table scan.
+
+The example statement has the following execution plan:
+
+```
+mysql> explain select max(a) from t;
++------------------------------+---------+-----------+-------------------------+-------------------------------------+
+| id                           | estRows | task      | access object           | operator info                       |
++------------------------------+---------+-----------+-------------------------+-------------------------------------+
+| StreamAgg_13                 | 1.00    | root      |                         | funcs:max(test.t.a)->Column#4       |
+| └─Limit_17                   | 1.00    | root      |                         | offset:0, count:1                   |
+|   └─IndexReader_27           | 1.00    | root      |                         | index:Limit_26                      |
+|     └─Limit_26               | 1.00    | cop[tikv] |                         | offset:0, count:1                   |
+|       └─IndexFullScan_25     | 1.00    | cop[tikv] | table:t, index:idx_a(a) | keep order:true, desc, stats:pseudo |
++------------------------------+---------+-----------+-------------------------+-------------------------------------+
+5 rows in set (0.00 sec)
+```
+
+## Multiple `max`/`min` functions
+
+When a SQL statement meets the following conditions, this rule is applied:
+
+- The statement contains multiple aggregate functions, which are all `max` or `min` functions.
+- None of the aggregate functions has a related `group by` clause.
+- The columns in each `max`/`min` function has indexes to preserve the order.
+
+For example:
+
+{{< copyable "sql" >}}
+
+```sql
+select max(a) - min(a) from t
+```
+
+The optimization rule first checks whether column `a` has an index to preserve its order. If yes, the SQL statement is rewritten as the Cartesian product of two subqueries:
+
+{{< copyable "sql" >}}
+
+```sql
+select max_a - min_a
+from
+    (select max(a) as max_a from t) t1,
+    (select min(a) as min_a from t) t2
+```
+
+Through the rewrite, the optimizer can apply the rule for statements with only one `max`/`min` function to the two subqueries respectively. The statement is then rewritten as follows:
+
+{{< copyable "sql" >}}
+
+```sql
+select max_a - min_a
+from
+    (select max(a) as max_a from (select a from t where a is not null order by a desc limit 1) t) t1,
+    (select min(a) as min_a from (select a from t where a is not null order by a asc limit 1) t) t2
+```
+
+Similarly, if column `a` has an index to preserve its order, the optimized execution only scans two rows of data instead of scanning the whole table. However, if column `a` does not have an index to preserve its order, this rule is not applied because it results in two full table scans, which only needs 
