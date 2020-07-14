@@ -13,6 +13,6 @@ Data is redundantly copied between TiKV nodes using the [Raft consensus algorith
 
 At the bottom layer, TiKV uses a model of replication log + State Machine to replicate data. For the write requests, the data is written to a Leader and the Leader then replicates the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log is committed and can be applied into the State Machine.
 
-## What's the recommended solution for the deployment of three geo-distributed data centers?
+## Besides the TiDB documentation, are there any other ways to acquire TiDB knowledge?
 
-The architecture of TiDB guarantees that it fully supports geo-distribution and multi-activeness. Your data and applications are always-on. All the outages are transparent to your applications and your data can recover automatically. The operation depends on the network latency and stability. It is recommended to keep the latency within 5ms. Currently, we already have similar use cases. For details, contact info@pingcap.com.
+Currently [TiDB documentation](/overview.md#tidb-introduction) is the most important and timely way to get TiDB related knowledge. In addition, we also have some technical communication groups, if you need to learn more, send an email to [info@pingcap.com](mailto:info@pingcap.com).
