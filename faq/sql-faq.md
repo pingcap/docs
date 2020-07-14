@@ -1,7 +1,6 @@
 ---
 title: SQL FAQ
 summary: Introduce the FAQs relating to SQL.
-category: FAQ
 ---
 
 # SQL FAQ
