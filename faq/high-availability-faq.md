@@ -1,7 +1,6 @@
 ---
 title: High Availability FAQ
 summary: Introduce the FAQs relating to high availability.
-category: FAQ
 ---
 
 # High Availability FAQ
