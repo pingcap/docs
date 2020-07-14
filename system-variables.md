@@ -1,8 +1,7 @@
 ---
 title: System Variables
 summary: Use system variables to optimize performance or alter running behavior.
-category: reference
-aliases: ['/tidb/stable/tidb-specific-system-variables','/docs/stable/system-variables/','/docs/v4.0/system-variables/','/docs/stable/reference/configuration/tidb-server/mysql-variables/','/docs/stable/tidb-specific-system-variables/','/docs/v4.0/tidb-specific-system-variables/','/docs/stable/reference/configuration/tidb-server/tidb-specific-variables/']
+aliases: ['/tidb/stable/tidb-specific-system-variables','/docs/stable/system-variables/','/docs/v4.0/system-variables/','/docs/stable/reference/configuration/tidb-server/mysql-variables/','/docs/stable/tidb-specific-system-variables/','/docs/v4.0/tidb-specific-system-variables/','/docs/stable/reference/configuration/tidb-server/tidb-specific-variables/','/tidb/stable/tidb-specific-system-variables']
 ---
 
 # System Variables
