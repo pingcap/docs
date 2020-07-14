@@ -105,6 +105,7 @@
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [Predicates Push Down](/predicates-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
         + [Statistics](/statistics.md)
@@ -420,6 +421,7 @@
   + Storage Engines
     + TiKV
       + [TiKV Overview](/tikv-overview.md)
+      + [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
