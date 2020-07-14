@@ -143,7 +143,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 
 - Owner
     - New ETCD Session Duration 95: the time it takes to create a new etcd session. TiDB connects to etcd in PD through etcd client to save/read some metadata information. This records the time spent creating the session
-    - Owner Watcher OPS: the number of operations per second of DDL owner watches PD's etcd metadata
+    - Owner Watcher OPS: the number of Goroutine operations per second of DDL owner watch PD's etcd metadata
 
 - Meta
     - AutoID QPS: AutoID related statistics, including three operations (global ID allocation, a single table AutoID allocation, a single table AutoID Rebase)
