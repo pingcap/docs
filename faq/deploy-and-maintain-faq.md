@@ -1,5 +1,5 @@
 ---
-title: Deploy and Maintain FAQ
+title: Deploy and Maintain FAQs
 summary: Introduce FAQs, causes and solutions relating to TiDB cluster operation and maintenance deployment.
 ---
 
@@ -19,11 +19,11 @@ The operating system version requirements are as follows:
 
 ### Why it is recommended to deploy the TiDB cluster on CentOS 7?
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems. For details, see [Software and Hardware Requirements](/hardware-and-software-requirements.md) for deploying TiDB.
+As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems. For details, see [Official Deployment Requirements](/hardware-and-software-requirements.md) for deploying TiDB.
 
 TiDB conducts a large number of tests under CentOS 7.3 environment, and there are many best practices for the deployment of this operating system. Therefore, we recommend that you use CentOS 7.3+ Linux operating system when deploying TiDB.
 
-## Server requirements
+## Hardware requirements
 
 You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture. The requirements and recommendations about server hardware configuration for development, testing and production environments are as follows:
 
@@ -36,7 +36,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 | TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3  |
 |         |         |         |              | Total Server Number |  4  |
 
-### Production environment
+### Online environment
 
 | Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
 | :-----: | :------: | :------: | :------: | :------: | :-----: |
@@ -513,7 +513,7 @@ Currently, the preferred method for backup is using the [PingCAP fork of Mydumpe
 
 Keep the size of the data file exported from `mydumper` as small as possible. It is recommended to keep the size within 64M. You can set value of the `-F` parameter to 64.
 
-You can edit the `t` parameter of `loader` based on the number of TiKV instances and load status. For example, in scenarios of three TiKV instances, you can set its value to `3 * (1 ～ n)`. When the TiKV load is very high and `backoffer.maxSleep 15000ms is exceeded` displays a lot in `loader` and TiDB logs, you can adjust the parameter to a smaller value. When the TiKV load is not very high, you can adjust the parameter to a larger value accordingly.### TiDB 备份恢复
+You can edit the `t` parameter of `loader` based on the number of TiKV instances and load status. For example, in scenarios of three TiKV instances, you can set its value to `3 * (1 ～ n)`. When the TiKV load is very high and `backoffer.maxSleep 15000ms is exceeded` displays a lot in `loader` and TiDB logs, you can adjust the parameter to a smaller value. When the TiKV load is not very high, you can adjust the parameter to a larger value accordingly.
 
 ## Monitor
 
