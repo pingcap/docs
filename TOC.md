@@ -445,7 +445,6 @@
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [SQL FAQs](/faq/sql-faq.md)
-  + [Deploy and Maintain FAQs](/faq/deploy-and-maintain-faq.md)
   + [Upgrade FAQs](/faq/upgrade-faq.md)
   + [High Reliability FAQs](/faq/high-reliability-faq.md)
   + [High Availability FAQs](/faq/high-availability-faq.md)
