@@ -8,7 +8,7 @@ aliases: ['/docs/stable/mysql-compatibility/','/docs/v4.0/mysql-compatibility/',
 
 TiDB is fully compatible with the MySQL 5.7 protocol and the common features and syntax of MySQL 5.7. The ecosystem tools for MySQL 5.7 (PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader) and the MySQL client can be used for TiDB.
 
-However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superceded by JSON), security issues (such as `SELECT INTO OUTFILE`), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
+However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superceded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
 > **Note:**
 >
@@ -122,7 +122,9 @@ TiDB supports storage engine abstraction similar to MySQL, but you need to speci
 
 ### SQL modes
 
-- Does not support the compatibility modes, such as `ORACLE` and `POSTGRESQL`. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
+TiDB supports most [SQL modes](/sql-mode.md):
+
+- The compatibility modes, such as `ORACLE` and `POSTGRESQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
 - The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
 - The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are accepted for compatibility, but are not applicable to TiDB.
 
