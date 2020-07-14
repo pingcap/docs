@@ -1,7 +1,6 @@
 ---
 title: SHOW CHARACTER SET | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CHARACTER SET for the TiDB database.
-category: reference
 aliases: ['/docs/v2.1/sql-statements/sql-statement-show-character-set/','/docs/v2.1/reference/sql/statements/show-character-set/']
 ---
 

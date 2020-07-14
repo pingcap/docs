@@ -1,7 +1,6 @@
 ---
 title: Constraints
 summary: Learn how SQL Constraints apply to TiDB.
-category: reference
 aliases: ['/docs/v2.1/constraints/','/docs/v2.1/reference/sql/constraints/']
 ---
 

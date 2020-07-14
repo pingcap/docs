@@ -1,7 +1,6 @@
 ---
 title: TiDB Configuration File Description
 summary: Learn the TiDB configuration file options that are not involved in command line options.
-category: deployment
 aliases: ['/docs/v2.1/tidb-configuration-file/','/docs/v2.1/reference/configuration/tidb-server/configuration-file/']
 ---
 

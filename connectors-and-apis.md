@@ -1,7 +1,6 @@
 ---
 title: Connectors and APIs
 summary: Learn about the connectors and APIs.
-category: reference
 aliases: ['/docs/v2.1/connectors-and-apis/','/docs/v2.1/reference/supported-clients/']
 ---
 

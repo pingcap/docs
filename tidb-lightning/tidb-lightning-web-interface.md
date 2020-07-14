@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Web Interface
 summary: Control TiDB Lightning through the web interface.
-category: reference
 aliases: ['/docs/v2.1/tidb-lightning/tidb-lightning-web-interface/','/docs/v2.1/reference/tools/tidb-lightning/web/']
 ---
 
