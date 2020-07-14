@@ -358,7 +358,7 @@ Configuration items related to performance.
 
 - Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
 - Default: `false`
-- This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/tidb-specific-system-variables.md#tidb_opt_distinct_agg_push_down).
+- This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down).
 
 ### `nested-loop-join-cache-capacity`
 
