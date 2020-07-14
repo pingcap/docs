@@ -5,7 +5,7 @@ category: reference
 aliases: ['/docs/dev/grafana-tikv-dashboard/','/docs/dev/reference/key-monitoring-metrics/tikv-dashboard/']
 ---
 
-# Description of TiKV Monitoring Metrics
+# Key Monitoring Metrics of TiKV
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
