@@ -1,7 +1,6 @@
 ---
 title: Migration FAQ
 summary: Introduce the FAQs relating to migration in TiDB.
-category: FAQ
 ---
 
 # Migration FAQ
