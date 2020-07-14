@@ -1,16 +1,17 @@
 ---
 title: The Blocklist of Optimization Rules and Expression Pushdown
 summary: Learn about the blocklist to control the optimization rules and the behavior of expression pushdown.
-category: performance
 ---
 
 # The Blocklist of Optimization Rules and Expression Pushdown
 
-This document introduces how we use the blocklist of optimization rules and the blocklist of expression pushdown to control the behavior of TiDB.
+This document introduces how to use the blocklist of optimization rules and the blocklist of expression pushdown to control the behavior of TiDB.
 
-## The Blocklist of Optimization Rules
+## The blocklist of optimization rules
 
-### Important Optimization Rules
+The blocklist of optimization rules is one way to tune optimization rules, mainly used to manually disable some optimization rules.
+
+### Important optimization rules
 
 |**Optimization Rule**|**Rule Name**|**Description**|
 | :--- | :--- | :--- |
@@ -26,17 +27,17 @@ This document introduces how we use the blocklist of optimization rules and the 
 | TopN Pushdown | topn_push_down | Try to push the topn to where is closer to the data source |
 | Join Reorder | join_reorder | Decide the order of multi-table joins |
 
-### Disable Optimization Rules
+### Disable optimization rules
 
-We can use the **Blocklist of Optimization Rules** to disable some of them if some rules lead to a sub-optimal execution plan for some special queries.
+You can use the blocklist of optimization rules to disable some of them if some rules lead to a sub-optimal execution plan for some special queries.
 
 #### Usage
 
 > **Note:**
 >
-> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. e.g. the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Important Optimization Rules](#Important_Optimization_Rules).
+> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. e.g. the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Important Optimization Rules](#important-optimization-rules).
 
-- If you want to disable some rules, you can write its name to the table `mysql.opt_rule_blacklist`. e.g.
+- If you want to disable some rules, write its name to the table `mysql.opt_rule_blacklist`. e.g.
 
     {{< copyable "sql" >}}
 
@@ -65,24 +66,24 @@ We can use the **Blocklist of Optimization Rules** to disable some of them if so
     admin reload opt_rule_blacklist;
     ```
 
-## The Blocklist of Expression Pushdown
+## The blocklist of expression pushdown
 
-**The Blocklist of Expression Pushdown** is one way to tuning the expression pushdown, mainly used to disable some expression of some specific data types.
+The blocklist of expression pushdown is one way to tune the expression pushdown, mainly used to manually disable some expressions of some specific data types.
 
 ### Expressions which are supported to be pushed down
 
 | Expression Classification | Concrete Operations |
 | :-------------- | :------------------------------------- |
 | [Logical Operations](/functions-and-operators/operators.md#logical-operators) | AND (&&), OR (&#124;&#124;), NOT (!) |
-| [Comparison functions and operators](#comparison-functions-and-operators) | <, <=, =, != (`<>`), >, >=, [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to), [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in), IS NULL, LIKE, IS TRUE, IS FALSE, [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) |
+| [Comparison functions and operators](/functions-and-operators/operators.md#comparison-functions-and-operators) | <, <=, =, != (`<>`), >, >=, [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to), [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in), IS NULL, LIKE, IS TRUE, IS FALSE, [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) |
 | [Numberic functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | +, -, *, /, [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs), [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil), [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling), [`FLOOR()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_floor) |
 | [Control flow functions](/functions-and-operators/control-flow-functions.md) | [`CASE`](https://dev.mysql.com/doc/refman/5.7/en/control-flow-functions.html#operator_case), [`IF()`](https://dev.mysql.com/doc/refman/5.7/en/control-flow-functions.html#function_if), [`IFNULL()`](https://dev.mysql.com/doc/refman/5.7/en/control-flow-functions.html#function_ifnull) |
 | [JSON functions](/functions-and-operators/json-functions.md) | [JSON_TYPE(json_val)][json_type],<br/> [JSON_EXTRACT(json_doc, path[, path] ...)][json_extract],<br/> [JSON_UNQUOTE(json_val)][json_unquote],<br/> [JSON_OBJECT(key, val[, key, val] ...)][json_object],<br/> [JSON_ARRAY([val[, val] ...])][json_array],<br/> [JSON_MERGE(json_doc, json_doc[, json_doc] ...)][json_merge],<br/> [JSON_SET(json_doc, path, val[, path, val] ...)][json_set],<br/> [JSON_INSERT(json_doc, path, val[, path, val] ...)][json_insert],<br/> [JSON_REPLACE(json_doc, path, val[, path, val] ...)][json_replace],<br/> [JSON_REMOVE(json_doc, path[, path] ...)][json_remove] |
 | [Date and time functions](/functions-and-operators/date-and-time-functions.md) | [`DATE_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_date-format)  |
 
-### Disable the pushdown of specific expression
+### Disable the pushdown of specific expressions
 
-When we got wrong results due to the expression pushdown, use the blocklist can make a quick recovery for the business. More clearly, you can add some of the supported functions or operators to the table `mysql.expr_pushdown_blacklist` to disable the pushdown of some specific expressions.
+When you get wrong results due to the expression pushdown, using the blocklist can make a quick recovery for the application. More clearly, you can add some of the supported functions or operators to the table `mysql.expr_pushdown_blacklist` to disable the pushdown of some specific expressions.
 
 The schema of `mysql.expr_pushdown_blacklist` is shown as below:
 
@@ -134,7 +135,7 @@ Using the following procedures if you want to remove one or more expressions fro
 >
 > `admin reload expr_pushdown_blacklist` only takes effect on the TiDB Server which runs this statement. If you need all TiDB Server of the cluster to disable some rules, you need to run this command on each of the TiDB Server.
 
-## Example of the Expression Blocklist
+## Expression blocklist usage example
 
 The following example first adds the operator `<` and `>` to the blocklist then removes the operator `>` from the blocklist.
 
