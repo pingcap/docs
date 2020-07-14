@@ -1,7 +1,6 @@
 ---
 title: Deploy and Maintain FAQ
 summary: Introduce FAQs, causes and solutions relating to TiDB cluster operation and maintenance deployment.
-category: FAQ
 ---
 
 # Deploy and maintain FAQ
