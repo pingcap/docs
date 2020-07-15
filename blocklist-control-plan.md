@@ -231,7 +231,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-5. Observe the execution plan again and you will find that the `<` and `>` operators can be re-pushed down to TiKV Coprocessor again.
+5. Observe the execution plan again and you will find that `<` is not pushed down while `>` is pushed down to TiKV Coprocessor.
 
     {{< copyable "sql" >}}
 
