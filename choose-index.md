@@ -29,7 +29,7 @@ Before introducing index selection, it is important to understand the ways TiDB 
 
 ## Index selection rules
 
-TiDB provides a heuristic rule named Skyline-Pruning based on the cost estimation of each access tables operator.It can reduce the probability of wrong index selection caused by wrong estimation.
+TiDB provides a heuristic rule named skyline-pruning based on the cost estimation of each operator for accessing tables. It can reduce the probability of wrong index selection caused by wrong estimation.
 
 ### Skyline-pruning
 
