@@ -25,7 +25,7 @@ Before introducing index selection, it is important to understand the ways TiDB 
 
 > **Note:**
 >
-> The TableReader operator is based on the `_tidb_rowid` column index, and TiFlash is a column storage index, so the choice of index is the choice of a access tables operator.
+> The TableReader operator is based on the `_tidb_rowid` column index, and TiFlash uses a column storage index, so the selection of index is the selection of an operator for accessing tables.
 
 ## Index selection rules
 
