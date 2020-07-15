@@ -5,9 +5,9 @@ summary: Introduce the rules for eliminating Max/Min functions.
 
 # Eliminate Max/Min
 
-When a SQL statement contains `max`/`min` functions, the query optimizer tries to convert the `max`/`min` aggregate functions to the TopN operator by applying the `max`/`min` eliminating rule. In this way, TiDB can perform the query more efficiently through indexes.
+When a SQL statement contains `max`/`min` functions, the query optimizer tries to convert the `max`/`min` aggregate functions to the TopN operator by applying the `max`/`min` optimization rule. In this way, TiDB can perform the query more efficiently through indexes.
 
-This optimization rule is divided into two types in terms of the number of `max`/`min` functions in the `select` statement:
+This optimization rule is divided into the following two types according to the number of `max`/`min` functions in the `select` statement:
 
 - [The statement with only one `max`/`min` function](#one-maxmin-function)
 - [The statement with multiple `max`/`min` functions](#multiple-maxmin-functions)
