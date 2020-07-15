@@ -9,8 +9,8 @@ When a SQL statement contains `max`/`min` functions, the query optimizer tries t
 
 This optimization rule is divided into two types in terms of the number of `max`/`min` functions in the `select` statement:
 
-- [The statement with only one `max`/`min` function](#one-max-min-function)
-- [The statement with multiple `max`/`min` functions](#multiple-max-min-functions)
+- [The statement with only one `max`/`min` function](#one-maxmin-function)
+- [The statement with multiple `max`/`min` functions](#multiple-maxmin-functions)
 
 ## One `max`/`min` function
 
