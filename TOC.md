@@ -101,6 +101,7 @@
       + Logic Optimization
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
+        + [Index Selection](/choose-index.md)
         + [Statistics](/statistics.md)
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
