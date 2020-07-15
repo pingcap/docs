@@ -58,7 +58,7 @@ According to these factors and the cost model, the optimizer selects an index wi
 
 1. The estimated number of rows is not accurate?
 
-    This is usually due to stale or inaccurate statistics. You can re-execute the analyze table or modify the parameters of the analyze table.
+    This is usually due to stale or inaccurate statistics. You can re-execute the `analyze table` statement or modify the parameters of the `analyze table` statement.
 
 2. Statistics are accurate, why read TiFlash faster, and the optimizer chose the TiKV?
 
