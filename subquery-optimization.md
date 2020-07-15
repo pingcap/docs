@@ -63,7 +63,7 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-This rewrite gets better performance when the `IN` subquery is relatively small and the external query is relatively large, because without rewriting, using `index join` with t2 as the driving table is impossible. However, the disadvantage is that when the aggregation cannot be automatically eliminated during the rewrite and the `t2` table is relatively large, this rewrite affects the performance of the query. Currently, the variable [tidb\_opt\_insubq\_to\_join\_and\_agg](/tidb-specific-system-variables.md#tidb_opt_insubq_to_join_and_agg) is used to control this optimization. When this optimization is not suitable, you can manually disable it.
+This rewrite gets better performance when the `IN` subquery is relatively small and the external query is relatively large, because without rewriting, using `index join` with t2 as the driving table is impossible. However, the disadvantage is that when the aggregation cannot be automatically eliminated during the rewrite and the `t2` table is relatively large, this rewrite affects the performance of the query. Currently, the variable [tidb\_opt\_insubq\_to\_join\_and\_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg) is used to control this optimization. When this optimization is not suitable, you can manually disable it.
 
 ## `EXISTS` subquery and `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
