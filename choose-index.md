@@ -17,7 +17,7 @@ Before introducing index selection, it is important to understand the ways TiDB 
 
 | Operator | Trigger Conditions | Applicable Scenarios | Explanations |
 | :------- | :------- | :------- | :---- |
-| PointGet / BatchPointGet | The scope of access tables is one or more single point ranges. | Any scene | If triggered, it is usually considered as the fastest operator, since it calls the kvget interface directly to perform the calculations rather than calls the coprocessor interface.  |
+| PointGet / BatchPointGet | When accessing tables in one or more single point ranges. | Any scenario | If triggered, it is usually considered as the fastest operator, since it calls the kvget interface directly to perform the calculations rather than calls the coprocessor interface.  |
 | TableReader | None | Any scene | It is generally considered as the least efficient operator that scan table data directly from the TiKV . It can be selected only if there is a range query on the _tidb_rowid column, or if there are no other access tables operators to choose from. |
 | TableReader | The table has a replica on the TiFlash node. | There are fewer columns to read, but many rows to evaluate.  | Tiflash is column storage. If you need to calculate a small number of columns and a large number of rows, It is recommended to choose this operator. |
 | IndexReader | A table has one or more indexes, and the columns needed for the calculation are included in the indexes. | When there is a smaller range query on the indexes, or when there is an order requirement for indexed columns. | When multiple indexes exist, a reasonable index is selected based on the cost estimation. |
