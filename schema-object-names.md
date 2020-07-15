@@ -1,7 +1,6 @@
 ---
 title: Schema Object Names
 summary: Introduce schema object names in TiDB SQL statements.
-category: reference
 aliases: ['/docs/dev/schema-object-names/','/docs/dev/reference/sql/language-structure/schema-object-names/']
 ---
 
