@@ -1,5 +1,5 @@
 ---
-title: mysql
+title: `mysql` schema
 summary: Learn about the TiDB system tables.
 aliases: ['/docs/dev/system-tables/system-table-overview/','/docs/dev/reference/system-databases/mysql/','/tidb/dev/system-table-overview/']
 ---
