@@ -66,7 +66,7 @@ According to these factors and the cost model, the optimizer selects an index wi
     
 3. The statistics are accurate. Index A needs to retrieve rows from tables, but it actually executes faster than Index B that does not retrieve rows from tables. Why does the optimizer choose Index B?
 
-    In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of tidb_opt_network_factor parameter in order to reduce the cost for retrieving rows from tables.
+    In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of `tidb_opt_network_factor` parameter to reduce the cost of retrieving rows from tables.
 
 ## Control index selection
 
