@@ -1,7 +1,6 @@
 ---
 title: GC Overview
 summary: Learn about Garbage Collection in TiDB.
-category: reference
 aliases: ['/docs/v3.0/garbage-collection-overview/','/docs/v3.0/reference/garbage-collection/overview/','/docs/op-guide/gc/','/docs/v3.0/reference/garbage-collection/']
 ---
 

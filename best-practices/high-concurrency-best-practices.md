@@ -1,7 +1,6 @@
 ---
 title: Highly Concurrent Write Best Practices
 summary: Learn best practices for highly-concurrent write-intensive workloads in TiDB.
-category: reference
 aliases: ['/docs/v3.0/best-practices/high-concurrency-best-practices/','/docs/v3.0/reference/best-practices/high-concurrency/']
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: TiDB 2.1 RC5 Release Notes
-category: Releases
 aliases: ['/docs/v3.0/releases/release-2.1-rc.5/','/docs/v3.0/releases/21rc5/','/docs/releases/21rc5/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Use Mydumper and TiDB Lightning for Backup and Restoration
 summary: Learn how to back up and restore the data of TiDB using Mydumper and TiDB Lightning.
-category: how-to
 aliases: ['/docs/v3.0/backup-and-restore-using-mydumper-lightning/','/docs/v3.0/how-to/maintain/backup-and-restore/','/docs/op-guide/backup-restore/']
 ---
 
