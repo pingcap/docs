@@ -1,7 +1,6 @@
 ---
 title: TiDB FAQ
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
-category: faq
 aliases: ['/docs/dev/faq/tidb-faq/','/docs/dev/faq/tidb/','/docs/dev/tiflash/tiflash-faq/','/docs/dev/reference/tiflash/faq/','/tidb/dev/tiflash-faq']
 ---
 
@@ -40,6 +39,16 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 #### How is TiDB compatible with MySQL?
 
 Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support trigger, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
+
+If you use the MySQL 8.0 client and it fails to connect to TiDB, try to add the `default-auth` and `default-character-set` options:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
+```
+
+This problem occurs because MySQL 8.0 changes the [authentication plugin](/security-compatibility-with-mysql.md) default in MySQL 5.7. To solve this problem, you need to add the options above to specify using the old encryption method.
 
 #### How is TiDB highly available?
 
@@ -102,7 +111,7 @@ As a standalone database, MySQL can only implement across-database transactions 
 The display content of TiDB `show processlist` is almost the same as that of MySQL `show processlist`. TiDB `show processlist` does not display the system process ID. The ID that it displays is the current session ID. The differences between TiDB `show processlist` and MySQL `show processlist` are as follows:
 
 - As TiDB is a distributed database, the `tidb-server` instance is a stateless engine for parsing and executing the SQL statements (for details, see [TiDB architecture](/architecture.md)). `show processlist` displays the session list executed in the `tidb-server` instance that the user logs in to from the MySQL client, not the list of all the sessions running in the cluster. But MySQL is a standalone database and its `show processlist` displays all the SQL statements executed in MySQL.
-- TiDB `show processlist` displays the estimated memory usage (unit: Byte) of the current session, which is not displayed in MySQL `show processlist`.
+- The `State` column in TiDB is not continually updated during query execution. As TiDB supports parallel query, each statement may be in multiple _states_ at once, and thus it is difficult to simplify to a single value.
 
 #### How to modify the user password and privilege?
 
@@ -539,7 +548,7 @@ In the communication process between the TiDB server and the TiKV server, the `S
 
 #### What's the maximum number of concurrent connections that TiDB supports?
 
-The current TiDB version has no limit for the maximum number of concurrent connections. If too large concurrency leads to an increase of response time, you can increase the capacity by adding TiDB nodes.
+By default, there is no limit on the maximum number of connections per TiDB server. A limit may be enforced by setting `max-server-connections` in the `config.toml` file. If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
 
 #### How to view the creation time of a table?
 
@@ -551,7 +560,7 @@ When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if e
 
 #### How to control or change the execution priority of SQL commits?
 
-TiDB supports changing the priority on a [per-session](/tidb-specific-system-variables.md#tidb_force_priority), [global](/tidb-configuration-file.md#force-priority) or individual statement basis. Priority has the following meaning:
+TiDB supports changing the priority on a [per-session](/system-variables.md#tidb_force_priority), [global](/tidb-configuration-file.md#force-priority) or individual statement basis. Priority has the following meaning:
 
 - `HIGH_PRIORITY`: this statement has a high priority, that is, TiDB gives priority to this statement and executes it first.
 
@@ -1014,7 +1023,7 @@ See [Introduction to Statistics](/statistics.md).
 
 #### How to optimize `select count(1)`?
 
-The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/tidb-specific-system-variables.md#tidb_distsql_scan_concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
+The `count(1)` statement counts the total number of rows in a table. Improving the degree of concurrency can significantly improve the speed. To modify the concurrency, refer to the [document](/system-variables.md#tidb_distsql_scan_concurrency). But it also depends on the CPU and I/O resources. TiDB accesses TiKV in every query. When the amount of data is small, all MySQL is in memory, and TiDB needs to conduct a network access.
 
 Recommendations:
 
@@ -1051,7 +1060,7 @@ From the above results, you can get that the `add index` operation is being proc
 
 #### Does TiDB support CBO (Cost-Based Optimization)? If yes, to what extent?
 
-Yes. TiDB uses the cost-based optimizer. The cost model and statistics are constantly optimized. TiDB also supports correlation algorithms like hash join and soft merge.
+Yes. TiDB uses the cost-based optimizer. The cost model and statistics are constantly optimized. TiDB also supports join algorithms like hash join and sort-merge join.
 
 #### How to determine whether I need to execute `analyze` on a table?
 
@@ -1079,7 +1088,7 @@ See [The TiDB Command Options](/command-line-flags-for-tidb-configuration.md).
 
 #### How to scatter the hotspots?
 
-In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [TiDB Specific System Variables and Syntax](/tidb-specific-system-variables.md#shard_row_id_bits).
+In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md).
 
 ### TiKV
 

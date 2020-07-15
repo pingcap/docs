@@ -1,7 +1,7 @@
 ---
 title: TiUP Troubleshooting Guide
 summary: Introduce the troubleshooting methods and solutions if you encounter issues when using TiUP.
-category: tools
+aliases: ['/docs/dev/tiup/tiup-troubleshooting-guide/']
 ---
 
 # TiUP Troubleshooting Guide
