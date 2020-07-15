@@ -62,7 +62,7 @@ You can use the blocklist of optimization rules to disable some of them if some 
     {{< copyable "sql" >}}
 
     ```sql
-    delete from mysql.opt_rule_blacklist where name in ("join_reoder", "topn_push_down");
+    delete from mysql.opt_rule_blacklist where name in ("join_reorder", "topn_push_down");
     ```
 
     {{< copyable "sql" >}}
