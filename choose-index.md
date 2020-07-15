@@ -64,7 +64,7 @@ According to these factors and the cost model, the optimizer selects an index wi
 
     At present, the cost model of distinguishing TiFlash from TiKV is still rough. You can decrease the value of `tidb_opt_seek_factor` parameter, then the optimizer prefers to choose TiFlash.
     
-3. The statistics are accurate. One index need to retrieve rows from tables, but it actually executes faster than the index that do not  retrieve rows from tables. Why select the index  that do not  retrieve rows from tables?
+3. The statistics are accurate. Index A needs to retrieve rows from tables, but it actually executes faster than Index B that does not retrieve rows from tables. Why does the optimizer choose Index B?
 
     In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of tidb_opt_network_factor parameter in order to reduce the cost for retrieving rows from tables.
 
