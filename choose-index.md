@@ -74,4 +74,4 @@ The index selection can be controlled by a single query through [Optimizer Hints
 
 - `USE_INDEX` / `IGNORE_INDEX` can force the optimizer to use / not use certain indexes.
 
-- `READ_FROM_STORAGE` can force the optimizer to choose the  TiKV / TiFlash storage engine for certain tables to execute queries.
+- `READ_FROM_STORAGE` can force the optimizer to choose the TiKV / TiFlash storage engine for certain tables to execute queries.
