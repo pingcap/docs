@@ -21,7 +21,7 @@ Before introducing index selection, it is important to understand the ways TiDB 
 | TableReader | None | Any scenario | It is generally considered as the least efficient operator that scans table data directly from the TiKV layer. It can be selected only if there is a range query on the `_tidb_rowid` column, or if there are no other operators for accessing tables to choose from. |
 | TableReader | The table has a replica on the TiFlash node. | There are fewer columns to read, but many rows to evaluate.  | Tiflash is column storage. If you need to calculate a small number of columns and a large number of rows, It is recommended to choose this operator. |
 | IndexReader | A table has one or more indexes, and the columns needed for the calculation are included in the indexes. | When there is a smaller range query on the indexes, or when there is an order requirement for indexed columns. | When multiple indexes exist, a reasonable index is selected based on the cost estimation. |
-| IndexLookupReader | A table has one or more indexes, and the columns needed for calculation are not completely included in the index. | Same as IndexReader. |  Since the index does not completely cover calculated columns, it needs to retrieve rows from a table after reading indexes. There is an extra cost compared to IndexReader operator. |
+| IndexLookupReader | A table has one or more indexes, and the columns needed for calculation are not completely included in the indexes. | Same as IndexReader. |  Since the index does not completely cover calculated columns, TiDB needs to retrieve rows from a table after reading indexes. There is an extra cost compared to the IndexReader operator. |
 
 > **Note:**
 >
