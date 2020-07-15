@@ -62,7 +62,7 @@ According to these factors and the cost model, the optimizer selects an index wi
 
 2. Statistics are accurate, and reading from TiFlash is faster, but why does the optimizer choose to read from TiKV?
 
-    At present, the cost model of distinguishing from TiFlash and TiKV is still rough. You can decrease the value of tidb_opt_seek_factor parameter, then the optimizer prefers to choose TiFlash.
+    At present, the cost model of distinguishing TiFlash from TiKV is still rough. You can decrease the value of `tidb_opt_seek_factor` parameter, then the optimizer prefers to choose TiFlash.
     
 3. The statistics are accurate. One index need to retrieve rows from tables, but it actually executes faster than the index that do not  retrieve rows from tables. Why select the index  that do not  retrieve rows from tables?
 
