@@ -1,7 +1,6 @@
 ---
 title: TiDB Configuration File
 summary: Learn the TiDB configuration file options that are not involved in command line options.
-category: deployment
 aliases: ['/docs/dev/tidb-configuration-file/','/docs/dev/reference/configuration/tidb-server/configuration-file/']
 ---
 
@@ -28,7 +27,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 - The maximum memory available for a single SQL statement.
 - Default value: `1073741824` (in bytes)
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
-- This value is the initial value of the system variable [`tidb_mem_quota_query`](/tidb-specific-system-variables.md#tidb_mem_quota_query).
+- This value is the initial value of the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
 
 ### `oom-use-tmp-storage`
 
@@ -146,7 +145,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Enables or disables the telemetry collection in TiDB.
 - Default value: `true`
-- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/tidb-specific-system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
+- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
 ## Log
 
@@ -193,7 +192,7 @@ Configuration items related to log.
 
 + Determines whether to record execution plans in the slow log.
 + Default value: `1`
-+ `0` means to disable, and `1` (by default) means to enable. The value of this parameter is the initial value of the [`tidb_record_plan_in_slow_log`](/tidb-specific-system-variables.md#tidb_record_plan_in_slow_log) system variable.
++ `0` means to disable, and `1` (by default) means to enable. The value of this parameter is the initial value of the [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log) system variable.
 
 ### `expensive-threshold`
 
@@ -354,6 +353,18 @@ Configuration items related to performance.
 - Sets the priority for all statements.
 - Default: `NO_PRIORITY`
 - Optional values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY` and `DELAYED`.
+
+### `distinct-agg-push-down`
+
+- Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
+- Default: `false`
+- This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down).
+
+### `nested-loop-join-cache-capacity`
+
++ The maximum memory usage for the Least Recently Used (LRU) algorithm of the nested loop join cache (in bytes).
++ Default value: `20971520`
++ When `nested-loop-join-cache-capacity` is set to `0`, nested loop join cache is disabled by default. When the LRU size is larger than the value of `nested-loop-join-cache-capacity`, the elements in the LRU are removed.
 
 ## prepared-plan-cache
 
