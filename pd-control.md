@@ -124,7 +124,7 @@ Use this command to view or modify the configuration information.
 Usage:
 
 ```bash
->> config show                                // Display the config information of the scheduler
+>> config show                                // Display the config information of the scheduling
 {
   "replication": {
     "enable-placement-rules": "false",
@@ -134,14 +134,14 @@ Usage:
   },
   "schedule": {
     "enable-cross-table-merge": "false",
-    "enable-debug-metrics": "true",
+    "enable-debug-metrics": "false",
     "enable-location-replacement": "true",
     "enable-make-up-replica": "true",
     "enable-one-way-merge": "false",
     "enable-remove-down-replica": "true",
     "enable-remove-extra-replica": "true",
     "enable-replace-offline-replica": "true",
-    "high-space-ratio": 0.6,
+    "high-space-ratio": 0.7,
     "hot-region-cache-hits-threshold": 3,
     "hot-region-schedule-limit": 4,
     "leader-schedule-limit": 4,
@@ -158,13 +158,11 @@ Usage:
     "replica-schedule-limit": 64,
     "scheduler-max-waiting-operator": 5,
     "split-merge-interval": "1h0m0s",
-    "store-balance-rate": 15,
     "store-limit-mode": "manual",
     "tolerant-size-ratio": 0
   }
 }
 >> config show all                            // Display all config information
-
 >> config show replication                    // Display the config information of replication
 {
   "max-replicas": 3,
@@ -174,16 +172,16 @@ Usage:
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"2.0.0"
+"4.0.0"
 ```
 
-+ `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
+- `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
 
     ```bash
     >> config set max-snapshot-count 16  // Set the maximum number of snapshots to 16
     ```
 
-+ `max-pending-peer-count` controls the maximum number of pending peers in a single store. The scheduler is restricted by this configuration to avoid producing a large number of Regions without the latest log in some nodes. When you need to improve the speed of adding replicas or balancing, increase this value. Setting it to 0 indicates no limit.
+- `max-pending-peer-count` controls the maximum number of pending peers in a single store. The scheduler is restricted by this configuration to avoid producing a large number of Regions without the latest log in some nodes. When you need to improve the speed of adding replicas or balancing, increase this value. Setting it to 0 indicates no limit.
 
     ```bash
     >> config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
@@ -195,16 +193,37 @@ Usage:
     >> config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16M
     ```
 
-- `max-merge-region-keys` controls the upper limit on the key count of Region Merge. When `regionKeyCount` exceeds the specified value, PD does not merge it with the adjacent Region.
+- `max-merge-region-keys` controls the upper limit on the key count of Region Merge. When `regionKey` exceeds the specified value, PD does not merge it with the adjacent Region.
 
     ```bash
-    >> config set max-merge-region-keys 50000 // Set the the upper limit on keyCount to 50000
+    >> config set max-merge-region-keys 50000 // Set the the upper limit on regionKey to 50000
     ```
 
 - `split-merge-interval` controls the interval between the `split` and `merge` operations on a same Region. This means the newly split Region won't be merged within a period of time.
 
     ```bash
     >> config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
+    ```
+
+- `enable-one-way-merge` controls the merge scheduler behavior. This means a region can only be merged into the next region of it.
+
+    ```bash
+    >> config set enable-one-way-merge true  // Enable one way merge.
+    ```
+
+- `enable-cross-table-merge` controls the merge scheduler behavior. This means two Regions can be merged with different table IDs.
+This option only works when key type is "table".
+
+    ```bash
+    >> config set enable-cross-table-merge true  // Enable cross table merge.
+    ```
+
+- `key-type` specifies the key encoding type used by the cluster. There are some strategics supported: ["table", "raw", "txn"], default: "table".
+    - If there is no TiDB in the cluster, `key-type` will be "raw" or "txn", PD is allowed to merge region cross table no matter what `enable-cross-table-merge` is.
+    - If there is TiDB in the cluster, `key-type` should be `table`. Whether pd can merge region cross table will be determined by `enable-cross-table-merge`. If `key-type` is `raw`, `placement rules` cannot work.
+
+    ```bash
+    >> config set key-type raw  // Enable cross table merge.
     ```
 
 - `patrol-region-interval` controls the execution frequency that `replicaChecker` checks the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
@@ -225,7 +244,7 @@ Usage:
     >> config set leader-schedule-limit 4         // 4 tasks of leader scheduling at the same time at most
     ```
 
-- `region-schedule-limit` controls the number of tasks scheduling the Region at the same time. This value affects the speed of Region balance. A larger value means a higher speed and setting the value to 0 closes the scheduling. Usually the Region scheduling has a large load, so do not set a too large value.
+- `region-schedule-limit` controls the number of tasks scheduling the Region at the same time. This value avoids too many region balance operators being created. The default value is 2048 which suits enough for all kinds sizes of clusters, setting the value to 0 closes the scheduling. Usually the Region scheduling speed is limited by the store-limit, users do not need to customize this value. Only change it when you know exactly what you are doing.
 
     ```bash
     >> config set region-schedule-limit 2         // 2 tasks of Region scheduling at the same time at most
@@ -242,14 +261,6 @@ Usage:
     ```bash
     >> config set merge-schedule-limit 16       // 16 tasks of Merge scheduling at the same time at most
     ```
-
-- `hot-region-schedule-limit` controls the hot Region scheduling tasks that are running at the same time. Setting its value to `0` means to disable the scheduling. It is not recommended to set a too large value, otherwise it might affect the system performance.
-
-    ```bash
-    >> config set hot-region-schedule-limit 4       // 4 tasks of hot Region scheduling at the same time at most
-    ```
-
-- `hot-region-cache-hits-threshold` is used to set the threshold of a hot Region. A Region is considered as hot only if the number of its cache hits exceeds this threshold.
 
 - `tolerant-size-ratio` controls the size of the balance buffer area. When the score difference between the leader or Region of the two stores is less than specified multiple times of the Region size, it is considered in balance by PD.
 
@@ -269,47 +280,25 @@ Usage:
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
     ```
 
-- `leader-schedule-policy` is used to select the scheduling strategy of the leader. You can choose to schedule the leader according to `size` or `count`.
-
-- `store-balance-rate` is used to control the maximum speed of adding a store or removing a peer.
-
-- `scheduler-max-waiting-operator` is used to control the number of operators in each scheduler.
-
-- `store-limit-mode` is used to control the mode of the store speed limit mechanism. There are two modes: `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to load.
-
-- `disable-raft-learner` is used to disable Raft learner. By default, PD uses Raft learner when adding replicas to reduce the risk of unavailability due to downtime or network failure.
-
-    ```bash
-    config set disable-raft-learner true        // Disable Raft learner
-    ```
-
 - `cluster-version` is the version of the cluster, which is used to enable or disable some features and to deal with the compatibility issues. By default, it is the minimum version of all normally running TiKV nodes in the cluster. You can set it manually only when you need to roll it back to an earlier version.
 
     ```bash
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
-- `enable-cross-table-merge` is used to enable the merging of cross-table Regions. When you set it to `false`, PD does not merge the Regions from different tables.
-
-- `enable-one-way-merge` controls whether PD only allows a Region to merge with the next Region. When you set it to `false`, PD allows a Region to merge with the adjacent two Regions.
-
 - `enable-remove-down-replica` is used to enable the feature of automatically deleting DownReplica. When you set it to `false`, PD does not automatically clean up the downtime replicas.
 
 - `enable-replace-offline-replica` is used to enable the feature of migrating OfflineReplica. When you set it to `false`, PD does not migrate the offline replicas.
 
-- `enable-make-up-replica` is used to enable the feature of making up replicas. When you set it to `false`, PD does not add replicas for Regions without sufficient replicas.
+- `enable-make-up-replica` is used to enable the feature of making up replicas. When you set it to `false`, PD does not adding replicas for Regions without sufficient replicas.
 
 - `enable-remove-extra-replica` is used to enable the feature of removing extra replicas. When you set it to `false`, PD does not remove extra replicas for Regions with redundant replicas.
 
-- `enable-location-replacement` is used to enable the isolation level checking. When you set it to `false`, PD does not increase the isolation level of a Region replica through scheduling.
+- `enable-location-replacement` is used to enable the isolation level check. When you set it to `false`, PD does not improve the isolation level of Region replicas by scheduling.
 
-- `enable-debug-metrics` is used to enable the metrics for debugging. When you set it to `true`, PD enables some metrics such as `balance-tolerant-size`.
+- `enable-debug-metrics` is used to enable the debug metrics. When you set it to `true`, PD will open some metrics, such as balance-tolerant-size and op influence.
 
-- `enable-placement-rules` is used to enable placement rules.
-
-### `config placement-rules [disable | enable | load | save | show]`
-
-Use this command to configure Placement Rules. For details, refer to [Placement Rules Usage Document](/configure-placement-rules.md).
+- `store-limit-mode` has two mode for setting limit: auto or manual, an auto-set value can be overwritten by a manual-set value, otherwise it is forbidden (experimental). 
 
 ### `health`
 
@@ -389,7 +378,7 @@ Success!
 
 ### `operator [check | show | add | remove]`
 
-Use this command to view and control the scheduling operation, split a Region, or merge Regions.
+Use this command to view and control the scheduling operation.
 
 Usage:
 
@@ -399,6 +388,7 @@ Usage:
 >> operator show leader                                 // Display all leader operators
 >> operator show region                                 // Display all Region operators
 >> operator add add-peer 1 2                            // Add a replica of Region 1 on store 2
+>> operator add add-learner 1 2                         // Add a learner replica of Region 1 on store 2
 >> operator add remove-peer 1 2                         // Remove a replica of Region 1 on store 2
 >> operator add transfer-leader 1 2                     // Schedule the leader of Region 1 to store 2
 >> operator add transfer-region 1 2 3 4                 // Schedule Region 1 to stores 2,3,4
@@ -464,11 +454,23 @@ Usage:
 }
 ```
 
-### `region key [--format=raw|encode] <key>`
+### `region key [--format=raw|encode|hex] <key>`
 
-Use this command to query the region that a specific key resides in. It supports the raw and encoding formats. And you need to use single quotes around the key when it is in the encoding format.
+Use this command to query the region that a specific key resides in. It supports the raw, encoding and hex formats. And you need to use single quotes around the key when it is in the encoding format.
 
-Raw format usage (default):
+Hex format usage (default):
+
+```bash
+>> region key 7480000000000000FF1300000000000000F8
+{
+  "region": {
+    "id": 2,
+    ......
+  }
+}
+```
+
+Raw format usage:
 
 ```bash
 >> region key --format=raw abc
@@ -621,7 +623,7 @@ Usage:
 
 ```
 
-### `region check [miss-peer | extra-peer | down-peer | pending-peer]`
+### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys]`
 
 Use this command to check the Regions in abnormal conditions.
 
@@ -644,7 +646,7 @@ Usage:
 
 ### `scheduler [show | add | remove | pause | resume | config]`
 
-Use this command to view and control the scheduling strategy.
+Use this command to view and control the scheduling policy.
 
 Usage:
 
@@ -664,58 +666,104 @@ Usage:
 
 ### `store [delete | label | weight | remove-tombstone | limit | limit-scene] <store_id>  [--jq="<query string>"]`
 
+Use this command to view and control the balance-hot-region-scheduler policy.
+
+Usage:
+
+```bash
+>> scheduler config balance-hot-region-scheduler  // Display all config
+{
+  "min-hot-byte-rate": 100,
+  "min-hot-key-rate": 10,
+  "max-zombie-rounds": 3,
+  "max-peer-number": 1000,
+  "byte-rate-rank-step-ratio": 0.05,
+  "key-rate-rank-step-ratio": 0.05,
+  "count-rank-step-ratio": 0.01,
+  "great-dec-ratio": 0.95,
+  "minor-dec-ratio": 0.99,
+  "src-tolerance-ratio": 1.02,
+  "dst-tolerance-ratio": 1.02
+}
+```
+
+- `min-hot-byte-rate` means the smallest byte counted, it is usually 100
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set min-hot-byte-rate 100
+    ```
+
+- `min-hot-key-rate` means the smallest key counted, it is usually 10
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set min-hot-key-rate 10
+    ```
+
+- `max-zombie-rounds` means the maximum number of heartbeat thatan operator is considered as a pending influence.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set max-zombie-rounds 3
+    ```
+
+- `max-peer-number` means the maximum number to solve, prevent scheduler too slow.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set max-peer-number 1000
+    ```
+
+- `byte-rate-rank-step-ratio`,`key-rate-rank-step-ratio`,`count-rank-step-ratio` means that step rank of  byte,key and count.Rank step ratio decide the step when calculate rank. `great-dec-ratio`,`minor-dec-ratio` are used to judge the dec rank. Usually we do not need to be modified them.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
+    ```
+
+- `src-tolerance-ratio` and `dst-tolerance-ratio` are config for expectation scheduler. The smaller the `tolerance-ratio` , the easier it is to schedule. When redundant scheduling occurs, we can appropriately increase this.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.05
+    ```
+
+### `store [delete | label | weight | remove-tombstone | limit | limit-scene] <store_id>  [--jq="<query string>"]`
+
 Use this command to view the store information or remove a specified store. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
 
 Usage:
 
 ```bash
->> store                        // Display information of all stores
+>> store                               // Display information of all stores
 {
   "count": 3,
   "stores": [...]
 }
->> store 1                      // Get the store with the store id of 1
+>> store 1                             // Get the store with the store id of 1
   ......
->> store delete 1               // Delete the store with the store id of 1
+>> store delete 1                      // Delete the store with the store id of 1
   ......
->> store label 1 zone cn        // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
->> store weight 1 5 10          // Set the leader weight to 5 and region weight to 10 for the store with the store id of 1
-```
-
-```bash
->> store remove-tombstone              // Delete all stores that are in the tombstone state
->> store limit                         // Display the speed limit of adding peers in all stores
->> store limit region-add              // Display the speed limit of adding peers in all stores
->> store limit region-remove           // Display the speed limit of deleting peers in all stores
->> store limit all 5                   // Set the speed limit for all stores to add peers to 5 per minute (if no specific type is set, the default setting is the speed of adding peers)
->> store limit 1 5                     // Set the speed limit of adding peers in store 1 to 5 per minute (if no specific type is set, the default setting is the speed of adding peers)
->> store limit all 5 region-add        // Set the speed limit for all stores to add peers to 5 per minute
->> store limit 1 5 region-add          // Set the speed limit of adding peers in store 1 to 5 per minute
->> store limit 1 5 region-remove       // Set the speed limit of deleting peers in store 1 to 5 per minute
->> store limit all 5 region-remove     // Set the speed limit for all stores to delete peers to 5 per minute
->> store limit-scene                   // Display the maximum speed of adding/deleting peers in different loads (only valid when `store-limit-mode` is `auto`)
+>> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
+>> store weight 1 5 10                 // Set the leader weight to 5 and region weight to 10 for the store with the store id of 1
+>> store remove-tombstone              // Remove stores that are in tombstone state
+>> store limit                         // Show limits of adding peer and removing peer operation for all stores
+>> store limit add-peer                // Show limits of adding peer operation for all stores
+>> store limit remove-peer             // Show limits of removing peer operation for all stores
+>> store limit all 5                   // Limit 5 adding peer operations and 5 remove peer operations per minute for all stores
+>> store limit 1 5                     // Limit 5 adding peer operations and 5 remove peer operations per minute for store 1
+>> store limit all 5 add-peer          // Limit 5 adding peer operations per minute for all stores
+>> store limit 1 5 add-peer            // Limit 5 adding peer operations per minute for store 1
+>> store limit 1 5 remove-peer         // Limit 5 removing peer operations per minute for store 1
+>> store limit all 5 remove-peer       // Limit 5 removing peer operations per minute for all stores
+>> store limit-scene                   // Show all limit scene (experimental)
 {
   "Idle": 100,
   "Low": 50,
   "Normal": 32,
   "High": 12
 }
->> store limit-scene idle 100          // In the scenario of setting load to idle, set the speed limit of adding/deleting peers to 100 per minute
+>> store limit-scene idle 100 // set rate to 100 in the idle scene (experimental)
 ```
 
-> **Note:**
+> **Notice**
 >
-> The effectiveness of the store limit depends on the order in which the commands are executed. For example, if you first execute `store limit 1 5 region-add` which sets the speed limit of adding peers in store 1 to 5 per minute, and then execute `store limit 1 10 region-add`. At this time, the speed limit for adding peers in store 1 is modified to 10 per minute; otherwise, if you first execute `store limit 1 10 region-add` which sets the speed limit of adding peers in all stores to 10 per minute, and then execute `store limit 1 5 region-add`. At this time, only the speed limit of adding peers in store 1 is modified to 5 per minute.
-
-### `log [fatal | error | warn | info | debug]`
-
-Use this command to set the log level of the PD leader.
-
-Usage:
-
-```bash
->> log warn
-```
+> When using `store limit` command, the original `region-add` and `region-remove` are deprecated, please use `add-peer` and `remove-peer`.
 
 ### `tso`
 
