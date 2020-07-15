@@ -1,20 +1,41 @@
 ---
 title: SHOW TABLE REGIONS
 summary: Learn how to use SHOW TABLE REGIONS in TiDB.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-table-regions/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-table-regions/','/docs/dev/reference/sql/statements/show-table-regions/']
 ---
 
 # SHOW TABLE REGIONS
 
 The `SHOW TABLE REGIONS` statement is used to show the Region information of a table in TiDB.
 
-## Synopsis
+## Syntax
 
 ```sql
 SHOW TABLE [table_name] REGIONS [WhereClauseOptional];
 SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 ```
+
+## Synopsis
+
+**ShowTableRegionStmt:**
+
+![ShowTableRegionStmt](/media/sqlgram/ShowTableRegionStmt.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**PartitionNameListOpt:**
+
+![PartitionNameListOpt](/media/sqlgram/PartitionNameListOpt.png)
+
+**WhereClauseOptional:**
+
+![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
+
+**WhereClause:**
+
+![WhereClause](/media/sqlgram/WhereClause.png)
 
 Executing `SHOW TABLE REGIONS` returns the following columns:
 

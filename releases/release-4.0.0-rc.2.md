@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 RC.2 Release Notes
-category: Releases
+aliases: ['/docs/dev/releases/release-4.0.0-rc.2/']
 ---
 
 # TiDB 4.0 RC.2 Release Notes
@@ -8,8 +8,6 @@ category: Releases
 Release date: May 15, 2020
 
 TiDB version: 4.0.0-rc.2
-
-TiUP version: 4.0.0-rc.2
 
 ## Compatibility Changes
 

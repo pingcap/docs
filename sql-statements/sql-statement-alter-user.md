@@ -1,8 +1,7 @@
 ---
 title: ALTER USER | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER USER for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/alter-user/']
+aliases: ['/docs/dev/sql-statements/sql-statement-alter-user/','/docs/dev/reference/sql/statements/alter-user/']
 ---
 
 # ALTER USER
@@ -22,6 +21,14 @@ This statement changes an existing user inside the TiDB privilege system. In the
 **UserSpec:**
 
 ![UserSpec](/media/sqlgram/UserSpec.png)
+
+**Username:**
+
+![Username](/media/sqlgram/Username.png)
+
+**AuthOption:**
+
+![AuthOption](/media/sqlgram/AuthOption.png)
 
 ## Examples
 

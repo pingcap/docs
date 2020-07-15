@@ -1,7 +1,6 @@
 ---
 title: TiDB 2.1 RC5 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/21rc5/']
+aliases: ['/docs/dev/releases/release-2.1-rc.5/','/docs/dev/releases/21rc5/']
 ---
 
 <!-- markdownlint-disable MD032 -->
@@ -61,4 +60,4 @@ On November 12, 2018, TiDB 2.1 RC5 is released. Compared with TiDB 2.1 RC4, this
 
 ## Tools
 
-- Support the TiDB-Binlog cluster, which is not compatible with the older version of binlog [#8093](https://github.com/pingcap/tidb/pull/8093), [documentation](https://pingcap.com/docs/dev/reference/tidb-binlog/overview/)
+- Support the TiDB-Binlog cluster, which is not compatible with the older version of binlog [#8093](https://github.com/pingcap/tidb/pull/8093), [documentation](/tidb-binlog/tidb-binlog-overview.md)

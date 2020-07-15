@@ -1,8 +1,7 @@
 ---
 title: ADD COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of ADD COLUMN for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/add-column/']
+aliases: ['/docs/dev/sql-statements/sql-statement-add-column/','/docs/dev/reference/sql/statements/add-column/']
 ---
 
 # ADD COLUMN
@@ -18,10 +17,6 @@ The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. Thi
 **AlterTableSpec:**
 
 ![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
-
-**ColumnKeywordOpt:**
-
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
 
 **ColumnDef:**
 
@@ -73,9 +68,10 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-* Adding multiple columns at the same time is currently not supported.
+* Adding multiple columns at the same time in a statement is currently not supported.
 * Adding a new column and setting it to the `PRIMARY KEY` is not supported.
 * Adding a new column and setting it to `AUTO_INCREMENT` is not supported.
+* There are limitations on adding generated columns, refer to: [generated column limitations](/generated-columns.md#limitations).
 
 ## See also
 

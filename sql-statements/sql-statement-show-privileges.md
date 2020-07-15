@@ -1,8 +1,7 @@
 ---
 title: SHOW PRIVILEGES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW PRIVILEGES for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-privileges/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-privileges/','/docs/dev/reference/sql/statements/show-privileges/']
 ---
 
 # SHOW PRIVILEGES
@@ -65,4 +64,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 ## See also
 
 * [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
-* [GRANT <privileges>](/sql-statements/sql-statement-grant-privileges.md)
+* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
