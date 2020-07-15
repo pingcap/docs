@@ -1,9 +1,9 @@
 ---
-title: Max/Min Eliminate
+title: Eliminate Max/Min
 summary: Introduce the rules for eliminating Max/Min functions.
 ---
 
-# Max/Min Eliminate
+# Eliminate Max/Min
 
 When a SQL statement contains `max`/`min` functions, the query optimizer tries to convert the `max`/`min` aggregate functions to the TopN operator by applying the `max`/`min` eliminating rule. In this way, TiDB can perform the query more efficiently through indexes.
 
@@ -39,7 +39,7 @@ When column `a` has an index, or when column `a` is the prefix of some composite
 
 The example statement has the following execution plan:
 
-```
+```sql
 mysql> explain select max(a) from t;
 +------------------------------+---------+-----------+-------------------------+-------------------------------------+
 | id                           | estRows | task      | access object           | operator info                       |
@@ -91,4 +91,27 @@ from
     (select min(a) as min_a from (select a from t where a is not null order by a asc limit 1) t) t2
 ```
 
-Similarly, if column `a` has an index to preserve its order, the optimized execution only scans two rows of data instead of scanning the whole table. However, if column `a` does not have an index to preserve its order, this rule is not applied because it results in two full table scans, which only needs 
+Similarly, if column `a` has an index to preserve its order, the optimized execution only scans two rows of data instead of the whole table. However, if column `a` does not have an index to preserve its order, this rule results in two full table scans, but the execution only needs one full table scan if it is not rewritten. Therefore, in such cases, this rule is not applied.
+
+The final execution plan is as follows:
+
+```sql
+mysql> explain select max(a)-min(a) from t;
++------------------------------------+---------+-----------+-------------------------+-------------------------------------+
+| id                                 | estRows | task      | access object           | operator info                       |
++------------------------------------+---------+-----------+-------------------------+-------------------------------------+
+| Projection_17                      | 1.00    | root      |                         | minus(Column#4, Column#5)->Column#6 |
+| └─HashJoin_18                      | 1.00    | root      |                         | CARTESIAN inner join                |
+|   ├─StreamAgg_45(Build)            | 1.00    | root      |                         | funcs:min(test.t.a)->Column#5       |
+|   │ └─Limit_49                     | 1.00    | root      |                         | offset:0, count:1                   |
+|   │   └─IndexReader_59             | 1.00    | root      |                         | index:Limit_58                      |
+|   │     └─Limit_58                 | 1.00    | cop[tikv] |                         | offset:0, count:1                   |
+|   │       └─IndexFullScan_57       | 1.00    | cop[tikv] | table:t, index:idx_a(a) | keep order:true, stats:pseudo       |
+|   └─StreamAgg_24(Probe)            | 1.00    | root      |                         | funcs:max(test.t.a)->Column#4       |
+|     └─Limit_28                     | 1.00    | root      |                         | offset:0, count:1                   |
+|       └─IndexReader_38             | 1.00    | root      |                         | index:Limit_37                      |
+|         └─Limit_37                 | 1.00    | cop[tikv] |                         | offset:0, count:1                   |
+|           └─IndexFullScan_36       | 1.00    | cop[tikv] | table:t, index:idx_a(a) | keep order:true, desc, stats:pseudo |
++------------------------------------+---------+-----------+-------------------------+-------------------------------------+
+12 rows in set (0.01 sec)
+```
