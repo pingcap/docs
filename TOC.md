@@ -79,12 +79,13 @@
   + [TiDB Cluster Alert Rules](/alert-rules.md)
   + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
 + Troubleshoot
+  + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Identify Slow Queries](/identify-slow-queries.md)
   + [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
+  + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
-  + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
   + [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
@@ -106,13 +107,16 @@
       + Logic Optimization
         + [Subquery Related Optimizations](/subquery-optimization.md)
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        + [Predicates Push Down](/predicates-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
         + [Statistics](/statistics.md)
+      + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
+        + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
@@ -205,6 +209,7 @@
       + Attributes
         + [AUTO_INCREMENT](/auto-increment.md)
         + [AUTO_RANDOM](/auto-random.md)
+        + [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
       + [Literal Values](/literal-values.md)
       + [Schema Object Names](/schema-object-names.md)
       + [Keywords and Reserved Words](/keywords.md)
@@ -415,10 +420,11 @@
     + [tikv-server](/tikv-configuration-file.md)
     + [tiflash-server](/tiflash/tiflash-configuration.md)
     + [pd-server](/pd-configuration-file.md)
-  + System Variables
-    + [MySQL System Variables](/system-variables.md)
-    + [TiDB Specific System Variables](/tidb-specific-system-variables.md)
+  + [System Variables](/system-variables.md)
   + Storage Engines
+    + TiKV
+      + [TiKV Overview](/tikv-overview.md)
+      + [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
