@@ -60,7 +60,7 @@ According to these factors and the cost model, the optimizer selects an index wi
 
     This is usually due to stale or inaccurate statistics. You can re-execute the `analyze table` statement or modify the parameters of the `analyze table` statement.
 
-2. Statistics are accurate, why read TiFlash faster, and the optimizer chose the TiKV?
+2. Statistics are accurate, and reading from TiFlash is faster, but why does the optimizer choose to read from TiKV?
 
     At present, the cost model of distinguishing from TiFlash and TiKV is still rough. You can decrease the value of tidb_opt_seek_factor parameter, then the optimizer prefers to choose TiFlash.
     
