@@ -92,7 +92,7 @@
     - [Scale a TiDB Cluster](/horizontal-scale.md)
   + Upgrade
     - [Upgrade to TiDB 3.0](/upgrade-tidb-using-ansible.md)
-  - Troubleshoot
+  + Troubleshoot
     - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
     - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
     - [Troubleshoot TiDB Lightning](/troubleshoot-tidb-lightning.md)
@@ -285,6 +285,7 @@
   + Performance
     - [Overview](/sql-optimization-concepts.md)
     - [Understanding the Query Execution Plan](/query-execution-plan.md)
+    - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
     - [Introduction to Statistics](/statistics.md)
     - [TopN and Limit Push Down](/topn-limit-push-down.md)
     - [Optimizer Hints](/optimizer-hints.md)
