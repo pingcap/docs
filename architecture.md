@@ -22,7 +22,7 @@ The TiDB server is the stateless SQL layer that exposes the connection endpoint 
 
 ## Placement Driver (PD) server
 
-The PD server is the managing component of the entire cluster and is in charge of storing real-time data distribution of every single TiKV node and overall topology structure of the entire TiDB cluster, providing Dashboard management UI, and allocating transaction IDs. The PD server can be seen as ‘The Brain’ of the entire cluster’ since it is not only for storage the metadata of the cluster, but also scheduling and load balancing regions in the TiKV cluster. Besides, The PD server at least three nodes which leads to high availability. It is recommended to deploy PD as an odd number of nodes.
+The PD server is the metadata managing component of the entire cluster. It stores metadata of real-time data distribution of every single TiKV node and the topology structure of the entire TiDB cluster, provides the TiDB Dashboard management UI, and allocates transaction IDs to distributed transactions. The PD server is "the brain" of the entire TiDB cluster because it not only stores metadata of the cluster, but also sends data scheduling command to specific TiKV nodes according to the data distribution state reported by TiKV nodes in real time. In addition, the PD server consists of three nodes at least and has high availability. It is recommended to deploy an odd number of PD nodes.
 
 ## Storage servers
 
