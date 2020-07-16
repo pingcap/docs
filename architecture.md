@@ -32,4 +32,4 @@ The TiKV server is responsible for storing data. TiKV is a distributed transacti
 
 ### TiFlash server
 
-The TiFlash Server is a special kind of storage server. Differs to normal TiKV, TiFlash is a kind of column-oriented storage server which is mainly designed for OLAP scenarios. 
+The TiFlash Server is a special type of storage server. Unlike ordinary TiKV nodes, TiFlash stores data by column, mainly designed to accelerate analytical processing.
