@@ -15,7 +15,7 @@ PD Recover is a disaster recovery tool of PD, used to recover the PD cluster whi
 
 > **Note:**
 >
-> Generally, you don't need to compile source code as the PD Control tool already exists in the released Binary or Docker. However, dev users can refer to the above instruction for compiling source code.
+> Generally, you do not need to compile source code because the PD Control tool already exists in the released Binary or Docker. However, developer users can refer to the above instruction for compiling source code.
 
 ## Download TiDB installation package
 
