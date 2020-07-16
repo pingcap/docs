@@ -1,6 +1,5 @@
 ---
 title: How to Test TiDB Using Sysbench
-category: benchmark
 aliases: ['/docs/dev/benchmark/benchmark-tidb-using-sysbench/','/docs/dev/benchmark/how-to-run-sysbench/']
 ---
 
@@ -88,7 +87,7 @@ sync-log = false
 capacity = "30GB"
 ```
 
-For more detailed information on TiKV performance tuning, see [Tune TiKV Performance](/tune-tikv-performance.md).
+For more detailed information on TiKV performance tuning, see [Tune TiKV Performance](/tune-tikv-memory-performance.md).
 
 ## Test process
 

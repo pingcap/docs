@@ -1,7 +1,6 @@
 ---
 title: Deploy TiDB Offline Using TiDB Ansible
 summary: Use TiDB Ansible to deploy a TiDB cluster offline.
-category: how-to
 aliases: ['/docs/dev/offline-deployment-using-ansible/','/docs/dev/how-to/deploy/orchestrated/offline-ansible/']
 ---
 
@@ -175,3 +174,7 @@ See [Edit the `inventory.ini` file to orchestrate the TiDB cluster](/online-depl
 ## Test the TiDB cluster
 
 See [Test the TiDB cluster](/online-deployment-using-ansible.md#test-the-tidb-cluster).
+
+> **Note:**
+>
+> By default, TiDB periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
