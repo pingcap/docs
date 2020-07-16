@@ -23,6 +23,7 @@ To download the latest version of PD Recover, directly download the TiDB package
 | Package download link | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
 | `https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` (pd-recover) | Linux | amd64 | `https://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
+
 > **Note:**
 >
 > `{version}` indicates the version number of TiDB. For example, if `{version}` is `v4.0.0`, the package download link is `https://download.pingcap.org/tidb-v4.0.0-linux-amd64.tar.gz`. You can also download the latest unpublished version by replacing `{version}` with `latest`.
