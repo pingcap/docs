@@ -111,7 +111,9 @@
         + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
+        + [Index Selection](/choose-index.md)
         + [Statistics](/statistics.md)
+        + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
