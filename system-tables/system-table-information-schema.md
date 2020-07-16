@@ -337,15 +337,15 @@ The `PROCESSLIST` table has a `MEM` column that `show processlist` does not have
 
 Fields in the `PROCESSLIST` table are described as follows:
 
-* ID: The ID of the user connection.
-* USER: The name of the user who is executing `PROCESS`.
-* HOST: The address that the user is connecting to.
-* DB: The name of the currently connected default database.
-* COMMAND: The command type that `PROCESS` is executing.
-* TIME: The current execution duration of `PROCESS`, in seconds.
-* STATE: The current connection state.
-* INFO: The requested statement that is being processed.
-* MEM: The memory used by the request that is being processed, in bytes.
+* `ID`: The ID of the user connection.
+* `USER`: The name of the user who is executing `PROCESS`.
+* `HOST`: The address that the user is connecting to.
+* `DB`: The name of the currently connected default database.
+* `COMMAND`: The command type that `PROCESS` is executing.
+* `TIME`: The current execution duration of `PROCESS`, in seconds.
+* `STATE`: The current connection state.
+* `INFO`: The requested statement that is being processed.
+* `MEM`: The memory used by the request that is being processed, in bytes.
 
 ## CLUSTER_PROCESSLIST
 
@@ -846,16 +846,16 @@ desc TIKV_REGION_PEERS;
 
 Fields in the `TIKV_REGION_PEERS` table are described as follows:
 
-* REGION_ID: The Region ID.
-* PEER_ID: The ID of the Region peer.
-* STORE_ID: The ID of the TiKV store where the Region is located.
-* IS_LEARNER: Whether the peer is leaner.
-* IS_LEADER: Whether the peer is leader.
-* STATUS: The statuses of a peer:
-    * PENDING: Temporarily unavailable.
-    * DOWN: Offline and converted. This peer no longer provides service.
-    * NORMAL: Running normally.
-* DOWN_SECONDS: The duration of being offline, in seconds.
+* `REGION_ID`: The Region ID.
+* `PEER_ID`: The ID of the Region peer.
+* `STORE_ID`: The ID of the TiKV store where the Region is located.
+* `IS_LEARNER`: Whether the peer is leaner.
+* `IS_LEADER`: Whether the peer is leader.
+* `STATUS`: The statuses of a peer:
+    * `PENDING`: Temporarily unavailable.
+    * `DOWN`: Offline and converted. This peer no longer provides service.
+    * `NORMAL`: Running normally.
+* `DOWN_SECONDS`: The duration of being offline, in seconds.
 
 ### TIKV_REGION_STATUS table
 
