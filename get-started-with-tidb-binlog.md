@@ -1,7 +1,6 @@
 ---
 title: TiDB Binlog Tutorial
 summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
-category: how-to
 aliases: ['/docs/dev/get-started-with-tidb-binlog/','/docs/dev/how-to/get-started/tidb-binlog/']
 ---
 
@@ -329,7 +328,7 @@ You should see the same rows that you inserted into TiDB when querying the Maria
 
 ## binlogctl
 
-Information about Pumps and Drainers that have joined the cluster is stored in PD. You can use the binlogctl tool query and manipulate information about their states. See [binlogctl guide](/tidb-binlog/maintain-tidb-binlog-cluster.md#binlogctl-guide) for more information.
+Information about Pumps and Drainers that have joined the cluster is stored in PD. You can use the binlogctl tool query and manipulate information about their states. See [binlogctl guide](/tidb-binlog/binlog-control.md) for more information.
 
 Use `binlogctl` to get a view of the current status of Pumps and Drainers in the cluster:
 
