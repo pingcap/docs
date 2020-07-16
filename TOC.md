@@ -257,6 +257,7 @@
     - [Overview](/sql-optimization-concepts.md)
     - [Understanding the Query Execution Plan](/query-execution-plan.md)
     - [Introduction to Statistics](/statistics.md)
+    - [TopN and Limit Push Down](/topn-limit-push-down.md)
     - [Optimizer Hints](/optimizer-hints.md)
     - [Tune TiKV](/tune-tikv-performance.md)
     - [Operating System Tuning](/tune-operating-system.md)
