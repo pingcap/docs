@@ -1,7 +1,6 @@
 ---
 title: Troubleshoot High Disk I/O Usage in TiDB
 summary: Learn how to locate and address the issue of high TiDB storage I/O usage.
-category: reference
 ---
 
 # Troubleshoot High Disk I/O Usage in TiDB
