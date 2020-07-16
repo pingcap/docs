@@ -30,6 +30,6 @@ The PD server is the managing component of the entire cluster and is in charge o
 
 The TiKV server is responsible for storing data. From an external view, TiKV is a distributed transactional Key-Value storage engine. Region is the basic unit to store data. Each Region stores the data for a particular Key Range which is a left-closed and right-open interval from StartKey to EndKey. There are multiple Regions in each TiKV node. APIs of TiKV provides native supports to distributed transactions as in Key-Value and supports SI (Snapshot Isolation) level isolation in default, which is the core of how TiDB supports distributed transactions at SQL level. After processing SQL, SQL plan will transfer to actual calling of TiKV APIs. As a result, data will be stored in TiKV. Besides, all data will be autometically maintained as multiple replicas (Three replicas in default), which supports high availability and failover naturally.
 
-### TiFlash Server
+### TiFlash server
 
 The TiFlash Server is a special kind of storage server. Differs to normal TiKV, TiFlash is a kind of column-oriented storage server which is mainly designed for OLAP scenarios. 
