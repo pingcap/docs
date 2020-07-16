@@ -167,6 +167,7 @@ ALTER TABLE person DROP INDEX person_unique_id;
 > **Note:**
 > 
 > DDL operations are not transactions. You don't need corresponding COMMIT statements when executing DDL.
+>
 > Common DML features are adding, modifying, and deleting tables. The corresponding commands are CREATE,  ALTER,and DELETE.
 
 ## Insert, select, update, and delete data
@@ -206,6 +207,7 @@ DELETE FROM person WHERE id=2;
 > **Note:**
 > 
 > UPDATE and DELETE without WHERE filter operate on the entire table.
+>
 > DQL is used to retrieve the desired data rows from a table or multiple tables, usually the core content.
 
 ## Query data
