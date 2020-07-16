@@ -11,8 +11,6 @@ In the TiDB execution plan tree, the `LIMIT` clause in SQL corresponds to the Li
 
 Similar to predicate pushdown, TopN and Limit are pushed down in the execution plan tree to a position as close to the data source as possible so that the required data is filtered at an early stage. In this way, the pushdown significantly reduces the overhead of data transmission and calculation.
 
-To disable this rule, refer to [Optimization Rules and Blocklist for Expression Pushdown](/blocklist-control-plan.md).
-
 ## Examples
 
 This section illustrates TopN pushdown through some examples.
