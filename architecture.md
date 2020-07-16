@@ -18,7 +18,7 @@ Compared with the traditional standalone databases, TiDB has the following advan
 
 ## TiDB server
 
-The TiDB server is in charge of external exposure the MySQL protocol connection endpoint, receiving SQL requests, processing and optimizing SQL related logics, and generates distributed execution plans finally. The TiDB server itself is stateless. It is horizontally scalable and provides the unified interface to the outside through the load balancing components such as Linux Virtual Server (LVS), HAProxy, or F5. It does not store data and is for computing and SQL analyzing only, transmitting actual data read request to TiKV nodes (or TiFlash nodes).
+The TiDB server is the stateless SQL layer that exposes the connection endpoint of the MySQL protocol to the outside. The TiDB server receives SQL requests, performs SQL parsing and optimization, and ultimately generates a distributed execution plan. It is horizontally scalable and provides the unified interface to the outside through the load balancing components such as Linux Virtual Server (LVS), HAProxy, or F5. It does not store data and is for computing and SQL analyzing only, transmitting actual data read request to TiKV nodes (or TiFlash nodes).
 
 ## Placement Driver (PD) server
 
