@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Glossary
 summary: List of special terms used in TiDB Lightning.
-category: glossary
 aliases: ['/docs/dev/tidb-lightning/tidb-lightning-glossary/','/docs/dev/reference/tools/tidb-lightning/glossary/']
 ---
 
@@ -34,12 +33,6 @@ Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREM
 Back end is the destination where TiDB Lightning sends the parsed result. Also spelled as "backend".
 
 See [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for details.
-
-### Black-white list
-
-A configuration list that specifies which tables to be imported and which should be excluded.
-
-See [TiDB Lightning Table Filter](/tidb-lightning/tidb-lightning-table-filter.md) for details.
 
 <!-- C -->
 
@@ -102,6 +95,16 @@ TiDB Lightning transfers data to TiKV Importer through engines. It first opens a
 Engines use TiKV Importer's `import-dir` as temporary storage, which are sometimes referred to as "engine files".
 
 See also [data engine](/tidb-lightning/tidb-lightning-glossary.md#data-engine) and [index engine](/tidb-lightning/tidb-lightning-glossary.md#index-engine).
+
+<!-- F -->
+
+## F
+
+### Filter
+
+A configuration list that specifies which tables to be imported or excluded.
+
+See [Table Filter](/table-filter.md) for details.
 
 <!-- I -->
 
