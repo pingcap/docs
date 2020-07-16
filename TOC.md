@@ -110,6 +110,7 @@
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
         + [Statistics](/statistics.md)
+        + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
