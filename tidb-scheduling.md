@@ -8,57 +8,55 @@ summary: Introduces the PD scheduling component in a TiDB cluster.
 PD works as the manager in a TiDB cluster, and it also schedules Regions in the
 cluster. This article introduces the design and core concepts of the PD scheduling component.
 
-## Use scenarios
+## Scheduling situations
 
 TiKV is the distributed K/V storage engine used by TiDB. In TiKV, data is
-organized as Regions, which are replicated on serveral stores. In all replicas,
+organized as Regions, which are replicated on serveral Stores. In all replicas,
 Leader is responsible for reading and writing, Followers are responsible for
-replicating Raft logs from the leader.
+replicating Raft logs from the Leader.
 
-So there are some situations need to be considered:
+Now consider about the following situations:
 
-* Regions need to be distributed fine in the cluster to utilize storage space
-  high-efficient;
-* For multiple datacenter topologies, one datacenter failure should only cause
-  one replica fail for all Regions;
+* To utilize storage space in a high-efficient way, multiple Replicas of the same Region need to be properly distributed on different nodes according to the Region size;
+* For multiple data center topologies, one data center failure only causes one replica to fail for all Regions;
 * When a new TiKV store is added, data can be rebalanced to it;
-* When a TiKV store fails, PD needs to consider
-    * recovery time of the failure store.
+* When a TiKV store fails, PD needs to consider:
+    * Recovery time of the failed store.
         * If it's short (e.g. the service is restarted), scheduling is necessary
           or not.
-        * If it's long (e.g. disk fault, data is lost), how to do scheduling.
-    * replicas of all regions.
-        * If replicas are not enouth for some regions, needs to complete them.
+        * If it's long (e.g. disk fault, data is lost, etc.), how to do scheduling.
+    * Replicas of all Regions.
+        * If replicas are not enough for some Regions, the cluster needs to complete them.
         * If replicas are more than expected (e.g. failed store re-joins into the
-          cluster after recovery), needs to delete them.
-* Read/Write operations are performed on leaders, which shouldn't be distributed
-  only on invividual stores;
-* Not all regions are hot, load of all TiKV stores needs to be balanced.
-* When regions are in balancing, data transferring utilizes much network/disk
+          cluster after recovery), the cluster needs to delete them.
+* Read/Write operations are performed on leaders, which should not be distributed
+  only on individual stores;
+* Not all Regions are hot, so load of all TiKV stores needs to be balanced.
+* When Regions are in balancing, data transferring utilizes much network/disk
   traffic and CPU time, which can influence online services.
 
 These situations can occur at the same time, which makes it harder to resolve.
-And, the whole system is changing dynamically, so a single point is necessary
-to collect all informations about the cluster, and then adjust the cluster. So,
-PD is introduced into TiDB cluster.
+Also, the whole system is changing dynamically, so a new component is necessary
+to collect all information about the cluster, and then adjust the cluster. So,
+PD is introduced into the TiDB cluster.
 
-## Scheduling Requirements
+## Scheduling requirements
 
-The above situations can be classified into 2 classes:
+The above situations can be classified into two types:
 
-** The First: must be satisfied to reach high availability, includes **
+1. A distributed and highly available storage system must meet the following requirements:
 
-* Count of replicas can't be more or less;
-* Replicas needs to be distributed to different machines;
-* The cluster can auto recovery from TiKV peers failure.
+    * The right number of replicas.
+    * Replicas should be distributed on different machines according to different topologies.
+    * The cluster can perform automatic disaster recovery from TiKV peers failure.
 
-** The Second: need to be satisfied as a good distributed system, includes **
+2. A good distributed system needs to have the following optimizations:
 
-* All Region leaders are balanced;
-* Storeage size of all TiKV peers are balanced;
-* Hot points are balanced;
-* Speed of Region balance needs to be limited to ensure online services are stable;
-* It's possible to online/offline peers manually.
+    * All Region leaders are balanced;
+    * Storage size of all TiKV peers are balanced;
+    * Hot spots are balanced;
+    * Speed of Region balance needs to be limited to ensure online services are stable;
+    * It's possible to make peers online/offline manually.
 
 After the first class requirements are satisfied, the system will be failure tolerable. 
 After the second class requirements are satisfied, resources will be utilized more
