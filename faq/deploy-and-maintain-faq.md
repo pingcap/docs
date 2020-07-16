@@ -7,7 +7,7 @@ summary: Introduce FAQs, causes and solutions relating to TiDB cluster operation
 
 This document introduces FAQs, causes and solutions relating to TiDB cluster operation and maintenance deployment.
 
-## Environment preparation FAQ
+## Prepare FAQ
 
 The operating system version requirements are as follows:
 
@@ -23,7 +23,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 TiDB conducts a large number of tests under CentOS 7.3 environment, and there are many best practices for the deployment of this operating system. Therefore, we recommend that you use CentOS 7.3+ Linux operating system when deploying TiDB.
 
-## Hardware requirements
+## Server requirements
 
 You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture. The requirements and recommendations about server hardware configuration for development, testing and production environments are as follows:
 
@@ -36,7 +36,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 | TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3  |
 |         |         |         |              | Total Server Number |  4  |
 
-### Online environment
+### Production environment
 
 | Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
 | :-----: | :------: | :------: | :------: | :------: | :-----: |
