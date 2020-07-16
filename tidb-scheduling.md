@@ -1,14 +1,15 @@
 ---
-title: Overview about TiDB Scheduling
-category: reference
+title: TiDB Scheduling
+summary: Introduces the PD scheduling component in a TiDB cluster.
 ---
 
-# Overview
-PD works as manager in a TiDB cluster, and it also schedules Regions in the
-cluster. This article will introduces the design and core concepts about PD's
-scheduling module.
+# TiDB Scheduling
 
-# Situations
+PD works as the manager in a TiDB cluster, and it also schedules Regions in the
+cluster. This article introduces the design and core concepts of the PD scheduling component.
+
+## Use scenarios
+
 TiKV is the distributed K/V storage engine used by TiDB. In TiKV, data is
 organized as Regions, which are replicated on serveral stores. In all replicas,
 Leader is responsible for reading and writing, Followers are responsible for
@@ -42,6 +43,7 @@ to collect all informations about the cluster, and then adjust the cluster. So,
 PD is introduced into TiDB cluster.
 
 ## Scheduling Requirements
+
 The above situations can be classified into 2 classes:
 
 ** The First: must be satisfied to reach high availability, includes **
@@ -70,6 +72,7 @@ strategies. Finally, PD will distribute some operators to TiKVs to complete sche
 ## Basic Schedule operators
 
 All scheduling plan contain 3 basic operators:
+
 * Add a new replica
 * Remove a replica
 * Transfer a Region leader between replicas
