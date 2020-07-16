@@ -287,6 +287,7 @@
     - [Understanding the Query Execution Plan](/query-execution-plan.md)
     - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
     - [Introduction to Statistics](/statistics.md)
+    - [TopN and Limit Push Down](/topn-limit-push-down.md)
     - [Optimizer Hints](/optimizer-hints.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/execution-plan-binding.md)
