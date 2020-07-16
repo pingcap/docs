@@ -262,7 +262,7 @@ The description of columns in the `ENGINES` table is as follows:
 * `ENGINES`: The name of the storage engine.
 * `SUPPORT`: The level of support that the server has on the storage engine. In TiDB, the value is always `DEFAULT`.
 * `COMMENT`: The brief comment on the storage engine.
-* `TRANSACTIONS`：Whether the storage engine supports transactions.
+* `TRANSACTIONS`: Whether the storage engine supports transactions.
 * `XA`: Whether the storage engine supports XA transactions.
 * `SAVEPOINTS`: Whether the storage engine supports `savepoints`.
 
@@ -313,7 +313,7 @@ The description of columns in the `KEY_COLUMN_USAGE` table is as follows:
 * `CONSTRAINT_NAME`: The name of the constraint.
 * `TABLE_CATALOG`: The name of the catalog to which the table belongs. The value is always `def`.
 * `TABLE_SCHEMA`: The name of the schema to which the table belongs.
-* `TABLE_NAME`: The name of the table with constraints. 
+* `TABLE_NAME`: The name of the table with constraints.
 * `COLUMN_NAME`: The name of the column with constraints.
 * `ORDINAL_POSITION`: The position of the column in the constraint, rather than in the table. The position number starts from `1`.
 * `POSITION_IN_UNIQUE_CONSTRAINT`: The unique constraint and the primary key constraint are empty. For foreign key constraints, this column is the position of the referenced table's key.
@@ -335,6 +335,40 @@ The `PROCESSLIST` table has a `MEM` column that `show processlist` does not have
 +----+------+------+--------------------+---------+------+-------+---------------------------+-----+
 ```
 
+Fields in the `PROCESSLIST` table are described as follows:
+
+* ID: The ID of the user connection.
+* USER: The name of the user who is executing `PROCESS`.
+* HOST: The address that the user is connecting to.
+* DB: The name of the currently connected default database.
+* COMMAND: The command type that `PROCESS` is executing.
+* TIME: The current execution duration of `PROCESS`, in seconds.
+* STATE: The current connection state.
+* INFO: The requested statement that is being processed.
+* MEM: The memory used by the request that is being processed, in bytes.
+
+## CLUSTER_PROCESSLIST
+
+`CLUSTER_PROCESSLIST` is the cluster system table corresponding to `PROCESSLIST`. It is used to query the `PROCESSLIST` information of all TiDB nodes in the cluster. The table schema of `CLUSTER_PROCESSLIST` has one more column than `PROCESSLIST`, the `INSTANCE` column, which stores the address of the TiDB node this row of data is from.
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM information_schema.cluster_processlist;
+```
+
+```sql
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
+| INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               |
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
+| 10.0.1.22:10080 | 150 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077223) |
+| 10.0.1.22:10080 | 138 | root | 10.0.1.1 | test | Query   | 0    | autocommit | SELECT * FROM information_schema.cluster_processlist | 0   | 05-28 03:54:21.230(416976223923077220) |
+| 10.0.1.22:10080 | 151 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077224) |
+| 10.0.1.21:10080 | 15  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077222) |
+| 10.0.1.21:10080 | 14  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077225) |
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
+```
+
 ### SCHEMATA table
 
 The `SCHEMATA` table provides information about databases. The table data is equivalent to the result of the `SHOW DATABASES` statement:
@@ -345,7 +379,7 @@ The `SCHEMATA` table provides information about databases. The table data is equ
 select * from SCHEMATA;
 ```
 
-```
+```sql
 *************************** 1. row ***************************
               CATALOG_NAME: def
                SCHEMA_NAME: INFORMATION_SCHEMA
@@ -373,27 +407,13 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 4 rows in set (0.00 sec)
 ```
 
-## CLUSTER_PROCESSLIST
+Fields in the `SCHEMATA` table are described as follows:
 
-`CLUSTER_PROCESSLIST` is the cluster system table corresponding to `PROCESSLIST`. It is used to query the `PROCESSLIST` information of all TiDB nodes in the cluster. The table schema of `CLUSTER_PROCESSLIST` has one more column than `PROCESSLIST`, the `INSTANCE` column, which stores the address of the TiDB node this row of data is from.
-
-{{< copyable "sql" >}}
-
-```sql
-SELECT * FROM information_schema.cluster_processlist;
-```
-
-```
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
-| INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               |
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
-| 10.0.1.22:10080 | 150 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077223) |
-| 10.0.1.22:10080 | 138 | root | 10.0.1.1 | test | Query   | 0    | autocommit | SELECT * FROM information_schema.cluster_processlist | 0   | 05-28 03:54:21.230(416976223923077220) |
-| 10.0.1.22:10080 | 151 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077224) |
-| 10.0.1.21:10080 | 15  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077222) |
-| 10.0.1.21:10080 | 14  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077225) |
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
-```
+* `CATALOG_NAME`: The catalog to which the database belongs.
+* `SCHEMA_NAME`: The database name.
+* `DEFAULT_CHARACTER_SET_NAME`: The default character set of the database.
+* `DEFAULT_COLLATION_NAME`: The default collation of the database.
+* `SQL_PATH`: The value of this item is always `NULL`.
 
 ### SESSION_VARIABLES table
 
@@ -823,6 +843,19 @@ desc TIKV_REGION_PEERS;
 | DOWN_SECONDS | bigint(21) unsigned | YES  |     | <null>  |       |
 +--------------+---------------------+------+-----+---------+-------+
 ```
+
+Fields in the `TIKV_REGION_PEERS` table are described as follows:
+
+* REGION_ID: The Region ID.
+* PEER_ID: The ID of the Region peer.
+* STORE_ID: The ID of the TiKV store where the Region is located.
+* IS_LEARNER: Whether the peer is leaner.
+* IS_LEADER: Whether the peer is leader.
+* STATUS: The statuses of a peer:
+    * PENDING: Temporarily unavailable.
+    * DOWN: Offline and converted. This peer no longer provides service.
+    * NORMAL: Running normally.
+* DOWN_SECONDS: The duration of being offline, in seconds.
 
 ### TIKV_REGION_STATUS table
 
