@@ -9,15 +9,15 @@ An expression is a combination of one or more values, operators, or functions. I
 
 The expressions contain the following types:
 
-- Identifier: For reference, see [Schema object names](/schema-object-names.md).
+- Identifier. For reference, see [Schema object names](/schema-object-names.md).
 
-- Predicates, numeric values, strings, date expressions: The [Literal values](/literal-values.md) of these types are also expressions.
+- Predicates, numeric values, strings, date expressions. The [Literal values](/literal-values.md) of these types are also expressions.
 
-- Function calls and window functions: For reference, see [Functions and operators overview](/functions-and-operators/functions-and-operators-overview.md) and [Window functions](/functions-and-operators/window-functions.md)
+- Function calls and window functions. For reference, see [Functions and operators overview](/functions-and-operators/functions-and-operators-overview.md) and [Window functions](/functions-and-operators/window-functions.md)
 
-- Others: ParamMarker (`?`), system variables, user variables and CASE expressions.
+- ParamMarker (`?`), system variables, user variables and CASE expressions.
 
-The following rules are the expression syntax , which is based on the [parser.y](https://github.com/pingcap/parser/blob/master/parser.y) rules of TiDB parser. For the navigable version of the following syntax diagram, please refer to [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/#Expression).
+The following rules are the expression syntax, which is based on the [parser.y](https://github.com/pingcap/parser/blob/master/parser.y) rules of TiDB parser. For the navigable version of the following syntax diagram, please refer to [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/#Expression).
 
 **Expression:**
 
