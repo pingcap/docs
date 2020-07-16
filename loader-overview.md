@@ -167,7 +167,7 @@ packet for query is too large. Try adjusting the 'max_allowed_packet' variable
 
 * Both MySQL client and MySQL/TiDB Server have `max_allowed_packet` quotas. If any of the `max_allowed_packet` quotas is violated, the client receives a corresponding error message. Currently, the latest version of Loader and TiDB Server all have a default `max_allowed_packet` quota of `64M`.
     * Please use the latest version, or the latest stable version of the tool. See the [download page](/download-ecosystem-tools.md).
-* The full data import processing module in Loader or DM does not support splitting `dump sqls` files.This is because Mydumper has the simple code implementation, as shown in the code comment `/* Poor man's data dump code */`. To support correctly splitting `dump sqls` files, you need to implement a sound parser based on TiDB parser, but you will encounter the following issues:
+* The full data import processing module in Loader or DM does not support splitting `dump sqls` files. This is because Mydumper has the simple code implementation, as shown in the code comment `/* Poor man's data dump code */`. To support correctly splitting `dump sqls` files, you need to implement a sound parser based on TiDB parser, but you will encounter the following issues:
     * A large amount of workload.
     * The task is difficult. It is not easy to ensure the correctness.
     * Significant performance reduction.
