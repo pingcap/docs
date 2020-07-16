@@ -9,8 +9,7 @@
   + [TiDB Introduction](/overview.md)
   + [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
   + [Basic Features](/basic-features.md)
-  + Compatibility
-    + [MySQL Compatibility](/mysql-compatibility.md)
+  + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
@@ -78,14 +77,16 @@
   + [TiDB Cluster Alert Rules](/alert-rules.md)
   + [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
 + Troubleshoot
+  + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Identify Slow Queries](/identify-slow-queries.md)
   + [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
+  + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
-  + [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+  + [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
 + Performance Tuning
   + System Tuning
     + [Operating System Tuning](/tune-operating-system.md)
@@ -102,13 +103,21 @@
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [Subquery Related Optimizations](/subquery-optimization.md)
+        + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        + [Predicates Push Down](/predicates-push-down.md)
+        + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
+        + [Index Selection](/choose-index.md)
         + [Statistics](/statistics.md)
+        + [Distinct Optimization](/agg-distinct-optimization.md)
+      + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
+        + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
@@ -178,7 +187,8 @@
     + [Quick Start](/get-started-with-tispark.md)
     + [User Guide](/tispark-overview.md)
 + Reference
-  + [Architecture](/architecture.md)
+  + Cluster Architecture
+    + [Overview](/tidb-architecture.md)
   + Key Monitoring Metrics
     + [Overview](/grafana-overview-dashboard.md)
     + [TiDB](/grafana-tidb-dashboard.md)
@@ -201,6 +211,7 @@
       + Attributes
         + [AUTO_INCREMENT](/auto-increment.md)
         + [AUTO_RANDOM](/auto-random.md)
+        + [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
       + [Literal Values](/literal-values.md)
       + [Schema Object Names](/schema-object-names.md)
       + [Keywords and Reserved Words](/keywords.md)
@@ -225,6 +236,7 @@
       + [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)
       + [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
       + [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
+      + [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
       + [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
       + [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)
       + [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
@@ -239,8 +251,9 @@
       + [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
       + [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
       + [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
+      + [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
       + [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)
-      - [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)
+      + [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)
       + [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)
       + [`DROP USER`](/sql-statements/sql-statement-drop-user.md)
       + [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)
@@ -252,6 +265,7 @@
       + [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
       + [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)
       + [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+      + [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
       + [`INSERT`](/sql-statements/sql-statement-insert.md)
       + [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
       + [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
@@ -264,8 +278,10 @@
       + [`REPLACE`](/sql-statements/sql-statement-replace.md)
       + [`RESTORE`](/sql-statements/sql-statement-restore.md)
       + [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+      + [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
       + [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
       + [`SELECT`](/sql-statements/sql-statement-select.md)
+      + [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       + [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
       + [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
       + [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
@@ -405,10 +421,11 @@
     + [tikv-server](/tikv-configuration-file.md)
     + [tiflash-server](/tiflash/tiflash-configuration.md)
     + [pd-server](/pd-configuration-file.md)
-  + System Variables
-    + [MySQL System Variables](/system-variables.md)
-    + [TiDB Specific System Variables](/tidb-specific-system-variables.md)
+  + [System Variables](/system-variables.md)
   + Storage Engines
+    + TiKV
+      + [TiKV Overview](/tikv-overview.md)
+      + [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
