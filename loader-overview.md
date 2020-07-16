@@ -6,7 +6,7 @@ aliases: ['/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/doc
 
 # Loader Instructions
 
-> **Note:**
+> **Warning:**
 >
 > Loader is no longer maintained. Its features are completely superseded by [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md). It is strongly recommend to use TiDB Lightning instead.
 
