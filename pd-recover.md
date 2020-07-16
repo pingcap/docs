@@ -20,7 +20,7 @@ PD Recover is a disaster recovery tool of PD, used to recover the PD cluster whi
 ## Download TiDB installation package
 
 To download the latest version of PD Recover, directly download the TiDB package, because PD Recover is included in the TiDB package.
-| Package download link | OS | Architecture | SHA256 checksum |
+| Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
 | `https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` (pd-recover) | Linux | amd64 | `https://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
 
