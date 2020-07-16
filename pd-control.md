@@ -300,6 +300,10 @@ This option only works when key type is "table".
 
 - `store-limit-mode` has two mode for setting limit: auto or manual, an auto-set value can be overwritten by a manual-set value, otherwise it is forbidden (experimental). 
 
+#### config placement-rules
+
+The usage can be found in [Configure rules](configure-placement-rules.md#Configure-rules)
+
 ### `health`
 
 Use this command to view the health information of the cluster.
