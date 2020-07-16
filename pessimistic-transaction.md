@@ -1,7 +1,6 @@
 ---
 title: TiDB Pessimistic Transaction Model
 summary: Learn the pessimistic transaction model in TiDB.
-category: reference
 aliases: ['/docs/dev/pessimistic-transaction/','/docs/dev/reference/transactions/transaction-pessimistic/']
 ---
 
@@ -15,7 +14,7 @@ To make the usage of TiDB closer to traditional databases and reduce the cost of
 
 ## Switch transaction mode
 
-You can set the transaction mode by configuring the [`tidb_txn_mode`](/tidb-specific-system-variables.md#tidb_txn_mode) system variable. The following command sets all explicit transactions (that is, non-autocommit transactions) executed by newly created sessions in the cluster to the pessimistic transaction mode:
+You can set the transaction mode by configuring the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) system variable. The following command sets all explicit transactions (that is, non-autocommit transactions) executed by newly created sessions in the cluster to the pessimistic transaction mode:
 
 {{< copyable "sql" >}}
 

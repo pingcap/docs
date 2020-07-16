@@ -1,7 +1,6 @@
 ---
 title: CREATE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE TABLE for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-create-table/','/docs/dev/reference/sql/statements/create-table/']
 ---
 
@@ -225,7 +224,7 @@ table_option:
   | STATS_PERSISTENT [=] {DEFAULT|0|1}
 ```
 
-The `table_option` currently only supports `AUTO_INCREMENT`, `SHARD_ROW_ID_BITS` (see [TiDB Specific System Variables](/tidb-specific-system-variables.md#shard_row_id_bits) for details), `PRE_SPLIT_REGIONS`, `CHARACTER SET`, `COLLATE`, and `COMMENT`, while the others are only supported in syntax. The clauses are separated by a comma `,`. See the following table for details:
+The `table_option` currently only supports `AUTO_INCREMENT`, [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md), `PRE_SPLIT_REGIONS`, `CHARACTER SET`, `COLLATE`, and `COMMENT`, while the others are only supported in syntax. The clauses are separated by a comma `,`. See the following table for details:
 
 | Parameters | Description | Example |
 | ---------- | ---------- | ------- |
