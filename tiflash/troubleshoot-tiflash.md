@@ -1,18 +1,44 @@
 ---
 title: Troubleshoot a TiFlash Cluster
 summary: Learn common operations when you troubleshoot a TiFlash cluster.
-category: reference
+aliases: ['/docs/dev/tiflash/troubleshoot-tiflash/']
 ---
 
 # Troubleshoot a TiFlash Cluster
 
 This section describes some commonly encountered issues when using TiFlash, the reasons, and the solutions.
 
+## TiFlash fails to start
+
+The issue might occur due to different reasons. It is recommended that you troubleshoot it following the steps below:
+
+1. Check whether your system is CentOS8.
+
+     CentOS8 does not have the `libnsl.so` system library. You can manually install it via the following command:
+
+     {{< copyable "shell-regular" >}}
+
+     ```shell
+     dnf install libnsl
+     ```
+
+2. Check your system's `ulimit` parameter setting.
+
+     {{< copyable "shell-regular" >}}
+
+     ```shell
+     ulimit -n 1000000
+     ```
+
+3. Use the PD Control tool to check whether there is any TiFlash instance that failed to go offline on the node (same IP and Port) and force the instance(s) to go offline. For detailed steps, refer to [Scale in a TiFlash node](/scale-tidb-using-tiup.md#scale-in-a-tiflash-node).
+
+If the above methods cannot resolve your issue, save the TiFlash log files and email to [info@pingcap.com](mailto:info@pingcap.com) for more information.
+
 ## TiFlash replica is always unavailable
 
 This is because TiFlash is in an abnormal state caused by configuration errors or environment issues. Take the following steps to identify the faulty component:
 
-1. Check whether PD enables the `Placement Rules` feature (to enable the feature, see the step 2 of [Add TiFlash component to an existing TiDB cluster](/tiflash/deploy-tiflash.md#add-tiflash-component-to-an-existing-tidb-cluster):
+1. Check whether PD enables the `Placement Rules` feature:
 
     {{< copyable "shell-regular" >}}
 
@@ -20,7 +46,7 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
     echo 'config show replication' | /path/to/pd-ctl -u http://<pd-ip>:<pd-port>
     ```
 
-    The expected result is `"enable-placement-rules": "true"`.
+    The expected result is `"enable-placement-rules": "true"`. If not enabled, [enable the Placement Rules feature](/configure-placement-rules.md#enable-placement-rules).
 
 2. Check whether the TiFlash process is working correctly by viewing `UpTime` on the TiFlash-Summary monitoring panel.
 
@@ -64,6 +90,6 @@ In this case, you can balance the load pressure by adding more TiFlash nodes.
 
 Take the following steps to handle the data file corruption:
 
-1. Refer to [Take a TiFlash node down](#take-a-tiflash-node-down) to take the corresponding TiFlash node down.
+1. Refer to [Take a TiFlash node down](/scale-tidb-using-tiup.md#scale-in-a-tiflash-node) to take the corresponding TiFlash node down.
 2. Delete the related data of the TiFlash node.
 3. Redeploy the TiFlash node in the cluster.

@@ -1,8 +1,7 @@
 ---
 title: ALTER TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER TABLE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/alter-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-alter-table/','/docs/dev/reference/sql/statements/alter-table/']
 ---
 
 # ALTER TABLE
@@ -61,8 +60,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQL compatibility
 
-* All of the data types except spatial types are supported.
-* `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
+* All of the data types except spatial types are supported. For other unsupported cases, refer to: [compatibility of DDL statements with MySQL](/mysql-compatibility.md#ddl).
 
 ## See also
 
@@ -71,6 +69,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * [ADD INDEX](/sql-statements/sql-statement-add-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
 * [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

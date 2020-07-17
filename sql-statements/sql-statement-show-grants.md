@@ -1,8 +1,7 @@
 ---
 title: SHOW GRANTS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW GRANTS for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-grants/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-grants/','/docs/dev/reference/sql/statements/show-grants/']
 ---
 
 # SHOW GRANTS
@@ -11,13 +10,25 @@ This statement shows a list of privileges associated with a user. As in MySQL, t
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowGrantsStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowGrantsStmt](/media/sqlgram/ShowGrantsStmt.png)
 
 **Username:**
 
 ![Username](/media/sqlgram/Username.png)
+
+**UsingRoles:**
+
+![UsingRoles](/media/sqlgram/UsingRoles.png)
+
+**RolenameList:**
+
+![RolenameList](/media/sqlgram/RolenameList.png)
+
+**Rolename:**
+
+![Rolename](/media/sqlgram/Rolename.png)
 
 ## Examples
 

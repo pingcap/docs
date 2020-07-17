@@ -1,13 +1,13 @@
 ---
 title: REVOKE <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/revoke-privileges/']
+aliases: ['/docs/dev/sql-statements/sql-statement-revoke-privileges/','/docs/dev/reference/sql/statements/revoke-privileges/']
 ---
 
-# REVOKE <privileges>
+# `REVOKE <privileges>`
 
 This statement removes privileges from an existing user.
+Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
 
 ## Synopsis
 
@@ -42,7 +42,7 @@ This statement removes privileges from an existing user.
 ## Examples
 
 ```sql
-mysql> CREATE USER newuser IDENTIFIED BY 'mypassword';
+mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
 Query OK, 1 row affected (0.02 sec)
 
 mysql> GRANT ALL ON test.* TO 'newuser';
@@ -68,10 +68,10 @@ mysql> SHOW GRANTS FOR 'newuser';
 +-------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> DROP USER newuser;
+mysql> DROP USER 'newuser';
 Query OK, 0 rows affected (0.14 sec)
 
-mysql> SHOW GRANTS FOR newuser;
+mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
@@ -81,6 +81,6 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 ## See also
 
-* [GRANT <privileges>](/sql-statements/sql-statement-grant-privileges.md)
+* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 * [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 * [Privilege Management](/privilege-management.md)

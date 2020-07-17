@@ -1,11 +1,14 @@
 ---
 title: Syncer User Guide
 summary: Use Syncer to import data incrementally to TiDB.
-category: reference
-aliases: ['/docs/dev/reference/tools/syncer/']
+aliases: ['/docs/dev/syncer-overview/','/docs/dev/reference/tools/syncer/']
 ---
 
 # Syncer User Guide
+
+> **Warning:**
+>
+> Syncer is no longer maintained. Its features are completely superseded by [TiDB Data Migration](https://pingcap.com/docs-cn/tidb-data-migration/stable/overview/). It is strongly recommended that you use TiDB Data Migration instead.
 
 ## About Syncer
 

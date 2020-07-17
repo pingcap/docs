@@ -1,8 +1,7 @@
 ---
 title: CREATE SEQUENCE
 summary: An overview of the usage of CREATE SEQUENCE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/create-sequence/']
+aliases: ['/docs/dev/sql-statements/sql-statement-create-sequence/','/docs/dev/reference/sql/statements/create-sequence/']
 ---
 
 # CREATE SEQUENCE
@@ -14,10 +13,6 @@ The `CREATE SEQUENCE` statement creates sequence objects in TiDB. The sequence i
 **CreateSequenceStmt:**
 
 ![CreateSequenceStmt](/media/sqlgram/CreateSequenceStmt.png)
-
-**OptTemporary:**
-
-![OptTemporary](/media/sqlgram/OptTemporary.png)
 
 **IfNotExists:**
 
@@ -31,13 +26,13 @@ The `CREATE SEQUENCE` statement creates sequence objects in TiDB. The sequence i
 
 ![CreateSequenceOptionListOpt](/media/sqlgram/CreateSequenceOptionListOpt.png)
 
+**SequenceOptionList:**
+
+![SequenceOptionList](/media/sqlgram/SequenceOptionList.png)
+
 **SequenceOption:**
 
 ![SequenceOption](/media/sqlgram/SequenceOption.png)
-
-**CreateTableOptionListOpt:**
-
-![CreateTableOptionListOpt](/media/sqlgram/CreateTableOptionListOpt.png)
 
 ## Syntax
 

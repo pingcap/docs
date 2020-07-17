@@ -1,8 +1,7 @@
 ---
 title: SHOW DATABASES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW DATABASES for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-databases/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-databases/','/docs/dev/reference/sql/statements/show-databases/']
 ---
 
 # SHOW DATABASES
@@ -13,13 +12,13 @@ This statement shows a list of databases that the current user has privileges to
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowDatabasesStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowDatabasesStmt](/media/sqlgram/ShowDatabasesStmt.png)
 
-**ShowTargetFilterable:**
+**ShowLikeOrWhereOpt:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 ## Examples
 

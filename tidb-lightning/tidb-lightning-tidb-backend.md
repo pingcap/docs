@@ -1,8 +1,7 @@
 ---
 title: TiDB Lightning TiDB-backend
 summary: Choose how to write data into the TiDB cluster.
-category: reference
-aliases: ['/docs/dev/reference/tools/tidb-lightning/tidb-backend/']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/']
 ---
 
 # TiDB Lightning TiDB-backend
@@ -68,7 +67,7 @@ The speed of TiDB Lightning using TiDB-backend is limited by the SQL processing 
 
 ### Manual deployment
 
-You do not need to download and configure `tikv-importer`.
+You do not need to download and configure `tikv-importer`. You can download TiDB Lightning from [here](/download-ecosystem-tools.md#tidb-lightning).
 
 Before running `tidb-lightning`, add the following lines into the configuration file:
 
@@ -100,7 +99,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](/loader-overview.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
 
 <table>
-<thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thread>
+<thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -225,6 +224,29 @@ user = "root"
 password = ""
 
 #sql-mode = ""
+```
+
+</td></tr>
+<tr><td>
+
+```toml
+# [[route-rules]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
+# target-schema = "shard_db"
+# target-table = "shard_table"
+```
+
+</td><td>
+
+```toml
+# [[routes]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
+# target-schema = "shard_db"
+# target-table = "shard_table"
 ```
 
 </td></tr>
