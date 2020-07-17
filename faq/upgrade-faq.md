@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: FAQs After Upgrade
-summary: Learn about the FAQs after upgrading TiDB.
-aliases: ['/docs/stable/faq/upgrade-faq/','/docs/v4.0/faq/upgrade-faq/','/docs/stable/faq/upgrade/']
-=======
 title: Upgrade and After Upgrade FAQs
 summary: Learn about some FAQs and the solutions during and after upgrading TiDB.
-aliases: ['/docs/dev/faq/upgrade-faq/','/docs/dev/faq/upgrade/']
->>>>>>> abaa4ad... Update TiDB upgrade FAQ (#3218)
+aliases: ['/docs/stable/faq/upgrade-faq/','/docs/v4.0/faq/upgrade-faq/','/docs/stable/faq/upgrade/']
 ---
 
 # Upgrade and After Upgrade FAQs
