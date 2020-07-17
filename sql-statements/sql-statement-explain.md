@@ -10,7 +10,7 @@ The `EXPLAIN` statement shows the execution plan for a query without executing i
 
 The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternative usage of `EXPLAIN <tableName>` is documented under [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
 
-TiDB supports the `EXPLAIN [options] FOR CONNECTION connection_id` statement. However, This statement is different from the `EXPLAIN FOR` statement in MySQL. For more details, see [`EXPLAIN FOR CONNECTION`](#explain-for-connection).
+TiDB supports the `EXPLAIN [options] FOR CONNECTION connection_id` statement. However, this statement is different from the `EXPLAIN FOR` statement in MySQL. For more details, see [`EXPLAIN FOR CONNECTION`](#explain-for-connection).
 
 ## Synopsis
 
@@ -34,9 +34,9 @@ Currently, `EXPLAIN` in TiDB outputs 5 columns: `id`, `estRows`, `task`, `access
 |:----------------|:----------------------------------------------------------------------------------------------------------|
 | id            | The operator ID is the unique identifier of the operator in the entire execution plan. In TiDB 2.1, the ID is formatted to display the tree structure of the operator. Data flows from the child node to the parent node. One and only one parent node for each operator. |
 | estRows       | Number of rows that the operator is expected to output. Data is based on statistical information and the evaluation of the operator's logic execution. `estRows` is called `count` in the earlier versions of TiDB 4.0. |
-| task          | The type of task the operator belongs to. Currently, the execution plans are divided into two tasks: **root** task, which is executed on tidb-server, and **cop** task, which is performed in parallel on TiKV or TiFlash. The topology of the execution plan at the task level is that a root task followed by many cop tasks. The root task uses the output of cop tasks as input. The cop tasks refers to tasks that TiDB pushes down to TiKV or TiFlash. Each cop task is distributed in the TiKV cluster or the TiFlash cluster, and is executed by multiple processes. |
-| access object | Data item information accessed by the operator. The information includes `table`, `partition`, and `index` (if any). Only operators who directly access the data have access to such information. |
-| operator info | Other information about the operator. `operator info` of each operator is different, you can refer to the following examples. |
+| task          | The type of task the operator belongs to. Currently, the execution plans are divided into two tasks: **root** task, which is executed on tidb-server, and **cop** task, which is performed in parallel on TiKV or TiFlash. The topology of the execution plan at the task level is that a root task followed by many cop tasks. The root task uses the output of cop tasks as input. The cop tasks refer to tasks that TiDB pushes down to TiKV or TiFlash. Each cop task is distributed in the TiKV cluster or the TiFlash cluster, and is executed by multiple processes. |
+| access object | Data item information accessed by the operator. The information includes `table`, `partition`, and `index` (if any). Only operators that directly access the data have access to such information. |
+| operator info | Other information about the operator. `operator info` of each operator is different. You can refer to the following examples. |
 
 ## Examples
 
@@ -239,9 +239,9 @@ If the `dot` program is not installed on your computer, copy the result to [this
 
 ## `EXPLAIN FOR CONNECTION`
 
-`EXPLAIN FOR CONNECTION` is used to get the execution plan of the last executed query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. The following lists their differences apart from the output format:
+`EXPLAIN FOR CONNECTION` is used to get the execution plan of the last executed query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. Their differences (apart from the output format) are listed as follows:
 
-- MySQL returns the **executing** query plan, while TiDB returns the **last executed** query plan.
+- MySQL returns the query plan that is **being executing**, while TiDB returns the **last executed** query plan.
 - MySQL requires the login user to be the same as the connection being queried, or the login user has the **`PROCESS`** privilege; while TiDB requires the login user to be the same as the connection being queried, or the login user has the **`SUPER`** privilege.
 
 ## See also
