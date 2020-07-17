@@ -1,7 +1,6 @@
 ---
 title: TiDB Configuration File
 summary: Learn the TiDB configuration file options that are not involved in command line options.
-category: deployment
 aliases: ['/docs/dev/tidb-configuration-file/','/docs/dev/reference/configuration/tidb-server/configuration-file/']
 ---
 
@@ -354,6 +353,12 @@ Configuration items related to performance.
 - Sets the priority for all statements.
 - Default: `NO_PRIORITY`
 - Optional values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY` and `DELAYED`.
+
+### `distinct-agg-push-down`
+
+- Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
+- Default: `false`
+- This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down).
 
 ### `nested-loop-join-cache-capacity`
 

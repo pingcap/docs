@@ -1,7 +1,6 @@
 ---
 title: Quick Start Guide for the TiDB Database Platform
 summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
-category: how-to
 aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-docker/']
 ---
 
@@ -308,7 +307,9 @@ Click to try TiDB-Wasm playground: <https://tour.tidb.io>. It takes about 10 sec
 - If you have just deployed a TiDB cluster for the local test environment:
 
     - Learn [Basic SQL operations in TiDB](/basic-sql-operations.md)
+    - [Migrate data to TiDB](/migration-overview.md)
     - Learn [TiDB key features and scenarios](/overview.md)
+    - Learn [TiDB's architecture](/tidb-architecture.md)
     - Learn [TiDB's compatibility with MySQL](/mysql-compatibility.md)
 
 - If you are ready to deploy a TiDB cluster for the production environment:

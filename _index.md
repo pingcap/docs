@@ -1,7 +1,6 @@
 ---
 title: TiDB Introduction
 summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
-category: introduction
 aliases: ['/docs/dev/']
 ---
 
@@ -90,7 +89,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 <NavColumn>
 <ColumnTitle>Reference</ColumnTitle>
 
-- [TiDB Architecture](/architecture.md)
+- [TiDB Architecture](/tidb-architecture.md)
 - [Key Monitoring Metrics](/grafana-overview-dashboard.md)
 - [Enable TLS](/enable-tls-between-clients-and-servers.md)
 - [Privilege Management](/privilege-management.md)
