@@ -20,7 +20,7 @@ The `ANALYZE_STATUS` table provides information about the running tasks that col
 select * from `ANALYZE_STATUS`;
 ```
 
-```
+```sql
 +--------------+------------+----------------+-------------------+----------------+---------------------+----------+
 | TABLE_SCHEMA | TABLE_NAME | PARTITION_NAME | JOB_INFO          | PROCESSED_ROWS | START_TIME          | STATE    |
 +--------------+------------+----------------+-------------------+----------------+---------------------+----------+
@@ -44,7 +44,7 @@ The `CHARACTER_SETS` table provides information about [character sets](/characte
 SELECT * FROM character_sets;
 ```
 
-```
+```sql
 +--------------------+----------------------+---------------+--------+
 | CHARACTER_SET_NAME | DEFAULT_COLLATE_NAME | DESCRIPTION   | MAXLEN |
 +--------------------+----------------------+---------------+--------+
@@ -67,7 +67,7 @@ The `COLLATIONS` table provides a list of collations that correspond to characte
 SELECT * FROM collations WHERE character_set_name='utf8mb4';
 ```
 
-```
+```sql
 +------------------------+--------------------+------+------------+-------------+---------+
 | COLLATION_NAME         | CHARACTER_SET_NAME | ID   | IS_DEFAULT | IS_COMPILED | SORTLEN |
 +------------------------+--------------------+------+------------+-------------+---------+
@@ -111,7 +111,7 @@ The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applica
 SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
 ```
 
-```
+```sql
 +------------------------+--------------------+
 | COLLATION_NAME         | CHARACTER_SET_NAME |
 +------------------------+--------------------+
@@ -155,7 +155,7 @@ The `COLUMNS` table provides detailed information about columns in tables:
 CREATE TABLE test.t1 (a int);
 ```
 
-```
+```sql
 1 row in set (0.01 sec)
 ```
 
@@ -165,7 +165,7 @@ CREATE TABLE test.t1 (a int);
 SELECT * FROM information_schema.columns WHERE table_schema='test' AND TABLE_NAME='t1';
 ```
 
-```
+```sql
 *************************** 1. row ***************************
            TABLE_CATALOG: def
             TABLE_SCHEMA: test
@@ -227,7 +227,7 @@ The corresponding `SHOW` statement is as follows:
 SHOW COLUMNS FROM t1 FROM test;
 ```
 
-```
+```sql
 +-------+---------+------+------+---------+-------+
 | Field | Type    | Null | Key  | Default | Extra |
 +-------+---------+------+------+---------+-------+
@@ -246,7 +246,7 @@ The `ENGINES` table provides information about storage engines. For compatibilit
 SELECT * FROM engines;
 ```
 
-```
+```sql
 *************************** 1. row ***************************
       ENGINE: InnoDB
      SUPPORT: DEFAULT
@@ -276,7 +276,7 @@ The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such 
 SELECT * FROM key_column_usage WHERE table_schema='mysql' and table_name='user';
 ```
 
-```
+```sql
 *************************** 1. row ***************************
            CONSTRAINT_CATALOG: def
             CONSTRAINT_SCHEMA: mysql
@@ -313,7 +313,7 @@ The description of columns in the `KEY_COLUMN_USAGE` table is as follows:
 * `CONSTRAINT_NAME`: The name of the constraint.
 * `TABLE_CATALOG`: The name of the catalog to which the table belongs. The value is always `def`.
 * `TABLE_SCHEMA`: The name of the schema to which the table belongs.
-* `TABLE_NAME`: The name of the table with constraints. 
+* `TABLE_NAME`: The name of the table with constraints.
 * `COLUMN_NAME`: The name of the column with constraints.
 * `ORDINAL_POSITION`: The position of the column in the constraint, rather than in the table. The position number starts from `1`.
 * `POSITION_IN_UNIQUE_CONSTRAINT`: The unique constraint and the primary key constraint are empty. For foreign key constraints, this column is the position of the referenced table's key.
@@ -327,7 +327,7 @@ The description of columns in the `KEY_COLUMN_USAGE` table is as follows:
 
 The `PROCESSLIST` table has a `MEM` column that `show processlist` does not have. `MEM` means the occupied memory of the requests being handled, and its unit is `byte`.
 
-```
+```sql
 +----+------+------+--------------------+---------+------+-------+---------------------------+-----+
 | ID | USER | HOST | DB                 | COMMAND | TIME | STATE | INFO                      | MEM |
 +----+------+------+--------------------+---------+------+-------+---------------------------+-----+
@@ -345,7 +345,7 @@ The `SCHEMATA` table provides information about databases. The table data is equ
 select * from SCHEMATA;
 ```
 
-```
+```sql
 *************************** 1. row ***************************
               CATALOG_NAME: def
                SCHEMA_NAME: INFORMATION_SCHEMA
@@ -373,6 +373,31 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 4 rows in set (0.00 sec)
 ```
 
+<<<<<<< HEAD
+=======
+## CLUSTER_PROCESSLIST
+
+`CLUSTER_PROCESSLIST` is the cluster system table corresponding to `PROCESSLIST`. It is used to query the `PROCESSLIST` information of all TiDB nodes in the cluster. The table schema of `CLUSTER_PROCESSLIST` has one more column than `PROCESSLIST`, the `INSTANCE` column, which stores the address of the TiDB node this row of data is from.
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM information_schema.cluster_processlist;
+```
+
+```sql
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
+| INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               |
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
+| 10.0.1.22:10080 | 150 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077223) |
+| 10.0.1.22:10080 | 138 | root | 10.0.1.1 | test | Query   | 0    | autocommit | SELECT * FROM information_schema.cluster_processlist | 0   | 05-28 03:54:21.230(416976223923077220) |
+| 10.0.1.22:10080 | 151 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077224) |
+| 10.0.1.21:10080 | 15  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077222) |
+| 10.0.1.21:10080 | 14  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077225) |
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
+```
+
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 ### SESSION_VARIABLES table
 
 The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement:
@@ -383,7 +408,7 @@ The `SESSION_VARIABLES` table provides information about session variables. The 
 SELECT * FROM session_variables LIMIT 10;
 ```
 
-```
+```sql
 +----------------------------------+----------------------+
 | VARIABLE_NAME                    | VARIABLE_VALUE       |
 +----------------------------------+----------------------+
@@ -406,6 +431,7 @@ SELECT * FROM session_variables LIMIT 10;
 The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance of the SQL engine, see [Slow Query Log Document](/identify-slow-queries.md).
 
 ```sql
+<<<<<<< HEAD
 mysql> desc information_schema.slow_query;
 +---------------+---------------------+------+------+---------+-------+
 | Field         | Type                | Null | Key  | Default | Extra |
@@ -439,6 +465,94 @@ mysql> desc information_schema.slow_query;
 | Succ          | tinyint(1) unsigned | YES  |      | NULL    |       |
 | Query         | longblob unsigned   | YES  |      | NULL    |       |
 +---------------+---------------------+------+------+---------+-------+
+=======
+desc information_schema.cluster_slow_query;
+```
+
+```sql
++---------------------------+---------------------+------+-----+---------+-------+
+| Field                     | Type                | Null | Key | Default | Extra |
++---------------------------+---------------------+------+-----+---------+-------+
+| INSTANCE                  | varchar(64)         | YES  |     | <null>  |       |
+| Time                      | timestamp unsigned  | YES  |     | <null>  |       |
+| Txn_start_ts              | bigint(20) unsigned | YES  |     | <null>  |       |
+| User                      | varchar(64)         | YES  |     | <null>  |       |
+| Host                      | varchar(64)         | YES  |     | <null>  |       |
+| Conn_ID                   | bigint(20) unsigned | YES  |     | <null>  |       |
+| Query_time                | double unsigned     | YES  |     | <null>  |       |
+| Parse_time                | double unsigned     | YES  |     | <null>  |       |
+| Compile_time              | double unsigned     | YES  |     | <null>  |       |
+| Prewrite_time             | double unsigned     | YES  |     | <null>  |       |
+| Wait_prewrite_binlog_time | double unsigned     | YES  |     | <null>  |       |
+| Commit_time               | double unsigned     | YES  |     | <null>  |       |
+| Get_commit_ts_time        | double unsigned     | YES  |     | <null>  |       |
+| Commit_backoff_time       | double unsigned     | YES  |     | <null>  |       |
+| Backoff_types             | varchar(64)         | YES  |     | <null>  |       |
+| Resolve_lock_time         | double unsigned     | YES  |     | <null>  |       |
+| Local_latch_wait_time     | double unsigned     | YES  |     | <null>  |       |
+| Write_keys                | bigint(22) unsigned | YES  |     | <null>  |       |
+| Write_size                | bigint(22) unsigned | YES  |     | <null>  |       |
+| Prewrite_region           | bigint(22) unsigned | YES  |     | <null>  |       |
+| Txn_retry                 | bigint(22) unsigned | YES  |     | <null>  |       |
+| Process_time              | double unsigned     | YES  |     | <null>  |       |
+| Wait_time                 | double unsigned     | YES  |     | <null>  |       |
+| Backoff_time              | double unsigned     | YES  |     | <null>  |       |
+| LockKeys_time             | double unsigned     | YES  |     | <null>  |       |
+| Request_count             | bigint(20) unsigned | YES  |     | <null>  |       |
+| Total_keys                | bigint(20) unsigned | YES  |     | <null>  |       |
+| Process_keys              | bigint(20) unsigned | YES  |     | <null>  |       |
+| DB                        | varchar(64)         | YES  |     | <null>  |       |
+| Index_names               | varchar(100)        | YES  |     | <null>  |       |
+| Is_internal               | tinyint(1) unsigned | YES  |     | <null>  |       |
+| Digest                    | varchar(64)         | YES  |     | <null>  |       |
+| Stats                     | varchar(512)        | YES  |     | <null>  |       |
+| Cop_proc_avg              | double unsigned     | YES  |     | <null>  |       |
+| Cop_proc_p90              | double unsigned     | YES  |     | <null>  |       |
+| Cop_proc_max              | double unsigned     | YES  |     | <null>  |       |
+| Cop_proc_addr             | varchar(64)         | YES  |     | <null>  |       |
+| Cop_wait_avg              | double unsigned     | YES  |     | <null>  |       |
+| Cop_wait_p90              | double unsigned     | YES  |     | <null>  |       |
+| Cop_wait_max              | double unsigned     | YES  |     | <null>  |       |
+| Cop_wait_addr             | varchar(64)         | YES  |     | <null>  |       |
+| Mem_max                   | bigint(20) unsigned | YES  |     | <null>  |       |
+| Succ                      | tinyint(1) unsigned | YES  |     | <null>  |       |
+| Plan_from_cache           | tinyint(1)          | YES  |     | <null>  |       |
+| Plan                      | longblob unsigned   | YES  |     | <null>  |       |
+| Plan_digest               | varchar(128)        | YES  |     | <null>  |       |
+| Prev_stmt                 | longblob unsigned   | YES  |     | <null>  |       |
+| Query                     | longblob unsigned   | YES  |     | <null>  |       |
++---------------------------+---------------------+------+-----+---------+-------+
+```
+
+When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
+
+{{< copyable "sql" >}}
+
+```sql
+desc select count(*) from information_schema.cluster_slow_query where user = 'u1';
+```
+
+```sql
++--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+| id                       | estRows  | task      | access object            | operator info                                        |
++--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+| StreamAgg_20             | 1.00     | root      |                          | funcs:count(Column#53)->Column#51                    |
+| └─TableReader_21         | 1.00     | root      |                          | data:StreamAgg_9                                     |
+|   └─StreamAgg_9          | 1.00     | cop[tidb] |                          | funcs:count(1)->Column#53                            |
+|     └─Selection_19       | 10.00    | cop[tidb] |                          | eq(information_schema.cluster_slow_query.user, "u1") |
+|       └─TableFullScan_18 | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
++--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+```
+
+In the above execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
+
+Currently, because statistics of the system tables are not collected, sometimes some aggregation operators cannot be pushed down, which results in slow execution. In this case, you can manually specify the SQL HINT to push down the aggregation operators. For example:
+
+{{< copyable "sql" >}}
+
+```sql
+select /*+ AGG_TO_COP() */ count(*) from information_schema.cluster_slow_query group by user;
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 ```
 
 ### STATISTICS table
@@ -451,6 +565,7 @@ The `STATISTICS` table provides information about table indexes:
 desc statistics;
 ```
 
+<<<<<<< HEAD
 ```
 +---------------|---------------------|------|------|---------|-------+
 | Field         | Type                | Null | Key  | Default | Extra |
@@ -472,6 +587,31 @@ desc statistics;
 | COMMENT       | varchar(16)         | YES  |      | NULL    |       |
 | INDEX_COMMENT | varchar(1024)       | YES  |      | NULL    |       |
 +---------------|---------------------|------|------|---------|-------+
+=======
+```sql
++---------------+---------------+------+------+---------+-------+
+| Field         | Type          | Null | Key  | Default | Extra |
++---------------+---------------+------+------+---------+-------+
+| TABLE_CATALOG | varchar(512)  | YES  |      | NULL    |       |
+| TABLE_SCHEMA  | varchar(64)   | YES  |      | NULL    |       |
+| TABLE_NAME    | varchar(64)   | YES  |      | NULL    |       |
+| NON_UNIQUE    | varchar(1)    | YES  |      | NULL    |       |
+| INDEX_SCHEMA  | varchar(64)   | YES  |      | NULL    |       |
+| INDEX_NAME    | varchar(64)   | YES  |      | NULL    |       |
+| SEQ_IN_INDEX  | bigint(2)     | YES  |      | NULL    |       |
+| COLUMN_NAME   | varchar(21)   | YES  |      | NULL    |       |
+| COLLATION     | varchar(1)    | YES  |      | NULL    |       |
+| CARDINALITY   | bigint(21)    | YES  |      | NULL    |       |
+| SUB_PART      | bigint(3)     | YES  |      | NULL    |       |
+| PACKED        | varchar(10)   | YES  |      | NULL    |       |
+| NULLABLE      | varchar(3)    | YES  |      | NULL    |       |
+| INDEX_TYPE    | varchar(16)   | YES  |      | NULL    |       |
+| COMMENT       | varchar(16)   | YES  |      | NULL    |       |
+| INDEX_COMMENT | varchar(1024) | YES  |      | NULL    |       |
+| IS_VISIBLE    | varchar(3)    | YES  |      | NULL    |       |
+| Expression    | varchar(64)   | YES  |      | NULL    |       |
++---------------+---------------+------+------+---------+-------+
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 ```
 
 The following statements are equivalent:
@@ -496,7 +636,7 @@ The `TABLES` table provides information about tables in databases:
 SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user';
 ```
 
-```
+```sql
 *************************** 1. row ***************************
   TABLE_CATALOG: def
    TABLE_SCHEMA: mysql
@@ -545,7 +685,7 @@ The `TABLE_CONSTRAINTS` table describes which tables have constraints:
 SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
 ```
 
-```
+```sql
 *************************** 1. row ***************************
 CONSTRAINT_CATALOG: def
  CONSTRAINT_SCHEMA: mysql
@@ -604,7 +744,7 @@ The `TIDB_HOT_REGIONS` table provides information about hot spot Regions.
 desc TIDB_HOT_REGIONS;
 ```
 
-```
+```sql
 +----------------+---------------------+------+-----+---------+-------+
 | Field          | Type                | Null | Key | Default | Extra |
 +----------------+---------------------+------+-----+---------+-------+
@@ -630,7 +770,7 @@ The `TIDB_INDEXES` table provides the INDEX information of all tables.
 desc TIDB_INDEXES;
 ```
 
-```
+```sql
 +---------------+---------------------+------+-----+---------+-------+
 | Field         | Type                | Null | Key | Default | Extra |
 +---------------+---------------------+------+-----+---------+-------+
@@ -646,6 +786,18 @@ desc TIDB_INDEXES;
 +---------------+---------------------+------+-----+---------+-------+
 ```
 
+Fields in the `TIDB_INDEXES` table are described as follows:
+
+* `TABLE_SCHEMA`: The name of the schema to which the index belongs.
+* `TABLE_NAME`: The name of the table to which the index belongs.
+* `NON_UNIQUE`: If the index is unique, the value is `0`; otherwise, the value is `1`.
+* `KEY_NAME`: The index name. If the index is the primary key, the name is `PRIMARY`.
+* `SEQ_IN_INDEX`: The sequential number of columns in the index, which starts from `1`.
+* `COLUMN_NAME`: The name of the column where the index is located.
+* `SUB_PART`: The prefix length of the index. If the the column is partly indexed, the `SUB_PART` value is the count of the indexed characters; otherwise, the value is `NULL`.
+* `INDEX_COMMENT`: The comment of the index, which is made when the index is created.
+* `INDEX_ID`: The index ID.
+
 ### TIKV_REGION_PEERS table
 
 The `TIKV_REGION_PEERS` table provides the peer information of all Regions.
@@ -656,7 +808,7 @@ The `TIKV_REGION_PEERS` table provides the peer information of all Regions.
 desc TIKV_REGION_PEERS;
 ```
 
-```
+```sql
 +--------------+---------------------+------+-----+---------+-------+
 | Field        | Type                | Null | Key | Default | Extra |
 +--------------+---------------------+------+-----+---------+-------+
@@ -680,7 +832,7 @@ The `TIKV_REGION_STATUS` table provides the status information of all Regions.
 desc TIKV_REGION_STATUS;
 ```
 
-```
+```sql
 +------------------+---------------------+------+-----+---------+-------+
 | Field            | Type                | Null | Key | Default | Extra |
 +------------------+---------------------+------+-----+---------+-------+
@@ -706,7 +858,7 @@ The `TIKV_STORE_STATUS` table provides the status information of all TiKV Stores
 desc TIKV_STORE_STATUS;
 ```
 
-```
+```sql
 +-------------------+---------------------+------+-----+---------+-------+
 | Field             | Type                | Null | Key | Default | Extra |
 +-------------------+---------------------+------+-----+---------+-------+
@@ -742,7 +894,7 @@ The `USER_PRIVILEGES` table provides information about global privileges. This i
 desc USER_PRIVILEGES;
 ```
 
-```
+```sql
 +----------------|--------------|------|------|---------|-------+
 | Field          | Type         | Null | Key  | Default | Extra |
 +----------------|--------------|------|------|---------|-------+
@@ -754,6 +906,13 @@ desc USER_PRIVILEGES;
 4 rows in set (0.00 sec)
 ```
 
+Fields in the `USER_PRIVILEGES` table are described as follows:
+
+* `GRANTEE`: The name of the granted user, which is in the format of `'user_name'@'host_name'`.
+* `TABLE_CATALOG`: The name of the catalog to which the table belongs. This value is always `def`.
+* `PRIVILEGE_TYPE`: The privilege type to be granted. Only one privilege type is shown in each row.
+* `IS_GRANTABLE`: If you have the `GRANT OPTION` privilege, the value is `YES`; otherwise, the value is `NO`.
+
 ### VIEWS table
 
 The `VIEWS` table provides information about SQL views:
@@ -764,7 +923,7 @@ The `VIEWS` table provides information about SQL views:
 create view test.v1 as select 1;
 ```
 
-```
+```sql
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -774,7 +933,7 @@ Query OK, 0 rows affected (0.00 sec)
 select * from views;
 ```
 
-```
+```sql
 *************************** 1. row ***************************
        TABLE_CATALOG: def
         TABLE_SCHEMA: test
@@ -789,12 +948,32 @@ COLLATION_CONNECTION: utf8_general_ci
 1 row in set (0.00 sec)
 ```
 
+Fields in the `VIEWS` table are described as follows:
+
+* `TABLE_CATALOG`: The name of the catalog to which the view belongs. This value is always `def`.
+* `TABLE_SCHEMA`: The name of the schema to which the view belongs.
+* `TABLE_NAME`: The view name.
+* `VIEW_DEFINITION`: The definition of view, which is made by the `SELECT` statement when the view is created.
+* `CHECK_OPTION`: The `CHECK_OPTION` value. The value options are `NONE`, `CASCADE`, and `LOCAL`.
+* `IS_UPDATABLE`: Whether `UPDATE`/`INSERT`/`DELETE` is applicable to the view. In TiDB, the value is always `NO`.
+* `DEFINER`: The name of the user who creates the view, which is in the format of `'user_name'@'host_name'`.
+* `SECURITY_TYPE`: The value of `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
+* `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
+* `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
+
 ## TIDB\_INDEXES table
 
 The `TIDB_INDEXES` table provides index-related information.
 
 ```sql
+<<<<<<< HEAD
 mysql> desc tidb_indexes\G
+=======
+desc tidb_indexes\G
+```
+
+```sql
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIDB_INDEXES
 Create Table: CREATE TABLE `TIDB_INDEXES` (
@@ -833,7 +1012,14 @@ where
 The `TIDB_HOT_REGIONS` table provides the hot Region information in the current TiKV instance.
 
 ```sql
+<<<<<<< HEAD
 mysql> desc tidb_hot_regions\G
+=======
+desc tidb_hot_regions\G
+```
+
+```sql
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIDB_HOT_REGIONS
 Create Table: CREATE TABLE `TIDB_HOT_REGIONS` (
@@ -858,7 +1044,14 @@ Create Table: CREATE TABLE `TIDB_HOT_REGIONS` (
 The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.
 
 ```sql
+<<<<<<< HEAD
 mysql> desc tikv_store_status\G
+=======
+desc tikv_store_status\G
+```
+
+```sql
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIKV_STORE_STATUS
 Create Table: CREATE TABLE `TIKV_STORE_STATUS` (
@@ -890,7 +1083,14 @@ Create Table: CREATE TABLE `TIKV_STORE_STATUS` (
 The `TIKV_REGION_STATUS` table shows some basic information of TiKV Regions via PD's API, like the Region ID, starting and ending key-values, and read and write traffic.
 
 ```sql
+<<<<<<< HEAD
 mysql> desc tikv_region_status\G
+=======
+desc tikv_region_status\G
+```
+
+```sql
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIKV_REGION_STATUS
 Create Table: CREATE TABLE `TIKV_REGION_STATUS` (
@@ -911,7 +1111,7 @@ You can implement the `top confver`, `top read` and `top write` operations in pd
 
 You can query the top 3 Regions with the most write data using the following SQL statement:
 
-```
+```sql
 select * from tikv_region_status order by written_bytes desc limit 3;
 ```
 
@@ -920,7 +1120,14 @@ select * from tikv_region_status order by written_bytes desc limit 3;
 The `TIKV_REGION_PEERS` table shows detailed information of a single Region node in TiKV, like whether it is a learner or leader.
 
 ```sql
+<<<<<<< HEAD
 mysql> desc tikv_region_peers\G
+=======
+desc tikv_region_peers\G
+```
+
+```sql
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIKV_REGION_PEERS
 Create Table: CREATE TABLE `TIKV_REGION_PEERS` (
@@ -965,7 +1172,14 @@ where
 The `ANALYZE_STATUS` table shows the execution status of the `ANALYZE` command in the current cluster.
 
 ```sql
+<<<<<<< HEAD
 mysql> desc analyze_status\G
+=======
+desc analyze_status\G
+```
+
+```sql
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: ANALYZE_STATUS
 Create Table: CREATE TABLE `ANALYZE_STATUS` (
@@ -987,7 +1201,14 @@ The `STATE` column shows the execution status of a specific `ANALYZE` task. Its 
 The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/identify-slow-queries.md#identify-slow-queries).
 
 ```sql
+<<<<<<< HEAD
 mysql> desc slow_query\G
+=======
+desc slow_query\G
+```
+
+```sql
+>>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: SLOW_QUERY
 Create Table: CREATE TABLE `SLOW_QUERY` (
