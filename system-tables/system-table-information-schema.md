@@ -416,6 +416,11 @@ SELECT * FROM session_variables LIMIT 10;
 10 rows in set (0.00 sec)
 ```
 
+The description of columns in the `SESSION_VARIABLES` table is as follows:
+
+* `VARIABLE_NAME`: The name of the session-level variable in the database.
+* `VARIABLE_VALUE`: The value of the session-level variable in the database.
+
 ## SLOW_QUERY table
 
 The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
@@ -672,6 +677,30 @@ SHOW TABLES
   [LIKE 'wild']
 ```
 
+The description of columns in the `TABLES` table is as follows:
+
+* `TABLE_CATALOG`: The name of the catalog which the table belongs to. The value is always `def`.
+* `TABLE_SCHEMA`: The name of the schema which the table belongs to.
+* `TABLE_NAME`: The name of the table.
+* `TABLE_TYPE`: The type of the table.
+* `ENGINE`: The type of the storage engine. The value is currently `InnoDB`.
+* `VERSION`: Version. The value is `10` by default.
+* `ROW_FORMAT`: The row format. The value is currently `Compact`.
+* `TABLE_ROWS`: The number of rows in the table in statistics.
+* `AVG_ROW_LENGTH`: The average row length of the table. `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS`.
+* `DATA_LENGTH`: Data length. `DATA_LENGTH` = `TABLE_ROWS` * the sum of storage lengths of the columns in the tuple. The replicas of TiKV is not taken into account.
+* `MAX_DATA_LENGTH`: The maximum data length. The value is currently `0`, which means the data length has no upper limit.
+* `INDEX_LENGTH`: The index length. `INDEX_LENGTH` = `TABLE_ROWS` * the sum of lengths of the columns in the index tuple. The replicas of TiKV is not taken into account.
+* `DATA_FREE`: Data fragment. The value is currently `0`.
+* `AUTO_INCREMENT`: The current step of the auto-increment primary key.
+* `CREATE_TIME`: The time at which the table is created.
+* `UPDATE_TIME`: The time at which the table is updated.
+* `CHECK_TIME`: The time at which the table is checked.
+* `TABLE_COLLATION`: The character check code set of the table.
+* `CHECKSUM`: Checksum.
+* `CREATE_OPTIONS`: Create options.
+* `TABLE_COMMENT`: The comments and notes of the table.
+
 Most of the information in the table is the same as MySQL. Only two columns are newly defined by TiDB:
 
 * `TIDB_TABLE_ID`: to indicate the internal ID of a table. This ID is unique in a TiDB cluster.
@@ -766,6 +795,19 @@ desc TIDB_HOT_REGIONS;
 | FLOW_BYTES     | bigint(21) unsigned | YES  |     | <null>  |       |
 +----------------+---------------------+------+-----+---------+-------+
 ```
+
+The description of columns in the `TIDB_HOT_REGIONS` table is as follows:
+
+* `TABLE_ID`: ID of the table which the hot Region is located.
+* `INDEX_ID`: ID of the index which the hot Region is located.
+* `DB_NAME`: The database name of the object which the hot Region is located.
+* `TABLE_NAME`: The name of the table which the hot Region is located.
+* `INDEX_NAME`: The name of the index which the hot Region is located.
+* `REGION_ID`: ID of the hot Region.
+* `TYPE`: The type of the hot Region.
+* `MAX_HOT_DEGREE`: The maximum hot degree of the Region.
+* `REGION_COUNT`: The number of Regions in the instance.
+* `FLOW_BYTES`: The number of bytes written and read in the Region.
 
 ### TIDB_INDEXES table
 
