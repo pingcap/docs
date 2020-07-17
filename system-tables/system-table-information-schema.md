@@ -696,7 +696,7 @@ The description of columns in the `TABLES` table is as follows:
 * `CREATE_TIME`: The time at which the table is created.
 * `UPDATE_TIME`: The time at which the table is updated.
 * `CHECK_TIME`: The time at which the table is checked.
-* `TABLE_COLLATION`: Table collation (to compare string).
+* `TABLE_COLLATION`: The collation of strings in the table.
 * `CHECKSUM`: Checksum.
 * `CREATE_OPTIONS`: Create options.
 * `TABLE_COMMENT`: The comments and notes of the table.
