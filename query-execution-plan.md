@@ -12,7 +12,7 @@ Based on the details of your tables, the TiDB optimizer chooses the most efficie
 
 The result of the `EXPLAIN` statement provides information about how TiDB executes SQL queries:
 
-- `EXPLAIN` works together with statements such as `SELECT`, `DELETE`, `INSERT`, `REPLACE`, and `UPDATE`.
+- `EXPLAIN` works together with statements such as `SELECT` and `DELETE`.
 - When you run the `EXPLAIN` statement, TiDB returns the final physical execution plan which is optimized by the SQL statement of `EXPLAIN`. In other words, `EXPLAIN` displays the complete information about how TiDB executes the SQL statement, such as in which order, how tables are joined, and what the expression tree looks like.
 - For more information about each column of `EXPLAIN`, see [`EXPLAIN` Output Format](/sql-statements/sql-statement-explain.md).
 
@@ -20,15 +20,15 @@ The results of `EXPLAIN` shed light on how to index the data tables so that the 
 
 ## Operator execution order
 
-The execution plan in TiDB is of the tree structure, with each node in the tree as an operator. Considering the concurrent execution of multiple threads in each operator, all operators consume CPU and memory to process data during the execution of a SQL statement. From this point of view, there is no execution order for the operator.
+The execution plan in TiDB has a tree structure, with each node of the tree as an operator. Considering the concurrent execution of multiple threads in each operator, all operators consume CPU and memory resources to process data during the execution of a SQL statement. From this point of view, there is no execution order for the operator.
 
 However, from the perspective of which operators process a row of data first, the execution of a piece of data is in order. The following rule roughly summarizes this order:
 
-**`Build` is always executed before `Probe`, and `Build` always appears before `Probe`.**
+**`Build` is always executed before `Probe` and always appears before `Probe`.**
 
-The first half of this rule says: if an operator has multiple child nodes, the operator with the `Build` keyword at the end of the child node ID is always executed before that with the `Probe` keyword. The second half says: when TiDB shows the execution plan, the `Build` side always appears first, followed by the `Probe` side.
+The first half of this rule means: if an operator has multiple child nodes, the operator with the `Build` keyword at the end of the child node ID is always executed before the operator with the `Probe` keyword. The second half means: when TiDB shows the execution plan, the `Build` side always appears first, followed by the `Probe` side.
 
-The following are some examples to illustrate this rule:
+The following examples illustrate this rule:
 
 {{< copyable "sql" >}}
 
@@ -76,13 +76,13 @@ explain select * from t t1 use index(idx_a) join t t2 use index() where t1.a = t
 
 To complete the `HashJoin_22` operation, you need to execute `TableReader_26(Build)`, and then execute `IndexLookUp_29(Probe)`.
 
-When executing `IndexLookUp_29(Probe)`, you need to execute `IndexFullScan_27(Build)` and `TableRowIDScan_28(Probe)` one by one. Therefore, from the perspective of the whole execution link, `TableRowIDScan_28(Probe)` is the last one awaken to be executed.
+When executing `IndexLookUp_29(Probe)`, you need to execute `IndexFullScan_27(Build)` and `TableRowIDScan_28(Probe)` one by one. Therefore, from the perspective of the whole execution link, `TableRowIDScan_28(Probe)` is the last one awoken to be executed.
 
 ### Task overview
 
-Currently, calculation tasks of TiDB can be divided into two categories: cop task and root task. The cop task is performed by the Coprocessor in TiKV, and the root task is performed in TiDB.
+Currently, calculation tasks of TiDB can be divided into two categories: cop tasks and root tasks. The cop tasks are performed by the Coprocessor in TiKV, and the root tasks are performed in TiDB.
 
-One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. However, all `Join` operations can only be performed as root tasks in TiDB.
+One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. However, all `Join` operations can only be performed as root tasks in TiDB.
 
 ### Range query
 
@@ -106,7 +106,7 @@ You can use optimizer hints to control the behavior of the optimizer, and thereb
 
 ### Read the execution plan of table scans
 
-The following lists operators that perform table scans (of the disk or the TiKV Block Cache):
+The operators that perform table scans (of the disk or the TiKV Block Cache) are listed as follows:
 
 - **TableFullScan**: Full table scan.
 - **TableRangeScan**: Table scans with the specified range.
@@ -118,7 +118,7 @@ TiDB aggregates the data or calculation results scanned from TiKV/TiFlash. The d
 
 - **TableReader**: Aggregates the data obtained by the underlying operators like `TableFullScan` or `TableRangeScan` in TiKV.
 - **IndexReader**: Aggregates the data obtained by the underlying operators like `IndexFullScan` or `IndexRangeScan` in TiKV.
-- **IndexLookUp**: First, aggregates the RowID (in TiKV) scanned by the `Build` side. Then go to the `Probe` side, to accurately read the data from TiKV based on these RowIDs. At the `Build` side, there are operators like `IndexFullScan` or `IndexRangeScan`; at the `Probe` side, there is the `TableRowIDScan` operator.
+- **IndexLookUp**: First aggregates the RowID (in TiKV) scanned by the `Build` side. Then at the `Probe` side, accurately reads the data from TiKV based on these RowIDs. At the `Build` side, there are operators like `IndexFullScan` or `IndexRangeScan`; at the `Probe` side, there is the `TableRowIDScan` operator.
 - **IndexMerge**: Similar to `IndexLookUp`. `IndexMerge` can be seen as an extension of `IndexLookupReader`. `IndexMerge` supports reading multiple indexes at the same time. There are many `Build`s and one `Probe`. The execution process of `IndexMerge` the same as that of `IndexLookUp`.
 
 #### Table data and index data
@@ -148,10 +148,10 @@ explain select * from t use index(idx_a);
 
 The `IndexLookUp_6` operator has two child nodes: `IndexFullScan_4(Build)` and `TableRowIDScan_5(Probe)`.
 
-1. `IndexFullScan_4(Build)` performs an index full scan and scans all the data of index `a`. Because it is a full scan, this operation gets the `RowID` of all the data in the table.
-2. `TableRowIDScan_5(Probe)` scans all table data using `RowID`s.
++ `IndexFullScan_4(Build)` performs an index full scan and scans all the data of index `a`. Because it is a full scan, this operation gets the `RowID` of all the data in the table.
++ `TableRowIDScan_5(Probe)` scans all table data using `RowID`s.
 
-This execution plan is not as efficient as using `TableReader` to perform a full table scan, because `IndexLookUp` performs an index scan (which comes with additional overhead), apart from the table scan.
+This execution plan is not as efficient as using `TableReader` to perform a full table scan, because `IndexLookUp` performs an extra index scan (which comes with additional overhead), apart from the table scan.
 
 #### `TableReader` example
 
@@ -174,7 +174,7 @@ explain select * from t where a > 1 or b >100;
 
 In the above example, the child node of the `TableReader_7` operator is `Selection_6`. The subtree rooted at this child node is seen as a `Cop Task` and is delivered to the corresponding TiKV. This `Cop Task` uses the `TableFullScan_5` operator to perform the table scan. `Selection` represents the selection condition in the SQL statement, namely, the `WHERE`/`HAVING`/`ON` clause.
 
-`TableFullScan_5` performs a full table scan. The load on the cluster rises accordingly, which might affect other queries running in the cluster. If an appropriate index is built and the `IndexMerge` operator is used, these come with greater query performance and reduced load on the cluster.
+`TableFullScan_5` performs a full table scan, and the load on the cluster increases accordingly, which might affect other queries running in the cluster. If an appropriate index is built and the `IndexMerge` operator is used, these will greatly improve query performance and reduce load on the cluster.
 
 #### `IndexMerge` example
 
@@ -201,9 +201,9 @@ explain select * from t use index(idx_a, idx_b) where a > 1 or b > 1;
 
 > **Note:**
 >
-> At present, the `IndexMerge` feature is disabled by default in the TiDB 4.0.0-rc.1. Besides, the currently supported scenarios of `IndexMerge` in TiDB 4.0 are limited to the disjunctive normal form (expressions connected by `or`). The conjunctive normal form (expressions connected by `and`) will be supported in later versions.
+> At present, the `IndexMerge` feature is disabled by default in TiDB 4.0.0-rc.1. In addition, the currently supported scenarios of `IndexMerge` in TiDB 4.0 are limited to the disjunctive normal form (expressions connected by `or`). The conjunctive normal form (expressions connected by `and`) will be supported in later versions.
 >
-> You can enable `IndexMerge` by configuring the `session` or `global` variables by executing the `set @@tidb_enable_index_merge = 1;` statement in the client.
+> You can enable `IndexMerge` by configuring the `session` or `global` variables: execute the `set @@tidb_enable_index_merge = 1;` statement in the client.
 
 ### Read the aggregated execution plan
 
@@ -214,7 +214,7 @@ Aggregation algorithms in TiDB include the following categories:
 
 #### `Hash Aggregate` example
 
-The `Hash Aggregation` operator is optimized through multi-threaded concurrency. It is fast at the cost of more memory usage. The following is an example of `Hash Aggregate`:
+The `Hash Aggregation` operator is optimized in multi-threaded concurrency. It is quick to execute at the cost of more memory usage. The following is an example of `Hash Aggregate`:
 
 {{< copyable "sql" >}}
 
@@ -276,7 +276,7 @@ The `Join` algorithms in TiDB consist of the following categories:
 - [Index Hash Join (Index Nested Loop Hash Join)](#index-hash-join-example)
 - [Index Merge Join (Index Nested Loop Merge Join)](#index-merge-join-example)
 
-The following are examples of the execution process of these `Join` algorithms.
+The following are examples of the execution processes of these `Join` algorithms.
 
 #### `Hash Join` example
 
@@ -442,7 +442,7 @@ The execution process of the above example can be illustrated as follows:
 
 In the above query, TiDB estimates the number of rows in the output of `TableScan_18` as 19117643.00, based on the statistics of the `trips` table. The number of rows that meet the `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` condition is 8168.73. After the aggregation operation, there is only 1 result.
 
-The execution as illustrated in the above example is not efficient enough, though most of the calculation logic is pushed down to the TiKV Coprocessor. You can add an appropriate index to eliminate the full table scan of `trips` by `TableScan_18`, thereby accelerating the execution of the query:
+The execution as illustrated in the above example is not efficient enough, though most of the calculation logic is pushed down to the TiKV Coprocessor. You can add an appropriate index to eliminate the full table scan on `trips` by `TableScan_18`, thereby accelerating the execution of the query:
 
 {{< copyable "sql" >}}
 
@@ -468,7 +468,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 4 rows in set (0.00 sec)
 ```
 
-After adding the index, use `IndexScan_24` to directly read the data that meets the `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` condition. The estimated number of rows to be scanned drops from 19117643.00 to 8166.73. In the test environment, the execution time of this query decreases from 50.41 seconds to 0.01 seconds.
+After adding the index, use `IndexScan_24` to directly read the data that meets the `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` condition. The estimated number of rows to be scanned decreases from 19117643.00 to 8166.73. In the test environment, the execution time of this query decreases from 50.41 seconds to 0.01 seconds.
 
 ## See also
 
