@@ -1,7 +1,6 @@
 ---
 title: BR storages
 summary: Describes the storage URL format used in BR.
-category: reference
 aliases: ['/docs/stable/br/backup-and-restore-storages/','/docs/v4.0/br/backup-and-restore-storages/']
 ---
 

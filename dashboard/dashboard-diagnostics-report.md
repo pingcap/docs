@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard Diagnostic Report
 summary: Learn the TiDB Dashboard diagnostic report.
-category: how-to
 aliases: ['/docs/stable/dashboard/dashboard-diagnostics-report/','/docs/v4.0/dashboard/dashboard-diagnostics-report/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Hybrid Deployment Topology
 summary: Learn the hybrid deployment topology of TiDB clusters.
-category: how-to
 aliases: ['/docs/stable/hybrid-deployment-topology/','/docs/v4.0/hybrid-deployment-topology/']
 ---
 

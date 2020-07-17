@@ -1,7 +1,6 @@
 ---
 title: TiFlash Command-line Flags
 summary: Learn the command-line startup flags of TiFlash.
-category: reference
 aliases: ['/docs/stable/tiflash/tiflash-command-line-flags/','/docs/v4.0/tiflash/tiflash-command-line-flags/']
 ---
 

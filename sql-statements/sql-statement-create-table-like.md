@@ -1,7 +1,6 @@
 ---
 title: CREATE TABLE LIKE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE TABLE LIKE for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-create-table-like/','/docs/v4.0/sql-statements/sql-statement-create-table-like/','/docs/stable/reference/sql/statements/create-table-like/']
 ---
 

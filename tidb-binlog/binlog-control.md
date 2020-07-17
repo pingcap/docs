@@ -1,7 +1,6 @@
 ---
 title: binlogctl
 summary: Learns how to use `binlogctl`.
-category: reference
 aliases: ['/docs/stable/tidb-binlog/binlog-control/','/docs/v4.0/tidb-binlog/binlog-control/']
 ---
 

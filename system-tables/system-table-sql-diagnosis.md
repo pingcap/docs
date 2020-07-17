@@ -1,7 +1,6 @@
 ---
 title: SQL Diagnosis
 summary: Understand SQL diagnosis in TiDB.
-category: reference
 aliases: ['/docs/stable/system-tables/system-table-sql-diagnosis/','/docs/v4.0/system-tables/system-table-sql-diagnosis/','/docs/stable/reference/system-databases/sql-diagnosis/']
 ---
 

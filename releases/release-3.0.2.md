@@ -1,6 +1,5 @@
 ---
 title: TiDB 3.0.2 Release Notes
-category: Releases
 aliases: ['/docs/stable/releases/release-3.0.2/','/docs/v4.0/releases/release-3.0.2/','/docs/stable/releases/3.0.2/']
 ---
 

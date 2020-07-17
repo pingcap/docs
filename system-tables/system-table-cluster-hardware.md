@@ -1,7 +1,6 @@
 ---
 title: CLUSTER_HARDWARE
 summary: Learn the `CLUSTER_HARDWARE` cluster hardware system table.
-category: reference
 aliases: ['/docs/stable/system-tables/system-table-cluster-hardware/','/docs/v4.0/system-tables/system-table-cluster-hardware/','/docs/stable/reference/system-databases/cluster-hardware/']
 ---
 

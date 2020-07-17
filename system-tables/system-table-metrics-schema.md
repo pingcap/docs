@@ -1,7 +1,6 @@
 ---
 title: Metrics Schema
 summary: Learn the `METRICS_SCHEMA` schema.
-category: reference
 aliases: ['/docs/stable/system-tables/system-table-metrics-schema/','/docs/v4.0/system-tables/system-table-metrics-schema/','/docs/stable/reference/system-databases/metrics-schema/']
 ---
 

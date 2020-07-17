@@ -1,7 +1,6 @@
 ---
 title: SHOW CREATE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CREATE TABLE for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-show-create-table/','/docs/v4.0/sql-statements/sql-statement-show-create-table/','/docs/stable/reference/sql/statements/show-create-table/']
 ---
 

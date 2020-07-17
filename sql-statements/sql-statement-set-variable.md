@@ -1,7 +1,6 @@
 ---
 title: SET [GLOBAL|SESSION] <variable> | TiDB SQL Statement Reference
 summary: An overview of the usage of SET [GLOBAL|SESSION] <variable> for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-set-variable/','/docs/v4.0/sql-statements/sql-statement-set-variable/','/docs/stable/reference/sql/statements/set-variable/']
 ---
 

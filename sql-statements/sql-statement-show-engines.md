@@ -1,7 +1,6 @@
 ---
 title: SHOW ENGINES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW ENGINES for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-show-engines/','/docs/v4.0/sql-statements/sql-statement-show-engines/','/docs/stable/reference/sql/statements/show-engines/']
 ---
 

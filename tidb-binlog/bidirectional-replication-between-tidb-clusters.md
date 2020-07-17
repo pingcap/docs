@@ -1,7 +1,6 @@
 ---
 title: Bidirectional Replication Between TiDB Clusters
 summary: Learn how to perform the bidirectional replication between TiDB clusters.
-category: reference
 aliases: ['/docs/stable/tidb-binlog/bidirectional-replication-between-tidb-clusters/','/docs/v4.0/tidb-binlog/bidirectional-replication-between-tidb-clusters/','/docs/stable/reference/tidb-binlog/bidirectional-replication/']
 ---
 

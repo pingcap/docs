@@ -1,7 +1,6 @@
 ---
 title: Install from Homebrew
 summary: Install TiDB using the Homebrew package manager.
-category: how-to
 aliases: ['/docs/stable/deploy-tidb-from-homebrew/','/docs/v4.0/deploy-tidb-from-homebrew/','/docs/stable/how-to/get-started/deploy-tidb-from-homebrew/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: INSPECTION_RESULT
 summary: Learn the `INSPECTION_RESULT` diagnostic result table.
-category: reference
 aliases: ['/docs/stable/system-tables/system-table-inspection-result/','/docs/v4.0/system-tables/system-table-inspection-result/','/docs/stable/reference/system-databases/inspection-result/']
 ---
 

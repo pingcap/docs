@@ -1,7 +1,6 @@
 ---
 title: List of Expressions for Pushdown
 summary: Learn a list of expressions that can be pushed down to TiKV and the related operations.
-category: reference
 aliases: ['/docs/stable/functions-and-operators/expressions-pushed-down/','/docs/v4.0/functions-and-operators/expressions-pushed-down/','/docs/stable/reference/sql/functions-and-operators/expressions-pushed-down/']
 ---
 

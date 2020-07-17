@@ -1,7 +1,6 @@
 ---
 title: Numeric Functions and Operators
 summary: Learn about the numeric functions and operators.
-category: reference
 aliases: ['/docs/stable/functions-and-operators/numeric-functions-and-operators/','/docs/v4.0/functions-and-operators/numeric-functions-and-operators/','/docs/stable/reference/sql/functions-and-operators/numeric-functions-and-operators/']
 ---
 

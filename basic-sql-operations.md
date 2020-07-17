@@ -1,7 +1,6 @@
 ---
 title: Explore SQL with TiDB
 summary: Learn about the basic SQL statements for the TiDB database.
-category: how-to
 aliases: ['/docs/stable/basic-sql-operations/','/docs/v4.0/basic-sql-operations/','/docs/stable/how-to/get-started/explore-sql/']
 ---
 
