@@ -1,7 +1,6 @@
 ---
 title: Use BR to Back up and Restore Data
 summary: Learn how to back up and restore data of the TiDB cluster using BR.
-category: how-to
 aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/']
 ---
 
@@ -331,7 +330,7 @@ If you want to back up incrementally, you only need to specify the **last backup
 The incremental backup has two limitations:
 
 - The incremental backup needs to be under a different path from the previous full backup.
-- No GC (Garbage Collection) happens between the start time of the incremental backup and `lastbackupts`.
+- GC (Garbage Collection) safepoint must be before the `lastbackupts`.
 
 To back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]`, execute the following command:
 
