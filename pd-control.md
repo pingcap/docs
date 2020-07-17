@@ -8,7 +8,7 @@ aliases: ['/docs/dev/pd-control/','/docs/dev/reference/tools/pd-control/']
 
 As a command line tool of PD, PD Control obtains the state information of the cluster and tunes the cluster.
 
-## Installation methods
+## Install PD Control
 
 ### Use TiUP command
 
