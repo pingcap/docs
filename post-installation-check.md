@@ -1,7 +1,7 @@
 ---
 title: Check Cluster Status
 summary: Learn how to check the running status of the TiDB cluster.
-category: how-to
+aliases: ['/docs/dev/post-installation-check/']
 ---
 
 # Check Cluster Status
@@ -13,6 +13,10 @@ This document describes how to check the cluster status via TiDB Dashboard and G
 This section describes how to check the TiDB cluster status using TiDB Dashboard and Grafana.
 
 ### Use TiDB Dashboard
+
+> **Note:**
+>
+> TiDB Dashboard is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 1. Log in to TiDB Dashboard at `${pd-ip}:${pd-port}/dashboard`. The username and password is the same as that of the TiDB `root` user. If you have modified the `root` password, enter the modified password. The password is empty by default.
 

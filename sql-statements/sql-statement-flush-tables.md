@@ -1,8 +1,7 @@
 ---
 title: FLUSH TABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH TABLES for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/flush-tables/']
+aliases: ['/docs/dev/sql-statements/sql-statement-flush-tables/','/docs/dev/reference/sql/statements/flush-tables/']
 ---
 
 # FLUSH TABLES
@@ -22,6 +21,10 @@ This statement is included for compatibility with MySQL. It has no effective usa
 **FlushOption:**
 
 ![FlushOption](/media/sqlgram/FlushOption.png)
+
+**LogTypeOpt:**
+
+![LogTypeOpt](/media/sqlgram/LogTypeOpt.png)
 
 **TableOrTables:**
 

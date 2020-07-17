@@ -1,8 +1,7 @@
 ---
 title: FLASHBACK TABLE
 summary: Learn how to recover tables using the `FLASHBACK TABLE` statement.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/flashback-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-flashback-table/','/docs/dev/reference/sql/statements/flashback-table/']
 ---
 
 # FLASHBACK TABLE
@@ -24,6 +23,20 @@ select * from mysql.tidb where variable_name in ('tikv_gc_safe_point','tikv_gc_l
 ```sql
 FLASHBACK TABLE table_name [TO other_table_name]
 ```
+
+## Synopsis
+
+**FlashbackTableStmt:**
+
+![FlashbackTableStmt](/media/sqlgram/FlashbackTableStmt.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**FlashbackToNewName:**
+
+![FlashbackToNewName](/media/sqlgram/FlashbackToNewName.png)
 
 ## Notes
 
