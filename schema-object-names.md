@@ -22,27 +22,53 @@ SELECT * FROM `table` WHERE `table`.id = 20;
 
 If you set `ANSI_QUOTES` in SQL MODE, TiDB will recognize the string enclosed in double quotation marks `"` as an identifier.
 
+{{< copyable "sql" >}}
+
 ```sql
-MySQL [test]> CREATE TABLE "test" (a varchar(10));
+CREATE TABLE "test" (a varchar(10));
+```
+
+```sql
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 1 column 19 near ""test" (a varchar(10))" 
+```
 
-MySQL [test]> SET SESSION sql_mode='ANSI_QUOTES';
+{{< copyable "sql" >}}
+
+```sql
+SET SESSION sql_mode='ANSI_QUOTES';
+```
+
+```sql
 Query OK, 0 rows affected (0.000 sec)
+```
 
-MySQL [test]> CREATE TABLE "test" (a varchar(10));
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE "test" (a varchar(10));
+```
+
+```sql
 Query OK, 0 rows affected (0.012 sec)
 ```
 
-If you want to use the backtick character in the quoted identifier, you need to repeat the backtick twice, for example to create a table a`b:
+If you want to use the backtick character in the quoted identifier, repeat the backtick twice. For example, to create a table a`b:
+
+{{< copyable "sql" >}}
 
 ```sql
-mysql> CREATE TABLE `a``b` (a int);
+CREATE TABLE `a``b` (a int);
 ```
 
-In a `SELECT` statement, a quoted column alias can be specified using an identifier or a string quoting characters:
+In a `SELECT` statement, you can use an identifier or a string to specify an alias:
+
+{{< copyable "sql" >}}
 
 ```sql
-mysql> SELECT 1 AS `identifier`, 2 AS 'string';
+SELECT 1 AS `identifier`, 2 AS 'string';
+```
+
+```sql
 +------------+--------+
 | identifier | string |
 +------------+--------+
@@ -51,25 +77,31 @@ mysql> SELECT 1 AS `identifier`, 2 AS 'string';
 1 row in set (0.00 sec)
 ```
 
-For more information, see [MySQL Documentation](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html).
+For more information, see [MySQL Schema Object Names](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html).
 
 ## Identifier qualifiers
 
-Object names can be unqualified or qualified. For example, the following statement creates a table using the unqualified name:
+Object names can be unqualified or qualified. For example, the following statement creates a table without a qualified name:
+
+{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t (i int);
 ```
 
-If you have not used the `USE` or connection parameter to set the database, the `ERROR 1046 (3D000): No database selected` is displayed. At this time you can specify the database qualified name:
+If you have not used the `USE` statement or the connection parameter to configure the database, the `ERROR 1046 (3D000): No database selected` error is displayed. At this time, you can specify the database qualified name:
+
+{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE test.t (i int);
 ```
 
-There can be white spaces around `.`, and `table_name.col_name` and `table_name . col_name` are equivalent.
+White spaces can exist around `.`. `table_name.col_name` and `table_name . col_name` are equivalent.
 
 To quote this identifier, use:
+
+{{< copyable "sql" >}}
 
 ```sql
 `table_name`.`col_name`
@@ -81,4 +113,4 @@ Instead of：
 `table_name.col_name`
 ```
 
-For more information, see [MySQL Documentation](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html).
+For more information, see [MySQL Identifier Qualifiers](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html).
