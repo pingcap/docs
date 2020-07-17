@@ -4,23 +4,23 @@ summary: Learn about the basic SQL statements for the TiDB database.
 aliases: ['/docs/dev/basic-sql-operations/','/docs/dev/how-to/get-started/explore-sql/']
 ---
 
-# Basic SQL operations
+# Basic SQL Operations
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
-SQL, a declarative language, is a way that users interact with the database. You can use it just as a natural language to talk to the database. This page walks you through the basic TiDB SQL statements. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
+Structured Query Language (SQL) is a declarative language which defines the way that users interact with databases. You can use SQL just as a natural language to talk to the database. This page walks you through the basic SQL statements in TiDB. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
 
 ## Category
 
-SQL can be divided into the following 4 parts according to function:
+SQL is divided into the following 4 types according to their functions:
 
 - DDL (Data Definition Language): It is used to define database objects, including databases, tables, views, and indexes.
 
-- DML (Data Manipulation Language): It is used to manipulate business related records.
+- DML (Data Manipulation Language): It is used to manipulate application related records.
 
 - DCL (Data Control Language): It is used to define access privileges and security levels
 
-Common DDL features are creating, modifying, and deleting objects (such as tables and indexes). The corresponding commands are CREATE, ALTER, and DROP.
+Common DDL features are creating, modifying, and deleting objects (such as tables and indexes). The corresponding commands are `CREATE`, `ALTER`, and `DROP`.
 
 ## Show, create and drop a database
 
@@ -78,7 +78,7 @@ To create a table, use the `CREATE TABLE` statement:
 CREATE TABLE table_name column_name data_type constraint;
 ```
 
-For example, to create a table named `person` including number, name, birthday and others, use the following statement:
+For example, to create a table named `person` which includes fields such as number, name, and birthday, use the following statement:
 
 {{< copyable "sql" >}}
 
@@ -126,7 +126,7 @@ or
 ALTER TABLE person ADD INDEX person_id (id);
 ```
 
-To create a unique index for the column whose value is unique, use the `CREATE UNIQUE INDEX` or `ALTER TABLE` statement:
+To create a unique index for the column whose value is unique, use the `CREATE UNIQUE INDEX` statement:
 
 {{< copyable "sql" >}}
 
@@ -134,7 +134,7 @@ To create a unique index for the column whose value is unique, use the `CREATE U
 CREATE UNIQUE INDEX person_unique_id ON person (id);
 ```
 
-or
+or use the `ALTER TABLE` statement:
 
 {{< copyable "sql" >}}
 
@@ -150,7 +150,7 @@ To show all the indexes in a table, use the `SHOW INDEX` statement:
 SHOW INDEX from person;
 ```
 
-To delete an index, use the `DROP INDEX` or `ALTER TABLE` statement. `DROP INDEX` can embed `ALTER TABLE` statements.:
+To delete an index, use the `DROP INDEX` or `ALTER TABLE` statement. `DROP INDEX` can be nested in `ALTER TABLE`:
 
 {{< copyable "sql" >}}
 
@@ -168,9 +168,9 @@ ALTER TABLE person DROP INDEX person_unique_id;
 > 
 > DDL operations are not transactions. You don't need corresponding COMMIT statements when executing DDL.
 >
-> Common DML features are adding, modifying, and deleting tables. The corresponding commands are CREATE,  ALTER,and DELETE.
+> Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
 
-## Insert, select, update, and delete data
+## Insert, update, and delete data
 
 To insert data into a table, use the `INSERT` statement:
 
@@ -180,7 +180,7 @@ To insert data into a table, use the `INSERT` statement:
 INSERT INTO person VALUES("1","tom","20170912");
 ```
 
-To insert data into a table containing data, use the `INSERT` statement:
+To insert data into a table containing data of some fields, use the `INSERT` statement:
 
 {{< copyable "sql" >}}
 
@@ -188,7 +188,7 @@ To insert data into a table containing data, use the `INSERT` statement:
 INSERT INTO person(id,name) VALUES("2","bob");
 ```
 
-To update the data in a table, use the `UPDATE` statement:
+To update some fields of a record in a table, use the `UPDATE` statement:
 
 {{< copyable "sql" >}}
 
@@ -206,7 +206,7 @@ DELETE FROM person WHERE id=2;
 
 > **Note:**
 > 
-> UPDATE and DELETE without WHERE filter operate on the entire table.
+> The `UPDATE` and `DELETE` statements without the `WHERE` clause as a filter operate on the entire table.
 >
 > DQL is used to retrieve the desired data rows from a table or multiple tables, usually the core content.
 
@@ -233,7 +233,7 @@ SELECT name FROM person;
 +------+
 ```
 
-Use the WHERE clause to filter all records for eligibility and then return:
+Use the `WHERE` clause to filter all records that match the conditions and then return the result:
 
 {{< copyable "sql" >}}
 
