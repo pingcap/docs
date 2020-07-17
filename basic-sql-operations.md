@@ -52,13 +52,15 @@ To show all the tables in a database, use the `SHOW TABLES` statement:
 SHOW TABLES FROM mysql;
 ```
 
-To create a database named `samp_db`, use the `CREATE DATABASE` statement:
+To create a database, use the `CREATE DATABASE` statement:
 
 {{< copyable "sql" >}}
 
 ```sql
 CREATE DATABASE db_name [options];
 ```
+
+To create a database named `samp_db`, use the following statement:
 
 {{< copyable "sql" >}}
 
