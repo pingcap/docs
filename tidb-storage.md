@@ -14,9 +14,9 @@ This document introduces some design ideas and key concepts of TiKV.
 The first thing to decide for a data storage system is the data storage model, that is, in what form the data is saved. TiKV's choice is the Key-Value model and provides an ordered traversal method. There are two key points for TiKV data storage model:
 
 + This is a huge Map (similar to `std::Map` in C++) , which stores Key-Value pairs.
-+ The Key-Value pair in the Map is ordered in the binary order of the Key, which means you can Seek the position of a particular Key, and then call the Next method to get the Key-Value pairs larger than this Key in an incremental order.
++ The Key-Value pair in the Map is ordered according to Keys' binary order, which means you can Seek the position of a particular Key and then call the Next method to get the Key-Value pairs larger than this Key in incremental order.
 
-Note that the KV storage model for TiKV described in this document has nothing to do with tables in SQL. This document does not discuss any concepts related to SQL and focuses on how to implement a high-performance, high-reliability, distributed Key-Value storage such as TiKV.
+Note that the KV storage model for TiKV described in this document has nothing to do with tables of SQL. This document does not discuss any concepts related to SQL and only focuses on how to implement a high-performance, high-reliability, distributed Key-Value storage such as TiKV.
 
 ## Local storage (RocksDB)
 
@@ -27,7 +27,7 @@ RocksDB is an excellent standalone storage engine open-sourced by Facebook. This
 
 What's more, the implementation of TiKV faces a more difficult thing: how to secure data safety in case a single machine fails?
 
-A simple way is to replicate data to multiple machines, so that even if one machine fails, the replicas on other machines are still available. To put it difficult, you need a data replication scheme that is reliable, efficient, and able to handle the situation of a failed replica. All of these are made possible by the Raft algorithm.
+A simple way is to replicate data to multiple machines, so that even if one machine fails, the replicas on other machines are still available. In other words, you need a data replication scheme that is reliable, efficient, and able to handle the situation of a failed replica. All of these are made possible by the Raft algorithm.
 
 Raft is a consensus algorithm. This document only briefly introduces Raft. For more details, you can see [In Search of an Understandable Consensus Algorithm](https://raft.github.io/raft.pdf). The Raft has several important features:
 
@@ -35,7 +35,7 @@ Raft is a consensus algorithm. This document only briefly introduces Raft. For m
 - Membership changes (such as adding replicas, deleting replicas, transferring leaders, and so on)
 - Log replication
 
-TiKV use Raft to perform data replication. Each data change will be recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft group. However, according to Raft protocol, success writes only needs that data is replicated to the majority of nodes.
+TiKV use Raft to perform data replication. Each data change will be recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft group. However, according to Raft protocol, successful writes only need that data is replicated to the majority of nodes.
 
 ![Raft in TiDB](/media/tidb-storage-1.png)
 
@@ -46,10 +46,10 @@ In summary, TiKV can quickly store data on disk via the standalone machine Rocks
 To make it easy to understand, let's assume that all data only has one replica. As mentioned earlier, TiKV can be regarded as a large, orderly KV Map, so data is distributed across multiple machines in order to achieve horizontal scalability.
 For a KV system, there are two typical solutions to distributing data across multiple machines:
 
-* Hash: create Hash by Key and select the corresponding storage node according to the Hash value.
+* Hash: Create Hash by Key and select the corresponding storage node according to the Hash value.
 * Range: Divide ranges by Key, where a segment of serial Key is stored on a node.
 
-TiKV chooses the second solution that divides the whole Key-Value space into a series of consecutive Key segments. Each segment is called a Region. There is a size limit for each Region to store data (the default value is 96 MB and the size can be configured. Each Region can be described with `[StartKey, EndKey)` such a left-inclusive and right-exclusive interval.
+TiKV chooses the second solution that divides the whole Key-Value space into a series of consecutive Key segments. Each segment is called a Region. There is a size limit for each Region to store data (the default value is 96 MB and the size can be configured). Each Region can be described by `[StartKey, EndKey)`, a left-inclusive and right-exclusive interval.
 
 ![Region in TiDB](/media/tidb-storage-2.png)
 
@@ -60,9 +60,9 @@ Note that the Region here has nothing to do with the table in SQL. In this docum
 
 These two tasks are very important and will be introduced one by one.
 
-* First, data is divided into many Regions according to Key, and the data for each Region is stored on only one node (ignoring multiple replicas). The TiDB system has a PD component PD that is responsible for spreading Regions as evenly as possible across all nodes in the cluster,
+* First, data is divided into many Regions according to Key, and the data for each Region is stored on only one node (ignoring multiple replicas). The TiDB system has a PD component that is responsible for spreading Regions as evenly as possible across all nodes in the cluster,
  In this way, on one hand, the storage capacity is scaled horizontally (Regions on the other nodes are automatically scheduled to the newly added node); on the other hand, load balancing is achieved (the situation where one node has a lot of data while the others have little will not occur).
- At the same time, in order to ensure that the upper client can access the needed data, there is a component (PD) in the system to record the distribution of Regions on the node, that is, the exact Region of a Key and the node of that Region placed through any Key (that is, the location routing information of the Key). The PD component that is responsible for these two important tasks will be introduced later.
+ At the same time, in order to ensure that the upper client can access the needed data, there is a component (PD) in the system to record the distribution of Regions on the node, that is, the exact Region of a Key and the node of that Region placed through any Key.
 
 * For the second task, TiKV replicates data in Regions, which means that data in one Region will have multiple replicas with the name “Replica”. Multiple replicas of a Region are stored on different nodes to form a Raft Group, which is kept consistent through the Raft algorithm. One of the replicas serves as the Leader of the Group and other as the Follower. By default, all reads and writes are processed through the Leader, where reads are done and write are replicated to followers. The following diagram shows the whole picture about Region and Raft group.
 
@@ -102,4 +102,4 @@ Note that for multiple versions of the same Key, versions with larger numbers ar
 
 ## Distributed ACID transaction
 
-Transaction of TiKV adopts the model used by Google in BigTable: [Percolator](https://research.google.com/pubs/pub36726.html). TiKV is implemented inspired by this paper, with a lot of optimizations. See [transaction overview](/transaction-overview.md) for details.
+Transaction of TiKV adopts the model used by Google in BigTable: [Percolator](https://research.google.com/pubs/pub36726.html). TiKV's implementation is inspired by this paper, with a lot of optimizations. See [transaction overview](/transaction-overview.md) for details.
