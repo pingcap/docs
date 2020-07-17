@@ -8,17 +8,19 @@ aliases: ['/docs/dev/schema-object-names/','/docs/dev/reference/sql/language-str
 
 <!-- markdownlint-disable MD038 -->
 
-This article introduces schema object names in TiDB SQL statements.
+This document introduces schema object names in TiDB SQL statements.
 
-Schema object names are used to name all schema objects in TiDB, including database, table, index, column, alias, etc. You can quote these objects by identifiers in SQL statements.
+Schema object names are used to name all schema objects in TiDB, including database, table, index, column, alias, and so on. You can quote these objects using identifiers in SQL statements.
 
-You can use the backtick to enclose the identifier, ie `SELECT * FROM t` can also be written as`` SELECT * FROM `t` ``. But if there is at least one special character in the identifier, or it is a reserved keyword, it must be enclosed in the backtick to refer to the schema object it represents.
+You can use backticks to enclose the identifier. For example, `SELECT * FROM t` can also be written as `` SELECT * FROM `t` ``. But if the identifier includes one or more special characters or is a reserved keyword, it must be enclosed in backticks to quote the schema object it represents.
+
+{{< copyable "sql" >}}
 
 ```sql
-mysql> SELECT * FROM `table` WHERE `table`.id = 20;
+SELECT * FROM `table` WHERE `table`.id = 20;
 ```
 
-If you set `ANSI_QUOTES` in SQL MODE, TiDB will recognize the string enclosed in double quotes `"` as identifier.
+If you set `ANSI_QUOTES` in SQL MODE, TiDB will recognize the string enclosed in double quotation marks `"` as an identifier.
 
 ```sql
 MySQL [test]> CREATE TABLE "test" (a varchar(10));
