@@ -57,6 +57,13 @@ SELECT * FROM character_sets;
 5 rows in set (0.00 sec)
 ```
 
+The description of columns in the `CHARACTER_SETS` table is as follows:
+
+* `CHARACTER_SET_NAME`: The name of the character set.
+* `DEFAULT_COLLATE_NAME`：The default collation name of the character set.
+* `DESCRIPTION`：The description of the character set
+* `MAXLEN`：The maximum length required to store a character in this character set.
+
 ### COLLATIONS table
 
 The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table.  Currently this table is included only for compatibility with MySQL, as TiDB only supports binary collation:
@@ -101,6 +108,15 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 26 rows in set (0.00 sec)
 ```
 
+The description of columns in the `COLLATION` table is as follows:
+
+* `COLLATION_NAME`: The name of the collation.
+* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
+* `ID`: The ID of the collation.
+* `IS_DEFAULT`: Whether this collation is the default collation of the character set it belongs to.
+* `IS_COMPILED`: Whether the character set is compiled into the server.
+* `SORTLEN`: The minimum length of memory allocated when the collation sorts characters.
+
 ### COLLATION_CHARACTER_SET_APPLICABILITY table
 
 The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applicable character set name.  Similar to the `COLLATIONS` table, it is included only for compatibility with MySQL:
@@ -111,39 +127,16 @@ The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applica
 SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
 ```
 
-```
-+------------------------+--------------------+
-| COLLATION_NAME         | CHARACTER_SET_NAME |
-+------------------------+--------------------+
-| utf8mb4_general_ci     | utf8mb4            |
-| utf8mb4_bin            | utf8mb4            |
-| utf8mb4_unicode_ci     | utf8mb4            |
-| utf8mb4_icelandic_ci   | utf8mb4            |
-| utf8mb4_latvian_ci     | utf8mb4            |
-| utf8mb4_romanian_ci    | utf8mb4            |
-| utf8mb4_slovenian_ci   | utf8mb4            |
-| utf8mb4_polish_ci      | utf8mb4            |
-| utf8mb4_estonian_ci    | utf8mb4            |
-| utf8mb4_spanish_ci     | utf8mb4            |
-| utf8mb4_swedish_ci     | utf8mb4            |
-| utf8mb4_turkish_ci     | utf8mb4            |
-| utf8mb4_czech_ci       | utf8mb4            |
-| utf8mb4_danish_ci      | utf8mb4            |
-| utf8mb4_lithuanian_ci  | utf8mb4            |
-| utf8mb4_slovak_ci      | utf8mb4            |
-| utf8mb4_spanish2_ci    | utf8mb4            |
-| utf8mb4_roman_ci       | utf8mb4            |
-| utf8mb4_persian_ci     | utf8mb4            |
-| utf8mb4_esperanto_ci   | utf8mb4            |
-| utf8mb4_hungarian_ci   | utf8mb4            |
-| utf8mb4_sinhala_ci     | utf8mb4            |
-| utf8mb4_german2_ci     | utf8mb4            |
-| utf8mb4_croatian_ci    | utf8mb4            |
-| utf8mb4_unicode_520_ci | utf8mb4            |
-| utf8mb4_vietnamese_ci  | utf8mb4            |
-+------------------------+--------------------+
-26 rows in set (0.00 sec)
-```
++----------------+--------------------+
+| COLLATION_NAME | CHARACTER_SET_NAME |
++----------------+--------------------+
+| utf8mb4_bin    | utf8mb4            |
++----------------+--------------------+
+
+The description of columns in the `COLLATION_CHARACTER_SET_APPLICABILITY` table is as follows:
+
+* `COLLATION_NAME`: The name of the collation.
+* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
 
 ### COLUMNS table
 
