@@ -373,31 +373,6 @@ DEFAULT_CHARACTER_SET_NAME: utf8mb4
 4 rows in set (0.00 sec)
 ```
 
-<<<<<<< HEAD
-=======
-## CLUSTER_PROCESSLIST
-
-`CLUSTER_PROCESSLIST` is the cluster system table corresponding to `PROCESSLIST`. It is used to query the `PROCESSLIST` information of all TiDB nodes in the cluster. The table schema of `CLUSTER_PROCESSLIST` has one more column than `PROCESSLIST`, the `INSTANCE` column, which stores the address of the TiDB node this row of data is from.
-
-{{< copyable "sql" >}}
-
-```sql
-SELECT * FROM information_schema.cluster_processlist;
-```
-
-```sql
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
-| INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               |
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
-| 10.0.1.22:10080 | 150 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077223) |
-| 10.0.1.22:10080 | 138 | root | 10.0.1.1 | test | Query   | 0    | autocommit | SELECT * FROM information_schema.cluster_processlist | 0   | 05-28 03:54:21.230(416976223923077220) |
-| 10.0.1.22:10080 | 151 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077224) |
-| 10.0.1.21:10080 | 15  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077222) |
-| 10.0.1.21:10080 | 14  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077225) |
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+
-```
-
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 ### SESSION_VARIABLES table
 
 The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement:
@@ -431,7 +406,6 @@ SELECT * FROM session_variables LIMIT 10;
 The `SLOW_QUERY` table provides the slow query information, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance of the SQL engine, see [Slow Query Log Document](/identify-slow-queries.md).
 
 ```sql
-<<<<<<< HEAD
 mysql> desc information_schema.slow_query;
 +---------------+---------------------+------+------+---------+-------+
 | Field         | Type                | Null | Key  | Default | Extra |
@@ -465,94 +439,6 @@ mysql> desc information_schema.slow_query;
 | Succ          | tinyint(1) unsigned | YES  |      | NULL    |       |
 | Query         | longblob unsigned   | YES  |      | NULL    |       |
 +---------------+---------------------+------+------+---------+-------+
-=======
-desc information_schema.cluster_slow_query;
-```
-
-```sql
-+---------------------------+---------------------+------+-----+---------+-------+
-| Field                     | Type                | Null | Key | Default | Extra |
-+---------------------------+---------------------+------+-----+---------+-------+
-| INSTANCE                  | varchar(64)         | YES  |     | <null>  |       |
-| Time                      | timestamp unsigned  | YES  |     | <null>  |       |
-| Txn_start_ts              | bigint(20) unsigned | YES  |     | <null>  |       |
-| User                      | varchar(64)         | YES  |     | <null>  |       |
-| Host                      | varchar(64)         | YES  |     | <null>  |       |
-| Conn_ID                   | bigint(20) unsigned | YES  |     | <null>  |       |
-| Query_time                | double unsigned     | YES  |     | <null>  |       |
-| Parse_time                | double unsigned     | YES  |     | <null>  |       |
-| Compile_time              | double unsigned     | YES  |     | <null>  |       |
-| Prewrite_time             | double unsigned     | YES  |     | <null>  |       |
-| Wait_prewrite_binlog_time | double unsigned     | YES  |     | <null>  |       |
-| Commit_time               | double unsigned     | YES  |     | <null>  |       |
-| Get_commit_ts_time        | double unsigned     | YES  |     | <null>  |       |
-| Commit_backoff_time       | double unsigned     | YES  |     | <null>  |       |
-| Backoff_types             | varchar(64)         | YES  |     | <null>  |       |
-| Resolve_lock_time         | double unsigned     | YES  |     | <null>  |       |
-| Local_latch_wait_time     | double unsigned     | YES  |     | <null>  |       |
-| Write_keys                | bigint(22) unsigned | YES  |     | <null>  |       |
-| Write_size                | bigint(22) unsigned | YES  |     | <null>  |       |
-| Prewrite_region           | bigint(22) unsigned | YES  |     | <null>  |       |
-| Txn_retry                 | bigint(22) unsigned | YES  |     | <null>  |       |
-| Process_time              | double unsigned     | YES  |     | <null>  |       |
-| Wait_time                 | double unsigned     | YES  |     | <null>  |       |
-| Backoff_time              | double unsigned     | YES  |     | <null>  |       |
-| LockKeys_time             | double unsigned     | YES  |     | <null>  |       |
-| Request_count             | bigint(20) unsigned | YES  |     | <null>  |       |
-| Total_keys                | bigint(20) unsigned | YES  |     | <null>  |       |
-| Process_keys              | bigint(20) unsigned | YES  |     | <null>  |       |
-| DB                        | varchar(64)         | YES  |     | <null>  |       |
-| Index_names               | varchar(100)        | YES  |     | <null>  |       |
-| Is_internal               | tinyint(1) unsigned | YES  |     | <null>  |       |
-| Digest                    | varchar(64)         | YES  |     | <null>  |       |
-| Stats                     | varchar(512)        | YES  |     | <null>  |       |
-| Cop_proc_avg              | double unsigned     | YES  |     | <null>  |       |
-| Cop_proc_p90              | double unsigned     | YES  |     | <null>  |       |
-| Cop_proc_max              | double unsigned     | YES  |     | <null>  |       |
-| Cop_proc_addr             | varchar(64)         | YES  |     | <null>  |       |
-| Cop_wait_avg              | double unsigned     | YES  |     | <null>  |       |
-| Cop_wait_p90              | double unsigned     | YES  |     | <null>  |       |
-| Cop_wait_max              | double unsigned     | YES  |     | <null>  |       |
-| Cop_wait_addr             | varchar(64)         | YES  |     | <null>  |       |
-| Mem_max                   | bigint(20) unsigned | YES  |     | <null>  |       |
-| Succ                      | tinyint(1) unsigned | YES  |     | <null>  |       |
-| Plan_from_cache           | tinyint(1)          | YES  |     | <null>  |       |
-| Plan                      | longblob unsigned   | YES  |     | <null>  |       |
-| Plan_digest               | varchar(128)        | YES  |     | <null>  |       |
-| Prev_stmt                 | longblob unsigned   | YES  |     | <null>  |       |
-| Query                     | longblob unsigned   | YES  |     | <null>  |       |
-+---------------------------+---------------------+------+-----+---------+-------+
-```
-
-When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-desc select count(*) from information_schema.cluster_slow_query where user = 'u1';
-```
-
-```sql
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-| id                       | estRows  | task      | access object            | operator info                                        |
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-| StreamAgg_20             | 1.00     | root      |                          | funcs:count(Column#53)->Column#51                    |
-| └─TableReader_21         | 1.00     | root      |                          | data:StreamAgg_9                                     |
-|   └─StreamAgg_9          | 1.00     | cop[tidb] |                          | funcs:count(1)->Column#53                            |
-|     └─Selection_19       | 10.00    | cop[tidb] |                          | eq(information_schema.cluster_slow_query.user, "u1") |
-|       └─TableFullScan_18 | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-```
-
-In the above execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
-
-Currently, because statistics of the system tables are not collected, sometimes some aggregation operators cannot be pushed down, which results in slow execution. In this case, you can manually specify the SQL HINT to push down the aggregation operators. For example:
-
-{{< copyable "sql" >}}
-
-```sql
-select /*+ AGG_TO_COP() */ count(*) from information_schema.cluster_slow_query group by user;
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 ```
 
 ### STATISTICS table
@@ -565,7 +451,6 @@ The `STATISTICS` table provides information about table indexes:
 desc statistics;
 ```
 
-<<<<<<< HEAD
 ```
 +---------------|---------------------|------|------|---------|-------+
 | Field         | Type                | Null | Key  | Default | Extra |
@@ -587,31 +472,6 @@ desc statistics;
 | COMMENT       | varchar(16)         | YES  |      | NULL    |       |
 | INDEX_COMMENT | varchar(1024)       | YES  |      | NULL    |       |
 +---------------|---------------------|------|------|---------|-------+
-=======
-```sql
-+---------------+---------------+------+------+---------+-------+
-| Field         | Type          | Null | Key  | Default | Extra |
-+---------------+---------------+------+------+---------+-------+
-| TABLE_CATALOG | varchar(512)  | YES  |      | NULL    |       |
-| TABLE_SCHEMA  | varchar(64)   | YES  |      | NULL    |       |
-| TABLE_NAME    | varchar(64)   | YES  |      | NULL    |       |
-| NON_UNIQUE    | varchar(1)    | YES  |      | NULL    |       |
-| INDEX_SCHEMA  | varchar(64)   | YES  |      | NULL    |       |
-| INDEX_NAME    | varchar(64)   | YES  |      | NULL    |       |
-| SEQ_IN_INDEX  | bigint(2)     | YES  |      | NULL    |       |
-| COLUMN_NAME   | varchar(21)   | YES  |      | NULL    |       |
-| COLLATION     | varchar(1)    | YES  |      | NULL    |       |
-| CARDINALITY   | bigint(21)    | YES  |      | NULL    |       |
-| SUB_PART      | bigint(3)     | YES  |      | NULL    |       |
-| PACKED        | varchar(10)   | YES  |      | NULL    |       |
-| NULLABLE      | varchar(3)    | YES  |      | NULL    |       |
-| INDEX_TYPE    | varchar(16)   | YES  |      | NULL    |       |
-| COMMENT       | varchar(16)   | YES  |      | NULL    |       |
-| INDEX_COMMENT | varchar(1024) | YES  |      | NULL    |       |
-| IS_VISIBLE    | varchar(3)    | YES  |      | NULL    |       |
-| Expression    | varchar(64)   | YES  |      | NULL    |       |
-+---------------+---------------+------+------+---------+-------+
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 ```
 
 The following statements are equivalent:
@@ -966,14 +826,10 @@ Fields in the `VIEWS` table are described as follows:
 The `TIDB_INDEXES` table provides index-related information.
 
 ```sql
-<<<<<<< HEAD
-mysql> desc tidb_indexes\G
-=======
 desc tidb_indexes\G
 ```
 
 ```sql
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIDB_INDEXES
 Create Table: CREATE TABLE `TIDB_INDEXES` (
@@ -1012,14 +868,10 @@ where
 The `TIDB_HOT_REGIONS` table provides the hot Region information in the current TiKV instance.
 
 ```sql
-<<<<<<< HEAD
-mysql> desc tidb_hot_regions\G
-=======
 desc tidb_hot_regions\G
 ```
 
 ```sql
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIDB_HOT_REGIONS
 Create Table: CREATE TABLE `TIDB_HOT_REGIONS` (
@@ -1044,14 +896,10 @@ Create Table: CREATE TABLE `TIDB_HOT_REGIONS` (
 The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.
 
 ```sql
-<<<<<<< HEAD
-mysql> desc tikv_store_status\G
-=======
 desc tikv_store_status\G
 ```
 
 ```sql
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIKV_STORE_STATUS
 Create Table: CREATE TABLE `TIKV_STORE_STATUS` (
@@ -1083,14 +931,10 @@ Create Table: CREATE TABLE `TIKV_STORE_STATUS` (
 The `TIKV_REGION_STATUS` table shows some basic information of TiKV Regions via PD's API, like the Region ID, starting and ending key-values, and read and write traffic.
 
 ```sql
-<<<<<<< HEAD
-mysql> desc tikv_region_status\G
-=======
 desc tikv_region_status\G
 ```
 
 ```sql
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIKV_REGION_STATUS
 Create Table: CREATE TABLE `TIKV_REGION_STATUS` (
@@ -1120,14 +964,10 @@ select * from tikv_region_status order by written_bytes desc limit 3;
 The `TIKV_REGION_PEERS` table shows detailed information of a single Region node in TiKV, like whether it is a learner or leader.
 
 ```sql
-<<<<<<< HEAD
-mysql> desc tikv_region_peers\G
-=======
 desc tikv_region_peers\G
 ```
 
 ```sql
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: TIKV_REGION_PEERS
 Create Table: CREATE TABLE `TIKV_REGION_PEERS` (
@@ -1172,14 +1012,10 @@ where
 The `ANALYZE_STATUS` table shows the execution status of the `ANALYZE` command in the current cluster.
 
 ```sql
-<<<<<<< HEAD
-mysql> desc analyze_status\G
-=======
 desc analyze_status\G
 ```
 
 ```sql
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: ANALYZE_STATUS
 Create Table: CREATE TABLE `ANALYZE_STATUS` (
@@ -1201,14 +1037,10 @@ The `STATE` column shows the execution status of a specific `ANALYZE` task. Its 
 The `SLOW_QUERY` table maps slow query logs. Its column names and field names of slow query logs have an one-to-one corresponse relationship. For details, see [Identify Slow Queries](/identify-slow-queries.md#identify-slow-queries).
 
 ```sql
-<<<<<<< HEAD
-mysql> desc slow_query\G
-=======
 desc slow_query\G
 ```
 
 ```sql
->>>>>>> 56beade... system-tables: add some descriptions for columns (#3269)
 *************************** 1. row ***************************
        Table: SLOW_QUERY
 Create Table: CREATE TABLE `SLOW_QUERY` (
