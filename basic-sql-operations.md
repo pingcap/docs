@@ -58,7 +58,7 @@ To create a database named `samp_db`, use the `CREATE DATABASE` statement:
 CREATE DATABASE IF NOT EXISTS samp_db;
 ```
 
-Add `IF NOT EXISTS` to  prevent an error if the database exists.
+Add `IF NOT EXISTS` to prevent an error if the database exists.
 
 To delete a database, use the `DROP DATABASE` statement:
 
@@ -180,7 +180,7 @@ To insert data into a table, use the `INSERT` statement:
 INSERT INTO person VALUES("1","tom","20170912");
 ```
 
-To insert data into a table containing data of some fields, use the `INSERT` statement:
+To insert a record containing data of some fields into a table, use the `INSERT` statement:
 
 {{< copyable "sql" >}}
 
@@ -241,7 +241,7 @@ Use the `WHERE` clause to filter all records that match the conditions and then 
 SELECT * FROM person where id<5;
 ```
 
-Common DCL features are creating or deleting users, and managing user privileges.
+DCL are usually used to create or delete users, and manage user privileges.
 
 ## Create, authorize, and delete a user
 
