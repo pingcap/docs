@@ -18,6 +18,8 @@ SQL is divided into the following 4 types according to their functions:
 
 - DML (Data Manipulation Language): It is used to manipulate application related records.
 
+- DQL (Data Query Language)：It is used to query the records after conditional filtering.
+
 - DCL (Data Control Language): It is used to define access privileges and security levels
 
 Common DDL features are creating, modifying, and deleting objects (such as tables and indexes). The corresponding commands are `CREATE`, `ALTER`, and `DROP`.
@@ -51,6 +53,12 @@ SHOW TABLES FROM mysql;
 ```
 
 To create a database named `samp_db`, use the `CREATE DATABASE` statement:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE DATABASE db_name [options];
+```
 
 {{< copyable "sql" >}}
 
