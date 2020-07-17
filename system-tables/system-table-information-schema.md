@@ -849,7 +849,7 @@ Fields in the `TIKV_REGION_PEERS` table are described as follows:
 * `REGION_ID`: The Region ID.
 * `PEER_ID`: The ID of the Region peer.
 * `STORE_ID`: The ID of the TiKV store where the Region is located.
-* `IS_LEARNER`: Whether the peer is leaner.
+* `IS_LEARNER`: Whether the peer is learner.
 * `IS_LEADER`: Whether the peer is leader.
 * `STATUS`: The statuses of a peer:
     * `PENDING`: Temporarily unavailable.
