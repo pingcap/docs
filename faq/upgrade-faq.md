@@ -1,26 +1,26 @@
 ---
-title: FAQs Upgrade and After Upgrade
-summary: Learn about some FAQs and their solutions during and after TiDB upgrade.
+title: Upgrade and After Upgrade FAQs
+summary: Learn about some FAQs and the solutions during and after upgrading TiDB.
 aliases: ['/docs/dev/faq/upgrade-faq/','/docs/dev/faq/upgrade/']
 ---
 
-# FAQs Upgrade and After Upgrade
+# Upgrade and After Upgrade FAQs
 
 This document introduces some FAQs and their solutions when or after you upgrade TiDB.
 
-## FAQs Upgrade
+## Upgrade FAQs
 
 This section lists some FAQs and their solutions when you upgrade TiDB.
 
-### How are the rolling updates done?
+### What are the effects of rolling updates?
 
-When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3).  If the Pump/Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you update TiDB, Pump is also updated.
+When you apply rolling updates to the TiDB services, the running application is not affected. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3). If the Pump or Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you upgrade TiDB, Pump is also upgraded.
 
-### How to upgrade Binary
+### How to upgrade TiDB using the binary?
 
-It is not recommended to deploy TiDB using Binary. The support for upgrading using Binary is not as friendly as using TiUP. It is recommended to [deploy TiDB using TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup).
+It is not recommended to deploy TiDB using the binary. The TiDB support for upgrading using Binary is not as friendly as using TiUP. It is recommended to [deploy TiDB using TiUP](/production-deployment-using-tiup.md).
 
-## FAQs After Upgrade
+## After upgrade FAQs
 
 This section lists some FAQs and their solutions after you upgrade TiDB.
 
