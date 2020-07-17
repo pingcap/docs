@@ -26,7 +26,7 @@ RocksDB is an excellent standalone storage engine open-sourced by Facebook. This
 
 ## Raft protocol
 
-What's more, the implementation of TiKV faces a more difficult thing: how to secure data safety in case a single machine fails?
+What's more, the implementation of TiKV faces a more difficult thing: to secure data safety in case a single machine fails.
 
 A simple way is to replicate data to multiple machines, so that even if one machine fails, the replicas on other machines are still available. In other words, you need a data replication scheme that is reliable, efficient, and able to handle the situation of a failed replica. All of these are made possible by the Raft algorithm.
 
