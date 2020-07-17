@@ -91,7 +91,7 @@ In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result 
 > **Note:**
 >
 > - Currently, TiDB only supports the case where a comparison operator is connected by a column (at one end) and a constant value (at the other end), or the case that the calculation result is a constant. You cannot use query conditions like `year(birth_day) < 1992` as the index.
-> - It is recommended to compare data of the same type; otherwise, additional `cast` operations are introduced, and the index is not available. For example, regarding the condition `user_id = 123456`, if `user_id` is a string, you must define `123456` as a string constant.
+> - It is recommended to compare data of the same type; otherwise, additional `cast` operations are introduced, which causes the index to be unavailable. For example, regarding the condition `user_id = 123456`, if `user_id` is a string, you must define `123456` as a string constant.
 
 You can also use `AND` (intersection) and `OR` (union) to combine the range query conditions of one column. For a multi-dimensional composite index, you can use conditions in multiple columns. For example, regarding the composite index `(a, b, c)`:
 
