@@ -1,7 +1,6 @@
 ---
 title: Upgrade TiDB Using TiDB Ansible
 summary: Learn how to upgrade TiDB using TiDB Ansible.
-category: how-to
 aliases: ['/docs/dev/upgrade-tidb-using-ansible/','/docs/dev/how-to/upgrade/from-previous-version/','/docs/dev/how-to/upgrade/rolling-updates-with-ansible/']
 ---
 
@@ -225,3 +224,7 @@ ansible-playbook local_prepare.yml
 ```bash
 ansible-playbook rolling_update_monitor.yml
 ```
+
+> **Note:**
+>
+> By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
