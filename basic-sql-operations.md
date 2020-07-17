@@ -50,7 +50,7 @@ To show all the tables in a database, use the `SHOW TABLES` statement:
 SHOW TABLES FROM mysql;
 ```
 
-To create a database named `samp_db`, use the following statement:
+To create a database named `samp_db`, use the `CREATE DATABASE` statement:
 
 {{< copyable "sql" >}}
 
