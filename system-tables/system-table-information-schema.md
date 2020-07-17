@@ -972,7 +972,7 @@ Fields in the `VIEWS` table are described as follows:
 * `CHECK_OPTION`: The `CHECK_OPTION` value. The value options are `NONE`, `CASCADE`, and `LOCAL`.
 * `IS_UPDATABLE`: Whether `UPDATE`/`INSERT`/`DELETE` is applicable to the view. In TiDB, the value is always `NO`.
 * `DEFINER`: The name of the user who creates the view, which is in the format of `'user_name'@'host_name'`.
-* `SECURITY_TYPE`: The `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
+* `SECURITY_TYPE`: The value of `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
 * `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
 * `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
 
