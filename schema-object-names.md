@@ -107,7 +107,7 @@ To quote this identifier, use:
 `table_name`.`col_name`
 ```
 
-Instead of：
+Instead of:
 
 ```sql
 `table_name.col_name`
