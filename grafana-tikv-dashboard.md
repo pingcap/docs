@@ -11,7 +11,7 @@ If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Gr
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node_exporter, and so on. A lot of metrics are there to help you diagnose.
 
-You can get an overview of the component TiKV status from the **TiKV-Details** dashboard, where the key metrics are displayed.
+You can get an overview of the component TiKV status from the **TiKV-Details** dashboard, where the key metrics are displayed. According to the [Performance Map](https://asktug.com/_/tidb-performance-map/#/), you can check whether the status of the cluster is as expected.
 
 This document provides a detailed description of these key metrics on the **TiKV-Details** dashboard.
 
