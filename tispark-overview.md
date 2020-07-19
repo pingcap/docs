@@ -232,7 +232,7 @@ It is recommended to set `isolationLevel` to `NONE` to avoid large single transa
 
 > **Note:**
 >
-> When you use JDBC, the default value of `isolationLevel` is `READ_UNCOMMITTED`, which causes the error of not supporting isolation level transactions. It is recommended to set the value of `isolationLevel` to `NONE`.
+> When you use JDBC, the default value of `isolationLevel` is `READ_UNCOMMITTED`, which causes the error of unsupported isolation level transactions. It is recommended to set the value of `isolationLevel` to `NONE`.
 
 ## Statistics information
 
