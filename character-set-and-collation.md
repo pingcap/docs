@@ -1,7 +1,6 @@
 ---
 title: Character Set and Collation
 summary: Learn about the supported character sets and collations in TiDB.
-category: reference
 aliases: ['/docs/dev/character-set-and-collation/','/docs/dev/reference/sql/characterset-and-collation/','/docs/dev/reference/sql/character-set/']
 ---
 
@@ -32,7 +31,7 @@ SHOW CHARACTER SET;
 
 > **Note:**
 >
-> Each character set might correspond to multiple collations, but by default each character set corresponds to only one collation.
+> The default collations in TiDB (binary collations, with the suffix `_bin`) are different than [the default collations in MySQL](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (typically general collations, with the suffix `_general_ci`). This can cause incompatible behavior when specifying an explicit character set but relying on the implicit default collation to be chosen.
 
 You can use the following statement to view the collations (under the [new framework for collations](#new-framework-for-collations)) that corresponds to the character set.
 
@@ -295,9 +294,9 @@ Query OK, 0 rows affected
 insert into t values ('A');
 Query OK, 1 row affected
 insert into t values ('a');
-Query OK, 1 row affected # In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
+Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
 insert into t1 values ('a ');
-Query OK, 1 row affected # In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
+Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
 ```
 
 ### New framework for collations
@@ -331,9 +330,9 @@ Query OK, 0 rows affected (0.00 sec)
 insert into t values ('A');
 Query OK, 1 row affected (0.00 sec)
 insert into t values ('a');
-ERROR 1062 (23000): Duplicate entry 'a' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry 'a' for key 'PRIMARY' # TiDB is compatible with the case-insensitive collation of MySQL.
 insert into t values ('a ');
-ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
 > **Note:**
