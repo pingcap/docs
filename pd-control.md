@@ -655,10 +655,10 @@ Usage:
 >> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
 >> scheduler add shuffle-region-scheduler         // Randomly scheduling the regions on different stores
 >> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler
->> scheduler pause balance-region-scheduler 10     // Pause the balance-region scheduler for 10 seconds
->> scheduler pause all 10                          // Pause all schedulers for 10 seconds
->> scheduler resume balance-region-scheduler       // Continue to run the balance-region scheduler
->> scheduler resume all                            // Continue to run all schedulers
+>> scheduler pause balance-region-scheduler 10    // Pause the balance-region scheduler for 10 seconds
+>> scheduler pause all 10                         // Pause all schedulers for 10 seconds
+>> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
+>> scheduler resume all                           // Continue to run all schedulers
 >> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
 ```
 
