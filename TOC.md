@@ -294,6 +294,7 @@
     - [Statement Summary Table](/statement-summary-tables.md)
     - [Tune TiKV](/tune-tikv-performance.md)
     - [Operating System Tuning](/tune-operating-system.md)
+    - [Column Pruning](/column-pruning.md)
   + Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
     - [TiDB](/grafana-tidb-dashboard.md)
