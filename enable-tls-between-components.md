@@ -1,7 +1,6 @@
 ---
 title: Enable TLS Authentication
 summary: Learn how to enable TLS authentication in a TiDB cluster.
-category: how-to
 aliases: ['/docs/v3.0/enable-tls-between-components/','/docs/v3.0/how-to/secure/enable-tls-between-components/','/docs/op-guide/security/']
 ---
 

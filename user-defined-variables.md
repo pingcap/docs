@@ -1,7 +1,6 @@
 ---
 title: User-Defined Variables
 summary: Learn how to use user-defined variables.
-category: reference
 aliases: ['/docs/v3.0/user-defined-variables/','/docs/v3.0/reference/sql/language-structure/user-defined-variables/','/docs/sql/user-defined-variables/']
 ---
 
