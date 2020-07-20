@@ -258,7 +258,7 @@ You can scale TiDB as your business grows.
 
 #### If Percolator uses distributed locks and the crash client keeps the lock, will the lock not be released?
 
-For more details, see [Percolator and TiDB Transaction Algorithm](https://pingcap.com/blog-cn/percolator-and-txn/)in Chinese.
+For more details, see [Percolator and TiDB Transaction Algorithm](https://pingcap.com/blog-cn/percolator-and-txn/) in Chinese.
 
 #### Why does TiDB use gRPC instead of Thrift? Is it because Google uses it?
 
@@ -389,9 +389,9 @@ If you previously deploy a PD cluster, but then you remove the PD data and deplo
 
 This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. Common conditions that cause this error: There is no data folder in the path specified by TiKV `--data-dir` (no update --data-dir after deleting or moving), restart the TiKV with the previous parameters.Please try [store delete](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string) function of pd-ctl, delete the previous store, and then restart TiKV.
 
-#### TiKV master and slave use the same compression algorithm, why the results are different?
+#### TiKV primary and secondary use the same compression algorithm, why the results are different?
 
-Currently, some files of TiKV master have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data size fluctuates occasionally. The underlying storage engine adjusts data as needed.
+Currently, some files of TiKV primary have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data size fluctuates occasionally. The underlying storage engine adjusts data as needed.
 
 #### What are the features of TiKV block cache?
 
