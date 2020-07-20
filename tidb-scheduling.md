@@ -36,20 +36,20 @@ The above situations can be classified into two types:
 1. A distributed and highly available storage system must meet the following requirements:
 
     * The right number of replicas.
-    * Replicas should be distributed on different machines according to different topologies.
-    * The cluster can perform automatic disaster recovery from TiKV peers failure.
+    * Replicas need to be distributed on different machines according to different topologies.
+    * The cluster can perform automatic disaster recovery from TiKV peers' failure.
 
 2. A good distributed system needs to have the following optimizations:
 
-    * All Region leaders are balanced;
-    * Storage size of all TiKV peers are balanced;
+    * All Region leaders are distributed evenly on stores;
+    * Storage capacity of all TiKV peers are balanced;
     * Hot spots are balanced;
-    * Speed of Region balance needs to be limited to ensure online services are stable;
-    * It's possible to make peers online/offline manually.
+    * Speed of load balancing for the Regions needs to be limited to ensure that online services are stable;
+    * Maintainers are able to to take peers online/offline manually.
 
-After the first type of requirements are satisfied, the system will be failure tolerable. After the second type of requirements are satisfied, resources will be utilized more efficiently and the system will have better scalability.
+After the first type of requirements is satisfied, the system will be failure tolerable. After the second type of requirements is satisfied, resources will be utilized more efficiently and the system will have better scalability.
 
-To achieve these targets, PD needs to collect information firstly, such as state of peers, information about Raft groups and peers' accessing statistics. Then we can specify some strategies on PD, so that PD can make scheduling plans from these information and strategies. Finally, PD distributes some operators to TiKVs to complete scheduling plans.
+To achieve the goals, PD needs to collect information firstly, such as state of peers, information about Raft groups and the statistics of accessing the peers. Then we need to specify some strategies for PD, so that PD can make scheduling plans from these information and strategies. Finally, PD distributes some operators to TiKV peers to complete scheduling plans.
 
 ## Basic scheduling operators
 
@@ -63,11 +63,11 @@ They are implemented by the Raft commands `AddReplica`, `RemoveReplica`, and `Tr
 
 ## Information collection
 
-Scheduling is based on information collection. In short, the PD scheduling component needs to know the states of all TiKV peers and all Regions. TiKV peers report these information to PD:
+Scheduling is based on information collection. In short, the PD scheduling component needs to know the states of all TiKV peers and all Regions. TiKV peers report the following information to PD:
 
 - State information reported by each TiKV peer:
 
-    TiKV sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L421) in the message. `StoreState` includes:
+    Each TiKV peer sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L421) in the heartbeat message. `StoreState` includes:
 
     * Total disk space
     * Available disk space
@@ -79,18 +79,18 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
 - Information reported by Region leaders:
 
-    Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L271), including:
+    Each Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L271), including:
 
     * Position of the leader itself
     * Positions of other replicas
     * The number of offline replicas
     * data read/write speed
 
-PD collects cluster information by these 2 types of heartbeats and then makes decision based on it.
+PD collects cluster information by the two types of heartbeats and then makes decision based on it.
 
 Besides, PD can get more information from an expanded interface to make a more precise decision. For example, if a store's heartbeats are broken, PD can't know whether the peer steps down temporarily or forever. It just waits a while (by default 30min) and then treats the store as offline if there are still no heartbeats received. Then PD balances all regions on the store to other stores.
 
-But sometimes stores are manually set offline by a maintainer, so that the maintainer can tell PD this by PD control interface. Then PD can balance all regions immediately.
+But sometimes stores are manually set offline by a maintainer, so the maintainer can tell PD this by the PD control interface. Then PD can balance all regions immediately.
 
 ## Scheduling strategies
 
@@ -98,7 +98,7 @@ After collecting the information, PD needs some strategies to make scheduling pl
 
 **Strategy 1: The number of replicas of a Region needs to be correct**
 
-PD can know that the replica count of a Region is incorrect from Region leader's heartbeat. If it happens, PD can adjust the replica count by adding/removing replica(s). The reason for incorrect replica count could be:
+PD can know that the replica count of a Region is incorrect from the Region leader's heartbeat. If it happens, PD can adjust the replica count by adding/removing replica(s). The reason for incorrect replica count can be:
 
 * Store failure, so some Region's replica count is less than expected;
 * Store recovery after failure, so some Region's replica count could be more than expected;
