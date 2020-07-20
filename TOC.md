@@ -86,6 +86,7 @@
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
+  + [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
   + [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
@@ -105,15 +106,22 @@
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [Subquery Related Optimizations](/subquery-optimization.md)
+        + [Column Pruning](/column-pruning.md)
+        + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
         + [Predicates Push Down](/predicates-push-down.md)
+        + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
+        + [Index Selection](/choose-index.md)
         + [Statistics](/statistics.md)
+        + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
+        + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
@@ -183,7 +191,11 @@
     + [Quick Start](/get-started-with-tispark.md)
     + [User Guide](/tispark-overview.md)
 + Reference
-  + [Architecture](/architecture.md)
+  + Cluster Architecture
+    + [Overview](/tidb-architecture.md)
+    + [Storage](/tidb-storage.md)
+    + [Computing](/tidb-computing.md)
+    + [Scheduling](/tidb-scheduling.md)
   + Key Monitoring Metrics
     + [Overview](/grafana-overview-dashboard.md)
     + [TiDB](/grafana-tidb-dashboard.md)
@@ -229,7 +241,7 @@
       + [`COMMIT`](/sql-statements/sql-statement-commit.md)
       + [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md)
       + [`CHANGE PUMP`](/sql-statements/sql-statement-change-pump.md)
-      + [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)
+      + [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
       + [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
       + [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
       + [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
@@ -243,7 +255,7 @@
       + [`DESC`](/sql-statements/sql-statement-desc.md)
       + [`DESCRIBE`](/sql-statements/sql-statement-describe.md)
       + [`DO`](/sql-statements/sql-statement-do.md)
-      + [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)
+      + [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)
       + [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
       + [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
       + [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
@@ -285,7 +297,7 @@
       + [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
       + [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
       + [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
-      + [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md)
+      + [`SHOW [GLOBAL|SESSION] BINDINGS`](/sql-statements/sql-statement-show-bindings.md)
       + [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)
       + [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       + [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
