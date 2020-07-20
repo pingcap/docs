@@ -163,7 +163,7 @@ In addition, TiDB has the following unique error codes:
 
     An unsupported privilege type is set.
 
-    See [privilege management](/privilege-management.md#tidb-各操作需要的权限) for the solution.
+    See [Privileges required for TiDB operations](/privilege-management.md#privileges-required-for-tidb-operations) for the solution.
 
 * Error Number: 8051
 
@@ -377,13 +377,13 @@ In addition, TiDB has the following unique error codes:
 
     Unsupported options are used when creating Sequence.
 
-    See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#参数说明) to find the list of the supported options.
+    See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#parameters) to find the list of the supported options.
 
 * Error Number: 8228
 
     Unsupported types are specified when using `setval` on Sequence.
     
-    See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#示例) to find the example of the function.
+    See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#examples) to find the example of the function.
     
 * Error Number: 8229
 
