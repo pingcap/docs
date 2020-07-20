@@ -9,7 +9,7 @@ PD works as the manager in a TiDB cluster, and it also schedules Regions in the 
 
 ## Scheduling situations
 
-TiKV is the distributed K/V storage engine used by TiDB. In TiKV, data is organized as Regions, which are replicated on several Stores. In all replicas, Leader is responsible for reading and writing, and Followers are responsible for replicating Raft logs from the Leader.
+TiKV is the distributed key-value storage engine used by TiDB. In TiKV, data is organized as Regions, which are replicated on several stores. In all replicas, a leader is responsible for reading and writing, and followers are responsible for replicating Raft logs from the leader.
 
 Now consider about the following situations:
 
@@ -18,16 +18,16 @@ Now consider about the following situations:
 * When a new TiKV store is added, data can be rebalanced to it;
 * When a TiKV store fails, PD needs to consider:
     * Recovery time of the failed store.
-        * If it's short (e.g. the service is restarted), scheduling is necessary or not.
+        * If it's short (e.g. the service is restarted), whether scheduling is necessary or not.
         * If it's long (e.g. disk fault, data is lost, etc.), how to do scheduling.
     * Replicas of all Regions.
-        * If replicas are not enough for some Regions, the cluster needs to complete them.
-        * If replicas are more than expected (e.g. failed store re-joins into the cluster after recovery), the cluster needs to delete them.
-* Read/Write operations are performed on leaders, which should not be distributed only on individual stores;
-* Not all Regions are hot, so load of all TiKV stores needs to be balanced;
+        * If the number of replicas is not enough for some Regions, PD needs to complete them.
+        * If the number of replicas is more than expected (e.g. the failed store re-joins into the cluster after recovery), PD needs to delete them.
+* Read/Write operations are performed on leaders, which can not be distributed only on a few individual stores;
+* Not all Regions are hot, so loads of all TiKV stores need to be balanced;
 * When Regions are in balancing, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
 
-These situations can occur at the same time, which makes it harder to resolve. Also, the whole system is changing dynamically, so a new component is necessary to collect all information about the cluster, and then adjust the cluster. So, PD is introduced into the TiDB cluster.
+These situations can occur at the same time, which makes it harder to resolve. Also, the whole system is changing dynamically, so a scheduler is needed to collect all information about the cluster, and then adjust the cluster. So, PD is introduced into the TiDB cluster.
 
 ## Scheduling requirements
 
@@ -67,7 +67,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
 - State information reported by each TiKV peer:
 
-    TiKV sends heartbeats to PD periodically. PD not only checks whether the Store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L421) in the message. `StoreState` includes:
+    TiKV sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L421) in the message. `StoreState` includes:
 
     * Total disk space
     * Available disk space
