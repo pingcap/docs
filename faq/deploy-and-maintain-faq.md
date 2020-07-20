@@ -1,15 +1,15 @@
 ---
-title: Deploy and Maintain FAQs
+title: Deploy Operation and Maintenance FAQs
 summary: Learn about the FAQs related to TiDB deployment, operations and maintenance.
 ---
 
-# Deploy and maintain FAQs
+# Deploy Operation and Maintenance FAQs
 
-This document introduces the FAQs related to TiDB deployment, operations and maintenance.
+This document summarizes the FAQs related to TiDB deployment, operations and maintenance.
 
-## Operating system requirements
+## Enviroment preparation 
 
-### What are the required operating system versions?
+The operating system version requirements are as follows:
 
 | Linux OS Platform        | Version      |
 | :-----------------------:| :----------: |
@@ -23,7 +23,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 A lot of TiDB tests have been carried out in CentOS 7.3, and many deployment best practices have been accumulated in CentOS 7.3. Therefore, it is recommended that you use the CentOS 7.3+ Linux operating system when deploying TiDB.
 
-## Server requirements
+## Server requirements FAQ
 
 You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture. The requirements and recommendations about server hardware configuration for development, testing and production environments are as follows:
 
@@ -64,7 +64,7 @@ For details, see [Software and Hardware Recommendations](/hardware-and-software-
 
 ## Install and deploy FAQ
 
-[TiUP](/tiup/tiup-overview.md) is recommended for the production environment. See [TiUP Deployment](/production-deployment-using-tiup.md).
+It is recommended to use TiUP to deploy TiDB cluster for the production environment. See [TiUP Deployment](/production-deployment-using-tiup.md).
 
 ### Why the modified `toml` configuration for TiKV/PD does not take effect?
 
@@ -108,11 +108,11 @@ Check the time difference between the machine time of the monitor and the time w
 
 > **Warning:**
 >
-> It is not recommended to deploy TiDB using TiDB Ansible since TiDB v4.0. [Use TiUP to deploy TiDB](/production-offline-deployment-using-tiup.md) instead.
+> We do not recommend you to deploy TiDB using this method. It is suitable for situations where the central control machine has no external network. For details, see [Deploy TiDB Offline Using TiDB Ansible](https://docs.pingcap.com/tidb/stable/offline-deployment-using-ansible).
 
 ### How to deploy TiDB quickly using Docker Compose on a single machine?
 
-You can use Docker Compose to build a TiDB cluster locally, including the cluster monitoring components. You can also customize the version and number of instances for each component. The configuration file can also be customized. You can only use this deployment method for testing and development environment. For details, see [Building the Cluster Using Docker Compose](/deploy-test-cluster-using-docker-compose.md).
+You can use Docker Compose to build a TiDB cluster locally, including the cluster monitoring components. You can also customize the version and number of instances for each component. The configuration file can also be customized. You can only use this deployment method for testing and development environment. For details, see [TiDB Docker Compose Deployment](/deploy-test-cluster-using-docker-compose.md).
 
 ### How to separately record the slow query log in TiDB? How to locate the slow query SQL statement?
 
@@ -130,7 +130,7 @@ You can use Docker Compose to build a TiDB cluster locally, including the cluste
 
 The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for PD to execute global management and scheduling. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone,rack,host"` (you should configure it based on the practical `label` level name).
 
-For the usage of `pd-ctl`, see [PD Control Instruction](/pd-control.md).
+For the usage of `pd-ctl`, see [PD Control User Guide](/pd-control.md).
 
 ### Why does the `dd` command for the disk test use the `oflag=direct` option?
 
@@ -258,7 +258,7 @@ You can scale TiDB as your business grows.
 
 #### If Percolator uses distributed locks and the crash client keeps the lock, will the lock not be released?
 
-For more details, see [Percolator and TiDB transaction algorithm](https://pingcap.com/blog-cn/percolator-and-txn/)in Chinese.
+For more details, see [Percolator and TiDB Transaction Algorithm](https://pingcap.com/blog-cn/percolator-and-txn/)in Chinese.
 
 #### Why does TiDB use gRPC instead of Thrift? Is it because Google uses it?
 
@@ -377,7 +377,7 @@ When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if e
 
 #### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
 
-3 replicas for each Region is sufficient for a testing environment. However, you should never operate a TiKV cluster with under 3 nodes in a production scenario. Depending on infrastructure, workload, and resiliency needs, you may wish to increase this number.
+3 replicas for each Region is sufficient for a testing environment. However, you should never operate a TiKV cluster with under 3 nodes in a production scenario. Depending on infrastructure, workload, and resiliency needs, you may wish to increase this number. It is worth noting that the higher the copy, the lower the performance, but the higher the security.
 
 #### The `cluster ID mismatch` message is displayed when starting TiKV
 
@@ -397,7 +397,9 @@ Currently, some files of TiKV master have a higher compression rate, which depen
 
 TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV data is eventually stored in the 3 CFs (default, write and lock) within RocksDB.
 
-- The default CF stores real data and the corresponding parameter is in `[rocksdb.defaultcf]`. The write CF stores the data version information (MVCC) and index-related data, and the corresponding parameter is in `[rocksdb.writecf]`. The lock CF stores the lock information and the system uses the default parameter.
+- The default CF stores real data and the corresponding parameter is in `[rocksdb.defaultcf]`. 
+- The write CF stores the data version information (MVCC) and index-related data, and the corresponding parameter is in `[rocksdb.writecf]`.
+- The lock CF stores the lock information and the system uses the default parameter.
 - The Raft RocksDB instance stores Raft logs. The default CF mainly stores Raft logs and the corresponding parameter is in `[raftdb.defaultcf]`.
 - All CFs have a shared block-cache to cache data blocks and improve RocksDB read speed. The size of block-cache is controlled by the `block-cache-size` parameter. A larger value of the parameter means more hot data can be cached and is more favorable to read operation. At the same time, it consumes more system memory.
 - Each CF has an individual write-buffer and the size is controlled by the `write-buffer-size` parameter.
@@ -453,7 +455,7 @@ Generally, enabling `sync-log` reduces about 30% of the performance. For write p
 
 #### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
 
-Data is redundantly replicated between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
+Data is redundantly replicated between TiKV nodes using the [Raft Consensus Algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
 
 As an alternative to using `sync-log`, you may also consider having five replicas instead of three in your Raft group. This would allow for the failure of two replicas, while still providing data safety.
 
@@ -522,7 +524,7 @@ You can edit the `t` parameter of `loader` based on the number of TiKV instances
 
 ### Is there a better way of monitoring the key metrics?
 
-The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [official document](/grafana-overview-dashboard.md).
+The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [official documentation](/grafana-overview-dashboard.md).
 
 ### The Prometheus monitoring data is deleted every 15 days by default. Could I set it to two months or delete the monitoring data manually?
 
