@@ -60,43 +60,43 @@ Use TLS to encrypt:
 
 ## Command line flags
 
-### --cacert
+### `--cacert`
 
 + Specifies the path to the certificate file of the trusted CA in PEM format
 + Default: ""
 
-### --cert
+### `--cert`
 
 + Specifies the path to the certificate of SSL in PEM format
 + Default: ""
 
-### --detach,-d
+### `--detach` / `-d`
 
 + Uses the single command line mode (not entering readline)
 + Default: true
 
-### --help,-h
+### `--help` / `-h`
 
 + Outputs the help information
 + Default: false
 
-### --interact,-i
+### `--interact` / `-i`
 
 + Uses the interactive mode (entering readline)
 + Default: false
 
-### --key
+### `--key`
 
 + Specifies the path to the certificate key file of SSL in PEM format, which is the private key of the certificate specified by `--cert`
 + Default: ""
 
-### --pd,-u
+### `--pd` / `-u`
 
 + Specifies the PD address
 + Default address: `http://127.0.0.1:2379`
 + Environment variable: `PD_ADDR`
 
-### --version,-V
+### `--version` / `-V`
 
 + Prints the version information and exit
 + Default: false
