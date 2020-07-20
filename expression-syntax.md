@@ -6,9 +6,9 @@ aliases: ['/docs/dev/expression-syntax/','/docs/dev/reference/sql/language-struc
 
 # Expression Syntax
 
-An expression is a combination of one or more values, operators, or functions. In TiDB, expressions are mainly used in various clauses of the `SELECT` statement, including Group by clause, Where clause, Having clause, Join condition and window function. In addition, some DDL statements will also use expressions, such as the setting of the default values, columns, and partition rules when creating tables.
+An expression is a combination of one or more values, operators, or functions. In TiDB, expressions are mainly used in various clauses of the `SELECT` statement, including Group by clause, Where clause, Having clause, Join condition and window function. In addition, some DDL statements also use expressions, such as the setting of the default values, columns, and partition rules when creating tables.
 
-The expressions contain the following types:
+The expressions can be divided into the following types:
 
 - Identifier. For reference, see [Schema object names](/schema-object-names.md).
 
@@ -18,7 +18,7 @@ The expressions contain the following types:
 
 - ParamMarker (`?`), system variables, user variables and CASE expressions.
 
-The following rules are the expression syntax, which is based on the [parser.y](https://github.com/pingcap/parser/blob/master/parser.y) rules of TiDB parser. For the navigable version of the following syntax diagram, please refer to [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/#Expression).
+The following rules are the expression syntax, which is based on the [parser.y](https://github.com/pingcap/parser/blob/master/parser.y) rules of TiDB parser. For the navigable version of the following syntax diagram, refer to [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/#Expression).
 
 **Expression:**
 
