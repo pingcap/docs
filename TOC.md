@@ -32,6 +32,7 @@
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
   + Benchmarks
+<<<<<<< HEAD
     + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
     + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
@@ -48,6 +49,95 @@
     + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
   + [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
 + Maintain
+=======
+    - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
+    - [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
+    - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
+    - [TPC-C Performance Test - v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
+    - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
+    - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
+- [Quick Start with TiDB](/quick-start-with-tidb.md)
++ Concepts
+  + Cluster Architecture
+    - [Scheduling](/tidb-scheduling.md)
+  + Key Features
+    - [Horizontal Scalability](/key-features.md#horizontal-scalability)
+    - [MySQL Compatible Syntax](/key-features.md#mysql-compatible-syntax)
+    - [Replicate from and to MySQL](/key-features.md#replicate-from-and-to-mysql)
+    - [Distributed Transactions with Strong Consistency](/key-features.md#distributed-transactions-with-strong-consistency)
+    - [Cloud Native Architecture](/key-features.md#cloud-native-architecture)
+    - [Minimize ETL with HTAP](/key-features.md#minimize-etl-with-htap)
+    - [Fault Tolerance & Recovery with Raft](/key-features.md#fault-tolerance--recovery-with-raft)
+    - [Automatic Rebalancing](/key-features.md#automatic-rebalancing)
+    - [Deployment and Orchestration with Ansible, Kubernetes, Docker](/key-features.md#deployment-and-orchestration-with-ansible-kubernetes-docker)
+    - [JSON Support](/key-features.md#json-support)
+    - [Spark Integration](/key-features.md#spark-integration)
+    - [Read Historical Data Without Restoring from Backup](/key-features.md#read-historical-data-without-restoring-from-backup)
+    - [Fast Import and Restore of Data](/key-features.md#fast-import-and-restore-of-data)
+    - [Hybrid of Column and Row Storage](/key-features.md#hybrid-of-column-and-row-storage)
+    - [SQL Plan Management](/key-features.md#sql-plan-management)
+    - [Open Source](/key-features.md#open-source)
+    - [Online Schema Changes](/key-features.md#online-schema-changes)
++ How-to
+  + Get Started
+    + Start a Cluster
+      - [From Binary](/deploy-tidb-from-binary.md)
+      - [From Homebrew](/deploy-tidb-from-homebrew.md)
+      - [From DBdeployer](/deploy-tidb-from-dbdeployer.md)
+      - [From Docker Compose](/deploy-test-cluster-using-docker-compose.md)
+    - [Explore SQL with TiDB](/basic-sql-operations.md)
+    - [Import Example Database](/import-example-data.md)
+    - [Read Historical Data](/read-historical-data.md)
+    - [TiDB Binlog Tutorial](/get-started-with-tidb-binlog.md)
+    - [TiDB Data Migration Tutorial](https://pingcap.com/docs/tidb-data-migration/stable/get-started/)
+    - [TiDB Lightning Tutorial](/get-started-with-tidb-lightning.md)
+    - [TiSpark Quick Start Guide](/get-started-with-tispark.md)
+  + Deploy
+    - [Hardware Recommendations](/hardware-and-software-requirements.md)
+    + From Binary Tarball
+      - [For Testing Environments](/test-deployment-from-binary-tarball.md)
+      - [For Production Environments](/production-deployment-from-binary-tarball.md)
+    + Orchestrated Deployment
+      - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+      - [Use TiDB Ansible](/online-deployment-using-ansible.md)
+      - [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
+      - [Use Docker](/test-deployment-using-docker.md)
+    + Geographic Redundancy
+      - [Overview](/geo-redundancy-deployment.md)
+      - [Configure Location Awareness](/location-awareness.md)
+    - [Data Migration with Ansible](https://pingcap.com/docs/tidb-data-migration/stable/deploy-a-dm-cluster-using-ansible/)
+  + Configure
+    - [Time Zone](/configure-time-zone.md)
+    - [Memory Control](/configure-memory-usage.md)
+    - [Placement Rules](/configure-placement-rules.md)
+  + Secure
+    + Transport Layer Security (TLS)
+      - [Enable TLS For MySQL Clients](/encrypted-connections-with-tls-protocols.md)
+      - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
+    - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
+  + Monitor
+    - [Overview](/tidb-monitoring-framework.md)
+    - [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
+  + Migrate
+    - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
+    + Migrate from MySQL
+      - [Migration Case of Amazon Aurora](/migrate-from-aurora-mysql-database.md)
+    - [Migrate from CSV](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+  + Maintain
+    - [Common TiUP Operations](/maintain-tidb-using-tiup.md)
+    - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
+    + Backup and Restore
+      - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
+      - [Use BR](/br/backup-and-restore-tool.md)
+      - [BR Usage Scenarios](/br/backup-and-restore-use-cases.md)
+      - [BR storages](/br/backup-and-restore-storages.md)
+    + Identify Abnormal Queries
+      - [Identify Slow Queries](/identify-slow-queries.md)
+      - [Identify Expensive Queries](/identify-expensive-queries.md)
+  + Scale
+    - [Scale using Ansible](/scale-tidb-using-ansible.md)
+    - [Scale using TiUP](/scale-tidb-using-tiup.md)
+>>>>>>> bc5b9ee... translate tidb-scheduling (#3102)
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
