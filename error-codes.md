@@ -431,12 +431,6 @@ In addition, TiDB has the following unique error codes:
 
     Extend the interval of GC Life Time.
 
-* Error Number: 9500
-
-    A single transaction is too large.
-
-    See [the error message `transaction too large`](/faq/tidb-faq.md#the-error-message-transaction-too-large-is-displayed) for the solution.
-
 * Error Number: 9007
 
     Transactions in TiKV encounter write conflicts.
