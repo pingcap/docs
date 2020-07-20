@@ -71,72 +71,71 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
     * Total disk space
     * Available disk space
-    * Region count
+    * The number of Regions
     * Data read/write speed
-    * Send/receive snapshot count
-    * It's overload or not
+    * The number of snapshots that are sent/received (The data might be replicated between replicas through snapshots)
+    * Whether the store is overloaded
     * Labels (See [Perception of Topology](/location-awareness.md))
 
 - Information reported by Region leaders:
 
-    Region leader send heartbeaets to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L271),
-    includes
+    Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L271), including:
 
     * Position of the leader itself
     * Positions of other replicas
-    * Offline replicas count
+    * The number of offline replicas
     * data read/write speed
 
-PD collects cluster information by these 2 type heartbeats and then makes dicision based on it.
+PD collects cluster information by these 2 types of heartbeats and then makes decision based on it.
 
-Beside these, PD can get more information from expanded interface. For example, if a store's heartbeats are broken, PD can't know the peer steps down temporarily or forever. It just waits a while (by default 30min) and then treats the store become offline if there are still no heartbeats received. Then PD balances all regions on the store to other stores.
+Besides, PD can get more information from an expanded interface to make a more precise decision. For example, if a store's heartbeats are broken, PD can't know whether the peer steps down temporarily or forever. It just waits a while (by default 30min) and then treats the store as offline if there are still no heartbeats received. Then PD balances all regions on the store to other stores.
 
-But sometimes stores are set offline by maintainers manually, so that we can tell PD this by PD control interface. Then PD can balance all regions immediately.
+But sometimes stores are manually set offline by a maintainer, so that the maintainer can tell PD this by PD control interface. Then PD can balance all regions immediately.
 
-## Scheduling stretagies
+## Scheduling strategies
 
-PD needs some stretagies to make scheduling plans.
+After collecting the information, PD needs some strategies to make scheduling plans.
 
-** Replicas count of Regions need to be correct **
+**Strategy 1: The number of replicas of a Region needs to be correct**
 
-PD can know replica count of a Region is incorrect from Region leader's heartbeat. If it happens, PD can adjust replica count by add/remove replica operation. The reason of incorrect replica counts could be:
+PD can know that the replica count of a Region is incorrect from Region leader's heartbeat. If it happens, PD can adjust the replica count by adding/removing replica(s). The reason for incorrect replica count could be:
 
-* Store failure, so some Region's replica count will be less than expected;
+* Store failure, so some Region's replica count is less than expected;
 * Store recovery after failure, so some Region's replica count could be more than expected;
 * [`max-replicas`](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L95) is changed.
 
-** Replicas of a Region need to be at different positions **
+**Strategy 2: Replicas of a Region need to be at different positions**
 
-Please note that 'position' is different from 'machine'. Generally PD can only ensure that replicas of a Region won't be at a same peer to avoid the peer's failure cause more than one replicas become lost. However in production, these requirements are possible:
+Note that here "position" is different from "machine". Generally PD can only ensure that replicas of a Region are not at a same peer to avoid that the peer's failure causes more than one replicas to become lost. However in production, you might have the following requirements:
 
 * Multiple TiKV peers are on one machine;
-* TiKVs are on multiple racks, and the system is expected to be available even if a rack fails;
-* TiKVs are in multiple datacenters, and the system is expected to be available even if a datacenter fails;
+* TiKV peers are on multiple racks, and the system is expected to be available even if a rack fails;
+* TiKV peers are in multiple data centers, and the system is expected to be available even if a data center fails;
 
-The key of there requirements is that peers can have same 'position', which is the smallest unit for failure-toleration. Replicas of a Region shouldn't be in one unit. So, we can configure [labels](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140) for TiKVs, and set [location-labels](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100) on PD to specify which labels are used for marking positions.
+The key to these requirements is that peers can have the same "position", which is the smallest unit for failure toleration. Replicas of a Region must not be in one unit. So, we can configure [labels](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140) for the TiKV peers, and set [location-labels](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100) on PD to specify which labels are used for marking positions.
 
-** Replicas should be balanced between stores **
+**Strategy 3: Replicas need to be balanced between stores**
 
-Size limit of a Region is fixed, so make Region count be balanced between store is helpful for data size balance.
+The size limit of a Region replica is fixed, so keeping the replicas balanced between stores is helpful for data size balance.
 
-** Leaders should be balanced between stores **
+**Strategy 4: Leaders need to be balanced between stores**
 
-Read and write operations are performed on leaders in Raft. So PD needs to distributed leader into whole cluster instead of serveral peers.
+Read and write operations are performed on leaders according to the Raft protocol, so that PD needs to distribute leaders into the whole cluster instead of several peers.
 
-** Hot points should be balanced between stores **
+**Strategy 5: Hot spots need to be balanced between stores**
 
-PD can detect hot points from store heartbets and Region heartbeats. So PD can disturb hot points.
+PD can detect hot spots from store heartbeats and Region heartbeats, so that PD can distribute hot spots.
 
-** Storage size needs to be balanced between stores **
+**Strategy 6: Storage size needs to be balanced between stores**
 
-TiKV reports `capacity` of storage when it starts up, which indicates the store's space limit. PD will consider this when doing schedule.
+When started up, a TiKV store reports `capacity` of storage, which indicates the store's space limit. PD will consider this when scheduling.
 
-** Adjust scheduling speed to stabilize online services **
+**Strategy 7: Adjust scheduling speed to stabilize online services**
 
-Scheduling utilizes CPU, memory, network and I/O traffic. Too much resource utilization will influence online services. So PD needs to limit concurrent scheduling count. By default the strategy is conservative, while it can be changed if quicker scheduling is required.
+Scheduling utilizes CPU, memory, network and I/O traffic. Too much resource utilization will influence online services. Therefore, PD needs to limit the number of the concurrent scheduling tasks. By default this strategy is conservative, while it can be changed if quicker scheduling is required.
 
 ## Scheduling implementation
 
-PD collects cluster information from store heartbeats and Region heartbeats, and then makes scheduling plan from the information and stretagies. Scheduling plans are constructed by a sequence of basic operators. Every time when PD receives a region heartbeat from a Region leader, it checks whether there is a pending operator on the Region or not. If PD needs to dispatch a new operator to a Region, it puts the operator into heartbeat responses, and monitors the operator by checking follow-up Region heartbeats.
+PD collects cluster information from store heartbeats and Region heartbeats, and then makes scheduling plans from the information and strategies. Scheduling plans are a sequence of basic operators. Every time PD receives a Region heartbeat from a Region leader, it checks whether there is a pending operator on the Region or not. If PD needs to dispatch a new operator to a Region, it puts the operator into heartbeat responses, and monitors the operator by checking follow-up Region heartbeats.
 
-Note that operators are only suggestions, which could be skipeed by Regions. Leader of Regions can decide whether to step a scheduling operator or not based on its current status.
+Note that here "operators" are only suggestions to the Region leader, which can be skipped by Regions. Leader of Regions can decide whether to skip a scheduling operator or not based on its current status.
