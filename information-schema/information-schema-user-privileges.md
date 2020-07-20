@@ -67,3 +67,10 @@ SELECT * FROM user_privileges;
 +------------+---------------+-------------------------+--------------+
 28 rows in set (0.00 sec)
 ```
+
+Fields in the `USER_PRIVILEGES` table are described as follows:
+
+* `GRANTEE`: The name of the granted user, which is in the format of `'user_name'@'host_name'`.
+* `TABLE_CATALOG`: The name of the catalog to which the table belongs. This value is always `def`.
+* `PRIVILEGE_TYPE`: The privilege type to be granted. Only one privilege type is shown in each row.
+* `IS_GRANTABLE`: If you have the `GRANT OPTION` privilege, the value is `YES`; otherwise, the value is `NO`.

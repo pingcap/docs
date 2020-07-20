@@ -53,3 +53,16 @@ CHARACTER_SET_CLIENT: utf8mb4
 COLLATION_CONNECTION: utf8mb4_0900_ai_ci
 1 row in set (0.00 sec)
 ```
+
+Fields in the `VIEWS` table are described as follows:
+
+* `TABLE_CATALOG`: The name of the catalog to which the view belongs. This value is always `def`.
+* `TABLE_SCHEMA`: The name of the schema to which the view belongs.
+* `TABLE_NAME`: The view name.
+* `VIEW_DEFINITION`: The definition of view, which is made by the `SELECT` statement when the view is created.
+* `CHECK_OPTION`: The `CHECK_OPTION` value. The value options are `NONE`, `CASCADE`, and `LOCAL`.
+* `IS_UPDATABLE`: Whether `UPDATE`/`INSERT`/`DELETE` is applicable to the view. In TiDB, the value is always `NO`.
+* `DEFINER`: The name of the user who creates the view, which is in the format of `'user_name'@'host_name'`.
+* `SECURITY_TYPE`: The value of `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
+* `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
+* `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
