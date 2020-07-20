@@ -1,18 +1,17 @@
 ---
 title: Wrong Index Solution
 summary: Learn how to solve the wrong index issue.
-category: performance
 ---
 
 # Wrong Index Solution
 
-If you find that the execution speed of some query does not reach the expectation, it might be caused by the wrong usage of indexes.
+If you find that the execution speed of some query does not reach the expectation, the optimizer might choose the wrong index to run the query.
 
 You can first view the [health state of tables](/statistics.md#health-state-of-tables) in the statistics, and then solve this issue according to the different health states.
 
 ## Low health state
 
-The low health state means TiDB has not performed the`ANALYZE` statement for a long time. You can update the statistics by running the `ANALYZE` command. After the update, if the wrong usage of indexes still persists, refer to the next section.
+The low health state means TiDB has not performed the`ANALYZE` statement for a long time. You can update the statistics by running the `ANALYZE` command. After the update, if the optimizer still uses the wrong index, refer to the next section.
 
 ## Near 100% health state
 
@@ -20,7 +19,7 @@ The near 100% health state suggests that the `ANALYZE` statement is just complet
 
 For equivalence queries, the cause might be [Count-Min Sketch](/statistics.md#count-min-sketch). You can check whether Count-Min Sketch is the cause and take corresponding solutions. 
 
-If the cause above does not apply to your problem, you can force-select indexes by executing `USE_INDEX` or `use index` (see [USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) for details). In addition, you can also non-intrusively change the query behavior by using [SQL Plan Management](/sql-plan-management.md).
+If the cause above does not apply to your problem, you can force-select indexes by using the `USE_INDEX` or `use index` optimzer hint (see [USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) for details). Also, you can change the query behavior by using [SQL Plan Management](/sql-plan-management.md) in a non-intrusive way.
 
 ## Other situations
 
