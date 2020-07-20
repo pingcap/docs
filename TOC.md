@@ -455,8 +455,8 @@
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [SQL FAQs](/faq/sql-faq.md)
   + [Upgrade FAQs](/faq/upgrade-faq.md)
-  + [High Reliability FAQs](/faq/high-reliability-faq.md)
   + [High Availability FAQs](/faq/high-availability-faq.md)
+  + [High Reliability FAQs](/faq/high-reliability-faq.md)
   + [Migration FAQs](/faq/migration-tidb-faq.md)
 + [Glossary](/glossary.md)
 + Release Notes

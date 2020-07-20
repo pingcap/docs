@@ -1,11 +1,11 @@
 ---
-title: High Reliability FAQ
-summary: Introduce the FAQs relating to high reliability.
+title: High Reliability FAQs
+summary: Learn about the FAQs related to high reliability of TiDB.
 ---
 
-# High Reliability FAQ
+# High Reliability FAQs
 
-This document introduces the FAQs relating to high reliability.
+This document summarizes the FAQs related to high reliability of TiDB.
 
 ## Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
 
@@ -17,10 +17,10 @@ Like MySQL, TiDB supports the SASL protocol for user login authentication and pa
 
 When the client connects to TiDB, the challenge-response authentication mode starts. The process is as follows:
 
- 1. The client connects to the server.
- 2. The server sends a random string challenge to the client.
- 3. The client sends the username and response to the server.
- 4. The server verifies the response.
+1. The client connects to the server.
+2. The server sends a random string challenge to the client.
+3. The client sends the username and response to the server.
+4. The server verifies the response.
 
 ## How to modify the user password and privilege?
 

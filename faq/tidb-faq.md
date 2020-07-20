@@ -74,9 +74,9 @@ Any language supported by MySQL client or driver.
 
 Yes. TiKV and TiDB support many popular standalone storage engines, such as GolevelDB and BoltDB. If the storage engine is a KV engine that supports transactions and it provides a client that meets the interface requirement of TiDB, then it can connect to TiDB.
 
-#### Besides the TiDB documentation, are there any other ways to acquire TiDB knowledge?
+#### In addition to the TiDB documentation, are there any other ways to acquire TiDB knowledge?
 
-Currently [TiDB documentation](/overview.md#tidb-introduction) is the most important and timely way to get TiDB related knowledge. In addition, we also have some technical communication groups, if you need to learn more, send an email to [info@pingcap.com](mailto:info@pingcap.com) and communicate with technical experts on [AskTUG website](https://asktug.com)
+Currently [TiDB documentation](/overview.md#tidb-introduction) is the most important and timely way to get TiDB related knowledge. In addition, we also have some technical communication groups. If you have any needs, contact [info@pingcap.com](mailto:info@pingcap.com).
 
 #### What is the length limit for the TiDB user name?
 

@@ -1,11 +1,11 @@
 ---
-title: SQL FAQ
-summary: Introduce the FAQs relating to SQL.
+title: SQL FAQs
+summary: Learn about the FAQs related to TiDB SQL.
 ---
 
-# SQL FAQ
+# SQL FAQs
 
-This document introduce the most frequently asked questions relating to SQL in TiDB.
+This document summarizes the FAQs related to SQL operations in TiDB.
 
 ## What are the MySQL variables that TiDB is compatible with?
 
@@ -17,7 +17,7 @@ Yes. But it differs from MySQL in syntax. As a distributed database, TiDB uses t
 
 ## Can the codec of TiDB guarantee that the UTF-8 string is memcomparable? Is there any coding suggestion if our key needs to support UTF-8?
 
-The character sets of TiDB use UTF-8 by default and currently only support UTF-8. The string of TiDB uses the memcomparable format.
+TiDB uses the UTF-8 character set by default and currently only supports UTF-8. The string of TiDB uses the memcomparable format.
 
 ## What is the maximum number of statements in a transaction?
 
@@ -25,13 +25,15 @@ The maximum number of statements in a transaction is 5000 by default.
 
 ## Why does the auto-increment ID of the later inserted data is smaller than that of the earlier inserted data in TiDB?
 
-The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [CREATE TABLE syntax](/mysql-compatibility.md#auto-increment-id).
+The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [Auto-increment ID](/mysql-compatibility.md#auto-increment-id).
 
 ## How to modify the `sql_mode` in TiDB except using the `set` command?
 
-The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql\_mode` of the database; it only supports using the `set` command to configure `sql\_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure it.
+The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql_mode` of the database; it only supports using the `set` command to configure `sql_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure it.
 
-## In Sqoop, `--batch` means committing 100 `statement`s in each batch, but by default each `statement` contains 100 SQL statements. So, 100 * 100 = 10000 SQL statements, which exceeds 5000, the maximum number of statements allowed in a single TiDB transaction
+## Error: `java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation` while using Sqoop to write data into TiDB in batches
+
+In Sqoop, `--batch` means committing 100 statements in each batch, but by default each statement contains 100 SQL statements. So, 100 * 100 = 10000 SQL statements, which exceeds 5000, the maximum number of statements allowed in a single TiDB transaction.
 
 Two solutions:
 
@@ -64,13 +66,18 @@ None of the `DELETE`, `TRUNCATE` and `DROP` operations release data immediately.
 
 Yes. But the `load data` does not support the `replace into` syntax.
 
-## Why does the query speed getting slow after deleting data?
+## Why does the query speed get slow after data is deleted?
 
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the [Region Merge](https://github.com/pingcap/docs/blob/master/best-practices/massive-regions-best-practices.md) feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
+Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the [Region Merge](/best-practices/massive-regions-best-practices.md) feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
 
 ## What should I do if it is slow to reclaim storage space after deleting data?
 
-You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:`update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";`
+You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:
+
+{{< copyable "sql" >}}
+
+```sql
+update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";
 
 ## Does `show processlist` display the system process ID?
 

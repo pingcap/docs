@@ -1,9 +1,11 @@
 ---
-title: Migration FAQ
-summary: Introduce the FAQs relating to migration in TiDB.
+title: Migration FAQs
+summary: Learn about the FAQs related to data migration.
 ---
 
 # Migration FAQ
+
+This document summarizes the FAQs related to TiDB data migration.
 
 ## Full data export and import
 
@@ -21,7 +23,7 @@ Because TiDB supports most MySQL syntax, generally you can migrate your applicat
 
 ### If I accidentally import the MySQL user table into TiDB, or forget the password and cannot log in, how to deal with it?
 
-Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Log into the cluster without password and recreate the user,or recreate the `mysql.user` table.You can search the official website for the specific table structure.
+Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Log into the cluster without password and recreate the user, or recreate the `mysql.user` table. For the specific table schema, search the official documentation.
 
 ### Can TiDB provide services while Loader is running?
 
@@ -31,7 +33,7 @@ TiDB can provide services while Loader is running because Loader inserts the dat
 
 Currently, TiDB does not support `select into outfile`. You can use the following methods to export the data in TiDB:
 
-- See [MySQL uses mysqldump to export part of the table data](https://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the WHERE condition.
+- See [MySQL uses mysqldump to export part of the table data](https://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the `WHERE` clause.
 - Use the MySQL client to export the results of `select` to a file.
 
 ### How to migrate from DB2 or Oracle to TiDB?
@@ -134,7 +136,7 @@ The total read capacity has no limit. You can increase the read capacity by addi
 
 Due to the limitation of the underlying storage engine, each key-value entry (one row) in TiDB should be no more than 6MB.
 
-Distributed transactions need two-phase commit and the underlying implementation performs the Raft replication. If a transaction is very large, the commit process would be quite slow and this transaction is more likely to conflict with other transactions. Moreover, the rollback of a failed transaction leads to an unnecessary performance penalty. To avoid these problems, we limit the total size of key-value entries to no more than 100MB in a transaction by default. If you need larger transactions, change `txn-total-size-limit` in the TiDB configuration file. The maximum value of this configuration item is up to `10G`. The actual limitation might also depend on the hardware of the RAM.
+Distributed transactions need two-phase commit and the bottom layer performs the Raft replication. If a transaction is very large, the commit process would be quite slow and the write conflict is more likely to occur. Moreover, the rollback of a failed transaction leads to an unnecessary performance penalty. To avoid these problems, we limit the total size of key-value entries to no more than 100MB in a transaction by default. If you need larger transactions, modify the value of `txn-total-size-limit` in the TiDB configuration file. The maximum value of this configuration item is up to 10G. The actual limitation is also affected by the physical memory of the machine.
 
 There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
 
@@ -171,4 +173,6 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 ### What should I do if it is slow to reclaim storage space after deleting data?
 
-You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:`update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency;"`
+You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:
+
+{{< copyable "sql" >}}
