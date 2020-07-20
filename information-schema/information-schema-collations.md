@@ -5,7 +5,7 @@ summary: Learn the `COLLATIONS` information_schema table.
 
 # COLLATIONS
 
-The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table.  Currently this table is included only for compatibility with MySQL.
+The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table. Currently, this table is included only for compatibility with MySQL.
 
 {{< copyable "sql" >}}
 
