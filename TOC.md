@@ -191,11 +191,8 @@
 + Reference
   + Cluster Architecture
     + [Overview](/tidb-architecture.md)
-<<<<<<< HEAD
-=======
     + [Storage](/tidb-storage.md)
     + [Computing](/tidb-computing.md)
->>>>>>> 38620d3... Translate tidb computing (#3057)
   + Key Monitoring Metrics
     + [Overview](/grafana-overview-dashboard.md)
     + [TiDB](/grafana-tidb-dashboard.md)
