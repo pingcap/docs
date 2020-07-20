@@ -16,7 +16,8 @@
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - [Quick Start with TiDB](/quick-start-with-tidb.md)
 + Concepts
-  - [Architecture](/architecture.md)
+  + Cluster Architecture
+    - [Scheduling](/tidb-scheduling.md)
   + Key Features
     - [Horizontal Scalability](/key-features.md#horizontal-scalability)
     - [MySQL Compatible Syntax](/key-features.md#mysql-compatible-syntax)
