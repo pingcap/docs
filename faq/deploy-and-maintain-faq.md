@@ -1,15 +1,15 @@
 ---
 title: Deploy and Maintain FAQs
-summary: Introduce FAQs, causes and solutions relating to TiDB cluster operation and maintenance deployment.
+summary: Learn about the FAQs related to TiDB deployment, operations and maintenance.
 ---
 
-# Deploy and maintain FAQ
+# Deploy and maintain FAQs
 
-This document introduces FAQs, causes and solutions relating to TiDB cluster operation and maintenance deployment.
+This document introduces the FAQs related to TiDB deployment, operations and maintenance.
 
-## Prepare FAQ
+## Operating system requirements
 
-The operating system version requirements are as follows:
+### What are the required operating system versions?
 
 | Linux OS Platform        | Version      |
 | :-----------------------:| :----------: |
@@ -21,7 +21,7 @@ The operating system version requirements are as follows:
 
 As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems. For details, see [Official Deployment Requirements](/hardware-and-software-requirements.md) for deploying TiDB.
 
-TiDB conducts a large number of tests under CentOS 7.3 environment, and there are many best practices for the deployment of this operating system. Therefore, we recommend that you use CentOS 7.3+ Linux operating system when deploying TiDB.
+A lot of TiDB tests have been carried out in CentOS 7.3, and many deployment best practices have been accumulated in CentOS 7.3. Therefore, it is recommended that you use the CentOS 7.3+ Linux operating system when deploying TiDB.
 
 ## Server requirements
 
@@ -56,7 +56,7 @@ If the resources are adequate, it is recommended to use RAID 10 for SSD. If the 
 
 ### What's the recommended configuration of TiDB components?
 
-- TiDB has a high requirement on CPU and memory. If you need to open Binlog, the local disk space should be increased based on the service volume estimation and the time requirement for the GC operation. But the SSD disk is not a must.
+- TiDB has a high requirement on CPU and memory. If you need to enable TiDB Binlog, the local disk space should be increased based on the service volume estimation and the time requirement for the GC operation. But the SSD disk is not a must.
 - PD stores the cluster metadata and has frequent Read and Write requests. It demands a high I/O disk. A disk of low performance will affect the performance of the whole cluster. It is recommended to use SSD disks. In addition, a larger number of Regions has a higher requirement on CPU and memory.
 - TiKV has a high requirement on CPU, memory and disk. It is required to use SSD.
 
@@ -64,7 +64,7 @@ For details, see [Software and Hardware Recommendations](/hardware-and-software-
 
 ## Install and deploy FAQ
 
-TiUP is recommended for a production environment. See [TiUP Deployment](/production-deployment-using-tiup.md).
+[TiUP](/tiup/tiup-overview.md) is recommended for the production environment. See [TiUP Deployment](/production-deployment-using-tiup.md).
 
 ### Why the modified `toml` configuration for TiKV/PD does not take effect?
 
