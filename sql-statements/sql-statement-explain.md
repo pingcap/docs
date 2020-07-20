@@ -33,9 +33,9 @@ Currently, `EXPLAIN` in TiDB outputs 5 columns: `id`, `estRows`, `task`, `access
 | Attribute name          | Description |
 |:----------------|:----------------------------------------------------------------------------------------------------------|
 | id            | The operator ID is the unique identifier of the operator in the entire execution plan. In TiDB 2.1, the ID is formatted to display the tree structure of the operator. Data flows from the child node to the parent node. One and only one parent node for each operator. |
-| estRows       | Number of rows that the operator is expected to output. Data is based on statistical information and the evaluation of the operator's logic execution. `estRows` is called `count` in the earlier versions of TiDB 4.0. |
+| estRows       | The number of rows that the operator is expected to output. This number is estimated according to the statistics and the operator's logic. `estRows` is called `count` in the earlier versions of TiDB 4.0. |
 | task          | The type of task the operator belongs to. Currently, the execution plans are divided into two tasks: **root** task, which is executed on tidb-server, and **cop** task, which is performed in parallel on TiKV or TiFlash. The topology of the execution plan at the task level is that a root task followed by many cop tasks. The root task uses the output of cop tasks as input. The cop tasks refer to tasks that TiDB pushes down to TiKV or TiFlash. Each cop task is distributed in the TiKV cluster or the TiFlash cluster, and is executed by multiple processes. |
-| access object | Data item information accessed by the operator. The information includes `table`, `partition`, and `index` (if any). Only operators that directly access the data have access to such information. |
+| access object | Data item information accessed by the operator. The information includes `table`, `partition`, and `index` (if any). Only operators that directly access the data have such information.. |
 | operator info | Other information about the operator. `operator info` of each operator is different. You can refer to the following examples. |
 
 ## Examples

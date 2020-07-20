@@ -13,7 +13,7 @@ Based on the details of your tables, the TiDB optimizer chooses the most efficie
 The result of the `EXPLAIN` statement provides information about how TiDB executes SQL queries:
 
 - `EXPLAIN` works together with statements such as `SELECT` and `DELETE`.
-- When you run the `EXPLAIN` statement, TiDB returns the final physical execution plan which is optimized by the SQL statement of `EXPLAIN`. In other words, `EXPLAIN` displays the complete information about how TiDB executes the SQL statement, such as in which order, how tables are joined, and what the expression tree looks like.
+- When you execute the `EXPLAIN` statement, TiDB returns the final optimized physical execution plan. In other words, `EXPLAIN` displays the complete information about how TiDB executes the SQL statement, such as in which order, how tables are joined, and what the expression tree looks like.
 - For more information about each column of `EXPLAIN`, see [`EXPLAIN` Output Format](/sql-statements/sql-statement-explain.md).
 
 The results of `EXPLAIN` shed light on how to index the data tables so that the execution plan can use the index to speed up the execution of SQL statements. You can also use `EXPLAIN` to check if the optimizer chooses the optimal order to join tables.
@@ -111,7 +111,7 @@ The operators that perform table scans (of the disk or the TiKV Block Cache) are
 - **TableFullScan**: Full table scan.
 - **TableRangeScan**: Table scans with the specified range.
 - **TableRowIDScan**: Accurately scans the table data based on the RowID passed down from the upper layer.
-- **IndexFullScan**: Another type of full table scan, except that the index data is scanned, rather than the table data.
+- **IndexFullScan**: Another type of "full table scan", except that the index data is scanned, rather than the table data.
 - **IndexRangeScan**: Index scans with the specified range.
 
 TiDB aggregates the data or calculation results scanned from TiKV/TiFlash. The data aggregation operators can be divided into the following categories:
