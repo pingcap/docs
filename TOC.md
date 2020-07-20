@@ -193,6 +193,7 @@
     + [Overview](/tidb-architecture.md)
     + [Storage](/tidb-storage.md)
     + [Computing](/tidb-computing.md)
+    + [Scheduling](/tidb-scheduling.md)
   + Key Monitoring Metrics
     + [Overview](/grafana-overview-dashboard.md)
     + [TiDB](/grafana-tidb-dashboard.md)
