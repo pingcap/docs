@@ -309,6 +309,7 @@
     - [Grafana Best Practices](/best-practices/grafana-monitor-best-practices.md)
     - [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   - [TiSpark](/tispark-overview.md)
+  - [TiKV](/tikv-overview.md)
   + TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Deploy](/tidb-binlog/deploy-tidb-binlog.md)
