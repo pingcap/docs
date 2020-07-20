@@ -17,7 +17,7 @@ In addition, TiDB has the following unique error codes:
 >
 > Some errors are internal errors. Normally, TiDB handles the errors rather than return to the user. So it is not listed here.
 >
-> If you encounter the errors that is not listed here, contact PingCAP for support or seek help in the official forum.
+> If you encounter the error that is not listed here, contact PingCAP for support or seek help in the official forum.
 
 * Error Number: 8001
 
@@ -149,7 +149,9 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8048
 
-    An unsupported database isolation level is set. If you cannot modify the codes by using third-party tools or frameworks, use `tidb_skip_isolation_level_check` to bypass this check.
+    An unsupported database isolation level is set. 
+    
+    If you cannot modify the codes by using third-party tools or frameworks, use `tidb_skip_isolation_level_check` to bypass this check.
 
     {{< copyable "sql" >}}
 
@@ -165,11 +167,15 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8051
 
-    Unknown data type is encountered when TiDB parses the Exec argument list sent by the client. If you encounter this error, check the client. If the client is normal, contact PingCAP for support or seek help in the official forum.
+    Unknown data type is encountered when TiDB parses the Exec argument list sent by the client. 
+    
+    If you encounter this error, check the client. If the client is normal, contact PingCAP for support or seek help in the official forum.
 
 * Error Number: 8052
 
-    The serial number of the data packet from the client is incorrect. If you encounter this error, check the client. If the client is normal, contact PingCAP for support or seek help in the official forum.
+    The serial number of the data packet from the client is incorrect. 
+    
+    If you encounter this error, check the client. If the client is normal, contact PingCAP for support or seek help in the official forum.
 
 
 * Error Number: 8055
@@ -236,15 +242,21 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8102
 
-    Unable to read the plugin definition information. Check the configuration related to the plugin.
+    Unable to read the plugin definition information. 
+    
+    Check the configuration related to the plugin.
 
 * Error Number: 8103
 
-    The plugin name is incorrect. Check the configuration of the plugin.
+    The plugin name is incorrect. 
+    
+    Check the configuration of the plugin.
 
 * Error Number: 8104
 
-    The plugin version does not match. Check the configuration of the plugin.
+    The plugin version does not match. 
+    
+    Check the configuration of the plugin.
 
 * Error Number: 8105
 
@@ -252,15 +264,21 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8106
 
-    The plugin defines a system variable whose name does not begin with the plugin name. Contact the developer of the plugin to modify.
+    The plugin defines a system variable whose name does not begin with the plugin name. 
+    
+    Contact the developer of the plugin to modify.
 
 * Error Number: 8107
 
-    The loaded plugin does not specify a version, or the specified version is too low. Check the configuration of the plugin.
+    The loaded plugin does not specify a version, or the specified version is too low. 
+    
+    Check the configuration of the plugin.
 
 * Error Number: 8108
 
-    Unsupported execution plan type. This error is an internal error. If you encounter this error, contact PingCAP for support or seek help in the official forum.
+    Unsupported execution plan type. This error is an internal error. 
+    
+    If you encounter this error, contact PingCAP for support or seek help in the official forum.
 
 * Error Number: 8109
 
@@ -294,11 +312,15 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8120
 
-    The `start tso` of transactions cannot be obtained.  Check the state/monitor/log of the PD server and the network between the TiDB server and the PD server.
+    The `start tso` of transactions cannot be obtained.  
+    
+    Check the state/monitor/log of the PD server and the network between the TiDB server and the PD server.
 
 * Error Number: 8121
 
-    Privilege check fails. Check the privilege configuration of the database.
+    Privilege check fails. 
+    
+    Check the privilege configuration of the database.
 
 * Error Number: 8122
 
@@ -306,7 +328,9 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8123
 
-    An SQL query with aggregate functions returns non-aggregated columns, which violates the `only_full_group_by` mode. Modify the SQL or disable the `only_full_group_by` mode.
+    An SQL query with aggregate functions returns non-aggregated columns, which violates the `only_full_group_by` mode. 
+    
+    Modify the SQL or disable the `only_full_group_by` mode.
 
 * Error Number: 8200
 
@@ -320,7 +344,9 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8215
 
-    `ADMIN REPAIR TABLE` fails. If you encounter this error, contact PingCAP for support or seek help in the official forum.
+    `ADMIN REPAIR TABLE` fails. 
+    
+    If you encounter this error, contact PingCAP for support or seek help in the official forum.
 
 * Error Number: 8216
 
@@ -330,11 +356,15 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8223
 
-    This error occurs when detecting that the data is not consistent with the index. If you encounter this error, contact PingCAP for support or seek help in the official forum.
+    This error occurs when detecting that the data is not consistent with the index. 
+    
+    If you encounter this error, contact PingCAP for support or seek help in the official forum.
 
 * Error Number: 8224
 
-    The DDL job cannot be found. Check the job id which is specified by the restore operation.
+    The DDL job cannot be found. 
+    
+    Check the job id which is specified by the restore operation.
 
 * Error Number: 8225
 
@@ -350,11 +380,21 @@ In addition, TiDB has the following unique error codes:
 
     See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#参数说明) to find the list of the supported options.
 
+* Error Number: 8228
+
+    Unsupported types are specified when using `setval` on Sequence.
+    
+    See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#示例) to find the example of the function.
+    
 * Error Number: 8229
 
     The transaction exceeds the survival time.
 
     Commit or roll back the current transaction, and start a new transaction.
+
+* Error Number: 8230
+
+    TiDB currently does not use Sequence as the default value on newly added columns.
 
 * Error Number: 9001
 
@@ -406,7 +446,15 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 9008
 
-    Too many requests are sent to TiKV at the same time. The number exceeds limit.
+    Too many requests are sent to TiKV at the same time. The number exceeds limit. 
+    
+    Increase `tidb_store_limit` or set it to `0` to remove the limit on the traffic of requests.
+
+* Error Number: 9010
+
+    TiKV cannot process this raft log.
+    
+    Check the state/monitor/log of the TiKV server.
 
 ## Troubleshooting
 
