@@ -177,7 +177,6 @@ In addition, TiDB has the following unique error codes:
     
     If you encounter this error, check the client. If the client is normal, contact PingCAP for support or seek help in the official forum.
 
-
 * Error Number: 8055
 
     The current snapshot is too old. The data may have been garbage collected. You can increase the value of `tikv_gc_life_time` to avoid this problem. The new version of TiDB automatically reserves data for long-running transactions. Usually this error does not occur. 
