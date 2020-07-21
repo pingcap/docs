@@ -164,4 +164,4 @@ TiDB version: 4.0.3
 
     + TiDB Binlog
 
-       - Fix the issue that not enable TLS to save checkpoint when enabling TLS for replicating [#988](https://github.com/pingcap/tidb-binlog/pull/988)
+        - Fix the issue that not enable TLS to save checkpoint when enabling TLS for replicating [#988](https://github.com/pingcap/tidb-binlog/pull/988)
