@@ -1,11 +1,11 @@
 ---
 title: Deploy Operation and Maintenance FAQs
-summary: Learn about the FAQs related to TiDB deployment, operations and maintenance.
+summary: Learn about the FAQs related to TiDB deployment, operation and maintenance.
 ---
 
 # Deploy Operation and Maintenance FAQs
 
-This document summarizes the FAQs related to TiDB deployment, operations and maintenance.
+This document summarizes the FAQs related to TiDB deployment, operation and maintenance.
 
 ## Enviroment preparation 
 
