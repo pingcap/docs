@@ -389,9 +389,9 @@ If you previously deploy a PD cluster, but then you remove the PD data and deplo
 
 This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. Common conditions that cause this error: There is no data folder in the path specified by TiKV `--data-dir` (no update --data-dir after deleting or moving), restart the TiKV with the previous parameters.Please try [store delete](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string) function of pd-ctl, delete the previous store, and then restart TiKV.
 
-#### TiKV primary and secondary use the same compression algorithm, why the results are different?
+#### TiKV primary database and secondary database use the same compression algorithm, why the results are different?
 
-Currently, some files of TiKV primary have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data size fluctuates occasionally. The underlying storage engine adjusts data as needed.
+Currently, some files of TiKV primary database have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data size fluctuates occasionally. The underlying storage engine adjusts data as needed.
 
 #### What are the features of TiKV block cache?
 
@@ -498,7 +498,7 @@ At the beginning, many users tend to do a benchmark test or a comparison test be
 #### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
 - Within 10 nodes, the relationship between TiDB write capacity (Insert TPS) and the number of nodes is roughly 40% linear increase. Because MySQL uses single-node write, its write capacity cannot be scaled.
-- In MySQL, the read capacity can be increased by adding secondary, but the write capacity cannot be increased except using sharding, which has many problems.
+- In MySQL, the read capacity can be increased by adding secondary database, but the write capacity cannot be increased except using sharding, which has many problems.
 - In TiDB, both the read and write capacity can be easily increased by adding more nodes.
 
 #### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL
