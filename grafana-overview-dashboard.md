@@ -28,13 +28,13 @@ PD | Abnormal stores | The number of nodes in the abnormal state. | 0 |
 PD | Number of Regions | The total number of Regions in the current cluster. Note that the number of Regions has nothing to do with the number of replicas. |
 PD | 99% completed_cmds_duration_seconds | The 99th percentile duration to complete a pd-server request. | less than 5ms
 PD | Handle\_requests\_duration\_seconds | The network duration of a PD request. |
-PD | Region health | The state of each Region. | Generally, the number of pending peers is less than 100, and that of the miss peers cannot always be greater than 0. |
-PD | Hot write Region's leader distribution | The total number of leader Regions in hot write on each TiKV instance. |
-PD | Hot read Region's leader distribution | The total number of leader Regions in hot read on each TiKV instance. |
+PD | Region health | The state of each Region. | Generally, the number of pending peers is less than 100, and that of the missing peers cannot always be greater than `0`. |
+PD | Hot write Region's leader distribution | The total number of leaders who are the write hotspots on each TiKV instance. |
+PD | Hot read Region's leader distribution | The total number of leaders who are the read hotspots on each TiKV instance.  |
 PD | Region heartbeat report | The count of heartbeats reported to PD per instance. |
 PD | 99% Region heartbeat latency | The heartbeat latency per TiKV instance (P99). |
 TiDB | Statement OPS | The number of different types of SQL statements executed per second, which is counted according to `SELECT`, `INSERT`, `UPDATE`, and other types of statements. |
-TiDB | Duration | The execution time.<br/>1. The duration between the time that the client's network request is sent to TiDB and the time that the request is returned to the client after TiDB has executed it. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`.<br/>2. Because TiDB supports Multi-Query, it supports sending multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
+TiDB | Duration | The execution time.<br/>1. The duration between the time that the client's network request is sent to TiDB and the time that the request is returned to the client after TiDB has executed the request. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`.<br/>2. Because TiDB supports Multi-Query, TiDB supports sending multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
 TiDB | QPS By Instance | The QPS on each TiDB instance, which is classified according to the success or failure of command execution results. |
 TiDB | Failed Query OPM | The statistics of error types (such as syntax errors and primary key conflicts) based on the errors occurred when executing SQL statements per second on each TiDB instance. The module in which the error occurs and the error code are included. |
 TiDB | Connection Count | The connection number of each TiDB instance. |
@@ -46,7 +46,7 @@ TiDB | KV Cmd Duration 99 | The execution time of the KV command. |
 TiDB | PD TSO OPS | The number of TSO that TiDB obtains from PD per second. |
 TiDB | PD TSO Wait Duration | The duration that TiDB waits for PD to return TSO. |
 TiDB | TiClient Region Error OPS | The number of Region related errors returned by TiKV. |
-TiDB | Lock Resolve OPS | The number of TiDB operations to resolve locks. When TiDB's read or write request encounters a lock, it tries to resolve the lock |
+TiDB | Lock Resolve OPS | The number of TiDB operations that resolve locks. When TiDB's read or write request encounters a lock, it tries to resolve the lock. |
 TiDB | KV Backoff OPS | The number of errors returned by TiKV. |
 TiKV | leader | The number of leaders on each TiKV node. |
 TiKV | region | The number of Regions on each TiKV node. |
