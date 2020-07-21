@@ -1,7 +1,7 @@
 ---
 title: CLUSTER_CONFIG
 summary: Learn the `CLUSTER_CONFIG` cluster configuration system table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-config/','/docs/v4.0/system-tables/system-table-cluster-config/','/docs/stable/reference/system-databases/cluster-config/','/tidb/dev/system-table-cluster-config/']
+aliases: ['/docs/stable/system-tables/system-table-cluster-config/','/docs/v4.0/system-tables/system-table-cluster-config/','/docs/stable/reference/system-databases/cluster-config/','/tidb/stable/system-table-cluster-config/']
 ---
 
 # CLUSTER_CONFIG
