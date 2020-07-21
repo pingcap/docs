@@ -189,7 +189,7 @@ In the above three ways of reading TiFlash replicas, engine isolation specifies 
 
 > **Note:**
 >
-> Before v4.0.3, the behavior of reading from TiFlash replica in a non-read-only SQL statement (for example, `INSERT INTO ... SELECT`, `SELECT ... FOR UPDATE`, `UPDATE ...`, `DELETE ...`) is undefined. In v4.0.3 and later versions, TiDB will internaly ignore the TiFlash replica for a non-read-only SQL statement to guarantee the data correctness. That is, for [Smart selection](#smart-selection) TiDB will automatically choose the non-TiFlash replica, for [Engine isolation](#engine-isolation) that specifies TiFlash replica **only** TiDB will report error, and for [Manual hint](#manual-hint) TiDB will ignore the hint.
+> Before v4.0.3, the behavior of reading from TiFlash replica in a non-read-only SQL statement (for example, `INSERT INTO ... SELECT`, `SELECT ... FOR UPDATE`, `UPDATE ...`, `DELETE ...`) is undefined. In v4.0.3 and later versions, internally TiDB ignores the TiFlash replica for a non-read-only SQL statement to guarantee the data correctness. That is, for [smart selection](#smart-selection), TiDB automatically chooses the non-TiFlash replica; for [engine isolation](#engine-isolation) that specifies TiFlash replica **only**, TiDB reports an error; and for [manual hint](#manual-hint), TiDB ignores the hint.
 
 ## Use TiSpark to read TiFlash replicas
 
