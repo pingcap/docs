@@ -500,4 +500,4 @@ Based on MySQL, TiDB defines some special system variables and syntax to optimiz
 * [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
 * [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 * [TRACE](/sql-statements/sql-statement-trace.md)
-* [System Variables](/tidb-specific-system-variables.md)
+* [System Variables](/system-variables.md)
