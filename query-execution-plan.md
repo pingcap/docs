@@ -327,7 +327,6 @@ The execution process of `Hash Join` is as follows:
 4. Use the data of the `Probe` side to probe the Hash Table.
 5. Return qualified data to the user.
 
-
 The operator info column in the explain table also records other information about Hash Join, including whether the query is Inner Join or Outer Join, and what are the conditions of join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query statement `where t1.id = t2. id`.The operator info of the other Join operators in the following example is similar to this one.
 
 #### `Merge Join` example
