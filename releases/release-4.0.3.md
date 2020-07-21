@@ -120,7 +120,7 @@ TiDB version: 4.0.3
     - Fix the issue that deleting the scheduler might cause deadlocks [#2637](https://github.com/pingcap/pd/pull/2637)
     - Fix the bug that placement rules are not considered when `balance-leader-scheduler` is enabled [#2636](https://github.com/pingcap/pd/pull/2636)
     - Fix the issue that sometimes service `safepoint` cannot be set properly, which might make BR and dumpling fail [#2635](https://github.com/pingcap/pd/pull/2635)
-    - Fix dst store filter in hot Region scheduler [#2627](https://github.com/pingcap/pd/pull/2627)
+    - Fix the issue that the target store in `hot region scheduler` is incorrectly selected [#2627](https://github.com/pingcap/pd/pull/2627)
     - Fix the issue that the TSO request might take too long when PD leader is switched [#2622](https://github.com/pingcap/pd/pull/2622)
     - Fix the issue of stale scheduler after leader change [#2608](https://github.com/pingcap/pd/pull/2608)
     - Fix the issue that sometimes replicas of a Region cannot be adjusted to the best location when placement rules are enabled [#2605](https://github.com/pingcap/pd/pull/2605)
