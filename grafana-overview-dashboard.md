@@ -9,7 +9,7 @@ aliases: ['/docs/dev/grafana-overview-dashboard/','/docs/dev/reference/key-monit
 
 If you use TiDB Ansible or TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
-the Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. A lot of metrics are there to help you diagnose.
 
 For routine operations, you can get an overview of the component (PD, TiDB, TiKV) status and the entire cluster from the Overview dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
 
@@ -28,7 +28,7 @@ PD | Abnormal stores | The number of nodes in the abnormal state. | 0 |
 PD | Number of Regions | The total number of Regions in the current cluster. Note that the number of Regions has nothing to do with the number of replicas. |
 PD | 99% completed_cmds_duration_seconds | The 99th percentile duration to complete a pd-server request. | less than 5ms
 PD | Handle\_requests\_duration\_seconds | The network duration of a PD request. |
-PD | Region health | The state of each Region. Generally, the number of pending peers is less than 100, and that of the miss peers cannot always be greater than 0. |
+PD | Region health | The state of each Region. | Generally, the number of pending peers is less than 100, and that of the miss peers cannot always be greater than 0. |
 PD | Hot write Region's leader distribution | The total number of leader Regions in hot write on each TiKV instance. |
 PD | Hot read Region's leader distribution | The total number of leader Regions in hot read on each TiKV instance. |
 PD | Region heartbeat report | The count of heartbeats reported to PD per instance. |
