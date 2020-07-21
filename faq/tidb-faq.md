@@ -140,8 +140,6 @@ See [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbint
 
 See [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/).
 
-### Public cloud
-
 #### What cloud vendors are currently supported by Cloud TiDB?
 
 Cloud TiDB is currently available on JD Cloud and UCloud, both of which are first-level database entries, and you are welcome to use them.
