@@ -74,25 +74,9 @@ Any language supported by MySQL client or driver.
 
 Yes. TiKV and TiDB support many popular standalone storage engines, such as GolevelDB and BoltDB. If the storage engine is a KV engine that supports transactions and it provides a client that meets the interface requirement of TiDB, then it can connect to TiDB.
 
-#### What's the recommended solution for the deployment of three geo-distributed data centers?
+#### In addition to the TiDB documentation, are there any other ways to acquire TiDB knowledge?
 
-The architecture of TiDB guarantees that it fully supports geo-distribution and multi-activeness. Your data and applications are always-on. All the outages are transparent to your applications and your data can recover automatically. The operation depends on the network latency and stability. It is recommended to keep the latency within 5ms. Currently, we already have similar use cases. For details, contact info@pingcap.com.
-
-#### Does TiDB provide any other knowledge resource besides the documentation?
-
-Currently, [TiDB documentation](https://pingcap.com/docs/) is the most important and timely way to get knowledge of TiDB. In addition, we also have some technical communication groups. If you have any needs, contact info@pingcap.com.
-
-#### What are the MySQL variables that TiDB is compatible with?
-
-See [The System Variables](/system-variables.md).
-
-#### Does TiDB support `select for update`?
-
-Yes. But it differs from MySQL in syntax. As a distributed database, TiDB uses the optimistic lock. `select for update` does not lock data when the transaction is started, but checks conflicts when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
-
-#### Can the codec of TiDB guarantee that the UTF-8 string is memcomparable? Is there any coding suggestion if our key needs to support UTF-8?
-
-The character sets of TiDB use UTF-8 by default and currently only support UTF-8. The string of TiDB uses the memcomparable format.
+Currently [TiDB documentation](/overview.md#tidb-introduction) is the most important and timely way to get TiDB related knowledge. In addition, we also have some technical communication groups. If you have any needs, contact [info@pingcap.com](mailto:info@pingcap.com).
 
 #### What is the length limit for the TiDB user name?
 
@@ -156,6 +140,7 @@ See [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbint
 
 See [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/).
 
+<<<<<<< HEAD
 ## Install, deploy and upgrade
 
 ### Prepare
@@ -1123,14 +1108,17 @@ Yes. Find the startup script on the machine where Prometheus is started, edit th
 In TiDB 2.0, Region health is monitored in the PD metric monitoring page, in which the `Region Health` monitoring item shows the statistics of all the Region replica status. `miss` means shortage of replicas and `extra` means the extra replica exists. In addition, `Region Health` also shows the isolation level by `label`. `level-1` means the Region replicas are isolated physically in the first `label` level. All the Regions are in `level-0` when `location label` is not configured.
 
 #### What is the meaning of `selectsimplefull` in Statement Count monitor?
+=======
+## Deployment on the cloud
+>>>>>>> d5a8134... Split the original faq to multiple files (#3240)
 
-It means full table scan but the table might be a small system table.
+### Public cloud
 
-#### What is the difference between `QPS` and `Statement OPS` in the monitor?
+#### What cloud vendors are currently supported by TiDB?
 
-The `QPS` statistics is about all the SQL statements, including `use database`, `load data`, `begin`, `commit`, `set`, `show`, `insert` and `select`.
+TiDB supports deployment on [Google GKE](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-gcp-gke/), [AWS EKS](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-aws-eks/) and [Alibaba Cloud ACK](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud/).
 
-The `Statement OPS` statistics is only about applications related SQL statements, including `select`, `update` and `insert`, therefore the `Statement OPS` statistics matches the applications better.
+In addition, TiDB is currently available on JD Cloud and UCloud, and has the first-level database entries on them.
 
 ## Troubleshoot
 
