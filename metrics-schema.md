@@ -1,11 +1,7 @@
 ---
 title: Metrics Schema
 summary: Learn the `METRICS_SCHEMA` schema.
-<<<<<<< HEAD:system-tables/system-table-metrics-schema.md
-aliases: ['/docs/stable/system-tables/system-table-metrics-schema/','/docs/v4.0/system-tables/system-table-metrics-schema/','/docs/stable/reference/system-databases/metrics-schema/']
-=======
-aliases: ['/docs/dev/system-tables/system-table-metrics-schema/','/docs/dev/reference/system-databases/metrics-schema/','/tidb/dev/system-table-metrics-schema/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):metrics-schema.md
+aliases: ['/docs/stable/system-tables/system-table-metrics-schema/','/docs/v4.0/system-tables/system-table-metrics-schema/','/docs/stable/reference/system-databases/metrics-schema/','/tidb/stable/system-table-metrics-schema/']
 ---
 
 # Metrics Schema

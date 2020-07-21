@@ -1,11 +1,7 @@
 ---
 title: METRICS_SUMMARY
 summary: Learn the `METRICS_SUMMARY` system table.
-<<<<<<< HEAD:system-tables/system-table-metrics-summary.md
-aliases: ['/docs/stable/system-tables/system-table-metrics-summary/','/docs/v4.0/system-tables/system-table-metrics-summary/','/docs/stable/reference/system-databases/metrics-summary/']
-=======
-aliases: ['/docs/dev/system-tables/system-table-metrics-summary/','/docs/dev/reference/system-databases/metrics-summary/',''/tidb/dev/system-table-metrics-summary/'']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-metrics-summary.md
+aliases: ['/docs/stable/system-tables/system-table-metrics-summary/','/docs/v4.0/system-tables/system-table-metrics-summary/','/docs/stable/reference/system-databases/metrics-summary/','/tidb/stable/system-table-metrics-summary/']
 ---
 
 # METRICS_SUMMARY

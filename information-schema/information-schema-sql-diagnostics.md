@@ -1,11 +1,7 @@
 ---
 title: SQL Diagnostics
 summary: Understand SQL diagnostics in TiDB.
-<<<<<<< HEAD:system-tables/system-table-sql-diagnostics.md
-aliases: ['/docs/stable/system-tables/system-table-sql-diagnostics/','/docs/v4.0/system-tables/system-table-sql-diagnostics/','/docs/stable/reference/system-databases/sql-diagnosis/','/docs/stable/system-tables/system-table-sql-diagnosis/']
-=======
-aliases: ['/docs/dev/system-tables/system-table-sql-diagnostics/','/docs/dev/reference/system-databases/sql-diagnosis/','/docs/dev/system-tables/system-table-sql-diagnosis/','/tidb/dev/system-table-sql-diagnostics/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-sql-diagnostics.md
+aliases: ['/docs/stable/system-tables/system-table-sql-diagnostics/','/docs/v4.0/system-tables/system-table-sql-diagnostics/','/docs/stable/reference/system-databases/sql-diagnosis/','/docs/stable/system-tables/system-table-sql-diagnosis/','/tidb/stable/system-table-sql-diagnostics/']
 ---
 
 # SQL Diagnostics

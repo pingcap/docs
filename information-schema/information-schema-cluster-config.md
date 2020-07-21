@@ -1,12 +1,7 @@
 ---
 title: CLUSTER_CONFIG
-<<<<<<< HEAD:system-tables/system-table-cluster-config.md
 summary: Learn the `CLUSTER_CONFIG` cluster configuration system table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-config/','/docs/v4.0/system-tables/system-table-cluster-config/','/docs/stable/reference/system-databases/cluster-config/']
-=======
-summary: Learn the `CLUSTER_CONFIG` information_schema table.
-aliases: ['/docs/dev/system-tables/system-table-cluster-config/','/docs/dev/reference/system-databases/cluster-config/','/tidb/dev/system-table-cluster-config/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-cluster-config.md
+aliases: ['/docs/stable/system-tables/system-table-cluster-config/','/docs/v4.0/system-tables/system-table-cluster-config/','/docs/stable/reference/system-databases/cluster-config/','/tidb/dev/system-table-cluster-config/']
 ---
 
 # CLUSTER_CONFIG

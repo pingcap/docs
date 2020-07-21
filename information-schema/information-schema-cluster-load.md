@@ -1,12 +1,7 @@
 ---
 title: CLUSTER_LOAD
-<<<<<<< HEAD:system-tables/system-table-cluster-load.md
 summary: Learn the `CLUSTER_LOAD` cluster load table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-load/','/docs/v4.0/system-tables/system-table-cluster-load/','/docs/stable/reference/system-databases/cluster-load/']
-=======
-summary: Learn the `CLUSTER_LOAD` information_schema table.
-aliases: ['/docs/dev/system-tables/system-table-cluster-load/','/docs/dev/reference/system-databases/cluster-load/','/tidb/dev/system-table-cluster-load/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-cluster-load.md
+aliases: ['/docs/stable/system-tables/system-table-cluster-load/','/docs/v4.0/system-tables/system-table-cluster-load/','/docs/stable/reference/system-databases/cluster-load/','/tidb/stable/system-table-cluster-load/']
 ---
 
 # CLUSTER_LOAD

@@ -1,11 +1,7 @@
 ---
 title: INSPECTION_SUMMARY
 summary: Learn the `INSPECTION_SUMMARY` inspection summary table.
-<<<<<<< HEAD:system-tables/system-table-inspection-summary.md
-aliases: ['/docs/stable/system-tables/system-table-inspection-summary/','/docs/v4.0/system-tables/system-table-inspection-summary/','/docs/stable/reference/system-databases/inspection-summary/']
-=======
-aliases: ['/docs/dev/system-tables/system-table-inspection-summary/','/docs/dev/reference/system-databases/inspection-summary/','/tidb/dev/system-table-inspection-summary/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-inspection-summary.md
+aliases: ['/docs/stable/system-tables/system-table-inspection-summary/','/docs/v4.0/system-tables/system-table-inspection-summary/','/docs/stable/reference/system-databases/inspection-summary/','/tidb/stable/system-table-inspection-summary/']
 ---
 
 # INSPECTION_SUMMARY

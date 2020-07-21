@@ -1,12 +1,7 @@
 ---
 title: CLUSTER_HARDWARE
-<<<<<<< HEAD:system-tables/system-table-cluster-hardware.md
 summary: Learn the `CLUSTER_HARDWARE` cluster hardware system table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-hardware/','/docs/v4.0/system-tables/system-table-cluster-hardware/','/docs/stable/reference/system-databases/cluster-hardware/']
-=======
-summary: Learn the `CLUSTER_HARDWARE` information_schema table.
-aliases: ['/docs/dev/system-tables/system-table-cluster-hardware/','/docs/dev/reference/system-databases/cluster-hardware/','/tidb/dev/system-table-cluster-hardware/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-cluster-hardware.md
+aliases: ['/docs/stable/system-tables/system-table-cluster-hardware/','/docs/v4.0/system-tables/system-table-cluster-hardware/','/docs/stable/reference/system-databases/cluster-hardware/','/tidb/stable/system-table-cluster-hardware/']
 ---
 
 # CLUSTER_HARDWARE

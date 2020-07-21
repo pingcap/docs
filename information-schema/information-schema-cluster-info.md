@@ -1,11 +1,7 @@
 ---
 title: CLUSTER_INFO
 summary: Learn the `CLUSTER_INFO` cluster topology information table.
-<<<<<<< HEAD:system-tables/system-table-cluster-info.md
-aliases: ['/docs/stable/system-tables/system-table-cluster-info/','/docs/v4.0/system-tables/system-table-cluster-info/','/docs/stable/reference/system-databases/cluster-info/']
-=======
-aliases: ['/docs/dev/system-tables/system-table-cluster-info/','/docs/dev/reference/system-databases/cluster-info/','/tidb/dev/system-table-cluster-info/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-cluster-info.md
+aliases: ['/docs/stable/system-tables/system-table-cluster-info/','/docs/v4.0/system-tables/system-table-cluster-info/','/docs/stable/reference/system-databases/cluster-info/','/tidb/stable/system-table-cluster-info/']
 ---
 
 # CLUSTER_INFO

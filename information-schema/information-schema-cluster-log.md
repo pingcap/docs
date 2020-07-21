@@ -1,12 +1,7 @@
 ---
 title: CLUSTER_LOG
-<<<<<<< HEAD:system-tables/system-table-cluster-log.md
 summary: Learn the `CLUSTER_LOG` cluster log table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-log/','/docs/v4.0/system-tables/system-table-cluster-log/','/docs/stable/reference/system-databases/cluster-log/']
-=======
-summary: Learn the `CLUSTER_LOG` information_schema table.
-aliases: ['/docs/dev/system-tables/system-table-cluster-log/','/docs/dev/reference/system-databases/cluster-log/','/tidb/dev/system-table-cluster-log/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-cluster-log.md
+aliases: ['/docs/stable/system-tables/system-table-cluster-log/','/docs/v4.0/system-tables/system-table-cluster-log/','/docs/stable/reference/system-databases/cluster-log/','/tidb/stable/system-table-cluster-log/']
 ---
 
 # CLUSTER_LOG

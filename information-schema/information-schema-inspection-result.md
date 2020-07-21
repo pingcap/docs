@@ -1,11 +1,7 @@
 ---
 title: INSPECTION_RESULT
 summary: Learn the `INSPECTION_RESULT` diagnostic result table.
-<<<<<<< HEAD:system-tables/system-table-inspection-result.md
-aliases: ['/docs/stable/system-tables/system-table-inspection-result/','/docs/v4.0/system-tables/system-table-inspection-result/','/docs/stable/reference/system-databases/inspection-result/']
-=======
-aliases: ['/docs/dev/system-tables/system-table-inspection-result/','/docs/dev/reference/system-databases/inspection-result/','/tidb/dev/system-table-inspection-result/']
->>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-inspection-result.md
+aliases: ['/docs/stable/system-tables/system-table-inspection-result/','/docs/v4.0/system-tables/system-table-inspection-result/','/docs/stable/reference/system-databases/inspection-result/','/tidb/stable/system-table-inspection-result/']
 ---
 
 # INSPECTION_RESULT
