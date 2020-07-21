@@ -3,7 +3,7 @@ title: Troubleshoot Lock Conflicts
 summary: Learn to analyze and resolve lock conflicts in TiDB.
 ---
 
-# TiDB Lock Conflict Handling
+# Troubleshoot Lock Conflicts
  
 TiDB supports complete distributed transactions. Starting from v3.0, TiDB provides optimistic transaction mode and pessimistic transaction mode. This document introduces how to troubleshoot and resolve lock conflicts in TiDB.
 
