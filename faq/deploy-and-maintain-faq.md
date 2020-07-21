@@ -3,7 +3,7 @@ title: Deployment, Operations and Maintenance FAQs
 summary: Learn about the FAQs related to TiDB deployment, operations and maintenance.
 ---
 
-# Deploy Operation and Maintenance FAQs
+# Deployment, Operation and Maintenance FAQs
 
 This document summarizes the FAQs related to TiDB deployment, operations and maintenance.
 
@@ -88,21 +88,21 @@ Check the time difference between the machine time of the monitor and the time w
 
 | Variable        | Description                                                |
 | ---- | ------- |
-| cluster_name | the name of a cluster, adjustable |
-| tidb_version | the version of TiDB, configured by default in TiDB Ansible branches |
-| deployment_method | the method of deployment, binary by default, Docker optional |
-| process_supervision | the supervision way of processes, systemd by default, supervise optional |
-| timezone | the timezone of the managed node, adjustable, `Asia/Shanghai` by default, used with the `set_timezone` variable |
-| set_timezone | to edit the timezone of the managed node, True by default; False means closing |
-| enable_elk | currently not supported |
-| enable_firewalld | to enable the firewall, closed by default |
-| enable_ntpd | to monitor the NTP service of the managed node, True by default; do not close it |
-| machine_benchmark | to monitor the disk IOPS of the managed node, True by default; do not close it |
-| set_hostname | to edit the hostname of the managed node based on the IP, False by default |
-| enable_binlog | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
-| zookeeper_addrs | the ZooKeeper address of the binlog Kafka cluster |
-| enable_slow_query_log | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
-| deploy_without_tidb | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
+| `cluster_name` | the name of a cluster, adjustable |
+| `tidb_version` | the version of TiDB, configured by default in TiDB Ansible branches |
+| `deployment_method` | the method of deployment, binary by default, Docker optional |
+| `process_supervision` | the supervision way of processes, systemd by default, supervise optional |
+| `timezone` | the timezone of the managed node, adjustable, `Asia/Shanghai` by default, used with the `set_timezone` variable |
+| `set_timezone` | to edit the timezone of the managed node, True by default; False means closing |
+| `enable_elk` | currently not supported |
+| `enable_firewalld` | to enable the firewall, closed by default |
+| `enable_ntpd` | to monitor the NTP service of the managed node, True by default; do not close it |
+| `machine_benchmark` | to monitor the disk IOPS of the managed node, True by default; do not close it |
+| `set_hostname` | to edit the hostname of the managed node based on the IP, False by default |
+| `enable_binlog` | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
+| `zookeeper_addrs` | the ZooKeeper address of the binlog Kafka cluster |
+| `enable_slow_query_log` | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
+| `deploy_without_tidb` | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 
 ### Deploy TiDB offline using TiDB Ansible（not recommended since TiDB v4.0)
 
