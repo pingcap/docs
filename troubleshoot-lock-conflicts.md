@@ -31,12 +31,12 @@ You can detect the read-write conflict in your TiDB cluster by the following way
 
 1. Monitoring metrics and logs of the TiDB server
 
-    * Monitoring data through TiDB Server
+    * Monitoring data through Grafana
 
-    The panel of `KV Errors` in the TiDB dashboard has two monitored metrics are `Lock Resolve OPS` and `KV Backoff OPS` which can check read-write conflict in the transactions. If too many read-write conflicts in the current situation, the monitoring value both of `not_expired`and `resolve` in the `Lock Resolve OPS` plane which have an obvious upward trend. The `not_expired` means that before the one of the transaction's lock hasn't timeout. The `resolve` metric means that the other transaction will try to resolve lock operation. The other monitoring value of `txnLockFast` in the `KV Backoff OPS` plane will have the same upward trend which represents read-write conflict peer of operation.
+        On the `KV Errors` panel in the TiDB dashboard, there are two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check read-write conflicts in the transactions. If there are many read-write conflicts, the monitoring value of both `not_expired` and `resolve` in the `Lock Resolve OPS` panel which have an obvious upward trend. The `not_expired` means that before the one of the transaction's lock hasn't timeout. The `resolve` metric means that the other transaction will try to resolve lock operation. The other monitoring value of `txnLockFast` in the `KV Backoff OPS` plane will have the same upward trend which represents read-write conflict peer of operation.
 
-    ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
-    ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
+        ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
+        ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
 
     * Logs of the TiDB server
 
@@ -227,6 +227,6 @@ In a scenario where a pessimistic transaction has a deadlock, one of the transac
 [err="[executor:1213]Deadlock found when trying to get lock; try restarting transaction"]
 ```
 
-Solutions: 
+Solutions:
 
 * The application needs to adjust transaction request logic when there too many more deadlocks. 
