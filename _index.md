@@ -1,7 +1,6 @@
 ---
 title: TiDB Introduction
 summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
-category: introduction
 aliases: ['/docs/dev/']
 ---
 
@@ -79,7 +78,8 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
 - [Identify Slow Queries](/identify-slow-queries.md)
-- [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
+- [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
+- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
 - [Troubleshoot the TiDB Cluster](/troubleshoot-tidb-cluster.md)
 - [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
 - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
@@ -89,7 +89,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 <NavColumn>
 <ColumnTitle>Reference</ColumnTitle>
 
-- [TiDB Architecture](/architecture.md)
+- [TiDB Architecture](/tidb-architecture.md)
 - [Key Monitoring Metrics](/grafana-overview-dashboard.md)
 - [Enable TLS](/enable-tls-between-clients-and-servers.md)
 - [Privilege Management](/privilege-management.md)
