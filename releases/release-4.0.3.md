@@ -161,3 +161,7 @@ TiDB version: 4.0.3
     + TiDB Lightning
 
         - Fix the issue that `--log-file` does not take effect [#345](https://github.com/pingcap/tidb-lightning/pull/345)
+
+    + TiDB Binlog
+
+       - Fix the issue that not enable TLS to save checkpoint when enabling TLS for replicating [#988](https://github.com/pingcap/tidb-binlog/pull/988)
