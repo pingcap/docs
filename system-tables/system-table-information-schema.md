@@ -57,6 +57,13 @@ SELECT * FROM character_sets;
 5 rows in set (0.00 sec)
 ```
 
+The description of columns in the `CHARACTER_SETS` table is as follows:
+
+* `CHARACTER_SET_NAME`: The name of the character set.
+* `DEFAULT_COLLATE_NAME`：The default collation name of the character set.
+* `DESCRIPTION`：The description of the character set.
+* `MAXLEN`：The maximum length required to store a character in this character set.
+
 ### COLLATIONS table
 
 The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table.  Currently this table is included only for compatibility with MySQL, as TiDB only supports binary collation:
@@ -101,6 +108,15 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 26 rows in set (0.00 sec)
 ```
 
+The description of columns in the `COLLATION` table is as follows:
+
+* `COLLATION_NAME`: The name of the collation.
+* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
+* `ID`: The ID of the collation.
+* `IS_DEFAULT`: Whether this collation is the default collation of the character set it belongs to.
+* `IS_COMPILED`: Whether the character set is compiled into the server.
+* `SORTLEN`: The minimum length of memory allocated when the collation sorts characters.
+
 ### COLLATION_CHARACTER_SET_APPLICABILITY table
 
 The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applicable character set name.  Similar to the `COLLATIONS` table, it is included only for compatibility with MySQL:
@@ -111,39 +127,16 @@ The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applica
 SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
 ```
 
-```sql
-+------------------------+--------------------+
-| COLLATION_NAME         | CHARACTER_SET_NAME |
-+------------------------+--------------------+
-| utf8mb4_general_ci     | utf8mb4            |
-| utf8mb4_bin            | utf8mb4            |
-| utf8mb4_unicode_ci     | utf8mb4            |
-| utf8mb4_icelandic_ci   | utf8mb4            |
-| utf8mb4_latvian_ci     | utf8mb4            |
-| utf8mb4_romanian_ci    | utf8mb4            |
-| utf8mb4_slovenian_ci   | utf8mb4            |
-| utf8mb4_polish_ci      | utf8mb4            |
-| utf8mb4_estonian_ci    | utf8mb4            |
-| utf8mb4_spanish_ci     | utf8mb4            |
-| utf8mb4_swedish_ci     | utf8mb4            |
-| utf8mb4_turkish_ci     | utf8mb4            |
-| utf8mb4_czech_ci       | utf8mb4            |
-| utf8mb4_danish_ci      | utf8mb4            |
-| utf8mb4_lithuanian_ci  | utf8mb4            |
-| utf8mb4_slovak_ci      | utf8mb4            |
-| utf8mb4_spanish2_ci    | utf8mb4            |
-| utf8mb4_roman_ci       | utf8mb4            |
-| utf8mb4_persian_ci     | utf8mb4            |
-| utf8mb4_esperanto_ci   | utf8mb4            |
-| utf8mb4_hungarian_ci   | utf8mb4            |
-| utf8mb4_sinhala_ci     | utf8mb4            |
-| utf8mb4_german2_ci     | utf8mb4            |
-| utf8mb4_croatian_ci    | utf8mb4            |
-| utf8mb4_unicode_520_ci | utf8mb4            |
-| utf8mb4_vietnamese_ci  | utf8mb4            |
-+------------------------+--------------------+
-26 rows in set (0.00 sec)
-```
++----------------+--------------------+
+| COLLATION_NAME | CHARACTER_SET_NAME |
++----------------+--------------------+
+| utf8mb4_bin    | utf8mb4            |
++----------------+--------------------+
+
+The description of columns in the `COLLATION_CHARACTER_SET_APPLICABILITY` table is as follows:
+
+* `COLLATION_NAME`: The name of the collation.
+* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
 
 ### COLUMNS table
 
@@ -423,6 +416,11 @@ SELECT * FROM session_variables LIMIT 10;
 10 rows in set (0.00 sec)
 ```
 
+The description of columns in the `SESSION_VARIABLES` table is as follows:
+
+* `VARIABLE_NAME`: The name of the session-level variable in the database.
+* `VARIABLE_VALUE`: The value of the session-level variable in the database.
+
 ## SLOW_QUERY table
 
 The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
@@ -679,6 +677,30 @@ SHOW TABLES
   [LIKE 'wild']
 ```
 
+The description of columns in the `TABLES` table is as follows:
+
+* `TABLE_CATALOG`: The name of the catalog which the table belongs to. The value is always `def`.
+* `TABLE_SCHEMA`: The name of the schema which the table belongs to.
+* `TABLE_NAME`: The name of the table.
+* `TABLE_TYPE`: The type of the table.
+* `ENGINE`: The type of the storage engine. The value is currently `InnoDB`.
+* `VERSION`: Version. The value is `10` by default.
+* `ROW_FORMAT`: The row format. The value is currently `Compact`.
+* `TABLE_ROWS`: The number of rows in the table in statistics.
+* `AVG_ROW_LENGTH`: The average row length of the table. `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS`.
+* `DATA_LENGTH`: Data length. `DATA_LENGTH` = `TABLE_ROWS` \* the sum of storage lengths of the columns in the tuple. The replicas of TiKV are not taken into account.
+* `MAX_DATA_LENGTH`: The maximum data length. The value is currently `0`, which means the data length has no upper limit.
+* `INDEX_LENGTH`: The index length. `INDEX_LENGTH` = `TABLE_ROWS` \* the sum of lengths of the columns in the index tuple. The replicas of TiKV are not taken into account.
+* `DATA_FREE`: Data fragment. The value is currently `0`.
+* `AUTO_INCREMENT`: The current step of the auto-increment primary key.
+* `CREATE_TIME`: The time at which the table is created.
+* `UPDATE_TIME`: The time at which the table is updated.
+* `CHECK_TIME`: The time at which the table is checked.
+* `TABLE_COLLATION`: The collation of strings in the table.
+* `CHECKSUM`: Checksum.
+* `CREATE_OPTIONS`: Creates options.
+* `TABLE_COMMENT`: The comments and notes of the table.
+
 Most of the information in the table is the same as MySQL. Only two columns are newly defined by TiDB:
 
 * `TIDB_TABLE_ID`: to indicate the internal ID of a table. This ID is unique in a TiDB cluster.
@@ -773,6 +795,19 @@ desc TIDB_HOT_REGIONS;
 | FLOW_BYTES     | bigint(21) unsigned | YES  |     | <null>  |       |
 +----------------+---------------------+------+-----+---------+-------+
 ```
+
+The description of columns in the `TIDB_HOT_REGIONS` table is as follows:
+
+* `TABLE_ID`: ID of the table in which the hot Region is located.
+* `INDEX_ID`: ID of the index in which the hot Region is located.
+* `DB_NAME`: The database name of the object in which the hot Region is located.
+* `TABLE_NAME`: The name of the table in which the hot Region is located.
+* `INDEX_NAME`: The name of the index in which the hot Region is located.
+* `REGION_ID`: ID of the hot Region.
+* `TYPE`: The type of the hot Region.
+* `MAX_HOT_DEGREE`: The maximum hot degree of the Region.
+* `REGION_COUNT`: The number of Regions in the instance.
+* `FLOW_BYTES`: The number of bytes written and read in the Region.
 
 ### TIDB_INDEXES table
 
