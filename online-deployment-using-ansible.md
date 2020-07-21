@@ -1,11 +1,16 @@
 ---
 title: Deploy TiDB Using TiDB Ansible
 summary: Use TiDB Ansible to deploy a TiDB cluster.
-category: how-to
-aliases: ['/docs/dev/how-to/deploy/orchestrated/ansible/']
+aliases: ['/docs/dev/online-deployment-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible/']
 ---
 
 # Deploy TiDB Using TiDB Ansible
+
+> **Warning:**
+>
+> For production environments, it is recommended that you [deploy TiDB using TiUP](/production-deployment-using-tiup.md). Since v4.0, it is not recommended to deploy TiDB using TiDB Ansible. You can [import the TiDB cluster deployed by TiDB Ansible to TiUP](/upgrade-tidb-using-tiup.md#import-the-tidb-ansible-cluster-to-tiup).
+>
+> If you only want to try out TiDB and explore new features, refer to [Quick Start Guide](/quick-start-with-tidb.md) or [deploy TiDB using Docker Compose](/deploy-test-cluster-using-docker-compose.md) on a single machine.
 
 This guide describes how to deploy a TiDB cluster using TiDB Ansible. For the production environment, it is recommended to deploy TiDB using TiDB Ansible.
 
@@ -27,10 +32,6 @@ You can use the TiDB Ansible configuration file to set up the cluster topology a
 - [Enable the cluster binlog](/tidb-binlog/tidb-binlog-overview.md)
 - [Clean up data of the TiDB cluster](/maintain-tidb-using-ansible.md#clean-up-cluster-data)
 - [Destroy the TiDB cluster](/maintain-tidb-using-ansible.md#destroy-a-cluster)
-
-> **Note:**
->
-> For production environments, it is recommended that you deploy TiDB [using TiUP](/production-deployment-using-tiup.md). You can also deploy TiDB using TiDB Ansible. If you only want to try TiDB out and explore the features, it is recommended to [deploy TiDB using Docker Compose](/deploy-test-cluster-using-docker-compose.md) on a single machine.
 
 ## Prepare
 
@@ -735,6 +736,10 @@ Because TiDB is compatible with MySQL, you must use the MySQL client to connect 
 
     - Address: <http://172.16.10.1:3000>
     - Default account and password: `admin`; `admin`
+
+> **Note:**
+>
+> By default, TiDB periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
 
 ## Deployment FAQs
 

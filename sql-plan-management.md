@@ -1,8 +1,7 @@
 ---
 title: SQL Plan Management (SPM)
 summary: Learn about SQL Plan Management in TiDB.
-category: reference
-aliases: ['/docs/dev/reference/performance/execution-plan-bind/','/docs/dev/execution-plan-binding/']
+aliases: ['/docs/dev/sql-plan-management/','/docs/dev/reference/performance/execution-plan-bind/','/docs/dev/execution-plan-binding/']
 ---
 
 # SQL Plan Management (SPM)
@@ -91,7 +90,7 @@ This statement removes a specified execution plan binding at the GLOBAL or SESSI
 
 Generally, the binding in the SESSION scope is mainly used for test or in special situations. For a binding to take effect in all TiDB processes, you need to use the GLOBAL binding. A created SESSION binding shields the corresponding GLOBAL binding until the end of the SESSION, even if the SESSION binding is dropped before the session closes. In this case, no binding takes effect and the plan is selected by the optimizer.
 
-The following example is based on the example in [create binding](#create-binding) in which the SESSION binding shields the GLOBAL binding:
+The following example is based on the example in [create binding](#create-a-binding) in which the SESSION binding shields the GLOBAL binding:
 
 ```sql
 -- Drops the binding created in the SESSION scope.
@@ -123,6 +122,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | update_time | Updating time |
 | charset | Character set |
 | collation | Ordering rule |
+| source | The way in which a binding is created, including `manual` (created by the `create [global] binding` SQL statement), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
 
 ## Baseline capturing
 

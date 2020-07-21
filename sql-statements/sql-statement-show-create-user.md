@@ -1,8 +1,7 @@
 ---
 title: SHOW CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-create-user/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-create-user/','/docs/dev/reference/sql/statements/show-create-user/']
 ---
 
 # SHOW CREATE USER
@@ -11,9 +10,9 @@ This statement shows how to re-create a user using the `CREATE USER` syntax.
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowCreateUserStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowCreateUserStmt](/media/sqlgram/ShowCreateUserStmt.png)
 
 **Username:**
 

@@ -1,8 +1,7 @@
 ---
 title: Use BR to Back up and Restore Data
 summary: Learn how to back up and restore data of the TiDB cluster using BR.
-category: how-to
-aliases: ['/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/']
+aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/']
 ---
 
 # Use BR to Back up and Restore Data
@@ -29,7 +28,11 @@ Refer to the [download page](/download-ecosystem-tools.md#br-backup-and-restore)
 
 BR sends the backup or restoration commands to each TiKV node. After receiving these commands, TiKV performs the corresponding backup or restoration operations. Each TiKV node has a path in which the backup files generated in the backup operation are stored and from which the stored backup files are read during the restoration.
 
-### Backup principle
+![br-arch](/media/br-arch.png)
+
+<details>
+
+<summary>Backup principle</summary>
 
 When BR performs a backup operation, it first obtains the following information from PD:
 
@@ -67,14 +70,14 @@ If `StartVersion` is not `0`, the backup is seen as an incremental backup. In ad
 
 If checksum is enabled when you execute the backup command, BR calculates the checksum of each backed up table for data check.
 
-#### Types of backup files
+### Types of backup files
 
 Two types of backup files are generated in the path where backup files are stored:
 
 - **The SST file**: stores the data that the TiKV node backed up.
 - **The `backupmeta` file**: stores the metadata of this backup operation, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
 
-#### The format of the SST file name
+### The format of the SST file name
 
 The SST file is named in the format of `storeID_regionID_regionEpoch_keyHash_cf`, where
 
@@ -82,9 +85,13 @@ The SST file is named in the format of `storeID_regionID_regionEpoch_keyHash_cf`
 - `regionID` is the Region ID;
 - `regionEpoch` is the version number of the Region;
 - `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures the uniqueness of a key;
-- `cf` indicates the [Column Family](/tune-tikv-performance.md#tune-tikv-performance) of RocksDB (`default` or `write` by default).
+- `cf` indicates the [Column Family](/tune-tikv-memory-performance.md) of RocksDB (`default` or `write` by default).
 
-### Restoration principle
+</details>
+
+<details>
+
+<summary>Restoration principle</summary>
 
 During the data restoration process, BR performs the following tasks in order:
 
@@ -102,7 +109,7 @@ After TiKV receives the request to load the SST file, TiKV uses the Raft mechani
 
 After the restoration operation is completed, BR performs a checksum calculation on the restored data to compare the stored data with the backed up data.
 
-![br-arch](/media/br-arch.png)
+</details>
 
 ## Command-line description
 
@@ -269,6 +276,25 @@ For descriptions of other options, see [Back up all cluster data](#back-up-all-t
 
 A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
 
+### Back up with table filter
+
+To back up multiple tables with more complex criteria, execute the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+
+**Usage example:**
+
+The following command backs up the data of all tables in the form `db*.tbl*` to the `/tmp/backup` path on each TiKV node and writes the `backupmeta` file to this path.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+br backup full \
+    --pd "${PDIP}:2379" \
+    --filter 'db*.tbl*' \
+    --storage "local:///tmp/backup" \
+    --ratelimit 120 \
+    --log-file backupfull.log
+```
+
 ### Back up data to Amazon S3 backend
 
 If you back up the data to the Amazon S3 backend, instead of `local` storage, you need to specify the S3 storage path in the `storage` sub-command, and allow the BR node and the TiKV node to access Amazon S3.
@@ -304,7 +330,7 @@ If you want to back up incrementally, you only need to specify the **last backup
 The incremental backup has two limitations:
 
 - The incremental backup needs to be under a different path from the previous full backup.
-- No GC (Garbage Collection) happens between the start time of the incremental backup and `lastbackupts`.
+- GC (Garbage Collection) safepoint must be before the `lastbackupts`.
 
 To back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]`, execute the following command:
 
@@ -443,6 +469,24 @@ br restore table \
 
 In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data) and [Restore a database](#restore-a-database).
 
+### Restore with table filter
+
+To restore multiple tables with more complex criteria, execute the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+
+**Usage example:**
+
+The following command restores a subset of tables backed up in the `/tmp/backup` path to the cluster.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+br restore full \
+    --pd "${PDIP}:2379" \
+    --filter 'db*.tbl*' \
+    --storage "local:///tmp/backup" \
+    --log-file restorefull.log
+```
+
 ### Restore data from Amazon S3 backend
 
 If you restore data from the Amazon S3 backend, instead of `local` storage, you need to specify the S3 storage path in the `storage` sub-command, and allow the BR node and the TiKV node to access Amazon S3.
@@ -487,12 +531,14 @@ Similar to [backing up Raw KV](#back-up-raw-kv-experimental-feature), you can ex
 
 {{< copyable "shell-regular" >}}
 
+```shell
 br restore raw --pd $PD_ADDR \
     -s "local://$BACKUP_DIR" \
     --start 31 \
     --end 3130303030303030 \
     --format hex \
     --cf default
+```
 
 In the above example, all the backed up keys in the range `[0x31, 0x3130303030303030)` are restored to the TiKV cluster. The coding methods of these keys are identical to that of [keys during the backup process](#back-up-raw-kv-experimental-feature)
 

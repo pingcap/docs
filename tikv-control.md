@@ -1,15 +1,38 @@
 ---
 title: TiKV Control User Guide
 summary: Use TiKV Control to manage a TiKV cluster.
-category: reference
-aliases: ['/docs/dev/reference/tools/tikv-control/']
+aliases: ['/docs/dev/tikv-control/','/docs/dev/reference/tools/tikv-control/']
 ---
 
 # TiKV Control User Guide
 
-TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster.
+TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. Its installation directory is as follows:
 
-When you compile TiKV, the `tikv-ctl` command is also compiled at the same time. If the cluster is deployed using TiDB Ansible, the `tikv-ctl` binary file exists in the corresponding `tidb-ansible/resources/bin` directory. If the cluster is deployed using the binary, the `tikv-ctl` file is in the `bin` directory together with other files such as `tidb-server`, `pd-server`, `tikv-server`, etc.
+* If the cluster is deployed using TiDB Ansible, `tikv-ctl` directory is in the `resources/bin` subdirectory under the `ansible` directory.
+* If the cluster is deployed using TiUP, `tikv-ctl` directory is in the in `~/.tiup/components/ctl/{VERSION}/` directory.
+
+[TiUP](https://github.com/pingcap-incubator/tiuptiup) is a deployment tool introduced later than TiDB Ansible, and its usage is simpler. `tikv-ctl` is also integrated in the `tiup` command. Execute the following command to call the `tikv-ctl` tool:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+tiup ctl tikv
+```
+
+```
+Starting component `ctl`: ~/.tiup/components/ctl/v4.0.0-rc.2/ctl tikv
+TiKV Control (tikv-ctl)
+Release Version:   4.0.0-rc.2
+Edition:           Community
+Git Commit Hash:   2fdb2804bf8ffaab4b18c4996970e19906296497
+Git Commit Branch: heads/refs/tags/v4.0.0-rc.2
+UTC Build Time:    2020-05-15 11:58:49
+Rust Version:      rustc 1.42.0-nightly (0de96d37f 2019-12-19)
+Enable Features:   jemalloc portable sse protobuf-codec
+Profile:           dist_release
+```
+
+You can add corresponding parameters and subcommands after `tiup ctl tikv`.
 
 ## General options
 
@@ -149,7 +172,11 @@ The properties can be used to check whether the Region is healthy or not. If not
 
 ### Compact data of each TiKV manually
 
-Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. You can use the `--db` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`. Also, the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
+Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. 
+
+- Use the `--host` option to specify the TiKV that you need to compact.
+- Use the `-d` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`.
+- Use the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db compact -d kv
@@ -164,29 +191,39 @@ Use the `compact-cluster` command to manually compact data of the whole TiKV clu
 
 The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
 
-In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism.
+In a TiKV instance, you can use this command to set the status of some Regions to tombstone. Then when you restart the instance, those Regions are skipped to avoid the restart failure caused by damaged Raft state machines of those Regions. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue the reads and writes through the Raft mechanism.
 
-Follow the two steps to set a Region to Tombstone:
+In general cases, you can remove the corresponding Peer of this Region using the `remove-peer` command:
 
-1. Remove the corresponding Peer of this Region on the machine in `pd-ctl`:
+{{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+```shell
+pd-ctl operator add remove-peer <region_id> <store_id>
+```
 
-    ```shell
-    pd-ctl operator add remove-peer <region_id> <store_id>
-    ```
+Then use the `tikv-ctl` tool to set a Region to tombstone on the corresponding TiKV instance to skip the health check for this Region at startup:
 
-2. Use the `tombstone` command to set a Region to Tombstone:
+{{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+```shell
+tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
+```
 
-    ```shell
-    tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
-    ```
+```
+success!
+```
 
-    ```
-    success!
-    ```
+However, in some cases, you cannot easily remove this Peer of this Region from PD, so you can specify the `--force` option in `tikv-ctl` to forcibly set the Peer to tombstone:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>,<region_id> --force
+```
+
+```
+success!
+```
 
 > **Note:**
 >
@@ -277,7 +314,8 @@ success!
 
 Use the `recover-mvcc` command in circumstances where TiKV cannot run normally caused by MVCC data corruption. It cross-checks 3 CFs ("default", "write", "lock") to recover from various kinds of inconsistency.
 
-Use the `-r` option to specify involved Regions by `region_id`. Use the `-p` option to specify PD endpoints.
+- Use the `-r` option to specify involved Regions by `region_id`. 
+- Use the `-p` option to specify PD endpoints.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
@@ -292,7 +330,7 @@ success!
 
 ### Ldb Command
 
-The ldb command line tool offers multiple data access and database administration commands. Some examples are listed below.
+The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below.
 For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
 
 Examples of data access sequence:
@@ -312,3 +350,60 @@ $ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 You can specify the column family that your query is against using the `--column_family=<string>` command line.
 
 `--try_load_options` loads the database options file to open the database. It is recommended to always keep this option on when the database is running. If you open the database with default options, the LSM-tree might be messed up, which cannot be recovered automatically.
+
+### Dump encryption metadata
+
+Use the `encryption-meta` subcommand to dump encryption metadata. The subcommand can dump two types of metadata: encryption info for data files, and the list of data encryption keys used.
+
+To dump encryption info for data files, use the `encryption-meta dump-file` subcommand. You need to create a TiKV config file to specify `data-dir` for the TiKV deployment:
+
+```
+# conf.toml
+[storage]
+data-dir = "/path/to/tikv/data"
+```
+
+The `--path` option can be used to specify an absolute or relative path to the data file of interest. The command might give empty output if the data file is not encrypted. If `--path` is not provided, encryption info for all data files will be printed.
+    
+```bash
+$ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
+/path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
+```
+
+To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. For how to config master key, refer to [Encryption-At-Rest](/encryption-at-rest.md). Also with this command, the `security.encryption.previous-master-key` config will be ignored, and the master key rotation will not be triggered.
+
+```
+# conf.toml
+[storage]
+data-dir = "/path/to/tikv/data"
+
+[security.encryption.master-key]
+type = "kms"
+key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
+region = "us-west-2"
+```
+
+Note if the master key is a AWS KMS key, `tikv-ctl` needs to have access to the KMS key. Access to a AWS KMS key can be granted to `tikv-ctl` via environment variable, AWS default config file, or IAM role, whichever is suitable. Refer to AWS document for usage.
+
+The `--ids` option can be used to specified a list of comma-separated data encryption key ids to print. If `--ids` is not provided, all data encryption keys will be printed, along with current key id, which is the id of the latest active data encryption key.
+
+When using the command, you will see a prompt warning that the action will expose sensitive information. Type "I consent" to continue.
+
+```bash
+$ ./tikv-ctl --config=./conf.toml encryption-meta dump-key
+This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
+Type "I consent" to continue, anything else to exit: I consent
+current key id: 9291156302549018620
+9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
+```
+
+```bash
+$ ./tikv-ctl --config=./conf.toml encryption-meta dump-key --ids=9291156302549018620
+This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
+Type "I consent" to continue, anything else to exit: I consent
+9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
+```
+
+> **Note**
+>
+> The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.

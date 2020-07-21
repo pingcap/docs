@@ -1,8 +1,7 @@
 ---
 title: EXECUTE | TiDB SQL Statement Reference
 summary: An overview of the usage of EXECUTE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/execute/']
+aliases: ['/docs/dev/sql-statements/sql-statement-execute/','/docs/dev/reference/sql/statements/execute/']
 ---
 
 # EXECUTE
@@ -14,10 +13,6 @@ The `EXECUTE` statement provides an SQL interface to server-side prepared statem
 **ExecuteStmt:**
 
 ![ExecuteStmt](/media/sqlgram/ExecuteStmt.png)
-
-**Identifier:**
-
-![Identifier](/media/sqlgram/Identifier.png)
 
 ## Examples
 

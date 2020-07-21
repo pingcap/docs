@@ -1,8 +1,7 @@
 ---
 title: ALTER TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER TABLE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/alter-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-alter-table/','/docs/dev/reference/sql/statements/alter-table/']
 ---
 
 # ALTER TABLE
@@ -37,32 +36,31 @@ Query OK, 5 rows affected (0.03 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
-+---------------------+----------+------+-------------------------------------------------------------+
-| id                  | count    | task | operator info                                               |
-+---------------------+----------+------+-------------------------------------------------------------+
-| TableReader_7       | 10.00    | root | data:Selection_6                                            |
-| └─Selection_6       | 10.00    | cop  | eq(test.t1.c1, 3)                                           |
-|   └─TableScan_5     | 10000.00 | cop  | table:t1, range:[-inf,+inf], keep order:false, stats:pseudo |
-+---------------------+----------+------+-------------------------------------------------------------+
++-------------------------+----------+-----------+---------------+--------------------------------+
+| id                      | estRows  | task      | access object | operator info                  |
++-------------------------+----------+-----------+---------------+--------------------------------+
+| TableReader_7           | 10.00    | root      |               | data:Selection_6               |
+| └─Selection_6           | 10.00    | cop[tikv] |               | eq(test.t1.c1, 3)              |
+|   └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t1      | keep order:false, stats:pseudo |
++-------------------------+----------+-----------+---------------+--------------------------------+
 3 rows in set (0.00 sec)
 
 mysql> ALTER TABLE t1 ADD INDEX (c1);
 Query OK, 0 rows affected (0.30 sec)
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
-+-------------------+-------+------+-----------------------------------------------------------------+
-| id                | count | task | operator info                                                   |
-+-------------------+-------+------+-----------------------------------------------------------------+
-| IndexReader_6     | 10.00 | root | index:IndexScan_5                                               |
-| └─IndexScan_5     | 10.00 | cop  | table:t1, index:c1, range:[3,3], keep order:false, stats:pseudo |
-+-------------------+-------+------+-----------------------------------------------------------------+
++------------------------+---------+-----------+------------------------+---------------------------------------------+
+| id                     | estRows | task      | access object          | operator info                               |
++------------------------+---------+-----------+------------------------+---------------------------------------------+
+| IndexReader_6          | 10.00   | root      |                        | index:IndexRangeScan_5                      |
+| └─IndexRangeScan_5     | 10.00   | cop[tikv] | table:t1, index:c1(c1) | range:[3,3], keep order:false, stats:pseudo |
++------------------------+---------+-----------+------------------------+---------------------------------------------+
 2 rows in set (0.00 sec)
 ```
 
 ## MySQL compatibility
 
-* All of the data types except spatial types are supported.
-* `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
+* All of the data types except spatial types are supported. For other unsupported cases, refer to: [compatibility of DDL statements with MySQL](/mysql-compatibility.md#ddl).
 
 ## See also
 
@@ -71,6 +69,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * [ADD INDEX](/sql-statements/sql-statement-add-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
 * [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

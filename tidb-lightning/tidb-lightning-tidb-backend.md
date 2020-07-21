@@ -1,8 +1,7 @@
 ---
 title: TiDB Lightning TiDB-backend
 summary: Choose how to write data into the TiDB cluster.
-category: reference
-aliases: ['/docs/dev/reference/tools/tidb-lightning/tidb-backend/']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/']
 ---
 
 # TiDB Lightning TiDB-backend
@@ -68,7 +67,7 @@ The speed of TiDB Lightning using TiDB-backend is limited by the SQL processing 
 
 ### Manual deployment
 
-You do not need to download and configure `tikv-importer`.
+You do not need to download and configure `tikv-importer`. You can download TiDB Lightning from [here](/download-ecosystem-tools.md#tidb-lightning).
 
 Before running `tidb-lightning`, add the following lines into the configuration file:
 
@@ -225,6 +224,29 @@ user = "root"
 password = ""
 
 #sql-mode = ""
+```
+
+</td></tr>
+<tr><td>
+
+```toml
+# [[route-rules]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
+# target-schema = "shard_db"
+# target-table = "shard_table"
+```
+
+</td><td>
+
+```toml
+# [[routes]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
+# target-schema = "shard_db"
+# target-table = "shard_table"
 ```
 
 </td></tr>

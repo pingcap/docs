@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 GA Release Notes
-category: Releases
+aliases: ['/docs/dev/releases/release-4.0-ga/']
 ---
 
 # TiDB 4.0 GA Release Notes

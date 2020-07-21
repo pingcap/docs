@@ -1,8 +1,7 @@
 ---
 title: ALTER INSTANCE
 summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/alter-instance/']
+aliases: ['/docs/dev/sql-statements/sql-statement-alter-instance/','/docs/dev/reference/sql/statements/alter-instance/']
 ---
 
 # ALTER INSTANCE
@@ -19,7 +18,13 @@ When an error occurs during reloading, by default, this error message is returne
 
 ## Syntax diagram
 
+**AlterInstanceStmt:**
+
 ![AlterInstanceStmt](/media/sqlgram/AlterInstanceStmt.png)
+
+**InstanceOption:**
+
+![InstanceOption](/media/sqlgram/InstanceOption.png)
 
 ## Example
 

@@ -1,8 +1,7 @@
 ---
 title: SHOW CHARACTER SET | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CHARACTER SET for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-character-set/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-character-set/','/docs/dev/reference/sql/statements/show-character-set/']
 ---
 
 # SHOW CHARACTER SET
@@ -11,13 +10,9 @@ This statement provides a static list of available character sets in TiDB. The o
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowCharsetStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowCharsetStmt](/media/sqlgram/ShowCharsetStmt.png)
 
 **CharsetKw:**
 
@@ -41,8 +36,9 @@ mysql> SHOW CHARACTER SET;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+The usage of this statement is understood to be fully compatible with MySQL. However, charsets in TiDB may have different default collations compared with MySQL. For details, refer to [Compatibility with MySQL](/mysql-compatibility.md). Any other compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
 
 ## See also
 
 * [SHOW COLLATION](/sql-statements/sql-statement-show-collation.md)
+* [Character Set and Collation](/character-set-and-collation.md)

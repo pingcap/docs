@@ -1,8 +1,7 @@
 ---
 title: CREATE DATABASE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE DATABASE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/create-database/']
+aliases: ['/docs/dev/sql-statements/sql-statement-create-database/','/docs/dev/reference/sql/statements/create-database/']
 ---
 
 # CREATE DATABASE
@@ -14,10 +13,6 @@ This statement creates a new database in TiDB. The MySQL terminology for 'databa
 **CreateDatabaseStmt:**
 
 ![CreateDatabaseStmt](/media/sqlgram/CreateDatabaseStmt.png)
-
-**DatabaseSym:**
-
-![DatabaseSym](/media/sqlgram/DatabaseSym.png)
 
 **IfNotExists:**
 

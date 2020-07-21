@@ -1,10 +1,14 @@
 ---
 title: TiDB Dashboard Introduction
 summary: Introduce TiDB Dashboard.
-category: how-to
+aliases: ['/docs/dev/dashboard/dashboard-intro/']
 ---
 
 # TiDB Dashboard Introduction
+
+> **Note:**
+>
+> TiDB Dashboard is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster, which is available since v4.0. It is built into the PD component and does not require an independent deployment.
 
@@ -61,3 +65,7 @@ See [Search Logs Page](/dashboard/dashboard-log-search.md) for details.
 This is an advanced debugging feature that lets you profile each instance online and analyze various internal operations an instance performed during the profiling data collection period and the proportion of the operation execution time in this period without third-party tools.
 
 See [Profile Instances Page](/dashboard/dashboard-profiling.md) for details.
+
+> **Note:**
+>
+> By default, TiDB Dashboard shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
