@@ -15,9 +15,9 @@ In addition, TiDB has the following unique error codes:
 
 > **Note:**
 >
-> Some errors are internal errors. Normally, TiDB handles the errors rather than return to the user. So it is not listed here.
+> Some error codes stand for internal errors. Normally, TiDB handles the errors rather than return to the user, so some error codes are not listed here.
 >
-> If you encounter the error that is not listed here, contact PingCAP for support or seek help in the official forum.
+> If you encounter an error code that is not listed here, [contact PingCAP](mailto:info@pingcap.com) for support.
 
 * Error Number: 8001
 
