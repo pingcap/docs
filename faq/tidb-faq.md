@@ -140,11 +140,15 @@ See [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbint
 
 See [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/).
 
-#### What cloud vendors are currently supported by Cloud TiDB?
+## Deployment on the cloud
 
-Cloud TiDB is currently available on JD Cloud and UCloud, both of which are first-level database entries, and you are welcome to use them.
+### Public cloud
 
-In addition, Cloud TiDB also supports [Google GKE](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-gcp-gke/), [AWS EKS](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-aws-eks/) and [Alibaba Cloud ACK](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud/).
+#### What cloud vendors are currently supported by TiDB?
+
+TiDB supports deployment on [Google GKE](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-gcp-gke/), [AWS EKS](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-aws-eks/) and [Alibaba Cloud ACK](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud/).
+
+In addition, TiDB is currently available on JD Cloud and UCloud, and has first-level database entries on them.
 
 ## Troubleshoot
 
