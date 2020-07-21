@@ -47,7 +47,6 @@ TiDB version: 4.0.3
     - Add the `tidb_log_desensitization` global variable to control whether to do desensitization when logging SQL queries [#18581](https://github.com/pingcap/tidb/pull/18581)
     - Enable `tidb_allow_batch_cop` by default [#18552](https://github.com/pingcap/tidb/pull/18552)
     - Speed up canceling a query [#18505](https://github.com/pingcap/tidb/pull/18505)
-    - Change the default value of `OOMAction` to `OOMActionCancel` [#18502](https://github.com/pingcap/tidb/pull/18502)
     - Add a header for the `tidb_decode_plan` result [#18501](https://github.com/pingcap/tidb/pull/18501)
     - Make the configuration checker compatible with earlier versions of the configuration file [#18046](https://github.com/pingcap/tidb/pull/18046)
     - Do not trigger rebase when inserting negative primary key into the `auto_random` table [#17987](https://github.com/pingcap/tidb/pull/17987)
