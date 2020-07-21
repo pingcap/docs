@@ -801,8 +801,8 @@ The description of columns in the `TIDB_HOT_REGIONS` table is as follows:
 * `TABLE_ID`: ID of the table in which the hot Region is located.
 * `INDEX_ID`: ID of the index in which the hot Region is located.
 * `DB_NAME`: The database name of the object in which the hot Region is located.
-* `TABLE_NAME`: The name of the table which the hot Region is located.
-* `INDEX_NAME`: The name of the index which the hot Region is located.
+* `TABLE_NAME`: The name of the table in which the hot Region is located.
+* `INDEX_NAME`: The name of the index in which the hot Region is located.
 * `REGION_ID`: ID of the hot Region.
 * `TYPE`: The type of the hot Region.
 * `MAX_HOT_DEGREE`: The maximum hot degree of the Region.
