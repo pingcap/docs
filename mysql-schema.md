@@ -1,12 +1,18 @@
 ---
+<<<<<<< HEAD:system-tables/system-table-overview.md
 title: TiDB System Tables
 summary: Learn the TiDB system tables.
 aliases: ['/docs/stable/system-tables/system-table-overview/','/docs/v4.0/system-tables/system-table-overview/','/docs/stable/reference/system-databases/mysql/']
+=======
+title: `mysql` schema
+summary: Learn about the TiDB system tables.
+aliases: ['/docs/dev/system-tables/system-table-overview/','/docs/dev/reference/system-databases/mysql/','/tidb/dev/system-table-overview/']
+>>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):mysql-schema.md
 ---
 
-# TiDB System Tables
+# `mysql` schema
 
-This document introduces TiDB system tables.
+The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables which are extensions to MySQL.
 
 ## Grant system tables
 

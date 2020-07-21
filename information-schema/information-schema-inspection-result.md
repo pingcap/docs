@@ -1,7 +1,11 @@
 ---
 title: INSPECTION_RESULT
 summary: Learn the `INSPECTION_RESULT` diagnostic result table.
+<<<<<<< HEAD:system-tables/system-table-inspection-result.md
 aliases: ['/docs/stable/system-tables/system-table-inspection-result/','/docs/v4.0/system-tables/system-table-inspection-result/','/docs/stable/reference/system-databases/inspection-result/']
+=======
+aliases: ['/docs/dev/system-tables/system-table-inspection-result/','/docs/dev/reference/system-databases/inspection-result/','/tidb/dev/system-table-inspection-result/']
+>>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-inspection-result.md
 ---
 
 # INSPECTION_RESULT
@@ -15,7 +19,8 @@ The structure of the `information_schema.inspection_result` diagnostic result ta
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.inspection_result;
+USE information_schema;
+DESC inspection_result;
 ```
 
 ```sql
@@ -59,7 +64,7 @@ Diagnose issues currently existing in the cluster.
 {{< copyable "sql" >}}
 
 ```sql
-select * from information_schema.inspection_result\G
+SELECT * FROM information_schema.inspection_result\G
 ```
 
 ```sql
@@ -234,7 +239,7 @@ The `version` diagnostic rule checks whether the version hash of the same compon
 {{< copyable "sql" >}}
 
 ```sql
-select * from information_schema.inspection_result where rule='version'\G
+SELECT * FROM information_schema.inspection_result WHERE rule='version'\G
 ```
 
 ```sql
@@ -246,7 +251,7 @@ INSTANCE  |
 VALUE     | inconsistent
 REFERENCE | consistent
 SEVERITY  | critical
-DETAILS   | the cluster has 2 different tidb versions, execute the sql to see more detail: select * from information_schema.cluster_info where type='tidb'
+DETAILS   | the cluster has 2 different tidb versions, execute the sql to see more detail: SELECT * FROM information_schema.cluster_info WHERE type='tidb'
 ```
 
 ### `critical-error` diagnostic rule

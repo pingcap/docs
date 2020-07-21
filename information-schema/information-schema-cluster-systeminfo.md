@@ -1,7 +1,11 @@
 ---
 title: CLUSTER_SYSTEMINFO
 summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
+<<<<<<< HEAD:system-tables/system-table-cluster-systeminfo.md
 aliases: ['/docs/stable/system-tables/system-table-cluster-systeminfo/','/docs/v4.0/system-tables/system-table-cluster-systeminfo/','/docs/stable/reference/system-databases/cluster-systeminfo/']
+=======
+aliases: ['/docs/dev/system-tables/system-table-cluster-systeminfo/','/docs/dev/reference/system-databases/cluster-systeminfo/','/tidb/dev/system-table-cluster-systeminfo/']
+>>>>>>> c713607... system-databases: Refactor/Improve clarity (#3178):information-schema/information-schema-cluster-systeminfo.md
 ---
 
 # CLUSTER_SYSTEMINFO
@@ -11,7 +15,8 @@ You can use the `CLUSTER_SYSTEMINFO` kernel parameter table to query the kernel 
 {{< copyable "sql" >}}
 
 ```sql
-desc information_schema.cluster_systeminfo;
+USE information_schema;
+DESC cluster_systeminfo;
 ```
 
 ```sql
@@ -30,8 +35,8 @@ desc information_schema.cluster_systeminfo;
 
 Field description:
 
-* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/system-tables/system-table-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/system-tables/system-table-cluster-info.md) cluster information table.
+* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
+* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) cluster information table.
 * `SYSTEM_TYPE`: The system type. Currently, you can query the `system` system type.
 * `SYSTEM_NAME`: The system name. Currently, you can query the `sysctl` system name.
 * `NAME`: The configuration name corresponding to `sysctl`.
@@ -40,7 +45,7 @@ Field description:
 The following example shows how to query the kernel version of all servers in the cluster using the `CLUSTER_SYSTEMINFO` system information table.
 
 ```sql
-select * from information_schema.cluster_systeminfo where name like '%kernel.osrelease%'
+SELECT * FROM cluster_systeminfo WHERE name LIKE '%kernel.osrelease%'
 ```
 
 ```sql
