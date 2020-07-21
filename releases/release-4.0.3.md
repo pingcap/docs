@@ -100,7 +100,7 @@ TiDB version: 4.0.3
     - Return an error instead of an empty set for `IndexHashJoin` when an error occurs during execution [#18586](https://github.com/pingcap/tidb/pull/18586)
     - Fix the recurring panic when gRPC transportReader is broken [#18562](https://github.com/pingcap/tidb/pull/18562)
     - Fix the issue that Green GC does not scan locks on offline stores which might cause data incompleteness [#18550](https://github.com/pingcap/tidb/pull/18550)
-    - Ban the TiFlash engine for a not-read-only statement [#18534](https://github.com/pingcap/tidb/pull/18534)
+    - Forbid processing a non-read-only statement using TiFlash engine [#18534](https://github.com/pingcap/tidb/pull/18534)
     - Return the actual error message when a query connection panics [#18500](https://github.com/pingcap/tidb/pull/18500)
     - Fix the issue that the `ADMIN REPAIR TABLE` execution fails to reload the table metadata on the TiDB node [#18323](https://github.com/pingcap/tidb/pull/18323)
     - Fix read/write inconsistent result when meeting lock that point to a primary key has be insert/delete in own txn [#18291](https://github.com/pingcap/tidb/pull/18291)
