@@ -105,7 +105,7 @@ TiDB version: 4.0.3
     - Fix the issue that the `ADMIN REPAIR TABLE` execution fails to reload the table metadata on the TiDB node [#18323](https://github.com/pingcap/tidb/pull/18323)
     - Fix read/write inconsistent result when meeting lock that point to a primary key has be insert/delete in own txn [#18291](https://github.com/pingcap/tidb/pull/18291)
     - Make spilling disk work well [#18288](https://github.com/pingcap/tidb/pull/18288)
-    - Fix the bug that replaces into a table with generated column fail [#17907](https://github.com/pingcap/tidb/pull/17907)
+    -  Fix the error reported when the `REPLACE INTO` statement works on the table that contains generated columns [#17907](https://github.com/pingcap/tidb/pull/17907)
     - Return the OOM error when the `indexHashJoin` worker panics [#18527](https://github.com/pingcap/tidb/pull/18527)
 
 + TiKV
