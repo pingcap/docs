@@ -1,15 +1,15 @@
 ---
-title: Deploy Operation and Maintenance FAQs
-summary: Learn about the FAQs related to TiDB operation and maintenance for deployment.
+title: Deployment, Operations and Maintenance FAQs
+summary: Learn about the FAQs related to TiDB deployment, operations and maintenance.
 ---
 
 # Deploy Operation and Maintenance FAQs
 
-This document summarizes the FAQs related to TiDB operation and maintenance for deployment.
+This document summarizes the FAQs related to TiDB deployment, operations and maintenance.
 
-## Enviroment preparation 
+## Operating system requirements
 
-The operating system version requirements are as follows:
+### What are the required operating system versions?
 
 | Linux OS Platform        | Version      |
 | :-----------------------:| :----------: |
@@ -23,7 +23,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 A lot of TiDB tests have been carried out in CentOS 7.3, and many deployment best practices have been accumulated in CentOS 7.3. Therefore, it is recommended that you use the CentOS 7.3+ Linux operating system when deploying TiDB.
 
-## Server requirements FAQ
+## Server requirements
 
 You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture. The requirements and recommendations about server hardware configuration for development, testing and production environments are as follows:
 
@@ -62,9 +62,9 @@ If the resources are adequate, it is recommended to use RAID 10 for SSD. If the 
 
 For details, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
-## Install and deploy FAQ
+## Installation and deployment
 
-It is recommended to use TiUP to deploy TiDB cluster for the production environment. See [TiUP Deployment](/production-deployment-using-tiup.md).
+For the production environment, it is recommended to use [TiUP](/tiup/tiup-overview.md) to deploy your TiDB cluster. See [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
 ### Why the modified `toml` configuration for TiKV/PD does not take effect?
 
@@ -108,7 +108,9 @@ Check the time difference between the machine time of the monitor and the time w
 
 > **Warning:**
 >
-> We do not recommend you to deploy TiDB using this method. It is suitable for situations where the central control machine has no external network. For details, see [Deploy TiDB Offline Using TiDB Ansible](https://docs.pingcap.com/tidb/stable/offline-deployment-using-ansible).
+> It is not recommended to deploy TiDB using TiDB Ansible since TiDB v4.0. [Use TiUP to deploy TiDB](/production-deployment-using-tiup.md) instead.
+
+If the central control machine cannot access the Internet, you can [deploy TiDB offline using TiDB Ansible](https://docs.pingcap.com/tidb/stable/offline-deployment-using-ansible).
 
 ### How to deploy TiDB quickly using Docker Compose on a single machine?
 
@@ -161,11 +163,11 @@ Two possible reasons and solutions:
 - The SSH mutual trust is not configured as required. It’s recommended to follow [the steps described in the official document](/online-deployment-using-ansible.md#step-5-configure-the-ssh-mutual-trust-and-sudo-rules-on-the-control-machine) and check whether it is successfully configured using `ansible -i inventory.ini all -m shell -a 'whoami' -b`.
 - If it involves the scenario where a single server is assigned multiple roles, for example, the mixed deployment of multiple components or multiple TiKV instances are deployed on a single server, this error might be caused by the SSH reuse mechanism. You can use the option of `ansible … -f 1` to avoid this error.
 
-## Manage the cluster FAQ
+## Cluster management
 
-### Daily management of the cluster
+### Daily management
 
-#### What are the common operations of Ansible?
+#### What are the common operations of TiDB Ansible?
 
 | Job                               | Playbook                                 |
 |:----------------------------------|:-----------------------------------------|
@@ -196,7 +198,7 @@ TiKV data is located in the [`--data-dir`](/command-line-flags-for-tikv-configur
 
 #### What are the system tables in TiDB?
 
-Similar to MySQL, TiDB includes system tables as well, used to store the information required by the server when it runs. See [TiDB system table](/system-tables/system-table-overview.md).
+Similar to MySQL, TiDB includes system tables as well, used to store the information required by the server when it runs. See [TiDB system table](/mysql-schema.md).
 
 #### Where are the TiDB/PD/TiKV logs?
 
@@ -215,7 +217,7 @@ If the cluster is deployed using TiDB Ansible, you can use the `ansible-playbook
 
 TiDB does not currently support session timeout at the database level. At present, if you want to achieve timeout, when there is no LB (Load Balancing), you need to record the ID of the initiated Session on the application side. You can customize the timeout through the application. After timeout, you need to go to the node that initiated the Query Use `kill tidb [session id]` to kill SQL. It is currently recommended to use an application program to achieve session timeout. When the timeout period is reached, the application layer will throw an exception and continue to execute subsequent program segments.
 
-##### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
+#### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
 
 Currently, TiDB has a standard management of various versions. Each release contains a detailed change log and [release notes](/releases/release-notes.md). Whether it is necessary to upgrade in the production environment depends on the application system. It is recommended to learn the details about the functional differences between the previous and later versions before upgrading.
 
@@ -275,7 +277,7 @@ Two reasons:
 - The two results are calculated in different ways. `information_schema.tables.data_length` is an estimated value by calculating the averaged length of each row, while the store size on the TiKV monitoring panel sums up the length of the data files (the SST files of RocksDB) in a single TiKV instance.
 - `information_schema.tables.data_length` is a logical value, while the store size is a physical value. The redundant data generated by multiple versions of the transaction is not included in the logical value, while the redundant data is compressed by TiKV in the physical value.
 
-### Manage the PD server
+### PD management
 
 #### The `TiKV cluster is not bootstrapped` message is displayed when I access PD
 
@@ -320,7 +322,7 @@ The offline node usually indicates the TiKV node. You can determine whether the 
 
 If your TiDB cluster is deployed using TiDB Ansible, the PD external service port is not bound to `127.0.0.1`, so PD Control does not recognize `127.0.0.1` and you can only connect to it using the local IP address.
 
-### Manage the TiDB server
+### TiDB server management
 
 #### How to set the `lease` parameter in TiDB?
 
@@ -351,7 +353,7 @@ No. Currently, TiDB only supports the distributed storage engine and the Golevel
 
 #### Can the `Information_schema` support more real information?
 
-As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` tables. Many of these tables also have a corresponding SHOW command. For more information, see [Information Schema](/system-tables/system-table-information-schema.md).
+As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` tables. Many of these tables also have a corresponding SHOW command. For more information, see [Information Schema](/information-schema.md).
 
 #### What's the explanation of the TiDB Backoff type scenario?
 
@@ -359,7 +361,7 @@ In the communication process between the TiDB server and the TiKV server, the `S
 
 #### What is the main reason of TiDB TiClient type?
 
- The indicator TiClient Region Error describes the error types and metric indicators that occur when the TiDB-server as a client accesses the TiKV-server through the KV interface to perform data operations, and the TiDB-server operates the Region data in the TiKV-server. The error types include not_leader, stale_epoch. These errors occur when the TiDB-server manipulates the Region leader data according to its own cache information, the Region leader has migrated, or the current region information of the TiKV and the routing information of the TiDB cache are inconsistent. Generally, in this case, TiDB-server will automatically retrieve the latest routing data from PD and redo the previous operation.
+The TiClient Region Error indicator describes the error types and metrics that appear when the TiDB server as a client accesses the TiKV server through the KV interface to perform data operations. The error types include `not_leader` and `stale_epoch`. These errors occur when the TiDB server manipulates the Region leader data according to its own cache information, the Region leader has migrated, or the current TiKV Region information and the routing information of the TiDB cache are inconsistent. Generally, in this case, the TiDB server will automatically retrieve the latest routing data from PD and redo the previous operation.
 
 #### What's the maximum number of concurrent connections that TiDB supports?
 
@@ -373,7 +375,7 @@ The `create_time` of tables in the `information_schema` is the creation time.
 
 When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if each operator is estimated to process over 10000 pieces of data. You can modify the `tidb-server` configuration parameter to adjust the threshold and then restart the `tidb-server`.
 
-### Manage the TiKV server
+### TiKV server management
 
 #### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
 
@@ -404,7 +406,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 - All CFs have a shared block-cache to cache data blocks and improve RocksDB read speed. The size of block-cache is controlled by the `block-cache-size` parameter. A larger value of the parameter means more hot data can be cached and is more favorable to read operation. At the same time, it consumes more system memory.
 - Each CF has an individual write-buffer and the size is controlled by the `write-buffer-size` parameter.
 
-#### Why it occurs that "TiKV channel full"?
+#### Why is the TiKV channel full?
 
 - The Raftstore thread is too slow or blocked by I/O. You can view the CPU usage status of Raftstore.
 - TiKV is too busy (CPU, disk I/O, etc.) and cannot manage to handle it.
@@ -465,7 +467,7 @@ For a standalone TiKV node, it is still recommended to enable the `sync-log` mod
 
 Theoretically, TiDB has a write delay of 4 more network roundtrips than standalone databases.
 
-#### Does TiDB have a InnoDB memcached plugin like MySQL which can directly use the KV interface and does not need the independent cache?
+#### Does TiDB have an InnoDB memcached plugin like MySQL which can directly use the KV interface and does not need the independent cache?
 
 TiKV supports calling the interface separately. Theoretically, you can take an instance as the cache. Because TiDB is a distributed relational database, we do not support TiKV separately.
 
@@ -486,7 +488,7 @@ The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 
 
 No. TiDB (or data created from the transactional API) relies on a specific key format. It is not compatible with data created from RawKV API (or data from other RawKV-based services).
 
-### TiDB test
+### TiDB testing
 
 #### What is the performance test result for TiDB using Sysbench?
 
@@ -507,7 +509,7 @@ TiDB is designed for scenarios where sharding is used because the capacity of a 
 
 TiDB is not suitable for tables of small size (such as below ten million level), because its strength in concurrency cannot be shown with a small size of data and limited Regions. A typical example is the counter table, in which records of a few lines are updated high frequently. In TiDB, these lines become several Key-Value pairs in the storage engine, and then settle into a Region located on a single node. The overhead of background replication to guarantee strong consistency and operations from TiDB to TiKV leads to a poorer performance than a MySQL standalone.
 
-### Backup and restore
+### Backup and restoration
 
 #### How to back up data in TiDB?
 
@@ -517,7 +519,7 @@ Keep the size of the data file exported from `mydumper` as small as possible. It
 
 You can edit the `t` parameter of `loader` based on the number of TiKV instances and load status. For example, in scenarios of three TiKV instances, you can set its value to `3 * (1 ～ n)`. When the TiKV load is very high and `backoffer.maxSleep 15000ms is exceeded` displays a lot in `loader` and TiDB logs, you can adjust the parameter to a smaller value. When the TiKV load is not very high, you can adjust the parameter to a larger value accordingly.
 
-## Monitor
+## Monitoring
 
 - For details of Prometheus monitoring framework, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 - For details of key metrics of monitoring, see [Key Metrics](/grafana-overview-dashboard.md).
