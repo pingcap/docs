@@ -105,7 +105,9 @@ TiDB version: 4.0.3
     - Fix the data inconsistency issue occurred because the lock of a written and deleted primary key in one transaction is resolved by another transaction [#18291](https://github.com/pingcap/tidb/pull/18291)
     - Make spilling disk work well [#18288](https://github.com/pingcap/tidb/pull/18288)
     - Fix the error reported when the `REPLACE INTO` statement works on the table that contains generated columns [#17907](https://github.com/pingcap/tidb/pull/17907)
-    - Return the OOM error when the `indexHashJoin` worker panics [#18527](https://github.com/pingcap/tidb/pull/18527)
+    - Return the OOM error when the `IndexHashJoin` and `IndexMergeJoin` workers panic [#18527](https://github.com/pingcap/tidb/pull/18527)
+    - Fix the bug that the execution of `Index Join` might return wrong results in special cases when the index used by `Index Join` contains the integer primary key [#18565](https://github.com/pingcap/tidb/pull/18565)
+    -  Fix the issue that when the new collation is enabled on the cluster, the data updated on columns with the new collation in a transaction cannot be read through the unique index [#18703](https://github.com/pingcap/tidb/pull/18703)
 
 + TiKV
 
