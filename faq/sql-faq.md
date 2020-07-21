@@ -78,6 +78,7 @@ You can configure concurrent GC to increase the speed of reclaiming storage spac
 
 ```sql
 update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";
+```
 
 ## Does `show processlist` display the system process ID?
 
