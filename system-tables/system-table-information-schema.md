@@ -61,7 +61,7 @@ The description of columns in the `CHARACTER_SETS` table is as follows:
 
 * `CHARACTER_SET_NAME`: The name of the character set.
 * `DEFAULT_COLLATE_NAME`：The default collation name of the character set.
-* `DESCRIPTION`：The description of the character set
+* `DESCRIPTION`：The description of the character set.
 * `MAXLEN`：The maximum length required to store a character in this character set.
 
 ### COLLATIONS table
@@ -688,9 +688,9 @@ The description of columns in the `TABLES` table is as follows:
 * `ROW_FORMAT`: The row format. The value is currently `Compact`.
 * `TABLE_ROWS`: The number of rows in the table in statistics.
 * `AVG_ROW_LENGTH`: The average row length of the table. `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS`.
-* `DATA_LENGTH`: Data length. `DATA_LENGTH` = `TABLE_ROWS` * the sum of storage lengths of the columns in the tuple. The replicas of TiKV is not taken into account.
+* `DATA_LENGTH`: Data length. `DATA_LENGTH` = `TABLE_ROWS` \* the sum of storage lengths of the columns in the tuple. The replicas of TiKV are not taken into account.
 * `MAX_DATA_LENGTH`: The maximum data length. The value is currently `0`, which means the data length has no upper limit.
-* `INDEX_LENGTH`: The index length. `INDEX_LENGTH` = `TABLE_ROWS` * the sum of lengths of the columns in the index tuple. The replicas of TiKV is not taken into account.
+* `INDEX_LENGTH`: The index length. `INDEX_LENGTH` = `TABLE_ROWS` \* the sum of lengths of the columns in the index tuple. The replicas of TiKV are not taken into account.
 * `DATA_FREE`: Data fragment. The value is currently `0`.
 * `AUTO_INCREMENT`: The current step of the auto-increment primary key.
 * `CREATE_TIME`: The time at which the table is created.
@@ -698,7 +698,7 @@ The description of columns in the `TABLES` table is as follows:
 * `CHECK_TIME`: The time at which the table is checked.
 * `TABLE_COLLATION`: The collation of strings in the table.
 * `CHECKSUM`: Checksum.
-* `CREATE_OPTIONS`: Create options.
+* `CREATE_OPTIONS`: Creates options.
 * `TABLE_COMMENT`: The comments and notes of the table.
 
 Most of the information in the table is the same as MySQL. Only two columns are newly defined by TiDB:
@@ -798,9 +798,9 @@ desc TIDB_HOT_REGIONS;
 
 The description of columns in the `TIDB_HOT_REGIONS` table is as follows:
 
-* `TABLE_ID`: ID of the table which the hot Region is located.
-* `INDEX_ID`: ID of the index which the hot Region is located.
-* `DB_NAME`: The database name of the object which the hot Region is located.
+* `TABLE_ID`: ID of the table in which the hot Region is located.
+* `INDEX_ID`: ID of the index in which the hot Region is located.
+* `DB_NAME`: The database name of the object in which the hot Region is located.
 * `TABLE_NAME`: The name of the table which the hot Region is located.
 * `INDEX_NAME`: The name of the index which the hot Region is located.
 * `REGION_ID`: ID of the hot Region.
