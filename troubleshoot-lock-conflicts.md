@@ -1,7 +1,6 @@
 ---
 title: Troubleshoot Lock Conflicts
 summary: Learn to analyze and resolve lock conflicts in TiDB.
-category: troubleshoot
 ---
 
 # TiDB Lock Conflict Handling
@@ -146,7 +145,7 @@ The commit phase of the pessimistic transaction mode and the optimistic transact
 
 ![TiDB pessimistic transaction commit logic](/media/troubleshooting-lock-pic-05.png)
  
-The pessimistic transaction adds ` Acquire Pessimistic Lock ` phase before 2PC, which its logic look at below introduction:
+The pessimistic transaction adds `Acquire Pessimistic Lock` phase before 2PC, which its logic look at below introduction:
 
 1. (same as the optimistic transaction mode) Receive the request from the client, the current timestamp is this transaction’s start_ts.
 2. When the TiDB Server receives an update data request from the client, TiDB Server initiates a pessimistic lock request to TiKV Server, which is persisted to TiKV Server.
