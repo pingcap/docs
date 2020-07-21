@@ -14,7 +14,7 @@ TiDB version: 4.0.3
 
     - Display detailed TiDB Dashboard version information [#679](https://github.com/pingcap-incubator/tidb-dashboard/pull/679)
     - Show browser compatibility notice for unsupported browsers or outdated browsers [#654](https://github.com/pingcap-incubator/tidb-dashboard/pull/654)
-    - Support searching in statement page [#658](https://github.com/pingcap-incubator/tidb-dashboard/pull/658)
+    - Support searching in the **SQL Statements** page [#658](https://github.com/pingcap-incubator/tidb-dashboard/pull/658)
 
 + TiFlash
 
@@ -33,7 +33,7 @@ TiDB version: 4.0.3
         - Support setting customized `changefeed` name [#727](https://github.com/pingcap/ticdc/pull/727)
         - Support TLS and MySQL SSL connection [#347](https://github.com/pingcap/ticdc/pull/347)
         - Support outputting changes in the Avro format [#753](https://github.com/pingcap/ticdc/pull/753)
-        - Support Apache Pulsar sink [#751](https://github.com/pingcap/ticdc/pull/751)
+        - Support the Apache Pulsar sink [#751](https://github.com/pingcap/ticdc/pull/751)
 
     + Dumpling
 
@@ -44,21 +44,20 @@ TiDB version: 4.0.3
 
 + TiDB
 
-    - Add `tidb_log_desensitization` global variable to control whether to do desensitization when log query [#18581](https://github.com/pingcap/tidb/pull/18581)
-    - Active `tidb_allow_batch_cop` by default [#18552](https://github.com/pingcap/tidb/pull/18552)
-    - Fix the issue that querying `information_schema.columns` consumes too much memory when there are a lot of tables in TiDB [#18436](https://github.com/pingcap/tidb/pull/18436)
+    - Add the `tidb_log_desensitization` global variable to control whether to do desensitization when logging SQL queries [#18581](https://github.com/pingcap/tidb/pull/18581)
+    - Enable `tidb_allow_batch_cop` by default [#18552](https://github.com/pingcap/tidb/pull/18552)
     - Speed up canceling a query [#18505](https://github.com/pingcap/tidb/pull/18505)
     - Change the default value of `OOMAction` to `OOMActionCancel` [#18502](https://github.com/pingcap/tidb/pull/18502)
     - Add a header for the `tidb_decode_plan` result [#18501](https://github.com/pingcap/tidb/pull/18501)
-    - Make the configuration checker compatible with earlier versions of the configuration [#18046](https://github.com/pingcap/tidb/pull/18046)
+    - Make the configuration checker compatible with earlier versions of the configuration file [#18046](https://github.com/pingcap/tidb/pull/18046)
     - Do not trigger rebase when inserting negative primary key into the `auto_random` table [#17987](https://github.com/pingcap/tidb/pull/17987)
     - Enable collecting the execution information by default [#18518](https://github.com/pingcap/tidb/pull/18518)
     - Add the `tiflash_tables` and `tiflash_segments` system tables [#18536](https://github.com/pingcap/tidb/pull/18536)
 
 + TiKV
 
-    - Introduce the `backup.num-threads` new configuration to control the backup thread pool size [#8199](https://github.com/tikv/tikv/pull/8199)
-    - Do not send store heartbeat when receiving snapshot [#8136](https://github.com/tikv/tikv/pull/8136)
+    - Introduce the new `backup.num-threads` configuration to control the size of the backup thread pool [#8199](https://github.com/tikv/tikv/pull/8199)
+    - Do not send store heartbeats when receiving snapshots [#8136](https://github.com/tikv/tikv/pull/8136)
     - Support dynamically changing the shared block cache's capacity [#8232](https://github.com/tikv/tikv/pull/8232)
 
 + PD
@@ -70,12 +69,12 @@ TiDB version: 4.0.3
     - Improve the Key Visualizer bucket merge for cold logical ranges [#674](https://github.com/pingcap-incubator/tidb-dashboard/pull/674)
     - Rename the configuration item of `disable-telemetry` to `enable-telemetry` for consistency [#684](https://github.com/pingcap-incubator/tidb-dashboard/pull/684)
     - Show the progress bar when switching pages [#661](https://github.com/pingcap-incubator/tidb-dashboard/pull/661)
-    - Slow log search now follows the same behavior as log search when there are space separators [#682](https://github.com/pingcap-incubator/tidb-dashboard/pull/682)
+    - Ensure that the slow log search now follows the same behavior as log search when there are space separators [#682](https://github.com/pingcap-incubator/tidb-dashboard/pull/682)
 
 + TiFlash
 
-    - Change the unit of the panels of DDL jobs in Grafana to operations per minute [#923](https://github.com/pingcap/tics/pull/923)
-    - Add a new dashboard in Grafana to show more metrics about TiFlash-Proxy [#923](https://github.com/pingcap/tics/pull/923)
+    - Change the unit of the **DDL Jobs** panel in Grafana to `operations per minute` [#923](https://github.com/pingcap/tics/pull/923)
+    - Add a new dashboard in Grafana to show more metrics about **TiFlash-Proxy** [#923](https://github.com/pingcap/tics/pull/923)
     - Reduce IOPS in TiFlash proxy [#856](https://github.com/pingcap/tics/pull/856)
 
 + Tools
@@ -86,9 +85,9 @@ TiDB version: 4.0.3
 
     + Backup & Restore (BR)
 
-        - Support JSON logs [#336](https://github.com/pingcap/br/issues/336)
-        - Support starting pprof in-the-fly [#372](https://github.com/pingcap/br/pull/372)
-        - Speed up DDL executions by sending DDL concurrently [#377](https://github.com/pingcap/br/pull/377)
+        - Support outputting JSON logs [#336](https://github.com/pingcap/br/issues/336)
+        - Support enabling pprof during runtime [#372](https://github.com/pingcap/br/pull/372)
+        - Speed up DDL executions by sending DDL concurrently during restore [#377](https://github.com/pingcap/br/pull/377)
 
     + TiDB Lightning
 
@@ -99,8 +98,8 @@ TiDB version: 4.0.3
 + TiDB
 
     - Return an error instead of an empty set for `IndexHashJoin` when an error occurs during execution [#18586](https://github.com/pingcap/tidb/pull/18586)
-    - Fix the infinite panic when gRPC transportReader is broken [#18562](https://github.com/pingcap/tidb/pull/18562)
-    - Fix the issue that green GC does not scan locks on offline stores which might cause data incompleteness [#18550](https://github.com/pingcap/tidb/pull/18550)
+    - Fix the recurring panic when gRPC transportReader is broken [#18562](https://github.com/pingcap/tidb/pull/18562)
+    - Fix the issue that Green GC does not scan locks on offline stores which might cause data incompleteness [#18550](https://github.com/pingcap/tidb/pull/18550)
     - Ban the TiFlash engine for a not-read-only statement [#18534](https://github.com/pingcap/tidb/pull/18534)
     - Return the actual error message when a query connection panics [#18500](https://github.com/pingcap/tidb/pull/18500)
     - Fix the issue that `ADMIN REPAIR TABLE` reloads fail on the other node [#18323](https://github.com/pingcap/tidb/pull/18323)
@@ -118,28 +117,28 @@ TiDB version: 4.0.3
 
     - Fix the issue that creating TSO stream might be blocked for a while if the server crashes [#2648](https://github.com/pingcap/pd/pull/2648)
     - Fix the issue that `getSchedulers` might cause a data race [#2638](https://github.com/pingcap/pd/pull/2638)
-    - Fix the issue that causes deadlock when deleting the scheduler [#2637](https://github.com/pingcap/pd/pull/2637)
-    - Fix the bug that `balance-leader-scheduler` does not consider placement rules when it is enabled [#2636](https://github.com/pingcap/pd/pull/2636)
+    - Fix the issue that deleting the scheduler might cause deadlocks [#2637](https://github.com/pingcap/pd/pull/2637)
+    - Fix the bug that placement rules are not considered when `balance-leader-scheduler` is enabled [#2636](https://github.com/pingcap/pd/pull/2636)
     - Fix the issue that sometimes service `safepoint` cannot be set properly, which might make BR and dumpling fail [#2635](https://github.com/pingcap/pd/pull/2635)
     - Fix dst store filter in hot Region scheduler [#2627](https://github.com/pingcap/pd/pull/2627)
-    - Fix the issue that the TSO request might take too long when PD leader switches [#2622](https://github.com/pingcap/pd/pull/2622)
+    - Fix the issue that the TSO request might take too long when PD leader is switched [#2622](https://github.com/pingcap/pd/pull/2622)
     - Fix the issue of stale scheduler after leader change [#2608](https://github.com/pingcap/pd/pull/2608)
-    - Fix the issue that when enabling placement rules, sometimes replicas of a Region might not be able to adjust to the best location [#2605](https://github.com/pingcap/pd/pull/2605)
-    - Fix the issue that the deployment path of the store is not updated if the deployment directory is moved [#2600](https://github.com/pingcap/pd/pull/2600)
-    - Prevent store limit from changing to zero [#2588](https://github.com/pingcap/pd/pull/2588)
+    - Fix the issue that sometimes replicas of a Region cannot be adjusted to the best location when placement rules are enabled [#2605](https://github.com/pingcap/pd/pull/2605)
+    - Fix the issue that the deployment path of the store is not updated according to the change of deployment directory [#2600](https://github.com/pingcap/pd/pull/2600)
+    - Prevent `store limit` from changing to zero [#2588](https://github.com/pingcap/pd/pull/2588)
 
 + TiDB Dashboard
 
-    - Fix TiDB connection error when TiDB is scaled in [#689](https://github.com/pingcap-incubator/tidb-dashboard/pull/689)
+    - Fix the TiDB connection error when TiDB is scaled out [#689](https://github.com/pingcap-incubator/tidb-dashboard/pull/689)
     - Fix the issue that TiFlash instances are not displayed in the log searching page [#680](https://github.com/pingcap-incubator/tidb-dashboard/pull/680)
-    - Fix metrics selection reset after refresh in overview page [#663](https://github.com/pingcap-incubator/tidb-dashboard/pull/663)
-    - Fix connection issue in some TLS scenarios [#660](https://github.com/pingcap-incubator/tidb-dashboard/pull/660)
+    - Fix the issue of metric selection reset after refreshing the overview page [#663](https://github.com/pingcap-incubator/tidb-dashboard/pull/663)
+    - Fix a connection issue in some TLS scenarios [#660](https://github.com/pingcap-incubator/tidb-dashboard/pull/660)
     - Fix the issue that the language dropdown box is not displayed correctly in some cases [#677](https://github.com/pingcap-incubator/tidb-dashboard/pull/677)
 
 + TiFlash
 
-    - Fix the issue that TiFlash crashes after renaming the name of the primary key column [#916](https://github.com/pingcap/tics/pull/916)
-    - Fix the issue that concurrent learner read and remove Region might lead to deadlocks [#872](https://github.com/pingcap/tics/pull/872)
+    - Fix the issue that TiFlash crashes after renaming the primary key column
+    - Fix the issue that concurrent `Learner Read` and `Remove Region` might cause deadlocks
 
 + Tools
 
@@ -156,7 +155,7 @@ TiDB version: 4.0.3
     + Dumpling
 
         - Fix the issue that Dumpling omits the `NULL` value when `--r` is specified [#119](https://github.com/pingcap/dumpling/pull/119)
-        - Fix the bug that flush tables might not work for tables to dump [#117](https://github.com/pingcap/dumpling/pull/117)
+        - Fix the bug that flushing tables might not work for tables to dump [#117](https://github.com/pingcap/dumpling/pull/117)
 
     + TiDB Lightning
 
