@@ -35,7 +35,7 @@ In addition, TiDB has the following unique error codes:
 
     If the data in a row is not consistent with the index when executing the `ADMIN CHECK TABLE` command, TiDB returns this error. This error is commonly seen when you check the data corruption in the table.
 
-    You can contact PingCAP for support or seek help in the official forum.
+    You can [contact PingCAP](mailto:info@pingcap.com) for support.
 
 * Error Number: 8004
 
@@ -85,7 +85,7 @@ In addition, TiDB has the following unique error codes:
 
     Invalid transactions. If TiDB finds that no transaction ID (Start Timestamp) is obtained for the transaction that is being executed, which means this transaction is invalid, this error is returned.
 
-    Usually this error does not occur. If you encounter this error, contact PingCAP for support or seek help in the official forum.
+    Usually this error does not occur. If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
 
 * Error Number: 8025
 
@@ -169,13 +169,13 @@ In addition, TiDB has the following unique error codes:
 
     Unknown data type is encountered when TiDB parses the Exec argument list sent by the client. 
     
-    If you encounter this error, check the client. If the client is normal, contact PingCAP for support or seek help in the official forum.
+    If you encounter this error, check the client. If the client is normal, [contact PingCAP](mailto:info@pingcap.com) for support.
 
 * Error Number: 8052
 
     The serial number of the data packet from the client is incorrect. 
     
-    If you encounter this error, check the client. If the client is normal, contact PingCAP for support or seek help in the official forum.
+    If you encounter this error, check the client. If the client is normal, [contact PingCAP](mailto:info@pingcap.com) for support.
 
 * Error Number: 8055
 
@@ -277,7 +277,7 @@ In addition, TiDB has the following unique error codes:
 
     Unsupported execution plan type. This error is an internal error. 
     
-    If you encounter this error, contact PingCAP for support or seek help in the official forum.
+    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
 
 * Error Number: 8109
 
@@ -345,7 +345,7 @@ In addition, TiDB has the following unique error codes:
 
     `ADMIN REPAIR TABLE` fails. 
     
-    If you encounter this error, contact PingCAP for support or seek help in the official forum.
+    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
 
 * Error Number: 8216
 
@@ -357,7 +357,7 @@ In addition, TiDB has the following unique error codes:
 
     This error occurs when detecting that the data is not consistent with the index. 
     
-    If you encounter this error, contact PingCAP for support or seek help in the official forum.
+    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
 
 * Error Number: 8224
 
@@ -430,6 +430,12 @@ In addition, TiDB has the following unique error codes:
     The interval of GC Life Time is too short and the data that should be read by the long transactions might be cleared.
 
     Extend the interval of GC Life Time.
+
+* Error Number: 9500
+
+    A single transaction is too large.
+
+    See [the error message `transaction too large`](/faq/tidb-faq.md#the-error-message-transaction-too-large-is-displayed) for the solution.
 
 * Error Number: 9007
 
