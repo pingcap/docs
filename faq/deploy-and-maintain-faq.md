@@ -104,7 +104,7 @@ Check the time difference between the machine time of the monitor and the time w
 | enable_slow_query_log | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
 | deploy_without_tidb | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 
-### Deploy TiDB offline using TiDB Ansible（not recommended since TiDB v4)
+### Deploy TiDB offline using TiDB Ansible（not recommended since TiDB v4.0)
 
 > **Warning:**
 >
