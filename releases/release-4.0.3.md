@@ -163,4 +163,4 @@ TiDB version: 4.0.3
 
     + TiDB Binlog
 
-        - Fix the issue that not enable TLS to save checkpoint when enabling TLS for replicating [#988](https://github.com/pingcap/tidb-binlog/pull/988)
+        - Fix the issue that when TiDB Binlog replicates data to the downstream with TLS enabled, Drainer cannot be started which occurs because TLS is not enabled on the database driver used to update the checkpoint [#988](https://github.com/pingcap/tidb-binlog/pull/988)
