@@ -1,12 +1,7 @@
 ---
 title: METRICS_SUMMARY
-<<<<<<< HEAD
-summary: Learn the `METRICS_SUMMARY` system table.
-aliases: ['/docs/stable/system-tables/system-table-metrics-summary/','/docs/v4.0/system-tables/system-table-metrics-summary/','/docs/stable/reference/system-databases/metrics-summary/','/tidb/stable/system-table-metrics-summary/']
-=======
 summary: Learn the METRICS_SUMMARY system table.
-aliases: ['/docs/dev/system-tables/system-table-metrics-summary/','/docs/dev/reference/system-databases/metrics-summary/','/tidb/dev/system-table-metrics-summary']
->>>>>>> cdf7ecc... Remove backtick and extra quote in metadata (#3367)
+aliases: ['/docs/stable/system-tables/system-table-metrics-summary/','/docs/v4.0/system-tables/system-table-metrics-summary/','/docs/stable/reference/system-databases/metrics-summary/','/tidb/stable/system-table-metrics-summary']
 ---
 
 # METRICS_SUMMARY
