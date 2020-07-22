@@ -1,11 +1,7 @@
 ---
 title: Loader Instructions
 summary: Use Loader to load data to TiDB.
-<<<<<<< HEAD
-aliases: ['/docs/stable/loader-overview/','/docs/v4.0/loader-overview/','/docs/stable/reference/tools/loader/']
-=======
-aliases: ['/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling']
->>>>>>> 4405915... loader: move loader faq to loader overview (#3270)
+aliases: ['/docs/stable/loader-overview/','/docs/v4.0/loader-overview/','/docs/stable/reference/tools/loader/','/docs/stable/load-misuse-handling/','/docs/v4.0/load-misuse-handling/','/docs/stable/reference/tools/error-case-handling/load-misuse-handling/','/tidb/stable/load-misuse-handling']
 ---
 
 # Loader Instructions
