@@ -1115,6 +1115,16 @@ The `QPS` statistics is about all the SQL statements, including `use database`, 
 
 The `Statement OPS` statistics is only about applications related SQL statements, including `select`, `update` and `insert`, therefore the `Statement OPS` statistics matches the applications better.
 
+## Deployment on the cloud
+
+### Public cloud
+
+#### What cloud vendors are currently supported by TiDB?
+
+TiDB supports deployment on [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
+
+In addition, TiDB is currently available on JD Cloud and UCloud, and has the first-level database entries on them.
+
 ## Troubleshoot
 
 ### TiDB custom error messages
