@@ -316,7 +316,7 @@ lanced according to load (experimental).
 
 #### `config placement-rules [disable | enable | load | save | show]`
 
-The usage can be found in [Configure rules](configure-placement-rules.md#Configure-rules)
+The usage can be found in [Configure rules](/configure-placement-rules.md#configure-rules)
 
 ### `health`
 
