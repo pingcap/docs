@@ -1,12 +1,7 @@
 ---
 title: Schema Object Names
-<<<<<<< HEAD
-summary: Learn about the schema object names (identifiers) in TiDB.
-aliases: ['/docs/v3.0/schema-object-names/','/docs/v3.0/reference/sql/language-structure/schema-object-names/','/docs/sql/schema-object-names/']
-=======
 summary: Learn about schema object names in TiDB SQL statements.
-aliases: ['/docs/dev/schema-object-names/','/docs/dev/reference/sql/language-structure/schema-object-names/']
->>>>>>> 37acc5a... Update schema object names (#3212)
+aliases: ['/docs/v3.0/schema-object-names/','/docs/v3.0/reference/sql/language-structure/schema-object-names/','/docs/sql/schema-object-names/']
 ---
 
 # Schema Object Names
