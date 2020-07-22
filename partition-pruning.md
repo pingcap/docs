@@ -254,6 +254,7 @@ explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x 
 |         └─TableReader_27             | 2.00     | root      |                        | data:Selection_26                                         |
 |           └─Selection_26             | 2.00     | cop[tikv] |                        | lt(test.t2.x, 2), lt(test.t2.x, test.t1.x)                |
 |             └─TableFullScan_25       | 2.50     | cop[tikv] | table:t1, partition:p1 | keep order:false, stats:pseudo                            |
++--------------------------------------+----------+-----------+------------------------+-----------------------------------------------------------+
 14 rows in set (0.00 sec)
 ```
 
