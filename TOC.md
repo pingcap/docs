@@ -301,6 +301,7 @@
     - [Statement Summary Table](/statement-summary-tables.md)
     - [Tune TiKV](/tune-tikv-performance.md)
     - [Operating System Tuning](/tune-operating-system.md)
+    - [Column Pruning](/column-pruning.md)
   + Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
     - [TiDB](/grafana-tidb-dashboard.md)
@@ -315,6 +316,7 @@
     - [Grafana Best Practices](/best-practices/grafana-monitor-best-practices.md)
     - [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   - [TiSpark](/tispark-overview.md)
+  - [TiKV](/tikv-overview.md)
   + TiFlash
     - [Overview](/tiflash/tiflash-overview.md)
     - [Deploy a TiFlash Cluster](/tiflash/deploy-tiflash.md)
