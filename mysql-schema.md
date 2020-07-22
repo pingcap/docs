@@ -1,10 +1,10 @@
 ---
-title: TiDB System Tables
-summary: Learn the TiDB system tables.
+title: mysql Schema
+summary: Learn about the TiDB system tables.
 aliases: ['/docs/stable/system-tables/system-table-overview/','/docs/v4.0/system-tables/system-table-overview/','/docs/stable/reference/system-databases/mysql/','/tidb/stable/system-table-overview/']
 ---
 
-# `mysql` schema
+# `mysql` Schema
 
 The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables which are extensions to MySQL.
 
