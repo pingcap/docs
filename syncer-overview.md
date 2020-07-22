@@ -78,7 +78,7 @@ Usage of syncer:
   -safe-mode
         to specify and enable the safe mode to make Syncer reentrant
   -server-id int
-        to specify MySQL replica sever-id (default 101)
+        to specify MySQL slave sever-id (default 101)
   -status-addr string
         to specify Syncer metrics (default :8271), such as `--status-addr 127:0.0.1:8271`
   -timezone string
