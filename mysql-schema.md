@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: TiDB System Tables
-summary: Learn the TiDB system tables.
-aliases: ['/docs/stable/system-tables/system-table-overview/','/docs/v4.0/system-tables/system-table-overview/','/docs/stable/reference/system-databases/mysql/','/tidb/stable/system-table-overview/']
-=======
 title: mysql Schema
 summary: Learn about the TiDB system tables.
-aliases: ['/docs/dev/system-tables/system-table-overview/','/docs/dev/reference/system-databases/mysql/','/tidb/dev/system-table-overview/']
->>>>>>> 51237ba... Remove the backtick characters from metadata (#3355)
+aliases: ['/docs/stable/system-tables/system-table-overview/','/docs/v4.0/system-tables/system-table-overview/','/docs/stable/reference/system-databases/mysql/','/tidb/stable/system-table-overview/']
 ---
 
 # `mysql` Schema
