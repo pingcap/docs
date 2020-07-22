@@ -193,10 +193,10 @@ Usage:
     >> config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16M
     ```
 
-- `max-merge-region-keys` controls the upper limit on the key count of Region Merge. When `regionKey` exceeds the specified value, PD does not merge it with the adjacent Region.
+- `max-merge-region-keys` controls the upper limit on the key count of Region Merge. When `regionKeyCount` exceeds the specified value, PD does not merge it with the adjacent Region.
 
     ```bash
-    >> config set max-merge-region-keys 50000 // Set the the upper limit on regionKey to 50000
+    >> config set max-merge-region-keys 50000 // Set the the upper limit on keyCount to 50000
     ```
 
 - `split-merge-interval` controls the interval between the `split` and `merge` operations on a same Region. This means the newly split Region won't be merged within a period of time.
@@ -205,14 +205,13 @@ Usage:
     >> config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
-- `enable-one-way-merge` controls the merge scheduler behavior. This means a region can only be merged into the next region of it.
+- `enable-one-way-merge` controls whether PD only allows a Region to merge with the next Region. When you set it to `false`, PD allows a Region to merge with the adjacent two Regions.
 
     ```bash
     >> config set enable-one-way-merge true  // Enable one way merge.
     ```
 
-- `enable-cross-table-merge` controls the merge scheduler behavior. This means two Regions can be merged with different table IDs.
-This option only works when key type is "table".
+- `enable-cross-table-merge` is used to enable the merging of cross-table Regions. When you set it to `false`, PD does not merge the Regions from different tables. This option only works when key type is "table".
 
     ```bash
     >> config set enable-cross-table-merge true  // Enable cross table merge.
@@ -262,6 +261,14 @@ This option only works when key type is "table".
     >> config set merge-schedule-limit 16       // 16 tasks of Merge scheduling at the same time at most
     ```
 
+- `hot-region-schedule-limit` controls the hot Region scheduling tasks that are running at the same time. Setting its value to `0` means to disable the scheduling. It is not recommended to set a too large value, otherwise it might affect the system performance.
+
+    ```bash
+    >> config set hot-region-schedule-limit 4       // 4 tasks of hot Region scheduling at the same time at most
+    ```
+
+- `hot-region-cache-hits-threshold` is used to set the threshold of a hot Region. A Region is considered as hot only if the number of its cache hits exceeds this threshold.
+
 - `tolerant-size-ratio` controls the size of the balance buffer area. When the score difference between the leader or Region of the two stores is less than specified multiple times of the Region size, it is considered in balance by PD.
 
     ```bash
@@ -286,21 +293,28 @@ This option only works when key type is "table".
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
+- `leader-schedule-policy` is used to select the scheduling strategy of the leader. You can choose to schedule the leader according to `size` or `count`.
+
+- `scheduler-max-waiting-operator` is used to control the number of waiting operatorsq in each scheduler.
+
 - `enable-remove-down-replica` is used to enable the feature of automatically deleting DownReplica. When you set it to `false`, PD does not automatically clean up the downtime replicas.
 
 - `enable-replace-offline-replica` is used to enable the feature of migrating OfflineReplica. When you set it to `false`, PD does not migrate the offline replicas.
 
-- `enable-make-up-replica` is used to enable the feature of making up replicas. When you set it to `false`, PD does not adding replicas for Regions without sufficient replicas.
+- `enable-make-up-replica` is used to enable the feature of making up replicas. When you set it to `false`, PD does not add replicas for Regions without sufficient replicas.
 
 - `enable-remove-extra-replica` is used to enable the feature of removing extra replicas. When you set it to `false`, PD does not remove extra replicas for Regions with redundant replicas.
 
-- `enable-location-replacement` is used to enable the isolation level check. When you set it to `false`, PD does not improve the isolation level of Region replicas by scheduling.
+- `enable-location-replacement` is used to enable the isolation level checking. When you set it to `false`, PD does not increase the isolation level of a Region replica through scheduling.
 
-- `enable-debug-metrics` is used to enable the debug metrics. When you set it to `true`, PD will open some metrics, such as balance-tolerant-size and op influence.
+- `enable-debug-metrics` is used to enable the metrics for debugging. When you set it to `true`, PD enables some metrics such as `balance-tolerant-size`.
 
-- `store-limit-mode` has two mode for setting limit: auto or manual, an auto-set value can be overwritten by a manual-set value, otherwise it is forbidden (experimental). 
+- `enable-placement-rules` is used to enable placement rules.
 
-#### config placement-rules
+- `store-limit-mode` is used to control the mode of the store speed limit mechanism. There are two modes: `auto` and `manual`. In `auto` mode, the stores are automatically ba
+lanced according to load (experimental).
+
+#### `config placement-rules [disable | enable | load | save | show]`
 
 The usage can be found in [Configure rules](configure-placement-rules.md#Configure-rules)
 
@@ -668,14 +682,14 @@ Usage:
 >> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
 ```
 
-### `store [delete | label | weight | remove-tombstone | limit | limit-scene] <store_id>  [--jq="<query string>"]`
+#### `scheduler config balance-hot-region-scheduler`
 
-Use this command to view and control the balance-hot-region-scheduler policy.
+Use this command to view and control the `balance-hot-region-scheduler` policy.
 
 Usage:
 
 ```bash
->> scheduler config balance-hot-region-scheduler  // Display all config
+>> scheduler config balance-hot-region-scheduler  // Display all configuration of the balance-hot-region scheduler
 {
   "min-hot-byte-rate": 100,
   "min-hot-key-rate": 10,
@@ -768,6 +782,16 @@ Usage:
 > **Notice**
 >
 > When using `store limit` command, the original `region-add` and `region-remove` are deprecated, please use `add-peer` and `remove-peer`.
+
+### `log [fatal | error | warn | info | debug]`
+
+Use this command to set the log level of the PD leader.
+
+Usage:
+
+```bash
+>> log warn
+```
 
 ### `tso`
 
