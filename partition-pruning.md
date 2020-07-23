@@ -1,6 +1,10 @@
+---
+title: Partition Pruning
+---
+
 # Partition Pruning
 
-Partition pruning is a performance optimization only when the target table is a partitioned table. It analyzes the filter conditions in the query statements, selects only the partitions that may meet the conditions, and does not scan the partitions that do not match, thereby significantly reducing the amount of calculated data.
+Partition pruning is a performance optimization only when target tables are partitioned tables. It analyzes the filter conditions in the query statements, selects only the partitions that may meet the conditions, and does not scan the partitions that do not match, thereby significantly reducing the amount of calculated data.
 
 ## Application scenarios for partition pruning 
 
