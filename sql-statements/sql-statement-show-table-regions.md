@@ -57,7 +57,7 @@ Executing `SHOW TABLE REGIONS` returns the following columns:
 
 ## Examples
 
-Create an example table with enough data that it fills a few regions:
+Create an example table with enough data that fills a few Regions:
 
 {{< copyable "sql" >}}
 
