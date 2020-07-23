@@ -1,6 +1,6 @@
 # Partition pruning
 
-Partition pruning is a performance optimization only when the target table is a partitioned table. Partition pruning analyzes the filter conditions in the query statements, selects only the partitions that may meet the conditions, and does not scan the partitions that do not match, thereby significantly reducing the amount of calculated data.
+Partition pruning is a performance optimization only when the target table is a partitioned table. It analyzes the filter conditions in the query statements, selects only the partitions that may meet the conditions, and does not scan the partitions that do not match, thereby significantly reducing the amount of calculated data.
 
 ## Application scenarios for partition pruning 
 
@@ -36,7 +36,7 @@ In this SQL statement, it can be known from the condition `x = 1` that all resul
 
 ##### Scenario one
 
-Partition pruning cannot take effect when it is not certain that the results of some query conditions, such as `in`, `between`, `> < >= <=`, etc., are only in one partition.
+Partition pruning cannot take effect when it is not certain that the results of some query conditions, such as `in`, `between`, `> < >= <=`, are only in one partition.
 
 {{< copyable "sql" >}}
 
@@ -99,7 +99,7 @@ explain select * from t2 where x = (select * from t1 where t2.x = t1.x and t2.x 
 +--------------------------------------+----------+-----------+------------------------+----------------------------------------------+
 ```
 
-Each time this query reads a row from `t2`, it will go to the partitioned table `t1` for query. Theoretically, the filter condition of `t1.x = val` will be met at this time, but in fact, the partition pruning only affects the query plan in the generation phase, not the execution phase, so the pruning does not take effect.
+Each time this query reads a row from `t2`, it will go to the partitioned table `t1` for query. Theoretically, the filter condition of `t1.x = val` will be met at this time, but in fact, the partition pruning only affects the query plan in the generation phase, not the execution phase, so the pruning will not take effect.
 
 ### Application of partition pruning in Range partitioned tables
 
@@ -130,7 +130,7 @@ explain select * from t where x = 3;
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-In this SQL statement, partition pruning supports the query condition `in` of equal comparison.
+In this case, partition pruning supports the query condition `in` of equal comparison.
 
 {{< copyable "sql" >}}
 
@@ -161,7 +161,7 @@ In this SQL statement, it can be known from the condition `x in(1,13)` that all 
 
 ##### Scenario two
 
-Partition pruning supports the query condition of interval comparison， such as `between`, `> < = >= <=`.
+Partition pruning supports the query condition of interval comparison，such as `between`, `> < = >= <=`.
 
 {{< copyable "sql" >}}
 
@@ -192,9 +192,7 @@ explain select * from t where x between 7 and 14;
 
 For Range partition, for partition pruning to take effect, the partition expression must be in the simple form of `fn(col)` and the `fn` function must be monotonous. In addition, the query condition must be one of `>, <, =, >=`, and `<=`. 
 
-If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any x and y, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". Theoretically, all monotonous functions, strictly or not, are supported by partition pruning.
-
-In fact, partition pruning in TiDB only support those monotonous functions:
+If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any `x` and `y`, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". Theoretically, all monotonous functions, strictly or not, are supported by partition pruning. In fact, partition pruning in TiDB only support those monotonous functions:
 
 ```sql
 unix_timestamp
@@ -258,4 +256,4 @@ explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x 
 14 rows in set (0.00 sec)
 ```
 
-Each time this query reads a row from `t2`, it will go to the partitioned table `t1` for query. Theoretically, the filter condition of `t1.x> val` will be met at this time, but in fact, the partition pruning only affects the query plan in the generation phase, not the execution phase, so the pruning does not take effect.
+Each time this query reads a row from `t2`, it will go to the partitioned table `t1` for query. Theoretically, the filter condition of `t1.x> val` will be met at this time, but in fact, the partition pruning only affects the query plan in the generation phase, not the execution phase, so the pruning will not take effect.
