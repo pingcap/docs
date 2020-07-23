@@ -88,7 +88,7 @@ SHOW TABLE t1 REGIONS;
 The output should show that the table is split into Regions. The `REGION_ID`, `START_KEY` and `END_KEY` may not match exactly:
 
 ```sql
-..
+...
 mysql> SHOW TABLE t1 REGIONS;
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+
 | REGION_ID | START_KEY    | END_KEY      | LEADER_ID | LEADER_STORE_ID | PEERS | SCATTERING | WRITTEN_BYTES | READ_BYTES | APPROXIMATE_SIZE(MB) | APPROXIMATE_KEYS |
