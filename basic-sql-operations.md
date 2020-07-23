@@ -20,7 +20,7 @@ SQL is divided into the following 4 types according to their functions:
 
 - DML (Data Manipulation Language): It is used to manipulate application related records.
 
-- DQL (Data Query Language)：It is used to query the records after conditional filtering.
+- DQL (Data Query Language): It is used to query the records after conditional filtering.
 
 - DCL (Data Control Language): It is used to define access privileges and security levels.
 
@@ -176,7 +176,7 @@ ALTER TABLE person DROP INDEX person_unique_id;
 
 > **Note:**
 > 
-> DDL operations are not transactions. You don't need to correspond COMMIT statements when executing DDL.
+> DDL operations are not transactions. You don't need to run a `COMMIT` statement when executing DDL operations.
 
 Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
 
@@ -230,7 +230,7 @@ To view the data in a table, use the `SELECT` statement:
 SELECT * FROM person;
 ```
 
-Add the column name to be queried after the `SELECT` statement:
+To query a specific column, add the column name after the `SELECT` keyword:
 
 {{< copyable "sql" >}}
 
