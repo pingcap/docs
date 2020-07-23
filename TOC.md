@@ -103,6 +103,7 @@
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
   + SQL Tuning
+    + [Overview](/sql-tuning-overview.md)
     + [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
@@ -120,6 +121,7 @@
         + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
+        + [Overview](/control-execution-plan.md)
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
         + [Access Tables Using `IndexMerge`](/index-merge.md)
