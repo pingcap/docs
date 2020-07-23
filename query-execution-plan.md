@@ -492,7 +492,7 @@ After adding the index, use `IndexScan_24` to directly read the data that meets 
 
 ## Operator-related system variables
 
-Based on MySQL, TiDB defines some special system variables and syntax to optimize performance. Some system variables are related to specific operators, such as the concurrency of the operator, the upper limit of the operator memory, and whether to use partition tables. These can be controlled by system variables, thereby affecting the efficiency of each operator.
+Based on MySQL, TiDB defines some special system variables and syntax to optimize performance. Some system variables are related to specific operators, such as the concurrency of the operator, the upper limit of the operator memory, and whether to use partitioned tables. These can be controlled by system variables, thereby affecting the efficiency of each operator.
 
 ## See also
 
