@@ -6,7 +6,15 @@ aliases: ['/docs/dev/character-set-and-collation/','/docs/dev/reference/sql/char
 
 # Character Set and Collation
 
-A character set is a set of symbols and encodings. A collation is a set of rules for comparing characters in a character set.
+This document introduces the character set and collation supported by TiDB.
+
+## Concepts
+
+A character set is a set of symbols and encodings. 
+
+A collation is a set of rules for comparing characters in a character set.
+
+## TiDB character set and collation
 
 Currently, TiDB supports the following character sets:
 
@@ -27,6 +35,22 @@ SHOW CHARACTER SET;
 | binary  | binary        | binary            |      1 |
 +---------|---------------|-------------------|--------+
 5 rows in set (0.00 sec)
+```
+
+TiDB supports the following collation:
+
+```sql
+mysql> show collation;
++-------------+---------+------+---------+----------+---------+
+| Collation   | Charset | Id   | Default | Compiled | Sortlen |
++-------------+---------+------+---------+----------+---------+
+| utf8mb4_bin | utf8mb4 |   46 | Yes     | Yes      |       1 |
+| latin1_bin  | latin1  |   47 | Yes     | Yes      |       1 |
+| binary      | binary  |   63 | Yes     | Yes      |       1 |
+| ascii_bin   | ascii   |   65 | Yes     | Yes      |       1 |
+| utf8_bin    | utf8    |   83 | Yes     | Yes      |       1 |
++-------------+---------+------+---------+----------+---------+
+5 rows in set (0.01 sec)
 ```
 
 > **Note:**
@@ -51,11 +75,11 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 2 rows in set (0.00 sec)
 ```
 
-## Cluster character set and collation
+## Character set and collation in different layers
 
-Not supported yet.
+The character set and collation can be set at different layers.
 
-## Database character set and collation
+### Database character set and collation
 
 Each database has a character set and a collation. You can use the following statements to specify the database character set and collation:
 
@@ -152,7 +176,7 @@ SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
 FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'db_name';
 ```
 
-## Table character set and collation
+### Table character set and collation
 
 You can use the following statement to specify the character set and collation for tables:
 
@@ -180,7 +204,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 If the table character set and collation are not specified, the database character set and collation are used as their default values.
 
-## Column character set and collation
+### Column character set and collation
 
 You can use the following statement to specify the character set and collation for columns:
 
@@ -196,7 +220,7 @@ col_name {ENUM | SET} (val_list)
 
 If the column character set and collation are not specified, the table character set and collation are used as their default values.
 
-## String character sets and collation
+### String character sets and collation
 
 Each string corresponds to a character set and a collation. When you use a string, this option is available:
 
@@ -222,7 +246,7 @@ Rules:
 + Rule 2: If you specify `CHARACTER SET charset_name` but do not specify `COLLATE collation_name`, the `charset_name` character set and the default collation of `charset_name` are used.
 + Rule 3: If you specify neither `CHARACTER SET charset_name` nor `COLLATE collation_name`, the character set and collation given by the system variables `character_set_connection` and `collation_connection` are used.
 
-## Client connection character set and collation
+### Client connection character set and collation
 
 + The server character set and collation are the values of the `character_set_server` and `collation_server` system variables.
 
@@ -246,7 +270,7 @@ You can use the following statement to set the character set and collation that 
     SET character_set_connection = charset_name;
     ```
 
-    `COLLATE` is optional, if absent, the default collation of the `charset_name` is used.
+    `COLLATE` is optional, if absent, the default collation of the `charset_name` is used to set the `collation_connection`.
 
 + `SET CHARACTER SET 'charset_name'`
 
@@ -255,12 +279,13 @@ You can use the following statement to set the character set and collation that 
     ```sql
     SET character_set_client = charset_name;
     SET character_set_results = charset_name;
+    SET charset_connection = @@charset_database;
     SET collation_connection = @@collation_database;
     ```
 
 ## Optimization levels of character sets and collations
 
-String > Column > Table > Database > Server > Cluster
+String > Column > Table > Database > Server
 
 ## General rules on selecting character sets and collation
 
@@ -345,13 +370,13 @@ If an expression involves multiple clauses of different collations, you need to 
 
 + The coercibility value of the explicit `COLLATE` clause is `0`.
 + If the collations of two strings are incompatible, the coercibility value of the concatenation of two strings with different collations is `1`. Currently, all implemented collations are compatible with each other.
-+ The column's collation has a coercibility value of `2`.
++ The collation of the column,`CAST()`, `CONVERT()` or `BINARY()` has a coercibility value of `2`.
 + The system constant (the string returned by `USER ()` or `VERSION ()`) has a coercibility value of `3`.
 + The coercibility value of constants is `4`.
 + The coercibility value of numbers or intermediate variables is `5`.
 + `NULL` or expressions derived from `NULL` has a coercibility value of `6`.
 
-When inferring collations, TiDB prefers using the collation of expressions with lower coercibility values (the same as MySQL). If the coercibility values of two clauses are the same, the collation is determined according to the following priority:
+When inferring collations, TiDB prefers using the collation of expressions with lower coercibility values. If the coercibility values of two clauses are the same, the collation is determined according to the following priority:
 
 binary > utf8mb4_bin > utf8mb4_general_ci > utf8_bin > utf8_general_ci > latin1_bin > ascii_bin
 
