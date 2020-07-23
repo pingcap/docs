@@ -1,6 +1,6 @@
 # Partition pruning
 
-Partition pruning is a performance optimization only when the target table is a partitioned table. It analyzes the filter conditions in the query statements, selects only the partitions that may meet the conditions, and does not scan the partitions that do not match, thereby significantly reducing the amount of calculated data.
+Partition pruning is a performance optimization that applies to partitioned tables. It analyzes the filter conditions in query statements, and eliminates (_prunes_) partitions from consideration when they do not contain any data that will be required. By eliminating the non-required partitions, TiDB is able to reduce the amount of data that needs to be accessed and potentially significantly improving query execution times.
 
 ## Application scenarios for partition pruning 
 
