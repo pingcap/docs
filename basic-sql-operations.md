@@ -1,10 +1,10 @@
 ---
-title: Basic SQL Operations
+title: Explore SQL with TiDB
 summary: Learn about the basic SQL statements for the TiDB database.
 aliases: ['/docs/dev/basic-sql-operations/','/docs/dev/how-to/get-started/explore-sql/']
 ---
 
-# Basic SQL Operations
+# Explore SQL with TiDB
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
@@ -120,7 +120,7 @@ DROP TABLE person;
 
 ## Create, show, and drop an index
 
-Indexes are used to speed up queries on indexed columns. To create an index for the column whose value is not unique, use the `CREATE INDEX` or `ALTER TABLE` statement:
+Indexes are used to speed up queries on indexed columns. To create an index for the column whose value is not unique, use the `CREATE INDEX` statement:
 
 {{< copyable "sql" >}}
 
@@ -128,7 +128,7 @@ Indexes are used to speed up queries on indexed columns. To create an index for 
 CREATE INDEX person_id ON person (id);
 ```
 
-Or
+Or use the `ALTER TABLE` statement:
 
 {{< copyable "sql" >}}
 
