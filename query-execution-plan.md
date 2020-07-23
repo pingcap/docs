@@ -86,7 +86,7 @@ One of the goals of SQL optimization is to push the calculation down to TiKV as 
 
 ### Access Object overview
 
-The data item accessed by the operator, including `table`, `partition`, and `index`(if any). Only operators that directly access the data have this information.
+Access Object is the data item accessed by the operator, including `table`, `partition`, and `index` (if any). Only operators that directly access the data have this information.
 
 ### Range query
 
@@ -157,7 +157,7 @@ The `IndexLookUp_6` operator has two child nodes: `IndexFullScan_4(Build)` and `
 
 This execution plan is not as efficient as using `TableReader` to perform a full table scan, because `IndexLookUp` performs an extra index scan (which comes with additional overhead), apart from the table scan.
 
-For table scan operations, the operator info column in the explain table shows whether the data is sorted. In the above example, the `keep order:false` in the `IndexFullScan` operator indicates that the data is unsorted. The `stats:pseudo` in the operator info means that the statists will not be used for estimation due to no or too old statistics. For other scan operations, the operator info involves similar information.
+For table scan operations, the operator info column in the `explain` table shows whether the data is sorted. In the above example, the `keep order:false` in the `IndexFullScan` operator indicates that the data is unsorted. The `stats:pseudo` in the operator info means that there is no statistics, or that the statistics will not be used for estimation because it is outdated. For other scan operations, the operator info involves similar information.
 
 #### `TableReader` example
 
@@ -184,7 +184,7 @@ In the above example, the child node of the `TableReader_7` operator is `Selecti
 
 #### `IndexMerge` example
 
-IndexMerge is a new way to access tables in TiDB 4.0. In the IndexMerge access mode, the optimizer can use multiple indexes in a table and merge the returned results of each index. In some scenarios, this mode can reduce a large amount of unnecessary data scan and improve the efficiency of the query execution.
+`IndexMerge` is a new way to access tables, introduced in TiDB 4.0. In the `IndexMerge` access mode, the optimizer can use multiple indexes in a table and merge the results returned by each index. In some scenarios, this mode can reduce a large amount of unnecessary data scan and improve the efficiency of the query execution.
 
 ```
 mysql> explain select * from t where a = 1 or b = 1;
@@ -207,9 +207,9 @@ mysql> explain select * from t use index(idx_a, idx_b) where a > 1 or b > 1;
 +--------------------------------+---------+-----------+-------------------------+------------------------------------------------+
 ```
 
-In the above example, without IndexMerge, only one index can be used in each table because the filter condition of the query is an expression connected by `OR`. `a = 1` cannot be pushed down to the index `a` and `b = 1` cannot be pushed down to the index `b`. This way makes the efficiency of the full scan very low when the amount of data in `t` is large. For such scenarios, TiDB introduces IndexMerge, a new access mode to tables.
+In the above example, where the filter condition of the query is an expression connected by `OR`, without IndexMerge, only one index can be used in each table.  In such case, `a = 1` cannot be pushed down to the index `a`, and `b = 1` cannot be pushed down to the index `b`. When `t` has a large amount of data, the execution of full table scan is inefficient. For such scenarios, TiDB introduces `IndexMerge`, a new access mode to tables.
 
-In the IndexMerge access mode, the optimizer can use multiple indexes in a table, and combine the returned results of each index to generate the execution plan of the latter IndexMerge in the figure above. Here the `IndexMerge_16` operator has three child nodes, among which `IndexRangeScan_13` and `IndexRangeScan_14` get all the `RowID`s that meet the conditions based on the result of range scan, and then the `TableRowIDScan_15` operator accurately reads all the data that meet the conditions according to these `RowID`s.
+In the IndexMerge access mode, the optimizer can use multiple indexes in a table, and combine the returned results of each index to generate the execution plan of the latter IndexMerge in the figure above. Here the `IndexMerge_16` operator has three child nodes, among which `IndexRangeScan_13` and `IndexRangeScan_14` get all the `RowID`s that meet the conditions based on the result of range scan, and then the `TableRowIDScan_15` operator accurately reads all the data that meets the conditions according to these `RowID`s.
 
 For the table scan that is performed by range such as indexRangeScan/TableRangeScan , the operator info column in the explain table has more information about the range of the scanned data than other scan operations. In the above example, the `range:(1,+inf]` in the IndexRangeScan operator indicates that the operator scans the data from 1 to positive infinity.
 
@@ -255,7 +255,7 @@ Generally speaking, `Hash Aggregate` is executed in two stages.
 - One is on the Coprocessor of TiKV/TiFlash, with the intermediate results of the aggregation function calculated when the table scan operator reads the data.
 - The other is at the TiDB layer, with the final result calculated through aggregating the intermediate results of all Coprocessor Tasks.
 
-The operator info column in the explain table also records other information about Hash Aggregation. You need to pay attention to what aggregation function that Aggregation uses. In the above example, the operator info of the Hash Aggregation operator is `funcs:count(Column#7)->Column#4`. It means that Hash Aggregation uses the aggregation function `count` for calculation. The operator info of the Stream Aggregation operator in the following example is the same with this one.
+The operator info column in the `explain` table also records other information about `Hash Aggregation`. You need to pay attention to what aggregate function that `Hash Aggregation` uses. In the above example, the operator info of the `Hash Aggregation` operator is `funcs:count(Column#7)->Column#4`. It means that `Hash Aggregation` uses the aggregate function `count` for calculation. The operator info of the `Stream Aggregation` operator in the following example is the same with this one.
 
 #### `Stream Aggregate` example
 
@@ -327,7 +327,7 @@ The execution process of `Hash Join` is as follows:
 4. Use the data of the `Probe` side to probe the Hash Table.
 5. Return qualified data to the user.
 
-The operator info column in the explain table also records other information about Hash Join, including whether the query is Inner Join or Outer Join, and what are the conditions of join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query statement `where t1.id = t2. id`.The operator info of the other Join operators in the following example is similar to this one.
+The operator info column in the `explain` table also records other information about `Hash Join`, including whether the query is Inner Join or Outer Join, and what are the conditions of Join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query statement `where t1.id = t2. id`. The operator info of the other Join operators in the following examples is similar to this one.
 
 #### `Merge Join` example
 
