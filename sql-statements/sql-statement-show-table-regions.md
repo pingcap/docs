@@ -100,7 +100,7 @@ mysql> SHOW TABLE t1 REGIONS;
 3 rows in set (0.00 sec)
 ```
 
-In the output above, a `START_KEY` of `t_75_r_31717` and `END_KEY` of `t_75_r_63434` shows that data with a PRIMARY KEY between `31717` and `63434` will be stored in this region. The prefix `t_75_` indicates that this is the region for a table (`t`) which has an internal table ID of `75`. An empty key value for `START_KEY` or `END_KEY` indicates negative infinity or positive infinity respectively.
+In the output above, a `START_KEY` of `t_75_r_31717` and `END_KEY` of `t_75_r_63434` shows that data with a PRIMARY KEY between `31717` and `63434` is stored in this Region. The prefix `t_75_` indicates that this is the Region for a table (`t`) which has an internal table ID of `75`. An empty key value for `START_KEY` or `END_KEY` indicates negative infinity or positive infinity respectively.
 
 TiDB will automatically rebalance regions as needed. For manual rebalancing, use the `SPLIT TABLE REGION` statement:
 
