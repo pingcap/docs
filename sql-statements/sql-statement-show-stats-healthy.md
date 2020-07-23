@@ -7,7 +7,7 @@ summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 
 The `SHOW STATS_HEALTHY` statement shows an estimation of how accurate statistics are believed to be. Tables with a low percentage health may generate sub-optimal query execution plans.
 
-The health of a table can be improved by running the `ANALYZE` table command. `ANALYZE` will run automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
+The health of a table can be improved by running the `ANALYZE` table command. `ANALYZE` runs automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
 
 ## Synopsis
 
