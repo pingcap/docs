@@ -15,7 +15,7 @@ In addition, TiDB has the following unique error codes:
 
 > **Note:**
 >
-> Some error codes stand for internal errors. Normally, TiDB handles the errors rather than return to the user, so some error codes are not listed here.
+> Some error codes stand for internal errors. Normally, TiDB handles the error rather than return it to the user, so some error codes are not listed here.
 >
 > If you encounter an error code that is not listed here, [contact PingCAP](mailto:info@pingcap.com) for support.
 
@@ -151,7 +151,7 @@ In addition, TiDB has the following unique error codes:
 
     An unsupported database isolation level is set. 
     
-    If you cannot modify the codes by using third-party tools or frameworks, use `tidb_skip_isolation_level_check` to bypass this check.
+    If you cannot modify the codes because you are using a third-party tool or framework, consider using `tidb_skip_isolation_level_check` to bypass this check.
 
     {{< copyable "sql" >}}
 
@@ -191,7 +191,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8059
 
-    The auto-random ID is exhausted and cannot be allocated. There is no way to recover from such errors currently. It is recommended to use bigint when using the auto random function to obtain the maximum number of assignment. And try to avoid manually assigning values to the auto random column.
+    The auto-random ID is exhausted and cannot be allocated. There is no way to recover from such errors currently. It is recommended to use bigint when using the auto random feature to obtain the maximum number of assignment. And try to avoid manually assigning values to the auto random column.
 
     See [auto random](/auto-random.md) for reference.
 
@@ -329,7 +329,7 @@ In addition, TiDB has the following unique error codes:
 
     An SQL query with aggregate functions returns non-aggregated columns, which violates the `only_full_group_by` mode. 
     
-    Modify the SQL or disable the `only_full_group_by` mode.
+    Modify the SQL statement or disable the `only_full_group_by` mode.
 
 * Error Number: 8200
 
@@ -339,7 +339,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8214
 
-    The DDL operation is terminated by the operation of admin cancel.
+    The DDL operation is terminated by the `admin cancel` operation.
 
 * Error Number: 8215
 
@@ -349,7 +349,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8216
 
-    Invalid automatic random columns.
+    The usage of automatic random columns is incorrect.
 
     See [auto random](/auto-random.md) to modify.
 
@@ -363,7 +363,7 @@ In addition, TiDB has the following unique error codes:
 
     The DDL job cannot be found. 
     
-    Check the job id which is specified by the restore operation.
+    Check whether the job id specified by the `restore` operation exists.
 
 * Error Number: 8225
 
@@ -393,7 +393,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8230
 
-    TiDB currently does not use Sequence as the default value on newly added columns.
+    TiDB currently does not support using Sequence as the default value on newly added columns, and reports this error if you use it. 
 
 * Error Number: 9001
 
