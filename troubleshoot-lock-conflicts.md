@@ -33,7 +33,7 @@ You can detect the read-write conflict in your TiDB cluster by the following way
 
     * Monitoring data through Grafana
 
-        On the `KV Errors` panel in the TiDB dashboard, there are two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check read-write conflicts in the transactions. If the values of both `not_expired` and `resolve` in the `Lock Resolve OPS` panel increase, there might be many read-write conflicts. The `not_expired` metric means that the transaction's lock has not timed out. The `resolve` metric means that the other transaction tries to clean up the locks. If the value of another `txnLockFast` metric in the `KV Backoff OPS` panel increases, there might also be read-write conflicts.
+        On the `KV Errors` panel in the TiDB dashboard, there are two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check read-write conflicts in the transactions. If the values of both `not_expired` and `resolve` under `Lock Resolve OPS` increase, there might be many read-write conflicts. The `not_expired` item means that the transaction's lock has not timed out. The `resolve` item means that the other transaction tries to clean up the locks. If the value of another `txnLockFast` item under `KV Backoff OPS` increases, there might also be read-write conflicts.
 
         ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
         ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
@@ -82,26 +82,26 @@ Solutions:
 
 #### KeyIsLocked error
 
-If the 2PC transaction status of the commit phase. And status is the prewrite phase right now. The first step is to check the write-write conflict, and then check whether the target key has been locked by other transactions. The TiKV server will output a log about "KeyIsLocked". At present, the error message is not printed in the logs of TiDB and TiKV. As with read-write conflicts, when "KeyIsLocked" occurs, the background will automatically perform backoff and retry again.
+In the Prewrite phase of a transaction, TiDB checks whether there is any write-write conflict, and then checks whether the target key has been locked by another transaction. If the key is locked, the TiKV server outputs a "KeyIsLocked" error. At present, the error message is not printed in the logs of TiDB and TiKV. Same as read-write conflicts, when "KeyIsLocked" occurs, TiDB automatically performs backoff and retry for the transaction.
 
-You can check "KeyIsLocked" error in the TiDB monitoring on Grafana:
+You can check whether there's any "KeyIsLocked" error in the TiDB monitoring on Grafana:
 
-The panel of "KV Errors" in the TiDB dashboard has two monitored metrics are "Lock Resolve OPS" and "KV Backoff OPS" which can check write-write conflict in the transaction. If too many write-write conflicts in the current situation, the "resolve" metric means that the other transaction will try to resolve lock operation. And the "txnLock" monitoring value in the "KV Backoff OPS" plane will have the same upward trend, indicating the number of write-write conflicts per second of the operation.
+The `KV Errors` panel in the TiDB dashboard has two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check write-write conflicts caused by a transaction. If the `resolve` item under `Lock Resolve OPS` and the `txnLock` item under `KV Backoff OPS` have a clear upward trend, a "KeyIsLocked" error occurs. `resolve` refers to the operation that attempts to clear the lock, and `txnLock` represents a write conflict.
 
 ![KV-backoff-txnLockFast-optimistic-01](/media/troubleshooting-lock-pic-07.png)
 ![KV-Errors-resolve-optimistic-01](/media/troubleshooting-lock-pic-08.png)
 
 Solutions:
 
-* We don’t need to more take care of less number of operation "txnLock" in the `KV Backoff OPS`. Because the background process will try to backoff the transaction for the commit phase. the first time will retry after 200 ms,  the total retry maximum time is 3000 ms.
-* If there are too many “txnLock” operation records in the “KV Backooff OPS”, we recommend analyzing to write conflicts at the application level.
-* If this application is a write-write conflict scenario, it is strongly recommended to use the pessimistic transaction mode.
+* If there is a small amount of txnLock in the monitoring, no need to pay too much attention. The backoff and retry is automatically performed in the background. The first time of the retry is 200 ms and the maximum time is 3000 ms for a single retry.
+* If there are too many “txnLock” operations in the `KV Backoff OPS`, it is recommended that you analyze the reasons to the write conflicts from the application side.
+* If your application is a write-write conflict scenario, it is strongly recommended to use the pessimistic transaction mode.
 
 ### Commit phase
 
-When the transaction states of the prewrite phase which has been completed. The client will be obtained commit_ts, and then the transaction is going to the next phase of 2PC. 
+After the Prewrite phase completes, the client obtains commit_ts, and then the transaction is going to the next phase of 2PC - the Commit phase.
 
-#### "LockNotFound" error
+#### LockNotFound error
 
 The error log of "TxnLockNotFound" means that transaction commit time is longer than TTL  time. and then when the transaction is going to commit, its lock has been rollbacked by other transactions. If the TiDB server enables transaction commit retry, this transaction is re-executed according to [tidb_retry_limit](/tidb-specific-system-variables.md). But take care of the difference between explicit and implicit transactions.
 
