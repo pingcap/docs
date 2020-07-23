@@ -50,7 +50,7 @@ SHOW STATS_HEALTHY; # should be 100% healthy
 ```
 
 ```sql
-..
+...
 mysql> SHOW STATS_HEALTHY;
 +---------+------------+----------------+---------+
 | Db_name | Table_name | Partition_name | Healthy |
