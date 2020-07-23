@@ -66,6 +66,7 @@
       + [Use BR Tool](/br/backup-and-restore-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
+  + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
@@ -116,6 +117,7 @@
       + Physical Optimization
         + [Index Selection](/choose-index.md)
         + [Statistics](/statistics.md)
+        + [Wrong Index Solution](/wrong-index-solution.md)
         + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
@@ -147,6 +149,7 @@
     + [BR Use Cases](/br/backup-and-restore-use-cases.md)
   + TiDB Binlog
     + [Overview](/tidb-binlog/tidb-binlog-overview.md)
+    + [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
     + [Deploy](/tidb-binlog/deploy-tidb-binlog.md)
     + [Maintain](/tidb-binlog/maintain-tidb-binlog-cluster.md)
     + [Configure](/tidb-binlog/tidb-binlog-configuration-file.md)
@@ -485,8 +488,12 @@
   + [Table Filter](/table-filter.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
-  + [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
+  + [SQL FAQs](/faq/sql-faq.md)
+  + [Deploy and Maintain FAQs](/faq/deploy-and-maintain-faq.md)
   + [Upgrade FAQs](/faq/upgrade-faq.md)
+  + [High Availability FAQs](/faq/high-availability-faq.md)
+  + [High Reliability FAQs](/faq/high-reliability-faq.md)
+  + [Migration FAQs](/faq/migration-tidb-faq.md)
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
