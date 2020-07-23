@@ -3,7 +3,7 @@ title: Migration FAQs
 summary: Learn about the FAQs related to data migration.
 ---
 
-# Migration FAQ
+# Migration FAQs
 
 This document summarizes the FAQs related to TiDB data migration.
 
@@ -78,7 +78,7 @@ Two solutions:
 
 ### Syncer infrastructure
 
-See [Parsing TiDB online data synchronization tool Syncer](https://pingcap.com/blog-cn/tidb-syncer/)in Chinese.
+See [Parsing TiDB online data synchronization tool Syncer](https://pingcap.com/blog-cn/tidb-syncer/) in Chinese.
 
 #### Syncer user guide
 
@@ -102,11 +102,11 @@ No. Currently, the data replication depends on the application itself.
 
 #### Does Syncer support replicating only some of the tables when Syncer is replicating data?
 
-Yes. For details, see [Syncer User Guide](/syncer-overview.md)
+Yes. For details, see [Syncer User Guide](/syncer-overview.md).
 
 #### Do frequent DDL operations affect the replication speed of Syncer?
 
-Frequent DDL operations may affect the replication speed. For Sycner, DDL operations are executed serially. When DDL operations are executed during data replication, data will be replicated serially and thus the replication speed will be slowed down.
+Frequent DDL operations may affect the replication speed. For Syncer, DDL operations are executed serially. When DDL operations are executed during data replication, data will be replicated serially and thus the replication speed will be slowed down.
 
 #### If the machine that Syncer is in is broken and the directory of the `syncer.meta` file is lost, what should I do?
 
@@ -158,13 +158,13 @@ Yes. But the `load data` does not support the `replace into` syntax.
 
 ### Why does the query speed getting slow after deleting data?
 
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the Region Merge feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
+Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the Region Merge feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write) in Chinese.
 
 ### What is the most efficient way of deleting data?
 
 When deleting a large amount of data, it is recommended to use `Delete * from t where xx limit 5000;`. It deletes through the loop and uses `Affected Rows == 0` as a condition to end the loop, so as not to exceed the limit of transaction size. With the prerequisite of meeting business filtering logic, it is recommended to add a strong filter index column or directly use the primary key to select the range, such as `id >= 5000*n+m and id < 5000*(n+1)+m`.
 
-If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all will be processed by Garbage Collection) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
+If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all will be processed by Garbage Collection) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write) in Chinese.
 
 ### How to improve the data loading speed in TiDB?
 
@@ -176,3 +176,5 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:
 
 {{< copyable "sql" >}}
+
+`update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";`
