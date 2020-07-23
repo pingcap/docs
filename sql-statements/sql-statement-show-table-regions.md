@@ -85,7 +85,7 @@ SELECT SLEEP(5);
 SHOW TABLE t1 REGIONS;
 ```
 
-The output should show that the table is split into regions. The `REGION_ID`, `START_KEY` and `END_KEY` may not match exactly:
+The output should show that the table is split into Regions. The `REGION_ID`, `START_KEY` and `END_KEY` may not match exactly:
 
 ```sql
 ..
