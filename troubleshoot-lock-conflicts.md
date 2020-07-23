@@ -33,45 +33,45 @@ You can detect the read-write conflict in your TiDB cluster by the following way
 
     * Monitoring data through Grafana
 
-        On the `KV Errors` panel in the TiDB dashboard, there are two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check read-write conflicts in the transactions. If there are many read-write conflicts, the monitoring value of both `not_expired` and `resolve` in the `Lock Resolve OPS` panel which have an obvious upward trend. The `not_expired` means that before the one of the transaction's lock hasn't timeout. The `resolve` metric means that the other transaction will try to resolve lock operation. The other monitoring value of `txnLockFast` in the `KV Backoff OPS` plane will have the same upward trend which represents read-write conflict peer of operation.
+        On the `KV Errors` panel in the TiDB dashboard, there are two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check read-write conflicts in the transactions. If the values of both `not_expired` and `resolve` in the `Lock Resolve OPS` panel increase, there might be many read-write conflicts. The `not_expired` metric means that the transaction's lock has not timed out. The `resolve` metric means that the other transaction tries to clean up the locks. If the value of another `txnLockFast` metric in the `KV Backoff OPS` panel increases, there might also be read-write conflicts.
 
         ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
         ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
 
     * Logs of the TiDB server
 
-        If among transactions is read-write conflict, the tidb log has below message:
+        If there is any read-write conflict, you can see the following message in the TiDB log:
 
         ```log
         [INFO] [coprocessor.go:743] ["[TIME_COP_PROCESS] resp_time:406.038899ms txnStartTS:416643508703592451 region_id:8297 store_addr:10.8.1.208:20160 backoff_ms:255 backoff_types:[txnLockFast,txnLockFast] kv_process_ms:333 scan_total_write:0 scan_processed_write:0 scan_total_data:0 scan_processed_data:0 scan_total_lock:0 scan_processed_lock:0"]
         ```
 
-        * txnStartTS: The transaction is reading request which start timestamp is start_ts, for example, the start_ts is 416643508703592451
-        * backoff_types: If read-write conflict has happened, when the current transaction of reading request will try to backoff. TxnLockFast is one of the backoff types.
-        * backoff_ms: This value is the time that the read request transaction attempts to backoff, and the time unit is milliseconds. The message is 255 milliseconds to try to backoff.
+        * txnStartTS: The start_ts of the transaction that is sending the read request. In the above log, `416643508703592451` is the start_ts.
+        * backoff_types: If a read-write conflict happens, and the read request performs backoff and retry, the type of retry is `TxnLockFast`.
+        * backoff_ms: The time that the read request spends in the backoff and retry, and the unit is milliseconds. In the above log, the read request spends 255 milliseconds in the backoff and retry.
         * region_id: Region ID corresponding to the target key of the read request.
 
 2. Logs of the TiKV server
 
-    If among transactions is read-write conflict, the tikv log has below message: 
+    If there is any read-write conflict, you can see the following message in the TiKV log:
 
     ```log
     [ERROR] [endpoint.rs:454] [error-response] [err=""locked primary_lock:7480000000000004D35F6980000000000000010380000000004C788E0380000000004C0748 lock_version: 411402933858205712 key: 7480000000000004D35F7280000000004C0748 lock_ttl: 3008 txn_size: 1""]
     ```
 
-    When the read-write conflict in the TiDB, the read request to target key which has been blocked by the other transaction. These locks include the optimistic transaction mode is uncommit and the pessimistic transaction mode after uncommitted prewrite phase.
+    This message indicates that a read-write conflict occurs in TiDB. The target key of the read request has been locked by another transaction. The locks are from the uncommitted optimistic transaction and the uncommitted pessimistic transaction after the prewrite phase.
 
-    * primary_lock：This value represents the target key is locked by the primary lock.
-    * lock_version：This value is the target key is locked by a version of the transaction's start_ts.
-    * key：The target key of information.
+    * primary_lock：Indicates that the target key is locked by the primary lock.
+    * lock_version：The start_ts of the transaction that owns the lock.
+    * key：The target key that is locked.
     * lock_ttl: The lock’s TTL (Time To Live)
-    * txn_size：The region of keys counts at which locks in the transaction.
+    * txn_size：The number of keys that are in the Region of the transaction that owns the lock.
 
 Solutions:
 
-* If read-write conflict in the TiDB, TiDB Server will trigger an automatic backoff and retry. As in the above example, the Txn1 will perform a backoff and retry, the first time will retry to execute after 100 ms, the longest retry for 3000 ms, the total retry maximum time is 20000 ms.
+* A read-write conflict triggers an automatic backoff and retry. As in the above example, Txn1 has a backoff and retry. The first time of the retry is 100 ms, the longest retry is 3000 ms, and the total time is 20000 ms at maximum.
 
-* You can use the subcommand [decoder](/tidb-control.md#decoder-subcommand) of TiDB Control to view the table id and rowid of the row corresponding to the specified key:
+* You can use the sub-command [`decoder`](/tidb-control.md#decoder-subcommand) of TiDB Control to view the table id and rowid of the row corresponding to the specified key:
 
     ```sh
     ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
