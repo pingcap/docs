@@ -125,7 +125,7 @@ mysql> SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-The above output shows that region 96 was split, with a new region 98 being created. The remaining regions in the table were unaffected by the split operation. This is confirmed by the output statistics:
+The above output shows that Region 96 was split, with a new Region 98 being created. The remaining Regions in the table were unaffected by the split operation. This is confirmed by the output statistics:
 
 * `TOTAL_SPLIT_REGION` indicates the number of newly split Regions. In this example, the number is 1.
 * `SCATTER_FINISH_RATIO` indicates the rate at which the newly split Regions are successfully scattered. `1.0` means that all Regions are scattered.
