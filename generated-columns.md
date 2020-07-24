@@ -78,7 +78,7 @@ CREATE TABLE person (
 
 ## Replace expression with generated column
 
-When an expression that appears in a query has been stored as a generated column with an index, TiDB replaces the expression with the corresponding generated column. Therefore, you can use this index when generating the query plan.
+When an expression that appears in a query has been stored as a generated column with an index, TiDB replaces the expression with the corresponding generated column. Therefore, TiDB can use this index when generating the query plan.
 
 The following example illustrates how to create a generated column for the expression `a+1` and add an index to speed up the query.
 
