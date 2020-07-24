@@ -211,7 +211,7 @@ In the above query, the filter condition is a `WHERE` clause that uses `OR` as t
 
 `IndexMerge` allows the optimizer to use multiple indexes per table, and merge the results returned by each index to generate the execution plan of the latter `IndexMerge` in the figure above. Here the `IndexMerge_16` operator has three child nodes, among which `IndexRangeScan_13` and `IndexRangeScan_14` get all the `RowID`s that meet the conditions based on the result of range scan, and then the `TableRowIDScan_15` operator accurately reads all the data that meets the conditions according to these `RowID`s.
 
-For the table scan that is performed by range such as indexRangeScan/TableRangeScan , the operator info column in the explain table has more information about the range of the scanned data than other scan operations. In the above example, the `range:(1,+inf]` in the IndexRangeScan operator indicates that the operator scans the data from 1 to positive infinity.
+For the scan operation that is performed on a specific range of data, such as `IndexRangeScan`/`TableRangeScan`, the `operator info` column in the result has additional information about the scan range compared with other scan operations like `IndexFullScan`/`TableFullScan`. In the above example, the `range:(1,+inf]` in the `IndexRangeScan_13` operator indicates that the operator scans the data from 1 to positive infinity.
 
 > **Note:**
 >
