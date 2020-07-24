@@ -141,7 +141,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8040
 
-    Unsupported operations are performed. For example, operating lock table on View and Sequence.
+    Unsupported operations are performed. For example, you perform a table locking operation on a view or a sequence.
 
 * Error Number: 8047
 
