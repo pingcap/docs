@@ -155,5 +155,5 @@ Currently, the limitation of TiDB cannot be bypassed. You can only ignore this t
 
 **Solutions**:
 
--If there are TiFlash nodes in the cluster, you can update the cluster to `v4.0.0-rc.2` or higher versions.
--Temporarily disable TiFlash.
+- If there are TiFlash nodes in the cluster, you can update the cluster to `v4.0.0-rc.2` or higher versions.
+- Temporarily disable TiFlash.
