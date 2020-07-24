@@ -37,7 +37,7 @@ SHOW CHARACTER SET;
 5 rows in set (0.00 sec)
 ```
 
-TiDB supports the following collation:
+TiDB supports the following collations:
 
 ```sql
 mysql> show collation;
