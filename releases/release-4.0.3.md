@@ -49,9 +49,15 @@ TiDB version: 4.0.3
     - Speed up canceling a query [#18505](https://github.com/pingcap/tidb/pull/18505)
     - Add a header for the `tidb_decode_plan` result [#18501](https://github.com/pingcap/tidb/pull/18501)
     - Make the configuration checker compatible with earlier versions of the configuration file [#18046](https://github.com/pingcap/tidb/pull/18046)
-    - Do not trigger rebase when inserting negative primary key into the `auto_random` table [#17987](https://github.com/pingcap/tidb/pull/17987)
     - Enable collecting the execution information by default [#18518](https://github.com/pingcap/tidb/pull/18518)
     - Add the `tiflash_tables` and `tiflash_segments` system tables [#18536](https://github.com/pingcap/tidb/pull/18536)
+    - Move `AUTO RANDOM` out of experimental features and announce its general availability. The improvements and compatibility changes are as follows:
+        - Deprecate `experimental.allow-auto-random` in the configuration file. No matter how this item is configured, you can always define the `AUTO RANDOM` feature on columns. [#18613](https://github.com/pingcap/tidb/pull/18613) [#18623](https://github.com/pingcap/tidb/pull/18623)
+        - Add the `tidb_allow_auto_random_explicit_insert` session variable to control the explicit writes on `AUTO RANDOM` columns. The default value is `false`. This is to avoid the unexpected `AUTO_RANDOM_BASE` update caused by explicit writes on columns. [#18508](https://github.com/pingcap/tidb/pull/18508)
+        - Allow defining `AUTO_RANDOM` only on `BIGINT` and `UNSIGNED BIGINT` columns and restrict the maximum number of shard bits to `15`, which avoids the allocatable space being consumed too quickly [#18538](https://github.com/pingcap/tidb/pull/18538)
+        - Do not trigger the `AUTO_RANDOM_BASE` update when defining the `AUTO_RANDOM` attribute on the `BIGINT` column and inserting the negative value into the primary key [#17987](https://github.com/pingcap/tidb/pull/17987)
+        - Use the highest bit of an integer for ID allocation when defining the `AUTO_RANDOM` attribute on `UNSIGNED BIGINT` columns, which gets more allocable space [#18404](https://github.com/pingcap/tidb/pull/18404)
+        - Support updating the `AUTO_RANDOM` attribute in the result of `SHOW CREATE TABLE` [#18316](https://github.com/pingcap/tidb/pull/18316)
 
 + TiKV
 
