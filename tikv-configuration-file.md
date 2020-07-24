@@ -1,8 +1,7 @@
 ﻿---
 title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
-category: reference
-aliases: ['/docs/dev/reference/configuration/tikv-server/configuration-file/']
+aliases: ['/docs/dev/tikv-configuration-file/','/docs/dev/reference/configuration/tikv-server/configuration-file/']
 ---
 
 # TiKV Configuration File
@@ -94,6 +93,10 @@ This document only describes the parameters that are not included in command-lin
 + Minimum value: `1KB`
 
 ## readpool.unified
+
+> **Warning:**
+>
+> Unified read pool is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
 
@@ -1058,12 +1061,12 @@ Configuration items related to `rocksdb.defaultcf.titan`
 ### `level-merge`
 
 + Determines whether to optimize the read performance. When `level-merge` is enabled, there is more write amplification.
-+ Default value: `true`
++ Default value: `false`
 
 ### `gc-merge-rewrite`
 
 + Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
-+ Default value: `true`
++ Default value: `false`
 
 ## rocksdb.writecf
 
@@ -1170,11 +1173,17 @@ Configuration items related to `import`
 
 ### `wait-for-lock-timeout`
 
-- The max time that a pessimistic transaction in TiKV waits for other transactions to release the lock, in milliseconds. If timed out, an error is returned to TiDB, and TiDB retries to add a lock. The lock wait timeout is set by `innodb_lock_wait_timeout`.
-- Default value: 1000
-- Minimum value: 1
+- The longest time that a pessimistic transaction in TiKV waits for other transactions to release the lock. If the time is out, an error is returned to TiDB, and TiDB retries to add a lock. The lock wait timeout is set by `innodb_lock_wait_timeout`.
+- Default value: 1 s
+- Minimum value: 1 ms
 
 ### `wait-up-delay-duration`
 
-- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration` milliseconds.
-- Default value: 20
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration`.
+- Default value: 20 ms
+
+### `pipelined`
+
+This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
+
+The default value of `pipelined` is `false`.

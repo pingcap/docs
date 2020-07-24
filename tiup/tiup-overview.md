@@ -1,17 +1,12 @@
 ---
 title: TiUP Overview
 summary: Introduce the TiUP tool and its ecosystem.
-category: tools
-aliases: ['/docs/dev/reference/tools/tiup/overview/']
+aliases: ['/docs/dev/tiup/tiup-overview/','/docs/dev/reference/tools/tiup/overview/']
 ---
 
 # TiUP Overview
 
-Package manager or package management system is widely used to automate the process of installing and managing system software and application software. Package management tools greatly simplify software's installation, upgrade, and maintenance processes. For example, almost all Linux operating systems that use RPM use Yum for package management, while Anaconda makes it very easy to manage the Python environment and related packages.
-
-In the past, there was no dedicated package management tool in the TiDB ecosystem. Users could only manually manage various packages through different configuration files and folders. Some third-party monitoring and reporting tools such as Prometheus even required additional special management, which made the operation and maintenance work much more difficult.
-
-Starting with TiDB 4.0, TiUP, as a new tool, assumes the role of a package manager and is responsible for managing components in the TiDB ecosystem, such as TiDB, PD, TiKV, and so on. When you want to run any component in the TiDB ecosystem, you just need to execute a single line of TiUP commands, which is far easier to manage.
+Starting with TiDB 4.0, TiUP, as the package manager, makes it far easier to manage different cluster components in the TiDB ecosystem. Now you can run any component with only a single line of TiUP commands.
 
 ## Install TiUP
 
@@ -32,6 +27,10 @@ After installation, you can check the version of TiUP:
 ```bash
 tiup --version
 ```
+
+> **Note:**
+>
+> By default, TiUP shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
 
 ## TiUP ecosystem introduction
 
@@ -65,16 +64,11 @@ Available Commands:
   update      Update tiup components to the latest version
   status      List the status of instantiated components
   clean       Clean the data of instantiated components
+  mirror      Manage a repository mirror for TiUP components
   help        Help about any command or component
 
-Available Components:
-  playground          Bootstrap a local TiDB cluster
-  client              A simple mysql client to connect TiDB
-  package             A toolbox to package tiup component
-  cluster             Deploy a TiDB cluster for production
-  mirrors             Build a local mirrors and download all selected components
-  bench               Benchmark database with different workloads
-  doc                 Online document for TiDB
+Components Manifest:
+  use "tiup list" to fetch the latest components manifest
 
 Flags:
   -B, --binary <component>[:version]   Print binary path of a specific version of a component <component>[:version]
@@ -83,7 +77,7 @@ Flags:
   -h, --help                           help for tiup
       --skip-version-check             Skip the strict version check, by default a version must be a valid SemVer string
   -T, --tag string                     Specify a tag for component instance
-      --version                        version for tiup
+  -v, --version                        version for tiup
 
 Component instances with the same "tag" will share a data directory ($TIUP_HOME/data/$tag):
   $ tiup --tag mycluster playground
@@ -95,7 +89,7 @@ Examples:
   $ tiup update --all                  # Update all installed components to the latest version
   $ tiup update --nightly              # Update all installed components to the nightly version
   $ tiup update --self                 # Update the "tiup" to the latest version
-  $ tiup list --refresh                # Fetch the latest supported components list
+  $ tiup list                          # Fetch the latest supported components list
   $ tiup status                        # Display all running/terminated instances
   $ tiup clean <name>                  # Clean the data of running/terminated instance (Kill process if it's running)
   $ tiup clean --all                   # Clean the data of all running/terminated instances
@@ -109,32 +103,23 @@ The output is long but you can focus on only two parts:
     - install: used to install components
     - list: used to view the list of available components
     - uninstall: used to uninstall components
-    - update: used to update the component version 
+    - update: used to update the component version
     - status: used to view the running history of components
     - clean: used to clear the running log of components
+    - mirror: used to clone a private mirror from the official mirror
     - help: used to print out help information
 - Available components
     - playground: used to start a TiDB cluster locally
     - client: used to connect to a TiDB cluster in a local machine
-    - mirrors: used to clone a private mirror from an official mirror
     - cluster: used to deploy a TiDB cluster for production environments
-    - package: used to package a new TiUP component
     - bench: used to stress test the database
     - doc: used to open online document
 
 > **Note:**
 >
-> - The number of available components will continue to grow. To check the latest supported components, execute the `tiup list --refresh` command.
-> - The list of available versions of components will also continue to grow. To check the latest supported component versions, execute the `tiup list <component> --refresh` command.
+> - The number of available components will continue to grow. To check the latest supported components, execute the `tiup list` command.
+> - The list of available versions of components will also continue to grow. To check the latest supported component versions, execute the `tiup list <component>` command.
 
 TiUP commands are implemented in TiUP's internal code and used for package management operations, while TiUP components are independent component packages installed by TiUP commands.
 
 For example, if you run the `tiup list` command, TiUP directly runs its own internal code; if you run the `tiup playground` command, TiUP first checks whether there is a local package named "playground", and if not, TiUP downloads the package from the mirror, and then run it.
-
-All TiUP commands are described in [Manage TiUP Components with TiUP Commands](/tiup/manage-tiup-component.md). All TiUP components are divided into the following topics by component:
-
-- [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md): introduce the playground component
-- [Deploy and Maintain an Online TiDB Cluster](/tiup/tiup-cluster.md): introduce the cluster component
-- [Create a Private Mirror](/tiup/tiup-mirrors.md): introduce the mirrors component
-- [Package a Component](/tiup/package-tiup-component.md): introduce the package component
-- [Stress Test TiDB Using TiUP](/tiup/tiup-bench.md): introduce the bench component

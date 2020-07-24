@@ -1,8 +1,7 @@
 ---
 title: SHOW CREATE SEQUENCE
 summary: An overview of the usage of SHOW CREATE SEQUENCE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-create-sequence/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-create-sequence/','/docs/dev/reference/sql/statements/show-create-sequence/']
 ---
 
 # SHOW CREATE SEQUENCE
@@ -11,9 +10,9 @@ The `SHOW CREATE SEQUENCE` shows the detailed information of a sequence, which i
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowCreateSequenceStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowCreateSequenceStmt](/media/sqlgram/ShowCreateSequenceStmt.png)
 
 **TableName:**
 

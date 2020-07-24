@@ -1,8 +1,7 @@
 ---
 title: SHOW WARNINGS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-warnings/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-warnings/','/docs/dev/reference/sql/statements/show-warnings/']
 ---
 
 # SHOW WARNINGS
@@ -11,13 +10,9 @@ This statement shows a list of warnings that occurred for previously executed st
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowWarningsStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowWarningsStmt](/media/sqlgram/ShowWarningsStmt.png)
 
 ## Examples
 

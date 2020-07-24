@@ -1,8 +1,7 @@
 ---
 title: CREATE INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE INDEX for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/create-index/']
+aliases: ['/docs/dev/sql-statements/sql-statement-create-index/','/docs/dev/reference/sql/statements/create-index/']
 ---
 
 # CREATE INDEX
@@ -15,33 +14,61 @@ This statement adds a new index to an existing table. It is an alternative synta
 
 ![CreateIndexStmt](/media/sqlgram/CreateIndexStmt.png)
 
-**CreateIndexStmtUnique:**
+**IndexKeyTypeOpt:**
 
-![CreateIndexStmtUnique](/media/sqlgram/CreateIndexStmtUnique.png)
+![IndexKeyTypeOpt](/media/sqlgram/IndexKeyTypeOpt.png)
 
-**Identifier:**
+**IfNotExists:**
 
-![Identifier](/media/sqlgram/Identifier.png)
+![IfNotExists](/media/sqlgram/IfNotExists.png)
 
 **IndexTypeOpt:**
 
 ![IndexTypeOpt](/media/sqlgram/IndexTypeOpt.png)
 
-**TableName:**
+**IndexPartSpecificationList:**
 
-![TableName](/media/sqlgram/TableName.png)
-
-**IndexColNameList:**
-
-![IndexColNameList](/media/sqlgram/IndexColNameList.png)
+![IndexPartSpecificationList](/media/sqlgram/IndexPartSpecificationList.png)
 
 **IndexOptionList:**
 
 ![IndexOptionList](/media/sqlgram/IndexOptionList.png)
 
+**IndexLockAndAlgorithmOpt:**
+
+![IndexLockAndAlgorithmOpt](/media/sqlgram/IndexLockAndAlgorithmOpt.png)
+
+**IndexType:**
+
+![IndexType](/media/sqlgram/IndexType.png)
+
+**IndexPartSpecification:**
+
+![IndexPartSpecification](/media/sqlgram/IndexPartSpecification.png)
+
 **IndexOption:**
 
 ![IndexOption](/media/sqlgram/IndexOption.png)
+
+**IndexTypeName:**
+
+![IndexTypeName](/media/sqlgram/IndexTypeName.png)
+
+**ColumnName:**
+
+![ColumnName](/media/sqlgram/ColumnName.png)
+
+**OptFieldLen:**
+
+![OptFieldLen](/media/sqlgram/OptFieldLen.png)
+
+**IndexNameList:**
+
+![IndexNameList](/media/sqlgram/IndexNameList.png)
+
+**KeyOrIndex:**
+
+![KeyOrIndex](/media/sqlgram/KeyOrIndex.png)
 
 ## Examples
 
@@ -54,25 +81,25 @@ Query OK, 5 rows affected (0.02 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
-+---------------------+----------+------+-------------------------------------------------------------+
-| id                  | count    | task | operator info                                               |
-+---------------------+----------+------+-------------------------------------------------------------+
-| TableReader_7       | 10.00    | root | data:Selection_6                                            |
-| └─Selection_6       | 10.00    | cop  | eq(test.t1.c1, 3)                                           |
-|   └─TableScan_5     | 10000.00 | cop  | table:t1, range:[-inf,+inf], keep order:false, stats:pseudo |
-+---------------------+----------+------+-------------------------------------------------------------+
++-------------------------+----------+-----------+---------------+--------------------------------+
+| id                      | estRows  | task      | access object | operator info                  |
++-------------------------+----------+-----------+---------------+--------------------------------+
+| TableReader_7           | 10.00    | root      |               | data:Selection_6               |
+| └─Selection_6           | 10.00    | cop[tikv] |               | eq(test.t1.c1, 3)              |
+|   └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t1      | keep order:false, stats:pseudo |
++-------------------------+----------+-----------+---------------+--------------------------------+
 3 rows in set (0.00 sec)
 
 mysql> CREATE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.30 sec)
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
-+-------------------+-------+------+-----------------------------------------------------------------+
-| id                | count | task | operator info                                                   |
-+-------------------+-------+------+-----------------------------------------------------------------+
-| IndexReader_6     | 10.00 | root | index:IndexScan_5                                               |
-| └─IndexScan_5     | 10.00 | cop  | table:t1, index:c1, range:[3,3], keep order:false, stats:pseudo |
-+-------------------+-------+------+-----------------------------------------------------------------+
++------------------------+---------+-----------+------------------------+---------------------------------------------+
+| id                     | estRows | task      | access object          | operator info                               |
++------------------------+---------+-----------+------------------------+---------------------------------------------+
+| IndexReader_6          | 10.00   | root      |                        | index:IndexRangeScan_5                      |
+| └─IndexRangeScan_5     | 10.00   | cop[tikv] | table:t1, index:c1(c1) | range:[3,3], keep order:false, stats:pseudo |
++------------------------+---------+-----------+------------------------+---------------------------------------------+
 2 rows in set (0.00 sec)
 
 mysql> ALTER TABLE t1 DROP INDEX c1;
@@ -83,6 +110,10 @@ Query OK, 0 rows affected (0.31 sec)
 ```
 
 ## Expression index
+
+> **Warning:**
+>
+> Expression index is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 TiDB can build indexes not only on one or more columns in a table, but also on an expression. When queries involve expressions, expression indexes can speed up those queries.
 
@@ -110,9 +141,20 @@ Expression indexes have the same syntax and limitations as in MySQL. They are im
 
 Currently, the optimizer can use the indexed expressions when the expressions are only in the `FIELD` clause, `WHERE` clause, and `ORDER BY` clause. The `GROUP BY` clause will be supported in future updates.
 
+## Invisible index
+
+Invisible indexes are a new feature introduced in MySQL 8.0 that sets an index to invisible so that the optimizer no longer uses this index.
+
+```sql
+CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
+CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
+```
+
+For details, see [Invisible index](/sql-statements/sql-statement-alter-index.md#invisible-index)
+
 ## Associated session variables
 
-The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size` and `tidb_ddl_reorg_priority`. Refer to [TiDB-specific system variables](/tidb-specific-system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
+The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size` and `tidb_ddl_reorg_priority`. Refer to [system variables](/system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
 
 ## MySQL compatibility
 
@@ -125,6 +167,7 @@ The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 * [ADD INDEX](/sql-statements/sql-statement-add-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
 * [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
 * [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [EXPLAIN](/sql-statements/sql-statement-explain.md)

@@ -1,8 +1,7 @@
 ---
 title: TiDB Configuration File
 summary: Learn the TiDB configuration file options that are not involved in command line options.
-category: deployment
-aliases: ['/docs/dev/reference/configuration/tidb-server/configuration-file/']
+aliases: ['/docs/dev/tidb-configuration-file/','/docs/dev/reference/configuration/tidb-server/configuration-file/']
 ---
 
 <!-- markdownlint-disable MD001 -->
@@ -18,12 +17,17 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables.
 
+### `token-limit`
+
++ The number of sessions that can execute requests concurrently.
++ Default value: `1000`
+
 ### `mem-quota-query`
 
 - The maximum memory available for a single SQL statement.
-- Default value: `1073741824`
+- Default value: `1073741824` (in bytes)
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
-- This value is the initial value of the system variable [`tidb_mem_quota_query`](/tidb-specific-system-variables.md#tidb_mem_quota_query).
+- This value is the initial value of the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
 
 ### `oom-use-tmp-storage`
 
@@ -33,8 +37,8 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `tmp-storage-path`
 
 + Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
-+ Default value: `<TMPDIR>/tidb/tmp-storage`
-+ It only takes effect when `oom-use-tmp-storage` is `true`.
++ Default value: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage`. `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=` is the `Base64` encoding result of `<host>:<port>/<statusHost>:<statusPort>`.
++ This configuration takes effect only when `oom-use-tmp-storage` is `true`.
 
 ### `tmp-storage-quota`
 
@@ -46,8 +50,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `oom-action`
 
+> **Warning:**
+>
+> This feature is still an experimental feature, which counts the memory during the writing process. For users who want to use this feature to cancel the write operation, it is not recommended to configure it as `cancel` in the production environment.
+
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
-- Default value: `"cancel"`
+- Default value: `"log"`
 - The valid options are `"log"` and `"cancel"`. When `oom-action="log"`, it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
 
 ### `enable-streaming`
@@ -57,7 +65,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `lower-case-table-names`
 
-- Configures the value of the `lower_case_table_names` system variable.
+- Configures the value of the `lower-case-table-names` system variable.
 - Default value: `2`
 - For details, see the [MySQL description](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names) of this variable.
 
@@ -133,6 +141,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Unit: byte
 - Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
 
+### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
+
+- Enables or disables the telemetry collection in TiDB.
+- Default value: `true`
+- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
+
 ## Log
 
 Configuration items related to log.
@@ -174,6 +188,12 @@ Configuration items related to log.
 - Default value: `300ms`
 - If the value in a query is larger than the default value, it is a slow query and is output to the slow log.
 
+### `record-plan-in-slow-log`
+
++ Determines whether to record execution plans in the slow log.
++ Default value: `1`
++ `0` means to disable, and `1` (by default) means to enable. The value of this parameter is the initial value of the [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log) system variable.
+
 ### `expensive-threshold`
 
 - Outputs the threshold value of the number of rows for the `expensive` operation.
@@ -214,12 +234,6 @@ Configuration items related to log files.
 - Default value: `0`
 - All the log files are retained by default. If you set it to `7`, seven log files are retained at maximum.
 
-#### `log-rotate`
-
-- Determines whether to create a new log file every day.
-- Default value: `true`
-- If you set the parameter to `true`, a new log file is created every day. If you set it to `false`, the log is output to a single log file.
-
 ## Security
 
 Configuration items related to security.
@@ -259,11 +273,6 @@ Configuration items related to security.
 - The path of the SSL private key file used to connect TiKV or PD with TLS.
 - Default value: ""
 
-### `skip-grant-table`
-
-- Determines whether to skip permission check.
-- Default value: `false`
-
 ## Performance
 
 Configuration items related to performance.
@@ -288,9 +297,9 @@ Configuration items related to performance.
 
 ### `txn-total-size-limit`
 
-- The size limit of a transaction.
-- Default value: `104857600`
-- The total size of all key-value entries in bytes should be less than this value. Note that if the `binlog` is enabled, this value should be less than `104857600` (which means 100MB), because of the limitation of the binlog component. If `binlog` is not enabled, the maximum value of this configuration is `10737418240` (which means 10GB).
+- The size limit of a single transaction in TiDB.
+- Default value: `104857600` (in bytes)
+- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `10737418240` (10 GB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
 
 ### `tcp-keep-alive`
 
@@ -345,9 +354,25 @@ Configuration items related to performance.
 - Default: `NO_PRIORITY`
 - Optional values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY` and `DELAYED`.
 
+### `distinct-agg-push-down`
+
+- Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
+- Default: `false`
+- This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down).
+
+### `nested-loop-join-cache-capacity`
+
++ The maximum memory usage for the Least Recently Used (LRU) algorithm of the nested loop join cache (in bytes).
++ Default value: `20971520`
++ When `nested-loop-join-cache-capacity` is set to `0`, nested loop join cache is disabled by default. When the LRU size is larger than the value of `nested-loop-join-cache-capacity`, the elements in the LRU are removed.
+
 ## prepared-plan-cache
 
 The Plan Cache configuration of the `PREPARE` statement.
+
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 ### `enabled`
 
@@ -358,10 +383,11 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - The number of cached statements.
 - Default value: `100`
+- The type is `uint`. Values less than `0` are converted to large integers.
 
 ### `memory-guard-ratio`
 
-- It is used to prevent `performance.max-memory` from being exceeded. When `max-proc * (1 - prepared-plan-cache.memory-guard-ratio)` is exceeded, the elements in the LRU are removed.
+- It is used to prevent `performance.max-memory` from being exceeded. When `max-memory * (1 - prepared-plan-cache.memory-guard-ratio)` is exceeded, the elements in the LRU are removed.
 - Default value: `0.1`
 - The minimum value is `0`; the maximum value is `1`.
 
@@ -390,11 +416,12 @@ The Plan Cache configuration of the `PREPARE` statement.
 - Default value: `41s`
 - It is required to set this value larger than twice of the Raft election timeout.
 
-### `max-txn-time-use`
+### `max-txn-ttl`
 
-- The maximum execution time allowed for a single transaction.
-- Default value: `590`
-- unit: second
+- The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
+- Default value: `600000`
+- Unit: Millisecond
+- The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
 
 ### `max-batch-size`
 
@@ -527,7 +554,7 @@ Configurations related to the `events_statement_summary_by_digest` table.
 
 ### max-retry-count
 
-- The max number of retries of each statement in pessimistic transactions. Exceeding this limit results in error.
+- The maximum number of retries of each statement in pessimistic transactions. If the number of retries exceeds this limit, an error occurs.
 - Default value: `256`
 
 ## experimental

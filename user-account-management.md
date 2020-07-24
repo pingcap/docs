@@ -1,8 +1,7 @@
 ---
 title: TiDB User Account Management
 summary: Learn how to manage a TiDB user account.
-category: reference
-aliases: ['/docs/dev/reference/security/user-account-management/']
+aliases: ['/docs/dev/user-account-management/','/docs/dev/reference/security/user-account-management/']
 ---
 
 # TiDB User Account Management
@@ -24,6 +23,10 @@ Or use the abbreviation of command line parameters:
 ```sql
 shell> mysql -P 4000 -u xxx -p
 ```
+
+> **Note:**
+>
+> + To connect to TiDB using a MySQL client from MySQL 8.0, you must explicitly specify `--default-auth=mysql_native_password`, because `mysql_native_password` is [no longer the default plugin](https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password).
 
 ## Add user accounts
 

@@ -1,15 +1,14 @@
 ---
 title: TiDB Lightning Deployment
 summary: Deploy TiDB Lightning to quickly import large amounts of new data.
-category: reference
-aliases: ['/docs/dev/reference/tools/tidb-lightning/deployment/']
+aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/deployment/']
 ---
 
 # TiDB Lightning Deployment
 
 This document describes the hardware requirements of TiDB Lightning using the default Importer-backend, and how to deploy it using TiDB Ansible or manually.
 
-If you wish to use the TiDB-backend, also read [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for the changes to the deployment steps.
+If you do not want the TiDB services to be impacted, read [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for the changes to the deployment steps.
 
 ## Notes
 
@@ -19,7 +18,7 @@ Before starting TiDB Lightning, note that:
 - If `tidb-lightning` crashes, the cluster is left in "import mode". Forgetting to switch back to "normal mode" can lead to a high amount of uncompacted data on the TiKV cluster, and cause abnormally high CPU usage and stall. You can manually switch the cluster back to "normal mode" via the `tidb-lightning-ctl` tool:
 
     ```sh
-    bin/tidb-lightning-ctl -switch-mode=normal
+    bin/tidb-lightning-ctl --switch-mode=normal
     ```
 
 - TiDB Lightning is required to have the following privileges in the downstream TiDB:
@@ -71,7 +70,7 @@ If you have sufficient machines, you can deploy multiple Lightning/Importer serv
 > - `tikv-importer` stores intermediate data on the RAM to speed up the import process. The typical memory usage can be calculated by using **(`max-open-engines` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
 
 Additionally, the target TiKV cluster should have enough space to absorb the new data.
-Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/tidb-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
@@ -97,7 +96,7 @@ If the data source consists of CSV files, see [CSV support](/tidb-lightning/migr
 
 This section describes two deployment methods of TiDB Lightning:
 
-- [Deploy TiDB Lightning using TiDB Ansible](#deploy-tidb-lightning-using-ansible)
+- [Deploy TiDB Lightning using TiDB Ansible](#deploy-tidb-lightning-using-tidb-ansible)
 - [Deploy TiDB Lightning manually](#deploy-tidb-lightning-manually)
 
 ### Deploy TiDB Lightning using TiDB Ansible
@@ -181,7 +180,7 @@ You can deploy TiDB Lightning using TiDB Ansible together with the [deployment o
 
 Before importing data, you need to have a deployed TiDB cluster, with the cluster version 2.0.9 or above. It is highly recommended to use the latest version.
 
-You can find deployment instructions in [TiDB Quick Start Guide](https://pingcap.com/docs/QUICKSTART/).
+You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-with-tidb.md).
 
 #### Step 2: Download the TiDB Lightning installation package
 
@@ -201,18 +200,13 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     # Log level: trace, debug, info, warn, error, off.
     log-level = "info"
 
+    # Listening address of the status server.
+    status-server-address = "0.0.0.0:8286"
+
     [server]
     # The listening address of tikv-importer. tidb-lightning needs to connect to
     # this address to write data.
-    addr = "192.168.20.10:8287"
-
-    [metric]
-    # The Prometheus client push job name.
-    job = "tikv-importer"
-    # The Prometheus client push interval.
-    interval = "15s"
-    # The Prometheus Pushgateway address.
-    address = ""
+    addr = "0.0.0.0:8287"
 
     [import]
     # The directory to store engine files.

@@ -1,8 +1,7 @@
 ﻿---
 title: SQL Mode
 summary: Learn SQL mode.
-category: reference
-aliases: ['/docs/dev/reference/sql/sql-mode/']
+aliases: ['/docs/dev/sql-mode/','/docs/dev/reference/sql/sql-mode/']
 ---
 
 # SQL Mode
@@ -43,18 +42,18 @@ Ensure that you have `SUPER` privilege when setting SQL mode at `GLOBAL` level, 
 | `NO_ZERO_IN_DATE` | Strict mode, where dates with a month or day part of `0` are not accepted. If you use the `IGNORE` option, TiDB inserts '0000-00-00' for a similar date. In non-strict mode, this date is accepted but a warning is returned. (full support)
 | `NO_ZERO_DATE` | Does not use '0000-00-00' as a legal date in strict mode. You can still insert a zero date with the `IGNORE` option. In non-strict mode, this date is accepted but a warning is returned. (full support)|
 | `ALLOW_INVALID_DATES` | In this mode, the system does not check the validity of all dates. It only checks the month value ranging from `1` to `12` and the date value ranging from `1` to `31`. The mode only applies to `DATE` and `DATATIME` columns. All `TIMESTAMP` columns need a full validity check. (full support) |
-| `ERROR_FOR_DIVISION_BY_ZERO` | If this mode is enabled, the system returns an error when handling division by `0` in data-change operations (`INSERT` or `UPDATE`). <br> If this mode is not enabled, the system returns a warning and `NULL` is used instead. (full support) |
+| `ERROR_FOR_DIVISION_BY_ZERO` | If this mode is enabled, the system returns an error when handling division by `0` in data-change operations (`INSERT` or `UPDATE`). <br/> If this mode is not enabled, the system returns a warning and `NULL` is used instead. (full support) |
 | `NO_AUTO_CREATE_USER` | Prevents `GRANT` from automatically creating new users, except for the specified password (full support)|
 | `HIGH_NOT_PRECEDENCE` | The precedence of the NOT operator is such that expressions such as `NOT a BETWEEN b AND c` are parsed as `NOT (a BETWEEN b AND c)`. In some older versions of MySQL, this expression is parsed as `(NOT a) BETWEEN b AND c`. (full support) |
 | `NO_ENGINE_SUBSTITUTION` | Prevents the automatic replacement of storage engines if the required storage engine is disabled or not compiled. (syntax support only)|
 | `PAD_CHAR_TO_FULL_LENGTH` | If this mode is enabled, the system does not trim the trailing spaces for `CHAR` types. (full support) |
 | `REAL_AS_FLOAT` | Treats `REAL` as the synonym of `FLOAT`, not the synonym of `DOUBLE` (full support)|
-| `POSTGRESQL` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (full support)|
-| `MSSQL` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (full support)|
-| `DB2` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (full support)|
+| `POSTGRESQL` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (syntax support only)|
+| `MSSQL` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (syntax support only)|
+| `DB2` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (syntax support only)|
 | `MAXDB` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS`, `NO_AUTO_CREATE_USER` (full support)|
-| `MySQL323` | Equivalent to `NO_FIELD_OPTIONS`, `HIGH_NOT_PRECEDENCE` (full support)|
-| `MYSQL40` | Equivalent to `NO_FIELD_OPTIONS`, `HIGH_NOT_PRECEDENCE` (full support)|
-| `ANSI` | Equivalent to `REAL_AS_FLOAT`, `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE` (full support)|
-| `TRADITIONAL` | Equivalent to `STRICT_TRANS_TABLES`, `STRICT_ALL_TABLES`, `NO_ZERO_IN_DATE`, `NO_ZERO_DATE`, `ERROR_FOR_DIVISION_BY_ZERO`, `NO_AUTO_CREATE_USER` (full support) |
-| `ORACLE` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS`, `NO_AUTO_CREATE_USER` (full support)|
+| `MySQL323` | Equivalent to `NO_FIELD_OPTIONS`, `HIGH_NOT_PRECEDENCE` (syntax support only)|
+| `MYSQL40` | Equivalent to `NO_FIELD_OPTIONS`, `HIGH_NOT_PRECEDENCE` (syntax support only)|
+| `ANSI` | Equivalent to `REAL_AS_FLOAT`, `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE` (syntax support only)|
+| `TRADITIONAL` | Equivalent to `STRICT_TRANS_TABLES`, `STRICT_ALL_TABLES`, `NO_ZERO_IN_DATE`, `NO_ZERO_DATE`, `ERROR_FOR_DIVISION_BY_ZERO`, `NO_AUTO_CREATE_USER` (syntax support only) |
+| `ORACLE` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS`, `NO_AUTO_CREATE_USER` (syntax support only)|

@@ -1,8 +1,7 @@
 ---
 title: TiDB Lightning Glossary
 summary: List of special terms used in TiDB Lightning.
-category: glossary
-aliases: ['/docs/dev/reference/tools/tidb-lightning/glossary/']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-glossary/','/docs/dev/reference/tools/tidb-lightning/glossary/']
 ---
 
 # TiDB Lightning Glossary
@@ -35,12 +34,6 @@ Back end is the destination where TiDB Lightning sends the parsed result. Also s
 
 See [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for details.
 
-### Black-white list
-
-A configuration list that specifies which tables to be imported and which should be excluded.
-
-See [TiDB Lightning Table Filter](/tidb-lightning/tidb-lightning-table-filter.md) for details.
-
 <!-- C -->
 
 ## C
@@ -63,7 +56,9 @@ See also the [Troubleshooting guide](/troubleshoot-tidb-lightning.md#checksum-fa
 
 ### Chunk
 
-Equivalent to a single file in the data source.
+A continuous range of source data, normally equivalent to a single file in the data source.
+
+When a file is too large, Lightning may split a file into multiple chunks.
 
 ### Compaction
 
@@ -100,6 +95,16 @@ TiDB Lightning transfers data to TiKV Importer through engines. It first opens a
 Engines use TiKV Importer's `import-dir` as temporary storage, which are sometimes referred to as "engine files".
 
 See also [data engine](/tidb-lightning/tidb-lightning-glossary.md#data-engine) and [index engine](/tidb-lightning/tidb-lightning-glossary.md#index-engine).
+
+<!-- F -->
+
+## F
+
+### Filter
+
+A configuration list that specifies which tables to be imported or excluded.
+
+See [Table Filter](/table-filter.md) for details.
 
 <!-- I -->
 

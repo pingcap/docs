@@ -1,8 +1,7 @@
 ---
 title: Best Practices for Monitoring TiDB Using Grafana
 summary: Learn seven tips for efficiently using Grafana to monitor TiDB.
-category: reference
-aliases: ['/docs/dev/reference/best-practices/grafana-monitor/']
+aliases: ['/docs/dev/best-practices/grafana-monitor-best-practices/','/docs/dev/reference/best-practices/grafana-monitor/']
 ---
 
 # Best Practices for Monitoring TiDB Using Grafana
@@ -15,7 +14,7 @@ When you [deploy a TiDB cluster using TiDB Ansible](/online-deployment-using-ans
 
 ![The monitoring architecture in the TiDB cluster](/media/prometheus-in-tidb.png)
 
-For TiDB 2.1.3 or later versions, TiDB monitoring uses the pull method instead of the push method which is used in previous versions. It is a good adjustment with the following benefits:
+For TiDB 2.1.3 or later versions, TiDB monitoring supports the pull method. It is a good adjustment with the following benefits:
 
 - There is no need to restart the entire TiDB cluster if you need to migrate Prometheus. Before adjustment, migrating Prometheus requires restarting the entire cluster because the target address needs to be updated.
 - You can deploy 2 separate sets of Grafana + Prometheus monitoring platforms (not highly available) to prevent a single point of monitoring. To do this, execute the deployment command of TiDB ansible twice with different IP addresses.

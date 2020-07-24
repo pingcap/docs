@@ -1,11 +1,10 @@
 ---
-title: TiDB Lightning FAQ
+title: TiDB Lightning FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
-category: faq
-aliases: ['/docs/dev/faq/tidb-lightning/']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-faq/','/docs/dev/faq/tidb-lightning/']
 ---
 
-# TiDB Lightning FAQ
+# TiDB Lightning FAQs
 
 >**Note:**
 >
@@ -61,7 +60,7 @@ If `tikv-importer` needs to be restarted:
 4. Start `tikv-importer`.
 5. Start `tidb-lightning` *and wait until the program fails with CHECKSUM error, if any*.
     * Restarting `tikv-importer` would destroy all engine files still being written, but `tidb-lightning` did not know about it. As of v3.0 the simplest way is to let `tidb-lightning` go on and retry.
-6. [Destroy the failed tables and checkpoints](/troubleshoot-tidb-lightning.md#checkpoint-for-has-invalid-status)
+6. [Destroy the failed tables and checkpoints](/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code)
 7. Start `tidb-lightning` again.
 
 ## How to ensure the integrity of the imported data?
@@ -135,7 +134,15 @@ It is not recommended to directly use `nohup` in the command line to start `tidb
 
 ## Why my TiDB cluster is using lots of CPU resources and running very slowly after using TiDB Lightning?
 
-If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. You can force the cluster back to "normal mode" using the following command:
+If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. The current mode can be retrieved using the following command:
+
+{{< copyable "shell-regular" >}}
+
+```sh
+tidb-lightning-ctl --fetch-mode
+```
+
+You can force the cluster back to "normal mode" using the following command:
 
 {{< copyable "shell-regular" >}}
 

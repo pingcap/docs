@@ -1,8 +1,7 @@
 ---
 title: Error Codes and Troubleshooting
 summary: Learn about the error codes and solutions in TiDB.
-category: reference
-aliases: ['/docs/dev/reference/error-codes/']
+aliases: ['/docs/dev/error-codes/','/docs/dev/reference/error-codes/']
 ---
 
 # Error Codes and Troubleshooting
@@ -36,7 +35,7 @@ In addition, TiDB has the following unique error codes:
 
     A single transaction is too large.
 
-    See [the error message `transaction too large`](/faq/tidb-faq.md#the-error-message-transaction-too-large-is-displayed) for the cause and solution.
+    See [the error message `transaction too large`](/faq/migration-tidb-faq.md#the-error-message-transaction-too-large-is-displayed) for the cause and solution.
 
 * Error Number: 8005
 
@@ -456,7 +455,7 @@ In addition, TiDB has the following unique error codes:
 
     A single transaction is too large.
 
-    See [the error message `transaction too large`](/faq/tidb-faq.md#the-error-message-transaction-too-large-is-displayed) for the solution.
+    See [the error message `transaction too large`](/faq/migration-tidb-faq.md#the-error-message-transaction-too-large-is-displayed) for the solution.
 
 * Error Number: 9007
 

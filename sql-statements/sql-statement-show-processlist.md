@@ -1,8 +1,7 @@
 ---
 title: SHOW [FULL] PROCESSLIST | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] PROCESSLIST for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-processlist/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-processlist/','/docs/dev/reference/sql/statements/show-processlist/']
 ---
 
 # SHOW [FULL] PROCESSLIST
@@ -11,9 +10,9 @@ This statement lists the current sessions connected to the same TiDB server. The
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowProcesslistStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowProcesslistStmt](/media/sqlgram/ShowProcesslistStmt.png)
 
 **OptFull:**
 

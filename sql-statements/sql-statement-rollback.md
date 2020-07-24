@@ -1,8 +1,7 @@
 ---
 title: ROLLBACK | TiDB SQL Statement Reference
 summary: An overview of the usage of ROLLBACK for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/rollback/']
+aliases: ['/docs/dev/sql-statements/sql-statement-rollback/','/docs/dev/reference/sql/statements/rollback/']
 ---
 
 # ROLLBACK
@@ -11,14 +10,14 @@ This statement reverts all changes in the current transaction inside of TIDB.  I
 
 ## Synopsis
 
-**Statement:**
+**RollbackStmt:**
 
-![Statement](/media/sqlgram/Statement.png)
+![RollbackStmt](/media/sqlgram/RollbackStmt.png)
 
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
+mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
 Query OK, 0 rows affected (0.12 sec)
 
 mysql> BEGIN;
@@ -36,7 +35,7 @@ Empty set (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is partly compatible with MySQL. TiDB only has syntactic support for `CompletionTypeWithinTransaction`. Closing the connection or continuing to open a new transaction after the transaction is rolled back is not supported. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
 
 ## See also
 

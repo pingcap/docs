@@ -1,13 +1,22 @@
 ---
 title: ALTER DATABASE | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER DATABASE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/alter-database/']
+aliases: ['/docs/dev/sql-statements/sql-statement-alter-database/','/docs/dev/reference/sql/statements/alter-database/']
 ---
 
 # ALTER DATABASE
 
 `ALTER DATABASE` is used to specify or modify the default character set and collation of the current database. `ALTER SCHEMA` has the same effect as `ALTER DATABASE`.
+
+## Synopsis
+
+**AlterDatabaseStmt:**
+
+![AlterDatabaseStmt](/media/sqlgram/AlterDatabaseStmt.png)
+
+**DatabaseOption:**
+
+![DatabaseOption](/media/sqlgram/DatabaseOption.png)
 
 ## Examples
 

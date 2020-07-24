@@ -1,15 +1,14 @@
 ---
 title: Mydumper Instructions
 summary: Use Mydumper to export data from TiDB.
-category: reference
-aliases: ['/docs/dev/reference/tools/mydumper/']
+aliases: ['/docs/dev/mydumper-overview/','/docs/dev/reference/tools/mydumper/']
 ---
 
 # Mydumper Instructions
 
 ## What is Mydumper?
 
-[Mydumper](https://github.com/pingcap/mydumper) is a fork project optimized for TiDB. It is recommended to use this tool for logical backups of TiDB.
+[Mydumper](https://github.com/pingcap/mydumper) is a fork project optimized for TiDB. You can use this tool for logical backups of **MySQL** or **TiDB**.
 
 It can be [downloaded](/download-ecosystem-tools.md) as part of the Enterprise Tools package.
 

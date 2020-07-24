@@ -1,8 +1,7 @@
 ---
 title: RENAME INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of RENAME INDEX for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/rename-index/']
+aliases: ['/docs/dev/sql-statements/sql-statement-rename-index/','/docs/dev/reference/sql/statements/rename-index/']
 ---
 
 # RENAME INDEX
@@ -61,3 +60,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
 * [SHOW INDEX](/sql-statements/sql-statement-show-index.md)
+* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)

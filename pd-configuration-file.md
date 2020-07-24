@@ -1,8 +1,7 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
-category: reference
-aliases: ['/docs/dev/reference/configuration/pd-server/configuration-file/']
+aliases: ['/docs/dev/pd-configuration-file/','/docs/dev/reference/configuration/pd-server/configuration-file/']
 ---
 
 # PD Configuration File
@@ -182,12 +181,12 @@ Configuration items related to scheduling
 ### `region-schedule-limit`
 
 + The number of Region scheduling tasks performed at the same time
-+ Default value: `4`
++ Default value: `2048`
 
 ### `replica-schedule-limit`
 
 + The number of Replica scheduling tasks performed at the same time
-+ Default value: `8`
++ Default value: `64`
 
 ### `merge-schedule-limit`
 
@@ -197,7 +196,7 @@ Configuration items related to scheduling
 ### `high-space-ratio`
 
 + The threshold ratio below which the capacity of the store is sufficient
-+ Default value: `0.6`
++ Default value: `0.7`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
 
@@ -211,7 +210,7 @@ Configuration items related to scheduling
 ### `tolerant-size-ratio`
 
 + Controls the `balance` buffer size
-+ Default value: `5`
++ Default value: `0` (automatically adjusts the buffer size)
 + Minimum value: `0`
 
 ### `disable-remove-down-replica`
@@ -257,6 +256,19 @@ Configuration items related to replicas
 
 + The topology information of a TiKV cluster
 + Default value: `[]`
++ [Cluster topology configuration](/location-awareness.md)
+
+### `strictly-match-label`
+
++ Enables the strict check for whether the TiKV label matches PD's `location-labels`.
++ Default value: `false`
+
+### `enable-placement-rules`
+
++ Enables `placement-rules`.
++ Default value: `false`
++ See [Placement Rules](/configure-placement-rules.md).
++ An experimental feature of TiDB 4.0.
 
 ## `label-property`
 
@@ -271,3 +283,19 @@ Configuration items related to labels
 
 + The label value for the store that rejected the Leader
 + Default value: `""`
+
+## `dashboard`
+
+Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built in PD.
+
+### `public-path-prefix`
+
++ When TiDB Dashboard is accessed behind a reverse proxy, this item sets the public URL path prefix for all web resources.
++ Default value: `/dashboard`
++ Do **not** modify this configuration item when TiDB Dashboard is accessed not behind a reverse proxy; otherwise, access issues might occur. See [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) for details.
+
+### `disable-telemetry`
+
++ Determines whether to disable the telemetry collection feature in TiDB Dashboard.
++ Default value: `false`
++ See [Telemetry](/telemetry.md) for details.

@@ -1,8 +1,7 @@
 ---
 title: UPDATE | TiDB SQL Statement Reference
 summary: An overview of the usage of UPDATE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/update/']
+aliases: ['/docs/dev/sql-statements/sql-statement-update/','/docs/dev/reference/sql/statements/update/']
 ---
 
 # UPDATE
@@ -14,6 +13,10 @@ The `UPDATE` statement is used to modify data in a specified table.
 **UpdateStmt:**
 
 ![UpdateStmt](/media/sqlgram/UpdateStmt.png)
+
+**PriorityOpt:**
+
+![PriorityOpt](/media/sqlgram/PriorityOpt.png)
 
 **TableRef:**
 

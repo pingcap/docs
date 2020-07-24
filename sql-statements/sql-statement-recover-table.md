@@ -1,8 +1,7 @@
 ---
 title: RECOVER TABLE
 summary: An overview of the usage of RECOVER TABLE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/recover-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-recover-table/','/docs/dev/reference/sql/statements/recover-table/']
 ---
 
 # RECOVER TABLE
@@ -22,6 +21,24 @@ RECOVER TABLE table_name
 ```sql
 RECOVER TABLE BY JOB ddl_job_id
 ```
+
+## Synopsis
+
+**RecoverTableStmt:**
+
+![RecoverTableStmt](/media/sqlgram/RecoverTableStmt.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**Int64Num:**
+
+![Int64Num](/media/sqlgram/Int64Num.png)
+
+**NUM:**
+
+![NUM](/media/sqlgram/NUM.png)
 
 > **Note:**
 >
@@ -45,7 +62,7 @@ When you use `RECOVER TABLE` in the upstream TiDB during TiDB Binlog replication
 
 + Latency occurs during replication between upstream and downstream databases. An error instance: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
 
-For the above three situations, you can resume data replication from TiDB Binlog with a [full import of the deleted table](/ecosystem-tool-user-guide.md#full-backup-and-restore-of-tidb-cluster-data-1).
+For the above three situations, you can resume data replication from TiDB Binlog with a [full import of the deleted table](/ecosystem-tool-user-guide.md#backup-and-restore).
 
 ## Examples
 

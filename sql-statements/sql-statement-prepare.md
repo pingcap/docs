@@ -1,8 +1,7 @@
 ---
 title: PREPARE | TiDB SQL Statement Reference
 summary: An overview of the usage of PREPARE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/prepare/']
+aliases: ['/docs/dev/sql-statements/sql-statement-prepare/','/docs/dev/reference/sql/statements/prepare/']
 ---
 
 # PREPARE
@@ -14,6 +13,10 @@ The `PREPARE` statement provides an SQL interface to server-side prepared statem
 **PreparedStmt:**
 
 ![PreparedStmt](/media/sqlgram/PreparedStmt.png)
+
+**PrepareSQL:**
+
+![PrepareSQL](/media/sqlgram/PrepareSQL.png)
 
 ## Examples
 

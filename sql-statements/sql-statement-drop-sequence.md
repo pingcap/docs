@@ -1,8 +1,7 @@
 ---
 title: DROP SEQUENCE
 summary: An overview of the usage of DROP SEQUENCE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/drop-sequence/']
+aliases: ['/docs/dev/sql-statements/sql-statement-drop-sequence/','/docs/dev/reference/sql/statements/drop-sequence/']
 ---
 
 # DROP SEQUENCE
@@ -15,10 +14,6 @@ The `DROP SEQUENCE` statement drops the sequence object in TiDB.
 
 ![DropSequenceStmt](/media/sqlgram/DropSequenceStmt.png)
 
-**OptTemporary:**
-
-![OptTemporary](/media/sqlgram/OptTemporary.png)
-
 **IfExists:**
 
 ![IfExists](/media/sqlgram/IfExists.png)
@@ -26,6 +21,10 @@ The `DROP SEQUENCE` statement drops the sequence object in TiDB.
 **TableNameList:**
 
 ![TableNameList](/media/sqlgram/TableNameList.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
 
 ## Examples
 
@@ -51,7 +50,7 @@ Query OK, 0 rows affected (0.03 sec)
 
 ## MySQL compatibility
 
-Currently, MySQL does not have the sequence option. The TiDB sequence is borrowed from MariaDB. Except for the `SETVAL` function, all other functions have the same progressions with those functions of MariaDB.
+Currently, sequence object is not supported by MySQL.
 
 ## See also
 

@@ -1,8 +1,7 @@
 ---
 title: SHOW ERRORS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW ERRORS for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-errors/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-errors/','/docs/dev/reference/sql/statements/show-errors/']
 ---
 
 # SHOW ERRORS
@@ -13,13 +12,9 @@ The behavior of which statements generate errors vs. warnings is highly influenc
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowErrorsStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowErrorsStmt](/media/sqlgram/ShowErrorsStmt.png)
 
 ## Examples
 

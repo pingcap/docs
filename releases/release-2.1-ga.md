@@ -1,7 +1,6 @@
 ---
 title: TiDB 2.1 GA Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/2.1ga/']
+aliases: ['/docs/dev/releases/release-2.1-ga/','/docs/dev/releases/2.1ga/']
 ---
 
 # TiDB 2.1 GA Release Notes
@@ -90,17 +89,17 @@ On November 30, 2018, TiDB 2.1 GA is released. See the following updates in this
 
         - Check the TiDB cluster information
 
-    - [Add the `auto_analyze_ratio` system variables to contorl the ratio of Analyze](/faq/tidb-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb)
+    - [Add the `auto_analyze_ratio` system variables to contorl the ratio of Analyze](/faq/sql-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb)
 
-    - [Add the `tidb_retry_limit` system variable to control the automatic retry times of transactions](/tidb-specific-system-variables.md#tidb_retry_limit)
+    - [Add the `tidb_retry_limit` system variable to control the automatic retry times of transactions](/system-variables.md#tidb_retry_limit)
 
-    - [Add the `tidb_disable_txn_auto_retry` system variable to control whether the transaction retries automatically](/tidb-specific-system-variables.md#tidb_disable_txn_auto_retry)
+    - [Add the `tidb_disable_txn_auto_retry` system variable to control whether the transaction retries automatically](/system-variables.md#tidb_disable_txn_auto_retry)
 
     - [Support using`admin show slow` statement to obtain the slow queries](/identify-slow-queries.md#admin-show-slow-command)
 
-    - [Add the `tidb_slow_log_threshold` environment variable to set the threshold of slow log automatically](/tidb-specific-system-variables.md#tidb_slow_log_threshold)
+    - [Add the `tidb_slow_log_threshold` environment variable to set the threshold of slow log automatically](/system-variables.md#tidb_slow_log_threshold)
 
-    - [Add the `tidb_query_log_max_len` environment variable to set the length of the SQL statement to be truncated in the log dynamically](/tidb-specific-system-variables.md#tidb_query_log_max_len)
+    - [Add the `tidb_query_log_max_len` environment variable to set the length of the SQL statement to be truncated in the log dynamically](/system-variables.md#tidb_query_log_max_len)
 
 + DDL
 
@@ -160,7 +159,7 @@ On November 30, 2018, TiDB 2.1 GA is released. See the following updates in this
 
     - Optimize Region merge to consider the number of rows within the Region
 
-    - [Add more commands to control the scheduling policy](/pd-control.md#config-show--set-option-value)
+    - [Add more commands to control the scheduling policy](/pd-control.md#config-show--set-option-value--placement-rules)
 
     - Improve [PD simulator](https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator) to simulate the scheduling scenarios
 
@@ -175,19 +174,19 @@ On November 30, 2018, TiDB 2.1 GA is released. See the following updates in this
     - Add the [`GetAllStores` interface](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L32), to support distributed GC in TiDB
 
     + pd-ctl supports:
-        - [using statistics for Region split](https://pingcap.com/docs/tools/pd-control/#operator-show--add--remove)
+        - [using statistics for Region split](/pd-control.md#operator-check--show--add--remove)
 
-        - [calling `jq` to format the JSON output](https://pingcap.com/docs/tools/pd-control/#jq-formatted-json-output-usage)
+        - [calling `jq` to format the JSON output](/pd-control.md#jq-formatted-json-output-usage)
 
-        - [checking the Region information of the specified store](https://pingcap.com/docs/tools/pd-control/#region-store-store-id)
+        - [checking the Region information of the specified store](/pd-control.md#region-store-store_id)
 
-        - [checking topN Region list sorted by versions](https://pingcap.com/docs/tools/pd-control/#region-topconfver-limit)
+        - [checking topN Region list sorted by versions](/pd-control.md#region-topconfver-limit)
 
-        - [checking topN Region list sorted by size](https://pingcap.com/docs/tools/pd-control/#region-topsize-limit)
+        - [checking topN Region list sorted by size](/pd-control.md#region-topsize-limit)
 
-        - [more precise TSO encoding](https://pingcap.com/docs/tools/pd-control/#tso)
+        - [more precise TSO encoding](/pd-control.md#tso)
 
-    - [pd-recover](https://pingcap.com/docs/tools/pd-recover) doesn't need to provide the `max-replica` parameter
+    - [pd-recover](/pd-recover.md) doesn't need to provide the `max-replica` parameter
 
 + Metrics
 
@@ -259,7 +258,7 @@ On November 30, 2018, TiDB 2.1 GA is released. See the following updates in this
 
 ## Tools
 
-- Fast full import of large amounts of data: [TiDB Lightning](https://pingcap.com/docs/tools/lightning/overview-architecture/)
+- Fast full import of large amounts of data: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
 
 - Support new [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)
 
