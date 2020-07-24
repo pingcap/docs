@@ -149,7 +149,7 @@ See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#chec
 
 Currently, the limitation of TiDB cannot be bypassed. You can only ignore this table to ensure the successful import of other tables.
 
-## How to deal with the error message `rpc error: code = Unimplemented ...` when TiDB Lightning switches the mode?
+## Encounter the `rpc error: code = Unimplemented ...` error when TiDB Lightning switches the mode
 
 **Cause**: Some node(s) in the cluster does not support `switch-mode`. For example, if the TiFlash version is earlier than `v4.0.0-rc.2`, [`switch-mode` is not supported](https://github.com/pingcap/tidb-lightning/issues/273).
 
