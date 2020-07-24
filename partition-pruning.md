@@ -1,5 +1,6 @@
 ---
 title: Partition Pruning
+summary：Introduce application scenarios of TiDB partition pruning.
 ---
 
 # Partition Pruning
