@@ -7,6 +7,40 @@ summary：Introduce application scenarios of TiDB partition pruning.
 
 Partition pruning is a performance optimization that applies to partitioned tables. It analyzes the filter conditions in query statements, and eliminates (_prunes_) partitions from consideration when they do not contain any data that will be required. By eliminating the non-required partitions, TiDB is able to reduce the amount of data that needs to be accessed and potentially significantly improving query execution times.
 
+The following is an example:
+
+{{< copyable "sql" >}}
+
+```sql
+
+CREATE TABLE t1 (
+ id INT NOT NULL PRIMARY KEY,
+ pad VARCHAR(100)
+)
+PARTITION BY RANGE COLUMNS(id) (
+ PARTITION p0 VALUES LESS THAN (100),
+ PARTITION p1 VALUES LESS THAN (200),
+ PARTITION p2 VALUES LESS THAN (MAXVALUE)
+);
+
+INSERT INTO t1 VALUES (1, 'test1'),(101, 'test2'), (201, 'test3');
+EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
+
+...
+
+mysql> EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
++----------------------------+---------+-----------+------------------------+------------------------------------------------+
+| id                         | estRows | task      | access object          | operator info                                  |
++----------------------------+---------+-----------+------------------------+------------------------------------------------+
+| PartitionUnion_8           | 80.00   | root      |                        |                                                |
+| ├─TableReader_10           | 40.00   | root      |                        | data:TableRangeScan_9                          |
+| │ └─TableRangeScan_9       | 40.00   | cop[tikv] | table:t1, partition:p0 | range:[80,120], keep order:false, stats:pseudo |
+| └─TableReader_12           | 40.00   | root      |                        | data:TableRangeScan_11                         |
+|   └─TableRangeScan_11      | 40.00   | cop[tikv] | table:t1, partition:p1 | range:[80,120], keep order:false, stats:pseudo |
++----------------------------+---------+-----------+------------------------+------------------------------------------------+
+5 rows in set (0.00 sec)
+```
+
 ## Application scenarios for partition pruning 
 
 TiDB supports two types of partitioned tables: Range partitioned tables and Hash partitioned tables, for which partition pruning applies different application scenarios. 
@@ -25,7 +59,6 @@ explain select * from t where x = 1;
 ```
 
 ```sql
-
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 | id                      | estRows  | task      | access object         | operator info                  |
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
