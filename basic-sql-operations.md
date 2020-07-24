@@ -178,9 +178,9 @@ ALTER TABLE person DROP INDEX person_unique_id;
 > 
 > DDL operations are not transactions. You don't need to run a `COMMIT` statement when executing DDL operations.
 
-Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
-
 ## Insert, update, and delete data
+
+Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
 
 To insert data into a table, use the `INSERT` statement:
 
@@ -218,9 +218,9 @@ DELETE FROM person WHERE id=2;
 > 
 > The `UPDATE` and `DELETE` statements without the `WHERE` clause as a filter operate on the entire table.
 
-DQL is used to retrieve the desired data rows from a table or multiple tables.
-
 ## Query data
+
+DQL is used to retrieve the desired data rows from a table or multiple tables.
 
 To view the data in a table, use the `SELECT` statement:
 
@@ -251,9 +251,9 @@ Use the `WHERE` clause to filter all records that match the conditions and then 
 SELECT * FROM person where id<5;
 ```
 
-DCL are usually used to create or delete users, and manage user privileges.
-
 ## Create, authorize, and delete a user
+
+DCL are usually used to create or delete users, and manage user privileges.
 
 To create a user, use the `CREATE USER` statement. The following example creates a user named `tiuser` with the password `123456`:
 
