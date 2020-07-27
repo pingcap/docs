@@ -175,7 +175,7 @@ In the pessimistic transaction mode, there will be no `TxnLockNotFound` error. I
 
 #### Pessimistic lock retry limit reached
 
-In a scenario where the transaction conflict is very serious or a write conflict occurs, the optimistic transaction will be terminated directly, but the pessimistic transaction will retry the statement with the latest data from storage until there is no write conflict.
+When the transaction conflict is very serious or a write conflict occurs, the optimistic transaction will be terminated directly, and the pessimistic transaction will retry the statement with the latest data from storage until there is no write conflict.
 
 Because TiDB's locking operation is a write operation, and the process of the operation is to read first and then write, there are two RPC requests. If a write conflict occurs in the middle of a transaction, TiDB will try again to lock the target keys, and each retry will be printed to the TiDB log. The number of retries is determined by [pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count).
 
@@ -220,9 +220,9 @@ Solutions:
 
 #### Deadlock found when trying to get lock
 
-Due to resource competition between two or more transactions, a deadlock will occur. If you do not handle it manually, transactions that block each other cannot be executed successfully and will wait for each other. So you need to manually terminate one of the transactions to resume other transaction requests.
+Due to resource competition between two or more transactions, a deadlock occurs. If you do not handle it manually, transactions that block each other cannot be executed successfully and will wait for each other forever. To resolve dead locks, you need to manually terminate one of the transactions to resume other transaction requests.
 
-In a scenario where a pessimistic transaction has a deadlock, one of the transactions must be terminated to unlock the deadlock. The client will return the same Error 1213 error as MySQL, for example
+When a pessimistic transaction has a deadlock, one of the transactions must be terminated to unlock the deadlock. The client will return the same `Error 1213` error as in MySQL, for example:
 
 ```log
 [err="[executor:1213]Deadlock found when trying to get lock; try restarting transaction"]
@@ -230,4 +230,4 @@ In a scenario where a pessimistic transaction has a deadlock, one of the transac
 
 Solutions:
 
-* The application needs to adjust transaction request logic when there too many more deadlocks. 
+* The application needs to adjust transaction request logic when there too many deadlocks.
