@@ -1,7 +1,6 @@
 ---
 title: SHOW ANALYZE STATUS
 summary: An overview of the usage of SHOW ANALYZE STATUS for the TiDB database。
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-show-analyze-status/']
 ---
 
@@ -47,4 +46,4 @@ show analyze status;
 
 ## See also
 
-* [ANALYZE_STATUS table](/system-tables/system-table-information-schema.md#analyze_status-table)
+* [ANALYZE_STATUS table](/information-schema/information-schema-analyze-status.md)

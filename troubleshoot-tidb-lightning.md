@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Troubleshooting
 summary: Learn about common errors and solutions of TiDB Lightning.
-category: how-to
 aliases: ['/docs/dev/troubleshoot-tidb-lightning/','/docs/dev/how-to/troubleshoot/tidb-lightning/']
 ---
 
@@ -149,3 +148,12 @@ See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#chec
 **Solution**:
 
 Currently, the limitation of TiDB cannot be bypassed. You can only ignore this table to ensure the successful import of other tables.
+
+## Encounter `rpc error: code = Unimplemented ...` when TiDB Lightning switches the mode
+
+**Cause**: Some node(s) in the cluster does not support `switch-mode`. For example, if the TiFlash version is earlier than `v4.0.0-rc.2`, [`switch-mode` is not supported](https://github.com/pingcap/tidb-lightning/issues/273).
+
+**Solutions**:
+
+- If there are TiFlash nodes in the cluster, you can update the cluster to `v4.0.0-rc.2` or higher versions.
+- Temporarily disable TiFlash if you do not want to upgrade the cluster.
