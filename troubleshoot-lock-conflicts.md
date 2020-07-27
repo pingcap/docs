@@ -179,8 +179,6 @@ In a scenario where the transaction conflict is very serious or a write conflict
 
 Because TiDB's locking operation is a write operation, and the process of the operation is to read first and then write, there are two RPC requests. If a write conflict occurs in the middle of a transaction, TiDB will try again to lock the target keys, and each retry will be printed to the TiDB log. The number of retries is determined by [pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count).
 
-You can view the error message in the logs of the TiDB server:
-
 In the pessimistic transaction mode, if a write conflict occurs and the number of retries reaches the upper limit, an error message containing the following keywords appears in the TiDB log:
 
 ```log
@@ -189,15 +187,13 @@ err="pessimistic lock retry limit reached"
 
 Solutions:
 
-* If the above error occurs frequently, it is recommended to adjust it from the application side.
+* If the above error occurs frequently, it is recommended to adjust from the application side.
 
 #### Lock wait timeout exceeded
  
-In the pessimistic transaction mode, transactions wait for locks of each other. The timeout for waiting a lock is defined by the [innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors) parameter of TiDB. This is the maximum allowable wait lock time at the SQL statement level, which is the expectation of a SQL statement Locking, but the lock has never been acquired. After this time, TiDB will not try to lock again and will return the corresponding error message to the client.
+In the pessimistic transaction mode, transactions wait for locks of each other. The timeout for waiting a lock is defined by the [innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors) parameter of TiDB. This is the maximum wait lock time at the SQL statement level, which is the expectation of a SQL statement Locking, but the lock has never been acquired. After this time, TiDB will not try to lock again and will return the corresponding error message to the client.
 
-You can view the error message in the logs of the TiDB server:
-
-When a wait lock timeout occurs, the following error message will be returned to the client: 
+When a wait lock timeout occurs, the following error message will be returned to the client:
 
 ```log
 ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
@@ -205,22 +201,22 @@ ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
  
 Solutions:
 
-* If the number of reported errors is very frequent, it is recommended to adjust from the perspective of application logic.
+* If the above error occurs frequently, it is recommended to adjust the application logic.
 
 #### TTL manager has timed out
  
-In addition to the transaction executes time can not exceed the GC time limit, the TTL time of pessimistic transactions has an upper limit, the default value is 10 minutes. Therefore, a pessimistic transaction with an execution time of more than 10 minutes will fail to commit. This timeout threshold is controlled by the TiDB parameter.
+The transaction execution time can not exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 10 minutes. Therefore, a pessimistic transaction executed for more than 10 minutes will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
 
-Logs of the TiDB server
+When the execution time of a pessimistic transaction exceeds the TTL time, the following error message occurs in the TiDB log:
 
 ```log
 TTL manager has timed out, pessimistic locks may expire, please commit or rollback this transaction
 ```
 
-Solutions: 
+Solutions:
 
-* When encountering this error, it is recommended to confirm whether the application logic can be optimized. For example, large transactions may trigger TiDB's transaction size limit, which can be split into multiple small transactions. Or adjust the TiDB transaction size limit [large transaction](/tidb-configuration-file.md#txn-total-size-limit).
-* It is recommended to adjust the relevant parameters appropriately to meet the application transaction logic.
+* First, confirm whether the application logic can be optimized. For example, large transactions may trigger TiDB's transaction size limit, which can be split into multiple small transactions. Or [adjust the TiDB transaction size limit](/tidb-configuration-file.md#txn-total-size-limit).
+* Also, you can adjust the related parameters properly to meet the application transaction logic.
 
 #### Deadlock found when trying to get lock
 
