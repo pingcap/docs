@@ -15,11 +15,11 @@ Transactions in TiDB use two-phase commit (2PC) that includes the Prewrite phase
  
 For details of Percolator and TiDB’s algorithm of the transactions, see [Google's Percolator](https://ai.google/research/pubs/pub36726).
 
-### Prewrite phase
+### Prewrite phase (optimistic)
  
 In the Prewrite phase, TiDB adds a primary lock and a secondary lock to target keys. If there are lots of requests for adding locks from the clients, TiDB prints an error such as write conflict or `keyislocked` to the log and reports it to the client. Specifically, the following errors related to locks might occur in the Prewrite phase.
  
-#### Read-write conflict
+#### Read-write conflict (optimistic)
  
 As TiDB Server receives a read data request from a client, that will get unique of a timestamp is start_ts at the physical time. When the transaction is waiting for reading data of the start_ts that is later than the key of the commit_ts version.  Because the latest transaction knows which is add a lock of the other transactions on this key,  but it doesn't know which is a phase of this transaction between the Prewrite phase and the Commit phase.The procedure is as follows:
 
@@ -82,7 +82,7 @@ Solutions:
 
 #### KeyIsLocked error
 
-In the Prewrite phase of a transaction, TiDB checks whether there is any write-write conflict, and then checks whether the target key has been locked by another transaction. If the key is locked, the TiKV server outputs a "KeyIsLocked" error. At present, the error message is not printed in the logs of TiDB and TiKV. Same as read-write conflicts, when "KeyIsLocked" occurs, TiDB automatically performs backoff and retry for the transaction in the background.
+In the Prewrite phase of a transaction, TiDB checks whether there is any write-write conflict, and then checks whether the target key has been locked by another transaction. If the key is locked, the TiKV server outputs a "KeyIsLocked" error. At present, the error message is not printed in the logs of TiDB and TiKV. Same as read-write conflicts, when "KeyIsLocked" occurs, TiDB automatically performs backoff and retry for the transaction.
 
 You can check whether there's any "KeyIsLocked" error in the TiDB monitoring on Grafana:
 
@@ -93,34 +93,34 @@ The `KV Errors` panel in the TiDB dashboard has two monitoring metrics `Lock Res
 
 Solutions:
 
-* If there is a small amount of "txnLock" operations, no need to pay too much attention. The backoff and retry is automatically performed in the background. The first time of the retry is 200 ms and the maximum time is 3000 ms for a single retry.
-* If there are too many "txnLock" operations in the `KV Backoff OPS`, it is recommended that you analyze the reasons of write conflicts from the application side.
+* If there is a small amount of txnLock in the monitoring, no need to pay too much attention. The backoff and retry is automatically performed in the background. The first time of the retry is 200 ms and the maximum time is 3000 ms for a single retry.
+* If there are too many “txnLock” operations in the `KV Backoff OPS`, it is recommended that you analyze the reasons to the write conflicts from the application side.
 * If your application is a write-write conflict scenario, it is strongly recommended to use the pessimistic transaction mode.
 
-### Commit phase
+### Commit phase (optimistic)
 
 After the Prewrite phase completes, the client obtains commit_ts, and then the transaction is going to the next phase of 2PC - the Commit phase.
 
 #### LockNotFound error
 
-The error log of "TxnLockNotFound" means that transaction commit time is longer than TTL time, and when the transaction is going to commit, its lock has been rolled back by other transactions. If the TiDB server enables transaction commit retry, this transaction is re-executed according to [tidb_retry_limit](/tidb-specific-system-variables.md). But take care of the difference between explicit and implicit transactions.
+The error log of "TxnLockNotFound" means that transaction commit time is longer than the the TTL time, and when the transaction is going to commit, its lock has been rolled back by other transactions. If the TiDB server enables transaction commit retry, this transaction is re-executed according to [tidb_retry_limit](/system-variables.md#tidb_retry_limit). (Note about the difference between explicit and implicit transactions.)
 
-If you find a "LockNotFound" error, there are two ways to analyze and deal with the suggestions:
+You can check whether there is any "LockNotFound" error in the following ways:
 
-1. Logs of the TiDB server
+1. View the logs of the TiDB server
 
-    If the metric has "TxnLockNotFound" error, the log of TiDB Server is outputting theses message:
+    If a "TxnLockNotFound" error occurs, the TiDB log message is like this:
 
     ```log
     [WARN] [session.go:446] ["commit failed"] [conn=149370] ["finished txn"="Txn{state=invalid}"] [error="[kv:6]Error: KV error safe to retry tikv restarts txn: Txn(Mvcc(TxnLockNotFound{ start_ts: 412720515987275779, commit_ts: 412720519984971777, key: [116, 128, 0, 0, 0, 0, 1, 111, 16, 95, 114, 128, 0, 0, 0, 0, 0, 0, 2] })) [try again later]"]
     ```
 
-    * start_ts: The transaction’s start_ts which its lock has been rollbacked by other transactions that are outputting error  `TxnLockNotFound`, such as 412720515987275779 is start_ts.
-    * commit_ts: The commit_ts is the same as start_ts’s transaction, such as the number is 412720519984971777 is commit_ts.
+    * start_ts: The start_ts of the transaction that outputs the `TxnLockNotFound` error because its lock has been rolled back by other transactions. In the above log, `412720515987275779` is the start_ts.
+    * commit_ts: The commit_ts of the transaction that outputs the `TxnLockNotFound` error. In the above log, `412720519984971777` is the commit_ts.
 
-2. Logs of the TiKV server
+2. View the logs of the TiKV server
 
-    If the metric has `TxnLockNotFound` error, the log of TiKV Server is outputting theses message:
+    If a "TxnLockNotFound" error occurs, the TiKV log message is like this:
 
     ```log
     Error: KV error safe to retry restarts txn: Txn(Mvcc(TxnLockNotFound)) [ERROR [Kv.rs:708] ["KvService::batch_raft send response fail"] [err=RemoteStoped]
@@ -128,50 +128,53 @@ If you find a "LockNotFound" error, there are two ways to analyze and deal with 
  
 Solutions:
 
-* By checking the time interval between start_ts and commit_ts, you can confirm whether the replacement TTL time is exceeded.
+* By checking the time interval between start_ts and commit_ts, you can confirm whether the commit time exceeds the TTL time.
 
-    checking the time interval use the PD control tool. 
+    Checking the time interval using the PD control tool:
 
     ```shell
     ./pd-ctl tso [start_ts]
     ./pd-ctl tso [commit_ts]
     ```
 
+* It is recommended to check whether the write performance is slow, which might cause that the efficiency of transaction commit is poor, and thus the lock is cleared.
+
+* In the case of disabling the TiDB transaction retry, you need to catch the exception on the application side and try again.
+
 ## Pessimistic transaction mode
 
-Before the version of v3.0.8, The TiDB default transaction mode is Optimistic Transaction. If there has transaction conflict, the latest transaction will commit failed. So the application needs to supporting transactions retry to execute. The Pessimistic Transaction Mode can resolve this question, and the application doesn’t need to modify any logic for the workaround.
+Before v3.0.8, TiDB uses the optimistic transaction mode by default. In this mode, if there is a transaction conflict, the latest transaction will fail to commit. Therefore, the application needs to support retrying transactions. The pessimistic transaction mode resolves this issue, and the application does not need to modify any logic for the workaround.
 
-The commit phase of the pessimistic transaction mode and the optimistic transaction mode in TiDB is the same logic, and both commits are the 2PC mode. The important innovation of pessimistic transactions is DML.
+The commit phase of the pessimistic transaction mode and the optimistic transaction mode in TiDB has the same logic, and both commits are in the 2PC mode. The important adaptation of pessimistic transactions is DML execution.
 
 ![TiDB pessimistic transaction commit logic](/media/troubleshooting-lock-pic-05.png)
  
-The pessimistic transaction adds `Acquire Pessimistic Lock` phase before 2PC, which its logic look at below introduction:
+The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
 
-1. (same as the optimistic transaction mode) Receive the request from the client, the current timestamp is this transaction’s start_ts.
-2. When the TiDB Server receives an update data request from the client, TiDB Server initiates a pessimistic lock request to TiKV Server, which is persisted to TiKV Server.
-3. (same as the optimistic transaction mode) When the client executes commit request, TiDB starts to perform the 2PC mode similar to the optimistic transaction mode. 
+1. (same as the optimistic transaction mode) Receive the `begin` request from the client, and the current timestamp is this transaction’s start_ts.
+2. When the TiDB server receives an `update` request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
+3. (same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the 2PC similar to the optimistic transaction mode. 
 
 ![Pessimistic transactions in TiDB](/media/troubleshooting-lock-pic-06.png)
 
-Relevant details will not be repeated in this section, you can see [The Pessimistic transaction mode](/pessimistic-transaction.md)
+For details, see [Pessimistic transaction mode](/pessimistic-transaction.md).
 
-### Prewrite phase
+### Prewrite phase (pessimistic)
 
-At the transaction pessimistic mode, the commit phase always two-phase commit(2PC). Therefore, the read-write conflict also exists as the optimistic transaction mode.
+In the transaction pessimistic mode, the commit phase is the same as the 2PC. Therefore, the read-write conflict also exists as in the optimistic transaction mode.
 
-#### Read-write conflict
+#### Read-write conflict (pessimistic)
 
-See the above method for a detailed introduction in the optimistic transaction mode.
+Same as [Read-write conflict (optimistic)](#read-write-conflict-optimistic).
 
-### Commit phase
+### Commit phase (pessimistic)
 
-The error of “TxnLockNotFound” 
-
-In the pessimistic transaction mode, there will be no `TxnLockNotFound` error. However, the pessimistic lock will automatically update the TTL of the transaction through `txnheartbeat` to ensure that the second transaction will not clear the lock of the first transaction.
+In the pessimistic transaction mode, there will be no `TxnLockNotFound` error. Instead, the pessimistic lock will automatically update the TTL of the transaction through `txnheartbeat` to ensure that the second transaction does not clear the lock of the first transaction.
 
 ### Other errors related to locks
 
-In a scenario where the transaction conflict is very serious, or when a write conflict occurs. The optimistic transaction will be terminated directly, but the pessimistic transaction will retry the statement with the latest data from storage until there is no write conflict. 
+In a scenario where the transaction conflict is very serious, or when a write conflict occurs. The optimistic transaction will be terminated directly, but the pessimistic transaction will retry the statement with the latest data from storage until there is no write conflict.
+
 Because TiDB's lock operation is a write operation, and the operation process is to read first and then write, there is two RPC requests time. If a write conflict occurs in the middle of transactions, it will try again to lock the target keys, the operation of trying it which will print the TiDB log without special attention. The number of retries is determined by [pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count) .
 
 Logs of the TiDB server
