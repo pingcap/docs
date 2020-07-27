@@ -25,10 +25,9 @@ PARTITION BY RANGE COLUMNS(id) (
 
 INSERT INTO t1 VALUES (1, 'test1'),(101, 'test2'), (201, 'test3');
 EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
+```
 
-...
-
-mysql> EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
+```sql
 +----------------------------+---------+-----------+------------------------+------------------------------------------------+
 | id                         | estRows | task      | access object          | operator info                                  |
 +----------------------------+---------+-----------+------------------------+------------------------------------------------+
