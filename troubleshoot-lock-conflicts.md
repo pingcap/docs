@@ -82,7 +82,7 @@ Solutions:
 
 #### KeyIsLocked error
 
-In the Prewrite phase of a transaction, TiDB checks whether there is any write-write conflict, and then checks whether the target key has been locked by another transaction. If the key is locked, the TiKV server outputs a "KeyIsLocked" error. At present, the error message is not printed in the logs of TiDB and TiKV. Same as read-write conflicts, when "KeyIsLocked" occurs, TiDB automatically performs backoff and retry for the transaction.
+In the Prewrite phase of a transaction, TiDB checks whether there is any write-write conflict, and then checks whether the target key has been locked by another transaction. If the key is locked, the TiKV server outputs a "KeyIsLocked" error. At present, the error message is not printed in the logs of TiDB and TiKV. Same as read-write conflicts, when "KeyIsLocked" occurs, TiDB automatically performs backoff and retry for the transaction in the background.
 
 You can check whether there's any "KeyIsLocked" error in the TiDB monitoring on Grafana:
 
@@ -93,8 +93,8 @@ The `KV Errors` panel in the TiDB dashboard has two monitoring metrics `Lock Res
 
 Solutions:
 
-* If there is a small amount of txnLock in the monitoring, no need to pay too much attention. The backoff and retry is automatically performed in the background. The first time of the retry is 200 ms and the maximum time is 3000 ms for a single retry.
-* If there are too many “txnLock” operations in the `KV Backoff OPS`, it is recommended that you analyze the reasons to the write conflicts from the application side.
+* If there is a small amount of "txnLock" operations, no need to pay too much attention. The backoff and retry is automatically performed in the background. The first time of the retry is 200 ms and the maximum time is 3000 ms for a single retry.
+* If there are too many "txnLock" operations in the `KV Backoff OPS`, it is recommended that you analyze the reasons of write conflicts from the application side.
 * If your application is a write-write conflict scenario, it is strongly recommended to use the pessimistic transaction mode.
 
 ### Commit phase
@@ -103,7 +103,7 @@ After the Prewrite phase completes, the client obtains commit_ts, and then the t
 
 #### LockNotFound error
 
-The error log of "TxnLockNotFound" means that transaction commit time is longer than TTL  time. and then when the transaction is going to commit, its lock has been rollbacked by other transactions. If the TiDB server enables transaction commit retry, this transaction is re-executed according to [tidb_retry_limit](/tidb-specific-system-variables.md). But take care of the difference between explicit and implicit transactions.
+The error log of "TxnLockNotFound" means that transaction commit time is longer than TTL time, and when the transaction is going to commit, its lock has been rolled back by other transactions. If the TiDB server enables transaction commit retry, this transaction is re-executed according to [tidb_retry_limit](/tidb-specific-system-variables.md). But take care of the difference between explicit and implicit transactions.
 
 If you find a "LockNotFound" error, there are two ways to analyze and deal with the suggestions:
 
