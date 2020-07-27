@@ -1,7 +1,7 @@
 ---
 title: Understand the Query Execution Plan
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
-aliases: ['/docs/dev/query-execution-plan/','/docs/dev/reference/performance/understanding-the-query-execution-plan/','/docs/dev/index-merge/','/docs/dev/reference/performance/index-merge/']
+aliases: ['/docs/dev/query-execution-plan/','/docs/dev/reference/performance/understanding-the-query-execution-plan/','/docs/dev/index-merge/','/docs/dev/reference/performance/index-merge/','/tidb/dev/index-merge']
 ---
 
 # Understand the Query Execution Plan
@@ -186,7 +186,7 @@ In the above example, the child node of the `TableReader_7` operator is `Selecti
 
 `IndexMerge` is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans.
 
-```
+```sql
 mysql> explain select * from t where a = 1 or b = 1;
 +-------------------------+----------+-----------+---------------+--------------------------------------+
 | id                      | estRows  | task      | access object | operator info                        |
