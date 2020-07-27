@@ -11,6 +11,7 @@
   + [Basic Features](/basic-features.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
+  + [Credits](/credits.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
@@ -108,14 +109,16 @@
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [Overview](/sql-logical-optimization.md)
         + [Subquery Related Optimizations](/subquery-optimization.md)
         + [Column Pruning](/column-pruning.md)
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
         + [Eliminate Max/Min](/max-min-eliminate.md)
-        + [Predicates Push Down](/predicates-push-down.md)
+        + [Predicates Push Down](/predicate-push-down.md)
         + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
+        + [Overview](/sql-physical-optimization.md)
         + [Index Selection](/choose-index.md)
         + [Statistics](/statistics.md)
         + [Wrong Index Solution](/wrong-index-solution.md)
