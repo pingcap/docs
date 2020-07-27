@@ -121,7 +121,7 @@ When the modified number or the current total row number is larger than `tidb_au
 
 ## Can I use hints to override the optimizer behavior?
 
-TiDB supports multiple ways to override the default query optimizer behavior, including [hints](//optimizer-hints.md) and [SQL Plan Management](/sql-plan-management.md). The basic usage is similar to MySQL, with several TiDB specific extensions:
+TiDB supports multiple ways to override the default query optimizer behavior, including [hints](/optimizer-hints.md) and [SQL Plan Management](/sql-plan-management.md). The basic usage is similar to MySQL, with several TiDB specific extensions:
 
 {{< copyable "sql" >}}
 
