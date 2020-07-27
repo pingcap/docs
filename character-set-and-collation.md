@@ -283,7 +283,7 @@ You can use the following statement to set the character set and collation that 
     SET collation_connection = @@collation_database;
     ```
 
-## Optimization levels of character sets and collations
+## Selection priorities of character sets and collations
 
 String > Column > Table > Database > Server
 
@@ -370,7 +370,7 @@ If an expression involves multiple clauses of different collations, you need to 
 
 + The coercibility value of the explicit `COLLATE` clause is `0`.
 + If the collations of two strings are incompatible, the coercibility value of the concatenation of two strings with different collations is `1`. Currently, all implemented collations are compatible with each other.
-+ The collation of the column,`CAST()`, `CONVERT()` or `BINARY()` has a coercibility value of `2`.
++ The collation of the column, `CAST()`, `CONVERT()`, or `BINARY()` has a coercibility value of `2`.
 + The system constant (the string returned by `USER ()` or `VERSION ()`) has a coercibility value of `3`.
 + The coercibility value of constants is `4`.
 + The coercibility value of numbers or intermediate variables is `5`.
