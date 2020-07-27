@@ -21,7 +21,7 @@ In the Prewrite phase, TiDB adds a primary lock and a secondary lock to target k
  
 #### Read-write conflict (optimistic)
  
-As TiDB Server receives a read data request from a client, that will get unique of a timestamp is start_ts at the physical time. When the transaction is waiting for reading data of the start_ts that is later than the key of the commit_ts version.  Because the latest transaction knows which is add a lock of the other transactions on this key,  but it doesn't know which is a phase of this transaction between the Prewrite phase and the Commit phase.The procedure is as follows:
+As the TiDB server receives a read request from a client, it gets a globally unique and increasing timestamp at the physical time as the start_ts of the current transaction. The transaction needs to read the latest data before start_ts, that is, the target key of the latest commit_ts that is smaller than start_ts. When the transaction finds that the target key is locked by another transaction, and it cannot know which phase the other transaction is in, a read-write conflict happens. The diagram is as follows:
 
 ![read-write conflict](/media/troubleshooting-lock-pic-04.png)
 
