@@ -71,7 +71,7 @@ Solutions:
 
 * A read-write conflict triggers an automatic backoff and retry. As in the above example, Txn1 has a backoff and retry. The first time of the retry is 100 ms, the longest retry is 3000 ms, and the total time is 20000 ms at maximum.
 
-* You can use the sub-command [`decoder`](/tidb-control.md#decoder-subcommand) of TiDB Control to view the table id and rowid of the row corresponding to the specified key:
+* You can use the sub-command [`decoder`](/tidb-control.md#the-decoder-command) of TiDB Control to view the table id and rowid of the row corresponding to the specified key:
 
     ```sh
     ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
