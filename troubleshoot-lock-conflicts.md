@@ -173,13 +173,15 @@ In the pessimistic transaction mode, there will be no `TxnLockNotFound` error. I
 
 ### Other errors related to locks
 
-In a scenario where the transaction conflict is very serious, or when a write conflict occurs. The optimistic transaction will be terminated directly, but the pessimistic transaction will retry the statement with the latest data from storage until there is no write conflict.
+#### Pessimistic lock retry limit reached
 
-Because TiDB's lock operation is a write operation, and the operation process is to read first and then write, there is two RPC requests time. If a write conflict occurs in the middle of transactions, it will try again to lock the target keys, the operation of trying it which will print the TiDB log without special attention. The number of retries is determined by [pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count) .
+In a scenario where the transaction conflict is very serious or a write conflict occurs, the optimistic transaction will be terminated directly, but the pessimistic transaction will retry the statement with the latest data from storage until there is no write conflict.
 
-Logs of the TiDB server
+Because TiDB's locking operation is a write operation, and the process of the operation is to read first and then write, there are two RPC requests. If a write conflict occurs in the middle of a transaction, TiDB will try again to lock the target keys, and each retry will be printed to the TiDB log. The number of retries is determined by [pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count).
 
-In the pessimistic transaction mode, if a write conflict occurs and the number of retries reaches the upper limit, an error message containing the following keywords will appear in the TiDB log. as follows:
+You can view the error message in the logs of the TiDB server:
+
+In the pessimistic transaction mode, if a write conflict occurs and the number of retries reaches the upper limit, an error message containing the following keywords appears in the TiDB log:
 
 ```log
 err="pessimistic lock retry limit reached"
@@ -187,13 +189,13 @@ err="pessimistic lock retry limit reached"
 
 Solutions:
 
-* If the above error occurs frequently, it is recommended to adjust it from an application level.
+* If the above error occurs frequently, it is recommended to adjust it from the application side.
 
 #### Lock wait timeout exceeded
  
-In the pessimistic transaction mode, there will be waiting for locks between transactions. The timeout for wait locks is defined by the [innodb_lock_wait_timeout](/pessimistic-transaction.md/###behavior) parameter of TiDB. This is the maximum allowable wait lock time at the SQL statement level, which is the expectation of a SQL statement Locking, but the lock has never been acquired. After this time, TiDB will not try to lock again and will return the corresponding error message to the client.
+In the pessimistic transaction mode, transactions wait for locks of each other. The timeout for waiting a lock is defined by the [innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors) parameter of TiDB. This is the maximum allowable wait lock time at the SQL statement level, which is the expectation of a SQL statement Locking, but the lock has never been acquired. After this time, TiDB will not try to lock again and will return the corresponding error message to the client.
 
-Logs of the TiDB server
+You can view the error message in the logs of the TiDB server:
 
 When a wait lock timeout occurs, the following error message will be returned to the client: 
 
