@@ -1,6 +1,6 @@
 ---
 title: Partition Pruning
-summary：Introduce application scenarios of TiDB partition pruning.
+summary: Learn about the usage scenarios of TiDB partition pruning.
 ---
 
 # Partition Pruning
@@ -12,7 +12,6 @@ The following is an example:
 {{< copyable "sql" >}}
 
 ```sql
-
 CREATE TABLE t1 (
  id INT NOT NULL PRIMARY KEY,
  pad VARCHAR(100)
@@ -40,15 +39,17 @@ EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
 5 rows in set (0.00 sec)
 ```
 
-## Application scenarios for partition pruning 
+## Usage scenarios of partition pruning
 
-TiDB supports two types of partitioned tables: Range partitioned tables and Hash partitioned tables, for which partition pruning applies different application scenarios. 
+The usage scenarios of partition pruning are different for the two types of partitioned tables: Range partitioned tables and Hash partitioned tables.
 
-### Application of partition pruning in Hash partitioned tables
+### Use partition pruning in Hash partitioned tables
 
-#### Scenarios for partition pruning in Hash partitioned tables
+This section describes the applicable and inapplicable usage scenarios of partition pruning in Hash partitioned tables.
 
-Only the query condition of equal comparison can support the partition pruning of the Hash partitioned tables.
+#### Applicable scenarios in Hash partitioned tables
+
+Only the query condition of equal comparison supports partition pruning in Hash partitioned tables.
 
 {{< copyable "sql" >}}
 
@@ -67,13 +68,15 @@ explain select * from t where x = 1;
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-In this SQL statement, it can be known from the condition `x = 1` that all results fall in one partition. The value `1` can be confirmed to be in the partition `p1` after passing through the Hash partition. Therefore, only the partition `p1` needs to be scanned, and there is no need to access the `p2`, `p3`, and `p4` partitions that will not have matching results. From the execution plan, there is only one `TableFullScan` operator, and the `p1` partition is specified in the `access object`, confirming that `partition pruning` takes effect.
+In the SQL statement above, it can be known from the condition `x = 1` that all results fall in one partition. The value `1` can be confirmed to be in the `p1` partition after passing through the Hash partition. Therefore, only the `p1` partition needs to be scanned, and there is no need to access the `p2`, `p3`, and `p4` partitions that will not have matching results. From the execution plan, only one `TableFullScan` operator appears and the `p1` partition is specified in `access object`, so it can be confirmed that `partition pruning` takes effect.
 
-#### Scenarios that cannot use partition pruning in Hash partitioned tables
+#### Inapplicable scenarios in Hash partitioned tables
+
+This section describes two inapplicable usage scenarios of partition pruning in Hash partitioned tables.
 
 ##### Scenario one
 
-Partition pruning cannot take effect when it is not certain that the results of some query conditions, such as `in`, `between`, `> < >= <=`, are only in one partition.
+If you cannot confirm the condition that the query result falls in only one partition (such as `in`, `between`, `>`, `<`, `>=`, `<=`), you cannot use the partition pruning optimization. For example:
 
 {{< copyable "sql" >}}
 
@@ -102,7 +105,7 @@ explain select * from t where x > 2;
 +------------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-In this case, partition pruning does not take effect because the condition `x> 2` cannot determine the corresponding Hash partition.
+In this case, partition pruning is inapplicable because the corresponding Hash partition cannot be confirmed by the `x > 2` condition.
 
 ##### Scenario two
 
@@ -138,7 +141,7 @@ explain select * from t2 where x = (select * from t1 where t2.x = t1.x and t2.x 
 
 Each time this query reads a row from `t2`, it will go to the partitioned table `t1` for query. Theoretically, the filter condition of `t1.x = val` will be met at this time, but in fact, the partition pruning only affects the query plan in the generation phase, not the execution phase, so the pruning will not take effect.
 
-### Application of partition pruning in Range partitioned tables
+### Use partition pruning in Range partitioned tables
 
 #### Scenarios for partition pruning in Range partitioned tables
 

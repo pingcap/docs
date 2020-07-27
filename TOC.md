@@ -111,6 +111,7 @@
         + [Column Pruning](/column-pruning.md)
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
         + [Predicates Push Down](/predicates-push-down.md)
+        + [Partition Pruning](/partition-pruning.md)
         + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
