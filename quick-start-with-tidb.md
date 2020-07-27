@@ -1,7 +1,7 @@
 ---
 title: Quick Start Guide for the TiDB Database Platform
 summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
-aliases: ['/docs/stable/quick-start-with-tidb/','/docs/v4.0/quick-start-with-tidb/','/docs/QUICKSTART','/docs/stable/test-deployment-using-docker/']
+aliases: ['/docs/stable/quick-start-with-tidb/','/docs/v4.0/quick-start-with-tidb/','/docs/QUICKSTART','/docs/stable/test-deployment-using-docker/','/docs/op-guide/docker-compose/']
 ---
 
 # Quick Start Guide for the TiDB Database Platform
