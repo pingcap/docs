@@ -1,10 +1,14 @@
 ---
-title: Mydumper Instructions
+title: Mydumper Instruction
 summary: Use Mydumper to export data from TiDB.
 aliases: ['/docs/dev/mydumper-overview/','/docs/dev/reference/tools/mydumper/']
 ---
 
-# Mydumper Instructions
+# Mydumper Instruction
+
+> **Warning:**
+>
+> The maintainers have stopped developing new features for Mydumper, and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you switch to Dumpling.
 
 ## What is Mydumper?
 
