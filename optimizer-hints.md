@@ -14,17 +14,19 @@ TiDB supports optimizer hints, which are based on the comment-like syntax introd
 
 ## Syntax
 
-Optimizer hints are specified within `/*+ ... */` comments and follow behind the `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement (optimizer hints are not supported behind the `INSERT` keyword). The hint names are case insensitive. If you want to use multiple hints, separate them with commas.
+Optimizer hints are case insensitive and specified within `/*+ ... */` comments following the `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. Optimizer hints are not currently supported for `INSERT` statements.
 
-For example, the following query uses three different hints:
+ Multiple hints can be specified by separating with commas. For example, the following query uses three different hints:
 
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) from t t1, t t2 where t1.a = t2.b;
+SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ```
 
-Optimizer hints can be used along with `Explain`/`Explain Analyze`. These two commands can check whether optimizer hints have taken effect on the queries as expected. If optimizer hints contains syntax errors or are not applicable to the statements, the query is executed without the optimizer hints. It does not report an error on the optimizer hints, but only record a warning. You can view the detailed information after the query is completed by running the `Show Warnings` command.
+How optimizer hints affect query execution plans can be observed in the output of [`EXPLAIN`](/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
+
+An incorrect or incomplete hint will not result in a statement error. This is because hints are intended to have only a _hint_ (suggestion) semantic to query execution. Similarly, TiDB will at most return a warning if a hint is not applicable.
 
 > **Note:**
 >
@@ -37,47 +39,47 @@ Each query or sub-query in a statement corresponds to a different query block, a
 {{< copyable "sql" >}}
 
 ```sql
-select * from (select * from t) t1, (select * from t) t2;
+SELECT * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
 The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose name is `sel_1`; the two `SELECT` sub-queries correspond to the second and the third query block, whose names are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the first `SELECT` with `DELETE` or `UPDATE`, then the corresponding query block names are `del_1` or `upd_1`.
 
 ## Hints that take effect in query blocks
 
-This category of hints can follow behind **any** `SELECT`, `UPDATE` or `DELETE` keywords. To control the effect scope of the hint, use the name of the query block in the hint. You can make the hint parameters clear by accurately identifying each table in the query (in case of duplicated table names or aliases). If no query block is specified in the hint, the hint takes effect in the current block by default.
+This category of hints can follow behind **any** `SELECT`, `UPDATE` or `DELETE` keywords. To control the effective scope of the hint, use the name of the query block in the hint. You can make the hint parameters clear by accurately identifying each table in the query (in case of duplicated table names or aliases). If no query block is specified in the hint, the hint takes effect in the current block by default.
 
 For example:
 
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * from (select t1.a, t1.b from t t1, t t2 where t1.a = t2.a) t1, t t3 where t1.b = t3.b;
+SELECT /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * FROM (SELECT t1.a, t1.b FROM t t1, t t2 WHERE t1.a = t2.a) t1, t t3 WHERE t1.b = t3.b;
 ```
 
 This hint takes effect in the `sel_1` query block, and its parameters are the `t1` and `t3` tables in `sel_1` (`sel_2` also contains a `t1` table).
 
-As described above, you can specify the name of the query block in the hint in two ways:
+As described above, you can specify the name of the query block in the hint in the following ways:
 
-- Set the query block name as the first parameter of the hint, and separate it from other parameters with a space. In addition to `QB_NAME`, all the hints listed in this section also have another optional hidden parameter `@QB_NAME`. By using this parameter, you can specify the effect scope of this hint.
+- Set the query block name as the first parameter of the hint, and separate it from other parameters with a space. In addition to `QB_NAME`, all the hints listed in this section also have another optional hidden parameter `@QB_NAME`. By using this parameter, you can specify the effective scope of this hint.
 - Append `@QB_NAME` to a table name in the parameter to explicitly specify which query block this table belongs to.
 
 > **Note:**
 >
-> You must put the hint in or before the query block that it takes effect in. If the hint is put after the query block, it cannot take effect.
+> You must put the hint in or before the query block where the hint takes effect. If the hint is put after the query block, it cannot take effect.
 
 ### QB_NAME
 
-When the query statement is a complicated statement that includes multiple nested queries, the id and name of a certain query block might be mistaken. Hint `QB_NAME` can help us in this regard.
+If the query statement is a complicated statement that includes multiple nested queries, the ID and name of a certain query block might be mistakenly identified. The hint `QB_NAME` can help us in this regard.
 
-`QB_NAME` means Query Block Name. You can specify a name name to a query block. The specified `QB_NAME` and the default name are both valid. For example:
+`QB_NAME` means Query Block Name. You can specify a new name to a query block. The specified `QB_NAME` and the previous default name are both valid. For example:
 
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ QB_NAME(QB1) */ * from (select * from t) t1, (select * from t) t2;
+SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
-This hint specifies the `SELECT` query block's name to `QB1`, which makes `QB1` and the default name `sel_1` both valid for the query block.
+This hint specifies the outer `SELECT` query block's name to `QB1`, which makes `QB1` and the default name `sel_1` both valid for the query block.
 
 > **Note:**
 >
@@ -115,11 +117,11 @@ The parameter(s) given in `INL_JOIN()` is the candidate table for the inner tabl
 
 ### INL_HASH_JOIN
 
-The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm. The difference between the two algorithms is that `INL_JOIN` creates a hash table on the connected inner table, but `INL_HASH_JOIN` creates a hash table on the connected outer table. `INL_HASH_JOIN` has a fixed limit for memory usage, while the memory used by `INL_JOIN` depends on the number of rows matched in the inner table.
+The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm. The difference between the two algorithms is that `INL_JOIN` creates a hash table on the joined inner table, but `INL_HASH_JOIN` creates a hash table on the joined outer table. `INL_HASH_JOIN` has a fixed limit on memory usage, while the memory used by `INL_JOIN` depends on the number of rows matched in the inner table.
 
 ### INL_MERGE_JOIN
 
-The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. This hint is used in the same scenario as `INL_JOIN`. Compared with `INL_JOIN` and `INL_HASH_JOIN`, it saves more memory but requires more strict usage conditions: the column sets of the inner table in join keys is the prefix of the inner table index, or the index of the inner table is the prefix of the column sets of the inner table in join keys.
+The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. This hint is used in the same scenario as in that of `INL_JOIN`. Compared with `INL_JOIN` and `INL_HASH_JOIN`, it saves more memory but requires more strict usage conditions: the column sets of the inner table in join keys is the prefix of the inner table index, or the index of the inner table is the prefix of the column sets of the inner table in join keys.
 
 ### HASH_JOIN(t1_name [, tl_name ...])
 
@@ -162,7 +164,7 @@ The `USE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer t
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ USE_INDEX(t1, idx1, idx2) */ * from t t1;
+SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 ```
 
 > **Note:**
@@ -206,10 +208,10 @@ The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optim
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * from t t1 where t1.a > 10 or t1.b > 10;
+SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10 OR t1.b > 10;
 ```
 
-When multiple `USE_INDEX_MERGE` hint is made to the same table, the optimizer tries to select the index from the union of the index set specified by these hints.
+When multiple `USE_INDEX_MERGE` hints are made to the same table, the optimizer tries to select the index from the union of the index sets specified by these hints.
 
 > **Note:**
 >
@@ -222,7 +224,7 @@ This hint takes effect on strict conditions, including:
 
 ## Hints that take effect in the whole query
 
-This category of hints can only follow behind the **first** `SELECT`, `UPDATE` or `DELETE` keywords, which is equivalent to modifying the value of the specified system variable when this query is executed. The priority of the hint is higher than that of existing system variables.
+This category of hints can only follow behind the **first** `SELECT`, `UPDATE` or `DELETE` keyword, which is equivalent to modifying the value of the specified system variable when this query is executed. The priority of the hint is higher than that of existing system variables.
 
 > **Note:**
 >
@@ -244,7 +246,7 @@ In addition to this hint, setting the `tidb_enable_index_merge` system variable 
 
 > **Note:**
 >
-> `NO_INDEX_MERGE` has higher priority than `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect.
+> `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect.
 
 ### USE_TOJA(boolean_value)
 
