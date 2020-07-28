@@ -67,7 +67,7 @@ CREATE USER 'test'@'192.168.10.%';
 
 The `test` user is allowed to log in from any hosts on the `192.168.10` subnet.
 
-If the host is not specified, all IPs can log in by default. If no password is specified, the default is null:
+If the host is not specified, the user is allowed to log in from any IP. If no password is specified, the default is null:
 
 {{< copyable "sql" >}}
 
@@ -83,7 +83,7 @@ Equivalent to:
 CREATE USER 'test'@'%' IDENTIFIED BY '';
 ```
 
-If the user specified does not exist, the behavior of automatically creating users depends on `sql_mode`. If the `sql_mode` includes `NO_AUTO_CREATE_USER`, `GRANT` statements will not return an error and create users.
+If the user specified does not exist, the behavior of automatically creating users depends on `sql_mode`. If the `sql_mode` includes `NO_AUTO_CREATE_USER`, `GRANT` statement will not return an error and create users.
 
 If the `sql_mode` does not include `NO_AUTO_CREATE_USER`, the following example uses the `CREATE USER` and `GRANT` statements to set up four accounts:
 
@@ -202,11 +202,11 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
     mysql -h 127.0.0.1 -P 4000 -u root
     ```
 
-When the `skip-grant-table` is set, starting the TiDB process will increase the user check of the operating system, and only the `root` user of the operating system can start the TiDB process.
+When the `skip-grant-table` is set, starting the TiDB process will check the user to be an administrator of the operating system, and only the `root` user of the operating system can start the TiDB process.
 
 ## `FLUSH PRIVILEGES`
 
-Information related to users and privileges is stored in the TiKV server, and TiDB caches this information inside the process. Generally, modification of the related information through CREATE USER, GRANT and other statements takes effect quickly in the entire cluster. If affected by the network or other factors, normally the information will take effect in about 15 minutes at most as TiDB will periodically update the cache information.
+Information related to users and privileges is stored in the TiKV server, and TiDB caches this information inside the process. Generally, modification of the related information through CREATE USER, GRANT and other statements takes effect quickly within the entire cluster. If the operation is affected by some factors such as network temporary unavailable, it will take effect in about 15 minutes as TiDB will periodically reload the cache information.
 
 If you modified the privilege tables directly, run the following command to apply changes immediately:
 
