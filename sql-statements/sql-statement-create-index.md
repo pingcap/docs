@@ -115,7 +115,7 @@ Query OK, 0 rows affected (0.31 sec)
 >
 > Expression index is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
-If you need to use this feature, set the following settings in [TiDB Configuration File](/tidb-configuration-file.md#allow-expression-index-introduced-since-v4.0.0-version):
+If you need to use this feature, set the following settings in [TiDB Configuration File](/tidb-configuration-file.md#allow-expression-index-New in v4.0.0):
 
 {{< copyable "sql" >}}
 
