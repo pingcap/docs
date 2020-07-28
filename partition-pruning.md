@@ -47,9 +47,9 @@ The usage scenarios of partition pruning are different for the two types of part
 
 This section describes the applicable and inapplicable usage scenarios of partition pruning in Hash partitioned tables.
 
-#### Applicable scenarios in Hash partitioned tables
+#### Applicable scenario in Hash partitioned tables
 
-Only the query condition of equal comparison supports partition pruning in Hash partitioned tables.
+Partition pruning applies only to the query condition of equality comparison in Hash partitioned tables.
 
 {{< copyable "sql" >}}
 
@@ -109,7 +109,7 @@ In this case, partition pruning is inapplicable because the corresponding Hash p
 
 ##### Scenario two
 
-Since the optimization rule of partition pruning is done during the query plan phase, it does not apply for those cases that filter conditions are unknown until the execution phase.
+Because the rule optimization of partition pruning is performed during the generation phase of the query plan, partition pruning is not suitable for scenarios where the filter conditions can be obtained only during the execution phase. For example:
 
 {{< copyable "sql" >}}
 
@@ -139,15 +139,19 @@ explain select * from t2 where x = (select * from t1 where t2.x = t1.x and t2.x 
 +--------------------------------------+----------+-----------+------------------------+----------------------------------------------+
 ```
 
-Each time this query reads a row from `t2`, it will go to the partitioned table `t1` for query. Theoretically, the filter condition of `t1.x = val` will be met at this time, but in fact, the partition pruning only affects the query plan in the generation phase, not the execution phase, so the pruning will not take effect.
+Each time this query reads a row from `t2`, it will query on the `t1` partitioned table. Theoretically, the filter condition of `t1.x = val` is met at this time, but in fact, partition pruning takes effect only in the generation phase of the query plan, not the execution phase.
 
 ### Use partition pruning in Range partitioned tables
 
-#### Scenarios for partition pruning in Range partitioned tables
+This section describes the applicable and inapplicable usage scenarios of partition pruning in Range partitioned tables.
 
-##### Scenario one 
+#### Applicable scenarios in Range partitioned tables
 
-Partition pruning supports the query condition of equal comparison. 
+This section describes three applicable usage scenarios of partition pruning in Range partitioned tables.
+
+##### Scenario one
+
+Partition pruning applies to the query condition of equality comparison in Range partitioned tables. For example:
 
 {{< copyable "sql" >}}
 
@@ -170,7 +174,7 @@ explain select * from t where x = 3;
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-In this case, partition pruning supports the query condition `in` of equal comparison.
+Partition pruning also applies to the equality comparison that uses the `in` query condition. For example:
 
 {{< copyable "sql" >}}
 
@@ -197,11 +201,11 @@ explain select * from t where x in(1,13);
 +-----------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-In this SQL statement, it can be known from the condition `x in(1,13)` that all results fall in a few partitions. After analysis, it is found that all records of `x = 1` are in partition `p0`, and all records of `x = 13` are in partition `p2`, so only `p0` and `p2` partitions need to be accessed.
+In the SQL statement above, it can be known from the `x in(1,13)` condition that all results fall in a few partitions. After analysis, it is found that all records of `x = 1` are in the `p0` partition, and all records of `x = 13` are in the `p2` partition, so only `p0` and `p2` partitions need to be accessed.
 
 ##### Scenario two
 
-Partition pruning supports the query condition of interval comparison，such as `between`, `> < = >= <=`.
+Partition pruning applies to the query condition of interval comparison，such as `between`, `>`, `<`, `=`, `>=`, `<=`. For example:
 
 {{< copyable "sql" >}}
 
@@ -230,16 +234,16 @@ explain select * from t where x between 7 and 14;
 
 ##### Scenario three
 
-For Range partition, for partition pruning to take effect, the partition expression must be in the simple form of `fn(col)` and the `fn` function must be monotonous. In addition, the query condition must be one of `>, <, =, >=`, and `<=`. 
+Partition pruning applies to the scenario where the partition expression is in the simple form of `fn(col)`, the query condition is one of `>`, `<`, `=`, `>=`, and `<=`, and the `fn` function is monotonous.
 
-If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any `x` and `y`, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". Theoretically, all monotonous functions, strictly or not, are supported by partition pruning. In fact, partition pruning in TiDB only support those monotonous functions:
+If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any `x` and `y`, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". Theoretically, all monotonous functions, strictly or not, are supported by partition pruning. Currently, TiDB only supports the following monotonous functions:
 
-```sql
+```
 unix_timestamp
 to_days
 ```
 
-For example, partition pruning takes effect when the partition expression is in the form of `fn(col)` where the `fn` is monotonous function  `to_days`:
+For example, partition pruning takes effect when the partition expression is in the form of `fn(col)`, where the `fn` is monotonous function `to_days`:
 
 {{< copyable "sql" >}}
 
@@ -260,9 +264,9 @@ explain select * from t where id > '2020-04-18';
 +-------------------------+----------+-----------+-----------------------+-------------------------------------------+
 ```
 
-#### Scenarios that cannot use partition pruning in Range partitioned tables
+#### Inapplicable scenario in Range partitioned tables
 
-Since the rule optimization of partition pruning is done during the query plan phase, it does not apply for those cases that filter conditions are unknown until the execution phase.
+Because the rule optimization of partition pruning is performed during the generation phase of the query plan, partition pruning is not suitable for scenarios where the filter conditions can be obtained only during the execution phase. For example: 
 
 {{< copyable "sql" >}}
 
@@ -296,4 +300,4 @@ explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x 
 14 rows in set (0.00 sec)
 ```
 
-Each time this query reads a row from `t2`, it will go to the partitioned table `t1` for query. Theoretically, the filter condition of `t1.x> val` will be met at this time, but in fact, the partition pruning only affects the query plan in the generation phase, not the execution phase, so the pruning will not take effect.
+Each time this query reads a row from `t2`, it will query on the `t1` partitioned table. Theoretically, the `t1.x> val` filter condition is met at this time, but in fact, partition pruning takes effect only in the generation phase of the query plan, not the execution phase.
