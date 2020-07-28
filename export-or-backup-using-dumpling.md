@@ -10,7 +10,7 @@ This document introduces how to use the [Dumpling](https://github.com/pingcap/du
 
 For backups of SST files (KV pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
 
-For detailed usage of Dumpling, use the `--help` command to view it.
+For detailed usage of Dumpling, use the `--help` command or refer to [Dumpling User Guide](https://github.com/pingcap/dumpling/blob/master/docs/en/user-guide.md).
 
 When using Dumpling, you need to execute the export command on a running cluster. This document assumes that there is a TiDB instance on the `127.0.0.1:4000` host and that this TiDB instance has a root user without a password.
 
@@ -102,7 +102,7 @@ The above command exports all the tables in the `employees` database and the `Wo
 
 #### Use the `-B` or `-T` command to filter data
 
-Dumpling can also export specific databases or tables with the `-B` or `-T` command.
+Dumpling can also export specific databases with the `-B` command or specific tables with the `-T` command.
 
 > **Note:**
 > 
