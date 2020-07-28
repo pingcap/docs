@@ -121,7 +121,7 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 #### How do I modify the `sql_mode` in TiDB?
 
-TiDB supports modifying the `sql_mode` as a [system variable](/system-variables.md#sql_mode), as in MySQL. Currently, TiDB does not permit modifying the sql mode in a configuration file, but system variable changes made with [`SET GLOBAL`](/sql-statements/sql-statement-set-variable.md) propagate to all TiDB servers in the cluster and persist across restarts.
+TiDB supports modifying the `sql_mode` as a [system variable](/system-variables.md), as in MySQL. Currently, TiDB does not permit modifying the sql mode in a configuration file, but system variable changes made with [`SET GLOBAL`](/sql-statements/sql-statement-set-variable.md) propagate to all TiDB servers in the cluster and persist across restarts.
 
 #### Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
 
