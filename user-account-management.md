@@ -51,11 +51,11 @@ After you assign the password, TiDB encrypts and stores the `auth_string` in the
 CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'xxx';
 ```
 
-The name of TiDB user account consists of a user name and a host name. The syntax of the account name is 'user_name'@'host_name'.
+The name of a TiDB account consists of a user name and a hostname. The syntax of the account name is 'user_name'@'host_name'.
 
 - `user_name` is case sensitive.
 
-- `host_name` is a host name or IP address, which allows to use the wild card % or _. For example, the hostname '%' matches all hosts, and the hostname '192.168.1.%' matches all hosts in the subnet.
+- `host_name` is a hostname or IP address, which supports the wild card `%` or ` _`. For example, the hostname `'%'` matches all hosts, and the hostname `'192.168.1.%'` matches all hosts in the subnet.
 
 The host supports fuzzy matching:
 
@@ -67,7 +67,7 @@ CREATE USER 'test'@'192.168.10.%';
 
 The `test` user is allowed to log in from any hosts on the `192.168.10` subnet.
 
-If the host is not specified, the user is allowed to log in from any IP. If no password is specified, the default is null:
+If the host is not specified, the user is allowed to log in from any IP. If no password is specified, the default is empty password:
 
 {{< copyable "sql" >}}
 
@@ -83,9 +83,9 @@ Equivalent to:
 CREATE USER 'test'@'%' IDENTIFIED BY '';
 ```
 
-If the user specified does not exist, the behavior of automatically creating users depends on `sql_mode`. If the `sql_mode` includes `NO_AUTO_CREATE_USER`, `GRANT` statement will not return an error and create users.
+If the specified user does not exist, the behavior of automatically creating users depends on `sql_mode`. If the `sql_mode` includes `NO_AUTO_CREATE_USER`, the `GRANT` statement will not create users with an error returned.
 
-If the `sql_mode` does not include `NO_AUTO_CREATE_USER`, the following example uses the `CREATE USER` and `GRANT` statements to set up four accounts:
+For example, assume that the `sql_mode` does not include `NO_AUTO_CREATE_USER`, and you use the following `CREATE USER` and `GRANT` statements to create four accounts:
 
 {{< copyable "sql" >}}
 
@@ -129,7 +129,7 @@ GRANT RELOAD,PROCESS ON *.* TO 'admin'@'localhost';
 CREATE USER 'dummy'@'localhost';
 ```
 
-To see the privileges for an account, use the `SHOW GRANTS` statement:
+To see the privileges granted for an account, use the `SHOW GRANTS` statement:
 
 {{< copyable "sql" >}}
 
@@ -152,10 +152,10 @@ To remove a user account, use the `DROP USER` statement:
 {{< copyable "sql" >}}
 
 ```sql
-mysql> DROP USER 'test'@'localhost';
+DROP USER 'test'@'localhost';
 ```
 
-This operation will clear user's records in the `mysql.user` table and the related records in the privilege table.
+This operation clears the user's records in the `mysql.user` table and the related records in the privilege table.
 
 ## Reserved user accounts
 
@@ -202,11 +202,11 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
     mysql -h 127.0.0.1 -P 4000 -u root
     ```
 
-When the `skip-grant-table` is set, starting the TiDB process will check the user to be an administrator of the operating system, and only the `root` user of the operating system can start the TiDB process.
+When the `skip-grant-table` is set, starting the TiDB process will check whether the user is an administrator of the operating system, and only the `root` user of the operating system can start the TiDB process.
 
 ## `FLUSH PRIVILEGES`
 
-Information related to users and privileges is stored in the TiKV server, and TiDB caches this information inside the process. Generally, modification of the related information through CREATE USER, GRANT and other statements takes effect quickly within the entire cluster. If the operation is affected by some factors such as network temporary unavailable, it will take effect in about 15 minutes as TiDB will periodically reload the cache information.
+Information related to users and privileges is stored in the TiKV server, and TiDB caches this information inside the process. Generally, modification of the related information through `CREATE USER`, `GRANT`, and other statements takes effect quickly within the entire cluster. If the operation is affected by some factors such as temporarily unavailable network, the modification will take effect in about 15 minutes because TiDB will periodically reload the cache information.
 
 If you modified the privilege tables directly, run the following command to apply changes immediately:
 
