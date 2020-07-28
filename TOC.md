@@ -28,7 +28,7 @@
     + Linux OS
       + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
       + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
-      + [In Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
       + [Use TiDB Ansible](/online-deployment-using-ansible.md)
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
