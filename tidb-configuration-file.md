@@ -55,7 +55,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 > This feature is still an experimental feature, which counts the memory during the writing process. For users who want to use this feature to cancel the write operation, it is not recommended to configure it as `cancel` in the production environment.
 
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
-- Default value: `"log"`
+- Default value: `"cancel"` (In TiDB v4.0.2 and earlier versions, the default value is `"log"`)
 - The valid options are `"log"` and `"cancel"`. When `oom-action="log"`, it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
 
 ### `enable-streaming`
@@ -566,3 +566,8 @@ The `experimental` section describes configurations related to the experimental 
 - Determines whether to allow using `AUTO_RANDOM`.
 - Default value: `false`
 - By default, TiDB does not support using `AUTO_RANDOM`. When the value is `true`, you cannot set `alter-primary-key` to `true` at the same time.
+
+### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
+
+- Determines whether to create the expression index.
+- Default value: `false`
