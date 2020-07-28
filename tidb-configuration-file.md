@@ -569,5 +569,5 @@ The `experimental` section describes configurations related to the experimental 
 
 ### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
 
-- Determines whether to allow creating `EXPRESSION INDEX`.
+- Determines whether to create the expression index.
 - Default value: `false`
