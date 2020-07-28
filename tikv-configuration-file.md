@@ -1171,7 +1171,7 @@ Configuration items related to BR backup
 ### `num-threads`
 
 + The number of worker threads to process backup
-+ Default value: CPU * 0.75, but the maximum is 32.
++ Default value: `CPU * 0.75`, but the maximum is `32`.
 + Minimum value: `1` 
 
 ## pessimistic-txn
