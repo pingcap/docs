@@ -13,7 +13,7 @@ Transactions in TiDB use two-phase commit (2PC) that includes the Prewrite phase
 
 ![two-phase commit in the optimistic transaction mode](/media/troubleshooting-lock-pic-01.png)
  
-For details of Percolator and TiDB’s algorithm of the transactions, see [Google's Percolator](https://ai.google/research/pubs/pub36726).
+For details of Percolator and TiDB's algorithm of the transactions, see [Google's Percolator](https://ai.google/research/pubs/pub36726).
 
 ### Prewrite phase (optimistic)
  
@@ -25,7 +25,7 @@ As the TiDB server receives a read request from a client, it gets a globally uni
 
 ![read-write conflict](/media/troubleshooting-lock-pic-04.png)
 
-Txn0 completes the Prewrite phase and enters the Commit phase. At this time, Txn1 requests to read the same target key. Txn1 needs to read the target key of the latest commit_ts that is smaller than its start_ts. Because Txn1’s start_ts is smaller than Txn0's lock_ts, Txn1 must wait for the target key's lock to be cleaned, but it hasn’t been done. As a result, Txn1 cannot confirm whether Txn0 has been committed or not. Thus, a read-write conflict between Txn1 and Txn0 happens.
+Txn0 completes the Prewrite phase and enters the Commit phase. At this time, Txn1 requests to read the same target key. Txn1 needs to read the target key of the latest commit_ts that is smaller than its start_ts. Because Txn1’s start_ts is smaller than Txn0's lock_ts, Txn1 must wait for the target key's lock to be cleared, but it hasn’t been done. As a result, Txn1 cannot confirm whether Txn0 has been committed or not. Thus, a read-write conflict between Txn1 and Txn0 happens.
 
 You can detect the read-write conflict in your TiDB cluster by the following ways:
 
