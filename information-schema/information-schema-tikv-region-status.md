@@ -47,12 +47,12 @@ The descriptions of the columns in the `TIKV_REGION_STATUS` table are as follows
 * `TABLE_ID`: The ID of the table to which the Region belongs.
 * `DB_NAME`: The name of the database to which `TABLE_ID` belongs.
 * `TABLE_NAME`: The name of the table to which the Region belongs.
-* `IS_INDEX`: Whether the Region data is an index. 0 means that it's not an index, while 1 means that it's an index. If the current Region contains both table data and index data, there will be multiple rows of records, and `IS_INDEX` is 0 and 1 respectively.
+* `IS_INDEX`: Whether the Region data is an index. 0 means that it is not an index, while 1 means that it is an index. If the current Region contains both table data and index data, there will be multiple rows of records, and `IS_INDEX` is 0 and 1 respectively.
 * `INDEX_ID`: The ID of the index to which the Region belongs. If `IS_INDEX` is 0, the value of this column is NULL.
 * `INDEX_NAME`: The name of the index to which the Region belongs. If `IS_INDEX` is 0, the value of this column is NULL.
 * `EPOCH_CONF_VER`: The version number of the Region configuration. The version number increases when a peer is added or removed.
 * `EPOCH_VERSION`: The current version number of the Region. The version number increases when the Region is split or merged.
-* `WRITTEN_BYTES`: The amount of data written to the Region (bytes).
+* `WRITTEN_BYTES`: The amount of data (bytes) written to the Region.
 * `READ_BYTES`: The amount of data (bytes) that has been read from the Region.
 * `APPROXIMATE_SIZE`: The approximate data size (MB) of the Region.
 * `APPROXIMATE_KEYS`: The approximate number of keys in the Region.
