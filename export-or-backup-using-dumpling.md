@@ -59,9 +59,9 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
 
 > **Note:**
 >
-> 1. Currently, the `--sql` option can be used only for exporting to CSV files.
+> - Currently, the `--sql` option can be used only for exporting to CSV files.
 >
-> 2. Here you need to execute the `select * from <table-name> where id <100` statement on all tables to be exported. If some tables do not have specified fields, the export fails.
+> - Here you need to execute the `select * from <table-name> where id <100` statement on all tables to be exported. If some tables do not have specified fields, the export fails.
 
 ### Filter the exported data
 
@@ -106,9 +106,9 @@ Dumpling can also export specific databases or tables with the `-B` or `-T` comm
 
 > **Note:**
 > 
-> 1. The `--filter` command and the `-T` command cannot be used at the same time.
+> - The `--filter` command and the `-T` command cannot be used at the same time.
 >
-> 2. The `-T` command can only accept a complete form of inputs like `database-name.table-name`, and inputs with only the table name are not accepted. Example: Dumpling cannot recognize `-T WorkOrder`.
+> - The `-T` command can only accept a complete form of inputs like `database-name.table-name`, and inputs with only the table name are not accepted. Example: Dumpling cannot recognize `-T WorkOrder`.
 
 Examples:
 
