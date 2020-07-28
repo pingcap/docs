@@ -10,9 +10,41 @@ This document introduces the character set and collation supported by TiDB.
 
 ## Concepts
 
-A character set is a set of symbols and encodings. 
+A character set is a set of symbols and encodings. The default character set in TiDB is utf8mb4, which matches the default in MySQL 8.0 and above. In TiDB `utf8` and `utf8mb4` behave identically, and `utf8` is not restricted to a maximum of 3 bytes as in MySQL. UTF-8 encoding [accounts for between 83% - 100% of webpages](https://en.wikipedia.org/wiki/UTF-8), depending on the language and country.
 
-A collation is a set of rules for comparing characters in a character set.
+A collation is a set of rules for comparing characters in a character set, and the sorting order of characters. For example in a binary collation `A` and `a` do not compare as equal:
+
+{{< copyable "sql" >}}
+
+```sql
+SET NAMES utf8mb4 COLLATE utf8mb4_bin;
+SELECT 'A' = 'a';
+SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
+SELECT 'A' = 'a';
+```
+
+```sql
+mysql> SELECT 'A' = 'a';
++-----------+
+| 'A' = 'a' |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT 'A' = 'a';
++-----------+
+| 'A' = 'a' |
++-----------+
+|         1 |
++-----------+
+1 row in set (0.00 sec)
+```
+
+TiDB defaults to using a binary collation. This differs from MySQL, which uses a case-insensitive collation by default.
 
 ## TiDB character set and collation
 
