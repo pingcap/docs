@@ -84,7 +84,7 @@ The above command exports the data that matches `id < 100` from each table.
 
 #### Use the `--filter` command to filter data
 
-Dumpling can filter a specific library table by specifying table-filter with `--filter`. The syntax of table-filter is similar to that of .gitignore, [Detailed syntax reference](/table-filter.md).
+Dumpling can filter specific databases or tables by specifying the table filter with the `--filter` command. The syntax of table filters is similar to that of .gitignore. For details, see [Table Filter](/table-filter.md).
 
 {{< copyable "shell-regular" >}}
 
@@ -100,22 +100,22 @@ Dumpling can filter a specific library table by specifying table-filter with `--
 
 The above command exports all the tables in the `employees` database and the `WorkOrder` tables in all databases.
 
-#### Use `-B` or `-T` command to filter data
+#### Use the `-B` or `-T` command to filter data
 
-Dumpling can also export a specific database/data table with the `-B` or `-T` parameter.
+Dumpling can also export specific databases or tables with the `-B` or `-T` command.
 
 > **Note:**
 > 
-> 1. The `--filter` parameter and the `-T` parameter cannot be used at the same time.
+> 1. The `--filter` command and the `-T` command cannot be used at the same time.
 >
-> 2. The `-T` parameter can only accept the complete `library name.table name` format, and only the table name is not supported. Example: Dumpling cannot recognize `-T WorkOrder`.
+> 2. The `-T` command can only accept a complete form of inputs like `database-name.table-name`, and inputs with only the table name are not accepted. Example: Dumpling cannot recognize `-T WorkOrder`.
 
-For example, by specifying:
+Examples:
 
 -`-B employees` exports the `employees` database
--`-T employees.WorkOrder` exports the `employees.WorkOrder` data table
+-`-T employees.WorkOrder` exports the `employees.WorkOrder` table
 
-### Improve Dumpling export efficiency through concurrency
+### Improve export efficiency through concurrency
 
 The exported file is stored in the `./export-<current local time>` directory by default. Commonly used parameters are as follows:
 
