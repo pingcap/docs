@@ -52,12 +52,12 @@ The descriptions of the columns in the `TIKV_STORE_STATUS` table are as follows:
 * `CAPACITY`: The storage capacity of the Store.
 * `AVAILABLE`: The remaining storage space of the Store.
 * `LEADER_COUNT`: The number of leaders on the Store.
-* `LEADER_WEIGHT`: The leader weights of the Store.
-* `LEADER_SCORE`: The leader scores of the Store.
+* `LEADER_WEIGHT`: The leader weight of the Store.
+* `LEADER_SCORE`: The leader score of the Store.
 * `LEADER_SIZE`: The approximate total data size (MB) of all leaders on the Store.
 * `REGION_COUNT`: The number of Regions on the Store.
-* `REGION_WEIGHT`: The Region weights of the Store.
-* `REGION_SCORE`: The Region scores of the Store.
+* `REGION_WEIGHT`: The Region weight of the Store.
+* `REGION_SCORE`: The Region score of the Store.
 * `REGION_SIZE`: The approximate total data size (MB) of all Regions on the Store.
 * `START_TS`: The timestamp when the Store is started.
 * `LAST_HEARTBEAT_TS`: The timestamp of the last heartbeat sent by the Store.
