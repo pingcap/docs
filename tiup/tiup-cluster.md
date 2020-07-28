@@ -602,6 +602,6 @@ The CPU thread count check, memory size check, and disk performance check are di
 - Memory: If the total size of physical memory is greater than or equal to 32 GB, the check is passed.
 - Disk: Execute `fio` test on the partitions of `data_dir` and record the results.
 
-When running the checks, if the `--apply` flag is specified, the program automatically tries to repair the failed items. Automatic repair is limited to some items that can be adjusted by modifying the configuration or system parameters. Other unrepaired items need to be handled manually according to the actual situation.
+When running the checks, if the `--apply` flag is specified, the program automatically repairs the failed items. Automatic repair is limited to some items that can be adjusted by modifying the configuration or system parameters. Other unrepaired items need to be handled manually according to the actual situation.
 
 Environment checks is not a necessary process for deploying a cluster. For the production environment, it is recommended to perform environment checks and pass all check items before deployment. If not all the check items are passed, the cluster might be deployed and run normally, but the best performance might not be obtained.
