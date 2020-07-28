@@ -221,14 +221,6 @@ You can configure this parameter in either of the following ways:
 
 TiFlash mainly supports predicate and aggregate push-down calculations. Push-down calculations can help TiDB perform distributed acceleration. Currently, table joins and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in later versions.
 
-<<<<<<< HEAD
-Currently, TiFlash supports pushing down a limited number of expressions. To learn the supported expressions, refer to [expression list](https://github.com/pingcap/tidb/blob/v4.0.0-rc/expression/expression.go#L979).
-
-TiFlash does not support push-down calculations in the following situations:
-
-- Expressions that contain `Duration` and `JSON` cannot be pushed down.
-- If an aggregate function or a `WHERE` clause contains expressions that are not in [this list](https://github.com/pingcap/tidb/blob/v4.0.0-rc/expression/expression.go#L979), the aggregate or related predicate filtering cannot be pushed down.
-=======
 Currently, TiFlash supports pushing down a limited number of expressions, including:
 
 ```
@@ -242,6 +234,5 @@ TiFlash does not support push-down calculations in the following situations:
 
 - Expressions that contain `Duration` cannot be pushed down.
 - If an aggregate function or a `WHERE` clause contains expressions that are not included in the list above, the aggregate or related predicate filtering cannot be pushed down.
->>>>>>> 517e0aa... Update use-tiflash.md (#3434)
 
 If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect.
