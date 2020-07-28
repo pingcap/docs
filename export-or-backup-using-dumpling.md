@@ -84,7 +84,7 @@ The above command exports the data that matches `id < 100` from each table.
 
 #### Use the `--filter` command to filter data
 
-Dumpling can filter specific databases or tables by specifying the table filter with the `--filter` command. The syntax of table filters is similar to that of .gitignore. For details, see [Table Filter](/table-filter.md).
+Dumpling can filter specific databases or tables by specifying the table filter with the `--filter` command. The syntax of table filters is similar to that of `.gitignore`. For details, see [Table Filter](/table-filter.md).
 
 {{< copyable "shell-regular" >}}
 
