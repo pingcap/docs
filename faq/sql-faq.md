@@ -31,7 +31,7 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 ## How do I modify the `sql_mode` in TiDB?
 
-TiDB supports modifying the [`sql_mode`](/sql-mode.md) as a [system variable](/system-variables.md#sql_mode), as in MySQL. Currently, TiDB does not permit modifying the sql mode in a configuration file, but system variable changes made with [`SET GLOBAL`](/sql-statements/sql-statement-set-variable.md) propagate to all TiDB servers in the cluster and persist across restarts.
+TiDB supports modifying the [`sql_mode`](/sql-mode.md) as a [system variable](/system-variables.md#sql_mode), as in MySQL. Currently, TiDB does not permit modifying the `sql mode` in a configuration file, but system variable changes made with [`SET GLOBAL`](/sql-statements/sql-statement-set-variable.md) propagate to all TiDB servers in the cluster and persist across restarts.
 
 ## Error: `java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation` while using Sqoop to write data into TiDB in batches
 
@@ -121,7 +121,7 @@ When the modified number or the current total row number is larger than `tidb_au
 
 ## Can I use hints to override the optimizer behavior?
 
-TiDB supports multiple ways to override the default query optimizer behavior, including [hints](//optimizer-hints.md) and [SQL Plan Management](/sql-plan-management.md). The basic usage is similar to MySQL, with several TiDB specific extensions:
+TiDB supports multiple ways to override the default query optimizer behavior, including [hints](/optimizer-hints.md) and [SQL Plan Management](/sql-plan-management.md). The basic usage is similar to MySQL, with several TiDB specific extensions:
 
 {{< copyable "sql" >}}
 
@@ -178,7 +178,7 @@ Recommendations:
 2. Improve the concurrency. The default value is 10. You can improve it to 50 and have a try. But usually the improvement is 2-4 times of the default value.
 3. Test the `count` in the case of large amount of data.
 4. Optimize the TiKV configuration. See [Tune TiKV Thread Performance](/tune-tikv-thread-performance.md) and [Tune TiKV Memory Performance](/tune-tikv-memory-performance.md).
-5. Enable the [coprocessor cache](/coprocessor-cache.md).
+5. Enable the [Coprocessor Cache](/coprocessor-cache.md).
 
 ### How to view the progress of the current DDL job?
 
