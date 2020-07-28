@@ -55,7 +55,7 @@ The name of a TiDB account consists of a user name and a hostname. The syntax of
 
 - `user_name` is case sensitive.
 
-- `host_name` is a hostname or IP address, which supports the wild card `%` or ` _`. For example, the hostname `'%'` matches all hosts, and the hostname `'192.168.1.%'` matches all hosts in the subnet.
+- `host_name` is a hostname or IP address, which supports the wild card `%` or `_`. For example, the hostname `'%'` matches all hosts, and the hostname `'192.168.1.%'` matches all hosts in the subnet.
 
 The host supports fuzzy matching:
 
