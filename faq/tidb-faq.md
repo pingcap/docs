@@ -76,9 +76,11 @@ Currently, [TiDB documentation](https://pingcap.com/docs/) is the most important
 
 See [The System Variables](/system-variables.md).
 
-#### Does TiDB support `select for update`?
+#### Does TiDB support `SELECT FOR UPDATE`?
 
-Yes. But it differs from MySQL in syntax. As a distributed database, TiDB uses the optimistic lock. `select for update` does not lock data when the transaction is started, but checks conflicts when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
+Yes. By default TIDB 2.1 uses optimistic locking, and `SELECT FOR UPDATE` does not lock data when the transaction is started. A check for conflicts occurs when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
+
+The default changes to pessimistic locking in TiDB 3.0, where `SELECT FOR UPDATE` execution behaves similar to MySQL.
 
 #### Can the codec of TiDB guarantee that the UTF-8 string is memcomparable? Is there any coding suggestion if our key needs to support UTF-8?
 
@@ -582,9 +584,9 @@ Trigger strategy: `auto analyze` is automatically triggered when the number of p
 
 When the modified number or the current total row number is larger than `tidb_auto_analyze_ratio`, the `analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is 0.5, indicating that this feature is enabled by default. To ensure safety, its minimum value is 0.3 when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is 0.8, otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to 0.5.
 
-#### How to use a specific index with hint in a SQL statement?
+#### Can I use hints to override the optimizer behavior?
 
-Its usage is similar to MySQL:
+TiDB supports multiple [hints](/optimizer-hints.md) to override the default query optimizer behavior. The basic usage is similar to MySQL, with several TiDB specific extensions:
 
 {{< copyable "sql" >}}
 
