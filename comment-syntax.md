@@ -127,7 +127,7 @@ In TiDB, you can also use another version:
 SELECT STRAIGHT_JOIN col1 FROM table1,table2 WHERE ...
 ```
 
-If the server version number is specified in the comment, for example, `/*!50110 KEY_BLOCK_SIZE=1024 */`, in MySQL it means that the contents in this comment are processed only when the MySQL version is or higher than 5.1.10. But in TiDB, the MySQL version number does not work and all contents in the comment are processed. **Note that leave no space between the `/*T![` characters**.
+If the server version number is specified in the comment, for example, `/*!50110 KEY_BLOCK_SIZE=1024 */`, in MySQL it means that the contents in this comment are processed only when the MySQL version is or higher than 5.1.10. But in TiDB, the MySQL version number does not work and all contents in the comment are processed. **Do not leave any space inside the `/*T![` characters**.
 
 ## TiDB specific comment syntax
 
