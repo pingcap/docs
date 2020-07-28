@@ -28,7 +28,7 @@ Common DDL features are creating, modifying, and deleting objects (such as table
 
 ## Show, create and drop a database
 
-Database in TiDB can be considered as a collection of objects such as tables and indexes.
+A database in TiDB can be considered as a collection of objects such as tables and indexes.
 
 To show the list of databases, use the `SHOW DATABASES` statement:
 
