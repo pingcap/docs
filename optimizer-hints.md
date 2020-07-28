@@ -79,17 +79,13 @@ If the query statement is a complicated statement that includes multiple nested 
 SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
-<<<<<<< HEAD
-### SM_JOIN(t1_name [, tl_name ...])
-=======
 This hint specifies the outer `SELECT` query block's name to `QB1`, which makes `QB1` and the default name `sel_1` both valid for the query block.
 
 > **Note:**
 >
 > In the above example, if the hint specifies the `QB_NAME` to `sel_2` and does not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
 
-### MERGE_JOIN(t1_name [, tl_name ...])
->>>>>>> 2df09cf... sql: elaborate more on optimizer hints (#2573)
+### SM_JOIN(t1_name [, tl_name ...])
 
 The `SM_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
 
@@ -101,11 +97,7 @@ select /*+ SM_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 
 > **Note:**
 >
-<<<<<<< HEAD
-> `TIDB_SMJ` is the alias for `SM_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `SM_JOIN` are both valid names for the hint.
-=======
-> `TIDB_SMJ` is the alias for `MERGE_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `MERGE_JOIN` are both valid names for the hint, but `MERGE_JOIN` is recommended.
->>>>>>> 2df09cf... sql: elaborate more on optimizer hints (#2573)
+> `TIDB_SMJ` is the alias for `SM_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `SM_JOIN` are both valid names for the hint, but `SM_JOIN` is recommended.
 
 ### INL_JOIN(t1_name [, tl_name ...])
 
@@ -123,17 +115,6 @@ The parameter(s) given in `INL_JOIN()` is the candidate table for the inner tabl
 >
 > `TIDB_INLJ` is the alias for `INL_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_INLJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_INLJ` and `INL_JOIN` are both valid names for the hint, but `INL_JOIN` is recommended.
 
-<<<<<<< HEAD
-=======
-### INL_HASH_JOIN
-
-The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm. The difference between the two algorithms is that `INL_JOIN` creates a hash table on the joined inner table, but `INL_HASH_JOIN` creates a hash table on the joined outer table. `INL_HASH_JOIN` has a fixed limit on memory usage, while the memory used by `INL_JOIN` depends on the number of rows matched in the inner table.
-
-### INL_MERGE_JOIN
-
-The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. This hint is used in the same scenario as in that of `INL_JOIN`. Compared with `INL_JOIN` and `INL_HASH_JOIN`, it saves more memory but requires more strict usage conditions: the column sets of the inner table in join keys is the prefix of the inner table index, or the index of the inner table is the prefix of the column sets of the inner table in join keys.
-
->>>>>>> 2df09cf... sql: elaborate more on optimizer hints (#2573)
 ### HASH_JOIN(t1_name [, tl_name ...])
 
 The `HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm for the given table(s). This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory. For example:
@@ -212,56 +193,6 @@ The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name
 select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 where t1.a = t2.a;
 ```
 
-<<<<<<< HEAD
-=======
-### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])
-
-The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. The given list of indexes are optional parameters. If you explicitly specify the list, TiDB selects indexes from the list to build index merge; if you do not give the list of indexes, TiDB selects indexes from all available indexes to build index merge. For example:
-
-{{< copyable "sql" >}}
-
-```sql
-SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10 OR t1.b > 10;
-```
-
-When multiple `USE_INDEX_MERGE` hints are made to the same table, the optimizer tries to select the index from the union of the index sets specified by these hints.
-
-> **Note:**
->
-> The parameters of `USE_INDEX_MERGE` refer to index names, rather than column names. The index name of the primary key is `primary`.
-
-This hint takes effect on strict conditions, including:
-
-- If the query can select a single index scan in addition to full table scan, the optimizer does not select index merge.
-- If the query is in an explicit transaction, and if the statements before this query has already written data, the optimizer does not select index merge.
-
-## Hints that take effect in the whole query
-
-This category of hints can only follow behind the **first** `SELECT`, `UPDATE` or `DELETE` keyword, which is equivalent to modifying the value of the specified system variable when this query is executed. The priority of the hint is higher than that of existing system variables.
-
-> **Note:**
->
-> This category of hints also has an optional hidden variable `@QB_NAME`, but the hint takes effect in the whole query even if you specify the variable.
-
-### NO_INDEX_MERGE()
-
-The `NO_INDEX_MERGE()` hint disables the index merge feature of the optimizer.
-
-For example, the following query will not use index merge:
-
-{{< copyable "sql" >}}
-
-```sql
-select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
-```
-
-In addition to this hint, setting the `tidb_enable_index_merge` system variable also controls whether to enable this feature.
-
-> **Note:**
->
-> `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect.
-
->>>>>>> 2df09cf... sql: elaborate more on optimizer hints (#2573)
 ### USE_TOJA(boolean_value)
 
 The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a sub-query) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
@@ -313,20 +244,3 @@ select /*+ READ_CONSISTENT_REPLICA() */ * from t;
 ```
 
 In addition to this hint, setting the `tidb_replica_read` environment variable to `'follower'` or `'leader'` also controls whether to enable this feature.
-<<<<<<< HEAD
-=======
-
-### IGNORE_PLAN_CACHE()
-
-`IGNORE_PLAN_CACHE()` reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
-
-This hint is used to temporarily disable the Plan Cache for a certain type of queries when [prepare-plan-cache](/tidb-configuration-file.md#prepared-plan-cache) is enabled.
-
-In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
-
-{{< copyable "sql" >}}
-
-```sql
-prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
-```
->>>>>>> 2df09cf... sql: elaborate more on optimizer hints (#2573)
