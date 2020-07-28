@@ -513,7 +513,7 @@ TiDB is not suitable for tables of small size (such as below ten million level),
 
 #### How to back up data in TiDB?
 
-Currently, the preferred method for backup is using the [BR](/br/backup-and-restore-tool.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is poorer than [BR](/br/backup-and-restore-tool.md) and it needs much more time to back up and restore large volumes of data.
+Currently, the preferred method for backup is using the [BR](/br/backup-and-restore-tool.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is worse than [BR](/br/backup-and-restore-tool.md) and it needs much more time to back up and restore large volumes of data.
 
 ## Monitoring
 
