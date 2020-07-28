@@ -1166,7 +1166,7 @@ TiDB Lightning import and configuration items related to BR recovery.
   
 ## backup
 
-Configuration items related to BR backup.
+Configuration items related to BR backup
 
 ### `num-threads`
 
