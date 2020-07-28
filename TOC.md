@@ -115,6 +115,7 @@
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
         + [Eliminate Max/Min](/max-min-eliminate.md)
         + [Predicates Push Down](/predicate-push-down.md)
+        + [Partition Pruning](/partition-pruning.md)
         + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
