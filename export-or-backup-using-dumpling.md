@@ -8,13 +8,8 @@ aliases: ['/docs/v3.0/export-or-backup-using-dumpling/']
 
 This document introduces how to use the [Dumpling](https://github.com/pingcap/dumpling) tool to export or backup data in TiDB. Dumpling exports data stored in TiDB as SQL or CSV data files and can be used to make a logical full backup or export.
 
-<<<<<<< HEAD
-=======
-For backups of SST files (KV pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
-
 For detailed usage of Dumpling, use the `--help` command or refer to [Dumpling User Guide](https://github.com/pingcap/dumpling/blob/master/docs/en/user-guide.md).
 
->>>>>>> 0531df1... Update export-or-backup-using-dumpling.md (#3454)
 When using Dumpling, you need to execute the export command on a running cluster. This document assumes that there is a TiDB instance on the `127.0.0.1:4000` host and that this TiDB instance has a root user without a password.
 
 ## Download Dumpling
@@ -97,7 +92,7 @@ Dumpling can filter specific databases or tables by specifying the table filter 
   -P 4000 \
   -h 127.0.0.1 \
   -o /tmp/test \
-  --filter "employees.*"
+  --filter "employees.*" \
   --filter "*.WorkOrder"
 ```
 
