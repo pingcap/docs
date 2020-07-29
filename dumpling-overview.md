@@ -23,7 +23,7 @@ For backups of SST files (key-value pairs) or backups of incremental data that a
 
 Dumpling is written in Go. The Github project is [pingcap/dumpling](https://github.com/pingcap/dumpling).
 
-For detailed usage of Dumpling, use the `--help` option or refer to [Parameter list of Dumpling](#parameter-list-of-dumpling).
+For detailed usage of Dumpling, use the `--help` option or refer to [Option list of Dumpling](#option-list-of-dumpling).
 
 When using Dumpling, you need to execute the export command on a running cluster. This document assumes that there is a TiDB instance on the `127.0.0.1:4000` host and that this TiDB instance has a root user without a password.
 
@@ -213,35 +213,45 @@ update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life
 
 Finally, all the exported data can be imported back to TiDB using [Lightning](/tidb-lightning/tidb-lightning-tidb-backend.md).
 
-## Parameter list of Dumpling
+## Option list of Dumpling
 
-| Parameters | Usage | Default value |
+| Options | Usage | Default value |
 | --------| --- | --- |
-| -B 或 --database | 导出指定数据库 |
-| -T 或 --tables-list | 导出指定数据表 |
-| -f 或 --filter | 导出能匹配模式的表，语法可参考 [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)（只有英文版） | "\*.\*" 不过滤任何库表 |
-| --case-sensitive | table-filter 是否大小写敏感 | false，大小写不敏感 |
-| -h 或 --host| 链接节点地址 | "127.0.0.1" |
-| -t 或 --threads | 备份并发线程数| 4 |
-| -r 或 --rows |将 table 划分成 row 行数据，一般针对大表操作并发生成多个文件。|
-| --loglevel | 日志级别 {debug,info,warn,error,dpanic,panic,fatal} | "info" |
-| -d 或 --no-data | 不导出数据, 适用于只导出 schema 场景 |
-| --no-header | 导出 table csv 数据，不生成 header |
-| -W 或 --no-views| 不导出 view | true |
-| -m 或 --no-schemas | 不导出 schema , 只导出数据 |
-| -s 或--statement-size | 控制 Insert Statement 的大小，单位 bytes |
-| -F 或 --filesize | 将 table 数据划分出来的文件大小, 需指明单位 (如 `128B`, `64KiB`, `32MiB`, `1.5GiB`) |
-| --filetype| 导出文件类型 csv/sql | "sql" |
-| -o 或 --output | 设置导出文件路径 | "./export-${time}" |
-| -S 或 --sql | 根据指定的 sql 导出数据，该指令不支持并发导出 |
-| --consistency | flush: dump 前用 FTWRL <br/> snapshot: 通过 tso 指定 dump 位置 <br/> lock: 对需要 dump 的所有表执行 lock tables read <br/> none: 不加锁 dump，无法保证一致性 <br/> auto: MySQL flush, TiDB snapshot | "auto" |
-| --snapshot | snapshot tso, 只在 consistency=snapshot 下生效 |
-| --where | 对备份的数据表通过 where 条件指定范围 |
-| -p 或 --password | 链接密码 |
-| -P 或 --port | 链接端口 | 4000 |
-| -u 或 --user | 用户名 | "root" |
-| --dump-empty-database | 导出空数据库的建库语句 | true |
-| --tidbMemQuotaQuery | 导出 TiDB 数据库时单条 query 最大使用的内存 | 34359738368(32GB) |
-| --ca | 用于 TLS 连接的 certificate authority 文件的地址 |
-| --cert | 用于 TLS 连接的 client certificate 文件的地址 |
-| --key | 用于 TLS 连接的 client private key 文件的地址 |
+| -V or --version | Output the Dumpling version and exit directly |
+| -B or --database | Export specified databases |
+| -T or --tables-list | Export specified tables |
+| -f or --filter | Export tables that match the filter pattern. For the filter syntax, see[table-filter](/table-filter.md). | `"\*.\*"` (export all databases or tables) |
+| --case-sensitive | whether table-filter is case-sensitive | false (case-insensitive) |
+| -h or --host| The address of the linked node | "127.0.0.1" |
+| -t or --threads | The number of concurrent backup threads | 4 |
+| -r or --rows | Divide the table into specified rows of data (generally applicable for concurrent operations of splitting a large table into multiple files. |
+| -L or --logfile | Log output address. If it is empty, the log will be output to the console | "" |
+| --loglevel | Log level {debug,info,warn,error,dpanic,panic,fatal} | "info" |
+| --logfmt | Log output format {text,json} | "text" |
+| -d or --no-data | Do not export data (suitable for scenarios where only the schema is exported) |
+| --no-header | Export CSV files of the tables without generating header |
+| -W or --no-views| Do not export the views | true |
+| -m or --no-schemas | Do not export the schema with only the data exported |
+| -s or--statement-size | Control the size of the `INSERT` statements; the unit is bytes |
+| -F or --filesize | The file size of the divided tables. The unit must be specified such as `128B`, `64KiB`, `32MiB`, and `1.5GiB`. |
+| --filetype| Exported file type (csv/sql) | "sql" |
+| -o or --output | Exported file path | "./export-${time}" |
+| -S or --sql | Export data according to the specified SQL statement. This command does not support concurrent export. |
+| --consistency | flush: use FTWRL before the dump <br/> snapshot: specify the dump files' location through TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which sacrifices consistency <br/> auto: MySQL flush, TiDB snapshot | "auto" |
+| --snapshot | snapshot TSO; valid only when `consistency=snapshot` |
+| --where | Specify the scope of the table backup through the `where` condition |
+| -p or --password | The password of the linked node |
+| -P or --port | The port of the linked node | 4000 |
+| -u or --user | The username of the linked node | "root" |
+| --dump-empty-database | Export the `CREATE DATABASE` statements of the empty databases | true |
+| --tidbMemQuotaQuery | Maximum memory used by a single query when exporting TiDB database | 34359738368(32GB) |
+| --ca | The address of the certificate authority file for TLS connection |
+| --cert | The address of the client certificate file for TLS connection |
+| --key | The address of the client private key file for TLS connection |
+| --csv-delimiter | Delimiter of character type variables in CSV files | '"' |
+| --csv-separator | Separator of each value in CSV files | ',' |
+| --csv-null-value | Representation of null values in CSV files | "\\N" |
+| --escape-backslash | Use backslash (`\`) to escape special characters in the export file | true |
+| --output-filename-template | The data file names in the [golang arguments](https://golang.org/pkg/text/template/#hdr-Arguments) format <br/> Support the `{{.DB}}`, `{{.Table}}`, and `{{.Index}}` arguments <br/> The three arguments represent the database name, table name, and block ID of the data file | '{{.DB}}.{{.Table}}.{{.Index}}' |
+| --status-addr | Dumpling's service address, including the address for Prometheus to pull metrics and pprof debugging | ":8281" |
+| --tidb-mem-quota-query | The memory limit of exporting SQL statements by a single Dumpling command, the unit is byte, and the default value is 32 GB | 34359738368 |
