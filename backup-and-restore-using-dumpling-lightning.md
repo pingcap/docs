@@ -38,7 +38,7 @@ Use the following `dumpling` command to backup data from TiDB.
 
 In this command:
 
-- `-T test.t1 -T test.t2` means that only the two tables `test`.`t1` and `test`.`t2` are exported. For more methods to filter exported data, refer to [Filter exported data](/dumpling-overview.md#filter-the0exported-data).
+- `-T test.t1 -T test.t2` means that only the two tables `test`.`t1` and `test`.`t2` are exported. For more methods to filter exported data, refer to [Filter exported data](/dumpling-overview.md#filter-the-exported-data).
 - `-t 32` means that 32 threads are used to export the data.
 - `-F 256m` means that a table is partitioned into chunks, and one chunk is 256MB.
 
