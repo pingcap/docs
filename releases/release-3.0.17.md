@@ -1,23 +1,22 @@
 ---
 title: TiDB v3.0.17 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v3.0.17/']
 ---
 
 # TiDB v3.0.17 Release Notes
 
-Release date: July 29, 2020
+Release date: Aug 03, 2020
 
-TiDB version: v3.0.17
+TiDB version: 3.0.17
 
 ## Bug Fixes
 
 + TiDB
 
-    - Return the actual error message when a query connection panics. [#18498](https://github.com/pingcap/tidb/pull/18498)
+    - Return the actual error message instead of empty set when a query which contains IndexHashJoin or IndexMergeJoin encounter a panic [#18498](https://github.com/pingcap/tidb/pull/18498)
     - Fix unknown column error for sql like `select a from t having t.a` [#18432](https://github.com/pingcap/tidb/pull/18432)
-    - Fix add a primary key when the table's  pk_is_handle is true [#18342](https://github.com/pingcap/tidb/pull/18342)
-    - Check plan type when executing `explain format="dot"`. [#17157](https://github.com/pingcap/tidb/pull/17157)
+    - Forbid adding primary key for a table when the table has no primary key or the table has an integer primary key already [#18342](https://github.com/pingcap/tidb/pull/18342)
+    - Return empty set when executing `explain format="dot" for connection` [#17157](https://github.com/pingcap/tidb/pull/17157)
+    - Fix STR_TO_DATE's handling for format token '%r', '%h' [#18725](https://github.com/pingcap/tidb/pull/18725)
 
 + TiKV
 
@@ -33,8 +32,9 @@ TiDB version: v3.0.17
 
     - Ease the impact of stats feedback on cluster [#18770](https://github.com/pingcap/tidb/pull/18770)
     - Limit batch split count for one request [#18694](https://github.com/pingcap/tidb/pull/18694)
-    - Fix the issue of request `/tiflash/replica` HTTP API was slow when there are many history DDL jobs in TiDB cluster. [#18386](https://github.com/pingcap/tidb/pull/18386)
+    - Accelerate `/tiflash/replica` HTTP API when there are many history DDL jobs in TiDB cluster [#18386](https://github.com/pingcap/tidb/pull/18386)
     - Improve row count estimation for index equal condition [#17609](https://github.com/pingcap/tidb/pull/17609)
+    - Speed up the executing of `kill tidb conn_id` [#18506](https://github.com/pingcap/tidb/pull/18506)
 
 + TiKV
 
