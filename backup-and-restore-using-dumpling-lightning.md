@@ -1,33 +1,33 @@
 ---
-title: 使用 Dumpling/TiDB Lightning 进行备份与恢复
+title: Use Dumpling and TiDB Lightning for Data Backup and Restoration
 aliases: ['/docs-cn/dev/export-or-backup-using-dumpling/','/zh/tidb/dev/export-or-backup-using-dumpling']
 ---
 
-# 使用 Dumpling/TiDB Lightning 进行备份与恢复
+# Use Dumpling and TiDB Lightning for Data Backup and Restoration
 
-本文档将详细介绍如何使用 Dumpling/TiDB Lightning 对 TiDB 进行全量备份与恢复。增量备份与恢复可使用 [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)。
+This document introduces in detail how to use Dumpling and TiDB Lightning to backup and restore full data of TiDB. For incremental backup and restoration, refer to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
-这里假定 TiDB 服务信息如下：
+Suppose that the TiDB server information is as follows:
 
-|Name|Address|Port|User|Password|
+|Server Name|Server Address|Port|User|Password|
 |----|-------|----|----|--------|
 |TiDB|127.0.0.1|4000|root|*|
 
-在这个备份恢复过程中，会用到下面的工具：
+Use the following tools for data backup and restoration:
 
-- [Dumpling](/dumpling-overview.md)：从 TiDB 导出数据
-- [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)：导入数据到 TiDB
+- [Dumpling](/dumpling-overview.md): to export data from TiDB
+- [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md): to import data into TiDB
 
-## Dumpling/TiDB Lightning 全量备份恢复最佳实践
+## Best practices for full backup and restoration using Dumpling/TiDB Lightning
 
-为了快速地备份恢复数据（特别是数据量巨大的库），可以参考以下建议：
+To quickly backup and restore data (especially large amounts of data), refer to the following recommendations:
 
-* 导出来的数据文件应当尽可能的小，可以通过设置参数 `-F` 来控制导出来的文件大小。如果后续使用 TiDB Lightning 对备份文件进行恢复，建议把 `dumpling` -F 参数的值设置为 `256m`。
-* 如果导出的表中有数据表的行数非常多，可以通过设置参数 `-r` 来开启表内并发。
+* Keep the exported data file as small as possible. It is recommended to use the `-F` option of Dumpling to set the file size. If you use TiDB Lightning to restore data, it is recommended that you set the value of `-F` to `256m`.
+* If some of the exported tables have many rows, you can enable concurrency in the table by setting the `-r` option.
 
-## 从 TiDB 备份数据
+## Backup data from TiDB
 
-使用 `dumpling` 从 TiDB 备份数据的命令如下:
+Use the following `dumpling` command to backup data from TiDB.
 
 {{< copyable "shell-regular" >}}
 
@@ -35,19 +35,21 @@ aliases: ['/docs-cn/dev/export-or-backup-using-dumpling/','/zh/tidb/dev/export-o
 ./bin/dumpling -h 127.0.0.1 -P 4000 -u root -t 32 -F 256m -T test.t1 -T test.t2 -o ./var/test
 ```
 
-上述命令中，用 `-T test.t1 -T test.t2` 表明只导出 `test`.`t1`，`test`.`t2` 两张表。更多导出数据筛选方式可以参考[筛选导出的数据](/dumpling-overview.md#筛选导出的数据)。
+In this command:
 
-`-t 32` 表明使用 32 个线程来导出数据。`-F 256m` 是将实际的表切分成一定大小的 chunk，这里的 chunk 大小为 256MB。
+- `-T test.t1 -T test.t2` means that only the two tables `test`.`t1` and `test`.`t2` are exported. For more methods to filter exported data, refer to [Filter exported data](/dumpling-overview.md#filter-the0exported-data).
+- `-t 32` means that 32 threads are used to export the data.
+- `-F 256m` means that a table is partitioned into chunks, and one chunk is 256MB.
 
-从 v4.0.0 版本开始，Dumpling 可以自动延长 GC 时间（Dumpling 需要访问 TiDB 集群的 PD 地址），而 v4.0.0 之前的版本，需要手动调整 GC 时间， 否则 `dumpling` 备份时可能出现以下报错：
+Starting from v4.0.0, Dumpling can automatically extends the GC time if it can access the PD address of the TiDB cluster. But for TiDB earlier than v4.0.0, you need to manually modify the GC time. Otherwise, you might bump into the following error:
 
-```
+```log
 Could not read data from testSchema.testTable: GC life time is shorter than transaction duration, transaction starts at 2019-08-05 21:10:01.451 +0800 CST, GC safe point is 2019-08-05 21:14:53.801 +0800 CST
 ```
 
-手动执行两步命令：
+The steps to manually modify the GC time are as follows:
 
-1. 执行 `dumpling` 命令前，查询 TiDB 集群的 [GC](/garbage-collection-overview.md) 值并使用 MySQL 客户端将其调整为合适的值：
+1. Before executing the `dumpling` command, query the [GC](/garbage-collection-overview.md) value of the TiDB cluster and execute the following statement in the MySQL client to adjust it to a suitable value:
 
     {{< copyable "sql" >}}
 
@@ -55,7 +57,7 @@ Could not read data from testSchema.testTable: GC life time is shorter than tran
     SELECT * FROM mysql.tidb WHERE VARIABLE_NAME = 'tikv_gc_life_time';
     ```
 
-    ```
+    ```sql
     +-----------------------+------------------------------------------------------------------------------------------------+
     | VARIABLE_NAME         | VARIABLE_VALUE                                                                                 |
     +-----------------------+------------------------------------------------------------------------------------------------+
@@ -70,7 +72,7 @@ Could not read data from testSchema.testTable: GC life time is shorter than tran
     update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
     ```
 
-2. 执行 `dumpling` 命令后，将 TiDB 集群的 GC 值恢复到第 1 步中的初始值：
+2. After executing the `dumpling` command, restore the GC value of the TiDB cluster to the initial value in step 1:
 
     {{< copyable "sql" >}}
 
@@ -78,6 +80,6 @@ Could not read data from testSchema.testTable: GC life time is shorter than tran
     update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
     ```
 
-## 向 TiDB 恢复数据
+## Restore data into TiDB
 
-使用 TiDB Lightning 将之前导出的数据导入到 TiDB，完成恢复操作。具体的使用方法见 [TiDB Lightning 使用文档](/tidb-lightning/tidb-lightning-tidb-backend.md)
+To restore data into TiDB, use TiDB Lightning to import the exported data. See [TiDB Lightning Tutorial](/tidb-lightning/tidb-lightning-tidb-backend.md).
