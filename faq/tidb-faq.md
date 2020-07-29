@@ -84,7 +84,7 @@ Currently, [TiDB documentation](https://pingcap.com/docs/) is the most important
 
 #### What are the MySQL variables that TiDB is compatible with?
 
-See [The System Variables](/system-variables.md).
+See [System Variables](/system-variables.md).
 
 #### Does TiDB support `SELECT FOR UPDATE`?
 
