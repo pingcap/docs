@@ -84,11 +84,13 @@ Currently, [TiDB documentation](https://pingcap.com/docs/) is the most important
 
 #### What are the MySQL variables that TiDB is compatible with?
 
-See [The System Variables](/system-variables.md).
+See [System Variables](/system-variables.md).
 
-#### Does TiDB support `select for update`?
+#### Does TiDB support `SELECT FOR UPDATE`?
 
-Yes. But it differs from MySQL in syntax. As a distributed database, TiDB uses the optimistic lock. `select for update` does not lock data when the transaction is started, but checks conflicts when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
+Yes. When using pessimistic locking (the default since TiDB v3.0) the `SELECT FOR UPDATE` execution behaves similar to MySQL.
+
+When using optimistic locking, `SELECT FOR UPDATE` does not lock data when the transaction is started, but checks conflicts when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
 
 #### Can the codec of TiDB guarantee that the UTF-8 string is memcomparable? Is there any coding suggestion if our key needs to support UTF-8?
 
@@ -127,9 +129,9 @@ It is recommended to use the official standard statements when modifying the use
 
 The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [MySQL Compatibility](/mysql-compatibility.md#auto-increment-id).
 
-#### How to modify the `sql_mode` in TiDB except using the `set` command?
+#### How do I modify the `sql_mode` in TiDB?
 
-The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql\_mode` of the database; it only supports using the `set` command to configure `sql\_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure it.
+TiDB supports modifying the [`sql_mode`](/sql-mode.md) as a [system variable](/system-variables.md), as in MySQL. Currently, TiDB does not permit modifying the sql mode in a configuration file, but system variable changes made with [`SET GLOBAL`](/sql-statements/sql-statement-set-variable.md) propagate to all TiDB servers in the cluster and persist across restarts.
 
 #### Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
 
@@ -590,9 +592,9 @@ Trigger strategy: `auto analyze` is automatically triggered when the number of p
 
 When the modified number or the current total row number is larger than `tidb_auto_analyze_ratio`, the `analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is 0.5, indicating that this feature is enabled by default. To ensure safety, its minimum value is 0.3 when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is 0.8, otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to 0.5.
 
-#### How to use a specific index with hint in a SQL statement?
+#### Can I use hints to override the optimizer behavior?
 
-Its usage is similar to MySQL:
+TiDB supports multiple [hints](/optimizer-hints.md) to override the default query optimizer behavior. The basic usage is similar to MySQL, with several TiDB specific extensions:
 
 {{< copyable "sql" >}}
 
