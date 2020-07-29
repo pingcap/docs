@@ -28,6 +28,7 @@
     + Linux OS
       + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
       + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
+      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
       + [Use TiDB Ansible](/online-deployment-using-ansible.md)
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
@@ -110,7 +111,9 @@
         + [Subquery Related Optimizations](/subquery-optimization.md)
         + [Column Pruning](/column-pruning.md)
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        + [Eliminate Max/Min](/max-min-eliminate.md)
         + [Predicates Push Down](/predicates-push-down.md)
+        + [Partition Pruning](/partition-pruning.md)
         + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
@@ -122,7 +125,6 @@
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
-        + [Access Tables Using `IndexMerge`](/index-merge.md)
         + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
