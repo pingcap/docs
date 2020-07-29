@@ -9,7 +9,7 @@ summary: Learn the `PROCESSLIST` information_schema table.
 
 The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`:
 
-* A `MEM` column to show the memory used by the request that is being processed, in bytes. (in bytes)
+* A `MEM` column to show the memory used by the request that is being processed, in bytes.
 * A `TxnStart` column to show the start time of the transaction
 
 {{< copyable "sql" >}}
