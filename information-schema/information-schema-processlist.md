@@ -69,7 +69,7 @@ Fields in the `PROCESSLIST` table are described as follows:
 * STATE: The current connection state.
 * INFO: The requested statement that is being processed.
 * MEM: The memory used by the request that is being processed, in bytes.
-* TxnStart: The start time of the transaction
+* TxnStart: The start time of the transaction.
 
 ## CLUSTER_PROCESSLIST
 
