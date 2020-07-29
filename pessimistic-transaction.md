@@ -84,7 +84,6 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 7. Open transactions do not block garbage collection (GC). By default, this limits the maximum execution time of pessimistic transactions to 10 minutes. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
 
-
 ## Isolation level
 
 TiDB supports the following two isolation levels in the pessimistic transaction mode:
