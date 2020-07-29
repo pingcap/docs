@@ -6,7 +6,7 @@ aliases: ['/docs/v3.1/data-type-date-and-time/','/docs/v3.1/reference/sql/data-t
 
 # Date and Time Types
 
-TiDB supports all MySQL date and time data types to store temporal values: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`, and `YEAR`. For more information, see [Date and Time Data Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html).
+TiDB supports all MySQL date and time data types to store temporal values: [`DATE`](#date-type), [`TIME`](#time-type), [`DATETIME`](#datetime-type), [`TIMESTAMP`](#timestamp-type), and [`YEAR`](#year-type). For more information, see [Date and Time Data Types in MySQL](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html).
 
 Each of these types has its range of valid values, and uses a zero value to indicate that it is an invalid value. In addition, the `TIMESTAMP` and `DATETIME` types can automatically generate new time values on modification.
 
@@ -77,6 +77,74 @@ Different types of zero value are shown in the following table:
 | YEAR      | 0000         |
 
 Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ) if the SQL mode permits such usage.
+
+## Supported types
+
+### `DATE` type
+
+`DATE` only contains date-portion and no time-portion, displayed in `YYYY-MM-DD` format. The supported range is '1000-01-01' to '9999-12-31':
+
+```sql
+DATE
+```
+
+### `TIME` type
+
+For the `TIME` type, the format is `HH:MM:SS[.fraction]` and valid values range from '-838:59:59.000000' to '838:59:59.000000'. `TIME` is used not only to indicate the time within a day but also to indicate the time interval between 2 events.  An optional `fsp` value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
+
+```sql
+TIME[(fsp)]
+```
+
+> **Note:**
+>
+> Pay attention to the abbreviated form of `TIME`. For example, '11:12' means '11:12:00' instead of '00:11:12'. However, '1112' means '00:11:12'. These differences are caused by the presence or absence of the `:` character.
+
+### `DATETIME` type
+
+`DATETIME` contains both date-portion and time-portion. Valid values range from '1000-01-01 00:00:00.000000' to '9999-12-31 23:59:59.999999'.
+
+TiDB displays `DATETIME` values in `YYYY-MM-DD HH:MM:SS[.fraction]` format, but permits assignment of values to `DATETIME` columns using either strings or numbers.  An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
+
+```sql
+DATETIME[(fsp)]
+```
+
+### `TIMESTAMP` type
+
+`TIMESTAMP` contains both date-portion and time-portion. Valid values range from '1970-01-01 00:00:01.000000' to '2038-01-19 03:14:07.999999' in UTC time. An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
+
+In `TIMESTAMP`, zero is not permitted to appear in the month-portion or day-portion. The only exception is zero value itself '0000-00-00 00:00:00'.
+
+```sql
+TIMESTAMP[(fsp)]
+```
+
+#### Timezone Handling
+
+When `TIMESTAMP` is to be stored, TiDB converts the `TIMESTAMP` value from the current time zone to UTC time zone. When `TIMESTAMP`  is to be retrieved, TiDB converts the stored `TIMESTAMP` value from UTC time zone to the current time zone (Note: `DATETIME` is not handled in this way). The default time zone for each connection is the server's local time zone, which can be modified by the environment variable `time_zone`.
+
+> **Warning:**
+>
+> As in MySQL, the `TIMESTAMP` data type suffers from the [Year 2038 Problem](https://en.wikipedia.org/wiki/Year_2038_problem). For storing values that may span beyond 2038, please consider using the `DATETIME` type instead.
+
+### `YEAR` type
+
+The `YEAR` type is specified in the format 'YYYY'. Supported values range from 1901 to 2155, or the zero value of 0000:
+
+```sql
+YEAR[(4)]
+```
+
+`YEAR` follows the following format rules:
+
++ Four-digit numeral ranges from 1901 to 2155
++ Four-digit string ranges from '1901' to '2155'
++ One-digit or two-digit numeral ranges from 1 to 99. Accordingly, 1-69 is converted to 2001-2069 and 70-99 is converted to 1970-1999
++ One-digit or two-digit string ranges from '0' to '99'
++ Value 0 is taken as 0000 whereas the string '0' or '00' is taken as 2000
+
+Invalid `YEAR` value is automatically converted to 0000 (if users are not using the `NO_ZERO_DATE` SQL mode).
 
 ## Automatic initialization and update of `TIMESTAMP` and `DATETIME`
 
@@ -192,71 +260,3 @@ When numeral `00` is inserted to `YEAR(4)`, the result is 0000 rather than 2000.
 If you want the result to be 2000, specify the value to be 2000.
 
 The two-digit year-portion might not be properly calculated in some functions such  `MIN()` and  `MAX()`. For these functions, the four-digit format suites better.
-
-## Supported types
-
-### `DATE` type
-
-`DATE` only contains date-portion and no time-portion, displayed in `YYYY-MM-DD` format. The supported range is '1000-01-01' to '9999-12-31':
-
-```sql
-DATE
-```
-
-### `TIME` type
-
-For the `TIME` type, the format is `HH:MM:SS[.fraction]` and valid values range from '-838:59:59.000000' to '838:59:59.000000'. `TIME` is used not only to indicate the time within a day but also to indicate the time interval between 2 events.  An optional `fsp` value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
-
-```sql
-TIME[(fsp)]
-```
-
-> **Note:**
->
-> Pay attention to the abbreviated form of `TIME`. For example, '11:12' means '11:12:00' instead of '00:11:12'. However, '1112' means '00:11:12'. These differences are caused by the presence or absence of the `:` character.
-
-### `DATETIME` type
-
-`DATETIME` contains both date-portion and time-portion. Valid values range from '1000-01-01 00:00:00.000000' to '9999-12-31 23:59:59.999999'.
-
-TiDB displays `DATETIME` values in `YYYY-MM-DD HH:MM:SS[.fraction]` format, but permits assignment of values to `DATETIME` columns using either strings or numbers.  An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
-
-```sql
-DATETIME[(fsp)]
-```
-
-### `TIMESTAMP` type
-
-`TIMESTAMP` contains both date-portion and time-portion. Valid values range from '1970-01-01 00:00:01.000000' to '2038-01-19 03:14:07.999999' in UTC time. An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
-
-In `TIMESTAMP`, zero is not permitted to appear in the month-portion or day-portion. The only exception is zero value itself '0000-00-00 00:00:00'.
-
-```sql
-TIMESTAMP[(fsp)]
-```
-
-#### Timezone Handling
-
-When `TIMESTAMP` is to be stored, TiDB converts the `TIMESTAMP` value from the current time zone to UTC time zone. When `TIMESTAMP`  is to be retrieved, TiDB converts the stored `TIMESTAMP` value from UTC time zone to the current time zone (Note: `DATETIME` is not handled in this way). The default time zone for each connection is the server's local time zone, which can be modified by the environment variable `time_zone`.
-
-> **Warning:**
->
-> As in MySQL, the `TIMESTAMP` data type suffers from the [Year 2038 Problem](https://en.wikipedia.org/wiki/Year_2038_problem). For storing values that may span beyond 2038, please consider using the `DATETIME` type instead.
-
-### `YEAR` type
-
-The `YEAR` type is specified in the format 'YYYY'. Supported values range from 1901 to 2155, or the zero value of 0000:
-
-```sql
-YEAR[(4)]
-```
-
-`YEAR` follows the following format rules:
-
-+ Four-digit numeral ranges from 1901 to 2155
-+ Four-digit string ranges from '1901' to '2155'
-+ One-digit or two-digit numeral ranges from 1 to 99. Accordingly, 1-69 is converted to 2001-2069 and 70-99 is converted to 1970-1999
-+ One-digit or two-digit string ranges from '0' to '99'
-+ Value 0 is taken as 0000 whereas the string '0' or '00' is taken as 2000
-
-Invalid `YEAR` value is automatically converted to 0000 (if users are not using the `NO_ZERO_DATE` SQL mode).
