@@ -78,8 +78,6 @@ Different types of zero value are shown in the following table:
 
 Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ) if the SQL mode permits such usage.
 
-<<<<<<< HEAD
-=======
 ## Supported types
 
 ### `DATE` type
@@ -148,7 +146,6 @@ YEAR[(4)]
 
 Invalid `YEAR` value is automatically converted to 0000 (if users are not using the `NO_ZERO_DATE` SQL mode).
 
->>>>>>> eb1d8aa... Reorganize "Date and Time Types" doc (#3462)
 ## Automatic initialization and update of `TIMESTAMP` and `DATETIME`
 
 Columns with `TIMESTAMP` or `DATETIME` value type can be automatically initialized or updated to the current time.
