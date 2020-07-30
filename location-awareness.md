@@ -74,7 +74,7 @@ After the PD cluster is initialized, you need to use the pd-ctl tool to make onl
 pd-ctl config set isolation-level zone
 ```
 
-`isolation-level` needs to correspond to one of the `location-labels` name so that PD can understand that this label represents the TiKV topology.
+`isolation-level` needs to correspond to one of the `location-labels` names so that PD can understand that this label represents the TiKV topology.
 
 > **Note:**
 >
