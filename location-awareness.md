@@ -57,7 +57,7 @@ pd-ctl config set location-labels zone,rack,host
 
 ## PD restricts the TiKV topology
 
-With configuring `location-labels` first, we can further enhance the topological isolation requirements of TiKV clusters through the `isolation-level`. Suppose we divide the cluster topology into three layers through `location-labels` according to the above instructions: zone -> rack -> host, and configure the `isolation-level` as follows.
+Having configured `location-labels`, you can further enhance the topological isolation requirements on TiKV clusters through the `isolation-level` parameter. Assume that you have made a three-layer cluster topology by configuring `location-labels` according to the instructions above: zone -> rack -> host, and have configured the `isolation-level` as follows:
 
 {{< copyable "" >}}
 
