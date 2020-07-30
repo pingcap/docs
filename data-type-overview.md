@@ -1,7 +1,6 @@
 ---
 title: Data Types
 summary: Learn about the data types supported in TiDB.
-category: reference
 aliases: ['/docs/stable/data-type-overview/','/docs/v4.0/data-type-overview/','/docs/stable/reference/sql/data-types/overview/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Dashboard.
-category: how-to
 aliases: ['/docs/stable/dashboard/dashboard-faq/','/docs/v4.0/dashboard/dashboard-faq/']
 ---
 

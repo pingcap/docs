@@ -1,7 +1,6 @@
 ---
 title: Transactions
 summary: Learn transactions in TiDB.
-category: reference
 aliases: ['/docs/stable/transaction-overview/','/docs/v4.0/transaction-overview/','/docs/stable/reference/transactions/overview/']
 ---
 
@@ -107,7 +106,7 @@ For DDL statements, the transaction is committed automatically and does not supp
 
 ## Lazy check of constraints
 
-**Lazy check** means that by default TiDB will not check [primary key](/constraints.md#primary-key) or [unique constraints](/constraints.md#unique) when an `INSERT` statement is executed, but instead checks when the transaction is committed. In TiDB, the lazy check is performed for values written by ordinary `INSERT` statements.
+**Lazy check** means that by default TiDB will not check [primary key](/constraints.md#primary-key) or [unique constraints](/constraints.md#unique-key) when an `INSERT` statement is executed, but instead checks when the transaction is committed. In TiDB, the lazy check is performed for values written by ordinary `INSERT` statements.
 
 For example:
 

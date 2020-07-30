@@ -1,6 +1,5 @@
 ---
 title: TiDB 1.0 release notes
-category: Releases
 aliases: ['/docs/stable/releases/release-1.0-ga/','/docs/v4.0/releases/release-1.0-ga/','/docs/stable/releases/ga/']
 ---
 

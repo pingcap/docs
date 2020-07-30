@@ -1,7 +1,6 @@
 ---
 title: SHOW CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-show-create-user/','/docs/v4.0/sql-statements/sql-statement-show-create-user/','/docs/stable/reference/sql/statements/show-create-user/']
 ---
 

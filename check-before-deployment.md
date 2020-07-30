@@ -1,7 +1,6 @@
 ---
 title: TiDB Environment and System Configuration Check
 summary: Learn the environment check operations before deploying TiDB.
-category: how-to
 aliases: ['/docs/stable/check-before-deployment/','/docs/v4.0/check-before-deployment/']
 ---
 

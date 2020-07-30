@@ -1,7 +1,6 @@
 ---
 title: FLUSH PRIVILEGES | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH PRIVILEGES for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-flush-privileges/','/docs/v4.0/sql-statements/sql-statement-flush-privileges/','/docs/stable/reference/sql/statements/flush-privileges/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: RENAME INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of RENAME INDEX for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-rename-index/','/docs/v4.0/sql-statements/sql-statement-rename-index/','/docs/stable/reference/sql/statements/rename-index/']
 ---
 

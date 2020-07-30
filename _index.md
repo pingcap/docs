@@ -1,7 +1,6 @@
 ---
 title: TiDB Introduction
 summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
-category: introduction
 aliases: ['/docs/','/docs/stable/','/docs/v4.0/']
 ---
 
@@ -37,7 +36,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 - [Check Environment and Configuration](/check-before-deployment.md)
 - [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md)
 - [Use TiFlash for Analytical Processing](/tiflash/use-tiflash.md)
-- [Deploy TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.1)
+- [Deploy TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 </NavColumn>
 
@@ -79,7 +78,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
 - [Identify Slow Queries](/identify-slow-queries.md)
-- [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
+- [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
 - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
 - [Troubleshoot the TiDB Cluster](/troubleshoot-tidb-cluster.md)
 - [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
@@ -102,9 +101,12 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 <NavColumn>
 <ColumnTitle>FAQs</ColumnTitle>
 
-- [TiDB FAQs](/faq/tidb-faq.md)
-- [FAQs After Upgrade](/faq/upgrade-faq.md)
-- [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
+- [Product FAQs](/faq/tidb-faq.md)
+- [High Availability FAQs](/faq/high-availability-faq.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [Deploy and Maintain FAQs](/faq/deploy-and-maintain-faq.md)
+- [Upgrade and After Upgrade FAQs](/faq/upgrade-faq.md)
+- [Migration FAQs](/faq/migration-tidb-faq.md)
 
 </NavColumn>
 </NavColumns>

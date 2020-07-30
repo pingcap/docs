@@ -1,7 +1,6 @@
 ---
 title: Deploy a TiDB Cluster Offline Using TiUP
 summary: Introduce how to deploy a TiDB cluster offline using TiUP.
-category: how-to
 aliases: ['/docs/stable/production-offline-deployment-using-tiup/','/docs/v4.0/production-offline-deployment-using-tiup/']
 ---
 
@@ -13,7 +12,7 @@ This document describes how to deploy a TiDB cluster offline using TiUP.
 
 ### Option 1: Download the official TiUP offline component package
 
-Download the prepared TiUP offline package from the [Download TiDB](https://pingcap.com/download) page.
+Download the offline mirror package of the TiDB server (including the TiUP offline component package) from the [Download TiDB](https://pingcap.com/download/) page.
 
 ### Option 2: Manually pack an offline component package using `tiup mirror clone`
 
@@ -253,7 +252,7 @@ tiup cluster start tidb-test
 > - The deployment version is `v4.0.0`. To obtain other supported versions, run `tiup list tidb`.
 > - The initialization configuration file is `topology.yaml`.
 > - `–user tidb`: log in to the target machine using the `tidb` user account to complete the cluster deployment. The `tidb` user needs to have `ssh` and `sudo` privileges of the target machine. You can use other users with `ssh` and `sudo` privileges to complete the deployment.
-> - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `-user`) that has access to the deployment machine. `[-p]` is used to input the user password interactively.
+> - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `-user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
 
 If you see the ``Deployed cluster `tidb-test` successfully`` output at the end of the log, the deployment is successful.
 

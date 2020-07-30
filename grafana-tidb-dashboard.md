@@ -1,7 +1,6 @@
 ---
 title: TiDB Monitoring Metrics
 summary: Learn some key metrics displayed on the Grafana TiDB dashboard.
-category: reference
 aliases: ['/docs/stable/grafana-tidb-dashboard/','/docs/v4.0/grafana-tidb-dashboard/','/docs/stable/reference/key-monitoring-metrics/tidb-dashboard/']
 ---
 

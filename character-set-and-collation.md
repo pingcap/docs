@@ -1,7 +1,6 @@
 ---
 title: Character Set and Collation
 summary: Learn about the supported character sets and collations in TiDB.
-category: reference
 aliases: ['/docs/stable/character-set-and-collation/','/docs/v4.0/character-set-and-collation/','/docs/stable/reference/sql/characterset-and-collation/','/docs/stable/reference/sql/character-set/']
 ---
 
@@ -295,9 +294,9 @@ Query OK, 0 rows affected
 insert into t values ('A');
 Query OK, 1 row affected
 insert into t values ('a');
-Query OK, 1 row affected # In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
+Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
 insert into t1 values ('a ');
-Query OK, 1 row affected # In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
+Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
 ```
 
 ### New framework for collations
@@ -331,9 +330,9 @@ Query OK, 0 rows affected (0.00 sec)
 insert into t values ('A');
 Query OK, 1 row affected (0.00 sec)
 insert into t values ('a');
-ERROR 1062 (23000): Duplicate entry 'a' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry 'a' for key 'PRIMARY' # TiDB is compatible with the case-insensitive collation of MySQL.
 insert into t values ('a ');
-ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
 > **Note:**
@@ -365,15 +364,15 @@ TiDB supports using the `COLLATE` clause to specify the collation of an expressi
 {{< copyable "sql" >}}
 
 ```sql
-select 'a' = 'A' collate utf8mb4_general_ci;
+select 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 ```
 
 ```sql
-+--------------------------------------+
-| 'a' = 'A' collate utf8mb4_general_ci |
-+--------------------------------------+
-|                                    1 |
-+--------------------------------------+
++-----------------------------------------------+
+| 'a' = _utf8mb4 'A' collate utf8mb4_general_ci |
++-----------------------------------------------+
+|                                             1 |
++-----------------------------------------------+
 1 row in set (0.00 sec)
 ```
 

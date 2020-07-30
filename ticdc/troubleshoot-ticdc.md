@@ -1,7 +1,6 @@
 ---
 title: Troubleshoot TiCDC
 summary: Learn how to troubleshoot issues you might encounter when you use TiCDC.
-category: reference
 aliases: ['/docs/stable/ticdc/troubleshoot-ticdc/','/docs/v4.0/ticdc/troubleshoot-ticdc/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: What's New in TiDB 4.0
 summary: Learn the new features of TiDB v4.0.
-category: introduction
 aliases: ['/docs/stable/whats-new-in-tidb-4.0/','/docs/v4.0/whats-new-in-tidb-4.0/']
 ---
 
@@ -24,7 +23,7 @@ TiDB v4.0 was officially released on May 28th, 2020. In this release, we have ma
 
 ### TiDB Dashboard
 
-Using TiDB Dashboard, DBAs can quickly find out the cluster topology, cluster configuration, log information, hardware information, operating system, slow queries, SQL query information, diagnostics, and so on. These information helps them quickly learn and analyze various system metrics using SQL statements:
+Using [TiDB Dashboard](/dashboard/dashboard-intro.md), DBAs can quickly find out the cluster topology, cluster configuration, log information, hardware information, operating system, slow queries, SQL query information, diagnostics, and so on. These information helps them quickly learn and analyze various system metrics using SQL statements:
 
 - Cluster Info, which is the running status of all components in the cluster (including TiDB, TiKV, and PD) and the running status of the machine on which these components are hosted.
 - Key Visualizer, which visually displays the traffic of TiDB over a certain period of time and can be used by DBAs to analyze the usage mode of TiDB and the traffic hotspots.
@@ -57,10 +56,10 @@ TiUP is a new package manager tool introduced in v4.0 that is used to manage all
 - Add the `FLASHBACK` statement to support recovering the truncated tables. See [`Flashback Table`](/sql-statements/sql-statement-flashback-table.md) for details.
 - Support writing the intermediate results of Join and Sort to the local disk when you make queries, which avoids the Out of Memory (OOM) issue because the queries occupy excessive memory. This also improves system stability.
 - Optimize the output of `EXPLAIN` and `EXPLAIN ANALYZE`. More information is shown in the result, which improves troubleshooting efficiency. See [Explain Analyze](/sql-statements/sql-statement-explain-analyze.md) and [Explain](/sql-statements/sql-statement-explain.md) for details.
-- Support using the Index Merge feature to access tables. When you make a query on a single table, the TiDB optimizer automatically reads multiple index data according to the query condition and makes a union of the result, which improves the performance of querying on a single table. See [Index Merge](/index-merge.md) for details.
+- Support using the Index Merge feature to access tables. When you make a query on a single table, the TiDB optimizer automatically reads multiple index data according to the query condition and makes a union of the result, which improves the performance of querying on a single table. See [Index Merge](/query-execution-plan.md#indexmerge-example) for details.
 - Support the expression index feature (**experimental**). The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details.
 - Support `AUTO_RANDOM` keys as an extended syntax for the TiDB columnar attribute (**experimental**). `AUTO_RANDOM` is designed to address the hotspot issue caused by the auto-increment column and provides a low-cost migration solution from MySQL for users who work with auto-increment columns. See [`AUTO_RANDOM` Key](/auto-random.md) for details.
-- Add system tables that provide information of cluster topology, configuration, logs, hardware, operating systems, and slow queries, which helps DBAs to quickly learn, analyze system metrics. See [SQL Diagnosis](/system-tables/system-table-sql-diagnostics.md) for details.
+- Add system tables that provide information of cluster topology, configuration, logs, hardware, operating systems, and slow queries, which helps DBAs to quickly learn, analyze system metrics. See [SQL Diagnosis](/information-schema/information-schema-sql-diagnostics.md) for details.
 
     - Add system tables that provide information of cluster topology, configuration, logs, hardware, operating systems to help DBAs quickly learn the cluster configuration and status:
         - The `cluster_info` table that stores the cluster topology information.

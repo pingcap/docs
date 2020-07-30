@@ -1,7 +1,6 @@
 ---
 title: DELETE | TiDB SQL Statement Reference
 summary: An overview of the usage of DELETE for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-delete/','/docs/v4.0/sql-statements/sql-statement-delete/','/docs/stable/reference/sql/statements/delete/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Key Features
 summary: Key features of the TiDB database platform.
-category: concepts
 aliases: ['/docs/stable/key-features/','/docs/v4.0/key-features/']
 ---
 

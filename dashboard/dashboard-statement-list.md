@@ -1,7 +1,6 @@
 ---
 title: SQL Statements Page of TiDB Dashboard
 summary: View the execution status of all SQL statements in the TiDB cluster.
-category: how-to
 aliases: ['/docs/stable/dashboard/dashboard-statement-list/','/docs/v4.0/dashboard/dashboard-statement-list/']
 ---
 

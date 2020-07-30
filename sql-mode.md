@@ -1,7 +1,6 @@
 ﻿---
 title: SQL Mode
 summary: Learn SQL mode.
-category: reference
 aliases: ['/docs/stable/sql-mode/','/docs/v4.0/sql-mode/','/docs/stable/reference/sql/sql-mode/']
 ---
 

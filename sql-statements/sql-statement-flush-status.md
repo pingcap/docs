@@ -1,7 +1,6 @@
 ---
 title: FLUSH STATUS | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH STATUS for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-flush-status/','/docs/v4.0/sql-statements/sql-statement-flush-status/','/docs/stable/reference/sql/statements/flush-status/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
-category: faq
 aliases: ['/docs/stable/tidb-lightning/tidb-lightning-faq/','/docs/v4.0/tidb-lightning/tidb-lightning-faq/','/docs/stable/faq/tidb-lightning/']
 ---
 

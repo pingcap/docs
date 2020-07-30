@@ -1,7 +1,6 @@
 ---
 title: Dynamic Configuration Change
 summary: Learn how to use dynamic configuration change.
-category: reference
 aliases: ['/docs/stable/dynamic-config/','/docs/v4.0/dynamic-config/']
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: TiUP Documentation Guide
 summary: Guide you through TiUP documentation with links and introductions.
-category: tools
 aliases: ['/docs/stable/tiup/tiup-documentation-guide/','/docs/v4.0/tiup/tiup-documentation-guide/']
 ---
 

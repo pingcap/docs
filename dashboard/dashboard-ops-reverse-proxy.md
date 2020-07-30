@@ -1,6 +1,5 @@
 ---
 title: Use TiDB Dashboard behind a Reverse Proxy
-category: how-to
 aliases: ['/docs/stable/dashboard/dashboard-ops-reverse-proxy/','/docs/v4.0/dashboard/dashboard-ops-reverse-proxy/']
 ---
 
