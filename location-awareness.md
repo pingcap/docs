@@ -8,7 +8,7 @@ aliases: ['/docs/dev/location-awareness/','/docs/dev/how-to/deploy/geographic-re
 
 ## Overview
 
-PD schedules according to the topology of the TiKV cluster to maximize the TiKV's capability for disaster recovery. We recommend that TiKV nodes should be physically dispersed as much as possible. For example, TiKV nodes can be distributed in different racks or even different data zones. According to the topology information of TiKV, the PD scheduler will automatically schedule in the background to isolate the replicas of the Region as much as possible, thereby maximizing the data disaster tolerance.
+PD schedules according to the topology of the TiKV cluster to maximize the TiKV's capability for disaster recovery. It is recommended that TiKV nodes are physically distributed as much as possible. For example, TiKV nodes can be distributed on different racks or even in different data zones. According to the topology information of TiKV, the PD scheduler automatically performs scheduling at the background to isolate the replicas of Regions as much as possible, thereby maximizing the capability for disaster recovery.
 
 Before you begin, see [Deploy TiDB Using TiDB Ansible (Recommended)](/online-deployment-using-ansible.md) and [Deploy TiDB Using Docker](/test-deployment-using-docker.md).
 
