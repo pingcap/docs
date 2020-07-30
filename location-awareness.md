@@ -78,7 +78,7 @@ pd-ctl config set isolation-level zone
 
 > **Note:**
 >
-> `isolation-level` is empty by default, that is, there is no mandatory isolation level restriction. To set it, you must first configure the PD's `location-labels` parameter, and ensure that the value of `isolation-level` must be one of `location-labels`.
+> `isolation-level` is empty by default, that is, there is no mandatory isolation level restriction. To set it, you must first configure the PD's `location-labels` parameter, and ensure that the value of `isolation-level` must be one of the `location-labels` names.
 
 ## PD schedules based on the TiKV topology
 
