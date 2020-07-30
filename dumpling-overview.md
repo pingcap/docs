@@ -244,7 +244,6 @@ Finally, all the exported data can be imported back to TiDB using [Lightning](/t
 | -P or --port | The port of the linked node | 4000 |
 | -u or --user | The username of the linked node | "root" |
 | --dump-empty-database | Export the `CREATE DATABASE` statements of the empty databases | true |
-| --tidbMemQuotaQuery | Maximum memory used by a single query when exporting TiDB database | 34359738368(32GB) |
 | --ca | The address of the certificate authority file for TLS connection |
 | --cert | The address of the client certificate file for TLS connection |
 | --key | The address of the client private key file for TLS connection |
