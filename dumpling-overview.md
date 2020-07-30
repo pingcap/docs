@@ -141,7 +141,7 @@ The exported file is stored in the `./export-<current local time>` directory by 
 - `-F` option is used to specify the maximum size of a single file (the unit here is `MiB`; inputs like `5GiB` or `8KB` are also acceptable).
 - `-r` option is used to specify the maximum number of records (or the number of rows in the database) for a single file. When it is enabled, Dumpling enables concurrency in the table to improve the speed of exporting large tables.
 
-You can use the above parameters to provide Dumpling with a higher degree of concurrency.
+With the above options specified, Dumpling can have a higher degree of parallelism.
 
 ### Adjust Dumpling's data consistency options
 
@@ -222,7 +222,7 @@ Finally, all the exported data can be imported back to TiDB using [Lightning](/t
 | -T or --tables-list | Export specified tables |
 | -f or --filter | Export tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md). | `"\*.\*"` (export all databases or tables) |
 | --case-sensitive | whether table-filter is case-sensitive | false (case-insensitive) |
-| -h or --host| The address of the linked node | "127.0.0.1" |
+| -h or --host| The IP address of the connected database host | "127.0.0.1" |
 | -t or --threads | The number of concurrent backup threads | 4 |
 | -r or --rows | Divide the table into specified rows of data (generally applicable for concurrent operations of splitting a large table into multiple files. |
 | -L or --logfile | Log output address. If it is empty, the log will be output to the console | "" |
@@ -240,9 +240,9 @@ Finally, all the exported data can be imported back to TiDB using [Lightning](/t
 | --consistency | flush: use FTWRL before the dump <br/> snapshot: specify the dump files' location through TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which sacrifices consistency <br/> auto: MySQL flush, TiDB snapshot | "auto" |
 | --snapshot | snapshot TSO; valid only when `consistency=snapshot` |
 | --where | Specify the scope of the table backup through the `where` condition |
-| -p or --password | The password of the linked node |
-| -P or --port | The port of the linked node | 4000 |
-| -u or --user | The username of the linked node | "root" |
+| -p or --password | The password of the connected database host |
+| -P or --port | The port of the connected database host | 4000 |
+| -u or --user | The username of the connected database host | "root" |
 | --dump-empty-database | Export the `CREATE DATABASE` statements of the empty databases | true |
 | --ca | The address of the certificate authority file for TLS connection |
 | --cert | The address of the client certificate file for TLS connection |
