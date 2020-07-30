@@ -6,7 +6,7 @@ aliases: ['/docs-cn/dev/export-or-backup-using-dumpling/','/zh/tidb/dev/export-o
 
 # Use Dumpling and TiDB Lightning for Data Backup and Restoration
 
-This document introduces in detail how to use Dumpling and TiDB Lightning to backup and restore full data of TiDB. For incremental backup and restoration, refer to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
+This document introduces in detail how to use Dumpling and TiDB Lightning to backup and restore full data of TiDB. For incremental backup and replication to downstream, refer to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
 Suppose that the TiDB server information is as follows:
 
