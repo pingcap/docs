@@ -44,6 +44,30 @@ Currently, the TiCDC sink component supports replicating data to the following d
 - Databases compatible with MySQL protocol. The sink component provides the final consistency support.
 - Kafka based on the TiCDC Open Protocol. The sink component ensures the row-level order, final consistency or strict transactional consistency.
 
+### Ensure replication order and consistency
+
+#### Data replication order
+
+- For all DDL and DML statements, TiCDC outputs **at least once**.
+- When the TiKV or TiCDC cluster encounters failure, TiCDC might send the same DDL/DML statement repeatedly. For duplicated DDL/DML statements:
+
+    - MySQL sink can execute DDL statements repeatedly. For DDL statements that can be executed repeatedly in downstream, such as `truncate table`, the statement is executed successfully. For those that cannot be executed repeatedly, such as `create table`, the execution fails, and TiCDC ignores the error and continues the replication.
+    - Kafka sink sends messages repeatedly, but the duplicate messages do not affect the constraints fo `Resolved Ts`. Users can filter the duplicated messages from Kafka consumers.
+
+#### Data replication consistency
+
+- MySQL sink
+
+    - TiCDC does not split in-table transactions. This is to ensure the transaction consistency within a single table. However, TiCDC does not ensure the transaction order in the upstream table.
+    - TiCDC splits cross-table transactions in the unit of tables. TiCDC does not ensure that cross-table transactions are always consistent.
+    - TiCDC ensures that the order of single-row updates are consistent with that in the upstream.
+
+- Kafka sink
+
+    - TiCDC provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or ts.
+    - For different distribution strategies, the different implementation of consumers can achieve different levels of consistency, including row-level consistency, eventual consistency, or cross-table transaction consistency.
+    - TiCDC does not has an implementation of Kafka consumers, but only offers [TiCDC open protocol](/ticdc/ticdc-open-protocol.md). You can implement the Kafka consumer according to the protocol.
+
 ## Restrictions
 
 To replicate data to TiDB or MySQL, you must ensure that the following requirements are satisfied to guarantee data correctness:
