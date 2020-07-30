@@ -17,7 +17,7 @@ For details of Percolator and TiDB's algorithm of the transactions, see [Google'
 
 ### Prewrite phase (optimistic)
  
-In the Prewrite phase, TiDB adds a primary lock and a secondary lock to target keys. If there are lots of requests for adding locks from the clients, TiDB prints an error such as write conflict or `keyislocked` to the log and reports it to the client. Specifically, the following errors related to locks might occur in the Prewrite phase.
+In the Prewrite phase, TiDB adds a primary lock and a secondary lock to target keys. If there are lots of requests for adding locks to the same target key, TiDB prints an error such as write conflict or `keyislocked` to the log and reports it to the client. Specifically, the following errors related to locks might occur in the Prewrite phase.
  
 #### Read-write conflict (optimistic)
  
@@ -25,7 +25,7 @@ As the TiDB server receives a read request from a client, it gets a globally uni
 
 ![read-write conflict](/media/troubleshooting-lock-pic-04.png)
 
-Txn0 completes the Prewrite phase and enters the Commit phase. At this time, Txn1 requests to read the same target key. Txn1 needs to read the target key of the latest commit_ts that is smaller than its start_ts. Because Txn1’s start_ts is smaller than Txn0's lock_ts, Txn1 must wait for the target key's lock to be cleared, but it hasn’t been done. As a result, Txn1 cannot confirm whether Txn0 has been committed or not. Thus, a read-write conflict between Txn1 and Txn0 happens.
+Txn0 completes the Prewrite phase and enters the Commit phase. At this time, Txn1 requests to read the same target key. Txn1 needs to read the target key of the latest commit_ts that is smaller than its start_ts. Because Txn1’s start_ts is larger than Txn0's lock_ts, Txn1 must wait for the target key's lock to be cleared, but it hasn’t been done. As a result, Txn1 cannot confirm whether Txn0 has been committed or not. Thus, a read-write conflict between Txn1 and Txn0 happens.
 
 You can detect the read-write conflict in your TiDB cluster by the following ways:
 
@@ -215,7 +215,7 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 Solutions:
 
-* First, confirm whether the application logic can be optimized. For example, large transactions may trigger TiDB's transaction size limit, which can be split into multiple small transactions. Or [adjust the TiDB transaction size limit](/tidb-configuration-file.md#txn-total-size-limit).
+* First, confirm whether the application logic can be optimized. For example, large transactions may trigger TiDB's transaction size limit, which can be split into multiple small transactions. 
 * Also, you can adjust the related parameters properly to meet the application transaction logic.
 
 #### Deadlock found when trying to get lock
