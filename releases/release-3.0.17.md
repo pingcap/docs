@@ -1,8 +1,8 @@
 ---
-title: TiDB v3.0.17 Release Notes
+title: TiDB 3.0.17 Release Notes
 ---
 
-# TiDB v3.0.17 Release Notes
+# TiDB 3.0.17 Release Notes
 
 Release date: Aug 03, 2020
 
