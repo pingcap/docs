@@ -251,6 +251,6 @@ Finally, all the exported data can be imported back to TiDB using [Lightning](/t
 | --csv-separator | Separator of each value in CSV files | ',' |
 | --csv-null-value | Representation of null values in CSV files | "\\N" |
 | --escape-backslash | Use backslash (`\`) to escape special characters in the export file | true |
-| --output-filename-template | The data file names in the [golang arguments](https://golang.org/pkg/text/template/#hdr-Arguments) format <br/> Support the `{{.DB}}`, `{{.Table}}`, and `{{.Index}}` arguments <br/> The three arguments represent the database name, table name, and block ID of the data file | '{{.DB}}.{{.Table}}.{{.Index}}' |
+| --output-filename-template | The filename templates represented in the format of [golang template](https://golang.org/pkg/text/template/#hdr-Arguments) <br/> Support the `{{.DB}}`, `{{.Table}}`, and `{{.Index}}` arguments <br/> The three arguments represent the database name, table name, and chunk ID of the data file | '{{.DB}}.{{.Table}}.{{.Index}}' |
 | --status-addr | Dumpling's service address, including the address for Prometheus to pull metrics and pprof debugging | ":8281" |
 | --tidb-mem-quota-query | The memory limit of exporting SQL statements by a single Dumpling command, the unit is byte, and the default value is 32 GB | 34359738368 |
