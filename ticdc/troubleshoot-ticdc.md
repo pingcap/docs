@@ -8,7 +8,7 @@ aliases: ['/docs/dev/ticdc/troubleshoot-ticdc/']
 
 This document introduces the common issues and errors that you might encounter when using TiCDC, and the corresponding maintenance and troubleshooting methods.
 
-## How to choose `start-ts` when starting a task
+## How do I choose `start-ts` when creating a task in TiCDC?
 
 The `start-ts` of a replication task corresponds to a Timestamp Oracle (TSO) in the upstream TiDB cluster. TiCDC requests data from this TSO in a replication task. Therefore, the `start-ts` of the replication task must meet the following requirements:
 
@@ -17,11 +17,11 @@ The `start-ts` of a replication task corresponds to a Timestamp Oracle (TSO) in 
 
 If you do not specify `start-ts`, or specify `start-ts` as `0`, when a replication task is started, TiCDC gets a current TSO and starts the task from this TSO.
 
-## Some tables cannot be replicated when you start a task
+## Why can't I replicate some tables when I create a task in TiCDC?
 
 When you execute `cdc cli changefeed create` to create a replication task, TiCDC checks whether the upstream tables meet the [replication restrictions](/ticdc/ticdc-overview.md#restrictions). If some tables do not meet the restrictions, `some tables are not eligible to replicate` is returned with a list of ineligible tables. You can choose `Y` or `y` to continue creating the task, and all updates on these tables are automatically ignored during the replication. If you choose an input other than `Y` or `y`, the replication task is not created.
 
-## How to handle replication interruption
+## How do I handle replication interruption?
 
 A replication task might be interrupted in the following known scenarios:
 
@@ -38,7 +38,7 @@ A replication task might be interrupted in the following known scenarios:
         2. Use the new task configuration file and add the `ignore-txn-commit-ts` parameter to skip the transaction corresponding to the specified `commit-ts`.
         3. Stop the old replication task via HTTP API. Execute `cdc cli changefeed create` to create a new task and specify the new task configuration file. Specify `checkpoint-ts` recorded in step 1 as the `start-ts` and start a new task to resume the replication.
 
-## `gc-ttl` and file sorting
+## What is `gc-ttl` and file sorting in TiCDC?
 
 Since v4.0.0-rc.1, PD supports external services in setting the service-level GC safepoint. Any service can register and update its GC safepoint. PD ensures that the key-value data smaller than this GC safepoint is not cleaned by GC. Enabling this feature in TiCDC ensures that the data to be consumed by TiCDC is retained in TiKV without being cleaned by GC when the replication task is unavailable or interrupted.
 
