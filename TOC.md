@@ -28,6 +28,7 @@
     + Linux OS
       + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
       + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
+      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
       + [Use TiDB Ansible](/online-deployment-using-ansible.md)
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
@@ -66,6 +67,7 @@
       + [Use BR Tool](/br/backup-and-restore-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
+  + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
@@ -109,7 +111,9 @@
         + [Subquery Related Optimizations](/subquery-optimization.md)
         + [Column Pruning](/column-pruning.md)
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        + [Eliminate Max/Min](/max-min-eliminate.md)
         + [Predicates Push Down](/predicates-push-down.md)
+        + [Partition Pruning](/partition-pruning.md)
         + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
@@ -121,7 +125,6 @@
       + Control Execution Plan
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
-        + [Access Tables Using `IndexMerge`](/index-merge.md)
         + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
@@ -324,8 +327,9 @@
       + [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)
       + [`SHOW PUMP STATUS`](/sql-statements/sql-statement-show-pump-status.md)
       + [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
+      + [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
       + [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-histograms.md)
-      + [`SHOW STATES_META`](/sql-statements/sql-statement-show-stats-meta.md)
+      + [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
       + [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
       + [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
       + [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
@@ -381,8 +385,8 @@
     + [Character Set and Collation](/character-set-and-collation.md)
     + System Tables
       + [`mysql`](/mysql-schema.md)
-      + `INFORMATION_SCHEMA`
-        + [Overview](/information-schema.md)
+      + INFORMATION_SCHEMA
+        + [Overview](/information-schema/information-schema.md)
         + [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
         + [`CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
         + [`CLUSTER_CONFIG`](/information-schema/information-schema-cluster-config.md)
@@ -496,6 +500,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.3](/releases/release-4.0.3.md)
     + [4.0.2](/releases/release-4.0.2.md)
     + [4.0.1](/releases/release-4.0.1.md)
     + [4.0 GA](/releases/release-4.0-ga.md)
