@@ -5,7 +5,7 @@ summary: Learn about the list and roles of contributors to the TiDB community.
 
 # Credits
 
-The TiDB developer community uses SIG (Special Interest Group) as a unit to manage and organize developers. Each module has its own SIG which is responsible for new feature development, performance optimization, stability guarantee, etc. If you also want to become a TiDB developer, it is undoubtedly the best to join the interested [SIG](https://github.com/pingcap/community/tree/master/special-interest-groups) and discuss face-to-face with other senior developers. As of TiDB 4.0 GA, the following is the list of contributors to the TiDB community and their corresponding roles:
+The TiDB developer community uses SIG (Special Interest Group) as a unit to manage and organize developers. Each module has its own SIG which is responsible for new feature development, performance optimization, stability guarantee, etc. If you also want to become a TiDB developer, come and join the interested [SIG](https://github.com/pingcap/community/tree/master/special-interest-groups) and discuss directly with other senior developers! As of TiDB 4.0 GA, the following is the list of contributors to the TiDB community and their corresponding roles:
 
 ## Committers
 
