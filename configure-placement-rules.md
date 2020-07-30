@@ -78,7 +78,8 @@ In this way, PD enables this feature after the cluster is successfully bootstrap
   "end_key": "",
   "role": "voter",
   "count": 3,
-  "location_labels": ["zone", "rack", "host"]
+  "location_labels": ["zone", "rack", "host"],
+  "isolation_level": ""
 }
 ```
 
