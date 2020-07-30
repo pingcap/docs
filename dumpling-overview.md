@@ -220,7 +220,7 @@ Finally, all the exported data can be imported back to TiDB using [Lightning](/t
 | -V or --version | Output the Dumpling version and exit directly |
 | -B or --database | Export specified databases |
 | -T or --tables-list | Export specified tables |
-| -f or --filter | Export tables that match the filter pattern. For the filter syntax, see[table-filter](/table-filter.md). | `"\*.\*"` (export all databases or tables) |
+| -f or --filter | Export tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md). | `"\*.\*"` (export all databases or tables) |
 | --case-sensitive | whether table-filter is case-sensitive | false (case-insensitive) |
 | -h or --host| The address of the linked node | "127.0.0.1" |
 | -t or --threads | The number of concurrent backup threads | 4 |
