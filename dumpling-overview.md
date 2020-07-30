@@ -195,7 +195,7 @@ The TiDB historical data snapshots when the TSO is `417773951312461825` and the 
 
 When exporting data from TiDB, if the TiDB version is greater than v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster. But for TiDB earlier than v4.0.0, you need to manually modify the GC time.
 
-In other scenarios, if the data volume is very large, to avoid export failure due to GC during the export process, you can extend the GC time in advance:
+In other scenarios, if the data size is very large, to avoid export failure due to GC during the export process, you can extend the GC time in advance:
 
 {{< copyable "sql" >}}
 
