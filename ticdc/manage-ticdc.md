@@ -116,7 +116,7 @@ Configure `--sink-uri`  according to the following format. Currently, the scheme
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
-- Configure sink URI with `mysql`/`tidb`
+- Configure sink URI with `mysql`/`tidb`:
 
     Sample configuration:
 
@@ -137,7 +137,7 @@ Configure `--sink-uri`  according to the following format. Currently, the scheme
     | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
     | `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default)) |
 
-- Configure sink URI with `kafka`
+- Configure sink URI with `kafka`:
 
     Sample configuration:
 
