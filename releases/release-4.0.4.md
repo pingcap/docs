@@ -13,6 +13,6 @@ TiDB version: 4.0.4
 + TiDB
 
     - Fix the issue of getting stuck when querying `information_schema.columns` [#18849](https://github.com/pingcap/tidb/pull/18849)
-    - Resolve errors caused by `in null` in point/batch get operators [#18848](https://github.com/pingcap/tidb/pull/18848)
+    - Fix the errors that occur when the `PointGet` and `BatchPointGet` operators encounter `in null` [#18848](https://github.com/pingcap/tidb/pull/18848)
     - Fix the wrong result of `BatchPointGet` [#18815](https://github.com/pingcap/tidb/pull/18815)
-    - Fix an encoding bug that causes the wrong result of HashJoin with `set` and `enum` [#18859](https://github.com/pingcap/tidb/pull/18859)
+    - Fix the issue of incorrect query result that occurs when the `HashJoin` operator encounters the `set` or `enum` type [#18859](https://github.com/pingcap/tidb/pull/18859)
