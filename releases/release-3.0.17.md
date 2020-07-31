@@ -38,7 +38,7 @@ TiDB version: 3.0.17
 
 + TiKV
 
-    - Add `hibernate-timeout` config that allows region being hibernated later to improve rolling update performance [#8207](https://github.com/tikv/tikv/pull/8207)
+    - Add the `hibernate-timeout` configuration that delays region hibernation to improve rolling update performance [#8207](https://github.com/tikv/tikv/pull/8207)
 
 + TiDB Lightning
 
