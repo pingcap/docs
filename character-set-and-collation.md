@@ -106,6 +106,41 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 +--------------------+---------+------+---------+----------+---------+
 2 rows in set (0.00 sec)
 ```
+## `utf8` and `ut8mb4` in TiDB
+
+In MySQL, the character set `utf8` is limited to a maximum of three bytes. This is sufficient to store characters in the Basic Multilingual Plane (BMP), but not enough to store characters such as emojis. For this, it is recommended to use the character set `utf8mb4` instead.
+
+By default, TiDB provides the same 3-byte limit on `utf8` to ensure that data created in TiDB can still safely be restored in MySQL. This can be disabled by changing the value of `check-mb4-value-in-utf8` to `FALSE` in your TiDB configuration file.
+
+The following demonstrates the default behavior when inserting a 4-byte emoji character into a table. The `INSERT` statement fails for the `utf8` character set, but succeeds for `ut8mb4`:
+
+```sql
+mysql> CREATE TABLE utf8_test (
+    ->  c char(1) NOT NULL
+    -> ) CHARACTER SET utf8;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> CREATE TABLE utf8m4_test (
+    ->  c char(1) NOT NULL
+    -> ) CHARACTER SET utf8mb4;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> INSERT INTO utf8_test VALUES ('😉');
+ERROR 1366 (HY000): incorrect utf8 value f09f9889(😉) for column c
+mysql> INSERT INTO utf8m4_test VALUES ('😉');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT char_length(c), length(c), c FROM utf8_test;
+Empty set (0.01 sec)
+
+mysql> SELECT char_length(c), length(c), c FROM utf8m4_test;
++----------------+-----------+------+
+| char_length(c) | length(c) | c    |
++----------------+-----------+------+
+|              1 |         4 | 😉     |
++----------------+-----------+------+
+1 row in set (0.00 sec)
+```
 
 ## Character set and collation in different layers
 
