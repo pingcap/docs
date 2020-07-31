@@ -97,7 +97,7 @@ tidb> explain select * from t where a < 2 and a > 2;
 > **Note:**
 >
 > - `admin reload expr_pushdown_blacklist` only takes effect on the TiDB server that executes this SQL statement. To make it apply to all TiDB servers, execute the SQL statement on each TiDB server.
-> - The feature of blacklisting specific expressions is supported in TiDB 3.0.0 or later versions.
+> - The feature of blocklisting specific expressions is supported in TiDB 3.0.0 or later versions.
 > - TiDB 3.0.3 or earlier versions does not support adding some of the operators (such as ">", "+", "is null") to the blocklist by using their original names. You need to use their aliases (case-sensitive) instead, as shown in the following table:
 
 | Operator Name | Aliases |
