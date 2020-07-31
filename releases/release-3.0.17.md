@@ -40,6 +40,6 @@ TiDB version: 3.0.17
 
     - Add `hibernate-timeout` config that allows region being hibernated later to improve rolling update performance [#8207](https://github.com/tikv/tikv/pull/8207)
 
-+ TiDB-Lightning
++ TiDB Lightning
 
     - `[black-white-list]` has been deprecated with a newer, easier-to-understand filter format [#332](https://github.com/pingcap/tidb-lightning/pull/332)
