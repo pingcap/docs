@@ -6,7 +6,7 @@ aliases: ['/docs/dev/character-set-and-collation/','/docs/dev/reference/sql/char
 
 # Character Set and Collation
 
-This document introduces the character set and collation supported by TiDB.
+This document introduces the character sets and collations supported by TiDB.
 
 ## Concepts
 
@@ -46,7 +46,7 @@ mysql> SELECT 'A' = 'a';
 
 TiDB defaults to using a binary collation. This differs from MySQL, which uses a case-insensitive collation by default.
 
-## TiDB character set and collation
+## Character sets and collations supported by TiDB
 
 Currently, TiDB supports the following character sets:
 
