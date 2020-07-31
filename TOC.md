@@ -371,7 +371,6 @@
   - [Contribute to TiDB](/contribute.md#contribute-to-tidb)
   - [Improve the Docs](/contribute.md#improve-the-docs)
 - [Adopters](/adopters.md)
-- [Roadmap](/roadmap.md)
 + [Releases](/releases/release-notes.md)
   + v3.0
     - [3.0.16](/releases/release-3.0.16.md)
