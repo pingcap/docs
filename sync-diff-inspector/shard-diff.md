@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sync-diff-inspector/shard-diff/','/docs/dev/reference/tools
 
 # Data Check in the Sharding Scenario
 
-sync-diff-inspector supports data check in the sharding scenario. Assuming that you have multiple MySQL instances using a replication tool to replicate data into TiDB, and now you can use sync-diff-inspector to check upstream and downstream data.
+sync-diff-inspector supports data check in the sharding scenario. Assume that you use the DM replication tool to replicate data from multiple MySQL instances into TiDB, and now you can use sync-diff-inspector to check upstream and downstream data.
 
 ## Use `table-config` for configuration
 
