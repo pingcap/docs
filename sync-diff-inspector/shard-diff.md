@@ -12,7 +12,7 @@ sync-diff-inspector supports data check in the sharding scenario. Assuming that 
 
 You can use `table-config` to configure `table-0`, set `is-sharding=true` and configure the upstream table information in `table-config.source-tables`. This configuration method requires setting all sharded tables, which is suitable for scenarios where the number of upstream sharded tables is small and the naming rules of sharded tables are irregular as shown below.
 
-![shard-table-sync-1](/media/shard-table-sync-1.png)
+![shard-table-replica-1](/media/shard-table-replica-1.png)
 
 Below is a complete example of the sync-diff-inspector configuration.
 
@@ -127,7 +127,7 @@ fix-sql-file = "fix.sql"
 
 You can use `table-rules` for configuration when there are a large number of upstream sharded tables and the naming rules of all sharded tables are regular as shown below:
 
-![shard-table-sync-2](/media/shard-table-sync-2.png)
+![shard-table-replica-2](/media/shard-table-replica-2.png)
 
 Below is a complete example of the sync-diff-inspector configuration.
 
