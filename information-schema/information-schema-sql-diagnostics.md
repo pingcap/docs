@@ -1,11 +1,7 @@
 ---
 title: SQL Diagnostics
 summary: Understand SQL diagnostics in TiDB.
-<<<<<<< HEAD
-aliases: ['/docs/stable/system-tables/system-table-sql-diagnostics/','/docs/v4.0/system-tables/system-table-sql-diagnostics/','/docs/stable/reference/system-databases/sql-diagnosis/','/docs/stable/system-tables/system-table-sql-diagnosis/','/tidb/stable/system-table-sql-diagnostics/']
-=======
-aliases: ['/docs/dev/system-tables/system-table-sql-diagnostics/','/docs/dev/reference/system-databases/sql-diagnosis/','/docs/dev/system-tables/system-table-sql-diagnosis/','/tidb/dev/system-table-sql-diagnostics/','/tidb/dev/check-cluster-status-using-sql-statements','/docs/dev/check-cluster-status-using-sql-statements/','/docs/dev/reference/performance/check-cluster-status-using-sql-statements/']
->>>>>>> 9b47c3e... resolve docs that are not in TOC (#3431)
+aliases: ['/docs/stable/system-tables/system-table-sql-diagnostics/','/docs/v4.0/system-tables/system-table-sql-diagnostics/','/docs/stable/reference/system-databases/sql-diagnosis/','/docs/stable/system-tables/system-table-sql-diagnosis/','/tidb/stable/system-table-sql-diagnostics/','/docs/stable/check-cluster-status-using-sql-statements/','/docs/v4.0/check-cluster-status-using-sql-statements/','/docs/stable/reference/performance/check-cluster-status-using-sql-statements/','/tidb/stable/check-cluster-status-using-sql-statements']
 ---
 
 # SQL Diagnostics
