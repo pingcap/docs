@@ -21,6 +21,7 @@ TiDB version: 3.0.17
 + TiKV
 
     - Fix a bug that might read stale data during region merging [#8111](https://github.com/tikv/tikv/pull/8111)
+    - Fix memory leak during scheduling [#8355](https://github.com/tikv/tikv/pull/8355)
 
 + TiDB Lightning
 
