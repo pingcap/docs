@@ -125,7 +125,7 @@ fix-sql-file = "fix.sql"
 
 ## Use `table-rules` for configuration
 
-You can use `table-rules` for configuration when there are a large number of upstream sharded tables and the naming rules of all sharded tables are regular as shown below:
+You can use `table-rules` for configuration when there are a large number of upstream sharded tables and the naming rules of all sharded tables are regular, as shown below:
 
 ![shard-table-replica-2](/media/shard-table-replica-2.png)
 
@@ -182,7 +182,7 @@ fix-sql-file = "fix.sql"
 # Use `table-rule` to set the mapping relationship between the upstream sharded tables and the downstream table family. You can configure the mapping rule only for the schema or table, or the mapping rules for both the schema and table.
 [[table-rules]]
      # schema-pattern and table-pattern support wildcard *?
-     # All tables that meet the schema-pattern and table-pattern rules in the upstream database configured in source-db are the sharded tables of target-schema.target-table
+     # All tables that meet the schema-pattern and table-pattern rules in the upstream database configured in source-db are the sharded tables of target-schema.target-table.
      schema-pattern = "test"
      table-pattern = "table-*"
      target-schema = "test"
