@@ -24,7 +24,7 @@ SELECT 'A' = 'a';
 ```
 
 ```sql
-SELECT 'A' = 'a';
+mysql> SELECT 'A' = 'a';
 +-----------+
 | 'A' = 'a' |
 +-----------+
