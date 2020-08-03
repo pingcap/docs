@@ -8,7 +8,7 @@ aliases: ['/docs/dev/auto-random/','/docs/dev/reference/sql/attributes/auto-rand
 
 > **Note:**
 >
-> `AUTO_RANDOM` has been an official feature since v4.0.3. It is **recommended** that you use this attribute in the production environment. In later TiDB versions, the syntax or semantics of `AUTO_RANDOM` might change.
+> `AUTO_RANDOM` was marked as stable in v4.0.3.
 
 Before using the `AUTO_RANDOM` attribute, set `allow-auto-random = true` in the `experimental` section of the TiDB configuration file. Refer to [`allow-auto-random`](/tidb-configuration-file.md#allow-auto-random-new-in-v310) for details.
 
