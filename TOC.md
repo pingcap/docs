@@ -15,6 +15,7 @@
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
+  + [Import Example Database](/import-example-data.md)
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   + [Environment Configuration Checklist](/check-before-deployment.md)
@@ -62,12 +63,12 @@
     + [Use TiDB Ansible](/scale-tidb-using-ansible.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
-    + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
-    + [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
-    + Use BR Tool
+    + Use BR Tool (Recommended)
       + [Use BR Tool](/br/backup-and-restore-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
+    + [Use Dumpling and TiDB Lightning (Recommended)](/backup-and-restore-using-dumpling-lightning.md)
+    + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
   + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
@@ -90,6 +91,7 @@
   + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
+  + [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
   + [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
@@ -189,6 +191,7 @@
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     + [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   + [TiCDC](/ticdc/ticdc-overview.md)
+  + [Dumpling](/dumpling-overview.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -505,6 +508,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.4](/releases/release-4.0.4.md)
     + [4.0.3](/releases/release-4.0.3.md)
     + [4.0.2](/releases/release-4.0.2.md)
     + [4.0.1](/releases/release-4.0.1.md)
