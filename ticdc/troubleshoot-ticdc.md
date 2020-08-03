@@ -236,4 +236,4 @@ In TiCDC Open Protocol, the type code `6` represents `null`.
 |:--|:--|:--|:--|
 | Null | 6 | `{"t":6,"v":null}` | |
 
-For more information, refer to [TiCDC Open Protocol column type code](ticdc/ticdc-open-protocol.md#column-type-code).
+For more information, refer to [TiCDC Open Protocol column type code](/ticdc/ticdc-open-protocol.md#column-type-code).
