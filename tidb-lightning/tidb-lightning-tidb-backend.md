@@ -241,7 +241,7 @@ password = ""
 </td><td>
 
 ```toml
-# [[route]]
+# [[routes]]
 # schema-pattern = "shard_db_*"
 # table-pattern = "shard_table_*"
 # target-schema = "shard_db"
