@@ -9,7 +9,7 @@ This document summarizes the FAQs related to high reliability of TiDB.
 
 ## Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
 
-Since v3.0.8, TiDB supports modifying the version string of the server by modifying [`server-version`](/tidb-configuration-file.md#server-version) in the configuration file. When you deploy TiDB using TiUP, you can also specify the proper version string by using `tiup cluster edit-config <cluster-name>`:
+Since v3.0.8, TiDB supports modifying the version string of the server by modifying [`server-version`](/tidb-configuration-file.md#server-version) in the configuration file. When you deploy TiDB using TiUP, you can also specify the proper version string by executing `tiup cluster edit-config <cluster-name>`:
 
 ```
 server_configs:
