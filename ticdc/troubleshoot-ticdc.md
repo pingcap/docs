@@ -195,4 +195,45 @@ In the output of this command, `admin-job-type` shows the state of the replicati
     * Increase `replica.fetch.max.bytes` in `server.properties` to `1073741824` (1 GB).
     * Increase `fetch.message.max.bytes` in `consumer.properties` to make it larger than `message.max.bytes`.
 
-## TiCDC 把数据同步到 Kafka 时，是把一个事务内的所有变更都写到一个消息中吗？如果不是，是根据什么划分的？
+## When TiCDC replicates data to Kafka, does it write all the changes in a transaction into one message? If not, on what basis does it divide the changes?
+
+No. According to the different distribution strategies configured, TiCDC divides the changes on different bases, including `default`, `row id`, `table`, and `ts`.
+
+For more information, refer to [Replication task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
+
+## When TiCDC replicates data to Kafka, can I control the maximum size of a single message in TiDB?
+
+No. Currently TiCDC sets the maximum size of batch messages to 512 MB, and that of a single message to 4 MB.
+
+## When TiCDC replicates data to Kafka, does a message contain multiple types of data changes?
+
+Yes. A single might contain multiple `update`s or `delete`s, and `update` and `delete` might co-exist.
+
+## When TiCDC replicates data to Kafka, how do I view the timestamp, table name, and schema name in the output of TiCDC Open Protocol?
+
+The information is included in the key of Kafka messages. For example:
+
+```json
+{
+    "ts":<TS>,
+    "scm":<Schema Name>,
+    "tbl":<Table Name>,
+    "t":1
+}
+```
+
+For more information, refer to [TiCDC Open Protocol event format](/ticdc/ticdc-open-protocol.md#event-format).
+
+## When TiCDC replicates data to Kafka, how do I know the timestamp of the data changes in a message?
+
+You can get the unix timestamp by moving `ts` in the key of the Kafka message by 18 bits to the right.
+
+## How does TiCDC Open Protocol represent `null`?
+
+In TiCDC Open Protocol, the type code `6` represents `null`.
+
+| Type | Code | Output Example | Note |
+|:--|:--|:--|:--|
+| Null | 6 | `{"t":6,"v":null}` | |
+
+For more information, refer to [TiCDC Open Protocol column type code](ticdc/ticdc-open-protocol.md#column-type-code).
