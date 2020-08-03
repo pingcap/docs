@@ -330,7 +330,7 @@ In the above command:
     - `status.tables`: Each key number represents the ID of the replication table, corresponding to `tidb_table_id` of a table in TiDB.
     - `mark-table-id`: The ID of mark tables in the cyclic replication, corresponding to `tidb_table_id` of mark tables in TiDB.
     - `resolved-ts`: The largest TSO among the sorted data in the current processor.
-    - `checkpoint-ts`: The largest TSO that has been successfully written to downstream in the current processor.
+    - `checkpoint-ts`: The largest TSO that has been successfully written to the downstream in the current processor.
 
 ## Use HTTP interface to manage cluster status and data replication task
 

@@ -74,44 +74,44 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If you use MySQL in a special cloud environment, such Aliyun RDS, and you do not have the permission to modify MySQL, you need to specify the time zone using the `--tz` parameter.
+If you use MySQL in a special cloud environment, such Aliyun RDS, and if you do not have the permission to modify MySQL, you need to specify the time zone using the `--tz` parameter:
 
-First, query the time zone used by MySQL:
+1. Query the time zone used by MySQL:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```shell
-show variables like '%time_zone%';
-```
+    ```shell
+    show variables like '%time_zone%';
+    ```
 
-```
-+------------------+--------+
-| Variable_name    | Value  |
-+------------------+--------+
-| system_time_zone | CST    |
-| time_zone        | SYSTEM |
-+------------------+--------+
-```
+    ```
+    +------------------+--------+
+    | Variable_name    | Value  |
+    +------------------+--------+
+    | system_time_zone | CST    |
+    | time_zone        | SYSTEM |
+    +------------------+--------+
+    ```
 
-Specify the time zone when you create the replication task and create the TiCDC service:
+2. Specify the time zone when you create the replication task and create the TiCDC service:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```shell
-cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/" --tz=Asia/Shanghai
-```
+    ```shell
+    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/" --tz=Asia/Shanghai
+    ```
 
-> **Note:**
->
-> In MySQL, CST refers to the China Standard Time (UTC+08:00). Usually you cannot use `CST` directly in your system, but use `Asia/Shanghai` instead.
+    > **Note:**
+    >
+    > In MySQL, CST refers to the China Standard Time (UTC+08:00). Usually you cannot use `CST` directly in your system, but use `Asia/Shanghai` instead.
 
 Be cautious when you set the time zone of the TiCDC server, because the time zone will be used for the conversion of time type. It is recommended that you use the same time zone in the upstream and downstream databases, and specify the time zone using `--tz` when you start the TiCDC server.
 
 The TiCDC server chooses its time zone in the following priority:
 
-- TiCDC first uses the time zone specified by `--tz`.
-- When the above parameter is not available, TiCDC tries to read the timezone set by the `TZ` environment variable.
-- When the above environment variable is not available, TiCDC uses the default time zone of the machine.
+1. TiCDC first uses the time zone specified by `--tz`.
+2. When the above parameter is not available, TiCDC tries to read the timezone set by the `TZ` environment variable.
+3. When the above environment variable is not available, TiCDC uses the default time zone of the machine.
 
 ## How do I handle the incompatibility of configuration files caused by TiCDC upgrade?
 
