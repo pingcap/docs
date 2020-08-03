@@ -6,7 +6,7 @@ aliases: ['/docs/dev/auto-random/','/docs/dev/reference/sql/attributes/auto-rand
 
 # AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>
 
-> **Warning:**
+> **Note:**
 >
 > `AUTO_RANDOM` has been an official feature since v4.0.3. It is **recommended** that you use this attribute in the production environment. In later TiDB versions, the syntax or semantics of `AUTO_RANDOM` might change.
 
