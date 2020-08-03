@@ -1,10 +1,10 @@
 ---
-title: Dynamic Configuration Change
-summary: Learn how to use dynamic configuration change.
+title: Change Configuration Online
+summary: Learn how to change the cluster configuration online.
 aliases: ['/docs/dev/dynamic-config/']
 ---
 
-# Dynamic Configuration Change
+# Change Configuration Online
 
 This document describes how to use the dynamic configuration change feature.
 
