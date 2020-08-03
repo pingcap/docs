@@ -23,8 +23,8 @@ SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
 SELECT 'A' = 'a';
 ```
 
-```
-mysql> SELECT 'A' = 'a';
+```sql
+SELECT 'A' = 'a';
 +-----------+
 | 'A' = 'a' |
 +-----------+
