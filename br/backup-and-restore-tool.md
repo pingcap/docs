@@ -20,9 +20,20 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 - It is recommended that you deploy BR on the PD node.
 - It is recommended that you mount a high-performance SSD to BR nodes and all TiKV nodes. A 10-gigabit network card is recommended. Otherwise, bandwidth is likely to be the performance bottleneck during the backup and restore process.
 
-## Download Binary
+> **Note:**
+>
+> If you don't mount a network disk or use other shared storage, the BR backup data will be generated on each TiKV node. Because BR only backs up the leader replica, the space reserved for each node needs to be estimated based on the leader size.
+> Meanwhile, because TiDB v4.0 uses leader count for balancing by default, there will be a problem of large differences in leader size, resulting in uneven backup data for each node.
+
+## Using method
+
+### Download Binary
 
 Refer to the [download page](/download-ecosystem-tools.md#br-backup-and-restore) for more information.
+
+### Using SQL statements
+
+Refer to [BACKUP](/sql-statements/sql-statement-backup.md#backup) and [RESTORE](/sql-statements/sql-statement-restore.md#restore) for more information.
 
 ## Implementation principles
 
