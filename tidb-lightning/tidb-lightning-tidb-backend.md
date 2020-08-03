@@ -230,9 +230,10 @@ password = ""
 <tr><td>
 
 ```toml
-# [[route-rules]]
-# schema-pattern = "shard_db_*"
-# table-pattern = "shard_table_*"
+# [[routes]]
+# Table routes
+# pattern-schema = "shard_db_*"
+# pattern-table = "shard_table_*"
 # target-schema = "shard_db"
 # target-table = "shard_table"
 ```
@@ -240,10 +241,9 @@ password = ""
 </td><td>
 
 ```toml
-# [[routes]]
-# Table routes
-# pattern-schema = "shard_db_*"
-# pattern-table = "shard_table_*"
+# [[route-rules]]
+# schema-pattern = "shard_db_*"
+# table-pattern = "shard_table_*"
 # target-schema = "shard_db"
 # target-table = "shard_table"
 ```
