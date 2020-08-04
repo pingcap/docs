@@ -12,21 +12,76 @@ The PD configuration file supports more options than command-line parameters. Yo
 
 This document only describes parameters that are not included in command-line parameters. Check [here](/command-line-flags-for-pd-configuration.md) for the command line parameters.
 
-### `lease`
+### `name`
 
-+ The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
-+ Default value: `3`
-+ unit: second
+- The human-readable unique name for this PD member
+- Default value: `"pd"`
+- If you want to start multiply PDs, you must use different name for each one.
 
-### `tso-save-interval`
+### `data-dir`
 
-+ The interval for PD to allocate TSOs for persistent storage in etcd
-+ Default value: `3` seconds
+- The path to the data directory
+- Default value: `default.${name}"`
+
+### `client-urls`
+
+- The listening URL list for client traffic
+- Default value: `"http://127.0.0.1:2379"`
+- To deploy a cluster, you must use `client-urls` to specify the IP address of the current host, such as `"http://192.168.100.113:2379"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
+
+### `advertise-client-urls`
+
+- The advertise URL list for peer traffic from outside
+- Default value: `"${peer-urls}"`
+- If the peer cannot connect to PD through the default listening peer URLs, you must manually set the advertise peer URLs explicitly.
+- For example, the internal IP address of Docker is 172.17.0.1, while the IP address of the host is 192.168.100.113 and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-peer-urls` to `"http://192.168.100.113:2380"`. The other PD nodes can find this service through `"http://192.168.100.113:2380"`.
+
+### `peer-urls`
+
+- The listening URL list for peer traffic
+- Default value: `"http://127.0.0.1:2380"`
+- To deploy a cluster, you must use `peer-urls` to specify the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
+
+### `advertise-peer-urls`
+
+- The advertise URL list for peer traffic from outside
+- Default: `"${peer-urls}"`
+- If the peer cannot connect to PD through the default listening peer URLs, you must manually set the advertise peer URLs explicitly.
+- For example, the internal IP address of Docker is 172.17.0.1, while the IP address of the host is 192.168.100.113 and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-peer-urls` to `"http://192.168.100.113:2380"`. The other PD nodes can find this service through `"http://192.168.100.113:2380"`.
+
+### `initial-cluster`
+
+- The initial cluster configuration for bootstrapping
+- Default value: `"{name}=http://{advertise-peer-url}"`
+- For example, if `name` is "pd", and `advertise-peer-urls` is `"http://192.168.100.113:2380"`, the `initial-cluster` is `"pd=http://192.168.100.113:2380"`.
+- If you need to start three PD servers, the `initial-cluster` might be:
+
+    ```
+    pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
+    ```
 
 ### `initial-cluster-state`
 
 + The initial state of the cluster
-+ Default value: `new`
++ Default value: `"new"`
+
+### `initial-cluster-token`
+
++ Used to identify different clusters during the bootstrap phase.
++ Default value: "pd-cluster"
++ If multiple clusters that have nodes with same configurations are deployed successively, different tokens should be specified to isolate different cluster nodes.
+
+### `lease`
+
++ The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
++ Default value: `3`
++ Unit: second
+
+### `tso-save-interval`
+
++ The interval for PD to allocate TSOs for persistent storage in etcd
++ Default value: `3`
++ Unit: second
 
 ### `enable-prevote`
 
