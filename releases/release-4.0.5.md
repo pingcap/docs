@@ -1,14 +1,25 @@
 ---
-title: TiDB v4.0.5 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.5/']
+title: TiDB 4.0.5 Release Notes
 ---
 
-# TiDB v4.0.5 Release Notes
+# TiDB 4.0.5 Release Notes
 
-Release date: August 04, 2020
+Release date: August 10, 2020
 
-TiDB version: v4.0.5
+TiDB version: 4.0.5
+
+## Compatibility Changes
+
++ TiDB
+
+    - Change drop partition and truncate partition's job args to support multi partition id array [#18930](https://github.com/pingcap/tidb/pull/18930)
+    - Add delete only state for add partition replica check [#18865](https://github.com/pingcap/tidb/pull/18865)
+
+## New Features
+
++ TiFlash
+
+    - Support standard error code [#978](https://github.com/pingcap/tics/pull/978)
 
 ## Improvements
 
@@ -29,19 +40,6 @@ TiDB version: v4.0.5
     - Accelerate regions schedule for blocked add partition ddl [#959](https://github.com/pingcap/tics/pull/959)
     - Optimize the process of DeltaTree's delta data compaction to reduce unnecessary read and write amplification [#952](https://github.com/pingcap/tics/pull/952)
     - Optimize applying snapshot by preprocessing under multi-thread. [#944](https://github.com/pingcap/tics/pull/944)
-
-## Compatibility Changes
-
-+ TiDB
-
-    - Change drop partition and truncate partition's job args to support multi partition id array [#18930](https://github.com/pingcap/tidb/pull/18930)
-    - Add delete only state for add partition replica check [#18865](https://github.com/pingcap/tidb/pull/18865)
-
-## New Features
-
-+ TiFlash
-
-    - Support standard error code [#978](https://github.com/pingcap/tics/pull/978)
 
 ## Bug Fixes
 
