@@ -290,7 +290,7 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 ### `tidb-cacert-path`
 
-+ The path of the root CA certificate file. Configure this path to connect to TiDB's SQL service with TLS.
++ The path of the root CA certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
 + Default value: `""`
 
 ### `tidb-cert-path`
@@ -300,7 +300,7 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 ### `tidb-key-path`
 
-+ The path of the SSL private key file. Configure this path to connect to TiDB's SQL service with TLS.
++ The path of the SSL private key file. You can configure this path when you connect to TiDB's SQL services using TLS.
 + Default value: `""`
 
 ### `public-path-prefix`
