@@ -295,7 +295,7 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 ### `tidb-cert-path`
 
-+ The path of the SSL certificate file. Configure this path to connect to TiDB's SQL service with TLS.
++ The path of the SSL certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
 + Default value: `""`
 
 ### `tidb-key-path`
