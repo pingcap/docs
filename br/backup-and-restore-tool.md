@@ -14,6 +14,12 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 - Currently, TiDB does not support backing up and restoring partitioned tables.
 - Currently, you can perform restoration only on new clusters.
 - It is recommended that you execute multiple backup operations serially. Otherwise, different backup operations might interfere with each other.
+- BR only supports operations between clusters with the same `new_collations_enabled_on_first_bootstrap` [switch value](/character-set-and-collation.md#Collation support framework) because BR only backs up KV data. If the backup cluster and the recovery cluster use different sorting rules, the data verification fails. Therefore, when restoring the cluster, you need to make sure that the switch value query result of the `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';` statement is consistent with the query result of the backup. Then you can perform the restoration operation.
+
+    - For v3.1 clusters, TiDB does not support new collation, so it can be considered that the new collation is not enabled.
+    - For v4.0 clusters, check whether new collation is enabled through `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';`.
+
+    For example, the data is backed up in a v3.1 cluster. If you restore the data to a v4.0 cluster and the value of `new_collation_enabled` in the query restore cluster is `true`. This means that the  switch supported by the new collation is enabled when the restore cluster is created. Restoring data at this time may cause errors.
 
 ## Recommended deployment configuration
 
