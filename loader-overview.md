@@ -1,7 +1,7 @@
 ---
 title: Loader Instructions
 summary: Use Loader to load data to TiDB.
-aliases: ['/docs/v3.0/loader-overview/','/docs/v3.0/reference/tools/loader/','/docs/tools/loader/']
+aliases: ['/docs/v3.0/loader-overview/','/docs/v3.0/reference/tools/loader/','/docs/tools/loader/','/docs/v3.0/load-misuse-handling/','/docs/v3.0/reference/tools/error-case-handling/load-misuse-handling/','/tidb/v3.0/load-misuse-handling']
 ---
 
 # Loader Instructions
@@ -150,3 +150,36 @@ pattern-table = "table_*"
 target-schema = "example_db"
 target-table = "table"
 ```
+
+### Error: ```Try adjusting the `max_allowed_packet` variable```
+
+The following error is reported during full data import:
+
+```
+packet for query is too large. Try adjusting the 'max_allowed_packet' variable
+```
+
+#### Reasons
+
+* Both MySQL client and MySQL/TiDB Server have `max_allowed_packet` quotas. If any of the `max_allowed_packet` quotas is violated, the client receives a corresponding error message. Currently, the latest version of Loader and TiDB Server all have a default `max_allowed_packet` quota of `64M`.
+    * Please use the latest version, or the latest stable version of the tool. See the [download page](/download-ecosystem-tools.md).
+* The full data import processing module in Loader or DM does not support splitting `dump sqls` files. This is because Mydumper has the simple code implementation, as shown in the code comment `/* Poor man's data dump code */`. To support correctly splitting `dump sqls` files, you need to implement a sound parser based on TiDB parser, but you will encounter the following issues:
+    * A large amount of workload.
+    * The task is difficult. It is not easy to ensure the correctness.
+    * Significant performance reduction.
+
+#### Solutions
+
+* For the above reasons, it is recommended to use the `-s, --statement-size` option which Mydumper offers to control the size of `Insert Statement`: `Attempted size of INSERT statement in bytes, default 1000000`.
+
+    According to the default configuration of `--statement-size`, the size of `Insert Statement` that Mydumper generates is as close as `1M`. This default configuration ensures that this error will not occur in most cases.
+
+    Sometimes the following `WARN` log appears during the dump process. The `WARN` log itself does not affect the dump process but indicates that the dumped table might be a wide table.
+
+    ```
+    Row bigger than statement_size for xxx
+    ```
+
+* If a single row of a wide table exceeds 64M, you need to modify and enable the following two configurations:
+    * Execute `set @@global.max_allowed_packet=134217728` (`134217728 = 128M`) in TiDB Server.
+    * Add `max-allowed-packet=128M` to db configuration in the Loader configuration file according to your situation, and then restart the progress or task.
