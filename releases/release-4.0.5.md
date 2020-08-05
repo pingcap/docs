@@ -36,6 +36,9 @@ TiDB version: 4.0.5
     - Add HTTP API to generate TiDB metric profile. [#18531](https://github.com/pingcap/tidb/pull/18531)
     - Fix the partition table issue in table scatter API. [#17863](https://github.com/pingcap/tidb/pull/17863)
     - Add detailed memory usage for each instance in grafana.
+    - Add runtime information for the batch-point-get executor [#18892](https://github.com/pingcap/tidb/pull/18892)
+    - Add executor runtime information for point-get. [#18817](https://github.com/pingcap/tidb/pull/18817)
+    - Warn potential deadlock for Consume in remove [#18395](https://github.com/pingcap/tidb/pull/18395)
 
 + TiFlash
 
@@ -64,6 +67,8 @@ TiDB version: 4.0.5
     - Ddl: fix admin repair table with range partition expr will parseInt fail [#17988](https://github.com/pingcap/tidb/pull/17988)
     - Fix wrong behavior of set charset statement [#17289](https://github.com/pingcap/tidb/pull/17289)
     - Fix a bug caused by the wrong collation setting which leads to the wrong result of collation function. [#17231](https://github.com/pingcap/tidb/pull/17231)
+    - Fix STR_TO_DATE's handling for format token '%r', '%h' [#18727](https://github.com/pingcap/tidb/pull/18727)
+    - Fix issues of TiDB version information formation doesn't consistent with PD/TiKV in cluster_info table. [#18413](https://github.com/pingcap/tidb/pull/18413)
 
 + PD
 
@@ -84,16 +89,6 @@ TiDB version: 4.0.5
 
 + TiDB
 
-    - Check the tiflash replica count when setting tiflash replica [#18943](https://github.com/pingcap/tidb/pull/18943)
-    - When introduced in v4.0.3, `allow_auto_random_explicit_insert` could be set only for the SESSION scope. It can now be set also for the GLOBAL scope. [#18911](https://github.com/pingcap/tidb/pull/18911)
-    - Add runtime information for the batch-point-get executor [#18892](https://github.com/pingcap/tidb/pull/18892)
-    - Add executor runtime information for point-get. [#18817](https://github.com/pingcap/tidb/pull/18817)
-    - Executor: modify the default value of actRows to be 0 instead of empty [#18806](https://github.com/pingcap/tidb/pull/18806)
-    - Types: fix STR_TO_DATE's handling for format token '%r', '%h' [#18727](https://github.com/pingcap/tidb/pull/18727)
-    - Add detailed memory usage for each instance in grafana. [#18683](https://github.com/pingcap/tidb/pull/18683)
-    - Add unit tests for batch coprocessor [#18583](https://github.com/pingcap/tidb/pull/18583)
-    - Fix issues of TiDB version information formation doesn't consistent with PD/TiKV in cluster_info table. [#18413](https://github.com/pingcap/tidb/pull/18413)
-    - Util/memory: warn potential deadlock for Consume in remove [#18395](https://github.com/pingcap/tidb/pull/18395)
 
 + PD
 
