@@ -20,7 +20,8 @@ TiDB version: 4.0.5
 + TiFlash
 
     - Support standard error code [#978](https://github.com/pingcap/tics/pull/978)
-
++ TiKV
+     - Define error code for errors [#8387](https://github.com/tikv/tikv/pull/8387)
 ## Improvements
 
 + TiDB
@@ -31,6 +32,7 @@ TiDB version: 4.0.5
     - Support cancel before RPC response return. [#18580](https://github.com/pingcap/tidb/pull/18580)
     - Add HTTP API to generate TiDB metric profile. [#18531](https://github.com/pingcap/tidb/pull/18531)
     - Fix the partition table issue in table scatter API. [#17863](https://github.com/pingcap/tidb/pull/17863)
+    - Add detailed memory usage for each instance in grafana.
 
 + TiFlash
 
