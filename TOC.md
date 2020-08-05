@@ -11,6 +11,7 @@
   + [Basic Features](/basic-features.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
+  + [Credits](/credits.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
@@ -106,25 +107,29 @@
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
   + SQL Tuning
+    + [Overview](/sql-tuning-overview.md)
     + [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [Overview](/sql-logical-optimization.md)
         + [Subquery Related Optimizations](/subquery-optimization.md)
         + [Column Pruning](/column-pruning.md)
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
         + [Eliminate Max/Min](/max-min-eliminate.md)
-        + [Predicates Push Down](/predicates-push-down.md)
+        + [Predicates Push Down](/predicate-push-down.md)
         + [Partition Pruning](/partition-pruning.md)
         + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
+        + [Overview](/sql-physical-optimization.md)
         + [Index Selection](/choose-index.md)
         + [Statistics](/statistics.md)
         + [Wrong Index Solution](/wrong-index-solution.md)
         + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
+        + [Overview](/control-execution-plan.md)
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
         + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
@@ -523,6 +528,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.17](/releases/release-3.0.17.md)
     + [3.0.16](/releases/release-3.0.16.md)
     + [3.0.15](/releases/release-3.0.15.md)
     + [3.0.14](/releases/release-3.0.14.md)
