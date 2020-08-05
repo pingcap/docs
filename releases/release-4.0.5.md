@@ -65,7 +65,7 @@ TiDB version: 4.0.5
 + PD
 
     - Fix the bug that TSO request may fail at the time of leader changing. [#2666](https://github.com/pingcap/pd/pull/2666)
-
+    - Fix the issue that when enabling placement rules, sometimes region replicas cannot schedule to optimal [#2720](https://github.com/pingcap/pd/pull/2720)
 + TiFlash
 
     - Fix the issue that TiFlash cannot start normally after upgrading from an old version if the name of the database or table contains special characters. [#971](https://github.com/pingcap/tics/pull/971)
