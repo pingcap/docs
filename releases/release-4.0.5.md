@@ -78,6 +78,7 @@ TiDB version: 4.0.5
 + TiKV
 
     - Fix memory leak during scheduling [#8357](https://github.com/tikv/tikv/pull/8357)
+    - Speed up leader election when hibernate region is enabled [#8292](https://github.com/tikv/tikv/pull/8292)
     
 ## Others
 
@@ -93,11 +94,6 @@ TiDB version: 4.0.5
     - Add unit tests for batch coprocessor [#18583](https://github.com/pingcap/tidb/pull/18583)
     - Fix issues of TiDB version information formation doesn't consistent with PD/TiKV in cluster_info table. [#18413](https://github.com/pingcap/tidb/pull/18413)
     - Util/memory: warn potential deadlock for Consume in remove [#18395](https://github.com/pingcap/tidb/pull/18395)
-
-+ TiKV
-
-    - Define error code for errors [#8387](https://github.com/tikv/tikv/pull/8387)
-    - Fix memory leak during scheduling [#8357](https://github.com/tikv/tikv/pull/8357)
 
 + PD
 
