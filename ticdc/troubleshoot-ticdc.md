@@ -17,7 +17,7 @@ The `start-ts` of a replication task corresponds to a Timestamp Oracle (TSO) in 
 
 If you do not specify `start-ts`, or specify `start-ts` as `0`, when a replication task is started, TiCDC gets a current TSO and starts the task from this TSO.
 
-## Why can't I replicate some tables when I create a task in TiCDC?
+## Why can't some tables be replicated when I create a task in TiCDC?
 
 When you execute `cdc cli changefeed create` to create a replication task, TiCDC checks whether the upstream tables meet the [replication restrictions](/ticdc/ticdc-overview.md#restrictions). If some tables do not meet the restrictions, `some tables are not eligible to replicate` is returned with a list of ineligible tables. You can choose `Y` or `y` to continue creating the task, and all updates on these tables are automatically ignored during the replication. If you choose an input other than `Y` or `y`, the replication task is not created.
 
@@ -58,7 +58,7 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --start-ts=415238226621235
 
 ## How do I handle the `Error 1298: Unknown or incorrect time zone: 'UTC'` error when creating the replication task or replicating data to MySQL?
 
-This error is returned when the downstream MySQL does not load the time zone. You can load the time zone by running [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html). After loading the time zone, you can create tasks and migrate data normally.
+This error is returned when the downstream MySQL does not load the time zone. You can load the time zone by running [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html). After loading the time zone, you can create tasks and replicate data normally.
 
 {{< copyable "shell-regular" >}}
 
@@ -74,7 +74,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If you use MySQL in a special cloud environment, such Aliyun RDS, and if you do not have the permission to modify MySQL, you need to specify the time zone using the `--tz` parameter:
+If you use MySQL in a special public cloud environment, such Alibaba Cloud RDS, and if you do not have the permission to modify MySQL, you need to specify the time zone using the `--tz` parameter:
 
 1. Query the time zone used by MySQL:
 
@@ -110,10 +110,10 @@ Be cautious when you set the time zone of the TiCDC server, because the time zon
 The TiCDC server chooses its time zone in the following priority:
 
 1. TiCDC first uses the time zone specified by `--tz`.
-2. When the above parameter is not available, TiCDC tries to read the timezone set by the `TZ` environment variable.
-3. When the above environment variable is not available, TiCDC uses the default time zone of the machine.
+2. When `--tz` is not available, TiCDC tries to read the time zone set by the `TZ` environment variable.
+3. When the `TZ` environment variable is not available, TiCDC uses the default time zone of the machine.
 
-## How do I handle the incompatibility of configuration files caused by TiCDC upgrade?
+## How do I handle the incompatibility issue of configuration files caused by TiCDC upgrade?
 
 Refer to [Notes for compatibility](/ticdc/manage-ticdc.md#notes-for-compatibility).
 
@@ -130,7 +130,7 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.
 > **Note:**
 >
 > * This feature is introduced in TiCDC 4.0.2.
-> * TiCDC currently only supports outputting data changes in the Canal format to Kafka.
+> * TiCDC currently supports outputting data changes in the Canal format only to Kafka.
 
 For more information, refer to [Create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task).
 
@@ -163,7 +163,7 @@ The expected output is as follows:
 
     * `normal`: The task runs normally.
     * `stopped`: The task is stopped manually or encounters an error.
-    * `removed`: The task is deleted.
+    * `removed`: The task is removed.
 
 > **Note:**
 >
@@ -186,14 +186,14 @@ In the output of this command, `admin-job-type` shows the state of the replicati
 * `2`: Resumed. The replication task resumes from `checkpoint-ts`.
 * `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
 
-## Why does the latency from TiCDC to Kafka become larger and larger?
+## Why does the latency from TiCDC to Kafka become higher and higher?
 
 * Check [whether the status of the replication task is normal](#how-do-i-know-whether-the-replication-task-runs-normally).
 * Adjust the following parameters of Kafka:
 
-    * Increase `message.max.bytes` in `server.properties` to `1073741824` (1 GB).
-    * Increase `replica.fetch.max.bytes` in `server.properties` to `1073741824` (1 GB).
-    * Increase `fetch.message.max.bytes` in `consumer.properties` to make it larger than `message.max.bytes`.
+    * Increase the `message.max.bytes` value in `server.properties` to `1073741824` (1 GB).
+    * Increase the `replica.fetch.max.bytes` value in `server.properties` to `1073741824` (1 GB).
+    * Increase the `fetch.message.max.bytes` value in `consumer.properties` to make it larger than the `message.max.bytes` value.
 
 ## When TiCDC replicates data to Kafka, does it write all the changes in a transaction into one message? If not, on what basis does it divide the changes?
 
@@ -207,7 +207,7 @@ No. Currently TiCDC sets the maximum size of batch messages to 512 MB, and that 
 
 ## When TiCDC replicates data to Kafka, does a message contain multiple types of data changes?
 
-Yes. A single might contain multiple `update`s or `delete`s, and `update` and `delete` might co-exist.
+Yes. A single message might contain multiple `update`s or `delete`s, and `update` and `delete` might co-exist.
 
 ## When TiCDC replicates data to Kafka, how do I view the timestamp, table name, and schema name in the output of TiCDC Open Protocol?
 
