@@ -22,18 +22,18 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 > **Note:**
 >
-> If you don't mount a network disk or use other shared storage, the BR backup data will be generated on each TiKV node. Because BR only backs up the leader replica, the space reserved for each node needs to be estimated based on the leader size.
-> Meanwhile, because TiDB v4.0 uses leader count for balancing by default, there will be a problem of large differences in leader size, resulting in uneven backup data for each node.
+> If you do not mount a network disk or use other shared storage, the data backed up by BR will be generated on each TiKV node. Because BR only backs up leader replicas, you should estimate the space reserved for each node based on the leader size.
+> Meanwhile, because TiDB v4.0 uses leader count for load balancing by default, leaders are greatly different in size, resulting in uneven distribution of backup data on each node.
 
-## Using method
+## Use BR
 
-### Download Binary
+### Download binary files
 
 Refer to the [download page](/download-ecosystem-tools.md#br-backup-and-restore) for more information.
 
 ### Using SQL statements
 
-Refer to [BACKUP](/sql-statements/sql-statement-backup.md#backup) and [RESTORE](/sql-statements/sql-statement-restore.md#restore) for more information.
+Refer to the [`BACKUP` syntax](/sql-statements/sql-statement-backup.md#backup) and [`RESTORE` syntax](/sql-statements/sql-statement-restore.md#restore) for more information.
 
 ## Implementation principles
 

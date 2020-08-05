@@ -44,11 +44,11 @@ Almost all of these problems are system call errors that occur when TiKV writes 
  
 For example, you might encounter the `Code: 22(invalid argument)` error when backing up data to the network disk built by `samba`.
 
-## What should I do to resolve the `rpc error: code = Unavailable desc =...` error?
+## How should I handle the `rpc error: code = Unavailable desc =...` error occurred in BR?
  
-This problem is generally caused by insufficient performance of the cluster restoration when using BR to restore data. You can further confirm the cause by cluster restoration monitoring or TiKV logs.
+This error might occur when the capacity of the cluster to restore (using BR) is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
 
-To solve this kind of problem, you can try to expand cluster resources, reduce the concurrency during restoration, and turn on the `RATE_LIMIT` setting.
+To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
 
 ## Where are the backed up files stored when I use `local` storage?
  
