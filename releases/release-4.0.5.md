@@ -48,6 +48,8 @@ TiDB version: 4.0.5
     - Add runtime information for the batch-point-get executor [#18892](https://github.com/pingcap/tidb/pull/18892)
     - Add executor runtime information for point-get. [#18817](https://github.com/pingcap/tidb/pull/18817)
     - Warn potential deadlock for Consume in remove [#18395](https://github.com/pingcap/tidb/pull/18395)
+    - Support the Action when memory exceed quota for TableReader Executor. [#18392](https://github.com/pingcap/tidb/pull/18392)
+    - Refine the behavior of StrToInt and StrToFloat and support convert JSON to date, time and timestamp [#18159](https://github.com/pingcap/tidb/pull/18159)
 
 + PD
 
@@ -94,9 +96,7 @@ TiDB version: 4.0.5
     - Fix incorrect collator when `getSignatureByPB` and remove unnecessary recover [#18735](https://github.com/pingcap/tidb/pull/18735)
     - Fix a bug `getAutoIncrementID()` function does not consider the `tidb_snapshot` session variable, this bug may cause dumper tool fail with 'table not exist' error. [#18692](https://github.com/pingcap/tidb/pull/18692)
     - Fix unknown column error for sql like `select a from t having t.a` [#18434](https://github.com/pingcap/tidb/pull/18434)
-    - Support the Action when memory exceed quota for TableReader Executor. [#18392](https://github.com/pingcap/tidb/pull/18392)
     - Fix a panic on hash partition table when the query condition is that the partition column equals to a big number like 9223372036854775808 [#18186](https://github.com/pingcap/tidb/pull/18186)
-    - Refine the behavior of StrToInt and StrToFloat and support convert JSON to date, time and timestamp [#18159](https://github.com/pingcap/tidb/pull/18159)
     - Fix the wrong behavior of char function. [#18122](https://github.com/pingcap/tidb/pull/18122)
     - Ddl: fix admin repair table with range partition expr will parseInt fail [#17988](https://github.com/pingcap/tidb/pull/17988)
     - Fix wrong behavior of set charset statement [#17289](https://github.com/pingcap/tidb/pull/17289)
