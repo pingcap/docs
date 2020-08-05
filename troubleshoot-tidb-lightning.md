@@ -1,11 +1,7 @@
 ---
 title: TiDB Lightning Troubleshooting
 summary: Learn about common errors and solutions of TiDB Lightning.
-<<<<<<< HEAD
-aliases: ['/docs/v3.0/troubleshoot-tidb-lightning/','/docs/v3.0/how-to/troubleshoot/tidb-lightning/']
-=======
-aliases: ['/docs/v3.1/troubleshoot-tidb-lightning/','/docs/v3.1/how-to/troubleshoot/tidb-lightning/','/docs/v3.1/tidb-lightning/tidb-lightning-misuse-handling/','/docs/v3.1/reference/tools/error-case-handling/lightning-misuse-handling/','/tidb/v3.1/tidb-lightning-misuse-handling']
->>>>>>> 597c8f1... Remove 2 docs that are not in toc (#3544)
+aliases: ['/docs/v3.0/troubleshoot-tidb-lightning/','/docs/v3.0/how-to/troubleshoot/tidb-lightning/','/docs/v3.0/tidb-lightning/tidb-lightning-misuse-handling/','/docs/v3.0/reference/tools/error-case-handling/lightning-misuse-handling/','/tidb/v3.0/tidb-lightning-misuse-handling']
 ---
 
 # TiDB Lightning Troubleshooting
