@@ -19,7 +19,7 @@ TiDB version: 4.0.5
 
 + TiFlash
 
-    - Support standard error code [#978](https://github.com/pingcap/tics/pull/978)
+    - Support unified log format [#977](https://github.com/pingcap/tics/pull/977), [#978](https://github.com/pingcap/tics/pull/978)
     
 + TiKV
 
@@ -50,11 +50,10 @@ TiDB version: 4.0.5
 
 + TiFlash
 
-    - Feature: support unified log format [#977](https://github.com/pingcap/tics/pull/977)
-    - Add some panels about IO operations on Grafana [#965](https://github.com/pingcap/tics/pull/965)
-    - Optimize `IngestSst` by reducing persisting uncommitted region data. [#960](https://github.com/pingcap/tics/pull/960)
+    - Add more Grafana panels, like CPU/IO/RAM usage, metrics about storage engine, etc.  [#965](https://github.com/pingcap/tics/pull/965)
+    - Reduce IO operations by optimizing Raft logs processing logic. [#960](https://github.com/pingcap/tics/pull/960)
     - Accelerate regions schedule for blocked add partition ddl [#959](https://github.com/pingcap/tics/pull/959)
-    - Optimize the process of DeltaTree's delta data compaction to reduce unnecessary read and write amplification [#952](https://github.com/pingcap/tics/pull/952)
+    - Optimize compactions of delta data in DeltaTree to reduce read and write amplification [#952](https://github.com/pingcap/tics/pull/952)
     - Optimize applying snapshot by preprocessing under multi-thread. [#944](https://github.com/pingcap/tics/pull/944)
 
 ## Bug Fixes
@@ -87,7 +86,7 @@ TiDB version: 4.0.5
 + TiFlash
 
     - Fix the issue that TiFlash cannot start normally after upgrading from an old version if the name of the database or table contains special characters. [#971](https://github.com/pingcap/tics/pull/971)
-    - Fix bug: tiflash can not exit if any exception is thrown during initialization [#953](https://github.com/pingcap/tics/pull/953)
+    - Fix the issue that TiFlash can not exit if any exception is thrown during initialization [#953](https://github.com/pingcap/tics/pull/953)
     
 + TiKV
 
