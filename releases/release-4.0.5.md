@@ -17,14 +17,23 @@ TiDB version: 4.0.5
 
 ## New Features
 
++ TiKV
+
+    - Define error code for errors [#8387](https://github.com/tikv/tikv/pull/8387)
+
 + TiFlash
 
     - Support unified log format [#977](https://github.com/pingcap/tics/pull/977), [#978](https://github.com/pingcap/tics/pull/978)
-    
-+ TiKV
 
-     - Define error code for errors [#8387](https://github.com/tikv/tikv/pull/8387)
-     
++ Tools
+
+    + TiCDC
+
+        - Support Kafka SSL connection [#764](https://github.com/pingcap/ticdc/pull/764)
+        - Support to output old value [#708](https://github.com/pingcap/ticdc/pull/708)
+        - Support the column flags [#796](https://github.com/pingcap/ticdc/pull/796)
+        - Support to output previous table info in ddl events [#799](https://github.com/pingcap/ticdc/pull/799)
+
 ## Improvements
 
 + TiDB
@@ -56,6 +65,24 @@ TiDB version: 4.0.5
     - Optimize compactions of delta data in DeltaTree to reduce read and write amplification [#952](https://github.com/pingcap/tics/pull/952)
     - Optimize applying snapshot by preprocessing under multi-thread. [#944](https://github.com/pingcap/tics/pull/944)
 
++ Tools
+
+    + TiCDC
+
+        - Optimize get tso frequency [#801](https://github.com/pingcap/ticdc/pull/801)
+
+    + Backup & Restore (BR)
+
+        - Optimize some logs [#428](https://github.com/pingcap/br/pull/428)
+
+    + Dumpling
+
+        - Release FTWRL after connections are created to reduce lock time for mysql [#121](https://github.com/pingcap/dumpling/pull/121)
+
+    + TiDB Lightning
+
+        - Optimize some logs [#352](https://github.com/pingcap/tidb-lightning/pull/352)
+
 ## Bug Fixes
 
 + TiDB
@@ -77,18 +104,29 @@ TiDB version: 4.0.5
     - Fix STR_TO_DATE's handling for format token '%r', '%h' [#18727](https://github.com/pingcap/tidb/pull/18727)
     - Fix issues of TiDB version information formation doesn't consistent with PD/TiKV in cluster_info table. [#18413](https://github.com/pingcap/tidb/pull/18413)
 
++ TiKV
+
+    - Fix memory leak during scheduling [#8357](https://github.com/tikv/tikv/pull/8357)
+    - Speed up leader election when hibernate region is enabled [#8292](https://github.com/tikv/tikv/pull/8292)
+
 + PD
 
     - Fix the bug that TSO request may fail at the time of leader changing. [#2666](https://github.com/pingcap/pd/pull/2666)
     - Fix the issue that when enabling placement rules, sometimes region replicas cannot schedule to optimal [#2720](https://github.com/pingcap/pd/pull/2720)
 
-    
 + TiFlash
 
     - Fix the issue that TiFlash cannot start normally after upgrading from an old version if the name of the database or table contains special characters. [#971](https://github.com/pingcap/tics/pull/971)
     - Fix the issue that TiFlash process can not exit if any exceptions are thrown during initialization [#953](https://github.com/pingcap/tics/pull/953)
-    
-+ TiKV
 
-    - Fix memory leak during scheduling [#8357](https://github.com/tikv/tikv/pull/8357)
-    - Speed up leader election when hibernate region is enabled [#8292](https://github.com/tikv/tikv/pull/8292)
++ Tools
+
+    + TiCDC
+
+        - Fix a issue that failed changefeed can't be removed [#782](https://github.com/pingcap/ticdc/pull/782)
+        - Fix invalid delete evenets by selecting one unique index as the handle index [#787](https://github.com/pingcap/ticdc/pull/787)
+        - Fix the bug that GC safepoint will be forwarded beyond the checkpoint of stopped changefeed [#797](https://github.com/pingcap/ticdc/pull/797)
+
+    + TiDB Lightning
+
+        - Fix syntax error on empty binary/hex literals when using TiDB backend [#357](https://github.com/pingcap/tidb-lightning/pull/357)
