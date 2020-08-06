@@ -6,7 +6,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 # Use BR to Back up and Restore Data
 
-[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/backup-and-restore-using-mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
+[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md) and [`mydumper`/`loader`](/backup-and-restore-using-mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
 
 ## Usage restrictions
 
@@ -330,7 +330,7 @@ If you want to back up incrementally, you only need to specify the **last backup
 The incremental backup has two limitations:
 
 - The incremental backup needs to be under a different path from the previous full backup.
-- No GC (Garbage Collection) happens between the start time of the incremental backup and `lastbackupts`.
+- GC (Garbage Collection) safepoint must be before the `lastbackupts`.
 
 To back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]`, execute the following command:
 

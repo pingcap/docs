@@ -12,6 +12,21 @@ This document describes how to deploy a TiCDC cluster and how to manage the TiCD
 
 You can deploy TiCDC using either TiUP or Binary.
 
+### Software and hardware recommendations
+
+In production environments, the recommendations of software and hardware for TiCDC are as follows:
+
+| Linux OS       | Version        |
+| :----------------------- | :----------: |
+| Red Hat Enterprise Linux | 7.3 or later versions   |
+| CentOS                   | 7.3 or later versions   |
+
+| **CPU** | **Memory** | **Disk Type** | **Network** | **Instances (Minimum Requirements)** |
+| --- | --- | --- | --- | --- |
+| 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred） | 2 |
+
+For more information, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md)
+
 ### Use TiUP
 
 If you use TiUP to deploy TiCDC, you can choose one of the following ways:
@@ -362,6 +377,31 @@ For nodes other than owner nodes, executing the above command will return the fo
 
 ```
 election: not leader
+```
+
+### Manually schedule a table to other node
+
+{{< copyable "shell-regular" >}}
+
+```shell
+curl -X POST curl 127.0.0.1:8300/capture/owner/move_table -X POST -d 'cf-id=cf060953-036c-4f31-899f-5afa0ad0c2f9&target-cp-id=6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5&table-id=49'
+```
+
+Parameter description:
+
+| Parameter name        | Description |
+| :----------- | :--- |
+| `cf-id`        | The ID of the `changefeed` to be scheduled |
+| `target-cp-id` | The ID of the target `capture` |
+| `table-id`     | The ID of the table to be scheduled |
+
+For nodes other than owner nodes, executing the above command will return the following error.
+
+```
+{
+ "status": true,
+ "message": ""
+}
 ```
 
 ## Task configuration file

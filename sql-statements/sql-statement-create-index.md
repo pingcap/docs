@@ -81,25 +81,25 @@ Query OK, 5 rows affected (0.02 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
-+---------------------+----------+------+-------------------------------------------------------------+
-| id                  | count    | task | operator info                                               |
-+---------------------+----------+------+-------------------------------------------------------------+
-| TableReader_7       | 10.00    | root | data:Selection_6                                            |
-| └─Selection_6       | 10.00    | cop  | eq(test.t1.c1, 3)                                           |
-|   └─TableScan_5     | 10000.00 | cop  | table:t1, range:[-inf,+inf], keep order:false, stats:pseudo |
-+---------------------+----------+------+-------------------------------------------------------------+
++-------------------------+----------+-----------+---------------+--------------------------------+
+| id                      | estRows  | task      | access object | operator info                  |
++-------------------------+----------+-----------+---------------+--------------------------------+
+| TableReader_7           | 10.00    | root      |               | data:Selection_6               |
+| └─Selection_6           | 10.00    | cop[tikv] |               | eq(test.t1.c1, 3)              |
+|   └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t1      | keep order:false, stats:pseudo |
++-------------------------+----------+-----------+---------------+--------------------------------+
 3 rows in set (0.00 sec)
 
 mysql> CREATE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.30 sec)
 
 mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
-+-------------------+-------+------+-----------------------------------------------------------------+
-| id                | count | task | operator info                                                   |
-+-------------------+-------+------+-----------------------------------------------------------------+
-| IndexReader_6     | 10.00 | root | index:IndexScan_5                                               |
-| └─IndexScan_5     | 10.00 | cop  | table:t1, index:c1, range:[3,3], keep order:false, stats:pseudo |
-+-------------------+-------+------+-----------------------------------------------------------------+
++------------------------+---------+-----------+------------------------+---------------------------------------------+
+| id                     | estRows | task      | access object          | operator info                               |
++------------------------+---------+-----------+------------------------+---------------------------------------------+
+| IndexReader_6          | 10.00   | root      |                        | index:IndexRangeScan_5                      |
+| └─IndexRangeScan_5     | 10.00   | cop[tikv] | table:t1, index:c1(c1) | range:[3,3], keep order:false, stats:pseudo |
++------------------------+---------+-----------+------------------------+---------------------------------------------+
 2 rows in set (0.00 sec)
 
 mysql> ALTER TABLE t1 DROP INDEX c1;
@@ -114,6 +114,14 @@ Query OK, 0 rows affected (0.31 sec)
 > **Warning:**
 >
 > Expression index is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
+To use this feature, make the following setting in [TiDB Configuration File](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
+
+{{< copyable "sql" >}}
+
+```sql
+allow-expression-index = true
+```
 
 TiDB can build indexes not only on one or more columns in a table, but also on an expression. When queries involve expressions, expression indexes can speed up those queries.
 
@@ -164,6 +172,8 @@ The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 
 ## See also
 
+* [Index Selection](/choose-index.md)
+* [Wrong Index Solution](/wrong-index-solution.md)
 * [ADD INDEX](/sql-statements/sql-statement-add-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
 * [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
