@@ -96,4 +96,4 @@ TiDB has been released under the Apache 2.0 license since its initial launch in 
 
 TiDB implements the _Online, Asynchronous Schema Change_ algorithm first described in [Google's F1 paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/41376.pdf).
 
-In simplified terms, this means that TiDB is able to make changes to the schema across its distributed architecture without blocking either read or write operations. There is no need to use an external schema change tool or flip between masters and slaves as is common in large MySQL deployments.
+In simplified terms, this means that TiDB is able to make changes to the schema across its distributed architecture without blocking either read or write operations. There is no need to use an external schema change tool or flip between sources and replicas as is common in large MySQL deployments.
