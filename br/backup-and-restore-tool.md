@@ -31,7 +31,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 Refer to the [download page](/download-ecosystem-tools.md#br-backup-and-restore) for more information.
 
-### Using SQL statements
+### Use SQL statements
 
 Refer to the [`BACKUP` syntax](/sql-statements/sql-statement-backup.md#backup) and [`RESTORE` syntax](/sql-statements/sql-statement-restore.md#restore) for more information.
 
