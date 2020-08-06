@@ -10,16 +10,17 @@ PD Recover is a disaster recovery tool of PD, used to recover the PD cluster whi
 
 ## Compile from source code
 
-1. [Go](https://golang.org/) Version 1.13 or later because the Go modules are used.
-2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make pd-recover` command to compile and generate `bin/pd-recover`
++ [Go](https://golang.org/) Version 1.13 or later is required because the Go modules are used.
++ In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make pd-recover` command to compile and generate `bin/pd-recover`.
 
 > **Note:**
 >
-> Generally, you do not need to compile source code because the PD Control tool already exists in the released Binary or Docker. However, developer users can refer to the above instruction for compiling source code.
+> Generally, you do not need to compile source code because the PD Control tool already exists in the released binary or Docker. However, developer users can refer to the instructions above for compiling source code.
 
 ## Download TiDB installation package
 
 To download the latest version of PD Recover, directly download the TiDB package, because PD Recover is included in the TiDB package.
+
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
 | `https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` (pd-recover) | Linux | amd64 | `https://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
@@ -81,17 +82,17 @@ cat {{/path/to}}/tikv.log | grep "connect to PD cluster"
 ...
 ```
 
-### Get allocate ID
+### Get allocated ID
 
-The allocate ID value you specify must be larger than the currently largest allocate ID value. To get allocate ID you can either get it from Monitor, or view the log directly on the server.
+The allocated ID value you specify must be larger than the currently largest allocated ID value. To get allocated ID, you can either get it from the monitor, or view the log directly on the server.
 
-#### Get allocate ID from the monitor (recommended)
+#### Get `allocate` ID from the monitor (recommended)
 
-To get allocate ID from the monitor, you need to make sure that the metrics you are viewing is **the last PD leader**, and you can get the max allocate ID from `Current ID allocation` panel in PD dashboard.
+To get allocated ID from the monitor, you need to make sure that the metrics you are viewing are the metrics of **the last PD leader**, and you can get the largest allocated ID from the **Current ID allocation** panel in PD dashboard.
  
-#### Get allocate ID from PD log
+#### Get allocated ID from PD log
 
-To get the allocate ID from the PD log, you need to make sure that the log you are viewing is **the last PD leader**, and you can get the max allocate ID by running the following command:
+To get the allocated ID from the PD log, you need to make sure that the log you are viewing is the log of **the last PD leader**, and you can get the maximum allocated ID by running the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -104,11 +105,11 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 ...
 ```
 
-Or you can simply run the above command in all pd servers to find the largest one.
+Or you can simply run the above command in all PD servers to find the largest one.
 
 ### Deploy a new PD cluster
 
-The existed PD cluster should be stopped at first. Before deploying a new PD cluster, you need to delete the old data directory which specified by `--data-dir`.
+Before deploying a new PD cluster, you need to stop the the existing PD cluster and then delete the previous data directory which is specified by `--data-dir`.
 
 ### Use pd-recover
 
@@ -120,7 +121,7 @@ The existed PD cluster should be stopped at first. Before deploying a new PD clu
 
 ### Restart the whole cluster
 
-When the recovery success information is prompted, restart the whole cluster.
+When you see the prompted information that the recovery is successful, restart the whole cluster.
 
 ## FAQ
 
