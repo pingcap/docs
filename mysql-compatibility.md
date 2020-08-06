@@ -93,7 +93,7 @@ mysql> select _tidb_rowid, id from t;
 3 rows in set (0.01 sec)
 ```
 
-In early versions, the cache size of auto-increment IDs in TiDB is transparent to users. Since v3.0.14, v3.1.2, and v4.0.rc-2, the `AUTO_ID_CACHE` table option has been introduced to allow users to customize the cache size of auto-increment IDs to be allocated. This cache size might be consumed by both auto-increment columns and `_tidb_rowid`. In addition, if the length of continuous IDs needed in an `INSERT` statement exceeds that set by `AUTO_ID_CACHE`, TiDB will properly increase the cache size for this insertion to be executed successfully.
+In early versions, the cache size of auto-increment IDs in TiDB is transparent to users. Since v3.0.14, v3.1.2, and v4.0.rc-2, the `AUTO_ID_CACHE` table option has been introduced to allow users to customize the cache size of auto-increment IDs to be allocated. This cache size might be consumed by both auto-increment columns and `_tidb_rowid`. In addition, if the length of continuous IDs needed for an `INSERT` statement exceeds that set by `AUTO_ID_CACHE`, TiDB will properly increase the cache size for this insertion to be executed successfully.
 
 ### Performance schema
 
