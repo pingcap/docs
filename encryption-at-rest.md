@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: Encryption-At-Rest for TiKV
-summary: Learn how to enable encryption-at-rest to protect sensitive data.
-aliases: ['/docs/stable/encryption-at-rest/','/docs/v4.0/encryption-at-rest/']
-=======
 title: Encryption at Rest for TiKV
 summary: Learn how to enable encryption at rest to protect sensitive data.
-aliases: ['/docs/dev/encryption at rest/']
->>>>>>> bc4cfb5... Add multiple links to index and fix typos (#3572)
+aliases: ['/docs/stable/encryption-at-rest/','/docs/v4.0/encryption-at-rest/']
 ---
 
 # Encryption at Rest for TiKV <span class="version-mark">New in v4.0.0</span>
