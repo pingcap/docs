@@ -285,7 +285,7 @@
       - [Drainer](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
     - [Upgrade](/tidb-binlog/upgrade-tidb-binlog.md)
     - [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
-    - [Binlog Slave Client](/tidb-binlog/binlog-slave-client.md)
+    - [Binlog Consumer Client](/tidb-binlog/binlog-consumer-client.md)
     - [Glossary](/tidb-binlog/tidb-binlog-glossary.md)
     + Troubleshoot
       - [Troubleshooting](/tidb-binlog/troubleshoot-tidb-binlog.md)
