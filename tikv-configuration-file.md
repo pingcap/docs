@@ -830,7 +830,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `block-cache-size`
 
 + The cache size of a RocksDB block
-+ Default value: `Total machine memory / 4`
++ Default value: `Total machine memory * 25%`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1061,12 +1061,12 @@ Configuration items related to `rocksdb.defaultcf.titan`
 ### `level-merge`
 
 + Determines whether to optimize the read performance. When `level-merge` is enabled, there is more write amplification.
-+ Default value: `true`
++ Default value: `false`
 
 ### `gc-merge-rewrite`
 
 + Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
-+ Default value: `true`
++ Default value: `false`
 
 ## rocksdb.writecf
 
@@ -1150,7 +1150,7 @@ Configuration items related to security
 
 ## `import`
 
-Configuration items related to `import`
+Configuration items related to TiDB Lightning import and BR restore.
 
 ### `num-threads`
 
@@ -1163,6 +1163,16 @@ Configuration items related to `import`
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
+  
+## backup
+
+Configuration items related to BR backup.
+
+### `num-threads`
+
++ The number of worker threads to process backup
++ Default value: `MIN(CPU * 0.75, 32)`.
++ Minimum value: `1` 
 
 ## pessimistic-txn
 

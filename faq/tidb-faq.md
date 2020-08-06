@@ -50,16 +50,6 @@ mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --defaul
 
 This problem occurs because MySQL 8.0 changes the [authentication plugin](/security-compatibility-with-mysql.md) default in MySQL 5.7. To solve this problem, you need to add the options above to specify using the old encryption method.
 
-#### How is TiDB highly available?
-
-TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [TiDB architecture](/tidb-architecture.md).
-
-#### How is TiDB strongly consistent?
-
-TiDB implements Snapshot Isolation consistency, which it advertises as `REPEATABLE-READ` for compatibility with MySQL. Data is redundantly copied between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur.
-
-At the bottom layer, TiKV uses a model of replication log + State Machine to replicate data. For the write requests, the data is written to a Leader and the Leader then replicates the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log is committed and can be applied into the State Machine.
-
 #### Does TiDB support distributed transactions?
 
 Yes. TiDB distributes transactions across your cluster, whether it is a few nodes in a single location or many [nodes across multiple data centers](/multi-data-centers-in-one-city-deployment.md).
@@ -90,42 +80,6 @@ After you configure the two data sources of Atomikos, set the JDBC drives to XA.
 
 As a standalone database, MySQL can only implement across-database transactions using XA; while TiDB supports distributed transactions using Google Percolator transaction model and its performance stability is higher than XA, so TiDB does not support XA and there is no need for TiDB to support XA.
 
-#### Does `show processlist` display the system process ID?
-
-The display content of TiDB `show processlist` is almost the same as that of MySQL `show processlist`. TiDB `show processlist` does not display the system process ID. The ID that it displays is the current session ID. The differences between TiDB `show processlist` and MySQL `show processlist` are as follows:
-
-- As TiDB is a distributed database, the `tidb-server` instance is a stateless engine for parsing and executing the SQL statements (for details, see [TiDB architecture](/tidb-architecture.md)). `show processlist` displays the session list executed in the `tidb-server` instance that the user logs in to from the MySQL client, not the list of all the sessions running in the cluster. But MySQL is a standalone database and its `show processlist` displays all the SQL statements executed in MySQL.
-- The `State` column in TiDB is not continually updated during query execution. As TiDB supports parallel query, each statement may be in multiple _states_ at once, and thus it is difficult to simplify to a single value.
-
-#### How to modify the user password and privilege?
-
-To modify the user password in TiDB, it is recommended to use `set password for 'root'@'%' = '0101001';` or `alter`, not `update mysql.user` which might lead to the condition that the password in other nodes is not refreshed timely.
-
-It is recommended to use the official standard statements when modifying the user password and privilege. For details, see [TiDB user account management](/user-account-management.md).
-
-#### Why does the auto-increment ID of the later inserted data is smaller than that of the earlier inserted data in TiDB?
-
-The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [MySQL Compatibility](/mysql-compatibility.md#auto-increment-id).
-
-#### How to modify the `sql_mode` in TiDB except using the `set` command?
-
-The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql\_mode` of the database; it only supports using the `set` command to configure `sql\_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure it.
-
-#### Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
-
-Since v3.0.8, TiDB supports modifying the version string of the server by modifying [`server-version`](/tidb-configuration-file.md#server-version) in the configuration file. When you deploy TiDB using TiDB Ansible, you can also specify the proper version string by configuring `server-version` in the `conf/tidb.yml` configuration file to avoid the failure of security vulnerability scan.
-
-#### What authentication protocols does TiDB support? What's the process?
-
-- Like MySQL, TiDB supports the SASL protocol for user login authentication and password processing.
-
-- When the client connects to TiDB, the challenge-response authentication mode starts. The process is as follows:
-
-    1. The client connects to the server.
-    2. The server sends a random string challenge to the client.
-    3. The client sends the username and response to the server.
-    4. The server verifies the response.
-
 ### TiDB techniques
 
 #### TiKV for data storage
@@ -146,7 +100,7 @@ See [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbi
 
 #### What cloud vendors are currently supported by TiDB?
 
-TiDB supports deployment on [Google GKE](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-gcp-gke/), [AWS EKS](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-aws-eks/) and [Alibaba Cloud ACK](https://pingcap.com/docs-cn/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud/).
+TiDB supports deployment on [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
 
 In addition, TiDB is currently available on JD Cloud and UCloud, and has the first-level database entries on them.
 
