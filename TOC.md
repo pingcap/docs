@@ -11,9 +11,11 @@
   + [Basic Features](/basic-features.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
+  + [Credits](/credits.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
+  + [Import Example Database](/import-example-data.md)
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   + [Environment Configuration Checklist](/check-before-deployment.md)
@@ -28,6 +30,7 @@
     + Linux OS
       + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
       + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
+      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
       + [Use TiDB Ansible](/online-deployment-using-ansible.md)
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
@@ -60,12 +63,13 @@
     + [Use TiDB Ansible](/scale-tidb-using-ansible.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
-    + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
-    + [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
-    + Use BR Tool
+    + Use BR Tool (Recommended)
       + [Use BR Tool](/br/backup-and-restore-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR storages](/br/backup-and-restore-storages.md)
+    + [Use Dumpling and TiDB Lightning (Recommended)](/backup-and-restore-using-dumpling-lightning.md)
+    + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
+  + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
@@ -87,6 +91,7 @@
   + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
+  + [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
   + [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
   + [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
   + [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
@@ -102,26 +107,31 @@
       + [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     + [Coprocessor Cache](/coprocessor-cache.md)
   + SQL Tuning
+    + [Overview](/sql-tuning-overview.md)
     + [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)
     + SQL Optimization
       + [SQL Optimization Process](/sql-optimization-concepts.md)
       + Logic Optimization
+        + [Overview](/sql-logical-optimization.md)
         + [Subquery Related Optimizations](/subquery-optimization.md)
         + [Column Pruning](/column-pruning.md)
         + [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
-        + [Predicates Push Down](/predicates-push-down.md)
+        + [Eliminate Max/Min](/max-min-eliminate.md)
+        + [Predicates Push Down](/predicate-push-down.md)
+        + [Partition Pruning](/partition-pruning.md)
         + [TopN and Limit Push Down](/topn-limit-push-down.md)
         + [Join Reorder](/join-reorder.md)
       + Physical Optimization
+        + [Overview](/sql-physical-optimization.md)
         + [Index Selection](/choose-index.md)
         + [Statistics](/statistics.md)
         + [Wrong Index Solution](/wrong-index-solution.md)
         + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
       + Control Execution Plan
+        + [Overview](/control-execution-plan.md)
         + [Optimizer Hints](/optimizer-hints.md)
         + [SQL Plan Management](/sql-plan-management.md)
-        + [Access Tables Using `IndexMerge`](/index-merge.md)
         + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
@@ -181,6 +191,7 @@
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     + [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   + [TiCDC](/ticdc/ticdc-overview.md)
+  + [Dumpling](/dumpling-overview.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -324,8 +335,9 @@
       + [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)
       + [`SHOW PUMP STATUS`](/sql-statements/sql-statement-show-pump-status.md)
       + [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
+      + [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
       + [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-histograms.md)
-      + [`SHOW STATES_META`](/sql-statements/sql-statement-show-stats-meta.md)
+      + [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
       + [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
       + [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
       + [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
@@ -381,8 +393,8 @@
     + [Character Set and Collation](/character-set-and-collation.md)
     + System Tables
       + [`mysql`](/mysql-schema.md)
-      + `INFORMATION_SCHEMA`
-        + [Overview](/information-schema.md)
+      + INFORMATION_SCHEMA
+        + [Overview](/information-schema/information-schema.md)
         + [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
         + [`CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
         + [`CLUSTER_CONFIG`](/information-schema/information-schema-cluster-config.md)
@@ -496,6 +508,8 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.4](/releases/release-4.0.4.md)
+    + [4.0.3](/releases/release-4.0.3.md)
     + [4.0.2](/releases/release-4.0.2.md)
     + [4.0.1](/releases/release-4.0.1.md)
     + [4.0 GA](/releases/release-4.0-ga.md)
@@ -514,6 +528,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.17](/releases/release-3.0.17.md)
     + [3.0.16](/releases/release-3.0.16.md)
     + [3.0.15](/releases/release-3.0.15.md)
     + [3.0.14](/releases/release-3.0.14.md)
