@@ -188,7 +188,7 @@ To avoid the hotspot problem in this situation, you can use `SHARD_ROW_ID_BITS` 
 
 > **Note:**
 >
-> The value of `PRE_SPLIT_REGIONS` must be smaller or equal to that of `SHARD_ROW_ID_BITS`.
+> The value of `PRE_SPLIT_REGIONS` must be smaller than or equal to that of `SHARD_ROW_ID_BITS`.
 
 Example:
 
@@ -207,7 +207,7 @@ When data starts to be written into table `t`, the data is written into the pre-
 >
 > The `tidb_scatter_region` global variable affects the behavior of `PRE_SPLIT_REGIONS`.
 >
-> This variable controls the time of returning the results after the table is created. If there are a large number of writes after creating the table, you need to set the value of this variable to `1`, so TiDB does not return the results to the client until all the regions have been split and scattered. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
+> This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `1`, then TiDB will not return the results to the client until all the Regions are split and scattered. Otherwise, TiDB writes data before the scattering is completed, which will have a significant impact on write performance.
 
 **Problem two:**
 

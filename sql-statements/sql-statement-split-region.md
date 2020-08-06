@@ -79,7 +79,7 @@ The following example shows the result of the `SPLIT` statement:
 >
 > The following two session variables might affect the behavior of the `SPLIT` statement:
 >
-> - `tidb_wait_split_region_finish`: It might take a while to scatter the Regions. The duration depends on PD scheduling and TiKV loads. This variable is used to control when executing the `SPLIT REGION` statement whether to return the results to the client until all Regions are scattered. If set to `1` (by default), TiDB returns the value only when the scattering is completed. If set to `0`, TiDB returns the results regardless of the scattering.
+> - `tidb_wait_split_region_finish`: It might take a while to scatter the Regions. This duration depends on PD scheduling and TiKV loads. This variable is used to control when executing the `SPLIT REGION` statement whether to return the results to the client until all Regions are scattered. If its value is set to `1` (by default), TiDB returns the results only after the scattering is completed. If its value is set to `0`, TiDB returns the results regardless of the scattering status.
 > - `tidb_wait_split_region_timeout`: This variable is to set the execution timeout of the `SPLIT REGION` statement, in seconds. The default value is 300s. If the `split` operation is not completed within the duration, TiDB returns a timeout error.
 
 ### Split Table Region
@@ -190,7 +190,7 @@ SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:
 
 This statement splits the region of index `idx2` in table `t` into 10 Regions from  `2010-01-01 00:00:00` to  `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue,  2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)` and so on.
 
-If you want to split index Region by day:
+If you want to split the index Region by day, see the following example:
 
 {{< copyable "sql" >}}
 
@@ -398,7 +398,7 @@ To have evenly split Regions when a table is created, it is recommended you use 
 >
 > The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS`.
 
-The `tidb_scatter_region` global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls the time of returning the results after the table is created. If there are a large number of writes after creating the table, you need to set the value of this variable to `1`, so TiDB does not return the results to the client until all the regions have been split and scattered. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
+The `tidb_scatter_region` global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `1`, then TiDB will not return the results to the client until all the Regions are split and scattered. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
 
 ### Example
 
