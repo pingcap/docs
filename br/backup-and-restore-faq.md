@@ -48,7 +48,7 @@ For example, you might encounter the `Code: 22(invalid argument)` error when bac
  
 This error might occur when the capacity of the cluster to restore (using BR) is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
 
-To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
+To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restoration, and enable the `RATE_LIMIT` option.
 
 ## Where are the backed up files stored when I use `local` storage?
  
