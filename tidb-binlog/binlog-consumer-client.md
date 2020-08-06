@@ -1,12 +1,18 @@
 ---
+<<<<<<< HEAD:tidb-binlog/binlog-slave-client.md
 title: Binlog Slave Client User Guide
 summary: Use Binlog Slave Client to consume TiDB slave binlog data from Kafka and output the data in a specific format.
 aliases: ['/docs/v3.1/tidb-binlog/binlog-slave-client/','/docs/v3.1/reference/tidb-binlog/binlog-slave-client/']
+=======
+title: Binlog Consumer Client User Guide
+summary: Use Binlog Consumer Client to consume TiDB secondary binlog data from Kafka and output the data in a specific format.
+aliases: ['/tidb/dev/binlog-slave-client','/docs/dev/tidb-binlog/binlog-slave-client/','/docs/dev/reference/tidb-binlog/binlog-slave-client/']
+>>>>>>> a8a6903... tools: update binlog slave to binlog consumer (#3522):tidb-binlog/binlog-consumer-client.md
 ---
 
-# Binlog Slave Client User Guide
+# Binlog Consumer Client User Guide
 
-Binlog Slave Client is used to consume TiDB slave binlog data from Kafka and output the data in a specific format. Currently, Drainer supports multiple kinds of down streaming, including MySQL, TiDB, file and Kafka. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced.
+Binlog Consumer Client is used to consume TiDB secondary binlog data from Kafka and output the data in a specific format. Currently, Drainer supports multiple kinds of down streaming, including MySQL, TiDB, file and Kafka. But sometimes users have customized requirements for outputting data to other formats, for example, Elasticsearch and Hive, so this feature is introduced.
 
 ## Configure Drainer
 
@@ -118,7 +124,7 @@ message Binlog {
 }
 ```
 
-For the definition of the data format, see [`binlog.proto`](https://github.com/pingcap/tidb-tools/blob/master/tidb-binlog/slave_binlog_proto/proto/binlog.proto).
+For the definition of the data format, see [`binlog.proto`](https://github.com/pingcap/tidb-tools/blob/master/tidb-binlog/proto/proto/binlog.proto).
 
 ### Driver
 
