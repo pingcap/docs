@@ -45,6 +45,7 @@ However, some features of MySQL are not supported. This could be because there i
 
 ### Auto-increment ID
 
+<<<<<<< HEAD
 In TiDB, auto-increment columns are only guaranteed to be incremental and unique but are *not* guaranteed to be allocated sequentially. Currently, TiDB allocates IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs will not be sequential.
 
 > **Note:**
@@ -67,8 +68,13 @@ The operations are executed as follows:
 
 1. The client issues the `INSERT INTO t VALUES (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
 2. The client issues the `INSERT INTO t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
+=======
++ In TiDB, auto-increment columns are only guaranteed to be unique and incremental on a single TiDB server, but they are *not* guaranteed to be incremental among multiple TiDB servers or allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
+>>>>>>> c7b4d55... auto-increment: update doc (#3562)
 
 Also, starting with TiDB 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+
++ See [`AUTO_INCREMENT`](/auto-increment.md) for more details.
 
 > **Note:**
 >
