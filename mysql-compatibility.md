@@ -40,11 +40,11 @@ However, some features of MySQL are not supported. This could be because there i
 
 ### Auto-increment ID
 
-+ In TiDB, auto-increment columns are only guaranteed to be incremental and unique but are *not* guaranteed to be allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
-
-+ The implementation principle of the auto-increment ID in TiDB is that each tidb-server instance caches a section of ID values (currently 30,000 IDs are cached) for allocation. The number of cached IDs is determined by `AUTO_ID_CACHE`. Note that both the auto-increment columns and `_tidb_rowid` consume the cached IDs. If the `INSERT` statement requires that the number of consecutive IDs is greater than the `AUTO_ID_CACHE` value, the system automatically adjusts this value so that this statement can be executed.
++ In TiDB, auto-increment columns are only guaranteed to be unique and incremental in a single TiDB server, but they are *not* guaranteed to be incremental among multiple TiDB servers or allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
 
 + You can use the `tidb_allow_remove_auto_inc` system variable to enable or disable the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
+
++ See [`AUTO_INCREMENT`](/auto-increment.md) for more details.
 
 > **Note:**
 >
@@ -53,14 +53,14 @@ However, some features of MySQL are not supported. This could be because there i
 > + If you have not specified the primary key when creating a table, TiDB uses `_tidb_rowid` to identify the row. The allocation of this value shares an allocator with the auto-increment column (if such a column exists). If you specify an auto-increment column as the primary key, TiDB uses this column to identify the row. In this situation, the following situation might happen:
 
 ```sql
-mysql> create table t(id int unique key AUTO_INCREMENT);
+create table t(id int unique key AUTO_INCREMENT);
 Query OK, 0 rows affected (0.05 sec)
 
-mysql> insert into t values(),(),();
+insert into t values(),(),();
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-mysql> select _tidb_rowid, id from t;
+select _tidb_rowid, id from t;
 +-------------+------+
 | _tidb_rowid | id   |
 +-------------+------+
