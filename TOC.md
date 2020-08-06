@@ -322,7 +322,7 @@
       - [Drainer](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
     - [Upgrade](/tidb-binlog/upgrade-tidb-binlog.md)
     - [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
-    - [Binlog Slave Client](/tidb-binlog/binlog-slave-client.md)
+    - [Binlog Consumer Client](/tidb-binlog/binlog-consumer-client.md)
     - [TiDB Binlog Relay Log](/tidb-binlog/tidb-binlog-relay-log.md)
     - [Bidirectional Replication Between TiDB Clusters](/tidb-binlog/bidirectional-replication-between-tidb-clusters.md)
     - [Glossary](/tidb-binlog/tidb-binlog-glossary.md)
