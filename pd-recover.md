@@ -86,7 +86,7 @@ cat {{/path/to}}/tikv.log | grep "connect to PD cluster"
 
 The allocated ID value you specify must be larger than the currently largest allocated ID value. To get allocated ID, you can either get it from the monitor, or view the log directly on the server.
 
-#### Get `allocate` ID from the monitor (recommended)
+#### Get allocated ID from the monitor (recommended)
 
 To get allocated ID from the monitor, you need to make sure that the metrics you are viewing are the metrics of **the last PD leader**, and you can get the largest allocated ID from the **Current ID allocation** panel in PD dashboard.
  
