@@ -27,7 +27,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 ## Use BR
 
-### Download binary files
+### Use binary files
 
 Refer to the [download page](/download-ecosystem-tools.md#br-backup-and-restore) for more information.
 
