@@ -71,12 +71,12 @@ TiFlash shares the computing workload in the same way as the TiKV Coprocessor do
 
 ## See also
 
-- To [deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
-- To [scale out a TiFlash node](/scale-tidb-using-tiup.md#scale-out-a-tiflash-node).
-- To [use TiFlash](/tiflash/use-tiflash.md).
-- To [maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
-- To [tune TiFlash performance](/tiflash/tune-tiflash-performance.md).
-- To [configure TiFlash](/tiflash/tiflash-configuration.md).
-- To [monitor the TiFlash cluster](/tiflash/monitor-tiflash.md).
-- To learn [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
-- To [troubleshoot a TiFlash cluster](/tiflash/troubleshoot-tiflash.md).
+- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
+- To add a TiFlash node in a deployed cluster, see [Scale out a TiFlash node](/scale-tidb-using-tiup.md#scale-out-a-tiflash-node).
+- [Use TiFlash](/tiflash/use-tiflash.md).
+- [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
+- [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).
+- [Configure TiFlash](/tiflash/tiflash-configuration.md).
+- [Monitor the TiFlash cluster](/tiflash/monitor-tiflash.md).
+- Learn [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
+- [Troubleshoot a TiFlash cluster](/tiflash/troubleshoot-tiflash.md).
