@@ -73,7 +73,6 @@ The operations are executed as follows:
 
 Also, starting from TiDB 2.1.18, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
-+ See [`AUTO_INCREMENT`](/auto-increment.md) for more details.
 
 > **Note:**
 >
