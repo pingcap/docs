@@ -126,6 +126,7 @@ TiDB version: 4.0.5
         - Fix a issue that failed changefeed can't be removed [#782](https://github.com/pingcap/ticdc/pull/782)
         - Fix invalid delete evenets by selecting one unique index as the handle index [#787](https://github.com/pingcap/ticdc/pull/787)
         - Fix the bug that GC safepoint will be forwarded beyond the checkpoint of stopped changefeed [#797](https://github.com/pingcap/ticdc/pull/797)
+        - Fix the bug that network io wait blocks task exits [#825](https://github.com/pingcap/ticdc/pull/825)
 
     + TiDB Lightning
 
