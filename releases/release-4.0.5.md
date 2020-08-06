@@ -50,6 +50,7 @@ TiDB version: 4.0.5
     - Warn potential deadlock for Consume in remove [#18395](https://github.com/pingcap/tidb/pull/18395)
     - Support the Action when memory exceed quota for TableReader Executor. [#18392](https://github.com/pingcap/tidb/pull/18392)
     - Refine the behavior of StrToInt and StrToFloat and support convert JSON to date, time and timestamp [#18159](https://github.com/pingcap/tidb/pull/18159)
+    - Avoid too many times of backoff when we retry for batch cop [#18999](https://github.com/pingcap/tidb/pull/18999)
 
 + PD
 
@@ -65,7 +66,7 @@ TiDB version: 4.0.5
     - Reduce IO operations by optimizing Raft logs processing logic. [#960](https://github.com/pingcap/tics/pull/960)
     - Accelerate regions schedule for blocked add partition ddl [#959](https://github.com/pingcap/tics/pull/959)
     - Optimize compactions of delta data in DeltaTree to reduce read and write amplification [#952](https://github.com/pingcap/tics/pull/952)
-    - Optimize applying snapshot by preprocessing under multi-thread. [#944](https://github.com/pingcap/tics/pull/944)
+    - Optimize the performance of applying region snapshots by preprocessing them under multi-threads. [#944](https://github.com/pingcap/tics/pull/944)
 
 + Tools
 
@@ -90,7 +91,6 @@ TiDB version: 4.0.5
 + TiDB
 
     - Check ErrTruncate/Overflow locally for builtinCastRealAsDecimalSig to fix the "should ensure all columns have the same length" error [#18967](https://github.com/pingcap/tidb/pull/18967)
-    - Fix a encode bug causes the wrong result of hashJoin with set and enum [#18859](https://github.com/pingcap/tidb/pull/18859)
     - Fix issue `pre_split_regions` table option doesn't work in the partition table. [#18837](https://github.com/pingcap/tidb/pull/18837)
     - Fixed an issue that could cause a large transaction to be terminated prematurely. [#18813](https://github.com/pingcap/tidb/pull/18813)
     - Fix incorrect collator when `getSignatureByPB` and remove unnecessary recover [#18735](https://github.com/pingcap/tidb/pull/18735)
@@ -103,6 +103,8 @@ TiDB version: 4.0.5
     - Fix a bug caused by the wrong collation setting which leads to the wrong result of collation function. [#17231](https://github.com/pingcap/tidb/pull/17231)
     - Fix STR_TO_DATE's handling for format token '%r', '%h' [#18727](https://github.com/pingcap/tidb/pull/18727)
     - Fix issues of TiDB version information formation doesn't consistent with PD/TiKV in cluster_info table. [#18413](https://github.com/pingcap/tidb/pull/18413)
+    - Fix the existence checks for pessimistic transactions. [#19004](https://github.com/pingcap/tidb/pull/19004)
+    - Fix union select for update race. [#19006](https://github.com/pingcap/tidb/pull/19006)
 
 + TiKV
 
