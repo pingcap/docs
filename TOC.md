@@ -331,7 +331,8 @@
   - [Contribute to TiDB](/contribute.md#contribute-to-tidb)
   - [Improve the Docs](/contribute.md#improve-the-docs)
 - [Adopters](/adopters.md)
-+ [Releases](/releases/release-notes.md)
++ Releases
+  + [All Releases](/releases/release-notes.md)
   + v2.1
     - [2.1.19](/releases/release-2.1.19.md)
     - [2.1.18](/releases/release-2.1.18.md)
