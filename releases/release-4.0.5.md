@@ -105,6 +105,7 @@ TiDB version: 4.0.5
     - Fix issues of TiDB version information formation doesn't consistent with PD/TiKV in cluster_info table. [#18413](https://github.com/pingcap/tidb/pull/18413)
     - Fix the existence checks for pessimistic transactions. [#19004](https://github.com/pingcap/tidb/pull/19004)
     - Fix union select for update race. [#19006](https://github.com/pingcap/tidb/pull/19006)
+    - Fix the wrong query result when apply has a child of type PointGet. [#19046](https://github.com/pingcap/tidb/pull/19046)
 
 + TiKV
 
