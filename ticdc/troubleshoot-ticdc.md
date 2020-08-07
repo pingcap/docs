@@ -80,7 +80,7 @@ If you use MySQL in a special public cloud environment, such Alibaba Cloud RDS, 
 
     {{< copyable "shell-regular" >}}
 
-    ```shell
+    ```sql
     show variables like '%time_zone%';
     ```
 
