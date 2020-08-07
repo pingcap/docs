@@ -11,7 +11,7 @@
   + [Basic Features](/basic-features.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
-  + [Adopters](/adopters.md)
+  + [TiDB Adopters](/adopters.md)
   + [Credits](/credits.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
