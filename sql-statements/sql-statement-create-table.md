@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-create-table/','/docs/dev/refe
 
 # CREATE TABLE
 
-This statement creates a new table in the currently selected database. This statement behaves similar to `CREATE TABLE` in MySQL, except some attributes are ignored or handled slightly differently for compatibility.
+This statement creates a new table in the currently selected database. It behaves similarly to the `CREATE TABLE` statement in MySQL.
 
 ## Synopsis
 
@@ -79,7 +79,7 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 |`PRE_SPLIT_REGIONS`| To pre-split `2^(PRE_SPLIT_REGIONS)` Regions when creating a table |`PRE_SPLIT_REGIONS` = 4|
 |`AUTO_ID_CACHE`| To set the auto ID cache size in a TiDB instance. By default, TiDB automatically changes this size according to allocation speed of auto ID |`AUTO_ID_CACHE` = 200|
 |`AUTO_RANDOM_BASE`| To set the initial incremental part value of auto_random. This option can be considered as a part of the internal interface. Users can ignore this parameter |`AUTO_RANDOM_BASE` = 0|
-| `CHARACTER SET` | To specify the character set for the table | `CHARACTER SET` =  'utf8mb4' |
+| `CHARACTER SET` | To specify the [character set](/character-set-and-collation.md) for the table | `CHARACTER SET` =  'utf8mb4' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
 
 > **Note:**
