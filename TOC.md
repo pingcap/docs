@@ -373,20 +373,8 @@
   - [Contribute to TiDB](/contribute.md#contribute-to-tidb)
   - [Improve the Docs](/contribute.md#improve-the-docs)
 - [Adopters](/adopters.md)
-<<<<<<< HEAD
-+ [Releases](/releases/release-notes.md)
-=======
 + Releases
   + [All Releases](/releases/release-notes.md)
-  + v3.1
-    - [3.1.2](/releases/release-3.1.2.md)
-    - [3.1.1](/releases/release-3.1.1.md)
-    - [3.1.0 GA](/releases/release-3.1.0-ga.md)
-    - [3.1.0-rc](/releases/release-3.1.0-rc.md)
-    - [3.1.0-beta.2](/releases/release-3.1.0-beta.2.md)
-    - [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
-    - [3.1.0-beta](/releases/release-3.1.0-beta.md)
->>>>>>> d8d2967... TOC: remove a link in the toggle title (#3575)
   + v3.0
     - [3.0.17](/releases/release-3.0.17.md)
     - [3.0.16](/releases/release-3.0.16.md)
