@@ -78,7 +78,7 @@ If you use MySQL in a special public cloud environment, such Alibaba Cloud RDS, 
 
 1. Query the time zone used by MySQL:
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "sql" >}}
 
     ```sql
     show variables like '%time_zone%';
