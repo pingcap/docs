@@ -9,7 +9,7 @@ aliases: ['/docs/dev/adopters/']
 
 This is a list of TiDB adopters in various industries.
 
-| Company | Industry | Case study |
+| Company | Industry | Case studies |
 | :--- | :--- | :--- |
 |[VNG](https://en.wikipedia.org/wiki/VNG_Corporation)|Mobile Payment|[English](https://pingcap.com/success-stories/tidb-at-zalopay-infrastructure-lesson-learned/)|
 |[PayPay](https://www.crunchbase.com/organization/paypay#section-overviewy)|Mobile Payment|[Chinese](https://pingcap.com/cases-cn/user-case-paypay/)|
