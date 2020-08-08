@@ -122,7 +122,7 @@ recognized and transformed:
     | `\Z`     | Windows EOF (U+001A)     |
 
     In all other cases (e.g. `\"`) the backslash is simply stripped, leaving the next character (`"`)
-in the field.
+in the field. Meanwhile, the reserved characters are only ordinary characters, and all special characters (e.g. delimiter) will be invalid.
 
 - Quoting will not affect whether backslash escapes are interpreted.
 
