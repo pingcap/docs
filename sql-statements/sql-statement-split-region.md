@@ -400,6 +400,10 @@ region3:   [ 2<<61     ,  3<<61 )
 region4:   [ 3<<61     ,  +inf  )
 ```
 
+## MySQL compatibility
+
+This statement is a TiDB extension to MySQL syntax.
+
 ## See also
 
 * [SHOW TABLE REGIONS](/sql-statements/sql-statement-show-table-regions.md)
