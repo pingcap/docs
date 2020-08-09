@@ -1,7 +1,6 @@
 ---
 title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
-category: how-to
 aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/']
 ---
 
@@ -113,7 +112,8 @@ The following topology documents provide a cluster configuration template for ea
 > You can use secret keys or interactive passwords for security authentication when you deploy TiDB using TiUP:
 >
 > - If you use secret keys, you can specify the path of the keys through `-i` or `--identity_file`;
-> - If you use passwords, you do not need to add other parameters, tap `Enter` and you can enter the password interaction window.
+> - If you use passwords, add the `-p` flag to enter the password interaction window;
+> - If password-free login to the target machine has been configured, no authentication is required.
 
 {{< copyable "shell-regular" >}}
 
@@ -127,7 +127,7 @@ In the above command:
 - The version of the TiDB cluster is `v4.0.0`. You can see other supported versions by running `tiup list tidb`.
 - The initialization configuration file is `topology.yaml`.
 - `--user root`: Log in to the target machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` privileges to complete the deployment.
-- `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `--user`) that has access to the deployment machine. `[-p]` is used to input the user password interactively.
+- `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
 
 At the end of the output log, you will see ```Deployed cluster `tidb-test` successfully```. This indicates that the deployment is successful.
 
@@ -190,7 +190,7 @@ If the output log includes ```Started cluster `tidb-test` successfully```, the s
     mysql -u root -h 10.0.1.4 -P 4000
     ```
 
-In addition, you also need to verify the status of the monitoring system, TiDB Dashboard, and the execution of simple SQL commands. For the specific operations, see [Verify Cluster Status](/post-installation-check.md).
+In addition, you also need to verify the status of the monitoring system, [TiDB Dashboard](/dashboard/dashboard-intro.md), and the execution of simple SQL commands. For the specific operations, see [Verify Cluster Status](/post-installation-check.md).
 
 ## What's next
 

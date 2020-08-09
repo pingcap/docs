@@ -1,7 +1,6 @@
 ---
 title: TiDB Binlog FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
-category: faq
 aliases: ['/docs/dev/tidb-binlog/tidb-binlog-faq/','/docs/dev/reference/tidb-binlog/faq/']
 ---
 
@@ -123,7 +122,7 @@ If the data in the downstream is not affected, you can redeploy Drainer on the n
 
 2. To restore the latest data of the backup file, use Reparo to set `start-tso` = {snapshot timestamp of the full backup + 1} and `end-ts` = 0 (or you can specify a point in time).
 
-## How to redeploy Drainer when enabling `ignore-error` in Master-Slave replication triggers a critical error?
+## How to redeploy Drainer when enabling `ignore-error` in Primary-Secondary replication triggers a critical error?
 
 If a critical error is trigged when TiDB fails to write binlog after enabling `ignore-error`, TiDB stops writing binlog and binlog data loss occurs. To resume replication, perform the following steps:
 

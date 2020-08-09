@@ -1,7 +1,6 @@
 ---
 title: TiDB Best Practices
 summary: Learn the best practices of using TiDB.
-category: reference
 aliases: ['/docs/dev/tidb-best-practices/']
 ---
 
@@ -31,7 +30,7 @@ This section is an introduction to these concepts. For detailed information, ref
 
 Raft is a consensus algorithm that ensures data replication with strong consistency. At the bottom layer, TiDB uses Raft to replicate data. TiDB writes data to the majority of the replicas before returning the result of success. In this way, even though a few replicas might get lost, the system still has the latest data. For example, if there are three replicas, the system does not return the result of success until data has been written to two replicas. Whenever a replica is lost, at least one of the remaining two replicas have the latest data.
 
-To store three replicas, compared with the replication of Master-Slave, Raft is more efficient. The write latency of Raft depends on the two fastest replicas, instead of the slowest one. Therefore, the implementation of geo-distributed and multiple active data centers becomes possible by using the Raft replication. In the typical scenario of three data centers distributing in two sites, to guarantee the data consistency, TiDB just needs to successfully write data into the local data center and the closer one, instead of writing to all three data centers. However, this does not mean that cross-data center deployment can be implemented in any scenario. When the amount of data to be written is large, the bandwidth and latency between data centers become the key factors. If the write speed exceeds the bandwidth or the latency is too high, the Raft replication mechanism still cannot work well.
+To store three replicas, compared with the replication of Source-Replica, Raft is more efficient. The write latency of Raft depends on the two fastest replicas, instead of the slowest one. Therefore, the implementation of geo-distributed and multiple active data centers becomes possible by using the Raft replication. In the typical scenario of three data centers distributing in two sites, to guarantee the data consistency, TiDB just needs to successfully write data into the local data center and the closer one, instead of writing to all three data centers. However, this does not mean that cross-data center deployment can be implemented in any scenario. When the amount of data to be written is large, the bandwidth and latency between data centers become the key factors. If the write speed exceeds the bandwidth or the latency is too high, the Raft replication mechanism still cannot work well.
 
 ### Distributed transactions
 
@@ -117,21 +116,21 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
     As data is distributed across many Regions, queries run in TiDB concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, the OLTP query usually does not involve a large amount of data and the low concurrency is enough. But for the OLAP query, the concurrency is high and TiDB modifies the query concurrency through the following system variables:
 
-    - [`tidb_distsql_scan_concurrency`](/tidb-specific-system-variables.md#tidb_distsql_scan_concurrency):
+    - [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency):
     
         The concurrency of scanning data, including scanning the table and index data.
 
-    - [`tidb_index_lookup_size`](/tidb-specific-system-variables.md#tidb_index_lookup_size):
+    - [`tidb_index_lookup_size`](/system-variables.md#tidb_index_lookup_size):
         
         If it needs to access the index to get row IDs before accessing the table data, it uses a batch of row IDs as a single request to access the table data. This parameter sets the size of a batch. The larger batch increases latency, while the smaller one might lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
     
-    - [`tidb_index_lookup_concurrency`](/tidb-specific-system-variables.md#tidb_index_lookup_concurrency):
+    - [`tidb_index_lookup_concurrency`](/system-variables.md#tidb_index_lookup_concurrency):
 
         If it needs to access the index to get row IDs before accessing the table data, the concurrency of getting data through row IDs every time is modified through this parameter.
     
 * Ensure the order of results through indexes
 
-    You can use indexes to filter or sort data. Firstly, get row IDs according to the index order. Then, return the row content according to the return order of row IDs. In this way, the returned results are ordered according to the index column. It has been mentioned earlier that the model of scanning index and getting row is parallel + pipeline. If the row is returned according to the index order, a high concurrency between two queries does not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [`tidb_index_serial_scan_concurrency`](/tidb-specific-system-variables.md#tidb_index_serial_scan_concurrency) variable.
+    You can use indexes to filter or sort data. Firstly, get row IDs according to the index order. Then, return the row content according to the return order of row IDs. In this way, the returned results are ordered according to the index column. It has been mentioned earlier that the model of scanning index and getting row is parallel + pipeline. If the row is returned according to the index order, a high concurrency between two queries does not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) variable.
 
 * Reverse index scan
 
@@ -176,7 +175,7 @@ This pseudocode means to split huge chunks of data into small ones and then dele
 
 ### Query
 
-For query requirements and specific statements, refer to [TiDB Specific System Variables](/tidb-specific-system-variables.md).
+For query requirements and specific statements, refer to [System Variables](/system-variables.md).
 
 You can control the concurrency of SQL execution through the `SET` statement and the selection of the `Join` operator through hints.
 
@@ -196,7 +195,7 @@ There are lots of items in the monitoring system, the majority of which are for 
 
 In addition to monitoring, you can also view the system logs. The three components of TiDB, tidb-server, tikv-server, and pd-server, each has a `--log-file` parameter. If this parameter has been configured when the cluster is started, logs are stored in the file configured by the parameter and log files are automatically archived on a daily basis. If the `--log-file` parameter has not been configured, the log is output to `stderr`.
 
-Starting from TiDB 4.0, TiDB provides TiDB Dashboard UI to improve usability. You can access TiDB Dashboard by visiting <http://${PD_IP}:${PD_PORT}/dashboard> in your browser. TiDB Dashboard provides features such as viewing cluster status, performance analysis, traffic visualization, cluster diagnostics, and log searching.
+Starting from TiDB 4.0, TiDB provides [TiDB Dashboard](/dashboard/dashboard-intro.md) UI to improve usability. You can access TiDB Dashboard by visiting <http://${PD_IP}:${PD_PORT}/dashboard> in your browser. TiDB Dashboard provides features such as viewing cluster status, performance analysis, traffic visualization, cluster diagnostics, and log searching.
 
 ### Documentation
 

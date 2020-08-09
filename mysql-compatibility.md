@@ -1,7 +1,6 @@
 ---
 title: Compatibility with MySQL
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
-category: reference
 aliases: ['/docs/dev/mysql-compatibility/','/docs/dev/reference/mysql-compatibility/']
 ---
 
@@ -9,7 +8,7 @@ aliases: ['/docs/dev/mysql-compatibility/','/docs/dev/reference/mysql-compatibil
 
 TiDB is fully compatible with the MySQL 5.7 protocol and the common features and syntax of MySQL 5.7. The ecosystem tools for MySQL 5.7 (PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader) and the MySQL client can be used for TiDB.
 
-However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superceded by JSON), security issues (such as `SELECT INTO OUTFILE`), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
+However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superceded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
 > **Note:**
 >
@@ -24,7 +23,6 @@ However, some features of MySQL are not supported. This could be because there i
 + `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
 + `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
-+ Add/drop primary key
 + SYS schema
 + Optimizer trace
 + XML Functions
@@ -42,11 +40,11 @@ However, some features of MySQL are not supported. This could be because there i
 
 ### Auto-increment ID
 
-+ In TiDB, auto-increment columns are only guaranteed to be incremental and unique but are *not* guaranteed to be allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
-
-+ The implementation principle of the auto-increment ID in TiDB is that each tidb-server instance caches a section of ID values (currently 30,000 IDs are cached) for allocation. The number of cached IDs is determined by `AUTO_ID_CACHE`. Note that both the auto-increment columns and `_tidb_rowid` consume the cached IDs. If the `INSERT` statement requires that the number of consecutive IDs is greater than the `AUTO_ID_CACHE` value, the system automatically adjusts this value so that this statement can be executed.
++ In TiDB, auto-increment columns are only guaranteed to be unique and incremental on a single TiDB server, but they are *not* guaranteed to be incremental among multiple TiDB servers or allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
 
 + You can use the `tidb_allow_remove_auto_inc` system variable to enable or disable the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
+
++ See [`AUTO_INCREMENT`](/auto-increment.md) for more details.
 
 > **Note:**
 >
@@ -123,7 +121,9 @@ TiDB supports storage engine abstraction similar to MySQL, but you need to speci
 
 ### SQL modes
 
-- Does not support the compatibility modes, such as `ORACLE` and `POSTGRESQL`. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
+TiDB supports most [SQL modes](/sql-mode.md):
+
+- The compatibility modes, such as `ORACLE` and `POSTGRESQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
 - The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
 - The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are accepted for compatibility, but are not applicable to TiDB.
 

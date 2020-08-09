@@ -1,6 +1,5 @@
 ---
 title: Use TiFlash
-category: reference
 aliases: ['/docs/dev/tiflash/use-tiflash/','/docs/dev/reference/tiflash/use-tiflash/']
 ---
 
@@ -12,10 +11,6 @@ You can either use TiDB to read TiFlash replicas for medium-scale analytical pro
 
 - [Use TiDB to read TiFlash replicas](#use-tidb-to-read-tiflash-replicas)
 - [Use TiSpark to read TiFlash replicas](#use-tispark-to-read-tiflash-replicas)
-
-> **Note:**
->
-> If you [use TiDB to read TiFlash replicas](#use-tidb-to-read-tiflash-replicas) in a transaction that contains any write operation (for example, `SELECT ... FOR UPDATE` followed by `UPDATE ...`), currently the behavior is undefined. This restriction will be removed in later versions.
 
 ## Create TiFlash replicas for tables
 
@@ -158,7 +153,7 @@ The final engine configuration is the session-level configuration, that is, the 
 
 > **Note:**
 >
-> Because TiDB Dashboard and other components need to read some system tables stored in the TiDB memory table area, it is recommended to always add the "tidb" engine to the instance-level engine configuration.
+> Because [TiDB Dashboard](/dashboard/dashboard-intro.md) and other components need to read some system tables stored in the TiDB memory table area, it is recommended to always add the "tidb" engine to the instance-level engine configuration.
 
 If the queried table does not have a replica of the specified engine (for example, the engine is configured as "tiflash" but the table does not have a TiFlash replica), the query returns an error.
 
@@ -192,6 +187,10 @@ If the table specified by a hint does not have a replica of the specified engine
 
 In the above three ways of reading TiFlash replicas, engine isolation specifies the overall range of available replicas of engines; within this range, manual hint provides statement-level and table-level engine selection that is more fine-grained; finally, CBO makes the decision and selects a replica of an engine based on cost estimation within the specified engine list.
 
+> **Note:**
+>
+> Before v4.0.3, the behavior of reading from TiFlash replica in a non-read-only SQL statement (for example, `INSERT INTO ... SELECT`, `SELECT ... FOR UPDATE`, `UPDATE ...`, `DELETE ...`) is undefined. In v4.0.3 and later versions, internally TiDB ignores the TiFlash replica for a non-read-only SQL statement to guarantee the data correctness. That is, for [smart selection](#smart-selection), TiDB automatically chooses the non-TiFlash replica; for [engine isolation](#engine-isolation) that specifies TiFlash replica **only**, TiDB reports an error; and for [manual hint](#manual-hint), TiDB ignores the hint.
+
 ## Use TiSpark to read TiFlash replicas
 
 Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.use.tiflash` parameter to `true` (or `false`).
@@ -222,11 +221,18 @@ You can configure this parameter in either of the following ways:
 
 TiFlash mainly supports predicate and aggregate push-down calculations. Push-down calculations can help TiDB perform distributed acceleration. Currently, table joins and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in later versions.
 
-Currently, TiFlash supports pushing down a limited number of expressions. To learn the supported expressions, refer to [expression list](https://github.com/pingcap/tidb/blob/692e0098b1207ef26ea18bedfcc9ba067604da3c/expression/expression.go#L1115).
+Currently, TiFlash supports pushing down a limited number of expressions, including:
+
+```
++, -, /, *, >=, <=, =, !=, <, >, ifnull, isnull, bitor, in, mod, bitand, or, and, like, not, 
+case when, month, substr, timestampdiff, date_format, from_unixtime, json_length, if, bitneg, bitxor, cast(int as decimal), date_add(datetime, int), date_add(datetime, string)
+```
+
+Among them, the push-down of `cast` and `date_add` is not enabled by default. To enable it, refer to [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
 
 TiFlash does not support push-down calculations in the following situations:
 
-- Expressions that contain `Duration` and `JSON` cannot be pushed down.
-- If an aggregate function or a `WHERE` clause contains expressions that are not in [this list](https://github.com/pingcap/tidb/blob/692e0098b1207ef26ea18bedfcc9ba067604da3c/expression/expression.go#L1115), the aggregate or related predicate filtering cannot be pushed down.
+- Expressions that contain `Duration` cannot be pushed down.
+- If an aggregate function or a `WHERE` clause contains expressions that are not included in the list above, the aggregate or related predicate filtering cannot be pushed down.
 
 If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect.
