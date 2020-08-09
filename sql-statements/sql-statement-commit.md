@@ -38,8 +38,8 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-* In MySQL, with the exception of Group Replication with multiple primaries, it is not typical that a `COMMIT` statement could result in an error. By contrast, TiDB uses optimistic concurrency control and conflicts may result in `COMMIT` returning an error.
-* Be default, `UNIQUE` and `PRIMARY KEY` constraint checks are deferred until statement commit. This behavior can be changed by setting `tidb_constraint_check_in_place=TRUE`.
+* By default, `UNIQUE` and `PRIMARY KEY` constraint checks are deferred until statement commit. This improves performance because checks are batched, but may result in compatibility issues for applications not expecting a commit statement to fail. This behavior can be changed by setting `tidb_constraint_check_in_place=TRUE`.
+* By default, TiDB 3.0 and above uses [Pessimistic Locking](/pessimistic-transaction.md). When using [Optimistic Locking](/optimistic-transaction.md), it is important to consider that a `COMMIT` statement may fail because rows have been modified by another transaction.
 * TiDB only has syntactic support for `CompletionTypeWithinTransaction`. Closing the connection or continuing to open a new transaction after the transaction is committed is not supported.
 
 ## See also
