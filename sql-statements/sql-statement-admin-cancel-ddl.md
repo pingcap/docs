@@ -6,11 +6,17 @@ category: reference
 
 # ADMIN CANCEL DDL
 
-TODO
+The `ADMIN CANCEL DDL` statement allows you to cancel a running DDL job. The `job_id` can be found by running `ADMIN SHOW DDL JOBS`.
 
 ## Synopsis
 
-TODO
+**AdminStmt:**
+
+![AdminStmt](/media/sqlgram/AdminStmt.png)
+
+**NumList:**
+
+![NumList](/media/sqlgram/NumList.png)
 
 ## Examples
 
@@ -30,12 +36,10 @@ If the operation fails to cancel the jobs, specific reasons are displayed.
 > - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement.
 > - If the jobs you want to cancel are finished, the cancellation operation fails.
 
-
-
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* 
+* [`ADMIN SHOW DDL [JOBS,QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)

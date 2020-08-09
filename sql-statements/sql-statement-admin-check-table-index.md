@@ -1,20 +1,24 @@
 ---
-title: ADMIN | TiDB SQL Statement Reference
+title: ADMIN CHECK [TABLE|INDEX] | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN for the TiDB database.
 category: reference
 ---
 
-# ADMIN
+# ADMIN CHECK [TABLE|INDEX]
 
-TODO
+The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes.
 
 ## Synopsis
 
-TODO
+**AdminStmt:**
+
+![AdminStmt](/media/sqlgram/AdminStmt.png)
+
+**TableNameList:**
+
+![TableNameList](/media/sqlgram/TableNameList.png)
 
 ## Examples
-
-## `ADMIN CHECK` related statement
 
 To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`:
 
@@ -48,4 +52,4 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* 
+* [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)
