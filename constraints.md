@@ -89,6 +89,26 @@ Query OK, 1 row affected (0.03 sec)
 
 * The third `INSERT` statement succeeds because `last_login` did not explicitly specify the column as `NOT NULL`. The default behavior is to permit `NULL` values.
 
+## CHECK
+
+TiDB parses but ignores `CHECK` constraints. This is MySQL 5.7 compatible behavior.
+
+For example:
+
+{{< copyable "sql" >}}
+
+```sql
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+ id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ username VARCHAR(60) NOT NULL,
+ UNIQUE KEY (username),
+ CONSTRAINT min_username_length CHECK (CHARACTER_LENGTH(username) >=4)
+);
+INSERT INTO users (username) VALUES ('a');
+SELECT * FROM users;
+```
+
 ## Primary Key
 
 In TiDB, `PRIMARY KEY` constraints are checked lazily by default. By batching checks until when the transaction commits, TiDB is able to reduce network communication. For example:
