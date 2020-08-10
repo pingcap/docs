@@ -12,8 +12,8 @@ TiDB version: 4.0.5
 
 + TiDB
 
-    - Change drop partition and truncate partition's job args to support multi partition id array [#18930](https://github.com/pingcap/tidb/pull/18930)
-    - Add delete only state for add partition replica check [#18865](https://github.com/pingcap/tidb/pull/18865)
+    - Change `drop partition` and `truncate partition`'s job arguments to support the ID array of multiple partitions [#18930](https://github.com/pingcap/tidb/pull/18930)
+    - Add the delete-only state for checking `add partition` replicas [#18865](https://github.com/pingcap/tidb/pull/18865)
 
 ## New Features
 
@@ -23,29 +23,29 @@ TiDB version: 4.0.5
 
 + TiFlash
 
-    - Support unified log format
+    - Support the unified log format with TiDB
 
 + Tools
 
     + TiCDC
 
         - Support Kafka SSL connection [#764](https://github.com/pingcap/ticdc/pull/764)
-        - Support to output old value [#708](https://github.com/pingcap/ticdc/pull/708)
-        - Support the column flags [#796](https://github.com/pingcap/ticdc/pull/796)
-        - Support to output previous table info in ddl events [#799](https://github.com/pingcap/ticdc/pull/799)
+        - Support outputting the old value [#708](https://github.com/pingcap/ticdc/pull/708)
+        - Add the column flags [#796](https://github.com/pingcap/ticdc/pull/796)
+        - Support outputting the DDL statements and table schema of the previous version [#799](https://github.com/pingcap/ticdc/pull/799)
 
 ## Improvements
 
 + TiDB
 
-    - Optimize the performance of decodePlan for big union query [#18941](https://github.com/pingcap/tidb/pull/18941)
+    - Optimize the performance of `DecodePlan` for big union queries [#18941](https://github.com/pingcap/tidb/pull/18941)
     - Reduce GC scan locks when meeting Region cache miss [#18876](https://github.com/pingcap/tidb/pull/18876)
     - Ease the impact of stats feedback on cluster [#18772](https://github.com/pingcap/tidb/pull/18772)
-    - Support cancel before RPC response return [#18580](https://github.com/pingcap/tidb/pull/18580)
-    - Add HTTP API to generate TiDB metric profile [#18531](https://github.com/pingcap/tidb/pull/18531)
+    - Support canceling operations before the RPC response is returned [#18580](https://github.com/pingcap/tidb/pull/18580)
+    - Add the HTTP API to generate the TiDB metric profile [#18531](https://github.com/pingcap/tidb/pull/18531)
     - Fix the partition table issue in table scatter API [#17863](https://github.com/pingcap/tidb/pull/17863)
-    - Add detailed memory usage for each instance in grafana
-    - Add runtime information for the batch-point-get executor [#18892](https://github.com/pingcap/tidb/pull/18892)
+    - Add detailed memory usage for each instance in Grafana
+    - Add runtime information for the `batch-point-get` executor [#18892](https://github.com/pingcap/tidb/pull/18892)
     - Add executor runtime information for point-get [#18817](https://github.com/pingcap/tidb/pull/18817)
     - Warn potential deadlock for Consume in remove [#18395](https://github.com/pingcap/tidb/pull/18395)
     - Support the Action when memory exceed quota for TableReader Executor [#18392](https://github.com/pingcap/tidb/pull/18392)
@@ -63,7 +63,7 @@ TiDB version: 4.0.5
 + TiFlash
 
     - Add more Grafana panels, like CPU/IO/RAM usage, metrics about storage engine
-    - Reduce IO operations by optimizing Raft logs processing logic
+    - Reduce I/O operations by optimizing Raft logs processing logic
     - Accelerate Regions schedule for blocked add partition DDL
     - Optimize compactions of delta data in DeltaTree to reduce read and write amplification
     - Optimize the performance of applying Region snapshots by preprocessing them under multi-threads
@@ -90,31 +90,31 @@ TiDB version: 4.0.5
 
 + TiDB
 
-    - Check ErrTruncate/Overflow locally for builtinCastRealAsDecimalSig to fix the "should ensure all columns have the same length" error [#18967](https://github.com/pingcap/tidb/pull/18967)
-    - Fix issue `pre_split_regions` table option does not work in the partition table [#18837](https://github.com/pingcap/tidb/pull/18837)
-    - Fixed an issue that could cause a large transaction to be terminated prematurely [#18813](https://github.com/pingcap/tidb/pull/18813)
-    - Fix incorrect collator when `getSignatureByPB` and remove unnecessary recover [#18735](https://github.com/pingcap/tidb/pull/18735)
-    - Fix a bug `getAutoIncrementID()` function does not consider the `tidb_snapshot` session variable, this bug may cause dumper tool fail with 'table not exist' error [#18692](https://github.com/pingcap/tidb/pull/18692)
+    - Check `ErrTruncate/Overflow` locally for `builtinCastRealAsDecimalSig` to fix the `should ensure all columns have the same length` error [#18967](https://github.com/pingcap/tidb/pull/18967)
+    - Fix issue that the `pre_split_regions` table option does not work in the partition table [#18837](https://github.com/pingcap/tidb/pull/18837)
+    - Fixe the issue that might cause a large transaction to be terminated prematurely [#18813](https://github.com/pingcap/tidb/pull/18813)
+    - Fix the incorrect collator when `getSignatureByPB` and remove unnecessary recover [#18735](https://github.com/pingcap/tidb/pull/18735)
+    - Fix a bug `getAutoIncrementID()` function does not consider the `tidb_snapshot` session variable, this bug might cause dumper tool fail with 'table not exist' error [#18692](https://github.com/pingcap/tidb/pull/18692)
     - Fix unknown column error for sql like `select a from t having t.a` [#18434](https://github.com/pingcap/tidb/pull/18434)
     - Fix a panic on hash partition table when the query condition is that the partition column equals to a big number like 9223372036854775808 [#18186](https://github.com/pingcap/tidb/pull/18186)
     - Fix the wrong behavior of char function [#18122](https://github.com/pingcap/tidb/pull/18122)
-    - Ddl: fix admin repair table with range partition expr will parseInt fail [#17988](https://github.com/pingcap/tidb/pull/17988)
-    - Fix wrong behavior of set charset statement [#17289](https://github.com/pingcap/tidb/pull/17289)
-    - Fix a bug caused by the wrong collation setting which leads to the wrong result of collation function [#17231](https://github.com/pingcap/tidb/pull/17231)
-    - Fix STR_TO_DATE's handling for format token '%r', '%h' [#18727](https://github.com/pingcap/tidb/pull/18727)
-    - Fix issues of TiDB version information formation does not consistent with PD/TiKV in cluster_info table. [#18413](https://github.com/pingcap/tidb/pull/18413)
-    - Fix the existence checks for pessimistic transactions. [#19004](https://github.com/pingcap/tidb/pull/19004)
+    - Fix the issue that the `ADMIN REPAIR TABLE` statement cannot parse integer in the expressions on the range partition [#17988](https://github.com/pingcap/tidb/pull/17988)
+    - Fix the wrong behavior of the `SET CHARSET` statement [#17289](https://github.com/pingcap/tidb/pull/17289)
+    - Fix the bug caused by the wrong collation setting which leads to the wrong result of the `collation` function [#17231](https://github.com/pingcap/tidb/pull/17231)
+    - Fix `STR_TO_DATE`'s handling for format token '%r', '%h' [#18727](https://github.com/pingcap/tidb/pull/18727)
+    - Fix issues that TiDB version information is not consistent with PD/TiKV in the `cluster_info` table [#18413](https://github.com/pingcap/tidb/pull/18413)
+    - Fix the existence checks for pessimistic transactions [#19004](https://github.com/pingcap/tidb/pull/19004)
     - Fix union select for update race [#19006](https://github.com/pingcap/tidb/pull/19006)
     - Fix the wrong query result when apply has a child of type PointGet [#19046](https://github.com/pingcap/tidb/pull/19046)
 
 + TiKV
 
     - Fix memory leak during scheduling [#8357](https://github.com/tikv/tikv/pull/8357)
-    - Speed up leader election when hibernate Region is enabled [#8292](https://github.com/tikv/tikv/pull/8292)
+    - Speed up leader election when Hibernate Region is enabled [#8292](https://github.com/tikv/tikv/pull/8292)
 
 + PD
 
-    - Fix the bug that TSO request may fail at the time of leader changing [#2666](https://github.com/pingcap/pd/pull/2666)
+    - Fix the bug that TSO request might fail at the time of leader changing [#2666](https://github.com/pingcap/pd/pull/2666)
     - Fix the issue that when enabling placement rules, sometimes Region replicas cannot schedule to optimal [#2720](https://github.com/pingcap/pd/pull/2720)
     - Fix the bug that balance-leader won't work when placement rule enabled [#2726](https://github.com/pingcap/pd/pull/2726)
 
@@ -127,8 +127,8 @@ TiDB version: 4.0.5
 
     + TiCDC
 
-        - Fix a issue that failed `changefeed` cannot be removed [#782](https://github.com/pingcap/ticdc/pull/782)
-        - Fix invalid delete evenets by selecting one unique index as the handle index [#787](https://github.com/pingcap/ticdc/pull/787)
+        - Fix the issue that the failed `changefeed` cannot be removed [#782](https://github.com/pingcap/ticdc/pull/782)
+        - Fix invalid `delete` events by selecting one unique index as the handle index [#787](https://github.com/pingcap/ticdc/pull/787)
         - Fix the bug that GC safepoint will be forwarded beyond the checkpoint of stopped `changefeed` [#797](https://github.com/pingcap/ticdc/pull/797)
         - Fix the bug that network io wait blocks task exits [#825](https://github.com/pingcap/ticdc/pull/825)
 
