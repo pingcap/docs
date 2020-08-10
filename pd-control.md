@@ -706,13 +706,13 @@ Usage:
 }
 ```
 
-- `min-hot-byte-rate` means the smallest byte counted, it is usually 100
+- `min-hot-byte-rate` means the smallest byte counted, which is usually 100.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set min-hot-byte-rate 100
     ```
 
-- `min-hot-key-rate` means the smallest key counted, it is usually 10
+- `min-hot-key-rate` means the smallest key counted, which is usually 10.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set min-hot-key-rate 10
