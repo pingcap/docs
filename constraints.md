@@ -54,11 +54,35 @@ ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 
 * TiDB supports foreign keys so that no errors are reported for this syntax when migrating data from other databases. Currently, foreign keys are not enforced as part of DML operations. For example, even though there is no such record as `id=123` in the `users` table, the following transaction commits successfully in TiDB:
 
+<<<<<<< HEAD
     ```
         START TRANSACTION;
         INSERT INTO orders (user_id, doc) VALUES (123, NULL);
         COMMIT;
     ```
+=======
+## CHECK
+
+TiDB parses but ignores `CHECK` constraints. This is MySQL 5.7 compatible behavior.
+
+For example:
+
+{{< copyable "sql" >}}
+
+```sql
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+ id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ username VARCHAR(60) NOT NULL,
+ UNIQUE KEY (username),
+ CONSTRAINT min_username_length CHECK (CHARACTER_LENGTH(username) >=4)
+);
+INSERT INTO users (username) VALUES ('a');
+SELECT * FROM users;
+```
+
+## UNIQUE KEY
+>>>>>>> 3959481... constraints, create table: improve clarity and update out of date info (#3582)
 
 * In TiDB, foreign key information is not displayed in the execution result of the `SHOW CREATE TABLE` statement.
 
@@ -185,7 +209,15 @@ Query OK, 0 rows affected (0.00 sec)
 mysql> INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 
+<<<<<<< HEAD
 ..
 ```
 
 * The first `INSERT` statement causes a duplicate key error. This results in additional network communication, and will likely decrease insert throughput.
+=======
+    ```sql
+    START TRANSACTION;
+    INSERT INTO orders (user_id, doc) VALUES (123, NULL);
+    COMMIT;
+    ```
+>>>>>>> 3959481... constraints, create table: improve clarity and update out of date info (#3582)
