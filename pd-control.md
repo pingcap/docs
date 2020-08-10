@@ -295,9 +295,9 @@ Usage:
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
-- `leader-schedule-policy` is used to select the scheduling strategy of the leader. You can choose to schedule the leader according to `size` or `count`.
+- `leader-schedule-policy` is used to select the scheduling strategy for the leader. You can schedule the leader according to `size` or `count`.
 
-- `scheduler-max-waiting-operator` is used to control the number of waiting operatorsq in each scheduler.
+- `scheduler-max-waiting-operator` is used to control the number of waiting operators in each scheduler.
 
 - `enable-remove-down-replica` is used to enable the feature of automatically deleting DownReplica. When you set it to `false`, PD does not automatically clean up the downtime replicas.
 
@@ -313,12 +313,11 @@ Usage:
 
 - `enable-placement-rules` is used to enable placement rules.
 
-- `store-limit-mode` is used to control the mode of the store speed limit mechanism. There are two modes: `auto` and `manual`. In `auto` mode, the stores are automatically ba
-lanced according to load (experimental).
+- `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
 
 #### `config placement-rules [disable | enable | load | save | show]`
 
-The usage can be found in [Configure rules](/configure-placement-rules.md#configure-rules)
+For the usage of `config placement-rules [disable | enable | load | save | show]`, see [Configure placement rules](/configure-placement-rules.md#configure-rules).
 
 ### `health`
 
@@ -476,7 +475,7 @@ Usage:
 
 ### `region key [--format=raw|encode|hex] <key>`
 
-Use this command to query the region that a specific key resides in. It supports the raw, encoding and hex formats. And you need to use single quotes around the key when it is in the encoding format.
+Use this command to query the Region that a specific key resides in. It supports the raw, encoding, and hex formats. And you need to use single quotes around the key when it is in the encoding format.
 
 Hex format usage (default):
 
@@ -725,19 +724,19 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set max-zombie-rounds 3
     ```
 
-- `max-peer-number` means the maximum number to solve, prevent scheduler too slow.
+- `max-peer-number` means the maximum number of peers to be solved, which prevents the scheduler from being too slow.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set max-peer-number 1000
     ```
 
-- `byte-rate-rank-step-ratio`,`key-rate-rank-step-ratio`,`count-rank-step-ratio` means that step rank of  byte,key and count.Rank step ratio decide the step when calculate rank. `great-dec-ratio`,`minor-dec-ratio` are used to judge the dec rank. Usually we do not need to be modified them.
+- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, and `count-rank-step-ratio` respectively mean the step ranks of byte, key, and count. The rank step ratio decides the step when the rank is calculated. `great-dec-ratio` and `minor-dec-ratio` are used to determine the `dec` rank. Usually, you do not need to modify these items.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
     ```
 
-- `src-tolerance-ratio` and `dst-tolerance-ratio` are config for expectation scheduler. The smaller the `tolerance-ratio` , the easier it is to schedule. When redundant scheduling occurs, we can appropriately increase this.
+- `src-tolerance-ratio` and `dst-tolerance-ratio` are configuration items for the expectation scheduler. The smaller the `tolerance-ratio`, the easier it is for scheduling. When redundant scheduling occurs, you can appropriately increase this value.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.05
@@ -762,16 +761,16 @@ Usage:
 >> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
 >> store weight 1 5 10                 // Set the leader weight to 5 and region weight to 10 for the store with the store id of 1
 >> store remove-tombstone              // Remove stores that are in tombstone state
->> store limit                         // Show limits of adding peer and removing peer operation for all stores
->> store limit add-peer                // Show limits of adding peer operation for all stores
->> store limit remove-peer             // Show limits of removing peer operation for all stores
->> store limit all 5                   // Limit 5 adding peer operations and 5 remove peer operations per minute for all stores
->> store limit 1 5                     // Limit 5 adding peer operations and 5 remove peer operations per minute for store 1
->> store limit all 5 add-peer          // Limit 5 adding peer operations per minute for all stores
->> store limit 1 5 add-peer            // Limit 5 adding peer operations per minute for store 1
->> store limit 1 5 remove-peer         // Limit 5 removing peer operations per minute for store 1
->> store limit all 5 remove-peer       // Limit 5 removing peer operations per minute for all stores
->> store limit-scene                   // Show all limit scene (experimental)
+>> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
+>> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
+>> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
+>> store limit all 5                   // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
+>> store limit 1 5                     // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 add-peer          // Set the limit of adding-peer operations to 5 per minute for all stores
+>> store limit 1 5 add-peer            // Set the limit of adding-peer operations to 5 per minute for store 1
+>> store limit 1 5 remove-peer         // Set the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
+>> store limit-scene                   // Show all limit scenarios (experimental)
 {
   "Idle": 100,
   "Low": 50,
@@ -781,9 +780,9 @@ Usage:
 >> store limit-scene idle 100 // set rate to 100 in the idle scene (experimental)
 ```
 
-> **Notice**
+> **Note:**
 >
-> When using `store limit` command, the original `region-add` and `region-remove` are deprecated, please use `add-peer` and `remove-peer`.
+> When you use the `store limit` command, the original `region-add` and `region-remove` are deprecated. Use `add-peer` and `remove-peer` instead.
 
 ### `log [fatal | error | warn | info | debug]`
 
