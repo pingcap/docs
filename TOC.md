@@ -161,6 +161,7 @@
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
+      - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
       - [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
@@ -215,6 +216,7 @@
       - [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
       - [`SHOW [FULL] PROCESSSLIST`](/sql-statements/sql-statement-show-processlist.md)
       - [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
+      - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
       - [`SHOW [FULL] TABLES`](/sql-statements/sql-statement-show-tables.md)
       - [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
       - [`SHOW [GLOBAL|SESSION] VARIABLES`](/sql-statements/sql-statement-show-variables.md)
@@ -283,7 +285,7 @@
       - [Drainer](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
     - [Upgrade](/tidb-binlog/upgrade-tidb-binlog.md)
     - [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
-    - [Binlog Slave Client](/tidb-binlog/binlog-slave-client.md)
+    - [Binlog Consumer Client](/tidb-binlog/binlog-consumer-client.md)
     - [Glossary](/tidb-binlog/tidb-binlog-glossary.md)
     + Troubleshoot
       - [Troubleshooting](/tidb-binlog/troubleshoot-tidb-binlog.md)
@@ -329,7 +331,8 @@
   - [Contribute to TiDB](/contribute.md#contribute-to-tidb)
   - [Improve the Docs](/contribute.md#improve-the-docs)
 - [Adopters](/adopters.md)
-+ [Releases](/releases/release-notes.md)
++ Releases
+  + [All Releases](/releases/release-notes.md)
   + v2.1
     - [2.1.19](/releases/release-2.1.19.md)
     - [2.1.18](/releases/release-2.1.18.md)
