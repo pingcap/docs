@@ -210,7 +210,7 @@ Usage:
 - `enable-one-way-merge` controls whether PD only allows a Region to merge with the next Region. When you set it to `false`, PD allows a Region to merge with the adjacent two Regions.
 
     ```bash
-    >> config set enable-one-way-merge true  // Enable one way merge.
+    >> config set enable-one-way-merge true  // Enables one-way merging.
     ```
 
 - `enable-cross-table-merge` is used to enable the merging of cross-table Regions. When you set it to `false`, PD does not merge the Regions from different tables. This option only works when key type is "table".
