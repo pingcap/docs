@@ -26,49 +26,33 @@ This statement creates a new table in the currently selected database. It behave
 
 ![TableElementListOpt](/media/sqlgram/TableElementListOpt.png)
 
-**TableElementList:**
-
-![TableElementList](/media/sqlgram/TableElementList.png)
-
 **TableElement:**
 
 ![TableElement](/media/sqlgram/TableElement.png)
-
-**ColumnDef:**
-
-![ColumnDef](/media/sqlgram/ColumnDef.png)
-
-**ColumnOptionListOpt:**
-
-![ColumnOptionListOpt](/media/sqlgram/ColumnOptionListOpt.png)
-
-**ColumnOptionList:**
-
-![ColumnOptionList](/media/sqlgram/ColumnOptionList.png)
-
-**ColumnOption:**
-
-![ColumnOption](/media/sqlgram/ColumnOption.png)
-
-**CreateTableOptionListOpt:**
-
-![CreateTableOptionListOpt](/media/sqlgram/CreateTableOptionListOpt.png)
 
 **PartitionOpt:**
 
 ![PartitionOpt](/media/sqlgram/PartitionOpt.png)
 
-**DuplicateOpt:**
+**ColumnDef:**
 
-![DuplicateOpt](/media/sqlgram/DuplicateOpt.png)
+![ColumnDef](/media/sqlgram/ColumnDef.png)
 
-**TableOptionList:**
+**ColumnName:**
 
-![TableOptionList](/media/sqlgram/TableOptionList.png)
+![ColumnName](/media/sqlgram/ColumnName.png)
 
-**TableOption:**
+**Type:**
 
-![TableOption](/media/sqlgram/TableOption.png)
+![Type](/media/sqlgram/Type.png)
+
+**ColumnOptionListOpt:**
+
+![ColumnOptionListOpt](/media/sqlgram/ColumnOptionListOpt.png)
+
+**TableOptionListOpt:**
+
+![TableOptionListOpt](/media/sqlgram/TableOptionListOpt.png)
 
 The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored.
 
