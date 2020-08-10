@@ -175,9 +175,9 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This setting only applies to optimistic transactions. When set to zero (default), checking for duplicate values in UNIQUE indexes is deffered until the transaction commits. This helps improve performance, but may be an unexpected behavior for some applications. See [Constraints](/constraints.md) for details.
+- This setting only applies to optimistic transactions. When set to zero, checking for duplicate values in UNIQUE indexes is deffered until the transaction commits. This helps improve performance, but may be an unexpected behavior for some applications. See [Constraints](/constraints.md) for details.
 
-    - When set to zero (default) and using optimistic transactions:
+    - When set to zero and using optimistic transactions:
 
         ```sql
         tidb> create table t (i int key);
