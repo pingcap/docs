@@ -72,7 +72,7 @@ This statement creates a new table in the currently selected database. It behave
 
 The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored.
 
-| Parameters | Description | Example |
+| Options | Description | Example |
 | ---------- | ---------- | ------- |
 | `AUTO_INCREMENT` | The initial value of the increment field | `AUTO_INCREMENT` = 5 |
 | [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)| To set the number of bits for the implicit `_tidb_rowid` shards |`SHARD_ROW_ID_BITS` = 4|
