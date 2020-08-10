@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS t1 (
 DESC t1;
 ```
 
-```
+```sql
 mysql> DROP TABLE IF EXISTS t1;
 Query OK, 0 rows affected (0.22 sec)
 

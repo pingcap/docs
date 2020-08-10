@@ -63,6 +63,7 @@ Query OK, 1 row affected (0.03 sec)
 TiDB parses but ignores `CHECK` constraints. This is MySQL 5.7 compatible behavior.
 
 For example:
+
 {{< copyable "sql" >}}
 
 ```sql
