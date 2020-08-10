@@ -34,26 +34,31 @@ To disable the pessimistic transaction mode, modify the configuration file and a
 
 Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Difference with MySQL InnoDB](#difference-with-mysql-innodb).
 
+<<<<<<< HEAD
 - When you perform the `SELECT FOR UPDATE` statement, transactions read the last committed data and apply a pessimistic lock on the data being read.
 
 - When you perform the `UPDATE`, `DELETE` or `INSERT` statement, transactions read the last committed data to execute on them and apply a pessimistic lock on the modified data.
+=======
+- When you execute `UPDATE`, `DELETE` or `INSERT` statements, the **latest** committed data is read, data is modified, and a pessimistic lock is applied on the modified rows.
 
-- When a pessimistic lock is applied on a row of data, other write transactions attempting to modify the data are blocked and have to wait for the lock to be released.
+- For `SELECT FOR UPDATE` statements, a pessimistic lock is applied on the latest version of the committed data, instead of on the modified rows.
+>>>>>>> 1f504cd... pessimistic trx: cleanup wording (#3475)
 
-- When a pessimistic lock is applied on a row of data, other transactions attempting to read the data are not blocked and can read the committed data.
+- Locks will be released when the transaction is committed or rolled back. Other transactions attempting to modify the data are blocked and have to wait for the lock to be released. Transactions attempting to _read_ the data are not blocked, because TiDB uses multi-version concurrency control (MVCC).
 
-- All the locks are released when the transaction is committed or rolled back.
+- If several transactions are trying to acquire each other's respective locks, a deadlock will occur. This is automatically detected, and one of the transactions will randomly be terminated with a MySQL-compatible error code `1213` returned.
 
-- When multiple transactions wait for the same lock to be released, the lock is acquired in the order of the `start ts` of the transactions as much as possible; however, the order cannot be strictly guaranteed.
-
-- Deadlocks in concurrent transactions can be detected by the deadlock detector. The detector randomly terminates one of the transactions, and a MySQL-compatible error code `1213` is returned.
+- Transactions will wait up to `innodb_lock_wait_timeout` seconds (default: 50) to acquire new locks. When this timeout is reached, a MySQL-compatible error code `1205` is returned. If multiple transactions are waiting for the same lock, the order of priority is approximately based on the `start ts` of the transaction.
 
 - TiDB supports both the optimistic transaction mode and pessimistic transaction mode in the same cluster. You can specify either mode for transaction execution.
 
-- TiDB sets the lock wait timeout time by the `innodb_lock_wait_timeout` variable. After the lock times out, a MySQL-compatible error code `1205` is returned.
-
 - TiDB supports the `FOR UPDATE NOWAIT` syntax and does not block and wait for locks to be released. Instead, a MySQL-compatible error code `3572` is returned.
 
+<<<<<<< HEAD
+=======
+- If the `Point Get` and `Batch Point Get` operators do not read data, they still lock the given primary key or unique key, which blocks other transactions from locking or writing data to the same primary key or unique key.
+
+>>>>>>> 1f504cd... pessimistic trx: cleanup wording (#3475)
 ## Difference with MySQL InnoDB
 
 1. When TiDB executes DML or `SELECT FOR UPDATE` statements that use range in the WHERE clause, the concurrent `INSERT` statements within the range are not blocked.
@@ -76,6 +81,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
     The autocommit `SELECT FOR UPDATE` statement does not wait for lock, either.
 
+<<<<<<< HEAD
 ## FAQ
 
 1. The TiDB log shows `pessimistic write conflict, retry statement`.
@@ -89,3 +95,35 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 3. The execution time limit for pessimistic transactions.
 
     The execution time of transactions cannot exceed the limit of `tikv_gc_life_time`. In addition, the pessimistic transactions have a TTL (Time to Live) limit of 10 minutes, so the pessimistic transactions that execute over 10 minutes might fail to commit.
+=======
+6. The data read by `EMBEDDED SELECT` in the statement is not locked.
+
+7. Open transactions in TiDB do not block garbage collection (GC). By default, this limits the maximum execution time of pessimistic transactions to 10 minutes. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
+
+## Isolation level
+
+TiDB supports the following two isolation levels in the pessimistic transaction mode:
+
+- [Repeatable Read](/transaction-isolation-levels.md#repeatable-read-isolation-level) by default, which is the same as MySQL.
+
+    > **Note:**
+    >
+    > In this isolation level, DML operations are performed based on the latest committed data. The behavior is the same as MySQL, but differs from the optimistic transaction mode in TiDB. See [Difference between TiDB and MySQL Repeatable Read](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read).
+
+- [Read Committed](/transaction-isolation-levels.md#read-committed-isolation-level). You can set this isolation level using the [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md) statement.
+
+## Pipelined locking process
+
+Adding a pessimistic lock requires writing data into TiKV. The response of successfully adding a lock can only be returned to TiDB after commit and apply through Raft. Therefore, compared with optimistic transactions, the pessimistic transaction mode inevitably has higher latency.
+
+To reduce the overhead of locking, TiKV implements the pipelined locking process: when the data meets the requirements for locking, TiKV immediately notifies TiDB to execute subsequent requests and writes into the pessimistic lock asynchronously. This process reduces most latency and significantly improves the performance of pessimistic transactions. However, there is a low probability that the asynchronous write into the pessimistic lock might fail, resulting in the commit failure of the pessimistic transaction.
+
+![Pipelined pessimistic lock](/media/pessimistic-transaction-pipelining.png)
+
+This feature is disabled by default. To enable it, modify the TiKV configuration:
+
+```toml
+[pessimistic-txn]
+pipelined = true
+```
+>>>>>>> 1f504cd... pessimistic trx: cleanup wording (#3475)
