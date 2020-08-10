@@ -59,7 +59,7 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 | Options | Description | Example |
 | ---------- | ---------- | ------- |
 | `AUTO_INCREMENT` | The initial value of the increment field | `AUTO_INCREMENT` = 5 |
-| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)| To set the number of bits for the implicit `_tidb_rowid` shards |`SHARD_ROW_ID_BITS` = 4|
+| `SHARD_ROW_ID_BITS`| To set the number of bits for the implicit `_tidb_rowid` shards |`SHARD_ROW_ID_BITS` = 4|
 |`PRE_SPLIT_REGIONS`| To pre-split `2^(PRE_SPLIT_REGIONS)` Regions when creating a table |`PRE_SPLIT_REGIONS` = 4|
 |`AUTO_ID_CACHE`| To set the auto ID cache size in a TiDB instance. By default, TiDB automatically changes this size according to allocation speed of auto ID |`AUTO_ID_CACHE` = 200|
 |`AUTO_RANDOM_BASE`| To set the initial incremental part value of auto_random. This option can be considered as a part of the internal interface. Users can ignore this parameter |`AUTO_RANDOM_BASE` = 0|
@@ -160,7 +160,7 @@ mysql> DESC t1;
 * For compatibility, the `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes by default. The length limit can be changed through the `max-index-length` configuration option. For details, see [TiDB configuration file](/tidb-configuration-file.md#max-index-length).
 * The `[ASC | DESC]` in `index_col_name` is currently parsed but ignored (MySQL 5.7 compatible behavior).
 * The `COMMENT` attribute supports a maximum of 1024 characters and does not support the `WITH PARSER` option.
-* TiDB supports at most 512 columns in a single table. The corresponding number limit in InnoDB is 1017, and the hard limit in MySQL is 4096. For details, see [TiDB Limitations](/tidb-limitations.md).
+* TiDB supports at most 512 columns in a single table. The corresponding number limit in InnoDB is 1017, and the hard limit in MySQL is 4096.
 * For partitioned tables, only Range, Hash and Range Columns (single column) are supported. For details, see [partitioned table](/partitioned-table.md).
 * `CHECK` constraints are parsed but ignored (MySQL 5.7 compatible behavior). For details, see [Constraints](/constraints.md).
 * `FOREIGN KEY` constraints are parsed and stored, but not enforced by DML statements. For details, see [Constraints](/constraints.md).
