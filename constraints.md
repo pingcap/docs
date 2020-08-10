@@ -302,3 +302,5 @@ ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
     INSERT INTO orders (user_id, doc) VALUES (123, NULL);
     COMMIT;
     ```
+
+* TiDB does not display foreign key information in the result of executing the `SHOW CREATE TABLE` statement.
