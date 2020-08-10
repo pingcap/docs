@@ -110,3 +110,17 @@ This feature is disabled by default. To enable it, modify the TiKV configuration
 [pessimistic-txn]
 pipelined = true
 ```
+
+## FAQ
+
+1. The TiDB log shows `pessimistic write conflict, retry statement`.
+
+    When a write conflict occurs, the optimistic transaction is terminated directly, but the pessimistic transaction retries the statement with the latest data until there is no write conflict. The log prints this entry with each retry, so there is no need for extra attention.
+
+2. When DML is executed, an error `pessimistic lock retry limit reached` is returned.
+
+    In the pessimistic transaction mode, every statement has a retry limit. This error is returned when the retry times of write conflict exceeds the limit. The default retry limit is `256`. To change the limit, modify the `max-retry-limit` under the `[pessimistic-txn]` category in the TiDB configuration file.
+
+3. The execution time limit for pessimistic transactions.
+
+    In TiDB 4.0, garbage collection (GC) does not affect the running transactions, but the execution time of pessimistic transactions cannot exceed 10 minutes by default. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
