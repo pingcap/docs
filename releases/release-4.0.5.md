@@ -39,7 +39,7 @@ TiDB version: 4.0.5
 + TiDB
 
     - Optimize the performance of `DecodePlan` for big union queries [#18941](https://github.com/pingcap/tidb/pull/18941)
-    - Reduce GC scan locks when meeting Region cache miss [#18876](https://github.com/pingcap/tidb/pull/18876)
+    - Reduce the number of GC lock scans when meeting the `Region cache miss` error [#18876](https://github.com/pingcap/tidb/pull/18876)
     - Ease the impact of statistical feedback on cluster performance [#18772](https://github.com/pingcap/tidb/pull/18772)
     - Support canceling operations before the RPC response is returned [#18580](https://github.com/pingcap/tidb/pull/18580)
     - Add the HTTP API to generate the TiDB metric profile [#18531](https://github.com/pingcap/tidb/pull/18531)
@@ -56,7 +56,7 @@ TiDB version: 4.0.5
 + PD
 
     - Support scattering Regions in stores with special engines (like TiFlash) [#2706](https://github.com/pingcap/pd/pull/2706)
-    - Support Region HTTP API to promote Regions schedule by given key range [#2687](https://github.com/pingcap/pd/pull/2687)
+    - Support the Region HTTP API to prioritize Region scheduling of a given key range [#2687](https://github.com/pingcap/pd/pull/2687)
     - Improve the leader distribution after Region scattering [#2684](https://github.com/pingcap/pd/pull/2684)
     - Add more tests and logs for the TSO request [#2678](https://github.com/pingcap/pd/pull/2678)
     - Avoid invalid cache updates after the leader of a Region has changed [#2672](https://github.com/pingcap/pd/pull/2672)
@@ -96,8 +96,8 @@ TiDB version: 4.0.5
     - Fixe the issue that might cause a large transaction to be terminated prematurely [#18813](https://github.com/pingcap/tidb/pull/18813)
     - Fix the incorrect collator when `getSignatureByPB` and remove unnecessary recover [#18735](https://github.com/pingcap/tidb/pull/18735)
     - Fix the bug that the `getAutoIncrementID()` function does not consider the `tidb_snapshot` session variable, which might cause the dumper tool to fail with the `table not exist` error [#18692](https://github.com/pingcap/tidb/pull/18692)
-    - Fix unknown column error for sql like `select a from t having t.a` [#18434](https://github.com/pingcap/tidb/pull/18434)
-    - Fix a panic on hash partition table when the query condition is that the partition column equals to a big number like 9223372036854775808 [#18186](https://github.com/pingcap/tidb/pull/18186)
+    - Fix the `unknown column error` for SQL statement like `select a from t having t.a` [#18434](https://github.com/pingcap/tidb/pull/18434)
+    - Fix the panic issue that writing the 64-bit unsigned type into the hash partitioned table causes overflow and gets an unexpected negative number when the partition key is the integer type [#18186](https://github.com/pingcap/tidb/pull/18186)
     - Fix the wrong behavior of the `char` function [#18122](https://github.com/pingcap/tidb/pull/18122)
     - Fix the issue that the `ADMIN REPAIR TABLE` statement cannot parse integer in the expressions on the range partition [#17988](https://github.com/pingcap/tidb/pull/17988)
     - Fix the wrong behavior of the `SET CHARSET` statement [#17289](https://github.com/pingcap/tidb/pull/17289)
@@ -106,7 +106,7 @@ TiDB version: 4.0.5
     - Fix issues that the TiDB version information is inconsistent with that of PD/TiKV in the `cluster_info` table [#18413](https://github.com/pingcap/tidb/pull/18413)
     - Fix the existent checks for pessimistic transactions [#19004](https://github.com/pingcap/tidb/pull/19004)
     - Fix the issue that executing `union select for update` might cause concurrent race [#19006](https://github.com/pingcap/tidb/pull/19006)
-    - Fix the wrong query result when apply has a child of type PointGet [#19046](https://github.com/pingcap/tidb/pull/19046)
+    - Fix the wrong query result when `apply` has a child of the `PointGet` operator [#19046](https://github.com/pingcap/tidb/pull/19046)
 
 + TiKV
 
