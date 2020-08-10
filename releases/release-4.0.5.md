@@ -94,7 +94,7 @@ TiDB version: 4.0.5
     - Fix the `should ensure all columns have the same length` error that occurs because the `ErrTruncate/Overflow` error is incorrectly handled in the `builtinCastRealAsDecimalSig` function [#18967](https://github.com/pingcap/tidb/pull/18967)
     - Fix the issue that the `pre_split_regions` table option does not work in the partitioned table [#18837](https://github.com/pingcap/tidb/pull/18837)
     - Fixe the issue that might cause a large transaction to be terminated prematurely [#18813](https://github.com/pingcap/tidb/pull/18813)
-    - Fix the incorrect collator when `getSignatureByPB` and remove unnecessary recover [#18735](https://github.com/pingcap/tidb/pull/18735)
+    - Fix the issue that using the `collation` functions get wrong query results [#18735](https://github.com/pingcap/tidb/pull/18735)
     - Fix the bug that the `getAutoIncrementID()` function does not consider the `tidb_snapshot` session variable, which might cause the dumper tool to fail with the `table not exist` error [#18692](https://github.com/pingcap/tidb/pull/18692)
     - Fix the `unknown column error` for SQL statement like `select a from t having t.a` [#18434](https://github.com/pingcap/tidb/pull/18434)
     - Fix the panic issue that writing the 64-bit unsigned type into the hash partitioned table causes overflow and gets an unexpected negative number when the partition key is the integer type [#18186](https://github.com/pingcap/tidb/pull/18186)
