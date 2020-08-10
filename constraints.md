@@ -185,15 +185,7 @@ Query OK, 0 rows affected (0.00 sec)
 mysql> INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 
-<<<<<<< HEAD
 ..
 ```
 
 * The first `INSERT` statement causes a duplicate key error. This results in additional network communication, and will likely decrease insert throughput.
-=======
-    ```sql
-    START TRANSACTION;
-    INSERT INTO orders (user_id, doc) VALUES (123, NULL);
-    COMMIT;
-    ```
->>>>>>> 3959481... constraints, create table: improve clarity and update out of date info (#3582)
