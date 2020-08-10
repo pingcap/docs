@@ -152,7 +152,7 @@ mysql> DESC t1;
 
 ## MySQL compatibility
 
-* TiDB does not support temporary tables, but it ignores the `CREATE TEMPORARY TABLE` syntax.
+* TiDB does not support the syntax `CREATE TEMPORARY TABLE`.
 * All of the data types except spatial types are supported.
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * For compatibility, the `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes by default. The length limit can be changed through the `max-index-length` configuration option. For details, see [TiDB configuration file](/tidb-configuration-file.md#max-index-length).
