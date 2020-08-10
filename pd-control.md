@@ -245,7 +245,7 @@ Usage:
     >> config set leader-schedule-limit 4         // 4 tasks of leader scheduling at the same time at most
     ```
 
-- `region-schedule-limit` controls the number of tasks scheduling the Region at the same time. This value avoids too many region balance operators being created. The default value is 2048 which suits enough for all kinds sizes of clusters, setting the value to 0 closes the scheduling. Usually the Region scheduling speed is limited by the store-limit, users do not need to customize this value. Only change it when you know exactly what you are doing.
+- `region-schedule-limit` controls the number of tasks of scheduling Regions at the same time. This value avoids too many Region balance operators being created. The default value is `2048` which is enough for all sizes of clusters, and setting the value to `0` closes the scheduling. Usually, the Region scheduling speed is limited by `store-limit`, but it is recommended that you do not customize this value unless you know exactly what you are doing.
 
     ```bash
     >> config set region-schedule-limit 2         // 2 tasks of Region scheduling at the same time at most
