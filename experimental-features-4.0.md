@@ -5,7 +5,7 @@ summary: Learn the experimental features of TiDB v4.0.
 
 # TiDB 4.0 Experimental Features
 
-This document introduces the experimental features of TiDB v4.0. It is recommended **NOT** to use these features in the production environment.
+This document introduces the experimental features of TiDB v4.0. It is **NOT** recommended to use these features in the production environment.
 
 ## Scheduling
 
