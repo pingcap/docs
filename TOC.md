@@ -25,6 +25,7 @@
     + [TiFlash Topology](/tiflash-deployment-topology.md)
     + [TiCDC Topology](/ticdc-deployment-topology.md)
     + [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
+    + [TiSpark Topology](/tispark-deployment-topology.md)
     + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     + [Hybrid Topology](/hybrid-deployment-topology.md)
   + Install and Start
