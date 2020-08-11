@@ -44,13 +44,6 @@
   + Benchmarks Methods
     + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
-<<<<<<< HEAD
-    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
-    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
-    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
-=======
->>>>>>> 0b7c79e... Add experimental-features.md (#3608)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
