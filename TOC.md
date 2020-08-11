@@ -11,6 +11,7 @@
   + [Basic Features](/basic-features.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
+  + [TiDB Adopters](/adopters.md)
   + [Credits](/credits.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
@@ -167,7 +168,7 @@
     + [Monitor](/tidb-binlog/monitor-tidb-binlog-cluster.md)
     + [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
     + [binlogctl](/tidb-binlog/binlog-control.md)
-    + [Binlog Slave Client](/tidb-binlog/binlog-slave-client.md)
+    + [Binlog Consumer Client](/tidb-binlog/binlog-consumer-client.md)
     + [TiDB Binlog Relay Log](/tidb-binlog/tidb-binlog-relay-log.md)
     + [Bidirectional Replication Between TiDB Clusters](/tidb-binlog/bidirectional-replication-between-tidb-clusters.md)
     + [Glossary](/tidb-binlog/tidb-binlog-glossary.md)
@@ -219,7 +220,7 @@
     + [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
     + [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
-    + [Encryption-At-Rest](/encryption-at-rest.md)
+    + [Encryption at Rest](/encryption-at-rest.md)
   + Privileges
     + [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     + [Privilege Management](/privilege-management.md)
