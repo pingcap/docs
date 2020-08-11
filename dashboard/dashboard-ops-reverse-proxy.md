@@ -281,7 +281,7 @@ Replace `http://192.168.0.123:2379/dashboard/` with the actual address of the Ti
 
 > **Warning:**
 >
-> You must retain the `if` part in the `use_backend` directive to ensure that services **only in this path** are behind reverse proxy; otherwise, security risks might be introduced. See [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md).
+> You must retain the `/dashboard/` path in the `proxy_pass` directive to ensure that services **only in this path** are behind reverse proxy; otherwise, security risks might be introduced. See [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md).
 
 If you want that the TiDB Dashboard service is run in the root path (such as `http://example.com:8033/`), use the following configuration:
 
