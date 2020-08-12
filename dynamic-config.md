@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: Dynamic Configuration Change
-summary: Learn how to use dynamic configuration change.
-aliases: ['/docs/stable/dynamic-config/','/docs/v4.0/dynamic-config/']
-=======
 title: Modify Configuration Online
 summary: Learn how to change the cluster configuration online.
-aliases: ['/docs/dev/dynamic-config/']
->>>>>>> 6e78dd5... maintenance: update dynamic configuration (#3529)
+aliases: ['/docs/stable/dynamic-config/','/docs/v4.0/dynamic-config/']
 ---
 
 # Modify Configuration Online
