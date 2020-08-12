@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: BR Usage Scenarios
-summary: Learn the scenarios of backing up and restoring data using BR.
-aliases: ['/docs/v3.1/br/backup-and-restore-use-cases/','/docs/v3.1/reference/tools/br/use-cases/']
-=======
 title: BR Use Cases
 summary: Learn the use cases of backing up and restoring data using BR.
-aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tools/br/use-cases/']
->>>>>>> dac2595... br: replace 'usage scenario' and  'scenario' (#3629)
+aliases: ['/docs/v3.1/br/backup-and-restore-use-cases/','/docs/v3.1/reference/tools/br/use-cases/']
 ---
 
 # BR Use Cases
