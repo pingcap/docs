@@ -12,7 +12,7 @@ This document describes how to modify the cluster configuration online.
 >
 > This feature is experimental. It is **NOT** recommended to use this feature in the production environment.
 
-You can online update the configuration of components (including TiDB, TiKV, and PD) using SQL statements, without restarting the cluster components. Currently the method of changing TiDB instance configuration is different from that of other components (such TiKV and PD).
+You can update the configuration of components (including TiDB, TiKV, and PD) online using SQL statements, without restarting the cluster components. Currently, the method of changing TiDB instance configuration is different from that of changing configuration of other components (such TiKV and PD).
 
 ## Common Operations
 
@@ -44,7 +44,7 @@ show config;
 ...
 ```
 
-You can filter the result in terms of fields. For example:
+You can filter the result by fields. For example:
 
 {{< copyable "sql" >}}
 
@@ -59,10 +59,10 @@ show config where type='tikv' and name='log-level'
 
 > **Note:**
 >
-> - After online changing TiKV configuration items, the TiKV configuration file is automatically updated. However, you need to modify the corresponding configuration items by executing `tiup edit-config`; otherwise, operations like `upgrade` and `reload` will overwrite your changes. For details of modifying configuration items, refer to [Modify configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
+> - After changing TiKV configuration items online, the TiKV configuration file is automatically updated. However, you also need to modify the corresponding configuration items by executing `tiup edit-config`; otherwise, operations like `upgrade` and `reload` will overwrite your changes. For details of modifying configuration items, refer to [Modify configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
 > - After executing `tiup edit-config`, you do not need to execute `tiup reload`.
 
-To modify the configuration of a single instance or all instances according to the instance address or the component type, use the `set config` statement.
+When using the `set config` statement, you can modify the configuration of a single instance or of all instances according to the instance address or the component type.
 
 - Modify the configuration of all TiKV instances:
 
@@ -111,7 +111,7 @@ show warnings;
 1 row in set (0.00 sec)
 ```
 
-The batch modification operation cannot guarantee atomicity. The modification might succeed on some instances, while fail on others. If you modify the configuration of the entire TiKV cluster using `set tikv key=val`, your modification might fail on some instances. You can use `show warnings` to check the result.
+The batch modification does not guarantee atomicity. The modification might succeed on some instances, while failing on others. If you modify the configuration of the entire TiKV cluster using `set tikv key=val`, your modification might fail on some instances. You can use `show warnings` to check the result.
 
 If some modifications fail, you need to re-execute the corresponding statement or modify each failed instance. If some TiKV instances cannot be accessed due to network issues or machine failure, modify these instances after they are recovered.
 
@@ -190,9 +190,9 @@ The following TiKV configuration items can be modified online:
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
-| `split.qps-threshold` | The threshold to execute load-base-split on a Region. If the read QPS is larger than this value for 10 consecutive seconds, the Region should be split. |
-| `split.split-balance-score` | The parameter of load-base-split, which ensures the load of the two split Regions is as balanced as possible |
-| `split.split-contained-score` | The parameter of load-base-split, which reduces the cross-Region visits after split as much as possible |
+| `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the read QPS is higher than this value for 10 consecutive seconds, this Region should be split. |
+| `split.split-balance-score` | The parameter of `load-base-split`, which ensures the load of the two split Regions is as balanced as possible |
+| `split.split-contained-score` | The parameter of `load-base-split`, which reduces the cross-Region visits after split as much as possible |
 
 In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` prefix are configurations related to RocksDB. The optional values of `db-name` are `rocksdb` and `raftdb`.
 
@@ -266,9 +266,9 @@ For detailed parameter description, refer to [PD Configuration File](/pd-configu
 
 ### Modify TiDB configuration online
 
-Currently the method of changing TiDB configuration is different from that of TiKV and PD. You can modify TiDB configuration by using [SQL variables](/system-variables.md).
+Currently, the method of changing TiDB configuration is different from that of changing TiKV and PD configurations. You can modify TiDB configuration by using [SQL variables](/system-variables.md).
 
-The following example shows how to online modify `slow-threshold` by using the `tidb_slow_log_threshold` variable. The default value of `slow-threshold` is 200ms. You can set it to 200ms by using `tidb_slow_log_threshold`.
+The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable. The default value of `slow-threshold` is 200 ms. You can set it to 200 ms by using `tidb_slow_log_threshold`.
 
 {{< copyable "sql" >}}
 
