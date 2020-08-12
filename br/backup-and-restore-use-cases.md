@@ -1,7 +1,7 @@
 ---
 title: BR Use Cases
 summary: Learn the use cases of backing up and restoring data using BR.
-aliases: ['/docs/stable/br/backup-and-restore-use-cases/','/docs/stable/reference/tools/br/use-cases/']
+aliases: ['/docs/stable/br/backup-and-restore-use-cases/','/docs/v4.0/br/backup-and-restore-use-cases/','/docs/stable/reference/tools/br/use-cases/']
 ---
 
 # BR Use Cases
