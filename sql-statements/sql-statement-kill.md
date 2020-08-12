@@ -36,7 +36,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQL compatibility
 
-* By design, this statement is not compatible with MySQL by default. This helps prevent against a case of a connection being terminated on the wrong TiDB server, since it is common to place multiple TiDB servers behind a load balancer.
+* By design, this statement is not compatible with MySQL by default. This helps prevent against a case of a connection being terminated on the wrong TiDB server, because it is common to place multiple TiDB servers behind a load balancer.
 * The `KILL TIDB` statement is a TiDB extension. If you are certain that the session you are attempting to kill is on the same TiDB server, set [`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query) in your configuration file.
 
 ## See also
