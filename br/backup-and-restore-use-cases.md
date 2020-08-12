@@ -23,7 +23,7 @@ You are expected to have a basic understanding of [TiDB](https://docs.pingcap.co
 
 ## Prerequisites
 
-This section introduces the recommended method of deploying TiDB, cluster versions, the hardware information of the TiKV cluster, and the cluster configuration for the use cases demonstrations. You can estimate the performance of your backup or restoration operation based on your own hardware and configuration.
+This section introduces the recommended method of deploying TiDB, cluster versions, the hardware information of the TiKV cluster, and the cluster configuration for the use case demonstrations. You can estimate the performance of your backup or restoration operation based on your own hardware and configuration.
 
 ### Deployment method
 
