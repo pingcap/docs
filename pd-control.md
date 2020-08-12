@@ -718,7 +718,7 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set min-hot-key-rate 10
     ```
 
-`max-zombie-rounds` means the maximum number of heartbeats with which an operator can be considered as the pending influence. If you set it to a larger value, more operators might be included in the pending influence. Usually, you do not need to adjust its value. Pending influence refers to the operator influence that is generated during scheduling but still has an effect.
+- `max-zombie-rounds` means the maximum number of heartbeats with which an operator can be considered as the pending influence. If you set it to a larger value, more operators might be included in the pending influence. Usually, you do not need to adjust its value. Pending influence refers to the operator influence that is generated during scheduling but still has an effect.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set max-zombie-rounds 3
