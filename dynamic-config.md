@@ -59,12 +59,14 @@ show config where type='tikv' and name='log-level'
 
 > **Note:**
 >
-> - After changing TiKV configuration items online, the TiKV configuration file is automatically updated. However, you also need to modify the corresponding configuration items by executing `tiup edit-config`; otherwise, operations like `upgrade` and `reload` will overwrite your changes. For details of modifying configuration items, refer to [Modify configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
+> - After changing TiKV configuration items online, the TiKV configuration file is automatically updated. However, you also need to modify the corresponding configuration items by executing `tiup edit-config`; otherwise, operations such as `upgrade` and `reload` will overwrite your changes. For details of modifying configuration items, refer to [Modify configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
 > - After executing `tiup edit-config`, you do not need to execute `tiup reload`.
 
 When using the `set config` statement, you can modify the configuration of a single instance or of all instances according to the instance address or the component type.
 
 - Modify the configuration of all TiKV instances:
+
+    {{< copyable "sql" >}}
 
     ```sql
     set config tikv log.level="info"
@@ -219,7 +221,7 @@ If the modification is successful, `Query OK` is returned:
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-If a configuration item is successfully modified, the result is persisted in etcd instead of the configuration file; the configuration in etcd will prevail in the subsequent operations. The names of some configuration items might conflict with TiDB reserved words. For these configuration items, use backtick `` ` `` to enclose them. For example, `` `schedule.leader-schedule-limit` ``.
+If a configuration item is successfully modified, the result is persisted in etcd instead of in the configuration file; the configuration in etcd will prevail in the subsequent operations. The names of some configuration items might conflict with TiDB reserved words. For these configuration items, use backtick `` ` `` to enclose them. For example, `` `schedule.leader-schedule-limit` ``.
 
 The following PD configuration items can be modified online:
 
