@@ -80,7 +80,7 @@ SELECT * FROM users;
 
 ## UNIQUE KEY
 
-Depending on the transaction mode and the value of `tidb_constraint_check_in_place`, TiDB may check `UNIQUE` constraints [lazily](/transaction-overview.md#lazy-check-of-constraints). This helps improve performance by batching network access.
+Depending on the transaction mode and the value of `tidb_constraint_check_in_place`, TiDB might check `UNIQUE` constraints [lazily](/transaction-overview.md#lazy-check-of-constraints). This helps improve performance by batching network access.
 
 For example:
 
