@@ -27,7 +27,7 @@ This section introduces the recommended method of deploying TiDB, cluster versio
 
 ### Deployment method
 
-It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-cluster.md) and get BR by downloading [TiDB Toolkit](/download-ecosystem-tools.md#br-backup-and-restore).
+It is recommended that you deploy the TiDB cluster using [TiDB Ansible](/online-deployment-using-ansible.md) and get BR by downloading [TiDB Toolkit](/download-ecosystem-tools.md#br-backup-and-restore).
 
 ### Cluster versions
 
