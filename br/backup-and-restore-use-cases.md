@@ -31,14 +31,14 @@ It is recommended that you deploy the TiDB cluster using [TiDB Ansible](/online-
 
 ### Cluster versions
 
-* TiDB: v4.0.2
-* TiKV: v4.0.2
-* PD: v4.0.2
-* BR: v4.0.2
+* TiDB: v3.1.2
+* TiKV: v3.1.2
+* PD: v3.1.2
+* BR: v3.1.2
 
 > **Note:**
 >
-> v4.0.2 was the latest version at the time this document was written. It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
+> v3.1.2 was the latest version at the time this document was written. It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
 
 ### TiKV hardware information
 
