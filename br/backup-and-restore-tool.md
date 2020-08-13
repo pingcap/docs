@@ -23,6 +23,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 > **Note:**
 >
 > If you do not mount a network disk or use other shared storage, the data backed up by BR will be generated on each TiKV node. Because BR only backs up leader replicas, you should estimate the space reserved for each node based on the leader size.
+>
 > Meanwhile, because TiDB v4.0 uses leader count for load balancing by default, leaders are greatly different in size, resulting in uneven distribution of backup data on each node.
 
 ## Use BR
