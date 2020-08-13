@@ -40,7 +40,7 @@ This document only describes parameters that are not included in command-line pa
 
 - The list of peer URLs to be listened to for peer traffic
 - Default value: `"http://127.0.0.1:2380"`
-- To deploy a cluster, you must use `peer-urls` to specify the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
+- To deploy a cluster, you must specify `peer-urls` as the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
 
 ### `advertise-peer-urls`
 
