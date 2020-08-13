@@ -27,7 +27,7 @@ This document only describes parameters that are not included in command-line pa
 
 - The list of client URLs to be listened to for client traffic
 - Default value: `"http://127.0.0.1:2379"`
-- To deploy a cluster, you must use `client-urls` to specify the IP address of the current host, such as `"http://192.168.100.113:2379"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
+- To deploy a cluster, you must specify the IP address of the current host as `client-urls` (for example, `"http://192.168.100.113:2379"`). If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
 
 ### `advertise-client-urls`
 
