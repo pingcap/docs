@@ -16,7 +16,7 @@ This document only describes parameters that are not included in command-line pa
 
 - The unique name of a PD node
 - Default value: `"pd"`
-- If you want to start multiply PDs, you must use different name for each one.
+- To start multiply PD nodes, use a unique name for each node.
 
 ### `data-dir`
 
