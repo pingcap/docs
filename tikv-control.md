@@ -275,7 +275,7 @@ If the command is successfully executed, it prints the above information. If the
     $ tikv-ctl --host 127.0.0.1:20160 region-properties -r 2
     ```
 
-### Modify the TiKV dynamically
+### Modify the TiKV configuration dynamically
 
 You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, the TiKV configuration items that can be dynamically modified and the detailed modification are consistent with modifying configuration using SQL statements. For details, see [Modify TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online).
 
