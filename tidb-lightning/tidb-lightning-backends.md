@@ -40,14 +40,14 @@ To deploy TiDB Lightning in the Local-backend mode, see [TiDB Lightning Deployme
 
 ## TiDB Lightning TiDB-backend
 
-## Deployment for TiDB-backend
+### Deployment for TiDB-backend
 
 When using the TiDB-backend, you no longer need `tikv-importer`. Compared with the [standard deployment procedure](/tidb-lightning/deploy-tidb-lightning.md), the TiDB-backend deployment has the following two differences:
 
 * Steps involving `tikv-importer` can all be skipped.
 * The configuration must be changed to indicate the TiDB-backend is used.
 
-### Hardware requirements
+#### Hardware requirements
 
 The speed of TiDB Lightning using TiDB-backend is limited by the SQL processing speed of TiDB. Therefore, even a lower-end machine may max out the possible performance. The recommended hardware configuration is:
 
@@ -55,7 +55,7 @@ The speed of TiDB Lightning using TiDB-backend is limited by the SQL processing 
 * An SSD large enough to store the entire data source, preferring higher read speed
 * 1 Gigabit network card
 
-### Ansible deployment
+#### Deploy TiDB Lightning using TiDB Ansible
 
 1. The `[importer_server]` section in `inventory.ini` can be left blank.
 
@@ -86,7 +86,7 @@ The speed of TiDB Lightning using TiDB-backend is limited by the SQL processing 
 
 5. Start `tidb-lightning` as usual.
 
-### Manual deployment
+#### Manual deployment
 
 You do not need to download and configure `tikv-importer`. You can download TiDB Lightning from [here](/download-ecosystem-tools.md#tidb-lightning).
 
@@ -99,7 +99,7 @@ backend = "tidb"
 
 or supplying the `--backend tidb` arguments when executing `tidb-lightning`.
 
-## Conflict resolution
+### Conflict resolution
 
 The TiDB-backend supports importing to an already-populated table. However, the new data might cause a unique key conflict with the old data. You can control how to resolve the conflict by using this task configuration.
 
@@ -115,7 +115,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 | ignore | Keep old entries and ignore new ones | `INSERT IGNORE INTO ...` |
 | error | Abort import | `INSERT INTO ...` |
 
-## Migrating from Loader to TiDB Lightning TiDB-backend
+### Migrating from Loader to TiDB Lightning TiDB-backend
 
 TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](/loader-overview.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
 
