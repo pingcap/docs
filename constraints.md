@@ -58,9 +58,29 @@ Query OK, 1 row affected (0.03 sec)
 * The second `INSERT` statement fails because the `age` column is defined as `NOT NULL`.
 * The third `INSERT` statement succeeds because the `last_login` column is not explicitly defined as `NOT NULL`. NULL values ​​are allowed by default.
 
+## CHECK
+
+TiDB parses but ignores `CHECK` constraints. This is MySQL 5.7 compatible behavior.
+
+For example:
+
+{{< copyable "sql" >}}
+
+```sql
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+ id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ username VARCHAR(60) NOT NULL,
+ UNIQUE KEY (username),
+ CONSTRAINT min_username_length CHECK (CHARACTER_LENGTH(username) >=4)
+);
+INSERT INTO users (username) VALUES ('a');
+SELECT * FROM users;
+```
+
 ## UNIQUE KEY
 
-In TiDB's optimistic transaction mode, UNIQUE constraints are [checked lazily](/transaction-overview.md#lazy-check-of-constraints) by default. By batching checks when the transaction is committed, TiDB can reduce network overhead and improve performance.
+Depending on the transaction mode and the value of `tidb_constraint_check_in_place`, TiDB might check `UNIQUE` constraints [lazily](/transaction-overview.md#lazy-check-of-constraints). This helps improve performance by batching network access.
 
 For example:
 
@@ -76,23 +96,31 @@ CREATE TABLE users (
 INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
-{{< copyable "sql" >}}
-
-```sql
-START TRANSACTION;
-```
-
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+With the default of pessimistic locking:
 
 {{< copyable "sql" >}}
 
 ```sql
+BEGIN;
 INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ```
 
 ```
+ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
+```
+
+With optimistic locking and `tidb_constraint_check_in_place=0`:
+
+{{< copyable "sql" >}}
+
+```sql
+BEGIN OPTIMISTIC;
+INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
@@ -118,9 +146,9 @@ COMMIT;
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ```
 
-The first `INSERT` statement will not cause duplicate key errors, which is consistent with MySQL's rules. This check will be delayed until the transaction is committed.
+In the optimistic example, the unique check was delayed until the transaction is committed. This resulted in a duplicate key error, because the value `bill` was already present.
 
-You can disable this behavior by setting  `tidb_constraint_check_in_place` to  `1`. This variable setting does not take effect on pessimistic transactions, because in the pessimistic transaction mode the constraints are always checked when the statement is executed. If this behavior is disabled, the unique constraint is checked when the statement is executed.
+You can disable this behavior by setting `tidb_constraint_check_in_place` to `1`. This variable setting does not take effect on pessimistic transactions, because in the pessimistic transaction mode the constraints are always checked when the statement is executed. When `tidb_constraint_check_in_place=1`, the unique constraint is checked when the statement is executed.
 
 For example:
 
@@ -147,7 +175,7 @@ Query OK, 0 rows affected (0.00 sec)
 {{< copyable "sql" >}}
 
 ```sql
-START TRANSACTION;
+BEGIN OPTIMISTIC;
 ```
 
 ```
@@ -282,5 +310,3 @@ ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
     INSERT INTO orders (user_id, doc) VALUES (123, NULL);
     COMMIT;
     ```
-
-* TiDB does not display foreign key information in the result of executing the `SHOW CREATE TABLE` statement.
