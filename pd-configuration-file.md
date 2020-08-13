@@ -69,7 +69,7 @@ This document only describes parameters that are not included in command-line pa
 
 + Used to identify different clusters during the bootstrap phase.
 + Default value: "pd-cluster"
-+ If multiple clusters that have nodes with same configurations are deployed successively, different tokens should be specified to isolate different cluster nodes.
++ If multiple clusters that have nodes with same configurations are deployed successively, you must specify different tokens to isolate different cluster nodes.
 
 ### `lease`
 
