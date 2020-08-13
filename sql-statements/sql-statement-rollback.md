@@ -14,6 +14,10 @@ This statement reverts all changes in the current transaction inside of TIDB.  I
 
 ![RollbackStmt](/media/sqlgram/RollbackStmt.png)
 
+**CompletionTypeWithinTransaction:**
+
+![CompletionTypeWithinTransaction](/media/sqlgram/CompletionTypeWithinTransaction.png)
+
 ## Examples
 
 ```sql
@@ -35,7 +39,13 @@ Empty set (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is partly compatible with MySQL. TiDB only has syntactic support for `CompletionTypeWithinTransaction`. Closing the connection or continuing to open a new transaction after the transaction is rolled back is not supported. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+This statement is partially compatible with MySQL:
+
+* TIDB does not support Savepoints, or the syntax `ROLLBACK TO SAVEPOINT`.
+* TiDB parses but ignores the syntax `ROLLBACK AND [NO] RELEASE`. This functionality is used in MySQL to disconnect the client session immediately after rolling back the transaction. In TiDB, it is recommended to instead use the `mysql_close()` functionality of your client driver.
+* TiDB parses but ignores the syntax `ROLLBACK AND [NO] CHAIN`. This functionality is used in MySQL to immediately start a new transaction with the same isolation level as the current transaction being rolled back. In TiDB, it is recommended to instead start a new transaction.
+
+ Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 
