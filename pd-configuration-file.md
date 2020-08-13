@@ -20,7 +20,7 @@ This document only describes parameters that are not included in command-line pa
 
 ### `data-dir`
 
-- The path to the data directory
+- The directory in which PD stores data
 - Default value: `default.${name}"`
 
 ### `client-urls`
