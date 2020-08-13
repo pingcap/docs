@@ -35,7 +35,7 @@ Empty set (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is partly compatible with MySQL. Closing the connection or continuing to open a new transaction after the transaction is rolled back is not supported. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+TiDB does not support the syntax `ROLLBACK TO SAVEPOINT`. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 
