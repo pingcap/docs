@@ -436,6 +436,7 @@ worker-num = 16
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
 # Supports four dispatchers: default, ts, rowid, and table
+# The matching syntax of matcher is the same as the filter rule syntax.
 dispatchers = [
     {matcher = ['test1.*', 'test2.*'], dispatcher = "ts"},
     {matcher = ['test3.*', 'test4.*'], dispatcher = "rowid"},
