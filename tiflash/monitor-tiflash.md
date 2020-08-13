@@ -55,7 +55,7 @@ The following sections introduce the default monitoring information of **TiFlash
 ## Storage
 
 - Write Command OPS: The number of write requests received per second by the storage layer of all TiFlash instances.
-- Write Amplification: Write amplification of each TiFlash instance (the actual bytes of disk writes divided by the written bytes of logical data). `total` is the write magnification since this start, and `5min` is the write magnification in the last 5 minutes.
+- Write Amplification: Write amplification of each TiFlash instance (the actual bytes of disk writes divided by the written bytes of logical data). `total` is the write amplification since this start, and `5min` is the write amplification in the last 5 minutes.
 - Read Tasks OPS: The number of read tasks in the storage layer per second for each TiFlash instance.
 - Rough Set Filter Rate: The proportion of the number of packets read by each TiFlash instance in the last minute that are filtered by the rough set index of the storage layer.
 - Internal Tasks OPS: The number of times that all TiFlash instances perform internal data sorting tasks per second.
