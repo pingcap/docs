@@ -96,7 +96,7 @@ Currently, TiCDC supports adding TiCDC components to the TiDB cluster using eith
 Currently, TiCDC supports using `cdc cli` to manage a TiCDC cluster and data replication tasks. For details, see: 
 
 - [Use `cdc cli` to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)
-- [Use HTTP interface to manage cluster status and data replication task](/ticdc/manage-ticdc.md#manage-ticdc-cluster-and-replication-tasks)
+- [Use HTTP interface to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-http-interface-to-manage-cluster-status-and-data-replication-task)
 
 ## Troubleshoot TiCDC
 
