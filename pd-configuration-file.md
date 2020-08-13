@@ -14,7 +14,7 @@ This document only describes parameters that are not included in command-line pa
 
 ### `name`
 
-- The human-readable unique name for this PD member
+- The unique name of a PD node
 - Default value: `"pd"`
 - If you want to start multiply PDs, you must use different name for each one.
 
