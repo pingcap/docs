@@ -12,9 +12,7 @@ TiDB v4.0 was officially released on May 28th, 2020. In this release, we have ma
 
 ### Scheduling
 
-+ Cascading Placement Rules is an experimental feature of the Placement Driver (PD) introduced in v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader. See [Cascading Placement Rules](/configure-placement-rules.md) for details.
-+ Elastic scheduling is an experimental feature based on Kubernetes, which enables TiDB to dynamically scale in and out nodes. This feature can effectively mitigate the high workload during peak hours of an application and saves unnecessary overhead.
-+ Hotspot scheduling policy supports more dimensions. In addition to using write or read traffic as the scheduling basis, keys are introduced as a new dimension for the scheduling policy, which might, to a large extent, mitigate the CPU usage imbalance caused by the previous single-dimensional policy.
++ Hotspot scheduling policy supports more dimensions. In addition to using write or read traffic as the scheduling basis, keys are introduced as a new dimension for the scheduling policy, which might, to a large extent, mitigate the CPU usage imbalance caused by the previous single-dimensional policy. See [TiDB Scheduling](/tidb-scheduling.md) for details.
 
 ### Storage engine
 
@@ -45,7 +43,7 @@ TiUP is a new package manager tool introduced in v4.0 that is used to manage all
 ### Transaction
 
 - The pessimistic transaction is now provided for general availability as the default transaction mode. Support the Read Committed isolation level and the `SELECT FOR UPDATE NOWAIT` syntax. See [Pessimistic Transaction Model](/pessimistic-transaction.md) for details.
-- Support large transactions. Increase the upper limit on transaction size from 10 MB to 10 GB. Support both the pessimistic transaction and optimistic transaction.
+- Support large transactions. Increase the upper limit on transaction size from 10 MB to 10 GB. Support both the pessimistic transaction and optimistic transaction. See [Transaction size limit](/transaction-overview.md#transaction-size-limit) for details.
 
 ### SQL features
 
@@ -57,9 +55,8 @@ TiUP is a new package manager tool introduced in v4.0 that is used to manage all
 - Support writing the intermediate results of Join and Sort to the local disk when you make queries, which avoids the Out of Memory (OOM) issue because the queries occupy excessive memory. This also improves system stability.
 - Optimize the output of `EXPLAIN` and `EXPLAIN ANALYZE`. More information is shown in the result, which improves troubleshooting efficiency. See [Explain Analyze](/sql-statements/sql-statement-explain-analyze.md) and [Explain](/sql-statements/sql-statement-explain.md) for details.
 - Support using the Index Merge feature to access tables. When you make a query on a single table, the TiDB optimizer automatically reads multiple index data according to the query condition and makes a union of the result, which improves the performance of querying on a single table. See [Index Merge](/query-execution-plan.md#indexmerge-example) for details.
-- Support the expression index feature (**experimental**). The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details.
-- Support `AUTO_RANDOM` keys as an extended syntax for the TiDB columnar attribute (**experimental**). `AUTO_RANDOM` is designed to address the hotspot issue caused by the auto-increment column and provides a low-cost migration solution from MySQL for users who work with auto-increment columns. See [`AUTO_RANDOM` Key](/auto-random.md) for details.
-- Add system tables that provide information of cluster topology, configuration, logs, hardware, operating systems, and slow queries, which helps DBAs to quickly learn, analyze system metrics. See [SQL Diagnosis](/information-schema/information-schema-sql-diagnostics.md) for details.
+- Support `AUTO_RANDOM` keys as an extended syntax for the TiDB columnar attribute. `AUTO_RANDOM` is designed to address the hotspot issue caused by the auto-increment column and provides a low-cost migration solution from MySQL for users who work with auto-increment columns. See [`AUTO_RANDOM` Key](/auto-random.md) for details.
+- Add system tables that provide information of cluster topology, configuration, logs, hardware, operating systems, and slow queries, which helps DBAs to quickly learn, analyze system metrics. See [Information Schema](/information-schema/information-schema.md) and [SQL Diagnosis](/information-schema/information-schema-sql-diagnostics.md) for details.
 
     - Add system tables that provide information of cluster topology, configuration, logs, hardware, operating systems to help DBAs quickly learn the cluster configuration and status:
         - The `cluster_info` table that stores the cluster topology information.
@@ -78,24 +75,16 @@ Support case-insensitive and accent-insensitive `utf8mb4_general_ci` and `utf8_g
 
 ### Security
 
-+ Improve the encrypted communication between the client and server, and between components, which ensures data security and prevents any sent and received data from being read and modified by illegal hackers. Mainly support the certificate-based login authentication, updating certificate online, and verifying the CommonName attribute of the TLS certificate.
-+ Transparent Data Encryption (TDE) is a new feature that provides protection for the entire database. This feature, when enabled, is transparent to applications that are connected to TiDB and does not require any change to the existing applications. Because this TDE feature operates at the file level, TiDB encrypts data before writing data to disk, and decrypts data before reading data from memory to ensure data security. Currently, the AES128-CTR, AES192-CTR, and AES256-CTR encryption algorithms are supported. You can manage keys via AWS KMS.
++ Improve the encrypted communication between the client and server, and between components, which ensures data security and prevents any sent and received data from being read and modified by illegal hackers. Mainly support the certificate-based login authentication, updating certificate online, and verifying the CommonName attribute of the TLS certificate. See [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md) for details.
+
++ Transparent Data Encryption (TDE) is a new feature that provides protection for the entire database. This feature, when enabled, is transparent to applications that are connected to TiDB and does not require any change to the existing applications. Because this TDE feature operates at the file level, TiDB encrypts data before writing data to disk, and decrypts data before reading data from memory to ensure data security. Currently, the AES128-CTR, AES192-CTR, and AES256-CTR encryption algorithms are supported. You can manage keys via AWS KMS. See [Encryption at Rest](/encryption-at-rest.md) for details.
 
 ### Backup and Restore
 
 Support the Backup & Restore (BR) feature to quickly back up and restore data of a single TiDB cluster to ensure data reliability and to meet enterprises’ needs of backup and restore or the graded protection of information security. Support quickly backing up and restoring all data or a certain range of sorted data. See [Backup & Restore](/br/backup-and-restore-tool.md) for details.
 
-### Service level feature
+### Service level features
 
-+ TiDB instances support caching the calculation results that the operator has pushed down to TiKV in the unit of Region, which improves the efficiency of SQL executions in the following scenarios. See [Coprocessor Cache](/coprocessor-cache.md) (**experimental**) for details.
-    - The SQL statements are the same.
-    - The SQL statements contain a changing condition (limited to the primary key of tables or partitions), and the other parts are consistent.
-    - The SQL statements contain multiple changing conditions and the other parts are consistent. The changing conditions exactly match a compound index column.
 + Support caching the execution plan of `Prepare` or `Execute` to improve the SQL execution efficiency.
-+ Support persisting configuration parameters in PD and dynamically modifying configuration items to improve product usability.
 + Support self-adapting to the thread pool and streamlining the number of thread pools. Optimize the processing and scheduling of requests to improve product usability and performance.
 + The Follower Read feature refers to using any follower replica of a Region to serve a read request under the premise of strongly consistent reads. This feature improves the throughput of the TiDB cluster and reduces the load of the leader. It contains a series of load balancing mechanisms that offload TiKV read loads from the leader replica to the follower replica in a Region. TiKV's Follower Read implementation guarantees the consistency of data reading; combined with Snapshot Isolation in TiDB, this implementation provides users with strongly consistent reads. See [Follower Read](/follower-read.md) for details.
-
-### TiCDC
-
-TiCDC (**experimental**) is a tool for replicating the incremental data of TiDB. This tool is implemented by pulling TiKV change logs, which ensures high reliability and availability of data. You can subscribe to the change information of data, and the system automatically sends data to the downstream. Currently, the downstream database must be MySQL compatible (such as MySQL and TiDB) or Kafka. You can also extend the supported downstream systems based on the [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md). See [TiCDC](/ticdc/ticdc-overview.md) for details.
