@@ -16,7 +16,7 @@ This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 
 ## How long is the replication latency of TiDB Binlog?
 
-The replication latency of TiDB Binlog is measured in seconds, which is generally about 3 seconds during off-peak business hours.
+The latency of TiDB Binlog replication is measured in seconds, which is generally about 3 seconds during off-peak business hours.
 
 ## What privileges does Drainer need to replicate data to the downstream MySQL or TiDB cluster?
 
