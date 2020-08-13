@@ -67,7 +67,7 @@ This document only describes parameters that are not included in command-line pa
 
 ### `initial-cluster-token`
 
-+ Used to identify different clusters during the bootstrap phase.
++ Identifies different clusters during the bootstrap phase.
 + Default value: `"pd-cluster"`
 + If multiple clusters that have nodes with same configurations are deployed successively, you must specify different tokens to isolate different cluster nodes.
 
