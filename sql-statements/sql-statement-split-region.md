@@ -32,6 +32,29 @@ SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
 
 `BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
 
+<<<<<<< HEAD
+=======
+The following example shows the result of the `SPLIT` statement:
+
+```sql
++--------------------+----------------------+
+| TOTAL_SPLIT_REGION | SCATTER_FINISH_RATIO |
++--------------------+----------------------+
+| 4                  | 1.0                  |
++--------------------+----------------------+
+```
+
+* `TOTAL_SPLIT_REGION`: the number of newly split Regions.
+* `SCATTER_FINISH_RATIO`: the completion rate of scattering for newly split Regions. `1.0` means that all Regions are scattered. `0.5` means that only half of the Regions are scattered and the rest are being scattered.
+
+> **Note:**
+>
+> The following two session variables might affect the behavior of the `SPLIT` statement:
+>
+> - `tidb_wait_split_region_finish`: It might take a while to scatter the Regions. This duration depends on PD scheduling and TiKV loads. This variable is used to control when executing the `SPLIT REGION` statement whether to return the results to the client until all Regions are scattered. If its value is set to `1` (by default), TiDB returns the results only after the scattering is completed. If its value is set to `0`, TiDB returns the results regardless of the scattering status.
+> - `tidb_wait_split_region_timeout`: This variable is to set the execution timeout of the `SPLIT REGION` statement, in seconds. The default value is 300s. If the `split` operation is not completed within the duration, TiDB returns a timeout error.
+
+>>>>>>> c49f309... *: update doc for split region (#3550)
 ### Split Table Region
 
 The key of row data in each table is encoded by `table_id` and `row_id`. The format is as follows:
@@ -130,7 +153,7 @@ SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
 
 This statement splits index idx1 of the table `t` into 26 Regions from a~`{`. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, z)`, and the range of Region 26 is `[z, maxIndexValue)`. 
 
-If the column of index idx2 is of time type like timestamp/datetime, and you want to split index Region by time interval:
+If the column of index `idx2` is of time type like timestamp/datetime, and you want to split index Region by year:
 
 {{< copyable "sql" >}}
 
@@ -138,7 +161,21 @@ If the column of index idx2 is of time type like timestamp/datetime, and you wan
 SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
+<<<<<<< HEAD
 This statemnt spilts the region of index idx2 in table t into 10 Regions from  `2010-01-01 00:00:00` to  `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue,  2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)` and so on.
+=======
+This statement splits the Region of index `idx2` in table `t` into 10 Regions from  `2010-01-01 00:00:00` to  `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue,  2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)` and so on.
+
+If you want to split the index Region by day, see the following example:
+
+{{< copyable "sql" >}}
+
+```sql
+SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:00") REGIONS 30;
+```
+
+This statement splits the data of June 2020 of index `idex2` in table `t` into 30 Regions, each Region representing 1 day.
+>>>>>>> c49f309... *: update doc for split region (#3550)
 
 Region split methods for other types of index columns are similar.
 
@@ -185,11 +222,13 @@ region4  [("c", "")                    , maxIndexValue               )
 
 ## pre_split_regions
 
-To have evenly split Regions when a table is created, it is recommended you use `shard_row_id_bits` together with `pre_split_regions`. When a table is created successfully, `pre_split_regions` pre-spilts tables into the number of Regions as specified by `2^(pre_split_regions)`.
+To have evenly split Regions when a table is created, it is recommended you use `SHARD_ROW_ID_BITS` together with `PRE_SPLIT_REGIONS`. When a table is created successfully, `PRE_SPLIT_REGIONS` pre-spilts tables into the number of Regions as specified by `2^(PRE_SPLIT_REGIONS)`.
 
 > **Note:**
 >
-> The value of `pre_split_regions` must be less than or equal to that of `shard_row_id_bits`.
+> The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS`.
+
+The `tidb_scatter_region` global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `1`, then TiDB will not return the results to the client until all the Regions are split and scattered. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
 
 ### Example
 
@@ -212,4 +251,9 @@ region4:   [ 3<<61     ,  +inf  )
 
 ## Related session variable
 
+<<<<<<< HEAD
 There are two `SPLIT REGION` related session variables: `tidb_scatter_region`, `tidb_wait_split_region_finish` and `tidb_wait_split_region_timeout`. For details, see [TiDB specific system variables and syntax](/tidb-specific-system-variables.md).
+=======
+* [SHOW TABLE REGIONS](/sql-statements/sql-statement-show-table-regions.md)
+* Session variables: [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region), [`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) and [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout).
+>>>>>>> c49f309... *: update doc for split region (#3550)
