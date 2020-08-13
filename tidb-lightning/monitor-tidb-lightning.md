@@ -6,14 +6,14 @@ aliases: ['/docs/dev/tidb-lightning/monitor-tidb-lightning/','/docs/dev/referenc
 
 # TiDB Lightning Monitoring
 
-Both `tidb-lightning` and `tikv-importer` supports metrics collection via [Prometheus](https://prometheus.io/). This document introduces the monitor configuration and monitoring metrics of TiDB Lightning.
+`tidb-lightning` supports metrics collection via [Prometheus](https://prometheus.io/). This document introduces the monitor configuration and monitoring metrics of TiDB Lightning.
 
 ## Monitor configuration
 
 - If TiDB Lightning is installed using TiDB Ansible, simply add the servers to the `[monitored_servers]` section in the `inventory.ini` file. Then the Prometheus server can collect their metrics.
 - If TiDB Lightning is manually installed, follow the instructions below.
 
-The metrics of `tidb-lightning` and `tikv-importer` can be gathered directly by Prometheus as long as it is discovered. You can set the metrics port in `tidb-lightning.toml`:
+The metrics of `tidb-lightning` can be gathered directly by Prometheus as long as it is discovered. You can set the metrics port in `tidb-lightning.toml`:
 
 ```toml
 [lightning]
@@ -23,24 +23,14 @@ pprof-port = 8289
 ...
 ```
 
-and in `tikv-importer.toml`:
-
-```toml
-# Listening address of the status server.
-status-server-address = '0.0.0.0:8286'
-```
-
 You need to configure Prometheus to make it discover the servers. For instance, you can directly add the server address to the `scrape_configs` section:
 
 ```yaml
 ...
 scrape_configs:
-  - job_name: 'lightning'
+  - job_name: 'tidb-lightning'
     static_configs:
       - targets: ['192.168.20.10:8289']
-  - job_name: 'tikv-importer'
-    static_configs:
-      - targets: ['192.168.20.9:8286']
 ```
 
 ## Grafana dashboard
