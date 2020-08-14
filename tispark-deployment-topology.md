@@ -3,15 +3,15 @@ title: TiSpark Deployment Topology
 summary: Learn the deployment topology of TiSpark using TiUP based on the minimal TiDB topology.
 ---
 
-> **Note:**
+> **Warning:**
 >
-> TiUP cluster is still an experimental feature. It is **NOT** recommended to use it in the production environment.
+> TiSpark support in the TiUP cluster is still an experimental feature. It is **NOT** recommended to use it in the production environment.
 
 # TiSpark Deployment Topology
 
 This document introduces the TiSpark deployment topology and how to deploy TiSpark based on the minimum cluster topology.
 
-TiSpark a thin layer built for running Apache Spark on top of TiDB/TiKV to answer the complex OLAP queries. It takes advantages of both the Spark platform and the distributed TiKV cluster and seamlessly glues to TiDB to provide a Hybrid Transactional/Analytical Processing (HTAP) solution to serve as a one-stop solution for both online transactions and analyses.
+TiSpark is a component built for running Apache Spark on top of TiDB/TiKV to answer complex OLAP queries. It brings benefits of both the Spark platform and the distributed TiKV cluster to TiDB and makes TiDB a one-stop solution for both online transactions and analytics.
 
 For more information about TiSpark, see [TiSpark User Guide](/tispark-overview.md).
 
@@ -27,9 +27,9 @@ For more information about TiSpark, see [TiSpark User Guide](/tispark-overview.m
 
 ## Topology templates
 
-[The simple template for the TiSpark](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-tispark.yaml)
+[Simple TiSpark topology template](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-tispark.yaml)
 
-[The complex template for the TiSpark](https://github.com/pingcap/docs-cn/blob/master/config-templates/complex-tispark.yaml)
+[Complex TiSpark topology template](https://github.com/pingcap/docs-cn/blob/master/config-templates/complex-tispark.yaml)
 
 > **Note:**
 >
@@ -38,7 +38,7 @@ For more information about TiSpark, see [TiSpark User Guide](/tispark-overview.m
 
 ## Prerequisites
 
-TiSpark is based on the Apache Spark cluster, so before you start the TiDB cluster that contains TiSpark, you must ensure that Java Runtime Environment (JRE) 8 is installed on the server with TiSpark deployed. Otherwise, TiSpark cannot be started.
+TiSpark is based on the Apache Spark cluster, so before you start the TiDB cluster that contains TiSpark, you must ensure that Java Runtime Environment (JRE) 8 is installed on the server that deploys TiSpark. Otherwise, TiSpark cannot be started.
 
 TiUP does not support installing JRE automatically. You need to install it on your own. For detailed installation instruction, see [How to download and install prebuilt OpenJDK packages](https://openjdk.java.net/install/).
 

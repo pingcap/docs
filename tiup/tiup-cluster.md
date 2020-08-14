@@ -430,7 +430,7 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 
 > **Note:**
 >
-> Currently, TiUP cluster's support for TiSpark is still **experimental**. It is not supported to import the cluster with TiSpark enabled.
+> Currently, TiUP cluster's support for TiSpark is still **experimental**. It is not supported to import a TiDB cluster with TiSpark enabled.
 
 Before TiUP is released, TiDB Ansible is often used to deploy TiDB clusters. To enable TiUP to take over the cluster deployed by TiDB Ansible, use the `import` command.
 
