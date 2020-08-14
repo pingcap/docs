@@ -23,6 +23,13 @@ pprof-port = 8289
 ...
 ```
 
+and in `tikv-importer.toml`:
+
+```toml
+# Listening address of the status server.
+status-server-address = '0.0.0.0:8286'
+```
+
 You need to configure Prometheus to make it discover the servers. For instance, you can directly add the server address to the `scrape_configs` section:
 
 ```yaml
@@ -31,6 +38,9 @@ scrape_configs:
   - job_name: 'tidb-lightning'
     static_configs:
       - targets: ['192.168.20.10:8289']
+  - job_name: 'tikv-importer'
+    static_configs:
+      - targets: ['192.168.20.9:8286']
 ```
 
 ## Grafana dashboard
