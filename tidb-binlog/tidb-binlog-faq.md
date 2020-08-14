@@ -14,9 +14,9 @@ This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 
 - There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In latency, a p-binlog is written concurrently in the TiKV prewrite stage before the transactions are committed. Generally, writing binlog is faster than TiKV prewrite, so it does not increase latency. You can check the response time of writing binlog in Pump's monitoring panel.
 
-## How long is the replication latency of TiDB Binlog?
+## How high is the replication latency of TiDB Binlog?
 
-The latency of TiDB Binlog replication is measured in seconds, which is generally about 3 seconds during off-peak business hours.
+The latency of TiDB Binlog replication is measured in seconds, which is generally about 3 seconds during off-peak hours.
 
 ## What privileges does Drainer need to replicate data to the downstream MySQL or TiDB cluster?
 
