@@ -87,13 +87,13 @@ Currently, The following scenarios are not supported:
 
 ## Install and deploy TiCDC 
 
-TiCDC supports deploying TiCDC components while deploying a new TiDB cluster using TiUP. You only need to [add the TiCDC](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file) to the configuration file when TiUP starts the TiDB cluster.
+You can deploy TiCDC components in the process of deploying a new TiDB cluster using TiUP. You only need to [add TiCDC](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file) to the configuration file when TiUP starts the TiDB cluster.
 
-Currently, TiCDC supports adding TiCDC components to the TiDB cluster using either TiUP or Binary. For details, see [Deploy and install TiCDC](/ticdc/manage-ticdc.md#deploy-and-install-ticdc).
+Currently, you can also add TiCDC components to an existing TiDB cluster using either TiUP or binary. For details, see [Deploy and install TiCDC](/ticdc/manage-ticdc.md#deploy-and-install-ticdc).
 
 ## Manage TiCDC Cluster and Replication Tasks
 
-Currently, TiCDC supports using `cdc cli` to manage a TiCDC cluster and data replication tasks. For details, see: 
+Currently, you can use the `cdc cli` tool to manage the status of a TiCDC cluster and data replication tasks. For details, see: 
 
 - [Use `cdc cli` to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)
 - [Use HTTP interface to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-http-interface-to-manage-cluster-status-and-data-replication-task)

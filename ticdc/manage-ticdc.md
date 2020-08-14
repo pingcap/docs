@@ -21,7 +21,7 @@ In production environments, the recommendations of software and hardware for TiC
 | Red Hat Enterprise Linux | 7.3 or later versions   |
 | CentOS                   | 7.3 or later versions   |
 
-| **CPU** | **Memory** | **Disk Type** | **Network** | **Number of TiCDC Cluster Instances (Minimum Requirements for Production Environment)** |
+| **CPU** | **Memory** | **Disk type** | **Network** | **Number of TiCDC cluster instances (minimum requirements for production environment)** |
 | --- | --- | --- | --- | --- |
 | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred） | 2 |
 
