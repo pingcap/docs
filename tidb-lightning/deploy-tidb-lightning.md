@@ -125,7 +125,7 @@ You can deploy TiDB Lightning using TiDB Ansible together with the [deployment o
     # Uses the Local-backend.
     backend = "local"
     # Sets the directory for temporarily storing the sorted key-value pairs.
-    * The target directory must be empty.
+    # The target directory must be empty.
     "sorted-kv-dir" = "/mnt/ssd/sorted-kv-dir"
     ```
 
