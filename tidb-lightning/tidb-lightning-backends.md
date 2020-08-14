@@ -14,14 +14,14 @@ The **Local-backend**: `tidb-lightning` first encodes data into key-value pairs,
 
 The **TiDB-backend** requires `tidb-lightning` to encode these data into SQL `INSERT` statements, and has these statements executed directly on the TiDB node.
 
-| Back end | Local-backend | Importer-backend | TiDB-backend |
+| Backend | Local-backend | Importer-backend | TiDB-backend |
 |:---|:---|:---|:---|
 | Speed | Fast (~500 GB/hr) | Fast (~300 GB/hr) | Slow (~50 GB/hr) |
 | Resource usage | High | High | Low |
 | Network bandwidth usage| High | Medium | Low |
 | ACID respected while importing | No | No | Yes |
 | Target tables | Must be empty | Must be empty | Can be populated |
-| External component needed | No | `tikv-importer` | No |
+| Additional component required | No | `tikv-importer` | No |
 | TiDB versions supported | >= v4.0.0 | All | All |
 
 ## How to choose the backend modes
@@ -42,10 +42,10 @@ To deploy TiDB Lightning in the Local-backend mode, see [TiDB Lightning Deployme
 
 ### Deployment for TiDB-backend
 
-When using the TiDB-backend, you no longer need `tikv-importer`. Compared with the [standard deployment procedure](/tidb-lightning/deploy-tidb-lightning.md), the TiDB-backend deployment has the following two differences:
+When using the TiDB-backend, deploying `tikv-importer` is not necessary. Compared with the [standard deployment procedure](/tidb-lightning/deploy-tidb-lightning.md), the TiDB-backend deployment has the following two differences:
 
-* Steps involving `tikv-importer` can all be skipped.
-* The configuration must be changed to indicate the TiDB-backend is used.
+* All steps involving `tikv-importer` can be skipped.
+* The configuration must be changed to declare that the TiDB-backend is used.
 
 #### Hardware requirements
 
