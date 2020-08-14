@@ -123,7 +123,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 * Invisible indexes in TiDB are modeled on the equivalent feature from MySQL 8.0.
 * Similiar to MySQL, TiDB does not permit `PRIMARY KEY` indexes to be made invisible.
-* MySQL provides an optimizer switch `use_invisible_indexes=on` to make all invisible indexes _visible_ again. This functionality is not available in TIDB.
+* MySQL provides an optimizer switch `use_invisible_indexes=on` to make all invisible indexes _visible_ again. This functionality is not available in TiDB.
 
 ## See also
 
