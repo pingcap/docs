@@ -759,15 +759,6 @@ Usage:
 >> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
 >> store weight 1 5 10                 // Set the leader weight to 5 and region weight to 10 for the store with the store id of 1
 >> store remove-tombstone              // Remove stores that are in tombstone state
->> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
->> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
->> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
->> store limit all 5                   // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
->> store limit 1 5                     // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 add-peer          // Set the limit of adding-peer operations to 5 per minute for all stores
->> store limit 1 5 add-peer            // Set the limit of adding-peer operations to 5 per minute for store 1
->> store limit 1 5 remove-peer         // Set the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
 >> store limit-scene                   // Show all limit scenarios (experimental)
 {
   "Idle": 100,
@@ -778,9 +769,7 @@ Usage:
 >> store limit-scene idle 100 // set rate to 100 in the idle scene (experimental)
 ```
 
-> **Note:**
->
-> When you use the `store limit` command, the original `region-add` and `region-remove` are deprecated. Use `add-peer` and `remove-peer` instead.
+For the usage of `store limit`, see [Store Limit](/configure-store-limit.md).
 
 ### `log [fatal | error | warn | info | debug]`
 
