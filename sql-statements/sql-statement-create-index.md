@@ -158,7 +158,7 @@ CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-For details, see [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
+For details, see [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md).
 
 ## Associated session variables
 
