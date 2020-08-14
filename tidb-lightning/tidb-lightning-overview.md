@@ -23,9 +23,9 @@ The complete import process is as follows:
 
 2. `tidb-lightning` creates the skeleton of all tables from the data source.
 
-3. Each table is split into multiple continuous *batches*, so that data from a huge table (200 GB+) can be delivered incrementally and concurrently.
+3. Each table is split into multiple continuous *batches*, so that data from a huge table (200 GB+) can be imported incrementally and concurrently.
 
-4. For each batch, `tidb-lightning` creates *engine files* to store KV pairs. `tidb-lightning` then reads the data source in parallel, transforms each row into KV pairs according to the TiDB rules, and writes these KV pairs into the local temporary storage files.
+4. For each batch, `tidb-lightning` creates an *engine file* to store KV pairs. `tidb-lightning` then reads the data source in parallel, transforms each row into KV pairs according to the TiDB rules, and writes these KV pairs into the local files for temporary storage.
 
 5. Once a complete engine file is written, `tidb-lightning` divides and schedules these data and imports them into the target TiKV cluster.
 
@@ -39,4 +39,4 @@ The complete import process is as follows:
 
 If the target cluster of data import is v3.x or earlier versions, you need to use the Importer-backend to import data. In this mode, `tidb-lightning` sends the parsed KV pairs to `tikv-importer` via gRPC and `tikv-importer` imports the data.
 
-TiDB Lightning also supports using TiDB-backend instead of Importer-end as the backend for data import. In this configuration, `tidb-lightning` transforms data into SQL `INSERT` statements and directly executes them on the target cluster, similar to TiDB-backend and Loader. See [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md) for details.
+TiDB Lightning also supports using TiDB-backend for data import. In this mode, `tidb-lightning` transforms data into `INSERT` SQL statements and directly executes them on the target cluster, which is similar to Loader's operations. See [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md) for details.

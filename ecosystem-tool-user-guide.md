@@ -25,7 +25,7 @@ The following are the basics of Dumpling:
 TiDB Lightning supports three modes:
 
 - `local`: TiDB Lightning parses data into ordered key-value pairs and directly imports them into TiKV. This mode is usually for importing a large amount of data (at the TB level) to a new cluster. During the import, the cluster cannot provide services.
-- `importer`: This mode is similar to the `local` mode. To use this mode, you need to deploy the external component of `tikv-importer` to help import key-value pairs. If the target cluster is v4.0 or later versions, it is recommended to use the `local` mode.
+- `importer`: This mode is similar to the `local` mode. To use this mode, you need to deploy an additional component `tikv-importer` to help import key-value pairs. If the target cluster is in v4.0 or later versions, it is recommended to use the `local` mode.
 - `tidb`: This mode uses TiDB/MySQL as the backend, which is slower than the `local` mode and `importer` mode but can be performed online. It also supports importing data to MySQL.
 
 The following are the basics of TiDB Lightning:
