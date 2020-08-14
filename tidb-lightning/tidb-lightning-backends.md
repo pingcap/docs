@@ -1,12 +1,18 @@
 ---
-title: TiDB Lightning Import Modes
-summary: Learn the different import modes of TiDB Lightning.
+title: TiDB Lightning Backends
+summary: Learn the backends of TiDB Lightning.
 aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend']
 ---
 
-# TiDB Lightning Import Modes
+# TiDB Lightning Backends
 
-TiDB Lightning supports three backends: Importer-backend (default), Local-backend, and TiDB-backend. It determines how `tidb-lightning` delivers data into the target cluster.
+TiDB Lightning supports the following [backends](/tidb-lightning/tidb-lightning-glossary.md#back-end):
+
++ [Importer-backend](#tidb-lightning-importer-backend) (default)
++ [Local-backend](#tidb-lightning-local-backend)
++ [TiDB-backend](#tidb-lightning-tidb-backend)
+
+The backend determines how `tidb-lightning` imports data into the target cluster.
 
 The **Importer-backend** (default) requires `tidb-lightning` to first encode the SQL or CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
 
