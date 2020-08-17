@@ -1,6 +1,7 @@
 ---
 title: Store Limit
 summary: Learn the feature of Store Limit.
+category: how-to
 aliases: ['/docs/v3.1/configure-store-limit/']
 ---
 

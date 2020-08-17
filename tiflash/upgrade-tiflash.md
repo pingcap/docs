@@ -1,6 +1,7 @@
 ---
 title: Upgrade TiFlash Nodes
 summary: Learn how to upgrade TiFlash nodes.
+category: reference
 aliases: ['/docs/v3.1/tiflash/upgrade-tiflash/','/docs/v3.1/reference/tiflash/upgrade/']
 ---
 

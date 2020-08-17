@@ -1,6 +1,7 @@
 ---
 title: TiDB Lightning Glossary
 summary: List of special terms used in TiDB Lightning.
+category: glossary
 aliases: ['/docs/v3.1/tidb-lightning/tidb-lightning-glossary/','/docs/v3.1/reference/tools/tidb-lightning/glossary/']
 ---
 

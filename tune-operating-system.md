@@ -1,6 +1,7 @@
 ---
 title: Operating System Tuning
 summary: Learn how to tune the parameters of the operating system.
+category: tuning
 aliases: ['/docs/v3.1/tune-operating-system/']
 ---
 

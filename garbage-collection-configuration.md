@@ -1,6 +1,7 @@
 ---
 title: GC Configuration
 summary: Learn about GC configuration parameters.
+category: reference
 aliases: ['/docs/v3.1/garbage-collection-configuration/','/docs/v3.1/reference/garbage-collection/configuration/']
 ---
 

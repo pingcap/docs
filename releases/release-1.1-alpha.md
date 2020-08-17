@@ -1,5 +1,6 @@
 ---
 title: TiDB 1.1 Alpha Release Notes
+category: Releases
 aliases: ['/docs/v3.1/releases/release-1.1-alpha/','/docs/v3.1/releases/11alpha/']
 ---
 

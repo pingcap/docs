@@ -1,6 +1,7 @@
 ---
 title: Compatibility with MySQL
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
+category: reference
 aliases: ['/docs/v3.1/mysql-compatibility/','/docs/v3.1/reference/mysql-compatibility/']
 ---
 
@@ -10,7 +11,7 @@ TiDB supports both the MySQL wire protocol and the majority of its syntax. This 
 
 Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader.
 
-However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superceded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
+However, TiDB does not support some of MySQL features or behaves differently from MySQL because these features cannot be easily implemented in a distributed system. For some MySQL syntax, TiDB can parse but does not process it. For example, the `ENGINE` table option in the `CREATE TABLE` statement can be parsed but is ignored.
 
 > **Note:**
 >
@@ -45,7 +46,7 @@ However, some features of MySQL are not supported. This could be because there i
 
 ### Auto-increment ID
 
-In TiDB, auto-increment columns are only guaranteed to be unique and incremental on a single TiDB server, but they are *not* guaranteed to be incremental among multiple TiDB servers or allocated sequentially. Currently, TiDB allocates IDs in batches. If you insert data on multiple TiDB servers at the same time, the allocated IDs are not continuous. You can use the `tidb_allow_remove_auto_inc` system variable to enable or disable deleting the `AUTO_INCREMENT` attribute of a column. The syntax for deleting this column attribute is `alter table modify` or `alter table change`.
+In TiDB, auto-increment columns are only guaranteed to be incremental and unique but are *not* guaranteed to be allocated sequentially. Currently, TiDB allocates IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs will not be sequential.
 
 > **Note:**
 >
@@ -92,8 +93,6 @@ mysql> select _tidb_rowid, id from t;
 +-------------+------+
 3 rows in set (0.01 sec)
 ```
-
-In early versions, the cache size of auto-increment IDs in TiDB is transparent to users. Since v3.0.14, v3.1.2, and v4.0.rc-2, the `AUTO_ID_CACHE` table option has been introduced to allow users to customize the cache size of auto-increment IDs to be allocated. This cache size might be consumed by both auto-increment columns and `_tidb_rowid`. In addition, if the length of continuous IDs needed for an `INSERT` statement exceeds the value set by `AUTO_ID_CACHE`, TiDB will properly increase the cache size so that this insertion can be executed successfully.
 
 ### Performance schema
 
@@ -188,11 +187,11 @@ Architecturally, TiDB does support a similar storage engine abstraction to MySQL
 
 ### SQL modes
 
-TiDB supports most [SQL modes](/sql-mode.md):
+TiDB supports **all of the SQL modes** from MySQL 5.7 with minor exceptions:
 
-- The compatibility modes, such as `ORACLE` and `POSTGRESQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
-- The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
-- The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are accepted for compatibility, but are not applicable to TiDB.
+- The compatibility modes deprecated in MySQL 5.7 and removed in MySQL 8.0 are not supported (such as `ORACLE`, `POSTGRESQL` etc).
+- The mode `ONLY_FULL_GROUP_BY` has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) to MySQL 5.7, which we plan to address in the future.
+- The SQL modes `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` are supported for compatibility, but are not applicable to TiDB.
 
 ### Version-specific comments
 

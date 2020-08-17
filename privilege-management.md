@@ -1,6 +1,7 @@
 ---
 title: Privilege Management
 summary: Learn how to manage the privilege.
+category: reference
 aliases: ['/docs/v3.1/privilege-management/','/docs/v3.1/reference/security/privilege-system/']
 ---
 

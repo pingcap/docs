@@ -1,5 +1,6 @@
 ---
 title: Release Notes
+category: release
 aliases: ['/docs/v3.1/releases/release-notes/','/docs/v3.1/releases/rn/']
 ---
 
@@ -17,7 +18,6 @@ aliases: ['/docs/v3.1/releases/release-notes/','/docs/v3.1/releases/rn/']
 
 ## 3.0
 
-- [3.0.17](/releases/release-3.0.17.md)
 - [3.0.16](/releases/release-3.0.16.md)
 - [3.0.15](/releases/release-3.0.15.md)
 - [3.0.14](/releases/release-3.0.14.md)

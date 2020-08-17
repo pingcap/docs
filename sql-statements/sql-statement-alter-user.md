@@ -1,6 +1,7 @@
 ---
 title: ALTER USER | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER USER for the TiDB database.
+category: reference
 aliases: ['/docs/v3.1/sql-statements/sql-statement-alter-user/','/docs/v3.1/reference/sql/statements/alter-user/']
 ---
 

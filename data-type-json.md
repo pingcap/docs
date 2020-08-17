@@ -1,6 +1,7 @@
 ---
 title: TiDB Data Type
 summary: Learn about the JSON data type in TiDB.
+category: reference
 aliases: ['/docs/v3.1/data-type-json/','/docs/v3.1/reference/sql/data-types/json/']
 ---
 

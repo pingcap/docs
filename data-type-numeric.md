@@ -1,6 +1,7 @@
 ---
 title: Numeric Types
 summary: Learn about numeric data types supported in TiDB.
+category: reference
 aliases: ['/docs/v3.1/data-type-numeric/','/docs/v3.1/reference/sql/data-types/numeric/']
 ---
 

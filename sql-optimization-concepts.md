@@ -1,6 +1,7 @@
 ---
 title: SQL Optimization Process
 summary: Learn about the logical and physical optimization of SQL in TiDB.
+category: reference
 aliases: ['/docs/v3.1/sql-optimization-concepts/','/docs/v3.1/reference/performance/sql-optimizer-overview/']
 ---
 

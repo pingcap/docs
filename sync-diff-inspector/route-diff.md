@@ -1,6 +1,7 @@
 ---
 title: Data Check for Tables with Different Schema or Table Names
 summary: Learn the data check for different database names or table names.
+category: tools
 aliases: ['/docs/v3.1/sync-diff-inspector/route-diff/','/docs/v3.1/reference/tools/sync-diff-inspector/route-diff/']
 ---
 

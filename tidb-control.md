@@ -1,24 +1,17 @@
 ---
 title: TiDB Control User Guide
 summary: Use TiDB Control to obtain TiDB status information for debugging.
+category: reference
 aliases: ['/docs/v3.1/tidb-control/','/docs/v3.1/reference/tools/tidb-control/']
 ---
 
 # TiDB Control User Guide
 
-TiDB Control is a command-line tool of TiDB, usually used to obtain the status information of TiDB for debugging. This document introduces the features of TiDB Control and how to use these features.
+TiDB Control is a command line tool of TiDB, usually used to obtain the status information of TiDB for debugging.
 
-## Get TiDB Control
+## Compile from source code
 
-You can get TiDB Control by installing it using TiUP or by compiling it from source code.
-
-### Install TiDB Control using TiUP
-
-After installing TiUP, you can use `tiup ctl tidb` command to get and execute TiDB Control.
-
-### Compile from source code
-
-- Compilation environment requirement: [Go](https://golang.org/) Version 1.13 or later
+- Compilation environment requirement: [Go](https://golang.org/) Version 1.7 or later
 - Compilation procedures: Go to the root directory of the [TiDB Control project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
 - Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
 
@@ -39,33 +32,15 @@ Usage example: `tidb-ctl schema in mysql -n db`
 - `-n`: the option
 - `db`: the flag of `-n`
 
-Currently, TiDB Control has the following subcommands:
-
-- `tidb-ctl base64decode`: used for `BASE64` decoding
-- `tidb-ctl decoder`: used for `KEY` decoding
-- `tidb-ctl etcd`: used for operating etcd
-- `tidb-ctl log`: used to format the log file to expand the single-line stack information
-- `tidb-ctl mvcc`: used to get the MVCC information
-- `tidb-ctl region`: used to get the Region information
-- `tidb-ctl schema`: used to get the schema information
-- `tidb-ctl table`: used to get the table information
-
 ### Get help
 
 Use `tidb-ctl -h/--help` to get usage information.
 
 TiDB Control consists of multiple layers of commands. You can use `-h/--help` after each command/subcommand to get its respective usage information.
 
-The following example shows how to obtain the schema information:
+### Connect
 
-Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has two subcommands: `in` and `tid`.
-
-- `in` is used to obtain the table schema of all tables in the database through the database name.
-- `tid` is used to obtain the table schema by using the unique `table_id` in the whole database.
-
-### Global options
-
-`tidb-ctl` has the following connection-related global options:
+`tidb-ctl` has 4 connection related options:
 
 - `--host`: TiDB Service address (default 127.0.0.1)
 - `--port`: TiDB Service port (default 10080)
@@ -81,11 +56,33 @@ Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has t
 - The default service port of TiDB: `10080`.
 - The default service port of PD: `2379`.
 
-### The `schema` command
+**Connection options are global options that apply to all the following commands:**
 
-#### The `in` subcommand
+- `tidb-ctl base64decode`: BASE64 decode
+- `tidb-ctl decoder`: for KEY decode
+- `tidb-ctl etcd`: for operating etcd
+- `tidb-ctl log`: format the log file to expand the single-line stack information
+- `tidb-ctl mvcc`: MVCC information
+- `tidb-ctl region`: Region information
+- `tidb-ctl schema`: Schema information
+- `tidb-ctl table`: Table information
 
-`in` is used to obtain the table schema of all tables in the database through the database name.
+For details about how to use the above `tidb-ctl` commands, use `tidb-ctl SUBCOMMAND --help` to get the help information.
+
+### Usage examples
+
+The following example shows how to obtain the schema information:
+
+Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has two subcommands: `in` and `tid`.
+
+- `in` is used to obtain the table schema of all tables in the database through the database name.
+- `tid` is used to obtain the table schema by using the unique `table_id` in the whole database.
+
+#### The `in` command
+
+You can use `tidb-ctl schema in -h/--help` to get the help information of the `in` subcommand.
+
+##### Basic usage
 
 ```bash
 tidb-ctl schema in <database name>
@@ -131,28 +128,7 @@ The result is displayed in the JSON format. (The above output is truncated.)
 
     If you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure. For example, `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`.
 
-#### The `tid` subcommand
-
-`tid` is used to obtain the table schema by using the unique `table_id` in the whole database. You can use the `in` subcommand to get all table IDs of certain schema and use the `tid` subcommand to get the detailed table information.
-
-For example, the table ID of `mysql.stat_meta` is `21`. You can use `tidb-ctl schema tid -i 21` to obtain the detail of `mysql.stat_meta`.
-
-```json
-{
- "id": 21,
- "name": {
-  "O": "stats_meta",
-  "L": "stats_meta"
- },
- "charset": "utf8mb4",
- "collate": "utf8mb4_bin",
-  ...
-}
-``` 
-
-Like the `in` subcommand, if you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to specify the host and port.
-
-#### The `base64decode` command
+#### The `base64decode` subcommand
 
 `base64decode` is used to decode `base64` data.
 
@@ -228,27 +204,25 @@ tidb-ctl base64decode [table_id] [base64_data]
     e not found in data
     ```
 
-### The `decoder` command
+#### The `decoder` subcommand
 
 - The following example shows how to decode the row key, similar to decoding the index key.
 
     ```shell
-    $ ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
-    format: table_row
-    table_id: -9223372036854775780      table_id: -9223372036854775780
-    row_id: -9223372036854775558        row_id: -9223372036854775558
+    $ ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
+    table_id: -9223372036854775780
+    row_id: -9223372036854775558
     ```
 
 - The following example shows how to decode `value`.
 
     ```shell
-    $ ./tidb-ctl decoder AhZoZWxsbyB3b3JsZAiAEA==
-    format: index_value
-    type: bigint, value: 1024       index_value[0]: {type: bytes, value: hello world}
-    index_value[1]: {type: bigint, value: 1024}
+    $ ./tidb-ctl decoder -f value -k AhZoZWxsbyB3b3JsZAiAEA==
+    type: bytes, value: hello world
+    type: bigint, value: 1024
     ```
 
-### The `etcd` command
+#### The `etcd` subcommand
 
 - `tidb-ctl etcd ddlinfo` is used to obtain DDL information.
 - `tidb-ctl etcd putkey KEY VALUE` is used to add KEY VALUE to etcd (All the KEYs are added to the `/tidb/ddl/all_schema_versions/` directory).
@@ -266,59 +240,6 @@ tidb-ctl base64decode [table_id] [base64_data]
     tidb-ctl etcd delkey "/tidb/ddl/all_schema_versions/bar"
     ```
 
-### The `log` command
+#### The `log` subcommand
 
 The stack information for the TiDB error log is in one line format. You could use `tidb-ctl log` to change its format to multiple lines.
-
-### The `keyrange` command
-
-The `keyrange` subcommand is used to query the global or table-related key range information, which is output in the hexadecimal form.
-
-* Execute the `tidb-ctl keyrange` command to check the global key range information:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tidb-ctl keyrange
-    ```
-
-    ```
-    global ranges:
-      meta: (6d, 6e)
-      table: (74, 75)
-    ```
-
-* Add the `--encode` option to display encoded keys (in the same format as in TiKV and PD):
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tidb-ctl keyrange --encode
-    ```
-
-    ```
-    global ranges:
-      meta: (6d00000000000000f8, 6e00000000000000f8)
-      table: (7400000000000000f8, 7500000000000000f8)
-    ```
-
-* Execute the `tidb-ctl keyrange --database={db} --table={tbl}` command to check the global and table-related key range information:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tidb-ctl keyrange --database test --table ttt
-    ```
-
-    ```
-    global ranges:
-      meta: (6d, 6e)
-      table: (74, 75)
-    table ttt ranges: (NOTE: key range might be changed after DDL)
-      table: (74800000000000002f, 748000000000000030)
-      table indexes: (74800000000000002f5f69, 74800000000000002f5f72)
-        index c2: (74800000000000002f5f698000000000000001, 74800000000000002f5f698000000000000002)
-        index c3: (74800000000000002f5f698000000000000002, 74800000000000002f5f698000000000000003)
-        index c4: (74800000000000002f5f698000000000000003, 74800000000000002f5f698000000000000004)
-      table rows: (74800000000000002f5f72, 748000000000000030)
-    ```

@@ -1,6 +1,7 @@
 ---
 title: MODIFY COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of MODIFY COLUMN for the TiDB database.
+category: reference
 aliases: ['/docs/v3.1/sql-statements/sql-statement-modify-column/','/docs/v3.1/reference/sql/statements/modify-column/']
 ---
 

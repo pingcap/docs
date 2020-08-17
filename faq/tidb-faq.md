@@ -1,6 +1,7 @@
 ---
 title: TiDB FAQ
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
+category: faq
 aliases: ['/docs/v3.1/faq/tidb-faq/','/docs/v3.1/faq/tidb/']
 ---
 
@@ -40,16 +41,6 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 
 Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support trigger, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
-If you use the MySQL 8.0 client and it fails to connect to TiDB, try to add the `default-auth` and `default-character-set` options:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
-```
-
-This problem occurs because MySQL 8.0 changes the [authentication plugin](/security-compatibility-with-mysql.md) default in MySQL 5.7. To solve this problem, you need to add the options above to specify using the old encryption method.
-
 #### How is TiDB highly available?
 
 TiDB is self-healing. All of the three components, TiDB, TiKV and PD, can tolerate failures of some of their instances. With its strong consistency guarantee, whether it’s data machine failures or even downtime of an entire data center, your data can be recovered automatically. For more information, see [TiDB architecture](/architecture.md).
@@ -84,13 +75,11 @@ Currently, [TiDB documentation](https://pingcap.com/docs/) is the most important
 
 #### What are the MySQL variables that TiDB is compatible with?
 
-See [System Variables](/system-variables.md).
+See [The System Variables](/system-variables.md).
 
-#### Does TiDB support `SELECT FOR UPDATE`?
+#### Does TiDB support `select for update`?
 
-Yes. When using pessimistic locking (the default since TiDB v3.0) the `SELECT FOR UPDATE` execution behaves similar to MySQL.
-
-When using optimistic locking, `SELECT FOR UPDATE` does not lock data when the transaction is started, but checks conflicts when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
+Yes. But it differs from MySQL in syntax. As a distributed database, TiDB uses the optimistic lock. `select for update` does not lock data when the transaction is started, but checks conflicts when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
 
 #### Can the codec of TiDB guarantee that the UTF-8 string is memcomparable? Is there any coding suggestion if our key needs to support UTF-8?
 
@@ -129,9 +118,9 @@ It is recommended to use the official standard statements when modifying the use
 
 The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [MySQL Compatibility](/mysql-compatibility.md#auto-increment-id).
 
-#### How do I modify the `sql_mode` in TiDB?
+#### How to modify the `sql_mode` in TiDB except using the `set` command?
 
-TiDB supports modifying the [`sql_mode`](/sql-mode.md) as a [system variable](/system-variables.md), as in MySQL. Currently, TiDB does not permit modifying the sql mode in a configuration file, but system variable changes made with [`SET GLOBAL`](/sql-statements/sql-statement-set-variable.md) propagate to all TiDB servers in the cluster and persist across restarts.
+The configuration method of TiDB `sql_mode` is different from that of MySQL `sql_mode`. TiDB does not support using the configuration file to configure `sql\_mode` of the database; it only supports using the `set` command to configure `sql\_mode` of the database. You can use `set @@global.sql_mode = 'STRICT_TRANS_TABLES';` to configure it.
 
 #### Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
 
@@ -592,9 +581,9 @@ Trigger strategy: `auto analyze` is automatically triggered when the number of p
 
 When the modified number or the current total row number is larger than `tidb_auto_analyze_ratio`, the `analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is 0.5, indicating that this feature is enabled by default. To ensure safety, its minimum value is 0.3 when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is 0.8, otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to 0.5.
 
-#### Can I use hints to override the optimizer behavior?
+#### How to use a specific index with hint in a SQL statement?
 
-TiDB supports multiple [hints](/optimizer-hints.md) to override the default query optimizer behavior. The basic usage is similar to MySQL, with several TiDB specific extensions:
+Its usage is similar to MySQL:
 
 {{< copyable "sql" >}}
 
@@ -649,9 +638,9 @@ This is because the address in the startup parameter has been registered in the 
 
 To solve this problem, use the [`store delete`](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string) function to delete the previous store and then restart TiKV.
 
-#### TiKV leader replicas and follower replicas use the same compression algorithm. Why the amount of disk space occupied is different?
+#### TiKV master and slave use the same compression algorithm, why the results are different?
 
-TiKV stores data in the LSM tree, in which each layer has a different compression algorithm. If two replicas of the same data are located in different layers in two TiKV nodes, the two replicas might occupy different space.
+Currently, some files of TiKV master have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data size fluctuates occasionally. The underlying storage engine adjusts data as needed.
 
 #### What are the features of TiKV block cache?
 
@@ -755,7 +744,7 @@ At the beginning, many users tend to do a benchmark test or a comparison test be
 #### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
 - Within 10 nodes, the relationship between TiDB write capacity (Insert TPS) and the number of nodes is roughly 40% linear increase. Because MySQL uses single-node write, its write capacity cannot be scaled.
-- In MySQL, the read capacity can be increased by adding replicas, but the write capacity cannot be increased except using sharding, which has many problems.
+- In MySQL, the read capacity can be increased by adding slave, but the write capacity cannot be increased except using sharding, which has many problems.
 - In TiDB, both the read and write capacity can be easily increased by adding more nodes.
 
 #### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL
@@ -768,7 +757,11 @@ TiDB is not suitable for tables of small size (such as below ten million level),
 
 #### How to back up data in TiDB?
 
-Currently, for the backup of a large volume of data, the preferred method is using [BR](/br/backup-and-restore-tool.md). Otherwise, the recommended tool is [Dumpling](/export-or-backup-using-dumpling.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is worse than [BR](/br/backup-and-restore-tool.md) and it needs much more time to back up and restore large volumes of data.
+Currently, the preferred method for backup is using the [PingCAP fork of Mydumper](/mydumper-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is poorer than [`mydumper`](/mydumper-overview.md)/[`loader`](/loader-overview.md) and it needs much more time to back up and restore large volumes of data.
+
+Keep the size of the data file exported from `mydumper` as small as possible. It is recommended to keep the size within 64M. You can set value of the `-F` parameter to 64.
+
+You can edit the `t` parameter of `loader` based on the number of TiKV instances and load status. For example, in scenarios of three TiKV instances, you can set its value to `3 * (1 ～ n)`. When the TiKV load is very high and `backoffer.maxSleep 15000ms is exceeded` displays a lot in `loader` and TiDB logs, you can adjust the parameter to a smaller value. When the TiKV load is not very high, you can adjust the parameter to a larger value accordingly.
 
 ## Migrate the data and traffic
 
@@ -1112,16 +1105,6 @@ It means full table scan but the table might be a small system table.
 The `QPS` statistics is about all the SQL statements, including `use database`, `load data`, `begin`, `commit`, `set`, `show`, `insert` and `select`.
 
 The `Statement OPS` statistics is only about applications related SQL statements, including `select`, `update` and `insert`, therefore the `Statement OPS` statistics matches the applications better.
-
-## Deployment on the cloud
-
-### Public cloud
-
-#### What cloud vendors are currently supported by TiDB?
-
-TiDB supports deployment on [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
-
-In addition, TiDB is currently available on JD Cloud and UCloud, and has the first-level database entries on them.
 
 ## Troubleshoot
 

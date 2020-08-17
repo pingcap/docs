@@ -1,6 +1,7 @@
 ---
 title: TiDB Lightning Deployment
 summary: Deploy TiDB Lightning to quickly import large amounts of new data.
+category: reference
 aliases: ['/docs/v3.1/tidb-lightning/deploy-tidb-lightning/','/docs/v3.1/reference/tools/tidb-lightning/deployment/']
 ---
 

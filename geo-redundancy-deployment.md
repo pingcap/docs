@@ -1,5 +1,6 @@
 ---
 title: Cross-DC Deployment Solutions
+category: how-to
 aliases: ['/docs/v3.1/geo-redundancy-deployment/','/docs/v3.1/how-to/deploy/geographic-redundancy/overview/']
 ---
 
@@ -49,23 +50,23 @@ However, the disadvantage is that if the 2 DCs within the same city goes down, w
 
 ## 2-DC + Binlog replication deployment solution
 
-The 2-DC + Binlog replication is similar to the MySQL Source-Replica solution. 2 complete sets of TiDB clusters (each complete set of the TiDB cluster includes TiDB, PD and TiKV) are deployed in 2 DCs, one acts as the primary and one as the secondary. Under normal circumstances, the primary DC handles all the requests and the data written to the primary DC is asynchronously written to the secondary DC via Binlog.
+The 2-DC + Binlog replication is similar to the MySQL Master-Slave solution. 2 complete sets of TiDB clusters (each complete set of the TiDB cluster includes TiDB, PD and TiKV) are deployed in 2 DCs, one acts as the Master and one as the Slave. Under normal circumstances, the Master DC handles all the requests and the data written to the Master DC is asynchronously written to the Slave DC via Binlog.
 
 ![Data Replication in 2-DC in 2 Cities Deployment](/media/deploy-binlog.png)
 
-If the primary DC goes down, the requests can be switched to the secondary cluster. Similar to MySQL, some data might be lost. But different from MySQL, this solution can ensure the high availability within the same DC: if some nodes within the DC are down, the online workloads won’t be impacted and no manual efforts are needed because the cluster will automatically re-elect leaders to provide services.
+If the Master DC goes down, the requests can be switched to the slave cluster. Similar to MySQL, some data might be lost. But different from MySQL, this solution can ensure the high availability within the same DC: if some nodes within the DC are down, the online workloads won’t be impacted and no manual efforts are needed because the cluster will automatically re-elect leaders to provide services.
 
 ![2-DC as a Mutual Backup Deployment](/media/deploy-backup.png)
 
 Some of our production users also adopt the 2-DC multi-active solution, which means:
 
 1. The application requests are separated and dispatched into 2 DCs.
-2. Each DC has 1 cluster and each cluster has two databases: A primary database to serve part of the application requests and a secondary database to act as the backup of the other DC’s primary database. Data written into the primary database is replicated via Binlog to the secondary database in the other DC, forming a loop of backup.
+2. Each DC has 1 cluster and each cluster has two databases: A Master database to serve part of the application requests and a Slave database to act as the backup of the other DC’s Master database. Data written into the Master database is replicated via Binlog to the Slave database in the other DC, forming a loop of backup.
 
-Please be noted that for the 2-DC + Binlog replication solution, data is asynchronously replicated via Binlog. If the network latency between 2 DCs is too high, the data in the secondary cluster will fall much behind of the primary cluster. If the primary cluster goes down, some data will be lost and it cannot be guaranteed the lost data is within 5 minutes.
+Please be noted that for the 2-DC + Binlog replication solution, data is asynchronously replicated via Binlog. If the network latency between 2 DCs is too high, the data in the Slave cluster will fall much behind of the Master cluster. If the Master cluster goes down, some data will be lost and it cannot be guaranteed the lost data is within 5 minutes.
 
 ## Overall analysis for HA and DR
 
 For the 3-DC deployment solution and 3-DC in 2 cities solution, we can guarantee that the cluster will automatically recover, no human interference is needed and that the data is strongly consistent even if any one of the 3 DCs goes down. All the scheduling policies are to tune the performance, but availability is the top 1 priority instead of performance in case of an outage.
 
-For 2-DC + Binlog replication solution,  we can guarantee that the cluster will automatically recover, no human interference is needed and that the data is strongly consistent even if any some of the nodes within the primary cluster go down. When the entire primary cluster goes down, manual efforts will be needed to switch to the secondary and some data will be lost. The amount of the lost data depends on the network latency and is decided by the network condition.
+For 2-DC + Binlog replication solution,  we can guarantee that the cluster will automatically recover, no human interference is needed and that the data is strongly consistent even if any some of the nodes within the Master cluster go down. When the entire Master cluster goes down, manual efforts will be needed to switch to the Slave and some data will be lost. The amount of the lost data depends on the network latency and is decided by the network condition.

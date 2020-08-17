@@ -1,6 +1,7 @@
 ---
 title: Glossary
 summary: Glossaries about TiDB.
+category: glossary
 aliases: ['/docs/v3.1/glossary/']
 ---
 

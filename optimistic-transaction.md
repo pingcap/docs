@@ -1,6 +1,7 @@
 ---
 title: TiDB Optimistic Transaction Model
 summary: Learn the optimistic transaction model in TiDB.
+category: reference
 aliases: ['/docs/v3.1/optimistic-transaction/','/docs/v3.1/reference/transactions/transaction-optimistic/','/docs/v3.1/reference/transactions/transaction-model/']
 ---
 
@@ -8,7 +9,7 @@ aliases: ['/docs/v3.1/optimistic-transaction/','/docs/v3.1/reference/transaction
 
 This document introduces the principles of TiDB's optimistic transaction model. This document assumes that you have a basic understanding of [TiDB architecture](/architecture.md), [Percolator](https://ai.google/research/pubs/pub36726), and the [ACID](/glossary.md#acid) properties of transactions.
 
-In TiDB's optimistic transaction model, write-write conflicts are detected only at the two-phase transactional commit.
+In TiDB's optimistic transaction model, the two-phase commit begins right after the client executes the `COMMIT` statement. Therefore, the write-write conflict can be observed before the transactions are actually committed.
 
 > **Note:**
 >

@@ -1,6 +1,7 @@
 ---
 title: Mydumper Instructions
 summary: Use Mydumper to export data from TiDB.
+category: reference
 aliases: ['/docs/v3.1/mydumper-overview/','/docs/v3.1/reference/tools/mydumper/']
 ---
 
@@ -78,10 +79,6 @@ The following TiDB versions supports the `_tidb_rowid` index:
 - v3.0 and v3.1 (by default)
 
 ## FAQ
-
-### How to resolve the error that occurs when the `--tidb-snapshot` option is used to export data?
-
-In this situation, you need to add a `--skip-tz-utc` option. Otherwise, Mydumper will pre-configure the UTC time zone and convert the time zone when `tidb-snapshot` is configured, which causes this error.
 
 ### How to determine if the Mydumper I am using is the PingCAP optimized version?
 

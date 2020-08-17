@@ -1,6 +1,7 @@
 ---
 title: Window Functions
 summary: This document introduces window functions supported in TiDB.
+category: reference
 aliases: ['/docs/v3.1/functions-and-operators/window-functions/','/docs/v3.1/reference/sql/functions-and-operators/window-functions/']
 ---
 

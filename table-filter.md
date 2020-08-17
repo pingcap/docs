@@ -1,6 +1,7 @@
 ---
 title: Table Filter
 summary: Usage of table filter feature in TiDB tools.
+category: reference
 aliases: ['/docs/v3.1/tidb-lightning/tidb-lightning-table-filter/','/docs/v3.1/reference/tools/tidb-lightning/table-filter/','/tidb/v3.1/tidb-lightning-table-filter/']
 ---
 
