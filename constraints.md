@@ -290,7 +290,7 @@ FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders')
 3 rows in set (0.00 sec)
 ```
 
-TiDB also supports the syntax to `DROP FOREIGN KEY` and `ADD FOREIGN KEY` via the `ALTER TABLE` command.
+TiDB also supports the `DROP FOREIGN KEY` and `ADD FOREIGN KEY` syntax via the `ALTER TABLE` command.
 
 {{< copyable "sql" >}}
 
