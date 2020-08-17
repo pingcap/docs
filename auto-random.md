@@ -8,9 +8,7 @@ aliases: ['/docs/dev/auto-random/','/docs/dev/reference/sql/attributes/auto-rand
 
 > **Note:**
 >
-> `AUTO_RANDOM` was marked as stable in v4.0.3. For TiDB v4.0.3 or above, you can use it in the production environment.
-
-Before using the `AUTO_RANDOM` attribute, set `allow-auto-random = true` in the `experimental` section of the TiDB configuration file. Refer to [`allow-auto-random`](/tidb-configuration-file.md#allow-auto-random-new-in-v310) for details.
+> `AUTO_RANDOM` was marked as stable in v4.0.3.
 
 ## User scenario
 
@@ -32,7 +30,7 @@ On this `t` table, you execute a large number of `INSERT` statements that do not
 insert into t(b) values ('a'), ('b'), ('c')
 ```
 
-In the above statement, values of the primary key (column `a`) are not specified, so TiDB uses the continuous auto-increment row values as the row IDs, which might cause write hotspot in a single TiKV node and affect the performance. To avoid such performance decrease, you can specify the `AUTO_RANDOM` attribute rather than the `AUTO_INCREMENT` attribute for the column `a` when you create the table. See the follow examples:
+In the above statement, values of the primary key (column `a`) are not specified, so TiDB uses the continuous auto-increment row values as the row IDs, which might cause write hotspot in a single TiKV node and affect the performance. To avoid such write hotspot, you can specify the `AUTO_RANDOM` attribute rather than the `AUTO_INCREMENT` attribute for the column `a` when you create the table. See the follow examples:
 
 {{< copyable "sql" >}}
 
@@ -52,6 +50,10 @@ Then execute the `INSERT` statement such as `INSERT INTO t(b) values...`. Now th
 
 + Implicitly assigning values: If the `INSERT` statement does not specify the values of the integer primary key column (column `a`) or specify the value as `NULL`, TiDB automatically assigns values to this column. These values are not necessarily auto-increment or continuous but are unique, which avoids the hotspot problem caused by continuous row IDs.
 + Explicitly inserting values: If the `INSERT` statement explicitly specifies the values of the integer primary key column, TiDB saves these values, which works similarly to the `AUTO_INCREMENT` attribute. Note that if you do not set `NO_AUTO_VALUE_ON_ZERO` in the `@@sql_mode` system variable, TiDB will automatically assign values to this column even if you explicitly specify the value of the integer primary key column as `0`.
+
+> **Note:**
+>
+> Since v4.0.3, if you want to insert values explicitly, set the value of the `@@allow_auto_random_explicit_insert` system variable to `1` (`0` by default). This explicit insertion is not supported by default and the reason is documented in [restrictions](#restrictions) section.
 
 TiDB automatically assigns values in the following way:
 
@@ -85,7 +87,7 @@ show warnings
 
 > **Note:**
 >
-> It is recommended that you use `bigint` as the `AUTO_RANDOM` column type to get the maximum number of implicit assignments.
+> Since v4.0.3, the type of the `AUTO_RANDOM` column can only be `BIGINT`. This is to ensure the maximum number of implicit allocations.
 
 In addition, to view the shard bit number of the table with the `AUTO_RANDOM` attribute, you can see the value of the `PK_AUTO_RANDOM_BITS=x` mode in the `TIDB_ROW_ID_SHARDING_INFO` column in the `information_schema.tables` system table. `x` is the number of shard bits.
 
@@ -140,14 +142,9 @@ This attribute supports forward compatibility, namely, downgrade compatibility. 
 
 Pay attention to the following restrictions when you use `AUTO_RANDOM`:
 
-- Specify this attribute for the primary key column **ONLY** of integer type. Otherwise, an error might occur. Refer to [Notes for `alter-primary-key`](#notes-for-alter-primary-key) for exception.
+- Specify this attribute for the primary key column **ONLY** of integer type. Otherwise, an error might occur. In addition, when the value of `alter-primary-key` is `true`, `AUTO_RANDOM` is not supported even on the integer primary key.
 - You cannot use `ALTER TABLE` to modify the `AUTO_RANDOM` attribute, including adding or removing this attribute.
 - You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
 - You cannot specify `AUTO_RANDOM` and `AUTO_INCREMENT` for the same column at the same time.
 - You cannot specify `AUTO_RANDOM` and `DEFAULT` (the default value of a column) for the same column at the same time.
 - It is **not** recommended that you explicitly specify a value for the column with the `AUTO_RANDOM` attribute when you insert data. Otherwise, the numeral values that can be automatically assigned for this table might be used up in advance.
-
-### Notes for `alter-primary-key`
-
-- When `alter-primary-key = true`, the `AUTO_RANDOM` attribute is not supported even if the primary key is the integer type.
-- In the configuration file, `alter-primary-key`and `allow-auto-random` cannot be set to `true` at the same time.
