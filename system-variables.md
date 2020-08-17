@@ -8,7 +8,100 @@ aliases: ['/docs/v3.0/system-variables/','/docs/v3.0/reference/configuration/tid
 
 The system variables in MySQL are the system parameters that modify the operation of the database runtime. These variables have two types of scope, Global Scope and Session Scope. TiDB supports all the system variables in MySQL 5.7. Most of the variables are only supported for compatibility and do not affect the runtime behaviors.
 
+<<<<<<< HEAD
 ## Set the system variables
+=======
+```sql
+# These two identical statements change a session variable
+SET tidb_distsql_scan_concurrency = 10;
+SET SESSION tidb_distsql_scan_concurrency = 10;
+
+# These two identical statements change a global variable
+SET @@global.tidb_distsql_scan_concurrency = 10;
+SET  GLOBAL tidb_distsql_scan_concurrency = 10;
+```
+
+> **Note:**
+>
+> TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Changes are also propagated to other TiDB servers every 2 seconds [TiDB #14531](https://github.com/pingcap/tidb/issues/14531).
+> Additionally, TiDB presents several MySQL variables from MySQL 5.7 as both readable and settable. This is required for compatibility, since it is common for both applications and connectors to read MySQL variables. For example: JDBC connectors both read and set query cache settings, despite not relying on the behavior.
+
+## Variable Reference
+
+### autocommit
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- Whether automatically commit a transaction.
+
+### ddl_slow_threshold
+
+- Scope: SESSION
+- Default value: 300
+- DDL operations whose execution time exceeds the threshold value are output to the log. The unit is millisecond.
+
+### foreign_key_checks
+
+- Scope: NONE
+- Default value: OFF
+- For compatibility, TiDB returns foreign key checks as OFF.
+
+### hostname
+
+- Scope: NONE
+- Default value: (system hostname)
+- The hostname of the TiDB server as a read-only variable.
+
+### innodb_lock_wait_timeout
+
+- Scope: SESSION | GLOBAL
+- Default value: 50
+- The lock wait timeout for pessimistic transactions (default) in seconds.
+
+### last_plan_from_cache <span class="version-mark">New in v4.0</span>
+
+- Scope: SESSION
+- Default value: 0
+- This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
+
+### max_execution_time
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- The maximum execution time of a statement in milliseconds. The default value is unlimited (zero).
+
+> **Note:**
+>
+> Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+
+### `interactive_timeout`
+
+- Scope: SESSION | GLOBAL
+- Default value: 28800
+- This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
+
+### sql_mode
+
+- Scope: SESSION | GLOBAL
+- Default value: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`
+- This variable controls a number of MySQL compatibility behaviors. See [SQL Mode](/sql-mode.md) for more information.
+
+### sql_select_limit <span class="version-mark">New in v4.0.2 version</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `2^64 - 1` (18446744073709551615)
+- The maximum number of rows returned by the `SELECT` statements.
+
+### tidb_allow_batch_cop <span class="version-mark">New in v4.0 version</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- This variable is used to control how TiDB sends a coprocessor request to TiFlash. It has the following values:
+
+    * `0`: Never send requests in batches
+    * `1`: Aggregation and join requests are sent in batches
+    * `2`: All coprocessor requests are sent in batches
+>>>>>>> ffaf67f... system-variables: add variable description (#3672)
 
 You can use the [`SET`](/sql-statements/sql-statement-set-variable.md) statement to change the value of the system variables. Before you change, consider the scope of the variable. For more information, see [MySQL Dynamic System Variables](https://dev.mysql.com/doc/refman/5.7/en/dynamic-system-variables.html).
 
