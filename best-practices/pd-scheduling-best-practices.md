@@ -1,7 +1,6 @@
 ---
 title: PD Scheduling Best Practices
 summary: Learn best practice and strategy for PD scheduling.
-category: reference
 aliases: ['/docs/v3.1/best-practices/pd-scheduling-best-practices/','/docs/v3.1/reference/best-practices/pd-scheduling/']
 ---
 

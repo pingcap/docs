@@ -1,7 +1,6 @@
 ---
 title: Constraints
 summary: Learn how SQL Constraints apply to TiDB.
-category: reference
 aliases: ['/docs/v3.1/constraints/','/docs/v3.1/reference/sql/constraints/']
 ---
 
@@ -56,12 +55,12 @@ ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 * TiDB supports foreign keys so that no errors are reported for this syntax when migrating data from other databases. Currently, foreign keys are not enforced as part of DML operations. For example, even though there is no such record as `id=123` in the `users` table, the following transaction commits successfully in TiDB:
 
     ```
-        START TRANSACTION;
-        INSERT INTO orders (user_id, doc) VALUES (123, NULL);
-        COMMIT;
+    START TRANSACTION;
+    INSERT INTO orders (user_id, doc) VALUES (123, NULL);
+    COMMIT;
     ```
 
-* In TiDB, foreign key information is not displayed in the execution result of the `SHOW CREATE TABLE` statement.
+* In TiDB, the foreign key information is not displayed in the execution result of the `SHOW CREATE TABLE` statement.
 
 ## Not Null
 
@@ -89,6 +88,26 @@ Query OK, 1 row affected (0.03 sec)
 * The second `INSERT` statement fails because the `age` column was defined as `NOT NULL`.
 
 * The third `INSERT` statement succeeds because `last_login` did not explicitly specify the column as `NOT NULL`. The default behavior is to permit `NULL` values.
+
+## CHECK
+
+TiDB parses but ignores `CHECK` constraints. This is MySQL 5.7 compatible behavior.
+
+For example:
+
+{{< copyable "sql" >}}
+
+```sql
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+ id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ username VARCHAR(60) NOT NULL,
+ UNIQUE KEY (username),
+ CONSTRAINT min_username_length CHECK (CHARACTER_LENGTH(username) >=4)
+);
+INSERT INTO users (username) VALUES ('a');
+SELECT * FROM users;
+```
 
 ## Primary Key
 

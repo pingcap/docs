@@ -1,7 +1,6 @@
 ---
 title: Backup & Restore FAQ
 summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
-category: FAQ
 aliases: ['/docs/v3.1/br/backup-and-restore-faq/']
 ---
 
@@ -23,7 +22,7 @@ To reduce the impact on the cluster, you can use the `--ratelimit` parameter to 
 
 ## Does BR back up system tables? During data restoration, do they raise conflict?
 
-The system libraries (`information_schema`, `performance_schema`, `mysql`) are filtered out during full backup. For more details, refer to the [Backup Principle](/br/backup-and-restore-tool.md#backup-principle).
+The system libraries (`information_schema`, `performance_schema`, `mysql`) are filtered out during full backup. For more details, refer to the [Backup Principle](/br/backup-and-restore-tool.md#implementation-principles).
 
 Because these system libraries do not exist in the backup files, no conflict occurs among system tables during data restoration.
 

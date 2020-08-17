@@ -1,7 +1,6 @@
 ---
 title: TiDB Binlog FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
-category: faq
 aliases: ['/docs/v3.1/tidb-binlog/tidb-binlog-faq/','/docs/v3.1/reference/tidb-binlog/faq/']
 ---
 
@@ -14,6 +13,10 @@ This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 - There is no impact on the query.
 
 - There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In latency, a p-binlog is written concurrently in the TiKV prewrite stage before the transactions are committed. Generally, writing binlog is faster than TiKV prewrite, so it does not increase latency. You can check the response time of writing binlog in Pump's monitoring panel.
+
+## How high is the replication latency of TiDB Binlog?
+
+The latency of TiDB Binlog replication is measured in seconds, which is generally about 3 seconds during off-peak hours.
 
 ## What privileges does Drainer need to replicate data to the downstream MySQL or TiDB cluster?
 
@@ -123,9 +126,9 @@ If the data in the downstream is not affected, you can redeploy Drainer on the n
 
 2. To restore the latest data of the backup file, use Reparo to set `start-tso` = {snapshot timestamp of the full backup + 1} and `end-ts` = 0 (or you can specify a point in time).
 
-## How to redeploy Drainer when enabling `ignore-error` in Master-Slave replication triggers a critical error?
+## How to redeploy Drainer when enabling `ignore-error` in Primary-Secondary replication triggers a critical error?
 
-If a critical error is trigged when TiDB fails to write binlog after enabling `ignore-error`, TiDB stops writing binlog and binlog data loss occurs. To resume replication, perform the following steps:
+If a critical error is triggered when TiDB fails to write binlog after enabling `ignore-error`, TiDB stops writing binlog and binlog data loss occurs. To resume replication, perform the following steps:
 
 1. Stop the Drainer instance.
 

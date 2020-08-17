@@ -1,7 +1,6 @@
 ---
 title: FLUSH TABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH TABLES for the TiDB database.
-category: reference
 aliases: ['/docs/v3.1/sql-statements/sql-statement-flush-tables/','/docs/v3.1/reference/sql/statements/flush-tables/']
 ---
 

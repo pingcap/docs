@@ -1,7 +1,6 @@
 ---
 title: TiDB Ecosystem Tools Use Cases
 summary: Learn the common use cases of TiDB ecosystem tools and how to choose the tools.
-category: reference
 aliases: ['/docs/v3.1/ecosystem-tool-user-case/']
 ---
 
@@ -37,4 +36,4 @@ If you also need to migrate incremental data, use [TiDB Binlog](/tidb-binlog/tid
 
 ## TiDB incremental data subscription
 
-If you need to subscribe to TiDB's incremental changes, use [TiDB Binlog](/tidb-binlog/binlog-slave-client.md).
+If you need to subscribe to TiDB's incremental changes, use [TiDB Binlog](/tidb-binlog/binlog-consumer-client.md).
