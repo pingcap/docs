@@ -1,7 +1,6 @@
 ---
 title: Tune TiFlash Performance
 summary: Learn how to tune the performance of TiFlash.
-category: reference
 aliases: ['/docs/v3.1/tiflash/tune-tiflash-performance/','/docs/v3.1/reference/tiflash/tune-performance/']
 ---
 

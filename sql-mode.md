@@ -1,7 +1,6 @@
 ﻿---
 title: SQL Mode
 summary: Learn SQL mode.
-category: reference
 aliases: ['/docs/v3.1/sql-mode/','/docs/v3.1/reference/sql/sql-mode/']
 ---
 
@@ -32,7 +31,7 @@ Ensure that you have `SUPER` privilege when setting SQL mode at `GLOBAL` level, 
 | `IGNORE_SPACE` | If this mode is enabled, the system ignores space. For example: "user" and "user " are the same. (full support)|
 | `ONLY_FULL_GROUP_BY` | If a non-aggregated column that is referred to in `SELECT`, `HAVING`, or `ORDER BY` is absent in `GROUP BY`, this SQL statement is invalid, because it is abnormal for a column to be absent in `GROUP BY` but displayed by query. (full support) |
 | `NO_UNSIGNED_SUBTRACTION` | Does not mark the result as `UNSIGNED` if an operand has no symbol in subtraction. (full support)|
-| `NO_DIR_IN_CREATE` | Ignores all `INDEX DIRECTORY` and `DATA DIRECTORY` directives when a table is created. This option is only useful for slave replication servers (syntax support only) |
+| `NO_DIR_IN_CREATE` | Ignores all `INDEX DIRECTORY` and `DATA DIRECTORY` directives when a table is created. This option is only useful for secondary replication servers (syntax support only) |
 | `NO_KEY_OPTIONS` | When you use the `SHOW CREATE TABLE` statement, MySQL-specific syntaxes such as `ENGINE` are not exported. Consider this option when migrating across DB types using mysqldump. (syntax support only)|
 | `NO_FIELD_OPTIONS` | When you use the `SHOW CREATE TABLE` statement, MySQL-specific syntaxes such as `ENGINE` are not exported. Consider this option when migrating across DB types using mysqldump. (syntax support only) |
 | `NO_TABLE_OPTIONS` | When you use the `SHOW CREATE TABLE` statement, MySQL-specific syntaxes such as `ENGINE` are not exported. Consider this option when migrating across DB types using mysqldump. (syntax support only)|
@@ -49,12 +48,12 @@ Ensure that you have `SUPER` privilege when setting SQL mode at `GLOBAL` level, 
 | `NO_ENGINE_SUBSTITUTION` | Prevents the automatic replacement of storage engines if the required storage engine is disabled or not compiled. (syntax support only)|
 | `PAD_CHAR_TO_FULL_LENGTH` | If this mode is enabled, the system does not trim the trailing spaces for `CHAR` types. (full support) |
 | `REAL_AS_FLOAT` | Treats `REAL` as the synonym of `FLOAT`, not the synonym of `DOUBLE` (full support)|
-| `POSTGRESQL` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (full support)|
-| `MSSQL` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (full support)|
-| `DB2` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (full support)|
+| `POSTGRESQL` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (syntax support only)|
+| `MSSQL` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (syntax support only)|
+| `DB2` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS` (syntax support only)|
 | `MAXDB` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS`, `NO_AUTO_CREATE_USER` (full support)|
-| `MySQL323` | Equivalent to `NO_FIELD_OPTIONS`, `HIGH_NOT_PRECEDENCE` (full support)|
-| `MYSQL40` | Equivalent to `NO_FIELD_OPTIONS`, `HIGH_NOT_PRECEDENCE` (full support)|
-| `ANSI` | Equivalent to `REAL_AS_FLOAT`, `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE` (full support)|
-| `TRADITIONAL` | Equivalent to `STRICT_TRANS_TABLES`, `STRICT_ALL_TABLES`, `NO_ZERO_IN_DATE`, `NO_ZERO_DATE`, `ERROR_FOR_DIVISION_BY_ZERO`, `NO_AUTO_CREATE_USER` (full support) |
-| `ORACLE` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS`, `NO_AUTO_CREATE_USER` (full support)|
+| `MySQL323` | Equivalent to `NO_FIELD_OPTIONS`, `HIGH_NOT_PRECEDENCE` (syntax support only)|
+| `MYSQL40` | Equivalent to `NO_FIELD_OPTIONS`, `HIGH_NOT_PRECEDENCE` (syntax support only)|
+| `ANSI` | Equivalent to `REAL_AS_FLOAT`, `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE` (syntax support only)|
+| `TRADITIONAL` | Equivalent to `STRICT_TRANS_TABLES`, `STRICT_ALL_TABLES`, `NO_ZERO_IN_DATE`, `NO_ZERO_DATE`, `ERROR_FOR_DIVISION_BY_ZERO`, `NO_AUTO_CREATE_USER` (syntax support only) |
+| `ORACLE` | Equivalent to `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, `NO_KEY_OPTIONS`, `NO_TABLE_OPTIONS`, `NO_FIELD_OPTIONS`, `NO_AUTO_CREATE_USER` (syntax support only)|
