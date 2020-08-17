@@ -56,24 +56,34 @@ ADMIN SHOW DDL JOBS;
 
 ```
 mysql> ADMIN SHOW DDL JOBS;
-+--------+---------+-------------------------+--------------------------+--------------+-----------+----------+-----------+---------------------+---------------------+--------+
-| JOB_ID | DB_NAME | TABLE_NAME              | JOB_TYPE                 | SCHEMA_STATE | SCHEMA_ID | TABLE_ID | ROW_COUNT | START_TIME          | END_TIME            | STATE  |
-+--------+---------+-------------------------+--------------------------+--------------+-----------+----------+-----------+---------------------+---------------------+--------+
-|     51 | test    | t1                      | create table             | public       |         1 |       50 |         0 | 2020-08-09 15:02:43 | 2020-08-09 15:02:43 | synced |
-|     49 | ontime  | ontime                  | rebase auto_increment ID | public       |        45 |       47 |         0 | 2020-08-09 13:41:53 | 2020-08-09 13:41:53 | synced |
-|     48 | ontime  | ontime                  | create table             | public       |        45 |       47 |         0 | 2020-08-09 13:28:23 | 2020-08-09 13:28:23 | synced |
-|     46 | ontime  |                         | create schema            | public       |        45 |        0 |         0 | 2020-08-09 13:28:22 | 2020-08-09 13:28:22 | synced |
-|     44 | mysql   | opt_rule_blacklist      | create table             | public       |         3 |       43 |         0 | 2020-08-09 10:17:18 | 2020-08-09 10:17:18 | synced |
-|     42 | mysql   | expr_pushdown_blacklist | create table             | public       |         3 |       41 |         0 | 2020-08-09 10:17:17 | 2020-08-09 10:17:18 | synced |
-|     40 | mysql   | stats_top_n             | create table             | public       |         3 |       39 |         0 | 2020-08-09 10:17:17 | 2020-08-09 10:17:17 | synced |
-|     38 | mysql   | bind_info               | create table             | public       |         3 |       37 |         0 | 2020-08-09 10:17:17 | 2020-08-09 10:17:17 | synced |
-|     36 | mysql   | default_roles           | create table             | public       |         3 |       35 |         0 | 2020-08-09 10:17:17 | 2020-08-09 10:17:17 | synced |
-|     34 | mysql   | role_edges              | create table             | public       |         3 |       33 |         0 | 2020-08-09 10:17:17 | 2020-08-09 10:17:17 | synced |
-+--------+---------+-------------------------+--------------------------+--------------+-----------+----------+-----------+---------------------+---------------------+--------+
-10 rows in set (0.01 sec)
++--------+---------+--------------------+--------------+----------------------+-----------+----------+-----------+---------------------+---------------------+---------+
+| JOB_ID | DB_NAME | TABLE_NAME         | JOB_TYPE     | SCHEMA_STATE         | SCHEMA_ID | TABLE_ID | ROW_COUNT | START_TIME          | END_TIME            | STATE   |
++--------+---------+--------------------+--------------+----------------------+-----------+----------+-----------+---------------------+---------------------+---------+
+|     59 | test    | t1                 | add index    | write reorganization |         1 |       55 |     88576 | 2020-08-17 07:51:58 | NULL                | running |
+|     60 | test    | t2                 | add index    | none                 |         1 |       57 |         0 | 2020-08-17 07:51:59 | NULL                | none    |
+|     58 | test    | t2                 | create table | public               |         1 |       57 |         0 | 2020-08-17 07:41:28 | 2020-08-17 07:41:28 | synced  |
+|     56 | test    | t1                 | create table | public               |         1 |       55 |         0 | 2020-08-17 07:41:02 | 2020-08-17 07:41:02 | synced  |
+|     54 | test    | t1                 | drop table   | none                 |         1 |       50 |         0 | 2020-08-17 07:41:02 | 2020-08-17 07:41:02 | synced  |
+|     53 | test    | t1                 | drop index   | none                 |         1 |       50 |         0 | 2020-08-17 07:35:44 | 2020-08-17 07:35:44 | synced  |
+|     52 | test    | t1                 | add index    | public               |         1 |       50 |    451010 | 2020-08-17 07:34:43 | 2020-08-17 07:35:16 | synced  |
+|     51 | test    | t1                 | create table | public               |         1 |       50 |         0 | 2020-08-17 07:34:02 | 2020-08-17 07:34:02 | synced  |
+|     49 | test    | t1                 | drop table   | none                 |         1 |       47 |         0 | 2020-08-17 07:34:02 | 2020-08-17 07:34:02 | synced  |
+|     48 | test    | t1                 | create table | public               |         1 |       47 |         0 | 2020-08-17 07:33:37 | 2020-08-17 07:33:37 | synced  |
+|     46 | mysql   | stats_extended     | create table | public               |         3 |       45 |         0 | 2020-08-17 06:42:38 | 2020-08-17 06:42:38 | synced  |
+|     44 | mysql   | opt_rule_blacklist | create table | public               |         3 |       43 |         0 | 2020-08-17 06:42:38 | 2020-08-17 06:42:38 | synced  |
++--------+---------+--------------------+--------------+----------------------+-----------+----------+-----------+---------------------+---------------------+---------+
+12 rows in set (0.00 sec)
 ```
 
-You may limit the number of rows shown by specifying a number and where condition. i.e.
+From the output above:
+
+- Job 59 is currently in progress (`STATE` of `running`). The schema state is currently in `write reorganization`, but will switch to `public` once the task is completed to note that the change can be observed publicly by user sessions. The `end_time` column is also `NULL` indicating that the completion time for the job is currently not known.
+
+- Job 60 is an add index job, which is currently queued waiting for job 59 to complete. When job 59 completes, the `STATE` of job 60 will switch to `running`.
+
+- For desctuctive changes such as dropping an index or dropping a table, the `SCHEMA_STATE` will change to `none` when the job is complete. For addative changes, the `SCHEMA_STATE` will change to `public`.
+
+To limit the number of rows shown by specifying a number and where condition. i.e.
 
 ```sql
 ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
