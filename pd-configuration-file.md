@@ -27,20 +27,20 @@ This document only describes parameters that are not included in command-line pa
 
 - The list of client URLs to be listened to for client traffic
 - Default value: `"http://127.0.0.1:2379"`
-- To deploy a cluster, you must specify the IP address of the current host as `client-urls` (for example, `"http://192.168.100.113:2379"`). If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
+- When you deploy a cluster, you must specify the IP address of the current host as `client-urls` (for example, `"http://192.168.100.113:2379"`). If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
 
 ### `advertise-client-urls`
 
 - The list of advertise URLs for client traffic from the outside
-- Default value: `"${peer-urls}"`
-- In some situations such as the Docker or NAT network environment, if a client cannot connect to PD through the default client URLs to be listened to by PD, you must manually set the advertise client URLs.
+- Default value: `"${client-urls}"`
+- In some situations such as in the Docker or NAT network environment, if a client cannot access PD through the default client URLs listened to by PD, you must manually set the advertise client URLs.
 - For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-client-urls` to `"http://192.168.100.113:2380"`. The client can find this service through `"http://192.168.100.113:2380"`.
 
 ### `peer-urls`
 
 - The list of peer URLs to be listened to for peer traffic
 - Default value: `"http://127.0.0.1:2380"`
-- To deploy a cluster, you must specify `peer-urls` as the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
+- When you deploy a cluster, you must specify `peer-urls` as the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
 
 ### `advertise-peer-urls`
 
