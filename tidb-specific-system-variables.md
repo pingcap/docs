@@ -339,6 +339,132 @@ Usage example:
 set tidb_query_log_max_len = 20
 ```
 
+<<<<<<< HEAD
+=======
+### tidb_txn_mode
+
+- Scope: SESSION | GLOBAL
+- Default value: "pessimistic"
+- This variable is used to set the transaction mode. TiDB 3.0 supports the pessimistic transactions. Since TiDB 3.0.8, the [pessimistic transaction mode](/pessimistic-transaction.md) is enabled by default.
+- If you upgrade TiDB from v3.0.7 or earlier versions to v3.0.8 or later versions, the default transaction mode does not change. **Only the newly created clusters use the pessimistic transaction mode by default**.
+- If this variable is set to "optimistic" or "", TiDB uses the [optimistic transaction mode](/optimistic-transaction.md).
+
+### tidb_constraint_check_in_place
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- This setting only applies to optimistic transactions. When this variable is set to zero, checking for duplicate values in UNIQUE indexes is deferred until the transaction commits. This helps improve performance, but might be an unexpected behavior for some applications. See [Constraints](/constraints.md) for details.
+
+    - When set to zero and using optimistic transactions:
+
+        ```sql
+        tidb >create table t (i int key)
+        tidb >insert into t values (1);
+        tidb >begin optimistic;
+        tidb >insert into t values (1);
+        Query OK, 1 row affected
+        tidb >commit; -- Check only when a transaction is committed.
+        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+        ```
+
+    - When set to 1 and using optimistic transactions:
+
+        ```sql
+        tidb >set @@tidb_constraint_check_in_place=1
+        tidb >begin optimistic;
+        tidb >insert into t values (1);
+        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+        ```
+
+Constraint checking is always performed in place for pessimistic transactions (default).
+
+### tidb_check_mb4_value_in_utf8
+
+- Scope: SERVER
+- Default value: 1, indicating check the validity of UTF-8 data. This default behavior is compatible with MySQL.
+- This variable is used to set whether to check the validity of UTF-8 data.
+- To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because there is no data validity check in the earlier version. For details, see [FAQs After Upgrade](/faq/upgrade-faq.md).
+
+### tidb_opt_insubq_to_join_and_agg
+
+- Scope: SESSION | GLOBAL
+- Default value: 1
+- This variable is used to set whether to enable the optimization rule that converts a subquery to join and aggregation.
+- For example, after you enable this optimization rule, the subquery is converted as follows:
+
+    ```sql
+    select * from t where t.a in (select aa from t1)
+    ```
+
+    The subquery is converted to join as follows:
+
+    ```sql
+    select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
+    ```
+
+    If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
+
+    ```sql
+    select * from t, t1 where t.a=t1.a
+    ```
+
+### tidb_opt_correlation_threshold
+
+- Scope: SESSION | GLOBAL
+- Default value: 0.9
+- This variable is used to set the threshold value that determines whether to enable estimating the row count by using column order correlation. If the order correlation between the current column and the `handle` column exceeds the threshold value, this method is enabled.
+
+### tidb_opt_correlation_exp_factor
+
+- Scope: SESSION | GLOBAL
+- Default value: 1
+- When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.
+    - When the value is 0, the heuristic method is not used.
+    - When the value is greater than 0:
+        - A larger value indicates that an index scan will probably be used in the heuristic method.
+        - A smaller value indicates that a table scan will probably be used in the heuristic method.
+
+### tidb_enable_window_function
+
+- Scope: SESSION | GLOBAL
+- Default value: 1, indicating enabling the window function feature.
+- This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `0`.
+
+### tidb_slow_query_file
+
+- Scope: SESSION
+- Default value: ""
+- When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is "tidb-slow.log". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path. For details, see [Identify Slow Queries](/identify-slow-queries.md).
+
+### tidb_enable_fast_analyze
+
+- Scope: SESSION | GLOBAL
+- Default value: 0, indicating not enabling the statistics fast `Analyze` feature.
+- This variable is used to set whether to enable the statistics `Fast Analyze` feature.
+- If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
+
+### tidb_expensive_query_time_threshold
+
+- Scope: SERVER
+- Default value: 60
+- This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
+    - Slow logs are printed after the statement is executed.
+    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
+
+### tidb_wait_split_region_finish
+
+- Scope: SESSION
+- Default value: 1, indicating returning the result after all Regions are scattered.
+- It usually takes a long time to scatter Regions, which is determined by PD scheduling and TiKV loads. This variable is used to set whether to return the result to the client after all Regions are scattered completely when the `SPLIT REGION` statement is being executed. Value `0` indicates returning the value before finishing scattering all Regions.
+- Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write or data importing scenarios, it is recommended to import data after Regions scattering is finished.
+
+### tidb_wait_split_region_timeout
+
+- Scope: SESSION
+- Default value: 300
+- This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned.
+
+>>>>>>> 343f17c... sql-statement: improve consistency, fix small errors (#3663)
 ### tidb_scatter_region
 
 - Scope: GLOBAL
