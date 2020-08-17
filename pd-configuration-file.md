@@ -25,7 +25,7 @@ This document only describes parameters that are not included in command-line pa
 
 ### `client-urls`
 
-- The list of client URLs to be listened to for client traffic
+- The list of client URLs to be listened to by PD
 - Default value: `"http://127.0.0.1:2379"`
 - When you deploy a cluster, you must specify the IP address of the current host as `client-urls` (for example, `"http://192.168.100.113:2379"`). If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
 
