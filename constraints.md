@@ -193,7 +193,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ..
 ```
 
-The first  `INSERT` statement caused a duplicate key error. This causes additional network communication overhead and may reduce the throughput of insert operations.
+The first  `INSERT` statement caused a duplicate key error. This causes additional network communication overhead and might reduce the throughput of `INSERT` operations.
 
 ## PRIMARY KEY
 
