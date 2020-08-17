@@ -34,7 +34,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+TiDB supports the syntax extension of `BEGIN PESSMISTIC` or `BEGIN OPTIMISTIC`. This enables you to override the default transactional model for your transaction.
 
 ## See also
 
