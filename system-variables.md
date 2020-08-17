@@ -65,7 +65,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to show whether the execution plan used in the previous `execute` statement is from binding.
+- This variable is used to show whether the execution plan used in the previous `execute` statement is from the plan binding.
 
 ### max_execution_time
 
