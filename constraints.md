@@ -279,7 +279,7 @@ SELECT table_name, column_name, constraint_name, referenced_table_name, referenc
 FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders');
 ```
 
-```
+```sql
 +------------+-------------+-----------------+-----------------------+------------------------+
 | table_name | column_name | constraint_name | referenced_table_name | referenced_column_name |
 +------------+-------------+-----------------+-----------------------+------------------------+
