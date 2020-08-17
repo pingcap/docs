@@ -245,7 +245,7 @@ Query OK, 0 rows affected (0.10 sec)
 * Table `t3` failed to be created, because a table can only have one primary key.
 * Table `t4` was created successfully, because even though there can be only one primary key, TiDB supports defining multiple columns as the composite primary key.
 
-In addition to the rules above, by default, TiDB has an additional restriction that once a table is successfully created, its primary key cannot be changed. If you need to add/remove the primary key, you need to set  `alter-primary-key`  to  `true`  in the TiDB configuration file, and restart the TiDB instance to make it effective.
+In addition to the rules above, by default, TiDB has an additional restriction that once a table is successfully created, its primary key cannot be changed. If you need to add or remove the primary key, set `alter-primary-key` to `true` in the TiDB configuration file, and restart the TiDB instance to make it effective.
 
 When the add/delete primary key feature is enabled, TiDB allows adding/deleting primary key to the table. However, it should be noted that, if a table with an integer type primary key has been created before the feature is enabled, you cannot delete its primary key constraint even when you enable the add/delete primary key feature.
 
