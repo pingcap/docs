@@ -44,7 +44,7 @@ This document only describes parameters that are not included in command-line pa
 
 ### `advertise-peer-urls`
 
-- The list of advertise URLs for peer traffic from the outside
+- The list of advertise URLs for other PD nodes (peers) to access a PD node
 - Default: `"${peer-urls}"`
 - In some situations such as the Docker or NAT network environment, if the other nodes cannot connect to PD through the default peer URLs to be listened to by PD, you must manually set the advertise peer URLs.
 - For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-peer-urls` to `"http://192.168.100.113:2380"`. The other PD nodes can find this service through `"http://192.168.100.113:2380"`.
