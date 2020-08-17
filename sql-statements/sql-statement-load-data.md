@@ -97,5 +97,4 @@ Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 ## See also
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
-* [Optimistic Transaction Model](/optimistic-transaction.md)
 * [Import Example Database](/import-example-data.md)
