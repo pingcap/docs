@@ -34,7 +34,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-* `START TRANSACTION` immediately starts a transaction inside TiDB. This differs from MySQL, where `START TRANSACTION` lazily creates a transaction unless the varation of `START TRANSACTION WITH CONSISTENT SNAPSHOT` is used.
+* `START TRANSACTION` immediately starts a transaction inside TiDB. This differs from MySQL, where `START TRANSACTION` lazily creates a transaction. But `START TRANSACTION` in TiDB is equivalent to MySQL's `START TRANSACTION WITH CONSISTENT SNAPSHOT`.
 
 * The statement `START TRANSACTION READ ONLY` is parsed for compatibility with MySQL, but will still permit write operations.
 
