@@ -252,7 +252,7 @@ mysql> SHOW COLLATION;
 
 ## MySQL compatibility
 
-TiDB does not support collations other than binary. This statement is only provided to ensure compatibility with MySQL.
+The usage of this statement is understood to be fully compatible with MySQL. However, charsets in TiDB might have different default collations compared with MySQL. For details, refer to [Compatibility with MySQL](/mysql-compatibility.md). Any other compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 
