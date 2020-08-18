@@ -113,7 +113,7 @@ mysql> ADMIN SHOW DDL JOB QUERIES 51;
 1 row in set (0.02 sec)
 ```
 
-You can only searches the running DDL job corresponding to `job_id` and the last ten results in the DDL history job queue.
+You can only search the running DDL job corresponding to `job_id` within the last ten results in the DDL history job queue.
 
 ## MySQL compatibility
 
