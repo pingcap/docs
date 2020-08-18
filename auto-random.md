@@ -48,16 +48,16 @@ create table t (a bigint auto_random, b varchar(255), primary key (a))
 
 Then execute the `INSERT` statement such as `INSERT INTO t(b) values...`. Now the results will be as follows:
 
-+ Implicitly assigning values: If the `INSERT` statement does not specify the values of the integer primary key column (column `a`) or specify the value as `NULL`, TiDB automatically assigns values to this column. These values are not necessarily auto-increment or continuous but are unique, which avoids the hotspot problem caused by continuous row IDs.
-+ Explicitly inserting values: If the `INSERT` statement explicitly specifies the values of the integer primary key column, TiDB saves these values, which works similarly to the `AUTO_INCREMENT` attribute. Note that if you do not set `NO_AUTO_VALUE_ON_ZERO` in the `@@sql_mode` system variable, TiDB will automatically assign values to this column even if you explicitly specify the value of the integer primary key column as `0`.
++ Implicitly allocating values: If the `INSERT` statement does not specify the values of the integer primary key column (column `a`) or specify the value as `NULL`, TiDB automatically allocates values to this column. These values are not necessarily auto-increment or continuous but are unique, which avoids the hotspot problem caused by continuous row IDs.
++ Explicitly inserting values: If the `INSERT` statement explicitly specifies the values of the integer primary key column, TiDB saves these values, which works similarly to the `AUTO_INCREMENT` attribute. Note that if you do not set `NO_AUTO_VALUE_ON_ZERO` in the `@@sql_mode` system variable, TiDB will automatically allocate values to this column even if you explicitly specify the value of the integer primary key column as `0`.
 
 > **Note:**
 >
 > Since v4.0.3, if you want to insert values explicitly, set the value of the `@@allow_auto_random_explicit_insert` system variable to `1` (`0` by default). This explicit insertion is not supported by default and the reason is documented in [restrictions](#restrictions) section.
 
-TiDB automatically assigns values in the following way:
+TiDB automatically allocates values in the following way:
 
-The highest five digits (ignoring the sign bit) of the row value in binary (namely, shard bits) are determined by the starting time of the current transaction. The remaining digits are assigned values in an auto-increment order.
+The highest five digits (ignoring the sign bit) of the row value in binary (namely, shard bits) are determined by the starting time of the current transaction. The remaining digits are allocated values in an auto-increment order.
 
 To use different number of shard bits, append a pair of parentheses to `AUTO_RANDOM` and specify the desired number of shard bits in the parentheses. See the following example:
 
@@ -91,7 +91,7 @@ show warnings
 
 In addition, to view the shard bit number of the table with the `AUTO_RANDOM` attribute, you can see the value of the `PK_AUTO_RANDOM_BITS=x` mode in the `TIDB_ROW_ID_SHARDING_INFO` column in the `information_schema.tables` system table. `x` is the number of shard bits.
 
-Values assigned to the `AUTO_RANDOM` column affect `last_insert_id()`. You can use `select last_insert_id ()` to get the ID that TiDB last implicitly assigns. For example:
+Values allocated to the `AUTO_RANDOM` column affect `last_insert_id()`. You can use `select last_insert_id ()` to get the ID that TiDB last implicitly allocates. For example:
 
 {{< copyable "sql" >}}
 
@@ -147,4 +147,4 @@ Pay attention to the following restrictions when you use `AUTO_RANDOM`:
 - You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
 - You cannot specify `AUTO_RANDOM` and `AUTO_INCREMENT` for the same column at the same time.
 - You cannot specify `AUTO_RANDOM` and `DEFAULT` (the default value of a column) for the same column at the same time.
-- It is **not** recommended that you explicitly specify a value for the column with the `AUTO_RANDOM` attribute when you insert data. Otherwise, the numeral values that can be automatically assigned for this table might be used up in advance.
+- It is **not** recommended that you explicitly specify a value for the column with the `AUTO_RANDOM` attribute when you insert data. Otherwise, the numeral values that can be automatically allocated for this table might be used up in advance.
