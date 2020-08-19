@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/ref
 
 # TiDB Lightning Backends
 
-The backend determines how `tidb-lightning` imports data into the target cluster.
+The backend determines how TiDB Lightning imports data into the target cluster.
 
 TiDB Lightning supports the following [backends](/tidb-lightning/tidb-lightning-glossary.md#back-end):
 
@@ -14,11 +14,11 @@ TiDB Lightning supports the following [backends](/tidb-lightning/tidb-lightning-
 + [Local-backend](#tidb-lightning-local-backend)
 + [TiDB-backend](#tidb-lightning-tidb-backend)
 
-The **Importer-backend** (default) requires `tidb-lightning` to first encode the SQL or CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
+The **Importer-backend** (default): `tidb-lightning` first encodes the SQL or CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
 
 The **Local-backend**: `tidb-lightning` first encodes data into key-value pairs, sorts and stores them in a local temporary directory, and writes these key-value pairs to each TiKV node in batches. Then, TiKV ingests these key-value pairs into the cluster. The implementation of Local-backend is the same with that of Importer-backend but does not rely on the external `tikv-importer` component.
 
-The **TiDB-backend** requires `tidb-lightning` to encode these data into SQL `INSERT` statements, and has these statements executed directly on the TiDB node.
+The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT` statements, and has these statements executed directly on the TiDB node.
 
 | Backend | Local-backend | Importer-backend | TiDB-backend |
 |:---|:---|:---|:---|
@@ -38,7 +38,7 @@ The **TiDB-backend** requires `tidb-lightning` to encode these data into SQL `IN
 
 ## TiDB Lightning Local-backend
 
-The Local-backend feature was introduced in TiDB v4.0.3. TiDB Lightning only of v4.0.3 or later versions has this feature. In addition, Local-backend only supports TiDB cluster of v4.0.0.
+The Local-backend feature is introduced to TiDB Lightning since TiDB v4.0.3. You can use this feature to import data to TiDB clusters of v4.0.0 or above.
 
 ### Deployment for Local-backend
 
