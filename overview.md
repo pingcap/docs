@@ -1,7 +1,7 @@
 ---
 title: TiDB Introduction
 summary: Learn about the key features and use cases of TiDB.
-aliases: ['/docs/stable/overview/','/docs/v4.0/overview/','/docs/v4.0/key-features/','/docs/stable/key-features/','/tidb/v4.0/key-features']
+aliases: ['/docs/stable/overview/','/docs/v4.0/overview/','/docs/v4.0/key-features/','/docs/stable/key-features/','/tidb/v4.0/key-features','/tidb/stable/key-features']
 ---
 
 # TiDB Introduction
