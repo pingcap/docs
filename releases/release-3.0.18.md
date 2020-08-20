@@ -16,7 +16,7 @@ TiDB version: 3.0.18
     - Fix the issue that the wrong handling of the `set` and `enum` types by the `Hash` function causes the wrong HashJoin result [#19175](https://github.com/pingcap/tidb/pull/19175)
     - Fix the issue that the check for duplicate keys fails in the pessimistic locking mode [#19236](https://github.com/pingcap/tidb/pull/19236)
     - Fix the issue that the `Apply` and `Union Scan` operators cause the wrong execution result [#19297](https://github.com/pingcap/tidb/pull/19297)
-    - Fix wrong result for some cached plans used in transaction [#19274](https://github.com/pingcap/tidb/pull/19274)
+    - Fix the issue that some cached execution plans are incorrectly executed in transaction [#19274](https://github.com/pingcap/tidb/pull/19274)
 
 + TiKV
 
