@@ -272,7 +272,7 @@ Configuration items related to security.
 ### `spilled-file-encryption-method`
 
 + Determines the encryption method used for saving the spilled files to disk.
-+ Default value: `"plaintext"`, means disable encryption
++ Default value: `"plaintext"`, which disables encryption.
 + Optional values: `"plaintext"` and `"aes128-ctr"`
 
 ## Performance
