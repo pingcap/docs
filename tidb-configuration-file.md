@@ -273,7 +273,7 @@ Configuration items related to security.
 
 + Determines the encryption method used for saving the spilled files to disk.
 + Default value: `"plaintext"`, means disable encryption
-+ Optional values: `"plaintext"`, `"aes128-ctr"`
++ Optional values: `"plaintext"` and `"aes128-ctr"`
 
 ## Performance
 
