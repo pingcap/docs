@@ -32,4 +32,4 @@ TiDB version: 3.0.18
 
 + TiDB Binlog
 
-    - Support go time duration format for pump GC configuration [#996](https://github.com/pingcap/tidb-binlog/pull/996)
+    - Support the time duration format of Go for the Pump GC configuration [#996](https://github.com/pingcap/tidb-binlog/pull/996)
