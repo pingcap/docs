@@ -8,6 +8,12 @@ Release date: August 21, 2020
 
 TiDB version: 3.0.18
 
+## Improvements
+
++ TiDB Binlog
+
+    - Support the time duration format of Go for the Pump GC configuration [#996](https://github.com/pingcap/tidb-binlog/pull/996)
+
 ## Bug Fixes
 
 + TiDB
@@ -27,9 +33,3 @@ TiDB version: 3.0.18
     - Fix the issue that the `--log-file` argument does not take effect [#345](https://github.com/pingcap/tidb-lightning/pull/345)
     - Fix the syntax error on empty binary/hex literals when using TiDB-backend [#357](https://github.com/pingcap/tidb-lightning/pull/357)
     - Fix the unexpected `switch-mode` call when using TiDB-backend [#368](https://github.com/pingcap/tidb-lightning/pull/368)
-
-## Improvements
-
-+ TiDB Binlog
-
-    - Support the time duration format of Go for the Pump GC configuration [#996](https://github.com/pingcap/tidb-binlog/pull/996)
