@@ -10,9 +10,11 @@ TiDB version: 3.0.18
 
 ## Improvements
 
-+ TiDB Binlog
++ Tools
 
-    - Support the time duration format of Go for the Pump GC configuration [#996](https://github.com/pingcap/tidb-binlog/pull/996)
+    + TiDB Binlog
+
+        - Support the time duration format of Go for the Pump GC configuration [#996](https://github.com/pingcap/tidb-binlog/pull/996)
 
 ## Bug Fixes
 
@@ -28,8 +30,10 @@ TiDB version: 3.0.18
 
     - Change the GC failure log from `error` to the `warning` level [#8444](https://github.com/tikv/tikv/pull/8444)
 
-+ TiDB Lightning
++ Tools
 
-    - Fix the issue that the `--log-file` argument does not take effect [#345](https://github.com/pingcap/tidb-lightning/pull/345)
-    - Fix the syntax error on empty binary/hex literals when using TiDB-backend [#357](https://github.com/pingcap/tidb-lightning/pull/357)
-    - Fix the unexpected `switch-mode` call when using TiDB-backend [#368](https://github.com/pingcap/tidb-lightning/pull/368)
+    + TiDB Lightning
+
+        - Fix the issue that the `--log-file` argument does not take effect [#345](https://github.com/pingcap/tidb-lightning/pull/345)
+        - Fix the syntax error on empty binary/hex literals when using TiDB-backend [#357](https://github.com/pingcap/tidb-lightning/pull/357)
+        - Fix the unexpected `switch-mode` call when using TiDB-backend [#368](https://github.com/pingcap/tidb-lightning/pull/368)
