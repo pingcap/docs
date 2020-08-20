@@ -120,7 +120,7 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"memory","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null,"protocol":"default"},"cyclic-replication":{"enable":false,"replica-id":0,"filter-replica-ids":null,"id-buckets":0,"sync-ddl":false},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
-- `--changefeed-id`: The ID of the replication task. The format must comply with the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
+- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`/`tidb`/`kafka`.
 
 {{< copyable "" >}}
@@ -587,7 +587,7 @@ To create a cyclic replication task, take the following steps:
 ### Usage notes
 
 + Before creating the cyclic replication task, you must execute `cdc cli changefeed cyclic create-marktables` to create the mark tables for the cyclic replication.
-+ The name of the table with cyclic replication enabled must comply with the `^[a-zA-Z0-9_]+$` regular expression.
++ The name of the table with cyclic replication enabled must match the `^[a-zA-Z0-9_]+$` regular expression.
 + Before creating the cyclic replication task, the tables for the task must be created.
 + After enabling the cyclic replication, you cannot create a table that will be replicated by the cyclic replication task.
 + To perform online DDL operations, ensure the following requirements are met:
