@@ -12,8 +12,8 @@ TiDB version: 3.0.18
 
 + TiDB
 
-    - Fix wrong hash key for decimal [#19185](https://github.com/pingcap/tidb/pull/19185)
-    - Fix an encode bug that causing the wrong result of HashJoin with set and enum [#19172](https://github.com/pingcap/tidb/pull/19172)
+    - Fix wrong hash key that causing the wrong result of HashJoin with decimal [#19185](https://github.com/pingcap/tidb/pull/19185)
+    - Fix wrong hash key that causing the wrong result of HashJoin with set and enum [#19175](https://github.com/pingcap/tidb/pull/19175)
     - Fix insert duplication check does not take effect after pessimistic lock on keys [#19236](https://github.com/pingcap/tidb/pull/19236)
     - Fix error result of apply with union scan [#19297](https://github.com/pingcap/tidb/pull/19297)
     - Fix wrong result for some cached plans used in transaction [#19274](https://github.com/pingcap/tidb/pull/19274)
