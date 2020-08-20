@@ -26,7 +26,7 @@ TiDB version: 3.0.18
 
     - Fix the issue that the `--log-file` argument does not take effect [#345](https://github.com/pingcap/tidb-lightning/pull/345)
     - Fix the syntax error on empty binary/hex literals when using TiDB-backend [#357](https://github.com/pingcap/tidb-lightning/pull/357)
-    - Fix the unexpected `switch-mode` in TiDB backend [#368](https://github.com/pingcap/tidb-lightning/pull/368)
+    - Fix the unexpected `switch-mode` call when using TiDB-backend [#368](https://github.com/pingcap/tidb-lightning/pull/368)
 
 ## Improvements
 
