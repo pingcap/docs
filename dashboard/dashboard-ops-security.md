@@ -80,7 +80,7 @@ It is recommended that you see [Use TiDB Dashboard behind a Reverse Proxy](/dash
 
 ## Enable TLS for reverse proxy
 
-To further enhance the security of the transport layer, you can enable TLS for reverse proxy, and introduce mTLS to verify users' certificates.
+To further enhance the security of the transport layer, you can enable TLS for reverse proxy, and even introduce mTLS to authenticate user certificates.
 
 See [Configuring HTTPS servers](http://nginx.org/en/docs/http/configuring_https_servers.html) and [HAProxy SSL Termination](https://www.haproxy.com/blog/haproxy-ssl-termination/) for more details.
 
