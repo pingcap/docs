@@ -285,45 +285,43 @@ SET ROLE ALL EXCEPT 'app_read' --
 
 The current user can use the `CURRENT_ROLE()` function to check which role has been enabled by the current user. 
 
-For example:
+For example,You can grant default roles to `rw_user1'@'localhost`:
 
-1. You can grant default roles to `rw_user1'@'localhost`:
+{{< copyable "sql" >}}
 
-    {{< copyable "sql" >}}
+```sql
+SET DEFAULT ROLE ALL TO 'rw_user1'@'localhost';
+ ```
 
-    ```sql
-    SET DEFAULT ROLE ALL TO 'rw_user1'@'localhost';
-    ```
+After `rw_user1@localhost` logs in, you can execute the following statement:
 
-2. After `rw_user1@localhost` logs in, you can execute the following statement:
+{{< copyable "sql" >}}
 
-    {{< copyable "sql" >}}
+```sql
+SELECT CURRENT_ROLE();
+```
 
-    ```sql
-    SELECT CURRENT_ROLE();
-    ```
+```
++--------------------------------+
+| CURRENT_ROLE()                 |
++--------------------------------+
+| `app_read`@`%`,`app_write`@`%` |
++--------------------------------+
+```
 
-    ```
-    +--------------------------------+
-    | CURRENT_ROLE()                 |
-    +--------------------------------+
-    | `app_read`@`%`,`app_write`@`%` |
-    +--------------------------------+
-    ```
+{{< copyable "sql" >}}
 
-    {{< copyable "sql" >}}
+ ```sql
+SET ROLE 'app_read'; SELECT CURRENT_ROLE();
+```
 
-    ```sql
-    SET ROLE 'app_read'; SELECT CURRENT_ROLE();
-    ```
-
-    ```
-    +----------------+
-    | CURRENT_ROLE() |
-    +----------------+
-    | `app_read`@`%` |
-    +----------------+
-    ```
+```
++----------------+
+| CURRENT_ROLE() |
++----------------+
+| `app_read`@`%` |
++----------------+
+```
 
 ### Revoke a role
 
