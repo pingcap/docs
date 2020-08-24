@@ -71,7 +71,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
     - TiFlash
 
-        Configure in the configuration file or command-line arguments, and change the `http_port` item to `https_port`:
+        Configure in the configuration file, and change the `http_port` item to `https_port`:
 
          ```toml
         [security]
