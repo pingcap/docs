@@ -44,7 +44,7 @@ For example, you can use the following statement to grant the `app_read` role th
 {{< copyable "sql" >}}
 
 ```sql
-GRANT SELECT ON app_db.* TO 'app_read'@'%';;
+GRANT SELECT ON app_db.* TO 'app_read'@'%';
 ```
 
 You can use the following statement to grant the `app_write` role the privilege to write the `app_db` database:
