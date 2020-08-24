@@ -6,13 +6,14 @@ aliases: ['/docs/dev/optimistic-transaction/','/docs/dev/reference/transactions/
 
 # TiDB Optimistic Transaction Model
 
-This document introduces the principles of TiDB's optimistic transaction model and related features.
+With optimistic transactions, conflicting changes are instead detected as part of a transaction commit. This helps improve the performance when concurrrent transactions are infrequently modifying the same rows, because the process of aquiring row locks can be skipped. In the case that concurrent transactions frequently modify the same rows (a conflict), optimistic transactions may perform worse than [Pessimistic Transactions](/pessimistic-transaction.md).
 
-In TiDB's optimistic transaction model, write-write conflicts are detected only at the two-phase transactional commit.
+Before enabling optimistic transactions, make sure that your application correctly handles that a `COMMIT` statement could return errors. If you are unsure of how your application handles this, it is recommended to instead use Pessimistic Transactions.
 
 > **Note:**
 >
-> Starting from v3.0.8, newly created TiDB clusters use the [pessimistic transaction model](/pessimistic-transaction.md) by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction model**.
+> Starting from v3.0.8, TiDB uses the [pessimistic transaction model](/pessimistic-transaction.md) by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction model**.
+
 
 ## Principles of optimistic transactions
 
