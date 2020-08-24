@@ -76,7 +76,7 @@ Transactions are also automatically rolled back if the client connection is abor
 
 ## Autocommit
 
-As part of MySQL compatiblity, TiDB supports the ability to _autocommit_ a statement immediately following its execution.
+As part of MySQL compatibility, TiDB supports the ability to _autocommit_ a statement immediately following its execution.
 
 i.e.
 
@@ -110,7 +110,7 @@ mysql> SELECT * FROM t1;
 1 row in set (0.00 sec)
 ```
 
-In the above example, the `ROLLBACK` statement has not affect. This is because the `INSERT` statement executed in autocommit. That is, it was the equivalent of the following single-statement transaction:
+In the above example, the `ROLLBACK` statement has no effect. This is because the `INSERT` statement executed in autocommit. That is, it was the equivalent of the following single-statement transaction:
 
 ```sql
 START TRANSACTION;
@@ -169,7 +169,6 @@ SET GLOBAL autocommit = 0;
 > **Note:**
 >
 > Some statements are committed implicitly. For example, executing `[BEGIN|START TRANSACTION]` implicitly commits the last transaction and starts a new transaction. This behavior is required for MySQL compatibility. Refer to [implicit commit](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html) for more details.
-
 
 TiDB supports explicit transactions (use `[BEGIN|START TRANSACTION]` and `COMMIT` to define the start and end of the transaction) and implicit transactions (`SET autocommit = 1`).
 
@@ -276,7 +275,7 @@ mysql> SELECT * FROM test;
 2 rows in set (0.00 sec)
 ```
 
-In the above example, the transaction remains open after the failed insert statements. The final insert statement is then succesful and changes are successfully committed.
+In the above example, the transaction remains open after the failed insert statements. The final insert statement is then successful and changes are committed.
 
 ## Transaction size limit
 
