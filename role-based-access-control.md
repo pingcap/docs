@@ -21,7 +21,7 @@ A role is a collection of a series of privileges. You can do the following opera
 
 ### Create a role
 
-For example, you can use the following statement to create roles `app_developer` and `app_read`  `r_2`:
+For example, you can use the following statement to create roles `app_developer` and `app_read`:
 
 {{< copyable "sql" >}}
 
