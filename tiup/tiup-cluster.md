@@ -608,9 +608,9 @@ When running the checks, if the `--apply` flag is specified, the program automat
 
 Environment checks are not necessary for deploying a cluster. For the production environment, it is recommended to perform environment checks and pass all check items before deployment. If not all the check items are passed, the cluster might be deployed and run normally, but the best performance might not be obtained.
 
-## Migrate control machine and backup
+## Migrate control machine and back up
 
-The data related to TiUP are stored in the `.tiup` directory of the user's home directory. To migrate the control machine, take the following steps to copy the `.tiup` directory to the corresponding target machine:
+The data related to TiUP are stored in the `.tiup` directory of the user's home directory. To migrate the control machine, you can take the following steps to copy the `.tiup` directory to the corresponding target machine:
 
 1. Execute `tar czvf tiup.tar.gz .tiup` in the home directory of the original machine.
 2. Copy `tip.tar.gz` to the home directory of the target machine.
