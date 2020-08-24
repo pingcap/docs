@@ -61,6 +61,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
+### last_plan_from_binding <span class="version-mark">New in v4.0</span>
+
+- Scope: SESSION
+- Default value: 0
+- This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
+
 ### max_execution_time
 
 - Scope: SESSION | GLOBAL
@@ -70,6 +76,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 > **Note:**
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+
+### `interactive_timeout`
+
+- Scope: SESSION | GLOBAL
+- Default value: 28800
+- This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
 
 ### sql_mode
 
