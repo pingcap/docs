@@ -53,7 +53,7 @@ Then execute the `INSERT` statement such as `INSERT INTO t(b) values...`. Now th
 
 > **Note:**
 >
-> Since v4.0.3, if you want to insert values explicitly, set the value of the `@@allow_auto_random_explicit_insert` system variable to `1` (`0` by default). This explicit insertion is not supported by default and the reason is documented in [restrictions](#restrictions) section.
+> Since v4.0.3, if you want to insert values explicitly, set the value of the `@@allow_auto_random_explicit_insert` system variable to `1` (`0` by default). This explicit insertion is not supported by default and the reason is documented in the [restrictions](#restrictions) section.
 
 TiDB automatically allocates values in the following way:
 
