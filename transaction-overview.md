@@ -110,7 +110,7 @@ mysql> SELECT * FROM t1;
 1 row in set (0.00 sec)
 ```
 
-In the above example, the `ROLLBACK` statement has no effect. This is because the `INSERT` statement executed in autocommit. That is, it was the equivalent of the following single-statement transaction:
+In the above example, the `ROLLBACK` statement has no effect. This is because the `INSERT` statement is executed in autocommit. That is, it was the equivalent of the following single-statement transaction:
 
 ```sql
 START TRANSACTION;
