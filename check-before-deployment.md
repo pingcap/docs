@@ -123,7 +123,7 @@ To disable the system swap, execute the following command:
 {{< copyable "shell-regular" >}}
 
 ```bash
-echo "vm.swappiness = 0">> /etc/sysctl.conf 
+echo "vm.swappiness = 0">> /etc/sysctl.conf
 swapoff -a && swapon -a
 sysctl -p
 ```
@@ -189,7 +189,7 @@ To check whether the NTP service is installed and whether it synchronizes with t
     Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
     ```
 
-2. Run the `ntpstat` command to check whether the NTP service synchronizes with the NTP server. 
+2. Run the `ntpstat` command to check whether the NTP service synchronizes with the NTP server.
 
     > **Note:**
     >
@@ -303,7 +303,7 @@ This section describes how to manually configure the SSH mutual trust and sudo w
 This section describes how to install the NUMA tool. In online environments, because the hardware configuration is usually higher than required, to better plan the hardware resources, multiple instances of TiDB or TiKV can be deployed on a single machine. In such scenarios, you can use NUMA tools to prevent the competition for CPU resources which might cause reduced performance.
 
 > **Note:**
-> 
+>
 > - Binding cores using NUMA is a method to isolate CPU resources and is suitable for deploying multiple instances on highly configured physical machines.
 > - After completing deployment using `tiup cluster deploy`, you can use the `exec` command to perform cluster level management operations.
 
