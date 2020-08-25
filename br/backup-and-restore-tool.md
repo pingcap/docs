@@ -129,7 +129,7 @@ TiDB v4.0.2 and later versions support backup and restore through SQL statements
 
 ### Through command line tools
 
-Also, you can use command line tools. First, you need to download a Binary of the BR tool, see [download link](/download-ecosystem-tools.md#Quick backup and restore br) for details. For details, see [download page](/download-ecosystem-tools.md#br-backup-and-restore).
+Also, you can use command line tools. First, you need to download a Binary of the BR tool. For details, see [download link](/download-ecosystem-tools.md#br-backup-and-restore).
 
 Take the command-line tool as an example to introduce how to perform backup and restoration operations.
 
