@@ -92,7 +92,7 @@ When the cluster is in operation, if you need to modify the parameters of a comp
 2. Configure the parameters:
 
     - If the configuration is globally effective for a component, edit `server_configs`:
-    
+
         ```
         server_configs:
           tidb:
@@ -108,7 +108,7 @@ When the cluster is in operation, if you need to modify the parameters of a comp
             config:
                 log.slow-threshold: 300
         ```
-    
+
     For the parameter format, see the [TiUP parameter template](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml).
 
     **Use `.` to represent the hierarchy of the configuration items**.
@@ -209,6 +209,56 @@ Similar to the `start` command, the `stop` command supports stopping some of the
 
     ```bash
     tiup cluster stop ${cluster-name} -N 1.2.3.4:4000,1.2.3.5:4000
+    ```
+
+## Clean up cluster data
+
+This operation stops all services and cleans up the data directory or/and log directory. The operation cannot be reverted, so proceed **with caution**.
+
+- Clean up the data of all services in the cluster, but keep the logs:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster clean ${cluster-name} --data
+    ```
+
+- Clean up the logs of all services in the cluster, but keep the data:
+
+    ```bash
+    tiup cluster clean ${cluster-name} --log
+    ```
+
+- Clean up the data and logs of all services in the cluster:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster clean ${cluster-name} --all 
+    ```
+
+- Clean up the logs and data of all services except Prometheus:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster clean ${cluster-name} --all --ignore-role prometheus
+    ```
+
+- Clean up the logs and data of all services except the node `172.16.13.11:9000`:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster clean ${cluster-name} --all --ignore-node 172.16.13.11:9000
+    ```
+
+- Clean up the logs and data of all services except the node `172.16.13.12`:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster clean ${cluster-name} --all --ignore-node 172.16.13.12
     ```
 
 ## Destroy the cluster
