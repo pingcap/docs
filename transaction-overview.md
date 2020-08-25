@@ -178,7 +178,7 @@ For DDL statements, the transaction is committed automatically and does not supp
 
 ## Lazy check of constraints
 
-By default, optimistic transactions will not check [primary key](/constraints.md#primary-key) or [unique constraints](/constraints.md#unique-key) when a DML statement is executed. These checks are instead performed on transaction `COMMIT`.
+By default, optimistic transactions will not check the [primary key](/constraints.md#primary-key) or [unique constraints](/constraints.md#unique-key) when a DML statement is executed. These checks are instead performed on transaction `COMMIT`.
 
 For example:
 
