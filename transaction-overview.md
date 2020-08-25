@@ -275,7 +275,7 @@ mysql> SELECT * FROM test;
 2 rows in set (0.00 sec)
 ```
 
-In the above example, the transaction remains open after the failed insert statements. The final insert statement is then successful and changes are committed.
+In the above example, the transaction remains open after the failed `INSERT` statements. The final insert statement is then successful and changes are committed.
 
 ## Transaction size limit
 
