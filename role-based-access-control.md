@@ -21,12 +21,12 @@ A role is a collection of a series of privileges. You can do the following opera
 
 ### Create a role
 
-For example, you can use the following statement to create roles `app_developer` and `app_read`:
+For example, you can use the following statement to create the roles `app_developer`, `app_read`, and `app_write`:
 
 {{< copyable "sql" >}}
 
 ```sql
-CREATE ROLE `app_developer` and `app_read`;
+CREATE ROLE 'app_developer', 'app_read', 'app_write';
 ```
 
 For the role naming format and rule, see [TiDB User Account Management](/user-account-management.md).
@@ -47,7 +47,7 @@ For example, you can use the following statement to grant the `app_read` role th
 GRANT SELECT ON app_db.* TO 'app_read'@'%';
 ```
 
-You can use the following statement to grant the `app_write` role the privilege to write the `app_db` database:
+You can use the following statement to grant the `app_write` role the privilege to write data to the `app_db` database:
 
 {{< copyable "sql" >}}
 
@@ -65,9 +65,9 @@ GRANT ALL ON app_db.* TO 'app_developer';
 
 ### Grant a role to a user
 
-Assume that a user has the developer role which has all the privileges on `app_db`; two users have read-only privileges on `app_db`; and a user has read and write privileges on `app_db`. 
+Assume that a user `dev1` has the developer role with all the privileges on `app_db`; two users `read_user1` and `read_user2` have the read-only privilege on `app_db`; and a user `rw_user1` has read and write privileges on `app_db`. 
 
-Use `CREATE USER` to create a user.
+Use `CREATE USER` to create the users:
 
 {{< copyable "sql" >}}
 
@@ -126,7 +126,7 @@ SHOW GRANTS FOR 'dev1'@'localhost';
 +-------------------------------------------------+
 ```
 
-You can use the `USING` option of `SHOW GRANTS` to check a role's privileges:
+You can use the `USING` option in `SHOW GRANTS` to check a role's privileges:
 
 {{< copyable "sql" >}}
 
@@ -134,7 +134,7 @@ You can use the `USING` option of `SHOW GRANTS` to check a role's privileges:
 SHOW GRANTS FOR 'dev1'@'localhost' USING 'app_developer';
 ```
 
-```
+```sql
 +----------------------------------------------------------+
 | Grants for dev1@localhost                                |
 +----------------------------------------------------------+
@@ -176,7 +176,7 @@ SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 +--------------------------------------------------------+
 ```
 
-You can use `SHOW GRANTS` or `SHOW GRANTS FOR CURRENT_USER()` to check the current user's privileges. There is a difference between these two statements:
+You can use `SHOW GRANTS` or `SHOW GRANTS FOR CURRENT_USER()` to check the current user's privileges. `SHOW GRANTS` and `SHOW GRANTS FOR CURRENT_USER()` are different in the following aspects:
 
 - `SHOW GRANTS` shows the privilege of the enabled role for the current user.
 - `SHOW GRANTS FOR CURRENT_USER()` does not show the enabled role's privilege.
@@ -200,7 +200,7 @@ For example, you can use the following statement to set default roles of `rw_use
 {{< copyable "sql" >}}
 
 ```sql
-SET DEFAULT ROLE `app_read` , `app_write` TO 'rw_user1'@'localhost';
+SET DEFAULT ROLE app_read, app_write TO 'rw_user1'@'localhost';
 ```
 
 You can use the following statement to set default roles of `dev1@localhost` to all roles:
@@ -237,7 +237,7 @@ SET ROLE {
 }
 ```
 
-For example, after `rw_user1` logs, you can use the following statement to enable roles `app_read` and `app_write` that are valid only in the current session:
+For example, after `rw_user1` logs in, you can use the following statement to enable roles `app_read` and `app_write` that are valid only in the current session:
 
 {{< copyable "sql" >}}
 
@@ -274,7 +274,7 @@ You can use the following statement to enable roles except `app_read`:
 {{< copyable "sql" >}}
 
 ```sql
-SET ROLE ALL EXCEPT 'app_read' --
+SET ROLE ALL EXCEPT 'app_read'
 ```
 
 > **Note:**
@@ -285,13 +285,12 @@ SET ROLE ALL EXCEPT 'app_read' --
 
 The current user can use the `CURRENT_ROLE()` function to check which role has been enabled by the current user. 
 
-For example,You can grant default roles to `rw_user1'@'localhost`:
+For example, you can grant default roles to `rw_user1'@'localhost`:
 
 {{< copyable "sql" >}}
 
 ```sql
 SET DEFAULT ROLE ALL TO 'rw_user1'@'localhost';
- ```
 
 After `rw_user1@localhost` logs in, you can execute the following statement:
 
@@ -311,7 +310,7 @@ SELECT CURRENT_ROLE();
 
 {{< copyable "sql" >}}
 
- ```sql
+```sql
 SET ROLE 'app_read'; SELECT CURRENT_ROLE();
 ```
 
@@ -333,7 +332,7 @@ For example, you can use the following statement to revoke all privileges on the
 REVOKE 'app_read' FROM 'read_user1'@'localhost', 'read_user2'@'localhost';
 ```
 
-You can use the following statement to revoke all privileges on roles `app_read` and `app_write` granted to the `rw_user1@localhost` user:
+You can use the following statement to revoke the roles `app_read` and `app_write` granted to the `rw_user1@localhost` user:
 
 {{< copyable "sql" >}}
 
@@ -345,7 +344,7 @@ The operation of revoking a role from a user is atomic. If you fail to revoke a 
 
 ### Revoke a privilege
 
-The `REVOKE` statement corresponds to `GRANT`, so you can use `REVOKE` to revoke the privileges of `app_write`.
+The `REVOKE` statement is reverse to `GRANT`. You can use `REVOKE` to revoke the privileges of `app_write`.
 
 {{< copyable "sql" >}}
 
@@ -365,7 +364,7 @@ For example, you can use the following statement to delete roles `app_read` and 
 DROP ROLE 'app_read', 'app_write';
 ```
 
-This operation deletes role records in the `mysql.user` table, removes related records in the authorization table, and terminates role-related authorization relationship.
+This operation deletes the role records of `app_read` and `app_write` in the `mysql.user` table and related records in the authorization table, and terminates the authorization related to the two roles.
 
 To delete a role, you need the `DROP ROLE` or `DROP USER` privilege.
 
