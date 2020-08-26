@@ -190,9 +190,9 @@ tiup cluster rename ${cluster-name} ${new-name}
 ```
 
 > **Note:**
-
+>
 > This operation will restart the monitoring system (Prometheus and Grafana).
-> After renaming the cluster, Grafana may leave some panels with the old cluster name, and you need to delete them manually.
+> After renaming the cluster, Grafana might leave some panels with the old cluster name, and you need to delete them manually.
 
 ## Stop the cluster
 
