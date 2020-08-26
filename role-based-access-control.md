@@ -324,7 +324,7 @@ SET ROLE 'app_read'; SELECT CURRENT_ROLE();
 
 ### Revoke a role
 
-For example, you can use the following statement to revoke all privileges on the `app_read` role granted to users `read_user1@localhost` and the `read_user2@localhost`:
+You can use the following statement to revoke the `app_read` role granted to the users `read_user1@localhost` and `read_user2@localhost`:
 
 {{< copyable "sql" >}}
 
