@@ -29,7 +29,13 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
-- Whether automatically commit a transaction.
+- Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
+
+### `allow_auto_random_explicit_insert` <span class="version-mark">New in v4.0.3</span>
+
+- Scope: SESSION (since v4.0.4: SESSION | GLOBAL)
+- Default value: 0
+- Determines whether to allow explicitly specifying the values of the column with the `AUTO_RANDOM` attribute in the `INSERT` statement. `1` means to allow and `0` means to disallow.
 
 ### ddl_slow_threshold
 
