@@ -190,11 +190,7 @@ tiup cluster rename ${cluster-name} ${new-name}
 ```
 
 > **Note:**
->
-> If you start the specified component by using the `-R` or `-N` parameters, make sure the starting order is correct. For example, start the PD component before the TiKV component. Otherwise, the start might fail.
 
-> > **注意：**
-> 
 > This operation will restart the monitoring system (Prometheus and Grafana).
 > After renaming the cluster, Grafana may leave some panels with the old cluster name, and you need to delete them manually.
 
