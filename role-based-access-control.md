@@ -356,7 +356,7 @@ For details, see [TiDB Privilege Management](/privilege-management.md).
 
 ### Delete a role
 
-For example, you can use the following statement to delete roles `app_read` and `app_write`:
+You can use the following statement to delete roles `app_read` and `app_write`:
 
 {{< copyable "sql" >}}
 
