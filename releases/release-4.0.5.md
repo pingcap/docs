@@ -67,7 +67,7 @@ TiDB version: 4.0.5
     - Reduce I/O operations by optimizing the processing logic of Raft logs
     - Accelerate Region scheduling for the blocked `add partition` DDL statement
     - Optimize compactions of delta data in DeltaTree to reduce read and write amplification
-    - Optimize the performance of `apply` by preprocessing the snapshots using multiple threads
+    - Optimize the performance of applying Region snapshots by preprocessing the snapshots using multiple threads
     - Optimize the number of opening file descriptors when the read load of TiFlash is low to reduce system resource consumption
     - Optimize the number of unnecessary small files created when TiFlash restarts
 
