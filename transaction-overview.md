@@ -76,7 +76,7 @@ Transactions are also automatically rolled back if the client connection is abor
 
 ## Autocommit
 
-As part of MySQL compatibility, TiDB supports the ability to _autocommit_ a statement immediately following its execution.
+As required for MySQL compatibility, TiDB will by default _autocommit_ statements immediately following their execution.
 
 For example:
 
