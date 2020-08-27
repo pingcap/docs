@@ -245,7 +245,7 @@ In the command and result above:
 + `state` is the replication state of the current `changefeed`. Each state must be consistent with the state in `changefeed list`.
 + `tso` represents the largest transaction TSO in the current `changefeed` that has been successfully replicated to the downstream.
 + `checkpoint` represents the corresponding time of the largest transaction TSO in the current `changefeed` that has been successfully replicated to the downstream.
-+ `error` records the error that has occurred in the current `changefeed`.
++ `error` records whether an error has occurred in the current `changefeed`.
 
 {{< copyable "shell-regular" >}}
 
@@ -403,7 +403,6 @@ Currently, you can modify the following configuration items:
 - `sink-uri` of the `changefeed`.
 - The `changefeed` configuration file and all configuration items in the file.
 - Whether to use the file sorting feature and the sorting directory.
-- The time zone used in the `changefeed`.
 - The `target-ts` of the `changefeed`.
 
 ### Manage processing units of replication sub-tasks (`processor`)
@@ -700,7 +699,7 @@ To create a cyclic replication task, take the following steps:
 >
 > Currently, outputting the historical value of a Row Changed Event is still an experimental feature. It is **NOT** recommended to use it in the production environment.
 
-In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Such a behavior neither supports the [new collation framework](/character-set-and-collation.md#new-framework-for-collations) introduced in TiDB v4.0 nor meets the need that the consumer ends of TiCDC Open Protocol use the historical value of a Row Changed Event.
+In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value neither supports the [new collation framework](/character-set-and-collation.md#new-framework-for-collations) introduced in TiDB v4.0, nor can be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
 
 Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Changed Event. To enable this feature, specify the following configuration in the `changefeed` configuration file at the root level:
 
