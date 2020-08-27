@@ -14,7 +14,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 |------------------------------------------------------------------------------------------|-----------------------------|
 | [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancel a currently running DDL jobs. |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculate the CRC64 of all rows + indexes of a table. |
-| [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Check for consistency of a table or index |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Check for consistency of a table or index |
 | [`ADMIN SHOW DDL [JOBS\|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | Show details about currently running or recently completed DDL jobs. |
 
 ## `ADMIN RELOAD` statement
