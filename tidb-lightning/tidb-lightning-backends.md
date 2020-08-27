@@ -1,7 +1,7 @@
 ---
 title: TiDB Lightning Backends
 summary: Learn the backends of TiDB Lightning.
-aliases: ['/docs/stable/tidb-lightning/tidb-lightning-tidb-backend/','/docs/stable/reference/tools/tidb-lightning/tidb-backend/','/tidb/stable/tidb-lightning-tidb-backend']
+aliases: ['/docs/stable/tidb-lightning/tidb-lightning-tidb-backend/','/docs/stable/reference/tools/tidb-lightning/tidb-backend/','/tidb/stable/tidb-lightning-tidb-backend','/docs/v4.0/tidb-lightning/tidb-lightning-tidb-backend/']
 ---
 
 # TiDB Lightning Backends
