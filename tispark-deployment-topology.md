@@ -3,11 +3,11 @@ title: TiSpark Deployment Topology
 summary: Learn the deployment topology of TiSpark using TiUP based on the minimal TiDB topology.
 ---
 
+# TiSpark Deployment Topology
+
 > **Warning:**
 >
 > TiSpark support in the TiUP cluster is still an experimental feature. It is **NOT** recommended to use it in the production environment.
-
-# TiSpark Deployment Topology
 
 This document introduces the TiSpark deployment topology and how to deploy TiSpark based on the minimum cluster topology.
 
