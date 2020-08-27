@@ -30,7 +30,7 @@ INSERT INTO t1 VALUES (1),(2),(3);
 ADMIN CHECKSUM TABLE t1;
 ```
 
-```
+```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment);
 Query OK, 0 rows affected (0.11 sec)
 
