@@ -79,7 +79,7 @@ From the output above:
 
 - Job 59 is currently in progress (`STATE` of `running`). The schema state is currently in `write reorganization`, but will switch to `public` once the task is completed to note that the change can be observed publicly by user sessions. The `end_time` column is also `NULL` indicating that the completion time for the job is currently not known.
 
-- Job 60 is an add index job, which is currently queued waiting for job 59 to complete. When job 59 completes, the `STATE` of job 60 will switch to `running`.
+- Job 60 is an `add index` job, which is currently queued waiting for job 59 to complete. When job 59 completes, the `STATE` of job 60 will switch to `running`.
 
 - For desctuctive changes such as dropping an index or dropping a table, the `SCHEMA_STATE` will change to `none` when the job is complete. For addative changes, the `SCHEMA_STATE` will change to `public`.
 
