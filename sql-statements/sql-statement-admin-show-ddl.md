@@ -34,7 +34,7 @@ To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
 ADMIN SHOW DDL;
 ```
 
-```
+```sql
 mysql> ADMIN SHOW DDL;
 +------------+--------------------------------------+---------------+--------------+--------------------------------------+-------+
 | SCHEMA_VER | OWNER_ID                             | OWNER_ADDRESS | RUNNING_JOBS | SELF_ID                              | QUERY |
