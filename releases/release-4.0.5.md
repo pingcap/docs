@@ -127,9 +127,10 @@ TiDB version: 4.0.5
 
 + PD
 
-    - Fix the bug that the TSO request might fail at the time of leader change [#2666](https://github.com/pingcap/pd/pull/2666)
-    - Fix the issue that sometimes Region replicas cannot be scheduled to the optimal state when placement rules are enabled [#2720](https://github.com/pingcap/pd/pull/2720)
-    - Fix the issue that `Balance Leader` does not work when placement rules are enabled [#2726](https://github.com/pingcap/pd/pull/2726)
+    - Fix the bug that the TSO request might fail at the time of leader change [#2666](https://github.com/tikv/pd/pull/2666)
+    - Fix the issue that sometimes Region replicas cannot be scheduled to the optimal state when placement rules are enabled [#2720](https://github.com/tikv/pd/pull/2720)
+    - Fix the issue that `Balance Leader` does not work when placement rules are enabled [#2726](https://github.com/tikv/pd/pull/2726)
+    - Fix the issue that unhealthy stores are not filtered from store load statistics [#2805](https://github.com/tikv/pd/pull/2805)
 
 + TiFlash
 
