@@ -1,7 +1,6 @@
 ---
 title: SHOW GRANTS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW GRANTS for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-show-grants/','/docs/dev/reference/sql/statements/show-grants/']
 ---
 
@@ -62,7 +61,7 @@ mysql> SHOW GRANTS FOR u1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

@@ -1,7 +1,6 @@
 ---
 title: Time Zone Support
 summary: Learn how to set the time zone and its format.
-category: how-to
 aliases: ['/docs/dev/configure-time-zone/','/docs/dev/how-to/configure/time-zone/']
 ---
 
@@ -109,4 +108,4 @@ In this example, no matter how you adjust the value of the time zone, the value 
 > **Note:**
 >
 > - Time zone is involved during the conversion of the value of Timestamp and Datetime, which is handled based on the current `time_zone` of the session.
-> - For data migration, you need to pay special attention to the time zone setting of the master database and the slave database.
+> - For data migration, you need to pay special attention to the time zone setting of the primary database and the secondary database.

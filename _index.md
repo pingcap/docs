@@ -1,13 +1,12 @@
 ---
 title: TiDB Introduction
 summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
-category: introduction
 aliases: ['/docs/dev/']
 ---
 
 # TiDB Introduction
 
-[TiDB](https://github.com/pingcap/tidb) ("Ti" stands for Titanium) is an open-source, distributed, NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. TiDB can be deployed on-premise or in-cloud.
+[TiDB](https://github.com/pingcap/tidb) (/’taɪdiːbi:/, "Ti" stands for Titanium) is an open-source, distributed, NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. TiDB can be deployed on-premise or in-cloud.
 
 Designed for the cloud, TiDB provides flexible scalability, reliability and security on the cloud platform. Users can elastically scale TiDB to meet the requirements of their changing workloads. [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview) helps manage TiDB on Kubernetes and automates operating tasks, which makes TiDB easier to deploy on any cloud that provides managed Kubernetes. [TiDB Cloud](https://pingcap.com/products/tidbcloud) (Beta), the fully-managed TiDB service, is the easiest, most economical, and most resilient way to unlock the full power of [TiDB in the cloud](https://docs.pingcap.com/tidbcloud/beta), allowing you to deploy and run TiDB clusters with just a few clicks.
 
@@ -17,8 +16,11 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 
 - [TiDB Introduction](/overview.md)
 - [Basic Features](/basic-features.md)
+- [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
 - [Compatibility with MySQL](/mysql-compatibility.md)
 - [Usage Limitations](/tidb-limitations.md)
+- [TiDB Adopters](/adopters.md)
+- [Credits](/credits.md)
 
 </NavColumn>
 
@@ -36,8 +38,8 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 - [Hardware and Software Requirements](/hardware-and-software-requirements.md)
 - [Check Environment and Configuration](/check-before-deployment.md)
 - [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md)
-- [Use TiFlash for Analytical Processing](/tiflash/use-tiflash.md)
-- [Deploy TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.1)
+- [Use TiFlash for Analytical Processing](/tiflash/tiflash-overview.md)
+- [Deploy TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 </NavColumn>
 
@@ -79,7 +81,8 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
 - [Identify Slow Queries](/identify-slow-queries.md)
-- [SQL Diagnostics](/system-tables/system-table-sql-diagnostics.md)
+- [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
+- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
 - [Troubleshoot the TiDB Cluster](/troubleshoot-tidb-cluster.md)
 - [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
 - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
@@ -89,7 +92,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 <NavColumn>
 <ColumnTitle>Reference</ColumnTitle>
 
-- [TiDB Architecture](/architecture.md)
+- [TiDB Architecture](/tidb-architecture.md)
 - [Key Monitoring Metrics](/grafana-overview-dashboard.md)
 - [Enable TLS](/enable-tls-between-clients-and-servers.md)
 - [Privilege Management](/privilege-management.md)
@@ -101,9 +104,12 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 <NavColumn>
 <ColumnTitle>FAQs</ColumnTitle>
 
-- [TiDB FAQs](/faq/tidb-faq.md)
-- [FAQs After Upgrade](/faq/upgrade-faq.md)
-- [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
+- [Product FAQs](/faq/tidb-faq.md)
+- [High Availability FAQs](/faq/high-availability-faq.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [Deploy and Maintain FAQs](/faq/deploy-and-maintain-faq.md)
+- [Upgrade and After Upgrade FAQs](/faq/upgrade-faq.md)
+- [Migration FAQs](/faq/migration-tidb-faq.md)
 
 </NavColumn>
 </NavColumns>

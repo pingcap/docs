@@ -1,7 +1,6 @@
 ---
 title: RENAME TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of RENAME TABLE for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-rename-table/','/docs/dev/reference/sql/statements/rename-table/']
 ---
 
@@ -47,7 +46,7 @@ mysql> SHOW TABLES;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

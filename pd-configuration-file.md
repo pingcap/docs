@@ -1,7 +1,6 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
-category: reference
 aliases: ['/docs/dev/pd-configuration-file/','/docs/dev/reference/configuration/pd-server/configuration-file/']
 ---
 
@@ -13,21 +12,76 @@ The PD configuration file supports more options than command-line parameters. Yo
 
 This document only describes parameters that are not included in command-line parameters. Check [here](/command-line-flags-for-pd-configuration.md) for the command line parameters.
 
-### `lease`
+### `name`
 
-+ The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
-+ Default value: `3`
-+ unit: second
+- The unique name of a PD node
+- Default value: `"pd"`
+- To start multiply PD nodes, use a unique name for each node.
 
-### `tso-save-interval`
+### `data-dir`
 
-+ The interval for PD to allocate TSOs for persistent storage in etcd
-+ Default value: `3` seconds
+- The directory in which PD stores data
+- Default value: `default.${name}"`
+
+### `client-urls`
+
+- The list of client URLs to be listened to by PD
+- Default value: `"http://127.0.0.1:2379"`
+- When you deploy a cluster, you must specify the IP address of the current host as `client-urls` (for example, `"http://192.168.100.113:2379"`). If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
+
+### `advertise-client-urls`
+
+- The list of advertise URLs for the client to access PD
+- Default value: `"${client-urls}"`
+- In some situations such as in the Docker or NAT network environment, if a client cannot access PD through the default client URLs listened to by PD, you must manually set the advertise client URLs.
+- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-client-urls` to `"http://192.168.100.113:2380"`. The client can find this service through `"http://192.168.100.113:2380"`.
+
+### `peer-urls`
+
+- The list of peer URLs to be listened to by a PD node
+- Default value: `"http://127.0.0.1:2380"`
+- When you deploy a cluster, you must specify `peer-urls` as the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
+
+### `advertise-peer-urls`
+
+- The list of advertise URLs for other PD nodes (peers) to access a PD node
+- Default: `"${peer-urls}"`
+- In some situations such as in the Docker or NAT network environment, if the other nodes (peers) cannot access the PD node through the default peer URLs listened to by this PD node, you must manually set the advertise peer URLs.
+- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-peer-urls` to `"http://192.168.100.113:2380"`. The other PD nodes can find this service through `"http://192.168.100.113:2380"`.
+
+### `initial-cluster`
+
+- The initial cluster configuration for bootstrapping
+- Default value: `"{name}=http://{advertise-peer-url}"`
+- For example, if `name` is "pd", and `advertise-peer-urls` is `"http://192.168.100.113:2380"`, the `initial-cluster` is `"pd=http://192.168.100.113:2380"`.
+- If you need to start three PD servers, the `initial-cluster` might be:
+
+    ```
+    pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
+    ```
 
 ### `initial-cluster-state`
 
 + The initial state of the cluster
-+ Default value: `new`
++ Default value: `"new"`
+
+### `initial-cluster-token`
+
++ Identifies different clusters during the bootstrap phase.
++ Default value: `"pd-cluster"`
++ If multiple clusters that have nodes with same configurations are deployed successively, you must specify different tokens to isolate different cluster nodes.
+
+### `lease`
+
++ The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
++ Default value: `3`
++ Unit: second
+
+### `tso-save-interval`
+
++ The interval for PD to allocate TSOs for persistent storage in etcd
++ Default value: `3`
++ Unit: second
 
 ### `enable-prevote`
 
@@ -259,6 +313,12 @@ Configuration items related to replicas
 + Default value: `[]`
 + [Cluster topology configuration](/location-awareness.md)
 
+### `isolation-level`
+
++ The minimum topological isolation level of a TiKV cluster
++ Default value: `""`
++ [Cluster topology configuration](/location-awareness.md)
+
 ### `strictly-match-label`
 
 + Enables the strict check for whether the TiKV label matches PD's `location-labels`.
@@ -289,14 +349,29 @@ Configuration items related to labels
 
 Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built in PD.
 
+### `tidb-cacert-path`
+
++ The path of the root CA certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
++ Default value: `""`
+
+### `tidb-cert-path`
+
++ The path of the SSL certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
++ Default value: `""`
+
+### `tidb-key-path`
+
++ The path of the SSL private key file. You can configure this path when you connect to TiDB's SQL services using TLS.
++ Default value: `""`
+
 ### `public-path-prefix`
 
 + When TiDB Dashboard is accessed behind a reverse proxy, this item sets the public URL path prefix for all web resources.
 + Default value: `/dashboard`
 + Do **not** modify this configuration item when TiDB Dashboard is accessed not behind a reverse proxy; otherwise, access issues might occur. See [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) for details.
 
-### `disable-telemetry`
+### `enable-telemetry`
 
-+ Determines whether to disable the telemetry collection feature in TiDB Dashboard.
-+ Default value: `false`
++ Determines whether to enable the telemetry collection feature in TiDB Dashboard.
++ Default value: `true`
 + See [Telemetry](/telemetry.md) for details.

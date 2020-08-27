@@ -1,20 +1,19 @@
 ---
 title: TiDB Lightning Monitoring
 summary: Learn about the monitor configuration and monitoring metrics of TiDB Lightning.
-category: reference
 aliases: ['/docs/dev/tidb-lightning/monitor-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/monitor/']
 ---
 
 # TiDB Lightning Monitoring
 
-Both `tidb-lightning` and `tikv-importer` supports metrics collection via [Prometheus](https://prometheus.io/). This document introduces the monitor configuration and monitoring metrics of TiDB Lightning.
+`tidb-lightning` supports metrics collection via [Prometheus](https://prometheus.io/). This document introduces the monitor configuration and monitoring metrics of TiDB Lightning.
 
 ## Monitor configuration
 
 - If TiDB Lightning is installed using TiDB Ansible, simply add the servers to the `[monitored_servers]` section in the `inventory.ini` file. Then the Prometheus server can collect their metrics.
 - If TiDB Lightning is manually installed, follow the instructions below.
 
-The metrics of `tidb-lightning` and `tikv-importer` can be gathered directly by Prometheus as long as it is discovered. You can set the metrics port in `tidb-lightning.toml`:
+The metrics of `tidb-lightning` can be gathered directly by Prometheus as long as it is discovered. You can set the metrics port in `tidb-lightning.toml`:
 
 ```toml
 [lightning]
@@ -36,7 +35,7 @@ You need to configure Prometheus to make it discover the servers. For instance, 
 ```yaml
 ...
 scrape_configs:
-  - job_name: 'lightning'
+  - job_name: 'tidb-lightning'
     static_configs:
       - targets: ['192.168.20.10:8289']
   - job_name: 'tikv-importer'

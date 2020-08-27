@@ -1,7 +1,6 @@
 ---
 title: SHOW TABLE NEXT_ROW_ID
 summary: Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-show-table-next-rowid/']
 ---
 
@@ -65,7 +64,7 @@ show table t next_row_id;
 
 ## MySQL compatibility
 
-`SHOW TABLE NEXT_ROW_ID` is specific to TiDB.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

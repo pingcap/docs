@@ -1,6 +1,5 @@
 ---
 title: TiDB Ecosystem Tools Overview
-category: reference
 aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user-guide/','/docs/dev/how-to/migrate/from-mysql/','/docs/dev/how-to/migrate/incrementally-from-mysql/','/docs/dev/how-to/migrate/overview/']
 ---
 
@@ -8,9 +7,9 @@ aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user
 
 This document introduces the functionalities of TiDB ecosystem tools and their relationship.
 
-## Full data export 
+## Full data export
 
-[Dumpling](/export-or-backup-using-dumpling.md) is a tool for the logical full data export from MySQL or TiDB.
+[Dumpling](/dumpling-overview.md) is a tool for the logical full data export from MySQL or TiDB.
 
 The following are the basics of Dumpling:
 
@@ -23,10 +22,11 @@ The following are the basics of Dumpling:
 
 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) (Lightning) is a tool used for the full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via Dumpling or CSV data source.
 
-TiDB Lightning supports two modes:
+TiDB Lightning supports three modes:
 
-- `importer`: This mode uses tikv-importer as the backend, which is usually for importing a large amount of data (at the TB level). During the import, the cluster cannot provide services.
-- `tidb`: This mode uses TiDB/MySQL as the backend, which is slower than the `importer` mode but can be performed online. It also supports importing data to MySQL.
+- `local`: TiDB Lightning parses data into ordered key-value pairs and directly imports them into TiKV. This mode is usually for importing a large amount of data (at the TB level) to a new cluster. During the import, the cluster cannot provide services.
+- `importer`: This mode is similar to the `local` mode. To use this mode, you need to deploy an additional component `tikv-importer` to help import key-value pairs. If the target cluster is in v4.0 or later versions, it is recommended to use the `local` mode.
+- `tidb`: This mode uses TiDB/MySQL as the backend, which is slower than the `local` mode and `importer` mode but can be performed online. It also supports importing data to MySQL.
 
 The following are the basics of TiDB Lightning:
 
@@ -38,7 +38,7 @@ The following are the basics of TiDB Lightning:
 
 > **Note:**
 >
-> The Loader tool is no longer maintained. For scenarios related to Loader, it is recommended that you use the `tidb` mode of TiDB Lighting instead.
+> The Loader tool is no longer maintained. For scenarios related to Loader, it is recommended that you use the `tidb` mode of TiDB Lighting instead. For details, see [TiDB Lightning TiDB backends](/tidb-lightning/tidb-lightning-backends.md#migrating-from-loader-to-tidb-lightning-tidb-backend).
 
 ## Backup and restore
 
@@ -77,7 +77,7 @@ If the data volume is below the TB level, it is recommended to migrate data from
 
 If the data volume is at the TB level, take the following steps:
 
-1. Use [Dumpling](/export-or-backup-using-dumpling.md) to export the full data from MySQL/MariaDB.
+1. Use [Dumpling](/dumpling-overview.md) to export the full data from MySQL/MariaDB.
 2. Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import the data exported in Step 1 to the TiDB cluster.
 3. Use DM to migrate the incremental data from MySQL/MariaDB to TiDB.
 

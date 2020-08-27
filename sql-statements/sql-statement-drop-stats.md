@@ -1,7 +1,6 @@
 ---
 title: DROP STATS
 summary: An overview of the usage of DROP STATS for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-drop-stats/']
 ---
 
@@ -65,6 +64,10 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```sql
 Empty set (0.00 sec)
 ```
+
+## MySQL compatibility
+
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

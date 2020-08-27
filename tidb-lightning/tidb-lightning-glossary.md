@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Glossary
 summary: List of special terms used in TiDB Lightning.
-category: glossary
 aliases: ['/docs/dev/tidb-lightning/tidb-lightning-glossary/','/docs/dev/reference/tools/tidb-lightning/glossary/']
 ---
 
@@ -33,7 +32,7 @@ Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREM
 
 Back end is the destination where TiDB Lightning sends the parsed result. Also spelled as "backend".
 
-See [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for details.
+See [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md) for details.
 
 <!-- C -->
 

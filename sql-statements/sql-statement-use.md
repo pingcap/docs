@@ -1,7 +1,6 @@
 ---
 title: USE | TiDB SQL Statement Reference
 summary: An overview of the usage of USE for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-use/','/docs/dev/reference/sql/statements/use/']
 ---
 
@@ -76,9 +75,7 @@ mysql> SHOW TABLES;
 
 ## MySQL compatibility
 
-In TiDB 2.0 versions, you can use `USE` statements to access any database. In TiDB 3.0 or later versions, TiDB checks whether you have the privilege to access the database when you use `USE` statements.
-
-Currently, `USE` statements are understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

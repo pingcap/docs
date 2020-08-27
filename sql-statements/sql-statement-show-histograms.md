@@ -1,7 +1,6 @@
 ---
 title: SHOW STATS_HISTOGRAMS
 summary: An overview of the usage of SHOW HISTOGRAMS for TiDB database。
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-show-histograms/']
 ---
 
@@ -60,7 +59,7 @@ show stats_histograms where table_name = 't2';
 
 ## MySQL compatibility
 
-`SHOW STATS_HISTOGRAMS` is a TiDB specific syntax, and thus not compatible with MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

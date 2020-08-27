@@ -1,7 +1,6 @@
 ---
 title: SHOW PROFILES
 summary: An overview of the usage of SHOW PROFILES for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-show-profiles/']
 ---
 
@@ -26,3 +25,7 @@ SHOW PROFILES
 ```
 Empty set (0.00 sec)
 ```
+
+## MySQL compatibility
+
+This statement is included only for compatibility with MySQL. Executing `SHOW PROFILES` always returns an empty result.

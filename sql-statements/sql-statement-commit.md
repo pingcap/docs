@@ -1,7 +1,6 @@
 ---
 title: COMMIT | TiDB SQL Statement Reference
 summary: An overview of the usage of COMMIT for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-commit/','/docs/dev/reference/sql/statements/commit/']
 ---
 
@@ -39,9 +38,10 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-* In MySQL, with the exception of Group Replication with multiple primaries, it is not typical that a `COMMIT` statement could result in an error. By contrast, TiDB uses optimistic concurrency control and conflicts may result in `COMMIT` returning an error.
-* Be default, `UNIQUE` and `PRIMARY KEY` constraint checks are deferred until statement commit. This behavior can be changed by setting `tidb_constraint_check_in_place=TRUE`.
-* TiDB only has syntactic support for `CompletionTypeWithinTransaction`. Closing the connection or continuing to open a new transaction after the transaction is committed is not supported.
+* By default, TiDB 3.0.8 and later versions use [Pessimistic Locking](/pessimistic-transaction.md). When using [Optimistic Locking](/optimistic-transaction.md), it is important to consider that a `COMMIT` statement might fail because rows have been modified by another transaction.
+* When Optimistic Locking is enabled, `UNIQUE` and `PRIMARY KEY` constraint checks are deferred until statement commit. This results in additional situations where a a `COMMIT` statement might fail. This behavior can be changed by setting `tidb_constraint_check_in_place=TRUE`.
+* TiDB parses but ignores the syntax `ROLLBACK AND [NO] RELEASE`. This functionality is used in MySQL to disconnect the client session immediately after committing the transaction. In TiDB, it is recommended to instead use the `mysql_close()` functionality of your client driver.
+* TiDB parses but ignores the syntax `ROLLBACK AND [NO] CHAIN`. This functionality is used in MySQL to immediately start a new transaction with the same isolation level while the current transaction is being committed. In TiDB, it is recommended to instead start a new transaction.
 
 ## See also
 

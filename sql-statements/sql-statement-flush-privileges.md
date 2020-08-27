@@ -1,7 +1,6 @@
 ---
 title: FLUSH PRIVILEGES | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH PRIVILEGES for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-flush-privileges/','/docs/dev/reference/sql/statements/flush-privileges/']
 ---
 
@@ -33,7 +32,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

@@ -1,7 +1,6 @@
 ---
 title: Statement Summary Tables
 summary: Learn about Statement Summary Table in TiDB.
-category: reference
 aliases: ['/docs/dev/statement-summary-tables/','/docs/dev/reference/performance/statement-summary/']
 ---
 
@@ -70,6 +69,8 @@ The following is a sample output of querying `statements_summary`:
   ...........
               AVG_MEM: 103
               MAX_MEM: 103
+              AVG_DISK: 65535
+              MAX_DISK: 65535
     AVG_AFFECTED_ROWS: 0
            FIRST_SEEN: 2020-01-02 11:12:54
             LAST_SEEN: 2020-01-02 11:25:24
@@ -234,6 +235,8 @@ Fields related to TiDB server:
 - `MAX_COMPILE_LATENCY`: The maximum latency of the compiler.
 - `AVG_MEM`: The average memory (byte) used.
 - `MAX_MEM`: The maximum memory (byte) used.
+- `AVG_DISK`: The average disk space (byte) used.
+- `MAX_DISK`: The maximum disk space (byte) used.
 
 Fields related to TiKV Coprocessor task:
 

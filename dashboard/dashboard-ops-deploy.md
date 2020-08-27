@@ -1,7 +1,6 @@
 ---
 title: Deploy TiDB Dashboard
 summary: Learn how to deploy TiDB Dashboard.
-category: how-to
 aliases: ['/docs/dev/dashboard/dashboard-ops-deploy/']
 ---
 
@@ -51,7 +50,10 @@ http://192.168.0.123:2379/dashboard/
 
 > **Note:**
 >
-> This feature is available only in the later version of the `tiup cluster` deployment tool (v1.0.3 or later). You can upgrade `tiup cluster` with the following commands:
+> This feature is available only in the later version of the `tiup cluster` deployment tool (v1.0.3 or later).
+>
+> <details>
+> <summary>Upgrade TiUP Cluster</summary>
 >
 > {{< copyable "shell-regular" >}}
 >
@@ -59,6 +61,8 @@ http://192.168.0.123:2379/dashboard/
 > tiup update --self
 > tiup update cluster --force
 > ```
+>
+> </details>
 
 ### Switch to another PD instance to serve TiDB Dashboard
 

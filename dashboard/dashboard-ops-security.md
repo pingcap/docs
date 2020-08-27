@@ -1,7 +1,6 @@
 ---
 title: Secure TiDB Dashboard
 summary: Learn how to improve the security of TiDB Dashboard.
-category: how-to
 aliases: ['/docs/dev/dashboard/dashboard-ops-security/']
 ---
 
@@ -51,7 +50,10 @@ The output is the actual TiDB Dashboard address.
 
 > **Note:**
 >
-> This feature is available only in the later version of the `tiup cluster` deployment tool (v1.0.3 or later). You can upgrade `tiup cluster` with the following commands:
+> This feature is available only in the later version of the `tiup cluster` deployment tool (v1.0.3 or later).
+>
+> <details>
+> <summary>Upgrade TiUP Cluster</summary>
 >
 > {{< copyable "shell-regular" >}}
 >
@@ -59,6 +61,8 @@ The output is the actual TiDB Dashboard address.
 > tiup update --self
 > tiup update cluster --force
 > ```
+>
+> </details>
 
 The following is a sample output:
 
@@ -73,6 +77,12 @@ In this example, the firewall needs to be configured with inbound access for the
 As mentioned in [Use a firewall to block untrusted access](#use-a-firewall-to-block-untrusted access), the services provided under the PD client port include not only TiDB Dashboard (located at <http://IP:2379/dashboard/>), but also other privileged interfaces in PD (such as <http://IP:2379/pd/api/v1/members>). Therefore, when using a reverse proxy to provide TiDB Dashboard to the external network, ensure that the services **ONLY** with the `/dashboard` prefix are provided (**NOT** all services under the port) to avoid that the external network can access the privileged interface in PD through the reverse proxy.
 
 It is recommended that you see [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) to learn a safe and recommended reverse proxy configuration.
+
+## Enable TLS for reverse proxy
+
+To further enhance the security of the transport layer, you can enable TLS for reverse proxy, and even introduce mTLS to authenticate user certificates.
+
+See [Configuring HTTPS servers](http://nginx.org/en/docs/http/configuring_https_servers.html) and [HAProxy SSL Termination](https://www.haproxy.com/blog/haproxy-ssl-termination/) for more details.
 
 ## Other recommended safety measures
 

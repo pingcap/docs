@@ -1,7 +1,6 @@
 ---
 title: SHOW [FULL] COLUMNS FROM | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-show-columns-from/','/docs/dev/reference/sql/statements/show-columns-from/']
 ---
 
@@ -150,7 +149,7 @@ mysql> show full columns from mysql.user;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

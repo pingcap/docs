@@ -1,7 +1,6 @@
 ---
 title: DROP ROLE | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP ROLE for the TiDB database.
-category: reference
 ---
 
 # DROP ROLE
@@ -201,7 +200,7 @@ ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with roles, which are a feature of MySQL 8.0. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with roles, which are a feature of MySQL 8.0. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

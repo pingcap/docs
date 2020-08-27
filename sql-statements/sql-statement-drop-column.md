@@ -1,7 +1,6 @@
 ---
 title: DROP COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP COLUMN for the TiDB database.
-category: reference
 aliases: ['/docs/dev/sql-statements/sql-statement-drop-column/','/docs/dev/reference/sql/statements/drop-column/']
 ---
 
@@ -78,7 +77,7 @@ mysql> SELECT * FROM t1;
 ## MySQL compatibility
 
 * Dropping multiple columns in the same statement is not supported.
-* Dropping primary key columns or index columns is not supported.
+* Dropping primary key columns or columns covered by the composite index is not supported.
 
 ## See also
 
