@@ -18,8 +18,8 @@ tiup cluster
 
 ```
 The component `cluster` is not installed; downloading from repository.
-download https://tiup-mirrors.pingcap.com/cluster-v0.4.9-darwin-amd64.tar.gz 15.32 MiB / 15.34 MiB 99.90% 10.04 MiB p/s                                                   
-Starting component `cluster`: /Users/joshua/.tiup/components/cluster/v0.4.9/cluster 
+download https://tiup-mirrors.pingcap.com/cluster-v0.4.9-darwin-amd64.tar.gz 15.32 MiB / 15.34 MiB 99.90% 10.04 MiB p/s
+Starting component `cluster`: /Users/joshua/.tiup/components/cluster/v0.4.9/cluster
 Deploy a TiDB cluster for production
 
 Usage:
@@ -197,13 +197,13 @@ The `Status` column uses `Up` or `Down` to indicate whether the service is runni
 
 For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` indicates that the PD node is a Leader, and `|UI` indicates that [TiDB Dashboard](/dashboard/dashboard-intro.md) is running on the PD node.
 
-## Scale in a node
+## Scale in a cluster
 
 > **Note:**
 >
 > This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
 
-Scaling in a node means taking the node offline. This operation removes the node from the cluster and deletes the remaining data files.
+Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining data files.
 
 Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiDB Binlog components.
 
@@ -229,7 +229,7 @@ tiup cluster scale-in <cluster-name> -N <node-id>
 
 To use this command, you need to specify at least two flags: the cluster name and the node ID. The node ID can be obtained by using the `tiup cluster display` command in the previous section.
 
-For example, to scale in the TiKV node on `172.16.5.140`, run the following command:
+For example, to make the TiKV node on `172.16.5.140` offline, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -266,7 +266,7 @@ ID                  Role        Host          Ports        Status     Data Dir  
 
 After PD schedules the data on the node to other TiKV nodes, this node will be deleted automatically.
 
-## Scale out a node
+## Scale out a cluster
 
 > **Note:**
 >
@@ -278,7 +278,7 @@ When you scale out PD, the node is added to the cluster by `join`, and the confi
 
 All services conduct correctness validation when they are scaled out. The validation results show whether the scaling-out is successful.
 
-To scale out a TiKV node and a PD node in the `tidb-test` cluster, take the following steps:
+To add a TiKV node and a PD node in the `tidb-test` cluster, take the following steps:
 
 1. Create a `scale.yaml` file, and add IPs of the new TiKV and PD nodes:
 
@@ -288,10 +288,10 @@ To scale out a TiKV node and a PD node in the `tidb-test` cluster, take the foll
 
     ```yaml
     ---
-    
+
     pd_servers:
       - ip: 172.16.5.140
-    
+
     tikv_servers:
       - ip: 172.16.5.140
     ```
@@ -429,6 +429,10 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 ```
 
 ## Import TiDB Ansible cluster
+
+> **Note:**
+>
+> Currently, TiUP cluster's support for TiSpark is still **experimental**. It is not supported to import a TiDB cluster with TiSpark enabled.
 
 Before TiUP is released, TiDB Ansible is often used to deploy TiDB clusters. To enable TiUP to take over the cluster deployed by TiDB Ansible, use the `import` command.
 
@@ -607,3 +611,18 @@ The CPU thread count check, memory size check, and disk performance check are di
 When running the checks, if the `--apply` flag is specified, the program automatically repairs the failed items. Automatic repair is limited to some items that can be adjusted by modifying the configuration or system parameters. Other unrepaired items need to be handled manually according to the actual situation.
 
 Environment checks are not necessary for deploying a cluster. For the production environment, it is recommended to perform environment checks and pass all check items before deployment. If not all the check items are passed, the cluster might be deployed and run normally, but the best performance might not be obtained.
+
+## Migrate control machine and back up TiUP data
+
+The TiUP data is stored in the `.tiup` directory in the user's home directory. To migrate the control machine, you can take the following steps to copy the `.tiup` directory to the corresponding target machine:
+
+1. Execute `tar czvf tiup.tar.gz .tiup` in the home directory of the original machine.
+2. Copy `tip.tar.gz` to the home directory of the target machine.
+3. Execute `tar xzvf tiup.tar.gz` in the home directory of the target machine.
+4. Add the `.tiup` directory to the `PATH` environment variable.
+
+    If you use `bash` and you are a `tidb` user, you can add `export PATH=/home/tidb/.tiup/bin:$PATH` in `~/.bashr` and execute `source ~/.bashrc`. Then make corresponding adjustments according to the shell and the user you use.
+
+> **Note:**
+>
+> It is recommended that you back up the `.tiup` directory regularly to avoid the loss of TiUP data caused by abnormal conditions, such as disk damage of the control machine. 

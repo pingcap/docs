@@ -97,6 +97,10 @@ The following topology documents provide a cluster configuration template for ea
 
     This is to deploy TiDB Binlog along with the minimal cluster topology. TiDB Binlog is the widely used component for replicating incremental data. It provides near real-time backup and replication.
 
+- [TiSpark deployment topology](/tispark-deployment-topology.md)
+
+    This is to deploy TiSpark along with the minimal cluster topology. TiSpark is a component built for running Apache Spark on top of TiDB/TiKV to answer the OLAP queries. Currently, TiUP cluster's support for TiSpark is still **experimental**.
+
 - [Hybrid deployment topology](/hybrid-deployment-topology.md)
 
     This is to deploy multiple instances on a single machine. You need to add extra configurations for the directory, port, resource ratio, and label.
@@ -104,6 +108,13 @@ The following topology documents provide a cluster configuration template for ea
 - [Geo-distributed deployment topology](/geo-distributed-deployment-topology.md)
 
     This topology takes the typical architecture of three data centers in two cities as an example. It introduces the geo-distributed deployment architecture and the key configuration that requires attention.
+
+> **Note:**
+>
+> - For parameters that should be globally effective, configure these parameters of corresponding components in the `server_configs` section of the configuration file.
+> - For parameters that should be effective on a specific node, configure these parameters in the `config` of this node.
+> - Use `.` to indicate the subcategory of the configuration, such as `log.slow-threshold`. For more formats, see [TiUP configuration template](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml).
+> - For more parameter description, see [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml), [PD `config.toml.example`](https://github.com/pingcap/pd/blob/master/conf/config.toml), and [TiFlash configuration](/tiflash/tiflash-configuration.md).
 
 ## Step 4: Execute the deployment command
 
