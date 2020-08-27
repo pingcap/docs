@@ -52,14 +52,22 @@ TiDB version: 4.0.5
     - Refine the behaviors of `StrToInt` and `StrToFloat` and support converting JSON to the `date`, `time`, and `timestamp` types [#18159](https://github.com/pingcap/tidb/pull/18159)
     - Support limiting the memory usage of the `TableReader` executor [#18392](https://github.com/pingcap/tidb/pull/18392)
     - Avoid too many times of backoff when retrying the `batch cop` request [#18999](https://github.com/pingcap/tidb/pull/18999)
+    - Improve compatibility for `ALTER TABLE` algorithms [#19270](https://github.com/pingcap/tidb/pull/19270)
+    - Make the single partitioned table support `IndexJoin` on the inner side [#19151](https://github.com/pingcap/tidb/pull/19151)
+    - Support searching the log file even when the log includes invalid lines [#18579](https://github.com/pingcap/tidb/pull/18579)
 
 + PD
 
-    - Support scattering Regions in stores with special engines (like TiFlash) [#2706](https://github.com/pingcap/pd/pull/2706)
-    - Support the Region HTTP API to prioritize Region scheduling of a given key range [#2687](https://github.com/pingcap/pd/pull/2687)
-    - Improve the leader distribution after Region scattering [#2684](https://github.com/pingcap/pd/pull/2684)
-    - Add more tests and logs for the TSO request [#2678](https://github.com/pingcap/pd/pull/2678)
-    - Avoid invalid cache updates after the leader of a Region has changed [#2672](https://github.com/pingcap/pd/pull/2672)
+    - Support scattering Regions in stores with special engines (like TiFlash) [#2706](https://github.com/tikv/pd/pull/2706)
+    - Support the Region HTTP API to prioritize Region scheduling of a given key range [#2687](https://github.com/tikv/pd/pull/2687)
+    - Improve the leader distribution after Region scattering [#2684](https://github.com/tikv/pd/pull/2684)
+    - Add more tests and logs for the TSO request [#2678](https://github.com/tikv/pd/pull/2678)
+    - Avoid invalid cache updates after the leader of a Region has changed [#2672](https://github.com/tikv/pd/pull/2672)
+    - Add an option to allow `store.GetLimit` to return the tombstone stores [#2743](https://github.com/tikv/pd/pull/2743)
+    - Support synchronizing the Region leader change between the PD leader and followers [#2795](https://github.com/tikv/pd/pull/2795)
+    - Add commands for querying the GC safepoint service [#2797](https://github.com/tikv/pd/pull/2797)
+    - Replace the `region.Clone` call in filters to improve performance [#2801](https://github.com/tikv/pd/pull/2801)
+    - Add an option to disable updating Region flow cache to improve the performance of the large cluster [#2848](https://github.com/tikv/pd/pull/2848)
 
 + TiFlash
 
