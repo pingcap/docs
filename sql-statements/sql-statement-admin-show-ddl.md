@@ -103,7 +103,7 @@ ADMIN SHOW DDL JOBS;
 ADMIN SHOW DDL JOB QUERIES 51;
 ```
 
-```
+```sql
 mysql> ADMIN SHOW DDL JOB QUERIES 51;
 +--------------------------------------------------------------+
 | QUERY                                                        |
