@@ -81,7 +81,7 @@ From the output above:
 
 - Job 60 is an `add index` job, which is currently queued waiting for job 59 to complete. When job 59 completes, the `STATE` of job 60 will switch to `running`.
 
-- For desctuctive changes such as dropping an index or dropping a table, the `SCHEMA_STATE` will change to `none` when the job is complete. For addative changes, the `SCHEMA_STATE` will change to `public`.
+- For destructive changes such as dropping an index or dropping a table, the `SCHEMA_STATE` will change to `none` when the job is complete. For additive changes, the `SCHEMA_STATE` will change to `public`.
 
 To limit the number of rows shown by specifying a number and where condition. i.e.
 
