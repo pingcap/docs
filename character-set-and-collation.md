@@ -295,6 +295,10 @@ mysql> SHOW COLLATION WHERE Charset = 'utf8mb4';
 27 rows in set (0.00 sec)
 ```
 
+> **Warning:**
+>
+> TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+
 > **Note:**
 >
 > The output of `SHOW COLLATION` and `SELECT * FROM information_schema.collations` includes collations which TiDB does not support. This is fixed in TiDB 3.0, where only supported collations are shown.
