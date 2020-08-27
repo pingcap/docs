@@ -83,7 +83,7 @@ From the output above:
 
 - For destructive changes such as dropping an index or dropping a table, the `SCHEMA_STATE` will change to `none` when the job is complete. For additive changes, the `SCHEMA_STATE` will change to `public`.
 
-To limit the number of rows shown by specifying a number and where condition. i.e.
+To limit the number of rows shown, specify a number and a where condition:
 
 ```sql
 ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
