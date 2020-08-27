@@ -24,6 +24,10 @@ mysql> SHOW CHARACTER SET;
 5 rows in set (0.00 sec)
 ```
 
+> **Warning:**
+>
+> TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+
 > **Note:**
 >
 > + In `TiDB`, `utf8` is treated as `utf8mb4`.
