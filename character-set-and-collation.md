@@ -24,6 +24,29 @@ mysql> SHOW CHARACTER SET;
 5 rows in set (0.00 sec)
 ```
 
+<<<<<<< HEAD
+=======
+TiDB supports the following collations:
+
+```sql
+mysql> show collation;
++-------------+---------+------+---------+----------+---------+
+| Collation   | Charset | Id   | Default | Compiled | Sortlen |
++-------------+---------+------+---------+----------+---------+
+| utf8mb4_bin | utf8mb4 |   46 | Yes     | Yes      |       1 |
+| latin1_bin  | latin1  |   47 | Yes     | Yes      |       1 |
+| binary      | binary  |   63 | Yes     | Yes      |       1 |
+| ascii_bin   | ascii   |   65 | Yes     | Yes      |       1 |
+| utf8_bin    | utf8    |   83 | Yes     | Yes      |       1 |
++-------------+---------+------+---------+----------+---------+
+5 rows in set (0.01 sec)
+```
+
+> **Warning:**
+>
+> TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+
+>>>>>>> 976ec8f... character set: include useful warning (#3730)
 > **Note:**
 >
 > + In `TiDB`, `utf8` is treated as `utf8mb4`.
