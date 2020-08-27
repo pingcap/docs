@@ -319,11 +319,11 @@ Before the node goes down, make sure that the number of remaining nodes in the T
 
 2. Wait for the TiFlash replicas of the related tables to be deleted. [Check the table replication progress](/tiflash/use-tiflash.md#check-the-replication-progress) and the replicas are deleted if the replication information of the related tables is not found.
 
-### 2. Remove a TiFlash node
+### 2. Perform the scale-in operation
 
 Next, perform the scale-in operation with one of the following solutions.
 
-#### Solution 1: Using TiUP to remove a TiFlash node
+#### Solution 1: Use TiUP to remove a TiFlash node
 
 1. First, confirm the name of the node to be taken down:
 
@@ -341,7 +341,7 @@ Next, perform the scale-in operation with one of the following solutions.
     tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000
     ```
 
-#### Solution 2: Manually remove the TiFlash node
+#### Solution 2: Manually remove a TiFlash node
 
 In special cases (such as when a node needs to be forcibly taken down), or if the TiUP scale-in operation fails, you can manually remove a TiFlash node with the following steps.
 
@@ -438,7 +438,7 @@ The steps to manually clean up the replication rules in PD are below:
 
 ## Scale in a TiCDC cluster
 
-If you want to remove a TiCDC node from the `10.0.1.4` host, take the following steps.
+If you want to remove the TiCDC node from the `10.0.1.4` host, take the following steps:
 
 1. Take the node offline:
 
