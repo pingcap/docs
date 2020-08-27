@@ -700,7 +700,7 @@ To create a cyclic replication task, take the following steps:
 >
 > Currently, outputting the historical value of a Row Changed Event is still an experimental feature. It is **NOT** recommended to use it in the production environment.
 
-Before v4.0.5, in the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Such a behavior neither supports the [new collation framework](/character-set-and-collation.md#new-framework-for-collations) introduced in TiDB v4.0 nor meets the need that the consumer ends of TiCDC Open Protocol use the historical value of a Row Changed Event.
+In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Such a behavior neither supports the [new collation framework](/character-set-and-collation.md#new-framework-for-collations) introduced in TiDB v4.0 nor meets the need that the consumer ends of TiCDC Open Protocol use the historical value of a Row Changed Event.
 
 Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Changed Event. To enable this feature, specify the following configuration in the `changefeed` configuration file at the root level:
 
