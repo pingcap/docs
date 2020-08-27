@@ -6,7 +6,7 @@ category: reference
 
 # ADMIN CHECKSUM TABLE
 
-The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data and indexes of a table. This statement is used by programs such as TiDB-Lightning to ensure that import operations have completed successfully.
+The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data and indexes of a table. This statement is used by programs such as TiDB Lightning to ensure that import operations have completed successfully.
 
 ## Synopsis
 
