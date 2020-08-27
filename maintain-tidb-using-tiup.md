@@ -181,7 +181,7 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 
 ## Rename the cluster
 
-After deploying and starting the cluster, you can rename the cluster with the `tiup cluster rename` command:
+After deploying and starting the cluster, you can rename the cluster using the `tiup cluster rename` command:
 
 {{< copyable "shell-regular" >}}
 
@@ -191,8 +191,8 @@ tiup cluster rename ${cluster-name} ${new-name}
 
 > **Note:**
 >
-> This operation restarts the monitoring system (Prometheus and Grafana).
-> After renaming the cluster, Grafana might leave some panels with the old cluster name, and you need to delete them manually.
+> + The operation of renaming a cluster restarts the monitoring system (Prometheus and Grafana).
+> + After a cluster is renamed, some panels with the old cluster name might remain on Grafana. You need to delete them manually.
 
 ## Stop the cluster
 
@@ -228,7 +228,7 @@ Similar to the `start` command, the `stop` command supports stopping some of the
 
 ## Clean up cluster data
 
-This operation stops all services and cleans up the data directory or/and log directory. The operation cannot be reverted, so proceed **with caution**.
+The operation of cleaning up cluster data stops all the services and cleans up the data directory or/and log directory. The operation cannot be reverted, so proceed **with caution**.
 
 - Clean up the data of all services in the cluster, but keep the logs:
 
@@ -239,6 +239,8 @@ This operation stops all services and cleans up the data directory or/and log di
     ```
 
 - Clean up the logs of all services in the cluster, but keep the data:
+
+    {{< copyable "shell-regular" >}}
 
     ```bash
     tiup cluster clean ${cluster-name} --log
@@ -260,7 +262,7 @@ This operation stops all services and cleans up the data directory or/and log di
     tiup cluster clean ${cluster-name} --all --ignore-role prometheus
     ```
 
-- Clean up the logs and data of all services except the node `172.16.13.11:9000`:
+- Clean up the logs and data of all services except the `172.16.13.11:9000` instance:
 
     {{< copyable "shell-regular" >}}
 
@@ -268,7 +270,7 @@ This operation stops all services and cleans up the data directory or/and log di
     tiup cluster clean ${cluster-name} --all --ignore-node 172.16.13.11:9000
     ```
 
-- Clean up the logs and data of all services except the node `172.16.13.12`:
+- Clean up the logs and data of all services except the `172.16.13.12` node:
 
     {{< copyable "shell-regular" >}}
 
