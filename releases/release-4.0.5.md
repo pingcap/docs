@@ -119,6 +119,22 @@ TiDB version: 4.0.5
     - Fix the existent checks for pessimistic transactions [#19004](https://github.com/pingcap/tidb/pull/19004)
     - Fix the issue that executing `union select for update` might cause concurrent race [#19006](https://github.com/pingcap/tidb/pull/19006)
     - Fix the wrong query result when `apply` has a child of the `PointGet` operator [#19046](https://github.com/pingcap/tidb/pull/19046)
+    - Fix the incorrect result that occurs when `IndexLookUp` is in the inner side of the `Apply` operator [#19496](https://github.com/pingcap/tidb/pull/19496)
+    - Fix the incorrect result of `anti-semi-join` queries [#19472](https://github.com/pingcap/tidb/pull/19472)
+    - Fix the incorrect result caused by the mistaken usage of `BatchPointGet` [#19456](https://github.com/pingcap/tidb/pull/19456)
+    - Fix the incorrect result that occurs when `UnionScan` is in the inner side of the `Apply` operator [#19447](https://github.com/pingcap/tidb/pull/19447)
+    - Fix the panic caused by using the `EXECUTE` statement to print an expensive query log [#17419](https://github.com/pingcap/tidb/pull/17419)
+    - Fix the index join error when the join key is `ENUM` or `SET` [#19235](https://github.com/pingcap/tidb/pull/19235)
+    - Fix the issue that the query range cannot be built when the `NULL` value exists on the index column [#19358](https://github.com/pingcap/tidb/pull/19358)
+    - Fix the data race issue caused by updating the global configuration [#17964](https://github.com/pingcap/tidb/pull/17964)
+    - Fix the panic issue caused when modifying the character set in an uppercase schema [#19286](https://github.com/pingcap/tidb/pull/19286)
+    - Fix an unexpected error caused by changing the temporary directory during the disk spill action [#18970](https://github.com/pingcap/tidb/pull/18970)
+    - Fix the wrong hash key for the decimal type [#19131](https://github.com/pingcap/tidb/pull/19131)
+    - Fix the issue that the `PointGet` and `BatchPointGet` operators do not consider the partition selection syntax and get incorrect results [#19141](https://github.com/pingcap/tidb/issues/19141)
+    - Fix the incorrect results when using the `Apply` operator together with the `UnionScan` operator [#19104](https://github.com/pingcap/tidb/issues/19104)
+    - Fix the bug that causes the indexed virtual generated column to return wrong value [#17989](https://github.com/pingcap/tidb/issues/17989)
+    - Add the lock for runtime statistics to fix a panic caused by concurrent execution [#18983](https://github.com/pingcap/tidb/pull/18983)
+    - Check `ErrTruncate`/`Overflow` locally for `builtinCastRealAsDecimalSig` to fix the `should ensure all columns have the same length` error [#18961](https://github.com/pingcap/tidb/pull/18961)
 
 + TiKV
 
