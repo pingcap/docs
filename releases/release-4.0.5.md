@@ -78,6 +78,8 @@ TiDB version: 4.0.5
     - Optimize the performance of applying Region snapshots by preprocessing the snapshots using multiple threads
     - Optimize the number of opening file descriptors when the read load of TiFlash is low to reduce system resource consumption
     - Optimize the number of unnecessary small files created when TiFlash restarts
+    - Support encryption at rest for data storage
+    - Support TLS for data transfer
 
 + Tools
 
