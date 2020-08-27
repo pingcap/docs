@@ -12,7 +12,7 @@ This is a list of TiDB adopters in various industries.
 | Company | Industry | Case studies |
 | :--- | :--- | :--- |
 |[VNG](https://en.wikipedia.org/wiki/VNG_Corporation)|Mobile Payment|[English](https://pingcap.com/case-studies/tidb-at-zalopay-infrastructure-lesson-learned/)|
-|[PayPay](https://www.crunchbase.com/organization/paypay#section-overviewy)|Mobile Payment|[Chinese](https://pingcap.com/cases-cn/user-case-paypay/)|
+|[PayPay](https://www.crunchbase.com/organization/paypay#section-overviewy)|Mobile Payment|[English](https://pingcap.com/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database); [Chinese](https://pingcap.com/cases-cn/user-case-paypay/)|
 |[Ping++](https://www.crunchbase.com/organization/ping-5)|Mobile Payment|[Chinese](https://pingcap.com/cases-cn/user-case-ping++/)|
 |[LianLian Tech](https://www.crunchbase.com/organization/lianlian-pay)|Mobile Payment||
 |[Dailymotion](https://en.wikipedia.org/wiki/Dailymotion)|Media and Entertainment||
@@ -32,7 +32,7 @@ This is a list of TiDB adopters in various industries.
 |[LY.com](https://www.crunchbase.com/organization/ly-com)|Travel|[Chinese](https://pingcap.com/cases-cn/user-case-tongcheng/)|
 |[Qunar.com](https://www.crunchbase.com/organization/qunar-com)|Travel|[Chinese](https://pingcap.com/cases-cn/user-case-qunar/)|
 |[Hulu](https://www.hulu.com)|Entertainment||
-|[VIPKid](https://www.crunchbase.com/organization/vipkid)|EdTech||
+|[VIPKid](https://www.crunchbase.com/organization/vipkid)|EdTech|[English](https://pingcap.com/case-studies/why-we-chose-a-distributed-sql-database-to-complement-mysql); [Chinese](https://pingcap.com/cases-cn/user-case-vipkid/)|
 |[Yuanfudao.com](https://www.crunchbase.com/organization/yuanfudao)|EdTech|[English](https://pingcap.com/blog/2017-08-08-tidbforyuanfudao/); [Chinese](https://pingcap.com/cases-cn/user-case-yuanfudao/)|
 |[Bank of Beijing](https://en.wikipedia.org/wiki/Bank_of_Beijing)|Banking|[Chinese](https://pingcap.com/cases-cn/user-case-beijing-bank/)|
 |[Industrial and Commercial Bank of China](https://en.wikipedia.org/wiki/Industrial_and_Commercial_Bank_of_China)|Banking||

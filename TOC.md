@@ -8,7 +8,13 @@
 + About TiDB
   + [TiDB Introduction](/overview.md)
   + [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
+  + [TiDB 4.0 Experimental Features](/experimental-features-4.0.md)
   + [Basic Features](/basic-features.md)
+  + Benchmarks
+    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
+    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
+    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
@@ -36,15 +42,9 @@
       + [Use TiDB Ansible](/online-deployment-using-ansible.md)
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
-  + Benchmarks
+  + Benchmarks Methods
     + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
-    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
-    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
-    + [v3.0 Sysbench Performance Test](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
-    + [v3.0 TPC-C Performance Test](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
-    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
@@ -78,6 +78,7 @@
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
+  + [Modify Configuration Online](/dynamic-config.md)
 + Monitor and Alert
   + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   + [Monitoring API](/tidb-monitoring-api.md)
@@ -154,9 +155,9 @@
   + [Use Cases](/ecosystem-tool-user-case.md)
   + [Download](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
-    + [BR FAQ](/br/backup-and-restore-faq.md)
-    + [Use BR Tool](/br/backup-and-restore-tool.md)
     + [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    + [Use BR Tool](/br/backup-and-restore-tool.md)
+    + [BR FAQ](/br/backup-and-restore-faq.md)
   + TiDB Binlog
     + [Overview](/tidb-binlog/tidb-binlog-overview.md)
     + [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -530,6 +531,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.18](/releases/release-3.0.18.md)
     + [3.0.17](/releases/release-3.0.17.md)
     + [3.0.16](/releases/release-3.0.16.md)
     + [3.0.15](/releases/release-3.0.15.md)
