@@ -26,7 +26,7 @@ The `ADMIN SHOW DDL [JOBS,QUERIES]` statement shows information about running an
 
 ### `ADMIN SHOW DDL`
 
-Provide an overview of DDL in the cluster, including any running jobs:
+To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
 
 {{< copyable "sql" >}}
 
