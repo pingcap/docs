@@ -18,7 +18,7 @@ If you need to import full data from MySQL or Aurora, use [Dumpling](/dumpling-o
 
 ## Migrate data from MySQL or Aurora
 
-If you need to migrate both full data and incremental data from MySQL or Aurora, use [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/v2.0/overview) (DM) to perform the [full and incremental data migration](https://docs.pingcap.com/zh/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
+If you need to migrate both full data and incremental data from MySQL or Aurora, use [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/v2.0/overview) (DM) to perform the [full and incremental data migration](https://docs.pingcap.com/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
 
 If the full data volume is large (at the TB level), you can first use [Dumpling](/dumpling-overview.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to perform the full data migration, and then use DM to perform the incremental data migration.
 
