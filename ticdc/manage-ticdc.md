@@ -326,7 +326,7 @@ In the command and result above:
 - `info` is the replication configuration of the queried `changefeed`.
 - `status` is the replication state of the queried `changefeed`.
     - `resolved-ts`: The largest transaction `TS` in the current `changefeed`. Note that this `TS` has been successfully sent from TiKV to TiCDC.
-    - `checkpoint-ts`: The largest transaction `TS` in the current `changefeed` that has been successfully written to the downstream.
+    - `checkpoint-ts`: The largest transaction `TS` in the current `changefeed`.  Note that this `TS` has been successfully written to the downstream.
     - `admin-job-type`: The status of a `changefeed`:
         - `0`: The state is normal.
         - `1`: The task is paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
