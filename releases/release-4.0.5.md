@@ -154,6 +154,15 @@ TiDB version: 4.0.5
 
 + Tools
 
+    + Backup & Restore (BR)
+
+        - Fix the issue of duplicated calculation of total KV and total bytes in the backup summary log [#472](https://github.com/pingcap/br/pull/472)
+        - Fix the issue that the import mode does not work in the first 5 minutes after switching to this mode [#473](https://github.com/pingcap/br/pull/473)
+
+    + Dumpling
+
+        - Fix the issue that FTWRL lock is not released in time [#128](https://github.com/pingcap/dumpling/pull/128)
+
     + TiCDC
 
         - Fix the issue that the failed `changefeed` cannot be removed [#782](https://github.com/pingcap/ticdc/pull/782)
