@@ -133,7 +133,6 @@ TiDB version: 4.0.5
     - Fix the incorrect results when using the `Apply` operator together with the `UnionScan` operator [#19104](https://github.com/pingcap/tidb/issues/19104)
     - Fix the bug that causes the indexed virtual generated column to return wrong value [#17989](https://github.com/pingcap/tidb/issues/17989)
     - Add the lock for runtime statistics to fix a panic caused by concurrent execution [#18983](https://github.com/pingcap/tidb/pull/18983)
-    - Check `ErrTruncate`/`Overflow` locally for `builtinCastRealAsDecimalSig` to fix the `should ensure all columns have the same length` error [#18961](https://github.com/pingcap/tidb/pull/18961)
 
 + TiKV
 
