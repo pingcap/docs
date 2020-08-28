@@ -148,7 +148,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `127.0.0.1`    | The IP address of the downstream database                               |
 | `3306`         | The port for the downstream data                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
-| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default)) |
+| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default) |
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
@@ -197,18 +197,18 @@ The following are descriptions of parameters that can be configured for the sink
 | `connectionTimeout` | The timeout for establishing a connection to the downstream Pulsar, which is optional and defaults to 30 (seconds) |
 | `operationTimeout` | The timeout for performing an operation on the downstream Pulsar, which is optional and defaults to 30 (seconds) |
 | `tlsTrustCertsFilePath` | The path of the CA certificate file needed to connect to the downstream Pulsar instance (optional) |
-| `tlsAllowInsecureConnection` | Determines whether to accept untrusted TLS certificate from broker (optional) |
+| `tlsAllowInsecureConnection` | Determines whether to allow unencrypted connection after TLS is enabled (optional) |
 | `tlsValidateHostname` |  Determines whether to verify the host name of the certificate from the downstream Pulsar (optional) |
 | `maxConnectionsPerBroker` | The maximum number of connections allowed to a single downstream Pulsar broker, which is optional and defaults to 1 |
 | `auth.tls` | Uses the TLS mode to verify the downstream Pulsar (optional). For example, `"{"tlsCertFile":"/path/to/cert", "tlsKeyFile":"/path/to/key"}"`. |
 | `auth.token` | Uses the token mode to verify the downstream Pulsar (optional). For example, `"{"token":"secret-token"}"` or `"{"file":"path/to/secret-token-file"}"`. |
 | `name` | The name of Pulsar producer in TiCDC (optional) |
-| `maxPendingMessages` | Sets the maximum queue size of pending messages, which is optional and defaults to 1000. For example, pending for the confirmation message from Pulsar. |
+| `maxPendingMessages` | Sets the maximum size of the pending message queue, which is optional and defaults to 1000. For example, pending for the confirmation message from Pulsar. |
 | `disableBatching` |  Disables automatically sending messages in batches (optional) |
 | `batchingMaxPublishDelay` | Sets the duration within which the messages sent are batched (default: 10ms) |
 | `compressionType` | Sets the compression algorithm used for sending messages (optional). The value options are `LZ4`, `ZLIB`, and `ZSTD` (default). |
 | `hashingScheme` | The hash algorithm used for choosing the partition to which a message is sent (optional). The value options are `JavaStringHash` (default) and `Murmur3`. |
-| `properties.*` |  The customized properties added to the Pulsar producer in TiCDC (optional). For example, `properties.location=Hangzhou`. |
+| `properties.*` | The customized properties added to the Pulsar producer in TiCDC (optional). For example, `properties.location=Hangzhou`. |
 
 For more parameters of Pulsar, see [pulsar-client-go ClientOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ClientOptions) and [pulsar-client-go ProducerOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ProducerOptions).
 
