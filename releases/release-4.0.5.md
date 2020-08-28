@@ -138,6 +138,7 @@ TiDB version: 4.0.5
 
     - Speed up leader election when Hibernate Region is enabled [#8292](https://github.com/tikv/tikv/pull/8292)
     - Fix the memory leak issue during scheduling [#8357](https://github.com/tikv/tikv/pull/8357)
+    - Add the `hibernate-timeout` configuration item to prevent the leader from becoming hibernate too fast [#8208](https://github.com/tikv/tikv/pull/8208)
 
 + PD
 
