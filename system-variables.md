@@ -29,7 +29,13 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
-- Whether automatically commit a transaction.
+- Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
+
+### `allow_auto_random_explicit_insert` <span class="version-mark">New in v4.0.3</span>
+
+- Scope: SESSION (since v4.0.4: SESSION | GLOBAL)
+- Default value: 0
+- Determines whether to allow explicitly specifying the values of the column with the `AUTO_RANDOM` attribute in the `INSERT` statement. `1` means to allow and `0` means to disallow.
 
 ### ddl_slow_threshold
 
@@ -61,6 +67,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
+### last_plan_from_binding <span class="version-mark">New in v4.0</span>
+
+- Scope: SESSION
+- Default value: 0
+- This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
+
 ### max_execution_time
 
 - Scope: SESSION | GLOBAL
@@ -70,6 +82,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 > **Note:**
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+
+### `interactive_timeout`
+
+- Scope: SESSION | GLOBAL
+- Default value: 28800
+- This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
 
 ### sql_mode
 
@@ -175,29 +193,30 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- TiDB supports the optimistic transaction model. This means that conflict check (unique key check) is performed when the transaction is committed. This variable is used to set whether to do a unique key check each time a row of data is written.
-- If this variable is enabled, the performance might be affected in a scenario where a large batch of data is written. For example:
+- This setting only applies to optimistic transactions. When this variable is set to zero, checking for duplicate values in UNIQUE indexes is deferred until the transaction commits. This helps improve performance, but might be an unexpected behavior for some applications. See [Constraints](/constraints.md) for details.
 
-    - When this variable is disabled:
+    - When set to zero and using optimistic transactions:
 
         ```sql
         tidb> create table t (i int key);
         tidb> insert into t values (1);
-        tidb> begin
+        tidb> begin optimistic;
         tidb> insert into t values (1);
         Query OK, 1 row affected
         tidb> commit; -- Check only when a transaction is committed.
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
-    - After this variable is enabled:
+    - When set to 1 and using optimistic transactions:
 
         ```sql
         tidb> set @@tidb_constraint_check_in_place=1;
-        tidb> begin
+        tidb> begin optimistic;
         tidb> insert into t values (1);
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
+
+Constraint checking is always performed in place for pessimistic transactions (default).
 
 ### tidb_current_ts
 
