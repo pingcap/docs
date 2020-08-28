@@ -4,7 +4,7 @@ title: TiDB 4.0.5 Release Notes
 
 # TiDB 4.0.5 Release Notes
 
-Release date: August 13, 2020
+Release date: August 28, 2020
 
 TiDB version: 4.0.5
 
@@ -45,12 +45,11 @@ TiDB version: 4.0.5
     - Add the HTTP API to generate the TiDB metric profile [#18531](https://github.com/pingcap/tidb/pull/18531)
     - Support scattering partitioned tables [#17863](https://github.com/pingcap/tidb/pull/17863)
     - Add detailed memory usage of each instance in Grafana [#18679](https://github.com/pingcap/tidb/pull/18679)
-    - Show the detailed runtime information of the `BatchPointGet` executor in the result of `EXPLAIN` [#18892](https://github.com/pingcap/tidb/pull/18892)
-    - Show the detailed runtime information of the `PointGet` executor in the result of `EXPLAIN` [#18817](https://github.com/pingcap/tidb/pull/18817)
+    - Show the detailed runtime information of the `BatchPointGet` operator in the result of `EXPLAIN` [#18892](https://github.com/pingcap/tidb/pull/18892)
+    - Show the detailed runtime information of the `PointGet` operator in the result of `EXPLAIN` [#18817](https://github.com/pingcap/tidb/pull/18817)
     - Warn the potential deadlock for `Consume` in `remove()` [#18395](https://github.com/pingcap/tidb/pull/18395)
-    - Support the Action when memory exceed quota for TableReader Executor [#18392](https://github.com/pingcap/tidb/pull/18392)
     - Refine the behaviors of `StrToInt` and `StrToFloat` and support converting JSON to the `date`, `time`, and `timestamp` types [#18159](https://github.com/pingcap/tidb/pull/18159)
-    - Support limiting the memory usage of the `TableReader` executor [#18392](https://github.com/pingcap/tidb/pull/18392)
+    - Support limiting the memory usage of the `TableReader` operator [#18392](https://github.com/pingcap/tidb/pull/18392)
     - Avoid too many times of backoff when retrying the `batch cop` request [#18999](https://github.com/pingcap/tidb/pull/18999)
     - Improve compatibility for `ALTER TABLE` algorithms [#19270](https://github.com/pingcap/tidb/pull/19270)
     - Make the single partitioned table support `IndexJoin` on the inner side [#19151](https://github.com/pingcap/tidb/pull/19151)
@@ -58,7 +57,7 @@ TiDB version: 4.0.5
 
 + PD
 
-    - Support scattering Regions in stores with special engines (like TiFlash) [#2706](https://github.com/tikv/pd/pull/2706)
+    - Support scattering Regions in stores with special engines (such as TiFlash) [#2706](https://github.com/tikv/pd/pull/2706)
     - Support the Region HTTP API to prioritize Region scheduling of a given key range [#2687](https://github.com/tikv/pd/pull/2687)
     - Improve the leader distribution after Region scattering [#2684](https://github.com/tikv/pd/pull/2684)
     - Add more tests and logs for the TSO request [#2678](https://github.com/tikv/pd/pull/2678)
@@ -122,12 +121,12 @@ TiDB version: 4.0.5
     - Fix the incorrect result that occurs when `IndexLookUp` is in the inner side of the `Apply` operator [#19496](https://github.com/pingcap/tidb/pull/19496)
     - Fix the incorrect result of `anti-semi-join` queries [#19472](https://github.com/pingcap/tidb/pull/19472)
     - Fix the incorrect result caused by the mistaken usage of `BatchPointGet` [#19456](https://github.com/pingcap/tidb/pull/19456)
-    - Fix the incorrect result that occurs when `UnionScan` is in the inner side of the `Apply` operator [#19447](https://github.com/pingcap/tidb/pull/19447)
+    - Fix the incorrect result that occurs when `UnionScan` is in the inner side of the `Apply` operator [#19496](https://github.com/pingcap/tidb/pull/19496)
     - Fix the panic caused by using the `EXECUTE` statement to print an expensive query log [#17419](https://github.com/pingcap/tidb/pull/17419)
     - Fix the index join error when the join key is `ENUM` or `SET` [#19235](https://github.com/pingcap/tidb/pull/19235)
     - Fix the issue that the query range cannot be built when the `NULL` value exists on the index column [#19358](https://github.com/pingcap/tidb/pull/19358)
     - Fix the data race issue caused by updating the global configuration [#17964](https://github.com/pingcap/tidb/pull/17964)
-    - Fix the panic issue caused when modifying the character set in an uppercase schema [#19286](https://github.com/pingcap/tidb/pull/19286)
+    - Fix the panic issue occurs when modifying the character set in an uppercase schema [#19286](https://github.com/pingcap/tidb/pull/19286)
     - Fix an unexpected error caused by changing the temporary directory during the disk spill action [#18970](https://github.com/pingcap/tidb/pull/18970)
     - Fix the wrong hash key for the decimal type [#19131](https://github.com/pingcap/tidb/pull/19131)
     - Fix the issue that the `PointGet` and `BatchPointGet` operators do not consider the partition selection syntax and get incorrect results [#19141](https://github.com/pingcap/tidb/issues/19141)
@@ -138,8 +137,8 @@ TiDB version: 4.0.5
 
 + TiKV
 
-    - Fix the memory leak issue during scheduling [#8357](https://github.com/tikv/tikv/pull/8357)
     - Speed up leader election when Hibernate Region is enabled [#8292](https://github.com/tikv/tikv/pull/8292)
+    - Fix the memory leak issue during scheduling [#8357](https://github.com/tikv/tikv/pull/8357)
 
 + PD
 
