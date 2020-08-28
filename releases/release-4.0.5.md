@@ -169,6 +169,7 @@ TiDB version: 4.0.5
         - Fix invalid `delete` events by selecting one unique index as the handle index [#787](https://github.com/pingcap/ticdc/pull/787)
         - Fix the bug that GC safepoint is forwarded beyond the checkpoint of stopped `changefeed` [#797](https://github.com/pingcap/ticdc/pull/797)
         - Fix the bug that the network I/O waiting blocks tasks to exit [#825](https://github.com/pingcap/ticdc/pull/825)
+        - Fix the bug that some unnecessary data might be mistakenly replicated to the downstream [#743](https://github.com/pingcap/ticdc/issues/743)
 
     + TiDB Lightning
 
