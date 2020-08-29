@@ -34,6 +34,7 @@ Available Commands:
   restart     Restart a TiDB cluster
   scale-in    Scale in a TiDB cluster
   scale-out   Scale out a TiDB cluster
+  clean       Clean up cluster data
   destroy     Destroy a specified cluster
   upgrade     Upgrade a specified TiDB cluster
   exec        Run shell command on host in the tidb cluster
@@ -197,13 +198,13 @@ The `Status` column uses `Up` or `Down` to indicate whether the service is runni
 
 For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` indicates that the PD node is a Leader, and `|UI` indicates that [TiDB Dashboard](/dashboard/dashboard-intro.md) is running on the PD node.
 
-## Scale in a node
+## Scale in a cluster
 
 > **Note:**
 >
 > This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
 
-Scaling in a node means taking the node offline. This operation removes the node from the cluster and deletes the remaining data files.
+Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining data files.
 
 Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiDB Binlog components.
 
@@ -229,7 +230,7 @@ tiup cluster scale-in <cluster-name> -N <node-id>
 
 To use this command, you need to specify at least two flags: the cluster name and the node ID. The node ID can be obtained by using the `tiup cluster display` command in the previous section.
 
-For example, to scale in the TiKV node on `172.16.5.140`, run the following command:
+For example, to make the TiKV node on `172.16.5.140` offline, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -266,7 +267,7 @@ ID                  Role        Host          Ports        Status     Data Dir  
 
 After PD schedules the data on the node to other TiKV nodes, this node will be deleted automatically.
 
-## Scale out a node
+## Scale out a cluster
 
 > **Note:**
 >
@@ -278,7 +279,7 @@ When you scale out PD, the node is added to the cluster by `join`, and the confi
 
 All services conduct correctness validation when they are scaled out. The validation results show whether the scaling-out is successful.
 
-To scale out a TiKV node and a PD node in the `tidb-test` cluster, take the following steps:
+To add a TiKV node and a PD node in the `tidb-test` cluster, take the following steps:
 
 1. Create a `scale.yaml` file, and add IPs of the new TiKV and PD nodes:
 
@@ -429,6 +430,10 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 ```
 
 ## Import TiDB Ansible cluster
+
+> **Note:**
+>
+> Currently, TiUP cluster's support for TiSpark is still **experimental**. It is not supported to import a TiDB cluster with TiSpark enabled.
 
 Before TiUP is released, TiDB Ansible is often used to deploy TiDB clusters. To enable TiUP to take over the cluster deployed by TiDB Ansible, use the `import` command.
 
