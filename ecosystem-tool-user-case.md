@@ -14,11 +14,19 @@ If you need to import the compatible CSV files exported by other tools to TiDB, 
 
 ## Import full data from MySQL/Aurora
 
+<<<<<<< HEAD
 If you need to import full data from MySQL or Aurora, use [Dumpling](/export-or-backup-using-dumpling.md) first to export data as SQL dump files, and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data into the TiDB cluster.
 
 ## Migrate data from MySQL/Aurora
 
 If you need to migrate both full data and incremental data from MySQL/Aurora, use [TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/overview/) (DM) to perform the full and incremental data migration.
+=======
+If you need to import full data from MySQL/Aurora, use [Dumpling](/dumpling-overview.md) first to export data as SQL dump files, and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data into the TiDB cluster.
+
+## Migrate data from MySQL/Aurora
+
+If you need to migrate both full data and incremental data from MySQL/Aurora, use [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/v2.0/overview) (DM) to perform the [full and incremental data migration](https://docs.pingcap.com/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
+>>>>>>> 92163d1... Update DM 2.0 related doc (#3757)
 
 If the full data volume is large (at the TB level), you can first use [Dumpling](/export-or-backup-using-dumpling.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to perform the full data migration, and then use DM to perform the incremental data migration.
 
