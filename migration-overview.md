@@ -45,6 +45,7 @@ For detailed operations, follow the steps in [Incremental Migration](/migrate-in
   > **Note:**
   >
   > To replicate data from MySQL to TiDB, binary logging [must be enabled](http://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html) with the [row format](https://dev.mysql.com/doc/refman/5.7/en/binary-log-formats.html) enabled.
+  
 ### Dump and restore from database other than MySQL
 
 To import data from another database, it is recommended to:
