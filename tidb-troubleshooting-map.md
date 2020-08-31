@@ -162,13 +162,8 @@ Refer to [5 PD issues](#5-pd-issues).
 - 3.3.3 Mitigation
 
     - For v3.0 and later versions, use the `SQL Bind` feature to bind the execution plan.
-<<<<<<< HEAD
-    
-    - Update the statistics. If you are roughly sure that the problem is caused by the statistics, [dump the statistics](https://pingcap.com/docs/stable/reference/performance/statistics/#export-statistics). If the cause is outdated statistics, such as the `modify count/row count` in `show stats_meta` is greater than a certain value (e.g. 0.3), or the table has an index of time column, you can try recovering by using `analyze table`. If `auto analyze` is configured, check whether the `tidb_auto_analyze_ratio` system variable is too large (e.g. > 0.3), and whether the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
-=======
 
     - Update the statistics. If you are roughly sure that the problem is caused by the statistics, [dump the statistics](/statistics.md#export-statistics). If the cause is outdated statistics, such as the `modify count/row count` in `show stats_meta` is greater than a certain value (e.g. 0.3), or the table has an index of time column, you can try recovering by using `analyze table`. If `auto analyze` is configured, check whether the `tidb_auto_analyze_ratio` system variable is too large (e.g. > 0.3), and whether the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
->>>>>>> 92163d1... Update DM 2.0 related doc (#3757)
 
     - For other situations, [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md).
 
@@ -438,13 +433,8 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 - 6.1.8 Pump reports the `fail to notify all living drainer` error when it is started.
 
     - Cause: When Pump is started, it notifies all Drainer nodes that are in the `online` state. If it fails to notify Drainer, this error log is printed.
-<<<<<<< HEAD
-    
-    - Solution: Use the binlogctl tool to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump. See the case [fail-to-notify-all-living-drainer](https://pingcap.com/docs/stable/reference/tidb-binlog/troubleshoot/error-handling/#fail-to-notify-all-living-drainer-is-returned-when-pump-is-started).
-=======
 
     - Solution: Use the binlogctl tool to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump. See the case [fail-to-notify-all-living-drainer](/tidb-binlog/handle-tidb-binlog-errors.md#fail-to-notify-all-living-drainer-is-returned-when-pump-is-started).
->>>>>>> 92163d1... Update DM 2.0 related doc (#3757)
 
 - 6.1.9 Draienr reports the `gen update sqls failed: table xxx: row data is corruption []` error.
 
@@ -464,13 +454,8 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 6.2.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you run `query status` or check the log.
 
-<<<<<<< HEAD
-    - The database related passwords in all the DM configuration files must be encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt the password.
-    - During DM operation, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges](https://pingcap.com/docs/tidb-data-migration/stable/precheck/) automatically while starting the data replication task.
-=======
     - The database related passwords in all the DM configuration files should be encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt the password. Cleartext passwords can be used since v1.0.6.
     - During DM operation, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges](https://docs.pingcap.com/tidb-data-migration/v2.0/precheck) automatically while starting the data replication task.
->>>>>>> 92163d1... Update DM 2.0 related doc (#3757)
     - To deploy different versions of DM-worker/DM-master/dmctl in a DM cluster, see the [case study on AskTUG](https://asktug.com/t/dm1-0-0-ga-access-denied-for-user/1049/5) in Chinese.
 
 - 6.2.3 A replication task is interrupted with the `driver: bad connection` error returned.
