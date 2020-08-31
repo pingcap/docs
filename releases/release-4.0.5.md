@@ -39,7 +39,7 @@ TiDB version: 4.0.5
 + TiDB
 
     - Optimize the performance of `DecodePlan` for big union queries [#18941](https://github.com/pingcap/tidb/pull/18941)
-    - Reduce the number of GC lock scans when meeting the `Region cache miss` error [#18876](https://github.com/pingcap/tidb/pull/18876)
+    - Reduce the number of GC lock scans when the `Region cache miss` error occurs [#18876](https://github.com/pingcap/tidb/pull/18876)
     - Ease the impact of statistical feedback on cluster performance [#18772](https://github.com/pingcap/tidb/pull/18772)
     - Support canceling operations before the RPC response is returned [#18580](https://github.com/pingcap/tidb/pull/18580)
     - Add the HTTP API to generate the TiDB metric profile [#18531](https://github.com/pingcap/tidb/pull/18531)
