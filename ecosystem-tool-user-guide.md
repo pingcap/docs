@@ -68,7 +68,7 @@ The following are the basics of TiDB Binlog:
 
 The following are the basics of DM:
 
-- Input: MySQL or MariaDB
+- Input: MySQL/MariaDB
 - Output: TiDB cluster
 - Supported TiDB versions: all versions
 - Kubernetes support: No, under development
