@@ -10,7 +10,7 @@ aliases: ['/docs/v3.1/loader-overview/','/docs/v3.1/reference/tools/loader/','/d
 
 Loader is a data import tool to load data to TiDB.
 
-It can be [downloaded](/download-ecosystem-tools.md) as part of the Enterprise Tools package.
+It can be [downloaded](/download-ecosystem-tools.md) as part of the tidb-enterprise-tools package.
 
 ## Why did we develop Loader?
 
@@ -37,7 +37,7 @@ Since tools like mysqldump will take us days to migrate massive amounts of data,
 > **Note:**
 >
 > - Do not import the `mysql` system database from the MySQL instance to the downstream TiDB instance.
-> - If Mydumper uses the `-m` parameter, the data is exported without the table structure and the loader can not import the data.
+> - If Mydumper uses the `-m` parameter, the data is exported without the table schema and the loader can not import the data.
 > - If you use the default `checkpoint-schema` parameter, after importing the data of a database, run `drop database tidb_loader` before you begin to import the next database.
 > - It is recommended to specify the `checkpoint-schema = "tidb_loader"` parameter when importing data.
 
@@ -119,11 +119,15 @@ max-allowed-packet = 67108864
 
 Command line parameter:
 
+{{< copyable "shell-regular" >}}
+
 ```
 ./bin/loader -d ./test -h 127.0.0.1 -u root -P 4000
 ```
 
 Or use configuration file "config.toml":
+
+{{< copyable "shell-regular" >}}
 
 ```
 ./bin/loader -c=config.toml
