@@ -4,7 +4,7 @@ title: TiDB 4.0.5 Release Notes
 
 # TiDB 4.0.5 Release Notes
 
-Release date: August 28, 2020
+Release date: August 31, 2020
 
 TiDB version: 4.0.5
 
