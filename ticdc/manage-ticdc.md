@@ -121,7 +121,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 ```
 
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`/`tidb`/`kafka`.
+- `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`/`tidb`/`kafka`/`pulsar`.
 
 {{< copyable "" >}}
 
@@ -129,56 +129,90 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
-- Configure sink URI with `mysql`/`tidb`
+#### Configure sink URI with `mysql`/`tidb`
 
-    Sample configuration:
+Sample configuration:
 
-    {{< copyable "shell-regular" >}}
+{{< copyable "shell-regular" >}}
 
-    ```shell
-    --sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000"
-    ```
+```shell
+--sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000"
+```
 
-    The following are descriptions of parameters and parameter values in the sample configuration:
+The following are descriptions of parameters and parameter values that can be configured for the sink URI with `mysql`/`tidb`:
 
-    | Parameter/Parameter Value    | Description                                             |
-    | :------------ | :------------------------------------------------ |
-    | `root`        | The username of the downstream database                              |
-    | `123456`       | The password of the downstream database                                      |
-    | `127.0.0.1`    | The IP address of the downstream database                               |
-    | `3306`         | The port for the downstream data                                 |
-    | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
-    | `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default)) |
-    | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
-    | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
-    | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
+| Parameter/Parameter Value    | Description                                             |
+| :------------ | :------------------------------------------------ |
+| `root`        | The username of the downstream database                              |
+| `123456`       | The password of the downstream database                                      |
+| `127.0.0.1`    | The IP address of the downstream database                               |
+| `3306`         | The port for the downstream data                                 |
+| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
+| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default) |
+| `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
+| `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
+| `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
 
-- Configure sink URI with `kafka`
+#### Configure sink URI with `kafka`
 
-    Sample configuration:
+Sample configuration:
 
-    {{< copyable "shell-regular" >}}
+{{< copyable "shell-regular" >}}
 
-    ```shell
-    --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
-    ```
+```shell
+--sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+```
 
-    The following are descriptions of parameters and parameter values in the sample configuration:
+The following are descriptions of parameters and parameter values that can be configured for the sink URI with `kafka`:
 
-    | Parameter/Parameter Value               | Description                                                        |
-    | :------------------ | :------------------------------------------------------------ |
-    | `127.0.0.1`          | The IP address of the downstream Kafka services                                 |
-    | `9092`               | The port for the downstream Kafka                                          |
-    | `cdc-test`           | The name of the Kafka topic                                      |
-    | `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default)                      |
-    | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional, `TiCDC_sarama_producer_replication ID` by default) |
-    | `partition-num`      | The number of the downstream Kafka partitions (Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically.) |
-    | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
-    | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
-    | `protocol` | The protocol with which messages are output to Kafka. The optional values are `default` and `canal` (`default` by default.)    |
-    | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
-    | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
-    | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
+| Parameter/Parameter Value               | Description                                                        |
+| :------------------ | :------------------------------------------------------------ |
+| `127.0.0.1`          | The IP address of the downstream Kafka services                                 |
+| `9092`               | The port for the downstream Kafka                                          |
+| `cdc-test`           | The name of the Kafka topic                                      |
+| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default)                      |
+| `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional, `TiCDC_sarama_producer_replication ID` by default) |
+| `partition-num`      | The number of the downstream Kafka partitions (Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically.) |
+| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
+| `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
+| `protocol` | The protocol with which messages are output to Kafka. The optional values are `default` and `canal` (`default` by default.)    |
+| `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
+| `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
+| `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
+
+#### Configure sink URI with `pulsar`
+
+Sample configuration:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+--sink-uri="pulsar://127.0.0.1:6650/cdc-test?connectionTimeout=2s"
+```
+
+The following are descriptions of parameters that can be configured for the sink URI with `pulsar`:
+
+| Parameter  | Description                                            |
+| :------------------ | :------------------------------------------------------------ |
+| `connectionTimeout` | The timeout for establishing a connection to the downstream Pulsar, which is optional and defaults to 30 (seconds) |
+| `operationTimeout` | The timeout for performing an operation on the downstream Pulsar, which is optional and defaults to 30 (seconds) |
+| `tlsTrustCertsFilePath` | The path of the CA certificate file needed to connect to the downstream Pulsar instance (optional) |
+| `tlsAllowInsecureConnection` | Determines whether to allow unencrypted connection after TLS is enabled (optional) |
+| `tlsValidateHostname` |  Determines whether to verify the host name of the certificate from the downstream Pulsar (optional) |
+| `maxConnectionsPerBroker` | The maximum number of connections allowed to a single downstream Pulsar broker, which is optional and defaults to 1 |
+| `auth.tls` | Uses the TLS mode to verify the downstream Pulsar (optional). For example, `"{"tlsCertFile":"/path/to/cert", "tlsKeyFile":"/path/to/key"}"`. |
+| `auth.token` | Uses the token mode to verify the downstream Pulsar (optional). For example, `"{"token":"secret-token"}"` or `"{"file":"path/to/secret-token-file"}"`. |
+| `name` | The name of Pulsar producer in TiCDC (optional) |
+| `maxPendingMessages` | Sets the maximum size of the pending message queue, which is optional and defaults to 1000. For example, pending for the confirmation message from Pulsar. |
+| `disableBatching` |  Disables automatically sending messages in batches (optional) |
+| `batchingMaxPublishDelay` | Sets the duration within which the messages sent are batched (default: 10ms) |
+| `compressionType` | Sets the compression algorithm used for sending messages (optional). The value options are `LZ4`, `ZLIB`, and `ZSTD` (default). |
+| `hashingScheme` | The hash algorithm used for choosing the partition to which a message is sent (optional). The value options are `JavaStringHash` (default) and `Murmur3`. |
+| `properties.*` | The customized properties added to the Pulsar producer in TiCDC (optional). For example, `properties.location=Hangzhou`. |
+
+For more parameters of Pulsar, see [pulsar-client-go ClientOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ClientOptions) and [pulsar-client-go ProducerOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ProducerOptions).
+
+#### Use the task configuration file
 
 For more replication configuration (for example, specify replicating a single table), see [Task configuration file](#task-configuration-file).
 
@@ -218,11 +252,34 @@ cdc cli changefeed list --pd=http://10.0.10.25:2379
 - `state` indicates the state of the replication task.
     - `normal`: The replication task runs normally.
     - `stopped`: The replication task is stopped (manually paused or stopped by an error).
-    - `removed`: The replication task is removed.
+    - `removed`: The replication task is removed. Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, execute the `changefeed query` command.
+    - `finished`: The replication task is finished (data is replicated to the `target-ts`). Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, execute the `changefeed query` command.
 
 #### Query a specific replication task
 
-Execute the following command to query a specific replication task:
+To query a specific replication task, execute the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result that will only include the basic replication state and the checkpoint information. If you do not specify this argument, detailed task configuration, replication states, and replication table information are output.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+cdc cli changefeed query -s --pd=http://10.0.10.25:2379 --changefeed-id=simple-replication-task
+```
+
+```
+{
+ "state": "normal",
+ "tso": 419035700154597378,
+ "checkpoint": "2020-08-27 10:12:19.579",
+ "error": null
+}
+```
+
+In the command and result above:
+
++ `state` is the replication state of the current `changefeed`. Each state must be consistent with the state in `changefeed list`.
++ `tso` represents the largest transaction TSO in the current `changefeed` that has been successfully replicated to the downstream.
++ `checkpoint` represents the corresponding time of the largest transaction TSO in the current `changefeed` that has been successfully replicated to the downstream.
++ `error` records whether an error has occurred in the current `changefeed`.
 
 {{< copyable "shell-regular" >}}
 
@@ -230,40 +287,86 @@ Execute the following command to query a specific replication task:
 cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id=simple-replication-task
 ```
 
-The information returned consists of `"info"` and `"status"` of the replication task.
-
 ```
 {
-        "info": {
-                "sink-uri": "mysql://root:123456@127.0.0.1:3306/",
-                "opts": {},
-                "create-time": "2020-03-12T22:04:08.103600025+08:00",
-                "start-ts": 415241823337054209,
-                "target-ts": 0,
-                "admin-job-type": 0,
-                "config": {
-                        "filter-case-sensitive": false,
-                        "filter-rules": null,
-                        "ignore-txn-start-ts": null
-                }
+  "info": {
+    "sink-uri": "mysql://127.0.0.1:3306/?max-txn-row=20\u0026worker-number=4",
+    "opts": {},
+    "create-time": "2020-08-27T10:33:41.687983832+08:00",
+    "start-ts": 419036036249681921,
+    "target-ts": 0,
+    "admin-job-type": 0,
+    "sort-engine": "memory",
+    "sort-dir": ".",
+    "config": {
+      "case-sensitive": true,
+      "enable-old-value": false,
+      "filter": {
+        "rules": [
+          "*.*"
+        ],
+        "ignore-txn-start-ts": null,
+        "ddl-allow-list": null
+      },
+      "mounter": {
+        "worker-num": 16
+      },
+      "sink": {
+        "dispatchers": null,
+        "protocol": "default"
+      },
+      "cyclic-replication": {
+        "enable": false,
+        "replica-id": 0,
+        "filter-replica-ids": null,
+        "id-buckets": 0,
+        "sync-ddl": false
+      },
+      "scheduler": {
+        "type": "table-number",
+        "polling-time": -1
+      }
+    },
+    "state": "normal",
+    "history": null,
+    "error": null
+  },
+  "status": {
+    "resolved-ts": 419036036249681921,
+    "checkpoint-ts": 419036036249681921,
+    "admin-job-type": 0
+  },
+  "count": 0,
+  "task-status": [
+    {
+      "capture-id": "97173367-75dc-490c-ae2d-4e990f90da0f",
+      "status": {
+        "tables": {
+          "47": {
+            "start-ts": 419036036249681921,
+            "mark-table-id": 0
+          }
         },
-        "status": {
-                "resolved-ts": 415241860902289409,
-                "checkpoint-ts": 415241860640145409,
-                "admin-job-type": 0
-        }
+        "operation": null,
+        "admin-job-type": 0
+      }
+    }
+  ]
 }
 ```
 
-In the above command:
+In the command and result above:
 
-- `resolved-ts`: The largest transaction `TS` in the current `changefeed`. Note that this `TS` has been successfully sent from TiKV to TiCDC.
-- `checkpoint-ts`: The largest transaction `TS` in the current `changefeed` that has been successfully written to the downstream.
-- `admin-job-type`: The status of a `changefeed`:
-    - `0`: The state is normal.
-    - `1`: The task is paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
-    - `2`: The task is resumed. The replication task resumes from `checkpoint-ts`.
-    - `3`: The task is removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
+- `info` is the replication configuration of the queried `changefeed`.
+- `status` is the replication state of the queried `changefeed`.
+    - `resolved-ts`: The largest transaction `TS` in the current `changefeed`. Note that this `TS` has been successfully sent from TiKV to TiCDC.
+    - `checkpoint-ts`: The largest transaction `TS` in the current `changefeed`. Note that this `TS` has been successfully written to the downstream.
+    - `admin-job-type`: The status of a `changefeed`:
+        - `0`: The state is normal.
+        - `1`: The task is paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
+        - `2`: The task is resumed. The replication task resumes from `checkpoint-ts`.
+        - `3`: The task is removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
+- `task-status` indicates the state of each replication sub-task in the queried `changefeed`.
 
 #### Pause a replication task
 
@@ -277,7 +380,7 @@ cdc cli changefeed pause --pd=http://10.0.10.25:2379 --changefeed-id simple-repl
 
 In the above command:
 
-- `--changefeed=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to pause.
+- `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to pause.
 
 #### Resume a replication task
 
@@ -291,7 +394,7 @@ cdc cli changefeed resume --pd=http://10.0.10.25:2379 --changefeed-id simple-rep
 
 In the above command:
 
-- `--changefeed=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to resume.
+- `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to resume.
 
 #### Remove a replication task
 
@@ -305,7 +408,36 @@ cdc cli changefeed remove --pd=http://10.0.10.25:2379 --changefeed-id simple-rep
 
 In the above command:
 
-- `--changefeed=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to remove.
+- `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to remove.
+
+After the replication task is removed, the state information of the task will be retained for 24 hours, mainly used for recording the replication checkpoint. Within this 24 hours, you cannot create a replication task of the same name.
+
+If you want to completely remove the task information, you can specify the `--force` or `-f` argument in the command. Then all information of the `changefeed` will be removed, and you can immediately create a `changefeed` of the same name.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+cdc cli changefeed remove --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task --force
+```
+
+### Update task configuration
+
+Starting from v4.0.4, TiCDC supports modifying the configuration of the replication task (not dynamically). To modify the `changefeed` configuration, pause the task, modify the configuration, and then resume the task.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+cdc cli changefeed pause -c test-cf
+cdc cli changefeed update -c test-cf --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+cdc cli changefeed resume -c test-cf
+```
+
+Currently, you can modify the following configuration items:
+
+- `sink-uri` of the `changefeed`.
+- The `changefeed` configuration file and all configuration items in the file.
+- Whether to use the file sorting feature and the sorting directory.
+- The `target-ts` of the `changefeed`.
 
 ### Manage processing units of replication sub-tasks (`processor`)
 
@@ -594,3 +726,21 @@ To create a cyclic replication task, take the following steps:
 + To perform online DDL operations, ensure the following requirements are met:
     - The TiCDC components of multiple clusters form a one-way DDL replication chain, which is not cyclic. For example, in the example above, only the TiCDC component of cluster C disables `sync-ddl`.
     - DDL operations must be performed on the cluster that is the starting point of the one-way DDL replication chain, such as cluster A in the example above.
+
+## Output the historical value of a Row Changed Event <span class="version-mark">New in v4.0.5</span>
+
+> **Warning:**
+>
+> Currently, outputting the historical value of a Row Changed Event is still an experimental feature. It is **NOT** recommended to use it in the production environment.
+
+In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value neither supports the [new collation framework](/character-set-and-collation.md#new-framework-for-collations) introduced in TiDB v4.0, nor can be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
+
+Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Changed Event. To enable this feature, specify the following configuration in the `changefeed` configuration file at the root level:
+
+{{< copyable "" >}}
+
+```toml
+enable-old-value = true
+```
+
+After this feature is enabled, you can see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event) for the detailed output format. The new TiDB v4.0 collation framework will also be supported when you use the MySQL sink.
