@@ -54,7 +54,7 @@ To view all the results in the current DDL job queue (including tasks that are r
 ADMIN SHOW DDL JOBS;
 ```
 
-```
+```sql
 mysql> ADMIN SHOW DDL JOBS;
 +--------+---------+--------------------+--------------+----------------------+-----------+----------+-----------+---------------------+---------------------+---------+
 | JOB_ID | DB_NAME | TABLE_NAME         | JOB_TYPE     | SCHEMA_STATE         | SCHEMA_ID | TABLE_ID | ROW_COUNT | START_TIME          | END_TIME            | STATE   |
