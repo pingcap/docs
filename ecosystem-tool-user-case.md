@@ -14,7 +14,7 @@ If you need to import the compatible CSV files exported by other tools to TiDB, 
 
 ## Import full data from MySQL/Aurora
 
-If you need to import full data from MySQL/Aurora, use [Dumpling](/dumpling-overview.md) first to export data as SQL dump files, and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data into the TiDB cluster.
+If you need to import full data from MySQL/Aurora, use [Dumpling](/export-or-backup-using-dumpling.md) first to export data as SQL dump files, and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data into the TiDB cluster.
 
 ## Migrate data from MySQL/Aurora
 
