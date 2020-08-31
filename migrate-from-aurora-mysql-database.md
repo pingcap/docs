@@ -6,4 +6,4 @@ aliases: ['/docs/dev/migrate-from-aurora-mysql-database/','/docs/dev/how-to/migr
 
 # Migrate from MySQL (Amazon Aurora)
 
-To migrate from MySQL (Amazon Aurora) to TiDB, refer to [Migrate from MySQL (Amazon Aurora)](https://docs.pingcap.com/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
+To migrate data from MySQL (Amazon Aurora) to TiDB, refer to [Migrate from MySQL (Amazon Aurora)](https://docs.pingcap.com/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
