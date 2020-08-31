@@ -6,6 +6,7 @@ aliases: ['/docs/v3.1/migrate-from-aurora-mysql-database/','/docs/v3.1/how-to/mi
 
 # Migrate from MySQL (Amazon Aurora)
 
+<<<<<<< HEAD
 This document describes how to migrate from [Amazon Aurora MySQL](https://aws.amazon.com/rds/aurora/details/mysql-details/?nc1=h_ls) to TiDB by using TiDB Data Migration (DM).
 
 ## Step 1: Enable binlog in the Aurora cluster
@@ -199,3 +200,6 @@ query-status
 > 1. Use the `stop-task` command to stop the paused task caused by the failure of nomarl dumping.
 > 2. In the `task.yaml` file, modify `extra-args: "-B test_db -T test_table"` to `extra-args: "-B test_db -T test_table --no-locks"`.
 > 3. Use the `start-task` command to restart the task.
+=======
+To migrate data from MySQL (Amazon Aurora) to TiDB, refer to [Migrate from MySQL (Amazon Aurora)](https://docs.pingcap.com/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
+>>>>>>> 92163d1... Update DM 2.0 related doc (#3757)
