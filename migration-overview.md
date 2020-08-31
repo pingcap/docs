@@ -40,7 +40,11 @@ To migrate the full data and then replicate data incrementally, you can use one 
 - Mydumper + TiDB Lightning + Syncer: use Mydumper to export data from MySQL, use TiDB Lightning to import the data into TiDB, and then use Syncer to replicate the incremental binlog data from MySQL into TiDB.
 - DM: use DM to migrate the full data from MySQL to TiDB and then replicate the incremental data from MySQL into TiDB.
 
+<<<<<<< HEAD
 For detailed operations, follow the steps in [Incremental Migration](/migrate-incremental-data-from-mysql.md).
+=======
+For details, refer to [Migrate from MySQL (Amazon Aurora)](https://docs.pingcap.com/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
+>>>>>>> 92163d1... Update DM 2.0 related doc (#3757)
 
   > **Note:**
   >
