@@ -8,13 +8,9 @@ aliases: ['/docs/v2.1/mysql-compatibility/','/docs/v2.1/reference/mysql-compatib
 
 TiDB supports both the MySQL wire protocol and the majority of its syntax. This means that you can use your existing MySQL connectors and clients, and your existing applications can often be migrated to TiDB without changing any application code.
 
-<<<<<<< HEAD
 Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader.
 
 However, TiDB does not support some of MySQL features or behaves differently from MySQL because these features cannot be easily implemented in a distributed system. For some MySQL syntax, TiDB can parse but does not process it. For example, the `ENGINE` table option and the `PARTITION BY` clause in the `CREATE TABLE` statement can be parsed but are ignored.
-=======
-However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superseded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
->>>>>>> 7b2d4fa... mysql compatibility: change title, add references (#3716)
 
 > **Note:**
 >
@@ -37,7 +33,6 @@ However, some features of MySQL are not supported. This could be because there i
 + SYS schema
 + Optimizer trace
 + XML Functions
-<<<<<<< HEAD
 + X-Protocol
 + Savepoints
 + Column-level privileges
@@ -48,17 +43,6 @@ However, some features of MySQL are not supported. This could be because there i
 + `CHECK TABLE` syntax
 + `CHECKSUM TABLE` syntax
 + `GET_LOCK` and `RELEASE_LOCK` functions
-=======
-+ X-Protocol [#1109](https://github.com/pingcap/tidb/issues/1109)
-+ Savepoints [#6840](https://github.com/pingcap/tidb/issues/6840)
-+ Column-level privileges [#9766](https://github.com/pingcap/tidb/issues/9766)
-+ `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
-+ `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
-+ `CREATE TEMPORARY TABLE` syntax [#1248](https://github.com/pingcap/tidb/issues/1248)
-+ `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
-+ `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
-+ `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
->>>>>>> 7b2d4fa... mysql compatibility: change title, add references (#3716)
 
 ## Features that are different from MySQL
 
@@ -157,13 +141,9 @@ For compatibility reasons, TiDB supports the syntax to create tables with altern
 
 {{< copyable "sql" >}}
 
-<<<<<<< HEAD
 ```sql
 CREATE TABLE t1 (a INT) ENGINE=MyISAM;
 ```
-=======
-These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md).
->>>>>>> 7b2d4fa... mysql compatibility: change title, add references (#3716)
 
 ```
 Query OK, 0 rows affected (0.14 sec)
