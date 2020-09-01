@@ -1,10 +1,10 @@
 ---
-title: Compatibility with MySQL
+title: MySQL Compatibility
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
 aliases: ['/docs/v2.1/mysql-compatibility/','/docs/v2.1/reference/mysql-compatibility/']
 ---
 
-# Compatibility with MySQL
+# MySQL Compatibility
 
 TiDB supports both the MySQL wire protocol and the majority of its syntax. This means that you can use your existing MySQL connectors and clients, and your existing applications can often be migrated to TiDB without changing any application code.
 
