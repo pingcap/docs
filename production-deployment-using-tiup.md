@@ -126,7 +126,7 @@ The following topology documents provide a cluster configuration template for ea
 > - If you use passwords, add the `-p` flag to enter the password interaction window;
 > - If password-free login to the target machine has been configured, no authentication is required.
 >
-> In general cases, TiUP creates the user and group on the target machine, and this user and group have been configured in the `topology.yaml` file. The following cases are exceptions:
+> In general, TiUP creates the user and group specified in the `topology.yaml` file on the target machine, with the following exceptions:
 >
 > - The user name configured in `topology.yaml` already exists on the target machine.
 > - You have used the `--skip-create-user` option in the command line to explicitly specify skipping the step of creating user.
