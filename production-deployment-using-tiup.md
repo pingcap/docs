@@ -129,7 +129,7 @@ The following topology documents provide a cluster configuration template for ea
 > In general, TiUP creates the user and group specified in the `topology.yaml` file on the target machine, with the following exceptions:
 >
 > - The user name configured in `topology.yaml` already exists on the target machine.
-> - You have used the `--skip-create-user` option in the command line to explicitly specify skipping the step of creating user.
+> - You have used the `--skip-create-user` option in the command line to explicitly skip the step of creating the user.
 
 {{< copyable "shell-regular" >}}
 
