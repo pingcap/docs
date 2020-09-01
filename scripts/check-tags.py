@@ -38,7 +38,8 @@ def stack_tag(tag, stack):
 
 for item in repo.index.diff(None):
     # print(item.a_path)
-    filename = item.a_path
+    # filename = item.a_path
+    filename = 'storage-engine/rocksdb-overview.md'
     if '.md' in filename:
         file = open(filename, "r" )
         content = file.read()
