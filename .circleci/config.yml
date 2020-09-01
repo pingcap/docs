@@ -44,7 +44,9 @@ jobs:
 
       - run:
          name: "Check unclosed tags"
-         command: python3 scripts/check-tags.py
+         command:
+          pip3 install GitPython
+          python3 scripts/check-tags.py
 
   build:
     docker:

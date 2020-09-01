@@ -59,3 +59,18 @@ rocksdb.defaultcf.level0-stop-writes-trigger
 rocksdb.writecf.level0-stop-writes-trigger
 rocksdb.lockcf.level0-stop-writes-trigger
 ```
+
+ac
+
+<NavColumns>
+<NavColumn>
+<ColumnTitle>About TiDB</ColumnTitle>
+</NavColumn>
+</NavColumns>
+
+
+## TiCDC Architecture
+
+When TiCDC is running, it is a stateless node that achi<!-- markdownlint -->eves high availability through etcd in PD. The TiCDC cluster supports creating multiple replication tasks to replicate data `<br>` to multiple</br>e different downstream platforms.
+
+The architecture of TiC<>DC is sh<details>own in the following <br> figure:
