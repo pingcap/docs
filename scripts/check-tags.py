@@ -1,4 +1,4 @@
-from git import Repo
+from git import Repo, git
 # import git
 import re
 

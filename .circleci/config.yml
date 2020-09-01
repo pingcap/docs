@@ -44,7 +44,11 @@ jobs:
 
       - run:
          name: "Check unclosed tags"
-         command: python3 scripts/check-tags.py
+         command: 
+          curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;
+          sudo python3 get-pip.py;
+          pip3 install GitPython;
+          python3 scripts/check-tags.py
 
   build:
     docker:
