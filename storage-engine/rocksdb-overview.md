@@ -68,7 +68,6 @@ ac
 </NavColumn>
 </NavColumns>
 
-
 ## TiCDC Architecture
 
 When TiCDC is running, it is a stateless node that achi<!-- markdownlint -->eves high availability through etcd in PD. The TiCDC cluster supports creating multiple replication tasks to replicate data `<br>` to multiple</br>e different downstream platforms.
