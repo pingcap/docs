@@ -87,16 +87,15 @@ See also: [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyw
 
 ### DDL
 
-In TiDB, all supported DDL changes are performed online. The MySQL DDL assertions `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` can also be used to assert which algorithm will be used to modify the table (which might differ from MySQL).
-
-The following major restrictions apply to DDL versus MySQL:
+In TiDB, all supported DDL changes are performed online. The following major restrictions apply to DDL versus MySQL:
 
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
 * Adding/Dropping the primary key is unsupported unless [`alter-primary-key`](/tidb-configuration-file.md#alter-primary-key) is enabled.
 * Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
-* Change/Modify decimal columns does not support changing the prevision.
+* Change/Modify decimal columns does not support changing the precision.
 * Change/Modify integer columns does not permit changing the `UNSIGNED` attribute.
+* The syntax `ALGORITHM={INSTANT,INPLACE,COPY}` functions only as an assertion in TiDB, and does not modify the alter algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Table Partitioning supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
