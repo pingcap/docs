@@ -63,6 +63,7 @@ def tag_is_wrapped(pos, content):
 
 # print(sys.argv[1:])
 for filename in sys.argv[1:]:
+    print("Checking " + filename + "......\n")
     file = open(filename, "r" )
     content = file.read()
     file.close()
